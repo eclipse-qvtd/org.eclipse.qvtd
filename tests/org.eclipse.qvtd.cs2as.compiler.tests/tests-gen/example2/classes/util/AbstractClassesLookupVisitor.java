@@ -9,8 +9,15 @@
 
 package example2.classes.util;
 
+import example2.classes.Class;
+import example2.classes.ClassesPackage;
+import example2.classes.Package;
+import example2.classes.Root;
+import example2.classes.util.AbstractExtendingVisitor;
+import example2.classes.util.Visitable;
+import example2.env.Environment;
+import example2.env.EnvironmentPackage;
 import java.util.List;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -24,23 +31,16 @@ import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 
-import example2.classes.Class;
-import example2.classes.ClassesPackage;
-import example2.classes.Package;
-import example2.classes.Root;
-import example2.env.Environment;
-import example2.env.EnvironmentPackage;
-
 public class AbstractClassesLookupVisitor
 	extends AbstractExtendingVisitor<Environment, Environment>
 {
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, ClassesPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/env/1.0", null, EnvironmentPackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_java_c_s_s_org_eclipse_qvtd_build_cs2as_tests_lookup = IdManager.getRootPackageId("java://org.eclipse.qvtd.cs2as.compiler.tests.lookup");
+    public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_java_c_s_s_org_eclipse_qvtd_cs2as_compiler_tests_lookup = IdManager.getRootPackageId("java://org.eclipse.qvtd.cs2as.compiler.tests.lookup");
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_evaluation = IdManager.getRootPackageId("org.eclipse.ocl.pivot.evaluation");
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_AbstractClassesLookupVisitor = PACKid_java_c_s_s_org_eclipse_qvtd_build_cs2as_tests_lookup.getClassId("AbstractClassesLookupVisitor", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_AbstractClassesLookupVisitor = PACKid_java_c_s_s_org_eclipse_qvtd_cs2as_compiler_tests_lookup.getClassId("AbstractClassesLookupVisitor", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Class = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Class", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Environment = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("Environment", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Evaluator = PACKid_org_eclipse_ocl_pivot_evaluation.getClassId("Evaluator", 0);
@@ -89,7 +89,7 @@ public class AbstractClassesLookupVisitor
     }
     
     /**
-     * visitClass(element : classes::Class) : env::Environment[?]
+     * visitClass(element : classes::Class[1]) : env::Environment[?]
      * 
      * this.parentEnv(element)
      */
@@ -100,11 +100,11 @@ public class AbstractClassesLookupVisitor
     }
     
     /**
-     * visitPackage(element : classes::Package) : env::Environment[?]
+     * visitPackage(element : classes::Package[1]) : env::Environment[?]
      * 
      * 
      * let
-     *   inner : env::Environment = context.addElements(element.ownedClasses)
+     *   inner : env::Environment[?] = context.addElements(element.ownedClasses)
      *   .addElements(element.ownedPackages)
      * in
      *   if inner.hasFinalResult()
@@ -133,11 +133,11 @@ public class AbstractClassesLookupVisitor
     }
     
     /**
-     * visitRoot(element : classes::Root) : env::Environment[?]
+     * visitRoot(element : classes::Root[1]) : env::Environment[?]
      * 
      * 
      * let
-     *   inner : env::Environment = context.addElements(element.ownedPackages)
+     *   inner : env::Environment[?] = context.addElements(element.ownedPackages)
      * in
      *   if inner.hasFinalResult()
      *   then inner

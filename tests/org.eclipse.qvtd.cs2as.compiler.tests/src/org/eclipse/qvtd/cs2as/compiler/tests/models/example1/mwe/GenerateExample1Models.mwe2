@@ -13,7 +13,6 @@ module org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample1Models
 
 import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.ocl.examples.build.xtend.*
-import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 
 var projectName = "org.eclipse.qvtd.cs2as.compiler.tests"

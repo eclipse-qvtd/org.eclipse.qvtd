@@ -47,13 +47,13 @@ public class AbstractTargetLookupVisitor
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/env/1.0", null, EnvironmentPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/targetMM/1.0", null, TargetPackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_java_c_s_s_org_eclipse_qvtd_build_cs2as_tests_lookup = IdManager.getRootPackageId("java://org.eclipse.qvtd.cs2as.compiler.tests.lookup");
+    public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_java_c_s_s_org_eclipse_qvtd_cs2as_compiler_tests_lookup = IdManager.getRootPackageId("java://org.eclipse.qvtd.cs2as.compiler.tests.lookup");
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_evaluation = IdManager.getRootPackageId("org.eclipse.ocl.pivot.evaluation");
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A1 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A1", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A2 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A2", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_AbstractTargetLookupVisitor = PACKid_java_c_s_s_org_eclipse_qvtd_build_cs2as_tests_lookup.getClassId("AbstractTargetLookupVisitor", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_AbstractTargetLookupVisitor = PACKid_java_c_s_s_org_eclipse_qvtd_cs2as_compiler_tests_lookup.getClassId("AbstractTargetLookupVisitor", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_B = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("B", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_C = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("C", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_D = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("D", 0);
@@ -104,14 +104,14 @@ public class AbstractTargetLookupVisitor
     }
     
     /**
-     * visitA1(element : target::A1) : env::Environment[?]
+     * visitA1(element : target::A1[1]) : env::Environment[?]
      * 
      * 
      * let ownedBs : OrderedSet(target::B) = element.ownsB
      * in
      *   if child = null
      *   then
-     *     let inner : env::Environment = context.addElements(ownedBs)
+     *     let inner : env::Environment[?] = context.addElements(ownedBs)
      *     in
      *       if inner.hasFinalResult()
      *       then inner
@@ -119,7 +119,7 @@ public class AbstractTargetLookupVisitor
      *       endif
      *   else
      *     let
-     *       inner : env::Environment = context.addElements(
+     *       inner : env::Environment[?] = context.addElements(
      *         ownedBs->select(x |
      *           ownedBs->indexOf(x) <
      *           ownedBs->indexOf(child)))
@@ -189,14 +189,14 @@ public class AbstractTargetLookupVisitor
     }
     
     /**
-     * visitA2(element : target::A2) : env::Environment[?]
+     * visitA2(element : target::A2[1]) : env::Environment[?]
      * 
      * 
      * let ownedCs : OrderedSet(target::C) = element.ownsC
      * in
      *   if child = null
      *   then
-     *     let inner : env::Environment = context.addElements(ownedCs)
+     *     let inner : env::Environment[?] = context.addElements(ownedCs)
      *     in
      *       if inner.hasFinalResult()
      *       then inner
@@ -204,7 +204,7 @@ public class AbstractTargetLookupVisitor
      *       endif
      *   else
      *     let
-     *       inner : env::Environment = context.addElements(
+     *       inner : env::Environment[?] = context.addElements(
      *         ownedCs->select(x |
      *           ownedCs->indexOf(x) <
      *           ownedCs->indexOf(child)))
@@ -274,7 +274,7 @@ public class AbstractTargetLookupVisitor
     }
     
     /**
-     * visitB(element : target::B) : env::Environment[?]
+     * visitB(element : target::B[1]) : env::Environment[?]
      * 
      * this.parentEnv(element)
      */
@@ -285,7 +285,7 @@ public class AbstractTargetLookupVisitor
     }
     
     /**
-     * visitC(element : target::C) : env::Environment[?]
+     * visitC(element : target::C[1]) : env::Environment[?]
      * 
      * this.parentEnv(element)
      */
@@ -296,7 +296,7 @@ public class AbstractTargetLookupVisitor
     }
     
     /**
-     * visitD(element : target::D) : env::Environment[?]
+     * visitD(element : target::D[1]) : env::Environment[?]
      * 
      * this.parentEnv(element)
      */
@@ -307,10 +307,10 @@ public class AbstractTargetLookupVisitor
     }
     
     /**
-     * visitTRoot(element : target::TRoot) : env::Environment[?]
+     * visitTRoot(element : target::TRoot[1]) : env::Environment[?]
      * 
      * 
-     * let inner : env::Environment = context.addElements(ownedA)
+     * let inner : env::Environment[?] = context.addElements(ownedA)
      * in
      *   if inner.hasFinalResult()
      *   then inner
