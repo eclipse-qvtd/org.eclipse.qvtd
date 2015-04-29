@@ -115,8 +115,8 @@ public class QVTiTransformationAnalysis
 		//
 		//	First pass
 		//  - identify all allInstances() source types
-		//  - identify all MiddlePropertyAssignments
-		//  - identify all MiddlePropertyCallExp and allocate a cacheIndex
+		//  - identify all PropertyAssignments
+		//  - identify all assigned PropertyCallExp and allocate a cacheIndex
 		//
 		Type oclElementType = environmentFactory.getStandardLibrary().getOclElementType();
 		OperationId allInstancesOperationId = oclElementType.getTypeId().getOperationId(0, "allInstances", IdManager.getParametersId());
