@@ -249,8 +249,9 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAssignment_6(), "rule__MappingCS__OwnedDomainsAssignment_6");
 					put(grammarAccess.getMappingCSAccess().getOwnedMiddleAssignment_7_1(), "rule__MappingCS__OwnedMiddleAssignment_7_1");
 					put(grammarAccess.getMappingCSAccess().getOwnedMappingSequenceAssignment_8(), "rule__MappingCS__OwnedMappingSequenceAssignment_8");
-					put(grammarAccess.getMappingCallCSAccess().getReferredMappingAssignment_2(), "rule__MappingCallCS__ReferredMappingAssignment_2");
-					put(grammarAccess.getMappingCallCSAccess().getOwnedBindingsAssignment_4(), "rule__MappingCallCS__OwnedBindingsAssignment_4");
+					put(grammarAccess.getMappingCallCSAccess().getIsInfiniteAssignment_1(), "rule__MappingCallCS__IsInfiniteAssignment_1");
+					put(grammarAccess.getMappingCallCSAccess().getReferredMappingAssignment_3(), "rule__MappingCallCS__ReferredMappingAssignment_3");
+					put(grammarAccess.getMappingCallCSAccess().getOwnedBindingsAssignment_5(), "rule__MappingCallCS__OwnedBindingsAssignment_5");
 					put(grammarAccess.getMappingCallBindingCSAccess().getReferredVariableAssignment_0(), "rule__MappingCallBindingCS__ReferredVariableAssignment_0");
 					put(grammarAccess.getMappingCallBindingCSAccess().getIsPolledAssignment_1_1(), "rule__MappingCallBindingCS__IsPolledAssignment_1_1");
 					put(grammarAccess.getMappingCallBindingCSAccess().getOwnedValueAssignment_2(), "rule__MappingCallBindingCS__OwnedValueAssignment_2");

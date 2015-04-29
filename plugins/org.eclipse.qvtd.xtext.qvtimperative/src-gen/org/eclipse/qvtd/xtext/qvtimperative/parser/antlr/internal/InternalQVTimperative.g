@@ -496,9 +496,24 @@ ruleMappingCallCS returns [EObject current=null]
             grammarAccess.getMappingCallCSAccess().getMappingCallCSAction_0(),
             $current);
     }
-)	otherlv_1='call' 
+)(
+(
+		lv_isInfinite_1_0=	'infinite' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getMappingCallCSAccess().getCallKeyword_1());
+        newLeafNode(lv_isInfinite_1_0, grammarAccess.getMappingCallCSAccess().getIsInfiniteInfiniteKeyword_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getMappingCallCSRule());
+	        }
+       		setWithLastConsumed($current, "isInfinite", true, "infinite");
+	    }
+
+)
+)?	otherlv_2='call' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getMappingCallCSAccess().getCallKeyword_2());
     }
 (
 (
@@ -511,38 +526,38 @@ ruleMappingCallCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getMappingCallCSAccess().getReferredMappingMappingCrossReference_2_0()); 
+	        newCompositeNode(grammarAccess.getMappingCallCSAccess().getReferredMappingMappingCrossReference_3_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_3='{' 
+)	otherlv_4='{' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getMappingCallCSAccess().getLeftCurlyBracketKeyword_3());
+    	newLeafNode(otherlv_4, grammarAccess.getMappingCallCSAccess().getLeftCurlyBracketKeyword_4());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMappingCallCSAccess().getOwnedBindingsMappingCallBindingCSParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getMappingCallCSAccess().getOwnedBindingsMappingCallBindingCSParserRuleCall_5_0()); 
 	    }
-		lv_ownedBindings_4_0=ruleMappingCallBindingCS		{
+		lv_ownedBindings_5_0=ruleMappingCallBindingCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCallCSRule());
 	        }
        		add(
        			$current, 
        			"ownedBindings",
-        		lv_ownedBindings_4_0, 
+        		lv_ownedBindings_5_0, 
         		"MappingCallBindingCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)*	otherlv_5='}' 
+)*	otherlv_6='}' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getMappingCallCSAccess().getRightCurlyBracketKeyword_5());
+    	newLeafNode(otherlv_6, grammarAccess.getMappingCallCSAccess().getRightCurlyBracketKeyword_6());
     }
 )
 ;

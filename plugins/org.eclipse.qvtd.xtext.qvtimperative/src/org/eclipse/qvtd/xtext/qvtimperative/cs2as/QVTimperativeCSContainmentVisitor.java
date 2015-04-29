@@ -130,6 +130,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitMappingCallCS(@NonNull MappingCallCS csElement) {
 		@NonNull MappingCall pivotElement = context.refreshModelElement(MappingCall.class, QVTimperativePackage.Literals.MAPPING_CALL, csElement);
 		context.refreshPivotList(MappingCallBinding.class, pivotElement.getBinding(), csElement.getOwnedBindings());
+		pivotElement.setIsInfinite(csElement.isIsInfinite());
 		context.refreshComments(pivotElement, csElement);
 		return null;
 	}

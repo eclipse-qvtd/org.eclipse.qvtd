@@ -284,50 +284,58 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MappingCallCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cMappingCallCSAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cCallKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cReferredMappingAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cReferredMappingMappingCrossReference_2_0 = (CrossReference)cReferredMappingAssignment_2.eContents().get(0);
-		private final RuleCall cReferredMappingMappingUnrestrictedNameParserRuleCall_2_0_1 = (RuleCall)cReferredMappingMappingCrossReference_2_0.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cOwnedBindingsAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cOwnedBindingsMappingCallBindingCSParserRuleCall_4_0 = (RuleCall)cOwnedBindingsAssignment_4.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cIsInfiniteAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cIsInfiniteInfiniteKeyword_1_0 = (Keyword)cIsInfiniteAssignment_1.eContents().get(0);
+		private final Keyword cCallKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cReferredMappingAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cReferredMappingMappingCrossReference_3_0 = (CrossReference)cReferredMappingAssignment_3.eContents().get(0);
+		private final RuleCall cReferredMappingMappingUnrestrictedNameParserRuleCall_3_0_1 = (RuleCall)cReferredMappingMappingCrossReference_3_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cOwnedBindingsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cOwnedBindingsMappingCallBindingCSParserRuleCall_5_0 = (RuleCall)cOwnedBindingsAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//MappingCallCS:
-		//	{MappingCallCS} "call" referredMapping=[qvtimperative::Mapping|UnrestrictedName] "{"
+		//	{MappingCallCS} isInfinite?="infinite"? "call" referredMapping=[qvtimperative::Mapping|UnrestrictedName] "{"
 		//	ownedBindings+=MappingCallBindingCS* "}";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{MappingCallCS} "call" referredMapping=[qvtimperative::Mapping|UnrestrictedName] "{"
+		//{MappingCallCS} isInfinite?="infinite"? "call" referredMapping=[qvtimperative::Mapping|UnrestrictedName] "{"
 		//ownedBindings+=MappingCallBindingCS* "}"
 		public Group getGroup() { return cGroup; }
 
 		//{MappingCallCS}
 		public Action getMappingCallCSAction_0() { return cMappingCallCSAction_0; }
 
+		//isInfinite?="infinite"?
+		public Assignment getIsInfiniteAssignment_1() { return cIsInfiniteAssignment_1; }
+
+		//"infinite"
+		public Keyword getIsInfiniteInfiniteKeyword_1_0() { return cIsInfiniteInfiniteKeyword_1_0; }
+
 		//"call"
-		public Keyword getCallKeyword_1() { return cCallKeyword_1; }
+		public Keyword getCallKeyword_2() { return cCallKeyword_2; }
 
 		//referredMapping=[qvtimperative::Mapping|UnrestrictedName]
-		public Assignment getReferredMappingAssignment_2() { return cReferredMappingAssignment_2; }
+		public Assignment getReferredMappingAssignment_3() { return cReferredMappingAssignment_3; }
 
 		//[qvtimperative::Mapping|UnrestrictedName]
-		public CrossReference getReferredMappingMappingCrossReference_2_0() { return cReferredMappingMappingCrossReference_2_0; }
+		public CrossReference getReferredMappingMappingCrossReference_3_0() { return cReferredMappingMappingCrossReference_3_0; }
 
 		//UnrestrictedName
-		public RuleCall getReferredMappingMappingUnrestrictedNameParserRuleCall_2_0_1() { return cReferredMappingMappingUnrestrictedNameParserRuleCall_2_0_1; }
+		public RuleCall getReferredMappingMappingUnrestrictedNameParserRuleCall_3_0_1() { return cReferredMappingMappingUnrestrictedNameParserRuleCall_3_0_1; }
 
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
 		//ownedBindings+=MappingCallBindingCS*
-		public Assignment getOwnedBindingsAssignment_4() { return cOwnedBindingsAssignment_4; }
+		public Assignment getOwnedBindingsAssignment_5() { return cOwnedBindingsAssignment_5; }
 
 		//MappingCallBindingCS
-		public RuleCall getOwnedBindingsMappingCallBindingCSParserRuleCall_4_0() { return cOwnedBindingsMappingCallBindingCSParserRuleCall_4_0; }
+		public RuleCall getOwnedBindingsMappingCallBindingCSParserRuleCall_5_0() { return cOwnedBindingsMappingCallBindingCSParserRuleCall_5_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 
 	public class MappingCallBindingCSElements extends AbstractParserRuleElementFinder {
@@ -1026,7 +1034,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MappingCallCS:
-	//	{MappingCallCS} "call" referredMapping=[qvtimperative::Mapping|UnrestrictedName] "{"
+	//	{MappingCallCS} isInfinite?="infinite"? "call" referredMapping=[qvtimperative::Mapping|UnrestrictedName] "{"
 	//	ownedBindings+=MappingCallBindingCS* "}";
 	public MappingCallCSElements getMappingCallCSAccess() {
 		return pMappingCallCS;

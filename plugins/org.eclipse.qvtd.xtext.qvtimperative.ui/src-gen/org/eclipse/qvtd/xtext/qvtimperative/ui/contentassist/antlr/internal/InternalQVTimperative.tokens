@@ -24,8 +24,8 @@
 '?'=63
 '?->'=47
 '?.'=46
-'?='=95
-'@'=98
+'?='=96
+'@'=99
 'Bag'=59
 'Boolean'=50
 'Collection'=61
@@ -53,13 +53,14 @@
 'endif'=88
 'enforce'=19
 'extends'=92
-'false'=97
+'false'=98
 'for'=70
 'if'=85
 'implies'=43
 'import'=20
 'imports'=21
 'in'=67
+'infinite'=95
 'invalid'=80
 'let'=90
 'library'=22
@@ -74,7 +75,7 @@
 'self'=91
 'then'=86
 'transformation'=27
-'true'=96
+'true'=97
 'uses'=28
 'where'=68
 'xor'=42
@@ -176,3 +177,4 @@ T__95=95
 T__96=96
 T__97=97
 T__98=98
+T__99=99

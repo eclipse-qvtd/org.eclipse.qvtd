@@ -174,6 +174,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		MappingCallCS csMappingCall = context.refreshElement(MappingCallCS.class, QVTimperativeCSPackage.Literals.MAPPING_CALL_CS, asMappingCall);
 		csMappingCall.setPivot(asMappingCall);
 		context.refreshList(csMappingCall.getOwnedBindings(), context.visitDeclarations(MappingCallBindingCS.class, asMappingCall.getBinding(), null));
+		csMappingCall.setIsInfinite(asMappingCall.isIsInfinite());
 		csMappingCall.setReferredMapping(asMappingCall.getReferredMapping());
 		return csMappingCall;
 	}

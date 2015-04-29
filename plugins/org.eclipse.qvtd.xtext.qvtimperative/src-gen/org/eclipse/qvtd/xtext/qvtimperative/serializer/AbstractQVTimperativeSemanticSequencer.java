@@ -514,7 +514,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (referredMapping=[Mapping|UnrestrictedName] ownedBindings+=MappingCallBindingCS*)
+	 *     (isInfinite?='infinite'? referredMapping=[Mapping|UnrestrictedName] ownedBindings+=MappingCallBindingCS*)
 	 */
 	protected void sequence_MappingCallCS(EObject context, MappingCallCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
