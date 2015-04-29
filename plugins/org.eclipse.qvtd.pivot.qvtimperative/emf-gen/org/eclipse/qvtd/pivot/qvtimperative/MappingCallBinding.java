@@ -30,9 +30,9 @@ import org.eclipse.ocl.pivot.Variable;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getMappingCall <em>Mapping Call</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getBoundVariable <em>Bound Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#isIsPolled <em>Is Polled</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getMappingCall <em>Mapping Call</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getValue <em>Value</em>}</li>
  * </ul>
  *
@@ -107,6 +107,9 @@ public interface MappingCallBinding extends Element {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A polled MappingCallBinding requires invocation of the mapping to be deverred until all relevant properties are available.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Polled</em>' attribute.
 	 * @see #isSetIsPolled()
 	 * @see #unsetIsPolled()

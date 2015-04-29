@@ -29,8 +29,9 @@ import org.eclipse.ocl.pivot.ReferringElement;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferredMapping <em>Referred Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBinding <em>Binding</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite <em>Is Infinite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferredMapping <em>Referred Mapping</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall()
@@ -84,5 +85,57 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * @generated
 	 */
 	EList<MappingCallBinding> getBinding();
+
+	/**
+	 * Returns the value of the '<em><b>Is Infinite</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Is Infinite</em>' attribute.
+	 * @see #isSetIsInfinite()
+	 * @see #unsetIsInfinite()
+	 * @see #setIsInfinite(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_IsInfinite()
+	 * @generated
+	 */
+	boolean isIsInfinite();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite <em>Is Infinite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Infinite</em>' attribute.
+	 * @see #isSetIsInfinite()
+	 * @see #unsetIsInfinite()
+	 * @see #isIsInfinite()
+	 * @generated
+	 */
+	void setIsInfinite(boolean value);
+
+	/**
+	 * Unsets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite <em>Is Infinite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetIsInfinite()
+	 * @see #isIsInfinite()
+	 * @see #setIsInfinite(boolean)
+	 * @generated
+	 */
+	void unsetIsInfinite();
+
+	/**
+	 * Returns whether the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite <em>Is Infinite</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Is Infinite</em>' attribute is set.
+	 * @see #unsetIsInfinite()
+	 * @see #isIsInfinite()
+	 * @see #setIsInfinite(boolean)
+	 * @generated
+	 */
+	boolean isSetIsInfinite();
 
 } // MappingCall

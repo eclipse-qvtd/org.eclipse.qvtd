@@ -51,6 +51,11 @@ import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+
 /**
  * This is the http://www.eclipse.org/qvt/2015/QVTdLibrary Standard Library
  * auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTd-1.3.oclstdlib.
@@ -77,9 +82,10 @@ public class QVTdStdlib extends ASResourceImpl
 	public static final @NonNull String STDLIB_URI = "http://www.eclipse.org/qvt/2015/QVTdLibrary";
 
 	/**
-	 * Return the default OCL standard Library. 
+	 * Return the default http://www.eclipse.org/qvt/2015/QVTdLibrary standard Library Resource. 
 	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTd-1.3.oclstdlib
-	 *  is used as the default when no overriding copy is registered. 
+	 *  is used as the default when no overriding copy is registered.
+	 * It cannot be unloaded or rather unloading has no effect.
 	 */
 	public static @NonNull QVTdStdlib getDefault() {
 		QVTdStdlib oclstdlib = INSTANCE;
@@ -88,6 +94,17 @@ public class QVTdStdlib extends ASResourceImpl
 			oclstdlib = INSTANCE = new QVTdStdlib(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION, contents.getModel());
 		}
 		return oclstdlib;
+	}
+
+	/**
+	 * Return the default http://www.eclipse.org/qvt/2015/QVTdLibrary standard Library model. 
+	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTd-1.3.oclstdlib
+	 *  is used as the default when no overriding copy is registered. 
+	 */
+	public static @NonNull Model getDefaultModel() {
+		Model model = (Model)(getDefault().getContents().get(0));
+		assert model != null;
+		return model;
 	}
 
 	/**
@@ -219,16 +236,16 @@ public class QVTdStdlib extends ASResourceImpl
 	private static class Contents extends AbstractContents
 	{
 		private final @NonNull Model model;
-		private final @NonNull Package orphanage;
 		private final @NonNull Library ocl;
 		private final @NonNull Library qvtbase;
+		private final @NonNull Package orphanage;
 
 		private Contents(@NonNull String asURI)
 		{
 			model = createModel(asURI);
-			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null);
-			ocl = createLibrary("ocl", "ocl", "http://www.eclipse.org/ocl/2015/Pivot", null);
+			ocl = createLibrary("ocl", "ocl", "http://www.eclipse.org/ocl/2015/Pivot", IdManager.METAMODEL);
 			qvtbase = createLibrary("qvtbase", "qvtb", "http://www.eclipse.org/qvt/2015/QVTbase", null);
+			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null);
 			installPackages();
 			installClassTypes();
 			installCollectionTypes();
@@ -240,22 +257,23 @@ public class QVTdStdlib extends ASResourceImpl
 		public @NonNull Model getModel() {
 			return model;
 		}
-		private final @NonNull Model X1_Library = getModel("http://www.eclipse.org/ocl/2015/Library");
-		private final @NonNull Library X2_ocl = getLibrary(X1_Library, "ocl");
-		private final @NonNull CollectionType X3_Collection = getCollectionType(X2_ocl, "Collection");
-		private final @NonNull SetType X3_Set = getSetType(X2_ocl, "Set");
-		private final @NonNull CollectionType X3_UniqueCollection = getCollectionType(X2_ocl, "UniqueCollection");
-		private final @NonNull TemplateParameter X5_T = getTemplateParameter(X3_Set, 0);
-		private final @NonNull TemplateParameter X5_T_0 = getTemplateParameter(X3_UniqueCollection, 0);
-		private final @NonNull TemplateParameter X5_T_1 = getTemplateParameter(X3_Collection, 0);
-		private final @NonNull AnyType _OclAny = getAnyType(X2_ocl, "OclAny");
-		private final @NonNull Class _OclElement = getClass(X2_ocl, "OclElement");
+		
+		private final @NonNull Model _library = org.eclipse.ocl.pivot.model.OCLstdlib.getDefaultModel();
+		private final @NonNull Package _ocl = getLibrary(_library, "ocl");
+		private final @NonNull CollectionType _Collection = getCollectionType(_ocl, "Collection");
+		private final @NonNull AnyType _OclAny = getAnyType(_ocl, "OclAny");
+		private final @NonNull Class _OclElement = getClass(_ocl, "OclElement");
+		private final @NonNull SetType _Set = getSetType(_ocl, "Set");
+		private final @NonNull CollectionType _UniqueCollection = getCollectionType(_ocl, "UniqueCollection");
+		private final @NonNull TemplateParameter _Collection_T = getTemplateParameter(_Collection, 0);
+		private final @NonNull TemplateParameter _Set_T = getTemplateParameter(_Set, 0);
+		private final @NonNull TemplateParameter _UniqueCollection_T = getTemplateParameter(_UniqueCollection, 0);
 		
 		private void installPackages() {
-			model.getOwnedPackages().add(orphanage);
 			model.getOwnedPackages().add(ocl);
 			model.getOwnedPackages().add(qvtbase);
-			model.getOwnedImports().add(createImport(X2_ocl));
+			model.getOwnedPackages().add(orphanage);
+			model.getOwnedImports().add(createImport(_ocl));
 		}
 		
 		private final @NonNull Class _Model = createClass("Model");
@@ -265,13 +283,12 @@ public class QVTdStdlib extends ASResourceImpl
 		
 		private final @NonNull TemplateParameter tp_Model_objectsOfKind_TT = createTemplateParameter("TT");
 		
-		
-		private final @NonNull CollectionType _Collection_OclElement = createCollectionType(X3_Collection, _OclElement);
-		private final @NonNull CollectionType _Collection_Model_objectsOfKind_TT = createCollectionType(X3_Collection, tp_Model_objectsOfKind_TT);
-		private final @NonNull SetType _Set_OclElement = createSetType(X3_Set, _OclElement);
-		private final @NonNull SetType _Set_Model_objectsOfKind_TT = createSetType(X3_Set, tp_Model_objectsOfKind_TT);
-		private final @NonNull CollectionType _UniqueCollection_OclElement = createCollectionType(X3_UniqueCollection, _OclElement);
-		private final @NonNull CollectionType _UniqueCollection_Model_objectsOfKind_TT = createCollectionType(X3_UniqueCollection, tp_Model_objectsOfKind_TT);
+		private final @NonNull CollectionType _Collection_OclElement = createCollectionType(_Collection, _OclElement);
+		private final @NonNull CollectionType _Collection_Model_objectsOfKind_TT = createCollectionType(_Collection, tp_Model_objectsOfKind_TT);
+		private final @NonNull SetType _Set_OclElement = createSetType(_Set, _OclElement);
+		private final @NonNull SetType _Set_Model_objectsOfKind_TT = createSetType(_Set, tp_Model_objectsOfKind_TT);
+		private final @NonNull CollectionType _UniqueCollection_OclElement = createCollectionType(_UniqueCollection, _OclElement);
+		private final @NonNull CollectionType _UniqueCollection_Model_objectsOfKind_TT = createCollectionType(_UniqueCollection, tp_Model_objectsOfKind_TT);
 		
 		private void installClassTypes() {
 			List<Class> ownedClasses;
@@ -346,17 +363,17 @@ public class QVTdStdlib extends ASResourceImpl
 		
 		private void installTemplateBindings() {
 			_Collection_OclElement.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(X5_T_1, _OclElement)));
+				createTemplateParameterSubstitution(_Collection_T, _OclElement)));
 			_Collection_Model_objectsOfKind_TT.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(X5_T_1, tp_Model_objectsOfKind_TT)));
+				createTemplateParameterSubstitution(_Collection_T, tp_Model_objectsOfKind_TT)));
 			_Set_OclElement.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(X5_T, _OclElement)));
+				createTemplateParameterSubstitution(_Set_T, _OclElement)));
 			_Set_Model_objectsOfKind_TT.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(X5_T, tp_Model_objectsOfKind_TT)));
+				createTemplateParameterSubstitution(_Set_T, tp_Model_objectsOfKind_TT)));
 			_UniqueCollection_OclElement.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(X5_T_0, _OclElement)));
+				createTemplateParameterSubstitution(_UniqueCollection_T, _OclElement)));
 			_UniqueCollection_Model_objectsOfKind_TT.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(X5_T_0, tp_Model_objectsOfKind_TT)));
+				createTemplateParameterSubstitution(_UniqueCollection_T, tp_Model_objectsOfKind_TT)));
 		}
 		
 		private void installComments() {

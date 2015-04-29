@@ -231,7 +231,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 */
 	@Override
 	public EReference getMappingCall_ReferredMapping() {
-		return (EReference)mappingCallEClass.getEStructuralFeatures().get(0);
+		return (EReference)mappingCallEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -241,7 +241,17 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 */
 	@Override
 	public EReference getMappingCall_Binding() {
-		return (EReference)mappingCallEClass.getEStructuralFeatures().get(1);
+		return (EReference)mappingCallEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMappingCall_IsInfinite() {
+		return (EAttribute)mappingCallEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -261,7 +271,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 */
 	@Override
 	public EReference getMappingCallBinding_MappingCall() {
-		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(0);
+		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -271,7 +281,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 */
 	@Override
 	public EReference getMappingCallBinding_BoundVariable() {
-		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(1);
+		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -281,7 +291,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 */
 	@Override
 	public EAttribute getMappingCallBinding_IsPolled() {
-		return (EAttribute)mappingCallBindingEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)mappingCallBindingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -392,13 +402,14 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEReference(mappingEClass, MAPPING__MAPPING_STATEMENT);
 
 		mappingCallEClass = createEClass(MAPPING_CALL);
-		createEReference(mappingCallEClass, MAPPING_CALL__REFERRED_MAPPING);
 		createEReference(mappingCallEClass, MAPPING_CALL__BINDING);
+		createEAttribute(mappingCallEClass, MAPPING_CALL__IS_INFINITE);
+		createEReference(mappingCallEClass, MAPPING_CALL__REFERRED_MAPPING);
 
 		mappingCallBindingEClass = createEClass(MAPPING_CALL_BINDING);
-		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__MAPPING_CALL);
 		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__BOUND_VARIABLE);
 		createEAttribute(mappingCallBindingEClass, MAPPING_CALL_BINDING__IS_POLLED);
+		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__MAPPING_CALL);
 		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__VALUE);
 
 		mappingLoopEClass = createEClass(MAPPING_LOOP);
@@ -469,13 +480,14 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		addEOperation(mappingEClass, this.getMapping(), "getAllMappings", 0, -1, IS_UNIQUE, !IS_ORDERED);
 
 		initEClass(mappingCallEClass, MappingCall.class, "MappingCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingCall_ReferredMapping(), this.getMapping(), null, "referredMapping", null, 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCall_Binding(), this.getMappingCallBinding(), this.getMappingCallBinding_MappingCall(), "binding", null, 0, -1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMappingCall_IsInfinite(), thePivotPackage.getBoolean(), "isInfinite", "false", 0, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCall_ReferredMapping(), this.getMapping(), null, "referredMapping", null, 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCallBindingEClass, MappingCallBinding.class, "MappingCallBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingCallBinding_MappingCall(), this.getMappingCall(), this.getMappingCall_Binding(), "mappingCall", null, 0, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCallBinding_BoundVariable(), thePivotPackage.getVariable(), null, "boundVariable", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingCallBinding_IsPolled(), thePivotPackage.getBoolean(), "isPolled", "false", 0, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCallBinding_MappingCall(), this.getMappingCall(), this.getMappingCall_Binding(), "mappingCall", null, 0, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCallBinding_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingLoopEClass, MappingLoop.class, "MappingLoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

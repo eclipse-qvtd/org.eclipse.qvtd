@@ -37,22 +37,33 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getReferredMapping <em>Referred Mapping</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#isIsInfinite <em>Is Infinite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getOwnedBindings <em>Owned Bindings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getReferredMapping <em>Referred Mapping</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class MappingCallCSImpl extends MappingStatementCSImpl implements MappingCallCS {
 	/**
-	 * The cached value of the '{@link #getReferredMapping() <em>Referred Mapping</em>}' reference.
+	 * The default value of the '{@link #isIsInfinite() <em>Is Infinite</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredMapping()
+	 * @see #isIsInfinite()
 	 * @generated
 	 * @ordered
 	 */
-	protected Mapping referredMapping;
+	protected static final boolean IS_INFINITE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsInfinite() <em>Is Infinite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsInfinite()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isInfinite = IS_INFINITE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOwnedBindings() <em>Owned Bindings</em>}' containment reference list.
@@ -63,6 +74,16 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	 * @ordered
 	 */
 	protected EList<MappingCallBindingCS> ownedBindings;
+
+	/**
+	 * The cached value of the '{@link #getReferredMapping() <em>Referred Mapping</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferredMapping()
+	 * @generated
+	 * @ordered
+	 */
+	protected Mapping referredMapping;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -81,6 +102,29 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativeCSPackage.Literals.MAPPING_CALL_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsInfinite() {
+		return isInfinite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsInfinite(boolean newIsInfinite) {
+		boolean oldIsInfinite = isInfinite;
+		isInfinite = newIsInfinite;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE, oldIsInfinite, isInfinite));
 	}
 
 	/**
@@ -121,6 +165,16 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 		referredMapping = newReferredMapping;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING, oldReferredMapping, referredMapping));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 	/**
@@ -173,11 +227,13 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE:
+				return isIsInfinite();
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
+				return getOwnedBindings();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
 				if (resolve) return getReferredMapping();
 				return basicGetReferredMapping();
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
-				return getOwnedBindings();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -191,12 +247,15 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
-				setReferredMapping((Mapping)newValue);
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE:
+				setIsInfinite((Boolean)newValue);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
 				getOwnedBindings().clear();
 				getOwnedBindings().addAll((Collection<? extends MappingCallBindingCS>)newValue);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
+				setReferredMapping((Mapping)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -210,11 +269,14 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
-				setReferredMapping((Mapping)null);
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE:
+				setIsInfinite(IS_INFINITE_EDEFAULT);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
 				getOwnedBindings().clear();
+				return;
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
+				setReferredMapping((Mapping)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -228,10 +290,12 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
-				return referredMapping != null;
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE:
+				return isInfinite != IS_INFINITE_EDEFAULT;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
 				return ownedBindings != null && !ownedBindings.isEmpty();
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
+				return referredMapping != null;
 		}
 		return super.eIsSet(featureID);
 	}
