@@ -20,12 +20,13 @@ import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseLibrary;
 
 public class QVTiEnvironmentFactory extends AbstractEnvironmentFactory {
 
 	public QVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
 		super(projectMap, externalResourceSet);
-//		getStandardLibrary().setDefaultStandardLibraryURI(QVTdStdlib.STDLIB_URI);
+		getStandardLibrary().setDefaultStandardLibraryURI(QVTbaseLibrary.STDLIB_URI);
 	}
 
 	@Override

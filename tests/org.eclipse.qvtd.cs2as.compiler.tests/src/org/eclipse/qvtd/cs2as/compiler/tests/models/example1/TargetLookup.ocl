@@ -46,7 +46,7 @@ def : _lookupNamespaces(env : env::Environment, path : source::PathElementCS, lo
 	let foundNS = env.namedElements->selectByKind(Namespace)->select(name = path.name) 
 	in  if foundNS->isEmpty() and not (env.parentEnv = null) and not local 
 		then _lookupNamespaces(env.parentEnv, path, local)
-		else foundNS
+		else foundNS->asSet()
 		endif
 
 def : _lookupNamespace(path : source::PathElementCS, local : Boolean) : Namespace[?] =
@@ -66,7 +66,7 @@ def: _lookupBs(env : env::Environment, path : source::PathElementCS, local : Boo
 	let	foundBs = env.namedElements->selectByKind(B)->select(name = path.name)
 	in	if foundBs->isEmpty() and not (env.parentEnv = null) and not local 
 		then _lookupBs(env.parentEnv, path, local)
-		else foundBs
+		else foundBs->asSet()
 		endif
 
 def : _lookupB(path : source::PathElementCS, local : Boolean) : B[?] =
@@ -87,7 +87,7 @@ def: _lookupCs(env : env::Environment, path : source::PathElementCS, local : Boo
 	let	foundCs = env.namedElements->selectByKind(C)->select(name = path.name)
 	in	if foundCs->isEmpty() and not (env.parentEnv = null) and not local 
 		then _lookupBs(env.parentEnv, path, local)
-		else foundCs
+		else foundCs->asSet()
 		endif
 
 def : _lookupC(path : source::PathElementCS, local : Boolean) : C[?] =

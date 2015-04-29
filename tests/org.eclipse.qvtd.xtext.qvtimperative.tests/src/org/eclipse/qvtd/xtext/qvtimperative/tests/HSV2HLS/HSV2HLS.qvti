@@ -20,6 +20,7 @@ query hsv2hls::rgb2hsv(color : HSV2HLS::RGB) : HSVTree::HSV;
 
 map __root__ in hsv2hls {
     for hsvRoot : HSVTree::HSVNode in HSVTree::HSVNode.allInstances() {
+--    for hsvRoot : HSVTree::HSVNode in hsv.objectsOfKind(HSVTree::HSVNode) {
         call HSV2MiddleRoot {
             hsvRoot := hsvRoot;
         } 

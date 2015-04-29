@@ -10,23 +10,32 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcorebase.cs2as;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
+import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialocl.cs2as.ImplicitSourceTypeIterator;
+import org.eclipse.ocl.xtext.essentialocl.cs2as.ImplicitSourceVariableIterator;
 import org.eclipse.ocl.xtext.essentialoclcs.AbstractNameExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.RoundBracketedClauseCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
@@ -72,6 +81,27 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 		};
 	}
 
+	@Override
+	protected @NonNull ImplicitSourceVariableIterator createImplicitSourceVariableIterator(@NonNull ModelElementCS csExp) {
+		return new ImplicitSourceVariableIterator(csExp) {
+			@Override
+			protected boolean doNext(@NonNull ElementCS csParent, @NonNull ElementCS csChild) {
+				if (csParent instanceof AbstractMappingCS) {
+					AbstractMapping asContext = PivotUtil.getPivot(AbstractMapping.class, (AbstractMappingCS)csParent);
+					if (asContext != null) {
+						Variable asVariable = asContext.getTransformation().getOwnedContext();
+						if (asVariable != null) {
+							setNext(asVariable);
+						}
+					}
+					return DONE; // no more parents
+				}
+				return super.doNext(csParent, csChild);
+			}
+			
+		};
+	}
+
 	private @Nullable Function getBestFunction(@NonNull Invocations invocations) {
 		for (NamedElement invocation : invocations) {
 			if (invocation instanceof Function) {
@@ -88,7 +118,14 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 			if (function != null) {
 				return new ResolvedInvocation(function);
 			}
-			return null;
+			Iterable<? extends Operation> nonStaticOperations = metamodelManager.getAllOperations(asType, FeatureFilter.SELECT_NON_STATIC, name);
+			List<NamedElement> invocations = getInvocationsInternal(null, nonStaticOperations, iteratorCount, expressionCount);
+//			if (asTypeValue != null) {
+//				Iterable<? extends Operation> staticOperations = metamodelManager.getAllOperations(asTypeValue, FeatureFilter.SELECT_STATIC, name);
+//				invocations = getInvocationsInternal(invocations, staticOperations, iteratorCount, expressionCount);
+//			}
+			return invocations != null ? new UnresolvedInvocations(asType, invocations) : null;
+//			return null;
 		}
 		return super.getInvocations(asType, asTypeValue, name, iteratorCount, expressionCount);
 	}
@@ -109,5 +146,18 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 			}
 		}
 		return super.resolveBestInvocation(sourceExp, csRoundBracketedClause, invocations);
+	}
+
+	@Override
+	protected Element resolveSimpleNameExp(@NonNull NameExpCS csNameExp, @NonNull Element element) {
+		if (element instanceof Transformation) {
+			Variable ownedContext = ((Transformation)element).getOwnedContext();
+			return resolveVariableExp(csNameExp, ownedContext);
+		}
+		else if (element instanceof TypedModel) {
+			Variable ownedContext = ((TypedModel)element).getOwnedContext();
+			return resolveVariableExp(csNameExp, ownedContext);
+		}
+		return super.resolveSimpleNameExp(csNameExp, element);
 	}
 }

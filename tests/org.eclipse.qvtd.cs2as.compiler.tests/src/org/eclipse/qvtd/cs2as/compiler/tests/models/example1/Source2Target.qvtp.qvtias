@@ -49,7 +49,7 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="not" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.not">
-              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA1">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A3.leftCS.guard.x"/>
               </ownedSource>
@@ -58,7 +58,7 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="not" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.not">
-              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA2">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A3.leftCS.guard.x"/>
               </ownedSource>
@@ -89,14 +89,14 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="not" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.not">
-              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA1">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A2.leftCS.guard.x"/>
               </ownedSource>
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+            <conditionExpression xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA2">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A2.leftCS.guard.x"/>
             </conditionExpression>
@@ -124,7 +124,7 @@
         </domain>
         <guardPattern>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+            <conditionExpression xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA1">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A1.leftCS.guard.x"/>
             </conditionExpression>
@@ -299,7 +299,7 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="not" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.not">
-              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA1">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA3_name.leftCS.guard.x"/>
               </ownedSource>
@@ -308,7 +308,7 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="not" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.not">
-              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA2">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA3_name.leftCS.guard.x"/>
               </ownedSource>
@@ -346,7 +346,7 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="not" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.not">
-              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA1">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA3_ownsC.leftCS.guard.x"/>
               </ownedSource>
@@ -355,7 +355,7 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="not" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.not">
-              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA2">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA3_ownsC.leftCS.guard.x"/>
               </ownedSource>
@@ -413,14 +413,14 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="not" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.not">
-              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA1">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA2_name.leftCS.guard.x"/>
               </ownedSource>
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+            <conditionExpression xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA2">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA2_name.leftCS.guard.x"/>
             </conditionExpression>
@@ -457,14 +457,14 @@
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="not" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.not">
-              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA1">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA2_ownsC.leftCS.guard.x"/>
               </ownedSource>
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+            <conditionExpression xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA2">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA2_ownsC.leftCS.guard.x"/>
             </conditionExpression>
@@ -519,7 +519,7 @@
         </domain>
         <guardPattern>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+            <conditionExpression xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA1">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA1_name.leftCS.guard.x"/>
             </conditionExpression>
@@ -554,7 +554,7 @@
         </domain>
         <guardPattern>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+            <conditionExpression xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="SourceDisambiguation.ocl.oclas#o.source.X.disambiguatesToA1">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA1_ownsB.leftCS.guard.x"/>
             </conditionExpression>
@@ -803,7 +803,7 @@
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.refsC">
-            <value xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredOperation="TargetLookup.ocl.oclas#o.target.D.lookupC..source.Z">
+            <value xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredOperation="TargetLookup.ocl.oclas#o.target.D.lookupC..source.Z">
               <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                     referredProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
@@ -901,7 +901,7 @@
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.refsB">
-            <value xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredOperation="TargetLookup.ocl.oclas#o.target.D.lookupB..source.Z">
+            <value xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredOperation="TargetLookup.ocl.oclas#o.target.D.lookupB..source.Z">
               <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                     referredProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">

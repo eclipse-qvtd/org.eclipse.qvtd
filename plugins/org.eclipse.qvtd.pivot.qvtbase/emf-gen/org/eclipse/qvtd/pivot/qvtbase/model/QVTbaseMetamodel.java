@@ -159,7 +159,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			root.getOwnedPackages().add(pivot);
 			root.getOwnedPackages().add(qvtbase);
 			root.getOwnedPackages().add(orphanage);
-			root.getOwnedImports().add(createImport(_ocl));
+			root.getOwnedImports().add(createImport(null, _ocl));
 		}
 		
 		private final @NonNull Class _Annotation = createClass(PivotPackage.Literals.ANNOTATION);

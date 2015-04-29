@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -35,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
@@ -58,6 +60,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
@@ -89,6 +92,21 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		context.refreshPivotList(Predicate.class, pBottomPattern.getPredicate(), Iterables.filter(csElement.getOwnedConstraints(), IsPredicatePredicate.INSTANCE));
 		context.refreshComments(pBottomPattern, csElement);
 		return null;
+	}
+
+	@Override
+	public Continuation<?> visitDirectionCS(@NonNull DirectionCS csElement) {
+		Continuation<?> continuation = super.visitDirectionCS(csElement);
+		TypedModel asTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
+		if (asTypedModel != null) {
+			org.eclipse.ocl.pivot.Class libModel = standardLibrary.getLibraryType("Model");
+			Variable contextVariable = PivotFactory.eINSTANCE.createVariable();
+			contextVariable.setName(asTypedModel.getName());
+			contextVariable.setType(libModel);
+			contextVariable.setIsRequired(true);
+			asTypedModel.setOwnedContext(contextVariable);
+		}
+		return continuation;
 	}
 
 	@Override
@@ -267,7 +285,17 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitTransformationCS( @NonNull TransformationCS csElement) {
-		// TODO Auto-generated method stub
-		return super.visitTransformationCS(csElement);
+		Continuation<?> continuation = super.visitTransformationCS(csElement);
+		Transformation asTransformation = PivotUtil.getPivot(Transformation.class, csElement);
+		if (asTransformation != null) {
+			org.eclipse.ocl.pivot.Class libTransformation = standardLibrary.getLibraryType("Transformation");
+			asTransformation.getSuperClasses().add(libTransformation);
+			Variable contextVariable = PivotFactory.eINSTANCE.createVariable();
+			contextVariable.setName("this");
+			contextVariable.setType(libTransformation);
+			contextVariable.setIsRequired(true);
+			asTransformation.setOwnedContext(contextVariable);
+		}
+		return continuation;
 	}
 }

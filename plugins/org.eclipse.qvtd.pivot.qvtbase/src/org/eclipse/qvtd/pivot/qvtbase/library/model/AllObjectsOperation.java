@@ -17,27 +17,26 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
+import org.eclipse.ocl.pivot.library.AbstractUnaryOperation;
 import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TypedModelInstance;
 
 /**
- * ModelObjectsOfKindOperation realises the Model::objectsOfKind() library operation.
+ * AllObjectsOperation realises the Model::allObjects() library operation.
  */
-public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
+public class AllObjectsOperation extends AbstractUnaryOperation
 {
-	public static final @NonNull ModelObjectsOfKindOperation INSTANCE = new ModelObjectsOfKindOperation();
+	public static final @NonNull AllObjectsOperation INSTANCE = new AllObjectsOperation();
 
 	@Override
-	public @NonNull SetValue evaluate(@NonNull Evaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object typeVal) {
-		org.eclipse.ocl.pivot.Class type = asClass(typeVal);
+	public @NonNull SetValue evaluate(@NonNull Evaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		if (!(sourceVal instanceof TypedModelInstance)) {
 			throw new InvalidValueException(PivotMessages.TypedValueRequired, "TypedModelInstance", getTypeName(sourceVal));
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
-		Set<Object> results = typedModelInstance.getObjectsOfKind(type);
+		Set<Object> results = typedModelInstance.getAllObjects();
 		return createSetValue((CollectionTypeId)returnTypeId, results);
 	}
 }

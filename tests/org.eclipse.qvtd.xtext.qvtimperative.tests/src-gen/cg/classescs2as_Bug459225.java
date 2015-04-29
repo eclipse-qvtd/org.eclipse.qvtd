@@ -91,7 +91,7 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
     }
     
     /**
-     * classescs::NamedElementCS::computeName() : String[1]
+     * classescs::NamedElementCS::computeName() : String[?]
      * 
      * 
      * let container : OclElement[?] = self.oclContainer()
@@ -105,7 +105,7 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
      *   else self.name
      *   endif
      */
-    public @NonNull /*@NonInvalid*/ String computeName(final @NonNull /*@NonInvalid*/ NamedElementCS self_0) {
+    public @Nullable /*@NonInvalid*/ String computeName(final @NonNull /*@NonInvalid*/ NamedElementCS self_0) {
         @Nullable /*@Caught*/ Object CAUGHT_container;
         try {
             final @Nullable /*@Thrown*/ Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_0);
@@ -149,18 +149,15 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
             }
             final @Nullable /*@Thrown*/ NamedElementCS oclAsType = (NamedElementCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_classescs_c_c_NamedElementCS_1);
             if (oclAsType == null) {
-                throw new InvalidValueException("Null source for \'classescs::NamedElementCS::computeName() : String\'");
+                throw new InvalidValueException("Null source for \'classescs::NamedElementCS::computeName() : String[?]\'");
             }
-            final @NonNull /*@Thrown*/ String computeName = this.computeName(oclAsType);
+            final @Nullable /*@Thrown*/ String computeName = this.computeName(oclAsType);
             final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(computeName, STR__c_c);
             final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
             symbol_1 = sum_0;
         }
         else {
             symbol_1 = name_0;
-        }
-        if (symbol_1 == null) {
-            throw new InvalidValueException("Null body for \'classescs::NamedElementCS::computeName() : String\'");
         }
         return symbol_1;
     }
@@ -211,9 +208,9 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         if (not == null) {
             throw new InvalidValueException("Null if condition");
         }
-        @NonNull /*@Thrown*/ String symbol_2;
+        @Nullable /*@Thrown*/ String symbol_2;
         if (not) {
-            final @NonNull /*@Thrown*/ String computeName = this.computeName(packageCS);
+            final @Nullable /*@Thrown*/ String computeName = this.computeName(packageCS);
             symbol_2 = computeName;
         }
         else {

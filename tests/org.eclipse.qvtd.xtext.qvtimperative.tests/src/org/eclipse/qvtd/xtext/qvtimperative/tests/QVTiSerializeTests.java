@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
@@ -38,8 +39,8 @@ import org.eclipse.xtext.resource.XtextResource;
 public class QVTiSerializeTests extends LoadTestCase
 {
 	protected void doSerializeRoundTrip(@NonNull String stem) throws Exception {
-		OCL ocl1 = OCL.newInstance(OCL.NO_PROJECTS);
-		OCL ocl2 = OCL.newInstance(OCL.NO_PROJECTS);
+		OCL ocl1 = QVTbase.newInstance(OCL.NO_PROJECTS, null);
+		OCL ocl2 = QVTbase.newInstance(OCL.NO_PROJECTS, null);
 		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvti", stem + ".qvtias");
 		URI inputURI = getProjectFileURI(stem + ".qvtias");
 		URI referenceURI = getProjectFileURI(stem + "ref.qvtias");
@@ -99,7 +100,7 @@ public class QVTiSerializeTests extends LoadTestCase
 		//
 		//	Load QVTiAS
 		//		
-		OCL ocl = OCL.newInstance(OCL.NO_PROJECTS);
+		OCL ocl = QVTbase.newInstance(OCL.NO_PROJECTS);
 		try {
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);

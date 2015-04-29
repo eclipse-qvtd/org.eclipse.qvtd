@@ -602,6 +602,11 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 //		for (TypedModel typedModel : object.getModelParameter()) {			-- done in analyzeTransformation
 //			visit(typedModel);
 //		}
+		Variable ownedContext = object.getOwnedContext();
+		DomainUsage domainUsage = getUsage(object);
+		if ((ownedContext != null) && (domainUsage != null)) {
+			setUsage(ownedContext, domainUsage);
+		}
 		//
 		//	Ensure all operations are analyzed even if not used.
 		//

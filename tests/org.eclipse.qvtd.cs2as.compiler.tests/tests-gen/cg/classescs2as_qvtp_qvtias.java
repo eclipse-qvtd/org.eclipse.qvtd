@@ -122,7 +122,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     }
     
     /**
-     * classes::Visitable::lookupPackage(pathSeq : OrderedSet(classescs::PathElementCS)) : classes::Package[1]
+     * classes::Visitable::lookupPackage(pathSeq : OrderedSet(classescs::PathElementCS)) : classes::Package[?]
      * 
      * 
      * if pathSeq->size() = 1
@@ -133,12 +133,12 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      *   ._lookupPackage(pathSeq->last())
      * endif
      */
-    public /*@NonNull*/ /*@NonInvalid*/ Package lookupPackage(final /*@NonNull*/ /*@NonInvalid*/ Visitable self_0, final /*@NonNull*/ /*@NonInvalid*/ List<PathElementCS> pathSeq) {
+    public /*@Nullable*/ /*@NonInvalid*/ Package lookupPackage(final /*@NonNull*/ /*@NonInvalid*/ Visitable self_0, final /*@NonNull*/ /*@NonInvalid*/ List<PathElementCS> pathSeq) {
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ OrderedSetValue BOXED_pathSeq_3 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq);
         final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_3);
         final /*@Thrown*/ boolean eq = size.equals(INT_1);
-        /*@NonNull*/ /*@Thrown*/ Package symbol_0;
+        /*@Nullable*/ /*@Thrown*/ Package symbol_0;
         if (eq) {
             final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_3);
             LookupEnvironment _lookupEnv = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment(evaluator,first);
@@ -157,7 +157,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue subOrderedSet = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_pathSeq_3, INT_1, diff);
             final List<PathElementCS> UNBOXED_subOrderedSet = subOrderedSet.asEcoreObjects(idResolver, PathElementCS.class);
             assert UNBOXED_subOrderedSet != null;
-            final /*@NonNull*/ /*@Thrown*/ Package lookupPackage = this.lookupPackage(self_0, UNBOXED_subOrderedSet);
+            final /*@Nullable*/ /*@Thrown*/ Package lookupPackage = this.lookupPackage(self_0, UNBOXED_subOrderedSet);
             final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_3);
             LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment(evaluator,last);
             ClassesLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv_0);
@@ -354,7 +354,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_pathSeq_0_3 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq_0);
             final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
             final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
-            /*@NonNull*/ /*@Thrown*/ example2.classes.Class symbol_2;
+            /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_2;
             if (eq_0) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
                 LookupEnvironment _lookupEnv = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment(evaluator,first);
@@ -370,13 +370,13 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
             }
             else {
                 if (self_1 == null) {
-                    throwNull(classCS_1, "Null source for \'classes::Visitable::lookupPackage(OrderedSet(classescs::PathElementCS)) : classes::Package\'");
+                    throwNull(classCS_1, "Null source for \'classes::Visitable::lookupPackage(OrderedSet(classescs::PathElementCS)) : classes::Package[?]\'");
                 }
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
                 final /*@NonNull*/ /*@Thrown*/ OrderedSetValue subOrderedSet = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3, INT_1, diff);
                 final List<PathElementCS> UNBOXED_subOrderedSet = subOrderedSet.asEcoreObjects(idResolver, PathElementCS.class);
                 assert UNBOXED_subOrderedSet != null;
-                final /*@NonNull*/ /*@Thrown*/ Package lookupPackage = this.lookupPackage(self_1, UNBOXED_subOrderedSet);
+                final /*@Nullable*/ /*@Thrown*/ Package lookupPackage = this.lookupPackage(self_1, UNBOXED_subOrderedSet);
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
                 LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment(evaluator,last);
                 ClassesLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv_0);

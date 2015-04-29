@@ -24,11 +24,11 @@ import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TypedModelInstance;
 
 /**
- * ModelObjectsOfKindOperation realises the Model::objectsOfKind() library operation.
+ * ModelObjectsOfTypeOperation realises the Model::objectsOfType() library operation.
  */
-public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
+public class ModelObjectsOfTypeOperation extends AbstractBinaryOperation
 {
-	public static final @NonNull ModelObjectsOfKindOperation INSTANCE = new ModelObjectsOfKindOperation();
+	public static final @NonNull ModelObjectsOfTypeOperation INSTANCE = new ModelObjectsOfTypeOperation();
 
 	@Override
 	public @NonNull SetValue evaluate(@NonNull Evaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object typeVal) {
@@ -37,7 +37,7 @@ public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
 			throw new InvalidValueException(PivotMessages.TypedValueRequired, "TypedModelInstance", getTypeName(sourceVal));
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
-		Set<Object> results = typedModelInstance.getObjectsOfKind(type);
+		Set<Object> results = typedModelInstance.getObjectsOfType(type);
 		return createSetValue((CollectionTypeId)returnTypeId, results);
 	}
 }

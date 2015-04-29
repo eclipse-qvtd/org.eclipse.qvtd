@@ -27,14 +27,17 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ParserException;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationInstance;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.TypedModelInstance;
 
 /**
  * QVTc Domain Manager is the class responsible for managing the QVTc virtual
@@ -128,7 +131,7 @@ public class QVTiModelManager implements ModelManager
 		// Find the typed model for the type
 		org.eclipse.ocl.pivot.Package p = type.getOwningPackage();
 		for (TypedModel d : modelResourceMap.keySet()) {
-			for (Package up : d.getUsedPackage()) {
+			for (org.eclipse.ocl.pivot.Package up : d.getUsedPackage()) {
 				if (up.equals(p)) {
 					for (Object o : getElementsByType(d, type)) {
 						elements.add((EObject) o);
@@ -137,6 +140,10 @@ public class QVTiModelManager implements ModelManager
 			}
 		}
 		return elements;
+	}
+
+	public @NonNull MetamodelManager getMetamodelManager() {
+		return metamodelManager;
 	}
 
 	/**
@@ -317,5 +324,63 @@ public class QVTiModelManager implements ModelManager
 	@SuppressWarnings("unchecked")
 	public void setUnnavigableOpposite(@NonNull Integer cacheIndex, @NonNull Object targetObject, Object sourceObject) {
 		((Map<Object, Object>)unnavigableOpposites[cacheIndex]).put(sourceObject, targetObject);
+	}
+
+	public static class QVTiTransformationInstance implements TransformationInstance
+	{
+		protected final @NonNull QVTiModelManager modelManager;
+		protected final @NonNull Transformation transformation;
+		
+		public QVTiTransformationInstance(@NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
+			this.modelManager = modelManager;
+			this.transformation = transformation;
+		}
+	}
+
+	public static class QVTiTypedModelInstance implements TypedModelInstance
+	{
+		protected final @NonNull QVTiModelManager modelManager;
+		protected final @NonNull TypedModel typedModel;
+		
+		public QVTiTypedModelInstance(@NonNull QVTiModelManager modelManager, @NonNull TypedModel typedModel) {
+			this.modelManager = modelManager;
+			this.typedModel = typedModel;
+		}
+
+		@Override
+		public @NonNull Set<Object> getAllObjects() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public @NonNull Set<Object> getObjectsOfKind(@NonNull org.eclipse.ocl.pivot.Class type) {
+			IdResolver idResolver = modelManager.getMetamodelManager().getEnvironmentFactory().getIdResolver();
+			Set<Object> results = new HashSet<Object>(); 
+			Set<?> instances = modelManager.get(type);
+			for (Object instance : instances) {
+				if (instance != null) {
+					results.add(idResolver.boxedValueOf(instance));	// FIXME Move to model manager
+				}
+			}
+			return results;
+		}
+
+		@Override
+		public @NonNull Set<Object> getObjectsOfType(@NonNull org.eclipse.ocl.pivot.Class type) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public @NonNull Set<Object> getRootObjects() {
+			throw new UnsupportedOperationException();
+		}
+	}
+	
+	public Object getTransformationInstance(@NonNull Transformation transformation) {
+		return new QVTiTransformationInstance(this, transformation);
+	}
+
+	public Object getTypedModelInstance(@NonNull TypedModel typedModel) {
+		return new QVTiTypedModelInstance(this, typedModel);
 	}
 }

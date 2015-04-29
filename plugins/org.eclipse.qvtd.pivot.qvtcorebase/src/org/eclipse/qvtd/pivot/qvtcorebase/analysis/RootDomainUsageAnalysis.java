@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.complete.CompleteModelInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -336,6 +337,10 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 				enforceableMask |= bitMask;
 			}
 			setUsage(typedModel, typedModelUsage);
+			Variable ownedContext = typedModel.getOwnedContext();
+			if (ownedContext != null) {
+				setUsage(ownedContext, typedModelUsage);
+			}
 			Set<CompleteClass> completeClasses = new HashSet<CompleteClass>();
 			for (org.eclipse.ocl.pivot.Package asPackage : QVTbaseUtil.getAllUsedPackages(typedModel)) {
 				for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
@@ -389,6 +394,10 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 		checkableUsage = getConstantUsage(getAnyMask() & checkableMask);
 		enforceableUsage = getConstantUsage(getAnyMask() & enforceableMask);
 		middleUsage = getConstantUsage(getAnyMask() & ~checkableMask & ~enforceableMask);
+		Variable ownedContext = transformation.getOwnedContext();
+		if (ownedContext != null) {
+			setUsage(ownedContext, getAnyUsage());
+		}
 		visit(transformation);
 		return element2usage;
 	}
