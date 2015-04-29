@@ -1,4 +1,4 @@
-package org.eclipse.qvtd.build.cs2as.xtext.generator;
+package org.eclipse.qvtd.cs2as.xtext.generator;
 
 import org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment;
 

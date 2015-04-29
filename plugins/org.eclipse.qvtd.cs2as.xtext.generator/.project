@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.qvtd.build.cs2as.xtext</name>
+	<name>org.eclipse.qvtd.cs2as.xtext.generator</name>
 	<comment></comment>
 	<projects>
 	</projects>
