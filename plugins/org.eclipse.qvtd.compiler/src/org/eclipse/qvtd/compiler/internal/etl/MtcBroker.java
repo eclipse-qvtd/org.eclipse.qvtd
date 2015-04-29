@@ -54,7 +54,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLBuilder;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
-import org.eclipse.qvtd.pivot.schedule.utilities.ScheduleToDependecyGraphVisitor;
+import org.eclipse.qvtd.pivot.schedule.utilities.ScheduleToDependencyGraphVisitor;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -385,7 +385,7 @@ public class MtcBroker {
 			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		} finally {
 			if (s != null) {
-				ScheduleToDependecyGraphVisitor visitor = new ScheduleToDependecyGraphVisitor(builder);
+				ScheduleToDependencyGraphVisitor visitor = new ScheduleToDependencyGraphVisitor(builder);
 				// GEt the source/middle/target info from the configuration
 				// FIXME why is the configuration not loaded with the generated classes?
 				for (EObject eContent : configModel.getResource().getContents()) {

@@ -22,7 +22,7 @@ import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.pivot.schedule.ScheduleElement;
 import org.eclipse.qvtd.pivot.schedule.util.AbstractExtendingScheduleVisitor;
 
-public class ScheduleToDependecyGraphVisitor extends AbstractExtendingScheduleVisitor<String, GraphBuilder> {
+public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleVisitor<String, GraphBuilder> {
 	
 	@NonNull private final String SOL_BASE03 = "#002b36";
 	@NonNull private final String SOL_BASE02 = "#073642";
@@ -64,7 +64,7 @@ public class ScheduleToDependecyGraphVisitor extends AbstractExtendingScheduleVi
 	private String middleDirection;
 	private String inputDirection;
 	
-	public ScheduleToDependecyGraphVisitor(GraphBuilder context) {
+	public ScheduleToDependencyGraphVisitor(GraphBuilder context) {
 		super(context);
 		// TODO Auto-generated constructor stub
 	}
