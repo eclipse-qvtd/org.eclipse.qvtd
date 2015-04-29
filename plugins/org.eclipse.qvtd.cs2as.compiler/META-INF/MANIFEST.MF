@@ -10,8 +10,7 @@ Export-Package: org.eclipse.qvtd.cs2as.compiler,
  org.eclipse.qvtd.cs2as.compiler.cgmodel,
  org.eclipse.qvtd.cs2as.compiler.cgmodel.impl,
  org.eclipse.qvtd.cs2as.compiler.cgmodel.util,
- org.eclipse.qvtd.cs2as.compiler.internal;x-friends:="org.eclipse.qvtd.cs2as.compiler.tests,org.eclipse.qvtd.cs2as.build",
- org.eclipse.qvtd.cs2as.compiler.qvti
+ org.eclipse.qvtd.cs2as.compiler.internal;x-friends:="org.eclipse.qvtd.cs2as.compiler.tests,org.eclipse.qvtd.cs2as.build"
 Require-Bundle: org.eclipse.ocl.xtext.completeocl;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.ocl.examples.codegen;bundle-version="[2.0.0,3.0.0)",
  org.eclipse.qvtd.xtext.qvtimperative;bundle-version="[0.12.0,1.0.0)",

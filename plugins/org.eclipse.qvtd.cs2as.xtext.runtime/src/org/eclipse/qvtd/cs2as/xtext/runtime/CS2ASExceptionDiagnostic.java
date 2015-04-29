@@ -1,4 +1,4 @@
-package org.eclipse.qvtd.cs2as.compiler.qvti;
+package org.eclipse.qvtd.cs2as.xtext.runtime;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
