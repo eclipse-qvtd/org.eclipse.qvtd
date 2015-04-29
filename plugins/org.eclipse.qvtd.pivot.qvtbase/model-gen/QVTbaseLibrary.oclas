@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
-    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" externalURI="platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTd-1.3.oclstdlib" name="QVTd-1.3.oclstdlib">
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" externalURI="platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib" name="QVTbaseLibrary.oclstdlib">
   <ownedImports importedNamespace="pivot:Package ../model/QVTbase.ecore.oclas#P.qvtbase"/>
   <ownedPackages xsi:type="pivot:Library" xmi:id="P.qvtbase" URI="http://www.eclipse.org/qvt/2015/QVTbase" name="qvtbase" nsPrefix="qvtb">
     <ownedClasses xmi:id="T.qvtbase.Transformation" name="Transformation" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
@@ -9,7 +9,6 @@
         <ownedParameters xmi:id="p0o.qvtbase.Transformation.modelFor..qvtbase.TypedModel" name="typedModel" type="pivot:Class ../model/QVTbase.ecore.oclas#T.qvtbase.TypedModel"/>
       </ownedOperations>
     </ownedClasses>
-    <ownedClasses xmi:id="T.qvtbase.TypedModel" name="TypedModel" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"/>
   </ownedPackages>
   <ownedPackages xsi:type="pivot:Library" xmi:id="P.ocl" URI="http://www.eclipse.org/ocl/2015/Pivot" name="ocl" nsPrefix="ocl">
     <ownedClasses xmi:id="T.ocl.Model" name="Model" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">

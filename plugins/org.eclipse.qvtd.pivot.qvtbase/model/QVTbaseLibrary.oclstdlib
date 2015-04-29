@@ -1,12 +1,9 @@
---import 'http://www.eclipse.org/ocl/2015/Library';
 import 'QVTbase.ecore#/';
 
 library qvtbase : qvtb = 'http://www.eclipse.org/qvt/2015/QVTbase'
 {
 type Transformation {
 	operation modelFor(typedModel : TypedModel) : ocl::Model[?] => 'org.eclipse.qvtd.pivot.qvtbase.library.transformation.TransformationModelForOperation';
-}
-type TypedModel {
 }
 }
 

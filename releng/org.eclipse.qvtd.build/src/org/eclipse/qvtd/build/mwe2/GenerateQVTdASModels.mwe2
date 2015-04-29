@@ -39,6 +39,26 @@ Workflow {
     	modelPackageName = "org.eclipse.qvtd.pivot.qvtbase"
 //    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtbase.util"
     }
+    component = GenerateOCLmetamodelXtend { //resourceSet = resourceSet
+    	projectName = "org.eclipse.qvtd.pivot.qvtbase"
+    	modelFile = "model/QVTbase.ecore"
+    	uri = "http://www.eclipse.org/qvt/2015/QVTbase"
+    	javaFolder = "emf-gen"
+    	javaPackageName = "org.eclipse.qvtd.pivot.qvtbase.model"
+    	javaClassName = "QVTbaseMetamodel"
+    	generatedClassNameMap = {
+    		from = "http://www.eclipse.org/ocl/2015/Pivot"
+    		to = "org.eclipse.ocl.pivot.model.OCLmetamodel"
+    	}
+    	generatedClassNameMap = {
+    		from = "http://www.eclipse.org/ocl/2015/Library"
+    		to = "org.eclipse.ocl.pivot.model.OCLstdlib"
+    	}
+//    	generatedClassNameMap = {
+//    		from = "http://www.eclipse.org/qvt/2015/QVTbase"
+//    		to = "org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel"
+//    	}
+    }
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtcorebase"
     	modelName = "QVTcoreBase"

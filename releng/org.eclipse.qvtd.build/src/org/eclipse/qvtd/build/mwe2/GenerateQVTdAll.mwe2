@@ -17,7 +17,7 @@ module GenerateQVTdAll
  */
 Workflow {
   component = @GenerateQVTdASModels {}
-  component = @GenerateQVTdStdlibModel {}
+  component = @GenerateQVTbaseLibraryModels {}
   component = @GenerateQVTdScheduleModels {}
   component = @GenerateQVTdCSModels {}
   component = @GenerateQVTdCGModels {}
