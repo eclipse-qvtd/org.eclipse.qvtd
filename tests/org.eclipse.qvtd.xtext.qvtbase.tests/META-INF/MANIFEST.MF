@@ -7,6 +7,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.junit;visibility:=reexport,
  org.eclipse.core.resources,
  org.eclipse.core.runtime,
+ org.eclipse.jdt.core,
  org.eclipse.emf.mapping.ecore2xml;visibility:=reexport,
  org.eclipse.uml2.uml.resources;visibility:=reexport,
  org.eclipse.ocl.xtext.oclstdlib;bundle-version="[1.0.0,2.0.0)",
