@@ -1,9 +1,10 @@
-package org.eclipse.qvtd.cs2as.compiler.qvti;
+package org.eclipse.qvtd.cs2as.runtime;
 
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -26,13 +27,13 @@ public class QVTiFacade extends OCL {
 		return new QVTiPivotEvaluator(getEnvironmentFactory(), transformation);
 	}
 	
-	
+	// FIXME why do we need this ?
 	public @NonNull QVTiTxEvaluator createTxEvaluator(Class<? extends TransformationExecutor> txClass)
 			throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		return new QVTiTxEvaluator(environmentFactory.getCompleteEnvironment(), txClass);
 	}	
 	
-	public static QVTiFacade createInstance(ProjectManager projectManager, ResourceSet rSet) {
+	public static QVTiFacade createInstance(@NonNull ProjectManager projectManager, @Nullable ResourceSet rSet) {
 		return new QVTiFacade(new QVTiEnvironmentFactory(projectManager, rSet));
 	}
 }

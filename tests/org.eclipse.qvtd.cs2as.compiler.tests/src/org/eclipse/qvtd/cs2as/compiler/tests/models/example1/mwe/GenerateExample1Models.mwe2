@@ -17,7 +17,7 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 
 var projectName = "org.eclipse.qvtd.cs2as.compiler.tests"
-var examplesFolder = "src/org/eclipse/qvtd/build/cs2as/tests/models/example1"
+var examplesFolder = "src/org/eclipse/qvtd/cs2as/compiler/tests/models/example1"
 
 /**
  *	Generate the Pivot Model, by performing the merge to create the flattened package

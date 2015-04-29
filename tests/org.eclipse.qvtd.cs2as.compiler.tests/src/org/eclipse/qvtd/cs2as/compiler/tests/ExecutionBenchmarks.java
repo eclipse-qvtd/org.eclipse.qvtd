@@ -54,7 +54,7 @@ import cg.classescs2as_qvtp_qvtias;
  */
 public class ExecutionBenchmarks extends LoadTestCase {
 	
-	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/build/cs2as/tests/models", true);
+	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models", true);
 	private static int NUM_OF_EXECUTIONS = 10;
 	
 	protected class MyQVT extends OCL

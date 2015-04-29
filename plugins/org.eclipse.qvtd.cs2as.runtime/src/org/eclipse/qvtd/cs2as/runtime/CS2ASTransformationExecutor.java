@@ -1,18 +1,20 @@
-package org.eclipse.qvtd.cs2as.compiler.qvti;
+package org.eclipse.qvtd.cs2as.runtime;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.PropertyId;
+
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
-import org.eclipse.xtext.diagnostics.Diagnostic;
 
 public abstract class CS2ASTransformationExecutor extends AbstractTransformationExecutor
+	implements CS2ASTransformation
 {
 
 	private final List<Diagnostic> txErrors = new ArrayList<Diagnostic>(); 
@@ -50,7 +52,7 @@ public abstract class CS2ASTransformationExecutor extends AbstractTransformation
 	}
 	
 	protected void handleError(EObject sourceObject, String errorMessage) {
-		txErrors.add(new CS2ASDiagnostic(sourceObject, errorMessage));
+		txErrors.add(new CS2ASDiagnostic<EObject>(sourceObject, errorMessage));
 	}
 	
 	public List<Diagnostic> getErrors() {

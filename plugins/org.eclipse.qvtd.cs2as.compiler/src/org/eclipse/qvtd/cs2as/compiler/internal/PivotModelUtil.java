@@ -8,7 +8,7 @@
  * Contributors:
  *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.cs2as.compiler;
+package org.eclipse.qvtd.cs2as.compiler.internal;
 
 import java.util.Map;
 

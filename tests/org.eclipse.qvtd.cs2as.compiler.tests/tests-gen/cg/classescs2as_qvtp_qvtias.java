@@ -47,9 +47,9 @@ import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
-import org.eclipse.qvtd.cs2as.compiler.qvti.CS2ASTransformationExecutor;
 import org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor;
 import org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment;
+import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformationExecutor;
 
 /**
  * The classescs2as_qvtp_qvtias transformation:

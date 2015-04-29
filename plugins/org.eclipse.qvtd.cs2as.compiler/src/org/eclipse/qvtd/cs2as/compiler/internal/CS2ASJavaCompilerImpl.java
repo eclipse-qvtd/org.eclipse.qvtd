@@ -1,4 +1,4 @@
-package org.eclipse.qvtd.cs2as.compiler.qvti;
+package org.eclipse.qvtd.cs2as.compiler.internal;
 
 import java.util.List;
 import java.util.Set;
@@ -42,22 +42,27 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
+import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
+import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompiler;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGFactory;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.CS2ASCGModelVisitor;
+import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformation;
+import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformationExecutor;
+import org.eclipse.qvtd.cs2as.runtime.QVTiFacade;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 
-public class CS2ASJavaCompiler {
+public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 	protected static class CS2ASJavaCodeGenerator extends QVTiCodeGenerator
 	{
-		private  @NonNull CS2ASJavaCGParameters params;
+		private  @NonNull CS2ASJavaCompilerParameters params;
 		
 		protected CS2ASJavaCodeGenerator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation,
-				@NonNull CS2ASJavaCGParameters params) {
+				@NonNull CS2ASJavaCompilerParameters params) {
 			super(environmentFactory, transformation);
 			this.params = params;
 		}
@@ -105,7 +110,7 @@ public class CS2ASJavaCompiler {
 					getGlobalPlace());
 		}
 		
-		public @NonNull CS2ASJavaCGParameters getCGParameters() {
+		public @NonNull CS2ASJavaCompilerParameters getCGParameters() {
 			return params;
 		}
 	}
@@ -143,7 +148,7 @@ public class CS2ASJavaCompiler {
 		@Override
 		@Nullable
 		public Boolean visitCGLookupCallExp(CGLookupCallExp cgCall) {
-			CS2ASJavaCGParameters params = ((CS2ASJavaCodeGenerator)getCodeGenerator()).getCGParameters();
+			CS2ASJavaCompilerParameters params = ((CS2ASJavaCodeGenerator)getCodeGenerator()).getCGParameters();
 			
 			CGValuedElement cgSource = cgCall.getSource(); // FIXME to skip env() call. Remove env() call
 			TypeDescriptor typeDescriptor = context.getTypeDescriptor(cgCall);
@@ -410,19 +415,20 @@ public class CS2ASJavaCompiler {
 	
 	// Copied from QVTiCompilerTest
 	@SuppressWarnings("unchecked")
-	protected Class<? extends AbstractTransformationExecutor> compileTransformation(@NonNull QVTiCodeGenerator cg) throws Exception {
+	protected Class<? extends CS2ASTransformation> compileTransformation(@NonNull QVTiCodeGenerator cg) throws Exception {
 		String qualifiedName = cg.getQualifiedName();
 		String javaCodeSource = cg.generateClassFile();
 		
 		Class<?> txClass = OCL2JavaFileObject.loadClass(qualifiedName, javaCodeSource);
-		return (Class<? extends AbstractTransformationExecutor>) txClass;
+		return (Class<? extends CS2ASTransformation>) txClass;
 		
 	}
 	
 	
 	// Copied from QVTiCompilerTest
-	public Class<? extends AbstractTransformationExecutor> compileTransformation(@NonNull QVTiFacade qvt,
-			@NonNull Transformation transformation,	@NonNull CS2ASJavaCGParameters params) throws Exception {
+	@Override
+	public Class<? extends CS2ASTransformation> compileTransformation(@NonNull QVTiFacade qvt,
+			@NonNull Transformation transformation,	@NonNull CS2ASJavaCompilerParameters params) throws Exception {
 				
 		QVTiCodeGenerator cg = new CS2ASJavaCodeGenerator(qvt.getEnvironmentFactory(), transformation, params);
 		QVTiCodeGenOptions options = cg.getOptions();

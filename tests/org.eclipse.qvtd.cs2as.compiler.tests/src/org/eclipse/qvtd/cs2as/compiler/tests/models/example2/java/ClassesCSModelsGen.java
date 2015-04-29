@@ -19,7 +19,7 @@ import example2.classescs.RootCS;
 
 public class ClassesCSModelsGen {
 
-	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/build/cs2as/tests/models", true);
+	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models", true);
 	
 	private static int NUM_ROOT_PACKAGES = 4;
 	private static int NUM_SUB_PACKAGES = 4;

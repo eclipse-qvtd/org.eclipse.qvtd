@@ -8,7 +8,7 @@
  * Contributors:
  *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.cs2as.compiler;
+package org.eclipse.qvtd.cs2as.compiler.internal;
 
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -30,9 +30,9 @@ import org.eclipse.qvtd.compiler.internal.etl.QvtMtcExecutionException;
  */
 public class OCL2QVTiBroker extends MtcBroker {
 	
-	private static final String OCL2QVTP_MIDDLE_MODEL = "ocl2qvtp.etl";
+	private static final String OCL2QVTP_MIDDLE_MODEL = "etl/ocl2qvtp.etl";
 	
-	private static final String OCL2QVTP_MIDDLE_FOLDED = "ocl2qvtp_v2.etl";
+	private static final String OCL2QVTP_MIDDLE_FOLDED = "etl/ocl2qvtp_v2.etl";
 
 	private static final String OCLSTDLIB_URI = "http://www.eclipse.org/ocl/2015/Library.oclas";
 	

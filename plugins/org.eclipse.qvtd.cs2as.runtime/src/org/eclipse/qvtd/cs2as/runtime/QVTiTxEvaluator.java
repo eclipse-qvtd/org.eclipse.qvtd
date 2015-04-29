@@ -1,4 +1,4 @@
-package org.eclipse.qvtd.cs2as.compiler.qvti;
+package org.eclipse.qvtd.cs2as.runtime;
 
 import java.lang.reflect.InvocationTargetException;
 

@@ -1,9 +1,10 @@
-package org.eclipse.qvtd.cs2as.compiler.qvti;
+package org.eclipse.qvtd.cs2as.compiler.internal;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 
-public class CS2ASJavaCGParameters {
+public class CS2ASJavaCompilerParametersImpl implements CS2ASJavaCompilerParameters  {
 
 	private @NonNull String envClassName;
 	private @NonNull String visitorClassName;
@@ -11,7 +12,7 @@ public class CS2ASJavaCGParameters {
 	private @NonNull String packagePrefix;
 	private @NonNull String namedElementClassName;
 	
-	public CS2ASJavaCGParameters(@NonNull String envClassName, @NonNull String visitorClassName,
+	public CS2ASJavaCompilerParametersImpl(@NonNull String envClassName, @NonNull String visitorClassName,
 			@Nullable String namedElementClassName,
 			@Nullable String savePath, @NonNull String packagePrefix) {
 		this.envClassName = envClassName;

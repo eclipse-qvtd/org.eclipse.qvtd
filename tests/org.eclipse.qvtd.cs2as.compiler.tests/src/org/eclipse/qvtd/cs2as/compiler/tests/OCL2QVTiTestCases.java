@@ -39,10 +39,11 @@ import org.eclipse.qvtd.compiler.internal.etl.EtlTask;
 import org.eclipse.qvtd.compiler.internal.etl.MtcBroker;
 import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
 import org.eclipse.qvtd.compiler.internal.etl.QvtMtcExecutionException;
-import org.eclipse.qvtd.cs2as.compiler.OCL2QVTiBroker;
-import org.eclipse.qvtd.cs2as.compiler.qvti.CS2ASJavaCGParameters;
-import org.eclipse.qvtd.cs2as.compiler.qvti.CS2ASJavaCompiler;
-import org.eclipse.qvtd.cs2as.compiler.qvti.QVTiFacade;
+import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
+import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
+import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
+import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiBroker;
+import org.eclipse.qvtd.cs2as.runtime.QVTiFacade;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationEvaluator;
@@ -68,7 +69,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	private static final boolean CREATE_GRAPHML = false; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
 	private static final String TESTS_GEN_PATH = "../org.eclipse.qvtd.cs2as.compiler.tests/tests-gen/";
 	private static final String TESTS_PACKAGE_NAME = "cg";
-	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/build/cs2as/tests/models", true);
+	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models", true);
 
 	
 	// For testing purpose
@@ -203,10 +204,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
 
-		CS2ASJavaCGParameters cgParams = new CS2ASJavaCGParameters("org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.LookupEnvironment",
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.LookupEnvironment",
 				"org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.TargetLookupVisitor", 
 				"example1.target.NamedElement", TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
-		Class<? extends TransformationExecutor> txClass = new CS2ASJavaCompiler()
+		Class<? extends TransformationExecutor> txClass = new CS2ASJavaCompilerImpl()
 			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
 		myQVT.dispose();
@@ -225,11 +226,11 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
 		
-		CS2ASJavaCGParameters cgParams = new CS2ASJavaCGParameters("org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment",
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment",
 				"org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor",
 				"example2.classes.NamedElement",
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
-		Class<? extends TransformationExecutor> txClass = new CS2ASJavaCompiler()
+		Class<? extends TransformationExecutor> txClass = new CS2ASJavaCompilerImpl()
 			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
 		
 		
