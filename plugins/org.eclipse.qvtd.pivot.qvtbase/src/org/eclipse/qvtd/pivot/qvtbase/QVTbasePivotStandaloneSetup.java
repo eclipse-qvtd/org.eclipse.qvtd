@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseLibrary;
 import org.eclipse.qvtd.pivot.qvtbase.scoping.QVTbasePivotScoping;
 
 import com.google.inject.Guice;
@@ -34,6 +35,7 @@ public class QVTbasePivotStandaloneSetup //implements ISetup
 	}
 
 	public static void init() {
+		QVTbaseLibrary.lazyInstall();
 		PivotStandaloneSetup.doSetup();
 		QVTbasePivotScoping.init();
 	}

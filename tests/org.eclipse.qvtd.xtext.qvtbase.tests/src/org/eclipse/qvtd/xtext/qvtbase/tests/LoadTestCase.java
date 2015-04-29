@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 
 /**
@@ -31,7 +32,8 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 public class LoadTestCase extends XtextTestCase
 {	
 	public void doLoad_Concrete(@NonNull String inputName) throws IOException {
-		OCL ocl = OCL.newInstance(OCL.NO_PROJECTS);
+		OCL ocl = QVTbase.newInstance(getProjectMap(), null);
+//		OCL ocl = OCL.newInstance(getProjectMap());
 		URI inputURI = getProjectFileURI(inputName);
 		URI pivotURI = inputURI.trimFileExtension().appendFileExtension("qvtias");
 		doLoad_Concrete(ocl, inputURI, pivotURI);

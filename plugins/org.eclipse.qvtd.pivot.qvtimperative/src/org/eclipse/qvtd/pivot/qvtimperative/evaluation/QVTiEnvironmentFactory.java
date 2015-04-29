@@ -25,6 +25,7 @@ public class QVTiEnvironmentFactory extends AbstractEnvironmentFactory {
 
 	public QVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
 		super(projectMap, externalResourceSet);
+//		getStandardLibrary().setDefaultStandardLibraryURI(QVTdStdlib.STDLIB_URI);
 	}
 
 	@Override

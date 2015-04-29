@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -45,6 +44,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.SimpleUML2RDBMS.SimpleRDBMSNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
+import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperative;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,7 +56,7 @@ import org.junit.Test;
  */
 public class QVTiInterpreterTests extends LoadTestCase
 {
-	protected class MyQVT extends OCL
+	protected class MyQVT extends QVTimperative
 	{
 		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
 			super(environmentFactory);
@@ -64,19 +64,6 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 		public @NonNull MyQvtiEvaluator createEvaluator(@NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
 			return new MyQvtiEvaluator(getEnvironmentFactory(), fileNamePrefix, transformationFileName);
-		}
-
-		@Override
-		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
-		}
-	}
-	
-	protected static class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
-	{
-		public MyQVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
-			super(projectMap, externalResourceSet);
-	    	setEvaluationTracingEnabled(true);
 		}
 	}
 	
@@ -206,7 +193,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	protected @NonNull MyQVT createQVT() {
-		return new MyQVT(new MyQVTiEnvironmentFactory(OCL.NO_PROJECTS, null));
+		return new MyQVT(new TestQVTiEnvironmentFactory(OCL.NO_PROJECTS, null));
 	}
 	
 	/* (non-Javadoc)

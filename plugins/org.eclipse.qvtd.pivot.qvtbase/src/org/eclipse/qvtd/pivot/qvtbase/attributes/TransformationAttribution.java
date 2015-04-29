@@ -24,6 +24,9 @@ public class TransformationAttribution extends ClassAttribution
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
+		if ("modelFor".equals(environmentView.getName())) {
+			System.out.println("Got it");
+		}
 		Transformation transformation = (Transformation)target;
 		environmentView.addNamedElements(transformation.getModelParameter());
 		QVTbaseUtil.addAllNamedElements(environmentView, transformation.getOwnedOperations());
