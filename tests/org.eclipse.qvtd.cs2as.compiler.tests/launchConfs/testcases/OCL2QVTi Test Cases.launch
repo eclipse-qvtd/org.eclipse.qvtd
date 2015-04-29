@@ -2,7 +2,7 @@
 <launchConfiguration type="org.eclipse.jdt.junit.launchconfig">
 <stringAttribute key="bad_container_name" value="\org.eclipse.qvtd.cs2as.compiler.tests\launchConfs\test"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/build/cs2as/tests/OCL2QVTiTestCases.java"/>
+<listEntry value="/org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/OCL2QVTiTestCases.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>

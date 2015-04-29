@@ -1,0 +1,420 @@
+-- Transformation model parameters:
+--     OCL - A CompleteOCL document 
+--     QVTi - The output QVTi model
+
+import 'ocl2qvtiUtils.eol';
+
+pre {
+	var MIDDLE_PACKAGE = MiddleMM!Package.all.first();
+	var LEFTCS_PACKAGE = OCL!Package.all.first();
+	var RIGHT = "rightAS";
+	var LEFT = "leftCS";
+	var MIDDLE = "middle";
+	var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+	
+	-- transformation begins --
+	var oclModel = OCL!Model.all.first();
+	var qvtiModel = new QVTi!ImperativeModel;
+	qvtiModel.externalURI = oclModel.externalURI.replace(".ocl",".qvtp.qvtias"); -- FIXME Assuming it will be serialised in the same folder
+	qvtiModel.ownedImports ::= oclModel.ownedImports;
+	
+	var qvtiPackage = new QVTi!Package;
+	qvtiPackage.name = "";
+	
+	var qvtiTransf = new QVTi!Transformation;
+	qvtiTransf.name = qvtiModel.name;
+	qvtiTransf.modelParameter.addAll(QVTi!TypedModel.all());
+	
+	var typedModel = new QVTi!TypedModel;
+	typedModel.name = LEFT;
+	typedModel.usedPackage.add(
+		OCL!Import.all.importedNamespace.ownedPackages.flatten().selectOne(x 
+				| x.name = OCL!ShadowExp.all.first().getExpressionContextType().owningPackage.name));
+	qvtiTransf.modelParameter.add(typedModel);
+	
+	typedModel = new QVTi!TypedModel;
+	typedModel.name = RIGHT;
+	typedModel.usedPackage.add(
+		OCL!Import.all.importedNamespace.ownedPackages.flatten().selectOne(x 
+				| x.name = OCL!ShadowExp.all.first().type.owningPackage.name));
+	qvtiTransf.modelParameter.add(typedModel);
+	
+	typedModel = new QVTi!TypedModel;
+	typedModel.name = MIDDLE;
+	typedModel.usedPackage.add(MIDDLE_PACKAGE);
+	qvtiTransf.modelParameter.add(typedModel);
+		
+	qvtiPackage.ownedClasses.add(qvtiTransf);
+	qvtiModel.ownedPackages.add(qvtiPackage);
+}
+
+
+@lazy
+rule Import2Import 
+	transform s : OCL!Import
+	to t : QVTi!Import {
+	
+	t.name = s.name;
+	t.importedNamespace = s.importedNamespace;
+}
+
+rule ShadowExp2Mapping_LM
+	transform s : OCL!ShadowExp
+	to t : QVTi!Mapping {
+	
+	guard {
+		// FIXME this is hazardy. Rework
+		// Ideally lazy transformation on the content of the OCL Model should avoid calling
+		// this rule on undesired elemenets (imported from other ocl files)
+		return s.closure(x|x.eContainer()).contains(LEFTCS_PACKAGE); 
+	}
+	
+	t.name = s.getCreationMappingName();
+	
+	var leftDomain = s.createLM_LeftDomain();
+	var middleDomain = s.createLM_MiddleDomain();
+	
+	t.domain.add(leftDomain);
+	t.domain.add(middleDomain);
+	
+	var guardPattern = new QVTi!GuardPattern;
+	var bottomPattern = new QVTi!BottomPattern;
+	
+	var pAssignment = new QVTi!MiddlePropertyAssignment;
+	var value = new QVTi!VariableExp;
+	value.referredVariable = leftDomain.guardPattern.variable.first();
+	value.type = value.referredVariable.type;
+	var slotExpression = new QVTi!VariableExp;	
+	slotExpression.referredVariable = middleDomain.bottomPattern.realizedVariable.first();
+	slotExpression.type = slotExpression.referredVariable.type;
+	
+	pAssignment.value = value;
+	pAssignment.slotExpression = slotExpression;
+	pAssignment.targetProperty = slotExpression.type.ownedProperties.selectOne(x | x.name = value.type.name.firstToLowerCase());	
+	
+	bottomPattern.assignment.add(pAssignment);
+				
+	t.guardPattern = guardPattern;
+	t.bottomPattern = bottomPattern;
+}
+
+rule ShadowExp2Mapping_MR
+	transform s : OCL!ShadowExp
+	to t : QVTi!Mapping {
+	
+	guard {
+		// FIXME this is hazardy. Rework
+		// Ideally lazy transformation on the content of the OCL Model should avoid calling
+		// this rule on undesired elemenets (imported from other ocl files)
+		return s.closure(x|x.eContainer()).contains(LEFTCS_PACKAGE); 
+	}
+	
+	t.name = 'm'+s.getTraceElementName()+'_MR';
+
+	var middleDomain = s.createMR_MiddleDomain();
+	var rightDomain = s.createMR_RightDomain();
+		
+	t.domain.add(middleDomain);
+	t.domain.add(rightDomain);
+	
+	var guardPattern = new QVTi!GuardPattern;
+	var bottomPattern = new QVTi!BottomPattern;
+
+	var pAssignment = new QVTi!MiddlePropertyAssignment;
+	var value = new QVTi!VariableExp;
+	value.referredVariable = rightDomain.bottomPattern.realizedVariable.first();
+	value.type = value.referredVariable.type;
+	var slotExpression = new QVTi!VariableExp;	
+	slotExpression.referredVariable = middleDomain.guardPattern.variable.first();
+	slotExpression.type = slotExpression.referredVariable.type;
+	
+	pAssignment.value = value;
+	pAssignment.slotExpression = slotExpression;
+	pAssignment.targetProperty = slotExpression.type.ownedProperties.selectOne(x | x.name = value.type.name.firstToLowerCase());	
+	
+	bottomPattern.assignment.add(pAssignment);
+		
+	t.guardPattern = guardPattern;
+	t.bottomPattern = bottomPattern;
+}
+
+
+rule ShadowPart2UpdateMapping
+	transform s : OCL!ShadowPart
+	to t : QVTi!Mapping {
+	
+	guard {
+		// FIXME this is hazardy. Rework
+		// Ideally lazy transformation on the content of the OCL Model should avoid calling
+		// this rule on undesired elemenets (imported from other ocl files)
+		return s.closure(x|x.eContainer()).contains(LEFTCS_PACKAGE); 
+	}
+		
+	var shadowExp = s.eContainer();
+	var refProp = s.referredProperty;
+		
+	t.name = s.getUpdateMappingName();
+
+	var rightDomain = shadowExp.createUpdate_RightDomain();
+	var leftDomain = shadowExp.createUpdate_LeftDomain();
+	
+	t.domain.add(rightDomain);	
+	t.domain.add(leftDomain);
+	
+	// Mapping Guard and Bottom patterns configuration
+	// Firstly, the guard pattern	
+	var leftVar = leftDomain.guardPattern.variable.first();
+	var rightVar = rightDomain.guardPattern.variable.first();
+	
+	var sourceVarExp = new QVTi!VariableExp;
+	sourceVarExp.referredVariable = leftVar;
+	sourceVarExp.type = leftVar.type;
+	
+	
+	var sourceMiddlePropCall = new QVTi!MiddlePropertyCallExp;
+	var middleType = MiddleMM!Class.all.selectOne(x | x.name = shadowExp.getTraceElementName());
+	sourceMiddlePropCall.referredProperty = middleType.ownedProperties.selectOne(x | x.name = leftVar.name);
+	sourceMiddlePropCall.type = middleType;
+	sourceMiddlePropCall.ownedSource = sourceVarExp;
+	
+	
+	var sourcePropCall = new QVTi!PropertyCallExp;
+	sourcePropCall.referredProperty = middleType.ownedProperties.selectOne(x | x.name = rightVar.name);
+	sourcePropCall.type = rightVar.type;
+	sourcePropCall.ownedSource = sourceMiddlePropCall;
+	
+	var argVarExp = new QVTi!VariableExp;
+	argVarExp.referredVariable = rightVar;
+	argVarExp.type = rightVar.type;
+	
+	var eqOpCall = new QVTi!OperationCallExp;	
+	var oclAnyEqualsOp = getOclAnyEqualsOp();
+	
+	eqOpCall.referredOperation = oclAnyEqualsOp;
+	eqOpCall.name = oclAnyEqualsOp.name;
+	eqOpCall.type = oclAnyEqualsOp.type;
+	eqOpCall.ownedSource = sourcePropCall;
+	eqOpCall.ownedArguments.add(argVarExp);
+	
+	var predicate = new QVTi!Predicate;
+	predicate.conditionExpression = eqOpCall;
+		
+	var guardPattern = new QVTi!GuardPattern;
+	guardPattern.predicate.add(predicate);
+	
+	t.guardPattern = guardPattern;
+	
+	// Secondly, the bottom pattern
+	var slotExp = new QVTi!VariableExp;
+	slotExp.referredVariable = rightVar;
+	slotExp.type = rightVar.type;
+	
+	var propAssignment = new QVTi!PropertyAssignment;
+	propAssignment.targetProperty = s.referredProperty;
+	propAssignment.value = s.ownedInit.createPropertyAssignmentValue(leftVar);
+	propAssignment.slotExpression = slotExp;
+		
+	var bottomPattern = new QVTi!BottomPattern;
+	bottomPattern.assignment.add(propAssignment);
+	
+	t.bottomPattern = bottomPattern;
+}
+--rule Root2ImperativeModel 
+--	transform s : OCL!Root
+--	to t : QVTi!ImperativeModel {
+	
+	
+--	var qvtiTransf = new QVTi!Transformation;
+--	qvtiTransf.name = s.name.replace(".ocl","");
+--	qvtiTransf.modelParameter.addAll(QVTi!TypedModel.all());
+--	qvtiTransf.`rule`.addAll(QVTi!Mapping.all());
+	
+--	t.nestedPackage.add(qvtiTransf);
+--}
+
+operation OCL!ShadowExp createLM_LeftDomain ( ) : QVTi!CoreDomain {
+	var contextType = self.getExpressionContextType();
+	var domain = new QVTi!CoreDomain;	
+	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= LEFT);
+	domain.isCheckable = true;
+	
+	var guardPattern = new QVTi!GuardPattern;	
+	var bottomPattern = new QVTi!BottomPattern;
+	
+	var variable = new QVTi!Variable;
+	variable.name = contextType.name.firstToLowerCase();
+	variable.type = contextType;
+	
+	guardPattern.variable.add(variable);
+	
+	domain.guardPattern = guardPattern;
+	domain.bottomPattern = bottomPattern;
+	return domain;
+}
+
+operation OCL!ShadowExp createLM_MiddleDomain () : QVTi!CoreDomain {
+	var contextType = self.getExpressionContextType();
+
+	var domain = new QVTi!CoreDomain;	
+	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= MIDDLE);
+	domain.isEnforceable = true;
+	
+	var guardPattern = new QVTi!GuardPattern;	
+	var bottomPattern = new QVTi!BottomPattern;
+	
+	var variable = new QVTi!RealizedVariable;
+	variable.name = self.getTraceElementVariableName();
+	variable.type = MIDDLE_PACKAGE.ownedClasses.selectOne(x| x.name = self.getTraceElementName());
+
+	bottomPattern.realizedVariable.add(variable);
+	
+	domain.guardPattern = guardPattern;
+	domain.bottomPattern = bottomPattern;
+	return domain;
+}
+
+operation OCL!ShadowExp createMR_MiddleDomain () : QVTi!CoreDomain {
+	var contextType = self.getExpressionContextType();
+		
+	var domain = new QVTi!CoreDomain;
+	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= MIDDLE);
+	domain.isCheckable = true;
+	
+	var guardPattern = new QVTi!GuardPattern;	
+	var bottomPattern = new QVTi!BottomPattern;
+	
+	var variable = new QVTi!Variable;
+	variable.name = self.getTraceElementVariableName();
+	variable.type = MIDDLE_PACKAGE.ownedClasses.selectOne(x| x.name = self.getTraceElementName());
+	
+	guardPattern.variable.add(variable);
+	
+	domain.guardPattern = guardPattern;
+	domain.bottomPattern = bottomPattern;
+	return domain;
+}
+
+operation OCL!ShadowExp createMR_RightDomain () : QVTi!CoreDomain {
+	var constructedType = self.type;
+		
+	var domain = new QVTi!CoreDomain;
+	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= RIGHT);
+	domain.isEnforceable = true;
+	
+	var guardPattern = new QVTi!GuardPattern;	
+	var bottomPattern = new QVTi!BottomPattern;
+	
+	var variable = new QVTi!RealizedVariable;
+	variable.name = constructedType.name.firstToLowerCase();
+	variable.type = constructedType;
+
+	bottomPattern.realizedVariable.add(variable);
+	
+	domain.guardPattern = guardPattern;
+	domain.bottomPattern = bottomPattern;
+	return domain;
+}
+
+operation OCL!ShadowExp createUpdate_RightDomain () : QVTi!CoreDomain {
+	var constructedType = self.type;
+		
+	var domain = new QVTi!CoreDomain;
+	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= RIGHT);
+	domain.isCheckable = true;
+	
+	var guardPattern = new QVTi!GuardPattern;
+	var bottomPattern = new QVTi!BottomPattern;
+	
+	var variable = new QVTi!Variable;
+	variable.name = constructedType.name.firstToLowerCase();
+	variable.type = constructedType;
+
+	guardPattern.variable.add(variable);
+	
+	domain.guardPattern = guardPattern;
+	domain.bottomPattern = bottomPattern;
+	return domain;
+}
+
+operation OCL!ShadowExp createUpdate_LeftDomain () : QVTi!CoreDomain {
+	var contextType = self.getExpressionContextType();
+		
+	var domain = new QVTi!CoreDomain;
+	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= LEFT);
+	domain.isCheckable = true;
+	
+	var guardPattern = new QVTi!GuardPattern;
+	var bottomPattern = new QVTi!BottomPattern;
+	
+	var variable = new QVTi!Variable;
+	variable.name = contextType.name.firstToLowerCase();
+	variable.type = contextType;
+
+	guardPattern.variable.add(variable);
+	
+	domain.guardPattern = guardPattern;
+	domain.bottomPattern = bottomPattern;
+	return domain;
+}
+
+operation OCL!OCLExpression createPropertyAssignmentValue(leftVar) : OCL!OCLExpression {
+	-- FIXME what happens with synthetised types ????
+	var eUtil = emfTool.getEcoreUtil();
+	var newInitExp = eUtil.copy(self);
+	-- We need to replace the OCL refered "self" varible by the QVTi domain "leftVar"
+	for (exp in newInitExp.getAllContents().including(newInitExp)) {		
+		switch (true) {
+			case exp.isSelfVarExp():
+				exp.referredVariable = leftVar;
+			case exp.isAstOpCallExp():
+				var middleTypeName = getTraceElementName(exp.ownedSource.type, exp.referredOperation.type); // FIXME This doesnt work with ast() op returning an abstract name
+				var middleType = MiddleMM!Class.all.selectOne(x | x.name = middleTypeName);
+				var leftPropertyName = exp.ownedSource.type.name.firstToLowerCase();
+				var middlePropCall = new QVTi!MiddlePropertyCallExp;
+				middlePropCall.referredProperty = middleType.ownedProperties.selectOne(x | x.name = leftPropertyName);
+				middlePropCall.type = middleType;
+				middlePropCall.ownedSource = exp.ownedSource;
+	
+	
+				var rightPropCall = new QVTi!PropertyCallExp;
+				var rightType = exp.referredOperation.type;
+				rightPropCall.referredProperty = middleType.ownedProperties.selectOne(x | x.name = rightType.name.firstToLowerCase()); -- FIXME refactor name algorithm
+				rightPropCall.type = rightType;
+				rightPropCall.ownedSource = middlePropCall;
+											
+				if (newInitExp = exp) {
+					newInitExp = rightPropCall;
+				} else {
+					eUtil.replace(exp, rightPropCall);
+				}
+				eUtil.`delete`(exp);
+		}
+	} 
+	return newInitExp;
+}
+
+operation OCL!Element isSelfVarExp() : Boolean {
+	return self.isKindOf(OCL!VariableExp) and self.referredVariable.name = 'self';
+}
+
+operation OCL!Element isAstOpCallExp() : Boolean {
+	return self.isKindOf(OCL!OperationCallExp) and self.referredOperation.name = 'ast';
+}
+
+
+operation OCL!ShadowPart getAstCalls() : Collection(OCL!OperationCallExpression) {
+	  
+	return self.ownedInit.getAllContents().including(self.ownedInit)
+			.select(x | x.isKindOf(OCL!OperationCallExp) and x.referredOperation.name = 'ast' );
+}
+
+operation getOclAnyEqualsOp() : OCL!Operation {
+ 	return OclStdLib!AnyType.all.selectOne(x | x.name = 'OclAny').ownedOperations
+						   .selectOne(x | x.name = '=');
+}
+
+post {
+	-- We add all the declaratively created QVTi mappings/units to the imperatively created QVTi transformation/model 
+	qvtiTransf.`rule`.addAll(QVTi!Mapping.all());
+	"OCL 2 QVTp completed".println();
+}
