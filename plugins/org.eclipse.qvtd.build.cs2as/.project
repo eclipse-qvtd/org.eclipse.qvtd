@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.qvtd.build.cs2as</name>
+	<name>org.eclipse.qvtd.cs2as.compiler</name>
 	<comment></comment>
 	<projects>
 	</projects>

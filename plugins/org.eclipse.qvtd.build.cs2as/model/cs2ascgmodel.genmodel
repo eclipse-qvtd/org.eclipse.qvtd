@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
-    modelDirectory="/org.eclipse.qvtd.build.cs2as/emf-gen" modelPluginID="org.eclipse.qvtd.build.cs2as"
+    modelDirectory="/org.eclipse.qvtd.cs2as.compiler/emf-gen" modelPluginID="org.eclipse.qvtd.cs2as.compiler"
     modelName="CS2ASCGModel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
     usedGenPackages="../../org.eclipse.ocl.examples.codegen/model/cgmodel.genmodel#//cgmodel"
     importOrganizing="true">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
     <details key="Root Visitor Class" value="org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor"/>
-    <details key="Derived Visitor Class" value="org.eclipse.qvtd.build.cs2as.cgmodel.util.CS2ASCGModelVisitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.qvtd.cs2as.compiler.cgmodel.util.CS2ASCGModelVisitor"/>
     <details key="Visitable Classes" value="org.eclipse.ocl.examples.codegen.cgmodel.CGElement"/>
   </genAnnotations>
   <foreignModel>cs2ascgmodel.ecore</foreignModel>
-  <genPackages prefix="CS2ASCG" basePackage="org.eclipse.qvtd.build.cs2as" disposableProviderFactory="true"
+  <genPackages prefix="CS2ASCG" basePackage="org.eclipse.qvtd.cs2as.compiler" disposableProviderFactory="true"
       ecorePackage="cs2ascgmodel.ecore#/">
     <genClasses ecoreClass="cs2ascgmodel.ecore#//CGLookupCallExp"/>
   </genPackages>

@@ -1,0 +1,51 @@
+/*******************************************************************************
+ * Copyright (c) 2015 Willink Transformations Ltd., University of York and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial API and implementation
+ * 
+ *  This is to generate the cs2ascgmodel.genmodel and related facilities 
+ *******************************************************************************/
+module org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample2Models
+
+import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.ecore.resource.impl.*
+
+var projectName = "org.eclipse.qvtd.cs2as.compiler"
+
+Workflow {
+	bean = ResourceSetImpl : resourceSet {}
+    bean = StandaloneSetup { resourceSet = resourceSet
+    	platformUri = ".."
+    	scanClassPath = true
+    }
+    bean = EcoreGenModelSetup { resourceSet = resourceSet }
+
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/${projectName}/model/cs2ascgmodel.genmodel"
+    }
+
+    component = GenerateCGVisitors { resourceSet = resourceSet    	
+    	projectName = "${projectName}"
+    	projectPrefix = "CS2ASCGModel"
+    	superProjectName = "org.eclipse.ocl.examples.codegen"
+		superProjectPrefix = "CGModel"
+    	genModelFile = "model/cs2ascgmodel.genmodel"
+    	javaFolder = "emf-gen"
+    	modelPackageName = "org.eclipse.qvtd.cs2as.compiler.cgmodel"
+    	visitorPackageName = "org.eclipse.qvtd.cs2as.compiler.cgmodel.util"
+    	visitorClassName = "CS2ASCGModelVisitor"
+		superVisitorPackageName = "org.eclipse.ocl.examples.codegen.cgmodel.util"
+    	superVisitorClassName = "CGModelVisitor"
+    	visitablePackageName = "org.eclipse.ocl.examples.codegen.cgmodel"
+    	visitableClassName= "CGElement"
+    }
+}
+
+

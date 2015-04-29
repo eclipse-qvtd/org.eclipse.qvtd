@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.qvtd.xtext.qvtrelation.tests;bundle-version="[0.12.0,1.0.0)",
  org.eclipse.qvtd.build.etl.tests;bundle-version="[0.12.0,1.0.0)",
  org.eclipse.qvtd.build.qvtrtoqvtc.tests;bundle-version="[0.12.0,1.0.0)",
- org.eclipse.qvtd.build.cs2as.tests;bundle-version="[0.12.0,1.0.0)"
+ org.eclipse.qvtd.cs2as.compiler.tests;bundle-version="[0.12.0,1.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin

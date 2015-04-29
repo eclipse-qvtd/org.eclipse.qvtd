@@ -4,7 +4,7 @@
  * </copyright>
  *
  * This code is auto-generated
- * from: org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example2/Classes.genmodel
+ * from: org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example2/Classes.genmodel
  *
  * Only the copyright statement is editable.
  *******************************************************************************/

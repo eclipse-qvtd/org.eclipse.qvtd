@@ -77,7 +77,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.qvtd.build.cs2as.tests"
+         id="org.eclipse.qvtd.cs2as.compiler.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"

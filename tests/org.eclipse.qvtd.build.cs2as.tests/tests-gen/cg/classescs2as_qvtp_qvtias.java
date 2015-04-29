@@ -47,9 +47,9 @@ import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
-import org.eclipse.qvtd.build.cs2as.qvti.CS2ASTransformationExecutor;
-import org.eclipse.qvtd.build.cs2as.tests.models.example2.java.ClassesLookupVisitor;
-import org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment;
+import org.eclipse.qvtd.cs2as.compiler.qvti.CS2ASTransformationExecutor;
+import org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor;
+import org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment;
 
 /**
  * The classescs2as_qvtp_qvtias transformation:
@@ -141,8 +141,8 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         /*@NonNull*/ /*@Thrown*/ Package symbol_0;
         if (eq) {
             final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_3);
-            LookupEnvironment _lookupEnv = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment(evaluator,first);
-            ClassesLookupVisitor _lookupVisitor = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv);
+            LookupEnvironment _lookupEnv = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment(evaluator,first);
+            ClassesLookupVisitor _lookupVisitor = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv);
             EList<NamedElement> _lookupResult = self_0.accept(_lookupVisitor).getNamedElements();
             Package _lookupPackage = null;
             if (_lookupResult.size() == 1) {
@@ -159,8 +159,8 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
             assert UNBOXED_subOrderedSet != null;
             final /*@NonNull*/ /*@Thrown*/ Package lookupPackage = this.lookupPackage(self_0, UNBOXED_subOrderedSet);
             final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_3);
-            LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment(evaluator,last);
-            ClassesLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv_0);
+            LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment(evaluator,last);
+            ClassesLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv_0);
             EList<NamedElement> _lookupResult_0 = lookupPackage.accept(_lookupVisitor_0).getNamedElements();
             Package _lookupPackage_0 = null;
             if (_lookupResult_0.size() == 1) {
@@ -357,8 +357,8 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
             /*@NonNull*/ /*@Thrown*/ example2.classes.Class symbol_2;
             if (eq_0) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
-                LookupEnvironment _lookupEnv = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment(evaluator,first);
-                ClassesLookupVisitor _lookupVisitor = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv);
+                LookupEnvironment _lookupEnv = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment(evaluator,first);
+                ClassesLookupVisitor _lookupVisitor = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv);
                 EList<NamedElement> _lookupResult = self_1.accept(_lookupVisitor).getNamedElements();
                 example2.classes.Class _lookupClass = null;
                 if (_lookupResult.size() == 1) {
@@ -378,8 +378,8 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
                 assert UNBOXED_subOrderedSet != null;
                 final /*@NonNull*/ /*@Thrown*/ Package lookupPackage = this.lookupPackage(self_1, UNBOXED_subOrderedSet);
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
-                LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment(evaluator,last);
-                ClassesLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv_0);
+                LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment(evaluator,last);
+                ClassesLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv_0);
                 EList<NamedElement> _lookupResult_0 = lookupPackage.accept(_lookupVisitor_0).getNamedElements();
                 example2.classes.Class _lookupClass_0 = null;
                 if (_lookupResult_0.size() == 1) {

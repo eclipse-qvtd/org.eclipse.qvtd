@@ -18,14 +18,14 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.qvtd.pivot.schedule;bundle-version="[0.12.0,1.0.0)";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.epsilon.common.util;x-friends:="org.eclipse.qvtd.build.cs2as,org.eclipse.qvtd.build.cs2as.tests",
- org.eclipse.epsilon.emc.emf;x-friends:="org.eclipse.qvtd.build.cs2as,org.eclipse.qvtd.build.cs2as.tests",
- org.eclipse.epsilon.emc.emf.xml;x-friends:="org.eclipse.qvtd.build.cs2as,org.eclipse.qvtd.build.cs2as.tests",
- org.eclipse.epsilon.eol.exceptions;x-friends:="org.eclipse.qvtd.build.cs2as,org.eclipse.qvtd.build.cs2as.tests",
- org.eclipse.epsilon.eol.exceptions.models;x-friends:="org.eclipse.qvtd.build.cs2as,org.eclipse.qvtd.build.cs2as.tests",
- org.eclipse.epsilon.eol.execute.context;x-friends:="org.eclipse.qvtd.build.cs2as,org.eclipse.qvtd.build.cs2as.tests",
- org.eclipse.epsilon.eol.models;x-friends:="org.eclipse.qvtd.build.cs2as,org.eclipse.qvtd.build.cs2as.tests",
- org.eclipse.epsilon.eol.types;x-friends:="org.eclipse.qvtd.build.cs2as,org.eclipse.qvtd.build.cs2as.tests",
+Export-Package: org.eclipse.epsilon.common.util;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
+ org.eclipse.epsilon.emc.emf;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
+ org.eclipse.epsilon.emc.emf.xml;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
+ org.eclipse.epsilon.eol.exceptions;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
+ org.eclipse.epsilon.eol.exceptions.models;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
+ org.eclipse.epsilon.eol.execute.context;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
+ org.eclipse.epsilon.eol.models;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
+ org.eclipse.epsilon.eol.types;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
  org.eclipse.qvtd.compiler.internal.etl;
   uses:="org.eclipse.ocl.pivot,
    org.eclipse.epsilon.eol.models,

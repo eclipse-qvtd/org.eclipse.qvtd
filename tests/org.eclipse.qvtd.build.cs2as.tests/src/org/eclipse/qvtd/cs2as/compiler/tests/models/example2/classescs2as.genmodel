@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.cs2as.compiler.tests/tests-gen"
+    modelPluginID="org.eclipse.qvtd.cs2as.compiler.tests" modelName="Example2Classescs2as"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="7.0" copyrightFields="false" usedGenPackages="Classes.genmodel#//classes ClassesCS.genmodel#//classescs"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>classescs2as.ecore</foreignModel>
+  <genPackages prefix="Classescstraces" basePackage="example2" disposableProviderFactory="true"
+      ecorePackage="classescs2as.ecore#/">
+    <genClasses ecoreClass="classescs2as.ecore#//PackageCS2Package">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classescs2as.ecore#//PackageCS2Package/packageCS"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classescs2as.ecore#//PackageCS2Package/package"/>
+    </genClasses>
+    <genClasses ecoreClass="classescs2as.ecore#//ClassCS2Class">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classescs2as.ecore#//ClassCS2Class/classCS"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classescs2as.ecore#//ClassCS2Class/class"/>
+    </genClasses>
+    <genClasses ecoreClass="classescs2as.ecore#//RootCS2Root">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classescs2as.ecore#//RootCS2Root/rootCS"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classescs2as.ecore#//RootCS2Root/root"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

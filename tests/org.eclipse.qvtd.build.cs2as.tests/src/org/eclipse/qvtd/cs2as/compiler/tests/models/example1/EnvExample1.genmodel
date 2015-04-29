@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.cs2as.compiler.tests/tests-gen"
+    modelPluginID="org.eclipse.qvtd.cs2as.compiler.tests" modelName="Example1Environment"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="TargetMM1.genmodel#//target"
+    operationReflection="true" importOrganizing="true">
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Delegates" value="false"/>
+    <details key="Use Null Annotations" value="true"/>
+  </genAnnotations>
+  <foreignModel>EnvExample1.ecore</foreignModel>
+  <genPackages prefix="Environment" basePackage="example1" disposableProviderFactory="true"
+      ecorePackage="EnvExample1.ecore#/">
+    <genClasses ecoreClass="EnvExample1.ecore#//Environment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EnvExample1.ecore#//Environment/namedElements"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EnvExample1.ecore#//Environment/parentEnv"/>
+      <genOperations ecoreOperation="EnvExample1.ecore#//Environment/addElements">
+        <genParameters ecoreParameter="EnvExample1.ecore#//Environment/addElements/elements"/>
+        <genTypeParameters ecoreTypeParameter="EnvExample1.ecore#//Environment/addElements/NE"/>
+      </genOperations>
+      <genOperations ecoreOperation="EnvExample1.ecore#//Environment/addElement">
+        <genParameters ecoreParameter="EnvExample1.ecore#//Environment/addElement/element"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EnvExample1.ecore#//Env4CG">
+      <genOperations ecoreOperation="EnvExample1.ecore#//Env4CG/hasFinalResult"/>
+      <genOperations ecoreOperation="EnvExample1.ecore#//Env4CG/getEvaluator"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EnvExample1.ecore#//Evaluator"/>
+  </genPackages>
+</genmodel:GenModel>

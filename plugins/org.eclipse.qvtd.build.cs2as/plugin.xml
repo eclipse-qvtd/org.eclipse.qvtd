@@ -10,7 +10,7 @@
       <!-- @generated cs2ascgmodel -->
       <package
             uri="http://www.eclipse.org/qvt/2015/CS2AScg"
-            class="org.eclipse.qvtd.build.cs2as.cgmodel.CS2ASCGPackage"
+            class="org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGPackage"
             genModel="model/cs2ascgmodel.genmodel"/>
    </extension>
 

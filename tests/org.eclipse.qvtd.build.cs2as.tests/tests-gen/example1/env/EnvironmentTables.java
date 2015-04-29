@@ -2,9 +2,9 @@
  *************************************************************************
  * This code is 100% auto-generated
  * from:
- *   /org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example1/EnvExample1.ecore
+ *   /org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example1/EnvExample1.ecore
  * using:
- *   /org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example1/EnvExample1.genmodel
+ *   /org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example1/EnvExample1.genmodel
  *   org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
