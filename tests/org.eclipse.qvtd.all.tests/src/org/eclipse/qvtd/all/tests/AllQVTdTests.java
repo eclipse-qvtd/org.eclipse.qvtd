@@ -19,6 +19,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
+import org.eclipse.qvtd.build.cs2as.tests.OCL2QVTiTestCases;
 import org.eclipse.qvtd.build.etl.tests.QVTdMtcTests;
 import org.eclipse.qvtd.build.qvtrtoqvtc.tests.QvtrToQvtcTests;
 import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseLibraryTests;
@@ -45,6 +46,7 @@ public class AllQVTdTests extends TestCase
 		result.addTestSuite(GrammarTests.class);
 		result.addTestSuite(QVTdMtcTests.class);
 		result.addTestSuite(QvtrToQvtcTests.class);
+		result.addTestSuite(OCL2QVTiTestCases.class);
 		return result;
 	}
 

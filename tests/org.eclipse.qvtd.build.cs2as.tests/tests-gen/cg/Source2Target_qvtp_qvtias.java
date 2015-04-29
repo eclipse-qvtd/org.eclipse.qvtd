@@ -116,17 +116,17 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Y2 = TypeId.SET.getSpecializedId(CLSSid_Y2);
     public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Z = TypeId.SET.getSpecializedId(CLSSid_Z);
     
-    
     /*
      * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
      */
     private static final /*@NonNull*/ ClassId[] classIndex2classId = new ClassId[]{
-        CLSSid_SRoot,		// 0 => SRoot
-        CLSSid_X,		// 1 => X
-        CLSSid_Y1,		// 2 => Y1
-        CLSSid_Y2,		// 3 => Y2
-        CLSSid_Z		// 4 => Z
+        CLSSid_SRoot,                   // 0 => SRoot
+        CLSSid_X,                       // 1 => X
+        CLSSid_Y1,                      // 2 => Y1
+        CLSSid_Y2,                      // 3 => Y2
+        CLSSid_Z                        // 4 => Z
     };
+    
     /*
      * Mapping from each ClassIndex to all the ClassIndexes to which an object of the outer index
      * may contribute results to an allInstances() invocation.
@@ -134,11 +134,11 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * instance of the derived classId contributes to derived and inherited ClassIndexes.
      */
     private final static /*@NonNull*/ int[][] classIndex2allClassIndexes = new int[][] {
-        {0},		// 0 : SRoot -> {SRoot}
-        {1},		// 1 : X -> {X}
-        {2},		// 2 : Y1 -> {Y1}
-        {3},		// 3 : Y2 -> {Y2}
-        {4}		// 4 : Z -> {Z}
+        {0},                    // 0 : SRoot -> {SRoot}
+        {1},                    // 1 : X -> {X}
+        {2},                    // 2 : Y1 -> {Y1}
+        {3},                    // 3 : Y2 -> {Y2}
+        {4}                     // 4 : Z -> {Z}
     };
     
     public Source2Target_qvtp_qvtias(final /*@NonNull*/ Evaluator evaluator) {

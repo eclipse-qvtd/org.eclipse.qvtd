@@ -92,15 +92,15 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_PackageCS = TypeId.SET.getSpecializedId(CLSSid_PackageCS);
     public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_RootCS = TypeId.SET.getSpecializedId(CLSSid_RootCS);
     
-    
     /*
      * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
      */
     private static final /*@NonNull*/ ClassId[] classIndex2classId = new ClassId[]{
-        CLSSid_ClassCS,		// 0 => ClassCS
-        CLSSid_PackageCS,		// 1 => PackageCS
-        CLSSid_RootCS		// 2 => RootCS
+        CLSSid_ClassCS,                 // 0 => ClassCS
+        CLSSid_PackageCS,               // 1 => PackageCS
+        CLSSid_RootCS                   // 2 => RootCS
     };
+    
     /*
      * Mapping from each ClassIndex to all the ClassIndexes to which an object of the outer index
      * may contribute results to an allInstances() invocation.
@@ -108,9 +108,9 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * instance of the derived classId contributes to derived and inherited ClassIndexes.
      */
     private final static /*@NonNull*/ int[][] classIndex2allClassIndexes = new int[][] {
-        {0},		// 0 : ClassCS -> {ClassCS}
-        {1},		// 1 : PackageCS -> {PackageCS}
-        {2}		// 2 : RootCS -> {RootCS}
+        {0},                    // 0 : ClassCS -> {ClassCS}
+        {1},                    // 1 : PackageCS -> {PackageCS}
+        {2}                     // 2 : RootCS -> {RootCS}
     };
     
     public classescs2as_qvtp_qvtias(final /*@NonNull*/ Evaluator evaluator) {
