@@ -51,9 +51,7 @@ import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 
-import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 
 /**
@@ -90,7 +88,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 	public static @NonNull QVTbaseLibrary getDefault() {
 		QVTbaseLibrary oclstdlib = INSTANCE;
 		if (oclstdlib == null) {
-			Contents contents = new Contents("http://www.eclipse.org/qvt/2015/QVTbase");
+			Contents contents = new Contents("http://www.eclipse.org/qvt/2015/QVTbaseLibrary");
 			oclstdlib = INSTANCE = new QVTbaseLibrary(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION, contents.getModel());
 		}
 		return oclstdlib;
@@ -236,21 +234,15 @@ public class QVTbaseLibrary extends ASResourceImpl
 	private static class Contents extends AbstractContents
 	{
 		private final @NonNull Model model;
-		private final @NonNull Library ocl;
-		private final @NonNull Library qvtbase;
-		private final @NonNull Package orphanage;
+		private final @NonNull Library qvtbaselibrary;
 
 		private Contents(@NonNull String asURI)
 		{
 			model = createModel(asURI);
-			ocl = createLibrary("ocl", "ocl", "http://www.eclipse.org/ocl/2015/Pivot", IdManager.METAMODEL);
-			qvtbase = createLibrary("qvtbase", "qvtb", "http://www.eclipse.org/qvt/2015/QVTbase", null);
-			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null);
+			qvtbaselibrary = createLibrary("qvtbaselibrary", "qvtbaselib", "http://www.eclipse.org/qvt/2015/QVTbaseLibrary", null);
 			installPackages();
 			installClassTypes();
-			installCollectionTypes();
 			installOperations();
-			installTemplateBindings();
 			installComments();
 		}
 		
@@ -259,83 +251,37 @@ public class QVTbaseLibrary extends ASResourceImpl
 		}
 		
 		private final @NonNull Package _ocl = getPackage(org.eclipse.ocl.pivot.model.OCLstdlib.getDefaultModel(), "ocl");
-		private final @NonNull Package _qvtbase = getPackage(org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel.getDefaultModel(), "qvtbase");
-		private final @NonNull CollectionType _Collection = getCollectionType(_ocl, "Collection");
 		private final @NonNull AnyType _OclAny = getAnyType(_ocl, "OclAny");
 		private final @NonNull Class _OclElement = getClass(_ocl, "OclElement");
-		private final @NonNull SetType _Set = getSetType(_ocl, "Set");
-		private final @NonNull Class _TypedModel = getClass(_qvtbase, "TypedModel");
-		private final @NonNull CollectionType _UniqueCollection = getCollectionType(_ocl, "UniqueCollection");
-		private final @NonNull TemplateParameter _Collection_T = getTemplateParameter(_Collection, 0);
-		private final @NonNull TemplateParameter _Set_T = getTemplateParameter(_Set, 0);
-		private final @NonNull TemplateParameter _UniqueCollection_T = getTemplateParameter(_UniqueCollection, 0);
+		private final @NonNull InvalidType _OclInvalid = getInvalidType(_ocl, "OclInvalid");
 		
 		private void installPackages() {
-			model.getOwnedPackages().add(ocl);
-			model.getOwnedPackages().add(qvtbase);
-			model.getOwnedPackages().add(orphanage);
+			model.getOwnedPackages().add(qvtbaselibrary);
 			model.getOwnedImports().add(createImport(_ocl));
 		}
 		
 		private final @NonNull Class _Model = createClass("Model");
-		
 		private final @NonNull Class _Transformation = createClass("Transformation");
 		
 		private final @NonNull TemplateParameter tp_Model_objectsOfKind_TT = createTemplateParameter("TT");
-		
-		private final @NonNull CollectionType _Collection_OclElement = createCollectionType(_Collection, _OclElement);
-		private final @NonNull CollectionType _Collection_Model_objectsOfKind_TT = createCollectionType(_Collection, tp_Model_objectsOfKind_TT);
-		private final @NonNull SetType _Set_OclElement = createSetType(_Set, _OclElement);
-		private final @NonNull SetType _Set_Model_objectsOfKind_TT = createSetType(_Set, tp_Model_objectsOfKind_TT);
-		private final @NonNull CollectionType _UniqueCollection_OclElement = createCollectionType(_UniqueCollection, _OclElement);
-		private final @NonNull CollectionType _UniqueCollection_Model_objectsOfKind_TT = createCollectionType(_UniqueCollection, tp_Model_objectsOfKind_TT);
 		
 		private void installClassTypes() {
 			List<Class> ownedClasses;
 			List<Class> superClasses;
 			Class type;
 		
-			ownedClasses = ocl.getOwnedClasses();
+			ownedClasses = qvtbaselibrary.getOwnedClasses();
 			ownedClasses.add(type = _Model);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
-		
-			ownedClasses = qvtbase.getOwnedClasses();
 			ownedClasses.add(type = _Transformation);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 		}
 		
-		private void installCollectionTypes() {
-			List<Class> ownedClasses;
-			List<Class> superClasses;
-			CollectionType type;
-		
-			ownedClasses = orphanage.getOwnedClasses();
-			ownedClasses.add(type = _Collection_OclElement);
-			superClasses = type.getSuperClasses();
-			superClasses.add(_OclElement);
-			ownedClasses.add(type = _Collection_Model_objectsOfKind_TT);
-			superClasses = type.getSuperClasses();
-			superClasses.add(_OclElement);
-			ownedClasses.add(type = _Set_OclElement);
-			superClasses = type.getSuperClasses();
-			superClasses.add(_UniqueCollection_OclElement);
-			ownedClasses.add(type = _Set_Model_objectsOfKind_TT);
-			superClasses = type.getSuperClasses();
-			superClasses.add(_UniqueCollection_Model_objectsOfKind_TT);
-			ownedClasses.add(type = _UniqueCollection_OclElement);
-			superClasses = type.getSuperClasses();
-			superClasses.add(_Collection_OclElement);
-			ownedClasses.add(type = _UniqueCollection_Model_objectsOfKind_TT);
-			superClasses = type.getSuperClasses();
-			superClasses.add(_Collection_Model_objectsOfKind_TT);
-		}
-		
-		private final @NonNull Operation op_Model_objects = createOperation("objects", _Set_OclElement, null, null);
-		private final @NonNull Operation op_Model_objectsOfKind = createOperation("objectsOfKind", _Set_Model_objectsOfKind_TT, "org.eclipse.qvtd.pivot.qvtbase.library.model.ModelObjectsOfKindOperation", org.eclipse.qvtd.pivot.qvtbase.library.model.ModelObjectsOfKindOperation.INSTANCE, tp_Model_objectsOfKind_TT);
-		private final @NonNull Operation op_Model_rootObjects = createOperation("rootObjects", _Set_OclElement, null, null);
-		private final @NonNull Operation op_Transformation_modelFor = createOperation("modelFor", _Model, "org.eclipse.qvtd.pivot.qvtbase.library.transformation.TransformationModelForOperation", org.eclipse.qvtd.pivot.qvtbase.library.transformation.TransformationModelForOperation.INSTANCE);
+		private final @NonNull Operation op_Model_objects = createOperation("objects", _OclInvalid, null, null);
+		private final @NonNull Operation op_Model_objectsOfKind = createOperation("objectsOfKind", _OclInvalid, "org.eclipse.qvtd.pivot.qvtbase.library.model.ModelObjectsOfKindOperation", org.eclipse.qvtd.pivot.qvtbase.library.model.ModelObjectsOfKindOperation.INSTANCE, tp_Model_objectsOfKind_TT);
+		private final @NonNull Operation op_Model_rootObjects = createOperation("rootObjects", _OclInvalid, null, null);
 		
 		private void installOperations() {
 			List<Operation> ownedOperations;
@@ -350,27 +296,6 @@ public class QVTbaseLibrary extends ASResourceImpl
 			ownedParameters.add(parameter = createParameter("type", tp_Model_objectsOfKind_TT, true));
 			parameter.setIsTypeof(true);
 			ownedOperations.add(operation = op_Model_rootObjects);
-		
-			ownedOperations = _Transformation.getOwnedOperations();
-			ownedOperations.add(operation = op_Transformation_modelFor);
-			operation.setIsRequired(false);
-			ownedParameters = operation.getOwnedParameters();
-			ownedParameters.add(parameter = createParameter("typedModel", _TypedModel, true));
-		}
-		
-		private void installTemplateBindings() {
-			_Collection_OclElement.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_Collection_T, _OclElement)));
-			_Collection_Model_objectsOfKind_TT.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_Collection_T, tp_Model_objectsOfKind_TT)));
-			_Set_OclElement.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_Set_T, _OclElement)));
-			_Set_Model_objectsOfKind_TT.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_Set_T, tp_Model_objectsOfKind_TT)));
-			_UniqueCollection_OclElement.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_UniqueCollection_T, _OclElement)));
-			_UniqueCollection_Model_objectsOfKind_TT.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_UniqueCollection_T, tp_Model_objectsOfKind_TT)));
 		}
 		
 		private void installComments() {
