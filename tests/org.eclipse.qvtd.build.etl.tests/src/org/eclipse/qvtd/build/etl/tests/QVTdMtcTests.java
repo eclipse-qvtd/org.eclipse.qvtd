@@ -161,8 +161,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("UpperToLower");;
     	MtcBroker mtc = new MtcBroker(testBaseURI, "UpperToLower.qvtcas", myQVT.getEnvironmentFactory(), TestsXMLUtil.defaultSavingOptions);
     	mtc.setCreateGraphml(true);
-    	//mtc.execute();
-    	mtc.executeQvtpQvtsToQvti();
+    	mtc.execute();
     	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
     	assertNoValidationErrors("QVTm validation", mtc.getmModel().getRooteObject());
         assertNoValidationErrors("QVTp validation", mtc.getpModel().getRooteObject());
