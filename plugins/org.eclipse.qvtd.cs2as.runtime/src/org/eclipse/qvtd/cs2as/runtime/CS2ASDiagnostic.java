@@ -4,7 +4,8 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 
-public class CS2ASDiagnostic<CS extends EObject> extends BasicDiagnostic {
+public class CS2ASDiagnostic<CS extends EObject> extends BasicDiagnostic
+	implements EObjectDiagnostic {
  
 	private CS csObject;
 	
@@ -22,7 +23,8 @@ public class CS2ASDiagnostic<CS extends EObject> extends BasicDiagnostic {
 		this(csObject, Diagnostic.ERROR, null, 0, message);		
 	}
 	
-	public CS getCSObject() {
+	@Override
+	public CS getEObject() {
 		return csObject;
 	}
 }

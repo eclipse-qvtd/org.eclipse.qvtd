@@ -8,7 +8,7 @@
  * Contributors:
  *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial API and implementation
  *******************************************************************************/
-module org.eclipse.qvtd.cs2as.compiler.mwe.GenerateCGedQVTiTransformation
+module org.eclipse.qvtd.cs2as.build.mwe.GenerateCGedQVTiTransformation
 
 import org.eclipse.emf.ecore.resource.*
 

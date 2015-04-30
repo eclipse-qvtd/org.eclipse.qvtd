@@ -3,7 +3,6 @@ package org.eclipse.qvtd.cs2as.runtime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -17,7 +16,7 @@ public abstract class CS2ASTransformationExecutor extends AbstractTransformation
 	implements CS2ASTransformation
 {
 
-	private final List<Diagnostic> txErrors = new ArrayList<Diagnostic>(); 
+	private final List<EObjectDiagnostic> txErrors = new ArrayList<EObjectDiagnostic>(); 
 	
 	protected CS2ASTransformationExecutor(@NonNull Evaluator evaluator, @NonNull String[] modelNames,
 			@Nullable PropertyId[] propertyIndex2propertyId, @Nullable ClassId[] classIndex2classId, @Nullable int[][] classIndex2allClassIndexes) {
@@ -55,7 +54,7 @@ public abstract class CS2ASTransformationExecutor extends AbstractTransformation
 		txErrors.add(new CS2ASDiagnostic<EObject>(sourceObject, errorMessage));
 	}
 	
-	public List<Diagnostic> getErrors() {
+	public List<EObjectDiagnostic> getErrors() {
 		return txErrors;
 	}
 }
