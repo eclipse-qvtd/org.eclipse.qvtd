@@ -107,13 +107,25 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 		}
 	    {
 	    	MiddleBottomPatternCSElements a = f.getMiddleBottomPatternCSAccess();
-			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_1());	
-			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_1());	
-			c.setLinewrap().before(a.getRightCurlyBracketKeyword_3());	
-			c.setLinewrap().after(a.getRightCurlyBracketKeyword_3());	
+			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_0_0());	
+			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_0_0());	
+			c.setNoSpace().before(a.getCommaKeyword_0_2_0());
+			c.setLinewrap().after(a.getCommaKeyword_0_2_0());	
+			c.setLinewrap(1).before(a.getVerticalLineKeyword_0_3_0());	
+			c.setLinewrap(1).after(a.getVerticalLineKeyword_0_3_0());	
+			c.setIndentation(a.getLeftCurlyBracketKeyword_0_0(), a.getVerticalLineKeyword_0_3_0());
+			c.setLinewrap().before(a.getRightCurlyBracketKeyword_0_4());	
+			c.setLinewrap().after(a.getRightCurlyBracketKeyword_0_4());	
+			c.setIndentation(a.getVerticalLineKeyword_0_3_0(), a.getRightCurlyBracketKeyword_0_4());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_0_0(), a.getVerticalLineKeyword_0_3_0());
+			c.setNoSpace().between(a.getVerticalLineKeyword_0_3_0(), a.getRightCurlyBracketKeyword_0_4());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_0_0(), a.getRightCurlyBracketKeyword_0_4());
 			//
-			c.setIndentation(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_3());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_3());
+			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_1_1());	
+			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_1_1());	
+			c.setLinewrap().before(a.getRightCurlyBracketKeyword_1_3());	
+			c.setLinewrap().after(a.getRightCurlyBracketKeyword_1_3());	
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_1_1(), a.getRightCurlyBracketKeyword_1_3());
 		}
 	    {
 	    	MiddleGuardPatternCSElements a = f.getMiddleGuardPatternCSAccess();
@@ -161,13 +173,13 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    	TargetBottomPatternCSElements a = f.getTargetBottomPatternCSAccess();
 			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_1());	
 			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_1());	
-			c.setNoSpace().before(a.getCommaKeyword_2_1_0());
-			c.setLinewrap().after(a.getCommaKeyword_2_1_0());	
-			c.setLinewrap().before(a.getRightCurlyBracketKeyword_3());	
-			c.setLinewrap().after(a.getRightCurlyBracketKeyword_3());	
+			c.setNoSpace().before(a.getCommaKeyword_3_0());
+			c.setLinewrap().after(a.getCommaKeyword_3_0());	
+			c.setLinewrap().before(a.getRightCurlyBracketKeyword_4());	
+			c.setLinewrap().after(a.getRightCurlyBracketKeyword_4());	
 			//
-			c.setIndentation(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_3());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_3());
+			c.setIndentation(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_4());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_4());
 		}
 	    {
 	    	TargetGuardPatternCSElements a = f.getTargetGuardPatternCSAccess();

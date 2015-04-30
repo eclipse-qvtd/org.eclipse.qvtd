@@ -51,7 +51,7 @@
 'else'=92
 'elseif'=94
 'endif'=93
-'enforce'=35
+'enforce'=36
 'extends'=98
 'false'=83
 'for'=30
@@ -80,7 +80,7 @@
 'where'=23
 'xor'=57
 '{'=22
-'|'=36
+'|'=35
 '}'=24
 RULE_ANY_OTHER=15
 RULE_DOUBLE_QUOTED_STRING=10

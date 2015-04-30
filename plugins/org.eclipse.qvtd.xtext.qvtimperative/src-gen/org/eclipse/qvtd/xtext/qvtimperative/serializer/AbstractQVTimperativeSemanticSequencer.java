@@ -604,12 +604,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         (
-	 *             (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS) 
-	 *             (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)*
-	 *         )?
-	 *     )
+	 *     ((ownedRealizedVariables+=RealizedVariableCS ownedRealizedVariables+=RealizedVariableCS*)?)
 	 */
 	protected void sequence_TargetBottomPatternCS(EObject context, BottomPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

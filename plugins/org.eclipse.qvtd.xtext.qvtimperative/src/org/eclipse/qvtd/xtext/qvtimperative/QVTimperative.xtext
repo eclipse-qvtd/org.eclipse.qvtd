@@ -61,7 +61,12 @@ SourceGuardPatternCS returns qvtcorebasecs::GuardPatternCS:
 MiddleDomainCS returns qvtcorebasecs::DomainCS: {qvtcorebasecs::DomainCS} ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS;
 		
 MiddleBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
-	{qvtcorebasecs::BottomPatternCS} '{' ownedConstraints+=PredicateOrAssignmentCS* '}'
+	( '{' ownedUnrealizedVariables+=UnrealizedVariableCS
+		(',' ownedUnrealizedVariables+=UnrealizedVariableCS)*
+		('|' ownedConstraints+=PredicateOrAssignmentCS*)? '}'
+	)
+	| ( {qvtcorebasecs::BottomPatternCS} '{' ownedConstraints+=PredicateOrAssignmentCS* '}'
+	)
 ;
 	
 MiddleGuardPatternCS returns qvtcorebasecs::GuardPatternCS:
@@ -73,8 +78,8 @@ TargetDomainCS returns qvtcorebasecs::DomainCS: isEnforce?='enforce' direction=[
 ;
 		
 TargetBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
-	{qvtcorebasecs::BottomPatternCS} '{' ((ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)
-		(',' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))*)?
+	{qvtcorebasecs::BottomPatternCS} '{' (ownedRealizedVariables+=RealizedVariableCS
+		(',' ownedRealizedVariables+=RealizedVariableCS)*)?
 	'}'
 ;
 	
