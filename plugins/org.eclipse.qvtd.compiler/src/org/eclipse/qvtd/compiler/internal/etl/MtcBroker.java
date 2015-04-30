@@ -152,7 +152,7 @@ public class MtcBroker {
 	private static final String MIDDLE_DIR_NAME = "M";
 	
 	/** The Constant CREATE_GRAPHML. */
-	private boolean createGraphml = false;
+	protected boolean createGraphml = false;
 
 	private boolean darkTheme = false;
 	
@@ -371,7 +371,7 @@ public class MtcBroker {
 		iModel = qvtpQvtsToQvti(pModel, sModel);
 	}
 	
-	private void qvtsToGraphML(PivotModel sModel) throws QvtMtcExecutionException {
+	protected void qvtsToGraphML(PivotModel sModel) throws QvtMtcExecutionException {
 		
 		GraphBuilder builder = new GraphMLBuilder();
 		

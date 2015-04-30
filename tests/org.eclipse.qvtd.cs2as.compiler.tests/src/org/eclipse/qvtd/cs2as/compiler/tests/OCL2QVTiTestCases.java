@@ -66,9 +66,10 @@ import org.junit.Test;
  */
 public class OCL2QVTiTestCases extends LoadTestCase {
 	
-	private static final boolean CREATE_GRAPHML = false; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
+	private static final boolean CREATE_GRAPHML = true; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
 	private static final String TESTS_GEN_PATH = "../org.eclipse.qvtd.cs2as.compiler.tests/tests-gen/";
 	private static final String TESTS_PACKAGE_NAME = "cg";
+	private static final String DEBUG_SEGMENT = "debug";
 	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models", true);
 
 	
@@ -106,9 +107,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		QVTimperativeStandaloneSetup.doSetup();		
-		CompleteOCLStandaloneSetup.doSetup(); // To be able to add QVTimperative.ocl validation
-		
+		QVTimperativeStandaloneSetup.doSetup(); // To be able to add QVTimperative.ocl validation
+		CompleteOCLStandaloneSetup.doSetup(); 
 		myQVT = createQVT();
 	}
 	
@@ -314,11 +314,11 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	protected PivotModel executeOCL2QVTi_MTC(QVTiFacade qvt, URI baseURI, String oclDocName) throws Exception {
 		
 		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, oclDocName, qvt, TestsXMLUtil.defaultSavingOptions);
-    	mtc.execute();
-    	
+		mtc.setCreateGraphml(CREATE_GRAPHML);
+    	mtc.execute();    	
     	if (CREATE_GRAPHML) {
-    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(oclDocName.replace(".ocl", "Schedule_complete.graphml")).toString(), false);
-    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(oclDocName.replace(".ocl", "Schedule_pruned.graphml")).toString(), true);
+    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(DEBUG_SEGMENT).appendSegment(oclDocName.replace(".ocl", "Schedule_complete.graphml")).toString(), false);
+    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(DEBUG_SEGMENT).appendSegment(oclDocName.replace(".ocl", "Schedule_pruned.graphml")).toString(), true);
     	}
     	
     	PivotModel qvtiTransf = mtc.getiModel();
@@ -433,7 +433,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		    StringProperties properties = new StringProperties();
 		    properties.put(XmlModel.PROPERTY_NAME, "GML");
 		    properties.put(XmlModel.PROPERTY_ALIASES, "GML");
-		    properties.put(XmlModel.PROPERTY_MODEL_FILE, graphMlURI); // TODO when use new APi when released
+		    properties.put(XmlModel.PROPERTY_MODEL_URI, graphMlURI);
 		    properties.put(XmlModel.PROPERTY_XSD_FILE, new File("schema/ygraphml.xsd").getAbsolutePath());
 		    properties.put(XmlModel.PROPERTY_READONLOAD, "false");
 		    properties.put(XmlModel.PROPERTY_STOREONDISPOSAL, "true");

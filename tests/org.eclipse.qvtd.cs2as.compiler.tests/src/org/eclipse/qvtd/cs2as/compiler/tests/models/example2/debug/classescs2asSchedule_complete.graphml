@@ -5,9 +5,27 @@
   <graphml:key for="node" id="d6" yfiles.type="nodegraphics"/>
   <graphml:key for="edge" id="d9" yfiles.type="edgegraphics"/>
   <graphml:graph edgedefault="directed" id="Graph">
+    <graphml:node id="ElementCS">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>ElementCS</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="NamedElementCS">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>NamedElementCS</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
     <graphml:node id="ClassCS">
       <graphml:data key="d6"><y:ShapeNode>
           <y:NodeLabel>ClassCS</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="NamedElement">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>NamedElement</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
@@ -41,6 +59,12 @@
           <y:Shape type="rectangle"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
+    <graphml:node id="PathNameCS">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>PathNameCS</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
     <graphml:node id="Environment">
       <graphml:data key="d6"><y:ShapeNode>
           <y:NodeLabel>Environment</y:NodeLabel>
@@ -53,9 +77,21 @@
           <y:Shape type="rectangle"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
-    <graphml:node id="PathNameCS">
+    <graphml:node id="ElementCS::ast">
       <graphml:data key="d6"><y:ShapeNode>
-          <y:NodeLabel>PathNameCS</y:NodeLabel>
+          <y:NodeLabel>ElementCS::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="NamedElementCS::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>NamedElementCS::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="NamedElementCS::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>NamedElementCS::ast</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
@@ -74,6 +110,12 @@
     <graphml:node id="ClassCS::extends">
       <graphml:data key="d6"><y:ShapeNode>
           <y:NodeLabel>ClassCS::extends</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="NamedElement::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>NamedElement::name</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
@@ -173,6 +215,12 @@
           <y:Shape type="rectangle"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
+    <graphml:node id="PathNameCS::path">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>PathNameCS::path</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
     <graphml:node id="Environment::parentEnv">
       <graphml:data key="d6"><y:ShapeNode>
           <y:NodeLabel>Environment::parentEnv</y:NodeLabel>
@@ -188,12 +236,6 @@
     <graphml:node id="PathElementCS::name">
       <graphml:data key="d6"><y:ShapeNode>
           <y:NodeLabel>PathElementCS::name</y:NodeLabel>
-          <y:Shape type="rectangle"/>
-        </y:ShapeNode></graphml:data>
-    </graphml:node>
-    <graphml:node id="PathNameCS::path">
-      <graphml:data key="d6"><y:ShapeNode>
-          <y:NodeLabel>PathNameCS::path</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
@@ -251,9 +293,99 @@
           <y:Shape type="ellipse"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
+    <graphml:edge source="NamedElementCS" target="ElementCS">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="ClassCS" target="NamedElementCS">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Class" target="NamedElement">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="PackageCS" target="NamedElementCS">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Package" target="NamedElement">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="RootCS" target="ElementCS">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="PathNameCS" target="ElementCS">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="PathElementCS" target="NamedElementCS">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="NamedElementCS::ast" target="ElementCS::ast">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="ClassCS::name" target="NamedElementCS::name">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="ClassCS::ast" target="NamedElementCS::ast">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Class::name" target="NamedElement::name">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
     <graphml:edge source="Class::superClass" target="Class::Class">
       <graphml:data key="d9"><y:PolyLineEdge>
           <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="PackageCS::name" target="NamedElementCS::name">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="PackageCS::ast" target="NamedElementCS::ast">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Package::name" target="NamedElement::name">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
           <y:Arrows source="none" target="standard"/>
         </y:PolyLineEdge></graphml:data>
     </graphml:edge>
@@ -269,9 +401,21 @@
           <y:Arrows source="none" target="standard"/>
         </y:PolyLineEdge></graphml:data>
     </graphml:edge>
+    <graphml:edge source="RootCS::ast" target="ElementCS::ast">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
     <graphml:edge source="Root::ownedPackages" target="Package::Root">
       <graphml:data key="d9"><y:PolyLineEdge>
           <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="PathElementCS::name" target="NamedElementCS::name">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
           <y:Arrows source="none" target="standard"/>
         </y:PolyLineEdge></graphml:data>
     </graphml:edge>
@@ -289,17 +433,17 @@
     <graphml:edge source="ClassCS::ast" target="uClass_name (8)"/>
     <graphml:edge source="uClass_name (8)" target="Class::name"/>
     <graphml:edge source="ClassCS" target="uClass_superClass (9)"/>
-    <graphml:edge source="ClassCS::extends" target="uClass_superClass (9)"/>
     <graphml:edge source="ClassCS::ast" target="uClass_superClass (9)"/>
-    <graphml:edge source="Root::ownedPackages" target="uClass_superClass (9)"/>
-    <graphml:edge source="Package::ownedPackages" target="uClass_superClass (9)"/>
-    <graphml:edge source="Package::ownedClasses" target="uClass_superClass (9)"/>
+    <graphml:edge source="ClassCS::extends" target="uClass_superClass (9)"/>
+    <graphml:edge source="PathNameCS::path" target="uClass_superClass (9)"/>
     <graphml:edge source="Environment::parentEnv" target="uClass_superClass (9)"/>
     <graphml:edge source="Environment::namedElements" target="uClass_superClass (9)"/>
     <graphml:edge source="Package::name" target="uClass_superClass (9)"/>
     <graphml:edge source="PathElementCS::name" target="uClass_superClass (9)"/>
+    <graphml:edge source="Package::ownedPackages" target="uClass_superClass (9)"/>
+    <graphml:edge source="Root::ownedPackages" target="uClass_superClass (9)"/>
+    <graphml:edge source="Package::ownedClasses" target="uClass_superClass (9)"/>
     <graphml:edge source="Class::name" target="uClass_superClass (9)"/>
-    <graphml:edge source="PathNameCS::path" target="uClass_superClass (9)"/>
     <graphml:edge source="uClass_superClass (9)" target="Class::superClass"/>
     <graphml:edge source="uClass_superClass (9)" target="Class::Class"/>
     <graphml:edge source="PackageCS" target="uPackage_name (4)"/>

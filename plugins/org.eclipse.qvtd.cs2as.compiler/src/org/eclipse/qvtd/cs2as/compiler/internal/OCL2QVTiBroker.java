@@ -99,6 +99,9 @@ public class OCL2QVTiBroker extends MtcBroker {
 		sModel = qvtpToQvts(pModel);
 		qvtpFlatScheduling(pModel, sModel);
 		// qvtpNestingScheduling(pModel, sModel);
+		if (createGraphml) {
+			qvtsToGraphML(sModel);
+		}
 		iModel = qvtpQvtsToQvti(pModel, sModel);
 	}
 	
