@@ -29,7 +29,7 @@ import org.junit.Test;
 
 public class QVTdMtcTests extends LoadTestCase {
 	
-	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests", true);
+	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.build.etl.tests/bin/org/eclipse/qvtd/build/etl/tests", true);
 	
 	/** The Constant CREATE_GRAPHML. */
 	private boolean createGraphml = false;
