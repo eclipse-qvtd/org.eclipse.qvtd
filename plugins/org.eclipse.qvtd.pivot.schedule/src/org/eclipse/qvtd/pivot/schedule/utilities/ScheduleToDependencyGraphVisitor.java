@@ -1,6 +1,8 @@
 package org.eclipse.qvtd.pivot.schedule.utilities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLBuilder.ShapeType;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
+import org.eclipse.qvtd.pivot.schedule.DataParameter;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
 import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
@@ -24,14 +27,14 @@ import org.eclipse.qvtd.pivot.schedule.util.AbstractExtendingScheduleVisitor;
 
 public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleVisitor<String, GraphBuilder> {
 	
-	@NonNull private final String SOL_BASE03 = "#002b36";
-	@NonNull private final String SOL_BASE02 = "#073642";
-	@NonNull private final String SOL_BASE01 = "#586e75";
-	@NonNull private final String SOL_BASE00 = "#657b83";
-	@NonNull private final String SOL_BASE0 = "#839496";
-	@NonNull private final String SOL_BASE1 = "#93a1a1";
-	@NonNull private final String SOL_BASE2 = "#eee8d5";
-	@NonNull private final String SOL_BASE3 = "#fdf6e3";
+	private final List<String> SOL_BASE = Arrays.asList("#fdf6e3", "#eee8d5", "#93a1a1", "#839496", "#657b83", "#586e75", "#073642", "#002b36");
+	@NonNull private final int SOL_BACKROUND = 0;
+	@NonNull private final int SOL_BACKROUND_HL = 1;
+	@NonNull private final int SOL_SECONDARY = 2;
+	@NonNull private final int SOL_NONE = 3;
+	@NonNull private final int SOL_PRIMARY = 4;
+	@NonNull private final int SOL_OPTIONAL = 5;
+	
 	@NonNull private final String SOL_YELLOW = "#b58900";
 	@NonNull private final String SOL_ORANGE = "#cb4b16";
 	@NonNull private final String SOL_RED = "#dc322f";
@@ -41,7 +44,7 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 	@NonNull private final String SOL_CYAN = "#2aa198";
 	@NonNull private final String SOL_GREEN = "#859900";
 	
-	@NonNull private final String NODE_FILL_COLOR = SOL_BASE2;
+	@NonNull private final String NODE_FILL_COLOR;
 	
 	@NonNull private final String MAPPING_ACTION_COLOR = SOL_ORANGE;
 	@NonNull private final String MAPPING_ACTION_SHAPE = ShapeType.hexagon.name();
@@ -51,10 +54,12 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 	@NonNull private final String DATUM_TARGET_COLOR = SOL_MAGENTA;
 	@NonNull private final String DATUM_SHAPE = ShapeType.rectangle.name();
 	
-	@NonNull private final String SUPER_EDGE_COLOR = SOL_BASE01;
-	@NonNull private final String PRODUCTION_EDGE_COLOR = SOL_BASE00;
+	@NonNull private final String SUPER_EDGE_COLOR;
+	@NonNull private final String PRODUCTION_EDGE_COLOR;
 	@NonNull private final String REQUISITE_EDGE_COLOR = SOL_GREEN;
+	@NonNull private final String REQUISITE_MULTIPLE_EDGE_COLOR = SOL_RED;
 	@NonNull private final String DEPENDENCY_ARROW_END = ArrowType.standard.name();
+	@NonNull private final String DEPENDENCY_LOOP_ARROW_END = ArrowType.transparent_circle.name();
 	@NonNull private final String SUPER_ARROW_END = ArrowType.delta.name();
 	
 	
@@ -63,10 +68,20 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 	private List<String> outputDirection;
 	private String middleDirection;
 	private String inputDirection;
+	private boolean onlyClassDatums;
 	
 	public ScheduleToDependencyGraphVisitor(GraphBuilder context) {
+		this(context, false);
+	}
+	
+	public ScheduleToDependencyGraphVisitor(GraphBuilder context, boolean darkTheme) {
 		super(context);
-		// TODO Auto-generated constructor stub
+		if (darkTheme) {
+			Collections.reverse(SOL_BASE);
+		}
+		NODE_FILL_COLOR = SOL_BASE.get(SOL_BACKROUND_HL);
+		SUPER_EDGE_COLOR = SOL_BASE.get(SOL_SECONDARY);
+		PRODUCTION_EDGE_COLOR = SOL_BASE.get(SOL_PRIMARY);
 	}
 
 	private String getClassId(ClassDatum object) {
@@ -85,7 +100,7 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 				return DATUM_TARGET_COLOR;
 			}
 		}
-		return SOL_BASE1;
+		return SOL_BASE.get(SOL_OPTIONAL);
 	}
 
 	protected @NonNull String getMappingLabel(@NonNull MappingAction object) {
@@ -146,8 +161,8 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 			if (!nodeExists(((ClassDatum) sd).getType(), sd.getDomain()))
 				visitClassDatum((ClassDatum) sd);
 			String sdOrder = getNodeOrder(((ClassDatum) sd).getType(), sd.getDomain()).toString();
-			context.appendEdge(sdOrder,
-					order,
+			context.appendEdge(order,
+					sdOrder,
 					SUPER_EDGE_COLOR,
 					LineType.dotted.name(),
 					ArrowType.none.name(),
@@ -164,45 +179,98 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 
 	@Override
 	public @Nullable String visitMappingAction(MappingAction object) {
+		
 		String mappingLabel = getMappingLabel(object);
 		String order = getNodeOrder(object.getMapping()).toString();
 		context.appendNode(order, MAPPING_ACTION_SHAPE, NODE_FILL_COLOR, mappingLabel, MAPPING_ACTION_COLOR);
 		String lineType = LineType.line.name();
-		for (AbstractDatum ad : object.getProductions()) {
+		for(DataParameter out : object.getResults()) {
 			String targetId = null;
-			lineType = LineType.line.name();
-			if (ad instanceof ClassDatum) {
-				targetId = getNodeOrder(((ClassDatum) ad).getType(), ad.getDomain()).toString();
-			} else if (ad instanceof PropertyDatum) {
-				targetId = getNodeOrder(((PropertyDatum) ad).getProperty(), ((PropertyDatum) ad).getClassDatum().getType(), ad.getDomain()).toString();
-				if (((PropertyDatum) ad).getProperty().isIsImplicit())
-					lineType = LineType.dashed.name();
-			}
+			targetId = getNodeOrder(((ClassDatum) out.getDatum()).getType(), ((ClassDatum) out.getDatum()).getDomain()).toString();
 			assert targetId != null;
 			context.appendEdge(order,
 					targetId,
 					PRODUCTION_EDGE_COLOR,
-					lineType,
+					LineType.line.name(),
 					ArrowType.none.name(),
 					DEPENDENCY_ARROW_END);
 		}
-		for (AbstractDatum ad : object.getRequisites()) {
+		for (AbstractDatum ad : object.getProductions()) {
 			String targetId = null;
 			lineType = LineType.line.name();
-			if (ad instanceof ClassDatum) {
-				targetId = getNodeOrder(((ClassDatum) ad).getType(), ad.getDomain()).toString();
-			} else if (ad instanceof PropertyDatum) {
+			if (ad instanceof PropertyDatum) {
 				targetId = getNodeOrder(((PropertyDatum) ad).getProperty(), ((PropertyDatum) ad).getClassDatum().getType(), ad.getDomain()).toString();
+				assert targetId != null;
 				if (((PropertyDatum) ad).getProperty().isIsImplicit())
 					lineType = LineType.dashed.name();
+				context.appendEdge(order,
+						targetId,
+						PRODUCTION_EDGE_COLOR,
+						lineType,
+						ArrowType.none.name(),
+						DEPENDENCY_ARROW_END);
 			}
+		}
+		// One edge per data parameter of the ClassDatum
+		List<DataParameter> visited = new ArrayList<DataParameter>();
+		String edgeColor;
+		String targetArrow;
+		String targetId = null;
+		for (DataParameter in : object.getParameters()) {
+			visited.add(in);
+			lineType = LineType.line.name();
+			edgeColor = REQUISITE_EDGE_COLOR;
+			targetArrow = DEPENDENCY_ARROW_END;
+			targetId = null;
+			targetId = getNodeOrder(((ClassDatum) in.getDatum()).getType(), ((ClassDatum) in.getDatum()).getDomain()).toString();
 			assert targetId != null;
+			// If two or more DataParameters have this Type, its a MULTIPLE Type dependency
+			int dpCount = 0;
+			for (DataParameter dp2 : object.getParameters()) {
+				if (!visited.contains(dp2) && !dp2.equals(in) && dp2.getDatum().equals(in.getDatum())) {
+					dpCount++;
+				}
+			}
+			if (dpCount > 0)
+				edgeColor = REQUISITE_MULTIPLE_EDGE_COLOR;
+				// If the DataParameter can be derived, the line is dotted
+				/*
+				for (ParameterDerivation pd : object.getParameterDerivations()) {
+					if (pd.getSecondaryParameter().getDataParameter().getDatum().equals(ad)) {
+						if (pd.getPrimaryParameter() != null)
+							lineType = LineType.dotted.name(); // FIXME Might not work for multiple derived parameters
+						if (pd.getSecondaryParameter().isIsLoop()) {
+							targetArrow = DEPENDENCY_LOOP_ARROW_END;
+						}
+					}
+				}
+				*/
 			context.appendEdge(targetId,
 					order,
-					REQUISITE_EDGE_COLOR,
+					edgeColor,
 					lineType,
 					ArrowType.none.name(),
-					DEPENDENCY_ARROW_END);
+					targetArrow);
+		}
+		for (AbstractDatum ad : object.getRequisites()) {
+			// One edge per data parameter of the ClassDatum
+			edgeColor = REQUISITE_EDGE_COLOR;
+			targetArrow = DEPENDENCY_ARROW_END;
+			targetId = null;
+			lineType = LineType.line.name();
+			if (ad instanceof PropertyDatum) {
+				targetId = getNodeOrder(((PropertyDatum) ad).getProperty(), ((PropertyDatum) ad).getClassDatum().getType(), ad.getDomain()).toString();
+				assert targetId != null;
+				if (((PropertyDatum) ad).getProperty().isIsImplicit())
+					lineType = LineType.dashed.name();
+				// Primary and Secondary Information
+				context.appendEdge(targetId,
+						order,
+						edgeColor,
+						lineType,
+						ArrowType.none.name(),
+						targetArrow);
+			}
 		}
 		return null;
 	}
@@ -210,8 +278,19 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 	@Override
 	public @Nullable String visitPropertyDatum(PropertyDatum object) {
 		String datumLabel = getPropertyId(object);
-		Integer order = getNodeOrder(object.getProperty(), object.getClassDatum().getType(), object.getDomain());
-		context.appendNode(order.toString(), DATUM_SHAPE, NODE_FILL_COLOR, datumLabel, getDomainColor(object.getDomain()));
+		String order = getNodeOrder(object.getProperty(), object.getClassDatum().getType(), object.getDomain()).toString();
+		context.appendNode(order, DATUM_SHAPE, NODE_FILL_COLOR, datumLabel, getDomainColor(object.getDomain()));
+		for (AbstractDatum sd : object.getSuper()) {
+			if (!nodeExists(object.getProperty(), object.getClassDatum().getType(), object.getDomain()))
+				visitPropertyDatum((PropertyDatum) sd);
+			String sdOrder = getNodeOrder(((PropertyDatum) sd).getProperty(), ((PropertyDatum) sd).getClassDatum().getType(), sd.getDomain()).toString();
+			context.appendEdge(order,
+					sdOrder,
+					SUPER_EDGE_COLOR,
+					LineType.dotted.name(),
+					ArrowType.none.name(),
+					SUPER_ARROW_END);
+		}
 		return null;
 	}
 
@@ -232,9 +311,16 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 					visitMappingAction(ma);
 			}
 		}
-		
 		context.close();
 		return null;
+	}
+
+	public boolean isOnlyClassDatums() {
+		return onlyClassDatums;
+	}
+
+	public void setOnlyClassDatums(boolean onlyClassDatums) {
+		this.onlyClassDatums = onlyClassDatums;
 	}
 
 }

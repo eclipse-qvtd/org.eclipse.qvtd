@@ -112,7 +112,7 @@ public class QVTdMtcTests extends LoadTestCase {
     /*
      * 	UmlToRdbms has a loop from NonLeafAttribute in mapping complexAttributeComplexAttributes_LM,
      *  probably breakable by classComplexAttributes_LM, but still we can't schedule it.
-     */
+    */ 
     @Test
     public void testUmlToRdbms() throws Exception {
     	
@@ -120,7 +120,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("UmlToRdbms");;
     	URI samplesBaseUri = testBaseURI.appendSegment("samples");
-    	MtcBroker mtc = new MtcBroker(testBaseURI, "UmlToRdbms.qvtcas", myQVT.getEnvironmentFactory());
+    	MtcBroker mtc = new MtcBroker(testBaseURI, "UmlToRdbms.qvtcas", myQVT.getEnvironmentFactory(), TestsXMLUtil.defaultSavingOptions);
     	mtc.setCreateGraphml(true);
     	mtc.execute();
     	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
@@ -152,7 +152,7 @@ public class QVTdMtcTests extends LoadTestCase {
         mtc.disposeModels();
         myQVT.dispose();
     }
-
+	
     @Test
     public void testUpperToLower() throws Exception {
     	
@@ -190,8 +190,8 @@ public class QVTdMtcTests extends LoadTestCase {
         mtc.disposeModels();
         myQVT.dispose();
     }
-    
-/*    @Test
+    /*
+    @Test
     public void testHSVToHLS() throws Exception {
     	
     	
@@ -199,6 +199,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("HSV2HLS");;
     	MtcBroker mtc = new MtcBroker(testBaseURI, "HSV2HLS.qvtcas", myQVT.getEnvironmentFactory(), TestsXMLUtil.defaultSavingOptions);
+    	mtc.setCreateGraphml(true);
     	mtc.execute();
     	
     	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
@@ -227,7 +228,7 @@ public class QVTdMtcTests extends LoadTestCase {
         testEvaluator.dispose();
         mtc.disposeModels();
         myQVT.dispose();
-    } */
-    
+    }
+    */
 	
 }

@@ -156,6 +156,8 @@ public class MtcBroker {
 	
 	/** The Constant CREATE_GRAPHML. */
 	private boolean createGraphml = false;
+
+	private boolean darkTheme = false;
 	
 	private boolean nestedSchedule = true;
 	
@@ -212,6 +214,8 @@ public class MtcBroker {
 	/** The base uri. */
 	private URI baseUri;
 	
+	private URI debugUri;
+	
 	/** The c model. */
 	private PivotModel cModel;
 	
@@ -229,11 +233,7 @@ public class MtcBroker {
 	
 	/** The i model. */
 	protected PivotModel iModel;
-
-	private URI debugUri;
-
-	
-	
+		
 	
 	/**
 	 * Instantiates a new MTC broker.
@@ -385,7 +385,7 @@ public class MtcBroker {
 			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		} finally {
 			if (s != null) {
-				ScheduleToDependencyGraphVisitor visitor = new ScheduleToDependencyGraphVisitor(builder);
+				ScheduleToDependencyGraphVisitor visitor = new ScheduleToDependencyGraphVisitor(builder, this.darkTheme);
 				// GEt the source/middle/target info from the configuration
 				for (EObject eContent : configModel.getResource().getContents()) {
 					if (eContent instanceof Configuration) {
@@ -1021,7 +1021,13 @@ public class MtcBroker {
 	}
 
 	public void setCreateGraphml(boolean createGraphml) {
+		setCreateGraphml(createGraphml, false);
+		
+	}
+	
+	public void setCreateGraphml(boolean createGraphml, boolean darkTheme) {
 		this.createGraphml = createGraphml;
+		this.darkTheme = darkTheme;
 	}
 
 	/**
