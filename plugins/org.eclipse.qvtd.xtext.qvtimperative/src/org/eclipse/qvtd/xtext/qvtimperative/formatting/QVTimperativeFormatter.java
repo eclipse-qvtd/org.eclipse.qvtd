@@ -173,13 +173,13 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    	TargetBottomPatternCSElements a = f.getTargetBottomPatternCSAccess();
 			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_1());	
 			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_1());	
-			c.setNoSpace().before(a.getCommaKeyword_3_0());
-			c.setLinewrap().after(a.getCommaKeyword_3_0());	
-			c.setLinewrap().before(a.getRightCurlyBracketKeyword_4());	
-			c.setLinewrap().after(a.getRightCurlyBracketKeyword_4());	
+			c.setNoSpace().before(a.getCommaKeyword_2_1_0());
+			c.setLinewrap().after(a.getCommaKeyword_2_1_0());	
+			c.setLinewrap().before(a.getRightCurlyBracketKeyword_3());	
+			c.setLinewrap().after(a.getRightCurlyBracketKeyword_3());	
 			//
-			c.setIndentation(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_4());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_4());
+			c.setIndentation(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_3());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_3());
 		}
 	    {
 	    	TargetGuardPatternCSElements a = f.getTargetGuardPatternCSAccess();

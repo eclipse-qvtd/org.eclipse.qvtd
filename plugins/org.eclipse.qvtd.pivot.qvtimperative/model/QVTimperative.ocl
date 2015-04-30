@@ -28,7 +28,7 @@ def: unboundGuardVariables : Set(ocl::Variable) = guardVariables - boundGuardVar
 /* No mapping refinement */
 -- inv NoRefinement: noInheritance and noParents
 inv NoMiddleGuardPatternVariables: guardPattern.variable->isEmpty()
-inv NoMiddleBottomPatternVariables: bottomPattern.variable->isEmpty() and bottomPattern.realizedVariable->isEmpty()
+--inv NoMiddleBottomPatternVariables: bottomPattern.variable->isEmpty() and bottomPattern.realizedVariable->isEmpty()
 
 context MappingCall
 def: referredNames : Set(String) = referredMapping.unboundGuardVariables.name->asSet()
@@ -54,7 +54,7 @@ def: isTarget : Boolean = mapping.isFromMiddle and oclIsKindOf(CoreDomain)
 context CoreDomain
 def: mapping : qvtimperative::Mapping = rule.oclAsType(qvtimperative::Mapping)
 inv CheckableXorEnforceable: isCheckable xor isEnforceable
-inv NoSourceBottomPatternVariables: isCheckable implies bottomPattern.variable->isEmpty()
+inv NoSideBottomPatternVariables: bottomPattern.variable->isEmpty()
 inv NoSideBottomPatternAssignments: bottomPattern.assignment->isEmpty()
 inv NoSideBottomPatternEnforcements: bottomPattern.enforcementOperation->isEmpty()
 

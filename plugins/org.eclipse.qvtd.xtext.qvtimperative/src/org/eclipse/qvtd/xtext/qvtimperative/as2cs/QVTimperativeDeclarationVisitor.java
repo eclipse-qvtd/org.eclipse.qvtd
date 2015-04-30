@@ -82,10 +82,10 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 			List<Element> asConstraints = new ArrayList<Element>(asBottomPattern.getAssignment());
 			asConstraints.addAll(asBottomPattern.getPredicate());
 			context.refreshList(csBottomPattern.getOwnedConstraints(), context.visitDeclarations(PredicateOrAssignmentCS.class, asConstraints, null));
+			context.refreshList(csBottomPattern.getOwnedUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asBottomPattern.getVariable(), null));
 		}
 		else {
 			context.refreshList(csBottomPattern.getOwnedRealizedVariables(), context.visitDeclarations(RealizedVariableCS.class, asBottomPattern.getRealizedVariable(), null));
-			context.refreshList(csBottomPattern.getOwnedUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asBottomPattern.getVariable(), null));
 		}
 		return csBottomPattern;
 	}

@@ -70,6 +70,7 @@ public class QVTiEvaluationVisitor extends QVTiAbstractEvaluationVisitor {
         Area area = bottomPattern.getArea();
         if (area instanceof CoreDomain) {
         	assert bottomPattern.getAssignment().isEmpty();
+        	assert bottomPattern.getVariable().isEmpty();
         	for (Predicate predicate : bottomPattern.getPredicate()) {
         		result = predicate.accept(undecoratedVisitor);
         		if (result != Boolean.TRUE) {
@@ -78,13 +79,6 @@ public class QVTiEvaluationVisitor extends QVTiAbstractEvaluationVisitor {
             }
             for (RealizedVariable rVar : bottomPattern.getRealizedVariable()) {
                 rVar.accept(undecoratedVisitor);
-            }
-            for (Variable rVar : bottomPattern.getVariable()) {
-            	OCLExpression ownedInit = rVar.getOwnedInit();
-                if (ownedInit != null) {
-                	Object initValue = ownedInit.accept(undecoratedVisitor);
-        			evaluationEnvironment.replace(rVar, initValue);
-                }
             }
 //            for (Assignment assigment : bottomPattern.getAssignment()) {
 //                assigment.accept(undecoratedVisitor);
@@ -101,8 +95,14 @@ public class QVTiEvaluationVisitor extends QVTiAbstractEvaluationVisitor {
         	assert area instanceof Mapping;
         	assert bottomPattern.getPredicate().isEmpty();
         	assert bottomPattern.getRealizedVariable().isEmpty();
-        	assert bottomPattern.getVariable().isEmpty();
         	assert bottomPattern.getEnforcementOperation().isEmpty();
+            for (Variable rVar : bottomPattern.getVariable()) {
+            	OCLExpression ownedInit = rVar.getOwnedInit();
+                if (ownedInit != null) {
+                	Object initValue = ownedInit.accept(undecoratedVisitor);
+        			evaluationEnvironment.replace(rVar, initValue);
+                }
+            }
 //            for (RealizedVariable rVar : bottomPattern.getRealizedVariable()) {
 //                rVar.accept(undecoratedVisitor);
 //            }
