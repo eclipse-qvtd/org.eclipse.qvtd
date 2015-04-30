@@ -387,7 +387,6 @@ public class MtcBroker {
 			if (s != null) {
 				ScheduleToDependencyGraphVisitor visitor = new ScheduleToDependencyGraphVisitor(builder);
 				// GEt the source/middle/target info from the configuration
-				// FIXME why is the configuration not loaded with the generated classes?
 				for (EObject eContent : configModel.getResource().getContents()) {
 					if (eContent instanceof Configuration) {
 						Configuration c = (Configuration) eContent;
@@ -400,11 +399,6 @@ public class MtcBroker {
 				}
 				s.accept(visitor);
 				// Save/print the builder
-				//FileOutputStream fos = new FileOutputStream(file);
-				//OutputStreamWriter osw = new OutputStreamWriter(fos);
-				//BufferedWriter writer = new BufferedWriter(osw);
-				//try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-			    //        new FileOutputStream(file), "utf-8"))) {
 				try (Writer writer = new BufferedWriter(new OutputStreamWriter(
 						URIConverter.INSTANCE.createOutputStream(this.dependencyGraphUri), "utf-8"))) {
 				   writer.write(builder.toString());
@@ -477,7 +471,10 @@ public class MtcBroker {
 		} finally {
 			if ((pModel != null) && (sModel != null))
 				sModel.setStoredOnDisposal(!dryRun);
-				qvtpNestingScheduling(pModel, sModel);
+				if (nestedSchedule)
+					qvtpNestingScheduling(pModel, sModel);
+				else
+					qvtpFlatScheduling(pModel, sModel);
 		}
 	}
 	
@@ -1027,6 +1024,14 @@ public class MtcBroker {
 		this.createGraphml = createGraphml;
 	}
 
+	/**
+	 * Sets the nested schedule option.
+	 * 
+	 * By default, the scheduler creates a nested schedule. If set to False, the
+	 * scheduler generates a flat schedule.
+	 *
+	 * @param nestedSchedule the new nested schedule
+	 */
 	public void setNestedSchedule(boolean nestedSchedule) {
 		this.nestedSchedule = nestedSchedule;
 	}
