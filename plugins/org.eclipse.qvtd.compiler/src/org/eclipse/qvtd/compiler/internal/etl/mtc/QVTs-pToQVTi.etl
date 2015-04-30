@@ -447,34 +447,52 @@ operation QVTs!SecondaryParameter getNavigationExp() : QVTi!OCLExpression {
 	if (self.derivationProperty.isDefined()) {
 		//self.dataParameter.variable.name.println("derivationProperty.isDefined ");
 		//self.derivationProperty.name.println("prop ");
+		var derivationExp;
 		if (self.derivationProperty.isIsImplicit()) {
-			exp = new QVTi!OppositePropertyCallExp;
-			exp.referredProperty = self.derivationProperty.opposite;
+			derivationExp = new QVTi!OppositePropertyCallExp;
+			derivationExp.referredProperty = self.derivationProperty.opposite;
 		}
 		else {
-			exp = new QVTi!PropertyCallExp;
-			exp.referredProperty = self.derivationProperty;
+			derivationExp = new QVTi!PropertyCallExp;
+			derivationExp.referredProperty = self.derivationProperty;
 		}
-		exp.type = exp.referredProperty.type;
+		//exp.type = exp.referredProperty.type;
+        derivationExp.type = self.derivationProperty.type;
 		if (self.derivation.primaryParameter.secondaryParameter.isDefined()) {
 			if (self.derivation.primaryParameter.secondaryParameter.isLoop) {
 				//self.dataParameter.variable.name.println("End Rec with iterator ");
-				exp.ownedSource = new QVTi!VariableExp;
-		    	exp.ownedSource.referredVariable = self.derivation.primaryParameter.secondaryParameter.equivalent().ownedIterators.first();
-		    	exp.ownedSource.type = exp.ownedSource.referredVariable.type;
+				var sourceVar = self.derivation.primaryParameter.secondaryParameter.equivalent().ownedIterators.first();
+				var sourceExp = new QVTi!VariableExp;
+                sourceExp.referredVariable = sourceVar;
+                sourceExp.type = sourceVar.type;
+                derivationExp.ownedSource = sourceExp;
+				if (self.derivationProperty.type == self.dataParameter.variable.type) {
+				    exp = derivationExp;
+				} else {
+				    // The result has to be casted
+				    exp = new QVTi!OperationCallExp;
+                    exp.referredOperation = getOclAnyOperation("oclAsType");
+                    exp.ownedSource = derivationExp;
+                    var typeExp = new QVTi!TypeExp;
+                    typeExp.referredType = self.dataParameter.variable.type;
+                    typeExp.type = getClassByName("Class");
+	                exp.type = typeExp.referredType;
+	                exp.ownedArguments.add(typeExp);
+				}
 			} else {
 				//self.dataParameter.variable.name.println("source = getNavigationExp ");
-				exp.ownedSource = self.derivation.primaryParameter.secondaryParameter.getNavigationExp();
+                derivationExp.ownedSource = self.derivation.primaryParameter.secondaryParameter.getNavigationExp();
+                exp = derivationExp;
 			}
 		} else {
 			//self.derivation.target.mapping.name.println("Binding from context ");
-			exp.ownedSource = new QVTi!VariableExp;
+			derivationExp.ownedSource = new QVTi!VariableExp;
 	    	// TODO What about supertypes?
-	    	exp.ownedSource.referredVariable ::= self.derivation.target.parent.getContextDataParameters()
+	    	derivationExp.ownedSource.referredVariable ::= self.derivation.target.parent.getContextDataParameters()
 	    			.selectOne(dp | dp.variable.type == self.derivation.primaryParameter.variable.type).variable.getSameVariable();
-	    	exp.ownedSource.type = exp.ownedSource.referredVariable.type;	
+	    	derivationExp.ownedSource.type = derivationExp.ownedSource.referredVariable.type;
+	    	exp = derivationExp;
 		}
-		
 	} else {
 		//self.dataParameter.variable.name.println("End Rec with iterator ");
 		exp = new QVTi!VariableExp;

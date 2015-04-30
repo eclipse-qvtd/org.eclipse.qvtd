@@ -127,9 +127,8 @@ public class QVTdMtcTests extends LoadTestCase {
     	assertNoValidationErrors("QVTm validation", mtc.getmModel().getRooteObject());
         assertNoValidationErrors("QVTp validation", mtc.getpModel().getRooteObject());
         assertNoValidationErrors("QVTs validation", mtc.getsModel().getRooteObject());
-        /** FIXME need to use OppositePropertyCallExp
         assertNoValidationErrors("QVTi validation", mtc.getiModel().getRooteObject());
-        
+        /*FIXME A decision on bug 465913 needs to be made so the transformation can execute
         // Run the QVTi transformation in interpreter mode
     	URI inputURI = samplesBaseUri.appendSegment("SimpleUMLPeople.xmi");
     	URI outputURI = samplesBaseUri.appendSegment("SimpleRDBMSPeople.xmi");
@@ -147,8 +146,9 @@ public class QVTdMtcTests extends LoadTestCase {
         Resource expected =  myQVT.getEnvironmentFactory().getResourceSet().getResource(expectedOutputURI, true);
         Resource actual =  myQVT.getEnvironmentFactory().getResourceSet().getResource(outputURI, true);
         assertSameModel(expected, actual);
-        
-        testEvaluator.dispose(); */
+       
+        testEvaluator.dispose();
+        */
         mtc.disposeModels();
         myQVT.dispose();
     }
@@ -161,7 +161,8 @@ public class QVTdMtcTests extends LoadTestCase {
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("UpperToLower");;
     	MtcBroker mtc = new MtcBroker(testBaseURI, "UpperToLower.qvtcas", myQVT.getEnvironmentFactory(), TestsXMLUtil.defaultSavingOptions);
     	mtc.setCreateGraphml(true);
-    	mtc.execute();
+    	//mtc.execute();
+    	mtc.executeQvtpQvtsToQvti();
     	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
     	assertNoValidationErrors("QVTm validation", mtc.getmModel().getRooteObject());
         assertNoValidationErrors("QVTp validation", mtc.getpModel().getRooteObject());
