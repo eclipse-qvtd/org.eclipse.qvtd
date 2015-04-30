@@ -31,9 +31,6 @@ public class QVTdMtcTests extends LoadTestCase {
 	
 	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.build.etl.tests/bin/org/eclipse/qvtd/build/etl/tests", true);
 	
-	/** The Constant CREATE_GRAPHML. */
-	private boolean createGraphml = false;
-	
 	protected class MyQVT extends OCL
 	{
 		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
