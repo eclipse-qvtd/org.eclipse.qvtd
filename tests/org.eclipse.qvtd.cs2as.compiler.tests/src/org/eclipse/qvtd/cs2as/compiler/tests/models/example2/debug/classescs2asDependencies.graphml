@@ -14,8 +14,8 @@
         <y:ShapeNode>
           <y:Geometry height="17.04" width="67.095" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">ElementCS</y:NodeLabel>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">ElementCS</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -26,8 +26,8 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="67.095" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">ElementCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">ElementCS
 .ast</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -39,8 +39,8 @@
         <y:ShapeNode>
           <y:Geometry height="17.04" width="110.75999999999999" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">NamedElementCS</y:NodeLabel>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">NamedElementCS</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -51,8 +51,8 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="110.75999999999999" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">NamedElementCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">NamedElementCS
 .name</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -64,17 +64,25 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="110.75999999999999" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">NamedElementCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">NamedElementCS
 .ast</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e0" source="n0" target="n2">
+    <edge id="e0" source="n4" target="n1">
       <data key="d9">
         <y:PolyLineEdge>
-          <y:LineStyle color="#586e75" type="dotted" width="1.0"/>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e1" source="n2" target="n0">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="delta"/>
         </y:PolyLineEdge>
       </data>
@@ -85,8 +93,8 @@
         <y:ShapeNode>
           <y:Geometry height="17.04" width="53.25" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">ClassCS</y:NodeLabel>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">ClassCS</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -97,43 +105,59 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="53.25" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">ClassCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">ClassCS
 .name</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
+    <edge id="e2" source="n6" target="n3">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
     <node id="n7">
       <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="34.08" width="53.25" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">ClassCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">ClassCS
 .ast</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
+    <edge id="e3" source="n7" target="n4">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
     <node id="n8">
       <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="34.08" width="53.25" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">ClassCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">ClassCS
 .extends</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e1" source="n2" target="n5">
+    <edge id="e4" source="n5" target="n2">
       <data key="d9">
         <y:PolyLineEdge>
-          <y:LineStyle color="#586e75" type="dotted" width="1.0"/>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="delta"/>
         </y:PolyLineEdge>
       </data>
@@ -144,8 +168,8 @@
         <y:ShapeNode>
           <y:Geometry height="17.04" width="92.655" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">NamedElement</y:NodeLabel>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">NamedElement</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -156,8 +180,8 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="92.655" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">NamedElement
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">NamedElement
 .name</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -169,8 +193,8 @@
         <y:ShapeNode>
           <y:Geometry height="17.04" width="35.144999999999996" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Class</y:NodeLabel>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Class</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -181,21 +205,29 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="37.275" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Class
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Class
 .name</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
+    <edge id="e5" source="n12" target="n10">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
     <node id="n13">
       <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="34.08" width="72.42" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Class
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Class
 .superClass</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -207,8 +239,8 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="38.339999999999996" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Class
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Class
 .Class</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -220,17 +252,17 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="54.315" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Class
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Class
 .Package</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e2" source="n9" target="n11">
+    <edge id="e6" source="n11" target="n9">
       <data key="d9">
         <y:PolyLineEdge>
-          <y:LineStyle color="#586e75" type="dotted" width="1.0"/>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="delta"/>
         </y:PolyLineEdge>
       </data>
@@ -241,8 +273,8 @@
         <y:ShapeNode>
           <y:Geometry height="17.04" width="69.225" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">PackageCS</y:NodeLabel>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">PackageCS</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -253,34 +285,50 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="69.225" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">PackageCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">PackageCS
 .name</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
+    <edge id="e7" source="n17" target="n3">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
     <node id="n18">
       <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="34.08" width="69.225" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">PackageCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">PackageCS
 .ast</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
+    <edge id="e8" source="n18" target="n4">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
     <node id="n19">
       <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="34.08" width="92.655" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">PackageCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">PackageCS
 .ownedClasses</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -292,17 +340,17 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="101.175" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">PackageCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">PackageCS
 .ownedPackages</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e3" source="n2" target="n16">
+    <edge id="e9" source="n16" target="n2">
       <data key="d9">
         <y:PolyLineEdge>
-          <y:LineStyle color="#586e75" type="dotted" width="1.0"/>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="delta"/>
         </y:PolyLineEdge>
       </data>
@@ -313,8 +361,8 @@
         <y:ShapeNode>
           <y:Geometry height="17.04" width="51.12" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Package</y:NodeLabel>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Package</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -325,21 +373,29 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="51.12" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Package
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Package
 .name</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
+    <edge id="e10" source="n22" target="n10">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
     <node id="n23">
       <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="34.08" width="92.655" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Package
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Package
 .ownedClasses</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -351,8 +407,8 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="101.175" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Package
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Package
 .ownedPackages</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -364,8 +420,8 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="54.315" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Package
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Package
 .Package</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -377,17 +433,17 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="51.12" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Package
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Package
 .Root</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e4" source="n9" target="n21">
+    <edge id="e11" source="n21" target="n9">
       <data key="d9">
         <y:PolyLineEdge>
-          <y:LineStyle color="#586e75" type="dotted" width="1.0"/>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="delta"/>
         </y:PolyLineEdge>
       </data>
@@ -398,8 +454,8 @@
         <y:ShapeNode>
           <y:Geometry height="17.04" width="45.794999999999995" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">RootCS</y:NodeLabel>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">RootCS</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -410,8 +466,8 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="101.175" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">RootCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">RootCS
 .ownedPackages</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -423,17 +479,25 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="45.794999999999995" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">RootCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">RootCS
 .ast</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e5" source="n0" target="n27">
+    <edge id="e12" source="n29" target="n1">
       <data key="d9">
         <y:PolyLineEdge>
-          <y:LineStyle color="#586e75" type="dotted" width="1.0"/>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e13" source="n27" target="n0">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="delta"/>
         </y:PolyLineEdge>
       </data>
@@ -444,8 +508,8 @@
         <y:ShapeNode>
           <y:Geometry height="17.04" width="27.689999999999998" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Root</y:NodeLabel>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Root</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -456,8 +520,8 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="101.175" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Root
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Root
 .ownedPackages</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -469,8 +533,8 @@
         <y:ShapeNode>
           <y:Geometry height="17.04" width="80.94" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">PathNameCS</y:NodeLabel>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">PathNameCS</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -481,17 +545,17 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="80.94" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">PathNameCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">PathNameCS
 .path</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e6" source="n0" target="n32">
+    <edge id="e14" source="n32" target="n0">
       <data key="d9">
         <y:PolyLineEdge>
-          <y:LineStyle color="#586e75" type="dotted" width="1.0"/>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="delta"/>
         </y:PolyLineEdge>
       </data>
@@ -502,8 +566,8 @@
         <y:ShapeNode>
           <y:Geometry height="17.04" width="73.485" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Environment</y:NodeLabel>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Environment</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -514,8 +578,8 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="73.485" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Environment
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Environment
 .parentEnv</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -527,8 +591,8 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="101.175" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">Environment
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Environment
 .namedElements</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -540,8 +604,8 @@
         <y:ShapeNode>
           <y:Geometry height="17.04" width="93.72" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">PathElementCS</y:NodeLabel>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">PathElementCS</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
@@ -552,17 +616,25 @@
         <y:ShapeNode>
           <y:Geometry height="34.08" width="93.72" x="0.0" y="0.0"/>
           <y:Fill color="#eee8d5" transparent="false"/>
-          <y:BorderStyle color="#93a1a1" type="line" width="1.0"/>
-          <y:NodeLabel textColor="#93a1a1">PathElementCS
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">PathElementCS
 .name</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e7" source="n2" target="n37">
+    <edge id="e15" source="n38" target="n3">
       <data key="d9">
         <y:PolyLineEdge>
-          <y:LineStyle color="#586e75" type="dotted" width="1.0"/>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e16" source="n37" target="n2">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="delta"/>
         </y:PolyLineEdge>
       </data>
@@ -580,7 +652,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e8" source="n39" target="n11">
+    <edge id="e17" source="n39" target="n11">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="line" width="1.0"/>
@@ -588,7 +660,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e9" source="n39" target="n7">
+    <edge id="e18" source="n39" target="n7">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="line" width="1.0"/>
@@ -596,7 +668,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e10" source="n5" target="n39">
+    <edge id="e19" source="n5" target="n39">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -617,7 +689,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e11" source="n40" target="n21">
+    <edge id="e20" source="n40" target="n21">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="line" width="1.0"/>
@@ -625,7 +697,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e12" source="n40" target="n18">
+    <edge id="e21" source="n40" target="n18">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="line" width="1.0"/>
@@ -633,7 +705,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e13" source="n16" target="n40">
+    <edge id="e22" source="n16" target="n40">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -654,7 +726,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e14" source="n41" target="n30">
+    <edge id="e23" source="n41" target="n30">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="line" width="1.0"/>
@@ -662,7 +734,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e15" source="n41" target="n29">
+    <edge id="e24" source="n41" target="n29">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="line" width="1.0"/>
@@ -670,7 +742,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e16" source="n27" target="n41">
+    <edge id="e25" source="n27" target="n41">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -691,7 +763,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e17" source="n42" target="n12">
+    <edge id="e26" source="n42" target="n12">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="line" width="1.0"/>
@@ -699,7 +771,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e18" source="n5" target="n42">
+    <edge id="e27" source="n5" target="n42">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -707,7 +779,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e19" source="n6" target="n42">
+    <edge id="e28" source="n6" target="n42">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -715,7 +787,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e20" source="n7" target="n42">
+    <edge id="e29" source="n7" target="n42">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -736,7 +808,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e21" source="n43" target="n13">
+    <edge id="e30" source="n43" target="n13">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="line" width="1.0"/>
@@ -744,7 +816,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e22" source="n43" target="n14">
+    <edge id="e31" source="n43" target="n14">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="dashed" width="1.0"/>
@@ -752,7 +824,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e23" source="n5" target="n43">
+    <edge id="e32" source="n5" target="n43">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -760,7 +832,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e24" source="n7" target="n43">
+    <edge id="e33" source="n7" target="n43">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -768,7 +840,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e25" source="n8" target="n43">
+    <edge id="e34" source="n8" target="n43">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -776,7 +848,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e26" source="n33" target="n43">
+    <edge id="e35" source="n33" target="n43">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -784,7 +856,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e27" source="n35" target="n43">
+    <edge id="e36" source="n35" target="n43">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -792,7 +864,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e28" source="n36" target="n43">
+    <edge id="e37" source="n36" target="n43">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -800,7 +872,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e29" source="n22" target="n43">
+    <edge id="e38" source="n22" target="n43">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -808,7 +880,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e30" source="n38" target="n43">
+    <edge id="e39" source="n38" target="n43">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -816,7 +888,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e31" source="n24" target="n43">
+    <edge id="e40" source="n24" target="n43">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -824,7 +896,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e32" source="n31" target="n43">
+    <edge id="e41" source="n31" target="n43">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -832,7 +904,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e33" source="n23" target="n43">
+    <edge id="e42" source="n23" target="n43">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -840,7 +912,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e34" source="n12" target="n43">
+    <edge id="e43" source="n12" target="n43">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -861,7 +933,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e35" source="n44" target="n22">
+    <edge id="e44" source="n44" target="n22">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="line" width="1.0"/>
@@ -869,7 +941,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e36" source="n16" target="n44">
+    <edge id="e45" source="n16" target="n44">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -877,7 +949,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e37" source="n17" target="n44">
+    <edge id="e46" source="n17" target="n44">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -885,7 +957,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e38" source="n18" target="n44">
+    <edge id="e47" source="n18" target="n44">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -906,7 +978,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e39" source="n45" target="n23">
+    <edge id="e48" source="n45" target="n23">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="line" width="1.0"/>
@@ -914,7 +986,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e40" source="n45" target="n15">
+    <edge id="e49" source="n45" target="n15">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="dashed" width="1.0"/>
@@ -922,7 +994,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e41" source="n16" target="n45">
+    <edge id="e50" source="n16" target="n45">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -930,7 +1002,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e42" source="n19" target="n45">
+    <edge id="e51" source="n19" target="n45">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -938,7 +1010,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e43" source="n7" target="n45">
+    <edge id="e52" source="n7" target="n45">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -946,7 +1018,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e44" source="n18" target="n45">
+    <edge id="e53" source="n18" target="n45">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -967,7 +1039,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e45" source="n46" target="n24">
+    <edge id="e54" source="n46" target="n24">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="line" width="1.0"/>
@@ -975,7 +1047,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e46" source="n46" target="n25">
+    <edge id="e55" source="n46" target="n25">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="dashed" width="1.0"/>
@@ -983,7 +1055,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e47" source="n16" target="n46">
+    <edge id="e56" source="n16" target="n46">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -991,7 +1063,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e48" source="n20" target="n46">
+    <edge id="e57" source="n20" target="n46">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -999,7 +1071,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e49" source="n18" target="n46">
+    <edge id="e58" source="n18" target="n46">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -1020,7 +1092,7 @@
         </y:ShapeNode>
       </data>
     </node>
-    <edge id="e50" source="n47" target="n31">
+    <edge id="e59" source="n47" target="n31">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="line" width="1.0"/>
@@ -1028,7 +1100,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e51" source="n47" target="n26">
+    <edge id="e60" source="n47" target="n26">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#657b83" type="dashed" width="1.0"/>
@@ -1036,7 +1108,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e52" source="n27" target="n47">
+    <edge id="e61" source="n27" target="n47">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -1044,7 +1116,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e53" source="n28" target="n47">
+    <edge id="e62" source="n28" target="n47">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -1052,7 +1124,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e54" source="n18" target="n47">
+    <edge id="e63" source="n18" target="n47">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
@@ -1060,7 +1132,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e55" source="n29" target="n47">
+    <edge id="e64" source="n29" target="n47">
       <data key="d9">
         <y:PolyLineEdge>
           <y:LineStyle color="#859900" type="line" width="1.0"/>
