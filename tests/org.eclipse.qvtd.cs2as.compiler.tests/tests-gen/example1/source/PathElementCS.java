@@ -23,6 +23,7 @@ package example1.source;
  * </p>
  * <ul>
  *   <li>{@link example1.source.PathElementCS#getName <em>Name</em>}</li>
+ *   <li>{@link example1.source.PathElementCS#getPathName <em>Path Name</em>}</li>
  * </ul>
  *
  * @see example1.source.SourcePackage#getPathElementCS()
@@ -55,5 +56,33 @@ public interface PathElementCS extends SElement {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Path Name</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link example1.source.PathNameCS#getPath <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Path Name</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Path Name</em>' container reference.
+	 * @see #setPathName(PathNameCS)
+	 * @see example1.source.SourcePackage#getPathElementCS_PathName()
+	 * @see example1.source.PathNameCS#getPath
+	 * @model opposite="path" transient="false"
+	 * @generated
+	 */
+	PathNameCS getPathName();
+
+	/**
+	 * Sets the value of the '{@link example1.source.PathElementCS#getPathName <em>Path Name</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Path Name</em>' container reference.
+	 * @see #getPathName()
+	 * @generated
+	 */
+	void setPathName(PathNameCS value);
 
 } // PathElementCS

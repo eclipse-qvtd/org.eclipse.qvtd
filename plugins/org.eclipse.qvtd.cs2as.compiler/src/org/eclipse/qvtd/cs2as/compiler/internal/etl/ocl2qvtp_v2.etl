@@ -160,7 +160,7 @@ rule ShadowPart2UpdateMapping
 	
 	var pAssignment = new QVTi!PropertyAssignment;
 	pAssignment.targetProperty = refProp;
-	pAssignment.value = s.createPropertyAssignmentValue(leftVar);
+	pAssignment.value = s.ownedInit.createPropertyAssignmentValue(leftVar);
 	pAssignment.slotExpression = asTypeOpCallExp;
 	
 	var guardPattern = new QVTi!GuardPattern;	
@@ -173,77 +173,131 @@ rule ShadowPart2UpdateMapping
 	t.bottomPattern = bottomPattern;
 }
 
-operation OCL!ShadowExp createCreationMapping_LeftDomain ( ) : QVTi!CoreDomain {
-	var contextType = self.getExpressionContextType();
-	var domain = new QVTi!CoreDomain;	
-	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= LEFT);
-	domain.isCheckable = true;
+rule AstOpWithNoShadowExps2UpdateMapping
+	transform s : OCL!Operation
+	to t : QVTi!Mapping {
 	
-	var guardPattern = new QVTi!GuardPattern;	
+	guard {
+		// FIXME this is hazardy. Rework
+		// Ideally lazy transformation on the content of the OCL Model should avoid calling
+		// this rule on undesired elemenets (imported from other ocl files)
+		return s.closure(x|x.eContainer()).contains(LEFTCS_PACKAGE) and
+			   s.isAstOp() and 
+			   not s.isInvalidOp() and
+			   not s.getAllContents().exists(x | x.isKindOf(OCL!ShadowExp));
+	}
+	
+	t.name = s.getUpdateMappingName();
+	
+	var rightDomain = s.createUpdateMapping_RightDomain();
+	var leftDomain = s.createUpdateMapping_LeftDomain();
+	
+	t.domain.add(leftDomain);
+	t.domain.add(rightDomain);
+		
+	// Bottom pattern expression : AssignmentExp
+	var leftVar = leftDomain.guardPattern.variable.first();
+		
+	var varExpression = new QVTi!VariableExp;
+	varExpression.referredVariable = leftVar;
+	varExpression.type = varExpression.referredVariable.type;
+	var traceabilityProperty = varExpression.type.getTraceabilityProperty();
+	
+	var pAssignment = new QVTi!PropertyAssignment;
+	pAssignment.targetProperty = traceabilityProperty;
+	pAssignment.value = s.bodyExpression.ownedBody.createPropertyAssignmentValue(leftVar);
+	pAssignment.slotExpression = varExpression;
+	
+	var guardPattern = new QVTi!GuardPattern;
 	var bottomPattern = new QVTi!BottomPattern;
+	bottomPattern.assignment.add(pAssignment);
 	
-	var variable = new QVTi!Variable;
-	variable.name = contextType.name.firstToLowerCase();
-	variable.type = contextType;
+	t.guardPattern = guardPattern;
+	t.bottomPattern = bottomPattern;
 	
-	guardPattern.variable.add(variable);
-	
+}
+
+operation createDomain() : QVTi!CoreDomain {
+
+	var domain = new QVTi!CoreDomain;
+	var guardPattern = new QVTi!GuardPattern;	
+	var bottomPattern = new QVTi!BottomPattern;	
 	domain.guardPattern = guardPattern;
 	domain.bottomPattern = bottomPattern;
 	return domain;
+}
+
+
+operation OCL!Type create_LeftDomain() :  QVTi!CoreDomain {
+
+	var domain = createDomain();	
+	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= LEFT);
+	domain.isCheckable = true;
+		
+	var variable = new QVTi!Variable;
+	variable.name = self.name.firstToLowerCase();
+	variable.type = self;
+	
+	domain.guardPattern.variable.add(variable);
+	return domain;
+}
+
+operation OCL!Type create_RightDomain() : QVTi!CoreDomain {
+
+	var domain = createDomain();
+	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= RIGHT);
+	domain.isEnforceable = true;
+	
+	var variable = new QVTi!RealizedVariable;
+	variable.name = self.name.firstToLowerCase();
+	variable.type = self;
+	
+	domain.bottomPattern.realizedVariable.add(variable);
+	return domain;
+}
+
+operation OCL!ShadowExp createCreationMapping_LeftDomain ( ) : QVTi!CoreDomain {
+	var contextType = self.getExpressionContextType();
+	return contextType.create_LeftDomain();
 }
 
 
 operation OCL!ShadowExp createCreationMapping_RightDomain () : QVTi!CoreDomain {
 	var constructedType = self.type;
-		
-	var domain = new QVTi!CoreDomain;
-	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= RIGHT);
-	domain.isEnforceable = true;
-	
-	var guardPattern = new QVTi!GuardPattern;	
-	var bottomPattern = new QVTi!BottomPattern;
-	
-	var variable = new QVTi!RealizedVariable;
-	variable.name = constructedType.name.firstToLowerCase();
-	variable.type = constructedType;
-
-	bottomPattern.realizedVariable.add(variable);
-	
-	domain.guardPattern = guardPattern;
-	domain.bottomPattern = bottomPattern;
-	return domain;
+	return constructedType.create_RightDomain();	
 }
 
 operation OCL!ShadowExp createUpdateMapping_LeftDomain ( ) : QVTi!CoreDomain {
-	// It's exactly the same domain as we have for the creation mappings
-	return self.createCreationMapping_LeftDomain();
+	var contextType = self.getExpressionContextType();
+	return contextType.create_LeftDomain();
 }
 
-
 operation OCL!ShadowExp createUpdateMapping_RightDomain () : QVTi!CoreDomain {
-	var constructedType = self.type;
-		
-	var domain = new QVTi!CoreDomain;
+	var domain = createDomain();
 	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= RIGHT);
 	domain.isEnforceable = true;
-	
-	var guardPattern = new QVTi!GuardPattern;	
-	var bottomPattern = new QVTi!BottomPattern;
-	
-	domain.guardPattern = guardPattern;
-	domain.bottomPattern = bottomPattern;
 	return domain;
 }
 
-operation OCL!ShadowPart createPropertyAssignmentValue(leftVar : QVTi!Variable) : OCL!OCLExpression {
-	-- FIXME what happens with synthetised types ????
-	var initExp = self.ownedInit;
-	var eUtil = emfTool.getEcoreUtil();
-	var newInitExp = eUtil.copy(initExp);
-	-- We need to replace the OCL refered "self" varible by the QVTi domain "leftVar" and ast op calls
-	return newInitExp.doReplacements(leftVar);
+operation OCL!Operation createUpdateMapping_LeftDomain ( ) : QVTi!CoreDomain {
+	var contextType = self.getContextType();
+	return contextType.create_LeftDomain();
+}
 
+
+operation OCL!Operation createUpdateMapping_RightDomain () : QVTi!CoreDomain {
+	var domain = createDomain();
+	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= RIGHT);
+	domain.isEnforceable = true;
+	return domain;
+}
+
+operation OCL!OCLExpression createPropertyAssignmentValue(leftVar : QVTi!Variable) : OCL!OCLExpression {
+	-- FIXME what happens with synthetised types ????
+	var eUtil = emfTool.getEcoreUtil();
+	var newExp = eUtil.copy(self);
+	-- We need to replace the OCL refered "self" varible by the QVTi domain "leftVar" and ast op calls
+	return newExp.doReplacements(leftVar);
 }
 
 operation OCL!OCLExpression doReplacements(leftVar : QVTi!Variable) : OCL!OCLExpression {
@@ -334,39 +388,54 @@ operation OCL!Element isSelfVarExp() : Boolean {
 }
 
 operation OCL!Element isAstOpCallExp() : Boolean {
-	return self.isKindOf(OCL!OperationCallExp) and self.referredOperation.name = 'ast';
+	return self.isKindOf(OCL!OperationCallExp) and self.referredOperation.isAstOp();
 }
 
+operation OCL!Operation isAstOp() : Boolean {
+	return self.name = 'ast'; 
+}
+
+operation OCL!Operation isInvalidOp () : Boolean {
+    // return not self.bodyExpression.ownedContext.type.isIsAbstract;
+	return self.bodyExpression.isDefined() and
+		self.bodyExpression.ownedBody.type = getOclInvalid();
+}
 
 operation OCL!ShadowPart getAstCalls() : Collection(OCL!OperationCallExpression) {
 	  
 	return self.ownedInit.getAllContents().including(self.ownedInit)
-			.select(x | x.isKindOf(OCL!OperationCallExp) and x.referredOperation.name = 'ast' );
+			.select(x | x.isAstOpCallExp());
 }
 
-operation OCL!Type getTraceabilityProperty() : OCL!Property {
-	// return self.ownedAttribute.selectOne(x | x.name = 'ast'); // FIXME can we parameterize the traceability property name ?
-	return self.asSequence().closure(x | x.superClasses).ownedProperties.flatten().selectOne(x | x.name = traceabilityPropName);
-}
 
+@cached
 operation getOclAnyEqualsOp() : OCL!Operation {
  	return OclStdLib!Class.all.selectOne(x | x.name = 'OclAny').ownedOperations
 						   .selectOne(x | x.name = '=');
 }
 
+@cached
 operation getOclMetaClass() : OCL!Class {
 	return OclStdLib!Class.all.selectOne(x | x.name = 'Class');
 }
 
+@cached
+operation getOclInvalid() : OCL!Class {
+	return OclStdLib!Class.all.selectOne(x | x.name = 'OclInvalid');
+}
+
+@cached
 operation getOclAnyOclAsTypeOp() : OCL!Operation {
 	return OclStdLib!Class.all.selectOne(x | x.name = 'OclAny').ownedOperations
 						   .selectOne(x | x.name = 'oclAsType');
 }
 
+@cached
 operation getBooleanPrimitiveType() : OCL!PrimitiveType {
 	return OclStdLib!PrimitiveType.all.selectOne(x | x.name = 'Boolean');
 }
 
+@cached
 operation getBooleanNotOp() : OCL!Operation {
  	return OclStdLib!Class.all.selectOne(x | x.name = 'Boolean').ownedOperations
 						   .selectOne(x | x.name = 'not');

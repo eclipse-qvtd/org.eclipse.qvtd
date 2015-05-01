@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see example1.source.SourcePackage#getSElement()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface SElement extends EObject {

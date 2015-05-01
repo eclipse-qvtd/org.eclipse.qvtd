@@ -499,13 +499,22 @@ public interface SourcePackage extends EPackage {
 	int PATH_NAME_CS__PATH = SELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_NAME_CS__CONTEXT = SELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Path Name CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PATH_NAME_CS_FEATURE_COUNT = SELEMENT_FEATURE_COUNT + 1;
+	int PATH_NAME_CS_FEATURE_COUNT = SELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Path Name CS</em>' class.
@@ -545,13 +554,22 @@ public interface SourcePackage extends EPackage {
 	int PATH_ELEMENT_CS__NAME = SELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Path Name</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_ELEMENT_CS__PATH_NAME = SELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Path Element CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PATH_ELEMENT_CS_FEATURE_COUNT = SELEMENT_FEATURE_COUNT + 1;
+	int PATH_ELEMENT_CS_FEATURE_COUNT = SELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Path Element CS</em>' class.
@@ -776,6 +794,17 @@ public interface SourcePackage extends EPackage {
 	EReference getPathNameCS_Path();
 
 	/**
+	 * Returns the meta object for the reference '{@link example1.source.PathNameCS#getContext <em>Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Context</em>'.
+	 * @see example1.source.PathNameCS#getContext()
+	 * @see #getPathNameCS()
+	 * @generated
+	 */
+	EReference getPathNameCS_Context();
+
+	/**
 	 * Returns the meta object for class '{@link example1.source.PathElementCS <em>Path Element CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -795,6 +824,17 @@ public interface SourcePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPathElementCS_Name();
+
+	/**
+	 * Returns the meta object for the container reference '{@link example1.source.PathElementCS#getPathName <em>Path Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Path Name</em>'.
+	 * @see example1.source.PathElementCS#getPathName()
+	 * @see #getPathElementCS()
+	 * @generated
+	 */
+	EReference getPathElementCS_PathName();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -996,6 +1036,14 @@ public interface SourcePackage extends EPackage {
 		EReference PATH_NAME_CS__PATH = eINSTANCE.getPathNameCS_Path();
 
 		/**
+		 * The meta object literal for the '<em><b>Context</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PATH_NAME_CS__CONTEXT = eINSTANCE.getPathNameCS_Context();
+
+		/**
 		 * The meta object literal for the '{@link example1.source.impl.PathElementCSImpl <em>Path Element CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1012,6 +1060,14 @@ public interface SourcePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PATH_ELEMENT_CS__NAME = eINSTANCE.getPathElementCS_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Path Name</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PATH_ELEMENT_CS__PATH_NAME = eINSTANCE.getPathElementCS_PathName();
 
 	}
 

@@ -3,18 +3,19 @@ import 'TargetMM1.ecore'
 import 'SourceDisambiguation.ocl'
 import 'TargetLookup.ocl'
 
-
 package source
 
+context SElement
+def : ast() : target::Visitable =
+	invalid -- To be overriden by subtypes
+	
 context SRoot
 def : ast() : target::TRoot =
 	target::TRoot {
 		ownedA = ownedX.ast()
 	}
 
-context X
-def : ast() : target::A =
-	invalid -- To be overriden
+
 
 context X
 def : ast() : target::A =
@@ -47,22 +48,46 @@ def : ast() : target::C =
 		ownsD = ownsZ.ast(),
 		name = name
 	}
-
-context Z
-def : ast() : target::D =
-	invalid -- To be overriden
 	
 context Z
 def : ast() : target::D =
-	if toY.oclIsKindOf(source::Y1)
+	if toY.oclIsKindOf(Y1)
 	then target::D {
-		toA = toY.oclAsType(source::Y1).ast().toA1,
-		refsB = ast().lookupB(self)
+		toA = toY.oclAsType(Y1).ast().toA1,
+		refsB = if refers = null
+				then null
+				else refers.ast().oclAsType(target::B)
+				endif
 	}
 	else target::D {
-		toA = toY.oclAsType(source::Y2).ast().toA2,
-		refsC = ast().lookupC(self)
+		toA = toY.oclAsType(Y2).ast().toA2,
+		refsC = if refers = null
+				then null
+				else refers.ast().oclAsType(target::C)
+				endif
 	}
 	endif
+
+context PathNameCS 
+def : ast() : target::NamedElement =
+	path->at(path->size()).ast()
 	
+context PathElementCS 
+def : ast() : target::NamedElement =
+	let path  = pathName.path,
+		lookupContext  = pathName.oclContainer().oclAsType(SElement).ast(),
+		first = path->at(1),
+		last = path->at(path->size())
+	in  if self = first  -- A lookup for the first path element, will be non local lookup
+		then if self = last
+			then lookupContext._lookupNamedElement(self, false)
+			else lookupContext._lookupNamespace(self, false)
+			endif
+		else -- else, we will perform a local lookup in the referred element of the previous PathElementCS
+			let prevPathElement = path->at(path->indexOf(self)-1)
+			in if self = last
+				then  prevPathElement.ast()._lookupNamedElement(self, true)
+				else  prevPathElement.ast()._lookupNamespace(self, true)
+				endif
+		endif
 endpackage

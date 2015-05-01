@@ -13,13 +13,17 @@
 package example1.source.impl;
 
 import example1.source.PathElementCS;
+import example1.source.PathNameCS;
 import example1.source.SourcePackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,6 +34,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link example1.source.impl.PathElementCSImpl#getName <em>Name</em>}</li>
+ *   <li>{@link example1.source.impl.PathElementCSImpl#getPathName <em>Path Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -100,11 +105,98 @@ public class PathElementCSImpl extends SElementImpl implements PathElementCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public PathNameCS getPathName() {
+		if (eContainerFeatureID() != SourcePackage.PATH_ELEMENT_CS__PATH_NAME) return null;
+		return (PathNameCS)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetPathName(PathNameCS newPathName, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newPathName, SourcePackage.PATH_ELEMENT_CS__PATH_NAME, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPathName(PathNameCS newPathName) {
+		if (newPathName != eInternalContainer() || (eContainerFeatureID() != SourcePackage.PATH_ELEMENT_CS__PATH_NAME && newPathName != null)) {
+			if (EcoreUtil.isAncestor(this, newPathName))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newPathName != null)
+				msgs = ((InternalEObject)newPathName).eInverseAdd(this, SourcePackage.PATH_NAME_CS__PATH, PathNameCS.class, msgs);
+			msgs = basicSetPathName(newPathName, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.PATH_ELEMENT_CS__PATH_NAME, newPathName, newPathName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SourcePackage.PATH_ELEMENT_CS__PATH_NAME:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetPathName((PathNameCS)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SourcePackage.PATH_ELEMENT_CS__PATH_NAME:
+				return basicSetPathName(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case SourcePackage.PATH_ELEMENT_CS__PATH_NAME:
+				return eInternalContainer().eInverseRemove(this, SourcePackage.PATH_NAME_CS__PATH, PathNameCS.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SourcePackage.PATH_ELEMENT_CS__NAME:
 				return getName();
+			case SourcePackage.PATH_ELEMENT_CS__PATH_NAME:
+				return getPathName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -119,6 +211,9 @@ public class PathElementCSImpl extends SElementImpl implements PathElementCS {
 		switch (featureID) {
 			case SourcePackage.PATH_ELEMENT_CS__NAME:
 				setName((String)newValue);
+				return;
+			case SourcePackage.PATH_ELEMENT_CS__PATH_NAME:
+				setPathName((PathNameCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -135,6 +230,9 @@ public class PathElementCSImpl extends SElementImpl implements PathElementCS {
 			case SourcePackage.PATH_ELEMENT_CS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case SourcePackage.PATH_ELEMENT_CS__PATH_NAME:
+				setPathName((PathNameCS)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -149,6 +247,8 @@ public class PathElementCSImpl extends SElementImpl implements PathElementCS {
 		switch (featureID) {
 			case SourcePackage.PATH_ELEMENT_CS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case SourcePackage.PATH_ELEMENT_CS__PATH_NAME:
+				return getPathName() != null;
 		}
 		return super.eIsSet(featureID);
 	}

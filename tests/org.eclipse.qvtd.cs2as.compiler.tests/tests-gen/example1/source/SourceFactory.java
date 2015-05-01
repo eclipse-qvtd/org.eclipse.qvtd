@@ -77,15 +77,6 @@ public interface SourceFactory extends EFactory {
 	SRoot createSRoot();
 
 	/**
-	 * Returns a new object of class '<em>SElement</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>SElement</em>'.
-	 * @generated
-	 */
-	SElement createSElement();
-
-	/**
 	 * Returns a new object of class '<em>Path Name CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

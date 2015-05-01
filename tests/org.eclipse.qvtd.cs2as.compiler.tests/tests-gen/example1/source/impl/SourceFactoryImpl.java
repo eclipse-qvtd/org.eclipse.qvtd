@@ -77,7 +77,6 @@ public class SourceFactoryImpl extends EFactoryImpl implements SourceFactory {
 			case SourcePackage.Y2: return createY2();
 			case SourcePackage.Z: return createZ();
 			case SourcePackage.SROOT: return createSRoot();
-			case SourcePackage.SELEMENT: return createSElement();
 			case SourcePackage.PATH_NAME_CS: return createPathNameCS();
 			case SourcePackage.PATH_ELEMENT_CS: return createPathElementCS();
 			default:
@@ -133,16 +132,6 @@ public class SourceFactoryImpl extends EFactoryImpl implements SourceFactory {
 	public SRoot createSRoot() {
 		SRootImpl sRoot = new SRootImpl();
 		return sRoot;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SElement createSElement() {
-		SElementImpl sElement = new SElementImpl();
-		return sElement;
 	}
 
 	/**

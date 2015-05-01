@@ -35,7 +35,7 @@ import example1.source.SourcePackage;
  *
  * @generated
  */
-public class SElementImpl extends MinimalEObjectImpl.Container implements SElement {
+public abstract class SElementImpl extends MinimalEObjectImpl.Container implements SElement {
 	/**
 	 * The cached value of the '{@link #getAst() <em>Ast</em>}' reference.
 	 * <!-- begin-user-doc -->

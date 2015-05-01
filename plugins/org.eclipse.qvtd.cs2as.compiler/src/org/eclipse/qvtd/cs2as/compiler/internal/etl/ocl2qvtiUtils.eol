@@ -1,6 +1,14 @@
-	
+-- globalVars: traceabilityPropName
+--  
+-- in order to use getTraceabilityProperty() helper operation a traceabilityPropName should have been defined
+--
+--
 operation OCL!ShadowExp getExpressionContextType () : OCL!Class {
 	return self.getContainingExpressionInOCL().ownedContext.type;
+}
+
+operation OCL!Operation getContextType () : OCL!Class {
+	return self.bodyExpression.ownedContext.type;
 }
 
 operation OCL!OCLExpression getContainingExpressionInOCL() {
@@ -30,6 +38,16 @@ operation OCL!ShadowPart getUpdateMappingName() : String {
  	var ShadowExp = self.eContainer();
  	var refProp = self.referredProperty;
 	return 'u' + ShadowExp.getShadowTypeName() + '_' + refProp.name;
+}
+
+operation OCL!Operation getUpdateMappingName() : String {
+ 	var opType = self.bodyExpression.ownedContext.type; 	
+	return 'u' + opType.name + '_' + opType.getTraceabilityProperty().name;
+}
+
+operation OCL!Type getTraceabilityProperty() : OCL!Property {
+	// return self.ownedAttribute.selectOne(x | x.name = 'ast'); // FIXME can we parameterize the traceability property name ?
+	return self.asSequence().closure(x | x.superClasses).including(self).ownedProperties.flatten().selectOne(x | x.name = traceabilityPropName);
 }
 
 // FIXME clash naming
