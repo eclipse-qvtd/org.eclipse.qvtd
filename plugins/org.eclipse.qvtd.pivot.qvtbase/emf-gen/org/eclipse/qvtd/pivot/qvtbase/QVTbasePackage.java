@@ -1161,13 +1161,22 @@ public interface QVTbasePackage extends EPackage {
 	int TRANSFORMATION__EXTENDS = PivotPackage.CLASS_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Owned Context</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION__OWNED_CONTEXT = PivotPackage.CLASS_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Transformation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_FEATURE_COUNT = PivotPackage.CLASS_FEATURE_COUNT + 4;
+	int TRANSFORMATION_FEATURE_COUNT = PivotPackage.CLASS_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl <em>Typed Model</em>}' class.
@@ -1252,13 +1261,22 @@ public interface QVTbasePackage extends EPackage {
 	int TYPED_MODEL__DEPENDS_ON = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Owned Context</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_MODEL__OWNED_CONTEXT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Typed Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_MODEL_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int TYPED_MODEL_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 
 	/**
@@ -1540,6 +1558,17 @@ public interface QVTbasePackage extends EPackage {
 	EReference getTransformation_Extends();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getOwnedContext <em>Owned Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Context</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Transformation#getOwnedContext()
+	 * @see #getTransformation()
+	 * @generated
+	 */
+	EReference getTransformation_OwnedContext();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel <em>Typed Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1581,6 +1610,17 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTypedModel_DependsOn();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getOwnedContext <em>Owned Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Context</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.TypedModel#getOwnedContext()
+	 * @see #getTypedModel()
+	 * @generated
+	 */
+	EReference getTypedModel_OwnedContext();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1829,6 +1869,14 @@ public interface QVTbasePackage extends EPackage {
 		EReference TRANSFORMATION__EXTENDS = eINSTANCE.getTransformation_Extends();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Context</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSFORMATION__OWNED_CONTEXT = eINSTANCE.getTransformation_OwnedContext();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl <em>Typed Model</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1861,6 +1909,14 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPED_MODEL__DEPENDS_ON = eINSTANCE.getTypedModel_DependsOn();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Context</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPED_MODEL__OWNED_CONTEXT = eINSTANCE.getTypedModel_OwnedContext();
 
 	}
 

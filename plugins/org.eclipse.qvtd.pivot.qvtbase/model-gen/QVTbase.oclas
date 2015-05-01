@@ -45,6 +45,8 @@
           type="#T.qvtbase.Transformation"/>
       <ownedProperties xmi:id="p.qvtbase.Transformation.modelParameter" isComposite="true" name="modelParameter" opposite="#p.qvtbase.TypedModel.transformation"
           type="#//@ownedPackages.2/@ownedClasses.14"/>
+      <ownedProperties xmi:id="p.qvtbase.Transformation.ownedContext" isComposite="true" isRequired="false" name="ownedContext" opposite="#p.pivot.Variable.Transformation"
+          type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"/>
       <ownedProperties xmi:id="p.qvtbase.Transformation.ownedTag" isComposite="true" name="ownedTag" opposite="#p.pivot.Annotation.Transformation"
           type="#//@ownedPackages.2/@ownedClasses.15"/>
       <ownedProperties xmi:id="p.qvtbase.Transformation.rule" isComposite="true" name="rule" opposite="#p.qvtbase.Rule.transformation"
@@ -54,6 +56,8 @@
     </ownedClasses>
     <ownedClasses xmi:id="T.qvtbase.TypedModel" name="TypedModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement">
       <ownedProperties xmi:id="p.qvtbase.TypedModel.dependsOn" name="dependsOn" opposite="#p.qvtbase.TypedModel.dependent" type="#//@ownedPackages.2/@ownedClasses.20"/>
+      <ownedProperties xmi:id="p.qvtbase.TypedModel.ownedContext" isComposite="true" isRequired="false" name="ownedContext" opposite="#p.pivot.Variable.TypedModel"
+          type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"/>
       <ownedProperties xmi:id="p.qvtbase.TypedModel.transformation" isTransient="true" name="transformation" opposite="#p.qvtbase.Transformation.modelParameter"
           type="#T.qvtbase.Transformation"/>
       <ownedProperties xmi:id="p.qvtbase.TypedModel.usedPackage" name="usedPackage" opposite="#p.pivot.Package.TypedModel" type="#//@ownedPackages.2/@ownedClasses.16"/>
@@ -79,6 +83,10 @@
     </ownedClasses>
     <ownedClasses xmi:id="T.pivot.Variable" name="Variable">
       <ownedProperties xmi:id="p.pivot.Variable.Pattern" isImplicit="true" name="Pattern" opposite="#p.qvtbase.Pattern.bindsTo" type="#//@ownedPackages.2/@ownedClasses.1"/>
+      <ownedProperties xmi:id="p.pivot.Variable.Transformation" isImplicit="true" isRequired="false" name="Transformation" opposite="#p.qvtbase.Transformation.ownedContext"
+          type="#T.qvtbase.Transformation"/>
+      <ownedProperties xmi:id="p.pivot.Variable.TypedModel" isImplicit="true" isRequired="false" name="TypedModel" opposite="#p.qvtbase.TypedModel.ownedContext"
+          type="#T.qvtbase.TypedModel"/>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">

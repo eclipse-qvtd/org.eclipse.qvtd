@@ -72,6 +72,8 @@
         <details key="body" value="extendedBy"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedContext" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypedModel" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" lowerBound="1"
@@ -84,5 +86,7 @@
         <details key="body" value="dependent"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedContext" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

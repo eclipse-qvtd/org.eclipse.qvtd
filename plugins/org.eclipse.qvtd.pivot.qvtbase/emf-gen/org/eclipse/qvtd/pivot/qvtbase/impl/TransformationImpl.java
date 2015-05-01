@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.ClassImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -46,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getModelParameter <em>Model Parameter</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getRule <em>Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getExtends <em>Extends</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedContext <em>Owned Context</em>}</li>
  * </ul>
  *
  * @generated
@@ -90,6 +92,16 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @ordered
 	 */
 	protected Transformation extends_;
+
+	/**
+	 * The cached value of the '{@link #getOwnedContext() <em>Owned Context</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected Variable ownedContext;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -198,6 +210,51 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @generated
 	 */
 	@Override
+	public Variable getOwnedContext() {
+		return ownedContext;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedContext(Variable newOwnedContext, NotificationChain msgs) {
+		Variable oldOwnedContext = ownedContext;
+		ownedContext = newOwnedContext;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT, oldOwnedContext, newOwnedContext);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedContext(Variable newOwnedContext) {
+		if (newOwnedContext != ownedContext) {
+			NotificationChain msgs = null;
+			if (ownedContext != null)
+				msgs = ((InternalEObject)ownedContext).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT, null, msgs);
+			if (newOwnedContext != null)
+				msgs = ((InternalEObject)newOwnedContext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT, null, msgs);
+			msgs = basicSetOwnedContext(newOwnedContext, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT, newOwnedContext, newOwnedContext));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Function getFunction(String name) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -235,6 +292,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return ((InternalEList<?>)getModelParameter()).basicRemove(otherEnd, msgs);
 			case QVTbasePackage.TRANSFORMATION__RULE:
 				return ((InternalEList<?>)getRule()).basicRemove(otherEnd, msgs);
+			case QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT:
+				return basicSetOwnedContext(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -256,6 +315,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case QVTbasePackage.TRANSFORMATION__EXTENDS:
 				if (resolve) return getExtends();
 				return basicGetExtends();
+			case QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT:
+				return getOwnedContext();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -284,6 +345,9 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case QVTbasePackage.TRANSFORMATION__EXTENDS:
 				setExtends((Transformation)newValue);
 				return;
+			case QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT:
+				setOwnedContext((Variable)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -308,6 +372,9 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case QVTbasePackage.TRANSFORMATION__EXTENDS:
 				setExtends((Transformation)null);
 				return;
+			case QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT:
+				setOwnedContext((Variable)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -328,6 +395,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return rule != null && !rule.isEmpty();
 			case QVTbasePackage.TRANSFORMATION__EXTENDS:
 				return extends_ != null;
+			case QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT:
+				return ownedContext != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -1128,6 +1128,15 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATIONAL_TRANSFORMATION__EXTENDS = QVTbasePackage.TRANSFORMATION__EXTENDS;
 
 	/**
+	 * The feature id for the '<em><b>Owned Context</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATIONAL_TRANSFORMATION__OWNED_CONTEXT = QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Owned Key</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

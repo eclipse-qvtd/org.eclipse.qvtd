@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtbase;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,6 +27,7 @@ import org.eclipse.ocl.pivot.NamedElement;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getUsedPackage <em>Used Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getDependsOn <em>Depends On</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getOwnedContext <em>Owned Context</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel()
@@ -93,5 +95,31 @@ public interface TypedModel extends NamedElement {
 	 * @generated
 	 */
 	@NonNull EList<TypedModel> getDependsOn();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Context</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Context</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Context</em>' containment reference.
+	 * @see #setOwnedContext(Variable)
+	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel_OwnedContext()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Variable getOwnedContext();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getOwnedContext <em>Owned Context</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Context</em>' containment reference.
+	 * @see #getOwnedContext()
+	 * @generated
+	 */
+	void setOwnedContext(Variable value);
 
 } // TypedModel

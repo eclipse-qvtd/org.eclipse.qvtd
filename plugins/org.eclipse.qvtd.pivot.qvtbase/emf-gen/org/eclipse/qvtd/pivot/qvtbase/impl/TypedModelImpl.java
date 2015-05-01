@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -40,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#getUsedPackage <em>Used Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#getDependsOn <em>Depends On</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#getOwnedContext <em>Owned Context</em>}</li>
  * </ul>
  *
  * @generated
@@ -64,6 +66,16 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @ordered
 	 */
 	protected EList<TypedModel> dependsOn;
+
+	/**
+	 * The cached value of the '{@link #getOwnedContext() <em>Owned Context</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected Variable ownedContext;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,6 +173,51 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @generated
 	 */
 	@Override
+	public Variable getOwnedContext() {
+		return ownedContext;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedContext(Variable newOwnedContext, NotificationChain msgs) {
+		Variable oldOwnedContext = ownedContext;
+		ownedContext = newOwnedContext;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT, oldOwnedContext, newOwnedContext);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedContext(Variable newOwnedContext) {
+		if (newOwnedContext != ownedContext) {
+			NotificationChain msgs = null;
+			if (ownedContext != null)
+				msgs = ((InternalEObject)ownedContext).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT, null, msgs);
+			if (newOwnedContext != null)
+				msgs = ((InternalEObject)newOwnedContext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT, null, msgs);
+			msgs = basicSetOwnedContext(newOwnedContext, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT, newOwnedContext, newOwnedContext));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTbasePackage.TYPED_MODEL__TRANSFORMATION:
@@ -181,6 +238,8 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 		switch (featureID) {
 			case QVTbasePackage.TYPED_MODEL__TRANSFORMATION:
 				return basicSetTransformation(null, msgs);
+			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
+				return basicSetOwnedContext(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -213,6 +272,8 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				return getUsedPackage();
 			case QVTbasePackage.TYPED_MODEL__DEPENDS_ON:
 				return getDependsOn();
+			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
+				return getOwnedContext();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -237,6 +298,9 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				getDependsOn().clear();
 				getDependsOn().addAll((Collection<? extends TypedModel>)newValue);
 				return;
+			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
+				setOwnedContext((Variable)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -258,6 +322,9 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 			case QVTbasePackage.TYPED_MODEL__DEPENDS_ON:
 				getDependsOn().clear();
 				return;
+			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
+				setOwnedContext((Variable)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -276,6 +343,8 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				return usedPackage != null && !usedPackage.isEmpty();
 			case QVTbasePackage.TYPED_MODEL__DEPENDS_ON:
 				return dependsOn != null && !dependsOn.isEmpty();
+			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
+				return ownedContext != null;
 		}
 		return super.eIsSet(featureID);
 	}
