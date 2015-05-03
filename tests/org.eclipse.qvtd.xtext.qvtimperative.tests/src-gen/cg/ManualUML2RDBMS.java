@@ -275,7 +275,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ PackageToSchema p2s_11 = UML2RDBMSFactory.eINSTANCE.createPackageToSchema();
         assert p2s_11 != null;
-        modelObjects[2/*middle*/].add(p2s_11);
+        models[2/*middle*/].add(p2s_11);
         // assignments
         p2s_11.setUmlPackage(p);
         final @Nullable /*@Thrown*/ String name = p.getName();
@@ -363,7 +363,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ Schema s_2 = RDBMSFactory.eINSTANCE.createSchema();
         assert s_2 != null;
-        modelObjects[1/*rdbms*/].add(s_2);
+        models[1/*rdbms*/].add(s_2);
         // assignments
         p2s.setSchema(s_2);
         // mapping statements
@@ -468,7 +468,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ PrimitiveToName p2n_3 = UML2RDBMSFactory.eINSTANCE.createPrimitiveToName();
         assert p2n_3 != null;
-        modelObjects[2/*middle*/].add(p2n_3);
+        models[2/*middle*/].add(p2n_3);
         // assignments
         p2n_3.setOwner(p2s_0);
         p2n_3.setPrimitive(prim);
@@ -567,7 +567,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ PrimitiveToName p2n_3 = UML2RDBMSFactory.eINSTANCE.createPrimitiveToName();
         assert p2n_3 != null;
-        modelObjects[2/*middle*/].add(p2n_3);
+        models[2/*middle*/].add(p2n_3);
         // assignments
         p2n_3.setOwner(p2s_3);
         p2n_3.setPrimitive(prim_0);
@@ -666,7 +666,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ PrimitiveToName p2n_3 = UML2RDBMSFactory.eINSTANCE.createPrimitiveToName();
         assert p2n_3 != null;
-        modelObjects[2/*middle*/].add(p2n_3);
+        models[2/*middle*/].add(p2n_3);
         // assignments
         p2n_3.setOwner(p2s_5);
         p2n_3.setPrimitive(prim_1);
@@ -784,7 +784,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ ClassToTable c2t_3 = UML2RDBMSFactory.eINSTANCE.createClassToTable();
         assert c2t_3 != null;
-        modelObjects[2/*middle*/].add(c2t_3);
+        models[2/*middle*/].add(c2t_3);
         // assignments
         c2t_3.setOwner(p2s_7);
         c2t_3.setUmlClass(c);
@@ -882,7 +882,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ Table t_0 = RDBMSFactory.eINSTANCE.createTable();
         assert t_0 != null;
-        modelObjects[1/*rdbms*/].add(t_0);
+        models[1/*rdbms*/].add(t_0);
         // assignments
         t_0.setKind(STR_base);
         t_0.setSchema(s);
@@ -1024,10 +1024,10 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ Column pc = RDBMSFactory.eINSTANCE.createColumn();
         assert pc != null;
-        modelObjects[1/*rdbms*/].add(pc);
+        models[1/*rdbms*/].add(pc);
         final /*@Thrown*/ Key pk = RDBMSFactory.eINSTANCE.createKey();
         assert pk != null;
-        modelObjects[1/*rdbms*/].add(pk);
+        models[1/*rdbms*/].add(pk);
         // assignments
         pk.setOwner(t_2);
         pk.setKind(STR_primary);
@@ -1198,7 +1198,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ AssociationToForeignKey a2f_0 = UML2RDBMSFactory.eINSTANCE.createAssociationToForeignKey();
         assert a2f_0 != null;
-        modelObjects[2/*middle*/].add(a2f_0);
+        models[2/*middle*/].add(a2f_0);
         // assignments
         sc2t_0.setOwner(p2s_9);
         a2f_0.setOwner(sc2t_0);
@@ -1380,10 +1380,10 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ Column fc_0 = RDBMSFactory.eINSTANCE.createColumn();
         assert fc_0 != null;
-        modelObjects[1/*rdbms*/].add(fc_0);
+        models[1/*rdbms*/].add(fc_0);
         final /*@Thrown*/ ForeignKey fk_0 = RDBMSFactory.eINSTANCE.createForeignKey();
         assert fk_0 != null;
-        modelObjects[1/*rdbms*/].add(fk_0);
+        models[1/*rdbms*/].add(fk_0);
         // assignments
         sc2t.setOwner(p2s_10);
         fk_0.setName(name);
@@ -1546,7 +1546,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ AttributeToColumn atc = UML2RDBMSFactory.eINSTANCE.createAttributeToColumn();
         assert atc != null;
-        modelObjects[2/*middle*/].add(atc);
+        models[2/*middle*/].add(atc);
         // assignments
         atc.setAttribute(a_0);
         OPPOSITE_OF_FromAttribute_attribute.put(a_0, atc);
@@ -1614,7 +1614,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ NonLeafAttribute fa = UML2RDBMSFactory.eINSTANCE.createNonLeafAttribute();
         assert fa != null;
-        modelObjects[2/*middle*/].add(fa);
+        models[2/*middle*/].add(fa);
         // assignments
         fa.setAttribute(a_1);
         OPPOSITE_OF_FromAttribute_attribute.put(a_1, fa);
@@ -1765,7 +1765,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ AttributeToColumn fa = UML2RDBMSFactory.eINSTANCE.createAttributeToColumn();
         assert fa != null;
-        modelObjects[2/*middle*/].add(fa);
+        models[2/*middle*/].add(fa);
         // assignments
         fa.setOwner(fao_1);
         final @NonNull /*@Thrown*/ SetValue Set = ValueUtil.createSetOfEach(SET_CLSSid_AttributeToColumn, fa);
@@ -1891,7 +1891,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ NonLeafAttribute fa = UML2RDBMSFactory.eINSTANCE.createNonLeafAttribute();
         assert fa != null;
-        modelObjects[2/*middle*/].add(fa);
+        models[2/*middle*/].add(fa);
         // assignments
         fa.setOwner(fao_1_0);
         final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes = fao_1_0.getFromAttributes();
@@ -1993,7 +1993,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ Column c_4 = RDBMSFactory.eINSTANCE.createColumn();
         assert c_4 != null;
-        modelObjects[1/*rdbms*/].add(c_4);
+        models[1/*rdbms*/].add(c_4);
         // assignments
         c_4.setOwner(t);
         // mapping statements

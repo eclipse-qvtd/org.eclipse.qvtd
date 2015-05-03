@@ -193,7 +193,7 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         // creations
         final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
         assert symbol_0 != null;
-        modelObjects[1/*rightAS*/].add(symbol_0);
+        models[1/*rightAS*/].add(symbol_0);
         // assignments
         @Nullable /*@Caught*/ Object CAUGHT_name;
         try {

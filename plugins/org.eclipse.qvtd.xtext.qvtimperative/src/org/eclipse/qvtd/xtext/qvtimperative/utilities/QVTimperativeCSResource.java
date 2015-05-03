@@ -26,6 +26,8 @@ import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
@@ -80,6 +82,12 @@ public class QVTimperativeCSResource extends EssentialOCLCSResource
 			return (Variable)element;
 		}
 		else if ((element instanceof Variable) && (element.eContainer() instanceof MappingLoop)) {
+			return (Variable)element;
+		}
+		else if ((element instanceof Variable) && (element.eContainer() instanceof Transformation)) {
+			return (Variable)element;
+		}
+		else if ((element instanceof Variable) && (element.eContainer() instanceof TypedModel)) {
 			return (Variable)element;
 		}
 		else {

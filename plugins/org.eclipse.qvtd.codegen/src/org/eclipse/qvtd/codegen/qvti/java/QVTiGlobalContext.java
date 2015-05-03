@@ -25,6 +25,8 @@ import org.eclipse.ocl.pivot.Property;
  */
 public class QVTiGlobalContext extends JavaGlobalContext<QVTiCodeGenerator>
 {
+	public static final @NonNull String MODELS_NAME = "models";
+	
 	/**
 	 * Map from an oppositeProperty that requites a cache to the global name of that cache. 
 	 */
@@ -33,7 +35,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<QVTiCodeGenerator>
 	public QVTiGlobalContext(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
 		nameManager.reserveName(JavaConstants.EVALUATOR_NAME, null);
-		nameManager.reserveName("modelObjects", null);
+		nameManager.reserveName(MODELS_NAME, null);
 	}
 
 	public String addOppositeProperty(@NonNull Property pivotProperty) {

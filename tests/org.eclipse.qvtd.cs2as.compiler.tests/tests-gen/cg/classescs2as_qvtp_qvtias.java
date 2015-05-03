@@ -199,7 +199,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         final /*@Thrown*/ example2.classes.Class symbol_0 = ClassesFactory.eINSTANCE.createClass();
         assert symbol_0 != null;
-        modelObjects[1/*rightAS*/].add(symbol_0);
+        models[1/*rightAS*/].add(symbol_0);
         // assignments
         classCS.setAst(symbol_0);
         // mapping statements
@@ -232,7 +232,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
         assert symbol_0 != null;
-        modelObjects[1/*rightAS*/].add(symbol_0);
+        models[1/*rightAS*/].add(symbol_0);
         // assignments
         packageCS.setAst(symbol_0);
         // mapping statements
@@ -265,7 +265,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         final /*@Thrown*/ Root root = ClassesFactory.eINSTANCE.createRoot();
         assert root != null;
-        modelObjects[1/*rightAS*/].add(root);
+        models[1/*rightAS*/].add(root);
         // assignments
         rootCS.setAst(root);
         // mapping statements

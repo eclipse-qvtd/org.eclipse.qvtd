@@ -39,9 +39,43 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 {	
 	private static final @SuppressWarnings("null")@NonNull List<Integer> EMPTY_INDEX_LIST = Collections.emptyList();
 	
+	protected class Model implements TypedModelInstance
+	{
+		protected final @NonNull String name;
+		protected final @NonNull List<EObject> objects = new ArrayList<EObject>();
+		
+		public Model(@NonNull String name) {
+			this.name = name;
+		}
+
+		public void add(@NonNull EObject eObject) {
+			objects.add(eObject);
+		}
+		
+		@Override
+		public @NonNull Set<Object> getAllObjects() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public @NonNull Set<Object> getObjectsOfKind(@NonNull org.eclipse.ocl.pivot.Class type) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public @NonNull Set<Object> getObjectsOfType(@NonNull org.eclipse.ocl.pivot.Class type) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public @NonNull Set<Object> getRootObjects() {
+			throw new UnsupportedOperationException();
+		}
+	}
+	
 	protected final @NonNull Evaluator evaluator;
 	protected final @NonNull IdResolver idResolver;
-	protected final @NonNull List<EObject>[] modelObjects;
+	protected final @NonNull Model[] models;
 	protected final @NonNull Map<String, Integer> modelIndexes = new HashMap<String, Integer>();
 
 	/**
@@ -86,11 +120,11 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 			@Nullable PropertyId[] propertyIndex2propertyId, @Nullable ClassId[] classIndex2classId, @Nullable int[][] classIndex2allClassIndexes) {
 		this.evaluator = evaluator;
 		this.idResolver = evaluator.getIdResolver();
-		@SuppressWarnings("unchecked")List<EObject>[] modelObjects = (List<EObject>[]) new List<?>[modelNames.length];
-		this.modelObjects = modelObjects;
+		this.models = new Model[modelNames.length];
 		for (int i = 0; i < modelNames.length; i++) {
-			modelObjects[i] = new ArrayList<EObject>();
-			modelIndexes.put(modelNames[i],  i);
+			@SuppressWarnings("null")@NonNull String modelName = modelNames[i];
+			models[i] = new Model(modelName);
+			modelIndexes.put(modelName,  i);
 		}
 		//
 		//	Prepare the unnavigable opposite property fields
@@ -200,7 +234,7 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
     	if (modelIndex == null) {
     		throw new IllegalStateException("Unknown model name '" + modelName + "'");
     	}
-    	List<EObject> eObjects = modelObjects[modelIndex];
+    	List<EObject> eObjects = models[modelIndex].objects;
     	Map<EClass, Set<Integer>> eClass2allClassIndexes = null;
 		Map<EClass, List<Integer>> eClass2allPropertyIndexes = null;
 		Map<EReference, Integer> eReference2propertyIndex = null;
@@ -277,7 +311,7 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
      */
     protected @NonNull <T extends EObject> List<T> getObjectsByType(@NonNull Class<T> javaClass, int modelIndex, @NonNull EClass eClass) {
 
-		List<EObject> eRootObjects = modelObjects[modelIndex];
+		List<EObject> eRootObjects = models[modelIndex].objects;
     	List<T> eObjects = new ArrayList<T>();
     	for (EObject eRootObject : eRootObjects) {
     		if (eClass.isInstance(eRootObject)) {
@@ -344,7 +378,7 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
     	if (modelIndex == null) {
     		throw new IllegalStateException("Unknown model name '" + modelName + "'");
     	}
-    	List<EObject> eObjects = modelObjects[modelIndex];
+    	List<EObject> eObjects = models[modelIndex].objects;
     	List<EObject> eRootObjects = new ArrayList<EObject>(eObjects.size());
     	for (EObject eObject : eObjects) {
     		if (eObject.eContainer() == null) {

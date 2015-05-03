@@ -236,7 +236,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         final /*@Thrown*/ TRoot tRoot = TargetFactory.eINSTANCE.createTRoot();
         assert tRoot != null;
-        modelObjects[1/*rightAS*/].add(tRoot);
+        models[1/*rightAS*/].add(tRoot);
         // assignments
         sRoot.setAst(tRoot);
         // mapping statements
@@ -281,7 +281,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         final /*@Thrown*/ A3 a3 = TargetFactory.eINSTANCE.createA3();
         assert a3 != null;
-        modelObjects[1/*rightAS*/].add(a3);
+        models[1/*rightAS*/].add(a3);
         // assignments
         x.setAst(a3);
         // mapping statements
@@ -325,7 +325,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         final /*@Thrown*/ A2 a2 = TargetFactory.eINSTANCE.createA2();
         assert a2 != null;
-        modelObjects[1/*rightAS*/].add(a2);
+        models[1/*rightAS*/].add(a2);
         // assignments
         x_0.setAst(a2);
         // mapping statements
@@ -363,7 +363,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         final /*@Thrown*/ A1 a1 = TargetFactory.eINSTANCE.createA1();
         assert a1 != null;
-        modelObjects[1/*rightAS*/].add(a1);
+        models[1/*rightAS*/].add(a1);
         // assignments
         x_1.setAst(a1);
         // mapping statements
@@ -396,7 +396,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         final /*@Thrown*/ B b = TargetFactory.eINSTANCE.createB();
         assert b != null;
-        modelObjects[1/*rightAS*/].add(b);
+        models[1/*rightAS*/].add(b);
         // assignments
         y1.setAst(b);
         // mapping statements
@@ -429,7 +429,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         final /*@Thrown*/ C c = TargetFactory.eINSTANCE.createC();
         assert c != null;
-        modelObjects[1/*rightAS*/].add(c);
+        models[1/*rightAS*/].add(c);
         // assignments
         y2.setAst(c);
         // mapping statements
@@ -471,7 +471,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         final /*@Thrown*/ D d = TargetFactory.eINSTANCE.createD();
         assert d != null;
-        modelObjects[1/*rightAS*/].add(d);
+        models[1/*rightAS*/].add(d);
         // assignments
         z.setAst(d);
         // mapping statements
@@ -512,7 +512,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         final /*@Thrown*/ D d = TargetFactory.eINSTANCE.createD();
         assert d != null;
-        modelObjects[1/*rightAS*/].add(d);
+        models[1/*rightAS*/].add(d);
         // assignments
         z_0.setAst(d);
         // mapping statements

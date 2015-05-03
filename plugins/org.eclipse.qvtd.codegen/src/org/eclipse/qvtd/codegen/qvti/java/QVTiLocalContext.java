@@ -10,11 +10,18 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.java;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * A QVTiLocalContext maintains the Java-specific local context for generation of QVTi code.
@@ -33,5 +40,31 @@ public class QVTiLocalContext extends JavaLocalContext<QVTiCodeGenerator>
 	@Override
 	public @NonNull QVTiGlobalContext getGlobalContext() {
 		return (QVTiGlobalContext) globalContext;
+	}
+
+	@Override
+	public @NonNull String getValueName(@NonNull CGValuedElement cgElement) {
+		String valueName = cgElement.getValueName();
+		if (valueName != null) {
+			return valueName;
+		}
+		if (cgElement instanceof CGVariableExp) {
+			CGVariable cgVariable = ((CGVariableExp)cgElement).getReferredVariable();
+			if (cgVariable != null) {
+				Element asVariable = cgVariable.getAst();
+				if (asVariable instanceof Variable) {
+					EObject asContainer = asVariable.eContainer();
+					if (asContainer instanceof TypedModel) {
+						Transformation asTransformation = ((TypedModel)asContainer).getTransformation();
+						if (asTransformation != null) {
+							int index = asTransformation.getModelParameter().indexOf(asContainer);
+							String name = QVTiGlobalContext.MODELS_NAME + "[" + index + "/*" + ((TypedModel)asContainer).getName() + "*/]";
+							return name;
+						}
+					}
+				}
+			}
+		}
+		return super.getValueName(cgElement);
 	}
 }

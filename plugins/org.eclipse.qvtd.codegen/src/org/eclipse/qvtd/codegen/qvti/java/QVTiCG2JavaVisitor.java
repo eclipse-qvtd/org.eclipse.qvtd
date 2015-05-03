@@ -131,7 +131,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		}
 		CGTypedModel cgTypedModel = cgRealizedVariable.getTypedModel();
 		//
-		js.append("modelObjects[");
+		js.append(QVTiGlobalContext.MODELS_NAME);
+		js.append("[");
 		appendModelIndex(cgTypedModel);
 		js.append("].add(");
 		js.appendValueName(cgRealizedVariable);
