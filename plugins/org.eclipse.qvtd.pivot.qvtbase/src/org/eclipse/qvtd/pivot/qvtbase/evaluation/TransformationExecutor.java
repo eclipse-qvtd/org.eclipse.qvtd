@@ -10,16 +10,15 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase.evaluation;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 
 public interface TransformationExecutor extends ModelManager
-{	
+{
 	void addRootObjects(@NonNull String modelName, @NonNull Iterable<? extends EObject> rootObjects);
-    @NonNull List<EObject> getRootObjects(@NonNull String modelName);
+    @NonNull Collection<EObject> getRootObjects(@NonNull String modelName);
     boolean run() throws Exception;
-
 }

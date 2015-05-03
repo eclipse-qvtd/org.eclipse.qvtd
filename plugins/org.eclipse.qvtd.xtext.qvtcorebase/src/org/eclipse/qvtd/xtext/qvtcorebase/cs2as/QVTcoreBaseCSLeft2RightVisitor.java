@@ -151,11 +151,11 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 	@Override
 	protected Element resolveSimpleNameExp(@NonNull NameExpCS csNameExp, @NonNull Element element) {
 		if (element instanceof Transformation) {
-			Variable ownedContext = ((Transformation)element).getOwnedContext();
+			Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (Transformation) element);
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		else if (element instanceof TypedModel) {
-			Variable ownedContext = ((TypedModel)element).getOwnedContext();
+			Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (TypedModel) element);
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		return super.resolveSimpleNameExp(csNameExp, element);

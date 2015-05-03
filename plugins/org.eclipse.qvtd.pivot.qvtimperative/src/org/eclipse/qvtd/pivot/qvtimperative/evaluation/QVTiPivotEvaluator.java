@@ -18,14 +18,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
 /**
  * A QVTiPivotEvaluator supports loading a compiled transformation and models, performing a transformation
@@ -90,25 +91,14 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 	public Boolean execute() {
         EvaluationEnvironment evalEnv = environmentFactory.createEvaluationEnvironment(transformation, modelManager);
         EvaluationVisitor visitor = environmentFactory.createEvaluationVisitor(evalEnv);
-        Variable ownedContext = transformation.getOwnedContext();
-        if (ownedContext == null) {		// FIXME fixing missing init
-        	ownedContext = PivotFactory.eINSTANCE.createVariable();
-        	ownedContext.setName("this");
-        	ownedContext.setType(environmentFactory.getStandardLibrary().getLibraryType("Transformation"));
-        	ownedContext.setIsRequired(true);
-        	transformation.setOwnedContext(ownedContext);
-        }
+        StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
+		Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
 		evalEnv.add(ownedContext, modelManager.getTransformationInstance(transformation));
         for (TypedModel typedModel : transformation.getModelParameter()) {
-            ownedContext = typedModel.getOwnedContext();
-            if (ownedContext == null) {
-            	ownedContext = PivotFactory.eINSTANCE.createVariable();
-            	ownedContext.setName("this");
-            	ownedContext.setType(environmentFactory.getStandardLibrary().getLibraryType("Model"));
-            	ownedContext.setIsRequired(true);
-            	typedModel.setOwnedContext(ownedContext);
-            }
-            evalEnv.add(ownedContext, modelManager.getTypedModelInstance(typedModel));
+        	if (typedModel != null) {
+	            ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
+	            evalEnv.add(ownedContext, modelManager.getTypedModelInstance(typedModel));
+        	}
         }
         return (Boolean) transformation.accept(visitor);
 	}

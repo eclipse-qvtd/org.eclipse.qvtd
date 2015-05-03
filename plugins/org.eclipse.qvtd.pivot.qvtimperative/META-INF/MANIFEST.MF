@@ -11,6 +11,8 @@ Export-Package: org.eclipse.qvtd.pivot.qvtimperative,
  org.eclipse.qvtd.pivot.qvtimperative.attributes,
  org.eclipse.qvtd.pivot.qvtimperative.evaluation,
  org.eclipse.qvtd.pivot.qvtimperative.impl,
+ org.eclipse.qvtd.pivot.qvtimperative.library.model,
+ org.eclipse.qvtd.pivot.qvtimperative.model,
  org.eclipse.qvtd.pivot.qvtimperative.scoping,
  org.eclipse.qvtd.pivot.qvtimperative.util,
  org.eclipse.qvtd.pivot.qvtimperative.utilities

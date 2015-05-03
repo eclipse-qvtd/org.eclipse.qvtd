@@ -8,10 +8,11 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.pivot.qvtbase.library.model;
+package org.eclipse.qvtd.pivot.qvtimperative.library.model;
 
-import java.util.Set;
+import java.util.Collection;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
@@ -24,11 +25,11 @@ import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TypedModelInstance;
 
 /**
- * ModelObjectsOfKindOperation realises the Model::objectsOfKind() library operation.
+ * ModelObjectsOfTypeOperation realises the Model::objectsOfType() library operation.
  */
-public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
+public class ModelObjectsOfTypeOperation extends AbstractBinaryOperation
 {
-	public static final @NonNull ModelObjectsOfKindOperation INSTANCE = new ModelObjectsOfKindOperation();
+	public static final @NonNull ModelObjectsOfTypeOperation INSTANCE = new ModelObjectsOfTypeOperation();
 
 	@Override
 	public @NonNull SetValue evaluate(@NonNull Evaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object typeVal) {
@@ -37,7 +38,7 @@ public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
 			throw new InvalidValueException(PivotMessages.TypedValueRequired, "TypedModelInstance", getTypeName(sourceVal));
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
-		Set<Object> results = typedModelInstance.getObjectsOfKind(type);
+		Collection<EObject> results = typedModelInstance.getObjectsOfType(type);
 		return createSetValue((CollectionTypeId)returnTypeId, results);
 	}
 }

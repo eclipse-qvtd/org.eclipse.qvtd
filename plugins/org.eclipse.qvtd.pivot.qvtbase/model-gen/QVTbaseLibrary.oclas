@@ -4,76 +4,7 @@
   <ownedImports importedNamespace="pivot:Package ../model/QVTbase.ecore.oclas#P.qvtbase" name="qvtb"/>
   <ownedPackages xsi:type="pivot:Library" xmi:id="P.qvtbaselibrary" URI="http://www.eclipse.org/qvt/2015/QVTbaseLibrary" name="qvtbaselibrary"
       nsPrefix="qvtbaselib">
-    <ownedClasses xmi:id="T.qvtbaselibrary.Model" name="Model" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
-      <ownedOperations xmi:id="o.qvtbaselibrary.Model.allObjects" implementationClass="org.eclipse.qvtd.pivot.qvtbase.library.model.AllObjectsOperation"
-          name="allObjects" type="#//@ownedPackages.1/@ownedClasses.3"/>
-      <ownedOperations xmi:id="o.qvtbaselibrary.Model.objectsOfKind..TT" implementationClass="org.eclipse.qvtd.pivot.qvtbase.library.model.ModelObjectsOfKindOperation"
-          name="objectsOfKind" type="#//@ownedPackages.1/@ownedClasses.4">
-        <ownedParameters xmi:id="p0o.qvtbaselibrary.Model.objectsOfKind..TT" isRequired="false" isTypeof="true" name="type" type="#t.qvtbaselibrary.Model..objectsOfKindTT"/>
-        <ownedSignature xmi:id="s.o.qvtbaselibrary.Model.objectsOfKind..TT">
-          <ownedParameters xmi:id="t.qvtbaselibrary.Model..objectsOfKindTT" name="TT"/>
-        </ownedSignature>
-      </ownedOperations>
-      <ownedOperations xmi:id="o.qvtbaselibrary.Model.objectsOfType..TT" implementationClass="org.eclipse.qvtd.pivot.qvtbase.library.model.ModelObjectsOfTypeOperation"
-          name="objectsOfType" type="#//@ownedPackages.1/@ownedClasses.5">
-        <ownedParameters xmi:id="p0o.qvtbaselibrary.Model.objectsOfType..TT" isRequired="false" isTypeof="true" name="type" type="#t.qvtbaselibrary.Model..objectsOfTypeTT"/>
-        <ownedSignature xmi:id="s.o.qvtbaselibrary.Model.objectsOfType..TT">
-          <ownedParameters xmi:id="t.qvtbaselibrary.Model..objectsOfTypeTT" name="TT"/>
-        </ownedSignature>
-      </ownedOperations>
-      <ownedOperations xmi:id="o.qvtbaselibrary.Model.rootObjects" implementationClass="org.eclipse.qvtd.pivot.qvtbase.library.model.RootObjectsOperation"
-          name="rootObjects" type="#//@ownedPackages.1/@ownedClasses.3"/>
-    </ownedClasses>
+    <ownedClasses xmi:id="T.qvtbaselibrary.Model" name="Model" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"/>
     <ownedClasses xmi:id="T.qvtbaselibrary.Transformation" name="Transformation" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"/>
-  </ownedPackages>
-  <ownedPackages xmi:id="P.$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:CollectionType" elementType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
-        name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" elementType="#t.qvtbaselibrary.Model..objectsOfKindTT" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
-      <ownedBindings>
-        <ownedSubstitutions actual="#t.qvtbaselibrary.Model..objectsOfKindTT" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" elementType="#t.qvtbaselibrary.Model..objectsOfTypeTT" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
-      <ownedBindings>
-        <ownedSubstitutions actual="#t.qvtbaselibrary.Model..objectsOfTypeTT" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" elementType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement" name="Set"
-        superClasses="#//@ownedPackages.1/@ownedClasses.6">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" elementType="#t.qvtbaselibrary.Model..objectsOfKindTT" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.7">
-      <ownedBindings>
-        <ownedSubstitutions actual="#t.qvtbaselibrary.Model..objectsOfKindTT" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" elementType="#t.qvtbaselibrary.Model..objectsOfTypeTT" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.8">
-      <ownedBindings>
-        <ownedSubstitutions actual="#t.qvtbaselibrary.Model..objectsOfTypeTT" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" elementType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
-        name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.0">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" elementType="#t.qvtbaselibrary.Model..objectsOfKindTT" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.1">
-      <ownedBindings>
-        <ownedSubstitutions actual="#t.qvtbaselibrary.Model..objectsOfKindTT" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" elementType="#t.qvtbaselibrary.Model..objectsOfTypeTT" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.2">
-      <ownedBindings>
-        <ownedSubstitutions actual="#t.qvtbaselibrary.Model..objectsOfTypeTT" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
   </ownedPackages>
 </pivot:Model>

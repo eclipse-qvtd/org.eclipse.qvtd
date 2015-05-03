@@ -1,17 +1,8 @@
-/*******************************************************************************
- * Copyright (c) 2015 E.D.Willink and others.
- * All rights reserved.   This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   E.D.Willink - Initial API and implementation
- *******************************************************************************/
-package org.eclipse.qvtd.pivot.qvtbase.library.model;
+package org.eclipse.qvtd.pivot.qvtimperative.library.model;
 
-import java.util.Set;
+import java.util.Collection;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
@@ -24,11 +15,11 @@ import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TypedModelInstance;
 
 /**
- * AllObjectsOperation realises the Model::allObjects() library operation.
+ * RootObjectsOperation realises the Model::rootObjects() library operation.
  */
-public class AllObjectsOperation extends AbstractUnaryOperation
+public class RootObjectsOperation extends AbstractUnaryOperation
 {
-	public static final @NonNull AllObjectsOperation INSTANCE = new AllObjectsOperation();
+	public static final @NonNull RootObjectsOperation INSTANCE = new RootObjectsOperation();
 
 	@Override
 	public @NonNull SetValue evaluate(@NonNull Evaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
@@ -36,7 +27,7 @@ public class AllObjectsOperation extends AbstractUnaryOperation
 			throw new InvalidValueException(PivotMessages.TypedValueRequired, "TypedModelInstance", getTypeName(sourceVal));
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
-		Set<Object> results = typedModelInstance.getAllObjects();
+		Collection<EObject> results = typedModelInstance.getRootObjects();
 		return createSetValue((CollectionTypeId)returnTypeId, results);
 	}
 }

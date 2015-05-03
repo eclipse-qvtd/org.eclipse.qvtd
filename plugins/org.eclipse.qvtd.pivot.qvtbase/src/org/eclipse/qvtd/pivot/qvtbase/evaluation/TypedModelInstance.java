@@ -10,14 +10,15 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase.evaluation;
 
-import java.util.Set;
+import java.util.Collection;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 
 public interface TypedModelInstance
 {
-	@NonNull Set<Object> getAllObjects();
-	@NonNull Set<Object> getObjectsOfKind(@NonNull org.eclipse.ocl.pivot.Class type);
-	@NonNull Set<Object> getObjectsOfType(@NonNull org.eclipse.ocl.pivot.Class type);
-	@NonNull Set<Object> getRootObjects();
+	@NonNull Collection<EObject> getAllObjects();
+	@NonNull Collection<EObject> getObjectsOfKind(@NonNull org.eclipse.ocl.pivot.Class type);
+	@NonNull Collection<EObject> getObjectsOfType(@NonNull org.eclipse.ocl.pivot.Class type);
+	@NonNull Collection<EObject> getRootObjects();
 }

@@ -17,6 +17,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -132,5 +135,35 @@ public class QVTbaseUtil
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Return the context variable for a Transformation, creating it if not yet available.
+	 */
+	public static @NonNull Variable getContextVariable(@NonNull StandardLibraryInternal standardLibrary, @NonNull Transformation transformation) {
+		Variable ownedContext = transformation.getOwnedContext();
+        if (ownedContext == null) {
+        	ownedContext = PivotFactory.eINSTANCE.createVariable();
+        	ownedContext.setName("this");
+        	ownedContext.setType(standardLibrary.getLibraryType("Transformation"));
+        	ownedContext.setIsRequired(true);
+        	transformation.setOwnedContext(ownedContext);
+        }
+		return ownedContext;
+	}
+
+	/**
+	 * Return the context variable for a TypedModel, creating it if not yet available.
+	 */
+	public static @NonNull Variable getContextVariable(@NonNull StandardLibraryInternal standardLibrary, @NonNull TypedModel typedModel) {
+		Variable ownedContext = typedModel.getOwnedContext();
+        if (ownedContext == null) {
+        	ownedContext = PivotFactory.eINSTANCE.createVariable();
+        	ownedContext.setName(typedModel.getName());
+        	ownedContext.setType(standardLibrary.getLibraryType("Model"));
+        	ownedContext.setIsRequired(true);
+        	typedModel.setOwnedContext(ownedContext);
+        }
+		return ownedContext;
 	}
 }

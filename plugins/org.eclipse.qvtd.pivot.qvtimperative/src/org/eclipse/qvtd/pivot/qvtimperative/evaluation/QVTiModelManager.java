@@ -348,30 +348,30 @@ public class QVTiModelManager implements ModelManager
 		}
 
 		@Override
-		public @NonNull Set<Object> getAllObjects() {
+		public @NonNull Set<EObject> getAllObjects() {
 			throw new UnsupportedOperationException();
 		}
 
 		@Override
-		public @NonNull Set<Object> getObjectsOfKind(@NonNull org.eclipse.ocl.pivot.Class type) {
+		public @NonNull Set<EObject> getObjectsOfKind(@NonNull org.eclipse.ocl.pivot.Class type) {
 			IdResolver idResolver = modelManager.getMetamodelManager().getEnvironmentFactory().getIdResolver();
-			Set<Object> results = new HashSet<Object>(); 
+			Set<EObject> results = new HashSet<EObject>(); 
 			Set<?> instances = modelManager.get(type);
 			for (Object instance : instances) {
 				if (instance != null) {
-					results.add(idResolver.boxedValueOf(instance));	// FIXME Move to model manager
+					results.add((EObject) idResolver.ecoreValueOf(null, instance));	// FIXME Move to model manager
 				}
 			}
 			return results;
 		}
 
 		@Override
-		public @NonNull Set<Object> getObjectsOfType(@NonNull org.eclipse.ocl.pivot.Class type) {
+		public @NonNull Set<EObject> getObjectsOfType(@NonNull org.eclipse.ocl.pivot.Class type) {
 			throw new UnsupportedOperationException();
 		}
 
 		@Override
-		public @NonNull Set<Object> getRootObjects() {
+		public @NonNull Collection<EObject> getRootObjects() {
 			throw new UnsupportedOperationException();
 		}
 	}

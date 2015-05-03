@@ -10,10 +10,10 @@
   <ownedPackages xmi:id="P." name="">
     <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..Source2Target_qvtp_qvtias" name="Source2Target_qvtp_qvtias">
       <modelParameter xmi:id="qT..Source2Target_qvtp_qvtias.leftCS" name="leftCS" usedPackage="SourceMM1.ecore.oclas#P.source">
-        <ownedContext name="this" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTbaseLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext name="leftCS" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <modelParameter xmi:id="qT..Source2Target_qvtp_qvtias.rightAS" name="rightAS" usedPackage="TargetMM1.ecore.oclas#P.target">
-        <ownedContext name="this" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTbaseLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext name="rightAS" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.cSRoot_2_TRoot" name="cSRoot_2_TRoot">
         <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
@@ -1231,7 +1231,7 @@
           </mappingStatements>
         </mappingStatement>
       </rule>
-      <ownedContext name="this" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTbaseLibrary.oclas#T.qvtbaselibrary.Transformation"/>
+      <ownedContext name="this"/>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">

@@ -57,4 +57,10 @@
       <fileTypes extension="qvtias" type="text" />
    </extension>
 
+   <extension point="org.eclipse.ocl.pivot.standard_library"
+         id="qvtimperativelibrary" name="QVTimperative Library">
+     <library uri="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary"
+     	class="org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary$Loader"/>
+   </extension>
+
 </plugin>

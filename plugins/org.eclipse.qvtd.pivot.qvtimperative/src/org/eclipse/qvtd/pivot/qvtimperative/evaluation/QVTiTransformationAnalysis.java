@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -119,7 +120,10 @@ public class QVTiTransformationAnalysis
 		//  - identify all assigned PropertyCallExp and allocate a cacheIndex
 		//
 		Type oclElementType = environmentFactory.getStandardLibrary().getOclElementType();
+		Type modelType = environmentFactory.getStandardLibrary().getLibraryType("Model");
 		OperationId allInstancesOperationId = oclElementType.getTypeId().getOperationId(0, "allInstances", IdManager.getParametersId());
+		OperationId objectsOfKindOperationId = modelType.getTypeId().getOperationId(1, "objectsOfKind", IdManager.getParametersId(TypeId.T_1));
+		OperationId objectsOfTypeOperationId = modelType.getTypeId().getOperationId(1, "objectsOfType", IdManager.getParametersId(TypeId.T_1));
 		List<PropertyAssignment> propertyAssignments = new ArrayList<PropertyAssignment>();
 		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
@@ -137,15 +141,30 @@ public class QVTiTransformationAnalysis
 			else if (eObject instanceof OperationCallExp) {
 				OperationCallExp operationCallExp = (OperationCallExp)eObject;
 				Operation referredOperation = operationCallExp.getReferredOperation();
-				if ((referredOperation != null) && (referredOperation.getOperationId() == allInstancesOperationId)) {
-					OCLExpression source = operationCallExp.getOwnedSource();
-					if (source != null) {
-						Type sourceType = source.getTypeValue();
-						if (sourceType == null) {
-							sourceType = source.getType();
+				if (referredOperation != null) {
+					OperationId operationId = referredOperation.getOperationId();
+					if (operationId == allInstancesOperationId) {
+						OCLExpression source = operationCallExp.getOwnedSource();
+						if (source != null) {
+							Type sourceType = source.getTypeValue();
+							if (sourceType == null) {
+								sourceType = source.getType();
+							}
+							if (sourceType instanceof org.eclipse.ocl.pivot.Class) {
+								allInstancesClasses.add((org.eclipse.ocl.pivot.Class)sourceType);
+							}
 						}
-						if (sourceType instanceof org.eclipse.ocl.pivot.Class) {
-							allInstancesClasses.add((org.eclipse.ocl.pivot.Class)sourceType);
+					}
+					else if ((operationId == objectsOfKindOperationId) || (operationId == objectsOfTypeOperationId)) {
+						OCLExpression argument = operationCallExp.getOwnedArguments().get(0);
+						if (argument != null) {
+							Type argumentType = argument.getTypeValue();
+							if (argumentType == null) {
+								argumentType = argument.getType();
+							}
+							if (argumentType instanceof org.eclipse.ocl.pivot.Class) {
+								allInstancesClasses.add((org.eclipse.ocl.pivot.Class)argumentType);
+							}
 						}
 					}
 				}

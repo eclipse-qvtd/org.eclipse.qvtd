@@ -59,6 +59,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	protected final @NonNull Transformation transformation;
 	private/* @LazyNonNull */String javaSourceCode = null;
 	protected final @NonNull QVTiGlobalContext globalContext = new QVTiGlobalContext(this);
+	protected final @NonNull Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
 
 	public QVTiCodeGenerator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
 		super(environmentFactory);
@@ -168,7 +169,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
-		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
+//		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
 		QVTiTransformationAnalysis transformationAnalysis = transformation2analysis.get(transformation);
 		if (transformationAnalysis == null) {
 			transformationAnalysis = new QVTiTransformationAnalysis(getEnvironmentFactory());

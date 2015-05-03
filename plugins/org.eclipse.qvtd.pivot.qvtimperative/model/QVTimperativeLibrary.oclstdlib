@@ -1,0 +1,11 @@
+import 'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib';
+
+library qvtbaselibrary : qvtbaselib = 'http://www.eclipse.org/qvt/2015/QVTbaseLibrary'
+{
+type Model : TypedModel {
+	operation allObjects() : ocl::Set(ocl::OclElement) => 'org.eclipse.qvtd.pivot.qvtimperative.library.model.AllObjectsOperation';
+	operation objectsOfKind(TT)(type : typeof(TT)) : ocl::Set(TT) => 'org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfKindOperation';
+	operation objectsOfType(TT)(type : typeof(TT)) : ocl::Set(TT) => 'org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfTypeOperation';
+	operation rootObjects() : ocl::Set(ocl::OclElement) => 'org.eclipse.qvtd.pivot.qvtimperative.library.model.RootObjectsOperation';
+}
+}
