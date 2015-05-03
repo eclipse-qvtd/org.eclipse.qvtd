@@ -12,7 +12,12 @@ package org.eclipse.qvtd.xtext.qvtimperative.ui.model;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
+import org.eclipse.ocl.pivot.resource.BasicProjectManager;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.ui.model.BaseCSorASDocumentProvider;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
 /**
@@ -21,10 +26,27 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
  */
 public class QVTimperativeDocumentProvider extends BaseCSorASDocumentProvider
 {
+	private @Nullable OCLInternal ocl;		// FIXME Eliminate once OCL implements createOCL
+
+//	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTbase.newInstance(BasicProjectManager.createDefaultProjectManager(), null);
+	}
+
 	@Override
 	protected @NonNull String createTestDocument(@NonNull URI uri, @NonNull String lastSegment) {
 		return "package " + lastSegment + " : pfx = '"+ uri + "' {\n" +
 		"}\n";
+	}
+
+	@Override
+	protected void disconnected() {
+		OCL ocl2 = ocl;
+		if (ocl2 != null) {
+			ocl = null;
+			ocl2.dispose();
+		}
+		super.disconnected();
 	}
 
 	@Override
@@ -35,5 +57,13 @@ public class QVTimperativeDocumentProvider extends BaseCSorASDocumentProvider
 	@Override
 	protected @NonNull String getFileExtension() {
 		return "qvti";
+	}
+	
+	protected @NonNull OCLInternal getOCL() {
+		OCLInternal ocl2 = ocl;
+		if (ocl2 == null) {
+			ocl = ocl2 = createOCL();
+		}
+		return ocl2;
 	}
 }

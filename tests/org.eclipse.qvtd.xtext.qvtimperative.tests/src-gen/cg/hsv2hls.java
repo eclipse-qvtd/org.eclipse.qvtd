@@ -22,10 +22,10 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
-import org.eclipse.qvtd.pivot.qvtbase.library.model.ModelObjectsOfKindOperation;
 import test.hls.HLSTree.HLSNode;
 import test.hls.HLSTree.HLSTreeFactory;
 import test.hls.HLSTree.HLSTreePackage;
@@ -50,7 +50,6 @@ import test.middle.HSV2HLS.HSVNode2HLSNode;
 public class hsv2hls extends AbstractTransformationExecutor
 {
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbaseLibrary", "qvtbaselib", null);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/HLSTree", null, HLSTreePackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/HSVTree", null, HSVTreePackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/HSVtoHLS", null, HSV2HLSPackage.eINSTANCE);
@@ -58,7 +57,6 @@ public class hsv2hls extends AbstractTransformationExecutor
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HLSNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree.getClassId("HLSNode", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HSVNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree.getClassId("HSVNode", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HSVNode2HLSNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS.getClassId("HSVNode2HLSNode", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Model = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary.getClassId("Model", 0);
     public static final @NonNull /*@NonInvalid*/ DataTypeId DATAid_HLS = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree.getDataTypeId("HLS", 0);
     public static final @NonNull /*@NonInvalid*/ DataTypeId DATAid_HSV = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree.getDataTypeId("HSV", 0);
     public static final @NonNull /*@NonInvalid*/ DataTypeId DATAid_RGB = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS.getDataTypeId("RGB", 0);
@@ -66,9 +64,25 @@ public class hsv2hls extends AbstractTransformationExecutor
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_HSVNode2HLSNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_HSVNode2HLSNode);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_HSVNode = TypeId.SET.getSpecializedId(CLSSid_HSVNode);
     
+    /*
+     * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
+     */
+    private static final @NonNull ClassId[] classIndex2classId = new ClassId[]{
+        CLSSid_HSVNode                  // 0 => HSVNode
+    };
+    
+    /*
+     * Mapping from each ClassIndex to all the ClassIndexes to which an object of the outer index
+     * may contribute results to an allInstances() invocation.
+     * Non trivial inner arrays arise when one ClassId is a derivation of another and so an
+     * instance of the derived classId contributes to derived and inherited ClassIndexes.
+     */
+    private final static @NonNull int[][] classIndex2allClassIndexes = new int[][] {
+        {0}                     // 0 : HSVNode -> {HSVNode}
+    };
     
     public hsv2hls(final @NonNull Evaluator evaluator) {
-        super(evaluator, new String[] {"hsv", "hls", "middle"}, null, null, null);
+        super(evaluator, new String[] {"hsv", "hls", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() {
@@ -99,7 +113,7 @@ public class hsv2hls extends AbstractTransformationExecutor
      * )
      * { |
      * }
-     * for hsvRoot : HSVTree::HSVNode in hsv.objectsOfKind(HSVTree::HSVNode)
+     * for hsvRoot : HSVTree::HSVNode in HSVTree::HSVNode.allInstances()
      *    {
      * map HSV2MiddleRoot {
      * hsvRoot := hsvRoot;
@@ -113,11 +127,11 @@ public class hsv2hls extends AbstractTransformationExecutor
         // creations
         // assignments
         // mapping statements
-        final @NonNull /*@Thrown*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_HSVNode, models[0/*hsv*/], TYP_HSVTree_c_c_HSVNode_0);
-        final List<HSVNode> UNBOXED_objectsOfKind = objectsOfKind.asEcoreObjects(idResolver, HSVNode.class);
-        assert UNBOXED_objectsOfKind != null;
+        final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_HSVNode, TYP_HSVTree_c_c_HSVNode_0);
+        final List<HSVNode> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, HSVNode.class);
+        assert UNBOXED_allInstances != null;
         ;
-        for (HSVNode hsvRoot_1 : UNBOXED_objectsOfKind) {
+        for (HSVNode hsvRoot_1 : UNBOXED_allInstances) {
             if (hsvRoot_1 != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode symbol_1 = (HSVNode)hsvRoot_1;
                 HSV2MiddleRoot(symbol_1);
