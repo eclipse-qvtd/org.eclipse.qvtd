@@ -10,10 +10,10 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.ui;
 
+import org.eclipse.ocl.xtext.base.ui.BaseEditor;
 import org.eclipse.qvtd.xtext.qvtrelation.ui.internal.QVTrelationActivator;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 
-public class QVTrelationEditor extends XtextEditor
+public class QVTrelationEditor extends BaseEditor
 {
 	public static final String EDITOR_ID = QVTrelationActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTRELATION_QVTRELATION;
 

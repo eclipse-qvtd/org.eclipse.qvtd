@@ -10,10 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.ui;
 
+import org.eclipse.ocl.xtext.base.ui.BaseEditor;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.internal.QVTimperativeActivator;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 
-public class QVTimperativeEditor extends XtextEditor
+public class QVTimperativeEditor extends BaseEditor
 {
 	public static final String EDITOR_ID = QVTimperativeActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTIMPERATIVE_QVTIMPERATIVE;
 

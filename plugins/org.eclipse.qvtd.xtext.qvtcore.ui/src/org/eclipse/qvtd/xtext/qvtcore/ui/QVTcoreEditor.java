@@ -10,10 +10,10 @@
  */
 package org.eclipse.qvtd.xtext.qvtcore.ui;
 
+import org.eclipse.ocl.xtext.base.ui.BaseEditor;
 import org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 
-public class QVTcoreEditor extends XtextEditor
+public class QVTcoreEditor extends BaseEditor
 {
 	public static final String EDITOR_ID = QVTcoreActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTCORE_QVTCORE;
 
