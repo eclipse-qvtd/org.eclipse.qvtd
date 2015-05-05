@@ -13,7 +13,7 @@ import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiBroker;
 import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformation;
-import org.eclipse.qvtd.cs2as.runtime.QVTiFacade;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 
 public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompilerParameters> {
@@ -26,7 +26,7 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 	@Override
 	public Class<? extends CS2ASTransformation> compileTransformation(@NonNull URI oclDocURI, @NonNull CS2ASJavaCompilerParameters params, @Nullable ResourceSet rSet) throws Exception {
 		
-		QVTiFacade qvt = QVTiFacade.createInstance(BasicProjectManager.CLASS_PATH, rSet);
+		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, rSet);
 		try {
 			PivotModel qvtiTransf = executeOCL2QVTi_MTC(qvt, oclDocURI.trimSegments(1), oclDocURI.lastSegment());
 			return createCompiler().compileTransformation(qvt, qvtiTransf.getTransformation(), (CS2ASJavaCompilerParameters) params);	

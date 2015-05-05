@@ -2,25 +2,23 @@ package org.eclipse.qvtd.cs2as.runtime;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
-public class QVTiFacade extends OCL {
+public class QVTiTxHelper  {
 	
-	protected QVTiFacade(@NonNull QVTiEnvironmentFactory environmentFactory) {
-		super(environmentFactory);
+	final private QVTimperative qvti; 
+	
+	public QVTiTxHelper(@NonNull QVTimperative qvti) {
+		this.qvti = qvti;
 	}
 
-	@Override
-	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-		return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
+	private @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+		return (QVTiEnvironmentFactory) qvti.getEnvironmentFactory();
 	}
 	
 	public @NonNull QVTiPivotEvaluator createEvaluator(Transformation transformation) {
@@ -30,10 +28,7 @@ public class QVTiFacade extends OCL {
 	// FIXME why do we need this ?
 	public @NonNull QVTiTxEvaluator createTxEvaluator(Class<? extends TransformationExecutor> txClass)
 			throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-		return new QVTiTxEvaluator(environmentFactory.getCompleteEnvironment(), txClass);
+		return new QVTiTxEvaluator(getEnvironmentFactory().getCompleteEnvironment(), txClass);
 	}	
-	
-	public static QVTiFacade createInstance(@NonNull ProjectManager projectManager, @Nullable ResourceSet rSet) {
-		return new QVTiFacade(new QVTiEnvironmentFactory(projectManager, rSet));
-	}
+
 }

@@ -42,17 +42,17 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
-import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompiler;
+import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGFactory;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.CS2ASCGModelVisitor;
 import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformation;
 import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformationExecutor;
-import org.eclipse.qvtd.cs2as.runtime.QVTiFacade;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
 
 public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
@@ -427,7 +427,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	
 	// Copied from QVTiCompilerTest
 	@Override
-	public Class<? extends CS2ASTransformation> compileTransformation(@NonNull QVTiFacade qvt,
+	public Class<? extends CS2ASTransformation> compileTransformation(@NonNull QVTimperative qvt,
 			@NonNull Transformation transformation,	@NonNull CS2ASJavaCompilerParameters params) throws Exception {
 				
 		QVTiCodeGenerator cg = new CS2ASJavaCodeGenerator(qvt.getEnvironmentFactory(), transformation, params);

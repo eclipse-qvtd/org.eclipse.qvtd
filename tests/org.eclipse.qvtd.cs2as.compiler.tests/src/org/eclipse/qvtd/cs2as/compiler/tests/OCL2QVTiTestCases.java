@@ -43,7 +43,7 @@ import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiBroker;
-import org.eclipse.qvtd.cs2as.runtime.QVTiFacade;
+import org.eclipse.qvtd.cs2as.runtime.QVTiTxHelper;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationEvaluator;
@@ -52,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
@@ -66,7 +67,7 @@ import org.junit.Test;
  */
 public class OCL2QVTiTestCases extends LoadTestCase {
 	
-	private static final boolean CREATE_GRAPHML = true; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
+	private static final boolean CREATE_GRAPHML = false; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
 	private static final String TESTS_GEN_PATH = "../org.eclipse.qvtd.cs2as.compiler.tests/tests-gen/";
 	private static final String TESTS_PACKAGE_NAME = "cg";
 	private static final String DEBUG_SEGMENT = "debug";
@@ -102,7 +103,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		}
 	}
 	
-	@NonNull private QVTiFacade myQVT;
+	@NonNull private QVTimperative myQVT;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -119,8 +120,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		super.tearDown();
 	}
 	
-	protected @NonNull QVTiFacade createQVT() {
-		return QVTiFacade.createInstance(getProjectMap(), null);
+	protected @NonNull QVTimperative createQVT() {
+		return QVTimperative.newInstance(getProjectMap(), null);
 	}
 	
 	
@@ -311,7 +312,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		assertValidModel(asURI, asResourceSet);
 	}
 	
-	protected PivotModel executeOCL2QVTi_MTC(QVTiFacade qvt, URI baseURI, String oclDocName) throws Exception {
+	protected PivotModel executeOCL2QVTi_MTC(QVTimperative qvt, URI baseURI, String oclDocName) throws Exception {
 		
 		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, oclDocName, qvt, TestsXMLUtil.defaultSavingOptions);
 		mtc.setCreateGraphml(CREATE_GRAPHML);
@@ -331,9 +332,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	//
 	// Execute the transformation with the interpreter
 	//
-	protected void executeModelsTX_CG(QVTiFacade qvt, Class<? extends TransformationExecutor> txClass, URI baseURI, String modelName) throws Exception {
+	protected void executeModelsTX_CG(QVTimperative qvt, Class<? extends TransformationExecutor> txClass, URI baseURI, String modelName) throws Exception {
 		
-		TransformationEvaluator evaluator = qvt.createTxEvaluator(txClass);
+		QVTiTxHelper txHelper = new QVTiTxHelper(qvt);
+		TransformationEvaluator evaluator = txHelper.createTxEvaluator(txClass);
 		TransformationExecutor tx = evaluator.getExecutor();
 		URI samplesBaseUri = baseURI.appendSegment("samples");
     	URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
@@ -357,7 +359,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	// Execute the transformation with the CGed transformation
 	//
 
-	protected void executeModelsTX_Interpreted(QVTiFacade qvt, Transformation tx, URI baseURI, String modelName) throws Exception {
+	protected void executeModelsTX_Interpreted(QVTimperative qvt, Transformation tx, URI baseURI, String modelName) throws Exception {
 		
 		URI samplesBaseUri = baseURI.appendSegment("samples");
 		URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
@@ -365,7 +367,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI expectedAsModelURI = samplesBaseUri.appendSegment(String.format("%s_output_ref.xmi", modelName));
 		saveEmptyModel(asModelURI);
 		
-		QVTiPivotEvaluator testEvaluator = qvt.createEvaluator(tx);
+		QVTiTxHelper txHelper = new QVTiTxHelper(qvt);
+		QVTiPivotEvaluator testEvaluator = txHelper.createEvaluator(tx);
 		testEvaluator.saveTransformation(null);
 	    testEvaluator.loadModel("leftCS", csModelURI);
 	    testEvaluator.createModel("rightAS", asModelURI, null);
