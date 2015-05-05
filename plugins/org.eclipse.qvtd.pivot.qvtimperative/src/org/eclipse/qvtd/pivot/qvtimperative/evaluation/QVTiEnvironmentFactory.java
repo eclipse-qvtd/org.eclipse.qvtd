@@ -18,11 +18,11 @@ import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 
-public class QVTiEnvironmentFactory extends AbstractEnvironmentFactory {
+public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory {
 
 	public QVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
 		super(projectMap, externalResourceSet);
