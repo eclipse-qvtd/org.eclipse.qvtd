@@ -685,31 +685,45 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCommaKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
 		private final Assignment cOwnedUnrealizedVariablesAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
 		private final RuleCall cOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_2_1_0 = (RuleCall)cOwnedUnrealizedVariablesAssignment_0_2_1.eContents().get(0);
-		private final Group cGroup_0_3 = (Group)cGroup_0.eContents().get(3);
-		private final Keyword cVerticalLineKeyword_0_3_0 = (Keyword)cGroup_0_3.eContents().get(0);
-		private final Assignment cOwnedConstraintsAssignment_0_3_1 = (Assignment)cGroup_0_3.eContents().get(1);
-		private final RuleCall cOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_0_3_1_0 = (RuleCall)cOwnedConstraintsAssignment_0_3_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_0_4 = (Keyword)cGroup_0.eContents().get(4);
+		private final Keyword cVerticalLineKeyword_0_3 = (Keyword)cGroup_0.eContents().get(3);
+		private final Assignment cOwnedConstraintsAssignment_0_4 = (Assignment)cGroup_0.eContents().get(4);
+		private final RuleCall cOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_0_4_0 = (RuleCall)cOwnedConstraintsAssignment_0_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_0_5 = (Keyword)cGroup_0.eContents().get(5);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Action cBottomPatternCSAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Assignment cOwnedConstraintsAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_1_2_0 = (RuleCall)cOwnedConstraintsAssignment_1_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cOwnedUnrealizedVariablesAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_1_1_0 = (RuleCall)cOwnedUnrealizedVariablesAssignment_1_1.eContents().get(0);
+		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
+		private final Keyword cCommaKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
+		private final Assignment cOwnedUnrealizedVariablesAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
+		private final RuleCall cOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_1_2_1_0 = (RuleCall)cOwnedUnrealizedVariablesAssignment_1_2_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
+		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
+		private final Keyword cLeftCurlyBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cOwnedConstraintsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_2_1_0 = (RuleCall)cOwnedConstraintsAssignment_2_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
+		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
+		private final Action cBottomPatternCSAction_3_0 = (Action)cGroup_3.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
+		//// Bug 466385 explains the redundancy below
 		//MiddleBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
-		//	"{" ownedUnrealizedVariables+=UnrealizedVariableCS ("," ownedUnrealizedVariables+=UnrealizedVariableCS)* ("|"
-		//	ownedConstraints+=PredicateOrAssignmentCS*)? "}" | {qvtcorebasecs::BottomPatternCS} "{"
-		//	ownedConstraints+=PredicateOrAssignmentCS* "}";
+		//	"{" ownedUnrealizedVariables+=UnrealizedVariableCS ("," ownedUnrealizedVariables+=UnrealizedVariableCS)* "|"
+		//	ownedConstraints+=PredicateOrAssignmentCS* "}" | "{" ownedUnrealizedVariables+=UnrealizedVariableCS (","
+		//	ownedUnrealizedVariables+=UnrealizedVariableCS)* "}" | "{" ownedConstraints+=PredicateOrAssignmentCS+ "}" |
+		//	{qvtcorebasecs::BottomPatternCS} "{" "}";
 		@Override public ParserRule getRule() { return rule; }
 
-		//"{" ownedUnrealizedVariables+=UnrealizedVariableCS ("," ownedUnrealizedVariables+=UnrealizedVariableCS)* ("|"
-		//ownedConstraints+=PredicateOrAssignmentCS*)? "}" | {qvtcorebasecs::BottomPatternCS} "{"
-		//ownedConstraints+=PredicateOrAssignmentCS* "}"
+		//"{" ownedUnrealizedVariables+=UnrealizedVariableCS ("," ownedUnrealizedVariables+=UnrealizedVariableCS)* "|"
+		//ownedConstraints+=PredicateOrAssignmentCS* "}" | "{" ownedUnrealizedVariables+=UnrealizedVariableCS (","
+		//ownedUnrealizedVariables+=UnrealizedVariableCS)* "}" | "{" ownedConstraints+=PredicateOrAssignmentCS+ "}" |
+		//{qvtcorebasecs::BottomPatternCS} "{" "}"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"{" ownedUnrealizedVariables+=UnrealizedVariableCS ("," ownedUnrealizedVariables+=UnrealizedVariableCS)* ("|"
-		//ownedConstraints+=PredicateOrAssignmentCS*)? "}"
+		//"{" ownedUnrealizedVariables+=UnrealizedVariableCS ("," ownedUnrealizedVariables+=UnrealizedVariableCS)* "|"
+		//ownedConstraints+=PredicateOrAssignmentCS* "}"
 		public Group getGroup_0() { return cGroup_0; }
 
 		//"{"
@@ -733,38 +747,71 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrealizedVariableCS
 		public RuleCall getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_2_1_0() { return cOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_2_1_0; }
 
-		//("|" ownedConstraints+=PredicateOrAssignmentCS*)?
-		public Group getGroup_0_3() { return cGroup_0_3; }
-
 		//"|"
-		public Keyword getVerticalLineKeyword_0_3_0() { return cVerticalLineKeyword_0_3_0; }
+		public Keyword getVerticalLineKeyword_0_3() { return cVerticalLineKeyword_0_3; }
 
 		//ownedConstraints+=PredicateOrAssignmentCS*
-		public Assignment getOwnedConstraintsAssignment_0_3_1() { return cOwnedConstraintsAssignment_0_3_1; }
+		public Assignment getOwnedConstraintsAssignment_0_4() { return cOwnedConstraintsAssignment_0_4; }
 
 		//PredicateOrAssignmentCS
-		public RuleCall getOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_0_3_1_0() { return cOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_0_3_1_0; }
+		public RuleCall getOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_0_4_0() { return cOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_0_4_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_0_4() { return cRightCurlyBracketKeyword_0_4; }
+		public Keyword getRightCurlyBracketKeyword_0_5() { return cRightCurlyBracketKeyword_0_5; }
 
-		//{qvtcorebasecs::BottomPatternCS} "{" ownedConstraints+=PredicateOrAssignmentCS* "}"
+		//"{" ownedUnrealizedVariables+=UnrealizedVariableCS ("," ownedUnrealizedVariables+=UnrealizedVariableCS)* "}"
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{qvtcorebasecs::BottomPatternCS}
-		public Action getBottomPatternCSAction_1_0() { return cBottomPatternCSAction_1_0; }
-
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_1_1() { return cLeftCurlyBracketKeyword_1_1; }
+		public Keyword getLeftCurlyBracketKeyword_1_0() { return cLeftCurlyBracketKeyword_1_0; }
 
-		//ownedConstraints+=PredicateOrAssignmentCS*
-		public Assignment getOwnedConstraintsAssignment_1_2() { return cOwnedConstraintsAssignment_1_2; }
+		//ownedUnrealizedVariables+=UnrealizedVariableCS
+		public Assignment getOwnedUnrealizedVariablesAssignment_1_1() { return cOwnedUnrealizedVariablesAssignment_1_1; }
 
-		//PredicateOrAssignmentCS
-		public RuleCall getOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_1_2_0() { return cOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_1_2_0; }
+		//UnrealizedVariableCS
+		public RuleCall getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_1_1_0() { return cOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_1_1_0; }
+
+		//("," ownedUnrealizedVariables+=UnrealizedVariableCS)*
+		public Group getGroup_1_2() { return cGroup_1_2; }
+
+		//","
+		public Keyword getCommaKeyword_1_2_0() { return cCommaKeyword_1_2_0; }
+
+		//ownedUnrealizedVariables+=UnrealizedVariableCS
+		public Assignment getOwnedUnrealizedVariablesAssignment_1_2_1() { return cOwnedUnrealizedVariablesAssignment_1_2_1; }
+
+		//UnrealizedVariableCS
+		public RuleCall getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_1_2_1_0() { return cOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_1_2_1_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_1_3() { return cRightCurlyBracketKeyword_1_3; }
+
+		//"{" ownedConstraints+=PredicateOrAssignmentCS+ "}"
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2_0() { return cLeftCurlyBracketKeyword_2_0; }
+
+		//ownedConstraints+=PredicateOrAssignmentCS+
+		public Assignment getOwnedConstraintsAssignment_2_1() { return cOwnedConstraintsAssignment_2_1; }
+
+		//PredicateOrAssignmentCS
+		public RuleCall getOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_2_1_0() { return cOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_2_1_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_2_2() { return cRightCurlyBracketKeyword_2_2; }
+
+		//{qvtcorebasecs::BottomPatternCS} "{" "}"
+		public Group getGroup_3() { return cGroup_3; }
+
+		//{qvtcorebasecs::BottomPatternCS}
+		public Action getBottomPatternCSAction_3_0() { return cBottomPatternCSAction_3_0; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3_1() { return cLeftCurlyBracketKeyword_3_1; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
 	}
 
 	public class MiddleGuardPatternCSElements extends AbstractParserRuleElementFinder {
@@ -1170,10 +1217,12 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getMiddleDomainCSAccess().getRule();
 	}
 
+	//// Bug 466385 explains the redundancy below
 	//MiddleBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
-	//	"{" ownedUnrealizedVariables+=UnrealizedVariableCS ("," ownedUnrealizedVariables+=UnrealizedVariableCS)* ("|"
-	//	ownedConstraints+=PredicateOrAssignmentCS*)? "}" | {qvtcorebasecs::BottomPatternCS} "{"
-	//	ownedConstraints+=PredicateOrAssignmentCS* "}";
+	//	"{" ownedUnrealizedVariables+=UnrealizedVariableCS ("," ownedUnrealizedVariables+=UnrealizedVariableCS)* "|"
+	//	ownedConstraints+=PredicateOrAssignmentCS* "}" | "{" ownedUnrealizedVariables+=UnrealizedVariableCS (","
+	//	ownedUnrealizedVariables+=UnrealizedVariableCS)* "}" | "{" ownedConstraints+=PredicateOrAssignmentCS+ "}" |
+	//	{qvtcorebasecs::BottomPatternCS} "{" "}";
 	public MiddleBottomPatternCSElements getMiddleBottomPatternCSAccess() {
 		return pMiddleBottomPatternCS;
 	}
@@ -1225,11 +1274,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getTargetGuardPatternCSAccess().getRule();
 	}
 
+	//// Bug 466385 explains the redundancy below
 	//BottomPatternCS:
 	//	"{" (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS) (","
-	//	(ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))* ("|"
-	//	ownedConstraints+=PredicateOrAssignmentCS*)? "}" | {BottomPatternCS} "{" ownedConstraints+=PredicateOrAssignmentCS*
-	//	"}";
+	//	(ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))* "|"
+	//	ownedConstraints+=PredicateOrAssignmentCS* "}" | "{" (ownedUnrealizedVariables+=UnrealizedVariableCS |
+	//	ownedRealizedVariables+=RealizedVariableCS) ("," (ownedUnrealizedVariables+=UnrealizedVariableCS |
+	//	ownedRealizedVariables+=RealizedVariableCS))* "}" | "{" ownedConstraints+=PredicateOrAssignmentCS+ "}" |
+	//	{BottomPatternCS} "{" "}";
 	public QVTcoreBaseGrammarAccess.BottomPatternCSElements getBottomPatternCSAccess() {
 		return gaQVTcoreBase.getBottomPatternCSAccess();
 	}
@@ -1239,11 +1291,11 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
+	//// Bug 466385 explains the redundancy below
 	//GuardPatternCS:
-	//	{GuardPatternCS} "(" (ownedUnrealizedVariables+=GuardVariableCS ("," ownedUnrealizedVariables+=GuardVariableCS)*)?
-	//	("|" ownedPredicates+=PredicateCS*)? ")" // FIXME Redundant but avoids serializer failure on Class2RDBMS.qvtc
-	//	| {GuardPatternCS} "(" (ownedUnrealizedVariables+=GuardVariableCS ("," ownedUnrealizedVariables+=GuardVariableCS)*)?
-	//	")" | {GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")";
+	//	"(" ownedUnrealizedVariables+=GuardVariableCS ("," ownedUnrealizedVariables+=GuardVariableCS)* "|"
+	//	ownedPredicates+=PredicateCS* ")" | "(" ownedUnrealizedVariables+=GuardVariableCS (","
+	//	ownedUnrealizedVariables+=GuardVariableCS)* ")" | "(" ownedPredicates+=PredicateCS+ ")" | {GuardPatternCS} "(" ")";
 	public QVTcoreBaseGrammarAccess.GuardPatternCSElements getGuardPatternCSAccess() {
 		return gaQVTcoreBase.getGuardPatternCSAccess();
 	}

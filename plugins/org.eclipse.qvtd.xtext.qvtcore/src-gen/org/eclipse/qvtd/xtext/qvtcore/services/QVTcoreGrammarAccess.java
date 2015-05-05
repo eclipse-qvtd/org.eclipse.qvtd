@@ -270,11 +270,14 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		return getMappingCSAccess().getRule();
 	}
 
+	//// Bug 466385 explains the redundancy below
 	//BottomPatternCS:
 	//	"{" (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS) (","
-	//	(ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))* ("|"
-	//	ownedConstraints+=PredicateOrAssignmentCS*)? "}" | {BottomPatternCS} "{" ownedConstraints+=PredicateOrAssignmentCS*
-	//	"}";
+	//	(ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))* "|"
+	//	ownedConstraints+=PredicateOrAssignmentCS* "}" | "{" (ownedUnrealizedVariables+=UnrealizedVariableCS |
+	//	ownedRealizedVariables+=RealizedVariableCS) ("," (ownedUnrealizedVariables+=UnrealizedVariableCS |
+	//	ownedRealizedVariables+=RealizedVariableCS))* "}" | "{" ownedConstraints+=PredicateOrAssignmentCS+ "}" |
+	//	{BottomPatternCS} "{" "}";
 	public QVTcoreBaseGrammarAccess.BottomPatternCSElements getBottomPatternCSAccess() {
 		return gaQVTcoreBase.getBottomPatternCSAccess();
 	}
@@ -296,11 +299,11 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
+	//// Bug 466385 explains the redundancy below
 	//GuardPatternCS:
-	//	{GuardPatternCS} "(" (ownedUnrealizedVariables+=GuardVariableCS ("," ownedUnrealizedVariables+=GuardVariableCS)*)?
-	//	("|" ownedPredicates+=PredicateCS*)? ")" // FIXME Redundant but avoids serializer failure on Class2RDBMS.qvtc
-	//	| {GuardPatternCS} "(" (ownedUnrealizedVariables+=GuardVariableCS ("," ownedUnrealizedVariables+=GuardVariableCS)*)?
-	//	")" | {GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")";
+	//	"(" ownedUnrealizedVariables+=GuardVariableCS ("," ownedUnrealizedVariables+=GuardVariableCS)* "|"
+	//	ownedPredicates+=PredicateCS* ")" | "(" ownedUnrealizedVariables+=GuardVariableCS (","
+	//	ownedUnrealizedVariables+=GuardVariableCS)* ")" | "(" ownedPredicates+=PredicateCS+ ")" | {GuardPatternCS} "(" ")";
 	public QVTcoreBaseGrammarAccess.GuardPatternCSElements getGuardPatternCSAccess() {
 		return gaQVTcoreBase.getGuardPatternCSAccess();
 	}

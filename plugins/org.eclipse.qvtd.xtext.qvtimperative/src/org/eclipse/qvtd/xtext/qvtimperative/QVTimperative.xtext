@@ -60,12 +60,16 @@ SourceGuardPatternCS returns qvtcorebasecs::GuardPatternCS:
 	
 MiddleDomainCS returns qvtcorebasecs::DomainCS: {qvtcorebasecs::DomainCS} ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS;
 		
-MiddleBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
-	( '{' ownedUnrealizedVariables+=UnrealizedVariableCS
-		(',' ownedUnrealizedVariables+=UnrealizedVariableCS)*
-		('|' ownedConstraints+=PredicateOrAssignmentCS*)? '}'
-	)
-	| ( {qvtcorebasecs::BottomPatternCS} '{' ownedConstraints+=PredicateOrAssignmentCS* '}'
+MiddleBottomPatternCS returns qvtcorebasecs::BottomPatternCS:		// Bug 466385 explains the redundancy below
+	(
+		'{' ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*
+		'|' ownedConstraints+=PredicateOrAssignmentCS* '}'
+	) | (
+		'{' ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)* '}'
+	) | (
+		'{' ownedConstraints+=PredicateOrAssignmentCS+ '}'
+	) | (
+		{qvtcorebasecs::BottomPatternCS} '{' '}'
 	)
 ;
 	

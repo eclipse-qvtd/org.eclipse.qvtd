@@ -403,7 +403,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (ownedConstraints+=PredicateOrAssignmentCS*)
+	 *     {BottomPatternCS}
 	 */
 	protected void sequence_BottomPatternCS(EObject context, BottomPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -425,11 +425,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         ((ownedUnrealizedVariables+=GuardVariableCS ownedUnrealizedVariables+=GuardVariableCS*)? ownedPredicates+=PredicateCS*) | 
-	 *         ((ownedUnrealizedVariables+=GuardVariableCS ownedUnrealizedVariables+=GuardVariableCS*)?) | 
-	 *         (ownedPredicates+=PredicateCS*)
-	 *     )
+	 *     {GuardPatternCS}
 	 */
 	protected void sequence_GuardPatternCS(EObject context, GuardPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

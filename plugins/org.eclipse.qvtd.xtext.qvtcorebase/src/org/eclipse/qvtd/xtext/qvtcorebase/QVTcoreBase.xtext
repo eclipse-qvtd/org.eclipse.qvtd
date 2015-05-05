@@ -18,12 +18,18 @@ import "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" a
 import "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore" as qvtcorebase
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore"
 		
-BottomPatternCS:
-	( '{' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)
+BottomPatternCS:		// Bug 466385 explains the redundancy below
+	(
+		'{' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)
 		(',' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))*
-		('|' ownedConstraints+=PredicateOrAssignmentCS*)? '}'
-	)
-	| ( {BottomPatternCS} '{' ownedConstraints+=PredicateOrAssignmentCS* '}'
+		'|' ownedConstraints+=PredicateOrAssignmentCS* '}'
+	) | (
+		'{' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)
+		(',' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))* '}'
+	) | (
+		'{' ownedConstraints+=PredicateOrAssignmentCS+ '}'
+	) | (
+		{BottomPatternCS} '{' '}'
 	)
 ;
 	
@@ -34,13 +40,16 @@ DirectionCS: {DirectionCS} name=UnrestrictedName?
 	
 //EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	
-GuardPatternCS:
-	({GuardPatternCS} '(' (ownedUnrealizedVariables+=GuardVariableCS (',' ownedUnrealizedVariables+=GuardVariableCS)*)?
-	   ('|' ownedPredicates+=PredicateCS*)? ')' )
-	|
-	({GuardPatternCS} '(' (ownedUnrealizedVariables+=GuardVariableCS (',' ownedUnrealizedVariables+=GuardVariableCS)*)? ')' )	// FIXME Redundant but avoids serializer failure on Class2RDBMS.qvtc
-	|
-	({GuardPatternCS} '(' (ownedPredicates+=PredicateCS*) ')' )
+GuardPatternCS:		// Bug 466385 explains the redundancy below
+	(
+		'(' ownedUnrealizedVariables+=GuardVariableCS (',' ownedUnrealizedVariables+=GuardVariableCS)* '|' ownedPredicates+=PredicateCS* ')'
+	) | (
+		'(' ownedUnrealizedVariables+=GuardVariableCS (',' ownedUnrealizedVariables+=GuardVariableCS)* ')'
+	) | (
+		'(' ownedPredicates+=PredicateCS+ ')'
+	) | (
+		{GuardPatternCS} '(' ')'
+	)
 ;
 	
 //Variable := VariableName �:� TypeDeclaration

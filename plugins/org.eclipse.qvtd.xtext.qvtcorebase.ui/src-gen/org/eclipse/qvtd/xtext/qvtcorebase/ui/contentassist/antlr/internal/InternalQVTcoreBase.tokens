@@ -4,7 +4,7 @@
 '*'=29
 '+'=31
 '++'=73
-','=64
+','=65
 '-'=27
 '->'=43
 '.'=42
@@ -75,8 +75,8 @@
 'uses'=26
 'xor'=40
 '{'=62
-'|'=65
-'}'=63
+'|'=63
+'}'=64
 RULE_ANY_OTHER=15
 RULE_DOUBLE_QUOTED_STRING=10
 RULE_ESCAPED_CHARACTER=8

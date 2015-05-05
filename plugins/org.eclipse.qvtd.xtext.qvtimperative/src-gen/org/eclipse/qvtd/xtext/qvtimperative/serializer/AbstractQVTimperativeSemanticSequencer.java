@@ -362,16 +362,10 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 			}
 		else if(semanticObject.eClass().getEPackage() == QVTcoreBaseCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS:
-				if(context == grammarAccess.getBottomPatternCSRule()) {
+				if(context == grammarAccess.getBottomPatternCSRule() ||
+				   context == grammarAccess.getMiddleBottomPatternCSRule() ||
+				   context == grammarAccess.getSourceBottomPatternCSRule()) {
 					sequence_BottomPatternCS(context, (BottomPatternCS) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getMiddleBottomPatternCSRule()) {
-					sequence_MiddleBottomPatternCS(context, (BottomPatternCS) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getSourceBottomPatternCSRule()) {
-					sequence_SourceBottomPatternCS(context, (BottomPatternCS) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getTargetBottomPatternCSRule()) {
@@ -550,15 +544,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (ownedConstraints+=PredicateOrAssignmentCS*)
-	 */
-	protected void sequence_MiddleBottomPatternCS(EObject context, BottomPatternCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     (ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS)
 	 */
 	protected void sequence_MiddleDomainCS(EObject context, DomainCS semanticObject) {
@@ -571,15 +556,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	 *     (ownedPredicates+=PredicateCS*)
 	 */
 	protected void sequence_MiddleGuardPatternCS(EObject context, GuardPatternCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     {BottomPatternCS}
-	 */
-	protected void sequence_SourceBottomPatternCS(EObject context, BottomPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
