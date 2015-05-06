@@ -35,6 +35,7 @@ public class AbstractClassesLookupVisitor
 	extends AbstractExtendingVisitor<Environment, Environment>
 {
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
+    public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_example2_env = IdManager.getRootPackageId("example2.env");
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, ClassesPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/env/1.0", null, EnvironmentPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_java_c_s_s_org_eclipse_qvtd_cs2as_compiler_tests_lookup = IdManager.getRootPackageId("java://org.eclipse.qvtd.cs2as.compiler.tests.lookup");
@@ -42,7 +43,8 @@ public class AbstractClassesLookupVisitor
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_AbstractClassesLookupVisitor = PACKid_java_c_s_s_org_eclipse_qvtd_cs2as_compiler_tests_lookup.getClassId("AbstractClassesLookupVisitor", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Class = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Class", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Environment = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("Environment", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Environment = PACKid_example2_env.getClassId("Environment", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Environment_0 = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("Environment", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Evaluator = PACKid_org_eclipse_ocl_pivot_evaluation.getClassId("Evaluator", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_IdResolver = PACKid_org_eclipse_ocl_pivot_ids.getClassId("IdResolver", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
@@ -54,19 +56,21 @@ public class AbstractClassesLookupVisitor
     protected @Nullable /*@Thrown*/ Object child;
     protected final @NonNull /*@Thrown*/ Evaluator evaluator;
     protected final @NonNull /*@Thrown*/ IdResolver idResolver;
+    protected final @NonNull /*@Thrown*/ Environment visitorEnv;
     
     public AbstractClassesLookupVisitor(@NonNull Environment context) {
         super(context);
         this.evaluator = context.getEvaluator();
         this.idResolver = evaluator.getIdResolver();
+        this.visitorEnv = context;
     }
     
     /**
      * Return the results of a lookup from the child of element.
      */
-    public @Nullable Environment envForChild(@NonNull Visitable element, @Nullable Visitable child) {
+    public @Nullable Environment envForChild(@NonNull Object element, @Nullable Object child) {
         this.child = element;
-        return element.accept(this);
+        return ((Visitable)element).accept(this);
     }
     
     /**
@@ -104,7 +108,7 @@ public class AbstractClassesLookupVisitor
      * 
      * 
      * let
-     *   inner : env::Environment[?] = context.addElements(element.ownedClasses)
+     *   inner : env::Environment[?] = visitorEnv.addElements(element.ownedClasses)
      *   .addElements(element.ownedPackages)
      * in
      *   if inner.hasFinalResult()
@@ -116,7 +120,7 @@ public class AbstractClassesLookupVisitor
     public @Nullable /*@NonInvalid*/ Environment visitPackage(final @NonNull /*@NonInvalid*/ Package element_0) {
         final @Nullable /*@Thrown*/ List<Class> ownedClasses = element_0.getOwnedClasses();
         assert ownedClasses != null;
-        final @NonNull /*@Thrown*/ Environment addElements = context.addElements((EList)ownedClasses);
+        final @NonNull /*@Thrown*/ Environment addElements = visitorEnv.addElements((EList)ownedClasses);
         final @Nullable /*@Thrown*/ List<Package> ownedPackages = element_0.getOwnedPackages();
         assert ownedPackages != null;
         final @NonNull /*@Thrown*/ Environment inner = addElements.addElements((EList)ownedPackages);
@@ -137,7 +141,7 @@ public class AbstractClassesLookupVisitor
      * 
      * 
      * let
-     *   inner : env::Environment[?] = context.addElements(element.ownedPackages)
+     *   inner : env::Environment[?] = visitorEnv.addElements(element.ownedPackages)
      * in
      *   if inner.hasFinalResult()
      *   then inner
@@ -148,7 +152,7 @@ public class AbstractClassesLookupVisitor
     public @Nullable /*@NonInvalid*/ Environment visitRoot(final @NonNull /*@NonInvalid*/ Root element_1) {
         final @Nullable /*@Thrown*/ List<Package> ownedPackages = element_1.getOwnedPackages();
         assert ownedPackages != null;
-        final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedPackages);
+        final @NonNull /*@Thrown*/ Environment inner = visitorEnv.addElements((EList)ownedPackages);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
         @Nullable /*@Thrown*/ Environment symbol_0;
         if (hasFinalResult) {

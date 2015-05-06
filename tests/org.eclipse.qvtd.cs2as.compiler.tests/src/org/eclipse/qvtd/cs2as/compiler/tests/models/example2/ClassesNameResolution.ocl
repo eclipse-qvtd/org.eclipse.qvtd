@@ -24,9 +24,6 @@ package env
 
 -- Lookup operations
 context Environment
--- Epsilon can't deal with this. The property is needed in the meta-model
--- def : namedElements : OrderedSet(classes::NamedElement) = OrderedSet{}
--- def : parentEnv : Environment = null
 
 -- General Environment configuration operations
 
@@ -42,6 +39,17 @@ def : nestedEnv() : Environment =
 	Environment {
 		parentEnv = self
 	}
+	
+def : addElementsOf(element : ocl::OclElement) : Environment =
+	let newEnv = element._env(null)
+	in Environment {
+		namedElements = self.namedElements->including(newEnv.namedElements)
+	}
+
+def : addElementsOf(elements : Collection(ocl::OclElement)) : Environment =
+	elements->iterate(element ; acc : Environment = self 
+		| acc.addElementsOf(element))
+
 
 -- TODO. Not used. Might be removed
 -- General Environment access operations

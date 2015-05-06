@@ -21,14 +21,21 @@ package env
 
 -- Lookup operations
 context Environment
--- Epsilon can't deal with this. The property is needed in the meta-model
--- def : namedElements : OrderedSet(classes::NamedElement) = OrderedSet{}
--- def : parentEnv : Environment = null
 	
 def : nestedEnv() : Environment = 
 	Environment {
 		parentEnv = self
 	}
+
+def : addElementsOf(element : ocl::OclElement) : Environment =
+	let newEnv = element._env(null)
+	in Environment {
+		namedElements = self.namedElements->including(newEnv.namedElements)
+	}
+
+def : addElementsOf(elements : Collection(ocl::OclElement)) : Environment =
+	elements->iterate(element ; acc : Environment = self 
+		| acc.addElementsOf(element))
 
 
 -- TODO This is not needed. Can be removed
@@ -86,7 +93,7 @@ def : lookupB(pathSeq : OrderedSet(source::PathElementCS)) : B[?] =
 def: _lookupCs(env : env::Environment, path : source::PathElementCS, local : Boolean) : C[*] =
 	let	foundCs = env.namedElements->selectByKind(C)->select(name = path.name)
 	in	if foundCs->isEmpty() and not (env.parentEnv = null) and not local 
-		then _lookupBs(env.parentEnv, path, local)
+		then _lookupCs(env.parentEnv, path, local)
 		else foundCs->asSet()
 		endif
 

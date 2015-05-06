@@ -45,6 +45,7 @@ public class AbstractTargetLookupVisitor
 	extends AbstractExtendingVisitor<Environment, Environment>
 {
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
+    public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_example1_env = IdManager.getRootPackageId("example1.env");
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/env/1.0", null, EnvironmentPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/targetMM/1.0", null, TargetPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_java_c_s_s_org_eclipse_qvtd_cs2as_compiler_tests_lookup = IdManager.getRootPackageId("java://org.eclipse.qvtd.cs2as.compiler.tests.lookup");
@@ -57,7 +58,8 @@ public class AbstractTargetLookupVisitor
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_B = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("B", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_C = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("C", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_D = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("D", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Environment = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("Environment", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Environment = PACKid_example1_env.getClassId("Environment", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Environment_0 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("Environment", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Evaluator = PACKid_org_eclipse_ocl_pivot_evaluation.getClassId("Evaluator", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_IdResolver = PACKid_org_eclipse_ocl_pivot_ids.getClassId("IdResolver", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
@@ -69,19 +71,21 @@ public class AbstractTargetLookupVisitor
     protected @Nullable /*@Thrown*/ Object child;
     protected final @NonNull /*@Thrown*/ Evaluator evaluator;
     protected final @NonNull /*@Thrown*/ IdResolver idResolver;
+    protected final @NonNull /*@Thrown*/ Environment visitorEnv;
     
     public AbstractTargetLookupVisitor(@NonNull Environment context) {
         super(context);
         this.evaluator = context.getEvaluator();
         this.idResolver = evaluator.getIdResolver();
+        this.visitorEnv = context;
     }
     
     /**
      * Return the results of a lookup from the child of element.
      */
-    public @Nullable Environment envForChild(@NonNull Visitable element, @Nullable Visitable child) {
+    public @Nullable Environment envForChild(@NonNull Object element, @Nullable Object child) {
         this.child = element;
-        return element.accept(this);
+        return ((Visitable)element).accept(this);
     }
     
     /**
@@ -111,7 +115,7 @@ public class AbstractTargetLookupVisitor
      * in
      *   if child = null
      *   then
-     *     let inner : env::Environment[?] = context.addElements(ownedBs)
+     *     let inner : env::Environment[?] = visitorEnv.addElements(ownedBs)
      *     in
      *       if inner.hasFinalResult()
      *       then inner
@@ -119,7 +123,7 @@ public class AbstractTargetLookupVisitor
      *       endif
      *   else
      *     let
-     *       inner : env::Environment[?] = context.addElements(
+     *       inner : env::Environment[?] = visitorEnv.addElements(
      *         ownedBs->select(x |
      *           ownedBs->indexOf(x) <
      *           ownedBs->indexOf(child)))
@@ -137,7 +141,7 @@ public class AbstractTargetLookupVisitor
         final /*@Thrown*/ boolean eq = child == null;
         @Nullable /*@Thrown*/ Environment symbol_2;
         if (eq) {
-            final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedBs);
+            final @NonNull /*@Thrown*/ Environment inner = visitorEnv.addElements((EList)ownedBs);
             final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
             @Nullable /*@Thrown*/ Environment symbol_0;
             if (hasFinalResult) {
@@ -173,7 +177,7 @@ public class AbstractTargetLookupVisitor
             }
             final List<B> UNBOXED_select = select.asEcoreObjects(idResolver, B.class);
             assert UNBOXED_select != null;
-            final @NonNull /*@Thrown*/ Environment inner_0 = context.addElements((EList)UNBOXED_select);
+            final @NonNull /*@Thrown*/ Environment inner_0 = visitorEnv.addElements((EList)UNBOXED_select);
             final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
             @Nullable /*@Thrown*/ Environment symbol_1;
             if (hasFinalResult_0) {
@@ -196,7 +200,7 @@ public class AbstractTargetLookupVisitor
      * in
      *   if child = null
      *   then
-     *     let inner : env::Environment[?] = context.addElements(ownedCs)
+     *     let inner : env::Environment[?] = visitorEnv.addElements(ownedCs)
      *     in
      *       if inner.hasFinalResult()
      *       then inner
@@ -204,7 +208,7 @@ public class AbstractTargetLookupVisitor
      *       endif
      *   else
      *     let
-     *       inner : env::Environment[?] = context.addElements(
+     *       inner : env::Environment[?] = visitorEnv.addElements(
      *         ownedCs->select(x |
      *           ownedCs->indexOf(x) <
      *           ownedCs->indexOf(child)))
@@ -222,7 +226,7 @@ public class AbstractTargetLookupVisitor
         final /*@Thrown*/ boolean eq = child == null;
         @Nullable /*@Thrown*/ Environment symbol_2;
         if (eq) {
-            final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedCs);
+            final @NonNull /*@Thrown*/ Environment inner = visitorEnv.addElements((EList)ownedCs);
             final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
             @Nullable /*@Thrown*/ Environment symbol_0;
             if (hasFinalResult) {
@@ -258,7 +262,7 @@ public class AbstractTargetLookupVisitor
             }
             final List<C> UNBOXED_select = select.asEcoreObjects(idResolver, C.class);
             assert UNBOXED_select != null;
-            final @NonNull /*@Thrown*/ Environment inner_0 = context.addElements((EList)UNBOXED_select);
+            final @NonNull /*@Thrown*/ Environment inner_0 = visitorEnv.addElements((EList)UNBOXED_select);
             final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
             @Nullable /*@Thrown*/ Environment symbol_1;
             if (hasFinalResult_0) {
@@ -310,7 +314,7 @@ public class AbstractTargetLookupVisitor
      * visitTRoot(element : target::TRoot[1]) : env::Environment[?]
      * 
      * 
-     * let inner : env::Environment[?] = context.addElements(ownedA)
+     * let inner : env::Environment[?] = visitorEnv.addElements(ownedA)
      * in
      *   if inner.hasFinalResult()
      *   then inner
@@ -321,7 +325,7 @@ public class AbstractTargetLookupVisitor
     public @Nullable /*@NonInvalid*/ Environment visitTRoot(final @NonNull /*@NonInvalid*/ TRoot element_4) {
         final @Nullable /*@Thrown*/ List<A> ownedA = element_4.getOwnedA();
         assert ownedA != null;
-        final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedA);
+        final @NonNull /*@Thrown*/ Environment inner = visitorEnv.addElements((EList)ownedA);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
         @Nullable /*@Thrown*/ Environment symbol_0;
         if (hasFinalResult) {
