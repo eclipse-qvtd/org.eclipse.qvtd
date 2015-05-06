@@ -743,12 +743,13 @@ public class MtcBroker {
 		        	//TODO Check if the tree has been already generated
 	        		URI modelUri = null;
 					try {
-						modelUri = baseUri.appendSegment(mm);
-						/*URI mmURI = URI.createURI(mm);
-						if (mmURI.segments().length == 1)
+						//modelUri = baseUri.appendSegment(mm);
+						URI mmSegments = URI.createURI(mm);
+						if (mmSegments.segments().length == 1) {
 							modelUri = baseUri.appendSegment(mm);
-						else
-							modelUri = mmURI.resolve(baseUri);*/
+						} else {
+							modelUri = mmSegments.resolve(baseUri);
+						}
 					} catch (IllegalArgumentException e) {
 						throw new QvtMtcExecutionException(e.getMessage(), e.getCause());
 					} finally {
