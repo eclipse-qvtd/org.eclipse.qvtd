@@ -9,4 +9,7 @@ import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformation;
 public interface OCL2JavaTxCompiler<P extends OCL2JavaTxCompilerParams> {
 	
 	public Class<? extends CS2ASTransformation> compileTransformation(@NonNull URI oclFileURI, @NonNull P params, @Nullable ResourceSet rset) throws Exception;
+	
+	// FIXME use better options/params
+	public Class<? extends CS2ASTransformation> compileTransformation(@NonNull URI oclFileURI, @NonNull P params,  @Nullable ResourceSet rset, @NonNull String tracePropName) throws Exception;
 }

@@ -85,7 +85,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		
 		public OCL2QVTiBrokerTester(URI baseURI, String oclDocName, OCL metaModelManager, boolean middleFolded)
 				throws Exception {
-			super(baseURI, oclDocName, metaModelManager, TestsXMLUtil.defaultSavingOptions, middleFolded);
+			super(baseURI, oclDocName, metaModelManager, TestsXMLUtil.defaultSavingOptions, middleFolded, null);
 		}
 		
 		// For testing purpose
@@ -268,7 +268,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
 		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtias");
 		
-		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "classescs2as.ocl", myQVT, false);
+		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "classescs2as.ocl", myQVT);
 		mtc.runOCL2QVTp_MiddleFolded(oclDocURI, qvtpFileURI);
 		// Test the QVTp transformation can be loaded
 		assertValidQVTiModel(qvtpFileURI);

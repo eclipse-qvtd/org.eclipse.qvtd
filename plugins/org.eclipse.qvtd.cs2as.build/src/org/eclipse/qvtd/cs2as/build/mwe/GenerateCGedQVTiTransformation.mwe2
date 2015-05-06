@@ -36,6 +36,7 @@ var javaFolder = "src-gen/"
 
 var javaPackage = ""
 
+var tracePropertyName = "ast"
 
 
 Workflow {
@@ -48,5 +49,6 @@ Workflow {
 		environmentClassName = environmentClassName
 		lookupVisitorClassName = lookupVisitorClassName
 		namedElementItfName = namedElementItfName 
+		tracePropertyName = tracePropertyName
 	}
 }

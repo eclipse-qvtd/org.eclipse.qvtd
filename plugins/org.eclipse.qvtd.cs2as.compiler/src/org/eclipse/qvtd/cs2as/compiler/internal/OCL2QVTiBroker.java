@@ -11,9 +11,12 @@
 package org.eclipse.qvtd.cs2as.compiler.internal;
 
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.epsilon.eol.execute.context.Variable;
+import org.eclipse.epsilon.eol.types.EolPrimitiveType;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -53,6 +56,7 @@ public class OCL2QVTiBroker extends MtcBroker {
 	private @NonNull URI oclASUri;	
 	private @Nullable URI tracesASUri;
 	private @NonNull PivotModelUtil pmUtil;
+	private @Nullable String traceabilityPropName;
 
 	/**
 	 * @param baseURI the base {@link URI} on which the OCL document resides
@@ -63,8 +67,8 @@ public class OCL2QVTiBroker extends MtcBroker {
 	 */
 	public OCL2QVTiBroker(@NonNull URI baseURI, @NonNull String oclDocName, @NonNull OCL ocl, @Nullable Map<?, ?> savingOptions )
 		throws Exception {
-		this(baseURI, oclDocName, ocl, savingOptions, true);
-	}
+		this(baseURI, oclDocName, ocl, savingOptions, true, "ast");
+	}	
 
 	/**
 	 * @param baseURI the base {@link URI} on which the OCL document resides
@@ -72,11 +76,11 @@ public class OCL2QVTiBroker extends MtcBroker {
 	 * @param ocl an {@link OCL} instance to parse the OCL document
 	 * @param savingOptions some optional savingOptions
 	 * @param usesMiddleFoldedInInputs true if the generated QVTp transformation should use middle folded in inputs approach
+	 * @param traceabilityPropName the name of the traceability property of CS elements (when using middleFoldedInInputs)
 	 * @throws Exception
 	 */
-	
 	public OCL2QVTiBroker(@NonNull URI baseURI, @NonNull String oclDocName, @NonNull OCL ocl, @Nullable Map<?, ?> savingOptions,
-			boolean usesMiddleFoldedInInputs)
+			boolean usesMiddleFoldedInInputs, @Nullable String traceabilityPropName)
 		throws Exception {
 		
 		super(baseURI, oclDocName,  ocl.getEnvironmentFactory(), savingOptions);
@@ -86,13 +90,14 @@ public class OCL2QVTiBroker extends MtcBroker {
 		if (!usesMiddleFoldedInInputs) {
 			this.tracesASUri = this.oclASUri.trimFileExtension().trimFileExtension().appendFileExtension("ecore.oclas");
 		}
+		this.traceabilityPropName = traceabilityPropName;
 	}
 	
 
 	@Override
 	public void execute() throws QvtMtcExecutionException {
 		
-		pModel = (tracesASUri == null)	? runOCL2QVTp_MiddleFolded(oclASUri, URI.createURI(partitionUri)) 
+		pModel = (tracesASUri == null)	? runOCL2QVTp_MiddleFolded(oclASUri, URI.createURI(partitionUri), traceabilityPropName) 
 										: runOCL2QVTp_MiddleModel(oclASUri, URI.createURI(partitionUri), tracesASUri);
 		
 		prepare();
@@ -125,6 +130,10 @@ public class OCL2QVTiBroker extends MtcBroker {
 	}
 	
 	protected PivotModel runOCL2QVTp_MiddleFolded (URI oclDocURI, URI qvtiFileURI) throws QvtMtcExecutionException {
+		return runOCL2QVTp_MiddleFolded(oclDocURI, qvtiFileURI, "ast");
+	}
+	
+	protected PivotModel runOCL2QVTp_MiddleFolded (URI oclDocURI, URI qvtiFileURI, String traceabilityPropName) throws QvtMtcExecutionException {
 
 		try {
 			EtlTask etl = new EtlTask(OCL2QVTiBroker.class.getResource(OCL2QVTP_MIDDLE_FOLDED).toURI());
@@ -132,7 +141,7 @@ public class OCL2QVTiBroker extends MtcBroker {
 			etl.addModel(createOCLModel(oclDocURI));
 			etl.addModel(pModel);
 			etl.addModel(createOclStdLibModel());
-			etl.execute();
+			etl.execute(Collections.singletonList(new Variable("traceabilityPropName", traceabilityPropName, EolPrimitiveType.String)));
 
 		} catch (URISyntaxException e) {
 			throw new QvtMtcExecutionException("Exception launching OCL 2 QVTp transformation", e);

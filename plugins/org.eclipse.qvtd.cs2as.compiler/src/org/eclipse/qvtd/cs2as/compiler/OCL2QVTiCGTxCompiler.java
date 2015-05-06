@@ -26,9 +26,15 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 	@Override
 	public Class<? extends CS2ASTransformation> compileTransformation(@NonNull URI oclDocURI, @NonNull CS2ASJavaCompilerParameters params, @Nullable ResourceSet rSet) throws Exception {
 		
+		return this.compileTransformation(oclDocURI, params, rSet, "ast");
+	}
+	
+	@Override
+	public Class<? extends CS2ASTransformation> compileTransformation(@NonNull URI oclDocURI, @NonNull CS2ASJavaCompilerParameters params, @Nullable ResourceSet rSet, @NonNull String tracePropertyName) throws Exception {
+		
 		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, rSet);
 		try {
-			PivotModel qvtiTransf = executeOCL2QVTi_MTC(qvt, oclDocURI.trimSegments(1), oclDocURI.lastSegment());
+			PivotModel qvtiTransf = executeOCL2QVTi_MTC(qvt, oclDocURI.trimSegments(1), oclDocURI.lastSegment(), tracePropertyName);
 			return createCompiler().compileTransformation(qvt, qvtiTransf.getTransformation(), (CS2ASJavaCompilerParameters) params);	
 		} finally {
 			qvt.dispose();	
@@ -38,18 +44,19 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 	protected CS2ASJavaCompilerImpl createCompiler() {
 		return new CS2ASJavaCompilerImpl();
 	}
-	
+		
 	/**
-	 * @param qvt
+	 * @param ocl
 	 * @param baseURI
 	 * @param oclDocName
+	 * @param tracePropName the name of the CS2AS traceability property
 	 * @return the {@link PivotModel} corresponding to the final QVTi transformation
 	 * @throws Exception
 	 */
-	protected PivotModel executeOCL2QVTi_MTC(OCL qvt, URI baseURI, String oclDocName) throws Exception {
+	protected PivotModel executeOCL2QVTi_MTC(OCL ocl, URI baseURI, String oclDocName, String tracePropName) throws Exception {
 		
-		// Map<?, ?> savingOptions = this.savingOptions == null ? XMIUtil.createSaveOptions() : this.savingOptions;
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, oclDocName, qvt, null);
+		// FIXME Map<?, ?> savingOptions = this.savingOptions == null ? XMIUtil.createSaveOptions() : this.savingOptions;
+		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, oclDocName, ocl, null, true, tracePropName);
     	mtc.execute();
     	return mtc.getiModel();
 	}

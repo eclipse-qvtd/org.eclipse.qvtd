@@ -1,6 +1,8 @@
 -- Transformation model parameters:
 --     OCL - A CompleteOCL document 
 --     QVTi - The output QVTi model
+-- Transformation variables
+--     traceabilityPropName - the name of the traceability property
 
 import 'ocl2qvtiUtils.eol';
 
@@ -323,12 +325,12 @@ operation OCL!Element isAstOpCallExp() : Boolean {
 operation OCL!ShadowPart getAstCalls() : Collection(OCL!OperationCallExpression) {
 	  
 	return self.ownedInit.getAllContents().including(self.ownedInit)
-			.select(x | x.isKindOf(OCL!OperationCallExp) and x.referredOperation.name = "ast" );
+			.select(x | x.isKindOf(OCL!OperationCallExp) and x.referredOperation.name = 'ast' );
 }
 
 operation OCL!Type getTraceabilityProperty() : OCL!Property {
 	// return self.ownedAttribute.selectOne(x | x.name = 'ast'); // FIXME can we parameterize the traceability property name ?
-	return self.asSequence().closure(x | x.superClasses).ownedProperties.flatten().selectOne(x | x.name = 'ast');
+	return self.asSequence().closure(x | x.superClasses).ownedProperties.flatten().selectOne(x | x.name = traceabilityPropName);
 }
 
 operation getOclAnyEqualsOp() : OCL!Operation {

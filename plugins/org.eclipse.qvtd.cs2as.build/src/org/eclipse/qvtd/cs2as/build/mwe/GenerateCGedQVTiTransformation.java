@@ -42,6 +42,7 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	protected String envClassName;
 	protected String visitorClassName;
 	protected String namedElementItfName;
+	protected String traceabilityPropName = "ast";
 	protected Map<?, ?> savingOptions;
 
 	public void checkConfiguration(final Issues issues) {
@@ -72,7 +73,7 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 		try {
 			URI oclDocURI = URI.createURI(oclFileURI);
 			CS2ASJavaCompilerParameters cgParams = createParameters();
-			createCompiler().compileTransformation(oclDocURI, cgParams, resourceSet);
+			createCompiler().compileTransformation(oclDocURI, cgParams, resourceSet, traceabilityPropName);
 		} catch (Exception e) {
 			issues.addError(this, "Error while executing " + GenerateCGedQVTiTransformation.class.getName(), null, e, null);
 		}		
@@ -142,6 +143,14 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	 */
 	public void setSavingOptions(final Map<?, ?> savingOptions) {
 		this.savingOptions = savingOptions;
+	}
+	
+
+	/**
+	 * An optional CS2AS traceability property name (default is "ast")
+	 */
+	public void setTracePropertyName(final String tracePropName) {
+		this.traceabilityPropName = tracePropName;
 	}
 	
 	
