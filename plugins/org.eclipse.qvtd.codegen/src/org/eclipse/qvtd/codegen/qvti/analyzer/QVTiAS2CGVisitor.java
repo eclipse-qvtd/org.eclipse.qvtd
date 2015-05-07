@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -33,6 +34,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Iteration;
@@ -333,6 +335,20 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		return cgPropertyCallExp;
 	}
 
+	protected @Nullable EClassifier getEClassifier(@Nullable Type type) {
+		if (type == null) {
+			return null;
+		}
+		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(type);
+		for (Type partialClass : completeClass.getPartialClasses()) {
+			EObject esObject = partialClass.getESObject();
+			if (esObject instanceof EClassifier) {
+				return (EClassifier) esObject;
+			}
+		}
+		return null;
+	}
+
 	public @NonNull CGFunctionParameter getFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
 		CGFunctionParameter cgFunctionParameter = (CGFunctionParameter)getVariablesStack().getParameter(asFunctionParameter);
 		if (cgFunctionParameter == null) {
@@ -360,8 +376,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		Variables variablesStack = getVariablesStack();
 		CGRealizedVariable cgVariable = (CGRealizedVariable) variablesStack.getVariable(pRealizedVariable);
 		if (cgVariable == null) {
-			Type pivotType = ClassUtil.nonNullModel(pRealizedVariable.getType());
-			EClassifier eClassifier = (EClassifier) pivotType.getESObject();
+			EClassifier eClassifier = getEClassifier(pRealizedVariable.getType());
 			if (eClassifier != null) {
 				CGEcoreRealizedVariable cgEcoreRealizedVariable = QVTiCGModelFactory.eINSTANCE.createCGEcoreRealizedVariable();
 				cgEcoreRealizedVariable.setEClassifier(eClassifier);
