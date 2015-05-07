@@ -14,6 +14,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -453,6 +454,18 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 
 	protected @NonNull Class<? extends AbstractTransformationExecutor> getAbstractTransformationExecutorClass() {
 		return AbstractTransformationExecutor.class;
+	}
+
+	@Override
+	public @NonNull Set<String> getAllImports() {
+		Set<String> allImports = new HashSet<String>();
+		for (String anImport : super.getAllImports()) {
+			allImports.add(anImport);
+			if (anImport.endsWith(".Model")) {
+				allImports.add(org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor.class.getName() + ".Model");
+			}
+		}
+		return allImports;
 	}
 
 	protected @NonNull QVTiGlobalContext getGlobalContext() {
