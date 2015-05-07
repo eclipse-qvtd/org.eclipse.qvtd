@@ -142,24 +142,18 @@ public class classescs2as extends AbstractTransformationExecutor
     
     /**
      * 
-     * map mClassCS2Class_LM in classescs2as) {
+     * map mClassCS2Class_LM in classescs2as {
      * leftCS (classCS : classescs::ClassCS[1];
-     *  |
-     * )
-     * { |
-     * }
-     * middle ( |
-     * )
+     *  |)
+     * { |}
+     * middle ( |)
      * {realize c2c : classescstraces::ClassCS2Class[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * c2c = classCS;
+     * c2c.classCS := classCS;
      * }
      * 
-     * }
      */
     protected boolean mClassCS2Class_LM(final @NonNull /*@NonInvalid*/ ClassCS classCS) {
         // predicates
@@ -176,24 +170,18 @@ public class classescs2as extends AbstractTransformationExecutor
     
     /**
      * 
-     * map mRootCS2Root_LM in classescs2as) {
+     * map mRootCS2Root_LM in classescs2as {
      * leftCS (rootCS : classescs::RootCS[1];
-     *  |
-     * )
-     * { |
-     * }
-     * middle ( |
-     * )
+     *  |)
+     * { |}
+     * middle ( |)
      * {realize r2r : classescstraces::RootCS2Root[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * r2r = rootCS;
+     * r2r.rootCS := rootCS;
      * }
      * 
-     * }
      */
     protected boolean mRootCS2Root_LM(final @NonNull /*@NonInvalid*/ RootCS rootCS) {
         // predicates
@@ -210,24 +198,18 @@ public class classescs2as extends AbstractTransformationExecutor
     
     /**
      * 
-     * map mPackageCS2Package_LM in classescs2as) {
+     * map mPackageCS2Package_LM in classescs2as {
      * leftCS (packageCS : classescs::PackageCS[1];
-     *  |
-     * )
-     * { |
-     * }
-     * middle ( |
-     * )
+     *  |)
+     * { |}
+     * middle ( |)
      * {realize p2p : classescstraces::PackageCS2Package[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * p2p = packageCS;
+     * p2p.packageCS := packageCS;
      * }
      * 
-     * }
      */
     protected boolean mPackageCS2Package_LM(final @NonNull /*@NonInvalid*/ PackageCS packageCS) {
         // predicates
@@ -244,24 +226,18 @@ public class classescs2as extends AbstractTransformationExecutor
     
     /**
      * 
-     * map mClassCS2Class_MR in classescs2as) {
+     * map mClassCS2Class_MR in classescs2as {
      * middle (c2c : classescstraces::ClassCS2Class[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize class : classes::Class[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * c2c = class;
+     * c2c.class := class;
      * }
      * 
-     * }
      */
     protected boolean mClassCS2Class_MR(final @NonNull /*@NonInvalid*/ ClassCS2Class c2c) {
         // predicates
@@ -277,24 +253,18 @@ public class classescs2as extends AbstractTransformationExecutor
     
     /**
      * 
-     * map mRootCS2Root_MR in classescs2as) {
+     * map mRootCS2Root_MR in classescs2as {
      * middle (r2r : classescstraces::RootCS2Root[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize root : classes::Root[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * r2r = root;
+     * r2r.root := root;
      * }
      * 
-     * }
      */
     protected boolean mRootCS2Root_MR(final @NonNull /*@NonInvalid*/ RootCS2Root r2r) {
         // predicates
@@ -310,24 +280,18 @@ public class classescs2as extends AbstractTransformationExecutor
     
     /**
      * 
-     * map mPackageCS2Package_MR in classescs2as) {
+     * map mPackageCS2Package_MR in classescs2as {
      * middle (p2p : classescstraces::PackageCS2Package[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize package : classes::Package[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * p2p = package;
+     * p2p.package := package;
      * }
      * 
-     * }
      */
     protected boolean mPackageCS2Package_MR(final @NonNull /*@NonInvalid*/ PackageCS2Package p2p) {
         // predicates
@@ -343,24 +307,19 @@ public class classescs2as extends AbstractTransformationExecutor
     
     /**
      * 
-     * map uClass_name in classescs2as) {
+     * map uClass_name in classescs2as {
      * rightAS (class : classes::Class[1];
-     *  |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
      * leftCS (classCS : classescs::ClassCS[1];
-     *  |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
      * where ( |
      * classCS.ClassCS2Class.class = class)
      * { |
-     * class = classCS.name;
+     * class.name := classCS.name;
      * }
      * 
-     * }
      */
     protected boolean uClass_name(final @NonNull /*@NonInvalid*/ classes.Class symbol_0, final @NonNull /*@NonInvalid*/ ClassCS classCS_0) {
         // predicates
@@ -380,25 +339,20 @@ public class classescs2as extends AbstractTransformationExecutor
     
     /**
      * 
-     * map uRoot_ownedPackages in classescs2as) {
+     * map uRoot_ownedPackages in classescs2as {
      * rightAS (root : classes::Root[1];
-     *  |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
      * leftCS (rootCS : classescs::RootCS[1];
-     *  |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
      * where ( |
      * rootCS.RootCS2Root.root =
      *   root)
      * { |
-     * root = rootCS.ownedPackages.PackageCS2Package.package->asOrderedSet();
+     * root.ownedPackages := rootCS.ownedPackages.PackageCS2Package.package->asOrderedSet();
      * }
      * 
-     * }
      */
     protected boolean uRoot_ownedPackages(final @NonNull /*@NonInvalid*/ Root root, final @NonNull /*@NonInvalid*/ RootCS rootCS_0) {
         // predicates
@@ -462,24 +416,19 @@ public class classescs2as extends AbstractTransformationExecutor
     
     /**
      * 
-     * map uPackage_name in classescs2as) {
+     * map uPackage_name in classescs2as {
      * rightAS (package : classes::Package[1];
-     *  |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
      * leftCS (packageCS : classescs::PackageCS[1];
-     *  |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
      * where ( |
      * packageCS.PackageCS2Package.package = package)
      * { |
-     * package = packageCS.name;
+     * package.name := packageCS.name;
      * }
      * 
-     * }
      */
     protected boolean uPackage_name(final @NonNull /*@NonInvalid*/ Package symbol_1, final @NonNull /*@NonInvalid*/ PackageCS packageCS_0) {
         // predicates
@@ -499,25 +448,20 @@ public class classescs2as extends AbstractTransformationExecutor
     
     /**
      * 
-     * map uPackage_ownedClasses in classescs2as) {
+     * map uPackage_ownedClasses in classescs2as {
      * rightAS (package : classes::Package[1];
-     *  |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
      * leftCS (packageCS : classescs::PackageCS[1];
-     *  |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
      * where ( |
      * packageCS.PackageCS2Package.package =
      *   package)
      * { |
-     * package = packageCS.ownedClasses.ClassCS2Class.class->asOrderedSet();
+     * package.ownedClasses := packageCS.ownedClasses.ClassCS2Class.class->asOrderedSet();
      * }
      * 
-     * }
      */
     protected boolean uPackage_ownedClasses(final @NonNull /*@NonInvalid*/ Package symbol_2, final @NonNull /*@NonInvalid*/ PackageCS packageCS_1) {
         // predicates
@@ -581,12 +525,10 @@ public class classescs2as extends AbstractTransformationExecutor
     
     /**
      * 
-     * map __root__ in classescs2as) {
+     * map __root__ in classescs2as {
      * 
-     *   where ( |
-     * )
-     * { |
-     * }
+     *   where ( |)
+     * { |}
      * for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances()
      *    {
      * map mPackageCS2Package_LM {
@@ -654,7 +596,6 @@ public class classescs2as extends AbstractTransformationExecutor
      * root := root;
      * rootCS := rootCS;
      * }}}
-     * }
      */
     protected boolean __root__() {
         // predicates

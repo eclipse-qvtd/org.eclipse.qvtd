@@ -164,29 +164,23 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
     
     /**
      * 
-     * map createPackage in classescs2as_Bug459225) {
+     * map createPackage in classescs2as_Bug459225 {
      * 
      *   leftCS (packageCS : classescs::PackageCS[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize package : classes::Package[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * package = if
+     * package.name := if
      *     packageCS.hasName()
      *   then packageCS.computeName()
      *   else 'unnamed'
      *   endif;
      * }
      * 
-     * }
      */
     protected boolean createPackage(final @NonNull /*@NonInvalid*/ PackageCS packageCS) {
         // predicates
@@ -223,18 +217,15 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
     
     /**
      * 
-     * map __root__ in classescs2as_Bug459225) {
+     * map __root__ in classescs2as_Bug459225 {
      * 
-     *   where ( |
-     * )
-     * { |
-     * }
+     *   where ( |)
+     * { |}
      * for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances()
      *    {
      * map createPackage {
      * packageCS := packageCS;
      * }}
-     * }
      */
     protected boolean __root__() {
         // predicates

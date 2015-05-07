@@ -109,18 +109,15 @@ public class hsv2hls extends AbstractTransformationExecutor
     
     /**
      * 
-     * map __root__ in hsv2hls) {
+     * map __root__ in hsv2hls {
      * 
-     *   where ( |
-     * )
-     * { |
-     * }
+     *   where ( |)
+     * { |}
      * for hsvRoot : HSVTree::HSVNode in hsv.objectsOfKind(HSVTree::HSVNode)
      *    {
      * map HSV2MiddleRoot {
      * hsvRoot := hsvRoot;
      * }}
-     * }
      */
     protected boolean __root__() {
         // predicates
@@ -144,23 +141,19 @@ public class hsv2hls extends AbstractTransformationExecutor
     
     /**
      * 
-     * map HSV2MiddleRoot in hsv2hls) {
+     * map HSV2MiddleRoot in hsv2hls {
      * hsv (hsvRoot : HSVTree::HSVNode[1];
-     *  |
-     * )
-     * { |
-     * }
-     * middle ( |
-     * )
+     *  |)
+     * { |}
+     * middle ( |)
      * {realize middleRoot : HSV2HLS::HSVNode2HLSNode[1];
-     *  |
-     * }
+     *  |}
      * where ( |
      * hsvRoot.parent =
      *   null)
      * { |
-     * middleRoot = hsvRoot;
-     * middleRoot = hsvRoot.name;
+     * middleRoot.hsv := hsvRoot;
+     * middleRoot.name := hsvRoot.name;
      * }
      * for hsvChild : HSVTree::HSVNode in hsvRoot.children {
      * 
@@ -170,7 +163,6 @@ public class hsv2hls extends AbstractTransformationExecutor
      * }}
      *   map Middle2HLSRoot {
      * middleNode := middleRoot;
-     * }
      * }
      */
     protected boolean HSV2MiddleRoot(final @NonNull /*@NonInvalid*/ HSVNode hsvRoot) {
@@ -204,25 +196,20 @@ public class hsv2hls extends AbstractTransformationExecutor
     
     /**
      * 
-     * map HSV2MiddleRecursion in hsv2hls) {
+     * map HSV2MiddleRecursion in hsv2hls {
      * 
      *   hsv (hsvNode : HSVTree::HSVNode[1];
-     *  |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
      * middle (middleParent : HSV2HLS::HSVNode2HLSNode[1];
-     *  |
-     * )
+     *  |)
      * {realize middleNode : HSV2HLS::HSVNode2HLSNode[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * middleNode = middleParent;
-     * middleNode = hsvNode;
-     * middleNode = hsvNode.name;
+     * middleNode.parent := middleParent;
+     * middleNode.hsv := hsvNode;
+     * middleNode.name := hsvNode.name;
      * }
      * for hsvChild : HSVTree::HSVNode in hsvNode.children {
      * 
@@ -230,7 +217,6 @@ public class hsv2hls extends AbstractTransformationExecutor
      * hsvNode := hsvChild;
      * middleParent := middleNode;
      * }}
-     * }
      */
     protected boolean HSV2MiddleRecursion(final @NonNull /*@NonInvalid*/ HSVNode hsvNode, final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleParent) {
         // predicates
@@ -258,31 +244,25 @@ public class hsv2hls extends AbstractTransformationExecutor
     
     /**
      * 
-     * map Middle2HLSRoot in hsv2hls) {
+     * map Middle2HLSRoot in hsv2hls {
      * 
      *   middle (middleNode : HSV2HLS::HSVNode2HLSNode[1];
-     *  |
-     * )
-     * { |
-     * }
-     * hls ( |
-     * )
+     *  |)
+     * { |}
+     * hls ( |)
      * {realize hlsNode : HLSTree::HLSNode[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * hlsNode = null;
-     * middleNode = hlsNode;
-     * hlsNode = middleNode.name;
+     * hlsNode.parent := null;
+     * middleNode.hls := hlsNode;
+     * hlsNode.name := middleNode.name;
      * }
      * for middleChild : HSV2HLS::HSVNode2HLSNode in middleNode.children {
      * 
      *     map Middle2HLSRecursion {
      * middleNode := middleChild;
      * }}
-     * }
      */
     protected boolean Middle2HLSRoot(final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleNode) {
         // predicates
@@ -310,31 +290,25 @@ public class hsv2hls extends AbstractTransformationExecutor
     
     /**
      * 
-     * map Middle2HLSRecursion in hsv2hls) {
+     * map Middle2HLSRecursion in hsv2hls {
      * 
      *   middle (middleNode : HSV2HLS::HSVNode2HLSNode[1];
-     *  |
-     * )
-     * { |
-     * }
-     * hls ( |
-     * )
+     *  |)
+     * { |}
+     * hls ( |)
      * {realize hlsNode : HLSTree::HLSNode[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * hlsNode = middleNode.parent.hls;
-     * middleNode = hlsNode;
-     * hlsNode = middleNode.name;
+     * hlsNode.parent := middleNode.parent.hls;
+     * middleNode.hls := hlsNode;
+     * hlsNode.name := middleNode.name;
      * }
      * for middleChild : HSV2HLS::HSVNode2HLSNode in middleNode.children {
      * 
      *     map Middle2HLSRecursion {
      * middleNode := middleChild;
      * }}
-     * }
      */
     protected boolean Middle2HLSRecursion(final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleNode_0) {
         // predicates

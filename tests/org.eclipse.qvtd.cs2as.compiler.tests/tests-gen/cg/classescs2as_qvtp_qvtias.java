@@ -175,24 +175,18 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map cClassCS_2_Class in classescs2as_qvtp_qvtias) {
+     * map cClassCS_2_Class in classescs2as_qvtp_qvtias {
      * leftCS (classCS : classescs::ClassCS[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize class : classes::Class[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * classCS = class;
+     * classCS.ast := class;
      * }
      * 
-     * }
      */
     protected boolean cClassCS_2_Class(final /*@NonNull*/ /*@NonInvalid*/ ClassCS classCS) {
         // predicates
@@ -208,24 +202,18 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map cPackageCS_2_Package in classescs2as_qvtp_qvtias) {
+     * map cPackageCS_2_Package in classescs2as_qvtp_qvtias {
      * leftCS (packageCS : classescs::PackageCS[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize package : classes::Package[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * packageCS = package;
+     * packageCS.ast := package;
      * }
      * 
-     * }
      */
     protected boolean cPackageCS_2_Package(final /*@NonNull*/ /*@NonInvalid*/ PackageCS packageCS) {
         // predicates
@@ -241,24 +229,18 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map cRootCS_2_Root in classescs2as_qvtp_qvtias) {
+     * map cRootCS_2_Root in classescs2as_qvtp_qvtias {
      * leftCS (rootCS : classescs::RootCS[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize root : classes::Root[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * rootCS = root;
+     * rootCS.ast := root;
      * }
      * 
-     * }
      */
     protected boolean cRootCS_2_Root(final /*@NonNull*/ /*@NonInvalid*/ RootCS rootCS) {
         // predicates
@@ -274,24 +256,18 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uClass_name in classescs2as_qvtp_qvtias) {
+     * map uClass_name in classescs2as_qvtp_qvtias {
      * 
      *   leftCS (classCS : classescs::ClassCS[1];
-     *  |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
+     * where ( |)
      * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
-     * where ( |
-     * )
-     * { |
-     * classCS.ast.oclAsType(classes::Class) = name;
+     * classCS.ast.oclAsType(classes::Class).name := name;
      * }
      * 
-     * }
      */
     protected boolean uClass_name(final /*@NonNull*/ /*@NonInvalid*/ ClassCS classCS_0) {
         // predicates
@@ -309,26 +285,20 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uClass_superClass in classescs2as_qvtp_qvtias) {
+     * map uClass_superClass in classescs2as_qvtp_qvtias {
      * 
      *   leftCS (classCS : classescs::ClassCS[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
-     * where ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
+     * where ( |)
      * { |
      * classCS.ast.oclAsType(classes::Class)
-     *    = ast.oclAsType(classes::Class)
+     *   .superClass := ast.oclAsType(classes::Class)
      *   .lookupClass(classCS);
      * }
      * 
-     * }
      */
     protected boolean uClass_superClass(final /*@NonNull*/ /*@NonInvalid*/ ClassCS classCS_1) {
         // predicates
@@ -398,24 +368,18 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uPackage_name in classescs2as_qvtp_qvtias) {
+     * map uPackage_name in classescs2as_qvtp_qvtias {
      * 
      *   leftCS (packageCS : classescs::PackageCS[1];
-     *  |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
+     * where ( |)
      * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
-     * where ( |
-     * )
-     * { |
-     * packageCS.ast.oclAsType(classes::Package) = name;
+     * packageCS.ast.oclAsType(classes::Package).name := name;
      * }
      * 
-     * }
      */
     protected boolean uPackage_name(final /*@NonNull*/ /*@NonInvalid*/ PackageCS packageCS_0) {
         // predicates
@@ -433,26 +397,20 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uPackage_ownedClasses in classescs2as_qvtp_qvtias) {
+     * map uPackage_ownedClasses in classescs2as_qvtp_qvtias {
      * 
      *   leftCS (packageCS : classescs::PackageCS[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
-     * where ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
+     * where ( |)
      * { |
      * packageCS.ast.oclAsType(classes::Package)
-     *    = ownedClasses.ast.oclAsType(classes::Class)
+     *   .ownedClasses := ownedClasses.ast.oclAsType(classes::Class)
      *   ->asOrderedSet();
      * }
      * 
-     * }
      */
     protected boolean uPackage_ownedClasses(final /*@NonNull*/ /*@NonInvalid*/ PackageCS packageCS_1) {
         // predicates
@@ -496,26 +454,20 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uPackage_ownedPackages in classescs2as_qvtp_qvtias) {
+     * map uPackage_ownedPackages in classescs2as_qvtp_qvtias {
      * 
      *   leftCS (packageCS : classescs::PackageCS[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
-     * where ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
+     * where ( |)
      * { |
      * packageCS.ast.oclAsType(classes::Package)
-     *    = ownedPackages.ast.oclAsType(classes::Package)
+     *   .ownedPackages := ownedPackages.ast.oclAsType(classes::Package)
      *   ->asOrderedSet();
      * }
      * 
-     * }
      */
     protected boolean uPackage_ownedPackages(final /*@NonNull*/ /*@NonInvalid*/ PackageCS packageCS_2) {
         // predicates
@@ -558,26 +510,20 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uRoot_ownedPackages in classescs2as_qvtp_qvtias) {
+     * map uRoot_ownedPackages in classescs2as_qvtp_qvtias {
      * 
      *   leftCS (rootCS : classescs::RootCS[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
-     * where ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
+     * where ( |)
      * { |
      * rootCS.ast.oclAsType(classes::Root)
-     *    = ownedPackages.ast.oclAsType(classes::Package)
+     *   .ownedPackages := ownedPackages.ast.oclAsType(classes::Package)
      *   ->asOrderedSet();
      * }
      * 
-     * }
      */
     protected boolean uRoot_ownedPackages(final /*@NonNull*/ /*@NonInvalid*/ RootCS rootCS_0) {
         // predicates
@@ -621,12 +567,10 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map __root__ in classescs2as_qvtp_qvtias) {
+     * map __root__ in classescs2as_qvtp_qvtias {
      * 
-     *   where ( |
-     * )
-     * { |
-     * }
+     *   where ( |)
+     * { |}
      * for rootCS : classescs::RootCS in classescs::RootCS.allInstances()
      *    {
      * map cRootCS_2_Root {
@@ -672,7 +616,6 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * map uClass_superClass {
      * classCS := classCS;
      * }}
-     * }
      */
     protected boolean __root__() {
         // predicates

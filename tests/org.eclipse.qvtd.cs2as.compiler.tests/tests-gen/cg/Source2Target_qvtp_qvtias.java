@@ -212,24 +212,18 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map cSRoot_2_TRoot in Source2Target_qvtp_qvtias) {
+     * map cSRoot_2_TRoot in Source2Target_qvtp_qvtias {
      * leftCS (sRoot : source::SRoot[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize tRoot : target::TRoot[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * sRoot = tRoot;
+     * sRoot.ast := tRoot;
      * }
      * 
-     * }
      */
     protected boolean cSRoot_2_TRoot(final /*@NonNull*/ /*@NonInvalid*/ SRoot sRoot) {
         // predicates
@@ -245,26 +239,21 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map cX_2_A3 in Source2Target_qvtp_qvtias) {
+     * map cX_2_A3 in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (x : source::X[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize a3 : target::A3[1];
-     *  |
-     * }
+     *  |}
      * where ( |
      * not disambiguatesToA1()
      *   not disambiguatesToA2())
      * { |
-     * x = a3;
+     * x.ast := a3;
      * }
      * 
-     * }
      */
     protected boolean cX_2_A3(final /*@NonNull*/ /*@NonInvalid*/ X x) {
         // predicates
@@ -290,26 +279,21 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map cX_2_A2 in Source2Target_qvtp_qvtias) {
+     * map cX_2_A2 in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (x : source::X[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize a2 : target::A2[1];
-     *  |
-     * }
+     *  |}
      * where ( |
      * not disambiguatesToA1()
      *   disambiguatesToA2())
      * { |
-     * x = a2;
+     * x.ast := a2;
      * }
      * 
-     * }
      */
     protected boolean cX_2_A2(final /*@NonNull*/ /*@NonInvalid*/ X x_0) {
         // predicates
@@ -334,25 +318,20 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map cX_2_A1 in Source2Target_qvtp_qvtias) {
+     * map cX_2_A1 in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (x : source::X[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize a1 : target::A1[1];
-     *  |
-     * }
+     *  |}
      * where ( |
      * disambiguatesToA1())
      * { |
-     * x = a1;
+     * x.ast := a1;
      * }
      * 
-     * }
      */
     protected boolean cX_2_A1(final /*@NonNull*/ /*@NonInvalid*/ X x_1) {
         // predicates
@@ -372,24 +351,18 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map cY1_2_B in Source2Target_qvtp_qvtias) {
+     * map cY1_2_B in Source2Target_qvtp_qvtias {
      * leftCS (y1 : source::Y1[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize b : target::B[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * y1 = b;
+     * y1.ast := b;
      * }
      * 
-     * }
      */
     protected boolean cY1_2_B(final /*@NonNull*/ /*@NonInvalid*/ Y1 y1) {
         // predicates
@@ -405,24 +378,18 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map cY2_2_C in Source2Target_qvtp_qvtias) {
+     * map cY2_2_C in Source2Target_qvtp_qvtias {
      * leftCS (y2 : source::Y2[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize c : target::C[1];
-     *  |
-     * }
-     * where ( |
-     * )
+     *  |}
+     * where ( |)
      * { |
-     * y2 = c;
+     * y2.ast := c;
      * }
      * 
-     * }
      */
     protected boolean cY2_2_C(final /*@NonNull*/ /*@NonInvalid*/ Y2 y2) {
         // predicates
@@ -438,25 +405,20 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map cZ_2_D_0 in Source2Target_qvtp_qvtias) {
+     * map cZ_2_D_0 in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (z : source::Z[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize d : target::D[1];
-     *  |
-     * }
+     *  |}
      * where ( |
      * not toY.oclIsKindOf(source::Y1))
      * { |
-     * z = d;
+     * z.ast := d;
      * }
      * 
-     * }
      */
     protected boolean cZ_2_D_0(final /*@NonNull*/ /*@NonInvalid*/ Z z) {
         // predicates
@@ -480,25 +442,20 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map cZ_2_D_1 in Source2Target_qvtp_qvtias) {
+     * map cZ_2_D_1 in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (z : source::Z[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
      * {realize d : target::D[1];
-     *  |
-     * }
+     *  |}
      * where ( |
      * toY.oclIsKindOf(source::Y1))
      * { |
-     * z = d;
+     * z.ast := d;
      * }
      * 
-     * }
      */
     protected boolean cZ_2_D_1(final /*@NonNull*/ /*@NonInvalid*/ Z z_0) {
         // predicates
@@ -521,25 +478,19 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uTRoot_ownedA in Source2Target_qvtp_qvtias) {
+     * map uTRoot_ownedA in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (sRoot : source::SRoot[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
-     * where ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
+     * where ( |)
      * { |
      * sRoot.ast.oclAsType(target::TRoot)
-     *    = ownedX.ast.oclAsType(target::A);
+     *   .ownedA := ownedX.ast.oclAsType(target::A);
      * }
      * 
-     * }
      */
     protected boolean uTRoot_ownedA(final /*@NonNull*/ /*@NonInvalid*/ SRoot sRoot_0) {
         // predicates
@@ -582,26 +533,21 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uA3_name in Source2Target_qvtp_qvtias) {
+     * map uA3_name in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (x : source::X[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
      * where ( |
      * not disambiguatesToA1()
      *   not disambiguatesToA2()
      *   )
      * { |
-     * x.ast.oclAsType(target::A3) = name;
+     * x.ast.oclAsType(target::A3).name := name;
      * }
      * 
-     * }
      */
     protected boolean uA3_name(final /*@NonNull*/ /*@NonInvalid*/ X x_2) {
         // predicates
@@ -629,28 +575,23 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uA3_ownsC in Source2Target_qvtp_qvtias) {
+     * map uA3_ownsC in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (x : source::X[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
      * where ( |
      * not disambiguatesToA1()
      *   not disambiguatesToA2()
      *   )
      * { |
      * x.ast.oclAsType(target::A3)
-     *    = ownsY.oclAsType(source::Y2)
+     *   .ownsC := ownsY.oclAsType(source::Y2)
      *   .ast.oclAsType(target::C);
      * }
      * 
-     * }
      */
     protected boolean uA3_ownsC(final /*@NonNull*/ /*@NonInvalid*/ X x_3) {
         // predicates
@@ -720,26 +661,21 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uA2_name in Source2Target_qvtp_qvtias) {
+     * map uA2_name in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (x : source::X[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
      * where ( |
      * not disambiguatesToA1()
      *   disambiguatesToA2()
      *   )
      * { |
-     * x.ast.oclAsType(target::A2) = name;
+     * x.ast.oclAsType(target::A2).name := name;
      * }
      * 
-     * }
      */
     protected boolean uA2_name(final /*@NonNull*/ /*@NonInvalid*/ X x_4) {
         // predicates
@@ -766,28 +702,23 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uA2_ownsC in Source2Target_qvtp_qvtias) {
+     * map uA2_ownsC in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (x : source::X[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
      * where ( |
      * not disambiguatesToA1()
      *   disambiguatesToA2()
      *   )
      * { |
      * x.ast.oclAsType(target::A2)
-     *    = ownsY.oclAsType(source::Y2)
+     *   .ownsC := ownsY.oclAsType(source::Y2)
      *   .ast.oclAsType(target::C);
      * }
      * 
-     * }
      */
     protected boolean uA2_ownsC(final /*@NonNull*/ /*@NonInvalid*/ X x_5) {
         // predicates
@@ -856,25 +787,20 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uA1_name in Source2Target_qvtp_qvtias) {
+     * map uA1_name in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (x : source::X[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
      * where ( |
      * disambiguatesToA1()
      *   )
      * { |
-     * x.ast.oclAsType(target::A1) = name;
+     * x.ast.oclAsType(target::A1).name := name;
      * }
      * 
-     * }
      */
     protected boolean uA1_name(final /*@NonNull*/ /*@NonInvalid*/ X x_6) {
         // predicates
@@ -896,27 +822,22 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uA1_ownsB in Source2Target_qvtp_qvtias) {
+     * map uA1_ownsB in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (x : source::X[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
      * where ( |
      * disambiguatesToA1()
      *   )
      * { |
      * x.ast.oclAsType(target::A1)
-     *    = ownsY.oclAsType(source::Y1)
+     *   .ownsB := ownsY.oclAsType(source::Y1)
      *   .ast.oclAsType(target::B);
      * }
      * 
-     * }
      */
     protected boolean uA1_ownsB(final /*@NonNull*/ /*@NonInvalid*/ X x_7) {
         // predicates
@@ -980,25 +901,19 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uB_ownsD in Source2Target_qvtp_qvtias) {
+     * map uB_ownsD in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (y1 : source::Y1[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
-     * where ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
+     * where ( |)
      * { |
      * y1.ast.oclAsType(target::B)
-     *    = ownsZ.ast.oclAsType(target::D);
+     *   .ownsD := ownsZ.ast.oclAsType(target::D);
      * }
      * 
-     * }
      */
     protected boolean uB_ownsD(final /*@NonNull*/ /*@NonInvalid*/ Y1 y1_0) {
         // predicates
@@ -1022,24 +937,18 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uB_name in Source2Target_qvtp_qvtias) {
+     * map uB_name in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (y1 : source::Y1[1];
-     *  |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
+     * where ( |)
      * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
-     * where ( |
-     * )
-     * { |
-     * y1.ast.oclAsType(target::B) = name;
+     * y1.ast.oclAsType(target::B).name := name;
      * }
      * 
-     * }
      */
     protected boolean uB_name(final /*@NonNull*/ /*@NonInvalid*/ Y1 y1_1) {
         // predicates
@@ -1057,25 +966,19 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uC_ownsD in Source2Target_qvtp_qvtias) {
+     * map uC_ownsD in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (y2 : source::Y2[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
-     * where ( |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
+     * where ( |)
      * { |
      * y2.ast.oclAsType(target::C)
-     *    = ownsZ.ast.oclAsType(target::D);
+     *   .ownsD := ownsZ.ast.oclAsType(target::D);
      * }
      * 
-     * }
      */
     protected boolean uC_ownsD(final /*@NonNull*/ /*@NonInvalid*/ Y2 y2_0) {
         // predicates
@@ -1099,24 +1002,18 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uC_name in Source2Target_qvtp_qvtias) {
+     * map uC_name in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (y2 : source::Y2[1];
-     *  |
-     * )
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
+     * where ( |)
      * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
-     * where ( |
-     * )
-     * { |
-     * y2.ast.oclAsType(target::C) = name;
+     * y2.ast.oclAsType(target::C).name := name;
      * }
      * 
-     * }
      */
     protected boolean uC_name(final /*@NonNull*/ /*@NonInvalid*/ Y2 y2_1) {
         // predicates
@@ -1134,27 +1031,22 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uD_0_toA in Source2Target_qvtp_qvtias) {
+     * map uD_0_toA in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (z : source::Z[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
      * where ( |
      * not toY.oclIsKindOf(source::Y1)
      *   )
      * { |
      * z.ast.oclAsType(target::D)
-     *    = toY.oclAsType(source::Y2)
+     *   .toA := toY.oclAsType(source::Y2)
      *   .ast.oclAsType(target::C).toA2;
      * }
      * 
-     * }
      */
     protected boolean uD_0_toA(final /*@NonNull*/ /*@NonInvalid*/ Z z_1) {
         // predicates
@@ -1190,27 +1082,22 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uD_0_refsC in Source2Target_qvtp_qvtias) {
+     * map uD_0_refsC in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (z : source::Z[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
      * where ( |
      * not toY.oclIsKindOf(source::Y1)
      *   )
      * { |
      * z.ast.oclAsType(target::D)
-     *    = ast.oclAsType(target::D)
+     *   .refsC := ast.oclAsType(target::D)
      *   .lookupC(z);
      * }
      * 
-     * }
      */
     protected boolean uD_0_refsC(final /*@NonNull*/ /*@NonInvalid*/ Z z_2) {
         // predicates
@@ -1295,27 +1182,22 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uD_1_toA in Source2Target_qvtp_qvtias) {
+     * map uD_1_toA in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (z : source::Z[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
      * where ( |
      * toY.oclIsKindOf(source::Y1)
      *   )
      * { |
      * z.ast.oclAsType(target::D)
-     *    = toY.oclAsType(source::Y1)
+     *   .toA := toY.oclAsType(source::Y1)
      *   .ast.oclAsType(target::B).toA1;
      * }
      * 
-     * }
      */
     protected boolean uD_1_toA(final /*@NonNull*/ /*@NonInvalid*/ Z z_3) {
         // predicates
@@ -1349,27 +1231,22 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map uD_1_refsB in Source2Target_qvtp_qvtias) {
+     * map uD_1_refsB in Source2Target_qvtp_qvtias {
      * 
      *   leftCS (z : source::Z[1];
-     *  |
-     * )
-     * { |
-     * }
-     * rightAS ( |
-     * )
-     * { |
-     * }
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * { |}
      * where ( |
      * toY.oclIsKindOf(source::Y1)
      *   )
      * { |
      * z.ast.oclAsType(target::D)
-     *    = ast.oclAsType(target::D)
+     *   .refsB := ast.oclAsType(target::D)
      *   .lookupB(z);
      * }
      * 
-     * }
      */
     protected boolean uD_1_refsB(final /*@NonNull*/ /*@NonInvalid*/ Z z_4) {
         // predicates
@@ -1453,12 +1330,10 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map __root__ in Source2Target_qvtp_qvtias) {
+     * map __root__ in Source2Target_qvtp_qvtias {
      * 
-     *   where ( |
-     * )
-     * { |
-     * }
+     *   where ( |)
+     * { |}
      * for sRoot : source::SRoot in source::SRoot.allInstances()
      *    {
      * map cSRoot_2_TRoot {
@@ -1574,7 +1449,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * map uD_1_toA {
      * z := z;
      * }}
-     * }
      */
     protected boolean __root__() {
         // predicates
