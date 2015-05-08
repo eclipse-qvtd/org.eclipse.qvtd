@@ -26,15 +26,15 @@ public abstract class AbstractTransformationEvaluator extends ExecutorManager im
 			throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException , NoSuchMethodException {
 		this(environment, ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class)));
 	}
-	
-	@Override
-	public @NonNull TransformationExecutor getExecutor() {
-		return executor;
-	}
 
 	@Override
 	public @NonNull Evaluator createNestedEvaluator() {
 		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	public @NonNull TransformationExecutor getExecutor() {
+		return executor;
 	}
 
 	@Override

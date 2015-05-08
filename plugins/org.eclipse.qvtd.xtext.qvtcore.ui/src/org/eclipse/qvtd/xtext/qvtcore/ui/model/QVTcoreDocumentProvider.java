@@ -23,8 +23,7 @@ public class QVTcoreDocumentProvider extends BaseCSorASDocumentProvider
 {
 	@Override
 	protected @NonNull String createTestDocument(@NonNull URI uri, @NonNull String lastSegment) {
-		return "package " + lastSegment + " : pfx = '"+ uri + "' {\n" +
-		"}\n";
+		return "";
 	}
 
 	@Override
