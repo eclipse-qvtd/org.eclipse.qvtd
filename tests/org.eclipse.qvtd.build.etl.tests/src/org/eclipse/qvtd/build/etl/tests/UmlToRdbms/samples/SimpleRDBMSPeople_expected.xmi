@@ -2,7 +2,10 @@
 <simplerdbms:Schema
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:simplerdbms="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS ../SimpleRDBMS.ecore">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simplerdbms="http://www.eclipse.org/qvtd/test/compiler/0.1/SimpleRDBMS"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/test/compiler/0.1/SimpleRDBMS ../SimpleRDBMS.ecore"
+    name="People">
   <tables name="Student"
       kind="base">
     <columns
@@ -34,9 +37,16 @@
     <columns
         name="name"
         type="VARCHAR"/>
+    <columns
+        name="professorLivesAt_tid"
+        foreignKeys="//@tables.1/@foreignKeys.0"/>
     <keys name="Professor_pk"
         kind="primary"
         column="//@tables.1/@columns.0"/>
+    <foreignKeys
+        name="professorLivesAt"
+        refersTo="//@tables.2/@keys.0"
+        columns="//@tables.1/@columns.3"/>
   </tables>
   <tables name="Address"
       kind="base">

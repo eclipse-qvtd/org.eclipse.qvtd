@@ -77,9 +77,9 @@
   <elements
       xsi:type="simpleuml:Association"
       kind=""
-      name="proffesorLivesAt"
-      source="//@elements.1"
-      destination="//@elements.2"/>
+      name="professorLivesAt"
+      destination="//@elements.2"
+      source="//@elements.1"/>
   <elements
       xsi:type="simpleuml:PrimitiveDataType"
       name="String"
