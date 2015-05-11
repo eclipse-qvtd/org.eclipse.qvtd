@@ -51,6 +51,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLBuilder;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
+import org.eclipse.qvtd.pivot.schedule.utilities.ScheduleToCallGraph;
 import org.eclipse.qvtd.pivot.schedule.utilities.ScheduleToDependencyGraphVisitor;
 
 // TODO: Auto-generated Javadoc
@@ -66,7 +67,7 @@ public class MtcBroker {
 	private static final String CONFIG_MODEL_NAME = "config";
 	
 	/** The Constant CONFIG_MM. */
-	private static final String CONFIG_MM = "platform:/resource/org.eclipse.qvtd.compiler/model/QVTcConfig.ecore";
+//	private static final String CONFIG_MM = "platform:/resource/org.eclipse.qvtd.compiler/model/QVTcConfig.ecore";
 	
 	/** The Constant CONFIG_URI. */
 	private static final String CONFIG_URI = QVTcConfigPackage.eNS_URI;
@@ -189,6 +190,8 @@ public class MtcBroker {
 	protected PivotModel oclStdLibModel;
 	
 	private URI dependencyGraphUri;
+	
+	private URI callGraphUri;
 
 	/** The r metamodel. */
 	@SuppressWarnings("unused")
@@ -230,6 +233,8 @@ public class MtcBroker {
 	
 	/** The i model. */
 	protected PivotModel iModel;
+
+	
 		
 	
 	/**
@@ -260,6 +265,7 @@ public class MtcBroker {
 		this.baseUri = baseURI;
 		this.debugUri = baseURI.appendSegment("debug");
 		String dgPath = this.debugUri.appendSegment(qvtcSource).trimFileExtension() + "Dependencies";
+		String cgPath = this.debugUri.appendSegment(qvtcSource).trimFileExtension() + "Calls";
 		System.out.println("Executing the QVTc to QVTi MTC for " + qvtcSource);
 		this.baseUri = baseURI;
 		URI qvtcURI = baseURI.appendSegment(qvtcSource);
@@ -272,6 +278,7 @@ public class MtcBroker {
 		this.configUri = URI.createURI(modelsBaseUri.toString() + "Config").appendFileExtension("xmi").toString();
 		this.scheduleUri = URI.createURI(modelsBaseUri.toString() + "Schedule").appendFileExtension("xmi").toString();
 		this.dependencyGraphUri = URI.createURI(dgPath).appendFileExtension("graphml");
+		this.callGraphUri = URI.createURI(cgPath).appendFileExtension("graphml");
 		
 		candidateMetamodelContainmentTrees = new HashMap<String, List<PivotModel>>();
 		registerMetamodels(environmentFactory);
@@ -373,7 +380,8 @@ public class MtcBroker {
 	
 	protected void qvtsToGraphML(PivotModel sModel) throws QvtMtcExecutionException {
 		
-		GraphBuilder builder = new GraphMLBuilder();
+		GraphBuilder depBuilder = new GraphMLBuilder();
+		GraphBuilder callBuilder = new GraphMLBuilder();
 		
 		Schedule s = null;
         try {
@@ -382,23 +390,38 @@ public class MtcBroker {
 			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		} finally {
 			if (s != null) {
-				ScheduleToDependencyGraphVisitor visitor = new ScheduleToDependencyGraphVisitor(builder, this.darkTheme);
+				ScheduleToDependencyGraphVisitor depVisitor = new ScheduleToDependencyGraphVisitor(depBuilder, this.darkTheme);
+				ScheduleToCallGraph callVisitor = new ScheduleToCallGraph(callBuilder, this.darkTheme);
 				// GEt the source/middle/target info from the configuration
 				for (EObject eContent : configModel.getResource().getContents()) {
 					if (eContent instanceof Configuration) {
 						Configuration c = (Configuration) eContent;
-						visitor.setInputDirection(c.getInputDirection().getName());
-						visitor.setMiddleDirection("middle"); // Always middle? Should the configuration have this value?
+						depVisitor.setInputDirection(c.getInputDirection().getName());
+						depVisitor.setMiddleDirection("middle"); // Always middle? Should the configuration have this value?
 						for (Direction od : c.getOutputDirection())  {
-							visitor.getOutputDirection().add(od.getName());
+							depVisitor.getOutputDirection().add(od.getName());
 						}
 					}
 				}
-				s.accept(visitor);
+				s.accept(depVisitor);
 				// Save/print the builder
 				try (Writer writer = new BufferedWriter(new OutputStreamWriter(
 						URIConverter.INSTANCE.createOutputStream(this.dependencyGraphUri), "utf-8"))) {
-				   writer.write(builder.toString());
+				   writer.write(depBuilder.toString());
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				s.accept(callVisitor);
+				try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+						URIConverter.INSTANCE.createOutputStream(this.callGraphUri), "utf-8"))) {
+				   writer.write(callBuilder.toString());
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -411,6 +434,7 @@ public class MtcBroker {
 				}
 			}
 		}
+        System.out.println("Graphs created.");
 	}
 
 	public void executeQvtcToQvtu() throws QvtMtcExecutionException {

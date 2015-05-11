@@ -119,7 +119,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	MyQVT myQVT = createQVT();
     	
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("UmlToRdbms");;
-    	URI samplesBaseUri = testBaseURI.appendSegment("samples");
+//    	URI samplesBaseUri = testBaseURI.appendSegment("samples");
     	MtcBroker mtc = new MtcBroker(testBaseURI, "UmlToRdbms.qvtcas", myQVT.getEnvironmentFactory(), TestsXMLUtil.defaultSavingOptions);
     	mtc.setCreateGraphml(true);
     	mtc.execute();

@@ -15,6 +15,9 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface GraphBuilder {
 	void appendEdge(@NonNull String sourceId, @NonNull String targetId, @NonNull String lineColor,
 			@NonNull String lineType, @NonNull String sourceArrowType, @NonNull String targetArrowType);
+	void appendEdge(@NonNull String sourceId, @NonNull String targetId, @NonNull String lineColor,
+			@NonNull String lineType, @NonNull String sourceArrowType, @NonNull String targetArrowType,
+			@NonNull String label);
 	void appendNode(@NonNull String id, @NonNull String shapeName,
 			@NonNull String fillColor, String label, @NonNull String labelColor);
 	void close();

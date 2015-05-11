@@ -200,6 +200,27 @@ public class GraphMLBuilder implements GraphBuilder
 		s.popTag();
 	}
 	
+	@Override
+	public void appendEdge(@NonNull String sourceId, @NonNull String targetId,
+			@NonNull String lineColor, @NonNull String lineType,
+			@NonNull String sourceArrowType, @NonNull String targetArrowType,
+			@NonNull String label) {
+		s.pushTag("edge");
+		s.appendElement("id", "e" + edgeCount++);
+		s.appendElement("source", "n" + sourceId);
+		s.appendElement("target", "n" + targetId);
+		s.pushTag("data");
+			s.appendElement("key", "d9");
+			s.pushTag("y:PolyLineEdge");
+				appendLineStyle(new LineStyle(lineColor, LineType.valueOf(lineType)));
+				appendArrows(sourceArrowType, targetArrowType);
+				appendEdgeLabel(label, lineColor);
+			s.popTag();
+		s.popTag();
+	s.popTag();
+	}
+
+	
 	public void appendFill(@NonNull String fillColor) {
 		s.pushTag("y:Fill");
 			s.appendElement("color", fillColor);
@@ -217,7 +238,13 @@ public class GraphMLBuilder implements GraphBuilder
 		s.popTag();
 	}
 	
-	protected void appendLabel(String label, String labelColor) {
+	protected void appendEdgeLabel(String label, String labelColor) {
+		s.pushTag("y:EdgeLabel");
+			s.appendElement("textColor", labelColor);
+		s.appendValueAndPopTag(label);
+	}
+	
+	protected void appendNodeLabel(String label, String labelColor) {
 		s.pushTag("y:NodeLabel");
 			s.appendElement("textColor", labelColor);
 		s.appendValueAndPopTag(label);
@@ -245,7 +272,7 @@ public class GraphMLBuilder implements GraphBuilder
 					appendGeometry(g);
 					appendFill(fillColor);
 					appendBorder(new BorderStyle(labelColor, LineType.line));
-					appendLabel(label, labelColor);
+					appendNodeLabel(label, labelColor);
 					appendShape(shapeName);
 				s.popTag();
 			s.popTag();
@@ -303,6 +330,7 @@ public class GraphMLBuilder implements GraphBuilder
 	public String toString() {
 		return s.toString();
 	}
+
 
 
 }
