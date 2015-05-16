@@ -19,9 +19,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
-import org.eclipse.qvtd.cs2as.compiler.tests.OCL2QVTiTestCases;
 import org.eclipse.qvtd.build.etl.tests.QVTdMtcTests;
 import org.eclipse.qvtd.build.qvtrtoqvtc.tests.QvtrToQvtcTests;
+import org.eclipse.qvtd.cs2as.compiler.tests.OCL2QVTiTestCases;
 import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseLibraryTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.AllQVTcoreTests;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.AllQVTimperativeTests;

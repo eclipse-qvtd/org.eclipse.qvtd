@@ -67,6 +67,7 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 		configureSquareBracketedClauseCS(c, f.getSquareBracketedClauseCSAccess());
 	    configureTupleLiteralExpCS(c, f.getTupleLiteralExpCSAccess());
 	    configureTupleTypeCS(c, f.getTupleTypeCSAccess());
+//		configureTypedTypeRefCS(c, f.getTypedTypeRefCSAccess());
 	    configureURIPathNameCS(c, f.getURIPathNameCSAccess());
 
 		c.setLinewrap(0, 1, 2).before(f.getSL_COMMENTRule());
