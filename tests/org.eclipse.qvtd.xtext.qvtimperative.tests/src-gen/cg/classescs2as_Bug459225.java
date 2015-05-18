@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
@@ -106,51 +107,28 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
      *   endif
      */
     public @Nullable /*@NonInvalid*/ String computeName(final @NonNull /*@NonInvalid*/ NamedElementCS self_0) {
-        @Nullable /*@Caught*/ Object CAUGHT_container;
-        try {
-            final @Nullable /*@Thrown*/ Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_0);
-            CAUGHT_container = container;
-        }
-        catch (Exception e) {
-            CAUGHT_container = ValueUtil.createInvalidValue(e);
-        }
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @Nullable /*@NonInvalid*/ Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_0);
         final @Nullable /*@Thrown*/ String name_0 = self_0.getName();
-        @Nullable /*@Caught*/ Object CAUGHT_not;
-        try {
-            final /*@NonInvalid*/ boolean symbol_0 = (CAUGHT_container == null) || (CAUGHT_container instanceof InvalidValueException);
-            final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_0);
-            CAUGHT_not = not;
-        }
-        catch (Exception e) {
-            CAUGHT_not = ValueUtil.createInvalidValue(e);
-        }
+        final /*@NonInvalid*/ boolean symbol_0 = container == null;
+        final @Nullable /*@NonInvalid*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_0);
         @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
         try {
             final @NonNull /*@NonInvalid*/ Class TYP_classescs_c_c_NamedElementCS_0 = idResolver.getClass(CLSSid_NamedElementCS, null);
-            if (CAUGHT_container instanceof InvalidValueException) {
-                throw (InvalidValueException)CAUGHT_container;
-            }
-            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_classescs_c_c_NamedElementCS_0).booleanValue();
+            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, container, TYP_classescs_c_c_NamedElementCS_0).booleanValue();
             CAUGHT_oclIsKindOf = oclIsKindOf;
         }
         catch (Exception e) {
             CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
         }
-        final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_not, CAUGHT_oclIsKindOf);
+        final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(not, CAUGHT_oclIsKindOf);
         if (and == null) {
             throw new InvalidValueException("Null if condition");
         }
         @Nullable /*@Thrown*/ String symbol_1;
         if (and) {
             final @NonNull /*@NonInvalid*/ Class TYP_classescs_c_c_NamedElementCS_1 = idResolver.getClass(CLSSid_NamedElementCS, null);
-            if (CAUGHT_container instanceof InvalidValueException) {
-                throw (InvalidValueException)CAUGHT_container;
-            }
-            final @Nullable /*@Thrown*/ NamedElementCS oclAsType = (NamedElementCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_classescs_c_c_NamedElementCS_1);
-            if (oclAsType == null) {
-                throw new InvalidValueException("Null source for \'classescs::NamedElementCS::computeName() : String[?]\'");
-            }
+            final @NonNull /*@Thrown*/ NamedElementCS oclAsType = ClassUtil.nonNullState((NamedElementCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, container, TYP_classescs_c_c_NamedElementCS_1));
             final @Nullable /*@Thrown*/ String computeName = this.computeName(oclAsType);
             final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(computeName, STR__c_c);
             final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
@@ -198,7 +176,7 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
             CAUGHT_name = ValueUtil.createInvalidValue(e);
         }
         final /*@NonInvalid*/ boolean symbol_1 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
-        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_1);
+        final @Nullable /*@NonInvalid*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_1);
         if (not == null) {
             throw new InvalidValueException("Null if condition");
         }
@@ -234,7 +212,7 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         // creations
         // assignments
         // mapping statements
-        final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
+        final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
         final List<PackageCS> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, PackageCS.class);
         assert UNBOXED_allInstances != null;
         ;

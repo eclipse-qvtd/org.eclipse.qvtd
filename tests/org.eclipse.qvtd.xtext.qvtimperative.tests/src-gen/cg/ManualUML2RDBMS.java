@@ -198,7 +198,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // creations
         // assignments
         // mapping statements
-        final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Package, TYP_uml_c_c_Package_0);
+        final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Package, TYP_uml_c_c_Package_0);
         final List<Package> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, Package.class);
         assert UNBOXED_allInstances != null;
         ;
@@ -261,8 +261,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean packageToSchemaLM(final @NonNull /*@NonInvalid*/ Package p) {
         // predicates
-        final @Nullable /*@Thrown*/ List<PackageElement> elements_0 = p.getElements();
-        assert elements_0 != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<PackageElement> elements_0 = p.getElements();
         // creations
         final /*@Thrown*/ PackageToSchema p2s_11 = UML2RDBMSFactory.eINSTANCE.createPackageToSchema();
         assert p2s_11 != null;
@@ -353,8 +353,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         p2s.setSchema(s_2);
         // mapping statements
         packageToSchemaMR_1(p2s, s_2);
-        final @Nullable /*@Thrown*/ List<PrimitiveToName> primitivesToNames = p2s.getPrimitivesToNames();
-        assert primitivesToNames != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<PrimitiveToName> primitivesToNames = p2s.getPrimitivesToNames();
         ;
         for (PrimitiveToName child : primitivesToNames) {
             if (child != null) {
@@ -364,8 +364,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
                 stringToVarcharMR(symbol_5, p2s);
             }
         }
-        final @Nullable /*@Thrown*/ List<ClassToTable> classesToTables = p2s.getClassesToTables();
-        assert classesToTables != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<ClassToTable> classesToTables = p2s.getClassesToTables();
         ;
         for (ClassToTable child_0 : classesToTables) {
             if (child_0 != null) {
@@ -424,8 +424,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean integerToNumberLM(final @NonNull /*@NonInvalid*/ Package p_0, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_0, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim) {
         // predicates
-        final @Nullable /*@Thrown*/ Package umlPackage = p2s_0.getUmlPackage();
-        final /*@Thrown*/ boolean eq = p_0.equals(umlPackage);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Package umlPackage = p2s_0.getUmlPackage();
+        final /*@Thrown*/ boolean eq = umlPackage.equals(p_0);
         if (!eq) {
             return false;
         }
@@ -472,8 +473,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     protected boolean integerToNumberMR(final @NonNull /*@NonInvalid*/ PrimitiveToName p2n, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_2) {
         // predicates
         final @Nullable /*@Thrown*/ String name = p2n.getName();
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(STR_Integer, STR_2);
-        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_NUMBER);
+        final @NonNull /*@NonInvalid*/ String sum = StringConcatOperation.INSTANCE.evaluate(STR_Integer, STR_2);
+        final @NonNull /*@NonInvalid*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_NUMBER);
         final /*@Thrown*/ boolean eq = sum_0.equals(name);
         if (!eq) {
             return false;
@@ -512,8 +513,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean booleanToBooleanLM(final @NonNull /*@NonInvalid*/ Package p_1, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_3, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim_0) {
         // predicates
-        final @Nullable /*@Thrown*/ Package umlPackage = p2s_3.getUmlPackage();
-        final /*@Thrown*/ boolean eq = p_1.equals(umlPackage);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Package umlPackage = p2s_3.getUmlPackage();
+        final /*@Thrown*/ boolean eq = umlPackage.equals(p_1);
         if (!eq) {
             return false;
         }
@@ -560,8 +562,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     protected boolean booleanToBooleanMR(final @NonNull /*@NonInvalid*/ PrimitiveToName p2n_0, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_4) {
         // predicates
         final @Nullable /*@Thrown*/ String name = p2n_0.getName();
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(STR_Boolean, STR_2);
-        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_BOOLEAN);
+        final @NonNull /*@NonInvalid*/ String sum = StringConcatOperation.INSTANCE.evaluate(STR_Boolean, STR_2);
+        final @NonNull /*@NonInvalid*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_BOOLEAN);
         final /*@Thrown*/ boolean eq = sum_0.equals(name);
         if (!eq) {
             return false;
@@ -600,8 +602,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean stringToVarcharLM(final @NonNull /*@NonInvalid*/ Package p_2, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_5, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim_1) {
         // predicates
-        final @Nullable /*@Thrown*/ Package umlPackage = p2s_5.getUmlPackage();
-        final /*@Thrown*/ boolean eq = p_2.equals(umlPackage);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Package umlPackage = p2s_5.getUmlPackage();
+        final /*@Thrown*/ boolean eq = umlPackage.equals(p_2);
         if (!eq) {
             return false;
         }
@@ -648,8 +651,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     protected boolean stringToVarcharMR(final @NonNull /*@NonInvalid*/ PrimitiveToName p2n_1, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_6) {
         // predicates
         final @Nullable /*@Thrown*/ String name = p2n_1.getName();
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(STR_String, STR_2);
-        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_VARCHAR);
+        final @NonNull /*@NonInvalid*/ String sum = StringConcatOperation.INSTANCE.evaluate(STR_String, STR_2);
+        final @NonNull /*@NonInvalid*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_VARCHAR);
         final /*@Thrown*/ boolean eq = sum_0.equals(name);
         if (!eq) {
             return false;
@@ -717,8 +720,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         if (!eq_0) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Package umlPackage = p2s_7.getUmlPackage();
-        final /*@Thrown*/ boolean eq_1 = p_3.equals(umlPackage);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Package umlPackage = p2s_7.getUmlPackage();
+        final /*@Thrown*/ boolean eq_1 = umlPackage.equals(p_3);
         if (!eq_1) {
             return false;
         }
@@ -733,16 +737,14 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         final @Nullable /*@Thrown*/ String name = c.getName();
         c2t_3.setName(name);
         // mapping statements
-        final @Nullable /*@Thrown*/ List<Attribute> attributes = c.getAttributes();
-        assert attributes != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<Attribute> attributes = c.getAttributes();
         ;
         for (Attribute anAttribute : attributes) {
             if (anAttribute != null) {
                 final @NonNull /*@NonInvalid*/ Attribute symbol_6 = (Attribute)anAttribute;
-                final @Nullable /*@Thrown*/ Classifier type_0 = symbol_6.getType();
-                if (type_0 == null) {
-                    throw new InvalidValueException("Null binding for \'complexAttributeComplexAttributesLM::c\'");
-                }
+                @SuppressWarnings("null")
+                final @NonNull /*@Thrown*/ Classifier type_0 = symbol_6.getType();
                 classPrimitiveAttributesLM(symbol_6, c, c2t_3);
                 classComplexAttributesLM(symbol_6, c, c2t_3);
                 if (type_0 instanceof manualuml2rdbms.uml.Class) {
@@ -805,15 +807,15 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean classToTableMR(final @NonNull /*@NonInvalid*/ ClassToTable c2t, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_8, final @NonNull /*@NonInvalid*/ Schema s) {
         // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final @Nullable /*@Thrown*/ PackageToSchema owner = c2t.getOwner();
         final /*@Thrown*/ boolean eq = p2s_8.equals(owner);
         if (!eq) {
             return false;
         }
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_uml2rdbms_c_c_NonLeafAttribute_0 = idResolver.getClass(CLSSid_NonLeafAttribute, null);
-        final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes = c2t.getFromAttributes();
-        assert fromAttributes != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<FromAttribute> fromAttributes = c2t.getFromAttributes();
         final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
         // creations
         final /*@Thrown*/ Table t_0 = RDBMSFactory.eINSTANCE.createTable();
@@ -825,8 +827,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // mapping statements
         classToTableMR_1(c2t, t_0);
         classToTableMR_2(c2t, t_0);
-        final @Nullable /*@Thrown*/ List<AssociationToForeignKey> associationsToForeignKeys = c2t.getAssociationsToForeignKeys();
-        assert associationsToForeignKeys != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<AssociationToForeignKey> associationsToForeignKeys = c2t.getAssociationsToForeignKeys();
         ;
         for (AssociationToForeignKey child : associationsToForeignKeys) {
             if (child != null) {
@@ -844,22 +846,19 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         }
         final @NonNull /*@Thrown*/ SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_fromAttributes, TYP_uml2rdbms_c_c_NonLeafAttribute_0);
         @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_FromAttribute);
-        @Nullable Iterator<?> ITERATOR__1 = selectByKind.iterator();
+        @NonNull Iterator<?> ITERATOR__1 = selectByKind.iterator();
         @NonNull /*@Thrown*/ BagValue collect;
         while (true) {
             if (!ITERATOR__1.hasNext()) {
                 collect = accumulator;
                 break;
             }
-            @Nullable /*@NonInvalid*/ NonLeafAttribute _1 = (NonLeafAttribute)ITERATOR__1.next();
+            @NonNull /*@NonInvalid*/ NonLeafAttribute _1 = (NonLeafAttribute)ITERATOR__1.next();
             /**
              * fromAttributes
              */
-            if (_1 == null) {
-                throw new InvalidValueException("Null source for \'uml2rdbms::FromAttributeOwner::fromAttributes\'");
-            }
-            final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes_1 = _1.getFromAttributes();
-            assert fromAttributes_1 != null;
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ List<FromAttribute> fromAttributes_1 = _1.getFromAttributes();
             final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes_1 = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes_1);
             //
             for (Object value : BOXED_fromAttributes_1.flatten().getElements()) {
@@ -1067,22 +1066,25 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean associationToForeignKeyLM(final @NonNull /*@NonInvalid*/ Association a, final @NonNull /*@NonInvalid*/ Package p_4, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_9) {
         // predicates
-        final @Nullable /*@Thrown*/ manualuml2rdbms.uml.Class destination = a.getDestination();
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ manualuml2rdbms.uml.Class destination = a.getDestination();
         final @Nullable /*@Thrown*/ manualuml2rdbms.uml.Class dc = destination;
         final @Nullable /*@Thrown*/ Package namespace = a.getNamespace();
         final /*@Thrown*/ boolean eq = p_4.equals(namespace);
         if (!eq) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Package umlPackage = p2s_9.getUmlPackage();
-        final /*@Thrown*/ boolean eq_0 = p_4.equals(umlPackage);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Package umlPackage = p2s_9.getUmlPackage();
+        final /*@Thrown*/ boolean eq_0 = umlPackage.equals(p_4);
         if (!eq_0) {
             return false;
         }
-        final @Nullable /*@Thrown*/ manualuml2rdbms.uml.Class source = a.getSource();
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ manualuml2rdbms.uml.Class source = a.getSource();
         final @Nullable /*@Thrown*/ manualuml2rdbms.uml.Class sc = source;
         if (dc == null) {
-            throw new InvalidValueException("Null source for \'uml2rdbms::ClassToTable::umlClass\'");
+            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS\'::ClassToTable::umlClass\'");
         }
         if (dc instanceof InvalidValueException) {
             throw (InvalidValueException)dc;
@@ -1090,7 +1092,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         final @Nullable /*@Thrown*/ ClassToTable ClassToTable = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(dc));
         final @Nullable /*@Thrown*/ ClassToTable dc2t_0 = ClassToTable;
         if (sc == null) {
-            throw new InvalidValueException("Null source for \'uml2rdbms::ClassToTable::umlClass\'");
+            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS\'::ClassToTable::umlClass\'");
         }
         if (sc instanceof InvalidValueException) {
             throw (InvalidValueException)sc;
@@ -1117,7 +1119,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             if (dc instanceof InvalidValueException) {
                 throw (InvalidValueException)dc;
             }
-            final /*@Thrown*/ boolean eq_2 = (destination != null) ? destination.equals(dc) : (dc == null);
+            final /*@Thrown*/ boolean eq_2 = destination.equals(dc);
             CAUGHT_eq_2 = eq_2;
         }
         catch (Exception e) {
@@ -1128,7 +1130,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             if (sc instanceof InvalidValueException) {
                 throw (InvalidValueException)sc;
             }
-            final /*@Thrown*/ boolean eq_3 = (source != null) ? source.equals(sc) : (sc == null);
+            final /*@Thrown*/ boolean eq_3 = source.equals(sc);
             CAUGHT_eq_3 = eq_3;
         }
         catch (Exception e) {
@@ -1148,7 +1150,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
                 if (dc instanceof InvalidValueException) {
                     throw (InvalidValueException)dc;
                 }
-                final /*@Thrown*/ boolean ne = (destination != null) ? !destination.equals(dc) : (dc != null);
+                final /*@Thrown*/ boolean ne = !destination.equals(dc);
                 CAUGHT_ne = ne;
             }
             catch (Exception e) {
@@ -1161,7 +1163,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             @NonNull /*@Thrown*/ String symbol_5;
             if (and_0) {
                 if (dc == null) {
-                    throw new InvalidValueException("Null source for \'uml::UMLModelElement::name\'");
+                    throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualUML\'::UMLModelElement::name\'");
                 }
                 if (dc instanceof InvalidValueException) {
                     throw (InvalidValueException)dc;
@@ -1178,7 +1180,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
                     if (sc instanceof InvalidValueException) {
                         throw (InvalidValueException)sc;
                     }
-                    final /*@Thrown*/ boolean ne_0 = (source != null) ? !source.equals(sc) : (sc != null);
+                    final /*@Thrown*/ boolean ne_0 = !source.equals(sc);
                     CAUGHT_ne_0 = ne_0;
                 }
                 catch (Exception e) {
@@ -1196,7 +1198,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
                 }
                 else {
                     if (dc == null) {
-                        throw new InvalidValueException("Null source for \'uml::UMLModelElement::name\'");
+                        throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualUML\'::UMLModelElement::name\'");
                     }
                     if (dc instanceof InvalidValueException) {
                         throw (InvalidValueException)dc;
@@ -1268,13 +1270,15 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         if (!eq_0) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Schema schema = p2s_10.getSchema();
-        final /*@Thrown*/ boolean eq_1 = s_0.equals(schema);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Schema schema = p2s_10.getSchema();
+        final /*@Thrown*/ boolean eq_1 = schema.equals(s_0);
         if (!eq_1) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Schema schema_0 = st.getSchema();
-        final /*@Thrown*/ boolean eq_2 = s_0.equals(schema_0);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Schema schema_0 = st.getSchema();
+        final /*@Thrown*/ boolean eq_2 = schema_0.equals(s_0);
         if (!eq_2) {
             return false;
         }
@@ -1295,7 +1299,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         fc_0.setOwner(st);
         // mapping statements
         if (referenced == null) {
-            throw new InvalidValueException("Null source for \'uml2rdbms::ClassToTable::table\'");
+            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS\'::ClassToTable::table\'");
         }
         final @Nullable /*@Thrown*/ Table table = referenced.getTable();
         if (table == null) {
@@ -1338,12 +1342,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         final List<ForeignKey> UNBOXED_OrderedSet = OrderedSet.asEcoreObjects(idResolver, ForeignKey.class);
         assert UNBOXED_OrderedSet != null;
         fc.getForeignKeys().addAll(UNBOXED_OrderedSet);
-        final @Nullable /*@Thrown*/ List<Column> column = rk_0.getColumn();
-        assert column != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<Column> column = rk_0.getColumn();
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_column = idResolver.createOrderedSetOfAll(ORD_CLSSid_Column, column);
         final @Nullable /*@Thrown*/ Column first = (Column)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_column);
         if (first == null) {
-            throw new InvalidValueException("Null source for \'rdbms::Column::type\'");
+            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualRDBMS\'::Column::type\'");
         }
         final @Nullable /*@Thrown*/ String type = first.getType();
         fc.setType(type);
@@ -1407,8 +1411,10 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean classPrimitiveAttributesLM(final @NonNull /*@NonInvalid*/ Attribute a_0, final @NonNull /*@NonInvalid*/ manualuml2rdbms.uml.Class c_0, final @NonNull /*@NonInvalid*/ ClassToTable fao) {
         // predicates
-        final @Nullable /*@Thrown*/ manualuml2rdbms.uml.Class owner = a_0.getOwner();
-        final /*@Thrown*/ boolean eq = c_0.equals(owner);
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ manualuml2rdbms.uml.Class owner = a_0.getOwner();
+        final /*@Thrown*/ boolean eq = owner.equals(c_0);
         if (!eq) {
             return false;
         }
@@ -1417,17 +1423,17 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         if (!eq_0) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Classifier type = a_0.getType();
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Classifier type = a_0.getType();
         if (!(type instanceof PrimitiveDataType)) {
             return false;
         }
         final @Nullable /*@Thrown*/ PrimitiveDataType t_0 = (PrimitiveDataType)type;
         if (t_0 == null) {
-            throw new InvalidValueException("Null source for \'uml2rdbms::PrimitiveToName::primitive\'");
+            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS\'::PrimitiveToName::primitive\'");
         }
         final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = ClassUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(t_0));
         final @Nullable /*@Thrown*/ PrimitiveToName p2n_3 = PrimitiveToName;
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         // creations
         final /*@Thrown*/ AttributeToColumn atc = UML2RDBMSFactory.eINSTANCE.createAttributeToColumn();
         assert atc != null;
@@ -1475,8 +1481,10 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean classComplexAttributesLM(final @NonNull /*@NonInvalid*/ Attribute a_1, final @NonNull /*@NonInvalid*/ manualuml2rdbms.uml.Class c_1, final @NonNull /*@NonInvalid*/ ClassToTable fao_0) {
         // predicates
-        final @Nullable /*@Thrown*/ manualuml2rdbms.uml.Class owner = a_1.getOwner();
-        final /*@Thrown*/ boolean eq = c_1.equals(owner);
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ manualuml2rdbms.uml.Class owner = a_1.getOwner();
+        final /*@Thrown*/ boolean eq = owner.equals(c_1);
         if (!eq) {
             return false;
         }
@@ -1485,12 +1493,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         if (!eq_0) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Classifier type = a_1.getType();
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Classifier type = a_1.getType();
         if (!(type instanceof manualuml2rdbms.uml.Class)) {
             return false;
         }
         final @Nullable /*@Thrown*/ manualuml2rdbms.uml.Class t_0 = (manualuml2rdbms.uml.Class)type;
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         // creations
         final /*@Thrown*/ NonLeafAttribute fa = UML2RDBMSFactory.eINSTANCE.createNonLeafAttribute();
         assert fa != null;
@@ -1503,8 +1511,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         fa.setKind(kind);
         final @Nullable /*@Thrown*/ String name = a_1.getName();
         fa.setName(name);
-        final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes = fao_0.getFromAttributes();
-        assert fromAttributes != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<FromAttribute> fromAttributes = fao_0.getFromAttributes();
         final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
         @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_AttributeToColumn);
         @Nullable Iterator<?> ITERATOR__1 = BOXED_fromAttributes.iterator();
@@ -1519,10 +1527,10 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
              * leafs
              */
             if (_1 == null) {
-                throw new InvalidValueException("Null source for \'uml2rdbms::FromAttribute::leafs\'");
+                throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS\'::FromAttribute::leafs\'");
             }
-            final @Nullable /*@Thrown*/ List<AttributeToColumn> leafs = _1.getLeafs();
-            assert leafs != null;
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ List<AttributeToColumn> leafs = _1.getLeafs();
             final @NonNull /*@Thrown*/ SetValue BOXED_leafs = idResolver.createSetOfAll(SET_CLSSid_AttributeToColumn, leafs);
             //
             for (Object value : BOXED_leafs.flatten().getElements()) {
@@ -1567,16 +1575,17 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             return false;
         }
         final @Nullable /*@Thrown*/ NonLeafAttribute fao_2 = (NonLeafAttribute)FromAttribute;
-        final @Nullable /*@Thrown*/ Classifier type = ca.getType();
-        final /*@Thrown*/ boolean eq = c_2.equals(type);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Classifier type = ca.getType();
+        final /*@Thrown*/ boolean eq = type.equals(c_2);
         if (!eq) {
             return false;
         }
         // creations
         // assignments
         // mapping statements
-        final @Nullable /*@Thrown*/ List<Attribute> attributes = c_2.getAttributes();
-        assert attributes != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<Attribute> attributes = c_2.getAttributes();
         ;
         for (Attribute anAttribute : attributes) {
             if (anAttribute != null) {
@@ -1620,17 +1629,18 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean complexAttributePrimitiveAttributesLM_1(final @NonNull /*@NonInvalid*/ Attribute a_1_0, final @NonNull /*@NonInvalid*/ manualuml2rdbms.uml.Class c_1_0, final @NonNull /*@NonInvalid*/ Attribute ca_1, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_1) {
         // predicates
-        final @Nullable /*@Thrown*/ Classifier type = a_1_0.getType();
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Classifier type = a_1_0.getType();
         if (!(type instanceof PrimitiveDataType)) {
             return false;
         }
         final @Nullable /*@Thrown*/ PrimitiveDataType t_1_0 = (PrimitiveDataType)type;
         if (t_1_0 == null) {
-            throw new InvalidValueException("Null source for \'uml2rdbms::PrimitiveToName::primitive\'");
+            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS\'::PrimitiveToName::primitive\'");
         }
         final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = ClassUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(t_1_0));
         final @Nullable /*@Thrown*/ PrimitiveToName p2n_1_0 = PrimitiveToName;
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         // creations
         final /*@Thrown*/ AttributeToColumn fa = UML2RDBMSFactory.eINSTANCE.createAttributeToColumn();
         assert fa != null;
@@ -1685,16 +1695,17 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             return false;
         }
         final @Nullable /*@Thrown*/ NonLeafAttribute fao_2 = (NonLeafAttribute)FromAttribute;
-        final @Nullable /*@Thrown*/ Classifier type = ca_0.getType();
-        final /*@Thrown*/ boolean eq = c_3.equals(type);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Classifier type = ca_0.getType();
+        final /*@Thrown*/ boolean eq = type.equals(c_3);
         if (!eq) {
             return false;
         }
         // creations
         // assignments
         // mapping statements
-        final @Nullable /*@Thrown*/ List<Attribute> attributes = c_3.getAttributes();
-        assert attributes != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<Attribute> attributes = c_3.getAttributes();
         ;
         for (Attribute anAttribute : attributes) {
             if (anAttribute != null) {
@@ -1735,25 +1746,27 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean complexAttributeComplexAttributesLM_1(final @NonNull /*@NonInvalid*/ Attribute a_1_1, final @NonNull /*@NonInvalid*/ manualuml2rdbms.uml.Class c_1_1, final @NonNull /*@NonInvalid*/ Attribute ca_1_0, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_1_0) {
         // predicates
-        final @Nullable /*@Thrown*/ manualuml2rdbms.uml.Class owner = a_1_1.getOwner();
-        final /*@Thrown*/ boolean eq = c_1_1.equals(owner);
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ manualuml2rdbms.uml.Class owner = a_1_1.getOwner();
+        final /*@Thrown*/ boolean eq = owner.equals(c_1_1);
         if (!eq) {
             return false;
         }
-        final @Nullable /*@Thrown*/ Classifier type = a_1_1.getType();
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Classifier type = a_1_1.getType();
         if (!(type instanceof manualuml2rdbms.uml.Class)) {
             return false;
         }
         final @Nullable /*@Thrown*/ manualuml2rdbms.uml.Class t_1_0 = (manualuml2rdbms.uml.Class)type;
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         // creations
         final /*@Thrown*/ NonLeafAttribute fa = UML2RDBMSFactory.eINSTANCE.createNonLeafAttribute();
         assert fa != null;
         models[2/*middle*/].add(fa);
         // assignments
         fa.setOwner(fao_1_0);
-        final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes = fao_1_0.getFromAttributes();
-        assert fromAttributes != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<FromAttribute> fromAttributes = fao_1_0.getFromAttributes();
         final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
         @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_AttributeToColumn);
         @Nullable Iterator<?> ITERATOR__1 = BOXED_fromAttributes.iterator();
@@ -1768,10 +1781,10 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
              * leafs
              */
             if (_1 == null) {
-                throw new InvalidValueException("Null source for \'uml2rdbms::FromAttribute::leafs\'");
+                throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS\'::FromAttribute::leafs\'");
             }
-            final @Nullable /*@Thrown*/ List<AttributeToColumn> leafs = _1.getLeafs();
-            assert leafs != null;
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ List<AttributeToColumn> leafs = _1.getLeafs();
             final @NonNull /*@Thrown*/ SetValue BOXED_leafs = idResolver.createSetOfAll(SET_CLSSid_AttributeToColumn, leafs);
             //
             for (Object value : BOXED_leafs.flatten().getElements()) {
@@ -1839,9 +1852,10 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         final @Nullable /*@Thrown*/ PrimitiveToName type = a2c.getType();
         final @Nullable /*@Thrown*/ PrimitiveToName p2n_3 = type;
         if (p2n_3 == null) {
-            throw new InvalidValueException("Null source for \'uml2rdbms::PrimitiveToName::typeName\'");
+            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS\'::PrimitiveToName::typeName\'");
         }
-        final @Nullable /*@Thrown*/ String typeName = p2n_3.getTypeName();
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ String typeName = p2n_3.getTypeName();
         final @Nullable /*@Thrown*/ String ct = typeName;
         // creations
         final /*@Thrown*/ Column c_4 = RDBMSFactory.eINSTANCE.createColumn();

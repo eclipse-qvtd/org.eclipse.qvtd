@@ -126,7 +126,7 @@ public class hsv2hls extends AbstractTransformationExecutor
         // creations
         // assignments
         // mapping statements
-        final @NonNull /*@Thrown*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_HSVNode, models[0/*hsv*/], TYP_HSVTree_c_c_HSVNode_0);
+        final @NonNull /*@NonInvalid*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_HSVNode, models[0/*hsv*/], TYP_HSVTree_c_c_HSVNode_0);
         final List<HSVNode> UNBOXED_objectsOfKind = objectsOfKind.asEcoreObjects(idResolver, HSVNode.class);
         assert UNBOXED_objectsOfKind != null;
         ;
@@ -181,8 +181,8 @@ public class hsv2hls extends AbstractTransformationExecutor
         final @Nullable /*@Thrown*/ String name = hsvRoot.getName();
         middleRoot.setName(name);
         // mapping statements
-        final @Nullable /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
-        assert children != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
         ;
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
@@ -230,8 +230,8 @@ public class hsv2hls extends AbstractTransformationExecutor
         final @Nullable /*@Thrown*/ String name = hsvNode.getName();
         middleNode_1.setName(name);
         // mapping statements
-        final @Nullable /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
-        assert children != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
         ;
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
@@ -276,8 +276,8 @@ public class hsv2hls extends AbstractTransformationExecutor
         final @Nullable /*@Thrown*/ String name = middleNode.getName();
         hlsNode.setName(name);
         // mapping statements
-        final @Nullable /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode.getChildren();
-        assert children != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode.getChildren();
         ;
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
@@ -319,16 +319,17 @@ public class hsv2hls extends AbstractTransformationExecutor
         // assignments
         final @Nullable /*@Thrown*/ HSVNode2HLSNode parent = middleNode_0.getParent();
         if (parent == null) {
-            throw new InvalidValueException("Null source for \'HSV2HLS::HSVNode2HLSNode::hls\'");
+            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/HSVtoHLS\'::HSVNode2HLSNode::hls\'");
         }
-        final @Nullable /*@Thrown*/ HLSNode hls = parent.getHls();
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ HLSNode hls = parent.getHls();
         hlsNode.setParent(hls);
         middleNode_0.setHls(hlsNode);
         final @Nullable /*@Thrown*/ String name = middleNode_0.getName();
         hlsNode.setName(name);
         // mapping statements
-        final @Nullable /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode_0.getChildren();
-        assert children != null;
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode_0.getChildren();
         ;
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {

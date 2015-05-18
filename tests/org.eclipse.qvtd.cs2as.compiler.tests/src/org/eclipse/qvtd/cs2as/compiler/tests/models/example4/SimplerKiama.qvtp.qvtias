@@ -137,8 +137,7 @@
                     referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
                   <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                       referredProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep">
-                    <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Node"
-                        referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
+                    <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Node" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                       <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
                           referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@bottomPattern/@assignment.0/@value/@ownedVariable"/>
                       <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
@@ -247,8 +246,7 @@
                     referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
                   <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                       referredProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep">
-                    <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Node"
-                        referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
+                    <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Node" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                       <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
                           referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@bottomPattern/@assignment.0/@value/@ownedVariable"/>
                       <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
