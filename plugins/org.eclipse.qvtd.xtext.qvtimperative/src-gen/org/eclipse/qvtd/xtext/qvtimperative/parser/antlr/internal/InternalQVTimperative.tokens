@@ -1,4 +1,4 @@
-'&&'=99
+'&&'=101
 '('=33
 ')'=34
 '*'=39
@@ -21,7 +21,7 @@
 '='=53
 '>'=49
 '>='=51
-'?'=97
+'?'=99
 '?->'=62
 '?.'=61
 '?='=28
@@ -52,7 +52,7 @@
 'elseif'=94
 'endif'=93
 'enforce'=36
-'extends'=98
+'extends'=100
 'false'=83
 'for'=30
 'if'=90
@@ -81,6 +81,8 @@
 'xor'=57
 '{'=22
 '|'=35
+'|1'=98
+'|?'=97
 '}'=24
 RULE_ANY_OTHER=15
 RULE_DOUBLE_QUOTED_STRING=10
@@ -94,6 +96,8 @@ RULE_SIMPLE_ID=4
 RULE_SINGLE_QUOTED_STRING=7
 RULE_SL_COMMENT=13
 RULE_WS=14
+T__100=100
+T__101=101
 T__16=16
 T__17=17
 T__18=18

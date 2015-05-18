@@ -22,12 +22,14 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 
 	protected QVTrelationGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_DomainCS_ReplaceKeyword_0_2_q;
+	protected AbstractElementAlias match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q;
 	protected AbstractElementAlias match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (QVTrelationGrammarAccess) access;
 		match_DomainCS_ReplaceKeyword_0_2_q = new TokenAlias(false, true, grammarAccess.getDomainCSAccess().getReplaceKeyword_0_2());
+		match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q = new TokenAlias(false, true, grammarAccess.getMultiplicityCSAccess().getVerticalLineQuestionMarkKeyword_2_0());
 		match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2()));
 	}
 	
@@ -45,6 +47,8 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
 			if(match_DomainCS_ReplaceKeyword_0_2_q.equals(syntax))
 				emit_DomainCS_ReplaceKeyword_0_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q.equals(syntax))
+				emit_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q.equals(syntax))
 				emit_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
@@ -59,6 +63,21 @@ public abstract class AbstractQVTrelationSyntacticSequencer extends AbstractSynt
 	 *     (rule start) (ambiguity) 'domain' modelId=[TypedModel|UnrestrictedName]
 	 */
 	protected void emit_DomainCS_ReplaceKeyword_0_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     '|?'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     lowerBound=LOWER (ambiguity) ']' (rule end)
+	 *     stringBounds='*' (ambiguity) ']' (rule end)
+	 *     stringBounds='+' (ambiguity) ']' (rule end)
+	 *     stringBounds='?' (ambiguity) ']' (rule end)
+	 *     upperBound=UPPER (ambiguity) ']' (rule end)
+	 */
+	protected void emit_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

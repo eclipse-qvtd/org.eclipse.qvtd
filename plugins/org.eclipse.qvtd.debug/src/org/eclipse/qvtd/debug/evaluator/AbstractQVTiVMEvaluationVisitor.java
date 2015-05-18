@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
@@ -56,6 +57,11 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 		return delegate.getCompleteEnvironment();
 	}
 
+	@Override
+	public int getDiagnosticSeverity(int severityPreference, @Nullable Object resultValue) {
+		return StatusCodes.WARNING;
+	}
+
 	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 		return (QVTiEnvironmentFactory) delegate.getEnvironmentFactory();
 	}
@@ -66,6 +72,11 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 
 	public @NonNull String getPluginId() {
 		return QVTiDebugPlugin.PLUGIN_ID;
+	}
+
+	@Override
+	public int getSeverity(@Nullable Object validationKey) {
+		return StatusCodes.WARNING;
 	}
 	
 //	@Override

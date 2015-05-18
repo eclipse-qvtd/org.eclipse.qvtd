@@ -16,7 +16,8 @@ Export-Package: org.eclipse.qvtd.pivot.qvtimperative,
  org.eclipse.qvtd.pivot.qvtimperative.scoping,
  org.eclipse.qvtd.pivot.qvtimperative.util,
  org.eclipse.qvtd.pivot.qvtimperative.utilities
-Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
+Require-Bundle: org.eclipse.core.resources;bundle-version="[3.5.0,4.0.0)",
+ org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.qvtd.pivot.qvtcorebase;bundle-version="[0.12.0,1.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Import-Package: com.google.inject,

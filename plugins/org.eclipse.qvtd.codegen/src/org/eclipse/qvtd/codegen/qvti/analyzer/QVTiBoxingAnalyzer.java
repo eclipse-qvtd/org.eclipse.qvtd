@@ -96,7 +96,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	public Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		if (cgMappingCallBinding.isRequired()) {
 			MappingCallBinding mappingCallBinding = (MappingCallBinding)cgMappingCallBinding.getAst();
-			rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValue(), "binding for '" + mappingCallBinding.getMappingCall().getReferredMapping().getName() + "::" + mappingCallBinding.getBoundVariable().getName() + "'"));	// FIXME referred mapping
+			rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValue(), false, "binding for '" + mappingCallBinding.getMappingCall().getReferredMapping().getName() + "::" + mappingCallBinding.getBoundVariable().getName() + "'"));	// FIXME referred mapping
 		}
 		else {
 			rewriteAsUnboxed(cgMappingCallBinding.getValue());
