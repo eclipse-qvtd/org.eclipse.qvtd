@@ -4,5 +4,5 @@ Bundle-Name: Runtime
 Bundle-SymbolicName: org.eclipse.qvtd.cs2as.runtime
 Bundle-Version: 0.12.0.qualifier
 Export-Package: org.eclipse.qvtd.cs2as.runtime
-Require-Bundle: org.eclipse.qvtd.pivot.qvtimperative;bundle-version="[0.12.0,1.0.0)";visibility:=reexport
+Require-Bundle: org.eclipse.qvtd.pivot.qvtimperative;bundle-version="[0.12.0,0.13.0)";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
