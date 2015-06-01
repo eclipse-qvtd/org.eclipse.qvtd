@@ -19,6 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
 import org.eclipse.ocl.examples.debug.vm.core.VMDebugCore;
+import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEnvironmentFactory;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
@@ -31,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiNestedEvaluationEnvir
 
 public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvironment implements IQVTiVMEvaluationEnvironment
 {
+	protected final @NonNull IVMEnvironmentFactory vmEnvironmentFactory;
 	private @NonNull Element myCurrentIP;
 	private @NonNull NamedElement myOperation;		// Redundant if final
     private final int myStackDepth;
@@ -39,6 +41,7 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
     
 	public QVTiVMNestedEvaluationEnvironment(@NonNull IQVTiVMEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, long id) {
 		super(evaluationEnvironment, executableObject);
+		this.vmEnvironmentFactory = evaluationEnvironment.getVMEnvironmentFactory();
 		myStackDepth = evaluationEnvironment.getDepth() + 1;
 		this.id = id;
 		this.myOperation = executableObject;
@@ -67,11 +70,11 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	}
 
 	public @NonNull VMDebugCore getDebugCore() {
-		return getRootEvaluationEnvironment().getDebugCore();
+		return getVMRootEvaluationEnvironment().getDebugCore();
 	}
 
 	public @NonNull Transformation getDebuggableElement() {
-		return getRootEvaluationEnvironment().getDebuggableElement();
+		return getVMRootEvaluationEnvironment().getDebuggableElement();
 	}
 
 	@Override
@@ -95,7 +98,7 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	}
 	
 	public @NonNull Map<String, Resource> getModelParameterVariables() {
-    	return getRootEvaluationEnvironment().getModelParameterVariables();
+    	return getVMRootEvaluationEnvironment().getModelParameterVariables();
 	}
 
 	@Override
@@ -105,16 +108,16 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 
 	@Override
 	@NonNull public Variable getPCVariable() {
-		return getRootEvaluationEnvironment().getPCVariable();
+		return getVMRootEvaluationEnvironment().getPCVariable();
 	}
 
 	@Override
-	public @Nullable IQVTiVMEvaluationEnvironment getParentEvaluationEnvironment() {
+	public @Nullable IQVTiVMEvaluationEnvironment getVMParentEvaluationEnvironment() {
 		return (IQVTiVMEvaluationEnvironment) super.getParentEvaluationEnvironment();
 	}
 
 	@Override
-	public @NonNull QVTiVMRootEvaluationEnvironment getRootEvaluationEnvironment() {
+	public @NonNull QVTiVMRootEvaluationEnvironment getVMRootEvaluationEnvironment() {
 		return (QVTiVMRootEvaluationEnvironment) rootEvaluationEnvironment;
 	}
 
@@ -123,12 +126,17 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 		return stepperStack;
 	}
 
+	@Override
+	public @NonNull IVMEnvironmentFactory getVMEnvironmentFactory() {
+		return vmEnvironmentFactory;
+	}
+
 	public boolean isDeferredExecution() {
-		return getRootEvaluationEnvironment().isDeferredExecution();
+		return getVMRootEvaluationEnvironment().isDeferredExecution();
 	}
     
     public void processDeferredTasks() {
-    	getRootEvaluationEnvironment().processDeferredTasks();
+    	getVMRootEvaluationEnvironment().processDeferredTasks();
     }
 
 	public @NonNull Element setCurrentIP(@NonNull Element element) {
@@ -144,7 +152,7 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 
 	public void throwVMException(@NonNull VMRuntimeException exception) throws VMRuntimeException {
 		try {
-			getRootEvaluationEnvironment().saveThrownException(exception);
+			getVMRootEvaluationEnvironment().saveThrownException(exception);
 			exception.setStackVMTrace(new VMStackTraceBuilder(this).buildStackTrace());
 		} catch (Exception e) {
 			getDebugCore().error("Failed to build QVT stack trace", e); //$NON-NLS-1$

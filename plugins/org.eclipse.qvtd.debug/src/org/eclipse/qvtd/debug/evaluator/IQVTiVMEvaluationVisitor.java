@@ -15,11 +15,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationVisitor;
 import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
-public interface IQVTiVMEvaluationVisitor extends IVMEvaluationVisitor<Transformation>, IQVTiEvaluationVisitor, QVTimperativeVisitor<Object>
+public interface IQVTiVMEvaluationVisitor extends IVMEvaluationVisitor, IQVTiEvaluationVisitor, QVTimperativeVisitor<Object>
 {
 	@NonNull IQVTiVMEvaluationVisitor createNestedEvaluator();
 	void dispose();

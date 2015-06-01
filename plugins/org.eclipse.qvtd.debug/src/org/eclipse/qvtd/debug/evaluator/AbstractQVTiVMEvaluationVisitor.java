@@ -46,7 +46,7 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 	}
 	
 	public @NonNull EvaluationVisitor getClonedEvaluator() {
-		IQVTiVMEvaluationEnvironment oldEvaluationEnvironment = getEvaluationEnvironment();
+		IQVTiVMEvaluationEnvironment oldEvaluationEnvironment = getVMEvaluationEnvironment();
 		IQVTiVMEvaluationEnvironment clonedEvaluationEnvironment = oldEvaluationEnvironment.createClonedEvaluationEnvironment();
 		return new QVTiEvaluationVisitor(clonedEvaluationEnvironment);
 	}
@@ -66,7 +66,11 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 		return (QVTiEnvironmentFactory) delegate.getEnvironmentFactory();
 	}
 
-	public @NonNull IQVTiVMEvaluationEnvironment getEvaluationEnvironment() {
+	public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
+		return delegate.getEvaluationEnvironment();
+	}
+
+	public @NonNull IQVTiVMEvaluationEnvironment getVMEvaluationEnvironment() {
 		return (IQVTiVMEvaluationEnvironment) delegate.getEvaluationEnvironment();
 	}
 
@@ -125,7 +129,7 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 			throw (VMInterruptedExecutionException)e;
 		}
 		Element element = (Element)visitable;
-		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
+		IVMEvaluationEnvironment evalEnv = getVMEvaluationEnvironment();
 		Object result = badVisit(evalEnv, element, preState, e);		// FIXME bad code exception here is confusing to user
 		if (VMVirtualMachine.POST_VISIT.isActive()) {
 			VMVirtualMachine.POST_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString());
@@ -133,10 +137,10 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 		return result;
 	}
 
-	protected abstract @Nullable Object badVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, Object preState, @NonNull Throwable e);
+	protected abstract @Nullable Object badVisit(@NonNull IVMEvaluationEnvironment evalEnv, @NonNull Element element, Object preState, @NonNull Throwable e);
 
 	protected void superProcessDeferredTasks() {
-		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
+		IVMEvaluationEnvironment evalEnv = getVMEvaluationEnvironment();
 		evalEnv.processDeferredTasks();
 	}
 
@@ -147,12 +151,12 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 			VMVirtualMachine.POST_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString() + " => " + result);
 		}
 //		setCurrentEnvInstructionPointer(parentElement);
-		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
+		IVMEvaluationEnvironment evalEnv = getVMEvaluationEnvironment();
 		postVisit(evalEnv, element, result);
 		return result;
 	}
 
-	protected abstract void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Object result);
+	protected abstract void postVisit(@NonNull IVMEvaluationEnvironment evalEnv, @NonNull Element element, @Nullable Object result);
 
 	@Override
 	protected @Nullable Element preVisit(@NonNull Visitable visitable) {
@@ -161,12 +165,12 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 			VMVirtualMachine.PRE_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString());
 		}
 		Element previousIP = setCurrentEnvInstructionPointer(null/*element*/);
-		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
+		IVMEvaluationEnvironment evalEnv = getVMEvaluationEnvironment();
 		preVisit(evalEnv, element);
 		return previousIP;
 	}
 
-	protected abstract Object preVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element);
+	protected abstract Object preVisit(@NonNull IVMEvaluationEnvironment evalEnv, @NonNull Element element);
 
 //	public void throwQVTException(VMInterruptedExecutionException qvtInterruptedExecutionException) {
 		// TODO Auto-generated method stub
@@ -174,7 +178,7 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 //	}
 	   
     protected Element setCurrentEnvInstructionPointer(Element element) {
-		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
+		IVMEvaluationEnvironment evalEnv = getVMEvaluationEnvironment();
     	if (element != null) {
     		return evalEnv.setCurrentIP(element);
     	}
@@ -206,7 +210,7 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 		return delegate.evaluate(body);
 	}
 
-	public static IVMEvaluationEnvironment<?> cloneEvaluationEnv(IVMEvaluationEnvironment<?> evaluationEnvironment) {
+	public static IVMEvaluationEnvironment cloneEvaluationEnv(IVMEvaluationEnvironment evaluationEnvironment) {
 		// TODO Auto-generated method stub
 		return null;
 	}

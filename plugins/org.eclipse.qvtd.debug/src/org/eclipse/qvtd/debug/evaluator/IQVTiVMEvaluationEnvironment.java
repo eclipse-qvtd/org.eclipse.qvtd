@@ -17,17 +17,16 @@ import org.eclipse.ocl.examples.debug.vm.UnitLocation;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironment;
 
-public interface IQVTiVMEvaluationEnvironment extends IQVTiEvaluationEnvironment, IVMEvaluationEnvironment<Transformation>
+public interface IQVTiVMEvaluationEnvironment extends IQVTiEvaluationEnvironment, IVMEvaluationEnvironment
 {
 	@NonNull IQVTiVMEvaluationEnvironment createClonedEvaluationEnvironment();
 	@NonNull Element getCurrentIP();
 	@NonNull UnitLocation getCurrentLocation();
 	@NonNull QVTiVMModelManager getModelManager();
-	@Nullable IQVTiVMEvaluationEnvironment getParentEvaluationEnvironment();
-	@NonNull QVTiVMRootEvaluationEnvironment getRootEvaluationEnvironment();
+	@Nullable IQVTiVMEvaluationEnvironment getVMParentEvaluationEnvironment();
+	@NonNull QVTiVMRootEvaluationEnvironment getVMRootEvaluationEnvironment();
 	void processDeferredTasks();
 	@NonNull Element setCurrentIP(@NonNull Element element);
 	void throwVMException(@NonNull VMRuntimeException qvtInterruptedExecutionException);

@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.core.EvaluationContext;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 public class QVTiEvaluationContext extends EvaluationContext
 {
@@ -28,7 +29,7 @@ public class QVTiEvaluationContext extends EvaluationContext
 	private @NonNull Map<String, URI> outputURIs = new HashMap<String, URI>();
 
 	public QVTiEvaluationContext(@NonNull URI transformationURI, @NonNull Map<String, URI> inputURIs, @NonNull Map<String, URI> outputURIs) {
-		super(new QVTiVMEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null));
+		super(new QVTiVMEnvironmentFactory(new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null)));
 		this.transformationURI = transformationURI;
 		this.inputURIs = inputURIs;
 		this.outputURIs = outputURIs;

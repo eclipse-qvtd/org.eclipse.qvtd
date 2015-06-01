@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluator;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMModelManager;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -61,22 +60,21 @@ public class QVTiVMEvaluator implements IVMEvaluator
     
 	protected final @NonNull MetamodelManager metamodelManager;
 	protected final @NonNull Transformation transformation;
-	protected final @NonNull QVTiVMEnvironmentFactory environmentFactory;
-	protected final @NonNull QVTiVMModelManager modelManager;
+	protected final @NonNull QVTiVMEnvironmentFactory vmEnvironmentFactory;
+	protected final @NonNull QVTiVMModelManager vmModelManager;
 	private boolean suspendOnStartup = false;
 
-    private QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
-    	this.environmentFactory = environmentFactory;
-    	this.metamodelManager = environmentFactory.getMetamodelManager();
+    private QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory vmEnvironmentFactory, @NonNull Transformation transformation) {
+    	this.vmEnvironmentFactory = vmEnvironmentFactory;
+    	this.metamodelManager = vmEnvironmentFactory.getEnvironmentFactory().getMetamodelManager();
     	this.transformation = transformation;
-    	QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
+    	QVTiTransformationAnalysis transformationAnalysis = vmEnvironmentFactory.getEnvironmentFactory().createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
-    	this.modelManager = environmentFactory.createModelManager(transformationAnalysis);
-//    	this.modelManager = envFactory.createModelManager(metamodelManager);
+    	this.vmModelManager = vmEnvironmentFactory.createVMModelManager(transformationAnalysis);
     }
 
-    public QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory envFactory, @NonNull URI transformationURI) throws IOException {
-    	this(envFactory, QVTiXtextEvaluator.loadTransformation(ImperativeModel.class, envFactory, transformationURI, envFactory.keepDebug()));
+    public QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory vmEnvironmentFactory, @NonNull URI transformationURI) throws IOException {
+    	this(vmEnvironmentFactory, QVTiXtextEvaluator.loadTransformation(ImperativeModel.class, vmEnvironmentFactory.getEnvironmentFactory(), transformationURI, vmEnvironmentFactory.keepDebug()));
     }
 
     public void createModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
@@ -84,20 +82,20 @@ public class QVTiVMEvaluator implements IVMEvaluator
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
+        Resource resource = vmEnvironmentFactory.getEnvironmentFactory().getResourceSet().createResource(modelURI, contentType);
         if (resource != null) {
-        	modelManager.addModel(typedModel, resource);
+        	vmModelManager.addModel(typedModel, resource);
         }
     }
 
 	public void dispose() {
-		modelManager.dispose();
+		vmModelManager.dispose();
 	}
 
 	public Boolean execute() {
 		Transformation transformation = getTransformation();
-		IQVTiVMEvaluationEnvironment evalEnv = environmentFactory.createEvaluationEnvironment(transformation, modelManager);
-        QVTiVMRootEvaluationVisitor visitor = environmentFactory.createEvaluationVisitor(evalEnv);
+		IQVTiVMEvaluationEnvironment evalEnv = vmEnvironmentFactory.createVMEvaluationEnvironment(transformation, vmModelManager);
+        QVTiVMRootEvaluationVisitor visitor = vmEnvironmentFactory.createVMEvaluationVisitor(evalEnv);
         visitor.start(suspendOnStartup);
         return (Boolean) transformation.accept(visitor);
 	}
@@ -108,20 +106,21 @@ public class QVTiVMEvaluator implements IVMEvaluator
 	}
 
 	public final @NonNull QVTiVMEnvironmentFactory getEnvironmentFactory() {
-		return environmentFactory;
+		return vmEnvironmentFactory;
 	}
 
 	public final @NonNull MetamodelManager getMetamodelManager() {
 		return metamodelManager;
 	}
 	
-	public final @NonNull IVMModelManager getModelManager() {
-		return modelManager;
-	}
-	
 	public @NonNull Transformation getTransformation() {
 		return transformation;
 	}
+	
+	public final @NonNull QVTiVMModelManager getVMModelManager() {
+		return vmModelManager;
+	}
+
 	public void loadModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
         TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
@@ -129,10 +128,10 @@ public class QVTiVMEvaluator implements IVMEvaluator
         }
         Resource resource;
         if (contentType == null) {
-        	resource = environmentFactory.getResourceSet().getResource(modelURI, true);
+        	resource = vmEnvironmentFactory.getEnvironmentFactory().getResourceSet().getResource(modelURI, true);
         }
         else {
-        	resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
+        	resource = vmEnvironmentFactory.getEnvironmentFactory().getResourceSet().createResource(modelURI, contentType);
         	try {
 				resource.load(null);
 			} catch (IOException e) {
@@ -141,7 +140,7 @@ public class QVTiVMEvaluator implements IVMEvaluator
 			}
         }
         if (resource != null) {
-        	modelManager.addModel(typedModel, resource);
+        	vmModelManager.addModel(typedModel, resource);
         }
     }
 

@@ -64,7 +64,7 @@ public class QVTiDebuggableRunnerFactory extends DebuggableRunnerFactory
 		if(diagnostic.getSeverity() == Diagnostic.ERROR) {
 			throw new DiagnosticException(diagnostic);
 		} */
-		IVMEnvironmentFactory environmentFactory = evaluationContext.getEnvironmentFactory();
+		IVMEnvironmentFactory environmentFactory = evaluationContext.getVMEnvironmentFactory();
 		QVTiInternalDebuggableExecutor executor = new QVTiInternalDebuggableExecutor(qvtiEvaluationContext, (QVTiVMEnvironmentFactory) environmentFactory);
 		DebuggableRunner runner = new DebuggableRunner(this, qvtiEvaluationContext.getTransformationURI(), executor);
 		

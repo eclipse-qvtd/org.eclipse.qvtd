@@ -31,7 +31,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
@@ -87,7 +87,7 @@ public class QVTiTransformationAnalysis
 	 * @deprecated Use EnvironmentFactoryInternal constructor
 	 */
 	@Deprecated
-	public QVTiTransformationAnalysis(@NonNull PivotMetamodelManager metamodelManager) {
+	public QVTiTransformationAnalysis(@NonNull MetamodelManagerInternal metamodelManager) {
 	    this(metamodelManager.getEnvironmentFactory());
 	}
 
@@ -99,7 +99,7 @@ public class QVTiTransformationAnalysis
 	protected @NonNull Integer allocateCacheIndex(@Nullable OCLExpression sourceExpression, @NonNull Property navigableProperty) {
 		Integer cacheIndex = property2cacheIndex.get(navigableProperty);
 		if (cacheIndex == null) { 
-			@SuppressWarnings("null")@NonNull Integer size = property2cacheIndex.size();
+			Integer size = property2cacheIndex.size();
 			property2cacheIndex.put(navigableProperty, size);
 			if (sourceExpression != null) {
 				DomainUsage sourceUsage = domainAnalysis.getUsage(sourceExpression);
@@ -217,7 +217,7 @@ public class QVTiTransformationAnalysis
 	 */
 	public @NonNull Map<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>> getInstancesClassAnalysis(@NonNull Iterable<org.eclipse.ocl.pivot.Class> instanceClasses) {
 		Map<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>> instancesClassAnalysis = new HashMap<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>>();
-		PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
+		MetamodelManagerInternal metamodelManager = environmentFactory.getMetamodelManager();
 		for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Class instanceClass : instanceClasses) {
 			CompleteClass completeInstanceClass = metamodelManager.getCompleteClass(instanceClass);
 			instancesClassAnalysis.put(completeInstanceClass.getPrimaryClass(),  null);
@@ -237,7 +237,7 @@ public class QVTiTransformationAnalysis
 		return instancesClassAnalysis;
 	}
 
-	public @NonNull PivotMetamodelManager getMetamodelManager() {
+	public @NonNull MetamodelManagerInternal getMetamodelManager() {
 		return environmentFactory.getMetamodelManager();
 	}
 	

@@ -31,7 +31,7 @@ public class QVTiVMNestedEvaluationVisitor extends AbstractQVTiVMEvaluationVisit
 	}
 
 	@Override
-	protected @Nullable Object badVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv,
+	protected @Nullable Object badVisit(@NonNull IVMEvaluationEnvironment evalEnv,
 			@NonNull Element element, Object preState, @NonNull Throwable e) {
 		return root.badVisit(evalEnv, element, preState, e);
 	}
@@ -48,11 +48,11 @@ public class QVTiVMNestedEvaluationVisitor extends AbstractQVTiVMEvaluationVisit
 		return root;
 	}
 
-	protected void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Object result) {
+	protected void postVisit(@NonNull IVMEvaluationEnvironment evalEnv, @NonNull Element element, @Nullable Object result) {
 		root.postVisit(evalEnv, element, result);
 	}
 
-	protected @Nullable Element preVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element) {
+	protected @Nullable Element preVisit(@NonNull IVMEvaluationEnvironment evalEnv, @NonNull Element element) {
 		return root.preVisit(evalEnv, element);
 	}
 }

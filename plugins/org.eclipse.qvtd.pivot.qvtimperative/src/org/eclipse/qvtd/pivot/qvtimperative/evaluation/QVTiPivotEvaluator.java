@@ -22,7 +22,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -114,7 +114,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 		return environmentFactory;
 	}
 
-	public final @NonNull PivotMetamodelManager getMetamodelManager() {
+	public final @NonNull MetamodelManagerInternal getMetamodelManager() {
 		return environmentFactory.getMetamodelManager();
 	}
 	

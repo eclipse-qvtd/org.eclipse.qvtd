@@ -11,54 +11,40 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.evaluator;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.debug.vm.IVMDebuggerShell;
+import org.eclipse.ocl.examples.debug.vm.evaluator.AbstractVMEnvironmentFactory;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEnvironmentFactory;
 import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 
-public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements IVMEnvironmentFactory
+public class QVTiVMEnvironmentFactory extends AbstractVMEnvironmentFactory implements IVMEnvironmentFactory
 {
-	private @Nullable IVMDebuggerShell shell;
-	private long envId = 0;
-	
-	public QVTiVMEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
-		super(projectMap, externalResourceSet);
+	public QVTiVMEnvironmentFactory(@NonNull QVTiEnvironmentFactory environmentFactory) {
+		super(environmentFactory);
 	}
 
-	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull Transformation transformation, @NonNull QVTiModelManager modelManager) {
-		return new QVTiVMRootEvaluationEnvironment(this, transformation, modelManager, ++envId);
+	public @NonNull IQVTiVMEvaluationEnvironment createVMEvaluationEnvironment(@NonNull Transformation transformation, @NonNull QVTiModelManager modelManager) {
+		return new QVTiVMRootEvaluationEnvironment(this, transformation, modelManager, getNextEnvironmentId());
 	}
 
-	@Override
-	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent, @NonNull NamedElement operation) {
-		return new QVTiVMNestedEvaluationEnvironment((IQVTiVMEvaluationEnvironment) parent, operation, ++envId);
+	public @NonNull IQVTiVMEvaluationEnvironment createVMEvaluationEnvironment(@NonNull IQVTiVMEvaluationEnvironment parent, @NonNull NamedElement operation) {
+		return new QVTiVMNestedEvaluationEnvironment(parent, operation, getNextEnvironmentId());
 	}
 
-	@Override
-	public @NonNull QVTiVMRootEvaluationVisitor createEvaluationVisitor(@NonNull EvaluationEnvironment evalEnv) {
-		return new QVTiVMRootEvaluationVisitor((IQVTiVMEvaluationEnvironment) evalEnv, ClassUtil.nonNullState(shell));
+	public @NonNull QVTiVMRootEvaluationVisitor createVMEvaluationVisitor(@NonNull IQVTiVMEvaluationEnvironment evalEnv) {
+		return new QVTiVMRootEvaluationVisitor(evalEnv, ClassUtil.nonNullState(getShell()));
 	}
 
-	@Override
-	public @NonNull QVTiVMModelManager createModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
+	public @NonNull QVTiVMModelManager createVMModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		return new QVTiVMModelManager(transformationAnalysis);
 	}
 
 	@Override
-	public boolean keepDebug() {
-		return true;
-	}
-
-	public void setShell(@Nullable IVMDebuggerShell shell) {
-		this.shell = shell;
+	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+		return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
 	}
 }

@@ -139,7 +139,7 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 	}
 
 	private static @NonNull VMStackFrameData createStackFrame(@NonNull UnitLocation location, boolean includeVars) {
-		IVMEvaluationEnvironment<?> evalEnv = location.getEvalEnv();
+		IVMEvaluationEnvironment evalEnv = location.getEvalEnv();
 		NamedElement module = location.getModule();
 		String moduleName = (module != null) ? module.getName() : null;
 		if (moduleName == null) moduleName = "<null>"; //$NON-NLS-1$

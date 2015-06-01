@@ -17,7 +17,6 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor;
 
 /**
@@ -40,7 +39,8 @@ public class QVTiVMEvaluationVisitor extends QVTiEvaluationVisitor implements IQ
 
     @Override
     public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator() {
-		IQVTiVMEvaluationEnvironment nestedEvalEnv = getEnvironmentFactory().createEvaluationEnvironment(evaluationEnvironment, evaluationEnvironment.getExecutableObject());
+		IQVTiVMEvaluationEnvironment vmEvaluationEnvironment = (IQVTiVMEvaluationEnvironment)evaluationEnvironment;
+		IQVTiVMEvaluationEnvironment nestedEvalEnv = getVMEnvironmentFactory().createVMEvaluationEnvironment(vmEvaluationEnvironment, evaluationEnvironment.getExecutableObject());
         QVTiVMEvaluationVisitor ne = new QVTiVMEvaluationVisitor(nestedEvalEnv);
         return ne;
     }
@@ -59,14 +59,14 @@ public class QVTiVMEvaluationVisitor extends QVTiEvaluationVisitor implements IQ
 	public void dispose() {}
 
 	@Override
-	public @NonNull IVMEvaluationVisitor<Transformation> getClonedEvaluator() {
+	public @NonNull IVMEvaluationVisitor getClonedEvaluator() {
 		IQVTiVMEvaluationEnvironment oldEvaluationEnvironment = getEvaluationEnvironment();
 		IQVTiVMEvaluationEnvironment clonedEvaluationEnvironment = oldEvaluationEnvironment.createClonedEvaluationEnvironment();
 		return new QVTiVMEvaluationVisitor(clonedEvaluationEnvironment);
 	}
 
-    @Override
-	public @NonNull QVTiVMEnvironmentFactory getEnvironmentFactory() {
+//    @Override
+	public @NonNull QVTiVMEnvironmentFactory getVMEnvironmentFactory() {
 		return (QVTiVMEnvironmentFactory) environmentFactory;
 	}
 

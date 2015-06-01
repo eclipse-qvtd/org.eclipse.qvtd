@@ -57,9 +57,8 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.stepper.QVTiStepperVisitor;
 import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
-public class QVTiVMRootEvaluationVisitor extends AbstractQVTiVMEvaluationVisitor implements IVMRootEvaluationVisitor<Transformation>
+public class QVTiVMRootEvaluationVisitor extends AbstractQVTiVMEvaluationVisitor implements IVMRootEvaluationVisitor
 {
 	private final @NonNull IVMDebuggerShell fDebugShell;
 	private final @NonNull VMBreakpointManager fBPM;
@@ -86,7 +85,7 @@ public class QVTiVMRootEvaluationVisitor extends AbstractQVTiVMEvaluationVisitor
 	}
 
 	@Override
-	protected @Nullable Object badVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv,
+	protected @Nullable Object badVisit(@NonNull IVMEvaluationEnvironment evalEnv,
 			@NonNull Element element, Object preState, @NonNull Throwable e) {
 		Stack<IVMEvaluationEnvironment.StepperEntry> stepperStack = evalEnv.getStepperStack();
 		if (!stepperStack.isEmpty()) {
@@ -141,7 +140,7 @@ public class QVTiVMRootEvaluationVisitor extends AbstractQVTiVMEvaluationVisitor
 
 	public @NonNull UnitLocation getCurrentLocation() {
 		AbstractQVTiVMEvaluationVisitor currentVisitor = visitorStack.peek();
-		IVMEvaluationEnvironment<?> evaluationEnvironment = currentVisitor.getEvaluationEnvironment();
+		IVMEvaluationEnvironment evaluationEnvironment = currentVisitor.getVMEvaluationEnvironment();
 		return evaluationEnvironment.getCurrentLocation();
 //		return fCurrentLocation;
 	}
@@ -157,8 +156,8 @@ public class QVTiVMRootEvaluationVisitor extends AbstractQVTiVMEvaluationVisitor
 
 	public @NonNull List<UnitLocation> getLocationStack() {
 		List<UnitLocation> fLocationStack = new ArrayList<UnitLocation>();
-		IVMEvaluationEnvironment<?> leafEvaluationEnvironment = visitorStack.peek().getEvaluationEnvironment();
-		for (IVMEvaluationEnvironment<?> evaluationEnvironment = leafEvaluationEnvironment; evaluationEnvironment != null; evaluationEnvironment = evaluationEnvironment.getParentEvaluationEnvironment()) {
+		IVMEvaluationEnvironment leafEvaluationEnvironment = visitorStack.peek().getVMEvaluationEnvironment();
+		for (IVMEvaluationEnvironment evaluationEnvironment = leafEvaluationEnvironment; evaluationEnvironment != null; evaluationEnvironment = evaluationEnvironment.getVMParentEvaluationEnvironment()) {
 			Element element = evaluationEnvironment.getCurrentIP();
 			IStepper stepper = getStepperVisitor().getStepper(element);
 			UnitLocation unitLocation = stepper.createUnitLocation(evaluationEnvironment, element);
@@ -302,7 +301,7 @@ public class QVTiVMRootEvaluationVisitor extends AbstractQVTiVMEvaluationVisitor
 		return location.getStackDepth() < fCurrentLocation.getStackDepth();
 	}
 
-	private @NonNull UnitLocation newLocalLocation(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element node, int startPosition, int endPosition) {
+	private @NonNull UnitLocation newLocalLocation(@NonNull IVMEvaluationEnvironment evalEnv, @NonNull Element node, int startPosition, int endPosition) {
 		return new UnitLocation(startPosition, endPosition, evalEnv, node);
 	}
 
@@ -320,7 +319,7 @@ public class QVTiVMRootEvaluationVisitor extends AbstractQVTiVMEvaluationVisitor
 //		}
 	}
 
-	protected void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Object result) {
+	protected void postVisit(@NonNull IVMEvaluationEnvironment evalEnv, @NonNull Element element, @Nullable Object result) {
 		Stack<IVMEvaluationEnvironment.StepperEntry> stepperStack = evalEnv.getStepperStack();
 		if (stepperStack.isEmpty()) {
 			return;
@@ -366,7 +365,7 @@ public class QVTiVMRootEvaluationVisitor extends AbstractQVTiVMEvaluationVisitor
 		}
 	}
 
-	protected @Nullable Element preVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element) {
+	protected @Nullable Element preVisit(@NonNull IVMEvaluationEnvironment evalEnv, @NonNull Element element) {
 		Stack<IVMEvaluationEnvironment.StepperEntry> stepperStack = evalEnv.getStepperStack();
 		IStepper stepper = getStepperVisitor().getStepper(element);
 		stepperStack.push(new IVMEvaluationEnvironment.StepperEntry(stepper, element));
@@ -502,7 +501,7 @@ public class QVTiVMRootEvaluationVisitor extends AbstractQVTiVMEvaluationVisitor
 	}
 
 	private void terminate() throws VMInterruptedExecutionException {
-		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
+		IVMEvaluationEnvironment evalEnv = getEvaluationEnvironment();
 		evalEnv.throwVMException(new VMInterruptedExecutionException("User termination request"));
 	}
 }
