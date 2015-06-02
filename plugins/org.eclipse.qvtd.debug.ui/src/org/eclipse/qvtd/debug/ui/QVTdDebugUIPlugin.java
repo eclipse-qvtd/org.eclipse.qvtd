@@ -22,6 +22,8 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.ocl.examples.debug.vm.ui.DebugVMUIPlugin;
+import org.eclipse.ocl.examples.debug.vm.ui.actions.DebugVMImages;
 import org.eclipse.qvtd.debug.ui.actions.QVTiDebugImages;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
 import org.eclipse.swt.graphics.Image;
@@ -245,12 +247,12 @@ public class QVTdDebugUIPlugin extends AbstractUIPlugin {
 	@Override
 	protected ImageRegistry createImageRegistry() {
 		ImageRegistry imageRegistry = super.createImageRegistry();
-		imageRegistry.put(QVTiDebugImages.LOCAL_VARIABLE, imageDescriptor("localvar_obj.gif")); //$NON-NLS-1$		
+		imageRegistry.put(DebugVMImages.LOCAL_VARIABLE, imageDescriptorFromPlugin(DebugVMUIPlugin.PLUGIN_ID, "localvar_obj.gif")); //$NON-NLS-1$		
 //		imageRegistry.put(QVTiDebugImages.THIS_VARIABLE, imageDescriptor("thisvar_obj.gif")); //$NON-NLS-1$
 //		imageRegistry.put(QVTiDebugImages.PREDEFINED_VARIABLE, imageDescriptor("predefvar_obj.gif")); //$NON-NLS-1$
-		imageRegistry.put(QVTiDebugImages.MODEL_PARAMETER, imageDescriptor("modelpar_obj.gif")); //$NON-NLS-1$
-		imageRegistry.put(QVTiDebugImages.ATTRIBUTE, imageDescriptor("attribute_obj.gif")); //$NON-NLS-1$
-		imageRegistry.put(QVTiDebugImages.REFERENCE, imageDescriptor("reference_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(DebugVMImages.MODEL_PARAMETER, imageDescriptorFromPlugin(DebugVMUIPlugin.PLUGIN_ID, "modelpar_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(DebugVMImages.ATTRIBUTE, imageDescriptorFromPlugin(DebugVMUIPlugin.PLUGIN_ID, "attribute_obj.gif")); //$NON-NLS-1$
+		imageRegistry.put(DebugVMImages.REFERENCE, imageDescriptorFromPlugin(DebugVMUIPlugin.PLUGIN_ID, "reference_obj.gif")); //$NON-NLS-1$
 //		imageRegistry.put(QVTiDebugImages.COLLECTION_ELEMENT, imageDescriptor("index_element_obj.gif")); //$NON-NLS-1$
 		imageRegistry.put(QVTiDebugImages.MAPPING, imageDescriptor("Mapping.gif")); //$NON-NLS-1$
 		imageRegistry.put(QVTiDebugImages.TRANSFORMATION, imageDescriptor("Transformation.gif")); //$NON-NLS-1$

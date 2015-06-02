@@ -20,6 +20,7 @@ import org.eclipse.ocl.examples.debug.vm.core.VMLineBreakpoint;
 import org.eclipse.ocl.examples.debug.vm.core.VMStackFrame;
 import org.eclipse.ocl.examples.debug.vm.core.VMThread;
 import org.eclipse.ocl.examples.debug.vm.core.VMVariable;
+import org.eclipse.ocl.examples.debug.vm.ui.actions.DebugVMImages;
 import org.eclipse.ocl.examples.debug.vm.ui.pages.VMDebugModelPresentation;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.ui.actions.QVTiDebugImages;
@@ -51,27 +52,27 @@ public class QVTiDebugModelPresentation extends VMDebugModelPresentation
         else if(element instanceof VMVariable) {
     		VMVariable var = (VMVariable) element;
     		if (var.isModelParameter()) {
-    			return QVTiDebugImages.getImage(QVTiDebugImages.MODEL_PARAMETER);
+    			return DebugVMImages.getImage(DebugVMImages.MODEL_PARAMETER);
     		} else if (var.isReference()) {
-    			return QVTiDebugImages.getImage(QVTiDebugImages.REFERENCE);
+    			return DebugVMImages.getImage(DebugVMImages.REFERENCE);
     		} else if (var.isAttribute()) {
-    			return QVTiDebugImages.getImage(QVTiDebugImages.ATTRIBUTE);
+    			return DebugVMImages.getImage(DebugVMImages.ATTRIBUTE);
     		} else if (var.isIntermProperty()) {
-    			return QVTiDebugImages.getImage(QVTiDebugImages.INTERM_PROPERTY);
+    			return DebugVMImages.getImage(DebugVMImages.INTERM_PROPERTY);
     		} else if (var.isLocalVariable()) {
-    			return QVTiDebugImages.getImage(QVTiDebugImages.LOCAL_VARIABLE);
+    			return DebugVMImages.getImage(DebugVMImages.LOCAL_VARIABLE);
     		} else if (var.isPredefinedVariable()) {
     			// TODO - add special case for this
     			try {
 					if("this".equals(var.getName())) { //$NON-NLS-1$
-						return QVTiDebugImages.getImage(QVTiDebugImages.THIS_VARIABLE);
+						return DebugVMImages.getImage(DebugVMImages.THIS_VARIABLE);
 					}
 				} catch (DebugException e) {
 					// do nothing use the std image
 				}
-    			return QVTiDebugImages.getImage(QVTiDebugImages.PREDEFINED_VARIABLE);
+    			return DebugVMImages.getImage(DebugVMImages.PREDEFINED_VARIABLE);
     		} else if(var.isCollectionElement()) {
-    			return QVTiDebugImages.getImage(QVTiDebugImages.COLLECTION_ELEMENT);
+    			return DebugVMImages.getImage(DebugVMImages.COLLECTION_ELEMENT);
     		}
     		
     	} else if (element instanceof VMLineBreakpoint) {
@@ -79,8 +80,8 @@ public class QVTiDebugModelPresentation extends VMDebugModelPresentation
             try {
                 if (breakpoint.isConditionEnabled()) {                	
                     return breakpoint.isEnabled() ? 
-                    		QVTiDebugImages.getImage(QVTiDebugImages.CONDITIONAL_BPNT_ENABLED) :
-                    			QVTiDebugImages.getImage(QVTiDebugImages.CONDITIONAL_BPNT_DISABLED);
+                    		DebugVMImages.getImage(DebugVMImages.CONDITIONAL_BPNT_ENABLED) :
+                    			DebugVMImages.getImage(DebugVMImages.CONDITIONAL_BPNT_DISABLED);
                 } 
             } catch (CoreException ex) {
                 QVTdDebugUIPlugin.log(ex);
