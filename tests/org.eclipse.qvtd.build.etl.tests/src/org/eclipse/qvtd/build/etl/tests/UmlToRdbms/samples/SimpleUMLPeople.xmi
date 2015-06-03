@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ASCII"?>
-
 <simpleuml:Package
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
@@ -9,8 +8,8 @@
     kind=""
     name="People">
   <elements xsi:type="simpleuml:Class" kind="persistent" name="Address" reverse="//@elements.7">
-    <attributes name="Street" type="//@elements.12"/>
-    <attributes name="Number" type="//@elements.12"/>
+    <attributes name="street" type="//@elements.12"/>
+    <attributes name="number" type="//@elements.12"/>
   </elements>
   <elements xsi:type="simpleuml:Class" kind="persistent" name="Budget" reverse="//@elements.6">
     <attributes name="year" type="//@elements.12"/>
