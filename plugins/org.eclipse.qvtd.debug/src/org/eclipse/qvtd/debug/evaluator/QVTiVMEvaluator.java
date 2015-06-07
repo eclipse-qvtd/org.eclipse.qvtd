@@ -157,7 +157,9 @@ public class QVTiVMEvaluator implements IVMEvaluator
     }
 
 	@Override
-	public void saveModels() {}
+	public void saveModels() {
+		vmModelManager.saveModels();
+	}
 
 	@Override
 	public void setSuspendOnStartUp(boolean suspendOnStartup) {
