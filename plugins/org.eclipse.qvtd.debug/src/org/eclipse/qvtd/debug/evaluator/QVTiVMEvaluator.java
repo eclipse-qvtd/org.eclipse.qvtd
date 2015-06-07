@@ -17,10 +17,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluator;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
@@ -96,6 +99,15 @@ public class QVTiVMEvaluator implements IVMEvaluator
 		Transformation transformation = getTransformation();
 		IQVTiVMEvaluationEnvironment evalEnv = vmEnvironmentFactory.createVMEvaluationEnvironment(transformation, vmModelManager);
         QVTiVMRootEvaluationVisitor visitor = vmEnvironmentFactory.createVMEvaluationVisitor(evalEnv);
+        StandardLibraryInternal standardLibrary = vmEnvironmentFactory.getEnvironmentFactory().getStandardLibrary();
+		Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
+		evalEnv.add(ownedContext, vmModelManager.getTransformationInstance(transformation));
+        for (TypedModel typedModel : transformation.getModelParameter()) {
+        	if (typedModel != null) {
+	            ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
+	            evalEnv.add(ownedContext, vmModelManager.getTypedModelInstance(typedModel));
+        	}
+        }
         visitor.start(suspendOnStartup);
         return (Boolean) transformation.accept(visitor);
 	}

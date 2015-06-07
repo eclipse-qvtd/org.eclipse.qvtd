@@ -10,5 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase.evaluation;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 public interface TransformationInstance {
+	@Nullable String getName();
 }

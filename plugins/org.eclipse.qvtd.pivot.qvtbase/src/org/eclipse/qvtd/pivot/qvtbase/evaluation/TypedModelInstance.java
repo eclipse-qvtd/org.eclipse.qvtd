@@ -14,10 +14,12 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public interface TypedModelInstance
 {
 	@NonNull Collection<EObject> getAllObjects();
+	@Nullable String getName();
 	@NonNull Collection<EObject> getObjectsOfKind(@NonNull org.eclipse.ocl.pivot.Class type);
 	@NonNull Collection<EObject> getObjectsOfType(@NonNull org.eclipse.ocl.pivot.Class type);
 	@NonNull Collection<EObject> getRootObjects();

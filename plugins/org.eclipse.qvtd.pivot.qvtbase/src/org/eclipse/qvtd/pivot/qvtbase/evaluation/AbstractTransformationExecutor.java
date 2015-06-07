@@ -252,6 +252,11 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 		public String toString() {
 			return name + " " + (rootEObjects != null ? rootEObjects.size() : "null") +  "/" + (allEObjects != null ? allEObjects.size() : "null");
 		}
+
+		@Override
+		public @NonNull String getName() {
+			return name;
+		}
 	}
 	
 	protected final @NonNull Evaluator evaluator;

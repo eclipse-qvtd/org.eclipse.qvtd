@@ -340,6 +340,11 @@ public class QVTiModelManager implements ModelManager
 			return modelManager;
 		}
 		
+		@Override
+		public @Nullable String getName() {
+			return transformation.getName();
+		}
+		
 		public @NonNull Transformation getTransformation() {
 			return transformation;
 		}
@@ -358,6 +363,11 @@ public class QVTiModelManager implements ModelManager
 		@Override
 		public @NonNull Set<EObject> getAllObjects() {
 			throw new UnsupportedOperationException();
+		}
+		
+		@Override
+		public @Nullable String getName() {
+			return typedModel.getName();
 		}
 
 		@Override
@@ -386,7 +396,7 @@ public class QVTiModelManager implements ModelManager
 		public @NonNull Collection<EObject> getRootObjects() {
 			throw new UnsupportedOperationException();
 		}
-
+		
 		public @NonNull TypedModel getTypedModel() {
 			return typedModel;
 		}

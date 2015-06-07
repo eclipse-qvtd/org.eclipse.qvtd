@@ -35,6 +35,13 @@
          </describer>
       </content-type>
    </extension>
+   
+  <extension point="org.eclipse.ocl.pivot.label_generator">
+      <generator for="org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationInstance"
+      	class="org.eclipse.qvtd.pivot.qvtbase.utilities.TransformationInstanceLabelGenerator"/>
+      <generator for="org.eclipse.qvtd.pivot.qvtbase.evaluation.TypedModelInstance"
+      	class="org.eclipse.qvtd.pivot.qvtbase.utilities.TypedModelInstanceLabelGenerator"/>
+   </extension>
 
    <extension point="org.eclipse.ocl.pivot.standard_library"
          id="qvtbaselibrary" name="QVTbase Library">
