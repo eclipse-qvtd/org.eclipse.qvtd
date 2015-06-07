@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
@@ -79,11 +80,12 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
 		this.transformationAnalysis = getModelManager().getTransformationAnalysis();
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.ocl.pivot.evaluation.EvaluationVisitorImpl#createNestedEvaluator()
-     */
+	/** @deprecated provide nestedElement argument */
+	@Deprecated
     @Override
 	public abstract @NonNull IQVTiEvaluationVisitor createNestedEvaluator();
+    @Override
+	public abstract @NonNull IQVTiEvaluationVisitor createNestedEvaluator(@NonNull NamedElement nestedElement);
 
 	protected void doMappingStatements(@NonNull List<MappingStatement> mappingStatements) {
 	}
@@ -95,7 +97,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
 			Property targetProperty = propertyAssignment.getTargetProperty();
 			Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
 			Object ecoreValue = environmentFactory.getIdResolver().ecoreValueOf(instanceClass, boxedValue);
-			targetProperty.initValue((EObject) slotExpValue, ecoreValue);
+			targetProperty.initValue(slotExpValue, ecoreValue);
 			if (cacheIndex != null) {
 				getModelManager().setUnnavigableOpposite(cacheIndex, slotExpValue, ecoreValue);
 			}
@@ -352,14 +354,16 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
 	@Override
 	public @Nullable Object visitMappingSequence(@NonNull MappingSequence mappingSequence) {
 		for (MappingStatement mappingStatement : mappingSequence.getMappingStatements()) {
-			IQVTiEvaluationVisitor nv = ((IQVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
-			// The Undecorated visitor createNestedEvaluator should return the undecorated, so no need
-			// to call the getUndecoratedVisitor.
-			try {
-				mappingStatement.accept(nv);
-			}
-			finally {
-				nv.dispose();
+			if (mappingStatement != null) {
+				IQVTiEvaluationVisitor nv = ((IQVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator(mappingStatement);
+				// The Undecorated visitor createNestedEvaluator should return the undecorated, so no need
+				// to call the getUndecoratedVisitor.
+				try {
+					mappingStatement.accept(nv);
+				}
+				finally {
+					nv.dispose();
+				}
 			}
 		}
 		return true;

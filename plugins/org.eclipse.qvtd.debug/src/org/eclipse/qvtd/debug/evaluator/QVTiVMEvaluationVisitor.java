@@ -12,6 +12,7 @@
 package org.eclipse.qvtd.debug.evaluator;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEnvironmentFactory;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationVisitor;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
@@ -22,8 +23,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor;
 /**
  * QVTiVMEvaluationVisitorImpl is the class for ...
  */
-public class QVTiVMEvaluationVisitor extends QVTiEvaluationVisitor implements IQVTiVMEvaluationVisitor {
-
+public class QVTiVMEvaluationVisitor extends QVTiEvaluationVisitor implements IQVTiVMEvaluationVisitor
+{
+	protected final @NonNull IVMEnvironmentFactory vmEnvironmentFactory;
         
     /**
      * Instantiates a new OCL evaluation visitor impl.
@@ -35,12 +37,23 @@ public class QVTiVMEvaluationVisitor extends QVTiEvaluationVisitor implements IQ
      */
     public QVTiVMEvaluationVisitor(@NonNull IQVTiVMEvaluationEnvironment evalEnv) {
         super(evalEnv);
+        vmEnvironmentFactory = evalEnv.getVMEnvironmentFactory();
     }
 
+	/** @deprecated provide nestedElement argument */
+	@Deprecated
     @Override
     public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator() {
 		IQVTiVMEvaluationEnvironment vmEvaluationEnvironment = (IQVTiVMEvaluationEnvironment)evaluationEnvironment;
 		IQVTiVMEvaluationEnvironment nestedEvalEnv = getVMEnvironmentFactory().createVMEvaluationEnvironment(vmEvaluationEnvironment, evaluationEnvironment.getExecutableObject());
+        QVTiVMEvaluationVisitor ne = new QVTiVMEvaluationVisitor(nestedEvalEnv);
+        return ne;
+    }
+
+    @Override
+    public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator(@NonNull NamedElement nestedElement) {
+		IQVTiVMEvaluationEnvironment vmEvaluationEnvironment = (IQVTiVMEvaluationEnvironment)evaluationEnvironment;
+		IQVTiVMEvaluationEnvironment nestedEvalEnv = getVMEnvironmentFactory().createVMEvaluationEnvironment(vmEvaluationEnvironment, nestedElement);
         QVTiVMEvaluationVisitor ne = new QVTiVMEvaluationVisitor(nestedEvalEnv);
         return ne;
     }
@@ -60,20 +73,20 @@ public class QVTiVMEvaluationVisitor extends QVTiEvaluationVisitor implements IQ
 
 	@Override
 	public @NonNull IVMEvaluationVisitor getClonedEvaluator() {
-		IQVTiVMEvaluationEnvironment oldEvaluationEnvironment = getEvaluationEnvironment();
+		IQVTiVMEvaluationEnvironment oldEvaluationEnvironment = getVMEvaluationEnvironment();
 		IQVTiVMEvaluationEnvironment clonedEvaluationEnvironment = oldEvaluationEnvironment.createClonedEvaluationEnvironment();
 		return new QVTiVMEvaluationVisitor(clonedEvaluationEnvironment);
 	}
 
 //    @Override
 	public @NonNull QVTiVMEnvironmentFactory getVMEnvironmentFactory() {
-		return (QVTiVMEnvironmentFactory) environmentFactory;
+		return (QVTiVMEnvironmentFactory) vmEnvironmentFactory;
 	}
 
-	@Override
-	public @NonNull IQVTiVMEvaluationEnvironment getEvaluationEnvironment() {
-		return (IQVTiVMEvaluationEnvironment) super.getEvaluationEnvironment();
-	}
+//	@Override
+//	public @NonNull IQVTiVMEvaluationEnvironment getEvaluationEnvironment() {
+//		return (IQVTiVMEvaluationEnvironment) super.getEvaluationEnvironment();
+//	}
 
 	/* (non-Javadoc)
      * @see org.eclipse.ocl.pivot.evaluation.AbstractEvaluationVisitor#getModelManager()
@@ -86,5 +99,10 @@ public class QVTiVMEvaluationVisitor extends QVTiEvaluationVisitor implements IQ
 	@Override
 	public @NonNull String getPluginId() {
 		return QVTiDebugPlugin.PLUGIN_ID;
+	}
+
+	@Override
+	public @NonNull IQVTiVMEvaluationEnvironment getVMEvaluationEnvironment() {
+		return (IQVTiVMEvaluationEnvironment) super.getEvaluationEnvironment();
 	}
 }

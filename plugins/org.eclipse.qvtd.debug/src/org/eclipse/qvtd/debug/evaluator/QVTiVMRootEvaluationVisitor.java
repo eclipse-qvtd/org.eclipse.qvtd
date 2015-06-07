@@ -376,7 +376,7 @@ public class QVTiVMRootEvaluationVisitor extends AbstractQVTiVMEvaluationVisitor
 					element = firstElement;
 				}
 			}
-			setCurrentEnvInstructionPointer(element);
+	    	evalEnv.setCurrentIP(element);
 			evalEnv.replace(evalEnv.getPCVariable(), element);
 			evalEnv.remove(invalidVariable);
 			UnitLocation unitLocation = stepper.createUnitLocation(evalEnv, element);

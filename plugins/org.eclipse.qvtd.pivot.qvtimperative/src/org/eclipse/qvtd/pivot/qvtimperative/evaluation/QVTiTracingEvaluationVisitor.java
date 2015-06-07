@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -66,13 +67,17 @@ public class QVTiTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationV
 		this.indentLevel = indentLevel;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorDecorator#createNestedEvaluator()
-	 */
+	/** @deprecated provide nestedElement argument */
+	@Deprecated
 	@Override
 	public @NonNull IQVTiEvaluationVisitor createNestedEvaluator() {
 		
 		return new QVTiTracingEvaluationVisitor(super.createNestedEvaluator(), indentLevel);
+	}
+	@Override
+	public @NonNull IQVTiEvaluationVisitor createNestedEvaluator(@NonNull NamedElement nestedElement) {
+		
+		return new QVTiTracingEvaluationVisitor(super.createNestedEvaluator(nestedElement), indentLevel);
 	}
 	
 	/* (non-Javadoc)

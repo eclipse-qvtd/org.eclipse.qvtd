@@ -36,7 +36,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.vm.QVTiVariableFinder;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiRootEvaluationEnvironment;
 
@@ -62,7 +61,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		this.id = id;
 		pcVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 		pcVariable.setName("$pc");
-		String typeName = ClassUtil.nonNullEMF(PivotPackage.Literals.OCL_EXPRESSION.getName());
+		String typeName = ClassUtil.nonNullEMF(PivotPackage.Literals.NAMED_ELEMENT.getName());
 		pcVariable.setType(environmentFactory.getMetamodelManager().getASClass(typeName));
 	}
 
@@ -126,8 +125,11 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		return (QVTiVMModelManager) super.getModelManager();
 	}
 	
+	/** @deprecated no longer useful */
+	@Deprecated
 	public @NonNull Map<String, Resource> getModelParameterVariables() {
-		Transformation currentModule = getTransformation();		
+		return new HashMap<String, Resource>();
+/*		Transformation currentModule = getTransformation();		
 //		if (!(currentModule instanceof Transformation)) {
 //			return Collections.emptyMap();
 //		}
@@ -149,7 +151,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 //			result.put("_intermediate", intermModel);
 //		}
 		
-		return result;
+		return result; */
 	}
 
 	@Override

@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -51,10 +52,21 @@ public class QVTiEvaluationVisitor extends QVTiAbstractEvaluationVisitor {
         super(evalEnv);
     }
 
+	/** @deprecated provide nestedElement argument */
+	@Deprecated
     @Override
     public @NonNull IQVTiEvaluationVisitor createNestedEvaluator() {
         QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
 		IQVTiEvaluationEnvironment nestedEvalEnv = (IQVTiEvaluationEnvironment) environmentFactory.createEvaluationEnvironment(evaluationEnvironment, evaluationEnvironment.getExecutableObject());
+        QVTiEvaluationVisitor nestedEvaluationVisitor = new QVTiEvaluationVisitor(nestedEvalEnv);
+        nestedEvaluationVisitor.setMonitor(getMonitor());
+        return nestedEvaluationVisitor;
+    }
+
+    @Override
+    public @NonNull IQVTiEvaluationVisitor createNestedEvaluator(@NonNull NamedElement namedElement) {
+        QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+		IQVTiEvaluationEnvironment nestedEvalEnv = (IQVTiEvaluationEnvironment) environmentFactory.createEvaluationEnvironment(evaluationEnvironment, namedElement);
         QVTiEvaluationVisitor nestedEvaluationVisitor = new QVTiEvaluationVisitor(nestedEvalEnv);
         nestedEvaluationVisitor.setMonitor(getMonitor());
         return nestedEvaluationVisitor;
@@ -208,7 +220,7 @@ public class QVTiEvaluationVisitor extends QVTiAbstractEvaluationVisitor {
         if (rule == null) {
         	throw new IllegalStateException("Transformation " + transformation.getName() + " has no root mapping");
         }
-    	IQVTiEvaluationVisitor nv = ((IQVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
+    	IQVTiEvaluationVisitor nv = ((IQVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator(rule);
         rule.accept(nv);
         return true;
     }

@@ -14,13 +14,18 @@ package org.eclipse.qvtd.debug.evaluator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationVisitor;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 public interface IQVTiVMEvaluationVisitor extends IVMEvaluationVisitor, IQVTiEvaluationVisitor, QVTimperativeVisitor<Object>
 {
+	/** @deprecated provide nestedElement argument */
+	@Deprecated
 	@NonNull IQVTiVMEvaluationVisitor createNestedEvaluator();
+	@NonNull IQVTiVMEvaluationVisitor createNestedEvaluator(@NonNull NamedElement nestedElement);
 	void dispose();
+	@NonNull IQVTiVMEvaluationEnvironment getVMEvaluationEnvironment();
 	Object safeVisit(@Nullable Visitable v);
 }

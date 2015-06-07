@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
@@ -59,12 +60,19 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 		super(decorated);
 	}
 	
+	/** @deprecated provide nestedElement argument */
+	@Deprecated
+	@Override
+	public @NonNull IQVTiEvaluationVisitor createNestedEvaluator() {
+        return delegate.createNestedEvaluator();
+	}
+	
 	/**
      * Delegates to my decorated visitor.
      */
 	@Override
-	public @NonNull IQVTiEvaluationVisitor createNestedEvaluator() {
-        return delegate.createNestedEvaluator();
+	public @NonNull IQVTiEvaluationVisitor createNestedEvaluator(@NonNull NamedElement nestedElement) {
+        return delegate.createNestedEvaluator(nestedElement);
 	}
 
 	@Override

@@ -105,6 +105,8 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 		return (QVTiVMModelManager) super.getModelManager();
 	}
 	
+	/** @deprecated no longer useful once Bug 469463 fixed */
+	@Deprecated
 	public @NonNull Map<String, Resource> getModelParameterVariables() {
     	return getVMRootEvaluationEnvironment().getModelParameterVariables();
 	}

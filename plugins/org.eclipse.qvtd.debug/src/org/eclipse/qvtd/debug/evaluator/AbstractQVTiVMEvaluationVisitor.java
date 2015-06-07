@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.utils.VMInterruptedExecutionException;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
@@ -71,7 +72,7 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 	}
 
 	public @NonNull IQVTiVMEvaluationEnvironment getVMEvaluationEnvironment() {
-		return (IQVTiVMEvaluationEnvironment) delegate.getEvaluationEnvironment();
+		return delegate.getVMEvaluationEnvironment();
 	}
 
 	public @NonNull String getPluginId() {
@@ -164,8 +165,9 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 		if (VMVirtualMachine.PRE_VISIT.isActive()) {
 			VMVirtualMachine.PRE_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString());
 		}
-		Element previousIP = setCurrentEnvInstructionPointer(null/*element*/);
+//		Element previousIP = setCurrentEnvInstructionPointer(null/*element*/);
 		IVMEvaluationEnvironment evalEnv = getVMEvaluationEnvironment();
+		Element previousIP = evalEnv.getCurrentIP();
 		preVisit(evalEnv, element);
 		return previousIP;
 	}
@@ -176,7 +178,9 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 		// TODO Auto-generated method stub
 		
 //	}
-	   
+	
+	/** @deprecated no lon ger used */
+	@Deprecated
     protected Element setCurrentEnvInstructionPointer(Element element) {
 		IVMEvaluationEnvironment evalEnv = getVMEvaluationEnvironment();
     	if (element != null) {
@@ -199,10 +203,18 @@ public abstract class AbstractQVTiVMEvaluationVisitor extends AbstractWrappingQV
 		return result;
 	}
 
+	/** @deprecated provide nestedElement argument */
+	@Deprecated
 	@Override
 	public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator() { // FIXME Pass 'operation'
 //		return delegate.createNestedEvaluator();
 		return new QVTiVMNestedEvaluationVisitor(this, delegate.createNestedEvaluator());
+	}
+
+	@Override
+	public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator(@NonNull NamedElement nestedElement) {
+//		return delegate.createNestedEvaluator();
+		return new QVTiVMNestedEvaluationVisitor(this, delegate.createNestedEvaluator(nestedElement));
 	}
 
 	@Override
