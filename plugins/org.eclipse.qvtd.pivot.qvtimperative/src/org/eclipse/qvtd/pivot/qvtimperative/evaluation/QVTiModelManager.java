@@ -335,6 +335,14 @@ public class QVTiModelManager implements ModelManager
 			this.modelManager = modelManager;
 			this.transformation = transformation;
 		}
+
+		public @NonNull QVTiModelManager getModelManager() {
+			return modelManager;
+		}
+		
+		public @NonNull Transformation getTransformation() {
+			return transformation;
+		}
 	}
 
 	public static class QVTiTypedModelInstance implements TypedModelInstance
@@ -370,9 +378,17 @@ public class QVTiModelManager implements ModelManager
 			throw new UnsupportedOperationException();
 		}
 
+		public @NonNull QVTiModelManager getModelManager() {
+			return modelManager;
+		}
+
 		@Override
 		public @NonNull Collection<EObject> getRootObjects() {
 			throw new UnsupportedOperationException();
+		}
+
+		public @NonNull TypedModel getTypedModel() {
+			return typedModel;
 		}
 	}
 	

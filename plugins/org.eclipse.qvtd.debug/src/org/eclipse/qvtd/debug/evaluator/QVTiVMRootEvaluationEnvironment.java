@@ -21,7 +21,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
+import org.eclipse.ocl.examples.debug.vm.VariableFinder;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEnvironmentFactory;
+import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironmentExtension;
 import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.examples.debug.vm.utils.VMStackTraceBuilder;
@@ -32,12 +34,13 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
+import org.eclipse.qvtd.debug.vm.QVTiVariableFinder;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiRootEvaluationEnvironment;
 
-public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironment implements IQVTiVMEvaluationEnvironment
+public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironment implements IQVTiVMEvaluationEnvironment, IVMEvaluationEnvironmentExtension
 {
 	protected final @NonNull IVMEnvironmentFactory vmEnvironmentFactory;
 //	private IContext myContext;
@@ -66,6 +69,11 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 	@Override
 	public @NonNull IQVTiVMEvaluationEnvironment createClonedEvaluationEnvironment() {
 		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	public @NonNull VariableFinder createVariableFinder(boolean isStoreValues) {
+		return new QVTiVariableFinder(this, isStoreValues);
 	}
 
 //    @Override

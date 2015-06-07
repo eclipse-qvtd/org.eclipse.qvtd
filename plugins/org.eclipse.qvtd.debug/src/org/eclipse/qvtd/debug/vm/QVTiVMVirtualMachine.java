@@ -156,7 +156,6 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 		return vmStackFrame;
 	}
 	
-	
 	public QVTiVMVirtualMachine(@NonNull DebuggableRunner runner, @NonNull QVTiEvaluationContext evaluationContext) {
 		super(runner, runner.createDebuggableAdapter(evaluationContext));
 	}
