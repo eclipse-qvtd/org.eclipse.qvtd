@@ -30,7 +30,6 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
-import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -122,8 +121,8 @@ public class QVTiSerializeTests extends LoadTestCase
 	@Override
 	public void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
+		QVTiEditorTests.doQVTimperativeSetup();
 		super.setUp();
-		QVTimperativeStandaloneSetup.doSetup();
 	}
 	
 	public void testSerialize_Expressions() throws Exception {

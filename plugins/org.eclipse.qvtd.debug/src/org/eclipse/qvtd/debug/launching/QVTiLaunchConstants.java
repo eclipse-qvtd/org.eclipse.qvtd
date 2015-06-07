@@ -17,6 +17,8 @@ import org.eclipse.jdt.annotation.NonNull;
 
 public interface QVTiLaunchConstants
 {
+	static final @NonNull String LAUNCH_CONFIGURATION_TYPE_ID = "org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate";
+
 	public static final @NonNull Map<String, String> EMPTY_MAP = new HashMap<String,String>();
 
 	/**

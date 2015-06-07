@@ -13,6 +13,8 @@ package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
 import java.util.Arrays;
 
+import org.eclipse.emf.common.EMFPlugin;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -28,9 +30,11 @@ public class AllQVTimperativeTests extends TestCase
 	public static Test suite() {
 		TestSuite result = new TestSuite("All QVTimperative Tests");			
 		result.addTestSuite(QVTiEditorTests.class);
-		result.addTestSuite(QVTiInterpreterTests.class);
-		result.addTestSuite(QVTiCompilerTests.class);
-		result.addTestSuite(QVTiDomainUsageTests.class);
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
+			result.addTestSuite(QVTiInterpreterTests.class);
+			result.addTestSuite(QVTiCompilerTests.class);
+			result.addTestSuite(QVTiDomainUsageTests.class);
+		}
 		result.addTestSuite(QVTiSerializeTests.class);
 		return result;
 	}

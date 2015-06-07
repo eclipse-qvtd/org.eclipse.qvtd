@@ -12,20 +12,37 @@ package org.eclipse.qvtd.xtext.qvtcore.tests;
 
 import java.io.IOException;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
+
+import com.google.inject.Guice;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
  */
 public class LoadTests extends LoadTestCase
 {	
+	/**
+	 * Perform the appropriate initialization to support QVTcore parsing and editing using Xtext.
+	 * NB. This must be called before setUp() creates a GlobalStateMemento if the aggressive DEBUG_GC
+	 * garbage collection is enabled.
+	 */
+	public static void doQVTcoreSetup() {
+    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+    		QVTcoreStandaloneSetup.doSetup();
+    	}
+    	else {
+    		Guice.createInjector(new org.eclipse.qvtd.xtext.qvtcore.QVTcoreRuntimeModule());
+    	}
+	}
+	
 	@Override
 	protected void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
+		doQVTcoreSetup();
 		super.setUp();
-		QVTcoreStandaloneSetup.doSetup();
 	}
 
 	public void testLoad_expressions_qvtc() throws IOException, InterruptedException {

@@ -49,7 +49,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
-import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -156,8 +155,8 @@ public class QVTcDomainUsageTests extends LoadTestCase
 	@Override
 	protected void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
+		LoadTests.doQVTcoreSetup();
 		super.setUp();
-		QVTcoreStandaloneSetup.doSetup();
 	}
 
 	public Resource doLoad_ConcreteWithOCL(@NonNull MyQVT myQVT, @NonNull URI inputURI) throws IOException {
