@@ -33,10 +33,10 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
+import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -110,11 +110,6 @@ public class QVTcDomainUsageTests extends LoadTestCase
 		public @NonNull TxEvaluator createEvaluator(Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
 			return new TxEvaluator(getCompleteEnvironment(), txConstructor);
 		}
-
-		@Override
-		public @NonNull EnvironmentFactoryInternal getEnvironmentFactory() {
-			return (EnvironmentFactoryInternal) super.getEnvironmentFactory();
-		}
 		
 		public void printAnalysis(@NonNull Map<DomainUsage, List<Element>> usage2elements) {
 			@SuppressWarnings("unchecked")Set<DomainUsage.Internal> keySet = (Set<DomainUsage.Internal>)(Set<?>)usage2elements.keySet();
@@ -134,9 +129,9 @@ public class QVTcDomainUsageTests extends LoadTestCase
 		}
 	}
 	
-	protected static class MyQVTiEnvironmentFactory extends AbstractEnvironmentFactory
+	protected static class MyQVTcEnvironmentFactory extends PivotEnvironmentFactory
 	{
-		public MyQVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
+		public MyQVTcEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
 			super(projectMap, externalResourceSet);
 	    	setEvaluationTracingEnabled(true);
 		}
@@ -149,7 +144,7 @@ public class QVTcDomainUsageTests extends LoadTestCase
 	}
 
 	protected @NonNull MyQVT createQVT() {
-		return new MyQVT(new MyQVTiEnvironmentFactory(getProjectMap(), null));
+		return new MyQVT(new MyQVTcEnvironmentFactory(getProjectMap(), null));
 	}
 
 	@Override

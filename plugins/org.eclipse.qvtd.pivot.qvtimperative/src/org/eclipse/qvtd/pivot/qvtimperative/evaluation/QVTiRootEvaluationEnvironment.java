@@ -11,13 +11,18 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
-public class QVTiRootEvaluationEnvironment extends QVTiEvaluationEnvironment
+public class QVTiRootEvaluationEnvironment extends BasicEvaluationEnvironment implements QVTiEvaluationEnvironment
 {
-    public QVTiRootEvaluationEnvironment(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull Transformation executableObject, @NonNull QVTiModelManager modelManager) {
-		super(environmentFactory, executableObject, modelManager);
+    public QVTiRootEvaluationEnvironment(@NonNull QVTiExecutor executor, @NonNull Transformation executableObject) {
+		super(executor, executableObject);
+	}
+
+	@Override
+	public @NonNull QVTiExecutor getExecutor() {
+		return (QVTiExecutor) super.getExecutor();
 	}
 
 	@Override

@@ -22,7 +22,7 @@ import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.VariableFinder;
 import org.eclipse.ocl.examples.debug.vm.data.VMStackFrameData;
 import org.eclipse.ocl.examples.debug.vm.data.VMVariableData;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
+import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.launching.DebuggableRunner;
 import org.eclipse.ocl.pivot.Constraint;
 import org.eclipse.ocl.pivot.Element;
@@ -150,7 +150,7 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 	}
 
 	private static @NonNull VMStackFrameData createStackFrame(@NonNull UnitLocation location, boolean includeVars) {
-		IVMEvaluationEnvironment evalEnv = location.getEvalEnv();
+		VMEvaluationEnvironment evalEnv = location.getEvalEnv();
 		NamedElement module = location.getModule();
 		String moduleName = (module != null) ? module.getName() : null;
 		if (moduleName == null) moduleName = "<null>"; //$NON-NLS-1$

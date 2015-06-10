@@ -11,27 +11,13 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationEnvironment;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
-public abstract class QVTiEvaluationEnvironment extends BasicEvaluationEnvironment implements IQVTiEvaluationEnvironment
+public interface QVTiEvaluationEnvironment extends EvaluationEnvironment
 {
-	protected QVTiEvaluationEnvironment(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull NamedElement executableObject, @NonNull QVTiModelManager modelManager) {
-		super(environmentFactory, executableObject, modelManager);
-	}
-
-	protected QVTiEvaluationEnvironment(@NonNull IQVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject) {
-		super(evaluationEnvironment, executableObject);
-	}
-
 	@Override
-	public @NonNull QVTiModelManager getModelManager() {
-		return (QVTiModelManager) modelManager;
-	}
-
-	public @Nullable IQVTiEvaluationEnvironment getParentEvaluationEnvironment() {
-		return (IQVTiEvaluationEnvironment) parent;
-	}
+	@NonNull QVTiExecutor getExecutor();
+	@NonNull QVTiRootEvaluationEnvironment getRootEvaluationEnvironment();
+	@NonNull Transformation getTransformation();
 }

@@ -250,7 +250,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 	protected void executeModelsTX_CG(MyQVT qvt, Constructor<? extends TransformationExecutor> txConstructor, URI baseURI, String modelName) throws Exception {
 		
 		TransformationEvaluator evaluator = qvt.createEvaluator(txConstructor);
-		TransformationExecutor tx = evaluator.getExecutor();
+		TransformationExecutor tx = evaluator.getTransformationExecutor();
 		URI samplesBaseUri = baseURI.appendSegment("samples");
     	URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
     	URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_CG.xmi", modelName));

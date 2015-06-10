@@ -13,8 +13,6 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.regex.Pattern;
-
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -27,7 +25,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.internal.evaluation.OCLEvaluationVisitor;
+import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -144,10 +142,10 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		return string;
 	}
 	
-	@Override
-	public @NonNull Pattern getRegexPattern(@NonNull String regex) {
-		return delegate.getRegexPattern(regex);
-	}
+//	@Override
+//	public @NonNull Pattern getRegexPattern(@NonNull String regex) {
+//		return delegate.getRegexPattern(regex);
+//	}
 
 	/**
 	 * Safe print.
@@ -355,7 +353,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
 		Variable v = variableAssignment.getTargetVariable();
 		logger.info(getIndent() + "VisitVariableAssignment " + v
-				+ ": " + ((OCLEvaluationVisitor)delegate).safeVisit(variableAssignment.getValue()));
+				+ ": " + ((BasicEvaluationVisitor)delegate).safeVisit(variableAssignment.getValue()));
 		indentLevel++;
 		Object result = delegate.visitVariableAssignment(variableAssignment);
 		indentLevel--;
@@ -367,7 +365,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {
 		Variable v = variablePredicate.getTargetVariable();
 		logger.info(getIndent() + "VisitVariablePredicate " + v
-				+ ": " + ((OCLEvaluationVisitor)delegate).safeVisit(variablePredicate.getConditionExpression()));
+				+ ": " + ((BasicEvaluationVisitor)delegate).safeVisit(variablePredicate.getConditionExpression()));
 		indentLevel++;
 		Object result = delegate.visitVariablePredicate(variablePredicate);
 		indentLevel--;

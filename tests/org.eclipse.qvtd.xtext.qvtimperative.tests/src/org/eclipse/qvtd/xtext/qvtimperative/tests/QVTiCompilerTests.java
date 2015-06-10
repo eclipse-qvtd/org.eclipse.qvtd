@@ -134,9 +134,9 @@ public class QVTiCompilerTests extends LoadTestCase
 		completeOCLEObjectValidator2.initialize();
 //		completeOCLEObjectValidator3.initialize();
 		PivotEObjectValidator.install(ClassUtil.nonNullState(asResource.getResourceSet()), myQVT.getEnvironmentFactory());
-		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE));
-		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE));
-		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE));
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE), null);
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), null);
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), null);
 	    
 		assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
 		asResource.save(getSaveOptions());
@@ -164,7 +164,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 		TxEvaluator evaluator = myQVT.createEvaluator(txConstructor);
-		TransformationExecutor tx = evaluator.getExecutor();
+		TransformationExecutor tx = evaluator.getTransformationExecutor();
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
 		tx.addRootObjects("hsv", ClassUtil.nonNullState(inputResource.getContents()));
 		tx.run();
@@ -207,7 +207,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 		TxEvaluator evaluator = myQVT.createEvaluator(txConstructor);
-		TransformationExecutor tx = evaluator.getExecutor();
+		TransformationExecutor tx = evaluator.getTransformationExecutor();
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
 		tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
 		tx.run();
@@ -236,7 +236,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 		TransformationEvaluator evaluator = myQVT.createEvaluator(txConstructor);
-		TransformationExecutor tx = evaluator.getExecutor();
+		TransformationExecutor tx = evaluator.getTransformationExecutor();
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
 		tx.addRootObjects("uml", ClassUtil.nonNullState(inputResource.getContents()));
 		tx.run();
@@ -271,7 +271,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 		TransformationEvaluator evaluator = myQVT.createEvaluator(txConstructor);
-		TransformationExecutor tx = evaluator.getExecutor();
+		TransformationExecutor tx = evaluator.getTransformationExecutor();
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
 		tx.addRootObjects("uml", ClassUtil.nonNullState(inputResource.getContents()));
 		tx.run();

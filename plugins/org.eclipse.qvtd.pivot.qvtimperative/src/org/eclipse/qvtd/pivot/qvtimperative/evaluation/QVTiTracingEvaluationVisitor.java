@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -42,7 +41,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationV
 	
 	
 	/** The indent level. */
-	private int indentLevel = 0;
+//	private int indentLevel = 0;
 	
 
 	/**
@@ -64,25 +63,9 @@ public class QVTiTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationV
 	protected QVTiTracingEvaluationVisitor(@NonNull IQVTiEvaluationVisitor decorated, int indentLevel) {
 		
 		super(decorated);
-		this.indentLevel = indentLevel;
+//		this.indentLevel = indentLevel;
 	}
-	
-	/** @deprecated provide nestedElement argument */
-	@Deprecated
-	@Override
-	public @NonNull IQVTiEvaluationVisitor createNestedEvaluator() {
-		
-		return new QVTiTracingEvaluationVisitor(super.createNestedEvaluator(), indentLevel);
-	}
-	@Override
-	public @NonNull IQVTiEvaluationVisitor createNestedEvaluator(@NonNull NamedElement nestedElement) {
-		
-		return new QVTiTracingEvaluationVisitor(super.createNestedEvaluator(nestedElement), indentLevel);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorDecorator#visitBottomPattern(org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern)
-	 */
+
 	@Override
     public @Nullable Object visitBottomPattern(@NonNull BottomPattern bottomPattern) {
 		
@@ -92,20 +75,20 @@ public class QVTiTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationV
 		if (bottomPattern.getArea() instanceof Mapping) {
 			logger.info(getIndent() + "Visiting Mapping BottomPattern");
 		}
-		indentLevel++;
+//		indentLevel++;
 		Object result = delegate.visitBottomPattern(bottomPattern);
 		if (bottomPattern.getArea() instanceof Mapping) {
 			// Print the domain realized variables to see their attributes
 			for(Domain d : ((Mapping)bottomPattern.getArea()).getDomain()) {
 				logger.info(getIndent() + "RealizedVariables for CoreDomain " + d.getName());
-				indentLevel++;
+//				indentLevel++;
 				for (Variable v : ((Area)d).getBottomPattern().getRealizedVariable()) {
 					logger.info(getIndent() + "RealizedVariable " + v.getName() + ": " + prettyPrint(delegate.getEvaluationEnvironment().getValueOf(v)));
 				}
-				indentLevel--;
+//				indentLevel--;
 			}
 		}
-		indentLevel--;
+//		indentLevel--;
 		if (bottomPattern.getArea() instanceof Mapping) {
 			// After visiting the mapping bottom pattern, the middle model must have changed.
 			if(verboseLevel == VERBOSE_LEVEL_HIGH) {
@@ -114,7 +97,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationV
 				logger.info("Output Model");
 				if (((Mapping)bottomPattern.getArea()).getDomain().size() > 0) {
 					TypedModel tm = ((Mapping)bottomPattern.getArea()).getDomain().get(0).getTypedModel();
-					for (EObject eo : ((QVTiModelManager)delegate.getModelManager()).getTypeModelEObjectList(tm)) {
+					for (EObject eo : ((QVTiModelManager)delegate.getEvaluator().getModelManager()).getTypeModelEObjectList(tm)) {
 						logger.info(prettyPrintUnident(eo));
 					}
 				}

@@ -13,11 +13,11 @@ package org.eclipse.qvtd.pivot.qvtbase.utilities;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseLibrary;
 
-public class QVTbaseEnvironmentFactory extends PivotEnvironmentFactory {
+public class QVTbaseEnvironmentFactory extends AbstractEnvironmentFactory {
 
 	public QVTbaseEnvironmentFactory(@NonNull ProjectManager projectManager,
 			@Nullable ResourceSet externalResourceSet) {

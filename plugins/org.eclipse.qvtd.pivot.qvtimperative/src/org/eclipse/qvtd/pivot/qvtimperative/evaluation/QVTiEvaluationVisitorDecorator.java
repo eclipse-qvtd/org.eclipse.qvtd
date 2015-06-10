@@ -13,17 +13,11 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Import;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.StandardLibrary;
-import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
-import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
-import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractEvaluationVisitorDecorator;
 import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -60,24 +54,6 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 		super(decorated);
 	}
 	
-	/** @deprecated provide nestedElement argument */
-	@Deprecated
-	@Override
-	public @NonNull IQVTiEvaluationVisitor createNestedEvaluator() {
-        return delegate.createNestedEvaluator();
-	}
-	
-	/**
-     * Delegates to my decorated visitor.
-     */
-	@Override
-	public @NonNull IQVTiEvaluationVisitor createNestedEvaluator(@NonNull NamedElement nestedElement) {
-        return delegate.createNestedEvaluator(nestedElement);
-	}
-
-	@Override
-	public void dispose() {}
-	
 	/**
      * Delegates to my decorated visitor.
      */
@@ -96,42 +72,47 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-	@Override
-	public @NonNull CompleteEnvironment getCompleteEnvironment() {
-		return delegate.getCompleteEnvironment();
-	}
+//	@Override
+//	public @NonNull CompleteEnvironment getCompleteEnvironment() {
+//		return delegate.getCompleteEnvironment();
+//	}
 
 	/**
      * Delegates to my decorated visitor.
      */
+//	@Override
+//	public @NonNull EvaluationVisitor getEvaluator() {
+//		return delegate.getEvaluator();
+//	}
+	
 	@Override
-	public @NonNull EvaluationVisitor getEvaluator() {
+	public @NonNull Evaluator getEvaluator() {
 		return delegate.getEvaluator();
 	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	@Override
-	public @NonNull IdResolver getIdResolver() {
-		return delegate.getIdResolver();
-	}
+//	@Override
+//	public @NonNull IdResolver getIdResolver() {
+//		return delegate.getIdResolver();
+//	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	@Override
-	public @Nullable EvaluationLogger getLogger() {
-		return delegate.getLogger();
-	}
+//	@Override
+//	public @Nullable EvaluationLogger getLogger() {
+//		return delegate.getLogger();
+//	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	@Override
-	public @NonNull MetamodelManager getMetamodelManager() {
-		return delegate.getMetamodelManager();
-	}
+//	@Override
+//	public @NonNull MetamodelManager getMetamodelManager() {
+//		return delegate.getMetamodelManager();
+//	}
 
 	/**
      * Delegates to my decorated visitor.
@@ -144,37 +125,36 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-	@Override
-	public @NonNull StandardLibrary getStandardLibrary() {
-		return delegate.getStandardLibrary();
-	}
+//	@Override
+//	public @NonNull StandardLibrary getStandardLibrary() {
+//		return delegate.getStandardLibrary();
+//	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	@Override
-	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value) {
-		
-		return delegate.getStaticTypeOf(value);
-	}
+//	@Override
+//	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value) {	
+//		return delegate.getStaticTypeOf(value);
+//	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	@Override
-	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value,
-			@NonNull Object... values) {
-		return delegate.getStaticTypeOf(value, values);
-	}
+//	@Override
+//	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value,
+//			@NonNull Object... values) {
+//		return delegate.getStaticTypeOf(value, values);
+//	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	@Override
-	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value,
-			@NonNull Iterable<?> values) {
-		return delegate.getStaticTypeOf(value, values);
-	}
+//	@Override
+//	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value,
+//			@NonNull Iterable<?> values) {
+//		return delegate.getStaticTypeOf(value, values);
+//	}
 
 	/**
      * Delegates to my decorated visitor.
@@ -195,10 +175,10 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-	@Override
-	public void setLogger(@Nullable EvaluationLogger logger) {
-		delegate.setLogger(logger);
-	}
+//	@Override
+//	public void setLogger(@Nullable EvaluationLogger logger) {
+//		delegate.setLogger(logger);
+//	}
 
 	/**
      * Delegates to my decorated visitor.

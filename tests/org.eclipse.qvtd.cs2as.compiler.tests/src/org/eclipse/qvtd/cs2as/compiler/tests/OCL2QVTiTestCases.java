@@ -305,9 +305,9 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		CompleteOCLEObjectValidator validator = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, factory);
 		validator.initialize();
 		PivotEObjectValidator.install(asResourceSet, factory);
-		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE));
-		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE));
-		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE));
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE), null);
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), null);
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), null);
 		
 		assertValidModel(asURI, asResourceSet);
 	}
@@ -336,7 +336,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		
 		QVTiTxHelper txHelper = new QVTiTxHelper(qvt);
 		TransformationEvaluator evaluator = txHelper.createTxEvaluator(txClass);
-		TransformationExecutor tx = evaluator.getExecutor();
+		TransformationExecutor tx = evaluator.getTransformationExecutor();
 		URI samplesBaseUri = baseURI.appendSegment("samples");
     	URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
     	URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_CG.xmi", modelName));

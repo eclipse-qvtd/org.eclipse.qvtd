@@ -14,18 +14,17 @@ package org.eclipse.qvtd.debug.evaluator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
+import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironment;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationEnvironment;
 
-public interface IQVTiVMEvaluationEnvironment extends IQVTiEvaluationEnvironment, IVMEvaluationEnvironment
+public interface QVTiVMEvaluationEnvironment extends QVTiEvaluationEnvironment, VMEvaluationEnvironment
 {
-	@NonNull IQVTiVMEvaluationEnvironment createClonedEvaluationEnvironment();
+	@NonNull QVTiVMEvaluationEnvironment createClonedEvaluationEnvironment();
 	@NonNull Element getCurrentIP();
 	@NonNull UnitLocation getCurrentLocation();
-	@NonNull QVTiVMModelManager getModelManager();
-	@Nullable IQVTiVMEvaluationEnvironment getVMParentEvaluationEnvironment();
+	@Nullable QVTiVMEvaluationEnvironment getVMParentEvaluationEnvironment();
 	@NonNull QVTiVMRootEvaluationEnvironment getVMRootEvaluationEnvironment();
 	void processDeferredTasks();
 	@NonNull Element setCurrentIP(@NonNull Element element);

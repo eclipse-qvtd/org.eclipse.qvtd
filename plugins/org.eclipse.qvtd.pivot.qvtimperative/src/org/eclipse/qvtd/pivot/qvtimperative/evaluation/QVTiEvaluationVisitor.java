@@ -12,9 +12,9 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.evaluation.ExecutorInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -48,33 +48,10 @@ public class QVTiEvaluationVisitor extends QVTiAbstractEvaluationVisitor {
      * @param evalEnv
      *            the eval env
      */
-    public QVTiEvaluationVisitor(@NonNull IQVTiEvaluationEnvironment evalEnv) {
-        super(evalEnv);
+    public QVTiEvaluationVisitor(@NonNull ExecutorInternal executor) {
+        super(executor);
     }
 
-	/** @deprecated provide nestedElement argument */
-	@Deprecated
-    @Override
-    public @NonNull IQVTiEvaluationVisitor createNestedEvaluator() {
-        QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
-		IQVTiEvaluationEnvironment nestedEvalEnv = (IQVTiEvaluationEnvironment) environmentFactory.createEvaluationEnvironment(evaluationEnvironment, evaluationEnvironment.getExecutableObject());
-        QVTiEvaluationVisitor nestedEvaluationVisitor = new QVTiEvaluationVisitor(nestedEvalEnv);
-        nestedEvaluationVisitor.setMonitor(getMonitor());
-        return nestedEvaluationVisitor;
-    }
-
-    @Override
-    public @NonNull IQVTiEvaluationVisitor createNestedEvaluator(@NonNull NamedElement namedElement) {
-        QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
-		IQVTiEvaluationEnvironment nestedEvalEnv = (IQVTiEvaluationEnvironment) environmentFactory.createEvaluationEnvironment(evaluationEnvironment, namedElement);
-        QVTiEvaluationVisitor nestedEvaluationVisitor = new QVTiEvaluationVisitor(nestedEvalEnv);
-        nestedEvaluationVisitor.setMonitor(getMonitor());
-        return nestedEvaluationVisitor;
-    }
-
-    /* (non-Javadoc)
-     * @see uk.ac.york.qvtd.pivot.qvtcorebase.evaluation.QVTcoreBaseEvaluationVisitorImpl#visitBottomPattern(org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern)
-     */
     @Override
     public @Nullable Object visitBottomPattern(@NonNull BottomPattern bottomPattern) {
         
@@ -112,7 +89,7 @@ public class QVTiEvaluationVisitor extends QVTiAbstractEvaluationVisitor {
             	OCLExpression ownedInit = rVar.getOwnedInit();
                 if (ownedInit != null) {
                 	Object initValue = ownedInit.accept(undecoratedVisitor);
-        			evaluationEnvironment.replace(rVar, initValue);
+                	context.replace(rVar, initValue);
                 }
             }
 //            for (RealizedVariable rVar : bottomPattern.getRealizedVariable()) {
@@ -220,8 +197,13 @@ public class QVTiEvaluationVisitor extends QVTiAbstractEvaluationVisitor {
         if (rule == null) {
         	throw new IllegalStateException("Transformation " + transformation.getName() + " has no root mapping");
         }
-    	IQVTiEvaluationVisitor nv = ((IQVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator(rule);
-        rule.accept(nv);
+        context.pushEvaluationEnvironment(rule);
+        try {
+        	rule.accept(undecoratedVisitor);
+        }
+        finally {
+        	context.popEvaluationEnvironment();
+        }
         return true;
     }
 }

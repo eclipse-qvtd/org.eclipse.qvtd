@@ -13,7 +13,7 @@ package org.eclipse.qvtd.debug.stepper;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.stepper.AbstractStepper;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMRootEvaluationVisitor;
+import org.eclipse.ocl.examples.debug.vm.evaluator.VMEValuationVisitor;
 import org.eclipse.ocl.pivot.Element;
 
 public class PrePostStepper extends AbstractStepper
@@ -21,12 +21,12 @@ public class PrePostStepper extends AbstractStepper
 	public static @NonNull PrePostStepper INSTANCE = new PrePostStepper();
 	
 	@Override
-	public @Nullable Element isPostStoppable(@NonNull IVMRootEvaluationVisitor rootVMEvaluationVisitor, @NonNull Element childElement, @Nullable Object result) {
+	public @Nullable Element isPostStoppable(@NonNull VMEValuationVisitor rootVMEvaluationVisitor, @NonNull Element childElement, @Nullable Object result) {
 		return childElement;
 	}
 
 	@Override
-	public boolean isPreStoppable(@NonNull IVMRootEvaluationVisitor rootVMEvaluationVisitor, @NonNull Element element) {
+	public boolean isPreStoppable(@NonNull VMEValuationVisitor rootVMEvaluationVisitor, @NonNull Element element) {
 		return true;
 	}
 }

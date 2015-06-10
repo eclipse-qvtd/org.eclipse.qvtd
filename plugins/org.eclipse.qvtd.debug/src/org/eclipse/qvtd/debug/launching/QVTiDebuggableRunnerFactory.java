@@ -21,12 +21,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.ValidBreakpointLocator;
 import org.eclipse.ocl.examples.debug.vm.core.EvaluationContext;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEnvironmentFactory;
+import org.eclipse.ocl.examples.debug.vm.evaluator.IVMContext;
 import org.eclipse.ocl.examples.debug.vm.launching.DebuggableRunner;
 import org.eclipse.ocl.examples.debug.vm.launching.DebuggableRunnerFactory;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
-import org.eclipse.qvtd.debug.evaluator.QVTiVMEnvironmentFactory;
 import org.eclipse.qvtd.debug.vm.QVTiIsBreakpointableVisitor;
 
 public class QVTiDebuggableRunnerFactory extends DebuggableRunnerFactory
@@ -64,8 +63,8 @@ public class QVTiDebuggableRunnerFactory extends DebuggableRunnerFactory
 		if(diagnostic.getSeverity() == Diagnostic.ERROR) {
 			throw new DiagnosticException(diagnostic);
 		} */
-		IVMEnvironmentFactory environmentFactory = evaluationContext.getVMEnvironmentFactory();
-		QVTiInternalDebuggableExecutor executor = new QVTiInternalDebuggableExecutor(qvtiEvaluationContext, (QVTiVMEnvironmentFactory) environmentFactory);
+		IVMContext environmentFactory = qvtiEvaluationContext.getVMContext();
+		QVTiInternalDebuggableExecutor executor = new QVTiInternalDebuggableExecutor(qvtiEvaluationContext, environmentFactory);
 		DebuggableRunner runner = new DebuggableRunner(this, qvtiEvaluationContext.getTransformationURI(), executor);
 		
 /*		if(traceFileURI != null) {

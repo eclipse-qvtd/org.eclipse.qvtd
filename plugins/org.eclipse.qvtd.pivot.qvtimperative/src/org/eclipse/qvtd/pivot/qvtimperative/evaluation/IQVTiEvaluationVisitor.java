@@ -10,21 +10,12 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 public interface IQVTiEvaluationVisitor extends QVTimperativeVisitor<Object>, EvaluationVisitor
 {
-	/** @deprecated provide nestedElement argument */
-	@Deprecated
-	@Override
-	@NonNull IQVTiEvaluationVisitor createNestedEvaluator();
-	@NonNull IQVTiEvaluationVisitor createNestedEvaluator(@NonNull NamedElement nestedElement);
-	@Override
-	void dispose();
 	Object safeVisit(@Nullable Visitable v);
 }

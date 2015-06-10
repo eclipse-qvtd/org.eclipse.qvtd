@@ -11,18 +11,14 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.evaluator;
 
-import java.util.Map;
 import java.util.Stack;
 
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
 import org.eclipse.ocl.examples.debug.vm.VariableFinder;
 import org.eclipse.ocl.examples.debug.vm.core.VMDebugCore;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEnvironmentFactory;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironmentExtension;
+import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.examples.debug.vm.utils.VMStackTraceBuilder;
@@ -33,18 +29,16 @@ import org.eclipse.qvtd.debug.vm.QVTiVariableFinder;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiNestedEvaluationEnvironment;
 
-public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvironment implements IQVTiVMEvaluationEnvironment, IVMEvaluationEnvironmentExtension
+public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvironment implements QVTiVMEvaluationEnvironment
 {
-	protected final @NonNull IVMEnvironmentFactory vmEnvironmentFactory;
 	private @NonNull Element myCurrentIP;
 	private @NonNull NamedElement myOperation;		// Redundant if final
     private final int myStackDepth;
 	private final long id;
 	private final @NonNull Stack<StepperEntry> stepperStack = new Stack<StepperEntry>();
     
-	public QVTiVMNestedEvaluationEnvironment(@NonNull IQVTiVMEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, long id) {
+	public QVTiVMNestedEvaluationEnvironment(@NonNull QVTiVMEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, long id) {
 		super(evaluationEnvironment, executableObject);
-		this.vmEnvironmentFactory = evaluationEnvironment.getVMEnvironmentFactory();
 		myStackDepth = evaluationEnvironment.getDepth() + 1;
 		this.id = id;
 		this.myOperation = executableObject;
@@ -52,7 +46,7 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	}
 
 	@Override
-	public @NonNull IQVTiVMEvaluationEnvironment createClonedEvaluationEnvironment() {
+	public @NonNull QVTiVMEvaluationEnvironment createClonedEvaluationEnvironment() {
 		throw new UnsupportedOperationException();
 	}
 	
@@ -101,17 +95,6 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	}
 
 	@Override
-	public @NonNull QVTiVMModelManager getModelManager() {
-		return (QVTiVMModelManager) super.getModelManager();
-	}
-	
-	/** @deprecated no longer useful once Bug 469463 fixed */
-	@Deprecated
-	public @NonNull Map<String, Resource> getModelParameterVariables() {
-    	return getVMRootEvaluationEnvironment().getModelParameterVariables();
-	}
-
-	@Override
 	public @NonNull NamedElement getOperation() {
 		return myOperation;
 	}
@@ -122,8 +105,8 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	}
 
 	@Override
-	public @Nullable IQVTiVMEvaluationEnvironment getVMParentEvaluationEnvironment() {
-		return (IQVTiVMEvaluationEnvironment) super.getParentEvaluationEnvironment();
+	public @Nullable QVTiVMEvaluationEnvironment getVMParentEvaluationEnvironment() {
+		return (QVTiVMEvaluationEnvironment)parent;
 	}
 
 	@Override
@@ -132,13 +115,8 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	}
 
 	@Override
-	public @NonNull Stack<IVMEvaluationEnvironment.StepperEntry> getStepperStack() {
+	public @NonNull Stack<VMEvaluationEnvironment.StepperEntry> getStepperStack() {
 		return stepperStack;
-	}
-
-	@Override
-	public @NonNull IVMEnvironmentFactory getVMEnvironmentFactory() {
-		return vmEnvironmentFactory;
 	}
 
 	public boolean isDeferredExecution() {

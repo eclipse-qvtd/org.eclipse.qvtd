@@ -16,15 +16,16 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.vm.evaluator.IVMContext;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluator;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 
@@ -61,23 +62,23 @@ public class QVTiVMEvaluator implements IVMEvaluator
         throw new IOException("Missing OCL expression " + eObject.eClass().getName() + " expected as '" + constraintURI + "'");
 	} */
     
-	protected final @NonNull MetamodelManager metamodelManager;
+	protected final @NonNull QVTiEnvironmentFactory environmentFactory;
 	protected final @NonNull Transformation transformation;
-	protected final @NonNull QVTiVMEnvironmentFactory vmEnvironmentFactory;
+	protected final @NonNull IVMContext vmContext;
 	protected final @NonNull QVTiVMModelManager vmModelManager;
 	private boolean suspendOnStartup = false;
 
-    private QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory vmEnvironmentFactory, @NonNull Transformation transformation) {
-    	this.vmEnvironmentFactory = vmEnvironmentFactory;
-    	this.metamodelManager = vmEnvironmentFactory.getEnvironmentFactory().getMetamodelManager();
+    private QVTiVMEvaluator(@NonNull IVMContext vmContext, @NonNull Transformation transformation) {
+    	this.vmContext = vmContext;
+    	this.environmentFactory = (QVTiEnvironmentFactory) vmContext.getEnvironmentFactory();
     	this.transformation = transformation;
-    	QVTiTransformationAnalysis transformationAnalysis = vmEnvironmentFactory.getEnvironmentFactory().createTransformationAnalysis();
+    	QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
-    	this.vmModelManager = vmEnvironmentFactory.createVMModelManager(transformationAnalysis);
+    	this.vmModelManager = new QVTiVMModelManager(transformationAnalysis);
     }
 
-    public QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory vmEnvironmentFactory, @NonNull URI transformationURI) throws IOException {
-    	this(vmEnvironmentFactory, QVTiXtextEvaluator.loadTransformation(ImperativeModel.class, vmEnvironmentFactory.getEnvironmentFactory(), transformationURI, vmEnvironmentFactory.keepDebug()));
+    public QVTiVMEvaluator(@NonNull IVMContext vmContext, @NonNull URI transformationURI) throws IOException {
+    	this(vmContext, QVTiXtextEvaluator.loadTransformation(ImperativeModel.class, vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug()));
     }
 
     public void createModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
@@ -85,7 +86,7 @@ public class QVTiVMEvaluator implements IVMEvaluator
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = vmEnvironmentFactory.getEnvironmentFactory().getResourceSet().createResource(modelURI, contentType);
+        Resource resource = vmContext.getEnvironmentFactory().getResourceSet().createResource(modelURI, contentType);
         if (resource != null) {
         	vmModelManager.addModel(typedModel, resource);
         }
@@ -97,9 +98,11 @@ public class QVTiVMEvaluator implements IVMEvaluator
 
 	public Boolean execute() {
 		Transformation transformation = getTransformation();
-		IQVTiVMEvaluationEnvironment evalEnv = vmEnvironmentFactory.createVMEvaluationEnvironment(transformation, vmModelManager);
-        QVTiVMRootEvaluationVisitor visitor = vmEnvironmentFactory.createVMEvaluationVisitor(evalEnv);
-        StandardLibraryInternal standardLibrary = vmEnvironmentFactory.getEnvironmentFactory().getStandardLibrary();
+		QVTiVMExecutor vmExecutor = new QVTiVMExecutor(vmContext, vmModelManager);
+		vmExecutor.initializeEvaluationEnvironment(transformation);
+		QVTiVMEvaluationEnvironment evalEnv = vmExecutor.getRootEvaluationEnvironment();
+        QVTiVMEvaluationVisitor visitor = vmExecutor.getEvaluationVisitor();
+        StandardLibraryInternal standardLibrary = vmContext.getEnvironmentFactory().getStandardLibrary();
 		Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
 		evalEnv.add(ownedContext, vmModelManager.getTransformationInstance(transformation));
         for (TypedModel typedModel : transformation.getModelParameter()) {
@@ -117,12 +120,8 @@ public class QVTiVMEvaluator implements IVMEvaluator
 		return getTransformation();
 	}
 
-	public final @NonNull QVTiVMEnvironmentFactory getEnvironmentFactory() {
-		return vmEnvironmentFactory;
-	}
-
-	public final @NonNull MetamodelManager getMetamodelManager() {
-		return metamodelManager;
+	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+		return environmentFactory;
 	}
 	
 	public @NonNull Transformation getTransformation() {
@@ -140,10 +139,10 @@ public class QVTiVMEvaluator implements IVMEvaluator
         }
         Resource resource;
         if (contentType == null) {
-        	resource = vmEnvironmentFactory.getEnvironmentFactory().getResourceSet().getResource(modelURI, true);
+        	resource = vmContext.getEnvironmentFactory().getResourceSet().getResource(modelURI, true);
         }
         else {
-        	resource = vmEnvironmentFactory.getEnvironmentFactory().getResourceSet().createResource(modelURI, contentType);
+        	resource = vmContext.getEnvironmentFactory().getResourceSet().createResource(modelURI, contentType);
         	try {
 				resource.load(null);
 			} catch (IOException e) {

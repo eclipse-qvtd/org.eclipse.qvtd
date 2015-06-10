@@ -17,7 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.VariableFinder;
 import org.eclipse.ocl.examples.debug.vm.data.VMVariableData;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
+import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationEnvironment;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager.QVTiType
 
 public class QVTiVariableFinder extends VariableFinder
 {
-	public QVTiVariableFinder(@NonNull IVMEvaluationEnvironment vmEvaluationEnvironment, boolean isStoreValues) {
+	public QVTiVariableFinder(@NonNull VMEvaluationEnvironment vmEvaluationEnvironment, boolean isStoreValues) {
 		super(vmEvaluationEnvironment, isStoreValues);
 	}
 

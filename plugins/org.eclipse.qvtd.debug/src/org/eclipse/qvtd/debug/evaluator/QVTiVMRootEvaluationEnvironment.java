@@ -12,18 +12,13 @@
 package org.eclipse.qvtd.debug.evaluator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
 import org.eclipse.ocl.examples.debug.vm.VariableFinder;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEnvironmentFactory;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironmentExtension;
 import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.examples.debug.vm.utils.VMStackTraceBuilder;
@@ -36,12 +31,10 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.vm.QVTiVariableFinder;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiRootEvaluationEnvironment;
 
-public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironment implements IQVTiVMEvaluationEnvironment, IVMEvaluationEnvironmentExtension
+public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironment implements QVTiVMEvaluationEnvironment
 {
-	protected final @NonNull IVMEnvironmentFactory vmEnvironmentFactory;
 //	private IContext myContext;
 	private List<Runnable> myDeferredTasks;
 //    private EObjectEStructuralFeaturePair myLastAssignLvalue;	  
@@ -54,9 +47,8 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 	private final @NonNull Variable pcVariable;
 	private final @NonNull Stack<StepperEntry> stepperStack = new Stack<StepperEntry>();
 
-    public QVTiVMRootEvaluationEnvironment(@NonNull IVMEnvironmentFactory vmEnvironmentFactory, @NonNull Transformation executableObject, @NonNull QVTiModelManager modelManager, long id) {
-		super(vmEnvironmentFactory.getEnvironmentFactory(), executableObject, modelManager);
-		this.vmEnvironmentFactory = vmEnvironmentFactory;
+    public QVTiVMRootEvaluationEnvironment(@NonNull QVTiVMExecutor vmExecutor, @NonNull Transformation executableObject, long id) {
+		super(vmExecutor, executableObject);
 		myCurrentIP = executableObject;
 		this.id = id;
 		pcVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
@@ -66,7 +58,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 	}
 
 	@Override
-	public @NonNull IQVTiVMEvaluationEnvironment createClonedEvaluationEnvironment() {
+	public @NonNull QVTiVMEvaluationEnvironment createClonedEvaluationEnvironment() {
 		throw new UnsupportedOperationException();
 	}
 	
@@ -121,40 +113,6 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 	}
 
 	@Override
-	public @NonNull QVTiVMModelManager getModelManager() {
-		return (QVTiVMModelManager) super.getModelManager();
-	}
-	
-	/** @deprecated no longer useful */
-	@Deprecated
-	public @NonNull Map<String, Resource> getModelParameterVariables() {
-		return new HashMap<String, Resource>();
-/*		Transformation currentModule = getTransformation();		
-//		if (!(currentModule instanceof Transformation)) {
-//			return Collections.emptyMap();
-//		}
-
-		Map<String, Resource> result = new HashMap<String, Resource>(2);
-		Transformation currentTransformation = currentModule;
-		QVTiVMModelManager modelManager = getModelManager();
-		for (TypedModel typedModel : currentTransformation.getModelParameter()) {
-			if (typedModel != null) {
-				Resource model = modelManager.getModel(typedModel);
-				result.put(typedModel.getName(), model);
-			}
-		}
-		
-//		ModelInstance intermModel = currentTransformation.getAdapter(
-//				TransformationInstance.InternalTransformation.class)
-//				.getIntermediateExtent();
-//		if(intermModel != null) {
-//			result.put("_intermediate", intermModel);
-//		}
-		
-		return result; */
-	}
-
-	@Override
 	public @NonNull NamedElement getOperation() {
 		return getTransformation();
 	}
@@ -170,18 +128,13 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 	}
 
 	@Override
-	public @NonNull Stack<org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment.StepperEntry> getStepperStack() {
+	public @NonNull Stack<org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationEnvironment.StepperEntry> getStepperStack() {
 		return stepperStack;
 	}
 
 	@Override
-	public @NonNull IVMEnvironmentFactory getVMEnvironmentFactory() {
-		return vmEnvironmentFactory;
-	}
-
-	@Override
 	public @Nullable QVTiVMRootEvaluationEnvironment getVMParentEvaluationEnvironment() {
-		return (QVTiVMRootEvaluationEnvironment) super.getParentEvaluationEnvironment();
+		return (QVTiVMRootEvaluationEnvironment)parent;
 	}
 
 	@Override

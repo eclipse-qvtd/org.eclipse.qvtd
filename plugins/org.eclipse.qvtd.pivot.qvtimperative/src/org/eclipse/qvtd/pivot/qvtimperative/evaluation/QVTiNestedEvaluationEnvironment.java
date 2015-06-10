@@ -12,15 +12,21 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
-public class QVTiNestedEvaluationEnvironment extends QVTiEvaluationEnvironment
+public class QVTiNestedEvaluationEnvironment extends BasicEvaluationEnvironment implements QVTiEvaluationEnvironment
 {
 	protected final @NonNull QVTiRootEvaluationEnvironment rootEvaluationEnvironment;
 	
-	public QVTiNestedEvaluationEnvironment(@NonNull IQVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject) {
+	public QVTiNestedEvaluationEnvironment(@NonNull QVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject) {
 		super(evaluationEnvironment, executableObject);
 		rootEvaluationEnvironment = evaluationEnvironment.getRootEvaluationEnvironment();
+	}
+
+	@Override
+	public @NonNull QVTiExecutor getExecutor() {
+		return (QVTiExecutor) super.getExecutor();
 	}
 
 	@Override

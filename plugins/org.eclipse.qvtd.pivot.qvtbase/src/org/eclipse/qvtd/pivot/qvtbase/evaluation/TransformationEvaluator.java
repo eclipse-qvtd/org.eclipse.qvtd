@@ -15,5 +15,5 @@ import org.eclipse.ocl.pivot.evaluation.Evaluator;
 
 public interface TransformationEvaluator extends Evaluator
 {
-	@NonNull TransformationExecutor getExecutor();
+	@NonNull TransformationExecutor getTransformationExecutor();
 }

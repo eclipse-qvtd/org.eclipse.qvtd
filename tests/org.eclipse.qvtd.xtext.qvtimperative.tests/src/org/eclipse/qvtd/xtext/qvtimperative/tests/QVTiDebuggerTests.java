@@ -203,15 +203,9 @@ public class QVTiDebuggerTests extends XtextTestCase
 		QVTiVMRootEvaluationEnvironment vmRootEvaluationEnvironment = (QVTiVMRootEvaluationEnvironment) vm.getEvaluationEnv();
 		assert vmRootEvaluationEnvironment != null;
 		Transformation asTransformation = vmRootEvaluationEnvironment.getDebuggableElement();
-//		QVTiVMEnvironmentFactory vmEnvironmentFactory = (QVTiVMEnvironmentFactory) vmEvaluationEnvironment.getVMEnvironmentFactory();
-//		QVTiVMModelManager vmModelManager = (QVTiVMModelManager) vmRootEvaluationEnvironment.getModelManager();
-//		vmModelManager.getTransformationInstance(transformation)
 		TypedModel inTypedModel = asTransformation.getModelParameter(inName);
 		TypedModel middleTypedModel = asTransformation.getModelParameter(middleName);
 		TypedModel outTypedModel = asTransformation.getModelParameter(outName);
-//		Resource hls = vmModelManager.getModel(inTypedModel);
-//		Resource hsv = vmModelManager.getModel(outTypedModel);
-//		Resource middle = vmModelManager.getModel(middleTypedModel);
 		Variable asTransformationVariable = asTransformation.getOwnedContext();
 		Variable asInVariable = inTypedModel.getOwnedContext();
 		Variable asMiddleVariable = middleTypedModel.getOwnedContext();
