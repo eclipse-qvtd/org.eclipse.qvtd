@@ -47,6 +47,7 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 		protected final @NonNull String name;
 		private @Nullable Set<EObject> allEObjects = null;
 		private @Nullable List<EObject> rootEObjects = null;
+		private @Nullable Map<EClass, Set<Integer>> eClass2allClassIndexes = null;
 
 		/**
 		 * All possible allInstances() returns indexed by the ClassIndex of the ClassId for which allInstances() may be invoked.
@@ -124,6 +125,10 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 			}
 			rootEObjects = null;
 			allEObjects2.add(eObject);
+			if ((eClass2allClassIndexes == null) && (classId2classIndexes != null) && (classIndex2objects != null)) {
+				eClass2allClassIndexes = new HashMap<EClass, Set<Integer>>();
+			}
+			accumulateEObject(eClass2allClassIndexes, null, null, eObject);
 		}
 		
 		/**
