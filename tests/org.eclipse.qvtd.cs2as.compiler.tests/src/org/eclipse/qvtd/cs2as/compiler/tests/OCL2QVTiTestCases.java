@@ -177,18 +177,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	
 //	@Test
 //	public void testExample3_Interpreted() throws Exception {
-//		MyQVT myQVT = createQVT();
-//		URI baseURI = TESTS_BASE_URI.appendSegment("example3");
 //
-//		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "KiamaRewrite.ocl", myQVT, TestsXMLUtil.defaultSavingOptions);
-//    	mtc.execute();
-//    	PivotModel qvtiTransf = mtc.getiModel();
-//    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
-//    	assertValidQVTiModel(txURI);
-//    	
+//		URI baseURI = TESTS_BASE_URI.appendSegment("example3");
+//		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "KiamaRewrite.ocl");
 //    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
-//    	
-//        myQVT.dispose();
 //	}
 	
 	
@@ -247,7 +239,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model5");
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model6");
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model7");
-	}
+	}	
 	
 	@Test
 	public void testExample2_OCL2QVTp_MiddleModel() throws Exception {

@@ -14,12 +14,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformation;
+import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASTransformer;
 
 public interface OCL2JavaTxCompiler<P extends OCL2JavaTxCompilerParams> {
 	
-	public Class<? extends CS2ASTransformation> compileTransformation(@NonNull URI oclFileURI, @NonNull P params, @Nullable ResourceSet rset) throws Exception;
+	public Class<? extends CS2ASTransformer> compileTransformation(@NonNull URI oclFileURI, @NonNull P params, @Nullable ResourceSet rset) throws Exception;
 	
 	// FIXME use better options/params
-	public Class<? extends CS2ASTransformation> compileTransformation(@NonNull URI oclFileURI, @NonNull P params,  @Nullable ResourceSet rset, @NonNull String tracePropName) throws Exception;
+	public Class<? extends CS2ASTransformer> compileTransformation(@NonNull URI oclFileURI, @NonNull P params,  @Nullable ResourceSet rset, @NonNull String tracePropName) throws Exception;
 }

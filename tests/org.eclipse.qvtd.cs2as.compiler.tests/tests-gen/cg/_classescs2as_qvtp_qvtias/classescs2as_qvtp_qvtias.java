@@ -48,9 +48,9 @@ import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
 import org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor;
 import org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment;
-import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformationExecutor;
 
 /**
  * The classescs2as_qvtp_qvtias transformation:
@@ -64,7 +64,7 @@ import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformationExecutor;
  * Extract each output model with {@link getRootObjects(String)}
  */
 @SuppressWarnings("nls")
-public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
+public class classescs2as_qvtp_qvtias extends AbstractCS2ASTransformer
 {
     public static final /*@NonNull*/ /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final /*@NonNull*/ /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, ClassesPackage.eINSTANCE);

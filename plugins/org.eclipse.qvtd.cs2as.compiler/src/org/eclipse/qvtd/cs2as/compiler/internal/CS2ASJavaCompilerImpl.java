@@ -40,6 +40,8 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
+import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASTransformer;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalysisVisitor;
@@ -61,8 +63,6 @@ import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGFactory;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.CS2ASCGModelVisitor;
 import org.eclipse.qvtd.cs2as.compiler.internal.utilities.CS2ASCGModelResourceFactory;
-import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformation;
-import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
@@ -160,7 +160,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 
 		protected @NonNull Class<? extends AbstractTransformer> getAbstractTransformationExecutorClass() {
-			return CS2ASTransformationExecutor.class;
+			return AbstractCS2ASTransformer.class;
 		}
 
 		@Override
@@ -435,19 +435,19 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	
 	// Copied from QVTiCompilerTest
 	@SuppressWarnings("unchecked")
-	protected Class<? extends CS2ASTransformation> compileTransformation(@NonNull QVTiCodeGenerator cg) throws Exception {
+	protected Class<? extends CS2ASTransformer> compileTransformation(@NonNull QVTiCodeGenerator cg) throws Exception {
 		String qualifiedName = cg.getQualifiedName();
 		String javaCodeSource = cg.generateClassFile();
 		
 		Class<?> txClass = OCL2JavaFileObject.loadClass(qualifiedName, javaCodeSource);
-		return (Class<? extends CS2ASTransformation>) txClass;
+		return (Class<? extends CS2ASTransformer>) txClass;
 		
 	}
 	
 	
 	// Copied from QVTiCompilerTest
 	@Override
-	public Class<? extends CS2ASTransformation> compileTransformation(@NonNull QVTimperative qvt,
+	public Class<? extends CS2ASTransformer> compileTransformation(@NonNull QVTimperative qvt,
 			@NonNull Transformation transformation,	@NonNull CS2ASJavaCompilerParameters params) throws Exception {
 				
 		QVTiCodeGenerator cg = new CS2ASJavaCodeGenerator(qvt.getEnvironmentFactory(), transformation, params);
