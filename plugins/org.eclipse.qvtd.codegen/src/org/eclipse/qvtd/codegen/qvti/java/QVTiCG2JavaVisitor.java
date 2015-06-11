@@ -775,6 +775,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 				js.append(") {\n");
 				js.pushIndentation(null);
 			}
+			else if (!cgMappingCallBinding.isRequired()) {
+				js.append("if (");
+				js.appendValueName(cgMappingCallBinding.getValue());
+				js.append(" != null) {\n");
+				js.pushIndentation(null);
+			}
 		}
 		//
 		//	Emit the mapping call.
@@ -801,6 +807,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 			TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
 			if (checkedType != null) {
+				js.popIndentation();
+				js.append("}\n");
+			}
+			else if (!cgMappingCallBinding.isRequired()) {
 				js.popIndentation();
 				js.append("}\n");
 			}
