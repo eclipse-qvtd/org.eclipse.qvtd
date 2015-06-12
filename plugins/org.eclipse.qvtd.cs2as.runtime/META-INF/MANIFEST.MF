@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Runtime
 Bundle-SymbolicName: org.eclipse.qvtd.cs2as.runtime
-Bundle-Version: 0.12.0.qualifier
+Bundle-Version: 0.13.0.qualifier
 Export-Package: org.eclipse.qvtd.cs2as.runtime
-Require-Bundle: org.eclipse.qvtd.pivot.qvtimperative;bundle-version="[0.12.0,0.13.0)";visibility:=reexport
+Require-Bundle: org.eclipse.qvtd.pivot.qvtimperative;bundle-version="[0.13.0,0.14.0)";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

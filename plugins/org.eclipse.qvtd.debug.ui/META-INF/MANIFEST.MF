@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.debug.ui;singleton:=true
-Bundle-Version: 0.12.0.qualifier
+Bundle-Version: 0.13.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -12,11 +12,11 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.ui.ide;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.emf.common.ui;bundle-version="[2.7.0,3.0.0)",
  org.eclipse.ocl.examples.debug.vm.ui;bundle-version="[2.0.0,2.1.0)",
- org.eclipse.qvtd.debug;bundle-version="[0.12.0,0.13.0)",
- org.eclipse.qvtd.xtext.qvtcore;bundle-version="[0.12.0,0.13.0)",
- org.eclipse.qvtd.xtext.qvtimperative;bundle-version="[0.12.0,0.13.0)",
- org.eclipse.qvtd.xtext.qvtimperative.ui;bundle-version="[0.12.0,0.13.0)",
- org.eclipse.qvtd.xtext.qvtrelation;bundle-version="[0.12.0,0.13.0)"
+ org.eclipse.qvtd.debug;bundle-version="[0.13.0,0.14.0)",
+ org.eclipse.qvtd.xtext.qvtcore;bundle-version="[0.13.0,0.14.0)",
+ org.eclipse.qvtd.xtext.qvtimperative;bundle-version="[0.13.0,0.14.0)",
+ org.eclipse.qvtd.xtext.qvtimperative.ui;bundle-version="[0.13.0,0.14.0)",
+ org.eclipse.qvtd.xtext.qvtrelation;bundle-version="[0.13.0,0.14.0)"
 Bundle-Activator: org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j

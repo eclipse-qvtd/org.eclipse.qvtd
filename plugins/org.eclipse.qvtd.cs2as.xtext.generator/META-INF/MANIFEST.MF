@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CS2AS Xtext Generator
 Bundle-SymbolicName: org.eclipse.qvtd.cs2as.xtext.generator
-Bundle-Version: 0.12.0.qualifier
+Bundle-Version: 0.13.0.qualifier
 Require-Bundle: org.eclipse.xtext.generator;bundle-version="[2.8.1,3.0.0)"
 Export-Package: org.eclipse.qvtd.cs2as.xtext.generator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
