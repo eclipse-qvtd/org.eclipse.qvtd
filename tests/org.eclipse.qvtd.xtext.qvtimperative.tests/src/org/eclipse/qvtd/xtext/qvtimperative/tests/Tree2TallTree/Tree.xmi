@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<tree:Node xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tree="http://www.eclipse.org/qvt/examples/0.1/Tree"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/Tree Tree.ecore"
+    name="n1">
+  <children
+      name="n1.1">
+    <children
+        name="n1.1.1"/>
+  </children>
+</tree:Node>

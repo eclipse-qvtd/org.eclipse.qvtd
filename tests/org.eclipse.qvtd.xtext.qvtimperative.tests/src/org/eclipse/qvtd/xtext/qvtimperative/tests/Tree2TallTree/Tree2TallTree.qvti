@@ -1,0 +1,80 @@
+import 'Tree.ecore'::tree;
+import 'TallTree.ecore'::talltree;
+import 'Tree2TallTree.ecore'::tree2talltree;
+
+transformation Tree2TallTree {
+	tree imports tree;
+	talltree imports talltree;
+	tree2talltree imports tree2talltree;
+}
+
+map __root__ in Tree2TallTree {
+    for node : tree::Node in tree::Node.allInstances()->sortedBy(name) {
+        call Node2MiddleNode {
+            node := node;
+        } 
+    } 
+    for node : tree::Node in tree::Node.allInstances()->sortedBy(name) {
+        call Edge2MiddleEdge {
+            node := node;
+            node2tallNode := node.Node2TallNode;
+        } 
+    } 
+    for node2tallNode : tree2talltree::Node2TallNode in tree::Node.allInstances()->sortedBy(name).Node2TallNode {
+        call MiddleLeaf2TallLeaf {
+            node2tallNode := node2tallNode;
+        } 
+    } 
+    for node2tallNode : tree2talltree::Node2TallNode in tree::Node.allInstances()->sortedBy(name).Node2TallNode {
+        call MiddleNode2TallNode {
+            node2tallNode ?= node2tallNode;
+        } 
+    } 
+}
+
+map Node2MiddleNode in Tree2TallTree {
+	check tree(node : Node) {} 
+	enforce tree2talltree() {
+		realize node2tallNode : Node2TallNode
+	}
+	where() {
+		node2tallNode.node := node;
+		node2tallNode.name := node.name;
+	}
+}
+
+map Edge2MiddleEdge in Tree2TallTree {
+	check tree(node : Node) {} 
+	enforce tree2talltree(node2tallNode : Node2TallNode) {
+--		realize node2tallNode : Node2TallNode
+	}
+	where(node.parent <> null;) {
+		node2tallNode.parent := node.parent.Node2TallNode;
+--		node2tallNode.name := node.name;
+	}
+}
+
+map MiddleLeaf2TallLeaf in Tree2TallTree {
+	check tree2talltree(node2tallNode : Node2TallNode) {} 
+	enforce talltree() {
+		realize tallNode : TallNode
+	}
+	where(node2tallNode.children->isEmpty();) {
+		node2tallNode.tallNode := tallNode;
+		tallNode.name := node2tallNode.name;
+		tallNode.height := 0;
+	}
+}
+
+map MiddleNode2TallNode in Tree2TallTree {
+	check tree2talltree(node2tallNode : Node2TallNode) {} 
+	enforce talltree() {
+		realize tallNode : TallNode
+	}
+	where(node2tallNode.children->notEmpty();) {
+		node2tallNode.tallNode := tallNode;
+		tallNode.name := node2tallNode.name;
+		tallNode.children := node2tallNode.children.tallNode;
+		tallNode.height := node2tallNode.children.tallNode.height->max() + 1;
+	}
+}

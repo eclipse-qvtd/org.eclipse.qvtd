@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.IndentingLogger;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
@@ -163,10 +162,40 @@ public class QVTiInterpreterTests extends LoadTestCase
 	        		modelNormalizer.normalize(actualModel);
 	        	}
 	            assertSameModel(expectedModel, actualModel);
+/******
+	        Evaluator evaluator = createEvaluator();
+	        try {
+		        boolean result = evaluator.visit(transformation) == Boolean.TRUE;
+	//	    	boolean result = execute();
+		        assertTrue(getClass().getSimpleName() + " should not return null.", result);
+		        saveModels(getProjectFileURI(fileNamePrefix + "middle.xmi"));
+		        for (Entry<TypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
+		        	TypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
+		        	Resource expectedModel = entry.getValue();
+		        	assert expectedModel != null;
+		        	Resource actualModel = modelManager.getModel(typedModel);
+		        	assert actualModel != null;
+		        	if (modelNormalizer != null) {
+		        		modelNormalizer.normalize(expectedModel);
+		        		modelNormalizer.normalize(actualModel);
+		        	}
+	//	            assertSameModel(expectedModel, actualModel);
+		        }
+	        }
+	        finally {
+		        if (evaluator instanceof QVTiIncrementalEvaluator) {
+		        	String s = ((QVTiIncrementalEvaluator)evaluator).getEvaluationStatusGraph();
+		    		File projectFile = getProjectFile();
+		    		File graphFile = new File(projectFile.toString() + "/" + fileNamePrefix + "EvaluationStatus.graphml");
+		    		FileWriter writer = new FileWriter(graphFile);
+		    		writer.append(s);
+		        	writer.close();
+		        }
+*****/
 	        }
 	    }
 	}
-		
+	
 	/**
 	 * Assert same model.
 	 *
@@ -197,7 +226,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	protected @NonNull MyQVT createQVT() {
-		return new MyQVT(new TestQVTiEnvironmentFactory(OCL.NO_PROJECTS, null));
+//		return new MyQVT(new TestQVTiEnvironmentFactory(OCL.NO_PROJECTS, null));
+		return new MyQVT(new QVTiEnvironmentFactory(OCL.NO_PROJECTS, null));
 	}
 	
 	/* (non-Javadoc)
@@ -221,7 +251,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testGraph2GraphMinimal() throws Exception {
     	MyQVT myQVT = createQVT();
-    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi");
@@ -275,14 +305,42 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testHSV2HLS() throws Exception {
     	MyQVT myQVT = createQVT();
-    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("HSV2HLS", "HSV2HLS.qvti");
-    	testEvaluator.setLogger(IndentingLogger.OUT);
+//    	testEvaluator.setLogger(IndentingLogger.OUT);
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("hsv", "HSVNode.xmi");
         testEvaluator.createModel("middle", "HLS2HLSNode.xmi");
         testEvaluator.createModel("hls", "HLSNode.xmi");
         testEvaluator.loadReference("hls", "HLSNodeValidate.xmi");
+        testEvaluator.test();
+        testEvaluator.dispose();
+        
+        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        assertLoadable(txURI);
+        myQVT.dispose();
+    }
+
+    /**
+     * Test hsv 2 hls.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testTree2TallTree() throws Exception {
+    	MyQVT myQVT = createQVT();
+    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+//    	MyQVT myQVT = new MyQVT(new MyQVTiEnvironmentFactory(getProjectMap(), null));
+//    	ResourceSet resourceSet = myQVT.getResourceSet();
+//    	resourceSet.getResource(URI.createURI(HSVTreePackage.eNS_URI), true);
+//    	resourceSet.getResource(URI.createURI(HLSTreePackage.eNS_URI), true);
+//    	resourceSet.getResource(URI.createURI(HSV2HLSPackage.eNS_URI), true);
+    	MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("Tree2TallTree", "Tree2TallTree.qvti");
+    	testEvaluator.saveTransformation(null);
+    	testEvaluator.loadModel("tree", "Tree.xmi");
+        testEvaluator.createModel("tree2talltree", "Tree2TallTree.xmi");
+        testEvaluator.createModel("talltree", "TallTree.xmi");
+//        testEvaluator.loadReference("hls", "TallTreeValidate.xmi");
         testEvaluator.test();
         testEvaluator.dispose();
         

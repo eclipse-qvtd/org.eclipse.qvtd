@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Ecore="http://www.eclipse.org/uml2/schemas/Ecore/5" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Ecore/5 pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA">
+  <uml:Model xmi:id="_GWxLgNhtEeS_WecIsDb67A" name="tree2talltree" URI="http://www.eclipse.org/qvt/examples/0.1/List2List">
+    <packagedElement xmi:type="uml:Class" xmi:id="_GWxLgdhtEeS_WecIsDb67A" name="Node2TallNode">
+      <ownedAttribute xmi:id="_GWxLgthtEeS_WecIsDb67A" name="children" type="_GWxLgdhtEeS_WecIsDb67A" aggregation="composite" association="_GWxLithtEeS_WecIsDb67A">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GWxLg9htEeS_WecIsDb67A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GWxLhNhtEeS_WecIsDb67A" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_GWxLhdhtEeS_WecIsDb67A" name="parent" type="_GWxLgdhtEeS_WecIsDb67A" isOrdered="true" association="_GWxLithtEeS_WecIsDb67A">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GWxLhthtEeS_WecIsDb67A"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_GWxLh9htEeS_WecIsDb67A" name="name" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_GWxLiNhtEeS_WecIsDb67A" name="node" isOrdered="true" association="_GWxLi9htEeS_WecIsDb67A">
+        <type xmi:type="uml:Class" href="tree.uml#_GXgyYdhtEeS_WecIsDb67A"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_GWxLidhtEeS_WecIsDb67A" name="tallNode" isOrdered="true" association="_GWxLjdhtEeS_WecIsDb67A">
+        <type xmi:type="uml:Class" href="talltree.uml#_GYaKQdhtEeS_WecIsDb67A"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_GWxLithtEeS_WecIsDb67A" memberEnd="_GWxLgthtEeS_WecIsDb67A _GWxLhdhtEeS_WecIsDb67A"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_GWxLi9htEeS_WecIsDb67A" memberEnd="_GWxLiNhtEeS_WecIsDb67A _GWxLjNhtEeS_WecIsDb67A">
+      <ownedEnd xmi:id="_GWxLjNhtEeS_WecIsDb67A" type="_GWxLgdhtEeS_WecIsDb67A" association="_GWxLi9htEeS_WecIsDb67A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_GWxLjdhtEeS_WecIsDb67A" memberEnd="_GWxLidhtEeS_WecIsDb67A _GWxLjthtEeS_WecIsDb67A">
+      <ownedEnd xmi:id="_GWxLjthtEeS_WecIsDb67A" type="_GWxLgdhtEeS_WecIsDb67A" association="_GWxLjdhtEeS_WecIsDb67A"/>
+    </packagedElement>
+    <profileApplication xmi:id="_GWxLj9htEeS_WecIsDb67A">
+      <eAnnotations xmi:id="_GWxLkNhtEeS_WecIsDb67A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Ecore.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <Ecore:EPackage xmi:id="_GWxLkdhtEeS_WecIsDb67A" base_Package="_GWxLgNhtEeS_WecIsDb67A" nsPrefix="l2l"/>
+  <Ecore:EClass xmi:id="_GWxLkthtEeS_WecIsDb67A" base_Class="_GWxLgdhtEeS_WecIsDb67A"/>
+  <Ecore:EReference xmi:id="_GWxLk9htEeS_WecIsDb67A" base_Property="_GWxLgthtEeS_WecIsDb67A"/>
+  <Ecore:EReference xmi:id="_GWxLlNhtEeS_WecIsDb67A" base_Property="_GWxLhdhtEeS_WecIsDb67A"/>
+  <Ecore:EReference xmi:id="_GWxLldhtEeS_WecIsDb67A" base_Property="_GWxLiNhtEeS_WecIsDb67A"/>
+  <Ecore:EReference xmi:id="_GWxLlthtEeS_WecIsDb67A" base_Property="_GWxLidhtEeS_WecIsDb67A"/>
+</xmi:XMI>
