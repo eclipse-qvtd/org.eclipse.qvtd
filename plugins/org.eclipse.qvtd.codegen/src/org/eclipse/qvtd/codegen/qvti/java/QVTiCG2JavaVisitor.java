@@ -27,6 +27,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
@@ -826,17 +827,30 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 	@Override
 	public @NonNull Boolean visitCGMappingExp(@NonNull CGMappingExp cgMappingExp) {
 		assert cgMappingExp.getPredicates().isEmpty();		// Get rewritten during JavaPre pass
-		js.append("// creations\n");
-		for (CGValuedElement cgRealizedVariable : cgMappingExp.getRealizedVariables()) {
-			cgRealizedVariable.accept(this);
+		List<CGFinalVariable> cgVariableAssignments = cgMappingExp.getVariableAssignments();
+		if (cgVariableAssignments.size() > 0) {
+			js.append("// variable assignments\n");
+			for (CGVariable cgAssignment : cgVariableAssignments) {
+				cgAssignment.accept(this);
+			}
 		}
-		js.append("// assignments\n");
-		for (CGPropertyAssignment cgAssignment : cgMappingExp.getAssignments()) {
-			cgAssignment.accept(this);
+		List<CGValuedElement> cgRealizedVariables = cgMappingExp.getRealizedVariables();
+		if (cgRealizedVariables.size() > 0) {
+			js.append("// creations\n");
+			for (CGValuedElement cgRealizedVariable : cgRealizedVariables) {
+				cgRealizedVariable.accept(this);
+			}
 		}
-		js.append("// mapping statements\n");
+		List<CGPropertyAssignment> cgPropertyAssignments = cgMappingExp.getAssignments();
+		if (cgPropertyAssignments.size()> 0) {
+			js.append("// property assignments\n");
+			for (CGPropertyAssignment cgAssignment : cgPropertyAssignments) {
+				cgAssignment.accept(this);
+			}
+		}
 		CGValuedElement body = cgMappingExp.getBody();
 		if (body != null) {
+			js.append("// mapping statements\n");
 			body.accept(this);
 		}
 		return true;

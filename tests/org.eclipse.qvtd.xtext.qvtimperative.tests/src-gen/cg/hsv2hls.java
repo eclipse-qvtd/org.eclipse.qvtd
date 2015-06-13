@@ -91,19 +91,19 @@ public class hsv2hls extends AbstractTransformationExecutor
         return __root__();
     }
     
-    protected @NonNull String hls2rgb(final @Nullable /*@NonInvalid*/ String color) {
+    protected @Nullable String hls2rgb(final @Nullable /*@NonInvalid*/ String color) {
         return "";
     }
     
-    protected @NonNull String hsv2rgb(final @Nullable /*@NonInvalid*/ String color_0) {
+    protected @Nullable String hsv2rgb(final @Nullable /*@NonInvalid*/ String color_0) {
         return "";
     }
     
-    protected @NonNull String rgb2hls(final @Nullable /*@NonInvalid*/ String color_1) {
+    protected @Nullable String rgb2hls(final @Nullable /*@NonInvalid*/ String color_1) {
         return "";
     }
     
-    protected @NonNull String rgb2hsv(final @Nullable /*@NonInvalid*/ String color_2) {
+    protected @Nullable String rgb2hsv(final @Nullable /*@NonInvalid*/ String color_2) {
         return "";
     }
     
@@ -123,8 +123,6 @@ public class hsv2hls extends AbstractTransformationExecutor
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final @NonNull /*@NonInvalid*/ Class TYP_HSVTree_c_c_HSVNode_0 = idResolver.getClass(CLSSid_HSVNode, null);
-        // creations
-        // assignments
         // mapping statements
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_HSVNode, models[0/*hsv*/], TYP_HSVTree_c_c_HSVNode_0);
         final List<HSVNode> UNBOXED_objectsOfKind = objectsOfKind.asEcoreObjects(idResolver, HSVNode.class);
@@ -133,7 +131,9 @@ public class hsv2hls extends AbstractTransformationExecutor
         for (HSVNode hsvRoot_1 : UNBOXED_objectsOfKind) {
             if (hsvRoot_1 != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode symbol_1 = (HSVNode)hsvRoot_1;
-                HSV2MiddleRoot(symbol_1);
+                if (symbol_1 != null) {
+                    HSV2MiddleRoot(symbol_1);
+                }
             }
         }
         return true;
@@ -142,11 +142,11 @@ public class hsv2hls extends AbstractTransformationExecutor
     /**
      * 
      * map HSV2MiddleRoot in hsv2hls {
-     * hsv (hsvRoot : HSVTree::HSVNode[1];
+     * hsv (hsvRoot : HSVTree::HSVNode[?];
      *  |)
      * { |}
      * middle ( |)
-     * {realize middleRoot : HSV2HLS::HSVNode2HLSNode[1];
+     * {realize middleRoot : HSV2HLS::HSVNode2HLSNode[?];
      *  |}
      * where ( |
      * hsvRoot.parent =
@@ -176,7 +176,7 @@ public class hsv2hls extends AbstractTransformationExecutor
         final /*@Thrown*/ HSVNode2HLSNode middleRoot = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
         assert middleRoot != null;
         models[2/*middle*/].add(middleRoot);
-        // assignments
+        // property assignments
         middleRoot.setHsv(hsvRoot);
         final @Nullable /*@Thrown*/ String name = hsvRoot.getName();
         middleRoot.setName(name);
@@ -187,10 +187,16 @@ public class hsv2hls extends AbstractTransformationExecutor
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode symbol_3 = (HSVNode)hsvChild;
-                HSV2MiddleRecursion(symbol_3, middleRoot);
+                if (symbol_3 != null) {
+                    if (middleRoot != null) {
+                        HSV2MiddleRecursion(symbol_3, middleRoot);
+                    }
+                }
             }
         }
-        Middle2HLSRoot(middleRoot);
+        if (middleRoot != null) {
+            Middle2HLSRoot(middleRoot);
+        }
         return true;
     }
     
@@ -198,12 +204,12 @@ public class hsv2hls extends AbstractTransformationExecutor
      * 
      * map HSV2MiddleRecursion in hsv2hls {
      * 
-     *   hsv (hsvNode : HSVTree::HSVNode[1];
+     *   hsv (hsvNode : HSVTree::HSVNode[?];
      *  |)
      * { |}
-     * middle (middleParent : HSV2HLS::HSVNode2HLSNode[1];
+     * middle (middleParent : HSV2HLS::HSVNode2HLSNode[?];
      *  |)
-     * {realize middleNode : HSV2HLS::HSVNode2HLSNode[1];
+     * {realize middleNode : HSV2HLS::HSVNode2HLSNode[?];
      *  |}
      * where ( |)
      * { |
@@ -224,7 +230,7 @@ public class hsv2hls extends AbstractTransformationExecutor
         final /*@Thrown*/ HSVNode2HLSNode middleNode_1 = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
         assert middleNode_1 != null;
         models[2/*middle*/].add(middleNode_1);
-        // assignments
+        // property assignments
         middleNode_1.setParent(middleParent);
         middleNode_1.setHsv(hsvNode);
         final @Nullable /*@Thrown*/ String name = hsvNode.getName();
@@ -236,7 +242,11 @@ public class hsv2hls extends AbstractTransformationExecutor
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode symbol_4 = (HSVNode)hsvChild;
-                HSV2MiddleRecursion(symbol_4, middleNode_1);
+                if (symbol_4 != null) {
+                    if (middleNode_1 != null) {
+                        HSV2MiddleRecursion(symbol_4, middleNode_1);
+                    }
+                }
             }
         }
         return true;
@@ -246,11 +256,11 @@ public class hsv2hls extends AbstractTransformationExecutor
      * 
      * map Middle2HLSRoot in hsv2hls {
      * 
-     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode[1];
+     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode[?];
      *  |)
      * { |}
      * hls ( |)
-     * {realize hlsNode : HLSTree::HLSNode[1];
+     * {realize hlsNode : HLSTree::HLSNode[?];
      *  |}
      * where ( |)
      * { |
@@ -270,7 +280,7 @@ public class hsv2hls extends AbstractTransformationExecutor
         final /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
         assert hlsNode != null;
         models[1/*hls*/].add(hlsNode);
-        // assignments
+        // property assignments
         hlsNode.setParent(null);
         middleNode.setHls(hlsNode);
         final @Nullable /*@Thrown*/ String name = middleNode.getName();
@@ -282,7 +292,9 @@ public class hsv2hls extends AbstractTransformationExecutor
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
-                Middle2HLSRecursion(symbol_4);
+                if (symbol_4 != null) {
+                    Middle2HLSRecursion(symbol_4);
+                }
             }
         }
         return true;
@@ -292,11 +304,11 @@ public class hsv2hls extends AbstractTransformationExecutor
      * 
      * map Middle2HLSRecursion in hsv2hls {
      * 
-     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode[1];
+     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode[?];
      *  |)
      * { |}
      * hls ( |)
-     * {realize hlsNode : HLSTree::HLSNode[1];
+     * {realize hlsNode : HLSTree::HLSNode[?];
      *  |}
      * where ( |)
      * { |
@@ -316,7 +328,7 @@ public class hsv2hls extends AbstractTransformationExecutor
         final /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
         assert hlsNode != null;
         models[1/*hls*/].add(hlsNode);
-        // assignments
+        // property assignments
         final @Nullable /*@Thrown*/ HSVNode2HLSNode parent = middleNode_0.getParent();
         if (parent == null) {
             throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/HSVtoHLS\'::HSVNode2HLSNode::hls\'");
@@ -334,7 +346,9 @@ public class hsv2hls extends AbstractTransformationExecutor
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
-                Middle2HLSRecursion(symbol_4);
+                if (symbol_4 != null) {
+                    Middle2HLSRecursion(symbol_4);
+                }
             }
         }
         return true;

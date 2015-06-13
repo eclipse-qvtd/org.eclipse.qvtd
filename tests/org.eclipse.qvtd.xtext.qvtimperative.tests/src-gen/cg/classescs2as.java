@@ -143,11 +143,11 @@ public class classescs2as extends AbstractTransformationExecutor
     /**
      * 
      * map mClassCS2Class_LM in classescs2as {
-     * leftCS (classCS : classescs::ClassCS[1];
+     * leftCS (classCS : classescs::ClassCS[?];
      *  |)
      * { |}
      * middle ( |)
-     * {realize c2c : classescstraces::ClassCS2Class[1];
+     * {realize c2c : classescstraces::ClassCS2Class[?];
      *  |}
      * where ( |)
      * { |
@@ -161,21 +161,20 @@ public class classescs2as extends AbstractTransformationExecutor
         final /*@Thrown*/ ClassCS2Class c2c_0 = ClassescstracesFactory.eINSTANCE.createClassCS2Class();
         assert c2c_0 != null;
         models[2/*middle*/].add(c2c_0);
-        // assignments
+        // property assignments
         c2c_0.setClassCS(classCS);
         OPPOSITE_OF_ClassCS2Class_classCS.put(classCS, c2c_0);
-        // mapping statements
         return true;
     }
     
     /**
      * 
      * map mRootCS2Root_LM in classescs2as {
-     * leftCS (rootCS : classescs::RootCS[1];
+     * leftCS (rootCS : classescs::RootCS[?];
      *  |)
      * { |}
      * middle ( |)
-     * {realize r2r : classescstraces::RootCS2Root[1];
+     * {realize r2r : classescstraces::RootCS2Root[?];
      *  |}
      * where ( |)
      * { |
@@ -189,21 +188,20 @@ public class classescs2as extends AbstractTransformationExecutor
         final /*@Thrown*/ RootCS2Root r2r_0 = ClassescstracesFactory.eINSTANCE.createRootCS2Root();
         assert r2r_0 != null;
         models[2/*middle*/].add(r2r_0);
-        // assignments
+        // property assignments
         r2r_0.setRootCS(rootCS);
         OPPOSITE_OF_RootCS2Root_rootCS.put(rootCS, r2r_0);
-        // mapping statements
         return true;
     }
     
     /**
      * 
      * map mPackageCS2Package_LM in classescs2as {
-     * leftCS (packageCS : classescs::PackageCS[1];
+     * leftCS (packageCS : classescs::PackageCS[?];
      *  |)
      * { |}
      * middle ( |)
-     * {realize p2p : classescstraces::PackageCS2Package[1];
+     * {realize p2p : classescstraces::PackageCS2Package[?];
      *  |}
      * where ( |)
      * { |
@@ -217,21 +215,20 @@ public class classescs2as extends AbstractTransformationExecutor
         final /*@Thrown*/ PackageCS2Package p2p_0 = ClassescstracesFactory.eINSTANCE.createPackageCS2Package();
         assert p2p_0 != null;
         models[2/*middle*/].add(p2p_0);
-        // assignments
+        // property assignments
         p2p_0.setPackageCS(packageCS);
         OPPOSITE_OF_PackageCS2Package_packageCS.put(packageCS, p2p_0);
-        // mapping statements
         return true;
     }
     
     /**
      * 
      * map mClassCS2Class_MR in classescs2as {
-     * middle (c2c : classescstraces::ClassCS2Class[1];
+     * middle (c2c : classescstraces::ClassCS2Class[?];
      *  |)
      * { |}
      * rightAS ( |)
-     * {realize class : classes::Class[1];
+     * {realize class : classes::Class[?];
      *  |}
      * where ( |)
      * { |
@@ -245,20 +242,19 @@ public class classescs2as extends AbstractTransformationExecutor
         final /*@Thrown*/ classes.Class symbol_3 = ClassesFactory.eINSTANCE.createClass();
         assert symbol_3 != null;
         models[1/*rightAS*/].add(symbol_3);
-        // assignments
+        // property assignments
         c2c.setClass(symbol_3);
-        // mapping statements
         return true;
     }
     
     /**
      * 
      * map mRootCS2Root_MR in classescs2as {
-     * middle (r2r : classescstraces::RootCS2Root[1];
+     * middle (r2r : classescstraces::RootCS2Root[?];
      *  |)
      * { |}
      * rightAS ( |)
-     * {realize root : classes::Root[1];
+     * {realize root : classes::Root[?];
      *  |}
      * where ( |)
      * { |
@@ -272,20 +268,19 @@ public class classescs2as extends AbstractTransformationExecutor
         final /*@Thrown*/ Root root_0 = ClassesFactory.eINSTANCE.createRoot();
         assert root_0 != null;
         models[1/*rightAS*/].add(root_0);
-        // assignments
+        // property assignments
         r2r.setRoot(root_0);
-        // mapping statements
         return true;
     }
     
     /**
      * 
      * map mPackageCS2Package_MR in classescs2as {
-     * middle (p2p : classescstraces::PackageCS2Package[1];
+     * middle (p2p : classescstraces::PackageCS2Package[?];
      *  |)
      * { |}
      * rightAS ( |)
-     * {realize package : classes::Package[1];
+     * {realize package : classes::Package[?];
      *  |}
      * where ( |)
      * { |
@@ -299,19 +294,18 @@ public class classescs2as extends AbstractTransformationExecutor
         final /*@Thrown*/ Package symbol_3 = ClassesFactory.eINSTANCE.createPackage();
         assert symbol_3 != null;
         models[1/*rightAS*/].add(symbol_3);
-        // assignments
+        // property assignments
         p2p.setPackage(symbol_3);
-        // mapping statements
         return true;
     }
     
     /**
      * 
      * map uClass_name in classescs2as {
-     * rightAS (class : classes::Class[1];
+     * rightAS (class : classes::Class[?];
      *  |)
      * { |}
-     * leftCS (classCS : classescs::ClassCS[1];
+     * leftCS (classCS : classescs::ClassCS[?];
      *  |)
      * { |}
      * where ( |
@@ -330,21 +324,19 @@ public class classescs2as extends AbstractTransformationExecutor
         if (!eq) {
             return false;
         }
-        // creations
-        // assignments
+        // property assignments
         final @Nullable /*@Thrown*/ String name = classCS_0.getName();
         symbol_0.setName(name);
-        // mapping statements
         return true;
     }
     
     /**
      * 
      * map uRoot_ownedPackages in classescs2as {
-     * rightAS (root : classes::Root[1];
+     * rightAS (root : classes::Root[?];
      *  |)
      * { |}
-     * leftCS (rootCS : classescs::RootCS[1];
+     * leftCS (rootCS : classescs::RootCS[?];
      *  |)
      * { |}
      * where ( |
@@ -365,8 +357,7 @@ public class classescs2as extends AbstractTransformationExecutor
         if (!eq) {
             return false;
         }
-        // creations
-        // assignments
+        // property assignments
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<PackageCS> ownedPackages = rootCS_0.getOwnedPackages();
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
@@ -410,17 +401,16 @@ public class classescs2as extends AbstractTransformationExecutor
         final List<Package> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, Package.class);
         assert UNBOXED_asOrderedSet != null;
         root.getOwnedPackages().addAll(UNBOXED_asOrderedSet);
-        // mapping statements
         return true;
     }
     
     /**
      * 
      * map uPackage_name in classescs2as {
-     * rightAS (package : classes::Package[1];
+     * rightAS (package : classes::Package[?];
      *  |)
      * { |}
-     * leftCS (packageCS : classescs::PackageCS[1];
+     * leftCS (packageCS : classescs::PackageCS[?];
      *  |)
      * { |}
      * where ( |
@@ -439,21 +429,19 @@ public class classescs2as extends AbstractTransformationExecutor
         if (!eq) {
             return false;
         }
-        // creations
-        // assignments
+        // property assignments
         final @Nullable /*@Thrown*/ String name = packageCS_0.getName();
         symbol_1.setName(name);
-        // mapping statements
         return true;
     }
     
     /**
      * 
      * map uPackage_ownedClasses in classescs2as {
-     * rightAS (package : classes::Package[1];
+     * rightAS (package : classes::Package[?];
      *  |)
      * { |}
-     * leftCS (packageCS : classescs::PackageCS[1];
+     * leftCS (packageCS : classescs::PackageCS[?];
      *  |)
      * { |}
      * where ( |
@@ -474,8 +462,7 @@ public class classescs2as extends AbstractTransformationExecutor
         if (!eq) {
             return false;
         }
-        // creations
-        // assignments
+        // property assignments
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<ClassCS> ownedClasses = packageCS_1.getOwnedClasses();
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
@@ -519,7 +506,6 @@ public class classescs2as extends AbstractTransformationExecutor
         final List<classes.Class> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, classes.Class.class);
         assert UNBOXED_asOrderedSet != null;
         symbol_2.getOwnedClasses().addAll(UNBOXED_asOrderedSet);
-        // mapping statements
         return true;
     }
     
@@ -619,14 +605,14 @@ public class classescs2as extends AbstractTransformationExecutor
         assert UNBOXED_allInstances != null;
         final List<RootCS> UNBOXED_allInstances_11 = allInstances_11.asEcoreObjects(idResolver, RootCS.class);
         assert UNBOXED_allInstances_11 != null;
-        // creations
-        // assignments
         // mapping statements
         ;
         for (PackageCS packageCS_5 : UNBOXED_allInstances) {
             if (packageCS_5 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS symbol_7 = (PackageCS)packageCS_5;
-                mPackageCS2Package_LM(symbol_7);
+                if (symbol_7 != null) {
+                    mPackageCS2Package_LM(symbol_7);
+                }
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue allInstances_0 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS2Package, TYP_classescstraces_c_c_PackageCS2Package_0);
@@ -636,7 +622,9 @@ public class classescs2as extends AbstractTransformationExecutor
         for (PackageCS2Package p2p_1 : UNBOXED_allInstances_0) {
             if (p2p_1 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS2Package symbol_11 = (PackageCS2Package)p2p_1;
-                mPackageCS2Package_MR(symbol_11);
+                if (symbol_11 != null) {
+                    mPackageCS2Package_MR(symbol_11);
+                }
             }
         }
         ;
@@ -647,7 +635,11 @@ public class classescs2as extends AbstractTransformationExecutor
                     if (packageCS_6 != null) {
                         final @NonNull /*@NonInvalid*/ Package symbol_16 = (Package)symbol_21;
                         final @NonNull /*@NonInvalid*/ PackageCS symbol_17 = (PackageCS)packageCS_6;
-                        uPackage_name(symbol_16, symbol_17);
+                        if (symbol_16 != null) {
+                            if (symbol_17 != null) {
+                                uPackage_name(symbol_16, symbol_17);
+                            }
+                        }
                     }
                 }
             }
@@ -660,7 +652,11 @@ public class classescs2as extends AbstractTransformationExecutor
                     if (packageCS_7 != null) {
                         final @NonNull /*@NonInvalid*/ Package symbol_24 = (Package)symbol_29;
                         final @NonNull /*@NonInvalid*/ PackageCS symbol_25 = (PackageCS)packageCS_7;
-                        uPackage_ownedClasses(symbol_24, symbol_25);
+                        if (symbol_24 != null) {
+                            if (symbol_25 != null) {
+                                uPackage_ownedClasses(symbol_24, symbol_25);
+                            }
+                        }
                     }
                 }
             }
@@ -669,7 +665,9 @@ public class classescs2as extends AbstractTransformationExecutor
         for (ClassCS classCS_3 : UNBOXED_allInstances_7) {
             if (classCS_3 != null) {
                 final @NonNull /*@NonInvalid*/ ClassCS symbol_31 = (ClassCS)classCS_3;
-                mClassCS2Class_LM(symbol_31);
+                if (symbol_31 != null) {
+                    mClassCS2Class_LM(symbol_31);
+                }
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassCS2Class, TYP_classescstraces_c_c_ClassCS2Class_0);
@@ -679,7 +677,9 @@ public class classescs2as extends AbstractTransformationExecutor
         for (ClassCS2Class c2c_1 : UNBOXED_allInstances_6) {
             if (c2c_1 != null) {
                 final @NonNull /*@NonInvalid*/ ClassCS2Class symbol_35 = (ClassCS2Class)c2c_1;
-                mClassCS2Class_MR(symbol_35);
+                if (symbol_35 != null) {
+                    mClassCS2Class_MR(symbol_35);
+                }
             }
         }
         ;
@@ -694,7 +694,11 @@ public class classescs2as extends AbstractTransformationExecutor
                     if (symbol_44 != null) {
                         final @NonNull /*@NonInvalid*/ classes.Class symbol_40 = (classes.Class)symbol_44;
                         final @NonNull /*@NonInvalid*/ ClassCS symbol_41 = (ClassCS)classCS_4;
-                        uClass_name(symbol_40, symbol_41);
+                        if (symbol_40 != null) {
+                            if (symbol_41 != null) {
+                                uClass_name(symbol_40, symbol_41);
+                            }
+                        }
                     }
                 }
             }
@@ -703,7 +707,9 @@ public class classescs2as extends AbstractTransformationExecutor
         for (RootCS rootCS_3 : UNBOXED_allInstances_11) {
             if (rootCS_3 != null) {
                 final @NonNull /*@NonInvalid*/ RootCS symbol_47 = (RootCS)rootCS_3;
-                mRootCS2Root_LM(symbol_47);
+                if (symbol_47 != null) {
+                    mRootCS2Root_LM(symbol_47);
+                }
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue allInstances_10 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_RootCS2Root, TYP_classescstraces_c_c_RootCS2Root_0);
@@ -713,7 +719,9 @@ public class classescs2as extends AbstractTransformationExecutor
         for (RootCS2Root r2r_1 : UNBOXED_allInstances_10) {
             if (r2r_1 != null) {
                 final @NonNull /*@NonInvalid*/ RootCS2Root symbol_51 = (RootCS2Root)r2r_1;
-                mRootCS2Root_MR(symbol_51);
+                if (symbol_51 != null) {
+                    mRootCS2Root_MR(symbol_51);
+                }
             }
         }
         ;
@@ -728,7 +736,11 @@ public class classescs2as extends AbstractTransformationExecutor
                     if (root_1 != null) {
                         final @NonNull /*@NonInvalid*/ Root symbol_56 = (Root)root_1;
                         final @NonNull /*@NonInvalid*/ RootCS symbol_57 = (RootCS)rootCS_4;
-                        uRoot_ownedPackages(symbol_56, symbol_57);
+                        if (symbol_56 != null) {
+                            if (symbol_57 != null) {
+                                uRoot_ownedPackages(symbol_56, symbol_57);
+                            }
+                        }
                     }
                 }
             }

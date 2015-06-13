@@ -144,11 +144,11 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
      * 
      * map createPackage in classescs2as_Bug459225 {
      * 
-     *   leftCS (packageCS : classescs::PackageCS[1];
+     *   leftCS (packageCS : classescs::PackageCS[?];
      *  |)
      * { |}
      * rightAS ( |)
-     * {realize package : classes::Package[1];
+     * {realize package : classes::Package[?];
      *  |}
      * where ( |)
      * { |
@@ -166,7 +166,7 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
         assert symbol_0 != null;
         models[1/*rightAS*/].add(symbol_0);
-        // assignments
+        // property assignments
         @Nullable /*@Caught*/ Object CAUGHT_name;
         try {
             final @Nullable /*@Thrown*/ String name = packageCS.getName();
@@ -189,7 +189,6 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
             symbol_2 = STR_unnamed;
         }
         symbol_0.setName(symbol_2);
-        // mapping statements
         return true;
     }
     
@@ -209,8 +208,6 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final @NonNull /*@NonInvalid*/ Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
-        // creations
-        // assignments
         // mapping statements
         final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
         final List<PackageCS> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, PackageCS.class);
@@ -219,7 +216,9 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         for (PackageCS packageCS_1 : UNBOXED_allInstances) {
             if (packageCS_1 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS symbol_1 = (PackageCS)packageCS_1;
-                createPackage(symbol_1);
+                if (symbol_1 != null) {
+                    createPackage(symbol_1);
+                }
             }
         }
         return true;

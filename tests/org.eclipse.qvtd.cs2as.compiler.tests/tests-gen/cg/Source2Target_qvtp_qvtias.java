@@ -239,9 +239,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Thrown*/ TRoot tRoot = TargetFactory.eINSTANCE.createTRoot();
         assert tRoot != null;
         models[1/*rightAS*/].add(tRoot);
-        // assignments
+        // property assignments
         sRoot.setAst(tRoot);
-        // mapping statements
         return true;
     }
     
@@ -279,9 +278,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Thrown*/ A3 a3 = TargetFactory.eINSTANCE.createA3();
         assert a3 != null;
         models[1/*rightAS*/].add(a3);
-        // assignments
+        // property assignments
         x.setAst(a3);
-        // mapping statements
         return true;
     }
     
@@ -318,9 +316,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Thrown*/ A2 a2 = TargetFactory.eINSTANCE.createA2();
         assert a2 != null;
         models[1/*rightAS*/].add(a2);
-        // assignments
+        // property assignments
         x_0.setAst(a2);
-        // mapping statements
         return true;
     }
     
@@ -351,9 +348,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Thrown*/ A1 a1 = TargetFactory.eINSTANCE.createA1();
         assert a1 != null;
         models[1/*rightAS*/].add(a1);
-        // assignments
+        // property assignments
         x_1.setAst(a1);
-        // mapping statements
         return true;
     }
     
@@ -378,9 +374,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Thrown*/ B b = TargetFactory.eINSTANCE.createB();
         assert b != null;
         models[1/*rightAS*/].add(b);
-        // assignments
+        // property assignments
         y1.setAst(b);
-        // mapping statements
         return true;
     }
     
@@ -405,9 +400,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Thrown*/ C c = TargetFactory.eINSTANCE.createC();
         assert c != null;
         models[1/*rightAS*/].add(c);
-        // assignments
+        // property assignments
         y2.setAst(c);
-        // mapping statements
         return true;
     }
     
@@ -442,9 +436,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Thrown*/ D d = TargetFactory.eINSTANCE.createD();
         assert d != null;
         models[1/*rightAS*/].add(d);
-        // assignments
+        // property assignments
         z.setAst(d);
-        // mapping statements
         return true;
     }
     
@@ -478,9 +471,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Thrown*/ D d = TargetFactory.eINSTANCE.createD();
         assert d != null;
         models[1/*rightAS*/].add(d);
-        // assignments
+        // property assignments
         z_0.setAst(d);
-        // mapping statements
         return true;
     }
     
@@ -504,8 +496,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_TRoot_0 = idResolver.getClass(CLSSid_TRoot, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = sRoot_0.getAst();
         final /*@NonNull*/ /*@Thrown*/ TRoot oclAsType = ClassUtil.nonNullState((TRoot)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_TRoot_0));
         @SuppressWarnings("null")
@@ -535,7 +526,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final List<A> UNBOXED_collect = collect.asEcoreObjects(idResolver, A.class);
         assert UNBOXED_collect != null;
         oclAsType.getOwnedA().addAll(UNBOXED_collect);
-        // mapping statements
         return true;
     }
     
@@ -571,13 +561,11 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             return false;
         }
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A3_0 = idResolver.getClass(CLSSid_A3, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = x_2.getAst();
         final /*@NonNull*/ /*@Thrown*/ A3 oclAsType = ClassUtil.nonNullState((A3)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A3_0));
         final /*@Nullable*/ /*@Thrown*/ String name = x_2.getName();
         oclAsType.setName(name);
-        // mapping statements
         return true;
     }
     
@@ -615,8 +603,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             return false;
         }
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A3_0 = idResolver.getClass(CLSSid_A3, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = x_3.getAst();
         final /*@NonNull*/ /*@Thrown*/ A3 oclAsType = ClassUtil.nonNullState((A3)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A3_0));
         @SuppressWarnings("null")
@@ -660,7 +647,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final List<C> UNBOXED_collect = collect.asEcoreObjects(idResolver, C.class);
         assert UNBOXED_collect != null;
         oclAsType.getOwnsC().addAll(UNBOXED_collect);
-        // mapping statements
         return true;
     }
     
@@ -695,13 +681,11 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             return false;
         }
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A2_0 = idResolver.getClass(CLSSid_A2, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = x_4.getAst();
         final /*@NonNull*/ /*@Thrown*/ A2 oclAsType = ClassUtil.nonNullState((A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A2_0));
         final /*@Nullable*/ /*@Thrown*/ String name = x_4.getName();
         oclAsType.setName(name);
-        // mapping statements
         return true;
     }
     
@@ -738,8 +722,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             return false;
         }
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A2_0 = idResolver.getClass(CLSSid_A2, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = x_5.getAst();
         final /*@NonNull*/ /*@Thrown*/ A2 oclAsType = ClassUtil.nonNullState((A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A2_0));
         @SuppressWarnings("null")
@@ -783,7 +766,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final List<C> UNBOXED_collect = collect.asEcoreObjects(idResolver, C.class);
         assert UNBOXED_collect != null;
         oclAsType.getOwnsC().addAll(UNBOXED_collect);
-        // mapping statements
         return true;
     }
     
@@ -812,13 +794,11 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             return false;
         }
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A1_0 = idResolver.getClass(CLSSid_A1, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = x_6.getAst();
         final /*@NonNull*/ /*@Thrown*/ A1 oclAsType = ClassUtil.nonNullState((A1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A1_0));
         final /*@Nullable*/ /*@Thrown*/ String name = x_6.getName();
         oclAsType.setName(name);
-        // mapping statements
         return true;
     }
     
@@ -849,8 +829,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             return false;
         }
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A1_0 = idResolver.getClass(CLSSid_A1, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = x_7.getAst();
         final /*@NonNull*/ /*@Thrown*/ A1 oclAsType = ClassUtil.nonNullState((A1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A1_0));
         @SuppressWarnings("null")
@@ -894,7 +873,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final List<B> UNBOXED_collect = collect.asEcoreObjects(idResolver, B.class);
         assert UNBOXED_collect != null;
         oclAsType.getOwnsB().addAll(UNBOXED_collect);
-        // mapping statements
         return true;
     }
     
@@ -919,8 +897,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = y1_0.getAst();
         final /*@NonNull*/ /*@Thrown*/ B oclAsType = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_B_0));
         final /*@Nullable*/ /*@Thrown*/ Z ownsZ = y1_0.getOwnsZ();
@@ -930,7 +907,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = ownsZ.getAst();
         final /*@NonNull*/ /*@Thrown*/ D oclAsType_0 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_D_0));
         oclAsType.setOwnsD(oclAsType_0);
-        // mapping statements
         return true;
     }
     
@@ -953,13 +929,11 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = y1_1.getAst();
         final /*@NonNull*/ /*@Thrown*/ B oclAsType = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_B_0));
         final /*@Nullable*/ /*@Thrown*/ String name = y1_1.getName();
         oclAsType.setName(name);
-        // mapping statements
         return true;
     }
     
@@ -984,8 +958,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = y2_0.getAst();
         final /*@NonNull*/ /*@Thrown*/ C oclAsType = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_C_0));
         final /*@Nullable*/ /*@Thrown*/ Z ownsZ = y2_0.getOwnsZ();
@@ -995,7 +968,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = ownsZ.getAst();
         final /*@NonNull*/ /*@Thrown*/ D oclAsType_0 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_D_0));
         oclAsType.setOwnsD(oclAsType_0);
-        // mapping statements
         return true;
     }
     
@@ -1018,13 +990,11 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = y2_1.getAst();
         final /*@NonNull*/ /*@Thrown*/ C oclAsType = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_C_0));
         final /*@Nullable*/ /*@Thrown*/ String name = y2_1.getName();
         oclAsType.setName(name);
-        // mapping statements
         return true;
     }
     
@@ -1060,8 +1030,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = z_1.getAst();
         final /*@NonNull*/ /*@Thrown*/ D oclAsType = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0));
         final /*@NonNull*/ /*@Thrown*/ Y2 oclAsType_0 = ClassUtil.nonNullState((Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y2_0));
@@ -1069,7 +1038,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@Thrown*/ C oclAsType_1 = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0));
         final /*@Nullable*/ /*@Thrown*/ A2 toA2 = oclAsType_1.getToA2();
         oclAsType.setToA(toA2);
-        // mapping statements
         return true;
     }
     
@@ -1104,8 +1072,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         }
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
         final /*@Nullable*/ /*@Thrown*/ EObject ast = z_2.getAst();
-        // creations
-        // assignments
+        // property assignments
         final /*@NonNull*/ /*@Thrown*/ D oclAsType = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0));
         final /*@NonNull*/ /*@Thrown*/ D self_1 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0));
         final /*@Nullable*/ /*@Thrown*/ PathNameCS refers = z_2.getRefers();
@@ -1173,7 +1140,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             symbol_2 = symbol_1;
         }
         oclAsType.setRefsC(symbol_2);
-        // mapping statements
         return true;
     }
     
@@ -1207,8 +1173,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         }
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = z_3.getAst();
         final /*@NonNull*/ /*@Thrown*/ D oclAsType = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0));
         final /*@NonNull*/ /*@Thrown*/ Y1 oclAsType_0 = ClassUtil.nonNullState((Y1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0));
@@ -1216,7 +1181,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@Thrown*/ B oclAsType_1 = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_B_0));
         final /*@Nullable*/ /*@Thrown*/ A1 toA1 = oclAsType_1.getToA1();
         oclAsType.setToA(toA1);
-        // mapping statements
         return true;
     }
     
@@ -1250,8 +1214,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         }
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
         final /*@Nullable*/ /*@Thrown*/ EObject ast = z_4.getAst();
-        // creations
-        // assignments
+        // property assignments
         final /*@NonNull*/ /*@Thrown*/ D oclAsType = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0));
         final /*@NonNull*/ /*@Thrown*/ D self_1 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0));
         final /*@Nullable*/ /*@Thrown*/ PathNameCS refers = z_4.getRefers();
@@ -1319,7 +1282,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             symbol_2 = symbol_1;
         }
         oclAsType.setRefsB(symbol_2);
-        // mapping statements
         return true;
     }
     
@@ -1468,8 +1430,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         assert UNBOXED_allInstances_17 != null;
         final List<Z> UNBOXED_allInstances_7 = allInstances_7.asEcoreObjects(idResolver, Z.class);
         assert UNBOXED_allInstances_7 != null;
-        // creations
-        // assignments
         // mapping statements
         ;
         for (SRoot sRoot_3 : UNBOXED_allInstances_3) {

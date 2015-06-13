@@ -195,9 +195,8 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Thrown*/ example2.classes.Class symbol_0 = ClassesFactory.eINSTANCE.createClass();
         assert symbol_0 != null;
         models[1/*rightAS*/].add(symbol_0);
-        // assignments
+        // property assignments
         classCS.setAst(symbol_0);
-        // mapping statements
         return true;
     }
     
@@ -222,9 +221,8 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
         assert symbol_0 != null;
         models[1/*rightAS*/].add(symbol_0);
-        // assignments
+        // property assignments
         packageCS.setAst(symbol_0);
-        // mapping statements
         return true;
     }
     
@@ -249,9 +247,8 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Thrown*/ Root root = ClassesFactory.eINSTANCE.createRoot();
         assert root != null;
         models[1/*rightAS*/].add(root);
-        // assignments
+        // property assignments
         rootCS.setAst(root);
-        // mapping statements
         return true;
     }
     
@@ -274,13 +271,11 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = classCS_0.getAst();
         final /*@NonNull*/ /*@Thrown*/ example2.classes.Class oclAsType = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_classes_c_c_Class_0));
         final /*@Nullable*/ /*@Thrown*/ String name = classCS_0.getName();
         oclAsType.setName(name);
-        // mapping statements
         return true;
     }
     
@@ -306,8 +301,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
         final /*@Nullable*/ /*@Thrown*/ EObject ast = classCS_1.getAst();
-        // creations
-        // assignments
+        // property assignments
         final /*@NonNull*/ /*@Thrown*/ example2.classes.Class oclAsType = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_classes_c_c_Class_0));
         final /*@NonNull*/ /*@Thrown*/ example2.classes.Class self_1 = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_classes_c_c_Class_0));
         final /*@Nullable*/ /*@Thrown*/ PathNameCS symbol_0 = classCS_1.getExtends();
@@ -360,7 +354,6 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
             symbol_3 = symbol_2;
         }
         oclAsType.setSuperClass(symbol_3);
-        // mapping statements
         return true;
     }
     
@@ -383,13 +376,11 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = packageCS_0.getAst();
         final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_classes_c_c_Package_0));
         final /*@Nullable*/ /*@Thrown*/ String name = packageCS_0.getName();
         oclAsType.setName(name);
-        // mapping statements
         return true;
     }
     
@@ -414,8 +405,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = packageCS_1.getAst();
         final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_classes_c_c_Package_0));
         @SuppressWarnings("null")
@@ -446,7 +436,6 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         final List<example2.classes.Class> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, example2.classes.Class.class);
         assert UNBOXED_asOrderedSet != null;
         oclAsType.getOwnedClasses().addAll(UNBOXED_asOrderedSet);
-        // mapping statements
         return true;
     }
     
@@ -471,8 +460,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = packageCS_2.getAst();
         final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_classes_c_c_Package_0));
         @SuppressWarnings("null")
@@ -502,7 +490,6 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         final List<Package> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, Package.class);
         assert UNBOXED_asOrderedSet != null;
         oclAsType.getOwnedPackages().addAll(UNBOXED_asOrderedSet);
-        // mapping statements
         return true;
     }
     
@@ -527,8 +514,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Root_0 = idResolver.getClass(CLSSid_Root, null);
-        // creations
-        // assignments
+        // property assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = rootCS_0.getAst();
         final /*@NonNull*/ /*@Thrown*/ Root oclAsType = ClassUtil.nonNullState((Root)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_classes_c_c_Root_0));
         @SuppressWarnings("null")
@@ -559,7 +545,6 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         final List<Package> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, Package.class);
         assert UNBOXED_asOrderedSet != null;
         oclAsType.getOwnedPackages().addAll(UNBOXED_asOrderedSet);
-        // mapping statements
         return true;
     }
     
@@ -630,8 +615,6 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         assert UNBOXED_allInstances_2 != null;
         final List<RootCS> UNBOXED_allInstances_1 = allInstances_1.asEcoreObjects(idResolver, RootCS.class);
         assert UNBOXED_allInstances_1 != null;
-        // creations
-        // assignments
         // mapping statements
         ;
         for (RootCS rootCS_3 : UNBOXED_allInstances_1) {

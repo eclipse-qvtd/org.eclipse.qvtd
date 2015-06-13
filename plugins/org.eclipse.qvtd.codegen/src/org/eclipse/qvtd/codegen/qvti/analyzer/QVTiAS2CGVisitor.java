@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -169,9 +170,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				}
 			}
 		}
+		List<CGFinalVariable> cgVariableAssignments = cgMappingExp.getVariableAssignments();
 		List<RealizedVariable> pRealizedVariables = new ArrayList<RealizedVariable>();
 		for (@SuppressWarnings("null")@NonNull BottomPattern pBottomPattern : pBottomPatterns) {
 			pRealizedVariables.addAll(pBottomPattern.getRealizedVariable());
+			for (@SuppressWarnings("null")@NonNull Variable asVariable : pBottomPattern.getVariable()) {
+				if (asVariable.getOwnedInit() != null) {
+					cgVariableAssignments.add(doVisit(CGFinalVariable.class, asVariable));
+				}
+			}
 		}
 		Collections.sort(pRealizedVariables, new Comparator<NamedElement>()
 			{
@@ -185,10 +192,16 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			CGRealizedVariable cgVariable = getRealizedVariable(pRealizedVariable);
 			cgRealizedVariables.add(cgVariable);
 		}
-		List<CGPropertyAssignment> cgAssignments = cgMappingExp.getAssignments();
+		List<CGPropertyAssignment> cgPropertyAssignments = cgMappingExp.getAssignments();
 		for (@SuppressWarnings("null")@NonNull BottomPattern pBottomPattern : pBottomPatterns) {
-			for (@SuppressWarnings("null")@NonNull Assignment pAssignment : pBottomPattern.getAssignment()) {
-				cgAssignments.add(doVisit(CGPropertyAssignment.class, pAssignment));
+			EList<Assignment> assignment = pBottomPattern.getAssignment();
+			for (@SuppressWarnings("null")@NonNull Assignment pAssignment : assignment) {
+				if (pAssignment instanceof PropertyAssignment) {
+					cgPropertyAssignments.add(doVisit(CGPropertyAssignment.class, pAssignment));
+				}
+				else {
+					cgVariableAssignments.add(doVisit(CGFinalVariable.class, pAssignment));
+				}
 			}
 		}
 	}
@@ -490,6 +503,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
+	public @Nullable CGNamedElement visitImport(@NonNull Import object) {
+		return visiting(object);
+	}
+
+	@Override
 	public @Nullable CGNamedElement visitMapping(@NonNull Mapping pMapping) {
 		CGMapping cgMapping = QVTiCGModelFactory.eINSTANCE.createCGMapping();
 		setAst(cgMapping, pMapping);
@@ -697,12 +715,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitVariableAssignment(@NonNull VariableAssignment object) {
-		return visiting(object);
-	}
-
-	@Override
 	public @Nullable CGNamedElement visitTransformation(@NonNull Transformation asTransformation) {
+		/*QVTiTransformationAnalysis transformationAnalysis =*/ analyzer.getCodeGenerator().getTransformationAnalysis(asTransformation);
 		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
 		setAst(cgTransformation, asTransformation);
 		pushCurrentClass(cgTransformation);
@@ -733,8 +747,27 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitImport(@NonNull Import object) {
-		return visiting(object);
+	public @Nullable CGNamedElement visitVariable(@NonNull Variable asVariable) {
+		CGVariable cgVariable = getVariable(asVariable);
+		CGValuedElement initValue = doVisit(CGValuedElement.class, asVariable.getOwnedInit());
+		cgVariable.setInit(initValue);
+		cgVariable.setTypeId(initValue.getTypeId());
+		cgVariable.setRequired(initValue.isRequired());
+		return cgVariable;
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitVariableAssignment(@NonNull VariableAssignment asVariableAssignment) {
+		Variable asVariable = asVariableAssignment.getTargetVariable();
+		if (asVariable == null) {
+			return null;
+		}
+		CGVariable cgVariable = getVariable(asVariable);
+		CGValuedElement initValue = doVisit(CGValuedElement.class, asVariableAssignment.getValue());
+		cgVariable.setInit(initValue);
+		cgVariable.setTypeId(initValue.getTypeId());
+		cgVariable.setRequired(initValue.isRequired());
+		return cgVariable;
 	}
 
 	@Override

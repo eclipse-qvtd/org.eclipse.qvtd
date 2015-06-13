@@ -212,7 +212,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 
 	@Override
 	public Object visitVariableAssignment(@NonNull VariableAssignment pVariableAssignment) {
-		safeVisit(pVariableAssignment.getTargetVariable());
+		context.appendName(pVariableAssignment.getTargetVariable());
 		context.append(" := ");
 		safeVisit(pVariableAssignment.getValue());
 		context.append(";\n");
