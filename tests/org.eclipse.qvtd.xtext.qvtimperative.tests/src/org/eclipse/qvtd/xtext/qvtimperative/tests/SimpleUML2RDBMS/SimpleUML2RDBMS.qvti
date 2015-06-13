@@ -129,8 +129,9 @@ map classToTable_MR in SimpleUML2RDBMS
 		c2t : ClassToTable) {}
 	where (p2s.schema = s;
 		c2t.owner = p2s;) {
+		c2t_name : String[?] := c2t.name |
 		c2t.table := t;
-		t.name := c2t.name;
+		t.name := c2t_name;
 		c2t.primaryKey := pk;
 		c2t.column := pc;
 		default t.kind := 'base';
@@ -140,8 +141,8 @@ map classToTable_MR in SimpleUML2RDBMS
 		pc.owner := t;
 		default pc.keys := OrderedSet(simplerdbms::Key){pk};
 		default pc.type := 'NUMBER';
-		pc.name := t.name + '_tid';
-		pk.name := t.name + '_pk';
+		pc.name := c2t_name + '_tid';
+		pk.name := c2t_name + '_pk';
 	}
 }
 
@@ -214,9 +215,8 @@ map associationToForeignKey_LM in SimpleUML2RDBMS
 		sc.namespace = p;
 		a.source = sc;
 		a.destination = dc;) {
-		a2f.association := a;
-		a2f.referenced := dc2t;
-		a2f.name := if a.destination = dc and a.source = sc
+		a2f_name : String |
+		a2f_name := if a.destination = dc and a.source = sc
                 		then a.name
                 		else if a.destination <> dc and a.source = sc
                 			then dc.name + '_' + a.name
@@ -226,9 +226,12 @@ map associationToForeignKey_LM in SimpleUML2RDBMS
                 				endif
                 			endif
                 		endif;
+		a2f.association := a;
+		a2f.referenced := dc2t;
+		a2f.name := a2f_name;
 		a2f.owner := sc2t;
 		a.name := if a.destination = dc and a.source = sc
-            		then a2f.name
+            		then a2f_name
             		else a.name
             		endif;
 	}
@@ -358,31 +361,31 @@ map attributeColumns_MR in SimpleUML2RDBMS
 map __root__ in SimpleUML2RDBMS
 {
 	where () {}
-	for p : simpleuml::Package in simpleuml::Package.allInstances() {
+	for p : simpleuml::Package in uml.objectsOfKind(Package) {
 		call packageToSchema_LM {
 			p := p;
 		}
 	}
-	for p2s : umltordbms::PackageToSchema in umltordbms::PackageToSchema.allInstances() {
+	for p2s : umltordbms::PackageToSchema in middle.objectsOfKind(PackageToSchema) {
 		call packageToSchema_MR {
 			p2s := p2s;
 		}
 	}
-	for c : simpleuml::Class in simpleuml::Class.allInstances() {
+	for c : simpleuml::Class in uml.objectsOfKind(Class) {
 		call classToTable_LM {
 			c := c;
 			p := c.namespace;
 			p2s := c.namespace.middle;
 		}
 	}
-	for c2t : umltordbms::ClassToTable in umltordbms::ClassToTable.allInstances() {
+	for c2t : umltordbms::ClassToTable in middle.objectsOfKind(ClassToTable) {
 		call classToTable_MR {
 			c2t := c2t;
 			p2s := c2t.owner;
 			s := c2t.owner.schema;
 		}
 	}
-	for a : simpleuml::Association in simpleuml::Association.allInstances() {
+	for a : simpleuml::Association in uml.objectsOfKind(Association) {
 		call associationToForeignKey_LM {
 			a := a;
 			sc := a.source;
@@ -393,8 +396,8 @@ map __root__ in SimpleUML2RDBMS
 			p2s := a.source.middle.owner;
 		}
 	}
-	for a2f : umltordbms::AssociationToForeignKey in umltordbms::AssociationToForeignKey.allInstances() {
-		for rk : simplerdbms::Key in simplerdbms::Key.allInstances() {
+	for a2f : umltordbms::AssociationToForeignKey in middle.objectsOfKind(AssociationToForeignKey) {
+		for rk : simplerdbms::Key in rdbms.objectsOfKind(Key) {
 			call associationToForeignKey_MR {
 				a2f := a2f;
 				rk := rk;
@@ -407,28 +410,28 @@ map __root__ in SimpleUML2RDBMS
 			}
 		}
 	}
-	for prim : simpleuml::PrimitiveDataType in simpleuml::PrimitiveDataType.allInstances() {
+	for prim : simpleuml::PrimitiveDataType in uml.objectsOfKind(PrimitiveDataType) {
 		call stringToVarchar_LM {
 			prim := prim;
 			p := prim.namespace;
 			p2s := prim.namespace.middle;
 		}
 	}
-	for prim : simpleuml::PrimitiveDataType in simpleuml::PrimitiveDataType.allInstances() {
+	for prim : simpleuml::PrimitiveDataType in uml.objectsOfKind(PrimitiveDataType) {
 		call integerToNumber_LM {
 			prim := prim;
 			p := prim.namespace;
 			p2s := prim.namespace.middle;
 		}
 	}
-	for prim : simpleuml::PrimitiveDataType in simpleuml::PrimitiveDataType.allInstances() {
+	for prim : simpleuml::PrimitiveDataType in uml.objectsOfKind(PrimitiveDataType) {
 		call booleanToBoolean_LM {
 			prim := prim;
 			p := prim.namespace;
 			p2s := prim.namespace.middle;
 		}
 	}
-	for a : simpleuml::Attribute in simpleuml::Attribute.allInstances() {
+	for a : simpleuml::Attribute in uml.objectsOfKind(Attribute)->select(type.oclIsKindOf(PrimitiveDataType)) {
 		call classPrimitiveAttributes_LM {
 			a := a;
 			c := a.owner;
@@ -437,25 +440,25 @@ map __root__ in SimpleUML2RDBMS
 			fao := a.owner.middle;
 		}
 	}
-	for p2n : umltordbms::IntegerToNumber in umltordbms::IntegerToNumber.allInstances() {
+	for p2n : umltordbms::IntegerToNumber in middle.objectsOfKind(IntegerToNumber) {
 		call integerToNumber_MR {
 			p2n := p2n;
 			p2s := p2n.owner;
 		}
 	}
-	for p2n : umltordbms::BooleanToBoolean in umltordbms::BooleanToBoolean.allInstances() {
+	for p2n : umltordbms::BooleanToBoolean in middle.objectsOfKind(BooleanToBoolean) {
 		call booleanToBoolean_MR {
 			p2n := p2n;
 			p2s := p2n.owner;
 		}
 	}
-    for p2n : umltordbms::StringToVarchar in umltordbms::StringToVarchar.allInstances() {
+    for p2n : umltordbms::StringToVarchar in middle.objectsOfKind(StringToVarchar) {
 		call stringToVarchar_MR {
 			p2n := p2n;
 			p2s := p2n.owner;
 		}
 	}
-	for a : simpleuml::Attribute in simpleuml::Attribute.allInstances() {
+	for a : simpleuml::Attribute in uml.objectsOfKind(Attribute) {
 		call classComplexAttributes_LM {
 			a := a;
 			t := a.type;
@@ -463,8 +466,8 @@ map __root__ in SimpleUML2RDBMS
 			fao := a.owner.middle;
 		}
 	}
-	for fao : umltordbms::NonLeafAttribute in umltordbms::NonLeafAttribute.allInstances() {
-		for a : simpleuml::Attribute in simpleuml::Attribute.allInstances() {
+	for fao : umltordbms::NonLeafAttribute in middle.objectsOfKind(NonLeafAttribute) {
+		for a : simpleuml::Attribute in uml.objectsOfKind(Attribute) {
 			call complexAttributeComplexAttributes_LM {
 				a := a;
 				fao := fao;
@@ -474,8 +477,8 @@ map __root__ in SimpleUML2RDBMS
 			}
 		}
 	}
-	for a : simpleuml::Attribute in simpleuml::Attribute.allInstances() {
-		for ca : simpleuml::Attribute in simpleuml::Attribute.allInstances() {
+	for a : simpleuml::Attribute in uml.objectsOfKind(Attribute)->select(type.oclIsKindOf(PrimitiveDataType)) {
+		for ca : simpleuml::Attribute in uml.objectsOfKind(Attribute) {
 			call complexAttributePrimitiveAttributes_LM {
 				a := a;
 				ca := ca;
@@ -486,7 +489,7 @@ map __root__ in SimpleUML2RDBMS
 			}
 		}
 	}
-	for a2c : umltordbms::AttributeToColumn in umltordbms::AttributeToColumn.allInstances() {
+	for a2c : umltordbms::AttributeToColumn in middle.objectsOfKind(AttributeToColumn)->select(owner.oclIsKindOf(umltordbms::ClassToTable)) {
 		call attributeColumns_MR {
 			a2c := a2c;
 			p2n := a2c.type;

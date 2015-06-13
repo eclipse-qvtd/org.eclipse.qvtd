@@ -55,6 +55,7 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNormalizer;
+import org.eclipse.qvtd.xtext.qvtimperative.tests.SimpleUML2RDBMS.SimpleRDBMSNormalizer;
 
 import test.hls.HLSTree.HLSTreePackage;
 import test.hsv.HSVTree.HSVTreePackage;
@@ -247,6 +248,37 @@ public class QVTiCompilerTests extends LoadTestCase
 		assert referenceResource != null;
 		ManualRDBMSNormalizer.INSTANCE.normalize(referenceResource);
 		ManualRDBMSNormalizer.INSTANCE.normalize(outputResource);
+        assertSameModel(referenceResource, outputResource);
+        myQVT.dispose();
+	}
+
+	public void testCG_SimpleUML2RDBMS_qvti() throws Exception {
+    	MyQVT myQVT = createQVT();
+		ResourceSet resourceSet = myQVT.getResourceSet();
+//		Resource umlResource = resourceSet.getResource(URI.createURI(manualuml2rdbms.uml.UMLPackage.eNS_URI, false), false);
+//		Resource rdbmsResource = resourceSet.getResource(URI.createURI(manualuml2rdbms.rdbms.RDBMSPackage.eNS_URI, false), false);
+//		Resource uml2rdbmsResource = resourceSet.getResource(URI.createURI(manualuml2rdbms.uml2rdbms.UML2RDBMSPackage.eNS_URI, false), false);
+		URI transformURI = getProjectFileURI("SimpleUML2RDBMS/SimpleUML2RDBMS.qvti");
+		URI genModelURI = getProjectFileURI("SimpleUML2RDBMS/SimpleUML2RDBMS.genmodel");
+		URI inputModelURI = getProjectFileURI("SimpleUML2RDBMS/SimpleUMLPeople.xmi");
+		URI outputModelURI = getProjectFileURI("SimpleUML2RDBMS/SimpleRDBMSPeople.xmi");
+		URI referenceModelURI = getProjectFileURI("SimpleUML2RDBMS/SimpleRDBMSPeopleValidate.xmi");
+		Transformation asTransformation = loadTransformation(myQVT, transformURI, genModelURI);
+		assert asTransformation != null;
+		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
+		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
+		TransformationEvaluator evaluator = myQVT.createEvaluator(txConstructor);
+		TransformationExecutor tx = evaluator.getTransformationExecutor();
+		Resource inputResource = resourceSet.getResource(inputModelURI, true);
+		tx.addRootObjects("uml", ClassUtil.nonNullState(inputResource.getContents()));
+		tx.run();
+		Resource outputResource = resourceSet.createResource(outputModelURI);
+		outputResource.getContents().addAll(tx.getRootObjects("rdbms"));
+		outputResource.save(getSaveOptions());
+		Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
+		assert referenceResource != null;
+		SimpleRDBMSNormalizer.INSTANCE.normalize(referenceResource);
+		SimpleRDBMSNormalizer.INSTANCE.normalize(outputResource);
         assertSameModel(referenceResource, outputResource);
         myQVT.dispose();
 	}
