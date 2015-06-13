@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -49,6 +50,7 @@ import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getPredicates <em>Predicates</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getRealizedVariables <em>Realized Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getVariableAssignments <em>Variable Assignments</em>}</li>
  * </ul>
  *
  * @generated
@@ -93,6 +95,16 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * @ordered
 	 */
 	protected CGValuedElement body;
+
+	/**
+	 * The cached value of the '{@link #getVariableAssignments() <em>Variable Assignments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariableAssignments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGFinalVariable> variableAssignments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -226,6 +238,19 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public List<CGFinalVariable> getVariableAssignments() {
+		if (variableAssignments == null) {
+			variableAssignments = new EObjectContainmentEList<CGFinalVariable>(CGFinalVariable.class, this, QVTiCGModelPackage.CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS);
+		}
+		return variableAssignments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -254,6 +279,8 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				return ((InternalEList<?>)getRealizedVariables()).basicRemove(otherEnd, msgs);
 			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:
 				return basicSetBody(null, msgs);
+			case QVTiCGModelPackage.CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS:
+				return ((InternalEList<?>)getVariableAssignments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -276,6 +303,8 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				return getRealizedVariables();
 			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:
 				return getBody();
+			case QVTiCGModelPackage.CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS:
+				return getVariableAssignments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -307,6 +336,10 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:
 				setBody((CGValuedElement)newValue);
 				return;
+			case QVTiCGModelPackage.CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS:
+				getVariableAssignments().clear();
+				getVariableAssignments().addAll((Collection<? extends CGFinalVariable>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -334,6 +367,9 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:
 				setBody((CGValuedElement)null);
 				return;
+			case QVTiCGModelPackage.CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS:
+				getVariableAssignments().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -356,6 +392,8 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				return realizedVariables != null && !realizedVariables.isEmpty();
 			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:
 				return body != null;
+			case QVTiCGModelPackage.CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS:
+				return variableAssignments != null && !variableAssignments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

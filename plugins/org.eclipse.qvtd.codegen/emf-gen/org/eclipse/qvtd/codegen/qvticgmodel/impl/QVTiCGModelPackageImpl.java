@@ -516,6 +516,16 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * @generated
 	 */
 	@Override
+	public EReference getCGMappingExp_VariableAssignments() {
+		return (EReference)cgMappingExpEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getCGMappingLoop() {
 		return cgMappingLoopEClass;
 	}
@@ -834,6 +844,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		createEReference(cgMappingExpEClass, CG_MAPPING_EXP__PREDICATES);
 		createEReference(cgMappingExpEClass, CG_MAPPING_EXP__REALIZED_VARIABLES);
 		createEReference(cgMappingExpEClass, CG_MAPPING_EXP__BODY);
+		createEReference(cgMappingExpEClass, CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS);
 
 		cgMappingLoopEClass = createEClass(CG_MAPPING_LOOP);
 
@@ -960,6 +971,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		initEReference(getCGMappingExp_Predicates(), this.getCGPredicate(), this.getCGPredicate_MappingExp(), "predicates", null, 0, -1, CGMappingExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGMappingExp_RealizedVariables(), theCGModelPackage.getCGValuedElement(), null, "realizedVariables", null, 0, -1, CGMappingExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGMappingExp_Body(), theCGModelPackage.getCGValuedElement(), null, "body", null, 0, 1, CGMappingExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGMappingExp_VariableAssignments(), theCGModelPackage.getCGFinalVariable(), null, "variableAssignments", null, 0, -1, CGMappingExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgMappingLoopEClass, CGMappingLoop.class, "CGMappingLoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

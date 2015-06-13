@@ -12,6 +12,7 @@ package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import java.util.List;
 
+import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
 /**
@@ -28,6 +29,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getPredicates <em>Predicates</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getRealizedVariables <em>Realized Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getBody <em>Body</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getVariableAssignments <em>Variable Assignments</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingExp()
@@ -138,5 +140,21 @@ public interface CGMappingExp extends CGValuedElement {
 	 * @generated
 	 */
 	void setBody(CGValuedElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Variable Assignments</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Variable Assignments</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Variable Assignments</em>' containment reference list.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingExp_VariableAssignments()
+	 * @model containment="true"
+	 * @generated
+	 */
+	List<CGFinalVariable> getVariableAssignments();
 
 } // CGMappingExp
