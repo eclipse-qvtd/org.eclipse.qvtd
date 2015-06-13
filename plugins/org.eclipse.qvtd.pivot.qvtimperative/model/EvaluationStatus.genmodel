@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.pivot.qvtimperative/emf-gen"
+    modelPluginID="org.eclipse.qvtd.pivot.qvtimperative" modelName="EvaluationStatus"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="6.0"
+    copyrightFields="false" runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase QVTimperative.genmodel#//qvtimperative"
+    importOrganizing="true">
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Null Annotations" value="true"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString">
+    <details key="org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationElement"
+        value="return &lt;%org.eclipse.qvtd.pivot.qvtimperative.evaluation.EvaluationStatus2StringVisitor%>.toString(this);"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util.EvaluationStatusVisitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util.EvaluationStatusVisitor"/>
+    <details key="Visitable Classes" value="org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationElement"/>
+  </genAnnotations>
+  <foreignModel>EvaluationStatus.ecore</foreignModel>
+  <genPackages prefix="EvaluationStatus" basePackage="org.eclipse.qvtd.pivot.qvtimperative"
+      disposableProviderFactory="true" ecorePackage="EvaluationStatus.ecore#/">
+    <genClasses ecoreClass="EvaluationStatus.ecore#//AssociationStatus">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//AssociationStatus/forwardEReference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//AssociationStatus/fromClassStatuses"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//AssociationStatus/isInput"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//AssociationStatus/isOutput"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//AssociationStatus/owningTransformationStatus"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//AssociationStatus/toClassStatuses"/>
+    </genClasses>
+    <genClasses ecoreClass="EvaluationStatus.ecore#//AttributeStatus">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//AttributeStatus/eFeature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//AttributeStatus/object"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//AttributeStatus/owningClassStatus"/>
+    </genClasses>
+    <genClasses ecoreClass="EvaluationStatus.ecore#//ClassStatus">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//ClassStatus/associationStatuses"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//ClassStatus/eObject"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//ClassStatus/isInput"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//ClassStatus/isOutput"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//ClassStatus/ownedAttributeStatuses"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//ClassStatus/owningTransformationStatus"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//ClassStatus/type"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EvaluationStatus.ecore#//ElementStatus">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//ElementStatus/depth"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//ElementStatus/sources"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//ElementStatus/targets"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="EvaluationStatus.ecore#//EvaluationElement"/>
+    <genClasses ecoreClass="EvaluationStatus.ecore#//MappingStatus">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//MappingStatus/boundValues"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//MappingStatus/depth"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//MappingStatus/inputs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//MappingStatus/isBlocked"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//MappingStatus/isDirty"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//MappingStatus/outputs"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//MappingStatus/owningTransformationStatus"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//MappingStatus/referredMappingCall"/>
+    </genClasses>
+    <genClasses ecoreClass="EvaluationStatus.ecore#//PropertyStatus">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//PropertyStatus/isAssignable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//PropertyStatus/isAssigned"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//PropertyStatus/isDirty"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//PropertyStatus/isError"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EvaluationStatus.ecore#//PropertyStatus/isReady"/>
+    </genClasses>
+    <genClasses ecoreClass="EvaluationStatus.ecore#//TransformationStatus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//TransformationStatus/ownedAssociationStatuses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//TransformationStatus/ownedClassStatuses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EvaluationStatus.ecore#//TransformationStatus/ownedMappingStatuses"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

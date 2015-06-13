@@ -19,6 +19,7 @@ Workflow {
   component = @GenerateQVTdASModels {}
   component = @GenerateQVTdLibraryModels {}
   component = @GenerateQVTdScheduleModels {}
+  component = @GenerateQVTdEvaluationStatusModels {}
   component = @GenerateQVTdCSModels {}
   component = @GenerateQVTdCGModels {}
   component = @GenerateQVTcoreBaseEditor {}

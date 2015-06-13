@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Ecore="http://www.eclipse.org/uml2/schemas/Ecore/5" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Ecore/5 pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA">
+  <uml:Model xmi:id="_lGFf4NhqEeS_WecIsDb67A" name="qvtimperative" URI="http://www.eclipse.org/qvt/2015/QVTimperative">
+    <ownedComment xmi:id="_lGFf4dhqEeS_WecIsDb67A" annotatedElement="_lGFf4NhqEeS_WecIsDb67A">
+      <body>The Package for an Imperative QVT transformation.</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:Class" xmi:id="_lGFf4thqEeS_WecIsDb67A" name="ImperativeModel">
+      <ownedComment xmi:id="_lGFf49hqEeS_WecIsDb67A" annotatedElement="_lGFf4thqEeS_WecIsDb67A">
+        <body>The Model of an Imperative QVT transformation.</body>
+      </ownedComment>
+      <generalization xmi:id="_lGFf5NhqEeS_WecIsDb67A">
+        <general xmi:type="uml:Class" href="qvtbase.uml#_lG-4HdhqEeS_WecIsDb67A"/>
+      </generalization>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_lGFf5dhqEeS_WecIsDb67A" name="MappingCall">
+      <ownedComment xmi:id="_lGFf5thqEeS_WecIsDb67A" annotatedElement="_lGFf5dhqEeS_WecIsDb67A">
+        <body>A MappingCall specifies the invocation of a referredMapping with a set of bindings
+of the bound variables of the referredMapping to values provided in the invocation.
+Where Collections of values are provided for isLoop bindings, a distinct invocation
+is performed for each distinct permutation of Collection elements.</body>
+      </ownedComment>
+      <generalization xmi:id="_lGFf59hqEeS_WecIsDb67A" general="_lGFf79hqEeS_WecIsDb67A"/>
+      <ownedAttribute xmi:id="_lGFf6NhqEeS_WecIsDb67A" name="referredMapping" type="_lGFgJNhqEeS_WecIsDb67A" isOrdered="true" association="_lGFf8thqEeS_WecIsDb67A">
+        <ownedComment xmi:id="_lGFf6dhqEeS_WecIsDb67A" annotatedElement="_lGFf6NhqEeS_WecIsDb67A">
+          <body>The Mapping invoked by the MappingCall.</body>
+        </ownedComment>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_lGFf6thqEeS_WecIsDb67A" name="binding" type="_lGFf9NhqEeS_WecIsDb67A" aggregation="composite" association="_lGFgAdhqEeS_WecIsDb67A">
+        <ownedComment xmi:id="_lGFf69hqEeS_WecIsDb67A" annotatedElement="_lGFf6thqEeS_WecIsDb67A">
+          <body>The Set of value to bound variable bindings.</body>
+        </ownedComment>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lGFf7NhqEeS_WecIsDb67A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lGFf7dhqEeS_WecIsDb67A" value="*"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:id="_lGFf7thqEeS_WecIsDb67A" client="_lGFf5dhqEeS_WecIsDb67A">
+        <supplier xmi:type="uml:Interface" href="pivot.uml#_lH4Uz9hqEeS_WecIsDb67A"/>
+        <contract href="pivot.uml#_lH4Uz9hqEeS_WecIsDb67A"/>
+      </interfaceRealization>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_lGFf79hqEeS_WecIsDb67A" name="MappingStatement" isAbstract="true">
+      <ownedComment xmi:id="_lGFf8NhqEeS_WecIsDb67A" annotatedElement="_lGFf79hqEeS_WecIsDb67A">
+        <body>A MappingCall specifies the invocation of a referredMapping with a set of bindings
+of the bound variables of the referredMapping to values provided in the invocation.
+Where Collections of values are provided for isLoop bindings, a distinct invocation
+is performed for each distinct permutation of Collection elements.</body>
+      </ownedComment>
+      <generalization xmi:id="_lGFf8dhqEeS_WecIsDb67A">
+        <general xmi:type="uml:Class" href="pivot.uml#_lH4S3thqEeS_WecIsDb67A"/>
+      </generalization>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_lGFf8thqEeS_WecIsDb67A" memberEnd="_lGFf6NhqEeS_WecIsDb67A _lGFf89hqEeS_WecIsDb67A">
+      <ownedEnd xmi:id="_lGFf89hqEeS_WecIsDb67A" type="_lGFf5dhqEeS_WecIsDb67A" association="_lGFf8thqEeS_WecIsDb67A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_lGFf9NhqEeS_WecIsDb67A" name="MappingCallBinding">
+      <ownedComment xmi:id="_lGFf9dhqEeS_WecIsDb67A" annotatedElement="_lGFf9NhqEeS_WecIsDb67A">
+        <body>A MappingCallBinding specifies the binding of a single variable as part of
+a MappingCall. A value is bound to the variable. OPtionally isLoop may be true
+to indicate that the value is a collection of values, each of which is to
+be used as part of a distinct invocation.</body>
+      </ownedComment>
+      <generalization xmi:id="_lGFf9thqEeS_WecIsDb67A">
+        <general xmi:type="uml:Class" href="pivot.uml#_lH4P1thqEeS_WecIsDb67A"/>
+      </generalization>
+      <ownedAttribute xmi:id="_lGFf99hqEeS_WecIsDb67A" name="mappingCall" type="_lGFf5dhqEeS_WecIsDb67A" isOrdered="true" association="_lGFgAdhqEeS_WecIsDb67A">
+        <ownedComment xmi:id="_lGFf-NhqEeS_WecIsDb67A" annotatedElement="_lGFf99hqEeS_WecIsDb67A">
+          <body>The containing MappingCall.</body>
+        </ownedComment>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lGFf-dhqEeS_WecIsDb67A"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_lGFf-thqEeS_WecIsDb67A" name="boundVariable" isOrdered="true" association="_lGFgAthqEeS_WecIsDb67A">
+        <ownedComment xmi:id="_lGFf-9hqEeS_WecIsDb67A" annotatedElement="_lGFf-thqEeS_WecIsDb67A">
+          <body>The variable with the mappingCall.referredMapping bound to the/a value</body>
+        </ownedComment>
+        <type xmi:type="uml:Class" href="pivot.uml#_lH4UOthqEeS_WecIsDb67A"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_lGFf_NhqEeS_WecIsDb67A" name="isPolled" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pivot.uml#_lH4PodhqEeS_WecIsDb67A"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lGFf_dhqEeS_WecIsDb67A"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_lGFf_thqEeS_WecIsDb67A" value="false"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_lGFf_9hqEeS_WecIsDb67A" name="value" isOrdered="true" aggregation="composite" association="_lGFgBNhqEeS_WecIsDb67A">
+        <ownedComment xmi:id="_lGFgANhqEeS_WecIsDb67A" annotatedElement="_lGFf_9hqEeS_WecIsDb67A">
+          <body>The value or collection of values to bind to boundVariable</body>
+        </ownedComment>
+        <type xmi:type="uml:Class" href="pivot.uml#_lH4S3thqEeS_WecIsDb67A"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_lGFgAdhqEeS_WecIsDb67A" memberEnd="_lGFf6thqEeS_WecIsDb67A _lGFf99hqEeS_WecIsDb67A"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_lGFgAthqEeS_WecIsDb67A" memberEnd="_lGFf-thqEeS_WecIsDb67A _lGFgA9hqEeS_WecIsDb67A">
+      <ownedEnd xmi:id="_lGFgA9hqEeS_WecIsDb67A" type="_lGFf9NhqEeS_WecIsDb67A" association="_lGFgAthqEeS_WecIsDb67A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_lGFgBNhqEeS_WecIsDb67A" memberEnd="_lGFf_9hqEeS_WecIsDb67A _lGFgBdhqEeS_WecIsDb67A">
+      <ownedEnd xmi:id="_lGFgBdhqEeS_WecIsDb67A" type="_lGFf9NhqEeS_WecIsDb67A" association="_lGFgBNhqEeS_WecIsDb67A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_lGFgBthqEeS_WecIsDb67A" name="MappingLoop">
+      <ownedComment xmi:id="_lGFgB9hqEeS_WecIsDb67A" annotatedElement="_lGFgBthqEeS_WecIsDb67A">
+        <body>An Imperative MappingLoop support an iterated nested mapping call.</body>
+      </ownedComment>
+      <generalization xmi:id="_lGFgCNhqEeS_WecIsDb67A">
+        <general xmi:type="uml:Class" href="pivot.uml#_lH4Uo9hqEeS_WecIsDb67A"/>
+      </generalization>
+      <generalization xmi:id="_lGFgCdhqEeS_WecIsDb67A" general="_lGFf79hqEeS_WecIsDb67A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_lGFgCthqEeS_WecIsDb67A" name="MappingSequence">
+      <ownedComment xmi:id="_lGFgC9hqEeS_WecIsDb67A" annotatedElement="_lGFgCthqEeS_WecIsDb67A">
+        <body>A MappingSequence specifies a sequence of mapping statements</body>
+      </ownedComment>
+      <generalization xmi:id="_lGFgDNhqEeS_WecIsDb67A" general="_lGFf79hqEeS_WecIsDb67A"/>
+      <ownedAttribute xmi:id="_lGFgDdhqEeS_WecIsDb67A" name="mappingStatements" type="_lGFf79hqEeS_WecIsDb67A" isOrdered="true" aggregation="composite" association="_lGFgENhqEeS_WecIsDb67A">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lGFgDthqEeS_WecIsDb67A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lGFgD9hqEeS_WecIsDb67A" value="*"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_lGFgENhqEeS_WecIsDb67A" memberEnd="_lGFgDdhqEeS_WecIsDb67A _lGFgEdhqEeS_WecIsDb67A">
+      <ownedEnd xmi:id="_lGFgEdhqEeS_WecIsDb67A" type="_lGFgCthqEeS_WecIsDb67A" association="_lGFgENhqEeS_WecIsDb67A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_lGFgEthqEeS_WecIsDb67A" name="MiddlePropertyAssignment">
+      <ownedComment xmi:id="_lGFgE9hqEeS_WecIsDb67A" annotatedElement="_lGFgEthqEeS_WecIsDb67A">
+        <body>A MiddlePropertyAssignment identifies a property assignment to the middle model.
+It adds an additional feature to facilitate efficient access to a cache of
+non-navigable outer-to-middle opposites.</body>
+      </ownedComment>
+      <generalization xmi:id="_lGFgFNhqEeS_WecIsDb67A">
+        <general xmi:type="uml:Class" href="qvtcorebase.uml#_lJEiw9hqEeS_WecIsDb67A"/>
+      </generalization>
+      <ownedAttribute xmi:id="_lGFgFdhqEeS_WecIsDb67A" name="cacheIndex" visibility="public" isOrdered="true">
+        <ownedComment xmi:id="_lGFgFthqEeS_WecIsDb67A" annotatedElement="_lGFgFdhqEeS_WecIsDb67A">
+          <body>Identification of the cache of unnavigable opposites to be maintained
+by this property assignment. May be null if no cache is required.</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EIntegerObject"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lGFgF9hqEeS_WecIsDb67A"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_lGFgGNhqEeS_WecIsDb67A" name="MiddlePropertyCallExp">
+      <ownedComment xmi:id="_lGFgGdhqEeS_WecIsDb67A" annotatedElement="_lGFgGNhqEeS_WecIsDb67A">
+        <body>A MiddlePropertyCallExp identifies a property call from the middle model.
+It adds an additional feature to facilitate efficient access to a cache of
+non-navigable outer-to-middle opposites.</body>
+      </ownedComment>
+      <generalization xmi:id="_lGFgGthqEeS_WecIsDb67A">
+        <general xmi:type="uml:Class" href="pivot.uml#_lH4WSthqEeS_WecIsDb67A"/>
+      </generalization>
+      <ownedAttribute xmi:id="_lGFgG9hqEeS_WecIsDb67A" name="cacheIndex" visibility="public" isOrdered="true">
+        <ownedComment xmi:id="_lGFgHNhqEeS_WecIsDb67A" annotatedElement="_lGFgG9hqEeS_WecIsDb67A">
+          <body>Identification of the cache of unnavigable opposites to be exploited
+by this property call. Should not be null during execution.</body>
+        </ownedComment>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EIntegerObject"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lGFgHdhqEeS_WecIsDb67A"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_lGFgHthqEeS_WecIsDb67A" name="VariablePredicate">
+      <ownedComment xmi:id="_lGFgH9hqEeS_WecIsDb67A" annotatedElement="_lGFgHthqEeS_WecIsDb67A">
+        <body>A VariablePredicate validates the initialization of a guard pattern varaible.</body>
+      </ownedComment>
+      <generalization xmi:id="_lGFgINhqEeS_WecIsDb67A">
+        <general xmi:type="uml:Class" href="qvtbase.uml#_lG-4FNhqEeS_WecIsDb67A"/>
+      </generalization>
+      <ownedAttribute xmi:id="_lGFgIdhqEeS_WecIsDb67A" name="targetVariable" isOrdered="true" association="_lGFgIthqEeS_WecIsDb67A">
+        <type xmi:type="uml:Class" href="pivot.uml#_lH4UOthqEeS_WecIsDb67A"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_lGFgIthqEeS_WecIsDb67A" memberEnd="_lGFgIdhqEeS_WecIsDb67A _lGFgI9hqEeS_WecIsDb67A">
+      <ownedEnd xmi:id="_lGFgI9hqEeS_WecIsDb67A" type="_lGFgHthqEeS_WecIsDb67A" association="_lGFgIthqEeS_WecIsDb67A"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_lGFgJNhqEeS_WecIsDb67A" name="Mapping">
+      <ownedComment xmi:id="_lGFgJdhqEeS_WecIsDb67A" annotatedElement="_lGFgJNhqEeS_WecIsDb67A">
+        <body>An Imperative Mapping extends the abstract declarative mapping to support
+explicit nested invocation of mappings with bindings for the invoked mapping's
+bound variables.</body>
+      </ownedComment>
+      <ownedAttribute xmi:id="_lGFgJthqEeS_WecIsDb67A" name="mappingStatement" type="_lGFf79hqEeS_WecIsDb67A" isOrdered="true" aggregation="composite" association="_lGFgLdhqEeS_WecIsDb67A">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lGFgJ9hqEeS_WecIsDb67A"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:id="_lGFgKNhqEeS_WecIsDb67A" client="_lGFgJNhqEeS_WecIsDb67A">
+        <supplier xmi:type="uml:Interface" href="qvtcorebase.uml#_lJEicdhqEeS_WecIsDb67A"/>
+        <contract href="qvtcorebase.uml#_lJEicdhqEeS_WecIsDb67A"/>
+      </interfaceRealization>
+      <ownedOperation xmi:id="_lGFgKdhqEeS_WecIsDb67A" name="getAllMappings" visibility="public">
+        <ownedParameter xmi:id="_lGFgKthqEeS_WecIsDb67A" type="_lGFgJNhqEeS_WecIsDb67A" direction="return">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lGFgK9hqEeS_WecIsDb67A"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lGFgLNhqEeS_WecIsDb67A" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_lGFgLdhqEeS_WecIsDb67A" memberEnd="_lGFgJthqEeS_WecIsDb67A _lGFgLthqEeS_WecIsDb67A">
+      <ownedEnd xmi:id="_lGFgLthqEeS_WecIsDb67A" type="_lGFgJNhqEeS_WecIsDb67A" association="_lGFgLdhqEeS_WecIsDb67A"/>
+    </packagedElement>
+    <profileApplication xmi:id="_lGFgL9hqEeS_WecIsDb67A">
+      <eAnnotations xmi:id="_lGFgMNhqEeS_WecIsDb67A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Ecore.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <Ecore:EPackage xmi:id="_lGFgMdhqEeS_WecIsDb67A" base_Package="_lGFf4NhqEeS_WecIsDb67A" nsPrefix="qvti">
+    <annotation>http://www.eclipse.org/OCL/Import qvtb='../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/' qvtcb='../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/'</annotation>
+  </Ecore:EPackage>
+  <Ecore:EClass xmi:id="_lGFgMthqEeS_WecIsDb67A" base_Class="_lGFf4thqEeS_WecIsDb67A"/>
+  <Ecore:EClass xmi:id="_lGFgM9hqEeS_WecIsDb67A" base_Class="_lGFf5dhqEeS_WecIsDb67A"/>
+  <Ecore:EReference xmi:id="_lGFgNNhqEeS_WecIsDb67A" base_Property="_lGFf6NhqEeS_WecIsDb67A"/>
+  <Ecore:EReference xmi:id="_lGFgNdhqEeS_WecIsDb67A" base_Property="_lGFf6thqEeS_WecIsDb67A"/>
+  <Ecore:EClass xmi:id="_lGFgNthqEeS_WecIsDb67A" base_Class="_lGFf79hqEeS_WecIsDb67A"/>
+  <Ecore:EClass xmi:id="_lGFgN9hqEeS_WecIsDb67A" base_Class="_lGFf9NhqEeS_WecIsDb67A"/>
+  <Ecore:EReference xmi:id="_lGFgONhqEeS_WecIsDb67A" base_Property="_lGFf99hqEeS_WecIsDb67A"/>
+  <Ecore:EReference xmi:id="_lGFgOdhqEeS_WecIsDb67A" base_Property="_lGFf-thqEeS_WecIsDb67A"/>
+  <Ecore:EReference xmi:id="_lGFgOthqEeS_WecIsDb67A" base_Property="_lGFf_9hqEeS_WecIsDb67A"/>
+  <Ecore:EClass xmi:id="_lGFgO9hqEeS_WecIsDb67A" base_Class="_lGFgBthqEeS_WecIsDb67A"/>
+  <Ecore:EClass xmi:id="_lGFgPNhqEeS_WecIsDb67A" base_Class="_lGFgCthqEeS_WecIsDb67A"/>
+  <Ecore:EReference xmi:id="_lGFgPdhqEeS_WecIsDb67A" base_Property="_lGFgDdhqEeS_WecIsDb67A"/>
+  <Ecore:EClass xmi:id="_lGFgPthqEeS_WecIsDb67A" base_Class="_lGFgEthqEeS_WecIsDb67A"/>
+  <Ecore:EClass xmi:id="_lGFgP9hqEeS_WecIsDb67A" base_Class="_lGFgGNhqEeS_WecIsDb67A"/>
+  <Ecore:EClass xmi:id="_lGFgQNhqEeS_WecIsDb67A" base_Class="_lGFgHthqEeS_WecIsDb67A"/>
+  <Ecore:EReference xmi:id="_lGFgQdhqEeS_WecIsDb67A" base_Property="_lGFgIdhqEeS_WecIsDb67A"/>
+  <Ecore:EClass xmi:id="_lGFgQthqEeS_WecIsDb67A" base_Class="_lGFgJNhqEeS_WecIsDb67A"/>
+  <Ecore:EReference xmi:id="_lGFgQ9hqEeS_WecIsDb67A" base_Property="_lGFgJthqEeS_WecIsDb67A"/>
+  <Ecore:EOperation xmi:id="_lGFgRNhqEeS_WecIsDb67A" base_Operation="_lGFgKdhqEeS_WecIsDb67A"/>
+</xmi:XMI>

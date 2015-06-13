@@ -53,6 +53,14 @@
      	extension="qvtimperative" contentType="org.eclipse.qvtd.qvtimperative"/>
   </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated EvaluationStatus -->
+      <package
+            uri="http://www.eclipse.org/qvt/2015/EvaluationStatus"
+            class="org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationStatusPackage"
+            genModel="model/EvaluationStatus.genmodel"/>
+   </extension>
+
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvtias" type="text" />
    </extension>
