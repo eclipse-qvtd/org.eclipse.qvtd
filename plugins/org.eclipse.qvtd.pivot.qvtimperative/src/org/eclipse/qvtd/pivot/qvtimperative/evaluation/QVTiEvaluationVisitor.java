@@ -70,21 +70,28 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
         
     /**
      * Instantiates a new qV tcore evaluation visitor impl.
-     * 
-     * @param env
-     *            the env
-     * @param evalEnv
-     *            the eval env
      */
     public QVTiEvaluationVisitor(@NonNull ExecutorInternal executor) {
         super(executor);
 		this.transformationAnalysis = ((QVTiModelManager)executor.getModelManager()).getTransformationAnalysis();
     }
 
-	protected void doMappingStatements(@NonNull List<MappingStatement> mappingStatements) {
-	}
-
 	protected void doCommits(@NonNull Mapping mapping) {
+		for (Domain domain : mapping.getDomain()) {
+			if (domain.isIsEnforceable()) {
+				CoreDomain enforceableDomain = (CoreDomain)domain;
+				BottomPattern enforceableBottomPattern = enforceableDomain.getBottomPattern();
+				for (RealizedVariable realizedVariable : enforceableBottomPattern.getRealizedVariable()) {
+					realizedVariable.accept(undecoratedVisitor);
+				}
+			}
+		}
+		BottomPattern middleBottomPattern = mapping.getBottomPattern();
+		for (Assignment assignment : middleBottomPattern.getAssignment()) {
+			if (assignment instanceof PropertyAssignment) {
+				assignment.accept(undecoratedVisitor);
+			}
+		}
 		for (Domain domain : mapping.getDomain()) {
 			if (domain.isIsEnforceable()) {
 				CoreDomain enforceableDomain = (CoreDomain)domain;
@@ -120,9 +127,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				BottomPattern enforceableBottomPattern = enforceableDomain.getBottomPattern();
 				assert enforceableBottomPattern.getAssignment().isEmpty();
 				assert enforceableBottomPattern.getPredicate().isEmpty();
-				for (RealizedVariable realizedVariable : enforceableBottomPattern.getRealizedVariable()) {
-					realizedVariable.accept(undecoratedVisitor);
-				}
 				for (Variable rVar : enforceableBottomPattern.getVariable()) {
 					OCLExpression ownedInit = rVar.getOwnedInit();
 					if (ownedInit != null) {
@@ -136,14 +140,15 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		assert middleBottomPattern.getEnforcementOperation().isEmpty();
 		assert middleBottomPattern.getPredicate().isEmpty();
 		assert middleBottomPattern.getRealizedVariable().isEmpty();
-//		assert middleBottomPattern.getVariable().isEmpty();
-		for (Assignment assignment : middleBottomPattern.getAssignment()) {
-			if (!(assignment instanceof PropertyAssignment)) {
-				assignment.accept(undecoratedVisitor);
+		for (Variable rVar : middleBottomPattern.getVariable()) {
+			OCLExpression ownedInit = rVar.getOwnedInit();
+			if (ownedInit != null) {
+				Object initValue = ownedInit.accept(undecoratedVisitor);
+				context.replace(rVar, initValue);
 			}
 		}
 		for (Assignment assignment : middleBottomPattern.getAssignment()) {
-			if (assignment instanceof PropertyAssignment) {
+			if (!(assignment instanceof PropertyAssignment)) {
 				assignment.accept(undecoratedVisitor);
 			}
 		}
@@ -173,7 +178,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			if (cacheIndex != null) {
 				((QVTiModelManager)context.getModelManager()).setUnnavigableOpposite(cacheIndex, slotExpValue, ecoreValue);
 			}
-			return;
 		} else {
 			throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
 				+ " specification. The assigment slot expression evaluates to non-ecore value");
@@ -258,157 +262,43 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
     @Override
-    public @Nullable Object visitBottomPattern(@NonNull BottomPattern bottomPattern) {
-        
-    	Object result = true;
-        Area area = bottomPattern.getArea();
-        if (area instanceof CoreDomain) {
-        	assert bottomPattern.getAssignment().isEmpty();
-        	assert bottomPattern.getVariable().isEmpty();
-        	for (Predicate predicate : bottomPattern.getPredicate()) {
-        		result = predicate.accept(undecoratedVisitor);
-        		if (result != Boolean.TRUE) {
-        			break;
-        		}
-            }
-            for (RealizedVariable rVar : bottomPattern.getRealizedVariable()) {
-                rVar.accept(undecoratedVisitor);
-            }
-//            for (Assignment assigment : bottomPattern.getAssignment()) {
-//                assigment.accept(undecoratedVisitor);
-//            }
-            for (EnforcementOperation enforceOp : bottomPattern.getEnforcementOperation()) {
-                enforceOp.accept(undecoratedVisitor);
-            }
-        	return result;
-        }
-        // LtoM Mapping. The bottomPattern belongs to a Mapping and it is visited once per
-        // binding of the L domain. The bottom pattern should have the realized variables of the
-        // middle model. Use the assignments to set values to their properties
-        else {
-        	assert area instanceof Mapping;
-        	assert bottomPattern.getPredicate().isEmpty();
-        	assert bottomPattern.getRealizedVariable().isEmpty();
-//        	assert bottomPattern.getVariable().isEmpty();
-        	assert bottomPattern.getEnforcementOperation().isEmpty();
-            for (Variable rVar : bottomPattern.getVariable()) {
-            	OCLExpression ownedInit = rVar.getOwnedInit();
-                if (ownedInit != null) {
-                	Object initValue = ownedInit.accept(undecoratedVisitor);
-                	context.replace(rVar, initValue);
-                }
-            }
-//            for (RealizedVariable rVar : bottomPattern.getRealizedVariable()) {
-//                rVar.accept(undecoratedVisitor);
-//            }
-            for (Assignment assignment : bottomPattern.getAssignment()) {
-                if (assignment instanceof VariableAssignment) {
-                	assignment.accept(undecoratedVisitor);
-                }
-            }
-            for (Assignment assignment : bottomPattern.getAssignment()) {
-                if (!(assignment instanceof VariableAssignment)) {
-                	assignment.accept(undecoratedVisitor);
-                }
-            }
-//            for (EnforcementOperation enforceOp : bottomPattern.getEnforcementOperation()) {
-//                enforceOp.accept(undecoratedVisitor);
-//            }
-        }
-        return result;
+    public @Nullable Object visitBottomPattern(@NonNull BottomPattern object) {
+		return visiting(object);
     }
     
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor#visitCoreDomain(org
-     * .eclipse.qvtd.pivot.qvtcore.CoreDomain)
-     */
     @Override
-	public @Nullable Object visitCoreDomain(@NonNull CoreDomain coreDomain) {
-        
-    	/* Bindings are set by the caller, just test the predicates */
-    	Object result = coreDomain.getGuardPattern().accept(undecoratedVisitor);
-    	if (result == Boolean.TRUE) {
-    		coreDomain.getBottomPattern().accept(undecoratedVisitor);
-    	}
-    	return result;
-        /* THERE SHOULD BE NO VARIABLES OR PREDICATES IN THE BottomPattern
-        for (Map.Entry<Variable, Set<Object>> entry : guardBindings.entrySet()) {
-            Variable var = entry.getKey();
-            for (Object e : entry.getValue()) {
-                evaluationEnvironment.replace(var, e);
-                coreDomain.getBottomPattern().accept(undecoratedVisitor); 
-            }
-        }*/
+	public @Nullable Object visitCoreDomain(@NonNull CoreDomain object) {
+		return visiting(object);
     }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitDomain(org.eclipse.qvtd.pivot.qvtbase.Domain)
-	 */
 	@Override
 	public @Nullable Object visitDomain(@NonNull Domain object) {
 		return visiting(object);
 	}
 
-    /* (non-Javadoc)
-     * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitCorePattern(org.eclipse.qvtd.pivot.qvtcorebase.CorePattern)
-     */
     @Override
 	public @Nullable Object visitCorePattern(@NonNull CorePattern object) {
 		return visiting(object);
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation)
-     */
     @Override
 	public @Nullable Object visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		return visiting(object);
     }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitFunction(org.eclipse.qvtd.pivot.qvtbase.Function)
-	 */
 	@Override
 	public @Nullable Object visitFunction(@NonNull Function object) {
 		return visiting(object);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.FunctionParameter)
-	 */
 	@Override
 	public @Nullable Object visitFunctionParameter(@NonNull FunctionParameter object) {
 		return visiting(object);
 	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor#visitGuardPattern(
-     * org.eclipse.qvtd.pivot.qvtcore.GuardPattern)
-     */
 	@Override
-	public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
-        for (Predicate predicate : guardPattern.getPredicate()) {
-            // If the predicate is not true, the binding is not valid
-            Object result = predicate.accept(undecoratedVisitor);
-            if (result != Boolean.TRUE) {
-            	return false;
-            }
-        }
-        // NB guard 1 variable may be initialized by guard 2 VariablePredicate
-/*        for (Variable v : guardPattern.getVariable()) {
-        	// Check for binding initialization
-        	if (evaluationEnvironment.getValueOf(v) == null) {
-        		logger.warn("Missing binding for " + v + " in " + QVTimperativeUtil.getContainingMapping(guardPattern));
-            	return false;
-			}
-		} */
-        return true;
+	public @Nullable Object visitGuardPattern(@NonNull GuardPattern object) {
+		return visiting(object);
     }
 
 	@Override
@@ -437,34 +327,29 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
      */
 	@Override
 	public @Nullable Object visitMapping(@NonNull Mapping mapping) {
-        GuardPattern gp = mapping.getGuardPattern();
-        if (gp != null) {
-        	Object result = gp.accept(undecoratedVisitor);
-            if (result != Boolean.TRUE) {
-            	return null;
-            }
-        }
-/*        for (Domain domain : mapping.getDomain()) {
-            if (domain.isIsCheckable()) {
-            	Object result = domain.accept(undecoratedVisitor);
-                if (result != Boolean.TRUE) {
-                	return result;
-                }
-           }
-        } */
-        for (Domain domain : mapping.getDomain()) {
-            if (domain.isIsEnforceable()) {
-            	domain.accept(undecoratedVisitor);
-           }
-        }
-        /*result =*/ mapping.getBottomPattern().accept(undecoratedVisitor);
-//      if (result == Boolean.TRUE) {
-			MappingStatement mappingStatement = mapping.getMappingStatement();
-			if (mappingStatement != null) {
-				mappingStatement.accept(undecoratedVisitor);
-			}
-//    	}
-        return null;
+		//
+		//	Check the predicates
+		//
+		if (!doPredicates(mapping)) {
+			return false;
+		}
+		//
+		//	Evaluate the enforceable domain expressions.
+		//
+		doEvaluations(mapping);
+		//
+		//	Perform the instance model addition and property assignment only after all expressions have been evaluated
+		//	possibly throwing a not-ready exception that bypasses premature commits.
+		//
+		doCommits(mapping);
+		//
+		//	Invoke any corrolaries
+		//
+ 		MappingStatement mappingStatement = mapping.getMappingStatement();
+		if (mappingStatement != null) {
+			mappingStatement.accept(undecoratedVisitor);
+		}
+        return true;
     }
 
 	/* (non-Javadoc)
@@ -597,35 +482,25 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
         return true;
     }
 
-	/*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor#visitRealizedVariable
-     * (org.eclipse.qvtd.pivot.qvtcore.RealizedVariable)
-     */
     @Override
 	public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable realizedVariable) {
-        
         // Realized variables are in the mapping's target bottom pattern
         // and create elements in the target model. The realized variables
         // are being visited for each binding of variable in the mapping. 
-        Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
         Type type = realizedVariable.getType();
-		Object element = type instanceof org.eclipse.ocl.pivot.Class ? ((org.eclipse.ocl.pivot.Class)type).createInstance() : null;
-        if (element != null) {
-	        TypedModel tm = QVTcoreBaseUtil.getTypedModel(area);
-	        assert tm != null;
-	        ((QVTiModelManager)context.getModelManager()).addModelElement(tm, element);
-	        // Add the realize variable binding to the environment
-	        context.replace(realizedVariable, element);
+        if (!(type instanceof org.eclipse.ocl.pivot.Class)) {
+        	return null;
         }
-        return element;
+        Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
+        TypedModel typedModel = QVTcoreBaseUtil.getTypedModel(area);
+        assert typedModel != null;
+		Object element = ((org.eclipse.ocl.pivot.Class)type).createInstance();
+        // Add the realize variable binding to the environment
+        context.replace(realizedVariable, element);
+        ((QVTiModelManager)context.getModelManager()).addModelElement(typedModel, element);
+        return true;
     }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitRule(org.eclipse.qvtd.pivot.qvtbase.Rule)
-	 */
 	@Override
 	public @Nullable Object visitRule(@NonNull Rule object) {
 		return visiting(object);
