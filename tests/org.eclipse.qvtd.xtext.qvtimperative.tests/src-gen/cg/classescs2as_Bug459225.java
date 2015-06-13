@@ -215,7 +215,6 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
         final List<PackageCS> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, PackageCS.class);
         assert UNBOXED_allInstances != null;
-        ;
         for (PackageCS packageCS_1 : UNBOXED_allInstances) {
             if (packageCS_1 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS symbol_1 = (PackageCS)packageCS_1;

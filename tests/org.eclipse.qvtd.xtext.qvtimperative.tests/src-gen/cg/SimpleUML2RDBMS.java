@@ -1678,7 +1678,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Package, models[0/*uml*/], TYP_uml_c_c_Package_0);
         final List<Package> UNBOXED_objectsOfKind = objectsOfKind.asEcoreObjects(idResolver, Package.class);
         assert UNBOXED_objectsOfKind != null;
-        ;
         for (Package p_11 : UNBOXED_objectsOfKind) {
             if (p_11 != null) {
                 final @NonNull /*@NonInvalid*/ Package symbol_1 = (Package)p_11;
@@ -1690,7 +1689,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_0 = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageToSchema, models[2/*middle*/], TYP_uml2rdbms_c_c_PackageToSchema_0);
         final List<PackageToSchema> UNBOXED_objectsOfKind_0 = objectsOfKind_0.asEcoreObjects(idResolver, PackageToSchema.class);
         assert UNBOXED_objectsOfKind_0 != null;
-        ;
         for (PackageToSchema p2s_21 : UNBOXED_objectsOfKind_0) {
             if (p2s_21 != null) {
                 final @NonNull /*@NonInvalid*/ PackageToSchema symbol_5 = (PackageToSchema)p2s_21;
@@ -1702,7 +1700,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_1 = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Class, models[0/*uml*/], TYP_uml_c_c_Class_0);
         final List<simpleuml2rdbms.uml.Class> UNBOXED_objectsOfKind_1 = objectsOfKind_1.asEcoreObjects(idResolver, simpleuml2rdbms.uml.Class.class);
         assert UNBOXED_objectsOfKind_1 != null;
-        ;
         for (simpleuml2rdbms.uml.Class c_9 : UNBOXED_objectsOfKind_1) {
             if (c_9 != null) {
                 final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class symbol_9 = (simpleuml2rdbms.uml.Class)c_9;
@@ -1721,7 +1718,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_2 = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassToTable, models[2/*middle*/], TYP_uml2rdbms_c_c_ClassToTable_0);
         final List<ClassToTable> UNBOXED_objectsOfKind_2 = objectsOfKind_2.asEcoreObjects(idResolver, ClassToTable.class);
         assert UNBOXED_objectsOfKind_2 != null;
-        ;
         for (ClassToTable c2t_3 : UNBOXED_objectsOfKind_2) {
             if (c2t_3 != null) {
                 final @NonNull /*@NonInvalid*/ ClassToTable symbol_15 = (ClassToTable)c2t_3;
@@ -1741,7 +1737,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_3 = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Association, models[0/*uml*/], TYP_uml_c_c_Association_0);
         final List<Association> UNBOXED_objectsOfKind_3 = objectsOfKind_3.asEcoreObjects(idResolver, Association.class);
         assert UNBOXED_objectsOfKind_3 != null;
-        ;
         for (Association a_9 : UNBOXED_objectsOfKind_3) {
             if (a_9 != null) {
                 final @NonNull /*@NonInvalid*/ Association symbol_21 = (Association)a_9;
@@ -1778,14 +1773,12 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_4 = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_AssociationToForeignKey, models[2/*middle*/], TYP_uml2rdbms_c_c_AssociationToForeignKey_0);
         final List<AssociationToForeignKey> UNBOXED_objectsOfKind_4 = objectsOfKind_4.asEcoreObjects(idResolver, AssociationToForeignKey.class);
         assert UNBOXED_objectsOfKind_4 != null;
-        ;
         for (AssociationToForeignKey a2f_1 : UNBOXED_objectsOfKind_4) {
             if (a2f_1 != null) {
                 final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_rdbms_c_c_Key_0 = idResolver.getClass(CLSSid_Key, null);
                 final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_5 = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Key, models[1/*rdbms*/], TYP_rdbms_c_c_Key_0);
                 final List<Key> UNBOXED_objectsOfKind_5 = objectsOfKind_5.asEcoreObjects(idResolver, Key.class);
                 assert UNBOXED_objectsOfKind_5 != null;
-                ;
                 for (Key rk_1 : UNBOXED_objectsOfKind_5) {
                     if (rk_1 != null) {
                         final @NonNull /*@NonInvalid*/ AssociationToForeignKey symbol_32 = (AssociationToForeignKey)a2f_1;
@@ -1826,7 +1819,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        ;
         for (PrimitiveDataType prim_5 : UNBOXED_objectsOfKind_7) {
             if (prim_5 != null) {
                 final @NonNull /*@NonInvalid*/ PrimitiveDataType symbol_46 = (PrimitiveDataType)prim_5;
@@ -1842,7 +1834,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        ;
         for (PrimitiveDataType prim_6 : UNBOXED_objectsOfKind_7) {
             if (prim_6 != null) {
                 final @NonNull /*@NonInvalid*/ PrimitiveDataType symbol_52 = (PrimitiveDataType)prim_6;
@@ -1858,7 +1849,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        ;
         for (PrimitiveDataType prim_7 : UNBOXED_objectsOfKind_7) {
             if (prim_7 != null) {
                 final @NonNull /*@NonInvalid*/ PrimitiveDataType symbol_58 = (PrimitiveDataType)prim_7;
@@ -1874,7 +1864,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        ;
         for (Attribute a_10 : UNBOXED_select_0) {
             if (a_10 != null) {
                 final @NonNull /*@NonInvalid*/ Attribute symbol_62 = (Attribute)a_10;
@@ -1901,7 +1890,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_10 = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_IntegerToNumber, models[2/*middle*/], TYP_uml2rdbms_c_c_IntegerToNumber_0);
         final List<IntegerToNumber> UNBOXED_objectsOfKind_10 = objectsOfKind_10.asEcoreObjects(idResolver, IntegerToNumber.class);
         assert UNBOXED_objectsOfKind_10 != null;
-        ;
         for (IntegerToNumber p2n_11 : UNBOXED_objectsOfKind_10) {
             if (p2n_11 != null) {
                 final @NonNull /*@NonInvalid*/ IntegerToNumber symbol_70 = (IntegerToNumber)p2n_11;
@@ -1917,7 +1905,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_11 = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_BooleanToBoolean, models[2/*middle*/], TYP_uml2rdbms_c_c_BooleanToBoolean_0);
         final List<BooleanToBoolean> UNBOXED_objectsOfKind_11 = objectsOfKind_11.asEcoreObjects(idResolver, BooleanToBoolean.class);
         assert UNBOXED_objectsOfKind_11 != null;
-        ;
         for (BooleanToBoolean p2n_12 : UNBOXED_objectsOfKind_11) {
             if (p2n_12 != null) {
                 final @NonNull /*@NonInvalid*/ BooleanToBoolean symbol_75 = (BooleanToBoolean)p2n_12;
@@ -1933,7 +1920,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_12 = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_StringToVarchar, models[2/*middle*/], TYP_uml2rdbms_c_c_StringToVarchar_0);
         final List<StringToVarchar> UNBOXED_objectsOfKind_12 = objectsOfKind_12.asEcoreObjects(idResolver, StringToVarchar.class);
         assert UNBOXED_objectsOfKind_12 != null;
-        ;
         for (StringToVarchar p2n_13 : UNBOXED_objectsOfKind_12) {
             if (p2n_13 != null) {
                 final @NonNull /*@NonInvalid*/ StringToVarchar symbol_80 = (StringToVarchar)p2n_13;
@@ -1946,7 +1932,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        ;
         for (Attribute a_11 : UNBOXED_objectsOfKind_13) {
             if (a_11 != null) {
                 final @NonNull /*@NonInvalid*/ Attribute symbol_85 = (Attribute)a_11;
@@ -1969,10 +1954,8 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_14 = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_NonLeafAttribute, models[2/*middle*/], TYP_uml2rdbms_c_c_NonLeafAttribute_0);
         final List<NonLeafAttribute> UNBOXED_objectsOfKind_14 = objectsOfKind_14.asEcoreObjects(idResolver, NonLeafAttribute.class);
         assert UNBOXED_objectsOfKind_14 != null;
-        ;
         for (NonLeafAttribute fao_7 : UNBOXED_objectsOfKind_14) {
             if (fao_7 != null) {
-                ;
                 for (Attribute a_12 : UNBOXED_objectsOfKind_13) {
                     if (a_12 != null) {
                         final @NonNull /*@NonInvalid*/ NonLeafAttribute symbol_96 = (NonLeafAttribute)fao_7;
@@ -2000,10 +1983,8 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        ;
         for (Attribute a_13 : UNBOXED_select_0) {
             if (a_13 != null) {
-                ;
                 for (Attribute ca_3 : UNBOXED_objectsOfKind_13) {
                     if (ca_3 != null) {
                         final @NonNull /*@NonInvalid*/ Attribute symbol_103 = (Attribute)a_13;
@@ -2058,7 +2039,6 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         }
         final List<AttributeToColumn> UNBOXED_select_1 = select_1.asEcoreObjects(idResolver, AttributeToColumn.class);
         assert UNBOXED_select_1 != null;
-        ;
         for (AttributeToColumn a2c_1 : UNBOXED_select_1) {
             if (a2c_1 != null) {
                 final @NonNull /*@NonInvalid*/ AttributeToColumn symbol_113 = (AttributeToColumn)a2c_1;

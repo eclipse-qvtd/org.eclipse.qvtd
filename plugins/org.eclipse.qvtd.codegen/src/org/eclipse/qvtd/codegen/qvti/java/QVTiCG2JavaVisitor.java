@@ -868,7 +868,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 //		js.appendDeclaration(iterator);
 //		js.append(" = ");
 //		js.appendValueName(iterator.getInit());
-		js.append(";\n");
+//		js.append(";\n");
 		js.append("for (");
 //		if (iterator.isNonNull()) {
 //			js.append("@SuppressWarnings(\"null\")@NonNull ");

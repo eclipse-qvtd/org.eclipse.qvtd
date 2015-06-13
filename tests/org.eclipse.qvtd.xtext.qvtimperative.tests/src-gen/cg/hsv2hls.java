@@ -127,7 +127,6 @@ public class hsv2hls extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_HSVNode, models[0/*hsv*/], TYP_HSVTree_c_c_HSVNode_0);
         final List<HSVNode> UNBOXED_objectsOfKind = objectsOfKind.asEcoreObjects(idResolver, HSVNode.class);
         assert UNBOXED_objectsOfKind != null;
-        ;
         for (HSVNode hsvRoot_1 : UNBOXED_objectsOfKind) {
             if (hsvRoot_1 != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode symbol_1 = (HSVNode)hsvRoot_1;
@@ -186,7 +185,6 @@ public class hsv2hls extends AbstractTransformationExecutor
         // mapping statements
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
-        ;
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode symbol_3 = (HSVNode)hsvChild;
@@ -244,7 +242,6 @@ public class hsv2hls extends AbstractTransformationExecutor
         // mapping statements
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
-        ;
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode symbol_4 = (HSVNode)hsvChild;
@@ -297,7 +294,6 @@ public class hsv2hls extends AbstractTransformationExecutor
         // mapping statements
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode.getChildren();
-        ;
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
@@ -356,7 +352,6 @@ public class hsv2hls extends AbstractTransformationExecutor
         // mapping statements
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode_0.getChildren();
-        ;
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;

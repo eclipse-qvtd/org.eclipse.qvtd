@@ -199,7 +199,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Package, TYP_uml_c_c_Package_0);
         final List<Package> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, Package.class);
         assert UNBOXED_allInstances != null;
-        ;
         for (Package p1 : UNBOXED_allInstances) {
             if (p1 != null) {
                 final @NonNull /*@NonInvalid*/ Package symbol_1 = (Package)p1;
@@ -275,7 +274,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         p2s_11.setUmlPackage(p);
         p2s_11.setName(name);
         // mapping statements
-        ;
         for (PackageElement child : elements_0) {
             if (child != null) {
                 final @NonNull /*@NonInvalid*/ PackageElement symbol_5 = (PackageElement)child;
@@ -302,7 +300,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        ;
         for (PackageElement child_0 : elements_0) {
             if (child_0 != null) {
                 final @NonNull /*@NonInvalid*/ PackageElement symbol_13 = (PackageElement)child_0;
@@ -384,7 +381,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<PrimitiveToName> primitivesToNames = p2s.getPrimitivesToNames();
-        ;
         for (PrimitiveToName child : primitivesToNames) {
             if (child != null) {
                 final @NonNull /*@NonInvalid*/ PrimitiveToName symbol_5 = (PrimitiveToName)child;
@@ -407,7 +403,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<ClassToTable> classesToTables = p2s.getClassesToTables();
-        ;
         for (ClassToTable child_0 : classesToTables) {
             if (child_0 != null) {
                 final @NonNull /*@NonInvalid*/ ClassToTable symbol_11 = (ClassToTable)child_0;
@@ -787,7 +782,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // mapping statements
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<Attribute> attributes = c.getAttributes();
-        ;
         for (Attribute anAttribute : attributes) {
             if (anAttribute != null) {
                 final @NonNull /*@NonInvalid*/ Attribute symbol_6 = (Attribute)anAttribute;
@@ -901,7 +895,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<AssociationToForeignKey> associationsToForeignKeys = c2t.getAssociationsToForeignKeys();
-        ;
         for (AssociationToForeignKey child : associationsToForeignKeys) {
             if (child != null) {
                 final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(t_0));
@@ -950,7 +943,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@Thrown*/ BagValue union = (BagValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_fromAttributes, collect);
         final List<FromAttribute> UNBOXED_union = union.asEcoreObjects(idResolver, FromAttribute.class);
         assert UNBOXED_union != null;
-        ;
         for (FromAttribute child_0 : UNBOXED_union) {
             if (child_0 != null) {
                 final @NonNull /*@NonInvalid*/ FromAttribute symbol_9 = (FromAttribute)child_0;
@@ -1711,7 +1703,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // mapping statements
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<Attribute> attributes = c_2.getAttributes();
-        ;
         for (Attribute anAttribute : attributes) {
             if (anAttribute != null) {
                 final @NonNull /*@NonInvalid*/ Attribute symbol_1 = (Attribute)anAttribute;
@@ -1838,7 +1829,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // mapping statements
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<Attribute> attributes = c_3.getAttributes();
-        ;
         for (Attribute anAttribute : attributes) {
             if (anAttribute != null) {
                 final @NonNull /*@NonInvalid*/ Attribute symbol_1 = (Attribute)anAttribute;

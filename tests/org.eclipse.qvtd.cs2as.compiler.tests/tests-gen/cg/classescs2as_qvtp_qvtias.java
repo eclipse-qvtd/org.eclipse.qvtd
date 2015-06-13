@@ -646,63 +646,54 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         final List<RootCS> UNBOXED_allInstances_1 = allInstances_1.asEcoreObjects(idResolver, RootCS.class);
         assert UNBOXED_allInstances_1 != null;
         // mapping statements
-        ;
         for (RootCS rootCS_3 : UNBOXED_allInstances_1) {
             if (rootCS_3 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ RootCS symbol_1 = (RootCS)rootCS_3;
                 cRootCS_2_Root(symbol_1);
             }
         }
-        ;
         for (PackageCS packageCS_7 : UNBOXED_allInstances_2) {
             if (packageCS_7 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_5 = (PackageCS)packageCS_7;
                 cPackageCS_2_Package(symbol_5);
             }
         }
-        ;
         for (RootCS rootCS_4 : UNBOXED_allInstances_1) {
             if (rootCS_4 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ RootCS symbol_9 = (RootCS)rootCS_4;
                 uRoot_ownedPackages(symbol_9);
             }
         }
-        ;
         for (PackageCS packageCS_8 : UNBOXED_allInstances_2) {
             if (packageCS_8 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_13 = (PackageCS)packageCS_8;
                 uPackage_name(symbol_13);
             }
         }
-        ;
         for (ClassCS classCS_5 : UNBOXED_allInstances_6) {
             if (classCS_5 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_17 = (ClassCS)classCS_5;
                 cClassCS_2_Class(symbol_17);
             }
         }
-        ;
         for (PackageCS packageCS_9 : UNBOXED_allInstances_2) {
             if (packageCS_9 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_21 = (PackageCS)packageCS_9;
                 uPackage_ownedClasses(symbol_21);
             }
         }
-        ;
         for (PackageCS packageCS_10 : UNBOXED_allInstances_2) {
             if (packageCS_10 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_25 = (PackageCS)packageCS_10;
                 uPackage_ownedPackages(symbol_25);
             }
         }
-        ;
         for (ClassCS classCS_6 : UNBOXED_allInstances_6) {
             if (classCS_6 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_29 = (ClassCS)classCS_6;
                 uClass_name(symbol_29);
             }
         }
-        ;
         for (ClassCS classCS_7 : UNBOXED_allInstances_6) {
             if (classCS_7 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_33 = (ClassCS)classCS_7;

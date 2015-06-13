@@ -1506,161 +1506,138 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final List<Z> UNBOXED_allInstances_7 = allInstances_7.asEcoreObjects(idResolver, Z.class);
         assert UNBOXED_allInstances_7 != null;
         // mapping statements
-        ;
         for (SRoot sRoot_3 : UNBOXED_allInstances_3) {
             if (sRoot_3 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ SRoot symbol_1 = (SRoot)sRoot_3;
                 cSRoot_2_TRoot(symbol_1);
             }
         }
-        ;
         for (X x_17 : UNBOXED_allInstances_1) {
             if (x_17 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ X symbol_5 = (X)x_17;
                 cX_2_A1(symbol_5);
             }
         }
-        ;
         for (X x_18 : UNBOXED_allInstances_1) {
             if (x_18 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ X symbol_9 = (X)x_18;
                 cX_2_A2(symbol_9);
             }
         }
-        ;
         for (X x_19 : UNBOXED_allInstances_1) {
             if (x_19 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ X symbol_13 = (X)x_19;
                 cX_2_A3(symbol_13);
             }
         }
-        ;
         for (SRoot sRoot_4 : UNBOXED_allInstances_3) {
             if (sRoot_4 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ SRoot symbol_17 = (SRoot)sRoot_4;
                 uTRoot_ownedA(symbol_17);
             }
         }
-        ;
         for (Y1 y1_5 : UNBOXED_allInstances_15) {
             if (y1_5 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ Y1 symbol_21 = (Y1)y1_5;
                 cY1_2_B(symbol_21);
             }
         }
-        ;
         for (Y2 y2_5 : UNBOXED_allInstances_17) {
             if (y2_5 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ Y2 symbol_25 = (Y2)y2_5;
                 cY2_2_C(symbol_25);
             }
         }
-        ;
         for (Z z_11 : UNBOXED_allInstances_7) {
             if (z_11 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ Z symbol_29 = (Z)z_11;
                 cZ_2_D_0(symbol_29);
             }
         }
-        ;
         for (Z z_12 : UNBOXED_allInstances_7) {
             if (z_12 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ Z symbol_33 = (Z)z_12;
                 cZ_2_D_1(symbol_33);
             }
         }
-        ;
         for (X x_20 : UNBOXED_allInstances_1) {
             if (x_20 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ X symbol_37 = (X)x_20;
                 uA2_ownsC(symbol_37);
             }
         }
-        ;
         for (X x_21 : UNBOXED_allInstances_1) {
             if (x_21 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ X symbol_41 = (X)x_21;
                 uA3_ownsC(symbol_41);
             }
         }
-        ;
         for (Z z_13 : UNBOXED_allInstances_7) {
             if (z_13 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ Z symbol_45 = (Z)z_13;
                 uD_0_toA(symbol_45);
             }
         }
-        ;
         for (X x_22 : UNBOXED_allInstances_1) {
             if (x_22 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ X symbol_49 = (X)x_22;
                 uA1_name(symbol_49);
             }
         }
-        ;
         for (X x_23 : UNBOXED_allInstances_1) {
             if (x_23 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ X symbol_53 = (X)x_23;
                 uA1_ownsB(symbol_53);
             }
         }
-        ;
         for (X x_24 : UNBOXED_allInstances_1) {
             if (x_24 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ X symbol_57 = (X)x_24;
                 uA2_name(symbol_57);
             }
         }
-        ;
         for (X x_25 : UNBOXED_allInstances_1) {
             if (x_25 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ X symbol_61 = (X)x_25;
                 uA3_name(symbol_61);
             }
         }
-        ;
         for (Y1 y1_6 : UNBOXED_allInstances_15) {
             if (y1_6 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ Y1 symbol_65 = (Y1)y1_6;
                 uB_ownsD(symbol_65);
             }
         }
-        ;
         for (Y1 y1_7 : UNBOXED_allInstances_15) {
             if (y1_7 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ Y1 symbol_69 = (Y1)y1_7;
                 uB_name(symbol_69);
             }
         }
-        ;
         for (Y2 y2_6 : UNBOXED_allInstances_17) {
             if (y2_6 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ Y2 symbol_73 = (Y2)y2_6;
                 uC_name(symbol_73);
             }
         }
-        ;
         for (Y2 y2_7 : UNBOXED_allInstances_17) {
             if (y2_7 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ Y2 symbol_77 = (Y2)y2_7;
                 uC_ownsD(symbol_77);
             }
         }
-        ;
         for (Z z_14 : UNBOXED_allInstances_7) {
             if (z_14 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ Z symbol_81 = (Z)z_14;
                 uD_1_refsB(symbol_81);
             }
         }
-        ;
         for (Z z_15 : UNBOXED_allInstances_7) {
             if (z_15 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ Z symbol_85 = (Z)z_15;
                 uD_0_refsC(symbol_85);
             }
         }
-        ;
         for (Z z_16 : UNBOXED_allInstances_7) {
             if (z_16 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ Z symbol_89 = (Z)z_16;
