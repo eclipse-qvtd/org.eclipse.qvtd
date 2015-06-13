@@ -14,8 +14,6 @@ package qvtimperative
 context Mapping
 def: allAreas : Set(qvtcorebase::Area) = self.domain.oclAsType(qvtcorebase::Area)->asSet()->including(self)
 def: allGuardPatterns : Set(qvtcorebase::GuardPattern) = allAreas.guardPattern->asSet()
-def: isToMiddle : Boolean = not domain->exists(isEnforceable) 
-def: isFromMiddle : Boolean = domain->forAll(isEnforceable) 
 def: guardVariables : Set(ocl::Variable) = allGuardPatterns.variable->asSet()
 def: boundGuardVariables : Set(ocl::Variable) = allGuardPatterns.predicate->selectByKind(VariablePredicate).targetVariable->asSet()
 /* Mapping guard variables that are assigned  */
@@ -45,8 +43,9 @@ package qvtcorebase
 
 context Area
 def: mapping : qvtimperative::Mapping = if oclIsKindOf(qvtimperative::Mapping) then self else oclAsType(CoreDomain).rule endif.oclAsType(qvtimperative::Mapping)
-def: isSource : Boolean = mapping.isToMiddle and oclIsKindOf(CoreDomain)
-def: isTarget : Boolean = mapping.isFromMiddle and oclIsKindOf(CoreDomain)
+def: isMiddle : Boolean = oclIsKindOf(qvtimperative::Mapping)
+def: isSource : Boolean = oclIsKindOf(CoreDomain) and oclAsType(CoreDomain).isCheckable
+def: isTarget : Boolean = oclIsKindOf(CoreDomain) and oclAsType(CoreDomain).isEnforceable
 
 --context BottomPattern
 --inv UniquePropertyAssignments: assignment->select(PropertyAssignment)->isUnique(a : PropertyAssignment | a.targetProperty)	-- FIXME redundant "a : PropertyAssignment | a."
@@ -62,14 +61,13 @@ context PropertyAssignment
 inv IsNotReadOnly: not targetProperty.isReadOnly
 inv PropertyOfSlot(slotExpression.type.name + ' must conform to ' + targetProperty.owningClass.name): slotExpression.type.conformsTo(targetProperty.owningClass)
 inv CompatibleType(value.type.name + ' must conform to ' + targetProperty.type.name): value.type.conformsTo(targetProperty.type)
+inv NoRealizedVariableNavigations: value->closure(oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(RealizedVariable))->select(oclContainer().oclIsKindOf(ocl::CallExp))->isEmpty()
 
 context RealizedVariable
 def: isBottom : Boolean = oclContainer().oclIsKindOf(BottomPattern)
 def: isGuard : Boolean = oclContainer().oclIsKindOf(GuardPattern)
 inv IsBottom('RealizedVariable ' + name + ' must be in a BottomPattern'): isBottom
-inv IsEnforced('RealizedVariable ' + name + ' must be in an enforceable Area'): if isBottom then let area = oclContainer().oclAsType(BottomPattern).area, mapping = area.mapping in
-	if mapping.isToMiddle then area = mapping else area.oclAsType(CoreDomain).isEnforceable endif
-	else true endif
+inv IsEnforced('RealizedVariable ' + name + ' must be in an enforceable Area'): isBottom and oclContainer().oclAsType(BottomPattern).area.isTarget
 
 --context Variable
 --inv IsInGuard: oclContainer().oclIsKindOf(GuardPattern)
