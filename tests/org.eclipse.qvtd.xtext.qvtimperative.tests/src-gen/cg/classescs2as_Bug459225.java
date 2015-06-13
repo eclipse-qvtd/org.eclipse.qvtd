@@ -151,22 +151,20 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
      * {realize package : classes::Package[?];
      *  |}
      * where ( |)
-     * { |
-     * package.name := if
+     * {_0 : String[?];
+     *  |
+     * _0 := if
      *     packageCS.hasName()
      *   then packageCS.computeName()
      *   else 'unnamed'
      *   endif;
+     * package.name := _0;
      * }
      * 
      */
     protected boolean createPackage(final @NonNull /*@NonInvalid*/ PackageCS packageCS) {
         // predicates
-        // creations
-        final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
-        assert symbol_0 != null;
-        models[1/*rightAS*/].add(symbol_0);
-        // property assignments
+        // variable assignments
         @Nullable /*@Caught*/ Object CAUGHT_name;
         try {
             final @Nullable /*@Thrown*/ String name = packageCS.getName();
@@ -175,20 +173,25 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         catch (Exception e) {
             CAUGHT_name = ValueUtil.createInvalidValue(e);
         }
-        final /*@NonInvalid*/ boolean symbol_1 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
-        final @Nullable /*@NonInvalid*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_1);
+        final /*@NonInvalid*/ boolean symbol_2 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
+        final @Nullable /*@NonInvalid*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_2);
         if (not == null) {
             throw new InvalidValueException("Null if condition");
         }
-        @Nullable /*@Thrown*/ String symbol_2;
+        @Nullable /*@Thrown*/ String symbol_3;
         if (not) {
             final @Nullable /*@Thrown*/ String computeName = this.computeName(packageCS);
-            symbol_2 = computeName;
+            symbol_3 = computeName;
         }
         else {
-            symbol_2 = STR_unnamed;
+            symbol_3 = STR_unnamed;
         }
-        symbol_0.setName(symbol_2);
+        // creations
+        final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
+        assert symbol_0 != null;
+        models[1/*rightAS*/].add(symbol_0);
+        // property assignments
+        symbol_0.setName(symbol_3);
         return true;
     }
     

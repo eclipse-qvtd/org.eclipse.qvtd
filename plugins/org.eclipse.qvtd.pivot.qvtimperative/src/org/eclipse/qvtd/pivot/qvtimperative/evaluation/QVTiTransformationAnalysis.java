@@ -113,6 +113,7 @@ public class QVTiTransformationAnalysis
 	}
 
 	public void analyzeTransformation(@NonNull Transformation transformation) {
+		transformation.accept(QVTiTuneUpVisitor.INSTANCE);
 		//
 		//	First pass
 		//  - identify all allInstances() source types

@@ -84,7 +84,85 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	protected void doMappingStatements(@NonNull List<MappingStatement> mappingStatements) {
 	}
 
-    protected void doPropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @Nullable Integer cacheIndex) {
+	protected void doCommits(@NonNull Mapping mapping) {
+		for (Domain domain : mapping.getDomain()) {
+			if (domain.isIsEnforceable()) {
+				CoreDomain enforceableDomain = (CoreDomain)domain;
+				BottomPattern enforceableBottomPattern = enforceableDomain.getBottomPattern();
+				for (EnforcementOperation enforceOp : enforceableBottomPattern.getEnforcementOperation()) {
+					enforceOp.accept(undecoratedVisitor);
+				}
+			}
+		}
+//		for (EnforcementOperation enforceOp : middleBottomPattern.getEnforcementOperation()) {
+//			enforceOp.accept(undecoratedVisitor);
+//		}
+		}
+
+	protected void doEvaluations(@NonNull Mapping mapping) {
+		for (Domain domain : mapping.getDomain()) {
+			if (!domain.isIsEnforceable()) {
+				assert domain.isIsCheckable();
+				CoreDomain checkableDomain = (CoreDomain)domain;
+				GuardPattern checkableGuardPattern = checkableDomain.getGuardPattern();
+				assert checkableGuardPattern.getPredicate().isEmpty();
+				BottomPattern checkableBottomPattern = checkableDomain.getBottomPattern();
+				assert checkableBottomPattern.getAssignment().isEmpty();
+				assert checkableBottomPattern.getEnforcementOperation().isEmpty();
+				assert checkableBottomPattern.getPredicate().isEmpty();
+				assert checkableBottomPattern.getRealizedVariable().isEmpty();
+				assert checkableBottomPattern.getVariable().isEmpty();
+			}
+			else {
+				CoreDomain enforceableDomain = (CoreDomain)domain;
+				GuardPattern enforceableGuardPattern = enforceableDomain.getGuardPattern();
+				assert enforceableGuardPattern.getPredicate().isEmpty();
+				BottomPattern enforceableBottomPattern = enforceableDomain.getBottomPattern();
+				assert enforceableBottomPattern.getAssignment().isEmpty();
+				assert enforceableBottomPattern.getPredicate().isEmpty();
+				for (RealizedVariable realizedVariable : enforceableBottomPattern.getRealizedVariable()) {
+					realizedVariable.accept(undecoratedVisitor);
+				}
+				for (Variable rVar : enforceableBottomPattern.getVariable()) {
+					OCLExpression ownedInit = rVar.getOwnedInit();
+					if (ownedInit != null) {
+						Object initValue = ownedInit.accept(undecoratedVisitor);
+						context.replace(rVar, initValue);
+					}
+				}
+			}
+		}
+		BottomPattern middleBottomPattern = mapping.getBottomPattern();
+		assert middleBottomPattern.getEnforcementOperation().isEmpty();
+		assert middleBottomPattern.getPredicate().isEmpty();
+		assert middleBottomPattern.getRealizedVariable().isEmpty();
+//		assert middleBottomPattern.getVariable().isEmpty();
+		for (Assignment assignment : middleBottomPattern.getAssignment()) {
+			if (!(assignment instanceof PropertyAssignment)) {
+				assignment.accept(undecoratedVisitor);
+			}
+		}
+		for (Assignment assignment : middleBottomPattern.getAssignment()) {
+			if (assignment instanceof PropertyAssignment) {
+				assignment.accept(undecoratedVisitor);
+			}
+		}
+	}
+
+	protected boolean doPredicates(@NonNull Mapping mapping) {
+		GuardPattern middleGuardPattern = mapping.getGuardPattern();
+		assert middleGuardPattern.getVariable().isEmpty();
+		for (Predicate predicate : middleGuardPattern.getPredicate()) {
+			// If the predicate is not true, the binding is not valid
+			Object result = predicate.accept(undecoratedVisitor);
+			if (result != Boolean.TRUE) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	protected void doPropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @Nullable Integer cacheIndex) {
 		Object slotExpValue = safeVisit(propertyAssignment.getSlotExpression());
 		if (slotExpValue instanceof EObject) {
 			Object boxedValue = safeVisit(propertyAssignment.getValue());
@@ -211,6 +289,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
         	assert area instanceof Mapping;
         	assert bottomPattern.getPredicate().isEmpty();
         	assert bottomPattern.getRealizedVariable().isEmpty();
+//        	assert bottomPattern.getVariable().isEmpty();
         	assert bottomPattern.getEnforcementOperation().isEmpty();
             for (Variable rVar : bottomPattern.getVariable()) {
             	OCLExpression ownedInit = rVar.getOwnedInit();

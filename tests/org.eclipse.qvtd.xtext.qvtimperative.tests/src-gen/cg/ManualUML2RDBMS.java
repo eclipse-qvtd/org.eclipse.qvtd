@@ -222,9 +222,11 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * {realize p2s : uml2rdbms::PackageToSchema[?];
      *  |}
      * where ( |)
-     * { |
+     * {_0 : String[?];
+     *  |
+     * _0 := p.name;
      * p2s.umlPackage := p;
-     * p2s.name := p.name;
+     * p2s.name := _0;
      * }
      * for child : uml::PackageElement in p.elements {
      * 
@@ -263,13 +265,14 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // predicates
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<PackageElement> elements_0 = p.getElements();
+        // variable assignments
+        final @Nullable /*@Thrown*/ String name = p.getName();
         // creations
         final /*@Thrown*/ PackageToSchema p2s_11 = UML2RDBMSFactory.eINSTANCE.createPackageToSchema();
         assert p2s_11 != null;
         models[2/*middle*/].add(p2s_11);
         // property assignments
         p2s_11.setUmlPackage(p);
-        final @Nullable /*@Thrown*/ String name = p.getName();
         p2s_11.setName(name);
         // mapping statements
         ;
@@ -430,15 +433,18 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      *  |)
      * { |}
      * where ( |)
-     * { |
-     * s_1.name := p2s_1.name;
+     * {_0 : String[?];
+     *  |
+     * _0 := p2s_1.name;
+     * s_1.name := _0;
      * }
      * 
      */
     protected boolean packageToSchemaMR_1(final @NonNull /*@NonInvalid*/ PackageToSchema p2s_1, final @NonNull /*@NonInvalid*/ Schema s_1) {
         // predicates
-        // property assignments
+        // variable assignments
         final @Nullable /*@Thrown*/ String name = p2s_1.getName();
+        // property assignments
         s_1.setName(name);
         return true;
     }
@@ -456,10 +462,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      *  |}
      * where ( |
      * prim.namespace = pprim.name = 'Integer'p2s.umlPackage = p)
-     * { |
+     * {_0 : String[1];
+     *  |
+     * _0 := prim.name + '2' + 'NUMBER';
      * p2n.owner := p2s;
      * p2n.primitive := prim;
-     * p2n.name := prim.name + '2' + 'NUMBER';
+     * p2n.name := _0;
      * p2n.typeName := 'NUMBER';
      * }
      * 
@@ -482,6 +490,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         if (!eq_1) {
             return false;
         }
+        // variable assignments
+        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
+        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_NUMBER);
         // creations
         final /*@Thrown*/ PrimitiveToName p2n_3 = UML2RDBMSFactory.eINSTANCE.createPrimitiveToName();
         assert p2n_3 != null;
@@ -490,8 +501,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         p2n_3.setOwner(p2s_0);
         p2n_3.setPrimitive(prim);
         OPPOSITE_OF_PrimitiveToName_primitive.put(prim, p2n_3);
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
-        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_NUMBER);
         p2n_3.setName(sum_0);
         p2n_3.setTypeName(STR_NUMBER);
         return true;
@@ -541,10 +550,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      *  |}
      * where ( |
      * prim.namespace = pprim.name = 'Boolean'p2s.umlPackage = p)
-     * { |
+     * {_0 : String[1];
+     *  |
+     * _0 := prim.name + '2' + 'BOOLEAN';
      * p2n.owner := p2s;
      * p2n.primitive := prim;
-     * p2n.name := prim.name + '2' + 'BOOLEAN';
+     * p2n.name := _0;
      * p2n.typeName := 'BOOLEAN';
      * }
      * 
@@ -567,6 +578,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         if (!eq_1) {
             return false;
         }
+        // variable assignments
+        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
+        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_BOOLEAN);
         // creations
         final /*@Thrown*/ PrimitiveToName p2n_3 = UML2RDBMSFactory.eINSTANCE.createPrimitiveToName();
         assert p2n_3 != null;
@@ -575,8 +589,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         p2n_3.setOwner(p2s_3);
         p2n_3.setPrimitive(prim_0);
         OPPOSITE_OF_PrimitiveToName_primitive.put(prim_0, p2n_3);
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
-        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_BOOLEAN);
         p2n_3.setName(sum_0);
         p2n_3.setTypeName(STR_BOOLEAN);
         return true;
@@ -626,10 +638,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      *  |}
      * where ( |
      * prim.namespace = pprim.name = 'String'p2s.umlPackage = p)
-     * { |
+     * {_0 : String[1];
+     *  |
+     * _0 := prim.name + '2' + 'VARCHAR';
      * p2n.owner := p2s;
      * p2n.primitive := prim;
-     * p2n.name := prim.name + '2' + 'VARCHAR';
+     * p2n.name := _0;
      * p2n.typeName := 'VARCHAR';
      * }
      * 
@@ -652,6 +666,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         if (!eq_1) {
             return false;
         }
+        // variable assignments
+        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
+        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_VARCHAR);
         // creations
         final /*@Thrown*/ PrimitiveToName p2n_3 = UML2RDBMSFactory.eINSTANCE.createPrimitiveToName();
         assert p2n_3 != null;
@@ -660,8 +677,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         p2n_3.setOwner(p2s_5);
         p2n_3.setPrimitive(prim_1);
         OPPOSITE_OF_PrimitiveToName_primitive.put(prim_1, p2n_3);
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
-        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_VARCHAR);
         p2n_3.setName(sum_0);
         p2n_3.setTypeName(STR_VARCHAR);
         return true;
@@ -712,10 +727,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * where ( |
      * c.kind = 'persistent'c.namespace = pp2s.umlPackage =
      *   p)
-     * { |
+     * {_0 : String[?];
+     *  |
+     * _0 := c.name;
      * c2t.owner := p2s;
      * c2t.umlClass := c;
-     * c2t.name := c.name;
+     * c2t.name := _0;
      * }
      * for anAttribute : uml::Attribute in c.attributes {
      * 
@@ -756,6 +773,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         if (!eq_1) {
             return false;
         }
+        // variable assignments
+        final @Nullable /*@Thrown*/ String name = c.getName();
         // creations
         final /*@Thrown*/ ClassToTable c2t_3 = UML2RDBMSFactory.eINSTANCE.createClassToTable();
         assert c2t_3 != null;
@@ -764,7 +783,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         c2t_3.setOwner(p2s_7);
         c2t_3.setUmlClass(c);
         OPPOSITE_OF_ClassToTable_umlClass.put(c, c2t_3);
-        final @Nullable /*@Thrown*/ String name = c.getName();
         c2t_3.setName(name);
         // mapping statements
         @SuppressWarnings("null")
@@ -958,18 +976,21 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      *  |)
      * { |}
      * where ( |)
-     * { |
+     * {_0 : String[?];
+     *  |
+     * _0 := c2t_1.name;
      * c2t_1.table := t_1;
-     * t_1.name := c2t_1.name;
+     * t_1.name := _0;
      * }
      * 
      */
     protected boolean classToTableMR_1(final @NonNull /*@NonInvalid*/ ClassToTable c2t_1, final @NonNull /*@NonInvalid*/ Table t_1) {
         // predicates
+        // variable assignments
+        final @Nullable /*@Thrown*/ String name = c2t_1.getName();
         // property assignments
         c2t_1.setTable(t_1);
         OPPOSITE_OF_ClassToTable_table.put(t_1, c2t_1);
-        final @Nullable /*@Thrown*/ String name = c2t_1.getName();
         t_1.setName(name);
         return true;
     }
@@ -1080,19 +1101,24 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      *  |)
      * { |}
      * where ( |)
-     * { |
-     * pc_2_2.name := t_2_2.name + '_tid';
-     * pk_2_2.name := t_2_2.name + '_pk';
+     * {_0 : String[1];
+     * _1 : String[1];
+     *  |
+     * _0 := t_2_2.name + '_tid';
+     * _1 := t_2_2.name + '_pk';
+     * pc_2_2.name := _0;
+     * pk_2_2.name := _1;
      * }
      * 
      */
     protected boolean classToTableMR_2_2(final @NonNull /*@NonInvalid*/ Column pc_2_2, final @NonNull /*@NonInvalid*/ Key pk_2_2, final @NonNull /*@NonInvalid*/ Table t_2_2) {
         // predicates
         final @Nullable /*@Thrown*/ String name_0 = t_2_2.getName();
-        // property assignments
+        // variable assignments
         final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR__tid);
-        pc_2_2.setName(sum);
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(name_0, STR__pk);
+        // property assignments
+        pc_2_2.setName(sum);
         pk_2_2.setName(sum_0);
         return true;
     }
@@ -1115,12 +1141,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * where ( |
      * a.namespace = psc.namespace = pp2s.umlPackage =
      *   p)
-     * { |
-     * sc2t.owner := p2s;
-     * a2f.owner := sc2t;
-     * a2f.referenced := dc2t;
-     * a2f.association := a;
-     * a2f.name := let dc2 : uml::Class[?] = dc;
+     * {_0 : String[?];
+     *  |
+     * _0 := let dc2 : uml::Class[?] = dc;
      * 
      *   in
      *     if a.destination = dc and a.source = sc
@@ -1135,6 +1158,11 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      *         endif
      *       endif
      *     endif;
+     * sc2t.owner := p2s;
+     * a2f.owner := sc2t;
+     * a2f.referenced := dc2t;
+     * a2f.association := a;
+     * a2f.name := _0;
      * }
      * 
      */
@@ -1178,15 +1206,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         }
         final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(sc));
         final @Nullable /*@Thrown*/ ClassToTable sc2t_0 = ClassToTable_0;
-        // creations
-        final /*@Thrown*/ AssociationToForeignKey a2f_0 = UML2RDBMSFactory.eINSTANCE.createAssociationToForeignKey();
-        assert a2f_0 != null;
-        models[2/*middle*/].add(a2f_0);
-        // property assignments
-        sc2t_0.setOwner(p2s_9);
-        a2f_0.setOwner(sc2t_0);
-        a2f_0.setReferenced(dc2t_0);
-        a2f_0.setAssociation(a);
+        // variable assignments
         final @Nullable /*@Thrown*/ String name = a.getName();
         @NonNull /*@Caught*/ Object CAUGHT_eq_2;
         try {
@@ -1214,9 +1234,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         if (and == null) {
             throw new InvalidValueException("Null if condition");
         }
-        @Nullable /*@Thrown*/ String symbol_6;
+        @Nullable /*@Thrown*/ String symbol_7;
         if (and) {
-            symbol_6 = name;
+            symbol_7 = name;
         }
         else {
             @NonNull /*@Caught*/ Object CAUGHT_ne;
@@ -1234,7 +1254,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             if (and_0 == null) {
                 throw new InvalidValueException("Null if condition");
             }
-            @NonNull /*@Thrown*/ String symbol_5;
+            @NonNull /*@Thrown*/ String symbol_6;
             if (and_0) {
                 if (dc == null) {
                     throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualUML\'::UMLModelElement::name\'");
@@ -1245,7 +1265,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
                 final @Nullable /*@Thrown*/ String name_0 = dc.getName();
                 final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR__);
                 final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name);
-                symbol_5 = sum_0;
+                symbol_6 = sum_0;
             }
             else {
                 final @Nullable /*@Thrown*/ String name_6 = sc.getName();
@@ -1264,11 +1284,11 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
                 if (and_1 == null) {
                     throw new InvalidValueException("Null if condition");
                 }
-                @NonNull /*@Thrown*/ String symbol_4;
+                @NonNull /*@Thrown*/ String symbol_5;
                 if (and_1) {
                     final @NonNull /*@Thrown*/ String sum_1 = StringConcatOperation.INSTANCE.evaluate(name, STR__);
                     final @NonNull /*@Thrown*/ String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, name_6);
-                    symbol_4 = sum_2;
+                    symbol_5 = sum_2;
                 }
                 else {
                     if (dc == null) {
@@ -1282,13 +1302,22 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
                     final @NonNull /*@Thrown*/ String sum_4 = StringConcatOperation.INSTANCE.evaluate(sum_3, name);
                     final @NonNull /*@Thrown*/ String sum_5 = StringConcatOperation.INSTANCE.evaluate(sum_4, STR__);
                     final @NonNull /*@Thrown*/ String sum_6 = StringConcatOperation.INSTANCE.evaluate(sum_5, name_6);
-                    symbol_4 = sum_6;
+                    symbol_5 = sum_6;
                 }
-                symbol_5 = symbol_4;
+                symbol_6 = symbol_5;
             }
-            symbol_6 = symbol_5;
+            symbol_7 = symbol_6;
         }
-        a2f_0.setName(symbol_6);
+        // creations
+        final /*@Thrown*/ AssociationToForeignKey a2f_0 = UML2RDBMSFactory.eINSTANCE.createAssociationToForeignKey();
+        assert a2f_0 != null;
+        models[2/*middle*/].add(a2f_0);
+        // property assignments
+        sc2t_0.setOwner(p2s_9);
+        a2f_0.setOwner(sc2t_0);
+        a2f_0.setReferenced(dc2t_0);
+        a2f_0.setAssociation(a);
+        a2f_0.setName(symbol_7);
         return true;
     }
     
@@ -1311,11 +1340,15 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      *  |}
      * where ( |
      * a2f.owner = sc2ta2f.referenced = dc2tp2s.schema = sst.schema = s)
-     * { |
-     * sc2t.owner := p2s;
-     * fk.name := a2f.name;
-     * fc.name := a2f.name +
+     * {_0 : String[?];
+     * _1 : String[1];
+     *  |
+     * _0 := a2f.name;
+     * _1 := a2f.name +
      *   '_tid';
+     * sc2t.owner := p2s;
+     * fk.name := _0;
+     * fc.name := _1;
      * fk.owner := st;
      * fc.owner := st;
      * }
@@ -1356,6 +1389,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             return false;
         }
         final @Nullable /*@Thrown*/ String name = a2f.getName();
+        // variable assignments
+        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__tid);
         // creations
         final /*@Thrown*/ Column fc_0 = RDBMSFactory.eINSTANCE.createColumn();
         assert fc_0 != null;
@@ -1366,7 +1401,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         // property assignments
         sc2t.setOwner(p2s_10);
         fk_0.setName(name);
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__tid);
         fc_0.setName(sum);
         fk_0.setOwner(st);
         fc_0.setOwner(st);
@@ -1407,24 +1441,21 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      *  |)
      * { |}
      * where ( |)
-     * { |
+     * {_0 : String[?];
+     *  |
+     * _0 := rk.column->first()
+     *   .type;
      * fk.refersTo := rk;
      * fc.foreignKeys := OrderedSet{fk
-     *   }
-     *   ;
-     * fc.type := rk.column->first().type;
+     *   };
+     * fc.type := _0;
      * }
      * 
      */
     protected boolean associationToForeignKeyMR_1(final @NonNull /*@NonInvalid*/ Table dt_0, final @NonNull /*@NonInvalid*/ Column fc, final @NonNull /*@NonInvalid*/ ForeignKey fk, final @NonNull /*@NonInvalid*/ Key rk_0) {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-        // property assignments
-        fk.setRefersTo(rk_0);
-        final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_ForeignKey, fk);
-        final List<ForeignKey> UNBOXED_OrderedSet = OrderedSet.asEcoreObjects(idResolver, ForeignKey.class);
-        assert UNBOXED_OrderedSet != null;
-        fc.getForeignKeys().addAll(UNBOXED_OrderedSet);
+        // variable assignments
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<Column> column = rk_0.getColumn();
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_column = idResolver.createOrderedSetOfAll(ORD_CLSSid_Column, column);
@@ -1433,6 +1464,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualRDBMS\'::Column::type\'");
         }
         final @Nullable /*@Thrown*/ String type = first.getType();
+        // property assignments
+        fk.setRefersTo(rk_0);
+        final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_ForeignKey, fk);
+        final List<ForeignKey> UNBOXED_OrderedSet = OrderedSet.asEcoreObjects(idResolver, ForeignKey.class);
+        assert UNBOXED_OrderedSet != null;
+        fc.getForeignKeys().addAll(UNBOXED_OrderedSet);
         fc.setType(type);
         return true;
     }
@@ -1478,12 +1515,16 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * where ( |
      * a.owner = cfao.umlClass =
      *   c)
-     * { |
+     * {_0 : String[?];
+     * _1 : String[?];
+     *  |
+     * _0 := a.kind;
+     * _1 := a.name;
      * atc.attribute := a;
      * atc.owner := fao;
      * atc.type := p2n;
-     * atc.kind := a.kind;
-     * atc.name := a.name;
+     * atc.kind := _0;
+     * atc.name := _1;
      * atc.leafs := Set{atc
      *   };
      * }
@@ -1514,6 +1555,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         }
         final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = ClassUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(t_0));
         final @Nullable /*@Thrown*/ PrimitiveToName p2n_3 = PrimitiveToName;
+        // variable assignments
+        final @Nullable /*@Thrown*/ String kind = a_0.getKind();
+        final @Nullable /*@Thrown*/ String name = a_0.getName();
         // creations
         final /*@Thrown*/ AttributeToColumn atc = UML2RDBMSFactory.eINSTANCE.createAttributeToColumn();
         assert atc != null;
@@ -1523,9 +1567,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         OPPOSITE_OF_FromAttribute_attribute.put(a_0, atc);
         atc.setOwner(fao);
         atc.setType(p2n_3);
-        final @Nullable /*@Thrown*/ String kind = a_0.getKind();
         atc.setKind(kind);
-        final @Nullable /*@Thrown*/ String name = a_0.getName();
         atc.setName(name);
         final @NonNull /*@Thrown*/ SetValue Set = ValueUtil.createSetOfEach(SET_CLSSid_AttributeToColumn, atc);
         final List<AttributeToColumn> UNBOXED_Set = Set.asEcoreObjects(idResolver, AttributeToColumn.class);
@@ -1549,12 +1591,18 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * where ( |
      * a.owner = cfao.umlClass =
      *   c)
-     * { |
+     * {_0 : String[?];
+     * _1 : String[?];
+     * _2 : Set(uml2rdbms::AttributeToColumn);
+     *  |
+     * _0 := a.kind;
+     * _1 := a.name;
+     * _2 := fao.fromAttributes.leafs->asSet();
      * fa.attribute := a;
      * fa.owner := fao;
-     * fa.kind := a.kind;
-     * fa.name := a.name;
-     * fa.leafs := fao.fromAttributes.leafs->asSet();
+     * fa.kind := _0;
+     * fa.name := _1;
+     * fa.leafs := _2;
      * }
      * 
      */
@@ -1578,18 +1626,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             return false;
         }
         final @Nullable /*@Thrown*/ manualuml2rdbms.uml.Class t_0 = (manualuml2rdbms.uml.Class)type;
-        // creations
-        final /*@Thrown*/ NonLeafAttribute fa = UML2RDBMSFactory.eINSTANCE.createNonLeafAttribute();
-        assert fa != null;
-        models[2/*middle*/].add(fa);
-        // property assignments
-        fa.setAttribute(a_1);
-        OPPOSITE_OF_FromAttribute_attribute.put(a_1, fa);
-        fa.setOwner(fao_0);
+        // variable assignments
         final @Nullable /*@Thrown*/ String kind = a_1.getKind();
-        fa.setKind(kind);
         final @Nullable /*@Thrown*/ String name = a_1.getName();
-        fa.setName(name);
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<FromAttribute> fromAttributes = fao_0.getFromAttributes();
         final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
@@ -1617,9 +1656,19 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             }
         }
         final @NonNull /*@Thrown*/ SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
-        final List<AttributeToColumn> UNBOXED_asSet = asSet.asEcoreObjects(idResolver, AttributeToColumn.class);
-        assert UNBOXED_asSet != null;
-        fa.getLeafs().addAll(UNBOXED_asSet);
+        // creations
+        final /*@Thrown*/ NonLeafAttribute fa = UML2RDBMSFactory.eINSTANCE.createNonLeafAttribute();
+        assert fa != null;
+        models[2/*middle*/].add(fa);
+        // property assignments
+        fa.setAttribute(a_1);
+        OPPOSITE_OF_FromAttribute_attribute.put(a_1, fa);
+        fa.setOwner(fao_0);
+        fa.setKind(kind);
+        fa.setName(name);
+        final List<AttributeToColumn> UNBOXED_null = asSet.asEcoreObjects(idResolver, AttributeToColumn.class);
+        assert UNBOXED_null != null;
+        fa.getLeafs().addAll(UNBOXED_null);
         return true;
     }
     
@@ -1683,8 +1732,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map complexAttributePrimitiveAttributesLM_1 in ManualUML2RDBMS {
-     * 
-     *   uml (c_1 : uml::Class[?];
+     * uml (c_1 : uml::Class[?];
      * t_1 : uml::PrimitiveDataType[?];
      * a_1 : uml::Attribute[?];
      * ca_1 : uml::Attribute[?];
@@ -1697,14 +1745,19 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      *  |}
      * where ( |
      * )
-     * { |
+     * {_0 : String[?];
+     * _1 : String[1];
+     *  |
+     * _0 := a_1.kind;
+     * _1 := ca_1.name + '_' +
+     *   a_1.name;
      * fa.owner := fao_1;
      * fa.leafs := Set{fa
      *   };
      * fa.attribute := a_1;
      * fa.type := p2n_1;
-     * fa.kind := a_1.kind;
-     * fa.name := ca_1.name + '_' + a_1.name;
+     * fa.kind := _0;
+     * fa.name := _1;
      * }
      * 
      */
@@ -1722,6 +1775,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         }
         final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = ClassUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(t_1_0));
         final @Nullable /*@Thrown*/ PrimitiveToName p2n_1_0 = PrimitiveToName;
+        // variable assignments
+        final @Nullable /*@Thrown*/ String kind = a_1_0.getKind();
+        final @Nullable /*@Thrown*/ String name = ca_1.getName();
+        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__);
+        final @Nullable /*@Thrown*/ String name_0 = a_1_0.getName();
+        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
         // creations
         final /*@Thrown*/ AttributeToColumn fa = UML2RDBMSFactory.eINSTANCE.createAttributeToColumn();
         assert fa != null;
@@ -1735,12 +1794,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         fa.setAttribute(a_1_0);
         OPPOSITE_OF_FromAttribute_attribute.put(a_1_0, fa);
         fa.setType(p2n_1_0);
-        final @Nullable /*@Thrown*/ String kind = a_1_0.getKind();
         fa.setKind(kind);
-        final @Nullable /*@Thrown*/ String name = ca_1.getName();
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__);
-        final @Nullable /*@Thrown*/ String name_0 = a_1_0.getName();
-        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
         fa.setName(sum_0);
         return true;
     }
@@ -1818,12 +1872,18 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * where ( |
      * a_1.owner =
      *   c_1)
-     * { |
+     * {_0 : Set(uml2rdbms::AttributeToColumn);
+     * _1 : String[?];
+     * _2 : String[1];
+     *  |
+     * _0 := fao_1.fromAttributes.leafs->asSet();
+     * _1 := a_1.kind;
+     * _2 := ca_1.name + '_' + a_1.name;
      * fa.owner := fao_1;
-     * fa.leafs := fao_1.fromAttributes.leafs->asSet();
+     * fa.leafs := _0;
      * fa.attribute := a_1;
-     * fa.kind := a_1.kind;
-     * fa.name := ca_1.name + '_' + a_1.name;
+     * fa.kind := _1;
+     * fa.name := _2;
      * }
      * 
      */
@@ -1842,12 +1902,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             return false;
         }
         final @Nullable /*@Thrown*/ manualuml2rdbms.uml.Class t_1_0 = (manualuml2rdbms.uml.Class)type;
-        // creations
-        final /*@Thrown*/ NonLeafAttribute fa = UML2RDBMSFactory.eINSTANCE.createNonLeafAttribute();
-        assert fa != null;
-        models[2/*middle*/].add(fa);
-        // property assignments
-        fa.setOwner(fao_1_0);
+        // variable assignments
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<FromAttribute> fromAttributes = fao_1_0.getFromAttributes();
         final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
@@ -1875,17 +1930,23 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             }
         }
         final @NonNull /*@Thrown*/ SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
-        final List<AttributeToColumn> UNBOXED_asSet = asSet.asEcoreObjects(idResolver, AttributeToColumn.class);
-        assert UNBOXED_asSet != null;
-        fa.getLeafs().addAll(UNBOXED_asSet);
-        fa.setAttribute(a_1_1);
-        OPPOSITE_OF_FromAttribute_attribute.put(a_1_1, fa);
         final @Nullable /*@Thrown*/ String kind = a_1_1.getKind();
-        fa.setKind(kind);
         final @Nullable /*@Thrown*/ String name = ca_1_0.getName();
         final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__);
         final @Nullable /*@Thrown*/ String name_0 = a_1_1.getName();
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
+        // creations
+        final /*@Thrown*/ NonLeafAttribute fa = UML2RDBMSFactory.eINSTANCE.createNonLeafAttribute();
+        assert fa != null;
+        models[2/*middle*/].add(fa);
+        // property assignments
+        fa.setOwner(fao_1_0);
+        final List<AttributeToColumn> UNBOXED_null = asSet.asEcoreObjects(idResolver, AttributeToColumn.class);
+        assert UNBOXED_null != null;
+        fa.getLeafs().addAll(UNBOXED_null);
+        fa.setAttribute(a_1_1);
+        OPPOSITE_OF_FromAttribute_attribute.put(a_1_1, fa);
+        fa.setKind(kind);
         fa.setName(sum_0);
         return true;
     }
@@ -2062,18 +2123,23 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      *  |)
      * { |}
      * where ( |)
-     * { |
-     * c_3.name := a2c_3.name;
-     * c_3.kind := a2c_3.kind;
+     * {_0 : String[?];
+     * _1 : String[?];
+     *  |
+     * _0 := a2c_3.name;
+     * _1 := a2c_3.kind;
+     * c_3.name := _0;
+     * c_3.kind := _1;
      * }
      * 
      */
     protected boolean attributeColumnsMR_3(final @NonNull /*@NonInvalid*/ AttributeToColumn a2c_3, final @NonNull /*@NonInvalid*/ Column c_3_0) {
         // predicates
-        // property assignments
+        // variable assignments
         final @Nullable /*@Thrown*/ String name = a2c_3.getName();
-        c_3_0.setName(name);
         final @Nullable /*@Thrown*/ String kind = a2c_3.getKind();
+        // property assignments
+        c_3_0.setName(name);
         c_3_0.setKind(kind);
         return true;
     }

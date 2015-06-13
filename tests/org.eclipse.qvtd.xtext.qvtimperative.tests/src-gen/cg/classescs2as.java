@@ -310,8 +310,10 @@ public class classescs2as extends AbstractTransformationExecutor
      * { |}
      * where ( |
      * classCS.ClassCS2Class.class = class)
-     * { |
-     * class.name := classCS.name;
+     * {_0 : String[?];
+     *  |
+     * _0 := classCS.name;
+     * class.name := _0;
      * }
      * 
      */
@@ -324,8 +326,9 @@ public class classescs2as extends AbstractTransformationExecutor
         if (!eq) {
             return false;
         }
-        // property assignments
+        // variable assignments
         final @Nullable /*@Thrown*/ String name = classCS_0.getName();
+        // property assignments
         symbol_0.setName(name);
         return true;
     }
@@ -342,8 +345,10 @@ public class classescs2as extends AbstractTransformationExecutor
      * where ( |
      * rootCS.RootCS2Root.root =
      *   root)
-     * { |
-     * root.ownedPackages := rootCS.ownedPackages.PackageCS2Package.package->asOrderedSet();
+     * {_0 : OrderedSet(classes::Package[*|1]);
+     *  |
+     * _0 := rootCS.ownedPackages.PackageCS2Package.package->asOrderedSet();
+     * root.ownedPackages := _0;
      * }
      * 
      */
@@ -357,7 +362,7 @@ public class classescs2as extends AbstractTransformationExecutor
         if (!eq) {
             return false;
         }
-        // property assignments
+        // variable assignments
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<PackageCS> ownedPackages = rootCS_0.getOwnedPackages();
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
@@ -393,14 +398,15 @@ public class classescs2as extends AbstractTransformationExecutor
              * package
              */
             @SuppressWarnings("null")
-            final @NonNull /*@Thrown*/ Package symbol_3 = _1_0.getPackage();
+            final @NonNull /*@Thrown*/ Package symbol_4 = _1_0.getPackage();
             //
-            accumulator_0.add(symbol_3);
+            accumulator_0.add(symbol_4);
         }
         final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
-        final List<Package> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, Package.class);
-        assert UNBOXED_asOrderedSet != null;
-        root.getOwnedPackages().addAll(UNBOXED_asOrderedSet);
+        // property assignments
+        final List<Package> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, Package.class);
+        assert UNBOXED_null != null;
+        root.getOwnedPackages().addAll(UNBOXED_null);
         return true;
     }
     
@@ -415,8 +421,10 @@ public class classescs2as extends AbstractTransformationExecutor
      * { |}
      * where ( |
      * packageCS.PackageCS2Package.package = package)
-     * { |
-     * package.name := packageCS.name;
+     * {_0 : String[?];
+     *  |
+     * _0 := packageCS.name;
+     * package.name := _0;
      * }
      * 
      */
@@ -429,8 +437,9 @@ public class classescs2as extends AbstractTransformationExecutor
         if (!eq) {
             return false;
         }
-        // property assignments
+        // variable assignments
         final @Nullable /*@Thrown*/ String name = packageCS_0.getName();
+        // property assignments
         symbol_1.setName(name);
         return true;
     }
@@ -447,8 +456,10 @@ public class classescs2as extends AbstractTransformationExecutor
      * where ( |
      * packageCS.PackageCS2Package.package =
      *   package)
-     * { |
-     * package.ownedClasses := packageCS.ownedClasses.ClassCS2Class.class->asOrderedSet();
+     * {_0 : OrderedSet(classes::Class[*|1]);
+     *  |
+     * _0 := packageCS.ownedClasses.ClassCS2Class.class->asOrderedSet();
+     * package.ownedClasses := _0;
      * }
      * 
      */
@@ -462,7 +473,7 @@ public class classescs2as extends AbstractTransformationExecutor
         if (!eq) {
             return false;
         }
-        // property assignments
+        // variable assignments
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<ClassCS> ownedClasses = packageCS_1.getOwnedClasses();
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
@@ -498,14 +509,15 @@ public class classescs2as extends AbstractTransformationExecutor
              * class
              */
             @SuppressWarnings("null")
-            final @NonNull /*@Thrown*/ classes.Class symbol_4 = _1_0.getClass_();
+            final @NonNull /*@Thrown*/ classes.Class symbol_5 = _1_0.getClass_();
             //
-            accumulator_0.add(symbol_4);
+            accumulator_0.add(symbol_5);
         }
         final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
-        final List<classes.Class> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, classes.Class.class);
-        assert UNBOXED_asOrderedSet != null;
-        symbol_2.getOwnedClasses().addAll(UNBOXED_asOrderedSet);
+        // property assignments
+        final List<classes.Class> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, classes.Class.class);
+        assert UNBOXED_null != null;
+        symbol_2.getOwnedClasses().addAll(UNBOXED_null);
         return true;
     }
     
