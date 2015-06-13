@@ -21,7 +21,6 @@ import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.evaluation.ExecutorInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -104,7 +103,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 //		for (EnforcementOperation enforceOp : middleBottomPattern.getEnforcementOperation()) {
 //			enforceOp.accept(undecoratedVisitor);
 //		}
-		}
+	}
 
 	protected void doEvaluations(@NonNull Mapping mapping) {
 		for (Domain domain : mapping.getDomain()) {
@@ -168,12 +167,12 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 	
 	protected void doPropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @Nullable Integer cacheIndex) {
-		Object slotExpValue = safeVisit(propertyAssignment.getSlotExpression());
+		Object slotExpValue = propertyAssignment.getSlotExpression().accept(undecoratedVisitor);
 		if (slotExpValue instanceof EObject) {
-			Object boxedValue = safeVisit(propertyAssignment.getValue());
+			Object boxedValue = propertyAssignment.getValue().accept(undecoratedVisitor);
 			Property targetProperty = propertyAssignment.getTargetProperty();
 			Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
-			Object ecoreValue = environmentFactory.getIdResolver().ecoreValueOf(instanceClass, boxedValue);
+			Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);
 			targetProperty.initValue(slotExpValue, ecoreValue);
 			if (cacheIndex != null) {
 				((QVTiModelManager)context.getModelManager()).setUnnavigableOpposite(cacheIndex, slotExpValue, ecoreValue);
@@ -184,78 +183,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		}
 	}
 
-//	@Override
-//	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-//		return (QVTiEnvironmentFactory) environmentFactory;
-//	}
-
-	@Override
-	public @NonNull QVTiEvaluationEnvironment getEvaluationEnvironment() {
-		return (QVTiEvaluationEnvironment) context.getEvaluationEnvironment();
-	}
-    
-    /**
-     * Checks if the mapping is a middle to right mapping. Middle to Right mappings
-     * must have enforce domains
-     *
-     * @param mapping the mapping
-     * @return true, if is m to r mapping
-     *
-    protected boolean isMtoRMapping(@NonNull Mapping mapping) {
-        if (mapping.getDomain().size() == 0) {
-            return false;
-        }
-        for (Domain domain : mapping.getDomain()) {
-            if (!domain.isIsEnforceable()) {
-                return false;
-            }
-        }
-        return true;
-    } */
-    
-    /**
-     * Checks if is middle to middle mapping.
-     *
-     * @param mapping the mapping
-     * @return true, if is middle to middle mapping
-     *
-    protected boolean isMtoMMapping(@NonNull Mapping mapping) {
-        if (mapping.getDomain().size() == 0) {
-            return true;
-        }
-        return false;
-    } */
-
-    /**
-     * Checks if the mapping is a left to middle mapping. Left to middle mappings
-     * can not have enforce domains
-     *
-     * @param mapping the mapping
-     * @return true, if is left to middle mapping
-     *
-    protected boolean isLtoMMapping(@NonNull Mapping mapping) {
-        if (mapping.getDomain().size() == 0) {
-            return false;
-        }
-        for (Domain domain : mapping.getDomain()) {
-            if (domain.isIsEnforceable()) {
-                return false;
-            }
-        }
-        return true;
-    } */
-
-    /* (non-Javadoc)
-     * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitAssignment(org.eclipse.qvtd.pivot.qvtcorebase.Assignment)
-     */
     @Override
 	public @Nullable Object visitAssignment(@NonNull Assignment object) {
 		return visiting(object);
     }
 	
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.BaseModel)
-	 */
 	@Override
 	public @Nullable Object visitBaseModel(@NonNull BaseModel object) {
 		return visiting(object);
@@ -314,17 +246,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
         return true;
     }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitUnit(org.eclipse.qvtd.pivot.qvtbase.Unit)
-	 */
 	@Override
 	public @Nullable Object visitImport(@NonNull Import object) {
 		return visiting(object);
 	}
     
-    /* (non-Javadoc)
-     * @see uk.ac.york.qvtd.pivot.qvtimperative.evaluation.QVTimperativeAbstractEvaluationVisitorImpl#visitMapping(org.eclipse.qvtd.pivot.qvtimperative.Mapping)
-     */
 	@Override
 	public @Nullable Object visitMapping(@NonNull Mapping mapping) {
 		//
@@ -352,44 +278,37 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
         return true;
     }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMappingCall(org.eclipse.qvtd.pivot.qvtimperative.MappingCall)
-	 */
 	@Override
 	public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
-    	Mapping calledMapping = ClassUtil.nonNullModel(mappingCall.getReferredMapping());
-		//
-		//	Initialise nested environment directly with the bound values for non-looped bindings,
-		//	and build matching lists of boundVariables and boundIterables for looped bindings. 
-		//
-//		List<Variable> loopedVariables = null;
-//		List<Iterable<?>> loopedValues = null;
-		for (MappingCallBinding binding : mappingCall.getBinding()) {
-			Variable boundVariable = ClassUtil.nonNullModel(binding.getBoundVariable());
-			Object valueOrValues = null;
-			try {
-				valueOrValues = ((IQVTiEvaluationVisitor)undecoratedVisitor).safeVisit(binding.getValue());
-			} catch (InvalidValueException ex) {
-				// There was an OCLVoid value being navigated or any other/similar OCL error
-				// evaluating the binding value
-				return null;
-			}
-			Type valueType = environmentFactory.getIdResolver().getDynamicTypeOf(valueOrValues);
-			Type varType = boundVariable.getType();
-			if ((varType != null) && valueType.conformsTo(metamodelManager.getStandardLibrary(), varType)) {
-				context.replace(boundVariable, valueOrValues);
-			}
-			else {
-				return null;		
-			}
-    	}
-		calledMapping.accept(undecoratedVisitor);
-    	return null;
+		try {
+			Mapping calledMapping = ClassUtil.nonNullModel(mappingCall.getReferredMapping());
+			for (MappingCallBinding binding : mappingCall.getBinding()) {
+				Variable boundVariable = binding.getBoundVariable();
+				if (boundVariable == null) {
+					return null;		
+				}
+				Type varType = boundVariable.getType();
+				if (varType == null) {
+					return null;		
+				}
+				OCLExpression value = binding.getValue();
+				if (value == null) {
+					return null;		
+				}
+				Object valueOrValues = value.accept(undecoratedVisitor);
+				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
+				if (valueType.conformsTo(standardLibrary, varType)) {
+					context.replace(boundVariable, valueOrValues);
+				}
+	    	}
+			calledMapping.accept(undecoratedVisitor);
+		} catch (InvalidValueException ex) {
+			// There was an OCLVoid value being navigated or any other/similar OCL error
+			// evaluating the binding value
+		}
+	    return null;
     }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMappingCallBinding(org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding)
-	 */
 	@Override
 	public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding object) {
 		return visiting(object);	// MappingCallBinding is serviced by the parent MappingCall
@@ -403,7 +322,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			if (iterators.size() > 0) {
 				Variable iterator = ClassUtil.nonNullState(iterators.get(0));
 				for (Object object : (Iterable<?>)inValues) {
-					getEvaluationEnvironment().replace(iterator, object);
+					context.replace(iterator, object);
 					mappingLoop.getOwnedBody().accept(undecoratedVisitor);
 				}
 			}
@@ -438,11 +357,14 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		if (cacheIndex == null) {
 			return super.visitOppositePropertyCallExp(oppositePropertyCallExp);
 		}
+		Object sourceValue = null;
 		OCLExpression source = oppositePropertyCallExp.getOwnedSource();
-		Object sourceValue = source != null ? undecoratedVisitor.evaluate(source) : null;
-		if (sourceValue != null) {
-			Object middleOpposite = ((QVTiModelManager) context.getModelManager()).getUnnavigableOpposite(cacheIndex, sourceValue);
-			return ClassUtil.nonNullState(middleOpposite);
+		if (source != null) {
+			sourceValue = source.accept(undecoratedVisitor);
+			if (sourceValue != null) {
+				Object middleOpposite = ((QVTiModelManager) context.getModelManager()).getUnnavigableOpposite(cacheIndex, sourceValue);
+				return ClassUtil.nonNullState(middleOpposite);
+			}
 		}
 		throw new InvalidValueException("Failed to evaluate '" + oppositePropertyCallExp.getReferredProperty() + "'", sourceValue, oppositePropertyCallExp);
 	}
@@ -452,17 +374,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
         return true;
     }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitPattern(org.eclipse.qvtd.pivot.qvtbase.Pattern)
-	 */
 	@Override
 	public @Nullable Object visitPattern(@NonNull Pattern object) {
 		return visiting(object);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitPredicate(org.eclipse.qvtd.pivot.qvtbase.Predicate)
-	 */
 	@Override
 	public @Nullable Object visitPredicate(@NonNull Predicate predicate) {
         
@@ -473,9 +389,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
         return expResult;
 	}
     
-    /* (non-Javadoc)
-     * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment)
-     */
     @Override
 	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
 		doPropertyAssignment(propertyAssignment, transformationAnalysis.getCacheIndex(propertyAssignment));
@@ -522,38 +435,37 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
         return true;
     }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.TypedModel)
-	 */
 	@Override
 	public @Nullable Object visitTypedModel(@NonNull TypedModel object) {
 		return visiting(object);
 	}
 
-	/* (non-Javadoc)
-     * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment)
-     */
     @Override
 	public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
     	Variable targetVariable = variableAssignment.getTargetVariable() ;
-		Object value = ((IQVTiEvaluationVisitor)undecoratedVisitor).safeVisit(variableAssignment.getValue());
-		// The variable had been added to the environment before the mapping call
 		if (targetVariable != null) {
-			context.replace(targetVariable, value);
+			OCLExpression valueExpression = variableAssignment.getValue();
+			if (valueExpression != null) {
+				Object value = valueExpression.accept(undecoratedVisitor);
+				// The variable had been added to the environment before the mapping call
+				context.replace(targetVariable, value);
+			}
 		}
 		return null;
     }
 
 	@Override
 	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {     
-        IdResolver idResolver = environmentFactory.getIdResolver();
         // Each predicate has a conditionExpression that is an OCLExpression
         OCLExpression exp = variablePredicate.getConditionExpression();
-		Object value = ((IQVTiEvaluationVisitor)undecoratedVisitor).safeVisit(exp);
+        if (exp == null) {
+        	return false;
+        }
+		Object value = exp.accept(undecoratedVisitor);
         Variable variable = variablePredicate.getTargetVariable();
 		Type guardType = variable.getType();
 		Type valueType = idResolver.getDynamicTypeOf(value);
-		if ((guardType != null) && valueType.conformsTo(metamodelManager.getStandardLibrary(), guardType)) {
+		if ((guardType != null) && valueType.conformsTo(standardLibrary, guardType)) {
 			context.replace(variable, value);
 		} else {
 			// The initialisation fails, the guard is not met
