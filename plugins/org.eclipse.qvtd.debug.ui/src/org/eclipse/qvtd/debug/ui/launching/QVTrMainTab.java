@@ -21,7 +21,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.debug.evaluator.QVTrXtextEvaluator;
+import org.eclipse.qvtd.debug.evaluator.BasicQVTrExecutor;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -98,7 +98,7 @@ public class QVTrMainTab extends DirectionalMainTab
 
 	protected @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException {
 		QVTiEnvironmentFactory envFactory = getEnvironmentFactory();
-		QVTrXtextEvaluator xtextEvaluator = new QVTrXtextEvaluator(envFactory, txURI);
+		BasicQVTrExecutor xtextEvaluator = new BasicQVTrExecutor(envFactory, txURI);
 		return xtextEvaluator.getTransformation();
 	}
 }

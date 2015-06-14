@@ -15,8 +15,8 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
 public class QVTiTxHelper  {
@@ -31,8 +31,8 @@ public class QVTiTxHelper  {
 		return (QVTiEnvironmentFactory) qvti.getEnvironmentFactory();
 	}
 	
-	public @NonNull QVTiPivotEvaluator createEvaluator(Transformation transformation) {
-		return new QVTiPivotEvaluator(getEnvironmentFactory(), transformation);
+	public @NonNull BasicQVTiExecutor createExecutor(Transformation transformation) {
+		return new BasicQVTiExecutor(getEnvironmentFactory(), transformation);
 	}
 	
 	// FIXME why do we need this ?

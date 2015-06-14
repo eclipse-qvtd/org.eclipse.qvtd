@@ -10,17 +10,25 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.CSResource;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -166,4 +174,40 @@ public class QVTbaseUtil
         }
 		return ownedContext;
 	}
+	
+    public static @NonNull Transformation loadTransformation(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+		// Load the transformation resource
+        CSResource xtextResource = (CSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
+        if (xtextResource == null) {
+            throw new IOException("Failed to load '" + transformationURI + "'");
+        }
+		String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
+		if (csMessage != null) {
+			throw new IOException(csMessage);
+		}
+		try {
+			ASResource asResource = xtextResource.getASResource();
+			String asMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(asResource.getErrors()), "Failed to load '" + asResource.getURI() + "'", "\n");
+			if (asMessage != null) {
+				throw new IOException(asMessage);
+			}
+			for (EObject eContent : asResource.getContents()) {
+				if (modelClass.isInstance(eContent)) {
+	    			for (org.eclipse.ocl.pivot.Package asPackage : ((Model)eContent).getOwnedPackages()) {
+    	    			for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
+    	    				if (asClass instanceof Transformation) {
+    	    	                return (Transformation)asClass;
+    	    				}
+    	    			}
+	    			}
+				}
+			}
+		} finally {
+			if (!keepDebug && (xtextResource instanceof CSResource.CSResourceExtension)) {
+				((CSResource.CSResourceExtension)xtextResource).dispose();
+			}
+		}
+        throw new IOException("Failed to locate a transformation in '" + transformationURI + "'");
+	}
+
 }

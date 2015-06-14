@@ -24,11 +24,11 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Group;
 
@@ -77,8 +77,6 @@ public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
 	}
 
 	protected @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException {
-		QVTiEnvironmentFactory envFactory = getEnvironmentFactory();
-		QVTiXtextEvaluator xtextEvaluator = new QVTiXtextEvaluator(envFactory, txURI);
-		return xtextEvaluator.getTransformation();
+		return QVTbaseUtil.loadTransformation(ImperativeModel.class, getEnvironmentFactory(), txURI, true);
 	}
 }

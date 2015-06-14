@@ -51,7 +51,7 @@ import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -368,7 +368,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		saveEmptyModel(asModelURI);
 		
 		QVTiTxHelper txHelper = new QVTiTxHelper(qvt);
-		QVTiPivotEvaluator testEvaluator = txHelper.createEvaluator(tx);
+		BasicQVTiExecutor testEvaluator = txHelper.createExecutor(tx);
 		testEvaluator.saveTransformation(null);
 	    testEvaluator.loadModel("leftCS", csModelURI);
 	    testEvaluator.createModel("rightAS", asModelURI, null);

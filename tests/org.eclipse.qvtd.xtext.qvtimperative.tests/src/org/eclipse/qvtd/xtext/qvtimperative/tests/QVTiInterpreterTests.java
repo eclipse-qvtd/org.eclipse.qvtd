@@ -36,15 +36,14 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.SimpleUML2RDBMS.SimpleRDBMSNormalizer;
-import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,7 +73,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	/**
 	 * The Class MyQvtiEvaluator provides helper methods for loading and creating models used in the test
 	 */
-	private class MyQvtiEvaluator extends QVTiXtextEvaluator
+	private class MyQvtiEvaluator extends BasicQVTiExecutor
 	{
 		
 		/** The typed model validation resource map. */
@@ -156,7 +155,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	        	TypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
 	        	Resource expectedModel = entry.getValue();
 	        	assert expectedModel != null;
-	        	Resource actualModel = modelManager.getModel(typedModel);
+	        	Resource actualModel = getModelManager().getModel(typedModel);
 	        	assert actualModel != null;
 	        	if (modelNormalizer != null) {
 	        		modelNormalizer.normalize(expectedModel);
@@ -391,18 +390,18 @@ public class QVTiInterpreterTests extends LoadTestCase
     	assertLoadable(ClassUtil.nonNullState(txURI));
      
     	QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
-		QVTiPivotEvaluator testEvaluator =  new QVTiPivotEvaluator(environmentFactory,
+    	BasicQVTiExecutor testExecutor =  new BasicQVTiExecutor(environmentFactory,
     				ClassUtil.nonNullState(loadTransformation(environmentFactory.getMetamodelManager(), txURI)));
     	    	
     	URI csModelURI = baseURI.appendSegment("example_input.xmi");
     	URI asModelURI = baseURI.appendSegment("example_output.xmi");
     	URI refAsModelURI = baseURI.appendSegment("exampleV2_output_ref.xmi");
     	
-        testEvaluator.loadModel("leftCS", ClassUtil.nonNullState(csModelURI));
-        testEvaluator.createModel("rightAS", ClassUtil.nonNullState(asModelURI), null);
-        testEvaluator.execute();
-        testEvaluator.saveModels(TestsXMLUtil.defaultSavingOptions);
-        testEvaluator.dispose();
+    	testExecutor.loadModel("leftCS", ClassUtil.nonNullState(csModelURI));
+    	testExecutor.createModel("rightAS", ClassUtil.nonNullState(asModelURI), null);
+    	testExecutor.execute();
+    	testExecutor.saveModels(TestsXMLUtil.defaultSavingOptions);
+    	testExecutor.dispose();
         
         ResourceSet rSet = environmentFactory.getResourceSet();
         assertSameModel(rSet.getResource(refAsModelURI, true),

@@ -35,8 +35,8 @@ import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 
 public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements QVTiLaunchConstants
 { 
@@ -60,17 +60,17 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
                 
                 public void run() throws Exception { 
         			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null);
-        			QVTiXtextEvaluator xtextEvaluator = new QVTiXtextEvaluator(envFactory, txURI);
+        			BasicQVTiExecutor executor = new BasicQVTiExecutor(envFactory, txURI);
         			for (@SuppressWarnings("null")@NonNull String inName : inMap.keySet()) {
         				@SuppressWarnings("null")@NonNull URI inURI = URI.createURI(inMap.get(inName), true);
-        				xtextEvaluator.loadModel(inName, inURI, null);
+        				executor.loadModel(inName, inURI, null);
         			}
         			for (@SuppressWarnings("null")@NonNull String outName : outMap.keySet()) {
         				@SuppressWarnings("null")@NonNull URI outURI = URI.createURI(outMap.get(outName), true);
-        				xtextEvaluator.createModel(outName, outURI, null);
+        				executor.createModel(outName, outURI, null);
         			}
-        			xtextEvaluator.execute();
-        			xtextEvaluator.saveModels();
+        			executor.execute();
+        			executor.saveModels();
 //                    IStatus status = QvtLaunchConfigurationDelegateBase.validate(qvtTransformation, configuration);                    
 //                    if(status.getSeverity() > IStatus.WARNING) {
 //                    	throw new CoreException(status);

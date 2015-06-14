@@ -14,19 +14,18 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
-import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 
 /**
- * A QVTrXtextEvaluator supports loading a QVTr transformation as source then loading models, performing a transformation
+ * A BasicQVTcExecutor supports loading a QVTc transformation as source then loading models, performing a transformation
  * and then saving the models.
  * 
- * @see QVTiXtextEvaluator
+ * @see BasicQVTiExecutor
  */
-public class QVTrXtextEvaluator extends QVTiXtextEvaluator
+public class BasicQVTcExecutor extends BasicQVTiExecutor
 {
-    public QVTrXtextEvaluator(@NonNull QVTiEnvironmentFactory envFactory, @NonNull URI transformationURI) throws IOException {
-    	super(envFactory, loadTransformation(RelationModel.class, envFactory, transformationURI, envFactory.keepDebug()));
+    public BasicQVTcExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI transformationURI) throws IOException {
+    	super(environmentFactory, transformationURI);
     }
 }

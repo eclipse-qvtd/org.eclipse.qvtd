@@ -35,7 +35,7 @@ import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
-import org.eclipse.qvtd.debug.evaluator.QVTcXtextEvaluator;
+import org.eclipse.qvtd.debug.evaluator.BasicQVTcExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 public class QVTcLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements QVTiLaunchConstants
@@ -60,7 +60,7 @@ public class QVTcLaunchConfigurationDelegate extends LaunchConfigurationDelegate
                 
                 public void run() throws Exception { 
         			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null);
-        			QVTcXtextEvaluator xtextEvaluator = new QVTcXtextEvaluator(envFactory, txURI);
+        			BasicQVTcExecutor xtextEvaluator = new BasicQVTcExecutor(envFactory, txURI);
         			for (@SuppressWarnings("null")@NonNull String inName : inMap.keySet()) {
         				@SuppressWarnings("null")@NonNull URI inURI = URI.createURI(inMap.get(inName), true);
         				xtextEvaluator.loadModel(inName, inURI, null);

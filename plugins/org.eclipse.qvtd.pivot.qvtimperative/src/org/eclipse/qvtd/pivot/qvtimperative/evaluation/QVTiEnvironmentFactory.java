@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
@@ -25,10 +24,10 @@ public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 		getStandardLibrary().setDefaultStandardLibraryURI(QVTimperativeLibrary.STDLIB_URI);
 	}
 
-	@Override
-	public @NonNull QVTiExecutor createExecutor( @NonNull ModelManager modelManager) {
-		return new BasicQVTiExecutor(this, modelManager);
-	}
+//	@Override
+//	public @NonNull BasicOCLExecutor createExecutor( @NonNull ModelManager modelManager) {
+//		return new BasicOCLExecutor(this, modelManager);		// Inherited functionality used for validation
+//	}
 
 	public @NonNull QVTiModelManager createModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		return new QVTiModelManager(transformationAnalysis);

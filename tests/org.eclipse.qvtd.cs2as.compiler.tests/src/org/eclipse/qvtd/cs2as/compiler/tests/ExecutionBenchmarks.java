@@ -37,8 +37,8 @@ import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationEvaluator
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationEvaluator;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
@@ -63,8 +63,8 @@ public class ExecutionBenchmarks extends LoadTestCase {
 			super(environmentFactory);
 		}
 
-		public @NonNull QVTiPivotEvaluator createEvaluator(Transformation transformation) {
-			return new QVTiPivotEvaluator(getEnvironmentFactory(), transformation);
+		public @NonNull BasicQVTiExecutor createEvaluator(Transformation transformation) {
+			return new BasicQVTiExecutor(getEnvironmentFactory(), transformation);
 		}
 
 		public @NonNull TxEvaluator createEvaluator(Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
@@ -275,7 +275,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
 		URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_Interpreted.xmi", modelName));
 		
-		QVTiPivotEvaluator testEvaluator = qvt.createEvaluator(tx);
+		BasicQVTiExecutor testEvaluator = qvt.createEvaluator(tx);
 		testEvaluator.saveTransformation(null);
 	    testEvaluator.loadModel("leftCS", csModelURI);
 	    testEvaluator.createModel("rightAS", asModelURI, null);

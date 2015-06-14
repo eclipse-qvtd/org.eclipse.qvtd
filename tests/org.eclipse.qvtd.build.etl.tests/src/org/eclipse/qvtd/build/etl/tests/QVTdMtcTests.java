@@ -28,8 +28,8 @@ import org.eclipse.qvtd.compiler.internal.etl.MtcBroker;
 import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
@@ -47,9 +47,9 @@ public class QVTdMtcTests extends LoadTestCase {
 			super(environmentFactory);
 		}
 
-		public @Nullable QVTiPivotEvaluator createEvaluator(@NonNull PivotModel qvtiModel) throws IOException {
+		public @Nullable BasicQVTiExecutor createExecutor(@NonNull PivotModel qvtiModel) throws IOException {
 			try {
-				return new QVTiPivotEvaluator(getEnvironmentFactory(), qvtiModel.getTransformation());
+				return new BasicQVTiExecutor(getEnvironmentFactory(), qvtiModel.getTransformation());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -183,7 +183,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	URI outputURI = samplesBaseUri.appendSegment("SimpleGraphLower.xmi");
     	URI middleURI = samplesBaseUri.appendSegment("UpperToLower_trace.xmi");
     	URI expectedOutputURI = samplesBaseUri.appendSegment("SimpleGraphLower_expected.xmi");
-        QVTiPivotEvaluator testEvaluator = myQVT.createEvaluator(mtc.getiModel());
+    	BasicQVTiExecutor testEvaluator = myQVT.createExecutor(mtc.getiModel());
         testEvaluator.getEnvironmentFactory().setEvaluationTracingEnabled(true);
         testEvaluator.loadModel("upperGraph", inputURI);
         testEvaluator.createModel("middle", middleURI, null);
