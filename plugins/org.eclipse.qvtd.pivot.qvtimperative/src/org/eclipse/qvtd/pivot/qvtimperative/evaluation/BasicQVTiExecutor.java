@@ -15,7 +15,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 
 	@Override
-	public @NonNull EvaluationVisitor createEvaluationVisitor() {
+	protected @NonNull EvaluationVisitor createEvaluationVisitor() {
 		if (getEvaluationEnvironment() instanceof QVTiEvaluationEnvironment) {
 			IQVTiEvaluationVisitor visitor = new QVTiEvaluationVisitor(this);
 	        if (environmentFactory.isEvaluationTracingEnabled()) {
