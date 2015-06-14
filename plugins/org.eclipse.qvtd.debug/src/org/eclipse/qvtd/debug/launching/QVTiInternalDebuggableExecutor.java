@@ -19,7 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMContext;
 import org.eclipse.ocl.examples.debug.vm.launching.InternalDebuggableExecutor;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
-import org.eclipse.qvtd.debug.evaluator.QVTiVMEvaluator;
+import org.eclipse.qvtd.debug.evaluator.QVTiVMExecutor;
 
 /**
  * Internal transformation executor
@@ -35,18 +35,18 @@ public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor
 		this.evaluationContext = evaluationContext;
 	}
 
-	protected @NonNull QVTiVMEvaluator createVMEvaluator() throws IOException {
-		QVTiVMEvaluator evaluator = new QVTiVMEvaluator(vmContext, evaluationContext.getTransformationURI());
+	protected @NonNull QVTiVMExecutor createVMExecutor() throws IOException {
+		QVTiVMExecutor vmExecutor = new QVTiVMExecutor(vmContext, evaluationContext.getTransformationURI());
 		for (Map.Entry<String, URI> inEntry : evaluationContext.getInputURIs().entrySet()) {
 			@SuppressWarnings("null")@NonNull String inKey = inEntry.getKey();
 			@SuppressWarnings("null")@NonNull URI inURI = inEntry.getValue();
-			evaluator.loadModel(inKey, inURI, null);
+			vmExecutor.loadModel(inKey, inURI, null);
 		}
 		for (Map.Entry<String, URI> outEntry : evaluationContext.getOutputURIs().entrySet()) {
 			@SuppressWarnings("null")@NonNull String outKey = outEntry.getKey();
 			@SuppressWarnings("null")@NonNull URI outURI = outEntry.getValue();
-			evaluator.createModel(outKey, outURI, null);
+			vmExecutor.createModel(outKey, outURI, null);
 		}
-		return evaluator;
+		return vmExecutor;
 	}
 }
