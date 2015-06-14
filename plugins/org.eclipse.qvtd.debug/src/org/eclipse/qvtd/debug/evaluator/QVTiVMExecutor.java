@@ -15,6 +15,7 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMContext;
+import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationStepper;
 import org.eclipse.ocl.examples.debug.vm.evaluator.VMExecutor;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
@@ -33,18 +34,15 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 	private long envId = 0;
 
     public QVTiVMExecutor(@NonNull IVMContext vmContext, @NonNull URI transformationURI) throws IOException {
-    	this(vmContext, (QVTiEnvironmentFactory) vmContext.getEnvironmentFactory(), QVTbaseUtil.loadTransformation(ImperativeModel.class, vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug()));
-    }
-
-    private QVTiVMExecutor(@NonNull IVMContext vmContext, @NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
-    	super(environmentFactory, transformation);
+    	super((QVTiEnvironmentFactory) vmContext.getEnvironmentFactory(), QVTbaseUtil.loadTransformation(ImperativeModel.class, vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug()));
 		this.vmContext = vmContext;
-	}
+    }
 
 	@Override
 	protected @NonNull QVTiVMEvaluationVisitor createEvaluationVisitor() {
 		QVTiEvaluationVisitor evaluationVisitor = new QVTiEvaluationVisitor(this);
-		return new QVTiVMEvaluationVisitor(evaluationVisitor, vmContext);
+		QVTiVMEvaluationStepper vmEvaluationStepper =  new QVTiVMEvaluationStepper(evaluationVisitor, vmContext);
+		return new QVTiVMEvaluationVisitor(vmEvaluationStepper, evaluationVisitor);
 	}
 
 	@Override
@@ -58,9 +56,10 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 	}
 
 	protected Boolean executeInternal() {
-        QVTiVMEvaluationVisitor visitor = (QVTiVMEvaluationVisitor) getEvaluationVisitor();
-        visitor.start(suspendOnStartup);
-		return (Boolean) transformation.accept(visitor);
+		QVTiVMEvaluationVisitor visitor = (QVTiVMEvaluationVisitor) getEvaluationVisitor();
+		VMEvaluationStepper vmStepper = visitor.getVMEvaluationStepper();
+		vmStepper.start(suspendOnStartup);
+	    return (Boolean) transformation.accept(visitor);
 	}
 
 	@Override

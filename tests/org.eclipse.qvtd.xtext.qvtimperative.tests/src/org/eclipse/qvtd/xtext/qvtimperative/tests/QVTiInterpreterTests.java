@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.IndentingLogger;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
@@ -274,7 +275,9 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testHSV2HLS() throws Exception {
     	MyQVT myQVT = createQVT();
+    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("HSV2HLS", "HSV2HLS.qvti");
+    	testEvaluator.setLogger(IndentingLogger.OUT);
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("hsv", "HSVNode.xmi");
         testEvaluator.createModel("middle", "HLS2HLSNode.xmi");
