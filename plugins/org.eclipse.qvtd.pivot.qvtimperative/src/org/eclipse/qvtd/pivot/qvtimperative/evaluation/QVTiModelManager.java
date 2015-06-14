@@ -47,7 +47,7 @@ import org.eclipse.qvtd.pivot.qvtbase.evaluation.TypedModelInstance;
  * A QVTc Domain Manager object encapsulates the domain information need to 
  * modify the domains's models. 
  */
-public class QVTiModelManager implements ModelManager
+public class QVTiModelManager implements ModelManager.ModelManagerExtension
 {
 	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
 	protected final @NonNull MetamodelManager metamodelManager;
@@ -117,6 +117,7 @@ public class QVTiModelManager implements ModelManager
 	/**
 	 * Dispose.
 	 */
+	@Override
 	public void dispose() {
 		modelElementsMap.clear();
 		modelResourceMap.clear();

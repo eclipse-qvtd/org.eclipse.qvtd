@@ -30,6 +30,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 
@@ -55,7 +56,7 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
     }
 
 	private QVTiVMExecutor(@NonNull IVMContext vmContext, @NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull QVTiTransformationAnalysis transformationAnalysis) {
-		super(environmentFactory, new QVTiVMModelManager(transformationAnalysis));
+		super(environmentFactory, new QVTiModelManager(transformationAnalysis));
     	this.transformation = transformation;
 		this.vmContext = vmContext;
 	}
@@ -73,7 +74,7 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
         }
         Resource resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
         if (resource != null) {
-        	getVMModelManager().addModel(typedModel, resource);
+        	getModelManager().addModel(typedModel, resource);
         }
     }
 
@@ -87,22 +88,18 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 		return new QVTiVMRootEvaluationEnvironment(this, (Transformation)executableObject, ++envId);
 	}
 
-	public void dispose() {
-		getVMModelManager().dispose();
-	}
-
 	public Boolean execute() {
 		initializeEvaluationEnvironment(transformation);
 		getRootEvaluationEnvironment();
         QVTiVMEvaluationVisitor visitor = (QVTiVMEvaluationVisitor) getEvaluationVisitor();
         StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
-		QVTiVMModelManager vmModelManager = getVMModelManager();
+		QVTiModelManager modelManager = getModelManager();
 		Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
-		add(ownedContext, vmModelManager.getTransformationInstance(transformation));
+		add(ownedContext, modelManager.getTransformationInstance(transformation));
         for (TypedModel typedModel : transformation.getModelParameter()) {
         	if (typedModel != null) {
 	            ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
-	            add(ownedContext, vmModelManager.getTypedModelInstance(typedModel));
+	            add(ownedContext, modelManager.getTypedModelInstance(typedModel));
         	}
         }
         visitor.start(suspendOnStartup);
@@ -113,14 +110,15 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 	public @NonNull Transformation getDebuggable() {
 		return transformation;
 	}
+	
+	@Override
+	public @NonNull QVTiModelManager getModelManager() {
+		return (QVTiModelManager) modelManager;
+	}
 
 	@Override
 	public @NonNull String getPluginId() {
 		return QVTiDebugPlugin.PLUGIN_ID;
-	}
-	
-	public final @NonNull QVTiVMModelManager getVMModelManager() {
-		return (QVTiVMModelManager) getModelManager();
 	}
 
 	public void loadModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
@@ -142,13 +140,13 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 			}
         }
         if (resource != null) {
-        	getVMModelManager().addModel(typedModel, resource);
+        	getModelManager().addModel(typedModel, resource);
         }
     }
 
-//	@Override
+	@Override
 	public void saveModels() {
-		getVMModelManager().saveModels();
+		getModelManager().saveModels();
 	}
 
 	@Override
