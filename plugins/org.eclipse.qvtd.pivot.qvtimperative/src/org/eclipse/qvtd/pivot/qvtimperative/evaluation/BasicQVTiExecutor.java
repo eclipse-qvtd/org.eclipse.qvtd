@@ -21,7 +21,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	        if (environmentFactory.isEvaluationTracingEnabled()) {
 	            // decorate the evaluation visitor with tracing support
 	        	visitor = new QVTiTracingEvaluationVisitor(visitor);
-	        	((QVTiTracingEvaluationVisitor)visitor).setVerboseLevel(QVTiTracingEvaluationVisitor.VERBOSE_LEVEL_HIGH);
+//	        	((QVTiTracingEvaluationVisitor)visitor).setVerboseLevel(QVTiTracingEvaluationVisitor.VERBOSE_LEVEL_HIGH);
 	        }
 			return visitor;
 		}

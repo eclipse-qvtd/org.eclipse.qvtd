@@ -221,6 +221,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testGraph2GraphMinimal() throws Exception {
     	MyQVT myQVT = createQVT();
+    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi");
