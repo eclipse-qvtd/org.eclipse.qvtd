@@ -543,8 +543,8 @@ public class classescs2as extends AbstractTransformationExecutor
      *     for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances()
      *      {
      * map uPackage_name {
-     * packageCS := packageCS;
      * package := package;
+     * packageCS := packageCS;
      * }}}
      *   for package : classes::Package in classes::Package.allInstances()
      *    {
@@ -553,8 +553,8 @@ public class classescs2as extends AbstractTransformationExecutor
      *      {
      * 
      *       map uPackage_ownedClasses {
-     * packageCS := packageCS;
      * package := package;
+     * packageCS := packageCS;
      * }}}
      *   for classCS : classescs::ClassCS in classescs::ClassCS.allInstances()
      *    {

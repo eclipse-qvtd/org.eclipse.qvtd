@@ -44,7 +44,12 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  * QVTiTuneUpVisitor enhances the structure of a QVTi transformation to simplify execution.
@@ -52,6 +57,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeV
  * Improvements are
  * - VariableAssignments before PropertyAssignments
  * - all CallExps within PropertyAssignments redirected via an intermediate VariableAssignment
+ * - MappingCallBindings are sorted into alphabetical order
+ * <p>
+ * With OCLExpressions a TRUE/FALSE return indicates the presence of a nested CallExp
  */
 public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boolean, Object>
 {
@@ -210,6 +218,32 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 		}
 		object.getGuardPattern().accept(this);
 		object.getBottomPattern().accept(this);
+		MappingStatement mappingStatement = object.getMappingStatement();
+		if (mappingStatement != null) {
+			mappingStatement.accept(this);
+		}
+		return Boolean.TRUE;
+	}
+
+	@Override
+	public @Nullable Boolean visitMappingCall(@NonNull MappingCall object) {
+		ECollections.sort(object.getBinding(), QVTimperativeUtil.MappingCallBindingComparator.INSTANCE);
+		return Boolean.TRUE;
+	}
+
+	@Override
+	public @Nullable Boolean visitMappingLoop(@NonNull MappingLoop object) {
+		object.getOwnedBody().accept(this);
+		return Boolean.TRUE;
+	}
+
+	@Override
+	public @Nullable Boolean visitMappingSequence(@NonNull MappingSequence object) {
+		for (MappingStatement mappingStatement : object.getMappingStatements()) {
+			if (mappingStatement != null) {
+				mappingStatement.accept(this);
+			}
+		}
 		return Boolean.TRUE;
 	}
 

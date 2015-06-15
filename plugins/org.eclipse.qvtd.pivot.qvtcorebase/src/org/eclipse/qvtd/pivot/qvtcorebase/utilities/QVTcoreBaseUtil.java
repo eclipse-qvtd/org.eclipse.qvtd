@@ -30,7 +30,7 @@ public class QVTcoreBaseUtil extends QVTbaseUtil
 
 	public static @Nullable TypedModel getTypedModel(@Nullable Area area) {
         if (area instanceof CoreDomain) {
-            return ((CoreDomain)area).getTypedModel();        // M to R
+            return ((CoreDomain)area).getTypedModel();
         }
         else {
         	return null;

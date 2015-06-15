@@ -231,29 +231,29 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * 
      *     map integerToNumberLM {
      * p := p;
-     * prim := child;
      * p2s := p2s;
+     * prim := child;
      * }
      *     map booleanToBooleanLM {
      * p := p;
-     * prim := child;
      * p2s := p2s;
+     * prim := child;
      * }
      *     map stringToVarcharLM {
      * p := p;
-     * prim := child;
      * p2s := p2s;
+     * prim := child;
      * }}
      *   for child : uml::PackageElement in p.elements {
      * 
      *     map classToTableLM {
-     * p := p;
      * c := child;
+     * p := p;
      * p2s := p2s;
      * }
      *     map associationToForeignKeyLM {
-     * p := p;
      * a := child;
+     * p := p;
      * p2s := p2s;
      * }}
      *   map packageToSchemaMR {
@@ -340,28 +340,28 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * p2s.schema := s;
      * }
      * map packageToSchemaMR_1 {
-     * s_1 := s;
      * p2s_1 := p2s;
+     * s_1 := s;
      * }
      *   for child : uml2rdbms::PrimitiveToName in p2s.primitivesToNames {
      * 
      *     map integerToNumberMR {
-     * p2s := p2s;
      * p2n := child;
+     * p2s := p2s;
      * }
      *     map booleanToBooleanMR {
-     * p2s := p2s;
      * p2n := child;
+     * p2s := p2s;
      * }
      *     map stringToVarcharMR {
-     * p2s := p2s;
      * p2n := child;
+     * p2s := p2s;
      * }}
      *   for child : uml2rdbms::ClassToTable in p2s.classesToTables {
      * 
      *     map classToTableMR {
-     * p2s := p2s;
      * c2t := child;
+     * p2s := p2s;
      * s := s;
      * }}
      */
@@ -732,22 +732,22 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * for anAttribute : uml::Attribute in c.attributes {
      * 
      *     map classPrimitiveAttributesLM {
-     * c := c;
      * a := anAttribute;
+     * c := c;
      * fao := c2t;
      * }
      *     map classComplexAttributesLM {
-     * c := c;
      * a := anAttribute;
+     * c := c;
      * fao := c2t;
      * }
      *     map complexAttributePrimitiveAttributesLM {
-     * ca := anAttribute;
      * c := anAttribute.type;
+     * ca := anAttribute;
      * }
      *     map complexAttributeComplexAttributesLM {
-     * ca := anAttribute;
      * c := anAttribute.type;
+     * ca := anAttribute;
      * }}
      */
     protected boolean classToTableLM(final @NonNull /*@NonInvalid*/ manualuml2rdbms.uml.Class c, final @NonNull /*@NonInvalid*/ Package p_3, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_7) {
@@ -839,27 +839,27 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * t_1 := t;
      * }
      *   map classToTableMR_2 {
-     * t_2 := t;
      * c2t_2 := c2t;
+     * t_2 := t;
      * }
      *   for child : uml2rdbms::AssociationToForeignKey in c2t.associationsToForeignKeys {
      * 
      *     map associationToForeignKeyMR {
-     * p2s := p2s;
-     * dt := t;
-     * sc2t := t.ClassToTable;
-     * dc2t := t.ClassToTable;
      * a2f := child;
-     * s := s;
-     * st := t;
+     * dc2t := t.ClassToTable;
+     * dt := t;
+     * p2s := p2s;
      * rk := c2t.primaryKey;
+     * s := s;
+     * sc2t := t.ClassToTable;
+     * st := t;
      * }}
      *   for child : uml2rdbms::FromAttribute in c2t.fromAttributes->union(
      *     c2t.fromAttributes->selectByKind(uml2rdbms::NonLeafAttribute).fromAttributes)
      *    {
      * map attributeColumnsMR {
-     * c2t := c2t;
      * a2c := child;
+     * c2t := c2t;
      * t := t;
      * }}
      */
@@ -1011,12 +1011,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * }
      * map classToTableMR_2_1 {
      * c2t_2_1 := c2t_2;
-     * pk_2_1 := pk;
      * pc_2_1 := pc;
+     * pk_2_1 := pk;
      * }
      *   map classToTableMR_2_2 {
-     * pk_2_2 := pk;
      * pc_2_2 := pc;
+     * pk_2_2 := pk;
      * t_2_2 := t_2;
      * }
      */
@@ -1345,15 +1345,15 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * fc.owner := st;
      * }
      * map associationToForeignKeyMR_1 {
-     * fk := fk;
-     * fc := fc;
      * dt := a2f.referenced.table;
+     * fc := fc;
+     * fk := fk;
      * rk := rk;
      * }
      *   map associationToForeignKeyMR_2 {
      * a2f_1 := a2f;
-     * fk_1 := fk;
      * fc_1 := fc;
+     * fk_1 := fk;
      * }
      */
     protected boolean associationToForeignKeyMR(final @NonNull /*@NonInvalid*/ AssociationToForeignKey a2f, final @NonNull /*@NonInvalid*/ ClassToTable dc2t, final @NonNull /*@NonInvalid*/ Table dt, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_10, final @NonNull /*@NonInvalid*/ Key rk, final @NonNull /*@NonInvalid*/ Schema s_0, final @NonNull /*@NonInvalid*/ ClassToTable sc2t, final @NonNull /*@NonInvalid*/ Table st) {
@@ -1681,10 +1681,10 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * for anAttribute : uml::Attribute in c.attributes {
      * 
      *     map complexAttributePrimitiveAttributesLM_1 {
+     * a_1 := anAttribute;
      * c_1 := c;
      * ca_1 := ca;
      * fao_1 := fao;
-     * a_1 := anAttribute;
      * }}
      */
     protected boolean complexAttributePrimitiveAttributesLM(final @NonNull /*@NonInvalid*/ manualuml2rdbms.uml.Class c_2, final @NonNull /*@NonInvalid*/ Attribute ca) {
@@ -1807,9 +1807,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * for anAttribute : uml::Attribute in c.attributes {
      * 
      *     map complexAttributeComplexAttributesLM_1 {
-     * ca_1 := ca;
      * a_1 := anAttribute;
      * c_1 := c;
+     * ca_1 := ca;
      * fao_1 := fao;
      * }}
      */
@@ -1967,12 +1967,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      *   map attributeColumnsMR_2 {
      * a2c_2 := a2c;
      * c_2 := c;
-     * p2n_2 := p2n;
      * ct_2 := ct;
+     * p2n_2 := p2n;
      * }
      *   map attributeColumnsMR_3 {
-     * c_3 := c;
      * a2c_3 := a2c;
+     * c_3 := c;
      * }
      */
     protected boolean attributeColumnsMR(final @NonNull /*@NonInvalid*/ AttributeToColumn a2c, final @NonNull /*@NonInvalid*/ ClassToTable c2t_0, final @NonNull /*@NonInvalid*/ Table t) {
@@ -2059,8 +2059,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * c_2.type := ct_2;
      * }
      * map attributeColumnsMR_2_1 {
-     * p2n_2_1 := p2n_2;
      * ct_2_1 := ct_2;
+     * p2n_2_1 := p2n_2;
      * }
      */
     protected boolean attributeColumnsMR_2(final @NonNull /*@NonInvalid*/ AttributeToColumn a2c_2, final @NonNull /*@NonInvalid*/ Column c_2_0, final @NonNull /*@NonInvalid*/ String ct_2, final @NonNull /*@NonInvalid*/ PrimitiveToName p2n_2) {

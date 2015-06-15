@@ -54,6 +54,7 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 	// TODO how to manage aliases?
 	/** Map a typed model to its resource (model). */
 	private @NonNull Map<TypedModel, Resource> modelResourceMap = new HashMap<TypedModel, Resource>();
+	private @NonNull Map<Resource, TypedModel> resource2typedModel = new HashMap<Resource, TypedModel>();
 	
 	private @NonNull Map<TypedModel, List<EObject>> modelElementsMap = new HashMap<TypedModel, List<EObject>>();
 
@@ -66,9 +67,10 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 	 * Array of caches for the un-navigable opposite of each used property. 
 	 * The array index is allocated by the QVTiTransformationAnalysis; it identifies the property
 	 * of interest. Each cache is from the sourceObject to the un-navigable targetObject.
+	 * <p>
+	 * Keys and values cannot be null, since null cannot participate in a 'bidirectional' relationship.
 	 */
 	private @NonNull Map<?, ?> unnavigableOpposites[];
-	
 	
 	/**
 	 * Instantiates a new QVTi Domain Manager. Responsible for creating new
@@ -96,6 +98,7 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 	// TODO support multiple model instances by alias
 	public void addModel(@NonNull TypedModel typedModel, @NonNull Resource model) {
 	    modelResourceMap.put(typedModel, model);
+	    resource2typedModel.put(model, typedModel);
 	}
 
 	/**
@@ -212,6 +215,24 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
         return elements;
     }
 
+	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis() {
+		return transformationAnalysis;
+	}
+	
+	public List<EObject> getTypeModelEObjectList(TypedModel model) {
+		
+		if (modelElementsMap.containsKey(model)) {
+			return  modelElementsMap.get(model);
+		} else {
+			return new ArrayList<EObject>();
+		}
+		
+	}
+
+	public @Nullable TypedModel getTypedModel(@NonNull Resource resource) {
+		return resource2typedModel.get(resource);
+	}
+
 	/**
 	 * Return the target object of the unnavigable property, associated with cacheIndex, navigation from sourceObject.
 	 */
@@ -248,20 +269,6 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 			}
 		}
 	    return (objectType != null) && objectType.conformsTo(metamodelManager.getStandardLibrary(), requiredType);
-	}
-
-	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis() {
-		return transformationAnalysis;
-	}
-	
-	public List<EObject> getTypeModelEObjectList(TypedModel model) {
-		
-		if (modelElementsMap.containsKey(model)) {
-			return  modelElementsMap.get(model);
-		} else {
-			return new ArrayList<EObject>();
-		}
-		
 	}
 
 	/**

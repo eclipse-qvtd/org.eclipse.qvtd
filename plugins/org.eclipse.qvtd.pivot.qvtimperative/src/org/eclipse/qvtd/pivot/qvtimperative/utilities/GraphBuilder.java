@@ -20,6 +20,7 @@ public interface GraphBuilder {
 			@NonNull String label);
 	void appendNode(@NonNull String id, @NonNull String shapeName,
 			@NonNull String fillColor, String label, @NonNull String labelColor);
+	void appendNode(/*@NonNull*/ String id, @NonNull String shapeName, @NonNull String fillColor, int height, int width, String label);
 	void close();
 	void open();
 }

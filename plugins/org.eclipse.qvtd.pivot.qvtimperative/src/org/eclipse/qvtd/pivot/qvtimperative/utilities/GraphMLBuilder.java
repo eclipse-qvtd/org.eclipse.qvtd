@@ -16,6 +16,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public class GraphMLBuilder implements GraphBuilder
 {	
@@ -242,6 +243,44 @@ public class GraphMLBuilder implements GraphBuilder
 		s.pushTag("y:EdgeLabel");
 			s.appendElement("textColor", labelColor);
 		s.appendValueAndPopTag(label);
+	}
+
+	public void appendGeometry(@Nullable Integer height, @Nullable Integer width, @Nullable Integer x, @Nullable Integer y ) {
+		s.pushTag("y:Geometry");
+			if (height != null) {
+				s.appendElement("height", height.toString());
+			}
+			if (width != null) {
+				s.appendElement("width", width.toString());
+			}
+			if (x != null) {
+				s.appendElement("x", x.toString());
+			}
+			if (y != null) {
+				s.appendElement("y", y.toString());
+			}
+		s.popTag();
+	}
+
+	protected void appendLabel(/*@NonNull*/ String label) {
+		s.appendText("y:NodeLabel", label);
+	}
+
+	@Override
+	public void appendNode(/*@NonNull*/ String id, @NonNull String shapeName, @NonNull String fillColor, int height, int width, String label) {
+		s.pushTag("node");
+			s.appendElement("id", id);
+			appendData("d5");
+			s.pushTag("data");
+				s.appendElement("key", "d6");
+				s.pushTag("y:ShapeNode");
+					appendGeometry(height, width, null, null);
+					appendFill(fillColor);
+					appendLabel(label);
+					appendShape(shapeName);
+				s.popTag();
+			s.popTag();
+		s.popTag();
 	}
 	
 	protected void appendNodeLabel(String label, String labelColor) {

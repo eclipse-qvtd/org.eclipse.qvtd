@@ -1499,12 +1499,12 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
      * 
      *     map associationToForeignKey_LM {
      * a := a;
-     * sc := a.source;
      * dc := a.destination;
-     * p := a.namespace;
-     * sc2t := a.source.middle;
      * dc2t := a.destination.middle;
+     * p := a.namespace;
      * p2s := a.source.middle.owner;
+     * sc := a.source;
+     * sc2t := a.source.middle;
      * }}
      *   for a2f : uml2rdbms::AssociationToForeignKey in middle.objectsOfKind(uml2rdbms::AssociationToForeignKey)
      *    {
@@ -1514,37 +1514,37 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
      * 
      *       map associationToForeignKey_MR {
      * a2f := a2f;
-     * rk := rk;
      * dc2t := a2f.referenced;
-     * sc2t := a2f.owner;
-     * st := a2f.owner.table;
-     * s := a2f.owner.table.schema;
      * dt := a2f.referenced.table;
      * p2s := a2f.owner.owner;
+     * rk := rk;
+     * s := a2f.owner.table.schema;
+     * sc2t := a2f.owner;
+     * st := a2f.owner.table;
      * }}}
      *   for prim : uml::PrimitiveDataType in uml.objectsOfKind(uml::PrimitiveDataType)
      *    {
      * 
      *     map stringToVarchar_LM {
-     * prim := prim;
      * p := prim.namespace;
      * p2s := prim.namespace.middle;
+     * prim := prim;
      * }}
      *   for prim : uml::PrimitiveDataType in uml.objectsOfKind(uml::PrimitiveDataType)
      *    {
      * 
      *     map integerToNumber_LM {
-     * prim := prim;
      * p := prim.namespace;
      * p2s := prim.namespace.middle;
+     * prim := prim;
      * }}
      *   for prim : uml::PrimitiveDataType in uml.objectsOfKind(uml::PrimitiveDataType)
      *    {
      * 
      *     map booleanToBoolean_LM {
-     * prim := prim;
      * p := prim.namespace;
      * p2s := prim.namespace.middle;
+     * prim := prim;
      * }}
      *   for a : uml::Attribute in uml.objectsOfKind(uml::Attribute)
      *   ->select(type.oclIsKindOf(uml::PrimitiveDataType))
@@ -1554,9 +1554,9 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
      * 
      *       a := a;
      * c := a.owner;
-     * t := a.type;
-     * p2n := a.type.oclAsType(uml::PrimitiveDataType).middle;
      * fao := a.owner.middle;
+     * p2n := a.type.oclAsType(uml::PrimitiveDataType).middle;
+     * t := a.type;
      * }}
      *   for p2n : uml2rdbms::IntegerToNumber in middle.objectsOfKind(uml2rdbms::IntegerToNumber)
      *    {
@@ -1581,9 +1581,9 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
      * 
      *     map classComplexAttributes_LM {
      * a := a;
-     * t := a.type;
      * c := a.owner;
      * fao := a.owner.middle;
+     * t := a.type;
      * }}
      *   for fao : uml2rdbms::NonLeafAttribute in middle.objectsOfKind(uml2rdbms::NonLeafAttribute)
      *    {
@@ -1593,10 +1593,10 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
      * 
      *       map complexAttributeComplexAttributes_LM {
      * a := a;
-     * fao := fao;
-     * ca := fao.attribute;
-     * t := a.type;
      * c := fao.attribute.type;
+     * ca := fao.attribute;
+     * fao := fao;
+     * t := a.type;
      * }}}
      *   for a : uml::Attribute in uml.objectsOfKind(uml::Attribute)
      *   ->select(type.oclIsKindOf(uml::PrimitiveDataType))
@@ -1608,11 +1608,11 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
      *       map complexAttributePrimitiveAttributes_LM {
      * 
      *         a := a;
-     * ca := ca;
      * c := a.owner;
-     * t := a.type;
-     * p2n := a.type.oclAsType(uml::PrimitiveDataType).middle;
+     * ca := ca;
      * fao := ca.middle;
+     * p2n := a.type.oclAsType(uml::PrimitiveDataType).middle;
+     * t := a.type;
      * }}}
      *   for a2c : uml2rdbms::AttributeToColumn in middle.objectsOfKind(uml2rdbms::AttributeToColumn)
      *   ->select(owner.oclIsKindOf(uml2rdbms::ClassToTable))
@@ -1621,10 +1621,10 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
      *     map attributeColumns_MR {
      * 
      *       a2c := a2c;
-     * p2n := a2c.type;
      * c2t := a2c.owner;
-     * t := a2c.owner.oclAsType(uml2rdbms::ClassToTable).table;
      * ct := a2c.type.typeName;
+     * p2n := a2c.type;
+     * t := a2c.owner.oclAsType(uml2rdbms::ClassToTable).table;
      * }}
      */
     protected boolean __root__() {

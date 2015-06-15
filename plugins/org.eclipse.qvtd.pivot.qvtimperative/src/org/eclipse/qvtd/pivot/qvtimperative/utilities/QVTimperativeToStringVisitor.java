@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -52,23 +53,42 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 
 	@Override
 	public @Nullable String visitMappingCall(@NonNull MappingCall object) {
-		append("mappingCall ");
 		appendQualifiedName(object.getReferredMapping());
+		append(" {");
+		boolean isFirst = true;
+		for (MappingCallBinding binding : object.getBinding()) {
+			if (!isFirst) {
+				append(", ");
+			}
+			appendName(binding.getBoundVariable());
+			append(binding.isIsPolled() ? " ?= " : " := ");
+			safeVisit(binding.getValue());
+			isFirst = false;
+		}
+		append("}");
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitMappingCallBinding(@NonNull MappingCallBinding object) {
 		appendName(object.getBoundVariable());
-		append(" := ");
+		append(object.isIsPolled() ? " ?= " : " := ");
 		safeVisit(object.getValue());
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitMappingLoop(@NonNull MappingLoop object) {
-		append("mappingLoop ");
-		appendQualifiedName(object.getOwnedIterators().get(0));
+		boolean isFirst = true;
+		for (Variable iterator : object.getOwnedIterators()) {
+			if (!isFirst) {
+				append(", ");
+			}
+			appendName(iterator);
+			isFirst = false;
+		}
+		append(" := ");
+		safeVisit(object.getOwnedSource());
 		return null;
 	}
 

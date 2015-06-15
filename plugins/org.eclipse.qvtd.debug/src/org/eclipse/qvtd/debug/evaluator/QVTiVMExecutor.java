@@ -59,7 +59,7 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 		QVTiVMEvaluationVisitor visitor = (QVTiVMEvaluationVisitor) getEvaluationVisitor();
 		VMEvaluationStepper vmStepper = visitor.getVMEvaluationStepper();
 		vmStepper.start(suspendOnStartup);
-	    return (Boolean) transformation.accept(visitor);
+		return super.executeInternal();
 	}
 
 	@Override

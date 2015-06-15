@@ -87,7 +87,7 @@ public class QVTcoreBaseToStringVisitor extends QVTbaseToStringVisitor implement
 
 	@Override
 	public String visitRealizedVariable(@NonNull RealizedVariable variable) {
-		append("realized ");
+//		append("realized ");
 		visitVariable(variable);
 		return null;
 	}

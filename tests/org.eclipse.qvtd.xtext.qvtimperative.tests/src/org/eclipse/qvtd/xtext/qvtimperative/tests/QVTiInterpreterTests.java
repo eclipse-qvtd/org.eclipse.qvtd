@@ -325,8 +325,8 @@ public class QVTiInterpreterTests extends LoadTestCase
      *
      * @throws Exception the exception
      */
-    @Test
-    public void testTree2TallTree() throws Exception {
+//    @Test
+    public void zztestTree2TallTree() throws Exception {
     	MyQVT myQVT = createQVT();
     	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 //    	MyQVT myQVT = new MyQVT(new MyQVTiEnvironmentFactory(getProjectMap(), null));
