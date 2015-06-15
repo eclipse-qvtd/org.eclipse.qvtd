@@ -76,6 +76,8 @@ rule Transformation
         tOut.name = tIn.name;
         tOut.modelParameter ::= tIn.modelParameter;
         tOut.`rule`.addAll(tIn.`rule`.equivalents().flatten());
+        tOut.ownedOperations.addAll(emfTool.getECoreUtil().copyAll(tIn.ownedOperations));
+        
     }
 
 /****u* QVTmToQVTiPartition/TypedModel
