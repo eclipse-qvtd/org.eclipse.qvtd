@@ -38,13 +38,13 @@ import test.hsv.HSVTree.HSVTreePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.hsv.HSVTree.impl.HSVNodeImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link test.hsv.HSVTree.impl.HSVNodeImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link test.hsv.HSVTree.impl.HSVNodeImpl#getHsv <em>Hsv</em>}</li>
  *   <li>{@link test.hsv.HSVTree.impl.HSVNodeImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

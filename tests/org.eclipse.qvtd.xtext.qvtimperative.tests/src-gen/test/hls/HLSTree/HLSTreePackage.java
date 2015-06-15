@@ -57,7 +57,7 @@ public interface HLSTreePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "pfx";
+	String eNS_PREFIX = "hls";
 
 	/**
 	 * The singleton instance of the package.

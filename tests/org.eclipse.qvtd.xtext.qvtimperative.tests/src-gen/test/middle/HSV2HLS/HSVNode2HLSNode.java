@@ -27,6 +27,7 @@ import test.hsv.HSVTree.HSVNode;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.middle.HSV2HLS.HSVNode2HLSNode#getParent <em>Parent</em>}</li>
  *   <li>{@link test.middle.HSV2HLS.HSVNode2HLSNode#getChildren <em>Children</em>}</li>
@@ -35,7 +36,6 @@ import test.hsv.HSVTree.HSVNode;
  *   <li>{@link test.middle.HSV2HLS.HSVNode2HLSNode#getRgb <em>Rgb</em>}</li>
  *   <li>{@link test.middle.HSV2HLS.HSVNode2HLSNode#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.middle.HSV2HLS.HSV2HLSPackage#getHSVNode2HLSNode()
  * @model

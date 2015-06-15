@@ -42,6 +42,7 @@ import test.middle.HSV2HLS.HSVNode2HLSNode;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.middle.HSV2HLS.impl.HSVNode2HLSNodeImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link test.middle.HSV2HLS.impl.HSVNode2HLSNodeImpl#getChildren <em>Children</em>}</li>
@@ -50,7 +51,6 @@ import test.middle.HSV2HLS.HSVNode2HLSNode;
  *   <li>{@link test.middle.HSV2HLS.impl.HSVNode2HLSNodeImpl#getRgb <em>Rgb</em>}</li>
  *   <li>{@link test.middle.HSV2HLS.impl.HSVNode2HLSNodeImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

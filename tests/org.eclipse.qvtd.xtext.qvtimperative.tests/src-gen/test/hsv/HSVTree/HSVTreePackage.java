@@ -57,7 +57,7 @@ public interface HSVTreePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "pfx";
+	String eNS_PREFIX = "hsv";
 
 	/**
 	 * The singleton instance of the package.

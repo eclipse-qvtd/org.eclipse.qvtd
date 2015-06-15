@@ -23,13 +23,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.hsv.HSVTree.HSVNode#getParent <em>Parent</em>}</li>
  *   <li>{@link test.hsv.HSVTree.HSVNode#getChildren <em>Children</em>}</li>
  *   <li>{@link test.hsv.HSVTree.HSVNode#getHsv <em>Hsv</em>}</li>
  *   <li>{@link test.hsv.HSVTree.HSVNode#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.hsv.HSVTree.HSVTreePackage#getHSVNode()
  * @model

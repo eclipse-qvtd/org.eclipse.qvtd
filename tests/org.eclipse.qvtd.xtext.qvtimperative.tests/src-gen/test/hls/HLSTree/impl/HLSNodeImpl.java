@@ -38,13 +38,13 @@ import test.hls.HLSTree.HLSTreePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.hls.HLSTree.impl.HLSNodeImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link test.hls.HLSTree.impl.HLSNodeImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link test.hls.HLSTree.impl.HLSNodeImpl#getHls <em>Hls</em>}</li>
  *   <li>{@link test.hls.HLSTree.impl.HLSNodeImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

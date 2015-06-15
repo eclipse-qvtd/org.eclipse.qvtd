@@ -23,13 +23,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.hls.HLSTree.HLSNode#getParent <em>Parent</em>}</li>
  *   <li>{@link test.hls.HLSTree.HLSNode#getChildren <em>Children</em>}</li>
  *   <li>{@link test.hls.HLSTree.HLSNode#getHls <em>Hls</em>}</li>
  *   <li>{@link test.hls.HLSTree.HLSNode#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.hls.HLSTree.HLSTreePackage#getHLSNode()
  * @model
