@@ -24,13 +24,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
-import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -41,7 +41,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
-import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.SimpleUML2RDBMS.SimpleRDBMSNormalizer;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -236,8 +235,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 	@Before
     public void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
+		QVTiTestUtil.doQVTimperativeSetup();
 		super.setUp();
-		QVTimperativeStandaloneSetup.doSetup();
     }
     
     /*
@@ -357,7 +356,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testManualUML2RDBMS() throws Exception {
     	MyQVT myQVT = createQVT();
-        CompleteOCLStandaloneSetup.doSetup();
+	    TestUtil.doCompleteOCLSetup();
         URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
         //  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
         @SuppressWarnings("unused")
@@ -385,7 +384,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testSimpleUML2RDBMS() throws Exception {
     	MyQVT myQVT = createQVT();
-        CompleteOCLStandaloneSetup.doSetup();
+	    TestUtil.doCompleteOCLSetup();
         URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
         QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
 		//  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);
@@ -427,7 +426,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     
     @Test
     public void testClassesCS2AS_bug457239() throws Exception {
-    	CompleteOCLStandaloneSetup.doSetup();
+	    TestUtil.doCompleteOCLSetup();
     	MyQVT myQVT = createQVT();
         MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(myQVT.getEnvironmentFactory(), "ClassesCS2AS/bug457239", "ClassesCS2AS.qvti");
     	testEvaluator.saveTransformation(null);
@@ -444,7 +443,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     
     @Test
     public void testClassesCS2AS_bug457239b() throws Exception {
-    	CompleteOCLStandaloneSetup.doSetup();
+	    TestUtil.doCompleteOCLSetup();
     	MyQVT myQVT = createQVT();
     	URI baseURI = URI.createURI("platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/bug457239");
     	URI txURI = baseURI.appendSegment("ClassesCS2ASv2_AS.qvtias"); 

@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Comment;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Element;
@@ -42,7 +43,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -57,7 +57,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeDomainUsageAnalysis;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
-import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 
 import test.hls.HLSTree.HLSTreePackage;
 import test.hsv.HSVTree.HSVTreePackage;
@@ -168,8 +167,9 @@ public class QVTiDomainUsageTests extends LoadTestCase
 	@Override
 	protected void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
+		QVTiTestUtil.doCompleteOCLSetup();
+		QVTiTestUtil.doQVTimperativeSetup();
 		super.setUp();
-		QVTimperativeStandaloneSetup.doSetup();
 	}
 
 	public Resource doLoad_ConcreteWithOCL(@NonNull MyQVT myQVT, @NonNull URI inputURI) throws IOException {
@@ -189,7 +189,7 @@ public class QVTiDomainUsageTests extends LoadTestCase
 		saveAsXMI(xtextResource, cstURI);
 		asResource.setURI(pivotURI);
 	    
-	    CompleteOCLStandaloneSetup.doSetup();
+	    TestUtil.doCompleteOCLSetup();
 	    URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
 //		CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, myQVT.getEnvironmentFactory());
@@ -233,7 +233,7 @@ public class QVTiDomainUsageTests extends LoadTestCase
 	}
 	
 	public void testDomainUsage_ClassesCS2AS_bug459225() throws Exception {
-		CompleteOCLStandaloneSetup.doSetup();
+		TestUtil.doCompleteOCLSetup();
 		MyQVT myQVT = createQVT();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Registry packageRegistry = resourceSet.getPackageRegistry();

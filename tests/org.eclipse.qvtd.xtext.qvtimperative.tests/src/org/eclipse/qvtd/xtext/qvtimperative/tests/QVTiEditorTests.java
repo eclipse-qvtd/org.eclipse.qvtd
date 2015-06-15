@@ -12,16 +12,12 @@ package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
 import java.io.IOException;
 
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
-import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
-
-import com.google.inject.Guice;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -37,24 +33,10 @@ public class QVTiEditorTests extends LoadTestCase
 		ocl.dispose();
 	}
 
-	/**
-	 * Perform the appropriate initialization to support QVTimperative parsing and editing using Xtext.
-	 * NB. This must be called before setUp() creates a GlobalStateMemento if the aggressive DEBUG_GC
-	 * garbage collection is enabled.
-	 */
-	public static void doQVTimperativeSetup() {
-    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-    		QVTimperativeStandaloneSetup.doSetup();
-    	}
-    	else {
-    		Guice.createInjector(new org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeRuntimeModule());
-    	}
-	}	
-
 	@Override
 	protected void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
-		doQVTimperativeSetup();
+		QVTiTestUtil.doQVTimperativeSetup();
 		super.setUp();
 	}
 	public void testLoad_HSV2HLS_qvti() throws IOException, InterruptedException {
