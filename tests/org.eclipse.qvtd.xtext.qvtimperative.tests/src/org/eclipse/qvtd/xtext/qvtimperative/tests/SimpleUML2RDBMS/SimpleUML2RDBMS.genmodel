@@ -3,7 +3,8 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen"
     modelPluginID="org.eclipse.qvtd.xtext.qvtimperative.tests" modelName="UML2RDBMS"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="5.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+    bundleManifest="false" complianceLevel="5.0" copyrightFields="false" operationReflection="true"
+    importOrganizing="true" pluginKey="">
   <foreignModel>SimpleUML2RDBMS.ecore</foreignModel>
   <genPackages prefix="UML2RDBMS" basePackage="simpleuml2rdbms" disposableProviderFactory="true"
       fileExtensions="simpleuml2rdbms" ecorePackage="SimpleUML2RDBMS.ecore#/">
