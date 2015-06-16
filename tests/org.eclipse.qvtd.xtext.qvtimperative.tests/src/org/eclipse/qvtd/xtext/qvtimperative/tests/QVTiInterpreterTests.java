@@ -41,8 +41,10 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EvaluationStatus2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -67,6 +69,10 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 		public @NonNull MyQvtiExecutor createEvaluator(@NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
 			return new MyQvtiExecutor(getEnvironmentFactory(), fileNamePrefix, transformationFileName);
+		}
+
+		public @NonNull MyQvtiExecutor createEvaluator(@NonNull String fileNamePrefix, @NonNull String transformationFileName, @NonNull QVTiIncrementalExecutor.Mode mode) throws IOException {
+			return new MyQvtiExecutor(getEnvironmentFactory(), fileNamePrefix, transformationFileName, mode);
 		}
 
 		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
@@ -95,7 +101,10 @@ public class QVTiInterpreterTests extends LoadTestCase
 		 * @throws IOException Signals that an I/O exception has occurred.
 		 */
 		public MyQvtiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
-			super(environmentFactory, getProjectFileURI(fileNamePrefix + "/"  + transformationFileName));
+			this(environmentFactory, fileNamePrefix, transformationFileName, QVTiIncrementalExecutor.Mode.INCREMENTAL);
+		}
+		public MyQvtiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull String fileNamePrefix, @NonNull String transformationFileName, @NonNull Mode mode) throws IOException {
+			super(environmentFactory, getProjectFileURI(fileNamePrefix + "/"  + transformationFileName), mode);
 			this.fileNamePrefix = fileNamePrefix + "/";
 		}
 		
@@ -172,11 +181,12 @@ public class QVTiInterpreterTests extends LoadTestCase
 		        }
 	        }
 	        finally {
-		       	String s = getEvaluationStatusGraph();
+	        	GraphMLBuilder s = new GraphMLBuilder();
+	        	getTransformationStatus().accept(new EvaluationStatus2GraphVisitor(s));
 		    	File projectFile = getProjectFile();
-	    		File graphFile = new File(projectFile.toString() + "/" + fileNamePrefix + "EvaluationStatus.graphml");
+	    		File graphFile = new File(projectFile.toString() + "/" + fileNamePrefix + transformation.getName() + "_" + mode + ".graphml");
 	    		FileWriter writer = new FileWriter(graphFile);
-	    		writer.append(s);
+	    		writer.append(s.toString());
 	        	writer.close();
 	       }
 	    }
@@ -307,15 +317,34 @@ public class QVTiInterpreterTests extends LoadTestCase
     }
 
     /**
-     * Test hsv 2 hls.
-     *
-     * @throws Exception the exception
+     * Test tree2talltree using the INCREMENTAL evaluator.
      */
     @Test
-    public void testTree2TallTree() throws Exception {
+    public void testTree2TallTreeIncremental() throws Exception {
     	MyQVT myQVT = createQVT();
     	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-    	MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Tree2TallTree", "Tree2TallTree.qvti");
+    	MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Tree2TallTree", "Tree2TallTree.qvti", QVTiIncrementalExecutor.Mode.INCREMENTAL);
+    	testEvaluator.saveTransformation(null);
+    	testEvaluator.loadModel("tree", "Tree.xmi");
+        testEvaluator.createModel("tree2talltree", "Tree2TallTree.xmi");
+        testEvaluator.createModel("talltree", "TallTree.xmi");
+        testEvaluator.loadReference("talltree", "TallTreeValidate.xmi");
+        testEvaluator.test();
+        testEvaluator.dispose();
+        
+        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        assertLoadable(txURI);
+        myQVT.dispose();
+    }
+
+    /**
+     * Test tree2talltree using the LAZY evaluator.
+     */
+    @Test
+    public void testTree2TallTreeLazy() throws Exception {
+    	MyQVT myQVT = createQVT();
+    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Tree2TallTree", "Tree2TallTree.qvti", QVTiIncrementalExecutor.Mode.LAZY);
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("tree", "Tree.xmi");
         testEvaluator.createModel("tree2talltree", "Tree2TallTree.xmi");

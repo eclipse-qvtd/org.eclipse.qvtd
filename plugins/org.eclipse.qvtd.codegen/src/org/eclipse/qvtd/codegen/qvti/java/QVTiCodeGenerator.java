@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -57,7 +58,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 {	
 	protected final @NonNull QVTiAnalyzer cgAnalyzer;
 	protected final @NonNull Transformation transformation;
-	private/* @LazyNonNull */String javaSourceCode = null;
+	private/* @LazyNonNull*/ CGPackage cgPackage;
+	private/* @LazyNonNull*/ String javaSourceCode = null;
 	protected final @NonNull QVTiGlobalContext globalContext = new QVTiGlobalContext(this);
 	protected final @NonNull Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
 
@@ -88,14 +90,36 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	protected @NonNull CGPackage createCGPackage() {
-		String packagePrefix = getOptions().getPackagePrefix();
-		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
-		cgPackage.setName(packagePrefix);
-		QVTiAS2CGVisitor pivot2CGVisitor = createAS2CGVisitor(cgAnalyzer,
-			getGlobalContext());
-		CGTransformation cgTransformation = (CGTransformation) ClassUtil
-			.nonNullState(transformation.accept(pivot2CGVisitor));
+		CGPackage cgPackage = createCGPackage(ClassUtil.nonNullModel(transformation.getOwningPackage()));
+		QVTiAS2CGVisitor pivot2CGVisitor = createAS2CGVisitor(cgAnalyzer, getGlobalContext());
+		CGTransformation cgTransformation = (CGTransformation) ClassUtil.nonNullState(transformation.accept(pivot2CGVisitor));
 		cgPackage.getClasses().add(cgTransformation);
+		while (cgPackage.eContainer() != null) {
+			cgPackage = (CGPackage)cgPackage.eContainer();
+		}
+		return cgPackage;
+	}
+
+	protected @NonNull CGPackage createCGPackage(@NonNull org.eclipse.ocl.pivot.Package asPackage) {
+		String packagePrefix = getOptions().getPackagePrefix();
+		CGPackage cgParentPackage;
+		org.eclipse.ocl.pivot.Package asParentPackage = asPackage.getOwningPackage();
+		if (asParentPackage != null) {
+			cgParentPackage = createCGPackage(asParentPackage);
+		}
+		else if (packagePrefix != null) {
+			cgParentPackage = CGModelFactory.eINSTANCE.createCGPackage();
+			cgParentPackage.setName(packagePrefix);		
+		}
+		else {
+			cgParentPackage = null;		
+		}
+		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
+		String name = asPackage.getName();
+		cgPackage.setName((name != null) && (name.length() > 0)? name : "_" + transformation.getName());
+		if (cgParentPackage != null) {
+			cgParentPackage.getPackages().add(cgPackage);
+		}
 		return cgPackage;
 	}
 
@@ -131,11 +155,12 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	public @NonNull String generateClassFile() {
 		String javaSourceCode2 = javaSourceCode;
 		if (javaSourceCode2 == null) {
-			CGPackage cgPackage = createCGPackage();
-			optimize(cgPackage);
+			CGPackage cgPackage2 = createCGPackage();
+			cgPackage = cgPackage2;
+			optimize(cgPackage2);
 			List<CGValuedElement> sortedGlobals = prepareGlobals();
-			QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage, sortedGlobals);
-			generator.safeVisit(cgPackage);
+			QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
+			generator.safeVisit(cgPackage2);
 			Set<String> allImports = generator.getAllImports();
 			Map<String, String> long2ShortImportNames = ImportUtils.getLong2ShortImportNames(allImports);
 			javaSourceCode = javaSourceCode2 = ImportUtils.resolveImports(generator.toString(), long2ShortImportNames);
@@ -159,13 +184,18 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	public @NonNull String getQualifiedName() {
-		String className = ClassUtil.nonNullState(transformation.getName());
-		String packagePrefix = getOptions().getPackagePrefix();
-		if (packagePrefix != null) {
-			return packagePrefix + "." + className;
-		} else {
-			return className;
+		StringBuilder s =  new StringBuilder();
+		CGPackage cgPackage = this.cgPackage;
+		s.append(cgPackage.getName());
+		while (cgPackage.getPackages().size() > 0) {
+			cgPackage = cgPackage.getPackages().get(0);
+			s.append(".");
+			s.append(cgPackage.getName());
 		}
+		s.append(".");
+		s.append(transformation.getName());
+		@SuppressWarnings("null")@NonNull String string = s.toString();
+		return string;
 	}
 
 	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
@@ -180,13 +210,22 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	public void saveSourceFile(@NonNull String savePath) throws IOException {
-		String javaCodeSource = generateClassFile();
-		String qualifiedName = getQualifiedName();
-		String saveDir = savePath + qualifiedName.replace('.', '/');
-		String fileName = saveDir + ".java";
-		new File(saveDir).getParentFile().mkdirs();
-		Writer writer = new FileWriter(fileName);
-		writer.append(javaCodeSource);
-		writer.close();
+		saveSourceFiles(ClassUtil.nonNullState(cgPackage), new File(savePath));
+	}
+
+	public void saveSourceFiles(@NonNull CGPackage cgPackage, @NonNull File parentFolder) throws IOException {
+		File folder = new File(parentFolder, cgPackage.getName());
+		for (CGPackage cgChildPackage : cgPackage.getPackages()) {
+			if (cgChildPackage != null) {
+				saveSourceFiles(cgChildPackage, folder);
+			}
+		}
+		for (CGClass cgClass : cgPackage.getClasses()) {
+			folder.mkdirs();
+			String javaCodeSource = generateClassFile();
+			Writer writer = new FileWriter(new File(folder, cgClass.getName() + ".java"));
+			writer.append(javaCodeSource);
+			writer.close();
+		}
 	}
 }

@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package cg;
+package cg._classescs2as_qvtp_qvtias;
 
 import example2.classes.ClassesFactory;
 import example2.classes.ClassesPackage;

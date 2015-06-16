@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package cg;
+package cg._ManualUML2RDBMS;
 
 import java.util.Collections;
 import java.util.HashMap;

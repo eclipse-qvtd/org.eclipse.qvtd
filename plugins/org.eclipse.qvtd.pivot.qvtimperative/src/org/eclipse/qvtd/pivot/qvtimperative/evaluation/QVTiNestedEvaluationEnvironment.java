@@ -63,7 +63,7 @@ public class QVTiNestedEvaluationEnvironment extends BasicEvaluationEnvironment 
 				OperationCallExp operationCallExp = (OperationCallExp)callingObject;
 				Operation referredOperation = operationCallExp.getReferredOperation();
 				if (referredOperation != null) {
-					usageAnalysis = usageAnalysis2 = getRootEvaluationEnvironment().getUsageAnalysis().getAnalysis(referredOperation);
+					usageAnalysis = usageAnalysis2 = getExecutor().getModelManager().getTransformationAnalysis().getDomainUsageAnalysis().getAnalysis(referredOperation);
 					// FIXME Surely we need to 'specialize' for the actual usage of callingObject
 				}
 			}

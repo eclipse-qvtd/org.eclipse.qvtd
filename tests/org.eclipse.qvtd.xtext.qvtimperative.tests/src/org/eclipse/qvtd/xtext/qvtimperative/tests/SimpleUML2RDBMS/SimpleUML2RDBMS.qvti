@@ -2,14 +2,14 @@ import simplerdbms : 'SimpleRDBMS.ecore#/';
 import simpleuml : 'SimpleUML.ecore#/';
 import umltordbms : 'SimpleUML2RDBMS.ecore#/';
 
-transformation SimpleUML2RDBMS
+transformation test::SimpleUML2RDBMS
 {
 	uml imports simpleuml;
 	rdbms imports simplerdbms;
 	middle imports umltordbms;
 }
 
-map packageToSchema_LM in SimpleUML2RDBMS
+map packageToSchema_LM in test::SimpleUML2RDBMS
 {
 	check uml(p : Package) {}
 	enforce middle() {
@@ -21,7 +21,7 @@ map packageToSchema_LM in SimpleUML2RDBMS
 	}
 }
 
-map packageToSchema_MR in SimpleUML2RDBMS
+map packageToSchema_MR in test::SimpleUML2RDBMS
 {
 	enforce rdbms() {
 		realize s : Schema
@@ -33,7 +33,7 @@ map packageToSchema_MR in SimpleUML2RDBMS
 	}
 }
 
-map integerToNumber_LM in SimpleUML2RDBMS
+map integerToNumber_LM in test::SimpleUML2RDBMS
 {
 	check uml(p : Package,
 		prim : PrimitiveDataType) {}
@@ -49,7 +49,7 @@ map integerToNumber_LM in SimpleUML2RDBMS
 	}
 }
 
-map integerToNumber_MR in SimpleUML2RDBMS
+map integerToNumber_MR in test::SimpleUML2RDBMS
 {
 	enforce rdbms() {}
 	check middle(p2s : PackageToSchema,
@@ -61,7 +61,7 @@ map integerToNumber_MR in SimpleUML2RDBMS
 	}
 }
 
-map booleanToBoolean_MR in SimpleUML2RDBMS
+map booleanToBoolean_MR in test::SimpleUML2RDBMS
 {
 	enforce rdbms() {}
 	check middle(p2s : PackageToSchema,
@@ -74,7 +74,7 @@ map booleanToBoolean_MR in SimpleUML2RDBMS
 	}
 }
 
-map booleanToBoolean_LM in SimpleUML2RDBMS
+map booleanToBoolean_LM in test::SimpleUML2RDBMS
 {
 	check uml(p : Package,
 		prim : PrimitiveDataType) {}
@@ -90,7 +90,7 @@ map booleanToBoolean_LM in SimpleUML2RDBMS
 	}
 }
 
-map stringToVarchar_MR in SimpleUML2RDBMS
+map stringToVarchar_MR in test::SimpleUML2RDBMS
 {
 	enforce rdbms() {}
 	check middle(p2s : PackageToSchema,
@@ -102,7 +102,7 @@ map stringToVarchar_MR in SimpleUML2RDBMS
 	}
 }
 
-map stringToVarchar_LM in SimpleUML2RDBMS
+map stringToVarchar_LM in test::SimpleUML2RDBMS
 {
 	check uml(p : Package,
 		prim : PrimitiveDataType) {}
@@ -118,7 +118,7 @@ map stringToVarchar_LM in SimpleUML2RDBMS
 	}
 }
 
-map classToTable_MR in SimpleUML2RDBMS
+map classToTable_MR in test::SimpleUML2RDBMS
 {
 	enforce rdbms(s : Schema) {
 		realize t : Table,
@@ -146,7 +146,7 @@ map classToTable_MR in SimpleUML2RDBMS
 	}
 }
 
-map classToTable_LM in SimpleUML2RDBMS
+map classToTable_LM in test::SimpleUML2RDBMS
 {
 	check uml(p : Package,
 		c : Class) {}
@@ -162,7 +162,7 @@ map classToTable_LM in SimpleUML2RDBMS
 	}
 }
 
-map associationToForeignKey_MR in SimpleUML2RDBMS
+map associationToForeignKey_MR in test::SimpleUML2RDBMS
 {
 	enforce rdbms(s : Schema,
 		st : Table,
@@ -196,7 +196,7 @@ map associationToForeignKey_MR in SimpleUML2RDBMS
 	}
 }
 
-map associationToForeignKey_LM in SimpleUML2RDBMS
+map associationToForeignKey_LM in test::SimpleUML2RDBMS
 {
 	check uml(p : Package,
 		sc : Class,
@@ -237,7 +237,7 @@ map associationToForeignKey_LM in SimpleUML2RDBMS
 	}
 }
 
-map classPrimitiveAttributes_LM in SimpleUML2RDBMS
+map classPrimitiveAttributes_LM in test::SimpleUML2RDBMS
 {
 	check uml(t : PrimitiveDataType,
 		c : Class,
@@ -262,7 +262,7 @@ map classPrimitiveAttributes_LM in SimpleUML2RDBMS
 	}
 }
 
-map classComplexAttributes_LM in SimpleUML2RDBMS
+map classComplexAttributes_LM in test::SimpleUML2RDBMS
 {
 	check uml(t : Class,
 		c : Class,
@@ -283,7 +283,7 @@ map classComplexAttributes_LM in SimpleUML2RDBMS
 	}
 }
 
-map complexAttributePrimitiveAttributes_LM in SimpleUML2RDBMS
+map complexAttributePrimitiveAttributes_LM in test::SimpleUML2RDBMS
 {
 	check uml(ca : Attribute,
 		c : Class,
@@ -311,7 +311,7 @@ map complexAttributePrimitiveAttributes_LM in SimpleUML2RDBMS
 	}
 }
 
-map complexAttributeComplexAttributes_LM in SimpleUML2RDBMS
+map complexAttributeComplexAttributes_LM in test::SimpleUML2RDBMS
 {
 	check uml(ca : Attribute,
 		c : Class,
@@ -336,7 +336,7 @@ map complexAttributeComplexAttributes_LM in SimpleUML2RDBMS
 	}
 }
 
-map attributeColumns_MR in SimpleUML2RDBMS
+map attributeColumns_MR in test::SimpleUML2RDBMS
 {
 	enforce rdbms(t : Table,
 		ct : String) {
@@ -358,7 +358,7 @@ map attributeColumns_MR in SimpleUML2RDBMS
 	}
 }
 
-map __root__ in SimpleUML2RDBMS
+map __root__ in test::SimpleUML2RDBMS
 {
 	where () {}
 	for p : simpleuml::Package in uml.objectsOfKind(Package) {

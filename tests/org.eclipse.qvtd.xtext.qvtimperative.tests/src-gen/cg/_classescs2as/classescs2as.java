@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package cg;
+package cg._classescs2as;
 
 import classes.ClassesFactory;
 import classes.ClassesPackage;

@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package cg;
+package cg._classescs2as_Bug459225;
 
 import classes.ClassesFactory;
 import classes.ClassesPackage;

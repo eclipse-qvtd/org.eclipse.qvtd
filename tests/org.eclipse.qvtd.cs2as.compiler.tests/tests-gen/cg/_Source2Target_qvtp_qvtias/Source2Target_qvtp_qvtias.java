@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package cg;
+package cg._Source2Target_qvtp_qvtias;
 
 import example1.source.PathElementCS;
 import example1.source.PathNameCS;

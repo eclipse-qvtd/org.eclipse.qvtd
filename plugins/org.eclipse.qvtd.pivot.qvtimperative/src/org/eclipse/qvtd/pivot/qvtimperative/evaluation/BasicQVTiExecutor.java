@@ -250,7 +250,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		if (calledMapping != null) {
 			calledMapping.accept(undecoratedVisitor);
 		}
-    	return null;
+    	return true;
 	}
 
 	@Override

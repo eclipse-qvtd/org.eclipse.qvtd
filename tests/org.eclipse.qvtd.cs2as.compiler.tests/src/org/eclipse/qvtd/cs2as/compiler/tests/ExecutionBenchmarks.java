@@ -45,7 +45,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.junit.Before;
 import org.junit.Test;
 
-import cg.classescs2as_qvtp_qvtias;
+import cg._classescs2as_qvtp_qvtias.classescs2as_qvtp_qvtias;
 
 /**
  * @author asbh500

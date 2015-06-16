@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
@@ -36,6 +37,8 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeDomainUsageAnalysis;
 
 /**
@@ -56,7 +59,6 @@ public class QVTiTransformationAnalysis
 	 * Analysis of domains applicable to each transformation element. 
 	 */
 	private final @NonNull QVTimperativeDomainUsageAnalysis domainAnalysis;
-
 
 	/**
 	 *  Set of all types for which allInstances() is invoked.
@@ -81,15 +83,27 @@ public class QVTiTransformationAnalysis
 	/**
 	 * Map from oppositePropertyCallExp to the cache index identifying the relevant un-navigable lookup cache.
 	 */
-	private final @NonNull Map<OppositePropertyCallExp, Integer> oppositePropertyCallExp2cacheIndex = new HashMap<OppositePropertyCallExp, Integer>();;
+	private final @NonNull Map<OppositePropertyCallExp, Integer> oppositePropertyCallExp2cacheIndex = new HashMap<OppositePropertyCallExp, Integer>();
 
 	/**
-	 * @deprecated Use EnvironmentFactoryInternal constructor
+	 * Map from operation to the properties that it may access.
 	 */
-	@Deprecated
-	public QVTiTransformationAnalysis(@NonNull MetamodelManagerInternal metamodelManager) {
-	    this(metamodelManager.getEnvironmentFactory());
-	}
+	private final @NonNull Map<Operation, Set<Property>> operation2property = new HashMap<Operation, Set<Property>>();
+
+	/**
+	 * Map from mapping to the properties that it may access.
+	 */
+	private final @NonNull Map<Mapping, Set<Property>> mapping2property = new HashMap<Mapping, Set<Property>>();
+
+	/**
+	 * Map from mapping to the properties that it may assign.
+	 */
+	private final @NonNull Map<Mapping, Set<PropertyAssignment>> mapping2propertyAssignments = new HashMap<Mapping, Set<PropertyAssignment>>();
+
+	/**
+	 * Mappings that have an isPolled input.
+	 */
+	private final @NonNull Set<Mapping> hazardousMappings = new HashSet<Mapping>();
 
 	public QVTiTransformationAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
 	    this.environmentFactory = environmentFactory;
@@ -111,8 +125,73 @@ public class QVTiTransformationAnalysis
 		}
 		return cacheIndex;
 	}
+	
+	private @NonNull Set<Property> analyzeMappingPropertyAccesses(@NonNull Mapping mapping) {
+		Set<Property> accessedProperties = mapping2property.get(mapping);
+		if (accessedProperties != null) {
+			return accessedProperties;
+		}
+		accessedProperties = new HashSet<Property>();
+		mapping2property.put(mapping, accessedProperties);
+		analyzeTree(accessedProperties, mapping.eAllContents());
+		return accessedProperties;
+	}
+	
+	private @NonNull Set<PropertyAssignment> analyzeMappingPropertyAssignments(@NonNull Mapping mapping) {
+		Set<PropertyAssignment> assignedProperties = mapping2propertyAssignments.get(mapping);
+		if (assignedProperties == null) {
+			assignedProperties = new HashSet<PropertyAssignment>();
+			mapping2propertyAssignments.put(mapping, assignedProperties);
+		}
+		for (TreeIterator<EObject> treeIterator = mapping.eAllContents(); treeIterator.hasNext(); ) {
+			EObject eObject = treeIterator.next();
+			if (eObject instanceof PropertyAssignment) {
+				assignedProperties.add((PropertyAssignment) eObject);
+			}
+		}
+		return assignedProperties;
+	}
+
+	private @NonNull Set<Property> analyzeOperation(@NonNull Operation operation) {
+		Set<Property> operationProperties = operation2property.get(operation);
+		if (operationProperties != null) {
+			return operationProperties;
+		}
+		operationProperties = new HashSet<Property>();
+		operation2property.put(operation, operationProperties);
+		analyzeTree(operationProperties, operation.eAllContents());
+		return operationProperties;
+	}
+
+	protected void analyzeTree(@NonNull Set<Property> properties, /*@NonNull*/ TreeIterator<EObject> treeIterator) {
+		while (treeIterator.hasNext()) {
+			EObject eObject = treeIterator.next();
+			if (eObject instanceof OperationCallExp) {
+				Operation referredOperation = ((OperationCallExp)eObject).getReferredOperation();
+				if (referredOperation != null) {
+					properties.addAll(analyzeOperation(referredOperation));
+				}
+			}
+			else if (eObject instanceof PropertyCallExp) {
+				Property referredProperty = ((PropertyCallExp)eObject).getReferredProperty();
+				if (referredProperty != null) {
+					properties.add(referredProperty);
+				}
+			}
+			else if (eObject instanceof OppositePropertyCallExp) {
+				Property referredOppositeProperty = ((OppositePropertyCallExp)eObject).getReferredProperty();
+				if (referredOppositeProperty != null) {
+					Property referredProperty = referredOppositeProperty.getOpposite();
+					if (referredProperty != null) {
+						properties.add(referredProperty);
+					}
+				}
+			}
+		}
+	}
 
 	public void analyzeTransformation(@NonNull Transformation transformation) {
+		domainAnalysis.analyzeTransformation(transformation);
 		transformation.accept(QVTiTuneUpVisitor.INSTANCE);
 		//
 		//	First pass
@@ -128,7 +207,18 @@ public class QVTiTransformationAnalysis
 		List<PropertyAssignment> propertyAssignments = new ArrayList<PropertyAssignment>();
 		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
-			if (eObject instanceof OppositePropertyCallExp) {
+			if (eObject instanceof Mapping) {
+				analyzeMappingPropertyAccesses((Mapping)eObject);
+				analyzeMappingPropertyAssignments((Mapping)eObject);
+			}
+			else if (eObject instanceof MappingCallBinding) {
+				MappingCallBinding mappingCallBinding = (MappingCallBinding)eObject;
+				if (mappingCallBinding.isIsPolled()) {
+					Mapping mapping = mappingCallBinding.getMappingCall().getReferredMapping();
+					hazardousMappings.add(mapping);
+				}
+			}
+			else if (eObject instanceof OppositePropertyCallExp) {
 				OppositePropertyCallExp oppositePropertyCallExp = (OppositePropertyCallExp)eObject;
 				Property navigableProperty = oppositePropertyCallExp.getReferredProperty();
 				if (navigableProperty != null) {
@@ -192,7 +282,7 @@ public class QVTiTransformationAnalysis
 			}
 		}
 	}
-	
+
 	public @NonNull Set<org.eclipse.ocl.pivot.Class> getAllInstancesClasses() {
 		return allInstancesClasses;
 	}
@@ -211,6 +301,14 @@ public class QVTiTransformationAnalysis
 
 	public @NonNull Map<Property, Integer> getCaches() {
 		return property2cacheIndex;
+	}
+	
+	public @NonNull QVTimperativeDomainUsageAnalysis getDomainUsageAnalysis() {
+		return domainAnalysis;
+	}
+
+	public @NonNull Set<Mapping> getHazardousMappings() {
+		return hazardousMappings;
 	}
 
 	/**
@@ -236,6 +334,14 @@ public class QVTiTransformationAnalysis
 			}
 		}
 		return instancesClassAnalysis;
+	}
+
+	public @NonNull Map<Mapping, Set<Property>> getMapping2Property() {
+		return mapping2property;
+	}
+
+	public @NonNull Map<Mapping, Set<PropertyAssignment>> getMapping2PropertyAssignments() {
+		return mapping2propertyAssignments;
 	}
 
 	public @NonNull MetamodelManagerInternal getMetamodelManager() {

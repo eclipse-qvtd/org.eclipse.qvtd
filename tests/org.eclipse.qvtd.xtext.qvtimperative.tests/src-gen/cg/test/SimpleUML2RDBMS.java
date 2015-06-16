@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package cg;
+package cg.test;
 
 import java.util.HashMap;
 import java.util.Iterator;
