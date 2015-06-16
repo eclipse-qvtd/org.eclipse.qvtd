@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
@@ -32,6 +33,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -153,7 +155,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 	        try {
 		    	boolean result = execute();
 		        assertTrue(getClass().getSimpleName() + " should not return null.", result);
-		        saveModels(getProjectFileURI(fileNamePrefix + "middle.xmi"));
+				Map<Object, Object> saveOptions = XMIUtil.createSaveOptions();
+				saveOptions.put(XMIResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
+		        saveModels(getProjectFileURI(fileNamePrefix + "middle.xmi"), saveOptions);
 		        for (Entry<TypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
 		        	TypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
 		        	Resource expectedModel = entry.getValue();
@@ -175,37 +179,6 @@ public class QVTiInterpreterTests extends LoadTestCase
 	    		writer.append(s);
 	        	writer.close();
 	       }
-		        
-/******
-	        Evaluator evaluator = createEvaluator();
-	        try {
-		        boolean result = evaluator.visit(transformation) == Boolean.TRUE;
-	//	    	boolean result = execute();
-		        assertTrue(getClass().getSimpleName() + " should not return null.", result);
-		        saveModels(getProjectFileURI(fileNamePrefix + "middle.xmi"));
-		        for (Entry<TypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
-		        	TypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
-		        	Resource expectedModel = entry.getValue();
-		        	assert expectedModel != null;
-		        	Resource actualModel = modelManager.getModel(typedModel);
-		        	assert actualModel != null;
-		        	if (modelNormalizer != null) {
-		        		modelNormalizer.normalize(expectedModel);
-		        		modelNormalizer.normalize(actualModel);
-		        	}
-	//	            assertSameModel(expectedModel, actualModel);
-		        }
-	        }
-	        finally {
-		        if (evaluator instanceof QVTiIncrementalEvaluator) {
-		        	String s = ((QVTiIncrementalEvaluator)evaluator).getEvaluationStatusGraph();
-		    		File projectFile = getProjectFile();
-		    		File graphFile = new File(projectFile.toString() + "/" + fileNamePrefix + "EvaluationStatus.graphml");
-		    		FileWriter writer = new FileWriter(graphFile);
-		    		writer.append(s);
-		        	writer.close();
-		        }
-*****/
 	    }
 	}
 	
@@ -338,21 +311,16 @@ public class QVTiInterpreterTests extends LoadTestCase
      *
      * @throws Exception the exception
      */
-//    @Test
-    public void zztestTree2TallTree() throws Exception {
+    @Test
+    public void testTree2TallTree() throws Exception {
     	MyQVT myQVT = createQVT();
     	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-//    	MyQVT myQVT = new MyQVT(new MyQVTiEnvironmentFactory(getProjectMap(), null));
-//    	ResourceSet resourceSet = myQVT.getResourceSet();
-//    	resourceSet.getResource(URI.createURI(HSVTreePackage.eNS_URI), true);
-//    	resourceSet.getResource(URI.createURI(HLSTreePackage.eNS_URI), true);
-//    	resourceSet.getResource(URI.createURI(HSV2HLSPackage.eNS_URI), true);
     	MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Tree2TallTree", "Tree2TallTree.qvti");
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("tree", "Tree.xmi");
         testEvaluator.createModel("tree2talltree", "Tree2TallTree.xmi");
         testEvaluator.createModel("talltree", "TallTree.xmi");
-//        testEvaluator.loadReference("hls", "TallTreeValidate.xmi");
+        testEvaluator.loadReference("talltree", "TallTreeValidate.xmi");
         testEvaluator.test();
         testEvaluator.dispose();
         

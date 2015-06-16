@@ -38,6 +38,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
@@ -170,6 +171,16 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		}
 		transformationStatus.getOwnedMappingStatuses().add(mappingStatus);
 		return mappingStatus;
+	}
+
+	protected void flushUnblockedMappings(@NonNull EvaluationVisitor undecoratedVisitor) {
+		while (unblockedMappingStatuses != null) {
+			List<MappingStatus> unblockingMappingStatuses = new ArrayList<MappingStatus>(unblockedMappingStatuses);
+			unblockedMappingStatuses = null;
+			for (@SuppressWarnings("null")@NonNull MappingStatus unblockingMappingStatus : unblockingMappingStatuses) {
+				internalExecuteMappingCallRetry(unblockingMappingStatus, undecoratedVisitor);
+			}
+		}
 	}
 
 	protected @NonNull PropertyStatus getAssociationStatus(@NonNull ClassStatus classStatus, @NonNull EObject thisObject, @NonNull EReference this2thatEReference) {
@@ -399,12 +410,8 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		finally {
 			mappingStatusStack.pop();
 		}
-		while (unblockedMappingStatuses != null) {
-			List<MappingStatus> unblockingMappingStatuses = new ArrayList<MappingStatus>(unblockedMappingStatuses);
-			unblockedMappingStatuses = null;
-			for (@SuppressWarnings("null")@NonNull MappingStatus unblockingMappingStatus : unblockingMappingStatuses) {
-				internalExecuteMappingCallRetry(unblockingMappingStatus, undecoratedVisitor);
-			}
+		if (unblockedMappingStatuses != null) {
+			flushUnblockedMappings(undecoratedVisitor);
 		}
 		return null;
 	}
@@ -468,6 +475,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 				if (!classStatus.isIsOutput()) {				// Pure input
 					attributeStatus.setObject(propertyValue);
 					attributeStatus.setIsDirty(false);
+					attributeStatus.setIsError(false);
 				}
 				else {											// Pure output or intermediate output-input
 					if (!attributeStatus.isIsAssigned()) {
@@ -513,6 +521,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		}
 		else {
 			propertyStatus.setIsAssigned(true);		// ?? not isAssignable for Attributes ?
+			propertyStatus.setIsError(false);
 			for (MappingStatus targetMappingStatus : propertyStatus.getTargets()) {
 				if (targetMappingStatus.isIsBlocked()) {
 					unblock(targetMappingStatus);
@@ -566,6 +575,13 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			mappingStatus.getOutputs().add(classStatus);
 		}
 		return element;
+	}
+
+	@Override
+	public @Nullable Object internalExecuteTransformation(@NonNull Transformation transformation, @NonNull EvaluationVisitor undecoratedVisitor) {
+		Object returnStatus = super.internalExecuteTransformation(transformation, undecoratedVisitor);
+		flushUnblockedMappings(undecoratedVisitor);
+		return returnStatus;
 	}
 
 	public void printEvaluationStatus() {

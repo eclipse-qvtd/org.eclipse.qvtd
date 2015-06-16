@@ -289,7 +289,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		if (cacheIndex != null) {
 			modelManager.setUnnavigableOpposite(cacheIndex, slotObject, ecoreValue);
 		}
-		return true;
+		return ecoreValue;
 	}
 
 	@Override
