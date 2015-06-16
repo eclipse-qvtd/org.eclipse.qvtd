@@ -12,6 +12,8 @@
 
 package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -60,8 +63,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 			super(environmentFactory);
 		}
 
-		public @NonNull MyQvtiEvaluator createEvaluator(@NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
-			return new MyQvtiEvaluator(getEnvironmentFactory(), fileNamePrefix, transformationFileName);
+		public @NonNull MyQvtiExecutor createEvaluator(@NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
+			return new MyQvtiExecutor(getEnvironmentFactory(), fileNamePrefix, transformationFileName);
 		}
 
 		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
@@ -72,7 +75,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	/**
 	 * The Class MyQvtiEvaluator provides helper methods for loading and creating models used in the test
 	 */
-	private class MyQvtiEvaluator extends BasicQVTiExecutor
+	private class MyQvtiExecutor extends QVTiIncrementalExecutor
 	{
 		
 		/** The typed model validation resource map. */
@@ -89,7 +92,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		 * @param transformationFileName the transformation file name
 		 * @throws IOException Signals that an I/O exception has occurred.
 		 */
-		public MyQvtiEvaluator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
+		public MyQvtiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
 			super(environmentFactory, getProjectFileURI(fileNamePrefix + "/"  + transformationFileName));
 			this.fileNamePrefix = fileNamePrefix + "/";
 		}
@@ -147,20 +150,32 @@ public class QVTiInterpreterTests extends LoadTestCase
 	    	test(null);
 	    }
 		public void test(@Nullable ModelNormalizer modelNormalizer) throws Exception {
-	    	boolean result = execute();
-	        assertTrue(getClass().getSimpleName() + " should not return null.", result);
-	        saveModels(getProjectFileURI(fileNamePrefix + "middle.xmi"));
-	        for (Entry<TypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
-	        	TypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
-	        	Resource expectedModel = entry.getValue();
-	        	assert expectedModel != null;
-	        	Resource actualModel = getModelManager().getModel(typedModel);
-	        	assert actualModel != null;
-	        	if (modelNormalizer != null) {
-	        		modelNormalizer.normalize(expectedModel);
-	        		modelNormalizer.normalize(actualModel);
-	        	}
-	            assertSameModel(expectedModel, actualModel);
+	        try {
+		    	boolean result = execute();
+		        assertTrue(getClass().getSimpleName() + " should not return null.", result);
+		        saveModels(getProjectFileURI(fileNamePrefix + "middle.xmi"));
+		        for (Entry<TypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
+		        	TypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
+		        	Resource expectedModel = entry.getValue();
+		        	assert expectedModel != null;
+		        	Resource actualModel = getModelManager().getModel(typedModel);
+		        	assert actualModel != null;
+		        	if (modelNormalizer != null) {
+		        		modelNormalizer.normalize(expectedModel);
+		        		modelNormalizer.normalize(actualModel);
+		        	}
+		            assertSameModel(expectedModel, actualModel);
+		        }
+	        }
+	        finally {
+		       	String s = getEvaluationStatusGraph();
+		    	File projectFile = getProjectFile();
+	    		File graphFile = new File(projectFile.toString() + "/" + fileNamePrefix + "EvaluationStatus.graphml");
+	    		FileWriter writer = new FileWriter(graphFile);
+	    		writer.append(s);
+	        	writer.close();
+	       }
+		        
 /******
 	        Evaluator evaluator = createEvaluator();
 	        try {
@@ -191,7 +206,6 @@ public class QVTiInterpreterTests extends LoadTestCase
 		        	writer.close();
 		        }
 *****/
-	        }
 	    }
 	}
 	
@@ -250,8 +264,8 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testGraph2GraphMinimal() throws Exception {
     	MyQVT myQVT = createQVT();
-//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-    	MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
+    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi");
         testEvaluator.createModel("middle", "Graph2Graph.xmi");
@@ -276,7 +290,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testGraph2GraphHierarchical() throws Exception {
     	MyQVT myQVT = createQVT();
-    	MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
+    	MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("upperGraph", "../Graph2GraphMinimal/SimpleGraph.xmi");
         testEvaluator.createModel("middle", "Graph2Graph.xmi");
@@ -305,8 +319,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     public void testHSV2HLS() throws Exception {
     	MyQVT myQVT = createQVT();
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-    	MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("HSV2HLS", "HSV2HLS.qvti");
-//    	testEvaluator.setLogger(IndentingLogger.OUT);
+    	MyQvtiExecutor testEvaluator = myQVT.createEvaluator("HSV2HLS", "HSV2HLS.qvti");
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("hsv", "HSVNode.xmi");
         testEvaluator.createModel("middle", "HLS2HLSNode.xmi");
@@ -334,7 +347,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 //    	resourceSet.getResource(URI.createURI(HSVTreePackage.eNS_URI), true);
 //    	resourceSet.getResource(URI.createURI(HLSTreePackage.eNS_URI), true);
 //    	resourceSet.getResource(URI.createURI(HSV2HLSPackage.eNS_URI), true);
-    	MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("Tree2TallTree", "Tree2TallTree.qvti");
+    	MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Tree2TallTree", "Tree2TallTree.qvti");
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("tree", "Tree.xmi");
         testEvaluator.createModel("tree2talltree", "Tree2TallTree.xmi");
@@ -362,7 +375,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         @SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, myQVT.getEnvironmentFactory());
         
-        MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("ManualUML2RDBMS", "ManualUML2RDBMS.qvti");
+        MyQvtiExecutor testEvaluator = myQVT.createEvaluator("ManualUML2RDBMS", "ManualUML2RDBMS.qvti");
     	testEvaluator.saveTransformation(null);
         //assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
         testEvaluator.loadModel("uml", "ManualUMLPeople.xmi");
@@ -391,7 +404,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         @SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, environmentFactory);
         
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(environmentFactory, "SimpleUML2RDBMS", "SimpleUML2RDBMS.qvti");
+        MyQvtiExecutor testEvaluator = new MyQvtiExecutor(environmentFactory, "SimpleUML2RDBMS", "SimpleUML2RDBMS.qvti");
     	testEvaluator.saveTransformation(null);
         //assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
@@ -411,7 +424,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     public void testClassesCS2AS_bug456900() throws Exception {
     	MyQVT myQVT = createQVT();
         QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(environmentFactory, "ClassesCS2AS/bug456900", "ClassesCS2AS.qvti");
+        MyQvtiExecutor testEvaluator = new MyQvtiExecutor(environmentFactory, "ClassesCS2AS/bug456900", "ClassesCS2AS.qvti");
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("leftCS", "example_input.xmi");
         testEvaluator.createModel("rightAS", "example_output.xmi");
@@ -428,7 +441,8 @@ public class QVTiInterpreterTests extends LoadTestCase
     public void testClassesCS2AS_bug457239() throws Exception {
 	    TestUtil.doCompleteOCLSetup();
     	MyQVT myQVT = createQVT();
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(myQVT.getEnvironmentFactory(), "ClassesCS2AS/bug457239", "ClassesCS2AS.qvti");
+    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+        MyQvtiExecutor testEvaluator = new MyQvtiExecutor(myQVT.getEnvironmentFactory(), "ClassesCS2AS/bug457239", "ClassesCS2AS.qvti");
     	testEvaluator.saveTransformation(null);
         
         testEvaluator.loadModel("leftCS", "example_input.xmi");

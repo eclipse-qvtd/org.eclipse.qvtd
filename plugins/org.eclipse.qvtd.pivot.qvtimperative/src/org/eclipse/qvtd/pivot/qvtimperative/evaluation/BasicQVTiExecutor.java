@@ -9,8 +9,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -72,18 +74,13 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 
 	@Override
 	protected @NonNull EvaluationVisitor createEvaluationVisitor() {
-		if (getEvaluationEnvironment() instanceof QVTiEvaluationEnvironment) {
-			IQVTiEvaluationVisitor visitor = new QVTiEvaluationVisitor(this);
-	        if (environmentFactory.isEvaluationTracingEnabled()) {
-	            // decorate the evaluation visitor with tracing support
-	        	visitor = new QVTiTracingEvaluationVisitor(visitor);
-//	        	((QVTiTracingEvaluationVisitor)visitor).setVerboseLevel(QVTiTracingEvaluationVisitor.VERBOSE_LEVEL_HIGH);
-	        }
-			return visitor;
-		}
-		else {
-			return super.createEvaluationVisitor();
-		}
+		IQVTiEvaluationVisitor visitor = new QVTiEvaluationVisitor(this);
+	    if (environmentFactory.isEvaluationTracingEnabled()) {
+	        // decorate the evaluation visitor with tracing support
+	        visitor = new QVTiTracingEvaluationVisitor(visitor);
+//	        ((QVTiTracingEvaluationVisitor)visitor).setVerboseLevel(QVTiTracingEvaluationVisitor.VERBOSE_LEVEL_HIGH);
+	    }
+		return visitor;
 	}
 
     public void createModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
@@ -98,12 +95,12 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
     }
 
 	@Override
-	protected @NonNull EvaluationEnvironment createNestedEvaluationEnvironment(@NonNull EvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject) {
+	protected @NonNull EvaluationEnvironment createNestedEvaluationEnvironment(@NonNull EvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @NonNull OCLExpression callingObject) {
 		if (evaluationEnvironment instanceof QVTiEvaluationEnvironment) {
-			return new QVTiNestedEvaluationEnvironment((QVTiEvaluationEnvironment) evaluationEnvironment, executableObject);
+			return new QVTiNestedEvaluationEnvironment((QVTiEvaluationEnvironment) evaluationEnvironment, executableObject, callingObject);
 		}
 		else{
-			return super.createNestedEvaluationEnvironment(evaluationEnvironment, executableObject);
+			return super.createNestedEvaluationEnvironment(evaluationEnvironment, executableObject, callingObject);
 		}
 	}
 
@@ -213,11 +210,12 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		getRootEvaluationEnvironment();
         StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
 		Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
-		add(ownedContext, getModelManager().getTransformationInstance(transformation));
+		QVTiModelManager modelManager = getModelManager();
+		add(ownedContext, modelManager.getTransformationInstance(transformation));
         for (TypedModel typedModel : transformation.getModelParameter()) {
         	if (typedModel != null) {
 	            ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
-	            add(ownedContext, getModelManager().getTypedModelInstance(typedModel));
+	            add(ownedContext, modelManager.getTypedModelInstance(typedModel));
         	}
         }
         return executeInternal();
@@ -230,6 +228,11 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	@Override
 	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 		return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
+	}
+
+	@Override
+	public @NonNull QVTiEvaluationEnvironment getEvaluationEnvironment() {
+		return (QVTiEvaluationEnvironment) super.getEvaluationEnvironment();
 	}
 	
 	@Override
@@ -305,7 +308,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
         // Add the realize variable binding to the environment
         replace(realizedVariable, element);
         getModelManager().addModelElement(typedModel, element);
-        return true;
+        return element;
 	}
 
 	@Override
@@ -314,7 +317,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
         if (rule == null) {
         	throw new IllegalStateException("Transformation " + transformation.getName() + " has no root mapping");
         }
-        pushEvaluationEnvironment(rule);
+        @SuppressWarnings("null")@NonNull CallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();		// FIXME TransformationCallExp
+        pushEvaluationEnvironment(rule, callExp);
         try {
         	rule.accept(undecoratedVisitor);
         }

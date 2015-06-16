@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.examples.debug.vm.utils.VMStackTraceBuilder;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.debug.vm.QVTiVariableFinder;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -37,8 +38,8 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	private final long id;
 	private final @NonNull Stack<StepperEntry> stepperStack = new Stack<StepperEntry>();
     
-	public QVTiVMNestedEvaluationEnvironment(@NonNull QVTiVMEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, long id) {
-		super(evaluationEnvironment, executableObject);
+	public QVTiVMNestedEvaluationEnvironment(@NonNull QVTiVMEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @NonNull OCLExpression callingObject, long id) {
+		super(evaluationEnvironment, executableObject, callingObject);
 		myStackDepth = evaluationEnvironment.getDepth() + 1;
 		this.id = id;
 		this.myOperation = executableObject;

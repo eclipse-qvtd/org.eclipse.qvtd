@@ -11,12 +11,18 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeDomainUsageAnalysis;
 
 public class QVTiRootEvaluationEnvironment extends BasicEvaluationEnvironment implements QVTiEvaluationEnvironment
 {
-    public QVTiRootEvaluationEnvironment(@NonNull QVTiExecutor executor, @NonNull Transformation executableObject) {
+	private @Nullable QVTimperativeDomainUsageAnalysis usageAnalysis;
+
+	public QVTiRootEvaluationEnvironment(@NonNull QVTiExecutor executor, @NonNull Transformation executableObject) {
 		super(executor, executableObject);
 	}
 
@@ -35,5 +41,23 @@ public class QVTiRootEvaluationEnvironment extends BasicEvaluationEnvironment im
 		Object executableObject2 = executableObject;
 		assert executableObject2 != null;
 		return (Transformation) executableObject2;
+	}
+
+	@Override
+	public @Nullable DomainUsage getUsageFor(@NonNull Element element) {
+		QVTimperativeDomainUsageAnalysis usageAnalysis2 = usageAnalysis;
+		if (usageAnalysis2 == null) {
+			usageAnalysis2 = getUsageAnalysis();
+		}
+		return usageAnalysis2.getUsage(element);
+	}
+
+	public @NonNull QVTimperativeDomainUsageAnalysis getUsageAnalysis() {
+		QVTimperativeDomainUsageAnalysis usageAnalysis2 = usageAnalysis;
+		if (usageAnalysis2 == null) {
+			usageAnalysis = usageAnalysis2 = new QVTimperativeDomainUsageAnalysis(getExecutor().getEnvironmentFactory());
+			usageAnalysis2.analyzeTransformation(getTransformation());
+		}
+		return usageAnalysis2;
 	}
 }

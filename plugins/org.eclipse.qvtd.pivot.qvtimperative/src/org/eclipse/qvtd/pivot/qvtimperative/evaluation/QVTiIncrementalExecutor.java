@@ -37,14 +37,10 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AssociationStatus;
@@ -56,14 +52,17 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.MappingStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.PropertyStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.TransformationStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  * An evaluator implementation for OCL expressions.
  */
 public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 {
-	private enum Mode { EXECUTE, INCREMENTAL, REPAIR };
+	private enum Mode {
+		EXECUTE,					// EvaluationStatus is created lazily where necessary
+		INCREMENTAL,				// EvaluationStatus is created for all mapping elements
+		REPAIR						// EvaluationStatus is updated for all mapping elements
+	};
 	private enum Usage { IN, OUT, INOUT };
 	
 	protected final @NonNull TransformationStatus transformationStatus = EvaluationStatusFactory.eINSTANCE.createTransformationStatus();
@@ -84,18 +83,6 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	 * Non-null while mapping invocations that failed due to a not-ready value that is now ready.
 	 */
 	private @Nullable Set<MappingStatus> unblockedMappingStatuses = null;
-	
-	/**
-	 * TypedModels used in a checkable domain.
-	 */
-//	private final @NonNull Set<TypedModel> checkableTypedModels = new HashSet<TypedModel>();
-	private final @NonNull Set<org.eclipse.ocl.pivot.Package> checkablePackages = new HashSet<org.eclipse.ocl.pivot.Package>();
-
-	/**
-	 * TypedModels used in an enforceable domain.
-	 */
-//	private final @NonNull Set<TypedModel> enforceableTypedModels = new HashSet<TypedModel>();
-	private final @NonNull Set<org.eclipse.ocl.pivot.Package> enforceablePackages = new HashSet<org.eclipse.ocl.pivot.Package>();
 	
 	private @NonNull Mode mode;
 	
@@ -333,7 +320,54 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	}
 
 	protected @NonNull Usage getUsageForMetamodelElement(@NonNull Element element) {
-		org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(element);
+/*		EObject eContainer = null;
+		ExpressionInOCL expressionInOCL = null;
+		EReference eFeature = null;
+		for (EObject eChild = element; (eContainer = eChild.eContainer()) != null; eChild = eContainer) {
+//			if (eContainer instanceof ExpressionInOCL) {
+//				expressionInOCL = (ExpressionInOCL)eContainer;
+//				eFeature = eChild.eContainmentFeature();
+//				break;
+//			}
+			if (eContainer instanceof Operation) {
+				DomainUsageAnalysis operationUsageAnalysis = usageAnalysis.analyzeOperation((Operation)eContainer);
+				QVTiEvaluationEnvironment evaluationEnvironment = getEvaluationEnvironment();
+				break;
+			}
+			if (eContainer instanceof Pattern) {
+				break;
+			}
+			if (eContainer instanceof Rule) {
+				break;
+			}
+			if (eContainer instanceof org.eclipse.ocl.pivot.Class) {
+				break;
+			}
+			if (eContainer instanceof org.eclipse.ocl.pivot.Package) {
+				break;
+			}
+		}
+		if (expressionInOCL != null) {
+			DomainUsage domainUsage1 = transformationAnalysis.get(element);
+			DomainUsage domainUsage3 = transformationAnalysis.get(expressionInOCL);
+			DomainUsage domainUsage2 = transformationAnalysis.get(eFeature);
+			
+		}
+		DomainUsage domainUsage = transformationAnalysis.get(element); */
+		DomainUsage domainUsage = getEvaluationEnvironment().getUsageFor(element);
+		if (domainUsage == null) {
+			return Usage.INOUT;
+		}
+		else if (!domainUsage.isEnforceable()) {
+			return Usage.IN;
+		}
+		else if (domainUsage.isCheckable()) {
+			return Usage.INOUT;
+		}
+		else {
+			return Usage.OUT;
+		}
+/*		org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(element);
 		if (!checkablePackages.contains(asPackage)) {
 			return Usage.OUT;
 		}
@@ -342,13 +376,13 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		}
 		else {
 			return Usage.INOUT;
-		}
+		} */
 	}
 
-	protected @NonNull Usage getUsageForTransformationElement(@NonNull Element element) {
-		Domain domain = QVTimperativeUtil.getContainingDomain(element);
-		return domain == null ? Usage.INOUT : Usage.OUT;
-	}
+//	protected @NonNull Usage getUsageForTransformationElement(@NonNull Element element) {
+//		Domain domain = QVTimperativeUtil.getContainingDomain(element);
+//		return domain == null ? Usage.INOUT : Usage.OUT;
+//	}
 
 	@Override
 	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor) {
@@ -409,8 +443,12 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			return propertyValue;
 		}
 		assert object != null;
-		Usage usage = getUsageForMetamodelElement(referredProperty);
+		Usage usage = getUsageForMetamodelElement(navigationCallExp);
 		PropertyStatus propertyStatus = getPropertyStatus(usage, (EObject)object, referredProperty);
+		if (usage == Usage.IN) {
+			propertyStatus.setIsAssignable(false);
+			propertyStatus.setIsAssigned(true);
+		}
 		List<ElementStatus> mappingInputs = mappingStatus.getInputs();
 		if (!mappingInputs.contains(propertyStatus)) {
 			mappingInputs.add(propertyStatus);
@@ -462,7 +500,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	@Override
 	public @Nullable Object internalExecutePropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @NonNull Object object, @Nullable Object ecoreValue) {
 		Object propertyValue = super.internalExecutePropertyAssignment(propertyAssignment, object, ecoreValue);
-		Usage usage = getUsageForTransformationElement(propertyAssignment);
+		Usage usage = getUsageForMetamodelElement(propertyAssignment);
 		Property targetProperty = propertyAssignment.getTargetProperty();
 		assert targetProperty != null;
 		PropertyStatus propertyStatus = getPropertyStatus(usage, (EObject)object, targetProperty);
@@ -521,33 +559,13 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	public @Nullable Object internalExecuteRealizedVariable(@NonNull RealizedVariable realizedVariable, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Object element = super.internalExecuteRealizedVariable(realizedVariable, undecoratedVisitor);
 		if (element != null) {
-			Usage usage = getUsageForTransformationElement(realizedVariable);
+			Usage usage = getUsageForMetamodelElement(realizedVariable);
 			ClassStatus classStatus = getClassStatus(usage, realizedVariable.getType(), (EObject)element);
 			MappingStatus mappingStatus = getMappingStatus();
 			assert mappingStatus != null;
 			mappingStatus.getOutputs().add(classStatus);
 		}
 		return element;
-	}
-
-	@Override
-	public @Nullable Object internalExecuteTransformation(@NonNull Transformation transformation, @NonNull EvaluationVisitor undecoratedVisitor) {
-		for (Rule rule : transformation.getRule()) {
-			for (Domain domain : rule.getDomain()) {
-				TypedModel typedModel = domain.getTypedModel();
-				if (typedModel != null) {
-					if (domain.isIsCheckable()) {
-//						checkableTypedModels.add(typedModel);
-						checkablePackages.addAll(typedModel.getUsedPackage());
-					}
-					if (domain.isIsEnforceable()) {
-//						enforceableTypedModels.add(typedModel);
-						enforceablePackages.addAll(typedModel.getUsedPackage());
-					}
-				}
-			}
-		}
-		return super.internalExecuteTransformation(transformation, undecoratedVisitor);
 	}
 
 	public void printEvaluationStatus() {

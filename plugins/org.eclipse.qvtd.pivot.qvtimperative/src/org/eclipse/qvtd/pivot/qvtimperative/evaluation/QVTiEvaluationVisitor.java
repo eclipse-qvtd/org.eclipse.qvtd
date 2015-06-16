@@ -194,7 +194,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	public @Nullable Object visitMappingSequence(@NonNull MappingSequence mappingSequence) {
 		for (MappingStatement mappingStatement : mappingSequence.getMappingStatements()) {
 			if (mappingStatement != null) {
-				context.pushEvaluationEnvironment(mappingStatement);
+				context.pushEvaluationEnvironment(mappingStatement, mappingSequence);
 				try {
 					mappingStatement.accept(undecoratedVisitor);
 				}

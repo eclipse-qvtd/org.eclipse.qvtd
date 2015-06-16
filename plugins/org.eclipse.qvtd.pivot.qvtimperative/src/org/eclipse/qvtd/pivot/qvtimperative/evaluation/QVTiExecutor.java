@@ -22,6 +22,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 
 public interface QVTiExecutor extends ExecutorInternal
 {
+	@Override
+	@NonNull QVTiEvaluationEnvironment getEvaluationEnvironment();
+	@Override
+	@NonNull QVTiModelManager getModelManager();
 	@Nullable Object internalExecuteMapping(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor);
 	@Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor);
 	@Nullable Object internalExecutePropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @NonNull Object slotObject, @Nullable Object ecoreValue);

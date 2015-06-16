@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcorebase.analysis;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -241,6 +243,30 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	protected void setUsage(@NonNull Element element, @NonNull DomainUsage newUsage) {
 		element2usage.put(element, newUsage);
 		((DomainUsage.Internal)newUsage).addUsedBy(element);
+	}
+
+	@Override
+	public String toString() {
+		Map<String, DomainUsage> map = new HashMap<String, DomainUsage>(element2usage.size());
+		List<String> keys = new ArrayList<String>(element2usage.size());
+		for (Map.Entry<Element, DomainUsage> entry : element2usage.entrySet()) {
+			Element element = entry.getKey();
+			String key = element.eClass().getName() + " : " + element;
+			map.put(key, entry.getValue());
+			keys.add(key);
+		}
+		Collections.sort(keys);
+		StringBuilder s = new StringBuilder();
+		for (String key : keys) {
+			DomainUsage usage = map.get(key);
+			if (s.length() > 0) {
+				s.append("\n");
+			}
+			s.append(key);
+			s.append(" => ");
+			s.append(usage);
+		}
+		return s.toString();
 	}
 
 	@Override

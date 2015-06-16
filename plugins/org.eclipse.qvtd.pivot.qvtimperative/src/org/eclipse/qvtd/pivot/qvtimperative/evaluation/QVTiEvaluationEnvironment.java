@@ -11,8 +11,11 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 
 public interface QVTiEvaluationEnvironment extends EvaluationEnvironment
 {
@@ -20,4 +23,5 @@ public interface QVTiEvaluationEnvironment extends EvaluationEnvironment
 	@NonNull QVTiExecutor getExecutor();
 	@NonNull QVTiRootEvaluationEnvironment getRootEvaluationEnvironment();
 	@NonNull Transformation getTransformation();
+	@Nullable DomainUsage getUsageFor(@NonNull Element element);
 }

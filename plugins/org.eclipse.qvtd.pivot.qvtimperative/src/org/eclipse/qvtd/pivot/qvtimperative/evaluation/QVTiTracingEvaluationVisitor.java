@@ -18,20 +18,18 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.StandardLibrary;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractMergedQVTimperativeVisitor;
 
@@ -47,7 +45,7 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 	@SuppressWarnings("null")
 	@Override
 	public @Nullable Object visiting(@NonNull Visitable visitable) {
-		EvaluationLogger logger = context.getLogger();
+		EvaluationLogger logger = context.getExecutor().getLogger();
 		if ((logger == null) || (!showOCL && (visitable.eClass().getEPackage() == PivotPackage.eINSTANCE))) {
 			return visitable.accept(context);
 		}
@@ -69,6 +67,9 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 				indentableLogger.pushIndentation();
 			}
 			Object visit = visitable.accept(context);
+			if (indentableLogger != null) {
+				indentableLogger.popIndentation();
+			}
 			logger.append("=> ");
 			logger.append(NameUtil.qualifiedNameFor(visit));
 			logger.append("\n");
@@ -78,7 +79,7 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 			if (indentableLogger != null) {
 				indentableLogger.popIndentation();
 			}
-			logger.append(" !! ");
+			logger.append("!! ");
 			logger.append(String.valueOf(e.getClass().getSimpleName()));
 			logger.append(": ");
 			logger.append(String.valueOf(e.getMessage()));
@@ -108,15 +109,16 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 		return context.getEvaluationEnvironment();
 	}
 
+	/** @deprected moved to Evaluator */
+	@Deprecated
 	@Override
 	public @NonNull Evaluator getEvaluator() {
 		return context.getEvaluator();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
-	public @NonNull MetamodelManager getMetamodelManager() {
-		return context.getMetamodelManager();
+	public @NonNull Executor getExecutor() {
+		return context.getExecutor();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -156,86 +158,78 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 		context.setUndecoratedVisitor(evaluationVisitor);
 	}
 
-	@Override
-	public void add(@NonNull TypedElement referredVariable, @Nullable Object value) {
-		context.add(referredVariable, value);
-	}
-
+	/** @deprecated moved to Executor. */
+	@Deprecated
 	@Override
 	public void dispose() {
 		context.dispose();
 	}
 
+	/** @deprecated moved to Executor. */
+	@Deprecated
 	@Override
 	public @NonNull CompleteEnvironment getCompleteEnvironment() {
 		return context.getCompleteEnvironment();
 	}
 
+	/** @deprecated moved to Executor. */
+	@Deprecated
 	@Override
 	public int getDiagnosticSeverity(int severityPreference, @Nullable Object resultValue) {
 		return context.getDiagnosticSeverity(severityPreference, resultValue);
 	}
 
+	/** @deprecated moved to Executor. */
+	@Deprecated
 	@Override
 	public @NonNull IdResolver getIdResolver() {
 		return context.getIdResolver();
 	}
 
+	/** @deprecated moved to Executor. */
+	@Deprecated
 	@Override
 	public @Nullable EvaluationLogger getLogger() {
 		return context.getLogger();
 	}
 
+	/** @deprecated moved to Executor. */
+	@Deprecated
 	@Override
 	public @NonNull Pattern getRegexPattern(@NonNull String regex) {
 		return context.getRegexPattern(regex);
 	}
 
+	/** @deprecated moved to Executor. */
+	@Deprecated
 	@Override
 	public int getSeverity(@Nullable Object validationKey) {
 		return context.getSeverity(validationKey);
 	}
 
+	/** @deprecated moved to Executor. */
+	@Deprecated
 	@Override
 	public @NonNull Class getStaticTypeOf(@Nullable Object value) {
 		return context.getStaticTypeOf(value);
 	}
 
+	/** @deprecated moved to Executor. */
+	@Deprecated
 	@Override
 	public @NonNull Class getStaticTypeOf(@Nullable Object value, @NonNull Object... values) {
 		return context.getStaticTypeOf(value, values);
 	}
 
+	/** @deprecated moved to Executor. */
+	@Deprecated
 	@Override
 	public @NonNull Class getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values) {
 		return context.getStaticTypeOf(value, values);
 	}
 
-	@Override
-	public @Nullable Object getValueOf(@NonNull TypedElement referredVariable) {
-		return context.getValueOf(referredVariable);
-	}
-
-	@Override
-	public @NonNull EvaluationEnvironment getRootEvaluationEnvironment() {
-		return context.getRootEvaluationEnvironment();
-	}
-
-	@Override
-	public void popEvaluationEnvironment() {
-		context.popEvaluationEnvironment();
-	}
-
-	@Override
-	public @NonNull EvaluationEnvironment pushEvaluationEnvironment(@NonNull NamedElement executableObject) {
-		return context.pushEvaluationEnvironment(executableObject);
-	}
-
-	@Override
-	public void replace(@NonNull TypedElement referredVariable, @Nullable Object value) {
-		context.replace(referredVariable, value);
-	}
-
+	/** @deprecated moved to Executor. */
+	@Deprecated
 	@Override
 	public void setLogger(@Nullable EvaluationLogger logger) {
 		context.setLogger(logger);

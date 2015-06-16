@@ -11,16 +11,25 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageAnalysis;
 
 public class QVTiNestedEvaluationEnvironment extends BasicEvaluationEnvironment implements QVTiEvaluationEnvironment
 {
 	protected final @NonNull QVTiRootEvaluationEnvironment rootEvaluationEnvironment;
+	private @Nullable DomainUsageAnalysis usageAnalysis;
 	
-	public QVTiNestedEvaluationEnvironment(@NonNull QVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject) {
-		super(evaluationEnvironment, executableObject);
+	public QVTiNestedEvaluationEnvironment(@NonNull QVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @NonNull OCLExpression callingObject) {
+		super(evaluationEnvironment, executableObject, callingObject);
 		rootEvaluationEnvironment = evaluationEnvironment.getRootEvaluationEnvironment();
 	}
 
@@ -29,13 +38,44 @@ public class QVTiNestedEvaluationEnvironment extends BasicEvaluationEnvironment 
 		return (QVTiExecutor) super.getExecutor();
 	}
 
+	public @NonNull QVTiEvaluationEnvironment getParentEvaluationEnvironment() {
+		EvaluationEnvironment parent = getParent();
+		assert parent != null;
+		return (QVTiEvaluationEnvironment)parent;
+	}
+
+	@Override
+	public @NonNull QVTiRootEvaluationEnvironment getRootEvaluationEnvironment() {
+		return rootEvaluationEnvironment;
+	}
+
 	@Override
 	public @NonNull Transformation getTransformation() {
 		return rootEvaluationEnvironment.getTransformation();
 	}
 
 	@Override
-	public @NonNull QVTiRootEvaluationEnvironment getRootEvaluationEnvironment() {
-		return rootEvaluationEnvironment;
+	public @Nullable DomainUsage getUsageFor(@NonNull Element element) {
+		DomainUsage domainUsage = null;
+		DomainUsageAnalysis usageAnalysis2 = usageAnalysis;
+		if (usageAnalysis2 == null) {
+			if (callingObject instanceof OperationCallExp) {
+				OperationCallExp operationCallExp = (OperationCallExp)callingObject;
+				Operation referredOperation = operationCallExp.getReferredOperation();
+				if (referredOperation != null) {
+					usageAnalysis = usageAnalysis2 = getRootEvaluationEnvironment().getUsageAnalysis().getAnalysis(referredOperation);
+					// FIXME Surely we need to 'specialize' for the actual usage of callingObject
+				}
+			}
+		}
+		if (usageAnalysis2 != null) {
+			domainUsage = usageAnalysis2.getUsage(element);
+		}
+		if (domainUsage != null) {
+			return domainUsage;
+		}
+		else {
+			return getParentEvaluationEnvironment().getUsageFor(element);
+		}
 	}
 }

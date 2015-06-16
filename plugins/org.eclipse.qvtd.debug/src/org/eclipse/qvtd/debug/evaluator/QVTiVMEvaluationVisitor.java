@@ -21,20 +21,18 @@ import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationStepper;
 import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationVisitor;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -48,13 +46,6 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 		super(nestedEvaluationVisitor);
 		this.vmEvaluationStepper = vmEvaluationStepper;
 		context.setUndecoratedVisitor(this);
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public void add(@NonNull TypedElement referredVariable, @Nullable Object value) {
-		context.add(referredVariable, value);
 	}
 	
 	/** @deprecated Evaluator no longer nests */
@@ -98,9 +89,16 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 		return context.getEvaluationEnvironment();
 	}
 
+	/** @deprecated Use this or getExecutor() */
+	@Deprecated
 	@Override
 	public @NonNull Evaluator getEvaluator() {
 		return context.getEvaluator();
+	}
+
+	@Override
+	public @NonNull Executor getExecutor() {
+		return context.getExecutor();
 	}
 
 	/** @deprecated moved to Evaluator */
@@ -115,13 +113,6 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
     @Override
 	public @Nullable EvaluationLogger getLogger() {
 		return context.getLogger();
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-    @Override
-	public @NonNull MetamodelManager getMetamodelManager() {
-		return context.getMetamodelManager();
 	}
 
 	/** @deprecated moved to Evaluator */
@@ -144,13 +135,6 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
     @Override
 	public @NonNull Pattern getRegexPattern(@NonNull String regex) {
         return context.getRegexPattern(regex);
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-    @Override
-	public @NonNull EvaluationEnvironment getRootEvaluationEnvironment() {
-	       return context.getRootEvaluationEnvironment();
 	}
 
 	/** @deprecated moved to Evaluator */
@@ -196,37 +180,9 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 		return vmEvaluationStepper;
 	}
 
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public @Nullable Object getValueOf(@NonNull TypedElement referredVariable) {
-		return context.getValueOf(referredVariable);
-	}
-
 	@Override
 	public boolean isCanceled() {
 		return context.isCanceled();
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public void popEvaluationEnvironment() {
-		context.popEvaluationEnvironment();
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public @NonNull EvaluationEnvironment pushEvaluationEnvironment(@NonNull NamedElement executableObject) {
-		return context.pushEvaluationEnvironment(executableObject);
-	}
-
-	/** @deprecated moved to Evaluator */
-	@Deprecated
-	@Override
-	public void replace(@NonNull TypedElement referredVariable, @Nullable Object value) {
-		context.replace(referredVariable, value);
 	}
 
 	@Override
