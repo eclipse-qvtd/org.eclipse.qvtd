@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
+import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -57,6 +58,7 @@ import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGFactory;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.CS2ASCGModelVisitor;
+import org.eclipse.qvtd.cs2as.compiler.internal.utilities.CS2ASCGModelResourceFactory;
 import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformation;
 import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -120,6 +122,11 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 					getGlobalPlace());
 		}
 		
+		@Override
+		public @NonNull CGModelResourceFactory getCGResourceFactory() {
+			return CS2ASCGModelResourceFactory.INSTANCE;
+		}
+
 		public @NonNull CS2ASJavaCompilerParameters getCGParameters() {
 			return params;
 		}
