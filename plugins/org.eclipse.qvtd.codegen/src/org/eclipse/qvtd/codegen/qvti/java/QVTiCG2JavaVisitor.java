@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.java;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +46,7 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -89,6 +91,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
  */
 public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implements QVTiCGModelVisitor<Boolean>
 {
+	public static boolean USE_CLASS = true;
+	
 	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull CGPackage cgPackage;
 	protected final @Nullable List<CGValuedElement> sortedGlobals;
@@ -255,7 +259,14 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.appendIsRequired(true);
 		js.append(" ");
 		js.appendClassReference(Executor.class);
-		js.append(" " + evaluatorName + ") {\n");
+		js.append(" " + evaluatorName + ")\n");
+		if (USE_CLASS) {
+			js.append(" throws ");
+			js.appendClassReference(NoSuchMethodException.class);
+			js.append(",");
+			js.appendClassReference(SecurityException.class);
+		}
+		js.append(" {\n");
 		js.pushIndentation(null);		
 		js.append("super(" + evaluatorName + ", new String[] {");
 		boolean isFirst = true;
@@ -285,10 +296,33 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.append(", null, null");
 		}
 		js.append(");\n");
+		for (CGMapping cgMapping : cgTransformation.getMappings()) {
+			if (USE_CLASS && (cgMapping.getFreeVariables().size() > 0)) {
+//				js.append("protected final ");
+//				js.appendIsRequired(true);
+//				js.append(" ");
+//				js.appendClassReference(Constructor.class, false, cgMapping.getName());
+				js.append(getMappingCtorName(cgMapping) + " = ");
+				js.appendClassReference(ClassUtil.class);
+				js.append(".nonNullState(" + getMappingName(cgMapping) + ".class.getConstructor(" + className + ".class, Object[].class));\n");
+			}
+		}
 		js.popIndentation();
 		js.append("}\n");
 	}
-    
+
+	protected void doConstructorConstants(/*@NonNull*/ List<CGMapping> cgMappings) {
+		for (CGMapping cgMapping : cgMappings) {
+			if (USE_CLASS && (cgMapping.getFreeVariables().size() > 0)) {
+				js.append("protected final ");
+				js.appendIsRequired(true);
+				js.append(" ");
+				js.appendClassReference(Constructor.class, false, getMappingName(cgMapping));
+				js.append(" " + getMappingCtorName(cgMapping) + ";\n");
+			}
+		}
+	}
+   
 	protected void doOppositeCaches(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		Map<Property, Integer> opposites = transformationAnalysis.getCaches();
 		if (opposites.size() <= 0) {
@@ -432,7 +466,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.pushIndentation(null);
 		} */
 		js.append("return ");
-		js.append(cgRootMapping.getName());
+		js.append(getMappingName(cgRootMapping));
 		js.append("(");
 /*		boolean isFirst = true;
 		for (CGGuardVariable cgFreeVariable : cgFreeVariables) {
@@ -472,6 +506,14 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 
 	protected @NonNull QVTiGlobalContext getGlobalContext() {
 		return (QVTiGlobalContext) globalContext;
+	}
+
+	protected String getMappingCtorName(@NonNull CGMapping cgMapping) {
+		return "CTOR_" + cgMapping.getName();
+	}
+
+	protected String getMappingName(@NonNull CGMapping cgMapping) {
+		return "MAP_" + cgMapping.getName();
 	}
 
 	protected @Nullable TypeDescriptor needsTypeCheck(@NonNull CGMappingCallBinding cgMappingCallBinding) {
@@ -720,22 +762,94 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 				List<CGGuardVariable> cgFreeVariables = cgMapping.getFreeVariables();
 				//
 				js.appendCommentWithOCL(null, cgMapping.getAst());
-				js.append("protected boolean " + cgMapping.getName() + "(");
-				boolean isFirst = true;
-				for (@SuppressWarnings("null")@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
-					if (!isFirst) {
-						js.append(", ");
-					}
-					js.appendDeclaration(cgFreeVariable);
-					isFirst = false;
+				if (USE_CLASS && (cgFreeVariables.size() > 0)) {
+					js.append("protected class ");
+					js.append(getMappingName(cgMapping));
+					js.append(" implements Invocation\n");
+					js.append("{\n");
+					js.pushIndentation(null);
+						for (@SuppressWarnings("null")@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
+							js.append("protected ");
+							js.appendDeclaration(cgFreeVariable);
+							js.append(";\n");
+						}
+						js.append("\n");
+						js.append("@SuppressWarnings(\"null\")\n");					
+						js.append("public ");
+						js.append(getMappingName(cgMapping));
+						js.append("(");
+						js.appendIsRequired(true);
+						js.append(" Object[] boundValues) {\n");
+						js.pushIndentation(null);
+						int i = 0;
+						for (@SuppressWarnings("null")@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
+							String valueName = getValueName(cgFreeVariable);
+							js.append(valueName);
+							js.append(" = ");
+							js.appendClassCast(cgFreeVariable);
+							js.append("boundValues[" + i++);
+							js.append("];\n");
+						}
+						js.popIndentation();
+						js.append("}\n");	
+						js.append("\n");	
+						js.append("public boolean execute() {\n");
+						js.pushIndentation(null);
+							String savedLocalPrefix = localPrefix;
+							try {
+								localPrefix = cgMapping.getTransformation().getName();
+								js.append("// predicates\n");
+								cgBody.accept(this);
+								js.append("return true;\n");
+							}
+							finally {
+								localPrefix = savedLocalPrefix;
+							}
+						js.popIndentation();
+						js.append("}\n");
+						js.append("\n");	
+						js.append("public boolean isEqual(");
+						js.appendIsRequired(true);
+						js.append(" ");
+						js.appendClassReference(IdResolver.class);
+						js.append(" idResolver, ");
+						js.appendIsRequired(true);
+						js.append(" Object[] thoseValues) {\n");
+						js.pushIndentation(null);
+							js.append("return ");
+								int index = 0;
+								for (@SuppressWarnings("null")@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
+									if (index > 0) {
+										js.append("\n    && ");
+									}
+									js.append("idResolver.oclEquals(");
+									js.append(cgFreeVariable.getValueName());
+									js.append(", thoseValues[" + index++ + "])");
+								}
+								js.append(";\n");
+						js.popIndentation();
+						js.append("}\n");
+					js.popIndentation();
+					js.append("}\n");
 				}
-				js.append(") {\n");
-				js.pushIndentation(null);
-					js.append("// predicates\n");
-					cgBody.accept(this);
-					js.append("return true;\n");
-				js.popIndentation();
-				js.append("}\n");
+				else {
+					js.append("protected boolean " + getMappingName(cgMapping) + "(");
+					boolean isFirst = true;
+					for (@SuppressWarnings("null")@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
+						if (!isFirst) {
+							js.append(", ");
+						}
+						js.appendDeclaration(cgFreeVariable);
+						isFirst = false;
+					}
+					js.append(") {\n");
+					js.pushIndentation(null);
+						js.append("// predicates\n");
+						cgBody.accept(this);
+						js.append("return true;\n");
+					js.popIndentation();
+					js.append("}\n");
+				}
 			}
 			finally {
 				localContext = null;
@@ -787,7 +901,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		//
 		//	Emit the mapping call.
 		//
-		js.append(cgReferredMapping.getName() + "(");
+		if (USE_CLASS) {
+			js.append("invokeOnce(" + getMappingCtorName(cgReferredMapping) + ", ");
+		}
+		else {
+			js.append(getMappingName(cgReferredMapping) + "(");
+		}
 		boolean isFirst = true;
 		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 			if (!isFirst) {
@@ -1055,6 +1174,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.append("\n");
 		}
 		String[] allInstancesNames = doAllInstances(transformationAnalysis);
+		js.append("\n");
+		doConstructorConstants(cgTransformation.getMappings());
 		js.append("\n");
 		doConstructor(cgTransformation, oppositeIndex2propertyIdName, allInstancesNames);
 		js.append("\n");

@@ -15,6 +15,7 @@ import classes.Package;
 import classescs.ClassescsPackage;
 import classescs.NamedElementCS;
 import classescs.PackageCS;
+import java.lang.reflect.Constructor;
 import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -83,12 +84,16 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         {0}                     // 0 : PackageCS -> {PackageCS}
     };
     
-    public classescs2as_Bug459225(final @NonNull Executor executor) {
+    protected final @NonNull Constructor<MAP_createPackage> CTOR_createPackage;
+    
+    public classescs2as_Bug459225(final @NonNull Executor executor)
+     throws NoSuchMethodException,SecurityException {
         super(executor, new String[] {"leftCS", "rightAS"}, null, classIndex2classId, classIndex2allClassIndexes);
+        CTOR_createPackage = ClassUtil.nonNullState(MAP_createPackage.class.getConstructor(classescs2as_Bug459225.class, Object[].class));
     }
     
     public boolean run() {
-        return __root__();
+        return MAP___root__();
     }
     
     /**
@@ -162,37 +167,51 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
      * }
      * 
      */
-    protected boolean createPackage(final @NonNull /*@NonInvalid*/ PackageCS packageCS) {
-        // predicates
-        // variable assignments
-        @Nullable /*@Caught*/ Object CAUGHT_name;
-        try {
-            final @Nullable /*@Thrown*/ String name = packageCS.getName();
-            CAUGHT_name = name;
+    protected class MAP_createPackage implements Invocation
+    {
+        protected final @NonNull /*@NonInvalid*/ PackageCS packageCS;
+        
+        @SuppressWarnings("null")
+        public MAP_createPackage(@NonNull Object[] boundValues) {
+            packageCS = (PackageCS)boundValues[0];
         }
-        catch (Exception e) {
-            CAUGHT_name = ValueUtil.createInvalidValue(e);
+        
+        public boolean execute() {
+            // predicates
+            // variable assignments
+            @Nullable /*@Caught*/ Object CAUGHT_name;
+            try {
+                final @Nullable /*@Thrown*/ String name = packageCS.getName();
+                CAUGHT_name = name;
+            }
+            catch (Exception e) {
+                CAUGHT_name = ValueUtil.createInvalidValue(e);
+            }
+            final /*@NonInvalid*/ boolean symbol_2 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
+            final @Nullable /*@NonInvalid*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_2);
+            if (not == null) {
+                throw new InvalidValueException("Null if condition");
+            }
+            @Nullable /*@Thrown*/ String symbol_3;
+            if (not) {
+                final @Nullable /*@Thrown*/ String computeName = classescs2as_Bug459225.this.computeName(packageCS);
+                symbol_3 = computeName;
+            }
+            else {
+                symbol_3 = STR_unnamed;
+            }
+            // creations
+            final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
+            assert symbol_0 != null;
+            models[1/*rightAS*/].add(symbol_0);
+            // property assignments
+            symbol_0.setName(symbol_3);
+            return true;
         }
-        final /*@NonInvalid*/ boolean symbol_2 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
-        final @Nullable /*@NonInvalid*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_2);
-        if (not == null) {
-            throw new InvalidValueException("Null if condition");
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues) {
+            return idResolver.oclEquals(packageCS, thoseValues[0]);
         }
-        @Nullable /*@Thrown*/ String symbol_3;
-        if (not) {
-            final @Nullable /*@Thrown*/ String computeName = this.computeName(packageCS);
-            symbol_3 = computeName;
-        }
-        else {
-            symbol_3 = STR_unnamed;
-        }
-        // creations
-        final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
-        assert symbol_0 != null;
-        models[1/*rightAS*/].add(symbol_0);
-        // property assignments
-        symbol_0.setName(symbol_3);
-        return true;
     }
     
     /**
@@ -207,7 +226,7 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
      * packageCS := packageCS;
      * }}
      */
-    protected boolean __root__() {
+    protected boolean MAP___root__() {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final @NonNull /*@NonInvalid*/ Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
@@ -219,7 +238,7 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
             if (packageCS_1 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS symbol_1 = (PackageCS)packageCS_1;
                 if (symbol_1 != null) {
-                    createPackage(symbol_1);
+                    invokeOnce(CTOR_createPackage, symbol_1);
                 }
             }
         }

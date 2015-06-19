@@ -22,6 +22,7 @@ import classescstraces.ClassescstracesFactory;
 import classescstraces.ClassescstracesPackage;
 import classescstraces.PackageCS2Package;
 import classescstraces.RootCS2Root;
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -132,12 +133,34 @@ public class classescs2as extends AbstractTransformationExecutor
         {8}                     // 8 : RootCS2Root -> {RootCS2Root}
     };
     
-    public classescs2as(final @NonNull Executor executor) {
+    protected final @NonNull Constructor<MAP_mClassCS2Class_LM> CTOR_mClassCS2Class_LM;
+    protected final @NonNull Constructor<MAP_mRootCS2Root_LM> CTOR_mRootCS2Root_LM;
+    protected final @NonNull Constructor<MAP_mPackageCS2Package_LM> CTOR_mPackageCS2Package_LM;
+    protected final @NonNull Constructor<MAP_mClassCS2Class_MR> CTOR_mClassCS2Class_MR;
+    protected final @NonNull Constructor<MAP_mRootCS2Root_MR> CTOR_mRootCS2Root_MR;
+    protected final @NonNull Constructor<MAP_mPackageCS2Package_MR> CTOR_mPackageCS2Package_MR;
+    protected final @NonNull Constructor<MAP_uClass_name> CTOR_uClass_name;
+    protected final @NonNull Constructor<MAP_uRoot_ownedPackages> CTOR_uRoot_ownedPackages;
+    protected final @NonNull Constructor<MAP_uPackage_name> CTOR_uPackage_name;
+    protected final @NonNull Constructor<MAP_uPackage_ownedClasses> CTOR_uPackage_ownedClasses;
+    
+    public classescs2as(final @NonNull Executor executor)
+     throws NoSuchMethodException,SecurityException {
         super(executor, new String[] {"leftCS", "rightAS", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
+        CTOR_mClassCS2Class_LM = ClassUtil.nonNullState(MAP_mClassCS2Class_LM.class.getConstructor(classescs2as.class, Object[].class));
+        CTOR_mRootCS2Root_LM = ClassUtil.nonNullState(MAP_mRootCS2Root_LM.class.getConstructor(classescs2as.class, Object[].class));
+        CTOR_mPackageCS2Package_LM = ClassUtil.nonNullState(MAP_mPackageCS2Package_LM.class.getConstructor(classescs2as.class, Object[].class));
+        CTOR_mClassCS2Class_MR = ClassUtil.nonNullState(MAP_mClassCS2Class_MR.class.getConstructor(classescs2as.class, Object[].class));
+        CTOR_mRootCS2Root_MR = ClassUtil.nonNullState(MAP_mRootCS2Root_MR.class.getConstructor(classescs2as.class, Object[].class));
+        CTOR_mPackageCS2Package_MR = ClassUtil.nonNullState(MAP_mPackageCS2Package_MR.class.getConstructor(classescs2as.class, Object[].class));
+        CTOR_uClass_name = ClassUtil.nonNullState(MAP_uClass_name.class.getConstructor(classescs2as.class, Object[].class));
+        CTOR_uRoot_ownedPackages = ClassUtil.nonNullState(MAP_uRoot_ownedPackages.class.getConstructor(classescs2as.class, Object[].class));
+        CTOR_uPackage_name = ClassUtil.nonNullState(MAP_uPackage_name.class.getConstructor(classescs2as.class, Object[].class));
+        CTOR_uPackage_ownedClasses = ClassUtil.nonNullState(MAP_uPackage_ownedClasses.class.getConstructor(classescs2as.class, Object[].class));
     }
     
     public boolean run() {
-        return __root__();
+        return MAP___root__();
     }
     
     /**
@@ -155,16 +178,30 @@ public class classescs2as extends AbstractTransformationExecutor
      * }
      * 
      */
-    protected boolean mClassCS2Class_LM(final @NonNull /*@NonInvalid*/ ClassCS classCS) {
-        // predicates
-        // creations
-        final /*@Thrown*/ ClassCS2Class c2c_0 = ClassescstracesFactory.eINSTANCE.createClassCS2Class();
-        assert c2c_0 != null;
-        models[2/*middle*/].add(c2c_0);
-        // property assignments
-        c2c_0.setClassCS(classCS);
-        OPPOSITE_OF_ClassCS2Class_classCS.put(classCS, c2c_0);
-        return true;
+    protected class MAP_mClassCS2Class_LM implements Invocation
+    {
+        protected final @NonNull /*@NonInvalid*/ ClassCS classCS;
+        
+        @SuppressWarnings("null")
+        public MAP_mClassCS2Class_LM(@NonNull Object[] boundValues) {
+            classCS = (ClassCS)boundValues[0];
+        }
+        
+        public boolean execute() {
+            // predicates
+            // creations
+            final /*@Thrown*/ ClassCS2Class c2c_0 = ClassescstracesFactory.eINSTANCE.createClassCS2Class();
+            assert c2c_0 != null;
+            models[2/*middle*/].add(c2c_0);
+            // property assignments
+            c2c_0.setClassCS(classCS);
+            OPPOSITE_OF_ClassCS2Class_classCS.put(classCS, c2c_0);
+            return true;
+        }
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues) {
+            return idResolver.oclEquals(classCS, thoseValues[0]);
+        }
     }
     
     /**
@@ -182,16 +219,30 @@ public class classescs2as extends AbstractTransformationExecutor
      * }
      * 
      */
-    protected boolean mRootCS2Root_LM(final @NonNull /*@NonInvalid*/ RootCS rootCS) {
-        // predicates
-        // creations
-        final /*@Thrown*/ RootCS2Root r2r_0 = ClassescstracesFactory.eINSTANCE.createRootCS2Root();
-        assert r2r_0 != null;
-        models[2/*middle*/].add(r2r_0);
-        // property assignments
-        r2r_0.setRootCS(rootCS);
-        OPPOSITE_OF_RootCS2Root_rootCS.put(rootCS, r2r_0);
-        return true;
+    protected class MAP_mRootCS2Root_LM implements Invocation
+    {
+        protected final @NonNull /*@NonInvalid*/ RootCS rootCS;
+        
+        @SuppressWarnings("null")
+        public MAP_mRootCS2Root_LM(@NonNull Object[] boundValues) {
+            rootCS = (RootCS)boundValues[0];
+        }
+        
+        public boolean execute() {
+            // predicates
+            // creations
+            final /*@Thrown*/ RootCS2Root r2r_0 = ClassescstracesFactory.eINSTANCE.createRootCS2Root();
+            assert r2r_0 != null;
+            models[2/*middle*/].add(r2r_0);
+            // property assignments
+            r2r_0.setRootCS(rootCS);
+            OPPOSITE_OF_RootCS2Root_rootCS.put(rootCS, r2r_0);
+            return true;
+        }
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues) {
+            return idResolver.oclEquals(rootCS, thoseValues[0]);
+        }
     }
     
     /**
@@ -209,16 +260,30 @@ public class classescs2as extends AbstractTransformationExecutor
      * }
      * 
      */
-    protected boolean mPackageCS2Package_LM(final @NonNull /*@NonInvalid*/ PackageCS packageCS) {
-        // predicates
-        // creations
-        final /*@Thrown*/ PackageCS2Package p2p_0 = ClassescstracesFactory.eINSTANCE.createPackageCS2Package();
-        assert p2p_0 != null;
-        models[2/*middle*/].add(p2p_0);
-        // property assignments
-        p2p_0.setPackageCS(packageCS);
-        OPPOSITE_OF_PackageCS2Package_packageCS.put(packageCS, p2p_0);
-        return true;
+    protected class MAP_mPackageCS2Package_LM implements Invocation
+    {
+        protected final @NonNull /*@NonInvalid*/ PackageCS packageCS;
+        
+        @SuppressWarnings("null")
+        public MAP_mPackageCS2Package_LM(@NonNull Object[] boundValues) {
+            packageCS = (PackageCS)boundValues[0];
+        }
+        
+        public boolean execute() {
+            // predicates
+            // creations
+            final /*@Thrown*/ PackageCS2Package p2p_0 = ClassescstracesFactory.eINSTANCE.createPackageCS2Package();
+            assert p2p_0 != null;
+            models[2/*middle*/].add(p2p_0);
+            // property assignments
+            p2p_0.setPackageCS(packageCS);
+            OPPOSITE_OF_PackageCS2Package_packageCS.put(packageCS, p2p_0);
+            return true;
+        }
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues) {
+            return idResolver.oclEquals(packageCS, thoseValues[0]);
+        }
     }
     
     /**
@@ -236,15 +301,29 @@ public class classescs2as extends AbstractTransformationExecutor
      * }
      * 
      */
-    protected boolean mClassCS2Class_MR(final @NonNull /*@NonInvalid*/ ClassCS2Class c2c) {
-        // predicates
-        // creations
-        final /*@Thrown*/ classes.Class symbol_3 = ClassesFactory.eINSTANCE.createClass();
-        assert symbol_3 != null;
-        models[1/*rightAS*/].add(symbol_3);
-        // property assignments
-        c2c.setClass(symbol_3);
-        return true;
+    protected class MAP_mClassCS2Class_MR implements Invocation
+    {
+        protected final @NonNull /*@NonInvalid*/ ClassCS2Class c2c;
+        
+        @SuppressWarnings("null")
+        public MAP_mClassCS2Class_MR(@NonNull Object[] boundValues) {
+            c2c = (ClassCS2Class)boundValues[0];
+        }
+        
+        public boolean execute() {
+            // predicates
+            // creations
+            final /*@Thrown*/ classes.Class symbol_3 = ClassesFactory.eINSTANCE.createClass();
+            assert symbol_3 != null;
+            models[1/*rightAS*/].add(symbol_3);
+            // property assignments
+            c2c.setClass(symbol_3);
+            return true;
+        }
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues) {
+            return idResolver.oclEquals(c2c, thoseValues[0]);
+        }
     }
     
     /**
@@ -262,15 +341,29 @@ public class classescs2as extends AbstractTransformationExecutor
      * }
      * 
      */
-    protected boolean mRootCS2Root_MR(final @NonNull /*@NonInvalid*/ RootCS2Root r2r) {
-        // predicates
-        // creations
-        final /*@Thrown*/ Root root_0 = ClassesFactory.eINSTANCE.createRoot();
-        assert root_0 != null;
-        models[1/*rightAS*/].add(root_0);
-        // property assignments
-        r2r.setRoot(root_0);
-        return true;
+    protected class MAP_mRootCS2Root_MR implements Invocation
+    {
+        protected final @NonNull /*@NonInvalid*/ RootCS2Root r2r;
+        
+        @SuppressWarnings("null")
+        public MAP_mRootCS2Root_MR(@NonNull Object[] boundValues) {
+            r2r = (RootCS2Root)boundValues[0];
+        }
+        
+        public boolean execute() {
+            // predicates
+            // creations
+            final /*@Thrown*/ Root root_0 = ClassesFactory.eINSTANCE.createRoot();
+            assert root_0 != null;
+            models[1/*rightAS*/].add(root_0);
+            // property assignments
+            r2r.setRoot(root_0);
+            return true;
+        }
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues) {
+            return idResolver.oclEquals(r2r, thoseValues[0]);
+        }
     }
     
     /**
@@ -288,15 +381,29 @@ public class classescs2as extends AbstractTransformationExecutor
      * }
      * 
      */
-    protected boolean mPackageCS2Package_MR(final @NonNull /*@NonInvalid*/ PackageCS2Package p2p) {
-        // predicates
-        // creations
-        final /*@Thrown*/ Package symbol_3 = ClassesFactory.eINSTANCE.createPackage();
-        assert symbol_3 != null;
-        models[1/*rightAS*/].add(symbol_3);
-        // property assignments
-        p2p.setPackage(symbol_3);
-        return true;
+    protected class MAP_mPackageCS2Package_MR implements Invocation
+    {
+        protected final @NonNull /*@NonInvalid*/ PackageCS2Package p2p;
+        
+        @SuppressWarnings("null")
+        public MAP_mPackageCS2Package_MR(@NonNull Object[] boundValues) {
+            p2p = (PackageCS2Package)boundValues[0];
+        }
+        
+        public boolean execute() {
+            // predicates
+            // creations
+            final /*@Thrown*/ Package symbol_3 = ClassesFactory.eINSTANCE.createPackage();
+            assert symbol_3 != null;
+            models[1/*rightAS*/].add(symbol_3);
+            // property assignments
+            p2p.setPackage(symbol_3);
+            return true;
+        }
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues) {
+            return idResolver.oclEquals(p2p, thoseValues[0]);
+        }
     }
     
     /**
@@ -317,20 +424,37 @@ public class classescs2as extends AbstractTransformationExecutor
      * }
      * 
      */
-    protected boolean uClass_name(final @NonNull /*@NonInvalid*/ classes.Class symbol_0, final @NonNull /*@NonInvalid*/ ClassCS classCS_0) {
-        // predicates
-        final @NonNull /*@Thrown*/ ClassCS2Class ClassCS2Class = ClassUtil.nonNullState (OPPOSITE_OF_ClassCS2Class_classCS.get(classCS_0));
+    protected class MAP_uClass_name implements Invocation
+    {
+        protected final @NonNull /*@NonInvalid*/ classes.Class symbol_0;
+        protected final @NonNull /*@NonInvalid*/ ClassCS classCS_0;
+        
         @SuppressWarnings("null")
-        final @NonNull /*@Thrown*/ classes.Class symbol_3 = ClassCS2Class.getClass_();
-        final /*@Thrown*/ boolean eq = symbol_3.equals(symbol_0);
-        if (!eq) {
-            return false;
+        public MAP_uClass_name(@NonNull Object[] boundValues) {
+            symbol_0 = (classes.Class)boundValues[0];
+            classCS_0 = (ClassCS)boundValues[1];
         }
-        // variable assignments
-        final @Nullable /*@Thrown*/ String name = classCS_0.getName();
-        // property assignments
-        symbol_0.setName(name);
-        return true;
+        
+        public boolean execute() {
+            // predicates
+            final @NonNull /*@Thrown*/ ClassCS2Class ClassCS2Class = ClassUtil.nonNullState (OPPOSITE_OF_ClassCS2Class_classCS.get(classCS_0));
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ classes.Class symbol_3 = ClassCS2Class.getClass_();
+            final /*@Thrown*/ boolean eq = symbol_3.equals(symbol_0);
+            if (!eq) {
+                return false;
+            }
+            // variable assignments
+            final @Nullable /*@Thrown*/ String name = classCS_0.getName();
+            // property assignments
+            symbol_0.setName(name);
+            return true;
+        }
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues) {
+            return idResolver.oclEquals(symbol_0, thoseValues[0])
+                && idResolver.oclEquals(classCS_0, thoseValues[1]);
+        }
     }
     
     /**
@@ -352,62 +476,79 @@ public class classescs2as extends AbstractTransformationExecutor
      * }
      * 
      */
-    protected boolean uRoot_ownedPackages(final @NonNull /*@NonInvalid*/ Root root, final @NonNull /*@NonInvalid*/ RootCS rootCS_0) {
-        // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final @NonNull /*@Thrown*/ RootCS2Root RootCS2Root = ClassUtil.nonNullState (OPPOSITE_OF_RootCS2Root_rootCS.get(rootCS_0));
+    protected class MAP_uRoot_ownedPackages implements Invocation
+    {
+        protected final @NonNull /*@NonInvalid*/ Root root;
+        protected final @NonNull /*@NonInvalid*/ RootCS rootCS_0;
+        
         @SuppressWarnings("null")
-        final @NonNull /*@Thrown*/ Root root_0 = RootCS2Root.getRoot();
-        final /*@Thrown*/ boolean eq = root_0.equals(root);
-        if (!eq) {
-            return false;
+        public MAP_uRoot_ownedPackages(@NonNull Object[] boundValues) {
+            root = (Root)boundValues[0];
+            rootCS_0 = (RootCS)boundValues[1];
         }
-        // variable assignments
-        @SuppressWarnings("null")
-        final @NonNull /*@Thrown*/ List<PackageCS> ownedPackages = rootCS_0.getOwnedPackages();
-        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
-        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_PackageCS2Package);
-        @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedPackages.iterator();
-        @NonNull /*@Thrown*/ SequenceValue collect_0;
-        while (true) {
-            if (!ITERATOR__1.hasNext()) {
-                collect_0 = accumulator;
-                break;
-            }
-            @Nullable /*@NonInvalid*/ PackageCS _1 = (PackageCS)ITERATOR__1.next();
-            /**
-             * PackageCS2Package
-             */
-            if (_1 == null) {
-                throw new InvalidValueException("Null source for \'\'http://tracesmodel/1.0/classescstraces\'::PackageCS2Package::packageCS\'");
-            }
-            final @NonNull /*@Thrown*/ PackageCS2Package PackageCS2Package = ClassUtil.nonNullState (OPPOSITE_OF_PackageCS2Package_packageCS.get(_1));
-            //
-            accumulator.add(PackageCS2Package);
-        }
-        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
-        @NonNull Iterator<?> ITERATOR__1_0 = collect_0.iterator();
-        @NonNull /*@Thrown*/ SequenceValue collect;
-        while (true) {
-            if (!ITERATOR__1_0.hasNext()) {
-                collect = accumulator_0;
-                break;
-            }
-            @NonNull /*@NonInvalid*/ PackageCS2Package _1_0 = (PackageCS2Package)ITERATOR__1_0.next();
-            /**
-             * package
-             */
+        
+        public boolean execute() {
+            // predicates
+            final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+            final @NonNull /*@Thrown*/ RootCS2Root RootCS2Root = ClassUtil.nonNullState (OPPOSITE_OF_RootCS2Root_rootCS.get(rootCS_0));
             @SuppressWarnings("null")
-            final @NonNull /*@Thrown*/ Package symbol_4 = _1_0.getPackage();
-            //
-            accumulator_0.add(symbol_4);
+            final @NonNull /*@Thrown*/ Root root_0 = RootCS2Root.getRoot();
+            final /*@Thrown*/ boolean eq = root_0.equals(root);
+            if (!eq) {
+                return false;
+            }
+            // variable assignments
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ List<PackageCS> ownedPackages = rootCS_0.getOwnedPackages();
+            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
+            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_PackageCS2Package);
+            @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedPackages.iterator();
+            @NonNull /*@Thrown*/ SequenceValue collect_0;
+            while (true) {
+                if (!ITERATOR__1.hasNext()) {
+                    collect_0 = accumulator;
+                    break;
+                }
+                @Nullable /*@NonInvalid*/ PackageCS _1 = (PackageCS)ITERATOR__1.next();
+                /**
+                 * PackageCS2Package
+                 */
+                if (_1 == null) {
+                    throw new InvalidValueException("Null source for \'\'http://tracesmodel/1.0/classescstraces\'::PackageCS2Package::packageCS\'");
+                }
+                final @NonNull /*@Thrown*/ PackageCS2Package PackageCS2Package = ClassUtil.nonNullState (OPPOSITE_OF_PackageCS2Package_packageCS.get(_1));
+                //
+                accumulator.add(PackageCS2Package);
+            }
+            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
+            @NonNull Iterator<?> ITERATOR__1_0 = collect_0.iterator();
+            @NonNull /*@Thrown*/ SequenceValue collect;
+            while (true) {
+                if (!ITERATOR__1_0.hasNext()) {
+                    collect = accumulator_0;
+                    break;
+                }
+                @NonNull /*@NonInvalid*/ PackageCS2Package _1_0 = (PackageCS2Package)ITERATOR__1_0.next();
+                /**
+                 * package
+                 */
+                @SuppressWarnings("null")
+                final @NonNull /*@Thrown*/ Package symbol_4 = _1_0.getPackage();
+                //
+                accumulator_0.add(symbol_4);
+            }
+            final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
+            // property assignments
+            final List<Package> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, Package.class);
+            assert UNBOXED_null != null;
+            root.getOwnedPackages().addAll(UNBOXED_null);
+            return true;
         }
-        final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
-        // property assignments
-        final List<Package> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, Package.class);
-        assert UNBOXED_null != null;
-        root.getOwnedPackages().addAll(UNBOXED_null);
-        return true;
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues) {
+            return idResolver.oclEquals(root, thoseValues[0])
+                && idResolver.oclEquals(rootCS_0, thoseValues[1]);
+        }
     }
     
     /**
@@ -428,20 +569,37 @@ public class classescs2as extends AbstractTransformationExecutor
      * }
      * 
      */
-    protected boolean uPackage_name(final @NonNull /*@NonInvalid*/ Package symbol_1, final @NonNull /*@NonInvalid*/ PackageCS packageCS_0) {
-        // predicates
-        final @NonNull /*@Thrown*/ PackageCS2Package PackageCS2Package = ClassUtil.nonNullState (OPPOSITE_OF_PackageCS2Package_packageCS.get(packageCS_0));
+    protected class MAP_uPackage_name implements Invocation
+    {
+        protected final @NonNull /*@NonInvalid*/ Package symbol_1;
+        protected final @NonNull /*@NonInvalid*/ PackageCS packageCS_0;
+        
         @SuppressWarnings("null")
-        final @NonNull /*@Thrown*/ Package symbol_3 = PackageCS2Package.getPackage();
-        final /*@Thrown*/ boolean eq = symbol_3.equals(symbol_1);
-        if (!eq) {
-            return false;
+        public MAP_uPackage_name(@NonNull Object[] boundValues) {
+            symbol_1 = (Package)boundValues[0];
+            packageCS_0 = (PackageCS)boundValues[1];
         }
-        // variable assignments
-        final @Nullable /*@Thrown*/ String name = packageCS_0.getName();
-        // property assignments
-        symbol_1.setName(name);
-        return true;
+        
+        public boolean execute() {
+            // predicates
+            final @NonNull /*@Thrown*/ PackageCS2Package PackageCS2Package = ClassUtil.nonNullState (OPPOSITE_OF_PackageCS2Package_packageCS.get(packageCS_0));
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ Package symbol_3 = PackageCS2Package.getPackage();
+            final /*@Thrown*/ boolean eq = symbol_3.equals(symbol_1);
+            if (!eq) {
+                return false;
+            }
+            // variable assignments
+            final @Nullable /*@Thrown*/ String name = packageCS_0.getName();
+            // property assignments
+            symbol_1.setName(name);
+            return true;
+        }
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues) {
+            return idResolver.oclEquals(symbol_1, thoseValues[0])
+                && idResolver.oclEquals(packageCS_0, thoseValues[1]);
+        }
     }
     
     /**
@@ -463,62 +621,79 @@ public class classescs2as extends AbstractTransformationExecutor
      * }
      * 
      */
-    protected boolean uPackage_ownedClasses(final @NonNull /*@NonInvalid*/ Package symbol_2, final @NonNull /*@NonInvalid*/ PackageCS packageCS_1) {
-        // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final @NonNull /*@Thrown*/ PackageCS2Package PackageCS2Package = ClassUtil.nonNullState (OPPOSITE_OF_PackageCS2Package_packageCS.get(packageCS_1));
+    protected class MAP_uPackage_ownedClasses implements Invocation
+    {
+        protected final @NonNull /*@NonInvalid*/ Package symbol_2;
+        protected final @NonNull /*@NonInvalid*/ PackageCS packageCS_1;
+        
         @SuppressWarnings("null")
-        final @NonNull /*@Thrown*/ Package symbol_3 = PackageCS2Package.getPackage();
-        final /*@Thrown*/ boolean eq = symbol_3.equals(symbol_2);
-        if (!eq) {
-            return false;
+        public MAP_uPackage_ownedClasses(@NonNull Object[] boundValues) {
+            symbol_2 = (Package)boundValues[0];
+            packageCS_1 = (PackageCS)boundValues[1];
         }
-        // variable assignments
-        @SuppressWarnings("null")
-        final @NonNull /*@Thrown*/ List<ClassCS> ownedClasses = packageCS_1.getOwnedClasses();
-        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
-        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_ClassCS2Class);
-        @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedClasses.iterator();
-        @NonNull /*@Thrown*/ SequenceValue collect_0;
-        while (true) {
-            if (!ITERATOR__1.hasNext()) {
-                collect_0 = accumulator;
-                break;
-            }
-            @Nullable /*@NonInvalid*/ ClassCS _1 = (ClassCS)ITERATOR__1.next();
-            /**
-             * ClassCS2Class
-             */
-            if (_1 == null) {
-                throw new InvalidValueException("Null source for \'\'http://tracesmodel/1.0/classescstraces\'::ClassCS2Class::classCS\'");
-            }
-            final @NonNull /*@Thrown*/ ClassCS2Class ClassCS2Class = ClassUtil.nonNullState (OPPOSITE_OF_ClassCS2Class_classCS.get(_1));
-            //
-            accumulator.add(ClassCS2Class);
-        }
-        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
-        @NonNull Iterator<?> ITERATOR__1_0 = collect_0.iterator();
-        @NonNull /*@Thrown*/ SequenceValue collect;
-        while (true) {
-            if (!ITERATOR__1_0.hasNext()) {
-                collect = accumulator_0;
-                break;
-            }
-            @NonNull /*@NonInvalid*/ ClassCS2Class _1_0 = (ClassCS2Class)ITERATOR__1_0.next();
-            /**
-             * class
-             */
+        
+        public boolean execute() {
+            // predicates
+            final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+            final @NonNull /*@Thrown*/ PackageCS2Package PackageCS2Package = ClassUtil.nonNullState (OPPOSITE_OF_PackageCS2Package_packageCS.get(packageCS_1));
             @SuppressWarnings("null")
-            final @NonNull /*@Thrown*/ classes.Class symbol_5 = _1_0.getClass_();
-            //
-            accumulator_0.add(symbol_5);
+            final @NonNull /*@Thrown*/ Package symbol_3 = PackageCS2Package.getPackage();
+            final /*@Thrown*/ boolean eq = symbol_3.equals(symbol_2);
+            if (!eq) {
+                return false;
+            }
+            // variable assignments
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ List<ClassCS> ownedClasses = packageCS_1.getOwnedClasses();
+            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
+            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_ClassCS2Class);
+            @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedClasses.iterator();
+            @NonNull /*@Thrown*/ SequenceValue collect_0;
+            while (true) {
+                if (!ITERATOR__1.hasNext()) {
+                    collect_0 = accumulator;
+                    break;
+                }
+                @Nullable /*@NonInvalid*/ ClassCS _1 = (ClassCS)ITERATOR__1.next();
+                /**
+                 * ClassCS2Class
+                 */
+                if (_1 == null) {
+                    throw new InvalidValueException("Null source for \'\'http://tracesmodel/1.0/classescstraces\'::ClassCS2Class::classCS\'");
+                }
+                final @NonNull /*@Thrown*/ ClassCS2Class ClassCS2Class = ClassUtil.nonNullState (OPPOSITE_OF_ClassCS2Class_classCS.get(_1));
+                //
+                accumulator.add(ClassCS2Class);
+            }
+            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
+            @NonNull Iterator<?> ITERATOR__1_0 = collect_0.iterator();
+            @NonNull /*@Thrown*/ SequenceValue collect;
+            while (true) {
+                if (!ITERATOR__1_0.hasNext()) {
+                    collect = accumulator_0;
+                    break;
+                }
+                @NonNull /*@NonInvalid*/ ClassCS2Class _1_0 = (ClassCS2Class)ITERATOR__1_0.next();
+                /**
+                 * class
+                 */
+                @SuppressWarnings("null")
+                final @NonNull /*@Thrown*/ classes.Class symbol_5 = _1_0.getClass_();
+                //
+                accumulator_0.add(symbol_5);
+            }
+            final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
+            // property assignments
+            final List<classes.Class> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, classes.Class.class);
+            assert UNBOXED_null != null;
+            symbol_2.getOwnedClasses().addAll(UNBOXED_null);
+            return true;
         }
-        final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
-        // property assignments
-        final List<classes.Class> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, classes.Class.class);
-        assert UNBOXED_null != null;
-        symbol_2.getOwnedClasses().addAll(UNBOXED_null);
-        return true;
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues) {
+            return idResolver.oclEquals(symbol_2, thoseValues[0])
+                && idResolver.oclEquals(packageCS_1, thoseValues[1]);
+        }
     }
     
     /**
@@ -595,7 +770,7 @@ public class classescs2as extends AbstractTransformationExecutor
      * rootCS := rootCS;
      * }}}
      */
-    protected boolean __root__() {
+    protected boolean MAP___root__() {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_1 = idResolver.getClass(CLSSid_Package, null);
@@ -622,7 +797,7 @@ public class classescs2as extends AbstractTransformationExecutor
             if (packageCS_5 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS symbol_7 = (PackageCS)packageCS_5;
                 if (symbol_7 != null) {
-                    mPackageCS2Package_LM(symbol_7);
+                    invokeOnce(CTOR_mPackageCS2Package_LM, symbol_7);
                 }
             }
         }
@@ -633,7 +808,7 @@ public class classescs2as extends AbstractTransformationExecutor
             if (p2p_1 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS2Package symbol_11 = (PackageCS2Package)p2p_1;
                 if (symbol_11 != null) {
-                    mPackageCS2Package_MR(symbol_11);
+                    invokeOnce(CTOR_mPackageCS2Package_MR, symbol_11);
                 }
             }
         }
@@ -645,7 +820,7 @@ public class classescs2as extends AbstractTransformationExecutor
                         final @NonNull /*@NonInvalid*/ PackageCS symbol_17 = (PackageCS)packageCS_6;
                         if (symbol_16 != null) {
                             if (symbol_17 != null) {
-                                uPackage_name(symbol_16, symbol_17);
+                                invokeOnce(CTOR_uPackage_name, symbol_16, symbol_17);
                             }
                         }
                     }
@@ -660,7 +835,7 @@ public class classescs2as extends AbstractTransformationExecutor
                         final @NonNull /*@NonInvalid*/ PackageCS symbol_25 = (PackageCS)packageCS_7;
                         if (symbol_24 != null) {
                             if (symbol_25 != null) {
-                                uPackage_ownedClasses(symbol_24, symbol_25);
+                                invokeOnce(CTOR_uPackage_ownedClasses, symbol_24, symbol_25);
                             }
                         }
                     }
@@ -671,7 +846,7 @@ public class classescs2as extends AbstractTransformationExecutor
             if (classCS_3 != null) {
                 final @NonNull /*@NonInvalid*/ ClassCS symbol_31 = (ClassCS)classCS_3;
                 if (symbol_31 != null) {
-                    mClassCS2Class_LM(symbol_31);
+                    invokeOnce(CTOR_mClassCS2Class_LM, symbol_31);
                 }
             }
         }
@@ -682,7 +857,7 @@ public class classescs2as extends AbstractTransformationExecutor
             if (c2c_1 != null) {
                 final @NonNull /*@NonInvalid*/ ClassCS2Class symbol_35 = (ClassCS2Class)c2c_1;
                 if (symbol_35 != null) {
-                    mClassCS2Class_MR(symbol_35);
+                    invokeOnce(CTOR_mClassCS2Class_MR, symbol_35);
                 }
             }
         }
@@ -698,7 +873,7 @@ public class classescs2as extends AbstractTransformationExecutor
                         final @NonNull /*@NonInvalid*/ ClassCS symbol_41 = (ClassCS)classCS_4;
                         if (symbol_40 != null) {
                             if (symbol_41 != null) {
-                                uClass_name(symbol_40, symbol_41);
+                                invokeOnce(CTOR_uClass_name, symbol_40, symbol_41);
                             }
                         }
                     }
@@ -709,7 +884,7 @@ public class classescs2as extends AbstractTransformationExecutor
             if (rootCS_3 != null) {
                 final @NonNull /*@NonInvalid*/ RootCS symbol_47 = (RootCS)rootCS_3;
                 if (symbol_47 != null) {
-                    mRootCS2Root_LM(symbol_47);
+                    invokeOnce(CTOR_mRootCS2Root_LM, symbol_47);
                 }
             }
         }
@@ -720,7 +895,7 @@ public class classescs2as extends AbstractTransformationExecutor
             if (r2r_1 != null) {
                 final @NonNull /*@NonInvalid*/ RootCS2Root symbol_51 = (RootCS2Root)r2r_1;
                 if (symbol_51 != null) {
-                    mRootCS2Root_MR(symbol_51);
+                    invokeOnce(CTOR_mRootCS2Root_MR, symbol_51);
                 }
             }
         }
@@ -736,7 +911,7 @@ public class classescs2as extends AbstractTransformationExecutor
                         final @NonNull /*@NonInvalid*/ RootCS symbol_57 = (RootCS)rootCS_4;
                         if (symbol_56 != null) {
                             if (symbol_57 != null) {
-                                uRoot_ownedPackages(symbol_56, symbol_57);
+                                invokeOnce(CTOR_uRoot_ownedPackages, symbol_56, symbol_57);
                             }
                         }
                     }

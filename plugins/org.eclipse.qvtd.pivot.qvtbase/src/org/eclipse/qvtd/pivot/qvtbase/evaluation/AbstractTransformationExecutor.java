@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase.evaluation;
 
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -43,7 +46,20 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 {	
 	private static final @SuppressWarnings("null")@NonNull List<Integer> EMPTY_INDEX_LIST = Collections.emptyList();
 	private static final @SuppressWarnings("null")@NonNull List<EObject> EMPTY_EOBJECT_LIST = Collections.emptyList();
-	
+
+	protected static interface Invocation
+	{
+		/**
+		 * Execute the mapping invocation.
+		 */
+ 		boolean execute();
+ 		
+ 		/**
+ 		 * Return true if a mapping invocation for thatClass with thoseValues would be a re-invocation of this invocation,
+  		 */
+		boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues);
+	}
+
 	protected class Model implements TypedModelInstance
 	{
 		protected final @NonNull String name;
@@ -270,7 +286,7 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	/** deprecated use executor */
 	@Deprecated
 	protected final @NonNull Evaluator evaluator;
-	protected final @NonNull IdResolver idResolver;
+	protected final @NonNull IdResolver.IdResolverExtension idResolver;
 	protected final @NonNull Model[] models;
 	protected final @NonNull Map<String, Integer> modelIndexes = new HashMap<String, Integer>();
 
@@ -307,6 +323,15 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	 */
 	private final @Nullable Map<ClassId, Set<Integer>> classId2classIndexes;
 	
+	/**
+	 * Map from invocation identity to one or more invocations with that identity. Single map entries use the
+	 * Invocation directly as the entry. Colliding entries use a List<Invocation> for the collisions.
+	 * <br>
+	 * This map is used to inhibit repeated invocations of the invocationId.
+	 */
+	private final @NonNull Map<Integer, Object> invocationId2invocation = new HashMap<Integer, Object>();
+
+	
 	/** @deprecated use Executor in constructor */
 	@Deprecated
 	protected AbstractTransformationExecutor(@NonNull Evaluator evaluator, @NonNull String[] modelNames,
@@ -317,7 +342,7 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 				@Nullable PropertyId[] propertyIndex2propertyId, @Nullable ClassId[] classIndex2classId, @Nullable int[][] classIndex2allClassIndexes) {
 		this.executor = executor;
 		this.evaluator = executor;
-		this.idResolver = executor.getIdResolver();
+		this.idResolver = (IdResolver.IdResolverExtension)executor.getIdResolver();
 		this.models = new Model[modelNames.length];
 		for (int i = 0; i < modelNames.length; i++) {
 			@SuppressWarnings("null")@NonNull String modelName = modelNames[i];
@@ -383,7 +408,69 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
     	}
     	models[modelIndex].addRootObjects(eRootObjects);
 	}
-
+	
+    /**
+     * Create and return the invocation for an invocationClass and boundValues.
+     * Returns null if already created.
+     */
+    protected @Nullable Invocation createFirst(@NonNull Constructor<? extends Invocation> constructor, @NonNull Object... boundValues) {
+    	Class<? extends Invocation> invocationClass = constructor.getDeclaringClass();
+    	assert invocationClass != null;
+		int hashCode = System.identityHashCode(invocationClass);
+    	for (Object boundValue : boundValues) {
+    		hashCode = 3 * hashCode + idResolver.oclHashCode(boundValue);
+    	}
+    	Object zeroOrMoreInvocations = invocationId2invocation.get(hashCode);
+    	Invocation oneInvocation = null;
+		List<Invocation> twoOrMoreInvocations2 = null;
+    	if (zeroOrMoreInvocations instanceof Invocation) {
+    		oneInvocation = (Invocation)zeroOrMoreInvocations;
+    		if ((invocationClass == oneInvocation.getClass()) && oneInvocation.isEqual(idResolver, boundValues)) {
+	    		return oneInvocation;
+	    	}
+    	}
+    	else if (zeroOrMoreInvocations instanceof List<?>) {
+    		@SuppressWarnings("unchecked")List<Invocation> zeroOrMoreInvocations2 = (List<Invocation>)zeroOrMoreInvocations;
+			twoOrMoreInvocations2 = zeroOrMoreInvocations2;
+			for (Invocation anInvocation : twoOrMoreInvocations2) {
+		   		if ((invocationClass == anInvocation.getClass()) && anInvocation.isEqual(idResolver, boundValues)) {
+     	    		return anInvocation;
+    	    	}
+    		}
+    	}
+		try {
+			Invocation theInvocation = constructor.newInstance(this, boundValues);;
+			if (zeroOrMoreInvocations == null) {
+				invocationId2invocation.put(hashCode, theInvocation);
+			}
+			else {
+				if (twoOrMoreInvocations2 == null) {
+		    		twoOrMoreInvocations2 = new ArrayList<Invocation>(4);
+	    			twoOrMoreInvocations2.add(oneInvocation);
+				}
+				twoOrMoreInvocations2.add(theInvocation);
+				invocationId2invocation.put(hashCode, twoOrMoreInvocations2);
+			}
+			return theInvocation;
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+    }
+    
 	@Override
 	public @NonNull Set<EObject> get(@NonNull org.eclipse.ocl.pivot.Class type) {
 		return new HashSet<EObject>(models[0].getObjectsOfKind(type));
@@ -470,4 +557,14 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
     	}
     	return models[modelIndex].getRootObjects();
 	}
+	
+    /**
+     * Invoke the invocationClass with a giveb set of boundValues once. Repeated invocation attempts are ignored.
+     */
+    protected <T extends Invocation> void invokeOnce(@NonNull Constructor<T> constructor, @NonNull Object... boundValues) {
+    	Invocation invocation = createFirst(constructor, boundValues);
+    	if (invocation != null) {
+    		invocation.execute();
+    	}
+    }
 }
