@@ -39,7 +39,7 @@ import manualuml2rdbms.uml2rdbms.UML2RDBMSFactory;
 import manualuml2rdbms.uml2rdbms.UML2RDBMSPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
@@ -156,8 +156,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         {0}                     // 0 : Package -> {Package}
     };
     
-    public ManualUML2RDBMS(final @NonNull Evaluator evaluator) {
-        super(evaluator, new String[] {"uml", "rdbms", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
+    public ManualUML2RDBMS(final @NonNull Executor executor) {
+        super(executor, new String[] {"uml", "rdbms", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() {
@@ -193,10 +193,10 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean __root__() {
         // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_uml_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
         // mapping statements
-        final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Package, TYP_uml_c_c_Package_0);
+        final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, TYP_uml_c_c_Package_0);
         final List<Package> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, Package.class);
         assert UNBOXED_allInstances != null;
         for (Package p1 : UNBOXED_allInstances) {
@@ -865,7 +865,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean classToTableMR(final @NonNull /*@NonInvalid*/ ClassToTable c2t, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_8, final @NonNull /*@NonInvalid*/ Schema s) {
         // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final @Nullable /*@Thrown*/ PackageToSchema owner = c2t.getOwner();
         final /*@Thrown*/ boolean eq = p2s_8.equals(owner);
         if (!eq) {
@@ -919,7 +919,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        final @NonNull /*@Thrown*/ SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_fromAttributes, TYP_uml2rdbms_c_c_NonLeafAttribute_0);
+        final @NonNull /*@Thrown*/ SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_fromAttributes, TYP_uml2rdbms_c_c_NonLeafAttribute_0);
         @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_FromAttribute);
         @NonNull Iterator<?> ITERATOR__1 = selectByKind.iterator();
         @NonNull /*@Thrown*/ BagValue collect;
@@ -1022,7 +1022,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean classToTableMR_2(final @NonNull /*@NonInvalid*/ ClassToTable c2t_2, final @NonNull /*@NonInvalid*/ Table t_2) {
         // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         // creations
         final /*@Thrown*/ Column pc = RDBMSFactory.eINSTANCE.createColumn();
         assert pc != null;
@@ -1446,7 +1446,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean associationToForeignKeyMR_1(final @NonNull /*@NonInvalid*/ Table dt_0, final @NonNull /*@NonInvalid*/ Column fc, final @NonNull /*@NonInvalid*/ ForeignKey fk, final @NonNull /*@NonInvalid*/ Key rk_0) {
         // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         // variable assignments
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<Column> column = rk_0.getColumn();
@@ -1524,7 +1524,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean classPrimitiveAttributesLM(final @NonNull /*@NonInvalid*/ Attribute a_0, final @NonNull /*@NonInvalid*/ manualuml2rdbms.uml.Class c_0, final @NonNull /*@NonInvalid*/ ClassToTable fao) {
         // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ manualuml2rdbms.uml.Class owner = a_0.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(c_0);
@@ -1600,7 +1600,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean classComplexAttributesLM(final @NonNull /*@NonInvalid*/ Attribute a_1, final @NonNull /*@NonInvalid*/ manualuml2rdbms.uml.Class c_1, final @NonNull /*@NonInvalid*/ ClassToTable fao_0) {
         // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ manualuml2rdbms.uml.Class owner = a_1.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(c_1);
@@ -1754,7 +1754,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean complexAttributePrimitiveAttributesLM_1(final @NonNull /*@NonInvalid*/ Attribute a_1_0, final @NonNull /*@NonInvalid*/ manualuml2rdbms.uml.Class c_1_0, final @NonNull /*@NonInvalid*/ Attribute ca_1, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_1) {
         // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type = a_1_0.getType();
         if (!(type instanceof PrimitiveDataType)) {
@@ -1879,7 +1879,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      */
     protected boolean complexAttributeComplexAttributesLM_1(final @NonNull /*@NonInvalid*/ Attribute a_1_1, final @NonNull /*@NonInvalid*/ manualuml2rdbms.uml.Class c_1_1, final @NonNull /*@NonInvalid*/ Attribute ca_1_0, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_1_0) {
         // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ manualuml2rdbms.uml.Class owner = a_1_1.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(c_1_1);

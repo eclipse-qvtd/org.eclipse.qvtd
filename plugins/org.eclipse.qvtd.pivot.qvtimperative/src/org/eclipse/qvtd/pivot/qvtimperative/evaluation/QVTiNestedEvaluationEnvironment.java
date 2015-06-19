@@ -28,7 +28,7 @@ public class QVTiNestedEvaluationEnvironment extends BasicEvaluationEnvironment 
 	protected final @NonNull QVTiRootEvaluationEnvironment rootEvaluationEnvironment;
 	private @Nullable DomainUsageAnalysis usageAnalysis;
 	
-	public QVTiNestedEvaluationEnvironment(@NonNull QVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @NonNull OCLExpression callingObject) {
+	public QVTiNestedEvaluationEnvironment(@NonNull QVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable OCLExpression callingObject) {
 		super(evaluationEnvironment, executableObject, callingObject);
 		rootEvaluationEnvironment = evaluationEnvironment.getRootEvaluationEnvironment();
 	}
@@ -38,6 +38,7 @@ public class QVTiNestedEvaluationEnvironment extends BasicEvaluationEnvironment 
 		return (QVTiExecutor) super.getExecutor();
 	}
 
+	@Override
 	public @NonNull QVTiEvaluationEnvironment getParentEvaluationEnvironment() {
 		EvaluationEnvironment parent = getParent();
 		assert parent != null;

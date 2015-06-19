@@ -15,7 +15,7 @@ import java.util.Collection;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
@@ -32,7 +32,7 @@ public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
 	public static final @NonNull ModelObjectsOfKindOperation INSTANCE = new ModelObjectsOfKindOperation();
 
 	@Override
-	public @NonNull SetValue evaluate(@NonNull Evaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object typeVal) {
+	public @NonNull SetValue evaluate(@NonNull Executor executor, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object typeVal) {
 		org.eclipse.ocl.pivot.Class type = asClass(typeVal);
 		if (!(sourceVal instanceof TypedModelInstance)) {
 			throw new InvalidValueException(PivotMessages.TypedValueRequired, "TypedModelInstance", getTypeName(sourceVal));

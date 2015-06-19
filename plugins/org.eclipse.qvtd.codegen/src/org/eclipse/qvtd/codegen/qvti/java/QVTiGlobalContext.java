@@ -34,7 +34,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<QVTiCodeGenerator>
 
 	public QVTiGlobalContext(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
-		nameManager.reserveName(JavaConstants.EVALUATOR_NAME, null);
+		nameManager.reserveName(JavaConstants.EXECUTOR_NAME, null);
 		nameManager.reserveName(MODELS_NAME, null);
 	}
 

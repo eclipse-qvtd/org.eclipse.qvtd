@@ -13,7 +13,7 @@ package org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 
 import example2.classes.NamedElement;
 import example2.classescs.PathElementCS;
@@ -23,23 +23,23 @@ import example2.env.impl.EnvironmentImpl;
 
 public class LookupEnvironment extends EnvironmentImpl   {
 	
-	private @NonNull Evaluator evaluator;
+	private @NonNull Executor executor;
 	private @NonNull String name;
 	
-	public LookupEnvironment(@NonNull Evaluator evaluator, @NonNull String name) {
-		this.evaluator = evaluator;
+	public LookupEnvironment(@NonNull Executor executor, @NonNull String name) {
+		this.executor = executor;
 		this.name = name;
 	}
 	
-	public LookupEnvironment(@NonNull Evaluator evaluator, @NonNull PathElementCS pathElement) {
-		this.evaluator = evaluator;
+	public LookupEnvironment(@NonNull Executor executor, @NonNull PathElementCS pathElement) {
+		this.executor = executor;
 		this.name = pathElement.getName();
 	}
 	
 	@Override
 	@NonNull
-	public Evaluator getEvaluator() {
-		return evaluator;
+	public Executor getExecutor() {
+		return executor;
 	}
 	
 	@Override

@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractEvaluationVisitorDecorator;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
@@ -85,10 +84,10 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 //		return delegate.getEvaluator();
 //	}
 	
-	@Override
-	public @NonNull Evaluator getEvaluator() {
-		return delegate.getEvaluator();
-	}
+//	@Override
+//	public @NonNull EvaluationVisitor getEvaluator() {
+//		return delegate.getEvaluator();
+//	}
 
 	/**
      * Delegates to my decorated visitor.

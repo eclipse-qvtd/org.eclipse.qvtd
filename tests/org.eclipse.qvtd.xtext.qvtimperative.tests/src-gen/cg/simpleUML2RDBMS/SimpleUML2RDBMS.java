@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package cg.test;
+package cg.simpleUML2RDBMS;
 
 import java.util.HashMap;
 import java.util.Iterator;

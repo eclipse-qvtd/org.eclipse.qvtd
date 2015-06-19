@@ -15,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.CompleteEnvironmentInternal;
@@ -34,7 +34,7 @@ public abstract class AbstractTransformationEvaluator extends ExecutorManager im
 	
 	public AbstractTransformationEvaluator(@NonNull CompleteEnvironment environment, Class<? extends TransformationExecutor> txClass) 
 			throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException , NoSuchMethodException {
-		this(environment, ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class)));
+		this(environment, ClassUtil.nonNullState(txClass.getConstructor(Executor.class)));
 	}
 	
 	@Override

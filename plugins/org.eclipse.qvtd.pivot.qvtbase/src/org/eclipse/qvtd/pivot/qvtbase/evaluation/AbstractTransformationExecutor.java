@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -36,6 +37,7 @@ import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
 
 public abstract class AbstractTransformationExecutor implements TransformationExecutor
 {	
@@ -264,6 +266,9 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 		}
 	}
 	
+	protected final @NonNull Executor executor;
+	/** deprecated use executor */
+	@Deprecated
 	protected final @NonNull Evaluator evaluator;
 	protected final @NonNull IdResolver idResolver;
 	protected final @NonNull Model[] models;
@@ -302,10 +307,17 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	 */
 	private final @Nullable Map<ClassId, Set<Integer>> classId2classIndexes;
 	
+	/** @deprecated use Executor in constructor */
+	@Deprecated
 	protected AbstractTransformationExecutor(@NonNull Evaluator evaluator, @NonNull String[] modelNames,
 			@Nullable PropertyId[] propertyIndex2propertyId, @Nullable ClassId[] classIndex2classId, @Nullable int[][] classIndex2allClassIndexes) {
-		this.evaluator = evaluator;
-		this.idResolver = evaluator.getIdResolver();
+		this(ValueUtil.getExecutor(evaluator), modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+	}
+	protected AbstractTransformationExecutor(@NonNull Executor executor, @NonNull String[] modelNames,
+				@Nullable PropertyId[] propertyIndex2propertyId, @Nullable ClassId[] classIndex2classId, @Nullable int[][] classIndex2allClassIndexes) {
+		this.executor = executor;
+		this.evaluator = executor;
+		this.idResolver = executor.getIdResolver();
 		this.models = new Model[modelNames.length];
 		for (int i = 0; i < modelNames.length; i++) {
 			@SuppressWarnings("null")@NonNull String modelName = modelNames[i];

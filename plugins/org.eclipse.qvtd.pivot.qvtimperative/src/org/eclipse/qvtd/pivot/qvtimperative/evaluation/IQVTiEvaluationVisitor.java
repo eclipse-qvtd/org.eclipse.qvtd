@@ -15,7 +15,7 @@ import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
-public interface IQVTiEvaluationVisitor extends QVTimperativeVisitor<Object>, EvaluationVisitor
+public interface IQVTiEvaluationVisitor extends QVTimperativeVisitor<Object>, EvaluationVisitor.EvaluationVisitorExtension
 {
 	Object safeVisit(@Nullable Visitable v);
 }

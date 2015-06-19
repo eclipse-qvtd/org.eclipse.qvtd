@@ -19,7 +19,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
@@ -83,8 +83,8 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         {0}                     // 0 : PackageCS -> {PackageCS}
     };
     
-    public classescs2as_Bug459225(final @NonNull Evaluator evaluator) {
-        super(evaluator, new String[] {"leftCS", "rightAS"}, null, classIndex2classId, classIndex2allClassIndexes);
+    public classescs2as_Bug459225(final @NonNull Executor executor) {
+        super(executor, new String[] {"leftCS", "rightAS"}, null, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() {
@@ -107,15 +107,15 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
      *   endif
      */
     public @Nullable /*@NonInvalid*/ String computeName(final @NonNull /*@NonInvalid*/ NamedElementCS self_0) {
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-        final @Nullable /*@NonInvalid*/ Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_0);
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+        final @Nullable /*@NonInvalid*/ Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, self_0);
         final @Nullable /*@Thrown*/ String name_0 = self_0.getName();
         final /*@NonInvalid*/ boolean symbol_0 = container == null;
         final @Nullable /*@NonInvalid*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_0);
         @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
         try {
             final @NonNull /*@NonInvalid*/ Class TYP_classescs_c_c_NamedElementCS_0 = idResolver.getClass(CLSSid_NamedElementCS, null);
-            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, container, TYP_classescs_c_c_NamedElementCS_0).booleanValue();
+            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_classescs_c_c_NamedElementCS_0).booleanValue();
             CAUGHT_oclIsKindOf = oclIsKindOf;
         }
         catch (Exception e) {
@@ -128,7 +128,7 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         @Nullable /*@Thrown*/ String symbol_1;
         if (and) {
             final @NonNull /*@NonInvalid*/ Class TYP_classescs_c_c_NamedElementCS_1 = idResolver.getClass(CLSSid_NamedElementCS, null);
-            final @NonNull /*@Thrown*/ NamedElementCS oclAsType = ClassUtil.nonNullState((NamedElementCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, container, TYP_classescs_c_c_NamedElementCS_1));
+            final @NonNull /*@Thrown*/ NamedElementCS oclAsType = ClassUtil.nonNullState((NamedElementCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_classescs_c_c_NamedElementCS_1));
             final @Nullable /*@Thrown*/ String computeName = this.computeName(oclAsType);
             final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(computeName, STR__c_c);
             final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
@@ -209,10 +209,10 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
      */
     protected boolean __root__() {
         // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final @NonNull /*@NonInvalid*/ Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
         // mapping statements
-        final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
+        final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
         final List<PackageCS> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, PackageCS.class);
         assert UNBOXED_allInstances != null;
         for (PackageCS packageCS_1 : UNBOXED_allInstances) {

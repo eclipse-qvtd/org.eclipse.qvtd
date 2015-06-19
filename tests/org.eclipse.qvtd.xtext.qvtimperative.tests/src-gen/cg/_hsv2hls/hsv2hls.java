@@ -13,7 +13,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.DataTypeId;
@@ -83,8 +83,8 @@ public class hsv2hls extends AbstractTransformationExecutor
         {0}                     // 0 : HSVNode -> {HSVNode}
     };
     
-    public hsv2hls(final @NonNull Evaluator evaluator) {
-        super(evaluator, new String[] {"hsv", "hls", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
+    public hsv2hls(final @NonNull Executor executor) {
+        super(executor, new String[] {"hsv", "hls", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() {
@@ -121,10 +121,10 @@ public class hsv2hls extends AbstractTransformationExecutor
      */
     protected boolean __root__() {
         // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final @NonNull /*@NonInvalid*/ Class TYP_HSVTree_c_c_HSVNode_0 = idResolver.getClass(CLSSid_HSVNode, null);
         // mapping statements
-        final @NonNull /*@NonInvalid*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_HSVNode, models[0/*hsv*/], TYP_HSVTree_c_c_HSVNode_0);
+        final @NonNull /*@NonInvalid*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_HSVNode, models[0/*hsv*/], TYP_HSVTree_c_c_HSVNode_0);
         final List<HSVNode> UNBOXED_objectsOfKind = objectsOfKind.asEcoreObjects(idResolver, HSVNode.class);
         assert UNBOXED_objectsOfKind != null;
         for (HSVNode hsvRoot_1 : UNBOXED_objectsOfKind) {

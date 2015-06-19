@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
+import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -188,8 +189,10 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			js.append(" ");
 			js.append(envClassSymbol);
 			js.append(" = new ");
-			js.append(envClassName);
-			js.append("(evaluator,");
+			js.appendClassReference(envClassName);
+			js.append("(");
+			js.append(JavaConstants.EXECUTOR_NAME);
+			js.append(",");
 			List<Parameter> pParameters = cgCall.getReferredOperation().getOwnedParameters();
 			int iMax = Math.min(pParameters.size(), cgArguments.size());
 			for (int i = 0; i < iMax; i++) {
@@ -211,7 +214,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			js.append(" ");
 			js.append(visitorClassSymbol);
 			js.append(" = new ");
-			js.append(params.getVisitorClassName());
+			js.appendClassReference(params.getVisitorClassName());
 			js.append("(");
 			js.append(envClassSymbol);
 			js.append(");\n");

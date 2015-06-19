@@ -17,7 +17,7 @@ import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 
-public interface QVTiEvaluationEnvironment extends EvaluationEnvironment
+public interface QVTiEvaluationEnvironment extends EvaluationEnvironment.EvaluationEnvironmentExtension
 {
 	@Override
 	@NonNull QVTiExecutor getExecutor();

@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import example1.env.Environment;
 import example1.env.EnvironmentFactory;
 import example1.env.EnvironmentPackage;
@@ -52,7 +52,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass evaluatorEClass = null;
+	private EClass executorEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -186,7 +186,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getEnv4CG__GetEvaluator() {
+	public EOperation getEnv4CG__GetExecutor() {
 		return env4CGEClass.getEOperations().get(1);
 	}
 
@@ -195,8 +195,8 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEvaluator() {
-		return evaluatorEClass;
+	public EClass getExecutor() {
+		return executorEClass;
 	}
 
 	/**
@@ -235,9 +235,9 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 
 		env4CGEClass = createEClass(ENV4_CG);
 		createEOperation(env4CGEClass, ENV4_CG___HAS_FINAL_RESULT);
-		createEOperation(env4CGEClass, ENV4_CG___GET_EVALUATOR);
+		createEOperation(env4CGEClass, ENV4_CG___GET_EXECUTOR);
 
-		evaluatorEClass = createEClass(EVALUATOR);
+		executorEClass = createEClass(EXECUTOR);
 	}
 
 	/**
@@ -292,9 +292,9 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 
 		initEOperation(getEnv4CG__HasFinalResult(), ecorePackage.getEBoolean(), "hasFinalResult", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getEnv4CG__GetEvaluator(), this.getEvaluator(), "getEvaluator", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getEnv4CG__GetExecutor(), this.getExecutor(), "getExecutor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(evaluatorEClass, Evaluator.class, "Evaluator", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEClass(executorEClass, Executor.class, "Executor", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -38,7 +38,7 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	private final long id;
 	private final @NonNull Stack<StepperEntry> stepperStack = new Stack<StepperEntry>();
     
-	public QVTiVMNestedEvaluationEnvironment(@NonNull QVTiVMEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @NonNull OCLExpression callingObject, long id) {
+	public QVTiVMNestedEvaluationEnvironment(@NonNull QVTiVMEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable OCLExpression callingObject, long id) {
 		super(evaluationEnvironment, executableObject, callingObject);
 		myStackDepth = evaluationEnvironment.getDepth() + 1;
 		this.id = id;

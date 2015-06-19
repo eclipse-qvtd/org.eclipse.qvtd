@@ -13,7 +13,7 @@ package org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 
 import example1.env.Environment;
 import example1.env.impl.EnvironmentImpl;
@@ -22,26 +22,26 @@ import example1.target.NamedElement;
 
 public class LookupEnvironment extends EnvironmentImpl   {
 	
-	private @NonNull Evaluator evaluator;
+	private @NonNull Executor executor;
 	private @NonNull String name;
 	private boolean isLocal;
 	
-	public LookupEnvironment(@NonNull Evaluator evaluator, @NonNull String name, boolean isLocalLookup) {
-		this.evaluator = evaluator;
+	public LookupEnvironment(@NonNull Executor executor, @NonNull String name, boolean isLocalLookup) {
+		this.executor = executor;
 		this.name = name;
 		this.isLocal = isLocalLookup;
 	}
 	
-	public LookupEnvironment(@NonNull Evaluator evaluator, @NonNull PathElementCS pathElement, boolean isLocalLookup) {
-		this.evaluator = evaluator;
+	public LookupEnvironment(@NonNull Executor executor, @NonNull PathElementCS pathElement, boolean isLocalLookup) {
+		this.executor = executor;
 		this.name = pathElement.getName();
 		this.isLocal = isLocalLookup;
 	}
 	
 	@Override
 	@NonNull
-	public Evaluator getEvaluator() {
-		return evaluator;
+	public Executor getExecutor() {
+		return executor;
 	}
 	
 	@Override

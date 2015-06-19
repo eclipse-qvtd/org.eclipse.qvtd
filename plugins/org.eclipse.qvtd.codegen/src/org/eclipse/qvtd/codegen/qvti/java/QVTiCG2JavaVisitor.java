@@ -41,7 +41,7 @@ import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
@@ -248,13 +248,13 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 
 	protected void doConstructor(@NonNull CGTransformation cgTransformation, @Nullable String oppositeName, @Nullable String[] allInstancesNames) {
 //		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
-		String evaluatorName = JavaConstants.EVALUATOR_NAME;
+		String evaluatorName = JavaConstants.EXECUTOR_NAME;
 		String className = cgTransformation.getName();
 		//
 		js.append("public " + className + "(final ");
 		js.appendIsRequired(true);
 		js.append(" ");
-		js.appendClassReference(Evaluator.class);
+		js.appendClassReference(Executor.class);
 		js.append(" " + evaluatorName + ") {\n");
 		js.pushIndentation(null);		
 		js.append("super(" + evaluatorName + ", new String[] {");

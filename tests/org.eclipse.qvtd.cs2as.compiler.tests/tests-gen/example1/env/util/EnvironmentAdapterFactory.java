@@ -18,7 +18,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import example1.env.Environment;
 import example1.env.EnvironmentPackage;
 
@@ -87,8 +87,8 @@ public class EnvironmentAdapterFactory extends AdapterFactoryImpl {
 				return createEnv4CGAdapter();
 			}
 			@Override
-			public Adapter caseEvaluator(Evaluator object) {
-				return createEvaluatorAdapter();
+			public Adapter caseExecutor(Executor object) {
+				return createExecutorAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -139,16 +139,16 @@ public class EnvironmentAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.evaluation.Evaluator <em>Evaluator</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.evaluation.Executor <em>Executor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.evaluation.Evaluator
+	 * @see org.eclipse.ocl.pivot.evaluation.Executor
 	 * @generated
 	 */
-	public Adapter createEvaluatorAdapter() {
+	public Adapter createExecutorAdapter() {
 		return null;
 	}
 

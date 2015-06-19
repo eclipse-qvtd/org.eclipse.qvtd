@@ -37,7 +37,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ocl.pivot.Class;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
@@ -142,8 +142,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         {4}                     // 4 : Z -> {Z}
     };
     
-    public Source2Target_qvtp_qvtias(final /*@NonNull*/ Evaluator evaluator) {
-        super(evaluator, new String[] {"leftCS", "rightAS"}, null, classIndex2classId, classIndex2allClassIndexes);
+    public Source2Target_qvtp_qvtias(final /*@NonNull*/ Executor executor) {
+        super(executor, new String[] {"leftCS", "rightAS"}, null, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() {
@@ -164,15 +164,15 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * endif
      */
     public /*@Nullable*/ /*@NonInvalid*/ Namespace lookupNamespace(final /*@NonNull*/ /*@NonInvalid*/ Visitable self_0, final /*@NonNull*/ /*@NonInvalid*/ List<PathElementCS> pathSeq) {
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ OrderedSetValue BOXED_pathSeq_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq);
         final /*@NonNull*/ /*@NonInvalid*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_0);
         final /*@NonInvalid*/ boolean eq = size.equals(INT_1);
         /*@Nullable*/ /*@Thrown*/ Namespace symbol_1;
         if (eq) {
             final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0);
-            LookupEnvironment _lookupEnv = new org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.LookupEnvironment(evaluator,first, ValueUtil.FALSE_VALUE);
-            TargetLookupVisitor _lookupVisitor = new org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.TargetLookupVisitor(_lookupEnv);
+            LookupEnvironment _lookupEnv = new LookupEnvironment(executor,first, ValueUtil.FALSE_VALUE);
+            TargetLookupVisitor _lookupVisitor = new TargetLookupVisitor(_lookupEnv);
             EList<NamedElement> _lookupResult = self_0.accept(_lookupVisitor).getNamedElements();
             Namespace _lookupNamespace = null;
             if (_lookupResult.size() == 1) {
@@ -202,8 +202,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             }
             else {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0);
-                LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.LookupEnvironment(evaluator,last, ValueUtil.TRUE_VALUE);
-                TargetLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.TargetLookupVisitor(_lookupEnv_0);
+                LookupEnvironment _lookupEnv_0 = new LookupEnvironment(executor,last, ValueUtil.TRUE_VALUE);
+                TargetLookupVisitor _lookupVisitor_0 = new TargetLookupVisitor(_lookupEnv_0);
                 EList<NamedElement> _lookupResult_0 = lookupNamespace.accept(_lookupVisitor_0).getNamedElements();
                 Namespace _lookupNamespace_0 = null;
                 if (_lookupResult_0.size() == 1) {
@@ -424,10 +424,10 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean cZ_2_D_0(final /*@NonNull*/ /*@NonInvalid*/ Z z) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
         final /*@Nullable*/ /*@Thrown*/ Y toY = z.getToY();
-        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0).booleanValue();
+        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, toY, TYP_source_c_c_Y1_0).booleanValue();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -460,10 +460,10 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean cZ_2_D_1(final /*@NonNull*/ /*@NonInvalid*/ Z z_0) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
         final /*@Nullable*/ /*@Thrown*/ Y toY = z_0.getToY();
-        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0).booleanValue();
+        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, toY, TYP_source_c_c_Y1_0).booleanValue();
         if (!oclIsKindOf) {
             return false;
         }
@@ -498,12 +498,11 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uTRoot_ownedA(final /*@NonNull*/ /*@NonInvalid*/ SRoot sRoot_0) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_TRoot_0 = idResolver.getClass(CLSSid_TRoot, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = sRoot_0.getAst();
-        final /*@NonNull*/ /*@Thrown*/ TRoot oclAsType = ClassUtil.nonNullState((TRoot)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_TRoot_0));
-        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ TRoot oclAsType = ClassUtil.nonNullState((TRoot)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_TRoot_0));
         final /*@NonNull*/ /*@Thrown*/ List<X> ownedX = sRoot_0.getOwnedX();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedX = idResolver.createOrderedSetOfAll(ORD_CLSSid_X, ownedX);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_A);
@@ -523,7 +522,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
                 throwNull(sRoot_0, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::SElement::ast\'");
             }
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1.getAst();
-            final /*@NonNull*/ /*@Thrown*/ A oclAsType_0 = ClassUtil.nonNullState((A)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_A_0));
+            final /*@NonNull*/ /*@Thrown*/ A oclAsType_0 = ClassUtil.nonNullState((A)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_target_c_c_A_0));
             //
             accumulator.add(oclAsType_0);
         }
@@ -558,7 +557,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uA3_name(final /*@NonNull*/ /*@NonInvalid*/ X x_2) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x_2.isIsA1();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
         if (not != ValueUtil.TRUE_VALUE) {
@@ -572,7 +571,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A3_0 = idResolver.getClass(CLSSid_A3, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = x_2.getAst();
-        final /*@NonNull*/ /*@Thrown*/ A3 oclAsType = ClassUtil.nonNullState((A3)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A3_0));
+        final /*@NonNull*/ /*@Thrown*/ A3 oclAsType = ClassUtil.nonNullState((A3)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_A3_0));
         final /*@Nullable*/ /*@Thrown*/ String name = x_2.getName();
         // property assignments
         oclAsType.setName(name);
@@ -605,7 +604,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uA3_ownsC(final /*@NonNull*/ /*@NonInvalid*/ X x_3) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x_3.isIsA1();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
         if (not != ValueUtil.TRUE_VALUE) {
@@ -619,8 +618,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A3_0 = idResolver.getClass(CLSSid_A3, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = x_3.getAst();
-        final /*@NonNull*/ /*@Thrown*/ A3 oclAsType = ClassUtil.nonNullState((A3)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A3_0));
-        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ A3 oclAsType = ClassUtil.nonNullState((A3)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_A3_0));
         final /*@NonNull*/ /*@Thrown*/ List<Y> ownsY = x_3.getOwnsY();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownsY = idResolver.createOrderedSetOfAll(ORD_CLSSid_Y, ownsY);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Y2);
@@ -636,7 +634,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
              * oclAsType(source::Y2)
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
-            final /*@NonNull*/ /*@Thrown*/ Y2 oclAsType_0 = ClassUtil.nonNullState((Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1, TYP_source_c_c_Y2_0));
+            final /*@NonNull*/ /*@Thrown*/ Y2 oclAsType_0 = ClassUtil.nonNullState((Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, TYP_source_c_c_Y2_0));
             //
             accumulator.add(oclAsType_0);
         }
@@ -654,7 +652,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1_0.getAst();
-            final /*@NonNull*/ /*@Thrown*/ C oclAsType_1 = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0));
+            final /*@NonNull*/ /*@Thrown*/ C oclAsType_1 = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_target_c_c_C_0));
             //
             accumulator_0.add(oclAsType_1);
         }
@@ -689,7 +687,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uA2_name(final /*@NonNull*/ /*@NonInvalid*/ X x_4) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@Nullable*/ /*@Thrown*/ Boolean isA2 = x_4.isIsA2();
         if (isA2 != ValueUtil.TRUE_VALUE) {
             return false;
@@ -702,7 +700,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A2_0 = idResolver.getClass(CLSSid_A2, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = x_4.getAst();
-        final /*@NonNull*/ /*@Thrown*/ A2 oclAsType = ClassUtil.nonNullState((A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A2_0));
+        final /*@NonNull*/ /*@Thrown*/ A2 oclAsType = ClassUtil.nonNullState((A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_A2_0));
         final /*@Nullable*/ /*@Thrown*/ String name = x_4.getName();
         // property assignments
         oclAsType.setName(name);
@@ -735,7 +733,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uA2_ownsC(final /*@NonNull*/ /*@NonInvalid*/ X x_5) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@Nullable*/ /*@Thrown*/ Boolean isA2 = x_5.isIsA2();
         if (isA2 != ValueUtil.TRUE_VALUE) {
             return false;
@@ -748,8 +746,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A2_0 = idResolver.getClass(CLSSid_A2, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = x_5.getAst();
-        final /*@NonNull*/ /*@Thrown*/ A2 oclAsType = ClassUtil.nonNullState((A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A2_0));
-        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ A2 oclAsType = ClassUtil.nonNullState((A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_A2_0));
         final /*@NonNull*/ /*@Thrown*/ List<Y> ownsY = x_5.getOwnsY();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownsY = idResolver.createOrderedSetOfAll(ORD_CLSSid_Y, ownsY);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Y2);
@@ -765,7 +762,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
              * oclAsType(source::Y2)
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
-            final /*@NonNull*/ /*@Thrown*/ Y2 oclAsType_0 = ClassUtil.nonNullState((Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1, TYP_source_c_c_Y2_0));
+            final /*@NonNull*/ /*@Thrown*/ Y2 oclAsType_0 = ClassUtil.nonNullState((Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, TYP_source_c_c_Y2_0));
             //
             accumulator.add(oclAsType_0);
         }
@@ -783,7 +780,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1_0.getAst();
-            final /*@NonNull*/ /*@Thrown*/ C oclAsType_1 = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0));
+            final /*@NonNull*/ /*@Thrown*/ C oclAsType_1 = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_target_c_c_C_0));
             //
             accumulator_0.add(oclAsType_1);
         }
@@ -817,7 +814,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uA1_name(final /*@NonNull*/ /*@NonInvalid*/ X x_6) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x_6.isIsA1();
         if (isA1 != ValueUtil.TRUE_VALUE) {
             return false;
@@ -825,7 +822,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A1_0 = idResolver.getClass(CLSSid_A1, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = x_6.getAst();
-        final /*@NonNull*/ /*@Thrown*/ A1 oclAsType = ClassUtil.nonNullState((A1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A1_0));
+        final /*@NonNull*/ /*@Thrown*/ A1 oclAsType = ClassUtil.nonNullState((A1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_A1_0));
         final /*@Nullable*/ /*@Thrown*/ String name = x_6.getName();
         // property assignments
         oclAsType.setName(name);
@@ -857,7 +854,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uA1_ownsB(final /*@NonNull*/ /*@NonInvalid*/ X x_7) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x_7.isIsA1();
         if (isA1 != ValueUtil.TRUE_VALUE) {
             return false;
@@ -865,8 +862,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A1_0 = idResolver.getClass(CLSSid_A1, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = x_7.getAst();
-        final /*@NonNull*/ /*@Thrown*/ A1 oclAsType = ClassUtil.nonNullState((A1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A1_0));
-        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ A1 oclAsType = ClassUtil.nonNullState((A1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_A1_0));
         final /*@NonNull*/ /*@Thrown*/ List<Y> ownsY = x_7.getOwnsY();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownsY = idResolver.createOrderedSetOfAll(ORD_CLSSid_Y, ownsY);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Y1);
@@ -882,7 +878,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
              * oclAsType(source::Y1)
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
-            final /*@NonNull*/ /*@Thrown*/ Y1 oclAsType_0 = ClassUtil.nonNullState((Y1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1, TYP_source_c_c_Y1_0));
+            final /*@NonNull*/ /*@Thrown*/ Y1 oclAsType_0 = ClassUtil.nonNullState((Y1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, TYP_source_c_c_Y1_0));
             //
             accumulator.add(oclAsType_0);
         }
@@ -900,7 +896,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1_0.getAst();
-            final /*@NonNull*/ /*@Thrown*/ B oclAsType_1 = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_B_0));
+            final /*@NonNull*/ /*@Thrown*/ B oclAsType_1 = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_target_c_c_B_0));
             //
             accumulator_0.add(oclAsType_1);
         }
@@ -933,18 +929,18 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uB_ownsD(final /*@NonNull*/ /*@NonInvalid*/ Y1 y1_0) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = y1_0.getAst();
-        final /*@NonNull*/ /*@Thrown*/ B oclAsType = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_B_0));
+        final /*@NonNull*/ /*@Thrown*/ B oclAsType = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_B_0));
         final /*@Nullable*/ /*@Thrown*/ Z ownsZ = y1_0.getOwnsZ();
         if (ownsZ == null) {
             throwNull(y1_0, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::SElement::ast\'");
         }
         final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = ownsZ.getAst();
-        final /*@NonNull*/ /*@Thrown*/ D oclAsType_0 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_D_0));
+        final /*@NonNull*/ /*@Thrown*/ D oclAsType_0 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_target_c_c_D_0));
         // property assignments
         oclAsType.setOwnsD(oclAsType_0);
         return true;
@@ -971,11 +967,11 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uB_name(final /*@NonNull*/ /*@NonInvalid*/ Y1 y1_1) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = y1_1.getAst();
-        final /*@NonNull*/ /*@Thrown*/ B oclAsType = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_B_0));
+        final /*@NonNull*/ /*@Thrown*/ B oclAsType = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_B_0));
         final /*@Nullable*/ /*@Thrown*/ String name = y1_1.getName();
         // property assignments
         oclAsType.setName(name);
@@ -1004,18 +1000,18 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uC_ownsD(final /*@NonNull*/ /*@NonInvalid*/ Y2 y2_0) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = y2_0.getAst();
-        final /*@NonNull*/ /*@Thrown*/ C oclAsType = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_C_0));
+        final /*@NonNull*/ /*@Thrown*/ C oclAsType = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_C_0));
         final /*@Nullable*/ /*@Thrown*/ Z ownsZ = y2_0.getOwnsZ();
         if (ownsZ == null) {
             throwNull(y2_0, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::SElement::ast\'");
         }
         final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = ownsZ.getAst();
-        final /*@NonNull*/ /*@Thrown*/ D oclAsType_0 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_D_0));
+        final /*@NonNull*/ /*@Thrown*/ D oclAsType_0 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_target_c_c_D_0));
         // property assignments
         oclAsType.setOwnsD(oclAsType_0);
         return true;
@@ -1042,11 +1038,11 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uC_name(final /*@NonNull*/ /*@NonInvalid*/ Y2 y2_1) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = y2_1.getAst();
-        final /*@NonNull*/ /*@Thrown*/ C oclAsType = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_C_0));
+        final /*@NonNull*/ /*@Thrown*/ C oclAsType = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_C_0));
         final /*@Nullable*/ /*@Thrown*/ String name = y2_1.getName();
         // property assignments
         oclAsType.setName(name);
@@ -1078,10 +1074,10 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uD_0_toA(final /*@NonNull*/ /*@NonInvalid*/ Z z_1) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
         final /*@Nullable*/ /*@Thrown*/ Y toY = z_1.getToY();
-        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0).booleanValue();
+        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, toY, TYP_source_c_c_Y1_0).booleanValue();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -1091,10 +1087,10 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = z_1.getAst();
-        final /*@NonNull*/ /*@Thrown*/ D oclAsType = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0));
-        final /*@NonNull*/ /*@Thrown*/ Y2 oclAsType_0 = ClassUtil.nonNullState((Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y2_0));
+        final /*@NonNull*/ /*@Thrown*/ D oclAsType = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_D_0));
+        final /*@NonNull*/ /*@Thrown*/ Y2 oclAsType_0 = ClassUtil.nonNullState((Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, toY, TYP_source_c_c_Y2_0));
         final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = oclAsType_0.getAst();
-        final /*@NonNull*/ /*@Thrown*/ C oclAsType_1 = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0));
+        final /*@NonNull*/ /*@Thrown*/ C oclAsType_1 = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_target_c_c_C_0));
         final /*@Nullable*/ /*@Thrown*/ A2 toA2 = oclAsType_1.getToA2();
         // property assignments
         oclAsType.setToA(toA2);
@@ -1126,10 +1122,10 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uD_0_refsC(final /*@NonNull*/ /*@NonInvalid*/ Z z_2) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
         final /*@Nullable*/ /*@Thrown*/ Y toY = z_2.getToY();
-        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0).booleanValue();
+        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, toY, TYP_source_c_c_Y1_0).booleanValue();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -1137,8 +1133,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
         final /*@Nullable*/ /*@Thrown*/ EObject ast = z_2.getAst();
         // variable assignments
-        final /*@NonNull*/ /*@Thrown*/ D oclAsType = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0));
-        final /*@NonNull*/ /*@Thrown*/ D self_1 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0));
+        final /*@NonNull*/ /*@Thrown*/ D oclAsType = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_D_0));
+        final /*@NonNull*/ /*@Thrown*/ D self_1 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_D_0));
         final /*@Nullable*/ /*@Thrown*/ PathNameCS refers = z_2.getRefers();
         final /*@Thrown*/ boolean eq = refers == null;
         /*@Nullable*/ /*@Thrown*/ C symbol_3;
@@ -1149,7 +1145,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             if (refers == null) {
                 throwNull(z_2, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathNameCS::path\'");
             }
-            @SuppressWarnings("null")
             final /*@NonNull*/ /*@Thrown*/ List<PathElementCS> pathSeq_0 = refers.getPath();
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_pathSeq_0_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq_0);
             final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
@@ -1157,8 +1152,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             /*@Nullable*/ /*@Thrown*/ C symbol_2;
             if (eq_0) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
-                LookupEnvironment _lookupEnv = new org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.LookupEnvironment(evaluator,first, ValueUtil.FALSE_VALUE);
-                TargetLookupVisitor _lookupVisitor = new org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.TargetLookupVisitor(_lookupEnv);
+                LookupEnvironment _lookupEnv = new LookupEnvironment(executor,first, ValueUtil.FALSE_VALUE);
+                TargetLookupVisitor _lookupVisitor = new TargetLookupVisitor(_lookupEnv);
                 EList<NamedElement> _lookupResult = self_1.accept(_lookupVisitor).getNamedElements();
                 C _lookupC = null;
                 if (_lookupResult.size() == 1) {
@@ -1188,8 +1183,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
                 }
                 else {
                     final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
-                    LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.LookupEnvironment(evaluator,last, ValueUtil.TRUE_VALUE);
-                    TargetLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.TargetLookupVisitor(_lookupEnv_0);
+                    LookupEnvironment _lookupEnv_0 = new LookupEnvironment(executor,last, ValueUtil.TRUE_VALUE);
+                    TargetLookupVisitor _lookupVisitor_0 = new TargetLookupVisitor(_lookupEnv_0);
                     EList<NamedElement> _lookupResult_0 = lookupNamespace.accept(_lookupVisitor_0).getNamedElements();
                     C _lookupC_0 = null;
                     if (_lookupResult_0.size() == 1) {
@@ -1233,10 +1228,10 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uD_1_toA(final /*@NonNull*/ /*@NonInvalid*/ Z z_3) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
         final /*@Nullable*/ /*@Thrown*/ Y toY = z_3.getToY();
-        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0).booleanValue();
+        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, toY, TYP_source_c_c_Y1_0).booleanValue();
         if (!oclIsKindOf) {
             return false;
         }
@@ -1244,10 +1239,10 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = z_3.getAst();
-        final /*@NonNull*/ /*@Thrown*/ D oclAsType = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0));
-        final /*@NonNull*/ /*@Thrown*/ Y1 oclAsType_0 = ClassUtil.nonNullState((Y1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0));
+        final /*@NonNull*/ /*@Thrown*/ D oclAsType = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_D_0));
+        final /*@NonNull*/ /*@Thrown*/ Y1 oclAsType_0 = ClassUtil.nonNullState((Y1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, toY, TYP_source_c_c_Y1_0));
         final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = oclAsType_0.getAst();
-        final /*@NonNull*/ /*@Thrown*/ B oclAsType_1 = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_B_0));
+        final /*@NonNull*/ /*@Thrown*/ B oclAsType_1 = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_target_c_c_B_0));
         final /*@Nullable*/ /*@Thrown*/ A1 toA1 = oclAsType_1.getToA1();
         // property assignments
         oclAsType.setToA(toA1);
@@ -1279,18 +1274,18 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean uD_1_refsB(final /*@NonNull*/ /*@NonInvalid*/ Z z_4) {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
         final /*@Nullable*/ /*@Thrown*/ Y toY = z_4.getToY();
-        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0).booleanValue();
+        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, toY, TYP_source_c_c_Y1_0).booleanValue();
         if (!oclIsKindOf) {
             return false;
         }
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
         final /*@Nullable*/ /*@Thrown*/ EObject ast = z_4.getAst();
         // variable assignments
-        final /*@NonNull*/ /*@Thrown*/ D oclAsType = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0));
-        final /*@NonNull*/ /*@Thrown*/ D self_1 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0));
+        final /*@NonNull*/ /*@Thrown*/ D oclAsType = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_D_0));
+        final /*@NonNull*/ /*@Thrown*/ D self_1 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_D_0));
         final /*@Nullable*/ /*@Thrown*/ PathNameCS refers = z_4.getRefers();
         final /*@Thrown*/ boolean eq = refers == null;
         /*@Nullable*/ /*@Thrown*/ B symbol_3;
@@ -1301,7 +1296,6 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             if (refers == null) {
                 throwNull(z_4, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathNameCS::path\'");
             }
-            @SuppressWarnings("null")
             final /*@NonNull*/ /*@Thrown*/ List<PathElementCS> pathSeq_0 = refers.getPath();
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_pathSeq_0_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq_0);
             final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
@@ -1309,8 +1303,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             /*@Nullable*/ /*@Thrown*/ B symbol_2;
             if (eq_0) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
-                LookupEnvironment _lookupEnv = new org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.LookupEnvironment(evaluator,first, ValueUtil.FALSE_VALUE);
-                TargetLookupVisitor _lookupVisitor = new org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.TargetLookupVisitor(_lookupEnv);
+                LookupEnvironment _lookupEnv = new LookupEnvironment(executor,first, ValueUtil.FALSE_VALUE);
+                TargetLookupVisitor _lookupVisitor = new TargetLookupVisitor(_lookupEnv);
                 EList<NamedElement> _lookupResult = self_1.accept(_lookupVisitor).getNamedElements();
                 B _lookupB = null;
                 if (_lookupResult.size() == 1) {
@@ -1340,8 +1334,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
                 }
                 else {
                     final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
-                    LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.LookupEnvironment(evaluator,last, ValueUtil.TRUE_VALUE);
-                    TargetLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.TargetLookupVisitor(_lookupEnv_0);
+                    LookupEnvironment _lookupEnv_0 = new LookupEnvironment(executor,last, ValueUtil.TRUE_VALUE);
+                    TargetLookupVisitor _lookupVisitor_0 = new TargetLookupVisitor(_lookupEnv_0);
                     EList<NamedElement> _lookupResult_0 = lookupNamespace.accept(_lookupVisitor_0).getNamedElements();
                     B _lookupB_0 = null;
                     if (_lookupResult_0.size() == 1) {
@@ -1484,17 +1478,17 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      */
     protected boolean __root__() {
         // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_SRoot_1 = idResolver.getClass(CLSSid_SRoot, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_X_8 = idResolver.getClass(CLSSid_X, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Y1_2 = idResolver.getClass(CLSSid_Y1, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Y2_2 = idResolver.getClass(CLSSid_Y2, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_source_c_c_Z_5 = idResolver.getClass(CLSSid_Z, null);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_3 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_SRoot, TYP_source_c_c_SRoot_1);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_X, TYP_source_c_c_X_8);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_15 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y1, TYP_source_c_c_Y1_2);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_17 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y2, TYP_source_c_c_Y2_2);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Z, TYP_source_c_c_Z_5);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_3 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_SRoot, TYP_source_c_c_SRoot_1);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_X, TYP_source_c_c_X_8);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_15 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Y1, TYP_source_c_c_Y1_2);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_17 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Y2, TYP_source_c_c_Y2_2);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Z, TYP_source_c_c_Z_5);
         final List<SRoot> UNBOXED_allInstances_3 = allInstances_3.asEcoreObjects(idResolver, SRoot.class);
         assert UNBOXED_allInstances_3 != null;
         final List<X> UNBOXED_allInstances_1 = allInstances_1.asEcoreObjects(idResolver, X.class);

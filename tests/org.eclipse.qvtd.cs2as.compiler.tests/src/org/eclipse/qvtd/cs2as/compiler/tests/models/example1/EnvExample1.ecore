@@ -37,12 +37,12 @@
         <details key="body" value="throw new &lt;%java.lang.UnsupportedOperationException%>(&quot;Enviroment::hasFinalResult() has been created for CG purposes. Don't call this method&quot;);"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getEvaluator" eType="#//Evaluator">
+    <eOperations name="getExecutor" eType="#//Executor">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="throw new &lt;%java.lang.UnsupportedOperationException%>(&quot;Enviroment::getEvaluator() has been created for CG purposes. Don't call this method&quot;);"/>
       </eAnnotations>
     </eOperations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Evaluator" instanceClassName="org.eclipse.ocl.pivot.evaluation.Evaluator"
+  <eClassifiers xsi:type="ecore:EClass" name="Executor" instanceClassName="org.eclipse.ocl.pivot.evaluation.Executor"
       abstract="true" interface="true"/>
 </ecore:EPackage>

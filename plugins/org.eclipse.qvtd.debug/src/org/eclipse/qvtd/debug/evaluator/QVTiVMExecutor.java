@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMContext;
 import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationStepper;
 import org.eclipse.ocl.examples.debug.vm.evaluator.VMExecutor;
@@ -47,7 +48,7 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 	}
 
 	@Override
-	protected @NonNull QVTiVMEvaluationEnvironment createNestedEvaluationEnvironment(@NonNull EvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @NonNull OCLExpression callingObject) {
+	protected @NonNull QVTiVMEvaluationEnvironment createNestedEvaluationEnvironment(@NonNull EvaluationEnvironment.EvaluationEnvironmentExtension evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable OCLExpression callingObject) {
 		return new QVTiVMNestedEvaluationEnvironment((QVTiVMEvaluationEnvironment) evaluationEnvironment, executableObject, callingObject, ++envId);
 	}
 

@@ -73,7 +73,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 
 	@Override
-	protected @NonNull EvaluationVisitor createEvaluationVisitor() {
+	protected @NonNull EvaluationVisitor.EvaluationVisitorExtension createEvaluationVisitor() {
 		IQVTiEvaluationVisitor visitor = new QVTiEvaluationVisitor(this);
 	    if (environmentFactory.isEvaluationTracingEnabled()) {
 	        // decorate the evaluation visitor with tracing support
@@ -95,7 +95,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
     }
 
 	@Override
-	protected @NonNull EvaluationEnvironment createNestedEvaluationEnvironment(@NonNull EvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @NonNull OCLExpression callingObject) {
+	protected @NonNull EvaluationEnvironment.EvaluationEnvironmentExtension createNestedEvaluationEnvironment(@NonNull EvaluationEnvironment.EvaluationEnvironmentExtension evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable OCLExpression callingObject) {
 		if (evaluationEnvironment instanceof QVTiEvaluationEnvironment) {
 			return new QVTiNestedEvaluationEnvironment((QVTiEvaluationEnvironment) evaluationEnvironment, executableObject, callingObject);
 		}
@@ -105,7 +105,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 
 	@Override
-	protected @NonNull EvaluationEnvironment createRootEvaluationEnvironment(@NonNull NamedElement executableObject) {
+	protected @NonNull EvaluationEnvironment.EvaluationEnvironmentExtension createRootEvaluationEnvironment(@NonNull NamedElement executableObject) {
 		if (executableObject instanceof Transformation) {
 			return new QVTiRootEvaluationEnvironment(this, (Transformation) executableObject);
 		}
