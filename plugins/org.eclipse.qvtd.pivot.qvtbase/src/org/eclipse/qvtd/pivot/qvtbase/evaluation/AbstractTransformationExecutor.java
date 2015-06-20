@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtbase.evaluation;
 
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -47,19 +46,358 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	private static final @SuppressWarnings("null")@NonNull List<Integer> EMPTY_INDEX_LIST = Collections.emptyList();
 	private static final @SuppressWarnings("null")@NonNull List<EObject> EMPTY_EOBJECT_LIST = Collections.emptyList();
 
+	@SuppressWarnings("serial")
+	public static class InvocationFailedException extends RuntimeException
+	{
+		public final @NonNull PropertyState<?,?> propertyState;
+		
+		public InvocationFailedException(@NonNull PropertyState<?,?> propertyState) {
+			this.propertyState = propertyState;
+		}
+	}
+
+	public enum PropertyMode {
+		ASSIGNABLE,
+		ASSIGNED
+	}
+	
+	public abstract class PropertyState<G,S>
+	{
+		protected final @NonNull EObject debug_eObject; 
+		protected final @NonNull EStructuralFeature debug_eFeature; 
+		protected @NonNull PropertyMode mode = PropertyMode.ASSIGNABLE;	
+		private @Nullable Object blockedInvocations = null;
+		
+		protected PropertyState(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature) {
+			super();
+			this.debug_eObject = eObject;
+			this.debug_eFeature = eFeature;
+		}
+
+		public abstract void assign(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature, @Nullable S ecoreValue);
+		
+		public synchronized void block(@NonNull Invocation invocation) {
+			final Object blockedInvocations2 = blockedInvocations;
+			if (blockedInvocations2 == null) {
+				blockedInvocations = invocation;
+			}
+			else if (blockedInvocations2 instanceof Invocation) {
+				List<Invocation> blockedInvocationList = new ArrayList<Invocation>();
+				blockedInvocationList.add((Invocation) blockedInvocations2);
+				blockedInvocationList.add(invocation);
+				blockedInvocations = blockedInvocationList;
+			}
+			else {
+				@SuppressWarnings("unchecked")
+				List<Invocation> blockedInvocationList = (List<Invocation>)blockedInvocations2;
+				blockedInvocationList.add(invocation);
+			}
+		}
+		
+		public abstract G get(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature);
+		
+		protected synchronized void unblock() {
+			final Object blockedInvocations2 = blockedInvocations;
+			if (blockedInvocations2 instanceof Invocation) {
+				invocationManager.unblock((Invocation) blockedInvocations2);
+			}
+			else if (blockedInvocations2 != null) {
+				@SuppressWarnings("unchecked")
+				List<Invocation> blockedInvocationList = (List<Invocation>)blockedInvocations2;
+				for (@SuppressWarnings("null")@NonNull Invocation invocation : blockedInvocationList) {
+					invocationManager.unblock(invocation);
+				}
+			}
+			blockedInvocations = null;
+		}
+	}
+	
+	public class SimpleObjectPropertyState<G,S> extends PropertyState<G,S>
+	{	
+		public SimpleObjectPropertyState(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature) {
+			super(eObject, eFeature);
+		}
+
+		@Override
+		public synchronized void assign(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature, @Nullable S ecoreValue) {
+			switch (mode) {
+				case ASSIGNABLE:
+					mode = PropertyMode.ASSIGNED;
+					unblock();
+					break;
+				case ASSIGNED:
+					break;
+			}
+			eObject.eSet(eFeature, ecoreValue);
+		}
+		
+		@SuppressWarnings("unchecked")
+		@Override
+		public synchronized @Nullable G get(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature) {
+			switch (mode) {
+				case ASSIGNABLE:
+					throw new InvocationFailedException(this);
+				case ASSIGNED:
+					break;
+			}
+			return (G) eObject.eGet(eFeature);
+		}
+	}
+	
+	public class ComplexObjectPropertyState<G,S> extends PropertyState<G,S>
+	{	
+		public ComplexObjectPropertyState(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature) {
+			super(eObject, eFeature);
+		}
+
+		@Override
+		public synchronized void assign(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature, @Nullable S ecoreValue) {
+			switch (mode) {
+				case ASSIGNABLE:
+					mode = PropertyMode.ASSIGNED;
+					unblock();
+					break;
+				case ASSIGNED:
+					break;
+			}
+			eObject.eSet(eFeature, ecoreValue);
+		}
+		
+		@SuppressWarnings("unchecked")
+		@Override
+		public synchronized @Nullable G get(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature) {
+			switch (mode) {
+				case ASSIGNABLE:
+					throw new InvocationFailedException(this);
+				case ASSIGNED:
+					break;
+			}
+			return (G) eObject.eGet(eFeature);
+		}
+	}
+	
+	public class CollectionPropertyState<G,S> extends PropertyState<G,S>
+	{
+		public CollectionPropertyState(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature) {
+			super(eObject, eFeature);
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		public synchronized void assign(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature, @Nullable S ecoreValue) {
+			switch (mode) {
+				case ASSIGNABLE:
+					mode = PropertyMode.ASSIGNED;
+					unblock();
+					break;
+				case ASSIGNED:
+					break;
+			}
+			((List<S>)eObject.eGet(eFeature)).add(ecoreValue);
+		}
+		
+		@SuppressWarnings("unchecked")
+		@Override
+		public synchronized @Nullable G get(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature) {
+			switch (mode) {
+				case ASSIGNABLE:
+					mode = PropertyMode.ASSIGNED;
+					unblock();
+					break;
+				case ASSIGNED:
+					System.out.println("Late assignment");
+					break;
+			}
+			return (G)eObject.eGet(eFeature);
+		}
+	}
+	
+	/** @noimplement */
 	protected static interface Invocation
 	{
 		/**
 		 * Execute the mapping invocation.
 		 */
- 		boolean execute();
+ 		boolean execute() throws InvocationFailedException, ReflectiveOperationException;
+
+ 		/**
+		 * Execute the mapping invocation.
+		 */
+ 		void insertAfter(@NonNull Invocation predecessor);
  		
  		/**
  		 * Return true if a mapping invocation for thatClass with thoseValues would be a re-invocation of this invocation,
   		 */
 		boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues);
+
+		/**
+		 * Remove this Invocation from a list, which may be the blocked or unblocked invocations list.
+		 */
+		void remove();
 	}
 
+	protected static abstract class AbstractInvocation implements Invocation
+	{
+		private @NonNull AbstractInvocation prev = this;
+		private @NonNull AbstractInvocation next = this;
+		
+		@Override
+		public void insertAfter(@NonNull Invocation predecessor) {
+			@NonNull AbstractInvocation castPredecessor = (AbstractInvocation)predecessor;
+			@Nullable AbstractInvocation successor = castPredecessor.next;
+			successor.prev = this;
+			next = successor;
+			castPredecessor.next = this;
+			prev = castPredecessor;
+		}
+		
+		@Override
+		public void remove() {
+			prev.next = next;
+			next.prev = prev;
+		}
+	}
+	
+	/**
+	 * InvocationManager supervises and provides thread safety for the listof blocked and unblock invocations.
+	 */
+	protected class InvocationManager
+	{
+		/**
+		 * Head of doubly linked list of blocked invocations.
+		 */
+		private @Nullable AbstractInvocation blockedInvocations = null;
+
+		/**
+		 * Head of doubly linked list of unblocked invocations.
+		 */
+		private @Nullable AbstractInvocation unblockedInvocations = null;	
+	    
+		private synchronized void block(@NonNull Invocation invocation, @NonNull PropertyState<?,?> propertyState) {
+			AbstractInvocation castInvocation = (AbstractInvocation) invocation;
+			AbstractInvocation blockedInvocations2 = blockedInvocations;
+			if (blockedInvocations2 == null) {
+				blockedInvocations = castInvocation;
+			}
+			else {
+				castInvocation.insertAfter(blockedInvocations2.prev);
+			}
+   			propertyState.block(invocation);
+		}
+			
+	    public void flush() throws ReflectiveOperationException {
+			while (unblockedInvocations != null) {
+	    		AbstractInvocation invocation = null;
+	    		synchronized (this) {
+	    	    	AbstractInvocation unblockedInvocations2 = unblockedInvocations;
+	    			if (unblockedInvocations2 != null) {
+	    				invocation = unblockedInvocations2;
+	    				unblockedInvocations = unblockedInvocations2.next;
+	    				if (unblockedInvocations == invocation) {
+	    					unblockedInvocations = null;
+	    				}
+	    				invocation.remove();
+	    			}
+	    		}
+	    		if (invocation != null) {
+	        		invoke(invocation);
+	    		}
+	    	}
+	    }
+		
+	    public <T extends Invocation> void invoke(@NonNull Invocation invocation) throws ReflectiveOperationException {
+    		try {
+    			invocation.execute();
+    		}
+    		catch (InvocationFailedException e) {
+     			block(invocation, e.propertyState);
+    		}
+	    }
+	    
+		public synchronized void unblock(@NonNull Invocation invocation) {
+			AbstractInvocation castInvocation = (AbstractInvocation) invocation;
+			if (blockedInvocations == castInvocation) {
+				blockedInvocations = castInvocation.next;
+				if (blockedInvocations == castInvocation) {
+					blockedInvocations = null;
+				}
+			}
+			castInvocation.remove();
+			AbstractInvocation unblockedInvocations2 = unblockedInvocations;
+			if (unblockedInvocations2 == null) {
+				unblockedInvocations = castInvocation;
+			}
+			else {
+				castInvocation.insertAfter(unblockedInvocations2.prev);
+			}
+		}
+	}
+
+	protected class ObjectManager
+	{
+		/**
+		 * This unpleasant Map of Maps is a pathfinder before embarking on slotted objects that merge user and overhead
+		 * in a single object. The first map is then a null lookup and the nested map is an index within the object. 
+		 */
+		private Map<EObject, Map<EStructuralFeature, PropertyState<?,?>>> map = new HashMap<EObject, Map<EStructuralFeature, PropertyState<?,?>>>();
+		
+		public synchronized <G,S> void assign(@NonNull EObject eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable S ecoreValue) {
+			assert eFeature != null;
+			PropertyState<G,S> propertyState = this.<G,S>getPropertyState(eObject, eFeature);
+			propertyState.assign(eObject, eFeature, ecoreValue);
+		}
+		
+		public synchronized <G,S> G get(@NonNull EObject eObject, /*@NonNull*/ EStructuralFeature eFeature) {
+			assert eFeature != null;
+			PropertyState<G,S> propertyState = this.<G,S>getPropertyState(eObject, eFeature);
+			return propertyState.get(eObject, eFeature);
+		}
+
+		private @NonNull Map<EStructuralFeature, PropertyState<?,?>> getObjectState(@NonNull EObject eObject) {
+			Map<EStructuralFeature, PropertyState<?,?>> feature2state = map.get(eObject);
+			if (feature2state == null) {
+				feature2state = new HashMap<EStructuralFeature, PropertyState<?,?>>();
+				map.put(eObject, feature2state);
+			}
+			return feature2state;
+		}
+		
+		private @NonNull <G,S> PropertyState<G,S> getPropertyState(@NonNull EObject eObject, @NonNull EStructuralFeature eFeature) {
+			Map<EStructuralFeature, PropertyState<?, ?>> objectState = getObjectState(eObject);
+			@SuppressWarnings("unchecked")
+			PropertyState<G,S> propertyState = (PropertyState<G,S>) objectState.get(eFeature);
+			if (propertyState == null) {
+				if (eFeature.isMany()) {
+					propertyState = new CollectionPropertyState<G,S>(eObject, eFeature);
+				}
+				else {
+					if (eFeature instanceof EReference) {
+						EReference eOppositeFeature = ((EReference)eFeature).getEOpposite();
+						if (eOppositeFeature != null) {
+							EObject eOpposite = (EObject) eObject.eGet(eFeature);
+							if (eOpposite != null) {
+								Map<EStructuralFeature, PropertyState<?, ?>> oppositeObjectState = getObjectState(eOpposite);
+								@SuppressWarnings("unchecked")
+								PropertyState<G,S> oppositePropertyState = (PropertyState<G, S>) oppositeObjectState.get(eOppositeFeature);
+								if (oppositePropertyState != null) {
+									propertyState = oppositePropertyState;
+								}
+							}
+							if (propertyState == null) {
+								propertyState = new ComplexObjectPropertyState<G,S>(eObject, eFeature);
+							}
+						}
+					}
+					if (propertyState == null) {
+						propertyState = new SimpleObjectPropertyState<G,S>(eObject, eFeature);
+					}
+				}
+				objectState.put(eFeature, propertyState);
+			}
+			return propertyState;
+		}
+	}
+	
 	protected class Model implements TypedModelInstance
 	{
 		protected final @NonNull String name;
@@ -331,6 +669,15 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	 */
 	private final @NonNull Map<Integer, Object> invocationId2invocation = new HashMap<Integer, Object>();
 
+	/**
+	 * Manager for the blocked and unblocked invocations.
+	 */
+	protected final @NonNull InvocationManager invocationManager = new InvocationManager();
+
+	/**
+	 * Manager for the auxiliary object and property state.
+	 */
+	protected final @NonNull ObjectManager objectManager = new ObjectManager();
 	
 	/** @deprecated use Executor in constructor */
 	@Deprecated
@@ -412,8 +759,9 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
     /**
      * Create and return the invocation for an invocationClass and boundValues.
      * Returns null if already created.
+     * @throws ReflectiveOperationException 
      */
-    protected @Nullable Invocation createFirst(@NonNull Constructor<? extends Invocation> constructor, @NonNull Object... boundValues) {
+    private @Nullable Invocation createFirst(@NonNull Constructor<? extends Invocation> constructor, @NonNull Object... boundValues) throws ReflectiveOperationException {
     	Class<? extends Invocation> invocationClass = constructor.getDeclaringClass();
     	assert invocationClass != null;
 		int hashCode = System.identityHashCode(invocationClass);
@@ -438,37 +786,19 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
     	    	}
     		}
     	}
-		try {
-			Invocation theInvocation = constructor.newInstance(this, boundValues);;
-			if (zeroOrMoreInvocations == null) {
-				invocationId2invocation.put(hashCode, theInvocation);
-			}
-			else {
-				if (twoOrMoreInvocations2 == null) {
-		    		twoOrMoreInvocations2 = new ArrayList<Invocation>(4);
-	    			twoOrMoreInvocations2.add(oneInvocation);
-				}
-				twoOrMoreInvocations2.add(theInvocation);
-				invocationId2invocation.put(hashCode, twoOrMoreInvocations2);
-			}
-			return theInvocation;
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Invocation theInvocation = constructor.newInstance(this, boundValues);
+		if (zeroOrMoreInvocations == null) {
+			invocationId2invocation.put(hashCode, theInvocation);
 		}
-		return null;
+		else {
+			if (twoOrMoreInvocations2 == null) {
+	    		twoOrMoreInvocations2 = new ArrayList<Invocation>(4);
+    			twoOrMoreInvocations2.add(oneInvocation);
+			}
+			twoOrMoreInvocations2.add(theInvocation);
+			invocationId2invocation.put(hashCode, twoOrMoreInvocations2);
+		}
+		return theInvocation;
     }
     
 	@Override
@@ -559,12 +889,25 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	}
 	
     /**
-     * Invoke the invocationClass with a giveb set of boundValues once. Repeated invocation attempts are ignored.
+     * Invoke a mapping with the given constructor with a given set of boundValues once. This shortform of invokeOnce
+     * should only be used when it is known that recursive invocation is impossible.
+     * 
+     * @throws ReflectiveOperationException 
      */
-    protected <T extends Invocation> void invokeOnce(@NonNull Constructor<T> constructor, @NonNull Object... boundValues) {
+    public <T extends Invocation> void invoke(@NonNull Constructor<T> constructor, @NonNull Object... boundValues) throws ReflectiveOperationException {
+    	@SuppressWarnings("null")@NonNull Invocation invocation = constructor.newInstance(this, boundValues);
+    	invocationManager.invoke(invocation);
+    }
+	
+    /**
+     * Invoke a mapping with the given constructor with a given set of boundValues once. Repeated invocation attempts are ignored.
+	 *
+     * @throws ReflectiveOperationException 
+     */
+    public <T extends Invocation> void invokeOnce(@NonNull Constructor<T> constructor, @NonNull Object... boundValues) throws ReflectiveOperationException {
     	Invocation invocation = createFirst(constructor, boundValues);
     	if (invocation != null) {
-    		invocation.execute();
+    		invocationManager.invoke(invocation);
     	}
     }
 }

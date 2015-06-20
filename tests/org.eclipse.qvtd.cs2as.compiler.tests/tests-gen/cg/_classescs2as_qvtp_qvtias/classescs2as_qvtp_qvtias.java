@@ -21,7 +21,6 @@ import example2.classescs.PackageCS;
 import example2.classescs.PathElementCS;
 import example2.classescs.PathNameCS;
 import example2.classescs.RootCS;
-import java.lang.reflect.Constructor;
 import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -115,32 +114,15 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         {2}                     // 2 : RootCS -> {RootCS}
     };
     
-    protected final /*@NonNull*/ Constructor<MAP_cClassCS_2_Class> CTOR_cClassCS_2_Class;
-    protected final /*@NonNull*/ Constructor<MAP_cPackageCS_2_Package> CTOR_cPackageCS_2_Package;
-    protected final /*@NonNull*/ Constructor<MAP_cRootCS_2_Root> CTOR_cRootCS_2_Root;
-    protected final /*@NonNull*/ Constructor<MAP_uClass_name> CTOR_uClass_name;
-    protected final /*@NonNull*/ Constructor<MAP_uClass_superClass> CTOR_uClass_superClass;
-    protected final /*@NonNull*/ Constructor<MAP_uPackage_name> CTOR_uPackage_name;
-    protected final /*@NonNull*/ Constructor<MAP_uPackage_ownedClasses> CTOR_uPackage_ownedClasses;
-    protected final /*@NonNull*/ Constructor<MAP_uPackage_ownedPackages> CTOR_uPackage_ownedPackages;
-    protected final /*@NonNull*/ Constructor<MAP_uRoot_ownedPackages> CTOR_uRoot_ownedPackages;
     
-    public classescs2as_qvtp_qvtias(final /*@NonNull*/ Executor executor)
-     throws NoSuchMethodException,SecurityException {
+    public classescs2as_qvtp_qvtias(final /*@NonNull*/ Executor executor) throws ReflectiveOperationException {
         super(executor, new String[] {"leftCS", "rightAS"}, null, classIndex2classId, classIndex2allClassIndexes);
-        CTOR_cClassCS_2_Class = ClassUtil.nonNullState(MAP_cClassCS_2_Class.class.getConstructor(classescs2as_qvtp_qvtias.class, Object[].class));
-        CTOR_cPackageCS_2_Package = ClassUtil.nonNullState(MAP_cPackageCS_2_Package.class.getConstructor(classescs2as_qvtp_qvtias.class, Object[].class));
-        CTOR_cRootCS_2_Root = ClassUtil.nonNullState(MAP_cRootCS_2_Root.class.getConstructor(classescs2as_qvtp_qvtias.class, Object[].class));
-        CTOR_uClass_name = ClassUtil.nonNullState(MAP_uClass_name.class.getConstructor(classescs2as_qvtp_qvtias.class, Object[].class));
-        CTOR_uClass_superClass = ClassUtil.nonNullState(MAP_uClass_superClass.class.getConstructor(classescs2as_qvtp_qvtias.class, Object[].class));
-        CTOR_uPackage_name = ClassUtil.nonNullState(MAP_uPackage_name.class.getConstructor(classescs2as_qvtp_qvtias.class, Object[].class));
-        CTOR_uPackage_ownedClasses = ClassUtil.nonNullState(MAP_uPackage_ownedClasses.class.getConstructor(classescs2as_qvtp_qvtias.class, Object[].class));
-        CTOR_uPackage_ownedPackages = ClassUtil.nonNullState(MAP_uPackage_ownedPackages.class.getConstructor(classescs2as_qvtp_qvtias.class, Object[].class));
-        CTOR_uRoot_ownedPackages = ClassUtil.nonNullState(MAP_uRoot_ownedPackages.class.getConstructor(classescs2as_qvtp_qvtias.class, Object[].class));
     }
     
-    public boolean run() {
-        return MAP___root__();
+    public boolean run() throws ReflectiveOperationException {
+        boolean returnStatus = MAP___root__();
+        invocationManager.flush();
+        return returnStatus;
     }
     
     /**
@@ -210,29 +192,15 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * }
      * 
      */
-    protected class MAP_cClassCS_2_Class implements Invocation
-    {
-        protected final /*@NonNull*/ /*@NonInvalid*/ ClassCS classCS;
-        
-        @SuppressWarnings("null")
-        public MAP_cClassCS_2_Class(/*@NonNull*/ Object[] boundValues) {
-            classCS = (ClassCS)boundValues[0];
-        }
-        
-        public boolean execute() {
-            // predicates
-            // creations
-            final /*@Thrown*/ example2.classes.Class symbol_0 = ClassesFactory.eINSTANCE.createClass();
-            assert symbol_0 != null;
-            models[1/*rightAS*/].add(symbol_0);
-            // property assignments
-            classCS.setAst(symbol_0);
-            return true;
-        }
-        
-        public boolean isEqual(/*@NonNull*/ IdResolver idResolver, /*@NonNull*/ Object[] thoseValues) {
-            return idResolver.oclEquals(classCS, thoseValues[0]);
-        }
+    protected boolean MAP_cClassCS_2_Class(final /*@NonNull*/ /*@NonInvalid*/ ClassCS classCS) throws ReflectiveOperationException {
+        // predicates
+        // creations
+        final /*@Thrown*/ example2.classes.Class symbol_0 = ClassesFactory.eINSTANCE.createClass();
+        assert symbol_0 != null;
+        models[1/*rightAS*/].add(symbol_0);
+        // property assignments
+        classCS.setAst(symbol_0);
+        return true;
     }
     
     /**
@@ -250,29 +218,15 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * }
      * 
      */
-    protected class MAP_cPackageCS_2_Package implements Invocation
-    {
-        protected final /*@NonNull*/ /*@NonInvalid*/ PackageCS packageCS;
-        
-        @SuppressWarnings("null")
-        public MAP_cPackageCS_2_Package(/*@NonNull*/ Object[] boundValues) {
-            packageCS = (PackageCS)boundValues[0];
-        }
-        
-        public boolean execute() {
-            // predicates
-            // creations
-            final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
-            assert symbol_0 != null;
-            models[1/*rightAS*/].add(symbol_0);
-            // property assignments
-            packageCS.setAst(symbol_0);
-            return true;
-        }
-        
-        public boolean isEqual(/*@NonNull*/ IdResolver idResolver, /*@NonNull*/ Object[] thoseValues) {
-            return idResolver.oclEquals(packageCS, thoseValues[0]);
-        }
+    protected boolean MAP_cPackageCS_2_Package(final /*@NonNull*/ /*@NonInvalid*/ PackageCS packageCS) throws ReflectiveOperationException {
+        // predicates
+        // creations
+        final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
+        assert symbol_0 != null;
+        models[1/*rightAS*/].add(symbol_0);
+        // property assignments
+        packageCS.setAst(symbol_0);
+        return true;
     }
     
     /**
@@ -290,29 +244,15 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * }
      * 
      */
-    protected class MAP_cRootCS_2_Root implements Invocation
-    {
-        protected final /*@NonNull*/ /*@NonInvalid*/ RootCS rootCS;
-        
-        @SuppressWarnings("null")
-        public MAP_cRootCS_2_Root(/*@NonNull*/ Object[] boundValues) {
-            rootCS = (RootCS)boundValues[0];
-        }
-        
-        public boolean execute() {
-            // predicates
-            // creations
-            final /*@Thrown*/ Root root = ClassesFactory.eINSTANCE.createRoot();
-            assert root != null;
-            models[1/*rightAS*/].add(root);
-            // property assignments
-            rootCS.setAst(root);
-            return true;
-        }
-        
-        public boolean isEqual(/*@NonNull*/ IdResolver idResolver, /*@NonNull*/ Object[] thoseValues) {
-            return idResolver.oclEquals(rootCS, thoseValues[0]);
-        }
+    protected boolean MAP_cRootCS_2_Root(final /*@NonNull*/ /*@NonInvalid*/ RootCS rootCS) throws ReflectiveOperationException {
+        // predicates
+        // creations
+        final /*@Thrown*/ Root root = ClassesFactory.eINSTANCE.createRoot();
+        assert root != null;
+        models[1/*rightAS*/].add(root);
+        // property assignments
+        rootCS.setAst(root);
+        return true;
     }
     
     /**
@@ -334,31 +274,17 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * }
      * 
      */
-    protected class MAP_uClass_name implements Invocation
-    {
-        protected final /*@NonNull*/ /*@NonInvalid*/ ClassCS classCS_0;
-        
-        @SuppressWarnings("null")
-        public MAP_uClass_name(/*@NonNull*/ Object[] boundValues) {
-            classCS_0 = (ClassCS)boundValues[0];
-        }
-        
-        public boolean execute() {
-            // predicates
-            final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-            final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
-            // variable assignments
-            final /*@Nullable*/ /*@Thrown*/ EObject ast = classCS_0.getAst();
-            final /*@NonNull*/ /*@Thrown*/ example2.classes.Class oclAsType = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Class_0));
-            final /*@Nullable*/ /*@Thrown*/ String name = classCS_0.getName();
-            // property assignments
-            oclAsType.setName(name);
-            return true;
-        }
-        
-        public boolean isEqual(/*@NonNull*/ IdResolver idResolver, /*@NonNull*/ Object[] thoseValues) {
-            return idResolver.oclEquals(classCS_0, thoseValues[0]);
-        }
+    protected boolean MAP_uClass_name(final /*@NonNull*/ /*@NonInvalid*/ ClassCS classCS_0) throws ReflectiveOperationException {
+        // predicates
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
+        // variable assignments
+        final /*@Nullable*/ /*@Thrown*/ EObject ast = classCS_0.getAst();
+        final /*@NonNull*/ /*@Thrown*/ example2.classes.Class oclAsType = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Class_0));
+        final /*@Nullable*/ /*@Thrown*/ String name = classCS_0.getName();
+        // property assignments
+        oclAsType.setName(name);
+        return true;
     }
     
     /**
@@ -382,79 +308,65 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * }
      * 
      */
-    protected class MAP_uClass_superClass implements Invocation
-    {
-        protected final /*@NonNull*/ /*@NonInvalid*/ ClassCS classCS_1;
-        
-        @SuppressWarnings("null")
-        public MAP_uClass_superClass(/*@NonNull*/ Object[] boundValues) {
-            classCS_1 = (ClassCS)boundValues[0];
+    protected boolean MAP_uClass_superClass(final /*@NonNull*/ /*@NonInvalid*/ ClassCS classCS_1) throws ReflectiveOperationException {
+        // predicates
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
+        final /*@Nullable*/ /*@Thrown*/ EObject ast = classCS_1.getAst();
+        // variable assignments
+        final /*@NonNull*/ /*@Thrown*/ example2.classes.Class oclAsType = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Class_0));
+        final /*@NonNull*/ /*@Thrown*/ example2.classes.Class self_1 = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Class_0));
+        final /*@Nullable*/ /*@Thrown*/ PathNameCS symbol_1 = classCS_1.getExtends();
+        final /*@Thrown*/ boolean eq = symbol_1 == null;
+        /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_4;
+        if (eq) {
+            symbol_4 = null;
         }
-        
-        public boolean execute() {
-            // predicates
-            final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-            final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
-            final /*@Nullable*/ /*@Thrown*/ EObject ast = classCS_1.getAst();
-            // variable assignments
-            final /*@NonNull*/ /*@Thrown*/ example2.classes.Class oclAsType = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Class_0));
-            final /*@NonNull*/ /*@Thrown*/ example2.classes.Class self_1 = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Class_0));
-            final /*@Nullable*/ /*@Thrown*/ PathNameCS symbol_1 = classCS_1.getExtends();
-            final /*@Thrown*/ boolean eq = symbol_1 == null;
-            /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_4;
-            if (eq) {
-                symbol_4 = null;
+        else {
+            if (symbol_1 == null) {
+                throwNull(classCS_1, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
+            }
+            final /*@NonNull*/ /*@Thrown*/ List<PathElementCS> pathSeq_0 = symbol_1.getPath();
+            final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_pathSeq_0_3 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq_0);
+            final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
+            final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
+            /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_3;
+            if (eq_0) {
+                final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
+                LookupEnvironment _lookupEnv = new LookupEnvironment(executor,first);
+                ClassesLookupVisitor _lookupVisitor = new ClassesLookupVisitor(_lookupEnv);
+                EList<NamedElement> _lookupResult = self_1.accept(_lookupVisitor).getNamedElements();
+                example2.classes.Class _lookupClass = null;
+                if (_lookupResult.size() == 1) {
+                    _lookupClass = (example2.classes.Class)_lookupResult.get(0);
+                } else {
+                    handleLookupError(classCS_1,first);
+                };
+                symbol_3 = _lookupClass;
             }
             else {
-                if (symbol_1 == null) {
-                    throwNull(classCS_1, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
-                }
-                final /*@NonNull*/ /*@Thrown*/ List<PathElementCS> pathSeq_0 = symbol_1.getPath();
-                final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_pathSeq_0_3 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq_0);
-                final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
-                final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
-                /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_3;
-                if (eq_0) {
-                    final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
-                    LookupEnvironment _lookupEnv = new LookupEnvironment(executor,first);
-                    ClassesLookupVisitor _lookupVisitor = new ClassesLookupVisitor(_lookupEnv);
-                    EList<NamedElement> _lookupResult = self_1.accept(_lookupVisitor).getNamedElements();
-                    example2.classes.Class _lookupClass = null;
-                    if (_lookupResult.size() == 1) {
-                        _lookupClass = (example2.classes.Class)_lookupResult.get(0);
-                    } else {
-                        handleLookupError(classCS_1,first);
-                    };
-                    symbol_3 = _lookupClass;
-                }
-                else {
-                    final /*@NonNull*/ /*@Thrown*/ IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
-                    final /*@NonNull*/ /*@Thrown*/ OrderedSetValue subOrderedSet = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3, INT_1, diff);
-                    final List<PathElementCS> UNBOXED_subOrderedSet = subOrderedSet.asEcoreObjects(idResolver, PathElementCS.class);
-                    assert UNBOXED_subOrderedSet != null;
-                    final /*@Nullable*/ /*@Thrown*/ Package lookupPackage = classescs2as_qvtp_qvtias.this.lookupPackage(self_1, UNBOXED_subOrderedSet);
-                    final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
-                    LookupEnvironment _lookupEnv_0 = new LookupEnvironment(executor,last);
-                    ClassesLookupVisitor _lookupVisitor_0 = new ClassesLookupVisitor(_lookupEnv_0);
-                    EList<NamedElement> _lookupResult_0 = lookupPackage.accept(_lookupVisitor_0).getNamedElements();
-                    example2.classes.Class _lookupClass_0 = null;
-                    if (_lookupResult_0.size() == 1) {
-                        _lookupClass_0 = (example2.classes.Class)_lookupResult_0.get(0);
-                    } else {
-                        handleLookupError(classCS_1,last);
-                    };
-                    symbol_3 = _lookupClass_0;
-                }
-                symbol_4 = symbol_3;
+                final /*@NonNull*/ /*@Thrown*/ IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
+                final /*@NonNull*/ /*@Thrown*/ OrderedSetValue subOrderedSet = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3, INT_1, diff);
+                final List<PathElementCS> UNBOXED_subOrderedSet = subOrderedSet.asEcoreObjects(idResolver, PathElementCS.class);
+                assert UNBOXED_subOrderedSet != null;
+                final /*@Nullable*/ /*@Thrown*/ Package lookupPackage = this.lookupPackage(self_1, UNBOXED_subOrderedSet);
+                final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
+                LookupEnvironment _lookupEnv_0 = new LookupEnvironment(executor,last);
+                ClassesLookupVisitor _lookupVisitor_0 = new ClassesLookupVisitor(_lookupEnv_0);
+                EList<NamedElement> _lookupResult_0 = lookupPackage.accept(_lookupVisitor_0).getNamedElements();
+                example2.classes.Class _lookupClass_0 = null;
+                if (_lookupResult_0.size() == 1) {
+                    _lookupClass_0 = (example2.classes.Class)_lookupResult_0.get(0);
+                } else {
+                    handleLookupError(classCS_1,last);
+                };
+                symbol_3 = _lookupClass_0;
             }
-            // property assignments
-            oclAsType.setSuperClass(symbol_4);
-            return true;
+            symbol_4 = symbol_3;
         }
-        
-        public boolean isEqual(/*@NonNull*/ IdResolver idResolver, /*@NonNull*/ Object[] thoseValues) {
-            return idResolver.oclEquals(classCS_1, thoseValues[0]);
-        }
+        // property assignments
+        oclAsType.setSuperClass(symbol_4);
+        return true;
     }
     
     /**
@@ -476,31 +388,17 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * }
      * 
      */
-    protected class MAP_uPackage_name implements Invocation
-    {
-        protected final /*@NonNull*/ /*@NonInvalid*/ PackageCS packageCS_0;
-        
-        @SuppressWarnings("null")
-        public MAP_uPackage_name(/*@NonNull*/ Object[] boundValues) {
-            packageCS_0 = (PackageCS)boundValues[0];
-        }
-        
-        public boolean execute() {
-            // predicates
-            final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-            final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
-            // variable assignments
-            final /*@Nullable*/ /*@Thrown*/ EObject ast = packageCS_0.getAst();
-            final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Package_0));
-            final /*@Nullable*/ /*@Thrown*/ String name = packageCS_0.getName();
-            // property assignments
-            oclAsType.setName(name);
-            return true;
-        }
-        
-        public boolean isEqual(/*@NonNull*/ IdResolver idResolver, /*@NonNull*/ Object[] thoseValues) {
-            return idResolver.oclEquals(packageCS_0, thoseValues[0]);
-        }
+    protected boolean MAP_uPackage_name(final /*@NonNull*/ /*@NonInvalid*/ PackageCS packageCS_0) throws ReflectiveOperationException {
+        // predicates
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
+        // variable assignments
+        final /*@Nullable*/ /*@Thrown*/ EObject ast = packageCS_0.getAst();
+        final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Package_0));
+        final /*@Nullable*/ /*@Thrown*/ String name = packageCS_0.getName();
+        // property assignments
+        oclAsType.setName(name);
+        return true;
     }
     
     /**
@@ -524,56 +422,42 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * }
      * 
      */
-    protected class MAP_uPackage_ownedClasses implements Invocation
-    {
-        protected final /*@NonNull*/ /*@NonInvalid*/ PackageCS packageCS_1;
-        
-        @SuppressWarnings("null")
-        public MAP_uPackage_ownedClasses(/*@NonNull*/ Object[] boundValues) {
-            packageCS_1 = (PackageCS)boundValues[0];
-        }
-        
-        public boolean execute() {
-            // predicates
-            final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-            final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
-            // variable assignments
-            final /*@Nullable*/ /*@Thrown*/ EObject ast = packageCS_1.getAst();
-            final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Package_0));
-            final /*@NonNull*/ /*@Thrown*/ List<ClassCS> ownedClasses = packageCS_1.getOwnedClasses();
-            final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
-            /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
-            /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedClasses.iterator();
-            /*@NonNull*/ /*@Thrown*/ SequenceValue collect;
-            while (true) {
-                if (!ITERATOR__1.hasNext()) {
-                    collect = accumulator;
-                    break;
-                }
-                /*@Nullable*/ /*@NonInvalid*/ ClassCS _1 = (ClassCS)ITERATOR__1.next();
-                /**
-                 * ast.oclAsType(classes::Class)
-                 */
-                final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
-                if (_1 == null) {
-                    throwNull(packageCS_1, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::ElementCS::ast\'");
-                }
-                final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1.getAst();
-                final /*@NonNull*/ /*@Thrown*/ example2.classes.Class oclAsType_0 = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_Class_0));
-                //
-                accumulator.add(oclAsType_0);
+    protected boolean MAP_uPackage_ownedClasses(final /*@NonNull*/ /*@NonInvalid*/ PackageCS packageCS_1) throws ReflectiveOperationException {
+        // predicates
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
+        // variable assignments
+        final /*@Nullable*/ /*@Thrown*/ EObject ast = packageCS_1.getAst();
+        final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Package_0));
+        final /*@NonNull*/ /*@Thrown*/ List<ClassCS> ownedClasses = packageCS_1.getOwnedClasses();
+        final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
+        /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
+        /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedClasses.iterator();
+        /*@NonNull*/ /*@Thrown*/ SequenceValue collect;
+        while (true) {
+            if (!ITERATOR__1.hasNext()) {
+                collect = accumulator;
+                break;
             }
-            final /*@NonNull*/ /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
-            // property assignments
-            final List<example2.classes.Class> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, example2.classes.Class.class);
-            assert UNBOXED_null != null;
-            oclAsType.getOwnedClasses().addAll(UNBOXED_null);
-            return true;
+            /*@Nullable*/ /*@NonInvalid*/ ClassCS _1 = (ClassCS)ITERATOR__1.next();
+            /**
+             * ast.oclAsType(classes::Class)
+             */
+            final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
+            if (_1 == null) {
+                throwNull(packageCS_1, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::ElementCS::ast\'");
+            }
+            final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1.getAst();
+            final /*@NonNull*/ /*@Thrown*/ example2.classes.Class oclAsType_0 = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_Class_0));
+            //
+            accumulator.add(oclAsType_0);
         }
-        
-        public boolean isEqual(/*@NonNull*/ IdResolver idResolver, /*@NonNull*/ Object[] thoseValues) {
-            return idResolver.oclEquals(packageCS_1, thoseValues[0]);
-        }
+        final /*@NonNull*/ /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
+        // property assignments
+        final List<example2.classes.Class> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, example2.classes.Class.class);
+        assert UNBOXED_null != null;
+        oclAsType.getOwnedClasses().addAll(UNBOXED_null);
+        return true;
     }
     
     /**
@@ -597,55 +481,41 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * }
      * 
      */
-    protected class MAP_uPackage_ownedPackages implements Invocation
-    {
-        protected final /*@NonNull*/ /*@NonInvalid*/ PackageCS packageCS_2;
-        
-        @SuppressWarnings("null")
-        public MAP_uPackage_ownedPackages(/*@NonNull*/ Object[] boundValues) {
-            packageCS_2 = (PackageCS)boundValues[0];
-        }
-        
-        public boolean execute() {
-            // predicates
-            final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-            final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
-            // variable assignments
-            final /*@Nullable*/ /*@Thrown*/ EObject ast = packageCS_2.getAst();
-            final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Package_0));
-            final /*@NonNull*/ /*@Thrown*/ List<PackageCS> ownedPackages = packageCS_2.getOwnedPackages();
-            final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
-            /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
-            /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedPackages.iterator();
-            /*@NonNull*/ /*@Thrown*/ SequenceValue collect;
-            while (true) {
-                if (!ITERATOR__1.hasNext()) {
-                    collect = accumulator;
-                    break;
-                }
-                /*@Nullable*/ /*@NonInvalid*/ PackageCS _1 = (PackageCS)ITERATOR__1.next();
-                /**
-                 * ast.oclAsType(classes::Package)
-                 */
-                if (_1 == null) {
-                    throwNull(packageCS_2, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::ElementCS::ast\'");
-                }
-                final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1.getAst();
-                final /*@NonNull*/ /*@Thrown*/ Package oclAsType_0 = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_Package_0));
-                //
-                accumulator.add(oclAsType_0);
+    protected boolean MAP_uPackage_ownedPackages(final /*@NonNull*/ /*@NonInvalid*/ PackageCS packageCS_2) throws ReflectiveOperationException {
+        // predicates
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
+        // variable assignments
+        final /*@Nullable*/ /*@Thrown*/ EObject ast = packageCS_2.getAst();
+        final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Package_0));
+        final /*@NonNull*/ /*@Thrown*/ List<PackageCS> ownedPackages = packageCS_2.getOwnedPackages();
+        final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
+        /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
+        /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedPackages.iterator();
+        /*@NonNull*/ /*@Thrown*/ SequenceValue collect;
+        while (true) {
+            if (!ITERATOR__1.hasNext()) {
+                collect = accumulator;
+                break;
             }
-            final /*@NonNull*/ /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
-            // property assignments
-            final List<Package> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, Package.class);
-            assert UNBOXED_null != null;
-            oclAsType.getOwnedPackages().addAll(UNBOXED_null);
-            return true;
+            /*@Nullable*/ /*@NonInvalid*/ PackageCS _1 = (PackageCS)ITERATOR__1.next();
+            /**
+             * ast.oclAsType(classes::Package)
+             */
+            if (_1 == null) {
+                throwNull(packageCS_2, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::ElementCS::ast\'");
+            }
+            final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1.getAst();
+            final /*@NonNull*/ /*@Thrown*/ Package oclAsType_0 = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_Package_0));
+            //
+            accumulator.add(oclAsType_0);
         }
-        
-        public boolean isEqual(/*@NonNull*/ IdResolver idResolver, /*@NonNull*/ Object[] thoseValues) {
-            return idResolver.oclEquals(packageCS_2, thoseValues[0]);
-        }
+        final /*@NonNull*/ /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
+        // property assignments
+        final List<Package> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, Package.class);
+        assert UNBOXED_null != null;
+        oclAsType.getOwnedPackages().addAll(UNBOXED_null);
+        return true;
     }
     
     /**
@@ -669,56 +539,42 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * }
      * 
      */
-    protected class MAP_uRoot_ownedPackages implements Invocation
-    {
-        protected final /*@NonNull*/ /*@NonInvalid*/ RootCS rootCS_0;
-        
-        @SuppressWarnings("null")
-        public MAP_uRoot_ownedPackages(/*@NonNull*/ Object[] boundValues) {
-            rootCS_0 = (RootCS)boundValues[0];
-        }
-        
-        public boolean execute() {
-            // predicates
-            final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-            final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Root_0 = idResolver.getClass(CLSSid_Root, null);
-            // variable assignments
-            final /*@Nullable*/ /*@Thrown*/ EObject ast = rootCS_0.getAst();
-            final /*@NonNull*/ /*@Thrown*/ Root oclAsType = ClassUtil.nonNullState((Root)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Root_0));
-            final /*@NonNull*/ /*@Thrown*/ List<PackageCS> ownedPackages = rootCS_0.getOwnedPackages();
-            final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
-            /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
-            /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedPackages.iterator();
-            /*@NonNull*/ /*@Thrown*/ SequenceValue collect;
-            while (true) {
-                if (!ITERATOR__1.hasNext()) {
-                    collect = accumulator;
-                    break;
-                }
-                /*@Nullable*/ /*@NonInvalid*/ PackageCS _1 = (PackageCS)ITERATOR__1.next();
-                /**
-                 * ast.oclAsType(classes::Package)
-                 */
-                final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
-                if (_1 == null) {
-                    throwNull(rootCS_0, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::ElementCS::ast\'");
-                }
-                final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1.getAst();
-                final /*@NonNull*/ /*@Thrown*/ Package oclAsType_0 = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_Package_0));
-                //
-                accumulator.add(oclAsType_0);
+    protected boolean MAP_uRoot_ownedPackages(final /*@NonNull*/ /*@NonInvalid*/ RootCS rootCS_0) throws ReflectiveOperationException {
+        // predicates
+        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Root_0 = idResolver.getClass(CLSSid_Root, null);
+        // variable assignments
+        final /*@Nullable*/ /*@Thrown*/ EObject ast = rootCS_0.getAst();
+        final /*@NonNull*/ /*@Thrown*/ Root oclAsType = ClassUtil.nonNullState((Root)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Root_0));
+        final /*@NonNull*/ /*@Thrown*/ List<PackageCS> ownedPackages = rootCS_0.getOwnedPackages();
+        final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
+        /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
+        /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedPackages.iterator();
+        /*@NonNull*/ /*@Thrown*/ SequenceValue collect;
+        while (true) {
+            if (!ITERATOR__1.hasNext()) {
+                collect = accumulator;
+                break;
             }
-            final /*@NonNull*/ /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
-            // property assignments
-            final List<Package> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, Package.class);
-            assert UNBOXED_null != null;
-            oclAsType.getOwnedPackages().addAll(UNBOXED_null);
-            return true;
+            /*@Nullable*/ /*@NonInvalid*/ PackageCS _1 = (PackageCS)ITERATOR__1.next();
+            /**
+             * ast.oclAsType(classes::Package)
+             */
+            final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
+            if (_1 == null) {
+                throwNull(rootCS_0, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::ElementCS::ast\'");
+            }
+            final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1.getAst();
+            final /*@NonNull*/ /*@Thrown*/ Package oclAsType_0 = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_Package_0));
+            //
+            accumulator.add(oclAsType_0);
         }
-        
-        public boolean isEqual(/*@NonNull*/ IdResolver idResolver, /*@NonNull*/ Object[] thoseValues) {
-            return idResolver.oclEquals(rootCS_0, thoseValues[0]);
-        }
+        final /*@NonNull*/ /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
+        // property assignments
+        final List<Package> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, Package.class);
+        assert UNBOXED_null != null;
+        oclAsType.getOwnedPackages().addAll(UNBOXED_null);
+        return true;
     }
     
     /**
@@ -773,7 +629,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * classCS := classCS;
      * }}
      */
-    protected boolean MAP___root__() {
+    protected boolean MAP___root__() throws ReflectiveOperationException {
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_ClassCS_2 = idResolver.getClass(CLSSid_ClassCS, null);
@@ -792,55 +648,55 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         for (RootCS rootCS_3 : UNBOXED_allInstances_1) {
             if (rootCS_3 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ RootCS symbol_1 = (RootCS)rootCS_3;
-                invokeOnce(CTOR_cRootCS_2_Root, symbol_1);
+                MAP_cRootCS_2_Root(symbol_1);
             }
         }
         for (PackageCS packageCS_7 : UNBOXED_allInstances_2) {
             if (packageCS_7 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_5 = (PackageCS)packageCS_7;
-                invokeOnce(CTOR_cPackageCS_2_Package, symbol_5);
+                MAP_cPackageCS_2_Package(symbol_5);
             }
         }
         for (RootCS rootCS_4 : UNBOXED_allInstances_1) {
             if (rootCS_4 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ RootCS symbol_9 = (RootCS)rootCS_4;
-                invokeOnce(CTOR_uRoot_ownedPackages, symbol_9);
+                MAP_uRoot_ownedPackages(symbol_9);
             }
         }
         for (PackageCS packageCS_8 : UNBOXED_allInstances_2) {
             if (packageCS_8 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_13 = (PackageCS)packageCS_8;
-                invokeOnce(CTOR_uPackage_name, symbol_13);
+                MAP_uPackage_name(symbol_13);
             }
         }
         for (ClassCS classCS_5 : UNBOXED_allInstances_6) {
             if (classCS_5 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_17 = (ClassCS)classCS_5;
-                invokeOnce(CTOR_cClassCS_2_Class, symbol_17);
+                MAP_cClassCS_2_Class(symbol_17);
             }
         }
         for (PackageCS packageCS_9 : UNBOXED_allInstances_2) {
             if (packageCS_9 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_21 = (PackageCS)packageCS_9;
-                invokeOnce(CTOR_uPackage_ownedClasses, symbol_21);
+                MAP_uPackage_ownedClasses(symbol_21);
             }
         }
         for (PackageCS packageCS_10 : UNBOXED_allInstances_2) {
             if (packageCS_10 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_25 = (PackageCS)packageCS_10;
-                invokeOnce(CTOR_uPackage_ownedPackages, symbol_25);
+                MAP_uPackage_ownedPackages(symbol_25);
             }
         }
         for (ClassCS classCS_6 : UNBOXED_allInstances_6) {
             if (classCS_6 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_29 = (ClassCS)classCS_6;
-                invokeOnce(CTOR_uClass_name, symbol_29);
+                MAP_uClass_name(symbol_29);
             }
         }
         for (ClassCS classCS_7 : UNBOXED_allInstances_6) {
             if (classCS_7 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_33 = (ClassCS)classCS_7;
-                invokeOnce(CTOR_uClass_superClass, symbol_33);
+                MAP_uClass_superClass(symbol_33);
             }
         }
         return true;

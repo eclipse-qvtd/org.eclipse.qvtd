@@ -316,6 +316,36 @@ public class QVTiCompilerTests extends LoadTestCase
         assertSameModel(referenceResource, outputResource);
         myQVT.dispose();
 	} */
+
+	public void testCG_Tree2TallTree_qvti() throws Exception {
+		ResourceSet resourceSet = new ResourceSetImpl();
+//		Registry packageRegistry = resourceSet.getPackageRegistry();
+//		packageRegistry.put(HSVTreePackage.eNS_URI, HSVTreePackage.eINSTANCE);
+//		packageRegistry.put(Tree2TallTreePackage.eNS_URI, Tree2TallTreePackage.eINSTANCE);
+//		packageRegistry.put(HLSTreePackage.eNS_URI, HLSTreePackage.eINSTANCE);
+    	MyQVT myQVT = createQVT();
+		URI transformURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.qvti");
+		URI genModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.genmodel");
+		URI inputModelURI = getProjectFileURI("Tree2TallTree/Tree.xmi");
+		URI outputModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.xmi");
+		URI referenceModelURI = getProjectFileURI("Tree2TallTree/TallTreeValidate.xmi");
+		Transformation asTransformation = loadTransformation(myQVT, transformURI, genModelURI);
+		assert asTransformation != null;
+		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
+		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Executor.class));
+		TxEvaluator executor = myQVT.createEvaluator(txConstructor);
+		TransformationExecutor tx = executor.getTransformationExecutor();
+		Resource inputResource = resourceSet.getResource(inputModelURI, true);
+		tx.addRootObjects("tree", ClassUtil.nonNullState(inputResource.getContents()));
+		tx.run();
+		Resource outputResource = resourceSet.createResource(outputModelURI);
+		outputResource.getContents().addAll(tx.getRootObjects("talltree"));
+		outputResource.save(getSaveOptions());
+		Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
+		assert referenceResource != null;
+        assertSameModel(referenceResource, outputResource);
+        myQVT.dispose();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public Class<? extends TransformationExecutor> compileTransformation(@NonNull QVTiCodeGenerator cg) throws Exception {

@@ -9,23 +9,23 @@ transformation Tree2TallTree {
 }
 
 map __root__ in Tree2TallTree {
-    for node : tree::Node in tree::Node.allInstances()->sortedBy(name) {
+    for node : tree::Node in tree.objectsOfKind(Node)->sortedBy(name) {
         call Node2MiddleNode {
             node := node;
         } 
     } 
-    for node : tree::Node in tree::Node.allInstances()->sortedBy(name) {
+    for node : tree::Node in tree.objectsOfKind(Node)->sortedBy(name) {
         call Edge2MiddleEdge {
             node := node;
             node2tallNode := node.Node2TallNode;
         } 
     } 
-    for node2tallNode : tree2talltree::Node2TallNode in tree::Node.allInstances()->sortedBy(name).Node2TallNode {
+    for node2tallNode : tree2talltree::Node2TallNode in tree.objectsOfKind(Node)->sortedBy(name).Node2TallNode {
         call MiddleLeaf2TallLeaf {
             node2tallNode := node2tallNode;
         } 
     } 
-    for node2tallNode : tree2talltree::Node2TallNode in tree::Node.allInstances()->sortedBy(name).Node2TallNode {
+    for node2tallNode : tree2talltree::Node2TallNode in tree2talltree.objectsOfKind(Node2TallNode)->sortedBy(name) {
         call MiddleNode2TallNode {
             node2tallNode ?= node2tallNode;
         } 

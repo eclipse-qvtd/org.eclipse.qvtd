@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen"
+    modelPluginID="org.eclipse.qvtd.xtext.qvtimperative.tests" modelName="Tree2TallTree"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    bundleManifest="false" complianceLevel="7.0" copyrightFields="false" operationReflection="true"
+    copyrightText="Copyright (c) 2015 Willink Transformations and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  E.D.Willink - Initial API and implementation"
+    importOrganizing="true" pluginKey="">
+  <foreignModel>Tree2TallTree.ecore</foreignModel>
+  <genPackages prefix="Tree2talltree" basePackage="tree2talltree" disposableProviderFactory="true"
+      ecorePackage="Tree2TallTree.ecore#/">
+    <genClasses ecoreClass="Tree2TallTree.ecore#//Node2TallNode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tree2TallTree.ecore#//Node2TallNode/children"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree2TallTree.ecore#//Node2TallNode/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Tree2TallTree.ecore#//Node2TallNode/parent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tree2TallTree.ecore#//Node2TallNode/node"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tree2TallTree.ecore#//Node2TallNode/tallNode"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Tree" basePackage="tree2talltree" disposableProviderFactory="true"
+      ecorePackage="Tree.ecore#/">
+    <genClasses ecoreClass="Tree.ecore#//Node">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tree.ecore#//Node/children"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//Node/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Tree.ecore#//Node/parent"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Talltree" basePackage="tree2talltree" disposableProviderFactory="true"
+      ecorePackage="TallTree.ecore#/">
+    <genClasses ecoreClass="TallTree.ecore#//TallNode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TallTree.ecore#//TallNode/children"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TallTree.ecore#//TallNode/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TallTree.ecore#//TallNode/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference TallTree.ecore#//TallNode/parent"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

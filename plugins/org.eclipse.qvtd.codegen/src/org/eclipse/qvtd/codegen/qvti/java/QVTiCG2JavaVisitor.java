@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
@@ -91,11 +93,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
  */
 public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implements QVTiCGModelVisitor<Boolean>
 {
-	public static boolean USE_CLASS = true;
-	
 	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull CGPackage cgPackage;
 	protected final @Nullable List<CGValuedElement> sortedGlobals;
+	protected boolean alwaysUseClasses = false;
+	protected QVTiTransformationAnalysis transformationAnalysis;
 	
 	public QVTiCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @NonNull CGPackage cgPackage,
 			@Nullable List<CGValuedElement> sortedGlobals) {
@@ -259,13 +261,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.appendIsRequired(true);
 		js.append(" ");
 		js.appendClassReference(Executor.class);
-		js.append(" " + evaluatorName + ")\n");
-		if (USE_CLASS) {
-			js.append(" throws ");
-			js.appendClassReference(NoSuchMethodException.class);
-			js.append(",");
-			js.appendClassReference(SecurityException.class);
-		}
+		js.append(" " + evaluatorName + ") throws ");
+		js.appendClassReference(ReflectiveOperationException.class);
 		js.append(" {\n");
 		js.pushIndentation(null);		
 		js.append("super(" + evaluatorName + ", new String[] {");
@@ -296,8 +293,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.append(", null, null");
 		}
 		js.append(");\n");
-		for (CGMapping cgMapping : cgTransformation.getMappings()) {
-			if (USE_CLASS && (cgMapping.getFreeVariables().size() > 0)) {
+		for (@SuppressWarnings("null")@NonNull CGMapping cgMapping : cgTransformation.getMappings()) {
+			if (useClass(cgMapping) && (cgMapping.getFreeVariables().size() > 0)) {
 //				js.append("protected final ");
 //				js.appendIsRequired(true);
 //				js.append(" ");
@@ -312,8 +309,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 	}
 
 	protected void doConstructorConstants(/*@NonNull*/ List<CGMapping> cgMappings) {
-		for (CGMapping cgMapping : cgMappings) {
-			if (USE_CLASS && (cgMapping.getFreeVariables().size() > 0)) {
+		for (@SuppressWarnings("null")@NonNull CGMapping cgMapping : cgMappings) {
+			if (useClass(cgMapping) && (cgMapping.getFreeVariables().size() > 0)) {
 				js.append("protected final ");
 				js.appendIsRequired(true);
 				js.append(" ");
@@ -414,7 +411,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			listNames.put(cgFreeVariable, listName);
 		} */
 		//
-		js.append("public boolean run() {\n");
+		js.append("public boolean run() throws ");
+		js.appendClassReference(ReflectiveOperationException.class);
+		js.append(" {\n");
 		js.pushIndentation(null);
 /*		for (@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
 			TypeDescriptor typeDescriptor = context.getTypeDescriptor(cgFreeVariable);
@@ -465,7 +464,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.append(" != null) {\n");
 			js.pushIndentation(null);
 		} */
-		js.append("return ");
+		js.append("boolean returnStatus = ");
 		js.append(getMappingName(cgRootMapping));
 		js.append("(");
 /*		boolean isFirst = true;
@@ -484,6 +483,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.append("}\n");
 		} */
 //		js.append("return true;\n");
+		js.append("invocationManager.flush();\n");
+		js.append("return returnStatus;\n");
 		js.popIndentation();		
 		js.append("}\n");
 	}
@@ -532,12 +533,19 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		}
 	}
 
+	private boolean useClass(@NonNull CGMapping cgMapping) {
+		Mapping asMapping = ClassUtil.nonNullState((Mapping) cgMapping.getAst());
+		return alwaysUseClasses || transformationAnalysis.isHazardous(asMapping);
+	}
+
 	@Override
 	public @NonNull Boolean visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgPropertyAssignment) {
+		Property referredProperty = cgPropertyAssignment.getReferredProperty();
 //		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
 //		CGTypeId cgTypeId = analyzer.getTypeId(pivotProperty.getOwningType().getTypeId());
 //		JavaTypeDescriptor requiredTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId, false);
 		EStructuralFeature eStructuralFeature = ClassUtil.nonNullModel(cgPropertyAssignment.getEStructuralFeature());
+		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
 		CGValuedElement cgSlot = getExpression(cgPropertyAssignment.getSlotValue());
 		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
 //		Class<?> requiredJavaClass = requiredTypeDescriptor.getJavaClass();
@@ -550,28 +558,81 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		if (!js.appendLocalStatements(cgInit)) {
 			return false;
 		}
-		//
-		if (eStructuralFeature.isMany()) {
-			String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
-			//
+		if ((referredProperty != null) && transformationAnalysis.isHazardous(referredProperty)) {
+			js.append("objectManager.assign(");
 			js.appendValueName(cgSlot);
-			js.append(".");
-			js.append(getAccessor);
-			js.append("().addAll(");
+			js.append(", ");
+			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
+			js.append(".Literals.");
+			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+			js.append(", ");
 			js.appendValueName(cgInit);
 			js.append(");\n");
 		}
 		else {
-			String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
-			//
-		js.appendValueName(cgSlot);
-		js.append(".");
-		js.append(setAccessor);
-		js.append("(");
-		js.appendValueName(cgInit);
-		js.append(");\n");
+			if (eStructuralFeature.isMany()) {
+				String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
+				//
+				js.appendValueName(cgSlot);
+				js.append(".");
+				js.append(getAccessor);
+				js.append("().addAll(");
+				js.appendValueName(cgInit);
+				js.append(");\n");
+			}
+			else {
+				String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
+					//
+				js.appendValueName(cgSlot);
+				js.append(".");
+				js.append(setAccessor);
+				js.append("(");
+				js.appendValueName(cgInit);
+				js.append(");\n");
+			}
 		}
 		return true;
+	}
+
+	@Override
+	public @NonNull Boolean visitCGEcorePropertyCallExp(@NonNull CGEcorePropertyCallExp cgPropertyCallExp) {
+		Property asProperty = cgPropertyCallExp.getReferredProperty();
+		assert asProperty != null;
+		if (transformationAnalysis.isHazardous(asProperty)) {
+			EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
+			EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
+			CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
+			//
+			if (!js.appendLocalStatements(source)) {
+				return false;
+			}
+			//
+			Boolean ecoreIsRequired = getCodeGenerator().isNonNull(asProperty);
+			boolean isRequired = cgPropertyCallExp.isNonNull();
+			boolean is_boolean = js.is_boolean(cgPropertyCallExp);
+			if (!is_boolean && isRequired && (ecoreIsRequired == Boolean.FALSE) && js.isUseNullAnnotations()) {
+				js.append("@SuppressWarnings(\"null\")\n");
+			}
+	//		js.append("/* " + ecoreIsRequired + " " + isRequired + " */\n");
+			js.appendDeclaration(cgPropertyCallExp);
+			js.append(" = objectManager.get(");
+			js.appendValueName(source);
+			js.append(", ");
+			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
+			js.append(".Literals.");
+			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+			js.append(");\n");
+			return true;
+		}
+		else {
+			return super.visitCGEcorePropertyCallExp(cgPropertyCallExp);
+		}
+	}
+
+	@Override
+	public @Nullable Boolean visitCGEcoreOppositePropertyCallExp(@NonNull CGEcoreOppositePropertyCallExp object) {
+		// TODO Auto-generated method stub
+		return super.visitCGEcoreOppositePropertyCallExp(object);
 	}
 
 	@Override
@@ -762,10 +823,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 				List<CGGuardVariable> cgFreeVariables = cgMapping.getFreeVariables();
 				//
 				js.appendCommentWithOCL(null, cgMapping.getAst());
-				if (USE_CLASS && (cgFreeVariables.size() > 0)) {
+				if (useClass(cgMapping) && (cgFreeVariables.size() > 0)) {
 					js.append("protected class ");
 					js.append(getMappingName(cgMapping));
-					js.append(" implements Invocation\n");
+					js.append(" extends AbstractInvocation\n");
 					js.append("{\n");
 					js.pushIndentation(null);
 						for (@SuppressWarnings("null")@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
@@ -793,7 +854,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 						js.popIndentation();
 						js.append("}\n");	
 						js.append("\n");	
-						js.append("public boolean execute() {\n");
+						js.append("public boolean execute() throws ");
+						js.appendClassReference(ReflectiveOperationException.class);
+						js.append(" {\n");
 						js.pushIndentation(null);
 							String savedLocalPrefix = localPrefix;
 							try {
@@ -842,7 +905,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 						js.appendDeclaration(cgFreeVariable);
 						isFirst = false;
 					}
-					js.append(") {\n");
+					js.append(") throws ");
+					js.appendClassReference(ReflectiveOperationException.class);
+					js.append(" {\n");
 					js.pushIndentation(null);
 						js.append("// predicates\n");
 						cgBody.accept(this);
@@ -901,8 +966,13 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		//
 		//	Emit the mapping call.
 		//
-		if (USE_CLASS) {
-			js.append("invokeOnce(" + getMappingCtorName(cgReferredMapping) + ", ");
+		if (useClass(cgReferredMapping)) {
+			if (pMappingCall.isIsInfinite()) {
+				js.append("invokeOnce(" + getMappingCtorName(cgReferredMapping) + ", ");
+			}
+			else {
+				js.append("invoke(" + getMappingCtorName(cgReferredMapping) + ", ");
+			}
 		}
 		else {
 			js.append(getMappingName(cgReferredMapping) + "(");
@@ -1143,6 +1213,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.appendClassHeader(cgTransformation.getContainingPackage());
 		@SuppressWarnings("null")@NonNull Transformation transformation = (Transformation) cgTransformation.getAst();
 		QVTiTransformationAnalysis transformationAnalysis = context.getTransformationAnalysis(transformation);
+		this.transformationAnalysis = transformationAnalysis;
 		String className = cgTransformation.getName();
 		js.append("/**\n");
 		js.append(" * The " + className + " transformation:\n");

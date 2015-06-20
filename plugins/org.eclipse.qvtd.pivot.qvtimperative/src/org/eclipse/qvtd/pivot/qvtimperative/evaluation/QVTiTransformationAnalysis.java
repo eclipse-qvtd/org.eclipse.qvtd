@@ -38,6 +38,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeDomainUsageAnalysis;
 
@@ -105,6 +106,13 @@ public class QVTiTransformationAnalysis
 	 */
 	private final @NonNull Set<Mapping> hazardousMappings = new HashSet<Mapping>();
 
+	private final @NonNull Set<Property> hazardousProperties = new HashSet<Property>();
+
+	/**
+	 * The PropertyAssignments to each Property.
+	 */
+	private final @NonNull Map<Property, Set<PropertyAssignment>> property2propertyAssignments = new HashMap<Property, Set<PropertyAssignment>>();
+
 	public QVTiTransformationAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
 	    this.environmentFactory = environmentFactory;
 		this.domainAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory);
@@ -161,6 +169,27 @@ public class QVTiTransformationAnalysis
 		operation2property.put(operation, operationProperties);
 		analyzeTree(operationProperties, operation.eAllContents());
 		return operationProperties;
+	}
+
+	private void analyzeProperties() {
+		Set<Mapping> hazardousMappings = getHazardousMappings();
+		for (Map.Entry<Mapping, Set<Property>> entry : getMapping2Property().entrySet()) {
+			Mapping mapping = entry.getKey();
+			if (hazardousMappings.contains(mapping)) {
+				hazardousProperties.addAll(entry.getValue());
+			}
+		}
+		for (Set<PropertyAssignment> propertyAssignments : mapping2propertyAssignments.values()) {
+			for (PropertyAssignment propertyAssignment : propertyAssignments) {
+				Property property = propertyAssignment.getTargetProperty();
+				Set<PropertyAssignment> assignments = property2propertyAssignments.get(property);
+				if (assignments == null) {
+					assignments = new HashSet<PropertyAssignment>();
+					property2propertyAssignments.put(property, assignments);
+				}
+				assignments.add(propertyAssignment);
+			}
+		}
 	}
 
 	protected void analyzeTree(@NonNull Set<Property> properties, /*@NonNull*/ TreeIterator<EObject> treeIterator) {
@@ -281,6 +310,8 @@ public class QVTiTransformationAnalysis
 				}
 			}
 		}
+		//
+		analyzeProperties();
 	}
 
 	public @NonNull Set<org.eclipse.ocl.pivot.Class> getAllInstancesClasses() {
@@ -367,5 +398,56 @@ public class QVTiTransformationAnalysis
 
 	public @NonNull Map<Property, Integer> getSourceCaches() {
 		return sourceProperty2cacheIndex;
+	}
+
+
+	public boolean hasHazardousRead(@NonNull MappingCall mappingCall) {
+		for (MappingCallBinding callBinding : mappingCall.getBinding()) {
+			if (callBinding.isIsPolled()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean hasHazardousWrite(@NonNull MappingCall mappingCall) {
+		Mapping mapping = mappingCall.getReferredMapping();
+		Set<PropertyAssignment> propertyAssignments = mapping2propertyAssignments.get(mapping);
+		if (propertyAssignments == null) {
+			return false;
+		}
+		for (PropertyAssignment propertyAssignment : propertyAssignments) {
+			Property assignedProperty = propertyAssignment.getTargetProperty();
+			if (hazardousProperties.contains(assignedProperty)) {
+				return true;
+			}
+			if (hazardousProperties.contains(assignedProperty.getOpposite())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isAssigned(@NonNull Property targetProperty, @NonNull DomainUsage domainUsage) {
+		Set<PropertyAssignment> propertyAssignments = property2propertyAssignments.get(targetProperty);
+		if (propertyAssignments == null) {
+			return false;
+		}
+		for (PropertyAssignment propertyAssignment : propertyAssignments) {
+			OCLExpression slotExpression = propertyAssignment.getSlotExpression();
+			DomainUsage slotUsage = domainAnalysis.getUsage(slotExpression);
+			if (domainUsage == slotUsage) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isHazardous(@NonNull Property targetProperty) {
+		return hazardousProperties.contains(targetProperty);
+	}
+
+	public boolean isHazardous(@NonNull Mapping mapping) {
+		return hazardousMappings.contains(mapping);
 	}
 }

@@ -70,7 +70,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	 */
 	private static class EvaluationStatusManager
 	{
-		protected final@NonNull MappingAnalysis mappingAnalysis;
+		protected final@NonNull QVTiTransformationAnalysis transformationAnalysis;
 		protected final @NonNull TransformationStatus transformationStatus = EvaluationStatusFactory.eINSTANCE.createTransformationStatus();
 
 		private final @NonNull Map<Object, ClassStatus> object2ClassStatus = new HashMap<Object, ClassStatus>();
@@ -80,8 +80,8 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		 */
 		private @Nullable Set<MappingStatus> dirtyMappingStatuses = new HashSet<MappingStatus>();
 
-		public EvaluationStatusManager(@NonNull MappingAnalysis mappingAnalysis) {
-			this.mappingAnalysis = mappingAnalysis;
+		public EvaluationStatusManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
+			this.transformationAnalysis = transformationAnalysis;
 		}
 
 		private void allocateDirtyMappingStatuses(@NonNull List<Set<MappingStatus>> depth2dirtyMappingStatuses,
@@ -344,7 +344,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 					throw new UnsupportedOperationException();
 				}
 			}
-			if ((domainUsage != null) && /*(propertyStatus != null) && */isIn(domainUsage) && !mappingAnalysis.isAssigned(property, domainUsage)) {
+			if ((domainUsage != null) && /*(propertyStatus != null) && */isIn(domainUsage) && !transformationAnalysis.isAssigned(property, domainUsage)) {
 				propertyStatus.setIsAssignable(false);
 				propertyStatus.setIsAssigned(true);
 			}
@@ -408,84 +408,6 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 				}
 			}
 		}
-	}
-
-	/**
-	 * MappingAnalysis manages additional properties determined by analysis of the Transformation or Mappings.. 
-	 */
-	private static class MappingAnalysis
-	{
-		private final @NonNull QVTiTransformationAnalysis transformationAnalysis;
-		private final @NonNull Set<Property> hazardousProperties = new HashSet<Property>();
-		private final @NonNull Map<Mapping, Set<PropertyAssignment>> mapping2propertyAssignments;
-		private final @NonNull Map<Property, Set<PropertyAssignment>> property2propertyAssignments = new HashMap<Property, Set<PropertyAssignment>>();
-
-		public MappingAnalysis(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
-			this.transformationAnalysis = transformationAnalysis;
-			Set<Mapping> hazardousMappings = transformationAnalysis.getHazardousMappings();
-			for (Map.Entry<Mapping, Set<Property>> entry : transformationAnalysis.getMapping2Property().entrySet()) {
-				Mapping mapping = entry.getKey();
-				if (hazardousMappings.contains(mapping)) {
-					hazardousProperties.addAll(entry.getValue());
-				}
-			}
-			mapping2propertyAssignments = transformationAnalysis.getMapping2PropertyAssignments();
-			for (Set<PropertyAssignment> propertyAssignments : mapping2propertyAssignments.values()) {
-				for (PropertyAssignment propertyAssignment : propertyAssignments) {
-					Property property = propertyAssignment.getTargetProperty();
-					Set<PropertyAssignment> assignments = property2propertyAssignments.get(property);
-					if (assignments == null) {
-						assignments = new HashSet<PropertyAssignment>();
-						property2propertyAssignments.put(property, assignments);
-					}
-					assignments.add(propertyAssignment);
-				}
-			}
-		}
-
-		public boolean hasHazardousRead(@NonNull MappingCall mappingCall) {
-			for (MappingCallBinding callBinding : mappingCall.getBinding()) {
-				if (callBinding.isIsPolled()) {
-					return true;
-				}
-			}
-			return false;
-		}
-
-		public boolean hasHazardousWrite(@NonNull MappingCall mappingCall) {
-			Mapping mapping = mappingCall.getReferredMapping();
-			Set<PropertyAssignment> propertyAssignments = mapping2propertyAssignments.get(mapping);
-			if (propertyAssignments == null) {
-				return false;
-			}
-			for (PropertyAssignment propertyAssignment : propertyAssignments) {
-				Property assignedProperty = propertyAssignment.getTargetProperty();
-				if (hazardousProperties.contains(assignedProperty)) {
-					return true;
-				}
-			}
-			return false;
-		}
-
-		public boolean isAssigned(@NonNull Property targetProperty, @NonNull DomainUsage domainUsage) {
-			Set<PropertyAssignment> propertyAssignments = property2propertyAssignments.get(targetProperty);
-			if (propertyAssignments == null) {
-				return false;
-			}
-			for (PropertyAssignment propertyAssignment : propertyAssignments) {
-				OCLExpression slotExpression = propertyAssignment.getSlotExpression();
-				DomainUsage slotUsage = transformationAnalysis.getDomainUsageAnalysis().getUsage(slotExpression);
-				if (domainUsage == slotUsage) {
-					return true;
-				}
-			}
-			return false;
-		}
-
-		public boolean isHazardous(@NonNull Property targetProperty) {
-			return hazardousProperties.contains(targetProperty);
-		}
-
 	}
 	
 	/**
@@ -584,7 +506,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	
 	protected final @NonNull Mode mode;
 	protected final @NonNull PendingInvocations pendingInvocations = new PendingInvocations();
-	protected final @NonNull MappingAnalysis mappingAnalysis;
+	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
 	protected final @NonNull Stack<MappingStatus> mappingStatusStack = new Stack<MappingStatus>();
 	protected final @NonNull EvaluationStatusManager statusManager;
 	protected final @NonNull MappingInvocations mappingInvocations;
@@ -592,9 +514,8 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI transformationURI, @NonNull Mode mode) throws IOException {
 		super(environmentFactory, transformationURI);
 		this.mode = mode;
-		QVTiTransformationAnalysis transformationAnalysis = getModelManager().getTransformationAnalysis();
-		this.mappingAnalysis = new MappingAnalysis(transformationAnalysis);
-		this.statusManager = new EvaluationStatusManager(mappingAnalysis);
+		this.transformationAnalysis = getModelManager().getTransformationAnalysis();
+		this.statusManager = new EvaluationStatusManager(transformationAnalysis);
 		this.mappingInvocations = new MappingInvocations(statusManager);
 	}
 
@@ -626,7 +547,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 				return false;
 			}
 		}
-		if ((mode != Mode.LAZY) || mappingAnalysis.hasHazardousRead(mappingCall) || mappingAnalysis.hasHazardousWrite(mappingCall)) {
+		if ((mode != Mode.LAZY) || transformationAnalysis.hasHazardousRead(mappingCall) || transformationAnalysis.hasHazardousWrite(mappingCall)) {
 			mappingStatus = statusManager.createMappingStatus(mappingCall, newBoundValues);
 		}
 		mappingStatusStack.push(mappingStatus);
@@ -678,7 +599,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	public @Nullable Object internalExecuteNavigationCallExp(@NonNull NavigationCallExp navigationCallExp, @NonNull Property referredProperty, @Nullable Object object) {
 		MappingStatus mappingStatus = findMappingStatus();
 		PropertyStatus propertyStatus = null;
-		if ((mappingStatus != null) && mappingAnalysis.isHazardous(referredProperty)) {
+		if ((mappingStatus != null) && transformationAnalysis.isHazardous(referredProperty)) {
 			assert object != null;
 			OCLExpression source = navigationCallExp.getOwnedSource();
 			DomainUsage domainUsage = source != null ? getEvaluationEnvironment().getUsageFor(source) : null;
@@ -747,14 +668,15 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		Property targetProperty = propertyAssignment.getTargetProperty();
 		assert targetProperty != null;
 		PropertyStatus propertyStatus;
-		if ((mode == Mode.LAZY) && !mappingAnalysis.isHazardous(targetProperty)) {
+		if ((mode == Mode.LAZY) && !transformationAnalysis.isHazardous(targetProperty)) {
 			propertyStatus = statusManager.findPropertyStatus((EObject)object, targetProperty);
 			if (propertyStatus == null) {
 				return propertyValue;
 			}
 		}
 		else {
-			DomainUsage domainUsage = getEvaluationEnvironment().getUsageFor(propertyAssignment.getSlotExpression());
+			OCLExpression slotExpression = propertyAssignment.getSlotExpression();
+			DomainUsage domainUsage = slotExpression !=null ? getEvaluationEnvironment().getUsageFor(slotExpression) : null;
 			propertyStatus = statusManager.getPropertyStatus(domainUsage, (EObject)object, targetProperty);
 			MappingStatus mappingStatus = findMappingStatus();
 			assert mappingStatus !=  null;
