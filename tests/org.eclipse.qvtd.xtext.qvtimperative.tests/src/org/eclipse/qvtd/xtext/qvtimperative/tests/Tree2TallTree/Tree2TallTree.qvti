@@ -20,11 +20,6 @@ map __root__ in Tree2TallTree {
             node2tallNode := node.Node2TallNode;
         } 
     } 
-    for node2tallNode : tree2talltree::Node2TallNode in tree.objectsOfKind(Node)->sortedBy(name).Node2TallNode {
-        call MiddleLeaf2TallLeaf {
-            node2tallNode := node2tallNode;
-        } 
-    } 
     for node2tallNode : tree2talltree::Node2TallNode in tree2talltree.objectsOfKind(Node2TallNode)->sortedBy(name) {
         call MiddleNode2TallNode {
             node2tallNode ?= node2tallNode;
@@ -54,27 +49,15 @@ map Edge2MiddleEdge in Tree2TallTree {
 	}
 }
 
-map MiddleLeaf2TallLeaf in Tree2TallTree {
-	check tree2talltree(node2tallNode : Node2TallNode) {} 
-	enforce talltree() {
-		realize tallNode : TallNode
-	}
-	where(node2tallNode.children->isEmpty();) {
-		node2tallNode.tallNode := tallNode;
-		tallNode.name := node2tallNode.name;
-		tallNode.height := 0;
-	}
-}
-
 map MiddleNode2TallNode in Tree2TallTree {
 	check tree2talltree(node2tallNode : Node2TallNode) {} 
 	enforce talltree() {
 		realize tallNode : TallNode
 	}
-	where(node2tallNode.children->notEmpty();) {
+	where() {
 		node2tallNode.tallNode := tallNode;
 		tallNode.name := node2tallNode.name;
-		tallNode.children := node2tallNode.children.tallNode;
-		tallNode.height := node2tallNode.children.tallNode.height->max() + 1;
+		tallNode.children := node2tallNode.children?.tallNode;
+		tallNode.height := if node2tallNode.children->notEmpty() then node2tallNode.children.tallNode.height->max() + 1 else 0 endif;
 	}
 }

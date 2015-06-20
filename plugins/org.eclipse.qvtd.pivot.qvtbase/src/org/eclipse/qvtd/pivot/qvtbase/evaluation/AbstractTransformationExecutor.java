@@ -308,6 +308,7 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	    public <T extends Invocation> void invoke(@NonNull Invocation invocation) throws ReflectiveOperationException {
     		try {
     			invocation.execute();
+    			flush();
     		}
     		catch (InvocationFailedException e) {
      			block(invocation, e.propertyState);
