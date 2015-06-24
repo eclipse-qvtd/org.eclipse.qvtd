@@ -13,6 +13,7 @@
 package org.eclipse.qvtd.cs2as.compiler.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
@@ -56,6 +57,14 @@ public class CGLookupCallExpImpl extends CGOperationCallExpImpl implements CGLoo
 		return (R) ((CS2ASCGModelVisitor<?>)visitor).visitCGLookupCallExp(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public EClassifier getEcoreClassifier() {
+		return null;
+	}
+
 	// FIXME use the CGModelSpecs
 	@Override
 	public boolean isUnboxed() {
@@ -64,6 +73,22 @@ public class CGLookupCallExpImpl extends CGOperationCallExpImpl implements CGLoo
 	
 	@Override
 	public boolean isBoxed() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public boolean isEcore() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public boolean isGlobal() {
 		return false;
 	}
 
