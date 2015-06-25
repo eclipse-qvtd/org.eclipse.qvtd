@@ -932,6 +932,7 @@ public class ManualUML2RDBMS extends AbstractTransformer
                 collect = accumulator;
                 break;
             }
+            @SuppressWarnings("null")
             @NonNull /*@NonInvalid*/ NonLeafAttribute _1 = (NonLeafAttribute)ITERATOR__1.next();
             /**
              * fromAttributes

@@ -396,6 +396,7 @@ public class classescs2as extends AbstractTransformer
                 collect = accumulator_0;
                 break;
             }
+            @SuppressWarnings("null")
             @NonNull /*@NonInvalid*/ PackageCS2Package _1_0 = (PackageCS2Package)ITERATOR__1_0.next();
             /**
              * package
@@ -506,6 +507,7 @@ public class classescs2as extends AbstractTransformer
                 collect = accumulator_0;
                 break;
             }
+            @SuppressWarnings("null")
             @NonNull /*@NonInvalid*/ ClassCS2Class _1_0 = (ClassCS2Class)ITERATOR__1_0.next();
             /**
              * class

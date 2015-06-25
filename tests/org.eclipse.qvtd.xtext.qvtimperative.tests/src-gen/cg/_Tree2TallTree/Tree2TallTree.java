@@ -364,6 +364,7 @@ public class Tree2TallTree extends AbstractTransformer
                     collect = accumulator;
                     break;
                 }
+                @SuppressWarnings("null")
                 @NonNull /*@NonInvalid*/ Node2TallNode _1 = (Node2TallNode)ITERATOR__1.next();
                 /**
                  * tallNode
@@ -404,6 +405,7 @@ public class Tree2TallTree extends AbstractTransformer
                         collect_0 = accumulator_1;
                         break;
                     }
+                    @SuppressWarnings("null")
                     @NonNull /*@NonInvalid*/ TallNode _1_1 = (TallNode)ITERATOR__1_1.next();
                     /**
                      * height
