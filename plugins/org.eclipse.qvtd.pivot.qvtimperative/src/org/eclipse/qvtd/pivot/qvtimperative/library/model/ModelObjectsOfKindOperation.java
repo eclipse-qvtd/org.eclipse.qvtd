@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.library.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
@@ -39,6 +40,6 @@ public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
 		Collection<EObject> results = typedModelInstance.getObjectsOfKind(type);
-		return createSetValue((CollectionTypeId)returnTypeId, results);
+		return createSetValue((CollectionTypeId)returnTypeId, new ArrayList<Object>(results));
 	}
 }
