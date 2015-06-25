@@ -13,6 +13,7 @@ package org.eclipse.qvtd.codegen.qvticgmodel.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -199,6 +200,15 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * @generated
 	 */
 	@Override
+	public @Nullable EClassifier getEcoreClassifier() {
+		return value != null ? value.getEcoreClassifier() : null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isBoxed() {
 		return (value != null) && value.isBoxed();
 	}
@@ -210,6 +220,15 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public boolean isCommonable() {
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isEcore() {
+		return (value != null) && value.isEcore();
 	}
 
 	/**

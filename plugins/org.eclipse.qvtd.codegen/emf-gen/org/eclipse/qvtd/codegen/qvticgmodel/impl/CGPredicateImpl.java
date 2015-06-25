@@ -15,6 +15,7 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -371,6 +372,15 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * @generated
 	 */
 	@Override
+	public @Nullable EClassifier getEcoreClassifier() {
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public @Nullable CGInvalid getInvalidValue() {
 		CGInvalid invalidValue = (conditionExpression != null) ? conditionExpression.getInvalidValue() : null;
 		if (invalidValue == null) {
@@ -403,6 +413,15 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 */
 	@Override
 	public boolean isBoxed() {
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isEcore() {
 		return true;
 	}
 

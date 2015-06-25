@@ -12,6 +12,7 @@ package org.eclipse.qvtd.codegen.qvticgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -161,7 +162,25 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 	 * @generated
 	 */
 	@Override
+	public @Nullable EClassifier getEcoreClassifier() {
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isBoxed() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isEcore() {
 		return false;
 	}
 

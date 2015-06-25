@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.codegen.qvticgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationImpl;
@@ -61,8 +62,26 @@ public class CGFunctionImpl extends CGOperationImpl implements CGFunction {
 	 * @generated
 	 */
 	@Override
+	public @Nullable EClassifier getEcoreClassifier() {
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isBoxed() {
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isEcore() {
+		return false;
 	}
 
 	/**
