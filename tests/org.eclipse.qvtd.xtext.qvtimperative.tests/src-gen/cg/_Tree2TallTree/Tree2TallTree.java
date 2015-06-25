@@ -41,7 +41,7 @@ import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfKindOperation;
 import tree2talltree.talltree.TallNode;
 import tree2talltree.talltree.TalltreeFactory;
@@ -64,7 +64,7 @@ import tree2talltree.tree2talltree.Tree2talltreePackage;
  * Extract each output model with {@link getRootObjects(String)}
  */
 @SuppressWarnings("nls")
-public class Tree2TallTree extends AbstractTransformationExecutor
+public class Tree2TallTree extends AbstractTransformer
 {
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbaseLibrary", "qvtbaselib", null);
@@ -180,10 +180,8 @@ public class Tree2TallTree extends AbstractTransformationExecutor
         };
         final @NonNull  ExecutorSingleIterationManager MGR_sortedBy_0_0 = new ExecutorSingleIterationManager(executor, ORD_CLSSid_Node, BODY_sortedBy_0_0, objectsOfKind_0, ACC_sortedBy_0_0);
         final @NonNull /*@Thrown*/ OrderedSetValue sortedBy_0 = ClassUtil.nonNullState((OrderedSetValue)IMPL_sortedBy_0_0.evaluateIteration(MGR_sortedBy_0_0));
-        final List<Node> UNBOXED_sortedBy_0 = sortedBy_0.asEcoreObjects(idResolver, Node.class);
-        assert UNBOXED_sortedBy_0 != null;
         // mapping statements
-        for (Node node_3 : UNBOXED_sortedBy_0) {
+        for (Node node_3 : ValueUtil.typedIterable(Node.class, sortedBy_0)) {
             if (node_3 != null) {
                 final @NonNull /*@NonInvalid*/ Node symbol_2 = (Node)node_3;
                 if (symbol_2 != null) {
@@ -191,7 +189,7 @@ public class Tree2TallTree extends AbstractTransformationExecutor
                 }
             }
         }
-        for (Node node_4 : UNBOXED_sortedBy_0) {
+        for (Node node_4 : ValueUtil.typedIterable(Node.class, sortedBy_0)) {
             if (node_4 != null) {
                 final @NonNull /*@NonInvalid*/ Node symbol_7 = (Node)node_4;
                 final @NonNull /*@Thrown*/ Node2TallNode Node2TallNode = ClassUtil.nonNullState (OPPOSITE_OF_Node2TallNode_node.get(symbol_7));
@@ -227,9 +225,7 @@ public class Tree2TallTree extends AbstractTransformationExecutor
         };
         final @NonNull  ExecutorSingleIterationManager MGR_sortedBy_1_0 = new ExecutorSingleIterationManager(executor, ORD_CLSSid_Node2TallNode, BODY_sortedBy_1_0, objectsOfKind_1, ACC_sortedBy_1_0);
         final @NonNull /*@Thrown*/ OrderedSetValue sortedBy_1 = ClassUtil.nonNullState((OrderedSetValue)IMPL_sortedBy_1_0.evaluateIteration(MGR_sortedBy_1_0));
-        final List<Node2TallNode> UNBOXED_sortedBy_1 = sortedBy_1.asEcoreObjects(idResolver, Node2TallNode.class);
-        assert UNBOXED_sortedBy_1 != null;
-        for (Node2TallNode node2tallNode_3 : UNBOXED_sortedBy_1) {
+        for (Node2TallNode node2tallNode_3 : ValueUtil.typedIterable(Node2TallNode.class, sortedBy_1)) {
             if (node2tallNode_3 != null) {
                 final @NonNull /*@NonInvalid*/ Node2TallNode symbol_13 = (Node2TallNode)node2tallNode_3;
                 if (symbol_13 != null) {
@@ -270,7 +266,8 @@ public class Tree2TallTree extends AbstractTransformationExecutor
         // property assignments
         node2tallNode_1.setNode(node);
         OPPOSITE_OF_Node2TallNode_node.put(node, node2tallNode_1);
-        objectManager.assign(node2tallNode_1, Tree2talltreePackage.Literals.NODE2_TALL_NODE__NAME, name);
+        node2tallNode_1.setName(name);
+        objectManager.assigned(node2tallNode_1, Tree2talltreePackage.Literals.NODE2_TALL_NODE__NAME, name);
         return true;
     }
     
@@ -300,12 +297,14 @@ public class Tree2TallTree extends AbstractTransformationExecutor
             return false;
         }
         // variable assignments
-        if (parent == null) {
+        final @Nullable /*@Thrown*/ Node parent_0 = node_0.getParent();
+        if (parent_0 == null) {
             throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/List2List\'::Node2TallNode::node\'");
         }
-        final @NonNull /*@Thrown*/ Node2TallNode Node2TallNode = ClassUtil.nonNullState (OPPOSITE_OF_Node2TallNode_node.get(parent));
+        final @NonNull /*@Thrown*/ Node2TallNode Node2TallNode = ClassUtil.nonNullState (OPPOSITE_OF_Node2TallNode_node.get(parent_0));
         // property assignments
         node2tallNode.setParent(Node2TallNode);
+        objectManager.assigned(node2tallNode, Tree2talltreePackage.Literals.NODE2_TALL_NODE__PARENT, Node2TallNode);
         return true;
     }
     
@@ -375,7 +374,7 @@ public class Tree2TallTree extends AbstractTransformationExecutor
                 accumulator.add(tallNode_0);
             }
             final /*@Thrown*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_children_0).booleanValue();
-            @NonNull /*@Thrown*/ IntegerValue symbol_4;
+            @NonNull /*@Thrown*/ IntegerValue symbol_0;
             if (notEmpty) {
                 @NonNull /*@Thrown*/ BagValue.Accumulator accumulator_0 = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_TallNode);
                 @Nullable Iterator<?> ITERATOR__1_0 = BOXED_children_0.iterator();
@@ -409,31 +408,31 @@ public class Tree2TallTree extends AbstractTransformationExecutor
                     /**
                      * height
                      */
-                    @SuppressWarnings("null")
-                    final @NonNull /*@Thrown*/ Object height = objectManager.get(_1_1, TalltreePackage.Literals.TALL_NODE__HEIGHT);
+                    final /*@Thrown*/ int height = objectManager.get(_1_1, TalltreePackage.Literals.TALL_NODE__HEIGHT);
                     final @NonNull /*@Thrown*/ IntegerValue BOXED_height = ValueUtil.integerValueOf(height);
                     //
                     accumulator_1.add(BOXED_height);
                 }
                 final @NonNull /*@Thrown*/ IntegerValue max = (IntegerValue)CollectionMaxOperation.INSTANCE.evaluate(collect_0);
                 final @NonNull /*@Thrown*/ IntegerValue sum = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(max, INT_1);
-                symbol_4 = sum;
+                symbol_0 = sum;
             }
             else {
-                symbol_4 = INT_0;
+                symbol_0 = INT_0;
             }
             // creations
             final /*@Thrown*/ TallNode tallNode = TalltreeFactory.eINSTANCE.createTallNode();
             assert tallNode != null;
             models[1/*talltree*/].add(tallNode);
             // property assignments
-            objectManager.assign(node2tallNode_0, Tree2talltreePackage.Literals.NODE2_TALL_NODE__TALL_NODE, tallNode);
+            node2tallNode_0.setTallNode(tallNode);
+            objectManager.assigned(node2tallNode_0, Tree2talltreePackage.Literals.NODE2_TALL_NODE__TALL_NODE, tallNode);
             tallNode.setName(name);
-            final List<TallNode> UNBOXED_null = collect.asEcoreObjects(idResolver, TallNode.class);
-            assert UNBOXED_null != null;
-            tallNode.getChildren().addAll(UNBOXED_null);
-            final @Nullable /*@NonInvalid*/ Object UNBOXED_null_0 = symbol_4.asNumber();
-            objectManager.assign(tallNode, TalltreePackage.Literals.TALL_NODE__HEIGHT, UNBOXED_null_0);
+            final @NonNull /*@NonInvalid*/ List<TallNode> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(TallNode.class, collect);
+            tallNode.getChildren().addAll(ECORE_collect);
+            final int ECORE_symbol_0 = ValueUtil.intValueOf(symbol_0);
+            tallNode.setHeight(ECORE_symbol_0);
+            objectManager.assigned(tallNode, TalltreePackage.Literals.TALL_NODE__HEIGHT, ECORE_symbol_0);
             return true;
         }
         

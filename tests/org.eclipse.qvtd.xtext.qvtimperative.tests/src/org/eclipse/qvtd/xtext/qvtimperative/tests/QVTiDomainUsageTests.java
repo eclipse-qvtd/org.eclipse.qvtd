@@ -11,8 +11,6 @@
 package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -31,7 +29,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Comment;
-import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
@@ -46,8 +43,6 @@ import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationEvaluator;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageAnalysis;
@@ -119,10 +114,6 @@ public class QVTiDomainUsageTests extends LoadTestCase
 			}
 		}
 
-		public @NonNull TxEvaluator createEvaluator(Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
-			return new TxEvaluator(getCompleteEnvironment(), txConstructor);
-		}
-
 		@Override
 		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
@@ -151,12 +142,6 @@ public class QVTiDomainUsageTests extends LoadTestCase
 		public MyQVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
 			super(projectMap, externalResourceSet);
 	    	setEvaluationTracingEnabled(true);
-		}
-	}
-	
-	protected static class TxEvaluator extends AbstractTransformationEvaluator {
-		private TxEvaluator(@NonNull CompleteEnvironment environment, Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
-			super(environment, txConstructor);
 		}
 	}
 

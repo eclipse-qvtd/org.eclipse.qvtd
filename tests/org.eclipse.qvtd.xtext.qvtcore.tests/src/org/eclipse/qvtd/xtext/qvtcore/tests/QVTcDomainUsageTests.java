@@ -11,8 +11,6 @@
 package org.eclipse.qvtd.xtext.qvtcore.tests;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,7 +26,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Comment;
-import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
@@ -41,8 +38,8 @@ import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationEvaluator;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.Transformer;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
@@ -106,10 +103,6 @@ public class QVTcDomainUsageTests extends LoadTestCase
 				printAnalysis(usage2elements);
 			}
 		}
-
-		public @NonNull TxEvaluator createEvaluator(Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
-			return new TxEvaluator(getCompleteEnvironment(), txConstructor);
-		}
 		
 		public void printAnalysis(@NonNull Map<DomainUsage, List<Element>> usage2elements) {
 			@SuppressWarnings("unchecked")Set<DomainUsage.Internal> keySet = (Set<DomainUsage.Internal>)(Set<?>)usage2elements.keySet();
@@ -137,9 +130,9 @@ public class QVTcDomainUsageTests extends LoadTestCase
 		}
 	}
 	
-	protected static class TxEvaluator extends AbstractTransformationEvaluator {
-		private TxEvaluator(@NonNull CompleteEnvironment environment, Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
-			super(environment, txConstructor);
+	protected static class MyQVTcTransformationExecutor extends AbstractTransformationExecutor {
+		private MyQVTcTransformationExecutor(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
+			super(environmentFactory, txClass);
 		}
 	}
 

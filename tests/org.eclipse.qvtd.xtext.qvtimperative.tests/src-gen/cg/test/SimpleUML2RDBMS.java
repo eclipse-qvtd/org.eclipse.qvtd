@@ -36,7 +36,7 @@ import org.eclipse.ocl.pivot.values.BagValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfKindOperation;
 import simpleuml2rdbms.rdbms.Column;
 import simpleuml2rdbms.rdbms.ForeignKey;
@@ -77,7 +77,7 @@ import simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage;
  * Extract each output model with {@link getRootObjects(String)}
  */
 @SuppressWarnings("nls")
-public class SimpleUML2RDBMS extends AbstractTransformationExecutor
+public class SimpleUML2RDBMS extends AbstractTransformer
 {
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbaseLibrary", "qvtbaselib", null);

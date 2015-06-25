@@ -36,7 +36,7 @@ import org.eclipse.ocl.pivot.values.BagValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfKindOperation;
 import simpleuml2rdbms.rdbms.Column;
 import simpleuml2rdbms.rdbms.ForeignKey;
@@ -77,7 +77,7 @@ import simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage;
  * Extract each output model with {@link getRootObjects(String)}
  */
 @SuppressWarnings("nls")
-public class SimpleUML2RDBMS extends AbstractTransformationExecutor
+public class SimpleUML2RDBMS extends AbstractTransformer
 {
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbaseLibrary", "qvtbaselib", null);
@@ -310,7 +310,8 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             return false;
         }
         // variable assignments
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
+        final @Nullable /*@Thrown*/ String name_0 = prim.getName();
+        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR_2);
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_NUMBER);
         // creations
         final /*@Thrown*/ IntegerToNumber p2n_5 = UML2RDBMSFactory.eINSTANCE.createIntegerToNumber();
@@ -429,7 +430,8 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             return false;
         }
         // variable assignments
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
+        final @Nullable /*@Thrown*/ String name_0 = prim_0.getName();
+        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR_2);
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_BOOLEAN);
         // creations
         final /*@Thrown*/ BooleanToBoolean p2n_5 = UML2RDBMSFactory.eINSTANCE.createBooleanToBoolean();
@@ -516,7 +518,8 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             return false;
         }
         // variable assignments
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
+        final @Nullable /*@Thrown*/ String name_0 = prim_1.getName();
+        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR_2);
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_VARCHAR);
         // creations
         final /*@Thrown*/ StringToVarchar p2n_5 = UML2RDBMSFactory.eINSTANCE.createStringToVarchar();
@@ -609,9 +612,8 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         pk.setKind(STR_primary);
         pc.setOwner(t_4);
         final @NonNull /*@Thrown*/ OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Key, pk);
-        final List<Key> UNBOXED_OrderedSet = OrderedSet.asEcoreObjects(idResolver, Key.class);
-        assert UNBOXED_OrderedSet != null;
-        pc.getKeys().addAll(UNBOXED_OrderedSet);
+        final @NonNull /*@Thrown*/ List<Key> ECORE_OrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Key.class, OrderedSet);
+        pc.getKeys().addAll(ECORE_OrderedSet);
         pc.setType(STR_NUMBER);
         pc.setName(sum);
         pk.setName(sum_0);
@@ -795,9 +797,8 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         fc.setOwner(st);
         fk.setRefersTo(rk);
         final @NonNull /*@Thrown*/ OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_ForeignKey, fk);
-        final List<ForeignKey> UNBOXED_OrderedSet = OrderedSet.asEcoreObjects(idResolver, ForeignKey.class);
-        assert UNBOXED_OrderedSet != null;
-        fc.getForeignKeys().addAll(UNBOXED_OrderedSet);
+        final @NonNull /*@Thrown*/ List<ForeignKey> ECORE_OrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(ForeignKey.class, OrderedSet);
+        fc.getForeignKeys().addAll(ECORE_OrderedSet);
         return true;
     }
     
@@ -898,14 +899,20 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         final @Nullable /*@Thrown*/ String name = a.getName();
         @NonNull /*@Caught*/ Object CAUGHT_eq_11;
         try {
-            CAUGHT_eq_11 = eq;
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class destination_3 = a.getDestination();
+            final /*@Thrown*/ boolean eq_11 = destination_3.equals(dc);
+            CAUGHT_eq_11 = eq_11;
         }
         catch (Exception e) {
             CAUGHT_eq_11 = ValueUtil.createInvalidValue(e);
         }
         @NonNull /*@Caught*/ Object CAUGHT_eq_12;
         try {
-            CAUGHT_eq_12 = eq_1;
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class source_3 = a.getSource();
+            final /*@Thrown*/ boolean eq_12 = source_3.equals(sc);
+            CAUGHT_eq_12 = eq_12;
         }
         catch (Exception e) {
             CAUGHT_eq_12 = ValueUtil.createInvalidValue(e);
@@ -915,14 +922,16 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             throw new InvalidValueException("Null if condition");
         }
         // variable assignments
-        @Nullable /*@Thrown*/ String symbol_7;
+        @Nullable /*@Thrown*/ String symbol_2;
         if (and_2) {
-            symbol_7 = name;
+            symbol_2 = name;
         }
         else {
             @NonNull /*@Caught*/ Object CAUGHT_ne;
             try {
-                final /*@Thrown*/ boolean ne = !destination.equals(dc);
+                @SuppressWarnings("null")
+                final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class destination_1 = a.getDestination();
+                final /*@Thrown*/ boolean ne = !destination_1.equals(dc);
                 CAUGHT_ne = ne;
             }
             catch (Exception e) {
@@ -932,18 +941,20 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             if (and_0 == null) {
                 throw new InvalidValueException("Null if condition");
             }
-            @NonNull /*@Thrown*/ String symbol_6;
+            @NonNull /*@Thrown*/ String symbol_1;
             if (and_0) {
                 final @Nullable /*@Thrown*/ String name_0 = dc.getName();
                 final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR__);
                 final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name);
-                symbol_6 = sum_0;
+                symbol_1 = sum_0;
             }
             else {
                 final @Nullable /*@Thrown*/ String name_6 = sc.getName();
                 @NonNull /*@Caught*/ Object CAUGHT_ne_0;
                 try {
-                    final /*@Thrown*/ boolean ne_0 = !source.equals(sc);
+                    @SuppressWarnings("null")
+                    final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class source_2 = a.getSource();
+                    final /*@Thrown*/ boolean ne_0 = !source_2.equals(sc);
                     CAUGHT_ne_0 = ne_0;
                 }
                 catch (Exception e) {
@@ -953,11 +964,11 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 if (and_1 == null) {
                     throw new InvalidValueException("Null if condition");
                 }
-                @NonNull /*@Thrown*/ String symbol_5;
+                @NonNull /*@Thrown*/ String symbol_0;
                 if (and_1) {
                     final @NonNull /*@Thrown*/ String sum_1 = StringConcatOperation.INSTANCE.evaluate(name, STR__);
                     final @NonNull /*@Thrown*/ String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, name_6);
-                    symbol_5 = sum_2;
+                    symbol_0 = sum_2;
                 }
                 else {
                     final @Nullable /*@Thrown*/ String name_4 = dc.getName();
@@ -965,18 +976,18 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                     final @NonNull /*@Thrown*/ String sum_4 = StringConcatOperation.INSTANCE.evaluate(sum_3, name);
                     final @NonNull /*@Thrown*/ String sum_5 = StringConcatOperation.INSTANCE.evaluate(sum_4, STR__);
                     final @NonNull /*@Thrown*/ String sum_6 = StringConcatOperation.INSTANCE.evaluate(sum_5, name_6);
-                    symbol_5 = sum_6;
+                    symbol_0 = sum_6;
                 }
-                symbol_6 = symbol_5;
+                symbol_1 = symbol_0;
             }
-            symbol_7 = symbol_6;
+            symbol_2 = symbol_1;
         }
-        @Nullable /*@Thrown*/ String symbol_8;
+        @Nullable /*@Thrown*/ String symbol_3;
         if (and_2) {
-            symbol_8 = symbol_7;
+            symbol_3 = symbol_2;
         }
         else {
-            symbol_8 = name;
+            symbol_3 = name;
         }
         // creations
         final /*@Thrown*/ AssociationToForeignKey a2f_0 = UML2RDBMSFactory.eINSTANCE.createAssociationToForeignKey();
@@ -985,9 +996,9 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         // property assignments
         a2f_0.setAssociation(a);
         a2f_0.setReferenced(dc2t_0);
-        a2f_0.setName(symbol_7);
+        a2f_0.setName(symbol_2);
         a2f_0.setOwner(sc2t_0);
-        a.setName(symbol_8);
+        a.setName(symbol_3);
         return true;
     }
     
@@ -1063,9 +1074,8 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         fa.setAttribute(a_0);
         OPPOSITE_OF_FromAttribute_attribute.put(a_0, fa);
         final @NonNull /*@Thrown*/ SetValue Set = ValueUtil.createSetOfEach(SET_CLSSid_AttributeToColumn, fa);
-        final List<AttributeToColumn> UNBOXED_Set = Set.asEcoreObjects(idResolver, AttributeToColumn.class);
-        assert UNBOXED_Set != null;
-        fa.getLeafs().addAll(UNBOXED_Set);
+        final @NonNull /*@Thrown*/ List<AttributeToColumn> ECORE_Set = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(AttributeToColumn.class, Set);
+        fa.getLeafs().addAll(ECORE_Set);
         return true;
     }
     
@@ -1159,9 +1169,8 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         fa.setKind(kind);
         fa.setOwner(fao_0);
         fa.setName(name);
-        final List<AttributeToColumn> UNBOXED_null = asSet.asEcoreObjects(idResolver, AttributeToColumn.class);
-        assert UNBOXED_null != null;
-        fa.getLeafs().addAll(UNBOXED_null);
+        final @NonNull /*@NonInvalid*/ List<AttributeToColumn> ECORE_asSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(AttributeToColumn.class, asSet);
+        fa.getLeafs().addAll(ECORE_asSet);
         return true;
     }
     
@@ -1249,9 +1258,8 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         fa.setKind(kind);
         fa.setType(p2n_3);
         final @NonNull /*@Thrown*/ SetValue Set = ValueUtil.createSetOfEach(SET_CLSSid_AttributeToColumn, fa);
-        final List<AttributeToColumn> UNBOXED_Set = Set.asEcoreObjects(idResolver, AttributeToColumn.class);
-        assert UNBOXED_Set != null;
-        fa.getLeafs().addAll(UNBOXED_Set);
+        final @NonNull /*@Thrown*/ List<AttributeToColumn> ECORE_Set = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(AttributeToColumn.class, Set);
+        fa.getLeafs().addAll(ECORE_Set);
         fa.setName(sum_0);
         return true;
     }
@@ -1356,9 +1364,8 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         // property assignments
         fa.setOwner(fao_2);
         fa.setKind(kind);
-        final List<AttributeToColumn> UNBOXED_null = asSet.asEcoreObjects(idResolver, AttributeToColumn.class);
-        assert UNBOXED_null != null;
-        fa.getLeafs().addAll(UNBOXED_null);
+        final @NonNull /*@NonInvalid*/ List<AttributeToColumn> ECORE_asSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(AttributeToColumn.class, asSet);
+        fa.getLeafs().addAll(ECORE_asSet);
         fa.setAttribute(a_3);
         OPPOSITE_OF_FromAttribute_attribute.put(a_3, fa);
         fa.setName(sum_0);
@@ -1647,14 +1654,9 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_uml_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_uml_c_c_PrimitiveDataType_2 = idResolver.getClass(CLSSid_PrimitiveDataType, null);
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_13 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Attribute, models[0/*uml*/], TYP_uml_c_c_Attribute_1);
-        final List<Attribute> UNBOXED_objectsOfKind_13 = objectsOfKind_13.asEcoreObjects(idResolver, Attribute.class);
-        assert UNBOXED_objectsOfKind_13 != null;
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_7 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_PrimitiveDataType, models[0/*uml*/], TYP_uml_c_c_PrimitiveDataType_2);
-        final List<PrimitiveDataType> UNBOXED_objectsOfKind_7 = objectsOfKind_7.asEcoreObjects(idResolver, PrimitiveDataType.class);
-        assert UNBOXED_objectsOfKind_7 != null;
-        final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_16 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Attribute, models[0/*uml*/], TYP_uml_c_c_Attribute_1);
         @NonNull /*@Thrown*/ SetValue.Accumulator accumulator = ValueUtil.createSetAccumulatorValue(SET_CLSSid_Attribute);
-        @Nullable Iterator<?> ITERATOR__1_0 = objectsOfKind_16.iterator();
+        @Nullable Iterator<?> ITERATOR__1_0 = objectsOfKind_13.iterator();
         @NonNull /*@Thrown*/ SetValue select_0;
         while (true) {
             if (!ITERATOR__1_0.hasNext()) {
@@ -1676,13 +1678,9 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 accumulator.add(_1_0);
             }
         }
-        final List<Attribute> UNBOXED_select_0 = select_0.asEcoreObjects(idResolver, Attribute.class);
-        assert UNBOXED_select_0 != null;
         // mapping statements
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, models[0/*uml*/], TYP_uml_c_c_Package_0);
-        final List<Package> UNBOXED_objectsOfKind = objectsOfKind.asEcoreObjects(idResolver, Package.class);
-        assert UNBOXED_objectsOfKind != null;
-        for (Package p_11 : UNBOXED_objectsOfKind) {
+        for (Package p_11 : ValueUtil.typedIterable(Package.class, objectsOfKind)) {
             if (p_11 != null) {
                 final @NonNull /*@NonInvalid*/ Package symbol_1 = (Package)p_11;
                 if (symbol_1 != null) {
@@ -1691,9 +1689,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_0 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageToSchema, models[2/*middle*/], TYP_uml2rdbms_c_c_PackageToSchema_0);
-        final List<PackageToSchema> UNBOXED_objectsOfKind_0 = objectsOfKind_0.asEcoreObjects(idResolver, PackageToSchema.class);
-        assert UNBOXED_objectsOfKind_0 != null;
-        for (PackageToSchema p2s_21 : UNBOXED_objectsOfKind_0) {
+        for (PackageToSchema p2s_21 : ValueUtil.typedIterable(PackageToSchema.class, objectsOfKind_0)) {
             if (p2s_21 != null) {
                 final @NonNull /*@NonInvalid*/ PackageToSchema symbol_5 = (PackageToSchema)p2s_21;
                 if (symbol_5 != null) {
@@ -1702,9 +1698,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_1 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, models[0/*uml*/], TYP_uml_c_c_Class_0);
-        final List<simpleuml2rdbms.uml.Class> UNBOXED_objectsOfKind_1 = objectsOfKind_1.asEcoreObjects(idResolver, simpleuml2rdbms.uml.Class.class);
-        assert UNBOXED_objectsOfKind_1 != null;
-        for (simpleuml2rdbms.uml.Class c_9 : UNBOXED_objectsOfKind_1) {
+        for (simpleuml2rdbms.uml.Class c_9 : ValueUtil.typedIterable(simpleuml2rdbms.uml.Class.class, objectsOfKind_1)) {
             if (c_9 != null) {
                 final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class symbol_9 = (simpleuml2rdbms.uml.Class)c_9;
                 @SuppressWarnings("null")
@@ -1720,9 +1714,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_2 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassToTable, models[2/*middle*/], TYP_uml2rdbms_c_c_ClassToTable_0);
-        final List<ClassToTable> UNBOXED_objectsOfKind_2 = objectsOfKind_2.asEcoreObjects(idResolver, ClassToTable.class);
-        assert UNBOXED_objectsOfKind_2 != null;
-        for (ClassToTable c2t_3 : UNBOXED_objectsOfKind_2) {
+        for (ClassToTable c2t_3 : ValueUtil.typedIterable(ClassToTable.class, objectsOfKind_2)) {
             if (c2t_3 != null) {
                 final @NonNull /*@NonInvalid*/ ClassToTable symbol_15 = (ClassToTable)c2t_3;
                 @SuppressWarnings("null")
@@ -1739,9 +1731,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_3 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Association, models[0/*uml*/], TYP_uml_c_c_Association_0);
-        final List<Association> UNBOXED_objectsOfKind_3 = objectsOfKind_3.asEcoreObjects(idResolver, Association.class);
-        assert UNBOXED_objectsOfKind_3 != null;
-        for (Association a_9 : UNBOXED_objectsOfKind_3) {
+        for (Association a_9 : ValueUtil.typedIterable(Association.class, objectsOfKind_3)) {
             if (a_9 != null) {
                 final @NonNull /*@NonInvalid*/ Association symbol_21 = (Association)a_9;
                 @SuppressWarnings("null")
@@ -1775,15 +1765,11 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_4 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_AssociationToForeignKey, models[2/*middle*/], TYP_uml2rdbms_c_c_AssociationToForeignKey_0);
-        final List<AssociationToForeignKey> UNBOXED_objectsOfKind_4 = objectsOfKind_4.asEcoreObjects(idResolver, AssociationToForeignKey.class);
-        assert UNBOXED_objectsOfKind_4 != null;
-        for (AssociationToForeignKey a2f_1 : UNBOXED_objectsOfKind_4) {
+        for (AssociationToForeignKey a2f_1 : ValueUtil.typedIterable(AssociationToForeignKey.class, objectsOfKind_4)) {
             if (a2f_1 != null) {
                 final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_rdbms_c_c_Key_0 = idResolver.getClass(CLSSid_Key, null);
                 final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_5 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Key, models[1/*rdbms*/], TYP_rdbms_c_c_Key_0);
-                final List<Key> UNBOXED_objectsOfKind_5 = objectsOfKind_5.asEcoreObjects(idResolver, Key.class);
-                assert UNBOXED_objectsOfKind_5 != null;
-                for (Key rk_1 : UNBOXED_objectsOfKind_5) {
+                for (Key rk_1 : ValueUtil.typedIterable(Key.class, objectsOfKind_5)) {
                     if (rk_1 != null) {
                         final @NonNull /*@NonInvalid*/ AssociationToForeignKey symbol_32 = (AssociationToForeignKey)a2f_1;
                         @SuppressWarnings("null")
@@ -1823,7 +1809,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        for (PrimitiveDataType prim_5 : UNBOXED_objectsOfKind_7) {
+        for (PrimitiveDataType prim_5 : ValueUtil.typedIterable(PrimitiveDataType.class, objectsOfKind_7)) {
             if (prim_5 != null) {
                 final @NonNull /*@NonInvalid*/ PrimitiveDataType symbol_46 = (PrimitiveDataType)prim_5;
                 @SuppressWarnings("null")
@@ -1838,7 +1824,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        for (PrimitiveDataType prim_6 : UNBOXED_objectsOfKind_7) {
+        for (PrimitiveDataType prim_6 : ValueUtil.typedIterable(PrimitiveDataType.class, objectsOfKind_7)) {
             if (prim_6 != null) {
                 final @NonNull /*@NonInvalid*/ PrimitiveDataType symbol_52 = (PrimitiveDataType)prim_6;
                 @SuppressWarnings("null")
@@ -1853,7 +1839,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        for (PrimitiveDataType prim_7 : UNBOXED_objectsOfKind_7) {
+        for (PrimitiveDataType prim_7 : ValueUtil.typedIterable(PrimitiveDataType.class, objectsOfKind_7)) {
             if (prim_7 != null) {
                 final @NonNull /*@NonInvalid*/ PrimitiveDataType symbol_58 = (PrimitiveDataType)prim_7;
                 @SuppressWarnings("null")
@@ -1868,7 +1854,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        for (Attribute a_10 : UNBOXED_select_0) {
+        for (Attribute a_10 : ValueUtil.typedIterable(Attribute.class, select_0)) {
             if (a_10 != null) {
                 final @NonNull /*@NonInvalid*/ Attribute symbol_62 = (Attribute)a_10;
                 @SuppressWarnings("null")
@@ -1892,9 +1878,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_10 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_IntegerToNumber, models[2/*middle*/], TYP_uml2rdbms_c_c_IntegerToNumber_0);
-        final List<IntegerToNumber> UNBOXED_objectsOfKind_10 = objectsOfKind_10.asEcoreObjects(idResolver, IntegerToNumber.class);
-        assert UNBOXED_objectsOfKind_10 != null;
-        for (IntegerToNumber p2n_11 : UNBOXED_objectsOfKind_10) {
+        for (IntegerToNumber p2n_11 : ValueUtil.typedIterable(IntegerToNumber.class, objectsOfKind_10)) {
             if (p2n_11 != null) {
                 final @NonNull /*@NonInvalid*/ IntegerToNumber symbol_70 = (IntegerToNumber)p2n_11;
                 @SuppressWarnings("null")
@@ -1907,9 +1891,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_11 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_BooleanToBoolean, models[2/*middle*/], TYP_uml2rdbms_c_c_BooleanToBoolean_0);
-        final List<BooleanToBoolean> UNBOXED_objectsOfKind_11 = objectsOfKind_11.asEcoreObjects(idResolver, BooleanToBoolean.class);
-        assert UNBOXED_objectsOfKind_11 != null;
-        for (BooleanToBoolean p2n_12 : UNBOXED_objectsOfKind_11) {
+        for (BooleanToBoolean p2n_12 : ValueUtil.typedIterable(BooleanToBoolean.class, objectsOfKind_11)) {
             if (p2n_12 != null) {
                 final @NonNull /*@NonInvalid*/ BooleanToBoolean symbol_75 = (BooleanToBoolean)p2n_12;
                 @SuppressWarnings("null")
@@ -1922,9 +1904,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_12 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_StringToVarchar, models[2/*middle*/], TYP_uml2rdbms_c_c_StringToVarchar_0);
-        final List<StringToVarchar> UNBOXED_objectsOfKind_12 = objectsOfKind_12.asEcoreObjects(idResolver, StringToVarchar.class);
-        assert UNBOXED_objectsOfKind_12 != null;
-        for (StringToVarchar p2n_13 : UNBOXED_objectsOfKind_12) {
+        for (StringToVarchar p2n_13 : ValueUtil.typedIterable(StringToVarchar.class, objectsOfKind_12)) {
             if (p2n_13 != null) {
                 final @NonNull /*@NonInvalid*/ StringToVarchar symbol_80 = (StringToVarchar)p2n_13;
                 @SuppressWarnings("null")
@@ -1936,7 +1916,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        for (Attribute a_11 : UNBOXED_objectsOfKind_13) {
+        for (Attribute a_11 : ValueUtil.typedIterable(Attribute.class, objectsOfKind_13)) {
             if (a_11 != null) {
                 final @NonNull /*@NonInvalid*/ Attribute symbol_85 = (Attribute)a_11;
                 @SuppressWarnings("null")
@@ -1956,11 +1936,9 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_14 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_NonLeafAttribute, models[2/*middle*/], TYP_uml2rdbms_c_c_NonLeafAttribute_0);
-        final List<NonLeafAttribute> UNBOXED_objectsOfKind_14 = objectsOfKind_14.asEcoreObjects(idResolver, NonLeafAttribute.class);
-        assert UNBOXED_objectsOfKind_14 != null;
-        for (NonLeafAttribute fao_7 : UNBOXED_objectsOfKind_14) {
+        for (NonLeafAttribute fao_7 : ValueUtil.typedIterable(NonLeafAttribute.class, objectsOfKind_14)) {
             if (fao_7 != null) {
-                for (Attribute a_12 : UNBOXED_objectsOfKind_13) {
+                for (Attribute a_12 : ValueUtil.typedIterable(Attribute.class, objectsOfKind_13)) {
                     if (a_12 != null) {
                         final @NonNull /*@NonInvalid*/ NonLeafAttribute symbol_96 = (NonLeafAttribute)fao_7;
                         final @NonNull /*@NonInvalid*/ Attribute symbol_93 = (Attribute)a_12;
@@ -1987,9 +1965,9 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 }
             }
         }
-        for (Attribute a_13 : UNBOXED_select_0) {
+        for (Attribute a_13 : ValueUtil.typedIterable(Attribute.class, select_0)) {
             if (a_13 != null) {
-                for (Attribute ca_3 : UNBOXED_objectsOfKind_13) {
+                for (Attribute ca_3 : ValueUtil.typedIterable(Attribute.class, objectsOfKind_13)) {
                     if (ca_3 != null) {
                         final @NonNull /*@NonInvalid*/ Attribute symbol_103 = (Attribute)a_13;
                         final @NonNull /*@NonInvalid*/ Attribute symbol_105 = (Attribute)ca_3;
@@ -2041,9 +2019,7 @@ public class SimpleUML2RDBMS extends AbstractTransformationExecutor
                 accumulator_0.add(_1_1);
             }
         }
-        final List<AttributeToColumn> UNBOXED_select_1 = select_1.asEcoreObjects(idResolver, AttributeToColumn.class);
-        assert UNBOXED_select_1 != null;
-        for (AttributeToColumn a2c_1 : UNBOXED_select_1) {
+        for (AttributeToColumn a2c_1 : ValueUtil.typedIterable(AttributeToColumn.class, select_1)) {
             if (a2c_1 != null) {
                 final @NonNull /*@NonInvalid*/ AttributeToColumn symbol_113 = (AttributeToColumn)a2c_1;
                 @SuppressWarnings("null")

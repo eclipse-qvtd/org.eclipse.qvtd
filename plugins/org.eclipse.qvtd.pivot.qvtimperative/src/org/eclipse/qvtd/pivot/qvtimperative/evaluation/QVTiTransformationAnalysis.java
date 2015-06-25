@@ -176,7 +176,10 @@ public class QVTiTransformationAnalysis
 		for (Map.Entry<Mapping, Set<Property>> entry : getMapping2Property().entrySet()) {
 			Mapping mapping = entry.getKey();
 			if (hazardousMappings.contains(mapping)) {
-				hazardousProperties.addAll(entry.getValue());
+				for (Property hazardousProperty : entry.getValue()) {
+					hazardousProperties.add(hazardousProperty);
+					hazardousProperties.add(hazardousProperty.getOpposite());
+				}
 			}
 		}
 		for (Set<PropertyAssignment> propertyAssignments : mapping2propertyAssignments.values()) {

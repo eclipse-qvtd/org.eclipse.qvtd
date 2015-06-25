@@ -13,8 +13,6 @@ package org.eclipse.qvtd.cs2as.compiler.tests;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -26,19 +24,17 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.CompleteEnvironment;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationEvaluator;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationEvaluator;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.Transformer;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
@@ -67,22 +63,14 @@ public class ExecutionBenchmarks extends LoadTestCase {
 			return new BasicQVTiExecutor(getEnvironmentFactory(), transformation);
 		}
 
-		public @NonNull TxEvaluator createEvaluator(Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
-			return new TxEvaluator(getCompleteEnvironment(), txConstructor);
+		public @NonNull TransformationExecutor createEvaluator(@NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
+			return new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 		}
 		@Override
 		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
 		}
 	}
-	
-	protected static class TxEvaluator extends AbstractTransformationEvaluator {
-		private TxEvaluator(@NonNull CompleteEnvironment environment, Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
-			super(environment, txConstructor);
-		}
-	}
-	
-
 	
 	@Before
 	public void setUp() throws Exception {
@@ -138,16 +126,13 @@ public class ExecutionBenchmarks extends LoadTestCase {
 			
 			URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 			
-			Class<? extends TransformationExecutor> txClass = classescs2as_qvtp_qvtias.class;
-			Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
-			
-			trackExample_CG(myQVT, txConstructor, baseURI, "model1", results);
-			trackExample_CG(myQVT, txConstructor, baseURI, "model2", results);
-			trackExample_CG(myQVT, txConstructor, baseURI, "model3", results);
-			trackExample_CG(myQVT, txConstructor, baseURI, "model4", results);
-			trackExample_CG(myQVT, txConstructor, baseURI, "model5", results);
-			trackExample_CG(myQVT, txConstructor, baseURI, "model6", results);
-			trackExample_CG(myQVT, txConstructor, baseURI, "model7", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model1", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model2", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model3", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model4", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model5", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model6", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model7", results);
 			
 			myQVT.dispose();
 			
@@ -185,11 +170,11 @@ public class ExecutionBenchmarks extends LoadTestCase {
 //	}
 	
 	
-	private void trackExample_CG(MyQVT qvt, Constructor<? extends TransformationExecutor> txConstructor, URI baseURI, String modelName,
+	private void trackExample_CG(MyQVT qvt, @NonNull Class<? extends Transformer> txClass, URI baseURI, String modelName,
 			Map<String, List<Integer>> results)  throws Exception  {
 		
 		long initStamp = System.currentTimeMillis();
-		executeModelsTX_CG(qvt, txConstructor, baseURI, modelName);
+		executeModelsTX_CG(qvt, txClass, baseURI, modelName);
 		long finalStamp = System.currentTimeMillis();
 		trackResults(results, modelName, initStamp, finalStamp);
 		System.out.println("Iteration on " +modelName+": " + (finalStamp - initStamp) + " ms");
@@ -247,10 +232,10 @@ public class ExecutionBenchmarks extends LoadTestCase {
 	//
 	// Execute the transformation with the interpreter
 	//
-	protected void executeModelsTX_CG(MyQVT qvt, Constructor<? extends TransformationExecutor> txConstructor, URI baseURI, String modelName) throws Exception {
+	protected void executeModelsTX_CG(MyQVT qvt, @NonNull Class<? extends Transformer> txClass, URI baseURI, String modelName) throws Exception {
 		
-		TransformationEvaluator evaluator = qvt.createEvaluator(txConstructor);
-		TransformationExecutor tx = evaluator.getTransformationExecutor();
+		TransformationExecutor evaluator = qvt.createEvaluator(txClass);
+		Transformer tx = evaluator.getTransformer();
 		URI samplesBaseUri = baseURI.appendSegment("samples");
     	URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
     	URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_CG.xmi", modelName));

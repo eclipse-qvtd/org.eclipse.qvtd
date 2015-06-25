@@ -8,13 +8,15 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.cs2as.runtime;
+package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
-import java.util.List;
-
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.Transformer;
 
-public interface CS2ASTransformation extends Transformer {
-
-	public List<EObjectDiagnostic> getErrors();
+public class QVTiTransformationExecutor extends AbstractTransformationExecutor
+{
+	public QVTiTransformationExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
+		super(environmentFactory, txClass);
+	}
 }

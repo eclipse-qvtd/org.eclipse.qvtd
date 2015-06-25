@@ -46,8 +46,8 @@ import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiBroker;
 import org.eclipse.qvtd.cs2as.runtime.QVTiTxHelper;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationEvaluator;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.Transformer;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -208,7 +208,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.LookupEnvironment",
 				"org.eclipse.qvtd.cs2as.compiler.tests.models.example1.java.TargetLookupVisitor", 
 				"example1.target.NamedElement", TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
-		Class<? extends TransformationExecutor> txClass = new CS2ASJavaCompilerImpl()
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
 			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
 		myQVT.dispose();
@@ -231,7 +231,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 				"org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor",
 				"example2.classes.NamedElement",
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
-		Class<? extends TransformationExecutor> txClass = new CS2ASJavaCompilerImpl()
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
 			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
 		
 		
@@ -332,11 +332,11 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	//
 	// Execute the transformation with the interpreter
 	//
-	protected void executeModelsTX_CG(QVTimperative qvt, Class<? extends TransformationExecutor> txClass, URI baseURI, String modelName) throws Exception {
+	protected void executeModelsTX_CG(QVTimperative qvt, Class<? extends Transformer> txClass, URI baseURI, String modelName) throws Exception {
 		
 		QVTiTxHelper txHelper = new QVTiTxHelper(qvt);
-		TransformationEvaluator evaluator = txHelper.createTxEvaluator(txClass);
-		TransformationExecutor tx = evaluator.getTransformationExecutor();
+		TransformationExecutor evaluator = txHelper.createTxEvaluator(txClass);
+		Transformer tx = evaluator.getTransformer();
 		URI samplesBaseUri = baseURI.appendSegment("samples");
     	URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
     	URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_CG.xmi", modelName));

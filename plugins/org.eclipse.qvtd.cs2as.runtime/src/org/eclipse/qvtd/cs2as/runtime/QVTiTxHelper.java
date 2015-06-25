@@ -10,13 +10,13 @@
  *******************************************************************************/
 package org.eclipse.qvtd.cs2as.runtime;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.Transformer;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
 public class QVTiTxHelper  {
@@ -36,9 +36,8 @@ public class QVTiTxHelper  {
 	}
 	
 	// FIXME why do we need this ?
-	public @NonNull QVTiTxEvaluator createTxEvaluator(Class<? extends TransformationExecutor> txClass)
-			throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-		return new QVTiTxEvaluator(getEnvironmentFactory().getCompleteEnvironment(), txClass);
+	public @NonNull TransformationExecutor createTxEvaluator(Class<? extends Transformer> txClass) throws ReflectiveOperationException {
+		return new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 	}	
 
 }

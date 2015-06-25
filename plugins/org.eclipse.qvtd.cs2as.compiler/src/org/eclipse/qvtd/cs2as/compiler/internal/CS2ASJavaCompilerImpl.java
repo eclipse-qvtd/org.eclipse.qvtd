@@ -63,7 +63,7 @@ import org.eclipse.qvtd.cs2as.compiler.internal.utilities.CS2ASCGModelResourceFa
 import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformation;
 import org.eclipse.qvtd.cs2as.runtime.CS2ASTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
@@ -159,7 +159,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			super.appendGuardFailure(cgGuardExp);
 		}
 
-		protected @NonNull Class<? extends AbstractTransformationExecutor> getAbstractTransformationExecutorClass() {
+		protected @NonNull Class<? extends AbstractTransformer> getAbstractTransformationExecutorClass() {
 			return CS2ASTransformationExecutor.class;
 		}
 

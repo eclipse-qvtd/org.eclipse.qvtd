@@ -76,7 +76,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -489,8 +489,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.append("}\n");
 	}
 
-	protected @NonNull Class<? extends AbstractTransformationExecutor> getAbstractTransformationExecutorClass() {
-		return AbstractTransformationExecutor.class;
+	protected @NonNull Class<? extends AbstractTransformer> getAbstractTransformationExecutorClass() {
+		return AbstractTransformer.class;
 	}
 
 	@Override
@@ -499,7 +499,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		for (String anImport : super.getAllImports()) {
 			allImports.add(anImport);
 			if (anImport.endsWith(".Model")) {
-				allImports.add(org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor.class.getName() + ".Model");
+				allImports.add(org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformer.class.getName() + ".Model");
 			}
 		}
 		return allImports;
@@ -558,8 +558,28 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		if (!js.appendLocalStatements(cgInit)) {
 			return false;
 		}
+		if (eStructuralFeature.isMany()) {
+			String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
+			//
+			js.appendValueName(cgSlot);
+			js.append(".");
+			js.append(getAccessor);
+			js.append("().addAll(");
+			js.appendValueName(cgInit);
+			js.append(");\n");
+		}
+		else {
+			String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
+			//
+			js.appendValueName(cgSlot);
+			js.append(".");
+			js.append(setAccessor);
+			js.append("(");
+			js.appendValueName(cgInit);
+			js.append(");\n");
+		}
 		if ((referredProperty != null) && transformationAnalysis.isHazardous(referredProperty)) {
-			js.append("objectManager.assign(");
+			js.append("objectManager.assigned(");
 			js.appendValueName(cgSlot);
 			js.append(", ");
 			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
@@ -568,28 +588,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.append(", ");
 			js.appendValueName(cgInit);
 			js.append(");\n");
-		}
-		else {
-			if (eStructuralFeature.isMany()) {
-				String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
-				//
-				js.appendValueName(cgSlot);
-				js.append(".");
-				js.append(getAccessor);
-				js.append("().addAll(");
-				js.appendValueName(cgInit);
-				js.append(");\n");
-			}
-			else {
-				String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
-					//
-				js.appendValueName(cgSlot);
-				js.append(".");
-				js.append(setAccessor);
-				js.append("(");
-				js.appendValueName(cgInit);
-				js.append(");\n");
-			}
 		}
 		return true;
 	}
@@ -609,8 +607,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			//
 			Boolean ecoreIsRequired = getCodeGenerator().isNonNull(asProperty);
 			boolean isRequired = cgPropertyCallExp.isNonNull();
-			boolean is_boolean = js.is_boolean(cgPropertyCallExp);
-			if (!is_boolean && isRequired && (ecoreIsRequired == Boolean.FALSE) && js.isUseNullAnnotations()) {
+			boolean isPrimitive = js.isPrimitive(cgPropertyCallExp);
+			if (!isPrimitive && isRequired && (ecoreIsRequired == Boolean.FALSE) && js.isUseNullAnnotations()) {
 				js.append("@SuppressWarnings(\"null\")\n");
 			}
 	//		js.append("/* " + ecoreIsRequired + " " + isRequired + " */\n");
@@ -1067,7 +1065,17 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.append(" ");
 		js.appendValueName(iterator);
 		js.append(" : ");
-		js.appendValueName(source);
+		if (source.isBoxed()) {
+			js.appendClassReference(ValueUtil.class);
+			js.append(".typedIterable(");
+			js.appendClassReference(iterator);
+			js.append(".class, ");
+			js.appendValueName(source);
+			js.append(")");
+		}
+		else {
+			js.appendValueName(source);
+		}
 		js.append(") {\n");
 		js.pushIndentation(null);
 		js.append("if (");

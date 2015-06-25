@@ -45,8 +45,8 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 
 	@Override
 	public Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgEcorePropertyAssignment) {
-		rewriteAsUnboxed(cgEcorePropertyAssignment.getSlotValue());
-		rewriteAsUnboxed(cgEcorePropertyAssignment.getInitValue());
+		rewriteAsEcore(cgEcorePropertyAssignment.getSlotValue(), cgEcorePropertyAssignment.getEStructuralFeature().getEContainingClass());
+		rewriteAsEcore(cgEcorePropertyAssignment.getInitValue(), cgEcorePropertyAssignment.getEStructuralFeature().getEType());
 		return visitCGPropertyAssignment(cgEcorePropertyAssignment);
 	}
 
@@ -112,7 +112,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	@Override
 	public Object visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
 		visitCGIterationCallExp(cgMappingLoop);
-		rewriteAsUnboxed(cgMappingLoop.getSource());
+//		rewriteAsUnboxed(cgMappingLoop.getSource());
 		return null;
 	}
 

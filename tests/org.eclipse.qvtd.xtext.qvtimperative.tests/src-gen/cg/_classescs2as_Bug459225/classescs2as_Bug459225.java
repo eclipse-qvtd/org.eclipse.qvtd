@@ -15,7 +15,6 @@ import classes.Package;
 import classescs.ClassescsPackage;
 import classescs.NamedElementCS;
 import classescs.PackageCS;
-import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
@@ -38,7 +37,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformer;
 
 /**
  * The classescs2as_Bug459225 transformation:
@@ -52,7 +51,7 @@ import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
  * Extract each output model with {@link getRootObjects(String)}
  */
 @SuppressWarnings("nls")
-public class classescs2as_Bug459225 extends AbstractTransformationExecutor
+public class classescs2as_Bug459225 extends AbstractTransformer
 {
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_ocldependencyanalysis_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://ocldependencyanalysis/classes/1.0", null, ClassesPackage.eINSTANCE);
@@ -176,25 +175,25 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         catch (Exception e) {
             CAUGHT_name = ValueUtil.createInvalidValue(e);
         }
-        final /*@NonInvalid*/ boolean symbol_2 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
-        final @Nullable /*@NonInvalid*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_2);
+        final /*@NonInvalid*/ boolean symbol_1 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
+        final @Nullable /*@NonInvalid*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_1);
         if (not == null) {
             throw new InvalidValueException("Null if condition");
         }
-        @Nullable /*@Thrown*/ String symbol_3;
+        @Nullable /*@Thrown*/ String symbol_2;
         if (not) {
             final @Nullable /*@Thrown*/ String computeName = this.computeName(packageCS);
-            symbol_3 = computeName;
+            symbol_2 = computeName;
         }
         else {
-            symbol_3 = STR_unnamed;
+            symbol_2 = STR_unnamed;
         }
         // creations
         final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
         assert symbol_0 != null;
         models[1/*rightAS*/].add(symbol_0);
         // property assignments
-        symbol_0.setName(symbol_3);
+        symbol_0.setName(symbol_2);
         return true;
     }
     
@@ -216,9 +215,7 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
         // mapping statements
         final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
-        final List<PackageCS> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, PackageCS.class);
-        assert UNBOXED_allInstances != null;
-        for (PackageCS packageCS_1 : UNBOXED_allInstances) {
+        for (PackageCS packageCS_1 : ValueUtil.typedIterable(PackageCS.class, allInstances)) {
             if (packageCS_1 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS symbol_1 = (PackageCS)packageCS_1;
                 if (symbol_1 != null) {

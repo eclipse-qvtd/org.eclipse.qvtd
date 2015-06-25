@@ -322,7 +322,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testTree2TallTreeIncremental() throws Exception {
     	MyQVT myQVT = createQVT();
-    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Tree2TallTree", "Tree2TallTree.qvti", QVTiIncrementalExecutor.Mode.INCREMENTAL);
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("tree", "Tree.xmi");
@@ -343,7 +343,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testTree2TallTreeLazy() throws Exception {
     	MyQVT myQVT = createQVT();
-    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Tree2TallTree", "Tree2TallTree.qvti", QVTiIncrementalExecutor.Mode.LAZY);
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("tree", "Tree.xmi");

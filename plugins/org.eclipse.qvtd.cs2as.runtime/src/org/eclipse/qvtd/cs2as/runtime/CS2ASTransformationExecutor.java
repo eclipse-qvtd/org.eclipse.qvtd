@@ -20,9 +20,9 @@ import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformer;
 
-public abstract class CS2ASTransformationExecutor extends AbstractTransformationExecutor
+public abstract class CS2ASTransformationExecutor extends AbstractTransformer
 	implements CS2ASTransformation
 {
 

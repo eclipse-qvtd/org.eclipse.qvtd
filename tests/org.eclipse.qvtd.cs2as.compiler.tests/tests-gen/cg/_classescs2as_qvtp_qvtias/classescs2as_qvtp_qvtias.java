@@ -316,21 +316,21 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         // variable assignments
         final /*@NonNull*/ /*@Thrown*/ example2.classes.Class oclAsType = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Class_0));
         final /*@NonNull*/ /*@Thrown*/ example2.classes.Class self_1 = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Class_0));
-        final /*@Nullable*/ /*@Thrown*/ PathNameCS symbol_1 = classCS_1.getExtends();
-        final /*@Thrown*/ boolean eq = symbol_1 == null;
-        /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_4;
+        final /*@Nullable*/ /*@Thrown*/ PathNameCS symbol_0 = classCS_1.getExtends();
+        final /*@Thrown*/ boolean eq = symbol_0 == null;
+        /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_3;
         if (eq) {
-            symbol_4 = null;
+            symbol_3 = null;
         }
         else {
-            if (symbol_1 == null) {
+            if (symbol_0 == null) {
                 throwNull(classCS_1, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
             }
-            final /*@NonNull*/ /*@Thrown*/ List<PathElementCS> pathSeq_0 = symbol_1.getPath();
+            final /*@NonNull*/ /*@Thrown*/ List<PathElementCS> pathSeq_0 = symbol_0.getPath();
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_pathSeq_0_3 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq_0);
             final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
             final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
-            /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_3;
+            /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_2;
             if (eq_0) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
                 LookupEnvironment _lookupEnv = new LookupEnvironment(executor,first);
@@ -342,7 +342,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
                 } else {
                     handleLookupError(classCS_1,first);
                 };
-                symbol_3 = _lookupClass;
+                symbol_2 = _lookupClass;
             }
             else {
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
@@ -360,12 +360,12 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
                 } else {
                     handleLookupError(classCS_1,last);
                 };
-                symbol_3 = _lookupClass_0;
+                symbol_2 = _lookupClass_0;
             }
-            symbol_4 = symbol_3;
+            symbol_3 = symbol_2;
         }
         // property assignments
-        oclAsType.setSuperClass(symbol_4);
+        oclAsType.setSuperClass(symbol_3);
         return true;
     }
     
@@ -454,9 +454,8 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         }
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
         // property assignments
-        final List<example2.classes.Class> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, example2.classes.Class.class);
-        assert UNBOXED_null != null;
-        oclAsType.getOwnedClasses().addAll(UNBOXED_null);
+        final /*@NonNull*/ /*@NonInvalid*/ List<example2.classes.Class> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(example2.classes.Class.class, asOrderedSet);
+        oclAsType.getOwnedClasses().addAll(ECORE_asOrderedSet);
         return true;
     }
     
@@ -512,9 +511,8 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         }
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
         // property assignments
-        final List<Package> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, Package.class);
-        assert UNBOXED_null != null;
-        oclAsType.getOwnedPackages().addAll(UNBOXED_null);
+        final /*@NonNull*/ /*@NonInvalid*/ List<Package> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, asOrderedSet);
+        oclAsType.getOwnedPackages().addAll(ECORE_asOrderedSet);
         return true;
     }
     
@@ -571,9 +569,8 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         }
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
         // property assignments
-        final List<Package> UNBOXED_null = asOrderedSet.asEcoreObjects(idResolver, Package.class);
-        assert UNBOXED_null != null;
-        oclAsType.getOwnedPackages().addAll(UNBOXED_null);
+        final /*@NonNull*/ /*@NonInvalid*/ List<Package> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, asOrderedSet);
+        oclAsType.getOwnedPackages().addAll(ECORE_asOrderedSet);
         return true;
     }
     
@@ -638,62 +635,56 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_2);
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_2 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_3);
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1);
-        final List<ClassCS> UNBOXED_allInstances_6 = allInstances_6.asEcoreObjects(idResolver, ClassCS.class);
-        assert UNBOXED_allInstances_6 != null;
-        final List<PackageCS> UNBOXED_allInstances_2 = allInstances_2.asEcoreObjects(idResolver, PackageCS.class);
-        assert UNBOXED_allInstances_2 != null;
-        final List<RootCS> UNBOXED_allInstances_1 = allInstances_1.asEcoreObjects(idResolver, RootCS.class);
-        assert UNBOXED_allInstances_1 != null;
         // mapping statements
-        for (RootCS rootCS_3 : UNBOXED_allInstances_1) {
+        for (RootCS rootCS_3 : ValueUtil.typedIterable(RootCS.class, allInstances_1)) {
             if (rootCS_3 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ RootCS symbol_1 = (RootCS)rootCS_3;
                 MAP_cRootCS_2_Root(symbol_1);
             }
         }
-        for (PackageCS packageCS_7 : UNBOXED_allInstances_2) {
+        for (PackageCS packageCS_7 : ValueUtil.typedIterable(PackageCS.class, allInstances_2)) {
             if (packageCS_7 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_5 = (PackageCS)packageCS_7;
                 MAP_cPackageCS_2_Package(symbol_5);
             }
         }
-        for (RootCS rootCS_4 : UNBOXED_allInstances_1) {
+        for (RootCS rootCS_4 : ValueUtil.typedIterable(RootCS.class, allInstances_1)) {
             if (rootCS_4 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ RootCS symbol_9 = (RootCS)rootCS_4;
                 MAP_uRoot_ownedPackages(symbol_9);
             }
         }
-        for (PackageCS packageCS_8 : UNBOXED_allInstances_2) {
+        for (PackageCS packageCS_8 : ValueUtil.typedIterable(PackageCS.class, allInstances_2)) {
             if (packageCS_8 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_13 = (PackageCS)packageCS_8;
                 MAP_uPackage_name(symbol_13);
             }
         }
-        for (ClassCS classCS_5 : UNBOXED_allInstances_6) {
+        for (ClassCS classCS_5 : ValueUtil.typedIterable(ClassCS.class, allInstances_6)) {
             if (classCS_5 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_17 = (ClassCS)classCS_5;
                 MAP_cClassCS_2_Class(symbol_17);
             }
         }
-        for (PackageCS packageCS_9 : UNBOXED_allInstances_2) {
+        for (PackageCS packageCS_9 : ValueUtil.typedIterable(PackageCS.class, allInstances_2)) {
             if (packageCS_9 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_21 = (PackageCS)packageCS_9;
                 MAP_uPackage_ownedClasses(symbol_21);
             }
         }
-        for (PackageCS packageCS_10 : UNBOXED_allInstances_2) {
+        for (PackageCS packageCS_10 : ValueUtil.typedIterable(PackageCS.class, allInstances_2)) {
             if (packageCS_10 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_25 = (PackageCS)packageCS_10;
                 MAP_uPackage_ownedPackages(symbol_25);
             }
         }
-        for (ClassCS classCS_6 : UNBOXED_allInstances_6) {
+        for (ClassCS classCS_6 : ValueUtil.typedIterable(ClassCS.class, allInstances_6)) {
             if (classCS_6 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_29 = (ClassCS)classCS_6;
                 MAP_uClass_name(symbol_29);
             }
         }
-        for (ClassCS classCS_7 : UNBOXED_allInstances_6) {
+        for (ClassCS classCS_7 : ValueUtil.typedIterable(ClassCS.class, allInstances_6)) {
             if (classCS_7 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_33 = (ClassCS)classCS_7;
                 MAP_uClass_superClass(symbol_33);
