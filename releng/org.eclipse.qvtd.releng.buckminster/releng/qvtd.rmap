@@ -10,26 +10,21 @@
   <rm:property key="resolve.target.platform" value="false"/>
   <rm:property key="build.type" value="I"/>
   <rm:property key="build.type" mutable="false" value="I"/>
-  <rm:property key="ocl.tools.last.p2.repository.location" value="https://hudson.eclipse.org/ocl/job/ocl-mars-master/lastSuccessfulBuild/artifact/MDT-OCL.p2.repository/"/>
+  <rm:property key="ocl.tools.last.p2.repository.location" value="https://hudson.eclipse.org/ocl/job/ocl-neon-master/lastSuccessfulBuild/artifact/MDT-OCL.p2.repository/"/>
   <rm:locator pattern="^org\.eclipse\.qvt$" searchPathRef="qvtd-source-code"/>
   <rm:locator pattern="^org\.eclipse\.qvtd.*$" searchPathRef="qvtd-source-code"/>
   <rm:locator pattern="^org\.eclipse\.emf\.mwe.*" searchPathRef="mwe"/>
   <rm:locator pattern="^org\.eclipse\.emf\.validation.*" searchPathRef="emf-validation"/>
   <rm:locator pattern="^org\.eclipse\.license.*" searchPathRef="license-source-code"/>
-  <!--rm:locator pattern="^org\.eclipse\.ocl\.examples\.uml25.*" searchPathRef="ocl-examples-source-code"/-->
-  <!--rm:locator pattern="^org\.eclipse\.ocl\.examples\.xtext\.tests.*" searchPathRef="ocl-tests-source-code"/-->
   <rm:locator pattern="^org\.eclipse\.ocl.*" searchPathRef="ocl"/>
   <rm:locator pattern="^org\.eclipse\.xpand.*" searchPathRef="xpand"/>
   <rm:locator pattern="^org\.eclipse\.xtend.lib.*" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.eclipse\.xtend.*" searchPathRef="xpand"/>
   <rm:locator pattern="^org\.eclipse\.xtext.*" searchPathRef="xtext"/>
   <rm:locator pattern="^com\.google.(inject|guava)$" searchPathRef="xtext"/>
-  <!--rm:locator pattern="^org\.antlr\.runtime$" searchPathRef="xtext"/-->
-  <!--rm:locator pattern="^org\.antlr\.runtime_3\.1.*" searchPathRef="epsilon"/-->
   <rm:locator pattern="^org\.eclipse\.draw2d$" searchPathRef="gef"/>
   <rm:locator pattern="^org\.eclipse\.emf.*" searchPathRef="emf"/>
   <rm:locator pattern="^org\.eclipse\.xsd.*" searchPathRef="emf"/>
-  <!--rm:locator pattern="^org\.eclipse\.epsilon.*" searchPathRef="epsilon"/-->
   <rm:locator pattern="^org\.eclipse\.uml2.*" searchPathRef="uml"/>
   <rm:locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse-tests-source-code"/>
   <rm:locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse-tests-source-code"/>
@@ -45,15 +40,6 @@
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
-  <!--rm:searchPath name="license">
-    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="p2" source="false" mutable="false">
-      <rm:property key="buckminster.source" value="false"/>
-      <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/cbi/updates/license">
-        <bc:propertyRef key="eclipse.download"/>
-      </rm:uri> 
-    </rm:provider>
-  </rm:searchPath-->
   <rm:searchPath name="qvtd-source-code">
     <rm:provider componentTypes="buckminster,eclipse.feature" readerType="local" mutable="false">
       <rm:property key="buckminster.mutable" value="false"/>
@@ -122,26 +108,6 @@
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
-  <!--rm:searchPath name="ocl-examples-source-code">
-    <rm:provider componentTypes="osgi.bundle" readerType="git">
-      <rm:property key="git.remote.uri" value="/gitroot/ocl/org.eclipse.ocl.git"/>
-      <rm:property key="git.auto.fetch" value="true"/>
-      <rm:uri format="{0},examples/{1}">
-        <bc:propertyRef key="git.ocl.local.repository.location"/>
-        <bc:propertyRef key="buckminster.component"/>
-      </rm:uri>
-    </rm:provider>
-  </rm:searchPath-->
-  <!--rm:searchPath name="ocl-tests-source-code">
-    <rm:provider componentTypes="osgi.bundle" readerType="git">
-      <rm:property key="git.remote.uri" value="/gitroot/ocl/org.eclipse.ocl.git"/>
-      <rm:property key="git.auto.fetch" value="true"/>
-      <rm:uri format="{0},tests/{1}">
-        <bc:propertyRef key="git.ocl.local.repository.location"/>
-        <bc:propertyRef key="buckminster.component"/>
-      </rm:uri>
-    </rm:provider>
-  </rm:searchPath-->
   <rm:searchPath name="ocl">
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="(&amp;(resolve.target.platform=true)(build.type=N))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
@@ -303,7 +269,7 @@
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=M)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/modeling/emf/emf/updates/2.10.x">
+      <rm:uri format="{0}/modeling/emf/emf/updates/2.11">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
@@ -333,7 +299,7 @@
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=M)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/modeling/mdt/uml2/updates/5.0">
+      <rm:uri format="{0}/modeling/mdt/uml2/updates/5.1">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
@@ -356,34 +322,18 @@
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=M)(build.type=N)(build.type=R)(build.type=S)))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/eclipse/updates/4.5">
+      <rm:uri format="{0}/eclipse/updates/4.6">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=M)(build.type=N)(build.type=R)(build.type=S)))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/eclipse/updates/4.4">
+      <rm:uri format="{0}/eclipse/updates/4.5">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
-  <!--rm:searchPath name="epsilon">
-    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
-      <rm:property key="buckminster.source" value="false"/>
-      <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/epsilon/1.3_RC2/">
-        <bc:propertyRef key="eclipse.download"/>
-      </rm:uri>
-    </rm:provider>
-    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
-      <rm:property key="buckminster.source" value="false"/>
-      <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/epsilon/updates/">
-        <bc:propertyRef key="eclipse.download"/>
-      </rm:uri>
-    </rm:provider>
-  </rm:searchPath-->
   <rm:searchPath name="orbit">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>

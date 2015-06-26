@@ -13,11 +13,11 @@ ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.reposit
 
 (This can be checked by installing new software from e.g. http://download.eclipse.org/mmt/qvtd/updates/milestones/0.13.0)
 
-The Mars aggregator is configured by GIT\org.eclipse.simrel.build\qvtd.b3aggrcon to use an explicit milestone entry
+The Neon aggregator is configured by GIT\org.eclipse.simrel.build\qvtd.b3aggrcon to use an explicit milestone entry
 
 So edit qvtd.b3aggrcon to update 
 location="http://download.eclipse.org/mmt/qvtd/updates/milestones/0.13.0/S201408191819"
-push to upstream master and start a new build at https://hudson.eclipse.org/hudson/job/simrel.mars.runaggregator/
+push to upstream master and start a new build at https://hudson.eclipse.org/hudson/job/simrel.neon.runaggregator/
 
 Once a release has been promoted update qvtd.b3aggrcon to the final release
 location="http://download.eclipse.org/mmt/qvtd/updates/releases/0.13.0"
