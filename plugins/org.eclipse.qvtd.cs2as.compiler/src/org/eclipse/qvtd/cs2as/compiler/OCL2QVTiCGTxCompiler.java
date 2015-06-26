@@ -16,9 +16,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASTransformer;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
@@ -34,13 +34,13 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 	}
 		
 	@Override
-	public Class<? extends CS2ASTransformer> compileTransformation(@NonNull URI oclDocURI, @NonNull CS2ASJavaCompilerParameters params, @Nullable ResourceSet rSet) throws Exception {
+	public Class<? extends Transformer> compileTransformation(@NonNull URI oclDocURI, @NonNull CS2ASJavaCompilerParameters params, @Nullable ResourceSet rSet) throws Exception {
 		
 		return this.compileTransformation(oclDocURI, params, rSet, "ast");
 	}
 	
 	@Override
-	public Class<? extends CS2ASTransformer> compileTransformation(@NonNull URI oclDocURI, @NonNull CS2ASJavaCompilerParameters params, @Nullable ResourceSet rSet, @NonNull String tracePropertyName) throws Exception {
+	public Class<? extends Transformer> compileTransformation(@NonNull URI oclDocURI, @NonNull CS2ASJavaCompilerParameters params, @Nullable ResourceSet rSet, @NonNull String tracePropertyName) throws Exception {
 		
 		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, rSet);
 		try {
