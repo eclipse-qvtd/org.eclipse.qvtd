@@ -11,8 +11,8 @@
 package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.evaluation.tx.TransformationInstance;
 import org.eclipse.ocl.pivot.labels.AbstractLabelGenerator;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationInstance;
 
 public final class TransformationInstanceLabelGenerator extends AbstractLabelGenerator<TransformationInstance>
 {

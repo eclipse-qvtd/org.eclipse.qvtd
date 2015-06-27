@@ -11,9 +11,9 @@
 package org.eclipse.qvtd.cs2as.runtime;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.evaluation.tx.TransformationExecutor;
+import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.Transformer;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;

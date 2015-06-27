@@ -17,10 +17,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.PropertyId;
-
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformer;
 
 public abstract class CS2ASTransformationExecutor extends AbstractTransformer
 	implements CS2ASTransformation

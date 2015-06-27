@@ -12,7 +12,7 @@ package org.eclipse.qvtd.cs2as.runtime;
 
 import java.util.List;
 
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.Transformer;
+import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 
 public interface CS2ASTransformation extends Transformer {
 

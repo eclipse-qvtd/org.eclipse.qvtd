@@ -11,8 +11,8 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.Transformer;
+import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformationExecutor;
+import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 
 public class QVTiTransformationExecutor extends AbstractTransformationExecutor
 {
