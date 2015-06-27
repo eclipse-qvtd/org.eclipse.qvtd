@@ -116,10 +116,12 @@ public class AbstractClassesLookupVisitor
     public @Nullable /*@NonInvalid*/ Environment visitPackage(final @NonNull /*@NonInvalid*/ Package element_0) {
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<Class> ownedClasses = element_0.getOwnedClasses();
-        final @NonNull /*@Thrown*/ Environment addElements = context.addElements((EList)ownedClasses);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Environment addElements = context.addElements((EList<Class>)ownedClasses);
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<Package> ownedPackages = element_0.getOwnedPackages();
-        final @NonNull /*@Thrown*/ Environment inner = addElements.addElements((EList)ownedPackages);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Environment inner = addElements.addElements((EList<Package>)ownedPackages);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
         @Nullable /*@Thrown*/ Environment symbol_0;
         if (hasFinalResult) {
@@ -148,7 +150,8 @@ public class AbstractClassesLookupVisitor
     public @Nullable /*@NonInvalid*/ Environment visitRoot(final @NonNull /*@NonInvalid*/ Root element_1) {
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<Package> ownedPackages = element_1.getOwnedPackages();
-        final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedPackages);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList<Package>)ownedPackages);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
         @Nullable /*@Thrown*/ Environment symbol_0;
         if (hasFinalResult) {

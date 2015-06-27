@@ -170,7 +170,6 @@ public class EnvironmentTables
 			Fragments.init();
 		}
 
-		public static final @NonNull ParameterTypes _ = TypeUtil.createParameterTypes();
 		public static final @NonNull ParameterTypes _NamedElement = TypeUtil.createParameterTypes(TargetTables.Types._NamedElement);
 		public static final @NonNull ParameterTypes _OrderedSet__Environment_addElements_NE__ = TypeUtil.createParameterTypes(new ExecutorSpecializedType("OrderedSet", EnvironmentTables.TypeParameters.__Environment__addElements_NE));
 
@@ -193,9 +192,9 @@ public class EnvironmentTables
 			Parameters.init();
 		}
 
-		public static final @NonNull ExecutorOperation _Env4CG__getExecutor = new ExecutorOperation("getExecutor", Parameters._, Types._Env4CG,
+		public static final @NonNull ExecutorOperation _Env4CG__getExecutor = new ExecutorOperation("getExecutor", TypeUtil.EMPTY_PARAMETER_TYPES, Types._Env4CG,
 			0, TemplateParameters.EMPTY_LIST, null);
-		public static final @NonNull ExecutorOperation _Env4CG__hasFinalResult = new ExecutorOperation("hasFinalResult", Parameters._, Types._Env4CG,
+		public static final @NonNull ExecutorOperation _Env4CG__hasFinalResult = new ExecutorOperation("hasFinalResult", TypeUtil.EMPTY_PARAMETER_TYPES, Types._Env4CG,
 			1, TemplateParameters.EMPTY_LIST, null);
 
 		public static final @NonNull ExecutorOperation _Environment__addElement = new ExecutorOperation("addElement", Parameters._NamedElement, Types._Environment,

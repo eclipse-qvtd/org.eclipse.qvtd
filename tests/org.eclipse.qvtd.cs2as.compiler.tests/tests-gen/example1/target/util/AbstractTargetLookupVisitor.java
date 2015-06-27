@@ -137,7 +137,8 @@ public class AbstractTargetLookupVisitor
         final /*@Thrown*/ boolean eq = child == null;
         @Nullable /*@Thrown*/ Environment symbol_2;
         if (eq) {
-            final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedBs);
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList<B>)ownedBs);
             final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
             @Nullable /*@Thrown*/ Environment symbol_0;
             if (hasFinalResult) {
@@ -171,9 +172,9 @@ public class AbstractTargetLookupVisitor
                     accumulator.add(x);
                 }
             }
-            final List<B> UNBOXED_select = select.asEcoreObjects(idResolver, B.class);
-            assert UNBOXED_select != null;
-            final @NonNull /*@Thrown*/ Environment inner_0 = context.addElements((EList)UNBOXED_select);
+            final @NonNull /*@Thrown*/ List<B> ECORE_select = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(B.class, select);
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ Environment inner_0 = context.addElements((EList<B>)ECORE_select);
             final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
             @Nullable /*@Thrown*/ Environment symbol_1;
             if (hasFinalResult_0) {
@@ -222,7 +223,8 @@ public class AbstractTargetLookupVisitor
         final /*@Thrown*/ boolean eq = child == null;
         @Nullable /*@Thrown*/ Environment symbol_2;
         if (eq) {
-            final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedCs);
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList<C>)ownedCs);
             final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
             @Nullable /*@Thrown*/ Environment symbol_0;
             if (hasFinalResult) {
@@ -256,9 +258,9 @@ public class AbstractTargetLookupVisitor
                     accumulator.add(x);
                 }
             }
-            final List<C> UNBOXED_select = select.asEcoreObjects(idResolver, C.class);
-            assert UNBOXED_select != null;
-            final @NonNull /*@Thrown*/ Environment inner_0 = context.addElements((EList)UNBOXED_select);
+            final @NonNull /*@Thrown*/ List<C> ECORE_select = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(C.class, select);
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ Environment inner_0 = context.addElements((EList<C>)ECORE_select);
             final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
             @Nullable /*@Thrown*/ Environment symbol_1;
             if (hasFinalResult_0) {
@@ -321,7 +323,8 @@ public class AbstractTargetLookupVisitor
     public @Nullable /*@NonInvalid*/ Environment visitTRoot(final @NonNull /*@NonInvalid*/ TRoot element_4) {
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<A> ownedA = element_4.getOwnedA();
-        final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedA);
+        @SuppressWarnings("null")
+        final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList<A>)ownedA);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
         @Nullable /*@Thrown*/ Environment symbol_0;
         if (hasFinalResult) {
