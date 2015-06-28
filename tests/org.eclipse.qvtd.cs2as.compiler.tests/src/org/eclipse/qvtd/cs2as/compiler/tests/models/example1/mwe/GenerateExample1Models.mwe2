@@ -18,11 +18,6 @@ import org.eclipse.emf.ecore.resource.impl.*
 var projectName = "org.eclipse.qvtd.cs2as.compiler.tests"
 var examplesFolder = "src/org/eclipse/qvtd/cs2as/compiler/tests/models/example1"
 
-/**
- *	Generate the Pivot Model, by performing the merge to create the flattened package
- *  with additional MDT/OCL content, alphabeticsing the classes, reloading the genmodel
- *  and finally generating the model code.
- */
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
     bean = ProjectMapSetup{ resourceSet = resourceSet}

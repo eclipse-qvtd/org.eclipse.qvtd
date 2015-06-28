@@ -299,11 +299,11 @@ operation OCL!ShadowExp updateGuardPattern(guardPattern : QVTi!GuardPattern, lef
 
 operation OCL!OCLExpression createNegatedExpression() : OCL!OCLExpression {
 	var negatedExpression;
+	var eUtil = emfTool.getEcoreUtil();
 	// We don't want to create a 'not not conditionExp'
 	if (self.isBooleanNotOpCallExp()) {
 		negatedExpression = eUtil.copy(self.ownedSource);
 	} else {
-		var eUtil = emfTool.getEcoreUtil();
 		negatedExpression = new OCL!OperationCallExp;
 		negatedExpression.name = 'not';
 		negatedExpression.referredOperation = getBooleanNotOp();
