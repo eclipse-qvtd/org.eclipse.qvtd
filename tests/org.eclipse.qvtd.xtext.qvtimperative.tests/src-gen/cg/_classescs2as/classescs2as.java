@@ -615,45 +615,45 @@ public class classescs2as extends AbstractTransformer
         // mapping statements
         for (PackageCS packageCS_5 : ValueUtil.typedIterable(PackageCS.class, allInstances)) {
             if (packageCS_5 != null) {
-                final @NonNull /*@NonInvalid*/ PackageCS symbol_7 = (PackageCS)packageCS_5;
-                if (symbol_7 != null) {
-                    MAP_mPackageCS2Package_LM(symbol_7);
+                final @NonNull /*@NonInvalid*/ PackageCS symbol_6 = (PackageCS)packageCS_5;
+                if (symbol_6 != null) {
+                    MAP_mPackageCS2Package_LM(symbol_6);
                 }
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue allInstances_0 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS2Package, TYP_classescstraces_c_c_PackageCS2Package_0);
         for (PackageCS2Package p2p_1 : ValueUtil.typedIterable(PackageCS2Package.class, allInstances_0)) {
             if (p2p_1 != null) {
-                final @NonNull /*@NonInvalid*/ PackageCS2Package symbol_11 = (PackageCS2Package)p2p_1;
-                if (symbol_11 != null) {
-                    MAP_mPackageCS2Package_MR(symbol_11);
+                final @NonNull /*@NonInvalid*/ PackageCS2Package symbol_9 = (PackageCS2Package)p2p_1;
+                if (symbol_9 != null) {
+                    MAP_mPackageCS2Package_MR(symbol_9);
                 }
             }
         }
-        for (Package symbol_21 : ValueUtil.typedIterable(Package.class, allInstances_3)) {
-            if (symbol_21 != null) {
+        for (Package symbol_17 : ValueUtil.typedIterable(Package.class, allInstances_3)) {
+            if (symbol_17 != null) {
                 for (PackageCS packageCS_6 : ValueUtil.typedIterable(PackageCS.class, allInstances)) {
                     if (packageCS_6 != null) {
-                        final @NonNull /*@NonInvalid*/ Package symbol_16 = (Package)symbol_21;
-                        final @NonNull /*@NonInvalid*/ PackageCS symbol_17 = (PackageCS)packageCS_6;
-                        if (symbol_16 != null) {
-                            if (symbol_17 != null) {
-                                MAP_uPackage_name(symbol_16, symbol_17);
+                        final @NonNull /*@NonInvalid*/ Package symbol_12 = (Package)symbol_17;
+                        final @NonNull /*@NonInvalid*/ PackageCS symbol_13 = (PackageCS)packageCS_6;
+                        if (symbol_12 != null) {
+                            if (symbol_13 != null) {
+                                MAP_uPackage_name(symbol_12, symbol_13);
                             }
                         }
                     }
                 }
             }
         }
-        for (Package symbol_29 : ValueUtil.typedIterable(Package.class, allInstances_3)) {
-            if (symbol_29 != null) {
+        for (Package symbol_23 : ValueUtil.typedIterable(Package.class, allInstances_3)) {
+            if (symbol_23 != null) {
                 for (PackageCS packageCS_7 : ValueUtil.typedIterable(PackageCS.class, allInstances)) {
                     if (packageCS_7 != null) {
-                        final @NonNull /*@NonInvalid*/ Package symbol_24 = (Package)symbol_29;
-                        final @NonNull /*@NonInvalid*/ PackageCS symbol_25 = (PackageCS)packageCS_7;
-                        if (symbol_24 != null) {
-                            if (symbol_25 != null) {
-                                MAP_uPackage_ownedClasses(symbol_24, symbol_25);
+                        final @NonNull /*@NonInvalid*/ Package symbol_18 = (Package)symbol_23;
+                        final @NonNull /*@NonInvalid*/ PackageCS symbol_19 = (PackageCS)packageCS_7;
+                        if (symbol_18 != null) {
+                            if (symbol_19 != null) {
+                                MAP_uPackage_ownedClasses(symbol_18, symbol_19);
                             }
                         }
                     }
@@ -662,18 +662,18 @@ public class classescs2as extends AbstractTransformer
         }
         for (ClassCS classCS_3 : ValueUtil.typedIterable(ClassCS.class, allInstances_7)) {
             if (classCS_3 != null) {
-                final @NonNull /*@NonInvalid*/ ClassCS symbol_31 = (ClassCS)classCS_3;
-                if (symbol_31 != null) {
-                    MAP_mClassCS2Class_LM(symbol_31);
+                final @NonNull /*@NonInvalid*/ ClassCS symbol_24 = (ClassCS)classCS_3;
+                if (symbol_24 != null) {
+                    MAP_mClassCS2Class_LM(symbol_24);
                 }
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS2Class, TYP_classescstraces_c_c_ClassCS2Class_0);
         for (ClassCS2Class c2c_1 : ValueUtil.typedIterable(ClassCS2Class.class, allInstances_6)) {
             if (c2c_1 != null) {
-                final @NonNull /*@NonInvalid*/ ClassCS2Class symbol_35 = (ClassCS2Class)c2c_1;
-                if (symbol_35 != null) {
-                    MAP_mClassCS2Class_MR(symbol_35);
+                final @NonNull /*@NonInvalid*/ ClassCS2Class symbol_27 = (ClassCS2Class)c2c_1;
+                if (symbol_27 != null) {
+                    MAP_mClassCS2Class_MR(symbol_27);
                 }
             }
         }
@@ -681,13 +681,13 @@ public class classescs2as extends AbstractTransformer
             if (classCS_4 != null) {
                 final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
                 final @NonNull /*@NonInvalid*/ SetValue allInstances_8 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, TYP_classes_c_c_Class_0);
-                for (classes.Class symbol_44 : ValueUtil.typedIterable(classes.Class.class, allInstances_8)) {
-                    if (symbol_44 != null) {
-                        final @NonNull /*@NonInvalid*/ classes.Class symbol_40 = (classes.Class)symbol_44;
-                        final @NonNull /*@NonInvalid*/ ClassCS symbol_41 = (ClassCS)classCS_4;
-                        if (symbol_40 != null) {
-                            if (symbol_41 != null) {
-                                MAP_uClass_name(symbol_40, symbol_41);
+                for (classes.Class symbol_34 : ValueUtil.typedIterable(classes.Class.class, allInstances_8)) {
+                    if (symbol_34 != null) {
+                        final @NonNull /*@NonInvalid*/ classes.Class symbol_30 = (classes.Class)symbol_34;
+                        final @NonNull /*@NonInvalid*/ ClassCS symbol_31 = (ClassCS)classCS_4;
+                        if (symbol_30 != null) {
+                            if (symbol_31 != null) {
+                                MAP_uClass_name(symbol_30, symbol_31);
                             }
                         }
                     }
@@ -696,18 +696,18 @@ public class classescs2as extends AbstractTransformer
         }
         for (RootCS rootCS_3 : ValueUtil.typedIterable(RootCS.class, allInstances_11)) {
             if (rootCS_3 != null) {
-                final @NonNull /*@NonInvalid*/ RootCS symbol_47 = (RootCS)rootCS_3;
-                if (symbol_47 != null) {
-                    MAP_mRootCS2Root_LM(symbol_47);
+                final @NonNull /*@NonInvalid*/ RootCS symbol_36 = (RootCS)rootCS_3;
+                if (symbol_36 != null) {
+                    MAP_mRootCS2Root_LM(symbol_36);
                 }
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue allInstances_10 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS2Root, TYP_classescstraces_c_c_RootCS2Root_0);
         for (RootCS2Root r2r_1 : ValueUtil.typedIterable(RootCS2Root.class, allInstances_10)) {
             if (r2r_1 != null) {
-                final @NonNull /*@NonInvalid*/ RootCS2Root symbol_51 = (RootCS2Root)r2r_1;
-                if (symbol_51 != null) {
-                    MAP_mRootCS2Root_MR(symbol_51);
+                final @NonNull /*@NonInvalid*/ RootCS2Root symbol_39 = (RootCS2Root)r2r_1;
+                if (symbol_39 != null) {
+                    MAP_mRootCS2Root_MR(symbol_39);
                 }
             }
         }
@@ -717,11 +717,11 @@ public class classescs2as extends AbstractTransformer
                 final @NonNull /*@NonInvalid*/ SetValue allInstances_12 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Root, TYP_classes_c_c_Root_0);
                 for (Root root_1 : ValueUtil.typedIterable(Root.class, allInstances_12)) {
                     if (root_1 != null) {
-                        final @NonNull /*@NonInvalid*/ Root symbol_56 = (Root)root_1;
-                        final @NonNull /*@NonInvalid*/ RootCS symbol_57 = (RootCS)rootCS_4;
-                        if (symbol_56 != null) {
-                            if (symbol_57 != null) {
-                                MAP_uRoot_ownedPackages(symbol_56, symbol_57);
+                        final @NonNull /*@NonInvalid*/ Root symbol_42 = (Root)root_1;
+                        final @NonNull /*@NonInvalid*/ RootCS symbol_43 = (RootCS)rootCS_4;
+                        if (symbol_42 != null) {
+                            if (symbol_43 != null) {
+                                MAP_uRoot_ownedPackages(symbol_42, symbol_43);
                             }
                         }
                     }

@@ -41,11 +41,4 @@ public abstract class MappingStatementImpl extends OCLExpressionImpl implements 
 	protected EClass eStaticClass() {
 		return QVTimperativePackage.Literals.MAPPING_STATEMENT;
 	}
-
-
-	@Override
-	public boolean mayHaveNullType() {		// FIXME Use *.ocl
-		return true;
-	}
-
 } //MappingStatementImpl

@@ -1351,7 +1351,7 @@
           </mappingStatements>
         </mappingStatement>
       </rule>
-      <ownedContext name="this"/>
+      <ownedContext name="this" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Transformation"/>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">

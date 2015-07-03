@@ -131,9 +131,9 @@ public class hsv2hls extends AbstractTransformer
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_HSVNode, models[0/*hsv*/], TYP_HSVTree_c_c_HSVNode_0);
         for (HSVNode hsvRoot_1 : ValueUtil.typedIterable(HSVNode.class, objectsOfKind)) {
             if (hsvRoot_1 != null) {
-                final @NonNull /*@NonInvalid*/ HSVNode symbol_1 = (HSVNode)hsvRoot_1;
-                if (symbol_1 != null) {
-                    MAP_HSV2MiddleRoot(symbol_1);
+                final @NonNull /*@NonInvalid*/ HSVNode symbol_0 = (HSVNode)hsvRoot_1;
+                if (symbol_0 != null) {
+                    MAP_HSV2MiddleRoot(symbol_0);
                 }
             }
         }
@@ -189,10 +189,10 @@ public class hsv2hls extends AbstractTransformer
         final @NonNull /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
-                final @NonNull /*@NonInvalid*/ HSVNode symbol_3 = (HSVNode)hsvChild;
-                if (symbol_3 != null) {
+                final @NonNull /*@NonInvalid*/ HSVNode symbol_2 = (HSVNode)hsvChild;
+                if (symbol_2 != null) {
                     if (middleRoot != null) {
-                        MAP_HSV2MiddleRecursion(symbol_3, middleRoot);
+                        MAP_HSV2MiddleRecursion(symbol_2, middleRoot);
                     }
                 }
             }
@@ -246,10 +246,10 @@ public class hsv2hls extends AbstractTransformer
         final @NonNull /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
-                final @NonNull /*@NonInvalid*/ HSVNode symbol_4 = (HSVNode)hsvChild;
-                if (symbol_4 != null) {
+                final @NonNull /*@NonInvalid*/ HSVNode symbol_3 = (HSVNode)hsvChild;
+                if (symbol_3 != null) {
                     if (middleNode_1 != null) {
-                        MAP_HSV2MiddleRecursion(symbol_4, middleNode_1);
+                        MAP_HSV2MiddleRecursion(symbol_3, middleNode_1);
                     }
                 }
             }
@@ -298,9 +298,9 @@ public class hsv2hls extends AbstractTransformer
         final @NonNull /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode.getChildren();
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
-                final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
-                if (symbol_4 != null) {
-                    MAP_Middle2HLSRecursion(symbol_4);
+                final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_3 = (HSVNode2HLSNode)middleChild;
+                if (symbol_3 != null) {
+                    MAP_Middle2HLSRecursion(symbol_3);
                 }
             }
         }
@@ -356,9 +356,9 @@ public class hsv2hls extends AbstractTransformer
         final @NonNull /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode_0.getChildren();
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
-                final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
-                if (symbol_4 != null) {
-                    MAP_Middle2HLSRecursion(symbol_4);
+                final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_3 = (HSVNode2HLSNode)middleChild;
+                if (symbol_3 != null) {
+                    MAP_Middle2HLSRecursion(symbol_3);
                 }
             }
         }

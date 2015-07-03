@@ -202,9 +202,9 @@ public class ManualUML2RDBMS extends AbstractTransformer
         final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, TYP_uml_c_c_Package_0);
         for (Package p1 : ValueUtil.typedIterable(Package.class, allInstances)) {
             if (p1 != null) {
-                final @NonNull /*@NonInvalid*/ Package symbol_1 = (Package)p1;
-                if (symbol_1 != null) {
-                    MAP_packageToSchemaLM(symbol_1);
+                final @NonNull /*@NonInvalid*/ Package symbol_0 = (Package)p1;
+                if (symbol_0 != null) {
+                    MAP_packageToSchemaLM(symbol_0);
                 }
             }
         }
@@ -277,25 +277,25 @@ public class ManualUML2RDBMS extends AbstractTransformer
         // mapping statements
         for (PackageElement child : elements_0) {
             if (child != null) {
-                final @NonNull /*@NonInvalid*/ PackageElement symbol_5 = (PackageElement)child;
+                final @NonNull /*@NonInvalid*/ PackageElement symbol_4 = (PackageElement)child;
                 if (p != null) {
                     if (p2s_11 != null) {
-                        if (symbol_5 instanceof PrimitiveDataType) {
-                            MAP_integerToNumberLM(p, p2s_11, (PrimitiveDataType)symbol_5);
+                        if (symbol_4 instanceof PrimitiveDataType) {
+                            MAP_integerToNumberLM(p, p2s_11, (PrimitiveDataType)symbol_4);
                         }
                     }
                 }
                 if (p != null) {
                     if (p2s_11 != null) {
-                        if (symbol_5 instanceof PrimitiveDataType) {
-                            MAP_booleanToBooleanLM(p, p2s_11, (PrimitiveDataType)symbol_5);
+                        if (symbol_4 instanceof PrimitiveDataType) {
+                            MAP_booleanToBooleanLM(p, p2s_11, (PrimitiveDataType)symbol_4);
                         }
                     }
                 }
                 if (p != null) {
                     if (p2s_11 != null) {
-                        if (symbol_5 instanceof PrimitiveDataType) {
-                            MAP_stringToVarcharLM(p, p2s_11, (PrimitiveDataType)symbol_5);
+                        if (symbol_4 instanceof PrimitiveDataType) {
+                            MAP_stringToVarcharLM(p, p2s_11, (PrimitiveDataType)symbol_4);
                         }
                     }
                 }
@@ -303,18 +303,18 @@ public class ManualUML2RDBMS extends AbstractTransformer
         }
         for (PackageElement child_0 : elements_0) {
             if (child_0 != null) {
-                final @NonNull /*@NonInvalid*/ PackageElement symbol_13 = (PackageElement)child_0;
-                if (symbol_13 instanceof manualuml2rdbms.uml.Class) {
+                final @NonNull /*@NonInvalid*/ PackageElement symbol_11 = (PackageElement)child_0;
+                if (symbol_11 instanceof manualuml2rdbms.uml.Class) {
                     if (p != null) {
                         if (p2s_11 != null) {
-                            MAP_classToTableLM((manualuml2rdbms.uml.Class)symbol_13, p, p2s_11);
+                            MAP_classToTableLM((manualuml2rdbms.uml.Class)symbol_11, p, p2s_11);
                         }
                     }
                 }
-                if (symbol_13 instanceof Association) {
+                if (symbol_11 instanceof Association) {
                     if (p != null) {
                         if (p2s_11 != null) {
-                            MAP_associationToForeignKeyLM((Association)symbol_13, p, p2s_11);
+                            MAP_associationToForeignKeyLM((Association)symbol_11, p, p2s_11);
                         }
                     }
                 }
@@ -384,20 +384,20 @@ public class ManualUML2RDBMS extends AbstractTransformer
         final @NonNull /*@Thrown*/ List<PrimitiveToName> primitivesToNames = p2s.getPrimitivesToNames();
         for (PrimitiveToName child : primitivesToNames) {
             if (child != null) {
-                final @NonNull /*@NonInvalid*/ PrimitiveToName symbol_5 = (PrimitiveToName)child;
-                if (symbol_5 != null) {
+                final @NonNull /*@NonInvalid*/ PrimitiveToName symbol_4 = (PrimitiveToName)child;
+                if (symbol_4 != null) {
                     if (p2s != null) {
-                        MAP_integerToNumberMR(symbol_5, p2s);
+                        MAP_integerToNumberMR(symbol_4, p2s);
                     }
                 }
-                if (symbol_5 != null) {
+                if (symbol_4 != null) {
                     if (p2s != null) {
-                        MAP_booleanToBooleanMR(symbol_5, p2s);
+                        MAP_booleanToBooleanMR(symbol_4, p2s);
                     }
                 }
-                if (symbol_5 != null) {
+                if (symbol_4 != null) {
                     if (p2s != null) {
-                        MAP_stringToVarcharMR(symbol_5, p2s);
+                        MAP_stringToVarcharMR(symbol_4, p2s);
                     }
                 }
             }
@@ -406,11 +406,11 @@ public class ManualUML2RDBMS extends AbstractTransformer
         final @NonNull /*@Thrown*/ List<ClassToTable> classesToTables = p2s.getClassesToTables();
         for (ClassToTable child_0 : classesToTables) {
             if (child_0 != null) {
-                final @NonNull /*@NonInvalid*/ ClassToTable symbol_11 = (ClassToTable)child_0;
-                if (symbol_11 != null) {
+                final @NonNull /*@NonInvalid*/ ClassToTable symbol_9 = (ClassToTable)child_0;
+                if (symbol_9 != null) {
                     if (p2s != null) {
                         if (s_2 != null) {
-                            MAP_classToTableMR(symbol_11, p2s, s_2);
+                            MAP_classToTableMR(symbol_9, p2s, s_2);
                         }
                     }
                 }
@@ -788,31 +788,31 @@ public class ManualUML2RDBMS extends AbstractTransformer
         final @NonNull /*@Thrown*/ List<Attribute> attributes = c.getAttributes();
         for (Attribute anAttribute : attributes) {
             if (anAttribute != null) {
-                final @NonNull /*@NonInvalid*/ Attribute symbol_6 = (Attribute)anAttribute;
+                final @NonNull /*@NonInvalid*/ Attribute symbol_5 = (Attribute)anAttribute;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ Classifier type_0 = symbol_6.getType();
-                if (symbol_6 != null) {
+                final @NonNull /*@Thrown*/ Classifier type_0 = symbol_5.getType();
+                if (symbol_5 != null) {
                     if (c != null) {
                         if (c2t_3 != null) {
-                            MAP_classPrimitiveAttributesLM(symbol_6, c, c2t_3);
+                            MAP_classPrimitiveAttributesLM(symbol_5, c, c2t_3);
                         }
                     }
                 }
-                if (symbol_6 != null) {
+                if (symbol_5 != null) {
                     if (c != null) {
                         if (c2t_3 != null) {
-                            MAP_classComplexAttributesLM(symbol_6, c, c2t_3);
+                            MAP_classComplexAttributesLM(symbol_5, c, c2t_3);
                         }
                     }
                 }
                 if (type_0 instanceof manualuml2rdbms.uml.Class) {
-                    if (symbol_6 != null) {
-                        MAP_complexAttributePrimitiveAttributesLM((manualuml2rdbms.uml.Class)type_0, symbol_6);
+                    if (symbol_5 != null) {
+                        MAP_complexAttributePrimitiveAttributesLM((manualuml2rdbms.uml.Class)type_0, symbol_5);
                     }
                 }
                 if (type_0 instanceof manualuml2rdbms.uml.Class) {
-                    if (symbol_6 != null) {
-                        MAP_complexAttributeComplexAttributesLM((manualuml2rdbms.uml.Class)type_0, symbol_6);
+                    if (symbol_5 != null) {
+                        MAP_complexAttributeComplexAttributesLM((manualuml2rdbms.uml.Class)type_0, symbol_5);
                     }
                 }
             }
@@ -902,9 +902,9 @@ public class ManualUML2RDBMS extends AbstractTransformer
         for (AssociationToForeignKey child : associationsToForeignKeys) {
             if (child != null) {
                 final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(t_0));
-                final @NonNull /*@NonInvalid*/ AssociationToForeignKey symbol_5 = (AssociationToForeignKey)child;
+                final @NonNull /*@NonInvalid*/ AssociationToForeignKey symbol_4 = (AssociationToForeignKey)child;
                 final @Nullable /*@Thrown*/ Key primaryKey = c2t.getPrimaryKey();
-                if (symbol_5 != null) {
+                if (symbol_4 != null) {
                     if (ClassToTable_0 != null) {
                         if (t_0 != null) {
                             if (p2s_8 != null) {
@@ -912,7 +912,7 @@ public class ManualUML2RDBMS extends AbstractTransformer
                                     if (s != null) {
                                         if (ClassToTable_0 != null) {
                                             if (t_0 != null) {
-                                                MAP_associationToForeignKeyMR(symbol_5, ClassToTable_0, t_0, p2s_8, primaryKey, s, ClassToTable_0, t_0);
+                                                MAP_associationToForeignKeyMR(symbol_4, ClassToTable_0, t_0, p2s_8, primaryKey, s, ClassToTable_0, t_0);
                                             }
                                         }
                                     }
@@ -948,11 +948,11 @@ public class ManualUML2RDBMS extends AbstractTransformer
         final @NonNull /*@Thrown*/ BagValue union = (BagValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_fromAttributes, collect);
         for (FromAttribute child_0 : ValueUtil.typedIterable(FromAttribute.class, union)) {
             if (child_0 != null) {
-                final @NonNull /*@NonInvalid*/ FromAttribute symbol_9 = (FromAttribute)child_0;
-                if (symbol_9 instanceof AttributeToColumn) {
+                final @NonNull /*@NonInvalid*/ FromAttribute symbol_7 = (FromAttribute)child_0;
+                if (symbol_7 instanceof AttributeToColumn) {
                     if (c2t != null) {
                         if (t_0 != null) {
-                            MAP_attributeColumnsMR((AttributeToColumn)symbol_9, c2t, t_0);
+                            MAP_attributeColumnsMR((AttributeToColumn)symbol_7, c2t, t_0);
                         }
                     }
                 }
@@ -1718,12 +1718,12 @@ public class ManualUML2RDBMS extends AbstractTransformer
         final @NonNull /*@Thrown*/ List<Attribute> attributes = c_2.getAttributes();
         for (Attribute anAttribute : attributes) {
             if (anAttribute != null) {
-                final @NonNull /*@NonInvalid*/ Attribute symbol_1 = (Attribute)anAttribute;
-                if (symbol_1 != null) {
+                final @NonNull /*@NonInvalid*/ Attribute symbol_0 = (Attribute)anAttribute;
+                if (symbol_0 != null) {
                     if (c_2 != null) {
                         if (ca != null) {
                             if (fao_2 != null) {
-                                MAP_complexAttributePrimitiveAttributesLM_1(symbol_1, c_2, ca, fao_2);
+                                MAP_complexAttributePrimitiveAttributesLM_1(symbol_0, c_2, ca, fao_2);
                             }
                         }
                     }
@@ -1843,12 +1843,12 @@ public class ManualUML2RDBMS extends AbstractTransformer
         final @NonNull /*@Thrown*/ List<Attribute> attributes = c_3.getAttributes();
         for (Attribute anAttribute : attributes) {
             if (anAttribute != null) {
-                final @NonNull /*@NonInvalid*/ Attribute symbol_1 = (Attribute)anAttribute;
-                if (symbol_1 != null) {
+                final @NonNull /*@NonInvalid*/ Attribute symbol_0 = (Attribute)anAttribute;
+                if (symbol_0 != null) {
                     if (c_3 != null) {
                         if (ca_0 != null) {
                             if (fao_2 != null) {
-                                MAP_complexAttributeComplexAttributesLM_1(symbol_1, c_3, ca_0, fao_2);
+                                MAP_complexAttributeComplexAttributesLM_1(symbol_0, c_3, ca_0, fao_2);
                             }
                         }
                     }

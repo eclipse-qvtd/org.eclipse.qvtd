@@ -233,7 +233,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VALIDATE_COMPATIBLE_INITIALISER_TYPE_DIAGNOSTIC_CHAIN_MAP__EEXPRESSION = "ownedInit <> null implies ownedInit?.type.conformsTo(type)\n" + //$NON-NLS-1$
+	protected static final String VALIDATE_COMPATIBLE_INITIALISER_TYPE_DIAGNOSTIC_CHAIN_MAP__EEXPRESSION = "ownedInit <> null implies ownedInit?.type?.conformsTo(type)\n" + //$NON-NLS-1$
 		"\n" + //$NON-NLS-1$
 		"";
 

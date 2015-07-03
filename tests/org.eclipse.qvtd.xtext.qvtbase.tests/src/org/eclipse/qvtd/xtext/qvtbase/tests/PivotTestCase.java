@@ -119,16 +119,20 @@ public class PivotTestCase extends TestCase
 			if (child.getData().size() > 0) {
 				Object data = child.getData().get(0);
 				if (data instanceof Element) {
-					ModelElementCS csElement = ElementUtil.getCsElement((Element)data);
-					if (csElement != null) {
-						ICompositeNode node = NodeModelUtils.getNode(csElement);
-						if (node != null) {
-							Resource eResource = csElement.eResource();
-							if (eResource != null) {
-								s.append(eResource.getURI().lastSegment() + ":");
+					for (EObject eScope = (Element)data; eScope instanceof Element; eScope = eScope.eContainer()) {
+						ModelElementCS csElement = ElementUtil.getCsElement((Element)eScope);
+						if (csElement != null) {
+							ICompositeNode node = NodeModelUtils.getNode(csElement);
+							if (node != null) {
+								Resource eResource = csElement.eResource();
+								if (eResource != null) {
+									s.append(eResource.getURI().lastSegment() + ":");
+								}
+								int startLine = node.getStartLine();
+								s.append(startLine + ":");
 							}
-							int startLine = node.getStartLine();
-							s.append(startLine + ": ");
+							s.append(((Element)data).eClass().getName() + ": ");
+							break;
 						}
 					}
 				}

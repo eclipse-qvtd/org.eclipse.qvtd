@@ -217,9 +217,9 @@ public class classescs2as_Bug459225 extends AbstractTransformer
         final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
         for (PackageCS packageCS_1 : ValueUtil.typedIterable(PackageCS.class, allInstances)) {
             if (packageCS_1 != null) {
-                final @NonNull /*@NonInvalid*/ PackageCS symbol_1 = (PackageCS)packageCS_1;
-                if (symbol_1 != null) {
-                    MAP_createPackage(symbol_1);
+                final @NonNull /*@NonInvalid*/ PackageCS symbol_0 = (PackageCS)packageCS_1;
+                if (symbol_0 != null) {
+                    MAP_createPackage(symbol_0);
                 }
             }
         }

@@ -638,56 +638,56 @@ public class classescs2as_qvtp_qvtias extends AbstractCS2ASTransformer
         // mapping statements
         for (RootCS rootCS_3 : ValueUtil.typedIterable(RootCS.class, allInstances_1)) {
             if (rootCS_3 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ RootCS symbol_1 = (RootCS)rootCS_3;
-                MAP_cRootCS_2_Root(symbol_1);
+                final /*@NonNull*/ /*@NonInvalid*/ RootCS symbol_0 = (RootCS)rootCS_3;
+                MAP_cRootCS_2_Root(symbol_0);
             }
         }
         for (PackageCS packageCS_7 : ValueUtil.typedIterable(PackageCS.class, allInstances_2)) {
             if (packageCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_5 = (PackageCS)packageCS_7;
-                MAP_cPackageCS_2_Package(symbol_5);
+                final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_3 = (PackageCS)packageCS_7;
+                MAP_cPackageCS_2_Package(symbol_3);
             }
         }
         for (RootCS rootCS_4 : ValueUtil.typedIterable(RootCS.class, allInstances_1)) {
             if (rootCS_4 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ RootCS symbol_9 = (RootCS)rootCS_4;
-                MAP_uRoot_ownedPackages(symbol_9);
+                final /*@NonNull*/ /*@NonInvalid*/ RootCS symbol_6 = (RootCS)rootCS_4;
+                MAP_uRoot_ownedPackages(symbol_6);
             }
         }
         for (PackageCS packageCS_8 : ValueUtil.typedIterable(PackageCS.class, allInstances_2)) {
             if (packageCS_8 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_13 = (PackageCS)packageCS_8;
-                MAP_uPackage_name(symbol_13);
+                final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_9 = (PackageCS)packageCS_8;
+                MAP_uPackage_name(symbol_9);
             }
         }
         for (ClassCS classCS_5 : ValueUtil.typedIterable(ClassCS.class, allInstances_6)) {
             if (classCS_5 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_17 = (ClassCS)classCS_5;
-                MAP_cClassCS_2_Class(symbol_17);
+                final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_12 = (ClassCS)classCS_5;
+                MAP_cClassCS_2_Class(symbol_12);
             }
         }
         for (PackageCS packageCS_9 : ValueUtil.typedIterable(PackageCS.class, allInstances_2)) {
             if (packageCS_9 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_21 = (PackageCS)packageCS_9;
-                MAP_uPackage_ownedClasses(symbol_21);
+                final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_15 = (PackageCS)packageCS_9;
+                MAP_uPackage_ownedClasses(symbol_15);
             }
         }
         for (PackageCS packageCS_10 : ValueUtil.typedIterable(PackageCS.class, allInstances_2)) {
             if (packageCS_10 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_25 = (PackageCS)packageCS_10;
-                MAP_uPackage_ownedPackages(symbol_25);
+                final /*@NonNull*/ /*@NonInvalid*/ PackageCS symbol_18 = (PackageCS)packageCS_10;
+                MAP_uPackage_ownedPackages(symbol_18);
             }
         }
         for (ClassCS classCS_6 : ValueUtil.typedIterable(ClassCS.class, allInstances_6)) {
             if (classCS_6 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_29 = (ClassCS)classCS_6;
-                MAP_uClass_name(symbol_29);
+                final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_21 = (ClassCS)classCS_6;
+                MAP_uClass_name(symbol_21);
             }
         }
         for (ClassCS classCS_7 : ValueUtil.typedIterable(ClassCS.class, allInstances_6)) {
             if (classCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_33 = (ClassCS)classCS_7;
-                MAP_uClass_superClass(symbol_33);
+                final /*@NonNull*/ /*@NonInvalid*/ ClassCS symbol_24 = (ClassCS)classCS_7;
+                MAP_uClass_superClass(symbol_24);
             }
         }
         return true;

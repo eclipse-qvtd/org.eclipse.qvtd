@@ -169,12 +169,12 @@ public class Tree2TallTree extends AbstractTransformer
              */
             @Override
             public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object objectsOfKind_0, final @Nullable /*@NonInvalid*/ Object _1_0) {
-                final @Nullable /*@NonInvalid*/ Node symbol_6 = (Node)_1_0;
-                if (symbol_6 == null) {
+                final @Nullable /*@NonInvalid*/ Node symbol_4 = (Node)_1_0;
+                if (symbol_4 == null) {
                     throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/Tree\'::Node::name\'");
                 }
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ String name_0 = symbol_6.getName();
+                final @NonNull /*@Thrown*/ String name_0 = symbol_4.getName();
                 return name_0;
             }
         };
@@ -183,19 +183,19 @@ public class Tree2TallTree extends AbstractTransformer
         // mapping statements
         for (Node node_3 : ValueUtil.typedIterable(Node.class, sortedBy_0)) {
             if (node_3 != null) {
-                final @NonNull /*@NonInvalid*/ Node symbol_2 = (Node)node_3;
-                if (symbol_2 != null) {
-                    MAP_Node2MiddleNode(symbol_2);
+                final @NonNull /*@NonInvalid*/ Node symbol_1 = (Node)node_3;
+                if (symbol_1 != null) {
+                    MAP_Node2MiddleNode(symbol_1);
                 }
             }
         }
         for (Node node_4 : ValueUtil.typedIterable(Node.class, sortedBy_0)) {
             if (node_4 != null) {
-                final @NonNull /*@NonInvalid*/ Node symbol_7 = (Node)node_4;
-                final @NonNull /*@Thrown*/ Node2TallNode Node2TallNode = ClassUtil.nonNullState (OPPOSITE_OF_Node2TallNode_node.get(symbol_7));
-                if (symbol_7 != null) {
+                final @NonNull /*@NonInvalid*/ Node symbol_5 = (Node)node_4;
+                final @NonNull /*@Thrown*/ Node2TallNode Node2TallNode = ClassUtil.nonNullState (OPPOSITE_OF_Node2TallNode_node.get(symbol_5));
+                if (symbol_5 != null) {
                     if (Node2TallNode != null) {
-                        MAP_Edge2MiddleEdge(symbol_7, Node2TallNode);
+                        MAP_Edge2MiddleEdge(symbol_5, Node2TallNode);
                     }
                 }
             }
@@ -214,12 +214,12 @@ public class Tree2TallTree extends AbstractTransformer
              */
             @Override
             public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object objectsOfKind_1, final @Nullable /*@NonInvalid*/ Object _1_1) {
-                final @Nullable /*@NonInvalid*/ Node2TallNode symbol_12 = (Node2TallNode)_1_1;
-                if (symbol_12 == null) {
+                final @Nullable /*@NonInvalid*/ Node2TallNode symbol_9 = (Node2TallNode)_1_1;
+                if (symbol_9 == null) {
                     throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/List2List\'::Node2TallNode::name\'");
                 }
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ String name_1 = objectManager.get(symbol_12, Tree2talltreePackage.Literals.NODE2_TALL_NODE__NAME);
+                final @NonNull /*@Thrown*/ String name_1 = objectManager.get(symbol_9, Tree2talltreePackage.Literals.NODE2_TALL_NODE__NAME);
                 return name_1;
             }
         };
@@ -227,9 +227,9 @@ public class Tree2TallTree extends AbstractTransformer
         final @NonNull /*@Thrown*/ OrderedSetValue sortedBy_1 = ClassUtil.nonNullState((OrderedSetValue)IMPL_sortedBy_1_0.evaluateIteration(MGR_sortedBy_1_0));
         for (Node2TallNode node2tallNode_3 : ValueUtil.typedIterable(Node2TallNode.class, sortedBy_1)) {
             if (node2tallNode_3 != null) {
-                final @NonNull /*@NonInvalid*/ Node2TallNode symbol_13 = (Node2TallNode)node2tallNode_3;
-                if (symbol_13 != null) {
-                    invoke(CTOR_MiddleNode2TallNode, symbol_13);
+                final @NonNull /*@NonInvalid*/ Node2TallNode symbol_10 = (Node2TallNode)node2tallNode_3;
+                if (symbol_10 != null) {
+                    invoke(CTOR_MiddleNode2TallNode, symbol_10);
                 }
             }
         }

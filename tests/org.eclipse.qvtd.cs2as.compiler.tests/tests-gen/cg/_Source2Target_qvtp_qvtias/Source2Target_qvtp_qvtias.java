@@ -1494,140 +1494,140 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
         // mapping statements
         for (SRoot sRoot_3 : ValueUtil.typedIterable(SRoot.class, allInstances_3)) {
             if (sRoot_3 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ SRoot symbol_1 = (SRoot)sRoot_3;
-                MAP_cSRoot_2_TRoot(symbol_1);
+                final /*@NonNull*/ /*@NonInvalid*/ SRoot symbol_0 = (SRoot)sRoot_3;
+                MAP_cSRoot_2_TRoot(symbol_0);
             }
         }
         for (X x_17 : ValueUtil.typedIterable(X.class, allInstances_1)) {
             if (x_17 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ X symbol_5 = (X)x_17;
-                MAP_cX_2_A1(symbol_5);
+                final /*@NonNull*/ /*@NonInvalid*/ X symbol_3 = (X)x_17;
+                MAP_cX_2_A1(symbol_3);
             }
         }
         for (X x_18 : ValueUtil.typedIterable(X.class, allInstances_1)) {
             if (x_18 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ X symbol_9 = (X)x_18;
-                MAP_cX_2_A2(symbol_9);
+                final /*@NonNull*/ /*@NonInvalid*/ X symbol_6 = (X)x_18;
+                MAP_cX_2_A2(symbol_6);
             }
         }
         for (X x_19 : ValueUtil.typedIterable(X.class, allInstances_1)) {
             if (x_19 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ X symbol_13 = (X)x_19;
-                MAP_cX_2_A3(symbol_13);
+                final /*@NonNull*/ /*@NonInvalid*/ X symbol_9 = (X)x_19;
+                MAP_cX_2_A3(symbol_9);
             }
         }
         for (SRoot sRoot_4 : ValueUtil.typedIterable(SRoot.class, allInstances_3)) {
             if (sRoot_4 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ SRoot symbol_17 = (SRoot)sRoot_4;
-                MAP_uTRoot_ownedA(symbol_17);
+                final /*@NonNull*/ /*@NonInvalid*/ SRoot symbol_12 = (SRoot)sRoot_4;
+                MAP_uTRoot_ownedA(symbol_12);
             }
         }
         for (Y1 y1_5 : ValueUtil.typedIterable(Y1.class, allInstances_15)) {
             if (y1_5 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ Y1 symbol_21 = (Y1)y1_5;
-                MAP_cY1_2_B(symbol_21);
+                final /*@NonNull*/ /*@NonInvalid*/ Y1 symbol_15 = (Y1)y1_5;
+                MAP_cY1_2_B(symbol_15);
             }
         }
         for (Y2 y2_5 : ValueUtil.typedIterable(Y2.class, allInstances_17)) {
             if (y2_5 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ Y2 symbol_25 = (Y2)y2_5;
-                MAP_cY2_2_C(symbol_25);
+                final /*@NonNull*/ /*@NonInvalid*/ Y2 symbol_18 = (Y2)y2_5;
+                MAP_cY2_2_C(symbol_18);
             }
         }
         for (Z z_11 : ValueUtil.typedIterable(Z.class, allInstances_7)) {
             if (z_11 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ Z symbol_29 = (Z)z_11;
-                MAP_cZ_2_D_0(symbol_29);
+                final /*@NonNull*/ /*@NonInvalid*/ Z symbol_21 = (Z)z_11;
+                MAP_cZ_2_D_0(symbol_21);
             }
         }
         for (Z z_12 : ValueUtil.typedIterable(Z.class, allInstances_7)) {
             if (z_12 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ Z symbol_33 = (Z)z_12;
-                MAP_cZ_2_D_1(symbol_33);
+                final /*@NonNull*/ /*@NonInvalid*/ Z symbol_24 = (Z)z_12;
+                MAP_cZ_2_D_1(symbol_24);
             }
         }
         for (X x_20 : ValueUtil.typedIterable(X.class, allInstances_1)) {
             if (x_20 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ X symbol_37 = (X)x_20;
-                MAP_uA2_ownsC(symbol_37);
+                final /*@NonNull*/ /*@NonInvalid*/ X symbol_27 = (X)x_20;
+                MAP_uA2_ownsC(symbol_27);
             }
         }
         for (X x_21 : ValueUtil.typedIterable(X.class, allInstances_1)) {
             if (x_21 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ X symbol_41 = (X)x_21;
-                MAP_uA3_ownsC(symbol_41);
+                final /*@NonNull*/ /*@NonInvalid*/ X symbol_30 = (X)x_21;
+                MAP_uA3_ownsC(symbol_30);
             }
         }
         for (Z z_13 : ValueUtil.typedIterable(Z.class, allInstances_7)) {
             if (z_13 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ Z symbol_45 = (Z)z_13;
-                MAP_uD_0_toA(symbol_45);
+                final /*@NonNull*/ /*@NonInvalid*/ Z symbol_33 = (Z)z_13;
+                MAP_uD_0_toA(symbol_33);
             }
         }
         for (X x_22 : ValueUtil.typedIterable(X.class, allInstances_1)) {
             if (x_22 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ X symbol_49 = (X)x_22;
-                MAP_uA1_name(symbol_49);
+                final /*@NonNull*/ /*@NonInvalid*/ X symbol_36 = (X)x_22;
+                MAP_uA1_name(symbol_36);
             }
         }
         for (X x_23 : ValueUtil.typedIterable(X.class, allInstances_1)) {
             if (x_23 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ X symbol_53 = (X)x_23;
-                MAP_uA1_ownsB(symbol_53);
+                final /*@NonNull*/ /*@NonInvalid*/ X symbol_39 = (X)x_23;
+                MAP_uA1_ownsB(symbol_39);
             }
         }
         for (X x_24 : ValueUtil.typedIterable(X.class, allInstances_1)) {
             if (x_24 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ X symbol_57 = (X)x_24;
-                MAP_uA2_name(symbol_57);
+                final /*@NonNull*/ /*@NonInvalid*/ X symbol_42 = (X)x_24;
+                MAP_uA2_name(symbol_42);
             }
         }
         for (X x_25 : ValueUtil.typedIterable(X.class, allInstances_1)) {
             if (x_25 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ X symbol_61 = (X)x_25;
-                MAP_uA3_name(symbol_61);
+                final /*@NonNull*/ /*@NonInvalid*/ X symbol_45 = (X)x_25;
+                MAP_uA3_name(symbol_45);
             }
         }
         for (Y1 y1_6 : ValueUtil.typedIterable(Y1.class, allInstances_15)) {
             if (y1_6 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ Y1 symbol_65 = (Y1)y1_6;
-                MAP_uB_ownsD(symbol_65);
+                final /*@NonNull*/ /*@NonInvalid*/ Y1 symbol_48 = (Y1)y1_6;
+                MAP_uB_ownsD(symbol_48);
             }
         }
         for (Y1 y1_7 : ValueUtil.typedIterable(Y1.class, allInstances_15)) {
             if (y1_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ Y1 symbol_69 = (Y1)y1_7;
-                MAP_uB_name(symbol_69);
+                final /*@NonNull*/ /*@NonInvalid*/ Y1 symbol_51 = (Y1)y1_7;
+                MAP_uB_name(symbol_51);
             }
         }
         for (Y2 y2_6 : ValueUtil.typedIterable(Y2.class, allInstances_17)) {
             if (y2_6 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ Y2 symbol_73 = (Y2)y2_6;
-                MAP_uC_name(symbol_73);
+                final /*@NonNull*/ /*@NonInvalid*/ Y2 symbol_54 = (Y2)y2_6;
+                MAP_uC_name(symbol_54);
             }
         }
         for (Y2 y2_7 : ValueUtil.typedIterable(Y2.class, allInstances_17)) {
             if (y2_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ Y2 symbol_77 = (Y2)y2_7;
-                MAP_uC_ownsD(symbol_77);
+                final /*@NonNull*/ /*@NonInvalid*/ Y2 symbol_57 = (Y2)y2_7;
+                MAP_uC_ownsD(symbol_57);
             }
         }
         for (Z z_14 : ValueUtil.typedIterable(Z.class, allInstances_7)) {
             if (z_14 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ Z symbol_81 = (Z)z_14;
-                MAP_uD_1_refsB(symbol_81);
+                final /*@NonNull*/ /*@NonInvalid*/ Z symbol_60 = (Z)z_14;
+                MAP_uD_1_refsB(symbol_60);
             }
         }
         for (Z z_15 : ValueUtil.typedIterable(Z.class, allInstances_7)) {
             if (z_15 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ Z symbol_85 = (Z)z_15;
-                MAP_uD_0_refsC(symbol_85);
+                final /*@NonNull*/ /*@NonInvalid*/ Z symbol_63 = (Z)z_15;
+                MAP_uD_0_refsC(symbol_63);
             }
         }
         for (Z z_16 : ValueUtil.typedIterable(Z.class, allInstances_7)) {
             if (z_16 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ Z symbol_89 = (Z)z_16;
-                MAP_uD_1_toA(symbol_89);
+                final /*@NonNull*/ /*@NonInvalid*/ Z symbol_66 = (Z)z_16;
+                MAP_uD_1_toA(symbol_66);
             }
         }
         return true;
