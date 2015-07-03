@@ -11,9 +11,11 @@
 package org.eclipse.qvtd.pivot.qvttemplate.impl;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -23,6 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
@@ -70,6 +73,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	 */
 	protected ObjectTemplateExpImpl() {
 		super();
+		System.out.println("create " + NameUtil.debugFullName(this));
 	}
 
 	/**
@@ -244,5 +248,12 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTtemplateVisitor<?>)visitor).visitObjectTemplateExp(this);
+	}
+
+	@Override
+	public boolean validateTypeIsNotNull(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		System.out.println("validate " + NameUtil.debugFullName(this));
+		return super.validateTypeIsNotNull(diagnostics, context);
 	}
 } //ObjectTemplateExpImpl

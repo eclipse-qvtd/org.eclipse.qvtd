@@ -315,7 +315,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getCollectionTemplateCS_RestIdentifier() {
+	public EReference getCollectionTemplateCS_OwnedRestIdentifier() {
 		return (EReference)collectionTemplateCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -467,6 +467,16 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	@Override
 	public EClass getElementTemplateCS() {
 		return elementTemplateCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getElementTemplateCS_Identifier() {
+		return (EReference)elementTemplateCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1022,7 +1032,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 
 		collectionTemplateCSEClass = createEClass(COLLECTION_TEMPLATE_CS);
 		createEReference(collectionTemplateCSEClass, COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS);
-		createEReference(collectionTemplateCSEClass, COLLECTION_TEMPLATE_CS__REST_IDENTIFIER);
+		createEReference(collectionTemplateCSEClass, COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER);
 
 		defaultValueCSEClass = createEClass(DEFAULT_VALUE_CS);
 		createEReference(defaultValueCSEClass, DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION);
@@ -1042,6 +1052,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		createEReference(domainPatternCSEClass, DOMAIN_PATTERN_CS__OWNED_TEMPLATE);
 
 		elementTemplateCSEClass = createEClass(ELEMENT_TEMPLATE_CS);
+		createEReference(elementTemplateCSEClass, ELEMENT_TEMPLATE_CS__IDENTIFIER);
 
 		keyDeclCSEClass = createEClass(KEY_DECL_CS);
 		createEReference(keyDeclCSEClass, KEY_DECL_CS__OWNED_PATH_NAME);
@@ -1180,7 +1191,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 
 		initEClass(collectionTemplateCSEClass, CollectionTemplateCS.class, "CollectionTemplateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCollectionTemplateCS_OwnedMemberIdentifiers(), this.getTemplateVariableCS(), null, "ownedMemberIdentifiers", null, 1, -1, CollectionTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionTemplateCS_RestIdentifier(), thePivotPackage.getVariable(), null, "restIdentifier", null, 0, 1, CollectionTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionTemplateCS_OwnedRestIdentifier(), this.getElementTemplateCS(), null, "ownedRestIdentifier", null, 0, 1, CollectionTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(defaultValueCSEClass, DefaultValueCS.class, "DefaultValueCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDefaultValueCS_OwnedInitExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInitExpression", null, 1, 1, DefaultValueCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1200,6 +1211,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEReference(getDomainPatternCS_OwnedTemplate(), this.getTemplateCS(), null, "ownedTemplate", null, 0, 1, DomainPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementTemplateCSEClass, ElementTemplateCS.class, "ElementTemplateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getElementTemplateCS_Identifier(), thePivotPackage.getVariable(), null, "identifier", null, 0, 1, ElementTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(keyDeclCSEClass, KeyDeclCS.class, "KeyDeclCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKeyDeclCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, KeyDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -22,7 +22,7 @@ public class QVTrelationScoping
 {	
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-		registry.put(QVTrelationCSPackage.Literals.COLLECTION_TEMPLATE_CS, CollectionTemplateCSAttribution.INSTANCE);
+		registry.put(QVTrelationCSPackage.Literals.ELEMENT_TEMPLATE_CS, ElementTemplateCSAttribution.INSTANCE);
 		registry.put(EssentialOCLCSPackage.Literals.NAVIGATING_ARG_CS, QVTrelationNavigatingArgCSAttribution.INSTANCE);
 		registry.put(BaseCSPackage.Literals.PATH_ELEMENT_CS, QVTrelationPathElementCSAttribution.INSTANCE);
 	}

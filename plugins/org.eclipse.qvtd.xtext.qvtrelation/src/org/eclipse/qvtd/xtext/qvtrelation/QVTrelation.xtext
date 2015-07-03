@@ -28,7 +28,7 @@ TopLevelCS:
 CollectionTemplateCS: name=UnrestrictedName? ':' ownedType=CollectionTypeCS
 	'{' (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
 	    (',' ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))*
-        '++' restIdentifier=[pivot::Variable|UnrestrictedName]
+        '++' ownedRestIdentifier=ElementTemplateCS
          )? '}';
 
 DefaultValueCS: propertyId=[pivot::Variable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
@@ -41,7 +41,7 @@ DomainCS: (isCheckonly?='checkonly' | isEnforce?='enforce' | 'replace')? 'domain
 
 DomainPatternCS: ownedTemplate=TemplateCS;
 
-ElementTemplateCS: name=UnrestrictedName;
+ElementTemplateCS: identifier=[pivot::Variable|UnrestrictedName];
 
 KeyDeclCS: 'key' ownedPathName=PathNameCS '{'
 	(propertyIds+=[pivot::Property|UnrestrictedName]

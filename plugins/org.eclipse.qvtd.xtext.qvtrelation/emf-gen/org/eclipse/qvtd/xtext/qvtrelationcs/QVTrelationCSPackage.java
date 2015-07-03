@@ -456,13 +456,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS = TEMPLATE_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Rest Identifier</b></em>' reference.
+	 * The feature id for the '<em><b>Owned Rest Identifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TEMPLATE_CS__REST_IDENTIFIER = TEMPLATE_CS_FEATURE_COUNT + 1;
+	int COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER = TEMPLATE_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Collection Template CS</em>' class.
@@ -910,13 +910,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int ELEMENT_TEMPLATE_CS__OWNED_TYPE = TEMPLATE_VARIABLE_CS__OWNED_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_TEMPLATE_CS__IDENTIFIER = TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Element Template CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_TEMPLATE_CS_FEATURE_COUNT = TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0;
+	int ELEMENT_TEMPLATE_CS_FEATURE_COUNT = TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.KeyDeclCSImpl <em>Key Decl CS</em>}' class.
@@ -2477,15 +2486,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EReference getCollectionTemplateCS_OwnedMemberIdentifiers();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getOwnedRestIdentifier <em>Owned Rest Identifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Rest Identifier</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getRestIdentifier()
+	 * @return the meta object for the containment reference '<em>Owned Rest Identifier</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getOwnedRestIdentifier()
 	 * @see #getCollectionTemplateCS()
 	 * @generated
 	 */
-	EReference getCollectionTemplateCS_RestIdentifier();
+	EReference getCollectionTemplateCS_OwnedRestIdentifier();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS <em>Default Value CS</em>}'.
@@ -2647,6 +2656,17 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getElementTemplateCS();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS#getIdentifier <em>Identifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Identifier</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS#getIdentifier()
+	 * @see #getElementTemplateCS()
+	 * @generated
+	 */
+	EReference getElementTemplateCS_Identifier();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS <em>Key Decl CS</em>}'.
@@ -3254,12 +3274,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EReference COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS = eINSTANCE.getCollectionTemplateCS_OwnedMemberIdentifiers();
 
 		/**
-		 * The meta object literal for the '<em><b>Rest Identifier</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Owned Rest Identifier</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_TEMPLATE_CS__REST_IDENTIFIER = eINSTANCE.getCollectionTemplateCS_RestIdentifier();
+		EReference COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER = eINSTANCE.getCollectionTemplateCS_OwnedRestIdentifier();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DefaultValueCSImpl <em>Default Value CS</em>}' class.
@@ -3388,6 +3408,14 @@ public interface QVTrelationCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ELEMENT_TEMPLATE_CS = eINSTANCE.getElementTemplateCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Identifier</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ELEMENT_TEMPLATE_CS__IDENTIFIER = eINSTANCE.getElementTemplateCS_Identifier();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.KeyDeclCSImpl <em>Key Decl CS</em>}' class.

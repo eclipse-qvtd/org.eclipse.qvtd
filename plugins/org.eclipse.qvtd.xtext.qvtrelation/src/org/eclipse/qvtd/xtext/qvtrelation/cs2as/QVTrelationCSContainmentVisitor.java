@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
@@ -59,6 +60,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -78,6 +80,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS;
@@ -87,7 +90,6 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS;
-import org.eclipse.qvtd.xtext.qvtrelationcs.impl.CollectionTemplateCSImpl;
 import org.eclipse.qvtd.xtext.qvtrelationcs.util.AbstractQVTrelationCSContainmentVisitor;
 
 public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContainmentVisitor
@@ -162,11 +164,18 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		super(context);
 	}
 
-	private void gatherVariables(List<Variable> pivotVariables, TemplateExp templateExp) {
-		Variable variable = templateExp.getBindsTo();
+	private void addVariable(@NonNull List<Variable> pivotVariables, @Nullable Variable variable) {
 		if (variable != null) {
+			if (variable.getName() == null) {
+				variable.setName(QVTrelationUtil.DUMMY_VARIABLE_NAME + pivotVariables.size());
+			}
 			pivotVariables.add(variable);
 		}
+	}
+
+	private void gatherVariables(@NonNull List<Variable> pivotVariables, @NonNull TemplateExp templateExp) {
+		Variable variable = templateExp.getBindsTo();
+		addVariable(pivotVariables, variable);
 		if (templateExp instanceof ObjectTemplateExp) {
 			for (PropertyTemplateItem part : ((ObjectTemplateExp)templateExp).getPart()) {
 				OCLExpression value = part.getValue();
@@ -178,21 +187,16 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		else if (templateExp instanceof CollectionTemplateExp) {
 			CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)templateExp;
 			for (OCLExpression member : collectionTemplateExp.getMember()) {
-//				OCLExpression value = part.getValue();
 				if (member instanceof TemplateExp) {
 					gatherVariables(pivotVariables, (TemplateExp)member);
 				}
 				else if (member instanceof VariableExp) {
 					Variable variableDeclaration = (Variable) ((VariableExp)member).getReferredVariable();
-					if (variableDeclaration != null) {
-						pivotVariables.add(variableDeclaration);
-					}
+					addVariable(pivotVariables, variableDeclaration);
 				}
 			}
 			Variable rest = collectionTemplateExp.getRest();
-			if ((rest != null)  && rest.isIsImplicit()) {
-				pivotVariables.add(rest);
-			}
+			addVariable(pivotVariables, rest);
 		}
 	}
 
@@ -203,42 +207,12 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		for (TransformationCS csTransformation : csTransformations) {
 			org.eclipse.ocl.pivot.Package asParent = null;
 			Transformation asTransformation = PivotUtil.getPivot(Transformation.class, csTransformation);
-//			PathNameCS pathName = csTransformation.getPathName();
-//			List<PathElementCS> ownedPathElements = pathName != null ? pathName.getOwnedPathElements() : null;
-//			if ((ownedPathElements == null) || ownedPathElements.isEmpty()) {
-				asParent = NameUtil.getNameable(asCoreModel.getOwnedPackages(), "");
-				if (asParent == null) {
-					asParent = context.refreshModelElement(org.eclipse.ocl.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
-					asParent.setName("");
-				}
-				asPackages.add(asParent);
-/*			}
-			else {
-				for (PathElementCS pathElement : ownedPathElements) {
-					String name = pathElement.toString();
-					List<org.eclipse.ocl.pivot.Package> asOldPackages;
-					List<org.eclipse.ocl.pivot.Package> asNewPackages;
-					if (asParent == null) {
-						asOldPackages = asCoreModel.getOwnedPackages();
-						asNewPackages = asPackages;
-					}
-					else {
-						asOldPackages = asParent.getOwnedPackages();
-						asNewPackages = package2ownedPackages.get(asParent);
-						if (asNewPackages == null) {
-							asNewPackages = new ArrayList<org.eclipse.ocl.pivot.Package>();
-							package2ownedPackages.put(asParent, asNewPackages);
-						}
-					}
-					org.eclipse.ocl.pivot.Package asPackage = ClassUtil.getNamedElement(asOldPackages, name);
-					if (asPackage == null) {
-						asPackage = context.refreshModelElement(org.eclipse.ocl.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
-						asPackage.setName(name);
-					}
-					asNewPackages.add(asPackage);
-					asParent = asPackage;
-				}
-			} */
+			asParent = NameUtil.getNameable(asCoreModel.getOwnedPackages(), "");
+			if (asParent == null) {
+				asParent = context.refreshModelElement(org.eclipse.ocl.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
+				asParent.setName("");
+			}
+			asPackages.add(asParent);
 			List<org.eclipse.ocl.pivot.Class> asNewTransformations = package2ownedClasses.get(asParent);
 			if (asNewTransformations == null) {
 				asNewTransformations = new ArrayList<org.eclipse.ocl.pivot.Class>();
@@ -269,21 +243,8 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 			pivotElement.setBindsTo(variable);
 		}
 		context.refreshName(variable, csElement.getName());
-		if (((CollectionTemplateCSImpl)csElement).basicGetRestIdentifier() == null) {
-			variable = pivotElement.getRest();
-			if (variable == null) {
-				variable = PivotFactory.eINSTANCE.createVariable();
-				pivotElement.setRest(variable);
-			}
-			variable.setIsImplicit(true);
-		}
-//		variable = pivotElement.getRest();
-//		if (variable == null) {
-//			variable = PivotFactory.eINSTANCE.createVariable();
-//			pivotElement.setRest(variable);
-//		}
-//		context.refreshName(variable, csElement.getRestIdentifier());
 		context.refreshPivotList(OCLExpression.class, pivotElement.getMember(), csElement.getOwnedMemberIdentifiers());
+		pivotElement.setRest(PivotUtil.getPivot(Variable.class, csElement.getOwnedRestIdentifier()));
 		return null;
 	}
 
@@ -339,14 +300,22 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	@Override
 	public Continuation<?> visitElementTemplateCS(@NonNull ElementTemplateCS csElement) {
-		@NonNull VariableExp pivotElement = context.refreshModelElement(VariableExp.class, PivotPackage.Literals.VARIABLE_EXP, csElement);
-		VariableDeclaration variable = pivotElement.getReferredVariable();
-		if (variable == null) {
-			variable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
-			pivotElement.setReferredVariable(variable);
+		if (csElement.eContainingFeature() == QVTrelationCSPackage.Literals.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER) {
+			@NonNull Variable asVariable = context.refreshModelElement(Variable.class, PivotPackage.Literals.VARIABLE, csElement);
+			context.refreshName(asVariable, csElement.getName());
+			return null;
 		}
-		context.refreshName(variable, csElement.getName());
-		return null;
+		else {
+			@NonNull VariableExp asVariableExp = context.refreshModelElement(VariableExp.class, PivotPackage.Literals.VARIABLE_EXP, csElement);
+			context.refreshName(asVariableExp, csElement.getName());
+			VariableDeclaration asVariable = asVariableExp.getReferredVariable();
+			if (asVariable == null) {
+				asVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
+				asVariableExp.setReferredVariable(asVariable);
+			}
+			context.refreshName(asVariable, csElement.getName());
+			return null;
+		}
 	}
 
 	@Override

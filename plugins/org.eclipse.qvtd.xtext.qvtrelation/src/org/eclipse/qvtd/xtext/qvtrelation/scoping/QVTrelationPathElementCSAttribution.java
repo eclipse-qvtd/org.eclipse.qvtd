@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.attributes.PathElementCSAttribution;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS;
 
 public class QVTrelationPathElementCSAttribution extends PathElementCSAttribution
@@ -30,18 +31,18 @@ public class QVTrelationPathElementCSAttribution extends PathElementCSAttributio
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		String name = environmentView.getName();
-		if ("_".equals(name)) {
+		if (QVTrelationUtil.DUMMY_VARIABLE_NAME.equals(name)) {
 			for (EObject eObject = target; eObject != null; eObject = eObject.eContainer()) {
 				if (eObject instanceof RelationCS) {
 					Relation relation = PivotUtil.getPivot(Relation.class, (RelationCS)eObject);
 					if (relation != null) {
 						List<Variable> variables = relation.getVariable();
 						AnyType oclAnyType = environmentView.getStandardLibrary().getOclAnyType();
-						String variableName = "_" + variables.size();
+						String variableName = QVTrelationUtil.DUMMY_VARIABLE_NAME + variables.size();
 						Variable asVariable = PivotUtil.createVariable(variableName, oclAnyType, true, null);
 						asVariable.setIsImplicit(true);
 						variables.add(asVariable);
-						environmentView.addElement("_", asVariable);
+						environmentView.addElement(QVTrelationUtil.DUMMY_VARIABLE_NAME, asVariable);
 					}
 					break;
 				}

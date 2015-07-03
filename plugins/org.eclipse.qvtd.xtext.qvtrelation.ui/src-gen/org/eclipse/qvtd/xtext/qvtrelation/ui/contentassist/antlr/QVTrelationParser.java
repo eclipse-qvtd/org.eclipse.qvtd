@@ -236,7 +236,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedTypeAssignment_2(), "rule__CollectionTemplateCS__OwnedTypeAssignment_2");
 					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAssignment_4_0(), "rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0");
 					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAssignment_4_1_1(), "rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1");
-					put(grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierAssignment_4_3(), "rule__CollectionTemplateCS__RestIdentifierAssignment_4_3");
+					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedRestIdentifierAssignment_4_3(), "rule__CollectionTemplateCS__OwnedRestIdentifierAssignment_4_3");
 					put(grammarAccess.getDefaultValueCSAccess().getPropertyIdAssignment_0(), "rule__DefaultValueCS__PropertyIdAssignment_0");
 					put(grammarAccess.getDefaultValueCSAccess().getOwnedInitExpressionAssignment_2(), "rule__DefaultValueCS__OwnedInitExpressionAssignment_2");
 					put(grammarAccess.getDomainCSAccess().getIsCheckonlyAssignment_0_0(), "rule__DomainCS__IsCheckonlyAssignment_0_0");
@@ -247,7 +247,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDomainCSAccess().getImplementedByAssignment_5_1(), "rule__DomainCS__ImplementedByAssignment_5_1");
 					put(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesAssignment_6_2(), "rule__DomainCS__OwnedDefaultValuesAssignment_6_2");
 					put(grammarAccess.getDomainPatternCSAccess().getOwnedTemplateAssignment(), "rule__DomainPatternCS__OwnedTemplateAssignment");
-					put(grammarAccess.getElementTemplateCSAccess().getNameAssignment(), "rule__ElementTemplateCS__NameAssignment");
+					put(grammarAccess.getElementTemplateCSAccess().getIdentifierAssignment(), "rule__ElementTemplateCS__IdentifierAssignment");
 					put(grammarAccess.getKeyDeclCSAccess().getOwnedPathNameAssignment_1(), "rule__KeyDeclCS__OwnedPathNameAssignment_1");
 					put(grammarAccess.getKeyDeclCSAccess().getPropertyIdsAssignment_3_0(), "rule__KeyDeclCS__PropertyIdsAssignment_3_0");
 					put(grammarAccess.getKeyDeclCSAccess().getOwnedOppositePropertyIdsAssignment_3_1_2(), "rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2");

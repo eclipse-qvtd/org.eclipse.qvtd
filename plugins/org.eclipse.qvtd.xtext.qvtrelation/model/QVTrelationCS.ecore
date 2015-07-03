@@ -6,7 +6,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="CollectionTemplateCS" eSuperTypes="#//TemplateCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMemberIdentifiers"
         lowerBound="1" upperBound="-1" eType="#//TemplateVariableCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="restIdentifier" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRestIdentifier" eType="#//ElementTemplateCS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DefaultValueCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ModelElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInitExpression" lowerBound="1"
@@ -32,7 +33,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTemplate" eType="#//TemplateCS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ElementTemplateCS" eSuperTypes="#//TemplateVariableCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementTemplateCS" eSuperTypes="#//TemplateVariableCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KeyDeclCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ModelElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
         containment="true"/>

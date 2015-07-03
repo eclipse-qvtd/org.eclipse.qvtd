@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.xtext.qvtrelationcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.pivot.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +22,7 @@ import org.eclipse.ocl.pivot.Variable;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getOwnedMemberIdentifiers <em>Owned Member Identifiers</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getOwnedRestIdentifier <em>Owned Rest Identifier</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getCollectionTemplateCS()
@@ -48,29 +47,29 @@ public interface CollectionTemplateCS extends TemplateCS {
 	EList<TemplateVariableCS> getOwnedMemberIdentifiers();
 
 	/**
-	 * Returns the value of the '<em><b>Rest Identifier</b></em>' reference.
+	 * Returns the value of the '<em><b>Owned Rest Identifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Rest Identifier</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Rest Identifier</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Rest Identifier</em>' reference.
-	 * @see #setRestIdentifier(Variable)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getCollectionTemplateCS_RestIdentifier()
-	 * @model
+	 * @return the value of the '<em>Owned Rest Identifier</em>' containment reference.
+	 * @see #setOwnedRestIdentifier(ElementTemplateCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getCollectionTemplateCS_OwnedRestIdentifier()
+	 * @model containment="true"
 	 * @generated
 	 */
-	Variable getRestIdentifier();
+	ElementTemplateCS getOwnedRestIdentifier();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getOwnedRestIdentifier <em>Owned Rest Identifier</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Rest Identifier</em>' reference.
-	 * @see #getRestIdentifier()
+	 * @param value the new value of the '<em>Owned Rest Identifier</em>' containment reference.
+	 * @see #getOwnedRestIdentifier()
 	 * @generated
 	 */
-	void setRestIdentifier(Variable value);
+	void setOwnedRestIdentifier(ElementTemplateCS value);
 
 } // CollectionTemplateCS

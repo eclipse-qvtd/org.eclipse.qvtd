@@ -267,17 +267,17 @@ ruleCollectionTemplateCS returns [EObject current=null]
 (
 (
 		{ 
-		  /* */ 
-		}
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getCollectionTemplateCSRule());
-	        }
-        }
-		{ 
-	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierVariableCrossReference_4_3_0()); 
+	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getOwnedRestIdentifierElementTemplateCSParserRuleCall_4_3_0()); 
 	    }
-		ruleUnrestrictedName		{ 
+		lv_ownedRestIdentifier_8_0=ruleElementTemplateCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getCollectionTemplateCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedRestIdentifier",
+        		lv_ownedRestIdentifier_8_0, 
+        		"ElementTemplateCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -589,17 +589,17 @@ ruleElementTemplateCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getElementTemplateCSAccess().getNameUnrestrictedNameParserRuleCall_0()); 
-	    }
-		lv_name_0_0=ruleUnrestrictedName		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getElementTemplateCSRule());
+		  /* */ 
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getElementTemplateCSRule());
 	        }
-       		set(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"UnrestrictedName");
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getElementTemplateCSAccess().getIdentifierVariableCrossReference_0()); 
+	    }
+		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 

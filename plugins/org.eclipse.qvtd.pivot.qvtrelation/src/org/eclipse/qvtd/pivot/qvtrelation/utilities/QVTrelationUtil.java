@@ -22,6 +22,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 
 public class QVTrelationUtil extends QVTbaseUtil
 {
+	public static final @NonNull String DUMMY_VARIABLE_NAME = "_";
+	
 	public static @NonNull List<Variable> getRootVariables(@NonNull Relation relation) {
 		List<Variable> rootVariables = new ArrayList<Variable>();
 		for (Domain domain : relation.getDomain()) {

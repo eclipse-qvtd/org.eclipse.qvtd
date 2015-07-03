@@ -22,9 +22,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
@@ -38,7 +38,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.CollectionTemplateCSImpl#getOwnedMemberIdentifiers <em>Owned Member Identifiers</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.CollectionTemplateCSImpl#getRestIdentifier <em>Rest Identifier</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.CollectionTemplateCSImpl#getOwnedRestIdentifier <em>Owned Rest Identifier</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,14 +55,14 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	protected EList<TemplateVariableCS> ownedMemberIdentifiers;
 
 	/**
-	 * The cached value of the '{@link #getRestIdentifier() <em>Rest Identifier</em>}' reference.
+	 * The cached value of the '{@link #getOwnedRestIdentifier() <em>Owned Rest Identifier</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRestIdentifier()
+	 * @see #getOwnedRestIdentifier()
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable restIdentifier;
+	protected ElementTemplateCS ownedRestIdentifier;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -102,16 +102,8 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	 * @generated
 	 */
 	@Override
-	public Variable getRestIdentifier() {
-		if (restIdentifier != null && restIdentifier.eIsProxy()) {
-			InternalEObject oldRestIdentifier = (InternalEObject)restIdentifier;
-			restIdentifier = (Variable)eResolveProxy(oldRestIdentifier);
-			if (restIdentifier != oldRestIdentifier) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER, oldRestIdentifier, restIdentifier));
-			}
-		}
-		return restIdentifier;
+	public ElementTemplateCS getOwnedRestIdentifier() {
+		return ownedRestIdentifier;
 	}
 
 	/**
@@ -119,8 +111,14 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetRestIdentifier() {
-		return restIdentifier;
+	public NotificationChain basicSetOwnedRestIdentifier(ElementTemplateCS newOwnedRestIdentifier, NotificationChain msgs) {
+		ElementTemplateCS oldOwnedRestIdentifier = ownedRestIdentifier;
+		ownedRestIdentifier = newOwnedRestIdentifier;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER, oldOwnedRestIdentifier, newOwnedRestIdentifier);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -129,11 +127,18 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	 * @generated
 	 */
 	@Override
-	public void setRestIdentifier(Variable newRestIdentifier) {
-		Variable oldRestIdentifier = restIdentifier;
-		restIdentifier = newRestIdentifier;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER, oldRestIdentifier, restIdentifier));
+	public void setOwnedRestIdentifier(ElementTemplateCS newOwnedRestIdentifier) {
+		if (newOwnedRestIdentifier != ownedRestIdentifier) {
+			NotificationChain msgs = null;
+			if (ownedRestIdentifier != null)
+				msgs = ((InternalEObject)ownedRestIdentifier).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER, null, msgs);
+			if (newOwnedRestIdentifier != null)
+				msgs = ((InternalEObject)newOwnedRestIdentifier).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER, null, msgs);
+			msgs = basicSetOwnedRestIdentifier(newOwnedRestIdentifier, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER, newOwnedRestIdentifier, newOwnedRestIdentifier));
 	}
 
 	/**
@@ -146,6 +151,8 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 		switch (featureID) {
 			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
 				return ((InternalEList<?>)getOwnedMemberIdentifiers()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER:
+				return basicSetOwnedRestIdentifier(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -160,9 +167,8 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 		switch (featureID) {
 			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
 				return getOwnedMemberIdentifiers();
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
-				if (resolve) return getRestIdentifier();
-				return basicGetRestIdentifier();
+			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER:
+				return getOwnedRestIdentifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -180,8 +186,8 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 				getOwnedMemberIdentifiers().clear();
 				getOwnedMemberIdentifiers().addAll((Collection<? extends TemplateVariableCS>)newValue);
 				return;
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
-				setRestIdentifier((Variable)newValue);
+			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER:
+				setOwnedRestIdentifier((ElementTemplateCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -198,8 +204,8 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
 				getOwnedMemberIdentifiers().clear();
 				return;
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
-				setRestIdentifier((Variable)null);
+			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER:
+				setOwnedRestIdentifier((ElementTemplateCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -215,8 +221,8 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 		switch (featureID) {
 			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
 				return ownedMemberIdentifiers != null && !ownedMemberIdentifiers.isEmpty();
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
-				return restIdentifier != null;
+			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER:
+				return ownedRestIdentifier != null;
 		}
 		return super.eIsSet(featureID);
 	}
