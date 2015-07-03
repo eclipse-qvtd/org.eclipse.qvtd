@@ -138,8 +138,21 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	}
 
 	@Override
-	public @Nullable String visitCGMappingLoop(@NonNull CGMappingLoop object) {
-		return visitCGIterationCallExp(object);
+	public @Nullable String visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
+		CGValuedElement source = cgMappingLoop.getSource();
+		safeVisit(source);
+		append("->loop(");
+		String prefix = "";//$NON-NLS-1$
+		for (CGValuedElement argument : cgMappingLoop.getIterators()) {
+			append(prefix);
+			safeVisit(argument);
+			prefix = ", ";//$NON-NLS-1$
+		}
+		append(" | ");
+		append(" ... ");
+//		safeVisit(cgMappingLoop.getBody());
+		append(")");
+		return null;
 	}
 
 	@Override

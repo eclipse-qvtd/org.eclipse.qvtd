@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.LoopExp;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
@@ -162,9 +161,8 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 			case QVTimperativePackage.MAPPING_LOOP: {
 				MappingLoop mappingLoop = (MappingLoop)theEObject;
 				T result = caseMappingLoop(mappingLoop);
-				if (result == null) result = caseLoopExp(mappingLoop);
-				if (result == null) result = caseMappingStatement(mappingLoop);
 				if (result == null) result = caseCallExp(mappingLoop);
+				if (result == null) result = caseMappingStatement(mappingLoop);
 				if (result == null) result = caseOCLExpression(mappingLoop);
 				if (result == null) result = caseTypedElement(mappingLoop);
 				if (result == null) result = caseNamedElement(mappingLoop);
@@ -599,21 +597,6 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCallExp(CallExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Loop Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Loop Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLoopExp(LoopExp object) {
 		return null;
 	}
 

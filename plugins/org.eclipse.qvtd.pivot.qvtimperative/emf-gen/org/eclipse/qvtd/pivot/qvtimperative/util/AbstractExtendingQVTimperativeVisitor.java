@@ -67,7 +67,7 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 
 	@Override
 	public @Nullable R visitMappingLoop(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingLoop object) {
-		return visitLoopExp(object);
+		return visitCallExp(object);
 	}
 
 	@Override

@@ -70,7 +70,7 @@ public abstract class AbstractQVTimperativeAS2MonikerVisitor
 
 	@Override
 	public @Nullable Object visitMappingLoop(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingLoop object) {
-		return visitLoopExp(object);
+		return visitCallExp(object);
 	}
 
 	@Override

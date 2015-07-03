@@ -320,6 +320,26 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public EReference getMappingLoop_OwnedBody() {
+		return (EReference)mappingLoopEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getMappingLoop_OwnedIterators() {
+		return (EReference)mappingLoopEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMappingSequence() {
 		return mappingSequenceEClass;
 	}
@@ -413,6 +433,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__VALUE);
 
 		mappingLoopEClass = createEClass(MAPPING_LOOP);
+		createEReference(mappingLoopEClass, MAPPING_LOOP__OWNED_BODY);
+		createEReference(mappingLoopEClass, MAPPING_LOOP__OWNED_ITERATORS);
 
 		mappingSequenceEClass = createEClass(MAPPING_SEQUENCE);
 		createEReference(mappingSequenceEClass, MAPPING_SEQUENCE__MAPPING_STATEMENTS);
@@ -462,7 +484,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		mappingCallEClass.getESuperTypes().add(this.getMappingStatement());
 		mappingCallEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 		mappingCallBindingEClass.getESuperTypes().add(thePivotPackage.getElement());
-		mappingLoopEClass.getESuperTypes().add(thePivotPackage.getLoopExp());
+		mappingLoopEClass.getESuperTypes().add(thePivotPackage.getCallExp());
 		mappingLoopEClass.getESuperTypes().add(this.getMappingStatement());
 		mappingSequenceEClass.getESuperTypes().add(this.getMappingStatement());
 		mappingStatementEClass.getESuperTypes().add(thePivotPackage.getOCLExpression());
@@ -491,6 +513,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEReference(getMappingCallBinding_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingLoopEClass, MappingLoop.class, "MappingLoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMappingLoop_OwnedBody(), thePivotPackage.getOCLExpression(), null, "ownedBody", null, 1, 1, MappingLoop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingLoop_OwnedIterators(), thePivotPackage.getVariable(), null, "ownedIterators", null, 0, -1, MappingLoop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingSequenceEClass, MappingSequence.class, "MappingSequence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingSequence_MappingStatements(), this.getMappingStatement(), null, "mappingStatements", null, 0, -1, MappingSequence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

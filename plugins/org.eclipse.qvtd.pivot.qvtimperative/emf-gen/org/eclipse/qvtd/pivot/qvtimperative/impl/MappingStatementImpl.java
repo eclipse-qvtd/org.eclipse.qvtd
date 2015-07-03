@@ -43,4 +43,9 @@ public abstract class MappingStatementImpl extends OCLExpressionImpl implements 
 	}
 
 
+	@Override
+	public boolean mayHaveNullType() {		// FIXME Use *.ocl
+		return true;
+	}
+
 } //MappingStatementImpl

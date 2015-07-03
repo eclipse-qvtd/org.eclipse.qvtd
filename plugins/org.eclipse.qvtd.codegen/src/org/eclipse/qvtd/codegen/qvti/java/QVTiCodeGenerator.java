@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
@@ -44,6 +45,7 @@ import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiCG2StringVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiDependencyVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -140,6 +142,23 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	@Override
 	public @NonNull FieldingAnalyzer createFieldingAnalyzer() {
 		return new QVTiFieldingAnalyzer(cgAnalyzer);
+	}
+
+	@Override
+	protected @NonNull NameManager createNameManager() {
+		return new NameManager() {
+			@Override
+			public @Nullable String getNameHint(@NonNull Object anObject) {
+				if (anObject instanceof CGValuedElement) {
+					anObject = ((CGValuedElement)anObject).getNamedValue();
+				}
+				if (anObject instanceof CGMappingLoop) {
+					return "loop";
+				}
+				return super.getNameHint(anObject);
+			}
+			
+		};
 	}
 
 	@Override

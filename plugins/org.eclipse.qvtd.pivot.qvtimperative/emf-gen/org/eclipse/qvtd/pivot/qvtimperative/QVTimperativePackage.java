@@ -775,7 +775,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__ANNOTATING_COMMENTS = PivotPackage.LOOP_EXP__ANNOTATING_COMMENTS;
+	int MAPPING_LOOP__ANNOTATING_COMMENTS = PivotPackage.CALL_EXP__ANNOTATING_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -784,7 +784,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__OWNED_ANNOTATIONS = PivotPackage.LOOP_EXP__OWNED_ANNOTATIONS;
+	int MAPPING_LOOP__OWNED_ANNOTATIONS = PivotPackage.CALL_EXP__OWNED_ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
@@ -793,7 +793,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__OWNED_COMMENTS = PivotPackage.LOOP_EXP__OWNED_COMMENTS;
+	int MAPPING_LOOP__OWNED_COMMENTS = PivotPackage.CALL_EXP__OWNED_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
@@ -802,7 +802,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__OWNED_EXTENSIONS = PivotPackage.LOOP_EXP__OWNED_EXTENSIONS;
+	int MAPPING_LOOP__OWNED_EXTENSIONS = PivotPackage.CALL_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -811,7 +811,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__NAME = PivotPackage.LOOP_EXP__NAME;
+	int MAPPING_LOOP__NAME = PivotPackage.CALL_EXP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
@@ -820,7 +820,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__IS_MANY = PivotPackage.LOOP_EXP__IS_MANY;
+	int MAPPING_LOOP__IS_MANY = PivotPackage.CALL_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -829,7 +829,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__IS_REQUIRED = PivotPackage.LOOP_EXP__IS_REQUIRED;
+	int MAPPING_LOOP__IS_REQUIRED = PivotPackage.CALL_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -838,7 +838,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__TYPE = PivotPackage.LOOP_EXP__TYPE;
+	int MAPPING_LOOP__TYPE = PivotPackage.CALL_EXP__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
@@ -847,7 +847,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__TYPE_VALUE = PivotPackage.LOOP_EXP__TYPE_VALUE;
+	int MAPPING_LOOP__TYPE_VALUE = PivotPackage.CALL_EXP__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
@@ -856,7 +856,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__IS_IMPLICIT = PivotPackage.LOOP_EXP__IS_IMPLICIT;
+	int MAPPING_LOOP__IS_IMPLICIT = PivotPackage.CALL_EXP__IS_IMPLICIT;
 
 	/**
 	 * The feature id for the '<em><b>Is Safe</b></em>' attribute.
@@ -865,7 +865,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__IS_SAFE = PivotPackage.LOOP_EXP__IS_SAFE;
+	int MAPPING_LOOP__IS_SAFE = PivotPackage.CALL_EXP__IS_SAFE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
@@ -874,7 +874,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__OWNED_SOURCE = PivotPackage.LOOP_EXP__OWNED_SOURCE;
+	int MAPPING_LOOP__OWNED_SOURCE = PivotPackage.CALL_EXP__OWNED_SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Body</b></em>' containment reference.
@@ -883,7 +883,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__OWNED_BODY = PivotPackage.LOOP_EXP__OWNED_BODY;
+	int MAPPING_LOOP__OWNED_BODY = PivotPackage.CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Iterators</b></em>' containment reference list.
@@ -892,16 +892,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__OWNED_ITERATORS = PivotPackage.LOOP_EXP__OWNED_ITERATORS;
-
-	/**
-	 * The feature id for the '<em><b>Referred Iteration</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_LOOP__REFERRED_ITERATION = PivotPackage.LOOP_EXP__REFERRED_ITERATION;
+	int MAPPING_LOOP__OWNED_ITERATORS = PivotPackage.CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Loop</em>' class.
@@ -910,7 +901,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP_FEATURE_COUNT = PivotPackage.LOOP_EXP_FEATURE_COUNT + 0;
+	int MAPPING_LOOP_FEATURE_COUNT = PivotPackage.CALL_EXP_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingSequenceImpl <em>Mapping Sequence</em>}' class.
@@ -1263,6 +1254,28 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getMappingLoop();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingLoop#getOwnedBody <em>Owned Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Body</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingLoop#getOwnedBody()
+	 * @see #getMappingLoop()
+	 * @generated
+	 */
+	EReference getMappingLoop_OwnedBody();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingLoop#getOwnedIterators <em>Owned Iterators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Iterators</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingLoop#getOwnedIterators()
+	 * @see #getMappingLoop()
+	 * @generated
+	 */
+	EReference getMappingLoop_OwnedIterators();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingSequence <em>Mapping Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1467,6 +1480,22 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EClass MAPPING_LOOP = eINSTANCE.getMappingLoop();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_LOOP__OWNED_BODY = eINSTANCE.getMappingLoop_OwnedBody();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Iterators</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_LOOP__OWNED_ITERATORS = eINSTANCE.getMappingLoop_OwnedIterators();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingSequenceImpl <em>Mapping Sequence</em>}' class.
