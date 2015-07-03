@@ -24,6 +24,7 @@
       <ownedOperations xmi:id="o.qvtbaselibrary.Model.rootObjects" implementationClass="org.eclipse.qvtd.pivot.qvtimperative.library.model.RootObjectsOperation"
           name="rootObjects" type="#//@ownedPackages.1/@ownedClasses.3"/>
     </ownedClasses>
+    <ownedClasses xmi:id="T.qvtbaselibrary.Transformation" name="Transformation" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"/>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
     <ownedClasses xsi:type="pivot:CollectionType" elementType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"

@@ -8,4 +8,5 @@ type Model : TypedModel {
 	operation objectsOfType(TT)(type : typeof(TT)) : ocl::Set(TT) => 'org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfTypeOperation';
 	operation rootObjects() : ocl::Set(ocl::OclElement) => 'org.eclipse.qvtd.pivot.qvtimperative.library.model.RootObjectsOperation';
 }
+type Transformation : Transformation {}
 }
