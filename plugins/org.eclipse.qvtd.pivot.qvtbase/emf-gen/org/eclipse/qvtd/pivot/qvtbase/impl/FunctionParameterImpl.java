@@ -226,14 +226,14 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	}
 
 	/**
-	 * The cached validation expression for the '{@link #validateCompatibleInitialiserType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Initialiser Type</em>}' invariant operation.
+	 * The cached validation expression for the '{@link #validateCompatibleInitializerType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Initializer Type</em>}' invariant operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #validateCompatibleInitialiserType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @see #validateCompatibleInitializerType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VALIDATE_COMPATIBLE_INITIALISER_TYPE_DIAGNOSTIC_CHAIN_MAP__EEXPRESSION = "ownedInit <> null implies ownedInit?.type?.conformsTo(type)\n" + //$NON-NLS-1$
+	protected static final String VALIDATE_COMPATIBLE_INITIALIZER_TYPE_DIAGNOSTIC_CHAIN_MAP__EEXPRESSION = "ownedInit <> null implies ownedInit?.type.conformsTo(type)\n" + //$NON-NLS-1$
 		"\n" + //$NON-NLS-1$
 		"";
 
@@ -243,7 +243,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * @generated
 	 */
 	@Override
-	public boolean validateCompatibleInitialiserType(DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateCompatibleInitializerType(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return
 			PivotValidator.validate
 				(QVTbasePackage.Literals.FUNCTION_PARAMETER,
@@ -251,11 +251,11 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 				 diagnostics,
 				 context,
 				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
-				 PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP,
-				 VALIDATE_COMPATIBLE_INITIALISER_TYPE_DIAGNOSTIC_CHAIN_MAP__EEXPRESSION,
+				 PivotPackage.Literals.VARIABLE___VALIDATE_COMPATIBLE_INITIALIZER_TYPE__DIAGNOSTICCHAIN_MAP,
+				 VALIDATE_COMPATIBLE_INITIALIZER_TYPE_DIAGNOSTIC_CHAIN_MAP__EEXPRESSION,
 				 Diagnostic.ERROR,
 				 PivotValidator.DIAGNOSTIC_SOURCE,
-				 PivotValidator.VARIABLE__VALIDATE_COMPATIBLE_INITIALISER_TYPE);
+				 PivotValidator.VARIABLE__VALIDATE_COMPATIBLE_INITIALIZER_TYPE);
 	}
 
 	/**

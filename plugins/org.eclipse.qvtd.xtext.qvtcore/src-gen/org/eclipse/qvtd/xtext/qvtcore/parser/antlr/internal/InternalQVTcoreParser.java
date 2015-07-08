@@ -14533,28 +14533,28 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCurlyBracketedClauseCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5041:1: ruleCurlyBracketedClauseCS returns [EObject current=null] : ( () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}' ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5041:1: ruleCurlyBracketedClauseCS returns [EObject current=null] : ( () otherlv_1= '{' ( ( (lv_value_2_0= ruleStringLiteral ) ) | ( ( (lv_ownedParts_3_0= ruleShadowPartCS ) ) (otherlv_4= ',' ( (lv_ownedParts_5_0= ruleShadowPartCS ) ) )* ) )? otherlv_6= '}' ) ;
     public final EObject ruleCurlyBracketedClauseCS() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
-        Token otherlv_3=null;
+        Token otherlv_4=null;
         Token otherlv_6=null;
-        EObject lv_ownedParts_2_0 = null;
+        AntlrDatatypeRuleToken lv_value_2_0 = null;
 
-        EObject lv_ownedParts_4_0 = null;
+        EObject lv_ownedParts_3_0 = null;
 
-        AntlrDatatypeRuleToken lv_value_5_0 = null;
+        EObject lv_ownedParts_5_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5044:28: ( ( () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}' ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5045:1: ( () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5044:28: ( ( () otherlv_1= '{' ( ( (lv_value_2_0= ruleStringLiteral ) ) | ( ( (lv_ownedParts_3_0= ruleShadowPartCS ) ) (otherlv_4= ',' ( (lv_ownedParts_5_0= ruleShadowPartCS ) ) )* ) )? otherlv_6= '}' ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5045:1: ( () otherlv_1= '{' ( ( (lv_value_2_0= ruleStringLiteral ) ) | ( ( (lv_ownedParts_3_0= ruleShadowPartCS ) ) (otherlv_4= ',' ( (lv_ownedParts_5_0= ruleShadowPartCS ) ) )* ) )? otherlv_6= '}' )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5045:1: ( () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5045:2: () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5045:1: ( () otherlv_1= '{' ( ( (lv_value_2_0= ruleStringLiteral ) ) | ( ( (lv_ownedParts_3_0= ruleShadowPartCS ) ) (otherlv_4= ',' ( (lv_ownedParts_5_0= ruleShadowPartCS ) ) )* ) )? otherlv_6= '}' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5045:2: () otherlv_1= '{' ( ( (lv_value_2_0= ruleStringLiteral ) ) | ( ( (lv_ownedParts_3_0= ruleShadowPartCS ) ) (otherlv_4= ',' ( (lv_ownedParts_5_0= ruleShadowPartCS ) ) )* ) )? otherlv_6= '}'
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5045:2: ()
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5046:2: 
@@ -14580,163 +14580,33 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_1, grammarAccess.getCurlyBracketedClauseCSAccess().getLeftCurlyBracketKeyword_1());
                   
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5058:1: ( ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) )
-            int alt91=2;
-            int LA91_0 = input.LA(1);
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5058:1: ( ( (lv_value_2_0= ruleStringLiteral ) ) | ( ( (lv_ownedParts_3_0= ruleShadowPartCS ) ) (otherlv_4= ',' ( (lv_ownedParts_5_0= ruleShadowPartCS ) ) )* ) )?
+            int alt90=3;
+            int LA90_0 = input.LA(1);
 
-            if ( ((LA91_0>=RULE_SIMPLE_ID && LA91_0<=RULE_ESCAPED_ID)||LA91_0==17||LA91_0==19||LA91_0==23||(LA91_0>=25 && LA91_0<=26)||LA91_0==30||(LA91_0>=34 && LA91_0<=35)||(LA91_0>=37 && LA91_0<=40)) ) {
-                alt91=1;
+            if ( (LA90_0==RULE_SINGLE_QUOTED_STRING) ) {
+                alt90=1;
             }
-            else if ( (LA91_0==RULE_SINGLE_QUOTED_STRING) ) {
-                alt91=2;
+            else if ( ((LA90_0>=RULE_SIMPLE_ID && LA90_0<=RULE_ESCAPED_ID)||LA90_0==17||LA90_0==19||(LA90_0>=25 && LA90_0<=26)||LA90_0==30||(LA90_0>=34 && LA90_0<=35)||(LA90_0>=37 && LA90_0<=40)) ) {
+                alt90=2;
             }
-            else {
-                if (state.backtracking>0) {state.failed=true; return current;}
-                NoViableAltException nvae =
-                    new NoViableAltException("", 91, 0, input);
-
-                throw nvae;
-            }
-            switch (alt91) {
+            switch (alt90) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5058:2: ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )?
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5058:2: ( (lv_value_2_0= ruleStringLiteral ) )
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5058:2: ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )?
-                    int alt90=2;
-                    int LA90_0 = input.LA(1);
-
-                    if ( ((LA90_0>=RULE_SIMPLE_ID && LA90_0<=RULE_ESCAPED_ID)||LA90_0==17||LA90_0==19||(LA90_0>=25 && LA90_0<=26)||LA90_0==30||(LA90_0>=34 && LA90_0<=35)||(LA90_0>=37 && LA90_0<=40)) ) {
-                        alt90=1;
-                    }
-                    switch (alt90) {
-                        case 1 :
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5058:3: ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )*
-                            {
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5058:3: ( (lv_ownedParts_2_0= ruleShadowPartCS ) )
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5059:1: (lv_ownedParts_2_0= ruleShadowPartCS )
-                            {
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5059:1: (lv_ownedParts_2_0= ruleShadowPartCS )
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5060:3: lv_ownedParts_2_0= ruleShadowPartCS
-                            {
-                            if ( state.backtracking==0 ) {
-                               
-                              	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_0_0()); 
-                              	    
-                            }
-                            pushFollow(FollowSets000.FOLLOW_ruleShadowPartCS_in_ruleCurlyBracketedClauseCS11220);
-                            lv_ownedParts_2_0=ruleShadowPartCS();
-
-                            state._fsp--;
-                            if (state.failed) return current;
-                            if ( state.backtracking==0 ) {
-
-                              	        if (current==null) {
-                              	            current = createModelElementForParent(grammarAccess.getCurlyBracketedClauseCSRule());
-                              	        }
-                                     		add(
-                                     			current, 
-                                     			"ownedParts",
-                                      		lv_ownedParts_2_0, 
-                                      		"ShadowPartCS");
-                              	        afterParserOrEnumRuleCall();
-                              	    
-                            }
-
-                            }
-
-
-                            }
-
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5076:2: (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )*
-                            loop89:
-                            do {
-                                int alt89=2;
-                                int LA89_0 = input.LA(1);
-
-                                if ( (LA89_0==20) ) {
-                                    alt89=1;
-                                }
-
-
-                                switch (alt89) {
-                            	case 1 :
-                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5076:4: otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) )
-                            	    {
-                            	    otherlv_3=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleCurlyBracketedClauseCS11233); if (state.failed) return current;
-                            	    if ( state.backtracking==0 ) {
-
-                            	          	newLeafNode(otherlv_3, grammarAccess.getCurlyBracketedClauseCSAccess().getCommaKeyword_2_0_1_0());
-                            	          
-                            	    }
-                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5080:1: ( (lv_ownedParts_4_0= ruleShadowPartCS ) )
-                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5081:1: (lv_ownedParts_4_0= ruleShadowPartCS )
-                            	    {
-                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5081:1: (lv_ownedParts_4_0= ruleShadowPartCS )
-                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5082:3: lv_ownedParts_4_0= ruleShadowPartCS
-                            	    {
-                            	    if ( state.backtracking==0 ) {
-                            	       
-                            	      	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_1_1_0()); 
-                            	      	    
-                            	    }
-                            	    pushFollow(FollowSets000.FOLLOW_ruleShadowPartCS_in_ruleCurlyBracketedClauseCS11254);
-                            	    lv_ownedParts_4_0=ruleShadowPartCS();
-
-                            	    state._fsp--;
-                            	    if (state.failed) return current;
-                            	    if ( state.backtracking==0 ) {
-
-                            	      	        if (current==null) {
-                            	      	            current = createModelElementForParent(grammarAccess.getCurlyBracketedClauseCSRule());
-                            	      	        }
-                            	             		add(
-                            	             			current, 
-                            	             			"ownedParts",
-                            	              		lv_ownedParts_4_0, 
-                            	              		"ShadowPartCS");
-                            	      	        afterParserOrEnumRuleCall();
-                            	      	    
-                            	    }
-
-                            	    }
-
-
-                            	    }
-
-
-                            	    }
-                            	    break;
-
-                            	default :
-                            	    break loop89;
-                                }
-                            } while (true);
-
-
-                            }
-                            break;
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5099:6: ( (lv_value_5_0= ruleStringLiteral ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5058:2: ( (lv_value_2_0= ruleStringLiteral ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5059:1: (lv_value_2_0= ruleStringLiteral )
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5099:6: ( (lv_value_5_0= ruleStringLiteral ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5100:1: (lv_value_5_0= ruleStringLiteral )
-                    {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5100:1: (lv_value_5_0= ruleStringLiteral )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5101:3: lv_value_5_0= ruleStringLiteral
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5059:1: (lv_value_2_0= ruleStringLiteral )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5060:3: lv_value_2_0= ruleStringLiteral
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getValueStringLiteralParserRuleCall_2_1_0()); 
+                      	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getValueStringLiteralParserRuleCall_2_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleStringLiteral_in_ruleCurlyBracketedClauseCS11285);
-                    lv_value_5_0=ruleStringLiteral();
+                    pushFollow(FollowSets000.FOLLOW_ruleStringLiteral_in_ruleCurlyBracketedClauseCS11219);
+                    lv_value_2_0=ruleStringLiteral();
 
                     state._fsp--;
                     if (state.failed) return current;
@@ -14748,13 +14618,125 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                              		set(
                              			current, 
                              			"value",
-                              		lv_value_5_0, 
+                              		lv_value_2_0, 
                               		"StringLiteral");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
 
                     }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5077:6: ( ( (lv_ownedParts_3_0= ruleShadowPartCS ) ) (otherlv_4= ',' ( (lv_ownedParts_5_0= ruleShadowPartCS ) ) )* )
+                    {
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5077:6: ( ( (lv_ownedParts_3_0= ruleShadowPartCS ) ) (otherlv_4= ',' ( (lv_ownedParts_5_0= ruleShadowPartCS ) ) )* )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5077:7: ( (lv_ownedParts_3_0= ruleShadowPartCS ) ) (otherlv_4= ',' ( (lv_ownedParts_5_0= ruleShadowPartCS ) ) )*
+                    {
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5077:7: ( (lv_ownedParts_3_0= ruleShadowPartCS ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5078:1: (lv_ownedParts_3_0= ruleShadowPartCS )
+                    {
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5078:1: (lv_ownedParts_3_0= ruleShadowPartCS )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5079:3: lv_ownedParts_3_0= ruleShadowPartCS
+                    {
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_1_0_0()); 
+                      	    
+                    }
+                    pushFollow(FollowSets000.FOLLOW_ruleShadowPartCS_in_ruleCurlyBracketedClauseCS11247);
+                    lv_ownedParts_3_0=ruleShadowPartCS();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getCurlyBracketedClauseCSRule());
+                      	        }
+                             		add(
+                             			current, 
+                             			"ownedParts",
+                              		lv_ownedParts_3_0, 
+                              		"ShadowPartCS");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
+
+                    }
+
+
+                    }
+
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5095:2: (otherlv_4= ',' ( (lv_ownedParts_5_0= ruleShadowPartCS ) ) )*
+                    loop89:
+                    do {
+                        int alt89=2;
+                        int LA89_0 = input.LA(1);
+
+                        if ( (LA89_0==20) ) {
+                            alt89=1;
+                        }
+
+
+                        switch (alt89) {
+                    	case 1 :
+                    	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5095:4: otherlv_4= ',' ( (lv_ownedParts_5_0= ruleShadowPartCS ) )
+                    	    {
+                    	    otherlv_4=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleCurlyBracketedClauseCS11260); if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+
+                    	          	newLeafNode(otherlv_4, grammarAccess.getCurlyBracketedClauseCSAccess().getCommaKeyword_2_1_1_0());
+                    	          
+                    	    }
+                    	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5099:1: ( (lv_ownedParts_5_0= ruleShadowPartCS ) )
+                    	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5100:1: (lv_ownedParts_5_0= ruleShadowPartCS )
+                    	    {
+                    	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5100:1: (lv_ownedParts_5_0= ruleShadowPartCS )
+                    	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5101:3: lv_ownedParts_5_0= ruleShadowPartCS
+                    	    {
+                    	    if ( state.backtracking==0 ) {
+                    	       
+                    	      	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_1_1_1_0()); 
+                    	      	    
+                    	    }
+                    	    pushFollow(FollowSets000.FOLLOW_ruleShadowPartCS_in_ruleCurlyBracketedClauseCS11281);
+                    	    lv_ownedParts_5_0=ruleShadowPartCS();
+
+                    	    state._fsp--;
+                    	    if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+
+                    	      	        if (current==null) {
+                    	      	            current = createModelElementForParent(grammarAccess.getCurlyBracketedClauseCSRule());
+                    	      	        }
+                    	             		add(
+                    	             			current, 
+                    	             			"ownedParts",
+                    	              		lv_ownedParts_5_0, 
+                    	              		"ShadowPartCS");
+                    	      	        afterParserOrEnumRuleCall();
+                    	      	    
+                    	    }
+
+                    	    }
+
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop89;
+                        }
+                    } while (true);
 
 
                     }
@@ -14887,13 +14869,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                   
             }
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5155:1: ( ( (lv_ownedArguments_2_0= ruleNavigatingArgCS ) ) ( (lv_ownedArguments_3_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_ownedArguments_4_0= ruleNavigatingSemiArgCS ) ) ( (lv_ownedArguments_5_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_ownedArguments_6_0= ruleNavigatingBarArgCS ) ) ( (lv_ownedArguments_7_0= ruleNavigatingCommaArgCS ) )* )* )?
-            int alt97=2;
-            int LA97_0 = input.LA(1);
+            int alt96=2;
+            int LA96_0 = input.LA(1);
 
-            if ( ((LA97_0>=RULE_SIMPLE_ID && LA97_0<=RULE_SINGLE_QUOTED_STRING)||LA97_0==17||LA97_0==19||(LA97_0>=25 && LA97_0<=27)||(LA97_0>=29 && LA97_0<=30)||LA97_0==32||(LA97_0>=34 && LA97_0<=35)||(LA97_0>=37 && LA97_0<=42)||(LA97_0>=59 && LA97_0<=73)||LA97_0==76||(LA97_0>=78 && LA97_0<=81)||LA97_0==86||(LA97_0>=91 && LA97_0<=92)) ) {
-                alt97=1;
+            if ( ((LA96_0>=RULE_SIMPLE_ID && LA96_0<=RULE_SINGLE_QUOTED_STRING)||LA96_0==17||LA96_0==19||(LA96_0>=25 && LA96_0<=27)||(LA96_0>=29 && LA96_0<=30)||LA96_0==32||(LA96_0>=34 && LA96_0<=35)||(LA96_0>=37 && LA96_0<=42)||(LA96_0>=59 && LA96_0<=73)||LA96_0==76||(LA96_0>=78 && LA96_0<=81)||LA96_0==86||(LA96_0>=91 && LA96_0<=92)) ) {
+                alt96=1;
             }
-            switch (alt97) {
+            switch (alt96) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5155:2: ( (lv_ownedArguments_2_0= ruleNavigatingArgCS ) ) ( (lv_ownedArguments_3_0= ruleNavigatingCommaArgCS ) )* ( ( (lv_ownedArguments_4_0= ruleNavigatingSemiArgCS ) ) ( (lv_ownedArguments_5_0= ruleNavigatingCommaArgCS ) )* )? ( ( (lv_ownedArguments_6_0= ruleNavigatingBarArgCS ) ) ( (lv_ownedArguments_7_0= ruleNavigatingCommaArgCS ) )* )*
                     {
@@ -14933,17 +14915,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
 
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5173:2: ( (lv_ownedArguments_3_0= ruleNavigatingCommaArgCS ) )*
-                    loop92:
+                    loop91:
                     do {
-                        int alt92=2;
-                        int LA92_0 = input.LA(1);
+                        int alt91=2;
+                        int LA91_0 = input.LA(1);
 
-                        if ( (LA92_0==20) ) {
-                            alt92=1;
+                        if ( (LA91_0==20) ) {
+                            alt91=1;
                         }
 
 
-                        switch (alt92) {
+                        switch (alt91) {
                     	case 1 :
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5174:1: (lv_ownedArguments_3_0= ruleNavigatingCommaArgCS )
                     	    {
@@ -14981,18 +14963,18 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop92;
+                    	    break loop91;
                         }
                     } while (true);
 
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5191:3: ( ( (lv_ownedArguments_4_0= ruleNavigatingSemiArgCS ) ) ( (lv_ownedArguments_5_0= ruleNavigatingCommaArgCS ) )* )?
-                    int alt94=2;
-                    int LA94_0 = input.LA(1);
+                    int alt93=2;
+                    int LA93_0 = input.LA(1);
 
-                    if ( (LA94_0==33) ) {
-                        alt94=1;
+                    if ( (LA93_0==33) ) {
+                        alt93=1;
                     }
-                    switch (alt94) {
+                    switch (alt93) {
                         case 1 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5191:4: ( (lv_ownedArguments_4_0= ruleNavigatingSemiArgCS ) ) ( (lv_ownedArguments_5_0= ruleNavigatingCommaArgCS ) )*
                             {
@@ -15032,17 +15014,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             }
 
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5209:2: ( (lv_ownedArguments_5_0= ruleNavigatingCommaArgCS ) )*
-                            loop93:
+                            loop92:
                             do {
-                                int alt93=2;
-                                int LA93_0 = input.LA(1);
+                                int alt92=2;
+                                int LA92_0 = input.LA(1);
 
-                                if ( (LA93_0==20) ) {
-                                    alt93=1;
+                                if ( (LA92_0==20) ) {
+                                    alt92=1;
                                 }
 
 
-                                switch (alt93) {
+                                switch (alt92) {
                             	case 1 :
                             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5210:1: (lv_ownedArguments_5_0= ruleNavigatingCommaArgCS )
                             	    {
@@ -15080,7 +15062,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             	    break;
 
                             	default :
-                            	    break loop93;
+                            	    break loop92;
                                 }
                             } while (true);
 
@@ -15091,17 +15073,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
 
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5227:5: ( ( (lv_ownedArguments_6_0= ruleNavigatingBarArgCS ) ) ( (lv_ownedArguments_7_0= ruleNavigatingCommaArgCS ) )* )*
-                    loop96:
+                    loop95:
                     do {
-                        int alt96=2;
-                        int LA96_0 = input.LA(1);
+                        int alt95=2;
+                        int LA95_0 = input.LA(1);
 
-                        if ( (LA96_0==24) ) {
-                            alt96=1;
+                        if ( (LA95_0==24) ) {
+                            alt95=1;
                         }
 
 
-                        switch (alt96) {
+                        switch (alt95) {
                     	case 1 :
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5227:6: ( (lv_ownedArguments_6_0= ruleNavigatingBarArgCS ) ) ( (lv_ownedArguments_7_0= ruleNavigatingCommaArgCS ) )*
                     	    {
@@ -15141,17 +15123,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    }
 
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5245:2: ( (lv_ownedArguments_7_0= ruleNavigatingCommaArgCS ) )*
-                    	    loop95:
+                    	    loop94:
                     	    do {
-                    	        int alt95=2;
-                    	        int LA95_0 = input.LA(1);
+                    	        int alt94=2;
+                    	        int LA94_0 = input.LA(1);
 
-                    	        if ( (LA95_0==20) ) {
-                    	            alt95=1;
+                    	        if ( (LA94_0==20) ) {
+                    	            alt94=1;
                     	        }
 
 
-                    	        switch (alt95) {
+                    	        switch (alt94) {
                     	    	case 1 :
                     	    	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5246:1: (lv_ownedArguments_7_0= ruleNavigatingCommaArgCS )
                     	    	    {
@@ -15189,7 +15171,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    	    break;
 
                     	    	default :
-                    	    	    break loop95;
+                    	    	    break loop94;
                     	        }
                     	    } while (true);
 
@@ -15198,7 +15180,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop96;
+                    	    break loop95;
                         }
                     } while (true);
 
@@ -15340,17 +15322,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5310:2: (otherlv_2= ',' ( (lv_ownedTerms_3_0= ruleExpCS ) ) )*
-            loop98:
+            loop97:
             do {
-                int alt98=2;
-                int LA98_0 = input.LA(1);
+                int alt97=2;
+                int LA97_0 = input.LA(1);
 
-                if ( (LA98_0==20) ) {
-                    alt98=1;
+                if ( (LA97_0==20) ) {
+                    alt97=1;
                 }
 
 
-                switch (alt98) {
+                switch (alt97) {
             	case 1 :
             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5310:4: otherlv_2= ',' ( (lv_ownedTerms_3_0= ruleExpCS ) )
             	    {
@@ -15400,7 +15382,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop98;
+            	    break loop97;
                 }
             } while (true);
 
@@ -15499,23 +15481,23 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5357:1: ( ( ( (lv_ownedNameExpression_0_0= ruleNavigatingArgExpCS ) ) ( (otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) (otherlv_3= '=' ( (lv_ownedInitExpression_4_0= ruleExpCS ) ) )? ) | (otherlv_5= 'in' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) ) )? ) | (otherlv_7= ':' ( (lv_ownedType_8_0= ruleTypeExpCS ) ) ) )
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5357:1: ( ( ( (lv_ownedNameExpression_0_0= ruleNavigatingArgExpCS ) ) ( (otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) (otherlv_3= '=' ( (lv_ownedInitExpression_4_0= ruleExpCS ) ) )? ) | (otherlv_5= 'in' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) ) )? ) | (otherlv_7= ':' ( (lv_ownedType_8_0= ruleTypeExpCS ) ) ) )
-            int alt101=2;
-            int LA101_0 = input.LA(1);
+            int alt100=2;
+            int LA100_0 = input.LA(1);
 
-            if ( ((LA101_0>=RULE_SIMPLE_ID && LA101_0<=RULE_SINGLE_QUOTED_STRING)||LA101_0==17||LA101_0==19||(LA101_0>=25 && LA101_0<=27)||LA101_0==30||LA101_0==32||(LA101_0>=34 && LA101_0<=35)||(LA101_0>=37 && LA101_0<=42)||(LA101_0>=59 && LA101_0<=73)||LA101_0==76||(LA101_0>=78 && LA101_0<=81)||LA101_0==86||(LA101_0>=91 && LA101_0<=92)) ) {
-                alt101=1;
+            if ( ((LA100_0>=RULE_SIMPLE_ID && LA100_0<=RULE_SINGLE_QUOTED_STRING)||LA100_0==17||LA100_0==19||(LA100_0>=25 && LA100_0<=27)||LA100_0==30||LA100_0==32||(LA100_0>=34 && LA100_0<=35)||(LA100_0>=37 && LA100_0<=42)||(LA100_0>=59 && LA100_0<=73)||LA100_0==76||(LA100_0>=78 && LA100_0<=81)||LA100_0==86||(LA100_0>=91 && LA100_0<=92)) ) {
+                alt100=1;
             }
-            else if ( (LA101_0==29) ) {
-                alt101=2;
+            else if ( (LA100_0==29) ) {
+                alt100=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 101, 0, input);
+                    new NoViableAltException("", 100, 0, input);
 
                 throw nvae;
             }
-            switch (alt101) {
+            switch (alt100) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5357:2: ( ( (lv_ownedNameExpression_0_0= ruleNavigatingArgExpCS ) ) ( (otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) (otherlv_3= '=' ( (lv_ownedInitExpression_4_0= ruleExpCS ) ) )? ) | (otherlv_5= 'in' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) ) )? )
                     {
@@ -15558,16 +15540,16 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
 
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5375:2: ( (otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) (otherlv_3= '=' ( (lv_ownedInitExpression_4_0= ruleExpCS ) ) )? ) | (otherlv_5= 'in' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) ) )?
-                    int alt100=3;
-                    int LA100_0 = input.LA(1);
+                    int alt99=3;
+                    int LA99_0 = input.LA(1);
 
-                    if ( (LA100_0==29) ) {
-                        alt100=1;
+                    if ( (LA99_0==29) ) {
+                        alt99=1;
                     }
-                    else if ( (LA100_0==18) ) {
-                        alt100=2;
+                    else if ( (LA99_0==18) ) {
+                        alt99=2;
                     }
-                    switch (alt100) {
+                    switch (alt99) {
                         case 1 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5375:3: (otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) (otherlv_3= '=' ( (lv_ownedInitExpression_4_0= ruleExpCS ) ) )? )
                             {
@@ -15616,13 +15598,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             }
 
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5397:2: (otherlv_3= '=' ( (lv_ownedInitExpression_4_0= ruleExpCS ) ) )?
-                            int alt99=2;
-                            int LA99_0 = input.LA(1);
+                            int alt98=2;
+                            int LA98_0 = input.LA(1);
 
-                            if ( (LA99_0==49) ) {
-                                alt99=1;
+                            if ( (LA98_0==49) ) {
+                                alt98=1;
                             }
-                            switch (alt99) {
+                            switch (alt98) {
                                 case 1 :
                                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5397:4: otherlv_3= '=' ( (lv_ownedInitExpression_4_0= ruleExpCS ) )
                                     {
@@ -15942,13 +15924,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5519:2: (otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )? )?
-            int alt103=2;
-            int LA103_0 = input.LA(1);
+            int alt102=2;
+            int LA102_0 = input.LA(1);
 
-            if ( (LA103_0==29) ) {
-                alt103=1;
+            if ( (LA102_0==29) ) {
+                alt102=1;
             }
-            switch (alt103) {
+            switch (alt102) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5519:4: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )?
                     {
@@ -15994,13 +15976,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
 
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5541:2: (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )?
-                    int alt102=2;
-                    int LA102_0 = input.LA(1);
+                    int alt101=2;
+                    int LA101_0 = input.LA(1);
 
-                    if ( (LA102_0==49) ) {
-                        alt102=1;
+                    if ( (LA101_0==49) ) {
+                        alt101=1;
                     }
-                    switch (alt102) {
+                    switch (alt101) {
                         case 1 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5541:4: otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) )
                             {
@@ -16208,16 +16190,16 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5617:2: ( (otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )? ) | (otherlv_6= 'in' ( (lv_ownedInitExpression_7_0= ruleExpCS ) ) ) )?
-            int alt105=3;
-            int LA105_0 = input.LA(1);
+            int alt104=3;
+            int LA104_0 = input.LA(1);
 
-            if ( (LA105_0==29) ) {
-                alt105=1;
+            if ( (LA104_0==29) ) {
+                alt104=1;
             }
-            else if ( (LA105_0==18) ) {
-                alt105=2;
+            else if ( (LA104_0==18) ) {
+                alt104=2;
             }
-            switch (alt105) {
+            switch (alt104) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5617:3: (otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )? )
                     {
@@ -16266,13 +16248,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
 
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5639:2: (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )?
-                    int alt104=2;
-                    int LA104_0 = input.LA(1);
+                    int alt103=2;
+                    int LA103_0 = input.LA(1);
 
-                    if ( (LA104_0==49) ) {
-                        alt104=1;
+                    if ( (LA103_0==49) ) {
+                        alt103=1;
                     }
-                    switch (alt104) {
+                    switch (alt103) {
                         case 1 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5639:4: otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) )
                             {
@@ -16533,13 +16515,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5738:2: (otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )? )?
-            int alt107=2;
-            int LA107_0 = input.LA(1);
+            int alt106=2;
+            int LA106_0 = input.LA(1);
 
-            if ( (LA107_0==29) ) {
-                alt107=1;
+            if ( (LA106_0==29) ) {
+                alt106=1;
             }
-            switch (alt107) {
+            switch (alt106) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5738:4: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )?
                     {
@@ -16585,13 +16567,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
 
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5760:2: (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )?
-                    int alt106=2;
-                    int LA106_0 = input.LA(1);
+                    int alt105=2;
+                    int LA105_0 = input.LA(1);
 
-                    if ( (LA106_0==49) ) {
-                        alt106=1;
+                    if ( (LA105_0==49) ) {
+                        alt105=1;
                     }
-                    switch (alt106) {
+                    switch (alt105) {
                         case 1 :
                             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5760:4: otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) )
                             {
@@ -16846,9 +16828,9 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5842:1: (lv_ownedCondition_1_1= ruleExpCS | lv_ownedCondition_1_2= rulePatternExpCS )
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5842:1: (lv_ownedCondition_1_1= ruleExpCS | lv_ownedCondition_1_2= rulePatternExpCS )
-            int alt108=2;
-            alt108 = dfa108.predict(input);
-            switch (alt108) {
+            int alt107=2;
+            alt107 = dfa107.predict(input);
+            switch (alt107) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5843:3: lv_ownedCondition_1_1= ruleExpCS
                     {
@@ -16958,17 +16940,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5898:2: ( (lv_ownedIfThenExpressions_4_0= ruleElseIfThenExpCS ) )*
-            loop109:
+            loop108:
             do {
-                int alt109=2;
-                int LA109_0 = input.LA(1);
+                int alt108=2;
+                int LA108_0 = input.LA(1);
 
-                if ( (LA109_0==90) ) {
-                    alt109=1;
+                if ( (LA108_0==90) ) {
+                    alt108=1;
                 }
 
 
-                switch (alt109) {
+                switch (alt108) {
             	case 1 :
             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:5899:1: (lv_ownedIfThenExpressions_4_0= ruleElseIfThenExpCS )
             	    {
@@ -17006,7 +16988,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop109;
+            	    break loop108;
                 }
             } while (true);
 
@@ -17350,17 +17332,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6050:2: (otherlv_2= ',' ( (lv_ownedVariables_3_0= ruleLetVariableCS ) ) )*
-            loop110:
+            loop109:
             do {
-                int alt110=2;
-                int LA110_0 = input.LA(1);
+                int alt109=2;
+                int LA109_0 = input.LA(1);
 
-                if ( (LA110_0==20) ) {
-                    alt110=1;
+                if ( (LA109_0==20) ) {
+                    alt109=1;
                 }
 
 
-                switch (alt110) {
+                switch (alt109) {
             	case 1 :
             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6050:4: otherlv_2= ',' ( (lv_ownedVariables_3_0= ruleLetVariableCS ) )
             	    {
@@ -17410,7 +17392,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop110;
+            	    break loop109;
                 }
             } while (true);
 
@@ -17578,13 +17560,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6133:2: ( (lv_ownedRoundBracketedClause_1_0= ruleRoundBracketedClauseCS ) )?
-            int alt111=2;
-            int LA111_0 = input.LA(1);
+            int alt110=2;
+            int LA110_0 = input.LA(1);
 
-            if ( (LA111_0==27) ) {
-                alt111=1;
+            if ( (LA110_0==27) ) {
+                alt110=1;
             }
-            switch (alt111) {
+            switch (alt110) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6134:1: (lv_ownedRoundBracketedClause_1_0= ruleRoundBracketedClauseCS )
                     {
@@ -17624,13 +17606,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6151:3: (otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) )?
-            int alt112=2;
-            int LA112_0 = input.LA(1);
+            int alt111=2;
+            int LA111_0 = input.LA(1);
 
-            if ( (LA112_0==29) ) {
-                alt112=1;
+            if ( (LA111_0==29) ) {
+                alt111=1;
             }
-            switch (alt112) {
+            switch (alt111) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6151:5: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) )
                     {
@@ -18070,13 +18052,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6315:2: (otherlv_1= '..' ( (lv_upperBound_2_0= ruleUPPER ) ) )?
-            int alt113=2;
-            int LA113_0 = input.LA(1);
+            int alt112=2;
+            int LA112_0 = input.LA(1);
 
-            if ( (LA113_0==74) ) {
-                alt113=1;
+            if ( (LA112_0==74) ) {
+                alt112=1;
             }
-            switch (alt113) {
+            switch (alt112) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6315:4: otherlv_1= '..' ( (lv_upperBound_2_0= ruleUPPER ) )
                     {
@@ -18219,23 +18201,23 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                   
             }
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6362:1: (this_MultiplicityBoundsCS_1= ruleMultiplicityBoundsCS | this_MultiplicityStringCS_2= ruleMultiplicityStringCS )
-            int alt114=2;
-            int LA114_0 = input.LA(1);
+            int alt113=2;
+            int LA113_0 = input.LA(1);
 
-            if ( (LA114_0==RULE_INT) ) {
-                alt114=1;
+            if ( (LA113_0==RULE_INT) ) {
+                alt113=1;
             }
-            else if ( (LA114_0==32||LA114_0==44||LA114_0==95) ) {
-                alt114=2;
+            else if ( (LA113_0==32||LA113_0==44||LA113_0==95) ) {
+                alt113=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 114, 0, input);
+                    new NoViableAltException("", 113, 0, input);
 
                 throw nvae;
             }
-            switch (alt114) {
+            switch (alt113) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6363:2: this_MultiplicityBoundsCS_1= ruleMultiplicityBoundsCS
                     {
@@ -18294,16 +18276,16 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6387:2: (otherlv_3= '|?' | ( (lv_isNullFree_4_0= '|1' ) ) )?
-            int alt115=3;
-            int LA115_0 = input.LA(1);
+            int alt114=3;
+            int LA114_0 = input.LA(1);
 
-            if ( (LA115_0==93) ) {
-                alt115=1;
+            if ( (LA114_0==93) ) {
+                alt114=1;
             }
-            else if ( (LA115_0==94) ) {
-                alt115=2;
+            else if ( (LA114_0==94) ) {
+                alt114=2;
             }
-            switch (alt115) {
+            switch (alt114) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6387:4: otherlv_3= '|?'
                     {
@@ -18441,32 +18423,32 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6434:1: (lv_stringBounds_0_1= '*' | lv_stringBounds_0_2= '+' | lv_stringBounds_0_3= '?' )
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6434:1: (lv_stringBounds_0_1= '*' | lv_stringBounds_0_2= '+' | lv_stringBounds_0_3= '?' )
-            int alt116=3;
+            int alt115=3;
             switch ( input.LA(1) ) {
             case 32:
                 {
-                alt116=1;
+                alt115=1;
                 }
                 break;
             case 44:
                 {
-                alt116=2;
+                alt115=2;
                 }
                 break;
             case 95:
                 {
-                alt116=3;
+                alt115=3;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 116, 0, input);
+                    new NoViableAltException("", 115, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt116) {
+            switch (alt115) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6435:3: lv_stringBounds_0_1= '*'
                     {
@@ -18651,17 +18633,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6513:2: (otherlv_1= '::' ( (lv_ownedPathElements_2_0= ruleNextPathElementCS ) ) )*
-            loop117:
+            loop116:
             do {
-                int alt117=2;
-                int LA117_0 = input.LA(1);
+                int alt116=2;
+                int LA116_0 = input.LA(1);
 
-                if ( (LA117_0==31) ) {
-                    alt117=1;
+                if ( (LA116_0==31) ) {
+                    alt116=1;
                 }
 
 
-                switch (alt117) {
+                switch (alt116) {
             	case 1 :
             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6513:4: otherlv_1= '::' ( (lv_ownedPathElements_2_0= ruleNextPathElementCS ) )
             	    {
@@ -18711,7 +18693,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop117;
+            	    break loop116;
                 }
             } while (true);
 
@@ -19053,17 +19035,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6652:2: (otherlv_1= ',' ( (lv_ownedSubstitutions_2_0= ruleTemplateParameterSubstitutionCS ) ) )*
-            loop118:
+            loop117:
             do {
-                int alt118=2;
-                int LA118_0 = input.LA(1);
+                int alt117=2;
+                int LA117_0 = input.LA(1);
 
-                if ( (LA118_0==20) ) {
-                    alt118=1;
+                if ( (LA117_0==20) ) {
+                    alt117=1;
                 }
 
 
-                switch (alt118) {
+                switch (alt117) {
             	case 1 :
             	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6652:4: otherlv_1= ',' ( (lv_ownedSubstitutions_2_0= ruleTemplateParameterSubstitutionCS ) )
             	    {
@@ -19113,18 +19095,18 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop118;
+            	    break loop117;
                 }
             } while (true);
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6674:4: ( (lv_ownedMultiplicity_3_0= ruleMultiplicityCS ) )?
-            int alt119=2;
-            int LA119_0 = input.LA(1);
+            int alt118=2;
+            int LA118_0 = input.LA(1);
 
-            if ( (LA119_0==84) ) {
-                alt119=1;
+            if ( (LA118_0==84) ) {
+                alt118=1;
             }
-            switch (alt119) {
+            switch (alt118) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6675:1: (lv_ownedMultiplicity_3_0= ruleMultiplicityCS )
                     {
@@ -19392,13 +19374,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6772:2: (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )?
-            int alt121=2;
-            int LA121_0 = input.LA(1);
+            int alt120=2;
+            int LA120_0 = input.LA(1);
 
-            if ( (LA121_0==96) ) {
-                alt121=1;
+            if ( (LA120_0==96) ) {
+                alt120=1;
             }
-            switch (alt121) {
+            switch (alt120) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6772:4: otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )*
                     {
@@ -19444,17 +19426,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
 
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6794:2: (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )*
-                    loop120:
+                    loop119:
                     do {
-                        int alt120=2;
-                        int LA120_0 = input.LA(1);
+                        int alt119=2;
+                        int LA119_0 = input.LA(1);
 
-                        if ( (LA120_0==97) ) {
-                            alt120=1;
+                        if ( (LA119_0==97) ) {
+                            alt119=1;
                         }
 
 
-                        switch (alt120) {
+                        switch (alt119) {
                     	case 1 :
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6794:4: otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) )
                     	    {
@@ -19504,7 +19486,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop120;
+                    	    break loop119;
                         }
                     } while (true);
 
@@ -19593,23 +19575,23 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6837:1: (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS )
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6837:1: (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS )
-            int alt122=2;
-            int LA122_0 = input.LA(1);
+            int alt121=2;
+            int LA121_0 = input.LA(1);
 
-            if ( ((LA122_0>=RULE_SIMPLE_ID && LA122_0<=RULE_ESCAPED_ID)||LA122_0==17||LA122_0==19||(LA122_0>=25 && LA122_0<=26)||LA122_0==30||(LA122_0>=34 && LA122_0<=35)||(LA122_0>=37 && LA122_0<=40)) ) {
-                alt122=1;
+            if ( ((LA121_0>=RULE_SIMPLE_ID && LA121_0<=RULE_ESCAPED_ID)||LA121_0==17||LA121_0==19||(LA121_0>=25 && LA121_0<=26)||LA121_0==30||(LA121_0>=34 && LA121_0<=35)||(LA121_0>=37 && LA121_0<=40)) ) {
+                alt121=1;
             }
-            else if ( (LA122_0==95) ) {
-                alt122=2;
+            else if ( (LA121_0==95) ) {
+                alt121=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 122, 0, input);
+                    new NoViableAltException("", 121, 0, input);
 
                 throw nvae;
             }
-            switch (alt122) {
+            switch (alt121) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6838:2: this_TypedRefCS_0= ruleTypedRefCS
                     {
@@ -19877,13 +19859,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             }
 
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6934:2: (otherlv_1= '(' ( (lv_ownedBinding_2_0= ruleTemplateBindingCS ) ) otherlv_3= ')' )?
-            int alt123=2;
-            int LA123_0 = input.LA(1);
+            int alt122=2;
+            int LA122_0 = input.LA(1);
 
-            if ( (LA123_0==27) ) {
-                alt123=1;
+            if ( (LA122_0==27) ) {
+                alt122=1;
             }
-            switch (alt123) {
+            switch (alt122) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6934:4: otherlv_1= '(' ( (lv_ownedBinding_2_0= ruleTemplateBindingCS ) ) otherlv_3= ')'
                     {
@@ -20046,13 +20028,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                   
             }
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6994:1: (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )?
-            int alt124=2;
-            int LA124_0 = input.LA(1);
+            int alt123=2;
+            int LA123_0 = input.LA(1);
 
-            if ( (LA124_0==96) ) {
-                alt124=1;
+            if ( (LA123_0==96) ) {
+                alt123=1;
             }
-            switch (alt124) {
+            switch (alt123) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:6994:3: otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) )
                     {
@@ -20180,23 +20162,23 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7037:1: (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID )
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7037:1: (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID )
-            int alt125=2;
-            int LA125_0 = input.LA(1);
+            int alt124=2;
+            int LA124_0 = input.LA(1);
 
-            if ( (LA125_0==RULE_SIMPLE_ID) ) {
-                alt125=1;
+            if ( (LA124_0==RULE_SIMPLE_ID) ) {
+                alt124=1;
             }
-            else if ( (LA125_0==RULE_ESCAPED_ID) ) {
-                alt125=2;
+            else if ( (LA124_0==RULE_ESCAPED_ID) ) {
+                alt124=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 125, 0, input);
+                    new NoViableAltException("", 124, 0, input);
 
                 throw nvae;
             }
-            switch (alt125) {
+            switch (alt124) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7037:6: this_SIMPLE_ID_0= RULE_SIMPLE_ID
                     {
@@ -20650,23 +20632,23 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7189:1: (this_INT_0= RULE_INT | kw= '*' )
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7189:1: (this_INT_0= RULE_INT | kw= '*' )
-            int alt126=2;
-            int LA126_0 = input.LA(1);
+            int alt125=2;
+            int LA125_0 = input.LA(1);
 
-            if ( (LA126_0==RULE_INT) ) {
-                alt126=1;
+            if ( (LA125_0==RULE_INT) ) {
+                alt125=1;
             }
-            else if ( (LA126_0==32) ) {
-                alt126=2;
+            else if ( (LA125_0==32) ) {
+                alt125=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 126, 0, input);
+                    new NoViableAltException("", 125, 0, input);
 
                 throw nvae;
             }
-            switch (alt126) {
+            switch (alt125) {
                 case 1 :
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7189:6: this_INT_0= RULE_INT
                     {
@@ -20826,25 +20808,25 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         {
         otherlv_0=(Token)match(input,21,FollowSets000.FOLLOW_21_in_synpred17_InternalQVTcore673); if (state.failed) return ;
         // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:384:1: ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) )
-        int alt129=2;
-        int LA129_0 = input.LA(1);
+        int alt128=2;
+        int LA128_0 = input.LA(1);
 
-        if ( ((LA129_0>=RULE_SIMPLE_ID && LA129_0<=RULE_ESCAPED_ID)||LA129_0==17||LA129_0==19||(LA129_0>=25 && LA129_0<=26)||LA129_0==30||(LA129_0>=34 && LA129_0<=35)||(LA129_0>=37 && LA129_0<=38)||LA129_0==40) ) {
-            alt129=1;
+        if ( ((LA128_0>=RULE_SIMPLE_ID && LA128_0<=RULE_ESCAPED_ID)||LA128_0==17||LA128_0==19||(LA128_0>=25 && LA128_0<=26)||LA128_0==30||(LA128_0>=34 && LA128_0<=35)||(LA128_0>=37 && LA128_0<=38)||LA128_0==40) ) {
+            alt128=1;
         }
-        else if ( (LA129_0==39) ) {
-            int LA129_2 = input.LA(2);
+        else if ( (LA128_0==39) ) {
+            int LA128_2 = input.LA(2);
 
-            if ( (LA129_2==20||LA129_2==24||LA129_2==29||LA129_2==36) ) {
-                alt129=1;
+            if ( ((LA128_2>=RULE_SIMPLE_ID && LA128_2<=RULE_ESCAPED_ID)||LA128_2==17||LA128_2==19||(LA128_2>=25 && LA128_2<=26)||LA128_2==30||(LA128_2>=34 && LA128_2<=35)||(LA128_2>=37 && LA128_2<=40)) ) {
+                alt128=2;
             }
-            else if ( ((LA129_2>=RULE_SIMPLE_ID && LA129_2<=RULE_ESCAPED_ID)||LA129_2==17||LA129_2==19||(LA129_2>=25 && LA129_2<=26)||LA129_2==30||(LA129_2>=34 && LA129_2<=35)||(LA129_2>=37 && LA129_2<=40)) ) {
-                alt129=2;
+            else if ( (LA128_2==20||LA128_2==24||LA128_2==29||LA128_2==36) ) {
+                alt128=1;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 129, 2, input);
+                    new NoViableAltException("", 128, 2, input);
 
                 throw nvae;
             }
@@ -20852,11 +20834,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         else {
             if (state.backtracking>0) {state.failed=true; return ;}
             NoViableAltException nvae =
-                new NoViableAltException("", 129, 0, input);
+                new NoViableAltException("", 128, 0, input);
 
             throw nvae;
         }
-        switch (alt129) {
+        switch (alt128) {
             case 1 :
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:384:2: ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) )
                 {
@@ -20917,41 +20899,41 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         }
 
         // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:421:3: (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )*
-        loop131:
+        loop130:
         do {
-            int alt131=2;
-            int LA131_0 = input.LA(1);
+            int alt130=2;
+            int LA130_0 = input.LA(1);
 
-            if ( (LA131_0==20) ) {
-                alt131=1;
+            if ( (LA130_0==20) ) {
+                alt130=1;
             }
 
 
-            switch (alt131) {
+            switch (alt130) {
         	case 1 :
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:421:5: otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) )
         	    {
         	    otherlv_3=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred17_InternalQVTcore736); if (state.failed) return ;
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:425:1: ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) )
-        	    int alt130=2;
-        	    int LA130_0 = input.LA(1);
+        	    int alt129=2;
+        	    int LA129_0 = input.LA(1);
 
-        	    if ( ((LA130_0>=RULE_SIMPLE_ID && LA130_0<=RULE_ESCAPED_ID)||LA130_0==17||LA130_0==19||(LA130_0>=25 && LA130_0<=26)||LA130_0==30||(LA130_0>=34 && LA130_0<=35)||(LA130_0>=37 && LA130_0<=38)||LA130_0==40) ) {
-        	        alt130=1;
+        	    if ( ((LA129_0>=RULE_SIMPLE_ID && LA129_0<=RULE_ESCAPED_ID)||LA129_0==17||LA129_0==19||(LA129_0>=25 && LA129_0<=26)||LA129_0==30||(LA129_0>=34 && LA129_0<=35)||(LA129_0>=37 && LA129_0<=38)||LA129_0==40) ) {
+        	        alt129=1;
         	    }
-        	    else if ( (LA130_0==39) ) {
-        	        int LA130_2 = input.LA(2);
+        	    else if ( (LA129_0==39) ) {
+        	        int LA129_2 = input.LA(2);
 
-        	        if ( ((LA130_2>=RULE_SIMPLE_ID && LA130_2<=RULE_ESCAPED_ID)||LA130_2==17||LA130_2==19||(LA130_2>=25 && LA130_2<=26)||LA130_2==30||(LA130_2>=34 && LA130_2<=35)||(LA130_2>=37 && LA130_2<=40)) ) {
-        	            alt130=2;
+        	        if ( ((LA129_2>=RULE_SIMPLE_ID && LA129_2<=RULE_ESCAPED_ID)||LA129_2==17||LA129_2==19||(LA129_2>=25 && LA129_2<=26)||LA129_2==30||(LA129_2>=34 && LA129_2<=35)||(LA129_2>=37 && LA129_2<=40)) ) {
+        	            alt129=2;
         	        }
-        	        else if ( (LA130_2==20||LA130_2==24||LA130_2==29||LA130_2==36) ) {
-        	            alt130=1;
+        	        else if ( (LA129_2==20||LA129_2==24||LA129_2==29||LA129_2==36) ) {
+        	            alt129=1;
         	        }
         	        else {
         	            if (state.backtracking>0) {state.failed=true; return ;}
         	            NoViableAltException nvae =
-        	                new NoViableAltException("", 130, 2, input);
+        	                new NoViableAltException("", 129, 2, input);
 
         	            throw nvae;
         	        }
@@ -20959,11 +20941,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    else {
         	        if (state.backtracking>0) {state.failed=true; return ;}
         	        NoViableAltException nvae =
-        	            new NoViableAltException("", 130, 0, input);
+        	            new NoViableAltException("", 129, 0, input);
 
         	        throw nvae;
         	    }
-        	    switch (alt130) {
+        	    switch (alt129) {
         	        case 1 :
         	            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:425:2: ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) )
         	            {
@@ -21028,23 +21010,23 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    break loop131;
+        	    break loop130;
             }
         } while (true);
 
         otherlv_6=(Token)match(input,24,FollowSets000.FOLLOW_24_in_synpred17_InternalQVTcore800); if (state.failed) return ;
         // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:466:1: ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )*
-        loop132:
+        loop131:
         do {
-            int alt132=2;
-            int LA132_0 = input.LA(1);
+            int alt131=2;
+            int LA131_0 = input.LA(1);
 
-            if ( ((LA132_0>=RULE_SIMPLE_ID && LA132_0<=RULE_SINGLE_QUOTED_STRING)||(LA132_0>=16 && LA132_0<=17)||LA132_0==19||(LA132_0>=25 && LA132_0<=27)||LA132_0==30||LA132_0==32||(LA132_0>=34 && LA132_0<=35)||(LA132_0>=37 && LA132_0<=42)||(LA132_0>=59 && LA132_0<=73)||LA132_0==76||(LA132_0>=78 && LA132_0<=81)||LA132_0==86||(LA132_0>=91 && LA132_0<=92)) ) {
-                alt132=1;
+            if ( ((LA131_0>=RULE_SIMPLE_ID && LA131_0<=RULE_SINGLE_QUOTED_STRING)||(LA131_0>=16 && LA131_0<=17)||LA131_0==19||(LA131_0>=25 && LA131_0<=27)||LA131_0==30||LA131_0==32||(LA131_0>=34 && LA131_0<=35)||(LA131_0>=37 && LA131_0<=42)||(LA131_0>=59 && LA131_0<=73)||LA131_0==76||(LA131_0>=78 && LA131_0<=81)||LA131_0==86||(LA131_0>=91 && LA131_0<=92)) ) {
+                alt131=1;
             }
 
 
-            switch (alt132) {
+            switch (alt131) {
         	case 1 :
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:467:1: (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS )
         	    {
@@ -21069,7 +21051,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    break loop132;
+        	    break loop131;
             }
         } while (true);
 
@@ -21104,25 +21086,25 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         {
         otherlv_9=(Token)match(input,21,FollowSets000.FOLLOW_21_in_synpred21_InternalQVTcore854); if (state.failed) return ;
         // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:493:1: ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) )
-        int alt134=2;
-        int LA134_0 = input.LA(1);
+        int alt133=2;
+        int LA133_0 = input.LA(1);
 
-        if ( ((LA134_0>=RULE_SIMPLE_ID && LA134_0<=RULE_ESCAPED_ID)||LA134_0==17||LA134_0==19||(LA134_0>=25 && LA134_0<=26)||LA134_0==30||(LA134_0>=34 && LA134_0<=35)||(LA134_0>=37 && LA134_0<=38)||LA134_0==40) ) {
-            alt134=1;
+        if ( ((LA133_0>=RULE_SIMPLE_ID && LA133_0<=RULE_ESCAPED_ID)||LA133_0==17||LA133_0==19||(LA133_0>=25 && LA133_0<=26)||LA133_0==30||(LA133_0>=34 && LA133_0<=35)||(LA133_0>=37 && LA133_0<=38)||LA133_0==40) ) {
+            alt133=1;
         }
-        else if ( (LA134_0==39) ) {
-            int LA134_2 = input.LA(2);
+        else if ( (LA133_0==39) ) {
+            int LA133_2 = input.LA(2);
 
-            if ( (LA134_2==20||LA134_2==23||LA134_2==29||LA134_2==36) ) {
-                alt134=1;
+            if ( ((LA133_2>=RULE_SIMPLE_ID && LA133_2<=RULE_ESCAPED_ID)||LA133_2==17||LA133_2==19||(LA133_2>=25 && LA133_2<=26)||LA133_2==30||(LA133_2>=34 && LA133_2<=35)||(LA133_2>=37 && LA133_2<=40)) ) {
+                alt133=2;
             }
-            else if ( ((LA134_2>=RULE_SIMPLE_ID && LA134_2<=RULE_ESCAPED_ID)||LA134_2==17||LA134_2==19||(LA134_2>=25 && LA134_2<=26)||LA134_2==30||(LA134_2>=34 && LA134_2<=35)||(LA134_2>=37 && LA134_2<=40)) ) {
-                alt134=2;
+            else if ( (LA133_2==20||LA133_2==23||LA133_2==29||LA133_2==36) ) {
+                alt133=1;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 134, 2, input);
+                    new NoViableAltException("", 133, 2, input);
 
                 throw nvae;
             }
@@ -21130,11 +21112,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         else {
             if (state.backtracking>0) {state.failed=true; return ;}
             NoViableAltException nvae =
-                new NoViableAltException("", 134, 0, input);
+                new NoViableAltException("", 133, 0, input);
 
             throw nvae;
         }
-        switch (alt134) {
+        switch (alt133) {
             case 1 :
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:493:2: ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) )
                 {
@@ -21195,41 +21177,41 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         }
 
         // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:530:3: (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )*
-        loop136:
+        loop135:
         do {
-            int alt136=2;
-            int LA136_0 = input.LA(1);
+            int alt135=2;
+            int LA135_0 = input.LA(1);
 
-            if ( (LA136_0==20) ) {
-                alt136=1;
+            if ( (LA135_0==20) ) {
+                alt135=1;
             }
 
 
-            switch (alt136) {
+            switch (alt135) {
         	case 1 :
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:530:5: otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) )
         	    {
         	    otherlv_12=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred21_InternalQVTcore917); if (state.failed) return ;
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:534:1: ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) )
-        	    int alt135=2;
-        	    int LA135_0 = input.LA(1);
+        	    int alt134=2;
+        	    int LA134_0 = input.LA(1);
 
-        	    if ( ((LA135_0>=RULE_SIMPLE_ID && LA135_0<=RULE_ESCAPED_ID)||LA135_0==17||LA135_0==19||(LA135_0>=25 && LA135_0<=26)||LA135_0==30||(LA135_0>=34 && LA135_0<=35)||(LA135_0>=37 && LA135_0<=38)||LA135_0==40) ) {
-        	        alt135=1;
+        	    if ( ((LA134_0>=RULE_SIMPLE_ID && LA134_0<=RULE_ESCAPED_ID)||LA134_0==17||LA134_0==19||(LA134_0>=25 && LA134_0<=26)||LA134_0==30||(LA134_0>=34 && LA134_0<=35)||(LA134_0>=37 && LA134_0<=38)||LA134_0==40) ) {
+        	        alt134=1;
         	    }
-        	    else if ( (LA135_0==39) ) {
-        	        int LA135_2 = input.LA(2);
+        	    else if ( (LA134_0==39) ) {
+        	        int LA134_2 = input.LA(2);
 
-        	        if ( (LA135_2==20||LA135_2==23||LA135_2==29||LA135_2==36) ) {
-        	            alt135=1;
+        	        if ( (LA134_2==20||LA134_2==23||LA134_2==29||LA134_2==36) ) {
+        	            alt134=1;
         	        }
-        	        else if ( ((LA135_2>=RULE_SIMPLE_ID && LA135_2<=RULE_ESCAPED_ID)||LA135_2==17||LA135_2==19||(LA135_2>=25 && LA135_2<=26)||LA135_2==30||(LA135_2>=34 && LA135_2<=35)||(LA135_2>=37 && LA135_2<=40)) ) {
-        	            alt135=2;
+        	        else if ( ((LA134_2>=RULE_SIMPLE_ID && LA134_2<=RULE_ESCAPED_ID)||LA134_2==17||LA134_2==19||(LA134_2>=25 && LA134_2<=26)||LA134_2==30||(LA134_2>=34 && LA134_2<=35)||(LA134_2>=37 && LA134_2<=40)) ) {
+        	            alt134=2;
         	        }
         	        else {
         	            if (state.backtracking>0) {state.failed=true; return ;}
         	            NoViableAltException nvae =
-        	                new NoViableAltException("", 135, 2, input);
+        	                new NoViableAltException("", 134, 2, input);
 
         	            throw nvae;
         	        }
@@ -21237,11 +21219,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    else {
         	        if (state.backtracking>0) {state.failed=true; return ;}
         	        NoViableAltException nvae =
-        	            new NoViableAltException("", 135, 0, input);
+        	            new NoViableAltException("", 134, 0, input);
 
         	        throw nvae;
         	    }
-        	    switch (alt135) {
+        	    switch (alt134) {
         	        case 1 :
         	            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:534:2: ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) )
         	            {
@@ -21306,7 +21288,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    break loop136;
+        	    break loop135;
             }
         } while (true);
 
@@ -21334,18 +21316,18 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         {
         otherlv_16=(Token)match(input,21,FollowSets000.FOLLOW_21_in_synpred23_InternalQVTcore1001); if (state.failed) return ;
         // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:580:1: ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+
-        int cnt137=0;
-        loop137:
+        int cnt136=0;
+        loop136:
         do {
-            int alt137=2;
-            int LA137_0 = input.LA(1);
+            int alt136=2;
+            int LA136_0 = input.LA(1);
 
-            if ( ((LA137_0>=RULE_SIMPLE_ID && LA137_0<=RULE_SINGLE_QUOTED_STRING)||(LA137_0>=16 && LA137_0<=17)||LA137_0==19||(LA137_0>=25 && LA137_0<=27)||LA137_0==30||LA137_0==32||(LA137_0>=34 && LA137_0<=35)||(LA137_0>=37 && LA137_0<=42)||(LA137_0>=59 && LA137_0<=73)||LA137_0==76||(LA137_0>=78 && LA137_0<=81)||LA137_0==86||(LA137_0>=91 && LA137_0<=92)) ) {
-                alt137=1;
+            if ( ((LA136_0>=RULE_SIMPLE_ID && LA136_0<=RULE_SINGLE_QUOTED_STRING)||(LA136_0>=16 && LA136_0<=17)||LA136_0==19||(LA136_0>=25 && LA136_0<=27)||LA136_0==30||LA136_0==32||(LA136_0>=34 && LA136_0<=35)||(LA136_0>=37 && LA136_0<=42)||(LA136_0>=59 && LA136_0<=73)||LA136_0==76||(LA136_0>=78 && LA136_0<=81)||LA136_0==86||(LA136_0>=91 && LA136_0<=92)) ) {
+                alt136=1;
             }
 
 
-            switch (alt137) {
+            switch (alt136) {
         	case 1 :
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:581:1: (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS )
         	    {
@@ -21370,13 +21352,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    if ( cnt137 >= 1 ) break loop137;
+        	    if ( cnt136 >= 1 ) break loop136;
         	    if (state.backtracking>0) {state.failed=true; return ;}
                     EarlyExitException eee =
-                        new EarlyExitException(137, input);
+                        new EarlyExitException(136, input);
                     throw eee;
             }
-            cnt137++;
+            cnt136++;
         } while (true);
 
         otherlv_18=(Token)match(input,23,FollowSets000.FOLLOW_23_in_synpred23_InternalQVTcore1035); if (state.failed) return ;
@@ -21431,17 +21413,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         }
 
         // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:799:2: (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )*
-        loop140:
+        loop139:
         do {
-            int alt140=2;
-            int LA140_0 = input.LA(1);
+            int alt139=2;
+            int LA139_0 = input.LA(1);
 
-            if ( (LA140_0==20) ) {
-                alt140=1;
+            if ( (LA139_0==20) ) {
+                alt139=1;
             }
 
 
-            switch (alt140) {
+            switch (alt139) {
         	case 1 :
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:799:4: otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) )
         	    {
@@ -21473,23 +21455,23 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    break loop140;
+        	    break loop139;
             }
         } while (true);
 
         otherlv_4=(Token)match(input,24,FollowSets000.FOLLOW_24_in_synpred31_InternalQVTcore1506); if (state.failed) return ;
         // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:825:1: ( (lv_ownedPredicates_5_0= rulePredicateCS ) )*
-        loop141:
+        loop140:
         do {
-            int alt141=2;
-            int LA141_0 = input.LA(1);
+            int alt140=2;
+            int LA140_0 = input.LA(1);
 
-            if ( ((LA141_0>=RULE_SIMPLE_ID && LA141_0<=RULE_SINGLE_QUOTED_STRING)||LA141_0==17||LA141_0==19||(LA141_0>=25 && LA141_0<=27)||LA141_0==30||LA141_0==32||(LA141_0>=34 && LA141_0<=35)||(LA141_0>=37 && LA141_0<=42)||(LA141_0>=59 && LA141_0<=73)||LA141_0==76||(LA141_0>=78 && LA141_0<=81)||LA141_0==86||(LA141_0>=91 && LA141_0<=92)) ) {
-                alt141=1;
+            if ( ((LA140_0>=RULE_SIMPLE_ID && LA140_0<=RULE_SINGLE_QUOTED_STRING)||LA140_0==17||LA140_0==19||(LA140_0>=25 && LA140_0<=27)||LA140_0==30||LA140_0==32||(LA140_0>=34 && LA140_0<=35)||(LA140_0>=37 && LA140_0<=42)||(LA140_0>=59 && LA140_0<=73)||LA140_0==76||(LA140_0>=78 && LA140_0<=81)||LA140_0==86||(LA140_0>=91 && LA140_0<=92)) ) {
+                alt140=1;
             }
 
 
-            switch (alt141) {
+            switch (alt140) {
         	case 1 :
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:826:1: (lv_ownedPredicates_5_0= rulePredicateCS )
         	    {
@@ -21514,7 +21496,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    break loop141;
+        	    break loop140;
             }
         } while (true);
 
@@ -21567,17 +21549,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         }
 
         // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:870:2: (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )*
-        loop142:
+        loop141:
         do {
-            int alt142=2;
-            int LA142_0 = input.LA(1);
+            int alt141=2;
+            int LA141_0 = input.LA(1);
 
-            if ( (LA142_0==20) ) {
-                alt142=1;
+            if ( (LA141_0==20) ) {
+                alt141=1;
             }
 
 
-            switch (alt142) {
+            switch (alt141) {
         	case 1 :
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:870:4: otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) )
         	    {
@@ -21609,7 +21591,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    break loop142;
+        	    break loop141;
             }
         } while (true);
 
@@ -21637,18 +21619,18 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         {
         otherlv_12=(Token)match(input,27,FollowSets000.FOLLOW_27_in_synpred35_InternalQVTcore1649); if (state.failed) return ;
         // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:901:1: ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+
-        int cnt143=0;
-        loop143:
+        int cnt142=0;
+        loop142:
         do {
-            int alt143=2;
-            int LA143_0 = input.LA(1);
+            int alt142=2;
+            int LA142_0 = input.LA(1);
 
-            if ( ((LA143_0>=RULE_SIMPLE_ID && LA143_0<=RULE_SINGLE_QUOTED_STRING)||LA143_0==17||LA143_0==19||(LA143_0>=25 && LA143_0<=27)||LA143_0==30||LA143_0==32||(LA143_0>=34 && LA143_0<=35)||(LA143_0>=37 && LA143_0<=42)||(LA143_0>=59 && LA143_0<=73)||LA143_0==76||(LA143_0>=78 && LA143_0<=81)||LA143_0==86||(LA143_0>=91 && LA143_0<=92)) ) {
-                alt143=1;
+            if ( ((LA142_0>=RULE_SIMPLE_ID && LA142_0<=RULE_SINGLE_QUOTED_STRING)||LA142_0==17||LA142_0==19||(LA142_0>=25 && LA142_0<=27)||LA142_0==30||LA142_0==32||(LA142_0>=34 && LA142_0<=35)||(LA142_0>=37 && LA142_0<=42)||(LA142_0>=59 && LA142_0<=73)||LA142_0==76||(LA142_0>=78 && LA142_0<=81)||LA142_0==86||(LA142_0>=91 && LA142_0<=92)) ) {
+                alt142=1;
             }
 
 
-            switch (alt143) {
+            switch (alt142) {
         	case 1 :
         	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:902:1: (lv_ownedPredicates_13_0= rulePredicateCS )
         	    {
@@ -21673,13 +21655,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    if ( cnt143 >= 1 ) break loop143;
+        	    if ( cnt142 >= 1 ) break loop142;
         	    if (state.backtracking>0) {state.failed=true; return ;}
                     EarlyExitException eee =
-                        new EarlyExitException(143, input);
+                        new EarlyExitException(142, input);
                     throw eee;
             }
-            cnt143++;
+            cnt142++;
         } while (true);
 
         otherlv_14=(Token)match(input,28,FollowSets000.FOLLOW_28_in_synpred35_InternalQVTcore1683); if (state.failed) return ;
@@ -21765,13 +21747,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         }
 
         // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:4410:2: (otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}' )?
-        int alt152=2;
-        int LA152_0 = input.LA(1);
+        int alt151=2;
+        int LA151_0 = input.LA(1);
 
-        if ( (LA152_0==21) ) {
-            alt152=1;
+        if ( (LA151_0==21) ) {
+            alt151=1;
         }
-        switch (alt152) {
+        switch (alt151) {
             case 1 :
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:4410:4: otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}'
                 {
@@ -21859,13 +21841,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         state._fsp--;
         if (state.failed) return ;
         // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:4546:1: ( () ( (lv_name_2_0= ruleBinaryOperatorName ) ) ( (lv_ownedRight_3_0= ruleExpCS ) ) )?
-        int alt153=2;
-        int LA153_0 = input.LA(1);
+        int alt152=2;
+        int LA152_0 = input.LA(1);
 
-        if ( (LA153_0==32||LA153_0==41||(LA153_0>=43 && LA153_0<=58)) ) {
-            alt153=1;
+        if ( (LA152_0==32||LA152_0==41||(LA152_0>=43 && LA152_0<=58)) ) {
+            alt152=1;
         }
-        switch (alt153) {
+        switch (alt152) {
             case 1 :
                 // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:4546:2: () ( (lv_name_2_0= ruleBinaryOperatorName ) ) ( (lv_ownedRight_3_0= ruleExpCS ) )
                 {
@@ -22240,7 +22222,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     protected DFA78 dfa78 = new DFA78(this);
     protected DFA81 dfa81 = new DFA81(this);
     protected DFA84 dfa84 = new DFA84(this);
-    protected DFA108 dfa108 = new DFA108(this);
+    protected DFA107 dfa107 = new DFA107(this);
     static final String DFA20_eotS =
         "\13\uffff";
     static final String DFA20_eofS =
@@ -23250,19 +23232,19 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             throw nvae;
         }
     }
-    static final String DFA108_eotS =
+    static final String DFA107_eotS =
         "\20\uffff";
-    static final String DFA108_eofS =
+    static final String DFA107_eofS =
         "\20\uffff";
-    static final String DFA108_minS =
+    static final String DFA107_minS =
         "\1\4\1\uffff\15\25\1\uffff";
-    static final String DFA108_maxS =
+    static final String DFA107_maxS =
         "\1\134\1\uffff\15\127\1\uffff";
-    static final String DFA108_acceptS =
+    static final String DFA107_acceptS =
         "\1\uffff\1\1\15\uffff\1\2";
-    static final String DFA108_specialS =
+    static final String DFA107_specialS =
         "\20\uffff}>";
-    static final String[] DFA108_transitionS = {
+    static final String[] DFA107_transitionS = {
             "\1\2\1\3\2\1\11\uffff\1\11\1\uffff\1\14\5\uffff\1\7\1\16\1\1\1\uffff\1\17\1\6\1\uffff\1\1\1\uffff\1\4\1\5\1\uffff\1\12\1\15\1\13\1\10\2\1\20\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4\uffff\1\1\4\uffff\2\1",
             "",
             "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
@@ -23281,34 +23263,34 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             ""
     };
 
-    static final short[] DFA108_eot = DFA.unpackEncodedString(DFA108_eotS);
-    static final short[] DFA108_eof = DFA.unpackEncodedString(DFA108_eofS);
-    static final char[] DFA108_min = DFA.unpackEncodedStringToUnsignedChars(DFA108_minS);
-    static final char[] DFA108_max = DFA.unpackEncodedStringToUnsignedChars(DFA108_maxS);
-    static final short[] DFA108_accept = DFA.unpackEncodedString(DFA108_acceptS);
-    static final short[] DFA108_special = DFA.unpackEncodedString(DFA108_specialS);
-    static final short[][] DFA108_transition;
+    static final short[] DFA107_eot = DFA.unpackEncodedString(DFA107_eotS);
+    static final short[] DFA107_eof = DFA.unpackEncodedString(DFA107_eofS);
+    static final char[] DFA107_min = DFA.unpackEncodedStringToUnsignedChars(DFA107_minS);
+    static final char[] DFA107_max = DFA.unpackEncodedStringToUnsignedChars(DFA107_maxS);
+    static final short[] DFA107_accept = DFA.unpackEncodedString(DFA107_acceptS);
+    static final short[] DFA107_special = DFA.unpackEncodedString(DFA107_specialS);
+    static final short[][] DFA107_transition;
 
     static {
-        int numStates = DFA108_transitionS.length;
-        DFA108_transition = new short[numStates][];
+        int numStates = DFA107_transitionS.length;
+        DFA107_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA108_transition[i] = DFA.unpackEncodedString(DFA108_transitionS[i]);
+            DFA107_transition[i] = DFA.unpackEncodedString(DFA107_transitionS[i]);
         }
     }
 
-    class DFA108 extends DFA {
+    class DFA107 extends DFA {
 
-        public DFA108(BaseRecognizer recognizer) {
+        public DFA107(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 108;
-            this.eot = DFA108_eot;
-            this.eof = DFA108_eof;
-            this.min = DFA108_min;
-            this.max = DFA108_max;
-            this.accept = DFA108_accept;
-            this.special = DFA108_special;
-            this.transition = DFA108_transition;
+            this.decisionNumber = 107;
+            this.eot = DFA107_eot;
+            this.eof = DFA107_eof;
+            this.min = DFA107_min;
+            this.max = DFA107_max;
+            this.accept = DFA107_accept;
+            this.special = DFA107_special;
+            this.transition = DFA107_transition;
         }
         public String getDescription() {
             return "5842:1: (lv_ownedCondition_1_1= ruleExpCS | lv_ownedCondition_1_2= rulePatternExpCS )";
@@ -23762,10 +23744,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_ruleCurlyBracketedClauseCS_in_entryRuleCurlyBracketedClauseCS11138 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleCurlyBracketedClauseCS11148 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_21_in_ruleCurlyBracketedClauseCS11197 = new BitSet(new long[]{0x000001EC468A00B0L});
-        public static final BitSet FOLLOW_ruleShadowPartCS_in_ruleCurlyBracketedClauseCS11220 = new BitSet(new long[]{0x0000000000900000L});
-        public static final BitSet FOLLOW_20_in_ruleCurlyBracketedClauseCS11233 = new BitSet(new long[]{0x000001EC460A0030L});
-        public static final BitSet FOLLOW_ruleShadowPartCS_in_ruleCurlyBracketedClauseCS11254 = new BitSet(new long[]{0x0000000000900000L});
-        public static final BitSet FOLLOW_ruleStringLiteral_in_ruleCurlyBracketedClauseCS11285 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_ruleStringLiteral_in_ruleCurlyBracketedClauseCS11219 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_ruleShadowPartCS_in_ruleCurlyBracketedClauseCS11247 = new BitSet(new long[]{0x0000000000900000L});
+        public static final BitSet FOLLOW_20_in_ruleCurlyBracketedClauseCS11260 = new BitSet(new long[]{0x000001EC460A0030L});
+        public static final BitSet FOLLOW_ruleShadowPartCS_in_ruleCurlyBracketedClauseCS11281 = new BitSet(new long[]{0x0000000000900000L});
         public static final BitSet FOLLOW_23_in_ruleCurlyBracketedClauseCS11298 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleRoundBracketedClauseCS_in_entryRuleRoundBracketedClauseCS11334 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleRoundBracketedClauseCS11344 = new BitSet(new long[]{0x0000000000000002L});
