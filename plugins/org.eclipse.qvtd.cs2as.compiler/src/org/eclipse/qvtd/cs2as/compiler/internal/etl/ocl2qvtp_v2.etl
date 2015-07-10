@@ -58,10 +58,13 @@ rule ShadowExp2CreationMapping
 	to t : QVTi!Mapping {
 	
 	guard {
+		var containers = s.closure(x|x.eContainer());
+		return  not containers.exists(x | x.isKindOf(OCL!ShadowExp)) -- innerShadowExps dont produce creation mappings
+		and 
 		// FIXME this is hazardy. Rework
 		// Ideally lazy transformation on the content of the OCL Model should avoid calling
 		// this rule on undesired elemenets (imported from other ocl files)
-		return s.closure(x|x.eContainer()).contains(LEFTCS_PACKAGE); 
+		containers.contains(LEFTCS_PACKAGE); 
 	}
 	
 	t.name = s.getCreationMappingName();
