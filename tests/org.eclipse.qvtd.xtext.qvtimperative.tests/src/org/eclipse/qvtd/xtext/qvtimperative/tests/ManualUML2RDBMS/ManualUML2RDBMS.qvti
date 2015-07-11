@@ -27,7 +27,7 @@ map packageToSchemaLM in ManualUML2RDBMS {
         p2s.umlPackage := p;
         p2s.name := p.name;
     }
-    /* L to M */
+    --/* L to M */
     -- A package has elements, elements can be Classifiers or Associations. A
     -- classifier can be a Class or a PrimitiveDataType
     

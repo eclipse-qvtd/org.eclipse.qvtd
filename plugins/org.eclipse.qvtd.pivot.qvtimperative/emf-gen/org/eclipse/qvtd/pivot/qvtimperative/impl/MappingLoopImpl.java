@@ -235,4 +235,9 @@ public class MappingLoopImpl extends CallExpImpl implements MappingLoop {
 	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTimperativeVisitor<?>)visitor).visitMappingLoop(this);
 	}
+
+	@Override
+	public boolean mayHaveNullType() {
+		return true;
+	}
 } //MappingLoopImpl

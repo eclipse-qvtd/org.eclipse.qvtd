@@ -348,7 +348,7 @@ public class classescs2as extends AbstractTransformer
      * where ( |
      * rootCS.RootCS2Root.root =
      *   root)
-     * {_0 : OrderedSet(classes::Package[*|1]);
+     * {_0 : OrderedSet(classes::Package)[*|1];
      *  |
      * _0 := rootCS.ownedPackages.PackageCS2Package.package->asOrderedSet();
      * root.ownedPackages := _0;
@@ -459,7 +459,7 @@ public class classescs2as extends AbstractTransformer
      * where ( |
      * packageCS.PackageCS2Package.package =
      *   package)
-     * {_0 : OrderedSet(classes::Class[*|1]);
+     * {_0 : OrderedSet(classes::Class)[*|1];
      *  |
      * _0 := packageCS.ownedClasses.ClassCS2Class.class->asOrderedSet();
      * package.ownedClasses := _0;

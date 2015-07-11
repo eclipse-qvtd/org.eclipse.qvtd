@@ -320,7 +320,7 @@ public class Tree2TallTree extends AbstractTransformer
      *  |}
      * where ( |)
      * {_0 : String[1];
-     * _1 : Bag(talltree::TallNode[*|1]);
+     * _1 : Bag(talltree::TallNode)[*|1];
      * _2 : Integer[1];
      *  |
      * _0 := node2tallNode.name;
