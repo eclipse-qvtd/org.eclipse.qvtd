@@ -1,1 +1,0 @@
-These are common classes which should belong to QVTi plugins
