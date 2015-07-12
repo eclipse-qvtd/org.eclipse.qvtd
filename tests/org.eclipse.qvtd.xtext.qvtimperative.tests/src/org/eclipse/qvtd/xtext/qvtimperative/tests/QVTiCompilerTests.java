@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -69,17 +70,12 @@ public class QVTiCompilerTests extends LoadTestCase
 		}
 		
 		@SuppressWarnings("unchecked")
-		private Class<? extends Transformer> compileTransformation(@NonNull QVTiCodeGenerator cg) throws Exception {
-			String qualifiedName = cg.getQualifiedName();
+		private Class<? extends Transformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg) throws Exception {
+			String qualifiedClassName = cg.getQualifiedName();
 			String javaCodeSource = cg.generateClassFile();
-			try {
-				Class<?> txClass = OCL2JavaFileObject.loadClass(qualifiedName, javaCodeSource);
-				return (Class<? extends Transformer>) txClass;
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				throw e;
-			}
+			OCL2JavaFileObject.saveClass(qualifiedClassName, javaCodeSource);	
+			Class<?> txClass = OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
+			return (Class<? extends Transformer>) txClass;
 		}
 
 		public @NonNull Transformer createTransformer(@NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
@@ -126,7 +122,7 @@ public class QVTiCompilerTests extends LoadTestCase
 			options.setPackagePrefix("cg");
 			cg.generateClassFile();
 			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
-			Class<? extends Transformer> txClass = compileTransformation(cg);
+			Class<? extends Transformer> txClass = compileTransformation(new File("../org.eclipse.qvtd.xtext.qvtimperative.tests/bin"), cg);
 			if (txClass == null) {
 				TestCase.fail("Failed tto compile transformation");
 				throw new UnsupportedOperationException();
