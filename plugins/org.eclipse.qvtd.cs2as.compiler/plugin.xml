@@ -13,5 +13,10 @@
             class="org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGPackage"
             genModel="model/cs2ascgmodel.genmodel"/>
    </extension>
+   
+   <extension point="org.eclipse.ocl.pivot.transformation_technology">
+      <technology uri="org.eclipse.qvtd.ocl2qvti"
+     	class="org.eclipse.qvtd.cs2as.compiler.OCL2QVTiTransformationTechnology"/>
+   </extension>
 
 </plugin>
