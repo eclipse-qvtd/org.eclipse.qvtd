@@ -24,7 +24,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#getIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#isIsDefault <em>Is Default</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage#getAssignment()
@@ -96,48 +96,21 @@ public interface Assignment extends Element {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Default</em>' attribute.
-	 * @see #isSetIsDefault()
-	 * @see #unsetIsDefault()
-	 * @see #setIsDefault(Boolean)
+	 * @see #setIsDefault(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage#getAssignment_IsDefault()
-	 * @model unsettable="true" dataType="org.eclipse.ocl.pivot.Boolean"
+	 * @model required="true"
 	 * @generated
 	 */
-	Boolean getIsDefault();
+	boolean isIsDefault();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#getIsDefault <em>Is Default</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#isIsDefault <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Default</em>' attribute.
-	 * @see #isSetIsDefault()
-	 * @see #unsetIsDefault()
-	 * @see #getIsDefault()
+	 * @see #isIsDefault()
 	 * @generated
 	 */
-	void setIsDefault(Boolean value);
-
-	/**
-	 * Unsets the value of the '{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#getIsDefault <em>Is Default</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetIsDefault()
-	 * @see #getIsDefault()
-	 * @see #setIsDefault(Boolean)
-	 * @generated
-	 */
-	void unsetIsDefault();
-
-	/**
-	 * Returns whether the value of the '{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#getIsDefault <em>Is Default</em>}' attribute is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Is Default</em>' attribute is set.
-	 * @see #unsetIsDefault()
-	 * @see #getIsDefault()
-	 * @see #setIsDefault(Boolean)
-	 * @generated
-	 */
-	boolean isSetIsDefault();
+	void setIsDefault(boolean value);
 
 } // Assignment

@@ -71,7 +71,7 @@ public class Tree2TallTree extends AbstractTransformer
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_List2List = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/List2List", null, Tree2talltreePackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_TallTree = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/TallTree", null, TalltreePackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_Tree = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/Tree", null, TreePackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_PRIMid_Integer = TypeId.BAG.getSpecializedId(TypeId.INTEGER);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_PRIMid_Integer = TypeId.BAG.getSpecializedId(TypeId.INTEGER, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Class = PACKid_$metamodel$.getClassId("Class", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Model = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary.getClassId("Model", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Node = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_Tree.getClassId("Node", 0);
@@ -79,11 +79,11 @@ public class Tree2TallTree extends AbstractTransformer
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TallNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_TallTree.getClassId("TallNode", 0);
     public static final @NonNull /*@NonInvalid*/ IntegerValue INT_0 = ValueUtil.integerValueOf("0");
     public static final @NonNull /*@NonInvalid*/ IntegerValue INT_1 = ValueUtil.integerValueOf("1");
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TallNode = TypeId.BAG.getSpecializedId(CLSSid_TallNode);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Node = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Node);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Node2TallNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Node2TallNode);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Node = TypeId.SET.getSpecializedId(CLSSid_Node);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Node2TallNode = TypeId.SET.getSpecializedId(CLSSid_Node2TallNode);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TallNode = TypeId.BAG.getSpecializedId(CLSSid_TallNode, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Node = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Node, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Node2TallNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Node2TallNode, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Node = TypeId.SET.getSpecializedId(CLSSid_Node, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Node2TallNode = TypeId.SET.getSpecializedId(CLSSid_Node2TallNode, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
     
     /*
      * Property-source to Property-target unnavigable navigation caches

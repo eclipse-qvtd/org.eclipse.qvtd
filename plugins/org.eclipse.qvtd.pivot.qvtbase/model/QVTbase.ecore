@@ -3,10 +3,10 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtbase" nsURI="http://www.eclipse.org/qvt/2015/QVTbase" nsPrefix="qvtb">
   <eClassifiers xsi:type="ecore:EClass" name="BaseModel" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Model"/>
   <eClassifiers xsi:type="ecore:EClass" name="Domain" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//NamedElement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//ReferringElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCheckable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        unsettable="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforceable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCheckable" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforceable" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rule" lowerBound="1" eType="#//Rule"
         transient="true" eOpposite="#//Rule/domain"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" eType="#//TypedModel"/>
@@ -40,8 +40,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Rule" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="domain" upperBound="-1"
         eType="#//Domain" containment="true" eOpposite="#//Domain/rule"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Boolean"
-        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="overrides" eType="#//Rule"
         eOpposite="#//Rule/overridden"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" eType="#//Transformation"

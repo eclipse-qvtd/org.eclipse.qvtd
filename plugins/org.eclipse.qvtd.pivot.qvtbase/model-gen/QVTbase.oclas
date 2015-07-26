@@ -4,8 +4,8 @@
   <ownedPackages xmi:id="P.qvtbase" URI="http://www.eclipse.org/qvt/2015/QVTbase" name="qvtbase" nsPrefix="qvtb">
     <ownedClasses xmi:id="T.qvtbase.BaseModel" name="BaseModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Model"/>
     <ownedClasses xmi:id="T.qvtbase.Domain" isAbstract="true" name="Domain" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.ReferringElement">
-      <ownedProperties xmi:id="p.qvtbase.Domain.isCheckable" isUnsettable="true" name="isCheckable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
-      <ownedProperties xmi:id="p.qvtbase.Domain.isEnforceable" isUnsettable="true" name="isEnforceable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
+      <ownedProperties xmi:id="p.qvtbase.Domain.isCheckable" name="isCheckable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
+      <ownedProperties xmi:id="p.qvtbase.Domain.isEnforceable" name="isEnforceable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
       <ownedProperties xmi:id="p.qvtbase.Domain.rule" isTransient="true" name="rule" opposite="#p.qvtbase.Rule.domain" type="#T.qvtbase.Rule"/>
       <ownedProperties xmi:id="p.qvtbase.Domain.typedModel" isRequired="false" name="typedModel" opposite="#p.qvtbase.TypedModel.Domain"
           type="#T.qvtbase.TypedModel"/>
@@ -28,7 +28,7 @@
     </ownedClasses>
     <ownedClasses xmi:id="T.qvtbase.Rule" isAbstract="true" name="Rule" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement">
       <ownedProperties xmi:id="p.qvtbase.Rule.domain" isComposite="true" name="domain" opposite="#p.qvtbase.Domain.rule" type="#//@ownedPackages.2/@ownedClasses.13"/>
-      <ownedProperties xmi:id="p.qvtbase.Rule.isDefault" defaultValueString="false" isRequired="false" name="isDefault" type="pivot:PrimitiveType ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#Boolean"/>
+      <ownedProperties xmi:id="p.qvtbase.Rule.isDefault" defaultValueString="false" name="isDefault" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
       <ownedProperties xmi:id="p.qvtbase.Rule.overridden" name="overridden" opposite="#p.qvtbase.Rule.overrides" type="#//@ownedPackages.2/@ownedClasses.19"/>
       <ownedProperties xmi:id="p.qvtbase.Rule.overrides" isRequired="false" name="overrides" opposite="#p.qvtbase.Rule.overridden" type="#T.qvtbase.Rule"/>
       <ownedProperties xmi:id="p.qvtbase.Rule.transformation" isRequired="false" isResolveProxies="false" isTransient="true" name="transformation"

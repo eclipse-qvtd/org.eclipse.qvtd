@@ -16,13 +16,13 @@
         <ownedContext name="rightAS" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.cSRoot_2_TRoot" name="cSRoot_2_TRoot">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.cSRoot_2_TRoot.leftCS.guard.sRoot" name="sRoot" type="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..Source2Target_qvtp_qvtias.cSRoot_2_TRoot.rightAS.bottom.tRoot" name="tRoot" type="pivot:Class TargetMM1.ecore.oclas#T.target.TRoot"/>
@@ -30,20 +30,20 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.TRoot" referredVariable="#qV..Source2Target_qvtp_qvtias.cSRoot_2_TRoot.rightAS.bottom.tRoot"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot" referredVariable="#qV..Source2Target_qvtp_qvtias.cSRoot_2_TRoot.leftCS.guard.sRoot"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.cX_2_A3" name="cX_2_A3">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.cX_2_A3.leftCS.guard.x" name="x" type="pivot:Class SourceMM1.ecore.oclas#T.source.X"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..Source2Target_qvtp_qvtias.cX_2_A3.rightAS.bottom.a3" name="a3" type="pivot:Class TargetMM1.ecore.oclas#T.target.A3"/>
@@ -70,20 +70,20 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.A3" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A3.rightAS.bottom.a3"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A3.leftCS.guard.x"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.cX_2_A2" name="cX_2_A2">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.cX_2_A2.leftCS.guard.x" name="x" type="pivot:Class SourceMM1.ecore.oclas#T.source.X"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..Source2Target_qvtp_qvtias.cX_2_A2.rightAS.bottom.a2" name="a2" type="pivot:Class TargetMM1.ecore.oclas#T.target.A2"/>
@@ -107,20 +107,20 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.A2" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A2.rightAS.bottom.a2"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A2.leftCS.guard.x"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.cX_2_A1" name="cX_2_A1">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.cX_2_A1.leftCS.guard.x" name="x" type="pivot:Class SourceMM1.ecore.oclas#T.source.X"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..Source2Target_qvtp_qvtias.cX_2_A1.rightAS.bottom.a1" name="a1" type="pivot:Class TargetMM1.ecore.oclas#T.target.A1"/>
@@ -135,20 +135,20 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.A1" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A1.rightAS.bottom.a1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A1.leftCS.guard.x"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.cY1_2_B" name="cY1_2_B">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.cY1_2_B.leftCS.guard.y1" name="y1" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..Source2Target_qvtp_qvtias.cY1_2_B.rightAS.bottom.b" name="b" type="pivot:Class TargetMM1.ecore.oclas#T.target.B"/>
@@ -156,20 +156,20 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredVariable="#qV..Source2Target_qvtp_qvtias.cY1_2_B.rightAS.bottom.b"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y1" referredVariable="#qV..Source2Target_qvtp_qvtias.cY1_2_B.leftCS.guard.y1"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.cY2_2_C" name="cY2_2_C">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.cY2_2_C.leftCS.guard.y2" name="y2" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..Source2Target_qvtp_qvtias.cY2_2_C.rightAS.bottom.c" name="c" type="pivot:Class TargetMM1.ecore.oclas#T.target.C"/>
@@ -177,20 +177,20 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredVariable="#qV..Source2Target_qvtp_qvtias.cY2_2_C.rightAS.bottom.c"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2" referredVariable="#qV..Source2Target_qvtp_qvtias.cY2_2_C.leftCS.guard.y2"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.cZ_2_D_0" name="cZ_2_D_0">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.cZ_2_D_0.leftCS.guard.z" name="z" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..Source2Target_qvtp_qvtias.cZ_2_D_0.rightAS.bottom.d" name="d" type="pivot:Class TargetMM1.ecore.oclas#T.target.D"/>
@@ -212,20 +212,20 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredVariable="#qV..Source2Target_qvtp_qvtias.cZ_2_D_0.rightAS.bottom.d"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z" referredVariable="#qV..Source2Target_qvtp_qvtias.cZ_2_D_0.leftCS.guard.z"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.cZ_2_D_1" name="cZ_2_D_1">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.cZ_2_D_1.leftCS.guard.z" name="z" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..Source2Target_qvtp_qvtias.cZ_2_D_1.rightAS.bottom.d" name="d" type="pivot:Class TargetMM1.ecore.oclas#T.target.D"/>
@@ -243,20 +243,20 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredVariable="#qV..Source2Target_qvtp_qvtias.cZ_2_D_1.rightAS.bottom.d"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z" referredVariable="#qV..Source2Target_qvtp_qvtias.cZ_2_D_1.leftCS.guard.z"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uTRoot_ownedA" name="uTRoot_ownedA">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uTRoot_ownedA.leftCS.guard.sRoot" name="sRoot" type="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -290,20 +290,20 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#i0i.ocl.OrderedSet.collect..T"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.TRoot.ownedA">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.TRoot.ownedA">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.0" referredVariable="#qV..Source2Target_qvtp_qvtias.uTRoot_ownedA.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.TRoot" referredVariable="#qV..Source2Target_qvtp_qvtias.uTRoot_ownedA.bottom._0"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uA3_name" name="uA3_name">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uA3_name.leftCS.guard.x" name="x" type="pivot:Class SourceMM1.ecore.oclas#T.source.X"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -345,7 +345,7 @@
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA3_name.leftCS.guard.x"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..Source2Target_qvtp_qvtias.uA3_name.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.A3" referredVariable="#qV..Source2Target_qvtp_qvtias.uA3_name.bottom._0"/>
@@ -353,13 +353,13 @@
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uA3_ownsC" name="uA3_ownsC">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uA3_ownsC.leftCS.guard.x" name="x" type="pivot:Class SourceMM1.ecore.oclas#T.source.X"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -420,20 +420,20 @@
               <ownedIterators name="1_" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2" isImplicit="true" representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#i0i.ocl.Sequence.collect..T"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.A2.ownsC">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.A2.ownsC">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.2" referredVariable="#qV..Source2Target_qvtp_qvtias.uA3_ownsC.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.A3" referredVariable="#qV..Source2Target_qvtp_qvtias.uA3_ownsC.bottom._0"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uA2_name" name="uA2_name">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uA2_name.leftCS.guard.x" name="x" type="pivot:Class SourceMM1.ecore.oclas#T.source.X"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -472,7 +472,7 @@
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA2_name.leftCS.guard.x"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..Source2Target_qvtp_qvtias.uA2_name.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.A2" referredVariable="#qV..Source2Target_qvtp_qvtias.uA2_name.bottom._0"/>
@@ -480,13 +480,13 @@
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uA2_ownsC" name="uA2_ownsC">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uA2_ownsC.leftCS.guard.x" name="x" type="pivot:Class SourceMM1.ecore.oclas#T.source.X"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -544,20 +544,20 @@
               <ownedIterators name="1_" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2" isImplicit="true" representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#i0i.ocl.Sequence.collect..T"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.A2.ownsC">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.A2.ownsC">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.2" referredVariable="#qV..Source2Target_qvtp_qvtias.uA2_ownsC.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.A2" referredVariable="#qV..Source2Target_qvtp_qvtias.uA2_ownsC.bottom._0"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uA1_name" name="uA1_name">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uA1_name.leftCS.guard.x" name="x" type="pivot:Class SourceMM1.ecore.oclas#T.source.X"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -587,7 +587,7 @@
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA1_name.leftCS.guard.x"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..Source2Target_qvtp_qvtias.uA1_name.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.A1" referredVariable="#qV..Source2Target_qvtp_qvtias.uA1_name.bottom._0"/>
@@ -595,13 +595,13 @@
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uA1_ownsB" name="uA1_ownsB">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uA1_ownsB.leftCS.guard.x" name="x" type="pivot:Class SourceMM1.ecore.oclas#T.source.X"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -650,20 +650,20 @@
               <ownedIterators name="1_" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y1" isImplicit="true" representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#i0i.ocl.Sequence.collect..T"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.A1.ownsB">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.A1.ownsB">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.5" referredVariable="#qV..Source2Target_qvtp_qvtias.uA1_ownsB.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.A1" referredVariable="#qV..Source2Target_qvtp_qvtias.uA1_ownsB.bottom._0"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uB_ownsD" name="uB_ownsD">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uB_ownsD.leftCS.guard.y1" name="y1" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -691,20 +691,20 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class TargetMM1.ecore.oclas#T.target.D"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.B.ownsD">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.B.ownsD">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredVariable="#qV..Source2Target_qvtp_qvtias.uB_ownsD.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredVariable="#qV..Source2Target_qvtp_qvtias.uB_ownsD.bottom._0"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uB_name" name="uB_name">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uB_name.leftCS.guard.y1" name="y1" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -727,7 +727,7 @@
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y1" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uB_name.leftCS.guard.y1"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..Source2Target_qvtp_qvtias.uB_name.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredVariable="#qV..Source2Target_qvtp_qvtias.uB_name.bottom._0"/>
@@ -735,13 +735,13 @@
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uC_ownsD" name="uC_ownsD">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uC_ownsD.leftCS.guard.y2" name="y2" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -769,20 +769,20 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class TargetMM1.ecore.oclas#T.target.D"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.C.ownsD">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.C.ownsD">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredVariable="#qV..Source2Target_qvtp_qvtias.uC_ownsD.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredVariable="#qV..Source2Target_qvtp_qvtias.uC_ownsD.bottom._0"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uC_name" name="uC_name">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uC_name.leftCS.guard.y2" name="y2" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -805,7 +805,7 @@
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uC_name.leftCS.guard.y2"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..Source2Target_qvtp_qvtias.uC_name.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredVariable="#qV..Source2Target_qvtp_qvtias.uC_name.bottom._0"/>
@@ -813,13 +813,13 @@
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uD_0_toA" name="uD_0_toA">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uD_0_toA.leftCS.guard.z" name="z" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -870,20 +870,20 @@
               </ownedSource>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.D.toA">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.toA">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class TargetMM1.ecore.oclas#T.target.A2" referredVariable="#qV..Source2Target_qvtp_qvtias.uD_0_toA.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredVariable="#qV..Source2Target_qvtp_qvtias.uD_0_toA.bottom._0"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uD_0_refsC" name="uD_0_refsC">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uD_0_refsC.leftCS.guard.z" name="z" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -927,20 +927,20 @@
               <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z" referredVariable="#qV..Source2Target_qvtp_qvtias.uD_0_refsC.leftCS.guard.z"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.D.refsC">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.refsC">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredVariable="#qV..Source2Target_qvtp_qvtias.uD_0_refsC.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredVariable="#qV..Source2Target_qvtp_qvtias.uD_0_refsC.bottom._0"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uD_1_toA" name="uD_1_toA">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uD_1_toA.leftCS.guard.z" name="z" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -987,20 +987,20 @@
               </ownedSource>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.D.toA">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.toA">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class TargetMM1.ecore.oclas#T.target.A1" referredVariable="#qV..Source2Target_qvtp_qvtias.uD_1_toA.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredVariable="#qV..Source2Target_qvtp_qvtias.uD_1_toA.bottom._0"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target_qvtp_qvtias.uD_1_refsB" name="uD_1_refsB">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..Source2Target_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..Source2Target_qvtp_qvtias.uD_1_refsB.leftCS.guard.z" name="z" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..Source2Target_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
@@ -1040,7 +1040,7 @@
               <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z" referredVariable="#qV..Source2Target_qvtp_qvtias.uD_1_refsB.leftCS.guard.z"/>
             </value>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="TargetMM1.ecore.oclas#p.target.D.refsB">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.refsB">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredVariable="#qV..Source2Target_qvtp_qvtias.uD_1_refsB.bottom._1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredVariable="#qV..Source2Target_qvtp_qvtias.uD_1_refsB.bottom._0"/>
           </assignment>

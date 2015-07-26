@@ -1241,11 +1241,11 @@ public interface QVTrelationPackage extends EPackage {
 	EClass getRelation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#getIsTopLevel <em>Is Top Level</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#isIsTopLevel <em>Is Top Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Is Top Level</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtrelation.Relation#getIsTopLevel()
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Relation#isIsTopLevel()
 	 * @see #getRelation()
 	 * @generated
 	 */

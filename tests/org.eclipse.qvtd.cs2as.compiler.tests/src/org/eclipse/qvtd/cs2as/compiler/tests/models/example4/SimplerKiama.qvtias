@@ -10,13 +10,13 @@
       <modelParameter xmi:id="qT..SimplerKiama_qvtp_qvtias.leftCS" name="leftCS" usedPackage="SimplerKiamaCS.ecore.oclas#P.kiamacs"/>
       <modelParameter xmi:id="qT..SimplerKiama_qvtp_qvtias.rightAS" name="rightAS" usedPackage="SimplerKiamaAS.ecore.oclas#P.kiamaas"/>
       <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.cCompositeCS_2_Composite" name="cCompositeCS_2_Composite">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.cCompositeCS_2_Composite.leftCS.guard.compositeCS" name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..SimplerKiama_qvtp_qvtias.cCompositeCS_2_Composite.rightAS.bottom.composite" name="composite"
@@ -25,20 +25,20 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Composite" referredVariable="#qV..SimplerKiama_qvtp_qvtias.cCompositeCS_2_Composite.rightAS.bottom.composite"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS" referredVariable="#qV..SimplerKiama_qvtp_qvtias.cCompositeCS_2_Composite.leftCS.guard.compositeCS"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.cLeafCS_2_Leaf" name="cLeafCS_2_Leaf">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.cLeafCS_2_Leaf.leftCS.guard.leafCS" name="leafCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..SimplerKiama_qvtp_qvtias.cLeafCS_2_Leaf.rightAS.bottom.leaf" name="leaf" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Leaf"/>
@@ -46,20 +46,20 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Leaf" referredVariable="#qV..SimplerKiama_qvtp_qvtias.cLeafCS_2_Leaf.rightAS.bottom.leaf"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS" referredVariable="#qV..SimplerKiama_qvtp_qvtias.cLeafCS_2_Leaf.leftCS.guard.leafCS"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.cTopCS_2_Top" name="cTopCS_2_Top">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.cTopCS_2_Top.leftCS.guard.topCS" name="topCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..SimplerKiama_qvtp_qvtias.cTopCS_2_Top.rightAS.bottom.top" name="top" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Top"/>
@@ -67,26 +67,26 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Top" referredVariable="#qV..SimplerKiama_qvtp_qvtias.cTopCS_2_Top.rightAS.bottom.top"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS" referredVariable="#qV..SimplerKiama_qvtp_qvtias.cTopCS_2_Top.leftCS.guard.topCS"/>
           </assignment>
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.uComposite_child" name="uComposite_child">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.uComposite_child.leftCS.guard.compositeCS" name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Composite.child">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Composite.child">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Node" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
@@ -109,19 +109,19 @@
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.uComposite_deep" name="uComposite_deep">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.uComposite_deep.leftCS.guard.compositeCS" name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep">
             <value xsi:type="pivot:LetExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
               <ownedIn xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
                 <ownedCondition xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
@@ -174,19 +174,19 @@
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.uComposite_height" name="uComposite_height">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.uComposite_height.leftCS.guard.compositeCS" name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.height">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.height">
             <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
               <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
@@ -218,19 +218,19 @@
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.uLeaf_deep" name="uLeaf_deep">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.uLeaf_deep.leftCS.guard.leafCS" name="leafCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep">
             <value xsi:type="pivot:LetExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
               <ownedIn xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
                 <ownedCondition xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
@@ -283,19 +283,19 @@
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.uLeaf_height" name="uLeaf_height">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.uLeaf_height.leftCS.guard.leafCS" name="leafCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.height">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.height">
             <value xsi:type="pivot:IntegerLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                 integerSymbol="0"/>
             <slotExpression xsi:type="pivot:OperationCallExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Leaf" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
@@ -309,19 +309,19 @@
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.uTop_node" name="uTop_node">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
             <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.uTop_node.leftCS.guard.topCS" name="topCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Top.node">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Top.node">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Node" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">

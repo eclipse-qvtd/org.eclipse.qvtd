@@ -32,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.AssignmentImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.AssignmentImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.AssignmentImpl#getIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.AssignmentImpl#isIsDefault <em>Is Default</em>}</li>
  * </ul>
  *
  * @generated
@@ -49,33 +49,24 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	protected OCLExpression value;
 
 	/**
-	 * The default value of the '{@link #getIsDefault() <em>Is Default</em>}' attribute.
+	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsDefault()
+	 * @see #isIsDefault()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_DEFAULT_EDEFAULT = null;
+	protected static final boolean IS_DEFAULT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #getIsDefault() <em>Is Default</em>}' attribute.
+	 * The cached value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsDefault()
+	 * @see #isIsDefault()
 	 * @generated
 	 * @ordered
 	 */
-	protected Boolean isDefault = IS_DEFAULT_EDEFAULT;
-
-	/**
-	 * This is true if the Is Default attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isDefaultESet;
+	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -189,7 +180,8 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getIsDefault() {
+	@Override
+	public boolean isIsDefault() {
 		return isDefault;
 	}
 
@@ -198,38 +190,12 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsDefault(Boolean newIsDefault) {
-		Boolean oldIsDefault = isDefault;
+	@Override
+	public void setIsDefault(boolean newIsDefault) {
+		boolean oldIsDefault = isDefault;
 		isDefault = newIsDefault;
-		boolean oldIsDefaultESet = isDefaultESet;
-		isDefaultESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBasePackage.ASSIGNMENT__IS_DEFAULT, oldIsDefault, isDefault, !oldIsDefaultESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void unsetIsDefault() {
-		Boolean oldIsDefault = isDefault;
-		boolean oldIsDefaultESet = isDefaultESet;
-		isDefault = IS_DEFAULT_EDEFAULT;
-		isDefaultESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTcoreBasePackage.ASSIGNMENT__IS_DEFAULT, oldIsDefault, IS_DEFAULT_EDEFAULT, oldIsDefaultESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isSetIsDefault() {
-		return isDefaultESet;
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBasePackage.ASSIGNMENT__IS_DEFAULT, oldIsDefault, isDefault));
 	}
 
 	/**
@@ -301,7 +267,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 			case QVTcoreBasePackage.ASSIGNMENT__VALUE:
 				return getValue();
 			case QVTcoreBasePackage.ASSIGNMENT__IS_DEFAULT:
-				return getIsDefault();
+				return isIsDefault();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -342,7 +308,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 				setValue((OCLExpression)null);
 				return;
 			case QVTcoreBasePackage.ASSIGNMENT__IS_DEFAULT:
-				unsetIsDefault();
+				setIsDefault(IS_DEFAULT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -361,7 +327,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 			case QVTcoreBasePackage.ASSIGNMENT__VALUE:
 				return value != null;
 			case QVTcoreBasePackage.ASSIGNMENT__IS_DEFAULT:
-				return isSetIsDefault();
+				return isDefault != IS_DEFAULT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

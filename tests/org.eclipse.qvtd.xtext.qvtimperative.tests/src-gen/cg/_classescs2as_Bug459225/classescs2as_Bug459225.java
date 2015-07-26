@@ -63,7 +63,7 @@ public class classescs2as_Bug459225 extends AbstractTransformer
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_PackageCS = PACKid_http_c_s_s_ocldependencyanalysis_s_classescs_s_1_0.getClassId("PackageCS", 0);
     public static final @NonNull /*@NonInvalid*/ String STR__c_c = "::";
     public static final @NonNull /*@NonInvalid*/ String STR_unnamed = "unnamed";
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_PackageCS = TypeId.SET.getSpecializedId(CLSSid_PackageCS);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_PackageCS = TypeId.SET.getSpecializedId(CLSSid_PackageCS, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
     
     /*
      * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.

@@ -37,8 +37,8 @@
         <details key="documentation" value="The Set of value to bound variable bindings."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInfinite" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Boolean"
-        defaultValueLiteral="false" unsettable="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInfinite" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop."/>
       </eAnnotations>
@@ -60,8 +60,8 @@
         <details key="documentation" value="The variable with the mappingCall.referredMapping bound to the/a value"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPolled" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Boolean"
-        defaultValueLiteral="false" unsettable="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPolled" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A polled MappingCallBinding requires invocation of the mapping to be deverred until all relevant properties are available."/>
       </eAnnotations>

@@ -103,19 +103,19 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_Y2 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_sourceMM_s_1_0.getClassId("Y2", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_Z = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_sourceMM_s_1_0.getClassId("Z", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ IntegerValue INT_1 = ValueUtil.integerValueOf("1");
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_PathElementCS = TypeId.ORDERED_SET.getSpecializedId(CLSSid_PathElementCS);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_X = TypeId.ORDERED_SET.getSpecializedId(CLSSid_X);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Y = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Y);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_A = TypeId.SEQUENCE.getSpecializedId(CLSSid_A);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_B = TypeId.SEQUENCE.getSpecializedId(CLSSid_B);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_C = TypeId.SEQUENCE.getSpecializedId(CLSSid_C);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Y1 = TypeId.SEQUENCE.getSpecializedId(CLSSid_Y1);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Y2 = TypeId.SEQUENCE.getSpecializedId(CLSSid_Y2);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_SRoot = TypeId.SET.getSpecializedId(CLSSid_SRoot);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_X = TypeId.SET.getSpecializedId(CLSSid_X);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Y1 = TypeId.SET.getSpecializedId(CLSSid_Y1);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Y2 = TypeId.SET.getSpecializedId(CLSSid_Y2);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Z = TypeId.SET.getSpecializedId(CLSSid_Z);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_PathElementCS = TypeId.ORDERED_SET.getSpecializedId(CLSSid_PathElementCS, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_X = TypeId.ORDERED_SET.getSpecializedId(CLSSid_X, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Y = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Y, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_A = TypeId.SEQUENCE.getSpecializedId(CLSSid_A, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_B = TypeId.SEQUENCE.getSpecializedId(CLSSid_B, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_C = TypeId.SEQUENCE.getSpecializedId(CLSSid_C, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Y1 = TypeId.SEQUENCE.getSpecializedId(CLSSid_Y1, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Y2 = TypeId.SEQUENCE.getSpecializedId(CLSSid_Y2, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_SRoot = TypeId.SET.getSpecializedId(CLSSid_SRoot, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_X = TypeId.SET.getSpecializedId(CLSSid_X, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Y1 = TypeId.SET.getSpecializedId(CLSSid_Y1, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Y2 = TypeId.SET.getSpecializedId(CLSSid_Y2, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Z = TypeId.SET.getSpecializedId(CLSSid_Z, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
     
     /*
      * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
@@ -267,12 +267,12 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
      */
     protected boolean MAP_cX_2_A3(final /*@NonNull*/ /*@NonInvalid*/ X x) throws ReflectiveOperationException {
         // predicates
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x.isIsA1();
+        final /*@Thrown*/ boolean isA1 = x.isIsA1();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
         }
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA2 = x.isIsA2();
+        final /*@Thrown*/ boolean isA2 = x.isIsA2();
         final /*@Nullable*/ /*@Thrown*/ Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(isA2);
         if (not_0 != ValueUtil.TRUE_VALUE) {
             return false;
@@ -306,11 +306,11 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
      */
     protected boolean MAP_cX_2_A2(final /*@NonNull*/ /*@NonInvalid*/ X x_0) throws ReflectiveOperationException {
         // predicates
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA2 = x_0.isIsA2();
-        if (isA2 != ValueUtil.TRUE_VALUE) {
+        final /*@Thrown*/ boolean isA2 = x_0.isIsA2();
+        if (!isA2) {
             return false;
         }
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x_0.isIsA1();
+        final /*@Thrown*/ boolean isA1 = x_0.isIsA1();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -343,8 +343,8 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
      */
     protected boolean MAP_cX_2_A1(final /*@NonNull*/ /*@NonInvalid*/ X x_1) throws ReflectiveOperationException {
         // predicates
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x_1.isIsA1();
-        if (isA1 != ValueUtil.TRUE_VALUE) {
+        final /*@Thrown*/ boolean isA1 = x_1.isIsA1();
+        if (!isA1) {
             return false;
         }
         // creations
@@ -560,12 +560,12 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
     protected boolean MAP_uA3_name(final /*@NonNull*/ /*@NonInvalid*/ X x_2) throws ReflectiveOperationException {
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x_2.isIsA1();
+        final /*@Thrown*/ boolean isA1 = x_2.isIsA1();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
         }
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA2 = x_2.isIsA2();
+        final /*@Thrown*/ boolean isA2 = x_2.isIsA2();
         final /*@Nullable*/ /*@Thrown*/ Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(isA2);
         if (not_0 != ValueUtil.TRUE_VALUE) {
             return false;
@@ -607,12 +607,12 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
     protected boolean MAP_uA3_ownsC(final /*@NonNull*/ /*@NonInvalid*/ X x_3) throws ReflectiveOperationException {
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x_3.isIsA1();
+        final /*@Thrown*/ boolean isA1 = x_3.isIsA1();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
         }
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA2 = x_3.isIsA2();
+        final /*@Thrown*/ boolean isA2 = x_3.isIsA2();
         final /*@Nullable*/ /*@Thrown*/ Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(isA2);
         if (not_0 != ValueUtil.TRUE_VALUE) {
             return false;
@@ -689,11 +689,11 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
     protected boolean MAP_uA2_name(final /*@NonNull*/ /*@NonInvalid*/ X x_4) throws ReflectiveOperationException {
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA2 = x_4.isIsA2();
-        if (isA2 != ValueUtil.TRUE_VALUE) {
+        final /*@Thrown*/ boolean isA2 = x_4.isIsA2();
+        if (!isA2) {
             return false;
         }
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x_4.isIsA1();
+        final /*@Thrown*/ boolean isA1 = x_4.isIsA1();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -735,11 +735,11 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
     protected boolean MAP_uA2_ownsC(final /*@NonNull*/ /*@NonInvalid*/ X x_5) throws ReflectiveOperationException {
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA2 = x_5.isIsA2();
-        if (isA2 != ValueUtil.TRUE_VALUE) {
+        final /*@Thrown*/ boolean isA2 = x_5.isIsA2();
+        if (!isA2) {
             return false;
         }
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x_5.isIsA1();
+        final /*@Thrown*/ boolean isA1 = x_5.isIsA1();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -815,8 +815,8 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
     protected boolean MAP_uA1_name(final /*@NonNull*/ /*@NonInvalid*/ X x_6) throws ReflectiveOperationException {
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x_6.isIsA1();
-        if (isA1 != ValueUtil.TRUE_VALUE) {
+        final /*@Thrown*/ boolean isA1 = x_6.isIsA1();
+        if (!isA1) {
             return false;
         }
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A1_0 = idResolver.getClass(CLSSid_A1, null);
@@ -855,8 +855,8 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
     protected boolean MAP_uA1_ownsB(final /*@NonNull*/ /*@NonInvalid*/ X x_7) throws ReflectiveOperationException {
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final /*@Nullable*/ /*@Thrown*/ Boolean isA1 = x_7.isIsA1();
-        if (isA1 != ValueUtil.TRUE_VALUE) {
+        final /*@Thrown*/ boolean isA1 = x_7.isIsA1();
+        if (!isA1) {
             return false;
         }
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A1_0 = idResolver.getClass(CLSSid_A1, null);

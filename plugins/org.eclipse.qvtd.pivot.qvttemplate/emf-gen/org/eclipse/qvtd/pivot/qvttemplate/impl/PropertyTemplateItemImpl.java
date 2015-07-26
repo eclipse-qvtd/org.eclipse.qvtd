@@ -236,6 +236,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Boolean getIsOpposite() {
 		return isOpposite;
 	}
@@ -245,6 +246,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsOpposite(Boolean newIsOpposite) {
 		Boolean oldIsOpposite = isOpposite;
 		isOpposite = newIsOpposite;

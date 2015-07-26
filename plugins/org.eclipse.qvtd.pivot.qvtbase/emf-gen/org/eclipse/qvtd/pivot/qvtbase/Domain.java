@@ -42,11 +42,9 @@ public interface Domain extends NamedElement, ReferringElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Checkable</em>' attribute.
-	 * @see #isSetIsCheckable()
-	 * @see #unsetIsCheckable()
 	 * @see #setIsCheckable(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getDomain_IsCheckable()
-	 * @model unsettable="true"
+	 * @model required="true"
 	 * @generated
 	 */
 	boolean isIsCheckable();
@@ -56,35 +54,10 @@ public interface Domain extends NamedElement, ReferringElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Checkable</em>' attribute.
-	 * @see #isSetIsCheckable()
-	 * @see #unsetIsCheckable()
 	 * @see #isIsCheckable()
 	 * @generated
 	 */
 	void setIsCheckable(boolean value);
-
-	/**
-	 * Unsets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.Domain#isIsCheckable <em>Is Checkable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetIsCheckable()
-	 * @see #isIsCheckable()
-	 * @see #setIsCheckable(boolean)
-	 * @generated
-	 */
-	void unsetIsCheckable();
-
-	/**
-	 * Returns whether the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.Domain#isIsCheckable <em>Is Checkable</em>}' attribute is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Is Checkable</em>' attribute is set.
-	 * @see #unsetIsCheckable()
-	 * @see #isIsCheckable()
-	 * @see #setIsCheckable(boolean)
-	 * @generated
-	 */
-	boolean isSetIsCheckable();
 
 	/**
 	 * Returns the value of the '<em><b>Is Enforceable</b></em>' attribute.
@@ -95,11 +68,9 @@ public interface Domain extends NamedElement, ReferringElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Enforceable</em>' attribute.
-	 * @see #isSetIsEnforceable()
-	 * @see #unsetIsEnforceable()
 	 * @see #setIsEnforceable(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getDomain_IsEnforceable()
-	 * @model unsettable="true"
+	 * @model required="true"
 	 * @generated
 	 */
 	boolean isIsEnforceable();
@@ -109,35 +80,10 @@ public interface Domain extends NamedElement, ReferringElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Enforceable</em>' attribute.
-	 * @see #isSetIsEnforceable()
-	 * @see #unsetIsEnforceable()
 	 * @see #isIsEnforceable()
 	 * @generated
 	 */
 	void setIsEnforceable(boolean value);
-
-	/**
-	 * Unsets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.Domain#isIsEnforceable <em>Is Enforceable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetIsEnforceable()
-	 * @see #isIsEnforceable()
-	 * @see #setIsEnforceable(boolean)
-	 * @generated
-	 */
-	void unsetIsEnforceable();
-
-	/**
-	 * Returns whether the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.Domain#isIsEnforceable <em>Is Enforceable</em>}' attribute is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Is Enforceable</em>' attribute is set.
-	 * @see #unsetIsEnforceable()
-	 * @see #isIsEnforceable()
-	 * @see #setIsEnforceable(boolean)
-	 * @generated
-	 */
-	boolean isSetIsEnforceable();
 
 	/**
 	 * Returns the value of the '<em><b>Rule</b></em>' container reference.

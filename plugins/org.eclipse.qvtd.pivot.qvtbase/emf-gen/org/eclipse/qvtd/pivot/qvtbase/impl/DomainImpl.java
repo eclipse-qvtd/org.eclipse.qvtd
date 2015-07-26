@@ -61,15 +61,6 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	protected boolean isCheckable = IS_CHECKABLE_EDEFAULT;
 
 	/**
-	 * This is true if the Is Checkable attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isCheckableESet;
-
-	/**
 	 * The default value of the '{@link #isIsEnforceable() <em>Is Enforceable</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,15 +79,6 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * @ordered
 	 */
 	protected boolean isEnforceable = IS_ENFORCEABLE_EDEFAULT;
-
-	/**
-	 * This is true if the Is Enforceable attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isEnforceableESet;
 
 	/**
 	 * The cached value of the '{@link #getTypedModel() <em>Typed Model</em>}' reference.
@@ -146,35 +128,8 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	public void setIsCheckable(boolean newIsCheckable) {
 		boolean oldIsCheckable = isCheckable;
 		isCheckable = newIsCheckable;
-		boolean oldIsCheckableESet = isCheckableESet;
-		isCheckableESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.DOMAIN__IS_CHECKABLE, oldIsCheckable, isCheckable, !oldIsCheckableESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void unsetIsCheckable() {
-		boolean oldIsCheckable = isCheckable;
-		boolean oldIsCheckableESet = isCheckableESet;
-		isCheckable = IS_CHECKABLE_EDEFAULT;
-		isCheckableESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTbasePackage.DOMAIN__IS_CHECKABLE, oldIsCheckable, IS_CHECKABLE_EDEFAULT, oldIsCheckableESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isSetIsCheckable() {
-		return isCheckableESet;
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.DOMAIN__IS_CHECKABLE, oldIsCheckable, isCheckable));
 	}
 
 	/**
@@ -196,35 +151,8 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	public void setIsEnforceable(boolean newIsEnforceable) {
 		boolean oldIsEnforceable = isEnforceable;
 		isEnforceable = newIsEnforceable;
-		boolean oldIsEnforceableESet = isEnforceableESet;
-		isEnforceableESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.DOMAIN__IS_ENFORCEABLE, oldIsEnforceable, isEnforceable, !oldIsEnforceableESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void unsetIsEnforceable() {
-		boolean oldIsEnforceable = isEnforceable;
-		boolean oldIsEnforceableESet = isEnforceableESet;
-		isEnforceable = IS_ENFORCEABLE_EDEFAULT;
-		isEnforceableESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTbasePackage.DOMAIN__IS_ENFORCEABLE, oldIsEnforceable, IS_ENFORCEABLE_EDEFAULT, oldIsEnforceableESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isSetIsEnforceable() {
-		return isEnforceableESet;
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.DOMAIN__IS_ENFORCEABLE, oldIsEnforceable, isEnforceable));
 	}
 
 	/**
@@ -418,10 +346,10 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTbasePackage.DOMAIN__IS_CHECKABLE:
-				unsetIsCheckable();
+				setIsCheckable(IS_CHECKABLE_EDEFAULT);
 				return;
 			case QVTbasePackage.DOMAIN__IS_ENFORCEABLE:
-				unsetIsEnforceable();
+				setIsEnforceable(IS_ENFORCEABLE_EDEFAULT);
 				return;
 			case QVTbasePackage.DOMAIN__RULE:
 				setRule((Rule)null);
@@ -442,9 +370,9 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case QVTbasePackage.DOMAIN__IS_CHECKABLE:
-				return isSetIsCheckable();
+				return isCheckable != IS_CHECKABLE_EDEFAULT;
 			case QVTbasePackage.DOMAIN__IS_ENFORCEABLE:
-				return isSetIsEnforceable();
+				return isEnforceable != IS_ENFORCEABLE_EDEFAULT;
 			case QVTbasePackage.DOMAIN__RULE:
 				return getRule() != null;
 			case QVTbasePackage.DOMAIN__TYPED_MODEL:

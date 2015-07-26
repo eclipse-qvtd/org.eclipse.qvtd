@@ -34,7 +34,7 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.Relation" name="Relation"
       eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Rule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTRelation.Relation.isTopLevel"
-        name="isTopLevel" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Boolean"/>
+        name="isTopLevel" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.operationalImpl"
         name="operationalImpl" ordered="false" upperBound="-1" eType="#QVTRelation.RelationImplementation"
         containment="true" eOpposite="#QVTRelation.RelationImplementation.relation"/>

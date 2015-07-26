@@ -24,8 +24,8 @@
         <details key="body" value="valueAssignment"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Boolean"
-        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BottomPattern" eSuperTypes="#//CorePattern">
     <eStructuralFeatures xsi:type="ecore:EReference" name="area" lowerBound="1" eType="#//Area"

@@ -385,7 +385,7 @@ operation QVTp!Type getCorePatternVariables() : OrderedSet(QVTp!Variable) {
 
 @cached
 operation QVTp!Type getAllSuperClasses() : OrderedSet {
-    if (self.isClass().isDefined())
+    if (self.asClass().isDefined())
 	   return self.asSequence().closure(x | x.superClasses).asOrderedSet();
 	return new OrderedSet();
 }
