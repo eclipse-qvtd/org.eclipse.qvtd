@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.ParameterableElement;
 import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
@@ -143,6 +144,7 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 				if (result == null) result = caseReferringElement(mappingCall);
 				if (result == null) result = caseOCLExpression(mappingCall);
 				if (result == null) result = caseTypedElement(mappingCall);
+				if (result == null) result = caseParameterableElement(mappingCall);
 				if (result == null) result = caseNamedElement(mappingCall);
 				if (result == null) result = caseElement(mappingCall);
 				if (result == null) result = caseNameable(mappingCall);
@@ -165,6 +167,7 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 				if (result == null) result = caseMappingStatement(mappingLoop);
 				if (result == null) result = caseOCLExpression(mappingLoop);
 				if (result == null) result = caseTypedElement(mappingLoop);
+				if (result == null) result = caseParameterableElement(mappingLoop);
 				if (result == null) result = caseNamedElement(mappingLoop);
 				if (result == null) result = caseElement(mappingLoop);
 				if (result == null) result = caseNameable(mappingLoop);
@@ -178,6 +181,7 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 				if (result == null) result = caseMappingStatement(mappingSequence);
 				if (result == null) result = caseOCLExpression(mappingSequence);
 				if (result == null) result = caseTypedElement(mappingSequence);
+				if (result == null) result = caseParameterableElement(mappingSequence);
 				if (result == null) result = caseNamedElement(mappingSequence);
 				if (result == null) result = caseElement(mappingSequence);
 				if (result == null) result = caseNameable(mappingSequence);
@@ -190,6 +194,7 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 				T result = caseMappingStatement(mappingStatement);
 				if (result == null) result = caseOCLExpression(mappingStatement);
 				if (result == null) result = caseTypedElement(mappingStatement);
+				if (result == null) result = caseParameterableElement(mappingStatement);
 				if (result == null) result = caseNamedElement(mappingStatement);
 				if (result == null) result = caseElement(mappingStatement);
 				if (result == null) result = caseNameable(mappingStatement);
@@ -552,6 +557,21 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterableElement(ParameterableElement object) {
 		return null;
 	}
 

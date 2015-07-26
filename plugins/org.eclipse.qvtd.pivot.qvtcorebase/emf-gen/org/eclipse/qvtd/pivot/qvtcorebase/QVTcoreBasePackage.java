@@ -1251,11 +1251,11 @@ public interface QVTcoreBasePackage extends EPackage {
 	EReference getAssignment_Value();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#isIsDefault <em>Is Default</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#getIsDefault <em>Is Default</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Is Default</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtcorebase.Assignment#isIsDefault()
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.Assignment#getIsDefault()
 	 * @see #getAssignment()
 	 * @generated
 	 */

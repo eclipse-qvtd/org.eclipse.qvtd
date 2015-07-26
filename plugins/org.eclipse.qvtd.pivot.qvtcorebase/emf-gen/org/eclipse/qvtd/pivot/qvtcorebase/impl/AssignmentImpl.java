@@ -32,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.AssignmentImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.AssignmentImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.AssignmentImpl#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.AssignmentImpl#getIsDefault <em>Is Default</em>}</li>
  * </ul>
  *
  * @generated
@@ -49,24 +49,24 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	protected OCLExpression value;
 
 	/**
-	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * The default value of the '{@link #getIsDefault() <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsDefault()
+	 * @see #getIsDefault()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_DEFAULT_EDEFAULT = false;
+	protected static final Boolean IS_DEFAULT_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * The cached value of the '{@link #getIsDefault() <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsDefault()
+	 * @see #getIsDefault()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
+	protected Boolean isDefault = IS_DEFAULT_EDEFAULT;
 
 	/**
 	 * This is true if the Is Default attribute has been set.
@@ -189,8 +189,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean isIsDefault() {
+	public Boolean getIsDefault() {
 		return isDefault;
 	}
 
@@ -199,9 +198,8 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setIsDefault(boolean newIsDefault) {
-		boolean oldIsDefault = isDefault;
+	public void setIsDefault(Boolean newIsDefault) {
+		Boolean oldIsDefault = isDefault;
 		isDefault = newIsDefault;
 		boolean oldIsDefaultESet = isDefaultESet;
 		isDefaultESet = true;
@@ -216,7 +214,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 */
 	@Override
 	public void unsetIsDefault() {
-		boolean oldIsDefault = isDefault;
+		Boolean oldIsDefault = isDefault;
 		boolean oldIsDefaultESet = isDefaultESet;
 		isDefault = IS_DEFAULT_EDEFAULT;
 		isDefaultESet = false;
@@ -303,7 +301,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 			case QVTcoreBasePackage.ASSIGNMENT__VALUE:
 				return getValue();
 			case QVTcoreBasePackage.ASSIGNMENT__IS_DEFAULT:
-				return isIsDefault();
+				return getIsDefault();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

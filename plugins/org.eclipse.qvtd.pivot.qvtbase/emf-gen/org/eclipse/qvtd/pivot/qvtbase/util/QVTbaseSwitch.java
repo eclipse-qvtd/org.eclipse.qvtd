@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ParameterableElement;
 import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.Type;
@@ -126,6 +127,7 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 				if (result == null) result = caseFeature(function);
 				if (result == null) result = caseNamespace(function);
 				if (result == null) result = caseTemplateableElement(function);
+				if (result == null) result = caseParameterableElement(function);
 				if (result == null) result = caseTypedElement(function);
 				if (result == null) result = caseNamedElement(function);
 				if (result == null) result = caseElement(function);
@@ -140,6 +142,7 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 				if (result == null) result = caseParameter(functionParameter);
 				if (result == null) result = caseVariable(functionParameter);
 				if (result == null) result = caseVariableDeclaration(functionParameter);
+				if (result == null) result = caseParameterableElement(functionParameter);
 				if (result == null) result = caseTypedElement(functionParameter);
 				if (result == null) result = caseNamedElement(functionParameter);
 				if (result == null) result = caseElement(functionParameter);
@@ -182,6 +185,7 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 				if (result == null) result = caseNamespace(transformation);
 				if (result == null) result = caseTemplateableElement(transformation);
 				if (result == null) result = caseNamedElement(transformation);
+				if (result == null) result = caseParameterableElement(transformation);
 				if (result == null) result = caseElement(transformation);
 				if (result == null) result = caseNameable(transformation);
 				if (result == null) result = caseVisitable(transformation);
@@ -484,6 +488,21 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTemplateableElement(TemplateableElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterableElement(ParameterableElement object) {
 		return null;
 	}
 

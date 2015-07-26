@@ -18,7 +18,7 @@
     <genClasses image="false" ecoreClass="QVTrelationCS.ecore#//AbstractDomainCS"/>
     <genClasses ecoreClass="QVTrelationCS.ecore#//CollectionTemplateCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//CollectionTemplateCS/ownedMemberIdentifiers"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//CollectionTemplateCS/restIdentifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//CollectionTemplateCS/ownedRestIdentifier"/>
     </genClasses>
     <genClasses ecoreClass="QVTrelationCS.ecore#//DefaultValueCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//DefaultValueCS/ownedInitExpression"/>
@@ -37,7 +37,9 @@
     <genClasses ecoreClass="QVTrelationCS.ecore#//DomainPatternCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//DomainPatternCS/ownedTemplate"/>
     </genClasses>
-    <genClasses ecoreClass="QVTrelationCS.ecore#//ElementTemplateCS"/>
+    <genClasses ecoreClass="QVTrelationCS.ecore#//ElementTemplateCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//ElementTemplateCS/identifier"/>
+    </genClasses>
     <genClasses ecoreClass="QVTrelationCS.ecore#//KeyDeclCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//KeyDeclCS/ownedPathName"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//KeyDeclCS/propertyIds"/>

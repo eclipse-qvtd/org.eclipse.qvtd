@@ -39,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getBinding <em>Binding</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#isIsInfinite <em>Is Infinite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getIsInfinite <em>Is Infinite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getReferredMapping <em>Referred Mapping</em>}</li>
  * </ul>
  *
@@ -57,24 +57,24 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	protected EList<MappingCallBinding> binding;
 
 	/**
-	 * The default value of the '{@link #isIsInfinite() <em>Is Infinite</em>}' attribute.
+	 * The default value of the '{@link #getIsInfinite() <em>Is Infinite</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsInfinite()
+	 * @see #getIsInfinite()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_INFINITE_EDEFAULT = false;
+	protected static final Boolean IS_INFINITE_EDEFAULT = Boolean.FALSE;
 
 	/**
-	 * The cached value of the '{@link #isIsInfinite() <em>Is Infinite</em>}' attribute.
+	 * The cached value of the '{@link #getIsInfinite() <em>Is Infinite</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsInfinite()
+	 * @see #getIsInfinite()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isInfinite = IS_INFINITE_EDEFAULT;
+	protected Boolean isInfinite = IS_INFINITE_EDEFAULT;
 
 	/**
 	 * This is true if the Is Infinite attribute has been set.
@@ -182,8 +182,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean isIsInfinite() {
+	public Boolean getIsInfinite() {
 		return isInfinite;
 	}
 
@@ -192,9 +191,8 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setIsInfinite(boolean newIsInfinite) {
-		boolean oldIsInfinite = isInfinite;
+	public void setIsInfinite(Boolean newIsInfinite) {
+		Boolean oldIsInfinite = isInfinite;
 		isInfinite = newIsInfinite;
 		boolean oldIsInfiniteESet = isInfiniteESet;
 		isInfiniteESet = true;
@@ -209,7 +207,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 */
 	@Override
 	public void unsetIsInfinite() {
-		boolean oldIsInfinite = isInfinite;
+		Boolean oldIsInfinite = isInfinite;
 		boolean oldIsInfiniteESet = isInfiniteESet;
 		isInfinite = IS_INFINITE_EDEFAULT;
 		isInfiniteESet = false;
@@ -267,7 +265,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			case QVTimperativePackage.MAPPING_CALL__BINDING:
 				return getBinding();
 			case QVTimperativePackage.MAPPING_CALL__IS_INFINITE:
-				return isIsInfinite();
+				return getIsInfinite();
 			case QVTimperativePackage.MAPPING_CALL__REFERRED_MAPPING:
 				if (resolve) return getReferredMapping();
 				return basicGetReferredMapping();

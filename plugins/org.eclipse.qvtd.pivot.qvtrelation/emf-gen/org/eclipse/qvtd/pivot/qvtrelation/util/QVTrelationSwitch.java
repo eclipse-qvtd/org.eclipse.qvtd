@@ -18,6 +18,7 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.ParameterableElement;
 import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.Type;
@@ -130,6 +131,7 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 				T result = caseRelationCallExp(relationCallExp);
 				if (result == null) result = caseOCLExpression(relationCallExp);
 				if (result == null) result = caseTypedElement(relationCallExp);
+				if (result == null) result = caseParameterableElement(relationCallExp);
 				if (result == null) result = caseNamedElement(relationCallExp);
 				if (result == null) result = caseElement(relationCallExp);
 				if (result == null) result = caseNameable(relationCallExp);
@@ -187,6 +189,7 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 				if (result == null) result = caseNamespace(relationalTransformation);
 				if (result == null) result = caseTemplateableElement(relationalTransformation);
 				if (result == null) result = caseNamedElement(relationalTransformation);
+				if (result == null) result = caseParameterableElement(relationalTransformation);
 				if (result == null) result = caseElement(relationalTransformation);
 				if (result == null) result = caseNameable(relationalTransformation);
 				if (result == null) result = caseVisitable(relationalTransformation);
@@ -419,6 +422,21 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterableElement(ParameterableElement object) {
 		return null;
 	}
 

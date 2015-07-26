@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.LiteralExp;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.ParameterableElement;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
@@ -90,6 +91,7 @@ public class QVTtemplateSwitch<T> extends Switch<T> {
 				if (result == null) result = caseLiteralExp(collectionTemplateExp);
 				if (result == null) result = caseOCLExpression(collectionTemplateExp);
 				if (result == null) result = caseTypedElement(collectionTemplateExp);
+				if (result == null) result = caseParameterableElement(collectionTemplateExp);
 				if (result == null) result = caseNamedElement(collectionTemplateExp);
 				if (result == null) result = caseElement(collectionTemplateExp);
 				if (result == null) result = caseNameable(collectionTemplateExp);
@@ -104,6 +106,7 @@ public class QVTtemplateSwitch<T> extends Switch<T> {
 				if (result == null) result = caseLiteralExp(objectTemplateExp);
 				if (result == null) result = caseOCLExpression(objectTemplateExp);
 				if (result == null) result = caseTypedElement(objectTemplateExp);
+				if (result == null) result = caseParameterableElement(objectTemplateExp);
 				if (result == null) result = caseNamedElement(objectTemplateExp);
 				if (result == null) result = caseElement(objectTemplateExp);
 				if (result == null) result = caseNameable(objectTemplateExp);
@@ -125,6 +128,7 @@ public class QVTtemplateSwitch<T> extends Switch<T> {
 				if (result == null) result = caseLiteralExp(templateExp);
 				if (result == null) result = caseOCLExpression(templateExp);
 				if (result == null) result = caseTypedElement(templateExp);
+				if (result == null) result = caseParameterableElement(templateExp);
 				if (result == null) result = caseNamedElement(templateExp);
 				if (result == null) result = caseElement(templateExp);
 				if (result == null) result = caseNameable(templateExp);
@@ -268,6 +272,21 @@ public class QVTtemplateSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterableElement(ParameterableElement object) {
 		return null;
 	}
 

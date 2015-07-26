@@ -19,14 +19,15 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedMappingSequence"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCallBindingCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//MappingCallBindingCS/isPolled"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallBindingCS/ownedValue"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallBindingCS/owningMappingCall"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallBindingCS/referredVariable"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallBindingCS/ownedValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//MappingCallBindingCS/isPolled"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCallCS">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallCS/referredMapping"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//MappingCallCS/isInfinite"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallCS/ownedBindings"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallCS/referredMapping"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingLoopCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingLoopCS/ownedIterator"/>

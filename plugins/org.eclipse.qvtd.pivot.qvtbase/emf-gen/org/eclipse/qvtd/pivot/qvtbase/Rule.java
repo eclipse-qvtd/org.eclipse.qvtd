@@ -23,7 +23,7 @@ import org.eclipse.ocl.pivot.NamedElement;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getDomain <em>Domain</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Rule#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getIsDefault <em>Is Default</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverridden <em>Overridden</em>}</li>
@@ -62,22 +62,22 @@ public interface Rule extends NamedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Default</em>' attribute.
-	 * @see #setIsDefault(boolean)
+	 * @see #setIsDefault(Boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getRule_IsDefault()
 	 * @model default="false" dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
-	boolean isIsDefault();
+	Boolean getIsDefault();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#isIsDefault <em>Is Default</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getIsDefault <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Default</em>' attribute.
-	 * @see #isIsDefault()
+	 * @see #getIsDefault()
 	 * @generated
 	 */
-	void setIsDefault(boolean value);
+	void setIsDefault(Boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Overrides</b></em>' reference.

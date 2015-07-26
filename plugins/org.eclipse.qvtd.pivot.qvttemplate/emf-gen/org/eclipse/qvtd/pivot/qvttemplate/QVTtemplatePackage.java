@@ -682,11 +682,11 @@ public interface QVTtemplatePackage extends EPackage {
 	EReference getPropertyTemplateItem_Value();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#isIsOpposite <em>Is Opposite</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#getIsOpposite <em>Is Opposite</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Is Opposite</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#isIsOpposite()
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#getIsOpposite()
 	 * @see #getPropertyTemplateItem()
 	 * @generated
 	 */

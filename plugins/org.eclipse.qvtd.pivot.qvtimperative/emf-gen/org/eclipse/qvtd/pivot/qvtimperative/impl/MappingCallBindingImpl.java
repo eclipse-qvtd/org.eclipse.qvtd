@@ -36,7 +36,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl#getBoundVariable <em>Bound Variable</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl#isIsPolled <em>Is Polled</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl#getIsPolled <em>Is Polled</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl#getMappingCall <em>Mapping Call</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl#getValue <em>Value</em>}</li>
  * </ul>
@@ -55,24 +55,24 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	protected Variable boundVariable;
 
 	/**
-	 * The default value of the '{@link #isIsPolled() <em>Is Polled</em>}' attribute.
+	 * The default value of the '{@link #getIsPolled() <em>Is Polled</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsPolled()
+	 * @see #getIsPolled()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_POLLED_EDEFAULT = false;
+	protected static final Boolean IS_POLLED_EDEFAULT = Boolean.FALSE;
 
 	/**
-	 * The cached value of the '{@link #isIsPolled() <em>Is Polled</em>}' attribute.
+	 * The cached value of the '{@link #getIsPolled() <em>Is Polled</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsPolled()
+	 * @see #getIsPolled()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isPolled = IS_POLLED_EDEFAULT;
+	protected Boolean isPolled = IS_POLLED_EDEFAULT;
 
 	/**
 	 * This is true if the Is Polled attribute has been set.
@@ -200,8 +200,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean isIsPolled() {
+	public Boolean getIsPolled() {
 		return isPolled;
 	}
 
@@ -210,9 +209,8 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setIsPolled(boolean newIsPolled) {
-		boolean oldIsPolled = isPolled;
+	public void setIsPolled(Boolean newIsPolled) {
+		Boolean oldIsPolled = isPolled;
 		isPolled = newIsPolled;
 		boolean oldIsPolledESet = isPolledESet;
 		isPolledESet = true;
@@ -227,7 +225,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 */
 	@Override
 	public void unsetIsPolled() {
-		boolean oldIsPolled = isPolled;
+		Boolean oldIsPolled = isPolled;
 		boolean oldIsPolledESet = isPolledESet;
 		isPolled = IS_POLLED_EDEFAULT;
 		isPolledESet = false;
@@ -358,7 +356,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 				if (resolve) return getBoundVariable();
 				return basicGetBoundVariable();
 			case QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED:
-				return isIsPolled();
+				return getIsPolled();
 			case QVTimperativePackage.MAPPING_CALL_BINDING__MAPPING_CALL:
 				return getMappingCall();
 			case QVTimperativePackage.MAPPING_CALL_BINDING__VALUE:

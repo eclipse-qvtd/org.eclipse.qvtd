@@ -1179,11 +1179,11 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getMappingCall_Binding();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite <em>Is Infinite</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getIsInfinite <em>Is Infinite</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Is Infinite</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite()
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getIsInfinite()
 	 * @see #getMappingCall()
 	 * @generated
 	 */
@@ -1222,11 +1222,11 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getMappingCallBinding_BoundVariable();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#isIsPolled <em>Is Polled</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getIsPolled <em>Is Polled</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Is Polled</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#isIsPolled()
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getIsPolled()
 	 * @see #getMappingCallBinding()
 	 * @generated
 	 */

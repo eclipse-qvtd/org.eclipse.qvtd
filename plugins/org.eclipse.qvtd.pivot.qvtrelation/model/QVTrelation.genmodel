@@ -26,7 +26,6 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTrelation.ecore#QVTRelation.Key.transformation"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelation.ecore#//Key/oppositePart"/>
     </genClasses>
-    <genClasses ecoreClass="QVTrelation.ecore#//OppositePropertyCallExp"/>
     <genClasses ecoreClass="QVTrelation.ecore#QVTRelation.Relation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelation.ecore#QVTRelation.Relation.isTopLevel"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#QVTRelation.Relation.operationalImpl"/>

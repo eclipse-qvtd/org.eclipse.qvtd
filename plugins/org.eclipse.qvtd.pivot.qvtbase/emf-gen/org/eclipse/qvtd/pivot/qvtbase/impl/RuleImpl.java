@@ -37,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getDomain <em>Domain</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getIsDefault <em>Is Default</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverridden <em>Overridden</em>}</li>
@@ -57,24 +57,24 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	protected EList<Domain> domain;
 
 	/**
-	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * The default value of the '{@link #getIsDefault() <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsDefault()
+	 * @see #getIsDefault()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_DEFAULT_EDEFAULT = false;
+	protected static final Boolean IS_DEFAULT_EDEFAULT = Boolean.FALSE;
 
 	/**
-	 * The cached value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * The cached value of the '{@link #getIsDefault() <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsDefault()
+	 * @see #getIsDefault()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
+	protected Boolean isDefault = IS_DEFAULT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOverrides() <em>Overrides</em>}' reference.
@@ -133,8 +133,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean isIsDefault() {
+	public Boolean getIsDefault() {
 		return isDefault;
 	}
 
@@ -143,9 +142,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setIsDefault(boolean newIsDefault) {
-		boolean oldIsDefault = isDefault;
+	public void setIsDefault(Boolean newIsDefault) {
+		Boolean oldIsDefault = isDefault;
 		isDefault = newIsDefault;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.RULE__IS_DEFAULT, oldIsDefault, isDefault));
@@ -349,7 +347,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case QVTbasePackage.RULE__DOMAIN:
 				return getDomain();
 			case QVTbasePackage.RULE__IS_DEFAULT:
-				return isIsDefault();
+				return getIsDefault();
 			case QVTbasePackage.RULE__OVERRIDES:
 				if (resolve) return getOverrides();
 				return basicGetOverrides();
@@ -429,7 +427,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case QVTbasePackage.RULE__DOMAIN:
 				return domain != null && !domain.isEmpty();
 			case QVTbasePackage.RULE__IS_DEFAULT:
-				return isDefault != IS_DEFAULT_EDEFAULT;
+				return IS_DEFAULT_EDEFAULT == null ? isDefault != null : !IS_DEFAULT_EDEFAULT.equals(isDefault);
 			case QVTbasePackage.RULE__OVERRIDES:
 				return overrides != null;
 			case QVTbasePackage.RULE__TRANSFORMATION:

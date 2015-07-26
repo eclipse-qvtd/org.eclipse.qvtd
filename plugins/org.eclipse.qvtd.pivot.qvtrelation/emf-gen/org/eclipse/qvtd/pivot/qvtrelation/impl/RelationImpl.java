@@ -40,7 +40,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#isIsTopLevel <em>Is Top Level</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#getIsTopLevel <em>Is Top Level</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#getOperationalImpl <em>Operational Impl</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#getVariable <em>Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#getWhen <em>When</em>}</li>
@@ -51,24 +51,24 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  */
 public class RelationImpl extends RuleImpl implements Relation {
 	/**
-	 * The default value of the '{@link #isIsTopLevel() <em>Is Top Level</em>}' attribute.
+	 * The default value of the '{@link #getIsTopLevel() <em>Is Top Level</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsTopLevel()
+	 * @see #getIsTopLevel()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_TOP_LEVEL_EDEFAULT = false;
+	protected static final Boolean IS_TOP_LEVEL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #isIsTopLevel() <em>Is Top Level</em>}' attribute.
+	 * The cached value of the '{@link #getIsTopLevel() <em>Is Top Level</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsTopLevel()
+	 * @see #getIsTopLevel()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isTopLevel = IS_TOP_LEVEL_EDEFAULT;
+	protected Boolean isTopLevel = IS_TOP_LEVEL_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOperationalImpl() <em>Operational Impl</em>}' containment reference list.
@@ -134,8 +134,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean isIsTopLevel() {
+	public Boolean getIsTopLevel() {
 		return isTopLevel;
 	}
 
@@ -144,9 +143,8 @@ public class RelationImpl extends RuleImpl implements Relation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setIsTopLevel(boolean newIsTopLevel) {
-		boolean oldIsTopLevel = isTopLevel;
+	public void setIsTopLevel(Boolean newIsTopLevel) {
+		Boolean oldIsTopLevel = isTopLevel;
 		isTopLevel = newIsTopLevel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION__IS_TOP_LEVEL, oldIsTopLevel, isTopLevel));
@@ -322,7 +320,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTrelationPackage.RELATION__IS_TOP_LEVEL:
-				return isIsTopLevel();
+				return getIsTopLevel();
 			case QVTrelationPackage.RELATION__OPERATIONAL_IMPL:
 				return getOperationalImpl();
 			case QVTrelationPackage.RELATION__VARIABLE:
@@ -401,7 +399,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case QVTrelationPackage.RELATION__IS_TOP_LEVEL:
-				return isTopLevel != IS_TOP_LEVEL_EDEFAULT;
+				return IS_TOP_LEVEL_EDEFAULT == null ? isTopLevel != null : !IS_TOP_LEVEL_EDEFAULT.equals(isTopLevel);
 			case QVTrelationPackage.RELATION__OPERATIONAL_IMPL:
 				return operationalImpl != null && !operationalImpl.isEmpty();
 			case QVTrelationPackage.RELATION__VARIABLE:

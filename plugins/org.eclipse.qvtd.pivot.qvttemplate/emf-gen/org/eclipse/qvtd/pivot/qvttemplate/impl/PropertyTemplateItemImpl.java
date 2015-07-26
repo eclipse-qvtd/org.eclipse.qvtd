@@ -38,7 +38,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.impl.PropertyTemplateItemImpl#getObjContainer <em>Obj Container</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.impl.PropertyTemplateItemImpl#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.impl.PropertyTemplateItemImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.impl.PropertyTemplateItemImpl#isIsOpposite <em>Is Opposite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.impl.PropertyTemplateItemImpl#getIsOpposite <em>Is Opposite</em>}</li>
  * </ul>
  *
  * @generated
@@ -65,24 +65,24 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	protected OCLExpression value;
 
 	/**
-	 * The default value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * The default value of the '{@link #getIsOpposite() <em>Is Opposite</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsOpposite()
+	 * @see #getIsOpposite()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_OPPOSITE_EDEFAULT = false;
+	protected static final Boolean IS_OPPOSITE_EDEFAULT = Boolean.FALSE;
 
 	/**
-	 * The cached value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * The cached value of the '{@link #getIsOpposite() <em>Is Opposite</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsOpposite()
+	 * @see #getIsOpposite()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isOpposite = IS_OPPOSITE_EDEFAULT;
+	protected Boolean isOpposite = IS_OPPOSITE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -236,8 +236,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean isIsOpposite() {
+	public Boolean getIsOpposite() {
 		return isOpposite;
 	}
 
@@ -246,9 +245,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setIsOpposite(boolean newIsOpposite) {
-		boolean oldIsOpposite = isOpposite;
+	public void setIsOpposite(Boolean newIsOpposite) {
+		Boolean oldIsOpposite = isOpposite;
 		isOpposite = newIsOpposite;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE, oldIsOpposite, isOpposite));
@@ -326,7 +324,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
 				return getValue();
 			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
-				return isIsOpposite();
+				return getIsOpposite();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -394,7 +392,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__VALUE:
 				return value != null;
 			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE:
-				return isOpposite != IS_OPPOSITE_EDEFAULT;
+				return IS_OPPOSITE_EDEFAULT == null ? isOpposite != null : !IS_OPPOSITE_EDEFAULT.equals(isOpposite);
 		}
 		return super.eIsSet(featureID);
 	}

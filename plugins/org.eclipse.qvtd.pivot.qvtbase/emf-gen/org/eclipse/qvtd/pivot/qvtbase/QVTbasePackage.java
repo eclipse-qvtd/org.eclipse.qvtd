@@ -1460,11 +1460,11 @@ public interface QVTbasePackage extends EPackage {
 	EReference getRule_Domain();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#isIsDefault <em>Is Default</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getIsDefault <em>Is Default</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Is Default</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#isIsDefault()
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#getIsDefault()
 	 * @see #getRule()
 	 * @generated
 	 */

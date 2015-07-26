@@ -24,7 +24,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#isIsTopLevel <em>Is Top Level</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#getIsTopLevel <em>Is Top Level</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#getOperationalImpl <em>Operational Impl</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#getVariable <em>Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#getWhen <em>When</em>}</li>
@@ -45,22 +45,22 @@ public interface Relation extends Rule {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Top Level</em>' attribute.
-	 * @see #setIsTopLevel(boolean)
+	 * @see #setIsTopLevel(Boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelation_IsTopLevel()
 	 * @model dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
-	boolean isIsTopLevel();
+	Boolean getIsTopLevel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#isIsTopLevel <em>Is Top Level</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#getIsTopLevel <em>Is Top Level</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Top Level</em>' attribute.
-	 * @see #isIsTopLevel()
+	 * @see #getIsTopLevel()
 	 * @generated
 	 */
-	void setIsTopLevel(boolean value);
+	void setIsTopLevel(Boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Operational Impl</b></em>' containment reference list.

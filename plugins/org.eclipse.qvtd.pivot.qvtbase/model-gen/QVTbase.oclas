@@ -4,8 +4,8 @@
   <ownedPackages xmi:id="P.qvtbase" URI="http://www.eclipse.org/qvt/2015/QVTbase" name="qvtbase" nsPrefix="qvtb">
     <ownedClasses xmi:id="T.qvtbase.BaseModel" name="BaseModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Model"/>
     <ownedClasses xmi:id="T.qvtbase.Domain" isAbstract="true" name="Domain" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.ReferringElement">
-      <ownedProperties xmi:id="p.qvtbase.Domain.isCheckable" isRequired="false" isUnsettable="true" name="isCheckable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
-      <ownedProperties xmi:id="p.qvtbase.Domain.isEnforceable" isRequired="false" isUnsettable="true" name="isEnforceable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
+      <ownedProperties xmi:id="p.qvtbase.Domain.isCheckable" isUnsettable="true" name="isCheckable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
+      <ownedProperties xmi:id="p.qvtbase.Domain.isEnforceable" isUnsettable="true" name="isEnforceable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
       <ownedProperties xmi:id="p.qvtbase.Domain.rule" isTransient="true" name="rule" opposite="#p.qvtbase.Rule.domain" type="#T.qvtbase.Rule"/>
       <ownedProperties xmi:id="p.qvtbase.Domain.typedModel" isRequired="false" name="typedModel" opposite="#p.qvtbase.TypedModel.Domain"
           type="#T.qvtbase.TypedModel"/>

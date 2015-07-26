@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ParameterableElement;
 import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.Type;
@@ -171,6 +172,10 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTemplateableElement(TemplateableElement object) {
 				return createTemplateableElementAdapter();
+			}
+			@Override
+			public Adapter caseParameterableElement(ParameterableElement object) {
+				return createParameterableElementAdapter();
 			}
 			@Override
 			public Adapter caseOperation(Operation object) {
@@ -479,6 +484,20 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTemplateableElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.ParameterableElement <em>Parameterable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.pivot.ParameterableElement
+	 * @generated
+	 */
+	public Adapter createParameterableElementAdapter() {
 		return null;
 	}
 

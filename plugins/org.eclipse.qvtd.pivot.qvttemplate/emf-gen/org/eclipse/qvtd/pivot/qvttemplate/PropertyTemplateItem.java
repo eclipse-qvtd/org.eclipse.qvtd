@@ -26,7 +26,7 @@ import org.eclipse.ocl.pivot.Property;
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#getObjContainer <em>Obj Container</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#isIsOpposite <em>Is Opposite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#getIsOpposite <em>Is Opposite</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getPropertyTemplateItem()
@@ -126,21 +126,21 @@ public interface PropertyTemplateItem extends Element {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Opposite</em>' attribute.
-	 * @see #setIsOpposite(boolean)
+	 * @see #setIsOpposite(Boolean)
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getPropertyTemplateItem_IsOpposite()
 	 * @model default="false" dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
-	boolean isIsOpposite();
+	Boolean getIsOpposite();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#isIsOpposite <em>Is Opposite</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#getIsOpposite <em>Is Opposite</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Opposite</em>' attribute.
-	 * @see #isIsOpposite()
+	 * @see #getIsOpposite()
 	 * @generated
 	 */
-	void setIsOpposite(boolean value);
+	void setIsOpposite(Boolean value);
 
 } // PropertyTemplateItem

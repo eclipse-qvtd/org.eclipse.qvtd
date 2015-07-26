@@ -18,6 +18,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.LiteralExp;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.ParameterableElement;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
@@ -118,6 +119,10 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypedElement(TypedElement object) {
 				return createTypedElementAdapter();
+			}
+			@Override
+			public Adapter caseParameterableElement(ParameterableElement object) {
+				return createParameterableElementAdapter();
 			}
 			@Override
 			public Adapter caseOCLExpression(OCLExpression object) {
@@ -270,6 +275,20 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.ParameterableElement <em>Parameterable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.pivot.ParameterableElement
+	 * @generated
+	 */
+	public Adapter createParameterableElementAdapter() {
 		return null;
 	}
 
