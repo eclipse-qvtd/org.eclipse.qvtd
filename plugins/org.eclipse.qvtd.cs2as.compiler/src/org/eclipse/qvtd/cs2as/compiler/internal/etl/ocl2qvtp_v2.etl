@@ -20,23 +20,33 @@ pre {
 	
 	var qvtiPackage = new QVTi!Package;
 	qvtiPackage.name = "";
-	
-	
+		
 	var qvtiTransf = new QVTi!Transformation;
 	qvtiTransf.name = qvtiModel.name.replace("\\.","_"); // FIXME . as part of the name is causing issues in the CG
 	qvtiTransf.modelParameter.addAll(QVTi!TypedModel.all());
+		
+	var importedPckgs = Sequence{};
+	for (namespace in OCL!Import.all.importedNamespace) {
+		if (namespace.isKindOf(OCL!Model)) {
+			importedPckgs.addAll(namespace.ownedPackages); 
+		} else if (namespace.isKindOf(OCL!Package)) {
+			importedPckgs.add(namespace);
+		} else {
+			namespace.println("[WARNING] imported namespace not recognised: ");
+		}
+	}
 	
 	var typedModel = new QVTi!TypedModel;
 	typedModel.name = LEFT;
 	typedModel.usedPackage.add(
-		OCL!Import.all.importedNamespace.ownedPackages.flatten().selectOne(x 
+		importedPckgs.selectOne(x 
 				| x.name = OCL!ShadowExp.all.first().getExpressionContextType().owningPackage.name));
 	qvtiTransf.modelParameter.add(typedModel);
 	
 	typedModel = new QVTi!TypedModel;
 	typedModel.name = RIGHT;
 	typedModel.usedPackage.add(
-		OCL!Import.all.importedNamespace.ownedPackages.flatten().selectOne(x 
+		importedPckgs.selectOne(x 
 				| x.name = OCL!ShadowExp.all.first().type.owningPackage.name));
 	qvtiTransf.modelParameter.add(typedModel);
 		
