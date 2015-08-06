@@ -46,8 +46,8 @@
       name="Eclipse Installation">
     <setupTask
         xsi:type="jdt:JRETask"
-        version="J2SE-1.6"
-        location="${jre.location-1.6}"/>
+        version="JavaSE-1.7"
+        location="${jre.location-1.7}"/>
     <setupTask
         xsi:type="setup:EclipseIniTask"
         option="-Xmx"
@@ -209,6 +209,9 @@
       <sourceLocator
           rootFolder="${qvtd.git.clone.location/examples}"
           locateNestedProjects="true"/>
+      <sourceLocator
+          rootFolder="${qvtd.git.clone.location/doc}"
+          locateNestedProjects="true"/>
       <description>Development Projects</description>
     </setupTask>
     <setupTask
@@ -293,7 +296,7 @@
       <requirement
           name="org.eclipse.buckminster.pde.feature.feature.group"/>
       <repository
-          url="http://download.eclipse.org/tools/buckminster/updates-4.4"/>
+          url="http://download.eclipse.org/tools/buckminster/updates-4.5"/>
     </setupTask>
     <setupTask
         xsi:type="git:GitCloneTask"
