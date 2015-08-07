@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
+import org.eclipse.ocl.pivot.internal.manager.ShadowObjectManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -61,6 +62,12 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 
     protected final @NonNull Transformation transformation;
+
+    /**
+	 * Lazily created cache of shadow objects.
+	 */
+	private /*@LazyNonNull*/ ShadowObjectManager shadowObjectManager = null;
+	
 
 	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI transformationURI) throws IOException {
     	this(environmentFactory, QVTbaseUtil.loadTransformation(ImperativeModel.class, environmentFactory, transformationURI, environmentFactory.keepDebug()));
@@ -248,6 +255,15 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	@Override
 	public @NonNull QVTiModelManager getModelManager() {
 		return (QVTiModelManager) modelManager;
+	}
+
+	@Override
+	public @NonNull Object getShadowObject(@NonNull org.eclipse.ocl.pivot.Class shadowClass,
+			@NonNull Property[] shadowProperties, @NonNull Object[] shadowValues) {
+		if (shadowObjectManager == null) {
+			shadowObjectManager = new ShadowObjectManager(getIdResolver());
+		}
+		return shadowObjectManager.getShadowObject(shadowClass, shadowProperties, shadowValues);
 	}
 	
 	public @NonNull Transformation getTransformation() {

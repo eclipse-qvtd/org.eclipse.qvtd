@@ -37,6 +37,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.ids.ValueId;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionAsOrderedSetOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -74,23 +75,23 @@ public class classescs2as extends AbstractTransformer
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Root = PACKid_http_c_s_s_ocldependencyanalysis_s_classes_s_1_0.getClassId("Root", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_RootCS = PACKid_http_c_s_s_ocldependencyanalysis_s_classescs_s_1_0.getClassId("RootCS", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_RootCS2Root = PACKid_http_c_s_s_tracesmodel_s_1_0_s_classescstraces.getClassId("RootCS2Root", 0);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Class = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Class, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_ClassCS = TypeId.ORDERED_SET.getSpecializedId(CLSSid_ClassCS, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Package = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Package, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_PackageCS = TypeId.ORDERED_SET.getSpecializedId(CLSSid_PackageCS, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Class = TypeId.SEQUENCE.getSpecializedId(CLSSid_Class, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_ClassCS2Class = TypeId.SEQUENCE.getSpecializedId(CLSSid_ClassCS2Class, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Package = TypeId.SEQUENCE.getSpecializedId(CLSSid_Package, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_PackageCS2Package = TypeId.SEQUENCE.getSpecializedId(CLSSid_PackageCS2Package, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Class = TypeId.SET.getSpecializedId(CLSSid_Class, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ClassCS = TypeId.SET.getSpecializedId(CLSSid_ClassCS, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ClassCS2Class = TypeId.SET.getSpecializedId(CLSSid_ClassCS2Class, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedId(CLSSid_Package, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_PackageCS = TypeId.SET.getSpecializedId(CLSSid_PackageCS, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_PackageCS2Package = TypeId.SET.getSpecializedId(CLSSid_PackageCS2Package, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Root = TypeId.SET.getSpecializedId(CLSSid_Root, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_RootCS = TypeId.SET.getSpecializedId(CLSSid_RootCS, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_RootCS2Root = TypeId.SET.getSpecializedId(CLSSid_RootCS2Root, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_ClassCS = TypeId.ORDERED_SET.getSpecializedId(CLSSid_ClassCS);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_PackageCS = TypeId.ORDERED_SET.getSpecializedId(CLSSid_PackageCS);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_NF_CLSSid_Class = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Class, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_NF_CLSSid_Package = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Package, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_NF_CLSSid_Class = TypeId.SEQUENCE.getSpecializedId(CLSSid_Class, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_NF_CLSSid_ClassCS2Class = TypeId.SEQUENCE.getSpecializedId(CLSSid_ClassCS2Class, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_NF_CLSSid_Package = TypeId.SEQUENCE.getSpecializedId(CLSSid_Package, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_NF_CLSSid_PackageCS2Package = TypeId.SEQUENCE.getSpecializedId(CLSSid_PackageCS2Package, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_NF_CLSSid_Class = TypeId.SET.getSpecializedId(CLSSid_Class, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_NF_CLSSid_ClassCS = TypeId.SET.getSpecializedId(CLSSid_ClassCS, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_NF_CLSSid_ClassCS2Class = TypeId.SET.getSpecializedId(CLSSid_ClassCS2Class, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_NF_CLSSid_Package = TypeId.SET.getSpecializedId(CLSSid_Package, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_NF_CLSSid_PackageCS = TypeId.SET.getSpecializedId(CLSSid_PackageCS, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_NF_CLSSid_PackageCS2Package = TypeId.SET.getSpecializedId(CLSSid_PackageCS2Package, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_NF_CLSSid_Root = TypeId.SET.getSpecializedId(CLSSid_Root, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_NF_CLSSid_RootCS = TypeId.SET.getSpecializedId(CLSSid_RootCS, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_NF_CLSSid_RootCS2Root = TypeId.SET.getSpecializedId(CLSSid_RootCS2Root, ValueId.TRUE_ID);
     
     /*
      * Property-source to Property-target unnavigable navigation caches
@@ -369,7 +370,7 @@ public class classescs2as extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<PackageCS> ownedPackages = rootCS_0.getOwnedPackages();
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
-        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_PackageCS2Package);
+        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_NF_CLSSid_PackageCS2Package);
         @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedPackages.iterator();
         @NonNull /*@Thrown*/ SequenceValue collect_0;
         while (true) {
@@ -388,7 +389,7 @@ public class classescs2as extends AbstractTransformer
             //
             accumulator.add(PackageCS2Package);
         }
-        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
+        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_NF_CLSSid_Package);
         @NonNull Iterator<?> ITERATOR__1_0 = collect_0.iterator();
         @NonNull /*@Thrown*/ SequenceValue collect;
         while (true) {
@@ -480,7 +481,7 @@ public class classescs2as extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<ClassCS> ownedClasses = packageCS_1.getOwnedClasses();
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
-        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_ClassCS2Class);
+        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_NF_CLSSid_ClassCS2Class);
         @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedClasses.iterator();
         @NonNull /*@Thrown*/ SequenceValue collect_0;
         while (true) {
@@ -499,7 +500,7 @@ public class classescs2as extends AbstractTransformer
             //
             accumulator.add(ClassCS2Class);
         }
-        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
+        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_NF_CLSSid_Class);
         @NonNull Iterator<?> ITERATOR__1_0 = collect_0.iterator();
         @NonNull /*@Thrown*/ SequenceValue collect;
         while (true) {
@@ -608,10 +609,10 @@ public class classescs2as extends AbstractTransformer
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescstraces_c_c_ClassCS2Class_0 = idResolver.getClass(CLSSid_ClassCS2Class, null);
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescstraces_c_c_PackageCS2Package_0 = idResolver.getClass(CLSSid_PackageCS2Package, null);
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescstraces_c_c_RootCS2Root_0 = idResolver.getClass(CLSSid_RootCS2Root, null);
-        final @NonNull /*@NonInvalid*/ SetValue allInstances_3 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, TYP_classes_c_c_Package_1);
-        final @NonNull /*@NonInvalid*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_1);
-        final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
-        final @NonNull /*@NonInvalid*/ SetValue allInstances_11 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1);
+        final @NonNull /*@NonInvalid*/ SetValue allInstances_3 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_NF_CLSSid_Package, TYP_classes_c_c_Package_1);
+        final @NonNull /*@NonInvalid*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_NF_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_1);
+        final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_NF_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
+        final @NonNull /*@NonInvalid*/ SetValue allInstances_11 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_NF_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1);
         // mapping statements
         for (PackageCS packageCS_5 : ValueUtil.typedIterable(PackageCS.class, allInstances)) {
             if (packageCS_5 != null) {
@@ -621,7 +622,7 @@ public class classescs2as extends AbstractTransformer
                 }
             }
         }
-        final @NonNull /*@NonInvalid*/ SetValue allInstances_0 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS2Package, TYP_classescstraces_c_c_PackageCS2Package_0);
+        final @NonNull /*@NonInvalid*/ SetValue allInstances_0 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_NF_CLSSid_PackageCS2Package, TYP_classescstraces_c_c_PackageCS2Package_0);
         for (PackageCS2Package p2p_1 : ValueUtil.typedIterable(PackageCS2Package.class, allInstances_0)) {
             if (p2p_1 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS2Package symbol_9 = (PackageCS2Package)p2p_1;
@@ -668,7 +669,7 @@ public class classescs2as extends AbstractTransformer
                 }
             }
         }
-        final @NonNull /*@NonInvalid*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS2Class, TYP_classescstraces_c_c_ClassCS2Class_0);
+        final @NonNull /*@NonInvalid*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_NF_CLSSid_ClassCS2Class, TYP_classescstraces_c_c_ClassCS2Class_0);
         for (ClassCS2Class c2c_1 : ValueUtil.typedIterable(ClassCS2Class.class, allInstances_6)) {
             if (c2c_1 != null) {
                 final @NonNull /*@NonInvalid*/ ClassCS2Class symbol_27 = (ClassCS2Class)c2c_1;
@@ -680,7 +681,7 @@ public class classescs2as extends AbstractTransformer
         for (ClassCS classCS_4 : ValueUtil.typedIterable(ClassCS.class, allInstances_7)) {
             if (classCS_4 != null) {
                 final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
-                final @NonNull /*@NonInvalid*/ SetValue allInstances_8 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, TYP_classes_c_c_Class_0);
+                final @NonNull /*@NonInvalid*/ SetValue allInstances_8 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_NF_CLSSid_Class, TYP_classes_c_c_Class_0);
                 for (classes.Class symbol_34 : ValueUtil.typedIterable(classes.Class.class, allInstances_8)) {
                     if (symbol_34 != null) {
                         final @NonNull /*@NonInvalid*/ classes.Class symbol_30 = (classes.Class)symbol_34;
@@ -702,7 +703,7 @@ public class classescs2as extends AbstractTransformer
                 }
             }
         }
-        final @NonNull /*@NonInvalid*/ SetValue allInstances_10 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS2Root, TYP_classescstraces_c_c_RootCS2Root_0);
+        final @NonNull /*@NonInvalid*/ SetValue allInstances_10 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_NF_CLSSid_RootCS2Root, TYP_classescstraces_c_c_RootCS2Root_0);
         for (RootCS2Root r2r_1 : ValueUtil.typedIterable(RootCS2Root.class, allInstances_10)) {
             if (r2r_1 != null) {
                 final @NonNull /*@NonInvalid*/ RootCS2Root symbol_39 = (RootCS2Root)r2r_1;
@@ -714,7 +715,7 @@ public class classescs2as extends AbstractTransformer
         for (RootCS rootCS_4 : ValueUtil.typedIterable(RootCS.class, allInstances_11)) {
             if (rootCS_4 != null) {
                 final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Root_0 = idResolver.getClass(CLSSid_Root, null);
-                final @NonNull /*@NonInvalid*/ SetValue allInstances_12 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Root, TYP_classes_c_c_Root_0);
+                final @NonNull /*@NonInvalid*/ SetValue allInstances_12 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_NF_CLSSid_Root, TYP_classes_c_c_Root_0);
                 for (Root root_1 : ValueUtil.typedIterable(Root.class, allInstances_12)) {
                     if (root_1 != null) {
                         final @NonNull /*@NonInvalid*/ Root symbol_42 = (Root)root_1;

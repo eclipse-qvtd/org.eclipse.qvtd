@@ -140,13 +140,19 @@ public class QVTbaseLibrary extends ASResourceImpl
 	 * is loaded from the registry of Standard Libraries populated by the standard_library 
 	 * extension point.
 	 */
-	public static class Loader implements StandardLibraryContribution
+	public static final class Loader implements StandardLibraryContribution
 	{
+		/**
+		 * @noreference This method is not intended to be referenced by clients.
+		 */
 		@Override
 		public @NonNull StandardLibraryContribution getContribution() {
 			return this;
 		}
 		
+		/**
+		 * @noreference This method is not intended to be referenced by clients.
+		 */
 		@Override
 		public @NonNull Resource getResource() {
 			return getDefault();
@@ -173,6 +179,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 
 	/**
 	 * Overridden to inhibit entry of the static shared instance in any ResourceSet.
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	@Override
 	public NotificationChain basicSetResourceSet(ResourceSet resourceSet, NotificationChain notifications) {
@@ -186,6 +193,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 
 	/**
 	 * Overridden to inhibit unloading of the static shared instance.
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	@Override
 	protected void doUnload() {
@@ -196,6 +204,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 
 	/**
 	 * Ensure xmi:ids are auto-generated before reference.
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	@Override
 	public EObject getEObject(String uriFragment) {
@@ -207,6 +216,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 
 	/**
 	 * Overridden to trivialise loading of the static shared instance.
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	@Override
 	public void load(Map<?, ?> options) throws IOException {
@@ -220,6 +230,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 
 	/**
 	 * Overridden to inhibit unloading of the static shared instance.
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	@Override
 	protected Notification setLoaded(boolean isLoaded) {
@@ -245,6 +256,9 @@ public class QVTbaseLibrary extends ASResourceImpl
 			installComments();
 		}
 		
+		/**
+		 * @noreference This method is not intended to be referenced by clients.
+		 */
 		public @NonNull Model getModel() {
 			return model;
 		}

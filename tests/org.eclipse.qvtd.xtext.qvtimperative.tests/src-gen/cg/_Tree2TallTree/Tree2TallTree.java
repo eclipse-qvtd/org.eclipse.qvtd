@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.ids.ValueId;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 import org.eclipse.ocl.pivot.library.LibraryIteration;
@@ -71,19 +72,19 @@ public class Tree2TallTree extends AbstractTransformer
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_List2List = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/List2List", null, Tree2talltreePackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_TallTree = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/TallTree", null, TalltreePackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_Tree = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/Tree", null, TreePackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_PRIMid_Integer = TypeId.BAG.getSpecializedId(TypeId.INTEGER, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_NF_PRIMid_Integer = TypeId.BAG.getSpecializedId(TypeId.INTEGER, ValueId.TRUE_ID);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Class = PACKid_$metamodel$.getClassId("Class", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Model = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary.getClassId("Model", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Node = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_Tree.getClassId("Node", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Node2TallNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_List2List.getClassId("Node2TallNode", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TallNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_TallTree.getClassId("TallNode", 0);
-    public static final @NonNull /*@NonInvalid*/ IntegerValue INT_0 = ValueUtil.integerValueOf("0");
-    public static final @NonNull /*@NonInvalid*/ IntegerValue INT_1 = ValueUtil.integerValueOf("1");
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TallNode = TypeId.BAG.getSpecializedId(CLSSid_TallNode, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Node = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Node, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Node2TallNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Node2TallNode, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Node = TypeId.SET.getSpecializedId(CLSSid_Node, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Node2TallNode = TypeId.SET.getSpecializedId(CLSSid_Node2TallNode, TypeId.BOOLEAN, TypeId.INTEGER, TypeId.UNLIMITED_NATURAL);
+    public static final @NonNull /*@NonInvalid*/ IntegerValue INT_0 = ValueUtil.ZERO_VALUE;
+    public static final @NonNull /*@NonInvalid*/ IntegerValue INT_1 = ValueUtil.ONE_VALUE;
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_NF_CLSSid_TallNode = TypeId.BAG.getSpecializedId(CLSSid_TallNode, ValueId.TRUE_ID);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Node = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Node);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Node2TallNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Node2TallNode);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Node = TypeId.SET.getSpecializedId(CLSSid_Node);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Node2TallNode = TypeId.SET.getSpecializedId(CLSSid_Node2TallNode);
     
     /*
      * Property-source to Property-target unnavigable navigation caches
@@ -355,8 +356,8 @@ public class Tree2TallTree extends AbstractTransformer
             // variable assignments
             @SuppressWarnings("null")
             final @NonNull /*@Thrown*/ String name = objectManager.get(node2tallNode_0, Tree2talltreePackage.Literals.NODE2_TALL_NODE__NAME);
-            final @NonNull /*@Thrown*/ SetValue safe_collect_sources = (SetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_children_0, null);
-            @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_TallNode);
+            final @NonNull /*@Thrown*/ SetValue safe_collect_sources = (SetValue)CollectionExcludingOperation.INSTANCE.evaluate(executor, SET_CLSSid_Node2TallNode, BOXED_children_0, null);
+            @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_NF_CLSSid_TallNode);
             @NonNull Iterator<?> ITERATOR__1 = safe_collect_sources.iterator();
             @NonNull /*@Thrown*/ BagValue collect;
             while (true) {
@@ -377,7 +378,7 @@ public class Tree2TallTree extends AbstractTransformer
             final /*@Thrown*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_children_0).booleanValue();
             @NonNull /*@Thrown*/ IntegerValue symbol_0;
             if (notEmpty) {
-                @NonNull /*@Thrown*/ BagValue.Accumulator accumulator_0 = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_TallNode);
+                @NonNull /*@Thrown*/ BagValue.Accumulator accumulator_0 = ValueUtil.createBagAccumulatorValue(BAG_NF_CLSSid_TallNode);
                 @Nullable Iterator<?> ITERATOR__1_0 = BOXED_children_0.iterator();
                 @NonNull /*@Thrown*/ BagValue collect_1;
                 while (true) {
@@ -397,7 +398,7 @@ public class Tree2TallTree extends AbstractTransformer
                     //
                     accumulator_0.add(tallNode_1);
                 }
-                @NonNull /*@Thrown*/ BagValue.Accumulator accumulator_1 = ValueUtil.createBagAccumulatorValue(BAG_PRIMid_Integer);
+                @NonNull /*@Thrown*/ BagValue.Accumulator accumulator_1 = ValueUtil.createBagAccumulatorValue(BAG_NF_PRIMid_Integer);
                 @NonNull Iterator<?> ITERATOR__1_1 = collect_1.iterator();
                 @NonNull /*@Thrown*/ BagValue collect_0;
                 while (true) {

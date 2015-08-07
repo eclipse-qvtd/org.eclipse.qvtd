@@ -8,7 +8,7 @@
 '-'=47
 '->'=61
 '.'=60
-'..'=79
+'..'=80
 '/'=49
 ':'=16
 '::'=39
@@ -28,7 +28,7 @@
 'Boolean'=66
 'Collection'=77
 'Integer'=67
-'Lambda'=80
+'Lambda'=79
 'Map'=64
 'OclAny'=71
 'OclInvalid'=72

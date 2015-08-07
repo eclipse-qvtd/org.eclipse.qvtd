@@ -95,10 +95,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		return model;
 	}
 
-	protected QVTbaseMetamodel(@NonNull URI uri) {
-		super(uri, OCLASResourceFactory.getInstance());
-	}
-
+	// LibraryContents ensures standardLibrary is available to derived field initializers
 	protected static class LibraryContents extends AbstractContents
 	{
 		protected final @NonNull Package standardLibrary;
@@ -193,7 +190,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull OrderedSetType _OrderedSet_Domain = createOrderedSetType(_OrderedSet, _Domain);
 		private final @NonNull OrderedSetType _OrderedSet_TypedModel = createOrderedSetType(_OrderedSet, _TypedModel);
 		private final @NonNull SetType _Set_Annotation = createSetType(_Set, _Annotation);
-		private final @NonNull SetType _Set_Package = createSetType(_Set, _Package);
+		private final @NonNull SetType _Set_Package_1 = createSetType(_Set, _Package);
 		private final @NonNull SetType _Set_Predicate = createSetType(_Set, _Predicate);
 		private final @NonNull SetType _Set_Rule = createSetType(_Set, _Rule);
 		private final @NonNull SetType _Set_TypedModel = createSetType(_Set, _TypedModel);
@@ -311,7 +308,8 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _Set_Annotation);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_Annotation);
-			ownedClasses.add(type = _Set_Package);
+			ownedClasses.add(type = _Set_Package_1);
+			type.setLower(1);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_UniqueCollection_Package);
 			ownedClasses.add(type = _Set_Predicate);
@@ -398,7 +396,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_TypedModel_dependsOn = createProperty(QVTbasePackage.Literals.TYPED_MODEL__DEPENDS_ON, _Set_TypedModel);
 		private final @NonNull Property pr_TypedModel_ownedContext = createProperty(QVTbasePackage.Literals.TYPED_MODEL__OWNED_CONTEXT, _Variable);
 		private final @NonNull Property pr_TypedModel_transformation = createProperty(QVTbasePackage.Literals.TYPED_MODEL__TRANSFORMATION, _Transformation);
-		private final @NonNull Property pr_TypedModel_usedPackage = createProperty(QVTbasePackage.Literals.TYPED_MODEL__USED_PACKAGE, _Set_Package);
+		private final @NonNull Property pr_TypedModel_usedPackage = createProperty(QVTbasePackage.Literals.TYPED_MODEL__USED_PACKAGE, _Set_Package_1);
 		private final @NonNull Property pr_TypedModel_Domain_typedModel = createProperty("Domain", _Bag_Domain);
 		private final @NonNull Property pr_TypedModel_dependent_dependsOn = createProperty("dependent", _TypedModel);
 		
@@ -595,7 +593,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 				createTemplateParameterSubstitution(_OrderedSet_T, _TypedModel)));
 			_Set_Annotation.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Set_T, _Annotation)));
-			_Set_Package.getOwnedBindings().add(createTemplateBinding(
+			_Set_Package_1.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Set_T, _Package)));
 			_Set_Variable.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Set_T, _Variable)));
@@ -623,5 +621,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		
 		private void installComments() {
 		}
+	}
+
+	private QVTbaseMetamodel(@NonNull URI uri) {
+		super(uri, OCLASResourceFactory.getInstance());
 	}
 }
