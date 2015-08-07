@@ -40,7 +40,7 @@ MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] (':='|
 	
 MappingLoopCS: 'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingSequence=MappingSequenceCS '}';
 	
-MappingIteratorCS returns essentialocl::VariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)?;
+MappingIteratorCS returns essentialocl::VariableCS: name=UnrestrictedName (':' ownedType=ComplexTypeCS)?;
 
 MappingSequenceCS: ownedMappingStatements+=MappingStatementCS+;
 	

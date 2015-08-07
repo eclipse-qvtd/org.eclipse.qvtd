@@ -55,14 +55,14 @@ ModelDeclCS: name=UnrestrictedName ':' (metamodelIds+=[pivot::Namespace|Unrestri
 	| '{' metamodelIds+=[pivot::Namespace|UnrestrictedName] (',' metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}')
 ;
 	
-ObjectTemplateCS: name=UnrestrictedName? ':' ownedType=TypedRefCS
+ObjectTemplateCS: name=UnrestrictedName? ':' ownedType=SimpleTypeCS
 	'{' (ownedPropertyTemplates+=PropertyTemplateCS (',' ownedPropertyTemplates+=PropertyTemplateCS)*)? '}';
 	
-ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypedRefCS;	
+ParamDeclarationCS: name=UnrestrictedName ':' ownedType=ComplexTypeCS;	
 
 PredicateCS: ownedCondition=ExpCS ';';
 
-PrimitiveTypeDomainCS: 'primitive' 'domain' name=UnrestrictedName ':' ownedType=TypedRefCS ';';
+PrimitiveTypeDomainCS: 'primitive' 'domain' name=UnrestrictedName ':' ownedType=SimpleTypeCS ';';
 
 PropertyTemplateCS: (propertyId=[pivot::Property|UnrestrictedName]
 	| ('opposite' '(' ownedOppositePropertyId=PathNameCS ')'))
@@ -70,7 +70,7 @@ PropertyTemplateCS: (propertyId=[pivot::Property|UnrestrictedName]
 		
 QueryCS: 'query' name=UnrestrictedName 
             '(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
-      	  ':' ownedType=TypedRefCS
+      	  ':' ownedType=ComplexTypeCS
             (';' | '{' ownedExpression=ExpCS '}');
 
 RelationCS: isTop?='top'? isDefault?='default'? 'relation' name=UnrestrictedName
@@ -96,7 +96,7 @@ TransformationCS: 'transformation' ownedPathName=ScopeNameCS? name=UnrestrictedN
 UnitCS returns base::ImportCS:
 	'import' (name=UnrestrictedName ':')? ownedPathName=URIPathNameCS ('::' isAll?='*')? ';';
 
-VarDeclarationCS: ownedVarDeclarationIds+=VarDeclarationIdCS (',' ownedVarDeclarationIds+=VarDeclarationIdCS)* (':' ownedType=TypedRefCS)? ( '=' ownedInitExpression=ExpCS)? ';';
+VarDeclarationCS: ownedVarDeclarationIds+=VarDeclarationIdCS (',' ownedVarDeclarationIds+=VarDeclarationIdCS)* (':' ownedType=ComplexTypeCS)? ( '=' ownedInitExpression=ExpCS)? ';';
 
 VarDeclarationIdCS: name=UnrestrictedName;
 
@@ -115,13 +115,13 @@ WhereCS returns PatternCS: {PatternCS} 'where' '{' ownedPredicates+=PredicateCS*
 
 ExpCSOrTemplateCS returns essentialocl::ExpCS: ExpCS | TemplateCS;
 
-TypedTypeRefCS returns base::TypedTypeRefCS: ownedPathName=PathNameCS;
+//PathTypeCS returns base::TypedTypeRefCS: ownedPathName=PathNameCS;
 
-TypedRefCS returns base::TypedRefCS:
-	PrimitiveTypeCS
-|	CollectionTypeCS
-|	TypedTypeRefCS
-;
+//TypedRefCS returns base::TypedRefCS:
+//	PrimitiveTypeCS
+//|	CollectionTypeCS
+//|	PathTypeCS
+//;
 
 //ExpCS returns essentialocl::ExpCS:
 //	InfixedExpCS

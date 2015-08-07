@@ -53,7 +53,7 @@ GuardPatternCS:		// Bug 466385 explains the redundancy below
 ;
 	
 //Variable := VariableName �:� TypeDeclaration
-GuardVariableCS returns UnrealizedVariableCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
+GuardVariableCS returns UnrealizedVariableCS: name=UnrestrictedName ':' ownedType=ComplexTypeCS;
 
 ImportCS returns base::ImportCS:
 	'import' (name=Identifier ':')? ownedPathName=URIPathNameCS (isAll?='::' '*')? ';';
@@ -61,7 +61,7 @@ ImportCS returns base::ImportCS:
 NamedDomainCS returns DomainCS: isCheck?='check'? isEnforce?='enforce'? direction=[qvtbase::TypedModel|UnrestrictedName]
 	ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS;
 	
-ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
+ParamDeclarationCS: name=UnrestrictedName ':' ownedType=ComplexTypeCS;
 
 PredicateCS: ownedCondition=ExpCS ';';
 		
@@ -72,7 +72,7 @@ PredicateOrAssignmentCS: isDefault?='default'? ownedTarget=ExpCS (':=' ownedInit
 		
 QueryCS: 'query' ownedPathName=ScopeNameCS name=UnrestrictedName
 		'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
-		':' ownedType=TypeExpCS (';' | '{' ownedExpression=ExpCS '}');
+		':' ownedType=ComplexTypeCS (';' | '{' ownedExpression=ExpCS '}');
 //<query> ::= 'query' <PathNameCS> 
 //            '(' [<paramDeclaration> (',' <paramDeclaration>)*] ')'
 //      	  ':' <TypeCS>
@@ -85,10 +85,10 @@ TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* '}';
 	
 //Variable := VariableName �:� TypeDeclaration
-UnrealizedVariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)? (':=' ownedInitExpression=ExpCS)?;
+UnrealizedVariableCS: name=UnrestrictedName (':' ownedType=ComplexTypeCS)? (':=' ownedInitExpression=ExpCS)?;
 		
 //RealizedVariable := �realized� VariableName �:� TypeDeclaration
-RealizedVariableCS: 'realize' name=UnrestrictedName ':' ownedType=TypeExpCS;
+RealizedVariableCS: 'realize' name=UnrestrictedName ':' ownedType=ComplexTypeCS;
 	
 UnnamedDomainCS returns DomainCS: {DomainCS} ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS;
 		
