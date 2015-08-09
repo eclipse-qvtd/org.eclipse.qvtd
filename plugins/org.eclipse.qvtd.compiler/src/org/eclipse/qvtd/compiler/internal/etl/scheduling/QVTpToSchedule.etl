@@ -142,6 +142,7 @@ rule PropertyCallExpToPropertyDatum
 		}
 		var propContext = pCallExp.getContextType();
 		var refProperty = pCallExp.referredProperty;
+		// refProperty.print("Analyzing property call Exp: ");
 		pDatum.updatePropertyDatum(propContext,refProperty);
 	}
 
@@ -183,14 +184,14 @@ rule PropertyAssignmentToPropertyDatum
      	pDatum.updatePropertyDatum(propContext, refProperty);
 	}
 
---
+-- 
 -- Since operations might have other PropertyCallExp and OperationCallExp of interest, they have
 -- to be individually analyzed. We will start the analysis from OperationCallExps which are used
 -- from expression which belong to the mapping (or any of their CorePatterns)
---
+-- 
 -- Note that the original context type on which the operation is called, needs to be carried on
 -- through the anlysis, so the proper PropertyDatums are accordingly created
---
+-- 
 rule OperationCallExpToPropertyDatums
 	transform opCall : QVTp!OperationCallExp
 	to pDatums : OrderedSet(QVTs!PropertyDatum) {
@@ -200,6 +201,8 @@ rule OperationCallExpToPropertyDatums
 	guard : opCall.isContainedInAnArea()
 	
 	var context = opCall.getContextType();
+	// context.print("Analyzing operation call Exp: ");
+	// opCall.println("::");
 	pDatums.addAll(opCall.analyseOCLExpression(context, Map{}, Map{}));
 }
 
@@ -257,6 +260,7 @@ operation QVTp!OperationCallExp analyseOCLExpression(context : QVTp!Type, type2V
 operation QVTp!PropertyCallExp analyseOCLExpression(context : QVTp!Type) : QVTs!PropertyDatum {
 
 	var refProperty = self.referredProperty;
+	// refProperty.println("\tSUB property : ");
 	return refProperty.getOrCreatePropertyDatum(context);
 }
 
@@ -265,7 +269,9 @@ operation QVTp!Type analyseOclContainerCall() : OrderedSet(QVTp!PropertyDatum) {
 	var result =  OrderedSet{};	
 	for (parentClass in self.getContainingTypes()) {
 		for (prop in parentClass.ownedProperties.select(x | x.isComposite)) {
-			if (self.getAllSuperClassesIncludingSelf().includes(prop.getElementType())) {
+			if (self.getAllSuperAndSubClassesIncludingSelf().includes(prop.getElementType())) {
+				// self.print("\tOCL Container property  for ");
+				// prop.println(" : ");	
 				// FIXME I'm getting non-deterministic QVTs 2 Graphml transformations
 				// when there are references to non-navigable (inexistent) properties
 				// in .oclas. Example3: Kiama
@@ -288,10 +294,10 @@ operation QVTp!LetExp updateVariableBindings(variable2BoundContext : Map ) {
 	variable2BoundContext.put(variable, variable.ownedInit.computeContexts(variable2BoundContext));
 }
 
---
+-- 
 -- PropertyDatums can be created either via an ETL rule or 'new' statment. Whereas PropertyDatums can 
 -- be differently created, this common subroutine will accordignly update the properties of those PropertyDatums.
---
+-- 
 operation QVTs!PropertyDatum updatePropertyDatum(context: QVTp!Type, prop : QVTp!Property) {
 
 	var classDatum ::= context;
@@ -403,6 +409,11 @@ operation QVTp!Type getAllSubClasses() : OrderedSet {
 @cached
 operation QVTp!Type getAllSubClassesIncludingSelf() : OrderedSet {
 	return self.getAllSubClasses().including(self);
+}
+
+@cached 
+operation QVTp!Type getAllSuperAndSubClassesIncludingSelf() : OrderedSet {
+	return self.getAllSuperClassesIncludingSelf().includingAll(self.getAllSubClasses());
 }
 
 @cached
@@ -589,7 +600,12 @@ operation QVTp!Type getContainingTypes() : OrderedSet(QVTp!PropertyType) {
 	if (node == null) {
 		return result;
 	} else {
-		for (parentNode in node.parent) {
+		// We also consider subtypes, due to a more conservative approach:
+		// If we want to compute possible containers of A, since the actual element could
+		// be a subtype B/C, possible containers of B/C will also be required 
+		var nodeAndSubtypes = node.asOrderedSet.closure(x | x.subTypes).including(node);
+		var allParents = nodeAndSubtypes.collect(x | x.parent).flatten();
+		for (parentNode in allParents) {
 			result.add(parentNode.getClass());
 		}
 		return result;
