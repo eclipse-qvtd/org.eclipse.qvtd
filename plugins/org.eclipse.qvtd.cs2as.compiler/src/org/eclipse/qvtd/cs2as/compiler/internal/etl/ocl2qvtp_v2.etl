@@ -113,10 +113,13 @@ rule ShadowPart2UpdateMapping
 	to t : QVTi!Mapping {
 	
 	guard {
+		var containingShadowExp = s.eContainer();
+		var containers = containingShadowExp.closure(x|x.eContainer());
+		return  not containers.exists(x | x.isKindOf(OCL!ShadowExp)) -- innerShadowParts dont produce udpate mappings
 		// FIXME this is hazardy. Rework
 		// Ideally lazy transformation on the content of the OCL Model should avoid calling
 		// this rule on undesired elemenets (imported from other ocl files)
-		return s.closure(x|x.eContainer()).contains(LEFTCS_PACKAGE); 
+		and containers.contains(LEFTCS_PACKAGE); 
 	}
 		
 	var shadowExp = s.eContainer();
