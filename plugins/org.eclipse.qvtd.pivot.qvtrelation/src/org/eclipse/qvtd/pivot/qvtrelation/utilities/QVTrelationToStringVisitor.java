@@ -10,9 +10,13 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -29,6 +33,28 @@ import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
  */
 public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor implements QVTrelationVisitor<String>
 {
+	protected static class QVTrelationToStringFactory implements QVTtemplateToStringVisitor.Factory
+	{
+		protected QVTrelationToStringFactory() {
+			ToStringVisitor.addFactory(this);
+			QVTbaseToStringVisitor.FACTORY.getClass();
+		}
+
+		@Override
+		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
+			return new QVTrelationToStringVisitor(s);
+		}
+
+		@Override
+		public @NonNull EPackage getEPackage() {
+			QVTrelationPackage eInstance = QVTrelationPackage.eINSTANCE;
+			assert eInstance != null;
+			return eInstance;
+		}
+	}
+
+	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTrelationToStringFactory();
+
 	public QVTrelationToStringVisitor(@NonNull StringBuilder s) {
 		super(s);
 	}

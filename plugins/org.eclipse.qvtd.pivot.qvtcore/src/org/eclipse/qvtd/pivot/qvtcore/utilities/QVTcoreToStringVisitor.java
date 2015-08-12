@@ -10,9 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseToStringVisitor;
 
@@ -22,6 +25,28 @@ import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseToStringVisitor;
  */
 public class QVTcoreToStringVisitor extends QVTcoreBaseToStringVisitor implements QVTcoreVisitor<String>
 {
+	protected static class QVTcoreToStringFactory implements QVTcoreBaseToStringVisitor.Factory
+	{
+		protected QVTcoreToStringFactory() {
+			ToStringVisitor.addFactory(this);
+			QVTcoreBaseToStringVisitor.FACTORY.getClass();
+		}
+
+		@Override
+		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
+			return new QVTcoreToStringVisitor(s);
+		}
+
+		@Override
+		public @NonNull EPackage getEPackage() {
+			QVTcorePackage eInstance = QVTcorePackage.eINSTANCE;
+			assert eInstance != null;
+			return eInstance;
+		}
+	}
+
+	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTcoreToStringFactory();
+
 	public QVTcoreToStringVisitor(@NonNull StringBuilder s) {
 		super(s);
 	}

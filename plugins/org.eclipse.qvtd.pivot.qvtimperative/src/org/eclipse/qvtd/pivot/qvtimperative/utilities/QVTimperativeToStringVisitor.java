@@ -10,9 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -22,6 +24,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
@@ -31,6 +34,28 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  */
 public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor implements QVTimperativeVisitor<String>
 {
+	protected static class QVTimperativeToStringFactory implements QVTcoreBaseToStringVisitor.Factory
+	{
+		protected QVTimperativeToStringFactory() {
+			ToStringVisitor.addFactory(this);
+			QVTcoreBaseToStringVisitor.FACTORY.getClass();
+		}
+
+		@Override
+		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
+			return new QVTimperativeToStringVisitor(s);
+		}
+
+		@Override
+		public @NonNull EPackage getEPackage() {
+			QVTimperativePackage eInstance = QVTimperativePackage.eINSTANCE;
+			assert eInstance != null;
+			return eInstance;
+		}
+	}
+
+	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTimperativeToStringFactory();
+
 	public QVTimperativeToStringVisitor(@NonNull StringBuilder s) {
 		super(s);
 	}
