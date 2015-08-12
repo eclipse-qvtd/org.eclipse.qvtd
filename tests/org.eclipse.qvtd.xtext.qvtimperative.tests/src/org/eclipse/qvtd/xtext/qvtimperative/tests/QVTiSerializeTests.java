@@ -141,6 +141,10 @@ public class QVTiSerializeTests extends LoadTestCase
 		doSerializeRoundTrip("HSV2HLS/HSV2HLS");
 	}
 	
+	public void testSerialize_HSV2HLSas_qvtias() throws Exception {
+		doSerialize("HSV2HLS/HSV2HLSas");
+	}
+	
 	public void testSerialize_ManualUML2RDBMS_qvti() throws Exception {
 		doSerializeRoundTrip("ManualUML2RDBMS/ManualUML2RDBMS");
 	}
@@ -148,10 +152,10 @@ public class QVTiSerializeTests extends LoadTestCase
 	public void testSerialize_SimpleUML2RDBMS_qvti() throws Exception {
 		doSerializeRoundTrip("SimpleUML2RDBMS/SimpleUML2RDBMS");
 	}
-/*	protected void doSerialize(@NonNull String stem) throws Exception {
+	protected void doSerialize(@NonNull String stem) throws Exception {
 		URI inputURI = getProjectFileURI(stem + ".qvtias");
 		URI referenceURI = getProjectFileURI(stem + "ref..qvtias");
 		doSerialize(inputURI, stem, referenceURI, null, true, true);
-	} */
+	}
 
 }

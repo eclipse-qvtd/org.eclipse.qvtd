@@ -64,6 +64,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSFactory;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 
@@ -165,7 +166,25 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		csDomain.setOwnedBottomPattern(context.visitDeclaration(BottomPatternCS.class, asMapping.getBottomPattern()));
 		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
 		csMapping.setOwnedMiddle(csDomain);
-		csMapping.setOwnedMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMapping.getMappingStatement()));
+		MappingStatementCS csMappingStatement = context.visitDeclaration(MappingStatementCS.class, asMapping.getMappingStatement());
+		MappingSequenceCS csMappingSequence;
+		if (csMappingStatement instanceof MappingSequenceCS) {
+			csMappingSequence = (MappingSequenceCS) csMappingStatement;
+		}
+		else if (csMappingStatement != null) {
+			csMappingSequence = csMapping.getOwnedMappingSequence();
+			if (csMappingSequence == null) {
+				csMappingSequence = QVTimperativeCSFactory.eINSTANCE.createMappingSequenceCS();
+			}
+			else {
+				csMappingSequence.getOwnedMappingStatements().clear();
+			}
+			csMappingSequence.getOwnedMappingStatements().add(csMappingStatement);
+		}
+		else {
+			csMappingSequence = null;
+		}
+		csMapping.setOwnedMappingSequence(csMappingSequence);
 		return csMapping;
 	}
 
