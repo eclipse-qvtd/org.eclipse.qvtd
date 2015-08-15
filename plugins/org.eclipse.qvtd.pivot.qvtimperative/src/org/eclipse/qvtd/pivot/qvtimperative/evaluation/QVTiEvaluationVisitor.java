@@ -10,7 +10,9 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -144,6 +146,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
+		Map<Variable, Object> variable2value = new HashMap<Variable, Object>();
 		for (MappingCallBinding binding : mappingCall.getBinding()) {
 			Variable boundVariable = binding.getBoundVariable();
 			if (boundVariable == null) {
@@ -160,13 +163,22 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			Object valueOrValues = value.accept(undecoratedVisitor);
 			Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
 			if (valueType.conformsTo(standardLibrary, varType)) {
-				context.replace(boundVariable, valueOrValues);
+				variable2value.put(boundVariable, valueOrValues);
 			}
 			else {
 				return null;		
 			}
     	}
-		return executor.internalExecuteMappingCall(mappingCall, undecoratedVisitor);
+		context.pushEvaluationEnvironment(mappingCall.getReferredMapping(), mappingCall);
+		try {
+			for (Map.Entry<Variable,Object> entry : variable2value.entrySet()) {
+				context.replace(entry.getKey(), entry.getValue());
+			}
+			return executor.internalExecuteMappingCall(mappingCall, undecoratedVisitor);
+		}
+		finally {
+			context.popEvaluationEnvironment();
+		}
     }
 
 	@Override
