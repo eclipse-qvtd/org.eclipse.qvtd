@@ -214,7 +214,25 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		csMappingLoop.setPivot(asMappingLoop);
 		csMappingLoop.setOwnedIterator(context.visitDeclaration(VariableCS.class, asMappingLoop.getOwnedIterators().get(0)));
 		csMappingLoop.setOwnedInExpression(createExpCS(asMappingLoop.getOwnedSource()));
-		csMappingLoop.setOwnedMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMappingLoop.getOwnedBody()));
+		MappingStatementCS csMappingStatement = context.visitDeclaration(MappingStatementCS.class, asMappingLoop.getOwnedBody());
+		MappingSequenceCS csMappingSequence;
+		if (csMappingStatement instanceof MappingSequenceCS) {
+			csMappingSequence = (MappingSequenceCS) csMappingStatement;
+		}
+		else if (csMappingStatement != null) {
+			csMappingSequence = csMappingLoop.getOwnedMappingSequence();
+			if (csMappingSequence == null) {
+				csMappingSequence = QVTimperativeCSFactory.eINSTANCE.createMappingSequenceCS();
+			}
+			else {
+				csMappingSequence.getOwnedMappingStatements().clear();
+			}
+			csMappingSequence.getOwnedMappingStatements().add(csMappingStatement);
+		}
+		else {
+			csMappingSequence = null;
+		}
+		csMappingLoop.setOwnedMappingSequence(csMappingSequence);
 		return csMappingLoop;
 	}
 
