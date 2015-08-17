@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelation;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -30,7 +31,7 @@ public class LoadTests extends LoadTestCase
 	}
 
 	protected void doLoad_Concrete(URI inputURI, URI pivotURI) throws IOException {
-		OCL ocl = OCL.newInstance(getProjectMap());
+		OCL ocl = QVTrelation.newInstance(getProjectMap(), null);
 		doLoad_Concrete(ocl, inputURI, pivotURI);
 		ocl.dispose();
 	}

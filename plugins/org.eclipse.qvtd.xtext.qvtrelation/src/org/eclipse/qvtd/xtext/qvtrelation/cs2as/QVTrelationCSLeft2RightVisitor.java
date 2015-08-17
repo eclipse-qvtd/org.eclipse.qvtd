@@ -35,8 +35,10 @@ import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
+import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.essentialocl.cs2as.ImplicitSourceTypeIterator;
+import org.eclipse.ocl.xtext.essentialocl.cs2as.ImplicitSourceVariableIterator;
 import org.eclipse.ocl.xtext.essentialoclcs.AbstractNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
@@ -47,6 +49,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
@@ -99,6 +102,26 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 
 	public QVTrelationCSLeft2RightVisitor(@NonNull CS2ASConversion context) {
 		super(context);
+	}
+
+	@Override
+	protected @NonNull ImplicitSourceVariableIterator createImplicitSourceVariableIterator(@NonNull ModelElementCS csElement) {
+		return new ImplicitSourceVariableIterator(csElement)
+		{
+			@Override
+			protected boolean doNext(@NonNull ElementCS csParent, @NonNull ElementCS csChild) {
+				if (csParent instanceof TransformationCS) {
+					Transformation asContext = PivotUtil.getPivot(Transformation.class, (TransformationCS)csParent);
+					if (asContext != null) {
+						addNext(QVTbaseUtil.getContextVariable(standardLibrary, asContext));
+					}
+					return DONE; // no more parents
+				}
+				else {
+					return super.doNext(csParent, csChild);
+				}
+			}
+		};
 	}
 
 	@Override
