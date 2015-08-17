@@ -47,7 +47,7 @@
 'check'=34
 'default'=16
 'else'=88
-'elseif'=90
+'elseif'=87
 'endif'=89
 'enforce'=35
 'extends'=96
@@ -69,7 +69,7 @@
 'realize'=39
 'refines'=19
 'self'=92
-'then'=87
+'then'=90
 'transformation'=38
 'true'=78
 'uses'=26

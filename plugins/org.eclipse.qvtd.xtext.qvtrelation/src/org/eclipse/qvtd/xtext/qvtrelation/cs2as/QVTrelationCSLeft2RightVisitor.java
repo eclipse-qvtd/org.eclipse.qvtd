@@ -110,7 +110,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 				if (csParent instanceof TransformationCS) {
 					Transformation asContext = PivotUtil.getPivot(Transformation.class, (TransformationCS)csParent);
 					if (asContext != null) {
-						next = asContext;
+						addNext(asContext);
 					}
 					return DONE; // no more parents
 				}

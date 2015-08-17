@@ -2325,7 +2325,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LambdaLiteralExpCS:
-	//	"Lambda" "(" (ownedParameters+=LambdaParameterCS ("," ownedParameters+=LambdaParameterCS)*)? ")" ":"
+	//	name="Lambda" "(" (ownedParameters+=LambdaParameterCS ("," ownedParameters+=LambdaParameterCS)*)? ")" ":"
 	//	ownedType=ComplexTypeCS "{" ownedExpression=ExpCS "}";
 	public EssentialOCLGrammarAccess.LambdaLiteralExpCSElements getLambdaLiteralExpCSAccess() {
 		return gaEssentialOCL.getLambdaLiteralExpCSAccess();
@@ -2686,9 +2686,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IfExpCS:
-	//	"if" ownedCondition=(ExpCS | PatternExpCS) "then" ownedThenExpression=ExpCS //	ifThenExpressions+=IfThenExpCS
-	//
-	//	ownedIfThenExpressions+=ElseIfThenExpCS* "else" ownedElseExpression=ExpCS "endif";
+	//	"if" ownedIfThenExpressions+=IfThenExpCS ("elseif" ownedIfThenExpressions+=IfThenExpCS)* "else"
+	//	ownedElseExpression=ExpCS "endif";
 	public EssentialOCLGrammarAccess.IfExpCSElements getIfExpCSAccess() {
 		return gaEssentialOCL.getIfExpCSAccess();
 	}
@@ -2697,19 +2696,14 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		return getIfExpCSAccess().getRule();
 	}
 
-	////IfThenExpCS returns IfThenExpCS:
-	// //	'if' condition=ExpCS
-	// //	'then' thenExpression=ExpCS
-	// //;
-	// ElseIfThenExpCS
-	//returns IfThenExpCS:
-	//	"elseif" ownedCondition=ExpCS "then" ownedThenExpression=ExpCS;
-	public EssentialOCLGrammarAccess.ElseIfThenExpCSElements getElseIfThenExpCSAccess() {
-		return gaEssentialOCL.getElseIfThenExpCSAccess();
+	//IfThenExpCS:
+	//	(ownedPattern=PatternExpCS "=")? ownedCondition=ExpCS "then" ownedThenExpression=ExpCS;
+	public EssentialOCLGrammarAccess.IfThenExpCSElements getIfThenExpCSAccess() {
+		return gaEssentialOCL.getIfThenExpCSAccess();
 	}
 	
-	public ParserRule getElseIfThenExpCSRule() {
-		return getElseIfThenExpCSAccess().getRule();
+	public ParserRule getIfThenExpCSRule() {
+		return getIfThenExpCSAccess().getRule();
 	}
 
 	//LetExpCS:
@@ -2751,6 +2745,17 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getSelfExpCSRule() {
 		return getSelfExpCSAccess().getRule();
+	}
+
+	//// Base overrides
+	// TemplateParameterActualCS returns base::PivotableElementCS:
+	//	ComplexTypeCS | WildcardTypeRefCS | PrimitiveLiteralExpCS;
+	public EssentialOCLGrammarAccess.TemplateParameterActualCSElements getTemplateParameterActualCSAccess() {
+		return gaEssentialOCL.getTemplateParameterActualCSAccess();
+	}
+	
+	public ParserRule getTemplateParameterActualCSRule() {
+		return getTemplateParameterActualCSAccess().getRule();
 	}
 
 	//MultiplicityBoundsCS:
@@ -2834,7 +2839,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TemplateParameterSubstitutionCS:
-	//	ownedActualParameter=TypeRefCS;
+	//	ownedActualParameter=TemplateParameterActualCS;
 	public BaseGrammarAccess.TemplateParameterSubstitutionCSElements getTemplateParameterSubstitutionCSAccess() {
 		return gaEssentialOCL.getTemplateParameterSubstitutionCSAccess();
 	}

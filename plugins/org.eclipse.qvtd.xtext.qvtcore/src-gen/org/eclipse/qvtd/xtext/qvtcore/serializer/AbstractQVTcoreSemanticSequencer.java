@@ -153,7 +153,8 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 				}
 				else break;
 			case BaseCSPackage.PATH_TYPE_CS:
-				if(context == grammarAccess.getComplexTypeCSRule()) {
+				if(context == grammarAccess.getComplexTypeCSRule() ||
+				   context == grammarAccess.getTemplateParameterActualCSRule()) {
 					sequence_ComplexTypeCS_PathTypeCS(context, (PathTypeCS) semanticObject); 
 					return; 
 				}
@@ -173,6 +174,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 					return; 
 				}
 				else if(context == grammarAccess.getComplexTypeCSRule() ||
+				   context == grammarAccess.getTemplateParameterActualCSRule() ||
 				   context == grammarAccess.getTypeExpCSRule() ||
 				   context == grammarAccess.getTypeLiteralWithMultiplicityCSRule()) {
 					sequence_PrimitiveTypeCS_TypeLiteralWithMultiplicityCS(context, (PrimitiveTypeRefCS) semanticObject); 
@@ -200,6 +202,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 					return; 
 				}
 				else if(context == grammarAccess.getComplexTypeCSRule() ||
+				   context == grammarAccess.getTemplateParameterActualCSRule() ||
 				   context == grammarAccess.getTypeExpCSRule() ||
 				   context == grammarAccess.getTypeLiteralWithMultiplicityCSRule()) {
 					sequence_TupleTypeCS_TypeLiteralWithMultiplicityCS(context, (TupleTypeCS) semanticObject); 
@@ -236,6 +239,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 				}
 				else if(context == grammarAccess.getCollectionTypeWithMultiplicityCSRule() ||
 				   context == grammarAccess.getComplexTypeCSRule() ||
+				   context == grammarAccess.getTemplateParameterActualCSRule() ||
 				   context == grammarAccess.getTypeExpCSRule() ||
 				   context == grammarAccess.getTypeLiteralWithMultiplicityCSRule()) {
 					sequence_CollectionTypeCS_CollectionTypeWithMultiplicityCS(context, (CollectionTypeCS) semanticObject); 
@@ -252,7 +256,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 				sequence_IfExpCS(context, (IfExpCS) semanticObject); 
 				return; 
 			case EssentialOCLCSPackage.IF_THEN_EXP_CS:
-				sequence_ElseIfThenExpCS(context, (IfThenExpCS) semanticObject); 
+				sequence_IfThenExpCS(context, (IfThenExpCS) semanticObject); 
 				return; 
 			case EssentialOCLCSPackage.INFIX_EXP_CS:
 				sequence_ExpCS(context, (InfixExpCS) semanticObject); 
@@ -284,6 +288,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 					return; 
 				}
 				else if(context == grammarAccess.getComplexTypeCSRule() ||
+				   context == grammarAccess.getTemplateParameterActualCSRule() ||
 				   context == grammarAccess.getTypeExpCSRule() ||
 				   context == grammarAccess.getTypeLiteralWithMultiplicityCSRule()) {
 					sequence_MapTypeCS_TypeLiteralWithMultiplicityCS(context, (MapTypeCS) semanticObject); 

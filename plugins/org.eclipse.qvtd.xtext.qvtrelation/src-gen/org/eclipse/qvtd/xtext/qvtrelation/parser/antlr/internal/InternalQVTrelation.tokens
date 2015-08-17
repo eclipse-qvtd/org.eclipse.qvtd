@@ -48,7 +48,7 @@
 'default_values'=28
 'domain'=26
 'else'=94
-'elseif'=96
+'elseif'=93
 'endif'=95
 'enforce'=24
 'extends'=41
@@ -73,7 +73,7 @@
 'relation'=37
 'replace'=25
 'self'=98
-'then'=93
+'then'=96
 'top'=35
 'transformation'=40
 'true'=82

@@ -73,7 +73,7 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNavigatingArgCSAccess().getAlternatives(), "rule__NavigatingArgCS__Alternatives");
 					put(grammarAccess.getNavigatingArgCSAccess().getAlternatives_0_1(), "rule__NavigatingArgCS__Alternatives_0_1");
 					put(grammarAccess.getNavigatingCommaArgCSAccess().getAlternatives_2(), "rule__NavigatingCommaArgCS__Alternatives_2");
-					put(grammarAccess.getIfExpCSAccess().getOwnedConditionAlternatives_1_0(), "rule__IfExpCS__OwnedConditionAlternatives_1_0");
+					put(grammarAccess.getTemplateParameterActualCSAccess().getAlternatives(), "rule__TemplateParameterActualCS__Alternatives");
 					put(grammarAccess.getMultiplicityCSAccess().getAlternatives_1(), "rule__MultiplicityCS__Alternatives_1");
 					put(grammarAccess.getMultiplicityCSAccess().getAlternatives_2(), "rule__MultiplicityCS__Alternatives_2");
 					put(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsAlternatives_0(), "rule__MultiplicityStringCS__StringBoundsAlternatives_0");
@@ -204,7 +204,9 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNavigatingSemiArgCSAccess().getGroup_2(), "rule__NavigatingSemiArgCS__Group_2__0");
 					put(grammarAccess.getNavigatingSemiArgCSAccess().getGroup_2_2(), "rule__NavigatingSemiArgCS__Group_2_2__0");
 					put(grammarAccess.getIfExpCSAccess().getGroup(), "rule__IfExpCS__Group__0");
-					put(grammarAccess.getElseIfThenExpCSAccess().getGroup(), "rule__ElseIfThenExpCS__Group__0");
+					put(grammarAccess.getIfExpCSAccess().getGroup_2(), "rule__IfExpCS__Group_2__0");
+					put(grammarAccess.getIfThenExpCSAccess().getGroup(), "rule__IfThenExpCS__Group__0");
+					put(grammarAccess.getIfThenExpCSAccess().getGroup_0(), "rule__IfThenExpCS__Group_0__0");
 					put(grammarAccess.getLetExpCSAccess().getGroup(), "rule__LetExpCS__Group__0");
 					put(grammarAccess.getLetExpCSAccess().getGroup_2(), "rule__LetExpCS__Group_2__0");
 					put(grammarAccess.getLetVariableCSAccess().getGroup(), "rule__LetVariableCS__Group__0");
@@ -331,6 +333,7 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionAssignment_2(), "rule__ShadowPartCS__OwnedInitExpressionAssignment_2");
 					put(grammarAccess.getPatternExpCSAccess().getPatternVariableNameAssignment_0(), "rule__PatternExpCS__PatternVariableNameAssignment_0");
 					put(grammarAccess.getPatternExpCSAccess().getOwnedPatternTypeAssignment_2(), "rule__PatternExpCS__OwnedPatternTypeAssignment_2");
+					put(grammarAccess.getLambdaLiteralExpCSAccess().getNameAssignment_0(), "rule__LambdaLiteralExpCS__NameAssignment_0");
 					put(grammarAccess.getLambdaLiteralExpCSAccess().getOwnedParametersAssignment_2_0(), "rule__LambdaLiteralExpCS__OwnedParametersAssignment_2_0");
 					put(grammarAccess.getLambdaLiteralExpCSAccess().getOwnedParametersAssignment_2_1_1(), "rule__LambdaLiteralExpCS__OwnedParametersAssignment_2_1_1");
 					put(grammarAccess.getLambdaLiteralExpCSAccess().getOwnedTypeAssignment_5(), "rule__LambdaLiteralExpCS__OwnedTypeAssignment_5");
@@ -398,12 +401,12 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNavigatingSemiArgCSAccess().getOwnedNameExpressionAssignment_1(), "rule__NavigatingSemiArgCS__OwnedNameExpressionAssignment_1");
 					put(grammarAccess.getNavigatingSemiArgCSAccess().getOwnedTypeAssignment_2_1(), "rule__NavigatingSemiArgCS__OwnedTypeAssignment_2_1");
 					put(grammarAccess.getNavigatingSemiArgCSAccess().getOwnedInitExpressionAssignment_2_2_1(), "rule__NavigatingSemiArgCS__OwnedInitExpressionAssignment_2_2_1");
-					put(grammarAccess.getIfExpCSAccess().getOwnedConditionAssignment_1(), "rule__IfExpCS__OwnedConditionAssignment_1");
-					put(grammarAccess.getIfExpCSAccess().getOwnedThenExpressionAssignment_3(), "rule__IfExpCS__OwnedThenExpressionAssignment_3");
-					put(grammarAccess.getIfExpCSAccess().getOwnedIfThenExpressionsAssignment_4(), "rule__IfExpCS__OwnedIfThenExpressionsAssignment_4");
-					put(grammarAccess.getIfExpCSAccess().getOwnedElseExpressionAssignment_6(), "rule__IfExpCS__OwnedElseExpressionAssignment_6");
-					put(grammarAccess.getElseIfThenExpCSAccess().getOwnedConditionAssignment_1(), "rule__ElseIfThenExpCS__OwnedConditionAssignment_1");
-					put(grammarAccess.getElseIfThenExpCSAccess().getOwnedThenExpressionAssignment_3(), "rule__ElseIfThenExpCS__OwnedThenExpressionAssignment_3");
+					put(grammarAccess.getIfExpCSAccess().getOwnedIfThenExpressionsAssignment_1(), "rule__IfExpCS__OwnedIfThenExpressionsAssignment_1");
+					put(grammarAccess.getIfExpCSAccess().getOwnedIfThenExpressionsAssignment_2_1(), "rule__IfExpCS__OwnedIfThenExpressionsAssignment_2_1");
+					put(grammarAccess.getIfExpCSAccess().getOwnedElseExpressionAssignment_4(), "rule__IfExpCS__OwnedElseExpressionAssignment_4");
+					put(grammarAccess.getIfThenExpCSAccess().getOwnedPatternAssignment_0_0(), "rule__IfThenExpCS__OwnedPatternAssignment_0_0");
+					put(grammarAccess.getIfThenExpCSAccess().getOwnedConditionAssignment_1(), "rule__IfThenExpCS__OwnedConditionAssignment_1");
+					put(grammarAccess.getIfThenExpCSAccess().getOwnedThenExpressionAssignment_3(), "rule__IfThenExpCS__OwnedThenExpressionAssignment_3");
 					put(grammarAccess.getLetExpCSAccess().getOwnedVariablesAssignment_1(), "rule__LetExpCS__OwnedVariablesAssignment_1");
 					put(grammarAccess.getLetExpCSAccess().getOwnedVariablesAssignment_2_1(), "rule__LetExpCS__OwnedVariablesAssignment_2_1");
 					put(grammarAccess.getLetExpCSAccess().getOwnedInExpressionAssignment_4(), "rule__LetExpCS__OwnedInExpressionAssignment_4");

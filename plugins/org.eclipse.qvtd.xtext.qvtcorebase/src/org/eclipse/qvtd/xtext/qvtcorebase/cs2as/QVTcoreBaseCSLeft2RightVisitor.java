@@ -59,7 +59,7 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 					if (asMapping != null) {
 						Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asMapping);
 						if (asTransformation != null) {
-							next = asTransformation;
+							addNext(asTransformation);
 						}
 					}
 					return DONE; // no more parents
@@ -69,7 +69,7 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 					if (asFunction != null) {
 						Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asFunction);;
 						if (asTransformation != null) {
-							next = asTransformation;
+							addNext(asTransformation);
 						}
 					}
 					return DONE; // no more parents
