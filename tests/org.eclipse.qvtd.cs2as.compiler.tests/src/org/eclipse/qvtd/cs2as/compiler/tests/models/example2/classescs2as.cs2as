@@ -1,0 +1,48 @@
+source cs : 'ClassesCS.ecore#/'
+target as : 'Classes.ecore#/'
+
+mappings {
+	map as::Root from RootCS {
+		ownedPackages := ownedPackages.resolve;
+	}
+
+	map as::Package from PackageCS {
+		name := name;
+		ownedClasses := ownedClasses.resolve;
+		ownedPackages := ownedPackages.resolve;
+	}
+
+	map classes::Class from ClassCS {
+		name := name;
+		superClass := if _extends = null then null else resolve.lookup(Class,_extends) endif; 
+	}	
+}
+
+
+disambiguation {
+	
+}
+
+nameresolution {
+		
+	named-element NamedElement name-property name; 	  /*from target */
+	name-referencer PathElementCS name-property name; /*from source */
+	name-qualifier PathNameCS name-segments-property path; /*from source */
+	
+	Root {
+		same-scope ownedPackages;
+	}
+	
+	Package {
+		named-element 
+			qualifying Package using ownedPackages,
+					   Class using ownedClasses;
+		
+		nested-scope ownedPackages, ownedClasses;
+	}
+	
+	Class {
+		named-element;
+	}
+	
+}

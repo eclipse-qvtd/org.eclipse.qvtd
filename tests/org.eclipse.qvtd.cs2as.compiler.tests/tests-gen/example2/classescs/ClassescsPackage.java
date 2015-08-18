@@ -251,13 +251,31 @@ public interface ClassescsPackage extends EPackage {
 	int CLASS_CS__EXTENDS = NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_CS__PROPERTIES = NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_CS__OPERATIONS = NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Class CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_CS_FEATURE_COUNT = NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int CLASS_CS_FEATURE_COUNT = NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Class CS</em>' class.
@@ -408,6 +426,291 @@ public interface ClassescsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link example2.classescs.impl.PropertyCSImpl <em>Property CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example2.classescs.impl.PropertyCSImpl
+	 * @see example2.classescs.impl.ClassescsPackageImpl#getPropertyCS()
+	 * @generated
+	 */
+	int PROPERTY_CS = 7;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CS__AST = NAMED_ELEMENT_CS__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CS__NAME = NAMED_ELEMENT_CS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Ref</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CS__TYPE_REF = NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Property CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CS_FEATURE_COUNT = NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Property CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CS_OPERATION_COUNT = NAMED_ELEMENT_CS_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link example2.classescs.impl.OperationCSImpl <em>Operation CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example2.classescs.impl.OperationCSImpl
+	 * @see example2.classescs.impl.ClassescsPackageImpl#getOperationCS()
+	 * @generated
+	 */
+	int OPERATION_CS = 8;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CS__AST = NAMED_ELEMENT_CS__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CS__NAME = NAMED_ELEMENT_CS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CS__PARAMS = NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Body Exps</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CS__BODY_EXPS = NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Result Ref</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CS__RESULT_REF = NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Operation CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CS_FEATURE_COUNT = NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Operation CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CS_OPERATION_COUNT = NAMED_ELEMENT_CS_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link example2.classescs.impl.NameExpCSImpl <em>Name Exp CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example2.classescs.impl.NameExpCSImpl
+	 * @see example2.classescs.impl.ClassescsPackageImpl#getNameExpCS()
+	 * @generated
+	 */
+	int NAME_EXP_CS = 9;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_EXP_CS__AST = ELEMENT_CS__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_EXP_CS__NAME = ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Rounded Brackets</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_EXP_CS__ROUNDED_BRACKETS = ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Owned Name Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_EXP_CS__OWNED_NAME_EXP = ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Name Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_EXP_CS_FEATURE_COUNT = ELEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Name Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAME_EXP_CS_OPERATION_COUNT = ELEMENT_CS_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link example2.classescs.impl.RoundedBracketClauseImpl <em>Rounded Bracket Clause</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example2.classescs.impl.RoundedBracketClauseImpl
+	 * @see example2.classescs.impl.ClassescsPackageImpl#getRoundedBracketClause()
+	 * @generated
+	 */
+	int ROUNDED_BRACKET_CLAUSE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROUNDED_BRACKET_CLAUSE__AST = ELEMENT_CS__AST;
+
+	/**
+	 * The feature id for the '<em><b>Args</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROUNDED_BRACKET_CLAUSE__ARGS = ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Rounded Bracket Clause</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROUNDED_BRACKET_CLAUSE_FEATURE_COUNT = ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Rounded Bracket Clause</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROUNDED_BRACKET_CLAUSE_OPERATION_COUNT = ELEMENT_CS_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link example2.classescs.impl.ArgumentCSImpl <em>Argument CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example2.classescs.impl.ArgumentCSImpl
+	 * @see example2.classescs.impl.ClassescsPackageImpl#getArgumentCS()
+	 * @generated
+	 */
+	int ARGUMENT_CS = 11;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_CS__AST = NAMED_ELEMENT_CS__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_CS__NAME = NAMED_ELEMENT_CS__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Argument CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_CS_FEATURE_COUNT = NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Argument CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_CS_OPERATION_COUNT = NAMED_ELEMENT_CS_OPERATION_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link example2.classescs.ElementCS <em>Element CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -503,6 +806,28 @@ public interface ClassescsPackage extends EPackage {
 	EReference getClassCS_Extends();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link example2.classescs.ClassCS#getProperties <em>Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Properties</em>'.
+	 * @see example2.classescs.ClassCS#getProperties()
+	 * @see #getClassCS()
+	 * @generated
+	 */
+	EReference getClassCS_Properties();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link example2.classescs.ClassCS#getOperations <em>Operations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Operations</em>'.
+	 * @see example2.classescs.ClassCS#getOperations()
+	 * @see #getClassCS()
+	 * @generated
+	 */
+	EReference getClassCS_Operations();
+
+	/**
 	 * Returns the meta object for class '{@link example2.classescs.PathNameCS <em>Path Name CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -553,6 +878,144 @@ public interface ClassescsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRootCS_OwnedPackages();
+
+	/**
+	 * Returns the meta object for class '{@link example2.classescs.PropertyCS <em>Property CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Property CS</em>'.
+	 * @see example2.classescs.PropertyCS
+	 * @generated
+	 */
+	EClass getPropertyCS();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link example2.classescs.PropertyCS#getTypeRef <em>Type Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type Ref</em>'.
+	 * @see example2.classescs.PropertyCS#getTypeRef()
+	 * @see #getPropertyCS()
+	 * @generated
+	 */
+	EReference getPropertyCS_TypeRef();
+
+	/**
+	 * Returns the meta object for class '{@link example2.classescs.OperationCS <em>Operation CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Operation CS</em>'.
+	 * @see example2.classescs.OperationCS
+	 * @generated
+	 */
+	EClass getOperationCS();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link example2.classescs.OperationCS#getParams <em>Params</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Params</em>'.
+	 * @see example2.classescs.OperationCS#getParams()
+	 * @see #getOperationCS()
+	 * @generated
+	 */
+	EAttribute getOperationCS_Params();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link example2.classescs.OperationCS#getBodyExps <em>Body Exps</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Body Exps</em>'.
+	 * @see example2.classescs.OperationCS#getBodyExps()
+	 * @see #getOperationCS()
+	 * @generated
+	 */
+	EReference getOperationCS_BodyExps();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link example2.classescs.OperationCS#getResultRef <em>Result Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Result Ref</em>'.
+	 * @see example2.classescs.OperationCS#getResultRef()
+	 * @see #getOperationCS()
+	 * @generated
+	 */
+	EReference getOperationCS_ResultRef();
+
+	/**
+	 * Returns the meta object for class '{@link example2.classescs.NameExpCS <em>Name Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Name Exp CS</em>'.
+	 * @see example2.classescs.NameExpCS
+	 * @generated
+	 */
+	EClass getNameExpCS();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link example2.classescs.NameExpCS#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Name</em>'.
+	 * @see example2.classescs.NameExpCS#getName()
+	 * @see #getNameExpCS()
+	 * @generated
+	 */
+	EReference getNameExpCS_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link example2.classescs.NameExpCS#getRoundedBrackets <em>Rounded Brackets</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Rounded Brackets</em>'.
+	 * @see example2.classescs.NameExpCS#getRoundedBrackets()
+	 * @see #getNameExpCS()
+	 * @generated
+	 */
+	EReference getNameExpCS_RoundedBrackets();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link example2.classescs.NameExpCS#getOwnedNameExp <em>Owned Name Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Name Exp</em>'.
+	 * @see example2.classescs.NameExpCS#getOwnedNameExp()
+	 * @see #getNameExpCS()
+	 * @generated
+	 */
+	EReference getNameExpCS_OwnedNameExp();
+
+	/**
+	 * Returns the meta object for class '{@link example2.classescs.RoundedBracketClause <em>Rounded Bracket Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Rounded Bracket Clause</em>'.
+	 * @see example2.classescs.RoundedBracketClause
+	 * @generated
+	 */
+	EClass getRoundedBracketClause();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link example2.classescs.RoundedBracketClause#getArgs <em>Args</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Args</em>'.
+	 * @see example2.classescs.RoundedBracketClause#getArgs()
+	 * @see #getRoundedBracketClause()
+	 * @generated
+	 */
+	EReference getRoundedBracketClause_Args();
+
+	/**
+	 * Returns the meta object for class '{@link example2.classescs.ArgumentCS <em>Argument CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Argument CS</em>'.
+	 * @see example2.classescs.ArgumentCS
+	 * @generated
+	 */
+	EClass getArgumentCS();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -658,6 +1121,22 @@ public interface ClassescsPackage extends EPackage {
 		EReference CLASS_CS__EXTENDS = eINSTANCE.getClassCS_Extends();
 
 		/**
+		 * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_CS__PROPERTIES = eINSTANCE.getClassCS_Properties();
+
+		/**
+		 * The meta object literal for the '<em><b>Operations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_CS__OPERATIONS = eINSTANCE.getClassCS_Operations();
+
+		/**
 		 * The meta object literal for the '{@link example2.classescs.impl.PathNameCSImpl <em>Path Name CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -702,6 +1181,120 @@ public interface ClassescsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROOT_CS__OWNED_PACKAGES = eINSTANCE.getRootCS_OwnedPackages();
+
+		/**
+		 * The meta object literal for the '{@link example2.classescs.impl.PropertyCSImpl <em>Property CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see example2.classescs.impl.PropertyCSImpl
+		 * @see example2.classescs.impl.ClassescsPackageImpl#getPropertyCS()
+		 * @generated
+		 */
+		EClass PROPERTY_CS = eINSTANCE.getPropertyCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Ref</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_CS__TYPE_REF = eINSTANCE.getPropertyCS_TypeRef();
+
+		/**
+		 * The meta object literal for the '{@link example2.classescs.impl.OperationCSImpl <em>Operation CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see example2.classescs.impl.OperationCSImpl
+		 * @see example2.classescs.impl.ClassescsPackageImpl#getOperationCS()
+		 * @generated
+		 */
+		EClass OPERATION_CS = eINSTANCE.getOperationCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Params</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION_CS__PARAMS = eINSTANCE.getOperationCS_Params();
+
+		/**
+		 * The meta object literal for the '<em><b>Body Exps</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_CS__BODY_EXPS = eINSTANCE.getOperationCS_BodyExps();
+
+		/**
+		 * The meta object literal for the '<em><b>Result Ref</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_CS__RESULT_REF = eINSTANCE.getOperationCS_ResultRef();
+
+		/**
+		 * The meta object literal for the '{@link example2.classescs.impl.NameExpCSImpl <em>Name Exp CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see example2.classescs.impl.NameExpCSImpl
+		 * @see example2.classescs.impl.ClassescsPackageImpl#getNameExpCS()
+		 * @generated
+		 */
+		EClass NAME_EXP_CS = eINSTANCE.getNameExpCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAME_EXP_CS__NAME = eINSTANCE.getNameExpCS_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Rounded Brackets</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAME_EXP_CS__ROUNDED_BRACKETS = eINSTANCE.getNameExpCS_RoundedBrackets();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Name Exp</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAME_EXP_CS__OWNED_NAME_EXP = eINSTANCE.getNameExpCS_OwnedNameExp();
+
+		/**
+		 * The meta object literal for the '{@link example2.classescs.impl.RoundedBracketClauseImpl <em>Rounded Bracket Clause</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see example2.classescs.impl.RoundedBracketClauseImpl
+		 * @see example2.classescs.impl.ClassescsPackageImpl#getRoundedBracketClause()
+		 * @generated
+		 */
+		EClass ROUNDED_BRACKET_CLAUSE = eINSTANCE.getRoundedBracketClause();
+
+		/**
+		 * The meta object literal for the '<em><b>Args</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROUNDED_BRACKET_CLAUSE__ARGS = eINSTANCE.getRoundedBracketClause_Args();
+
+		/**
+		 * The meta object literal for the '{@link example2.classescs.impl.ArgumentCSImpl <em>Argument CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see example2.classescs.impl.ArgumentCSImpl
+		 * @see example2.classescs.impl.ClassescsPackageImpl#getArgumentCS()
+		 * @generated
+		 */
+		EClass ARGUMENT_CS = eINSTANCE.getArgumentCS();
 
 	}
 

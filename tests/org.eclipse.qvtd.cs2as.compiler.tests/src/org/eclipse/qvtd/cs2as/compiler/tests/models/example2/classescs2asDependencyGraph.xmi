@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase"
+    xmlns:qvtg="http://www.eclipse.org/qvt/2015/DependencyGraph" xsi:schemaLocation="http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/DependencyGraph java://org.eclipse.qvtd.pivot.dependencies.DependencyGraphPackage">
+  <qvtb:TypedModel name="$primitive$"/>
+  <qvtg:DependencyGraph>
+    <datums xsi:type="qvtg:ClassDatum" sub="/1/@datums.1 /1/@datums.7 /1/@datums.9 /1/@datums.13 /1/@datums.14">
+      <type href="ClassesCS.ecore.oclas#T.classescs.ElementCS"/>
+      <propertyDatums sub="/1/@datums.1/@propertyDatums.1 /1/@datums.7/@propertyDatums.1 /1/@datums.7/@propertyDatums.2">
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.0" sub="/1/@datums.2 /1/@datums.5 /1/@datums.10 /1/@datums.11 /1/@datums.12 /1/@datums.15">
+      <type href="ClassesCS.ecore.oclas#T.classescs.NamedElementCS"/>
+      <propertyDatums sub="/1/@datums.2/@propertyDatums.0 /1/@datums.5/@propertyDatums.0 /1/@datums.10/@propertyDatums.0">
+        <property href="ClassesCS.ecore.oclas#p.classescs.NamedElementCS.name"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.0/@propertyDatums.0" sub="/1/@datums.2/@propertyDatums.1 /1/@datums.2/@propertyDatums.3 /1/@datums.2/@propertyDatums.5 /1/@datums.5/@propertyDatums.1 /1/@datums.2/@propertyDatums.6 /1/@datums.5/@propertyDatums.3 /1/@datums.5/@propertyDatums.5 /1/@datums.5/@propertyDatums.6 /1/@datums.5/@propertyDatums.7 /1/@datums.2/@propertyDatums.7 /1/@datums.5/@propertyDatums.8">
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.1" requiredBy="/1/@actions.0 /1/@actions.3 /1/@actions.4" dataParameter="/1/@actions.0/@parameters.0 /1/@actions.3/@parameters.0 /1/@actions.4/@parameters.0">
+      <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+      <type href="ClassesCS.ecore.oclas#T.classescs.ClassCS"/>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.0" requiredBy="/1/@actions.3">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.NamedElementCS.name"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.1" producedBy="/1/@actions.0" requiredBy="/1/@actions.3 /1/@actions.4 /1/@actions.6">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+      <propertyDatums requiredBy="/1/@actions.4">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ClassCS.extends"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.1">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+      <propertyDatums>
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ClassCS.extends"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.1">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.1">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.1">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" sub="/1/@datums.4 /1/@datums.6 /1/@datums.16 /1/@datums.17 /1/@datums.18 /1/@datums.19">
+      <type href="Classes.ecore.oclas#T.classes.NamedElement"/>
+      <propertyDatums sub="/1/@datums.4/@propertyDatums.0 /1/@datums.6/@propertyDatums.0">
+        <property href="Classes.ecore.oclas#p.classes.NamedElement.name"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.3" producedBy="/1/@actions.0" dataParameter="/1/@actions.0/@results.0">
+      <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+      <type href="Classes.ecore.oclas#T.classes.Class"/>
+      <propertyDatums super="/1/@datums.3/@propertyDatums.0" producedBy="/1/@actions.3" requiredBy="/1/@actions.4">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+        <property href="Classes.ecore.oclas#p.classes.NamedElement.name"/>
+      </propertyDatums>
+      <propertyDatums producedBy="/1/@actions.4" opposite="/1/@datums.4/@propertyDatums.2">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+        <property href="Classes.ecore.oclas#p.classes.Class.superClass"/>
+      </propertyDatums>
+      <propertyDatums producedBy="/1/@actions.4">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+        <property href="Classes.ecore.oclas#p.classes.Class.Class"/>
+      </propertyDatums>
+      <propertyDatums producedBy="/1/@actions.6">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+        <property href="Classes.ecore.oclas#p.classes.Class.Package"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.1" requiredBy="/1/@actions.1 /1/@actions.5 /1/@actions.6 /1/@actions.7" dataParameter="/1/@actions.1/@parameters.0 /1/@actions.5/@parameters.0 /1/@actions.6/@parameters.0 /1/@actions.7/@parameters.0">
+      <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+      <type href="ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.0" requiredBy="/1/@actions.5">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.NamedElementCS.name"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.1" producedBy="/1/@actions.1" requiredBy="/1/@actions.5 /1/@actions.6 /1/@actions.7 /1/@actions.8">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+      <propertyDatums requiredBy="/1/@actions.6">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.PackageCS.ownedClasses"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.1">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+      <propertyDatums requiredBy="/1/@actions.7">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.PackageCS.ownedPackages"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.1">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.1">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.1">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.1">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.3" producedBy="/1/@actions.1" dataParameter="/1/@actions.1/@results.0">
+      <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+      <type href="Classes.ecore.oclas#T.classes.Package"/>
+      <propertyDatums super="/1/@datums.3/@propertyDatums.0" producedBy="/1/@actions.5" requiredBy="/1/@actions.4">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+        <property href="Classes.ecore.oclas#p.classes.NamedElement.name"/>
+      </propertyDatums>
+      <propertyDatums producedBy="/1/@actions.6" requiredBy="/1/@actions.4" opposite="/1/@datums.4/@propertyDatums.3">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+        <property href="Classes.ecore.oclas#p.classes.Package.ownedClasses"/>
+      </propertyDatums>
+      <propertyDatums producedBy="/1/@actions.7" requiredBy="/1/@actions.4" opposite="/1/@datums.6/@propertyDatums.3">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+        <property href="Classes.ecore.oclas#p.classes.Package.ownedPackages"/>
+      </propertyDatums>
+      <propertyDatums producedBy="/1/@actions.7">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+        <property href="Classes.ecore.oclas#p.classes.Package.Package"/>
+      </propertyDatums>
+      <propertyDatums producedBy="/1/@actions.8">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+        <property href="Classes.ecore.oclas#p.classes.Package.Root"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.0" requiredBy="/1/@actions.2 /1/@actions.8" dataParameter="/1/@actions.2/@parameters.0 /1/@actions.8/@parameters.0">
+      <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+      <type href="ClassesCS.ecore.oclas#T.classescs.RootCS"/>
+      <propertyDatums requiredBy="/1/@actions.8">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.RootCS.ownedPackages"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.0/@propertyDatums.0" producedBy="/1/@actions.2" requiredBy="/1/@actions.8">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+      <propertyDatums super="/1/@datums.0/@propertyDatums.0">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.leftCS"/>
+        <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" producedBy="/1/@actions.2" dataParameter="/1/@actions.2/@results.0">
+      <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+      <type href="Classes.ecore.oclas#T.classes.Root"/>
+      <propertyDatums producedBy="/1/@actions.8" requiredBy="/1/@actions.4" opposite="/1/@datums.6/@propertyDatums.4">
+        <domain href="classescs2as.qvtp.qvtias#qT..classescs2as_qvtp_qvtias.rightAS"/>
+        <property href="Classes.ecore.oclas#p.classes.Root.ownedPackages"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.0">
+      <type href="ClassesCS.ecore.oclas#T.classescs.PathNameCS"/>
+      <propertyDatums requiredBy="/1/@actions.4">
+        <property href="ClassesCS.ecore.oclas#p.classescs.PathNameCS.path"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.1">
+      <type href="ClassesCS.ecore.oclas#T.classescs.PathElementCS"/>
+      <propertyDatums super="/1/@datums.1/@propertyDatums.0" requiredBy="/1/@actions.4">
+        <property href="ClassesCS.ecore.oclas#p.classescs.NamedElementCS.name"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.1">
+      <type href="ClassesCS.ecore.oclas#T.classescs.PropertyCS"/>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.1">
+      <type href="ClassesCS.ecore.oclas#T.classescs.OperationCS"/>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.0">
+      <type href="ClassesCS.ecore.oclas#T.classescs.NameExpCS"/>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.0">
+      <type href="ClassesCS.ecore.oclas#T.classescs.RoundedBracketClause"/>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.1">
+      <type href="ClassesCS.ecore.oclas#T.classescs.ArgumentCS"/>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.3">
+      <type href="Classes.ecore.oclas#T.classes.Property"/>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.3">
+      <type href="Classes.ecore.oclas#T.classes.Operation"/>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.3">
+      <type href="Classes.ecore.oclas#T.classes.Parameter"/>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum" super="/1/@datums.3">
+      <type href="Classes.ecore.oclas#T.classes.Argument"/>
+    </datums>
+    <datums xsi:type="qvtg:ClassDatum">
+      <type href="EnvExample2.ecore.oclas#T.lookup.LookupEnvironment"/>
+      <propertyDatums requiredBy="/1/@actions.4">
+        <property href="EnvExample2.ecore.oclas#p.lookup.LookupEnvironment.parentEnv"/>
+      </propertyDatums>
+      <propertyDatums requiredBy="/1/@actions.4">
+        <property href="EnvExample2.ecore.oclas#p.lookup.LookupEnvironment.namedElements"/>
+      </propertyDatums>
+    </datums>
+    <actions xsi:type="qvtg:MappingAction" productions="/1/@datums.4 /1/@datums.2/@propertyDatums.1" requisites="/1/@datums.2">
+      <parameters datum="/1/@datums.2">
+        <variable href="classescs2as.qvtp.qvtias#qV..classescs2as_qvtp_qvtias.cClassCS_2_Class.leftCS.guard.classCS"/>
+      </parameters>
+      <results datum="/1/@datums.4">
+        <variable href="classescs2as.qvtp.qvtias#qV..classescs2as_qvtp_qvtias.cClassCS_2_Class.rightAS.bottom.class"/>
+      </results>
+      <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.cClassCS_2_Class"/>
+    </actions>
+    <actions xsi:type="qvtg:MappingAction" productions="/1/@datums.6 /1/@datums.5/@propertyDatums.1" requisites="/1/@datums.5">
+      <parameters datum="/1/@datums.5">
+        <variable href="classescs2as.qvtp.qvtias#qV..classescs2as_qvtp_qvtias.cPackageCS_2_Package.leftCS.guard.packageCS"/>
+      </parameters>
+      <results datum="/1/@datums.6">
+        <variable href="classescs2as.qvtp.qvtias#qV..classescs2as_qvtp_qvtias.cPackageCS_2_Package.rightAS.bottom.package"/>
+      </results>
+      <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.cPackageCS_2_Package"/>
+    </actions>
+    <actions xsi:type="qvtg:MappingAction" productions="/1/@datums.8 /1/@datums.7/@propertyDatums.1" requisites="/1/@datums.7">
+      <parameters datum="/1/@datums.7">
+        <variable href="classescs2as.qvtp.qvtias#qV..classescs2as_qvtp_qvtias.cRootCS_2_Root.leftCS.guard.rootCS"/>
+      </parameters>
+      <results datum="/1/@datums.8">
+        <variable href="classescs2as.qvtp.qvtias#qV..classescs2as_qvtp_qvtias.cRootCS_2_Root.rightAS.bottom.root"/>
+      </results>
+      <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.cRootCS_2_Root"/>
+    </actions>
+    <actions xsi:type="qvtg:MappingAction" productions="/1/@datums.4/@propertyDatums.0" requisites="/1/@datums.2 /1/@datums.2/@propertyDatums.0 /1/@datums.2/@propertyDatums.1">
+      <parameters datum="/1/@datums.2">
+        <variable href="classescs2as.qvtp.qvtias#qV..classescs2as_qvtp_qvtias.uClass_name.leftCS.guard.classCS"/>
+      </parameters>
+      <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.uClass_name"/>
+    </actions>
+    <actions xsi:type="qvtg:MappingAction" productions="/1/@datums.4/@propertyDatums.1 /1/@datums.4/@propertyDatums.2" requisites="/1/@datums.2 /1/@datums.2/@propertyDatums.2 /1/@datums.2/@propertyDatums.1 /1/@datums.20/@propertyDatums.0 /1/@datums.20/@propertyDatums.1 /1/@datums.4/@propertyDatums.0 /1/@datums.6/@propertyDatums.2 /1/@datums.6/@propertyDatums.1 /1/@datums.10/@propertyDatums.0 /1/@datums.6/@propertyDatums.0 /1/@datums.8/@propertyDatums.0 /1/@datums.9/@propertyDatums.0">
+      <parameters datum="/1/@datums.2">
+        <variable href="classescs2as.qvtp.qvtias#qV..classescs2as_qvtp_qvtias.uClass_superClass.leftCS.guard.classCS"/>
+      </parameters>
+      <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.uClass_superClass"/>
+    </actions>
+    <actions xsi:type="qvtg:MappingAction" productions="/1/@datums.6/@propertyDatums.0" requisites="/1/@datums.5 /1/@datums.5/@propertyDatums.0 /1/@datums.5/@propertyDatums.1">
+      <parameters datum="/1/@datums.5">
+        <variable href="classescs2as.qvtp.qvtias#qV..classescs2as_qvtp_qvtias.uPackage_name.leftCS.guard.packageCS"/>
+      </parameters>
+      <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.uPackage_name"/>
+    </actions>
+    <actions xsi:type="qvtg:MappingAction" productions="/1/@datums.6/@propertyDatums.1 /1/@datums.4/@propertyDatums.3" requisites="/1/@datums.5 /1/@datums.5/@propertyDatums.2 /1/@datums.2/@propertyDatums.1 /1/@datums.5/@propertyDatums.1">
+      <parameters datum="/1/@datums.5">
+        <variable href="classescs2as.qvtp.qvtias#qV..classescs2as_qvtp_qvtias.uPackage_ownedClasses.leftCS.guard.packageCS"/>
+      </parameters>
+      <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.uPackage_ownedClasses"/>
+    </actions>
+    <actions xsi:type="qvtg:MappingAction" productions="/1/@datums.6/@propertyDatums.2 /1/@datums.6/@propertyDatums.3" requisites="/1/@datums.5 /1/@datums.5/@propertyDatums.4 /1/@datums.5/@propertyDatums.1">
+      <parameters datum="/1/@datums.5">
+        <variable href="classescs2as.qvtp.qvtias#qV..classescs2as_qvtp_qvtias.uPackage_ownedPackages.leftCS.guard.packageCS"/>
+      </parameters>
+      <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.uPackage_ownedPackages"/>
+    </actions>
+    <actions xsi:type="qvtg:MappingAction" productions="/1/@datums.8/@propertyDatums.0 /1/@datums.6/@propertyDatums.4" requisites="/1/@datums.7 /1/@datums.7/@propertyDatums.0 /1/@datums.5/@propertyDatums.1 /1/@datums.7/@propertyDatums.1">
+      <parameters datum="/1/@datums.7">
+        <variable href="classescs2as.qvtp.qvtias#qV..classescs2as_qvtp_qvtias.uRoot_ownedPackages.leftCS.guard.rootCS"/>
+      </parameters>
+      <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.uRoot_ownedPackages"/>
+    </actions>
+  </qvtg:DependencyGraph>
+</xmi:XMI>

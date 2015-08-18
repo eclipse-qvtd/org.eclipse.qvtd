@@ -13,7 +13,6 @@
 package example1.env;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.pivot.evaluation.Executor;
 
 /**

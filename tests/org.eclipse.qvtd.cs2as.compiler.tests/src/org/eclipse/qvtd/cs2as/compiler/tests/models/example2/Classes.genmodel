@@ -20,16 +20,39 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Classes.ecore#//NamedElement/name"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Classes.ecore#//Namespace"/>
+    <genClasses image="false" ecoreClass="Classes.ecore#//TypedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Classes.ecore#//TypedElement/type"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Classes.ecore#//CallExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Classes.ecore#//CallExp/ownedCallExp"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Classes.ecore#//CallExp/owningSource"/>
+    </genClasses>
+    <genClasses ecoreClass="Classes.ecore#//Root">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Classes.ecore#//Root/ownedPackages"/>
+    </genClasses>
     <genClasses ecoreClass="Classes.ecore#//Package">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Classes.ecore#//Package/ownedClasses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Classes.ecore#//Package/ownedPackages"/>
     </genClasses>
     <genClasses ecoreClass="Classes.ecore#//Class">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Classes.ecore#//Class/superClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Classes.ecore#//Class/ownedOperations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Classes.ecore#//Class/ownedProperties"/>
     </genClasses>
-    <genClasses ecoreClass="Classes.ecore#//Root">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Classes.ecore#//Root/ownedPackages"/>
+    <genClasses ecoreClass="Classes.ecore#//Property"/>
+    <genClasses ecoreClass="Classes.ecore#//Operation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Classes.ecore#//Operation/ownedParameters"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Classes.ecore#//Operation/ownedExpressions"/>
     </genClasses>
+    <genClasses ecoreClass="Classes.ecore#//Parameter"/>
+    <genClasses ecoreClass="Classes.ecore#//PropertyCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Classes.ecore#//PropertyCallExp/referredProperty"/>
+    </genClasses>
+    <genClasses ecoreClass="Classes.ecore#//OperationCallExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Classes.ecore#//OperationCallExp/ownedArguments"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Classes.ecore#//OperationCallExp/referredOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="Classes.ecore#//Argument"/>
     <genClasses image="false" ecoreClass="Classes.ecore#//Visitable"/>
   </genPackages>
 </genmodel:GenModel>

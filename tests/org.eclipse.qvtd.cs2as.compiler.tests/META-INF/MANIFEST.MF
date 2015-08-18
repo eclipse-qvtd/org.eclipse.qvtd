@@ -18,10 +18,7 @@ Require-Bundle: org.junit,
  org.eclipse.qvtd.codegen;bundle-version="[0.13.0,0.14.0)";resolution:=optional
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: example1.env,
- example1.env.impl,
- example1.env.util,
- example1.source,
+Export-Package: example1.source,
  example1.source.impl,
  example1.source.util,
  example1.target,
@@ -36,7 +33,4 @@ Export-Package: example1.env,
  example2.classescstraces,
  example2.classescstraces.impl,
  example2.classescstraces.util,
- example2.env,
- example2.env.impl,
- example2.env.util,
  org.eclipse.qvtd.cs2as.compiler.tests

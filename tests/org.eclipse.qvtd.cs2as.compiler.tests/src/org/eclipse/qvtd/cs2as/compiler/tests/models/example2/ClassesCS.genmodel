@@ -19,6 +19,8 @@
     </genClasses>
     <genClasses ecoreClass="ClassesCS.ecore#//ClassCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//ClassCS/extends"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//ClassCS/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//ClassCS/operations"/>
     </genClasses>
     <genClasses ecoreClass="ClassesCS.ecore#//PathNameCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//PathNameCS/path"/>
@@ -27,5 +29,22 @@
     <genClasses ecoreClass="ClassesCS.ecore#//RootCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//RootCS/ownedPackages"/>
     </genClasses>
+    <genClasses ecoreClass="ClassesCS.ecore#//PropertyCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//PropertyCS/typeRef"/>
+    </genClasses>
+    <genClasses ecoreClass="ClassesCS.ecore#//OperationCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassesCS.ecore#//OperationCS/params"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//OperationCS/bodyExps"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//OperationCS/resultRef"/>
+    </genClasses>
+    <genClasses ecoreClass="ClassesCS.ecore#//NameExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//NameExpCS/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//NameExpCS/roundedBrackets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//NameExpCS/ownedNameExp"/>
+    </genClasses>
+    <genClasses ecoreClass="ClassesCS.ecore#//RoundedBracketClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//RoundedBracketClause/args"/>
+    </genClasses>
+    <genClasses ecoreClass="ClassesCS.ecore#//ArgumentCS"/>
   </genPackages>
 </genmodel:GenModel>

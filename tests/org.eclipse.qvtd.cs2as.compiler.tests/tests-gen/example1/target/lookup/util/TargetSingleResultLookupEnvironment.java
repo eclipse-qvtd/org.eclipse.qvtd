@@ -1,0 +1,93 @@
+/*******************************************************************************
+ * <copyright>
+ * 
+ * </copyright>
+ *
+ * This code is auto-generated
+ * from: org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models/example1/TargetMM1.genmodel
+ *
+ * Only the copyright statement is editable.
+ *******************************************************************************/
+package	example1.target.lookup.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+
+import example1.target.NamedElement;
+import example1.target.lookup.LookupEnvironment;
+import example1.target.lookup.impl.LookupEnvironmentImpl;
+
+public class TargetSingleResultLookupEnvironment extends LookupEnvironmentImpl   {
+	
+	private @NonNull Executor executor;
+	private @NonNull String name;
+	private @NonNull EClass typeFilter;
+	
+	public TargetSingleResultLookupEnvironment(@NonNull Executor executor, @NonNull EClass typeFilter, @NonNull String name) {
+		this.executor = executor;
+		this.name = name;
+		this.typeFilter = typeFilter;
+	}
+	
+	@Override
+	@NonNull
+	public Executor getExecutor() {
+		return executor;
+	}
+	
+	@Override
+	public boolean hasFinalResult() {
+		for (NamedElement element : getNamedElements()) {
+			if (name.equals(element.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	@NonNull
+	public LookupEnvironment addElement(@Nullable NamedElement namedElement) {
+		if (namedElement != null) {
+			if (name.equals(namedElement.getName())) {
+				if (typeFilter.isInstance(namedElement)) {
+					EList<NamedElement> elements = getNamedElements();
+					if (!elements.contains(namedElement)) { 	// FIXME use a set ?
+						elements.add(namedElement);
+					}
+				}
+			}
+		}
+		return this;
+	}
+	
+	@Override
+	@NonNull
+	public <NE extends NamedElement > LookupEnvironment addElements(
+			@Nullable EList<NE> namedElements) {
+		
+		if (namedElements != null) {
+			for (NamedElement namedElement : namedElements) {
+				addElement(namedElement);
+			}	
+		}
+		return this;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <NE extends NamedElement> List<NE> getNamedElementsByKind(Class<NE> class_) {
+		List<NE> result = new ArrayList<NE>(); 
+		for (NamedElement namedElement : getNamedElements()) {
+			if (class_.isAssignableFrom(namedElement.getClass())) {
+				result.add((NE)namedElement);
+			}
+		}
+		return result;
+	}
+}

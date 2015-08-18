@@ -39,9 +39,8 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	protected ResourceSet resourceSet;
 	protected String javaFolder = "src-gen/";
 	protected String javaPackage = "";
-	protected String envClassName;
-	protected String visitorClassName;
-	protected String namedElementItfName;
+	protected String lookupResolverClassName;
+	protected String lookupResultItfName;
 	protected String traceabilityPropName = "ast";
 	protected Map<?, ?> savingOptions;
 
@@ -50,15 +49,11 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 			issues.addError(this, "OCL document URI not specified.");
 		}
 		
-		if (!isDefined(envClassName)) {
-			issues.addError(this, "Fully qualified name of the Environment java class not specified.");
-		}
-		
-		if (!isDefined(visitorClassName)) {
+		if (!isDefined(lookupResolverClassName)) {
 			issues.addError(this, "Fully qualified name of the Loookup Visitor java class not specified");
 		}
 		
-		if (!isDefined(namedElementItfName)) {
+		if (!isDefined(lookupResultItfName)) {
 			issues.addError(this, "Fully qualified name of the Named Element interface not specified");
 		}
 	}
@@ -83,7 +78,7 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 		return new OCL2QVTiCGTxCompiler();
 	}
 	protected CS2ASJavaCompilerParameters createParameters() {
-		return new CS2ASJavaCompilerParametersImpl(envClassName, visitorClassName, namedElementItfName, javaFolder, javaPackage);
+		return new CS2ASJavaCompilerParametersImpl(lookupResolverClassName, lookupResultItfName, javaFolder, javaPackage);
 	}
 
 	/**
@@ -108,26 +103,19 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	public void setOclDocURI(final String oclDocURI) {
 		this.oclFileURI = oclDocURI;
 	}
-
+	
 	/**
-	 * (Mandatory) The fully qualified class name of the Environment java class  
+	 * (Mandatory) The fully qualified class name of the Lookup Resolver java class  
 	 */
-	public void setEnvironmentClassName(final String envClassName) {
-		this.envClassName = envClassName;
+	public void setLookupResolverClassName(final String visitorClassName) {
+		this.lookupResolverClassName = visitorClassName;
 	}
 	
 	/**
-	 * (Mandatory) The fully qualified class name of the Lookup Visitor java class  
+	 * (Mandatory) The fully qualified interface name of the Lookup Result java interface  
 	 */
-	public void setLookupVisitorClassName(final String visitorClassName) {
-		this.visitorClassName = visitorClassName;
-	}
-	
-	/**
-	 * (Mandatory) The fully qualified interface name of the NamedElement (itf which provides the "name" attribute)  
-	 */
-	public void setNamedElementItfName(final String namedElementItfName) {
-		this.namedElementItfName = namedElementItfName;
+	public void setLookupResultItfName(final String namedElementItfName) {
+		this.lookupResultItfName = namedElementItfName;
 	}
 	
 	/**

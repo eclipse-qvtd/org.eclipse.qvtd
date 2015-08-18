@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbase:SRoot
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:sbase="http://cs2as/tests/example5/sourceBaseMM/1.0"
+    xmlns:sderived="http://cs2as/tests/example5/sourceDerivedMM/1.0">
+  <ownedX name="x1">
+    <ownsY name="y1">
+      <ownsZ/>
+    </ownsY>
+  </ownedX>
+  <ownedX xsi:type="sderived:X2"
+      name="x2">
+    <ownsY xsi:type="sderived:Y2"
+        name="y2"
+        name2="y2b">
+      <ownsZ/>
+    </ownsY>
+    <ownsW/>
+  </ownedX>
+</sbase:SRoot>

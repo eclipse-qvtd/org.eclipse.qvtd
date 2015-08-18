@@ -172,4 +172,5 @@ public class CompositeImpl extends NodeImpl implements Composite {
 		return super.eIsSet(featureID);
 	}
 
+
 } //CompositeImpl

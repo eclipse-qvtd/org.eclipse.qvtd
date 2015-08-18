@@ -14,13 +14,19 @@ package example2.classescs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import example2.classescs.ClassCS;
 import example2.classescs.ClassescsPackage;
+import example2.classescs.OperationCS;
 import example2.classescs.PathNameCS;
+import example2.classescs.PropertyCS;
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +37,8 @@ import example2.classescs.PathNameCS;
  * </p>
  * <ul>
  *   <li>{@link example2.classescs.impl.ClassCSImpl#getExtends <em>Extends</em>}</li>
+ *   <li>{@link example2.classescs.impl.ClassCSImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link example2.classescs.impl.ClassCSImpl#getOperations <em>Operations</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,6 +53,25 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	 * @ordered
 	 */
 	protected PathNameCS extends_;
+
+	/**
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PropertyCS> properties;
+	/**
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<OperationCS> operations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,11 +140,39 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<PropertyCS> getProperties() {
+		if (properties == null) {
+			properties = new EObjectContainmentEList<PropertyCS>(PropertyCS.class, this, ClassescsPackage.CLASS_CS__PROPERTIES);
+		}
+		return properties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<OperationCS> getOperations() {
+		if (operations == null) {
+			operations = new EObjectContainmentEList<OperationCS>(OperationCS.class, this, ClassescsPackage.CLASS_CS__OPERATIONS);
+		}
+		return operations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ClassescsPackage.CLASS_CS__EXTENDS:
 				return basicSetExtends(null, msgs);
+			case ClassescsPackage.CLASS_CS__PROPERTIES:
+				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+			case ClassescsPackage.CLASS_CS__OPERATIONS:
+				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -132,6 +187,10 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 		switch (featureID) {
 			case ClassescsPackage.CLASS_CS__EXTENDS:
 				return getExtends();
+			case ClassescsPackage.CLASS_CS__PROPERTIES:
+				return getProperties();
+			case ClassescsPackage.CLASS_CS__OPERATIONS:
+				return getOperations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -141,11 +200,20 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ClassescsPackage.CLASS_CS__EXTENDS:
 				setExtends((PathNameCS)newValue);
+				return;
+			case ClassescsPackage.CLASS_CS__PROPERTIES:
+				getProperties().clear();
+				getProperties().addAll((Collection<? extends PropertyCS>)newValue);
+				return;
+			case ClassescsPackage.CLASS_CS__OPERATIONS:
+				getOperations().clear();
+				getOperations().addAll((Collection<? extends OperationCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -162,6 +230,12 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 			case ClassescsPackage.CLASS_CS__EXTENDS:
 				setExtends((PathNameCS)null);
 				return;
+			case ClassescsPackage.CLASS_CS__PROPERTIES:
+				getProperties().clear();
+				return;
+			case ClassescsPackage.CLASS_CS__OPERATIONS:
+				getOperations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -176,6 +250,10 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 		switch (featureID) {
 			case ClassescsPackage.CLASS_CS__EXTENDS:
 				return extends_ != null;
+			case ClassescsPackage.CLASS_CS__PROPERTIES:
+				return properties != null && !properties.isEmpty();
+			case ClassescsPackage.CLASS_CS__OPERATIONS:
+				return operations != null && !operations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

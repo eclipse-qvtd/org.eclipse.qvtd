@@ -13,9 +13,9 @@
 package example1.target.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import example1.target.A3;
 import example1.target.TargetPackage;
 import example1.target.util.Visitor;

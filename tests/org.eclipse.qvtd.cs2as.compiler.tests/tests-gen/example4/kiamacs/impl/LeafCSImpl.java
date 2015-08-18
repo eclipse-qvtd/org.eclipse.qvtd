@@ -34,4 +34,5 @@ public class LeafCSImpl extends NodeCSImpl implements LeafCS {
 		return KiamacsPackage.Literals.LEAF_CS;
 	}
 
+
 } //LeafCSImpl

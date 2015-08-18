@@ -3,30 +3,37 @@
 --     QVTi - The output QVTi model
 -- Transformation variables
 --     traceabilityPropName - the name of the traceability property
+--     oclDocURI - the external URI of the target OCL Model
 
 import 'ocl2qvtiUtils.eol';
 
 pre {
-	var LEFTCS_PACKAGE = OCL!Package.all.first();
 	var RIGHT = "rightAS";
 	var LEFT = "leftCS";
-	var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+	var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");	
+}
+
+
+rule Model2ImperativeModel 
+	transform s : OCL!Model
+	to t : QVTi!ImperativeModel {
 	
-	-- transformation begins --
-	var oclModel = OCL!Model.all.first();
-	var qvtiModel = new QVTi!ImperativeModel;
-	qvtiModel.externalURI = oclModel.externalURI.replace(".ocl",".qvtp.qvtias"); -- FIXME Assuming it will be serialised in the same folder
-	qvtiModel.ownedImports ::= oclModel.ownedImports;
+	guard: s.eResource().getURI().toString() = oclDocURI
+	
+	var shadowExps = s.getAllContents().select(x | x.isKindOf(OCL!ShadowExp));
+	var shadowParts = s.getAllContents().select(x | x.isKindOf(OCL!ShadowPart));
+	
+	t.externalURI = s.externalURI.replace(".ocl",".qvtp.qvtias"); -- FIXME Assuming it will be serialised in the same folder
+	t.ownedImports ::= s.ownedImports;
 	
 	var qvtiPackage = new QVTi!Package;
 	qvtiPackage.name = "";
 		
 	var qvtiTransf = new QVTi!Transformation;
-	qvtiTransf.name = qvtiModel.name.replace("\\.","_"); // FIXME . as part of the name is causing issues in the CG
-	qvtiTransf.modelParameter.addAll(QVTi!TypedModel.all());
-		
+	qvtiTransf.name = t.name.replace("\\.","_"); // FIXME . as part of the name is causing issues in the CG
+
 	var importedPckgs = Sequence{};
-	for (namespace in OCL!Import.all.importedNamespace) {
+	for (namespace in t.ownedImports.importedNamespace) {
 		if (namespace.isKindOf(OCL!Model)) {
 			importedPckgs.addAll(namespace.ownedPackages); 
 		} else if (namespace.isKindOf(OCL!Package)) {
@@ -40,19 +47,25 @@ pre {
 	typedModel.name = LEFT;
 	typedModel.usedPackage.add(
 		importedPckgs.selectOne(x 
-				| x.name = OCL!ShadowExp.all.first().getExpressionContextType().owningPackage.name));
+				| x.name = shadowExps.first().getExpressionContextType().owningPackage.name));
 	qvtiTransf.modelParameter.add(typedModel);
 	
 	typedModel = new QVTi!TypedModel;
 	typedModel.name = RIGHT;
 	typedModel.usedPackage.add(
 		importedPckgs.selectOne(x 
-				| x.name = OCL!ShadowExp.all.first().type.owningPackage.name));
+				| x.name = shadowExps.first().type.owningPackage.name));
 	qvtiTransf.modelParameter.add(typedModel);
 		
 	qvtiPackage.ownedClasses.add(qvtiTransf);
-	qvtiModel.ownedPackages.add(qvtiPackage);
+	t.ownedPackages.add(qvtiPackage);
+	
+	-- Adding the mappings	 
+
+	qvtiTransf.`rule`.addAll(shadowExps.equivalent());
+	qvtiTransf.`rule`.addAll(shadowParts.equivalent());
 }
+
 
 @lazy
 rule Import2Import 
@@ -63,18 +76,14 @@ rule Import2Import
 	t.importedNamespace = s.importedNamespace;
 }
 
+@lazy
 rule ShadowExp2CreationMapping
 	transform s : OCL!ShadowExp
 	to t : QVTi!Mapping {
 	
 	guard {
 		var containers = s.closure(x|x.eContainer());
-		return  not containers.exists(x | x.isKindOf(OCL!ShadowExp)) -- innerShadowExps dont produce creation mappings
-		and 
-		// FIXME this is hazardy. Rework
-		// Ideally lazy transformation on the content of the OCL Model should avoid calling
-		// this rule on undesired elemenets (imported from other ocl files)
-		containers.contains(LEFTCS_PACKAGE); 
+		return  not containers.exists(x | x.isKindOf(OCL!ShadowExp));
 	}
 	
 	t.name = s.getCreationMappingName();
@@ -108,15 +117,16 @@ rule ShadowExp2CreationMapping
 	t.bottomPattern = bottomPattern;
 }
 
+@lazy
 rule ShadowPart2UpdateMapping
 	transform s : OCL!ShadowPart
 	to t : QVTi!Mapping {
 	
 	guard {
-		// FIXME this is hazardy. Rework
-		// Ideally lazy transformation on the content of the OCL Model should avoid calling
-		// this rule on undesired elemenets (imported from other ocl files)
-		return s.closure(x|x.eContainer()).contains(LEFTCS_PACKAGE); 
+		var containingShadowExp = s.eContainer();
+		var containers = containingShadowExp.closure(x|x.eContainer());
+		return  not containers.exists(x | x.isKindOf(OCL!ShadowExp)); -- innerShadowParts dont produce udpate mappings
+	
 	}
 		
 	var shadowExp = s.eContainer();
@@ -375,7 +385,5 @@ operation OCL!OCLExpression isBooleanNotOpCallExp() {
 
 
 post {
-	-- We add all the declaratively created QVTi mappings to the imperatively created QVTi transformation 
-	qvtiTransf.`rule`.addAll(QVTi!Mapping.all());
 	"OCL 2 QVTp completed".println();
 }

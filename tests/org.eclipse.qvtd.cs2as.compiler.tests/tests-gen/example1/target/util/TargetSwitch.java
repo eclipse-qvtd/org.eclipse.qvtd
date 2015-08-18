@@ -12,7 +12,6 @@
  */
 package example1.target.util;
 
-import example1.target.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -25,6 +24,7 @@ import example1.target.B;
 import example1.target.C;
 import example1.target.D;
 import example1.target.NamedElement;
+import example1.target.Namespace;
 import example1.target.TRoot;
 import example1.target.TargetPackage;
 

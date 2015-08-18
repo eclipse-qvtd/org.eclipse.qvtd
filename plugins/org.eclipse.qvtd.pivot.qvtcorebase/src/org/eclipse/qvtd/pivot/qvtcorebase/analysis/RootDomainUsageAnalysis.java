@@ -397,11 +397,26 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 				setUsage(ownedContext, typedModelUsage);
 			}
 			Set<CompleteClass> completeClasses = new HashSet<CompleteClass>();
+// TODO		There is an issue with extending transformations, because just classes extended by the
+//			the extending metamodel are tracked. Following code tries to workaround this issue. Also take into account
+//			that pivot/ocl are filtered. This might be an issue, when the transformations involve the own pivot metamodel 
+//			(e.g. the CS2AS transformation for QVTo, Pivot-based QVTo AS extends Pivot metamodel).
+//			Set<Package> allPackages = QVTbaseUtil.getAllUsedPackages(typedModel);
+//			Deque<Package> pckQueue = new LinkedList<Package>();	// To track new discovered packages
+//			pckQueue.addAll(allPackages);
+//			while (!pckQueue.isEmpty()) {
+//			Package asPackage = pckQueue.pop();
 			for (org.eclipse.ocl.pivot.Package asPackage : QVTbaseUtil.getAllUsedPackages(typedModel)) {
 				for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
 					if (asClass != null) {
 						for (CompleteClass completeClass : completeModel.getCompleteClass(asClass).getSuperCompleteClasses()) {
 							completeClasses.add(completeClass);
+//							Package superClassPackage = completeClass.getPrimaryClass().getOwningPackage();
+//							if (!allPackages.contains(superClassPackage)
+//									&& !isPivotMMPackage(superClassPackage)) {
+//								pckQueue.push(superClassPackage);
+//								allPackages.add(superClassPackage);
+//							}
 						}
 					}
 				}
@@ -507,6 +522,10 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	public @NonNull DomainUsage getNoneUsage() {
 		return constantUsages.get(NONE_USAGE_BIT_MASK);
 	}
+	
+//	public @NonNull TypedModel getPrimitiveTypeModel() {
+//		return primitiveTypeModel;
+//	}
 
 	public @NonNull OperationId getOclContainerId() {
 		OperationId oclElementOclContainerId2 = oclElementOclContainerId;
@@ -621,4 +640,10 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	public boolean isDirty(@NonNull Property property) {
 		return dirtyProperties.contains(property);
 	}
+	
+//	private boolean isPivotMMPackage(Package p) {
+//		String pURI = p.getURI();
+//		return PivotPackage.eNS_URI.equals(pURI) ||
+//				OCLstdlib.STDLIB_URI.equals(pURI);
+//	}
 }

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml:graphml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://graphml.graphdrawing.org/xmlns"
+    xmlns:graphml="http://graphml.graphdrawing.org/xmlns/graphml" xmlns:y="http://www.yworks.com/xml/graphml"
+    xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd">
+  <graphml:key for="node" id="d6" yfiles.type="nodegraphics"/>
+  <graphml:key for="edge" id="d9" yfiles.type="edgegraphics"/>
+  <graphml:graph edgedefault="directed" id="Graph">
+    <graphml:node id="ClassCS">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>ClassCS</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Class">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Class</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="PackageCS">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>PackageCS</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Package">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Package</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="RootCS">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>RootCS</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Root">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Root</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="PathNameCS">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>PathNameCS</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="PathElementCS">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>PathElementCS</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Environment">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Environment</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="ClassCS::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>ClassCS::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="ClassCS::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>ClassCS::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="ClassCS::extends">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>ClassCS::extends</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Class::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Class::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Class::superClass">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Class::superClass</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Class::Class">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Class::Class</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Class::Package">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Class::Package</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="PackageCS::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>PackageCS::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="PackageCS::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>PackageCS::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="PackageCS::ownedClasses">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>PackageCS::ownedClasses</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="PackageCS::ownedPackages">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>PackageCS::ownedPackages</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Package::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Package::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Package::ownedClasses">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Package::ownedClasses</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Package::ownedPackages">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Package::ownedPackages</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Package::Package">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Package::Package</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Package::Root">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Package::Root</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="RootCS::ownedPackages">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>RootCS::ownedPackages</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="RootCS::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>RootCS::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Root::ownedPackages">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Root::ownedPackages</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="PathNameCS::path">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>PathNameCS::path</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="PathElementCS::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>PathElementCS::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Environment::parentEnv">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Environment::parentEnv</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Environment::namedElements">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Environment::namedElements</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="cClassCS_2_Class (1)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>cClassCS_2_Class (1)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="cPackageCS_2_Package (3)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>cPackageCS_2_Package (3)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="cRootCS_2_Root (7)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>cRootCS_2_Root (7)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uClass_name (2)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uClass_name (2)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uClass_superClass (9)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uClass_superClass (9)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uPackage_name (5)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uPackage_name (5)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uPackage_ownedClasses (4)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uPackage_ownedClasses (4)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uPackage_ownedPackages (6)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uPackage_ownedPackages (6)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uRoot_ownedPackages (8)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uRoot_ownedPackages (8)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:edge source="Class::superClass" target="Class::Class">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Package::ownedClasses" target="Class::Package">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Package::ownedPackages" target="Package::Package">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Root::ownedPackages" target="Package::Root">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="ClassCS" target="cClassCS_2_Class (1)"/>
+    <graphml:edge source="cClassCS_2_Class (1)" target="Class"/>
+    <graphml:edge source="cClassCS_2_Class (1)" target="ClassCS::ast"/>
+    <graphml:edge source="PackageCS" target="cPackageCS_2_Package (3)"/>
+    <graphml:edge source="cPackageCS_2_Package (3)" target="Package"/>
+    <graphml:edge source="cPackageCS_2_Package (3)" target="PackageCS::ast"/>
+    <graphml:edge source="RootCS" target="cRootCS_2_Root (7)"/>
+    <graphml:edge source="cRootCS_2_Root (7)" target="Root"/>
+    <graphml:edge source="cRootCS_2_Root (7)" target="RootCS::ast"/>
+    <graphml:edge source="ClassCS" target="uClass_name (2)"/>
+    <graphml:edge source="ClassCS::name" target="uClass_name (2)"/>
+    <graphml:edge source="ClassCS::ast" target="uClass_name (2)"/>
+    <graphml:edge source="uClass_name (2)" target="Class::name"/>
+    <graphml:edge source="ClassCS" target="uClass_superClass (9)"/>
+    <graphml:edge source="ClassCS::ast" target="uClass_superClass (9)"/>
+    <graphml:edge source="ClassCS::extends" target="uClass_superClass (9)"/>
+    <graphml:edge source="PathNameCS::path" target="uClass_superClass (9)"/>
+    <graphml:edge source="Environment::parentEnv" target="uClass_superClass (9)"/>
+    <graphml:edge source="Environment::namedElements" target="uClass_superClass (9)"/>
+    <graphml:edge source="Package::name" target="uClass_superClass (9)"/>
+    <graphml:edge source="PathElementCS::name" target="uClass_superClass (9)"/>
+    <graphml:edge source="Package::ownedPackages" target="uClass_superClass (9)"/>
+    <graphml:edge source="Root::ownedPackages" target="uClass_superClass (9)"/>
+    <graphml:edge source="Package::ownedClasses" target="uClass_superClass (9)"/>
+    <graphml:edge source="Class::name" target="uClass_superClass (9)"/>
+    <graphml:edge source="uClass_superClass (9)" target="Class::superClass"/>
+    <graphml:edge source="uClass_superClass (9)" target="Class::Class"/>
+    <graphml:edge source="PackageCS" target="uPackage_name (5)"/>
+    <graphml:edge source="PackageCS::name" target="uPackage_name (5)"/>
+    <graphml:edge source="PackageCS::ast" target="uPackage_name (5)"/>
+    <graphml:edge source="uPackage_name (5)" target="Package::name"/>
+    <graphml:edge source="PackageCS" target="uPackage_ownedClasses (4)"/>
+    <graphml:edge source="PackageCS::ownedClasses" target="uPackage_ownedClasses (4)"/>
+    <graphml:edge source="ClassCS::ast" target="uPackage_ownedClasses (4)"/>
+    <graphml:edge source="PackageCS::ast" target="uPackage_ownedClasses (4)"/>
+    <graphml:edge source="uPackage_ownedClasses (4)" target="Package::ownedClasses"/>
+    <graphml:edge source="uPackage_ownedClasses (4)" target="Class::Package"/>
+    <graphml:edge source="PackageCS" target="uPackage_ownedPackages (6)"/>
+    <graphml:edge source="PackageCS::ownedPackages" target="uPackage_ownedPackages (6)"/>
+    <graphml:edge source="PackageCS::ast" target="uPackage_ownedPackages (6)"/>
+    <graphml:edge source="uPackage_ownedPackages (6)" target="Package::ownedPackages"/>
+    <graphml:edge source="uPackage_ownedPackages (6)" target="Package::Package"/>
+    <graphml:edge source="RootCS" target="uRoot_ownedPackages (8)"/>
+    <graphml:edge source="RootCS::ownedPackages" target="uRoot_ownedPackages (8)"/>
+    <graphml:edge source="PackageCS::ast" target="uRoot_ownedPackages (8)"/>
+    <graphml:edge source="RootCS::ast" target="uRoot_ownedPackages (8)"/>
+    <graphml:edge source="uRoot_ownedPackages (8)" target="Root::ownedPackages"/>
+    <graphml:edge source="uRoot_ownedPackages (8)" target="Package::Root"/>
+  </graphml:graph>
+</graphml:graphml>

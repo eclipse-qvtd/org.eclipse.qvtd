@@ -24,7 +24,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Num" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.cNumCS_2_Num.rightAS.bottom.num"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.cNumCS_2_Num.leftCS.guard.numCS"/>
           </assignment>
@@ -45,7 +45,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Plus" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.cPlusCS_2_Plus.rightAS.bottom.plus"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.cPlusCS_2_Plus.leftCS.guard.plusCS"/>
           </assignment>
@@ -66,7 +66,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Top" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.cTopCS_2_Top.rightAS.bottom.top"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.TopCS" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.cTopCS_2_Top.leftCS.guard.topCS"/>
           </assignment>
@@ -85,13 +85,8 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-<<<<<<< ewillink/support
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Num.value">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
-=======
           <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Num.value">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
->>>>>>> a23fd48 Realized/GuardVariables cannot be null
                 referredProperty="KiamaCS.ecore.oclas#p.kiamacs.NumCS.value">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS" isImplicit="true" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.uNum_value.leftCS.guard.numCS"/>
             </value>
@@ -105,10 +100,10 @@
           </assignment>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..KiamaRewrite_qvtp_qvtias.uNum_deep" name="uNum_deep">
+      <rule xsi:type="qvti:Mapping" xmi:id="m..KiamaRewrite_qvtp_qvtias.uNum_depth" name="uNum_depth">
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" typedModel="#qT..KiamaRewrite_qvtp_qvtias.leftCS">
           <guardPattern>
-            <variable xmi:id="qV..KiamaRewrite_qvtp_qvtias.uNum_deep.leftCS.guard.numCS" name="numCS" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS"/>
+            <variable xmi:id="qV..KiamaRewrite_qvtp_qvtias.uNum_depth.leftCS.guard.numCS" name="numCS" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
@@ -118,7 +113,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.deep">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.depth">
             <value xsi:type="pivot:LetExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
               <ownedIn xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
                 <ownedCondition xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
@@ -126,25 +121,24 @@
                   <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
                       referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@bottomPattern/@assignment.0/@value/@ownedVariable"/>
                   <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
-                      referredType="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node"/>
+                      referredType="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Top"/>
                 </ownedCondition>
-                <ownedElse xsi:type="pivot:IntegerLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
-                    integerSymbol="0"/>
-                <ownedThen xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                <ownedElse xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                     referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
-                      referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.deep">
-                    <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node"
-                        referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject"
+                      referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.depth">
+                    <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Plus" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                       <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
                           referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@bottomPattern/@assignment.0/@value/@ownedVariable"/>
                       <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
-                          referredType="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node"/>
+                          referredType="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Plus"/>
                     </ownedSource>
                   </ownedSource>
                   <ownedArguments xsi:type="pivot:IntegerLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                       integerSymbol="1"/>
-                </ownedThen>
+                </ownedElse>
+                <ownedThen xsi:type="pivot:IntegerLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                    integerSymbol="0"/>
               </ownedIn>
               <ownedVariable name="container" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
                 <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
@@ -153,7 +147,7 @@
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                         referredProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
                       <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS" isImplicit="true"
-                          referredVariable="#qV..KiamaRewrite_qvtp_qvtias.uNum_deep.leftCS.guard.numCS"/>
+                          referredVariable="#qV..KiamaRewrite_qvtp_qvtias.uNum_depth.leftCS.guard.numCS"/>
                     </ownedSource>
                     <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                         referredType="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Num"/>
@@ -164,7 +158,7 @@
             <slotExpression xsi:type="pivot:OperationCallExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Num" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.uNum_deep.leftCS.guard.numCS"/>
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.uNum_depth.leftCS.guard.numCS"/>
               </ownedSource>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Num"/>
             </slotExpression>
@@ -184,7 +178,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
             <value xsi:type="pivot:IntegerLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                 integerSymbol="0"/>
             <slotExpression xsi:type="pivot:OperationCallExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Num" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
@@ -210,7 +204,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Plus.left">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Plus.left">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
@@ -245,7 +239,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Plus.right">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Plus.right">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
@@ -267,10 +261,10 @@
           </assignment>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..KiamaRewrite_qvtp_qvtias.uPlus_deep" name="uPlus_deep">
+      <rule xsi:type="qvti:Mapping" xmi:id="m..KiamaRewrite_qvtp_qvtias.uPlus_depth" name="uPlus_depth">
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" typedModel="#qT..KiamaRewrite_qvtp_qvtias.leftCS">
           <guardPattern>
-            <variable xmi:id="qV..KiamaRewrite_qvtp_qvtias.uPlus_deep.leftCS.guard.plusCS" name="plusCS" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS"/>
+            <variable xmi:id="qV..KiamaRewrite_qvtp_qvtias.uPlus_depth.leftCS.guard.plusCS" name="plusCS" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
@@ -280,7 +274,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.deep">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.depth">
             <value xsi:type="pivot:LetExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
               <ownedIn xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
                 <ownedCondition xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
@@ -288,25 +282,24 @@
                   <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
                       referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.8/@bottomPattern/@assignment.0/@value/@ownedVariable"/>
                   <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
-                      referredType="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node"/>
+                      referredType="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Top"/>
                 </ownedCondition>
-                <ownedElse xsi:type="pivot:IntegerLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
-                    integerSymbol="0"/>
-                <ownedThen xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                <ownedElse xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                     referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
-                      referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.deep">
-                    <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node"
-                        referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject"
+                      referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.depth">
+                    <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Plus" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                       <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
                           referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.8/@bottomPattern/@assignment.0/@value/@ownedVariable"/>
                       <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
-                          referredType="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node"/>
+                          referredType="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Plus"/>
                     </ownedSource>
                   </ownedSource>
                   <ownedArguments xsi:type="pivot:IntegerLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                       integerSymbol="1"/>
-                </ownedThen>
+                </ownedElse>
+                <ownedThen xsi:type="pivot:IntegerLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                    integerSymbol="0"/>
               </ownedIn>
               <ownedVariable name="container" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
                 <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
@@ -315,7 +308,7 @@
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                         referredProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
                       <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS" isImplicit="true"
-                          referredVariable="#qV..KiamaRewrite_qvtp_qvtias.uPlus_deep.leftCS.guard.plusCS"/>
+                          referredVariable="#qV..KiamaRewrite_qvtp_qvtias.uPlus_depth.leftCS.guard.plusCS"/>
                     </ownedSource>
                     <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                         referredType="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Plus"/>
@@ -326,7 +319,7 @@
             <slotExpression xsi:type="pivot:OperationCallExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Plus" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.uPlus_deep.leftCS.guard.plusCS"/>
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.uPlus_depth.leftCS.guard.plusCS"/>
               </ownedSource>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Plus"/>
             </slotExpression>
@@ -346,15 +339,15 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
             <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
+              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject"
                   referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Collection.max">
                 <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Set.including..T">
-                  <ownedSource xsi:type="pivot:OperationCallExp" name="oclAsSet" type="#//@ownedPackages.1/@ownedClasses.0" isImplicit="true"
+                  <ownedSource xsi:type="pivot:OperationCallExp" name="oclAsSet" type="#//@ownedPackages.1/@ownedClasses.1" isImplicit="true"
                       referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsSet">
-                    <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
+                    <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject"
                         referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
                       <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node"
                           referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Plus.left">
@@ -370,7 +363,7 @@
                       </ownedSource>
                     </ownedSource>
                   </ownedSource>
-                  <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
+                  <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject"
                       referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
                     <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node"
                         referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Plus.right">
@@ -413,7 +406,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Top.node">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Top.node">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
@@ -436,34 +429,26 @@
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
-<<<<<<< ewillink/support
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.1" elementType="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
-=======
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.2" elementType="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt">
->>>>>>> a23fd48 Realized/GuardVariables cannot be null
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.2" elementType="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+        <ownedSubstitutions actual="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-<<<<<<< ewillink/support
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.2" elementType="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
-=======
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.2" elementType="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.2" elementType="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject"
         isNullFree="true">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+        <ownedSubstitutions actual="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.3" elementType="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt">
->>>>>>> a23fd48 Realized/GuardVariables cannot be null
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.3" elementType="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+        <ownedSubstitutions actual="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
-        elementType="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt">
+        elementType="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+        <ownedSubstitutions actual="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EIntegerObject" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
       </ownedBindings>
     </ownedClasses>
   </ownedPackages>

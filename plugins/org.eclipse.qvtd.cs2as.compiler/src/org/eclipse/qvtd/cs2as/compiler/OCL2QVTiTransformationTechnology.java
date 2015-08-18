@@ -30,9 +30,8 @@ public class OCL2QVTiTransformationTechnology extends AbstractTransformationTech
 	@Override
 	public @NonNull Map<String, Object> execute(@NonNull ResourceSet resourceSet, @NonNull Map<String, Object> modelMap,
 			@NonNull Map<String, Object> parametersMap) throws TransformationException {
-		String envClassName = (String) parametersMap.get("envClassName");
-		String visitorClassName = (String) parametersMap.get("visitorClassName");
-		String namedElementItfName = (String) parametersMap.get("namedElementItfName");
+		String lookupSolverClassName = (String) parametersMap.get("lookupSolverClassName");
+		String lookupResultItfName = (String) parametersMap.get("lookupResultItfName");
 		String javaFolder = (String) parametersMap.get("javaFolder");
 		String javaPackage = (String) parametersMap.get("javaPackage");
 		//
@@ -40,7 +39,7 @@ public class OCL2QVTiTransformationTechnology extends AbstractTransformationTech
 		String traceabilityPropName = (String) parametersMap.get("traceabilityPropName");
 		//
 		URI oclDocURI = URI.createURI(oclFileURI);
-		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(envClassName, visitorClassName, namedElementItfName, javaFolder, javaPackage);
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(lookupSolverClassName, lookupResultItfName, javaFolder, javaPackage);
 		try {
 			new OCL2QVTiCGTxCompiler().compileTransformation(oclDocURI, cgParams, resourceSet, traceabilityPropName);
 			return new HashMap<String, Object>();

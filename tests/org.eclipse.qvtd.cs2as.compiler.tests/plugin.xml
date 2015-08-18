@@ -29,4 +29,84 @@
             genModel="src/org/eclipse/qvtd/cs2as/compiler/tests/models/example1/EnvExample1.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated SourceBaseMM -->
+      <package
+            uri="http://cs2as/tests/example5/sourceBaseMM/1.0"
+            class="example5.sbase.SbasePackage"
+            genModel="src/org/eclipse/qvtd/cs2as/compiler/tests/models/example5/SourceBaseMM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated SourceDerivedMM -->
+      <package
+            uri="http://cs2as/tests/example5/sourceDerivedMM/1.0"
+            class="example5.sderived.SderivedPackage"
+            genModel="src/org/eclipse/qvtd/cs2as/compiler/tests/models/example5/SourceDerivedMM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated TargetBaseMM -->
+      <package
+            uri="http://cs2as/tests/example5/targetBaseMM/1.0"
+            class="example5.tbase.TbasePackage"
+            genModel="src/org/eclipse/qvtd/cs2as/compiler/tests/models/example5/TargetBaseMM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated TargetDerivedMM -->
+      <package
+            uri="http://cs2as/tests/example5/targetDerivedMM/1.0"
+            class="example5.tderived.TderivedPackage"
+            genModel="src/org/eclipse/qvtd/cs2as/compiler/tests/models/example5/TargetDerivedMM.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated KiamaAS -->
+      <package
+            uri="http://cs2as/tests/example3/kiamaas/1.0"
+            class="example3.kiamaas.KiamaasPackage"
+            genModel="src/org/eclipse/qvtd/cs2as/compiler/tests/models/example3/KiamaAS.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated KiamaCS -->
+      <package
+            uri="http://cs2as/tests/example3/kiamacs/1.0"
+            class="example3.kiamacs.KiamacsPackage"
+            genModel="src/org/eclipse/qvtd/cs2as/compiler/tests/models/example3/KiamaCS.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated SimplerKiamaAS -->
+      <package
+            uri="http://cs2as/tests/example4/simplerkiamaas/1.0"
+            class="example4.kiamaas.KiamaasPackage"
+            genModel="src/org/eclipse/qvtd/cs2as/compiler/tests/models/example4/SimplerKiamaAS.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated SimplerKiamaCS -->
+      <package
+            uri="http://cs2as/tests/example4/simplerkiamacs/1.0"
+            class="example4.kiamacs.KiamacsPackage"
+            genModel="src/org/eclipse/qvtd/cs2as/compiler/tests/models/example4/SimplerKiamaCS.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated EnvExample1 -->
+      <package
+            uri="http://cs2as/tests/example1/env/1.0"
+            class="example1.target.lookup.EnvironmentPackage"
+            genModel="src/org/eclipse/qvtd/cs2as/compiler/tests/models/example1/EnvExample1.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated EnvExample2 -->
+      <package
+            uri="http://cs2as/tests/example2/env/1.0"
+            class="example2.classes.lookup.EnvironmentPackage"
+            genModel="src/org/eclipse/qvtd/cs2as/compiler/tests/models/example2/EnvExample2.genmodel"/>
+   </extension>
+
 </plugin>

@@ -12,6 +12,7 @@
  */
 package example2.classes.impl;
 
+import example2.classes.Argument;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -20,6 +21,11 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import example2.classes.ClassesFactory;
 import example2.classes.ClassesPackage;
+import example2.classes.Operation;
+import example2.classes.OperationCallExp;
+import example2.classes.Parameter;
+import example2.classes.Property;
+import example2.classes.PropertyCallExp;
 import example2.classes.Root;
 
 /**
@@ -66,9 +72,15 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case ClassesPackage.ROOT: return createRoot();
 			case ClassesPackage.PACKAGE: return createPackage();
 			case ClassesPackage.CLASS: return createClass();
-			case ClassesPackage.ROOT: return createRoot();
+			case ClassesPackage.PROPERTY: return createProperty();
+			case ClassesPackage.OPERATION: return createOperation();
+			case ClassesPackage.PARAMETER: return createParameter();
+			case ClassesPackage.PROPERTY_CALL_EXP: return createPropertyCallExp();
+			case ClassesPackage.OPERATION_CALL_EXP: return createOperationCallExp();
+			case ClassesPackage.ARGUMENT: return createArgument();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -92,6 +104,66 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	public example2.classes.Class createClass() {
 		ClassImpl class_ = new ClassImpl();
 		return class_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Property createProperty() {
+		PropertyImpl property = new PropertyImpl();
+		return property;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation createOperation() {
+		OperationImpl operation = new OperationImpl();
+		return operation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Parameter createParameter() {
+		ParameterImpl parameter = new ParameterImpl();
+		return parameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PropertyCallExp createPropertyCallExp() {
+		PropertyCallExpImpl propertyCallExp = new PropertyCallExpImpl();
+		return propertyCallExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OperationCallExp createOperationCallExp() {
+		OperationCallExpImpl operationCallExp = new OperationCallExpImpl();
+		return operationCallExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Argument createArgument() {
+		ArgumentImpl argument = new ArgumentImpl();
+		return argument;
 	}
 
 	/**

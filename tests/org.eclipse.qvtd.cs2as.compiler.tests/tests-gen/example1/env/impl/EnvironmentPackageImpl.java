@@ -12,7 +12,6 @@
  */
 package example1.env.impl;
 
-import example1.env.Env4CG;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
@@ -20,8 +19,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.ocl.pivot.evaluation.Executor;
+
+import example1.env.Env4CG;
 import example1.env.Environment;
 import example1.env.EnvironmentFactory;
 import example1.env.EnvironmentPackage;

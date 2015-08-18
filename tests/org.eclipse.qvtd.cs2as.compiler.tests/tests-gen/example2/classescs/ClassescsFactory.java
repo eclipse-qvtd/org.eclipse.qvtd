@@ -77,6 +77,51 @@ public interface ClassescsFactory extends EFactory {
 	RootCS createRootCS();
 
 	/**
+	 * Returns a new object of class '<em>Property CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property CS</em>'.
+	 * @generated
+	 */
+	PropertyCS createPropertyCS();
+
+	/**
+	 * Returns a new object of class '<em>Operation CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation CS</em>'.
+	 * @generated
+	 */
+	OperationCS createOperationCS();
+
+	/**
+	 * Returns a new object of class '<em>Name Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Name Exp CS</em>'.
+	 * @generated
+	 */
+	NameExpCS createNameExpCS();
+
+	/**
+	 * Returns a new object of class '<em>Rounded Bracket Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rounded Bracket Clause</em>'.
+	 * @generated
+	 */
+	RoundedBracketClause createRoundedBracketClause();
+
+	/**
+	 * Returns a new object of class '<em>Argument CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Argument CS</em>'.
+	 * @generated
+	 */
+	ArgumentCS createArgumentCS();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tbase:TRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tbase="http://cs2as/tests/example5/targetBaseMM/1.0"
+    xmlns:tderived="http://cs2as/tests/example5/targetDerivedMM/1.0" xsi:schemaLocation="http://cs2as/tests/example5/targetBaseMM/1.0 java://example5.tbase.TbasePackage http://cs2as/tests/example5/targetDerivedMM/1.0 java://example5.tderived.TderivedPackage">
+  <ownedA name="x1">
+    <ownsB name="y1">
+      <ownsC/>
+    </ownsB>
+  </ownedA>
+  <ownedA xsi:type="tderived:A2" name="x2">
+    <ownsB xsi:type="tderived:B2" name="y2" anotherName="y2b">
+      <ownsC/>
+    </ownsB>
+    <ownsD/>
+  </ownedA>
+</tbase:TRoot>

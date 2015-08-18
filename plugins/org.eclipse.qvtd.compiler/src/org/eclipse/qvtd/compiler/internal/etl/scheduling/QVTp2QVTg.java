@@ -28,6 +28,7 @@ import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.TemplateParameter;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -534,6 +535,9 @@ public class QVTp2QVTg {
 			} else {
 				result.add(callExp.getType().isClass());
 			}
+		} else if (oclExp instanceof ShadowExp) {
+			result.add(((ShadowExp)oclExp).getType());
+
 		} else {
 			throw new IllegalStateException("OCLExpression has not been considered yet");
 		}

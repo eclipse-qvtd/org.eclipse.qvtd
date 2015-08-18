@@ -23,11 +23,15 @@ var String oclFileURI
  */
 var ResourceSet resourceSet
 
-var String environmentClassName
+/**
+ * Mandatory fully qualified name for the lookup resolver class 
+ */
+var String lookupResolverClassName
 
-var String lookupVisitorClassName
-
-var String namedElementItfName
+/**
+ * Mandatory fully qualified name for the lookup result interface 
+ */
+var String lookupResultItfName
 
 /**
  * Optional output 
@@ -46,9 +50,8 @@ Workflow {
 		oclDocURI = oclFileURI
 		javaFolder = javaFolder
 		javaPackage = javaPackage
-		environmentClassName = environmentClassName
-		lookupVisitorClassName = lookupVisitorClassName
-		namedElementItfName = namedElementItfName 
+		lookupResolverClassName = lookupResolverClassName
+		lookupResultItfName = lookupResultItfName 
 		tracePropertyName = tracePropertyName
 	}
 }

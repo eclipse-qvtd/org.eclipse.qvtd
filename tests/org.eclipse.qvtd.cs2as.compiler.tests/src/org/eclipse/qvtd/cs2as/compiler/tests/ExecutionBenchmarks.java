@@ -93,7 +93,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 			ResourceSet resourceSet = myQVT.getResourceSet();
 			resourceSet.getResource(URI.createURI(example2.classes.ClassesPackage.eNS_URI, true), true);
 			resourceSet.getResource(URI.createURI(example2.classescs.ClassescsPackage.eNS_URI, true), true);
-			resourceSet.getResource(URI.createURI(example2.env.EnvironmentPackage.eNS_URI, true), true);
+			resourceSet.getResource(URI.createURI(example2.classes.lookup.EnvironmentPackage.eNS_URI, true), true);
 	
 			URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 			URI txURI = baseURI.appendSegment("classescs2as.qvtias");

@@ -78,6 +78,30 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
+	public @Nullable R visitArgument(@NonNull example2.classes.Argument object) {
+		P prologue = preVisit(object);
+		try {
+			R result = delegate.visitArgument(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public @Nullable R visitCallExp(@NonNull example2.classes.CallExp object) {
+		P prologue = preVisit(object);
+		try {
+			R result = delegate.visitCallExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public @Nullable R visitClass(@NonNull example2.classes.Class object) {
 		P prologue = preVisit(object);
 		try {
@@ -126,6 +150,30 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
+	public @Nullable R visitOperation(@NonNull example2.classes.Operation object) {
+		P prologue = preVisit(object);
+		try {
+			R result = delegate.visitOperation(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public @Nullable R visitOperationCallExp(@NonNull example2.classes.OperationCallExp object) {
+		P prologue = preVisit(object);
+		try {
+			R result = delegate.visitOperationCallExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public @Nullable R visitPackage(@NonNull example2.classes.Package object) {
 		P prologue = preVisit(object);
 		try {
@@ -138,10 +186,58 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
+	public @Nullable R visitParameter(@NonNull example2.classes.Parameter object) {
+		P prologue = preVisit(object);
+		try {
+			R result = delegate.visitParameter(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public @Nullable R visitProperty(@NonNull example2.classes.Property object) {
+		P prologue = preVisit(object);
+		try {
+			R result = delegate.visitProperty(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public @Nullable R visitPropertyCallExp(@NonNull example2.classes.PropertyCallExp object) {
+		P prologue = preVisit(object);
+		try {
+			R result = delegate.visitPropertyCallExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public @Nullable R visitRoot(@NonNull example2.classes.Root object) {
 		P prologue = preVisit(object);
 		try {
 			R result = delegate.visitRoot(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public @Nullable R visitTypedElement(@NonNull example2.classes.TypedElement object) {
+		P prologue = preVisit(object);
+		try {
+			R result = delegate.visitTypedElement(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

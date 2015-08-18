@@ -52,6 +52,16 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 	}
 
 	@Override
+	public @Nullable R visitArgument(@NonNull example2.classes.Argument object) {
+		return delegate.visitArgument(object);
+	}
+
+	@Override
+	public @Nullable R visitCallExp(@NonNull example2.classes.CallExp object) {
+		return delegate.visitCallExp(object);
+	}
+
+	@Override
 	public @Nullable R visitClass(@NonNull example2.classes.Class object) {
 		return delegate.visitClass(object);
 	}
@@ -72,12 +82,42 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 	}
 
 	@Override
+	public @Nullable R visitOperation(@NonNull example2.classes.Operation object) {
+		return delegate.visitOperation(object);
+	}
+
+	@Override
+	public @Nullable R visitOperationCallExp(@NonNull example2.classes.OperationCallExp object) {
+		return delegate.visitOperationCallExp(object);
+	}
+
+	@Override
 	public @Nullable R visitPackage(@NonNull example2.classes.Package object) {
 		return delegate.visitPackage(object);
 	}
 
 	@Override
+	public @Nullable R visitParameter(@NonNull example2.classes.Parameter object) {
+		return delegate.visitParameter(object);
+	}
+
+	@Override
+	public @Nullable R visitProperty(@NonNull example2.classes.Property object) {
+		return delegate.visitProperty(object);
+	}
+
+	@Override
+	public @Nullable R visitPropertyCallExp(@NonNull example2.classes.PropertyCallExp object) {
+		return delegate.visitPropertyCallExp(object);
+	}
+
+	@Override
 	public @Nullable R visitRoot(@NonNull example2.classes.Root object) {
 		return delegate.visitRoot(object);
+	}
+
+	@Override
+	public @Nullable R visitTypedElement(@NonNull example2.classes.TypedElement object) {
+		return delegate.visitTypedElement(object);
 	}
 }

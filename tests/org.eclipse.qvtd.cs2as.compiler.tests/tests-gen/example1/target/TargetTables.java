@@ -11,8 +11,6 @@
  *******************************************************************************/
 package example1.target;
 
-import example1.target.TargetPackage;
-import example1.target.TargetTables;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;

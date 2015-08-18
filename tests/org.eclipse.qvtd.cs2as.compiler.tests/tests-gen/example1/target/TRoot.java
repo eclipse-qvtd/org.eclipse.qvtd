@@ -12,9 +12,10 @@
  */
 package example1.target;
 
-import example1.target.util.Visitable;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+
+import example1.target.util.Visitable;
 
 /**
  * <!-- begin-user-doc -->

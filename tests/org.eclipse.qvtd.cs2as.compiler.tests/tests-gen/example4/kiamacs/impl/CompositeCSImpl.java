@@ -172,4 +172,5 @@ public class CompositeCSImpl extends NodeCSImpl implements CompositeCS {
 		return super.eIsSet(featureID);
 	}
 
+
 } //CompositeCSImpl

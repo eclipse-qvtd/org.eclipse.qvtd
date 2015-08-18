@@ -173,4 +173,5 @@ public class TopImpl extends MinimalEObjectImpl.Container implements Top {
 		return super.eIsSet(featureID);
 	}
 
+
 } //TopImpl

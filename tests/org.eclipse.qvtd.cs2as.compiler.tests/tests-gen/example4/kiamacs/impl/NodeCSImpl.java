@@ -34,4 +34,5 @@ public abstract class NodeCSImpl extends BaseCSImpl implements NodeCS {
 		return KiamacsPackage.Literals.NODE_CS;
 	}
 
+
 } //NodeCSImpl

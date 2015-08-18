@@ -154,4 +154,5 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 		return super.eIsSet(featureID);
 	}
 
+
 } //BaseCSImpl

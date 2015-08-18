@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<qvtcconfig:Configuration
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:qvtcconfig="http://www.eclipse.org/qvt/examples/0.1/QVTcConfig"
+    inputDirection="//@transformation/@direction.0"
+    outputDirection="//@transformation/@direction.1"
+    mode="enforce"
+    middle="//@transformation/@direction.0">
+  <transformation
+      name="Source2TargetDerived">
+    <direction
+        name="leftCS"
+        imports="//@transformation/@import.0"/>
+    <direction
+        name="rightAS"
+        imports="//@transformation/@import.1"/>
+    <import
+        name="leftCS"
+        metamodelFile="SourceDerivedMM.ecore">
+      <package>sderived</package>
+    </import>
+    <import
+        name="rightAS"
+        metamodelFile="TargetDerivedMM.ecore">
+      <package>tderived</package>
+    </import>
+  </transformation>
+</qvtcconfig:Configuration>

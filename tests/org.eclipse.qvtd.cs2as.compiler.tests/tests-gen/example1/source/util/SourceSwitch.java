@@ -12,11 +12,12 @@
  */
 package example1.source.util;
 
-import example1.source.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
+import example1.source.PathElementCS;
+import example1.source.PathNameCS;
 import example1.source.SElement;
 import example1.source.SRoot;
 import example1.source.SourcePackage;

@@ -1,0 +1,114 @@
+source cs : 'ClassesCS.ecore#/'
+target as : 'Classes.ecore#/'
+
+mappings {
+	map as::Root from RootCS {
+		ownedPackages := ownedPackages.resolve;
+	}
+
+	map as::Package from PackageCS {
+		name := name;
+		ownedClasses := ownedClasses.resolve;
+		ownedPackages := ownedPackages.resolve;
+	}
+
+	map as::Class from ClassCS {
+		name := name;
+		ownedOperations := operations.resolve;
+		ownedProperties := properties.resolve;
+		superClass := if _extends = null then null else resolve.lookup(Class,_extends) endif; 
+	}
+	
+	map as::Property from PropertyCS {
+		name := name;
+		type := resolve.lookup(Class, typeRef); 
+	}
+	
+	map as::Operation from OperationCS {
+		name := name;
+		type := resolve.lookup(Class, resultRef);
+		ownedParameters := params->collect(x | classes::Parameter{ /*FIXME*/ });
+		ownedExpressions := bodyExps.resolve; 
+	}
+	
+	map as::PropertyCallExp from NameExpCS {
+		when isPropCallExp;
+		
+		ownedCallExp := ownedNameExp.resolve;
+		referredProperty := if oclContainer() = null 
+							then resolve.lookup(Property, name)
+							else resolve.lookupFrom(Property, resolve.owningSource.type, name)
+							endif;
+		type := resolve.oclAsType(as::PropertyCallExp).referredProperty.type;
+	}
+	
+	map as::OperationCallExp from NameExpCS {
+		when isOpCallExp;
+	
+		ownedCallExp := ownedNameExp.resolve;
+		ownedArguments := roundedBrackets.args.resolve;
+		referredOperation := if oclContainer() = null 
+							then resolve.lookup(Operation, name, resolve.oclAsType(as::OperationCallExp).ownedArguments) /*FIXME cast */
+							else resolve.lookupFrom(Operation, resolve.owningSource.type, name, resolve.oclAsType(as::OperationCallExp).ownedArguments) /*FIXME cast */
+							endif;
+		type := resolve.oclAsType(as::OperationCallExp).referredOperation.type;	
+	}
+	
+	map as::Argument from ArgumentCS {
+		name := name;
+	}	
+}
+
+
+
+disambiguation {
+	 NameExpCS {
+	 	isOpCallExp := roundedBrackets <> null;
+	 	isPropCallExp := roundedBrackets = null;
+	 }
+}
+
+nameresolution {
+		
+	named-element NamedElement name-property name; 	  /*from target */
+	name-referencer PathElementCS name-property name; /*from source */
+	name-qualifier PathNameCS name-segments-property path; /*from source */
+	
+	Root {
+		same-scope ownedPackages;
+	}
+	
+	Package {
+		named-element 
+			qualifying Package using ownedPackages,
+					   Class using ownedClasses;
+		
+		nested-scope ownedPackages, ownedClasses;
+	}
+	
+	Class {
+		named-element
+			qualifying Operation using ownedOperations,
+					   Property using ownedProperties;
+					   
+		nested-scope ownedOperations, ownedProperties;
+		
+		exports Operation using ownedOperations; 
+	    exports Property using ownedProperties; /* FIXME */
+	}
+	
+	Operation {
+		named-element
+			filtered by args : OrderedSet(Argument)
+				when args->size() = ownedParameters->size() and
+						args->forAll(x | x.name = ownedParameters->at(args->indexOf(x)).name);				
+	}
+	
+	Property {
+		named-element;
+	}
+}
+
+helpers {
+	
+}

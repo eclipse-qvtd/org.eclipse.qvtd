@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvts:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvts="http://www.eclipse.org/qvt/2015/Schedule"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/2015/Schedule java://org.eclipse.qvtd.pivot.schedule.SchedulePackage">
+  <datums xsi:type="qvts:ClassDatum" sub="//@datums.1 //@datums.3 //@datums.6 //@datums.8">
+    <type href="SourceBaseMM.ecore.oclas#T.sbase.SElement"/>
+    <propertyDatums sub="//@datums.3/@propertyDatums.0 //@datums.1/@propertyDatums.1 //@datums.6/@propertyDatums.0 //@datums.8/@propertyDatums.0">
+      <property href="SourceBaseMM.ecore.oclas#p.sbase.SElement.ast"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvts:ClassDatum" super="//@datums.0" requiredBy="//@actions.0 //@actions.4" dataParameter="//@actions.0/@parameters.0 //@actions.4/@parameters.0">
+    <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
+    <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+    <type href="SourceBaseMM.ecore.oclas#T.sbase.SRoot"/>
+    <propertyDatums requiredBy="//@actions.4">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+      <property href="SourceBaseMM.ecore.oclas#p.sbase.SRoot.ownedX"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.0/@propertyDatums.0" producedBy="//@actions.0" requiredBy="//@actions.4">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+      <property href="SourceBaseMM.ecore.oclas#p.sbase.SElement.ast"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvts:ClassDatum" producedBy="//@actions.0" dataParameter="//@actions.0/@results.0">
+    <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
+    <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.rightAS"/>
+    <type href="TargetBaseMM.ecore.oclas#T.tbase.TRoot"/>
+    <propertyDatums producedBy="//@actions.4" opposite="//@datums.5/@propertyDatums.2">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.rightAS"/>
+      <property href="TargetBaseMM.ecore.oclas#p.tbase.TRoot.ownedA"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvts:ClassDatum" super="//@datums.0" requiredBy="//@actions.1 //@actions.5 //@actions.6" dataParameter="//@actions.1/@parameters.0 //@actions.5/@parameters.0 //@actions.6/@parameters.0">
+    <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
+    <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+    <type href="SourceBaseMM.ecore.oclas#T.sbase.X"/>
+    <propertyDatums super="//@datums.0/@propertyDatums.0" producedBy="//@actions.1" requiredBy="//@actions.4 //@actions.5 //@actions.6">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+      <property href="SourceBaseMM.ecore.oclas#p.sbase.SElement.ast"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.5">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+      <property href="SourceBaseMM.ecore.oclas#p.sbase.X.name"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.6">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+      <property href="SourceBaseMM.ecore.oclas#p.sbase.X.ownsY"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvts:ClassDatum" sub="//@datums.5 //@datums.7">
+    <type href="TargetBaseMM.ecore.oclas#T.tbase.NamedElement"/>
+    <propertyDatums sub="//@datums.5/@propertyDatums.0 //@datums.7/@propertyDatums.0">
+      <property href="TargetBaseMM.ecore.oclas#p.tbase.NamedElement.name"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvts:ClassDatum" super="//@datums.4" producedBy="//@actions.1" dataParameter="//@actions.1/@results.0">
+    <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
+    <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.rightAS"/>
+    <type href="TargetBaseMM.ecore.oclas#T.tbase.A"/>
+    <propertyDatums super="//@datums.4/@propertyDatums.0" producedBy="//@actions.5">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.rightAS"/>
+      <property href="TargetBaseMM.ecore.oclas#p.tbase.NamedElement.name"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.6" opposite="//@datums.7/@propertyDatums.2">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.rightAS"/>
+      <property href="TargetBaseMM.ecore.oclas#p.tbase.A.ownsB"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.4">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.rightAS"/>
+      <property href="TargetBaseMM.ecore.oclas#p.tbase.A.TRoot"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvts:ClassDatum" super="//@datums.0" requiredBy="//@actions.2 //@actions.7 //@actions.8" dataParameter="//@actions.2/@parameters.0 //@actions.7/@parameters.0 //@actions.8/@parameters.0">
+    <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0"/>
+    <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+    <type href="SourceBaseMM.ecore.oclas#T.sbase.Y"/>
+    <propertyDatums super="//@datums.0/@propertyDatums.0" producedBy="//@actions.2" requiredBy="//@actions.6 //@actions.7 //@actions.8">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+      <property href="SourceBaseMM.ecore.oclas#p.sbase.SElement.ast"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.7">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+      <property href="SourceBaseMM.ecore.oclas#p.sbase.Y.name"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.8">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+      <property href="SourceBaseMM.ecore.oclas#p.sbase.Y.ownsZ"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvts:ClassDatum" super="//@datums.4" producedBy="//@actions.2" dataParameter="//@actions.2/@results.0">
+    <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1"/>
+    <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.rightAS"/>
+    <type href="TargetBaseMM.ecore.oclas#T.tbase.B"/>
+    <propertyDatums super="//@datums.4/@propertyDatums.0" producedBy="//@actions.7">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.rightAS"/>
+      <property href="TargetBaseMM.ecore.oclas#p.tbase.NamedElement.name"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8" opposite="//@datums.9/@propertyDatums.0">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.rightAS"/>
+      <property href="TargetBaseMM.ecore.oclas#p.tbase.B.ownsC"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.6">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.rightAS"/>
+      <property href="TargetBaseMM.ecore.oclas#p.tbase.B.A"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvts:ClassDatum" super="//@datums.0" requiredBy="//@actions.3" dataParameter="//@actions.3/@parameters.0">
+    <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0"/>
+    <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+    <type href="SourceBaseMM.ecore.oclas#T.sbase.Z"/>
+    <propertyDatums super="//@datums.0/@propertyDatums.0" producedBy="//@actions.3" requiredBy="//@actions.8">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.leftCS"/>
+      <property href="SourceBaseMM.ecore.oclas#p.sbase.SElement.ast"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvts:ClassDatum" producedBy="//@actions.3" dataParameter="//@actions.3/@results.0">
+    <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.1"/>
+    <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.rightAS"/>
+    <type href="TargetBaseMM.ecore.oclas#T.tbase.C"/>
+    <propertyDatums producedBy="//@actions.8">
+      <domain href="Source2TargetBase.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.1"/>
+      <typedModel href="Source2TargetBase.qvtp.qvtias#qT..Source2TargetBase_qvtp_qvtias.rightAS"/>
+      <property href="TargetBaseMM.ecore.oclas#p.tbase.C.B"/>
+    </propertyDatums>
+  </datums>
+  <actions xsi:type="qvts:MappingAction" productions="//@datums.2 //@datums.1/@propertyDatums.1" requisites="//@datums.1" order="1" parent="//@actions.9">
+    <parameterDerivations>
+      <secondaryParameter isLoop="true" dataParameter="//@actions.0/@parameters.0"/>
+    </parameterDerivations>
+    <parameters secondaryParameter="//@actions.0/@parameterDerivations.0/@secondaryParameter" datum="//@datums.1">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.cSRoot_2_TRoot.leftCS.guard.sRoot"/>
+    </parameters>
+    <results datum="//@datums.2">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.cSRoot_2_TRoot.rightAS.bottom.tRoot"/>
+    </results>
+    <mapping href="Source2TargetBase.qvtp.qvtias#m..Source2TargetBase_qvtp_qvtias.cSRoot_2_TRoot"/>
+  </actions>
+  <actions xsi:type="qvts:MappingAction" productions="//@datums.5 //@datums.3/@propertyDatums.0" requisites="//@datums.3" order="2" parent="//@actions.9">
+    <parameterDerivations>
+      <secondaryParameter isLoop="true" dataParameter="//@actions.1/@parameters.0"/>
+    </parameterDerivations>
+    <parameters secondaryParameter="//@actions.1/@parameterDerivations.0/@secondaryParameter" datum="//@datums.3">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.cX_2_A.leftCS.guard.x"/>
+    </parameters>
+    <results datum="//@datums.5">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.cX_2_A.rightAS.bottom.a"/>
+    </results>
+    <mapping href="Source2TargetBase.qvtp.qvtias#m..Source2TargetBase_qvtp_qvtias.cX_2_A"/>
+  </actions>
+  <actions xsi:type="qvts:MappingAction" productions="//@datums.7 //@datums.6/@propertyDatums.0" requisites="//@datums.6" order="4" parent="//@actions.9">
+    <parameterDerivations>
+      <secondaryParameter isLoop="true" dataParameter="//@actions.2/@parameters.0"/>
+    </parameterDerivations>
+    <parameters secondaryParameter="//@actions.2/@parameterDerivations.0/@secondaryParameter" datum="//@datums.6">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.cY_2_B.leftCS.guard.y"/>
+    </parameters>
+    <results datum="//@datums.7">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.cY_2_B.rightAS.bottom.b"/>
+    </results>
+    <mapping href="Source2TargetBase.qvtp.qvtias#m..Source2TargetBase_qvtp_qvtias.cY_2_B"/>
+  </actions>
+  <actions xsi:type="qvts:MappingAction" productions="//@datums.9 //@datums.8/@propertyDatums.0" requisites="//@datums.8" order="8" parent="//@actions.9">
+    <parameterDerivations>
+      <secondaryParameter isLoop="true" dataParameter="//@actions.3/@parameters.0"/>
+    </parameterDerivations>
+    <parameters secondaryParameter="//@actions.3/@parameterDerivations.0/@secondaryParameter" datum="//@datums.8">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.cZ_2_C.leftCS.guard.z"/>
+    </parameters>
+    <results datum="//@datums.9">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.cZ_2_C.rightAS.bottom.c"/>
+    </results>
+    <mapping href="Source2TargetBase.qvtp.qvtias#m..Source2TargetBase_qvtp_qvtias.cZ_2_C"/>
+  </actions>
+  <actions xsi:type="qvts:MappingAction" productions="//@datums.2/@propertyDatums.0 //@datums.5/@propertyDatums.2" requisites="//@datums.1 //@datums.1/@propertyDatums.0 //@datums.3/@propertyDatums.0 //@datums.1/@propertyDatums.1"
+      order="3" parent="//@actions.9">
+    <parameterDerivations>
+      <secondaryParameter isLoop="true" dataParameter="//@actions.4/@parameters.0"/>
+    </parameterDerivations>
+    <parameters secondaryParameter="//@actions.4/@parameterDerivations.0/@secondaryParameter" datum="//@datums.1">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.uTRoot_ownedA.leftCS.guard.sRoot"/>
+    </parameters>
+    <mapping href="Source2TargetBase.qvtp.qvtias#m..Source2TargetBase_qvtp_qvtias.uTRoot_ownedA"/>
+  </actions>
+  <actions xsi:type="qvts:MappingAction" productions="//@datums.5/@propertyDatums.0" requisites="//@datums.3 //@datums.3/@propertyDatums.1 //@datums.3/@propertyDatums.0"
+      order="5" parent="//@actions.9">
+    <parameterDerivations>
+      <secondaryParameter isLoop="true" dataParameter="//@actions.5/@parameters.0"/>
+    </parameterDerivations>
+    <parameters secondaryParameter="//@actions.5/@parameterDerivations.0/@secondaryParameter" datum="//@datums.3">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.uA_name.leftCS.guard.x"/>
+    </parameters>
+    <mapping href="Source2TargetBase.qvtp.qvtias#m..Source2TargetBase_qvtp_qvtias.uA_name"/>
+  </actions>
+  <actions xsi:type="qvts:MappingAction" productions="//@datums.5/@propertyDatums.1 //@datums.7/@propertyDatums.2" requisites="//@datums.3 //@datums.3/@propertyDatums.2 //@datums.6/@propertyDatums.0 //@datums.3/@propertyDatums.0"
+      order="6" parent="//@actions.9">
+    <parameterDerivations>
+      <secondaryParameter isLoop="true" dataParameter="//@actions.6/@parameters.0"/>
+    </parameterDerivations>
+    <parameters secondaryParameter="//@actions.6/@parameterDerivations.0/@secondaryParameter" datum="//@datums.3">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.uA_ownsB.leftCS.guard.x"/>
+    </parameters>
+    <mapping href="Source2TargetBase.qvtp.qvtias#m..Source2TargetBase_qvtp_qvtias.uA_ownsB"/>
+  </actions>
+  <actions xsi:type="qvts:MappingAction" productions="//@datums.7/@propertyDatums.0" requisites="//@datums.6 //@datums.6/@propertyDatums.1 //@datums.6/@propertyDatums.0"
+      order="7" parent="//@actions.9">
+    <parameterDerivations>
+      <secondaryParameter isLoop="true" dataParameter="//@actions.7/@parameters.0"/>
+    </parameterDerivations>
+    <parameters secondaryParameter="//@actions.7/@parameterDerivations.0/@secondaryParameter" datum="//@datums.6">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.uB_name.leftCS.guard.y"/>
+    </parameters>
+    <mapping href="Source2TargetBase.qvtp.qvtias#m..Source2TargetBase_qvtp_qvtias.uB_name"/>
+  </actions>
+  <actions xsi:type="qvts:MappingAction" productions="//@datums.7/@propertyDatums.1 //@datums.9/@propertyDatums.0" requisites="//@datums.6 //@datums.8/@propertyDatums.0 //@datums.6/@propertyDatums.2 //@datums.6/@propertyDatums.0"
+      order="9" parent="//@actions.9">
+    <parameterDerivations>
+      <secondaryParameter isLoop="true" dataParameter="//@actions.8/@parameters.0"/>
+    </parameterDerivations>
+    <parameters secondaryParameter="//@actions.8/@parameterDerivations.0/@secondaryParameter" datum="//@datums.6">
+      <variable href="Source2TargetBase.qvtp.qvtias#qV..Source2TargetBase_qvtp_qvtias.uB_ownsC.leftCS.guard.y"/>
+    </parameters>
+    <mapping href="Source2TargetBase.qvtp.qvtias#m..Source2TargetBase_qvtp_qvtias.uB_ownsC"/>
+  </actions>
+  <actions xsi:type="qvts:MappingAction" children="//@actions.0 //@actions.1 //@actions.4 //@actions.2 //@actions.5 //@actions.6 //@actions.7 //@actions.3 //@actions.8"/>
+</qvts:Schedule>

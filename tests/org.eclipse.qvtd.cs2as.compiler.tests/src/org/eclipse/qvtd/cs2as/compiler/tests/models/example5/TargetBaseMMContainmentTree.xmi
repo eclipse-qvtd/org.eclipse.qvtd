@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree ../../../../../../../../../../org.eclipse.qvtd.compiler/model/ECoreContainmentTree.ecore">
+  <eCoreContainemntTree:Node name="A" parent="/3" children="/1" superTypes="/4">
+    <element href="TargetBaseMM.ecore#//A"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="B" parent="/0" children="/2" superTypes="/4">
+    <element href="TargetBaseMM.ecore#//B"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="C" parent="/1">
+    <element href="TargetBaseMM.ecore#//C"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="TRoot" children="/0">
+    <element href="TargetBaseMM.ecore#//TRoot"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="NamedElement" subTypes="/0 /1">
+    <element href="TargetBaseMM.ecore#//NamedElement"/>
+  </eCoreContainemntTree:Node>
+</xmi:XMI>

@@ -12,13 +12,13 @@
  */
 package example1.env.util;
 
-import example1.env.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.pivot.evaluation.Executor;
+
+import example1.env.Env4CG;
 import example1.env.Environment;
 import example1.env.EnvironmentPackage;
 

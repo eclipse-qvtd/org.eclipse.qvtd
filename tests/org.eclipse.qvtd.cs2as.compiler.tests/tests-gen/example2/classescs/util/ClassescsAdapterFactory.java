@@ -12,6 +12,7 @@
  */
 package example2.classescs.util;
 
+import example2.classescs.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -109,6 +110,26 @@ public class ClassescsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRootCS(RootCS object) {
 				return createRootCSAdapter();
+			}
+			@Override
+			public Adapter casePropertyCS(PropertyCS object) {
+				return createPropertyCSAdapter();
+			}
+			@Override
+			public Adapter caseOperationCS(OperationCS object) {
+				return createOperationCSAdapter();
+			}
+			@Override
+			public Adapter caseNameExpCS(NameExpCS object) {
+				return createNameExpCSAdapter();
+			}
+			@Override
+			public Adapter caseRoundedBracketClause(RoundedBracketClause object) {
+				return createRoundedBracketClauseAdapter();
+			}
+			@Override
+			public Adapter caseArgumentCS(ArgumentCS object) {
+				return createArgumentCSAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -225,6 +246,76 @@ public class ClassescsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRootCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example2.classescs.PropertyCS <em>Property CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example2.classescs.PropertyCS
+	 * @generated
+	 */
+	public Adapter createPropertyCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example2.classescs.OperationCS <em>Operation CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example2.classescs.OperationCS
+	 * @generated
+	 */
+	public Adapter createOperationCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example2.classescs.NameExpCS <em>Name Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example2.classescs.NameExpCS
+	 * @generated
+	 */
+	public Adapter createNameExpCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example2.classescs.RoundedBracketClause <em>Rounded Bracket Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example2.classescs.RoundedBracketClause
+	 * @generated
+	 */
+	public Adapter createRoundedBracketClauseAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example2.classescs.ArgumentCS <em>Argument CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example2.classescs.ArgumentCS
+	 * @generated
+	 */
+	public Adapter createArgumentCSAdapter() {
 		return null;
 	}
 

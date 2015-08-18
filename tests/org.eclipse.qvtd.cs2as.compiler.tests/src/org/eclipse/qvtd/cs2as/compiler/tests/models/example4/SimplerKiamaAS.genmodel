@@ -2,19 +2,17 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.cs2as.compiler.tests/tests-gen"
     modelPluginID="org.eclipse.qvtd.cs2as.compiler.tests" modelName="SimplerKiamaAS"
-    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="7.0"
-    copyrightFields="false" runtimeVersion="2.7" operationReflection="true" importOrganizing="true"
-    pluginKey="">
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="7.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>SimplerKiamaAS.ecore</foreignModel>
-  <genPackages prefix="Kiamaas" basePackage="example4" resource="XMI" disposableProviderFactory="true"
+  <genPackages prefix="Kiamaas" basePackage="example4" disposableProviderFactory="true"
       ecorePackage="SimplerKiamaAS.ecore#/">
     <genClasses ecoreClass="SimplerKiamaAS.ecore#//Top">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimplerKiamaAS.ecore#//Top/node"/>
     </genClasses>
     <genClasses image="false" ecoreClass="SimplerKiamaAS.ecore#//Node">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimplerKiamaAS.ecore#//Node/height"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimplerKiamaAS.ecore#//Node/deep"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimplerKiamaAS.ecore#//Node/depth"/>
     </genClasses>
     <genClasses ecoreClass="SimplerKiamaAS.ecore#//Composite">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimplerKiamaAS.ecore#//Composite/child"/>

@@ -1,0 +1,98 @@
+source _source : 'SourceMM1.ecore#/'
+target _target : 'TargetMM1.ecore#/'
+
+mappings {
+	map _target::TRoot from SRoot {
+		ownedA := ownedX.resolve;
+	}
+	
+	map _target::A1 from X {
+		when isA1;
+		name := name;
+		ownsB := ownsY.oclAsType(Y1).resolve;
+	}
+	
+	
+	map _target::A2 from X {
+		when isA2;
+		name := name;
+		ownsC := ownsY.oclAsType(Y2).resolve;
+	}
+
+	map _target::A3 from X {
+		when isA3;
+		name := name;
+		ownsC := ownsY.oclAsType(Y2).resolve;
+	}
+	
+	map _target::B from Y1 {
+		name := name;
+		ownsD := ownsZ.resolve;
+	}	
+
+	map _target::C from Y2 {
+		name := name;
+		ownsD := ownsZ.resolve;
+	}
+	
+	map _target::D from Z {
+		when parentIsY1;
+		toA := toY.oclAsType(_'source'::Y1).resolve.toA1;
+		refsB := if refers = null then null else resolve.lookup(B,refers) endif;
+	}
+	
+	
+	map _target::D from Z {
+		when parentIsY2;
+		toA := toY.oclAsType(_'source'::Y2).resolve.toA2;
+		refsC := if refers = null then null else resolve.lookup(C,refers) endif;
+	}
+}
+
+disambiguation {
+	X {
+		isA1 := isA1;
+		isA2 := isA2;
+		isA3 := not(isA1 or isA2);
+	}
+	
+	Z {
+		parentIsY1 := oclContainer().oclIsTypeOf(Y1);
+		parentIsY2 := oclContainer().oclIsTypeOf(Y2);		
+	}
+}
+
+nameresolution {
+	
+	named-element NamedElement name-property name; 	  /*from target */
+	name-referencer PathElementCS name-property name; /*from source */
+	name-qualifier PathNameCS name-segments-property path; /*from source */
+		
+	TRoot {
+		new-scope ownsA;
+	}
+	
+	A1 {
+		named-element /*name-property name*/
+			qualifying B using ownsB;
+		
+		new-scope following ownsB for ownsB;
+	}
+	
+	A2 {
+		named-element
+			qualifying C using ownsC;		
+		
+		new-scope following ownsC for ownsC;
+	}
+	
+	B {
+		named-element;
+	}
+	
+	C {
+		named-element;
+	}
+	
+	D{} -- FIXME, just to generate the env method
+}

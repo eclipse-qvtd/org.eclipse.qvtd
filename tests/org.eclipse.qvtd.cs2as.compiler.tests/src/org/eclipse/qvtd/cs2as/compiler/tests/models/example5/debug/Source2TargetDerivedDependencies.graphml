@@ -1,0 +1,726 @@
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:y="http://www.yworks.com/xml/graphml"
+   xmlns:yed="http://www.yworks.com/xml/yed/3"
+   xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd">
+  <key attr.name="description" attr.type="string" for="node" id="d5"/>
+  <key for="node" id="d6" yfiles.type="nodegraphics"/>
+  <key attr.name="description" attr.type="string" for="edge" id="d8"/>
+  <key for="edge" id="d9" yfiles.type="edgegraphics"/>
+  <graph edgedefault="directed" id="G">
+    <node id="n0">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="57.51" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">SElement</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n1">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="11.715" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#268bd2" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#268bd2">W</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e0" source="n1" target="n0">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n2">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="9.584999999999999" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#d33682" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#d33682">D</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n3">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="7.455" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#268bd2" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#268bd2">X</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e1" source="n3" target="n0">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n4">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="14.91" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#268bd2" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#268bd2">X2</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e2" source="n4" target="n3">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n5">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="92.655" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">NamedElement</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n6">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="7.455" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#d33682" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#d33682">A</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e3" source="n6" target="n5">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n7">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="14.91" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#d33682" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#d33682">A2</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e4" source="n7" target="n6">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n8">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="7.455" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#268bd2" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#268bd2">Y</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e5" source="n8" target="n0">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n9">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="14.91" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#268bd2" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#268bd2">Y2</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e6" source="n9" target="n8">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n10">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="8.52" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#d33682" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#d33682">B</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e7" source="n10" target="n5">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n11">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="15.975" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#d33682" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#d33682">B2</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e8" source="n11" target="n10">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n12">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="36.21" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">SRoot</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e9" source="n12" target="n0">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n13">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="35.144999999999996" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#d33682" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#d33682">TRoot</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n14">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="7.455" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#586e75" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#586e75">Z</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e10" source="n14" target="n0">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#93a1a1" type="dotted" width="1.0"/>
+          <y:Arrows source="none" target="delta"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n15">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="17.04" width="9.584999999999999" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#d33682" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#d33682">C</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n16">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="54.755" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">cW_2_D
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e11" source="n16" target="n2">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#657b83" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e12" source="n1" target="n16">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n17">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="64.07499999999999" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">cX2_2_A2
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e13" source="n17" target="n7">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#657b83" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e14" source="n4" target="n17">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n18">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="65.24" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">cY2_2_B2
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e15" source="n18" target="n11">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#657b83" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e16" source="n9" target="n18">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n19">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="69.9" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">uA2_name
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e17" source="n4" target="n19">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n20">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="76.88999999999999" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">uA2_ownsB
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e18" source="n4" target="n20">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n21">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="78.05499999999999" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">uA2_ownsD
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e19" source="n4" target="n21">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n22">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="71.065" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">uB2_name
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e20" source="n9" target="n22">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n23">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="122.32499999999999" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">uB2_anotherName
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e21" source="n9" target="n23">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n24">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="79.22" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">uB2_ownsC
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e22" source="n9" target="n24">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n25">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="109.51" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">cSRoot_2_TRoot
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e23" source="n25" target="n13">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#657b83" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e24" source="n12" target="n25">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n26">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="47.765" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">cX_2_A
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e25" source="n26" target="n6">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#657b83" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e26" source="n3" target="n26">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n27">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="48.93" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">cY_2_B
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e27" source="n27" target="n10">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#657b83" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e28" source="n8" target="n27">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n28">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="50.09499999999999" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">cZ_2_C
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e29" source="n28" target="n15">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#657b83" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e30" source="n14" target="n28">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n29">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="106.01499999999999" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">uTRoot_ownedA
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e31" source="n12" target="n29">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n30">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="61.745000000000005" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">uA_name
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e32" source="n3" target="n30">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n31">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="68.735" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">uA_ownsB
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e33" source="n3" target="n31">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n32">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="62.91" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">uB_name
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e34" source="n8" target="n32">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <node id="n33">
+      <data key="d5"/>
+      <data key="d6">
+        <y:ShapeNode>
+          <y:Geometry height="34.08" width="71.065" x="0.0" y="0.0"/>
+          <y:Fill color="#eee8d5" transparent="false"/>
+          <y:BorderStyle color="#cb4b16" type="line" width="1.0"/>
+          <y:NodeLabel textColor="#cb4b16">uB_ownsC
+(0)</y:NodeLabel>
+          <y:Shape type="hexagon"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e35" source="n8" target="n33">
+      <data key="d9">
+        <y:PolyLineEdge>
+          <y:LineStyle color="#859900" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+  </graph>
+</graphml>

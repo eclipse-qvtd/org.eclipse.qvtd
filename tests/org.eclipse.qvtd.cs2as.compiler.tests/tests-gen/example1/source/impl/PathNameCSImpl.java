@@ -12,21 +12,18 @@
  */
 package example1.source.impl;
 
-import example1.source.PathElementCS;
-import example1.source.PathNameCS;
-import example1.source.SourcePackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import example1.source.PathElementCS;
+import example1.source.PathNameCS;
+import example1.source.SourcePackage;
 
 /**
  * <!-- begin-user-doc -->

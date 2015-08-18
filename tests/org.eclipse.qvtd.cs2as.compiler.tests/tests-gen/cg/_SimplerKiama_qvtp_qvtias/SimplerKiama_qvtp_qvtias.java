@@ -560,8 +560,8 @@ public class SimplerKiama_qvtp_qvtias extends AbstractCS2ASTransformer
             /*@NonNull*/ /*@Thrown*/ IntegerValue symbol_0;
             if (oclIsKindOf) {
                 final /*@NonNull*/ /*@Thrown*/ Node oclAsType_0 = ClassUtil.nonNullState((Node)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer, TYP_kiamaas_c_c_Node_0));
-                objectManager.getting(oclAsType_0, KiamaasPackage.Literals.NODE__DEEP);
-                final /*@Thrown*/ int deep = oclAsType_0.getDeep();
+                objectManager.getting(oclAsType_0, KiamaasPackage.Literals.NODE__DEPTH);
+                final /*@Thrown*/ int deep = oclAsType_0.getDepth();
                 final /*@Nullable*/ /*@Thrown*/ IntegerValue BOXED_deep = ValueUtil.integerValueOf(deep);
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue sum = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(BOXED_deep, INT_1);
                 symbol_0 = sum;
@@ -571,8 +571,8 @@ public class SimplerKiama_qvtp_qvtias extends AbstractCS2ASTransformer
             }
             // property assignments
             final int ECORE_symbol_0 = ValueUtil.intValueOf(symbol_0);
-            oclAsType.setDeep(ECORE_symbol_0);
-            objectManager.assigned(oclAsType, KiamaasPackage.Literals.NODE__DEEP, ECORE_symbol_0);
+            oclAsType.setDepth(ECORE_symbol_0);
+            objectManager.assigned(oclAsType, KiamaasPackage.Literals.NODE__DEPTH, ECORE_symbol_0);
             return true;
         }
         
@@ -679,8 +679,8 @@ public class SimplerKiama_qvtp_qvtias extends AbstractCS2ASTransformer
             /*@NonNull*/ /*@Thrown*/ IntegerValue symbol_0;
             if (oclIsKindOf) {
                 final /*@NonNull*/ /*@Thrown*/ Node oclAsType_0 = ClassUtil.nonNullState((Node)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer, TYP_kiamaas_c_c_Node_0));
-                objectManager.getting(oclAsType_0, KiamaasPackage.Literals.NODE__DEEP);
-                final /*@Thrown*/ int deep = oclAsType_0.getDeep();
+                objectManager.getting(oclAsType_0, KiamaasPackage.Literals.NODE__DEPTH);
+                final /*@Thrown*/ int deep = oclAsType_0.getDepth();
                 final /*@Nullable*/ /*@Thrown*/ IntegerValue BOXED_deep = ValueUtil.integerValueOf(deep);
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue sum = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(BOXED_deep, INT_1);
                 symbol_0 = sum;
@@ -690,8 +690,8 @@ public class SimplerKiama_qvtp_qvtias extends AbstractCS2ASTransformer
             }
             // property assignments
             final int ECORE_symbol_0 = ValueUtil.intValueOf(symbol_0);
-            oclAsType.setDeep(ECORE_symbol_0);
-            objectManager.assigned(oclAsType, KiamaasPackage.Literals.NODE__DEEP, ECORE_symbol_0);
+            oclAsType.setDepth(ECORE_symbol_0);
+            objectManager.assigned(oclAsType, KiamaasPackage.Literals.NODE__DEPTH, ECORE_symbol_0);
             return true;
         }
         

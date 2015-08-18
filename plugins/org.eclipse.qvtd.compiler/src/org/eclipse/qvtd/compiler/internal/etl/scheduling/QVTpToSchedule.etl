@@ -86,9 +86,11 @@ rule VariableToDataParameter
     transform v : QVTp!Variable
     to dp : QVTs!DataParameter {
         
+        guard : v.oppositePattern().isDefined()
+        
         //v.name.println("VariableToDataParameter ");
         dp.variable = v;
-        dp.datum ::= v.type;            
+        dp.datum ::= v.type;
     }
 
 /****u* QVTpToSchedule/ClassToClassDatum
@@ -167,13 +169,13 @@ rule OppositePropertyCallExpToPropertyDatum
 
 -- greedy to also consider MiddlePropertyAssignment
 // FIXME opposites (nonNavigable) will need different treat. See Bug 454555
-@greedy    
-rule PropertyAssignmentToPropertyDatum 
+@greedy
+rule PropertyAssignmentToPropertyDatum
     transform pAssign : QVTp!PropertyAssignment
     to pDatum : QVTs!PropertyDatum {
 
-		// guard: the referred property doesn't have any property datum        
-		guard { 
+		// guard: the referred property doesn't have any property datum
+		guard {
 			var propContext = pAssign.getContextType();
 			var refProperty = pAssign.targetProperty;
        		return refProperty.propertyDatumNotCreated(propContext);
@@ -265,7 +267,7 @@ operation QVTp!Type analyseOclContainerCall() : OrderedSet(QVTp!PropertyDatum) {
 	var result =  OrderedSet{};	
 	for (parentClass in self.getContainingTypes()) {
 		for (prop in parentClass.ownedProperties.select(x | x.isComposite)) {
-			if (self.getAllSuperClassesIncludingSelf().includes(prop.getElementType())) {
+			if (self.getAllSuperAndSubClassesIncludingSelf().includes(prop.getElementType())) {
 				// FIXME I'm getting non-deterministic QVTs 2 Graphml transformations
 				// when there are references to non-navigable (inexistent) properties
 				// in .oclas. Example3: Kiama
@@ -403,6 +405,11 @@ operation QVTp!Type getAllSubClasses() : OrderedSet {
 @cached
 operation QVTp!Type getAllSubClassesIncludingSelf() : OrderedSet {
 	return self.getAllSubClasses().including(self);
+}
+
+@cached
+operation QVTp!Type getAllSuperAndSubClassesIncludingSelf() : OrderedSet {
+	return self.getAllSuperClassesIncludingSelf().includingAll(self.getAllSubClasses());
 }
 
 @cached
@@ -553,6 +560,13 @@ operation QVTp!CallExp computeContexts(variable2BoundContext : Map) : OrderedSet
 }
 
 @cached
+operation QVTp!ShadowExp computeContexts(variable2BoundContext : Map) : OrderedSet(QVTp!Type) {
+	var result = OrderedSet{};
+	result.add(self.type);
+	return result;
+}
+
+@cached
 operation QVTp!Operation isOclContainerOp() : Boolean {
 	// FIXME make this check more robust
 	return self.name = 'oclContainer' and self.ownedParameters.isEmpty();
@@ -589,7 +603,12 @@ operation QVTp!Type getContainingTypes() : OrderedSet(QVTp!PropertyType) {
 	if (node == null) {
 		return result;
 	} else {
-		for (parentNode in node.parent) {
+		// We also consider subtypes, due to a more conservative approach:
+		// If we want to compute possible containers of A, since the actual element could
+		// be a subtype B/C, possible containers of B/C will also be required 
+		var nodeAndSubtypes = node.asOrderedSet.closure(x | x.subTypes).including(node);
+		var allParents = nodeAndSubtypes.collect(x | x.parent).flatten();
+		for (parentNode in allParents) {
 			result.add(parentNode.getClass());
 		}
 		return result;

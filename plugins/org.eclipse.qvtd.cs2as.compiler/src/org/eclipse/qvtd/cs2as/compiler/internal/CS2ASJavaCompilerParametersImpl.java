@@ -16,46 +16,34 @@ import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 
 public class CS2ASJavaCompilerParametersImpl implements CS2ASJavaCompilerParameters  {
 
-	private @NonNull String envClassName;
-	private @NonNull String visitorClassName;
+	private @NonNull String lookupSolverName;
 	private @Nullable String savePath;
 	private @NonNull String packagePrefix;
-	private @NonNull String namedElementClassName;
+	private @NonNull String lookupResultName;
 	
-	public CS2ASJavaCompilerParametersImpl(@NonNull String envClassName, @NonNull String visitorClassName,
-			@Nullable String namedElementClassName,
+	public CS2ASJavaCompilerParametersImpl(@NonNull String lookupSolverClassName,
+			@Nullable String lookupResultClassName,
 			@Nullable String savePath, @NonNull String packagePrefix) {
-		this.envClassName = envClassName;
-		this.visitorClassName = visitorClassName;
+		this.lookupSolverName = lookupSolverClassName;
 		this.savePath = savePath;
 		this.packagePrefix = packagePrefix;
-		this.namedElementClassName = namedElementClassName;
+		this.lookupResultName = lookupResultClassName;
 	}
 	
 	/**
-	 * @return the fully qualified name of the environment class
+	 * @return the fully qualified name of the lookup resolver class
 	 */
 	@NonNull
-	public String getEnviromentClassName() {
-		return envClassName;
+	public String getLookupSolverClassName() {
+		return lookupSolverName;
 	}
 	
 	/**
-	 * @return the fully qualified name of the lookup visitor class
-	 */
-	@NonNull
-	public String getVisitorClassName() {
-		return visitorClassName;
-	}
-	
-	/**
-	 * If there is no common NamedElement class name. Object should be used by the CG
-	 * 
-	 * @return the fully qualified name of the common named element class
+	 * @return the fully qualified name of the lookup result class
 	 */
 	@Nullable
-	public String getNamedElementClassName() {
-		return namedElementClassName; 
+	public String getLookupResultClassName() {
+		return lookupResultName; 
 	}
 
 	/**

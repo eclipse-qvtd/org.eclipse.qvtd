@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link example4.kiamaas.Node#getHeight <em>Height</em>}</li>
- *   <li>{@link example4.kiamaas.Node#getDeep <em>Deep</em>}</li>
+ *   <li>{@link example4.kiamaas.Node#getDepth <em>Depth</em>}</li>
  * </ul>
  *
  * @see example4.kiamaas.KiamaasPackage#getNode()
@@ -31,12 +31,12 @@ public interface Node extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Height</em>' attribute.
-	 * @see #setHeight(int)
+	 * @see #setHeight(Integer)
 	 * @see example4.kiamaas.KiamaasPackage#getNode_Height()
 	 * @model
 	 * @generated
 	 */
-	int getHeight();
+	Integer getHeight();
 
 	/**
 	 * Sets the value of the '{@link example4.kiamaas.Node#getHeight <em>Height</em>}' attribute.
@@ -46,32 +46,32 @@ public interface Node extends EObject {
 	 * @see #getHeight()
 	 * @generated
 	 */
-	void setHeight(int value);
+	void setHeight(Integer value);
 
 	/**
-	 * Returns the value of the '<em><b>Deep</b></em>' attribute.
+	 * Returns the value of the '<em><b>Depth</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Deep</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Depth</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Deep</em>' attribute.
-	 * @see #setDeep(int)
-	 * @see example4.kiamaas.KiamaasPackage#getNode_Deep()
+	 * @return the value of the '<em>Depth</em>' attribute.
+	 * @see #setDepth(Integer)
+	 * @see example4.kiamaas.KiamaasPackage#getNode_Depth()
 	 * @model
 	 * @generated
 	 */
-	int getDeep();
+	Integer getDepth();
 
 	/**
-	 * Sets the value of the '{@link example4.kiamaas.Node#getDeep <em>Deep</em>}' attribute.
+	 * Sets the value of the '{@link example4.kiamaas.Node#getDepth <em>Depth</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Deep</em>' attribute.
-	 * @see #getDeep()
+	 * @param value the new value of the '<em>Depth</em>' attribute.
+	 * @see #getDepth()
 	 * @generated
 	 */
-	void setDeep(int value);
+	void setDepth(Integer value);
 
 } // Node

@@ -12,14 +12,14 @@
  */
 package example1.source.impl;
 
-import example1.source.PathElementCS;
-import example1.source.PathNameCS;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import example1.source.PathElementCS;
+import example1.source.PathNameCS;
 import example1.source.SElement;
 import example1.source.SRoot;
 import example1.source.SourceFactory;

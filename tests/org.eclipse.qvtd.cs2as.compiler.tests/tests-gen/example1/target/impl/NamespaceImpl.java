@@ -12,15 +12,13 @@
  */
 package example1.target.impl;
 
-import example1.target.Namespace;
-import example1.target.TargetPackage;
-
-import example1.target.util.Visitor;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import example1.target.Namespace;
+import example1.target.TargetPackage;
+import example1.target.util.Visitor;
 
 /**
  * <!-- begin-user-doc -->

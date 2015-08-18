@@ -34,4 +34,5 @@ public class LeafImpl extends NodeImpl implements Leaf {
 		return KiamaasPackage.Literals.LEAF;
 	}
 
+
 } //LeafImpl

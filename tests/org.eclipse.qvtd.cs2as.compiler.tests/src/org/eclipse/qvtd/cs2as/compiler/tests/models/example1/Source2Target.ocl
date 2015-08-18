@@ -1,68 +1,65 @@
-import 'SourceMM1.ecore'
-import 'TargetMM1.ecore'
-import 'SourceDisambiguation.ocl'
-import 'TargetLookup.ocl'
-
-
-package source
+import  _source : 'SourceMM1.ecore#/'
+import  _target : 'TargetMM1.ecore#/'
+import 'Source2TargetLookup.ocl'
+import 'Source2TargetDisambiguation.ocl'
+package _source
 
 context SRoot
-def : ast() : target::TRoot =
-	target::TRoot {
-		ownedA = ownedX.ast()
+def : ast() : _target::TRoot =
+	_target::TRoot {
+		ownedA = ownedX.ast() 
 	}
-
 context X
-def : ast() : target::A =
-	invalid -- To be overriden
-
-context X
-def : ast() : target::A =
-	if disambiguatesToA1()
-	then target::A1 {
-		name = name,
-		ownsB = ownsY.oclAsType(Y1).ast()
+def : ast() : _target::A =
+	if isA1()
+	then _target::A1 {
+		name = name, 
+	ownsB = ownsY.oclAsType(Y1).ast() 
 	}
-	else if disambiguatesToA2() 
-		then  target::A2 {
-			name = name,
-			ownsC = ownsY.oclAsType(Y2).ast()
+	else
+		if isA2()
+		then _target::A2 {
+			name = name, 
+		ownsC = ownsY.oclAsType(Y2).ast() 
 		}
-		else target::A3 {
-			name = name,
-			ownsC = ownsY.oclAsType(Y2).ast()
-		}
-	endif endif
-
-context Y1	
-def : ast() : target::B =
-	target::B {
-		ownsD = ownsZ.ast(),
-		name = name
-	}
-	
-context Y2	
-def : ast() : target::C =
-	target::C {
-		ownsD = ownsZ.ast(),
-		name = name
-	}
-
-context Z
-def : ast() : target::D =
-	invalid -- To be overriden
-	
-context Z
-def : ast() : target::D =
-	if toY.oclIsKindOf(source::Y1)
-	then target::D {
-		toA = toY.oclAsType(source::Y1).ast().toA1,
-		refsB = ast().lookupB(self)
-	}
-	else target::D {
-		toA = toY.oclAsType(source::Y2).ast().toA2,
-		refsC = ast().lookupC(self)
-	}
+		else
+			if isA3()
+			then _target::A3 {
+				name = name, 
+			ownsC = ownsY.oclAsType(Y2).ast() 
+			}
+			else
+				invalid
+			endif
+		endif
 	endif
-	
+context Y1
+def : ast() : _target::B =
+	_target::B {
+		name = name, 
+	ownsD = ownsZ.ast() 
+	}
+context Y2
+def : ast() : _target::C =
+	_target::C {
+		name = name, 
+	ownsD = ownsZ.ast() 
+	}
+context Z
+def : ast() : _target::D =
+	if parentIsY1()
+	then _target::D {
+		toA = toY.oclAsType(_'source'::Y1).ast().toA1, 
+	refsB = if refers = null then null else ast().lookupB(refers) endif 
+	}
+	else
+		if parentIsY2()
+		then _target::D {
+			toA = toY.oclAsType(_'source'::Y2).ast().toA2, 
+		refsC = if refers = null then null else ast().lookupC(refers) endif 
+		}
+		else
+			invalid
+		endif
+	endif
 endpackage

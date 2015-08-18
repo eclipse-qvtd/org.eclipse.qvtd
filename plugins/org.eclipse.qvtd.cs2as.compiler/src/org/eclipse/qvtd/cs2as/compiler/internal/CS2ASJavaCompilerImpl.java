@@ -14,7 +14,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
@@ -136,7 +135,8 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 	protected static class CS2ASCG2JavaVisitor extends QVTiCG2JavaVisitor implements CS2ASCGModelVisitor<Boolean>
 	{
-	
+		private static final String LOOKUP_SOLVER_FIELD_NAME = "lookupSolver";
+		
 		protected CS2ASCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @NonNull CGPackage cgPackage, @Nullable List<CGValuedElement> sortedGlobals) {
 			super(codeGenerator, cgPackage, sortedGlobals);
 		}
@@ -183,23 +183,29 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 					return false;
 				}
 			}
-			
-			String envClassName = params.getEnviromentClassName();
-			String envClassSymbol = getSymbolName(envClassName + cgCall.hashCode(), "_lookupEnv");
-			js.appendClassReference(envClassName);
+						
+			 
+			String resultClassName = params.getLookupResultClassName();
+			String resultSymbol = getSymbolName(resultClassName + cgCall.hashCode(), "_lookupResult");
+
+			js.appendClassReference(resultClassName);
+			js.append("<");
+			js.appendClassReference(context.getUnboxedDescriptor(ClassUtil.nonNullState(cgCall.getTypeId().getElementId())));
+			js.append(">");
 			js.append(" ");
-			js.append(envClassSymbol);
-			js.append(" = new ");
-			js.appendClassReference(envClassName);
+			js.append(resultSymbol);	
+			js.append(" = ");				
+			js.append(LOOKUP_SOLVER_FIELD_NAME);
+			js.append(".");
+			js.append(cgCall.getName());
+			//js.append(cgCall.getReferredOperation().getType().getName());
 			js.append("(");
-			js.append(JavaConstants.EXECUTOR_NAME);
-			js.append(",");
+			js.appendReferenceTo(cgSource);
 			List<Parameter> pParameters = cgCall.getReferredOperation().getOwnedParameters();
 			int iMax = Math.min(pParameters.size(), cgArguments.size());
+
 			for (int i = 0; i < iMax; i++) {
-				if ((i > 0)) {
-					js.append(", ");
-				}
+				js.append(", ");
 				CGValuedElement cgArgument = cgArguments.get(i);
 				Parameter pParameter = pParameters.get(i);
 				CGTypeId cgTypeId = analyzer.getTypeId(pParameter.getTypeId());
@@ -209,29 +215,6 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			}
 			js.append(");\n");
 			
-			String visitorClassName = params.getVisitorClassName();
-			String visitorClassSymbol = getSymbolName(visitorClassName + cgCall.hashCode(), "_lookupVisitor");
-			js.appendClassReference(visitorClassName);
-			js.append(" ");
-			js.append(visitorClassSymbol);
-			js.append(" = new ");
-			js.appendClassReference(params.getVisitorClassName());
-			js.append("(");
-			js.append(envClassSymbol);
-			js.append(");\n");
-			
-			// FIXME what if there is not common named element class name ?
-			String namedElemClassName = params.getNamedElementClassName();
-			String resultSymbol = getSymbolName(namedElemClassName + cgCall.hashCode(), "_lookupResult");
-			js.appendClassReference(EList.class, false, namedElemClassName); 
-			js.append(" ");
-			js.append(resultSymbol);	
-			js.append(" = ");				
-			js.appendReferenceTo(cgSource);
-			js.append(".accept(");
-			js.append(visitorClassSymbol);
-			js.append(").getNamedElements();\n");
-			
 			js.appendClassReference(typeDescriptor);
 			js.append(" ");
 			js.appendReferenceTo(cgCall);
@@ -239,12 +222,10 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			js.append("if ("+resultSymbol+".size() == 1) {\n");
 			js.pushIndentation(null);
 			js.appendReferenceTo(cgCall);
-			js.append(" = (");
-			js.appendClassReference(typeDescriptor);
-			js.append(")");
-			js.append(resultSymbol+".get(0);\n");
+			js.append(" = ");
+			js.append(resultSymbol+".getSingleResult();\n");
 			js.popIndentation();
-			// TODO what about ambigous error report ?
+			// TODO what about ambiguous error report ?
 			js.append("} else {\n");
 			js.pushIndentation(null);
 			
@@ -261,19 +242,41 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			return true;
 		}
 		
+		
+		@Override
+		protected void doConstructorConstants(List<CGMapping> cgMappings) {
+
+			super.doConstructorConstants(cgMappings);
+			
+			CS2ASJavaCompilerParameters params = ((CS2ASJavaCodeGenerator)getCodeGenerator()).getCGParameters();
+			String lookupSolver = params.getLookupSolverClassName();
+			
+			if (lookupSolver != null && !"".equals(lookupSolver)) {
+				js.append("private final ");
+				js.appendClassReference(lookupSolver);
+				js.append(" ");
+				js.append(LOOKUP_SOLVER_FIELD_NAME);
+				js.append(" = new ");
+				js.appendClassReference(lookupSolver);
+				js.append("(");
+				js.append(JavaConstants.EXECUTOR_NAME);
+				js.append(");\n");	
+			}
+		}
+
 		/**
 		 * @param cgValue
 		 * @return helper to obtain the initial CGValuedElement corresponding to the source of the lookupCall argument
 		 */
 		private CGValuedElement initialSourceCG(CGValuedElement cgValue) {
 			if (cgValue instanceof CGVariableExp) {
-				CGValuedElement cgVarInit = ((CGVariableExp) cgValue).getReferredVariable().getInit();
+				/*CGValuedElement cgVarInit = ((CGVariableExp) cgValue).getReferredVariable().getInit();
 				if (cgVarInit == null) {
 					return cgValue;
 				} else {
 					return cgVarInit == cgValue ? cgVarInit : initialSourceCG(cgVarInit);	
-				}
-				
+				}*/
+				return cgValue;
 			} else if (cgValue instanceof CGCallExp) {
 				CGValuedElement cgSource = ((CGCallExp) cgValue).getSource();
 				return initialSourceCG(cgSource);
@@ -293,8 +296,9 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			
 			Operation asOperation = asOperationCallExp.getReferredOperation();
 			if (isLookupOp(asOperation)) {
-				CGLookupCallExp cgLookupCallExp = CS2ASCGFactory.eINSTANCE.createCGLookupCallExp();				
+				CGLookupCallExp cgLookupCallExp = CS2ASCGFactory.eINSTANCE.createCGLookupCallExp();
 				setAst(cgLookupCallExp, asOperationCallExp);
+				cgLookupCallExp.setName(asOperation.getName());
 				cgLookupCallExp.setSource(cgSource);
 				for (OCLExpression arg :  asOperationCallExp.getOwnedArguments()) {
 					CGValuedElement cgArg = doVisit(CGValuedElement.class, arg);

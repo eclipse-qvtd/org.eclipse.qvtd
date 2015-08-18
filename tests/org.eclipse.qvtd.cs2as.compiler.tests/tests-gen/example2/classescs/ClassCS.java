@@ -12,6 +12,8 @@
  */
 package example2.classescs;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +25,8 @@ package example2.classescs;
  * </p>
  * <ul>
  *   <li>{@link example2.classescs.ClassCS#getExtends <em>Extends</em>}</li>
+ *   <li>{@link example2.classescs.ClassCS#getProperties <em>Properties</em>}</li>
+ *   <li>{@link example2.classescs.ClassCS#getOperations <em>Operations</em>}</li>
  * </ul>
  *
  * @see example2.classescs.ClassescsPackage#getClassCS()
@@ -55,5 +59,37 @@ public interface ClassCS extends NamedElementCS {
 	 * @generated
 	 */
 	void setExtends(PathNameCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
+	 * The list contents are of type {@link example2.classescs.PropertyCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Properties</em>' containment reference list.
+	 * @see example2.classescs.ClassescsPackage#getClassCS_Properties()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<PropertyCS> getProperties();
+
+	/**
+	 * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
+	 * The list contents are of type {@link example2.classescs.OperationCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Operations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Operations</em>' containment reference list.
+	 * @see example2.classescs.ClassescsPackage#getClassCS_Operations()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<OperationCS> getOperations();
 
 } // ClassCS

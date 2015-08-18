@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link example4.kiamaas.impl.NodeImpl#getHeight <em>Height</em>}</li>
- *   <li>{@link example4.kiamaas.impl.NodeImpl#getDeep <em>Deep</em>}</li>
+ *   <li>{@link example4.kiamaas.impl.NodeImpl#getDepth <em>Depth</em>}</li>
  * </ul>
  *
  * @generated
@@ -35,7 +35,7 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int HEIGHT_EDEFAULT = 0;
+	protected static final Integer HEIGHT_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getHeight() <em>Height</em>}' attribute.
@@ -45,27 +45,27 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	 * @generated
 	 * @ordered
 	 */
-	protected int height = HEIGHT_EDEFAULT;
+	protected Integer height = HEIGHT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getDeep() <em>Deep</em>}' attribute.
+	 * The default value of the '{@link #getDepth() <em>Depth</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDeep()
+	 * @see #getDepth()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int DEEP_EDEFAULT = 0;
+	protected static final Integer DEPTH_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDeep() <em>Deep</em>}' attribute.
+	 * The cached value of the '{@link #getDepth() <em>Depth</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDeep()
+	 * @see #getDepth()
 	 * @generated
 	 * @ordered
 	 */
-	protected int deep = DEEP_EDEFAULT;
+	protected Integer depth = DEPTH_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,7 +91,7 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getHeight() {
+	public Integer getHeight() {
 		return height;
 	}
 
@@ -100,8 +100,8 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setHeight(int newHeight) {
-		int oldHeight = height;
+	public void setHeight(Integer newHeight) {
+		Integer oldHeight = height;
 		height = newHeight;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KiamaasPackage.NODE__HEIGHT, oldHeight, height));
@@ -112,8 +112,8 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getDeep() {
-		return deep;
+	public Integer getDepth() {
+		return depth;
 	}
 
 	/**
@@ -121,11 +121,11 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDeep(int newDeep) {
-		int oldDeep = deep;
-		deep = newDeep;
+	public void setDepth(Integer newDepth) {
+		Integer oldDepth = depth;
+		depth = newDepth;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KiamaasPackage.NODE__DEEP, oldDeep, deep));
+			eNotify(new ENotificationImpl(this, Notification.SET, KiamaasPackage.NODE__DEPTH, oldDepth, depth));
 	}
 
 	/**
@@ -138,8 +138,8 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 		switch (featureID) {
 			case KiamaasPackage.NODE__HEIGHT:
 				return getHeight();
-			case KiamaasPackage.NODE__DEEP:
-				return getDeep();
+			case KiamaasPackage.NODE__DEPTH:
+				return getDepth();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -155,8 +155,8 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 			case KiamaasPackage.NODE__HEIGHT:
 				setHeight((Integer)newValue);
 				return;
-			case KiamaasPackage.NODE__DEEP:
-				setDeep((Integer)newValue);
+			case KiamaasPackage.NODE__DEPTH:
+				setDepth((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -173,8 +173,8 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 			case KiamaasPackage.NODE__HEIGHT:
 				setHeight(HEIGHT_EDEFAULT);
 				return;
-			case KiamaasPackage.NODE__DEEP:
-				setDeep(DEEP_EDEFAULT);
+			case KiamaasPackage.NODE__DEPTH:
+				setDepth(DEPTH_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -189,9 +189,9 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KiamaasPackage.NODE__HEIGHT:
-				return height != HEIGHT_EDEFAULT;
-			case KiamaasPackage.NODE__DEEP:
-				return deep != DEEP_EDEFAULT;
+				return HEIGHT_EDEFAULT == null ? height != null : !HEIGHT_EDEFAULT.equals(height);
+			case KiamaasPackage.NODE__DEPTH:
+				return DEPTH_EDEFAULT == null ? depth != null : !DEPTH_EDEFAULT.equals(depth);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -208,10 +208,11 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (height: ");
 		result.append(height);
-		result.append(", deep: ");
-		result.append(deep);
+		result.append(", depth: ");
+		result.append(depth);
 		result.append(')');
 		return result.toString();
 	}
+
 
 } //NodeImpl

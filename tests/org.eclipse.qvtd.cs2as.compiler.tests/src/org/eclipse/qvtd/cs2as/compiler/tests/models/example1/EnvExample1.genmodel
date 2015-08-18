@@ -10,23 +10,23 @@
     <details key="Use Null Annotations" value="true"/>
   </genAnnotations>
   <foreignModel>EnvExample1.ecore</foreignModel>
-  <genPackages prefix="Environment" basePackage="example1" disposableProviderFactory="true"
+  <genPackages prefix="Environment" basePackage="example1.target" disposableProviderFactory="true"
       ecorePackage="EnvExample1.ecore#/">
-    <genClasses ecoreClass="EnvExample1.ecore#//Environment">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EnvExample1.ecore#//Environment/namedElements"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EnvExample1.ecore#//Environment/parentEnv"/>
-      <genOperations ecoreOperation="EnvExample1.ecore#//Environment/addElements">
-        <genParameters ecoreParameter="EnvExample1.ecore#//Environment/addElements/elements"/>
-        <genTypeParameters ecoreTypeParameter="EnvExample1.ecore#//Environment/addElements/NE"/>
+    <genClasses ecoreClass="EnvExample1.ecore#//LookupEnvironment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EnvExample1.ecore#//LookupEnvironment/namedElements"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EnvExample1.ecore#//LookupEnvironment/parentEnv"/>
+      <genOperations ecoreOperation="EnvExample1.ecore#//LookupEnvironment/addElements">
+        <genParameters ecoreParameter="EnvExample1.ecore#//LookupEnvironment/addElements/elements"/>
+        <genTypeParameters ecoreTypeParameter="EnvExample1.ecore#//LookupEnvironment/addElements/NE"/>
       </genOperations>
-      <genOperations ecoreOperation="EnvExample1.ecore#//Environment/addElement">
-        <genParameters ecoreParameter="EnvExample1.ecore#//Environment/addElement/element"/>
+      <genOperations ecoreOperation="EnvExample1.ecore#//LookupEnvironment/addElement">
+        <genParameters ecoreParameter="EnvExample1.ecore#//LookupEnvironment/addElement/element"/>
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="EnvExample1.ecore#//Env4CG">
       <genOperations ecoreOperation="EnvExample1.ecore#//Env4CG/hasFinalResult"/>
-      <genOperations ecoreOperation="EnvExample1.ecore#//Env4CG/getEvaluator"/>
+      <genOperations ecoreOperation="EnvExample1.ecore#//Env4CG/getExecutor"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="EnvExample1.ecore#//Evaluator"/>
+    <genClasses image="false" ecoreClass="EnvExample1.ecore#//Executor"/>
   </genPackages>
 </genmodel:GenModel>

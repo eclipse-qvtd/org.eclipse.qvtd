@@ -113,13 +113,13 @@ public interface KiamaasPackage extends EPackage {
 	int NODE__HEIGHT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Deep</b></em>' attribute.
+	 * The feature id for the '<em><b>Depth</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__DEEP = 1;
+	int NODE__DEPTH = 1;
 
 	/**
 	 * The number of structural features of the '<em>Node</em>' class.
@@ -159,13 +159,13 @@ public interface KiamaasPackage extends EPackage {
 	int COMPOSITE__HEIGHT = NODE__HEIGHT;
 
 	/**
-	 * The feature id for the '<em><b>Deep</b></em>' attribute.
+	 * The feature id for the '<em><b>Depth</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE__DEEP = NODE__DEEP;
+	int COMPOSITE__DEPTH = NODE__DEPTH;
 
 	/**
 	 * The feature id for the '<em><b>Child</b></em>' containment reference.
@@ -214,13 +214,13 @@ public interface KiamaasPackage extends EPackage {
 	int LEAF__HEIGHT = NODE__HEIGHT;
 
 	/**
-	 * The feature id for the '<em><b>Deep</b></em>' attribute.
+	 * The feature id for the '<em><b>Depth</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF__DEEP = NODE__DEEP;
+	int LEAF__DEPTH = NODE__DEPTH;
 
 	/**
 	 * The number of structural features of the '<em>Leaf</em>' class.
@@ -284,15 +284,15 @@ public interface KiamaasPackage extends EPackage {
 	EAttribute getNode_Height();
 
 	/**
-	 * Returns the meta object for the attribute '{@link example4.kiamaas.Node#getDeep <em>Deep</em>}'.
+	 * Returns the meta object for the attribute '{@link example4.kiamaas.Node#getDepth <em>Depth</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Deep</em>'.
-	 * @see example4.kiamaas.Node#getDeep()
+	 * @return the meta object for the attribute '<em>Depth</em>'.
+	 * @see example4.kiamaas.Node#getDepth()
 	 * @see #getNode()
 	 * @generated
 	 */
-	EAttribute getNode_Deep();
+	EAttribute getNode_Depth();
 
 	/**
 	 * Returns the meta object for class '{@link example4.kiamaas.Composite <em>Composite</em>}'.
@@ -385,12 +385,12 @@ public interface KiamaasPackage extends EPackage {
 		EAttribute NODE__HEIGHT = eINSTANCE.getNode_Height();
 
 		/**
-		 * The meta object literal for the '<em><b>Deep</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Depth</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute NODE__DEEP = eINSTANCE.getNode_Deep();
+		EAttribute NODE__DEPTH = eINSTANCE.getNode_Depth();
 
 		/**
 		 * The meta object literal for the '{@link example4.kiamaas.impl.CompositeImpl <em>Composite</em>}' class.

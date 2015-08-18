@@ -12,6 +12,7 @@
  */
 package example2.classescs.util;
 
+import example2.classescs.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -133,6 +134,44 @@ public class ClassescsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ClassescsPackage.PROPERTY_CS: {
+				PropertyCS propertyCS = (PropertyCS)theEObject;
+				T result = casePropertyCS(propertyCS);
+				if (result == null) result = caseNamedElementCS(propertyCS);
+				if (result == null) result = caseElementCS(propertyCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClassescsPackage.OPERATION_CS: {
+				OperationCS operationCS = (OperationCS)theEObject;
+				T result = caseOperationCS(operationCS);
+				if (result == null) result = caseNamedElementCS(operationCS);
+				if (result == null) result = caseElementCS(operationCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClassescsPackage.NAME_EXP_CS: {
+				NameExpCS nameExpCS = (NameExpCS)theEObject;
+				T result = caseNameExpCS(nameExpCS);
+				if (result == null) result = caseElementCS(nameExpCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClassescsPackage.ROUNDED_BRACKET_CLAUSE: {
+				RoundedBracketClause roundedBracketClause = (RoundedBracketClause)theEObject;
+				T result = caseRoundedBracketClause(roundedBracketClause);
+				if (result == null) result = caseElementCS(roundedBracketClause);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClassescsPackage.ARGUMENT_CS: {
+				ArgumentCS argumentCS = (ArgumentCS)theEObject;
+				T result = caseArgumentCS(argumentCS);
+				if (result == null) result = caseNamedElementCS(argumentCS);
+				if (result == null) result = caseElementCS(argumentCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -239,6 +278,81 @@ public class ClassescsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRootCS(RootCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyCS(PropertyCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationCS(OperationCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Name Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Name Exp CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNameExpCS(NameExpCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rounded Bracket Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rounded Bracket Clause</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRoundedBracketClause(RoundedBracketClause object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Argument CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Argument CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArgumentCS(ArgumentCS object) {
 		return null;
 	}
 

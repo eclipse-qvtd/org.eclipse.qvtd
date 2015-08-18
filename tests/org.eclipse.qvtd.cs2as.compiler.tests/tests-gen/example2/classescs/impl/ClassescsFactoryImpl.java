@@ -12,6 +12,7 @@
  */
 package example2.classescs.impl;
 
+import example2.classescs.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -75,6 +76,11 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 			case ClassescsPackage.PATH_NAME_CS: return createPathNameCS();
 			case ClassescsPackage.PATH_ELEMENT_CS: return createPathElementCS();
 			case ClassescsPackage.ROOT_CS: return createRootCS();
+			case ClassescsPackage.PROPERTY_CS: return createPropertyCS();
+			case ClassescsPackage.OPERATION_CS: return createOperationCS();
+			case ClassescsPackage.NAME_EXP_CS: return createNameExpCS();
+			case ClassescsPackage.ROUNDED_BRACKET_CLAUSE: return createRoundedBracketClause();
+			case ClassescsPackage.ARGUMENT_CS: return createArgumentCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -128,6 +134,56 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	public RootCS createRootCS() {
 		RootCSImpl rootCS = new RootCSImpl();
 		return rootCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PropertyCS createPropertyCS() {
+		PropertyCSImpl propertyCS = new PropertyCSImpl();
+		return propertyCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OperationCS createOperationCS() {
+		OperationCSImpl operationCS = new OperationCSImpl();
+		return operationCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NameExpCS createNameExpCS() {
+		NameExpCSImpl nameExpCS = new NameExpCSImpl();
+		return nameExpCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RoundedBracketClause createRoundedBracketClause() {
+		RoundedBracketClauseImpl roundedBracketClause = new RoundedBracketClauseImpl();
+		return roundedBracketClause;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ArgumentCS createArgumentCS() {
+		ArgumentCSImpl argumentCS = new ArgumentCSImpl();
+		return argumentCS;
 	}
 
 	/**

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Horacio Hoyos - initial API and implementation
  ******************************************************************************/
@@ -74,73 +74,74 @@ import org.eclipse.qvtd.pivot.schedule.utilities.ScheduleToDependencyGraphVisito
  * The Class MtcBroker.
  */
 public class MtcBroker {
-	
+
 	/** The Constant ECORE_URI. */
 	private static final String ECORE_URI = EcorePackage.eNS_URI;
-	
+
 	/** The Constant CONFIG_MODEL_NAME. */
 	private static final String CONFIG_MODEL_NAME = "config";
-	
+
 	/** The Constant CONFIG_MM. */
 //	private static final String CONFIG_MM = "platform:/resource/org.eclipse.qvtd.compiler/model/QVTcConfig.ecore";
-	
+
 	/** The Constant CONFIG_URI. */
 	private static final String CONFIG_URI = QVTcConfigPackage.eNS_URI;
-	
+
 	/** The Constant CONFIG_QUERIES_EOL. */
 	private static final String CONFIG_QUERIES_EOL = "helpers/ConfigQueries.eol";
-	
+
 	/** The Constant ECORE_CONTAINMENT_MM. */
 	private static final String ECORE_CONTAINMENT_MM = "platform:/resource/org.eclipse.qvtd.compiler/model/ECoreContainmentTree.ecore";
-	
+
 	/** The Constant ECORE_CONTAINMENT_URI. */
 	private static final String ECORE_CONTAINMENT_URI = "http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree";
-	
+
 	/** The Constant ECORE_TO_TREE_EOL. */
 	private static final String ECORE_TO_TREE_EOL = "utils/EcoreToContainmentTree.etl";
-	
+
 	/** The Constant QVTS_MM. */
 	//private static final String QVTS_MM = "platform:/resource/org.eclipse.qvtd.pivot.schedule/model/Schedule.ecore";
-	
+
 	/** The Constant QVTS_URI. */
 	private static final String QVTS_URI = SchedulePackage.eNS_URI;
 	
 	/** The Constant OCL_STD_LIB_MODEL_NAME. */
 	private static final String OCL_STD_LIB_MODEL_NAME = "oclStdLib";
-	
+
 	/** The Constant OCL_STD_LIB_URI. */
 	private static final String OCL_STD_LIB_URI = OCLstdlibPackage.eNS_URI + ".oclas";
-	
+
 	/** The Constant PIVOT_URI. */
 	private static final String PIVOT_URI = PivotPackage.eNS_URI;
-	
+
 	/** The Constant QVTB_URI. */
 	private static final String QVTB_URI = QVTbasePackage.eNS_URI;
-	
+
 	/** The Constant QVTCB_URI. */
 	private static final String QVTCB_URI =  QVTcoreBasePackage.eNS_URI;
-	
+
 	/** The Constant QVTC_URI. */
 	private static final String QVTC_URI = QVTcorePackage.eNS_URI;
-	
+
 	/** The Constant QVTI_URI. */
 	private static final String QVTI_URI = QVTimperativePackage.eNS_URI;
-	
+
 	/** The Constant QVTC_FULL_NS. */
 	private static final String QVTC_FULL_NS = QVTC_URI + "," + QVTCB_URI + "," + QVTB_URI + "," + PIVOT_URI;
-	
+
 	/** The Constant QVTI_FULL_NS. */
 	protected static final String QVTI_FULL_NS = QVTI_URI + "," + QVTCB_URI + "," +  QVTB_URI + "," +  PIVOT_URI;
 	
 	/** The Constant QVTS_FULL_NS. */
 	private static final String QVTS_FULL_NS = QVTS_URI + "," + QVTI_FULL_NS;
-	
+
+	// Epsilon Scripts
 	/** The Constant QVTC_TO_QVTU_FLOCK. */
 	private static final String QVTC_TO_QVTU_FLOCK = "mtc/QVTcToQVTu.mig";
-	
+
 	/** The Constant QVTU_TO_QVTM_FLOCK. */
 	private static final String QVTU_TO_QVTM_FLOCK = "mtc/QVTuToQVTm.mig";
-	
+
 	/** The Constant QVTM_TO_QVTP_ETL. */
 	private static final String QVTM_TO_QVTP_ETL = "mtc/QVTmToQVTiPartition.etl";
 	
@@ -149,24 +150,24 @@ public class MtcBroker {
 	
 	/** The Constant QVTP_FLAT_SCHEDULE_EOL. */
 	private static final String QVTP_FLAT_SCHEDULE_EOL = "scheduling/FlatSchedule.eol";
-	
+
 	/** The Constant QVTP_SIMPLE_NESTING_SCHEDULE_EOL. */
 	private static final String QVTP_SIMPLE_NESTING_SCHEDULE_EOL = "scheduling/NestedSchedule.eol";
-	
+
 	/** The Constant QVTPS_TO_QVTI_ETL. */
 	private static final String QVTPS_TO_QVTI_ETL = "mtc/QVTs-pToQVTi.etl";
-	
+
 	/** The Constant LEFT_DIR_NAME. */
 	@SuppressWarnings("unused")
 	private static final String LEFT_DIR_NAME = "L";
-	
+
 	/** The Constant RIGHT_DIR_NAME. */
 	private static final String RIGHT_DIR_NAME = "R";
-	
+
 	/** The Constant MIDDLE_DIR_NAME. */
 	@SuppressWarnings("unused")
 	private static final String MIDDLE_DIR_NAME = "M";
-	
+
 	/** The Constant CREATE_GRAPHML. */
 	protected boolean createGraphml = false;
 
@@ -176,19 +177,19 @@ public class MtcBroker {
 	
 	/** The qvtcas uri. */
 	private String qvtcasUri;
-	
+
 	/** The qvtu uri. */
 	private String qvtuUri;
-	
+
 	/** The qvtm uri. */
 	private String qvtmUri;
-	
+
 	/** The partition uri. */
 	protected String partitionUri;
-	
+
 	/** The qvti uri. */
 	protected String qvtiUri;
-	
+
 	/** The config uri. */
 	private String configUri;
 	
@@ -197,7 +198,7 @@ public class MtcBroker {
 	
 	/** The owner clas of the MTC (used to find resources). */
 	//private Class<?> owner;
-	
+
 	/** The config model. */
 	private PivotModel configModel;
 
@@ -205,9 +206,9 @@ public class MtcBroker {
 	
 	/** The ocl std lib model. */
 	protected PivotModel oclStdLibModel;
-	
+
 	private URI dependencyGraphUri;
-	
+
 	private URI callGraphUri;
 
 	/** The r metamodel. */
@@ -217,41 +218,40 @@ public class MtcBroker {
 	/** The r metamodel model. */
 	@SuppressWarnings("unused")
 	private PivotModel rMetamodelModel;
-	
+
 	/** The candidate metamodel containment trees. */
-	private Map<String, List<PivotModel>> candidateMetamodelContainmentTrees; 
-	
+	private Map<String, List<PivotModel>> candidateMetamodelContainmentTrees;
+
 	/** The meta model manager. */
-	private @NonNull EnvironmentFactory environmentFactory;
-	
+	protected @NonNull EnvironmentFactory environmentFactory;
+
 	/** The saving options. */
 	protected @Nullable Map<?, ?> savingOptions;
-	
-	
+
 	/** The base uri. */
 	private URI baseUri;
-	
+
 	private URI debugUri;
-	
-	/** The c model. */
+
+	/** The QVTc model. */
 	private PivotModel cModel;
-	
-	/** The u model. */
+
+	/** The QVTu model. */
 	private PivotModel uModel;
-	
-	/** The m model. */
+
+	/** The QVTm model. */
 	private PivotModel mModel;
-	
-	/** The p model. */
+
+	/** The QVTp model. */
 	protected PivotModel pModel;
-	
-	/** The g model. */
+
+	/** The QVTg model. */
 	protected PivotModel gModel;
 
-	/** The s model. */
+	/** The QVTs model. */
 	protected PivotModel sModel;
-	
-	/** The i model. */
+
+	/** The QVTi model. */
 	protected PivotModel iModel;
 	protected Resource iResource;
 
@@ -269,7 +269,7 @@ public class MtcBroker {
 	public MtcBroker(URI baseURI, String qvtcSource, @NonNull EnvironmentFactory environmentFactory) throws QvtMtcExecutionException {
 		this(baseURI, qvtcSource, environmentFactory, null);
 	}
-	
+
 	/**
 	 * Instantiates a new mtc broker.
 	 *
@@ -280,7 +280,7 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException the qvt mtc execution exception
 	 */
 	public MtcBroker(URI baseURI, String qvtcSource, @NonNull EnvironmentFactory environmentFactory, Map<?, ?> savingOptions) throws QvtMtcExecutionException {
-		
+
 		this.savingOptions = savingOptions;
 		this.environmentFactory = environmentFactory;
 		this.baseUri = baseURI;
@@ -300,7 +300,6 @@ public class MtcBroker {
 		this.scheduleUri = URI.createURI(modelsBaseUri.toString() + "Schedule").appendFileExtension("xmi").toString();
 		this.dependencyGraphUri = URI.createURI(dgPath).appendFileExtension("graphml");
 		this.callGraphUri = URI.createURI(cgPath).appendFileExtension("graphml");
-		
 		candidateMetamodelContainmentTrees = new HashMap<String, List<PivotModel>>();
 		registerMetamodels(environmentFactory);
 	}
@@ -342,6 +341,11 @@ public class MtcBroker {
 		return pModel;
 	}
 
+
+	public void setgModel(PivotModel gModel) {
+		this.gModel = gModel;
+	}
+
 	/**
 	 * Gets the g model.
 	 *
@@ -372,7 +376,7 @@ public class MtcBroker {
 	public Resource getiResource() {
 		return iResource;
 	}
-	
+
 	/**
 	 * Prepare.
 	 *
@@ -416,6 +420,7 @@ public class MtcBroker {
 		if (createGraphml)
 			qvtsToGraphML(sModel);
 		iModel = qvtpQvtsToQvti(pModel, sModel);
+		assertNoResourceErrors("iModel", iModel.getResource());
 		iModel.store();
 	}
 	public @Nullable Resource newExecute() throws QvtMtcExecutionException {
@@ -531,22 +536,23 @@ public class MtcBroker {
         System.out.println("Graphs created.");
 	}
 
+
 	public void executeQvtcToQvtu() throws QvtMtcExecutionException {
-		
+
 		prepare();
 		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
 		uModel = qvtcToQvtu(cModel, true);
 	}
-	
+
 	public void executeQvtuToQvtm() throws QvtMtcExecutionException {
-		
+
 		prepare();
 		uModel = createASModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, true, false, false, false);
 		mModel = qvtuToQvtm(uModel, true);
 	}
-	
+
 	public void executeQvtmToQvtp() throws QvtMtcExecutionException {
-		
+
 		prepare();
 		mModel = createASModel(qvtmUri, "QVTm", "QVT", QVTC_FULL_NS, true, false, false, false);
 		pModel = qvtmToQvtp(mModel, true);
@@ -558,16 +564,16 @@ public class MtcBroker {
 		sModel = createASModel(scheduleUri, "QVTs", "QVT", QVTS_FULL_NS, true, false, false, true);
 		qvtsToGraphML(sModel);
 	}
-	
+
 	public void executeQvtpQvtsToQvti() throws QvtMtcExecutionException {
-		
+
 		prepare();
 		pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, true, false, false, true);
 		sModel = createASModel(scheduleUri, "QVTs", "QVT", QVTS_FULL_NS, false, true, false, true);
 		iModel = qvtpQvtsToQvti(pModel, sModel);
 	}
-	
-	
+
+
 	/**
 	 * Execute scheduling.
 	 *
@@ -575,7 +581,7 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException the qvt mtc execution exception
 	 */
 	public void executeQvtpToQvts(boolean dryRun) throws QvtMtcExecutionException {
-		
+
 		prepare();
 		try {
 			pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, true, false, false, true);
@@ -662,7 +668,7 @@ public class MtcBroker {
 			return uModel;
 		}
 	}
-	
+
 	/**
 	 * QVTu to QVTm.
 	 *
@@ -763,7 +769,6 @@ public class MtcBroker {
     	}
     }
 
-	
 	/**
 	 * QVTp to QVTs.
 	 *
@@ -799,20 +804,21 @@ public class MtcBroker {
 		}
 		return sModel;
 	}
-	
+
 
 	/**
 	 * Qvtp flat scheduling.
 	 *
 	 * @param pModel the model
 	 * @param sModel the s model
+	 * @return
 	 * @throws QvtMtcExecutionException If there was an error loading the script
 	 */
-	protected void qvtpFlatScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
-		
-		qvtpScheduling(pModel, sModel, QVTP_FLAT_SCHEDULE_EOL);
+	protected PivotModel qvtpFlatScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
+
+		return qvtpScheduling(pModel, sModel, QVTP_FLAT_SCHEDULE_EOL);
 	}
-	
+
 	/**
 	 * Qvtp simple nesting scheduling.
 	 *
@@ -820,21 +826,21 @@ public class MtcBroker {
 	 * @param sModel the s model
 	 * @throws QvtMtcExecutionException If there was an error loading the script
 	 */
-	protected void qvtpNestingScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
+	protected PivotModel qvtpNestingScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
 		
-		qvtpScheduling(pModel, sModel, QVTP_SIMPLE_NESTING_SCHEDULE_EOL);
+		return qvtpScheduling(pModel, sModel, QVTP_SIMPLE_NESTING_SCHEDULE_EOL);
 	}
-	
+
 	/**
 	 * Qvtp scheduling. By supplying an additional scheduling script URI different scheduling strategies can be
-	 * invoked. 
+	 * invoked.
 	 *
 	 * @param pModel the model
 	 * @param sModel the s model
 	 * @param schedulingTxURI The URI to the scheduling script to run
 	 * @throws QvtMtcExecutionException If there was an error loading the script
 	 */
-	protected void qvtpScheduling(PivotModel pModel, PivotModel sModel, String schedulingTxURI) throws QvtMtcExecutionException {
+	protected PivotModel qvtpScheduling(PivotModel pModel, PivotModel sModel, String schedulingTxURI) throws QvtMtcExecutionException {
 		
 		if (pModel != null && sModel != null  ) {
 			sModel.setCachingEnabled(true);
@@ -857,8 +863,9 @@ public class MtcBroker {
 				eol.execute();
 			}
 		}
+		return sModel;
 	}
-	
+
 	/**
 	 * QVTp and QVTs to QVTi.
 	 *
@@ -869,7 +876,7 @@ public class MtcBroker {
 	 * 	executing the ETL script.
 	 */
 	protected PivotModel qvtpQvtsToQvti(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
-		
+
 		PivotModel iModel = null;
 		iModel = createASModel(qvtiUri, "QVTi", "QVT", QVTI_FULL_NS, false, true, false, true);
 		if (pModel != null && sModel != null && iModel != null  ) {
@@ -890,7 +897,8 @@ public class MtcBroker {
 		}
 		return iModel;
 	}
-	
+
+
 	/**
 	 * Creates the containment trees.
 	 *
@@ -898,7 +906,7 @@ public class MtcBroker {
 	 * 	executing the EOL script.
 	 */
 	protected void createContainmentTrees() throws QvtMtcExecutionException  {
-		
+
 		EtlTask eol = null;
 		List<URI> loadedUris = new ArrayList<URI>();
 		try {
@@ -980,14 +988,14 @@ public class MtcBroker {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Load configuration model.
 	 *
 	 * @throws QvtMtcExecutionException If there is a problem loading the model.
 	 */
 	protected void loadConfigurationModel() throws QvtMtcExecutionException {
-		
+
 		configModel = createModel(configUri, CONFIG_MODEL_NAME, "", CONFIG_URI, true, false, true, false);
         for (EObject eo : configModel.getResource().getContents()) {
             if (eo instanceof Configuration) {
@@ -997,19 +1005,19 @@ public class MtcBroker {
         }
         assert config != null;
 	}
-	
+
 	/**
 	 * Load OCLStdLib model.
 	 *
 	 * @throws QvtMtcExecutionException If there is a problem loading the model.
 	 */
 	protected void loadOclStdLibModel() throws QvtMtcExecutionException {
-		
+
 		OCLASResourceFactory.getInstance();
 //        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap( ).put("oclas", OCLASResourceFactory.getInstance());
 		oclStdLibModel = createASModel(OCL_STD_LIB_URI, OCL_STD_LIB_MODEL_NAME, "", PIVOT_URI, true, false, true, false);
 	}
-	
+
 	/**
 	 * Register metamodels.
 	 *
@@ -1017,9 +1025,9 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException If there is a problem finding the metamodels
 	 */
 	private void registerMetamodels(@NonNull EnvironmentFactory environmentFactory) throws QvtMtcExecutionException {
-		
+
 		URI mmURI = null;
-		
+
 		ResourceSet externalResourceSet = environmentFactory.getResourceSet();
 		Resource r;
 		EObject eObject;
@@ -1056,14 +1064,14 @@ public class MtcBroker {
 				    externalResourceSet.getPackageRegistry().put(p.getNsURI(), p);
 				}
 			}
-			
+
 		}
 		// Schedule metamodel
 		EPackage sp = SchedulePackage.eINSTANCE;
 		externalResourceSet.getPackageRegistry().put(sp.getNsURI(), sp);
 	}
 
-	
+
 	/**
 	 * Creates a Pivot Model with the given attributes. This models is loaded by the metamodel manager
 	 * as external resources. Use this method for creating models that are not AS of any of the
@@ -1082,7 +1090,7 @@ public class MtcBroker {
 	 */
 	protected PivotModel createModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
 				boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean expand) throws QvtMtcExecutionException {
-	
+
 		PivotModel model = new PivotModel(environmentFactory, false, savingOptions);
 		StringProperties properties = new StringProperties();
 		properties.put(EmfModel.PROPERTY_NAME, modelName);
@@ -1100,8 +1108,8 @@ public class MtcBroker {
 		}
 		return model;
 	}
-	
-	
+
+
 	/**
 	 * Creates the as model.
 	 *
@@ -1136,15 +1144,15 @@ public class MtcBroker {
 	}
 	return model;
 }
-	
+
 	/**
-	 * Change resource to source. 
+	 * Change resource to source.
 	 *
 	 * @param resourcePath the resource path
 	 * @return the string
 	 */
 	public static String changeResourceToSource(String resourcePath) {
-		
+
 		String result;
 		if (resourcePath.indexOf("/bin/") > -1) {
 	      result = resourcePath.replaceAll("/bin/", "/src/");
@@ -1154,7 +1162,7 @@ public class MtcBroker {
 	    }
 		return result;
 	}
-	
+
 	/**
 	 * Change model resource to source.
 	 *
@@ -1162,7 +1170,7 @@ public class MtcBroker {
 	 * @return the string
 	 */
 	public static String changeModelResourceToSource(String resourcePath) {
-		
+
 		String result;
 		if (resourcePath.indexOf("/bin/") > -1) {
 	      result = resourcePath.replaceAll("/bin/", "/model/");
@@ -1172,21 +1180,21 @@ public class MtcBroker {
 	    }
 		return result;
 	}
-	
-	
-	
+
+
+
 	/**
-	 * Return a java.net.URI for an specified filename  
+	 * Return a java.net.URI for an specified filename
 	 *
 	 * @param resource the resource
 	 * @return URI for the provided filename
-	 * 
+	 *
 	 * 	private java.net.URI getURI(String fileName)  {
 	 * 	    return java.net.URI.create(URI.createPlatformResourceURI(fileName, false).toString());
 	 * 	}
 	 * @throws URISyntaxException the URI syntax exception
 	 */
-	
+
 	/**
 	 * Return a string representing the URI for a resource.
 	 *
@@ -1237,7 +1245,7 @@ public class MtcBroker {
 
 	/**
 	 * Sets the nested schedule option.
-	 * 
+	 *
 	 * By default, the scheduler creates a nested schedule. If set to False, the
 	 * scheduler generates a flat schedule.
 	 *
@@ -1246,7 +1254,7 @@ public class MtcBroker {
 	public void setNestedSchedule(boolean nestedSchedule) {
 		this.nestedSchedule = nestedSchedule;
 	}
-	
+
 	/**
 	 * Gets the resource uri from class.
 	 *
@@ -1260,6 +1268,6 @@ public class MtcBroker {
 		String uri = r.toURI().toString();
 	    return uri;
 	}	*/
-	
-	
+
+
 }

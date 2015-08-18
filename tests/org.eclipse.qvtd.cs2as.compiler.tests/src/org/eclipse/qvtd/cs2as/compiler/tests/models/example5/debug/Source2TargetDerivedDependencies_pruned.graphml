@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml:graphml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://graphml.graphdrawing.org/xmlns"
+    xmlns:graphml="http://graphml.graphdrawing.org/xmlns/graphml" xmlns:y="http://www.yworks.com/xml/graphml"
+    xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd">
+  <graphml:key for="node" id="d6" yfiles.type="nodegraphics"/>
+  <graphml:key for="edge" id="d9" yfiles.type="edgegraphics"/>
+  <graphml:graph edgedefault="directed" id="Graph">
+    <graphml:node id="W">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>W</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="D">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>D</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="X">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>X</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="X2">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>X2</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="A">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>A</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="A2">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>A2</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Y">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Y</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Y2">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Y2</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="B">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>B</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="B2">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>B2</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="SRoot">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>SRoot</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="TRoot">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>TRoot</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Z">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Z</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="C">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>C</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="W::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>W::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="D::A2">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>D::A2</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="X::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>X::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="X::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>X::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="X::ownsY">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>X::ownsY</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="X2::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>X2::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="X2::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>X2::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="X2::ownsY">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>X2::ownsY</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="X2::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>X2::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="X2::ownsW">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>X2::ownsW</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="X2::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>X2::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="X2::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>X2::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="A::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>A::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="A::ownsB">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>A::ownsB</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="A::TRoot">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>A::TRoot</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="A2::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>A2::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="A2::ownsB">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>A2::ownsB</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="A2::ownsD">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>A2::ownsD</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Y::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Y::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Y::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Y::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Y::ownsZ">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Y::ownsZ</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Y2::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Y2::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Y2::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Y2::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Y2::name2">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Y2::name2</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Y2::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Y2::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Y2::ownsZ">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Y2::ownsZ</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Y2::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Y2::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Y2::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Y2::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="B::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>B::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="B::ownsC">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>B::ownsC</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="B::A">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>B::A</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="B2::name">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>B2::name</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="B2::anotherName">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>B2::anotherName</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="B2::ownsC">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>B2::ownsC</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="SRoot::ownedX">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>SRoot::ownedX</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="SRoot::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>SRoot::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="TRoot::ownedA">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>TRoot::ownedA</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Z::ast">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Z::ast</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="C::B">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>C::B</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="cW_2_D (1)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>cW_2_D (1)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="cX2_2_A2 (3)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>cX2_2_A2 (3)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="cY2_2_B2 (8)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>cY2_2_B2 (8)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uA2_name (6)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uA2_name (6)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uA2_ownsB (12)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uA2_ownsB (12)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uA2_ownsD (4)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uA2_ownsD (4)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uB2_name (9)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uB2_name (9)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uB2_anotherName (11)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uB2_anotherName (11)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uB2_ownsC (18)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uB2_ownsC (18)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="cSRoot_2_TRoot (14)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>cSRoot_2_TRoot (14)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="cX_2_A (2)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>cX_2_A (2)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="cY_2_B (7)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>cY_2_B (7)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="cZ_2_C (16)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>cZ_2_C (16)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uTRoot_ownedA (15)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uTRoot_ownedA (15)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uA_name (5)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uA_name (5)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uA_ownsB (13)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uA_ownsB (13)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uB_name (10)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uB_name (10)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="uB_ownsC (17)">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>uB_ownsC (17)</y:NodeLabel>
+          <y:Shape type="ellipse"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:edge source="X2" target="X">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="A2" target="A">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Y2" target="Y">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="B2" target="B">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="X2::name" target="X::name">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="X2::ast" target="X::ast">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="X2::ownsY" target="X::ownsY">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="X2::ast" target="X::ast">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="X2::ast" target="X::ast">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="X2::ast" target="X::ast">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="A::ownsB" target="B::A">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="A2::name" target="A::name">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="A2::ownsB" target="B::A">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="A2::ownsB" target="A::ownsB">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="A2::ownsD" target="D::A2">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Y2::name" target="Y::name">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Y2::ast" target="Y::ast">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Y2::ast" target="Y::ast">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Y2::ownsZ" target="Y::ownsZ">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Y2::ast" target="Y::ast">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="Y2::ast" target="Y::ast">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="B::ownsC" target="C::B">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="B2::name" target="B::name">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="B2::ownsC" target="C::B">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="B2::ownsC" target="B::ownsC">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dotted"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="TRoot::ownedA" target="A::TRoot">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
+    <graphml:edge source="W" target="cW_2_D (1)"/>
+    <graphml:edge source="cW_2_D (1)" target="D"/>
+    <graphml:edge source="cW_2_D (1)" target="W::ast"/>
+    <graphml:edge source="X2" target="cX2_2_A2 (3)"/>
+    <graphml:edge source="cX2_2_A2 (3)" target="A2"/>
+    <graphml:edge source="cX2_2_A2 (3)" target="X2::ast"/>
+    <graphml:edge source="Y2" target="cY2_2_B2 (8)"/>
+    <graphml:edge source="cY2_2_B2 (8)" target="B2"/>
+    <graphml:edge source="cY2_2_B2 (8)" target="Y2::ast"/>
+    <graphml:edge source="X2" target="uA2_name (6)"/>
+    <graphml:edge source="X2::name" target="uA2_name (6)"/>
+    <graphml:edge source="X2::ast" target="uA2_name (6)"/>
+    <graphml:edge source="uA2_name (6)" target="A2::name"/>
+    <graphml:edge source="X2" target="uA2_ownsB (12)"/>
+    <graphml:edge source="X2::ownsY" target="uA2_ownsB (12)"/>
+    <graphml:edge source="Y::ast" target="uA2_ownsB (12)"/>
+    <graphml:edge source="X2::ast" target="uA2_ownsB (12)"/>
+    <graphml:edge source="uA2_ownsB (12)" target="A2::ownsB"/>
+    <graphml:edge source="uA2_ownsB (12)" target="B::A"/>
+    <graphml:edge source="X2" target="uA2_ownsD (4)"/>
+    <graphml:edge source="X2::ownsW" target="uA2_ownsD (4)"/>
+    <graphml:edge source="W::ast" target="uA2_ownsD (4)"/>
+    <graphml:edge source="X2::ast" target="uA2_ownsD (4)"/>
+    <graphml:edge source="uA2_ownsD (4)" target="A2::ownsD"/>
+    <graphml:edge source="uA2_ownsD (4)" target="D::A2"/>
+    <graphml:edge source="Y2" target="uB2_name (9)"/>
+    <graphml:edge source="Y2::name" target="uB2_name (9)"/>
+    <graphml:edge source="Y2::ast" target="uB2_name (9)"/>
+    <graphml:edge source="uB2_name (9)" target="B2::name"/>
+    <graphml:edge source="Y2" target="uB2_anotherName (11)"/>
+    <graphml:edge source="Y2::name2" target="uB2_anotherName (11)"/>
+    <graphml:edge source="Y2::ast" target="uB2_anotherName (11)"/>
+    <graphml:edge source="uB2_anotherName (11)" target="B2::anotherName"/>
+    <graphml:edge source="Y2" target="uB2_ownsC (18)"/>
+    <graphml:edge source="Z::ast" target="uB2_ownsC (18)"/>
+    <graphml:edge source="Y2::ownsZ" target="uB2_ownsC (18)"/>
+    <graphml:edge source="Y2::ast" target="uB2_ownsC (18)"/>
+    <graphml:edge source="uB2_ownsC (18)" target="B2::ownsC"/>
+    <graphml:edge source="uB2_ownsC (18)" target="C::B"/>
+    <graphml:edge source="SRoot" target="cSRoot_2_TRoot (14)"/>
+    <graphml:edge source="cSRoot_2_TRoot (14)" target="TRoot"/>
+    <graphml:edge source="cSRoot_2_TRoot (14)" target="SRoot::ast"/>
+    <graphml:edge source="X" target="cX_2_A (2)"/>
+    <graphml:edge source="cX_2_A (2)" target="A"/>
+    <graphml:edge source="cX_2_A (2)" target="X::ast"/>
+    <graphml:edge source="Y" target="cY_2_B (7)"/>
+    <graphml:edge source="cY_2_B (7)" target="B"/>
+    <graphml:edge source="cY_2_B (7)" target="Y::ast"/>
+    <graphml:edge source="Z" target="cZ_2_C (16)"/>
+    <graphml:edge source="cZ_2_C (16)" target="C"/>
+    <graphml:edge source="cZ_2_C (16)" target="Z::ast"/>
+    <graphml:edge source="SRoot" target="uTRoot_ownedA (15)"/>
+    <graphml:edge source="SRoot::ownedX" target="uTRoot_ownedA (15)"/>
+    <graphml:edge source="X::ast" target="uTRoot_ownedA (15)"/>
+    <graphml:edge source="SRoot::ast" target="uTRoot_ownedA (15)"/>
+    <graphml:edge source="uTRoot_ownedA (15)" target="TRoot::ownedA"/>
+    <graphml:edge source="uTRoot_ownedA (15)" target="A::TRoot"/>
+    <graphml:edge source="X" target="uA_name (5)"/>
+    <graphml:edge source="X::name" target="uA_name (5)"/>
+    <graphml:edge source="X::ast" target="uA_name (5)"/>
+    <graphml:edge source="uA_name (5)" target="A::name"/>
+    <graphml:edge source="X" target="uA_ownsB (13)"/>
+    <graphml:edge source="X::ownsY" target="uA_ownsB (13)"/>
+    <graphml:edge source="Y::ast" target="uA_ownsB (13)"/>
+    <graphml:edge source="X::ast" target="uA_ownsB (13)"/>
+    <graphml:edge source="uA_ownsB (13)" target="A::ownsB"/>
+    <graphml:edge source="uA_ownsB (13)" target="B::A"/>
+    <graphml:edge source="Y" target="uB_name (10)"/>
+    <graphml:edge source="Y::name" target="uB_name (10)"/>
+    <graphml:edge source="Y::ast" target="uB_name (10)"/>
+    <graphml:edge source="uB_name (10)" target="B::name"/>
+    <graphml:edge source="Y" target="uB_ownsC (17)"/>
+    <graphml:edge source="Z::ast" target="uB_ownsC (17)"/>
+    <graphml:edge source="Y::ownsZ" target="uB_ownsC (17)"/>
+    <graphml:edge source="Y::ast" target="uB_ownsC (17)"/>
+    <graphml:edge source="uB_ownsC (17)" target="B::ownsC"/>
+    <graphml:edge source="uB_ownsC (17)" target="C::B"/>
+  </graphml:graph>
+</graphml:graphml>

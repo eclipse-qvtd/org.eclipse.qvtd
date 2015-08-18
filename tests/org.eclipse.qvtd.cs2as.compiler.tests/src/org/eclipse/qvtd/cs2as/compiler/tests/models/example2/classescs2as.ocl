@@ -1,29 +1,25 @@
-import 'ClassesCS.ecore'
-import 'Classes.ecore'
-import 'ClassesNameResolution.ocl'
---import 'EnvDefinition.ocl' -- FIXME Report bug to OCL transitive import doesn't work
-
-package classescs
+import  cs : 'ClassesCS.ecore#/'
+import  as : 'Classes.ecore#/'
+import 'classescs2asLookup.ocl'
+import 'classescs2asDisambiguation.ocl'
+package cs
 
 context RootCS
-def : ast() : classes::Root =
-	classes::Root {
-		ownedPackages = ownedPackages.ast()->asOrderedSet()
+def : ast() : as::Root =
+	as::Root {
+		ownedPackages = ownedPackages.ast() 
 	}
-
 context PackageCS
-def : ast() : classes::Package =
-	classes::Package {	
-		name = name,
-		ownedClasses = ownedClasses.ast()->asOrderedSet(),
-		ownedPackages = ownedPackages.ast()->asOrderedSet()
+def : ast() : as::Package =
+	as::Package {
+		name = name, 
+	ownedClasses = ownedClasses.ast(), 
+	ownedPackages = ownedPackages.ast() 
 	}
-
 context ClassCS
 def : ast() : classes::Class =
 	classes::Class {
-		name = name,
-		superClass = ast().lookupClass(self) 
+		name = name, 
+	superClass = if _extends = null then null else ast().lookupClass(_extends) endif 
 	}
-
 endpackage
