@@ -40,6 +40,7 @@ delete PropertyAssignment
             )
         or  (original.slotExpression.isFromMiddleDomain()       // R to M, except trace values
             and not original.value.isTypeOf(QVTc!VariableExp)
+            and not original.value.isTypeOf(QVTc!NullLiteralExp)
             and original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isOutputDomain())
             )
         or (original.slotExpression.isFromMiddleDomain()      // M (local variable) to M
