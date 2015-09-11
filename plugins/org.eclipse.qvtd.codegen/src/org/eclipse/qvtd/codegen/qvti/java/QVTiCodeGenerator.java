@@ -92,7 +92,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	protected @NonNull CGPackage createCGPackage() {
-		CGPackage cgPackage = createCGPackage(ClassUtil.nonNullModel(transformation.getOwningPackage()));
+		CGPackage cgPackage = createPrefixedCGPackage(ClassUtil.nonNullModel(transformation.getOwningPackage()), getOptions().getPackagePrefix());
 		QVTiAS2CGVisitor pivot2CGVisitor = createAS2CGVisitor(cgAnalyzer, getGlobalContext());
 		CGTransformation cgTransformation = (CGTransformation) ClassUtil.nonNullState(transformation.accept(pivot2CGVisitor));
 		cgPackage.getClasses().add(cgTransformation);
@@ -103,24 +103,44 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	protected @NonNull CGPackage createCGPackage(@NonNull org.eclipse.ocl.pivot.Package asPackage) {
-		String packagePrefix = getOptions().getPackagePrefix();
-		CGPackage cgParentPackage;
-		org.eclipse.ocl.pivot.Package asParentPackage = asPackage.getOwningPackage();
-		if (asParentPackage != null) {
-			cgParentPackage = createCGPackage(asParentPackage);
-		}
-		else if (packagePrefix != null) {
-			cgParentPackage = CGModelFactory.eINSTANCE.createCGPackage();
-			cgParentPackage.setName(packagePrefix);		
-		}
-		else {
-			cgParentPackage = null;		
-		}
+		
+		// Target CG Package
 		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
 		String name = asPackage.getName();
 		cgPackage.setName((name != null) && (name.length() > 0)? name : "_" + transformation.getName());
-		if (cgParentPackage != null) {
+		
+		// Parent CG Package
+		org.eclipse.ocl.pivot.Package asParentPackage = asPackage.getOwningPackage();
+		if (asParentPackage != null) {
+			CGPackage cgParentPackage = createCGPackage(asParentPackage);
 			cgParentPackage.getPackages().add(cgPackage);
+		}
+		
+		return cgPackage;
+	}
+	
+	protected @NonNull CGPackage createPrefixedCGPackage(@NonNull org.eclipse.ocl.pivot.Package asPackage, String packagePrefix) {
+		
+		CGPackage cgPackage = createCGPackage(asPackage);
+		// Prefix Packages		
+		if (packagePrefix != null) {
+			CGPackage lastSPackage = null;
+			for (String segment : packagePrefix.split("\\.")) {
+				CGPackage sPackage = CGModelFactory.eINSTANCE.createCGPackage();
+				sPackage.setName(segment);
+				if (lastSPackage != null) {
+					lastSPackage.getPackages().add(sPackage);
+				}
+				lastSPackage = sPackage;
+			}
+			// We add the root created CG Package to the last prefix segment CG Package
+			if (lastSPackage != null) {
+				CGPackage cgParentPackage = cgPackage;
+				while (cgParentPackage.eContainer() != null) {
+					cgParentPackage = (CGPackage)cgParentPackage.eContainer();
+				}
+				lastSPackage.getPackages().add(cgParentPackage);
+			}
 		}
 		return cgPackage;
 	}
@@ -205,16 +225,23 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	public @NonNull String getQualifiedName() {
 		StringBuilder s =  new StringBuilder();
 		CGPackage cgPackage = this.cgPackage;
-		s.append(cgPackage.getName());
+		appendSegmentName(s, cgPackage);
 		while (cgPackage.getPackages().size() > 0) {
 			cgPackage = cgPackage.getPackages().get(0);
-			s.append(".");
-			s.append(cgPackage.getName());
+			appendSegmentName(s, cgPackage);
 		}
-		s.append(".");
+		
 		s.append(transformation.getName());
 		@SuppressWarnings("null")@NonNull String string = s.toString();
 		return string;
+	}
+	
+	private void appendSegmentName(@NonNull StringBuilder s, CGPackage sPackage) {
+		String pName = sPackage.getName();
+		if (pName != null && pName.length() > 0) {
+			s.append(pName);
+			s.append('.');
+		}
 	}
 
 	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
