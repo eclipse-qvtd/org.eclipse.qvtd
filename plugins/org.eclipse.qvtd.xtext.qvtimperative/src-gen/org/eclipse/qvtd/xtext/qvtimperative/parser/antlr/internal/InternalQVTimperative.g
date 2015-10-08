@@ -518,17 +518,17 @@ ruleMappingCallCS returns [EObject current=null]
 (
 (
 		{ 
-		  /* */ 
-		}
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getMappingCallCSRule());
-	        }
-        }
-		{ 
-	        newCompositeNode(grammarAccess.getMappingCallCSAccess().getReferredMappingMappingCrossReference_3_0()); 
+	        newCompositeNode(grammarAccess.getMappingCallCSAccess().getOwnedPathNamePathNameCSParserRuleCall_3_0()); 
 	    }
-		ruleUnrestrictedName		{ 
+		lv_ownedPathName_3_0=rulePathNameCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMappingCallCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedPathName",
+        		lv_ownedPathName_3_0, 
+        		"PathNameCS");
 	        afterParserOrEnumRuleCall();
 	    }
 

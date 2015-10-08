@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 /**
@@ -24,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInfinite <em>Is Infinite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getOwnedBindings <em>Owned Bindings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getReferredMapping <em>Referred Mapping</em>}</li>
  * </ul>
  *
@@ -70,7 +72,7 @@ public interface MappingCallCS extends MappingStatementCS {
 	 * @return the value of the '<em>Referred Mapping</em>' reference.
 	 * @see #setReferredMapping(Mapping)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallCS_ReferredMapping()
-	 * @model required="true"
+	 * @model resolveProxies="false" derived="true"
 	 * @generated
 	 */
 	Mapping getReferredMapping();
@@ -102,5 +104,31 @@ public interface MappingCallCS extends MappingStatementCS {
 	 * @generated
 	 */
 	EList<MappingCallBindingCS> getOwnedBindings();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Path Name</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Path Name</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Path Name</em>' containment reference.
+	 * @see #setOwnedPathName(PathNameCS)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallCS_OwnedPathName()
+	 * @model containment="true"
+	 * @generated
+	 */
+	PathNameCS getOwnedPathName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getOwnedPathName <em>Owned Path Name</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Path Name</em>' containment reference.
+	 * @see #getOwnedPathName()
+	 * @generated
+	 */
+	void setOwnedPathName(PathNameCS value);
 
 } // MappingCallCS

@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
@@ -39,6 +40,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#isIsInfinite <em>Is Infinite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getOwnedBindings <em>Owned Bindings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getReferredMapping <em>Referred Mapping</em>}</li>
  * </ul>
  *
@@ -74,6 +76,16 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	 * @ordered
 	 */
 	protected EList<MappingCallBindingCS> ownedBindings;
+
+	/**
+	 * The cached value of the '{@link #getOwnedPathName() <em>Owned Path Name</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedPathName()
+	 * @generated
+	 * @ordered
+	 */
+	protected PathNameCS ownedPathName;
 
 	/**
 	 * The cached value of the '{@link #getReferredMapping() <em>Referred Mapping</em>}' reference.
@@ -134,23 +146,6 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	 */
 	@Override
 	public Mapping getReferredMapping() {
-		if (referredMapping != null && referredMapping.eIsProxy()) {
-			InternalEObject oldReferredMapping = (InternalEObject)referredMapping;
-			referredMapping = (Mapping)eResolveProxy(oldReferredMapping);
-			if (referredMapping != oldReferredMapping) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING, oldReferredMapping, referredMapping));
-			}
-		}
-		return referredMapping;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Mapping basicGetReferredMapping() {
 		return referredMapping;
 	}
 
@@ -195,6 +190,51 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public PathNameCS getOwnedPathName() {
+		return ownedPathName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedPathName(PathNameCS newOwnedPathName, NotificationChain msgs) {
+		PathNameCS oldOwnedPathName = ownedPathName;
+		ownedPathName = newOwnedPathName;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_PATH_NAME, oldOwnedPathName, newOwnedPathName);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedPathName(PathNameCS newOwnedPathName) {
+		if (newOwnedPathName != ownedPathName) {
+			NotificationChain msgs = null;
+			if (ownedPathName != null)
+				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_PATH_NAME, null, msgs);
+			if (newOwnedPathName != null)
+				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_PATH_NAME, null, msgs);
+			msgs = basicSetOwnedPathName(newOwnedPathName, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_PATH_NAME, newOwnedPathName, newOwnedPathName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -215,6 +255,8 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 		switch (featureID) {
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
 				return ((InternalEList<?>)getOwnedBindings()).basicRemove(otherEnd, msgs);
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_PATH_NAME:
+				return basicSetOwnedPathName(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -231,9 +273,10 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 				return isIsInfinite();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
 				return getOwnedBindings();
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_PATH_NAME:
+				return getOwnedPathName();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
-				if (resolve) return getReferredMapping();
-				return basicGetReferredMapping();
+				return getReferredMapping();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -253,6 +296,9 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
 				getOwnedBindings().clear();
 				getOwnedBindings().addAll((Collection<? extends MappingCallBindingCS>)newValue);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_PATH_NAME:
+				setOwnedPathName((PathNameCS)newValue);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
 				setReferredMapping((Mapping)newValue);
@@ -275,6 +321,9 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
 				getOwnedBindings().clear();
 				return;
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_PATH_NAME:
+				setOwnedPathName((PathNameCS)null);
+				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
 				setReferredMapping((Mapping)null);
 				return;
@@ -294,6 +343,8 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 				return isInfinite != IS_INFINITE_EDEFAULT;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
 				return ownedBindings != null && !ownedBindings.isEmpty();
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_PATH_NAME:
+				return ownedPathName != null;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
 				return referredMapping != null;
 		}
