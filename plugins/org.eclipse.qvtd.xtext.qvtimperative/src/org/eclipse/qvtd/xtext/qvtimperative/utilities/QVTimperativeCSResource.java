@@ -30,6 +30,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory;
@@ -74,6 +75,9 @@ public class QVTimperativeCSResource extends EssentialOCLCSResource
 	public @Nullable NamedElement isPathable(@NonNull EObject element) {
 		if (element instanceof FunctionParameter) {
 			return (FunctionParameter)element;
+		}
+		else if (element instanceof Mapping) {
+			return (Mapping)element;
 		}
 		else if (element instanceof RealizedVariable) {
 			return (RealizedVariable)element;

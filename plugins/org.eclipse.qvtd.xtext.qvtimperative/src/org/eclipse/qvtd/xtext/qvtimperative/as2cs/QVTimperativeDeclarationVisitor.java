@@ -23,8 +23,10 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
+import org.eclipse.ocl.xtext.basecs.BaseCSFactory;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
@@ -34,6 +36,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
@@ -72,6 +75,18 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 {
 	public QVTimperativeDeclarationVisitor(@NonNull AS2CSConversion context) {
 		super(context);
+	}
+
+	protected void refreshReferredMapping(@NonNull MappingCallCS csMappingCall, @NonNull MappingCall asMappingCall) {
+		Mapping asMapping = asMappingCall.getReferredMapping();
+		if (asMapping != null) {
+			@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+			csMappingCall.setOwnedPathName(csPathName);
+			context.refreshPathName(csPathName, asMapping, QVTbaseUtil.getContainingTransformation(asMappingCall));
+		}
+		else {
+			csMappingCall.setOwnedPathName(null);
+		}
 	}
 
 	@Override
@@ -194,7 +209,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		csMappingCall.setPivot(asMappingCall);
 		context.refreshList(csMappingCall.getOwnedBindings(), context.visitDeclarations(MappingCallBindingCS.class, asMappingCall.getBinding(), null));
 		csMappingCall.setIsInfinite(asMappingCall.isIsInfinite());
-		csMappingCall.setReferredMapping(asMappingCall.getReferredMapping());
+		refreshReferredMapping(csMappingCall, asMappingCall);
 		return csMappingCall;
 	}
 

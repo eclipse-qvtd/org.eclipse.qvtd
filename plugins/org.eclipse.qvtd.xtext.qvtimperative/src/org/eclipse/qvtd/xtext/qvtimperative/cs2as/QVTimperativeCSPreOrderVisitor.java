@@ -11,19 +11,27 @@
 package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.scoping.ScopeFilter;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
+import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.cs2as.PivotDependency;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
+import org.eclipse.ocl.xtext.basecs.ElementCS;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -71,6 +79,17 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		super(context);
 	}
 
+	protected @Nullable Mapping lookupMapping(@NonNull ElementCS csElement, @NonNull PathNameCS csPathName, @Nullable ScopeFilter scopeFilter) {
+		CS2AS.setElementType(csPathName, QVTimperativePackage.Literals.MAPPING, csElement, scopeFilter);
+		Element namedElement = csPathName.getReferredElement();
+		if (namedElement instanceof Mapping) {
+			return (Mapping) namedElement;
+		}
+		else {
+			return null;
+		}
+	}
+
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		return null;
@@ -89,7 +108,11 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	public Continuation<?> visitMappingCallCS(@NonNull MappingCallCS csElement) {
 		MappingCall pivotElement = PivotUtil.getPivot(MappingCall.class, csElement);
 		if (pivotElement != null) {
-			pivotElement.setReferredMapping(csElement.getReferredMapping());
+			PathNameCS csPathName = csElement.getOwnedPathName();
+			if (csPathName != null) {
+				Mapping asMapping = lookupMapping(csElement, csPathName, null);
+				pivotElement.setReferredMapping(asMapping);
+			}
 		}
 		return null;
 	}
