@@ -22,8 +22,10 @@
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBindings" ordered="false"
         upperBound="-1" eType="#//MappingCallBindingCS" containment="true" eOpposite="#//MappingCallBindingCS/owningMappingCall"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredMapping" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#//Mapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredMapping" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#//Mapping"
+        derived="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingLoopCS" eSuperTypes="#//MappingStatementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedIterator" lowerBound="1"

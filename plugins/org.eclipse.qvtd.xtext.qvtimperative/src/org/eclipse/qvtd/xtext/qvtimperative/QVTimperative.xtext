@@ -33,7 +33,7 @@ DirectionCS returns qvtcorebasecs::DirectionCS : {qvtcorebasecs::DirectionCS} na
 MappingCS: {MappingCS} isDefault?='default'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)?
 	'{' ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)? ownedMappingSequence=MappingSequenceCS? '}';
 	
-MappingCallCS: {MappingCallCS} isInfinite?='infinite'? 'call' referredMapping=[qvtimperative::Mapping|UnrestrictedName]
+MappingCallCS: {MappingCallCS} isInfinite?='infinite'? 'call' ownedPathName=PathNameCS
 	'{' ownedBindings+=MappingCallBindingCS* '}';
 
 MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] (':='|isPolled?='?=') ownedValue=ExpCS ';';
