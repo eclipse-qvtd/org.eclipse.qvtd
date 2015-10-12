@@ -52,11 +52,11 @@ public class QVTp2QVTg {
 	
 	private Schedule dg; 
 	
-	private Set<Variable> mappingsVariables = new HashSet<Variable>();
 	
 	// Caches
-	private Map<Class, ClassDatum> class2datum = new HashMap<>();
-
+	private Map<Class, ClassDatum> class2datum = new HashMap<Class, ClassDatum> ();
+	private Map<EObject, List<EObject>> eObject2allContents = new HashMap<EObject, List<EObject>>();
+	private Set<Variable> mappingsVariables = new HashSet<Variable>();
 	
 	private Map<Element, DomainUsage> duAnalysis;
 	private ClassRelationships cRels;
@@ -64,13 +64,12 @@ public class QVTp2QVTg {
 	private void clearCaches() {
 		class2datum.clear();
 		mappingsVariables.clear();
+		eObject2allContents.clear();
 	}
 	
 	private void computeInitialCaches(Transformation tx) {
-				
-		TreeIterator<EObject> it =  tx.eAllContents();
-		while (it.hasNext()) {
-			EObject eObj = it.next();
+		
+		for (EObject eObj : getAllContents(tx)) {
 			if (eObj instanceof Variable) {
 				EObject container = eObj.eContainer();
 				if (container instanceof CorePattern) {
@@ -107,6 +106,9 @@ public class QVTp2QVTg {
 		
 		ma.setSchedule(dg);
 		ma.setMapping(mapping);
+		
+		// TODO by just one content iteration of the mapping content, we could map different
+		// type of elements we are interested in
 		
 		for (Variable inputVar : getInputVariables(mapping)) {
 			ma.getParameters().add(createDataParameter(inputVar));
@@ -241,9 +243,7 @@ public class QVTp2QVTg {
 	
 	protected List<NavigationCallExp> getPropertyNavigations(Mapping mapping) {
 		List<NavigationCallExp> propReads = new ArrayList<NavigationCallExp>();
-		TreeIterator<EObject> it =  mapping.eAllContents();
-		while (it.hasNext()) {
-			EObject eObject = it.next();
+		for (EObject eObject : getAllContents(mapping)) {
 			if (eObject instanceof NavigationCallExp) {
 				propReads.add((NavigationCallExp) eObject);
 			}
@@ -253,9 +253,7 @@ public class QVTp2QVTg {
 
 	protected List<PropertyAssignment> getPropertyAssignments(Mapping mapping) {
 		List<PropertyAssignment> propWrites = new ArrayList<PropertyAssignment>();
-		TreeIterator<EObject> it =  mapping.eAllContents();
-		while (it.hasNext()) {
-			EObject eObject = it.next();
+		for (EObject eObject : getAllContents(mapping)) {
 			if (eObject instanceof PropertyAssignment) {
 				propWrites.add((PropertyAssignment) eObject);
 			}
@@ -265,9 +263,7 @@ public class QVTp2QVTg {
 	
 	protected List<OperationCallExp> getOperationCallExps(Mapping mapping) {
 		List<OperationCallExp> propReads = new ArrayList<OperationCallExp>();
-		TreeIterator<EObject> it =  mapping.eAllContents();
-		while (it.hasNext()) {
-			EObject eObject = it.next();
+		for (EObject eObject : getAllContents(mapping)) {
 			if (eObject instanceof OperationCallExp) {
 				propReads.add((OperationCallExp) eObject);
 			}
@@ -275,6 +271,19 @@ public class QVTp2QVTg {
 		return propReads;
 	}
 	
+	private List<EObject> getAllContents(EObject eObject) {
+				
+		List<EObject> allContents = eObject2allContents.get(eObject);
+		if (allContents == null) {
+			allContents = new ArrayList<EObject>();
+			for (EObject child : eObject.eContents()) {
+				allContents.add(child);
+				allContents.addAll(getAllContents(child));
+			}
+			eObject2allContents.put(eObject, allContents);
+		}
+		return allContents;
+	}
 	
 	@NonNull
 	protected PropertyDatum getPropertyDatum(NavigationCallExp navCallExp) {

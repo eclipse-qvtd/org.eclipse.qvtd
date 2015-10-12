@@ -93,7 +93,7 @@ public class ClassRelationships {
 		}
 		
 		while (!packageToProcess.isEmpty()) {
-			Package aPackage = packageToProcess.pop();			
+			Package aPackage = packageToProcess.pop();
 			computeClass2SuperClasses(aPackage);
 		}
 		
@@ -183,29 +183,7 @@ public class ClassRelationships {
 			}
 		}
 	}
-	
-	
-	
-//	private void addContainerClassForTypeAndSubtypes(Class containerClass, Property containmentProperty, Class type) {
-//		
-//		//type = mManager.getPrimaryClass(type);
-//		Set<ContainerClass> containerClasses = class2containerClasses.get(type);
-//		if (containerClasses == null) {
-//			containerClasses = new LinkedHashSet<ContainerClass>();
-//			class2containerClasses.put(type, containerClasses);
-//		}
-//		
-//		containerClasses.add(new ContainerClass(containerClass, containmentProperty));
-//		
-//		Set<Class> subTypes = getDirectSubClasses(type);
-//		if (subTypes != null) {
-//			for (Class subType : subTypes) {
-//				addContainerClassForTypeAndSubtypes(containerClass, containmentProperty, subType);
-//			}	
-//		}
-//	}
-	
-	
+		
 	private List<Package> getInvolvedPackages(Resource resource) {
 	
 		List<Model> oclRoots = new ArrayList<Model>();
