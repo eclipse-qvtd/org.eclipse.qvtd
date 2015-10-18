@@ -206,11 +206,11 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map packageToSchema_LM in SimpleUML2RDBMS {
-     * uml (p : uml::Package[?];
+     * uml (p : uml::Package[1];
      *  |)
      * { |}
      * middle ( |)
-     * {realize p2s : uml2rdbms::PackageToSchema[?];
+     * {realize p2s : uml2rdbms::PackageToSchema[1];
      *  |}
      * where ( |)
      * {_0 : String[?];
@@ -240,9 +240,9 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * 
      * map packageToSchema_MR in SimpleUML2RDBMS {
      * rdbms ( |)
-     * {realize s : rdbms::Schema[?];
+     * {realize s : rdbms::Schema[1];
      *  |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
      * { |}
      * where ( |)
@@ -271,13 +271,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map integerToNumber_LM in SimpleUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * prim : uml::PrimitiveDataType[?];
+     * uml (p : uml::Package[1];
+     * prim : uml::PrimitiveDataType[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
-     * {realize p2n : uml2rdbms::IntegerToNumber[?];
+     * {realize p2n : uml2rdbms::IntegerToNumber[1];
      *  |}
      * where ( |
      * p2s.umlPackage = pprim.namespace = pprim.name = 'Integer')
@@ -330,13 +330,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * map integerToNumber_MR in SimpleUML2RDBMS {
      * rdbms ( |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * p2n : uml2rdbms::IntegerToNumber[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * p2n : uml2rdbms::IntegerToNumber[1];
      *  |)
      * { |}
      * where ( |
      * p2n.owner = p2s)
-     * {sqlType : String[?] = 'NUMBER';
+     * {sqlType : String[1] = 'NUMBER';
      *  |
      * p2n.typeName := sqlType;
      * }
@@ -361,13 +361,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * map booleanToBoolean_MR in SimpleUML2RDBMS {
      * rdbms ( |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * p2n : uml2rdbms::BooleanToBoolean[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * p2n : uml2rdbms::BooleanToBoolean[1];
      *  |)
      * { |}
      * where ( |
      * p2n.owner = p2s)
-     * {sqlType : String[?];
+     * {sqlType : String[1];
      *  |
      * sqlType := 'BOOLEAN';
      * p2n.typeName := sqlType;
@@ -391,13 +391,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map booleanToBoolean_LM in SimpleUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * prim : uml::PrimitiveDataType[?];
+     * uml (p : uml::Package[1];
+     * prim : uml::PrimitiveDataType[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
-     * {realize p2n : uml2rdbms::BooleanToBoolean[?];
+     * {realize p2n : uml2rdbms::BooleanToBoolean[1];
      *  |}
      * where ( |
      * p2s.umlPackage = pprim.namespace = pprim.name = 'Boolean')
@@ -450,13 +450,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * map stringToVarchar_MR in SimpleUML2RDBMS {
      * rdbms ( |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * p2n : uml2rdbms::StringToVarchar[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * p2n : uml2rdbms::StringToVarchar[1];
      *  |)
      * { |}
      * where ( |
      * p2n.owner = p2s)
-     * {sqlType : String[?] = 'VARCHAR';
+     * {sqlType : String[1] = 'VARCHAR';
      *  |
      * p2n.typeName := sqlType;
      * }
@@ -479,13 +479,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map stringToVarchar_LM in SimpleUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * prim : uml::PrimitiveDataType[?];
+     * uml (p : uml::Package[1];
+     * prim : uml::PrimitiveDataType[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
-     * {realize p2n : uml2rdbms::StringToVarchar[?];
+     * {realize p2n : uml2rdbms::StringToVarchar[1];
      *  |}
      * where ( |
      * p2s.umlPackage = pprim.namespace = pprim.name = 'String')
@@ -536,19 +536,19 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map classToTable_MR in SimpleUML2RDBMS {
-     * rdbms (s : rdbms::Schema[?];
+     * rdbms (s : rdbms::Schema[1];
      *  |)
-     * {realize t : rdbms::Table[?];
-     * realize pk : rdbms::Key[?];
-     * realize pc : rdbms::Column[?];
+     * {realize t : rdbms::Table[1];
+     * realize pk : rdbms::Key[1];
+     * realize pc : rdbms::Column[1];
      *  |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * c2t : uml2rdbms::ClassToTable[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * c2t : uml2rdbms::ClassToTable[1];
      *  |)
      * { |}
      * where ( |
      * p2s.schema = sc2t.owner = p2s)
-     * {c2t_name : String[?] = c2t.name;
+     * {c2t_name : String[1] = c2t.name;
      * _0 : String[1];
      * _1 : String[1];
      *  |
@@ -589,8 +589,8 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         }
         // variable assignments
         final @Nullable /*@Thrown*/ String name = c2t.getName();
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__tid);
-        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(name, STR__pk);
+        final @NonNull /*@NonInvalid*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__tid);
+        final @NonNull /*@NonInvalid*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(name, STR__pk);
         // creations
         final /*@Thrown*/ Column pc = RDBMSFactory.eINSTANCE.createColumn();
         assert pc != null;
@@ -623,13 +623,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map classToTable_LM in SimpleUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * c : uml::Class[?];
+     * uml (p : uml::Package[1];
+     * c : uml::Class[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
-     * {realize c2t : uml2rdbms::ClassToTable[?];
+     * {realize c2t : uml2rdbms::ClassToTable[1];
      *  |}
      * where ( |
      * p2s.umlPackage = pc.kind = 'persistent'c.namespace = p)
@@ -678,18 +678,18 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map associationToForeignKey_MR in SimpleUML2RDBMS {
-     * rdbms (s : rdbms::Schema[?];
-     * st : rdbms::Table[?];
-     * dt : rdbms::Table[?];
-     * rk : rdbms::Key[?];
+     * rdbms (s : rdbms::Schema[1];
+     * st : rdbms::Table[1];
+     * dt : rdbms::Table[1];
+     * rk : rdbms::Key[1];
      *  |)
-     * {realize fk : rdbms::ForeignKey[?];
-     * realize fc : rdbms::Column[?];
+     * {realize fk : rdbms::ForeignKey[1];
+     * realize fc : rdbms::Column[1];
      *  |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * sc2t : uml2rdbms::ClassToTable[?];
-     * dc2t : uml2rdbms::ClassToTable[?];
-     * a2f : uml2rdbms::AssociationToForeignKey[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * sc2t : uml2rdbms::ClassToTable[1];
+     * dc2t : uml2rdbms::ClassToTable[1];
+     * a2f : uml2rdbms::AssociationToForeignKey[1];
      *  |)
      * { |}
      * where ( |
@@ -805,22 +805,22 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map associationToForeignKey_LM in SimpleUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * sc : uml::Class[?];
-     * dc : uml::Class[?];
-     * a : uml::Association[?];
+     * uml (p : uml::Package[1];
+     * sc : uml::Class[1];
+     * dc : uml::Class[1];
+     * a : uml::Association[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * sc2t : uml2rdbms::ClassToTable[?];
-     * dc2t : uml2rdbms::ClassToTable[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * sc2t : uml2rdbms::ClassToTable[1];
+     * dc2t : uml2rdbms::ClassToTable[1];
      *  |)
-     * {realize a2f : uml2rdbms::AssociationToForeignKey[?];
+     * {realize a2f : uml2rdbms::AssociationToForeignKey[1];
      *  |}
      * where ( |
      * sc2t.owner = p2sdc2t.umlClass = dcsc2t.umlClass = scp2s.umlPackage = pa.namespace = psc.namespace = pa.source = sca.destination =
      *   dc)
-     * {a2f_name : String[?];
+     * {a2f_name : String[1];
      * _1 : String[?];
      *  |
      * a2f_name := if a.destination = dc and a.source = sc
@@ -1005,15 +1005,15 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map classPrimitiveAttributes_LM in SimpleUML2RDBMS {
-     * uml (t : uml::PrimitiveDataType[?];
-     * c : uml::Class[?];
-     * a : uml::Attribute[?];
+     * uml (t : uml::PrimitiveDataType[1];
+     * c : uml::Class[1];
+     * a : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao : uml2rdbms::ClassToTable[?];
-     * p2n : uml2rdbms::PrimitiveToName[?];
+     * middle (fao : uml2rdbms::ClassToTable[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |)
-     * {realize fa : uml2rdbms::AttributeToColumn[?];
+     * {realize fa : uml2rdbms::AttributeToColumn[1];
      *  |}
      * where ( |
      * fao.umlClass = cp2n.primitive = ta.owner = ca.type =
@@ -1082,14 +1082,14 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map classComplexAttributes_LM in SimpleUML2RDBMS {
-     * uml (t : uml::Class[?];
-     * c : uml::Class[?];
-     * a : uml::Attribute[?];
+     * uml (t : uml::Class[1];
+     * c : uml::Class[1];
+     * a : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao : uml2rdbms::ClassToTable[?];
+     * middle (fao : uml2rdbms::ClassToTable[1];
      *  |)
-     * {realize fa : uml2rdbms::NonLeafAttribute[?];
+     * {realize fa : uml2rdbms::NonLeafAttribute[1];
      *  |}
      * where ( |
      * fao.umlClass = ca.owner = ca.type =
@@ -1177,16 +1177,16 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map complexAttributePrimitiveAttributes_LM in SimpleUML2RDBMS {
-     * uml (ca : uml::Attribute[?];
-     * c : uml::Class[?];
-     * t : uml::PrimitiveDataType[?];
-     * a : uml::Attribute[?];
+     * uml (ca : uml::Attribute[1];
+     * c : uml::Class[1];
+     * t : uml::PrimitiveDataType[1];
+     * a : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao : uml2rdbms::NonLeafAttribute[?];
-     * p2n : uml2rdbms::PrimitiveToName[?];
+     * middle (fao : uml2rdbms::NonLeafAttribute[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |)
-     * {realize fa : uml2rdbms::AttributeToColumn[?];
+     * {realize fa : uml2rdbms::AttributeToColumn[1];
      *  |}
      * where ( |
      * fao.attribute = cap2n.primitive = ta.owner = ca.type = tca.type = ca.owner = c)
@@ -1267,15 +1267,15 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map complexAttributeComplexAttributes_LM in SimpleUML2RDBMS {
-     * uml (ca : uml::Attribute[?];
-     * c : uml::Class[?];
-     * t : uml::Class[?];
-     * a : uml::Attribute[?];
+     * uml (ca : uml::Attribute[1];
+     * c : uml::Class[1];
+     * t : uml::Class[1];
+     * a : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao : uml2rdbms::NonLeafAttribute[?];
+     * middle (fao : uml2rdbms::NonLeafAttribute[1];
      *  |)
-     * {realize fa : uml2rdbms::NonLeafAttribute[?];
+     * {realize fa : uml2rdbms::NonLeafAttribute[1];
      *  |}
      * where ( |
      * fao.attribute = caa.owner = ca.owner = cca.type = ca.type =
@@ -1375,14 +1375,14 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map attributeColumns_MR in SimpleUML2RDBMS {
-     * rdbms (t : rdbms::Table[?];
-     * ct : String[?];
+     * rdbms (t : rdbms::Table[1];
+     * ct : String[1];
      *  |)
-     * {realize c : rdbms::Column[?];
+     * {realize c : rdbms::Column[1];
      *  |}
-     * middle (c2t : uml2rdbms::ClassToTable[?];
-     * p2n : uml2rdbms::PrimitiveToName[?];
-     * a2c : uml2rdbms::AttributeToColumn[?];
+     * middle (c2t : uml2rdbms::ClassToTable[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
+     * a2c : uml2rdbms::AttributeToColumn[1];
      *  |)
      * { |}
      * where ( |
@@ -1683,18 +1683,14 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         for (Package p_11 : ValueUtil.typedIterable(Package.class, objectsOfKind)) {
             if (p_11 != null) {
                 final @NonNull /*@NonInvalid*/ Package symbol_0 = (Package)p_11;
-                if (symbol_0 != null) {
-                    MAP_packageToSchema_LM(symbol_0);
-                }
+                MAP_packageToSchema_LM(symbol_0);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_0 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageToSchema, models[2/*middle*/], TYP_uml2rdbms_c_c_PackageToSchema_0);
         for (PackageToSchema p2s_21 : ValueUtil.typedIterable(PackageToSchema.class, objectsOfKind_0)) {
             if (p2s_21 != null) {
                 final @NonNull /*@NonInvalid*/ PackageToSchema symbol_3 = (PackageToSchema)p2s_21;
-                if (symbol_3 != null) {
-                    MAP_packageToSchema_MR(symbol_3);
-                }
+                MAP_packageToSchema_MR(symbol_3);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_1 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, models[0/*uml*/], TYP_uml_c_c_Class_0);
@@ -1704,13 +1700,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ Package namespace = symbol_6.getNamespace();
                 final @NonNull /*@Thrown*/ PackageToSchema middle = ClassUtil.nonNullState (OPPOSITE_OF_PackageToSchema_umlPackage.get(namespace));
-                if (symbol_6 != null) {
-                    if (namespace != null) {
-                        if (middle != null) {
-                            MAP_classToTable_LM(symbol_6, namespace, middle);
-                        }
-                    }
-                }
+                MAP_classToTable_LM(symbol_6, namespace, middle);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_2 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassToTable, models[2/*middle*/], TYP_uml2rdbms_c_c_ClassToTable_0);
@@ -1721,13 +1711,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 final @NonNull /*@Thrown*/ PackageToSchema owner = symbol_11.getOwner();
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ Schema schema = owner.getSchema();
-                if (symbol_11 != null) {
-                    if (owner != null) {
-                        if (schema != null) {
-                            MAP_classToTable_MR(symbol_11, owner, schema);
-                        }
-                    }
-                }
+                MAP_classToTable_MR(symbol_11, owner, schema);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_3 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Association, models[0/*uml*/], TYP_uml_c_c_Association_0);
@@ -1739,29 +1723,18 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class source_0 = symbol_16.getSource();
                 final @Nullable /*@Thrown*/ ClassToTable middle_2 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(source_0));
+                if (middle_2 == null) {
+                    throw new InvalidValueException("Null binding for \'associationToForeignKey_LM::sc2t\'");
+                }
                 final @Nullable /*@Thrown*/ ClassToTable middle_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(destination));
+                if (middle_0 == null) {
+                    throw new InvalidValueException("Null binding for \'associationToForeignKey_LM::dc2t\'");
+                }
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ Package namespace_1 = symbol_16.getNamespace();
-                if (middle_2 == null) {
-                    throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/SimpleUML2RDBMS\'::ClassToTable::owner\'");
-                }
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ PackageToSchema owner_1 = middle_2.getOwner();
-                if (symbol_16 != null) {
-                    if (destination != null) {
-                        if (middle_0 != null) {
-                            if (namespace_1 != null) {
-                                if (owner_1 != null) {
-                                    if (source_0 != null) {
-                                        if (middle_2 != null) {
-                                            MAP_associationToForeignKey_LM(symbol_16, destination, middle_0, namespace_1, owner_1, source_0, middle_2);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                MAP_associationToForeignKey_LM(symbol_16, destination, middle_0, namespace_1, owner_1, source_0, middle_2);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_4 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_AssociationToForeignKey, models[2/*middle*/], TYP_uml2rdbms_c_c_AssociationToForeignKey_0);
@@ -1777,34 +1750,21 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                         final @Nullable /*@Thrown*/ ClassToTable referenced = symbol_25.getReferenced();
                         final @Nullable /*@Thrown*/ Table table_1 = owner_5.getTable();
                         if (referenced == null) {
-                            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/SimpleUML2RDBMS\'::ClassToTable::table\'");
+                            throw new InvalidValueException("Null binding for \'associationToForeignKey_MR::dc2t\'");
+                        }
+                        if (table_1 == null) {
+                            throw new InvalidValueException("Null binding for \'associationToForeignKey_MR::st\'");
                         }
                         final @Nullable /*@Thrown*/ Table table = referenced.getTable();
+                        if (table == null) {
+                            throw new InvalidValueException("Null binding for \'associationToForeignKey_MR::dt\'");
+                        }
                         @SuppressWarnings("null")
                         final @NonNull /*@Thrown*/ PackageToSchema owner_3 = owner_5.getOwner();
                         final @NonNull /*@NonInvalid*/ Key symbol_29 = (Key)rk_1;
-                        if (table_1 == null) {
-                            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS\'::Table::schema\'");
-                        }
                         @SuppressWarnings("null")
                         final @NonNull /*@Thrown*/ Schema schema_0 = table_1.getSchema();
-                        if (symbol_25 != null) {
-                            if (referenced != null) {
-                                if (table != null) {
-                                    if (owner_3 != null) {
-                                        if (symbol_29 != null) {
-                                            if (schema_0 != null) {
-                                                if (owner_5 != null) {
-                                                    if (table_1 != null) {
-                                                        MAP_associationToForeignKey_MR(symbol_25, referenced, table, owner_3, symbol_29, schema_0, owner_5, table_1);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        MAP_associationToForeignKey_MR(symbol_25, referenced, table, owner_3, symbol_29, schema_0, owner_5, table_1);
                     }
                 }
             }
@@ -1815,13 +1775,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ Package namespace_2 = symbol_38.getNamespace();
                 final @NonNull /*@Thrown*/ PackageToSchema middle_3 = ClassUtil.nonNullState (OPPOSITE_OF_PackageToSchema_umlPackage.get(namespace_2));
-                if (namespace_2 != null) {
-                    if (middle_3 != null) {
-                        if (symbol_38 != null) {
-                            MAP_stringToVarchar_LM(namespace_2, middle_3, symbol_38);
-                        }
-                    }
-                }
+                MAP_stringToVarchar_LM(namespace_2, middle_3, symbol_38);
             }
         }
         for (PrimitiveDataType prim_6 : ValueUtil.typedIterable(PrimitiveDataType.class, objectsOfKind_7)) {
@@ -1830,13 +1784,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ Package namespace_4 = symbol_43.getNamespace();
                 final @NonNull /*@Thrown*/ PackageToSchema middle_4 = ClassUtil.nonNullState (OPPOSITE_OF_PackageToSchema_umlPackage.get(namespace_4));
-                if (namespace_4 != null) {
-                    if (middle_4 != null) {
-                        if (symbol_43 != null) {
-                            MAP_integerToNumber_LM(namespace_4, middle_4, symbol_43);
-                        }
-                    }
-                }
+                MAP_integerToNumber_LM(namespace_4, middle_4, symbol_43);
             }
         }
         for (PrimitiveDataType prim_7 : ValueUtil.typedIterable(PrimitiveDataType.class, objectsOfKind_7)) {
@@ -1845,13 +1793,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ Package namespace_6 = symbol_48.getNamespace();
                 final @NonNull /*@Thrown*/ PackageToSchema middle_5 = ClassUtil.nonNullState (OPPOSITE_OF_PackageToSchema_umlPackage.get(namespace_6));
-                if (namespace_6 != null) {
-                    if (middle_5 != null) {
-                        if (symbol_48 != null) {
-                            MAP_booleanToBoolean_LM(namespace_6, middle_5, symbol_48);
-                        }
-                    }
-                }
+                MAP_booleanToBoolean_LM(namespace_6, middle_5, symbol_48);
             }
         }
         for (Attribute a_10 : ValueUtil.typedIterable(Attribute.class, select_0)) {
@@ -1862,18 +1804,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ Classifier type_1 = symbol_51.getType();
                 final @Nullable /*@Thrown*/ ClassToTable middle_6 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(owner_7));
+                if (middle_6 == null) {
+                    throw new InvalidValueException("Null binding for \'classPrimitiveAttributes_LM::fao\'");
+                }
                 final @NonNull /*@Thrown*/ PrimitiveDataType oclAsType = ClassUtil.nonNullState((PrimitiveDataType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_1, TYP_uml_c_c_PrimitiveDataType_2));
                 final @NonNull /*@Thrown*/ PrimitiveToName middle_7 = ClassUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(oclAsType));
-                if (symbol_51 != null) {
-                    if (owner_7 != null) {
-                        if (middle_6 != null) {
-                            if (middle_7 != null) {
-                                if (type_1 instanceof PrimitiveDataType) {
-                                    MAP_classPrimitiveAttributes_LM(symbol_51, owner_7, middle_6, middle_7, (PrimitiveDataType)type_1);
-                                }
-                            }
-                        }
-                    }
+                if (type_1 instanceof PrimitiveDataType) {
+                    MAP_classPrimitiveAttributes_LM(symbol_51, owner_7, middle_6, middle_7, (PrimitiveDataType)type_1);
                 }
             }
         }
@@ -1883,11 +1820,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 final @NonNull /*@NonInvalid*/ IntegerToNumber symbol_58 = (IntegerToNumber)p2n_11;
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ PackageToSchema owner_9 = symbol_58.getOwner();
-                if (symbol_58 != null) {
-                    if (owner_9 != null) {
-                        MAP_integerToNumber_MR(symbol_58, owner_9);
-                    }
-                }
+                MAP_integerToNumber_MR(symbol_58, owner_9);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_11 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_BooleanToBoolean, models[2/*middle*/], TYP_uml2rdbms_c_c_BooleanToBoolean_0);
@@ -1896,11 +1829,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 final @NonNull /*@NonInvalid*/ BooleanToBoolean symbol_62 = (BooleanToBoolean)p2n_12;
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ PackageToSchema owner_10 = symbol_62.getOwner();
-                if (symbol_62 != null) {
-                    if (owner_10 != null) {
-                        MAP_booleanToBoolean_MR(symbol_62, owner_10);
-                    }
-                }
+                MAP_booleanToBoolean_MR(symbol_62, owner_10);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_12 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_StringToVarchar, models[2/*middle*/], TYP_uml2rdbms_c_c_StringToVarchar_0);
@@ -1909,11 +1838,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 final @NonNull /*@NonInvalid*/ StringToVarchar symbol_66 = (StringToVarchar)p2n_13;
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ PackageToSchema owner_11 = symbol_66.getOwner();
-                if (symbol_66 != null) {
-                    if (owner_11 != null) {
-                        MAP_stringToVarchar_MR(symbol_66, owner_11);
-                    }
-                }
+                MAP_stringToVarchar_MR(symbol_66, owner_11);
             }
         }
         for (Attribute a_11 : ValueUtil.typedIterable(Attribute.class, objectsOfKind_13)) {
@@ -1922,16 +1847,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner_12 = symbol_70.getOwner();
                 final @Nullable /*@Thrown*/ ClassToTable middle_8 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(owner_12));
+                if (middle_8 == null) {
+                    throw new InvalidValueException("Null binding for \'classComplexAttributes_LM::fao\'");
+                }
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ Classifier type_2 = symbol_70.getType();
-                if (symbol_70 != null) {
-                    if (owner_12 != null) {
-                        if (middle_8 != null) {
-                            if (type_2 instanceof simpleuml2rdbms.uml.Class) {
-                                MAP_classComplexAttributes_LM(symbol_70, owner_12, middle_8, (simpleuml2rdbms.uml.Class)type_2);
-                            }
-                        }
-                    }
+                if (type_2 instanceof simpleuml2rdbms.uml.Class) {
+                    MAP_classComplexAttributes_LM(symbol_70, owner_12, middle_8, (simpleuml2rdbms.uml.Class)type_2);
                 }
             }
         }
@@ -1944,21 +1866,15 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                         final @NonNull /*@NonInvalid*/ Attribute symbol_76 = (Attribute)a_12;
                         final @Nullable /*@Thrown*/ Attribute attribute_0 = symbol_79.getAttribute();
                         if (attribute_0 == null) {
-                            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/SimpleUML\'::Attribute::type\'");
+                            throw new InvalidValueException("Null binding for \'complexAttributeComplexAttributes_LM::ca\'");
                         }
                         @SuppressWarnings("null")
                         final @NonNull /*@Thrown*/ Classifier type_3 = attribute_0.getType();
                         @SuppressWarnings("null")
                         final @NonNull /*@Thrown*/ Classifier type_4 = symbol_76.getType();
-                        if (symbol_76 != null) {
-                            if (type_3 instanceof simpleuml2rdbms.uml.Class) {
-                                if (attribute_0 != null) {
-                                    if (symbol_79 != null) {
-                                        if (type_4 instanceof simpleuml2rdbms.uml.Class) {
-                                            MAP_complexAttributeComplexAttributes_LM(symbol_76, (simpleuml2rdbms.uml.Class)type_3, attribute_0, symbol_79, (simpleuml2rdbms.uml.Class)type_4);
-                                        }
-                                    }
-                                }
+                        if (type_3 instanceof simpleuml2rdbms.uml.Class) {
+                            if (type_4 instanceof simpleuml2rdbms.uml.Class) {
+                                MAP_complexAttributeComplexAttributes_LM(symbol_76, (simpleuml2rdbms.uml.Class)type_3, attribute_0, symbol_79, (simpleuml2rdbms.uml.Class)type_4);
                             }
                         }
                     }
@@ -1976,19 +1892,14 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                         @SuppressWarnings("null")
                         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner_14 = symbol_84.getOwner();
                         final @Nullable /*@Thrown*/ FromAttribute middle_9 = ClassUtil.nonNullState (OPPOSITE_OF_FromAttribute_attribute.get(symbol_86));
+                        if (middle_9 == null) {
+                            throw new InvalidValueException("Null binding for \'complexAttributePrimitiveAttributes_LM::fao\'");
+                        }
                         final @NonNull /*@Thrown*/ PrimitiveDataType oclAsType_0 = ClassUtil.nonNullState((PrimitiveDataType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_7, TYP_uml_c_c_PrimitiveDataType_2));
                         final @NonNull /*@Thrown*/ PrimitiveToName middle_10 = ClassUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(oclAsType_0));
-                        if (symbol_84 != null) {
-                            if (owner_14 != null) {
-                                if (symbol_86 != null) {
-                                    if (middle_9 instanceof NonLeafAttribute) {
-                                        if (middle_10 != null) {
-                                            if (type_7 instanceof PrimitiveDataType) {
-                                                MAP_complexAttributePrimitiveAttributes_LM(symbol_84, owner_14, symbol_86, (NonLeafAttribute)middle_9, middle_10, (PrimitiveDataType)type_7);
-                                            }
-                                        }
-                                    }
-                                }
+                        if (middle_9 instanceof NonLeafAttribute) {
+                            if (type_7 instanceof PrimitiveDataType) {
+                                MAP_complexAttributePrimitiveAttributes_LM(symbol_84, owner_14, symbol_86, (NonLeafAttribute)middle_9, middle_10, (PrimitiveDataType)type_7);
                             }
                         }
                     }
@@ -2026,22 +1937,17 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 final @NonNull /*@Thrown*/ FromAttributeOwner owner_16 = symbol_93.getOwner();
                 final @Nullable /*@Thrown*/ PrimitiveToName type_9 = symbol_93.getType();
                 if (type_9 == null) {
-                    throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/SimpleUML2RDBMS\'::PrimitiveToName::typeName\'");
+                    throw new InvalidValueException("Null binding for \'attributeColumns_MR::p2n\'");
                 }
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ String typeName = type_9.getTypeName();
                 final @NonNull /*@Thrown*/ ClassToTable oclAsType_1 = ClassUtil.nonNullState((ClassToTable)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, owner_16, TYP_uml2rdbms_c_c_ClassToTable_0));
                 final @Nullable /*@Thrown*/ Table table_2 = oclAsType_1.getTable();
-                if (symbol_93 != null) {
-                    if (owner_16 instanceof ClassToTable) {
-                        if (typeName != null) {
-                            if (type_9 != null) {
-                                if (table_2 != null) {
-                                    MAP_attributeColumns_MR(symbol_93, (ClassToTable)owner_16, typeName, type_9, table_2);
-                                }
-                            }
-                        }
-                    }
+                if (table_2 == null) {
+                    throw new InvalidValueException("Null binding for \'attributeColumns_MR::t\'");
+                }
+                if (owner_16 instanceof ClassToTable) {
+                    MAP_attributeColumns_MR(symbol_93, (ClassToTable)owner_16, typeName, type_9, table_2);
                 }
             }
         }

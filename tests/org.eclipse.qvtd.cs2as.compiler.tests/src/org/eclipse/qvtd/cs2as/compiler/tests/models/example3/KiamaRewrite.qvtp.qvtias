@@ -85,8 +85,13 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
+<<<<<<< ewillink/support
           <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Num.value">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+=======
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Num.value">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
+>>>>>>> a23fd48 Realized/GuardVariables cannot be null
                 referredProperty="KiamaCS.ecore.oclas#p.kiamacs.NumCS.value">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS" isImplicit="true" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.uNum_value.leftCS.guard.numCS"/>
             </value>
@@ -127,7 +132,7 @@
                     integerSymbol="0"/>
                 <ownedThen xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                     referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
                       referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.deep">
                     <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node"
                         referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
@@ -289,7 +294,7 @@
                     integerSymbol="0"/>
                 <ownedThen xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                     referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
                       referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.deep">
                     <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node"
                         referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
@@ -344,12 +349,12 @@
           <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
             <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+              <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
                   referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Collection.max">
                 <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Set.including..T">
                   <ownedSource xsi:type="pivot:OperationCallExp" name="oclAsSet" type="#//@ownedPackages.1/@ownedClasses.0" isImplicit="true"
                       referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsSet">
-                    <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                    <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
                         referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
                       <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node"
                           referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Plus.left">
@@ -365,7 +370,7 @@
                       </ownedSource>
                     </ownedSource>
                   </ownedSource>
-                  <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                  <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
                       referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
                     <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node"
                         referredProperty="KiamaAS.ecore.oclas#p.kiamaas.Plus.right">
@@ -431,20 +436,34 @@
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
+<<<<<<< ewillink/support
     <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.1" elementType="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
+=======
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.2" elementType="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt">
+>>>>>>> a23fd48 Realized/GuardVariables cannot be null
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+        <ownedSubstitutions actual="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
+<<<<<<< ewillink/support
     <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.2" elementType="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
+=======
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.2" elementType="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
+        isNullFree="true">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+        <ownedSubstitutions actual="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.3" elementType="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt">
+>>>>>>> a23fd48 Realized/GuardVariables cannot be null
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
-        elementType="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
+        elementType="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+        <ownedSubstitutions actual="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
       </ownedBindings>
     </ownedClasses>
   </ownedPackages>

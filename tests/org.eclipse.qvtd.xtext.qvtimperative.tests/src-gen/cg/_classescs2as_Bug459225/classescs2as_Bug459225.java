@@ -146,11 +146,11 @@ public class classescs2as_Bug459225 extends AbstractTransformer
      * 
      * map createPackage in classescs2as_Bug459225 {
      * 
-     *   leftCS (packageCS : classescs::PackageCS[?];
+     *   leftCS (packageCS : classescs::PackageCS[1];
      *  |)
      * { |}
      * rightAS ( |)
-     * {realize package : classes::Package[?];
+     * {realize package : classes::Package[1];
      *  |}
      * where ( |)
      * {_0 : String[?];
@@ -218,9 +218,7 @@ public class classescs2as_Bug459225 extends AbstractTransformer
         for (PackageCS packageCS_1 : ValueUtil.typedIterable(PackageCS.class, allInstances)) {
             if (packageCS_1 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS symbol_0 = (PackageCS)packageCS_1;
-                if (symbol_0 != null) {
-                    MAP_createPackage(symbol_0);
-                }
+                MAP_createPackage(symbol_0);
             }
         }
         return true;

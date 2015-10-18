@@ -203,9 +203,7 @@ public class ManualUML2RDBMS extends AbstractTransformer
         for (Package p1 : ValueUtil.typedIterable(Package.class, allInstances)) {
             if (p1 != null) {
                 final @NonNull /*@NonInvalid*/ Package symbol_0 = (Package)p1;
-                if (symbol_0 != null) {
-                    MAP_packageToSchemaLM(symbol_0);
-                }
+                MAP_packageToSchemaLM(symbol_0);
             }
         }
         return true;
@@ -215,11 +213,11 @@ public class ManualUML2RDBMS extends AbstractTransformer
      * 
      * map packageToSchemaLM in ManualUML2RDBMS {
      * 
-     *   uml (p : uml::Package[?];
+     *   uml (p : uml::Package[1];
      *  |)
      * { |}
      * middle ( |)
-     * {realize p2s : uml2rdbms::PackageToSchema[?];
+     * {realize p2s : uml2rdbms::PackageToSchema[1];
      *  |}
      * where ( |)
      * {_0 : String[?];
@@ -278,26 +276,14 @@ public class ManualUML2RDBMS extends AbstractTransformer
         for (PackageElement child : elements_0) {
             if (child != null) {
                 final @NonNull /*@NonInvalid*/ PackageElement symbol_4 = (PackageElement)child;
-                if (p != null) {
-                    if (p2s_11 != null) {
-                        if (symbol_4 instanceof PrimitiveDataType) {
-                            MAP_integerToNumberLM(p, p2s_11, (PrimitiveDataType)symbol_4);
-                        }
-                    }
+                if (symbol_4 instanceof PrimitiveDataType) {
+                    MAP_integerToNumberLM(p, p2s_11, (PrimitiveDataType)symbol_4);
                 }
-                if (p != null) {
-                    if (p2s_11 != null) {
-                        if (symbol_4 instanceof PrimitiveDataType) {
-                            MAP_booleanToBooleanLM(p, p2s_11, (PrimitiveDataType)symbol_4);
-                        }
-                    }
+                if (symbol_4 instanceof PrimitiveDataType) {
+                    MAP_booleanToBooleanLM(p, p2s_11, (PrimitiveDataType)symbol_4);
                 }
-                if (p != null) {
-                    if (p2s_11 != null) {
-                        if (symbol_4 instanceof PrimitiveDataType) {
-                            MAP_stringToVarcharLM(p, p2s_11, (PrimitiveDataType)symbol_4);
-                        }
-                    }
+                if (symbol_4 instanceof PrimitiveDataType) {
+                    MAP_stringToVarcharLM(p, p2s_11, (PrimitiveDataType)symbol_4);
                 }
             }
         }
@@ -305,24 +291,14 @@ public class ManualUML2RDBMS extends AbstractTransformer
             if (child_0 != null) {
                 final @NonNull /*@NonInvalid*/ PackageElement symbol_11 = (PackageElement)child_0;
                 if (symbol_11 instanceof manualuml2rdbms.uml.Class) {
-                    if (p != null) {
-                        if (p2s_11 != null) {
-                            MAP_classToTableLM((manualuml2rdbms.uml.Class)symbol_11, p, p2s_11);
-                        }
-                    }
+                    MAP_classToTableLM((manualuml2rdbms.uml.Class)symbol_11, p, p2s_11);
                 }
                 if (symbol_11 instanceof Association) {
-                    if (p != null) {
-                        if (p2s_11 != null) {
-                            MAP_associationToForeignKeyLM((Association)symbol_11, p, p2s_11);
-                        }
-                    }
+                    MAP_associationToForeignKeyLM((Association)symbol_11, p, p2s_11);
                 }
             }
         }
-        if (p2s_11 != null) {
-            MAP_packageToSchemaMR(p2s_11);
-        }
+        MAP_packageToSchemaMR(p2s_11);
         return true;
     }
     
@@ -330,11 +306,11 @@ public class ManualUML2RDBMS extends AbstractTransformer
      * 
      * map packageToSchemaMR in ManualUML2RDBMS {
      * 
-     *   middle (p2s : uml2rdbms::PackageToSchema[?];
+     *   middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
      * { |}
      * rdbms ( |)
-     * {realize s : rdbms::Schema[?];
+     * {realize s : rdbms::Schema[1];
      *  |}
      * where ( |)
      * { |
@@ -375,31 +351,15 @@ public class ManualUML2RDBMS extends AbstractTransformer
         // property assignments
         p2s.setSchema(s_2);
         // mapping statements
-        if (p2s != null) {
-            if (s_2 != null) {
-                MAP_packageToSchemaMR_1(p2s, s_2);
-            }
-        }
+        MAP_packageToSchemaMR_1(p2s, s_2);
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<PrimitiveToName> primitivesToNames = p2s.getPrimitivesToNames();
         for (PrimitiveToName child : primitivesToNames) {
             if (child != null) {
                 final @NonNull /*@NonInvalid*/ PrimitiveToName symbol_4 = (PrimitiveToName)child;
-                if (symbol_4 != null) {
-                    if (p2s != null) {
-                        MAP_integerToNumberMR(symbol_4, p2s);
-                    }
-                }
-                if (symbol_4 != null) {
-                    if (p2s != null) {
-                        MAP_booleanToBooleanMR(symbol_4, p2s);
-                    }
-                }
-                if (symbol_4 != null) {
-                    if (p2s != null) {
-                        MAP_stringToVarcharMR(symbol_4, p2s);
-                    }
-                }
+                MAP_integerToNumberMR(symbol_4, p2s);
+                MAP_booleanToBooleanMR(symbol_4, p2s);
+                MAP_stringToVarcharMR(symbol_4, p2s);
             }
         }
         @SuppressWarnings("null")
@@ -407,13 +367,7 @@ public class ManualUML2RDBMS extends AbstractTransformer
         for (ClassToTable child_0 : classesToTables) {
             if (child_0 != null) {
                 final @NonNull /*@NonInvalid*/ ClassToTable symbol_9 = (ClassToTable)child_0;
-                if (symbol_9 != null) {
-                    if (p2s != null) {
-                        if (s_2 != null) {
-                            MAP_classToTableMR(symbol_9, p2s, s_2);
-                        }
-                    }
-                }
+                MAP_classToTableMR(symbol_9, p2s, s_2);
             }
         }
         return true;
@@ -422,10 +376,10 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map packageToSchemaMR_1 in ManualUML2RDBMS {
-     * middle (p2s_1 : uml2rdbms::PackageToSchema[?];
+     * middle (p2s_1 : uml2rdbms::PackageToSchema[1];
      *  |)
      * { |}
-     * rdbms (s_1 : rdbms::Schema[?];
+     * rdbms (s_1 : rdbms::Schema[1];
      *  |)
      * { |}
      * where ( |)
@@ -448,13 +402,13 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map integerToNumberLM in ManualUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * prim : uml::PrimitiveDataType[?];
+     * uml (p : uml::Package[1];
+     * prim : uml::PrimitiveDataType[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
-     * {realize p2n : uml2rdbms::PrimitiveToName[?];
+     * {realize p2n : uml2rdbms::PrimitiveToName[1];
      *  |}
      * where ( |
      * prim.namespace = pprim.name = 'Integer'p2s.umlPackage = p)
@@ -506,8 +460,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map integerToNumberMR in ManualUML2RDBMS {
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * p2n : uml2rdbms::PrimitiveToName[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |)
      * { |}
      * rdbms ( |)
@@ -537,13 +491,13 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map booleanToBooleanLM in ManualUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * prim : uml::PrimitiveDataType[?];
+     * uml (p : uml::Package[1];
+     * prim : uml::PrimitiveDataType[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
-     * {realize p2n : uml2rdbms::PrimitiveToName[?];
+     * {realize p2n : uml2rdbms::PrimitiveToName[1];
      *  |}
      * where ( |
      * prim.namespace = pprim.name = 'Boolean'p2s.umlPackage = p)
@@ -595,8 +549,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map booleanToBooleanMR in ManualUML2RDBMS {
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * p2n : uml2rdbms::PrimitiveToName[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |)
      * { |}
      * rdbms ( |)
@@ -626,13 +580,13 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map stringToVarcharLM in ManualUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * prim : uml::PrimitiveDataType[?];
+     * uml (p : uml::Package[1];
+     * prim : uml::PrimitiveDataType[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
-     * {realize p2n : uml2rdbms::PrimitiveToName[?];
+     * {realize p2n : uml2rdbms::PrimitiveToName[1];
      *  |}
      * where ( |
      * prim.namespace = pprim.name = 'String'p2s.umlPackage = p)
@@ -684,8 +638,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map stringToVarcharMR in ManualUML2RDBMS {
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * p2n : uml2rdbms::PrimitiveToName[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |)
      * { |}
      * rdbms ( |)
@@ -715,13 +669,13 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map classToTableLM in ManualUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * c : uml::Class[?];
+     * uml (p : uml::Package[1];
+     * c : uml::Class[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
-     * {realize c2t : uml2rdbms::ClassToTable[?];
+     * {realize c2t : uml2rdbms::ClassToTable[1];
      *  |}
      * where ( |
      * c.kind = 'persistent'c.namespace = pp2s.umlPackage =
@@ -791,29 +745,13 @@ public class ManualUML2RDBMS extends AbstractTransformer
                 final @NonNull /*@NonInvalid*/ Attribute symbol_5 = (Attribute)anAttribute;
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ Classifier type_0 = symbol_5.getType();
-                if (symbol_5 != null) {
-                    if (c != null) {
-                        if (c2t_3 != null) {
-                            MAP_classPrimitiveAttributesLM(symbol_5, c, c2t_3);
-                        }
-                    }
-                }
-                if (symbol_5 != null) {
-                    if (c != null) {
-                        if (c2t_3 != null) {
-                            MAP_classComplexAttributesLM(symbol_5, c, c2t_3);
-                        }
-                    }
+                MAP_classPrimitiveAttributesLM(symbol_5, c, c2t_3);
+                MAP_classComplexAttributesLM(symbol_5, c, c2t_3);
+                if (type_0 instanceof manualuml2rdbms.uml.Class) {
+                    MAP_complexAttributePrimitiveAttributesLM((manualuml2rdbms.uml.Class)type_0, symbol_5);
                 }
                 if (type_0 instanceof manualuml2rdbms.uml.Class) {
-                    if (symbol_5 != null) {
-                        MAP_complexAttributePrimitiveAttributesLM((manualuml2rdbms.uml.Class)type_0, symbol_5);
-                    }
-                }
-                if (type_0 instanceof manualuml2rdbms.uml.Class) {
-                    if (symbol_5 != null) {
-                        MAP_complexAttributeComplexAttributesLM((manualuml2rdbms.uml.Class)type_0, symbol_5);
-                    }
+                    MAP_complexAttributeComplexAttributesLM((manualuml2rdbms.uml.Class)type_0, symbol_5);
                 }
             }
         }
@@ -823,13 +761,13 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map classToTableMR in ManualUML2RDBMS {
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * c2t : uml2rdbms::ClassToTable[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * c2t : uml2rdbms::ClassToTable[1];
      *  |)
      * { |}
-     * rdbms (s : rdbms::Schema[?];
+     * rdbms (s : rdbms::Schema[1];
      *  |)
-     * {realize t : rdbms::Table[?];
+     * {realize t : rdbms::Table[1];
      *  |}
      * where ( |
      * c2t.owner =
@@ -887,40 +825,22 @@ public class ManualUML2RDBMS extends AbstractTransformer
         t_0.setKind(STR_base);
         t_0.setSchema(s);
         // mapping statements
-        if (c2t != null) {
-            if (t_0 != null) {
-                MAP_classToTableMR_1(c2t, t_0);
-            }
-        }
-        if (c2t != null) {
-            if (t_0 != null) {
-                MAP_classToTableMR_2(c2t, t_0);
-            }
-        }
+        MAP_classToTableMR_1(c2t, t_0);
+        MAP_classToTableMR_2(c2t, t_0);
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ List<AssociationToForeignKey> associationsToForeignKeys = c2t.getAssociationsToForeignKeys();
         for (AssociationToForeignKey child : associationsToForeignKeys) {
             if (child != null) {
                 final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(t_0));
+                if (ClassToTable_0 == null) {
+                    throw new InvalidValueException("Null binding for \'associationToForeignKeyMR::sc2t\'");
+                }
                 final @NonNull /*@NonInvalid*/ AssociationToForeignKey symbol_4 = (AssociationToForeignKey)child;
                 final @Nullable /*@Thrown*/ Key primaryKey = c2t.getPrimaryKey();
-                if (symbol_4 != null) {
-                    if (ClassToTable_0 != null) {
-                        if (t_0 != null) {
-                            if (p2s_8 != null) {
-                                if (primaryKey != null) {
-                                    if (s != null) {
-                                        if (ClassToTable_0 != null) {
-                                            if (t_0 != null) {
-                                                MAP_associationToForeignKeyMR(symbol_4, ClassToTable_0, t_0, p2s_8, primaryKey, s, ClassToTable_0, t_0);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                if (primaryKey == null) {
+                    throw new InvalidValueException("Null binding for \'associationToForeignKeyMR::rk\'");
                 }
+                MAP_associationToForeignKeyMR(symbol_4, ClassToTable_0, t_0, p2s_8, primaryKey, s, ClassToTable_0, t_0);
             }
         }
         final @NonNull /*@Thrown*/ SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_fromAttributes, TYP_uml2rdbms_c_c_NonLeafAttribute_0);
@@ -950,11 +870,7 @@ public class ManualUML2RDBMS extends AbstractTransformer
             if (child_0 != null) {
                 final @NonNull /*@NonInvalid*/ FromAttribute symbol_7 = (FromAttribute)child_0;
                 if (symbol_7 instanceof AttributeToColumn) {
-                    if (c2t != null) {
-                        if (t_0 != null) {
-                            MAP_attributeColumnsMR((AttributeToColumn)symbol_7, c2t, t_0);
-                        }
-                    }
+                    MAP_attributeColumnsMR((AttributeToColumn)symbol_7, c2t, t_0);
                 }
             }
         }
@@ -964,10 +880,10 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map classToTableMR_1 in ManualUML2RDBMS {
-     * middle (c2t_1 : uml2rdbms::ClassToTable[?];
+     * middle (c2t_1 : uml2rdbms::ClassToTable[1];
      *  |)
      * { |}
-     * rdbms (t_1 : rdbms::Table[?];
+     * rdbms (t_1 : rdbms::Table[1];
      *  |)
      * { |}
      * where ( |)
@@ -994,13 +910,13 @@ public class ManualUML2RDBMS extends AbstractTransformer
      * 
      * map classToTableMR_2 in ManualUML2RDBMS {
      * 
-     *   middle (c2t_2 : uml2rdbms::ClassToTable[?];
+     *   middle (c2t_2 : uml2rdbms::ClassToTable[1];
      *  |)
      * { |}
-     * rdbms (t_2 : rdbms::Table[?];
+     * rdbms (t_2 : rdbms::Table[1];
      *  |)
-     * {realize pk : rdbms::Key[?];
-     * realize pc : rdbms::Column[?];
+     * {realize pk : rdbms::Key[1];
+     * realize pc : rdbms::Column[1];
      *  |}
      * where ( |)
      * { |
@@ -1042,31 +958,19 @@ public class ManualUML2RDBMS extends AbstractTransformer
         pc.getKey().addAll(ECORE_OrderedSet);
         pc.setType(STR_NUMBER);
         // mapping statements
-        if (c2t_2 != null) {
-            if (pc != null) {
-                if (pk != null) {
-                    MAP_classToTableMR_2_1(c2t_2, pc, pk);
-                }
-            }
-        }
-        if (pc != null) {
-            if (pk != null) {
-                if (t_2 != null) {
-                    MAP_classToTableMR_2_2(pc, pk, t_2);
-                }
-            }
-        }
+        MAP_classToTableMR_2_1(c2t_2, pc, pk);
+        MAP_classToTableMR_2_2(pc, pk, t_2);
         return true;
     }
     
     /**
      * 
      * map classToTableMR_2_1 in ManualUML2RDBMS {
-     * middle (c2t_2_1 : uml2rdbms::ClassToTable[?];
+     * middle (c2t_2_1 : uml2rdbms::ClassToTable[1];
      *  |)
      * { |}
-     * rdbms (pk_2_1 : rdbms::Key[?];
-     * pc_2_1 : rdbms::Column[?];
+     * rdbms (pk_2_1 : rdbms::Key[1];
+     * pc_2_1 : rdbms::Column[1];
      *  |)
      * { |}
      * where ( |)
@@ -1089,9 +993,9 @@ public class ManualUML2RDBMS extends AbstractTransformer
      * map classToTableMR_2_2 in ManualUML2RDBMS {
      * middle ( |)
      * { |}
-     * rdbms (pk_2_2 : rdbms::Key[?];
-     * pc_2_2 : rdbms::Column[?];
-     * t_2_2 : rdbms::Table[?];
+     * rdbms (pk_2_2 : rdbms::Key[1];
+     * pc_2_2 : rdbms::Column[1];
+     * t_2_2 : rdbms::Table[1];
      *  |)
      * { |}
      * where ( |)
@@ -1120,24 +1024,24 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map associationToForeignKeyLM in ManualUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * sc : uml::Class[?];
-     * dc : uml::Class[?];
-     * a : uml::Association[?];
+     * uml (p : uml::Package[1];
+     * sc : uml::Class[1];
+     * dc : uml::Class[1];
+     * a : uml::Association[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * sc2t : uml2rdbms::ClassToTable[?];
-     * dc2t : uml2rdbms::ClassToTable[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * sc2t : uml2rdbms::ClassToTable[1];
+     * dc2t : uml2rdbms::ClassToTable[1];
      *  |)
-     * {realize a2f : uml2rdbms::AssociationToForeignKey[?];
+     * {realize a2f : uml2rdbms::AssociationToForeignKey[1];
      *  |}
      * where ( |
      * a.namespace = psc.namespace = pp2s.umlPackage =
      *   p)
      * {_0 : String[?];
      *  |
-     * _0 := let dc2 : uml::Class[?] = dc;
+     * _0 := let dc2 : uml::Class[1] = dc;
      * 
      *   in
      *     if a.destination = dc and a.source = sc
@@ -1332,19 +1236,19 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map associationToForeignKeyMR in ManualUML2RDBMS {
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * sc2t : uml2rdbms::ClassToTable[?];
-     * dc2t : uml2rdbms::ClassToTable[?];
-     * a2f : uml2rdbms::AssociationToForeignKey[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * sc2t : uml2rdbms::ClassToTable[1];
+     * dc2t : uml2rdbms::ClassToTable[1];
+     * a2f : uml2rdbms::AssociationToForeignKey[1];
      *  |)
      * { |}
-     * rdbms (s : rdbms::Schema[?];
-     * st : rdbms::Table[?];
-     * dt : rdbms::Table[?];
-     * rk : rdbms::Key[?];
+     * rdbms (s : rdbms::Schema[1];
+     * st : rdbms::Table[1];
+     * dt : rdbms::Table[1];
+     * rk : rdbms::Key[1];
      *  |)
-     * {realize fk : rdbms::ForeignKey[?];
-     * realize fc : rdbms::Column[?];
+     * {realize fk : rdbms::ForeignKey[1];
+     * realize fc : rdbms::Column[1];
      *  |}
      * where ( |
      * a2f.owner = sc2ta2f.referenced = dc2tp2s.schema = sst.schema = s)
@@ -1417,22 +1321,11 @@ public class ManualUML2RDBMS extends AbstractTransformer
             throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS\'::ClassToTable::table\'");
         }
         final @Nullable /*@Thrown*/ Table table = referenced.getTable();
-        if (table != null) {
-            if (fc_0 != null) {
-                if (fk_0 != null) {
-                    if (rk != null) {
-                        MAP_associationToForeignKeyMR_1(table, fc_0, fk_0, rk);
-                    }
-                }
-            }
+        if (table == null) {
+            throw new InvalidValueException("Null binding for \'associationToForeignKeyMR_1::dt\'");
         }
-        if (a2f != null) {
-            if (fc_0 != null) {
-                if (fk_0 != null) {
-                    MAP_associationToForeignKeyMR_2(a2f, fc_0, fk_0);
-                }
-            }
-        }
+        MAP_associationToForeignKeyMR_1(table, fc_0, fk_0, rk);
+        MAP_associationToForeignKeyMR_2(a2f, fc_0, fk_0);
         return true;
     }
     
@@ -1442,10 +1335,10 @@ public class ManualUML2RDBMS extends AbstractTransformer
      * 
      *   middle ( |)
      * { |}
-     * rdbms (fk : rdbms::ForeignKey[?];
-     * fc : rdbms::Column[?];
-     * dt : rdbms::Table[?];
-     * rk : rdbms::Key[?];
+     * rdbms (fk : rdbms::ForeignKey[1];
+     * fc : rdbms::Column[1];
+     * dt : rdbms::Table[1];
+     * rk : rdbms::Key[1];
      *  |)
      * { |}
      * where ( |)
@@ -1484,11 +1377,11 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map associationToForeignKeyMR_2 in ManualUML2RDBMS {
-     * middle (a2f_1 : uml2rdbms::AssociationToForeignKey[?];
+     * middle (a2f_1 : uml2rdbms::AssociationToForeignKey[1];
      *  |)
      * { |}
-     * rdbms (fk_1 : rdbms::ForeignKey[?];
-     * fc_1 : rdbms::Column[?];
+     * rdbms (fk_1 : rdbms::ForeignKey[1];
+     * fc_1 : rdbms::Column[1];
      *  |)
      * { |}
      * where ( |)
@@ -1509,15 +1402,15 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map classPrimitiveAttributesLM in ManualUML2RDBMS {
-     * uml (c : uml::Class[?];
-     * t : uml::PrimitiveDataType[?];
-     * a : uml::Attribute[?];
+     * uml (c : uml::Class[1];
+     * t : uml::PrimitiveDataType[1];
+     * a : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao : uml2rdbms::ClassToTable[?];
-     * p2n : uml2rdbms::PrimitiveToName[?];
+     * middle (fao : uml2rdbms::ClassToTable[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |)
-     * {realize atc : uml2rdbms::AttributeToColumn[?];
+     * {realize atc : uml2rdbms::AttributeToColumn[1];
      *  |}
      * where ( |
      * a.owner = cfao.umlClass =
@@ -1585,14 +1478,14 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map classComplexAttributesLM in ManualUML2RDBMS {
-     * uml (c : uml::Class[?];
-     * t : uml::Class[?];
-     * a : uml::Attribute[?];
+     * uml (c : uml::Class[1];
+     * t : uml::Class[1];
+     * a : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao : uml2rdbms::ClassToTable[?];
+     * middle (fao : uml2rdbms::ClassToTable[1];
      *  |)
-     * {realize fa : uml2rdbms::NonLeafAttribute[?];
+     * {realize fa : uml2rdbms::NonLeafAttribute[1];
      *  |}
      * where ( |
      * a.owner = cfao.umlClass =
@@ -1680,11 +1573,11 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map complexAttributePrimitiveAttributesLM in ManualUML2RDBMS {
-     * uml (c : uml::Class[?];
-     * ca : uml::Attribute[?];
+     * uml (c : uml::Class[1];
+     * ca : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao : uml2rdbms::NonLeafAttribute[?];
+     * middle (fao : uml2rdbms::NonLeafAttribute[1];
      *  |)
      * { |}
      * where ( |
@@ -1719,15 +1612,10 @@ public class ManualUML2RDBMS extends AbstractTransformer
         for (Attribute anAttribute : attributes) {
             if (anAttribute != null) {
                 final @NonNull /*@NonInvalid*/ Attribute symbol_0 = (Attribute)anAttribute;
-                if (symbol_0 != null) {
-                    if (c_2 != null) {
-                        if (ca != null) {
-                            if (fao_2 != null) {
-                                MAP_complexAttributePrimitiveAttributesLM_1(symbol_0, c_2, ca, fao_2);
-                            }
-                        }
-                    }
+                if (fao_2 == null) {
+                    throw new InvalidValueException("Null binding for \'complexAttributePrimitiveAttributesLM_1::fao_1\'");
                 }
+                MAP_complexAttributePrimitiveAttributesLM_1(symbol_0, c_2, ca, fao_2);
             }
         }
         return true;
@@ -1736,16 +1624,16 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map complexAttributePrimitiveAttributesLM_1 in ManualUML2RDBMS {
-     * uml (c_1 : uml::Class[?];
-     * t_1 : uml::PrimitiveDataType[?];
-     * a_1 : uml::Attribute[?];
-     * ca_1 : uml::Attribute[?];
+     * uml (c_1 : uml::Class[1];
+     * t_1 : uml::PrimitiveDataType[1];
+     * a_1 : uml::Attribute[1];
+     * ca_1 : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao_1 : uml2rdbms::NonLeafAttribute[?];
-     * p2n_1 : uml2rdbms::PrimitiveToName[?];
+     * middle (fao_1 : uml2rdbms::NonLeafAttribute[1];
+     * p2n_1 : uml2rdbms::PrimitiveToName[1];
      *  |)
-     * {realize fa : uml2rdbms::AttributeToColumn[?];
+     * {realize fa : uml2rdbms::AttributeToColumn[1];
      *  |}
      * where ( |
      * )
@@ -1805,11 +1693,11 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map complexAttributeComplexAttributesLM in ManualUML2RDBMS {
-     * uml (c : uml::Class[?];
-     * ca : uml::Attribute[?];
+     * uml (c : uml::Class[1];
+     * ca : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao : uml2rdbms::NonLeafAttribute[?];
+     * middle (fao : uml2rdbms::NonLeafAttribute[1];
      *  |)
      * { |}
      * where ( |
@@ -1844,15 +1732,10 @@ public class ManualUML2RDBMS extends AbstractTransformer
         for (Attribute anAttribute : attributes) {
             if (anAttribute != null) {
                 final @NonNull /*@NonInvalid*/ Attribute symbol_0 = (Attribute)anAttribute;
-                if (symbol_0 != null) {
-                    if (c_3 != null) {
-                        if (ca_0 != null) {
-                            if (fao_2 != null) {
-                                MAP_complexAttributeComplexAttributesLM_1(symbol_0, c_3, ca_0, fao_2);
-                            }
-                        }
-                    }
+                if (fao_2 == null) {
+                    throw new InvalidValueException("Null binding for \'complexAttributeComplexAttributesLM_1::fao_1\'");
                 }
+                MAP_complexAttributeComplexAttributesLM_1(symbol_0, c_3, ca_0, fao_2);
             }
         }
         return true;
@@ -1861,15 +1744,15 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map complexAttributeComplexAttributesLM_1 in ManualUML2RDBMS {
-     * uml (c_1 : uml::Class[?];
-     * ca_1 : uml::Attribute[?];
-     * t_1 : uml::Class[?];
-     * a_1 : uml::Attribute[?];
+     * uml (c_1 : uml::Class[1];
+     * ca_1 : uml::Attribute[1];
+     * t_1 : uml::Class[1];
+     * a_1 : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao_1 : uml2rdbms::NonLeafAttribute[?];
+     * middle (fao_1 : uml2rdbms::NonLeafAttribute[1];
      *  |)
-     * {realize fa : uml2rdbms::NonLeafAttribute[?];
+     * {realize fa : uml2rdbms::NonLeafAttribute[1];
      *  |}
      * where ( |
      * a_1.owner =
@@ -1955,15 +1838,15 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map attributeColumnsMR in ManualUML2RDBMS {
-     * middle (c2t : uml2rdbms::ClassToTable[?];
-     * a2c : uml2rdbms::AttributeToColumn[?];
-     * p2n : uml2rdbms::PrimitiveToName[?];
+     * middle (c2t : uml2rdbms::ClassToTable[1];
+     * a2c : uml2rdbms::AttributeToColumn[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |)
      * { |}
-     * rdbms (t : rdbms::Table[?];
-     * ct : String[?];
+     * rdbms (t : rdbms::Table[1];
+     * ct : String[1];
      *  |)
-     * {realize c : rdbms::Column[?];
+     * {realize c : rdbms::Column[1];
      *  |}
      * where ( |
      * c2t.table =
@@ -2008,35 +1891,22 @@ public class ManualUML2RDBMS extends AbstractTransformer
         // property assignments
         c_4.setOwner(t);
         // mapping statements
-        if (a2c != null) {
-            if (c_4 != null) {
-                MAP_attributeColumnsMR_1(a2c, c_4);
-            }
+        MAP_attributeColumnsMR_1(a2c, c_4);
+        if (ct == null) {
+            throw new InvalidValueException("Null binding for \'attributeColumnsMR_2::ct_2\'");
         }
-        if (a2c != null) {
-            if (c_4 != null) {
-                if (ct != null) {
-                    if (p2n_3 != null) {
-                        MAP_attributeColumnsMR_2(a2c, c_4, ct, p2n_3);
-                    }
-                }
-            }
-        }
-        if (a2c != null) {
-            if (c_4 != null) {
-                MAP_attributeColumnsMR_3(a2c, c_4);
-            }
-        }
+        MAP_attributeColumnsMR_2(a2c, c_4, ct, p2n_3);
+        MAP_attributeColumnsMR_3(a2c, c_4);
         return true;
     }
     
     /**
      * 
      * map attributeColumnsMR_1 in ManualUML2RDBMS {
-     * middle (a2c_1 : uml2rdbms::AttributeToColumn[?];
+     * middle (a2c_1 : uml2rdbms::AttributeToColumn[1];
      *  |)
      * { |}
-     * rdbms (c_1 : rdbms::Column[?];
+     * rdbms (c_1 : rdbms::Column[1];
      *  |)
      * { |}
      * where ( |)
@@ -2055,12 +1925,12 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map attributeColumnsMR_2 in ManualUML2RDBMS {
-     * middle (p2n_2 : uml2rdbms::PrimitiveToName[?];
-     * a2c_2 : uml2rdbms::AttributeToColumn[?];
+     * middle (p2n_2 : uml2rdbms::PrimitiveToName[1];
+     * a2c_2 : uml2rdbms::AttributeToColumn[1];
      *  |)
      * { |}
-     * rdbms (c_2 : rdbms::Column[?];
-     * ct_2 : String[?];
+     * rdbms (c_2 : rdbms::Column[1];
+     * ct_2 : String[1];
      *  |)
      * { |}
      * where ( |
@@ -2084,21 +1954,17 @@ public class ManualUML2RDBMS extends AbstractTransformer
         // property assignments
         c_2_0.setType(ct_2);
         // mapping statements
-        if (ct_2 != null) {
-            if (p2n_2 != null) {
-                MAP_attributeColumnsMR_2_1(ct_2, p2n_2);
-            }
-        }
+        MAP_attributeColumnsMR_2_1(ct_2, p2n_2);
         return true;
     }
     
     /**
      * 
      * map attributeColumnsMR_2_1 in ManualUML2RDBMS {
-     * middle (p2n_2_1 : uml2rdbms::PrimitiveToName[?];
+     * middle (p2n_2_1 : uml2rdbms::PrimitiveToName[1];
      *  |)
      * { |}
-     * rdbms (ct_2_1 : String[?];
+     * rdbms (ct_2_1 : String[1];
      *  |)
      * { |}
      * where ( |)
@@ -2117,10 +1983,10 @@ public class ManualUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map attributeColumnsMR_3 in ManualUML2RDBMS {
-     * middle (a2c_3 : uml2rdbms::AttributeToColumn[?];
+     * middle (a2c_3 : uml2rdbms::AttributeToColumn[1];
      *  |)
      * { |}
-     * rdbms (c_3 : rdbms::Column[?];
+     * rdbms (c_3 : rdbms::Column[1];
      *  |)
      * { |}
      * where ( |)

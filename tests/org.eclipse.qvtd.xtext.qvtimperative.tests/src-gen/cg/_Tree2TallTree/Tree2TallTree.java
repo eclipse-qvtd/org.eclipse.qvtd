@@ -188,20 +188,14 @@ public class Tree2TallTree extends AbstractTransformer
         for (Node node_3 : ValueUtil.typedIterable(Node.class, sortedBy_0)) {
             if (node_3 != null) {
                 final @NonNull /*@NonInvalid*/ Node symbol_1 = (Node)node_3;
-                if (symbol_1 != null) {
-                    MAP_Node2MiddleNode(symbol_1);
-                }
+                MAP_Node2MiddleNode(symbol_1);
             }
         }
         for (Node node_4 : ValueUtil.typedIterable(Node.class, sortedBy_0)) {
             if (node_4 != null) {
                 final @NonNull /*@NonInvalid*/ Node symbol_5 = (Node)node_4;
                 final @NonNull /*@Thrown*/ Node2TallNode Node2TallNode = ClassUtil.nonNullState (OPPOSITE_OF_Node2TallNode_node.get(symbol_5));
-                if (symbol_5 != null) {
-                    if (Node2TallNode != null) {
-                        MAP_Edge2MiddleEdge(symbol_5, Node2TallNode);
-                    }
-                }
+                MAP_Edge2MiddleEdge(symbol_5, Node2TallNode);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_1 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Node2TallNode, models[2/*tree2talltree*/], TYP_tree2talltree_c_c_Node2TallNode_0);
@@ -232,9 +226,7 @@ public class Tree2TallTree extends AbstractTransformer
         for (Node2TallNode node2tallNode_3 : ValueUtil.typedIterable(Node2TallNode.class, sortedBy_1)) {
             if (node2tallNode_3 != null) {
                 final @NonNull /*@NonInvalid*/ Node2TallNode symbol_10 = (Node2TallNode)node2tallNode_3;
-                if (symbol_10 != null) {
-                    invoke(CTOR_MiddleNode2TallNode, symbol_10);
-                }
+                invoke(CTOR_MiddleNode2TallNode, symbol_10);
             }
         }
         return true;
@@ -243,11 +235,11 @@ public class Tree2TallTree extends AbstractTransformer
     /**
      * 
      * map Node2MiddleNode in Tree2TallTree {
-     * tree (node : tree::Node[?];
+     * tree (node : tree::Node[1];
      *  |)
      * { |}
      * tree2talltree ( |)
-     * {realize node2tallNode : tree2talltree::Node2TallNode[?];
+     * {realize node2tallNode : tree2talltree::Node2TallNode[1];
      *  |}
      * where ( |)
      * {_0 : String[1];
@@ -278,10 +270,10 @@ public class Tree2TallTree extends AbstractTransformer
     /**
      * 
      * map Edge2MiddleEdge in Tree2TallTree {
-     * tree (node : tree::Node[?];
+     * tree (node : tree::Node[1];
      *  |)
      * { |}
-     * tree2talltree (node2tallNode : tree2talltree::Node2TallNode[?];
+     * tree2talltree (node2tallNode : tree2talltree::Node2TallNode[1];
      *  |)
      * { |}
      * where ( |
@@ -316,11 +308,11 @@ public class Tree2TallTree extends AbstractTransformer
      * 
      * map MiddleNode2TallNode in Tree2TallTree {
      * 
-     *   tree2talltree (node2tallNode : tree2talltree::Node2TallNode[?];
+     *   tree2talltree (node2tallNode : tree2talltree::Node2TallNode[1];
      *  |)
      * { |}
      * talltree ( |)
-     * {realize tallNode : talltree::TallNode[?];
+     * {realize tallNode : talltree::TallNode[1];
      *  |}
      * where ( |)
      * {_0 : String[1];

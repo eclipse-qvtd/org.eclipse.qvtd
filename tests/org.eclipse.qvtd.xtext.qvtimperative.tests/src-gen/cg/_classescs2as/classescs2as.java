@@ -146,11 +146,11 @@ public class classescs2as extends AbstractTransformer
     /**
      * 
      * map mClassCS2Class_LM in classescs2as {
-     * leftCS (classCS : classescs::ClassCS[?];
+     * leftCS (classCS : classescs::ClassCS[1];
      *  |)
      * { |}
      * middle ( |)
-     * {realize c2c : classescstraces::ClassCS2Class[?];
+     * {realize c2c : classescstraces::ClassCS2Class[1];
      *  |}
      * where ( |)
      * { |
@@ -173,11 +173,11 @@ public class classescs2as extends AbstractTransformer
     /**
      * 
      * map mRootCS2Root_LM in classescs2as {
-     * leftCS (rootCS : classescs::RootCS[?];
+     * leftCS (rootCS : classescs::RootCS[1];
      *  |)
      * { |}
      * middle ( |)
-     * {realize r2r : classescstraces::RootCS2Root[?];
+     * {realize r2r : classescstraces::RootCS2Root[1];
      *  |}
      * where ( |)
      * { |
@@ -200,11 +200,11 @@ public class classescs2as extends AbstractTransformer
     /**
      * 
      * map mPackageCS2Package_LM in classescs2as {
-     * leftCS (packageCS : classescs::PackageCS[?];
+     * leftCS (packageCS : classescs::PackageCS[1];
      *  |)
      * { |}
      * middle ( |)
-     * {realize p2p : classescstraces::PackageCS2Package[?];
+     * {realize p2p : classescstraces::PackageCS2Package[1];
      *  |}
      * where ( |)
      * { |
@@ -227,11 +227,11 @@ public class classescs2as extends AbstractTransformer
     /**
      * 
      * map mClassCS2Class_MR in classescs2as {
-     * middle (c2c : classescstraces::ClassCS2Class[?];
+     * middle (c2c : classescstraces::ClassCS2Class[1];
      *  |)
      * { |}
      * rightAS ( |)
-     * {realize class : classes::Class[?];
+     * {realize class : classes::Class[1];
      *  |}
      * where ( |)
      * { |
@@ -253,11 +253,11 @@ public class classescs2as extends AbstractTransformer
     /**
      * 
      * map mRootCS2Root_MR in classescs2as {
-     * middle (r2r : classescstraces::RootCS2Root[?];
+     * middle (r2r : classescstraces::RootCS2Root[1];
      *  |)
      * { |}
      * rightAS ( |)
-     * {realize root : classes::Root[?];
+     * {realize root : classes::Root[1];
      *  |}
      * where ( |)
      * { |
@@ -279,11 +279,11 @@ public class classescs2as extends AbstractTransformer
     /**
      * 
      * map mPackageCS2Package_MR in classescs2as {
-     * middle (p2p : classescstraces::PackageCS2Package[?];
+     * middle (p2p : classescstraces::PackageCS2Package[1];
      *  |)
      * { |}
      * rightAS ( |)
-     * {realize package : classes::Package[?];
+     * {realize package : classes::Package[1];
      *  |}
      * where ( |)
      * { |
@@ -305,10 +305,10 @@ public class classescs2as extends AbstractTransformer
     /**
      * 
      * map uClass_name in classescs2as {
-     * rightAS (class : classes::Class[?];
+     * rightAS (class : classes::Class[1];
      *  |)
      * { |}
-     * leftCS (classCS : classescs::ClassCS[?];
+     * leftCS (classCS : classescs::ClassCS[1];
      *  |)
      * { |}
      * where ( |
@@ -339,10 +339,10 @@ public class classescs2as extends AbstractTransformer
     /**
      * 
      * map uRoot_ownedPackages in classescs2as {
-     * rightAS (root : classes::Root[?];
+     * rightAS (root : classes::Root[1];
      *  |)
      * { |}
-     * leftCS (rootCS : classescs::RootCS[?];
+     * leftCS (rootCS : classescs::RootCS[1];
      *  |)
      * { |}
      * where ( |
@@ -416,10 +416,10 @@ public class classescs2as extends AbstractTransformer
     /**
      * 
      * map uPackage_name in classescs2as {
-     * rightAS (package : classes::Package[?];
+     * rightAS (package : classes::Package[1];
      *  |)
      * { |}
-     * leftCS (packageCS : classescs::PackageCS[?];
+     * leftCS (packageCS : classescs::PackageCS[1];
      *  |)
      * { |}
      * where ( |
@@ -450,10 +450,10 @@ public class classescs2as extends AbstractTransformer
     /**
      * 
      * map uPackage_ownedClasses in classescs2as {
-     * rightAS (package : classes::Package[?];
+     * rightAS (package : classes::Package[1];
      *  |)
      * { |}
-     * leftCS (packageCS : classescs::PackageCS[?];
+     * leftCS (packageCS : classescs::PackageCS[1];
      *  |)
      * { |}
      * where ( |
@@ -616,18 +616,14 @@ public class classescs2as extends AbstractTransformer
         for (PackageCS packageCS_5 : ValueUtil.typedIterable(PackageCS.class, allInstances)) {
             if (packageCS_5 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS symbol_6 = (PackageCS)packageCS_5;
-                if (symbol_6 != null) {
-                    MAP_mPackageCS2Package_LM(symbol_6);
-                }
+                MAP_mPackageCS2Package_LM(symbol_6);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue allInstances_0 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS2Package, TYP_classescstraces_c_c_PackageCS2Package_0);
         for (PackageCS2Package p2p_1 : ValueUtil.typedIterable(PackageCS2Package.class, allInstances_0)) {
             if (p2p_1 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS2Package symbol_9 = (PackageCS2Package)p2p_1;
-                if (symbol_9 != null) {
-                    MAP_mPackageCS2Package_MR(symbol_9);
-                }
+                MAP_mPackageCS2Package_MR(symbol_9);
             }
         }
         for (Package symbol_17 : ValueUtil.typedIterable(Package.class, allInstances_3)) {
@@ -636,11 +632,7 @@ public class classescs2as extends AbstractTransformer
                     if (packageCS_6 != null) {
                         final @NonNull /*@NonInvalid*/ Package symbol_12 = (Package)symbol_17;
                         final @NonNull /*@NonInvalid*/ PackageCS symbol_13 = (PackageCS)packageCS_6;
-                        if (symbol_12 != null) {
-                            if (symbol_13 != null) {
-                                MAP_uPackage_name(symbol_12, symbol_13);
-                            }
-                        }
+                        MAP_uPackage_name(symbol_12, symbol_13);
                     }
                 }
             }
@@ -651,11 +643,7 @@ public class classescs2as extends AbstractTransformer
                     if (packageCS_7 != null) {
                         final @NonNull /*@NonInvalid*/ Package symbol_18 = (Package)symbol_23;
                         final @NonNull /*@NonInvalid*/ PackageCS symbol_19 = (PackageCS)packageCS_7;
-                        if (symbol_18 != null) {
-                            if (symbol_19 != null) {
-                                MAP_uPackage_ownedClasses(symbol_18, symbol_19);
-                            }
-                        }
+                        MAP_uPackage_ownedClasses(symbol_18, symbol_19);
                     }
                 }
             }
@@ -663,18 +651,14 @@ public class classescs2as extends AbstractTransformer
         for (ClassCS classCS_3 : ValueUtil.typedIterable(ClassCS.class, allInstances_7)) {
             if (classCS_3 != null) {
                 final @NonNull /*@NonInvalid*/ ClassCS symbol_24 = (ClassCS)classCS_3;
-                if (symbol_24 != null) {
-                    MAP_mClassCS2Class_LM(symbol_24);
-                }
+                MAP_mClassCS2Class_LM(symbol_24);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS2Class, TYP_classescstraces_c_c_ClassCS2Class_0);
         for (ClassCS2Class c2c_1 : ValueUtil.typedIterable(ClassCS2Class.class, allInstances_6)) {
             if (c2c_1 != null) {
                 final @NonNull /*@NonInvalid*/ ClassCS2Class symbol_27 = (ClassCS2Class)c2c_1;
-                if (symbol_27 != null) {
-                    MAP_mClassCS2Class_MR(symbol_27);
-                }
+                MAP_mClassCS2Class_MR(symbol_27);
             }
         }
         for (ClassCS classCS_4 : ValueUtil.typedIterable(ClassCS.class, allInstances_7)) {
@@ -685,11 +669,7 @@ public class classescs2as extends AbstractTransformer
                     if (symbol_34 != null) {
                         final @NonNull /*@NonInvalid*/ classes.Class symbol_30 = (classes.Class)symbol_34;
                         final @NonNull /*@NonInvalid*/ ClassCS symbol_31 = (ClassCS)classCS_4;
-                        if (symbol_30 != null) {
-                            if (symbol_31 != null) {
-                                MAP_uClass_name(symbol_30, symbol_31);
-                            }
-                        }
+                        MAP_uClass_name(symbol_30, symbol_31);
                     }
                 }
             }
@@ -697,18 +677,14 @@ public class classescs2as extends AbstractTransformer
         for (RootCS rootCS_3 : ValueUtil.typedIterable(RootCS.class, allInstances_11)) {
             if (rootCS_3 != null) {
                 final @NonNull /*@NonInvalid*/ RootCS symbol_36 = (RootCS)rootCS_3;
-                if (symbol_36 != null) {
-                    MAP_mRootCS2Root_LM(symbol_36);
-                }
+                MAP_mRootCS2Root_LM(symbol_36);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue allInstances_10 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS2Root, TYP_classescstraces_c_c_RootCS2Root_0);
         for (RootCS2Root r2r_1 : ValueUtil.typedIterable(RootCS2Root.class, allInstances_10)) {
             if (r2r_1 != null) {
                 final @NonNull /*@NonInvalid*/ RootCS2Root symbol_39 = (RootCS2Root)r2r_1;
-                if (symbol_39 != null) {
-                    MAP_mRootCS2Root_MR(symbol_39);
-                }
+                MAP_mRootCS2Root_MR(symbol_39);
             }
         }
         for (RootCS rootCS_4 : ValueUtil.typedIterable(RootCS.class, allInstances_11)) {
@@ -719,11 +695,7 @@ public class classescs2as extends AbstractTransformer
                     if (root_1 != null) {
                         final @NonNull /*@NonInvalid*/ Root symbol_42 = (Root)root_1;
                         final @NonNull /*@NonInvalid*/ RootCS symbol_43 = (RootCS)rootCS_4;
-                        if (symbol_42 != null) {
-                            if (symbol_43 != null) {
-                                MAP_uRoot_ownedPackages(symbol_42, symbol_43);
-                            }
-                        }
+                        MAP_uRoot_ownedPackages(symbol_42, symbol_43);
                     }
                 }
             }

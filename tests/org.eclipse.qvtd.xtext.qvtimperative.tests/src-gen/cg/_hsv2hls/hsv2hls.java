@@ -132,9 +132,7 @@ public class hsv2hls extends AbstractTransformer
         for (HSVNode hsvRoot_1 : ValueUtil.typedIterable(HSVNode.class, objectsOfKind)) {
             if (hsvRoot_1 != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode symbol_0 = (HSVNode)hsvRoot_1;
-                if (symbol_0 != null) {
-                    MAP_HSV2MiddleRoot(symbol_0);
-                }
+                MAP_HSV2MiddleRoot(symbol_0);
             }
         }
         return true;
@@ -143,11 +141,11 @@ public class hsv2hls extends AbstractTransformer
     /**
      * 
      * map HSV2MiddleRoot in hsv2hls {
-     * hsv (hsvRoot : HSVTree::HSVNode[?];
+     * hsv (hsvRoot : HSVTree::HSVNode[1];
      *  |)
      * { |}
      * middle ( |)
-     * {realize middleRoot : HSV2HLS::HSVNode2HLSNode[?];
+     * {realize middleRoot : HSV2HLS::HSVNode2HLSNode[1];
      *  |}
      * where ( |
      * hsvRoot.parent =
@@ -190,16 +188,10 @@ public class hsv2hls extends AbstractTransformer
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode symbol_2 = (HSVNode)hsvChild;
-                if (symbol_2 != null) {
-                    if (middleRoot != null) {
-                        MAP_HSV2MiddleRecursion(symbol_2, middleRoot);
-                    }
-                }
+                MAP_HSV2MiddleRecursion(symbol_2, middleRoot);
             }
         }
-        if (middleRoot != null) {
-            MAP_Middle2HLSRoot(middleRoot);
-        }
+        MAP_Middle2HLSRoot(middleRoot);
         return true;
     }
     
@@ -207,12 +199,12 @@ public class hsv2hls extends AbstractTransformer
      * 
      * map HSV2MiddleRecursion in hsv2hls {
      * 
-     *   hsv (hsvNode : HSVTree::HSVNode[?];
+     *   hsv (hsvNode : HSVTree::HSVNode[1];
      *  |)
      * { |}
-     * middle (middleParent : HSV2HLS::HSVNode2HLSNode[?];
+     * middle (middleParent : HSV2HLS::HSVNode2HLSNode[1];
      *  |)
-     * {realize middleNode : HSV2HLS::HSVNode2HLSNode[?];
+     * {realize middleNode : HSV2HLS::HSVNode2HLSNode[1];
      *  |}
      * where ( |)
      * {_0 : String[?];
@@ -247,11 +239,7 @@ public class hsv2hls extends AbstractTransformer
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode symbol_3 = (HSVNode)hsvChild;
-                if (symbol_3 != null) {
-                    if (middleNode_1 != null) {
-                        MAP_HSV2MiddleRecursion(symbol_3, middleNode_1);
-                    }
-                }
+                MAP_HSV2MiddleRecursion(symbol_3, middleNode_1);
             }
         }
         return true;
@@ -261,11 +249,11 @@ public class hsv2hls extends AbstractTransformer
      * 
      * map Middle2HLSRoot in hsv2hls {
      * 
-     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode[?];
+     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode[1];
      *  |)
      * { |}
      * hls ( |)
-     * {realize hlsNode : HLSTree::HLSNode[?];
+     * {realize hlsNode : HLSTree::HLSNode[1];
      *  |}
      * where ( |)
      * {_0 : String[?];
@@ -299,9 +287,7 @@ public class hsv2hls extends AbstractTransformer
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_3 = (HSVNode2HLSNode)middleChild;
-                if (symbol_3 != null) {
-                    MAP_Middle2HLSRecursion(symbol_3);
-                }
+                MAP_Middle2HLSRecursion(symbol_3);
             }
         }
         return true;
@@ -311,11 +297,11 @@ public class hsv2hls extends AbstractTransformer
      * 
      * map Middle2HLSRecursion in hsv2hls {
      * 
-     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode[?];
+     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode[1];
      *  |)
      * { |}
      * hls ( |)
-     * {realize hlsNode : HLSTree::HLSNode[?];
+     * {realize hlsNode : HLSTree::HLSNode[1];
      *  |}
      * where ( |)
      * {_0 : HLSTree::HLSNode[1];
@@ -357,9 +343,7 @@ public class hsv2hls extends AbstractTransformer
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
                 final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_3 = (HSVNode2HLSNode)middleChild;
-                if (symbol_3 != null) {
-                    MAP_Middle2HLSRecursion(symbol_3);
-                }
+                MAP_Middle2HLSRecursion(symbol_3);
             }
         }
         return true;
