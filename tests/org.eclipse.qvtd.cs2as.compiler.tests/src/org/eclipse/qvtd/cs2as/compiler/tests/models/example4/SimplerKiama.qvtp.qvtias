@@ -135,7 +135,7 @@
                     integerSymbol="0"/>
                 <ownedThen xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                     referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
                       referredProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep">
                     <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Node" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                       <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
@@ -189,7 +189,7 @@
           <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.height">
             <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
                   referredProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.height">
                 <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Node"
                     referredProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Composite.child">
@@ -244,7 +244,7 @@
                     integerSymbol="0"/>
                 <ownedThen xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                     referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
                       referredProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep">
                     <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Node" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                       <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
