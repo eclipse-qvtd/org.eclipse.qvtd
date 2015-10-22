@@ -51,7 +51,9 @@ SourceDomainCS returns qvtcorebasecs::DomainCS: isCheck?='check' direction=[qvtb
 ;
 		
 SourceBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
-	{qvtcorebasecs::BottomPatternCS} '{''}'
+	{qvtcorebasecs::BottomPatternCS} '{' (ownedUnrealizedVariables+=UnrealizedVariableCS
+		(',' ownedUnrealizedVariables+=UnrealizedVariableCS)*)?
+	'}'
 ;
 	
 SourceGuardPatternCS returns qvtcorebasecs::GuardPatternCS:
@@ -82,8 +84,8 @@ TargetDomainCS returns qvtcorebasecs::DomainCS: isEnforce?='enforce' direction=[
 ;
 		
 TargetBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
-	{qvtcorebasecs::BottomPatternCS} '{' (ownedRealizedVariables+=RealizedVariableCS
-		(',' ownedRealizedVariables+=RealizedVariableCS)*)?
+	{qvtcorebasecs::BottomPatternCS} '{' ((ownedRealizedVariables+=RealizedVariableCS | ownedUnrealizedVariables+=UnrealizedVariableCS)
+		(',' (ownedRealizedVariables+=RealizedVariableCS | ownedUnrealizedVariables+=UnrealizedVariableCS))*)?
 	'}'
 ;
 	
