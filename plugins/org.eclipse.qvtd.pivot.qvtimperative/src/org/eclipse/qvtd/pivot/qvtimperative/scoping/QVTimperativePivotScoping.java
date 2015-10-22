@@ -20,12 +20,14 @@ import org.eclipse.qvtd.pivot.qvtimperative.attributes.MappingAttribution;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.MappingCallBindingAttribution;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.MappingLoopAttribution;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.QVTimperativeBottomPatternAttribution;
+import org.eclipse.qvtd.pivot.qvtimperative.attributes.QVTimperativeGuardPatternAttribution;
 
 public class QVTimperativePivotScoping
 {	
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
 		registry.put(QVTcoreBasePackage.Literals.BOTTOM_PATTERN, QVTimperativeBottomPatternAttribution.INSTANCE);
+		registry.put(QVTcoreBasePackage.Literals.GUARD_PATTERN, QVTimperativeGuardPatternAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.MAPPING, MappingAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.MAPPING_CALL_BINDING, MappingCallBindingAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.MAPPING_LOOP, MappingLoopAttribution.INSTANCE);
