@@ -29,7 +29,6 @@ import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.ocl.xtext.essentialoclcs.InfixExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -57,7 +56,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
@@ -179,13 +177,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitPredicateCS(@NonNull PredicateCS csElement) {
-		ExpCS csCondition = csElement.getOwnedCondition();
-		if ((csCondition instanceof InfixExpCS) && "=".equals(((InfixExpCS)csCondition).getName()) && (((InfixExpCS)csCondition).getOwnedLeft() instanceof NameExpCS)) {
-			context.refreshModelElement(VariablePredicate.class, QVTimperativePackage.Literals.VARIABLE_PREDICATE, csElement);
-		}
-		else {
-			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
-		}
+		context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
 		return null;
 	}
 
@@ -194,12 +186,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		ExpCS csTarget = csElement.getOwnedTarget();
 		EObject eContainer = csElement.eContainer();
 		if ((csElement.getOwnedInitExpression() == null) || (eContainer instanceof GuardPatternCS)) {
-			if (csTarget instanceof NameExpCS) {
-				context.refreshModelElement(VariablePredicate.class, QVTimperativePackage.Literals.VARIABLE_PREDICATE, csElement);
-			}
-			else {
-				context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
-			}
+			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
 		}
 		else if (csTarget instanceof NameExpCS) {
 			context.refreshModelElement(VariableAssignment.class, QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csElement);

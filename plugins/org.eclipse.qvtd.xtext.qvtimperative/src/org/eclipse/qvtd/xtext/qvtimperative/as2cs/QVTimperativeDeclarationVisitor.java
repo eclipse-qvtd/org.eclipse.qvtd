@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -30,10 +31,9 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.ocl.xtext.essentialoclcs.InfixExpCS;
-import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -50,6 +50,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtcorebase.as2cs.QVTcoreBaseDeclarationVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
@@ -291,6 +292,25 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	//		refreshList(csElement.getOwnedConstraint(), visitDeclarations(ConstraintCS.class, object.getOwnedRule(), null));		
 			return csVariable;
 		}
+		else if (asVariable.eContainer() instanceof GuardPattern){
+			Mapping containingMapping = QVTimperativeUtil.getContainingMapping(asVariable);
+			assert containingMapping != null;
+			UnrealizedVariableCS csUnrealizedVariable = context.refreshNamedElement(UnrealizedVariableCS.class, QVTcoreBaseCSPackage.Literals.UNREALIZED_VARIABLE_CS, asVariable);
+			csUnrealizedVariable.setPivot(asVariable);
+			csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), getScope(asVariable)));
+			OCLExpression ownedInit = null;
+			for (Predicate asPredicate : containingMapping.getGuardPattern().getPredicate()) {
+				if (asPredicate instanceof VariablePredicate) {
+					VariablePredicate asVariablePredicate = (VariablePredicate)asPredicate;
+					if (asVariablePredicate.getTargetVariable() == asVariable) {
+						ownedInit = asVariablePredicate.getConditionExpression();
+						break;
+					}
+				}
+			}
+			csUnrealizedVariable.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, ownedInit));
+			return csUnrealizedVariable;
+		}
 		else {
 			return super.visitVariable(asVariable);
 		}
@@ -298,12 +318,6 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 
 	@Override
 	public ElementCS visitVariablePredicate(@NonNull VariablePredicate asVariablePredicate) {
-		PredicateCS csPredicate = context.refreshElement(PredicateCS.class, QVTcoreBaseCSPackage.Literals.PREDICATE_CS, asVariablePredicate);
-		csPredicate.setPivot(asVariablePredicate);
-		NameExpCS csVariableExp = createNameExpCS(asVariablePredicate.getTargetVariable());
-		ExpCS csValueExp = createExpCS(asVariablePredicate.getConditionExpression());
-		InfixExpCS csConditionExp = createInfixExpCS(csVariableExp, "=", csValueExp);
-		csPredicate.setOwnedCondition(csConditionExp);
-		return csPredicate;
+		return null;
 	}
 }

@@ -169,10 +169,15 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				return null;		
 			}
     	}
-		context.pushEvaluationEnvironment(mappingCall.getReferredMapping(), mappingCall);
+		Mapping referredMapping = mappingCall.getReferredMapping();
+		if (referredMapping == null) {
+			return null;
+		}
+		context.pushEvaluationEnvironment(referredMapping, mappingCall);
 		try {
 			for (Map.Entry<Variable,Object> entry : variable2value.entrySet()) {
-				context.replace(entry.getKey(), entry.getValue());
+				@SuppressWarnings("null")@NonNull Variable variable = entry.getKey();
+				context.replace(variable, entry.getValue());
 			}
 			return executor.internalExecuteMappingCall(mappingCall, undecoratedVisitor);
 		}
