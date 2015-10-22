@@ -21,3 +21,21 @@ map expressionsMR in Expressions {
     enforce target() {}
     where () {}
 }
+
+map expressionsDomains in Expressions {
+	check middle() {
+		s : Integer := 0,
+		s_1 : Integer := m,
+		s_2 : Integer := t
+	}
+    enforce target() {
+		t : Integer := 0,
+		t_1 : Integer := s,
+		t_2 : Integer := m
+    }
+    where () {
+		m : Integer := 0,
+		m_1 : Integer := s,
+		m_2 : Integer := t
+    }
+}

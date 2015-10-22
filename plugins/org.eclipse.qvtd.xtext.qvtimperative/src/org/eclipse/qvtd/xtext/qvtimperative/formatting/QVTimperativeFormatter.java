@@ -164,8 +164,11 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    {
 	    	SourceBottomPatternCSElements a = f.getSourceBottomPatternCSAccess();
 			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_1());	
-			c.setLinewrap().after(a.getRightCurlyBracketKeyword_2());	
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_2());
+			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_1());	
+			c.setNoSpace().before(a.getCommaKeyword_2_1_0());
+			c.setLinewrap().after(a.getCommaKeyword_2_1_0());	
+			c.setLinewrap().after(a.getRightCurlyBracketKeyword_3());	
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_3());
 		}
 	    {
 	    	SourceGuardPatternCSElements a = f.getSourceGuardPatternCSAccess();
