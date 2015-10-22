@@ -377,9 +377,12 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 		else if(semanticObject.eClass().getEPackage() == QVTcoreBaseCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS:
 				if(context == grammarAccess.getBottomPatternCSRule() ||
-				   context == grammarAccess.getMiddleBottomPatternCSRule() ||
-				   context == grammarAccess.getSourceBottomPatternCSRule()) {
+				   context == grammarAccess.getMiddleBottomPatternCSRule()) {
 					sequence_BottomPatternCS(context, (BottomPatternCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getSourceBottomPatternCSRule()) {
+					sequence_SourceBottomPatternCS(context, (BottomPatternCS) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getTargetBottomPatternCSRule()) {
@@ -576,6 +579,15 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
+	 *     ((ownedUnrealizedVariables+=UnrealizedVariableCS ownedUnrealizedVariables+=UnrealizedVariableCS*)?)
+	 */
+	protected void sequence_SourceBottomPatternCS(EObject context, BottomPatternCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (isCheck?='check' direction=[TypedModel|UnrestrictedName] ownedGuardPattern=SourceGuardPatternCS ownedBottomPattern=SourceBottomPatternCS)
 	 */
 	protected void sequence_SourceDomainCS(EObject context, DomainCS semanticObject) {
@@ -594,7 +606,12 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     ((ownedRealizedVariables+=RealizedVariableCS ownedRealizedVariables+=RealizedVariableCS*)?)
+	 *     (
+	 *         (
+	 *             (ownedRealizedVariables+=RealizedVariableCS | ownedUnrealizedVariables+=UnrealizedVariableCS) 
+	 *             (ownedRealizedVariables+=RealizedVariableCS | ownedUnrealizedVariables+=UnrealizedVariableCS)*
+	 *         )?
+	 *     )
 	 */
 	protected void sequence_TargetBottomPatternCS(EObject context, BottomPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

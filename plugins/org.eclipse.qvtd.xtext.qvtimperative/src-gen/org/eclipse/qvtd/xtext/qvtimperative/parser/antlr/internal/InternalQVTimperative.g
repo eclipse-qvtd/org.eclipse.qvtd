@@ -1001,9 +1001,49 @@ ruleSourceBottomPatternCS returns [EObject current=null]
     {
     	newLeafNode(otherlv_1, grammarAccess.getSourceBottomPatternCSAccess().getLeftCurlyBracketKeyword_1());
     }
-	otherlv_2='}' 
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getSourceBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_0_0()); 
+	    }
+		lv_ownedUnrealizedVariables_2_0=ruleUnrealizedVariableCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getSourceBottomPatternCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedUnrealizedVariables",
+        		lv_ownedUnrealizedVariables_2_0, 
+        		"UnrealizedVariableCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_3=',' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getSourceBottomPatternCSAccess().getRightCurlyBracketKeyword_2());
+    	newLeafNode(otherlv_3, grammarAccess.getSourceBottomPatternCSAccess().getCommaKeyword_2_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getSourceBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_1_1_0()); 
+	    }
+		lv_ownedUnrealizedVariables_4_0=ruleUnrealizedVariableCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getSourceBottomPatternCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedUnrealizedVariables",
+        		lv_ownedUnrealizedVariables_4_0, 
+        		"UnrealizedVariableCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)?	otherlv_5='}' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getSourceBottomPatternCSAccess().getRightCurlyBracketKeyword_3());
     }
 )
 ;
@@ -1514,10 +1554,10 @@ ruleTargetBottomPatternCS returns [EObject current=null]
     {
     	newLeafNode(otherlv_1, grammarAccess.getTargetBottomPatternCSAccess().getLeftCurlyBracketKeyword_1());
     }
-((
+(((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTargetBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_2_0_0()); 
+	        newCompositeNode(grammarAccess.getTargetBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_2_0_0_0()); 
 	    }
 		lv_ownedRealizedVariables_2_0=ruleRealizedVariableCS		{
 	        if ($current==null) {
@@ -1532,31 +1572,69 @@ ruleTargetBottomPatternCS returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_3=',' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getTargetBottomPatternCSAccess().getCommaKeyword_2_1_0());
-    }
-(
+)
+    |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTargetBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_2_1_1_0()); 
+	        newCompositeNode(grammarAccess.getTargetBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_0_1_0()); 
 	    }
-		lv_ownedRealizedVariables_4_0=ruleRealizedVariableCS		{
+		lv_ownedUnrealizedVariables_3_0=ruleUnrealizedVariableCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTargetBottomPatternCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedUnrealizedVariables",
+        		lv_ownedUnrealizedVariables_3_0, 
+        		"UnrealizedVariableCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))(	otherlv_4=',' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getTargetBottomPatternCSAccess().getCommaKeyword_2_1_0());
+    }
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getTargetBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_2_1_1_0_0()); 
+	    }
+		lv_ownedRealizedVariables_5_0=ruleRealizedVariableCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTargetBottomPatternCSRule());
 	        }
        		add(
        			$current, 
        			"ownedRealizedVariables",
-        		lv_ownedRealizedVariables_4_0, 
+        		lv_ownedRealizedVariables_5_0, 
         		"RealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*)?	otherlv_5='}' 
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getTargetBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_1_1_1_0()); 
+	    }
+		lv_ownedUnrealizedVariables_6_0=ruleUnrealizedVariableCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTargetBottomPatternCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedUnrealizedVariables",
+        		lv_ownedUnrealizedVariables_6_0, 
+        		"UnrealizedVariableCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)))*)?	otherlv_7='}' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getTargetBottomPatternCSAccess().getRightCurlyBracketKeyword_3());
+    	newLeafNode(otherlv_7, grammarAccess.getTargetBottomPatternCSAccess().getRightCurlyBracketKeyword_3());
     }
 )
 ;
