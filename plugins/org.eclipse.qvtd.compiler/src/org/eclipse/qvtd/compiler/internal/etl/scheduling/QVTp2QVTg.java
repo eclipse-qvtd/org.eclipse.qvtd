@@ -450,7 +450,8 @@ public class QVTp2QVTg {
 	}
 	
 	private Class getContextType(CallExp callExp) {
-		return callExp.getOwnedSource().getType().isClass();
+		OCLExpression ownedSource = callExp.getOwnedSource();
+		return ownedSource != null ? ownedSource.getType().isClass() : null;
 	}
 	
 	private Set<Class> getAllSuperClasses(Class context) {

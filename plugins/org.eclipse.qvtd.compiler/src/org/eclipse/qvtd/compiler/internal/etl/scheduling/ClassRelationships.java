@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 
@@ -76,6 +77,7 @@ public class ClassRelationships {
 	
 	public ClassRelationships(EnvironmentFactory ocl, ResourceSet rSet) {
 		mManager = ocl.getMetamodelManager();
+		((MetamodelManagerInternal)mManager).getASmetamodel();
 		initializeMaps(rSet);
 	}
 	
