@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
-  <ecore:EPackage name="PrimitiveTypes" nsURI="http://www.omg.org/spec/QVT/20140401/PrimitiveTypes" nsPrefix="primitivetypes">
+  <ecore:EPackage name="PrimitiveTypes" nsURI="http://www.omg.org/spec/QVT/20151201/PrimitiveTypes" nsPrefix="primitivetypes">
     <eClassifiers xmi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
     <eClassifiers xmi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
     <eClassifiers xmi:type="ecore:EDataType" name="Real" instanceClassName="java.lang.Float"/>
     <eClassifiers xmi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
     <eClassifiers xmi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer"/>
   </ecore:EPackage>
-  <ecore:EPackage name="EMOF" nsURI="http://www.omg.org/spec/QVT/20140401/EMOF" nsPrefix="emof">
+  <ecore:EPackage name="EMOF" nsURI="http://www.omg.org/spec/QVT/20151201/EMOF" nsPrefix="emof">
     <eClassifiers xmi:type="ecore:EClass" name="Class" eSuperTypes="#/1/Type">
       <eStructuralFeatures xmi:type="ecore:EAttribute" name="isAbstract" eType="#/0/Boolean" defaultValueLiteral="false"/>
       <eStructuralFeatures xmi:type="ecore:EReference" name="ownedAttribute" upperBound="-1" eType="#/1/Property" containment="true" resolveProxies="false"
@@ -193,7 +193,7 @@
       </eOperations>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="EssentialOCL" nsURI="http://www.omg.org/spec/QVT/20140401/EssentialOCL" nsPrefix="essentialocl">
+  <ecore:EPackage name="EssentialOCL" nsURI="http://www.omg.org/spec/QVT/20151201/EssentialOCL" nsPrefix="essentialocl">
     <eClassifiers xmi:type="ecore:EClass" name="AnyType" eSuperTypes="#/1/Type"/>
     <eClassifiers xmi:type="ecore:EClass" name="BagType" eSuperTypes="#/2/CollectionType"/>
     <eClassifiers xmi:type="ecore:EClass" name="BooleanLiteralExp" eSuperTypes="#/2/PrimitiveLiteralExp">
@@ -427,7 +427,7 @@
     </eClassifiers>
     <eClassifiers xmi:type="ecore:EClass" name="VoidType" eSuperTypes="#/1/Type"/>
   </ecore:EPackage>
-  <ecore:EPackage name="QVTBase" nsURI="http://www.omg.org/spec/QVT/20140401/QVTBase" nsPrefix="qvtbase">
+  <ecore:EPackage name="QVTBase" nsURI="http://www.omg.org/spec/QVT/20151201/QVTBase" nsPrefix="qvtbase">
     <eClassifiers xmi:type="ecore:EClass" name="Domain" abstract="true" eSuperTypes="#/1/NamedElement">
       <eStructuralFeatures xmi:type="ecore:EAttribute" name="isCheckable" eType="#/0/Boolean"/>
       <eStructuralFeatures xmi:type="ecore:EAttribute" name="isEnforceable" eType="#/0/Boolean"/>
@@ -469,6 +469,7 @@
     <eClassifiers xmi:type="ecore:EClass" name="Rule" abstract="true" eSuperTypes="#/1/NamedElement">
       <eStructuralFeatures xmi:type="ecore:EReference" name="domain" upperBound="-1" eType="#/3/Domain" containment="true" resolveProxies="false"
           eOpposite="#/3/Domain/rule"/>
+      <eStructuralFeatures xmi:type="ecore:EAttribute" name="isAbstract" lowerBound="1" eType="#/0/Boolean" defaultValueLiteral="false"/>
       <eStructuralFeatures xmi:type="ecore:EReference" name="overrides" eType="#/3/Rule">
         <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
           <details key="body" value="overridden"/>
@@ -513,7 +514,7 @@
       </eStructuralFeatures>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="QVTCore" nsURI="http://www.omg.org/spec/QVT/20140401/QVTCore" nsPrefix="qvtcore">
+  <ecore:EPackage name="QVTCore" nsURI="http://www.omg.org/spec/QVT/20151201/QVTCore" nsPrefix="qvtcore">
     <eClassifiers xmi:type="ecore:EClass" name="Area" abstract="true">
       <eStructuralFeatures xmi:type="ecore:EReference" name="bottomPattern" lowerBound="1" eType="#/4/BottomPattern" containment="true"
           resolveProxies="false" eOpposite="#/4/BottomPattern/area"/>
@@ -604,7 +605,7 @@
       </eStructuralFeatures>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="QVTTemplate" nsURI="http://www.omg.org/spec/QVT/20140401/QVTTemplate" nsPrefix="qvttemplate">
+  <ecore:EPackage name="QVTTemplate" nsURI="http://www.omg.org/spec/QVT/20151201/QVTTemplate" nsPrefix="qvttemplate">
     <eClassifiers xmi:type="ecore:EClass" name="CollectionTemplateExp" eSuperTypes="#/5/TemplateExp">
       <eStructuralFeatures xmi:type="ecore:EReference" name="member" ordered="false" upperBound="-1" eType="#/2/OclExpression" containment="true"
           resolveProxies="false">
@@ -660,7 +661,7 @@
       </eStructuralFeatures>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="QVTRelation" nsURI="http://www.omg.org/spec/QVT/20140401/QVTRelation" nsPrefix="qvtrelation">
+  <ecore:EPackage name="QVTRelation" nsURI="http://www.omg.org/spec/QVT/20151201/QVTRelation" nsPrefix="qvtrelation">
     <eClassifiers xmi:type="ecore:EClass" name="DomainPattern" eSuperTypes="#/3/Pattern">
       <eStructuralFeatures xmi:type="ecore:EReference" name="relationDomain" lowerBound="1" eType="#/6/RelationDomain" eOpposite="#/6/RelationDomain/pattern"/>
       <eStructuralFeatures xmi:type="ecore:EReference" name="templateExpression" eType="#/5/TemplateExp" containment="true" resolveProxies="false">
@@ -726,9 +727,9 @@
     <eClassifiers xmi:type="ecore:EClass" name="RelationDomain" eSuperTypes="#/3/Domain">
       <eStructuralFeatures xmi:type="ecore:EReference" name="defaultAssignment" ordered="false" upperBound="-1" eType="#/6/RelationDomainAssignment"
           containment="true" resolveProxies="false" eOpposite="#/6/RelationDomainAssignment/owner"/>
-      <eStructuralFeatures xmi:type="ecore:EReference" name="pattern" eType="#/6/DomainPattern" containment="true" resolveProxies="false"
+      <eStructuralFeatures xmi:type="ecore:EReference" name="pattern" upperBound="-1" eType="#/6/DomainPattern" containment="true" resolveProxies="false"
           eOpposite="#/6/DomainPattern/relationDomain"/>
-      <eStructuralFeatures xmi:type="ecore:EReference" name="rootVariable" lowerBound="1" eType="#/2/Variable">
+      <eStructuralFeatures xmi:type="ecore:EReference" name="rootVariable" lowerBound="1" upperBound="-1" eType="#/2/Variable">
         <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
           <details key="body" value="relationDomain"/>
         </eAnnotations>
@@ -766,7 +767,7 @@
           resolveProxies="false" eOpposite="#/6/Key/transformation"/>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="ImperativeOCL" nsURI="http://www.omg.org/spec/QVT/20140401/ImperativeOCL" nsPrefix="imperativeocl">
+  <ecore:EPackage name="ImperativeOCL" nsURI="http://www.omg.org/spec/QVT/20151201/ImperativeOCL" nsPrefix="imperativeocl">
     <eClassifiers xmi:type="ecore:EClass" name="AltExp" eSuperTypes="#/7/ImperativeExpression">
       <eStructuralFeatures xmi:type="ecore:EReference" name="body" lowerBound="1" eType="#/2/OclExpression" containment="true" resolveProxies="false">
         <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
@@ -911,7 +912,8 @@
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xmi:type="ecore:EClass" name="ListLiteralExp" eSuperTypes="#/2/LiteralExp">
-      <eStructuralFeatures xmi:type="ecore:EReference" name="element" upperBound="-1" eType="#/2/OclExpression" containment="true" resolveProxies="false">
+      <eStructuralFeatures xmi:type="ecore:EReference" name="part" upperBound="-1" eType="#/2/CollectionLiteralPart" containment="true"
+          resolveProxies="false">
         <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
           <details key="body" value="listLiteralExp"/>
         </eAnnotations>
@@ -1019,7 +1021,7 @@
       </eStructuralFeatures>
     </eClassifiers>
   </ecore:EPackage>
-  <ecore:EPackage name="QVTOperational" nsURI="http://www.omg.org/spec/QVT/20140401/QVTOperational" nsPrefix="qvtoperational">
+  <ecore:EPackage name="QVTOperational" nsURI="http://www.omg.org/spec/QVT/20151201/QVTOperational" nsPrefix="qvtoperational">
     <eClassifiers xmi:type="ecore:EClass" name="Constructor" eSuperTypes="#/8/ImperativeOperation"/>
     <eClassifiers xmi:type="ecore:EClass" name="ConstructorBody" eSuperTypes="#/8/OperationBody"/>
     <eClassifiers xmi:type="ecore:EClass" name="ContextualProperty" eSuperTypes="#/1/Property">
@@ -1190,7 +1192,7 @@
           <details key="body" value="importingElement"/>
         </eAnnotations>
       </eStructuralFeatures>
-      <eStructuralFeatures xmi:type="ecore:EAttribute" name="kind" eType="#/8/ImportKind"/>
+      <eStructuralFeatures xmi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="#/8/ImportKind" defaultValueLiteral="access"/>
       <eStructuralFeatures xmi:type="ecore:EReference" name="module" eType="#/8/Module" transient="true" resolveProxies="false" eOpposite="#/8/Module/moduleImport"/>
     </eClassifiers>
     <eClassifiers xmi:type="ecore:EClass" name="ObjectExp" eSuperTypes="#/7/InstantiationExp">

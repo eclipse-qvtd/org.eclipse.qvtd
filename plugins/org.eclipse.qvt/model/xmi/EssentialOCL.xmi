@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:mofext="http://www.omg.org/spec/MOF/20131001" xmlns:uml="http://www.omg.org/spec/UML/20131001">
-  <uml:Package xmi:type="uml:Package" xmi:id="EssentialOCL" name="EssentialOCL" URI="http://www.omg.org/spec/QVT/20140401/EssentialOCL">
+  <uml:Package xmi:type="uml:Package" xmi:id="EssentialOCL" name="EssentialOCL" URI="http://www.omg.org/spec/QVT/20151201/EssentialOCL">
     <packagedElement xmi:type="uml:Enumeration" xmi:id="CollectionKind" name="CollectionKind">
       <ownedLiteral xmi:id="Set" name="Set"/>
       <ownedLiteral xmi:id="OrderedSet" name="OrderedSet"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:mofext="http://www.omg.org/spec/MOF/20131001" xmlns:uml="http://www.omg.org/spec/UML/20131001">
-  <uml:Package xmi:type="uml:Package" xmi:id="QVTBase" name="QVTBase" URI="http://www.omg.org/spec/QVT/20140401/QVTBase">
+  <uml:Package xmi:type="uml:Package" xmi:id="QVTBase" name="QVTBase" URI="http://www.omg.org/spec/QVT/20151201/QVTBase">
     <packagedElement xmi:type="uml:Class" xmi:id="Domain" name="Domain" isAbstract="true">
       <generalization xmi:id="G_Domain_NamedElement">
         <general xmi:type="uml:Class" href="EMOF.xmi#NamedElement"/>
@@ -65,6 +65,12 @@
       <ownedAttribute xmi:id="Rule.domain" name="domain" type="Domain" isOrdered="true" aggregation="composite" association="A_Domain.rule_Rule.domain">
         <lowerValue xmi:type="uml:LiteralInteger"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="Rule.isAbstract" name="isAbstract" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.xmi#Boolean"/>
+        <defaultValue xmi:type="uml:LiteralBoolean">
+          <type xmi:type="uml:PrimitiveType" href="PrimitiveTypes.xmi#Boolean"/>
+        </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="Rule.overrides" name="overrides" type="Rule" association="A_Rule.overrides_overridden">
         <lowerValue xmi:type="uml:LiteralInteger"/>

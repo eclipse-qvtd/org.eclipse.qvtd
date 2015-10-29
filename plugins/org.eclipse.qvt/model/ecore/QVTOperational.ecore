@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="QVTOperational" name="QVTOperational" nsURI="http://www.omg.org/spec/QVT/20140401/QVTOperational"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="QVTOperational" name="QVTOperational" nsURI="http://www.omg.org/spec/QVT/20151201/QVTOperational"
     nsPrefix="qvtoperational">
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTOperational.Constructor" name="Constructor"
       eSuperTypes="#QVTOperational.ImperativeOperation"/>
@@ -229,7 +229,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTOperational.ModuleImport.kind"
-        name="kind" eType="#QVTOperational.ImportKind"/>
+        name="kind" lowerBound="1" eType="#QVTOperational.ImportKind" defaultValueLiteral="access"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTOperational.ModuleImport.module"
         name="module" eType="#QVTOperational.Module" transient="true" resolveProxies="false"
         eOpposite="#QVTOperational.Module.moduleImport"/>

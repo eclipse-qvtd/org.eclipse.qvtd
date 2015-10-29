@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Package xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML"
-    xmi:id="QVTCore" name="QVTCore" URI="http://www.omg.org/spec/QVT/20140401/QVTCore">
+    xmi:id="QVTCore" name="QVTCore" URI="http://www.omg.org/spec/QVT/20151201/QVTCore">
   <packagedElement xmi:type="uml:Enumeration" xmi:id="EnforcementMode" name="EnforcementMode">
     <ownedLiteral xmi:id="Creation" name="Creation"/>
     <ownedLiteral xmi:id="Deletion" name="Deletion"/>

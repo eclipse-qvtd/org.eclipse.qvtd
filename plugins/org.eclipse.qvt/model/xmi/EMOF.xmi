@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:mofext="http://www.omg.org/spec/MOF/20131001" xmlns:uml="http://www.omg.org/spec/UML/20131001">
-  <uml:Package xmi:type="uml:Package" xmi:id="EMOF" name="EMOF" URI="http://www.omg.org/spec/QVT/20140401/EMOF">
+  <uml:Package xmi:type="uml:Package" xmi:id="EMOF" name="EMOF" URI="http://www.omg.org/spec/QVT/20151201/EMOF">
     <packagedElement xmi:type="uml:Class" xmi:id="Class" name="Class">
       <generalization xmi:id="G_Class_Type" general="Type"/>
       <ownedAttribute xmi:id="Class.isAbstract" name="isAbstract" visibility="public">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Package xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML"
-    xmi:id="ImperativeOCL" name="ImperativeOCL" URI="http://www.omg.org/spec/QVT/20140401/ImperativeOCL">
+    xmi:id="ImperativeOCL" name="ImperativeOCL" URI="http://www.omg.org/spec/QVT/20151201/ImperativeOCL">
   <packagedElement xmi:type="uml:Enumeration" xmi:id="SeverityKind" name="SeverityKind">
     <ownedLiteral xmi:id="error" name="error"/>
     <ownedLiteral xmi:id="warning" name="warning"/>
@@ -164,8 +164,8 @@
     <generalization xmi:id="G_ListLiteralExp_LiteralExp">
       <general xmi:type="uml:Class" href="EssentialOCL.uml#LiteralExp"/>
     </generalization>
-    <ownedAttribute xmi:id="ListLiteralExp.element" name="element" isOrdered="true" aggregation="composite" association="A_ListLiteralExp.element_listLiteralExp">
-      <type xmi:type="uml:Class" href="EssentialOCL.uml#OclExpression"/>
+    <ownedAttribute xmi:id="ListLiteralExp.part" name="part" isOrdered="true" aggregation="composite" association="A_ListLiteralExp.part_listLiteralExp">
+      <type xmi:type="uml:Class" href="EssentialOCL.uml#CollectionLiteralPart"/>
       <lowerValue xmi:type="uml:LiteralInteger"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
@@ -396,9 +396,9 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedEnd>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="A_ListLiteralExp.element_listLiteralExp" name="A_ListLiteralExp.element_listLiteralExp"
-      memberEnd="ListLiteralExp.element A_ListLiteralExp.element_listLiteralExp.listLiteralExp">
-    <ownedEnd xmi:id="A_ListLiteralExp.element_listLiteralExp.listLiteralExp" name="listLiteralExp" type="ListLiteralExp" association="A_ListLiteralExp.element_listLiteralExp">
+  <packagedElement xmi:type="uml:Association" xmi:id="A_ListLiteralExp.part_listLiteralExp" name="A_ListLiteralExp.part_listLiteralExp"
+      memberEnd="ListLiteralExp.part A_ListLiteralExp.part_listLiteralExp.listLiteralExp">
+    <ownedEnd xmi:id="A_ListLiteralExp.part_listLiteralExp.listLiteralExp" name="listLiteralExp" type="ListLiteralExp" association="A_ListLiteralExp.part_listLiteralExp">
       <lowerValue xmi:type="uml:LiteralInteger"/>
     </ownedEnd>
   </packagedElement>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:mofext="http://www.omg.org/spec/MOF/20131001" xmlns:uml="http://www.omg.org/spec/UML/20131001">
-  <uml:Package xmi:type="uml:Package" xmi:id="QVTOperational" name="QVTOperational" URI="http://www.omg.org/spec/QVT/20140401/QVTOperational">
+  <uml:Package xmi:type="uml:Package" xmi:id="QVTOperational" name="QVTOperational" URI="http://www.omg.org/spec/QVT/20151201/QVTOperational">
     <packagedElement xmi:type="uml:Enumeration" xmi:id="DirectionKind" name="DirectionKind">
       <ownedLiteral xmi:id="in" name="in"/>
       <ownedLiteral xmi:id="inout" name="inout"/>
@@ -212,7 +212,7 @@
       </ownedAttribute>
       <ownedAttribute xmi:id="ModuleImport.importedModule" name="importedModule" type="Module" association="A_ModuleImport.importedModule_importingElement"/>
       <ownedAttribute xmi:id="ModuleImport.kind" name="kind" visibility="public" type="ImportKind">
-        <lowerValue xmi:type="uml:LiteralInteger"/>
+        <defaultValue xmi:type="uml:InstanceValue" type="ImportKind" instance="access"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="ModuleImport.module" name="module" type="Module" association="A_Module.moduleImport_ModuleImport.module">
         <lowerValue xmi:type="uml:LiteralInteger"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Package xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML"
-    xmi:id="QVTRelation" name="QVTRelation" URI="http://www.omg.org/spec/QVT/20140401/QVTRelation">
+    xmi:id="QVTRelation" name="QVTRelation" URI="http://www.omg.org/spec/QVT/20151201/QVTRelation">
   <packagedElement xmi:type="uml:Class" xmi:id="DomainPattern" name="DomainPattern">
     <generalization xmi:id="G_DomainPattern_Pattern">
       <general xmi:type="uml:Class" href="QVTBase.uml#Pattern"/>
@@ -83,11 +83,13 @@
       <lowerValue xmi:type="uml:LiteralInteger"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="RelationDomain.pattern" name="pattern" type="DomainPattern" aggregation="composite" association="A_DomainPattern.relationDomain_RelationDomain.pattern">
+    <ownedAttribute xmi:id="RelationDomain.pattern" name="pattern" type="DomainPattern" isOrdered="true" aggregation="composite" association="A_DomainPattern.relationDomain_RelationDomain.pattern">
       <lowerValue xmi:type="uml:LiteralInteger"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="RelationDomain.rootVariable" name="rootVariable" association="A_RelationDomain.rootVariable_relationDomain">
+    <ownedAttribute xmi:id="RelationDomain.rootVariable" name="rootVariable" isOrdered="true" association="A_RelationDomain.rootVariable_relationDomain">
       <type xmi:type="uml:Class" href="EssentialOCL.uml#Variable"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" value="*"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="RelationDomainAssignment" name="RelationDomainAssignment">

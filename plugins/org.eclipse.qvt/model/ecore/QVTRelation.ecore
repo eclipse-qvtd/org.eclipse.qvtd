@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="QVTRelation" name="QVTRelation" nsURI="http://www.omg.org/spec/QVT/20140401/QVTRelation"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="QVTRelation" name="QVTRelation" nsURI="http://www.omg.org/spec/QVT/20151201/QVTRelation"
     nsPrefix="qvtrelation">
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.DomainPattern" name="DomainPattern"
       eSuperTypes="QVTBase.ecore#QVTBase.Pattern">
@@ -90,10 +90,10 @@
         name="defaultAssignment" ordered="false" upperBound="-1" eType="#QVTRelation.RelationDomainAssignment"
         containment="true" resolveProxies="false" eOpposite="#//RelationDomainAssignment/owner"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomain.pattern"
-        name="pattern" eType="#QVTRelation.DomainPattern" containment="true" resolveProxies="false"
-        eOpposite="#//DomainPattern/relationDomain"/>
+        name="pattern" upperBound="-1" eType="#QVTRelation.DomainPattern" containment="true"
+        resolveProxies="false" eOpposite="#//DomainPattern/relationDomain"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomain.rootVariable"
-        name="rootVariable" lowerBound="1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable">
+        name="rootVariable" lowerBound="1" upperBound="-1" eType="ecore:EClass EssentialOCL.ecore#EssentialOCL.Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="relationDomain"/>
       </eAnnotations>

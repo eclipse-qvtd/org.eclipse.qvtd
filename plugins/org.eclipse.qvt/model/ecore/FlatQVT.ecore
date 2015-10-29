@@ -527,7 +527,7 @@
   </eClassifiers>
   <eClassifiers xmi:type="ecore:EClass" name="Library" eSuperTypes="#//Module"/>
   <eClassifiers xmi:type="ecore:EClass" name="ListLiteralExp" eSuperTypes="#//LiteralExp">
-    <eStructuralFeatures xmi:type="ecore:EReference" name="element" upperBound="-1" eType="#//OclExpression" containment="true" resolveProxies="false">
+    <eStructuralFeatures xmi:type="ecore:EReference" name="part" upperBound="-1" eType="#//CollectionLiteralPart" containment="true" resolveProxies="false">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="listLiteralExp"/>
       </eAnnotations>
@@ -679,7 +679,7 @@
         <details key="body" value="importingElement"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xmi:type="ecore:EAttribute" name="kind" eType="#//ImportKind"/>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="#//ImportKind" defaultValueLiteral="access"/>
     <eStructuralFeatures xmi:type="ecore:EReference" name="module" eType="#//Module" transient="true" resolveProxies="false" eOpposite="#//Module/moduleImport"/>
   </eClassifiers>
   <eClassifiers xmi:type="ecore:EClass" name="MultiplicityElement" abstract="true">
@@ -947,9 +947,9 @@
   <eClassifiers xmi:type="ecore:EClass" name="RelationDomain" eSuperTypes="#//Domain">
     <eStructuralFeatures xmi:type="ecore:EReference" name="defaultAssignment" ordered="false" upperBound="-1" eType="#//RelationDomainAssignment"
         containment="true" resolveProxies="false" eOpposite="#//RelationDomainAssignment/owner"/>
-    <eStructuralFeatures xmi:type="ecore:EReference" name="pattern" eType="#//DomainPattern" containment="true" resolveProxies="false"
+    <eStructuralFeatures xmi:type="ecore:EReference" name="pattern" upperBound="-1" eType="#//DomainPattern" containment="true" resolveProxies="false"
         eOpposite="#//DomainPattern/relationDomain"/>
-    <eStructuralFeatures xmi:type="ecore:EReference" name="rootVariable" lowerBound="1" eType="#//Variable">
+    <eStructuralFeatures xmi:type="ecore:EReference" name="rootVariable" lowerBound="1" upperBound="-1" eType="#//Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="relationDomain"/>
       </eAnnotations>
@@ -1018,6 +1018,7 @@
   <eClassifiers xmi:type="ecore:EClass" name="Rule" abstract="true" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xmi:type="ecore:EReference" name="domain" upperBound="-1" eType="#//Domain" containment="true" resolveProxies="false"
         eOpposite="#//Domain/rule"/>
+    <eStructuralFeatures xmi:type="ecore:EAttribute" name="isAbstract" lowerBound="1" eType="#//Boolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xmi:type="ecore:EReference" name="overrides" eType="#//Rule">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="overridden"/>
