@@ -39,9 +39,9 @@ query getSharedDomainVars(r:qvtrelation::Relation):Set(essentialocl::Variable)
    r.domain->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
       if (vars->isEmpty())
       then
-         vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
+         vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo->asSet())
       else
-         vars->intersection(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
+         vars->intersection(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo->asSet())
       endif
    )
 }
@@ -54,9 +54,9 @@ query getWhenVars(r:qvtrelation::Relation):Set(essentialocl::Variable)
    r.domain->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
       if (vars->isEmpty())
       then
-         vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
+         vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo->asSet())
       else
-         vars->intersection(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
+         vars->intersection(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo->asSet())
       endif
    )
 }
@@ -485,7 +485,7 @@ top relation TopLevelRelationToMappingForEnforcement
                                  p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
 
       oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
-         vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo));
+         vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo->asSet()));
       sharedDomainVars = getSharedDomainVars(r);
       domainBottomUnSharedVars = domainVars - whenVars - sharedDomainVars;
 
@@ -710,7 +710,7 @@ top relation InvokedRelationToMappingForEnforcement
                                  p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
 
       oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
-         vars->union(d.pattern.bindsTo));
+         vars->union(d.pattern.bindsTo->asSet()));
       sharedDomainVars = getSharedDomainVars(r);
       domainBottomUnSharedVars =
          (domainVars - whenVars - sharedDomainVars)->excluding(tev);
