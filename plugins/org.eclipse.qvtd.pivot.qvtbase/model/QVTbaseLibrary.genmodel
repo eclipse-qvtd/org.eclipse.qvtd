@@ -14,6 +14,6 @@
   <modelPluginVariables>org.eclipse.ocl.pivot</modelPluginVariables>
   <modelPluginVariables>org.eclipse.ocl.examples.codegen</modelPluginVariables>
   <modelPluginVariables>org.eclipse.jdt.annotation</modelPluginVariables>
-  <genPackages prefix="QVTbaseLibrary" basePackage="org.eclipse.qvtd.pivot.qvtbase" disposableProviderFactory="true"
-      ecorePackage="../model-gen/QVTbaseLibrary.ecore#/"/>
+  <genPackages prefix="QVTbaseLibrary" basePackage="org.eclipse.qvtd.pivot.qvtbase"
+      disposableProviderFactory="true" ecorePackage="../model-gen/QVTbaseLibrary.ecore#/"/>
 </genmodel:GenModel>

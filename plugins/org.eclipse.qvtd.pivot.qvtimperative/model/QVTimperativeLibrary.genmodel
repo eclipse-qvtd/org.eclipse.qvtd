@@ -3,9 +3,9 @@
     copyrightText="Copyright (c) 2010,2014 E.D.Willink and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  E.D.Willink - Initial API and implementation"
     modelDirectory="/org.eclipse.qvtd.pivot.qvtimperative/emf-gen" editDirectory="/org.eclipse.qvtd.pivot.qvtimperative.edit/emf-gen"
     editorDirectory="/org.eclipse.qvtd.pivot.qvtimperative.editor/emf-gen" modelPluginID="org.eclipse.qvtd.pivot.qvtimperative"
-    modelName="QVTimperativeLibrary" updateClasspath="false" nonNLSMarkers="true" suppressInterfaces="true"
-    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="6.0"
-    copyrightFields="false" runtimeVersion="2.7" interfaceNamePattern="">
+    modelName="QVTimperativeLibrary" updateClasspath="false" nonNLSMarkers="true"
+    suppressInterfaces="true" importerID="org.eclipse.emf.importer.ecore" bundleManifest="false"
+    complianceLevel="6.0" copyrightFields="false" runtimeVersion="2.7" interfaceNamePattern="">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Delegates" value="false"/>
     <details key="Use Null Annotations" value="true"/>
@@ -14,6 +14,6 @@
   <modelPluginVariables>org.eclipse.ocl.pivot</modelPluginVariables>
   <modelPluginVariables>org.eclipse.ocl.examples.codegen</modelPluginVariables>
   <modelPluginVariables>org.eclipse.jdt.annotation</modelPluginVariables>
-  <genPackages prefix="QVTimperativeLibrary" basePackage="org.eclipse.qvtd.pivot.qvtimperative" disposableProviderFactory="true"
-      ecorePackage="../model-gen/QVTimperativeLibrary.ecore#/"/>
+  <genPackages prefix="QVTimperativeLibrary" basePackage="org.eclipse.qvtd.pivot.qvtimperative"
+      disposableProviderFactory="true" ecorePackage="../model-gen/QVTimperativeLibrary.ecore#/"/>
 </genmodel:GenModel>

@@ -189,28 +189,36 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cInKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Assignment cOwnedInPathNameAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
 		private final RuleCall cOwnedInPathNamePathNameCSParserRuleCall_4_1_0 = (RuleCall)cOwnedInPathNameAssignment_4_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cOwnedDomainsAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final Alternatives cOwnedDomainsAlternatives_6_0 = (Alternatives)cOwnedDomainsAssignment_6.eContents().get(0);
-		private final RuleCall cOwnedDomainsSourceDomainCSParserRuleCall_6_0_0 = (RuleCall)cOwnedDomainsAlternatives_6_0.eContents().get(0);
-		private final RuleCall cOwnedDomainsTargetDomainCSParserRuleCall_6_0_1 = (RuleCall)cOwnedDomainsAlternatives_6_0.eContents().get(1);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cWhereKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Assignment cOwnedMiddleAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
-		private final RuleCall cOwnedMiddleMiddleDomainCSParserRuleCall_7_1_0 = (RuleCall)cOwnedMiddleAssignment_7_1.eContents().get(0);
-		private final Assignment cOwnedMappingSequenceAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cOwnedMappingSequenceMappingSequenceCSParserRuleCall_8_0 = (RuleCall)cOwnedMappingSequenceAssignment_8.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cUsesKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cOwnedUsesPathNamesAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cOwnedUsesPathNamesPathNameCSParserRuleCall_5_1_0 = (RuleCall)cOwnedUsesPathNamesAssignment_5_1.eContents().get(0);
+		private final Group cGroup_5_2 = (Group)cGroup_5.eContents().get(2);
+		private final Keyword cCommaKeyword_5_2_0 = (Keyword)cGroup_5_2.eContents().get(0);
+		private final Assignment cOwnedUsesPathNamesAssignment_5_2_1 = (Assignment)cGroup_5_2.eContents().get(1);
+		private final RuleCall cOwnedUsesPathNamesPathNameCSParserRuleCall_5_2_1_0 = (RuleCall)cOwnedUsesPathNamesAssignment_5_2_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cOwnedDomainsAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final Alternatives cOwnedDomainsAlternatives_7_0 = (Alternatives)cOwnedDomainsAssignment_7.eContents().get(0);
+		private final RuleCall cOwnedDomainsSourceDomainCSParserRuleCall_7_0_0 = (RuleCall)cOwnedDomainsAlternatives_7_0.eContents().get(0);
+		private final RuleCall cOwnedDomainsTargetDomainCSParserRuleCall_7_0_1 = (RuleCall)cOwnedDomainsAlternatives_7_0.eContents().get(1);
+		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
+		private final Keyword cWhereKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
+		private final Assignment cOwnedMiddleAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
+		private final RuleCall cOwnedMiddleMiddleDomainCSParserRuleCall_8_1_0 = (RuleCall)cOwnedMiddleAssignment_8_1.eContents().get(0);
+		private final Assignment cOwnedMappingSequenceAssignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final RuleCall cOwnedMappingSequenceMappingSequenceCSParserRuleCall_9_0 = (RuleCall)cOwnedMappingSequenceAssignment_9.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		
 		//MappingCS:
-		//	{MappingCS} isDefault?="default"? "map" name=UnrestrictedName ("in" ownedInPathName=PathNameCS)? "{"
-		//	ownedDomains+=(SourceDomainCS | TargetDomainCS)* ("where" ownedMiddle=MiddleDomainCS)?
-		//	ownedMappingSequence=MappingSequenceCS? "}";
+		//	{MappingCS} isDefault?="default"? "map" name=UnrestrictedName ("in" ownedInPathName=PathNameCS)? ("uses"
+		//	ownedUsesPathNames+=PathNameCS ("," ownedUsesPathNames+=PathNameCS)*)? "{" ownedDomains+=(SourceDomainCS |
+		//	TargetDomainCS)* ("where" ownedMiddle=MiddleDomainCS)? ownedMappingSequence=MappingSequenceCS? "}";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{MappingCS} isDefault?="default"? "map" name=UnrestrictedName ("in" ownedInPathName=PathNameCS)? "{"
-		//ownedDomains+=(SourceDomainCS | TargetDomainCS)* ("where" ownedMiddle=MiddleDomainCS)?
-		//ownedMappingSequence=MappingSequenceCS? "}"
+		//{MappingCS} isDefault?="default"? "map" name=UnrestrictedName ("in" ownedInPathName=PathNameCS)? ("uses"
+		//ownedUsesPathNames+=PathNameCS ("," ownedUsesPathNames+=PathNameCS)*)? "{" ownedDomains+=(SourceDomainCS |
+		//TargetDomainCS)* ("where" ownedMiddle=MiddleDomainCS)? ownedMappingSequence=MappingSequenceCS? "}"
 		public Group getGroup() { return cGroup; }
 
 		//{MappingCS}
@@ -243,41 +251,65 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//PathNameCS
 		public RuleCall getOwnedInPathNamePathNameCSParserRuleCall_4_1_0() { return cOwnedInPathNamePathNameCSParserRuleCall_4_1_0; }
 
+		//("uses" ownedUsesPathNames+=PathNameCS ("," ownedUsesPathNames+=PathNameCS)*)?
+		public Group getGroup_5() { return cGroup_5; }
+
+		//"uses"
+		public Keyword getUsesKeyword_5_0() { return cUsesKeyword_5_0; }
+
+		//ownedUsesPathNames+=PathNameCS
+		public Assignment getOwnedUsesPathNamesAssignment_5_1() { return cOwnedUsesPathNamesAssignment_5_1; }
+
+		//PathNameCS
+		public RuleCall getOwnedUsesPathNamesPathNameCSParserRuleCall_5_1_0() { return cOwnedUsesPathNamesPathNameCSParserRuleCall_5_1_0; }
+
+		//("," ownedUsesPathNames+=PathNameCS)*
+		public Group getGroup_5_2() { return cGroup_5_2; }
+
+		//","
+		public Keyword getCommaKeyword_5_2_0() { return cCommaKeyword_5_2_0; }
+
+		//ownedUsesPathNames+=PathNameCS
+		public Assignment getOwnedUsesPathNamesAssignment_5_2_1() { return cOwnedUsesPathNamesAssignment_5_2_1; }
+
+		//PathNameCS
+		public RuleCall getOwnedUsesPathNamesPathNameCSParserRuleCall_5_2_1_0() { return cOwnedUsesPathNamesPathNameCSParserRuleCall_5_2_1_0; }
+
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
+		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
 
 		//ownedDomains+=(SourceDomainCS | TargetDomainCS)*
-		public Assignment getOwnedDomainsAssignment_6() { return cOwnedDomainsAssignment_6; }
+		public Assignment getOwnedDomainsAssignment_7() { return cOwnedDomainsAssignment_7; }
 
 		//SourceDomainCS | TargetDomainCS
-		public Alternatives getOwnedDomainsAlternatives_6_0() { return cOwnedDomainsAlternatives_6_0; }
+		public Alternatives getOwnedDomainsAlternatives_7_0() { return cOwnedDomainsAlternatives_7_0; }
 
 		//SourceDomainCS
-		public RuleCall getOwnedDomainsSourceDomainCSParserRuleCall_6_0_0() { return cOwnedDomainsSourceDomainCSParserRuleCall_6_0_0; }
+		public RuleCall getOwnedDomainsSourceDomainCSParserRuleCall_7_0_0() { return cOwnedDomainsSourceDomainCSParserRuleCall_7_0_0; }
 
 		//TargetDomainCS
-		public RuleCall getOwnedDomainsTargetDomainCSParserRuleCall_6_0_1() { return cOwnedDomainsTargetDomainCSParserRuleCall_6_0_1; }
+		public RuleCall getOwnedDomainsTargetDomainCSParserRuleCall_7_0_1() { return cOwnedDomainsTargetDomainCSParserRuleCall_7_0_1; }
 
 		//("where" ownedMiddle=MiddleDomainCS)?
-		public Group getGroup_7() { return cGroup_7; }
+		public Group getGroup_8() { return cGroup_8; }
 
 		//"where"
-		public Keyword getWhereKeyword_7_0() { return cWhereKeyword_7_0; }
+		public Keyword getWhereKeyword_8_0() { return cWhereKeyword_8_0; }
 
 		//ownedMiddle=MiddleDomainCS
-		public Assignment getOwnedMiddleAssignment_7_1() { return cOwnedMiddleAssignment_7_1; }
+		public Assignment getOwnedMiddleAssignment_8_1() { return cOwnedMiddleAssignment_8_1; }
 
 		//MiddleDomainCS
-		public RuleCall getOwnedMiddleMiddleDomainCSParserRuleCall_7_1_0() { return cOwnedMiddleMiddleDomainCSParserRuleCall_7_1_0; }
+		public RuleCall getOwnedMiddleMiddleDomainCSParserRuleCall_8_1_0() { return cOwnedMiddleMiddleDomainCSParserRuleCall_8_1_0; }
 
 		//ownedMappingSequence=MappingSequenceCS?
-		public Assignment getOwnedMappingSequenceAssignment_8() { return cOwnedMappingSequenceAssignment_8; }
+		public Assignment getOwnedMappingSequenceAssignment_9() { return cOwnedMappingSequenceAssignment_9; }
 
 		//MappingSequenceCS
-		public RuleCall getOwnedMappingSequenceMappingSequenceCSParserRuleCall_8_0() { return cOwnedMappingSequenceMappingSequenceCSParserRuleCall_8_0; }
+		public RuleCall getOwnedMappingSequenceMappingSequenceCSParserRuleCall_9_0() { return cOwnedMappingSequenceMappingSequenceCSParserRuleCall_9_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
+		public Keyword getRightCurlyBracketKeyword_10() { return cRightCurlyBracketKeyword_10; }
 	}
 
 	public class MappingCallCSElements extends AbstractParserRuleElementFinder {
@@ -1154,9 +1186,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MappingCS:
-	//	{MappingCS} isDefault?="default"? "map" name=UnrestrictedName ("in" ownedInPathName=PathNameCS)? "{"
-	//	ownedDomains+=(SourceDomainCS | TargetDomainCS)* ("where" ownedMiddle=MiddleDomainCS)?
-	//	ownedMappingSequence=MappingSequenceCS? "}";
+	//	{MappingCS} isDefault?="default"? "map" name=UnrestrictedName ("in" ownedInPathName=PathNameCS)? ("uses"
+	//	ownedUsesPathNames+=PathNameCS ("," ownedUsesPathNames+=PathNameCS)*)? "{" ownedDomains+=(SourceDomainCS |
+	//	TargetDomainCS)* ("where" ownedMiddle=MiddleDomainCS)? ownedMappingSequence=MappingSequenceCS? "}";
 	public MappingCSElements getMappingCSAccess() {
 		return pMappingCS;
 	}

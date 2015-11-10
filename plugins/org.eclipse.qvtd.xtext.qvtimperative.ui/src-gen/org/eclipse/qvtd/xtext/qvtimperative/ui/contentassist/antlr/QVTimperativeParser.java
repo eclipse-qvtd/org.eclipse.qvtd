@@ -38,7 +38,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getTopLevelCSAccess().getAlternatives_1(), "rule__TopLevelCS__Alternatives_1");
-					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAlternatives_6_0(), "rule__MappingCS__OwnedDomainsAlternatives_6_0");
+					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAlternatives_7_0(), "rule__MappingCS__OwnedDomainsAlternatives_7_0");
 					put(grammarAccess.getMappingCallBindingCSAccess().getAlternatives_1(), "rule__MappingCallBindingCS__Alternatives_1");
 					put(grammarAccess.getMappingStatementCSAccess().getAlternatives(), "rule__MappingStatementCS__Alternatives");
 					put(grammarAccess.getMiddleBottomPatternCSAccess().getAlternatives(), "rule__MiddleBottomPatternCS__Alternatives");
@@ -90,7 +90,9 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDirectionCSAccess().getGroup_3_2(), "rule__DirectionCS__Group_3_2__0");
 					put(grammarAccess.getMappingCSAccess().getGroup(), "rule__MappingCS__Group__0");
 					put(grammarAccess.getMappingCSAccess().getGroup_4(), "rule__MappingCS__Group_4__0");
-					put(grammarAccess.getMappingCSAccess().getGroup_7(), "rule__MappingCS__Group_7__0");
+					put(grammarAccess.getMappingCSAccess().getGroup_5(), "rule__MappingCS__Group_5__0");
+					put(grammarAccess.getMappingCSAccess().getGroup_5_2(), "rule__MappingCS__Group_5_2__0");
+					put(grammarAccess.getMappingCSAccess().getGroup_8(), "rule__MappingCS__Group_8__0");
 					put(grammarAccess.getMappingCallCSAccess().getGroup(), "rule__MappingCallCS__Group__0");
 					put(grammarAccess.getMappingCallBindingCSAccess().getGroup(), "rule__MappingCallBindingCS__Group__0");
 					put(grammarAccess.getMappingLoopCSAccess().getGroup(), "rule__MappingLoopCS__Group__0");
@@ -258,9 +260,11 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMappingCSAccess().getIsDefaultAssignment_1(), "rule__MappingCS__IsDefaultAssignment_1");
 					put(grammarAccess.getMappingCSAccess().getNameAssignment_3(), "rule__MappingCS__NameAssignment_3");
 					put(grammarAccess.getMappingCSAccess().getOwnedInPathNameAssignment_4_1(), "rule__MappingCS__OwnedInPathNameAssignment_4_1");
-					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAssignment_6(), "rule__MappingCS__OwnedDomainsAssignment_6");
-					put(grammarAccess.getMappingCSAccess().getOwnedMiddleAssignment_7_1(), "rule__MappingCS__OwnedMiddleAssignment_7_1");
-					put(grammarAccess.getMappingCSAccess().getOwnedMappingSequenceAssignment_8(), "rule__MappingCS__OwnedMappingSequenceAssignment_8");
+					put(grammarAccess.getMappingCSAccess().getOwnedUsesPathNamesAssignment_5_1(), "rule__MappingCS__OwnedUsesPathNamesAssignment_5_1");
+					put(grammarAccess.getMappingCSAccess().getOwnedUsesPathNamesAssignment_5_2_1(), "rule__MappingCS__OwnedUsesPathNamesAssignment_5_2_1");
+					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAssignment_7(), "rule__MappingCS__OwnedDomainsAssignment_7");
+					put(grammarAccess.getMappingCSAccess().getOwnedMiddleAssignment_8_1(), "rule__MappingCS__OwnedMiddleAssignment_8_1");
+					put(grammarAccess.getMappingCSAccess().getOwnedMappingSequenceAssignment_9(), "rule__MappingCS__OwnedMappingSequenceAssignment_9");
 					put(grammarAccess.getMappingCallCSAccess().getIsInfiniteAssignment_1(), "rule__MappingCallCS__IsInfiniteAssignment_1");
 					put(grammarAccess.getMappingCallCSAccess().getOwnedPathNameAssignment_3(), "rule__MappingCallCS__OwnedPathNameAssignment_3");
 					put(grammarAccess.getMappingCallCSAccess().getOwnedBindingsAssignment_5(), "rule__MappingCallCS__OwnedBindingsAssignment_5");
