@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
 
 /**
@@ -22,6 +24,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedUsesPathNames <em>Owned Uses Path Names</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS()
@@ -54,5 +57,21 @@ public interface MappingCS extends AbstractMappingCS {
 	 * @generated
 	 */
 	void setOwnedMappingSequence(MappingSequenceCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Uses Path Names</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.PathNameCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Uses Path Names</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Uses Path Names</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_OwnedUsesPathNames()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<PathNameCS> getOwnedUsesPathNames();
 
 } // MappingCS

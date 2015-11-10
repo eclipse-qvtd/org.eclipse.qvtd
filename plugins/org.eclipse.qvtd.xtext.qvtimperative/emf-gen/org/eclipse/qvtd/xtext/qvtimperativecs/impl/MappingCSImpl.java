@@ -10,13 +10,18 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperativecs.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AbstractMappingCSImpl;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -33,6 +38,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedUsesPathNames <em>Owned Uses Path Names</em>}</li>
  * </ul>
  *
  * @generated
@@ -47,6 +53,15 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	 * @ordered
 	 */
 	protected MappingSequenceCS ownedMappingSequence;
+	/**
+	 * The cached value of the '{@link #getOwnedUsesPathNames() <em>Owned Uses Path Names</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedUsesPathNames()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PathNameCS> ownedUsesPathNames;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -117,10 +132,25 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
+	public EList<PathNameCS> getOwnedUsesPathNames() {
+		if (ownedUsesPathNames == null) {
+			ownedUsesPathNames = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES);
+		}
+		return ownedUsesPathNames;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				return basicSetOwnedMappingSequence(null, msgs);
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
+				return ((InternalEList<?>)getOwnedUsesPathNames()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -135,6 +165,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 		switch (featureID) {
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				return getOwnedMappingSequence();
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
+				return getOwnedUsesPathNames();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -144,11 +176,16 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				setOwnedMappingSequence((MappingSequenceCS)newValue);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
+				getOwnedUsesPathNames().clear();
+				getOwnedUsesPathNames().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -165,6 +202,9 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				setOwnedMappingSequence((MappingSequenceCS)null);
 				return;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
+				getOwnedUsesPathNames().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -179,6 +219,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 		switch (featureID) {
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				return ownedMappingSequence != null;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
+				return ownedUsesPathNames != null && !ownedUsesPathNames.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
