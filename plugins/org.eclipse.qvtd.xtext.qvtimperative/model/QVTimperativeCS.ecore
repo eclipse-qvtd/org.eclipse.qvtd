@@ -5,6 +5,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="MappingCS" eSuperTypes="../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore#//AbstractMappingCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappingSequence" eType="#//MappingSequenceCS"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedUsesPathNames" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCallBindingCS" eSuperTypes="../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPolled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
