@@ -10,9 +10,13 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeFilter;
@@ -79,6 +83,17 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		super(context);
 	}
 
+	protected @Nullable org.eclipse.ocl.pivot.Class lookupClass(@NonNull ElementCS csElement, @NonNull PathNameCS csPathName, @Nullable ScopeFilter scopeFilter) {
+		CS2AS.setElementType(csPathName, PivotPackage.Literals.CLASS, csElement, scopeFilter);
+		Element namedElement = csPathName.getReferredElement();
+		if (namedElement instanceof org.eclipse.ocl.pivot.Class) {
+			return (org.eclipse.ocl.pivot.Class) namedElement;
+		}
+		else {
+			return null;
+		}
+	}
+
 	protected @Nullable Mapping lookupMapping(@NonNull ElementCS csElement, @NonNull PathNameCS csPathName, @Nullable ScopeFilter scopeFilter) {
 		CS2AS.setElementType(csPathName, QVTimperativePackage.Literals.MAPPING, csElement, scopeFilter);
 		Element namedElement = csPathName.getReferredElement();
@@ -91,7 +106,20 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	}
 
 	@Override
-	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
+	public Continuation<?> visitMappingCS(@NonNull MappingCS csMapping) {
+		Mapping asMapping = PivotUtil.getPivot(Mapping.class, csMapping);
+		if (asMapping != null) {
+			List<org.eclipse.ocl.pivot.Class> asClasses = new ArrayList<org.eclipse.ocl.pivot.Class>();
+			for (PathNameCS csPathName : csMapping.getOwnedUsesPathNames()) {
+				if (csPathName != null) {
+					org.eclipse.ocl.pivot.Class asClass = lookupClass(csMapping, csPathName, null);
+					if (asClass != null) {
+						asClasses.add(asClass);
+					}
+				}
+			}
+			context.refreshList(asMapping.getPolledClasses(), asClasses);
+		}
 		return null;
 	}
 

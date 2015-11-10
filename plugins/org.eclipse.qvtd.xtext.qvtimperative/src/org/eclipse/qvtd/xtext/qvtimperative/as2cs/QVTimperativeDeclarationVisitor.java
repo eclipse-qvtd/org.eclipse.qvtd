@@ -90,6 +90,17 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		}
 	}
 
+	protected void refreshUsedTypes(@NonNull MappingCS csMapping, @NonNull Mapping asMapping) {
+		List<PathNameCS> csPathNames = new ArrayList<PathNameCS>();
+		for (@SuppressWarnings("null") @NonNull org.eclipse.ocl.pivot.Class asClass : asMapping.getPolledClasses()) {
+			@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+			csPathNames.add(csPathName);
+			Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asMapping);
+			context.refreshPathName(csPathName, asClass, asTransformation);
+		}
+		context.refreshList(csMapping.getOwnedUsesPathNames(), csPathNames);
+	}
+
 	@Override
 	public ElementCS visitBottomPattern(@NonNull BottomPattern asBottomPattern) {
 		Area asArea = asBottomPattern.getArea();
@@ -177,6 +188,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		csMapping.setPivot(asMapping);
 		csMapping.setIsDefault(asMapping.isIsDefault());
 		refreshOwnedInTransformation(csMapping, asMapping);
+		refreshUsedTypes(csMapping, asMapping);
 		context.refreshList(csMapping.getOwnedDomains(), context.visitDeclarations(DomainCS.class, asMapping.getDomain(), null));
 		DomainCS csDomain = context.refreshElement(DomainCS.class, QVTcoreBaseCSPackage.Literals.DOMAIN_CS, asMapping);
 		csDomain.setPivot(null);		// stop comment duplication
