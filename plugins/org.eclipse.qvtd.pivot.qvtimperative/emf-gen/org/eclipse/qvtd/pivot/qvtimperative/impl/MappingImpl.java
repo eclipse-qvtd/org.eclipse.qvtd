@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
@@ -17,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
@@ -43,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getGuardPattern <em>Guard Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getMappingStatement <em>Mapping Statement</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getPolledClasses <em>Polled Classes</em>}</li>
  * </ul>
  *
  * @generated
@@ -77,6 +80,16 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @ordered
 	 */
 	protected MappingStatement mappingStatement;
+
+	/**
+	 * The cached value of the '{@link #getPolledClasses() <em>Polled Classes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPolledClasses()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<org.eclipse.ocl.pivot.Class> polledClasses;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -238,6 +251,19 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	@Override
+	public EList<org.eclipse.ocl.pivot.Class> getPolledClasses() {
+		if (polledClasses == null) {
+			polledClasses = new EObjectResolvingEList<org.eclipse.ocl.pivot.Class>(org.eclipse.ocl.pivot.Class.class, this, QVTimperativePackage.MAPPING__POLLED_CLASSES);
+		}
+		return polledClasses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<Mapping> getAllMappings() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -308,6 +334,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return getBottomPattern();
 			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
 				return getMappingStatement();
+			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
+				return getPolledClasses();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -317,6 +345,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -328,6 +357,10 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return;
 			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
 				setMappingStatement((MappingStatement)newValue);
+				return;
+			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
+				getPolledClasses().clear();
+				getPolledClasses().addAll((Collection<? extends org.eclipse.ocl.pivot.Class>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -350,6 +383,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
 				setMappingStatement((MappingStatement)null);
 				return;
+			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
+				getPolledClasses().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -368,6 +404,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return bottomPattern != null;
 			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
 				return mappingStatement != null;
+			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
+				return polledClasses != null && !polledClasses.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -29,6 +29,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatement <em>Mapping Statement</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getPolledClasses <em>Polled Classes</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping()
@@ -59,6 +60,20 @@ public interface Mapping extends AbstractMapping {
 	 * @generated
 	 */
 	void setMappingStatement(MappingStatement value);
+
+	/**
+	 * Returns the value of the '<em><b>Polled Classes</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Class}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The classes whse instances must be polled for readiness prior to use.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Polled Classes</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_PolledClasses()
+	 * @generated
+	 */
+	EList<org.eclipse.ocl.pivot.Class> getPolledClasses();
 
 	/**
 	 * <!-- begin-user-doc -->
