@@ -26,6 +26,12 @@
     <eOperations name="getAllMappings" ordered="false" upperBound="-1" eType="#//Mapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingStatement" eType="#//MappingStatement"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="polledClasses" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Class">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The classes whse instances must be polled for readiness prior to use."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCall" eSuperTypes="#//MappingStatement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//ReferringElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
