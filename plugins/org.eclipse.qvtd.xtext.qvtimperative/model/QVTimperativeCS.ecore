@@ -2,6 +2,26 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtimperativecs" nsURI="http://www.eclipse.org/qvt/2015/QVTimperativeCS"
     nsPrefix="qvtics">
+  <eClassifiers xsi:type="ecore:EClass" name="ImperativeDomainCS" eSuperTypes="../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore#//DomainCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="checkedProperties" ordered="false"
+        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The properties whose accesses must be polled for readiness prior to use here."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enforcedProperties" ordered="false"
+        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The properties whose assignments may be polled for readiness prior to use elsewhere."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImperativePredicateOrAssignmentCS" eSuperTypes="../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore#//PredicateOrAssignmentCS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAccumulate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCS" eSuperTypes="../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore#//AbstractMappingCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappingSequence" eType="#//MappingSequenceCS"
         containment="true"/>

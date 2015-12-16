@@ -20,6 +20,8 @@ import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -85,6 +87,20 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	private EClass topLevelCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imperativeDomainCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imperativePredicateOrAssignmentCSEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -197,6 +213,16 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public EAttribute getMappingCallBindingCS_IsPolled() {
+		return (EAttribute)mappingCallBindingCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getMappingCallBindingCS_OwningMappingCall() {
 		return (EReference)mappingCallBindingCSEClass.getEStructuralFeatures().get(2);
 	}
@@ -219,16 +245,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	@Override
 	public EReference getMappingCallBindingCS_OwnedValue() {
 		return (EReference)mappingCallBindingCSEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getMappingCallBindingCS_IsPolled() {
-		return (EAttribute)mappingCallBindingCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -397,6 +413,56 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public EClass getImperativeDomainCS() {
+		return imperativeDomainCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getImperativeDomainCS_CheckedProperties() {
+		return (EReference)imperativeDomainCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getImperativeDomainCS_EnforcedProperties() {
+		return (EReference)imperativeDomainCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getImperativePredicateOrAssignmentCS() {
+		return imperativePredicateOrAssignmentCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getImperativePredicateOrAssignmentCS_IsAccumulate() {
+		return (EAttribute)imperativePredicateOrAssignmentCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public QVTimperativeCSFactory getQVTimperativeCSFactory() {
 		return (QVTimperativeCSFactory)getEFactoryInstance();
 	}
@@ -420,6 +486,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		isCreated = true;
 
 		// Create classes and their features
+		imperativeDomainCSEClass = createEClass(IMPERATIVE_DOMAIN_CS);
+		createEReference(imperativeDomainCSEClass, IMPERATIVE_DOMAIN_CS__CHECKED_PROPERTIES);
+		createEReference(imperativeDomainCSEClass, IMPERATIVE_DOMAIN_CS__ENFORCED_PROPERTIES);
+
+		imperativePredicateOrAssignmentCSEClass = createEClass(IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS);
+		createEAttribute(imperativePredicateOrAssignmentCSEClass, IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE);
+
 		mappingCSEClass = createEClass(MAPPING_CS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_MAPPING_SEQUENCE);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_USES_PATH_NAMES);
@@ -487,6 +560,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		imperativeDomainCSEClass.getESuperTypes().add(theQVTcoreBaseCSPackage.getDomainCS());
+		imperativePredicateOrAssignmentCSEClass.getESuperTypes().add(theQVTcoreBaseCSPackage.getPredicateOrAssignmentCS());
 		mappingCSEClass.getESuperTypes().add(theQVTcoreBaseCSPackage.getAbstractMappingCS());
 		mappingCallBindingCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		mappingCallCSEClass.getESuperTypes().add(this.getMappingStatementCS());
@@ -496,6 +571,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		topLevelCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(imperativeDomainCSEClass, ImperativeDomainCS.class, "ImperativeDomainCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getImperativeDomainCS_CheckedProperties(), theBaseCSPackage.getPathNameCS(), null, "checkedProperties", null, 0, -1, ImperativeDomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getImperativeDomainCS_EnforcedProperties(), theBaseCSPackage.getPathNameCS(), null, "enforcedProperties", null, 0, -1, ImperativeDomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(imperativePredicateOrAssignmentCSEClass, ImperativePredicateOrAssignmentCS.class, "ImperativePredicateOrAssignmentCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImperativePredicateOrAssignmentCS_IsAccumulate(), ecorePackage.getEBoolean(), "isAccumulate", "false", 0, 1, ImperativePredicateOrAssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(mappingCSEClass, MappingCS.class, "MappingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCS_OwnedMappingSequence(), this.getMappingSequenceCS(), null, "ownedMappingSequence", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedUsesPathNames(), theBaseCSPackage.getPathNameCS(), null, "ownedUsesPathNames", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

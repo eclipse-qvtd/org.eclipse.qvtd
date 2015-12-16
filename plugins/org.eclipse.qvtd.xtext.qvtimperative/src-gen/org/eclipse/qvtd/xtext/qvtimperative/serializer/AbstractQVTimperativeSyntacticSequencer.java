@@ -28,13 +28,19 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected QVTimperativeGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_MiddleDomainCS___LeftCurlyBracketKeyword_0_0_RightCurlyBracketKeyword_0_3__q;
 	protected AbstractElementAlias match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q;
+	protected AbstractElementAlias match_SourceDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_3__q;
+	protected AbstractElementAlias match_TargetDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_3__q;
 	protected AbstractElementAlias match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (QVTimperativeGrammarAccess) access;
+		match_MiddleDomainCS___LeftCurlyBracketKeyword_0_0_RightCurlyBracketKeyword_0_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getMiddleDomainCSAccess().getLeftCurlyBracketKeyword_0_0()), new TokenAlias(false, false, grammarAccess.getMiddleDomainCSAccess().getRightCurlyBracketKeyword_0_3()));
 		match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q = new TokenAlias(false, true, grammarAccess.getMultiplicityCSAccess().getVerticalLineQuestionMarkKeyword_2_0());
+		match_SourceDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getSourceDomainCSAccess().getLeftCurlyBracketKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getSourceDomainCSAccess().getRightCurlyBracketKeyword_2_3()));
+		match_TargetDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTargetDomainCSAccess().getLeftCurlyBracketKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getTargetDomainCSAccess().getRightCurlyBracketKeyword_2_3()));
 		match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2()));
 	}
 	
@@ -50,14 +56,31 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q.equals(syntax))
+			if(match_MiddleDomainCS___LeftCurlyBracketKeyword_0_0_RightCurlyBracketKeyword_0_3__q.equals(syntax))
+				emit_MiddleDomainCS___LeftCurlyBracketKeyword_0_0_RightCurlyBracketKeyword_0_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q.equals(syntax))
 				emit_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_SourceDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_3__q.equals(syntax))
+				emit_SourceDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_TargetDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_3__q.equals(syntax))
+				emit_TargetDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q.equals(syntax))
 				emit_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     ('{' '}')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) ownedGuardPattern=MiddleGuardPatternCS
+	 */
+	protected void emit_MiddleDomainCS___LeftCurlyBracketKeyword_0_0_RightCurlyBracketKeyword_0_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 	/**
 	 * Ambiguous syntax:
 	 *     '|?'?
@@ -70,6 +93,28 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 	 *     upperBound=UPPER (ambiguity) ']' (rule end)
 	 */
 	protected void emit_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('{' '}')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     direction=[TypedModel|UnrestrictedName] (ambiguity) ownedGuardPattern=SourceGuardPatternCS
+	 */
+	protected void emit_SourceDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('{' '}')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     direction=[TypedModel|UnrestrictedName] (ambiguity) ownedGuardPattern=TargetGuardPatternCS
+	 */
+	protected void emit_TargetDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

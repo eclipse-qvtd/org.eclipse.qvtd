@@ -109,6 +109,29 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	 * @generated
 	 */
 	@Override
+	public boolean isIsPolled() {
+		return isPolled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsPolled(boolean newIsPolled) {
+		boolean oldIsPolled = isPolled;
+		isPolled = newIsPolled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__IS_POLLED, oldIsPolled, isPolled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public MappingCallCS getOwningMappingCall() {
 		if (eContainerFeatureID() != QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__OWNING_MAPPING_CALL) return null;
 		return (MappingCallCS)eInternalContainer();
@@ -192,6 +215,16 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public ExpCS getOwnedValue() {
 		return ownedValue;
 	}
@@ -229,39 +262,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__OWNED_VALUE, newOwnedValue, newOwnedValue));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIsPolled() {
-		return isPolled;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsPolled(boolean newIsPolled) {
-		boolean oldIsPolled = isPolled;
-		isPolled = newIsPolled;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__IS_POLLED, oldIsPolled, isPolled));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 
 	/**

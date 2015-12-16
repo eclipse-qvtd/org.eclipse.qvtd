@@ -61,6 +61,8 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTimperativeCSPackage.IMPERATIVE_DOMAIN_CS: return createImperativeDomainCS();
+			case QVTimperativeCSPackage.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS: return createImperativePredicateOrAssignmentCS();
 			case QVTimperativeCSPackage.MAPPING_CS: return createMappingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS: return createMappingCallBindingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS: return createMappingCallCS();
@@ -136,6 +138,28 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public TopLevelCS createTopLevelCS() {
 		TopLevelCSImpl topLevelCS = new TopLevelCSImpl();
 		return topLevelCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ImperativeDomainCS createImperativeDomainCS() {
+		ImperativeDomainCSImpl imperativeDomainCS = new ImperativeDomainCSImpl();
+		return imperativeDomainCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ImperativePredicateOrAssignmentCS createImperativePredicateOrAssignmentCS() {
+		ImperativePredicateOrAssignmentCSImpl imperativePredicateOrAssignmentCS = new ImperativePredicateOrAssignmentCSImpl();
+		return imperativePredicateOrAssignmentCS;
 	}
 
 	/**

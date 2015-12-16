@@ -79,6 +79,8 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -401,20 +403,8 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 				sequence_DirectionCS(context, (DirectionCS) semanticObject); 
 				return; 
 			case QVTcoreBaseCSPackage.DOMAIN_CS:
-				if(context == grammarAccess.getMiddleDomainCSRule()) {
-					sequence_MiddleDomainCS(context, (DomainCS) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getNamedDomainCSRule()) {
+				if(context == grammarAccess.getNamedDomainCSRule()) {
 					sequence_NamedDomainCS(context, (DomainCS) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getSourceDomainCSRule()) {
-					sequence_SourceDomainCS(context, (DomainCS) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getTargetDomainCSRule()) {
-					sequence_TargetDomainCS(context, (DomainCS) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getUnnamedDomainCSRule()) {
@@ -423,12 +413,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 				}
 				else break;
 			case QVTcoreBaseCSPackage.GUARD_PATTERN_CS:
-				if(context == grammarAccess.getGuardPatternCSRule()) {
+				if(context == grammarAccess.getGuardPatternCSRule() ||
+				   context == grammarAccess.getMiddleGuardPatternCSRule()) {
 					sequence_GuardPatternCS(context, (GuardPatternCS) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getMiddleGuardPatternCSRule()) {
-					sequence_MiddleGuardPatternCS(context, (GuardPatternCS) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getSourceGuardPatternCSRule()) {
@@ -470,6 +457,23 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 				else break;
 			}
 		else if(semanticObject.eClass().getEPackage() == QVTimperativeCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case QVTimperativeCSPackage.IMPERATIVE_DOMAIN_CS:
+				if(context == grammarAccess.getMiddleDomainCSRule()) {
+					sequence_MiddleDomainCS(context, (ImperativeDomainCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getSourceDomainCSRule()) {
+					sequence_SourceDomainCS(context, (ImperativeDomainCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getTargetDomainCSRule()) {
+					sequence_TargetDomainCS(context, (ImperativeDomainCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case QVTimperativeCSPackage.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS:
+				sequence_ImperativePredicateOrAssignmentCS(context, (ImperativePredicateOrAssignmentCS) semanticObject); 
+				return; 
 			case QVTimperativeCSPackage.MAPPING_CS:
 				sequence_MappingCS(context, (MappingCS) semanticObject); 
 				return; 
@@ -501,6 +505,15 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	 *     )
 	 */
 	protected void sequence_DirectionCS(EObject context, DirectionCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (isDefault?='default'? ownedTarget=ExpCS (isAccumulate?='+='? ownedInitExpression=ExpCS)?)
+	 */
+	protected void sequence_ImperativePredicateOrAssignmentCS(EObject context, ImperativePredicateOrAssignmentCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -569,18 +582,13 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS)
+	 *     (
+	 *         ((checkedProperties+=PathNameCS checkedProperties+=PathNameCS*)? (enforcedProperties+=PathNameCS enforcedProperties+=PathNameCS*)?)? 
+	 *         ownedGuardPattern=MiddleGuardPatternCS 
+	 *         ownedBottomPattern=MiddleBottomPatternCS
+	 *     )
 	 */
-	protected void sequence_MiddleDomainCS(EObject context, DomainCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (ownedPredicates+=PredicateCS*)
-	 */
-	protected void sequence_MiddleGuardPatternCS(EObject context, GuardPatternCS semanticObject) {
+	protected void sequence_MiddleDomainCS(EObject context, ImperativeDomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -596,9 +604,15 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (isCheck?='check' direction=[TypedModel|UnrestrictedName] ownedGuardPattern=SourceGuardPatternCS ownedBottomPattern=SourceBottomPatternCS)
+	 *     (
+	 *         isCheck?='check' 
+	 *         direction=[TypedModel|UnrestrictedName] 
+	 *         ((checkedProperties+=PathNameCS checkedProperties+=PathNameCS*)? (enforcedProperties+=PathNameCS enforcedProperties+=PathNameCS*)?)? 
+	 *         ownedGuardPattern=SourceGuardPatternCS 
+	 *         ownedBottomPattern=SourceBottomPatternCS
+	 *     )
 	 */
-	protected void sequence_SourceDomainCS(EObject context, DomainCS semanticObject) {
+	protected void sequence_SourceDomainCS(EObject context, ImperativeDomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -628,9 +642,15 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (isEnforce?='enforce' direction=[TypedModel|UnrestrictedName] ownedGuardPattern=TargetGuardPatternCS ownedBottomPattern=TargetBottomPatternCS)
+	 *     (
+	 *         isEnforce?='enforce' 
+	 *         direction=[TypedModel|UnrestrictedName] 
+	 *         ((checkedProperties+=PathNameCS checkedProperties+=PathNameCS*)? (enforcedProperties+=PathNameCS enforcedProperties+=PathNameCS*)?)? 
+	 *         ownedGuardPattern=TargetGuardPatternCS 
+	 *         ownedBottomPattern=TargetBottomPatternCS
+	 *     )
 	 */
-	protected void sequence_TargetDomainCS(EObject context, DomainCS semanticObject) {
+	protected void sequence_TargetDomainCS(EObject context, ImperativeDomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

@@ -46,8 +46,12 @@ MappingIteratorCS returns essentialocl::VariableCS: name=UnrestrictedName (':' o
 MappingSequenceCS: ownedMappingStatements+=MappingStatementCS+;
 	
 MappingStatementCS: MappingCallCS | MappingLoopCS;
+
+ImperativePredicateOrAssignmentCS: isDefault?='default'? ownedTarget=ExpCS ((':='|isAccumulate?='+=') ownedInitExpression=ExpCS)? ';';
 	
-SourceDomainCS returns qvtcorebasecs::DomainCS: isCheck?='check' direction=[qvtbase::TypedModel|UnrestrictedName]
+SourceDomainCS returns ImperativeDomainCS: isCheck?='check' direction=[qvtbase::TypedModel|UnrestrictedName]
+	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
+	('enforce' enforcedProperties+=PathNameCS (',' enforcedProperties+=PathNameCS)*)? '}')?
 	ownedGuardPattern=SourceGuardPatternCS ownedBottomPattern=SourceBottomPatternCS
 ;
 		
@@ -61,26 +65,31 @@ SourceGuardPatternCS returns qvtcorebasecs::GuardPatternCS:
 	{qvtcorebasecs::GuardPatternCS} '(' (ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ')'
 ;
 	
-MiddleDomainCS returns qvtcorebasecs::DomainCS: {qvtcorebasecs::DomainCS} ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS;
+MiddleDomainCS returns ImperativeDomainCS:
+	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
+	('enforce' enforcedProperties+=PathNameCS (',' enforcedProperties+=PathNameCS)*)? '}')?
+	ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS
+;
 		
 MiddleBottomPatternCS returns qvtcorebasecs::BottomPatternCS:		// Bug 466385 explains the redundancy below
 	(
 		'{' ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*
-		'|' ownedConstraints+=PredicateOrAssignmentCS* '}'
+		'|' ownedConstraints+=ImperativePredicateOrAssignmentCS* '}'
 	) | (
 		'{' ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)* '}'
 	) | (
-		'{' ownedConstraints+=PredicateOrAssignmentCS+ '}'
+		'{' ownedConstraints+=ImperativePredicateOrAssignmentCS+ '}'
 	) | (
 		{qvtcorebasecs::BottomPatternCS} '{' '}'
 	)
 ;
 	
-MiddleGuardPatternCS returns qvtcorebasecs::GuardPatternCS:
-	{qvtcorebasecs::GuardPatternCS} '(' ownedPredicates+=PredicateCS* ')'
+MiddleGuardPatternCS returns qvtcorebasecs::GuardPatternCS: GuardPatternCS
 ;
 	
-TargetDomainCS returns qvtcorebasecs::DomainCS: isEnforce?='enforce' direction=[qvtbase::TypedModel|UnrestrictedName]
+TargetDomainCS returns ImperativeDomainCS: isEnforce?='enforce' direction=[qvtbase::TypedModel|UnrestrictedName]
+	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
+	('enforce' enforcedProperties+=PathNameCS (',' enforcedProperties+=PathNameCS)*)? '}')?
 	ownedGuardPattern=TargetGuardPatternCS ownedBottomPattern=TargetBottomPatternCS
 ;
 		

@@ -41,6 +41,16 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 	}	
 
 	@Override
+	public @Nullable R visitImperativeDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS object) {
+		return visitDomainCS(object);
+	}
+
+	@Override
+	public @Nullable R visitImperativePredicateOrAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS object) {
+		return visitPredicateOrAssignmentCS(object);
+	}
+
+	@Override
 	public @Nullable R visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS object) {
 		return visitAbstractMappingCS(object);
 	}

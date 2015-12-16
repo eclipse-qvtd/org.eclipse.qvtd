@@ -82,7 +82,366 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCS()
 	 * @generated
 	 */
-	int MAPPING_CS = 0;
+	int MAPPING_CS = 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl <em>Mapping Call Binding CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCallBindingCS()
+	 * @generated
+	 */
+	int MAPPING_CALL_BINDING_CS = 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingStatementCSImpl <em>Mapping Statement CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingStatementCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingStatementCS()
+	 * @generated
+	 */
+	int MAPPING_STATEMENT_CS = 7;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCallCS()
+	 * @generated
+	 */
+	int MAPPING_CALL_CS = 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingSequenceCSImpl <em>Mapping Sequence CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingSequenceCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingSequenceCS()
+	 * @generated
+	 */
+	int MAPPING_SEQUENCE_CS = 6;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl <em>Mapping Loop CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingLoopCS()
+	 * @generated
+	 */
+	int MAPPING_LOOP_CS = 5;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.TopLevelCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getTopLevelCS()
+	 * @generated
+	 */
+	int TOP_LEVEL_CS = 8;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeDomainCSImpl <em>Imperative Domain CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeDomainCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getImperativeDomainCS()
+	 * @generated
+	 */
+	int IMPERATIVE_DOMAIN_CS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__CSI = QVTcoreBaseCSPackage.DOMAIN_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__PARENT = QVTcoreBaseCSPackage.DOMAIN_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__PIVOT = QVTcoreBaseCSPackage.DOMAIN_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__ORIGINAL_XMI_ID = QVTcoreBaseCSPackage.DOMAIN_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__OWNED_ANNOTATIONS = QVTcoreBaseCSPackage.DOMAIN_CS__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__NAME = QVTcoreBaseCSPackage.DOMAIN_CS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Guard Pattern</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__OWNED_GUARD_PATTERN = QVTcoreBaseCSPackage.DOMAIN_CS__OWNED_GUARD_PATTERN;
+
+	/**
+	 * The feature id for the '<em><b>Owned Bottom Pattern</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__OWNED_BOTTOM_PATTERN = QVTcoreBaseCSPackage.DOMAIN_CS__OWNED_BOTTOM_PATTERN;
+
+	/**
+	 * The feature id for the '<em><b>Is Check</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__IS_CHECK = QVTcoreBaseCSPackage.DOMAIN_CS__IS_CHECK;
+
+	/**
+	 * The feature id for the '<em><b>Is Enforce</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__IS_ENFORCE = QVTcoreBaseCSPackage.DOMAIN_CS__IS_ENFORCE;
+
+	/**
+	 * The feature id for the '<em><b>Direction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__DIRECTION = QVTcoreBaseCSPackage.DOMAIN_CS__DIRECTION;
+
+	/**
+	 * The feature id for the '<em><b>Checked Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__CHECKED_PROPERTIES = QVTcoreBaseCSPackage.DOMAIN_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Enforced Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS__ENFORCED_PROPERTIES = QVTcoreBaseCSPackage.DOMAIN_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Imperative Domain CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_DOMAIN_CS_FEATURE_COUNT = QVTcoreBaseCSPackage.DOMAIN_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativePredicateOrAssignmentCSImpl <em>Imperative Predicate Or Assignment CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativePredicateOrAssignmentCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getImperativePredicateOrAssignmentCS()
+	 * @generated
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__CSI = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__PARENT = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__PIVOT = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__ORIGINAL_XMI_ID = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__OWNED_ANNOTATIONS = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__HAS_ERROR = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__HAS_ERROR;
+
+	/**
+	 * The feature id for the '<em><b>Local Left</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__LOCAL_LEFT = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__LOCAL_LEFT;
+
+	/**
+	 * The feature id for the '<em><b>Local Leftmost Descendant</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__LOCAL_LEFTMOST_DESCENDANT = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__LOCAL_LEFTMOST_DESCENDANT;
+
+	/**
+	 * The feature id for the '<em><b>Local Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__LOCAL_PARENT = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__LOCAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Local Right</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__LOCAL_RIGHT = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__LOCAL_RIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Local Rightmost Descendant</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__LOCAL_RIGHTMOST_DESCENDANT = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__LOCAL_RIGHTMOST_DESCENDANT;
+
+	/**
+	 * The feature id for the '<em><b>Precedence</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__PRECEDENCE = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Is Accumulate</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Imperative Predicate Or Assignment CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS_FEATURE_COUNT = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -200,16 +559,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_CS_FEATURE_COUNT = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl <em>Mapping Call Binding CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCallBindingCS()
-	 * @generated
-	 */
-	int MAPPING_CALL_BINDING_CS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -365,16 +714,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CALL_BINDING_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingStatementCSImpl <em>Mapping Statement CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingStatementCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingStatementCS()
-	 * @generated
-	 */
-	int MAPPING_STATEMENT_CS = 5;
-
-	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -427,16 +766,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_STATEMENT_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCallCS()
-	 * @generated
-	 */
-	int MAPPING_CALL_CS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -527,26 +856,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_CALL_CS_FEATURE_COUNT = MAPPING_STATEMENT_CS_FEATURE_COUNT + 4;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingSequenceCSImpl <em>Mapping Sequence CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingSequenceCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingSequenceCS()
-	 * @generated
-	 */
-	int MAPPING_SEQUENCE_CS = 4;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl <em>Mapping Loop CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingLoopCS()
-	 * @generated
-	 */
-	int MAPPING_LOOP_CS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -693,16 +1002,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_SEQUENCE_CS_FEATURE_COUNT = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.TopLevelCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getTopLevelCS()
-	 * @generated
-	 */
-	int TOP_LEVEL_CS = 6;
-
-	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -844,6 +1143,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getMappingCallBindingCS();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#isIsPolled <em>Is Polled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Polled</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#isIsPolled()
+	 * @see #getMappingCallBindingCS()
+	 * @generated
+	 */
+	EAttribute getMappingCallBindingCS_IsPolled();
+
+	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwningMappingCall <em>Owning Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -875,17 +1185,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingCallBindingCS_OwnedValue();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#isIsPolled <em>Is Polled</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Polled</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#isIsPolled()
-	 * @see #getMappingCallBindingCS()
-	 * @generated
-	 */
-	EAttribute getMappingCallBindingCS_IsPolled();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS <em>Mapping Call CS</em>}'.
@@ -1059,6 +1358,59 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getTopLevelCS_OwnedMappings();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS <em>Imperative Domain CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Imperative Domain CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS
+	 * @generated
+	 */
+	EClass getImperativeDomainCS();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS#getCheckedProperties <em>Checked Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Checked Properties</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS#getCheckedProperties()
+	 * @see #getImperativeDomainCS()
+	 * @generated
+	 */
+	EReference getImperativeDomainCS_CheckedProperties();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS#getEnforcedProperties <em>Enforced Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Enforced Properties</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS#getEnforcedProperties()
+	 * @see #getImperativeDomainCS()
+	 * @generated
+	 */
+	EReference getImperativeDomainCS_EnforcedProperties();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS <em>Imperative Predicate Or Assignment CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Imperative Predicate Or Assignment CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS
+	 * @generated
+	 */
+	EClass getImperativePredicateOrAssignmentCS();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS#isIsAccumulate <em>Is Accumulate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Accumulate</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS#isIsAccumulate()
+	 * @see #getImperativePredicateOrAssignmentCS()
+	 * @generated
+	 */
+	EAttribute getImperativePredicateOrAssignmentCS_IsAccumulate();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1117,6 +1469,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass MAPPING_CALL_BINDING_CS = eINSTANCE.getMappingCallBindingCS();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Polled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING_CALL_BINDING_CS__IS_POLLED = eINSTANCE.getMappingCallBindingCS_IsPolled();
+
+		/**
 		 * The meta object literal for the '<em><b>Owning Mapping Call</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1139,14 +1499,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CALL_BINDING_CS__OWNED_VALUE = eINSTANCE.getMappingCallBindingCS_OwnedValue();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Polled</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MAPPING_CALL_BINDING_CS__IS_POLLED = eINSTANCE.getMappingCallBindingCS_IsPolled();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
@@ -1285,6 +1637,50 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TOP_LEVEL_CS__OWNED_MAPPINGS = eINSTANCE.getTopLevelCS_OwnedMappings();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeDomainCSImpl <em>Imperative Domain CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeDomainCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getImperativeDomainCS()
+		 * @generated
+		 */
+		EClass IMPERATIVE_DOMAIN_CS = eINSTANCE.getImperativeDomainCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Checked Properties</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IMPERATIVE_DOMAIN_CS__CHECKED_PROPERTIES = eINSTANCE.getImperativeDomainCS_CheckedProperties();
+
+		/**
+		 * The meta object literal for the '<em><b>Enforced Properties</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IMPERATIVE_DOMAIN_CS__ENFORCED_PROPERTIES = eINSTANCE.getImperativeDomainCS_EnforcedProperties();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativePredicateOrAssignmentCSImpl <em>Imperative Predicate Or Assignment CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativePredicateOrAssignmentCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getImperativePredicateOrAssignmentCS()
+		 * @generated
+		 */
+		EClass IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS = eINSTANCE.getImperativePredicateOrAssignmentCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Accumulate</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE = eINSTANCE.getImperativePredicateOrAssignmentCS_IsAccumulate();
 
 	}
 

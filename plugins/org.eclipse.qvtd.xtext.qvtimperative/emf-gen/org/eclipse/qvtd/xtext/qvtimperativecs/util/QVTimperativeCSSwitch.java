@@ -25,6 +25,9 @@ import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.*;
 
 /**
@@ -84,6 +87,34 @@ public class QVTimperativeCSSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case QVTimperativeCSPackage.IMPERATIVE_DOMAIN_CS: {
+				ImperativeDomainCS imperativeDomainCS = (ImperativeDomainCS)theEObject;
+				T result = caseImperativeDomainCS(imperativeDomainCS);
+				if (result == null) result = caseDomainCS(imperativeDomainCS);
+				if (result == null) result = caseAreaCS(imperativeDomainCS);
+				if (result == null) result = caseNamedElementCS(imperativeDomainCS);
+				if (result == null) result = caseModelElementCS(imperativeDomainCS);
+				if (result == null) result = caseNameable(imperativeDomainCS);
+				if (result == null) result = casePivotableElementCS(imperativeDomainCS);
+				if (result == null) result = caseElementCS(imperativeDomainCS);
+				if (result == null) result = casePivotable(imperativeDomainCS);
+				if (result == null) result = caseVisitableCS(imperativeDomainCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS: {
+				ImperativePredicateOrAssignmentCS imperativePredicateOrAssignmentCS = (ImperativePredicateOrAssignmentCS)theEObject;
+				T result = caseImperativePredicateOrAssignmentCS(imperativePredicateOrAssignmentCS);
+				if (result == null) result = casePredicateOrAssignmentCS(imperativePredicateOrAssignmentCS);
+				if (result == null) result = caseExpCS(imperativePredicateOrAssignmentCS);
+				if (result == null) result = caseModelElementCS(imperativePredicateOrAssignmentCS);
+				if (result == null) result = casePivotableElementCS(imperativePredicateOrAssignmentCS);
+				if (result == null) result = caseElementCS(imperativePredicateOrAssignmentCS);
+				if (result == null) result = casePivotable(imperativePredicateOrAssignmentCS);
+				if (result == null) result = caseVisitableCS(imperativePredicateOrAssignmentCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativeCSPackage.MAPPING_CS: {
 				MappingCS mappingCS = (MappingCS)theEObject;
 				T result = caseMappingCS(mappingCS);
@@ -281,6 +312,36 @@ public class QVTimperativeCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Imperative Domain CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Imperative Domain CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImperativeDomainCS(ImperativeDomainCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Imperative Predicate Or Assignment CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Imperative Predicate Or Assignment CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImperativePredicateOrAssignmentCS(ImperativePredicateOrAssignmentCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Visitable CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -416,6 +477,21 @@ public class QVTimperativeCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Predicate Or Assignment CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Predicate Or Assignment CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePredicateOrAssignmentCS(PredicateOrAssignmentCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -457,6 +533,36 @@ public class QVTimperativeCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRootPackageCS(RootPackageCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Area CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Area CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAreaCS(AreaCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomainCS(DomainCS object) {
 		return null;
 	}
 

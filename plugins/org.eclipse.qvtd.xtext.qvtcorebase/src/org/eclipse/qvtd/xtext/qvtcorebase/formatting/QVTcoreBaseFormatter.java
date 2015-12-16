@@ -131,6 +131,7 @@ public class QVTcoreBaseFormatter extends AbstractEssentialOCLFormatter {
 	}
 
 	protected void configureQueryCS(FormattingConfig c, QueryCSElements a) {
+		c.setLinewrap(2).before(a.getQueryKeyword_0());
 		c.setNoSpace().around(a.getLeftParenthesisKeyword_3());	
 		c.setNoSpace().around(a.getLeftParenthesisKeyword_3());	
 		c.setNoSpace().before(a.getCommaKeyword_4_1_0());
@@ -147,6 +148,7 @@ public class QVTcoreBaseFormatter extends AbstractEssentialOCLFormatter {
 	}
 
 	protected void configureTransformationCS(FormattingConfig c, TransformationCSElements a) {
+		c.setLinewrap(2).before(a.getTransformationKeyword_0());
 		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 		setBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 		setNoSpaceLineWrap(c, a.getSemicolonKeyword_4_1());

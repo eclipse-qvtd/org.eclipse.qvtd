@@ -84,6 +84,24 @@ public interface QVTimperativeCSFactory extends EFactory {
 	TopLevelCS createTopLevelCS();
 
 	/**
+	 * Returns a new object of class '<em>Imperative Domain CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Imperative Domain CS</em>'.
+	 * @generated
+	 */
+	ImperativeDomainCS createImperativeDomainCS();
+
+	/**
+	 * Returns a new object of class '<em>Imperative Predicate Or Assignment CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Imperative Predicate Or Assignment CS</em>'.
+	 * @generated
+	 */
+	ImperativePredicateOrAssignmentCS createImperativePredicateOrAssignmentCS();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

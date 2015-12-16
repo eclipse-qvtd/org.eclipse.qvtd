@@ -24,6 +24,8 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 public interface QVTimperativeCSVisitor<R> extends org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor<R>
 {
+	@Nullable R visitImperativeDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS object);
+	@Nullable R visitImperativePredicateOrAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS object);
 	@Nullable R visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS object);
 	@Nullable R visitMappingCallBindingCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS object);
 	@Nullable R visitMappingCallCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS object);

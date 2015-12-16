@@ -109,6 +109,11 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		super(context);
 	}
 
+	@SuppressWarnings("null")
+	protected @NonNull DomainCS createCoreDomain(@NonNull CoreDomain asCoreDomain) {
+		return context.refreshElement(DomainCS.class, QVTcoreBaseCSPackage.Literals.DOMAIN_CS, asCoreDomain);
+	}
+
 	protected void gatherTransformations(@NonNull List<Transformation> asTransformations, @NonNull List<Package> ownedPackages) {
 		for (org.eclipse.ocl.pivot.Package asPackage : ownedPackages) {
 			for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
@@ -191,7 +196,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 
 	@Override
 	public ElementCS visitCoreDomain(@NonNull CoreDomain asCoreDomain) {
-		DomainCS csDomain = context.refreshElement(DomainCS.class, QVTcoreBaseCSPackage.Literals.DOMAIN_CS, asCoreDomain);
+		DomainCS csDomain = createCoreDomain(asCoreDomain);
 		csDomain.setPivot(asCoreDomain);
 		csDomain.setOwnedBottomPattern(context.visitDeclaration(BottomPatternCS.class, asCoreDomain.getBottomPattern()));
 		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asCoreDomain.getGuardPattern()));
@@ -257,7 +262,6 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	}
 
 	@Override
-	@Nullable
 	public ElementCS visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
 		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTcoreBaseCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asPropertyAssignment);
 		csAssignment.setPivot(asPropertyAssignment);
@@ -355,7 +359,6 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	}
 
 	@Override
-	@Nullable
 	public ElementCS visitVariableAssignment(@NonNull VariableAssignment asVariableAssignment) {
 		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTcoreBaseCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asVariableAssignment);
 		csAssignment.setPivot(asVariableAssignment);
