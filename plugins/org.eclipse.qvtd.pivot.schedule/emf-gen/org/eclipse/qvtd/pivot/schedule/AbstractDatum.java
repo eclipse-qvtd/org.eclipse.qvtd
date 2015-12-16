@@ -14,6 +14,7 @@ package org.eclipse.qvtd.pivot.schedule;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 
 /**
@@ -32,6 +33,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.AbstractDatum#getRequiredBy <em>Required By</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.AbstractDatum#getSchedule <em>Schedule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.AbstractDatum#getDataParameter <em>Data Parameter</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.schedule.AbstractDatum#getTypedModel <em>Typed Model</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getAbstractDatum()
@@ -100,6 +102,32 @@ public interface AbstractDatum extends ScheduleElement {
 	 * @generated
 	 */
 	void setDomain(CoreDomain value);
+
+	/**
+	 * Returns the value of the '<em><b>Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Typed Model</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Typed Model</em>' reference.
+	 * @see #setTypedModel(TypedModel)
+	 * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getAbstractDatum_TypedModel()
+	 * @model
+	 * @generated
+	 */
+	TypedModel getTypedModel();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.schedule.AbstractDatum#getTypedModel <em>Typed Model</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Typed Model</em>' reference.
+	 * @see #getTypedModel()
+	 * @generated
+	 */
+	void setTypedModel(TypedModel value);
 
 	/**
 	 * Returns the value of the '<em><b>Produced By</b></em>' reference list.

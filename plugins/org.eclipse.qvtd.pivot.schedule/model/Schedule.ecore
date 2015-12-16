@@ -15,6 +15,7 @@
         eOpposite="#//Schedule/datums"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataParameter" upperBound="-1"
         eType="#//DataParameter" eOpposite="#//DataParameter/datum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" eType="ecore:EClass http://www.eclipse.org/qvt/2015/QVTbase#//TypedModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractAction" abstract="true" eSuperTypes="#//ScheduleElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="productions" upperBound="-1"

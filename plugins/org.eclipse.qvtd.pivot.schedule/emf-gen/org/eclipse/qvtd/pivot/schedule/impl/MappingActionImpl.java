@@ -172,4 +172,8 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 		return visitor.visitMappingAction(this);
 	}
 
+	@Override
+	public String toString() {
+		return mapping.toString();
+	}
 } //MappingActionImpl

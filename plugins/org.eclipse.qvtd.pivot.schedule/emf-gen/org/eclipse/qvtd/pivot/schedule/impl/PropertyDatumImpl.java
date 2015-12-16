@@ -331,4 +331,9 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 		return visitor.visitPropertyDatum(this);
 	}
 
+	@Override
+	public String toString() {
+		return property.toString();
+	}
+
 } //PropertyDatumImpl

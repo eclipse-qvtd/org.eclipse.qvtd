@@ -242,4 +242,9 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		return visitor.visitClassDatum(this);
 	}
 
+	@Override
+	public String toString() {
+		return type.toString();
+	}
+
 } //ClassDatumImpl

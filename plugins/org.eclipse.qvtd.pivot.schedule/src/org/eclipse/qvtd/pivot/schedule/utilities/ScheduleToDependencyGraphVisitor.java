@@ -20,7 +20,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLBuilder.ArrowType;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLBuilder.LineType;
@@ -100,7 +100,7 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 		return id;
 	}
 
-	private String getDomainColor(CoreDomain domain) {
+	private String getDomainColor(TypedModel domain) {
 		if (domain != null) {
 			if (domain.getName().equals(this.inputDirection)) {
 				return DATUM_INPUT_COLOR;
@@ -162,15 +162,15 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 	@Override
 	public @Nullable String visitClassDatum(ClassDatum object) {
 		String datumLabel = getClassId(object);
-		String order = getNodeOrder(object.getType(), object.getDomain()).toString();
-		context.appendNode(order, DATUM_SHAPE, NODE_FILL_COLOR, datumLabel, getDomainColor(object.getDomain()));
+		String order = getNodeOrder(object.getType(), object.getTypedModel()).toString();
+		context.appendNode(order, DATUM_SHAPE, NODE_FILL_COLOR, datumLabel, getDomainColor(object.getTypedModel()));
 		for (PropertyDatum pd : object.getPropertyDatums()) {
 			visitPropertyDatum(pd);
 		}
 		for (AbstractDatum sd : object.getSuper()) {
-			if (!nodeExists(((ClassDatum) sd).getType(), sd.getDomain()))
+			if (!nodeExists(((ClassDatum) sd).getType(), sd.getTypedModel()))
 				visitClassDatum((ClassDatum) sd);
-			String sdOrder = getNodeOrder(((ClassDatum) sd).getType(), sd.getDomain()).toString();
+			String sdOrder = getNodeOrder(((ClassDatum) sd).getType(), sd.getTypedModel()).toString();
 			context.appendEdge(order,
 					sdOrder,
 					SUPER_EDGE_COLOR,
@@ -196,7 +196,7 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 		String lineType = LineType.line.name();
 		for(DataParameter out : object.getResults()) {
 			String targetId = null;
-			targetId = getNodeOrder(((ClassDatum) out.getDatum()).getType(), ((ClassDatum) out.getDatum()).getDomain()).toString();
+			targetId = getNodeOrder(((ClassDatum) out.getDatum()).getType(), ((ClassDatum) out.getDatum()).getTypedModel()).toString();
 			assert targetId != null;
 			context.appendEdge(order,
 					targetId,
@@ -209,7 +209,7 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 			String targetId = null;
 			lineType = LineType.line.name();
 			if (ad instanceof PropertyDatum) {
-				targetId = getNodeOrder(((PropertyDatum) ad).getProperty(), ((PropertyDatum) ad).getClassDatum().getType(), ad.getDomain()).toString();
+				targetId = getNodeOrder(((PropertyDatum) ad).getProperty(), ((PropertyDatum) ad).getClassDatum().getType(), ad.getTypedModel()).toString();
 				assert targetId != null;
 				if (((PropertyDatum) ad).getProperty().isIsImplicit())
 					lineType = LineType.dashed.name();
@@ -232,7 +232,7 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 			edgeColor = REQUISITE_EDGE_COLOR;
 			targetArrow = DEPENDENCY_ARROW_END;
 			targetId = null;
-			targetId = getNodeOrder(((ClassDatum) in.getDatum()).getType(), ((ClassDatum) in.getDatum()).getDomain()).toString();
+			targetId = getNodeOrder(((ClassDatum) in.getDatum()).getType(), ((ClassDatum) in.getDatum()).getTypedModel()).toString();
 			assert targetId != null;
 			// If two or more DataParameters have this Type, its a MULTIPLE Type dependency
 			int dpCount = 0;
@@ -269,7 +269,7 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 			targetId = null;
 			lineType = LineType.line.name();
 			if (ad instanceof PropertyDatum) {
-				targetId = getNodeOrder(((PropertyDatum) ad).getProperty(), ((PropertyDatum) ad).getClassDatum().getType(), ad.getDomain()).toString();
+				targetId = getNodeOrder(((PropertyDatum) ad).getProperty(), ((PropertyDatum) ad).getClassDatum().getType(), ad.getTypedModel()).toString();
 				assert targetId != null;
 				if (((PropertyDatum) ad).getProperty().isIsImplicit())
 					lineType = LineType.dashed.name();
@@ -288,12 +288,12 @@ public class ScheduleToDependencyGraphVisitor extends AbstractExtendingScheduleV
 	@Override
 	public @Nullable String visitPropertyDatum(PropertyDatum object) {
 		String datumLabel = getPropertyId(object);
-		String order = getNodeOrder(object.getProperty(), object.getClassDatum().getType(), object.getDomain()).toString();
-		context.appendNode(order, DATUM_SHAPE, NODE_FILL_COLOR, datumLabel, getDomainColor(object.getDomain()));
+		String order = getNodeOrder(object.getProperty(), object.getClassDatum().getType(), object.getTypedModel()).toString();
+		context.appendNode(order, DATUM_SHAPE, NODE_FILL_COLOR, datumLabel, getDomainColor(object.getTypedModel()));
 		for (AbstractDatum sd : object.getSuper()) {
-			if (!nodeExists(object.getProperty(), object.getClassDatum().getType(), object.getDomain()))
+			if (!nodeExists(object.getProperty(), object.getClassDatum().getType(), object.getTypedModel()))
 				visitPropertyDatum((PropertyDatum) sd);
-			String sdOrder = getNodeOrder(((PropertyDatum) sd).getProperty(), ((PropertyDatum) sd).getClassDatum().getType(), sd.getDomain()).toString();
+			String sdOrder = getNodeOrder(((PropertyDatum) sd).getProperty(), ((PropertyDatum) sd).getClassDatum().getType(), sd.getTypedModel()).toString();
 			context.appendEdge(order,
 					sdOrder,
 					SUPER_EDGE_COLOR,

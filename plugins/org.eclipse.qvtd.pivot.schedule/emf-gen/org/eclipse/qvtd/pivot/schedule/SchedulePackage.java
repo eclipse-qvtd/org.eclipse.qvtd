@@ -168,13 +168,22 @@ public interface SchedulePackage extends EPackage {
 	int ABSTRACT_DATUM__DATA_PARAMETER = SCHEDULE_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM__TYPED_MODEL = SCHEDULE_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Datum</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM_FEATURE_COUNT = SCHEDULE_ELEMENT_FEATURE_COUNT + 7;
+	int ABSTRACT_DATUM_FEATURE_COUNT = SCHEDULE_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of operations of the '<em>Abstract Datum</em>' class.
@@ -366,6 +375,15 @@ public interface SchedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS_DATUM__DATA_PARAMETER = ABSTRACT_DATUM__DATA_PARAMETER;
+
+	/**
+	 * The feature id for the '<em><b>Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__TYPED_MODEL = ABSTRACT_DATUM__TYPED_MODEL;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -923,6 +941,15 @@ public interface SchedulePackage extends EPackage {
 	int PROPERTY_DATUM__DATA_PARAMETER = ABSTRACT_DATUM__DATA_PARAMETER;
 
 	/**
+	 * The feature id for the '<em><b>Typed Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__TYPED_MODEL = ABSTRACT_DATUM__TYPED_MODEL;
+
+	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1120,6 +1147,17 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAbstractDatum_Domain();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.schedule.AbstractDatum#getTypedModel <em>Typed Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Typed Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.schedule.AbstractDatum#getTypedModel()
+	 * @see #getAbstractDatum()
+	 * @generated
+	 */
+	EReference getAbstractDatum_TypedModel();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.schedule.AbstractDatum#getProducedBy <em>Produced By</em>}'.
@@ -1628,6 +1666,14 @@ public interface SchedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_DATUM__DOMAIN = eINSTANCE.getAbstractDatum_Domain();
+
+		/**
+		 * The meta object literal for the '<em><b>Typed Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_DATUM__TYPED_MODEL = eINSTANCE.getAbstractDatum_TypedModel();
 
 		/**
 		 * The meta object literal for the '<em><b>Produced By</b></em>' reference list feature.

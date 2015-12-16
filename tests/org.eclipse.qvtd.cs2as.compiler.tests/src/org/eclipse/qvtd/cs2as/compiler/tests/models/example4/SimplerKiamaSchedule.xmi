@@ -15,13 +15,16 @@
   </datums>
   <datums xsi:type="qvts:ClassDatum" super="//@datums.1" requiredBy="//@actions.0 //@actions.3 //@actions.4 //@actions.5" dataParameter="//@actions.0/@parameters.0 //@actions.3/@parameters.0 //@actions.4/@parameters.0 //@actions.5/@parameters.0">
     <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
+    <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.leftCS"/>
     <type href="SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
     <propertyDatums requiredBy="//@actions.3">
       <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
+      <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.leftCS"/>
       <property href="SimplerKiamaCS.ecore.oclas#p.kiamacs.CompositeCS.child"/>
     </propertyDatums>
     <propertyDatums super="//@datums.1/@propertyDatums.0" producedBy="//@actions.0" requiredBy="//@actions.3 //@actions.4 //@actions.5">
       <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
+      <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.leftCS"/>
       <property href="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast"/>
     </propertyDatums>
   </datums>
@@ -42,57 +45,71 @@
   </datums>
   <datums xsi:type="qvts:ClassDatum" super="//@datums.3" producedBy="//@actions.0" dataParameter="//@actions.0/@results.0">
     <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
+    <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.rightAS"/>
     <type href="SimplerKiamaAS.ecore.oclas#T.kiamaas.Composite"/>
     <propertyDatums producedBy="//@actions.3" requiredBy="//@actions.4 //@actions.5 //@actions.6" opposite="//@datums.3/@propertyDatums.2">
       <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
+      <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.rightAS"/>
       <property href="SimplerKiamaAS.ecore.oclas#p.kiamaas.Composite.child"/>
     </propertyDatums>
     <propertyDatums super="//@datums.3/@propertyDatums.0" producedBy="//@actions.4">
       <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
+      <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.rightAS"/>
       <property href="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep"/>
     </propertyDatums>
     <propertyDatums super="//@datums.3/@propertyDatums.1" producedBy="//@actions.5">
       <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
+      <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.rightAS"/>
       <property href="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.height"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvts:ClassDatum" super="//@datums.1" requiredBy="//@actions.1 //@actions.6 //@actions.7" dataParameter="//@actions.1/@parameters.0 //@actions.6/@parameters.0 //@actions.7/@parameters.0">
     <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
+    <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.leftCS"/>
     <type href="SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
     <propertyDatums super="//@datums.1/@propertyDatums.0" producedBy="//@actions.1" requiredBy="//@actions.6 //@actions.7">
       <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
+      <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.leftCS"/>
       <property href="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvts:ClassDatum" super="//@datums.3" producedBy="//@actions.1" dataParameter="//@actions.1/@results.0">
     <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
+    <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.rightAS"/>
     <type href="SimplerKiamaAS.ecore.oclas#T.kiamaas.Leaf"/>
     <propertyDatums super="//@datums.3/@propertyDatums.0" producedBy="//@actions.6">
       <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
+      <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.rightAS"/>
       <property href="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep"/>
     </propertyDatums>
     <propertyDatums super="//@datums.3/@propertyDatums.1" producedBy="//@actions.7">
       <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
+      <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.rightAS"/>
       <property href="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.height"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvts:ClassDatum" super="//@datums.0" requiredBy="//@actions.2 //@actions.8" dataParameter="//@actions.2/@parameters.0 //@actions.8/@parameters.0">
     <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0"/>
+    <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.leftCS"/>
     <type href="SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"/>
     <propertyDatums requiredBy="//@actions.8">
       <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0"/>
+      <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.leftCS"/>
       <property href="SimplerKiamaCS.ecore.oclas#p.kiamacs.TopCS.node"/>
     </propertyDatums>
     <propertyDatums super="//@datums.0/@propertyDatums.0" producedBy="//@actions.2" requiredBy="//@actions.8">
       <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0"/>
+      <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.leftCS"/>
       <property href="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvts:ClassDatum" producedBy="//@actions.2" dataParameter="//@actions.2/@results.0">
     <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1"/>
+    <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.rightAS"/>
     <type href="SimplerKiamaAS.ecore.oclas#T.kiamaas.Top"/>
     <propertyDatums producedBy="//@actions.8" requiredBy="//@actions.4 //@actions.6" opposite="//@datums.3/@propertyDatums.3">
       <domain href="SimplerKiama.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1"/>
+      <typedModel href="SimplerKiama.qvtp.qvtias#qT..SimplerKiama_qvtp_qvtias.rightAS"/>
       <property href="SimplerKiamaAS.ecore.oclas#p.kiamaas.Top.node"/>
     </propertyDatums>
   </datums>

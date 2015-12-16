@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
@@ -45,6 +46,7 @@ import org.eclipse.qvtd.pivot.schedule.Schedule;
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.AbstractDatumImpl#getRequiredBy <em>Required By</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.AbstractDatumImpl#getSchedule <em>Schedule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.AbstractDatumImpl#getDataParameter <em>Data Parameter</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.AbstractDatumImpl#getTypedModel <em>Typed Model</em>}</li>
  * </ul>
  *
  * @generated
@@ -111,6 +113,16 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	protected EList<DataParameter> dataParameter;
 
 	/**
+	 * The cached value of the '{@link #getTypedModel() <em>Typed Model</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypedModel()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypedModel typedModel;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -158,7 +170,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CoreDomain getDomain() {
+	public CoreDomain getDomainGen() {
 		if (domain != null && domain.eIsProxy()) {
 			InternalEObject oldDomain = (InternalEObject)domain;
 			domain = (CoreDomain)eResolveProxy(oldDomain);
@@ -168,6 +180,17 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 			}
 		}
 		return domain;
+	}
+	public CoreDomain getDomain() {		// FIXME Eliminate domain altogether
+		CoreDomain domainGen = getDomainGen();
+		TypedModel typedModel2 = getTypedModel();
+		if (domainGen == null) {
+			assert typedModel2 == null;
+		}
+		else {
+			assert domainGen.getTypedModel() == typedModel2;
+		}
+		return domainGen;
 	}
 
 	/**
@@ -184,11 +207,53 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDomain(CoreDomain newDomain) {
+	public void setDomainGen(CoreDomain newDomain) {
 		CoreDomain oldDomain = domain;
 		domain = newDomain;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SchedulePackage.ABSTRACT_DATUM__DOMAIN, oldDomain, domain));
+	}
+	public void setDomain(CoreDomain newDomain) {
+		setDomainGen(newDomain);
+		setTypedModel(newDomain != null ? newDomain.getTypedModel() : null);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypedModel getTypedModel() {
+		if (typedModel != null && typedModel.eIsProxy()) {
+			InternalEObject oldTypedModel = (InternalEObject)typedModel;
+			typedModel = (TypedModel)eResolveProxy(oldTypedModel);
+			if (typedModel != oldTypedModel) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SchedulePackage.ABSTRACT_DATUM__TYPED_MODEL, oldTypedModel, typedModel));
+			}
+		}
+		return typedModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypedModel basicGetTypedModel() {
+		return typedModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypedModel(TypedModel newTypedModel) {
+		TypedModel oldTypedModel = typedModel;
+		typedModel = newTypedModel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SchedulePackage.ABSTRACT_DATUM__TYPED_MODEL, oldTypedModel, typedModel));
 	}
 
 	/**
@@ -356,6 +421,9 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 				return getSchedule();
 			case SchedulePackage.ABSTRACT_DATUM__DATA_PARAMETER:
 				return getDataParameter();
+			case SchedulePackage.ABSTRACT_DATUM__TYPED_MODEL:
+				if (resolve) return getTypedModel();
+				return basicGetTypedModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -395,6 +463,9 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 				getDataParameter().clear();
 				getDataParameter().addAll((Collection<? extends DataParameter>)newValue);
 				return;
+			case SchedulePackage.ABSTRACT_DATUM__TYPED_MODEL:
+				setTypedModel((TypedModel)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -428,6 +499,9 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 			case SchedulePackage.ABSTRACT_DATUM__DATA_PARAMETER:
 				getDataParameter().clear();
 				return;
+			case SchedulePackage.ABSTRACT_DATUM__TYPED_MODEL:
+				setTypedModel((TypedModel)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -454,6 +528,8 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 				return getSchedule() != null;
 			case SchedulePackage.ABSTRACT_DATUM__DATA_PARAMETER:
 				return dataParameter != null && !dataParameter.isEmpty();
+			case SchedulePackage.ABSTRACT_DATUM__TYPED_MODEL:
+				return typedModel != null;
 		}
 		return super.eIsSet(featureID);
 	}
