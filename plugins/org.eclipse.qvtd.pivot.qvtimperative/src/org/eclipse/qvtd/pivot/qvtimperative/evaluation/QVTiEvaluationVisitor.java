@@ -19,16 +19,27 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationVisitor;
+import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
+import org.eclipse.ocl.pivot.labels.ILabelGenerator;
+import org.eclipse.ocl.pivot.library.AbstractOperation;
+import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.CollectionValue;
+import org.eclipse.ocl.pivot.values.CollectionValue.Accumulator;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.NullValue;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -47,10 +58,10 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -64,7 +75,50 @@ import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
  */
 public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQVTiEvaluationVisitor
 {
-//	private static final Logger logger = Logger.getLogger(QVTiAbstractEvaluationVisitor.class);
+	public class FunctionOperation extends AbstractOperation
+	{
+		protected final @NonNull Function function;
+		
+		public FunctionOperation(@NonNull Function function) {
+			this.function = function;
+		}
+		
+		/**
+		 * @since 1.1
+		 */
+		@Override
+		public @Nullable Object dispatch(@NonNull Executor executor, @NonNull OperationCallExp callExp, @Nullable Object sourceValue) {
+			List<? extends OCLExpression> arguments = callExp.getOwnedArguments();
+			Object[] argumentValues = new Object[arguments.size()];
+			for (int i = 0; i < arguments.size(); i++) {
+				OCLExpression argument = arguments.get(i);
+				assert argument != null;
+				argumentValues[i] = executor.evaluate(argument);
+			}
+			return evaluate(executor, callExp, sourceValue, argumentValues);
+		}
+
+		private @Nullable Object evaluate(@NonNull Executor executor, @NonNull OperationCallExp callExp, @Nullable Object sourceValue, @NonNull Object... argumentValues) {
+//			PivotUtil.checkExpression(expressionInOCL);
+			EvaluationEnvironment nestedEvaluationEnvironment = executor.pushEvaluationEnvironment(function, callExp);
+//			nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(expressionInOCL.getOwnedContext()), sourceValue);
+			List<Parameter> parameters = function.getOwnedParameters();
+			if (!parameters.isEmpty()) {
+				for (int i = 0; i < parameters.size(); i++) {
+					Object value = argumentValues[i];
+					nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(parameters.get(i)), value);
+				}
+			}
+			try {
+				OCLExpression bodyExpression = function.getQueryExpression();
+				assert bodyExpression != null;
+				return executor.evaluate(bodyExpression);
+			}
+			finally {
+				executor.popEvaluationEnvironment();
+			}
+		}
+	}//	private static final Logger logger = Logger.getLogger(QVTiAbstractEvaluationVisitor.class);
 	protected final @NonNull QVTiExecutor executor;
         
     /**
@@ -100,7 +154,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 					Object values = valueExpression.accept(undecoratedVisitor);
 //					context.replace(targetVariable, value);
 					Object connection = context.getValueOf(targetVariable);
-					CollectionValue.Accumulator connectionCollection = (CollectionValue.Accumulator) ValueUtil.asCollectionValue(connection);
+					CollectionValue.Accumulator connectionCollection = (Accumulator) ValueUtil.asCollectionValue(connection);
 					CollectionValue valuesCollection = ValueUtil.asCollectionValue(values);
 					for (Object value : valuesCollection) {
 						connectionCollection.add(value);
@@ -261,6 +315,29 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);	// MappingStatement is abstract
+	}
+
+	@Override
+	public Object visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
+		Operation referredOperation = operationCallExp.getReferredOperation();
+		if (referredOperation instanceof Function) {
+			Function function = (Function)referredOperation;
+			LibraryOperation.LibraryOperationExtension implementation = new FunctionOperation(function);
+			try {
+				Object result = implementation.dispatch(context, operationCallExp, null);
+				assert !(result instanceof NullValue);
+				return result;
+			} catch (InvalidValueException e) {
+				throw e;
+			} catch (Exception e) {
+				// This is a backstop. Library operations should catch their own exceptions
+				//  and produce a better reason as a result.
+				throw new InvalidValueException(e, PivotMessagesInternal.FailedToEvaluate_ERROR_, function, ILabelGenerator.Registry.INSTANCE.labelFor(null), operationCallExp);
+			}
+		}
+		else {
+			return super.visitOperationCallExp(operationCallExp);
+		}
 	}
 
 	@Override

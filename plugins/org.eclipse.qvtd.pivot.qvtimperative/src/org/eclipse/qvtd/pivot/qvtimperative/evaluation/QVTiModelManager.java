@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -431,7 +432,13 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 
 		@Override
 		public @NonNull Collection<EObject> getRootObjects() {
-			throw new UnsupportedOperationException();
+			Resource resource = modelManager.getModel(typedModel);
+			if (resource != null) {
+				return resource.getContents();
+			}
+			else {
+				return Collections.EMPTY_LIST;
+			}
 		}
 		
 		public @NonNull TypedModel getTypedModel() {

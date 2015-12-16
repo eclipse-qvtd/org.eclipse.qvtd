@@ -28,9 +28,12 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -192,7 +195,19 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			OCLExpression ownedInit = rVar.getOwnedInit();
 			if (ownedInit != null) {
 				Object initValue = ownedInit.accept(undecoratedVisitor);
-				replace(rVar, initValue);
+//				assert initValue != null;
+				if (QVTimperativeUtil.isConnectionAccumulator(rVar)) {
+					CollectionValue.Accumulator accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) ownedInit.getTypeId());
+					if (initValue != null) {
+						for (Object value : (Iterable<?>)initValue) {
+							accumulator.add(value);
+						}
+					}
+					replace(rVar, accumulator);
+				}
+				else {
+					replace(rVar, initValue);
+				}
 			}
 		}
 		for (Assignment assignment : middleBottomPattern.getAssignment()) {
@@ -204,7 +219,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 
 	protected boolean doPredicates(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
 		GuardPattern middleGuardPattern = mapping.getGuardPattern();
-		assert middleGuardPattern.getVariable().isEmpty();
+//		assert middleGuardPattern.getVariable().isEmpty();		middle guards are connection variables
 		for (Predicate predicate : middleGuardPattern.getPredicate()) {
 			// If the predicate is not true, the binding is not valid
 			Object result = predicate.accept(undecoratedVisitor);
