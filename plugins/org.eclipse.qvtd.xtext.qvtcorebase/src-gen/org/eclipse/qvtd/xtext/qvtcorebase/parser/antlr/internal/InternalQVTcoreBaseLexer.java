@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2015 Willink Transformations and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcorebase.parser.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
@@ -22,66 +12,8 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalQVTcoreBaseLexer extends Lexer {
-    public static final int T__29=29;
-    public static final int T__28=28;
-    public static final int T__27=27;
-    public static final int T__26=26;
-    public static final int T__25=25;
-    public static final int RULE_ESCAPED_CHARACTER=8;
-    public static final int T__24=24;
-    public static final int T__23=23;
-    public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=15;
-    public static final int T__21=21;
-    public static final int T__20=20;
-    public static final int RULE_ESCAPED_ID=5;
-    public static final int RULE_DOUBLE_QUOTED_STRING=10;
-    public static final int EOF=-1;
-    public static final int T__93=93;
-    public static final int T__94=94;
-    public static final int T__19=19;
-    public static final int T__91=91;
-    public static final int T__92=92;
-    public static final int T__16=16;
-    public static final int T__90=90;
-    public static final int T__18=18;
-    public static final int T__17=17;
-    public static final int RULE_SIMPLE_ID=4;
-    public static final int T__96=96;
-    public static final int T__95=95;
-    public static final int T__80=80;
-    public static final int T__81=81;
-    public static final int T__82=82;
-    public static final int T__83=83;
-    public static final int RULE_SINGLE_QUOTED_STRING=7;
-    public static final int T__85=85;
-    public static final int T__84=84;
-    public static final int T__87=87;
-    public static final int T__86=86;
-    public static final int T__89=89;
-    public static final int T__88=88;
-    public static final int RULE_LETTER_CHARACTER=9;
-    public static final int RULE_ML_COMMENT=12;
-    public static final int T__71=71;
-    public static final int T__72=72;
-    public static final int T__70=70;
-    public static final int T__76=76;
-    public static final int T__75=75;
-    public static final int T__74=74;
-    public static final int T__73=73;
-    public static final int T__79=79;
-    public static final int T__78=78;
-    public static final int T__77=77;
-    public static final int T__68=68;
-    public static final int T__69=69;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__64=64;
-    public static final int T__65=65;
-    public static final int T__62=62;
-    public static final int T__63=63;
-    public static final int T__61=61;
-    public static final int T__60=60;
+    public static final int T__50=50;
+    public static final int T__59=59;
     public static final int T__55=55;
     public static final int T__56=56;
     public static final int T__57=57;
@@ -90,32 +22,90 @@ public class InternalQVTcoreBaseLexer extends Lexer {
     public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__54=54;
-    public static final int T__59=59;
+    public static final int T__60=60;
+    public static final int T__61=61;
     public static final int RULE_INT=6;
-    public static final int T__50=50;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int RULE_ML_SINGLE_QUOTED_STRING=11;
-    public static final int T__41=41;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int T__49=49;
-    public static final int RULE_SL_COMMENT=13;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
+    public static final int T__66=66;
+    public static final int RULE_ML_COMMENT=12;
+    public static final int T__67=67;
+    public static final int T__68=68;
+    public static final int T__69=69;
+    public static final int T__62=62;
+    public static final int T__63=63;
+    public static final int T__64=64;
+    public static final int T__65=65;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
     public static final int T__33=33;
     public static final int T__34=34;
     public static final int T__35=35;
     public static final int T__36=36;
-    public static final int T__37=37;
-    public static final int T__38=38;
-    public static final int T__39=39;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_SINGLE_QUOTED_STRING=7;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int RULE_DOUBLE_QUOTED_STRING=10;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int RULE_ESCAPED_ID=5;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__91=91;
+    public static final int T__92=92;
+    public static final int T__93=93;
+    public static final int T__94=94;
+    public static final int T__90=90;
+    public static final int RULE_LETTER_CHARACTER=9;
+    public static final int T__19=19;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int T__18=18;
+    public static final int RULE_ESCAPED_CHARACTER=8;
+    public static final int T__95=95;
+    public static final int RULE_ML_SINGLE_QUOTED_STRING=11;
+    public static final int T__96=96;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int T__29=29;
+    public static final int T__22=22;
+    public static final int T__23=23;
+    public static final int T__24=24;
+    public static final int T__25=25;
+    public static final int T__20=20;
+    public static final int T__21=21;
+    public static final int T__70=70;
+    public static final int T__71=71;
+    public static final int T__72=72;
+    public static final int RULE_SL_COMMENT=13;
+    public static final int T__77=77;
+    public static final int T__78=78;
+    public static final int T__79=79;
+    public static final int T__73=73;
+    public static final int EOF=-1;
+    public static final int T__74=74;
+    public static final int T__75=75;
+    public static final int T__76=76;
+    public static final int T__80=80;
+    public static final int T__81=81;
+    public static final int T__82=82;
+    public static final int RULE_SIMPLE_ID=4;
+    public static final int T__83=83;
     public static final int RULE_WS=14;
+    public static final int RULE_ANY_OTHER=15;
+    public static final int T__88=88;
+    public static final int T__89=89;
+    public static final int T__84=84;
+    public static final int T__85=85;
+    public static final int T__86=86;
+    public static final int T__87=87;
 
     // delegates
     // delegators
@@ -1814,8 +1804,8 @@ public class InternalQVTcoreBaseLexer extends Lexer {
     // $ANTLR start "RULE_ESCAPED_CHARACTER"
     public final void mRULE_ESCAPED_CHARACTER() throws RecognitionException {
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6442:33: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6442:35: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6449:33: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6449:35: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
             {
             match('\\'); 
             if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1839,8 +1829,8 @@ public class InternalQVTcoreBaseLexer extends Lexer {
     // $ANTLR start "RULE_LETTER_CHARACTER"
     public final void mRULE_LETTER_CHARACTER() throws RecognitionException {
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6444:32: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6444:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6451:32: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6451:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -1865,11 +1855,11 @@ public class InternalQVTcoreBaseLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE_QUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6446:27: ( '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6446:29: '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6453:27: ( '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6453:29: '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
             {
             match('\"'); 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6446:33: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6453:33: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )*
             loop1:
             do {
                 int alt1=3;
@@ -1885,14 +1875,14 @@ public class InternalQVTcoreBaseLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6446:34: RULE_ESCAPED_CHARACTER
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6453:34: RULE_ESCAPED_CHARACTER
             	    {
             	    mRULE_ESCAPED_CHARACTER(); 
 
             	    }
             	    break;
             	case 2 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6446:57: ~ ( ( '\\\\' | '\"' ) )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6453:57: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1929,11 +1919,11 @@ public class InternalQVTcoreBaseLexer extends Lexer {
         try {
             int _type = RULE_SINGLE_QUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6448:27: ( '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6448:29: '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6455:27: ( '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6455:29: '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
             match('\''); 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6448:34: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6455:34: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop2:
             do {
                 int alt2=3;
@@ -1949,14 +1939,14 @@ public class InternalQVTcoreBaseLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6448:35: RULE_ESCAPED_CHARACTER
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6455:35: RULE_ESCAPED_CHARACTER
             	    {
             	    mRULE_ESCAPED_CHARACTER(); 
 
             	    }
             	    break;
             	case 2 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6448:58: ~ ( ( '\\\\' | '\\'' ) )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6455:58: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1993,12 +1983,12 @@ public class InternalQVTcoreBaseLexer extends Lexer {
         try {
             int _type = RULE_ML_SINGLE_QUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6450:30: ( '/\\'' ( options {greedy=false; } : . )* '\\'/' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6450:32: '/\\'' ( options {greedy=false; } : . )* '\\'/'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6457:30: ( '/\\'' ( options {greedy=false; } : . )* '\\'/' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6457:32: '/\\'' ( options {greedy=false; } : . )* '\\'/'
             {
             match("/'"); 
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6450:38: ( options {greedy=false; } : . )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6457:38: ( options {greedy=false; } : . )*
             loop3:
             do {
                 int alt3=2;
@@ -2023,7 +2013,7 @@ public class InternalQVTcoreBaseLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6450:66: .
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6457:66: .
             	    {
             	    matchAny(); 
 
@@ -2053,11 +2043,11 @@ public class InternalQVTcoreBaseLexer extends Lexer {
         try {
             int _type = RULE_SIMPLE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6452:16: ( RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )* )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6452:18: RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6459:16: ( RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6459:18: RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )*
             {
             mRULE_LETTER_CHARACTER(); 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6452:40: ( RULE_LETTER_CHARACTER | '0' .. '9' )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6459:40: ( RULE_LETTER_CHARACTER | '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -2106,8 +2096,8 @@ public class InternalQVTcoreBaseLexer extends Lexer {
         try {
             int _type = RULE_ESCAPED_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6454:17: ( '_' RULE_SINGLE_QUOTED_STRING )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6454:19: '_' RULE_SINGLE_QUOTED_STRING
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6461:17: ( '_' RULE_SINGLE_QUOTED_STRING )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6461:19: '_' RULE_SINGLE_QUOTED_STRING
             {
             match('_'); 
             mRULE_SINGLE_QUOTED_STRING(); 
@@ -2127,10 +2117,10 @@ public class InternalQVTcoreBaseLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6456:10: ( ( '0' .. '9' )+ )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6456:12: ( '0' .. '9' )+
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6463:10: ( ( '0' .. '9' )+ )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6463:12: ( '0' .. '9' )+
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6456:12: ( '0' .. '9' )+
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6463:12: ( '0' .. '9' )+
             int cnt5=0;
             loop5:
             do {
@@ -2144,7 +2134,7 @@ public class InternalQVTcoreBaseLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6456:13: '0' .. '9'
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6463:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -2176,12 +2166,12 @@ public class InternalQVTcoreBaseLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6458:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6458:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6465:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6465:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6458:24: ( options {greedy=false; } : . )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6465:24: ( options {greedy=false; } : . )*
             loop6:
             do {
                 int alt6=2;
@@ -2206,7 +2196,7 @@ public class InternalQVTcoreBaseLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6458:52: .
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6465:52: .
             	    {
             	    matchAny(); 
 
@@ -2236,12 +2226,12 @@ public class InternalQVTcoreBaseLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6460:17: ( '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6460:19: '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6467:17: ( '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6467:19: '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("--"); 
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6460:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6467:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop7:
             do {
                 int alt7=2;
@@ -2254,7 +2244,7 @@ public class InternalQVTcoreBaseLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6460:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6467:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2274,7 +2264,7 @@ public class InternalQVTcoreBaseLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6460:40: ( ( '\\r' )? '\\n' )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6467:40: ( ( '\\r' )? '\\n' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2283,9 +2273,9 @@ public class InternalQVTcoreBaseLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6460:41: ( '\\r' )? '\\n'
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6467:41: ( '\\r' )? '\\n'
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6460:41: ( '\\r' )?
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6467:41: ( '\\r' )?
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -2294,7 +2284,7 @@ public class InternalQVTcoreBaseLexer extends Lexer {
                     }
                     switch (alt8) {
                         case 1 :
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6460:41: '\\r'
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6467:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2326,10 +2316,10 @@ public class InternalQVTcoreBaseLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6462:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6462:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6469:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6469:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6462:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6469:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt10=0;
             loop10:
             do {
@@ -2383,8 +2373,8 @@ public class InternalQVTcoreBaseLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6464:16: ( . )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6464:18: .
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6471:16: ( . )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:6471:18: .
             {
             matchAny(); 
 
@@ -3048,19 +3038,106 @@ public class InternalQVTcoreBaseLexer extends Lexer {
 
     protected DFA11 dfa11 = new DFA11(this);
     static final String DFA11_eotS =
-        "\3\uffff\1\74\1\uffff\2\101\2\uffff\1\107\1\uffff\10\101\1\127\1\101\1\uffff\1\135\1\137\1\141\1\145\1\uffff\3\101\1\153\1\156\13\101\1\uffff\1\101\2\uffff\1\101\3\67\1\101\12\uffff\1\101\1\u008a\1\u008b\1\uffff\1\101\6\uffff\14\101\3\uffff\2\101\15\uffff\1\101\1\u009f\1\101\5\uffff\16\101\1\uffff\1\101\2\uffff\1\101\6\uffff\2\101\2\uffff\12\101\1\u00bf\1\u00c0\4\101\1\u00c5\1\101\1\u00c7\1\uffff\1\u00c8\1\u00c9\2\101\1\u00cc\3\101\1\u00d0\7\101\1\u00da\4\101\1\u00df\6\101\1\u00e7\2\101\2\uffff\2\101\1\u00ec\1\u00ed\1\uffff\1\u00ee\3\uffff\2\101\1\uffff\1\101\1\u00f2\1\101\1\uffff\11\101\1\uffff\1\u00fd\3\101\1\uffff\3\101\1\u0104\1\101\1\u0106\1\101\1\uffff\2\101\1\u010a\1\101\3\uffff\1\u010c\2\101\1\uffff\11\101\1\u0118\1\uffff\1\u011a\5\101\1\uffff\1\101\1\uffff\1\u0121\2\101\1\uffff\1\101\1\uffff\2\101\1\u0127\2\101\1\u012a\4\101\1\u012f\1\uffff\1\u0130\1\uffff\1\u0131\1\u0132\1\u0133\1\u0134\1\u0135\1\u0136\1\uffff\1\u0137\1\u0138\1\101\1\u013a\1\u013b\1\uffff\2\101\1\uffff\1\101\1\u013f\2\101\12\uffff\1\101\2\uffff\1\u0143\2\101\1\uffff\3\101\1\uffff\6\101\1\u014f\1\u0150\1\u0151\2\101\3\uffff\4\101\1\u0158\1\101\1\uffff\1\101\1\u015b\1\uffff";
+        "\3\uffff\1\74\1\uffff\2\101\2\uffff\1\107\1\uffff\10\101\1\127"+
+        "\1\101\1\uffff\1\135\1\137\1\141\1\145\1\uffff\3\101\1\153\1\156"+
+        "\13\101\1\uffff\1\101\2\uffff\1\101\3\67\1\101\12\uffff\1\101\1"+
+        "\u008a\1\u008b\1\uffff\1\101\6\uffff\14\101\3\uffff\2\101\15\uffff"+
+        "\1\101\1\u009f\1\101\5\uffff\16\101\1\uffff\1\101\2\uffff\1\101"+
+        "\6\uffff\2\101\2\uffff\12\101\1\u00bf\1\u00c0\4\101\1\u00c5\1\101"+
+        "\1\u00c7\1\uffff\1\u00c8\1\u00c9\2\101\1\u00cc\3\101\1\u00d0\7\101"+
+        "\1\u00da\4\101\1\u00df\6\101\1\u00e7\2\101\2\uffff\2\101\1\u00ec"+
+        "\1\u00ed\1\uffff\1\u00ee\3\uffff\2\101\1\uffff\1\101\1\u00f2\1\101"+
+        "\1\uffff\11\101\1\uffff\1\u00fd\3\101\1\uffff\3\101\1\u0104\1\101"+
+        "\1\u0106\1\101\1\uffff\2\101\1\u010a\1\101\3\uffff\1\u010c\2\101"+
+        "\1\uffff\11\101\1\u0118\1\uffff\1\u011a\5\101\1\uffff\1\101\1\uffff"+
+        "\1\u0121\2\101\1\uffff\1\101\1\uffff\2\101\1\u0127\2\101\1\u012a"+
+        "\4\101\1\u012f\1\uffff\1\u0130\1\uffff\1\u0131\1\u0132\1\u0133\1"+
+        "\u0134\1\u0135\1\u0136\1\uffff\1\u0137\1\u0138\1\101\1\u013a\1\u013b"+
+        "\1\uffff\2\101\1\uffff\1\101\1\u013f\2\101\12\uffff\1\101\2\uffff"+
+        "\1\u0143\2\101\1\uffff\3\101\1\uffff\6\101\1\u014f\1\u0150\1\u0151"+
+        "\2\101\3\uffff\4\101\1\u0158\1\101\1\uffff\1\101\1\u015b\1\uffff";
     static final String DFA11_eofS =
         "\u015c\uffff";
     static final String DFA11_minS =
-        "\1\0\2\uffff\1\61\1\uffff\1\146\1\163\2\uffff\1\72\1\uffff\2\145\1\150\1\154\1\145\1\141\1\165\1\150\1\55\1\157\1\uffff\1\47\1\53\1\75\1\55\1\uffff\1\156\1\162\1\157\1\56\1\55\1\141\1\165\1\141\1\156\2\145\1\156\1\143\1\157\2\141\1\uffff\1\162\2\uffff\1\145\1\46\2\0\1\47\12\uffff\1\160\2\60\1\uffff\1\145\6\uffff\1\146\1\141\1\145\1\144\1\163\1\164\1\142\1\164\1\160\1\145\1\141\1\145\3\uffff\1\164\1\154\15\uffff\1\144\1\60\1\162\5\uffff\2\160\1\157\1\147\1\164\1\141\1\162\1\161\2\154\1\144\1\154\1\155\1\154\1\uffff\1\145\2\uffff\1\154\6\uffff\1\154\1\141\2\uffff\1\163\1\141\1\154\1\151\1\143\1\157\1\151\2\145\1\162\2\60\1\162\1\156\1\145\1\156\1\60\1\154\1\60\1\uffff\2\60\2\154\1\60\1\145\1\154\1\151\1\60\1\165\1\151\1\101\1\145\1\154\1\142\1\163\1\60\1\146\1\162\1\151\1\154\1\60\1\165\1\151\1\156\1\153\1\162\1\146\1\60\1\156\1\141\2\uffff\1\171\1\163\2\60\1\uffff\1\60\3\uffff\2\145\1\uffff\1\147\1\60\1\156\1\uffff\1\145\1\155\2\156\1\157\1\162\1\145\1\144\1\145\1\uffff\1\60\1\164\1\145\1\151\1\uffff\1\154\1\172\1\145\1\60\1\143\1\60\1\146\1\uffff\1\144\1\162\1\60\1\146\3\uffff\1\60\1\141\1\145\1\uffff\1\147\1\156\1\151\1\171\1\166\1\151\1\145\1\143\1\141\1\60\1\uffff\1\60\1\163\1\144\1\164\1\145\1\163\1\uffff\1\145\1\uffff\1\60\1\163\1\171\1\uffff\1\157\1\uffff\1\156\1\162\1\60\1\143\1\164\1\60\1\141\2\144\1\164\1\60\1\uffff\1\60\1\uffff\6\60\1\uffff\2\60\1\162\2\60\1\uffff\2\145\1\uffff\1\154\1\60\1\123\1\151\12\uffff\1\155\2\uffff\1\60\1\144\1\151\1\uffff\1\145\1\157\1\141\1\uffff\1\116\1\144\1\164\1\156\1\164\1\141\3\60\1\151\1\164\3\uffff\1\157\1\165\1\156\1\162\1\60\1\141\1\uffff\1\154\1\60\1\uffff";
+        "\1\0\2\uffff\1\61\1\uffff\1\146\1\163\2\uffff\1\72\1\uffff\2\145"+
+        "\1\150\1\154\1\145\1\141\1\165\1\150\1\55\1\157\1\uffff\1\47\1\53"+
+        "\1\75\1\55\1\uffff\1\156\1\162\1\157\1\56\1\55\1\141\1\165\1\141"+
+        "\1\156\2\145\1\156\1\143\1\157\2\141\1\uffff\1\162\2\uffff\1\145"+
+        "\1\46\2\0\1\47\12\uffff\1\160\2\60\1\uffff\1\145\6\uffff\1\146\1"+
+        "\141\1\145\1\144\1\163\1\164\1\142\1\164\1\160\1\145\1\141\1\145"+
+        "\3\uffff\1\164\1\154\15\uffff\1\144\1\60\1\162\5\uffff\2\160\1\157"+
+        "\1\147\1\164\1\141\1\162\1\161\2\154\1\144\1\154\1\155\1\154\1\uffff"+
+        "\1\145\2\uffff\1\154\6\uffff\1\154\1\141\2\uffff\1\163\1\141\1\154"+
+        "\1\151\1\143\1\157\1\151\2\145\1\162\2\60\1\162\1\156\1\145\1\156"+
+        "\1\60\1\154\1\60\1\uffff\2\60\2\154\1\60\1\145\1\154\1\151\1\60"+
+        "\1\165\1\151\1\101\1\145\1\154\1\142\1\163\1\60\1\146\1\162\1\151"+
+        "\1\154\1\60\1\165\1\151\1\156\1\153\1\162\1\146\1\60\1\156\1\141"+
+        "\2\uffff\1\171\1\163\2\60\1\uffff\1\60\3\uffff\2\145\1\uffff\1\147"+
+        "\1\60\1\156\1\uffff\1\145\1\155\2\156\1\157\1\162\1\145\1\144\1"+
+        "\145\1\uffff\1\60\1\164\1\145\1\151\1\uffff\1\154\1\172\1\145\1"+
+        "\60\1\143\1\60\1\146\1\uffff\1\144\1\162\1\60\1\146\3\uffff\1\60"+
+        "\1\141\1\145\1\uffff\1\147\1\156\1\151\1\171\1\166\1\151\1\145\1"+
+        "\143\1\141\1\60\1\uffff\1\60\1\163\1\144\1\164\1\145\1\163\1\uffff"+
+        "\1\145\1\uffff\1\60\1\163\1\171\1\uffff\1\157\1\uffff\1\156\1\162"+
+        "\1\60\1\143\1\164\1\60\1\141\2\144\1\164\1\60\1\uffff\1\60\1\uffff"+
+        "\6\60\1\uffff\2\60\1\162\2\60\1\uffff\2\145\1\uffff\1\154\1\60\1"+
+        "\123\1\151\12\uffff\1\155\2\uffff\1\60\1\144\1\151\1\uffff\1\145"+
+        "\1\157\1\141\1\uffff\1\116\1\144\1\164\1\156\1\164\1\141\3\60\1"+
+        "\151\1\164\3\uffff\1\157\1\165\1\156\1\162\1\60\1\141\1\uffff\1"+
+        "\154\1\60\1\uffff";
     static final String DFA11_maxS =
-        "\1\uffff\2\uffff\1\77\1\uffff\1\156\1\163\2\uffff\1\75\1\uffff\2\145\1\150\1\170\1\151\1\141\1\165\1\162\1\76\1\165\1\uffff\1\52\1\53\1\75\1\76\1\uffff\1\156\1\162\1\157\2\56\1\141\1\165\1\157\1\156\1\145\1\164\1\156\1\162\1\157\2\141\1\uffff\1\162\2\uffff\1\145\1\46\2\uffff\1\47\12\uffff\1\160\2\172\1\uffff\1\145\6\uffff\2\146\1\145\1\146\1\163\1\164\1\142\1\164\1\160\1\145\1\165\1\145\3\uffff\1\164\1\154\15\uffff\1\144\1\172\1\162\5\uffff\2\160\1\157\1\147\1\164\1\141\1\162\1\164\2\154\1\144\1\154\1\155\1\154\1\uffff\1\145\2\uffff\1\154\6\uffff\1\157\1\141\2\uffff\1\163\1\141\1\154\1\151\1\143\1\157\1\151\2\145\1\162\2\172\1\162\1\156\1\145\1\156\1\172\1\154\1\172\1\uffff\2\172\2\154\1\172\1\145\1\154\1\151\1\172\1\165\1\151\1\126\1\145\1\154\1\142\1\163\1\172\1\146\1\162\1\151\1\154\1\172\1\165\1\151\1\156\1\153\1\162\1\146\1\172\1\156\1\141\2\uffff\1\171\1\163\2\172\1\uffff\1\172\3\uffff\2\145\1\uffff\1\147\1\172\1\156\1\uffff\1\145\1\155\2\156\1\157\1\162\1\145\1\144\1\145\1\uffff\1\172\1\164\1\145\1\151\1\uffff\1\154\1\172\1\145\1\172\1\143\1\172\1\146\1\uffff\1\144\1\162\1\172\1\146\3\uffff\1\172\1\141\1\145\1\uffff\1\147\1\156\1\151\1\171\1\166\1\151\1\145\1\143\1\141\1\172\1\uffff\1\172\1\163\1\144\1\164\1\145\1\163\1\uffff\1\145\1\uffff\1\172\1\163\1\171\1\uffff\1\157\1\uffff\1\156\1\162\1\172\1\143\1\164\1\172\1\141\2\144\1\164\1\172\1\uffff\1\172\1\uffff\6\172\1\uffff\2\172\1\162\2\172\1\uffff\2\145\1\uffff\1\154\1\172\1\123\1\151\12\uffff\1\155\2\uffff\1\172\1\144\1\151\1\uffff\1\145\1\157\1\141\1\uffff\1\116\1\144\1\164\1\156\1\164\1\141\3\172\1\151\1\164\3\uffff\1\157\1\165\1\156\1\162\1\172\1\141\1\uffff\1\154\1\172\1\uffff";
+        "\1\uffff\2\uffff\1\77\1\uffff\1\156\1\163\2\uffff\1\75\1\uffff"+
+        "\2\145\1\150\1\170\1\151\1\141\1\165\1\162\1\76\1\165\1\uffff\1"+
+        "\52\1\53\1\75\1\76\1\uffff\1\156\1\162\1\157\2\56\1\141\1\165\1"+
+        "\157\1\156\1\145\1\164\1\156\1\162\1\157\2\141\1\uffff\1\162\2\uffff"+
+        "\1\145\1\46\2\uffff\1\47\12\uffff\1\160\2\172\1\uffff\1\145\6\uffff"+
+        "\2\146\1\145\1\146\1\163\1\164\1\142\1\164\1\160\1\145\1\165\1\145"+
+        "\3\uffff\1\164\1\154\15\uffff\1\144\1\172\1\162\5\uffff\2\160\1"+
+        "\157\1\147\1\164\1\141\1\162\1\164\2\154\1\144\1\154\1\155\1\154"+
+        "\1\uffff\1\145\2\uffff\1\154\6\uffff\1\157\1\141\2\uffff\1\163\1"+
+        "\141\1\154\1\151\1\143\1\157\1\151\2\145\1\162\2\172\1\162\1\156"+
+        "\1\145\1\156\1\172\1\154\1\172\1\uffff\2\172\2\154\1\172\1\145\1"+
+        "\154\1\151\1\172\1\165\1\151\1\126\1\145\1\154\1\142\1\163\1\172"+
+        "\1\146\1\162\1\151\1\154\1\172\1\165\1\151\1\156\1\153\1\162\1\146"+
+        "\1\172\1\156\1\141\2\uffff\1\171\1\163\2\172\1\uffff\1\172\3\uffff"+
+        "\2\145\1\uffff\1\147\1\172\1\156\1\uffff\1\145\1\155\2\156\1\157"+
+        "\1\162\1\145\1\144\1\145\1\uffff\1\172\1\164\1\145\1\151\1\uffff"+
+        "\1\154\1\172\1\145\1\172\1\143\1\172\1\146\1\uffff\1\144\1\162\1"+
+        "\172\1\146\3\uffff\1\172\1\141\1\145\1\uffff\1\147\1\156\1\151\1"+
+        "\171\1\166\1\151\1\145\1\143\1\141\1\172\1\uffff\1\172\1\163\1\144"+
+        "\1\164\1\145\1\163\1\uffff\1\145\1\uffff\1\172\1\163\1\171\1\uffff"+
+        "\1\157\1\uffff\1\156\1\162\1\172\1\143\1\164\1\172\1\141\2\144\1"+
+        "\164\1\172\1\uffff\1\172\1\uffff\6\172\1\uffff\2\172\1\162\2\172"+
+        "\1\uffff\2\145\1\uffff\1\154\1\172\1\123\1\151\12\uffff\1\155\2"+
+        "\uffff\1\172\1\144\1\151\1\uffff\1\145\1\157\1\141\1\uffff\1\116"+
+        "\1\144\1\164\1\156\1\164\1\141\3\172\1\151\1\164\3\uffff\1\157\1"+
+        "\165\1\156\1\162\1\172\1\141\1\uffff\1\154\1\172\1\uffff";
     static final String DFA11_acceptS =
-        "\1\uffff\1\1\1\2\1\uffff\1\4\2\uffff\1\7\1\10\1\uffff\1\12\12\uffff\1\31\4\uffff\1\40\20\uffff\1\101\1\uffff\1\103\1\104\5\uffff\1\125\1\127\1\132\1\133\1\1\1\2\1\115\1\116\1\3\1\4\3\uffff\1\125\1\uffff\1\7\1\10\1\14\1\15\1\11\1\12\14\uffff\1\47\1\131\1\27\2\uffff\1\31\1\124\1\130\1\32\1\72\1\33\1\36\1\34\1\37\1\41\1\74\1\35\1\40\3\uffff\1\71\1\46\1\50\1\51\1\117\16\uffff\1\101\1\uffff\1\103\1\104\1\uffff\1\121\1\122\1\123\1\126\1\127\1\132\2\uffff\1\105\1\106\23\uffff\1\43\37\uffff\1\113\1\23\4\uffff\1\30\1\uffff\1\42\1\44\1\52\2\uffff\1\65\3\uffff\1\64\11\uffff\1\102\4\uffff\1\6\7\uffff\1\110\4\uffff\1\75\1\107\1\100\3\uffff\1\56\12\uffff\1\114\6\uffff\1\17\1\uffff\1\111\3\uffff\1\24\1\uffff\1\53\13\uffff\1\76\1\uffff\1\21\6\uffff\1\112\5\uffff\1\57\2\uffff\1\61\4\uffff\1\73\1\5\1\45\1\77\1\13\1\16\1\25\1\20\1\120\1\22\1\uffff\1\54\1\55\3\uffff\1\63\3\uffff\1\66\13\uffff\1\62\1\70\1\67\6\uffff\1\26\2\uffff\1\60";
+        "\1\uffff\1\1\1\2\1\uffff\1\4\2\uffff\1\7\1\10\1\uffff\1\12\12\uffff"+
+        "\1\31\4\uffff\1\40\20\uffff\1\101\1\uffff\1\103\1\104\5\uffff\1"+
+        "\125\1\127\1\132\1\133\1\1\1\2\1\115\1\116\1\3\1\4\3\uffff\1\125"+
+        "\1\uffff\1\7\1\10\1\14\1\15\1\11\1\12\14\uffff\1\47\1\131\1\27\2"+
+        "\uffff\1\31\1\124\1\130\1\32\1\72\1\33\1\36\1\34\1\37\1\41\1\74"+
+        "\1\35\1\40\3\uffff\1\71\1\46\1\50\1\51\1\117\16\uffff\1\101\1\uffff"+
+        "\1\103\1\104\1\uffff\1\121\1\122\1\123\1\126\1\127\1\132\2\uffff"+
+        "\1\105\1\106\23\uffff\1\43\37\uffff\1\113\1\23\4\uffff\1\30\1\uffff"+
+        "\1\42\1\44\1\52\2\uffff\1\65\3\uffff\1\64\11\uffff\1\102\4\uffff"+
+        "\1\6\7\uffff\1\110\4\uffff\1\75\1\107\1\100\3\uffff\1\56\12\uffff"+
+        "\1\114\6\uffff\1\17\1\uffff\1\111\3\uffff\1\24\1\uffff\1\53\13\uffff"+
+        "\1\76\1\uffff\1\21\6\uffff\1\112\5\uffff\1\57\2\uffff\1\61\4\uffff"+
+        "\1\73\1\5\1\45\1\77\1\13\1\16\1\25\1\20\1\120\1\22\1\uffff\1\54"+
+        "\1\55\3\uffff\1\63\3\uffff\1\66\13\uffff\1\62\1\70\1\67\6\uffff"+
+        "\1\26\2\uffff\1\60";
     static final String DFA11_specialS =
-        "\1\1\60\uffff\1\0\1\2\u0129\uffff}>";
+        "\1\0\60\uffff\1\1\1\2\u0129\uffff}>";
     static final String[] DFA11_transitionS = {
-            "\11\67\2\66\2\67\1\66\22\67\1\66\1\67\1\61\3\67\1\60\1\62\1\7\1\10\1\25\1\27\1\2\1\23\1\36\1\26\12\65\1\11\1\12\1\31\1\32\1\30\1\37\1\53\1\64\1\42\1\50\5\64\1\43\2\64\1\51\1\40\1\64\1\47\2\64\1\44\1\45\1\41\1\46\5\64\1\55\1\67\1\56\1\67\1\63\1\67\1\33\1\64\1\15\1\13\1\16\1\52\2\64\1\5\2\64\1\17\1\20\1\24\1\34\1\54\1\21\1\14\1\57\1\22\1\6\2\64\1\35\2\64\1\1\1\3\1\4\uff82\67",
+            "\11\67\2\66\2\67\1\66\22\67\1\66\1\67\1\61\3\67\1\60\1\62\1"+
+            "\7\1\10\1\25\1\27\1\2\1\23\1\36\1\26\12\65\1\11\1\12\1\31\1"+
+            "\32\1\30\1\37\1\53\1\64\1\42\1\50\5\64\1\43\2\64\1\51\1\40\1"+
+            "\64\1\47\2\64\1\44\1\45\1\41\1\46\5\64\1\55\1\67\1\56\1\67\1"+
+            "\63\1\67\1\33\1\64\1\15\1\13\1\16\1\52\2\64\1\5\2\64\1\17\1"+
+            "\20\1\24\1\34\1\54\1\21\1\14\1\57\1\22\1\6\2\64\1\35\2\64\1"+
+            "\1\1\3\1\4\uff82\67",
             "",
             "",
             "\1\73\15\uffff\1\72",
@@ -3123,7 +3200,8 @@ public class InternalQVTcoreBaseLexer extends Lexer {
             "",
             "",
             "\1\u0088",
-            "\12\101\7\uffff\32\101\4\uffff\1\101\1\uffff\25\101\1\u0089\4\101",
+            "\12\101\7\uffff\32\101\4\uffff\1\101\1\uffff\25\101\1\u0089"+
+            "\4\101",
             "\12\101\7\uffff\32\101\4\uffff\1\101\1\uffff\32\101",
             "",
             "\1\u008c",
@@ -3248,7 +3326,8 @@ public class InternalQVTcoreBaseLexer extends Lexer {
             "\1\u00e3",
             "\1\u00e4",
             "\1\u00e5",
-            "\12\101\7\uffff\32\101\4\uffff\1\101\1\uffff\10\101\1\u00e6\21\101",
+            "\12\101\7\uffff\32\101\4\uffff\1\101\1\uffff\10\101\1\u00e6"+
+            "\21\101",
             "\1\u00e8",
             "\1\u00e9",
             "",
@@ -3314,7 +3393,8 @@ public class InternalQVTcoreBaseLexer extends Lexer {
             "\1\u0117",
             "\12\101\7\uffff\32\101\4\uffff\1\101\1\uffff\32\101",
             "",
-            "\12\101\7\uffff\32\101\4\uffff\1\101\1\uffff\22\101\1\u0119\7\101",
+            "\12\101\7\uffff\32\101\4\uffff\1\101\1\uffff\22\101\1\u0119"+
+            "\7\101",
             "\1\u011b",
             "\1\u011c",
             "\1\u011d",
@@ -3447,16 +3527,6 @@ public class InternalQVTcoreBaseLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA11_49 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA11_49>='\u0000' && LA11_49<='\uFFFF')) ) {s = 131;}
-
-                        else s = 55;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA11_0 = input.LA(1);
 
                         s = -1;
@@ -3569,6 +3639,16 @@ public class InternalQVTcoreBaseLexer extends Lexer {
                         else if ( ((LA11_0>='\t' && LA11_0<='\n')||LA11_0=='\r'||LA11_0==' ') ) {s = 54;}
 
                         else if ( ((LA11_0>='\u0000' && LA11_0<='\b')||(LA11_0>='\u000B' && LA11_0<='\f')||(LA11_0>='\u000E' && LA11_0<='\u001F')||LA11_0=='!'||(LA11_0>='#' && LA11_0<='%')||LA11_0=='\\'||LA11_0=='^'||LA11_0=='`'||(LA11_0>='~' && LA11_0<='\uFFFF')) ) {s = 55;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA11_49 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA11_49>='\u0000' && LA11_49<='\uFFFF')) ) {s = 131;}
+
+                        else s = 55;
 
                         if ( s>=0 ) return s;
                         break;
