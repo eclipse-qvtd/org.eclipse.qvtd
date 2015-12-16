@@ -18,7 +18,10 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -42,7 +45,28 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass connectionAssignmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imperativeAreaEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass imperativeBottomPatternEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imperativeDomainEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -170,6 +194,56 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public EClass getConnectionAssignment() {
+		return connectionAssignmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConnectionAssignment_TargetVariable() {
+		return (EReference)connectionAssignmentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getImperativeArea() {
+		return imperativeAreaEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getImperativeArea_CheckedProperties() {
+		return (EReference)imperativeAreaEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getImperativeArea_EnforcedProperties() {
+		return (EReference)imperativeAreaEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getImperativeBottomPattern() {
 		return imperativeBottomPatternEClass;
 	}
@@ -182,6 +256,16 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EReference getImperativeBottomPattern_OrderedAssignment() {
 		return (EReference)imperativeBottomPatternEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getImperativeDomain() {
+		return imperativeDomainEClass;
 	}
 
 	/**
@@ -423,8 +507,17 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		isCreated = true;
 
 		// Create classes and their features
+		connectionAssignmentEClass = createEClass(CONNECTION_ASSIGNMENT);
+		createEReference(connectionAssignmentEClass, CONNECTION_ASSIGNMENT__TARGET_VARIABLE);
+
+		imperativeAreaEClass = createEClass(IMPERATIVE_AREA);
+		createEReference(imperativeAreaEClass, IMPERATIVE_AREA__CHECKED_PROPERTIES);
+		createEReference(imperativeAreaEClass, IMPERATIVE_AREA__ENFORCED_PROPERTIES);
+
 		imperativeBottomPatternEClass = createEClass(IMPERATIVE_BOTTOM_PATTERN);
 		createEReference(imperativeBottomPatternEClass, IMPERATIVE_BOTTOM_PATTERN__ORDERED_ASSIGNMENT);
+
+		imperativeDomainEClass = createEClass(IMPERATIVE_DOMAIN);
 
 		imperativeModelEClass = createEClass(IMPERATIVE_MODEL);
 
@@ -481,17 +574,22 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		// Obtain other dependent packages
 		QVTcoreBasePackage theQVTcoreBasePackage = (QVTcoreBasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTcoreBasePackage.eNS_URI);
-		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
+		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		connectionAssignmentEClass.getESuperTypes().add(theQVTcoreBasePackage.getAssignment());
+		imperativeAreaEClass.getESuperTypes().add(theQVTcoreBasePackage.getArea());
 		imperativeBottomPatternEClass.getESuperTypes().add(theQVTcoreBasePackage.getBottomPattern());
+		imperativeDomainEClass.getESuperTypes().add(theQVTcoreBasePackage.getCoreDomain());
+		imperativeDomainEClass.getESuperTypes().add(this.getImperativeArea());
 		imperativeModelEClass.getESuperTypes().add(theQVTbasePackage.getBaseModel());
 		mappingEClass.getESuperTypes().add(theQVTcoreBasePackage.getAbstractMapping());
+		mappingEClass.getESuperTypes().add(this.getImperativeArea());
 		mappingCallEClass.getESuperTypes().add(this.getMappingStatement());
 		mappingCallEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 		mappingCallBindingEClass.getESuperTypes().add(thePivotPackage.getElement());
@@ -502,8 +600,17 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		variablePredicateEClass.getESuperTypes().add(theQVTbasePackage.getPredicate());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(connectionAssignmentEClass, ConnectionAssignment.class, "ConnectionAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConnectionAssignment_TargetVariable(), thePivotPackage.getVariable(), null, "targetVariable", null, 1, 1, ConnectionAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(imperativeAreaEClass, ImperativeArea.class, "ImperativeArea", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getImperativeArea_CheckedProperties(), thePivotPackage.getProperty(), null, "checkedProperties", null, 0, -1, ImperativeArea.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getImperativeArea_EnforcedProperties(), thePivotPackage.getProperty(), null, "enforcedProperties", null, 0, -1, ImperativeArea.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
 		initEClass(imperativeBottomPatternEClass, ImperativeBottomPattern.class, "ImperativeBottomPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getImperativeBottomPattern_OrderedAssignment(), theQVTcoreBasePackage.getAssignment(), null, "orderedAssignment", null, 0, -1, ImperativeBottomPattern.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEClass(imperativeDomainEClass, ImperativeDomain.class, "ImperativeDomain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(imperativeModelEClass, ImperativeModel.class, "ImperativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -571,6 +678,12 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 */
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		addAnnotation
+		  (getConnectionAssignment_TargetVariable(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });	
 		addAnnotation
 		  (getVariablePredicate_TargetVariable(), 
 		   source, 

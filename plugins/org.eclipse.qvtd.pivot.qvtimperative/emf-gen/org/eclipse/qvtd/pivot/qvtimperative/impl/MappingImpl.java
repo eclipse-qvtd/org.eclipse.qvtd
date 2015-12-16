@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
@@ -29,6 +30,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -44,6 +46,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getGuardPattern <em>Guard Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getCheckedProperties <em>Checked Properties</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getEnforcedProperties <em>Enforced Properties</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getMappingStatement <em>Mapping Statement</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getPolledClasses <em>Polled Classes</em>}</li>
  * </ul>
@@ -70,6 +74,26 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @ordered
 	 */
 	protected BottomPattern bottomPattern;
+
+	/**
+	 * The cached value of the '{@link #getCheckedProperties() <em>Checked Properties</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCheckedProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Property> checkedProperties;
+
+	/**
+	 * The cached value of the '{@link #getEnforcedProperties() <em>Enforced Properties</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEnforcedProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Property> enforcedProperties;
 
 	/**
 	 * The cached value of the '{@link #getMappingStatement() <em>Mapping Statement</em>}' containment reference.
@@ -206,6 +230,32 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	@Override
+	public EList<Property> getCheckedProperties() {
+		if (checkedProperties == null) {
+			checkedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.MAPPING__CHECKED_PROPERTIES);
+		}
+		return checkedProperties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Property> getEnforcedProperties() {
+		if (enforcedProperties == null) {
+			enforcedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES);
+		}
+		return enforcedProperties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public MappingStatement getMappingStatement() {
 		return mappingStatement;
 	}
@@ -332,6 +382,10 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return getGuardPattern();
 			case QVTimperativePackage.MAPPING__BOTTOM_PATTERN:
 				return getBottomPattern();
+			case QVTimperativePackage.MAPPING__CHECKED_PROPERTIES:
+				return getCheckedProperties();
+			case QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES:
+				return getEnforcedProperties();
 			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
 				return getMappingStatement();
 			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
@@ -354,6 +408,14 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return;
 			case QVTimperativePackage.MAPPING__BOTTOM_PATTERN:
 				setBottomPattern((BottomPattern)newValue);
+				return;
+			case QVTimperativePackage.MAPPING__CHECKED_PROPERTIES:
+				getCheckedProperties().clear();
+				getCheckedProperties().addAll((Collection<? extends Property>)newValue);
+				return;
+			case QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES:
+				getEnforcedProperties().clear();
+				getEnforcedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
 				setMappingStatement((MappingStatement)newValue);
@@ -380,6 +442,12 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTimperativePackage.MAPPING__BOTTOM_PATTERN:
 				setBottomPattern((BottomPattern)null);
 				return;
+			case QVTimperativePackage.MAPPING__CHECKED_PROPERTIES:
+				getCheckedProperties().clear();
+				return;
+			case QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES:
+				getEnforcedProperties().clear();
+				return;
 			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
 				setMappingStatement((MappingStatement)null);
 				return;
@@ -402,6 +470,10 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return guardPattern != null;
 			case QVTimperativePackage.MAPPING__BOTTOM_PATTERN:
 				return bottomPattern != null;
+			case QVTimperativePackage.MAPPING__CHECKED_PROPERTIES:
+				return checkedProperties != null && !checkedProperties.isEmpty();
+			case QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES:
+				return enforcedProperties != null && !enforcedProperties.isEmpty();
 			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
 				return mappingStatement != null;
 			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
@@ -424,6 +496,13 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				default: return -1;
 			}
 		}
+		if (baseClass == ImperativeArea.class) {
+			switch (derivedFeatureID) {
+				case QVTimperativePackage.MAPPING__CHECKED_PROPERTIES: return QVTimperativePackage.IMPERATIVE_AREA__CHECKED_PROPERTIES;
+				case QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES: return QVTimperativePackage.IMPERATIVE_AREA__ENFORCED_PROPERTIES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -438,6 +517,13 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			switch (baseFeatureID) {
 				case QVTcoreBasePackage.AREA__GUARD_PATTERN: return QVTimperativePackage.MAPPING__GUARD_PATTERN;
 				case QVTcoreBasePackage.AREA__BOTTOM_PATTERN: return QVTimperativePackage.MAPPING__BOTTOM_PATTERN;
+				default: return -1;
+			}
+		}
+		if (baseClass == ImperativeArea.class) {
+			switch (baseFeatureID) {
+				case QVTimperativePackage.IMPERATIVE_AREA__CHECKED_PROPERTIES: return QVTimperativePackage.MAPPING__CHECKED_PROPERTIES;
+				case QVTimperativePackage.IMPERATIVE_AREA__ENFORCED_PROPERTIES: return QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES;
 				default: return -1;
 			}
 		}

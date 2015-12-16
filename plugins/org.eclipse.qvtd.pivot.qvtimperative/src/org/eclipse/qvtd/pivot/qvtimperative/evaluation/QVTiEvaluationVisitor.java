@@ -26,6 +26,8 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationVisitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -45,7 +47,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -84,6 +88,32 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
     @Override
     public @Nullable Object visitBottomPattern(@NonNull BottomPattern object) {
 		return visiting(object);
+    }
+
+    @Override
+	public @Nullable Object visitConnectionAssignment(@NonNull ConnectionAssignment connectionAssignment) {
+    	Variable targetVariable = connectionAssignment.getTargetVariable() ;
+		if (targetVariable != null) {
+			OCLExpression valueExpression = connectionAssignment.getValue();
+			if (valueExpression != null) {
+				try {
+					Object values = valueExpression.accept(undecoratedVisitor);
+//					context.replace(targetVariable, value);
+					Object connection = context.getValueOf(targetVariable);
+					CollectionValue.Accumulator connectionCollection = (CollectionValue.Accumulator) ValueUtil.asCollectionValue(connection);
+					CollectionValue valuesCollection = ValueUtil.asCollectionValue(values);
+					for (Object value : valuesCollection) {
+						connectionCollection.add(value);
+					}
+					return connectionCollection;
+				}
+				catch (RuntimeException e) {
+					context.replace(targetVariable, e);
+					throw e;
+				}
+			}
+		}
+		return null;
     }
     
     @Override
@@ -124,6 +154,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
 		return visitBottomPattern(object);
+	}
+
+	@Override
+	public @Nullable Object visitImperativeDomain(@NonNull ImperativeDomain object) {
+		return visitCoreDomain(object);
 	}
 
     @Override

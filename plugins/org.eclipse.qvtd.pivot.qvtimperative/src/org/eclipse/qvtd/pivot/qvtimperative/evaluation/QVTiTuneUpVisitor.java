@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 E.D.Willink and others.
+ * Copyright (c) 2015 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -43,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
@@ -99,7 +100,10 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 		List<Assignment> variableAssignments = new ArrayList<Assignment>();
 		List<Assignment> propertyAssignments = new ArrayList<Assignment>();
 		for (Assignment assignment : object.getAssignment()) {
-			if (assignment instanceof VariableAssignment) {
+			if (assignment instanceof ConnectionAssignment) {
+				variableAssignments.add(assignment);
+			}
+			else if (assignment instanceof VariableAssignment) {
 				variableAssignments.add(assignment);
 			}
 			else if (assignment instanceof PropertyAssignment) {

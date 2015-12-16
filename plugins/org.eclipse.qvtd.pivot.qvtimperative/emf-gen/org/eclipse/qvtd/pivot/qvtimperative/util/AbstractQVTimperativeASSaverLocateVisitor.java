@@ -44,8 +44,18 @@ public abstract class AbstractQVTimperativeASSaverLocateVisitor
 	}	
 
 	@Override
+	public @Nullable Object visitConnectionAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment object) {
+		return visitAssignment(object);
+	}
+
+	@Override
 	public @Nullable Object visitImperativeBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern object) {
 		return visitBottomPattern(object);
+	}
+
+	@Override
+	public @Nullable Object visitImperativeDomain(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain object) {
+		return visitCoreDomain(object);
 	}
 
 	@Override

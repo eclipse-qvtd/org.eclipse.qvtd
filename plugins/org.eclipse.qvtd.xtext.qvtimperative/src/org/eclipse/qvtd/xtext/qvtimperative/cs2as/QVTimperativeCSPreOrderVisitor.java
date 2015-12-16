@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeFilter;
@@ -31,11 +32,13 @@ import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -103,6 +106,41 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		else {
 			return null;
 		}
+	}
+
+	protected @Nullable Property lookupProperty(@NonNull ElementCS csElement, @NonNull PathNameCS csPathName, @Nullable ScopeFilter scopeFilter) {
+		CS2AS.setElementType(csPathName, PivotPackage.Literals.PROPERTY, csElement, scopeFilter);
+		Element namedElement = csPathName.getReferredElement();
+		if (namedElement instanceof Property) {
+			return (Property) namedElement;
+		}
+		else {
+			return null;
+		}
+	}
+
+	private void refreshUsedProperties(@NonNull ImperativeDomainCS csImperativeDomain,
+			/*@NonNull*/ List<Property> asProperties, /*@NonNull*/ List<PathNameCS> csProperties) {
+		List<Property> properties = new ArrayList<Property>();
+		for (PathNameCS csPathName : csProperties) {
+			if (csPathName != null) {
+				Property asProperty = lookupProperty(csImperativeDomain, csPathName, null);
+				if (asProperty != null) {
+					properties.add(asProperty);
+				}
+			}
+		}
+		context.refreshList(asProperties, properties);
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitImperativeDomainCS(@NonNull ImperativeDomainCS csImperativeDomain) {
+		ImperativeArea asArea = PivotUtil.getPivot(ImperativeArea.class, csImperativeDomain);
+		if (asArea != null) {
+			refreshUsedProperties(csImperativeDomain, asArea.getCheckedProperties(), csImperativeDomain.getCheckedProperties());
+			refreshUsedProperties(csImperativeDomain, asArea.getEnforcedProperties(), csImperativeDomain.getEnforcedProperties());
+		}
+		return null;
 	}
 
 	@Override

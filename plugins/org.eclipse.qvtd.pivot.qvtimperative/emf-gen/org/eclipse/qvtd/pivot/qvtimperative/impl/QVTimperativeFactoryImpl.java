@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -70,7 +71,9 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTimperativePackage.CONNECTION_ASSIGNMENT: return createConnectionAssignment();
 			case QVTimperativePackage.IMPERATIVE_BOTTOM_PATTERN: return createImperativeBottomPattern();
+			case QVTimperativePackage.IMPERATIVE_DOMAIN: return createImperativeDomain();
 			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
 			case QVTimperativePackage.MAPPING: return createMapping();
 			case QVTimperativePackage.MAPPING_CALL: return createMappingCall();
@@ -89,9 +92,31 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public ConnectionAssignment createConnectionAssignment() {
+		ConnectionAssignmentImpl connectionAssignment = new ConnectionAssignmentImpl();
+		return connectionAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public ImperativeBottomPattern createImperativeBottomPattern() {
 		ImperativeBottomPatternImpl imperativeBottomPattern = new ImperativeBottomPatternImpl();
 		return imperativeBottomPattern;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ImperativeDomain createImperativeDomain() {
+		ImperativeDomainImpl imperativeDomain = new ImperativeDomainImpl();
+		return imperativeDomain;
 	}
 
 	/**

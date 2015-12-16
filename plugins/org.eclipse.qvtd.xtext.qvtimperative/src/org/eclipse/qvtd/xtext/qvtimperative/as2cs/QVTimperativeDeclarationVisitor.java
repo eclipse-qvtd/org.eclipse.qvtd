@@ -45,7 +45,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -142,7 +144,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		return csBottomPattern;
 	}
 	
-/*	@Override
+	@Override
 	public ElementCS visitConnectionAssignment(@NonNull ConnectionAssignment asConnectionAssignment) {
 		ImperativePredicateOrAssignmentCS csAssignment = context.refreshElement(ImperativePredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS, asConnectionAssignment);
 		csAssignment.setPivot(asConnectionAssignment);
@@ -155,7 +157,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		csAssignment.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asConnectionAssignment.getValue()));
 		assert !asConnectionAssignment.isIsDefault();
 		return csAssignment;
-	} */
+	}
 
 	@Override
 	public ElementCS visitGuardPattern(@NonNull GuardPattern asGuardPattern) {
@@ -177,7 +179,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		return visitBottomPattern(object);
 	}
 
-/*	@Override
+	@Override
 	public ElementCS visitImperativeDomain(@NonNull ImperativeDomain asImperativeDomain) {
 		ImperativeDomainCS csDomain = (ImperativeDomainCS) visitCoreDomain(asImperativeDomain);
 		Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asImperativeDomain);
@@ -185,7 +187,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), asImperativeDomain.getCheckedProperties());
 		refreshUsedProperties(asTransformation, csDomain.getEnforcedProperties(), asImperativeDomain.getEnforcedProperties());
 		return csDomain;
-	} */
+	}
 
 	@Override
 	public ElementCS visitImperativeModel(@NonNull ImperativeModel asModel) {
@@ -245,8 +247,8 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
 		Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asMapping);
 		assert asTransformation != null;
-//		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), asMapping.getCheckedProperties());
-//		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), asMapping.getCheckedProperties());
+		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), asMapping.getCheckedProperties());
+		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), asMapping.getCheckedProperties());
 		csMapping.setOwnedMiddle(csDomain);
 		MappingStatementCS csMappingStatement = context.visitDeclaration(MappingStatementCS.class, asMapping.getMappingStatement());
 		MappingSequenceCS csMappingSequence;

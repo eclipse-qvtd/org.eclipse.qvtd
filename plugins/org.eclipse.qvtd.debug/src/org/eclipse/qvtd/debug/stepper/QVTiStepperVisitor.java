@@ -24,6 +24,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -44,6 +46,10 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 		return PostStepper.INSTANCE;
 	}
 
+	public @Nullable IStepper visitConnectionAssignment(@NonNull ConnectionAssignment object) {
+		return visitAssignment(object);
+	}
+
 	@Override
 	public @Nullable IStepper visitBottomPattern(@NonNull BottomPattern object) {
 		return NonStepper.INSTANCE;
@@ -62,6 +68,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	@Override
 	public @Nullable IStepper visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
 		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitImperativeDomain(@NonNull ImperativeDomain object) {
+		return visitCoreDomain(object);
 	}
 
 	@Override

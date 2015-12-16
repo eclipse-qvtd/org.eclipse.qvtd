@@ -35,7 +35,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping()
  * @generated
  */
-public interface Mapping extends AbstractMapping {
+public interface Mapping extends AbstractMapping, ImperativeArea {
 	/**
 	 * Returns the value of the '<em><b>Mapping Statement</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

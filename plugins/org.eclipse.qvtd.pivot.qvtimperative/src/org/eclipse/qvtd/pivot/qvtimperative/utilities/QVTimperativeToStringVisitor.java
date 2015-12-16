@@ -17,7 +17,9 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -61,8 +63,21 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 	}
 
 	@Override
+	public String visitConnectionAssignment(@NonNull ConnectionAssignment connectionAssignment) {
+		appendName(connectionAssignment.getTargetVariable());
+		append(" += ");
+		safeVisit(connectionAssignment.getValue());
+		return null;
+	}
+
+	@Override
 	public @Nullable String visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
 		return visitBottomPattern(object);
+	}
+
+	@Override
+	public @Nullable String visitImperativeDomain(@NonNull ImperativeDomain object) {
+		return visitCoreDomain(object);
 	}
 
 	@Override

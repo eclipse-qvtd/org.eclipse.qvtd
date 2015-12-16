@@ -17,7 +17,9 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -37,8 +39,20 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	}
 
 	@Override
+	public @Nullable DomainUsage visitConnectionAssignment(@NonNull ConnectionAssignment object) {
+		DomainUsage valueUsage = visit(object.getValue());
+		DomainUsage variableUsage = visit(object.getTargetVariable());
+		return intersection(variableUsage, valueUsage);
+	}
+
+	@Override
 	public @Nullable DomainUsage visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
 		return visitBottomPattern(object);
+	}
+
+	@Override
+	public @Nullable DomainUsage visitImperativeDomain(@NonNull ImperativeDomain object) {
+		return visitCoreDomain(object);
 	}
 
 	@Override

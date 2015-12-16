@@ -28,7 +28,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBasePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -72,6 +74,15 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 	}
 
 	@Override
+	public Object visitConnectionAssignment(@NonNull ConnectionAssignment asConnectionAssignment) {
+		context.appendName(asConnectionAssignment.getTargetVariable());
+		context.append(" += ");
+		safeVisit(asConnectionAssignment.getValue());
+		context.append(";\n");
+		return null;
+	}
+
+	@Override
 	public Object visitGuardPattern(@NonNull GuardPattern pGuardPattern) {
 		for (Variable pVariable : pGuardPattern.getVariable()) {
 			safeVisit(pVariable);
@@ -90,6 +101,11 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 	@Override
 	public Object visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
 		return visitBottomPattern(object);
+	}
+
+	@Override
+	public @Nullable Object visitImperativeDomain(@NonNull ImperativeDomain object) {
+		return visitCoreDomain(object);
 	}
 
 	@Override
