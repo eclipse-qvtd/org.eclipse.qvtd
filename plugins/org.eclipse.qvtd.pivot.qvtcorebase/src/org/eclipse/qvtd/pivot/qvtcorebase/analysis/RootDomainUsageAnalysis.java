@@ -25,10 +25,13 @@ import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.complete.CompleteModelInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -66,7 +69,9 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 					if (residue == 0) {
 						return RootDomainUsageAnalysis.this.getTypedModel(i);
 					}
-					throw new IllegalStateException("Amiguous TypedModel: " + this);
+					System.err.println("Ambiguous TypedModel: " + this);
+//					throw new IllegalStateException("Ambiguous TypedModel: " + this);
+					return RootDomainUsageAnalysis.this.getTypedModel(i);
 				}
 			}
 			return null;
@@ -151,7 +156,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 	
 		@Override
 		public String toString() {
-			return toString("Constant ");
+			return toString("«constant»");
 		}
 	
 		public @NonNull DomainUsageConstant union(@NonNull DomainUsageConstant usage) {
@@ -193,7 +198,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 
 		@Override
 		public String toString() {
-			return toString("Variable ");
+			return toString("«variable»");
 		}
 	}
 
@@ -278,14 +283,22 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 	 * The nested analyses for declared operations.
 	 */
 	protected final @NonNull Map<Operation, DomainUsageAnalysis.Internal> operation2analysis = new HashMap<Operation, DomainUsageAnalysis.Internal>();
-	
+
+	@SuppressWarnings("null")
+	private final @NonNull TypedModel primitiveTypeModel = QVTbaseFactory.eINSTANCE.createTypedModel();
+
+	private /*@LazyNonNull*/ OperationId oclElementOclContainerId;
+	private /*@LazyNonNull*/ OperationId oclElementOclContentsId;
+	private /*@LazyNonNull*/ Property oclElementOclContainerProperty;
+	private /*@LazyNonNull*/ Property oclElementOclContentsProperty;
+
 	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
 		super(environmentFactory);
-		TypedModel primitiveTypeModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 		primitiveTypeModel.setName("$primitive$");
 		add(primitiveTypeModel);
 		validUsages.put(NONE_USAGE_BIT_MASK, getConstantUsage(NONE_USAGE_BIT_MASK));
 		validUsages.put(PRIMITIVE_USAGE_BIT_MASK, getConstantUsage(PRIMITIVE_USAGE_BIT_MASK));
+		setUsage(primitiveTypeModel, getPrimitiveUsage());
 	}
 
 	protected int add(@NonNull TypedModel typedModel) {
@@ -306,7 +319,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 		return analysis;
 	}
 
-	
 	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation) {
 		int checkableMask = 0;
 		int enforceableMask = 0;
@@ -452,6 +464,56 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 		return constantUsages.get(NONE_USAGE_BIT_MASK);
 	}
 
+	public @NonNull OperationId getOclContainerId() {
+		OperationId oclElementOclContainerId2 = oclElementOclContainerId;
+		if (oclElementOclContainerId2 == null) {
+			StandardLibrary standardLibrary = context.getStandardLibrary();
+			org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
+			Operation operation = NameUtil.getNameable(oclElementType.getOwnedOperations(), "oclContainer");
+			oclElementOclContainerId = oclElementOclContainerId2 = operation.getOperationId();
+		}
+		return oclElementOclContainerId2;
+	}
+
+	public @NonNull Property getOclContainerProperty() {
+		Property oclElementOclContainerProperty2 = oclElementOclContainerProperty;
+		if (oclElementOclContainerProperty2 == null) {
+			StandardLibrary standardLibrary = context.getStandardLibrary();
+			org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
+			oclElementOclContainerProperty2 = NameUtil.getNameable(oclElementType.getOwnedProperties(), "oclContainer");
+			assert oclElementOclContainerProperty2 != null;
+			oclElementOclContainerProperty = oclElementOclContainerProperty2;
+		}
+		return oclElementOclContainerProperty2;
+	}
+
+	public @NonNull OperationId getOclContentsId() {
+		OperationId oclElementOclContentsId2 = oclElementOclContentsId;
+		if (oclElementOclContentsId2 == null) {
+			StandardLibrary standardLibrary = context.getStandardLibrary();
+			org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
+			Operation operation = NameUtil.getNameable(oclElementType.getOwnedOperations(), "oclContents");
+			oclElementOclContentsId = oclElementOclContentsId2 = operation.getOperationId();
+		}
+		return oclElementOclContentsId2;
+	}
+
+	public @NonNull Property getOclContentsProperty() {
+		Property oclElementOclContentsProperty2 = oclElementOclContentsProperty;
+		if (oclElementOclContentsProperty2 == null) {
+			StandardLibrary standardLibrary = context.getStandardLibrary();
+			org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
+			oclElementOclContentsProperty2 = NameUtil.getNameable(oclElementType.getOwnedProperties(), "oclContents");
+			assert oclElementOclContentsProperty2 != null;
+			oclElementOclContentsProperty = oclElementOclContentsProperty2;
+		}
+		return oclElementOclContentsProperty2;
+	}
+	
+	public @NonNull TypedModel getPrimitiveTypeModel() {
+		return primitiveTypeModel;
+	}
+
 	@SuppressWarnings("null")
 	public @NonNull DomainUsage getPrimitiveUsage() {
 		return constantUsages.get(PRIMITIVE_USAGE_BIT_MASK);
@@ -467,7 +529,38 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 		return bit2typedModel.get(i);
 	}
 
+/*	@Override
+	public @Nullable DomainUsage getUsage(@Nullable EObject element) {
+		DomainUsage domainUsage = super.getUsage(element);
+		if ((domainUsage == null) && (element instanceof Property)) {
+			domainUsage = property2referredTypeUsage.get(element);
+		}
+		return domainUsage;
+	} */
+
+	/**
+	 * Return a corresponding non-null usage if bitMask identifies a single domain.
+	 */
 	public @Nullable DomainUsageConstant getValidUsage(int bitMask) {
 		return validUsages.get(bitMask);
+	}
+
+	/**
+	 * Return either a constant usage if usage is for a single domain,
+	 * else re-use a variable usgae else or create
+	 * a variable usage for the multiple domains.
+	 */
+	public @NonNull DomainUsage getValidOrVariableUsage(@NonNull DomainUsage usage) {
+		int bitMask = ((DomainUsage.Internal)usage).getMask();
+		DomainUsage validUsage = getValidUsage(bitMask);
+		if (validUsage != null) {
+			return validUsage;
+		}
+		else if (!usage.isConstant()) {
+			return usage;
+		}
+		else {
+			return createVariableUsage(bitMask);
+		}
 	}
 }
