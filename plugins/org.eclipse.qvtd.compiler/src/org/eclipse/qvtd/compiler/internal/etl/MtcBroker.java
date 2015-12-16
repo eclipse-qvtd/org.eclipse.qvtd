@@ -539,7 +539,9 @@ public class MtcBroker {
 				}
 			}
 		}
-		environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(cModel.getResource());
+		if (cModel != null) {
+			environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(cModel.getResource());
+		}
 		return uModel;
 	}
 	
@@ -574,7 +576,9 @@ public class MtcBroker {
 				}
 			}
 		}
-		environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(uModel.getResource());
+		if (uModel != null) {
+			environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(uModel.getResource());
+		}
 		return mModel;
 	}
 
@@ -586,8 +590,8 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException If there is a problem loading the models or
 	 * 	executing the ETL script.
 	 */
-	private PivotModel qvtmToQvtp(PivotModel mModel) throws QvtMtcExecutionException {
-		
+	private PivotModel qvtmToQvtp(@NonNull PivotModel mModel) throws QvtMtcExecutionException {
+
 		PivotModel pModel = null;
 		pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, false, true, false, true);
 		if (mModel != null && pModel != null  ) {

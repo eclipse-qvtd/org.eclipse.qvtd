@@ -43,6 +43,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 
 	private static class Factory extends AbstractRule.Factory
 	{
+		@Override
 		public @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation, @NonNull EObject eo) {
 			Rule rule = null;
 			if (eo instanceof Relation) {	

@@ -43,6 +43,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	
 	private static class Factory extends AbstractRule.Factory
 	{
+		@Override
 		public @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation, @NonNull EObject eo) {
 			Rule rule = null;
 			if (eo instanceof Relation) {	
@@ -125,6 +126,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	}
 
 	// One Mapping per domain
+	@Override
 	public void check() {
 		Relation r = ruleBindings.get(RELATIONS_r);
 		assert (r != null);
@@ -158,10 +160,12 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		}
 	}
 
+	@Override
 	public @NonNull RuleBindings.KeySet getRuleBindingsKeys() {
 		return RULE_BINDINGS;
 	}
 	
+	@Override
 	public void instantiateOutput() {
 		Relation r = ruleBindings.get(RELATIONS_r);
 		assert (r != null);
@@ -204,6 +208,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	}
 
 	
+	@Override
 	public void setAttributes() {
 		for (SubRecord subRecord : subRecords) {
 			BottomPattern mb = subRecord.mb;

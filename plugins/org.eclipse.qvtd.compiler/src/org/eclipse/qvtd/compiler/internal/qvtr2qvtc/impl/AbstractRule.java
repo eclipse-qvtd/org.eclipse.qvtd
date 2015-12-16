@@ -25,12 +25,15 @@ public abstract class AbstractRule implements Rule
 {
 	protected static abstract class Factory implements Rule.Factory
 	{
+		@Override
 		public abstract @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,
 				@NonNull EObject eo);
 		
+		@Override
 		public abstract @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,
 				@NonNull List<EObject> eos);
 		
+		@Override
 		public @NonNull List<Rule> getRules(@NonNull QvtrToQvtcTransformation transformation, @NonNull Resource inputModel) {
 			List<Rule> rules = new ArrayList<Rule>();
 			TreeIterator<EObject> it = inputModel.getAllContents();
@@ -79,11 +82,13 @@ public abstract class AbstractRule implements Rule
 		this.transformation = transformation;
 	}
 
+	@Override
 	public void check() {
 		throw new UnsupportedOperationException();
 	}
 	
 	// Some rules don't need to instantiate anything
+	@Override
 	public void instantiateOutput() { }
 
 	@Override

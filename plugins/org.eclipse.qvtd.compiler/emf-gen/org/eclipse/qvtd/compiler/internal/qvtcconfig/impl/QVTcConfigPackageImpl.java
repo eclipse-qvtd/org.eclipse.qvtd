@@ -144,6 +144,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConfiguration() {
 		return configurationEClass;
 	}
@@ -153,6 +154,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConfiguration_InputDirection() {
 		return (EReference)configurationEClass.getEStructuralFeatures().get(0);
 	}
@@ -162,6 +164,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConfiguration_OutputDirection() {
 		return (EReference)configurationEClass.getEStructuralFeatures().get(1);
 	}
@@ -171,6 +174,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getConfiguration_Mode() {
 		return (EAttribute)configurationEClass.getEStructuralFeatures().get(2);
 	}
@@ -180,6 +184,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConfiguration_Transformation() {
 		return (EReference)configurationEClass.getEStructuralFeatures().get(3);
 	}
@@ -189,6 +194,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConfiguration_Middle() {
 		return (EReference)configurationEClass.getEStructuralFeatures().get(4);
 	}
@@ -198,6 +204,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDirection() {
 		return directionEClass;
 	}
@@ -207,6 +214,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDirection_Imports() {
 		return (EReference)directionEClass.getEStructuralFeatures().get(0);
 	}
@@ -216,6 +224,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNamedElement() {
 		return namedElementEClass;
 	}
@@ -225,6 +234,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNamedElement_Name() {
 		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -234,6 +244,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImport() {
 		return importEClass;
 	}
@@ -243,6 +254,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImport_MetamodelFile() {
 		return (EAttribute)importEClass.getEStructuralFeatures().get(0);
 	}
@@ -252,6 +264,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImport_MetamodelUri() {
 		return (EAttribute)importEClass.getEStructuralFeatures().get(1);
 	}
@@ -261,6 +274,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImport_Package() {
 		return (EAttribute)importEClass.getEStructuralFeatures().get(2);
 	}
@@ -270,6 +284,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTransformation() {
 		return transformationEClass;
 	}
@@ -279,6 +294,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransformation_Direction() {
 		return (EReference)transformationEClass.getEStructuralFeatures().get(0);
 	}
@@ -288,6 +304,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransformation_Import() {
 		return (EReference)transformationEClass.getEStructuralFeatures().get(1);
 	}
@@ -297,6 +314,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getMode() {
 		return modeEEnum;
 	}
@@ -306,6 +324,7 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTcConfigFactory getQVTcConfigFactory() {
 		return (QVTcConfigFactory)getEFactoryInstance();
 	}

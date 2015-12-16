@@ -88,6 +88,7 @@ public class TransformationImpl extends NamedElementImpl implements Transformati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Direction> getDirection() {
 		if (direction == null) {
 			direction = new EObjectContainmentEList<Direction>(Direction.class, this, QVTcConfigPackage.TRANSFORMATION__DIRECTION);
@@ -100,6 +101,7 @@ public class TransformationImpl extends NamedElementImpl implements Transformati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Import> getImport() {
 		if (import_ == null) {
 			import_ = new EObjectContainmentEList<Import>(Import.class, this, QVTcConfigPackage.TRANSFORMATION__IMPORT);

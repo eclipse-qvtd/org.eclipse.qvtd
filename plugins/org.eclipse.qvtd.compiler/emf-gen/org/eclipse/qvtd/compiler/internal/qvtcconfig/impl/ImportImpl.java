@@ -117,6 +117,7 @@ public class ImportImpl extends NamedElementImpl implements Import {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMetamodelFile() {
 		return metamodelFile;
 	}
@@ -126,6 +127,7 @@ public class ImportImpl extends NamedElementImpl implements Import {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMetamodelFile(String newMetamodelFile) {
 		String oldMetamodelFile = metamodelFile;
 		metamodelFile = newMetamodelFile;
@@ -138,6 +140,7 @@ public class ImportImpl extends NamedElementImpl implements Import {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMetamodelUri() {
 		return metamodelUri;
 	}
@@ -147,6 +150,7 @@ public class ImportImpl extends NamedElementImpl implements Import {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMetamodelUri(String newMetamodelUri) {
 		String oldMetamodelUri = metamodelUri;
 		metamodelUri = newMetamodelUri;
@@ -159,6 +163,7 @@ public class ImportImpl extends NamedElementImpl implements Import {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getPackage() {
 		if (package_ == null) {
 			package_ = new EDataTypeUniqueEList<String>(String.class, this, QVTcConfigPackage.IMPORT__PACKAGE);

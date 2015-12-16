@@ -72,6 +72,7 @@ public class DirectionImpl extends NamedElementImpl implements Direction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Import> getImports() {
 		if (imports == null) {
 			imports = new EObjectResolvingEList<Import>(Import.class, this, QVTcConfigPackage.DIRECTION__IMPORTS);

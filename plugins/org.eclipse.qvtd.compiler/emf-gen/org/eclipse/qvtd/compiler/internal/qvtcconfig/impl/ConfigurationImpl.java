@@ -135,6 +135,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Direction getInputDirection() {
 		if (inputDirection != null && inputDirection.eIsProxy()) {
 			InternalEObject oldInputDirection = (InternalEObject)inputDirection;
@@ -161,6 +162,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInputDirection(Direction newInputDirection) {
 		Direction oldInputDirection = inputDirection;
 		inputDirection = newInputDirection;
@@ -173,6 +175,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Direction> getOutputDirection() {
 		if (outputDirection == null) {
 			outputDirection = new EObjectResolvingEList<Direction>(Direction.class, this, QVTcConfigPackage.CONFIGURATION__OUTPUT_DIRECTION);
@@ -185,6 +188,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Mode getMode() {
 		return mode;
 	}
@@ -194,6 +198,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMode(Mode newMode) {
 		Mode oldMode = mode;
 		mode = newMode == null ? MODE_EDEFAULT : newMode;
@@ -206,6 +211,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Transformation getTransformation() {
 		return transformation;
 	}
@@ -230,6 +236,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransformation(Transformation newTransformation) {
 		if (newTransformation != transformation) {
 			NotificationChain msgs = null;
@@ -249,6 +256,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Direction getMiddle() {
 		if (middle != null && middle.eIsProxy()) {
 			InternalEObject oldMiddle = (InternalEObject)middle;
@@ -275,6 +283,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMiddle(Direction newMiddle) {
 		Direction oldMiddle = middle;
 		middle = newMiddle;

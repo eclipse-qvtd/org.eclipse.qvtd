@@ -111,6 +111,7 @@ public class QVTcConfigFactoryImpl extends EFactoryImpl implements QVTcConfigFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Configuration createConfiguration() {
 		ConfigurationImpl configuration = new ConfigurationImpl();
 		return configuration;
@@ -121,6 +122,7 @@ public class QVTcConfigFactoryImpl extends EFactoryImpl implements QVTcConfigFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Direction createDirection() {
 		DirectionImpl direction = new DirectionImpl();
 		return direction;
@@ -131,6 +133,7 @@ public class QVTcConfigFactoryImpl extends EFactoryImpl implements QVTcConfigFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Import createImport() {
 		ImportImpl import_ = new ImportImpl();
 		return import_;
@@ -141,6 +144,7 @@ public class QVTcConfigFactoryImpl extends EFactoryImpl implements QVTcConfigFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Transformation createTransformation() {
 		TransformationImpl transformation = new TransformationImpl();
 		return transformation;
@@ -171,6 +175,7 @@ public class QVTcConfigFactoryImpl extends EFactoryImpl implements QVTcConfigFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTcConfigPackage getQVTcConfigPackage() {
 		return (QVTcConfigPackage)getEPackage();
 	}

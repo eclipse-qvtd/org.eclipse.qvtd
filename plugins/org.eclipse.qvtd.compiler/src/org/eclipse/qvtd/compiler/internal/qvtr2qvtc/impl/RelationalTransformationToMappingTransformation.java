@@ -27,6 +27,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 {
 	private static class Factory extends AbstractRule.Factory
 	{
+		@Override
 		public @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation, @NonNull EObject eo) {
 			Rule rule = null;
 			if (eo instanceof RelationalTransformation) {
@@ -114,6 +115,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		return mt;
 	}
 
+	@Override
 	public @NonNull RuleBindings.KeySet getRuleBindingsKeys() {
 		return RULE_BINDINGS;
 	}

@@ -90,6 +90,7 @@ public class PivotModel extends EmfModel {
 		}
 	}
 	
+	@Override
 	protected EClass classForName(String name, Registry registry) {	
 		boolean absolute = name.indexOf("::") > -1;
 		EClass epClass = null;
