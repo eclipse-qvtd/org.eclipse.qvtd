@@ -13,9 +13,12 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeTemplateParameterSubstitutionVisitor;
 
 public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 {
@@ -31,6 +34,13 @@ public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 
 	public @NonNull QVTiModelManager createModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		return new QVTiModelManager(transformationAnalysis);
+	}
+
+	@Override
+	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
+			@Nullable Type selfType, @Nullable Type selfTypeValue) {
+		// TODO Auto-generated method stub
+		return new QVTimperativeTemplateParameterSubstitutionVisitor(this, selfType, selfTypeValue);
 	}
 
 	public @NonNull QVTiTransformationAnalysis createTransformationAnalysis() {
