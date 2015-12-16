@@ -23,6 +23,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -45,6 +47,16 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 	{
 		public QVTiAnalysisVisitor(@NonNull QVTiFieldingAnalyzer context) {
 			super(context);
+		}
+
+		@Override
+		public @Nullable Set<CGVariable> visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public @Nullable Set<CGVariable> visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
+			return visitCGGuardVariable(object);
 		}
 
 		@Override
@@ -152,6 +164,16 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 	{
 		public QVTiRewriteVisitor(@NonNull QVTiAnalyzer context, @NonNull Set<CGVariable> caughtVariables) {
 			super(context, caughtVariables);
+		}
+
+		@Override
+		public Boolean visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
+			return visitCGValuedElement(object);
+		}
+
+		@Override
+		public Boolean visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
+			return visitCGGuardVariable(object);
 		}
 
 		@Override

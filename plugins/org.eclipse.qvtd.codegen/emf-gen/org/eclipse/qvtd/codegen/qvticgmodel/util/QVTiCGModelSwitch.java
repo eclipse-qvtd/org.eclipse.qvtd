@@ -87,6 +87,31 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT: {
+				CGConnectionAssignment cgConnectionAssignment = (CGConnectionAssignment)theEObject;
+				T result = caseCGConnectionAssignment(cgConnectionAssignment);
+				if (result == null) result = caseCGValuedElement(cgConnectionAssignment);
+				if (result == null) result = caseCGTypedElement(cgConnectionAssignment);
+				if (result == null) result = caseCGNamedElement(cgConnectionAssignment);
+				if (result == null) result = caseCGElement(cgConnectionAssignment);
+				if (result == null) result = caseNameable(cgConnectionAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTiCGModelPackage.CG_CONNECTION_VARIABLE: {
+				CGConnectionVariable cgConnectionVariable = (CGConnectionVariable)theEObject;
+				T result = caseCGConnectionVariable(cgConnectionVariable);
+				if (result == null) result = caseCGGuardVariable(cgConnectionVariable);
+				if (result == null) result = caseCGParameter(cgConnectionVariable);
+				if (result == null) result = caseCGVariable(cgConnectionVariable);
+				if (result == null) result = caseCGValuedElement(cgConnectionVariable);
+				if (result == null) result = caseCGTypedElement(cgConnectionVariable);
+				if (result == null) result = caseCGNamedElement(cgConnectionVariable);
+				if (result == null) result = caseCGElement(cgConnectionVariable);
+				if (result == null) result = caseNameable(cgConnectionVariable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTiCGModelPackage.CG_ECORE_PROPERTY_ASSIGNMENT: {
 				CGEcorePropertyAssignment cgEcorePropertyAssignment = (CGEcorePropertyAssignment)theEObject;
 				T result = caseCGEcorePropertyAssignment(cgEcorePropertyAssignment);
@@ -324,6 +349,36 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Connection Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Connection Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGConnectionAssignment(CGConnectionAssignment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Connection Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Connection Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGConnectionVariable(CGConnectionVariable object) {
+		return null;
 	}
 
 	/**

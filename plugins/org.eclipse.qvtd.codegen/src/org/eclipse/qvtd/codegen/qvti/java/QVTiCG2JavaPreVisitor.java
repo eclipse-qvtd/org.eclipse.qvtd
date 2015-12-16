@@ -26,6 +26,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -46,6 +48,16 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 {
 	public QVTiCG2JavaPreVisitor(@NonNull QVTiGlobalContext javaContext) {
 		super(javaContext);
+	}
+
+	@Override
+	public Object visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
+		return visitCGValuedElement(object);
+	}
+
+	@Override
+	public Object visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
+		return visitCGGuardVariable(object);
 	}
 
 	@Override

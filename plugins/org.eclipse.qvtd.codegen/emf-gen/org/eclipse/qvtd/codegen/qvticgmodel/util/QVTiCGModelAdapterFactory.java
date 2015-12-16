@@ -88,6 +88,14 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	protected QVTiCGModelSwitch<Adapter> modelSwitch =
 		new QVTiCGModelSwitch<Adapter>() {
 			@Override
+			public Adapter caseCGConnectionAssignment(CGConnectionAssignment object) {
+				return createCGConnectionAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseCGConnectionVariable(CGConnectionVariable object) {
+				return createCGConnectionVariableAdapter();
+			}
+			@Override
 			public Adapter caseCGEcorePropertyAssignment(CGEcorePropertyAssignment object) {
 				return createCGEcorePropertyAssignmentAdapter();
 			}
@@ -192,6 +200,10 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGVariableAdapter();
 			}
 			@Override
+			public Adapter caseCGParameter(CGParameter object) {
+				return createCGParameterAdapter();
+			}
+			@Override
 			public Adapter caseCGCallable(CGCallable object) {
 				return createCGCallableAdapter();
 			}
@@ -206,10 +218,6 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGOperationCallExp(CGOperationCallExp object) {
 				return createCGOperationCallExpAdapter();
-			}
-			@Override
-			public Adapter caseCGParameter(CGParameter object) {
-				return createCGParameterAdapter();
 			}
 			@Override
 			public Adapter caseCGIterationCallExp(CGIterationCallExp object) {
@@ -246,6 +254,34 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment <em>CG Connection Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment
+	 * @generated
+	 */
+	public Adapter createCGConnectionAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable <em>CG Connection Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable
+	 * @generated
+	 */
+	public Adapter createCGConnectionVariableAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment <em>CG Ecore Property Assignment</em>}'.

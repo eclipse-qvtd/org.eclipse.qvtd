@@ -19,6 +19,12 @@
   <foreignModel>qvticgmodel.ecore</foreignModel>
   <genPackages prefix="QVTiCGModel" basePackage="org.eclipse.qvtd.codegen" disposableProviderFactory="true"
       contentTypeIdentifier="org.eclipse.qvtd.codegen.qvticgmodel" ecorePackage="qvticgmodel.ecore#/">
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGConnectionAssignment">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGConnectionAssignment/mappingExp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGConnectionAssignment/initValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGConnectionAssignment/connectionVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGConnectionVariable"/>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGEcorePropertyAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGEcorePropertyAssignment/eStructuralFeature"/>
     </genClasses>
@@ -54,6 +60,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingExp/realizedVariables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingExp/body"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingExp/variableAssignments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingExp/connectionAssignments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingExp/ownedAccumulators"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMappingLoop"/>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMiddlePropertyAssignment"/>

@@ -12,6 +12,7 @@ package org.eclipse.qvtd.codegen.qvticgmodel.impl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -25,11 +26,16 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.qvtd.codegen.qvti.cse.MappingExpPlaces;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
@@ -52,6 +58,8 @@ import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getRealizedVariables <em>Realized Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getVariableAssignments <em>Variable Assignments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getConnectionAssignments <em>Connection Assignments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getOwnedAccumulators <em>Owned Accumulators</em>}</li>
  * </ul>
  *
  * @generated
@@ -106,6 +114,26 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * @ordered
 	 */
 	protected EList<CGFinalVariable> variableAssignments;
+
+	/**
+	 * The cached value of the '{@link #getConnectionAssignments() <em>Connection Assignments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnectionAssignments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGConnectionAssignment> connectionAssignments;
+
+	/**
+	 * The cached value of the '{@link #getOwnedAccumulators() <em>Owned Accumulators</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedAccumulators()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGAccumulator> ownedAccumulators;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -252,6 +280,32 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public List<CGConnectionAssignment> getConnectionAssignments() {
+		if (connectionAssignments == null) {
+			connectionAssignments = new EObjectContainmentWithInverseEList<CGConnectionAssignment>(CGConnectionAssignment.class, this, QVTiCGModelPackage.CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__MAPPING_EXP);
+		}
+		return connectionAssignments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<CGAccumulator> getOwnedAccumulators() {
+		if (ownedAccumulators == null) {
+			ownedAccumulators = new EObjectContainmentEList<CGAccumulator>(CGAccumulator.class, this, QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS);
+		}
+		return ownedAccumulators;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -260,6 +314,8 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAssignments()).basicAdd(otherEnd, msgs);
 			case QVTiCGModelPackage.CG_MAPPING_EXP__PREDICATES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPredicates()).basicAdd(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConnectionAssignments()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -282,6 +338,10 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				return basicSetBody(null, msgs);
 			case QVTiCGModelPackage.CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS:
 				return ((InternalEList<?>)getVariableAssignments()).basicRemove(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS:
+				return ((InternalEList<?>)getConnectionAssignments()).basicRemove(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
+				return ((InternalEList<?>)getOwnedAccumulators()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -306,6 +366,10 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				return getBody();
 			case QVTiCGModelPackage.CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS:
 				return getVariableAssignments();
+			case QVTiCGModelPackage.CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS:
+				return getConnectionAssignments();
+			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
+				return getOwnedAccumulators();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -341,6 +405,14 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				getVariableAssignments().clear();
 				getVariableAssignments().addAll((Collection<? extends CGFinalVariable>)newValue);
 				return;
+			case QVTiCGModelPackage.CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS:
+				getConnectionAssignments().clear();
+				getConnectionAssignments().addAll((Collection<? extends CGConnectionAssignment>)newValue);
+				return;
+			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
+				getOwnedAccumulators().clear();
+				getOwnedAccumulators().addAll((Collection<? extends CGAccumulator>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -371,6 +443,12 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 			case QVTiCGModelPackage.CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS:
 				getVariableAssignments().clear();
 				return;
+			case QVTiCGModelPackage.CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS:
+				getConnectionAssignments().clear();
+				return;
+			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
+				getOwnedAccumulators().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -395,6 +473,10 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				return body != null;
 			case QVTiCGModelPackage.CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS:
 				return variableAssignments != null && !variableAssignments.isEmpty();
+			case QVTiCGModelPackage.CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS:
+				return connectionAssignments != null && !connectionAssignments.isEmpty();
+			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
+				return ownedAccumulators != null && !ownedAccumulators.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -432,6 +514,15 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * @generated
 	 */
 	@Override
+	public @Nullable AbstractPlace getPlace(@NonNull Map<CGElement,AbstractPlace> element2place) {
+		return MappingExpPlaces.createMappingExpPlaces(element2place, this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isBoxed() {
 		return true;
 	}
@@ -462,5 +553,4 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	public boolean isUnboxed() {
 		return true;
 	}
-
 } //CGMappingExpImpl

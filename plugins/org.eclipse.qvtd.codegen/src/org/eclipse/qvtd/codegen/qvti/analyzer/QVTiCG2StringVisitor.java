@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
@@ -22,6 +23,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -44,7 +47,27 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 {	
 	private static final class MyFactory extends AbstractFactory
 	{
+		private static final class MyFactory2 extends AbstractFactory
+		{
+			private MyFactory2() {
+				CG2StringVisitor.addFactory(this);
+			}
+
+			@Override
+			public @NonNull CG2StringVisitor createToStringVisitor() {
+				return new QVTiCG2StringVisitor();
+			}
+
+			@Override
+			public @NonNull EPackage getEPackage() {
+				CGModelPackage eInstance = CGModelPackage.eINSTANCE;
+				assert eInstance != null;
+				return eInstance;
+			}
+		}
+		
 		private MyFactory() {
+			new MyFactory2();
 			CG2StringVisitor.addFactory(this);
 		}
 
@@ -64,6 +87,19 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	public static @NonNull QVTiCG2StringVisitor.Factory FACTORY = new MyFactory();
 
 	public QVTiCG2StringVisitor() {}
+
+	@Override
+	public @Nullable String visitCGConnectionAssignment(@NonNull CGConnectionAssignment cgConnectionAssignment) {
+		appendName(cgConnectionAssignment.getConnectionVariable());
+		append(" := ");
+		safeVisit(cgConnectionAssignment.getInitValue());
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
+		return visitCGGuardVariable(object);
+	}
 
 	@Override
 	@Nullable

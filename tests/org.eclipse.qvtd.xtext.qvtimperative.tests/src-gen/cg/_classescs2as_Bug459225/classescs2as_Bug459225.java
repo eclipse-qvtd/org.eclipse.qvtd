@@ -88,9 +88,7 @@ public class classescs2as_Bug459225 extends AbstractTransformer
     }
     
     public boolean run() throws ReflectiveOperationException {
-        boolean returnStatus = MAP___root__();
-        invocationManager.flush();
-        return returnStatus;
+        return MAP___root__() && invocationManager.flush();
     }
     
     /**
@@ -212,8 +210,8 @@ public class classescs2as_Bug459225 extends AbstractTransformer
     protected boolean MAP___root__() throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final @NonNull /*@NonInvalid*/ Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
         // mapping statements
+        final @NonNull /*@NonInvalid*/ Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
         final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
         for (PackageCS packageCS_1 : ValueUtil.typedIterable(PackageCS.class, allInstances)) {
             if (packageCS_1 != null) {

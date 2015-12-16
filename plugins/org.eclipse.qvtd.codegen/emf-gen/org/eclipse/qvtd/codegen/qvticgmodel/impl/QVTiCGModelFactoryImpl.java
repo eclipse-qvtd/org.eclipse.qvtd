@@ -82,6 +82,8 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT: return createCGConnectionAssignment();
+			case QVTiCGModelPackage.CG_CONNECTION_VARIABLE: return createCGConnectionVariable();
 			case QVTiCGModelPackage.CG_ECORE_PROPERTY_ASSIGNMENT: return createCGEcorePropertyAssignment();
 			case QVTiCGModelPackage.CG_ECORE_REALIZED_VARIABLE: return createCGEcoreRealizedVariable();
 			case QVTiCGModelPackage.CG_FUNCTION: return createCGFunction();
@@ -105,6 +107,28 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CGConnectionAssignment createCGConnectionAssignment() {
+		CGConnectionAssignmentImpl cgConnectionAssignment = new CGConnectionAssignmentImpl();
+		return cgConnectionAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CGConnectionVariable createCGConnectionVariable() {
+		CGConnectionVariableImpl cgConnectionVariable = new CGConnectionVariableImpl();
+		return cgConnectionVariable;
 	}
 
 	/**
@@ -223,7 +247,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * @generated
 	 */
 	@Override
-	public CGMappingLoop createCGMappingLoop() {
+	public @NonNull CGMappingLoop createCGMappingLoop() {
 		CGMappingLoopImpl cgMappingLoop = new CGMappingLoopImpl();
 		return cgMappingLoop;
 	}
@@ -289,7 +313,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * @generated
 	 */
 	@Override
-	public CGSequence createCGSequence() {
+	public @NonNull CGSequence createCGSequence() {
 		CGSequenceImpl cgSequence = new CGSequenceImpl();
 		return cgSequence;
 	}
@@ -322,7 +346,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * @generated
 	 */
 	@Override
-	public CGVariablePredicate createCGVariablePredicate() {
+	public @NonNull CGVariablePredicate createCGVariablePredicate() {
 		CGVariablePredicateImpl cgVariablePredicate = new CGVariablePredicateImpl();
 		return cgVariablePredicate;
 	}

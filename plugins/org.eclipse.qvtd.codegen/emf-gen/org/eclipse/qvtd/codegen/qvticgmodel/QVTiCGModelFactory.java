@@ -32,6 +32,24 @@ public interface QVTiCGModelFactory extends EFactory {
 	@NonNull QVTiCGModelFactory eINSTANCE = org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>CG Connection Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Connection Assignment</em>'.
+	 * @generated
+	 */
+	CGConnectionAssignment createCGConnectionAssignment();
+
+	/**
+	 * Returns a new object of class '<em>CG Connection Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Connection Variable</em>'.
+	 * @generated
+	 */
+	CGConnectionVariable createCGConnectionVariable();
+
+	/**
 	 * Returns a new object of class '<em>CG Ecore Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -128,7 +146,7 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Variable Predicate</em>'.
 	 * @generated
 	 */
-	CGVariablePredicate createCGVariablePredicate();
+	@NonNull CGVariablePredicate createCGVariablePredicate();
 
 	/**
 	 * Returns a new object of class '<em>CG Mapping Call</em>'.
@@ -164,7 +182,7 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Mapping Loop</em>'.
 	 * @generated
 	 */
-	CGMappingLoop createCGMappingLoop();
+	@NonNull CGMappingLoop createCGMappingLoop();
 
 	/**
 	 * Returns a new object of class '<em>CG Middle Property Assignment</em>'.
@@ -209,7 +227,7 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Sequence</em>'.
 	 * @generated
 	 */
-	CGSequence createCGSequence();
+	@NonNull CGSequence createCGSequence();
 
 	/**
 	 * Returns the package supported by this factory.

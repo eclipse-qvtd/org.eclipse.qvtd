@@ -138,9 +138,7 @@ public class classescs2as extends AbstractTransformer
     }
     
     public boolean run() throws ReflectiveOperationException {
-        boolean returnStatus = MAP___root__();
-        invocationManager.flush();
-        return returnStatus;
+        return MAP___root__() && invocationManager.flush();
     }
     
     /**
@@ -326,7 +324,7 @@ public class classescs2as extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ classes.Class symbol_3 = ClassCS2Class.getClass_();
         final /*@Thrown*/ boolean eq = symbol_3.equals(symbol_0);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -362,7 +360,7 @@ public class classescs2as extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Root root_0 = RootCS2Root.getRoot();
         final /*@Thrown*/ boolean eq = root_0.equals(root);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -437,7 +435,7 @@ public class classescs2as extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package symbol_3 = PackageCS2Package.getPackage();
         final /*@Thrown*/ boolean eq = symbol_3.equals(symbol_1);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -473,7 +471,7 @@ public class classescs2as extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package symbol_3 = PackageCS2Package.getPackage();
         final /*@Thrown*/ boolean eq = symbol_3.equals(symbol_2);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -601,6 +599,7 @@ public class classescs2as extends AbstractTransformer
     protected boolean MAP___root__() throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+        // mapping statements
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_1 = idResolver.getClass(CLSSid_Package, null);
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_ClassCS_1 = idResolver.getClass(CLSSid_ClassCS, null);
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
@@ -612,7 +611,6 @@ public class classescs2as extends AbstractTransformer
         final @NonNull /*@NonInvalid*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_1);
         final @NonNull /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
         final @NonNull /*@NonInvalid*/ SetValue allInstances_11 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1);
-        // mapping statements
         for (PackageCS packageCS_5 : ValueUtil.typedIterable(PackageCS.class, allInstances)) {
             if (packageCS_5 != null) {
                 final @NonNull /*@NonInvalid*/ PackageCS symbol_6 = (PackageCS)packageCS_5;

@@ -330,5 +330,4 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	public boolean isUnboxed() {
 		return true;
 	}
-
 } //CGGuardVariableImpl

@@ -121,9 +121,7 @@ public class Tree2TallTree extends AbstractTransformer
     }
     
     public boolean run() throws ReflectiveOperationException {
-        boolean returnStatus = MAP___root__();
-        invocationManager.flush();
-        return returnStatus;
+        return MAP___root__() && invocationManager.flush();
     }
     
     /**
@@ -156,9 +154,10 @@ public class Tree2TallTree extends AbstractTransformer
     protected boolean MAP___root__() throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+        final @NonNull /*@NonInvalid*/ StandardLibrary standardLibrary = idResolver.getStandardLibrary();
+        // mapping statements
         final @NonNull /*@NonInvalid*/ Class TYP_tree2talltree_c_c_Node2TallNode_0 = idResolver.getClass(CLSSid_Node2TallNode, null);
         final @NonNull /*@NonInvalid*/ Class TYP_tree_c_c_Node_1 = idResolver.getClass(CLSSid_Node, null);
-        final @NonNull /*@NonInvalid*/ StandardLibrary standardLibrary = idResolver.getStandardLibrary();
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_0 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Node, models[0/*tree*/], TYP_tree_c_c_Node_1);
         final @NonNull Class TYPE_sortedBy_0_0 = executor.getStaticTypeOf(objectsOfKind_0);
         final @NonNull LibraryIteration.LibraryIterationExtension IMPL_sortedBy_0_0 = (LibraryIteration.LibraryIterationExtension)TYPE_sortedBy_0_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
@@ -184,7 +183,6 @@ public class Tree2TallTree extends AbstractTransformer
         };
         final @NonNull  ExecutorSingleIterationManager MGR_sortedBy_0_0 = new ExecutorSingleIterationManager(executor, ORD_CLSSid_Node, BODY_sortedBy_0_0, objectsOfKind_0, ACC_sortedBy_0_0);
         final @NonNull /*@Thrown*/ OrderedSetValue sortedBy_0 = ClassUtil.nonNullState((OrderedSetValue)IMPL_sortedBy_0_0.evaluateIteration(MGR_sortedBy_0_0));
-        // mapping statements
         for (Node node_3 : ValueUtil.typedIterable(Node.class, sortedBy_0)) {
             if (node_3 != null) {
                 final @NonNull /*@NonInvalid*/ Node symbol_1 = (Node)node_3;
@@ -289,7 +287,7 @@ public class Tree2TallTree extends AbstractTransformer
         // predicates
         final @Nullable /*@Thrown*/ Node parent = node_0.getParent();
         final /*@Thrown*/ boolean ne = parent != null;
-        if (!ne) {
+        if (ne != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments

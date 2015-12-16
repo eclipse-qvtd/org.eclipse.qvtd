@@ -90,9 +90,7 @@ public class hsv2hls extends AbstractTransformer
     }
     
     public boolean run() throws ReflectiveOperationException {
-        boolean returnStatus = MAP___root__();
-        invocationManager.flush();
-        return returnStatus;
+        return MAP___root__() && invocationManager.flush();
     }
     
     protected @Nullable String hls2rgb(final @Nullable /*@NonInvalid*/ String color) {
@@ -126,8 +124,8 @@ public class hsv2hls extends AbstractTransformer
     protected boolean MAP___root__() throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final @NonNull /*@NonInvalid*/ Class TYP_HSVTree_c_c_HSVNode_0 = idResolver.getClass(CLSSid_HSVNode, null);
         // mapping statements
+        final @NonNull /*@NonInvalid*/ Class TYP_HSVTree_c_c_HSVNode_0 = idResolver.getClass(CLSSid_HSVNode, null);
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_HSVNode, models[0/*hsv*/], TYP_HSVTree_c_c_HSVNode_0);
         for (HSVNode hsvRoot_1 : ValueUtil.typedIterable(HSVNode.class, objectsOfKind)) {
             if (hsvRoot_1 != null) {
@@ -170,7 +168,7 @@ public class hsv2hls extends AbstractTransformer
         // predicates
         final @Nullable /*@Thrown*/ HSVNode parent = hsvRoot.getParent();
         final /*@Thrown*/ boolean eq = parent == null;
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments

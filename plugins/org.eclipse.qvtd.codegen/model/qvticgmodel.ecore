@@ -7,6 +7,16 @@
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore#/"/>
   </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="CGConnectionAssignment" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingExp" lowerBound="1"
+        eType="#//CGMappingExp" resolveProxies="false" eOpposite="#//CGMappingExp/connectionAssignments"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initValue" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionVariable" lowerBound="1"
+        eType="#//CGConnectionVariable" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGConnectionVariable" eSuperTypes="#//CGGuardVariable"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGEcorePropertyAssignment" eSuperTypes="#//CGPropertyAssignment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="eStructuralFeature" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"
@@ -67,6 +77,12 @@
         containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableAssignments" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGFinalVariable"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionAssignments"
+        upperBound="-1" eType="#//CGConnectionAssignment" containment="true" resolveProxies="false"
+        eOpposite="#//CGConnectionAssignment/mappingExp"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAccumulators" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGAccumulator"
         containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGMappingLoop" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGIterationCallExp"/>

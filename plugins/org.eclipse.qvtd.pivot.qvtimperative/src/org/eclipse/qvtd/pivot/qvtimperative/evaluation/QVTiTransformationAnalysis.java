@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -19,9 +20,12 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.DataType;
+import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -32,11 +36,21 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.library.LibraryFeature;
+import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtcorebase.Area;
+import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -89,12 +103,12 @@ public class QVTiTransformationAnalysis
 	/**
 	 * Map from operation to the properties that it may access.
 	 */
-	private final @NonNull Map<Operation, Set<Property>> operation2property = new HashMap<Operation, Set<Property>>();
+	private final @NonNull Map<Operation, Set<NavigationCallExp>> operation2property = new HashMap<Operation, Set<NavigationCallExp>>();
 
 	/**
 	 * Map from mapping to the properties that it may access.
 	 */
-	private final @NonNull Map<Mapping, Set<Property>> mapping2property = new HashMap<Mapping, Set<Property>>();
+	private final @NonNull Map<Mapping, Set<NavigationCallExp>> mapping2property = new HashMap<Mapping, Set<NavigationCallExp>>();
 
 	/**
 	 * Map from mapping to the properties that it may assign.
@@ -112,6 +126,16 @@ public class QVTiTransformationAnalysis
 	 * The PropertyAssignments to each Property.
 	 */
 	private final @NonNull Map<Property, Set<PropertyAssignment>> property2propertyAssignments = new HashMap<Property, Set<PropertyAssignment>>();
+
+	/**
+	 * Map of all oclContainer() accesses.
+	 */
+	private final @NonNull Map<Type, List<Type>> parentClass2childClasses = new HashMap<Type, List<Type>>();
+	
+	/**
+	 * FIXME. Legacy/new policy detection.
+	 */
+	private boolean hasPropertyAccessDeclarations = false;
 
 	public QVTiTransformationAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
 	    this.environmentFactory = environmentFactory;
@@ -134,12 +158,12 @@ public class QVTiTransformationAnalysis
 		return cacheIndex;
 	}
 	
-	private @NonNull Set<Property> analyzeMappingPropertyAccesses(@NonNull Mapping mapping) {
-		Set<Property> accessedProperties = mapping2property.get(mapping);
+	private @NonNull Set<NavigationCallExp> analyzeMappingPropertyAccesses(@NonNull Mapping mapping) {
+		Set<NavigationCallExp> accessedProperties = mapping2property.get(mapping);
 		if (accessedProperties != null) {
 			return accessedProperties;
 		}
-		accessedProperties = new HashSet<Property>();
+		accessedProperties = new HashSet<NavigationCallExp>();
 		mapping2property.put(mapping, accessedProperties);
 		analyzeTree(accessedProperties, mapping.eAllContents());
 		return accessedProperties;
@@ -160,12 +184,12 @@ public class QVTiTransformationAnalysis
 		return assignedProperties;
 	}
 
-	private @NonNull Set<Property> analyzeOperation(@NonNull Operation operation) {
-		Set<Property> operationProperties = operation2property.get(operation);
+	private @NonNull Set<NavigationCallExp> analyzeOperation(@NonNull Operation operation) {
+		Set<NavigationCallExp> operationProperties = operation2property.get(operation);
 		if (operationProperties != null) {
 			return operationProperties;
 		}
-		operationProperties = new HashSet<Property>();
+		operationProperties = new HashSet<NavigationCallExp>();
 		operation2property.put(operation, operationProperties);
 		analyzeTree(operationProperties, operation.eAllContents());
 		return operationProperties;
@@ -173,10 +197,11 @@ public class QVTiTransformationAnalysis
 
 	private void analyzeProperties() {
 		Set<Mapping> hazardousMappings = getHazardousMappings();
-		for (Map.Entry<Mapping, Set<Property>> entry : getMapping2Property().entrySet()) {
+		for (Map.Entry<Mapping, Set<NavigationCallExp>> entry : getMapping2Property().entrySet()) {
 			Mapping mapping = entry.getKey();
 			if (hazardousMappings.contains(mapping)) {
-				for (Property hazardousProperty : entry.getValue()) {
+				for (@SuppressWarnings("null")@NonNull NavigationCallExp hazardousPropertyCallExp : entry.getValue()) {
+					Property hazardousProperty = PivotUtil.getReferredProperty(hazardousPropertyCallExp);
 					hazardousProperties.add(hazardousProperty);
 					hazardousProperties.add(hazardousProperty.getOpposite());
 				}
@@ -195,7 +220,7 @@ public class QVTiTransformationAnalysis
 		}
 	}
 
-	protected void analyzeTree(@NonNull Set<Property> properties, /*@NonNull*/ TreeIterator<EObject> treeIterator) {
+	protected void analyzeTree(@NonNull Set<NavigationCallExp> properties, /*@NonNull*/ TreeIterator<EObject> treeIterator) {
 		while (treeIterator.hasNext()) {
 			EObject eObject = treeIterator.next();
 			if (eObject instanceof OperationCallExp) {
@@ -205,17 +230,34 @@ public class QVTiTransformationAnalysis
 				}
 			}
 			else if (eObject instanceof PropertyCallExp) {
-				Property referredProperty = ((PropertyCallExp)eObject).getReferredProperty();
+				PropertyCallExp asPropertyCallExp = (PropertyCallExp)eObject;
+				Property referredProperty = asPropertyCallExp.getReferredProperty();
 				if (referredProperty != null) {
-					properties.add(referredProperty);
+					LibraryFeature implementation = referredProperty.getImplementation();
+					if (implementation instanceof OclElementOclContainerProperty) {
+						Type childType = asPropertyCallExp.getOwnedSource().getType();
+						Type parentType = asPropertyCallExp.getType();
+						List<Type> childClasses = parentClass2childClasses .get(parentType);
+						if (childClasses == null) {
+							childClasses = new ArrayList<Type>();
+							parentClass2childClasses.put(parentType, childClasses);
+						}
+						if (!childClasses.contains(childType)) {
+							childClasses.add(childType);
+						}
+					}
+					else {
+						properties.add(asPropertyCallExp);
+					}
 				}
 			}
 			else if (eObject instanceof OppositePropertyCallExp) {
-				Property referredOppositeProperty = ((OppositePropertyCallExp)eObject).getReferredProperty();
+				OppositePropertyCallExp asOppositePropertyCallExp = (OppositePropertyCallExp)eObject;
+				Property referredOppositeProperty = asOppositePropertyCallExp.getReferredProperty();
 				if (referredOppositeProperty != null) {
 					Property referredProperty = referredOppositeProperty.getOpposite();
 					if (referredProperty != null) {
-						properties.add(referredProperty);
+						properties.add(asOppositePropertyCallExp);
 					}
 				}
 			}
@@ -240,8 +282,27 @@ public class QVTiTransformationAnalysis
 		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof Mapping) {
-				analyzeMappingPropertyAccesses((Mapping)eObject);
-				analyzeMappingPropertyAssignments((Mapping)eObject);
+				Mapping mapping = (Mapping)eObject;
+				analyzeMappingPropertyAccesses(mapping);
+				analyzeMappingPropertyAssignments(mapping);
+				if (mapping.getCheckedProperties().size() > 0) {
+					hazardousMappings.add(mapping);
+				}
+				else {
+					for (Domain domain : mapping.getDomain()) {
+						if (domain instanceof ImperativeDomain) {
+							if (((ImperativeDomain)domain).getCheckedProperties().size() > 0) {
+								hazardousMappings.add(mapping);
+								hasPropertyAccessDeclarations = true;
+								break;
+							}
+							if (((ImperativeDomain)domain).getEnforcedProperties().size() > 0) {
+								hasPropertyAccessDeclarations = true;
+								break;
+							}
+						}
+					}
+				}
 			}
 			else if (eObject instanceof MappingCallBinding) {
 				MappingCallBinding mappingCallBinding = (MappingCallBinding)eObject;
@@ -370,7 +431,7 @@ public class QVTiTransformationAnalysis
 		return instancesClassAnalysis;
 	}
 
-	public @NonNull Map<Mapping, Set<Property>> getMapping2Property() {
+	public @NonNull Map<Mapping, Set<NavigationCallExp>> getMapping2Property() {
 		return mapping2property;
 	}
 
@@ -402,7 +463,10 @@ public class QVTiTransformationAnalysis
 	public @NonNull Map<Property, Integer> getSourceCaches() {
 		return sourceProperty2cacheIndex;
 	}
-
+	
+	public boolean hasPropertyAccessDeclarations() {
+		return hasPropertyAccessDeclarations;
+	}
 
 	public boolean hasHazardousRead(@NonNull MappingCall mappingCall) {
 		for (MappingCallBinding callBinding : mappingCall.getBinding()) {
@@ -446,11 +510,126 @@ public class QVTiTransformationAnalysis
 		return false;
 	}
 
-	public boolean isHazardous(@NonNull Property targetProperty) {
-		return hazardousProperties.contains(targetProperty);
+	public boolean isHazardous(@NonNull Property targetProperty) {	// Migrate to isHazardous(@NonNull Mapping asMapping, @NonNull Property asProperty)
+		if (hazardousProperties.contains(targetProperty)) {
+			return true;
+		}
+		if (!targetProperty.isIsComposite()) {
+			return false;
+		}
+		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
+		Type parentType = targetProperty.getOwningClass();
+		Type childType = targetProperty.getType();
+		assert childType != null;
+		for (Map.Entry<Type, List<Type>> entry : parentClass2childClasses.entrySet()) {
+			Type entryType = entry.getKey();
+			assert entryType != null;
+			if (parentType.conformsTo(standardLibrary, entryType)) {
+				for (Type type : entry.getValue()) {
+					if (type.conformsTo(standardLibrary, childType)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public boolean isHazardous(@NonNull Mapping mapping) {
 		return hazardousMappings.contains(mapping);
+	}
+
+	private boolean isHazardous(@NonNull Mapping asMapping, @NonNull Property asProperty) {
+		if (!isHazardous(asMapping)) {
+			return false;
+		}
+		List<org.eclipse.ocl.pivot.Class> asPolledClasses = Collections.emptyList(); //asMapping.getPolledClasses();
+		if (asPolledClasses.isEmpty()) {		// FIXME obsolete legacy backward compatibility
+			return hazardousProperties.contains(asProperty);
+		}
+		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
+		Type referencedType = asProperty.getType();
+		if (referencedType.getESObject() == EcorePackage.Literals.EOBJECT) {		// FIXME is this really right?
+			return true;
+		}
+		for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Class asPolledClass : asPolledClasses) {
+			if (referencedType.conformsTo(standardLibrary, asPolledClass)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isHazardousRead(@NonNull Mapping asMapping, @NonNull NavigationCallExp asNavigationCallExp) {
+		Property asProperty = PivotUtil.getReferredProperty(asNavigationCallExp);
+		OCLExpression asSource = asNavigationCallExp.getOwnedSource();
+		DomainUsage domainUsage = getDomainUsageAnalysis().getUsage(asSource);
+		if (domainUsage != null) {
+			TypedModel typedModel = domainUsage.getTypedModel();
+			if (typedModel != null) {
+				Area area = null;
+				for (Domain domain : asMapping.getDomain()) {
+					if (domain.getTypedModel() == typedModel) {
+						area = (CoreDomain)domain;
+						break;
+					}
+				}
+				if (area == null) {
+					area = asMapping;
+				}
+				if ((area instanceof ImperativeArea) && ((ImperativeArea)area).getCheckedProperties().contains(asProperty)) {
+					return true;
+				}
+			}
+		}
+		if (!hasPropertyAccessDeclarations()) {		// See Bug 481840
+			Type type = asProperty.getType();
+			if (type instanceof DataType) {
+				return isHazardous(asProperty);
+			}
+			else {
+				return isHazardous(asMapping, asProperty);
+			}
+		}
+		return false;
+	}
+
+	public boolean isHazardousWrite(@NonNull Mapping asMapping, @NonNull PropertyAssignment asPropertyAssignment) {
+		Property asProperty = asPropertyAssignment.getTargetProperty();
+		OCLExpression asSource = asPropertyAssignment.getSlotExpression();
+		DomainUsage domainUsage = getDomainUsageAnalysis().getUsage(asSource);
+		if (domainUsage != null) {
+			TypedModel typedModel = domainUsage.getTypedModel();
+			if (typedModel != null) {
+				Area area = null;
+				for (Domain domain : asMapping.getDomain()) {
+					if (domain.getTypedModel() == typedModel) {
+						area = (CoreDomain)domain;
+						break;
+					}
+				}
+				if (area == null) {
+					area = asMapping;
+				}
+				if (area instanceof ImperativeArea) {
+					List<Property> enforcedProperties = ((ImperativeArea)area).getEnforcedProperties();
+					if (enforcedProperties.contains(asProperty)) {
+						return true;
+					}
+					if (enforcedProperties.contains(asProperty.getOpposite())) {
+						return true;
+					}
+				}
+			}
+		}
+		if (!hasPropertyAccessDeclarations()) {		// See Bug 481840
+			if (asProperty != null) {
+				return isHazardous(asProperty);
+			}
+			else {
+				return false;
+			}
+		}
+		return false;
 	}
 }

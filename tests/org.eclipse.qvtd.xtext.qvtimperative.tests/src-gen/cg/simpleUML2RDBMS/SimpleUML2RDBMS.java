@@ -198,9 +198,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     }
     
     public boolean run() throws ReflectiveOperationException {
-        boolean returnStatus = MAP___root__();
-        invocationManager.flush();
-        return returnStatus;
+        return MAP___root__() && invocationManager.flush();
     }
     
     /**
@@ -295,18 +293,18 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package umlPackage = p2s_0.getUmlPackage();
         final /*@Thrown*/ boolean eq = umlPackage.equals(p_0);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ String name = prim.getName();
         final /*@Thrown*/ boolean eq_0 = STR_Integer.equals(name);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package namespace = prim.getNamespace();
         final /*@Thrown*/ boolean eq_1 = namespace.equals(p_0);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -347,7 +345,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PackageToSchema owner = p2n.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(p2s_1);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -379,7 +377,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PackageToSchema owner = p2n_0.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(p2s_2);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -415,18 +413,18 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package umlPackage = p2s_3.getUmlPackage();
         final /*@Thrown*/ boolean eq = umlPackage.equals(p_1);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ String name = prim_0.getName();
         final /*@Thrown*/ boolean eq_0 = STR_Boolean.equals(name);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package namespace = prim_0.getNamespace();
         final /*@Thrown*/ boolean eq_1 = namespace.equals(p_1);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -467,7 +465,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PackageToSchema owner = p2n_1.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(p2s_4);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -503,18 +501,18 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package umlPackage = p2s_5.getUmlPackage();
         final /*@Thrown*/ boolean eq = umlPackage.equals(p_2);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ String name = prim_1.getName();
         final /*@Thrown*/ boolean eq_0 = STR_String.equals(name);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package namespace = prim_1.getNamespace();
         final /*@Thrown*/ boolean eq_1 = namespace.equals(p_2);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -578,13 +576,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PackageToSchema owner = c2t.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(p2s_6);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Schema schema = p2s_6.getSchema();
         final /*@Thrown*/ boolean eq_0 = schema.equals(s);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -646,19 +644,19 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         // predicates
         final @Nullable /*@Thrown*/ String kind = c.getKind();
         final /*@Thrown*/ boolean eq = STR_persistent.equals(kind);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package namespace = c.getNamespace();
         final /*@Thrown*/ boolean eq_0 = namespace.equals(p_3);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package umlPackage = p2s_7.getUmlPackage();
         final /*@Thrown*/ boolean eq_1 = umlPackage.equals(p_3);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -722,51 +720,51 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ ClassToTable owner = a2f.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(sc2t);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ ClassToTable referenced = a2f.getReferenced();
         final /*@Thrown*/ boolean eq_0 = dc2t.equals(referenced);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ Table table = dc2t.getTable();
         final /*@Thrown*/ boolean eq_1 = dt.equals(table);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Schema schema = p2s_8.getSchema();
         final /*@Thrown*/ boolean eq_2 = schema.equals(s_0);
-        if (!eq_2) {
+        if (eq_2 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ String kind = rk.getKind();
         final /*@Thrown*/ boolean eq_3 = STR_primary.equals(kind);
-        if (!eq_3) {
+        if (eq_3 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Table owner_0 = rk.getOwner();
         final /*@Thrown*/ boolean eq_4 = owner_0.equals(dt);
-        if (!eq_4) {
+        if (eq_4 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PackageToSchema owner_1 = sc2t.getOwner();
         final /*@Thrown*/ boolean eq_5 = owner_1.equals(p2s_8);
-        if (!eq_5) {
+        if (eq_5 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ Table table_0 = sc2t.getTable();
         final /*@Thrown*/ boolean eq_6 = st.equals(table_0);
-        if (!eq_6) {
+        if (eq_6 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Schema schema_0 = st.getSchema();
         final /*@Thrown*/ boolean eq_7 = schema_0.equals(s_0);
-        if (!eq_7) {
+        if (eq_7 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ String name = a2f.getName();
@@ -853,47 +851,47 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class destination = a.getDestination();
         final /*@Thrown*/ boolean eq = destination.equals(dc);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package namespace = a.getNamespace();
         final /*@Thrown*/ boolean eq_0 = namespace.equals(p_4);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class source = a.getSource();
         final /*@Thrown*/ boolean eq_1 = source.equals(sc);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ simpleuml2rdbms.uml.Class umlClass = dc2t_0.getUmlClass();
         final /*@Thrown*/ boolean eq_2 = dc.equals(umlClass);
-        if (!eq_2) {
+        if (eq_2 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package umlPackage = p2s_9.getUmlPackage();
         final /*@Thrown*/ boolean eq_3 = umlPackage.equals(p_4);
-        if (!eq_3) {
+        if (eq_3 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package namespace_0 = sc.getNamespace();
         final /*@Thrown*/ boolean eq_4 = namespace_0.equals(p_4);
-        if (!eq_4) {
+        if (eq_4 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PackageToSchema owner = sc2t_0.getOwner();
         final /*@Thrown*/ boolean eq_5 = owner.equals(p2s_9);
-        if (!eq_5) {
+        if (eq_5 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ simpleuml2rdbms.uml.Class umlClass_0 = sc2t_0.getUmlClass();
         final /*@Thrown*/ boolean eq_6 = sc.equals(umlClass_0);
-        if (!eq_6) {
+        if (eq_6 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ String name = a.getName();
@@ -1039,24 +1037,24 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner = a_0.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(c_0);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type = a_0.getType();
         final /*@Thrown*/ boolean eq_0 = type.equals(t);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ simpleuml2rdbms.uml.Class umlClass = fao.getUmlClass();
         final /*@Thrown*/ boolean eq_1 = c_0.equals(umlClass);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PrimitiveDataType primitive = p2n_2.getPrimitive();
         final /*@Thrown*/ boolean eq_2 = primitive.equals(t);
-        if (!eq_2) {
+        if (eq_2 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -1115,18 +1113,18 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner = a_1.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(c_1);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type = a_1.getType();
         final /*@Thrown*/ boolean eq_0 = type.equals(t_0);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ simpleuml2rdbms.uml.Class umlClass = fao_0.getUmlClass();
         final /*@Thrown*/ boolean eq_1 = c_1.equals(umlClass);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -1212,33 +1210,33 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner = a_2.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(c_2);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type = a_2.getType();
         final /*@Thrown*/ boolean eq_1 = type.equals(t_1);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type_0 = ca.getType();
         final /*@Thrown*/ boolean eq_2 = type_0.equals(c_2);
-        if (!eq_2) {
+        if (eq_2 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ Attribute attribute = fao_1.getAttribute();
         final /*@Thrown*/ boolean eq_3 = ca.equals(attribute);
-        if (!eq_3) {
+        if (eq_3 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PrimitiveDataType primitive = p2n_3.getPrimitive();
         final /*@Thrown*/ boolean eq_4 = primitive.equals(t_1);
-        if (!eq_4) {
+        if (eq_4 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -1301,27 +1299,27 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner = a_3.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(c_3);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type = a_3.getType();
         final /*@Thrown*/ boolean eq_1 = type.equals(t_2);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type_0 = ca_0.getType();
         final /*@Thrown*/ boolean eq_2 = type_0.equals(c_3);
-        if (!eq_2) {
+        if (eq_2 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ Attribute attribute = fao_2.getAttribute();
         final /*@Thrown*/ boolean eq_3 = ca_0.equals(attribute);
-        if (!eq_3) {
+        if (eq_3 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -1406,24 +1404,24 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final @Nullable /*@Thrown*/ Table table = c2t_0.getTable();
         final /*@Thrown*/ boolean eq = t_3.equals(table);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ String typeName = p2n_4.getTypeName();
         final /*@Thrown*/ boolean eq_0 = typeName.equals(ct);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ FromAttributeOwner owner = a2c.getOwner();
         final /*@Thrown*/ boolean eq_1 = owner.equals(c2t_0);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ PrimitiveToName type = a2c.getType();
         final /*@Thrown*/ boolean eq_2 = p2n_4.equals(type);
-        if (!eq_2) {
+        if (eq_2 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
@@ -1453,7 +1451,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
             }
         }
         final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(collect, a2c).booleanValue();
-        if (!includes) {
+        if (includes != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -1640,6 +1638,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     protected boolean MAP___root__() throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+        // mapping statements
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_uml2rdbms_c_c_AssociationToForeignKey_0 = idResolver.getClass(CLSSid_AssociationToForeignKey, null);
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_uml2rdbms_c_c_AttributeToColumn_0 = idResolver.getClass(CLSSid_AttributeToColumn, null);
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_uml2rdbms_c_c_BooleanToBoolean_0 = idResolver.getClass(CLSSid_BooleanToBoolean, null);
@@ -1678,7 +1677,6 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 accumulator.add(_1_0);
             }
         }
-        // mapping statements
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, models[0/*uml*/], TYP_uml_c_c_Package_0);
         for (Package p_11 : ValueUtil.typedIterable(Package.class, objectsOfKind)) {
             if (p_11 != null) {

@@ -13,12 +13,15 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -35,12 +38,22 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVisitor<Object>
 {
-	
 	public QVTiBoxingAnalyzer(@NonNull QVTiAnalyzer analyzer) {
 		super(analyzer);
+	}
+
+	@Override
+	public Object visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
+		return visitCGValuedElement(object);
+	}
+
+	@Override
+	public Object visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
+		return visitCGGuardVariable(object);
 	}
 
 	@Override
@@ -94,9 +107,14 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 
 	@Override
 	public Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
-		if (cgMappingCallBinding.isRequired()) {
-			MappingCallBinding mappingCallBinding = (MappingCallBinding)cgMappingCallBinding.getAst();
-			rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValue(), false, "binding for '" + mappingCallBinding.getMappingCall().getReferredMapping().getName() + "::" + mappingCallBinding.getBoundVariable().getName() + "'"));	// FIXME referred mapping
+		MappingCallBinding mappingCallBinding = (MappingCallBinding)cgMappingCallBinding.getAst();
+		Variable boundVariable = mappingCallBinding.getBoundVariable();
+		assert boundVariable != null;
+		if (QVTimperativeUtil.isConnectionVariable(boundVariable)) {
+			//
+		}
+		else if (cgMappingCallBinding.isRequired()) {
+			rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValue(), false, "binding for '" + mappingCallBinding.getMappingCall().getReferredMapping().getName() + "::" + boundVariable.getName() + "'"));	// FIXME referred mapping
 		}
 		else {
 			rewriteAsUnboxed(cgMappingCallBinding.getValue());
