@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<simplegraph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simplegraph="http://www.eclipse.org/qvt/examples/0.1/SimpleGraph"
-    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/SimpleGraph ../SimpleGraph.ecore" name="graphone">
+<simplegraph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simplegraph="http://www.eclipse.org/qvtd/test/compiler/0.1/SimpleGraph"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/test/compiler/0.1/SimpleGraph ../SimpleGraph.ecore" name="graphone">
   <element xsi:type="simplegraph:Node" incoming="//@element.6" outgoing="//@element.5" label="york"/>
   <element xsi:type="simplegraph:Node" incoming="//@element.5 //@element.10" outgoing="//@element.6 //@element.7" label="stansted"/>
   <element xsi:type="simplegraph:Node" incoming="//@element.7" outgoing="//@element.8" label="munich"/>

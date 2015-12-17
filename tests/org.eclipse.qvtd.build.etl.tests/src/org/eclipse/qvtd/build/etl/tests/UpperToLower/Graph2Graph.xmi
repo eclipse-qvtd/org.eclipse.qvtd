@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simplegraph2graph="http://http://www.eclipse.org/qvt/examples/0.1/SimpleGraph2Graph" xsi:schemaLocation="http://http://www.eclipse.org/qvt/examples/0.1/SimpleGraph2Graph SimpleGraph2Graph.ecore">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simplegraph2graph="http://http://www.eclipse.org/qvtd/test/compiler/0.1/SimpleGraph2Graph" xsi:schemaLocation="http://http://www.eclipse.org/qvtd/test/compiler/0.1/SimpleGraph2Graph SimpleGraph2Graph.ecore">
   <simplegraph2graph:Graph2Graph name="graphone">
     <graph1 href="SimpleGraph.xmi#/"/>
     <graph2 href="SimpleGraphLower.xmi#/"/>
