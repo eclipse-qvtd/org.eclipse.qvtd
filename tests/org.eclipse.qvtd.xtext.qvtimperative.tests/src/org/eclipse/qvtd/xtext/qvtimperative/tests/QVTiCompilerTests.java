@@ -69,13 +69,15 @@ public class QVTiCompilerTests extends LoadTestCase
 			super(environmentFactory);
 		}
 		
-		@SuppressWarnings("unchecked")
 		private Class<? extends Transformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg) throws Exception {
 			String qualifiedClassName = cg.getQualifiedName();
 			String javaCodeSource = cg.generateClassFile();
-			OCL2JavaFileObject.saveClass(qualifiedClassName, javaCodeSource);	
-			Class<?> txClass = OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
-			return (Class<? extends Transformer>) txClass;
+			String string = explicitClassPath.toString();
+			assert string != null;
+			OCL2JavaFileObject.saveClass(string, qualifiedClassName, javaCodeSource);	
+			@SuppressWarnings("unchecked")
+			Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
+			return txClass;
 		}
 
 		public @NonNull Transformer createTransformer(@NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {

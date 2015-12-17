@@ -435,13 +435,13 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	}
 	
 	// Copied from QVTiCompilerTest
-	@SuppressWarnings("unchecked")
 	protected Class<? extends CS2ASTransformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg) throws Exception {
 		String qualifiedClassName = cg.getQualifiedName();
 		String javaCodeSource = cg.generateClassFile();
-		OCL2JavaFileObject.saveClass(qualifiedClassName, javaCodeSource);	
-		Class<?> txClass = OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
-		return (Class<? extends CS2ASTransformer>) txClass;
+		OCL2JavaFileObject.saveClass(explicitClassPath.toString(), qualifiedClassName, javaCodeSource);	
+		@SuppressWarnings("unchecked")
+		Class<? extends CS2ASTransformer> txClass = (Class<? extends CS2ASTransformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
+		return txClass;
 	}
 	
 	
