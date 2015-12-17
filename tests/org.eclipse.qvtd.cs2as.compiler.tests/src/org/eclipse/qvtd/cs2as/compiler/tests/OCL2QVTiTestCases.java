@@ -37,8 +37,11 @@ import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
+import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.compiler.internal.etl.EtlTask;
@@ -51,6 +54,7 @@ import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiBroker;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -59,12 +63,16 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
+import org.eclipse.xtext.resource.XtextResource;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import example2.classes.ClassesPackage;
 import example2.classescs.ClassescsPackage;
+import example4.kiamaas.KiamaasPackage;
+import example4.kiamacs.KiamacsPackage;
 
 /**
  * @author asbh500
@@ -231,10 +239,25 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	
 	
 	@Test
-	public void testExample4_() throws Exception {
+	public void testExample4_Interpreted() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
+		InstallMap installMap = new InstallMap(baseURI);
+		installMap.install(KiamacsPackage.eINSTANCE, "SimplerKiamaCS.ecore");
+		installMap.install(KiamaasPackage.eINSTANCE, "SimplerKiamaAS.ecore");
+		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl");
+		
+		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
+		myQVT.dispose();
+		myQVT = createQVT();		
+		myQVT.getEnvironmentFactory().configureLoadStrategy(StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
 				
-		executeOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl");
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());		
+// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
+//    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model0");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
+// FIXME fails    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
+//    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3");
+    	installMap.uninstall();
 	}
 	
 	@Test
@@ -257,8 +280,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model3");
 	
 	}
-		
-		
+
 	@Test
 	public void testExample2_CG() throws Exception {
 		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
@@ -284,8 +306,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model6");
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model7");
 		installMap.uninstall();
-	}	
-	
+	}
+
 	@Test
 	public void testExample2_OCL2QVTp_MiddleModel() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
@@ -363,6 +385,13 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	
     	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
     	assertValidQVTiModel(txURI);
+
+    	
+		URI inputURI = txURI;
+		URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvti");
+		doSerialize(inputURI, serializedURI);
+    	
+    	
     	return qvtiTransf;
 	}
 	
@@ -449,6 +478,27 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		}
 		return null;
 	}	
+
+	/**
+	 * Explicitly install the eInstances that would normally make it into the ProjectMap from extension point registrations.
+	 * Test models are not registered via extension point so we have to do this manually.
+	 *
+	private void install(@NonNull URI testBaseURI, @NonNull EPackage... eInstances) {
+		ResourceSetImpl resourceSet = (ResourceSetImpl) myQVT.getResourceSet();
+		for (EPackage eInstance : eInstances) {
+			resourceSet.getURIResourceMap().put(testBaseURI.appendSegment(eInstance.getName()+".ecore"), eInstance.eResource());
+		}
+	} */
+
+	/**
+	 * Explicitly remove the eInstances from the EPackage.Registry.INSTANCE so that global registrations from the calling test
+	 * do not confuse subsequent tests that may want to use dynamic models.
+	 *
+	private void uninstall(@NonNull EPackage... eInstances) {
+		for (EPackage eInstance : eInstances) {
+			EPackage.Registry.INSTANCE.remove(eInstance.getNsURI());
+		}
+	} */
 	
 	private void launchQVTs2GraphMlTx(PivotModel qvtsModel, String graphMlURI, boolean pruneQVTs) throws QvtMtcExecutionException {
 		
@@ -484,4 +534,68 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		}
 		
 	}
+	
+// FIXME move following clones to a Util class
+	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
+		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, QVTimperativeCSPackage.eCONTENT_TYPE));
+		ocl.as2cs(asResource, (CSResource) xtextResource);
+		assertNoResourceErrors("Conversion failed", xtextResource);
+		//
+		//	CS save
+		//		
+		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
+		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
+		asResource.save(TestsXMLUtil.defaultSavingOptions);
+		asResource.setURI(savedURI);
+		
+		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
+		try {		
+			xtextResource.save(TestsXMLUtil.defaultSavingOptions);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			URI xmiURI = outputURI.appendFileExtension(".xmi");
+			Resource xmiResource = resourceSet.createResource(xmiURI);
+			xmiResource.getContents().addAll(xtextResource.getContents());
+			xmiResource.save(TestsXMLUtil.defaultSavingOptions);
+			fail(e.toString());
+		}
+		return xtextResource;
+	}
+
+	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		//
+		//	Load QVTiAS
+		//		
+		OCL ocl = QVTbase.newInstance(OCL.NO_PROJECTS);
+		try {
+			ASResource asResource = loadQVTiAS(ocl, inputURI);
+			assertNoResourceErrors("Normalisation failed", asResource);
+//FIXME			assertNoValidationErrors("Normalisation invalid", asResource);
+			//
+			//	Pivot to CS
+			//		
+			XtextResource xtextResource = pivot2cs(ocl, resourceSet, asResource, serializedURI);
+			resourceSet.getResources().clear();
+			return xtextResource;
+		}
+		finally {
+			ocl.dispose();
+			ocl = null;
+		}
+	}
+
+	protected ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
+		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
+//		List<String> conversionErrors = new ArrayList<String>();
+//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
+//		Resource eResource = documentCS.eResource();
+		assertNoResourceErrors("Load failed", asResource);
+//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
+//		xtextResource.getContents().add(documentCS);
+		return (ASResource) asResource;
+	}
+
 }
