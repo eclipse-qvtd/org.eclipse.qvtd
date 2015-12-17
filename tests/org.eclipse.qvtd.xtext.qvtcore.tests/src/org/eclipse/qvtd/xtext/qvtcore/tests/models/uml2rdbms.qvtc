@@ -16,11 +16,11 @@ query umlRdbms::getAllSupers(cls : SimpleUML::Class) : Set(SimpleUML::Class) {
 }
 
 query umlRdbms::getAllAttributes(cls : SimpleUML::Class) : Set(SimpleUML::Attribute) {
-	getAllSupers(cls).attribute
+	getAllSupers(cls).attribute->asSet()
 }
 
 query umlRdbms::getAllForwards(cls : SimpleUML::Class) : Set(SimpleUML::Association) {
-	getAllSupers(cls).forward
+	getAllSupers(cls).forward->asSet()
 }
 
 map packageToSchema in umlRdbms {

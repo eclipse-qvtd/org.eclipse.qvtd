@@ -8,7 +8,7 @@ transformation umlRdbms {
 	imports SimpleUMLtoRDBMS;
 }
 
-query umlRdbms::asClass(cls : SimpleUML::Classifier) : Set(SimpleUML::Class) {
+query umlRdbms::asClass(cls : SimpleUML::Classifier) : SimpleUML::Class {
 	if cls.oclIsTypeOf(SimpleUML::Class) then cls.oclAsType(SimpleUML::Class) else null endif
 }
 

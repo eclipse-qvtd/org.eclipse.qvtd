@@ -106,11 +106,11 @@ query umlRdbms::getAllSupers(cls : SimpleUML::Class) : Set(SimpleUML::Class) {
 }
 
 query umlRdbms::getAllAttributes(cls :  SimpleUML::Class) : Set( SimpleUML::Attribute) {
-    getAllSupers(cls)->collect(c | c.attributes)
+    getAllSupers(cls).attributes->asSet()
 }
     
 query umlRdbms::getAllForwards(cls :  SimpleUML::Class) : Set( SimpleUML::Association) {
-    getAllSupers(cls)->collect(c | true)
+    getAllSupers(cls).forward->asSet()
 }
  
 /*  -- Class and Table mapping
