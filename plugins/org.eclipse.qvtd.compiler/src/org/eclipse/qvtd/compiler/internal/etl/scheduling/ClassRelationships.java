@@ -14,6 +14,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Model;
@@ -22,6 +23,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 
@@ -84,7 +86,7 @@ public class ClassRelationships {
 	private void initializeMaps(ResourceSet resourceSet) {
 	
 		for (Resource resource : resourceSet.getResources()) {
-			for (Package aPackage : getInvolvedPackages(resource)) {
+			for (@SuppressWarnings("null") @NonNull Package aPackage : getInvolvedPackages(resource)) {
 				Package pPackage = mManager.getPrimaryPackage(aPackage);
 				if (!packageToProcess.contains(pPackage)) {
 					packageToProcess.add(pPackage);;
@@ -144,7 +146,7 @@ public class ClassRelationships {
 			superRels.addAll(computeClass2SuperClasses(superClass));
 		}
 				
-		Package classPackage = aClass.getOwningPackage();
+		Package classPackage = ClassUtil.nonNullState(aClass.getOwningPackage());
 		Package pPackage = mManager.getPrimaryPackage(classPackage);
 		if (!processedPackage.contains(pPackage) &&
 			! packageToProcess.contains(pPackage)) {
@@ -179,7 +181,9 @@ public class ClassRelationships {
 		for (Property property : aClass.getOwnedProperties()) {
 			Type propType = getType(property);
 			if (property.isIsComposite() && propType instanceof Class) {
-				addContainerClassForTypeAndSubtypes(aClass, property, propType.isClass());
+				Class isClass = propType.isClass();
+				assert isClass != null;
+				addContainerClassForTypeAndSubtypes(aClass, property, isClass);
 			}
 		}
 	}
@@ -210,7 +214,7 @@ public class ClassRelationships {
 		return type;
 	}
 
-	private void addContainerClassForTypeAndSubtypes(Class containerClass, Property containmentProperty, Class type) {
+	private void addContainerClassForTypeAndSubtypes(Class containerClass, Property containmentProperty, @NonNull Class type) {
 		
 		//type = mManager.getPrimaryClass(type);
 		Set<ContainerClass> detailedContainerClasses = class2detailedContainerClasses.get(type);
@@ -227,7 +231,7 @@ public class ClassRelationships {
 		detailedContainerClasses.add(new ContainerClass(containerClass, containmentProperty));
 		containerClasses.add(containerClass);
 		
-		for (Class subType : getDirectSubClasses(type)) {
+		for (@SuppressWarnings("null") @NonNull Class subType : getDirectSubClasses(type)) {
 			addContainerClassForTypeAndSubtypes(containerClass, containmentProperty, subType);
 		}	
 	}
@@ -238,35 +242,35 @@ public class ClassRelationships {
 //	}
 
 	
-	public Set<Class> getAllSuperClasses(Class type) {
+	public Set<Class> getAllSuperClasses(@NonNull Class type) {
 		Type primaryType = mManager.getPrimaryClass(type);
 		Set<Class> allSuperClasses = class2superClasses.get(primaryType);
 		return allSuperClasses == null ? Collections.<Class>emptySet()  
 										: Collections.<Class>unmodifiableSet(allSuperClasses);
 	}
 	
-	public Set<Class> getAllSubClasses(Class type) {
+	public Set<Class> getAllSubClasses(@NonNull Class type) {
 		Type primaryType = mManager.getPrimaryClass(type);
 		Set<Class> allSubClasses = class2allSubClasses.get(primaryType);
 		return allSubClasses == null ? Collections.<Class>emptySet()  
 										: Collections.<Class>unmodifiableSet(allSubClasses);
 	}
 	
-	public Set<Class> getDirectSubClasses(Class type) {
+	public Set<Class> getDirectSubClasses(@NonNull Class type) {
 		Type primaryType = mManager.getPrimaryClass(type);
 		Set<Class> directSubClasses = class2directSubClasses.get(primaryType);
 		return directSubClasses == null ? Collections.<Class>emptySet()  
 										: Collections.<Class>unmodifiableSet(directSubClasses);
 	}
 	
-	public Set<Class> getContainerClasses(Class type) {
+	public Set<Class> getContainerClasses(@NonNull Class type) {
 		Type primaryType = mManager.getPrimaryClass(type);
 		Set<Class> containerClasses = class2containerClasses.get(primaryType);
 		return containerClasses == null ? Collections.<Class>emptySet()
 				: Collections.<Class>unmodifiableSet(containerClasses);
 	}
 	
-	public Set<ContainerClass> getDetailedContainerClasses(Class type) {
+	public Set<ContainerClass> getDetailedContainerClasses(@NonNull Class type) {
 		Type primaryType = mManager.getPrimaryClass(type);
 		Set<ContainerClass> containerClasses = class2detailedContainerClasses.get(primaryType);
 		return containerClasses == null ? Collections.<ContainerClass>emptySet()
