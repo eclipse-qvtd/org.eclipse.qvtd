@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<hsv:HSVNode xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hsv="http://www.eclipse.org/qvt/examples/0.1/HSVTree" xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/HSVTree ../HSVTree.ecore" hsv="192,100,21.2" name="base03">
+<hsv:HSVNode xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hsv="http://www.eclipse.org/qvtd/test/compiler/0.1/HSVTree" xsi:schemaLocation="http://www.eclipse.org/qvtd/test/compiler/0.1/HSVTree ../HSVTree.ecore" hsv="192,100,21.2" name="base03">
   <children hsv="192,89.4,25.9" name="base02"/>
   <children hsv="194,24.8,45.9" name="base01">
     <children hsv="196,22.9,51.44" name="base00">
