@@ -21,6 +21,7 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -36,6 +37,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.EvaluationException;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
+import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -57,7 +59,7 @@ import org.eclipse.xtext.resource.XtextResource;
 public class PivotTestCase extends TestCase
 {
 	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.tests";
-	private static ProjectMap projectMap = null;
+	private static StandaloneProjectMap projectMap = null;
 
 	public static void assertNoDiagnosticErrors(String message, XtextResource xtextResource) {
 		List<Diagnostic> diagnostics = xtextResource.validateConcreteSyntax();
@@ -223,15 +225,24 @@ public class PivotTestCase extends TestCase
 		Resource ecoreResource = savePivotAsEcore(ocl, pivotResource, ecoreURI, true);
 		return ecoreResource;
 	}
+
+	public static @NonNull StandaloneProjectMap getProjectMap() {
+		StandaloneProjectMap projectMap2 = projectMap;
+		if (projectMap2 == null) {
+			projectMap = projectMap2 = EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(false) : new StandaloneProjectMap(false);
+		}
+		return projectMap2;
+	}
 	
 	public URI getTestModelURI(String localFileName) {
-		if (projectMap == null) {
-			projectMap = new ProjectMap(false);
-		}
-		String urlString = projectMap.getLocation(PLUGIN_ID).toString();
+		String urlString = getProjectMap().getLocation(PLUGIN_ID).toString();
 		TestCase.assertNotNull(urlString);
 		return URI.createURI(urlString + "/" + localFileName);
 	}
+
+//	public static void resetProjectMap() {
+//		projectMap = null;
+//	}
 
 	public static Resource savePivotAsEcore(@NonNull OCL ocl, Resource pivotResource, URI ecoreURI, boolean validateSaved) throws IOException {
 		return savePivotAsEcore(ocl, pivotResource, ecoreURI, null, validateSaved);

@@ -47,7 +47,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
-import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
@@ -94,7 +93,6 @@ public class XtextTestCase extends PivotTestCase
 		}
 	}
 	
-	private static StandaloneProjectMap projectMap = null;
 	public static TestCaseAppender testCaseAppender = new TestCaseAppender();
 
 	protected void assertPivotIsValid(URI pivotURI) {
@@ -154,14 +152,6 @@ public class XtextTestCase extends PivotTestCase
 			}
 		}
 		return s != null ? s.toString() : null;
-	}
-
-	public static @NonNull StandaloneProjectMap getProjectMap() {
-		StandaloneProjectMap projectMap2 = projectMap;
-		if (projectMap2 == null) {
-			projectMap = projectMap2 = new StandaloneProjectMap(false);
-		}
-		return projectMap2;
 	}
 
 	protected static boolean hasCorrespondingCS(Element pivotElement) {
