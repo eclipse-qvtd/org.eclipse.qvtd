@@ -18,8 +18,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteInheritance;
+import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.internal.ExpressionInOCLImpl;
 import org.eclipse.ocl.pivot.internal.OperationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -40,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * @generated
  */
 public class FunctionImpl extends OperationImpl implements Function {
+
 	/**
 	 * The cached value of the '{@link #getQueryExpression() <em>Query Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -200,5 +204,30 @@ public class FunctionImpl extends OperationImpl implements Function {
 	@Override
 	public @Nullable CompleteInheritance getInheritance(@NonNull StandardLibrary standardLibrary) {
 		return null;
+	}
+	
+	private final class Function_Body_481664 extends ExpressionInOCLImpl			// FIXME Bug 481664 workaround
+	{
+		@Override
+		public OCLExpression getOwnedBody() {
+			return getQueryExpression();
+		}
+		
+		@Override
+		public Type getType() {
+			return getQueryExpression().getType();
+		}
+	}
+
+	@Override
+	public LanguageExpression getBodyExpression() {			// FIXME Bug 481664 workaround
+		return new Function_Body_481664();
+	}
+
+	@Override
+	public void setBodyExpression(LanguageExpression newBodyExpression) {		// FIXME Bug 481664 workaround
+		if (newBodyExpression.getClass() != Function_Body_481664.class) {
+			throw new UnsupportedOperationException();
+		}
 	}
 } //FunctionImpl
