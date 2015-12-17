@@ -125,6 +125,10 @@ public class QVTiSerializeTests extends LoadTestCase
 		super.setUp();
 	}
 	
+	public void testSerialize_Dependencies() throws Exception {
+		doSerializeRoundTrip("Dependencies/Dependencies");
+	}
+	
 	public void testSerialize_Expressions() throws Exception {
 		doSerializeRoundTrip("Expressions/Expressions");
 	}

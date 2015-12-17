@@ -6,7 +6,7 @@ transformation Expressions {
 	middle imports ecore;
 }
 
-map expressionsLM in Expressions uses ecore::EPackage, ocl::Integer {
+map expressionsLM in Expressions {
 	check source(dummy:EPackage) {}
 	enforce middle() {}
     where () {}
