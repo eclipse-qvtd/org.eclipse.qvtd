@@ -234,9 +234,10 @@ public class ManualUML2RDBMS extends AbstractTransformer
                 accumulator.add(value);
             }
         }
-        final List<Attribute> UNBOXED_collect = collect.asEcoreObjects(idResolver, Attribute.class);
-        assert UNBOXED_collect != null;
-        return UNBOXED_collect;
+        final @NonNull /*@Thrown*/ SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
+        final List<Attribute> UNBOXED_asSet = asSet.asEcoreObjects(idResolver, Attribute.class);
+        assert UNBOXED_asSet != null;
+        return UNBOXED_asSet;
     }
     
     protected @NonNull List<Association> getAllForwards(final @Nullable /*@NonInvalid*/ manualuml2rdbms.uml.Class cls_1) {
@@ -266,9 +267,10 @@ public class ManualUML2RDBMS extends AbstractTransformer
                 accumulator.add(value);
             }
         }
-        final List<Association> UNBOXED_collect = collect.asEcoreObjects(idResolver, Association.class);
-        assert UNBOXED_collect != null;
-        return UNBOXED_collect;
+        final @NonNull /*@Thrown*/ SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
+        final List<Association> UNBOXED_asSet = asSet.asEcoreObjects(idResolver, Association.class);
+        assert UNBOXED_asSet != null;
+        return UNBOXED_asSet;
     }
     
     /**
