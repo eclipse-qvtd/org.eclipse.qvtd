@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiamaas:Top
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kiamaas="http://cs2as/tests/example4/simplerkiamaas/1.0"
+    xsi:schemaLocation="http://cs2as/tests/example4/simplerkiamaas/1.0 ../SimplerKiamaAS.ecore">
+</kiamaas:Top>
+
+

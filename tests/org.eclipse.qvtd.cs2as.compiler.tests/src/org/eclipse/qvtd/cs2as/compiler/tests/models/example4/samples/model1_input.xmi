@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kiamacs:TopCS
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kiamacs="http://cs2as/tests/example4/simplerkiamacs/1.0"
+    xsi:schemaLocation="http://cs2as/tests/example4/simplerkiamacs/1.0 ../SimplerKiamaCS.ecore">
+  <node xsi:type="kiamacs:LeafCS"/>
+</kiamacs:TopCS>

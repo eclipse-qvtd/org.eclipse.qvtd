@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.cs2as.compiler.tests/tests-gen"
+    modelPluginID="org.eclipse.qvtd.cs2as.compiler.tests" modelName="SimplerKiamaCS"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="7.0"
+    copyrightFields="false" runtimeVersion="2.7" operationReflection="true" importOrganizing="true"
+    pluginKey="">
+  <foreignModel>SimplerKiamaCS.ecore</foreignModel>
+  <genPackages prefix="Kiamacs" basePackage="example4" resource="XMI" disposableProviderFactory="true"
+      ecorePackage="SimplerKiamaCS.ecore#/">
+    <genClasses ecoreClass="SimplerKiamaCS.ecore#//TopCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimplerKiamaCS.ecore#//TopCS/node"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="SimplerKiamaCS.ecore#//NodeCS"/>
+    <genClasses ecoreClass="SimplerKiamaCS.ecore#//CompositeCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimplerKiamaCS.ecore#//CompositeCS/child"/>
+    </genClasses>
+    <genClasses ecoreClass="SimplerKiamaCS.ecore#//LeafCS"/>
+    <genClasses image="false" ecoreClass="SimplerKiamaCS.ecore#//BaseCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimplerKiamaCS.ecore#//BaseCS/ast"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
