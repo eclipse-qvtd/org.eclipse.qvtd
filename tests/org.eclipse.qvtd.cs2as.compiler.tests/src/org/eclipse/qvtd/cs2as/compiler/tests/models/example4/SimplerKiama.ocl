@@ -17,7 +17,7 @@ context CompositeCS
 def : ast() : kiamaas::Composite =
 	kiamaas::Composite {	
 		child = child.ast(),
-		deep = let container = ast().oclContainer() in 
+		deep = let container = ast().oclContainer in 
 				if container.oclIsKindOf(kiamaas::Node)  then container.oclAsType(kiamaas::Node).deep + 1 else 0 endif,
 		height = ast().child.height + 1
 		--height = child.ast().height + 1
@@ -26,7 +26,7 @@ def : ast() : kiamaas::Composite =
 context LeafCS
 def : ast() : kiamaas::Leaf = 
 	kiamaas::Leaf {
-		deep = let container = ast().oclContainer() in 
+		deep = let container = ast().oclContainer in 
 				if container.oclIsKindOf(kiamaas::Node)  then container.oclAsType(kiamaas::Node).deep + 1 else 0 endif,
 		height = 0
 	}
