@@ -215,7 +215,7 @@ public class Tree2TallTree extends AbstractTransformer
                     throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/List2List\'::Node2TallNode::name\'");
                 }
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ String name_1 = objectManager.get(symbol_9, Tree2talltreePackage.Literals.NODE2_TALL_NODE__NAME);
+                final @NonNull /*@Thrown*/ String name_1 = symbol_9.getName();
                 return name_1;
             }
         };
@@ -261,7 +261,6 @@ public class Tree2TallTree extends AbstractTransformer
         node2tallNode_1.setNode(node);
         OPPOSITE_OF_Node2TallNode_node.put(node, node2tallNode_1);
         node2tallNode_1.setName(name);
-        objectManager.assigned(node2tallNode_1, Tree2talltreePackage.Literals.NODE2_TALL_NODE__NAME, name);
         return true;
     }
     
@@ -348,7 +347,7 @@ public class Tree2TallTree extends AbstractTransformer
             final @NonNull /*@Thrown*/ SetValue BOXED_children_0 = idResolver.createSetOfAll(SET_CLSSid_Node2TallNode, children_0);
             // variable assignments
             @SuppressWarnings("null")
-            final @NonNull /*@Thrown*/ String name = objectManager.get(node2tallNode_0, Tree2talltreePackage.Literals.NODE2_TALL_NODE__NAME);
+            final @NonNull /*@Thrown*/ String name = node2tallNode_0.getName();
             final @NonNull /*@Thrown*/ SetValue safe_collect_sources = (SetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_children_0, null);
             @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_TallNode);
             @NonNull Iterator<?> ITERATOR__1 = safe_collect_sources.iterator();

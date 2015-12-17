@@ -156,6 +156,11 @@ public class QVTiSerializeTests extends LoadTestCase
 	public void testSerialize_SimpleUML2RDBMS_qvti() throws Exception {
 		doSerializeRoundTrip("SimpleUML2RDBMS/SimpleUML2RDBMS");
 	}
+	
+	public void testSerialize_Tree2TallTree_qvti() throws Exception {
+		doSerializeRoundTrip("Tree2TallTree/Tree2TallTree");
+	}
+	
 	protected void doSerialize(@NonNull String stem) throws Exception {
 		URI inputURI = getProjectFileURI(stem + ".qvtias");
 		URI referenceURI = getProjectFileURI(stem + "ref..qvtias");

@@ -22,7 +22,7 @@ map __root__ in Tree2TallTree {
     } 
     for node2tallNode : tree2talltree::Node2TallNode in tree2talltree.objectsOfKind(Node2TallNode)->sortedBy(name) {
         call MiddleNode2TallNode {
-            node2tallNode ?= node2tallNode;
+            node2tallNode ?= node2tallNode;			--isPolled
         } 
     } 
 }
@@ -40,7 +40,9 @@ map Node2MiddleNode in Tree2TallTree {
 
 map Edge2MiddleEdge in Tree2TallTree {
 	check tree(node : Node) {} 
-	enforce tree2talltree(node2tallNode : Node2TallNode) {
+	enforce tree2talltree {
+		enforce Node2TallNode::parent
+	} (node2tallNode : Node2TallNode) {
 --		realize node2tallNode : Node2TallNode
 	}
 	where(node.parent <> null;) {
@@ -50,8 +52,14 @@ map Edge2MiddleEdge in Tree2TallTree {
 }
 
 map MiddleNode2TallNode in Tree2TallTree {
-	check tree2talltree(node2tallNode : Node2TallNode) {} 
-	enforce talltree() {
+	check tree2talltree {
+		check Node2TallNode::tallNode, Node2TallNode::children
+		enforce Node2TallNode::tallNode
+	} (node2tallNode : Node2TallNode) {} 
+	enforce talltree {
+		check TallNode::height
+		enforce TallNode::height
+	} () {
 		realize tallNode : TallNode
 	}
 	where() {
