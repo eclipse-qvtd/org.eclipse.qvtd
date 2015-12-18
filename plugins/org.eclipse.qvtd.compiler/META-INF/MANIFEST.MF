@@ -26,6 +26,7 @@ Export-Package: org.eclipse.epsilon.common.util;x-friends:="org.eclipse.qvtd.cs2
  org.eclipse.epsilon.eol.execute.context;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
  org.eclipse.epsilon.eol.models;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
  org.eclipse.epsilon.eol.types;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
+ org.eclipse.qvtd.compiler,
  org.eclipse.qvtd.compiler.internal.etl;
   uses:="org.eclipse.ocl.pivot,
    org.eclipse.epsilon.eol.models,
@@ -33,9 +34,14 @@ Export-Package: org.eclipse.epsilon.common.util;x-friends:="org.eclipse.qvtd.cs2
    org.eclipse.epsilon.etl.trace,
    org.osgi.framework,
    org.eclipse.epsilon.eol",
+ org.eclipse.qvtd.compiler.internal.qvtcconfig,
+ org.eclipse.qvtd.compiler.internal.qvtcconfig.impl,
+ org.eclipse.qvtd.compiler.internal.qvtcconfig.util,
  org.eclipse.qvtd.compiler.internal.qvtr2qvtc,
  org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl,
  org.eclipse.qvtd.compiler.internal.qvtr2qvtc.utilities,
- org.eclipse.qvtd.compiler.internal.qvtcconfig,
- org.eclipse.qvtd.compiler.internal.qvtcconfig.impl,
- org.eclipse.qvtd.compiler.internal.qvtcconfig.util
+ org.eclipse.qvtd.compiler.internal.schedule2qvti,
+ org.eclipse.qvtd.compiler.internal.scheduler,
+ org.eclipse.qvtd.compiler.internal.utilities
+Import-Package: com.google.common.base,
+ com.google.common.collect

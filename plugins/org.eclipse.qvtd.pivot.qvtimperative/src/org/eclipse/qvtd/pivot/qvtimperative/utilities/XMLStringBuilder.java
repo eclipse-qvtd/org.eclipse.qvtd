@@ -44,7 +44,15 @@ public class XMLStringBuilder
 	}
 
 	public void appendText(@NonNull String tag, /*@NonNull*/ String text) {
+		appendTextBegin(tag);
+		appendTextEnd(text);
+	}
+
+	public void appendTextBegin(@NonNull String tag) {
 		pushTag(tag);
+	}
+
+	public void appendTextEnd(/*@NonNull*/ String text) {
 		s.append(">");
 		s.append(text);
 		s.append("</");
@@ -61,7 +69,16 @@ public class XMLStringBuilder
 		}
 		if (value == null)
 			value = "";
-		s.append(value);
+		for (int i = 0; i < value.length(); i++) {
+			char c = value.charAt(i);
+			if (c == '\'') { s.append("&apos;"); }
+			else if (c == '"') { s.append("&quot;"); }
+			else if (c == '&') { s.append("&amp;"); }
+			else if (c == '<') { s.append("&lt;"); }
+			else if (c == '>') { s.append("&gt;"); }
+			else if (c == '\n') { s.append("&#xA;"); }
+			else { s.append(c); }
+		}
 		String topTag = tagStack.pop();
 		s.append("</");
 		s.append(topTag);

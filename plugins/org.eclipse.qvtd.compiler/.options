@@ -1,0 +1,17 @@
+# Debugging options for the org.eclipse.ocl.examples.codegen plug-in
+
+# Turn on tracing of the operation dependency analysis 
+org.eclipse.qvtd.compiler/qvtp2qvts/dependencyAnalysis=false
+# Turn on tracing of the region depth computation 
+org.eclipse.qvtd.compiler/qvtp2qvts/regionDepth=false
+# Turn on tracing of the region connection locality computation 
+org.eclipse.qvtd.compiler/qvtp2qvts/regionLOcality=false
+# Turn on tracing of the region order computation 
+org.eclipse.qvtd.compiler/qvtp2qvts/regionOrder=false
+# Turn on tracing of the region call stack computation 
+org.eclipse.qvtd.compiler/qvtp2qvts/regionStack=false
+# Turn on tracing of the region traversal computation 
+org.eclipse.qvtd.compiler/qvtp2qvts/regionTraversal=false
+
+# Turn on tracing of the polled properties computation 
+org.eclipse.qvtd.compiler/qvts2qvti/polledProperties=false

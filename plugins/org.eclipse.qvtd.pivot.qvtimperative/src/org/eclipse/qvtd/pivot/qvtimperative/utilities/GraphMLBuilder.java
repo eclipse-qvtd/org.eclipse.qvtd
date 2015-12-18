@@ -31,6 +31,9 @@ public class GraphMLBuilder implements GraphBuilder
 			super(color, type);
 		}
 
+		public BorderStyle(String color, LineType type, Double width) {
+			super(color, type, width);
+		}
 	}
 	
 	public class Geometry {
@@ -120,6 +123,13 @@ public class GraphMLBuilder implements GraphBuilder
 			this.type = type;
 		}
 
+		public LineStyle(String color, LineType type, Double width) {
+			super();
+			this.color = color;
+			this.type = type;
+			this.width = width;
+		}
+
 		public String getColor() {
 			return color;
 		}
@@ -191,9 +201,9 @@ public class GraphMLBuilder implements GraphBuilder
 	public void appendEdge(@NonNull String sourceId, @NonNull String targetId, @NonNull String lineColor,
 			@NonNull String lineType, @NonNull String sourceArrowType, @NonNull String targetArrowType) {
 		s.pushTag("edge");
-			s.appendElement("id", EDGEID_PREFIX + edgeCount++);
-			s.appendElement("source", NODEID_PREFIX + sourceId);
-			s.appendElement("target", NODEID_PREFIX + targetId);
+			appendEdgeId();
+			appendEdgeSource(sourceId);
+			appendEdgeTarget(targetId);
 			s.pushTag("data");
 				s.appendElement("key", "d9");
 				s.pushTag("y:PolyLineEdge");
@@ -210,9 +220,9 @@ public class GraphMLBuilder implements GraphBuilder
 			@NonNull String sourceArrowType, @NonNull String targetArrowType,
 			@NonNull String label) {
 		s.pushTag("edge");
-		s.appendElement("id", EDGEID_PREFIX + edgeCount++);
-		s.appendElement("source", NODEID_PREFIX + sourceId);
-		s.appendElement("target", NODEID_PREFIX + targetId);
+		appendEdgeId();
+		appendEdgeSource(sourceId);
+		appendEdgeTarget(targetId);
 		s.pushTag("data");
 			s.appendElement("key", "d9");
 			s.pushTag("y:PolyLineEdge");
@@ -224,6 +234,17 @@ public class GraphMLBuilder implements GraphBuilder
 	s.popTag();
 	}
 
+	protected void appendEdgeId() {
+		s.appendElement("id", EDGEID_PREFIX + edgeCount++);
+	}
+
+	protected void appendEdgeSource(@NonNull String sourceId) {
+		s.appendElement("source", NODEID_PREFIX + sourceId);
+	}
+
+	protected void appendEdgeTarget(@NonNull String targetId) {
+		s.appendElement("target", NODEID_PREFIX + targetId);
+	}
 	
 	public void appendFill(@NonNull String fillColor) {
 		s.pushTag("y:Fill");
@@ -242,10 +263,12 @@ public class GraphMLBuilder implements GraphBuilder
 		s.popTag();
 	}
 	
-	protected void appendEdgeLabel(String label, String labelColor) {
-		s.pushTag("y:EdgeLabel");
-			s.appendElement("textColor", labelColor);
-		s.appendValueAndPopTag(label);
+	protected void appendEdgeLabel(@Nullable String label, String labelColor) {
+		if (label !=  null) {
+			s.pushTag("y:EdgeLabel");
+				s.appendElement("textColor", labelColor);
+			s.appendValueAndPopTag(label);
+		}
 	}
 
 	public void appendGeometry(@Nullable Integer height, @Nullable Integer width, @Nullable Integer x, @Nullable Integer y ) {
@@ -315,10 +338,12 @@ public class GraphMLBuilder implements GraphBuilder
 		s.popTag();
 	}
 	
-	protected void appendNodeLabel(String label, String labelColor) {
-		s.pushTag("y:NodeLabel");
-			s.appendElement("textColor", labelColor);
-		s.appendValueAndPopTag(label);
+	protected void appendNodeLabel(@Nullable String label, String labelColor) {
+		if (label != null) {
+			s.pushTag("y:NodeLabel");
+				s.appendElement("textColor", labelColor);
+			s.appendValueAndPopTag(label);
+		}
 	}
 
 	public void appendShape(@NonNull String shapeName) {
