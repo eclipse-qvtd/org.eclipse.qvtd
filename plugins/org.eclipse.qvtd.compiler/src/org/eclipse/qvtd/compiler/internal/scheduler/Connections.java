@@ -44,6 +44,11 @@ public class Connections
 			}
 			return super.merge(connectionRole);
 		}
+
+		@Override
+		public @NonNull String toString() {
+			return "«mandatory»";
+		}
 	}
 	
 	private static final class PassedConnectionRole extends AbstractConnectionRole
@@ -62,6 +67,11 @@ public class Connections
 				return this;
 			}
 			return super.merge(connectionRole);
+		}
+
+		@Override
+		public @NonNull String toString() {
+			return "«passed»";
 		}
 	}
 
@@ -91,6 +101,11 @@ public class Connections
 				return connectionRole;
 			}
 			return super.merge(connectionRole);
+		}
+
+		@Override
+		public @NonNull String toString() {
+			return "«preferred»";
 		}
 	}
 

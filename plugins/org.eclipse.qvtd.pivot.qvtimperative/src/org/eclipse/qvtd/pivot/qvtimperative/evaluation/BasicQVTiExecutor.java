@@ -48,6 +48,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -139,7 +140,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		}
 		BottomPattern middleBottomPattern = mapping.getBottomPattern();
 		for (Assignment assignment : middleBottomPattern.getAssignment()) {
-			if (assignment instanceof PropertyAssignment) {
+			if (!(assignment instanceof VariableAssignment)) {
 				assignment.accept(undecoratedVisitor);
 			}
 		}
@@ -211,7 +212,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			}
 		}
 		for (Assignment assignment : middleBottomPattern.getAssignment()) {
-			if (!(assignment instanceof PropertyAssignment)) {
+			if (assignment instanceof VariableAssignment) {
 				assignment.accept(undecoratedVisitor);
 			}
 		}

@@ -48,8 +48,10 @@ import org.eclipse.qvtd.compiler.internal.scheduler.Connection;
 import org.eclipse.qvtd.compiler.internal.scheduler.Node;
 import org.eclipse.qvtd.compiler.internal.scheduler.Region;
 import org.eclipse.qvtd.compiler.internal.scheduler.SchedulerConstants;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public abstract class AbstractRegion2Mapping
@@ -72,11 +74,18 @@ public abstract class AbstractRegion2Mapping
 	 * Safe name for each node
 	 */
 	private final @NonNull Set<String> names;
-	
+
+	/**
+	 * The QVTi variable for each connection.
+	 */
+	protected Map<Connection, Variable> connection2variable = null;
+
 	public AbstractRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		this.visitor = visitor;
 		this.region = region;
-		this.mapping = QVTimperativeUtil.createMapping(region.getName());
+		String name = region.getName();
+		assert name != null;
+		this.mapping = QVTimperativeUtil.createMapping(name);
 		this.names = new HashSet<String>(visitor.getReservedNames());
 		for (Node node : region.getNodes()) {
 			for (TypedElement typedElement : node.getTypedElements()) {
@@ -107,7 +116,24 @@ public abstract class AbstractRegion2Mapping
 //		}
 	}
 
-	public void createConnections() {}
+	protected void createConnectionAssignment(@NonNull Variable connectionVariable, @NonNull OCLExpression childrenExpression) {
+		ConnectionAssignment connectionAssignment = QVTimperativeFactory.eINSTANCE.createConnectionAssignment();
+		connectionAssignment.setTargetVariable(connectionVariable);
+		connectionAssignment.setValue(childrenExpression);
+		mapping.getBottomPattern().getAssignment().add(connectionAssignment);
+	}
+
+	protected void createConnectionGuardVariables() {
+		List<Connection> intermediateConnections = region.getIntermediateConnections();
+		if (intermediateConnections.size() > 0) {
+			connection2variable = new HashMap<Connection, Variable>();
+			for (@SuppressWarnings("null")@NonNull Connection connection : intermediateConnections) {
+				Variable connectionVariable = createVariable(connection);
+				connection2variable.put(connection, connectionVariable);
+				mapping.getGuardPattern().getVariable().add(connectionVariable);
+			}
+		}
+	}
 
 	protected @NonNull NullLiteralExp createNullLiteralExp() {
 		return getMetamodelManager().createNullLiteralExp();
@@ -131,7 +157,9 @@ public abstract class AbstractRegion2Mapping
 		PivotMetamodelManager metamodelManager = getMetamodelManager();
 		StandardLibraryInternal standardLibrary = metamodelManager.getStandardLibrary();
 		@NonNull Operation asBestOperation = asOperation;
-		org.eclipse.ocl.pivot.Class sourceType1 = PivotUtil.getUnspecializedTemplateableElement((org.eclipse.ocl.pivot.Class)asSource.getType());
+		org.eclipse.ocl.pivot.Class asType = (org.eclipse.ocl.pivot.Class)asSource.getType();
+		assert asType != null;
+		org.eclipse.ocl.pivot.Class sourceType1 = PivotUtil.getUnspecializedTemplateableElement(asType);
 		for (Operation asOverrideOperation : metamodelManager.getFinalAnalysis().getOverrides(asOperation)) {
 			if (asOverrideOperation.getOwningClass().conformsTo(standardLibrary, sourceType1)) {		// FIXME arguments, generic method
 				asBestOperation = asOverrideOperation;
@@ -187,13 +215,22 @@ public abstract class AbstractRegion2Mapping
 		IdResolver idResolver = visitor.getEnvironmentFactory().getIdResolver();
 		Type asType = connection.getType(idResolver);
 		assert asType != null;
-		return PivotUtil.createVariable(getSafeName(connection.getName()), asType, true, null);
+		String name = connection.getName();
+		assert name != null;
+		return PivotUtil.createVariable(getSafeName(name), asType, true, null);
 	}
 
 	protected @NonNull Variable createVariable(@NonNull Node node) {
 		Type asType = node.getClassDatumAnalysis().getCompleteClass().getPrimaryClass();
 		assert asType != null;
 		return PivotUtil.createVariable(getSafeName(node), asType, true, null);
+	}
+
+	public @NonNull Variable getConnectionVariable(@NonNull Connection connection) {
+		assert connection2variable != null;
+		Variable connectionVariable = connection2variable.get(connection);
+		assert connectionVariable != null;
+		return connectionVariable;
 	}
 
 //	protected @NonNull Iterable<Region> getEarliestFirstCalledRegions() {
@@ -219,10 +256,6 @@ public abstract class AbstractRegion2Mapping
 		}
 		return null;
 	} */
-
-	public @Nullable Variable getConnectionVariable(@NonNull Connection connection) {
-		return null;
-	}
 
 	public @NonNull Mapping getMapping() {
 		return mapping;

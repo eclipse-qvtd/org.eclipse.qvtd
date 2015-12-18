@@ -151,13 +151,18 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			OCLExpression valueExpression = connectionAssignment.getValue();
 			if (valueExpression != null) {
 				try {
-					Object values = valueExpression.accept(undecoratedVisitor);
 //					context.replace(targetVariable, value);
 					Object connection = context.getValueOf(targetVariable);
 					CollectionValue.Accumulator connectionCollection = (Accumulator) ValueUtil.asCollectionValue(connection);
-					CollectionValue valuesCollection = ValueUtil.asCollectionValue(values);
-					for (Object value : valuesCollection) {
-						connectionCollection.add(value);
+					Object values = valueExpression.accept(undecoratedVisitor);
+					if (values instanceof Iterable<?>) {
+						CollectionValue valuesCollection = ValueUtil.asCollectionValue(values);
+						for (Object value : valuesCollection) {
+							connectionCollection.add(value);
+						}
+					}
+					else {
+						connectionCollection.add(values);
 					}
 					return connectionCollection;
 				}

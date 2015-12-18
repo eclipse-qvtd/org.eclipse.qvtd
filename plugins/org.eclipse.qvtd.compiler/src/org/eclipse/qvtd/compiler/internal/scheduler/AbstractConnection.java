@@ -18,6 +18,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.qvtd.pivot.schedule.utilities.DOTStringBuilder;
@@ -265,6 +267,10 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 		for (Node node : getSources()) {
 			Type nodeType = node.getCompleteClass().getPrimaryClass();
 //			System.out.println("  nodeType " + nodeType);
+			if (!(nodeType instanceof CollectionType)) {		// RealizedVariable accumulated on Connection
+				CompleteEnvironment environment = idResolver.getEnvironment();
+				nodeType = isOrdered() ? environment.getOrderedSetType(nodeType, true, null, null) : environment.getSetType(nodeType, true, null, null);
+			}
 			if (commonType == null) {
 				commonType = nodeType;
 			}
@@ -284,6 +290,25 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 
 	public boolean isNode2Node() {
 		return (sourceNodes.size() == 1) && (targetNode2role.size() == 1);
+	}
+
+	/**
+	 * Return true if this connections should be ordered since its source could be ordered.
+	 */
+	private boolean isOrdered() {
+		boolean isOrdered = false;
+		for (Node sourceNode1 : getSources()) {
+			Region sourceRegion = sourceNode1.getRegion();
+			for (Connection passedConnection : sourceRegion.getParentPassedConnections()) {
+				for (Node sourceNode2 : passedConnection.getSources()) {
+					Type sourceType2 = sourceNode2.getClassDatumAnalysis().getCompleteClass().getPrimaryClass();
+					if ((sourceType2 instanceof CollectionType) && ((CollectionType)sourceType2).isOrdered()) {
+						return true;
+					}
+				}
+			}
+		}
+		return isOrdered;
 	}
 
 	@Override
@@ -400,7 +425,6 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 		StringBuilder s = new StringBuilder();
 		if (connectionRole != null) {
 			s.append(connectionRole);
-			s.append("-");
 		}
 		s.append(getName());
 		s.append("(");
@@ -411,6 +435,8 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 		s.append("=>");
 		for (@SuppressWarnings("null")@NonNull Node targetNode : targetNode2role.keySet()) {
 			s.append(" ");
+			ConnectionRole targetConnectionRole = targetNode2role.get(targetNode);
+			s.append(targetConnectionRole);
 			s.append(targetNode.getDisplayName());
 		}
 		s.append(")");

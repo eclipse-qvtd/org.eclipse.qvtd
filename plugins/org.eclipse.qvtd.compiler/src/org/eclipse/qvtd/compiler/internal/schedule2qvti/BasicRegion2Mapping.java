@@ -293,7 +293,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		private @NonNull List<Variable> createVariables(@NonNull List<Variable> oldVariables) {
 			List<Variable> newVariables = new ArrayList<Variable>(oldVariables.size());
 			for (@SuppressWarnings("null")@NonNull Variable oldVariable : oldVariables) {
-				Variable newVariable = PivotUtil.createVariable(oldVariable.getName(), oldVariable.getType(), oldVariable.isIsRequired(), create(oldVariable.getOwnedInit()));
+				String name = oldVariable.getName();
+				assert name != null;
+				Type type = oldVariable.getType();
+				assert type != null;
+				Variable newVariable = PivotUtil.createVariable(name, type, oldVariable.isIsRequired(), create(oldVariable.getOwnedInit()));
 				newVariables.add(newVariable);
 				Node variableNode = getNode(oldVariable);
 				if (variableNode != null) {
@@ -399,9 +403,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			asCallExp.getOwnedIterators().addAll(asIterators);
 			asCallExp.setOwnedBody(asBody);
 			Type formalType = asIteration.getType();
+			assert formalType != null;
 			asCallExp.setType(formalType);
 			asCallExp.setIsRequired(asIteration.isIsRequired());
 			Type actualType = asSource.getType();
+			assert actualType != null;
 			Type returnType = getMetamodelManager().specializeType(formalType, asCallExp, actualType, asSource.getTypeValue());
 			asCallExp.setType(returnType);
 			return asCallExp;
@@ -577,6 +583,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		createInternalPredicates();
 		createRealizedVariables();
 		createPropertyAssignments();
+		createConnectionAssignments();
 		createPollingDependencies();
 	}
 
@@ -686,6 +693,21 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	/**
+	 *	Create accumulation assignments for connections.
+	 */
+	private void createConnectionAssignments() {
+		if (connection2variable != null) {
+			for (Connection connection : connection2variable.keySet()) {
+				Node sourceNode = connection.getSource(region);
+				OCLExpression variableExpression = createVariableExp(sourceNode);
+				Variable connectionVariable = connection2variable.get(connection);
+				assert connectionVariable != null;
+				createConnectionAssignment(connectionVariable, variableExpression);
+			}
+		}
+	}
+
+	/**
 	 * Create the domains and guard/bottom patterns.
 	 */
 	private void createEmptyDomainsAndPatterns() {
@@ -761,7 +783,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		guardNodes.addAll(headNodes);
 		for (Node guardNode : region.getGuardNodes()) {
 			if (!guardNodes.contains(guardNode)) {
-				boolean canBeGuard2 = false;
 				Connection connection = guardNode.getIncomingUsedConnection();
 				if (connection != null) {				// null for LOADED
 					Set<Region> guardCallingRegions = new HashSet<Region>();
@@ -792,6 +813,10 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			assert guardPattern != null;
 			createUnrealizedVariable(guardPattern, guardNode, null);
 		}
+		//
+		//	Create any connectionVariable guards
+		//
+		createConnectionGuardVariables();
 	}
 
 	/**
@@ -799,8 +824,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	private void createInternalPredicates() {
 		@SuppressWarnings("null")@NonNull BottomPattern bottomPattern = mapping.getBottomPattern();
-		Set<Node> reachableNodes = new HashSet<Node>(guardNodes);
-		List<Node> sourcesList = new ArrayList<Node>(guardNodes);
+//		Set<Node> reachableNodes = new HashSet<Node>(guardNodes);
+//		List<Node> sourcesList = new ArrayList<Node>(guardNodes);
 		for (Node node : region.getPredicatedNodes()) {
 			if (node.isInternal()) {
 				for (Edge edge : node.getIncomingEdges()) {
@@ -962,7 +987,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	private void createPollingDependencies() {
 		DomainUsage anyUsage = region.getSchedulerConstants().getDomainAnalysis().getAnyUsage();
-		for (TypedModel qvtpTypedModel : anyUsage.getTypedModels()) {
+		for (@SuppressWarnings("null")@NonNull TypedModel qvtpTypedModel : anyUsage.getTypedModels()) {
 			TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtpTypedModel);
 			ImperativeDomain domain = typedModel2domain.get(qvtiTypedModel);
 			ImperativeArea imperativeArea = domain != null ? (ImperativeArea)domain : mapping;

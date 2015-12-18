@@ -411,11 +411,6 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 //		chainGraph.writeChainDOTfile(baseURI, "c");
 //		chainGraph.writeChainGraphMLfile(baseURI, "c");
 		//
-		for (@SuppressWarnings("null")@NonNull Region region : sortedRegions) {
-//			if (!region.isConnectionRegion()) {
-				getRegion2Mapping(region).createConnections();
-//			}
-		}
 
 /*		Map<TypedModel, Map<Property, List<NavigationEdge>>> typedModel2property2realizedEdges = new HashMap<TypedModel, Map<Property, List<NavigationEdge>>>();
 		for (@SuppressWarnings("null")@NonNull Region region : sortedRegions) {
@@ -462,7 +457,7 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 		}
 		Collections.sort(importedNamespaces, NameUtil.NAMEABLE_COMPARATOR);
 		List<Import> ownedImports = model.getOwnedImports();
-		for (Namespace importedNamespace : importedNamespaces) {
+		for (@SuppressWarnings("null")@NonNull Namespace importedNamespace : importedNamespaces) {
 			ownedImports.add(createImport(null, importedNamespace));
 		}
 		return model;

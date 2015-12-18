@@ -34,12 +34,10 @@ import org.eclipse.qvtd.compiler.internal.scheduler.Node;
 import org.eclipse.qvtd.compiler.internal.scheduler.Region;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class CompositionRegion2Mapping extends AbstractRegion2Mapping
@@ -55,9 +53,14 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 	private Variable headVariable = null;
 
 	/**
-	 * The QVTi variable for each connection.
+	 * QVTi variable for the children node
 	 */
-	private Map<Connection, Variable> connection2variable = null;
+	private Variable childrenVariable = null;
+
+	/**
+	 * Mapping from the scheduled Nodes to their QVTi variables.
+	 */
+	private final @NonNull Map<Node, Variable> node2variable = new HashMap<Node, Variable>();
 
 	public CompositionRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		super(visitor, region);
@@ -79,17 +82,9 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 		headVariable = createVariable(headNode);
 		domain.getGuardPattern().getVariable().add(headVariable);
 		//
-		//	Create and connectionVariable guards
+		//	Create any connectionVariable guards
 		//
-		List<Connection> intermediateConnections = region.getIntermediateConnections();
-		if (intermediateConnections.size() > 0) {
-			connection2variable =new HashMap<Connection, Variable>();
-			for (Connection connection : intermediateConnections) {
-				Variable connectionVariable = createVariable(connection);
-				connection2variable.put(connection, connectionVariable);
-				mapping.getGuardPattern().getVariable().add(connectionVariable);
-			}
-		}
+		createConnectionGuardVariables();
 	}
 	
 	/**
@@ -102,31 +97,20 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 		//
 		OCLExpression sourceExpression = PivotUtil.createVariableExp(childrenVariable);
 		Type type = childrenVariable.getType();
-//		if (!(type instanceof CollectionType)) {
-//			sourceExpression = createOclAsSetCallExp(sourceExpression);
-//			type = sourceExpression.getType();
-//		}
-			CollectionType childrenCollectionType = (CollectionType)type;
-			Type childrenElementType = childrenCollectionType.getElementType();
-			assert childrenElementType != null;
-//			CollectionType type = (CollectionType)sourceExpression.getType();
+		assert type instanceof CollectionType;
+		type = sourceExpression.getType();
+		CollectionType childrenCollectionType = (CollectionType)type;
+		Type childrenElementType = childrenCollectionType.getElementType();
+		assert childrenElementType != null;
 			Type elementType = targetNode.getCompleteClass().getPrimaryClass();
 			assert elementType != null;
 			if (!childrenElementType.conformsTo(visitor.getStandardLibrary(), elementType)) {
-				CompleteClass sourceCompleteClass = sourceNode.getCompleteClass();
-				org.eclipse.ocl.pivot.Class sourcePrimaryClass = sourceCompleteClass.getPrimaryClass();
-				if (sourcePrimaryClass instanceof CollectionType) {
-					Type sourceElementType = ((CollectionType)sourcePrimaryClass).getElementType();
-					sourceCompleteClass = visitor.getEnvironmentFactory().getCompleteModel().getCompleteClass(sourceElementType);
-				}
-				OCLExpression asTypeExp = createTypeExp(sourceCompleteClass);
-				sourceExpression = createOperationCallExp(sourceExpression, getSelectByKindOperation(), asTypeExp);
+				sourceExpression = createSelectByKind(sourceNode);
 			}
 			//
 			//	Create the loop variable.
 			//
 			Variable loopVariable = PivotUtil.createVariable(getSafeName("aChild"), elementType, true, null);
-//			mapping.getBottomPattern().getVariable().add(loopVariable);
 			//
 			//	Create loop over mapping calls of prevailing loop variable value
 			//
@@ -150,7 +134,7 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 				mappingCallBindings.add(mappingCallBinding);
 			}
 			if (connection2variable != null) {
-				for (Variable connectionVariable : connection2variable.values()) {
+				for (@SuppressWarnings("null")@NonNull Variable connectionVariable : connection2variable.values()) {
 					OCLExpression connectionVariableExpression = PivotUtil.createVariableExp(connectionVariable);
 					mappingCallBinding = QVTimperativeUtil.createMappingCallBinding(connectionVariable, connectionVariableExpression);
 					setLegacyIsPolled(calledMapping, mappingCallBinding);
@@ -159,137 +143,51 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 			}
 			MappingCall mappingCall = QVTimperativeUtil.createMappingCall(calledMapping, mappingCallBindings);
 			return QVTimperativeUtil.createMappingLoop(sourceExpression, loopVariable, mappingCall);
-//		}
-/*		else {
-			Type childrenElementType = type;
-			assert childrenElementType != null;
-			OCLExpression sourceExpression = PivotUtil.createVariableExp(childrenVariable);
-//			CollectionType type = (CollectionType)sourceExpression.getType();
-			Type elementType = targetNode.getCompleteClass().getPrimaryClass();
-			assert elementType != null;
-			if (!childrenElementType.conformsTo(visitor.getStandardLibrary(), elementType)) {
-				OCLExpression asTypeExp = createTypeExp(sourceNode.getCompleteClass());
-				sourceExpression = createOperationCallExp(sourceExpression, getSelectByKindOperation(), asTypeExp);
-			}
-			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(targetNode.getRegion());
-			Variable guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
-			List<MappingCallBinding> mappingCallBindings = new ArrayList<MappingCallBinding>();
-			mappingCallBindings.add(QVTimperativeUtil.createMappingCallBinding(guardVariable, sourceExpression));
-			List<Node> calledGuardNodes = new ArrayList<Node>(calledRegion2Mapping.getGuardNodes());
-			calledGuardNodes.remove(targetNode);
-			if (calledGuardNodes.size() > 0) {
-				assert calledGuardNodes.size() == 1;
-				@SuppressWarnings("null")@NonNull Node calledGuardNode = calledGuardNodes.get(0);
-				Variable guardVariable2 = calledRegion2Mapping.getGuardVariable(calledGuardNode);
-				OCLExpression headVariableExpression = createVariableExp(getHeadNode());
-				mappingCallBindings.add(QVTimperativeUtil.createMappingCallBinding(guardVariable2, headVariableExpression));
-			}
-			MappingCall mappingCall = QVTimperativeUtil.createMappingCall(calledRegion2Mapping.getMapping(), mappingCallBindings);
-			return mappingCall;
-		} */
 	}
 
-	@Override
-	public void createConnections() {
-		//
-		//	Create guard variables for connections.
-		//
-/*		ChainNode chain = visitor.getChain(region);
-		for (Connection connection : chain.getConnections()) {
-			ChainNode child = chain.getChild(connection);
-			Region childRegion = child.getRegion();
-			if (childRegion.isConnectionRegion()) {
-				Type connectionClass = null;
-				int bestDepth = Integer.MAX_VALUE;
-				for (Connection connectionConnection : childRegion.getParentPassedConnections()) {
-					Node connectionSource = connectionConnection.getSource();
-					int depth = visitor.getRegion2Depth().getRegionDepth(connectionSource.getRegion());
-					if ((connectionClass == null) || (depth < bestDepth)) {
-						connectionClass = connectionSource.getCompleteClass().getPrimaryClass();
-						bestDepth = depth;
-					}
-				}
-				assert connectionClass != null;
-				Variable connectionVariable =  PivotUtil.createVariable(getSafeName(connection.getSource()), connectionClass, true, null);
-				mapping.getGuardPattern().getVariable().add(connectionVariable);
-				if (connectionRegion2connectionVariable == null) {
-					connectionRegion2connectionVariable = new HashMap<Connection, Variable>();
-				}
-				Variable oldConnectionVariable = connectionRegion2connectionVariable.put((Connection) childRegion, connectionVariable);
-				assert oldConnectionVariable == null;
-			}
-		} */
+	private @NonNull OCLExpression createSelectByKind(@NonNull Node resultNode) {
+		Variable resultVariable = node2variable.get(resultNode);
+		if (resultVariable == null) {
+			OCLExpression asSource = PivotUtil.createVariableExp(getChildrenVariable());
+			CompleteClass sourceCompleteClass = resultNode.getCompleteClass();
+			CollectionType sourceCollectionType = (CollectionType) sourceCompleteClass.getPrimaryClass();
+			Type sourceElementType = sourceCollectionType.getElementType();
+			assert sourceElementType != null;
+			CompleteClass sourceElementClass = visitor.getEnvironmentFactory().getCompleteModel().getCompleteClass(sourceElementType);
+			OCLExpression asTypeExp = createTypeExp(sourceElementClass);
+			OCLExpression selectExp = createOperationCallExp(asSource, getSelectByKindOperation(), asTypeExp);
+			resultVariable = PivotUtil.createVariable(resultNode.getName(), selectExp);
+			mapping.getBottomPattern().getVariable().add(resultVariable);
+			node2variable.put(resultNode, resultVariable);
+		}
+		return PivotUtil.createVariableExp(resultVariable);
 	}
 
 	@Override
 	public void createStatements() {
-		Node headNode = getHeadNode();
+		Variable childrenVariable = getChildrenVariable();
 		//
-		//	Create an unrealized variable for the raw navigation result.
-		//
-		Property property = null;
-		for (NavigationEdge edge : headNode.getNavigationEdges()) {
-			Property navigationProperty = edge.getProperty();
-			if (property == null) {
-				property = navigationProperty;
-			}
-			else {
-				assert property == navigationProperty;
-			}
-		}
-		assert property != null;
-		//
-		//	Cache the children in a middle bottom pattern variable.
-		//
-		OCLExpression parentExpression = createVariableExp(headNode);
-		OCLExpression initExpression = PivotUtil.createNavigationCallExp(parentExpression, property);
-		Type asType = initExpression.getType();
-		if (!(asType instanceof CollectionType)) {
-			initExpression = createOclAsSetCallExp(initExpression);
-			asType = initExpression.getType();
-		}
-		assert asType != null;
-		Variable childrenVariable = PivotUtil.createVariable(getSafeName("allChildren"), asType, true, initExpression);
-		mapping.getBottomPattern().getVariable().add(childrenVariable);
-		//
-		//	Create union assignments for connections.
+		//	Create accumulation assignments for connections.
 		//
 		if (connection2variable != null) {
-			for (Variable connectionVariable : connection2variable.values()) {
-				OCLExpression childrenExpression = PivotUtil.createVariableExp(childrenVariable);
-				ConnectionAssignment connectionAssignment = QVTimperativeFactory.eINSTANCE.createConnectionAssignment();
-				connectionAssignment.setTargetVariable(connectionVariable);
-				connectionAssignment.setValue(childrenExpression);
-				mapping.getBottomPattern().getAssignment().add(connectionAssignment);
+			for (Connection connection : connection2variable.keySet()) {
+				Variable connectionVariable = connection2variable.get(connection);
+				assert connectionVariable != null;
+				Node resultNode = connection.getSource(region);
+				OCLExpression sourceExpression = createSelectByKind(resultNode);
+				createConnectionAssignment(connectionVariable, sourceExpression);
 			}
 		}
 		//
 		//	Create a loop for each distinct consumer of the children.
 		//
 		MappingStatement mappingStatement = null;
-//		for (@SuppressWarnings("null")@NonNull Node sourceNode : AbstractNode.getSortedTargets(region.getComposedNodes())) {
-//			for (@SuppressWarnings("null")@NonNull Node targetNode : AbstractNode.getSortedTargets(sourceNode.getPassedBindingTargets())) {
-//				MappingStatement mappingLoop = createChildLoop(childrenVariable, sourceNode, targetNode);
-//				mappingStatement = QVTimperativeUtil.addMappingStatement(mappingStatement, mappingLoop);
-//			}		
-//		}
-		for (Region childRegion : region.getCallableChildren()) {
-//			ChainNode child = chain.getChild(connection);
-//			Region childRegion = child.getRegion();
-//			if (childRegion.isConnectionRegion() && Iterables.isEmpty(child.getConnections())) {
-//			}
-//			else if (childRegion.isConnectionRegion() && !Iterables.isEmpty(child.getConnections())) {
-//			}
-//			else {
+		for (@SuppressWarnings("null")@NonNull Region childRegion : region.getCallableChildren()) {
 				Region calledRegion = childRegion;
 				AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
-//				Map<Variable, OCLExpression> loopVariables = new HashMap<Variable, OCLExpression>();
-//				List<MappingCallBinding> mappingCallBindings = new ArrayList<MappingCallBinding>();
 				for (@SuppressWarnings("null")@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
 					for (Node callingNode : calledGuardNode.getPassedBindingSources()) {
 						if (callingNode.getRegion() == region) {
-//							MappingCallBinding mappingCallBinding = createMappingCallBinding(callingNode, calledGuardNode, loopVariables);
-//							mappingCallBindings.add(mappingCallBinding);
 							MappingStatement mappingLoop = createChildLoop(childrenVariable, callingNode, calledGuardNode);
 							mappingStatement = QVTimperativeUtil.addMappingStatement(mappingStatement, mappingLoop);
 						}
@@ -297,21 +195,6 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 				}
 //			}
 		}	
-/*		for (@SuppressWarnings("null")@NonNull Region calledRegion : getEarliestFirstCalledRegions()) {
-			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
-//			Map<Variable, OCLExpression> loopVariables = new HashMap<Variable, OCLExpression>();
-//			List<MappingCallBinding> mappingCallBindings = new ArrayList<MappingCallBinding>();
-			for (@SuppressWarnings("null")@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
-				for (Node callingNode : calledGuardNode.getPassedBindingSources()) {
-					if (callingNode.getRegion() == region) {
-//						MappingCallBinding mappingCallBinding = createMappingCallBinding(callingNode, calledGuardNode, loopVariables);
-//						mappingCallBindings.add(mappingCallBinding);
-						MappingStatement mappingLoop = createChildLoop(childrenVariable, callingNode, calledGuardNode);
-						mappingStatement = QVTimperativeUtil.addMappingStatement(mappingStatement, mappingLoop);
-					}
-				}
-			}	
-		} */
 		//
 		//	Create a loop for each distinct child recursion.
 		//
@@ -333,12 +216,48 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 		return PivotUtil.createVariableExp(headVariable2);
 	}
 
-	@Override
-	public @NonNull Variable getConnectionVariable(@NonNull Connection connection) {
-		assert connection2variable != null;
-		Variable connectionVariable = connection2variable.get(connection);
-		assert connectionVariable != null;
-		return connectionVariable;
+	protected @NonNull Variable getChildrenVariable() {
+		Variable childrenVariable2 = childrenVariable;
+		if (childrenVariable2 == null) {
+			Node headNode = getHeadNode();
+			//
+			//	Create an unrealized variable for the raw navigation result.
+			//
+			Property property = null;
+			for (NavigationEdge edge : headNode.getNavigationEdges()) {
+				Property navigationProperty = edge.getProperty();
+				if (property == null) {
+					property = navigationProperty;
+				}
+				else {
+					assert property == navigationProperty;
+				}
+			}
+			assert property != null;
+			//
+			//	Cache the children in a middle bottom pattern variable.
+			//
+			OCLExpression parentExpression = createVariableExp(headNode);
+			OCLExpression initExpression = PivotUtil.createNavigationCallExp(parentExpression, property);
+			Type asType = initExpression.getType();
+			if (!(asType instanceof CollectionType)) {
+				// FIXME if we have a 1:1 containment relationship we really don't need the bloat of a CompositionRegion at all.
+				initExpression = createOclAsSetCallExp(initExpression);
+				asType = initExpression.getType();
+			}
+			else {
+				// FIXME this redundant selectByKind avoids an out-of-order CG of a boxed CSE
+				Type childrenElementType2 = ((CollectionType)asType).getElementType();
+				assert childrenElementType2 != null;
+				CompleteClass sourceCompleteClass = visitor.getEnvironmentFactory().getCompleteModel().getCompleteClass(childrenElementType2);
+				OCLExpression asTypeExp2 = createTypeExp(sourceCompleteClass);
+				initExpression = createOperationCallExp(initExpression, getSelectByKindOperation(), asTypeExp2);
+			}
+			assert asType != null;
+			childrenVariable = childrenVariable2 = PivotUtil.createVariable(getSafeName("allChildren"), asType, true, initExpression);
+			mapping.getBottomPattern().getVariable().add(childrenVariable2);
+		}
+		return childrenVariable2;
 	}
 
 	@SuppressWarnings("null")
@@ -367,5 +286,9 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 			headNode = headNode2;
 		}
 		return headNode2;
+	}
+
+	protected @NonNull VariableExp getHeadVariableExp() {
+		return PivotUtil.createVariableExp(getGuardVariable(getHeadNode()));
 	}
 }

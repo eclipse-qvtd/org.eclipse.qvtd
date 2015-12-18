@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionLiteralExp;
-import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.IterateExp;
 import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -281,7 +280,7 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 	}
 
 	public static boolean isConnectionVariable(@NonNull Variable asVariable) {
-		if (asVariable.getType() instanceof CollectionType) {
+//		if (asVariable.getType() instanceof CollectionType) {
 			Area asArea = QVTimperativeUtil.getContainingArea(asVariable);
 			if (asArea instanceof Mapping) {
 //				for (Assignment asAssignment : asArea.getBottomPattern().getAssignment()) {
@@ -292,7 +291,7 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 //					}
 //				}
 			}
-		}
+//		}
 		return false;
 	}
 

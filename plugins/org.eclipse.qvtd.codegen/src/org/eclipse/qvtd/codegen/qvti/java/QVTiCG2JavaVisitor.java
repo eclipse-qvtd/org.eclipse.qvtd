@@ -506,47 +506,55 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			return false;
 		}
 		final String iteratorName = getSymbolName(null, "iterator");
-		CollectionTypeId abstractCollectionTypeId = (CollectionTypeId)initValue.getASTypeId();
-		assert abstractCollectionTypeId != null;
-		TypeId abstractElementTypeId = abstractCollectionTypeId.getElementTypeId();
-		BoxedDescriptor abstractBoxedDescriptor = context.getBoxedDescriptor(abstractElementTypeId);
+//		CollectionTypeId abstractCollectionTypeId = (CollectionTypeId)initValue.getASTypeId();
+//		assert abstractCollectionTypeId != null;
+//		TypeId abstractElementTypeId = abstractCollectionTypeId.getElementTypeId();
+//		BoxedDescriptor abstractBoxedDescriptor = context.getBoxedDescriptor(abstractElementTypeId);
 		CollectionTypeId concreteCollectionTypeId = (CollectionTypeId)cgConnectionAssignment.getConnectionVariable().getASTypeId();
 		assert concreteCollectionTypeId != null;
 		TypeId concreteElementTypeId = concreteCollectionTypeId.getElementTypeId();
 		BoxedDescriptor concreteBoxedDescriptor = context.getBoxedDescriptor(concreteElementTypeId);
-		js.append("for (");
-		js.appendClassReference(abstractBoxedDescriptor);
-		js.append(" ");
-		js.append(iteratorName);
-		js.append(" : ");
-		if (initValue.isBoxed()) {
-			js.appendClassReference(ValueUtil.class);
-			js.append(".typedIterable(");
-			js.appendClassReference(abstractBoxedDescriptor);
-			js.append(".class, ");
+		BoxedDescriptor abstractBoxedDescriptor = concreteBoxedDescriptor;
+		if (!(initValue.getASTypeId() instanceof CollectionTypeId)) {
+			js.appendReferenceTo(cgConnectionAssignment.getConnectionVariable());
+			js.append(".add(");
 			js.appendValueName(initValue);
-			js.append(")");
+			js.append(");\n");
 		}
 		else {
-			js.appendValueName(initValue);
-		}
-		js.append(") {\n");
-			js.pushIndentation(null);
-			js.append("if (");
+			js.append("for (");
+			js.appendClassReference(abstractBoxedDescriptor);
+			js.append(" ");
 			js.append(iteratorName);
-			js.append(" instanceof ");
-			js.appendClassReference(concreteBoxedDescriptor);
+			js.append(" : ");
+			if (initValue.isBoxed()) {
+				js.appendClassReference(ValueUtil.class);
+				js.append(".typedIterable(");
+				js.appendClassReference(abstractBoxedDescriptor);
+				js.append(".class, ");
+				js.appendValueName(initValue);
+				js.append(")");
+			}
+			else {
+				js.appendValueName(initValue);
+			}
 			js.append(") {\n");
 				js.pushIndentation(null);
-				js.appendReferenceTo(cgConnectionAssignment.getConnectionVariable());
-				js.append(".add(");
+				js.append("if (");
 				js.append(iteratorName);
-				js.append(");\n");
+				js.append(" instanceof ");
+				js.appendClassReference(concreteBoxedDescriptor);
+				js.append(") {\n");
+					js.pushIndentation(null);
+					js.appendReferenceTo(cgConnectionAssignment.getConnectionVariable());
+					js.append(".add(");
+					js.append(iteratorName);
+					js.append(");\n");
+					js.popIndentation();
+				js.append("}\n");
 				js.popIndentation();
 			js.append("}\n");
-			js.popIndentation();
-		js.append("}\n");
-		
+		}
 		return true;
 	}
 
@@ -1112,13 +1120,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 				}
 			}
 		}
-		List<CGConnectionAssignment> cgConnectionAssignments = cgMappingExp.getConnectionAssignments();
-		if (cgConnectionAssignments.size() > 0) {
-			js.append("// connection assignments\n");
-			for (CGConnectionAssignment cgConnectionAssignment : cgConnectionAssignments) {
-				cgConnectionAssignment.accept(this);
-			}
-		}
 		List<CGValuedElement> cgRealizedVariables = cgMappingExp.getRealizedVariables();
 		if (cgRealizedVariables.size() > 0) {
 			js.append("// creations\n");
@@ -1131,6 +1132,13 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.append("// property assignments\n");
 			for (CGPropertyAssignment cgAssignment : cgPropertyAssignments) {
 				cgAssignment.accept(this);
+			}
+		}
+		List<CGConnectionAssignment> cgConnectionAssignments = cgMappingExp.getConnectionAssignments();
+		if (cgConnectionAssignments.size() > 0) {
+			js.append("// connection assignments\n");
+			for (CGConnectionAssignment cgConnectionAssignment : cgConnectionAssignments) {
+				cgConnectionAssignment.accept(this);
 			}
 		}
 		CGValuedElement body = cgMappingExp.getBody();

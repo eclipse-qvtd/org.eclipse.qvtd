@@ -579,7 +579,7 @@ public class QVTdMtcTests extends LoadTestCase {
 			Transformer tx = myQVT.createTransformer(txClass);
 			myQVT.loadInput(tx, "upperGraph", inputURI);
 			tx.run();
-			myQVT.saveOutput(tx, "lowerGraph", outputURI, expectedOutputURI, null);
+			myQVT.saveOutput(tx, "lowerGraph", outputURI, expectedOutputURI, UpperToLowerNormalizer.INSTANCE);
 	        myQVT.dispose();
     	}
         mtc.disposeModels();

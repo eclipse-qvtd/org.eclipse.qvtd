@@ -254,7 +254,8 @@ public class RegionOrdering
 				List<Region> intermediateRegions = new ArrayList<Region>();
 				for (@SuppressWarnings("null")@NonNull Region sourceRegion : connection2sourceRegions.get(connection)) {
 					if (sourceRegion != commonRegion) {
-						installIntermediateConnections(intermediateRegions, Collections.singletonList(sourceRegion), commonRegion);
+						@SuppressWarnings("null")@NonNull List<Region> sourceRegions = Collections.singletonList(sourceRegion);
+						installIntermediateConnections(intermediateRegions, sourceRegions, commonRegion);
 					}
 				}
 				for (@SuppressWarnings("null")@NonNull Region targetRegion : connection2targetRegions.get(connection)) {
@@ -375,10 +376,12 @@ public class RegionOrdering
 		if (unblockedRegions.size() > 0) {		// FIXME deepest compatible with current context
 			for (Region region : unblockedRegions) {
 				if (region instanceof CompositionRegion) {
-					return region;		// FIXME Make UpperToLower determinstically awkward
+					return region;		// FIXME Make UpperToLower deterministically awkward
 				}
 			}
-			return unblockedRegions.iterator().next();		// FIXME deterministic
+			List<Region> sorted = new ArrayList<Region>(unblockedRegions);
+			Collections.sort(sorted, NameUtil.NAMEABLE_COMPARATOR);
+			return sorted.get(0);
 		}
 		//
 		//	Select any connection subject only to a preferred block and which has no outgoing passed regions.
@@ -392,7 +395,9 @@ public class RegionOrdering
 		//	Select the 'first' region that is subject to a preferred blockage.
 		//
 		if (preferredBlockedRegions.size() > 0) {		// FIXME deepest compatible with current context
-			return preferredBlockedRegions.iterator().next();		// FIXME deterministic
+			List<Region> sorted = new ArrayList<Region>(preferredBlockedRegions);
+			Collections.sort(sorted, NameUtil.NAMEABLE_COMPARATOR);
+			return sorted.get(0);
 		}
 		return null;
 	}

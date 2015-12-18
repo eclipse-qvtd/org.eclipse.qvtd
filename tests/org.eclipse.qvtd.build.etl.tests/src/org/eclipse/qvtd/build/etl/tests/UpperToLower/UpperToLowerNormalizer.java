@@ -20,6 +20,12 @@ import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 
 import build.upper2lower.simplegraph.SimplegraphPackage;
 
+/**
+ * UpperToLowerNormalizer normalises the results of the UpperToLower transformation.
+ * 
+ * Even though everything is ordered in the input/output model, the edges/incoming/outgoing lists cn be independently ordered, and only
+ * the edges order is preserved in the middle model.
+ */
 public class UpperToLowerNormalizer implements ModelNormalizer
 {
 	public static final @NonNull UpperToLowerNormalizer INSTANCE = new UpperToLowerNormalizer();
@@ -28,11 +34,13 @@ public class UpperToLowerNormalizer implements ModelNormalizer
 	{
 		private final @NonNull EClass edgeClass;
 		private final @NonNull EReference edgeSource;
+		private final @NonNull EReference edgeTarget;
 		private final @NonNull EAttribute nodeLabel;
 
-		public ElementComparator(@NonNull EClass edgeClass, @NonNull EReference edgeSource, @NonNull EAttribute nodeLabel) {
+		public ElementComparator(@NonNull EClass edgeClass, @NonNull EReference edgeSource, @NonNull EReference edgeTarget, @NonNull EAttribute nodeLabel) {
 			this.edgeClass = edgeClass;
 			this.edgeSource = edgeSource;
+			this.edgeTarget = edgeTarget;
 			this.nodeLabel = nodeLabel;
 		}
 		
@@ -46,6 +54,10 @@ public class UpperToLowerNormalizer implements ModelNormalizer
 				}
 				n1 = (String) ((EObject)o1.eGet(edgeSource)).eGet(nodeLabel);
 				n2 = (String) ((EObject)o2.eGet(edgeSource)).eGet(nodeLabel);
+				if (ClassUtil.safeEquals(n1, n2)) {
+					n1 = (String) ((EObject)o1.eGet(edgeTarget)).eGet(nodeLabel);
+					n2 = (String) ((EObject)o2.eGet(edgeTarget)).eGet(nodeLabel);
+				}
 			}
 			else {
 				if (edgeClass.isInstance(o2)) {
@@ -83,16 +95,18 @@ public class UpperToLowerNormalizer implements ModelNormalizer
 		}
 	}
 	
-/*	protected class TableNormalizer implements Normalizer
+	protected class NodeNormalizer implements Normalizer
 	{
-		protected final @NonNull EObject table;
-		protected final @NonNull EReference tableColumn;
-		protected final @NonNull RModelElementNameComparator rmodelElementNameComparator;
+		protected final @NonNull EObject node;
+		protected final @NonNull EReference incoming;
+		protected final @NonNull EReference outgoing;
+		protected final @NonNull ElementComparator elementComparator;
 
-		public TableNormalizer(@NonNull EObject table, @NonNull EReference tableColumn, @NonNull RModelElementNameComparator rmodelElementNameComparator) {
-			this.table = table;
-			this.tableColumn = tableColumn;
-			this.rmodelElementNameComparator = rmodelElementNameComparator;
+		public NodeNormalizer(@NonNull EObject node, @NonNull EReference incoming, @NonNull EReference outgoing, @NonNull ElementComparator elementComparator) {
+			this.node = node;
+			this.incoming = incoming;
+			this.outgoing = outgoing;
+			this.elementComparator = elementComparator;
 		}
 
 		@Override
@@ -102,11 +116,12 @@ public class UpperToLowerNormalizer implements ModelNormalizer
 
 		@Override
 		public void normalize() {
-			@SuppressWarnings("unchecked")
-			EList<EObject> columns = (EList<EObject>) table.eGet(tableColumn);
-			ECollections.sort(columns, rmodelElementNameComparator);
+			@SuppressWarnings("unchecked")EList<EObject> incomingEdges = (EList<EObject>) node.eGet(incoming);
+			ECollections.sort(incomingEdges, elementComparator);
+			@SuppressWarnings("unchecked")EList<EObject> outgoingEdges = (EList<EObject>) node.eGet(outgoing);
+			ECollections.sort(outgoingEdges, elementComparator);
 		}
-	} */
+	}
 
 	public @NonNull List<Normalizer> normalize(@NonNull Resource resource) {
 		EObject eRoot = resource.getContents().get(0);
@@ -123,17 +138,24 @@ public class UpperToLowerNormalizer implements ModelNormalizer
 		assert graphElements != null;
 		EAttribute nodeLabel = (EAttribute) nodeClass.getEStructuralFeature(SimplegraphPackage.Literals.NODE__LABEL.getName());
 		assert nodeLabel != null;
+		EReference nodeIncoming = (EReference) nodeClass.getEStructuralFeature(SimplegraphPackage.Literals.NODE__INCOMING.getName());
+		assert nodeIncoming != null;
+		EReference nodeOutgoing = (EReference) nodeClass.getEStructuralFeature(SimplegraphPackage.Literals.NODE__OUTGOING.getName());
+		assert nodeOutgoing != null;
 		EReference edgeSource = (EReference) edgeClass.getEStructuralFeature(SimplegraphPackage.Literals.EDGE__SOURCE.getName());
 		assert edgeSource != null;
 		EReference edgeTarget = (EReference) edgeClass.getEStructuralFeature(SimplegraphPackage.Literals.EDGE__TARGET.getName());
 		assert edgeTarget != null;
-		ElementComparator elementComparator = new ElementComparator(edgeClass, edgeSource, nodeLabel);
+		ElementComparator elementComparator = new ElementComparator(edgeClass, edgeSource, edgeTarget, nodeLabel);
 		List<Normalizer> normalizers = new ArrayList<Normalizer>();
 		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			EClass eClass = eObject.eClass();
 			if (graphClass.isSuperTypeOf(eClass)) {
 				normalizers.add(new GraphNormalizer(eObject, graphElements, elementComparator));
+			}
+			if (nodeClass.isSuperTypeOf(eClass)) {
+				normalizers.add(new NodeNormalizer(eObject, nodeIncoming, nodeOutgoing, elementComparator));
 			}
 		}
 		for (Normalizer normalizer : normalizers) {
