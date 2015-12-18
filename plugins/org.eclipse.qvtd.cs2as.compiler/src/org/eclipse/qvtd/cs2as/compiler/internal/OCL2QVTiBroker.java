@@ -10,11 +10,13 @@
  *******************************************************************************/
 package org.eclipse.qvtd.cs2as.compiler.internal;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.types.EolPrimitiveType;
 import org.eclipse.jdt.annotation.NonNull;
@@ -108,6 +110,22 @@ public class OCL2QVTiBroker extends MtcBroker {
 			qvtsToGraphML(sModel);
 		}
 		iModel = qvtpQvtsToQvti(pModel, sModel);
+	}
+	
+
+	@Override
+	public Resource newExecute() throws QvtMtcExecutionException {
+		pModel = (tracesASUri == null)	? runOCL2QVTp_MiddleFolded(oclASUri, URI.createURI(partitionUri), traceabilityPropName) 
+										: runOCL2QVTp_MiddleModel(oclASUri, URI.createURI(partitionUri), tracesASUri);
+		prepare();
+		try {
+			iResource = qvtp2qvti();
+		} catch (QvtMtcExecutionException e) {
+			throw e;
+		} catch (IOException e) {
+			throw new QvtMtcExecutionException("Failed to create regions", e);
+		}
+		return iResource;
 	}
 	
 	

@@ -38,17 +38,25 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.compiler.internal.etl.scheduling.ClassRelationships;
+import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.Configuration;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.Direction;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.QVTcConfigPackage;
+import org.eclipse.qvtd.compiler.internal.scheduler.ScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 import org.eclipse.qvtd.pivot.schedule.utilities.ScheduleToCallGraph;
@@ -228,11 +236,15 @@ public class MtcBroker {
 	/** The p model. */
 	protected PivotModel pModel;
 	
+	/** The g model. */
+	protected PivotModel gModel;
+
 	/** The s model. */
 	protected PivotModel sModel;
 	
 	/** The i model. */
 	protected PivotModel iModel;
+	protected Resource iResource;
 
 	
 		
@@ -322,6 +334,15 @@ public class MtcBroker {
 	}
 
 	/**
+	 * Gets the g model.
+	 *
+	 * @return the gModel
+	 */
+	public PivotModel getgModel() {
+		return gModel;
+	}
+
+	/**
 	 * Gets the s model.
 	 *
 	 * @return the sModel
@@ -339,6 +360,9 @@ public class MtcBroker {
 	public PivotModel getiModel() {
 		return iModel;
 	}
+	public Resource getiResource() {
+		return iResource;
+	}
 	
 	/**
 	 * Prepare.
@@ -352,6 +376,12 @@ public class MtcBroker {
 		createContainmentTrees();
 	}
 
+	public static void assertNoResourceErrors(String prefix, Resource resource) {
+		String message = org.eclipse.ocl.pivot.utilities.PivotUtil.formatResourceDiagnostics(resource.getErrors(), prefix, "\n\t");
+		if (message != null)
+			assert false : message;
+	}
+
 	/**
 	 * Execute.
 	 *
@@ -362,12 +392,13 @@ public class MtcBroker {
 		
 		prepare();
 		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
+		assertNoResourceErrors("cModel", cModel.getResource());
 		uModel = qvtcToQvtu(cModel);
-		
+		assertNoResourceErrors("uModel", uModel.getResource());
 		mModel = qvtuToQvtm(uModel);
-		
+		assertNoResourceErrors("mModel", mModel.getResource());
 		pModel = qvtmToQvtp(mModel);
-		
+		assertNoResourceErrors("pModel", pModel.getResource());
 		sModel = qvtpToQvts(pModel);
 		if (nestedSchedule)
 			qvtpNestingScheduling(pModel, sModel);
@@ -376,6 +407,58 @@ public class MtcBroker {
 		if (createGraphml)
 			qvtsToGraphML(sModel);
 		iModel = qvtpQvtsToQvti(pModel, sModel);
+		iModel.store();
+	}
+	public @Nullable Resource newExecute() throws QvtMtcExecutionException {
+		prepare();
+		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
+		assertNoResourceErrors("cModel", cModel.getResource());
+		uModel = qvtcToQvtu(cModel);
+		assertNoResourceErrors("uModel", uModel.getResource());
+		mModel = qvtuToQvtm(uModel);
+		assertNoResourceErrors("mModel", mModel.getResource());
+		pModel = qvtmToQvtp(mModel);
+		assertNoResourceErrors("pModel", pModel.getResource());
+		try {
+			iResource = qvtp2qvti();
+		} catch (QvtMtcExecutionException e) {
+			throw e;
+		} catch (IOException e) {
+			throw new QvtMtcExecutionException("Failed to create regions", e);
+		}
+		return iResource;
+	}
+	
+	protected Resource qvtp2qvti() throws IOException, QvtMtcExecutionException {
+		Resource pResource = pModel.getResource();
+		ResourceSet pResourceSet = pResource.getResourceSet();
+		QVTimperativeDomainUsageAnalysis domainAnalysis = new QVTimperativeDomainUsageAnalysis((EnvironmentFactoryInternal) this.environmentFactory);
+		gModel = createASModel(scheduleUri, "QVTg", "QVT", QVTS_FULL_NS, false, true, false, true);
+		Resource gResource = gModel.getResource();
+		pModel.setCachingEnabled(true);
+		pModel.clearCache();
+		pModel.setStoredOnDisposal(false);
+		Transformation asTransformation;
+		try {
+			asTransformation = getTransformation(pResource);
+		} catch (Exception e1) {
+			throw new QvtMtcExecutionException(e1.getMessage());
+		}
+		/*Map<Element, DomainUsage> analysis =*/ domainAnalysis.analyzeTransformation(asTransformation);
+		ClassRelationships classRelationships = new ClassRelationships(environmentFactory, pResourceSet);
+		QVTp2QVTg qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);
+		qvtp2qvtg.run(pResource, gResource);
+		gResource.getContents().add(domainAnalysis.getPrimitiveTypeModel());
+		
+		// We have to manually save the models
+		pModel.store();
+		assertNoResourceErrors("gModel", gResource);
+		if (createGraphml) {
+			qvtsToGraphML(gModel);
+		}
+		org.eclipse.qvtd.compiler.internal.scheduler.Scheduler scheduler = new Scheduler(environmentFactory, getSchedule(), domainAnalysis, qvtp2qvtg);
+		ScheduledRegion rootRegion = scheduler.qvtp2qvts();
+		return scheduler.qvts2qvti(rootRegion, qvtiUri);
 	}
 	
 	protected void qvtsToGraphML(PivotModel sModel) throws QvtMtcExecutionException {
@@ -507,8 +590,15 @@ public class MtcBroker {
 		uModel.dispose();
 		mModel.dispose();
 		pModel.dispose();
-		sModel.dispose();
-		iModel.dispose();
+		if (sModel != null) {
+			sModel.dispose();
+		}
+		if (gModel != null) {
+			gModel.dispose();
+		}
+		if (iModel != null) {
+			iModel.dispose();
+		}
 	}
 
 	/**
@@ -1054,6 +1144,31 @@ public class MtcBroker {
 	public void setCreateGraphml(boolean createGraphml, boolean darkTheme) {
 		this.createGraphml = createGraphml;
 		this.darkTheme = darkTheme;
+	}
+
+	public Transformation getTransformation(Resource resource) throws Exception {
+		for (EObject eContent : resource.getContents()) {
+			if (eContent instanceof ImperativeModel) {
+	    		for (org.eclipse.ocl.pivot.Package aPackage : ((ImperativeModel)eContent).getOwnedPackages()) {
+	    			for (org.eclipse.ocl.pivot.Class aClass : aPackage.getOwnedClasses()) {
+	    				if (aClass instanceof Transformation) {
+		                    return (Transformation) aClass;
+		    			}
+	    			}
+	    		}
+			}
+		}
+		throw new Exception("The QVTd model does not have a Transformation element.");
+	}
+
+	public Schedule getSchedule() throws QvtMtcExecutionException {
+		if (gModel != null)
+			for (EObject eContent : gModel.getResource().getContents()) {
+				if (eContent instanceof Schedule) {
+		    		return (Schedule) eContent;
+				}
+			}
+		throw new QvtMtcExecutionException("Could not retreive the Schedule for this MTC");
 	}
 
 	/**
