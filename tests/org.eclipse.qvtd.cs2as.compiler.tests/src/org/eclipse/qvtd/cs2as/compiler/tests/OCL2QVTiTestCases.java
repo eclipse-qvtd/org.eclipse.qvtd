@@ -385,8 +385,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 				"org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor",
 				"example2.classes.NamedElement",
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
-		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
-			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
+		Transformation transformation = qvtiTransf.getTransformation();
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, transformation, cgParams);
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model3");
@@ -720,7 +720,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		try {
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
-//FIXME			assertNoValidationErrors("Normalisation invalid", asResource);
+			assertNoUnresolvedProxies("Normalisation invalid", asResource);
+			assertNoValidationErrors("Normalisation invalid", asResource);
 			//
 			//	Pivot to CS
 			//		
