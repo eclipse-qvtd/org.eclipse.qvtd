@@ -154,8 +154,12 @@ public class QVTbaseUtil
         	ownedContext = PivotFactory.eINSTANCE.createVariable();
         	ownedContext.setName("this");
         	ownedContext.setType(standardLibrary.getLibraryType("Transformation"));
+           	ownedContext.setTypeValue(transformation);
         	ownedContext.setIsRequired(true);
         	transformation.setOwnedContext(ownedContext);
+        }
+        else {
+           	ownedContext.setTypeValue(transformation);		// FIXME BUG 484723 find a better solution for the transient declaration
         }
 		return ownedContext;
 	}
@@ -169,6 +173,7 @@ public class QVTbaseUtil
         	ownedContext = PivotFactory.eINSTANCE.createVariable();
         	ownedContext.setName(typedModel.getName());
         	ownedContext.setType(standardLibrary.getLibraryType("Model"));
+//        	ownedContext.setTypeValue(typedModel);
         	ownedContext.setIsRequired(true);
         	typedModel.setOwnedContext(ownedContext);
         }
