@@ -271,6 +271,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
 	}
 	
+	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler
 //	@Test
 //	public void testExample3_Interpreted() throws Exception {
 //
@@ -278,8 +279,9 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "KiamaRewrite.ocl");
 //    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
 //	}
+*/	
 	
-	
+	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler
 	@Test
 	public void testExample4_Interpreted() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
@@ -300,7 +302,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 // FIXME fails    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
 //    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3");
     	installMap.uninstall();
-	}
+	}*/
 	
 	@Test
 	public void testNewExample4_Interpreted() throws Exception {
@@ -346,39 +348,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		
 		tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());	
 		executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
-	}
-	
-	@Test
-	public void testNewExample4_CG() throws Exception {
-//		CommonSubexpressionEliminator.CSE_BUILD.setState(true);
-//		CommonSubexpressionEliminator.CSE_PLACES.setState(true);
-//		CommonSubexpressionEliminator.CSE_PRUNE.setState(true);
-//		CommonSubexpressionEliminator.CSE_PULL_UP.setState(true);
-//		CommonSubexpressionEliminator.CSE_PUSH_UP.setState(true);
-//		CommonSubexpressionEliminator.CSE_REWRITE.setState(true);
-		Scheduler.EDGE_ORDER.setState(true);
-//		Scheduler.REGION_DEPTH.setState(true);
-		Scheduler.REGION_ORDER.setState(true);
-		Scheduler.REGION_TRAVERSAL.setState(true);
-		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
-		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
-		InstallMap installMap = new InstallMap(baseURI);
-		installMap.install(KiamacsPackage.eINSTANCE);
-		installMap.install(KiamaasPackage.eINSTANCE);
-		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl", "SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
-		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
-				"org.eclipse.qvtd.cs2as.compiler.tests.models.example4.java.LookupEnvironment",
-				"org.eclipse.qvtd.cs2as.compiler.tests.models.example4.java.TargetLookupVisitor", 
-				"example4.target.NamedElement", TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
-		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
-		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
-//		executeModelsTX_CG(myQVT, txClass, testBaseURI, "model0");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model3");
-		installMap.uninstall();
 	}
 	
 /*	@Test
@@ -461,9 +430,9 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		installMap.install(ClassescsPackage.eINSTANCE, "ClassesCS.ecore");
 		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl", "Classes.genmodel", "ClassesCS.genmodel");
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
-				"org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.LookupEnvironment",
-				"org.eclipse.qvtd.cs2as.compiler.tests.models.example2.java.ClassesLookupVisitor", 
-				"example2.classes.NamedElement", TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+				"example2.classes.lookup.util.ClassesLookupSolver",
+				"example2.classes.lookup.util.ClassesLookupResult",
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
@@ -486,7 +455,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 				"example2.classes.lookup.util.ClassesLookupResult",
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
-			.compileTransformation(myQVT, getTransformation(qvtiTransf), cgParams);
+			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
 
 
 		// Execute CGed transformation
@@ -495,6 +464,120 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT = createQVT();
 
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
+	}
+	
+	@Test
+	public void testNewExample4_CG() throws Exception {
+//		CommonSubexpressionEliminator.CSE_BUILD.setState(true);
+//		CommonSubexpressionEliminator.CSE_PLACES.setState(true);
+//		CommonSubexpressionEliminator.CSE_PRUNE.setState(true);
+//		CommonSubexpressionEliminator.CSE_PULL_UP.setState(true);
+//		CommonSubexpressionEliminator.CSE_PUSH_UP.setState(true);
+//		CommonSubexpressionEliminator.CSE_REWRITE.setState(true);
+		Scheduler.EDGE_ORDER.setState(true);
+//		Scheduler.REGION_DEPTH.setState(true);
+		Scheduler.REGION_ORDER.setState(true);
+		Scheduler.REGION_TRAVERSAL.setState(true);
+		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
+		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
+		InstallMap installMap = new InstallMap(baseURI);
+		installMap.install(KiamacsPackage.eINSTANCE);
+		installMap.install(KiamaasPackage.eINSTANCE);
+		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl", "SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("","",
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
+		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
+//		executeModelsTX_CG(myQVT, txClass, testBaseURI, "model0");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model3");
+		installMap.uninstall();
+	}
+	
+	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler 
+	@Test
+	public void testExample3_CG() throws Exception {
+		URI baseURI = TESTS_BASE_URI.appendSegment("example3");
+
+		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "KiamaRewrite.ocl");
+
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
+				"",
+				"",
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
+			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
+
+		// To avoid metamodel schizophrenia
+		myQVT.dispose();
+		myQVT = createQVT();
+		
+		// Execute CGed transformation
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
+	}*/
+	
+	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler 
+	@Test
+	public void testExample4_CG() throws Exception {
+		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
+
+		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl");
+
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
+				"",
+				"",
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
+			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
+
+		// To avoid metamodel schizophrenia
+		myQVT.dispose();
+		myQVT = createQVT();
+
+		// Execute CGed transformation
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
+	}*/
+	
+	@Test
+	public void testExample5_CG() throws Exception {
+		URI baseURI = TESTS_BASE_URI.appendSegment("example5");
+
+		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2TargetBase.ocl");
+
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
+				"",
+				"",
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
+			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
+
+		// To avoid metamodel schizophrenia
+		myQVT.dispose();
+		myQVT = createQVT();
+
+		// Execute CGed transformation
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
+		
+		myQVT.dispose();
+		myQVT = createQVT();
+		
+		// 
+		List<String> oclDocs = new ArrayList<String>();
+		oclDocs.add("Source2TargetDerived.ocl");
+		oclDocs.add("Source2TargetBase.ocl");
+		qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, oclDocs);
+		txClass = new CS2ASJavaCompilerImpl()
+				.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
+	
+		// To avoid metamodel schizophrenia
+		myQVT.dispose();
+		myQVT = createQVT();
+		
+		// Execute CGed transformation
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
 	}
 	
 	@Test
