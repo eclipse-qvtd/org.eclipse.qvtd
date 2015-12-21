@@ -52,11 +52,15 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.tx.AbstractInvocation;
 import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
+import org.eclipse.ocl.pivot.evaluation.tx.InvocationManager;
+import org.eclipse.ocl.pivot.evaluation.tx.ObjectManager;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.evaluation.tx.IncrementalInvocationManager;
+import org.eclipse.ocl.pivot.internal.evaluation.tx.IncrementalObjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
@@ -110,12 +114,14 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	 * 
 	 * @noreference this is solely for development usage.
 	 */
-	public static int RUN_TIME_EVALUATOR_API_VERSION = Transformer.RUN_TIME_EVALUATOR_API_VERSION_1_1_0_1;
+	public static int RUN_TIME_EVALUATOR_API_VERSION = Transformer.RUN_TIME_EVALUATOR_API_VERSION_1_1_0_2;
 	
 	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull CGPackage cgPackage;
 	protected final @Nullable List<CGValuedElement> sortedGlobals;
+	protected boolean isIncremental = false;
 	protected boolean alwaysUseClasses = false;
+	protected boolean useGot = true;
 	protected QVTiTransformationAnalysis transformationAnalysis;
 	
 	public QVTiCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @NonNull CGPackage cgPackage,
@@ -124,6 +130,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		this.analyzer = codeGenerator.getAnalyzer();
 		this.cgPackage = cgPackage;
 		this.sortedGlobals = sortedGlobals;
+		this.isIncremental = codeGenerator.getOptions().isIncremental();
+		this.alwaysUseClasses = isIncremental;
+		this.useGot = isIncremental;
 	}
 
 	protected void appendModelIndex(@Nullable CGTypedModel cgTypedModel) {
@@ -162,6 +171,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("].add(");
 		js.appendValueName(cgRealizedVariable);
 		js.append(");\n");
+		//
+		if (isIncremental) {
+			js.append("objectManager.created(this, ");
+			js.appendValueName(cgRealizedVariable);
+			js.append(");\n");
+		}
 	}
 
 	protected @NonNull String @Nullable [] doAllInstances(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
@@ -348,7 +363,35 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 		}
 	}
-   
+
+	private void doCreateIncrementalManagers() {
+		js.append("protected ");
+		js.appendIsRequired(true);
+		js.append(" ");
+		js.appendClassReference(InvocationManager.class);
+		js.append(" createInvocationManager() {\n");
+		js.pushIndentation(null);
+			js.append("return new ");
+			js.appendClassReference(IncrementalInvocationManager.class);
+			js.append("();\n");
+		js.popIndentation();		
+		js.append("}\n");
+		js.append("\n");
+		js.append("protected ");
+		js.appendIsRequired(true);
+		js.append(" ");
+		js.appendClassReference(ObjectManager.class);
+		js.append(" createObjectManager() {\n");
+		js.pushIndentation(null);
+			js.append("return new ");
+			js.appendClassReference(IncrementalObjectManager.class);
+			js.append("((");
+			js.appendClassReference(IncrementalInvocationManager.class);
+			js.append(")invocationManager);\n");
+		js.popIndentation();		
+		js.append("}\n");
+	}
+
 	protected void doOppositeCaches(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		Map<@NonNull Property, Integer> opposites = transformationAnalysis.getCaches();
 		if (opposites.size() <= 0) {
@@ -633,7 +676,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if ((asMapping != null) && (asPropertyAssignment instanceof PropertyAssignment)) {
 			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (PropertyAssignment)asPropertyAssignment);
 		}
-		if (isHazardous) {
+		if (isHazardous || isIncremental) {
 			js.append("objectManager.assigned(");
 			js.appendValueName(cgSlot);
 			js.append(", ");
@@ -676,7 +719,25 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
 			js.append(");\n");
 		}
-		return appendCGEcorePropertyCallExp(cgPropertyCallExp, source);
+		Boolean status = appendCGEcorePropertyCallExp(cgPropertyCallExp, source);
+		if (status != ValueUtil.TRUE_VALUE) {
+			return status;
+		}
+		if (useGot) {
+			EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
+			EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
+			//
+			js.append("objectManager.got(this, ");
+			js.appendValueName(source);
+			js.append(", ");
+			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
+			js.append(".Literals.");
+			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+			js.append(", ");
+			js.appendValueName(cgPropertyCallExp);
+			js.append(");\n");
+		}
+		return status;
 	}
 
 	@Override
@@ -871,7 +932,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append("protected class ");
 					js.append(getMappingName(cgMapping));
 					js.append(" extends ");
-					js.appendClassReference(AbstractInvocation.class);
+					js.appendClassReference(isIncremental ? AbstractInvocation.Incremental.class : AbstractInvocation.class);
 					js.append("\n");
 					js.append("{\n");
 					js.pushIndentation(null);
@@ -1345,6 +1406,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("\n");
 		doConstructor(cgTransformation, oppositeIndex2propertyIdName, allInstancesNames);
 		js.append("\n");
+		if (isIncremental) {
+			doCreateIncrementalManagers();
+			js.append("\n");
+		}
 		doRun(cgTransformation);
 		for (CGOperation cgOperation : cgTransformation.getOperations()) {
 			js.append("\n");

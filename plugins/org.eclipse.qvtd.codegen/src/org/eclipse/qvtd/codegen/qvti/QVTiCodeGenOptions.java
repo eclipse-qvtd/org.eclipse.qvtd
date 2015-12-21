@@ -16,12 +16,25 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenOptions;
 public class QVTiCodeGenOptions extends CodeGenOptions
 {
 	/**
+	 * True to generate an incremental transformation.
+	 */
+	private boolean isIncremental;
+	
+	/**
 	 * Optional packaging prefix (may have internal dots, no trailing dots)
 	 */
 	private String packagePrefix = null;
 	
 	public @Nullable String getPackagePrefix() {
 		return packagePrefix;
+	}
+
+	public boolean isIncremental() {
+		return isIncremental;
+	}
+	
+	public void setIsIncremental(boolean isIncremental) {
+		this.isIncremental = isIncremental;
 	}
 	
 	public void setPackagePrefix(@Nullable String packagePrefix) {

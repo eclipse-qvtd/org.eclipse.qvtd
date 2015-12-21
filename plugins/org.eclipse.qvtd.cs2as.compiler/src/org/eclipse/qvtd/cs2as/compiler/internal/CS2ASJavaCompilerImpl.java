@@ -457,6 +457,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		QVTiCodeGenerator cg = new CS2ASJavaCodeGenerator(qvt.getEnvironmentFactory(), transformation, params);
 		QVTiCodeGenOptions options = cg.getOptions();
 		options.setUseNullAnnotations(true);
+		options.setIsIncremental(params.isIncremental());
 		options.setPackagePrefix(params.getPackageName());
 		cg.generateClassFile();
 		String savePath = params.getSavePath();

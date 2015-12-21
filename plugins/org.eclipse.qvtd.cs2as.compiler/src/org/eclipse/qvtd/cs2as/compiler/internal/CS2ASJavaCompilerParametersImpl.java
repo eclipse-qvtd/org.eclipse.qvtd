@@ -20,6 +20,8 @@ public class CS2ASJavaCompilerParametersImpl implements CS2ASJavaCompilerParamet
 	private @Nullable String savePath;
 	private @NonNull String packagePrefix;
 	private @NonNull String lookupResultName;
+	private @NonNull String namedElementClassName;
+	private boolean isIncremental = false;
 	
 	public CS2ASJavaCompilerParametersImpl(@NonNull String lookupSolverClassName,
 			@Nullable String lookupResultClassName,
@@ -61,7 +63,14 @@ public class CS2ASJavaCompilerParametersImpl implements CS2ASJavaCompilerParamet
 	public String getPackageName() {
 		return packagePrefix;
 	}
-	
 
-	
+	@Override
+	public boolean isIncremental() {
+		return isIncremental;
+	}
+
+	@Override
+	public void setIsIncremental(boolean isIncremental) {
+		this.isIncremental = isIncremental;
+	}
 }

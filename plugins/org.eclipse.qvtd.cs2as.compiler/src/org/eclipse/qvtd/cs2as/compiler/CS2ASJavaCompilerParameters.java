@@ -40,4 +40,11 @@ public interface CS2ASJavaCompilerParameters extends OCL2JavaTxCompilerParams {
 	@NonNull
 	public String getPackageName();
 	
+
+	/**
+	 * @return true to generate an incremental transformation
+	 */
+	public boolean isIncremental();
+
+	public void setIsIncremental(boolean isIncremental);
 }

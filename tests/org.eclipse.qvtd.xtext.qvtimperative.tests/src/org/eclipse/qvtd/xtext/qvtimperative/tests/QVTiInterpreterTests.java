@@ -318,7 +318,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 
     /**
      * Test tree2talltree using the INCREMENTAL evaluator.
-     * FIXME suspended till INCREMENTAL properly implemented
+     */
     @Test
     public void testTree2TallTreeIncremental() throws Exception {
     	MyQVT myQVT = createQVT();
@@ -335,7 +335,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
         myQVT.dispose();
-    } */
+    }
 
     /**
      * Test tree2talltree using the LAZY evaluator.

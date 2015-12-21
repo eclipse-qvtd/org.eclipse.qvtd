@@ -31,6 +31,8 @@ import org.eclipse.ocl.pivot.evaluation.tx.InvocationManager;
 import org.eclipse.ocl.pivot.evaluation.tx.ObjectManager;
 import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.internal.evaluation.tx.IncrementalInvocationManager;
+import org.eclipse.ocl.pivot.internal.evaluation.tx.IncrementalObjectManager;
 import org.eclipse.ocl.pivot.internal.evaluation.tx.LazyInvocationManager;
 import org.eclipse.ocl.pivot.internal.evaluation.tx.LazyObjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -54,9 +56,9 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	 * 
 	 * @noreference this is solely for development usage.
 	 */
-	public static int RUN_TIME_EVALUATOR_API_VERSION = Transformer.RUN_TIME_EVALUATOR_API_VERSION_1_1_0_1;
+	public static int RUN_TIME_EVALUATOR_API_VERSION = Transformer.RUN_TIME_EVALUATOR_API_VERSION_1_1_0_2;
 
-	protected static abstract class InterpretedInvocation extends AbstractInvocation
+	protected static abstract class InterpretedInvocation extends AbstractInvocation.Incremental
 	{
 		protected final @NonNull List<Object> theseValues;
 		protected Object returnStatus;
@@ -90,13 +92,15 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
 	protected final @NonNull InvocationManager invocationManager;
 	protected final @NonNull ObjectManager objectManager;
+	private @Nullable InterpretedInvocation currentInvocation = null;
 	
 	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull Mode mode) {
 		super(environmentFactory, transformation);
 		this.mode = mode;
 		this.transformationAnalysis = getModelManager().getTransformationAnalysis();
-		this.invocationManager = new LazyInvocationManager();
-		this.objectManager = new LazyObjectManager(invocationManager, mode != Mode.LAZY);
+		boolean isLazy = mode == Mode.LAZY;
+		this.invocationManager = isLazy ? new LazyInvocationManager() : new IncrementalInvocationManager();
+		this.objectManager = isLazy ? new LazyObjectManager((LazyInvocationManager)invocationManager) : new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
 	}
 
 	@Override
@@ -114,7 +118,8 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			Object valueOrValues = variable2value.get(boundVariable);
 			newBoundValues.add(valueOrValues);
 		}
-		InterpretedInvocation invocation = new InterpretedInvocation(newBoundValues)
+		InterpretedInvocation savedInvocation = currentInvocation;
+		InterpretedInvocation invocation = currentInvocation = new InterpretedInvocation(newBoundValues)
 		{
 			@Override
 			public boolean execute() throws InvocationFailedException, ReflectiveOperationException {
@@ -134,6 +139,8 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		} catch (ReflectiveOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			currentInvocation = savedInvocation;
 		}
 		return null;		
 	}
@@ -156,17 +163,27 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			}
 		}
 		Mapping asMapping = QVTimperativeUtil.getContainingMapping(navigationCallExp);
+		Object ecoreValue;
 		if ((asMapping != null) && transformationAnalysis.isHazardousRead(asMapping, navigationCallExp)) {		// null within queries
 			assert sourceValue != null;
 			EStructuralFeature eFeature = (EStructuralFeature)referredProperty.getESObject();
-			objectManager.getting(sourceValue, eFeature);
-			Object result = super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
-			AbstractTransformer.INVOCATIONS.println("got " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + sourceValue + " = " + result);
-			return result;
+			objectManager.getting((EObject)sourceValue, eFeature);
+			ecoreValue = super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
+			AbstractTransformer.INVOCATIONS.println("got " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + sourceValue + " = " + ecoreValue);
 		}
 		else {
-			return super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
+			ecoreValue = super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
 		}
+		if (mode != Mode.LAZY) {
+			InterpretedInvocation currentInvocation2 = currentInvocation;
+			if (currentInvocation2 != null) {			// Null at root
+				assert sourceValue != null;
+				EStructuralFeature eFeature = (EStructuralFeature)referredProperty.getESObject();
+				assert currentInvocation2 != null;
+				objectManager.got(currentInvocation2, (EObject)sourceValue, eFeature, ecoreValue);
+			}
+		}
+		return ecoreValue;
 	}
 
 	@Override
@@ -189,7 +206,9 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	public @Nullable Object internalExecuteRealizedVariable(@NonNull RealizedVariable realizedVariable, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Object element = super.internalExecuteRealizedVariable(realizedVariable, undecoratedVisitor);
 		if ((element != null) && (mode == Mode.INCREMENTAL)) {
-			throw new UnsupportedOperationException();
+			InterpretedInvocation currentInvocation2 = currentInvocation;
+			assert currentInvocation2 != null;
+			objectManager.created(currentInvocation2, (EObject)element);
 /*			DomainUsage domainUsage = getEvaluationEnvironment().getUsageFor(realizedVariable);
 			ClassStatus classStatus = statusManager.getClassStatus(domainUsage, realizedVariable.getType(), (EObject)element);
 			MappingStatus mappingStatus = findMappingStatus();
