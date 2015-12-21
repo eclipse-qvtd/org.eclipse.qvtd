@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package cg._ManualUML2RDBMS;
+package cg_qvtimperative_tests._ManualUML2RDBMS;
 
 import java.util.HashMap;
 import java.util.Iterator;

@@ -129,6 +129,9 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 
 	protected void doCommits(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
+		//
+		//	creations
+		//
 		for (Domain domain : mapping.getDomain()) {
 			if (domain.isIsEnforceable()) {
 				CoreDomain enforceableDomain = (CoreDomain)domain;
@@ -138,12 +141,18 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				}
 			}
 		}
+		//
+        // property and connection assignments
+		//
 		BottomPattern middleBottomPattern = mapping.getBottomPattern();
 		for (Assignment assignment : middleBottomPattern.getAssignment()) {
 			if (!(assignment instanceof VariableAssignment)) {
 				assignment.accept(undecoratedVisitor);
 			}
 		}
+		//
+        // enforcement operations
+		//
 		for (Domain domain : mapping.getDomain()) {
 			if (domain.isIsEnforceable()) {
 				CoreDomain enforceableDomain = (CoreDomain)domain;
@@ -192,6 +201,9 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		assert middleBottomPattern.getEnforcementOperation().isEmpty();
 		assert middleBottomPattern.getPredicate().isEmpty();
 		assert middleBottomPattern.getRealizedVariable().isEmpty();
+		//
+        // variable declarations/initializations
+		//
 		for (Variable rVar : middleBottomPattern.getVariable()) {
 			OCLExpression ownedInit = rVar.getOwnedInit();
 			if (ownedInit != null) {
@@ -211,6 +223,9 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				}
 			}
 		}
+		//
+        // variable assignments
+		//
 		for (Assignment assignment : middleBottomPattern.getAssignment()) {
 			if (assignment instanceof VariableAssignment) {
 				assignment.accept(undecoratedVisitor);
@@ -271,10 +286,20 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 
 	@Override
-	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor) {
+	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Map<Variable, Object> variable2value, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Mapping calledMapping = mappingCall.getReferredMapping();
 		if (calledMapping != null) {
-			calledMapping.accept(undecoratedVisitor);
+			pushEvaluationEnvironment(calledMapping, mappingCall);
+			try {
+				for (Map.Entry<Variable,Object> entry : variable2value.entrySet()) {
+					@SuppressWarnings("null")@NonNull Variable variable = entry.getKey();
+					replace(variable, entry.getValue());
+				}
+				calledMapping.accept(undecoratedVisitor);
+			}
+			finally {
+				popEvaluationEnvironment();
+			}
 		}
     	return true;
 	}
@@ -307,7 +332,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 	
 	@Override
-	public @Nullable Object internalExecutePropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @NonNull Object slotObject, @Nullable Object ecoreValue) {
+	public void internalExecutePropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @NonNull Object slotObject, @Nullable Object ecoreValue) {
 		Property targetProperty = propertyAssignment.getTargetProperty();
 		targetProperty.initValue(slotObject, ecoreValue);
     	QVTiModelManager modelManager = getModelManager();
@@ -315,7 +340,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		if (cacheIndex != null) {
 			modelManager.setUnnavigableOpposite(cacheIndex, slotObject, ecoreValue);
 		}
-		return ecoreValue;
 	}
 
 	@Override

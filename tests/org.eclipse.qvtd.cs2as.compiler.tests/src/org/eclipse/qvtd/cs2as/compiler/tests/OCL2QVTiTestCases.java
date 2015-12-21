@@ -62,6 +62,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -290,12 +292,12 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		installMap.install(KiamacsPackage.eINSTANCE, "SimplerKiamaCS.ecore");
 		installMap.install(KiamaasPackage.eINSTANCE, "SimplerKiamaAS.ecore");
 		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl", "SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
-		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 // FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
 //    	executeModelsTX_Interpreted(myQVT, qvtiTransf, baseURI, "model0");
     	executeModelsTX_Interpreted(myQVT, qvtiTransf, baseURI, "model1");
-//FIXME    	executeModelsTX_Interpreted(myQVT, qvtiTransf, baseURI, "model2");
-//    	executeModelsTX_Interpreted(myQVT, qvtiTransf, baseURI, "model3");
+    	executeModelsTX_Interpreted(myQVT, qvtiTransf, baseURI, "model2");
+    	executeModelsTX_Interpreted(myQVT, qvtiTransf, baseURI, "model3");
     	installMap.uninstall();
 	}
 	
@@ -547,9 +549,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	// Execute the transformation with the interpreter
 	//
 	protected void executeModelsTX_CG(QVTimperative qvt, Class<? extends Transformer> txClass, URI baseURI, String modelName) throws Exception {
-		
-		QVTiTxHelper txHelper = new QVTiTxHelper(qvt);
-		TransformationExecutor evaluator = txHelper.createTxEvaluator(txClass);
+		TransformationExecutor evaluator = new QVTiTransformationExecutor(qvt.getEnvironmentFactory(), txClass);
 		Transformer tx = evaluator.getTransformer();
 		URI samplesBaseUri = baseURI.appendSegment("samples");
     	URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
@@ -581,8 +581,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI expectedAsModelURI = samplesBaseUri.appendSegment(String.format("%s_output_ref.xmi", modelName));
 		saveEmptyModel(asModelURI);
 		
-		QVTiTxHelper txHelper = new QVTiTxHelper(qvt);
-		BasicQVTiExecutor testEvaluator = txHelper.createExecutor(tx);
+		BasicQVTiExecutor testEvaluator = new QVTiIncrementalExecutor(qvt.getEnvironmentFactory(), tx, QVTiIncrementalExecutor.Mode.LAZY);
 		testEvaluator.saveTransformation(null);
 	    testEvaluator.loadModel("leftCS", csModelURI);
 	    testEvaluator.createModel("rightAS", asModelURI, null);

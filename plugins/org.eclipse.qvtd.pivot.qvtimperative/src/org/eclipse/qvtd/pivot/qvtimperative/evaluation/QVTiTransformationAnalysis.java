@@ -287,6 +287,7 @@ public class QVTiTransformationAnalysis
 				analyzeMappingPropertyAssignments(mapping);
 				if (mapping.getCheckedProperties().size() > 0) {
 					hazardousMappings.add(mapping);
+					hasPropertyAccessDeclarations = true;
 				}
 				else {
 					for (Domain domain : mapping.getDomain()) {

@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package cg._Tree2TallTree;
+package cg_qvtimperative_tests._Tree2TallTree;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.evaluation.tx.AbstractInvocation;
 import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
@@ -342,8 +343,9 @@ public class Tree2TallTree extends AbstractTransformer
         public boolean execute() throws ReflectiveOperationException {
             // predicates
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+            objectManager.getting(node2tallNode_0, Tree2talltreePackage.Literals.NODE2_TALL_NODE__CHILDREN);
             @SuppressWarnings("null")
-            final @NonNull /*@Thrown*/ List<Node2TallNode> children_0 = objectManager.get(node2tallNode_0, Tree2talltreePackage.Literals.NODE2_TALL_NODE__CHILDREN);
+            final @NonNull /*@Thrown*/ List<Node2TallNode> children_0 = node2tallNode_0.getChildren();
             final @NonNull /*@Thrown*/ SetValue BOXED_children_0 = idResolver.createSetOfAll(SET_CLSSid_Node2TallNode, children_0);
             // variable assignments
             @SuppressWarnings("null")
@@ -362,8 +364,9 @@ public class Tree2TallTree extends AbstractTransformer
                 /**
                  * tallNode
                  */
+                objectManager.getting(_1, Tree2talltreePackage.Literals.NODE2_TALL_NODE__TALL_NODE);
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ TallNode tallNode_0 = objectManager.get(_1, Tree2talltreePackage.Literals.NODE2_TALL_NODE__TALL_NODE);
+                final @NonNull /*@Thrown*/ TallNode tallNode_0 = _1.getTallNode();
                 //
                 accumulator.add(tallNode_0);
             }
@@ -385,8 +388,9 @@ public class Tree2TallTree extends AbstractTransformer
                     if (_1_0 == null) {
                         throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/List2List\'::Node2TallNode::tallNode\'");
                     }
+                    objectManager.getting(_1_0, Tree2talltreePackage.Literals.NODE2_TALL_NODE__TALL_NODE);
                     @SuppressWarnings("null")
-                    final @NonNull /*@Thrown*/ TallNode tallNode_1 = objectManager.get(_1_0, Tree2talltreePackage.Literals.NODE2_TALL_NODE__TALL_NODE);
+                    final @NonNull /*@Thrown*/ TallNode tallNode_1 = _1_0.getTallNode();
                     //
                     accumulator_0.add(tallNode_1);
                 }
@@ -403,7 +407,8 @@ public class Tree2TallTree extends AbstractTransformer
                     /**
                      * height
                      */
-                    final /*@Thrown*/ int height = objectManager.get(_1_1, TalltreePackage.Literals.TALL_NODE__HEIGHT);
+                    objectManager.getting(_1_1, TalltreePackage.Literals.TALL_NODE__HEIGHT);
+                    final /*@Thrown*/ int height = _1_1.getHeight();
                     final @NonNull /*@Thrown*/ IntegerValue BOXED_height = ValueUtil.integerValueOf(height);
                     //
                     accumulator_1.add(BOXED_height);

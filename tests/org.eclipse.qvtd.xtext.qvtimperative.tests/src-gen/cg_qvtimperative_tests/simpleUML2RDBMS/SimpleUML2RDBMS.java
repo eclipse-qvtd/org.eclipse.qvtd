@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package cg.test;
+package cg_qvtimperative_tests.simpleUML2RDBMS;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -192,22 +192,23 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         {13}                    // 13 : StringToVarchar -> {StringToVarchar}
     };
     
-    public SimpleUML2RDBMS(final @NonNull Executor executor) {
+    
+    public SimpleUML2RDBMS(final @NonNull Executor executor) throws ReflectiveOperationException {
         super(executor, new String[] {"uml", "rdbms", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
     }
     
-    public boolean run() {
-        return __root__();
+    public boolean run() throws ReflectiveOperationException {
+        return MAP___root__() && invocationManager.flush();
     }
     
     /**
      * 
      * map packageToSchema_LM in SimpleUML2RDBMS {
-     * uml (p : uml::Package[?];
+     * uml (p : uml::Package[1];
      *  |)
      * { |}
      * middle ( |)
-     * {realize p2s : uml2rdbms::PackageToSchema[?];
+     * {realize p2s : uml2rdbms::PackageToSchema[1];
      *  |}
      * where ( |)
      * {_0 : String[?];
@@ -218,7 +219,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean packageToSchema_LM(final @NonNull /*@NonInvalid*/ Package p) {
+    protected boolean MAP_packageToSchema_LM(final @NonNull /*@NonInvalid*/ Package p) throws ReflectiveOperationException {
         // predicates
         // variable assignments
         final @Nullable /*@Thrown*/ String name = p.getName();
@@ -237,9 +238,9 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * 
      * map packageToSchema_MR in SimpleUML2RDBMS {
      * rdbms ( |)
-     * {realize s : rdbms::Schema[?];
+     * {realize s : rdbms::Schema[1];
      *  |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
      * { |}
      * where ( |)
@@ -251,7 +252,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean packageToSchema_MR(final @NonNull /*@NonInvalid*/ PackageToSchema p2s) {
+    protected boolean MAP_packageToSchema_MR(final @NonNull /*@NonInvalid*/ PackageToSchema p2s) throws ReflectiveOperationException {
         // predicates
         // variable assignments
         final @Nullable /*@Thrown*/ String name = p2s.getName();
@@ -268,13 +269,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map integerToNumber_LM in SimpleUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * prim : uml::PrimitiveDataType[?];
+     * uml (p : uml::Package[1];
+     * prim : uml::PrimitiveDataType[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
-     * {realize p2n : uml2rdbms::IntegerToNumber[?];
+     * {realize p2n : uml2rdbms::IntegerToNumber[1];
      *  |}
      * where ( |
      * p2s.umlPackage = pprim.namespace = pprim.name = 'Integer')
@@ -287,27 +288,28 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean integerToNumber_LM(final @NonNull /*@NonInvalid*/ Package p_0, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_0, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim) {
+    protected boolean MAP_integerToNumber_LM(final @NonNull /*@NonInvalid*/ Package p_0, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_0, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim) throws ReflectiveOperationException {
         // predicates
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package umlPackage = p2s_0.getUmlPackage();
         final /*@Thrown*/ boolean eq = umlPackage.equals(p_0);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ String name = prim.getName();
         final /*@Thrown*/ boolean eq_0 = STR_Integer.equals(name);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package namespace = prim.getNamespace();
         final /*@Thrown*/ boolean eq_1 = namespace.equals(p_0);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
+        final @Nullable /*@Thrown*/ String name_0 = prim.getName();
+        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR_2);
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_NUMBER);
         // creations
         final /*@Thrown*/ IntegerToNumber p2n_5 = UML2RDBMSFactory.eINSTANCE.createIntegerToNumber();
@@ -326,24 +328,24 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * map integerToNumber_MR in SimpleUML2RDBMS {
      * rdbms ( |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * p2n : uml2rdbms::IntegerToNumber[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * p2n : uml2rdbms::IntegerToNumber[1];
      *  |)
      * { |}
      * where ( |
      * p2n.owner = p2s)
-     * {sqlType : String[?] = 'NUMBER';
+     * {sqlType : String[1] = 'NUMBER';
      *  |
      * p2n.typeName := sqlType;
      * }
      * 
      */
-    protected boolean integerToNumber_MR(final @NonNull /*@NonInvalid*/ IntegerToNumber p2n, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_1) {
+    protected boolean MAP_integerToNumber_MR(final @NonNull /*@NonInvalid*/ IntegerToNumber p2n, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_1) throws ReflectiveOperationException {
         // predicates
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PackageToSchema owner = p2n.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(p2s_1);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -357,25 +359,25 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * map booleanToBoolean_MR in SimpleUML2RDBMS {
      * rdbms ( |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * p2n : uml2rdbms::BooleanToBoolean[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * p2n : uml2rdbms::BooleanToBoolean[1];
      *  |)
      * { |}
      * where ( |
      * p2n.owner = p2s)
-     * {sqlType : String[?];
+     * {sqlType : String[1];
      *  |
      * sqlType := 'BOOLEAN';
      * p2n.typeName := sqlType;
      * }
      * 
      */
-    protected boolean booleanToBoolean_MR(final @NonNull /*@NonInvalid*/ BooleanToBoolean p2n_0, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_2) {
+    protected boolean MAP_booleanToBoolean_MR(final @NonNull /*@NonInvalid*/ BooleanToBoolean p2n_0, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_2) throws ReflectiveOperationException {
         // predicates
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PackageToSchema owner = p2n_0.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(p2s_2);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -387,13 +389,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map booleanToBoolean_LM in SimpleUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * prim : uml::PrimitiveDataType[?];
+     * uml (p : uml::Package[1];
+     * prim : uml::PrimitiveDataType[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
-     * {realize p2n : uml2rdbms::BooleanToBoolean[?];
+     * {realize p2n : uml2rdbms::BooleanToBoolean[1];
      *  |}
      * where ( |
      * p2s.umlPackage = pprim.namespace = pprim.name = 'Boolean')
@@ -406,27 +408,28 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean booleanToBoolean_LM(final @NonNull /*@NonInvalid*/ Package p_1, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_3, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim_0) {
+    protected boolean MAP_booleanToBoolean_LM(final @NonNull /*@NonInvalid*/ Package p_1, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_3, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim_0) throws ReflectiveOperationException {
         // predicates
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package umlPackage = p2s_3.getUmlPackage();
         final /*@Thrown*/ boolean eq = umlPackage.equals(p_1);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ String name = prim_0.getName();
         final /*@Thrown*/ boolean eq_0 = STR_Boolean.equals(name);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package namespace = prim_0.getNamespace();
         final /*@Thrown*/ boolean eq_1 = namespace.equals(p_1);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
+        final @Nullable /*@Thrown*/ String name_0 = prim_0.getName();
+        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR_2);
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_BOOLEAN);
         // creations
         final /*@Thrown*/ BooleanToBoolean p2n_5 = UML2RDBMSFactory.eINSTANCE.createBooleanToBoolean();
@@ -445,24 +448,24 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * map stringToVarchar_MR in SimpleUML2RDBMS {
      * rdbms ( |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * p2n : uml2rdbms::StringToVarchar[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * p2n : uml2rdbms::StringToVarchar[1];
      *  |)
      * { |}
      * where ( |
      * p2n.owner = p2s)
-     * {sqlType : String[?] = 'VARCHAR';
+     * {sqlType : String[1] = 'VARCHAR';
      *  |
      * p2n.typeName := sqlType;
      * }
      * 
      */
-    protected boolean stringToVarchar_MR(final @NonNull /*@NonInvalid*/ StringToVarchar p2n_1, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_4) {
+    protected boolean MAP_stringToVarchar_MR(final @NonNull /*@NonInvalid*/ StringToVarchar p2n_1, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_4) throws ReflectiveOperationException {
         // predicates
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PackageToSchema owner = p2n_1.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(p2s_4);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -474,13 +477,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map stringToVarchar_LM in SimpleUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * prim : uml::PrimitiveDataType[?];
+     * uml (p : uml::Package[1];
+     * prim : uml::PrimitiveDataType[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
-     * {realize p2n : uml2rdbms::StringToVarchar[?];
+     * {realize p2n : uml2rdbms::StringToVarchar[1];
      *  |}
      * where ( |
      * p2s.umlPackage = pprim.namespace = pprim.name = 'String')
@@ -493,27 +496,28 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean stringToVarchar_LM(final @NonNull /*@NonInvalid*/ Package p_2, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_5, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim_1) {
+    protected boolean MAP_stringToVarchar_LM(final @NonNull /*@NonInvalid*/ Package p_2, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_5, final @NonNull /*@NonInvalid*/ PrimitiveDataType prim_1) throws ReflectiveOperationException {
         // predicates
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package umlPackage = p2s_5.getUmlPackage();
         final /*@Thrown*/ boolean eq = umlPackage.equals(p_2);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ String name = prim_1.getName();
         final /*@Thrown*/ boolean eq_0 = STR_String.equals(name);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package namespace = prim_1.getNamespace();
         final /*@Thrown*/ boolean eq_1 = namespace.equals(p_2);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
+        final @Nullable /*@Thrown*/ String name_0 = prim_1.getName();
+        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR_2);
         final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_VARCHAR);
         // creations
         final /*@Thrown*/ StringToVarchar p2n_5 = UML2RDBMSFactory.eINSTANCE.createStringToVarchar();
@@ -530,19 +534,19 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map classToTable_MR in SimpleUML2RDBMS {
-     * rdbms (s : rdbms::Schema[?];
+     * rdbms (s : rdbms::Schema[1];
      *  |)
-     * {realize t : rdbms::Table[?];
-     * realize pk : rdbms::Key[?];
-     * realize pc : rdbms::Column[?];
+     * {realize t : rdbms::Table[1];
+     * realize pk : rdbms::Key[1];
+     * realize pc : rdbms::Column[1];
      *  |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * c2t : uml2rdbms::ClassToTable[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * c2t : uml2rdbms::ClassToTable[1];
      *  |)
      * { |}
      * where ( |
      * p2s.schema = sc2t.owner = p2s)
-     * {c2t_name : String[?] = c2t.name;
+     * {c2t_name : String[1] = c2t.name;
      * _0 : String[1];
      * _1 : String[1];
      *  |
@@ -566,25 +570,25 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean classToTable_MR(final @NonNull /*@NonInvalid*/ ClassToTable c2t, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_6, final @NonNull /*@NonInvalid*/ Schema s) {
+    protected boolean MAP_classToTable_MR(final @NonNull /*@NonInvalid*/ ClassToTable c2t, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_6, final @NonNull /*@NonInvalid*/ Schema s) throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PackageToSchema owner = c2t.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(p2s_6);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Schema schema = p2s_6.getSchema();
         final /*@Thrown*/ boolean eq_0 = schema.equals(s);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
         final @Nullable /*@Thrown*/ String name = c2t.getName();
-        final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__tid);
-        final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(name, STR__pk);
+        final @NonNull /*@NonInvalid*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__tid);
+        final @NonNull /*@NonInvalid*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(name, STR__pk);
         // creations
         final /*@Thrown*/ Column pc = RDBMSFactory.eINSTANCE.createColumn();
         assert pc != null;
@@ -606,9 +610,8 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         pk.setKind(STR_primary);
         pc.setOwner(t_4);
         final @NonNull /*@Thrown*/ OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Key, pk);
-        final List<Key> UNBOXED_OrderedSet = OrderedSet.asEcoreObjects(idResolver, Key.class);
-        assert UNBOXED_OrderedSet != null;
-        pc.getKeys().addAll(UNBOXED_OrderedSet);
+        final @NonNull /*@Thrown*/ List<Key> ECORE_OrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Key.class, OrderedSet);
+        pc.getKeys().addAll(ECORE_OrderedSet);
         pc.setType(STR_NUMBER);
         pc.setName(sum);
         pk.setName(sum_0);
@@ -618,13 +621,13 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map classToTable_LM in SimpleUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * c : uml::Class[?];
+     * uml (p : uml::Package[1];
+     * c : uml::Class[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |)
-     * {realize c2t : uml2rdbms::ClassToTable[?];
+     * {realize c2t : uml2rdbms::ClassToTable[1];
      *  |}
      * where ( |
      * p2s.umlPackage = pc.kind = 'persistent'c.namespace = p)
@@ -637,23 +640,23 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean classToTable_LM(final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class c, final @NonNull /*@NonInvalid*/ Package p_3, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_7) {
+    protected boolean MAP_classToTable_LM(final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class c, final @NonNull /*@NonInvalid*/ Package p_3, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_7) throws ReflectiveOperationException {
         // predicates
         final @Nullable /*@Thrown*/ String kind = c.getKind();
         final /*@Thrown*/ boolean eq = STR_persistent.equals(kind);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package namespace = c.getNamespace();
         final /*@Thrown*/ boolean eq_0 = namespace.equals(p_3);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package umlPackage = p2s_7.getUmlPackage();
         final /*@Thrown*/ boolean eq_1 = umlPackage.equals(p_3);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -673,18 +676,18 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map associationToForeignKey_MR in SimpleUML2RDBMS {
-     * rdbms (s : rdbms::Schema[?];
-     * st : rdbms::Table[?];
-     * dt : rdbms::Table[?];
-     * rk : rdbms::Key[?];
+     * rdbms (s : rdbms::Schema[1];
+     * st : rdbms::Table[1];
+     * dt : rdbms::Table[1];
+     * rk : rdbms::Key[1];
      *  |)
-     * {realize fk : rdbms::ForeignKey[?];
-     * realize fc : rdbms::Column[?];
+     * {realize fk : rdbms::ForeignKey[1];
+     * realize fc : rdbms::Column[1];
      *  |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * sc2t : uml2rdbms::ClassToTable[?];
-     * dc2t : uml2rdbms::ClassToTable[?];
-     * a2f : uml2rdbms::AssociationToForeignKey[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * sc2t : uml2rdbms::ClassToTable[1];
+     * dc2t : uml2rdbms::ClassToTable[1];
+     * a2f : uml2rdbms::AssociationToForeignKey[1];
      *  |)
      * { |}
      * where ( |
@@ -711,57 +714,57 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean associationToForeignKey_MR(final @NonNull /*@NonInvalid*/ AssociationToForeignKey a2f, final @NonNull /*@NonInvalid*/ ClassToTable dc2t, final @NonNull /*@NonInvalid*/ Table dt, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_8, final @NonNull /*@NonInvalid*/ Key rk, final @NonNull /*@NonInvalid*/ Schema s_0, final @NonNull /*@NonInvalid*/ ClassToTable sc2t, final @NonNull /*@NonInvalid*/ Table st) {
+    protected boolean MAP_associationToForeignKey_MR(final @NonNull /*@NonInvalid*/ AssociationToForeignKey a2f, final @NonNull /*@NonInvalid*/ ClassToTable dc2t, final @NonNull /*@NonInvalid*/ Table dt, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_8, final @NonNull /*@NonInvalid*/ Key rk, final @NonNull /*@NonInvalid*/ Schema s_0, final @NonNull /*@NonInvalid*/ ClassToTable sc2t, final @NonNull /*@NonInvalid*/ Table st) throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ ClassToTable owner = a2f.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(sc2t);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ ClassToTable referenced = a2f.getReferenced();
         final /*@Thrown*/ boolean eq_0 = dc2t.equals(referenced);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ Table table = dc2t.getTable();
         final /*@Thrown*/ boolean eq_1 = dt.equals(table);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Schema schema = p2s_8.getSchema();
         final /*@Thrown*/ boolean eq_2 = schema.equals(s_0);
-        if (!eq_2) {
+        if (eq_2 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ String kind = rk.getKind();
         final /*@Thrown*/ boolean eq_3 = STR_primary.equals(kind);
-        if (!eq_3) {
+        if (eq_3 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Table owner_0 = rk.getOwner();
         final /*@Thrown*/ boolean eq_4 = owner_0.equals(dt);
-        if (!eq_4) {
+        if (eq_4 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PackageToSchema owner_1 = sc2t.getOwner();
         final /*@Thrown*/ boolean eq_5 = owner_1.equals(p2s_8);
-        if (!eq_5) {
+        if (eq_5 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ Table table_0 = sc2t.getTable();
         final /*@Thrown*/ boolean eq_6 = st.equals(table_0);
-        if (!eq_6) {
+        if (eq_6 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Schema schema_0 = st.getSchema();
         final /*@Thrown*/ boolean eq_7 = schema_0.equals(s_0);
-        if (!eq_7) {
+        if (eq_7 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ String name = a2f.getName();
@@ -792,31 +795,30 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         fc.setOwner(st);
         fk.setRefersTo(rk);
         final @NonNull /*@Thrown*/ OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_ForeignKey, fk);
-        final List<ForeignKey> UNBOXED_OrderedSet = OrderedSet.asEcoreObjects(idResolver, ForeignKey.class);
-        assert UNBOXED_OrderedSet != null;
-        fc.getForeignKeys().addAll(UNBOXED_OrderedSet);
+        final @NonNull /*@Thrown*/ List<ForeignKey> ECORE_OrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(ForeignKey.class, OrderedSet);
+        fc.getForeignKeys().addAll(ECORE_OrderedSet);
         return true;
     }
     
     /**
      * 
      * map associationToForeignKey_LM in SimpleUML2RDBMS {
-     * uml (p : uml::Package[?];
-     * sc : uml::Class[?];
-     * dc : uml::Class[?];
-     * a : uml::Association[?];
+     * uml (p : uml::Package[1];
+     * sc : uml::Class[1];
+     * dc : uml::Class[1];
+     * a : uml::Association[1];
      *  |)
      * { |}
-     * middle (p2s : uml2rdbms::PackageToSchema[?];
-     * sc2t : uml2rdbms::ClassToTable[?];
-     * dc2t : uml2rdbms::ClassToTable[?];
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * sc2t : uml2rdbms::ClassToTable[1];
+     * dc2t : uml2rdbms::ClassToTable[1];
      *  |)
-     * {realize a2f : uml2rdbms::AssociationToForeignKey[?];
+     * {realize a2f : uml2rdbms::AssociationToForeignKey[1];
      *  |}
      * where ( |
      * sc2t.owner = p2sdc2t.umlClass = dcsc2t.umlClass = scp2s.umlPackage = pa.namespace = psc.namespace = pa.source = sca.destination =
      *   dc)
-     * {a2f_name : String[?];
+     * {a2f_name : String[1];
      * _1 : String[?];
      *  |
      * a2f_name := if a.destination = dc and a.source = sc
@@ -844,65 +846,71 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean associationToForeignKey_LM(final @NonNull /*@NonInvalid*/ Association a, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class dc, final @NonNull /*@NonInvalid*/ ClassToTable dc2t_0, final @NonNull /*@NonInvalid*/ Package p_4, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_9, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class sc, final @NonNull /*@NonInvalid*/ ClassToTable sc2t_0) {
+    protected boolean MAP_associationToForeignKey_LM(final @NonNull /*@NonInvalid*/ Association a, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class dc, final @NonNull /*@NonInvalid*/ ClassToTable dc2t_0, final @NonNull /*@NonInvalid*/ Package p_4, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_9, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class sc, final @NonNull /*@NonInvalid*/ ClassToTable sc2t_0) throws ReflectiveOperationException {
         // predicates
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class destination = a.getDestination();
         final /*@Thrown*/ boolean eq = destination.equals(dc);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package namespace = a.getNamespace();
         final /*@Thrown*/ boolean eq_0 = namespace.equals(p_4);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class source = a.getSource();
         final /*@Thrown*/ boolean eq_1 = source.equals(sc);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ simpleuml2rdbms.uml.Class umlClass = dc2t_0.getUmlClass();
         final /*@Thrown*/ boolean eq_2 = dc.equals(umlClass);
-        if (!eq_2) {
+        if (eq_2 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package umlPackage = p2s_9.getUmlPackage();
         final /*@Thrown*/ boolean eq_3 = umlPackage.equals(p_4);
-        if (!eq_3) {
+        if (eq_3 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Package namespace_0 = sc.getNamespace();
         final /*@Thrown*/ boolean eq_4 = namespace_0.equals(p_4);
-        if (!eq_4) {
+        if (eq_4 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PackageToSchema owner = sc2t_0.getOwner();
         final /*@Thrown*/ boolean eq_5 = owner.equals(p2s_9);
-        if (!eq_5) {
+        if (eq_5 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ simpleuml2rdbms.uml.Class umlClass_0 = sc2t_0.getUmlClass();
         final /*@Thrown*/ boolean eq_6 = sc.equals(umlClass_0);
-        if (!eq_6) {
+        if (eq_6 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ String name = a.getName();
         @NonNull /*@Caught*/ Object CAUGHT_eq_11;
         try {
-            CAUGHT_eq_11 = eq;
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class destination_3 = a.getDestination();
+            final /*@Thrown*/ boolean eq_11 = destination_3.equals(dc);
+            CAUGHT_eq_11 = eq_11;
         }
         catch (Exception e) {
             CAUGHT_eq_11 = ValueUtil.createInvalidValue(e);
         }
         @NonNull /*@Caught*/ Object CAUGHT_eq_12;
         try {
-            CAUGHT_eq_12 = eq_1;
+            @SuppressWarnings("null")
+            final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class source_3 = a.getSource();
+            final /*@Thrown*/ boolean eq_12 = source_3.equals(sc);
+            CAUGHT_eq_12 = eq_12;
         }
         catch (Exception e) {
             CAUGHT_eq_12 = ValueUtil.createInvalidValue(e);
@@ -912,14 +920,16 @@ public class SimpleUML2RDBMS extends AbstractTransformer
             throw new InvalidValueException("Null if condition");
         }
         // variable assignments
-        @Nullable /*@Thrown*/ String symbol_7;
+        @Nullable /*@Thrown*/ String symbol_2;
         if (and_2) {
-            symbol_7 = name;
+            symbol_2 = name;
         }
         else {
             @NonNull /*@Caught*/ Object CAUGHT_ne;
             try {
-                final /*@Thrown*/ boolean ne = !destination.equals(dc);
+                @SuppressWarnings("null")
+                final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class destination_1 = a.getDestination();
+                final /*@Thrown*/ boolean ne = !destination_1.equals(dc);
                 CAUGHT_ne = ne;
             }
             catch (Exception e) {
@@ -929,18 +939,20 @@ public class SimpleUML2RDBMS extends AbstractTransformer
             if (and_0 == null) {
                 throw new InvalidValueException("Null if condition");
             }
-            @NonNull /*@Thrown*/ String symbol_6;
+            @NonNull /*@Thrown*/ String symbol_1;
             if (and_0) {
                 final @Nullable /*@Thrown*/ String name_0 = dc.getName();
                 final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR__);
                 final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name);
-                symbol_6 = sum_0;
+                symbol_1 = sum_0;
             }
             else {
                 final @Nullable /*@Thrown*/ String name_6 = sc.getName();
                 @NonNull /*@Caught*/ Object CAUGHT_ne_0;
                 try {
-                    final /*@Thrown*/ boolean ne_0 = !source.equals(sc);
+                    @SuppressWarnings("null")
+                    final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class source_2 = a.getSource();
+                    final /*@Thrown*/ boolean ne_0 = !source_2.equals(sc);
                     CAUGHT_ne_0 = ne_0;
                 }
                 catch (Exception e) {
@@ -950,11 +962,11 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 if (and_1 == null) {
                     throw new InvalidValueException("Null if condition");
                 }
-                @NonNull /*@Thrown*/ String symbol_5;
+                @NonNull /*@Thrown*/ String symbol_0;
                 if (and_1) {
                     final @NonNull /*@Thrown*/ String sum_1 = StringConcatOperation.INSTANCE.evaluate(name, STR__);
                     final @NonNull /*@Thrown*/ String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, name_6);
-                    symbol_5 = sum_2;
+                    symbol_0 = sum_2;
                 }
                 else {
                     final @Nullable /*@Thrown*/ String name_4 = dc.getName();
@@ -962,18 +974,18 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                     final @NonNull /*@Thrown*/ String sum_4 = StringConcatOperation.INSTANCE.evaluate(sum_3, name);
                     final @NonNull /*@Thrown*/ String sum_5 = StringConcatOperation.INSTANCE.evaluate(sum_4, STR__);
                     final @NonNull /*@Thrown*/ String sum_6 = StringConcatOperation.INSTANCE.evaluate(sum_5, name_6);
-                    symbol_5 = sum_6;
+                    symbol_0 = sum_6;
                 }
-                symbol_6 = symbol_5;
+                symbol_1 = symbol_0;
             }
-            symbol_7 = symbol_6;
+            symbol_2 = symbol_1;
         }
-        @Nullable /*@Thrown*/ String symbol_8;
+        @Nullable /*@Thrown*/ String symbol_3;
         if (and_2) {
-            symbol_8 = symbol_7;
+            symbol_3 = symbol_2;
         }
         else {
-            symbol_8 = name;
+            symbol_3 = name;
         }
         // creations
         final /*@Thrown*/ AssociationToForeignKey a2f_0 = UML2RDBMSFactory.eINSTANCE.createAssociationToForeignKey();
@@ -982,24 +994,24 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         // property assignments
         a2f_0.setAssociation(a);
         a2f_0.setReferenced(dc2t_0);
-        a2f_0.setName(symbol_7);
+        a2f_0.setName(symbol_2);
         a2f_0.setOwner(sc2t_0);
-        a.setName(symbol_8);
+        a.setName(symbol_3);
         return true;
     }
     
     /**
      * 
      * map classPrimitiveAttributes_LM in SimpleUML2RDBMS {
-     * uml (t : uml::PrimitiveDataType[?];
-     * c : uml::Class[?];
-     * a : uml::Attribute[?];
+     * uml (t : uml::PrimitiveDataType[1];
+     * c : uml::Class[1];
+     * a : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao : uml2rdbms::ClassToTable[?];
-     * p2n : uml2rdbms::PrimitiveToName[?];
+     * middle (fao : uml2rdbms::ClassToTable[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |)
-     * {realize fa : uml2rdbms::AttributeToColumn[?];
+     * {realize fa : uml2rdbms::AttributeToColumn[1];
      *  |}
      * where ( |
      * fao.umlClass = cp2n.primitive = ta.owner = ca.type =
@@ -1019,30 +1031,30 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean classPrimitiveAttributes_LM(final @NonNull /*@NonInvalid*/ Attribute a_0, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class c_0, final @NonNull /*@NonInvalid*/ ClassToTable fao, final @NonNull /*@NonInvalid*/ PrimitiveToName p2n_2, final @NonNull /*@NonInvalid*/ PrimitiveDataType t) {
+    protected boolean MAP_classPrimitiveAttributes_LM(final @NonNull /*@NonInvalid*/ Attribute a_0, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class c_0, final @NonNull /*@NonInvalid*/ ClassToTable fao, final @NonNull /*@NonInvalid*/ PrimitiveToName p2n_2, final @NonNull /*@NonInvalid*/ PrimitiveDataType t) throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner = a_0.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(c_0);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type = a_0.getType();
         final /*@Thrown*/ boolean eq_0 = type.equals(t);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ simpleuml2rdbms.uml.Class umlClass = fao.getUmlClass();
         final /*@Thrown*/ boolean eq_1 = c_0.equals(umlClass);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PrimitiveDataType primitive = p2n_2.getPrimitive();
         final /*@Thrown*/ boolean eq_2 = primitive.equals(t);
-        if (!eq_2) {
+        if (eq_2 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -1060,23 +1072,22 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         fa.setAttribute(a_0);
         OPPOSITE_OF_FromAttribute_attribute.put(a_0, fa);
         final @NonNull /*@Thrown*/ SetValue Set = ValueUtil.createSetOfEach(SET_CLSSid_AttributeToColumn, fa);
-        final List<AttributeToColumn> UNBOXED_Set = Set.asEcoreObjects(idResolver, AttributeToColumn.class);
-        assert UNBOXED_Set != null;
-        fa.getLeafs().addAll(UNBOXED_Set);
+        final @NonNull /*@Thrown*/ List<AttributeToColumn> ECORE_Set = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(AttributeToColumn.class, Set);
+        fa.getLeafs().addAll(ECORE_Set);
         return true;
     }
     
     /**
      * 
      * map classComplexAttributes_LM in SimpleUML2RDBMS {
-     * uml (t : uml::Class[?];
-     * c : uml::Class[?];
-     * a : uml::Attribute[?];
+     * uml (t : uml::Class[1];
+     * c : uml::Class[1];
+     * a : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao : uml2rdbms::ClassToTable[?];
+     * middle (fao : uml2rdbms::ClassToTable[1];
      *  |)
-     * {realize fa : uml2rdbms::NonLeafAttribute[?];
+     * {realize fa : uml2rdbms::NonLeafAttribute[1];
      *  |}
      * where ( |
      * fao.umlClass = ca.owner = ca.type =
@@ -1096,24 +1107,24 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean classComplexAttributes_LM(final @NonNull /*@NonInvalid*/ Attribute a_1, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class c_1, final @NonNull /*@NonInvalid*/ ClassToTable fao_0, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class t_0) {
+    protected boolean MAP_classComplexAttributes_LM(final @NonNull /*@NonInvalid*/ Attribute a_1, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class c_1, final @NonNull /*@NonInvalid*/ ClassToTable fao_0, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class t_0) throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner = a_1.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(c_1);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type = a_1.getType();
         final /*@Thrown*/ boolean eq_0 = type.equals(t_0);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ simpleuml2rdbms.uml.Class umlClass = fao_0.getUmlClass();
         final /*@Thrown*/ boolean eq_1 = c_1.equals(umlClass);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -1156,25 +1167,24 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         fa.setKind(kind);
         fa.setOwner(fao_0);
         fa.setName(name);
-        final List<AttributeToColumn> UNBOXED_null = asSet.asEcoreObjects(idResolver, AttributeToColumn.class);
-        assert UNBOXED_null != null;
-        fa.getLeafs().addAll(UNBOXED_null);
+        final @NonNull /*@NonInvalid*/ List<AttributeToColumn> ECORE_asSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(AttributeToColumn.class, asSet);
+        fa.getLeafs().addAll(ECORE_asSet);
         return true;
     }
     
     /**
      * 
      * map complexAttributePrimitiveAttributes_LM in SimpleUML2RDBMS {
-     * uml (ca : uml::Attribute[?];
-     * c : uml::Class[?];
-     * t : uml::PrimitiveDataType[?];
-     * a : uml::Attribute[?];
+     * uml (ca : uml::Attribute[1];
+     * c : uml::Class[1];
+     * t : uml::PrimitiveDataType[1];
+     * a : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao : uml2rdbms::NonLeafAttribute[?];
-     * p2n : uml2rdbms::PrimitiveToName[?];
+     * middle (fao : uml2rdbms::NonLeafAttribute[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |)
-     * {realize fa : uml2rdbms::AttributeToColumn[?];
+     * {realize fa : uml2rdbms::AttributeToColumn[1];
      *  |}
      * where ( |
      * fao.attribute = cap2n.primitive = ta.owner = ca.type = tca.type = ca.owner = c)
@@ -1194,39 +1204,39 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean complexAttributePrimitiveAttributes_LM(final @NonNull /*@NonInvalid*/ Attribute a_2, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class c_2, final @NonNull /*@NonInvalid*/ Attribute ca, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_1, final @NonNull /*@NonInvalid*/ PrimitiveToName p2n_3, final @NonNull /*@NonInvalid*/ PrimitiveDataType t_1) {
+    protected boolean MAP_complexAttributePrimitiveAttributes_LM(final @NonNull /*@NonInvalid*/ Attribute a_2, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class c_2, final @NonNull /*@NonInvalid*/ Attribute ca, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_1, final @NonNull /*@NonInvalid*/ PrimitiveToName p2n_3, final @NonNull /*@NonInvalid*/ PrimitiveDataType t_1) throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner = a_2.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(c_2);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type = a_2.getType();
         final /*@Thrown*/ boolean eq_1 = type.equals(t_1);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type_0 = ca.getType();
         final /*@Thrown*/ boolean eq_2 = type_0.equals(c_2);
-        if (!eq_2) {
+        if (eq_2 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ Attribute attribute = fao_1.getAttribute();
         final /*@Thrown*/ boolean eq_3 = ca.equals(attribute);
-        if (!eq_3) {
+        if (eq_3 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ PrimitiveDataType primitive = p2n_3.getPrimitive();
         final /*@Thrown*/ boolean eq_4 = primitive.equals(t_1);
-        if (!eq_4) {
+        if (eq_4 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -1246,9 +1256,8 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         fa.setKind(kind);
         fa.setType(p2n_3);
         final @NonNull /*@Thrown*/ SetValue Set = ValueUtil.createSetOfEach(SET_CLSSid_AttributeToColumn, fa);
-        final List<AttributeToColumn> UNBOXED_Set = Set.asEcoreObjects(idResolver, AttributeToColumn.class);
-        assert UNBOXED_Set != null;
-        fa.getLeafs().addAll(UNBOXED_Set);
+        final @NonNull /*@Thrown*/ List<AttributeToColumn> ECORE_Set = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(AttributeToColumn.class, Set);
+        fa.getLeafs().addAll(ECORE_Set);
         fa.setName(sum_0);
         return true;
     }
@@ -1256,15 +1265,15 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map complexAttributeComplexAttributes_LM in SimpleUML2RDBMS {
-     * uml (ca : uml::Attribute[?];
-     * c : uml::Class[?];
-     * t : uml::Class[?];
-     * a : uml::Attribute[?];
+     * uml (ca : uml::Attribute[1];
+     * c : uml::Class[1];
+     * t : uml::Class[1];
+     * a : uml::Attribute[1];
      *  |)
      * { |}
-     * middle (fao : uml2rdbms::NonLeafAttribute[?];
+     * middle (fao : uml2rdbms::NonLeafAttribute[1];
      *  |)
-     * {realize fa : uml2rdbms::NonLeafAttribute[?];
+     * {realize fa : uml2rdbms::NonLeafAttribute[1];
      *  |}
      * where ( |
      * fao.attribute = caa.owner = ca.owner = cca.type = ca.type =
@@ -1284,33 +1293,33 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean complexAttributeComplexAttributes_LM(final @NonNull /*@NonInvalid*/ Attribute a_3, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class c_3, final @NonNull /*@NonInvalid*/ Attribute ca_0, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_2, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class t_2) {
+    protected boolean MAP_complexAttributeComplexAttributes_LM(final @NonNull /*@NonInvalid*/ Attribute a_3, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class c_3, final @NonNull /*@NonInvalid*/ Attribute ca_0, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_2, final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class t_2) throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner = a_3.getOwner();
         final /*@Thrown*/ boolean eq = owner.equals(c_3);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type = a_3.getType();
         final /*@Thrown*/ boolean eq_1 = type.equals(t_2);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Classifier type_0 = ca_0.getType();
         final /*@Thrown*/ boolean eq_2 = type_0.equals(c_3);
-        if (!eq_2) {
+        if (eq_2 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ Attribute attribute = fao_2.getAttribute();
         final /*@Thrown*/ boolean eq_3 = ca_0.equals(attribute);
-        if (!eq_3) {
+        if (eq_3 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -1353,9 +1362,8 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         // property assignments
         fa.setOwner(fao_2);
         fa.setKind(kind);
-        final List<AttributeToColumn> UNBOXED_null = asSet.asEcoreObjects(idResolver, AttributeToColumn.class);
-        assert UNBOXED_null != null;
-        fa.getLeafs().addAll(UNBOXED_null);
+        final @NonNull /*@NonInvalid*/ List<AttributeToColumn> ECORE_asSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(AttributeToColumn.class, asSet);
+        fa.getLeafs().addAll(ECORE_asSet);
         fa.setAttribute(a_3);
         OPPOSITE_OF_FromAttribute_attribute.put(a_3, fa);
         fa.setName(sum_0);
@@ -1365,14 +1373,14 @@ public class SimpleUML2RDBMS extends AbstractTransformer
     /**
      * 
      * map attributeColumns_MR in SimpleUML2RDBMS {
-     * rdbms (t : rdbms::Table[?];
-     * ct : String[?];
+     * rdbms (t : rdbms::Table[1];
+     * ct : String[1];
      *  |)
-     * {realize c : rdbms::Column[?];
+     * {realize c : rdbms::Column[1];
      *  |}
-     * middle (c2t : uml2rdbms::ClassToTable[?];
-     * p2n : uml2rdbms::PrimitiveToName[?];
-     * a2c : uml2rdbms::AttributeToColumn[?];
+     * middle (c2t : uml2rdbms::ClassToTable[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
+     * a2c : uml2rdbms::AttributeToColumn[1];
      *  |)
      * { |}
      * where ( |
@@ -1391,29 +1399,29 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * }
      * 
      */
-    protected boolean attributeColumns_MR(final @NonNull /*@NonInvalid*/ AttributeToColumn a2c, final @NonNull /*@NonInvalid*/ ClassToTable c2t_0, final @NonNull /*@NonInvalid*/ String ct, final @NonNull /*@NonInvalid*/ PrimitiveToName p2n_4, final @NonNull /*@NonInvalid*/ Table t_3) {
+    protected boolean MAP_attributeColumns_MR(final @NonNull /*@NonInvalid*/ AttributeToColumn a2c, final @NonNull /*@NonInvalid*/ ClassToTable c2t_0, final @NonNull /*@NonInvalid*/ String ct, final @NonNull /*@NonInvalid*/ PrimitiveToName p2n_4, final @NonNull /*@NonInvalid*/ Table t_3) throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
         final @Nullable /*@Thrown*/ Table table = c2t_0.getTable();
         final /*@Thrown*/ boolean eq = t_3.equals(table);
-        if (!eq) {
+        if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ String typeName = p2n_4.getTypeName();
         final /*@Thrown*/ boolean eq_0 = typeName.equals(ct);
-        if (!eq_0) {
+        if (eq_0 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ FromAttributeOwner owner = a2c.getOwner();
         final /*@Thrown*/ boolean eq_1 = owner.equals(c2t_0);
-        if (!eq_1) {
+        if (eq_1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final @Nullable /*@Thrown*/ PrimitiveToName type = a2c.getType();
         final /*@Thrown*/ boolean eq_2 = p2n_4.equals(type);
-        if (!eq_2) {
+        if (eq_2 != ValueUtil.TRUE_VALUE) {
             return false;
         }
         @SuppressWarnings("null")
@@ -1443,7 +1451,7 @@ public class SimpleUML2RDBMS extends AbstractTransformer
             }
         }
         final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(collect, a2c).booleanValue();
-        if (!includes) {
+        if (includes != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
@@ -1627,9 +1635,10 @@ public class SimpleUML2RDBMS extends AbstractTransformer
      * t := a2c.owner.oclAsType(uml2rdbms::ClassToTable).table;
      * }}
      */
-    protected boolean __root__() {
+    protected boolean MAP___root__() throws ReflectiveOperationException {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+        // mapping statements
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_uml2rdbms_c_c_AssociationToForeignKey_0 = idResolver.getClass(CLSSid_AssociationToForeignKey, null);
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_uml2rdbms_c_c_AttributeToColumn_0 = idResolver.getClass(CLSSid_AttributeToColumn, null);
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_uml2rdbms_c_c_BooleanToBoolean_0 = idResolver.getClass(CLSSid_BooleanToBoolean, null);
@@ -1645,10 +1654,6 @@ public class SimpleUML2RDBMS extends AbstractTransformer
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_uml_c_c_PrimitiveDataType_2 = idResolver.getClass(CLSSid_PrimitiveDataType, null);
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_13 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Attribute, models[0/*uml*/], TYP_uml_c_c_Attribute_1);
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_7 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_PrimitiveDataType, models[0/*uml*/], TYP_uml_c_c_PrimitiveDataType_2);
-        final List<Attribute> UNBOXED_objectsOfKind_13 = objectsOfKind_13.asEcoreObjects(idResolver, Attribute.class);
-        assert UNBOXED_objectsOfKind_13 != null;
-        final List<PrimitiveDataType> UNBOXED_objectsOfKind_7 = objectsOfKind_7.asEcoreObjects(idResolver, PrimitiveDataType.class);
-        assert UNBOXED_objectsOfKind_7 != null;
         @NonNull /*@Thrown*/ SetValue.Accumulator accumulator = ValueUtil.createSetAccumulatorValue(SET_CLSSid_Attribute);
         @Nullable Iterator<?> ITERATOR__1_0 = objectsOfKind_13.iterator();
         @NonNull /*@Thrown*/ SetValue select_0;
@@ -1672,341 +1677,227 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 accumulator.add(_1_0);
             }
         }
-        final List<Attribute> UNBOXED_select_0 = select_0.asEcoreObjects(idResolver, Attribute.class);
-        assert UNBOXED_select_0 != null;
-        // mapping statements
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, models[0/*uml*/], TYP_uml_c_c_Package_0);
-        final List<Package> UNBOXED_objectsOfKind = objectsOfKind.asEcoreObjects(idResolver, Package.class);
-        assert UNBOXED_objectsOfKind != null;
-        for (Package p_11 : UNBOXED_objectsOfKind) {
+        for (Package p_11 : ValueUtil.typedIterable(Package.class, objectsOfKind)) {
             if (p_11 != null) {
-                final @NonNull /*@NonInvalid*/ Package symbol_1 = (Package)p_11;
-                if (symbol_1 != null) {
-                    packageToSchema_LM(symbol_1);
-                }
+                final @NonNull /*@NonInvalid*/ Package symbol_0 = (Package)p_11;
+                MAP_packageToSchema_LM(symbol_0);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_0 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageToSchema, models[2/*middle*/], TYP_uml2rdbms_c_c_PackageToSchema_0);
-        final List<PackageToSchema> UNBOXED_objectsOfKind_0 = objectsOfKind_0.asEcoreObjects(idResolver, PackageToSchema.class);
-        assert UNBOXED_objectsOfKind_0 != null;
-        for (PackageToSchema p2s_21 : UNBOXED_objectsOfKind_0) {
+        for (PackageToSchema p2s_21 : ValueUtil.typedIterable(PackageToSchema.class, objectsOfKind_0)) {
             if (p2s_21 != null) {
-                final @NonNull /*@NonInvalid*/ PackageToSchema symbol_5 = (PackageToSchema)p2s_21;
-                if (symbol_5 != null) {
-                    packageToSchema_MR(symbol_5);
-                }
+                final @NonNull /*@NonInvalid*/ PackageToSchema symbol_3 = (PackageToSchema)p2s_21;
+                MAP_packageToSchema_MR(symbol_3);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_1 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, models[0/*uml*/], TYP_uml_c_c_Class_0);
-        final List<simpleuml2rdbms.uml.Class> UNBOXED_objectsOfKind_1 = objectsOfKind_1.asEcoreObjects(idResolver, simpleuml2rdbms.uml.Class.class);
-        assert UNBOXED_objectsOfKind_1 != null;
-        for (simpleuml2rdbms.uml.Class c_9 : UNBOXED_objectsOfKind_1) {
+        for (simpleuml2rdbms.uml.Class c_9 : ValueUtil.typedIterable(simpleuml2rdbms.uml.Class.class, objectsOfKind_1)) {
             if (c_9 != null) {
-                final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class symbol_9 = (simpleuml2rdbms.uml.Class)c_9;
+                final @NonNull /*@NonInvalid*/ simpleuml2rdbms.uml.Class symbol_6 = (simpleuml2rdbms.uml.Class)c_9;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ Package namespace = symbol_9.getNamespace();
+                final @NonNull /*@Thrown*/ Package namespace = symbol_6.getNamespace();
                 final @NonNull /*@Thrown*/ PackageToSchema middle = ClassUtil.nonNullState (OPPOSITE_OF_PackageToSchema_umlPackage.get(namespace));
-                if (symbol_9 != null) {
-                    if (namespace != null) {
-                        if (middle != null) {
-                            classToTable_LM(symbol_9, namespace, middle);
-                        }
-                    }
-                }
+                MAP_classToTable_LM(symbol_6, namespace, middle);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_2 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassToTable, models[2/*middle*/], TYP_uml2rdbms_c_c_ClassToTable_0);
-        final List<ClassToTable> UNBOXED_objectsOfKind_2 = objectsOfKind_2.asEcoreObjects(idResolver, ClassToTable.class);
-        assert UNBOXED_objectsOfKind_2 != null;
-        for (ClassToTable c2t_3 : UNBOXED_objectsOfKind_2) {
+        for (ClassToTable c2t_3 : ValueUtil.typedIterable(ClassToTable.class, objectsOfKind_2)) {
             if (c2t_3 != null) {
-                final @NonNull /*@NonInvalid*/ ClassToTable symbol_15 = (ClassToTable)c2t_3;
+                final @NonNull /*@NonInvalid*/ ClassToTable symbol_11 = (ClassToTable)c2t_3;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ PackageToSchema owner = symbol_15.getOwner();
+                final @NonNull /*@Thrown*/ PackageToSchema owner = symbol_11.getOwner();
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ Schema schema = owner.getSchema();
-                if (symbol_15 != null) {
-                    if (owner != null) {
-                        if (schema != null) {
-                            classToTable_MR(symbol_15, owner, schema);
-                        }
-                    }
-                }
+                MAP_classToTable_MR(symbol_11, owner, schema);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_3 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Association, models[0/*uml*/], TYP_uml_c_c_Association_0);
-        final List<Association> UNBOXED_objectsOfKind_3 = objectsOfKind_3.asEcoreObjects(idResolver, Association.class);
-        assert UNBOXED_objectsOfKind_3 != null;
-        for (Association a_9 : UNBOXED_objectsOfKind_3) {
+        for (Association a_9 : ValueUtil.typedIterable(Association.class, objectsOfKind_3)) {
             if (a_9 != null) {
-                final @NonNull /*@NonInvalid*/ Association symbol_21 = (Association)a_9;
+                final @NonNull /*@NonInvalid*/ Association symbol_16 = (Association)a_9;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class destination = symbol_21.getDestination();
+                final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class destination = symbol_16.getDestination();
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class source_0 = symbol_21.getSource();
+                final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class source_0 = symbol_16.getSource();
                 final @Nullable /*@Thrown*/ ClassToTable middle_2 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(source_0));
-                final @Nullable /*@Thrown*/ ClassToTable middle_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(destination));
-                @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ Package namespace_1 = symbol_21.getNamespace();
                 if (middle_2 == null) {
-                    throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/SimpleUML2RDBMS\'::ClassToTable::owner\'");
+                    throw new InvalidValueException("Null binding for \'associationToForeignKey_LM::sc2t\'");
                 }
+                final @Nullable /*@Thrown*/ ClassToTable middle_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(destination));
+                if (middle_0 == null) {
+                    throw new InvalidValueException("Null binding for \'associationToForeignKey_LM::dc2t\'");
+                }
+                @SuppressWarnings("null")
+                final @NonNull /*@Thrown*/ Package namespace_1 = symbol_16.getNamespace();
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ PackageToSchema owner_1 = middle_2.getOwner();
-                if (symbol_21 != null) {
-                    if (destination != null) {
-                        if (middle_0 != null) {
-                            if (namespace_1 != null) {
-                                if (owner_1 != null) {
-                                    if (source_0 != null) {
-                                        if (middle_2 != null) {
-                                            associationToForeignKey_LM(symbol_21, destination, middle_0, namespace_1, owner_1, source_0, middle_2);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                MAP_associationToForeignKey_LM(symbol_16, destination, middle_0, namespace_1, owner_1, source_0, middle_2);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_4 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_AssociationToForeignKey, models[2/*middle*/], TYP_uml2rdbms_c_c_AssociationToForeignKey_0);
-        final List<AssociationToForeignKey> UNBOXED_objectsOfKind_4 = objectsOfKind_4.asEcoreObjects(idResolver, AssociationToForeignKey.class);
-        assert UNBOXED_objectsOfKind_4 != null;
-        for (AssociationToForeignKey a2f_1 : UNBOXED_objectsOfKind_4) {
+        for (AssociationToForeignKey a2f_1 : ValueUtil.typedIterable(AssociationToForeignKey.class, objectsOfKind_4)) {
             if (a2f_1 != null) {
                 final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_rdbms_c_c_Key_0 = idResolver.getClass(CLSSid_Key, null);
                 final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_5 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Key, models[1/*rdbms*/], TYP_rdbms_c_c_Key_0);
-                final List<Key> UNBOXED_objectsOfKind_5 = objectsOfKind_5.asEcoreObjects(idResolver, Key.class);
-                assert UNBOXED_objectsOfKind_5 != null;
-                for (Key rk_1 : UNBOXED_objectsOfKind_5) {
+                for (Key rk_1 : ValueUtil.typedIterable(Key.class, objectsOfKind_5)) {
                     if (rk_1 != null) {
-                        final @NonNull /*@NonInvalid*/ AssociationToForeignKey symbol_32 = (AssociationToForeignKey)a2f_1;
+                        final @NonNull /*@NonInvalid*/ AssociationToForeignKey symbol_25 = (AssociationToForeignKey)a2f_1;
                         @SuppressWarnings("null")
-                        final @NonNull /*@Thrown*/ ClassToTable owner_5 = symbol_32.getOwner();
-                        final @Nullable /*@Thrown*/ ClassToTable referenced = symbol_32.getReferenced();
+                        final @NonNull /*@Thrown*/ ClassToTable owner_5 = symbol_25.getOwner();
+                        final @Nullable /*@Thrown*/ ClassToTable referenced = symbol_25.getReferenced();
                         final @Nullable /*@Thrown*/ Table table_1 = owner_5.getTable();
                         if (referenced == null) {
-                            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/SimpleUML2RDBMS\'::ClassToTable::table\'");
+                            throw new InvalidValueException("Null binding for \'associationToForeignKey_MR::dc2t\'");
+                        }
+                        if (table_1 == null) {
+                            throw new InvalidValueException("Null binding for \'associationToForeignKey_MR::st\'");
                         }
                         final @Nullable /*@Thrown*/ Table table = referenced.getTable();
+                        if (table == null) {
+                            throw new InvalidValueException("Null binding for \'associationToForeignKey_MR::dt\'");
+                        }
                         @SuppressWarnings("null")
                         final @NonNull /*@Thrown*/ PackageToSchema owner_3 = owner_5.getOwner();
-                        final @NonNull /*@NonInvalid*/ Key symbol_36 = (Key)rk_1;
-                        if (table_1 == null) {
-                            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS\'::Table::schema\'");
-                        }
+                        final @NonNull /*@NonInvalid*/ Key symbol_29 = (Key)rk_1;
                         @SuppressWarnings("null")
                         final @NonNull /*@Thrown*/ Schema schema_0 = table_1.getSchema();
-                        if (symbol_32 != null) {
-                            if (referenced != null) {
-                                if (table != null) {
-                                    if (owner_3 != null) {
-                                        if (symbol_36 != null) {
-                                            if (schema_0 != null) {
-                                                if (owner_5 != null) {
-                                                    if (table_1 != null) {
-                                                        associationToForeignKey_MR(symbol_32, referenced, table, owner_3, symbol_36, schema_0, owner_5, table_1);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        MAP_associationToForeignKey_MR(symbol_25, referenced, table, owner_3, symbol_29, schema_0, owner_5, table_1);
                     }
                 }
             }
         }
-        for (PrimitiveDataType prim_5 : UNBOXED_objectsOfKind_7) {
+        for (PrimitiveDataType prim_5 : ValueUtil.typedIterable(PrimitiveDataType.class, objectsOfKind_7)) {
             if (prim_5 != null) {
-                final @NonNull /*@NonInvalid*/ PrimitiveDataType symbol_46 = (PrimitiveDataType)prim_5;
+                final @NonNull /*@NonInvalid*/ PrimitiveDataType symbol_38 = (PrimitiveDataType)prim_5;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ Package namespace_2 = symbol_46.getNamespace();
+                final @NonNull /*@Thrown*/ Package namespace_2 = symbol_38.getNamespace();
                 final @NonNull /*@Thrown*/ PackageToSchema middle_3 = ClassUtil.nonNullState (OPPOSITE_OF_PackageToSchema_umlPackage.get(namespace_2));
-                if (namespace_2 != null) {
-                    if (middle_3 != null) {
-                        if (symbol_46 != null) {
-                            stringToVarchar_LM(namespace_2, middle_3, symbol_46);
-                        }
-                    }
-                }
+                MAP_stringToVarchar_LM(namespace_2, middle_3, symbol_38);
             }
         }
-        for (PrimitiveDataType prim_6 : UNBOXED_objectsOfKind_7) {
+        for (PrimitiveDataType prim_6 : ValueUtil.typedIterable(PrimitiveDataType.class, objectsOfKind_7)) {
             if (prim_6 != null) {
-                final @NonNull /*@NonInvalid*/ PrimitiveDataType symbol_52 = (PrimitiveDataType)prim_6;
+                final @NonNull /*@NonInvalid*/ PrimitiveDataType symbol_43 = (PrimitiveDataType)prim_6;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ Package namespace_4 = symbol_52.getNamespace();
+                final @NonNull /*@Thrown*/ Package namespace_4 = symbol_43.getNamespace();
                 final @NonNull /*@Thrown*/ PackageToSchema middle_4 = ClassUtil.nonNullState (OPPOSITE_OF_PackageToSchema_umlPackage.get(namespace_4));
-                if (namespace_4 != null) {
-                    if (middle_4 != null) {
-                        if (symbol_52 != null) {
-                            integerToNumber_LM(namespace_4, middle_4, symbol_52);
-                        }
-                    }
-                }
+                MAP_integerToNumber_LM(namespace_4, middle_4, symbol_43);
             }
         }
-        for (PrimitiveDataType prim_7 : UNBOXED_objectsOfKind_7) {
+        for (PrimitiveDataType prim_7 : ValueUtil.typedIterable(PrimitiveDataType.class, objectsOfKind_7)) {
             if (prim_7 != null) {
-                final @NonNull /*@NonInvalid*/ PrimitiveDataType symbol_58 = (PrimitiveDataType)prim_7;
+                final @NonNull /*@NonInvalid*/ PrimitiveDataType symbol_48 = (PrimitiveDataType)prim_7;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ Package namespace_6 = symbol_58.getNamespace();
+                final @NonNull /*@Thrown*/ Package namespace_6 = symbol_48.getNamespace();
                 final @NonNull /*@Thrown*/ PackageToSchema middle_5 = ClassUtil.nonNullState (OPPOSITE_OF_PackageToSchema_umlPackage.get(namespace_6));
-                if (namespace_6 != null) {
-                    if (middle_5 != null) {
-                        if (symbol_58 != null) {
-                            booleanToBoolean_LM(namespace_6, middle_5, symbol_58);
-                        }
-                    }
-                }
+                MAP_booleanToBoolean_LM(namespace_6, middle_5, symbol_48);
             }
         }
-        for (Attribute a_10 : UNBOXED_select_0) {
+        for (Attribute a_10 : ValueUtil.typedIterable(Attribute.class, select_0)) {
             if (a_10 != null) {
-                final @NonNull /*@NonInvalid*/ Attribute symbol_62 = (Attribute)a_10;
+                final @NonNull /*@NonInvalid*/ Attribute symbol_51 = (Attribute)a_10;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner_7 = symbol_62.getOwner();
+                final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner_7 = symbol_51.getOwner();
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ Classifier type_1 = symbol_62.getType();
+                final @NonNull /*@Thrown*/ Classifier type_1 = symbol_51.getType();
                 final @Nullable /*@Thrown*/ ClassToTable middle_6 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(owner_7));
+                if (middle_6 == null) {
+                    throw new InvalidValueException("Null binding for \'classPrimitiveAttributes_LM::fao\'");
+                }
                 final @NonNull /*@Thrown*/ PrimitiveDataType oclAsType = ClassUtil.nonNullState((PrimitiveDataType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_1, TYP_uml_c_c_PrimitiveDataType_2));
                 final @NonNull /*@Thrown*/ PrimitiveToName middle_7 = ClassUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(oclAsType));
-                if (symbol_62 != null) {
-                    if (owner_7 != null) {
-                        if (middle_6 != null) {
-                            if (middle_7 != null) {
-                                if (type_1 instanceof PrimitiveDataType) {
-                                    classPrimitiveAttributes_LM(symbol_62, owner_7, middle_6, middle_7, (PrimitiveDataType)type_1);
-                                }
-                            }
-                        }
-                    }
+                if (type_1 instanceof PrimitiveDataType) {
+                    MAP_classPrimitiveAttributes_LM(symbol_51, owner_7, middle_6, middle_7, (PrimitiveDataType)type_1);
                 }
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_10 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_IntegerToNumber, models[2/*middle*/], TYP_uml2rdbms_c_c_IntegerToNumber_0);
-        final List<IntegerToNumber> UNBOXED_objectsOfKind_10 = objectsOfKind_10.asEcoreObjects(idResolver, IntegerToNumber.class);
-        assert UNBOXED_objectsOfKind_10 != null;
-        for (IntegerToNumber p2n_11 : UNBOXED_objectsOfKind_10) {
+        for (IntegerToNumber p2n_11 : ValueUtil.typedIterable(IntegerToNumber.class, objectsOfKind_10)) {
             if (p2n_11 != null) {
-                final @NonNull /*@NonInvalid*/ IntegerToNumber symbol_70 = (IntegerToNumber)p2n_11;
+                final @NonNull /*@NonInvalid*/ IntegerToNumber symbol_58 = (IntegerToNumber)p2n_11;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ PackageToSchema owner_9 = symbol_70.getOwner();
-                if (symbol_70 != null) {
-                    if (owner_9 != null) {
-                        integerToNumber_MR(symbol_70, owner_9);
-                    }
-                }
+                final @NonNull /*@Thrown*/ PackageToSchema owner_9 = symbol_58.getOwner();
+                MAP_integerToNumber_MR(symbol_58, owner_9);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_11 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_BooleanToBoolean, models[2/*middle*/], TYP_uml2rdbms_c_c_BooleanToBoolean_0);
-        final List<BooleanToBoolean> UNBOXED_objectsOfKind_11 = objectsOfKind_11.asEcoreObjects(idResolver, BooleanToBoolean.class);
-        assert UNBOXED_objectsOfKind_11 != null;
-        for (BooleanToBoolean p2n_12 : UNBOXED_objectsOfKind_11) {
+        for (BooleanToBoolean p2n_12 : ValueUtil.typedIterable(BooleanToBoolean.class, objectsOfKind_11)) {
             if (p2n_12 != null) {
-                final @NonNull /*@NonInvalid*/ BooleanToBoolean symbol_75 = (BooleanToBoolean)p2n_12;
+                final @NonNull /*@NonInvalid*/ BooleanToBoolean symbol_62 = (BooleanToBoolean)p2n_12;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ PackageToSchema owner_10 = symbol_75.getOwner();
-                if (symbol_75 != null) {
-                    if (owner_10 != null) {
-                        booleanToBoolean_MR(symbol_75, owner_10);
-                    }
-                }
+                final @NonNull /*@Thrown*/ PackageToSchema owner_10 = symbol_62.getOwner();
+                MAP_booleanToBoolean_MR(symbol_62, owner_10);
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_12 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_StringToVarchar, models[2/*middle*/], TYP_uml2rdbms_c_c_StringToVarchar_0);
-        final List<StringToVarchar> UNBOXED_objectsOfKind_12 = objectsOfKind_12.asEcoreObjects(idResolver, StringToVarchar.class);
-        assert UNBOXED_objectsOfKind_12 != null;
-        for (StringToVarchar p2n_13 : UNBOXED_objectsOfKind_12) {
+        for (StringToVarchar p2n_13 : ValueUtil.typedIterable(StringToVarchar.class, objectsOfKind_12)) {
             if (p2n_13 != null) {
-                final @NonNull /*@NonInvalid*/ StringToVarchar symbol_80 = (StringToVarchar)p2n_13;
+                final @NonNull /*@NonInvalid*/ StringToVarchar symbol_66 = (StringToVarchar)p2n_13;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ PackageToSchema owner_11 = symbol_80.getOwner();
-                if (symbol_80 != null) {
-                    if (owner_11 != null) {
-                        stringToVarchar_MR(symbol_80, owner_11);
-                    }
-                }
+                final @NonNull /*@Thrown*/ PackageToSchema owner_11 = symbol_66.getOwner();
+                MAP_stringToVarchar_MR(symbol_66, owner_11);
             }
         }
-        for (Attribute a_11 : UNBOXED_objectsOfKind_13) {
+        for (Attribute a_11 : ValueUtil.typedIterable(Attribute.class, objectsOfKind_13)) {
             if (a_11 != null) {
-                final @NonNull /*@NonInvalid*/ Attribute symbol_85 = (Attribute)a_11;
+                final @NonNull /*@NonInvalid*/ Attribute symbol_70 = (Attribute)a_11;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner_12 = symbol_85.getOwner();
+                final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner_12 = symbol_70.getOwner();
                 final @Nullable /*@Thrown*/ ClassToTable middle_8 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(owner_12));
+                if (middle_8 == null) {
+                    throw new InvalidValueException("Null binding for \'classComplexAttributes_LM::fao\'");
+                }
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ Classifier type_2 = symbol_85.getType();
-                if (symbol_85 != null) {
-                    if (owner_12 != null) {
-                        if (middle_8 != null) {
-                            if (type_2 instanceof simpleuml2rdbms.uml.Class) {
-                                classComplexAttributes_LM(symbol_85, owner_12, middle_8, (simpleuml2rdbms.uml.Class)type_2);
-                            }
-                        }
-                    }
+                final @NonNull /*@Thrown*/ Classifier type_2 = symbol_70.getType();
+                if (type_2 instanceof simpleuml2rdbms.uml.Class) {
+                    MAP_classComplexAttributes_LM(symbol_70, owner_12, middle_8, (simpleuml2rdbms.uml.Class)type_2);
                 }
             }
         }
         final @NonNull /*@NonInvalid*/ SetValue objectsOfKind_14 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_NonLeafAttribute, models[2/*middle*/], TYP_uml2rdbms_c_c_NonLeafAttribute_0);
-        final List<NonLeafAttribute> UNBOXED_objectsOfKind_14 = objectsOfKind_14.asEcoreObjects(idResolver, NonLeafAttribute.class);
-        assert UNBOXED_objectsOfKind_14 != null;
-        for (NonLeafAttribute fao_7 : UNBOXED_objectsOfKind_14) {
+        for (NonLeafAttribute fao_7 : ValueUtil.typedIterable(NonLeafAttribute.class, objectsOfKind_14)) {
             if (fao_7 != null) {
-                for (Attribute a_12 : UNBOXED_objectsOfKind_13) {
+                for (Attribute a_12 : ValueUtil.typedIterable(Attribute.class, objectsOfKind_13)) {
                     if (a_12 != null) {
-                        final @NonNull /*@NonInvalid*/ NonLeafAttribute symbol_96 = (NonLeafAttribute)fao_7;
-                        final @NonNull /*@NonInvalid*/ Attribute symbol_93 = (Attribute)a_12;
-                        final @Nullable /*@Thrown*/ Attribute attribute_0 = symbol_96.getAttribute();
+                        final @NonNull /*@NonInvalid*/ NonLeafAttribute symbol_79 = (NonLeafAttribute)fao_7;
+                        final @NonNull /*@NonInvalid*/ Attribute symbol_76 = (Attribute)a_12;
+                        final @Nullable /*@Thrown*/ Attribute attribute_0 = symbol_79.getAttribute();
                         if (attribute_0 == null) {
-                            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/SimpleUML\'::Attribute::type\'");
+                            throw new InvalidValueException("Null binding for \'complexAttributeComplexAttributes_LM::ca\'");
                         }
                         @SuppressWarnings("null")
                         final @NonNull /*@Thrown*/ Classifier type_3 = attribute_0.getType();
                         @SuppressWarnings("null")
-                        final @NonNull /*@Thrown*/ Classifier type_4 = symbol_93.getType();
-                        if (symbol_93 != null) {
-                            if (type_3 instanceof simpleuml2rdbms.uml.Class) {
-                                if (attribute_0 != null) {
-                                    if (symbol_96 != null) {
-                                        if (type_4 instanceof simpleuml2rdbms.uml.Class) {
-                                            complexAttributeComplexAttributes_LM(symbol_93, (simpleuml2rdbms.uml.Class)type_3, attribute_0, symbol_96, (simpleuml2rdbms.uml.Class)type_4);
-                                        }
-                                    }
-                                }
+                        final @NonNull /*@Thrown*/ Classifier type_4 = symbol_76.getType();
+                        if (type_3 instanceof simpleuml2rdbms.uml.Class) {
+                            if (type_4 instanceof simpleuml2rdbms.uml.Class) {
+                                MAP_complexAttributeComplexAttributes_LM(symbol_76, (simpleuml2rdbms.uml.Class)type_3, attribute_0, symbol_79, (simpleuml2rdbms.uml.Class)type_4);
                             }
                         }
                     }
                 }
             }
         }
-        for (Attribute a_13 : UNBOXED_select_0) {
+        for (Attribute a_13 : ValueUtil.typedIterable(Attribute.class, select_0)) {
             if (a_13 != null) {
-                for (Attribute ca_3 : UNBOXED_objectsOfKind_13) {
+                for (Attribute ca_3 : ValueUtil.typedIterable(Attribute.class, objectsOfKind_13)) {
                     if (ca_3 != null) {
-                        final @NonNull /*@NonInvalid*/ Attribute symbol_103 = (Attribute)a_13;
-                        final @NonNull /*@NonInvalid*/ Attribute symbol_105 = (Attribute)ca_3;
+                        final @NonNull /*@NonInvalid*/ Attribute symbol_84 = (Attribute)a_13;
+                        final @NonNull /*@NonInvalid*/ Attribute symbol_86 = (Attribute)ca_3;
                         @SuppressWarnings("null")
-                        final @NonNull /*@Thrown*/ Classifier type_7 = symbol_103.getType();
+                        final @NonNull /*@Thrown*/ Classifier type_7 = symbol_84.getType();
                         @SuppressWarnings("null")
-                        final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner_14 = symbol_103.getOwner();
-                        final @Nullable /*@Thrown*/ FromAttribute middle_9 = ClassUtil.nonNullState (OPPOSITE_OF_FromAttribute_attribute.get(symbol_105));
+                        final @NonNull /*@Thrown*/ simpleuml2rdbms.uml.Class owner_14 = symbol_84.getOwner();
+                        final @Nullable /*@Thrown*/ FromAttribute middle_9 = ClassUtil.nonNullState (OPPOSITE_OF_FromAttribute_attribute.get(symbol_86));
+                        if (middle_9 == null) {
+                            throw new InvalidValueException("Null binding for \'complexAttributePrimitiveAttributes_LM::fao\'");
+                        }
                         final @NonNull /*@Thrown*/ PrimitiveDataType oclAsType_0 = ClassUtil.nonNullState((PrimitiveDataType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type_7, TYP_uml_c_c_PrimitiveDataType_2));
                         final @NonNull /*@Thrown*/ PrimitiveToName middle_10 = ClassUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(oclAsType_0));
-                        if (symbol_103 != null) {
-                            if (owner_14 != null) {
-                                if (symbol_105 != null) {
-                                    if (middle_9 instanceof NonLeafAttribute) {
-                                        if (middle_10 != null) {
-                                            if (type_7 instanceof PrimitiveDataType) {
-                                                complexAttributePrimitiveAttributes_LM(symbol_103, owner_14, symbol_105, (NonLeafAttribute)middle_9, middle_10, (PrimitiveDataType)type_7);
-                                            }
-                                        }
-                                    }
-                                }
+                        if (middle_9 instanceof NonLeafAttribute) {
+                            if (type_7 instanceof PrimitiveDataType) {
+                                MAP_complexAttributePrimitiveAttributes_LM(symbol_84, owner_14, symbol_86, (NonLeafAttribute)middle_9, middle_10, (PrimitiveDataType)type_7);
                             }
                         }
                     }
@@ -2037,31 +1928,24 @@ public class SimpleUML2RDBMS extends AbstractTransformer
                 accumulator_0.add(_1_1);
             }
         }
-        final List<AttributeToColumn> UNBOXED_select_1 = select_1.asEcoreObjects(idResolver, AttributeToColumn.class);
-        assert UNBOXED_select_1 != null;
-        for (AttributeToColumn a2c_1 : UNBOXED_select_1) {
+        for (AttributeToColumn a2c_1 : ValueUtil.typedIterable(AttributeToColumn.class, select_1)) {
             if (a2c_1 != null) {
-                final @NonNull /*@NonInvalid*/ AttributeToColumn symbol_113 = (AttributeToColumn)a2c_1;
+                final @NonNull /*@NonInvalid*/ AttributeToColumn symbol_93 = (AttributeToColumn)a2c_1;
                 @SuppressWarnings("null")
-                final @NonNull /*@Thrown*/ FromAttributeOwner owner_16 = symbol_113.getOwner();
-                final @Nullable /*@Thrown*/ PrimitiveToName type_9 = symbol_113.getType();
+                final @NonNull /*@Thrown*/ FromAttributeOwner owner_16 = symbol_93.getOwner();
+                final @Nullable /*@Thrown*/ PrimitiveToName type_9 = symbol_93.getType();
                 if (type_9 == null) {
-                    throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/SimpleUML2RDBMS\'::PrimitiveToName::typeName\'");
+                    throw new InvalidValueException("Null binding for \'attributeColumns_MR::p2n\'");
                 }
                 @SuppressWarnings("null")
                 final @NonNull /*@Thrown*/ String typeName = type_9.getTypeName();
                 final @NonNull /*@Thrown*/ ClassToTable oclAsType_1 = ClassUtil.nonNullState((ClassToTable)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, owner_16, TYP_uml2rdbms_c_c_ClassToTable_0));
                 final @Nullable /*@Thrown*/ Table table_2 = oclAsType_1.getTable();
-                if (symbol_113 != null) {
-                    if (owner_16 instanceof ClassToTable) {
-                        if (typeName != null) {
-                            if (type_9 != null) {
-                                if (table_2 != null) {
-                                    attributeColumns_MR(symbol_113, (ClassToTable)owner_16, typeName, type_9, table_2);
-                                }
-                            }
-                        }
-                    }
+                if (table_2 == null) {
+                    throw new InvalidValueException("Null binding for \'attributeColumns_MR::t\'");
+                }
+                if (owner_16 instanceof ClassToTable) {
+                    MAP_attributeColumns_MR(symbol_93, (ClassToTable)owner_16, typeName, type_9, table_2);
                 }
             }
         }

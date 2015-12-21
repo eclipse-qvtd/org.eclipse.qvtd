@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package cg._classescs2as;
+package cg_qvtimperative_tests._classescs2as;
 
 import classes.ClassesFactory;
 import classes.ClassesPackage;

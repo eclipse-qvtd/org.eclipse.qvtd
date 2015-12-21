@@ -24,6 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
+import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
@@ -121,7 +122,7 @@ public class QVTiCompilerTests extends LoadTestCase
 			QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), asTransformation);
 			QVTiCodeGenOptions options = cg.getOptions();
 			options.setUseNullAnnotations(true);
-			options.setPackagePrefix("cg");
+			options.setPackagePrefix("cg_qvtimperative_tests");
 			cg.generateClassFile();
 			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
 			Class<? extends Transformer> txClass = compileTransformation(new File("../org.eclipse.qvtd.xtext.qvtimperative.tests/bin"), cg);
@@ -286,7 +287,8 @@ public class QVTiCompilerTests extends LoadTestCase
 	}
 
 	public void testCG_Tree2TallTree_qvti() throws Exception {
-    	MyQVT myQVT = createQVT();
+		AbstractTransformer.INVOCATIONS.setState(true);
+		MyQVT myQVT = createQVT();
 		URI genModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.genmodel");
 		URI transformURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.qvti");
 		URI inputModelURI = getProjectFileURI("Tree2TallTree/Tree.xmi");

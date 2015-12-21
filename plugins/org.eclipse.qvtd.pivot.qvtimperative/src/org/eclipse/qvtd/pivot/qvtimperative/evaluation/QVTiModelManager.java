@@ -32,6 +32,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
+import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformationInstance;
+import org.eclipse.ocl.pivot.evaluation.tx.AbstractTypedModelInstance;
 import org.eclipse.ocl.pivot.evaluation.tx.TransformationInstance;
 import org.eclipse.ocl.pivot.evaluation.tx.TypedModelInstance;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -345,7 +347,7 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 		((Map<Object, Object>)unnavigableOpposites[cacheIndex]).put(sourceObject, targetObject);
 	}
 
-	public static class QVTiTransformationInstance implements TransformationInstance
+	public static class QVTiTransformationInstance extends AbstractTransformationInstance
 	{
 		protected final @NonNull QVTiModelManager modelManager;
 		protected final @NonNull Transformation transformation;
@@ -369,7 +371,7 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 		}
 	}
 
-	public static class QVTiTypedModelInstance implements TypedModelInstance
+	public static class QVTiTypedModelInstance extends AbstractTypedModelInstance
 	{
 		protected final @NonNull QVTiModelManager modelManager;
 		protected final @NonNull TypedModel typedModel;
@@ -430,6 +432,7 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 			return modelManager;
 		}
 
+		@SuppressWarnings("null")
 		@Override
 		public @NonNull Collection<EObject> getRootObjects() {
 			Resource resource = modelManager.getModel(typedModel);
@@ -437,7 +440,7 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 				return resource.getContents();
 			}
 			else {
-				return Collections.EMPTY_LIST;
+				return Collections.emptyList();
 			}
 		}
 		

@@ -78,10 +78,10 @@ public class UpperToLower extends AbstractTransformer
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Node2Node = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Node2Node);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Graph = TypeId.SET.getSpecializedId(CLSSid_Graph);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OclElement = TypeId.SET.getSpecializedId(CLSSid_OclElement);
-    public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet_0 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Node);
-    public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet_1 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Edge);
+    public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet_0 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Edge2Edge);
+    public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Edge);
+    public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet_1 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Node);
     public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet_2 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Node2Node);
-    public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Edge2Edge);
     
     /*
      * Property-source to Property-target unnavigable navigation caches
@@ -104,14 +104,14 @@ public class UpperToLower extends AbstractTransformer
      * map __root__ in UpperToLower {
      * 
      *   where ( |)
-     * {_'-join-Edge2Edge-0' : OrderedSet(simplegraph2graph::Edge2Edge[*|1]) = OrderedSet{};
+     * {_'-join-Edge-0' : OrderedSet(simplegraph::Edge[*|1]) = OrderedSet{};
+     * _'-join-Edge2Edge-0' : OrderedSet(simplegraph2graph::Edge2Edge[*|1]) = OrderedSet{};
      * roots : Set(OclElement) = upperGraph.rootObjects()
      *   ;
      * _'-child-Graph-' : Set(simplegraph::Graph[*|1]) = roots->selectByKind(simplegraph::Graph)
      *   ;
      * _'-join-Graph-0' : Set(simplegraph::Graph[*|1]) = _'-child-Graph-';
      * _'-join-Node-0' : OrderedSet(simplegraph::Node[*|1]) = OrderedSet{};
-     * _'-join-Edge-0' : OrderedSet(simplegraph::Edge[*|1]) = OrderedSet{};
      * _'-join-Node2Node-0' : OrderedSet(simplegraph2graph::Node2Node[*|1]) = OrderedSet{};
      *  |}
      * for loop0 : simplegraph::Graph in _'-join-Graph-0' {
@@ -157,9 +157,9 @@ public class UpperToLower extends AbstractTransformer
         final @NonNull /*@NonInvalid*/ SetValue rootObjects = RootObjectsOperation.INSTANCE.evaluate(executor, SET_CLSSid_OclElement, models[0/*upperGraph*/]);
         final @NonNull /*@NonInvalid*/ SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, rootObjects, TYP_simplegraph_c_c_Graph_0);
         // connection variables
+        final @NonNull OrderedSetValue.Accumulator _m_join_m_Edge_m_0_1 = (OrderedSetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(ORD_CLSSid_Edge);
         final @NonNull OrderedSetValue.Accumulator _m_join_m_Edge2Edge_m_0_1 = (OrderedSetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(ORD_CLSSid_Edge2Edge);
         final @NonNull OrderedSetValue.Accumulator _m_join_m_Node_m_0_1 = (OrderedSetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(ORD_CLSSid_Node);
-        final @NonNull OrderedSetValue.Accumulator _m_join_m_Edge_m_0_1 = (OrderedSetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(ORD_CLSSid_Edge);
         final @NonNull OrderedSetValue.Accumulator _m_join_m_Node2Node_m_0_1 = (OrderedSetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(ORD_CLSSid_Node2Node);
         // mapping statements
         for (Graph loop0 : ValueUtil.typedIterable(Graph.class, selectByKind)) {
@@ -212,12 +212,12 @@ public class UpperToLower extends AbstractTransformer
      * { |}
      * where (_'-join-Edge2Edge-0' : OrderedSet(simplegraph2graph::Edge2Edge[*|1]);
      *  |)
-     * {tn1 : simplegraph::Node[1] = e1.target;
-     * sn1 : simplegraph::Node[1] = e1.source;
+     * {sn1 : simplegraph::Node[1] = e1.source;
      * g1 : simplegraph::Graph[1] = e1.graph;
-     * tn2n : simplegraph2graph::Node2Node[1] = tn1.middle1;
+     * tn1 : simplegraph::Node[1] = e1.target;
      * sn2n : simplegraph2graph::Node2Node[1] = sn1.middle1;
      * g2g : simplegraph2graph::Graph2Graph[1] = g1.middle1;
+     * tn2n : simplegraph2graph::Node2Node[1] = tn1.middle1;
      *  |
      * _'-join-Edge2Edge-0' += e2e;
      * e2e.edge1 := e1;
@@ -230,22 +230,22 @@ public class UpperToLower extends AbstractTransformer
     protected boolean MAP_edge2edge_LM(final @NonNull OrderedSetValue.Accumulator _m_join_m_Edge2Edge_m_0, final @NonNull /*@NonInvalid*/ Edge e1) throws ReflectiveOperationException {
         // predicates
         // variable assignments
-        final @Nullable /*@Thrown*/ Node target = e1.getTarget();
         final @Nullable /*@Thrown*/ Node source = e1.getSource();
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Graph graph = e1.getGraph();
-        final @Nullable /*@Thrown*/ Node2Node middle1 = ClassUtil.nonNullState (OPPOSITE_OF_Node2Node_node1.get(target));
-        final @Nullable /*@Thrown*/ Node2Node middle1_0 = ClassUtil.nonNullState (OPPOSITE_OF_Node2Node_node1.get(source));
-        final @Nullable /*@Thrown*/ Graph2Graph middle1_1 = ClassUtil.nonNullState (OPPOSITE_OF_Graph2Graph_graph1.get(graph));
+        final @Nullable /*@Thrown*/ Node target = e1.getTarget();
+        final @Nullable /*@Thrown*/ Node2Node middle1 = ClassUtil.nonNullState (OPPOSITE_OF_Node2Node_node1.get(source));
+        final @Nullable /*@Thrown*/ Graph2Graph middle1_0 = ClassUtil.nonNullState (OPPOSITE_OF_Graph2Graph_graph1.get(graph));
+        final @Nullable /*@Thrown*/ Node2Node middle1_1 = ClassUtil.nonNullState (OPPOSITE_OF_Node2Node_node1.get(target));
         // creations
         final /*@Thrown*/ Edge2Edge e2e_0 = Simplegraph2graphFactory.eINSTANCE.createEdge2Edge();
         assert e2e_0 != null;
         models[2/*middle*/].add(e2e_0);
         // property assignments
         e2e_0.setEdge1(e1);
-        e2e_0.setOwner(middle1_1);
-        e2e_0.setSource(middle1_0);
-        e2e_0.setTarget(middle1);
+        e2e_0.setOwner(middle1_0);
+        e2e_0.setSource(middle1);
+        e2e_0.setTarget(middle1_1);
         // connection assignments
         _m_join_m_Edge2Edge_m_0.add(e2e_0);
         return true;
@@ -261,12 +261,12 @@ public class UpperToLower extends AbstractTransformer
      *  |)
      * { |}
      * where ( |)
-     * {g2g : simplegraph2graph::Graph2Graph[1] = e2e.owner;
+     * {tn2n : simplegraph2graph::Node2Node[1] = e2e.target;
+     * g2g : simplegraph2graph::Graph2Graph[1] = e2e.owner;
      * sn2n : simplegraph2graph::Node2Node[1] = e2e.source;
-     * tn2n : simplegraph2graph::Node2Node[1] = e2e.target;
+     * tn2 : simplegraph::Node[1] = tn2n.node2;
      * g2 : simplegraph::Graph[1] = g2g.graph2;
      * sn2 : simplegraph::Node[1] = sn2n.node2;
-     * tn2 : simplegraph::Node[1] = tn2n.node2;
      *  |
      * e2e.edge2 := e2;
      * e2.graph := g2;
@@ -278,12 +278,12 @@ public class UpperToLower extends AbstractTransformer
     protected boolean MAP_edge2edge_MR(final @NonNull /*@NonInvalid*/ Edge2Edge e2e) throws ReflectiveOperationException {
         // predicates
         // variable assignments
+        final @Nullable /*@Thrown*/ Node2Node target = e2e.getTarget();
         final @Nullable /*@Thrown*/ Graph2Graph owner = e2e.getOwner();
         final @Nullable /*@Thrown*/ Node2Node source = e2e.getSource();
-        final @Nullable /*@Thrown*/ Node2Node target = e2e.getTarget();
+        final @Nullable /*@Thrown*/ Node node2 = target.getNode2();
         final @Nullable /*@Thrown*/ Graph graph2 = owner.getGraph2();
-        final @Nullable /*@Thrown*/ Node node2 = source.getNode2();
-        final @Nullable /*@Thrown*/ Node node2_0 = target.getNode2();
+        final @Nullable /*@Thrown*/ Node node2_0 = source.getNode2();
         // creations
         final /*@Thrown*/ Edge e2 = SimplegraphFactory.eINSTANCE.createEdge();
         assert e2 != null;
@@ -291,8 +291,8 @@ public class UpperToLower extends AbstractTransformer
         // property assignments
         e2e.setEdge2(e2);
         e2.setGraph(graph2);
-        e2.setSource(node2);
-        e2.setTarget(node2_0);
+        e2.setSource(node2_0);
+        e2.setTarget(node2);
         return true;
     }
     
@@ -431,17 +431,17 @@ public class UpperToLower extends AbstractTransformer
      *   upperGraph (_'-parent-' : simplegraph::Graph[1];
      *  |)
      * { |}
-     * where (_'-join-Node-0' : OrderedSet(simplegraph::Node[*|1]);
-     * _'-join-Edge-0' : OrderedSet(simplegraph::Edge[*|1]);
+     * where (_'-join-Edge-0' : OrderedSet(simplegraph::Edge[*|1]);
+     * _'-join-Node-0' : OrderedSet(simplegraph::Node[*|1]);
      *  |)
      * {allChildren : OrderedSet(simplegraph::Element) = _'-parent-'.element->selectByKind(simplegraph::Element)
      *   ;
-     * _'-child-Node-' : OrderedSet(simplegraph::Node[*|1]) = allChildren->selectByKind(simplegraph::Node)
+     * _'-child-Edge-' : OrderedSet(simplegraph::Edge[*|1]) = allChildren->selectByKind(simplegraph::Edge)
      *   ;
-     * _'-child-Edge-' : OrderedSet(simplegraph::Edge[*|1]) = allChildren->selectByKind(simplegraph::Edge);
+     * _'-child-Node-' : OrderedSet(simplegraph::Node[*|1]) = allChildren->selectByKind(simplegraph::Node);
      *  |
-     * _'-join-Node-0' += _'-child-Node-';
      * _'-join-Edge-0' += _'-child-Edge-';
+     * _'-join-Node-0' += _'-child-Node-';
      * }
      * 
      */
@@ -456,17 +456,17 @@ public class UpperToLower extends AbstractTransformer
         final @NonNull /*@Thrown*/ List<Element> element = _m_parent_m.getElement();
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_element = idResolver.createOrderedSetOfAll(ORD_CLSSid_Element, element);
         final @NonNull /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_element, TYP_simplegraph_c_c_Element_0);
-        final @NonNull /*@NonInvalid*/ OrderedSetValue selectByKind_0 = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_simplegraph_c_c_Node_0);
-        final @NonNull /*@NonInvalid*/ OrderedSetValue selectByKind_1 = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_simplegraph_c_c_Edge_0);
+        final @NonNull /*@NonInvalid*/ OrderedSetValue selectByKind_0 = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_simplegraph_c_c_Edge_0);
+        final @NonNull /*@NonInvalid*/ OrderedSetValue selectByKind_1 = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_simplegraph_c_c_Node_0);
         // connection assignments
-        for (Node iterator : ValueUtil.typedIterable(Node.class, selectByKind_0)) {
-            if (iterator instanceof Node) {
-                _m_join_m_Node_m_0.add(iterator);
+        for (Edge iterator : ValueUtil.typedIterable(Edge.class, selectByKind_0)) {
+            if (iterator instanceof Edge) {
+                _m_join_m_Edge_m_0.add(iterator);
             }
         }
-        for (Edge iterator_0 : ValueUtil.typedIterable(Edge.class, selectByKind_1)) {
-            if (iterator_0 instanceof Edge) {
-                _m_join_m_Edge_m_0.add(iterator_0);
+        for (Node iterator_0 : ValueUtil.typedIterable(Node.class, selectByKind_1)) {
+            if (iterator_0 instanceof Node) {
+                _m_join_m_Node_m_0.add(iterator_0);
             }
         }
         return true;

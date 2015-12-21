@@ -21,13 +21,13 @@ import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.evaluation.tx.InvocationFailedException;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
@@ -58,10 +58,10 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -119,7 +119,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			}
 		}
 	}//	private static final Logger logger = Logger.getLogger(QVTiAbstractEvaluationVisitor.class);
-	protected final @NonNull QVTiExecutor executor;
+	protected final @NonNull QVTiExecutor executor;			// FIXME fold into templated context
         
     /**
      * Instantiates a new qV tcore evaluation visitor impl.
@@ -267,17 +267,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		if (referredMapping == null) {
 			return null;
 		}
-		context.pushEvaluationEnvironment(referredMapping, mappingCall);
-		try {
-			for (Map.Entry<Variable,Object> entry : variable2value.entrySet()) {
-				@SuppressWarnings("null")@NonNull Variable variable = entry.getKey();
-				context.replace(variable, entry.getValue());
-			}
-			return executor.internalExecuteMappingCall(mappingCall, undecoratedVisitor);
-		}
-		finally {
-			context.popEvaluationEnvironment();
-		}
+		return executor.internalExecuteMappingCall(mappingCall, variable2value, undecoratedVisitor);
     }
 
 	@Override
@@ -345,7 +335,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		}
 	}
 
-	@Override
+/*	@Override
 	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp oppositePropertyCallExp) {
 		QVTiModelManager modelManager = (QVTiModelManager) context.getModelManager();
 		Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex(oppositePropertyCallExp);
@@ -358,11 +348,14 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			sourceValue = source.accept(undecoratedVisitor);
 			if (sourceValue != null) {
 				Object middleOpposite = modelManager.getUnnavigableOpposite(cacheIndex, sourceValue);
+				if (middleOpposite == null) {
+					throw new NotReadyValueException("Missing opposite value");
+				}
 				return ClassUtil.nonNullState(middleOpposite);
 			}
 		}
 		throw new InvalidValueException("Failed to evaluate '" + oppositePropertyCallExp.getReferredProperty() + "'", sourceValue, oppositePropertyCallExp);
-	}
+	} */
 
     @Override
     public @Nullable Object visitPackage(@NonNull org.eclipse.ocl.pivot.Package pkge) {
@@ -393,9 +386,10 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				Property targetProperty = propertyAssignment.getTargetProperty();
 				Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
 				Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);
-				return executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, ecoreValue);
+				executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, ecoreValue);
+				return null;
 			}
-			catch (NotReadyValueException e) {
+			catch (InvocationFailedException e) {
 				executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, e);
 //				throw e;
 			}

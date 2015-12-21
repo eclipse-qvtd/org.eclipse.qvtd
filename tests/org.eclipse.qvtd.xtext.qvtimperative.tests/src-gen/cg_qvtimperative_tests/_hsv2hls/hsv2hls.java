@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package cg._hsv2hls;
+package cg_qvtimperative_tests._hsv2hls;
 
 import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;

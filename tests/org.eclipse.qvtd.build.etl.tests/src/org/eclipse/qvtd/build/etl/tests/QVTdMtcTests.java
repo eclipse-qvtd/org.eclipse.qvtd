@@ -28,6 +28,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
+import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
@@ -210,6 +211,7 @@ public class QVTdMtcTests extends LoadTestCase {
     
     @Test
     public void testNewHSVToHLS() throws Exception {
+		AbstractTransformer.INVOCATIONS.setState(true);
     	QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
     	environmentFactory.setEvaluationTracingEnabled(true);
         ResourceSet resourceSet = environmentFactory.getResourceSet();
@@ -228,8 +230,8 @@ public class QVTdMtcTests extends LoadTestCase {
     	URI outputURI = samplesBaseUri.appendSegment("SolarizedHLS.xmi");
     	URI middleURI = samplesBaseUri.appendSegment("HSV2HLS_trace.xmi");
     	URI expectedOutputURI = samplesBaseUri.appendSegment("SolarizedHLS_expected.xmi");
-//    	BasicQVTiExecutor qvtiExecutor = new QVTiIncrementalExecutor(environmentFactory, mtc.getTransformation(iResource), QVTiIncrementalExecutor.Mode.LAZY);
-		BasicQVTiExecutor qvtiExecutor = new BasicQVTiExecutor(environmentFactory, mtc.getTransformation(iResource));
+    	BasicQVTiExecutor qvtiExecutor = new QVTiIncrementalExecutor(environmentFactory, mtc.getTransformation(iResource), QVTiIncrementalExecutor.Mode.LAZY);
+//		BasicQVTiExecutor qvtiExecutor = new BasicQVTiExecutor(environmentFactory, mtc.getTransformation(iResource));
     	qvtiExecutor.loadModel("hsv", inputURI);
     	qvtiExecutor.createModel("middle", middleURI, null);
     	qvtiExecutor.createModel("hls", outputURI, null);
@@ -255,7 +257,7 @@ public class QVTdMtcTests extends LoadTestCase {
 		private Class<? extends Transformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg) throws Exception {
 			String qualifiedClassName = cg.getQualifiedName();
 			String javaCodeSource = cg.generateClassFile();
-			OCL2JavaFileObject.saveClass(qualifiedClassName, javaCodeSource);	
+			OCL2JavaFileObject.saveClass(explicitClassPath.toString(), qualifiedClassName, javaCodeSource);	
 			Class<?> txClass = OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
 			return (Class<? extends Transformer>) txClass;
 		}
@@ -402,6 +404,7 @@ public class QVTdMtcTests extends LoadTestCase {
     
     @Test
     public void testNewHSVToHLS_CG() throws Exception {
+		AbstractTransformer.INVOCATIONS.setState(true);
 		Scheduler.EDGE_ORDER.setState(true);
 		Scheduler.REGION_DEPTH.setState(true);
 		Scheduler.REGION_ORDER.setState(true);
@@ -509,8 +512,8 @@ public class QVTdMtcTests extends LoadTestCase {
     	URI outputURI = samplesBaseUri.appendSegment("SimpleGraphLower.xmi");
     	URI middleURI = samplesBaseUri.appendSegment("UpperToLower_trace.xmi");
     	URI expectedOutputURI = samplesBaseUri.appendSegment("SimpleGraphLower_expected.xmi");
-		BasicQVTiExecutor qvtiExecutor = new BasicQVTiExecutor(environmentFactory, mtc.getTransformation(mtc.getiResource()));
-//    	BasicQVTiExecutor qvtiExecutor = new QVTiIncrementalExecutor(environmentFactory, mtc.getTransformation(mtc.getiResource()), QVTiIncrementalExecutor.Mode.LAZY);
+//		BasicQVTiExecutor qvtiExecutor = new BasicQVTiExecutor(environmentFactory, mtc.getTransformation(mtc.getiResource()));
+    	BasicQVTiExecutor qvtiExecutor = new QVTiIncrementalExecutor(environmentFactory, mtc.getTransformation(mtc.getiResource()), QVTiIncrementalExecutor.Mode.LAZY);
     	qvtiExecutor.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	qvtiExecutor.loadModel("upperGraph", inputURI);
     	qvtiExecutor.createModel("middle", middleURI, null);

@@ -31,11 +31,11 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TypeUtil;
 import org.eclipse.qvtd.compiler.internal.scheduler.ClassDatumAnalysis;
@@ -141,20 +141,24 @@ public class RootRegion2Mapping extends AbstractRegion2Mapping
 	private void createRootConnectionVariables() {
 		IdResolver idResolver = visitor.getEnvironmentFactory().getIdResolver();
 		BottomPattern bottomPattern = mapping.getBottomPattern();
-		List<Connection> rootConnections = region.getRootConnections();
+		assert bottomPattern != null;
+		List<Connection> rootConnections = new ArrayList<Connection>(region.getRootConnections());
+		Collections.sort(rootConnections, NameUtil.NAMEABLE_COMPARATOR);
 		for (Connection rootConnection : rootConnections) {
 			Type commonType = rootConnection.getType(idResolver);
 			Node regionNode = rootConnection.basicGetSource(region);
+			String name = rootConnection.getName();
+			assert name != null;
 			if (regionNode != null) {
 				OCLExpression initExpression = createSelectByKind(regionNode);
-				connection2variable.put(rootConnection, createRootConnectionVariable(bottomPattern, rootConnection.getName(), commonType, initExpression));
+				connection2variable.put(rootConnection, createRootConnectionVariable(bottomPattern, name, commonType, initExpression));
 			}
 			else if (commonType instanceof CollectionType) {
 				CollectionLiteralExp initExpression = PivotFactory.eINSTANCE.createCollectionLiteralExp();
 				initExpression.setType(commonType);
 				initExpression.setKind(TypeUtil.getCollectionKind((CollectionType) commonType));
 				initExpression.setIsRequired(true);
-				connection2variable.put(rootConnection, createRootConnectionVariable(bottomPattern, rootConnection.getName(), commonType, initExpression));
+				connection2variable.put(rootConnection, createRootConnectionVariable(bottomPattern, name, commonType, initExpression));
 			}
 			else {
 				CollectionLiteralExp initExpression = PivotFactory.eINSTANCE.createCollectionLiteralExp();
@@ -162,12 +166,12 @@ public class RootRegion2Mapping extends AbstractRegion2Mapping
 				initExpression.setType(setType);
 				initExpression.setKind(CollectionKind.SET);
 				initExpression.setIsRequired(true);
-				connection2variable.put(rootConnection, createRootConnectionVariable(bottomPattern, rootConnection.getName(), setType, initExpression));
+				connection2variable.put(rootConnection, createRootConnectionVariable(bottomPattern, name, setType, initExpression));
 			}
 		}
 	}
 
-	protected Type getType(IdResolver idResolver, Connection rootConnection) {
+	protected Type getType(@NonNull IdResolver idResolver, @NonNull Connection rootConnection) {
 		Type commonType = null;
 		for (Node node : rootConnection.getSources()) {
 			Type nodeType = node.getCompleteClass().getPrimaryClass();
@@ -187,7 +191,9 @@ public class RootRegion2Mapping extends AbstractRegion2Mapping
 			OCLExpression asSource = getRootsVariable(resultNode);
 			CompleteClass sourceCompleteClass = resultNode.getCompleteClass();
 			CollectionType sourceCollectionType = (CollectionType) sourceCompleteClass.getPrimaryClass();
-			CompleteClass sourceElementClass = visitor.getEnvironmentFactory().getCompleteModel().getCompleteClass(sourceCollectionType.getElementType());
+			Type elementType = sourceCollectionType.getElementType();
+			assert elementType != null;
+			CompleteClass sourceElementClass = visitor.getEnvironmentFactory().getCompleteModel().getCompleteClass(elementType);
 			OCLExpression asTypeExp = createTypeExp(sourceElementClass);
 			OCLExpression selectExp = createOperationCallExp(asSource, getSelectByKindOperation(), asTypeExp);
 			resultVariable = PivotUtil.createVariable(resultNode.getName(), selectExp);
@@ -199,7 +205,7 @@ public class RootRegion2Mapping extends AbstractRegion2Mapping
 
 	@Override
 	public void createStatements() {
-		BottomPattern bottomPattern = mapping.getBottomPattern();
+//		BottomPattern bottomPattern = mapping.getBottomPattern();
 		createRootConnectionVariables();
 /*		//
 		//	Cache the children in a middle bottom pattern variable.
@@ -259,7 +265,7 @@ public class RootRegion2Mapping extends AbstractRegion2Mapping
 				}
 			}
 		} */
-		for (Region callableRegion : region.getCallableChildren()) {
+		for (@SuppressWarnings("null")@NonNull Region callableRegion : region.getCallableChildren()) {
 			mappingStatement = createCalls(mappingStatement, callableRegion);
 		}
 		mapping.setMappingStatement(mappingStatement);
@@ -305,34 +311,12 @@ public class RootRegion2Mapping extends AbstractRegion2Mapping
 				}
 			}
 		}
-		for (Connection intermediateConnection : calledRegion.getIntermediateConnections()) {
+		for (@SuppressWarnings("null")@NonNull Connection intermediateConnection : calledRegion.getIntermediateConnections()) {
 			Variable calledConnectionVariable = calledRegion2Mapping.getConnectionVariable(intermediateConnection);
-			if (calledConnectionVariable != null) {
-	//			Node connectionNode = connectionRegion.getConnectionNode();
-				Variable callingConnectionVariable = connection2variable.get(intermediateConnection);
-				assert callingConnectionVariable != null;
-/*				if (callingConnectionVariable == null) {
-					BottomPattern bottomPattern = mapping.getBottomPattern();
-					Node connectionNode = intermediateConnection.getSource(region);
-					OCLExpression initExpression = createNullLiteralExp();
-					callingConnectionVariable = createRootConnectionVariable(bottomPattern, connectionNode, initExpression);
-					connection2variable.put(intermediateConnection, callingConnectionVariable);
-				} */
-				OCLExpression sourceExpression = null;
-				OCLExpression ownedInit = callingConnectionVariable.getOwnedInit();
-				if (ownedInit instanceof VariableExp) {
-					VariableDeclaration callingConnectionVariableInit = ((VariableExp)ownedInit).getReferredVariable();
-					if (callingConnectionVariableInit instanceof Variable) {
-	//					sourceExpression = PivotUtil.createVariableExp((Variable) callingConnectionVariableInit);
-					}
-				}
-				if (sourceExpression == null) {		// FIXME ?? never happens
-					sourceExpression = PivotUtil.createVariableExp(callingConnectionVariable);
-				}
-	//			variable = createVariable(node);
-	//			mapping.getBottomPattern().getVariable().add(variable);
-				mappingCallBindings.add(QVTimperativeUtil.createMappingCallBinding(calledConnectionVariable, sourceExpression));
-			}
+			Variable callingConnectionVariable = connection2variable.get(intermediateConnection);
+			assert callingConnectionVariable != null;
+			OCLExpression sourceExpression = PivotUtil.createVariableExp(callingConnectionVariable);
+			mappingCallBindings.add(QVTimperativeUtil.createMappingCallBinding(calledConnectionVariable, sourceExpression));
 		}
 		Collections.sort(mappingCallBindings, QVTimperativeUtil.MappingCallBindingComparator.INSTANCE);
 		MappingStatement mappingCallStatement = QVTimperativeUtil.createMappingCall(calledMapping, mappingCallBindings);
@@ -376,32 +360,18 @@ public class RootRegion2Mapping extends AbstractRegion2Mapping
 		return variable;
 	}
 
-/*	private @NonNull Iterable<Connection> getConnectionRegions(@NonNull Region region) {
-		List<Connection> connectionRegions = null;
-		ChainNode chain = visitor.getChain(region);
-		for (ChainNode child : chain.getChildren()) {
-			Region childRegion = child.getRegion();
-			if (childRegion.isConnectionRegion()) {
-				if (connectionRegions == null) {
-					connectionRegions = new ArrayList<Connection>();
-				}
-				connectionRegions.add((Connection)childRegion);
-			}	
-		}
-		return connectionRegions != null ? connectionRegions : EMPTY_JOIN_REGION_LIST;
-	} */
-
 	private @NonNull OCLExpression getRootsVariable(@NonNull Node resultNode) {	// FIXME compute input typed model
-		if (rootsVariable == null) {
+		Variable rootsVariable2 = rootsVariable;
+		if (rootsVariable2 == null) {
 			StandardLibraryInternal standardLibrary = (StandardLibraryInternal)visitor.getStandardLibrary();
 			TypedModel typedModel = visitor.getQVTiTypedModel(resultNode.getClassDatumAnalysis().getTypedModel());
 			assert typedModel != null;
 			Variable contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
 			VariableExp modelExp = PivotUtil.createVariableExp(contextVariable);
 			OCLExpression asSource = createOperationCallExp(modelExp, getRootObjectsOperation());
-			rootsVariable = PivotUtil.createVariable("roots", asSource);
-			mapping.getBottomPattern().getVariable().add(rootsVariable);
+			rootsVariable = rootsVariable2 = PivotUtil.createVariable("roots", asSource);
+			mapping.getBottomPattern().getVariable().add(rootsVariable2);
 		}
-		return PivotUtil.createVariableExp(rootsVariable);
+		return PivotUtil.createVariableExp(rootsVariable2);
 	}
 }
