@@ -269,7 +269,7 @@ public class QVTpModelsMerger {
 		
 		// We set the argument
 		TypeExp arg = PivotFactory.eINSTANCE.createTypeExp();
-		arg.setType(refiningType);
+		arg.setType(envF.getStandardLibrary().getClassType());
 		arg.setReferredType(refiningType);
 		opCallExp.getOwnedArguments().add(arg);
 		
