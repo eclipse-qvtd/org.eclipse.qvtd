@@ -32,6 +32,18 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
  * The Package for an Imperative QVT transformation.
+ * 
+ * An Imperative QVT trabsformation is expected to be created by an autogenerator that observes the following run-time restrictions:
+ * 
+ * A mapping that my be re-invoked must have MappingCall.isInfinite set for every possible invocation.
+ * 
+ * A mapping that reads object slots before they are guaranteed to have been assigned must declare the slots property in a corresponding ImperativeArea.checkedProperties entry.
+ * 
+ * A mapping that assigns an object slot that any mapping may access before assignment is guaranteed must declare declare the slots property in a corresponding ImperativeArea.enforcedProperties entry.
+ * 
+ * All reads by Functions/Queries must be guaranteed to succeed; i.e. the invoking mapping must check readiness before calling the query.
+ * 
+ * All writes to multi-valued properties must be guaranteed to occur before any read of the property. 
  * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory
  * @generated
