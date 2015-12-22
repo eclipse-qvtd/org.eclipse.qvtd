@@ -149,8 +149,8 @@
                     integerSymbol="0"/>
               </ownedIn>
               <ownedVariable name="container" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
-                <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
-                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.oclContainer">
+                <ownedInit xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
+                    referredProperty="http://www.eclipse.org/ocl/2015/Library.oclas#p.ocl.OclElement.oclContainer">
                   <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Composite" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                         referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
@@ -258,8 +258,8 @@
                     integerSymbol="0"/>
               </ownedIn>
               <ownedVariable name="container" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
-                <ownedInit xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
-                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.oclContainer">
+                <ownedInit xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
+                    referredProperty="http://www.eclipse.org/ocl/2015/Library.oclas#p.ocl.OclElement.oclContainer">
                   <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Leaf" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                         referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">

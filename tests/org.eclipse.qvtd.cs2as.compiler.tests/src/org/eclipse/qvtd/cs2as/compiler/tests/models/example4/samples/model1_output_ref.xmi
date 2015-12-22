@@ -7,7 +7,7 @@
     xsi:schemaLocation="http://cs2as/tests/example4/simplerkiamaas/1.0 ../SimplerKiamaAS.ecore">
   <node xsi:type="kiamaas:Leaf"
             height="0"
-            deep="0"/>
+            depth="0"/>
 </kiamaas:Top>
 
 
