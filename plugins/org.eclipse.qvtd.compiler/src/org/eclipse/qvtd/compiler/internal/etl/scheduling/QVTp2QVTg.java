@@ -443,33 +443,13 @@ public class QVTp2QVTg {
 	}
 
 	private @Nullable DomainUsage getUsage(@NonNull Element element) {
-		DomainUsageAnalysis usageAnalysis = domainUsageAnalysis;
-		if (element instanceof OperationCallExp) {
-			OperationCallExp operationCallExp = (OperationCallExp)element;
-			Operation operation = operationCallExp.getReferredOperation();
-			TemplateParameter templateParameter = operation.getType().isTemplateParameter();
-			if (templateParameter != null) {			// Handle e.g oclAsType()
-				List<Parameter> ownedParameters = operation.getOwnedParameters();
-				List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
-				int iMax = Math.min(ownedParameters.size(), ownedArguments.size());
-				for (int i = 0; i < iMax; i++) {
-					Parameter parameter = ownedParameters.get(i);
-					if (parameter.isIsTypeof() && (parameter.getType() == templateParameter)) {
-						OCLExpression argument = ownedArguments.get(i);
-						DomainUsage argumentUsage = getUsage(argument);
-						return argumentUsage;
-					}
-				}
-			}
-			usageAnalysis = domainUsageAnalysis.getAnalysis(operation);
-		}
 		Operation operation = PivotUtil.getContainingOperation(element);
 		if (operation != null) {
 			DomainUsageAnalysis analysis = domainUsageAnalysis.getAnalysis(operation);
 			return analysis.getUsage(element);
 		}
 		else {
-			return usageAnalysis.getUsage(element);
+			return domainUsageAnalysis.getUsage(element);
 		}
 	}
 	
