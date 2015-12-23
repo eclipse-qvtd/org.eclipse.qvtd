@@ -2,7 +2,8 @@
 <sbase:SRoot
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:sbase="http://cs2as/tests/example5/sourceBaseMM/1.0">
+    xmlns:sbase="http://cs2as/tests/example5/sourceBaseMM/1.0"
+    xsi:schemaLocation="http://cs2as/tests/example5/sourceBaseMM/1.0 ../SourceBaseMM.ecore">
   <ownedX name="x1">
     <ownsY name="y1">
       <ownsZ/>

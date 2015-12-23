@@ -4,7 +4,8 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:sbase="http://cs2as/tests/example5/sourceBaseMM/1.0"
-    xmlns:sderived="http://cs2as/tests/example5/sourceDerivedMM/1.0">
+    xmlns:sderived="http://cs2as/tests/example5/sourceDerivedMM/1.0"
+    xsi:schemaLocation="http://cs2as/tests/example5/sourceBaseMM/1.0 ../SourceBaseMM.ecore http://cs2as/tests/example5/sourceDerivedMM/1.0 ../SourceDerivedMM.ecore">
   <ownedX name="x1">
     <ownsY name="y1">
       <ownsZ/>
