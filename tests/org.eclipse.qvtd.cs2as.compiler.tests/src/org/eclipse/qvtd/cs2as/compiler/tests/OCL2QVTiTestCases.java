@@ -264,7 +264,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 		loadGenModels(baseURI, "ClassesCS.genmodel", "Classes.genmodel");
 		
-		Transformation tx = executeNewOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
+		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
+		URI txURI = qvtiTransf.eResource().getURI();
+		
+		myQVT.dispose();
+		myQVT = createQVT();
+		loadEcoreFile(baseURI.appendSegment("ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
+		loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
 //		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
@@ -285,6 +292,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.dispose();
 		myQVT = createQVT();
 		// We need to load the metamodel ecore files to properly use the proper PackageImpl
+		loadEcoreFile(baseURI.appendSegment("ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
 		loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
 		
 		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
