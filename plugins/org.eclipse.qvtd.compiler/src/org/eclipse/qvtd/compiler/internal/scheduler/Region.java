@@ -20,8 +20,8 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 
 public interface Region extends Visitable, GraphNode, Nameable, Schedulable
 {		

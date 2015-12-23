@@ -21,7 +21,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
 public class CompositionRegion extends AbstractRegion implements SimpleRegion
 {

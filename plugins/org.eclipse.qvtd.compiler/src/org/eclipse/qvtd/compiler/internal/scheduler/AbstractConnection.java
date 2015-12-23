@@ -22,9 +22,9 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.qvtd.pivot.schedule.utilities.DOTStringBuilder;
-import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 
 /**
  * AbstractEdge.

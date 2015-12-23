@@ -678,6 +678,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 		if (isHazardous || isIncremental) {
 			js.append("objectManager.assigned(");
+			if (isIncremental) {
+				js.append("this, ");
+			}
 			js.appendValueName(cgSlot);
 			js.append(", ");
 			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));

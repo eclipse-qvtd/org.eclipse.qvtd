@@ -12,10 +12,10 @@ package org.eclipse.qvtd.compiler.internal.scheduler;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.schedule.utilities.DOTStringBuilder;
-import org.eclipse.qvtd.pivot.schedule.utilities.GraphMLStringBuilder;
-import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 
 /**
  * AbstractEdge.

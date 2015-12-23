@@ -1,4 +1,4 @@
-package org.eclipse.qvtd.pivot.schedule.utilities;
+package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -113,6 +113,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 		attributes.clear();
 	}
 
+	@Override
 	public void appendEdge(@NonNull GraphEdge edge) {
 		String sourceName = appendNode(edge.getSource());
 		String targetName = appendNode(edge.getTarget());
@@ -153,6 +154,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 		}
 	}
 
+	@Override
 	public void appendEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
 		String sourceName = appendNode(source);
 		String targetName = appendNode(target);
@@ -191,6 +193,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 		}
 	}
 
+	@Override
 	public @NonNull String appendNode(@NonNull GraphNode object) {
 		String name = node2name.get(object);
 		if (name == null) {
@@ -220,12 +223,14 @@ public class DOTStringBuilder implements GraphStringBuilder
 		indentPending = true;
 	}
 
+	@Override
 	public void popCluster() {
 		indents--;
 		append("}");
 		newLine();
 	}
 
+	@Override
 	public void pushCluster() {
 		String name = "cluster_" + clusterName.size();
 		clusterName.add(name);
@@ -256,6 +261,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 		}
 	}
 
+	@Override
 	public void setArrowhead(@NonNull String value) {
 		attributes.put("arrowhead", value);
 	}
@@ -270,6 +276,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 		attributes.put("head", "true");
 	}
 
+	@Override
 	public void setLabel(/*@NonNull*/ String value) {
 		attributes.put("label",  '"' + value + '"');
 	}

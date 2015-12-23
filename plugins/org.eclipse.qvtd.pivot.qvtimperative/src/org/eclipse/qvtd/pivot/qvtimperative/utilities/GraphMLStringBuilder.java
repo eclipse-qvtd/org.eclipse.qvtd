@@ -1,11 +1,10 @@
-package org.eclipse.qvtd.pivot.schedule.utilities;
+package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLBuilder;
 
 public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringBuilder
 {
@@ -63,6 +62,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	}
 
 //	@Override
+	@Override
 	public void appendAttributedEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
 		String sourceName = appendNode(source);
 		String targetName = appendNode(target);
@@ -92,6 +92,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		String shapeName = shape;
 		String fillColor = "#ffffff";
 		String lineColor = color;
+		LineType lineType = LineType.line;
 		Double width = Double.valueOf(penwidth);
 		s.pushTag("node");
 			s.appendElement("id", NODEID_PREFIX + id);
@@ -112,6 +113,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		resetAttributes();
 	}
 
+	@Override
 	public void appendEdge(@NonNull GraphEdge edge) {
 		resetAttributes();
 		edge.appendEdgeAttributes(this);
@@ -125,28 +127,25 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		resetAttributes();
 	}
 	
+	@Override
 	public @NonNull String appendNode(@NonNull GraphNode object) {
 		String name = node2name.get(object);
 		if (name == null) {
 			name = "a" + node2name.size();
 			node2name.put(object, name);
-			if (object instanceof GraphNode) {
-				resetAttributes();
-				((GraphNode)object).appendNode(this, name);
-			}
-			else {
-//				append(name);
-			}
-//			newLine();
+			resetAttributes();
+			object.appendNode(this, name);
 		}
 		return name;
 	}
 
+	@Override
 	public void popCluster() {
 		s.popTag();
 		s.popTag();
 	}
 
+	@Override
 	public void pushCluster() {
 		s.pushTag("node");
 			s.appendElement("id", "gn" + graphCount++);
@@ -207,6 +206,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		this.label = replace;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public void setPenwidth(@NonNull Integer penwidth) {
 		this.penwidth = penwidth.toString();
@@ -217,6 +217,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		this.shape = shape;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public void setStyle(@NonNull String style) {
 		if ("dashed".equals(style)) {
@@ -230,6 +231,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		}
 	}
 	
+	@SuppressWarnings("null")
 	@Override
 	public @NonNull String toString() {
 		close();

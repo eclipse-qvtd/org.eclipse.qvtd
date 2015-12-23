@@ -44,6 +44,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
@@ -103,6 +104,15 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		this.objectManager = isLazy ? new LazyObjectManager((LazyInvocationManager)invocationManager) : new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
 	}
 
+	public @NonNull String createGraph(@NonNull GraphStringBuilder s) {
+		Execution2GraphVisitor execution2GraphVisitor = new Execution2GraphVisitor(s);
+		invocationManager.accept(execution2GraphVisitor);
+		objectManager.accept(execution2GraphVisitor);
+		String string = execution2GraphVisitor.toString();
+		assert string != null;
+		return string;
+	}
+
 	@Override
 	public @Nullable Object internalExecuteMappingCall(final @NonNull MappingCall mappingCall, final @NonNull Map<Variable, Object> variable2value, final @NonNull EvaluationVisitor undecoratedVisitor) {
 		if (mode == Mode.LAZY) {
@@ -118,13 +128,18 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			Object valueOrValues = variable2value.get(boundVariable);
 			newBoundValues.add(valueOrValues);
 		}
-		InterpretedInvocation savedInvocation = currentInvocation;
-		InterpretedInvocation invocation = currentInvocation = new InterpretedInvocation(newBoundValues)
+		InterpretedInvocation invocation = new InterpretedInvocation(newBoundValues)
 		{
 			@Override
 			public boolean execute() throws InvocationFailedException, ReflectiveOperationException {
-				returnStatus = QVTiIncrementalExecutor.super.internalExecuteMappingCall(mappingCall, variable2value, undecoratedVisitor);
-				return returnStatus == ValueUtil.TRUE_VALUE;
+				currentInvocation = this;
+				try {
+					returnStatus = QVTiIncrementalExecutor.super.internalExecuteMappingCall(mappingCall, variable2value, undecoratedVisitor);
+					return returnStatus == ValueUtil.TRUE_VALUE;
+				}
+				finally {
+					currentInvocation = null;
+				}
 			}
 
 			@Override
@@ -139,8 +154,6 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		} catch (ReflectiveOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			currentInvocation = savedInvocation;
 		}
 		return null;		
 	}
@@ -198,8 +211,10 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		}
 		Property targetProperty = propertyAssignment.getTargetProperty();
 		assert targetProperty != null;
-		EObject eFeature = targetProperty.getESObject();
-		objectManager.assigned((EObject)sourceObject, (EStructuralFeature) eFeature, ecoreValue);
+		EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
+		InterpretedInvocation currentInvocation2 = currentInvocation;
+		assert currentInvocation2 != null;
+		objectManager.assigned(currentInvocation2, (EObject)sourceObject, eFeature, ecoreValue);
 	}
 	
 	@Override

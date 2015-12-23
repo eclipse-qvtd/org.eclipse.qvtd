@@ -12,7 +12,7 @@ package org.eclipse.qvtd.compiler.internal.scheduler;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
 /**
  * ConnectionRole defines which of many possible roles a connection plays

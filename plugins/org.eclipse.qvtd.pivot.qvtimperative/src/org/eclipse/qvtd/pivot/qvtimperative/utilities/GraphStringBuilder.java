@@ -1,4 +1,4 @@
-package org.eclipse.qvtd.pivot.schedule.utilities;
+package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 

@@ -175,7 +175,7 @@ public class GraphMLBuilder implements GraphBuilder
 	
 	public GraphMLBuilder() {}
 	
-	public void appendArrows(@NonNull String source, @NonNull String target) {
+	public void appendArrows(/*@NonNull*/ String source, /*@NonNull*/ String target) {
 		s.pushTag("y:Arrows");
 			s.appendElement("source", source);
 			s.appendElement("target", target);
@@ -294,7 +294,8 @@ public class GraphMLBuilder implements GraphBuilder
 
 	public void appendLineStyle(@NonNull LineStyle ls) {
 		s.pushTag(LineStyle.TAG);
-			s.appendElement(LineStyle.COLOR_KEY, ls.getColor().toString());
+			String string = ls.getColor().toString();
+			s.appendElement(LineStyle.COLOR_KEY, string);
 			s.appendElement(LineStyle.TYPE_KEY, ls.getType().toString());
 			s.appendElement(LineStyle.WIDTH_KEY, ls.getWidth().toString());
 		s.popTag();

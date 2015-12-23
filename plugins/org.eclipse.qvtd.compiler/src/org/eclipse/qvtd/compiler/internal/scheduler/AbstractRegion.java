@@ -34,10 +34,10 @@ import org.eclipse.qvtd.compiler.internal.schedule2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.ToDOT;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
-import org.eclipse.qvtd.pivot.schedule.utilities.DOTStringBuilder;
-import org.eclipse.qvtd.pivot.schedule.utilities.GraphMLStringBuilder;
-import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;

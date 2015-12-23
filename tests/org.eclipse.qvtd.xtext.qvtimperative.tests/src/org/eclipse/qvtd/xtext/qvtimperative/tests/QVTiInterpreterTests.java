@@ -15,6 +15,7 @@ package org.eclipse.qvtd.xtext.qvtimperative.tests;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,6 +24,7 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -43,7 +45,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -190,6 +194,21 @@ public class QVTiInterpreterTests extends LoadTestCase
 	        	writer.close();
 	       }
 	    }
+
+		public void writeExecutionGraphMLfile(@NonNull String suffix) {
+			@SuppressWarnings("null")@NonNull URI baseURI = getTransformation().eResource().getURI();
+			URI dotURI = URI.createURI(getTransformation().getName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".graphml").resolve(baseURI);
+			try {
+				OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
+				GraphMLStringBuilder s = new GraphMLStringBuilder();
+				createGraph(s);
+				outputStream.write(s.toString().getBytes());
+				outputStream.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**
@@ -330,6 +349,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.createModel("talltree", "TallTree.xmi");
         testEvaluator.loadReference("talltree", "TallTreeValidate.xmi");
         testEvaluator.test();
+        testEvaluator.writeExecutionGraphMLfile("-execution");
         testEvaluator.dispose();
         
         URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
