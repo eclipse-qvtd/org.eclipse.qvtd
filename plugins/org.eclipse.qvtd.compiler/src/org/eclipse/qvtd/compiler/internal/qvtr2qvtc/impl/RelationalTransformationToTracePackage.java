@@ -89,7 +89,7 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 		}
 	}
 	
-	public @Nullable org.eclipse.ocl.pivot.Package getCore() {
+	public org.eclipse.ocl.pivot.@Nullable Package getCore() {
 		return p;
 	}
 

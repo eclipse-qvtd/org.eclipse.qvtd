@@ -31,7 +31,7 @@ public class QVTcoreAS2CS extends EssentialOCLAS2CS
 {	
 	private static final class Factory implements AS2CS.Factory
 	{
-		private static @NonNull AS2CS.Factory INSTANCE = new Factory();
+		private static AS2CS.@NonNull Factory INSTANCE = new Factory();
 
 		@Override
 		public @NonNull QVTcoreDeclarationVisitor createDeclarationVisitor(@NonNull AS2CSConversion converter) {

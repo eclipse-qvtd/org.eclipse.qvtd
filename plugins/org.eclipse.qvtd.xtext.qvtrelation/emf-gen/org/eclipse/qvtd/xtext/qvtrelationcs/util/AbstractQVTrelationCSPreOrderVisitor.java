@@ -44,117 +44,117 @@ public abstract class AbstractQVTrelationCSPreOrderVisitor
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitAbstractDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.AbstractDomainCS csElement) {
+	public @Nullable Continuation<?> visitAbstractDomainCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull AbstractDomainCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitCollectionTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS csElement) {
+	public @Nullable Continuation<?> visitCollectionTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull CollectionTemplateCS csElement) {
 		return visitTemplateCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitDefaultValueCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS csElement) {
+	public @Nullable Continuation<?> visitDefaultValueCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull DefaultValueCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS csElement) {
+	public @Nullable Continuation<?> visitDomainCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull DomainCS csElement) {
 		return visitAbstractDomainCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitDomainPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS csElement) {
+	public @Nullable Continuation<?> visitDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull DomainPatternCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitElementTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS csElement) {
+	public @Nullable Continuation<?> visitElementTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull ElementTemplateCS csElement) {
 		return visitTemplateVariableCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitKeyDeclCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS csElement) {
+	public @Nullable Continuation<?> visitKeyDeclCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull KeyDeclCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitModelDeclCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS csElement) {
+	public @Nullable Continuation<?> visitModelDeclCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull ModelDeclCS csElement) {
 		return visitNamedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitObjectTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS csElement) {
+	public @Nullable Continuation<?> visitObjectTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull ObjectTemplateCS csElement) {
 		return visitTemplateCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitParamDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.ParamDeclarationCS csElement) {
+	public @Nullable Continuation<?> visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull ParamDeclarationCS csElement) {
 		return visitTypedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS csElement) {
+	public @Nullable Continuation<?> visitPatternCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PatternCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitPredicateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS csElement) {
+	public @Nullable Continuation<?> visitPredicateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PredicateCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitPrimitiveTypeDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS csElement) {
+	public @Nullable Continuation<?> visitPrimitiveTypeDomainCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PrimitiveTypeDomainCS csElement) {
 		return visitTemplateVariableCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitPropertyTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS csElement) {
+	public @Nullable Continuation<?> visitPropertyTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PropertyTemplateCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS csElement) {
+	public @Nullable Continuation<?> visitQueryCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull QueryCS csElement) {
 		return visitTypedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitRelationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS csElement) {
+	public @Nullable Continuation<?> visitRelationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull RelationCS csElement) {
 		return visitNamedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS csElement) {
+	public @Nullable Continuation<?> visitTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TemplateCS csElement) {
 		return visitExpCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitTemplateVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS csElement) {
+	public @Nullable Continuation<?> visitTemplateVariableCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TemplateVariableCS csElement) {
 		return visitNamedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS csElement) {
+	public @Nullable Continuation<?> visitTopLevelCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TopLevelCS csElement) {
 		return visitRootPackageCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitTransformationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS csElement) {
+	public @Nullable Continuation<?> visitTransformationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TransformationCS csElement) {
 		return visitClassCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitUnitCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS csElement) {
+	public @Nullable Continuation<?> visitUnitCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull UnitCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitVarDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS csElement) {
+	public @Nullable Continuation<?> visitVarDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull VarDeclarationCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitVarDeclarationIdCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS csElement) {
+	public @Nullable Continuation<?> visitVarDeclarationIdCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull VarDeclarationIdCS csElement) {
 		return visitNamedElementCS(csElement);
 	}
 }

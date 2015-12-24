@@ -17,7 +17,6 @@
  *******************************************************************************/
 package	org.eclipse.qvtd.xtext.qvtcorecs.util;
 
-import org.eclipse.jdt.annotation.NonNull;
 
 /*
  * An AbstractQVTcoreCSVisitor provides a default implementation of the visitor framework
@@ -32,7 +31,7 @@ public abstract class AbstractQVTcoreCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTcoreCSVisitor(@NonNull C context) {
+	protected AbstractQVTcoreCSVisitor(C context) {
 		super(context);
 	}
 }

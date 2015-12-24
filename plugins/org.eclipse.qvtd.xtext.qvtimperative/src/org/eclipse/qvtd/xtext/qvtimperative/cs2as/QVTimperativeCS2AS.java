@@ -27,7 +27,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 
 public class QVTimperativeCS2AS extends QVTcoreBaseCS2AS
 {	
-    public static boolean isMiddle(@Nullable org.eclipse.ocl.pivot.Class areaType, @NonNull ElementCS csElement) {
+    public static boolean isMiddle(org.eclipse.ocl.pivot.@Nullable Class areaType, @NonNull ElementCS csElement) {
     	if (areaType != null) {
     		org.eclipse.ocl.pivot.Package areaPackage = areaType.getOwningPackage();
     		for (EObject eObject = csElement; eObject != null; eObject = eObject.eContainer()) {

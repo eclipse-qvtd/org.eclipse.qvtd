@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.Pivotable;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
@@ -98,8 +99,8 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected QVTcoreBaseCSSwitch<Adapter> modelSwitch =
-		new QVTcoreBaseCSSwitch<Adapter>() {
+	protected QVTcoreBaseCSSwitch<@Nullable Adapter> modelSwitch =
+		new QVTcoreBaseCSSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseAbstractMappingCS(AbstractMappingCS object) {
 				return createAbstractMappingCSAdapter();

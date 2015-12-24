@@ -18,12 +18,11 @@
 package	org.eclipse.qvtd.xtext.qvtcorecs.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  */
 public interface QVTcoreCSVisitor<R> extends org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor<R>
 {
-	@Nullable R visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecs.MappingCS object);
-	@Nullable R visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS object);
+	R visitMappingCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull MappingCS object);
+	R visitTopLevelCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull TopLevelCS object);
 }

@@ -24,5 +24,5 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface DecorableQVTcoreCSVisitor<R> extends QVTcoreCSVisitor<R>, org.eclipse.qvtd.xtext.qvtcorebasecs.util.DecorableQVTcoreBaseCSVisitor<R>
 {
 	@Override
-	void setUndecoratedVisitor(@NonNull org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor<R> visitor);
+	void setUndecoratedVisitor(org.eclipse.ocl.xtext.basecs.util.@NonNull BaseCSVisitor<R> visitor);
 }

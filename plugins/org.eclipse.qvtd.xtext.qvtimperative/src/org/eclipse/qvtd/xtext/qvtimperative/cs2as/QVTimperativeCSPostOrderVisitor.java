@@ -140,16 +140,18 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			ExpCS expression = csElement.getOwnedInExpression();
 			if (expression != null) {
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
-				pMappingLoop.setOwnedSource(target);
-				List<Variable> iterators = pMappingLoop.getOwnedIterators();
-				if (iterators.size() > 0) {
-					Variable iterator = iterators.get(0);
-					if (iterator.getType() == null) {
-						Type type = target.getType();
-						if (type instanceof CollectionType) {
-							type = ((CollectionType)type).getElementType();
+				if (target != null) {
+					pMappingLoop.setOwnedSource(target);
+					List<Variable> iterators = pMappingLoop.getOwnedIterators();
+					if (iterators.size() > 0) {
+						Variable iterator = iterators.get(0);
+						if (iterator.getType() == null) {
+							Type type = target.getType();
+							if (type instanceof CollectionType) {
+								type = ((CollectionType)type).getElementType();
+							}
+							iterator.setType(type);
 						}
-						iterator.setType(type);
 					}
 				}
 			}

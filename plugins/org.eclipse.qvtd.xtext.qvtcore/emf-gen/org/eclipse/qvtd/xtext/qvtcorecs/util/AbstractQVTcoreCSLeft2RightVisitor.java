@@ -44,12 +44,12 @@ public abstract class AbstractQVTcoreCSLeft2RightVisitor
 	}
 
 	@Override
-	public @Nullable Element visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecs.MappingCS csElement) {
+	public @Nullable Element visitMappingCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull MappingCS csElement) {
 		return visitAbstractMappingCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS csElement) {
+	public @Nullable Element visitTopLevelCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull TopLevelCS csElement) {
 		return visitRootPackageCS(csElement);
 	}
 }

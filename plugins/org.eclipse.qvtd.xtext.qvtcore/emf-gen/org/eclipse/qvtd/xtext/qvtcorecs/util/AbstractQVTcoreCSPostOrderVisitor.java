@@ -44,12 +44,12 @@ public abstract class AbstractQVTcoreCSPostOrderVisitor
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecs.MappingCS csElement) {
+	public @Nullable Continuation<?> visitMappingCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull MappingCS csElement) {
 		return visitAbstractMappingCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS csElement) {
+	public @Nullable Continuation<?> visitTopLevelCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull TopLevelCS csElement) {
 		return visitRootPackageCS(csElement);
 	}
 }

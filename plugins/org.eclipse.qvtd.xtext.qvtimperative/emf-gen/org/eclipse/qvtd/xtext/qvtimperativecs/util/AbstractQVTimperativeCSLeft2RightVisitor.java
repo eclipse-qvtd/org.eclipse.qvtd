@@ -44,47 +44,47 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 	}
 
 	@Override
-	public @Nullable Element visitImperativeDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS csElement) {
+	public @Nullable Element visitImperativeDomainCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ImperativeDomainCS csElement) {
 		return visitDomainCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitImperativePredicateOrAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS csElement) {
+	public @Nullable Element visitImperativePredicateOrAssignmentCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ImperativePredicateOrAssignmentCS csElement) {
 		return visitPredicateOrAssignmentCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS csElement) {
+	public @Nullable Element visitMappingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCS csElement) {
 		return visitAbstractMappingCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitMappingCallBindingCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS csElement) {
+	public @Nullable Element visitMappingCallBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCallBindingCS csElement) {
 		return visitExpCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitMappingCallCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS csElement) {
+	public @Nullable Element visitMappingCallCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCallCS csElement) {
 		return visitMappingStatementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitMappingLoopCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS csElement) {
+	public @Nullable Element visitMappingLoopCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingLoopCS csElement) {
 		return visitMappingStatementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitMappingSequenceCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS csElement) {
+	public @Nullable Element visitMappingSequenceCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingSequenceCS csElement) {
 		return visitMappingStatementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitMappingStatementCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS csElement) {
+	public @Nullable Element visitMappingStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingStatementCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS csElement) {
+	public @Nullable Element visitTopLevelCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull TopLevelCS csElement) {
 		return visitRootPackageCS(csElement);
 	}
 }

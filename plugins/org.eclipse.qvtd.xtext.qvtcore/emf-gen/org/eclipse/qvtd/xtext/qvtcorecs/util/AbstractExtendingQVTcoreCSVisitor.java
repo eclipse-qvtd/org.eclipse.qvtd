@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.xtext.qvtcorecs.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractExtendingQVTcoreCSVisitor provides a default implementation for each
@@ -36,17 +35,17 @@ public abstract class AbstractExtendingQVTcoreCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtendingQVTcoreCSVisitor(@NonNull C context) {
+	protected AbstractExtendingQVTcoreCSVisitor(C context) {
 		super(context);
 	}	
 
 	@Override
-	public @Nullable R visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecs.MappingCS object) {
+	public R visitMappingCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull MappingCS object) {
 		return visitAbstractMappingCS(object);
 	}
 
 	@Override
-	public @Nullable R visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS object) {
+	public R visitTopLevelCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull TopLevelCS object) {
 		return visitRootPackageCS(object);
 	}
 }

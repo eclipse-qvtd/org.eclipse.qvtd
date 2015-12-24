@@ -44,47 +44,47 @@ public abstract class AbstractQVTimperativeCSPreOrderVisitor
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitImperativeDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS csElement) {
+	public @Nullable Continuation<?> visitImperativeDomainCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ImperativeDomainCS csElement) {
 		return visitDomainCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitImperativePredicateOrAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS csElement) {
+	public @Nullable Continuation<?> visitImperativePredicateOrAssignmentCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ImperativePredicateOrAssignmentCS csElement) {
 		return visitPredicateOrAssignmentCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS csElement) {
+	public @Nullable Continuation<?> visitMappingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCS csElement) {
 		return visitAbstractMappingCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitMappingCallBindingCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS csElement) {
+	public @Nullable Continuation<?> visitMappingCallBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCallBindingCS csElement) {
 		return visitExpCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitMappingCallCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS csElement) {
+	public @Nullable Continuation<?> visitMappingCallCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCallCS csElement) {
 		return visitMappingStatementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitMappingLoopCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS csElement) {
+	public @Nullable Continuation<?> visitMappingLoopCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingLoopCS csElement) {
 		return visitMappingStatementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitMappingSequenceCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS csElement) {
+	public @Nullable Continuation<?> visitMappingSequenceCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingSequenceCS csElement) {
 		return visitMappingStatementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitMappingStatementCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS csElement) {
+	public @Nullable Continuation<?> visitMappingStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingStatementCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS csElement) {
+	public @Nullable Continuation<?> visitTopLevelCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull TopLevelCS csElement) {
 		return visitRootPackageCS(csElement);
 	}
 }

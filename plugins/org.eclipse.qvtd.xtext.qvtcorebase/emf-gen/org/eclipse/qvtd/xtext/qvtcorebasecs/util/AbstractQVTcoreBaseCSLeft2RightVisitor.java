@@ -44,82 +44,82 @@ public abstract class AbstractQVTcoreBaseCSLeft2RightVisitor
 	}
 
 	@Override
-	public @Nullable Element visitAbstractMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS csElement) {
+	public @Nullable Element visitAbstractMappingCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull AbstractMappingCS csElement) {
 		return visitNamedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitAreaCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS csElement) {
+	public @Nullable Element visitAreaCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull AreaCS csElement) {
 		return visitNamedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitBottomPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS csElement) {
+	public @Nullable Element visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull BottomPatternCS csElement) {
 		return visitPatternCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitDirectionCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS csElement) {
+	public @Nullable Element visitDirectionCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull DirectionCS csElement) {
 		return visitNamedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS csElement) {
+	public @Nullable Element visitDomainCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull DomainCS csElement) {
 		return visitAreaCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitEnforcementOperationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS csElement) {
+	public @Nullable Element visitEnforcementOperationCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull EnforcementOperationCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitGuardPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS csElement) {
+	public @Nullable Element visitGuardPatternCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull GuardPatternCS csElement) {
 		return visitPatternCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitParamDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS csElement) {
+	public @Nullable Element visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull ParamDeclarationCS csElement) {
 		return visitTypedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS csElement) {
+	public @Nullable Element visitPatternCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull PatternCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitPredicateCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS csElement) {
+	public @Nullable Element visitPredicateCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull PredicateCS csElement) {
 		return visitExpCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitPredicateOrAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS csElement) {
+	public @Nullable Element visitPredicateOrAssignmentCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull PredicateOrAssignmentCS csElement) {
 		return visitExpCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS csElement) {
+	public @Nullable Element visitQueryCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull QueryCS csElement) {
 		return visitTypedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitRealizeableVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS csElement) {
+	public @Nullable Element visitRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull RealizeableVariableCS csElement) {
 		return visitTypedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitRealizedVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS csElement) {
+	public @Nullable Element visitRealizedVariableCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull RealizedVariableCS csElement) {
 		return visitRealizeableVariableCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitTransformationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS csElement) {
+	public @Nullable Element visitTransformationCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull TransformationCS csElement) {
 		return visitClassCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitUnrealizedVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS csElement) {
+	public @Nullable Element visitUnrealizedVariableCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull UnrealizedVariableCS csElement) {
 		return visitRealizeableVariableCS(csElement);
 	}
 }

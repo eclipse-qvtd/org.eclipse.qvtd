@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.xtext.qvtcorecs.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractDelegatingQVTcoreCSVisitor delegates all visits.
@@ -27,22 +26,22 @@ public abstract class AbstractDelegatingQVTcoreCSVisitor<R, C, D extends QVTcore
 	extends org.eclipse.qvtd.xtext.qvtcorebasecs.util.AbstractDelegatingQVTcoreBaseCSVisitor<R, C, D>
 	implements QVTcoreCSVisitor<R>
 {
-	protected AbstractDelegatingQVTcoreCSVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractDelegatingQVTcoreCSVisitor(@NonNull D delegate, C context) {
 		super(delegate, context);
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull org.eclipse.ocl.xtext.basecs.util.VisitableCS visitable) {
+	public R visiting(org.eclipse.ocl.xtext.basecs.util.@NonNull VisitableCS visitable) {
 		return delegate.visiting(visitable);
 	}
 
 	@Override
-	public @Nullable R visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecs.MappingCS object) {
+	public R visitMappingCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull MappingCS object) {
 		return delegate.visitMappingCS(object);
 	}
 
 	@Override
-	public @Nullable R visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS object) {
+	public R visitTopLevelCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull TopLevelCS object) {
 		return delegate.visitTopLevelCS(object);
 	}
 }

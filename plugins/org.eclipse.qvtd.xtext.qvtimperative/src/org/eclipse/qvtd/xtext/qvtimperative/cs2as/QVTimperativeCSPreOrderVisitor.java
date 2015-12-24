@@ -86,7 +86,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		super(context);
 	}
 
-	protected @Nullable org.eclipse.ocl.pivot.Class lookupClass(@NonNull ElementCS csElement, @NonNull PathNameCS csPathName, @Nullable ScopeFilter scopeFilter) {
+	protected org.eclipse.ocl.pivot.@Nullable Class lookupClass(@NonNull ElementCS csElement, @NonNull PathNameCS csPathName, @Nullable ScopeFilter scopeFilter) {
 		CS2AS.setElementType(csPathName, PivotPackage.Literals.CLASS, csElement, scopeFilter);
 		Element namedElement = csPathName.getReferredElement();
 		if (namedElement instanceof org.eclipse.ocl.pivot.Class) {

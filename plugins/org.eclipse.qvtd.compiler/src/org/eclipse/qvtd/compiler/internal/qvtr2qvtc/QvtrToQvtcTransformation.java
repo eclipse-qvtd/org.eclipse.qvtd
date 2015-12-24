@@ -507,12 +507,12 @@ public class QvtrToQvtcTransformation
 		return traceRoots;
 	}
 	
-	public @Nullable org.eclipse.ocl.pivot.Class getRelationTrace(@NonNull Relation relation) {
+	public org.eclipse.ocl.pivot.@Nullable Class getRelationTrace(@NonNull Relation relation) {
 		
 		return relationToTraceClass.get(relation);
 	}
 	
-	public @Nullable org.eclipse.ocl.pivot.Package getTransformationToPackageTrace(RelationalTransformation rt) {
+	public org.eclipse.ocl.pivot.@Nullable Package getTransformationToPackageTrace(RelationalTransformation rt) {
 		
 		return transformationToPackage.get(rt);
 	}

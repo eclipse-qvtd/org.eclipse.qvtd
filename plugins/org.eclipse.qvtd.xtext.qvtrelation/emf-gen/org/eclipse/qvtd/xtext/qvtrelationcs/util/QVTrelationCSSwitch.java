@@ -13,6 +13,7 @@ package org.eclipse.qvtd.xtext.qvtrelationcs.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.Pivotable;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
@@ -43,7 +44,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.*;
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage
  * @generated
  */
-public class QVTrelationCSSwitch<T> extends Switch<T> {
+public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

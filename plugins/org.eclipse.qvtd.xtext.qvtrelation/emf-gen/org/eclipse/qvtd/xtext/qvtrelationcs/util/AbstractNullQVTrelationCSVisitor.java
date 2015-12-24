@@ -23,8 +23,11 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * An AbstractNullQVTrelationCSVisitor provides a default implementation for each
  * visitXxx method that returns null.
+ *
+ * @deprecated Explicit 'Null' functionality is obsolete with Java 8 @Nullable annotations.  
  */
-public abstract class AbstractNullQVTrelationCSVisitor<R, C>
+ @Deprecated
+public abstract class AbstractNullQVTrelationCSVisitor<@Nullable R, C>
 	extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractNullEssentialOCLCSVisitor<R, C> implements QVTrelationCSVisitor<R>
 {
 	/**
@@ -32,122 +35,122 @@ public abstract class AbstractNullQVTrelationCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNullQVTrelationCSVisitor(@NonNull C context) {
+	protected AbstractNullQVTrelationCSVisitor(C context) {
 		super(context);
 	}	
 
 	@Override
-	public @Nullable R visitAbstractDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.AbstractDomainCS object) {
+	public R visitAbstractDomainCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull AbstractDomainCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitCollectionTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS object) {
+	public R visitCollectionTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull CollectionTemplateCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitDefaultValueCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS object) {
+	public R visitDefaultValueCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull DefaultValueCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS object) {
+	public R visitDomainCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull DomainCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitDomainPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS object) {
+	public R visitDomainPatternCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull DomainPatternCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitElementTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS object) {
+	public R visitElementTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull ElementTemplateCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitKeyDeclCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS object) {
+	public R visitKeyDeclCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull KeyDeclCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitModelDeclCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS object) {
+	public R visitModelDeclCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull ModelDeclCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitObjectTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS object) {
+	public R visitObjectTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull ObjectTemplateCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitParamDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.ParamDeclarationCS object) {
+	public R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull ParamDeclarationCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS object) {
+	public R visitPatternCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PatternCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitPredicateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS object) {
+	public R visitPredicateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PredicateCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitPrimitiveTypeDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS object) {
+	public R visitPrimitiveTypeDomainCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PrimitiveTypeDomainCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitPropertyTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS object) {
+	public R visitPropertyTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull PropertyTemplateCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS object) {
+	public R visitQueryCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull QueryCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitRelationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS object) {
+	public R visitRelationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull RelationCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS object) {
+	public R visitTemplateCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TemplateCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitTemplateVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS object) {
+	public R visitTemplateVariableCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TemplateVariableCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS object) {
+	public R visitTopLevelCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TopLevelCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitTransformationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS object) {
+	public R visitTransformationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TransformationCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitUnitCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS object) {
+	public R visitUnitCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull UnitCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitVarDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS object) {
+	public R visitVarDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull VarDeclarationCS object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitVarDeclarationIdCS(@NonNull org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS object) {
+	public R visitVarDeclarationIdCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull VarDeclarationIdCS object) {
 		return null;
 	}
 }
