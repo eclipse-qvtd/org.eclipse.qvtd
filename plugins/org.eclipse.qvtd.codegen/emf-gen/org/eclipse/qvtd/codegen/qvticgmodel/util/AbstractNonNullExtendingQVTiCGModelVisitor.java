@@ -25,8 +25,11 @@ import org.eclipse.jdt.annotation.NonNull;
  * super class, (or transitively its first super class first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
- * The return in annotated as @NonNull.
+ * The return is annotated as @NonNull.
+ *
+ * @deprecated Explicit 'NonNull' functionality is obsolete with Java 8 @NonNull annotations.  
  */
+ @Deprecated
 public abstract class AbstractNonNullExtendingQVTiCGModelVisitor<R, C>
 	extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractNonNullExtendingCGModelVisitor<R, C>
 	implements QVTiCGModelVisitor<R>
@@ -36,117 +39,117 @@ public abstract class AbstractNonNullExtendingQVTiCGModelVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNonNullExtendingQVTiCGModelVisitor(@NonNull C context) {
+	protected AbstractNonNullExtendingQVTiCGModelVisitor(C context) {
 		super(context);
 	}	
 
 	@Override
-	public @NonNull R visitCGConnectionAssignment(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment object) {
+	public @NonNull R visitCGConnectionAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGConnectionAssignment object) {
 		return visitCGValuedElement(object);
 	}
 
 	@Override
-	public @NonNull R visitCGConnectionVariable(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable object) {
+	public @NonNull R visitCGConnectionVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGConnectionVariable object) {
 		return visitCGGuardVariable(object);
 	}
 
 	@Override
-	public @NonNull R visitCGEcorePropertyAssignment(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment object) {
+	public @NonNull R visitCGEcorePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcorePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
 	@Override
-	public @NonNull R visitCGEcoreRealizedVariable(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable object) {
+	public @NonNull R visitCGEcoreRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreRealizedVariable object) {
 		return visitCGRealizedVariable(object);
 	}
 
 	@Override
-	public @NonNull R visitCGFunction(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGFunction object) {
+	public @NonNull R visitCGFunction(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunction object) {
 		return visitCGOperation(object);
 	}
 
 	@Override
-	public @NonNull R visitCGFunctionCallExp(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp object) {
+	public @NonNull R visitCGFunctionCallExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionCallExp object) {
 		return visitCGOperationCallExp(object);
 	}
 
 	@Override
-	public @NonNull R visitCGFunctionParameter(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter object) {
+	public @NonNull R visitCGFunctionParameter(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionParameter object) {
 		return visitCGParameter(object);
 	}
 
 	@Override
-	public @NonNull R visitCGGuardVariable(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable object) {
+	public @NonNull R visitCGGuardVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGGuardVariable object) {
 		return visitCGParameter(object);
 	}
 
 	@Override
-	public @NonNull R visitCGMapping(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMapping object) {
+	public @NonNull R visitCGMapping(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMapping object) {
 		return visitCGNamedElement(object);
 	}
 
 	@Override
-	public @NonNull R visitCGMappingCall(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall object) {
+	public @NonNull R visitCGMappingCall(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingCall object) {
 		return visitCGValuedElement(object);
 	}
 
 	@Override
-	public @NonNull R visitCGMappingCallBinding(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding object) {
+	public @NonNull R visitCGMappingCallBinding(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingCallBinding object) {
 		return visitCGValuedElement(object);
 	}
 
 	@Override
-	public @NonNull R visitCGMappingExp(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp object) {
+	public @NonNull R visitCGMappingExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingExp object) {
 		return visitCGValuedElement(object);
 	}
 
 	@Override
-	public @NonNull R visitCGMappingLoop(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop object) {
+	public @NonNull R visitCGMappingLoop(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingLoop object) {
 		return visitCGIterationCallExp(object);
 	}
 
 	@Override
-	public @NonNull R visitCGMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment object) {
+	public @NonNull R visitCGMiddlePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMiddlePropertyAssignment object) {
 		return visitCGEcorePropertyAssignment(object);
 	}
 
 	@Override
-	public @NonNull R visitCGMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp object) {
+	public @NonNull R visitCGMiddlePropertyCallExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMiddlePropertyCallExp object) {
 		return visitCGOppositePropertyCallExp(object);
 	}
 
 	@Override
-	public @NonNull R visitCGPredicate(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate object) {
+	public @NonNull R visitCGPredicate(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGPredicate object) {
 		return visitCGValuedElement(object);
 	}
 
 	@Override
-	public @NonNull R visitCGPropertyAssignment(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment object) {
+	public @NonNull R visitCGPropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGPropertyAssignment object) {
 		return visitCGValuedElement(object);
 	}
 
 	@Override
-	public @NonNull R visitCGRealizedVariable(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable object) {
+	public @NonNull R visitCGRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGRealizedVariable object) {
 		return visitCGVariable(object);
 	}
 
 	@Override
-	public @NonNull R visitCGSequence(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGSequence object) {
+	public @NonNull R visitCGSequence(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGSequence object) {
 		return visitCGValuedElement(object);
 	}
 
 	@Override
-	public @NonNull R visitCGTransformation(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation object) {
+	public @NonNull R visitCGTransformation(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTransformation object) {
 		return visitCGClass(object);
 	}
 
 	@Override
-	public @NonNull R visitCGTypedModel(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel object) {
+	public @NonNull R visitCGTypedModel(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
 	}
 
 	@Override
-	public @NonNull R visitCGVariablePredicate(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate object) {
+	public @NonNull R visitCGVariablePredicate(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGVariablePredicate object) {
 		return visitCGPredicate(object);
 	}
 }

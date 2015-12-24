@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
@@ -85,8 +86,8 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected QVTiCGModelSwitch<Adapter> modelSwitch =
-		new QVTiCGModelSwitch<Adapter>() {
+	protected QVTiCGModelSwitch<@Nullable Adapter> modelSwitch =
+		new QVTiCGModelSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseCGConnectionAssignment(CGConnectionAssignment object) {
 				return createCGConnectionAssignmentAdapter();

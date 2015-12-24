@@ -940,9 +940,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 						}
 						if (cgFreeVariable instanceof CGConnectionVariable) {
 							js.append("final ");
-							js.appendIsRequired(true);
-							js.append(" ");
-							js.appendClassReference(cgFreeVariable);
+							js.appendClassReference(true, cgFreeVariable);
 							js.append(".Accumulator ");						// FIXME Embed properly as a nested typeid
 							js.append(getValueName(cgFreeVariable));
 						}
@@ -1075,13 +1073,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.append("// connection variables\n");
 			for (CGAccumulator cgAccumulator : cgAccumulators) {
 				js.append("final ");
-				js.appendIsRequired(true);
-				js.append(" ");
-				js.appendClassReference(cgAccumulator);
+				js.appendClassReference(true, cgAccumulator);
 				js.append(".Accumulator ");
 				js.appendValueName(cgAccumulator);
 				js.append(" = (");
-				js.appendClassReference(cgAccumulator);
+				js.appendClassReference(null, cgAccumulator);
 				js.append(".Accumulator)");
 				js.appendClassReference(ValueUtil.class);
 				js.append(".createCollectionAccumulatorValue(");
@@ -1167,14 +1163,14 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 //		if (iterator.isNonNull()) {
 //			js.append("@SuppressWarnings(\"null\")@NonNull ");
 //		}
-		js.appendClassReference(iterator);
+		js.appendClassReference(null, iterator);
 		js.append(" ");
 		js.appendValueName(iterator);
 		js.append(" : ");
 		if (source.isBoxed()) {
 			js.appendClassReference(ValueUtil.class);
 			js.append(".typedIterable(");
-			js.appendClassReference(iterator);
+			js.appendClassReference(null, iterator);
 			js.append(".class, ");
 			js.appendValueName(source);
 			js.append(")");

@@ -84,7 +84,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 		}
 	}
 
-	public static @NonNull QVTiCG2StringVisitor.Factory FACTORY = new MyFactory();
+	public static QVTiCG2StringVisitor.@NonNull Factory FACTORY = new MyFactory();
 
 	public QVTiCG2StringVisitor() {}
 

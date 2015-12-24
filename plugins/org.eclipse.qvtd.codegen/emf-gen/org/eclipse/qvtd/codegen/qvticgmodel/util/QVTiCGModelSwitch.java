@@ -13,6 +13,7 @@ package org.eclipse.qvtd.codegen.qvticgmodel.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
@@ -43,7 +44,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.*;
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage
  * @generated
  */
-public class QVTiCGModelSwitch<T> extends Switch<T> {
+public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
