@@ -102,7 +102,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return cgPackage;
 	}
 
-	protected @NonNull CGPackage createCGPackage(@NonNull org.eclipse.ocl.pivot.Package asPackage) {
+	protected @NonNull CGPackage createCGPackage(org.eclipse.ocl.pivot.@NonNull Package asPackage) {
 		
 		// Target CG Package
 		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
@@ -119,7 +119,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return cgPackage;
 	}
 	
-	protected @NonNull CGPackage createPrefixedCGPackage(@NonNull org.eclipse.ocl.pivot.Package asPackage, String packagePrefix) {
+	protected @NonNull CGPackage createPrefixedCGPackage(org.eclipse.ocl.pivot.@NonNull Package asPackage, String packagePrefix) {
 		
 		CGPackage cgPackage = createCGPackage(asPackage);
 		// Prefix Packages		

@@ -413,11 +413,11 @@ public class QVTiTransformationAnalysis
 	public @NonNull Map<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>> getInstancesClassAnalysis(@NonNull Iterable<org.eclipse.ocl.pivot.Class> instanceClasses) {
 		Map<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>> instancesClassAnalysis = new HashMap<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>>();
 		MetamodelManagerInternal metamodelManager = environmentFactory.getMetamodelManager();
-		for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Class instanceClass : instanceClasses) {
+		for (@SuppressWarnings("null")org.eclipse.ocl.pivot.@NonNull Class instanceClass : instanceClasses) {
 			CompleteClass completeInstanceClass = metamodelManager.getCompleteClass(instanceClass);
 			instancesClassAnalysis.put(completeInstanceClass.getPrimaryClass(),  null);
 		}
-		for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Class instanceClass : instancesClassAnalysis.keySet()) {
+		for (@SuppressWarnings("null")org.eclipse.ocl.pivot.@NonNull Class instanceClass : instancesClassAnalysis.keySet()) {
 			List<org.eclipse.ocl.pivot.Class> superInstanceClasses = new ArrayList<org.eclipse.ocl.pivot.Class>();
 			superInstanceClasses.add(instanceClass);
 			CompleteClass completeClass = metamodelManager.getCompleteClass(instanceClass);
@@ -553,7 +553,7 @@ public class QVTiTransformationAnalysis
 		if (referencedType.getESObject() == EcorePackage.Literals.EOBJECT) {		// FIXME is this really right?
 			return true;
 		}
-		for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Class asPolledClass : asPolledClasses) {
+		for (@SuppressWarnings("null")org.eclipse.ocl.pivot.@NonNull Class asPolledClass : asPolledClasses) {
 			if (referencedType.conformsTo(standardLibrary, asPolledClass)) {
 				return true;
 			}

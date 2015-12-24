@@ -245,7 +245,7 @@ public abstract class SchedulerConstants
 		return getClassDatumAnalysis(classDatum);
 	}
 
-	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull org.eclipse.ocl.pivot.Class type, @NonNull TypedModel typedModel) {
+	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull TypedModel typedModel) {
 		ClassDatum classDatum = qvtp2qvtg.getClassDatum(typedModel, type);
 		return getClassDatumAnalysis(classDatum);
 	}

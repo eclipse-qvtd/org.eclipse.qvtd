@@ -202,7 +202,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		return oldUsage;
 	}
 
-	protected void replace(@NonNull DomainUsage.Internal oldUsage, @NonNull DomainUsage newUsage) {
+	protected void replace(DomainUsage.@NonNull Internal oldUsage, @NonNull DomainUsage newUsage) {
 		Iterable<Element> elements = oldUsage.getElements();
 		if (elements != null) {
 			for (@SuppressWarnings("null")@NonNull Element element : elements) {
@@ -312,7 +312,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	}
 
 	@Override
-	public @Nullable DomainUsage visitClass(@NonNull org.eclipse.ocl.pivot.Class object) {
+	public @Nullable DomainUsage visitClass(org.eclipse.ocl.pivot.@NonNull Class object) {
 		DomainUsage usage = getRootAnalysis().class2usage.get(object);
 		if (usage != null) {
 			return usage;

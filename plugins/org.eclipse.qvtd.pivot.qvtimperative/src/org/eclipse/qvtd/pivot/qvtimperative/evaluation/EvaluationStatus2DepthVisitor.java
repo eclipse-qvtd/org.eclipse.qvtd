@@ -19,7 +19,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationElement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.MappingStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util.AbstractNonNullExtendingEvaluationStatusVisitor;
 
-public class EvaluationStatus2DepthVisitor extends AbstractNonNullExtendingEvaluationStatusVisitor<Integer, Object>
+public class EvaluationStatus2DepthVisitor extends AbstractNonNullExtendingEvaluationStatusVisitor<@NonNull Integer, Object>
 {
 	public static final @NonNull EvaluationStatus2DepthVisitor INSTANCE = new EvaluationStatus2DepthVisitor(EvaluationStatus2DepthVisitor.class);
 	

@@ -53,7 +53,7 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 		}
 	}
 
-	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTrelationToStringFactory();
+	public static ToStringVisitor.@NonNull Factory FACTORY = new QVTrelationToStringFactory();
 
 	public QVTrelationToStringVisitor(@NonNull StringBuilder s) {
 		super(s);

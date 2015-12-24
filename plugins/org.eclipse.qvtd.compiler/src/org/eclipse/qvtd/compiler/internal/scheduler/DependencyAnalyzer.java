@@ -96,7 +96,7 @@ public class DependencyAnalyzer
 			this.usage = usage;
 		}
 		
-		public @NonNull ClassDependencyStep createClassDependencyStep(@NonNull org.eclipse.ocl.pivot.Class type, @NonNull Element element) {
+		public @NonNull ClassDependencyStep createClassDependencyStep(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull Element element) {
 			ClassDependencyStep dependencyStep = class2step.get(type);
 			if (dependencyStep == null) {
 				dependencyStep = new ClassDependencyStep(usage, type, element);
@@ -135,7 +135,7 @@ public class DependencyAnalyzer
 			return element;
 		}
 
-		public abstract @NonNull org.eclipse.ocl.pivot.Class getElementalType();
+		public abstract org.eclipse.ocl.pivot.@NonNull Class getElementalType();
 
 		public abstract String getName();
 
@@ -146,16 +146,16 @@ public class DependencyAnalyzer
 	
 	protected static class ClassDependencyStep extends DependencyStep
 	{
-		private final @NonNull org.eclipse.ocl.pivot.Class type;
+		private final org.eclipse.ocl.pivot.@NonNull Class type;
 		
-		public ClassDependencyStep(@NonNull DomainUsage usage, @NonNull org.eclipse.ocl.pivot.Class type, @NonNull Element element) {
+		public ClassDependencyStep(@NonNull DomainUsage usage, org.eclipse.ocl.pivot.@NonNull Class type, @NonNull Element element) {
 			super(usage, element);
 			this.type = type;
 			assert !(type instanceof CollectionType);
 		}
 
 		@Override
-		public @NonNull org.eclipse.ocl.pivot.Class getElementalType() {
+		public org.eclipse.ocl.pivot.@NonNull Class getElementalType() {
 			return type;
 		}
 
@@ -180,7 +180,7 @@ public class DependencyAnalyzer
 		}
 
 		@Override
-		public @NonNull org.eclipse.ocl.pivot.Class getElementalType() {
+		public org.eclipse.ocl.pivot.@NonNull Class getElementalType() {
 			Type type = property.getType();
 			assert type != null;
 			while (type instanceof CollectionType) {
@@ -203,7 +203,7 @@ public class DependencyAnalyzer
 		}
 
 //		@Override
-//		public @NonNull org.eclipse.ocl.pivot.Class getType() {
+//		public org.eclipse.ocl.pivot.@NonNull Class getType() {
 //			Type type = property.getType();
 //			assert type != null;
 //			return (org.eclipse.ocl.pivot.Class) type;
@@ -217,16 +217,16 @@ public class DependencyAnalyzer
 	
 	protected static class UnknownDependencyStep extends DependencyStep
 	{
-		private final @NonNull org.eclipse.ocl.pivot.Class type;
+		private final org.eclipse.ocl.pivot.@NonNull Class type;
 		
-		public UnknownDependencyStep(@NonNull DomainUsage usage, @NonNull org.eclipse.ocl.pivot.Class type, @NonNull Element element) {
+		public UnknownDependencyStep(@NonNull DomainUsage usage, org.eclipse.ocl.pivot.@NonNull Class type, @NonNull Element element) {
 			super(usage, element);
 			this.type = type;
 			assert !(type instanceof CollectionType);
 		}
 
 		@Override
-		public @NonNull org.eclipse.ocl.pivot.Class getElementalType() {
+		public org.eclipse.ocl.pivot.@NonNull Class getElementalType() {
 			return type;
 		}
 
@@ -940,7 +940,7 @@ public class DependencyAnalyzer
 		}
 	}
 	
-	protected @NonNull ClassDependencyStep createClassDependencyStep(@NonNull org.eclipse.ocl.pivot.Class type, @NonNull Element element) {
+	protected @NonNull ClassDependencyStep createClassDependencyStep(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull Element element) {
 		while (type instanceof CollectionType) {
 			type = ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class) ((CollectionType)type).getElementType());
 		}

@@ -248,7 +248,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	 * @see org.eclipse.ocl.pivot.util.AbstractExtendingVisitor#visitIteratorExp(org.eclipse.ocl.pivot.IteratorExp)
 	 */
 	@Override
-	public @Nullable Object visitIteratorExp(@NonNull org.eclipse.ocl.pivot.IteratorExp object) {
+	public @Nullable Object visitIteratorExp(org.eclipse.ocl.pivot.@NonNull IteratorExp object) {
 		
 		return delegate.visitIteratorExp(object);
 	}

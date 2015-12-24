@@ -117,7 +117,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 
 	protected void refreshUsedTypes(@NonNull MappingCS csMapping, @NonNull Mapping asMapping) {
 		List<PathNameCS> csPathNames = new ArrayList<PathNameCS>();
-		for (@SuppressWarnings("null") @NonNull org.eclipse.ocl.pivot.Class asClass : asMapping.getPolledClasses()) {
+		for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class asClass : asMapping.getPolledClasses()) {
 			@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
 			csPathNames.add(csPathName);
 			Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asMapping);

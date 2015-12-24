@@ -55,7 +55,7 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 		}
 	}
 
-	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTbaseToStringFactory();
+	public static ToStringVisitor.@NonNull Factory FACTORY = new QVTbaseToStringFactory();
 
 	public QVTbaseToStringVisitor(@NonNull StringBuilder s) {
 		super(s);

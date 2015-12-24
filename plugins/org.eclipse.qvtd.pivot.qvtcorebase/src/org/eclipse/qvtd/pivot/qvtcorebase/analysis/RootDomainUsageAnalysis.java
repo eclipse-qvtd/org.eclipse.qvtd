@@ -533,6 +533,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			StandardLibrary standardLibrary = context.getStandardLibrary();
 			org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
 			Operation operation = NameUtil.getNameable(oclElementType.getOwnedOperations(), "oclContainer");
+			assert operation != null;
 			oclElementOclContainerId = oclElementOclContainerId2 = operation.getOperationId();
 		}
 		return oclElementOclContainerId2;
@@ -556,6 +557,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			StandardLibrary standardLibrary = context.getStandardLibrary();
 			org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
 			Operation operation = NameUtil.getNameable(oclElementType.getOwnedOperations(), "oclContents");
+			assert operation != null;
 			oclElementOclContentsId = oclElementOclContentsId2 = operation.getOperationId();
 		}
 		return oclElementOclContentsId2;

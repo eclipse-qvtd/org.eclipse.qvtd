@@ -484,7 +484,7 @@ public class ScheduledRegion extends AbstractRegion
 		List<org.eclipse.ocl.pivot.Package> allPackagesList = new ArrayList<org.eclipse.ocl.pivot.Package>();
 		for (@SuppressWarnings("null")@NonNull Model asModel : inputModels.keySet()) {
 			DomainUsage domainUsage = inputModels.get(asModel);
-			for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Package asPackage : asModel.getOwnedPackages()) {
+			for (@SuppressWarnings("null")org.eclipse.ocl.pivot.@NonNull Package asPackage : asModel.getOwnedPackages()) {
 				if (allPackagesSet.put(asPackage, domainUsage) == null) {
 					allPackagesList.add(asPackage);
 				}
@@ -505,12 +505,12 @@ public class ScheduledRegion extends AbstractRegion
 		for (int i = 0; i < allPackagesList.size(); i++) {
 			org.eclipse.ocl.pivot.Package asPackage = allPackagesList.get(i);
 			DomainUsage domainUsage = ClassUtil.nonNullState(allPackagesSet.get(asPackage));
-			for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Package asPackage2 : asPackage.getOwnedPackages()) {
+			for (@SuppressWarnings("null")org.eclipse.ocl.pivot.@NonNull Package asPackage2 : asPackage.getOwnedPackages()) {
 				if (allPackagesSet.put(asPackage2, domainUsage) == null) {
 					allPackagesList.add(asPackage2);
 				}
 			}
-			for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
+			for (@SuppressWarnings("null")org.eclipse.ocl.pivot.@NonNull Class asClass : asPackage.getOwnedClasses()) {
 				for (@SuppressWarnings("null")@NonNull Property asProperty : asClass.getOwnedProperties()) {
 					if (asProperty.isIsComposite()) {
 						computeContainedClassDatumAnalysis2compositeProperties3(asProperty, domainUsage);

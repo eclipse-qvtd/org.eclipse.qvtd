@@ -445,7 +445,7 @@ public class QVTr2QVTcRelations {
 		}
 	}
 	
-	public void doRelationToTraceClass(@NonNull Relation r, @NonNull org.eclipse.ocl.pivot.Class rc) {
+	public void doRelationToTraceClass(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class rc) {
 		
 		transformation.putRelationTrace(r, rc);
 		// check
@@ -492,7 +492,7 @@ public class QVTr2QVTcRelations {
 	}
 
 	private void doSubObjectTemplateToTraceClassProps(@NonNull TemplateExp t, 
-			@NonNull org.eclipse.ocl.pivot.Class rc) {
+			org.eclipse.ocl.pivot.@NonNull Class rc) {
 		
 		// check
 		if (t instanceof ObjectTemplateExp) {
@@ -502,7 +502,7 @@ public class QVTr2QVTcRelations {
 	}
 	
 	private void doObjectTemplateToTraceClassProps(@NonNull ObjectTemplateExp t,
-			@NonNull org.eclipse.ocl.pivot.Class rc) {
+			org.eclipse.ocl.pivot.@NonNull Class rc) {
 		
 		// check
 		Variable tv = t.getBindsTo();
@@ -530,7 +530,7 @@ public class QVTr2QVTcRelations {
 	}
 
 	private void doSubCollectionTemplateToTraceClassProps(@NonNull TemplateExp t,
-			@NonNull org.eclipse.ocl.pivot.Class rc) {
+			org.eclipse.ocl.pivot.@NonNull Class rc) {
 		
 		// check
 		if (t instanceof CollectionTemplateExp) {
@@ -540,7 +540,7 @@ public class QVTr2QVTcRelations {
 
 
 	private void doCollectionTemplateToTraceClassProps(@NonNull CollectionTemplateExp t,
-			@NonNull org.eclipse.ocl.pivot.Class rc) {
+			org.eclipse.ocl.pivot.@NonNull Class rc) {
 		
 		// check
 		for (OCLExpression m : t.getMember()) {

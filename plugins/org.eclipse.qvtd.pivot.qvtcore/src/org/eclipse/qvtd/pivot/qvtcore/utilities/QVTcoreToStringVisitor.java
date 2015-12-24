@@ -45,7 +45,7 @@ public class QVTcoreToStringVisitor extends QVTcoreBaseToStringVisitor implement
 		}
 	}
 
-	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTcoreToStringFactory();
+	public static ToStringVisitor.@NonNull Factory FACTORY = new QVTcoreToStringFactory();
 
 	public QVTcoreToStringVisitor(@NonNull StringBuilder s) {
 		super(s);

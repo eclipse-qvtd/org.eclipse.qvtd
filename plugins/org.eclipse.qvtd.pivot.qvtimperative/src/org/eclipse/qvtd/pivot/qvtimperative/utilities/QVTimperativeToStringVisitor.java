@@ -56,7 +56,7 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 		}
 	}
 
-	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTimperativeToStringFactory();
+	public static ToStringVisitor.@NonNull Factory FACTORY = new QVTimperativeToStringFactory();
 
 	public QVTimperativeToStringVisitor(@NonNull StringBuilder s) {
 		super(s);

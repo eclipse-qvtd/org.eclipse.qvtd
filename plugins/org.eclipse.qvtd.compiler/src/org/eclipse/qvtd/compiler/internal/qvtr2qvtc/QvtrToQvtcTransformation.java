@@ -353,7 +353,7 @@ public class QvtrToQvtcTransformation
 		return m;
 	}
 	
-	public Property findProperty(@NonNull String name, @NonNull org.eclipse.ocl.pivot.Class owningType) {
+	public Property findProperty(@NonNull String name, org.eclipse.ocl.pivot.@NonNull Class owningType) {
 		
 		Property p = null;
 		if (doGlobalSearch) {
@@ -557,7 +557,7 @@ public class QvtrToQvtcTransformation
 		}
 	}
 
-	public void putRelationTrace(@NonNull Relation r, @NonNull org.eclipse.ocl.pivot.Class rc) {
+	public void putRelationTrace(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class rc) {
 		
 		relationToTraceClass.put(r, rc);
 	}

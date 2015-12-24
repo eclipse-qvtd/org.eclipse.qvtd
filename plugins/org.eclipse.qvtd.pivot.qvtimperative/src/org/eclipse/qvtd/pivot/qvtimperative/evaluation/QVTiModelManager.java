@@ -147,7 +147,7 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 	 * The inherited 'allInstances' behavior is implemented as an accumulation of all instances from all input models.
 	 */
 	@Override
-	public @NonNull Set<EObject> get(@NonNull org.eclipse.ocl.pivot.Class type) {
+	public @NonNull Set<EObject> get(org.eclipse.ocl.pivot.@NonNull Class type) {
 		Set<EObject> elements = new HashSet<EObject>();
 		DomainUsage checkableUsage = transformationAnalysis.getDomainUsageAnalysis().getCheckableUsage();
 		for (@SuppressWarnings("null")@NonNull TypedModel typedModel : checkableUsage.getTypedModels()) {
@@ -394,7 +394,7 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 		}
 
 		@Override
-		public @NonNull Set<EObject> getObjectsOfKind(@NonNull org.eclipse.ocl.pivot.Class type) {
+		public @NonNull Set<EObject> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
 			if (kind2instances == null) {
 				kind2instances = new HashMap<Type, Set<EObject>>();
 			}
@@ -410,7 +410,7 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 		}
 
 		@Override
-		public @NonNull Set<EObject> getObjectsOfType(@NonNull org.eclipse.ocl.pivot.Class type) {
+		public @NonNull Set<EObject> getObjectsOfType(org.eclipse.ocl.pivot.@NonNull Class type) {
 			if (type2instances == null) {
 				type2instances = new HashMap<Type, Set<EObject>>();
 			}

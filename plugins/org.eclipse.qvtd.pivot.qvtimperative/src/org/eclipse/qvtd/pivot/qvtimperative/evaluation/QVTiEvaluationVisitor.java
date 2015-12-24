@@ -358,7 +358,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	} */
 
     @Override
-    public @Nullable Object visitPackage(@NonNull org.eclipse.ocl.pivot.Package pkge) {
+    public @Nullable Object visitPackage(org.eclipse.ocl.pivot.@NonNull Package pkge) {
         return true;
     }
 

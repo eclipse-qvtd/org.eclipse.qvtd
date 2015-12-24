@@ -47,7 +47,7 @@ public class QVTtemplateToStringVisitor extends QVTbaseToStringVisitor implement
 		}
 	}
 
-	public static @NonNull ToStringVisitor.Factory FACTORY = new QVTtemplateToStringFactory();
+	public static ToStringVisitor.@NonNull Factory FACTORY = new QVTtemplateToStringFactory();
 
 	public QVTtemplateToStringVisitor(@NonNull StringBuilder s) {
 		super(s);
