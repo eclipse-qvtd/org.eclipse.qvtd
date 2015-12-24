@@ -18,7 +18,7 @@ Require-Bundle: org.junit,
  org.eclipse.qvtd.codegen;bundle-version="[0.13.0,0.14.0)";resolution:=optional,
  org.eclipse.xsd;bundle-version="[2.11.0,3.0.0)";resolution:=optional
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: example1.source,
  example1.source.impl,
  example1.source.util,
