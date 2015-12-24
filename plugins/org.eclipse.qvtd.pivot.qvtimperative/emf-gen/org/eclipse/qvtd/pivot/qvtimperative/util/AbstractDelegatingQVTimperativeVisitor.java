@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.pivot.qvtimperative.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractDelegatingQVTimperativeVisitor delegates all visits.
@@ -27,67 +26,67 @@ public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, D extends QVT
 	extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractDelegatingQVTcoreBaseVisitor<R, C, D>
 	implements QVTimperativeVisitor<R>
 {
-	protected AbstractDelegatingQVTimperativeVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractDelegatingQVTimperativeVisitor(@NonNull D delegate, C context) {
 		super(delegate, context);
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull org.eclipse.ocl.pivot.util.Visitable visitable) {
+	public R visiting(org.eclipse.ocl.pivot.util.@NonNull Visitable visitable) {
 		return delegate.visiting(visitable);
 	}
 
 	@Override
-	public @Nullable R visitConnectionAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment object) {
+	public R visitConnectionAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionAssignment object) {
 		return delegate.visitConnectionAssignment(object);
 	}
 
 	@Override
-	public @Nullable R visitImperativeBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern object) {
+	public R visitImperativeBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeBottomPattern object) {
 		return delegate.visitImperativeBottomPattern(object);
 	}
 
 	@Override
-	public @Nullable R visitImperativeDomain(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain object) {
+	public R visitImperativeDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeDomain object) {
 		return delegate.visitImperativeDomain(object);
 	}
 
 	@Override
-	public @Nullable R visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
+	public R visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return delegate.visitImperativeModel(object);
 	}
 
 	@Override
-	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtimperative.Mapping object) {
+	public R visitMapping(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Mapping object) {
 		return delegate.visitMapping(object);
 	}
 
 	@Override
-	public @Nullable R visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCall object) {
+	public R visitMappingCall(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCall object) {
 		return delegate.visitMappingCall(object);
 	}
 
 	@Override
-	public @Nullable R visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
+	public R visitMappingCallBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCallBinding object) {
 		return delegate.visitMappingCallBinding(object);
 	}
 
 	@Override
-	public @Nullable R visitMappingLoop(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingLoop object) {
+	public R visitMappingLoop(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingLoop object) {
 		return delegate.visitMappingLoop(object);
 	}
 
 	@Override
-	public @Nullable R visitMappingSequence(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingSequence object) {
+	public R visitMappingSequence(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingSequence object) {
 		return delegate.visitMappingSequence(object);
 	}
 
 	@Override
-	public @Nullable R visitMappingStatement(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingStatement object) {
+	public R visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
 		return delegate.visitMappingStatement(object);
 	}
 
 	@Override
-	public @Nullable R visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
+	public R visitVariablePredicate(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariablePredicate object) {
 		return delegate.visitVariablePredicate(object);
 	}
 }

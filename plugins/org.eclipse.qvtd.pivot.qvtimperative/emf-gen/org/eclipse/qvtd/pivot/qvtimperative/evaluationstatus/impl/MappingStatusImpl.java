@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ElementStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationStatusPackage;
@@ -564,7 +563,7 @@ public class MappingStatusImpl extends EvaluationElementImpl implements MappingS
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull EvaluationStatusVisitor<R> visitor) {
+	public <R> R accept(@NonNull EvaluationStatusVisitor<R> visitor) {
 		return visitor.visitMappingStatus(this);
 	}
 } //MappingStatusImpl

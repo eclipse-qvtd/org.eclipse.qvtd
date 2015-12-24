@@ -14,8 +14,6 @@ package example2.classes.impl;
 
 import example2.classes.Argument;
 import example2.classes.CallExp;
-import static example2.classes.ClassesPackage.CLASS;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;

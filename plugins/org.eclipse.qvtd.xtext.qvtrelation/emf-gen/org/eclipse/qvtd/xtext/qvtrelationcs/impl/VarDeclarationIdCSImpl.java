@@ -12,7 +12,6 @@ package org.eclipse.qvtd.xtext.qvtrelationcs.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
@@ -53,7 +52,7 @@ public class VarDeclarationIdCSImpl extends NamedElementCSImpl implements VarDec
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((QVTrelationCSVisitor<?>)visitor).visitVarDeclarationIdCS(this);
 	}
 } //VarDeclarationIdCSImpl

@@ -40,18 +40,18 @@ public interface ScheduleVisitor<R>
 	 * Return the result of visiting a visitable for which no more specific pivot type method
 	 * is available.
 	 */
-	@Nullable R visiting(@NonNull org.eclipse.qvtd.pivot.schedule.ScheduleElement visitable);
+	R visiting(org.eclipse.qvtd.pivot.schedule.@NonNull ScheduleElement visitable);
 
-	@Nullable R visitAbstractAction(@NonNull org.eclipse.qvtd.pivot.schedule.AbstractAction object);
-	@Nullable R visitAbstractDatum(@NonNull org.eclipse.qvtd.pivot.schedule.AbstractDatum object);
-	@Nullable R visitClassDatum(@NonNull org.eclipse.qvtd.pivot.schedule.ClassDatum object);
-	@Nullable R visitDataParameter(@NonNull org.eclipse.qvtd.pivot.schedule.DataParameter object);
-	@Nullable R visitInputAction(@NonNull org.eclipse.qvtd.pivot.schedule.InputAction object);
-	@Nullable R visitMappingAction(@NonNull org.eclipse.qvtd.pivot.schedule.MappingAction object);
-	@Nullable R visitOutputAction(@NonNull org.eclipse.qvtd.pivot.schedule.OutputAction object);
-	@Nullable R visitParameterDerivation(@NonNull org.eclipse.qvtd.pivot.schedule.ParameterDerivation object);
-	@Nullable R visitPropertyDatum(@NonNull org.eclipse.qvtd.pivot.schedule.PropertyDatum object);
-	@Nullable R visitSchedule(@NonNull org.eclipse.qvtd.pivot.schedule.Schedule object);
-	@Nullable R visitScheduleElement(@NonNull org.eclipse.qvtd.pivot.schedule.ScheduleElement object);
-	@Nullable R visitSecondaryParameter(@NonNull org.eclipse.qvtd.pivot.schedule.SecondaryParameter object);
+	R visitAbstractAction(org.eclipse.qvtd.pivot.schedule.@NonNull AbstractAction object);
+	R visitAbstractDatum(org.eclipse.qvtd.pivot.schedule.@NonNull AbstractDatum object);
+	R visitClassDatum(org.eclipse.qvtd.pivot.schedule.@NonNull ClassDatum object);
+	R visitDataParameter(org.eclipse.qvtd.pivot.schedule.@NonNull DataParameter object);
+	R visitInputAction(org.eclipse.qvtd.pivot.schedule.@NonNull InputAction object);
+	R visitMappingAction(org.eclipse.qvtd.pivot.schedule.@NonNull MappingAction object);
+	R visitOutputAction(org.eclipse.qvtd.pivot.schedule.@NonNull OutputAction object);
+	R visitParameterDerivation(org.eclipse.qvtd.pivot.schedule.@NonNull ParameterDerivation object);
+	R visitPropertyDatum(org.eclipse.qvtd.pivot.schedule.@NonNull PropertyDatum object);
+	R visitSchedule(org.eclipse.qvtd.pivot.schedule.@NonNull Schedule object);
+	R visitScheduleElement(org.eclipse.qvtd.pivot.schedule.@NonNull ScheduleElement object);
+	R visitSecondaryParameter(org.eclipse.qvtd.pivot.schedule.@NonNull SecondaryParameter object);
 }

@@ -197,7 +197,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTbaseVisitor<?>)visitor).visitFunction(this);
 	}
 

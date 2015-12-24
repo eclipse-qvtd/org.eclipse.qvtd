@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.EvaluationStatus2StringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationElement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationStatusPackage;
@@ -61,7 +60,7 @@ public abstract class EvaluationElementImpl extends MinimalEObjectImpl.Container
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull EvaluationStatusVisitor<R> visitor) {
+	public <R> R accept(@NonNull EvaluationStatusVisitor<R> visitor) {
 		return visitor.visitEvaluationElement(this);
 	}
 

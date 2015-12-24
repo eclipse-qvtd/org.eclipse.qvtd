@@ -27,13 +27,13 @@ public abstract class AbstractWrappingQVTcoreBaseVisitor<R, C, D extends QVTcore
 	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractWrappingQVTbaseVisitor<R, C, D, P>
 	implements QVTcoreBaseVisitor<R>
 {
-	protected AbstractWrappingQVTcoreBaseVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractWrappingQVTcoreBaseVisitor(@NonNull D delegate, C context) {
 		super(delegate, context);
 	}
 
 	@Override
-	public @Nullable R visitAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.Assignment object) {
-		P prologue = preVisit(object);
+	public R visitAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull Assignment object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitAssignment(object);
 			return postVisit(object, prologue, result);
@@ -44,8 +44,8 @@ public abstract class AbstractWrappingQVTcoreBaseVisitor<R, C, D extends QVTcore
 	}
 
 	@Override
-	public @Nullable R visitBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern object) {
-		P prologue = preVisit(object);
+	public R visitBottomPattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull BottomPattern object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitBottomPattern(object);
 			return postVisit(object, prologue, result);
@@ -56,8 +56,8 @@ public abstract class AbstractWrappingQVTcoreBaseVisitor<R, C, D extends QVTcore
 	}
 
 	@Override
-	public @Nullable R visitCoreDomain(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain object) {
-		P prologue = preVisit(object);
+	public R visitCoreDomain(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull CoreDomain object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitCoreDomain(object);
 			return postVisit(object, prologue, result);
@@ -68,8 +68,8 @@ public abstract class AbstractWrappingQVTcoreBaseVisitor<R, C, D extends QVTcore
 	}
 
 	@Override
-	public @Nullable R visitCorePattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.CorePattern object) {
-		P prologue = preVisit(object);
+	public R visitCorePattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull CorePattern object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitCorePattern(object);
 			return postVisit(object, prologue, result);
@@ -80,8 +80,8 @@ public abstract class AbstractWrappingQVTcoreBaseVisitor<R, C, D extends QVTcore
 	}
 
 	@Override
-	public @Nullable R visitEnforcementOperation(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation object) {
-		P prologue = preVisit(object);
+	public R visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull EnforcementOperation object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitEnforcementOperation(object);
 			return postVisit(object, prologue, result);
@@ -92,8 +92,8 @@ public abstract class AbstractWrappingQVTcoreBaseVisitor<R, C, D extends QVTcore
 	}
 
 	@Override
-	public @Nullable R visitGuardPattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern object) {
-		P prologue = preVisit(object);
+	public R visitGuardPattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull GuardPattern object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitGuardPattern(object);
 			return postVisit(object, prologue, result);
@@ -104,8 +104,8 @@ public abstract class AbstractWrappingQVTcoreBaseVisitor<R, C, D extends QVTcore
 	}
 
 	@Override
-	public @Nullable R visitPropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment object) {
-		P prologue = preVisit(object);
+	public R visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitPropertyAssignment(object);
 			return postVisit(object, prologue, result);
@@ -116,8 +116,8 @@ public abstract class AbstractWrappingQVTcoreBaseVisitor<R, C, D extends QVTcore
 	}
 
 	@Override
-	public @Nullable R visitRealizedVariable(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable object) {
-		P prologue = preVisit(object);
+	public R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull RealizedVariable object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitRealizedVariable(object);
 			return postVisit(object, prologue, result);
@@ -128,8 +128,8 @@ public abstract class AbstractWrappingQVTcoreBaseVisitor<R, C, D extends QVTcore
 	}
 
 	@Override
-	public @Nullable R visitVariableAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment object) {
-		P prologue = preVisit(object);
+	public R visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull VariableAssignment object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitVariableAssignment(object);
 			return postVisit(object, prologue, result);

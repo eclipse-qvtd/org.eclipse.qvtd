@@ -18,19 +18,18 @@
 package	org.eclipse.qvtd.pivot.qvtrelation.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  */
 public interface QVTrelationVisitor<R> extends org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor<R>
 {
-	@Nullable R visitDomainPattern(@NonNull org.eclipse.qvtd.pivot.qvtrelation.DomainPattern object);
-	@Nullable R visitKey(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Key object);
-	@Nullable R visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object);
-	@Nullable R visitRelationCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp object);
-	@Nullable R visitRelationDomain(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object);
-	@Nullable R visitRelationDomainAssignment(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment object);
-	@Nullable R visitRelationImplementation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation object);
-	@Nullable R visitRelationModel(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationModel object);
-	@Nullable R visitRelationalTransformation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object);
+	R visitDomainPattern(org.eclipse.qvtd.pivot.qvtrelation.@NonNull DomainPattern object);
+	R visitKey(org.eclipse.qvtd.pivot.qvtrelation.@NonNull Key object);
+	R visitRelation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull Relation object);
+	R visitRelationCallExp(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationCallExp object);
+	R visitRelationDomain(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationDomain object);
+	R visitRelationDomainAssignment(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationDomainAssignment object);
+	R visitRelationImplementation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationImplementation object);
+	R visitRelationModel(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationModel object);
+	R visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationalTransformation object);
 }

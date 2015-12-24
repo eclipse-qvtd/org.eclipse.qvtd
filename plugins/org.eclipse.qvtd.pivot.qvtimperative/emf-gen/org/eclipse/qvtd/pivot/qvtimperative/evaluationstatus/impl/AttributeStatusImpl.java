@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AttributeStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ClassStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationStatusPackage;
@@ -333,7 +332,7 @@ public class AttributeStatusImpl extends PropertyStatusImpl implements Attribute
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull EvaluationStatusVisitor<R> visitor) {
+	public <R> R accept(@NonNull EvaluationStatusVisitor<R> visitor) {
 		return visitor.visitAttributeStatus(this);
 	}
 

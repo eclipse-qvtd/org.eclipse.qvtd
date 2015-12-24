@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util.EvaluationStatusVisitor;
 
 /**
@@ -31,5 +30,5 @@ public interface EvaluationElement extends EObject {
 	 * @generated
 	 */
 	// Generated from org.eclipse.ocl.examples.build/templates/model/Class/insert.javajetinc
-	public @Nullable <R> R accept(@NonNull EvaluationStatusVisitor<R> visitor);
+	public <R> R accept(@NonNull EvaluationStatusVisitor<R> visitor);
 } // EvaluationElement

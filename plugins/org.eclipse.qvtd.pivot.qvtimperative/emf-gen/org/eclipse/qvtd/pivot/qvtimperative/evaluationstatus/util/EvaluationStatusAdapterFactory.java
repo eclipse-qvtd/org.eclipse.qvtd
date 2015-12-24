@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AssociationStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AttributeStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ClassStatus;
@@ -78,8 +79,8 @@ public class EvaluationStatusAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EvaluationStatusSwitch<Adapter> modelSwitch =
-		new EvaluationStatusSwitch<Adapter>() {
+	protected EvaluationStatusSwitch<@Nullable Adapter> modelSwitch =
+		new EvaluationStatusSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseAssociationStatus(AssociationStatus object) {
 				return createAssociationStatusAdapter();

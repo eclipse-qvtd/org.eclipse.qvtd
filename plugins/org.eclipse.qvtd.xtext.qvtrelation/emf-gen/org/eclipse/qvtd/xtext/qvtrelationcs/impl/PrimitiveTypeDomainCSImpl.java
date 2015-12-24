@@ -12,7 +12,6 @@ package org.eclipse.qvtd.xtext.qvtrelationcs.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
@@ -52,7 +51,7 @@ public class PrimitiveTypeDomainCSImpl extends TemplateVariableCSImpl implements
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((QVTrelationCSVisitor<?>)visitor).visitPrimitiveTypeDomainCS(this);
 	}
 } //PrimitiveTypeDomainCSImpl

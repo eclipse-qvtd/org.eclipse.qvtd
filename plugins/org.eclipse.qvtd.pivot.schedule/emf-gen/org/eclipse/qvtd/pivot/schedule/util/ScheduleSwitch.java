@@ -15,6 +15,7 @@ package org.eclipse.qvtd.pivot.schedule.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.schedule.*;
 
 /**
@@ -30,7 +31,7 @@ import org.eclipse.qvtd.pivot.schedule.*;
  * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage
  * @generated
  */
-public class ScheduleSwitch<T> extends Switch<T> {
+public class ScheduleSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

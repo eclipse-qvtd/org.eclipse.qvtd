@@ -17,7 +17,6 @@
  *******************************************************************************/
 package	org.eclipse.qvtd.pivot.qvtimperative.util;
 
-import org.eclipse.jdt.annotation.NonNull;
 
 /*
  * An AbstractQVTimperativeVisitor provides a default implementation of the visitor framework
@@ -32,7 +31,7 @@ public abstract class AbstractQVTimperativeVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTimperativeVisitor(@NonNull C context) {
+	protected AbstractQVTimperativeVisitor(C context) {
 		super(context);
 	}
 }

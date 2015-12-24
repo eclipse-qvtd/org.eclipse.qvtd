@@ -16,6 +16,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.schedule.*;
 
 /**
@@ -72,8 +73,8 @@ public class ScheduleAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ScheduleSwitch<Adapter> modelSwitch =
-		new ScheduleSwitch<Adapter>() {
+	protected ScheduleSwitch<@Nullable Adapter> modelSwitch =
+		new ScheduleSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseAbstractDatum(AbstractDatum object) {
 				return createAbstractDatumAdapter();

@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Model;
@@ -101,8 +102,8 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected QVTimperativeSwitch<Adapter> modelSwitch =
-		new QVTimperativeSwitch<Adapter>() {
+	protected QVTimperativeSwitch<@Nullable Adapter> modelSwitch =
+		new QVTimperativeSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseConnectionAssignment(ConnectionAssignment object) {
 				return createConnectionAssignmentAdapter();

@@ -14,8 +14,6 @@ package example1.target.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import example1.target.Namespace;
 import example1.target.TargetPackage;
 import example1.target.util.Visitor;
@@ -52,7 +50,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitNamespace(this);
 	}
 

@@ -27,13 +27,13 @@ public abstract class AbstractWrappingQVTtemplateVisitor<R, C, D extends QVTtemp
 	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractWrappingQVTbaseVisitor<R, C, D, P>
 	implements QVTtemplateVisitor<R>
 {
-	protected AbstractWrappingQVTtemplateVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractWrappingQVTtemplateVisitor(@NonNull D delegate, C context) {
 		super(delegate, context);
 	}
 
 	@Override
-	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
-		P prologue = preVisit(object);
+	public R visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull CollectionTemplateExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitCollectionTemplateExp(object);
 			return postVisit(object, prologue, result);
@@ -44,8 +44,8 @@ public abstract class AbstractWrappingQVTtemplateVisitor<R, C, D extends QVTtemp
 	}
 
 	@Override
-	public @Nullable R visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
-		P prologue = preVisit(object);
+	public R visitObjectTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull ObjectTemplateExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitObjectTemplateExp(object);
 			return postVisit(object, prologue, result);
@@ -56,8 +56,8 @@ public abstract class AbstractWrappingQVTtemplateVisitor<R, C, D extends QVTtemp
 	}
 
 	@Override
-	public @Nullable R visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
-		P prologue = preVisit(object);
+	public R visitPropertyTemplateItem(org.eclipse.qvtd.pivot.qvttemplate.@NonNull PropertyTemplateItem object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitPropertyTemplateItem(object);
 			return postVisit(object, prologue, result);
@@ -68,8 +68,8 @@ public abstract class AbstractWrappingQVTtemplateVisitor<R, C, D extends QVTtemp
 	}
 
 	@Override
-	public @Nullable R visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
-		P prologue = preVisit(object);
+	public R visitTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull TemplateExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitTemplateExp(object);
 			return postVisit(object, prologue, result);

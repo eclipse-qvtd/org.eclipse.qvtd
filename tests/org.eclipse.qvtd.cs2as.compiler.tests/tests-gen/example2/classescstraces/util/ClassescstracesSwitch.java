@@ -12,7 +12,6 @@
  */
 package example2.classescstraces.util;
 
-import example2.classescstraces.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;

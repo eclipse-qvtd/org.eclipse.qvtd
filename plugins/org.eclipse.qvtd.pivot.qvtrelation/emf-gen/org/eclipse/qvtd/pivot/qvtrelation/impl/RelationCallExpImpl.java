@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.internal.OCLExpressionImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
@@ -229,7 +228,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTrelationVisitor<?>)visitor).visitRelationCallExp(this);
 	}
 } //RelationCallExpImpl

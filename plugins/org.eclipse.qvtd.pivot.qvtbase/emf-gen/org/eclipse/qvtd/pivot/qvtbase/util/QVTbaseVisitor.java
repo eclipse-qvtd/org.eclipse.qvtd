@@ -18,19 +18,18 @@
 package	org.eclipse.qvtd.pivot.qvtbase.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  */
 public interface QVTbaseVisitor<R> extends org.eclipse.ocl.pivot.util.Visitor<R>
 {
-	@Nullable R visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object);
-	@Nullable R visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object);
-	@Nullable R visitFunction(@NonNull org.eclipse.qvtd.pivot.qvtbase.Function object);
-	@Nullable R visitFunctionParameter(@NonNull org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object);
-	@Nullable R visitPattern(@NonNull org.eclipse.qvtd.pivot.qvtbase.Pattern object);
-	@Nullable R visitPredicate(@NonNull org.eclipse.qvtd.pivot.qvtbase.Predicate object);
-	@Nullable R visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object);
-	@Nullable R visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object);
-	@Nullable R visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object);
+	R visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull BaseModel object);
+	R visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object);
+	R visitFunction(org.eclipse.qvtd.pivot.qvtbase.@NonNull Function object);
+	R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object);
+	R visitPattern(org.eclipse.qvtd.pivot.qvtbase.@NonNull Pattern object);
+	R visitPredicate(org.eclipse.qvtd.pivot.qvtbase.@NonNull Predicate object);
+	R visitRule(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule object);
+	R visitTransformation(org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation object);
+	R visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel object);
 }

@@ -30,20 +30,20 @@ public abstract class AbstractScheduleVisitor<R, C>
 	/**
 	 * Context for the AST visitation.
 	 */
-	protected final @NonNull C context;
+	protected final C context;
 
 	/**
 	 * Initializes me with an initial value for my result.
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractScheduleVisitor(@NonNull C context) {
+	protected AbstractScheduleVisitor(C context) {
 		this.context = context;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <A> A getAdapter(@NonNull Class<A> adapter) {
+	public <A> @Nullable A getAdapter(@NonNull Class<A> adapter) {
 		if (adapter.isAssignableFrom(getClass())) {
 			return (A) this;
 		}
@@ -59,7 +59,7 @@ public abstract class AbstractScheduleVisitor<R, C>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *	 otherwise, the result of visiting it
 	 */
-	public @Nullable R safeVisit(@Nullable org.eclipse.qvtd.pivot.schedule.ScheduleElement v) {
+	public @Nullable R safeVisit(org.eclipse.qvtd.pivot.schedule.@Nullable ScheduleElement v) {
 		return (v == null) ? null : v.accept(this);
 	}
 	
@@ -70,11 +70,11 @@ public abstract class AbstractScheduleVisitor<R, C>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *	 otherwise, the result of visiting it
 	 */
-	public @Nullable R visit(@NonNull org.eclipse.qvtd.pivot.schedule.ScheduleElement v) {
+	public R visit(org.eclipse.qvtd.pivot.schedule.@NonNull ScheduleElement v) {
 		return v.accept(this);
 	}
 
-	//	public @Nullable R visiting(@NonNull org.eclipse.qvtd.pivot.schedule.ScheduleElement visitable) {
+	//	public R visiting(org.eclipse.qvtd.pivot.schedule.@NonNull ScheduleElement visitable) {
 	//		return null;
 	//	}
 }

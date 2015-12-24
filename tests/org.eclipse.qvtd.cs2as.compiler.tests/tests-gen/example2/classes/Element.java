@@ -14,8 +14,6 @@ package example2.classes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import example2.classes.util.Visitable;
 import example2.classes.util.Visitor;
 
@@ -35,5 +33,5 @@ public interface Element extends EObject, Visitable {
 	 * @generated
 	 */
 	// Generated from org.eclipse.ocl.examples.build/templates/model/Class/insert.javajetinc
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor);
+	public <R> R accept(@NonNull Visitor<R> visitor);
 } // Element

@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.pivot.qvtcore.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractExtendingQVTcoreVisitor provides a default implementation for each
@@ -36,17 +35,17 @@ public abstract class AbstractExtendingQVTcoreVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtendingQVTcoreVisitor(@NonNull C context) {
+	protected AbstractExtendingQVTcoreVisitor(C context) {
 		super(context);
 	}	
 
 	@Override
-	public @Nullable R visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
+	public R visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreModel object) {
 		return visitBaseModel(object);
 	}
 
 	@Override
-	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object) {
+	public R visitMapping(org.eclipse.qvtd.pivot.qvtcore.@NonNull Mapping object) {
 		return visitRule(object);
 	}
 }

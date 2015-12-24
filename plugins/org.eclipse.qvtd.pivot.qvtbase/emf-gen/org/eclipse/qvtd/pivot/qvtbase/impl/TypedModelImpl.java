@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
@@ -356,7 +355,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTbaseVisitor<?>)visitor).visitTypedModel(this);
 	}
 } //TypedModelImpl

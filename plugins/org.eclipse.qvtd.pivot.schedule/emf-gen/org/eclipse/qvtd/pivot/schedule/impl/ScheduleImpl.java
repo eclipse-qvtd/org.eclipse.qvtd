@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
@@ -214,7 +213,7 @@ public class ScheduleImpl extends ScheduleElementImpl implements Schedule {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
+	public <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
 		return visitor.visitSchedule(this);
 	}
 

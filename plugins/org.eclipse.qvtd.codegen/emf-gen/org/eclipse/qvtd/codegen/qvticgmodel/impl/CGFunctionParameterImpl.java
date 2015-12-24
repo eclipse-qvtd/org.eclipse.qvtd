@@ -153,7 +153,7 @@ public class CGFunctionParameterImpl extends CGParameterImpl implements CGFuncti
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGFunctionParameter(this);
 	}
 

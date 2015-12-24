@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.CallExpImpl;
@@ -232,7 +231,7 @@ public class MappingLoopImpl extends CallExpImpl implements MappingLoop {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTimperativeVisitor<?>)visitor).visitMappingLoop(this);
 	}
 } //MappingLoopImpl

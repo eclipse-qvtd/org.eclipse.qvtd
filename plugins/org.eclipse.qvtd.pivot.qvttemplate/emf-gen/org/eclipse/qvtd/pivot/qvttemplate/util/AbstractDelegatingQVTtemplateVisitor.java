@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.pivot.qvttemplate.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractDelegatingQVTtemplateVisitor delegates all visits.
@@ -27,32 +26,32 @@ public abstract class AbstractDelegatingQVTtemplateVisitor<R, C, D extends QVTte
 	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractDelegatingQVTbaseVisitor<R, C, D>
 	implements QVTtemplateVisitor<R>
 {
-	protected AbstractDelegatingQVTtemplateVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractDelegatingQVTtemplateVisitor(@NonNull D delegate, C context) {
 		super(delegate, context);
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull org.eclipse.ocl.pivot.util.Visitable visitable) {
+	public R visiting(org.eclipse.ocl.pivot.util.@NonNull Visitable visitable) {
 		return delegate.visiting(visitable);
 	}
 
 	@Override
-	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
+	public R visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull CollectionTemplateExp object) {
 		return delegate.visitCollectionTemplateExp(object);
 	}
 
 	@Override
-	public @Nullable R visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
+	public R visitObjectTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull ObjectTemplateExp object) {
 		return delegate.visitObjectTemplateExp(object);
 	}
 
 	@Override
-	public @Nullable R visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
+	public R visitPropertyTemplateItem(org.eclipse.qvtd.pivot.qvttemplate.@NonNull PropertyTemplateItem object) {
 		return delegate.visitPropertyTemplateItem(object);
 	}
 
 	@Override
-	public @Nullable R visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
+	public R visitTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull TemplateExp object) {
 		return delegate.visitTemplateExp(object);
 	}
 }

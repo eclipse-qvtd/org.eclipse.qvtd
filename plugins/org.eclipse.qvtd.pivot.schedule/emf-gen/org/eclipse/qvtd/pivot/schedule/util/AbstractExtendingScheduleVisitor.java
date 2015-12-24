@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.pivot.schedule.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractExtendingScheduleVisitor provides a default implementation for each
@@ -36,67 +35,67 @@ public abstract class AbstractExtendingScheduleVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtendingScheduleVisitor(@NonNull C context) {
+	protected AbstractExtendingScheduleVisitor(C context) {
 		super(context);
 	}	
 
 	@Override
-	public @Nullable R visitAbstractAction(@NonNull org.eclipse.qvtd.pivot.schedule.AbstractAction object) {
+	public R visitAbstractAction(org.eclipse.qvtd.pivot.schedule.@NonNull AbstractAction object) {
 		return visitScheduleElement(object);
 	}
 
 	@Override
-	public @Nullable R visitAbstractDatum(@NonNull org.eclipse.qvtd.pivot.schedule.AbstractDatum object) {
+	public R visitAbstractDatum(org.eclipse.qvtd.pivot.schedule.@NonNull AbstractDatum object) {
 		return visitScheduleElement(object);
 	}
 
 	@Override
-	public @Nullable R visitClassDatum(@NonNull org.eclipse.qvtd.pivot.schedule.ClassDatum object) {
+	public R visitClassDatum(org.eclipse.qvtd.pivot.schedule.@NonNull ClassDatum object) {
 		return visitAbstractDatum(object);
 	}
 
 	@Override
-	public @Nullable R visitDataParameter(@NonNull org.eclipse.qvtd.pivot.schedule.DataParameter object) {
+	public R visitDataParameter(org.eclipse.qvtd.pivot.schedule.@NonNull DataParameter object) {
 		return visitScheduleElement(object);
 	}
 
 	@Override
-	public @Nullable R visitInputAction(@NonNull org.eclipse.qvtd.pivot.schedule.InputAction object) {
+	public R visitInputAction(org.eclipse.qvtd.pivot.schedule.@NonNull InputAction object) {
 		return visitAbstractAction(object);
 	}
 
 	@Override
-	public @Nullable R visitMappingAction(@NonNull org.eclipse.qvtd.pivot.schedule.MappingAction object) {
+	public R visitMappingAction(org.eclipse.qvtd.pivot.schedule.@NonNull MappingAction object) {
 		return visitAbstractAction(object);
 	}
 
 	@Override
-	public @Nullable R visitOutputAction(@NonNull org.eclipse.qvtd.pivot.schedule.OutputAction object) {
+	public R visitOutputAction(org.eclipse.qvtd.pivot.schedule.@NonNull OutputAction object) {
 		return visitAbstractAction(object);
 	}
 
 	@Override
-	public @Nullable R visitParameterDerivation(@NonNull org.eclipse.qvtd.pivot.schedule.ParameterDerivation object) {
+	public R visitParameterDerivation(org.eclipse.qvtd.pivot.schedule.@NonNull ParameterDerivation object) {
 		return visitScheduleElement(object);
 	}
 
 	@Override
-	public @Nullable R visitPropertyDatum(@NonNull org.eclipse.qvtd.pivot.schedule.PropertyDatum object) {
+	public R visitPropertyDatum(org.eclipse.qvtd.pivot.schedule.@NonNull PropertyDatum object) {
 		return visitAbstractDatum(object);
 	}
 
 	@Override
-	public @Nullable R visitSchedule(@NonNull org.eclipse.qvtd.pivot.schedule.Schedule object) {
+	public R visitSchedule(org.eclipse.qvtd.pivot.schedule.@NonNull Schedule object) {
 		return visitScheduleElement(object);
 	}
 
 	@Override
-	public @Nullable R visitScheduleElement(@NonNull org.eclipse.qvtd.pivot.schedule.ScheduleElement object) {
+	public R visitScheduleElement(org.eclipse.qvtd.pivot.schedule.@NonNull ScheduleElement object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitSecondaryParameter(@NonNull org.eclipse.qvtd.pivot.schedule.SecondaryParameter object) {
+	public R visitSecondaryParameter(org.eclipse.qvtd.pivot.schedule.@NonNull SecondaryParameter object) {
 		return visitScheduleElement(object);
 	}
 }

@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.pivot.qvtcorebase.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractDelegatingQVTcoreBaseVisitor delegates all visits.
@@ -27,57 +26,57 @@ public abstract class AbstractDelegatingQVTcoreBaseVisitor<R, C, D extends QVTco
 	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractDelegatingQVTbaseVisitor<R, C, D>
 	implements QVTcoreBaseVisitor<R>
 {
-	protected AbstractDelegatingQVTcoreBaseVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractDelegatingQVTcoreBaseVisitor(@NonNull D delegate, C context) {
 		super(delegate, context);
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull org.eclipse.ocl.pivot.util.Visitable visitable) {
+	public R visiting(org.eclipse.ocl.pivot.util.@NonNull Visitable visitable) {
 		return delegate.visiting(visitable);
 	}
 
 	@Override
-	public @Nullable R visitAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.Assignment object) {
+	public R visitAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull Assignment object) {
 		return delegate.visitAssignment(object);
 	}
 
 	@Override
-	public @Nullable R visitBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern object) {
+	public R visitBottomPattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull BottomPattern object) {
 		return delegate.visitBottomPattern(object);
 	}
 
 	@Override
-	public @Nullable R visitCoreDomain(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain object) {
+	public R visitCoreDomain(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull CoreDomain object) {
 		return delegate.visitCoreDomain(object);
 	}
 
 	@Override
-	public @Nullable R visitCorePattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.CorePattern object) {
+	public R visitCorePattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull CorePattern object) {
 		return delegate.visitCorePattern(object);
 	}
 
 	@Override
-	public @Nullable R visitEnforcementOperation(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation object) {
+	public R visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull EnforcementOperation object) {
 		return delegate.visitEnforcementOperation(object);
 	}
 
 	@Override
-	public @Nullable R visitGuardPattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern object) {
+	public R visitGuardPattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull GuardPattern object) {
 		return delegate.visitGuardPattern(object);
 	}
 
 	@Override
-	public @Nullable R visitPropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment object) {
+	public R visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
 		return delegate.visitPropertyAssignment(object);
 	}
 
 	@Override
-	public @Nullable R visitRealizedVariable(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable object) {
+	public R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull RealizedVariable object) {
 		return delegate.visitRealizedVariable(object);
 	}
 
 	@Override
-	public @Nullable R visitVariableAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment object) {
+	public R visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull VariableAssignment object) {
 		return delegate.visitVariableAssignment(object);
 	}
 }

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
@@ -173,7 +174,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 		isInited = true;
 
 		// Initialize simple dependencies
-		QVTcoreBasePackage.eINSTANCE.eClass();
+		QVTimperativePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theSchedulePackage.createPackageContents();

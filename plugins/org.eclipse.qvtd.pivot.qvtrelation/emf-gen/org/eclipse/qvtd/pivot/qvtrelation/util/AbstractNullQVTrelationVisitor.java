@@ -23,8 +23,11 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * An AbstractNullQVTrelationVisitor provides a default implementation for each
  * visitXxx method that returns null.
+ *
+ * @deprecated Explicit 'Null' functionality is obsolete with Java 8 @Nullable annotations.  
  */
-public abstract class AbstractNullQVTrelationVisitor<R, C>
+ @Deprecated
+public abstract class AbstractNullQVTrelationVisitor<@Nullable R, C>
 	extends org.eclipse.qvtd.pivot.qvttemplate.util.AbstractNullQVTtemplateVisitor<R, C> implements QVTrelationVisitor<R>
 {
 	/**
@@ -32,52 +35,52 @@ public abstract class AbstractNullQVTrelationVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNullQVTrelationVisitor(@NonNull C context) {
+	protected AbstractNullQVTrelationVisitor(C context) {
 		super(context);
 	}	
 
 	@Override
-	public @Nullable R visitDomainPattern(@NonNull org.eclipse.qvtd.pivot.qvtrelation.DomainPattern object) {
+	public R visitDomainPattern(org.eclipse.qvtd.pivot.qvtrelation.@NonNull DomainPattern object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitKey(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Key object) {
+	public R visitKey(org.eclipse.qvtd.pivot.qvtrelation.@NonNull Key object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object) {
+	public R visitRelation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull Relation object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitRelationCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp object) {
+	public R visitRelationCallExp(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationCallExp object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitRelationDomain(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object) {
+	public R visitRelationDomain(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationDomain object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitRelationDomainAssignment(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment object) {
+	public R visitRelationDomainAssignment(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationDomainAssignment object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitRelationImplementation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation object) {
+	public R visitRelationImplementation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationImplementation object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitRelationModel(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationModel object) {
+	public R visitRelationModel(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationModel object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitRelationalTransformation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object) {
+	public R visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationalTransformation object) {
 		return null;
 	}
 }

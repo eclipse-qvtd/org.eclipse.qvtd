@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.DataParameter;
@@ -371,7 +370,7 @@ public class DataParameterImpl extends ScheduleElementImpl implements DataParame
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
+	public <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
 		return visitor.visitDataParameter(this);
 	}
 

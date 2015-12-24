@@ -20,7 +20,6 @@
 package	org.eclipse.qvtd.pivot.qvtimperative.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractMergedQVTimperativeVisitor merges all visits direct to visiting().
@@ -30,62 +29,62 @@ public abstract class AbstractMergedQVTimperativeVisitor<R, C>
 	extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractMergedQVTcoreBaseVisitor<R, C>
 	implements QVTimperativeVisitor<R>
 {
-	protected AbstractMergedQVTimperativeVisitor(@NonNull C context) {
+	protected AbstractMergedQVTimperativeVisitor(C context) {
 		super(context);
 	}
 
 	@Override
-	public @Nullable R visitConnectionAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment object) {
+	public R visitConnectionAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionAssignment object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitImperativeBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern object) {
+	public R visitImperativeBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeBottomPattern object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitImperativeDomain(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain object) {
+	public R visitImperativeDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeDomain object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
+	public R visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtimperative.Mapping object) {
+	public R visitMapping(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Mapping object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCall object) {
+	public R visitMappingCall(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCall object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
+	public R visitMappingCallBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCallBinding object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitMappingLoop(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingLoop object) {
+	public R visitMappingLoop(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingLoop object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitMappingSequence(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingSequence object) {
+	public R visitMappingSequence(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingSequence object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitMappingStatement(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingStatement object) {
+	public R visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
+	public R visitVariablePredicate(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariablePredicate object) {
 		return visiting(object);
 	}
 }

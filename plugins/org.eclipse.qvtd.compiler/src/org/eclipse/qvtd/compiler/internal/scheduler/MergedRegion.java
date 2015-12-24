@@ -38,7 +38,7 @@ public class MergedRegion extends AbstractRegion
 	}
 
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitMergedRegion(this);
 	}
 

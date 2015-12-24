@@ -17,8 +17,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import example1.target.NamedElement;
 import example1.target.TargetPackage;
 import example1.target.util.Visitor;
@@ -176,7 +174,7 @@ public class NamedElementImpl extends MinimalEObjectImpl.Container implements Na
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitNamedElement(this);
 	}
 

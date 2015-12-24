@@ -15,8 +15,6 @@ package org.eclipse.qvtd.pivot.schedule;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
 
 /**
@@ -35,5 +33,5 @@ public interface ScheduleElement extends EObject {
 	 * @generated
 	 */
 	// Generated from org.eclipse.ocl.examples.build/templates/model/Class/insert.javajetinc
-	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor);
+	public <R> R accept(@NonNull ScheduleVisitor<R> visitor);
 } // ScheduleElement

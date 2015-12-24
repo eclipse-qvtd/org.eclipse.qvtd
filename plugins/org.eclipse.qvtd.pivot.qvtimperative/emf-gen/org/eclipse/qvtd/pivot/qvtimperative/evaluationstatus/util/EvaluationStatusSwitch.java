@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AssociationStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AttributeStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ClassStatus;
@@ -36,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.TransformationStatu
  * @see org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationStatusPackage
  * @generated
  */
-public class EvaluationStatusSwitch<T> extends Switch<T> {
+public class EvaluationStatusSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

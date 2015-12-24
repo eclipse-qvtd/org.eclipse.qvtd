@@ -30,20 +30,20 @@ public abstract class AbstractEvaluationStatusVisitor<R, C>
 	/**
 	 * Context for the AST visitation.
 	 */
-	protected final @NonNull C context;
+	protected final C context;
 
 	/**
 	 * Initializes me with an initial value for my result.
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractEvaluationStatusVisitor(@NonNull C context) {
+	protected AbstractEvaluationStatusVisitor(C context) {
 		this.context = context;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <A> A getAdapter(@NonNull Class<A> adapter) {
+	public <A> @Nullable A getAdapter(@NonNull Class<A> adapter) {
 		if (adapter.isAssignableFrom(getClass())) {
 			return (A) this;
 		}
@@ -59,7 +59,7 @@ public abstract class AbstractEvaluationStatusVisitor<R, C>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *	 otherwise, the result of visiting it
 	 */
-	public @Nullable R safeVisit(@Nullable org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationElement v) {
+	public @Nullable R safeVisit(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@Nullable EvaluationElement v) {
 		return (v == null) ? null : v.accept(this);
 	}
 	
@@ -70,11 +70,11 @@ public abstract class AbstractEvaluationStatusVisitor<R, C>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *	 otherwise, the result of visiting it
 	 */
-	public @Nullable R visit(@NonNull org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationElement v) {
+	public R visit(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull EvaluationElement v) {
 		return v.accept(this);
 	}
 
-	//	public @Nullable R visiting(@NonNull org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationElement visitable) {
+	//	public R visiting(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull EvaluationElement visitable) {
 	//		return null;
 	//	}
 }

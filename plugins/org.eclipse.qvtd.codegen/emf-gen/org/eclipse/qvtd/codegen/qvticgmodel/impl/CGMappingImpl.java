@@ -330,7 +330,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMapping(this);
 	}
 

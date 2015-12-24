@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
@@ -301,7 +300,7 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((QVTrelationCSVisitor<?>)visitor).visitVarDeclarationCS(this);
 	}
 } //VarDeclarationCSImpl

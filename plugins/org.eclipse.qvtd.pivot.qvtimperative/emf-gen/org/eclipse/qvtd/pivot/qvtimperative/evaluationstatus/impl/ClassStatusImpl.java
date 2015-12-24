@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AssociationStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AttributeStatus;
@@ -534,7 +533,7 @@ public class ClassStatusImpl extends ElementStatusImpl implements ClassStatus {
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull EvaluationStatusVisitor<R> visitor) {
+	public <R> R accept(@NonNull EvaluationStatusVisitor<R> visitor) {
 		return visitor.visitClassStatus(this);
 	}
 

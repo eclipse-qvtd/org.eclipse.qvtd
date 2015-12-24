@@ -47,57 +47,57 @@ public abstract class AbstractQVTimperativeTemplateParameterSubstitutionVisitor
 	}	
 
 	@Override
-	public @Nullable Object visitConnectionAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment object) {
+	public @Nullable Object visitConnectionAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionAssignment object) {
 		return visitAssignment(object);
 	}
 
 	@Override
-	public @Nullable Object visitImperativeBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern object) {
+	public @Nullable Object visitImperativeBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeBottomPattern object) {
 		return visitBottomPattern(object);
 	}
 
 	@Override
-	public @Nullable Object visitImperativeDomain(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain object) {
+	public @Nullable Object visitImperativeDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeDomain object) {
 		return visitCoreDomain(object);
 	}
 
 	@Override
-	public @Nullable Object visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
+	public @Nullable Object visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
 	}
 
 	@Override
-	public @Nullable Object visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtimperative.Mapping object) {
+	public @Nullable Object visitMapping(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Mapping object) {
 		return visitRule(object);
 	}
 
 	@Override
-	public @Nullable Object visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCall object) {
+	public @Nullable Object visitMappingCall(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCall object) {
 		return visitMappingStatement(object);
 	}
 
 	@Override
-	public @Nullable Object visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
+	public @Nullable Object visitMappingCallBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCallBinding object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable Object visitMappingLoop(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingLoop object) {
+	public @Nullable Object visitMappingLoop(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingLoop object) {
 		return visitCallExp(object);
 	}
 
 	@Override
-	public @Nullable Object visitMappingSequence(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingSequence object) {
+	public @Nullable Object visitMappingSequence(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingSequence object) {
 		return visitMappingStatement(object);
 	}
 
 	@Override
-	public @Nullable Object visitMappingStatement(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingStatement object) {
+	public @Nullable Object visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
 		return visitOCLExpression(object);
 	}
 
 	@Override
-	public @Nullable Object visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
+	public @Nullable Object visitVariablePredicate(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariablePredicate object) {
 		return visitPredicate(object);
 	}
 }

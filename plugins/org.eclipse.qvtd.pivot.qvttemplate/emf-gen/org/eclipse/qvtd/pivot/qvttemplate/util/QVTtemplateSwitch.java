@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvttemplate.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.LiteralExp;
 import org.eclipse.ocl.pivot.NamedElement;
@@ -39,7 +40,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage
  * @generated
  */
-public class QVTtemplateSwitch<T> extends Switch<T> {
+public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

@@ -21,8 +21,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import example2.classes.ClassesPackage;
 import example2.classes.Operation;
 import example2.classes.Property;
@@ -258,7 +256,7 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitClass(this);
 	}
 

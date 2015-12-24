@@ -23,8 +23,11 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * An AbstractNullQVTbaseVisitor provides a default implementation for each
  * visitXxx method that returns null.
+ *
+ * @deprecated Explicit 'Null' functionality is obsolete with Java 8 @Nullable annotations.  
  */
-public abstract class AbstractNullQVTbaseVisitor<R, C>
+ @Deprecated
+public abstract class AbstractNullQVTbaseVisitor<@Nullable R, C>
 	extends org.eclipse.ocl.pivot.util.AbstractNullVisitor<R, C> implements QVTbaseVisitor<R>
 {
 	/**
@@ -32,52 +35,52 @@ public abstract class AbstractNullQVTbaseVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNullQVTbaseVisitor(@NonNull C context) {
+	protected AbstractNullQVTbaseVisitor(C context) {
 		super(context);
 	}	
 
 	@Override
-	public @Nullable R visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
+	public R visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull BaseModel object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {
+	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitFunction(@NonNull org.eclipse.qvtd.pivot.qvtbase.Function object) {
+	public R visitFunction(org.eclipse.qvtd.pivot.qvtbase.@NonNull Function object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitFunctionParameter(@NonNull org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
+	public R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitPattern(@NonNull org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
+	public R visitPattern(org.eclipse.qvtd.pivot.qvtbase.@NonNull Pattern object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitPredicate(@NonNull org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
+	public R visitPredicate(org.eclipse.qvtd.pivot.qvtbase.@NonNull Predicate object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object) {
+	public R visitRule(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
+	public R visitTransformation(org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
+	public R visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel object) {
 		return null;
 	}
 }

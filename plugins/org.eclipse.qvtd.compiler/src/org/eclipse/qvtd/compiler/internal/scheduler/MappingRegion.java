@@ -167,7 +167,7 @@ public class MappingRegion extends AbstractMappingRegion implements Comparable<M
 	}
 
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitMappingRegion(this);
 	}
 

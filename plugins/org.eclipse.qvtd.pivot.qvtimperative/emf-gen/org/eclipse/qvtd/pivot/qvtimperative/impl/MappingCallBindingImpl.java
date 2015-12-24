@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
@@ -442,7 +441,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTimperativeVisitor<?>)visitor).visitMappingCallBinding(this);
 	}
 } //MappingCallBindingImpl

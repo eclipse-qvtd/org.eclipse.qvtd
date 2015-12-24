@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
@@ -168,7 +167,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
+	public <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
 		return visitor.visitMappingAction(this);
 	}
 

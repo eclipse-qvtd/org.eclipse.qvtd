@@ -165,7 +165,7 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMappingCall(this);
 	}
 

@@ -14,7 +14,6 @@ package org.eclipse.qvtd.pivot.schedule.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.schedule.OutputAction;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
@@ -51,7 +50,7 @@ public class OutputActionImpl extends AbstractActionImpl implements OutputAction
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
+	public <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
 		return visitor.visitOutputAction(this);
 	}
 

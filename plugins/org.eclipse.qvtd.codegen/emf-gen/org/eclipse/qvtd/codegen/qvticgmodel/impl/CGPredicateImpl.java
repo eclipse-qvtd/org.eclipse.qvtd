@@ -354,7 +354,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGPredicate(this);
 	}
 

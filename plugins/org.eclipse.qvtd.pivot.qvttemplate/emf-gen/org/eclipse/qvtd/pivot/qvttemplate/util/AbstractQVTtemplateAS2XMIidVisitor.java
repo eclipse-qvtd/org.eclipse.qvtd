@@ -44,22 +44,22 @@ public abstract class AbstractQVTtemplateAS2XMIidVisitor
 	}	
 
 	@Override
-	public @Nullable Boolean visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
+	public @Nullable Boolean visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull CollectionTemplateExp object) {
 		return visitTemplateExp(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
+	public @Nullable Boolean visitObjectTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull ObjectTemplateExp object) {
 		return visitTemplateExp(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
+	public @Nullable Boolean visitPropertyTemplateItem(org.eclipse.qvtd.pivot.qvttemplate.@NonNull PropertyTemplateItem object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
+	public @Nullable Boolean visitTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull TemplateExp object) {
 		return visitLiteralExp(object);
 	}
 }

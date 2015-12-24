@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AssociationStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ClassStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationStatusPackage;
@@ -255,7 +254,7 @@ public class TransformationStatusImpl extends EvaluationElementImpl implements T
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull EvaluationStatusVisitor<R> visitor) {
+	public <R> R accept(@NonNull EvaluationStatusVisitor<R> visitor) {
 		return visitor.visitTransformationStatus(this);
 	}
 

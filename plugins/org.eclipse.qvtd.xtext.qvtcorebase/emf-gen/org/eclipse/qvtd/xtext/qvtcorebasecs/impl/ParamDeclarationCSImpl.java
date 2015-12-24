@@ -12,7 +12,6 @@ package org.eclipse.qvtd.xtext.qvtcorebasecs.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
@@ -53,7 +52,7 @@ public class ParamDeclarationCSImpl extends TypedElementCSImpl implements ParamD
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((QVTcoreBaseCSVisitor<?>)visitor).visitParamDeclarationCS(this);
 	}
 } //ParamDeclarationCSImpl

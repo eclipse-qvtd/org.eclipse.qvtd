@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
@@ -177,7 +176,7 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((QVTrelationCSVisitor<?>)visitor).visitObjectTemplateCS(this);
 	}
 } //ObjectTemplateCSImpl

@@ -198,7 +198,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGRealizedVariable(this);
 	}
 

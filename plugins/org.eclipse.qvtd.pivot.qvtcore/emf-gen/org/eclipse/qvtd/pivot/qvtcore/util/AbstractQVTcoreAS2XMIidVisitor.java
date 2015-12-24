@@ -44,12 +44,12 @@ public abstract class AbstractQVTcoreAS2XMIidVisitor
 	}	
 
 	@Override
-	public @Nullable Boolean visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
+	public @Nullable Boolean visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreModel object) {
 		return visitBaseModel(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object) {
+	public @Nullable Boolean visitMapping(org.eclipse.qvtd.pivot.qvtcore.@NonNull Mapping object) {
 		return visitRule(object);
 	}
 }

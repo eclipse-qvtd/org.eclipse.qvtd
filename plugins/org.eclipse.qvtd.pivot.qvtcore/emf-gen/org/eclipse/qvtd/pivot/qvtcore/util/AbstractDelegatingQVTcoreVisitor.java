@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.pivot.qvtcore.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractDelegatingQVTcoreVisitor delegates all visits.
@@ -27,22 +26,22 @@ public abstract class AbstractDelegatingQVTcoreVisitor<R, C, D extends QVTcoreVi
 	extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractDelegatingQVTcoreBaseVisitor<R, C, D>
 	implements QVTcoreVisitor<R>
 {
-	protected AbstractDelegatingQVTcoreVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractDelegatingQVTcoreVisitor(@NonNull D delegate, C context) {
 		super(delegate, context);
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull org.eclipse.ocl.pivot.util.Visitable visitable) {
+	public R visiting(org.eclipse.ocl.pivot.util.@NonNull Visitable visitable) {
 		return delegate.visiting(visitable);
 	}
 
 	@Override
-	public @Nullable R visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
+	public R visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreModel object) {
 		return delegate.visitCoreModel(object);
 	}
 
 	@Override
-	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object) {
+	public R visitMapping(org.eclipse.qvtd.pivot.qvtcore.@NonNull Mapping object) {
 		return delegate.visitMapping(object);
 	}
 }

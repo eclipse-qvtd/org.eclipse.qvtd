@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.DataParameter;
 import org.eclipse.qvtd.pivot.schedule.ParameterDerivation;
@@ -338,7 +337,7 @@ public class ParameterDerivationImpl extends ScheduleElementImpl implements Para
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
+	public <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
 		return visitor.visitParameterDerivation(this);
 	}
 

@@ -458,7 +458,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGPropertyAssignment(this);
 	}
 

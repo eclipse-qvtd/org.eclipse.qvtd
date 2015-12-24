@@ -22,8 +22,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import example1.target.A;
 import example1.target.TRoot;
 import example1.target.TargetPackage;
@@ -163,7 +161,7 @@ public class TRootImpl extends MinimalEObjectImpl.Container implements TRoot {
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitTRoot(this);
 	}
 

@@ -23,8 +23,11 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * An AbstractNullQVTtemplateVisitor provides a default implementation for each
  * visitXxx method that returns null.
+ *
+ * @deprecated Explicit 'Null' functionality is obsolete with Java 8 @Nullable annotations.  
  */
-public abstract class AbstractNullQVTtemplateVisitor<R, C>
+ @Deprecated
+public abstract class AbstractNullQVTtemplateVisitor<@Nullable R, C>
 	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractNullQVTbaseVisitor<R, C> implements QVTtemplateVisitor<R>
 {
 	/**
@@ -32,27 +35,27 @@ public abstract class AbstractNullQVTtemplateVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNullQVTtemplateVisitor(@NonNull C context) {
+	protected AbstractNullQVTtemplateVisitor(C context) {
 		super(context);
 	}	
 
 	@Override
-	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
+	public R visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull CollectionTemplateExp object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
+	public R visitObjectTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull ObjectTemplateExp object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
+	public R visitPropertyTemplateItem(org.eclipse.qvtd.pivot.qvttemplate.@NonNull PropertyTemplateItem object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
+	public R visitTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull TemplateExp object) {
 		return null;
 	}
 }

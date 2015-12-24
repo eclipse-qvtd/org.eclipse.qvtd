@@ -17,8 +17,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import org.eclipse.qvtd.pivot.schedule.ScheduleElement;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 
@@ -55,7 +53,7 @@ public abstract class ScheduleElementImpl extends MinimalEObjectImpl.Container i
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
+	public <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
 		return visitor.visitScheduleElement(this);
 	}
 

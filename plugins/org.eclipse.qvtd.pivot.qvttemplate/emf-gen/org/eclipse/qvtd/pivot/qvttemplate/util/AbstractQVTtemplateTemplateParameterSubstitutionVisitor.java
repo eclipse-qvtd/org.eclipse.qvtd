@@ -47,22 +47,22 @@ public abstract class AbstractQVTtemplateTemplateParameterSubstitutionVisitor
 	}	
 
 	@Override
-	public @Nullable Object visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
+	public @Nullable Object visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull CollectionTemplateExp object) {
 		return visitTemplateExp(object);
 	}
 
 	@Override
-	public @Nullable Object visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
+	public @Nullable Object visitObjectTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull ObjectTemplateExp object) {
 		return visitTemplateExp(object);
 	}
 
 	@Override
-	public @Nullable Object visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
+	public @Nullable Object visitPropertyTemplateItem(org.eclipse.qvtd.pivot.qvttemplate.@NonNull PropertyTemplateItem object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable Object visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
+	public @Nullable Object visitTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull TemplateExp object) {
 		return visitLiteralExp(object);
 	}
 }

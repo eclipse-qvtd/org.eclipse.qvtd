@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
@@ -82,8 +83,8 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected QVTcoreSwitch<Adapter> modelSwitch =
-		new QVTcoreSwitch<Adapter>() {
+	protected QVTcoreSwitch<@Nullable Adapter> modelSwitch =
+		new QVTcoreSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseCoreModel(CoreModel object) {
 				return createCoreModelAdapter();

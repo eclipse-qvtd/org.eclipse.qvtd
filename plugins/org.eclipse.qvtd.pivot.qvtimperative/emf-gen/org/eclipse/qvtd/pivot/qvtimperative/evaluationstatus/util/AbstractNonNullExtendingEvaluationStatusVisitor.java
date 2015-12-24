@@ -25,8 +25,11 @@ import org.eclipse.jdt.annotation.NonNull;
  * super class, (or transitively its first super class first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
- * The return in annotated as @NonNull.
+ * The return is annotated as @NonNull.
+ *
+ * @deprecated Explicit 'NonNull' functionality is obsolete with Java 8 @NonNull annotations.  
  */
+ @Deprecated
 public abstract class AbstractNonNullExtendingEvaluationStatusVisitor<R, C>
 	extends AbstractEvaluationStatusVisitor<R, C>
 	implements EvaluationStatusVisitor<R>
@@ -36,7 +39,7 @@ public abstract class AbstractNonNullExtendingEvaluationStatusVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNonNullExtendingEvaluationStatusVisitor(@NonNull C context) {
+	protected AbstractNonNullExtendingEvaluationStatusVisitor(C context) {
 		super(context);
 	}	
 	
@@ -47,7 +50,7 @@ public abstract class AbstractNonNullExtendingEvaluationStatusVisitor<R, C>
 	 * @return the non-null result of visiting it
 	 */
 	@Override
-	public @NonNull R visit(@NonNull org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationElement visitable) {
+	public @NonNull R visit(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull EvaluationElement visitable) {
 		R result = visitable.accept(this);
 		if (result == null) {
 			throw new IllegalStateException("null return from non-null " + getClass().getName());
@@ -56,42 +59,42 @@ public abstract class AbstractNonNullExtendingEvaluationStatusVisitor<R, C>
 	}
 
 	@Override
-	public @NonNull R visitAssociationStatus(@NonNull org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AssociationStatus object) {
+	public @NonNull R visitAssociationStatus(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull AssociationStatus object) {
 		return visitPropertyStatus(object);
 	}
 
 	@Override
-	public @NonNull R visitAttributeStatus(@NonNull org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AttributeStatus object) {
+	public @NonNull R visitAttributeStatus(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull AttributeStatus object) {
 		return visitPropertyStatus(object);
 	}
 
 	@Override
-	public @NonNull R visitClassStatus(@NonNull org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ClassStatus object) {
+	public @NonNull R visitClassStatus(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull ClassStatus object) {
 		return visitElementStatus(object);
 	}
 
 	@Override
-	public @NonNull R visitElementStatus(@NonNull org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ElementStatus object) {
+	public @NonNull R visitElementStatus(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull ElementStatus object) {
 		return visitEvaluationElement(object);
 	}
 
 	@Override
-	public @NonNull R visitEvaluationElement(@NonNull org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationElement object) {
+	public @NonNull R visitEvaluationElement(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull EvaluationElement object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @NonNull R visitMappingStatus(@NonNull org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.MappingStatus object) {
+	public @NonNull R visitMappingStatus(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull MappingStatus object) {
 		return visitEvaluationElement(object);
 	}
 
 	@Override
-	public @NonNull R visitPropertyStatus(@NonNull org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.PropertyStatus object) {
+	public @NonNull R visitPropertyStatus(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull PropertyStatus object) {
 		return visitElementStatus(object);
 	}
 
 	@Override
-	public @NonNull R visitTransformationStatus(@NonNull org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.TransformationStatus object) {
+	public @NonNull R visitTransformationStatus(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull TransformationStatus object) {
 		return visitEvaluationElement(object);
 	}
 
@@ -100,5 +103,5 @@ public abstract class AbstractNonNullExtendingEvaluationStatusVisitor<R, C>
 	 * is available.
 	 */
 	@Override
-	public abstract @NonNull R visiting(@NonNull org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationElement visitable);
+	public abstract @NonNull R visiting(org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.@NonNull EvaluationElement visitable);
 }

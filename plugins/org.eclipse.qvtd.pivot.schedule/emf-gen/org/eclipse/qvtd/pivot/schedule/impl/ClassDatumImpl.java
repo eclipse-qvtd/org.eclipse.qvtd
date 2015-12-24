@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
@@ -238,7 +237,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
+	public <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
 		return visitor.visitClassDatum(this);
 	}
 

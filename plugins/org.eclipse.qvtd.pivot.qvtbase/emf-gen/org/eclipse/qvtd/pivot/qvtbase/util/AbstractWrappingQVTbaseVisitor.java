@@ -27,13 +27,13 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 	extends org.eclipse.ocl.pivot.util.AbstractWrappingVisitor<R, C, D, P>
 	implements QVTbaseVisitor<R>
 {
-	protected AbstractWrappingQVTbaseVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractWrappingQVTbaseVisitor(@NonNull D delegate, C context) {
 		super(delegate, context);
 	}
 
 	@Override
-	public @Nullable R visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
-		P prologue = preVisit(object);
+	public R visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull BaseModel object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitBaseModel(object);
 			return postVisit(object, prologue, result);
@@ -44,8 +44,8 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 	}
 
 	@Override
-	public @Nullable R visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {
-		P prologue = preVisit(object);
+	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitDomain(object);
 			return postVisit(object, prologue, result);
@@ -56,8 +56,8 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 	}
 
 	@Override
-	public @Nullable R visitFunction(@NonNull org.eclipse.qvtd.pivot.qvtbase.Function object) {
-		P prologue = preVisit(object);
+	public R visitFunction(org.eclipse.qvtd.pivot.qvtbase.@NonNull Function object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitFunction(object);
 			return postVisit(object, prologue, result);
@@ -68,8 +68,8 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 	}
 
 	@Override
-	public @Nullable R visitFunctionParameter(@NonNull org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
-		P prologue = preVisit(object);
+	public R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitFunctionParameter(object);
 			return postVisit(object, prologue, result);
@@ -80,8 +80,8 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 	}
 
 	@Override
-	public @Nullable R visitPattern(@NonNull org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
-		P prologue = preVisit(object);
+	public R visitPattern(org.eclipse.qvtd.pivot.qvtbase.@NonNull Pattern object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitPattern(object);
 			return postVisit(object, prologue, result);
@@ -92,8 +92,8 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 	}
 
 	@Override
-	public @Nullable R visitPredicate(@NonNull org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
-		P prologue = preVisit(object);
+	public R visitPredicate(org.eclipse.qvtd.pivot.qvtbase.@NonNull Predicate object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitPredicate(object);
 			return postVisit(object, prologue, result);
@@ -104,8 +104,8 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 	}
 
 	@Override
-	public @Nullable R visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object) {
-		P prologue = preVisit(object);
+	public R visitRule(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitRule(object);
 			return postVisit(object, prologue, result);
@@ -116,8 +116,8 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 	}
 
 	@Override
-	public @Nullable R visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
-		P prologue = preVisit(object);
+	public R visitTransformation(org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitTransformation(object);
 			return postVisit(object, prologue, result);
@@ -128,8 +128,8 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 	}
 
 	@Override
-	public @Nullable R visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
-		P prologue = preVisit(object);
+	public R visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitTypedModel(object);
 			return postVisit(object, prologue, result);

@@ -12,7 +12,6 @@ package org.eclipse.qvtd.codegen.qvticgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
@@ -51,7 +50,7 @@ public class CGMiddlePropertyAssignmentImpl extends CGEcorePropertyAssignmentImp
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMiddlePropertyAssignment(this);
 	}
 

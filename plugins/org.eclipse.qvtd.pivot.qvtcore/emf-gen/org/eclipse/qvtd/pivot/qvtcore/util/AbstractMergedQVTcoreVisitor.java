@@ -20,7 +20,6 @@
 package	org.eclipse.qvtd.pivot.qvtcore.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractMergedQVTcoreVisitor merges all visits direct to visiting().
@@ -30,17 +29,17 @@ public abstract class AbstractMergedQVTcoreVisitor<R, C>
 	extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractMergedQVTcoreBaseVisitor<R, C>
 	implements QVTcoreVisitor<R>
 {
-	protected AbstractMergedQVTcoreVisitor(@NonNull C context) {
+	protected AbstractMergedQVTcoreVisitor(C context) {
 		super(context);
 	}
 
 	@Override
-	public @Nullable R visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
+	public R visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreModel object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object) {
+	public R visitMapping(org.eclipse.qvtd.pivot.qvtcore.@NonNull Mapping object) {
 		return visiting(object);
 	}
 }

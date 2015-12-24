@@ -47,47 +47,47 @@ public abstract class AbstractQVTcoreBaseTemplateParameterSubstitutionVisitor
 	}	
 
 	@Override
-	public @Nullable Object visitAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.Assignment object) {
+	public @Nullable Object visitAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull Assignment object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable Object visitBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern object) {
+	public @Nullable Object visitBottomPattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull BottomPattern object) {
 		return visitCorePattern(object);
 	}
 
 	@Override
-	public @Nullable Object visitCoreDomain(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain object) {
+	public @Nullable Object visitCoreDomain(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull CoreDomain object) {
 		return visitDomain(object);
 	}
 
 	@Override
-	public @Nullable Object visitCorePattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.CorePattern object) {
+	public @Nullable Object visitCorePattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull CorePattern object) {
 		return visitPattern(object);
 	}
 
 	@Override
-	public @Nullable Object visitEnforcementOperation(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation object) {
+	public @Nullable Object visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull EnforcementOperation object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable Object visitGuardPattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern object) {
+	public @Nullable Object visitGuardPattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull GuardPattern object) {
 		return visitCorePattern(object);
 	}
 
 	@Override
-	public @Nullable Object visitPropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment object) {
+	public @Nullable Object visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
 		return visitAssignment(object);
 	}
 
 	@Override
-	public @Nullable Object visitRealizedVariable(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable object) {
+	public @Nullable Object visitRealizedVariable(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull RealizedVariable object) {
 		return visitVariable(object);
 	}
 
 	@Override
-	public @Nullable Object visitVariableAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment object) {
+	public @Nullable Object visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull VariableAssignment object) {
 		return visitAssignment(object);
 	}
 }

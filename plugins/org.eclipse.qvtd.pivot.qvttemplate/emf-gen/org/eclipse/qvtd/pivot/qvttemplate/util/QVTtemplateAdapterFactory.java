@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.LiteralExp;
 import org.eclipse.ocl.pivot.NamedElement;
@@ -81,8 +82,8 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected QVTtemplateSwitch<Adapter> modelSwitch =
-		new QVTtemplateSwitch<Adapter>() {
+	protected QVTtemplateSwitch<@Nullable Adapter> modelSwitch =
+		new QVTtemplateSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseCollectionTemplateExp(CollectionTemplateExp object) {
 				return createCollectionTemplateExpAdapter();

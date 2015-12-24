@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtcorebase.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.ReferringElement;
@@ -50,7 +51,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
  * @see org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage
  * @generated
  */
-public class QVTcoreBaseSwitch<T> extends Switch<T> {
+public class QVTcoreBaseSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

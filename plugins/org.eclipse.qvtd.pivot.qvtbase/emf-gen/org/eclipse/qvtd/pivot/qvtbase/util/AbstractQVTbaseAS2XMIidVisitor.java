@@ -44,47 +44,47 @@ public abstract class AbstractQVTbaseAS2XMIidVisitor
 	}	
 
 	@Override
-	public @Nullable Boolean visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
+	public @Nullable Boolean visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull BaseModel object) {
 		return visitModel(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {
+	public @Nullable Boolean visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return visitNamedElement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitFunction(@NonNull org.eclipse.qvtd.pivot.qvtbase.Function object) {
+	public @Nullable Boolean visitFunction(org.eclipse.qvtd.pivot.qvtbase.@NonNull Function object) {
 		return visitOperation(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitFunctionParameter(@NonNull org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
+	public @Nullable Boolean visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object) {
 		return visitParameter(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitPattern(@NonNull org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
+	public @Nullable Boolean visitPattern(org.eclipse.qvtd.pivot.qvtbase.@NonNull Pattern object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitPredicate(@NonNull org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
+	public @Nullable Boolean visitPredicate(org.eclipse.qvtd.pivot.qvtbase.@NonNull Predicate object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object) {
+	public @Nullable Boolean visitRule(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule object) {
 		return visitNamedElement(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
+	public @Nullable Boolean visitTransformation(org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation object) {
 		return visitClass(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
+	public @Nullable Boolean visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel object) {
 		return visitNamedElement(object);
 	}
 }

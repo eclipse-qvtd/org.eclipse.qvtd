@@ -47,12 +47,12 @@ public abstract class AbstractQVTcoreTemplateParameterSubstitutionVisitor
 	}	
 
 	@Override
-	public @Nullable Object visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
+	public @Nullable Object visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreModel object) {
 		return visitBaseModel(object);
 	}
 
 	@Override
-	public @Nullable Object visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object) {
+	public @Nullable Object visitMapping(org.eclipse.qvtd.pivot.qvtcore.@NonNull Mapping object) {
 		return visitRule(object);
 	}
 }

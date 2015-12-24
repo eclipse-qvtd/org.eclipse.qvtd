@@ -46,47 +46,47 @@ public abstract class AbstractQVTrelationASSaverNormalizeVisitor
 	}	
 
 	@Override
-	public @Nullable Object visitDomainPattern(@NonNull org.eclipse.qvtd.pivot.qvtrelation.DomainPattern object) {
+	public @Nullable Object visitDomainPattern(org.eclipse.qvtd.pivot.qvtrelation.@NonNull DomainPattern object) {
 		return visitPattern(object);
 	}
 
 	@Override
-	public @Nullable Object visitKey(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Key object) {
+	public @Nullable Object visitKey(org.eclipse.qvtd.pivot.qvtrelation.@NonNull Key object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable Object visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object) {
+	public @Nullable Object visitRelation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull Relation object) {
 		return visitRule(object);
 	}
 
 	@Override
-	public @Nullable Object visitRelationCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp object) {
+	public @Nullable Object visitRelationCallExp(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationCallExp object) {
 		return visitOCLExpression(object);
 	}
 
 	@Override
-	public @Nullable Object visitRelationDomain(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object) {
+	public @Nullable Object visitRelationDomain(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationDomain object) {
 		return visitDomain(object);
 	}
 
 	@Override
-	public @Nullable Object visitRelationDomainAssignment(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment object) {
+	public @Nullable Object visitRelationDomainAssignment(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationDomainAssignment object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable Object visitRelationImplementation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation object) {
+	public @Nullable Object visitRelationImplementation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationImplementation object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable Object visitRelationModel(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationModel object) {
+	public @Nullable Object visitRelationModel(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationModel object) {
 		return visitBaseModel(object);
 	}
 
 	@Override
-	public @Nullable Object visitRelationalTransformation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object) {
+	public @Nullable Object visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationalTransformation object) {
 		return visitTransformation(object);
 	}
 }

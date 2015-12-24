@@ -18,12 +18,11 @@
 package	org.eclipse.qvtd.pivot.qvtcore.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  */
 public interface QVTcoreVisitor<R> extends org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor<R>
 {
-	@Nullable R visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object);
-	@Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object);
+	R visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreModel object);
+	R visitMapping(org.eclipse.qvtd.pivot.qvtcore.@NonNull Mapping object);
 }

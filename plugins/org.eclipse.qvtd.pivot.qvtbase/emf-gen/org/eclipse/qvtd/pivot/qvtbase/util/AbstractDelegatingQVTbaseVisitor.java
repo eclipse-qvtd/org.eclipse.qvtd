@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.pivot.qvtbase.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractDelegatingQVTbaseVisitor delegates all visits.
@@ -27,57 +26,57 @@ public abstract class AbstractDelegatingQVTbaseVisitor<R, C, D extends QVTbaseVi
 	extends org.eclipse.ocl.pivot.util.AbstractDelegatingVisitor<R, C, D>
 	implements QVTbaseVisitor<R>
 {
-	protected AbstractDelegatingQVTbaseVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractDelegatingQVTbaseVisitor(@NonNull D delegate, C context) {
 		super(delegate, context);
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull org.eclipse.ocl.pivot.util.Visitable visitable) {
+	public R visiting(org.eclipse.ocl.pivot.util.@NonNull Visitable visitable) {
 		return delegate.visiting(visitable);
 	}
 
 	@Override
-	public @Nullable R visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
+	public R visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull BaseModel object) {
 		return delegate.visitBaseModel(object);
 	}
 
 	@Override
-	public @Nullable R visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {
+	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return delegate.visitDomain(object);
 	}
 
 	@Override
-	public @Nullable R visitFunction(@NonNull org.eclipse.qvtd.pivot.qvtbase.Function object) {
+	public R visitFunction(org.eclipse.qvtd.pivot.qvtbase.@NonNull Function object) {
 		return delegate.visitFunction(object);
 	}
 
 	@Override
-	public @Nullable R visitFunctionParameter(@NonNull org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
+	public R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object) {
 		return delegate.visitFunctionParameter(object);
 	}
 
 	@Override
-	public @Nullable R visitPattern(@NonNull org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
+	public R visitPattern(org.eclipse.qvtd.pivot.qvtbase.@NonNull Pattern object) {
 		return delegate.visitPattern(object);
 	}
 
 	@Override
-	public @Nullable R visitPredicate(@NonNull org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
+	public R visitPredicate(org.eclipse.qvtd.pivot.qvtbase.@NonNull Predicate object) {
 		return delegate.visitPredicate(object);
 	}
 
 	@Override
-	public @Nullable R visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object) {
+	public R visitRule(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule object) {
 		return delegate.visitRule(object);
 	}
 
 	@Override
-	public @Nullable R visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
+	public R visitTransformation(org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation object) {
 		return delegate.visitTransformation(object);
 	}
 
 	@Override
-	public @Nullable R visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
+	public R visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel object) {
 		return delegate.visitTypedModel(object);
 	}
 }

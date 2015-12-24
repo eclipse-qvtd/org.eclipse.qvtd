@@ -23,8 +23,11 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * An AbstractNullQVTcoreVisitor provides a default implementation for each
  * visitXxx method that returns null.
+ *
+ * @deprecated Explicit 'Null' functionality is obsolete with Java 8 @Nullable annotations.  
  */
-public abstract class AbstractNullQVTcoreVisitor<R, C>
+ @Deprecated
+public abstract class AbstractNullQVTcoreVisitor<@Nullable R, C>
 	extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractNullQVTcoreBaseVisitor<R, C> implements QVTcoreVisitor<R>
 {
 	/**
@@ -32,17 +35,17 @@ public abstract class AbstractNullQVTcoreVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNullQVTcoreVisitor(@NonNull C context) {
+	protected AbstractNullQVTcoreVisitor(C context) {
 		super(context);
 	}	
 
 	@Override
-	public @Nullable R visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
+	public R visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreModel object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object) {
+	public R visitMapping(org.eclipse.qvtd.pivot.qvtcore.@NonNull Mapping object) {
 		return null;
 	}
 }

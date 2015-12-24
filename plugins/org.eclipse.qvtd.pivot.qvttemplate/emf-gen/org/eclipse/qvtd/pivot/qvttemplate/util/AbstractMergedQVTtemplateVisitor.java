@@ -20,7 +20,6 @@
 package	org.eclipse.qvtd.pivot.qvttemplate.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractMergedQVTtemplateVisitor merges all visits direct to visiting().
@@ -30,27 +29,27 @@ public abstract class AbstractMergedQVTtemplateVisitor<R, C>
 	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractMergedQVTbaseVisitor<R, C>
 	implements QVTtemplateVisitor<R>
 {
-	protected AbstractMergedQVTtemplateVisitor(@NonNull C context) {
+	protected AbstractMergedQVTtemplateVisitor(C context) {
 		super(context);
 	}
 
 	@Override
-	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
+	public R visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull CollectionTemplateExp object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
+	public R visitObjectTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull ObjectTemplateExp object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
+	public R visitPropertyTemplateItem(org.eclipse.qvtd.pivot.qvttemplate.@NonNull PropertyTemplateItem object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
+	public R visitTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull TemplateExp object) {
 		return visiting(object);
 	}
 }

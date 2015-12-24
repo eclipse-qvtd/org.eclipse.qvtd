@@ -46,7 +46,7 @@ public class RootRegion extends AbstractRegion implements SimpleRegion
 	}
 
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitRootCompositionRegion(this);
 	}
 

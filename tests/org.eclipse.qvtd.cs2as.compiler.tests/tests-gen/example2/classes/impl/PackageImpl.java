@@ -21,8 +21,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import example2.classes.ClassesPackage;
 import example2.classes.util.Visitor;
 
@@ -196,7 +194,7 @@ public class PackageImpl extends NamedElementImpl implements example2.classes.Pa
 	 * @generated
 	 */
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitPackage(this);
 	}
 
