@@ -678,6 +678,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 						if (primaryTargetNode.getCompleteClass() != secondaryTargetNode.getCompleteClass()) {		// FIXME conforms
 							return false;
 						}
+						if (primaryTargetNode.isNull() != secondaryTargetNode.isNull()) {		// FIXME conforms
+							return false;
+						}
 					}
 					else {
 						if (secondaryEdge.isPredicated()) {	
@@ -876,7 +879,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	protected @NonNull List<List<Node>> computeHeadNodeGroups() {
 		List<List<Node>> headNodeGroups = new ArrayList<List<Node>>();
-		Iterable<Node> navigableNodes = getNavigableNodes();
+		Iterable<Node> navigableNodes = getNavigableNodes();		// Excludes, null, attributes, constants, operations
 		//
 		//	Compute the Set of all target nodes that can be reached by transitive to-one navigation from a particular source node.
 		//
@@ -887,41 +890,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			targetClosure.add(navigableNode);
 			for (Edge navigationEdge : navigableNode.getNavigationEdges()) {
 				if (!navigationEdge.isRealized()) {
-					Node targetNode = navigationEdge.getTarget();
-					Region targetRegion = targetNode.getRegion();
-/*					if ((targetRegion != this) && (targetRegion.isIterationRegion())) {							// Leap across an IterationRegion
-						for (Edge edge : getEdges()) {
-							if (edge.getSource().getRegion() == targetRegion) {
-								targetNode = edge.getTarget();
-								break;
-							}
-						}
-						if (targetNode.isMatchable()) {
-							targetClosure.add(targetNode);
-						}
-					}
-					else { */
-						targetClosure.add(targetNode);
-//					}
+					targetClosure.add(navigationEdge.getTarget());
 				}
 			}
 			for (Edge computationEdge : navigableNode.getComputationEdges()) {
-				Node sourceNode = computationEdge.getSource();
-				Region sourceRegion = sourceNode.getRegion();
-/*				if ((sourceRegion != this) && (sourceRegion.isIterationRegion())) {							// Leap across an IterationRegion
-					for (Edge edge : getEdges()) {
-						if (edge.getTarget().getRegion() == sourceRegion) {		// FIXME source/target
-							sourceNode = edge.getSource();
-							break;
-						}
-					}
-//					if (sourceNode.isMatchable()) {
-						targetClosure.add(sourceNode);
-//					}
-				}
-				else { */
-					targetClosure.add(sourceNode);
-//				}
+				targetClosure.add(computationEdge.getSource());
 			}
 		}
 		boolean isChanged = true;
@@ -931,7 +904,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				Set<Node> targetClosure = source2targetClosure.get(sourceNode);
 				if (targetClosure != null) {
 					for (Node nextNode : new ArrayList<Node>(targetClosure)) {
-						if (targetClosure.addAll(source2targetClosure.get(nextNode))) {
+						Set<Node> nextTargetClosure = source2targetClosure.get(nextNode);
+						if ((nextTargetClosure != null) && targetClosure.addAll(nextTargetClosure)) {
 							isChanged = true;
 						}
 					}
@@ -949,9 +923,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 		for (Node sourceNode : navigableNodes) {
 			Set<Node> targetClosure = source2targetClosure.get(sourceNode);
+			assert targetClosure != null;
 			for (Node targetNode : targetClosure) {
 				Set<Node> sourceClosure = target2sourceClosure.get(targetNode);
-				sourceClosure.add(sourceNode);
+				if (sourceClosure != null) {
+					sourceClosure.add(sourceNode);
+				}
 			}
 		}
 		//
@@ -977,6 +954,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			Node headNode = headLessNodes.remove(0);
 			assert headNode != null;
 			Set<Node> sourceClosure = target2sourceClosure.get(headNode);
+			assert sourceClosure != null;
 			Set<Node> targetClosure = source2targetClosure.get(headNode);
 			assert targetClosure != null;
 			List<Node> headGroup = new ArrayList<Node>();
@@ -986,6 +964,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				Node nextNode = headLessNodes.get(i);
 				assert nextNode != null;
 				Set<Node> nextClosure = target2sourceClosure.get(nextNode);
+				assert nextClosure != null;
 				if (nextClosure.size() > sourceClosure.size()) {
 					break;
 				}

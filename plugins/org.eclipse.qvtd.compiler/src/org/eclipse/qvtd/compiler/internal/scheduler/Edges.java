@@ -249,6 +249,7 @@ public class Edges
 			}
 		}
 
+		private static final @NonNull IteratedEdgeRole CONSTANT_ITERATED = new IteratedEdgeRole(Role.Phase.CONSTANT);
 		private static final @NonNull IteratedEdgeRole LOADED_ITERATED = new IteratedEdgeRole(Role.Phase.LOADED);
 		private static final @NonNull IteratedEdgeRole PREDICATED_ITERATED = new IteratedEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull IteratedEdgeRole REALIZED_ITERATED = new IteratedEdgeRole(Role.Phase.REALIZED);
@@ -262,6 +263,9 @@ public class Edges
 			}
 			else if (sourceNode.isLoaded() || targetNode.isLoaded()) {
 				return new BasicSimpleEdge(LOADED_ITERATED, region, sourceNode, null, targetNode);
+			}
+			else if (sourceNode.isConstant() || targetNode.isConstant()) {
+				return new BasicSimpleEdge(CONSTANT_ITERATED, region, sourceNode, null, targetNode);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -288,6 +292,7 @@ public class Edges
 			}
 		}
 
+		private static final @NonNull IteratingEdgeRole CONSTANT_ITERATING = new IteratingEdgeRole(Role.Phase.CONSTANT);
 		private static final @NonNull IteratingEdgeRole LOADED_ITERATING = new IteratingEdgeRole(Role.Phase.LOADED);
 		private static final @NonNull IteratingEdgeRole PREDICATED_ITERATING = new IteratingEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull IteratingEdgeRole REALIZED_ITERATING = new IteratingEdgeRole(Role.Phase.REALIZED);
@@ -301,6 +306,9 @@ public class Edges
 			}
 			else if (sourceNode.isLoaded() || targetNode.isLoaded()) {
 				return new BasicSimpleEdge(LOADED_ITERATING, region, sourceNode, null, targetNode);
+			}
+			else if (sourceNode.isConstant() || targetNode.isConstant()) {
+				return new BasicSimpleEdge(CONSTANT_ITERATING, region, sourceNode, null, targetNode);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -445,15 +453,16 @@ public class Edges
 			}
 		}
 
+		private static final @NonNull EdgeRole CONSTANT_RESULT = new ResultEdgeRole(Role.Phase.CONSTANT);
 		private static final @NonNull EdgeRole LOADED_RESULT = new ResultEdgeRole(Role.Phase.LOADED);
 		private static final @NonNull EdgeRole PREDICATED_RESULT = new ResultEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull EdgeRole REALIZED_RESULT = new ResultEdgeRole(Role.Phase.REALIZED);
 
 		public @NonNull SimpleEdge createSimpleEdge(@NonNull SimpleRegion region, @NonNull SimpleNode sourceNode, @Nullable String name, @NonNull SimpleNode targetNode) {
-			/*if (targetNode.isConstant()) {
-				return new SimpleEdge(CONSTANT_RESULT, region, sourceNode, name, targetNode);
+			if (targetNode.isConstant()) {
+				return new BasicSimpleEdge(CONSTANT_RESULT, region, sourceNode, name, targetNode);
 			}
-			else*/ if (targetNode.isLoaded()) {
+			else if (targetNode.isLoaded()) {
 				return new BasicSimpleEdge(LOADED_RESULT, region, sourceNode, name, targetNode);
 			}
 			else if (targetNode.isPredicated()) {

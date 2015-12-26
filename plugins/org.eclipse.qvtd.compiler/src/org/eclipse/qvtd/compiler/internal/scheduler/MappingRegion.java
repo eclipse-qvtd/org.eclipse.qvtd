@@ -181,7 +181,7 @@ public class MappingRegion extends AbstractMappingRegion implements Comparable<M
 		Property property = path.get(0);
 		assert property != null;
 		SimpleNode sourceNode = getReferenceNode(sourceVariable);
-		SimpleNode targetNode = targetVariable != null ? getReferenceNode(targetVariable) : Nodes.NULL.createSimpleNode(this, sourceVariable);
+		SimpleNode targetNode = targetVariable != null ? getReferenceNode(targetVariable) : Nodes.NULL.createSimpleNode(this);
 		assert sourceNode.isGuardVariable();
 		assert (targetVariable == null) || targetNode.isGuardVariable();
 		addPredicateEdge(sourceNode, property, targetNode);
@@ -271,7 +271,8 @@ public class MappingRegion extends AbstractMappingRegion implements Comparable<M
 		}
 		SimpleNode extraGuardNode = Nodes.EXTRA_GUARD.createSimpleNode(this, "«extra-" + (extraNodes.size()+1) + "»", extraNode.getClassDatumAnalysis());
 		extraNodes.add(extraGuardNode);
-		addHeadGroup(Collections.<Node>singletonList(extraGuardNode));
+		@SuppressWarnings("null")@NonNull List<Node> extraGuardNodeList = Collections.<Node>singletonList(extraGuardNode);
+		addHeadGroup(extraGuardNodeList);
 		return extraGuardNode;
 	}
 

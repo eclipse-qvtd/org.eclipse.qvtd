@@ -10,12 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.scheduler;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.NavigationCallExp;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -434,11 +432,15 @@ public class Nodes
 			}
 		}
 		
+		public static final @NonNull AbstractVariableNodeRole CONSTANT_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT);
 		public static final @NonNull AbstractVariableNodeRole LOADED_ITERATOR = new IteratorNodeRole(Role.Phase.LOADED);
 		public static final @NonNull AbstractVariableNodeRole PREDICATED_ITERATOR = new IteratorNodeRole(Role.Phase.PREDICATED);
 
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull Variable iterator, @NonNull SimpleNode sourceNode) {
-			if (sourceNode.isLoaded()) {
+			if (sourceNode.isConstant()) {
+				return CONSTANT_ITERATOR.createSimpleNode(region, iterator);
+			}
+			else if (sourceNode.isLoaded()) {
 				return LOADED_ITERATOR.createSimpleNode(region, iterator);
 			}
 			else {
@@ -507,78 +509,33 @@ public class Nodes
 		}
 	}
 	
-	public static final class NullNodeRoleFactory
-	{		
-		private static class NullNodeRole extends AbstractSimpleNodeRole
-		{
-			protected NullNodeRole(@NonNull Phase phase) {
-				super(phase);
-			}
-
-			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region) {
-				return createSimpleNode(region, "-null-", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
-			}
-			
-			@Override
-			public @Nullable String getStyle() {
-				return "rounded";
-			}
-
-			@Override
-			public boolean isMatchable() {
-				return phase != Role.Phase.REALIZED;
-			}
-
-			@Override
-			public boolean isNavigable() {
-				return phase != Role.Phase.REALIZED;
-			}
-
-			@Override
-			public boolean isNull() {
-				return true;
-			}
-			
-			@Override
-			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-				if (getClass() != nodeRole.getClass()) {
-					throw new IllegalStateException(this + " cannot be merged");
-				}
-				return this.compareTo(nodeRole) < 0 ? this : nodeRole;
-			}
+	public static class NullNodeRole extends AbstractSimpleNodeRole
+	{
+		protected NullNodeRole() {
+			super(Role.Phase.CONSTANT);
 		}
-		
-		public static final @NonNull NullNodeRole CONSTANT_NULL = new NullNodeRole(Role.Phase.CONSTANT);
-		public static final @NonNull NullNodeRole LOADED_NULL = new NullNodeRole(Role.Phase.LOADED);
-		public static final @NonNull NullNodeRole PREDICATED_NULL = new NullNodeRole(Role.Phase.PREDICATED);
-		public static final @NonNull NullNodeRole REALIZED_NULL = new NullNodeRole(Role.Phase.REALIZED);
 
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region) {
-			return LOADED_NULL.createSimpleNode(region);
+			return createSimpleNode(region, "-null-", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
 		}
 
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull TypedElement typedElement) {
-//			if (typedElement != null) {
-				for (EObject eContainer = typedElement.eContainer(); eContainer != null; eContainer = eContainer.eContainer()) {
-					if (eContainer instanceof PropertyAssignment) {
-						return REALIZED_NULL.createSimpleNode(region);
-					}
-					if (!(eContainer instanceof OCLExpression)) {
-						break;
-					}
-				}
-//			}
-//			else {
-//				return CONSTANT_NULL.createSimpleNode(region);
-//			} */
-			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(typedElement);
-			boolean isEnforceable = domainUsage.isEnforceable();
-			if (!isEnforceable) {
-				return LOADED_NULL.createSimpleNode(region);
-			}
-			else {
-				return PREDICATED_NULL.createSimpleNode(region);
-			}
+			return createSimpleNode(region, "-null-", typedElement);
+		}
+		
+		@Override
+		public @Nullable String getStyle() {
+			return "rounded";
+		}
+
+		@Override
+		public boolean isMatchable() {
+			return true;
+		}
+
+		@Override
+		public boolean isNull() {
+			return true;
 		}
 	}
 	
@@ -626,7 +583,6 @@ public class Nodes
 		private static final @NonNull OperationNodeRole PREDICATED_OPERATION = new OperationNodeRole(Role.Phase.PREDICATED);
 		private static final @NonNull OperationNodeRole REALIZED_OPERATION = new OperationNodeRole(Role.Phase.REALIZED);
 
-
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull TypedElement typedElement, SimpleNode... argNodes) {
 			boolean isLoaded = false;
 			boolean isPredicated = false;
@@ -656,42 +612,6 @@ public class Nodes
 			else {
 				return CONSTANT_OPERATION.createSimpleNode(region, name, typedElement);
 			}
-/*			for (EObject eContainer = typedElement; eContainer != null; eContainer = eContainer.eContainer()) {
-				if (eContainer instanceof PropertyAssignment) {
-					return REALIZED_OPERATION.createSimpleNode(region, name, typedElement);
-				}
-				if (eContainer instanceof Predicate) {
-					DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage((Predicate)eContainer);
-//					DomainUsage domainUsage2 = region.getSchedulerConstants().getDomainUsage(((Predicate)eContainer).getPattern());
-					Area containingArea = ClassUtil.nonNullState(QVTcoreBaseUtil.getContainingArea(eContainer));
-					if (containingArea instanceof AbstractMapping) {
-						return PREDICATED_OPERATION.createSimpleNode(region, name, typedElement);
-					}
-//					DomainUsage domainUsage3 = region.getSchedulerConstants().getDomainUsage(containingArea);
-					if (domainUsage.isEnforceable()) {
-						return PREDICATED_OPERATION.createSimpleNode(region, name, typedElement);
-					}
-					else if (domainUsage.isCheckable()) {
-						return LOADED_OPERATION.createSimpleNode(region, name, typedElement);
-					}
-					else {
-						return CONSTANT_OPERATION.createSimpleNode(region, name, typedElement);
-					}
-				}
-				if (!(eContainer instanceof OCLExpression)) {
-					DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(typedElement);
-					if (domainUsage.isEnforceable()) {
-						return PREDICATED_OPERATION.createSimpleNode(region, name, typedElement);
-					}
-					else if (domainUsage.isCheckable()) {
-						return LOADED_OPERATION.createSimpleNode(region, name, typedElement);
-					}
-					else {
-						return CONSTANT_OPERATION.createSimpleNode(region, name, typedElement);
-					}
-				}
-			}
-			return PREDICATED_OPERATION.createSimpleNode(region, name, typedElement);		// Never happens */
 		}
 	}
 	
@@ -926,12 +846,11 @@ public class Nodes
 	public static final @NonNull GuardNodeRoleFactory GUARD = new GuardNodeRoleFactory();
 	public static final @NonNull IteratorNodeRoleFactory ITERATOR = new IteratorNodeRoleFactory();
 	public static final @NonNull LetNodeRoleFactory LET = new LetNodeRoleFactory();
-	public static final @NonNull NullNodeRoleFactory NULL = new NullNodeRoleFactory();
+	public static final @NonNull NullNodeRole NULL = new NullNodeRole();
 	public static final @NonNull OperationNodeRoleFactory OPERATION = new OperationNodeRoleFactory();
 	public static final @NonNull AbstractVariableNodeRole PARAMETER = new ParameterNodeRole();
 	public static final @NonNull AttributeNodeRoleFactory.RealizedAttributeNodeRole REALIZED_ATTRIBUTE = new AttributeNodeRoleFactory.RealizedAttributeNodeRole();
 	public static final @NonNull AbstractVariableNodeRole REALIZED_VARIABLE = new RealizedVariableNodeRole();
-//	public static final @NonNull ResultNodeRoleFactory RESULT = new ResultNodeRoleFactory();
 	public static final @NonNull StepNodeRoleFactory STEP = new StepNodeRoleFactory();
 	public static final @NonNull TrueNodeRole TRUE = new TrueNodeRole();
 	public static final @NonNull NodeRole UNKNOWN = new UnknownNodeRole();

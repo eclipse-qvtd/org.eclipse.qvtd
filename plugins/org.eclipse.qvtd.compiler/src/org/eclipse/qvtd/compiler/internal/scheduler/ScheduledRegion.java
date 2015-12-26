@@ -422,7 +422,7 @@ public class ScheduledRegion extends AbstractRegion
 		for (@SuppressWarnings("null")@NonNull Region region : getRegions()) {
 			for (Node predicatedNode : region.getMatchableNodes()) {
 				if (!predicatedNode.isHead()) {
-					if (!predicatedNode.isLoaded() && !predicatedNode.isInternal()) {
+					if (!predicatedNode.isLoaded() && !predicatedNode.isConstant() && !predicatedNode.isInternal()) {
 						boolean isCast = true;
 						for (Edge outgoingEdge : predicatedNode.getOutgoingEdges()) {
 							if (!outgoingEdge.isCast()) {
@@ -757,7 +757,7 @@ public class ScheduledRegion extends AbstractRegion
 			//
 			for (NavigationEdge predicatedEdge : region.getPredicatedNavigationEdges()) {
 				Node predicatedNode = predicatedEdge.getTarget();
-				if (!predicatedNode.isLoaded()) {
+				if (!predicatedNode.isLoaded() && !predicatedNode.isConstant()) {
 					Iterable<Connection> passedConnections = predicatedNode.getIncomingPassedConnections();
 					Connection usedConnection = predicatedNode.getIncomingUsedConnection();
 					if ((usedConnection == null) && Iterables.isEmpty(passedConnections)) {
@@ -869,7 +869,7 @@ public class ScheduledRegion extends AbstractRegion
 			//
 			for (Map.Entry<Node, List<Node>> entry : predicated2availableSources.entrySet()) {
 				@SuppressWarnings("null")@NonNull Node calledNode = entry.getKey();
-				if (!calledNode.isLoaded()) {
+				if (!calledNode.isLoaded() && !calledNode.isConstant()) {
 					@SuppressWarnings("null")@NonNull List<Node> availableNodes = entry.getValue();
 					Connection guardConnection = getConnection(availableNodes, calledNode.getClassDatumAnalysis());
 					guardConnection.addUsedTargetNode(calledNode, false);
