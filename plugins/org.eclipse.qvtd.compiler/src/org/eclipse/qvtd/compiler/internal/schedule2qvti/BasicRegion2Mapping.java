@@ -128,8 +128,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		 */
 		private void analyzeExpressions(@NonNull Set<Node> multiAccessedNodes, @NonNull Set<Node> conditionalNodes) {
 			Set<Node> unconditionalNodes = new HashSet<Node>();
-			for (@SuppressWarnings("null")@NonNull Node node : region.getRealizedNodes()) {
-				analyzeIncomingPath(node, unconditionalNodes, conditionalNodes, false);
+			for (@SuppressWarnings("null")@NonNull Edge edge : region.getRealizedEdges()) {
+				analyzeIncomingPath(edge.getTarget(), unconditionalNodes, conditionalNodes, false);
 			}
 			conditionalNodes.removeAll(unconditionalNodes);
 			if (conditionalNodes.size() > 0) {
@@ -138,7 +138,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					System.out.println("  " + conditionalNode);
 				}
 			}
-			for (@SuppressWarnings("null")@NonNull Node node :unconditionalNodes) {
+			for (@SuppressWarnings("null")@NonNull Node node : unconditionalNodes) {
 				int accesses = 0;
 				for (Edge outgoingEdge : node.getOutgoingEdges()) {
 					if (outgoingEdge.isNavigation() || outgoingEdge.isComputation()) {
@@ -305,6 +305,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				}
 			}
 			return newVariables;
+		}
+
+		@Override
+		public String toString() {
+			return getClass().getSimpleName() + " " + region;
 		}
 
 		@Override
