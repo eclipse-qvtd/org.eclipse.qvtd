@@ -34,10 +34,10 @@ mappings {
 	map as::PropertyCallExp from NameExpCS {
 		when isPropCallExp;
 		
-		ownedCallExp := ownedNameExp.resolve;
-		referredProperty := if oclContainer() = null 
-							then resolve.lookup(Property, name)
-							else resolve.lookupFrom(Property, resolve.owningSource.type, name)
+		ownedCallExp := ownedNameExp?.resolve;
+		referredProperty := if oclContainer().oclIsKindOf(NameExpCS) 
+							then resolve.lookupFrom(Property, resolve.owningSource.type, name)
+							else resolve.lookup(Property, name)
 							endif;
 		type := resolve.oclAsType(as::PropertyCallExp).referredProperty.type;
 	}
@@ -45,11 +45,11 @@ mappings {
 	map as::OperationCallExp from NameExpCS {
 		when isOpCallExp;
 	
-		ownedCallExp := ownedNameExp.resolve;
+		ownedCallExp := ownedNameExp?.resolve;
 		ownedArguments := roundedBrackets.args.resolve;
-		referredOperation := if oclContainer() = null 
-							then resolve.lookup(Operation, name, resolve.oclAsType(as::OperationCallExp).ownedArguments) /*FIXME cast */
-							else resolve.lookupFrom(Operation, resolve.owningSource.type, name, resolve.oclAsType(as::OperationCallExp).ownedArguments) /*FIXME cast */
+		referredOperation := if oclContainer().oclIsKindOf(NameExpCS) 
+							then resolve.lookupFrom(Operation, resolve.owningSource.type, name, resolve.oclAsType(as::OperationCallExp).ownedArguments) /*FIXME cast */
+							else resolve.lookup(Operation, name, resolve.oclAsType(as::OperationCallExp).ownedArguments) /*FIXME cast */
 							endif;
 		type := resolve.oclAsType(as::OperationCallExp).referredOperation.type;	
 	}

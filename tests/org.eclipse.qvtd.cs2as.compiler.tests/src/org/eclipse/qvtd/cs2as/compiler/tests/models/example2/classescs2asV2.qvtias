@@ -433,16 +433,29 @@
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="Classes.ecore.oclas#p.classes.CallExp.ownedCallExp">
-            <value xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.CallExp" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
-                  referredProperty="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast">
+            <value xsi:type="pivot:IfExp" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.CallExp">
+              <ownedCondition xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                 <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"
                     referredProperty="ClassesCS.ecore.oclas#p.classescs.NameExpCS.ownedNameExp">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" isImplicit="true"
                       referredVariable="#qV..classescs2asV2_qvtp_qvtias.uPropertyCallExp_ownedCallExp.leftCS.guard.nameExpCS"/>
                 </ownedSource>
-              </ownedSource>
-              <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class Classes.ecore.oclas#T.classes.CallExp"/>
+                <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclVoid"/>
+              </ownedCondition>
+              <ownedElse xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.CallExp" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
+                <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
+                    referredProperty="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"
+                      referredProperty="ClassesCS.ecore.oclas#p.classescs.NameExpCS.ownedNameExp">
+                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" isImplicit="true"
+                        referredVariable="#qV..classescs2asV2_qvtp_qvtias.uPropertyCallExp_ownedCallExp.leftCS.guard.nameExpCS"/>
+                  </ownedSource>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
+                    referredType="pivot:Class Classes.ecore.oclas#T.classes.CallExp"/>
+              </ownedElse>
+              <ownedThen xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclVoid"/>
             </value>
             <slotExpression xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.PropertyCallExp" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
@@ -488,16 +501,34 @@
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="Classes.ecore.oclas#p.classes.PropertyCallExp.referredProperty">
             <value xsi:type="pivot:IfExp" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Property">
-              <ownedCondition xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedCondition xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclIsKindOf..ocl.OclType">
                 <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"
                     referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.oclContainer">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" isImplicit="true"
                       referredVariable="#qV..classescs2asV2_qvtp_qvtias.uPropertyCallExp_referredProperty.leftCS.guard.nameExpCS"/>
                 </ownedSource>
-                <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclVoid"/>
+                <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
+                    referredType="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"/>
               </ownedCondition>
               <ownedElse xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Property"
+                  referredOperation="classescs2asV2Lookup.ocl.oclas#o.classes.Visitable.lookupProperty..classescs.PathNameCS">
+                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.CallExp" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
+                      referredProperty="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast">
+                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" isImplicit="true"
+                        referredVariable="#qV..classescs2asV2_qvtp_qvtias.uPropertyCallExp_referredProperty.leftCS.guard.nameExpCS"/>
+                  </ownedSource>
+                  <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
+                      referredType="pivot:Class Classes.ecore.oclas#T.classes.CallExp"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PathNameCS"
+                    referredProperty="ClassesCS.ecore.oclas#p.classescs.NameExpCS.name">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" isImplicit="true"
+                      referredVariable="#qV..classescs2asV2_qvtp_qvtias.uPropertyCallExp_referredProperty.leftCS.guard.nameExpCS"/>
+                </ownedArguments>
+              </ownedElse>
+              <ownedThen xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Property"
                   referredOperation="classescs2asV2Lookup.ocl.oclas#o.classes.Visitable.lookupPropertyFrom..classes.Class..classescs.PathNameCS">
                 <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.CallExp" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                   <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
@@ -523,23 +554,6 @@
                     </ownedSource>
                   </ownedSource>
                 </ownedArguments>
-                <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PathNameCS"
-                    referredProperty="ClassesCS.ecore.oclas#p.classescs.NameExpCS.name">
-                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" isImplicit="true"
-                      referredVariable="#qV..classescs2asV2_qvtp_qvtias.uPropertyCallExp_referredProperty.leftCS.guard.nameExpCS"/>
-                </ownedArguments>
-              </ownedElse>
-              <ownedThen xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Property"
-                  referredOperation="classescs2asV2Lookup.ocl.oclas#o.classes.Visitable.lookupProperty..classescs.PathNameCS">
-                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.CallExp" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
-                      referredProperty="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast">
-                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" isImplicit="true"
-                        referredVariable="#qV..classescs2asV2_qvtp_qvtias.uPropertyCallExp_referredProperty.leftCS.guard.nameExpCS"/>
-                  </ownedSource>
-                  <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
-                      referredType="pivot:Class Classes.ecore.oclas#T.classes.CallExp"/>
-                </ownedSource>
                 <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PathNameCS"
                     referredProperty="ClassesCS.ecore.oclas#p.classescs.NameExpCS.name">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" isImplicit="true"
@@ -589,8 +603,10 @@
         </guardPattern>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="Classes.ecore.oclas#p.classes.TypedElement.type">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Class" referredProperty="Classes.ecore.oclas#p.classes.TypedElement.type">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Property" referredProperty="Classes.ecore.oclas#p.classes.PropertyCallExp.referredProperty">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Class" isSafe="true"
+                referredProperty="Classes.ecore.oclas#p.classes.TypedElement.type">
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Property"
+                  referredProperty="Classes.ecore.oclas#p.classes.PropertyCallExp.referredProperty">
                 <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.PropertyCallExp" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                   <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.CallExp" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
@@ -858,7 +874,8 @@
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="Classes.ecore.oclas#p.classes.TypedElement.type">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Class" referredProperty="Classes.ecore.oclas#p.classes.TypedElement.type">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Operation" referredProperty="Classes.ecore.oclas#p.classes.OperationCallExp.referredOperation">
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Operation"
+                  referredProperty="Classes.ecore.oclas#p.classes.OperationCallExp.referredOperation">
                 <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.OperationCallExp" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                   <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.CallExp" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
@@ -1524,13 +1541,26 @@
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS" referredType="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS"/>
             </ownedSource>
             <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2asV2_qvtp_qvtias.uOperation_ownedParameters">
-                <binding boundVariable="#qV..classescs2asV2_qvtp_qvtias.uOperation_ownedParameters.leftCS.guard.operationCS">
+              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2asV2_qvtp_qvtias.uOperation_ownedExpressions">
+                <binding boundVariable="#qV..classescs2asV2_qvtp_qvtias.uOperation_ownedExpressions.leftCS.guard.operationCS">
                   <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.20.operationCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
             <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.20.operationCS" name="operationCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS"/>
+          </mappingStatements>
+          <mappingStatements xsi:type="qvti:MappingLoop">
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.18" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
+              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS" referredType="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS"/>
+            </ownedSource>
+            <ownedBody xsi:type="qvti:MappingSequence">
+              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2asV2_qvtp_qvtias.uOperation_ownedParameters">
+                <binding boundVariable="#qV..classescs2asV2_qvtp_qvtias.uOperation_ownedParameters.leftCS.guard.operationCS">
+                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.21.operationCS"/>
+                </binding>
+              </mappingStatements>
+            </ownedBody>
+            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.21.operationCS" name="operationCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
             <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.20" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
@@ -1539,11 +1569,11 @@
             <ownedBody xsi:type="qvti:MappingSequence">
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2asV2_qvtp_qvtias.uPropertyCallExp_ownedCallExp">
                 <binding boundVariable="#qV..classescs2asV2_qvtp_qvtias.uPropertyCallExp_ownedCallExp.leftCS.guard.nameExpCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.21.nameExpCS"/>
+                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.22.nameExpCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.21.nameExpCS" name="nameExpCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"/>
+            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.22.nameExpCS" name="nameExpCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
             <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.20" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
@@ -1552,11 +1582,11 @@
             <ownedBody xsi:type="qvti:MappingSequence">
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2asV2_qvtp_qvtias.uOperationCallExp_referredOperation">
                 <binding boundVariable="#qV..classescs2asV2_qvtp_qvtias.uOperationCallExp_referredOperation.leftCS.guard.nameExpCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.22.nameExpCS"/>
+                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.23.nameExpCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.22.nameExpCS" name="nameExpCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"/>
+            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.23.nameExpCS" name="nameExpCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
             <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.18" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
@@ -1565,11 +1595,11 @@
             <ownedBody xsi:type="qvti:MappingSequence">
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2asV2_qvtp_qvtias.uOperation_type">
                 <binding boundVariable="#qV..classescs2asV2_qvtp_qvtias.uOperation_type.leftCS.guard.operationCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.23.operationCS"/>
+                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.24.operationCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.23.operationCS" name="operationCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS"/>
+            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.24.operationCS" name="operationCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
             <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.20" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
@@ -1578,11 +1608,11 @@
             <ownedBody xsi:type="qvti:MappingSequence">
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2asV2_qvtp_qvtias.uOperationCallExp_type">
                 <binding boundVariable="#qV..classescs2asV2_qvtp_qvtias.uOperationCallExp_type.leftCS.guard.nameExpCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.24.nameExpCS"/>
+                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.25.nameExpCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.24.nameExpCS" name="nameExpCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"/>
+            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.25.nameExpCS" name="nameExpCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
             <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.19" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
@@ -1591,11 +1621,11 @@
             <ownedBody xsi:type="qvti:MappingSequence">
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2asV2_qvtp_qvtias.uProperty_name">
                 <binding boundVariable="#qV..classescs2asV2_qvtp_qvtias.uProperty_name.leftCS.guard.propertyCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PropertyCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.25.propertyCS"/>
+                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PropertyCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.26.propertyCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.25.propertyCS" name="propertyCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PropertyCS"/>
+            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.26.propertyCS" name="propertyCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PropertyCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
             <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.20" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
@@ -1604,11 +1634,11 @@
             <ownedBody xsi:type="qvti:MappingSequence">
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2asV2_qvtp_qvtias.uPropertyCallExp_referredProperty">
                 <binding boundVariable="#qV..classescs2asV2_qvtp_qvtias.uPropertyCallExp_referredProperty.leftCS.guard.nameExpCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.26.nameExpCS"/>
+                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.27.nameExpCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.26.nameExpCS" name="nameExpCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"/>
+            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.27.nameExpCS" name="nameExpCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
             <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.19" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
@@ -1617,11 +1647,11 @@
             <ownedBody xsi:type="qvti:MappingSequence">
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2asV2_qvtp_qvtias.uProperty_type">
                 <binding boundVariable="#qV..classescs2asV2_qvtp_qvtias.uProperty_type.leftCS.guard.propertyCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PropertyCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.27.propertyCS"/>
+                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PropertyCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.28.propertyCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.27.propertyCS" name="propertyCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PropertyCS"/>
+            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.28.propertyCS" name="propertyCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PropertyCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
             <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.20" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
@@ -1630,24 +1660,11 @@
             <ownedBody xsi:type="qvti:MappingSequence">
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2asV2_qvtp_qvtias.uPropertyCallExp_type">
                 <binding boundVariable="#qV..classescs2asV2_qvtp_qvtias.uPropertyCallExp_type.leftCS.guard.nameExpCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.28.nameExpCS"/>
+                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.29.nameExpCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.28.nameExpCS" name="nameExpCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"/>
-          </mappingStatements>
-          <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.18" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
-              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS" referredType="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS"/>
-            </ownedSource>
-            <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2asV2_qvtp_qvtias.uOperation_ownedExpressions">
-                <binding boundVariable="#qV..classescs2asV2_qvtp_qvtias.uOperation_ownedExpressions.leftCS.guard.operationCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS" referredVariable="#i..classescs2asV2_qvtp_qvtias.__root__.0.29.operationCS"/>
-                </binding>
-              </mappingStatements>
-            </ownedBody>
-            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.29.operationCS" name="operationCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.OperationCS"/>
+            <ownedIterators xmi:id="i..classescs2asV2_qvtp_qvtias.__root__.0.29.nameExpCS" name="nameExpCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.NameExpCS"/>
           </mappingStatements>
         </mappingStatement>
       </rule>

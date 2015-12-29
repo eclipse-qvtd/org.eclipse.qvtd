@@ -296,7 +296,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
 		
 		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1V2");
 	}
 	
 	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler
@@ -482,7 +482,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.dispose();
 		myQVT = createQVT();
 
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model1V2");
 	}
 	
 	@Test

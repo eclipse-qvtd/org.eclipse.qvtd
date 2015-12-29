@@ -50,8 +50,7 @@ public interface OperationCallExp extends CallExp {
 	 * @return the value of the '<em>Referred Operation</em>' reference.
 	 * @see #setReferredOperation(Operation)
 	 * @see example2.classes.ClassesPackage#getOperationCallExp_ReferredOperation()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!OperationCallExp!referredOperation'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!OperationCallExp!referredOperation'"
 	 * @generated
 	 */
 	Operation getReferredOperation();

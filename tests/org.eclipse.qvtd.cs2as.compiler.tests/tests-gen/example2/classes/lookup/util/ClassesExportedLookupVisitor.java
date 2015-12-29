@@ -16,7 +16,7 @@ import example2.classes.util.AbstractClassesExportedLookupVisitor;
 
 public class ClassesExportedLookupVisitor extends AbstractClassesExportedLookupVisitor {
 
-	public ClassesExportedLookupVisitor(@NonNull LookupEnvironment context, Object importer) {
+	public ClassesExportedLookupVisitor(@NonNull LookupEnvironment context, @NonNull Object importer) {
 		super(context, importer);
 	}
 

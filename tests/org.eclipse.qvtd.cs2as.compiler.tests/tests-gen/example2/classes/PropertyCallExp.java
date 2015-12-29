@@ -32,8 +32,7 @@ public interface PropertyCallExp extends CallExp {
 	 * @return the value of the '<em>Referred Property</em>' reference.
 	 * @see #setReferredProperty(Property)
 	 * @see example2.classes.ClassesPackage#getPropertyCallExp_ReferredProperty()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!PropertyCallExp!referredProperty'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!PropertyCallExp!referredProperty'"
 	 * @generated
 	 */
 	Property getReferredProperty();

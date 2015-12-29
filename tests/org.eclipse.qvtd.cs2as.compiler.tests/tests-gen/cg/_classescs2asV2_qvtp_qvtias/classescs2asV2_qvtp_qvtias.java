@@ -55,6 +55,7 @@ import org.eclipse.ocl.pivot.library.collection.OrderedSetSubOrderedSetOperation
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.numeric.NumericMinusOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
@@ -770,11 +771,14 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
      *   isPropCallExp()
      *   )
      * {_0 : classes::PropertyCallExp[1];
-     * _1 : classes::CallExp[1];
+     * _1 : classes::CallExp[?];
      *  |
      * _0 := nameExpCS.ast.oclAsType(classes::PropertyCallExp)
      *   ;
-     * _1 := ownedNameExp.ast.oclAsType(classes::CallExp);
+     * _1 := if ownedNameExp = null
+     *   then null
+     *   else ownedNameExp.ast.oclAsType(classes::CallExp)
+     *   endif;
      * _0.ownedCallExp := _1;
      * }
      * 
@@ -793,19 +797,27 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
         }
-        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_CallExp_0 = idResolver.getClass(CLSSid_CallExp, null);
         final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_PropertyCallExp_0 = idResolver.getClass(CLSSid_PropertyCallExp, null);
+        final /*@Nullable*/ /*@Thrown*/ NameExpCS ownedNameExp = nameExpCS_1.getOwnedNameExp();
         // variable assignments
         final /*@Nullable*/ /*@Thrown*/ EObject ast = nameExpCS_1.getAst();
         final /*@NonNull*/ /*@Thrown*/ PropertyCallExp oclAsType = ClassUtil.nonNullState((PropertyCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_PropertyCallExp_0));
-        final /*@Nullable*/ /*@Thrown*/ NameExpCS ownedNameExp = nameExpCS_1.getOwnedNameExp();
-        if (ownedNameExp == null) {
-            throwNull(nameExpCS_1, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::ElementCS::ast\'");
+        final /*@Thrown*/ boolean eq_0 = ownedNameExp == null;
+        /*@Nullable*/ /*@Thrown*/ CallExp symbol_0;
+        if (eq_0) {
+            symbol_0 = null;
         }
-        final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = ownedNameExp.getAst();
-        final /*@NonNull*/ /*@Thrown*/ CallExp oclAsType_0 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_CallExp_0));
+        else {
+            final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_CallExp_0 = idResolver.getClass(CLSSid_CallExp, null);
+            if (ownedNameExp == null) {
+                throwNull(nameExpCS_1, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::ElementCS::ast\'");
+            }
+            final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = ownedNameExp.getAst();
+            final /*@NonNull*/ /*@Thrown*/ CallExp oclAsType_0 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_CallExp_0));
+            symbol_0 = oclAsType_0;
+        }
         // property assignments
-        oclAsType.setOwnedCallExp(oclAsType_0);
+        oclAsType.setOwnedCallExp(symbol_0);
         return true;
     }
     
@@ -827,12 +839,14 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
      *  |
      * _0 := nameExpCS.ast.oclAsType(classes::PropertyCallExp)
      *   ;
-     * _1 := if oclContainer() = null
-     *   then ast.oclAsType(classes::CallExp).lookupProperty(name)
-     *   else
+     * _1 := if
+     *     oclContainer()
+     *     .oclIsKindOf(classescs::NameExpCS)
+     *   then
      *     ast.oclAsType(classes::CallExp)
      *     .lookupPropertyFrom(
      *       ast.oclAsType(classes::CallExp).owningSource.type, name)
+     *   else ast.oclAsType(classes::CallExp).lookupProperty(name)
      *   endif;
      * _0.referredProperty := _1;
      * }
@@ -852,47 +866,54 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
         }
-        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_CallExp_1 = idResolver.getClass(CLSSid_CallExp, null);
+        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_CallExp_2 = idResolver.getClass(CLSSid_CallExp, null);
         final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_PropertyCallExp_0 = idResolver.getClass(CLSSid_PropertyCallExp, null);
+        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_NameExpCS_0 = idResolver.getClass(CLSSid_NameExpCS, null);
         final /*@Nullable*/ /*@Thrown*/ EObject ast = nameExpCS_2.getAst();
-        final /*@NonNull*/ /*@Thrown*/ CallExp self_2 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_1));
+        final /*@NonNull*/ /*@Thrown*/ CallExp self_2 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_2));
         // variable assignments
         final /*@NonNull*/ /*@Thrown*/ PropertyCallExp oclAsType = ClassUtil.nonNullState((PropertyCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_PropertyCallExp_0));
         final /*@Nullable*/ /*@NonInvalid*/ Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, nameExpCS_2);
-        final /*@NonInvalid*/ boolean eq_0 = oclContainer == null;
+        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_classescs_c_c_NameExpCS_0).booleanValue();
         /*@Nullable*/ /*@Thrown*/ example2.classes.Property symbol_8;
-        if (eq_0) {
+        if (oclIsKindOf) {
             final /*@Nullable*/ /*@Thrown*/ PathNameCS aPathNameCS = nameExpCS_2.getName();
+            final /*@NonNull*/ /*@Thrown*/ CallExp oclAsType_0 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_2));
+            final /*@Nullable*/ /*@Thrown*/ CallExp owningSource = oclAsType_0.getOwningSource();
+            if (owningSource == null) {
+                throwNull(nameExpCS_2, "Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::TypedElement::type\'");
+            }
+            final /*@Nullable*/ /*@Thrown*/ example2.classes.Class exporter = owningSource.getType();
             if (aPathNameCS == null) {
                 throwNull(nameExpCS_2, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
             }
             final /*@NonNull*/ /*@Thrown*/ List<PathElementCS> segments_0 = aPathNameCS.getPath();
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
             final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
-            final /*@Thrown*/ boolean eq_1 = size.equals(INT_1);
+            final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
             /*@Nullable*/ /*@Thrown*/ example2.classes.Property symbol_3;
-            if (eq_1) {
+            if (eq_0) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments_0);
                 if (aPathElementCS == null) {
                     throwNull(nameExpCS_2, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::NamedElementCS::name\'");
                 }
                 final /*@Nullable*/ /*@Thrown*/ String name = aPathElementCS.getName();
-                ClassesLookupResult<example2.classes.Property> _lookupResult = lookupSolver._lookupProperty(self_2, name);
-                example2.classes.Property _lookupProperty = null;
+                ClassesLookupResult<example2.classes.Property> _lookupResult = lookupSolver._lookupExportedProperty(exporter, self_2, name);
+                example2.classes.Property _lookupExportedProperty = null;
                 if (_lookupResult.size() == 1) {
-                    _lookupProperty = _lookupResult.getSingleResult();
+                    _lookupExportedProperty = _lookupResult.getSingleResult();
                 } else {
-                    handleLookupError(aPathElementCS,name);
+                    handleLookupError(self_2,self_2);
                 };
-                symbol_3 = _lookupProperty;
+                symbol_3 = _lookupExportedProperty;
             }
             else {
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
                 final /*@NonNull*/ /*@Thrown*/ OrderedSetValue qualifierSegments = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff);
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue size_1 = CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments);
-                final /*@Thrown*/ boolean eq_2 = size_1.equals(INT_1);
+                final /*@Thrown*/ boolean eq_1 = size_1.equals(INT_1);
                 /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_1;
-                if (eq_2) {
+                if (eq_1) {
                     final /*@Nullable*/ /*@Thrown*/ PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(qualifierSegments);
                     if (aPathElementCS_0 == null) {
                         throwNull(nameExpCS_2, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::NamedElementCS::name\'");
@@ -975,42 +996,36 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         }
         else {
             final /*@Nullable*/ /*@Thrown*/ PathNameCS aPathNameCS_0 = nameExpCS_2.getName();
-            final /*@NonNull*/ /*@Thrown*/ CallExp oclAsType_0 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_1));
-            final /*@Nullable*/ /*@Thrown*/ CallExp owningSource = oclAsType_0.getOwningSource();
-            if (owningSource == null) {
-                throwNull(nameExpCS_2, "Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::TypedElement::type\'");
-            }
-            final /*@Nullable*/ /*@Thrown*/ example2.classes.Class exporter = owningSource.getType();
             if (aPathNameCS_0 == null) {
                 throwNull(nameExpCS_2, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
             }
             final /*@NonNull*/ /*@Thrown*/ List<PathElementCS> segments_1 = aPathNameCS_0.getPath();
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_segments_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_1);
             final /*@NonNull*/ /*@Thrown*/ IntegerValue size_3 = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_1);
-            final /*@Thrown*/ boolean eq_3 = size_3.equals(INT_1);
+            final /*@Thrown*/ boolean eq_2 = size_3.equals(INT_1);
             /*@Nullable*/ /*@Thrown*/ example2.classes.Property symbol_7;
-            if (eq_3) {
+            if (eq_2) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS aPathElementCS_3 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments_1);
                 if (aPathElementCS_3 == null) {
                     throwNull(nameExpCS_2, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::NamedElementCS::name\'");
                 }
                 final /*@Nullable*/ /*@Thrown*/ String name_3 = aPathElementCS_3.getName();
-                ClassesLookupResult<example2.classes.Property> _lookupResult_3 = lookupSolver._lookupExportedProperty(exporter, self_2, name_3);
-                example2.classes.Property _lookupExportedProperty = null;
+                ClassesLookupResult<example2.classes.Property> _lookupResult_3 = lookupSolver._lookupProperty(self_2, name_3);
+                example2.classes.Property _lookupProperty = null;
                 if (_lookupResult_3.size() == 1) {
-                    _lookupExportedProperty = _lookupResult_3.getSingleResult();
+                    _lookupProperty = _lookupResult_3.getSingleResult();
                 } else {
-                    handleLookupError(self_2,self_2);
+                    handleLookupError(aPathElementCS_3,name_3);
                 };
-                symbol_7 = _lookupExportedProperty;
+                symbol_7 = _lookupProperty;
             }
             else {
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue diff_1 = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_3, INT_1);
                 final /*@NonNull*/ /*@Thrown*/ OrderedSetValue qualifierSegments_1 = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_1, INT_1, diff_1);
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue size_5 = CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments_1);
-                final /*@Thrown*/ boolean eq_4 = size_5.equals(INT_1);
+                final /*@Thrown*/ boolean eq_3 = size_5.equals(INT_1);
                 /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_5;
-                if (eq_4) {
+                if (eq_3) {
                     final /*@Nullable*/ /*@Thrown*/ PathElementCS aPathElementCS_4 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(qualifierSegments_1);
                     if (aPathElementCS_4 == null) {
                         throwNull(nameExpCS_2, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::NamedElementCS::name\'");
@@ -1115,7 +1130,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
      * _0 := nameExpCS.ast.oclAsType(classes::PropertyCallExp)
      *   ;
      * _1 := ast.oclAsType(classes::CallExp)
-     *   .oclAsType(classes::PropertyCallExp).referredProperty.type;
+     *   .oclAsType(classes::PropertyCallExp).referredProperty?.type;
      * _0.type := _1;
      * }
      * 
@@ -1141,10 +1156,26 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonNull*/ /*@Thrown*/ PropertyCallExp oclAsType = ClassUtil.nonNullState((PropertyCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_PropertyCallExp_0));
         final /*@NonNull*/ /*@Thrown*/ CallExp oclAsType_0 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_0));
         final /*@NonNull*/ /*@Thrown*/ PropertyCallExp oclAsType_1 = ClassUtil.nonNullState((PropertyCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclAsType_0, TYP_classes_c_c_PropertyCallExp_0));
-        final /*@NonNull*/ /*@Thrown*/ example2.classes.Property referredProperty = oclAsType_1.getReferredProperty();
-        final /*@Nullable*/ /*@Thrown*/ example2.classes.Class type = referredProperty.getType();
+        final /*@Nullable*/ /*@Thrown*/ example2.classes.Property referredProperty = oclAsType_1.getReferredProperty();
+        /*@Nullable*/ /*@Caught*/ Object CAUGHT_referredProperty;
+        try {
+            CAUGHT_referredProperty = referredProperty;
+        }
+        catch (Exception e) {
+            CAUGHT_referredProperty = ValueUtil.createInvalidValue(e);
+        }
+        final /*@NonNull*/ /*@NonInvalid*/ Object symbol_0 = CAUGHT_referredProperty == null;
+        /*@Nullable*/ /*@Thrown*/ example2.classes.Class safe_type_source;
+        if (symbol_0 == Boolean.TRUE) {
+            safe_type_source = null;
+        }
+        else {
+            assert referredProperty != null;
+            final /*@Nullable*/ /*@Thrown*/ example2.classes.Class type = referredProperty.getType();
+            safe_type_source = type;
+        }
         // property assignments
-        oclAsType.setType(type);
+        oclAsType.setType(safe_type_source);
         return true;
     }
     
@@ -1590,7 +1621,10 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonNull*/ /*@Thrown*/ OperationCallExp oclAsType = ClassUtil.nonNullState((OperationCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_OperationCallExp_0));
         final /*@NonNull*/ /*@Thrown*/ CallExp oclAsType_0 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_0));
         final /*@NonNull*/ /*@Thrown*/ OperationCallExp oclAsType_1 = ClassUtil.nonNullState((OperationCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclAsType_0, TYP_classes_c_c_OperationCallExp_0));
-        final /*@NonNull*/ /*@Thrown*/ Operation referredOperation = oclAsType_1.getReferredOperation();
+        final /*@Nullable*/ /*@Thrown*/ Operation referredOperation = oclAsType_1.getReferredOperation();
+        if (referredOperation == null) {
+            throwNull(nameExpCS_7, "Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::TypedElement::type\'");
+        }
         final /*@Nullable*/ /*@Thrown*/ example2.classes.Class type = referredOperation.getType();
         // property assignments
         oclAsType.setType(type);
@@ -2264,6 +2298,11 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
      * }}
      *   for operationCS : classescs::OperationCS in classescs::OperationCS.allInstances()
      *    {
+     * map uOperation_ownedExpressions {
+     * operationCS := operationCS;
+     * }}
+     *   for operationCS : classescs::OperationCS in classescs::OperationCS.allInstances()
+     *    {
      * map uOperation_ownedParameters {
      * operationCS := operationCS;
      * }}
@@ -2307,11 +2346,6 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
      * map uPropertyCallExp_type {
      * nameExpCS := nameExpCS;
      * }}
-     *   for operationCS : classescs::OperationCS in classescs::OperationCS.allInstances()
-     *    {
-     * map uOperation_ownedExpressions {
-     * operationCS := operationCS;
-     * }}
      */
     protected boolean MAP___root__() throws ReflectiveOperationException {
         // predicates
@@ -2329,7 +2363,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_13 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_NameExpCS, TYP_classescs_c_c_NameExpCS_8);
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_18 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_OperationCS, TYP_classescs_c_c_OperationCS_4);
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_2 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_3);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_24 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PropertyCS, TYP_classescs_c_c_PropertyCS_2);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_25 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PropertyCS, TYP_classescs_c_c_PropertyCS_2);
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1);
         for (RootCS rootCS_3 : ValueUtil.typedIterable(RootCS.class, allInstances_1)) {
             if (rootCS_3 != null) {
@@ -2391,7 +2425,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
                 MAP_uClass_ownedOperations(symbol_27);
             }
         }
-        for (PropertyCS propertyCS_5 : ValueUtil.typedIterable(PropertyCS.class, allInstances_24)) {
+        for (PropertyCS propertyCS_5 : ValueUtil.typedIterable(PropertyCS.class, allInstances_25)) {
             if (propertyCS_5 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ PropertyCS symbol_30 = (PropertyCS)propertyCS_5;
                 MAP_cPropertyCS_2_Property(symbol_30);
@@ -2454,61 +2488,61 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         for (OperationCS operationCS_11 : ValueUtil.typedIterable(OperationCS.class, allInstances_18)) {
             if (operationCS_11 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ OperationCS symbol_60 = (OperationCS)operationCS_11;
-                MAP_uOperation_ownedParameters(symbol_60);
-            }
-        }
-        for (NameExpCS nameExpCS_21 : ValueUtil.typedIterable(NameExpCS.class, allInstances_13)) {
-            if (nameExpCS_21 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ NameExpCS symbol_63 = (NameExpCS)nameExpCS_21;
-                MAP_uPropertyCallExp_ownedCallExp(symbol_63);
-            }
-        }
-        for (NameExpCS nameExpCS_22 : ValueUtil.typedIterable(NameExpCS.class, allInstances_13)) {
-            if (nameExpCS_22 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ NameExpCS symbol_66 = (NameExpCS)nameExpCS_22;
-                MAP_uOperationCallExp_referredOperation(symbol_66);
+                MAP_uOperation_ownedExpressions(symbol_60);
             }
         }
         for (OperationCS operationCS_12 : ValueUtil.typedIterable(OperationCS.class, allInstances_18)) {
             if (operationCS_12 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ OperationCS symbol_69 = (OperationCS)operationCS_12;
-                MAP_uOperation_type(symbol_69);
+                final /*@NonNull*/ /*@NonInvalid*/ OperationCS symbol_63 = (OperationCS)operationCS_12;
+                MAP_uOperation_ownedParameters(symbol_63);
             }
         }
-        for (NameExpCS nameExpCS_23 : ValueUtil.typedIterable(NameExpCS.class, allInstances_13)) {
-            if (nameExpCS_23 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ NameExpCS symbol_72 = (NameExpCS)nameExpCS_23;
-                MAP_uOperationCallExp_type(symbol_72);
+        for (NameExpCS nameExpCS_21 : ValueUtil.typedIterable(NameExpCS.class, allInstances_13)) {
+            if (nameExpCS_21 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ NameExpCS symbol_66 = (NameExpCS)nameExpCS_21;
+                MAP_uPropertyCallExp_ownedCallExp(symbol_66);
             }
         }
-        for (PropertyCS propertyCS_6 : ValueUtil.typedIterable(PropertyCS.class, allInstances_24)) {
-            if (propertyCS_6 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ PropertyCS symbol_75 = (PropertyCS)propertyCS_6;
-                MAP_uProperty_name(symbol_75);
-            }
-        }
-        for (NameExpCS nameExpCS_24 : ValueUtil.typedIterable(NameExpCS.class, allInstances_13)) {
-            if (nameExpCS_24 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ NameExpCS symbol_78 = (NameExpCS)nameExpCS_24;
-                MAP_uPropertyCallExp_referredProperty(symbol_78);
-            }
-        }
-        for (PropertyCS propertyCS_7 : ValueUtil.typedIterable(PropertyCS.class, allInstances_24)) {
-            if (propertyCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ PropertyCS symbol_81 = (PropertyCS)propertyCS_7;
-                MAP_uProperty_type(symbol_81);
-            }
-        }
-        for (NameExpCS nameExpCS_25 : ValueUtil.typedIterable(NameExpCS.class, allInstances_13)) {
-            if (nameExpCS_25 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ NameExpCS symbol_84 = (NameExpCS)nameExpCS_25;
-                MAP_uPropertyCallExp_type(symbol_84);
+        for (NameExpCS nameExpCS_22 : ValueUtil.typedIterable(NameExpCS.class, allInstances_13)) {
+            if (nameExpCS_22 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ NameExpCS symbol_69 = (NameExpCS)nameExpCS_22;
+                MAP_uOperationCallExp_referredOperation(symbol_69);
             }
         }
         for (OperationCS operationCS_13 : ValueUtil.typedIterable(OperationCS.class, allInstances_18)) {
             if (operationCS_13 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ OperationCS symbol_87 = (OperationCS)operationCS_13;
-                MAP_uOperation_ownedExpressions(symbol_87);
+                final /*@NonNull*/ /*@NonInvalid*/ OperationCS symbol_72 = (OperationCS)operationCS_13;
+                MAP_uOperation_type(symbol_72);
+            }
+        }
+        for (NameExpCS nameExpCS_23 : ValueUtil.typedIterable(NameExpCS.class, allInstances_13)) {
+            if (nameExpCS_23 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ NameExpCS symbol_75 = (NameExpCS)nameExpCS_23;
+                MAP_uOperationCallExp_type(symbol_75);
+            }
+        }
+        for (PropertyCS propertyCS_6 : ValueUtil.typedIterable(PropertyCS.class, allInstances_25)) {
+            if (propertyCS_6 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ PropertyCS symbol_78 = (PropertyCS)propertyCS_6;
+                MAP_uProperty_name(symbol_78);
+            }
+        }
+        for (NameExpCS nameExpCS_24 : ValueUtil.typedIterable(NameExpCS.class, allInstances_13)) {
+            if (nameExpCS_24 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ NameExpCS symbol_81 = (NameExpCS)nameExpCS_24;
+                MAP_uPropertyCallExp_referredProperty(symbol_81);
+            }
+        }
+        for (PropertyCS propertyCS_7 : ValueUtil.typedIterable(PropertyCS.class, allInstances_25)) {
+            if (propertyCS_7 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ PropertyCS symbol_84 = (PropertyCS)propertyCS_7;
+                MAP_uProperty_type(symbol_84);
+            }
+        }
+        for (NameExpCS nameExpCS_25 : ValueUtil.typedIterable(NameExpCS.class, allInstances_13)) {
+            if (nameExpCS_25 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ NameExpCS symbol_87 = (NameExpCS)nameExpCS_25;
+                MAP_uPropertyCallExp_type(symbol_87);
             }
         }
         return true;

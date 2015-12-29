@@ -40,7 +40,7 @@ public interface Operation extends NamedElement, TypedElement {
 	EList<Parameter> getOwnedParameters();
 
 	/**
-	 * Returns the value of the '<em><b>Owned Expressions</b></em>' reference list.
+	 * Returns the value of the '<em><b>Owned Expressions</b></em>' containment reference list.
 	 * The list contents are of type {@link example2.classes.CallExp}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -48,9 +48,10 @@ public interface Operation extends NamedElement, TypedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Expressions</em>' reference list.
+	 * @return the value of the '<em>Owned Expressions</em>' containment reference list.
 	 * @see example2.classes.ClassesPackage#getOperation_OwnedExpressions()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!Operation!ownedExpressions'"
+	 * @model containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!Operation!ownedExpressions'"
 	 * @generated
 	 */
 	EList<CallExp> getOwnedExpressions();

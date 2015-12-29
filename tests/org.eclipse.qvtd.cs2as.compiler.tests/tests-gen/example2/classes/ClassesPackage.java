@@ -559,7 +559,7 @@ public interface ClassesPackage extends EPackage {
 	int OPERATION__OWNED_PARAMETERS = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Owned Expressions</b></em>' reference list.
+	 * The feature id for the '<em><b>Owned Expressions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -958,10 +958,10 @@ public interface ClassesPackage extends EPackage {
 	EReference getOperation_OwnedParameters();
 
 	/**
-	 * Returns the meta object for the reference list '{@link example2.classes.Operation#getOwnedExpressions <em>Owned Expressions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link example2.classes.Operation#getOwnedExpressions <em>Owned Expressions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Owned Expressions</em>'.
+	 * @return the meta object for the containment reference list '<em>Owned Expressions</em>'.
 	 * @see example2.classes.Operation#getOwnedExpressions()
 	 * @see #getOperation()
 	 * @generated
@@ -1267,7 +1267,7 @@ public interface ClassesPackage extends EPackage {
 		EReference OPERATION__OWNED_PARAMETERS = eINSTANCE.getOperation_OwnedParameters();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Expressions</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Owned Expressions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

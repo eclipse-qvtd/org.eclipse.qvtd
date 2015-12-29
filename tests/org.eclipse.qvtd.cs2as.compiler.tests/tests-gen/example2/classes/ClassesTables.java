@@ -69,7 +69,6 @@ public class ClassesTables
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Root = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Root", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TypedElement = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("TypedElement", 0);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Class = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_Class);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Operation = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_Operation);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_OperationCallExp = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_OperationCallExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_PropertyCallExp = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_PropertyCallExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_TypedElement = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_TypedElement);

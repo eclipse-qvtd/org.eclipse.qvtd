@@ -54,7 +54,7 @@ public class AbstractClassesExportedLookupVisitor
     
     protected final @NonNull /*@Thrown*/ Object importer;
     
-    public AbstractClassesExportedLookupVisitor(@NonNull LookupEnvironment context, Object importer) {
+    public AbstractClassesExportedLookupVisitor(@NonNull LookupEnvironment context, @NonNull Object importer) {
         super(context);
         this.importer = importer;
     }

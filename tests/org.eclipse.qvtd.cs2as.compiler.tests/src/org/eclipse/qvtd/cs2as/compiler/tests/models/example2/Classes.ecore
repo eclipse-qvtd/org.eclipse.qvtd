@@ -42,18 +42,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameters" upperBound="-1"
         eType="#//Parameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpressions" upperBound="-1"
-        eType="#//CallExp"/>
+        eType="#//CallExp" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExp" eSuperTypes="#//CallExp">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
-        eType="#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" eType="#//Property"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallExp" eSuperTypes="#//CallExp">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedArguments" upperBound="-1"
         eType="#//Argument" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" lowerBound="1"
-        eType="#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" eType="#//Operation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Argument" eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Visitable" instanceClassName="example2.classes.util.Visitable"

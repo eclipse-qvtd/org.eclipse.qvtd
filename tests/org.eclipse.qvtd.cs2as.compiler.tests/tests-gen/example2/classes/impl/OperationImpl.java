@@ -65,7 +65,7 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	protected EList<Parameter> ownedParameters;
 
 	/**
-	 * The cached value of the '{@link #getOwnedExpressions() <em>Owned Expressions</em>}' reference list.
+	 * The cached value of the '{@link #getOwnedExpressions() <em>Owned Expressions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOwnedExpressions()
@@ -150,7 +150,7 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	 */
 	public EList<CallExp> getOwnedExpressions() {
 		if (ownedExpressions == null) {
-			ownedExpressions = new EObjectResolvingEList<CallExp>(CallExp.class, this, ClassesPackage.OPERATION__OWNED_EXPRESSIONS);
+			ownedExpressions = new EObjectContainmentEList<CallExp>(CallExp.class, this, ClassesPackage.OPERATION__OWNED_EXPRESSIONS);
 		}
 		return ownedExpressions;
 	}
@@ -165,6 +165,8 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 		switch (featureID) {
 			case ClassesPackage.OPERATION__OWNED_PARAMETERS:
 				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
+			case ClassesPackage.OPERATION__OWNED_EXPRESSIONS:
+				return ((InternalEList<?>)getOwnedExpressions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

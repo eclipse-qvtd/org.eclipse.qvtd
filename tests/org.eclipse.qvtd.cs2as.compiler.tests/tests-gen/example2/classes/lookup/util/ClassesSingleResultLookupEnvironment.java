@@ -28,9 +28,9 @@ public class ClassesSingleResultLookupEnvironment extends LookupEnvironmentImpl 
 	private @NonNull Executor executor;
 	private @NonNull String name;
 	private @NonNull EClass typeFilter;
-	private @NonNull ClassesLookupFilter expFilter;
+	private @Nullable ClassesLookupFilter expFilter;
 	
-	public ClassesSingleResultLookupEnvironment(@NonNull Executor executor, @NonNull EClass typeFilter, @NonNull String name, ClassesLookupFilter expFilter) {
+	public ClassesSingleResultLookupEnvironment(@NonNull Executor executor, @NonNull EClass typeFilter, @NonNull String name,  @Nullable ClassesLookupFilter expFilter) {
 		this.executor = executor;
 		this.name = name;
 		this.typeFilter = typeFilter;
@@ -63,7 +63,7 @@ public class ClassesSingleResultLookupEnvironment extends LookupEnvironmentImpl 
 		if (namedElement != null) {
 			if (name.equals(namedElement.getName())) {
 				if (typeFilter.isInstance(namedElement)) {
-					if (expFilter == null || expFilter.matches(namedElement)) {
+					if (expFilter == null || (expFilter != null /*null analysis bug? */ && expFilter.matches(namedElement))) {
 						EList<NamedElement> elements = getNamedElements();
 						if (!elements.contains(namedElement)) { 	// FIXME use a set ?
 							elements.add(namedElement);
