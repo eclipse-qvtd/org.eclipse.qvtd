@@ -2,48 +2,48 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree"
     xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree ../../../../../../../../../../org.eclipse.qvtd.compiler/model/ECoreContainmentTree.ecore">
   <eCoreContainemntTree:Node name="Element" subTypes="/1 /2 /3 /4 /5 /6 /7 /8 /9 /10 /11 /12 /13" superTypes="/14">
-    <element href="http://cs2as/tests/example2/classes/1.0#//Element"/>
+    <element href="Classes.ecore#//Element"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="NamedElement" subTypes="/6 /7 /8 /9 /10 /13" superTypes="/0 /14">
-    <element href="http://cs2as/tests/example2/classes/1.0#//NamedElement"/>
+    <element href="Classes.ecore#//NamedElement"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Namespace" subTypes="/6" superTypes="/0 /14">
-    <element href="http://cs2as/tests/example2/classes/1.0#//Namespace"/>
+    <element href="Classes.ecore#//Namespace"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="TypedElement" subTypes="/4 /8 /9 /11 /12" superTypes="/0 /14">
-    <element href="http://cs2as/tests/example2/classes/1.0#//TypedElement"/>
+    <element href="Classes.ecore#//TypedElement"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="CallExp" parent="/4" children="/4 /11 /12" subTypes="/11 /12" superTypes="/3 /0 /14">
-    <element href="http://cs2as/tests/example2/classes/1.0#//CallExp"/>
+    <element href="Classes.ecore#//CallExp"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Root" children="/6" superTypes="/0 /14">
-    <element href="http://cs2as/tests/example2/classes/1.0#//Root"/>
+    <element href="Classes.ecore#//Root"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Package" parent="/5 /6" children="/6 /7" superTypes="/1 /0 /14 /2">
-    <element href="http://cs2as/tests/example2/classes/1.0#//Package"/>
+    <element href="Classes.ecore#//Package"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Class" parent="/6" children="/8 /9" superTypes="/1 /0 /14">
-    <element href="http://cs2as/tests/example2/classes/1.0#//Class"/>
+    <element href="Classes.ecore#//Class"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Property" parent="/7" superTypes="/1 /0 /14 /3">
-    <element href="http://cs2as/tests/example2/classes/1.0#//Property"/>
+    <element href="Classes.ecore#//Property"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Operation" parent="/7" children="/10" superTypes="/1 /0 /14 /3">
-    <element href="http://cs2as/tests/example2/classes/1.0#//Operation"/>
+    <element href="Classes.ecore#//Operation"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Parameter" parent="/9" superTypes="/1 /0 /14">
-    <element href="http://cs2as/tests/example2/classes/1.0#//Parameter"/>
+    <element href="Classes.ecore#//Parameter"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="PropertyCallExp" parent="/4" superTypes="/4 /3 /0 /14">
-    <element href="http://cs2as/tests/example2/classes/1.0#//PropertyCallExp"/>
+    <element href="Classes.ecore#//PropertyCallExp"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="OperationCallExp" parent="/4" children="/13" superTypes="/4 /3 /0 /14">
-    <element href="http://cs2as/tests/example2/classes/1.0#//OperationCallExp"/>
+    <element href="Classes.ecore#//OperationCallExp"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Argument" parent="/12" superTypes="/1 /0 /14">
-    <element href="http://cs2as/tests/example2/classes/1.0#//Argument"/>
+    <element href="Classes.ecore#//Argument"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Visitable" subTypes="/0 /1 /2 /3 /4 /5 /6 /7 /8 /9 /10 /11 /12 /13">
-    <element href="http://cs2as/tests/example2/classes/1.0#//Visitable"/>
+    <element href="Classes.ecore#//Visitable"/>
   </eCoreContainemntTree:Node>
 </xmi:XMI>
