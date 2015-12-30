@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
@@ -41,6 +42,7 @@ import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.ClassRelationships;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.Configuration;
@@ -50,6 +52,7 @@ import org.eclipse.qvtd.compiler.internal.scheduler.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -193,6 +196,8 @@ public class MtcBroker {
 	
 	/** The config model. */
 	private PivotModel configModel;
+
+    private Configuration config;
 	
 	/** The ocl std lib model. */
 	protected PivotModel oclStdLibModel;
@@ -393,7 +398,7 @@ public class MtcBroker {
 		prepare();
 		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
 		assertNoResourceErrors("cModel", cModel.getResource());
-		uModel = qvtcToQvtu(cModel);
+		uModel = qvtcToQvtu(cModel, true);
 		assertNoResourceErrors("uModel", uModel.getResource());
 		mModel = qvtuToQvtm(uModel);
 		assertNoResourceErrors("mModel", mModel.getResource());
@@ -413,7 +418,7 @@ public class MtcBroker {
 		prepare();
 		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
 		assertNoResourceErrors("cModel", cModel.getResource());
-		uModel = qvtcToQvtu(cModel);
+		uModel = qvtcToQvtu(cModel, true);
 		assertNoResourceErrors("uModel", uModel.getResource());
 		mModel = qvtuToQvtm(uModel);
 		assertNoResourceErrors("mModel", mModel.getResource());
@@ -524,7 +529,7 @@ public class MtcBroker {
 		
 		prepare();
 		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
-		uModel = qvtcToQvtu(cModel);
+		uModel = qvtcToQvtu(cModel, true);
 	}
 	
 	public void executeQvtuToQvtm() throws QvtMtcExecutionException {
@@ -609,30 +614,47 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException If there is a problem loading the models or
 	 * 	executing the Flock script.
 	 */
-	private PivotModel qvtcToQvtu(EmfModel cModel) throws QvtMtcExecutionException {
-
-		PivotModel uModel = null;
-		uModel = createASModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, false, true, false, false);
-		if (cModel != null && uModel != null  ) {
-			FlockTask flock = null;
-			try {
-				flock = new FlockTask(java.net.URI.create(getResourceURI(QVTC_TO_QVTU_FLOCK)));
-			} catch (URISyntaxException e) {
-				throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
-			} finally {
-				if (flock != null) {
-					flock.setOriginalModel(cModel);
-					flock.setMigratedModel(uModel);
-					flock.models.add(configModel);
-					flock.models.add(oclStdLibModel);
-					flock.execute();
+	private PivotModel qvtcToQvtu(EmfModel cModel, boolean useEpsilon) throws QvtMtcExecutionException {
+		if (useEpsilon) {
+			PivotModel uModel = null;
+			uModel = createASModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, false, true, false, false);
+			if (cModel != null && uModel != null  ) {
+				FlockTask flock = null;
+				try {
+					flock = new FlockTask(java.net.URI.create(getResourceURI(QVTC_TO_QVTU_FLOCK)));
+				} catch (URISyntaxException e) {
+					throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
+				} finally {
+					if (flock != null) {
+						flock.setOriginalModel(cModel);
+						flock.setMigratedModel(uModel);
+						flock.models.add(configModel);
+						flock.models.add(oclStdLibModel);
+						flock.execute();
+					}
 				}
 			}
+			if (cModel != null) {
+				environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(cModel.getResource());
+			}
+			return uModel;
 		}
-		if (cModel != null) {
-			environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(cModel.getResource());
+		else {
+	        uModel = createASModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, false, true, false, false);
+	        for (EObject e : cModel.getResource().getContents()) {
+	            CoreModel newE = (CoreModel) EcoreUtil.copy(e);
+	            newE.setExternalURI(((CoreModel) e).getExternalURI().replace(".qvtc", ".qvtu.qvtc"));
+	            newE.setName(((CoreModel) e).getName().replace(".qvtc", ".qvtu"));
+	            uModel.getResource().getContents().add(newE);
+	        }
+	        QVTc2QVTu ctou = new QVTc2QVTu(environmentFactory, config);
+	        for (EObject e : uModel.getResource().getContents()) {
+	        	ctou.execute((CoreModel) e);
+	        }
+	        uModel.store();
+	        System.out.println("QVTcToQVTu Done!");
+			return uModel;
 		}
-		return uModel;
 	}
 	
 	/**
@@ -932,6 +954,13 @@ public class MtcBroker {
 	protected void loadConfigurationModel() throws QvtMtcExecutionException {
 		
 		configModel = createModel(configUri, CONFIG_MODEL_NAME, "", CONFIG_URI, true, false, true, false);
+        for (EObject eo : configModel.getResource().getContents()) {
+            if (eo instanceof Configuration) {
+                config = (Configuration) eo;
+                break;
+            }
+        }
+        assert config != null;
 	}
 	
 	/**
