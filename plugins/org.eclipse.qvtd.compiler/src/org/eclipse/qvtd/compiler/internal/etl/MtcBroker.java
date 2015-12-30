@@ -44,6 +44,7 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTu2QVTm;
+import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTm2QVTp;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.ClassRelationships;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.Configuration;
@@ -403,7 +404,7 @@ public class MtcBroker {
 		assertNoResourceErrors("uModel", uModel.getResource());
 		mModel = qvtuToQvtm(uModel, true);
 		assertNoResourceErrors("mModel", mModel.getResource());
-		pModel = qvtmToQvtp(mModel);
+		pModel = qvtmToQvtp(mModel, true);
 		assertNoResourceErrors("pModel", pModel.getResource());
 		sModel = qvtpToQvts(pModel);
 		if (nestedSchedule)
@@ -423,7 +424,7 @@ public class MtcBroker {
 		assertNoResourceErrors("uModel", uModel.getResource());
 		mModel = qvtuToQvtm(uModel, true);
 		assertNoResourceErrors("mModel", mModel.getResource());
-		pModel = qvtmToQvtp(mModel);
+		pModel = qvtmToQvtp(mModel, true);
 		assertNoResourceErrors("pModel", pModel.getResource());
 		try {
 			iResource = qvtp2qvti();
@@ -544,7 +545,7 @@ public class MtcBroker {
 		
 		prepare();
 		mModel = createASModel(qvtmUri, "QVTm", "QVT", QVTC_FULL_NS, true, false, false, false);
-		pModel = qvtmToQvtp(mModel);
+		pModel = qvtmToQvtp(mModel, true);
 	}
 	
 	public void executeQvtsToGraphML() throws QvtMtcExecutionException {
@@ -721,32 +722,42 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException If there is a problem loading the models or
 	 * 	executing the ETL script.
 	 */
-	private PivotModel qvtmToQvtp(@NonNull PivotModel mModel) throws QvtMtcExecutionException {
+    private PivotModel qvtmToQvtp(@NonNull PivotModel mModel, boolean useEpsilon) throws QvtMtcExecutionException {
+    	if (useEpsilon) {
+            PivotModel pModel = null;
+            pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, false, true, false, true);
+    		if (mModel != null && pModel != null  ) {
+    			mModel.setCachingEnabled(true);
+    			mModel.clearCache();
+    			mModel.setStoredOnDisposal(false);
+    			EtlTask etl = null;
+    			try {
+    				etl = new EtlTask(java.net.URI.create(getResourceURI(QVTM_TO_QVTP_ETL)));
+    			} catch (URISyntaxException e) {
+    				throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
+    			} finally {
+    				if (etl != null) {
+    					etl.models.add(mModel);
+    					etl.models.add(pModel);
+    					etl.models.add(configModel);
+    					etl.models.add(oclStdLibModel);
+    					etl.execute();
+    				}
+    			}
+    		}
+            environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(mModel.getResource());
+            return pModel;
+    	}
+    	else {
+	        PivotModel pModel = null;
+	        pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, false, true, false, true);
+	        QVTm2QVTp tx = new QVTm2QVTp(config, environmentFactory);
+	        tx.transform(mModel.getResource(), pModel.getResource());
+	        environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(mModel.getResource());
+	        return pModel;
+    	}
+    }
 
-		PivotModel pModel = null;
-		pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, false, true, false, true);
-		if (mModel != null && pModel != null  ) {
-			mModel.setCachingEnabled(true);
-			mModel.clearCache();
-			mModel.setStoredOnDisposal(false);
-			EtlTask etl = null;
-			try {
-				etl = new EtlTask(java.net.URI.create(getResourceURI(QVTM_TO_QVTP_ETL)));
-			} catch (URISyntaxException e) {
-				throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
-			} finally {
-				if (etl != null) {
-					etl.models.add(mModel);
-					etl.models.add(pModel);
-					etl.models.add(configModel);
-					etl.models.add(oclStdLibModel);
-					etl.execute();
-				}
-			}
-		}
-		environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(mModel.getResource());
-		return pModel;
-	}
 	
 	/**
 	 * QVTp to QVTs.
