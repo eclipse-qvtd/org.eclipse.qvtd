@@ -28,8 +28,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeAS2XMIidVi
 
 public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidVisitor
 {
-	public static final @NonNull String MAPPING_PREFIX = "m."; //$NON-NLS-1$
-	
 	protected QVTimperativeAS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
 	}

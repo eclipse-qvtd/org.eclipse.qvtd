@@ -26,6 +26,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractQVTcoreBaseAS2XMIidVisito
 
 public class QVTcoreBaseAS2XMIidVisitor extends AbstractQVTcoreBaseAS2XMIidVisitor
 {
+	public static final @NonNull String MAPPING_PREFIX = "m."; //$NON-NLS-1$
+	
 	public QVTcoreBaseAS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
 	}	
