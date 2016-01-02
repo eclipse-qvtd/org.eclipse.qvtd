@@ -79,10 +79,10 @@ public class UpperToLower extends AbstractTransformer
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Node2Node = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Node2Node);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Graph = TypeId.SET.getSpecializedId(CLSSid_Graph);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OclElement = TypeId.SET.getSpecializedId(CLSSid_OclElement);
-    public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Edge);
     public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet_1 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Node);
-    public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet_0 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Edge2Edge);
     public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet_2 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Node2Node);
+    public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet_0 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Edge2Edge);
+    public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Edge);
     
     /*
      * Property-source to Property-target unnavigable navigation caches
@@ -223,11 +223,11 @@ public class UpperToLower extends AbstractTransformer
      * { |}
      * where (_'-join-Edge2Edge-0' : OrderedSet(simplegraph2graph::Edge2Edge[*|1]);
      *  |)
-     * {sn1 : simplegraph::Node[?] = e1.source;
-     * g1 : simplegraph::Graph[1] = e1.graph;
+     * {g1 : simplegraph::Graph[1] = e1.graph;
+     * sn1 : simplegraph::Node[?] = e1.source;
      * tn1 : simplegraph::Node[?] = e1.target;
-     * sn2n : simplegraph2graph::Node2Node[?] = sn1.middle1;
      * g2g : simplegraph2graph::Graph2Graph[?] = g1.middle1;
+     * sn2n : simplegraph2graph::Node2Node[?] = sn1.middle1;
      * tn2n : simplegraph2graph::Node2Node[?] = tn1.middle1;
      *  |
      * _'-join-Edge2Edge-0' += e2e;
@@ -241,15 +241,15 @@ public class UpperToLower extends AbstractTransformer
     protected boolean MAP_edge2edge_LM(final @NonNull OrderedSetValue.Accumulator _m_join_m_Edge2Edge_m_0, final @NonNull /*@NonInvalid*/ Edge e1) throws ReflectiveOperationException {
         // predicates
         // variable assignments
-        final @Nullable /*@Thrown*/ Node source = e1.getSource();
         @SuppressWarnings("null")
         final @NonNull /*@Thrown*/ Graph graph = e1.getGraph();
+        final @Nullable /*@Thrown*/ Node source = e1.getSource();
         final @Nullable /*@Thrown*/ Node target = e1.getTarget();
+        final @Nullable /*@Thrown*/ Graph2Graph middle1 = ClassUtil.nonNullState (OPPOSITE_OF_Graph2Graph_graph1.get(graph));
         if (source == null) {
             throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/test/compiler/0.1/SimpleGraph2Graph\'::Node2Node::node1\'");
         }
-        final @Nullable /*@Thrown*/ Node2Node middle1 = ClassUtil.nonNullState (OPPOSITE_OF_Node2Node_node1.get(source));
-        final @Nullable /*@Thrown*/ Graph2Graph middle1_0 = ClassUtil.nonNullState (OPPOSITE_OF_Graph2Graph_graph1.get(graph));
+        final @Nullable /*@Thrown*/ Node2Node middle1_0 = ClassUtil.nonNullState (OPPOSITE_OF_Node2Node_node1.get(source));
         if (target == null) {
             throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/test/compiler/0.1/SimpleGraph2Graph\'::Node2Node::node1\'");
         }
@@ -260,8 +260,8 @@ public class UpperToLower extends AbstractTransformer
         models[2/*middle*/].add(e2e_0);
         // property assignments
         e2e_0.setEdge1(e1);
-        e2e_0.setOwner(middle1_0);
-        e2e_0.setSource(middle1);
+        e2e_0.setOwner(middle1);
+        e2e_0.setSource(middle1_0);
         e2e_0.setTarget(middle1_1);
         // connection assignments
         _m_join_m_Edge2Edge_m_0.add(e2e_0);
@@ -279,11 +279,11 @@ public class UpperToLower extends AbstractTransformer
      * { |}
      * where ( |)
      * {g2g : simplegraph2graph::Graph2Graph[?] = e2e.owner;
-     * tn2n : simplegraph2graph::Node2Node[?] = e2e.target;
      * sn2n : simplegraph2graph::Node2Node[?] = e2e.source;
+     * tn2n : simplegraph2graph::Node2Node[?] = e2e.target;
      * g2 : simplegraph::Graph[?] = g2g.graph2;
-     * tn2 : simplegraph::Node[?] = tn2n.node2;
      * sn2 : simplegraph::Node[?] = sn2n.node2;
+     * tn2 : simplegraph::Node[?] = tn2n.node2;
      *  |
      * e2e.edge2 := e2;
      * e2.graph := g2;
@@ -296,20 +296,20 @@ public class UpperToLower extends AbstractTransformer
         // predicates
         // variable assignments
         final @Nullable /*@Thrown*/ Graph2Graph owner = e2e.getOwner();
-        final @Nullable /*@Thrown*/ Node2Node target = e2e.getTarget();
         final @Nullable /*@Thrown*/ Node2Node source = e2e.getSource();
+        final @Nullable /*@Thrown*/ Node2Node target = e2e.getTarget();
         if (owner == null) {
             throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/test/compiler/0.1/SimpleGraph2Graph\'::Graph2Graph::graph2\'");
         }
         final @Nullable /*@Thrown*/ Graph graph2 = owner.getGraph2();
-        if (target == null) {
-            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/test/compiler/0.1/SimpleGraph2Graph\'::Node2Node::node2\'");
-        }
-        final @Nullable /*@Thrown*/ Node node2 = target.getNode2();
         if (source == null) {
             throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/test/compiler/0.1/SimpleGraph2Graph\'::Node2Node::node2\'");
         }
-        final @Nullable /*@Thrown*/ Node node2_0 = source.getNode2();
+        final @Nullable /*@Thrown*/ Node node2 = source.getNode2();
+        if (target == null) {
+            throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/test/compiler/0.1/SimpleGraph2Graph\'::Node2Node::node2\'");
+        }
+        final @Nullable /*@Thrown*/ Node node2_0 = target.getNode2();
         // creations
         final /*@Thrown*/ Edge e2 = SimplegraphFactory.eINSTANCE.createEdge();
         assert e2 != null;
@@ -317,8 +317,8 @@ public class UpperToLower extends AbstractTransformer
         // property assignments
         e2e.setEdge2(e2);
         e2.setGraph(graph2);
-        e2.setSource(node2_0);
-        e2.setTarget(node2);
+        e2.setSource(node2);
+        e2.setTarget(node2_0);
         return true;
     }
     

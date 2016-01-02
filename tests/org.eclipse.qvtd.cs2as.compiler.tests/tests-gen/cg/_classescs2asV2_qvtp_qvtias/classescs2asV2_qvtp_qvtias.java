@@ -1309,16 +1309,18 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
      *  |
      * _0 := nameExpCS.ast.oclAsType(classes::OperationCallExp)
      *   ;
-     * _1 := if oclContainer() = null
+     * _1 := if
+     *     oclContainer()
+     *     .oclIsKindOf(classescs::NameExpCS)
      *   then
      *     ast.oclAsType(classes::CallExp)
-     *     .lookupOperation(name,
+     *     .lookupOperationFrom(
+     *       ast.oclAsType(classes::CallExp).owningSource.type, name,
      *       ast.oclAsType(classes::CallExp)
      *       .oclAsType(classes::OperationCallExp).ownedArguments)
      *   else
      *     ast.oclAsType(classes::CallExp)
-     *     .lookupOperationFrom(
-     *       ast.oclAsType(classes::CallExp).owningSource.type, name,
+     *     .lookupOperation(name,
      *       ast.oclAsType(classes::CallExp)
      *       .oclAsType(classes::OperationCallExp).ownedArguments)
      *   endif;
@@ -1334,50 +1336,56 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         if (ne != ValueUtil.TRUE_VALUE) {
             return false;
         }
-        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_CallExp_2 = idResolver.getClass(CLSSid_CallExp, null);
+        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_CallExp_3 = idResolver.getClass(CLSSid_CallExp, null);
         final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_OperationCallExp_0 = idResolver.getClass(CLSSid_OperationCallExp, null);
+        final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_NameExpCS_0 = idResolver.getClass(CLSSid_NameExpCS, null);
         final /*@Nullable*/ /*@Thrown*/ EObject ast = nameExpCS_6.getAst();
-        final /*@NonNull*/ /*@Thrown*/ CallExp self_2 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_2));
+        final /*@NonNull*/ /*@Thrown*/ CallExp self_2 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_3));
         // variable assignments
         final /*@NonNull*/ /*@Thrown*/ OperationCallExp oclAsType = ClassUtil.nonNullState((OperationCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_OperationCallExp_0));
         final /*@Nullable*/ /*@NonInvalid*/ Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, nameExpCS_6);
-        final /*@NonInvalid*/ boolean eq = oclContainer == null;
+        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_classescs_c_c_NameExpCS_0).booleanValue();
         /*@Nullable*/ /*@Thrown*/ Operation symbol_8;
-        if (eq) {
-            final /*@NonNull*/ /*@Thrown*/ CallExp oclAsType_0 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_2));
+        if (oclIsKindOf) {
+            final /*@NonNull*/ /*@Thrown*/ CallExp oclAsType_0 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_3));
             final /*@NonNull*/ /*@Thrown*/ OperationCallExp oclAsType_1 = ClassUtil.nonNullState((OperationCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclAsType_0, TYP_classes_c_c_OperationCallExp_0));
             final /*@NonNull*/ /*@Thrown*/ List<Argument> args = oclAsType_1.getOwnedArguments();
             final /*@Nullable*/ /*@Thrown*/ PathNameCS aPathNameCS = nameExpCS_6.getName();
+            final /*@Nullable*/ /*@Thrown*/ CallExp owningSource = oclAsType_0.getOwningSource();
+            if (owningSource == null) {
+                throwNull(nameExpCS_6, "Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::TypedElement::type\'");
+            }
+            final /*@Nullable*/ /*@Thrown*/ example2.classes.Class exporter = owningSource.getType();
             if (aPathNameCS == null) {
                 throwNull(nameExpCS_6, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
             }
             final /*@NonNull*/ /*@Thrown*/ List<PathElementCS> segments_0 = aPathNameCS.getPath();
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
             final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
-            final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
+            final /*@Thrown*/ boolean eq = size.equals(INT_1);
             /*@Nullable*/ /*@Thrown*/ Operation symbol_3;
-            if (eq_0) {
+            if (eq) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments_0);
                 if (aPathElementCS == null) {
                     throwNull(nameExpCS_6, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::NamedElementCS::name\'");
                 }
                 final /*@Nullable*/ /*@Thrown*/ String name = aPathElementCS.getName();
-                ClassesLookupResult<Operation> _lookupResult = lookupSolver._lookupOperation(self_2, name, (List<Argument>)args);
-                Operation _lookupOperation = null;
+                ClassesLookupResult<Operation> _lookupResult = lookupSolver._lookupExportedOperation(exporter, self_2, name, (List<Argument>)args);
+                Operation _lookupExportedOperation = null;
                 if (_lookupResult.size() == 1) {
-                    _lookupOperation = _lookupResult.getSingleResult();
+                    _lookupExportedOperation = _lookupResult.getSingleResult();
                 } else {
-                    handleLookupError(aPathElementCS,name);
+                    handleLookupError(self_2,self_2);
                 };
-                symbol_3 = _lookupOperation;
+                symbol_3 = _lookupExportedOperation;
             }
             else {
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
                 final /*@NonNull*/ /*@Thrown*/ OrderedSetValue qualifierSegments = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff);
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue size_1 = CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments);
-                final /*@Thrown*/ boolean eq_1 = size_1.equals(INT_1);
+                final /*@Thrown*/ boolean eq_0 = size_1.equals(INT_1);
                 /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_1;
-                if (eq_1) {
+                if (eq_0) {
                     final /*@Nullable*/ /*@Thrown*/ PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(qualifierSegments);
                     if (aPathElementCS_0 == null) {
                         throwNull(nameExpCS_6, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::NamedElementCS::name\'");
@@ -1459,45 +1467,40 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             symbol_8 = symbol_3;
         }
         else {
-            final /*@NonNull*/ /*@Thrown*/ CallExp oclAsType_2 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_2));
-            final /*@NonNull*/ /*@Thrown*/ OperationCallExp oclAsType_3 = ClassUtil.nonNullState((OperationCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclAsType_2, TYP_classes_c_c_OperationCallExp_0));
-            final /*@NonNull*/ /*@Thrown*/ List<Argument> args_0 = oclAsType_3.getOwnedArguments();
+            final /*@NonNull*/ /*@Thrown*/ CallExp oclAsType_3 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_3));
+            final /*@NonNull*/ /*@Thrown*/ OperationCallExp oclAsType_4 = ClassUtil.nonNullState((OperationCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclAsType_3, TYP_classes_c_c_OperationCallExp_0));
+            final /*@NonNull*/ /*@Thrown*/ List<Argument> args_0 = oclAsType_4.getOwnedArguments();
             final /*@Nullable*/ /*@Thrown*/ PathNameCS aPathNameCS_0 = nameExpCS_6.getName();
-            final /*@Nullable*/ /*@Thrown*/ CallExp owningSource = oclAsType_2.getOwningSource();
-            if (owningSource == null) {
-                throwNull(nameExpCS_6, "Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::TypedElement::type\'");
-            }
-            final /*@Nullable*/ /*@Thrown*/ example2.classes.Class exporter = owningSource.getType();
             if (aPathNameCS_0 == null) {
                 throwNull(nameExpCS_6, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
             }
             final /*@NonNull*/ /*@Thrown*/ List<PathElementCS> segments_1 = aPathNameCS_0.getPath();
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_segments_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_1);
             final /*@NonNull*/ /*@Thrown*/ IntegerValue size_3 = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_1);
-            final /*@Thrown*/ boolean eq_2 = size_3.equals(INT_1);
+            final /*@Thrown*/ boolean eq_1 = size_3.equals(INT_1);
             /*@Nullable*/ /*@Thrown*/ Operation symbol_7;
-            if (eq_2) {
+            if (eq_1) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS aPathElementCS_3 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments_1);
                 if (aPathElementCS_3 == null) {
                     throwNull(nameExpCS_6, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::NamedElementCS::name\'");
                 }
                 final /*@Nullable*/ /*@Thrown*/ String name_3 = aPathElementCS_3.getName();
-                ClassesLookupResult<Operation> _lookupResult_3 = lookupSolver._lookupExportedOperation(exporter, self_2, name_3, (List<Argument>)args_0);
-                Operation _lookupExportedOperation = null;
+                ClassesLookupResult<Operation> _lookupResult_3 = lookupSolver._lookupOperation(self_2, name_3, (List<Argument>)args_0);
+                Operation _lookupOperation = null;
                 if (_lookupResult_3.size() == 1) {
-                    _lookupExportedOperation = _lookupResult_3.getSingleResult();
+                    _lookupOperation = _lookupResult_3.getSingleResult();
                 } else {
-                    handleLookupError(self_2,self_2);
+                    handleLookupError(aPathElementCS_3,name_3);
                 };
-                symbol_7 = _lookupExportedOperation;
+                symbol_7 = _lookupOperation;
             }
             else {
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue diff_1 = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_3, INT_1);
                 final /*@NonNull*/ /*@Thrown*/ OrderedSetValue qualifierSegments_1 = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_1, INT_1, diff_1);
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue size_5 = CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments_1);
-                final /*@Thrown*/ boolean eq_3 = size_5.equals(INT_1);
+                final /*@Thrown*/ boolean eq_2 = size_5.equals(INT_1);
                 /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_5;
-                if (eq_3) {
+                if (eq_2) {
                     final /*@Nullable*/ /*@Thrown*/ PathElementCS aPathElementCS_4 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(qualifierSegments_1);
                     if (aPathElementCS_4 == null) {
                         throwNull(nameExpCS_6, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::NamedElementCS::name\'");
@@ -1601,7 +1604,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
      * _0 := nameExpCS.ast.oclAsType(classes::OperationCallExp)
      *   ;
      * _1 := ast.oclAsType(classes::CallExp)
-     *   .oclAsType(classes::OperationCallExp).referredOperation.type;
+     *   .oclAsType(classes::OperationCallExp).referredOperation?.type;
      * _0.type := _1;
      * }
      * 
@@ -1622,12 +1625,25 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonNull*/ /*@Thrown*/ CallExp oclAsType_0 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_0));
         final /*@NonNull*/ /*@Thrown*/ OperationCallExp oclAsType_1 = ClassUtil.nonNullState((OperationCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclAsType_0, TYP_classes_c_c_OperationCallExp_0));
         final /*@Nullable*/ /*@Thrown*/ Operation referredOperation = oclAsType_1.getReferredOperation();
-        if (referredOperation == null) {
-            throwNull(nameExpCS_7, "Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::TypedElement::type\'");
+        /*@Nullable*/ /*@Caught*/ Object CAUGHT_referredOperation;
+        try {
+            CAUGHT_referredOperation = referredOperation;
         }
-        final /*@Nullable*/ /*@Thrown*/ example2.classes.Class type = referredOperation.getType();
+        catch (Exception e) {
+            CAUGHT_referredOperation = ValueUtil.createInvalidValue(e);
+        }
+        final /*@NonNull*/ /*@NonInvalid*/ Object symbol_0 = CAUGHT_referredOperation == null;
+        /*@Nullable*/ /*@Thrown*/ example2.classes.Class safe_type_source;
+        if (symbol_0 == Boolean.TRUE) {
+            safe_type_source = null;
+        }
+        else {
+            assert referredOperation != null;
+            final /*@Nullable*/ /*@Thrown*/ example2.classes.Class type = referredOperation.getType();
+            safe_type_source = type;
+        }
         // property assignments
-        oclAsType.setType(type);
+        oclAsType.setType(safe_type_source);
         return true;
     }
     
