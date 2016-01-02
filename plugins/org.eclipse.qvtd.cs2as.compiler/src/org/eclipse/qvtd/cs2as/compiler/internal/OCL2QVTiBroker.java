@@ -119,7 +119,7 @@ public class OCL2QVTiBroker extends MtcBroker {
 										: runOCL2QVTp_MiddleModel(oclASUri, URI.createURI(partitionUri), tracesASUri);
 		prepare();
 		try {
-			iResource = qvtp2qvti();
+			iResource = qvtp2qvti(true);
 		} catch (QvtMtcExecutionException e) {
 			throw e;
 		} catch (IOException e) {

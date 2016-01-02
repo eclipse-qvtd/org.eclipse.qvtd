@@ -60,7 +60,7 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 {
     /** The name of the root mapping */
 	public static final @NonNull String ROOT_MAPPING_NAME = "__root__";
-	public static final @NonNull String MIDDLE_DOMAIN_NAME = "__middle__";
+	public static final @NonNull String MIDDLE_DOMAIN_NAME = "middle";
 
 	public static final class MappingCallBindingComparator implements Comparator<MappingCallBinding>
 	{
