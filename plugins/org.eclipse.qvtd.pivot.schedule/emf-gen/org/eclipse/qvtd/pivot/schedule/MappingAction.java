@@ -12,7 +12,7 @@
  */
 package org.eclipse.qvtd.pivot.schedule;
 
-import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,12 +40,12 @@ public interface MappingAction extends AbstractAction {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Mapping</em>' reference.
-	 * @see #setMapping(Mapping)
+	 * @see #setMapping(AbstractMapping)
 	 * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getMappingAction_Mapping()
 	 * @model
 	 * @generated
 	 */
-	Mapping getMapping();
+	AbstractMapping getMapping();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.schedule.MappingAction#getMapping <em>Mapping</em>}' reference.
@@ -55,6 +55,6 @@ public interface MappingAction extends AbstractAction {
 	 * @see #getMapping()
 	 * @generated
 	 */
-	void setMapping(Mapping value);
+	void setMapping(AbstractMapping value);
 
 } // MappingAction

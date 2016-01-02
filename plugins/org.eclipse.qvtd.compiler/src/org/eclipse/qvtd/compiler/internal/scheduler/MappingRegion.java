@@ -33,12 +33,12 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
@@ -76,7 +76,7 @@ public class MappingRegion extends AbstractMappingRegion implements Comparable<M
 		super(superRegion);
 		this.mappingAction = mappingAction;
 		this.naturalOrder = naturalOrder;
-		Mapping mapping = mappingAction.getMapping();
+		AbstractMapping mapping = mappingAction.getMapping();
 		assert mapping != null;
 		
 		List<GuardPattern> guardPatterns = new ArrayList<GuardPattern>();
@@ -284,7 +284,7 @@ public class MappingRegion extends AbstractMappingRegion implements Comparable<M
 	@SuppressWarnings("null")
 	@Override
 	public @NonNull String getName() {
-		Mapping mapping = mappingAction.getMapping();
+		AbstractMapping mapping = mappingAction.getMapping();
 		return mapping.getName();
 	}	
 	

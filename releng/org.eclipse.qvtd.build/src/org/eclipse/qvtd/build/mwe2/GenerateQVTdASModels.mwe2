@@ -104,4 +104,14 @@ Workflow {
     	modelPackageName = "org.eclipse.qvtd.pivot.qvtrelation"
 //    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtrelation.util"
     }
+//    component = @SubGenerateASModel { resourceSet = resourceSet
+//    	projectName = "org.eclipse.qvtd.pivot.schedule"
+//    	modelName = "Schedule"
+//    	projectPrefix = "Schedule"
+//    	superProjectName = "org.eclipse.qvtd.pivot.qvtcorebase"
+//    	superProjectPrefix = "QVTcoreBase"
+//    	modelPackageName = "org.eclipse.qvtd.pivot.schedule"
+//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtrelation.util"
+//    }
+	component = @GenerateQVTdScheduleModels {}
 }
