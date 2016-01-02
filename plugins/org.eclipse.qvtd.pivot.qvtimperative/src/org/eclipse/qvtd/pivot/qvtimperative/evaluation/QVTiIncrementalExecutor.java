@@ -205,16 +205,21 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		if (mode == Mode.LAZY) {
 			Mapping asMapping = QVTimperativeUtil.getContainingMapping(propertyAssignment);
 			assert asMapping != null;
-			if (!transformationAnalysis.isHazardousWrite(asMapping, propertyAssignment)) {
-				return;
+			if (transformationAnalysis.isHazardousWrite(asMapping, propertyAssignment)) {
+				Property targetProperty = propertyAssignment.getTargetProperty();
+				assert targetProperty != null;
+				EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
+				objectManager.assigned((EObject)sourceObject, eFeature, ecoreValue);
 			}
 		}
-		Property targetProperty = propertyAssignment.getTargetProperty();
-		assert targetProperty != null;
-		EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
-		InterpretedInvocation currentInvocation2 = currentInvocation;
-		assert currentInvocation2 != null;
-		objectManager.assigned(currentInvocation2, (EObject)sourceObject, eFeature, ecoreValue);
+		else {
+			Property targetProperty = propertyAssignment.getTargetProperty();
+			assert targetProperty != null;
+			EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
+			InterpretedInvocation currentInvocation2 = currentInvocation;
+			assert currentInvocation2 != null;
+			objectManager.assigned(currentInvocation2, (EObject)sourceObject, eFeature, ecoreValue);
+		}
 	}
 	
 	@Override
