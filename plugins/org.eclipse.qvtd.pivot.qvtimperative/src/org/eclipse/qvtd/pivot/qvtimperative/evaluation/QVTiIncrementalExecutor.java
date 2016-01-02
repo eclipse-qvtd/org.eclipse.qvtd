@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.evaluation.tx.InvocationFailedException;
 import org.eclipse.ocl.pivot.evaluation.tx.InvocationManager;
 import org.eclipse.ocl.pivot.evaluation.tx.ObjectManager;
+import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.evaluation.tx.LazyInvocationManager;
 import org.eclipse.ocl.pivot.internal.evaluation.tx.LazyObjectManager;
@@ -52,6 +53,13 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
  */
 public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 {
+	/**
+	 * The run-time API version.
+	 * 
+	 * @noreference this is solely for development usage.
+	 */
+	public static int RUN_TIME_EVALUATOR_API_VERSION = Transformer.RUN_TIME_EVALUATOR_API_VERSION_1_1_0_1;
+
 	protected static abstract class InterpretedInvocation extends AbstractInvocation
 	{
 		protected final @NonNull List<Object> theseValues;
