@@ -10,30 +10,19 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -48,66 +37,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  */
 public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTimperativeVisitor<DomainUsage>
 {
-	/**
-	 * The properties of the input models that are assigned by mappings and which cannot therefore
-	 * be trusted to be loaded from the input models.
-	 */
-	private final @NonNull Set<Property> dirtyProperties = new HashSet<Property>();
-	private final @NonNull Set<EReference> dirtyEReferences = new HashSet<EReference>();
-
 	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
 		super(environmentFactory);
-	}
-
-	private void analyzePropertyAssignments(@NonNull Transformation transformation) {
-		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
-			EObject eObject = tit.next();
-			if (eObject instanceof PropertyAssignment) {
-				PropertyAssignment propertyAssignment = (PropertyAssignment)eObject;
-				DomainUsage domainUsage = getUsage(propertyAssignment.getSlotExpression());
-				if ((domainUsage == null) || !domainUsage.isEnforceable()) {
-					Property targetProperty = propertyAssignment.getTargetProperty();
-//					System.out.println("Dirty " + targetProperty + " for " + eObject);
-					dirtyProperties.add(targetProperty);
-					EObject eProperty = targetProperty.getESObject();
-					if (eProperty instanceof EReference) {
-						dirtyEReferences.add((EReference) eProperty);
-					}
-				}
-			}
-		}
-		for (Property dirtyProperty : dirtyProperties) {
-			if (!dirtyProperty.isIsTransient()) {
-				System.out.println("Dirty " + dirtyProperty + " is not transient");
-			}
-			if (dirtyProperty.isIsReadOnly()) {
-				System.out.println("Dirty " + dirtyProperty + " is readonly");
-			}
-			if (dirtyProperty.isIsRequired()) {
-				System.out.println("Dirty " + dirtyProperty + " is required");
-			}
-		}
-	}
-
-	@Override
-	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation) {
-		Map<Element, DomainUsage> analysis = super.analyzeTransformation(transformation);
-		analyzePropertyAssignments(transformation);
-		return analysis;
-	}
-
-	/**
-	 * Return true if a mapping may assign this property in an input model.
-	 */
-	public boolean isDirty(@NonNull EReference eReference) {
-		return dirtyEReferences.contains(eReference);
-	}
-
-	/**
-	 * Return true if a mapping may assign this property in an input model.
-	 */
-	public boolean isDirty(@NonNull Property property) {
-		return dirtyProperties.contains(property);
 	}
 
 	@Override
@@ -134,11 +65,13 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 
 	@Override
 	public @Nullable DomainUsage visitMapping(@NonNull Mapping object) {
+		DomainUsage usage = getNoneUsage();
+		setUsage(object, usage);
 		visitRule(object);
 		visit(object.getGuardPattern());
 		visit(object.getBottomPattern());
 		visit(object.getMappingStatement());
-		return getNoneUsage();
+		return usage;
 	}
 
 	@Override

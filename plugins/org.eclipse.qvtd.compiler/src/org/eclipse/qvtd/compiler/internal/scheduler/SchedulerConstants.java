@@ -45,7 +45,6 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
@@ -88,7 +87,7 @@ public abstract class SchedulerConstants
 	 * The DependencyGraph to be analyzed
 	 */
 	private final @NonNull Schedule dependencyGraph;
-	private final @NonNull QVTimperativeDomainUsageAnalysis domainAnalysis;
+	private final @NonNull RootDomainUsageAnalysis domainAnalysis;
 	private final @NonNull QVTp2QVTg qvtp2qvtg;
 	@SuppressWarnings("unused")
 	private final @NonNull DomainUsage inputUsage;
@@ -134,7 +133,7 @@ public abstract class SchedulerConstants
 	 */
 	private final @NonNull Map<String, Property> name2argumentProperty = new HashMap<String, Property>();
 
-	public SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule dependencyGraph, @NonNull QVTimperativeDomainUsageAnalysis domainAnalysis, @NonNull QVTp2QVTg qvtp2qvtg) {
+	public SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule dependencyGraph, @NonNull RootDomainUsageAnalysis domainAnalysis, @NonNull QVTp2QVTg qvtp2qvtg) {
 		this.environmentFactory = environmentFactory;
 		this.dependencyGraph = dependencyGraph;
 		this.domainAnalysis = domainAnalysis;

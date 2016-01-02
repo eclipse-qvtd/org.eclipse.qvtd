@@ -48,12 +48,14 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 
 	@Override
 	public @Nullable DomainUsage visitMapping(@NonNull Mapping object) {
+		DomainUsage usage = getRootAnalysis().getNoneUsage();
+		setUsage(object, usage);
 		visitRule(object);
 		visit(object.getGuardPattern());
 		visit(object.getBottomPattern());
 		for (Mapping local : object.getLocal()) {
 			visit(local);
 		}
-		return getRootAnalysis().getNoneUsage();
+		return usage;
 	}
 }

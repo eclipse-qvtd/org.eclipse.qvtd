@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
@@ -38,8 +41,10 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
 
-public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
+public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis implements QVTcoreBaseVisitor<DomainUsage>
 {
 	protected abstract class AbstractDomainUsage implements DomainUsage.Internal
 	{
@@ -116,7 +121,8 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 					if (!first) {
 						s.append("|");
 					}
-					s.append(bit2typedModel.get(i).getName());
+					String name = bit2typedModel.get(i).getName();
+					s.append(name != null ? name : "$middle$");
 					first = false;
 				}
 			}
@@ -291,6 +297,13 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 	private /*@LazyNonNull*/ OperationId oclElementOclContentsId;
 	private /*@LazyNonNull*/ Property oclElementOclContainerProperty;
 	private /*@LazyNonNull*/ Property oclElementOclContentsProperty;
+	/**
+	 * The properties of the input models that are assigned by mappings and which cannot therefore
+	 * be trusted to be loaded from the input models.
+	 */
+	private final @NonNull Set<Property> dirtyProperties = new HashSet<Property>();
+	private final @NonNull Set<EReference> dirtyEReferences = new HashSet<EReference>();
+
 
 	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
 		super(environmentFactory);
@@ -317,6 +330,36 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 			setUsage(object, usage);
 		}
 		return analysis;
+	}
+
+	protected void analyzePropertyAssignments(@NonNull Transformation transformation) {
+		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof PropertyAssignment) {
+				PropertyAssignment propertyAssignment = (PropertyAssignment)eObject;
+				DomainUsage domainUsage = getUsage(propertyAssignment.getSlotExpression());
+				if ((domainUsage == null) || !domainUsage.isEnforceable()) {
+					Property targetProperty = propertyAssignment.getTargetProperty();
+//					System.out.println("Dirty " + targetProperty + " for " + eObject);
+					dirtyProperties.add(targetProperty);
+					EObject eProperty = targetProperty.getESObject();
+					if (eProperty instanceof EReference) {
+						dirtyEReferences.add((EReference) eProperty);
+					}
+				}
+			}
+		}
+		for (Property dirtyProperty : dirtyProperties) {
+			if (!dirtyProperty.isIsTransient()) {
+				System.out.println("Dirty " + dirtyProperty + " is not transient");
+			}
+			if (dirtyProperty.isIsReadOnly()) {
+				System.out.println("Dirty " + dirtyProperty + " is readonly");
+			}
+			if (dirtyProperty.isIsRequired()) {
+				System.out.println("Dirty " + dirtyProperty + " is required");
+			}
+		}
 	}
 
 	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation) {
@@ -411,6 +454,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 			setUsage(ownedContext, getAnyUsage());
 		}
 		visit(transformation);
+		analyzePropertyAssignments(transformation);
 		return element2usage;
 	}
 
@@ -562,5 +606,19 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 		else {
 			return createVariableUsage(bitMask);
 		}
+	}
+
+	/**
+	 * Return true if a mapping may assign this property in an input model.
+	 */
+	public boolean isDirty(@NonNull EReference eReference) {
+		return dirtyEReferences.contains(eReference);
+	}
+
+	/**
+	 * Return true if a mapping may assign this property in an input model.
+	 */
+	public boolean isDirty(@NonNull Property property) {
+		return dirtyProperties.contains(property);
 	}
 }

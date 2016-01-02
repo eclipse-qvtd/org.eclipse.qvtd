@@ -72,6 +72,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
+import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
@@ -349,9 +350,11 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	}
 	@Override
 	public @Nullable DomainUsage visitCoreDomain(@NonNull CoreDomain object) {
+		DomainUsage usage = visit(object.getTypedModel());
+		setUsage(object, usage);
 		visit(object.getGuardPattern());
 		visit(object.getBottomPattern());
-		return visit(object.getTypedModel());
+		return usage;
 	}
 
 	@Override
@@ -627,9 +630,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	@Override
 	public @Nullable DomainUsage visitPropertyAssignment(@NonNull PropertyAssignment object) {
 		Property property = object.getTargetProperty();
-		if ("att2col.type := prim2name".equals(object.toString())) {
-			property = object.getTargetProperty();
-		}
+//		if ("middleRoot.name := hsvRoot.name".equals(object.toString())) {
+//			property = object.getTargetProperty();
+//		}
 		return doPropertyAssignment(property, object);
 	}
 
@@ -767,6 +770,10 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		OCLExpression ownedInit = object.getOwnedInit();
 		if (ownedInit != null) {
 			return visit(ownedInit);
+		}
+		Area area = QVTcoreBaseUtil.getContainingArea(object);
+		if (area != null) {
+			return visit(area);
 		}
 		else {
 			return visit(object.getType());

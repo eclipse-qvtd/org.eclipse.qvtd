@@ -40,7 +40,7 @@ import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.schedule2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.ASURIHandler;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
@@ -64,7 +64,7 @@ public class Scheduler extends SchedulerConstants
 
 	private final @NonNull List<AbstractAction> orderedActions;
 
-	public Scheduler(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule schedule, @NonNull QVTimperativeDomainUsageAnalysis domainAnalysis, @NonNull QVTp2QVTg qvtp2qvtg) {
+	public Scheduler(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule schedule, @NonNull RootDomainUsageAnalysis domainAnalysis, @NonNull QVTp2QVTg qvtp2qvtg) {
 		super(environmentFactory, schedule, domainAnalysis, qvtp2qvtg);
 		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(schedule);
 		List<AbstractAction> orderedActions = orderer.computeOrdering();
