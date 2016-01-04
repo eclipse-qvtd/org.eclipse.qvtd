@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?>
+<qvtcconfig:Configuration
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:qvtcconfig="http://www.eclipse.org/qvt/examples/0.1/QVTcConfig"
+    inputDirection="//@transformation/@direction.1"
+    outputDirection="//@transformation/@direction.0"
+    mode="enforce"
+    middle="//@transformation/@direction.2">
+  <transformation name="Families2Persons">
+    <direction name="person" imports="//@transformation/@import.1"/>
+    <direction name="family" imports="//@transformation/@import.0"/>
+    <direction imports="//@transformation/@import.2"/>
+    <import name="fMM" metamodelFile="Families.Ecore" package="Families"/>
+     <import name="pMM" metamodelFile="Persons.ecore" package="Persons"/>
+    <import name="f2pMM" metamodelFile="Families2Persons.ecore" package="Families2Persons"/>
+  </transformation>
+</qvtcconfig:Configuration>
