@@ -299,6 +299,25 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1V2");
 	}
 	
+	@Test
+	public void testNewExample2_V2_Interpreted() throws Exception {
+		testCaseAppender.uninstall();	// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
+		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
+		loadGenModels(baseURI, "ClassesCS.genmodel", "Classes.genmodel");
+		
+		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "classescs2asV2.ocl");
+		URI txURI = qvtiTransf.eResource().getURI();
+		
+		myQVT.dispose();
+		myQVT = createQVT();
+		loadEcoreFile(baseURI.appendSegment("ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
+		loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1V2");
+	}
+	
+	
+	
 	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler
 //	@Test
 //	public void testExample3_Interpreted() throws Exception {
