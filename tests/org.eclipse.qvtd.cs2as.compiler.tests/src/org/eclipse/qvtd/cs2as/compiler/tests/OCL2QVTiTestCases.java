@@ -276,10 +276,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3");
-//    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model4");
-//    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model5");
-//    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model6");
-//    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model7");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model4");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model5");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model6");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model7");
 	}
 	
 	@Test
