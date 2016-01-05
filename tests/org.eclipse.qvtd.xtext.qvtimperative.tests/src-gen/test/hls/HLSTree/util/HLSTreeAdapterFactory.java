@@ -19,6 +19,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.jdt.annotation.Nullable;
 import test.hls.HLSTree.*;
 
 /**
@@ -75,8 +76,8 @@ public class HLSTreeAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected HLSTreeSwitch<Adapter> modelSwitch =
-		new HLSTreeSwitch<Adapter>() {
+	protected HLSTreeSwitch<@Nullable Adapter> modelSwitch =
+		new HLSTreeSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseHLSNode(HLSNode object) {
 				return createHLSNodeAdapter();

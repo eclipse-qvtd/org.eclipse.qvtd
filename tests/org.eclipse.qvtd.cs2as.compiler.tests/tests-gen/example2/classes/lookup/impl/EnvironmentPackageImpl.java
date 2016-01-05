@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 
 import example2.classes.ClassesPackage;
+import example2.classes.impl.ClassesPackageImpl;
 import example2.classes.lookup.Env4CG;
 import example2.classes.lookup.EnvironmentFactory;
 import example2.classes.lookup.EnvironmentPackage;
@@ -91,14 +92,16 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 
 		isInited = true;
 
-		// Initialize simple dependencies
-		ClassesPackage.eINSTANCE.eClass();
+		// Obtain or create and register interdependencies
+		ClassesPackageImpl theClassesPackage = (ClassesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ClassesPackage.eNS_URI) instanceof ClassesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ClassesPackage.eNS_URI) : ClassesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theEnvironmentPackage.createPackageContents();
+		theClassesPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theEnvironmentPackage.initializePackageContents();
+		theClassesPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theEnvironmentPackage.freeze();

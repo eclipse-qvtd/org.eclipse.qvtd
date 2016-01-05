@@ -22,7 +22,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 {
 	protected final D delegate;
 	
-	protected AbstractWrappingVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractWrappingVisitor(@NonNull D delegate, C context) {
 		super(context);
 		this.delegate = delegate;		
 	//	delegate.setUndecoratedVisitor(this);
@@ -34,7 +34,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	 * 
 	 * @return a rethrown RuntimeException or a RuntimeException-wrapped non-RuntimeException.
 	 */
-	protected @Nullable R badVisit(@NonNull example2.classes.util.Visitable visitable, @Nullable P prologue, @NonNull Throwable e) throws RuntimeException {
+	protected R badVisit(example2.classes.util.@NonNull Visitable visitable, @Nullable P prologue, @NonNull Throwable e) throws RuntimeException {
 		if (e instanceof Exception) {
 			throw (RuntimeException)e;
 		}
@@ -59,7 +59,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	 * 
 	 * @return the epilogue result, which defaults to the delegated result.
 	 */
-	protected @Nullable R postVisit(@NonNull example2.classes.util.Visitable visitable, @Nullable P prologue, @Nullable R result) {
+	protected R postVisit(example2.classes.util.@NonNull Visitable visitable, @Nullable P prologue, R result) {
 		return result;
 	}
 
@@ -68,18 +68,18 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	 * 
 	 * @return the prologue result, which defauilts to null.
 	 */
-	protected @Nullable P preVisit(@NonNull example2.classes.util.Visitable visitable) {
+	protected @Nullable P preVisit(example2.classes.util.@NonNull Visitable visitable) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull example2.classes.util.Visitable visitable) {
+	public R visiting(example2.classes.util.@NonNull Visitable visitable) {
 		throw new UnsupportedOperationException();		// Cannot happen since all methods delegate.
 	}
 
 	@Override
-	public @Nullable R visitArgument(@NonNull example2.classes.Argument object) {
-		P prologue = preVisit(object);
+	public R visitArgument(example2.classes.@NonNull Argument object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitArgument(object);
 			return postVisit(object, prologue, result);
@@ -90,8 +90,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitCallExp(@NonNull example2.classes.CallExp object) {
-		P prologue = preVisit(object);
+	public R visitCallExp(example2.classes.@NonNull CallExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitCallExp(object);
 			return postVisit(object, prologue, result);
@@ -102,8 +102,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitClass(@NonNull example2.classes.Class object) {
-		P prologue = preVisit(object);
+	public R visitClass(example2.classes.@NonNull Class object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitClass(object);
 			return postVisit(object, prologue, result);
@@ -114,8 +114,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitElement(@NonNull example2.classes.Element object) {
-		P prologue = preVisit(object);
+	public R visitElement(example2.classes.@NonNull Element object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitElement(object);
 			return postVisit(object, prologue, result);
@@ -126,8 +126,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitNamedElement(@NonNull example2.classes.NamedElement object) {
-		P prologue = preVisit(object);
+	public R visitNamedElement(example2.classes.@NonNull NamedElement object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitNamedElement(object);
 			return postVisit(object, prologue, result);
@@ -138,8 +138,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitNamespace(@NonNull example2.classes.Namespace object) {
-		P prologue = preVisit(object);
+	public R visitNamespace(example2.classes.@NonNull Namespace object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitNamespace(object);
 			return postVisit(object, prologue, result);
@@ -150,8 +150,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitOperation(@NonNull example2.classes.Operation object) {
-		P prologue = preVisit(object);
+	public R visitOperation(example2.classes.@NonNull Operation object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitOperation(object);
 			return postVisit(object, prologue, result);
@@ -162,8 +162,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitOperationCallExp(@NonNull example2.classes.OperationCallExp object) {
-		P prologue = preVisit(object);
+	public R visitOperationCallExp(example2.classes.@NonNull OperationCallExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitOperationCallExp(object);
 			return postVisit(object, prologue, result);
@@ -174,8 +174,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitPackage(@NonNull example2.classes.Package object) {
-		P prologue = preVisit(object);
+	public R visitPackage(example2.classes.@NonNull Package object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitPackage(object);
 			return postVisit(object, prologue, result);
@@ -186,8 +186,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitParameter(@NonNull example2.classes.Parameter object) {
-		P prologue = preVisit(object);
+	public R visitParameter(example2.classes.@NonNull Parameter object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitParameter(object);
 			return postVisit(object, prologue, result);
@@ -198,8 +198,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitProperty(@NonNull example2.classes.Property object) {
-		P prologue = preVisit(object);
+	public R visitProperty(example2.classes.@NonNull Property object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitProperty(object);
 			return postVisit(object, prologue, result);
@@ -210,8 +210,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitPropertyCallExp(@NonNull example2.classes.PropertyCallExp object) {
-		P prologue = preVisit(object);
+	public R visitPropertyCallExp(example2.classes.@NonNull PropertyCallExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitPropertyCallExp(object);
 			return postVisit(object, prologue, result);
@@ -222,8 +222,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitRoot(@NonNull example2.classes.Root object) {
-		P prologue = preVisit(object);
+	public R visitRoot(example2.classes.@NonNull Root object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitRoot(object);
 			return postVisit(object, prologue, result);
@@ -234,8 +234,8 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitTypedElement(@NonNull example2.classes.TypedElement object) {
-		P prologue = preVisit(object);
+	public R visitTypedElement(example2.classes.@NonNull TypedElement object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitTypedElement(object);
 			return postVisit(object, prologue, result);

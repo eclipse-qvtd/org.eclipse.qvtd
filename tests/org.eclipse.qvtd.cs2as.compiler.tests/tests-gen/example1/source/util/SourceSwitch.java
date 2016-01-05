@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.jdt.annotation.Nullable;
 import example1.source.PathElementCS;
 import example1.source.PathNameCS;
 import example1.source.SElement;
@@ -40,7 +41,7 @@ import example1.source.Z;
  * @see example1.source.SourcePackage
  * @generated
  */
-public class SourceSwitch<T> extends Switch<T> {
+public class SourceSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

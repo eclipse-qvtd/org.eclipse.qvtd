@@ -12,7 +12,6 @@ package	example2.classes.util;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 public interface Visitable
 {
@@ -31,7 +30,7 @@ public interface Visitable
 	 * @param visitor
 	 * @return the result of the visit.
 	 */
-	@Nullable <R> R accept(@NonNull example2.classes.util.Visitor<R> visitor);
+	<R> R accept(example2.classes.util.@NonNull Visitor<R> visitor);
 	
 	EClass eClass();
 }

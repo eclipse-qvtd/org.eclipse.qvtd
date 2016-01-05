@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.jdt.annotation.Nullable;
 import simpleuml2rdbms.uml.Association;
 import simpleuml2rdbms.uml.Attribute;
 import simpleuml2rdbms.uml.Classifier;
@@ -38,7 +39,7 @@ import simpleuml2rdbms.uml.UMLPackage;
  * @see simpleuml2rdbms.uml.UMLPackage
  * @generated
  */
-public class UMLSwitch<T> extends Switch<T> {
+public class UMLSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

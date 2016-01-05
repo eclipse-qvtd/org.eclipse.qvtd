@@ -6,6 +6,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 
 import example1.target.lookup.Env4CG;
@@ -66,8 +67,8 @@ public class EnvironmentAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EnvironmentSwitch<Adapter> modelSwitch =
-		new EnvironmentSwitch<Adapter>() {
+	protected EnvironmentSwitch<@Nullable Adapter> modelSwitch =
+		new EnvironmentSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseLookupEnvironment(LookupEnvironment object) {
 				return createLookupEnvironmentAdapter();

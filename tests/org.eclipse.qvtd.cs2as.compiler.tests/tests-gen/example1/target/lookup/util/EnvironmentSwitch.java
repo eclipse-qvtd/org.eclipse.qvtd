@@ -5,6 +5,7 @@ package example1.target.lookup.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 
 import example1.target.lookup.Env4CG;
@@ -24,7 +25,7 @@ import example1.target.lookup.LookupEnvironment;
  * @see example1.target.lookup.EnvironmentPackage
  * @generated
  */
-public class EnvironmentSwitch<T> extends Switch<T> {
+public class EnvironmentSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

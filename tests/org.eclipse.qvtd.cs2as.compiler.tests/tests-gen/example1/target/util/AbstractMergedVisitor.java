@@ -11,7 +11,6 @@
 package	example1.target.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractMergedVisitor merges all visits direct to visiting().
@@ -21,57 +20,57 @@ public abstract class AbstractMergedVisitor<R, C>
 	extends AbstractVisitor<R, C>
 	implements Visitor<R>
 {
-	protected AbstractMergedVisitor(@NonNull C context) {
+	protected AbstractMergedVisitor(C context) {
 		super(context);
 	}
 
 	@Override
-	public @Nullable R visitA(@NonNull example1.target.A object) {
+	public R visitA(example1.target.@NonNull A object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitA1(@NonNull example1.target.A1 object) {
+	public R visitA1(example1.target.@NonNull A1 object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitA2(@NonNull example1.target.A2 object) {
+	public R visitA2(example1.target.@NonNull A2 object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitA3(@NonNull example1.target.A3 object) {
+	public R visitA3(example1.target.@NonNull A3 object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitB(@NonNull example1.target.B object) {
+	public R visitB(example1.target.@NonNull B object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitC(@NonNull example1.target.C object) {
+	public R visitC(example1.target.@NonNull C object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitD(@NonNull example1.target.D object) {
+	public R visitD(example1.target.@NonNull D object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitNamedElement(@NonNull example1.target.NamedElement object) {
+	public R visitNamedElement(example1.target.@NonNull NamedElement object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitNamespace(@NonNull example1.target.Namespace object) {
+	public R visitNamespace(example1.target.@NonNull Namespace object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitTRoot(@NonNull example1.target.TRoot object) {
+	public R visitTRoot(example1.target.@NonNull TRoot object) {
 		return visiting(object);
 	}
 }

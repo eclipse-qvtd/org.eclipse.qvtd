@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.jdt.annotation.Nullable;
 import example2.classescstraces.ClassCS2Class;
 import example2.classescstraces.ClassescstracesPackage;
 import example2.classescstraces.PackageCS2Package;
@@ -34,7 +35,7 @@ import example2.classescstraces.RootCS2Root;
  * @see example2.classescstraces.ClassescstracesPackage
  * @generated
  */
-public class ClassescstracesSwitch<T> extends Switch<T> {
+public class ClassescstracesSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

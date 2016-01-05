@@ -32,6 +32,8 @@ import example2.classes.Property;
 import example2.classes.PropertyCallExp;
 import example2.classes.Root;
 import example2.classes.TypedElement;
+import example2.classes.lookup.EnvironmentPackage;
+import example2.classes.lookup.impl.EnvironmentPackageImpl;
 import example2.classes.util.Visitable;
 
 /**
@@ -192,11 +194,16 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 
 		isInited = true;
 
+		// Obtain or create and register interdependencies
+		EnvironmentPackageImpl theEnvironmentPackage = (EnvironmentPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) instanceof EnvironmentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) : EnvironmentPackage.eINSTANCE);
+
 		// Create package meta-data objects
 		theClassesPackage.createPackageContents();
+		theEnvironmentPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theClassesPackage.initializePackageContents();
+		theEnvironmentPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theClassesPackage.freeze();

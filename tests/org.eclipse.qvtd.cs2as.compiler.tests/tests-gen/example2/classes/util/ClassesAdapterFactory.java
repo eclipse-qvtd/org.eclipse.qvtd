@@ -19,6 +19,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.jdt.annotation.Nullable;
 import example2.classes.ClassesPackage;
 import example2.classes.Element;
 import example2.classes.NamedElement;
@@ -85,8 +86,8 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ClassesSwitch<Adapter> modelSwitch =
-		new ClassesSwitch<Adapter>() {
+	protected ClassesSwitch<@Nullable Adapter> modelSwitch =
+		new ClassesSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseElement(Element object) {
 				return createElementAdapter();

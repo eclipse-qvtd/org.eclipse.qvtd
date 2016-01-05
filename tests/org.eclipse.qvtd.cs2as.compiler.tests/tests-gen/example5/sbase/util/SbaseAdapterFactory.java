@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,8 +66,8 @@ public class SbaseAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SbaseSwitch<Adapter> modelSwitch =
-		new SbaseSwitch<Adapter>() {
+	protected SbaseSwitch<@Nullable Adapter> modelSwitch =
+		new SbaseSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseX(X object) {
 				return createXAdapter();

@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,8 +70,8 @@ public class TderivedAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TderivedSwitch<Adapter> modelSwitch =
-		new TderivedSwitch<Adapter>() {
+	protected TderivedSwitch<@Nullable Adapter> modelSwitch =
+		new TderivedSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseA2(A2 object) {
 				return createA2Adapter();

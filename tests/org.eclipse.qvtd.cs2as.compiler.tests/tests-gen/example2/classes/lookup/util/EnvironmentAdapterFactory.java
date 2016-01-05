@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 
 /**
@@ -67,8 +68,8 @@ public class EnvironmentAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EnvironmentSwitch<Adapter> modelSwitch =
-		new EnvironmentSwitch<Adapter>() {
+	protected EnvironmentSwitch<@Nullable Adapter> modelSwitch =
+		new EnvironmentSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseLookupEnvironment(LookupEnvironment object) {
 				return createLookupEnvironmentAdapter();

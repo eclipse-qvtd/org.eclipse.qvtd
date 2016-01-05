@@ -19,6 +19,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.jdt.annotation.Nullable;
 import simpleuml2rdbms.uml.Association;
 import simpleuml2rdbms.uml.Attribute;
 import simpleuml2rdbms.uml.Classifier;
@@ -81,8 +82,8 @@ public class UMLAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UMLSwitch<Adapter> modelSwitch =
-		new UMLSwitch<Adapter>() {
+	protected UMLSwitch<@Nullable Adapter> modelSwitch =
+		new UMLSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseAttribute(Attribute object) {
 				return createAttributeAdapter();

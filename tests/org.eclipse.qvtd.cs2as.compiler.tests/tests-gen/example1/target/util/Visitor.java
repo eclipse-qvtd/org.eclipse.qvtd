@@ -33,16 +33,16 @@ public interface Visitor<R>
 	 * Return the result of visiting a visitable for which no more specific pivot type method
 	 * is available.
 	 */
-	@Nullable R visiting(@NonNull example1.target.util.Visitable visitable);
+	R visiting(example1.target.util.@NonNull Visitable visitable);
 
-	@Nullable R visitA(@NonNull example1.target.A object);
-	@Nullable R visitA1(@NonNull example1.target.A1 object);
-	@Nullable R visitA2(@NonNull example1.target.A2 object);
-	@Nullable R visitA3(@NonNull example1.target.A3 object);
-	@Nullable R visitB(@NonNull example1.target.B object);
-	@Nullable R visitC(@NonNull example1.target.C object);
-	@Nullable R visitD(@NonNull example1.target.D object);
-	@Nullable R visitNamedElement(@NonNull example1.target.NamedElement object);
-	@Nullable R visitNamespace(@NonNull example1.target.Namespace object);
-	@Nullable R visitTRoot(@NonNull example1.target.TRoot object);
+	R visitA(example1.target.@NonNull A object);
+	R visitA1(example1.target.@NonNull A1 object);
+	R visitA2(example1.target.@NonNull A2 object);
+	R visitA3(example1.target.@NonNull A3 object);
+	R visitB(example1.target.@NonNull B object);
+	R visitC(example1.target.@NonNull C object);
+	R visitD(example1.target.@NonNull D object);
+	R visitNamedElement(example1.target.@NonNull NamedElement object);
+	R visitNamespace(example1.target.@NonNull Namespace object);
+	R visitTRoot(example1.target.@NonNull TRoot object);
 }

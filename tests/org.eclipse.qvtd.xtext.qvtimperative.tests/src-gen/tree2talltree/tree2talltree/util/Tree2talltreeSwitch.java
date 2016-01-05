@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.jdt.annotation.Nullable;
 import tree2talltree.tree2talltree.*;
 
 /**
@@ -30,7 +31,7 @@ import tree2talltree.tree2talltree.*;
  * @see tree2talltree.tree2talltree.Tree2talltreePackage
  * @generated
  */
-public class Tree2talltreeSwitch<T> extends Switch<T> {
+public class Tree2talltreeSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

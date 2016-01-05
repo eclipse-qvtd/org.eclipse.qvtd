@@ -11,12 +11,8 @@
  *******************************************************************************/
 package example1.target;
 
+import example1.target.TargetTables;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
-import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
@@ -54,18 +50,18 @@ public class TargetTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/targetMM/1.0", null, TargetPackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A = TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A1 = TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A1", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A2 = TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A2", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_B = TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("B", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_C = TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("C", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_D = TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("D", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TRoot = TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("TRoot", 0);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_D = TypeId.BAG.getSpecializedId(TargetTables.CLSSid_D);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_A = TypeId.ORDERED_SET.getSpecializedId(TargetTables.CLSSid_A);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_B = TypeId.ORDERED_SET.getSpecializedId(TargetTables.CLSSid_B);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_C = TypeId.ORDERED_SET.getSpecializedId(TargetTables.CLSSid_C);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0 = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://cs2as/tests/example1/targetMM/1.0", null, example1.target.TargetPackage.eINSTANCE);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_A = example1.target.TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_A1 = example1.target.TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A1", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_A2 = example1.target.TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A2", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_B = example1.target.TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("B", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_C = example1.target.TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("C", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_D = example1.target.TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("D", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TRoot = example1.target.TargetTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("TRoot", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_D = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(example1.target.TargetTables.CLSSid_D);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_A = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(example1.target.TargetTables.CLSSid_A);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_B = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(example1.target.TargetTables.CLSSid_B);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_C = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(example1.target.TargetTables.CLSSid_C);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -107,7 +103,7 @@ public class TargetTables
 		public static final @NonNull EcoreExecutorType _TRoot = new EcoreExecutorType(TargetPackage.Literals.TROOT, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Visitable = new EcoreExecutorType(TargetPackage.Literals.VISITABLE, PACKAGE, 0);
 
-		private static final @NonNull EcoreExecutorType[] types = {
+		private static final @NonNull EcoreExecutorType @NonNull [] types = {
 			_A,
 			_A1,
 			_A2,
@@ -317,7 +313,7 @@ public class TargetTables
 			Properties.init();
 		}
 
-		private static final @NonNull ExecutorFragment[] _A =
+		private static final @NonNull ExecutorFragment @NonNull [] _A =
 		{
 			Fragments._A__OclAny /* 0 */,
 			Fragments._A__OclElement /* 1 */,
@@ -326,9 +322,9 @@ public class TargetTables
 			Fragments._A__Namespace /* 4 */,
 			Fragments._A__A /* 5 */
 		};
-		private static final @NonNull int[] __A = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __A = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment[] _A1 =
+		private static final @NonNull ExecutorFragment @NonNull [] _A1 =
 		{
 			Fragments._A1__OclAny /* 0 */,
 			Fragments._A1__OclElement /* 1 */,
@@ -338,9 +334,9 @@ public class TargetTables
 			Fragments._A1__A /* 5 */,
 			Fragments._A1__A1 /* 6 */
 		};
-		private static final @NonNull int[] __A1 = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __A1 = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment[] _A2 =
+		private static final @NonNull ExecutorFragment @NonNull [] _A2 =
 		{
 			Fragments._A2__OclAny /* 0 */,
 			Fragments._A2__OclElement /* 1 */,
@@ -350,9 +346,9 @@ public class TargetTables
 			Fragments._A2__A /* 5 */,
 			Fragments._A2__A2 /* 6 */
 		};
-		private static final @NonNull int[] __A2 = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __A2 = { 1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment[] _A3 =
+		private static final @NonNull ExecutorFragment @NonNull [] _A3 =
 		{
 			Fragments._A3__OclAny /* 0 */,
 			Fragments._A3__OclElement /* 1 */,
@@ -363,9 +359,9 @@ public class TargetTables
 			Fragments._A3__A2 /* 6 */,
 			Fragments._A3__A3 /* 7 */
 		};
-		private static final @NonNull int[] __A3 = { 1,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __A3 = { 1,1,1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment[] _B =
+		private static final @NonNull ExecutorFragment @NonNull [] _B =
 		{
 			Fragments._B__OclAny /* 0 */,
 			Fragments._B__OclElement /* 1 */,
@@ -374,9 +370,9 @@ public class TargetTables
 			Fragments._B__Namespace /* 4 */,
 			Fragments._B__B /* 5 */
 		};
-		private static final @NonNull int[] __B = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __B = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment[] _C =
+		private static final @NonNull ExecutorFragment @NonNull [] _C =
 		{
 			Fragments._C__OclAny /* 0 */,
 			Fragments._C__OclElement /* 1 */,
@@ -385,9 +381,9 @@ public class TargetTables
 			Fragments._C__Namespace /* 4 */,
 			Fragments._C__C /* 5 */
 		};
-		private static final @NonNull int[] __C = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __C = { 1,1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment[] _D =
+		private static final @NonNull ExecutorFragment @NonNull [] _D =
 		{
 			Fragments._D__OclAny /* 0 */,
 			Fragments._D__OclElement /* 1 */,
@@ -395,18 +391,18 @@ public class TargetTables
 			Fragments._D__NamedElement /* 3 */,
 			Fragments._D__D /* 4 */
 		};
-		private static final @NonNull int[] __D = { 1,1,1,1,1 };
+		private static final int @NonNull [] __D = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment[] _NamedElement =
+		private static final @NonNull ExecutorFragment @NonNull [] _NamedElement =
 		{
 			Fragments._NamedElement__OclAny /* 0 */,
 			Fragments._NamedElement__OclElement /* 1 */,
 			Fragments._NamedElement__Visitable /* 2 */,
 			Fragments._NamedElement__NamedElement /* 3 */
 		};
-		private static final @NonNull int[] __NamedElement = { 1,1,1,1 };
+		private static final int @NonNull [] __NamedElement = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment[] _Namespace =
+		private static final @NonNull ExecutorFragment @NonNull [] _Namespace =
 		{
 			Fragments._Namespace__OclAny /* 0 */,
 			Fragments._Namespace__OclElement /* 1 */,
@@ -414,24 +410,24 @@ public class TargetTables
 			Fragments._Namespace__NamedElement /* 3 */,
 			Fragments._Namespace__Namespace /* 4 */
 		};
-		private static final @NonNull int[] __Namespace = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Namespace = { 1,1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment[] _TRoot =
+		private static final @NonNull ExecutorFragment @NonNull [] _TRoot =
 		{
 			Fragments._TRoot__OclAny /* 0 */,
 			Fragments._TRoot__OclElement /* 1 */,
 			Fragments._TRoot__Visitable /* 2 */,
 			Fragments._TRoot__TRoot /* 3 */
 		};
-		private static final @NonNull int[] __TRoot = { 1,1,1,1 };
+		private static final int @NonNull [] __TRoot = { 1,1,1,1 };
 
-		private static final @NonNull ExecutorFragment[] _Visitable =
+		private static final @NonNull ExecutorFragment @NonNull [] _Visitable =
 		{
 			Fragments._Visitable__OclAny /* 0 */,
 			Fragments._Visitable__OclElement /* 1 */,
 			Fragments._Visitable__Visitable /* 2 */
 		};
-		private static final @NonNull int[] __Visitable = { 1,1,1 };
+		private static final int @NonNull [] __Visitable = { 1,1,1 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
@@ -467,10 +463,10 @@ public class TargetTables
 			TypeFragments.init();
 		}
 
-		private static final @NonNull ExecutorOperation[] _A__A = {};
-		private static final @NonNull ExecutorOperation[] _A__NamedElement = {};
-		private static final @NonNull ExecutorOperation[] _A__Namespace = {};
-		private static final @NonNull ExecutorOperation[] _A__OclAny = {
+		private static final @NonNull ExecutorOperation @NonNull [] _A__A = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A__Namespace = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -486,18 +482,18 @@ public class TargetTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation[] _A__OclElement = {
+		private static final @NonNull ExecutorOperation @NonNull [] _A__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
-		private static final @NonNull ExecutorOperation[] _A__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A__Visitable = {};
 
-		private static final @NonNull ExecutorOperation[] _A1__A1 = {};
-		private static final @NonNull ExecutorOperation[] _A1__A = {};
-		private static final @NonNull ExecutorOperation[] _A1__NamedElement = {};
-		private static final @NonNull ExecutorOperation[] _A1__Namespace = {};
-		private static final @NonNull ExecutorOperation[] _A1__OclAny = {
+		private static final @NonNull ExecutorOperation @NonNull [] _A1__A1 = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A1__A = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A1__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A1__Namespace = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A1__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -513,18 +509,18 @@ public class TargetTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation[] _A1__OclElement = {
+		private static final @NonNull ExecutorOperation @NonNull [] _A1__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
-		private static final @NonNull ExecutorOperation[] _A1__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A1__Visitable = {};
 
-		private static final @NonNull ExecutorOperation[] _A2__A2 = {};
-		private static final @NonNull ExecutorOperation[] _A2__A = {};
-		private static final @NonNull ExecutorOperation[] _A2__NamedElement = {};
-		private static final @NonNull ExecutorOperation[] _A2__Namespace = {};
-		private static final @NonNull ExecutorOperation[] _A2__OclAny = {
+		private static final @NonNull ExecutorOperation @NonNull [] _A2__A2 = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A2__A = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A2__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A2__Namespace = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A2__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -540,19 +536,19 @@ public class TargetTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation[] _A2__OclElement = {
+		private static final @NonNull ExecutorOperation @NonNull [] _A2__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
-		private static final @NonNull ExecutorOperation[] _A2__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A2__Visitable = {};
 
-		private static final @NonNull ExecutorOperation[] _A3__A3 = {};
-		private static final @NonNull ExecutorOperation[] _A3__A = {};
-		private static final @NonNull ExecutorOperation[] _A3__A2 = {};
-		private static final @NonNull ExecutorOperation[] _A3__NamedElement = {};
-		private static final @NonNull ExecutorOperation[] _A3__Namespace = {};
-		private static final @NonNull ExecutorOperation[] _A3__OclAny = {
+		private static final @NonNull ExecutorOperation @NonNull [] _A3__A3 = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A3__A = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A3__A2 = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A3__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A3__Namespace = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A3__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -568,17 +564,17 @@ public class TargetTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation[] _A3__OclElement = {
+		private static final @NonNull ExecutorOperation @NonNull [] _A3__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
-		private static final @NonNull ExecutorOperation[] _A3__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _A3__Visitable = {};
 
-		private static final @NonNull ExecutorOperation[] _B__B = {};
-		private static final @NonNull ExecutorOperation[] _B__NamedElement = {};
-		private static final @NonNull ExecutorOperation[] _B__Namespace = {};
-		private static final @NonNull ExecutorOperation[] _B__OclAny = {
+		private static final @NonNull ExecutorOperation @NonNull [] _B__B = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _B__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _B__Namespace = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _B__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -594,17 +590,17 @@ public class TargetTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation[] _B__OclElement = {
+		private static final @NonNull ExecutorOperation @NonNull [] _B__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
-		private static final @NonNull ExecutorOperation[] _B__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _B__Visitable = {};
 
-		private static final @NonNull ExecutorOperation[] _C__C = {};
-		private static final @NonNull ExecutorOperation[] _C__NamedElement = {};
-		private static final @NonNull ExecutorOperation[] _C__Namespace = {};
-		private static final @NonNull ExecutorOperation[] _C__OclAny = {
+		private static final @NonNull ExecutorOperation @NonNull [] _C__C = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _C__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _C__Namespace = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _C__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -620,16 +616,16 @@ public class TargetTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation[] _C__OclElement = {
+		private static final @NonNull ExecutorOperation @NonNull [] _C__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
-		private static final @NonNull ExecutorOperation[] _C__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _C__Visitable = {};
 
-		private static final @NonNull ExecutorOperation[] _D__D = {};
-		private static final @NonNull ExecutorOperation[] _D__NamedElement = {};
-		private static final @NonNull ExecutorOperation[] _D__OclAny = {
+		private static final @NonNull ExecutorOperation @NonNull [] _D__D = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _D__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _D__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -645,15 +641,15 @@ public class TargetTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation[] _D__OclElement = {
+		private static final @NonNull ExecutorOperation @NonNull [] _D__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
-		private static final @NonNull ExecutorOperation[] _D__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _D__Visitable = {};
 
-		private static final @NonNull ExecutorOperation[] _NamedElement__NamedElement = {};
-		private static final @NonNull ExecutorOperation[] _NamedElement__OclAny = {
+		private static final @NonNull ExecutorOperation @NonNull [] _NamedElement__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _NamedElement__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -669,16 +665,16 @@ public class TargetTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation[] _NamedElement__OclElement = {
+		private static final @NonNull ExecutorOperation @NonNull [] _NamedElement__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
-		private static final @NonNull ExecutorOperation[] _NamedElement__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _NamedElement__Visitable = {};
 
-		private static final @NonNull ExecutorOperation[] _Namespace__Namespace = {};
-		private static final @NonNull ExecutorOperation[] _Namespace__NamedElement = {};
-		private static final @NonNull ExecutorOperation[] _Namespace__OclAny = {
+		private static final @NonNull ExecutorOperation @NonNull [] _Namespace__Namespace = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _Namespace__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _Namespace__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -694,15 +690,15 @@ public class TargetTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation[] _Namespace__OclElement = {
+		private static final @NonNull ExecutorOperation @NonNull [] _Namespace__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
-		private static final @NonNull ExecutorOperation[] _Namespace__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _Namespace__Visitable = {};
 
-		private static final @NonNull ExecutorOperation[] _TRoot__TRoot = {};
-		private static final @NonNull ExecutorOperation[] _TRoot__OclAny = {
+		private static final @NonNull ExecutorOperation @NonNull [] _TRoot__TRoot = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _TRoot__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -718,15 +714,15 @@ public class TargetTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation[] _TRoot__OclElement = {
+		private static final @NonNull ExecutorOperation @NonNull [] _TRoot__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
-		private static final @NonNull ExecutorOperation[] _TRoot__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _TRoot__Visitable = {};
 
-		private static final @NonNull ExecutorOperation[] _Visitable__Visitable = {};
-		private static final @NonNull ExecutorOperation[] _Visitable__OclAny = {
+		private static final @NonNull ExecutorOperation @NonNull [] _Visitable__Visitable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _Visitable__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
@@ -742,7 +738,7 @@ public class TargetTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
-		private static final @NonNull ExecutorOperation[] _Visitable__OclElement = {
+		private static final @NonNull ExecutorOperation @NonNull [] _Visitable__OclElement = {
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
@@ -842,48 +838,48 @@ public class TargetTables
 			FragmentOperations.init();
 		}
 
-		private static final @NonNull ExecutorProperty[] _A = {
+		private static final @NonNull ExecutorProperty @NonNull [] _A = {
 			TargetTables.Properties._NamedElement__name,
 			TargetTables.Properties._A__D__toA,
 			TargetTables.Properties._A__TRoot__ownedA
 		};
 
-		private static final @NonNull ExecutorProperty[] _A1 = {
+		private static final @NonNull ExecutorProperty @NonNull [] _A1 = {
 			TargetTables.Properties._NamedElement__name,
 			TargetTables.Properties._A1__ownsB,
 			TargetTables.Properties._A__D__toA,
 			TargetTables.Properties._A__TRoot__ownedA
 		};
 
-		private static final @NonNull ExecutorProperty[] _A2 = {
+		private static final @NonNull ExecutorProperty @NonNull [] _A2 = {
 			TargetTables.Properties._NamedElement__name,
 			TargetTables.Properties._A2__ownsC,
 			TargetTables.Properties._A__D__toA,
 			TargetTables.Properties._A__TRoot__ownedA
 		};
 
-		private static final @NonNull ExecutorProperty[] _A3 = {
+		private static final @NonNull ExecutorProperty @NonNull [] _A3 = {
 			TargetTables.Properties._NamedElement__name,
 			TargetTables.Properties._A2__ownsC,
 			TargetTables.Properties._A__D__toA,
 			TargetTables.Properties._A__TRoot__ownedA
 		};
 
-		private static final @NonNull ExecutorProperty[] _B = {
+		private static final @NonNull ExecutorProperty @NonNull [] _B = {
 			TargetTables.Properties._NamedElement__name,
 			TargetTables.Properties._B__ownsD,
 			TargetTables.Properties._B__toA1,
 			TargetTables.Properties._B__D__refsB
 		};
 
-		private static final @NonNull ExecutorProperty[] _C = {
+		private static final @NonNull ExecutorProperty @NonNull [] _C = {
 			TargetTables.Properties._NamedElement__name,
 			TargetTables.Properties._C__ownsD,
 			TargetTables.Properties._C__toA2,
 			TargetTables.Properties._C__D__refsC
 		};
 
-		private static final @NonNull ExecutorProperty[] _D = {
+		private static final @NonNull ExecutorProperty @NonNull [] _D = {
 			TargetTables.Properties._NamedElement__name,
 			TargetTables.Properties._D__refsB,
 			TargetTables.Properties._D__refsC,
@@ -892,19 +888,19 @@ public class TargetTables
 			TargetTables.Properties._D__toC
 		};
 
-		private static final @NonNull ExecutorProperty[] _NamedElement = {
+		private static final @NonNull ExecutorProperty @NonNull [] _NamedElement = {
 			TargetTables.Properties._NamedElement__name
 		};
 
-		private static final @NonNull ExecutorProperty[] _Namespace = {
+		private static final @NonNull ExecutorProperty @NonNull [] _Namespace = {
 			TargetTables.Properties._NamedElement__name
 		};
 
-		private static final @NonNull ExecutorProperty[] _TRoot = {
+		private static final @NonNull ExecutorProperty @NonNull [] _TRoot = {
 			TargetTables.Properties._TRoot__ownedA
 		};
 
-		private static final @NonNull ExecutorProperty[] _Visitable = {};
+		private static final @NonNull ExecutorProperty @NonNull [] _Visitable = {};
 
 		/**
 		 *	Install the property descriptors in the fragment descriptors.

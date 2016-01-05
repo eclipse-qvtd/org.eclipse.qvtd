@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.jdt.annotation.Nullable;
 import test.hls.HLSTree.*;
 
 /**
@@ -32,7 +33,7 @@ import test.hls.HLSTree.*;
  * @see test.hls.HLSTree.HLSTreePackage
  * @generated
  */
-public class HLSTreeSwitch<T> extends Switch<T> {
+public class HLSTreeSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

@@ -7,16 +7,16 @@
  * Do not edit it.
  ********************************************************************************/
 
-package example2.classes.util;
+package example1.target.util;
 
-import example2.classes.lookup.LookupEnvironment;
-import example2.classes.util.AbstractExtendingVisitor;
-import example2.classes.util.Visitable;
+import example1.target.lookup.LookupEnvironment;
+import example1.target.util.AbstractExtendingVisitor;
+import example1.target.util.Visitable;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.IdManager;
 
-public class AbstractClassesCommonLookupVisitor
+public class AbstractTargetCommonLookupVisitor
 	extends AbstractExtendingVisitor<LookupEnvironment, LookupEnvironment>
 {
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_org_eclipse_ocl_pivot_evaluation = IdManager.getRootPackageId("org.eclipse.ocl.pivot.evaluation");
@@ -27,7 +27,7 @@ public class AbstractClassesCommonLookupVisitor
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
     
-    public AbstractClassesCommonLookupVisitor(@NonNull LookupEnvironment context) {
+    public AbstractTargetCommonLookupVisitor(@NonNull LookupEnvironment context) {
         super(context);
         this.executor = context.getExecutor();
         this.idResolver = executor.getIdResolver();

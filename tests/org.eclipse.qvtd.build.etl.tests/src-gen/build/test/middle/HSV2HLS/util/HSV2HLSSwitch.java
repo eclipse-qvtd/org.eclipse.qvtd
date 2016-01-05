@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +23,7 @@ import org.eclipse.emf.ecore.util.Switch;
  * @see build.test.middle.HSV2HLS.HSV2HLSPackage
  * @generated
  */
-public class HSV2HLSSwitch<T> extends Switch<T> {
+public class HSV2HLSSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

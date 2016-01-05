@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.jdt.annotation.Nullable;
 import test.middle.HSV2HLS.*;
 
 /**
@@ -32,7 +33,7 @@ import test.middle.HSV2HLS.*;
  * @see test.middle.HSV2HLS.HSV2HLSPackage
  * @generated
  */
-public class HSV2HLSSwitch<T> extends Switch<T> {
+public class HSV2HLSSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

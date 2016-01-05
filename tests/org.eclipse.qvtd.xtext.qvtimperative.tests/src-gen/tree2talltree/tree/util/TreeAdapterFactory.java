@@ -17,6 +17,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.jdt.annotation.Nullable;
 import tree2talltree.tree.*;
 
 /**
@@ -73,8 +74,8 @@ public class TreeAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TreeSwitch<Adapter> modelSwitch =
-		new TreeSwitch<Adapter>() {
+	protected TreeSwitch<@Nullable Adapter> modelSwitch =
+		new TreeSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseNode(Node object) {
 				return createNodeAdapter();

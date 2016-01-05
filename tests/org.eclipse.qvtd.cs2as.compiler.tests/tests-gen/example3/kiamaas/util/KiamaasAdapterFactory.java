@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,8 +66,8 @@ public class KiamaasAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected KiamaasSwitch<Adapter> modelSwitch =
-		new KiamaasSwitch<Adapter>() {
+	protected KiamaasSwitch<@Nullable Adapter> modelSwitch =
+		new KiamaasSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseTop(Top object) {
 				return createTopAdapter();

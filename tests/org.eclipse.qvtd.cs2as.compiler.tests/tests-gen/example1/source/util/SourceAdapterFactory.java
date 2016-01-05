@@ -17,6 +17,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.jdt.annotation.Nullable;
 import example1.source.PathElementCS;
 import example1.source.PathNameCS;
 import example1.source.SElement;
@@ -82,8 +83,8 @@ public class SourceAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SourceSwitch<Adapter> modelSwitch =
-		new SourceSwitch<Adapter>() {
+	protected SourceSwitch<@Nullable Adapter> modelSwitch =
+		new SourceSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseX(X object) {
 				return createXAdapter();

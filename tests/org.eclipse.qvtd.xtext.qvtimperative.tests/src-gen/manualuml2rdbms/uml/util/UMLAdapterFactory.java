@@ -26,6 +26,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * <!-- begin-user-doc -->
@@ -81,8 +82,8 @@ public class UMLAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UMLSwitch<Adapter> modelSwitch =
-		new UMLSwitch<Adapter>() {
+	protected UMLSwitch<@Nullable Adapter> modelSwitch =
+		new UMLSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseAttribute(Attribute object) {
 				return createAttributeAdapter();

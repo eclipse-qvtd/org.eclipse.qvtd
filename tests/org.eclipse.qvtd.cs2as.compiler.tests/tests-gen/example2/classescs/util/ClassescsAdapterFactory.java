@@ -18,6 +18,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.jdt.annotation.Nullable;
 import example2.classescs.ClassCS;
 import example2.classescs.ClassescsPackage;
 import example2.classescs.ElementCS;
@@ -81,8 +82,8 @@ public class ClassescsAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ClassescsSwitch<Adapter> modelSwitch =
-		new ClassescsSwitch<Adapter>() {
+	protected ClassescsSwitch<@Nullable Adapter> modelSwitch =
+		new ClassescsSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseElementCS(ElementCS object) {
 				return createElementCSAdapter();

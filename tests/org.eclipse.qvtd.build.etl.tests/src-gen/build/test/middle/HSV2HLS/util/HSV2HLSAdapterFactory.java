@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,8 +66,8 @@ public class HSV2HLSAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected HSV2HLSSwitch<Adapter> modelSwitch =
-		new HSV2HLSSwitch<Adapter>() {
+	protected HSV2HLSSwitch<@Nullable Adapter> modelSwitch =
+		new HSV2HLSSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseHSVNode2HLSNode(HSVNode2HLSNode object) {
 				return createHSVNode2HLSNodeAdapter();

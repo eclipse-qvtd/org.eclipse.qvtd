@@ -11,7 +11,6 @@
 package	example1.target.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractDelegatingVisitor delegates all visits.
@@ -22,7 +21,7 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 {
 	protected final D delegate;
 	
-	protected AbstractDelegatingVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractDelegatingVisitor(@NonNull D delegate, C context) {
 		super(context);
 	//	assert delegate != null : "cannot decorate a null visitor"; //$NON-NLS-1$
 		this.delegate = delegate;		
@@ -47,57 +46,57 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull example1.target.util.Visitable visitable) {
+	public R visiting(example1.target.util.@NonNull Visitable visitable) {
 		return delegate.visiting(visitable);
 	}
 
 	@Override
-	public @Nullable R visitA(@NonNull example1.target.A object) {
+	public R visitA(example1.target.@NonNull A object) {
 		return delegate.visitA(object);
 	}
 
 	@Override
-	public @Nullable R visitA1(@NonNull example1.target.A1 object) {
+	public R visitA1(example1.target.@NonNull A1 object) {
 		return delegate.visitA1(object);
 	}
 
 	@Override
-	public @Nullable R visitA2(@NonNull example1.target.A2 object) {
+	public R visitA2(example1.target.@NonNull A2 object) {
 		return delegate.visitA2(object);
 	}
 
 	@Override
-	public @Nullable R visitA3(@NonNull example1.target.A3 object) {
+	public R visitA3(example1.target.@NonNull A3 object) {
 		return delegate.visitA3(object);
 	}
 
 	@Override
-	public @Nullable R visitB(@NonNull example1.target.B object) {
+	public R visitB(example1.target.@NonNull B object) {
 		return delegate.visitB(object);
 	}
 
 	@Override
-	public @Nullable R visitC(@NonNull example1.target.C object) {
+	public R visitC(example1.target.@NonNull C object) {
 		return delegate.visitC(object);
 	}
 
 	@Override
-	public @Nullable R visitD(@NonNull example1.target.D object) {
+	public R visitD(example1.target.@NonNull D object) {
 		return delegate.visitD(object);
 	}
 
 	@Override
-	public @Nullable R visitNamedElement(@NonNull example1.target.NamedElement object) {
+	public R visitNamedElement(example1.target.@NonNull NamedElement object) {
 		return delegate.visitNamedElement(object);
 	}
 
 	@Override
-	public @Nullable R visitNamespace(@NonNull example1.target.Namespace object) {
+	public R visitNamespace(example1.target.@NonNull Namespace object) {
 		return delegate.visitNamespace(object);
 	}
 
 	@Override
-	public @Nullable R visitTRoot(@NonNull example1.target.TRoot object) {
+	public R visitTRoot(example1.target.@NonNull TRoot object) {
 		return delegate.visitTRoot(object);
 	}
 }

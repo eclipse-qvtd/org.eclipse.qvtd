@@ -33,20 +33,20 @@ public interface Visitor<R>
 	 * Return the result of visiting a visitable for which no more specific pivot type method
 	 * is available.
 	 */
-	@Nullable R visiting(@NonNull example2.classes.util.Visitable visitable);
+	R visiting(example2.classes.util.@NonNull Visitable visitable);
 
-	@Nullable R visitArgument(@NonNull example2.classes.Argument object);
-	@Nullable R visitCallExp(@NonNull example2.classes.CallExp object);
-	@Nullable R visitClass(@NonNull example2.classes.Class object);
-	@Nullable R visitElement(@NonNull example2.classes.Element object);
-	@Nullable R visitNamedElement(@NonNull example2.classes.NamedElement object);
-	@Nullable R visitNamespace(@NonNull example2.classes.Namespace object);
-	@Nullable R visitOperation(@NonNull example2.classes.Operation object);
-	@Nullable R visitOperationCallExp(@NonNull example2.classes.OperationCallExp object);
-	@Nullable R visitPackage(@NonNull example2.classes.Package object);
-	@Nullable R visitParameter(@NonNull example2.classes.Parameter object);
-	@Nullable R visitProperty(@NonNull example2.classes.Property object);
-	@Nullable R visitPropertyCallExp(@NonNull example2.classes.PropertyCallExp object);
-	@Nullable R visitRoot(@NonNull example2.classes.Root object);
-	@Nullable R visitTypedElement(@NonNull example2.classes.TypedElement object);
+	R visitArgument(example2.classes.@NonNull Argument object);
+	R visitCallExp(example2.classes.@NonNull CallExp object);
+	R visitClass(example2.classes.@NonNull Class object);
+	R visitElement(example2.classes.@NonNull Element object);
+	R visitNamedElement(example2.classes.@NonNull NamedElement object);
+	R visitNamespace(example2.classes.@NonNull Namespace object);
+	R visitOperation(example2.classes.@NonNull Operation object);
+	R visitOperationCallExp(example2.classes.@NonNull OperationCallExp object);
+	R visitPackage(example2.classes.@NonNull Package object);
+	R visitParameter(example2.classes.@NonNull Parameter object);
+	R visitProperty(example2.classes.@NonNull Property object);
+	R visitPropertyCallExp(example2.classes.@NonNull PropertyCallExp object);
+	R visitRoot(example2.classes.@NonNull Root object);
+	R visitTypedElement(example2.classes.@NonNull TypedElement object);
 }

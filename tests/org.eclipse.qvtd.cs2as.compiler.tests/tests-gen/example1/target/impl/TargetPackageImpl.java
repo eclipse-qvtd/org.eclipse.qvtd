@@ -23,6 +23,8 @@ import example1.target.Namespace;
 import example1.target.TRoot;
 import example1.target.TargetFactory;
 import example1.target.TargetPackage;
+import example1.target.lookup.EnvironmentPackage;
+import example1.target.lookup.impl.EnvironmentPackageImpl;
 import example1.target.util.Visitable;
 
 /**
@@ -155,11 +157,16 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 
 		isInited = true;
 
+		// Obtain or create and register interdependencies
+		EnvironmentPackageImpl theEnvironmentPackage = (EnvironmentPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) instanceof EnvironmentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) : EnvironmentPackage.eINSTANCE);
+
 		// Create package meta-data objects
 		theTargetPackage.createPackageContents();
+		theEnvironmentPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theTargetPackage.initializePackageContents();
+		theEnvironmentPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theTargetPackage.freeze();

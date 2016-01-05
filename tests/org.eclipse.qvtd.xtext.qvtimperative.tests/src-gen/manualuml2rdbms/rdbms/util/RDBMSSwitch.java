@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +33,7 @@ import org.eclipse.emf.ecore.util.Switch;
  * @see manualuml2rdbms.rdbms.RDBMSPackage
  * @generated
  */
-public class RDBMSSwitch<T> extends Switch<T> {
+public class RDBMSSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

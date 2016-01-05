@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +27,7 @@ import org.eclipse.emf.ecore.util.Switch;
  * @see example5.sderived.SderivedPackage
  * @generated
  */
-public class SderivedSwitch<T> extends Switch<T> {
+public class SderivedSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

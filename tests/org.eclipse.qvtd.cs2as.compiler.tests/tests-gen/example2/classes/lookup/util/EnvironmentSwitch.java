@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 
 /**
@@ -24,7 +25,7 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
  * @see example2.classes.lookup.EnvironmentPackage
  * @generated
  */
-public class EnvironmentSwitch<T> extends Switch<T> {
+public class EnvironmentSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,8 +66,8 @@ public class SimplegraphAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SimplegraphSwitch<Adapter> modelSwitch =
-		new SimplegraphSwitch<Adapter>() {
+	protected SimplegraphSwitch<@Nullable Adapter> modelSwitch =
+		new SimplegraphSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseNode(Node object) {
 				return createNodeAdapter();

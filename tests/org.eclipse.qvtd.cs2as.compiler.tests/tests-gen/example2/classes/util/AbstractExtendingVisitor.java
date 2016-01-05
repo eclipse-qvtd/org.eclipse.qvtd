@@ -11,7 +11,6 @@
 package	example2.classes.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractExtendingVisitor provides a default implementation for each
@@ -29,77 +28,77 @@ public abstract class AbstractExtendingVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtendingVisitor(@NonNull C context) {
+	protected AbstractExtendingVisitor(C context) {
 		super(context);
 	}	
 
 	@Override
-	public @Nullable R visitArgument(@NonNull example2.classes.Argument object) {
+	public R visitArgument(example2.classes.@NonNull Argument object) {
 		return visitNamedElement(object);
 	}
 
 	@Override
-	public @Nullable R visitCallExp(@NonNull example2.classes.CallExp object) {
+	public R visitCallExp(example2.classes.@NonNull CallExp object) {
 		return visitTypedElement(object);
 	}
 
 	@Override
-	public @Nullable R visitClass(@NonNull example2.classes.Class object) {
+	public R visitClass(example2.classes.@NonNull Class object) {
 		return visitNamedElement(object);
 	}
 
 	@Override
-	public @Nullable R visitElement(@NonNull example2.classes.Element object) {
+	public R visitElement(example2.classes.@NonNull Element object) {
 		return visiting(object);
 	}
 
 	@Override
-	public @Nullable R visitNamedElement(@NonNull example2.classes.NamedElement object) {
+	public R visitNamedElement(example2.classes.@NonNull NamedElement object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable R visitNamespace(@NonNull example2.classes.Namespace object) {
+	public R visitNamespace(example2.classes.@NonNull Namespace object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable R visitOperation(@NonNull example2.classes.Operation object) {
+	public R visitOperation(example2.classes.@NonNull Operation object) {
 		return visitNamedElement(object);
 	}
 
 	@Override
-	public @Nullable R visitOperationCallExp(@NonNull example2.classes.OperationCallExp object) {
+	public R visitOperationCallExp(example2.classes.@NonNull OperationCallExp object) {
 		return visitCallExp(object);
 	}
 
 	@Override
-	public @Nullable R visitPackage(@NonNull example2.classes.Package object) {
+	public R visitPackage(example2.classes.@NonNull Package object) {
 		return visitNamedElement(object);
 	}
 
 	@Override
-	public @Nullable R visitParameter(@NonNull example2.classes.Parameter object) {
+	public R visitParameter(example2.classes.@NonNull Parameter object) {
 		return visitNamedElement(object);
 	}
 
 	@Override
-	public @Nullable R visitProperty(@NonNull example2.classes.Property object) {
+	public R visitProperty(example2.classes.@NonNull Property object) {
 		return visitNamedElement(object);
 	}
 
 	@Override
-	public @Nullable R visitPropertyCallExp(@NonNull example2.classes.PropertyCallExp object) {
+	public R visitPropertyCallExp(example2.classes.@NonNull PropertyCallExp object) {
 		return visitCallExp(object);
 	}
 
 	@Override
-	public @Nullable R visitRoot(@NonNull example2.classes.Root object) {
+	public R visitRoot(example2.classes.@NonNull Root object) {
 		return visitElement(object);
 	}
 
 	@Override
-	public @Nullable R visitTypedElement(@NonNull example2.classes.TypedElement object) {
+	public R visitTypedElement(example2.classes.@NonNull TypedElement object) {
 		return visitElement(object);
 	}
 }

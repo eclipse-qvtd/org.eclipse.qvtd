@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.jdt.annotation.Nullable;
 import example2.classes.ClassesPackage;
 import example2.classes.Element;
 import example2.classes.NamedElement;
@@ -43,7 +44,7 @@ import example2.classes.TypedElement;
  * @see example2.classes.ClassesPackage
  * @generated
  */
-public class ClassesSwitch<T> extends Switch<T> {
+public class ClassesSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

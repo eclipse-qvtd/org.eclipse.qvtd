@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.jdt.annotation.Nullable;
 import test.hsv.HSVTree.*;
 
 /**
@@ -32,7 +33,7 @@ import test.hsv.HSVTree.*;
  * @see test.hsv.HSVTree.HSVTreePackage
  * @generated
  */
-public class HSVTreeSwitch<T> extends Switch<T> {
+public class HSVTreeSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
