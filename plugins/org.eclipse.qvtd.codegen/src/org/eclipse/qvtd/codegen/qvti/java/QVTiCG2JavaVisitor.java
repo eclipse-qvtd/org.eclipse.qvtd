@@ -107,7 +107,7 @@ import com.google.common.collect.Iterables;
 /**
  * A QVTiCG2JavaVisitor supports generation of Java code from an optimized QVTi CG transformation tree.
  */
-public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implements QVTiCGModelVisitor<Boolean>
+public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerator> implements QVTiCGModelVisitor<Boolean>
 {
 	/**
 	 * The run-time API version.
@@ -168,7 +168,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.append(");\n");
 	}
 
-	protected String[] doAllInstances(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
+	protected @NonNull String @Nullable [] doAllInstances(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		Set<org.eclipse.ocl.pivot.Class> allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
 		if (allInstancesClasses.size() > 0) {
 			NameManager nameManager = getGlobalContext().getNameManager();
@@ -196,6 +196,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.append("[] ");
 			js.append(classIndex2classIdName);
 			js.append(" = new ");
+			js.appendIsRequired(true);
+			js.append(" ");
 			js.appendClassReference(ClassId.class);
 			js.append("[]{\n");
 			js.pushIndentation(null);
@@ -226,14 +228,20 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.append(" * instance of the derived classId contributes to derived and inherited ClassIndexes.\n");
 			js.append(" */\n");
 			js.append("private final static ");
-			js.appendIsRequired(true);
-			js.append(" ");
 			js.appendClassReference(int.class);
-			js.append("[][] ");
+			js.append(" ");
+			js.appendIsRequired(true);
+			js.append(" [] ");
+			js.appendIsRequired(true);
+			js.append(" [] ");
 			js.append(classIndex2allClassIndexes);
 			js.append(" = new ");
 			js.appendClassReference(int.class);
-			js.append("[][] {\n");
+			js.append(" ");
+			js.appendIsRequired(true);
+			js.append(" [] ");
+			js.appendIsRequired(true);
+			js.append(" [] {\n");
 			js.pushIndentation(null);
 			for (int i = 0; i < sortedList.size(); i++) {
 				org.eclipse.ocl.pivot.Class instancesClass = sortedList.get(i);
@@ -270,12 +278,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			}
 			js.popIndentation();
 			js.append("};\n");
-			return new String[]{ classIndex2classIdName, classIndex2allClassIndexes};
+			return new @NonNull String[]{ classIndex2classIdName, classIndex2allClassIndexes};
 		}
 		return null;
     }
 
-	protected void doConstructor(@NonNull CGTransformation cgTransformation, @Nullable String oppositeName, @Nullable String[] allInstancesNames) {
+	protected void doConstructor(@NonNull CGTransformation cgTransformation, @Nullable String oppositeName, @NonNull String @Nullable [] allInstancesNames) {
 //		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
 		String evaluatorName = JavaConstants.EXECUTOR_NAME;
 		String className = cgTransformation.getName();
@@ -288,7 +296,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.appendClassReference(ReflectiveOperationException.class);
 		js.append(" {\n");
 		js.pushIndentation(null);		
-		js.append("super(" + evaluatorName + ", new String[] {");
+		js.append("super(" + evaluatorName + ", new ");
+		js.appendIsRequired(true);
+		js.append(" String[] {");
 		boolean isFirst = true;
 		for (CGTypedModel cgTypedModel : cgTransformation.getTypedModels()) {
 			if (!isFirst) {
@@ -460,7 +470,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return JavaStream.convertToJavaIdentifier("CTOR_" + cgMapping.getName());
 	}
 
-	protected String getMappingName(@NonNull CGMapping cgMapping) {
+	protected @NonNull String getMappingName(@NonNull CGMapping cgMapping) {
 		return JavaStream.convertToJavaIdentifier("MAP_" + cgMapping.getName());
 	}
 
@@ -940,8 +950,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 						}
 						if (cgFreeVariable instanceof CGConnectionVariable) {
 							js.append("final ");
-							js.appendClassReference(true, cgFreeVariable);
-							js.append(".Accumulator ");						// FIXME Embed properly as a nested typeid
+							js.appendClassReference(null, cgFreeVariable);
+							js.append(".");
+							js.appendIsRequired(true);
+							js.append(" Accumulator ");						// FIXME Embed properly as a nested typeid
 							js.append(getValueName(cgFreeVariable));
 						}
 						else{
@@ -1073,8 +1085,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.append("// connection variables\n");
 			for (CGAccumulator cgAccumulator : cgAccumulators) {
 				js.append("final ");
-				js.appendClassReference(true, cgAccumulator);
-				js.append(".Accumulator ");
+				js.appendClassReference(null, cgAccumulator);
+				js.append(".");
+				js.appendIsRequired(true);
+				js.append(" Accumulator ");
 				js.appendValueName(cgAccumulator);
 				js.append(" = (");
 				js.appendClassReference(null, cgAccumulator);
@@ -1353,7 +1367,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		if (oppositeIndex2propertyIdName != null) {
 			js.append("\n");
 		}
-		String[] allInstancesNames = doAllInstances(transformationAnalysis);
+		@NonNull String @Nullable [] allInstancesNames = doAllInstances(transformationAnalysis);
 		js.append("\n");
 		doConstructorConstants(cgTransformation.getMappings());
 		js.append("\n");
