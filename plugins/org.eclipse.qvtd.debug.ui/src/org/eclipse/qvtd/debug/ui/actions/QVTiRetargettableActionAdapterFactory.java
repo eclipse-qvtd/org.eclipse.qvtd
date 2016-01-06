@@ -14,6 +14,7 @@ package org.eclipse.qvtd.debug.ui.actions;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.debug.ui.actions.IRunToLineTarget;
 import org.eclipse.debug.ui.actions.IToggleBreakpointsTarget;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
 
 /**
@@ -28,14 +29,15 @@ public class QVTiRetargettableActionAdapterFactory implements IAdapterFactory
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Object getAdapter(Object adaptableObject, @SuppressWarnings("rawtypes") Class adapterType) {
+	@Override
+	public <T> @Nullable T getAdapter(Object adaptableObject, Class<T> adapterType) {
 		if (!(adaptableObject instanceof QVTimperativeEditor)) {
 			return null;
         }
         if (IRunToLineTarget.class == adapterType) {
-			return new QVTiRunToLineAdapter();
+			return (T) new QVTiRunToLineAdapter();
         } else if (IToggleBreakpointsTarget.class == adapterType) {
-			return new QVTiToggleBreakpointAdapter();
+			return (T) new QVTiToggleBreakpointAdapter();
         } 
 		return null;
 	}
