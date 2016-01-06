@@ -5,7 +5,7 @@
     editorDirectory="/org.eclipse.qvtd.pivot.qvtimperative.editor/emf-gen" modelPluginID="org.eclipse.qvtd.pivot.qvtimperative"
     modelName="QVTimperativeLibrary" updateClasspath="false" nonNLSMarkers="true"
     suppressInterfaces="true" importerID="org.eclipse.emf.importer.ecore" bundleManifest="false"
-    complianceLevel="6.0" copyrightFields="false" runtimeVersion="2.7" interfaceNamePattern="">
+    complianceLevel="8.0" copyrightFields="false" runtimeVersion="2.7" interfaceNamePattern="">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Delegates" value="false"/>
     <details key="Use Null Annotations" value="true"/>

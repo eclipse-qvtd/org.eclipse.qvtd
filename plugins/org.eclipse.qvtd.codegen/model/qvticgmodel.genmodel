@@ -5,7 +5,7 @@
     editorDirectory="/org.eclipse.qvtd.codegen.editor/emf-gen" modelPluginID="org.eclipse.qvtd.codegen"
     modelName="QVTiCGmodel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     suppressEMFTypes="true" testsDirectory="/org.eclipse.qvtd.codegen.tests/emf-gen"
-    booleanFlagsReservedBits="8" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    booleanFlagsReservedBits="8" importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0"
     copyrightFields="false" usedGenPackages="../../org.eclipse.ocl.examples.codegen/model/cgmodel.genmodel#//cgmodel"
     importOrganizing="true">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">

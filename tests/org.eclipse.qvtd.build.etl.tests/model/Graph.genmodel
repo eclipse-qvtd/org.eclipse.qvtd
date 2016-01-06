@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.build.etl/src-gen" editDirectory="/org.eclipse.qvtd.build.etl.edit/src-gen"
     editorDirectory="/org.eclipse.qvtd.build.etl.editor/src-gen" modelPluginID="org.eclipse.qvtd.build.etl"
     modelName="Graph" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
     operationReflection="true" importOrganizing="true">
   <foreignModel>Graph.ecore</foreignModel>
   <genPackages prefix="Graph" basePackage="org.eclipse.qvtd.build.etl" disposableProviderFactory="true"

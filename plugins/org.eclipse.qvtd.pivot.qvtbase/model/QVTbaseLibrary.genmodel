@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.qvtd.pivot.qvtbase/emf-gen" editDirectory="/org.eclipse.qvtd.pivot.qvtbase.edit/emf-gen"
     editorDirectory="/org.eclipse.qvtd.pivot.qvtbase.editor/emf-gen" modelPluginID="org.eclipse.qvtd.pivot.qvtbase"
     modelName="QVTbaseLibrary" updateClasspath="false" nonNLSMarkers="true" suppressInterfaces="true"
-    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="6.0"
+    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="8.0"
     copyrightFields="false" runtimeVersion="2.7" interfaceNamePattern="">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Delegates" value="false"/>

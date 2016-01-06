@@ -1,41 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen"
-    modelPluginID="org.eclipse.qvtd.xtext.qvtimperative.tests" modelName="HSV2HLS"
-    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
-    bundleManifest="false" complianceLevel="5.0" copyrightFields="false" operationReflection="true"
-    importOrganizing="true" pluginKey="">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen" modelPluginID="org.eclipse.qvtd.xtext.qvtimperative.tests" modelName="HSV2HLS" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true" pluginKey="">
   <foreignModel>HSV2HLS.ecore</foreignModel>
-  <genPackages prefix="HSV2HLS" basePackage="test.middle" disposableProviderFactory="true"
-      ecorePackage="HSV2HLS.ecore#/">
-    <genDataTypes ecoreDataType="HSV2HLS.ecore#//RGB"/>
-    <genClasses ecoreClass="HSV2HLS.ecore#//HSVNode2HLSNode">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference HSV2HLS.ecore#//HSVNode2HLSNode/parent"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HSV2HLS.ecore#//HSVNode2HLSNode/children"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference HSV2HLS.ecore#//HSVNode2HLSNode/hsv"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference HSV2HLS.ecore#//HSVNode2HLSNode/hls"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HSV2HLS.ecore#//HSVNode2HLSNode/rgb"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HSV2HLS.ecore#//HSVNode2HLSNode/name"/>
+  <genPackages prefix="HSV2HLS" basePackage="test.middle" disposableProviderFactory="true">
+    <ecorePackage href="HSV2HLS.ecore#/"/>
+    <genDataTypes>
+      <ecoreDataType href="HSV2HLS.ecore#//RGB"/>
+    </genDataTypes>
+    <genClasses>
+      <ecoreClass href="HSV2HLS.ecore#//HSVNode2HLSNode"/>
+      <genFeatures property="None" notify="false" createChild="false">
+        <ecoreFeature xsi:type="ecore:EReference" href="HSV2HLS.ecore#//HSVNode2HLSNode/parent"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="HSV2HLS.ecore#//HSVNode2HLSNode/children"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="HSV2HLS.ecore#//HSVNode2HLSNode/hsv"/>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="HSV2HLS.ecore#//HSVNode2HLSNode/hls"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="HSV2HLS.ecore#//HSVNode2HLSNode/rgb"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="HSV2HLS.ecore#//HSVNode2HLSNode/name"/>
+      </genFeatures>
     </genClasses>
   </genPackages>
-  <genPackages prefix="HSVTree" basePackage="test.hsv" disposableProviderFactory="true"
-      ecorePackage="HSVTree.ecore#/">
-    <genDataTypes ecoreDataType="HSVTree.ecore#//HSV"/>
-    <genClasses ecoreClass="HSVTree.ecore#//HSVNode">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference HSVTree.ecore#//HSVNode/parent"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HSVTree.ecore#//HSVNode/children"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HSVTree.ecore#//HSVNode/hsv"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HSVTree.ecore#//HSVNode/name"/>
+  <genPackages prefix="HSVTree" basePackage="test.hsv" disposableProviderFactory="true">
+    <ecorePackage href="HSVTree.ecore#/"/>
+    <genDataTypes>
+      <ecoreDataType href="HSVTree.ecore#//HSV"/>
+    </genDataTypes>
+    <genClasses>
+      <ecoreClass href="HSVTree.ecore#//HSVNode"/>
+      <genFeatures property="None" notify="false" createChild="false">
+        <ecoreFeature xsi:type="ecore:EReference" href="HSVTree.ecore#//HSVNode/parent"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="HSVTree.ecore#//HSVNode/children"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="HSVTree.ecore#//HSVNode/hsv"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="HSVTree.ecore#//HSVNode/name"/>
+      </genFeatures>
     </genClasses>
   </genPackages>
-  <genPackages prefix="HLSTree" basePackage="test.hls" disposableProviderFactory="true"
-      ecorePackage="HLSTree.ecore#/">
-    <genDataTypes ecoreDataType="HLSTree.ecore#//HLS"/>
-    <genClasses ecoreClass="HLSTree.ecore#//HLSNode">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference HLSTree.ecore#//HLSNode/parent"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HLSTree.ecore#//HLSNode/children"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HLSTree.ecore#//HLSNode/hls"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HLSTree.ecore#//HLSNode/name"/>
+  <genPackages prefix="HLSTree" basePackage="test.hls" disposableProviderFactory="true">
+    <ecorePackage href="HLSTree.ecore#/"/>
+    <genDataTypes>
+      <ecoreDataType href="HLSTree.ecore#//HLS"/>
+    </genDataTypes>
+    <genClasses>
+      <ecoreClass href="HLSTree.ecore#//HLSNode"/>
+      <genFeatures property="None" notify="false" createChild="false">
+        <ecoreFeature xsi:type="ecore:EReference" href="HLSTree.ecore#//HLSNode/parent"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="HLSTree.ecore#//HLSNode/children"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="HLSTree.ecore#//HLSNode/hls"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="HLSTree.ecore#//HLSNode/name"/>
+      </genFeatures>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
