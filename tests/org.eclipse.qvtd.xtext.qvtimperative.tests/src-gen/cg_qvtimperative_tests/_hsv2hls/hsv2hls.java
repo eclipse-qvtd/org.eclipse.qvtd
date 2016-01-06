@@ -12,22 +12,15 @@ package cg_qvtimperative_tests._hsv2hls;
 import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
-import org.eclipse.ocl.pivot.ids.DataTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfKindOperation;
-import test.hls.HLSTree.HLSNode;
 import test.hls.HLSTree.HLSTreeFactory;
 import test.hls.HLSTree.HLSTreePackage;
 import test.hsv.HSVTree.HSVNode;
@@ -50,27 +43,27 @@ import test.middle.HSV2HLS.HSVNode2HLSNode;
 @SuppressWarnings("nls")
 public class hsv2hls extends AbstractTransformer
 {
-    public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbaseLibrary", "qvtbaselib", null);
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/HLSTree", null, HLSTreePackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/HSVTree", null, HSVTreePackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/HSVtoHLS", null, HSV2HLSPackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Class = PACKid_$metamodel$.getClassId("Class", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HLSNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree.getClassId("HLSNode", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HSVNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree.getClassId("HSVNode", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HSVNode2HLSNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS.getClassId("HSVNode2HLSNode", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Model = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary.getClassId("Model", 0);
-    public static final @NonNull /*@NonInvalid*/ DataTypeId DATAid_HLS = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree.getDataTypeId("HLS", 0);
-    public static final @NonNull /*@NonInvalid*/ DataTypeId DATAid_HSV = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree.getDataTypeId("HSV", 0);
-    public static final @NonNull /*@NonInvalid*/ DataTypeId DATAid_RGB = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS.getDataTypeId("RGB", 0);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_HSVNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_HSVNode);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_HSVNode2HLSNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_HSVNode2HLSNode);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_HSVNode = TypeId.SET.getSpecializedId(CLSSid_HSVNode);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbaseLibrary", "qvtbaselib", null);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/HLSTree", null, HLSTreePackage.eINSTANCE);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/HSVTree", null, HSVTreePackage.eINSTANCE);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/HSVtoHLS", null, HSV2HLSPackage.eINSTANCE);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = PACKid_$metamodel$.getClassId("Class", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_HLSNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree.getClassId("HLSNode", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_HSVNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree.getClassId("HSVNode", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_HSVNode2HLSNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS.getClassId("HSVNode2HLSNode", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Model = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary.getClassId("Model", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull DataTypeId DATAid_HLS = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree.getDataTypeId("HLS", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull DataTypeId DATAid_HSV = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree.getDataTypeId("HSV", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull DataTypeId DATAid_RGB = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS.getDataTypeId("RGB", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_HSVNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_HSVNode);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_HSVNode2HLSNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_HSVNode2HLSNode);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_HSVNode = TypeId.SET.getSpecializedId(CLSSid_HSVNode);
     
     /*
      * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
      */
-    private static final @NonNull ClassId[] classIndex2classId = new ClassId[]{
+    private static final @NonNull ClassId[] classIndex2classId = new @NonNull ClassId[]{
         CLSSid_HSVNode                  // 0 => HSVNode
     };
     
@@ -80,32 +73,32 @@ public class hsv2hls extends AbstractTransformer
      * Non trivial inner arrays arise when one ClassId is a derivation of another and so an
      * instance of the derived classId contributes to derived and inherited ClassIndexes.
      */
-    private final static @NonNull int[][] classIndex2allClassIndexes = new int[][] {
+    private final static int @NonNull [] @NonNull [] classIndex2allClassIndexes = new int @NonNull [] @NonNull [] {
         {0}                     // 0 : HSVNode -> {HSVNode}
     };
     
     
     public hsv2hls(final @NonNull Executor executor) throws ReflectiveOperationException {
-        super(executor, new String[] {"hsv", "hls", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
+        super(executor, new @NonNull String[] {"hsv", "hls", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() throws ReflectiveOperationException {
         return MAP___root__() && invocationManager.flush();
     }
     
-    protected @Nullable String hls2rgb(final @Nullable /*@NonInvalid*/ String color) {
+    protected @Nullable String hls2rgb(final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable String color) {
         return "";
     }
     
-    protected @Nullable String hsv2rgb(final @Nullable /*@NonInvalid*/ String color_0) {
+    protected @Nullable String hsv2rgb(final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable String color_0) {
         return "";
     }
     
-    protected @Nullable String rgb2hls(final @Nullable /*@NonInvalid*/ String color_1) {
+    protected @Nullable String rgb2hls(final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable String color_1) {
         return "";
     }
     
-    protected @Nullable String rgb2hsv(final @Nullable /*@NonInvalid*/ String color_2) {
+    protected @Nullable String rgb2hsv(final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable String color_2) {
         return "";
     }
     
@@ -123,13 +116,13 @@ public class hsv2hls extends AbstractTransformer
      */
     protected boolean MAP___root__() throws ReflectiveOperationException {
         // predicates
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         // mapping statements
-        final @NonNull /*@NonInvalid*/ Class TYP_HSVTree_c_c_HSVNode_0 = idResolver.getClass(CLSSid_HSVNode, null);
-        final @NonNull /*@NonInvalid*/ SetValue objectsOfKind = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_HSVNode, models[0/*hsv*/], TYP_HSVTree_c_c_HSVNode_0);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_HSVTree_c_c_HSVNode_0 = idResolver.getClass(CLSSid_HSVNode, null);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue objectsOfKind = ClassUtil.nonNullState(ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_HSVNode, models[0/*hsv*/], TYP_HSVTree_c_c_HSVNode_0));
         for (HSVNode hsvRoot_1 : ValueUtil.typedIterable(HSVNode.class, objectsOfKind)) {
             if (hsvRoot_1 != null) {
-                final @NonNull /*@NonInvalid*/ HSVNode symbol_0 = (HSVNode)hsvRoot_1;
+                final /*@NonInvalid*/ test.hsv.HSVTree.@org.eclipse.jdt.annotation.NonNull HSVNode symbol_0 = (HSVNode)hsvRoot_1;
                 MAP_HSV2MiddleRoot(symbol_0);
             }
         }
@@ -164,17 +157,17 @@ public class hsv2hls extends AbstractTransformer
      * middleNode := middleRoot;
      * }
      */
-    protected boolean MAP_HSV2MiddleRoot(final @NonNull /*@NonInvalid*/ HSVNode hsvRoot) throws ReflectiveOperationException {
+    protected boolean MAP_HSV2MiddleRoot(final /*@NonInvalid*/ test.hsv.HSVTree.@org.eclipse.jdt.annotation.NonNull HSVNode hsvRoot) throws ReflectiveOperationException {
         // predicates
-        final @Nullable /*@Thrown*/ HSVNode parent = hsvRoot.getParent();
+        final /*@Thrown*/ test.hsv.HSVTree.@org.eclipse.jdt.annotation.Nullable HSVNode parent = hsvRoot.getParent();
         final /*@Thrown*/ boolean eq = parent == null;
         if (eq != ValueUtil.TRUE_VALUE) {
             return false;
         }
         // variable assignments
-        final @Nullable /*@Thrown*/ String name = hsvRoot.getName();
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = hsvRoot.getName();
         // creations
-        final /*@Thrown*/ HSVNode2HLSNode middleRoot = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
+        final /*@Thrown*/ test.middle.HSV2HLS.@org.eclipse.jdt.annotation.Nullable HSVNode2HLSNode middleRoot = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
         assert middleRoot != null;
         models[2/*middle*/].add(middleRoot);
         // property assignments
@@ -182,10 +175,10 @@ public class hsv2hls extends AbstractTransformer
         middleRoot.setName(name);
         // mapping statements
         @SuppressWarnings("null")
-        final @NonNull /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
+        final /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
-                final @NonNull /*@NonInvalid*/ HSVNode symbol_2 = (HSVNode)hsvChild;
+                final /*@NonInvalid*/ test.hsv.HSVTree.@org.eclipse.jdt.annotation.NonNull HSVNode symbol_2 = (HSVNode)hsvChild;
                 MAP_HSV2MiddleRecursion(symbol_2, middleRoot);
             }
         }
@@ -219,12 +212,12 @@ public class hsv2hls extends AbstractTransformer
      * middleParent := middleNode;
      * }}
      */
-    protected boolean MAP_HSV2MiddleRecursion(final @NonNull /*@NonInvalid*/ HSVNode hsvNode, final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleParent) throws ReflectiveOperationException {
+    protected boolean MAP_HSV2MiddleRecursion(final /*@NonInvalid*/ test.hsv.HSVTree.@org.eclipse.jdt.annotation.NonNull HSVNode hsvNode, final /*@NonInvalid*/ test.middle.HSV2HLS.@org.eclipse.jdt.annotation.NonNull HSVNode2HLSNode middleParent) throws ReflectiveOperationException {
         // predicates
         // variable assignments
-        final @Nullable /*@Thrown*/ String name = hsvNode.getName();
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = hsvNode.getName();
         // creations
-        final /*@Thrown*/ HSVNode2HLSNode middleNode_1 = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
+        final /*@Thrown*/ test.middle.HSV2HLS.@org.eclipse.jdt.annotation.Nullable HSVNode2HLSNode middleNode_1 = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
         assert middleNode_1 != null;
         models[2/*middle*/].add(middleNode_1);
         // property assignments
@@ -233,10 +226,10 @@ public class hsv2hls extends AbstractTransformer
         middleNode_1.setName(name);
         // mapping statements
         @SuppressWarnings("null")
-        final @NonNull /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
+        final /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
-                final @NonNull /*@NonInvalid*/ HSVNode symbol_3 = (HSVNode)hsvChild;
+                final /*@NonInvalid*/ test.hsv.HSVTree.@org.eclipse.jdt.annotation.NonNull HSVNode symbol_3 = (HSVNode)hsvChild;
                 MAP_HSV2MiddleRecursion(symbol_3, middleNode_1);
             }
         }
@@ -267,12 +260,12 @@ public class hsv2hls extends AbstractTransformer
      * middleNode := middleChild;
      * }}
      */
-    protected boolean MAP_Middle2HLSRoot(final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleNode) throws ReflectiveOperationException {
+    protected boolean MAP_Middle2HLSRoot(final /*@NonInvalid*/ test.middle.HSV2HLS.@org.eclipse.jdt.annotation.NonNull HSVNode2HLSNode middleNode) throws ReflectiveOperationException {
         // predicates
         // variable assignments
-        final @Nullable /*@Thrown*/ String name = middleNode.getName();
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = middleNode.getName();
         // creations
-        final /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
+        final /*@Thrown*/ test.hls.HLSTree.@org.eclipse.jdt.annotation.Nullable HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
         assert hlsNode != null;
         models[1/*hls*/].add(hlsNode);
         // property assignments
@@ -281,10 +274,10 @@ public class hsv2hls extends AbstractTransformer
         hlsNode.setName(name);
         // mapping statements
         @SuppressWarnings("null")
-        final @NonNull /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode.getChildren();
+        final /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode.getChildren();
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
-                final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_3 = (HSVNode2HLSNode)middleChild;
+                final /*@NonInvalid*/ test.middle.HSV2HLS.@org.eclipse.jdt.annotation.NonNull HSVNode2HLSNode symbol_3 = (HSVNode2HLSNode)middleChild;
                 MAP_Middle2HLSRecursion(symbol_3);
             }
         }
@@ -317,18 +310,18 @@ public class hsv2hls extends AbstractTransformer
      * middleNode := middleChild;
      * }}
      */
-    protected boolean MAP_Middle2HLSRecursion(final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleNode_0) throws ReflectiveOperationException {
+    protected boolean MAP_Middle2HLSRecursion(final /*@NonInvalid*/ test.middle.HSV2HLS.@org.eclipse.jdt.annotation.NonNull HSVNode2HLSNode middleNode_0) throws ReflectiveOperationException {
         // predicates
         // variable assignments
-        final @Nullable /*@Thrown*/ HSVNode2HLSNode parent = middleNode_0.getParent();
+        final /*@Thrown*/ test.middle.HSV2HLS.@org.eclipse.jdt.annotation.Nullable HSVNode2HLSNode parent = middleNode_0.getParent();
         if (parent == null) {
             throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/examples/0.1/HSVtoHLS\'::HSVNode2HLSNode::hls\'");
         }
         @SuppressWarnings("null")
-        final @NonNull /*@Thrown*/ HLSNode hls = parent.getHls();
-        final @Nullable /*@Thrown*/ String name = middleNode_0.getName();
+        final /*@Thrown*/ test.hls.HLSTree.@org.eclipse.jdt.annotation.NonNull HLSNode hls = parent.getHls();
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = middleNode_0.getName();
         // creations
-        final /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
+        final /*@Thrown*/ test.hls.HLSTree.@org.eclipse.jdt.annotation.Nullable HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
         assert hlsNode != null;
         models[1/*hls*/].add(hlsNode);
         // property assignments
@@ -337,10 +330,10 @@ public class hsv2hls extends AbstractTransformer
         hlsNode.setName(name);
         // mapping statements
         @SuppressWarnings("null")
-        final @NonNull /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode_0.getChildren();
+        final /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode_0.getChildren();
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
-                final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_3 = (HSVNode2HLSNode)middleChild;
+                final /*@NonInvalid*/ test.middle.HSV2HLS.@org.eclipse.jdt.annotation.NonNull HSVNode2HLSNode symbol_3 = (HSVNode2HLSNode)middleChild;
                 MAP_Middle2HLSRecursion(symbol_3);
             }
         }
