@@ -18,7 +18,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
@@ -83,8 +83,8 @@ public class CS2ASCGAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CS2ASCGSwitch<Adapter> modelSwitch =
-		new CS2ASCGSwitch<Adapter>() {
+	protected CS2ASCGSwitch<@Nullable Adapter> modelSwitch =
+		new CS2ASCGSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseCGLookupCallExp(CGLookupCallExp object) {
 				return createCGLookupCallExpAdapter();

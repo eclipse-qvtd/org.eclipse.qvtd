@@ -22,11 +22,13 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.internal.etl.utils.MtcUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -111,7 +113,7 @@ public class QVTu2QVTm {
             for (Domain d : m.getDomain()) {
                 MtcUtil.fixReferences((Area) d, refinedVars);
             }
-            MtcUtil.fixReferences((Area) m, refinedVars);
+            MtcUtil.fixReferences(m, refinedVars);
         }
     }
 
@@ -149,7 +151,7 @@ public class QVTu2QVTm {
                 if (hasVariables((Area) rd))
                     return false;
             }
-            if (hasVariables((Area) m))
+            if (hasVariables(m))
                 return false;
         }
         return true;
@@ -281,14 +283,14 @@ public class QVTu2QVTm {
             for (Domain rd : r.getDomain()) {
                 mergeDomain(m, rd);
             }
-            mergeAreas((Area)m, (Area)r);
+            mergeAreas(m, r);
         }
         // After all has been merged all predicates, assignments and inits must
         // have their references fixed.
         for (Domain d : m.getDomain()) {
         	MtcUtil.fixReferences((Area) d, refinedVars);
         }
-        MtcUtil.fixReferences((Area) m, refinedVars);
+        MtcUtil.fixReferences(m, refinedVars);
 
     }
 
@@ -337,14 +339,14 @@ public class QVTu2QVTm {
 
     private void moveBottomPattern(BottomPattern source, BottomPattern target) {
         moveCorePattern(source, target);
-        ArrayList<EObject> temp = new ArrayList<EObject>(source.getRealizedVariable());
-        Iterator<EObject> it = temp.iterator();
+        ArrayList<@NonNull EObject> temp = new ArrayList<@NonNull EObject>(ClassUtil.nullFree(source.getRealizedVariable()));
+        Iterator<@NonNull EObject> it = temp.iterator();
         while (it.hasNext()) {
             EObject n = it.next();
             PivotUtilInternal.resetContainer(n);
             target.getRealizedVariable().add((RealizedVariable) n);
         }
-        temp = new ArrayList<EObject>(source.getAssignment());
+        temp = new ArrayList<@NonNull EObject>(ClassUtil.nullFree(source.getAssignment()));
         it = temp.iterator();
         while (it.hasNext()) {
             EObject n = it.next();
@@ -354,14 +356,14 @@ public class QVTu2QVTm {
     }
 
     private void moveCorePattern(CorePattern source, CorePattern target) {
-        ArrayList<EObject> temp = new ArrayList<EObject>(source.getVariable());
-        Iterator<EObject> it = temp.iterator();
+        ArrayList<@NonNull EObject> temp = new ArrayList<@NonNull EObject>(ClassUtil.nullFree(source.getVariable()));
+        Iterator<@NonNull EObject> it = temp.iterator();
         while (it.hasNext()) {
             Variable n = (Variable) it.next();
             PivotUtilInternal.resetContainer(n);
             target.getVariable().add(n);
         }
-        temp = new ArrayList<EObject>(source.getPredicate());
+        temp = new ArrayList<@NonNull EObject>(ClassUtil.nullFree(source.getPredicate()));
         it = temp.iterator();
         while (it.hasNext()) {
             EObject p = it.next();
@@ -453,8 +455,8 @@ public class QVTu2QVTm {
      * @param r
      */
     private void reduceVarAssignments(Area area) {
-        List<Variable> move = new ArrayList<Variable>();
-        for (Variable gv : area.getGuardPattern().getVariable()) {
+        List<@NonNull Variable> move = new ArrayList<@NonNull Variable>();
+        for (Variable gv : ClassUtil.nullFree(area.getGuardPattern().getVariable())) {
             if (findAndUseAssignment(gv, area)) {
                 // If initialised, move it to the bottom
                 move.add(gv);

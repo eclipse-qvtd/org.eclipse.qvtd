@@ -52,7 +52,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	{
 		
 		// Relations
-		@NonNull public TypedModel rtm;
+	//	@NonNull public TypedModel rtm;
 		@NonNull public String tmn;
 		@NonNull public List<org.eclipse.ocl.pivot.Package> up;
 		
@@ -60,7 +60,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		@Nullable public TypedModel mtm;
 		
 		public SubRecord(@NonNull TypedModel rtm, @NonNull String tmn, @NonNull List<org.eclipse.ocl.pivot.Package> up) {
-			this.rtm = rtm;
+	//		this.rtm = rtm;
 			this.tmn = tmn;
 			this.up = up;
 		}
@@ -68,23 +68,23 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		
 	}
 
-	public static final @NonNull Rule.Factory FACTORY = new Factory(); 
+	public static final Rule.@NonNull Factory FACTORY = new Factory(); 
 	
 	// Relations
-	private static final @NonNull RuleBindings.KeySet RULE_BINDINGS = new RuleBindings.KeySet();
-	public static final @NonNull RuleBindings.RuleKey<RelationalTransformation> RELATIONS_rt = RULE_BINDINGS.createRoot((RelationalTransformation)null, "rt");
-//	private static final @NonNull RuleBindings.RuleKey<TypedModel> RELATIONS_rtm = RULE_BINDINGS.create((TypedModel)null, "rtm");
+	private static final RuleBindings.@NonNull KeySet RULE_BINDINGS = new RuleBindings.KeySet();
+	public static final RuleBindings.@NonNull RuleKey<@NonNull RelationalTransformation> RELATIONS_rt = RULE_BINDINGS.createRoot((RelationalTransformation)null, "rt");
+//	private static final RuleBindings.@NonNull RuleKey<TypedModel> RELATIONS_rtm = RULE_BINDINGS.create((TypedModel)null, "rtm");
 	
 	// Core
 	Transformation mt = null;
 	org.eclipse.ocl.pivot.Package p = null;
 	TypedModel mmtm = null;
-	//public static final @NonNull RuleBindings.RuleKey<Transformation> CORE_mt = RULE_BINDINGS.create((Transformation)null, "mt");
-//	public static final @NonNull RuleBindings.RuleKey<TypedModel> CORE_mtm = RULE_BINDINGS.create((TypedModel)null, "mtm");
+	//public static final RuleBindings.@NonNull RuleKey<Transformation> CORE_mt = RULE_BINDINGS.create((Transformation)null, "mt");
+//	public static final RuleBindings.@NonNull RuleKey<TypedModel> CORE_mtm = RULE_BINDINGS.create((TypedModel)null, "mtm");
 	
 	// Shared
-//	public static final @NonNull RuleBindings.RuleKey<String> SHARED_tmn = RULE_BINDINGS.create((String)null, "tmn");
-//	public static final @NonNull RuleBindings.RuleKey<List<org.eclipse.ocl.examples.pivot.Package>> SHARED_up = RULE_BINDINGS.create((List<org.eclipse.ocl.examples.pivot.Package>)null, "up");
+//	public static final RuleBindings.@NonNull RuleKey<String> SHARED_tmn = RULE_BINDINGS.create((String)null, "tmn");
+//	public static final RuleBindings.@NonNull RuleKey<List<org.eclipse.ocl.examples.pivot.Package>> SHARED_up = RULE_BINDINGS.create((List<org.eclipse.ocl.examples.pivot.Package>)null, "up");
 	String rtn;
 	 
 	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
@@ -116,7 +116,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	}
 
 	@Override
-	public @NonNull RuleBindings.KeySet getRuleBindingsKeys() {
+	public RuleBindings.@NonNull KeySet getRuleBindingsKeys() {
 		return RULE_BINDINGS;
 	}
 
@@ -166,7 +166,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		RuleBindings whenBindings = whenRule.getRuleBindings();
 		RelationalTransformationToTracePackage whenRuleRecord = (RelationalTransformationToTracePackage) transformation.getRecord(whenBindings);
 		if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
-			p = (org.eclipse.ocl.pivot.Package) whenRuleRecord.getCore();
+			p = whenRuleRecord.getCore();
 			assert p != null;
 			return true;
 		}

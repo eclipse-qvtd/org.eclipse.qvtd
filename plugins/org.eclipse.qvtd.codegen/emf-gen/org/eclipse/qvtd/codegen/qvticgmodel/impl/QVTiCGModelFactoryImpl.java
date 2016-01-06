@@ -115,7 +115,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * @generated
 	 */
 	@Override
-	public CGConnectionAssignment createCGConnectionAssignment() {
+	public @NonNull CGConnectionAssignment createCGConnectionAssignment() {
 		CGConnectionAssignmentImpl cgConnectionAssignment = new CGConnectionAssignmentImpl();
 		return cgConnectionAssignment;
 	}
@@ -126,7 +126,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * @generated
 	 */
 	@Override
-	public CGConnectionVariable createCGConnectionVariable() {
+	public @NonNull CGConnectionVariable createCGConnectionVariable() {
 		CGConnectionVariableImpl cgConnectionVariable = new CGConnectionVariableImpl();
 		return cgConnectionVariable;
 	}

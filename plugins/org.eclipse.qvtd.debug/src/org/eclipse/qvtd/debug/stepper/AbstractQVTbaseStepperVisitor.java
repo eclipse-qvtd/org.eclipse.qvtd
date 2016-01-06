@@ -36,39 +36,39 @@ public abstract class AbstractQVTbaseStepperVisitor
 		super(context);
 	}	
 
-	public @Nullable IStepper visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
+	public @Nullable IStepper visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull BaseModel object) {
 		return visitModel(object);
 	}
 
-	public @Nullable IStepper visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {
+	public @Nullable IStepper visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return visitNamedElement(object);
 	}
 
-	public @Nullable IStepper visitFunction(@NonNull org.eclipse.qvtd.pivot.qvtbase.Function object) {
+	public @Nullable IStepper visitFunction(org.eclipse.qvtd.pivot.qvtbase.@NonNull Function object) {
 		return visitOperation(object);
 	}
 
-	public @Nullable IStepper visitFunctionParameter(@NonNull org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
+	public @Nullable IStepper visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object) {
 		return visitParameter(object);
 	}
 
-	public @Nullable IStepper visitPattern(@NonNull org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
+	public @Nullable IStepper visitPattern(org.eclipse.qvtd.pivot.qvtbase.@NonNull Pattern object) {
 		return visitElement(object);
 	}
 
-	public @Nullable IStepper visitPredicate(@NonNull org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
+	public @Nullable IStepper visitPredicate(org.eclipse.qvtd.pivot.qvtbase.@NonNull Predicate object) {
 		return visitElement(object);
 	}
 
-	public @Nullable IStepper visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object) {
+	public @Nullable IStepper visitRule(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule object) {
 		return visitNamedElement(object);
 	}
 
-	public @Nullable IStepper visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
+	public @Nullable IStepper visitTransformation(org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation object) {
 		return visitClass(object);
 	}
 
-	public @Nullable IStepper visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
+	public @Nullable IStepper visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel object) {
 		return visitNamedElement(object);
 	}
 }

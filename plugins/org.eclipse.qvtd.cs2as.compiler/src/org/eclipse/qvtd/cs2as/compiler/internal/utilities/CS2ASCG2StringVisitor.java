@@ -40,7 +40,7 @@ public class CS2ASCG2StringVisitor extends QVTiCG2StringVisitor implements CS2AS
 		}
 	}
 
-	public static @NonNull CS2ASCG2StringVisitor.Factory FACTORY = new MyFactory();
+	public static CS2ASCG2StringVisitor.@NonNull Factory FACTORY = new MyFactory();
 
 	public CS2ASCG2StringVisitor() {}
 

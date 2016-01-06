@@ -141,7 +141,7 @@ public class Scheduler extends SchedulerConstants
 							sharedHeadNodeGroup = headNodeGroup;
 						}
 						else {
-							for (@SuppressWarnings("null")@NonNull Map.Entry<MappingRegion, List<Node>> oldEntry : headNodeGroup) {
+							for (@SuppressWarnings("null")Map.@NonNull Entry<MappingRegion, List<Node>> oldEntry : headNodeGroup) {
 								@SuppressWarnings("null")@NonNull MappingRegion oldMappingRegion = oldEntry.getKey();
 								@SuppressWarnings("null")@NonNull List<Node> oldClassNodes = oldEntry.getValue();
 								sharedHeadNodeGroup.addMappingRegion(oldMappingRegion, oldClassNodes);

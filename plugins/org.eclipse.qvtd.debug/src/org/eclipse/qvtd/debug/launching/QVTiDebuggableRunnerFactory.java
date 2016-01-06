@@ -32,7 +32,7 @@ public class QVTiDebuggableRunnerFactory extends DebuggableRunnerFactory
 {
 	public static final @NonNull ValidBreakpointLocator validBreakpointLocator = new ValidBreakpointLocator(QVTiIsBreakpointableVisitor.INSTANCE);
 	
-	public QVTiDebuggableRunnerFactory(@NonNull EPackage.Registry packageRegistry,
+	public QVTiDebuggableRunnerFactory(EPackage.@NonNull Registry packageRegistry,
 			@NonNull List<String> modelURIs, @Nullable String traceFileURI) {
 		super(packageRegistry, modelURIs, traceFileURI);
 	}

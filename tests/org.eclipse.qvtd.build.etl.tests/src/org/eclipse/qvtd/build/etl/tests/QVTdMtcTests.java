@@ -136,7 +136,7 @@ public class QVTdMtcTests extends LoadTestCase {
     public void zztestUmlToRdbms() throws Exception {
 
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("UmlToRdbms");;
-    	URI samplesBaseUri = testBaseURI.appendSegment("samples");
+//    	URI samplesBaseUri = testBaseURI.appendSegment("samples");
     	MtcBroker mtc = new MtcBroker(testBaseURI, "UmlToRdbms.qvtcas", myQVT.getEnvironmentFactory(), TestsXMLUtil.defaultSavingOptions);
     	mtc.setCreateGraphml(true);
     	mtc.execute();
@@ -147,10 +147,10 @@ public class QVTdMtcTests extends LoadTestCase {
         assertNoValidationErrors("QVTs validation", mtc.getsModel().getRooteObject());
         assertNoValidationErrors("QVTi validation", mtc.getiModel().getRooteObject());
         // Run the QVTi transformation in interpreter mode
-    	URI inputURI = samplesBaseUri.appendSegment("SimpleUMLPeople.xmi");
-    	URI outputURI = samplesBaseUri.appendSegment("SimpleRDBMSPeople.xmi");
-    	URI middleURI = samplesBaseUri.appendSegment("SimpleUMLtoRDBMS_trace.xmi");
-    	URI expectedOutputURI = samplesBaseUri.appendSegment("SimpleRDBMSPeople_expected.xmi");
+//    	URI inputURI = samplesBaseUri.appendSegment("SimpleUMLPeople.xmi");
+//    	URI outputURI = samplesBaseUri.appendSegment("SimpleRDBMSPeople.xmi");
+//    	URI middleURI = samplesBaseUri.appendSegment("SimpleUMLtoRDBMS_trace.xmi");
+//    	URI expectedOutputURI = samplesBaseUri.appendSegment("SimpleRDBMSPeople_expected.xmi");
     	
 /* Fails because scheduler uses realized variable in expressions 
     	BasicQVTiExecutor qvtiExecutor = new BasicQVTiExecutor(myQVT.getEnvironmentFactory(), mtc.getTransformation(mtc.getiModel().getResource()));

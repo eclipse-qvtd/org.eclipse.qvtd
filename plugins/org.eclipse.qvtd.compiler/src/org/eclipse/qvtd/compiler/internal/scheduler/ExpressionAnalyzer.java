@@ -55,7 +55,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 
-public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<SimpleNode, AbstractMappingRegion>
+public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@NonNull SimpleNode, @NonNull AbstractMappingRegion>
 {
 	public class ConditionalExpressionAnalyzer extends ExpressionAnalyzer
 	{

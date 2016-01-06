@@ -70,7 +70,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeV
 
 public class DependencyAnalyzer
 {
-	private static final @SuppressWarnings("null")@NonNull Set<List<DependencyStep>> EMPTY_ELEMENTS = Collections.emptySet();
+//	private static final @SuppressWarnings("null")@NonNull Set<List<DependencyStep>> EMPTY_ELEMENTS = Collections.emptySet();
 		
 	@SuppressWarnings("serial")
 	protected static class BlockedAnalysisException extends RuntimeException

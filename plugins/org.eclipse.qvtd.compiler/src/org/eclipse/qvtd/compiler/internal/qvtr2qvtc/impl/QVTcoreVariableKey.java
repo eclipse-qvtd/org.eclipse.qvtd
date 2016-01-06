@@ -23,10 +23,10 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 
 public class QVTcoreVariableKey implements RelationKey {
 	
-	private static final @NonNull KeyBindings.KeySet RELATION_KEY_BINDINGS = new KeyBindings.KeySet();
-	public static final @NonNull KeyBindings.KeyKey<String> NAME = RELATION_KEY_BINDINGS.create((String)null, "name");
-	public static final @NonNull KeyBindings.KeyKey<Type> TYPE = RELATION_KEY_BINDINGS.create((Type)null, "type");
-	public static final @NonNull KeyBindings.KeyKey<CorePattern> CORE_PATTERN = RELATION_KEY_BINDINGS.create((CorePattern)null, "corePattern");
+	private static final KeyBindings.@NonNull KeySet RELATION_KEY_BINDINGS = new KeyBindings.KeySet();
+	public static final KeyBindings.@NonNull KeyKey<String> NAME = RELATION_KEY_BINDINGS.create((String)null, "name");
+	public static final KeyBindings.@NonNull KeyKey<Type> TYPE = RELATION_KEY_BINDINGS.create((Type)null, "type");
+	public static final KeyBindings.@NonNull KeyKey<CorePattern> CORE_PATTERN = RELATION_KEY_BINDINGS.create((CorePattern)null, "corePattern");
 
 	private Map<KeyBindings, Variable> variables = new HashMap<KeyBindings, Variable>();
 	

@@ -108,14 +108,14 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	}
 
 	// Relations
-	private static final @NonNull RuleBindings.KeySet RULE_BINDINGS = new RuleBindings.KeySet();
-	private static final @NonNull RuleBindings.RuleKey<Relation> RELATIONS_r = RULE_BINDINGS.createRoot((Relation)null, "r");
+	private static final RuleBindings.@NonNull KeySet RULE_BINDINGS = new RuleBindings.KeySet();
+	private static final RuleBindings.@NonNull RuleKey<Relation> RELATIONS_r = RULE_BINDINGS.createRoot((Relation)null, "r");
 
 	private String rn;
 
 	public Transformation mt;
 	
-	public static final @NonNull Rule.Factory FACTORY = new Factory(); 
+	public static final Rule.@NonNull Factory FACTORY = new Factory(); 
 	
 	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
 
@@ -161,7 +161,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	}
 
 	@Override
-	public @NonNull RuleBindings.KeySet getRuleBindingsKeys() {
+	public RuleBindings.@NonNull KeySet getRuleBindingsKeys() {
 		return RULE_BINDINGS;
 	}
 	

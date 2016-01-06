@@ -24,5 +24,5 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 public interface CS2ASCGModelVisitor<R> extends org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor<R>
 {
-	@Nullable R visitCGLookupCallExp(@NonNull org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp object);
+	@Nullable R visitCGLookupCallExp(org.eclipse.qvtd.cs2as.compiler.cgmodel.@NonNull CGLookupCallExp object);
 }

@@ -11,16 +11,15 @@
 package org.eclipse.qvtd.compiler.internal.scheduler;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 public interface Visitor<R>
 {
-	@Nullable R visiting(@NonNull Visitable visitable);
+	R visiting(@NonNull Visitable visitable);
 
-	@Nullable R visitCompositionRegion(@NonNull CompositionRegion containmentRegion);
-	@Nullable R visitMappingRegion(@NonNull MappingRegion mappingRegion);
-	@Nullable R visitMergedRegion(@NonNull MergedRegion mergedRegion);
-	@Nullable R visitOperationRegion(@NonNull OperationRegion operationRegion);
-	@Nullable R visitRootCompositionRegion(@NonNull RootRegion rootContainmentRegion);
-	@Nullable R visitRootRegion(@NonNull ScheduledRegion rootRegion);
+	R visitCompositionRegion(@NonNull CompositionRegion containmentRegion);
+	R visitMappingRegion(@NonNull MappingRegion mappingRegion);
+	R visitMergedRegion(@NonNull MergedRegion mergedRegion);
+	R visitOperationRegion(@NonNull OperationRegion operationRegion);
+	R visitRootCompositionRegion(@NonNull RootRegion rootContainmentRegion);
+	R visitRootRegion(@NonNull ScheduledRegion rootRegion);
 }

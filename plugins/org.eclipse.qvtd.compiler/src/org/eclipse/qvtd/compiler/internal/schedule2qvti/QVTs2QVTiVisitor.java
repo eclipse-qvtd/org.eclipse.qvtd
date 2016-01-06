@@ -257,6 +257,7 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 		StandardLibrary standardLibrary = getStandardLibrary();
 		org.eclipse.ocl.pivot.Class oclAnyType = standardLibrary.getOclAnyType();
 		Operation operation1 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "=");
+		assert operation1 != null;
 		OperationId oclAnyEqualsId = operation1.getOperationId();
 		return environmentFactory.getIdResolver().getOperation(oclAnyEqualsId);
 	}

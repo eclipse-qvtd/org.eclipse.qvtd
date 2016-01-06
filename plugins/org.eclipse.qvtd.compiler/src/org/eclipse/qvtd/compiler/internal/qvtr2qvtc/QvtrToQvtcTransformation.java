@@ -27,7 +27,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Package;
@@ -81,7 +80,7 @@ public class QvtrToQvtcTransformation
 	private final @NonNull Resource qvtrModel;
 	private final @NonNull Resource qvtcModel;
 	
-	private final @Nullable Resource qvtcTraceModel;
+//	private final @Nullable Resource qvtcTraceModel;
 //	private Rule.Factory[] ruleFactories;
 	
 	private final @NonNull List<EObject> potentialOrphans = new ArrayList<EObject>();
@@ -120,7 +119,7 @@ public class QvtrToQvtcTransformation
 		this.environmentFactory = environmentFactory;
 		this.qvtrModel = qvtrModel;		
 		this.qvtcModel = qvtcModel;
-		this.qvtcTraceModel = qvtcTraceModel;
+//		this.qvtcTraceModel = qvtcTraceModel;
 		traceData = new TransformationTraceDataImpl();
 		this.coreModel = QVTcoreFactory.eINSTANCE.createCoreModel();
         
@@ -244,7 +243,7 @@ public class QvtrToQvtcTransformation
 		}
 	}
 	
-	public void executeFactory(@NonNull Rule.Factory factory) {
+	public void executeFactory(Rule.@NonNull Factory factory) {
 		for (Rule rule : factory.getRules(this, qvtrModel)) {
 			if (rule != null) {
 				executeTopLevelRule(rule);
@@ -303,7 +302,7 @@ public class QvtrToQvtcTransformation
 	}
 
 	public @NonNull CoreDomain findCoreDomain(@NonNull String name,
-			@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule rule) {
+			org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule rule) {
 		
 		CoreDomain md = null;
 		if (doGlobalSearch) {
@@ -417,7 +416,7 @@ public class QvtrToQvtcTransformation
 		Type type = sv.getType();
 		assert (name != null) && (type != null);
 		if (doGlobalSearch) {
-			v = (Variable) variables.get(name, type, pattern);
+			v = variables.get(name, type, pattern);
 		}
 		if (v == null) {
 			v = PivotFactory.eINSTANCE.createVariable();
@@ -436,7 +435,7 @@ public class QvtrToQvtcTransformation
 		
 		Variable v = null;
 		if (doGlobalSearch) {
-			v = (Variable) variables.get(name, type, pattern);
+			v = variables.get(name, type, pattern);
 		}
 		if (v == null) {
 			v = PivotFactory.eINSTANCE.createVariable();
@@ -588,7 +587,7 @@ public class QvtrToQvtcTransformation
                 // Add the package to the CoreModel imports, there should be only one!!
                 Import i = PivotFactory.eINSTANCE.createImport();
                 i.setName(p.getName());
-                i.setImportedNamespace((Namespace) p);
+                i.setImportedNamespace(p);
                 this.coreModel.getOwnedImports().add(i);
         	}
         	else {

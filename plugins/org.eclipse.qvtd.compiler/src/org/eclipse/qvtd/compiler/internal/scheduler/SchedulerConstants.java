@@ -149,14 +149,19 @@ public abstract class SchedulerConstants
 		org.eclipse.ocl.pivot.Class oclAnyType = standardLibrary.getOclAnyType();
 		org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
 		Operation operation1 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "=");
+		assert operation1 != null;
 		oclAnyEqualsId = operation1.getOperationId();
 		Operation operation2 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "oclAsType");
+		assert operation2 != null;
 		oclAnyOclAsTypeId = operation2.getOperationId();
 		Operation operation3 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "oclIsKindOf");
+		assert operation3 != null;
 		oclAnyOclIsKindOfId = operation3.getOperationId();
 		Operation operation4 = NameUtil.getNameable(oclElementType.getOwnedOperations(), "oclContainer");
+		assert operation4 != null;
 		oclElementOclContainerId = operation4.getOperationId();
 		Operation operation5 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "oclAsSet");
+		assert operation5 != null;
 		oclAnyOclAsSetId = operation5.getOperationId();
 		oclVoidClassDatumAnalysis = getClassDatumAnalysis(standardLibrary.getOclVoidType(), domainAnalysis.getPrimitiveTypeModel());
 		//

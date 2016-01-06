@@ -67,8 +67,7 @@ public abstract class AbstractRule implements Rule
 		}
 
 		@Override
-		@NonNull
-		public RuleBindings.KeySet getRuleBindingsKeys() {
+		public RuleBindings.@NonNull KeySet getRuleBindingsKeys() {
 			return (RuleBindings.KeySet) ruleBindings.keySet();
 		}
 	}
@@ -98,8 +97,7 @@ public abstract class AbstractRule implements Rule
 	}
 
 	@Override
-	@NonNull
-	public RuleBindings.KeySet getRuleBindingsKeys() {
+	public RuleBindings.@NonNull KeySet getRuleBindingsKeys() {
 		return (RuleBindings.KeySet) ruleBindings.keySet();
 	}
 

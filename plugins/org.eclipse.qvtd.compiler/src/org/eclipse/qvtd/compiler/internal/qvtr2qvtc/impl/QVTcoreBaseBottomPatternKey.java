@@ -22,8 +22,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 
 public class QVTcoreBaseBottomPatternKey implements RelationKey {
 	
-	private static final @NonNull KeyBindings.KeySet RELATION_KEY_BINDINGS = new KeyBindings.KeySet();
-	public static final @NonNull KeyBindings.KeyKey<Area> AREA = RELATION_KEY_BINDINGS.create((Area)null, "area");
+	private static final KeyBindings.@NonNull KeySet RELATION_KEY_BINDINGS = new KeyBindings.KeySet();
+	public static final KeyBindings.@NonNull KeyKey<Area> AREA = RELATION_KEY_BINDINGS.create((Area)null, "area");
 	
 	private Map<KeyBindings, BottomPattern> bottomPatterns = new HashMap<KeyBindings, BottomPattern>();
 	

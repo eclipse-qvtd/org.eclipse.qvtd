@@ -22,9 +22,9 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 public class QVTcoreMappingKey implements RelationKey {
 	
-	private static final @NonNull KeyBindings.KeySet RELATION_KEY_BINDINGS = new KeyBindings.KeySet();
-	public static final @NonNull KeyBindings.KeyKey<String> NAME = RELATION_KEY_BINDINGS.create((String)null, "name");
-	public static final @NonNull KeyBindings.KeyKey<Transformation> TRANSFORMATION = RELATION_KEY_BINDINGS.create((Transformation)null, "transformation");
+	private static final KeyBindings.@NonNull KeySet RELATION_KEY_BINDINGS = new KeyBindings.KeySet();
+	public static final KeyBindings.@NonNull KeyKey<String> NAME = RELATION_KEY_BINDINGS.create((String)null, "name");
+	public static final KeyBindings.@NonNull KeyKey<Transformation> TRANSFORMATION = RELATION_KEY_BINDINGS.create((Transformation)null, "transformation");
 	
 	private Map<KeyBindings, Mapping> mappings = new HashMap<KeyBindings, Mapping>();
 	

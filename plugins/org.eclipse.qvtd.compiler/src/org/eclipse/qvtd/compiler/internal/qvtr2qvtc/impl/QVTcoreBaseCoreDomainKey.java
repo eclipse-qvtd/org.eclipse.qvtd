@@ -22,9 +22,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 public class QVTcoreBaseCoreDomainKey implements RelationKey {
 	
 	
-	private static final @NonNull KeyBindings.KeySet RELATION_KEY_BINDINGS = new KeyBindings.KeySet();
-	public static final @NonNull KeyBindings.KeyKey<String> NAME = RELATION_KEY_BINDINGS.create((String)null, "name");
-	public static final @NonNull KeyBindings.KeyKey<org.eclipse.qvtd.pivot.qvtbase.Rule> RULE = RELATION_KEY_BINDINGS.create((org.eclipse.qvtd.pivot.qvtbase.Rule)null, "rule");
+	private static final KeyBindings.@NonNull KeySet RELATION_KEY_BINDINGS = new KeyBindings.KeySet();
+	public static final KeyBindings.@NonNull KeyKey<String> NAME = RELATION_KEY_BINDINGS.create((String)null, "name");
+	public static final KeyBindings.@NonNull KeyKey<org.eclipse.qvtd.pivot.qvtbase.Rule> RULE = RELATION_KEY_BINDINGS.create((org.eclipse.qvtd.pivot.qvtbase.Rule)null, "rule");
 	
 	private Map<KeyBindings, CoreDomain> coreDomains = new HashMap<KeyBindings, CoreDomain>();
 	

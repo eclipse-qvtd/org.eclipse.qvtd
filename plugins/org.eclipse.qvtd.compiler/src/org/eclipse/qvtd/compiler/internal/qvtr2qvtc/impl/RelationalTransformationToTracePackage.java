@@ -60,10 +60,10 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	}
 	
 
-	public static final @NonNull Rule.Factory FACTORY = new Factory(); 
+	public static final Rule.@NonNull Factory FACTORY = new Factory(); 
 	
-	private static final @NonNull RuleBindings.KeySet RULE_BINDINGS = new RuleBindings.KeySet();
-	public static final @NonNull RuleBindings.RuleKey<RelationalTransformation> RELATIONS_rt = RULE_BINDINGS.createRoot((RelationalTransformation)null, "rt");
+	private static final RuleBindings.@NonNull KeySet RULE_BINDINGS = new RuleBindings.KeySet();
+	public static final RuleBindings.@NonNull RuleKey<RelationalTransformation> RELATIONS_rt = RULE_BINDINGS.createRoot((RelationalTransformation)null, "rt");
 	
 	// Core
 	private org.eclipse.ocl.pivot.Package p;
@@ -94,7 +94,7 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	}
 
 	@Override
-	public @NonNull RuleBindings.KeySet getRuleBindingsKeys() {
+	public RuleBindings.@NonNull KeySet getRuleBindingsKeys() {
 		return RULE_BINDINGS;
 	}
 

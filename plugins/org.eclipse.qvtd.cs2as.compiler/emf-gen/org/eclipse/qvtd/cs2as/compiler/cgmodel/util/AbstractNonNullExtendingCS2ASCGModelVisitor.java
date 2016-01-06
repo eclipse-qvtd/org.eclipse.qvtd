@@ -41,7 +41,7 @@ public abstract class AbstractNonNullExtendingCS2ASCGModelVisitor<R, C>
 	}	
 
 	@Override
-	public @NonNull R visitCGLookupCallExp(@NonNull org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp object) {
+	public @NonNull R visitCGLookupCallExp(org.eclipse.qvtd.cs2as.compiler.cgmodel.@NonNull CGLookupCallExp object) {
 		return visitCGOperationCallExp(object);
 	}
 }

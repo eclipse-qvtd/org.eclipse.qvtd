@@ -15,14 +15,11 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludingAllOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludingOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 
 import example1.target.NamedElement;
@@ -153,7 +150,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_lookup_c_c_LookupEnvironment_0 = idResolver.getClass(EnvironmentTables.CLSSid_LookupEnvironment, null);
 		final /*@Thrown*/ example1.target.lookup.@NonNull LookupEnvironment symbol_0 = (LookupEnvironment)TYP_lookup_c_c_LookupEnvironment_0.createInstance();
 		@SuppressWarnings("null")
-		final /*@Thrown*/ List<Object> namedElements = this.getNamedElements();
+		final /*@Thrown*/ List<NamedElement> namedElements = this.getNamedElements();
 		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_elements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_TMPLid_, elements);
 		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue includingAll = ClassUtil.nonNullState(CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements, BOXED_elements));
@@ -184,7 +181,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_lookup_c_c_LookupEnvironment_0 = idResolver.getClass(EnvironmentTables.CLSSid_LookupEnvironment, null);
 		final /*@Thrown*/ example1.target.lookup.@NonNull LookupEnvironment symbol_0 = (LookupEnvironment)TYP_lookup_c_c_LookupEnvironment_0.createInstance();
 		@SuppressWarnings("null")
-		final /*@Thrown*/ List<Object> namedElements = this.getNamedElements();
+		final /*@Thrown*/ List<NamedElement> namedElements = this.getNamedElements();
 		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
 		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue including = ClassUtil.nonNullState((OrderedSetValue)CollectionIncludingOperation.INSTANCE.evaluate(BOXED_namedElements, element));
 		final List<? extends Object> UNBOXED_including = including.asEcoreObjects(idResolver, Object.class);

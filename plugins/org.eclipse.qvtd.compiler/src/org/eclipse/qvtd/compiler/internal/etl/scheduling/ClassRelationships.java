@@ -34,56 +34,57 @@ import org.eclipse.ocl.pivot.utilities.MetamodelManager;
  * @param <C>
  */
 public class ClassRelationships {
+	private static final @SuppressWarnings("null")@NonNull Set<@NonNull Class> EMPTY_CLASS_SET = Collections.<@NonNull Class>emptySet();
 
 	public static class ContainerClass {
 		
-		private Class containerClass;
+		private @NonNull Class containerClass;
 		
-		private Property containmentProperty;
+		private @NonNull Property containmentProperty;
 		
-		public ContainerClass(Class containerClass, Property containmentProperty) {
+		public ContainerClass(@NonNull Class containerClass, @NonNull Property containmentProperty) {
 			this.containerClass = containerClass;
 			this.containmentProperty = containmentProperty;
 		}
 		
-		public Class getContainerClass() {
+		public @NonNull Class getContainerClass() {
 			return containerClass;
 		}
 		
-		public Property getContainmentProperty() {
+		public @NonNull Property getContainmentProperty() {
 			return containmentProperty;
 		}
 		
 		@Override
-		public String toString() {
+		public @NonNull String toString() {
 			
 			return containerClass.getName() + " - " + containmentProperty.getName();
 		}
 	}
 	
-	private Map<Class, Set<Class>> class2superClasses = new HashMap<Class, Set<Class>>();
+	private @NonNull Map<@NonNull Class, Set<@NonNull Class>> class2superClasses = new HashMap<@NonNull Class, Set<@NonNull Class>>();
 		
-	private Map<Class, Set<Class>> class2directSubClasses = new HashMap<Class, Set<Class>>();
+	private @NonNull Map<@NonNull Class, Set<@NonNull Class>> class2directSubClasses = new HashMap<@NonNull Class, Set<@NonNull Class>>();
 	
-	private Map<Class, Set<Class>> class2allSubClasses = new HashMap<Class, Set<Class>>();
+	private @NonNull Map<@NonNull Class, Set<@NonNull Class>> class2allSubClasses = new HashMap<@NonNull Class, Set<@NonNull Class>>();
 	
-	private Map<Class, Set<Class>> class2containerClasses = new HashMap<Class, Set<Class>>();
+	private @NonNull Map<@NonNull Class, Set<@NonNull Class>> class2containerClasses = new HashMap<@NonNull Class, Set<@NonNull Class>>();
 	
-	private Map<Class, Set<ContainerClass>> class2detailedContainerClasses = new HashMap<Class, Set<ContainerClass>>();
+	private @NonNull Map<@NonNull Class, Set<@NonNull ContainerClass>> class2detailedContainerClasses = new HashMap<@NonNull Class, Set<@NonNull ContainerClass>>();
 	
-	protected MetamodelManager mManager;
+	protected @NonNull MetamodelManager mManager;
 	
-	private Deque<Package> packageToProcess = new LinkedList<Package>();
+	private Deque<@NonNull Package> packageToProcess = new LinkedList<@NonNull Package>();
 	
-	private Set<Package> processedPackage = new HashSet<Package>(); 
+	private Set<@NonNull Package> processedPackage = new HashSet<@NonNull Package>(); 
 	
-	public ClassRelationships(EnvironmentFactory ocl, ResourceSet rSet) {
+	public ClassRelationships(@NonNull EnvironmentFactory ocl, @NonNull ResourceSet rSet) {
 		mManager = ocl.getMetamodelManager();
 		((MetamodelManagerInternal)mManager).getASmetamodel();
 		initializeMaps(rSet);
 	}
 	
-	private void initializeMaps(ResourceSet resourceSet) {
+	private void initializeMaps(@NonNull ResourceSet resourceSet) {
 	
 		for (Resource resource : resourceSet.getResources()) {
 			for (@SuppressWarnings("null") @NonNull Package aPackage : getInvolvedPackages(resource)) {
@@ -109,16 +110,16 @@ public class ClassRelationships {
 	}
 	
 	
-	private void computeClass2SuperClasses(Package p) {
+	private void computeClass2SuperClasses(@NonNull Package p) {
 				
 		if (processedPackage.contains(p)) {
 			return;
 		}			
 		processedPackage.add(p);
-		for (Class aClass : p.getOwnedClasses()) {
+		for (Class aClass : ClassUtil.nullFree(p.getOwnedClasses())) {
 			computeClass2SuperClasses(aClass);
 		}
-		for (Package nestedPackage : p.getOwnedPackages()) {
+		for (Package nestedPackage : ClassUtil.nullFree(p.getOwnedPackages())) {
 			computeClass2SuperClasses(nestedPackage);
 		}
 	}
@@ -128,19 +129,19 @@ public class ClassRelationships {
 	 * @param aClass
 	 * @return a set with all the all classess
 	 */
-	private Set<Class> computeClass2SuperClasses(Class aClass) {
+	private Set<@NonNull Class> computeClass2SuperClasses(@NonNull Class aClass) {
 		
 		//aClass = mManager.getPrimaryClass(aClass);
-		Set<Class> superRels = class2superClasses.get(aClass);
+		Set<@NonNull Class> superRels = class2superClasses.get(aClass);
 		if (superRels != null) {
 			return superRels;
 		} else {
-			superRels = new LinkedHashSet<Class>();
+			superRels = new LinkedHashSet<@NonNull Class>();
 			class2superClasses.put(aClass, superRels);
 		}
 		
 		// Super class inheritance might be shortcut 
-		for (Class superClass : aClass.getSuperClasses()) {
+		for (Class superClass : ClassUtil.nullFree(aClass.getSuperClasses())) {
 			//superClass = mManager.getPrimaryClass(superClass);
 			superRels.add(superClass);
 			superRels.addAll(computeClass2SuperClasses(superClass));
@@ -176,7 +177,7 @@ public class ClassRelationships {
 		}
 	}
 	
-	private void computeClass2ContainerClasses(Class aClass) {
+	private void computeClass2ContainerClasses(@NonNull Class aClass) {
 		 
 		for (Property property : aClass.getOwnedProperties()) {
 			Type propType = getType(property);
@@ -214,24 +215,24 @@ public class ClassRelationships {
 		return type;
 	}
 
-	private void addContainerClassForTypeAndSubtypes(Class containerClass, Property containmentProperty, @NonNull Class type) {
+	private void addContainerClassForTypeAndSubtypes(@NonNull Class containerClass, @NonNull Property containmentProperty, @NonNull Class type) {
 		
 		//type = mManager.getPrimaryClass(type);
-		Set<ContainerClass> detailedContainerClasses = class2detailedContainerClasses.get(type);
-		Set<Class> containerClasses = class2containerClasses.get(type);
+		Set<@NonNull ContainerClass> detailedContainerClasses = class2detailedContainerClasses.get(type);
+		Set<@NonNull Class> containerClasses = class2containerClasses.get(type);
 		if (detailedContainerClasses == null) {
-			detailedContainerClasses = new LinkedHashSet<ContainerClass>();
+			detailedContainerClasses = new LinkedHashSet<@NonNull ContainerClass>();
 			class2detailedContainerClasses.put(type, detailedContainerClasses);
 		}
 		if (containerClasses == null) {
-			containerClasses = new LinkedHashSet<Class>();
+			containerClasses = new LinkedHashSet<@NonNull Class>();
 			class2containerClasses.put(type, containerClasses);
 		}
 		
 		detailedContainerClasses.add(new ContainerClass(containerClass, containmentProperty));
 		containerClasses.add(containerClass);
 		
-		for (@SuppressWarnings("null") @NonNull Class subType : getDirectSubClasses(type)) {
+		for (Class subType : getDirectSubClasses(type)) {
 			addContainerClassForTypeAndSubtypes(containerClass, containmentProperty, subType);
 		}	
 	}
@@ -242,38 +243,38 @@ public class ClassRelationships {
 //	}
 
 	
-	public Set<Class> getAllSuperClasses(@NonNull Class type) {
+	public @NonNull Set<@NonNull Class> getAllSuperClasses(@NonNull Class type) {
 		Type primaryType = mManager.getPrimaryClass(type);
-		Set<Class> allSuperClasses = class2superClasses.get(primaryType);
-		return allSuperClasses == null ? Collections.<Class>emptySet()  
-										: Collections.<Class>unmodifiableSet(allSuperClasses);
+		Set<@NonNull Class> allSuperClasses = class2superClasses.get(primaryType);
+		return allSuperClasses == null ? EMPTY_CLASS_SET  
+				: ClassUtil.nonNullState(Collections.<@NonNull Class>unmodifiableSet(allSuperClasses));
 	}
 	
-	public Set<Class> getAllSubClasses(@NonNull Class type) {
+	public @NonNull Set<@NonNull Class> getAllSubClasses(@NonNull Class type) {
 		Type primaryType = mManager.getPrimaryClass(type);
-		Set<Class> allSubClasses = class2allSubClasses.get(primaryType);
-		return allSubClasses == null ? Collections.<Class>emptySet()  
-										: Collections.<Class>unmodifiableSet(allSubClasses);
+		Set<@NonNull Class> allSubClasses = class2allSubClasses.get(primaryType);
+		return allSubClasses == null ? EMPTY_CLASS_SET  
+				: ClassUtil.nonNullState(Collections.<@NonNull Class>unmodifiableSet(allSubClasses));
 	}
 	
-	public Set<Class> getDirectSubClasses(@NonNull Class type) {
+	public @NonNull Set<@NonNull Class> getDirectSubClasses(@NonNull Class type) {
 		Type primaryType = mManager.getPrimaryClass(type);
-		Set<Class> directSubClasses = class2directSubClasses.get(primaryType);
-		return directSubClasses == null ? Collections.<Class>emptySet()  
-										: Collections.<Class>unmodifiableSet(directSubClasses);
+		Set<@NonNull Class> directSubClasses = class2directSubClasses.get(primaryType);
+		return directSubClasses == null ? EMPTY_CLASS_SET  
+				: ClassUtil.nonNullState(Collections.<@NonNull Class>unmodifiableSet(directSubClasses));
 	}
 	
-	public Set<Class> getContainerClasses(@NonNull Class type) {
+	public @NonNull Set<@NonNull Class> getContainerClasses(@NonNull Class type) {
 		Type primaryType = mManager.getPrimaryClass(type);
-		Set<Class> containerClasses = class2containerClasses.get(primaryType);
-		return containerClasses == null ? Collections.<Class>emptySet()
-				: Collections.<Class>unmodifiableSet(containerClasses);
+		Set<@NonNull Class> containerClasses = class2containerClasses.get(primaryType);
+		return containerClasses == null ? EMPTY_CLASS_SET
+				: ClassUtil.nonNullState(Collections.<@NonNull Class>unmodifiableSet(containerClasses));
 	}
 	
-	public Set<ContainerClass> getDetailedContainerClasses(@NonNull Class type) {
+	public @NonNull Set<@NonNull ContainerClass> getDetailedContainerClasses(@NonNull Class type) {
 		Type primaryType = mManager.getPrimaryClass(type);
-		Set<ContainerClass> containerClasses = class2detailedContainerClasses.get(primaryType);
-		return containerClasses == null ? Collections.<ContainerClass>emptySet()
-				: Collections.<ContainerClass>unmodifiableSet(containerClasses);
+		Set<@NonNull ContainerClass> containerClasses = class2detailedContainerClasses.get(primaryType);
+		return ClassUtil.nonNullState(containerClasses == null ? Collections.<@NonNull ContainerClass>emptySet()
+				: Collections.<@NonNull ContainerClass>unmodifiableSet(containerClasses));
 	}
 }

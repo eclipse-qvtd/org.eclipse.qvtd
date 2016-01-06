@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 public abstract class AbstractRole implements Role
 {
-	protected final @NonNull Role.Phase phase;
+	protected final Role.@NonNull Phase phase;
 	
 	protected AbstractRole(@NonNull Phase phase) {
 		this.phase = phase;

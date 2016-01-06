@@ -66,8 +66,8 @@ public class QVTr2QVTcRelations {
 	private @NonNull final String OPPOSITE_UPPER_SOURCE = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper";
 	private @NonNull final String OPPOSITE_ROLE_NAME_SOURCE = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 	private @NonNull final String EMF_ANNOTATION_DETAIL_KEY = "body";
-	private @NonNull final String OPPOSITE_UPPER_VALUE = "1";
-	private @NonNull final String OPPOSITE_ROLE_NAME_VALUE = "middle";
+//	private @NonNull final String OPPOSITE_UPPER_VALUE = "1";
+//	private @NonNull final String OPPOSITE_ROLE_NAME_VALUE = "middle";
 	
 	
 
@@ -101,13 +101,11 @@ public class QVTr2QVTcRelations {
 		
 		Set<Variable> vars = new HashSet<Variable>();
 		for (Domain d : r.getDomain()) {
-			if (((RelationDomain) d).getPattern() != null) {
-				if (vars.isEmpty()) {
-					vars.addAll(((RelationDomain) d).getPattern().get(0).getBindsTo());
-				} else {
-					List<Variable> bt = ((RelationDomain) d).getPattern().get(0).getBindsTo(); 
-					vars.retainAll(bt);
-				}
+			if (vars.isEmpty()) {
+				vars.addAll(((RelationDomain) d).getPattern().get(0).getBindsTo());
+			} else {
+				List<Variable> bt = ((RelationDomain) d).getPattern().get(0).getBindsTo(); 
+				vars.retainAll(bt);
 			}
 		}
 		return vars;
@@ -585,7 +583,7 @@ public class QVTr2QVTcRelations {
 				RelationalTransformationToMappingTransformation whenRuleRecord = (RelationalTransformationToMappingTransformation) transformation.getRecord(whenBindings);
 				Transformation mt = null;
 				if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
-					mt = (Transformation) whenRuleRecord.getCore();
+					mt = whenRuleRecord.getCore();
 				}
 				assert mt != null;
 				// init
@@ -953,7 +951,7 @@ public class QVTr2QVTcRelations {
 		RuleBindings whenBindings = whenRule.getRuleBindings();
 		RelationalTransformationToMappingTransformation whenRuleRecord = (RelationalTransformationToMappingTransformation) transformation.getRecord(whenBindings);
 		if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
-			mt = (Transformation) whenRuleRecord.getCore();
+			mt = whenRuleRecord.getCore();
 			
 		}
 		assert mt != null;
@@ -1326,7 +1324,7 @@ public class QVTr2QVTcRelations {
 				RelationalTransformationToMappingTransformation whenRuleRecord = (RelationalTransformationToMappingTransformation) transformation.getRecord(whenBindings);
 				Transformation mt = null;
 				if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
-					mt = (Transformation) whenRuleRecord.getCore();
+					mt = whenRuleRecord.getCore();
 				}
 				assert mt != null;
 				// init
@@ -1451,8 +1449,7 @@ public class QVTr2QVTcRelations {
 	public Set<Variable> getAllDomainVars(@NonNull Relation r) {
 		Set<Variable> allDomainVars = new HashSet<Variable>();
 		for (Domain d : r.getDomain()) {
-			if (((RelationDomain) d).getPattern() != null)
-				allDomainVars.addAll(((RelationDomain) d).getPattern().get(0).getBindsTo());
+			allDomainVars.addAll(((RelationDomain) d).getPattern().get(0).getBindsTo());
 		}
 		return allDomainVars;
 	}

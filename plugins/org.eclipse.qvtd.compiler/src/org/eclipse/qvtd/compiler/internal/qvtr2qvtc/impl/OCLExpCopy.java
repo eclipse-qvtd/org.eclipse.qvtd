@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.AnyType;
 import org.eclipse.ocl.pivot.AssociationClass;
@@ -106,7 +107,7 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
  * A set of operations to correctly copy an OCLExp
  * @generated
  */
-public class OCLExpCopy extends PivotSwitch<Element> {
+public class OCLExpCopy extends PivotSwitch<@Nullable Element> {
 
     @NonNull private QvtrToQvtcTransformation transformation;
     

@@ -20,9 +20,9 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.AbstractBindings.KeySet
 
 public class PivotPropertyKey implements RelationKey {
 	
-	private static final @NonNull KeyBindings.KeySet RELATION_KEY_BINDINGS = new KeyBindings.KeySet();
-	public static final @NonNull KeyBindings.KeyKey<String> NAME = RELATION_KEY_BINDINGS.create((String)null, "name");
-	public static final @NonNull KeyBindings.KeyKey<Type> OWNING_TYPE = RELATION_KEY_BINDINGS.create((Type)null, "owningType");
+	private static final KeyBindings.@NonNull KeySet RELATION_KEY_BINDINGS = new KeyBindings.KeySet();
+	public static final KeyBindings.@NonNull KeyKey<String> NAME = RELATION_KEY_BINDINGS.create((String)null, "name");
+	public static final KeyBindings.@NonNull KeyKey<Type> OWNING_TYPE = RELATION_KEY_BINDINGS.create((Type)null, "owningType");
 	
 	private Map<KeyBindings, Property> properties = new HashMap<KeyBindings, Property>();
 	

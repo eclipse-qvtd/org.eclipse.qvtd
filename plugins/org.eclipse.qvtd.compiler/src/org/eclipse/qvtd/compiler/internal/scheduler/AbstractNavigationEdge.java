@@ -18,7 +18,7 @@ public abstract class AbstractNavigationEdge extends AbstractEdge implements Nav
 {
 	protected final @NonNull Property source2targetProperty;
 
-	protected AbstractNavigationEdge(@NonNull EdgeRole.Navigation edgeRole, @NonNull Region region,
+	protected AbstractNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull Region region,
 			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		super(edgeRole, region, sourceNode, source2targetProperty.getName(), targetNode);
 		this.source2targetProperty = source2targetProperty;

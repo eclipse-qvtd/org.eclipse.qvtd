@@ -140,8 +140,8 @@ public class Edges
 			}
 		}
 
-		private static final @NonNull EdgeRole.Navigation LOADED_CAST = new CastEdgeRole(Role.Phase.LOADED);
-		private static final @NonNull EdgeRole.Navigation PREDICATED_CAST = new CastEdgeRole(Role.Phase.PREDICATED);
+		private static final EdgeRole.@NonNull Navigation LOADED_CAST = new CastEdgeRole(Role.Phase.LOADED);
+		private static final EdgeRole.@NonNull Navigation PREDICATED_CAST = new CastEdgeRole(Role.Phase.PREDICATED);
 
 		public @NonNull SimpleEdge createSimpleEdge(@NonNull SimpleRegion region, @NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
 			if (sourceNode.isLoaded() && targetNode.isLoaded()) {
@@ -479,8 +479,8 @@ public class Edges
 	
 	public static final @NonNull ArgumentEdgeRoleFactory ARGUMENT = new ArgumentEdgeRoleFactory();
 	public static final @NonNull CastEdgeRoleFactory CAST = new CastEdgeRoleFactory();
-	public static final @NonNull EdgeRole.Navigation COMPOSITION = new CompositionEdgeRole();
-	public static final @NonNull EdgeRole.Navigation CONTAINER = new ContainerEdgeRole();
+	public static final EdgeRole.@NonNull Navigation COMPOSITION = new CompositionEdgeRole();
+	public static final EdgeRole.@NonNull Navigation CONTAINER = new ContainerEdgeRole();
 	public static final @NonNull IteratedEdgeRoleFactory ITERATED = new IteratedEdgeRoleFactory();		
 	public static final @NonNull IteratingEdgeRoleFactory ITERATING = new IteratingEdgeRoleFactory();		
 	public static final @NonNull NavigationEdgeRoleFactory NAVIGATION = new NavigationEdgeRoleFactory();
@@ -499,8 +499,8 @@ public class Edges
 	 */
 //	public static final @NonNull EdgeRole CONSUMED_ORDERING = new ConsumedOrderingEdgeRole();
 	
-	public static final @NonNull EdgeRole.Recursion PRIMARY_RECURSION = new RecursionEdgeRole(true);	
-	public static final @NonNull EdgeRole.Navigation REALIZED = new RealizedNavigationEdgeRole();
+	public static final EdgeRole.@NonNull Recursion PRIMARY_RECURSION = new RecursionEdgeRole(true);	
+	public static final EdgeRole.@NonNull Navigation REALIZED = new RealizedNavigationEdgeRole();
 	public static final @NonNull ResultEdgeRoleFactory RESULT = new ResultEdgeRoleFactory();
-	public static final @NonNull EdgeRole.Recursion SECONDARY_RECURSION = new RecursionEdgeRole(false);	
+	public static final EdgeRole.@NonNull Recursion SECONDARY_RECURSION = new RecursionEdgeRole(false);	
 }

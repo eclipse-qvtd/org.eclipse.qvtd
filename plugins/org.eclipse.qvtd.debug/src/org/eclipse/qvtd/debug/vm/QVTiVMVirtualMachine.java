@@ -131,7 +131,7 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
         }
     }
 
-	public static @NonNull VMStackFrameData[] createStackFrame(List<UnitLocation> stack) {
+	public static @NonNull VMStackFrameData @NonNull [] createStackFrame(List<UnitLocation> stack) {
 		List<VMStackFrameData> result = new ArrayList<VMStackFrameData>();
 		
 		int i = 0;
@@ -141,7 +141,7 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 				result.add(createStackFrame(location, i++ == 0));
 			}
 		}
-		@SuppressWarnings("null")@NonNull VMStackFrameData[] varsArray = result.toArray(new VMStackFrameData[result.size()]);
+		@SuppressWarnings("null")@NonNull VMStackFrameData @NonNull [] varsArray = result.toArray(new VMStackFrameData[result.size()]);
 		return varsArray;
 	}
 	
@@ -161,7 +161,7 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 		
 		List<VMVariableData> vars = VariableFinder.newInstance(evalEnv, false).getVariables();
 		@SuppressWarnings("null")@NonNull String locationString = location.getURI().toString();
-		@SuppressWarnings("null")@NonNull VMVariableData[] varsArray = vars.toArray(new VMVariableData[vars.size()]);
+		@SuppressWarnings("null")@NonNull VMVariableData @NonNull [] varsArray = vars.toArray(new VMVariableData[vars.size()]);
 		VMStackFrameData vmStackFrame = new VMStackFrameData(evalEnv.getID(), locationString, moduleName, 
 					operSignature, location.getLineNum(), location.getStartPosition(), location.getEndPosition(), varsArray);
 		return vmStackFrame;

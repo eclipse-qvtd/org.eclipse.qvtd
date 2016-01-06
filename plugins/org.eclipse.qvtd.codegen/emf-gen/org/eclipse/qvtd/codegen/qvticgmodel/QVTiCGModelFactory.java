@@ -38,7 +38,7 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Connection Assignment</em>'.
 	 * @generated
 	 */
-	CGConnectionAssignment createCGConnectionAssignment();
+	@NonNull CGConnectionAssignment createCGConnectionAssignment();
 
 	/**
 	 * Returns a new object of class '<em>CG Connection Variable</em>'.
@@ -47,7 +47,7 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @return a new object of class '<em>CG Connection Variable</em>'.
 	 * @generated
 	 */
-	CGConnectionVariable createCGConnectionVariable();
+	@NonNull CGConnectionVariable createCGConnectionVariable();
 
 	/**
 	 * Returns a new object of class '<em>CG Ecore Property Assignment</em>'.

@@ -849,7 +849,7 @@ public class Nodes
 	public static final @NonNull NullNodeRole NULL = new NullNodeRole();
 	public static final @NonNull OperationNodeRoleFactory OPERATION = new OperationNodeRoleFactory();
 	public static final @NonNull AbstractVariableNodeRole PARAMETER = new ParameterNodeRole();
-	public static final @NonNull AttributeNodeRoleFactory.RealizedAttributeNodeRole REALIZED_ATTRIBUTE = new AttributeNodeRoleFactory.RealizedAttributeNodeRole();
+	public static final AttributeNodeRoleFactory.@NonNull RealizedAttributeNodeRole REALIZED_ATTRIBUTE = new AttributeNodeRoleFactory.RealizedAttributeNodeRole();
 	public static final @NonNull AbstractVariableNodeRole REALIZED_VARIABLE = new RealizedVariableNodeRole();
 	public static final @NonNull StepNodeRoleFactory STEP = new StepNodeRoleFactory();
 	public static final @NonNull TrueNodeRole TRUE = new TrueNodeRole();

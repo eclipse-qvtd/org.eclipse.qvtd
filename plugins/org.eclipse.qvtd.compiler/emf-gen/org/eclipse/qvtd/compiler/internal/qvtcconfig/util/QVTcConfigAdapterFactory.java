@@ -18,7 +18,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.*;
 
 /**
@@ -75,8 +75,8 @@ public class QVTcConfigAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected QVTcConfigSwitch<Adapter> modelSwitch =
-		new QVTcConfigSwitch<Adapter>() {
+	protected QVTcConfigSwitch<@Nullable Adapter> modelSwitch =
+		new QVTcConfigSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseConfiguration(Configuration object) {
 				return createConfigurationAdapter();

@@ -27,7 +27,7 @@ public class QVTiVMEvaluationStepper extends AbstractVMEvaluationStepper
 		super(evaluationVisitor, vmContext, QVTiStepperVisitor.INSTANCE);
 	}
 
-	protected VMStackFrameData[] createStackFrame() {
+	protected @NonNull VMStackFrameData @NonNull [] createStackFrame() {
 		return QVTiVMVirtualMachine.createStackFrame(getLocationStack());
 	}
 	

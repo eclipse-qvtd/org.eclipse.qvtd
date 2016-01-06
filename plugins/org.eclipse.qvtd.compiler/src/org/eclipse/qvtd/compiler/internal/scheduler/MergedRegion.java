@@ -325,7 +325,7 @@ public class MergedRegion extends AbstractRegion
 		//
 		//	Merge the overlapping nodes
 		//
-		for (@SuppressWarnings("null")@NonNull Map.Entry<Node, Node> entry : secondaryNode2primaryNode.entrySet()) {
+		for (@SuppressWarnings("null")Map.@NonNull Entry<Node, Node> entry : secondaryNode2primaryNode.entrySet()) {
 			@SuppressWarnings("null")@NonNull Node secondaryNode = entry.getKey();
 			@SuppressWarnings("null")@NonNull Node primaryNode = entry.getValue();
 //			assert mergedRegions.contains(primaryNode.getRegion());

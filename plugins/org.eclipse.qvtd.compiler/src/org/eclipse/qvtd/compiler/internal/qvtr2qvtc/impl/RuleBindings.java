@@ -54,7 +54,7 @@ public class RuleBindings extends AbstractBindings
 		this.rule = rule;
 	}
 	
-	protected void checkKey(@NonNull AbstractBindings.Key<?> key) {
+	protected void checkKey(AbstractBindings.@NonNull Key<?> key) {
 		for (Key<?> relationsKey : rule.getRuleBindingsKeys().getKeys()) {
 			if (relationsKey == key) {
 				return;

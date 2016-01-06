@@ -44,7 +44,7 @@ public interface Rule {
 		/**
 		 * Return the keys for all relations bindings of this rule.
 		 */
-		@NonNull RuleBindings.KeySet getRuleBindingsKeys();
+		RuleBindings.@NonNull KeySet getRuleBindingsKeys();
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public interface Rule {
 	/**
 	 * Return the keys for all relations bindings of this rule.
 	 */
-	@NonNull RuleBindings.KeySet getRuleBindingsKeys();
+	RuleBindings.@NonNull KeySet getRuleBindingsKeys();
 	
 	/**
 	 * Was executed.

@@ -354,7 +354,7 @@ public class Region2Index
 				if (!calledRegions.contains(calledRegion)) {
 					calledRegions.add(calledRegion);
 				}
-				for (@SuppressWarnings("null")@NonNull Map.Entry<Region, List<Region>> ancestor : getRegion2CalledRegions(callingRegion).entrySet()) {
+				for (@SuppressWarnings("null")Map.@NonNull Entry<Region, List<Region>> ancestor : getRegion2CalledRegions(callingRegion).entrySet()) {
 					Region ancestorCallingRegion = ancestor.getKey();
 					List<Region> ancestorCalledRegions = ancestorRegion2calledRegions.get(ancestorCallingRegion);
 					if (ancestorCalledRegions == null) {

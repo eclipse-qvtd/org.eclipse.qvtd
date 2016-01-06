@@ -71,7 +71,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 			return new MyQvtiExecutor(getEnvironmentFactory(), fileNamePrefix, transformationFileName);
 		}
 
-		public @NonNull MyQvtiExecutor createEvaluator(@NonNull String fileNamePrefix, @NonNull String transformationFileName, @NonNull QVTiIncrementalExecutor.Mode mode) throws IOException {
+		public @NonNull MyQvtiExecutor createEvaluator(@NonNull String fileNamePrefix, @NonNull String transformationFileName, QVTiIncrementalExecutor.@NonNull Mode mode) throws IOException {
 			return new MyQvtiExecutor(getEnvironmentFactory(), fileNamePrefix, transformationFileName, mode);
 		}
 

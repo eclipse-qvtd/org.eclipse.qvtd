@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
-
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
@@ -40,7 +40,7 @@ import org.eclipse.qvtd.cs2as.compiler.cgmodel.*;
  * @see org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGPackage
  * @generated
  */
-public class CS2ASCGSwitch<T> extends Switch<T> {
+public class CS2ASCGSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

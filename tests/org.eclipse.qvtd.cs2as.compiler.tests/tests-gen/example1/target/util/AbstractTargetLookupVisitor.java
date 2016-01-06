@@ -132,7 +132,7 @@ public class AbstractTargetLookupVisitor
         final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownsB, child).booleanValue();
         @Nullable /*@Thrown*/ LookupEnvironment symbol_1;
         if (includes) {
-            @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_B);
+            /*@Thrown*/ OrderedSetValue.@NonNull Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_B);
             @Nullable Iterator<?> ITERATOR_x = BOXED_ownsB.iterator();
             @NonNull /*@Thrown*/ OrderedSetValue select;
             while (true) {
@@ -200,7 +200,7 @@ public class AbstractTargetLookupVisitor
         final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownsC, child).booleanValue();
         @Nullable /*@Thrown*/ LookupEnvironment symbol_1;
         if (includes) {
-            @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
+            /*@Thrown*/ OrderedSetValue.@NonNull Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
             @Nullable Iterator<?> ITERATOR_x = BOXED_ownsC.iterator();
             @NonNull /*@Thrown*/ OrderedSetValue select;
             while (true) {

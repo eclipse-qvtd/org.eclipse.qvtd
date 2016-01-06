@@ -35,39 +35,39 @@ public abstract class AbstractQVTcoreBaseStepperVisitor
 		super(context);
 	}	
 
-	public @Nullable IStepper visitAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.Assignment object) {
+	public @Nullable IStepper visitAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull Assignment object) {
 		return visitElement(object);
 	}
 
-	public @Nullable IStepper visitBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern object) {
+	public @Nullable IStepper visitBottomPattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull BottomPattern object) {
 		return visitCorePattern(object);
 	}
 
-	public @Nullable IStepper visitCoreDomain(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain object) {
+	public @Nullable IStepper visitCoreDomain(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull CoreDomain object) {
 		return visitDomain(object);
 	}
 
-	public @Nullable IStepper visitCorePattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.CorePattern object) {
+	public @Nullable IStepper visitCorePattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull CorePattern object) {
 		return visitPattern(object);
 	}
 
-	public @Nullable IStepper visitEnforcementOperation(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation object) {
+	public @Nullable IStepper visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull EnforcementOperation object) {
 		return visitElement(object);
 	}
 
-	public @Nullable IStepper visitGuardPattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern object) {
+	public @Nullable IStepper visitGuardPattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull GuardPattern object) {
 		return visitCorePattern(object);
 	}
 
-	public @Nullable IStepper visitPropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment object) {
+	public @Nullable IStepper visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
 		return visitAssignment(object);
 	}
 
-	public @Nullable IStepper visitRealizedVariable(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable object) {
+	public @Nullable IStepper visitRealizedVariable(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull RealizedVariable object) {
 		return visitVariable(object);
 	}
 
-	public @Nullable IStepper visitVariableAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment object) {
+	public @Nullable IStepper visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull VariableAssignment object) {
 		return visitAssignment(object);
 	}
 }

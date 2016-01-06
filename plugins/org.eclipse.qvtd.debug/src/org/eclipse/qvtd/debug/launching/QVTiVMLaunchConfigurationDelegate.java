@@ -43,7 +43,7 @@ public class QVTiVMLaunchConfigurationDelegate extends VMLaunchConfigurationDele
 		return new QVTiDebugTarget(process, vm);
 	}
 
-	protected @NonNull DebuggableRunnerFactory createDebuggableRunnerFactory(@NonNull EPackage.Registry packageRegistry,
+	protected @NonNull DebuggableRunnerFactory createDebuggableRunnerFactory(EPackage.@NonNull Registry packageRegistry,
 			@NonNull List<String> modelURIs, @Nullable String traceURI) {
 		return new QVTiDebuggableRunnerFactory(packageRegistry, modelURIs, null);
 	}
