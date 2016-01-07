@@ -338,7 +338,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			if (eObject instanceof PropertyAssignment) {
 				PropertyAssignment propertyAssignment = (PropertyAssignment)eObject;
 				DomainUsage domainUsage = getUsage(propertyAssignment.getSlotExpression());
-				if ((domainUsage == null) || !domainUsage.isEnforceable()) {
+				if ((domainUsage == null) || (!domainUsage.isEnforceable() && !domainUsage.isMiddle())) {
 					Property targetProperty = propertyAssignment.getTargetProperty();
 //					System.out.println("Dirty " + targetProperty + " for " + eObject);
 					dirtyProperties.add(targetProperty);
