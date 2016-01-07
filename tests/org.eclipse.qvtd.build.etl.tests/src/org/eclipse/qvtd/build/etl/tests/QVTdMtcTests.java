@@ -260,7 +260,7 @@ public class QVTdMtcTests extends LoadTestCase {
 
 		public void executeTransformation() throws Exception {
 			if (interpretedExecutor != null) {
-				System.out.println("Executing QVTi transformation on test models.");
+//				System.out.println("Executing QVTi transformation on test models.");
 		        interpretedExecutor.execute();
 		        interpretedExecutor.saveModels(TestsXMLUtil.defaultSavingOptions);
 			}
@@ -352,13 +352,18 @@ public class QVTdMtcTests extends LoadTestCase {
 //		AbstractTransformer.INVOCATIONS.setState(true);
     	MyQVT myQVT = createQVT("Families2Persons");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-    	Transformation asTransformation = myQVT.compileTransformation();
-    	myQVT.createInterpretedExecutor(asTransformation);
-    	myQVT.loadInput("family", "Families.xmi");
-    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
-    	myQVT.createModel("person", "Persons_Interpreted.xmi");
-    	myQVT.executeTransformation();
-		myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+    	try {
+	    	Transformation asTransformation = myQVT.compileTransformation();
+	    	myQVT.createInterpretedExecutor(asTransformation);
+	    	myQVT.loadInput("family", "Families.xmi");
+	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
+	    	myQVT.createModel("person", "Persons_Interpreted.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
     }
     
     @Test
@@ -395,14 +400,18 @@ public class QVTdMtcTests extends LoadTestCase {
 //		AbstractTransformer.INVOCATIONS.setState(true);
     	MyQVT myQVT = createQVT("HSV2HLS");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-    	Transformation asTransformation = myQVT.compileTransformation();
-    	myQVT.createInterpretedExecutor(asTransformation);
-    	myQVT.loadInput("hsv", "SolarizedHSV.xmi");
-    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HSV2HLS_trace.xmi");
-    	myQVT.createModel("hls", "SolarizedHLS_Interpreted.xmi");
-    	myQVT.executeTransformation();
-    	myQVT.saveOutput("hls", "SolarizedHLS_Interpreted.xmi", "SolarizedHLS_expected.xmi", null);
-    	myQVT.dispose();
+    	try {
+	    	Transformation asTransformation = myQVT.compileTransformation();
+	    	myQVT.createInterpretedExecutor(asTransformation);
+	    	myQVT.loadInput("hsv", "SolarizedHSV.xmi");
+	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HSV2HLS_trace.xmi");
+	    	myQVT.createModel("hls", "SolarizedHLS_Interpreted.xmi");
+	    	myQVT.executeTransformation();
+	    	myQVT.saveOutput("hls", "SolarizedHLS_Interpreted.xmi", "SolarizedHLS_expected.xmi", null);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
     }
     
     @Test
