@@ -98,7 +98,7 @@ public class Scheduler extends SchedulerConstants
 
 	private @NonNull OperationDatum createOperationDatum(@NonNull OperationCallExp operationCallExp) {
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
-		ClassDatum[] classDatums = new ClassDatum[1 + ownedArguments.size()];
+		@NonNull ClassDatum[] classDatums = new @NonNull ClassDatum[1 + ownedArguments.size()];
 		int i = 0;
 		@SuppressWarnings("null")@NonNull OCLExpression source = operationCallExp.getOwnedSource();
 		classDatums[i++] = getClassDatum(source);
@@ -228,6 +228,7 @@ public class Scheduler extends SchedulerConstants
 		LinkedHashSet<MappingRegion> residualInputRegions = new LinkedHashSet<MappingRegion>(orderedRegions);	// order preserving fast random removal
 		while (!residualInputRegions.isEmpty()) {
 			@SuppressWarnings("null")@NonNull Region candidateRegion = residualInputRegions.iterator().next();
+			boolean isMerged = false;
 			if (isEarlyMergePrimaryCandidate(candidateRegion)) {
 				List<Region> secondaryRegions = selectSecondaryRegions(candidateRegion);
 				if (secondaryRegions != null) {
@@ -259,15 +260,11 @@ public class Scheduler extends SchedulerConstants
 //						GuardedRegion guardedRegion = createGuardedRegion(mergedRegion, mergeableRegions);
 //						outputRegions.add(guardedRegion);
 						outputRegions.add(mergedRegion);
-					}
-					else {
-//						primaryRegion.resolveRecursion();
-						outputRegions.add(primaryRegion);
-					}
-					
+						isMerged = true;
+					}	
 				}
 			}
-			else {
+			if (!isMerged) {
 				outputRegions.add(candidateRegion);
 			}
 			residualInputRegions.remove(candidateRegion);
