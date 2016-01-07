@@ -424,7 +424,7 @@ public class MtcBroker {
 		iModel.store();
 	}
 	public @Nullable Resource newExecute() throws QvtMtcExecutionException {
-		prepare();
+		loadConfigurationModel();
 		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
 		assertNoResourceErrors("cModel", cModel.getResource());
 		uModel = qvtcToQvtu(cModel, false);
@@ -603,10 +603,18 @@ public class MtcBroker {
 	 * Dispose models.
 	 */
 	public void disposeModels() {
-		cModel.dispose();
-		uModel.dispose();
-		mModel.dispose();
-		pModel.dispose();
+		if (cModel != null) {
+			cModel.dispose();
+		}
+		if (uModel != null) {
+			uModel.dispose();
+		}
+		if (mModel != null) {
+			mModel.dispose();
+		}
+		if (pModel != null) {
+			pModel.dispose();
+		}
 		if (sModel != null) {
 			sModel.dispose();
 		}
