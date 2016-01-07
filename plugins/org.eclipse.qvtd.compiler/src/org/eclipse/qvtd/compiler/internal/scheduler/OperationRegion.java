@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -54,9 +55,15 @@ public class OperationRegion extends AbstractMappingRegion
 		Variable selfVariable = specification.getOwnedContext();
 		OCLExpression source = operationCallExp.getOwnedSource();
 		assert source != null;
-		createParameterNode(selfVariable, ClassUtil.nonNullState(selfVariable.getName()), source);
-		SimpleNode extraNode = createParameterNode(selfVariable, "extra_" + selfVariable.getName(), source);
-		extraNodes.add(extraNode);
+		SimpleNode selfNode = createParameterNode(selfVariable, ClassUtil.nonNullState(selfVariable.getName()), source);
+		SimpleNode extraNode;
+		if (!(source.getType() instanceof DataType)) {
+			extraNode = createParameterNode(selfVariable, "extra_" + selfVariable.getName(), source);
+			extraNodes.add(extraNode);
+		}
+		else {
+			extraNode = selfNode;
+		}
 		//
 		resultNode = Nodes.STEP.createSimpleNode(this, "result", operationCallExp, extraNode);				
 		Edges.RESULT.createSimpleEdge(this, extraNode, null, resultNode);
@@ -88,28 +95,30 @@ public class OperationRegion extends AbstractMappingRegion
 					TypedModel typedModel = stepUsage.getTypedModel();
 					assert typedModel != null;
 					ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(stepType, typedModel);
-//					OCLExpression source = operationCallExp.getOwnedSource();
-//					assert source != null;
-//					createParameterNode(selfVariable, selfVariable.getName(), source);
-					SimpleNode extraNode2 = classDatumAnalysis2node.get(classDatumAnalysis);
-					if (extraNode2 == null) {
-						extraNode2 = createParameterNode(classDatumAnalysis, "extra2_" + stepType.getName());
-						classDatumAnalysis2node.put(classDatumAnalysis, extraNode2);
-						extraNodes.add(extraNode2);
-					}
-//					extraNodes.add(extraNode);
-					for (int i = 1; i < steps.size(); i++) {
-						NavigationDependencyStep propertyStep = (NavigationDependencyStep)steps.get(i);
-						NavigationCallExp navigationCallExp = propertyStep.getNavigationCallExp();
-//						stepUsage = propertyStep.getUsage();
-//						typedModel = stepUsage.getTypedModel();
-//						assert typedModel != null;
-//						stepType = propertyStep.getType();
-//						classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(stepType, typedModel);
-//						SimpleNode nextNode = Nodes.StepNodeRoleFactory.PREDICATED_STEP.createSimpleNode(this, "next", classDatumAnalysis);				
-						SimpleNode nextNode = Nodes.ATTRIBUTE.createSimpleNode(this, extraNode2, navigationCallExp);
-						Edges.NAVIGATION.createSimpleEdge(this, extraNode2, propertyStep.getProperty(), nextNode);
-						extraNode2 = nextNode;
+					if (!(classDatumAnalysis.getCompleteClass().getPrimaryClass() instanceof DataType)) {
+	//					OCLExpression source = operationCallExp.getOwnedSource();
+	//					assert source != null;
+	//					createParameterNode(selfVariable, selfVariable.getName(), source);
+						SimpleNode extraNode2 = classDatumAnalysis2node.get(classDatumAnalysis);
+						if (extraNode2 == null) {
+							extraNode2 = createParameterNode(classDatumAnalysis, "extra2_" + stepType.getName());
+							classDatumAnalysis2node.put(classDatumAnalysis, extraNode2);
+							extraNodes.add(extraNode2);
+						}
+	//					extraNodes.add(extraNode);
+						for (int i = 1; i < steps.size(); i++) {
+							NavigationDependencyStep propertyStep = (NavigationDependencyStep)steps.get(i);
+							NavigationCallExp navigationCallExp = propertyStep.getNavigationCallExp();
+	//						stepUsage = propertyStep.getUsage();
+	//						typedModel = stepUsage.getTypedModel();
+	//						assert typedModel != null;
+	//						stepType = propertyStep.getType();
+	//						classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(stepType, typedModel);
+	//						SimpleNode nextNode = Nodes.StepNodeRoleFactory.PREDICATED_STEP.createSimpleNode(this, "next", classDatumAnalysis);				
+							SimpleNode nextNode = Nodes.ATTRIBUTE.createSimpleNode(this, extraNode2, navigationCallExp);
+							Edges.NAVIGATION.createSimpleEdge(this, extraNode2, propertyStep.getProperty(), nextNode);
+							extraNode2 = nextNode;
+						}
 					}
 				}
 				else {
