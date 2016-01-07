@@ -760,7 +760,7 @@ public class MtcBroker {
     	}
     	else {
 	        PivotModel pModel = null;
-	        pModel = createASModel(partitionUri.replace("qvtias",  "qvtpas"), "QVTp", "QVT", QVTI_FULL_NS, false, true, false, true);
+	        pModel = createASModel(partitionUri.replace("qvtias",  "qvtcas"), "QVTp", "QVT", QVTI_FULL_NS, false, true, false, true);
 	        QVTm2QVTp tx = new QVTm2QVTp(environmentFactory);
 	        tx.transform(mModel.getResource(), pModel.getResource());
 	        environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(mModel.getResource());
