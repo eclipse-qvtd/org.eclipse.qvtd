@@ -50,7 +50,9 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
@@ -448,6 +450,15 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	public @NonNull SimpleNode visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
 		Operation referredOperation = operationCallExp.getReferredOperation();
 		OCLExpression ownedSource = operationCallExp.getOwnedSource();
+		if (ownedSource instanceof VariableExp) {
+			Transformation transformation = QVTbaseUtil.getContainingTransformation(operationCallExp);
+			if (transformation != null) {
+				Variable thisVariable = QVTbaseUtil.getContextVariable(scheduler.getStandardLibrary(), transformation);
+				if (((VariableExp)ownedSource).getReferredVariable() == thisVariable) {
+					ownedSource = null;
+				}
+			}
+		}
 		if (ownedSource == null) {
 			List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
 			int iSize = ownedArguments.size();

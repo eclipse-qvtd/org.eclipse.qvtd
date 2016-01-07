@@ -526,6 +526,18 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		public @NonNull OCLExpression visitVariableExp(@NonNull VariableExp pVariableExp) {
 			VariableDeclaration pVariable = pVariableExp.getReferredVariable();
 			Node node = getNode(pVariable);
+			if (node == null) {
+				SchedulerConstants scheduler = getRegion().getSuperRegion().getSchedulerConstants();
+				StandardLibrary standardLibrary = scheduler.getStandardLibrary();
+				Transformation pTransformation = QVTbaseUtil.getContainingTransformation(pVariableExp);
+				if (pTransformation != null) {
+					Variable pThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, pTransformation);
+					if (pVariableExp.getReferredVariable() == pThisVariable) {
+						Variable iThisVariable = QVTbaseUtil.getContextVariable(standardLibrary, visitor.getTransformation());
+						return PivotUtil.createVariableExp(iThisVariable);
+					}
+				}
+			}
 			assert node != null;
 			Variable iVariable = getVariable(node);
 			assert iVariable != null;

@@ -62,6 +62,9 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageAnalysis;
@@ -678,17 +681,33 @@ public class DependencyAnalyzer
 				return result;
 			}
 			Scheduler.DEPENDENCY_ANALYSIS.println("Start " + this);
-			DependencyAnalyzerVisitor visitor = new DependencyAnalyzerVisitor(null);
-			LanguageExpression bodyExpression = ClassUtil.nonNullState(operation.getBodyExpression());
 			try {
-				ExpressionInOCL specification = metamodelManager.parseSpecification(bodyExpression);
-				visitor.addVariable(ClassUtil.nonNullState(specification.getOwnedContext()), ClassUtil.nonNullState(sourceAndArgumentPaths.get(0)));
-				List<Variable> ownedParameters = specification.getOwnedParameters();
+				DependencyAnalyzerVisitor visitor = new DependencyAnalyzerVisitor(null);
+				LanguageExpression bodyExpression;
+				List<? extends VariableDeclaration> ownedParameters;
+				OCLExpression ownedBody;
+				if (operation instanceof Function) {
+					Function function  = (Function)operation;
+					Transformation transformation = QVTbaseUtil.getContainingTransformation(function);
+					if (transformation != null) {
+						Variable thisVariable = QVTbaseUtil.getContextVariable(metamodelManager.getStandardLibrary(), transformation);
+						visitor.addVariable(thisVariable, ClassUtil.nonNullState(sourceAndArgumentPaths.get(0)));
+					}
+					ownedParameters = function.getOwnedParameters();
+					ownedBody = function.getQueryExpression();
+				}
+				else {
+					bodyExpression = ClassUtil.nonNullState(operation.getBodyExpression());
+					ExpressionInOCL specification = metamodelManager.parseSpecification(bodyExpression);
+					visitor.addVariable(ClassUtil.nonNullState(specification.getOwnedContext()), ClassUtil.nonNullState(sourceAndArgumentPaths.get(0)));
+					ownedParameters = specification.getOwnedParameters();
+					ownedBody = specification.getOwnedBody();
+				}
 				int iMax = Math.min(ownedParameters.size(), sourceAndArgumentPaths.size()-1);
 				for (int i = 0; i < iMax; i++) {
 					visitor.addVariable(ClassUtil.nonNullState(ownedParameters.get(i)), ClassUtil.nonNullState(sourceAndArgumentPaths.get(i+1)));
 				}
-				result = visitor.analyze(specification.getOwnedBody());
+				result = visitor.analyze(ownedBody);
 				if (invokingAnalyses != null) {
 					for (OperationAnalysis invokingAnalysis : invokingAnalyses) {
 						invokingAnalysis.removeFailedAnalysis(this);
