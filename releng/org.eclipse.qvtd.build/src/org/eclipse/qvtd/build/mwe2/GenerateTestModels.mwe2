@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.resource.impl.*
 
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
-//    bean = ProjectMapSetup{ resourceSet = resourceSet}
-//    bean = EcoreGenModelSetup { resourceSet = resourceSet }
+    bean = ProjectMapSetup{ resourceSet = resourceSet}
+    bean = EcoreGenModelSetup { resourceSet = resourceSet }
     
 //  component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample1Models {}
     component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample2Models {}
@@ -43,6 +43,9 @@ Workflow {
     	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/HSV2HLS/HSV2HLS.genmodel"
     }
 
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
+    	genModel = "/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/Families2Persons/Families2Persons.genmodel"
+    }
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
     	genModel = "/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/HSV2HLS/HSV2HLS.genmodel"
     }
