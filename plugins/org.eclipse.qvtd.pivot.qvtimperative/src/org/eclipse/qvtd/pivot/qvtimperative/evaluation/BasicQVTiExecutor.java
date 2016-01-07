@@ -416,6 +416,21 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
         }
     }
 
+    public Resource saveModel(@NonNull String name, @NonNull URI modelURI, String contentType, @Nullable Map<?, ?> savingOptions) throws IOException {
+        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
+        if (typedModel == null) {
+        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
+        }
+    	Resource resource = getModelManager().getModel(typedModel);
+        if (resource == null) {
+        	resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
+        }
+        if (resource != null) {
+        	resource.save(savingOptions);
+        }
+        return resource;
+    }
+
 	public void saveModels() {
 		getModelManager().saveModels();
 	}

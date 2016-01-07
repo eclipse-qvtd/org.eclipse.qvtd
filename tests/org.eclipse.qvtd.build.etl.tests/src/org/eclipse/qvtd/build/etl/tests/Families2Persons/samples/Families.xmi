@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:families="http://www.eclipse.org/qvt/2015/QVTcore/examples/Families"
-    xsi:schemaLocation="http://www.eclipse.org/qvt/2015/QVTcore/examples/Families ../../../../../../../../../../org.eclipse.qvtd.examples.qvtcore/qvtcsrc/Families2Persons/Families.ecore">
+    xsi:schemaLocation="http://www.eclipse.org/qvt/2015/QVTcore/examples/Families ../Families.ecore">
   <families:Family
       lastName="March">
     <father
