@@ -27,9 +27,11 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.util.Visitable;
@@ -44,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
@@ -154,6 +157,66 @@ public class QVTm2QVTp
 			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
 	        return mOut;
 	    }
+
+		private @NonNull Mapping doVisitMapping_1(@NonNull Mapping mIn) {
+			String name = mIn.getName();
+			assert name != null;
+			Mapping mOut = doVisitMapping(mIn, name);
+			//
+			// LMR.L to LMR.L
+			//
+			for (Domain d : mIn.getDomain()) {
+				if (!d.isIsEnforceable()) {
+					CoreDomain dIn = (CoreDomain)d;
+					CoreDomain dOut = create(dIn);
+					createAll(dIn.getGuardPattern().getPredicate(), mOut.getGuardPattern().getPredicate());		// Colocate all predicates
+					createAll(dIn.getGuardPattern().getVariable(), dOut.getGuardPattern().getVariable());
+					createAll(dIn.getBottomPattern().getVariable(), dOut.getGuardPattern().getVariable());		// Colocate all variables
+					createAll(dIn.getBottomPattern().getPredicate(), mOut.getGuardPattern().getPredicate());		// Colocate all variables
+					mOut.getDomain().add(dOut);
+				}
+			}
+			//
+			// LMR.M to LMR.M
+			//
+			{
+				for (@SuppressWarnings("null")@NonNull Predicate pIn : mIn.getGuardPattern().getPredicate()) {
+					mOut.getGuardPattern().getPredicate().add(create(pIn));
+				}
+				for (@SuppressWarnings("null")@NonNull Assignment aIn : mIn.getBottomPattern().getAssignment()) {
+					mOut.getBottomPattern().getAssignment().add(create(aIn));
+				}
+			}
+			//
+			// LMR.M to LM.R
+			//
+			{
+				CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+				dOut.setIsCheckable(false);
+				dOut.setIsEnforceable(true);
+				dOut.setGuardPattern(create(mIn.getGuardPattern()));
+				dOut.setBottomPattern(create(mIn.getBottomPattern()));
+				createAll(mIn.getGuardPattern().getVariable(), dOut.getGuardPattern().getVariable());
+				createAll(mIn.getBottomPattern().getRealizedVariable(), dOut.getBottomPattern().getRealizedVariable());
+				mOut.getDomain().add(dOut);
+			}
+			//
+			// LMR.R to LMR.R
+			//
+			for (Domain d : mIn.getDomain()) {
+				if (!d.isIsCheckable()) {
+					CoreDomain dIn = (CoreDomain)d;
+					CoreDomain dOut = create(dIn);
+					createAll(dIn.getGuardPattern().getVariable(), dOut.getGuardPattern().getVariable());
+					createAll(dIn.getBottomPattern().getRealizedVariable(), dOut.getBottomPattern().getRealizedVariable());
+					for (@SuppressWarnings("null")@NonNull Assignment aIn : dIn.getBottomPattern().getAssignment()) {
+						mOut.getBottomPattern().getAssignment().add(create(aIn));
+					}
+					mOut.getDomain().add(0, dOut);			// FIXME preserve legacy ordering
+				}
+			}
+			return mOut;
+		}
 
 		private @NonNull Mapping doVisitMapping_LM(@NonNull Mapping mIn) {
 			Mapping mOut = doVisitMapping(mIn, mIn.getName() + "_LM");
@@ -315,6 +378,14 @@ public class QVTm2QVTp
 			return false;
 		}
 
+		private boolean isSingleInput(@NonNull Mapping mIn) {
+			int guardCount = mIn.getGuardPattern().getVariable().size();
+			for (Domain dIn : mIn.getDomain()) {
+				guardCount += ((CoreDomain)dIn).getGuardPattern().getVariable().size();
+			}
+			return guardCount <= 1;
+		}
+
 		@Override
 		public @Nullable Element visiting(@NonNull Visitable visitable) {
 			throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for " + getClass().getSimpleName());
@@ -393,7 +464,10 @@ public class QVTm2QVTp
 
 		@Override
 		public @Nullable Element visitMapping(@NonNull Mapping mIn) {
-			if (generateLM) {
+			if (isSingleInput(mIn)) {
+				return doVisitMapping_1(mIn);
+			}
+			else if (generateLM) {
 				return doVisitMapping_LM(mIn);
 			}
 			else {
@@ -455,10 +529,15 @@ public class QVTm2QVTp
 		    //	Generate two mappings per mapping, using generateLM to separate "_LM" and "_MR".
 		    //
 			for (@SuppressWarnings("null")@NonNull Rule inRule : tIn.getRule()) {
-				generateLM = true;
-				outRules.add(create(inRule));
-				generateLM = false;
-				outRules.add(create(inRule));
+				if (isSingleInput((Mapping)inRule)) {
+					outRules.add(create(inRule));
+				}
+				else {
+					generateLM = true;
+					outRules.add(create(inRule));
+					generateLM = false;
+					outRules.add(create(inRule));
+				}
 			}
 			createAll(tIn.getOwnedComments(), tOut.getOwnedComments());
 		    return tOut;
@@ -792,5 +871,29 @@ public class QVTm2QVTp
                 target.getContents().add(mOut);
             }
         }
+        // FIXME Following code fixes up missing source. Should be fixed earlier.
+        List<OperationCallExp> missingSources = null; 
+	    for (TreeIterator<EObject> tit = target.getAllContents(); tit.hasNext(); ) {
+	    	EObject eObject = tit.next();
+	    	if (eObject instanceof OperationCallExp) {
+	    		OperationCallExp operationCallExp = (OperationCallExp)eObject;
+	    		if (operationCallExp.getOwnedSource() == null) {
+	    			if (missingSources == null) {
+	    				missingSources = new ArrayList<OperationCallExp>();
+	    			}
+	    			missingSources.add(operationCallExp);
+	    		}
+	    	}
+	    }
+	    if (missingSources != null) {
+			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
+	    	for (OperationCallExp operationCallExp : missingSources) {
+    			Transformation transformation = QVTbaseUtil.getContainingTransformation(operationCallExp);
+    			if (transformation != null) {
+    				Variable thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
+					operationCallExp.setOwnedSource(PivotUtil.createVariableExp(thisVariable));
+    			}
+	    	}
+	    }
     }
 }

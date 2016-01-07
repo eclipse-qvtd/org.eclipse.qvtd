@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
@@ -148,12 +149,12 @@ public class QVTbaseUtil
 	/**
 	 * Return the context variable for a Transformation, creating it if not yet available.
 	 */
-	public static @NonNull Variable getContextVariable(@NonNull StandardLibraryInternal standardLibrary, @NonNull Transformation transformation) {
+	public static @NonNull Variable getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation transformation) {
 		Variable ownedContext = transformation.getOwnedContext();
         if (ownedContext == null) {
         	ownedContext = PivotFactory.eINSTANCE.createVariable();
         	ownedContext.setName("this");
-        	ownedContext.setType(standardLibrary.getLibraryType("Transformation"));
+        	ownedContext.setType(((StandardLibraryInternal)standardLibrary).getLibraryType("Transformation"));		// FIXME promote API
            	ownedContext.setTypeValue(transformation);
         	ownedContext.setIsRequired(true);
         	transformation.setOwnedContext(ownedContext);
