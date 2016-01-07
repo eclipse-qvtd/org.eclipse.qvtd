@@ -33,15 +33,23 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Si
 	public void addAssignmentEdge(@NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
 		assert sourceNode.isClassNode();
 		Edge assignmentEdge = sourceNode.getAssignmentEdge(source2targetProperty);
-		assert assignmentEdge == null;
-		Edges.REALIZED.createEdge(this, sourceNode, source2targetProperty, targetNode);
+		if (assignmentEdge == null) {
+			Edges.REALIZED.createEdge(this, sourceNode, source2targetProperty, targetNode);
+		}
+		else {
+			assert assignmentEdge.getTarget() == targetNode;
+		}
 	}
 	
 	public void addPredicateEdge(@NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
 		assert sourceNode.isClassNode();
 		SimpleEdge predicateEdge = sourceNode.getPredicateEdge(source2targetProperty);
-		assert predicateEdge == null;
-		Edges.NAVIGATION.createSimpleEdge(this, sourceNode, source2targetProperty, targetNode);
+		if (predicateEdge == null) {
+			Edges.NAVIGATION.createSimpleEdge(this, sourceNode, source2targetProperty, targetNode);
+		}
+		else {
+			assert predicateEdge.getTarget() == targetNode;
+		}
 	}
 
 	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull SimpleNode simpleNode) {
