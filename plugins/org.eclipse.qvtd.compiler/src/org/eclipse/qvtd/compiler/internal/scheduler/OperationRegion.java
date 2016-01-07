@@ -81,7 +81,7 @@ public class OperationRegion extends AbstractMappingRegion
 		SchedulerConstants schedulerConstants = getSchedulerConstants();
 		DependencyAnalyzer dependencyAnalyzer = new DependencyAnalyzer(schedulerConstants);
 		DependencyPaths path = dependencyAnalyzer.analyze(operationCallExp);
-		System.out.println("Analyze " + operationCallExp + " gives\n" + path);
+//		System.out.println("Analyze " + operationCallExp + " gives\n" + path);
 		Iterable<List<DependencyStep>> hiddenPaths = path.getHiddenPaths();
 		Iterable<List<DependencyStep>> returnPaths = path.getReturnPaths();
 		Map<ClassDatumAnalysis, SimpleNode> classDatumAnalysis2node = new HashMap<ClassDatumAnalysis, SimpleNode>();

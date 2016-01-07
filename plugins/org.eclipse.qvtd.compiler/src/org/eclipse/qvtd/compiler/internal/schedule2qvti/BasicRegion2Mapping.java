@@ -133,12 +133,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				analyzeIncomingPath(edge.getTarget(), unconditionalNodes, conditionalNodes, false);
 			}
 			conditionalNodes.removeAll(unconditionalNodes);
-			if (conditionalNodes.size() > 0) {
-				System.out.println("Conditional nodes for " + this);
-				for (Node conditionalNode : conditionalNodes) {
-					System.out.println("  " + conditionalNode);
-				}
-			}
+//			if (conditionalNodes.size() > 0) {
+//				System.out.println("Conditional nodes for " + this);
+//				for (Node conditionalNode : conditionalNodes) {
+//					System.out.println("  " + conditionalNode);
+//				}
+//			}
 			for (@SuppressWarnings("null")@NonNull Node node : unconditionalNodes) {
 				int accesses = 0;
 				for (Edge outgoingEdge : node.getOutgoingEdges()) {
@@ -150,12 +150,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					multiAccessedNodes.add(node);
 				}
 			}
-			if (multiAccessedNodes.size() > 0) {
-				System.out.println("multi-accessed nodes for " + this);
-				for (Node multiAccessedNode : multiAccessedNodes) {
-					System.out.println("  " + multiAccessedNode);
-				}
-			}
+//			if (multiAccessedNodes.size() > 0) {
+//				System.out.println("multi-accessed nodes for " + this);
+//				for (Node multiAccessedNode : multiAccessedNodes) {
+//					System.out.println("  " + multiAccessedNode);
+//				}
+//			}
 		}
 
 		private void analyzeIncomingPath(@NonNull Node node, @NonNull Set<Node> unconditionalNodes, @NonNull Set<Node> conditionalNodes, boolean isConditional) {
