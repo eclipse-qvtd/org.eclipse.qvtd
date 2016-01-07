@@ -47,6 +47,7 @@ import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PrimitiveLiteralExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.TupleLiteralExp;
 import org.eclipse.ocl.pivot.TupleLiteralPart;
 import org.eclipse.ocl.pivot.TupleType;
@@ -57,7 +58,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.VoidType;
-import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -76,6 +76,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
@@ -113,7 +114,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 	}
 
-	private class ExpressionCreator extends AbstractExtendingQVTimperativeVisitor<OCLExpression, BasicRegion2Mapping>
+	private class ExpressionCreator extends AbstractExtendingQVTimperativeVisitor<@NonNull OCLExpression, @NonNull BasicRegion2Mapping>
 	{
 		protected final @NonNull Set<Node> multiAccessedNodes = new HashSet<Node>();
 		protected final @NonNull Set<Node> conditionalNodes = new HashSet<Node>();
@@ -357,7 +358,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		@Override
-		public @Nullable OCLExpression visitCollectionLiteralExp(@NonNull CollectionLiteralExp pCollectionLiteralExp) {
+		public @NonNull OCLExpression visitCollectionLiteralExp(@NonNull CollectionLiteralExp pCollectionLiteralExp) {
 			List<CollectionLiteralPart> clonedParts = new ArrayList<CollectionLiteralPart>();
 			for (CollectionLiteralPart pPart : pCollectionLiteralExp.getOwnedParts()) {
 				if (pPart instanceof CollectionItem) {
@@ -385,12 +386,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		@Override
-		public @Nullable OCLExpression visitIterateExp(@NonNull IterateExp pIterateExp) {
+		public @NonNull OCLExpression visitIterateExp(@NonNull IterateExp pIterateExp) {
 			return visiting(pIterateExp);
 		}
 
 		@Override
-		public @Nullable OCLExpression visitIteratorExp(@NonNull IteratorExp pIteratorExp) {
+		public @NonNull OCLExpression visitIteratorExp(@NonNull IteratorExp pIteratorExp) {
 			OCLExpression iSource = create(pIteratorExp.getOwnedSource());
 			assert iSource != null;
 			List<? extends Variable> iIterators = createVariables(pIteratorExp.getOwnedIterators());
@@ -419,7 +420,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		@Override
-		public @Nullable OCLExpression visitMapLiteralExp(@NonNull MapLiteralExp pMapLiteralExp) {
+		public @NonNull OCLExpression visitMapLiteralExp(@NonNull MapLiteralExp pMapLiteralExp) {
 			List<MapLiteralPart> clonedParts = new ArrayList<MapLiteralPart>();
 			for (MapLiteralPart pPart : pMapLiteralExp.getOwnedParts()) {
 				OCLExpression key = createNonNull(pPart.getOwnedKey());
@@ -439,7 +440,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			assert referredOperation != null;
 			if ((iSource == null) && (referredOperation instanceof Function)) {
 				SchedulerConstants scheduler = getRegion().getSuperRegion().getSchedulerConstants();
-				StandardLibraryInternal standardLibrary = (StandardLibraryInternal) scheduler.getStandardLibrary();
+				StandardLibrary standardLibrary = scheduler.getStandardLibrary();
 				Variable thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, visitor.getTransformation());
 				iSource = PivotUtil.createVariableExp(thisVariable);
 			}
@@ -483,7 +484,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		@Override
-		public @Nullable OCLExpression visitPrimitiveLiteralExp(@NonNull PrimitiveLiteralExp pPrimitiveLiteralExp) {
+		public @NonNull OCLExpression visitPrimitiveLiteralExp(@NonNull PrimitiveLiteralExp pPrimitiveLiteralExp) {
 			return EcoreUtil.copy(pPrimitiveLiteralExp);
 		}
 
@@ -496,7 +497,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		@Override
-		public @Nullable OCLExpression visitTupleLiteralExp(@NonNull TupleLiteralExp pTupleLiteralExp) {
+		public @NonNull OCLExpression visitTupleLiteralExp(@NonNull TupleLiteralExp pTupleLiteralExp) {
 			List<TupleLiteralPart> clonedParts = new ArrayList<TupleLiteralPart>();
 			for (TupleLiteralPart pPart : pTupleLiteralExp.getOwnedParts()) {
 				OCLExpression init = createNonNull(pPart.getOwnedInit());
@@ -511,7 +512,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		@Override
-		public @Nullable OCLExpression visitTypeExp(@NonNull TypeExp pTypeExp) {
+		public @NonNull OCLExpression visitTypeExp(@NonNull TypeExp pTypeExp) {
 			Type referredType = pTypeExp.getReferredType();
 			TypeExp typeExp = PivotFactory.eINSTANCE.createTypeExp();
 			typeExp.setReferredType(referredType);
@@ -522,7 +523,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		@Override
-		public @Nullable OCLExpression visitVariableExp(@NonNull VariableExp pVariableExp) {
+		public @NonNull OCLExpression visitVariableExp(@NonNull VariableExp pVariableExp) {
 			VariableDeclaration pVariable = pVariableExp.getReferredVariable();
 			Node node = getNode(pVariable);
 			assert node != null;
@@ -584,6 +585,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		this.expressionCreator = new ExpressionCreator();
 		createEmptyDomainsAndPatterns();
 		createHeadAndGuardNodeVariables();
+		createExternalPredicates();
 		createNavigablePredicates();
 		createInternalPredicates();
 		createRealizedVariables();
@@ -751,6 +753,26 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			assert oldDomain == null;
 		}
 		ECollections.sort(mapping.getDomain(), DomainNameComparator.INSTANCE);
+	}
+
+	/**
+	 * Create a predicate expression for each TRUE 'head'.
+	 */
+	private void createExternalPredicates() {
+		List<Predicate> predicates = mapping.getGuardPattern().getPredicate();
+		for (Node node : region.getNodes()) {
+			if (node.isTrue()) {
+				for (Edge edge : node.getArgumentEdges()) {
+					Node predicateNode = edge.getSource();
+					for (TypedElement typedElement : predicateNode.getTypedElements()) {
+						OCLExpression conditionExpression = typedElement.accept(inlineExpressionCreator);
+						Predicate predicate = QVTbaseFactory.eINSTANCE.createPredicate();
+						predicate.setConditionExpression(conditionExpression);
+						predicates.add(predicate);
+					}
+				}
+			}
+		}
 	}
 
 	/**
