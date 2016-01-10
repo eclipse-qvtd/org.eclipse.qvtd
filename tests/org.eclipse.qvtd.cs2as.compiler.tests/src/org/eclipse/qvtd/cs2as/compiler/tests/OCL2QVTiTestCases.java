@@ -481,7 +481,27 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model6");
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model7");
 	}
-	
+
+	@Test
+	public void testNewExample2_V2_CG() throws Exception {
+//		Scheduler.EDGE_ORDER.setState(true);
+//		Scheduler.REGION_DEPTH.setState(true);
+//		Scheduler.REGION_ORDER.setState(true);
+//		Scheduler.REGION_TRAVERSAL.setState(true);
+//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
+//		Scheduler.DEPENDENCY_ANALYSIS.setState(true);
+//		AbstractTransformer.INVOCATIONS.setState(true);
+		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
+		loadGenModels(baseURI, "ClassesCS.genmodel", "Classes.genmodel");
+		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "classescs2asV2.ocl");
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
+				"example2.classes.lookup.util.ClassesLookupSolver",
+				"example2.classes.lookup.util.ClassesLookupResult",
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model1V2");
+	}
+
 	@Test
 	public void testExample2_V2_CG() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");

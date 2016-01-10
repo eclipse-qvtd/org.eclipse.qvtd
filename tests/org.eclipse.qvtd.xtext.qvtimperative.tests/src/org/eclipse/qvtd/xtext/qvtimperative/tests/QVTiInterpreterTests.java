@@ -342,7 +342,7 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testTree2TallTreeLazy() throws Exception {
-		AbstractTransformer.INVOCATIONS.setState(true);
+//		AbstractTransformer.INVOCATIONS.setState(true);
     	MyQVT myQVT = createQVT();
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Tree2TallTree", "Tree2TallTree.qvti", QVTiIncrementalExecutor.Mode.LAZY);

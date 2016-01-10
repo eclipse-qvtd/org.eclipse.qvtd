@@ -287,7 +287,7 @@ public class QVTiCompilerTests extends LoadTestCase
 	}
 
 	public void testCG_Tree2TallTree_qvti() throws Exception {
-		AbstractTransformer.INVOCATIONS.setState(true);
+//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = createQVT();
 		URI genModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.genmodel");
 		URI transformURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.qvti");
