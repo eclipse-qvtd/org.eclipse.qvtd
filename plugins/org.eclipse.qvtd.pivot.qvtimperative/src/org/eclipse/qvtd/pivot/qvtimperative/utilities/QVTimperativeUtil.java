@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionLiteralExp;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.IterateExp;
 import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -281,18 +282,18 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 	}
 
 	public static boolean isConnectionVariable(@NonNull Variable asVariable) {
-//		if (asVariable.getType() instanceof CollectionType) {
-			Area asArea = QVTimperativeUtil.getContainingArea(asVariable);
-			if (asArea instanceof Mapping) {
-//				for (Assignment asAssignment : asArea.getBottomPattern().getAssignment()) {
-//					if (asAssignment instanceof VariableAssignment) {
-//						if (((VariableAssignment)asAssignment).getTargetVariable() == asVariable) {
-							return true;
-//						}
-//					}
-//				}
-			}
-//		}
+		Area asArea = QVTimperativeUtil.getContainingArea(asVariable);
+		if ((asArea instanceof Mapping) && (asVariable.getType() instanceof CollectionType))  {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean isPrimitiveVariable(@NonNull Variable asVariable) {
+		Area asArea = QVTimperativeUtil.getContainingArea(asVariable);
+		if ((asArea instanceof Mapping) && !(asVariable.getType() instanceof CollectionType))  {
+			return true;
+		}
 		return false;
 	}
 

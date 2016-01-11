@@ -33,6 +33,7 @@ import org.eclipse.qvtd.compiler.internal.scheduler.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.scheduler.Node;
 import org.eclipse.qvtd.compiler.internal.scheduler.Region;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -73,14 +74,21 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 		TypedModel typedModel = classDatumAnalysis.getTypedModel();
 		TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(typedModel);
 		assert qvtiTypedModel != null;
-		CoreDomain domain = QVTimperativeUtil.createImperativeDomain(qvtiTypedModel);
-		domain.setIsCheckable(true);
-		mapping.getDomain().add(domain);
+		Area area;
+		if (qvtiTypedModel != typedModel) {			// == occurs for objects such as EObject/EAnnotation that may be in multiple domains
+			CoreDomain domain = QVTimperativeUtil.createImperativeDomain(qvtiTypedModel);
+			domain.setIsCheckable(true);
+			mapping.getDomain().add(domain);
+			area = domain;
+		}
+		else {
+			area = mapping;
+		}
 		//
 		//	Create guard variable for head node.
 		//
 		headVariable = createVariable(headNode);
-		domain.getGuardPattern().getVariable().add(headVariable);
+		area.getGuardPattern().getVariable().add(headVariable);
 		//
 		//	Create any connectionVariable guards
 		//

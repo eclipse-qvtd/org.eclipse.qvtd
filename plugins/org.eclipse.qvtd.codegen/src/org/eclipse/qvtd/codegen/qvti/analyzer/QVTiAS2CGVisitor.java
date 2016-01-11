@@ -412,6 +412,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGGuardVariable cgGuardVariable = (CGGuardVariable) getVariablesStack().getParameter(asVariable);
 		assert cgGuardVariable == null;
 		boolean isConnectionVariable = QVTimperativeUtil.isConnectionVariable(asVariable);
+		boolean isPrimitiveVariable = QVTimperativeUtil.isPrimitiveVariable(asVariable);
 		if (isConnectionVariable) {
 			cgGuardVariable = QVTiCGModelFactory.eINSTANCE.createCGConnectionVariable();
 		}
@@ -421,7 +422,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		context.setNames(cgGuardVariable, asVariable);
 		setAst(cgGuardVariable, asVariable);
 		cgGuardVariable.setTypeId(context.getTypeId(asVariable.getTypeId()));
-		if (!isConnectionVariable) {
+		if (!isConnectionVariable && !isPrimitiveVariable) {
 			cgGuardVariable.setTypedModel(getTypedModel(asVariable));
 		}
 		addParameter(asVariable, cgGuardVariable);

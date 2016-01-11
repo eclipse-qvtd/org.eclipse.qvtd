@@ -300,17 +300,6 @@ public class RootRegion2Mapping extends AbstractRegion2Mapping
 				}
 			}
 		}
-		for (Node node : calledRegion.getPredicatedNodes()) {
-			Connection connection = node.getIncomingUsedConnection();
-			if (connection != null) {
-				Node sourceNode = connection.basicGetSource(region);
-				if (sourceNode != null) {
-					OCLExpression sourceExpression = createVariableExp(sourceNode);
-					Variable guardVariable = calledRegion2Mapping.getGuardVariable(connection.getTarget(region));
-					mappingCallBindings.add(QVTimperativeUtil.createMappingCallBinding(guardVariable, sourceExpression));
-				}
-			}
-		}
 		for (@SuppressWarnings("null")@NonNull Connection intermediateConnection : calledRegion.getIntermediateConnections()) {
 			Variable calledConnectionVariable = calledRegion2Mapping.getConnectionVariable(intermediateConnection);
 			Variable callingConnectionVariable = connection2variable.get(intermediateConnection);
@@ -327,25 +316,6 @@ public class RootRegion2Mapping extends AbstractRegion2Mapping
 		}				
 		mappingStatement = QVTimperativeUtil.addMappingStatement(mappingStatement, mappingCallStatement);
 		return mappingStatement;
-	}
-
-	private @NonNull OCLExpression createVariableExp(@NonNull Node node) {
-		if (node.isNull()) {
-			return createNullLiteralExp();
-		}
-		else {
-			Variable variable = node2variable.get(node);
-			if (variable == null) {
-				if (node.isAttributeNode()) {
-					variable = createVariable(node);
-					mapping.getBottomPattern().getVariable().add(variable);
-					Variable oldVariable = node2variable.put(node, variable);
-					assert oldVariable == null;
-				}
-			}
-			assert variable != null;
-			return PivotUtil.createVariableExp(variable);
-		}
 	}
 
 	@Override
