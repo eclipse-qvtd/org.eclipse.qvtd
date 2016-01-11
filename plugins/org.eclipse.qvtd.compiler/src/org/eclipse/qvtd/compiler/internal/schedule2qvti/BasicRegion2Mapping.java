@@ -1373,6 +1373,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 								else if (reverseProperty.isIsImplicit()) {
 									reverseEdges.remove(reverseEdge);
 								}
+								else if (sourceNode.isInternal()) {
+									forwardEdges.remove(forwardEdge);
+								}
+								else if (targetNode.isInternal()) {
+									reverseEdges.remove(reverseEdge);
+								}
 								else {		// FIXME do we prefer either direction ?
 									reverseEdges.remove(reverseEdge);
 								}
