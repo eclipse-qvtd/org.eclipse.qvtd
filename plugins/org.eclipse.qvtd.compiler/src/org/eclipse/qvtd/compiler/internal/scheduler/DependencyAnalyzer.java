@@ -881,7 +881,7 @@ public class DependencyAnalyzer
 //			}
 			operationAnalysis.check();
 		}
-		return visitor.analyze(element);
+		return analyze(visitor, element);
 	}
 	
 	public @NonNull DependencyPaths analyze(/*@NonNull*/ Element element,
