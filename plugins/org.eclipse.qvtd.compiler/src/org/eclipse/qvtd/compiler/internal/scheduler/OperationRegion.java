@@ -17,12 +17,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Class;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -31,6 +36,7 @@ import org.eclipse.qvtd.compiler.internal.scheduler.DependencyAnalyzer.Dependenc
 import org.eclipse.qvtd.compiler.internal.scheduler.DependencyAnalyzer.NavigationDependencyStep;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;
@@ -57,13 +63,7 @@ public class OperationRegion extends AbstractMappingRegion
 		assert source != null;
 		SimpleNode selfNode = createParameterNode(selfVariable, ClassUtil.nonNullState(selfVariable.getName()), source);
 		SimpleNode extraNode;
-		if (!(source.getType() instanceof DataType)) {
-			extraNode = createParameterNode(selfVariable, "extra_" + selfVariable.getName(), source);
-			extraNodes.add(extraNode);
-		}
-		else {
-			extraNode = selfNode;
-		}
+		extraNode = selfNode;
 		//
 		resultNode = Nodes.STEP.createSimpleNode(this, "result", operationCallExp, extraNode);				
 		Edges.RESULT.createSimpleEdge(this, extraNode, null, resultNode);
