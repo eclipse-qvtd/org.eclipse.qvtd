@@ -775,8 +775,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				Node laterNode = predicatedEdge.getSource();
 				Node predicatedSourceNode = predicatedEdge.getSource();
 				Node predicatedTargetNode = predicatedEdge.getTarget();
-				Connection usedConnection = predicatedTargetNode.getIncomingUsedConnection();
-				if (usedConnection != null) {
+				for (Connection usedConnection : predicatedTargetNode.getIncomingUsedConnections()) {
 					for (Node usedSourceNode : usedConnection.getSources()) {
 						Region usedRegion = usedSourceNode.getRegion();
 						if (usedRegion.getLatestIndex() > getEarliestIndex()) {			// FIXME =
@@ -1393,8 +1392,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			}
 		}
 		for (Node node : getPredicatedNodes()) {
-			Connection connection = node.getIncomingUsedConnection();
-			if (connection != null) {
+			for (Connection connection : node.getIncomingUsedConnections()) {
 				connections.add(connection);
 			}
 		}
@@ -1418,8 +1416,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	public @NonNull List<Connection> getParentUsedConnections() {			// FIXME cache
 		List<Connection> connections = new ArrayList<Connection>();
 		for (Node node : getPredicatedNodes()) {
-			Connection connection = node.getIncomingUsedConnection();
-			if (connection != null) {
+			for (Connection connection : node.getIncomingUsedConnections()) {
 				connections.add(connection);
 			}
 		}
@@ -1568,9 +1565,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	public @NonNull List<Connection> getUsedConnections() {			// FIXME cache
 		List<Connection> usedConnections = new ArrayList<Connection>();
 		for (Node node : getPredicatedNodes()) {
-			Connection usedBindingEdge = node.getIncomingUsedConnection();
-			if (usedBindingEdge != null) {
-				usedConnections.add(usedBindingEdge);
+			for (Connection usedBindingEdge : node.getIncomingUsedConnections()) {
+			usedConnections.add(usedBindingEdge);
 			}
 		}
 		return usedConnections;

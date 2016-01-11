@@ -336,15 +336,10 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public @Nullable Connection getIncomingUsedConnection() {
-		Connection usedBindingEdge = null;
-		for (Connection connection : getIncomingConnections()) {
-			if (connection.isUsed(this)) {
-				assert usedBindingEdge == null;
-				usedBindingEdge = connection;
-			}
-		}
-		return usedBindingEdge;
+	public @NonNull Iterable<Connection> getIncomingUsedConnections() {
+		@SuppressWarnings({"null"})
+		@NonNull Iterable<Connection> filter = Iterables.filter(getIncomingConnections(), ScheduledRegion.IsUsedBindingEdgePredicate.INSTANCE);
+		return filter;
 	}
 
 	@Override
@@ -513,8 +508,7 @@ public abstract class AbstractNode implements Node
 	@Override
 	public @NonNull Iterable<Node> getUsedBindingSources() {
 		List<Node> sources = new ArrayList<Node>();
-		Connection connection = getIncomingUsedConnection();
-		if (connection != null) {
+		for (Connection connection : getIncomingUsedConnections()) {
 			for (Node source : connection.getSources()) {
 				if (!sources.contains(source)) {
 					sources.add(source);

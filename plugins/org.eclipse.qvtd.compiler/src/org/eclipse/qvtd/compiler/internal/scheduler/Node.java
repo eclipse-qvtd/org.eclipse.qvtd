@@ -42,7 +42,6 @@ public interface Node extends GraphStringBuilder.GraphNode, Nameable
 	@NonNull Iterable<Edge> getArgumentEdges();
 	@Nullable Edge getAssignmentEdge(@NonNull Property source2targetProperty);
 	@NonNull Iterable<NavigationEdge> getAssignmentEdges();
-
 	@NonNull ClassDatumAnalysis getClassDatumAnalysis();
 	@NonNull CompleteClass getCompleteClass();
 	@NonNull Iterable<Edge> getComputationEdges();
@@ -53,7 +52,7 @@ public interface Node extends GraphStringBuilder.GraphNode, Nameable
 	@NonNull List<Edge> getIncomingEdges();
 //	@Nullable InterRegionEdge getIncomingPassedBindingEdge();
 	@NonNull Iterable<Connection> getIncomingPassedConnections();
-	@Nullable Connection getIncomingUsedConnection();
+	@NonNull Iterable<Connection> getIncomingUsedConnections();
 	@NonNull String getLabel();
 	@NonNull Iterable<Edge> getMergeableEdges();
 	@Override

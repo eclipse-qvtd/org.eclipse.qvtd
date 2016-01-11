@@ -294,6 +294,7 @@ public class ScheduledRegion extends AbstractRegion
 	} */
 
 	private void addConsumedNode(@NonNull Node headNode) {
+//		assert !"EObject".equals(headNode.getCompleteClass().getName());
 		Region region = headNode.getRegion();
 		Region invokingRegion = region.getInvokingRegion();
 		assert (invokingRegion == this) || (invokingRegion == null);
@@ -759,27 +760,31 @@ public class ScheduledRegion extends AbstractRegion
 				Node predicatedNode = predicatedEdge.getTarget();
 				if (!predicatedNode.isLoaded() && !predicatedNode.isConstant()) {
 					Iterable<Connection> passedConnections = predicatedNode.getIncomingPassedConnections();
-					Connection usedConnection = predicatedNode.getIncomingUsedConnection();
-					if ((usedConnection == null) && Iterables.isEmpty(passedConnections)) {
-						PropertyDatum propertyDatum = getPropertyDatum(predicatedEdge);
-						List<NavigationEdge> realizedEdges = producedPropertyDatum2realizedEdges.get(propertyDatum);
-						if (realizedEdges != null) {
-							Property predicatedProperty = predicatedEdge.getProperty();
-							List<Node> realizingNodes = new ArrayList<Node>();
-							for (NavigationEdge realizedEdge : realizedEdges) {
-								Node realizedNode;
-								if (realizedEdge.getProperty() == predicatedProperty) {
-									realizedNode = realizedEdge.getTarget();
-								}
-								else {
-									assert realizedEdge.getProperty() == predicatedProperty.getOpposite();
-									realizedNode = realizedEdge.getSource();
-								}
-								if (!realizingNodes.contains(realizedNode)) {
-									realizingNodes.add(realizedNode);
-								}
+//					Connection usedConnection = predicatedNode.getIncomingUsedConnection();
+//					boolean isNew = (usedConnection == null) && Iterables.isEmpty(passedConnections);
+//					if (!isNew) {		// FIXME could be multiple
+//						isNew = (usedConnection == null) && Iterables.isEmpty(passedConnections);
+//					}		// FIXME could be multiple
+					PropertyDatum propertyDatum = getPropertyDatum(predicatedEdge);
+					List<NavigationEdge> realizedEdges = producedPropertyDatum2realizedEdges.get(propertyDatum);
+					if (realizedEdges != null) {
+						Property predicatedProperty = predicatedEdge.getProperty();
+						List<Node> realizingNodes = new ArrayList<Node>();
+						for (NavigationEdge realizedEdge : realizedEdges) {
+							Node realizedNode;
+							if (realizedEdge.getProperty() == predicatedProperty) {
+								realizedNode = realizedEdge.getTarget();
 							}
-							Connection predicatedConnection = getConnection(realizingNodes, predicatedNode.getClassDatumAnalysis());
+							else {
+								assert realizedEdge.getProperty() == predicatedProperty.getOpposite();
+								realizedNode = realizedEdge.getSource();
+							}
+							if (!realizingNodes.contains(realizedNode)) {
+								realizingNodes.add(realizedNode);
+							}
+						}
+						Connection predicatedConnection = getConnection(realizingNodes, predicatedNode.getClassDatumAnalysis());
+						if (!Iterables.contains(predicatedConnection.getTargets(), predicatedNode)) {
 							predicatedConnection.addUsedTargetNode(predicatedNode, false);
 						}
 					}
@@ -1122,11 +1127,11 @@ public class ScheduledRegion extends AbstractRegion
 		//	Bind each head node to the viable introducer/producer of its type.
 		//
 		createBindings();
-		for (Map<Set<Node>, Connection> connections : classDatumAnalysis2nodes2connections.values()) {
-			for (@SuppressWarnings("null")@NonNull Connection connectionRegion : connections.values()) {
+//		for (Map<Set<Node>, Connection> connections : classDatumAnalysis2nodes2connections.values()) {
+//			for (@SuppressWarnings("null")@NonNull Connection connectionRegion : connections.values()) {
 //				addRegion(connectionRegion);
-			}
-		}
+//			}
+//		}
 		//
 		//	Bind each remaining guard node to the viable introducer/producer of its type.
 		//
@@ -1417,6 +1422,7 @@ public class ScheduledRegion extends AbstractRegion
 	}
 
 	public @NonNull Connection getConnection(@NonNull Iterable<Node> sourceNodes, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+//		assert !"EObject".equals(classDatumAnalysis.getCompleteClass().getName());
 		Map<Set<Node>, Connection> nodes2connection = classDatumAnalysis2nodes2connections.get(classDatumAnalysis);
 		if (nodes2connection == null) {
 			nodes2connection = new HashMap<Set<Node>, Connection>();
@@ -1447,6 +1453,7 @@ public class ScheduledRegion extends AbstractRegion
 		org.eclipse.ocl.pivot.Class primaryClass = completeClass.getPrimaryClass();
 		if (primaryClass instanceof CollectionType) {
 			org.eclipse.ocl.pivot.Class elementType = (org.eclipse.ocl.pivot.Class)((CollectionType)primaryClass).getElementType();
+			assert elementType != null;
 			classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(elementType, classDatumAnalysis.getTypedModel());
 		}
 		return classDatumAnalysis;

@@ -822,8 +822,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		guardNodes.addAll(headNodes);
 		for (Node guardNode : region.getGuardNodes()) {
 			if (!guardNodes.contains(guardNode)) {
-				Connection connection = guardNode.getIncomingUsedConnection();
-				if (connection != null) {				// null for LOADED
+				for (Connection connection : guardNode.getIncomingUsedConnections()) {
+//				if (connection != null) {				// null for LOADED
 					Set<Region> guardCallingRegions = new HashSet<Region>();
 					boolean canBeGuard = true;
 					for (Node callingSource : guardNode.getUsedBindingSources()) {
