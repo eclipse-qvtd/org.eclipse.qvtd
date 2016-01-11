@@ -36,6 +36,13 @@ public abstract class AbstractSimpleNode extends AbstractNode implements SimpleN
 	}
 
 	@Override
+	public final @NonNull Iterable<SimpleNavigationEdge> getCastEdges() {
+		@SuppressWarnings({"null", "unchecked"})
+		@NonNull Iterable<SimpleNavigationEdge> filter = (Iterable<SimpleNavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsCastEdgePredicate.INSTANCE);
+		return filter;
+	}
+
+	@Override
 	public @Nullable SimpleNavigationEdge getNavigationEdge(@NonNull Property source2targetProperty) {
 		return (SimpleNavigationEdge) super.getNavigationEdge(source2targetProperty);
 	}

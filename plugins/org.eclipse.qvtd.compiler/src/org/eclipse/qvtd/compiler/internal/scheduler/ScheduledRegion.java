@@ -424,14 +424,7 @@ public class ScheduledRegion extends AbstractRegion
 			for (Node predicatedNode : region.getMatchableNodes()) {
 				if (!predicatedNode.isHead()) {
 					if (!predicatedNode.isLoaded() && !predicatedNode.isConstant() && !predicatedNode.isInternal()) {
-						boolean isCast = true;
-						for (Edge outgoingEdge : predicatedNode.getOutgoingEdges()) {
-							if (!outgoingEdge.isCast()) {
-								isCast = false;
-								break;
-							}
-						}
-						if (!isCast) {			// FIXME Eliminate cast nodes
+						if (!isOnlyCastOrRecursed(predicatedNode)) {			// FIXME Eliminate cast nodes
 							addConsumedNode(predicatedNode);
 						}
 					}
@@ -758,7 +751,7 @@ public class ScheduledRegion extends AbstractRegion
 			//
 			for (NavigationEdge predicatedEdge : region.getPredicatedNavigationEdges()) {
 				Node predicatedNode = predicatedEdge.getTarget();
-				if (!predicatedNode.isLoaded() && !predicatedNode.isConstant()) {
+				if (!predicatedNode.isLoaded() && !predicatedNode.isConstant() && !isOnlyCastOrRecursed(predicatedNode)) {
 					Iterable<Connection> passedConnections = predicatedNode.getIncomingPassedConnections();
 //					Connection usedConnection = predicatedNode.getIncomingUsedConnection();
 //					boolean isNew = (usedConnection == null) && Iterables.isEmpty(passedConnections);
@@ -1576,6 +1569,21 @@ public class ScheduledRegion extends AbstractRegion
 		@NonNull Iterable<Edge> filter = Iterables.filter(getEdges(), IsUsedBindingEdgePredicate.INSTANCE);
 		return filter;
 	} */
+
+	/**
+	 * Return true if this node is consumed solely by casts (or recursions) and so need not be considered as a true consumer.
+	 * The downstream usages will consume more accurately.
+	 */
+	protected boolean isOnlyCastOrRecursed(@NonNull Node predicatedNode) {
+		boolean isCast = false;
+		for (Edge outgoingEdge : predicatedNode.getOutgoingEdges()) {
+			if (!outgoingEdge.isCast() && !outgoingEdge.isRecursion()) {
+				return false;
+			}
+			isCast = true;
+		}
+		return isCast;
+	}
 	
 	@Override
 	public boolean isLateMergeable(@NonNull Region innerRegion, @NonNull Region2Depth region2depths) {

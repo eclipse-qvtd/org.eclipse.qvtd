@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.TypedElement;
 public interface SimpleNode extends Node, Iterable<SimpleNode>
 {
 	void addTypedElement(@NonNull TypedElement typedElement);
+	@NonNull Iterable<SimpleNavigationEdge> getCastEdges();
 	@Override
 	@Nullable SimpleNavigationEdge getNavigationEdge(@NonNull Property source2targetProperty);
 	@Override

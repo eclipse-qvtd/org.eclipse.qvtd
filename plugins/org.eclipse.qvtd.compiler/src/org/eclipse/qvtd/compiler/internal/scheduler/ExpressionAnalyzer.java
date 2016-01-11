@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionItem;
 import org.eclipse.ocl.pivot.CollectionLiteralExp;
@@ -88,15 +87,33 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	private @NonNull SimpleNode analyzeOperationCallExp_oclAsType(@NonNull SimpleNode sourceNode, @NonNull OperationCallExp operationCallExp) {
-		if ((operationCallExp.getOwnedSource() instanceof CallExp) && sourceNode.refineClassDatumAnalysis(scheduler.getClassDatumAnalysis(operationCallExp))) {
-			return sourceNode;
+//		if ((operationCallExp.getOwnedSource() instanceof CallExp) && sourceNode.refineClassDatumAnalysis(scheduler.getClassDatumAnalysis(operationCallExp))) {
+//			return sourceNode;
+//		}
+		Type type = operationCallExp.getType();
+		assert type != null;
+		CompleteClass requiredClass = scheduler.getEnvironmentFactory().getCompleteModel().getCompleteClass(type);
+		CompleteClass predicatedClass = sourceNode.getCompleteClass();
+		if (predicatedClass.conformsTo(requiredClass)) {
+			sourceNode.addTypedElement(operationCallExp);
+			return sourceNode;											// Skip cast if already conformant, typically a redundant cast daisy chain
 		}
-		Type castType = operationCallExp.getType();
+		for (SimpleNavigationEdge castEdge : sourceNode.getCastEdges()) {
+			SimpleNode targetNode = castEdge.getTarget();
+			predicatedClass = targetNode.getCompleteClass();
+			if (predicatedClass.conformsTo(requiredClass)) {
+				targetNode.addTypedElement(operationCallExp);
+				return targetNode;										// Re-use a pre-existing class
+			}
+		}
+		Type castType = type;
 		assert castType != null;
 		Property castProperty = scheduler.getCastProperty(castType);
 		SimpleEdge castEdge = sourceNode.getPredicateEdge(castProperty);
 		if (castEdge != null) {
-			return castEdge.getTarget();
+			SimpleNode castNode = castEdge.getTarget();
+			castNode.addTypedElement(operationCallExp);
+			return castNode;
 		}
 		String name = operationCallExp.getReferredOperation().getName();
 		assert name != null;

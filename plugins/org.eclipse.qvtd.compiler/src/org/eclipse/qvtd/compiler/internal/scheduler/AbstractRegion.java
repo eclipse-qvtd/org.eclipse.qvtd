@@ -103,7 +103,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
-/*	public static final class IsCastEdgePredicate implements Predicate<Edge>
+	public static final class IsCastEdgePredicate implements Predicate<Edge>
 	{
 		public static final @NonNull IsCastEdgePredicate INSTANCE = new IsCastEdgePredicate();
 
@@ -111,7 +111,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		public boolean apply(Edge edge) {
 			return edge.isCast();
 		}
-	} */
+	}
 
 	public static final class IsComposedNodePredicate implements Predicate<Node>
 	{

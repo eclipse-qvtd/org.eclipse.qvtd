@@ -493,6 +493,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			OCLExpression iSource = createNonNull(pPropertyCallExp.getOwnedSource());
 			Property referredProperty = pPropertyCallExp.getReferredProperty();
 			assert referredProperty != null;
+			assert referredProperty.eContainer() != null;
 			return PivotUtil.createNavigationCallExp(iSource, referredProperty);
 		}
 
@@ -967,6 +968,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						Property property = edge.getProperty();
 						if (reachableNodes.add(targetNode)) {
 							if (targetNode.isAttributeNode()) {
+								if (targetNode.getCompleteClass().getPrimaryClass() instanceof CollectionType) {
+									sourcesList.add(targetNode);
+								}
 								OCLExpression sourceExp = createVariableExp(sourceNode);
 								OCLExpression source2targetExp = createCallExp(sourceExp, property);
 //								qvti2node.put(source2targetExp, targetNode);
