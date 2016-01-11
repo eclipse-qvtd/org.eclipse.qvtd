@@ -95,7 +95,7 @@ public abstract class AbstractRegion2Mapping
 		}
 	}
 	
-	protected @NonNull CallExp createCallExp(@NonNull OCLExpression asSource, @NonNull Property asProperty) {
+	protected @Nullable CallExp createCallExp(@NonNull OCLExpression asSource, @NonNull Property asProperty) {
 		if (asProperty.eContainer() == null) {
 			Type asType = asProperty.getType();
 			SchedulerConstants schedulerConstants = getRegion().getSchedulerConstants();
@@ -107,13 +107,10 @@ public abstract class AbstractRegion2Mapping
 				return createOclAsTypeCallExp(asSource, asType);
 			}
 			else {
-//				IdResolver idResolver = schedulerConstants.getEnvironmentFactory().getIdResolver();
-//				return createOperationCallExp(asSource, idResolver.getOperation(schedulerConstants.getOclElementOclContainerId()));
+				throw new UnsupportedOperationException();
 			}
 		}
-//		else {
-			return PivotUtil.createNavigationCallExp(asSource, asProperty);
-//		}
+		return PivotUtil.createNavigationCallExp(asSource, asProperty);
 	}
 
 	protected void createConnectionAssignment(@NonNull Variable connectionVariable, @NonNull OCLExpression childrenExpression) {

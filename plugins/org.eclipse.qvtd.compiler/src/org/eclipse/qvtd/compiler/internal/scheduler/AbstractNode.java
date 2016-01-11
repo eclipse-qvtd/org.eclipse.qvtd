@@ -645,7 +645,18 @@ public abstract class AbstractNode implements Node
 	public boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis) {
 		CompleteClass oldCompleteClass = classDatumAnalysis.getCompleteClass();
 		CompleteClass newCompleteClass = newClassDatumAnalysis.getCompleteClass();
-		if (newCompleteClass.conformsTo(oldCompleteClass)) {
+		if (oldCompleteClass.conformsTo(newCompleteClass)) {
+			RootDomainUsageAnalysis domainAnalysis = getSchedulerConstants().getDomainAnalysis();
+			DomainUsage.Internal oldDomainUsage = (Internal) classDatumAnalysis.getDomainUsage();
+			DomainUsage.Internal newDomainUsage = (Internal) newClassDatumAnalysis.getDomainUsage();
+			int refinedBitMask = oldDomainUsage.getMask() & newDomainUsage.getMask();
+			DomainUsage refinedDomainUsage = domainAnalysis.getConstantUsage(refinedBitMask);
+			TypedModel refinedTypedModel = refinedDomainUsage.getTypedModel();
+			assert refinedTypedModel != null;
+			classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(oldCompleteClass.getPrimaryClass(), refinedTypedModel);
+			return true;
+		}
+		else if (newCompleteClass.conformsTo(oldCompleteClass)) {
 			RootDomainUsageAnalysis domainAnalysis = getSchedulerConstants().getDomainAnalysis();
 			DomainUsage.Internal oldDomainUsage = (Internal) classDatumAnalysis.getDomainUsage();
 			DomainUsage.Internal newDomainUsage = (Internal) newClassDatumAnalysis.getDomainUsage();
