@@ -25,9 +25,7 @@ import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -62,7 +60,7 @@ public class QVTp2QVTg {
 	private Map<TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>> typedModel2class2datum = new HashMap<TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>>();
 	
 	private Map<AbstractMapping, List<OperationCallExp>> mapping2opCallExps = new HashMap<AbstractMapping, List<OperationCallExp>>();
-	private Map<AbstractMapping, List<PropertyAssignment>> mapping2propAssigns = new HashMap<AbstractMapping, List<PropertyAssignment>>();
+	private Map<AbstractMapping, List<@NonNull PropertyAssignment>> mapping2propAssigns = new HashMap<@NonNull AbstractMapping, List<@NonNull PropertyAssignment>>();
 	private Map<AbstractMapping, List<NavigationCallExp>> mapping2navCallExps = new HashMap<AbstractMapping, List<NavigationCallExp>>();
 	
 	private final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
@@ -276,9 +274,9 @@ public class QVTp2QVTg {
 		return navCallExps == null ? Collections.<NavigationCallExp>emptyList() : navCallExps;
 	}
 
-	protected List<PropertyAssignment> getPropertyAssignments(AbstractMapping mapping) {	
-		List<PropertyAssignment> propAssigns = mapping2propAssigns.get(mapping);
-		return propAssigns == null ? Collections.<PropertyAssignment>emptyList() : propAssigns;
+	protected List<@NonNull PropertyAssignment> getPropertyAssignments(AbstractMapping mapping) {	
+		List<@NonNull PropertyAssignment> propAssigns = mapping2propAssigns.get(mapping);
+		return propAssigns == null ? Collections.<@NonNull PropertyAssignment>emptyList() : propAssigns;
 	}
 	
 	protected List<OperationCallExp> getOperationCallExps(AbstractMapping mapping) {
@@ -294,38 +292,16 @@ public class QVTp2QVTg {
 	}
 	
 	@NonNull
-	protected PropertyDatum getPropertyDatum(NavigationCallExp navCallExp, org.eclipse.ocl.pivot.@NonNull Class context) {
-		
-		Property property = null;
-		if (navCallExp instanceof PropertyCallExp) {
-			property = ((PropertyCallExp) navCallExp).getReferredProperty();
-		} else if (navCallExp instanceof OppositePropertyCallExp) {
-			property = ((OppositePropertyCallExp) navCallExp).getReferredProperty().getOpposite();		
-		} else {
-			throw new IllegalStateException("Kind of NavigationCallExp not processed");
-		}
-		Iterator<TypedModel> typedModels = getTypedModels(navCallExp).iterator();
-		if (!typedModels.hasNext()) {
-			throw new IllegalStateException("No TypedModel for " + navCallExp);
-		}
-		@SuppressWarnings("null") @NonNull TypedModel typedModel = typedModels.next();
-		if (typedModels.hasNext()) {
-			typedModel = getTypedModel(ClassUtil.nonNullState(navCallExp.getOwnedSource()));
-//			throw new IllegalStateException("Ambiguous TypedModel: " + typedModel + " for " + navCallExp);
-		}
-//		Property opposite = property.getOpposite();
-//		if (property.isIsComposite() || ((opposite != null) && opposite.isIsComposite())) {
-//			TypedModel typedModel = getTypedModel(navCallExp.getOwnedSource());
-//			return getPropertyDatum(typedModel, context, property);
-//		}
-//		else {
-//			TypedModel typedModel = getTypedModel(navCallExp);
-			return getPropertyDatum(typedModel, context, property);
-//		}
+	protected PropertyDatum getPropertyDatum(@NonNull NavigationCallExp navCallExp, org.eclipse.ocl.pivot.@NonNull Class context) {
+		Property property = PivotUtil.getReferredProperty(navCallExp);
+		OCLExpression ownedSource = navCallExp.getOwnedSource();
+		assert ownedSource != null;
+		TypedModel typedModel = getTypedModel(ownedSource);
+		return getPropertyDatum(typedModel, context, property);
 	}
 	
 	@NonNull
-	protected Set<PropertyDatum> getPropertyDatum(PropertyAssignment propAssign) {
+	protected Set<PropertyDatum> getPropertyDatum(@NonNull PropertyAssignment propAssign) {
 		Set<PropertyDatum> result = new LinkedHashSet<PropertyDatum>();
 		Property targetProp = propAssign.getTargetProperty();
 		OCLExpression slotExpression = ClassUtil.nonNullState(propAssign.getSlotExpression());

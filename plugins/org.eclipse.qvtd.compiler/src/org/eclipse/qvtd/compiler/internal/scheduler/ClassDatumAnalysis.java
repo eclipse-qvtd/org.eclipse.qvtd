@@ -192,7 +192,7 @@ public class ClassDatumAnalysis
 	public @NonNull Iterable<ClassDatumAnalysis> getSuperClassDatumAnalyses() {
 		List<ClassDatumAnalysis> superClassDatumAnalyses2 = superClassDatumAnalyses;
 		if (superClassDatumAnalyses2  == null) {
-			superClassDatumAnalyses = superClassDatumAnalyses2= new ArrayList<ClassDatumAnalysis>();
+			superClassDatumAnalyses = superClassDatumAnalyses2 = new ArrayList<ClassDatumAnalysis>();
 			for (@SuppressWarnings("null")@NonNull CompleteClass completeSuperClass : completeClass.getSuperCompleteClasses()) {
 				superClassDatumAnalyses2.add(schedulerConstants.getClassDatumAnalysis(completeSuperClass.getPrimaryClass(), ClassUtil.nonNullState(domainUsage.getTypedModel())));
 			}
