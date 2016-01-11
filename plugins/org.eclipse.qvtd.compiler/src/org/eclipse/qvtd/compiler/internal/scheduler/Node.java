@@ -143,6 +143,11 @@ public interface Node extends GraphStringBuilder.GraphNode, Nameable
 	boolean isInternal();
 
 	/**
+	 * Return true if this node is a LoopExp iterator.
+	 */
+	boolean isIterator();
+
+	/**
 	 * Return true if this node has a known value, because it is inherently constant, or
 	 * is available once sufficient input models have been loaded.
 	 */

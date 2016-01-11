@@ -422,6 +422,11 @@ public class Nodes
 			}
 			
 			@Override
+			public boolean isIterator() {
+				return true;
+			}
+			
+			@Override
 			public boolean isMatchable() {
 				return true;
 			}

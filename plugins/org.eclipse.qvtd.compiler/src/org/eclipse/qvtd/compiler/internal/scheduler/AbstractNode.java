@@ -575,6 +575,11 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
+	public boolean isIterator() {
+		return nodeRole.isIterator();
+	}
+
+	@Override
 	public boolean isKnown() {
 		return nodeRole.isConstant() || nodeRole.isLoaded();
 	}

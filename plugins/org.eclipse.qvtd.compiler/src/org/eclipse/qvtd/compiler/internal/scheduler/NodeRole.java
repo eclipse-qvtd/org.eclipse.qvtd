@@ -53,6 +53,8 @@ public interface NodeRole extends Role
 	
 	boolean isInternal();
 	
+	boolean isIterator();
+	
 	boolean isMatchable();
 
 	boolean isNavigable();

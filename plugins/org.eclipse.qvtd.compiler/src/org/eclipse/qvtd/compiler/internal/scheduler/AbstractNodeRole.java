@@ -73,6 +73,11 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	public boolean isInternal() {
 		return false;
 	}
+	
+	@Override
+	public boolean isIterator() {
+		return false;
+	}
 
 	@Override
 	public boolean isMatchable() {

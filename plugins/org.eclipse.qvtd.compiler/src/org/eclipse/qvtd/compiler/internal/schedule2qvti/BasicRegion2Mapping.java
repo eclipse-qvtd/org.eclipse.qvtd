@@ -960,6 +960,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					if (targetNode.isNull()) {
 						// FIXME check in caller
 					}
+					else if (targetNode.isIterator()) {
+						// Process in LoopExp
+					}
 					else {
 						Property property = edge.getProperty();
 						if (reachableNodes.add(targetNode)) {

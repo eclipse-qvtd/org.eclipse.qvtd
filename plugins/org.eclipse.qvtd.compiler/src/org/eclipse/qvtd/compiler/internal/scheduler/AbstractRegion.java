@@ -1889,7 +1889,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	private @Nullable Node selectMergedHeadNode(@NonNull Node headNode, @NonNull List<Node> mergedNodes) {
 		if (mergedNodes.size() == 1) {
-			return mergedNodes.get(0);
+			Node mergedNode = mergedNodes.get(0);
+			if (mergedNode.isIterator()) {
+				return null;
+			}
+			return mergedNode;
 		}
 		if (mergedNodes.size() == 0) {
 			return null;
@@ -1899,13 +1903,15 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 //			return null;
 //		}
 		for (Node mergedNode : mergedNodes) {
-			boolean ok = true;
-			for (NavigationEdge predicateEdge : predicateEdges) {
-				Property property = predicateEdge.getProperty();
-				Node navigation = mergedNode.getNavigationTarget(property);
-				if (navigation == null) {
-					ok = false;
-					break;
+			boolean ok = !mergedNode.isIterator();
+			if (ok) {
+				for (NavigationEdge predicateEdge : predicateEdges) {
+					Property property = predicateEdge.getProperty();
+					Node navigation = mergedNode.getNavigationTarget(property);
+					if (navigation == null) {
+						ok = false;
+						break;
+					}
 				}
 			}
 			if (ok) {						// FIXME stronger checking
