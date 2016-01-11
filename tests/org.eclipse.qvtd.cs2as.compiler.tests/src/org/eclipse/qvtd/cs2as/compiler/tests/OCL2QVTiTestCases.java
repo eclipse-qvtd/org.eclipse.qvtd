@@ -50,6 +50,7 @@ import org.eclipse.qvtd.compiler.internal.etl.EtlTask;
 import org.eclipse.qvtd.compiler.internal.etl.MtcBroker;
 import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
 import org.eclipse.qvtd.compiler.internal.etl.QvtMtcExecutionException;
+import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
@@ -484,6 +485,11 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testNewExample2_V2_CG() throws Exception {
+		Scheduler.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
+		Scheduler.DUMP_CLASS_TO_CONTAINING_PROPERTIES.setState(true);
+		Scheduler.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
+		Scheduler.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.setState(true);
+		Scheduler.DUMP_PROPERTY_TO_CONSUMING_CLASSES.setState(true);
 //		Scheduler.EDGE_ORDER.setState(true);
 //		Scheduler.REGION_DEPTH.setState(true);
 //		Scheduler.REGION_ORDER.setState(true);

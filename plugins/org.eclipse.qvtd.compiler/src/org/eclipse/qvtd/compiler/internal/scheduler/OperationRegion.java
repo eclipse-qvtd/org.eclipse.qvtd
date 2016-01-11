@@ -36,7 +36,6 @@ import org.eclipse.qvtd.compiler.internal.scheduler.DependencyAnalyzer.Dependenc
 import org.eclipse.qvtd.compiler.internal.scheduler.DependencyAnalyzer.NavigationDependencyStep;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;
@@ -90,7 +89,7 @@ public class OperationRegion extends AbstractMappingRegion
 				DependencyStep classStep = steps.get(0);
 				DomainUsage stepUsage = classStep.getUsage();
 				if (stepUsage.isEnforceable() && !stepUsage.isCheckable()) {
-					System.out.println("!checkable && enforceable: " + steps);
+//					System.out.println("!checkable && enforceable: " + steps);
 					org.eclipse.ocl.pivot.Class stepType = steps.get(0).getElementalType();
 					TypedModel typedModel = stepUsage.getTypedModel();
 					assert typedModel != null;
@@ -135,7 +134,7 @@ public class OperationRegion extends AbstractMappingRegion
 					}
 				}
 				else {
-					System.out.println("checkable || !enforceable: " + steps);			
+//					System.out.println("checkable || !enforceable: " + steps);			
 				}
 			}
 		}			

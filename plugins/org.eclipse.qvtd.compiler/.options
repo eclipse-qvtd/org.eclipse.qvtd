@@ -2,6 +2,16 @@
 
 # Turn on tracing of the operation dependency analysis 
 org.eclipse.qvtd.compiler/qvtp2qvts/dependencyAnalysis=false
+# Turn on dump of the consuming node for each class 
+org.eclipse.qvtd.compiler/qvtp2qvts/dump/class2consumingNodes=false
+# Turn on dump of the consumed properties analysis 
+org.eclipse.qvtd.compiler/qvtp2qvts/dump/consumedProperties=false
+# Turn on dump of the realized node for each produced class
+org.eclipse.qvtd.compiler/qvtp2qvts/dump/class2realizedNodes=false
+# Turn on dump of the domain usage for each input model 
+org.eclipse.qvtd.compiler/qvtp2qvts/dump/inputModel2domainUsage=false
+# Turn on dump of the possible containing properties for each class 
+org.eclipse.qvtd.compiler/qvtp2qvts/dump/property2consumingClass=false
 # Turn on tracing of the region depth computation 
 org.eclipse.qvtd.compiler/qvtp2qvts/regionDepth=false
 # Turn on tracing of the region connection locality computation 

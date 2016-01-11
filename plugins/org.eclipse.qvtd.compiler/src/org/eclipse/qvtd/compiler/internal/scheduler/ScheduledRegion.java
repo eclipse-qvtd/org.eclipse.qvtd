@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.BinaryOperator;
+import java.util.stream.Stream;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -125,6 +127,10 @@ public class ScheduledRegion extends AbstractRegion
 			}
 		}
 		return true;
+	}
+
+	public static @NonNull BinaryOperator<@NonNull String> stringJoin(@NonNull String delimiter) {
+		return (a, b) -> String.valueOf(a) + delimiter + String.valueOf(b);
 	}
 	
 	private final @NonNull String name;	
@@ -1048,6 +1054,7 @@ public class ScheduledRegion extends AbstractRegion
 		addRegion(rootContainmentRegion);
 		@SuppressWarnings("null")@NonNull Set<ClassDatumAnalysis> consumedClassDatumAnalyses = consumedClassDatumAnalysis2headNodes.keySet();		// FIXME all consumed classes
 		for (@SuppressWarnings("null")@NonNull ClassDatumAnalysis consumedClassDatumAnalysis : consumedClassDatumAnalyses) {
+//			System.out.println("ScheduledRegion.createRootContainmentRegion: " + consumedClassDatumAnalysis);
 			boolean canBeAtRoot = !consumedClassDatumAnalysis.getDomainUsage().isEnforceable();
 			if (consumedClassDatumAnalysis.getClassDatum().getType() instanceof DataType) {
 				canBeAtRoot = false;
@@ -1086,22 +1093,37 @@ public class ScheduledRegion extends AbstractRegion
 		//	Identify the input models.
 		//
 		computeInputModels();
+		if (Scheduler.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.isActive()) {
+			Scheduler.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.println(dumpInputModels().reduce("", stringJoin("\n\t")));
+		}
 		//
 		//	Identify all the containment relationships in the input models.
 		//
 		computeContainedClassDatumAnalysis2compositeProperties();
+		if (Scheduler.DUMP_CLASS_TO_CONTAINING_PROPERTIES.isActive()) {
+			Scheduler.DUMP_CLASS_TO_CONTAINING_PROPERTIES.println(dumpClass2ContainingProperties().reduce("", stringJoin("\n\t")));
+		}
 		//
 		//	Identify all classes that are produced by mappings.
 		//
 		computeProducedClassDatumAnalysis2realizedNodes();
+		if (Scheduler.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
+			Scheduler.DUMP_CLASS_TO_REALIZED_NODES.println(dumpClass2ProducingNode().reduce("", stringJoin("\n\t")));
+		}
 		//
 		//	Identify all classes that are consumed as independent inputs of mappings.
 		//
 		computeConsumedConsumedClassDatumAnalysis2headNodes();
+		if (Scheduler.DUMP_CLASS_TO_CONSUMING_NODES.isActive()) {
+			Scheduler.DUMP_CLASS_TO_CONSUMING_NODES.println(dumpClass2consumingNode().reduce("", stringJoin("\n\t")));
+		}
 		//
 		//	Identify all classes that are transitively consumed as containers of consumed classes.
 		//
 		computeConsumedCompositeProperty2introducedClassDatumAnalyses();
+		if (Scheduler.DUMP_PROPERTY_TO_CONSUMING_CLASSES.isActive()) {
+			Scheduler.DUMP_PROPERTY_TO_CONSUMING_CLASSES.println(dumpClass2ConsumingProperty().reduce("", stringJoin("\n\t")));
+		}
 		//
 		//	Create containment regions to traverse all in-use compositions to introduce all consumed classes.
 		//
@@ -1403,6 +1425,63 @@ public class ScheduledRegion extends AbstractRegion
 			}
 		}
 	} */
+
+	public Stream<String> dumpClass2consumingNode() {
+		Stream<String> entries = consumedClassDatumAnalysis2headNodes.keySet().stream().map(
+			k -> {
+				List<Node> list = consumedClassDatumAnalysis2headNodes.get(k);
+					return String.valueOf(k) + " : " + list.stream().map(
+						p -> p.getDisplayName()
+					).sorted().reduce("", stringJoin("\n\t\t"));
+			}
+		);
+		return entries.sorted();
+	}
+
+	public Stream<String> dumpClass2ConsumingProperty() {
+		Stream<String> entries = consumedCompositeProperty2introducedClassDatumAnalyses.keySet().stream().map(
+			k -> {
+				Set<ClassDatumAnalysis> set = consumedCompositeProperty2introducedClassDatumAnalyses.get(k);
+				return String.valueOf(k) + " : " +
+					set.stream().map(
+						p -> p.toString()
+					).sorted().reduce("", stringJoin("\n\t\t"));
+			}
+		);
+		return entries.sorted();
+	}
+
+	public Stream<String> dumpClass2ContainingProperties() {
+		Stream<String> entries = containedClassDatumAnalysis2compositeProperties.keySet().stream().map(
+			k -> {
+				Set<Property> set = containedClassDatumAnalysis2compositeProperties.get(k);
+				return String.valueOf(k) + " " + k.getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(k)) + " : " + set.stream().map(
+					p -> String.valueOf(p)).sorted().reduce("", stringJoin("\n\t\t")
+				);
+			}
+		);
+		return entries.sorted();
+	}
+
+	public Stream<String> dumpClass2ProducingNode() {
+		Stream<String> entries = producedClassDatumAnalysis2realizedNodes.keySet().stream().map(
+			k -> {
+				List<Node> list = producedClassDatumAnalysis2realizedNodes.get(k);
+				return String.valueOf(k) + " : " +
+					list.stream().map(
+						p -> p.getDisplayName()
+					).sorted().reduce("", stringJoin("\n\t\t")
+				);
+			}
+		);
+		return entries.sorted();
+	}
+
+	public Stream<String> dumpInputModels() {
+		Stream<String> entries = inputModels.keySet().stream().map(
+			k -> String.valueOf(k) + " : " + String.valueOf(inputModels.get(k)));
+		return entries.sorted();
+	}
 
 	public @NonNull Iterable<Region> getCallableRegions() {
 		List<Region> callableRegions = new ArrayList<Region>();
