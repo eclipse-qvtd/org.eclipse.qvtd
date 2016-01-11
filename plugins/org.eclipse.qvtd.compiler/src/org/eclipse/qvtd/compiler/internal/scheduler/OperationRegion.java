@@ -78,7 +78,7 @@ public class OperationRegion extends AbstractMappingRegion
 		
 		//
 		SchedulerConstants schedulerConstants = getSchedulerConstants();
-		DependencyAnalyzer dependencyAnalyzer = new DependencyAnalyzer(schedulerConstants);
+		DependencyAnalyzer dependencyAnalyzer = schedulerConstants.getDependencyAnalyzer();
 		DependencyPaths path = dependencyAnalyzer.analyze(operationCallExp);
 //		System.out.println("Analyze " + operationCallExp + " gives\n" + path);
 		Iterable<List<DependencyStep>> hiddenPaths = path.getHiddenPaths();

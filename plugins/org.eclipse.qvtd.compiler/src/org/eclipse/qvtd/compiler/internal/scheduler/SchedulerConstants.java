@@ -21,6 +21,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Element;
@@ -79,8 +80,7 @@ public abstract class SchedulerConstants
 		else {
 			s.append(typedElement.isIsRequired() ? "[1]" : "[?]");
 		}
-		@SuppressWarnings("null")@NonNull String multiplicity = s.toString();
-		return multiplicity;
+		return s.toString();
 	}
 	
 	/**
@@ -132,6 +132,11 @@ public abstract class SchedulerConstants
 	 * Property used as an argument role identification.
 	 */
 	private final @NonNull Map<String, Property> name2argumentProperty = new HashMap<String, Property>();
+	
+	/**
+	 * OPeration depency analyzer and analyses.
+	 */
+	private @Nullable DependencyAnalyzer dependencyAnalyzer = null;
 
 	public SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule dependencyGraph, @NonNull RootDomainUsageAnalysis domainAnalysis, @NonNull QVTp2QVTg qvtp2qvtg) {
 		this.environmentFactory = environmentFactory;
@@ -268,6 +273,15 @@ public abstract class SchedulerConstants
 //	public @NonNull Set<ClassDatum> getClassDatums() {
 //		return classDatum2classDatumAnalysis.keySet();
 //	}
+
+	public @NonNull DependencyAnalyzer getDependencyAnalyzer() {
+		@Nullable
+		DependencyAnalyzer dependencyAnalyzer2 = dependencyAnalyzer;
+		if (dependencyAnalyzer2 == null) {
+			dependencyAnalyzer = dependencyAnalyzer2 = new DependencyAnalyzer(this);
+		}
+		return dependencyAnalyzer2;
+	}
 
 	public @NonNull Schedule getDependencyGraph() {
 		return dependencyGraph;

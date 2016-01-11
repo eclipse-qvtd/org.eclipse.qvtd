@@ -78,13 +78,13 @@ public class DependencyAnalyzer
 	@SuppressWarnings("serial")
 	protected static class BlockedAnalysisException extends RuntimeException
 	{
-		private @NonNull Collection<OperationAnalysis> failedAnalyses;
+		private @NonNull Collection<@NonNull OperationAnalysis> failedAnalyses;
 
-		public BlockedAnalysisException(@NonNull Collection<OperationAnalysis> failedAnalyses) {
+		public BlockedAnalysisException(@NonNull Collection<@NonNull OperationAnalysis> failedAnalyses) {
 			this.failedAnalyses = /*new ArrayList<OperationAnalysis>(*/failedAnalyses;//);
 		}
 
-		public @NonNull Collection<OperationAnalysis> getFailedAnalyses() {
+		public @NonNull Collection<@NonNull OperationAnalysis> getFailedAnalyses() {
 			return failedAnalyses;
 		}
 	}
@@ -328,6 +328,7 @@ public class DependencyAnalyzer
 				else {
 					org.eclipse.ocl.pivot.Class endClass = oldReturnPath.get(size-1).getElementalType();
 					org.eclipse.ocl.pivot.Class sourceClass = propertyDependencyStep.getProperty().getOwningClass();
+					assert sourceClass != null;
 					if (!endClass.conformsTo(dependencyAnalyzer.getStandardLibrary(), sourceClass)) {
 						newReturnPath = oldReturnPath;
 					}
@@ -574,7 +575,7 @@ public class DependencyAnalyzer
 			return result;
 		}
 
-		private DependencyPaths executeOperationCallExp_oclContainer(@NonNull OperationCallExp operationCallExp,
+		private @NonNull DependencyPaths executeOperationCallExp_oclContainer(@NonNull OperationCallExp operationCallExp,
 				@NonNull List<DependencyPaths> argumentPaths) {
 			assert argumentPaths.size() == 1;
 			DependencyPaths sourcePath = argumentPaths.get(0);
@@ -886,6 +887,7 @@ public class DependencyAnalyzer
 	
 	public @NonNull DependencyPaths analyze(/*@NonNull*/ Element element,
 			@NonNull VariableDeclaration selfVariable, @Nullable DependencyPaths selfPath) {
+		assert element != null;
 		DependencyAnalyzerVisitor visitor = new DependencyAnalyzerVisitor(null);
 		if (selfPath == null) {
 			org.eclipse.ocl.pivot.Class type = ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)selfVariable.getType());
@@ -964,7 +966,6 @@ public class DependencyAnalyzer
 			type = ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class) ((CollectionType)type).getElementType());
 		}
 		DomainUsage usage1 = basicGetUsage(type);
-		DomainUsage usage2 = basicGetUsage(element);
 		DomainUsage usage = usage1 != null ? usage1 : getUsage(element);
 		DependencyStepFactory factory = getDependencyStepFactory(usage);
 		return factory.createClassDependencyStep(type, element);
@@ -1002,11 +1003,11 @@ public class DependencyAnalyzer
 			@NonNull List<DependencyPaths> sourceAndArgumentPaths) throws BlockedAnalysisException {
 		checkAll();
 		Operation referredOperation = operationCallExp.getReferredOperation();
-		
+		assert referredOperation != null;
 		assert sourceAndArgumentPaths.size() > 0;
 		DependencyPaths sourcePath = sourceAndArgumentPaths.get(0);
 		DependencyPaths result = emptyDependencyPaths;
-		List<OperationAnalysis> failedAnalyses = null;
+		List<@NonNull OperationAnalysis> failedAnalyses = null;
 		for (List<DependencyStep> steps : sourcePath.getReturnPaths()) {
 			int size = steps.size();
 			assert size > 0;
@@ -1033,7 +1034,7 @@ public class DependencyAnalyzer
 				DependencyPaths operationResult = operationAnalysis.getResult();
 				if (operationResult == null) {
 					if (failedAnalyses == null) {
-						failedAnalyses = new ArrayList<OperationAnalysis>();
+						failedAnalyses = new ArrayList<@NonNull OperationAnalysis>();
 					}
 					failedAnalyses.add(operationAnalysis);
 				}
@@ -1070,7 +1071,7 @@ public class DependencyAnalyzer
 	
 	protected void unblock(@NonNull OperationAnalysis operationAnalysis) {
 		Scheduler.DEPENDENCY_ANALYSIS.println("Unblock " + operationAnalysis);
-		boolean wasRemoved = blockedAnalyses.remove(operationAnalysis);
+		@SuppressWarnings("unused")boolean wasRemoved = blockedAnalyses.remove(operationAnalysis);
 //		assert wasRemoved; -- multiple unblocking occur when introducing UnknownDependencySteps
 		unblockedAnalyses.addLast(operationAnalysis);
 	}
