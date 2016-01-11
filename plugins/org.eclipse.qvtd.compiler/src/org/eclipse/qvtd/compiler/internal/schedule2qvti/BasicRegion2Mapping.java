@@ -47,6 +47,8 @@ import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PrimitiveLiteralExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.ShadowExp;
+import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.TupleLiteralExp;
 import org.eclipse.ocl.pivot.TupleLiteralPart;
@@ -255,6 +257,23 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 //			mapLiteralPart.setType(asItem.getType());
 //			mapLiteralPart.setIsRequired(true);
 			return mapLiteralPart;
+		}
+
+		private @NonNull OCLExpression createShadowExp(org.eclipse.ocl.pivot.@NonNull Class asClass, @NonNull Iterable<ShadowPart> asParts) {
+			ShadowExp shadowExp = PivotFactory.eINSTANCE.createShadowExp();
+			Iterables.addAll(shadowExp.getOwnedParts(), asParts);
+			shadowExp.setType(asClass);
+			shadowExp.setIsRequired(true);
+			return shadowExp;
+		}
+
+		private @NonNull ShadowPart createShadowPart(@NonNull Property asProperty, @NonNull OCLExpression asValue) {
+			ShadowPart shadowPart = PivotFactory.eINSTANCE.createShadowPart();
+			shadowPart.setReferredProperty(asProperty);
+			shadowPart.setType(asProperty.getType());
+			shadowPart.setIsRequired(asProperty.isIsRequired());
+			shadowPart.setOwnedInit(asValue);
+			return shadowPart;
 		}
 
 		private @NonNull OCLExpression createTupleLiteralExp(@NonNull TupleType asType, @NonNull Iterable<TupleLiteralPart> asParts) {
@@ -495,6 +514,23 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			assert referredProperty != null;
 			assert referredProperty.eContainer() != null;
 			return PivotUtil.createNavigationCallExp(iSource, referredProperty);
+		}
+
+		@Override
+		public @NonNull OCLExpression visitShadowExp(@NonNull ShadowExp pShadowExp) {
+			List<ShadowPart> clonedParts = new ArrayList<ShadowPart>();
+			for (ShadowPart pPart : pShadowExp.getOwnedParts()) {
+				OCLExpression init = createNonNull(pPart.getOwnedInit());
+				String name = pPart.getName();
+				Type type = pPart.getType();
+				assert (name != null) && (type != null);
+				Property referredProperty = pPart.getReferredProperty();
+				assert referredProperty != null;
+				clonedParts.add(createShadowPart(referredProperty, init));
+			}
+			org.eclipse.ocl.pivot.Class shadowType = pShadowExp.getType();
+			assert shadowType != null;
+			return createShadowExp(shadowType, clonedParts);
 		}
 
 		@Override
