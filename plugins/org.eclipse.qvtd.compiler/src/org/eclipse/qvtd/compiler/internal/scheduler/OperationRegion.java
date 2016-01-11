@@ -114,7 +114,20 @@ public class OperationRegion extends AbstractMappingRegion
 	//						assert typedModel != null;
 	//						stepType = propertyStep.getType();
 	//						classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(stepType, typedModel);
-	//						SimpleNode nextNode = Nodes.StepNodeRoleFactory.PREDICATED_STEP.createSimpleNode(this, "next", classDatumAnalysis);				
+	//						SimpleNode nextNode = Nodes.StepNodeRoleFactory.PREDICATED_STEP.createSimpleNode(this, "next", classDatumAnalysis);
+							
+							CompleteClass completeClass = extraNode2.getCompleteClass();
+							Type primaryClass = completeClass.getPrimaryClass();
+							if (primaryClass instanceof CollectionType) {
+								Property iterateProperty = schedulerConstants.getIterateProperty(primaryClass);
+								Type elementType = ((CollectionType)primaryClass).getElementType();
+								TypedModel typedModel2 = extraNode2.getClassDatumAnalysis().getTypedModel();
+								ClassDatumAnalysis elementClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis((@NonNull Class) elementType, typedModel2);
+								SimpleNode elementNode = Nodes.ELEMENT.createSimpleNode(this, name, elementClassDatumAnalysis, extraNode2);
+								//(region, name, typedElement, argNodes)SimpleNode(region, name, callExp, sourceNode)Node(this, name, iterateProperty, extraNode2);
+								Edges.NAVIGATION.createSimpleEdge(this, extraNode2, iterateProperty, elementNode);
+								extraNode2 = elementNode;
+							}
 							SimpleNode nextNode = Nodes.ATTRIBUTE.createSimpleNode(this, extraNode2, navigationCallExp);
 							Edges.NAVIGATION.createSimpleEdge(this, extraNode2, propertyStep.getProperty(), nextNode);
 							extraNode2 = nextNode;

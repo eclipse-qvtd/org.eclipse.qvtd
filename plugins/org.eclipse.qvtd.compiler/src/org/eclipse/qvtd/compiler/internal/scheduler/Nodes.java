@@ -304,6 +304,81 @@ public class Nodes
 			return true;
 		}
 	}
+	
+	public static final class ElementNodeRoleFactory
+	{
+		private static abstract class AbstractElementNodeRole extends AbstractSimpleNodeRole
+		{
+			protected AbstractElementNodeRole(@NonNull Phase phase) {
+				super(phase);
+			}
+
+			@Override
+			public boolean isClassNode() {
+				return true;
+			}
+
+			@Override
+			public boolean isMatchable() {
+				return true;
+			}
+
+			@Override
+			public boolean isNavigable() {
+				return true;
+			}
+
+			@Override
+			public String toString() {
+				return getClass().getSimpleName();
+			}
+		}
+
+		private static final class LoadedElementNodeRole extends AbstractElementNodeRole
+		{
+			protected LoadedElementNodeRole() {
+				super(Role.Phase.LOADED);
+			}
+
+			@Override
+			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
+				if (nodeRole.isHead()) {
+					return this;
+				}
+				return super.merge(nodeRole);
+			}
+		}
+
+		public static final class PredicatedElementNodeRole extends AbstractElementNodeRole
+		{
+			protected PredicatedElementNodeRole() {
+				super(Role.Phase.PREDICATED);
+			}
+
+			@Override
+			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
+				if (nodeRole.isHead()) {
+					return this;
+				}
+				if (nodeRole instanceof RealizedVariableNodeRole) {
+					return nodeRole;
+				}
+				return super.merge(nodeRole);
+			}
+		}
+
+		private static final @NonNull LoadedElementNodeRole LOADED_ELEMENT = new LoadedElementNodeRole();
+		public static final @NonNull PredicatedElementNodeRole PREDICATED_ELEMENT = new PredicatedElementNodeRole();
+		
+		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull SimpleNode sourceNode) {
+			if (sourceNode.isPredicated()) {
+				return PREDICATED_ELEMENT.createSimpleNode(region, name, classDatumAnalysis);
+			}
+			else {
+				return LOADED_ELEMENT.createSimpleNode(region, name, classDatumAnalysis);
+			}
+		}
+	}
 
 	private static final class ErrorNodeRole extends AbstractSimpleNodeRole
 	{
@@ -846,6 +921,7 @@ public class Nodes
 	public static final @NonNull AttributeNodeRoleFactory ATTRIBUTE = new AttributeNodeRoleFactory();
 	public static final @NonNull NodeRole COMPOSED = new ComposedNodeRole();
 	public static final @NonNull NodeRole COMPOSING = new ComposingNodeRole();
+	public static final @NonNull ElementNodeRoleFactory ELEMENT = new ElementNodeRoleFactory();
 	public static final @NonNull NodeRole ERROR = new ErrorNodeRole();
 	public static final @NonNull NodeRole EXTRA_GUARD = new AttributeNodeRoleFactory.ExtraGuardNodeRole();
 	public static final @NonNull GuardNodeRoleFactory GUARD = new GuardNodeRoleFactory();
