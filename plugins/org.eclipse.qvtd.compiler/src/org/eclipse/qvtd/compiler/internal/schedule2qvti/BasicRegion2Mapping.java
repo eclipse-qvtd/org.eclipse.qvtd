@@ -771,7 +771,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		Set<TypedModel> enforceableTypedModels = new HashSet<TypedModel>();
 		for (Node node : region.getNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
-			org.eclipse.ocl.pivot.Class type = classDatumAnalysis.getClassDatum().getType();
+			Type type = classDatumAnalysis.getClassDatum().getType();
 			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {
 				DomainUsage domainUsage = classDatumAnalysis.getDomainUsage();
 				if (domainUsage.isCheckable()) {		// EObject is $primitive$

@@ -75,7 +75,7 @@ public class ClassDatumAnalysis
 		this.schedulerConstants = schedulerConstants;
 		this.classDatum = classDatum;
 		this.domainUsage = schedulerConstants.getDomainUsage(ClassUtil.nonNullState(classDatum.getTypedModel()));
-		org.eclipse.ocl.pivot.Class type = classDatum.getType();
+		Type type = classDatum.getType();
 		assert type != null;
 		this.completeClass = schedulerConstants.getEnvironmentFactory().getCompleteModel().getCompleteClass(type);
 	}
@@ -138,7 +138,7 @@ public class ClassDatumAnalysis
 		List<Property> multiOpposites2 = multiOpposites;
 		if (multiOpposites2 == null) {
 			EnvironmentFactory environmentFactory = schedulerConstants.getEnvironmentFactory();
-			org.eclipse.ocl.pivot.Class asClass = classDatum.getType();
+			Type asClass = classDatum.getType();
 			assert asClass != null;
 			CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(asClass);
 			for (Property property : completeClass.getProperties((FeatureFilter)null)) {
