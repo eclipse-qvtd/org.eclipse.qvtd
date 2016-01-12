@@ -6,13 +6,16 @@ package ocl
 ---- Default Environment related functionality
 context OclElement
 --	
-def : env() : lookup::LookupEnvironment =
+def : env() : lookup::LookupEnvironment[1] =
 	_env(null)
 
-def : _env(child : OclElement) : lookup::LookupEnvironment =
+def : _env(child : OclElement) : lookup::LookupEnvironment[1] =
 	parentEnv()
+
+def : _exported_env(importer : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
 	
-def : parentEnv() : lookup::LookupEnvironment =
+def : parentEnv() : lookup::LookupEnvironment[1] =
 	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._env(self) endif
 endpackage 
 
