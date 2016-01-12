@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.LanguageExpression;
@@ -38,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
@@ -57,7 +59,7 @@ public class QVTp2QVTg {
 	private Schedule dg;
 	
 	// Caches
-	private Map<TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>> typedModel2class2datum = new HashMap<TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>>();
+	private Map<@NonNull TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>> typedModel2class2datum = new HashMap<@NonNull TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>>();
 	
 	private Map<AbstractMapping, List<OperationCallExp>> mapping2opCallExps = new HashMap<AbstractMapping, List<OperationCallExp>>();
 	private Map<AbstractMapping, List<@NonNull PropertyAssignment>> mapping2propAssigns = new HashMap<@NonNull AbstractMapping, List<@NonNull PropertyAssignment>>();
@@ -70,6 +72,29 @@ public class QVTp2QVTg {
 	public QVTp2QVTg(@NonNull RootDomainUsageAnalysis domainAnalysis, @NonNull ClassRelationships classRelationships) {
 		this.domainUsageAnalysis = domainAnalysis;
 		this.classRelationships = classRelationships;
+	}
+
+	private boolean assertValidTypedModel(@NonNull TypedModel typedModel, @NonNull Type aType) {
+		Type elementType = QVTbaseUtil.getElementalType(aType);
+		if (elementType instanceof DataType) {
+			assert typedModel == domainUsageAnalysis.getPrimitiveTypeModel();
+		}
+		else {
+			assert typedModel != null;
+			/* FIXME waiting for BUG 485647 
+			if (typedModel != domainUsageAnalysis.getPrimitiveTypeModel()) {			// Un'used' packages are primitive
+				Set<org.eclipse.ocl.pivot.Package> allUsedPackages = QVTbaseUtil.getAllUsedPackages(typedModel);
+				org.eclipse.ocl.pivot.Package containingPackage = PivotUtil.getContainingPackage(elementType);
+				assert containingPackage != null;
+				if (!Iterables.contains(allUsedPackages, containingPackage)) {
+					StandardLibrary standardLibrary = classRelationships.getEnvironmentFactory().getStandardLibrary();
+					assert (elementType == standardLibrary.getOclAnyType())
+				    || (elementType == standardLibrary.getOclElementType())
+				    || (elementType == standardLibrary.getOclVoidType());
+				}
+			} */
+		}
+		return true;
 	}
 
 	private void clearCaches() {
@@ -175,22 +200,24 @@ public class QVTp2QVTg {
 		dp.setDatum(getClassDatum(typedModel, ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)variable.getType())));		
 		return dp;
 	}
-	
-	@NonNull
-	protected ClassDatum createClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class aClass) {
+
+	protected @NonNull ClassDatum createClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class aClass) {
+		assert assertValidTypedModel(typedModel, aClass);
 		ClassDatum cDatum = ScheduleFactory.eINSTANCE.createClassDatum();
 		cDatum.setSchedule(dg);
 		cDatum.setType(aClass);
 		cDatum.setTypedModel(typedModel);
-		for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class superClass : aClass.getSuperClasses()) {
-			ClassDatum superCDatum = getClassDatum(typedModel, superClass);
-			cDatum.getSuper().add(superCDatum);
+		if (!(aClass instanceof DataType)) { 
+			for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class superClass : aClass.getSuperClasses()) {
+				ClassDatum superCDatum = getClassDatum(typedModel, superClass);
+				cDatum.getSuper().add(superCDatum);
+			}
 		}
-		
 		return cDatum;
 	}
-	
+
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class aClass) {
+		assert assertValidTypedModel(typedModel, aClass);
 		Map<org.eclipse.ocl.pivot.Class, ClassDatum> class2datum = typedModel2class2datum.get(typedModel);
 		if (class2datum == null) {
 			class2datum = new HashMap<org.eclipse.ocl.pivot.Class, ClassDatum>();
@@ -201,6 +228,22 @@ public class QVTp2QVTg {
 			cDatum = createClassDatum(typedModel, aClass);
 			class2datum.put(aClass, cDatum);
 		}
+		/**
+		 * Following check is useful for heterogeneous checking. assertValidTypedModel should be better once BUG 485647 is fixed.
+		 *
+		TypedModel tmKey = null;
+		for (TypedModel tm : typedModel2class2datum.keySet()) {
+			Map<Type, ClassDatum> c2d = typedModel2class2datum.get(tm);
+			if (c2d.containsKey(aType)) {
+				if (tmKey == null) {
+					tmKey = tm;
+				}
+				else if (!aType.getName().startsWith("Ocl") && !aType.getName().equals("EObject")) {
+					System.out.println(aType +  " is both " + tmKey + " and " + tm);
+					throw new IllegalStateException(aType +  " is both " + tmKey + " and " + tm);
+				}
+			}
+		} */
 		return cDatum;
 	}
 	
@@ -310,7 +353,10 @@ public class QVTp2QVTg {
 		result.add(targetDatum);
 		Property oppositeProp = targetProp.getOpposite();
 		if (oppositeProp != null) {
-			PropertyDatum oppositeDatum = getPropertyDatum(typedModel, ClassUtil.nonNullState(getElementClass(targetProp)), oppositeProp);
+			OCLExpression value = propAssign.getValue();
+			assert value != null;
+			TypedModel oppositeTypedModel = getTypedModel(value);
+			PropertyDatum oppositeDatum = getPropertyDatum(oppositeTypedModel, ClassUtil.nonNullState(getElementClass(targetProp)), oppositeProp);
 			targetDatum.setOpposite(oppositeDatum);
 			result.add(oppositeDatum);
 		}
@@ -331,11 +377,16 @@ public class QVTp2QVTg {
 		if (!visitedOps.contains(op)) {
 			visitedOps.add(op);
 			if (isOclContainerOp(op)) {
-				for (@SuppressWarnings("null") @NonNull TypedModel typedModel : getTypedModels(opCall)) {
+				for (@SuppressWarnings("null") @NonNull TypedModel typedModel : getTypedModels(context)) {
 					for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class newContext : getComputedContexts(opCall, variable2BoundContext)) {
 						result.addAll(analyseOclContainerCall(typedModel, newContext));
 					}
 				}
+//				for (@SuppressWarnings("null") @NonNull TypedModel typedModel : getTypedModels(opCall)) {
+//					for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class newContext : getComputedContexts(opCall, variable2BoundContext)) {
+//						result.addAll(analyseOclContainerCall(typedModel, newContext));
+//					}
+//				}
 			} else {
 				result.addAll(getPropertyDatums(op, context, type2VisitedOps));
 			}

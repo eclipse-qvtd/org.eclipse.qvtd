@@ -188,6 +188,10 @@ public class ClassRelationships {
 			}
 		}
 	}
+
+	public @NonNull EnvironmentFactory getEnvironmentFactory() {
+		return mManager.getEnvironmentFactory();
+	}
 		
 	private List<Package> getInvolvedPackages(Resource resource) {
 	
