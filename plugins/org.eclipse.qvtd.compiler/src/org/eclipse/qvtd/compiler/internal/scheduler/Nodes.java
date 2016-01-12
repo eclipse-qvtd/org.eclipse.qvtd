@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.scheduler;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
@@ -167,7 +168,12 @@ public class Nodes
 				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 				Type type = property.getType();
 				assert type != null;
-				TypedModel typedModel = parentNode.getClassDatumAnalysis().getTypedModel();
+//				TypedModel typedModel = /*type instanceof DataType ? region.getSchedulerConstants().getDomainAnalysis().getPrimitiveTypeModel() :*/ parentNode.getClassDatumAnalysis().getTypedModel();
+				@Nullable
+				DomainUsage usage = region.getSchedulerConstants().getDomainAnalysis().getUsage(type);
+				assert usage != null;
+				TypedModel typedModel = usage.getTypedModel();
+				assert typedModel != null;
 				ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
 //				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
 				ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);

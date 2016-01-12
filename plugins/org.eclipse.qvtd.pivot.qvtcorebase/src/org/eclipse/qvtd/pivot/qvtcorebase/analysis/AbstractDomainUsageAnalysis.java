@@ -97,15 +97,15 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	
 	protected @NonNull DomainUsage doPropertyAssignment(Property property, @NonNull PropertyAssignment object) {
 		DomainUsage slotUsage = visit(object.getSlotExpression());
-		DomainUsage valueUsage = visit(object.getValue());
+		@SuppressWarnings("unused")DomainUsage valueUsage = visit(object.getValue());
 		DomainUsage knownSourceUsage = getRootAnalysis().property2containingClassUsage.get(property);
 		if (knownSourceUsage != null) {
 			@SuppressWarnings("null")@NonNull DomainUsage knownTargetUsage = getRootAnalysis().property2referredTypeUsage.get(property);
 			intersection(knownSourceUsage, slotUsage);
-			return intersection(knownTargetUsage, valueUsage);
+			return knownSourceUsage; //intersection(knownTargetUsage, valueUsage);
 		}
 		else {
-			return intersection(slotUsage, valueUsage);
+			return slotUsage; //intersection(slotUsage, valueUsage);
 		}
 	}
 	
@@ -114,7 +114,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		DomainUsage knownSourceUsage = getRootAnalysis().property2containingClassUsage.get(property);
 		if (knownSourceUsage != null) {
 			@SuppressWarnings("null")@NonNull DomainUsage knownTargetUsage = getRootAnalysis().property2referredTypeUsage.get(property);
-			return knownTargetUsage; //intersection(knownSourceUsage, actualSourceUsage);
+			return intersection(knownSourceUsage, actualSourceUsage);
 		}
 		else {
 			return actualSourceUsage;
