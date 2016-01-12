@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classes:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classes="http://cs2as/tests/example2/classes/1.0"
+    xsi:schemaLocation="http://cs2as/tests/example2/classes/1.0 ../Classes.ecore">
+  <ownedPackages name="P1">
+    <ownedClasses name="String"/>
+    <ownedClasses name="C1">
+      <ownedProperties name="name" type="//@ownedPackages.0/@ownedClasses.0"/>
+    </ownedClasses>
+    <ownedClasses name="C2" superClass="//@ownedPackages.0/@ownedClasses.1">
+      <ownedOperations name="getProp1" type="//@ownedPackages.0/@ownedClasses.1">
+        <ownedExpressions xsi:type="classes:PropertyCallExp" type="//@ownedPackages.0/@ownedClasses.1" referredProperty="//@ownedPackages.0/@ownedClasses.2/@ownedProperties.0"/>
+      </ownedOperations>
+      <ownedOperations name="getProp1Name" type="//@ownedPackages.0/@ownedClasses.0">
+        <ownedExpressions xsi:type="classes:PropertyCallExp" type="//@ownedPackages.0/@ownedClasses.1" referredProperty="//@ownedPackages.0/@ownedClasses.2/@ownedProperties.0">
+          <ownedCallExp xsi:type="classes:PropertyCallExp" type="//@ownedPackages.0/@ownedClasses.0" referredProperty="//@ownedPackages.0/@ownedClasses.1/@ownedProperties.0"/>
+        </ownedExpressions>
+      </ownedOperations>
+      <ownedProperties name="prop1" type="//@ownedPackages.0/@ownedClasses.1"/>
+    </ownedClasses>
+  </ownedPackages>
+</classes:Root>

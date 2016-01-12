@@ -336,6 +336,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
 		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1V2");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3V2");
 	}
 	
 	
@@ -520,11 +521,11 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testNewExample2_V2_CG() throws Exception {
-		Scheduler.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
-		Scheduler.DUMP_CLASS_TO_CONTAINING_PROPERTIES.setState(true);
-		Scheduler.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
-		Scheduler.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.setState(true);
-		Scheduler.DUMP_PROPERTY_TO_CONSUMING_CLASSES.setState(true);
+//		Scheduler.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
+//		Scheduler.DUMP_CLASS_TO_CONTAINING_PROPERTIES.setState(true);
+//		Scheduler.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
+//		Scheduler.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.setState(true);
+//		Scheduler.DUMP_PROPERTY_TO_CONSUMING_CLASSES.setState(true);
 //		Scheduler.EDGE_ORDER.setState(true);
 //		Scheduler.REGION_DEPTH.setState(true);
 //		Scheduler.REGION_ORDER.setState(true);
@@ -541,6 +542,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model1V2");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model3V2");
 	}
 
 	@Test
