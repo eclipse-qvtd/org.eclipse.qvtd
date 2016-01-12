@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classes:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classes="http://cs2as/tests/example2/classes/1.0"
+    xsi:schemaLocation="http://cs2as/tests/example2/classes/1.0 java://example2.classes.ClassesPackage">
+  <ownedPackages name="P1">
+    <ownedClasses name="String"/>
+    <ownedClasses name="C1">
+      <ownedOperations name="twoParamsOp" type="//@ownedPackages.0/@ownedClasses.0">
+        <ownedParameters name="param1"/>
+        <ownedParameters name="param2"/>
+        <ownedExpressions xsi:type="classes:PropertyCallExp" type="//@ownedPackages.0/@ownedClasses.0" referredProperty="//@ownedPackages.0/@ownedClasses.1/@ownedProperties.0"/>
+      </ownedOperations>
+      <ownedOperations name="paramsLessOp" type="//@ownedPackages.0/@ownedClasses.0">
+        <ownedExpressions xsi:type="classes:OperationCallExp" type="//@ownedPackages.0/@ownedClasses.0" referredOperation="//@ownedPackages.0/@ownedClasses.1/@ownedOperations.0">
+          <ownedArguments name="param1"/>
+          <ownedArguments name="param2"/>
+        </ownedExpressions>
+      </ownedOperations>
+      <ownedProperties name="name" type="//@ownedPackages.0/@ownedClasses.0"/>
+    </ownedClasses>
+  </ownedPackages>
+</classes:Root>
