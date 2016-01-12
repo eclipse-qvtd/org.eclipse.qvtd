@@ -257,7 +257,7 @@ operation OCL!OCLExpression doReplacements(leftVar : QVTi!Variable) : OCL!OCLExp
 
 	var eUtil = emfTool.getEcoreUtil();
 	var result = self;
-	for (exp in self.getAllContents().including(self)) {		
+	for (exp in self.getAllContents().including(self)) {
 		switch (true) {
 		case exp.isSelfVarExp():
 			exp.referredVariable = leftVar;
@@ -266,8 +266,18 @@ operation OCL!OCLExpression doReplacements(leftVar : QVTi!Variable) : OCL!OCLExp
 			astPropCallExp.ownedSource = exp.ownedSource;
 			astPropCallExp.referredProperty = astPropCallExp.ownedSource.type.getTraceabilityProperty();
 			astPropCallExp.type = astPropCallExp.referredProperty.type;
-					
-			var castType = exp.type;				
+			// Copying remaining changeable OpCallExp properties (excepting ownedArguments and referredOperation)
+			astPropCallExp.typeValue = exp.typeValue;
+			astPropCallExp.ownedComments = exp.ownedComments;
+			astPropCallExp.ownedExtensions = exp.ownedExtensions;
+			astPropCallExp.name = exp.name;
+			astPropCallExp.isSafe = exp.isSafe;
+			astPropCallExp.isRequired = exp.isRequired;
+			astPropCallExp.isImplicit = exp.isImplicit;
+			astPropCallExp.isPre = exp.isPre;
+			// end of copy
+			
+			var castType = exp.type;
 			var asTypeOpCallExp = new QVTi!OperationCallExp;
 			asTypeOpCallExp.ownedSource = astPropCallExp;  
 			asTypeOpCallExp.referredOperation = getOclAnyOclAsTypeOp();
@@ -278,13 +288,15 @@ operation OCL!OCLExpression doReplacements(leftVar : QVTi!Variable) : OCL!OCLExp
 			argTypeExp.type = getOclMetaClass();
 			
 			asTypeOpCallExp.ownedArguments.add(argTypeExp);
-										
+			
 			if (result = exp) {
 				result = asTypeOpCallExp;
 			} else {
 				eUtil.replace(exp, asTypeOpCallExp);
 			}
 			eUtil.`delete`(exp);
+--			astPropCallExp.println("propCallExp: ").isSafe.println("propCalExp is safe ?: ");
+--			"".println();
 		}
 	}
 	return result;
