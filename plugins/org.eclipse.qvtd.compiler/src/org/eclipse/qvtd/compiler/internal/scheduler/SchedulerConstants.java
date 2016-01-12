@@ -22,8 +22,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
@@ -215,17 +215,24 @@ public abstract class SchedulerConstants
 	}
 
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement) {
-		DomainUsage domainUsage = getDomainUsage(asTypedElement);
-		assert domainUsage != null;
-		Type asType = asTypedElement.getType();
+		org.eclipse.ocl.pivot.Class asType = (org.eclipse.ocl.pivot.Class)asTypedElement.getType();
 		assert asType != null;
-		TypedModel typedModel = domainUsage.getTypedModel();
-		assert typedModel != null;
-		return qvtp2qvtg.getClassDatum(typedModel, (Class) asType);
+		Type elementType = QVTbaseUtil.getElementalType(asType);
+		TypedModel typedModel;
+		if (elementType instanceof DataType) {
+			typedModel = getDomainAnalysis().getPrimitiveTypeModel();
+		}
+		else {
+			DomainUsage domainUsage = getDomainUsage(asTypedElement);
+			assert domainUsage != null;
+			typedModel = domainUsage.getTypedModel();
+			assert typedModel != null;
+		}
+		return qvtp2qvtg.getClassDatum(typedModel, asType);
 	}
 
-	public @NonNull ClassDatum getClassDatum(@NonNull Type asType, @NonNull TypedModel typedModel) {
-		return qvtp2qvtg.getClassDatum(typedModel, (Class) asType);
+	public @NonNull ClassDatum getClassDatum(org.eclipse.ocl.pivot.@NonNull Class asType, @NonNull TypedModel typedModel) {
+		return qvtp2qvtg.getClassDatum(typedModel, asType);
 	}
 
 	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull ClassDatum classDatum) {

@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
@@ -166,13 +167,13 @@ public class Nodes
 			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull SimpleNode parentNode, @NonNull Property property) {
 				assert parentNode.isClassNode();
 				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
-				Type type = property.getType();
+				org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
 				assert type != null;
-//				TypedModel typedModel = /*type instanceof DataType ? region.getSchedulerConstants().getDomainAnalysis().getPrimitiveTypeModel() :*/ parentNode.getClassDatumAnalysis().getTypedModel();
-				@Nullable
-				DomainUsage usage = region.getSchedulerConstants().getDomainAnalysis().getUsage(type);
-				assert usage != null;
-				TypedModel typedModel = usage.getTypedModel();
+				Type elementType = QVTbaseUtil.getElementalType(type);
+				TypedModel typedModel = elementType instanceof DataType ? region.getSchedulerConstants().getDomainAnalysis().getPrimitiveTypeModel() : parentNode.getClassDatumAnalysis().getTypedModel();
+//				DomainUsage usage = region.getSchedulerConstants().getDomainAnalysis().getUsage(type);
+//				assert usage != null;
+//				TypedModel typedModel = usage.getTypedModel();
 				assert typedModel != null;
 				ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
 //				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
@@ -212,7 +213,7 @@ public class Nodes
 				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 				Property property = propertyAssignment.getTargetProperty();
 				assert property != null;
-				Type type = property.getType();
+				org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
 				assert type != null;
 				TypedModel typedModel = parentNode.getClassDatumAnalysis().getTypedModel();
 				ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);

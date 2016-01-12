@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.schedule2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
@@ -530,11 +531,7 @@ public class ScheduledRegion extends AbstractRegion
 	}
 
 	private void computeContainedClassDatumAnalysis2compositeProperties3(@NonNull Property asProperty, @NonNull DomainUsage domainUsage) {
-		Type asType = asProperty.getType();
-		if (asProperty.isIsMany()) {
-			assert (asType instanceof CollectionType);
-			asType = ((CollectionType)asType).getElementType();
-		}
+		Type asType = QVTbaseUtil.getElementalType(ClassUtil.nonNullState(asProperty.getType()));
 		if (asType instanceof org.eclipse.ocl.pivot.Class) {
 			ClassDatumAnalysis classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis((Class) asType, ClassUtil.nonNullState(domainUsage.getTypedModel()));
 			Set<Property> compositeProperties = containedClassDatumAnalysis2compositeProperties.get(classDatumAnalysis);
@@ -595,10 +592,14 @@ public class ScheduledRegion extends AbstractRegion
 	private void computeInputModels() {
 		for (ClassDatumAnalysis classDatumAnalysis : getSchedulerConstants().getClassDatumAnalyses()) {
 			DomainUsage domainUsage = classDatumAnalysis.getDomainUsage();
-			if (!domainUsage.isEnforceable()) {
-				Model model = PivotUtil.getContainingModel(classDatumAnalysis.getClassDatum().getType());
-				if ((model != null) && !PivotConstants.ORPHANAGE_URI.equals(model.getExternalURI())) {
-					inputModels.put(model, domainUsage);
+			if (domainUsage.isCheckable() && !domainUsage.isEnforceable()) {
+				Type type = classDatumAnalysis.getClassDatum().getType();
+				org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
+				if ((asPackage != null) && !PivotConstants.ORPHANAGE_URI.equals(asPackage.getURI())) {
+					Model model = PivotUtil.getContainingModel(type);
+					if (model != null) {
+						inputModels.put(model, domainUsage);
+					}
 				}
 			}
 		}

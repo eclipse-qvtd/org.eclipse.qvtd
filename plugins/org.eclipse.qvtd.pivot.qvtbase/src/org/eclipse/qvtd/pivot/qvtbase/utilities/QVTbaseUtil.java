@@ -18,10 +18,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
@@ -179,6 +181,15 @@ public class QVTbaseUtil
         	typedModel.setOwnedContext(ownedContext);
         }
 		return ownedContext;
+	}
+
+	public static @NonNull Type getElementalType(@NonNull Type type) {
+		Type elementType = type;
+		while (elementType instanceof CollectionType) {
+			elementType = ((CollectionType)elementType).getElementType();
+			assert elementType != null;
+		}
+		return elementType;
 	}
 	
     public static @NonNull Transformation loadTransformation(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
