@@ -97,7 +97,8 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 		if (isInited) return (SimplegraphPackage)EPackage.Registry.INSTANCE.getEPackage(SimplegraphPackage.eNS_URI);
 
 		// Obtain or create and register package
-		SimplegraphPackageImpl theSimplegraphPackage = (SimplegraphPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimplegraphPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimplegraphPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SimplegraphPackageImpl theSimplegraphPackage = (SimplegraphPackageImpl)(ePackage instanceof SimplegraphPackageImpl ? ePackage : new SimplegraphPackageImpl());
 
 		isInited = true;
 

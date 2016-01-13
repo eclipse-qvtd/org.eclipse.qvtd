@@ -85,7 +85,8 @@ public class FamiliesPackageImpl extends EPackageImpl implements FamiliesPackage
 		if (isInited) return (FamiliesPackage)EPackage.Registry.INSTANCE.getEPackage(FamiliesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		FamiliesPackageImpl theFamiliesPackage = (FamiliesPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FamiliesPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FamiliesPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		FamiliesPackageImpl theFamiliesPackage = (FamiliesPackageImpl)(ePackage instanceof FamiliesPackageImpl ? ePackage : new FamiliesPackageImpl());
 
 		isInited = true;
 

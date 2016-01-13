@@ -169,7 +169,8 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 		if (isInited) return (SchedulePackage)EPackage.Registry.INSTANCE.getEPackage(SchedulePackage.eNS_URI);
 
 		// Obtain or create and register package
-		SchedulePackageImpl theSchedulePackage = (SchedulePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SchedulePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SchedulePackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SchedulePackageImpl theSchedulePackage = (SchedulePackageImpl)(ePackage instanceof SchedulePackageImpl ? ePackage : new SchedulePackageImpl());
 
 		isInited = true;
 

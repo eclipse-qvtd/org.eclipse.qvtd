@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
-import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;

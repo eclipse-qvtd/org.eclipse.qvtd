@@ -133,7 +133,8 @@ public class EvaluationStatusPackageImpl extends EPackageImpl implements Evaluat
 		if (isInited) return (EvaluationStatusPackage)EPackage.Registry.INSTANCE.getEPackage(EvaluationStatusPackage.eNS_URI);
 
 		// Obtain or create and register package
-		EvaluationStatusPackageImpl theEvaluationStatusPackage = (EvaluationStatusPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EvaluationStatusPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EvaluationStatusPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		EvaluationStatusPackageImpl theEvaluationStatusPackage = (EvaluationStatusPackageImpl)(ePackage instanceof EvaluationStatusPackageImpl ? ePackage : new EvaluationStatusPackageImpl());
 
 		isInited = true;
 

@@ -102,7 +102,8 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 		if (isInited) return (ClassescstracesPackage)EPackage.Registry.INSTANCE.getEPackage(ClassescstracesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ClassescstracesPackageImpl theClassescstracesPackage = (ClassescstracesPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ClassescstracesPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ClassescstracesPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ClassescstracesPackageImpl theClassescstracesPackage = (ClassescstracesPackageImpl)(ePackage instanceof ClassescstracesPackageImpl ? ePackage : new ClassescstracesPackageImpl());
 
 		isInited = true;
 

@@ -142,7 +142,8 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		if (isInited) return (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 
 		// Obtain or create and register package
-		QVTbasePackageImpl theQVTbasePackage = (QVTbasePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QVTbasePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QVTbasePackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTbasePackageImpl theQVTbasePackage = (QVTbasePackageImpl)(ePackage instanceof QVTbasePackageImpl ? ePackage : new QVTbasePackageImpl());
 
 		isInited = true;
 

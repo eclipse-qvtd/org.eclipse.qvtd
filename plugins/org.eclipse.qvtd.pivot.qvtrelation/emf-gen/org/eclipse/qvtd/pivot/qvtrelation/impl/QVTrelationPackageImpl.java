@@ -142,7 +142,8 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		if (isInited) return (QVTrelationPackage)EPackage.Registry.INSTANCE.getEPackage(QVTrelationPackage.eNS_URI);
 
 		// Obtain or create and register package
-		QVTrelationPackageImpl theQVTrelationPackage = (QVTrelationPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QVTrelationPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QVTrelationPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTrelationPackageImpl theQVTrelationPackage = (QVTrelationPackageImpl)(ePackage instanceof QVTrelationPackageImpl ? ePackage : new QVTrelationPackageImpl());
 
 		isInited = true;
 

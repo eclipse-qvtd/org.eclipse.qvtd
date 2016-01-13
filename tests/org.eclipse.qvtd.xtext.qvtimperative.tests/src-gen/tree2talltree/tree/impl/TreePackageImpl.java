@@ -85,7 +85,8 @@ public class TreePackageImpl extends EPackageImpl implements TreePackage {
 		if (isInited) return (TreePackage)EPackage.Registry.INSTANCE.getEPackage(TreePackage.eNS_URI);
 
 		// Obtain or create and register package
-		TreePackageImpl theTreePackage = (TreePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TreePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TreePackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TreePackageImpl theTreePackage = (TreePackageImpl)(ePackage instanceof TreePackageImpl ? ePackage : new TreePackageImpl());
 
 		isInited = true;
 

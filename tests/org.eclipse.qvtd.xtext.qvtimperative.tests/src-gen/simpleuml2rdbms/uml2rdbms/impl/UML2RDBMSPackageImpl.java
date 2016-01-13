@@ -183,7 +183,8 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 		if (isInited) return (UML2RDBMSPackage)EPackage.Registry.INSTANCE.getEPackage(UML2RDBMSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		UML2RDBMSPackageImpl theUML2RDBMSPackage = (UML2RDBMSPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UML2RDBMSPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new UML2RDBMSPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		UML2RDBMSPackageImpl theUML2RDBMSPackage = (UML2RDBMSPackageImpl)(ePackage instanceof UML2RDBMSPackageImpl ? ePackage : new UML2RDBMSPackageImpl());
 
 		isInited = true;
 

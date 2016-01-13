@@ -166,7 +166,8 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 		if (isInited) return (QVTcoreBasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTcoreBasePackage.eNS_URI);
 
 		// Obtain or create and register package
-		QVTcoreBasePackageImpl theQVTcoreBasePackage = (QVTcoreBasePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QVTcoreBasePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QVTcoreBasePackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTcoreBasePackageImpl theQVTcoreBasePackage = (QVTcoreBasePackageImpl)(ePackage instanceof QVTcoreBasePackageImpl ? ePackage : new QVTcoreBasePackageImpl());
 
 		isInited = true;
 

@@ -141,7 +141,8 @@ public class UMLPackageImpl extends EPackageImpl implements UMLPackage {
 		if (isInited) return (UMLPackage)EPackage.Registry.INSTANCE.getEPackage(UMLPackage.eNS_URI);
 
 		// Obtain or create and register package
-		UMLPackageImpl theUMLPackage = (UMLPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UMLPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new UMLPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		UMLPackageImpl theUMLPackage = (UMLPackageImpl)(ePackage instanceof UMLPackageImpl ? ePackage : new UMLPackageImpl());
 
 		isInited = true;
 

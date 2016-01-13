@@ -135,7 +135,8 @@ public class RDBMSPackageImpl extends EPackageImpl implements RDBMSPackage {
 		if (isInited) return (RDBMSPackage)EPackage.Registry.INSTANCE.getEPackage(RDBMSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		RDBMSPackageImpl theRDBMSPackage = (RDBMSPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RDBMSPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RDBMSPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		RDBMSPackageImpl theRDBMSPackage = (RDBMSPackageImpl)(ePackage instanceof RDBMSPackageImpl ? ePackage : new RDBMSPackageImpl());
 
 		isInited = true;
 

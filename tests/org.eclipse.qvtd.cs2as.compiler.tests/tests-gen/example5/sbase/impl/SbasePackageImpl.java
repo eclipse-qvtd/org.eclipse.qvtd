@@ -98,7 +98,8 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 		if (isInited) return (SbasePackage)EPackage.Registry.INSTANCE.getEPackage(SbasePackage.eNS_URI);
 
 		// Obtain or create and register package
-		SbasePackageImpl theSbasePackage = (SbasePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SbasePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SbasePackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SbasePackageImpl theSbasePackage = (SbasePackageImpl)(ePackage instanceof SbasePackageImpl ? ePackage : new SbasePackageImpl());
 
 		isInited = true;
 

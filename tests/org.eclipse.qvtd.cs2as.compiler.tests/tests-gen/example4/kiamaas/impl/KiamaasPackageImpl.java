@@ -93,7 +93,8 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 		if (isInited) return (KiamaasPackage)EPackage.Registry.INSTANCE.getEPackage(KiamaasPackage.eNS_URI);
 
 		// Obtain or create and register package
-		KiamaasPackageImpl theKiamaasPackage = (KiamaasPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof KiamaasPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new KiamaasPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		KiamaasPackageImpl theKiamaasPackage = (KiamaasPackageImpl)(ePackage instanceof KiamaasPackageImpl ? ePackage : new KiamaasPackageImpl());
 
 		isInited = true;
 

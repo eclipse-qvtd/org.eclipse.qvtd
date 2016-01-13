@@ -256,7 +256,8 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		if (isInited) return (QVTrelationCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTrelationCSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		QVTrelationCSPackageImpl theQVTrelationCSPackage = (QVTrelationCSPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QVTrelationCSPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QVTrelationCSPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTrelationCSPackageImpl theQVTrelationCSPackage = (QVTrelationCSPackageImpl)(ePackage instanceof QVTrelationCSPackageImpl ? ePackage : new QVTrelationCSPackageImpl());
 
 		isInited = true;
 

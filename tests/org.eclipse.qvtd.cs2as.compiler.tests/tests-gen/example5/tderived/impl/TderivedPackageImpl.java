@@ -84,7 +84,8 @@ public class TderivedPackageImpl extends EPackageImpl implements TderivedPackage
 		if (isInited) return (TderivedPackage)EPackage.Registry.INSTANCE.getEPackage(TderivedPackage.eNS_URI);
 
 		// Obtain or create and register package
-		TderivedPackageImpl theTderivedPackage = (TderivedPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TderivedPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TderivedPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TderivedPackageImpl theTderivedPackage = (TderivedPackageImpl)(ePackage instanceof TderivedPackageImpl ? ePackage : new TderivedPackageImpl());
 
 		isInited = true;
 

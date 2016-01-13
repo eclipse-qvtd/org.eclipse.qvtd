@@ -97,7 +97,8 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 		if (isInited) return (Simplegraph2graphPackage)EPackage.Registry.INSTANCE.getEPackage(Simplegraph2graphPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Simplegraph2graphPackageImpl theSimplegraph2graphPackage = (Simplegraph2graphPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Simplegraph2graphPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Simplegraph2graphPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		Simplegraph2graphPackageImpl theSimplegraph2graphPackage = (Simplegraph2graphPackageImpl)(ePackage instanceof Simplegraph2graphPackageImpl ? ePackage : new Simplegraph2graphPackageImpl());
 
 		isInited = true;
 

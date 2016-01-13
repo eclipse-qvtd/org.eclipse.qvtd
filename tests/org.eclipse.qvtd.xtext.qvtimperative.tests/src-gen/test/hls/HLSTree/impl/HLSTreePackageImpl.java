@@ -95,7 +95,8 @@ public class HLSTreePackageImpl extends EPackageImpl implements HLSTreePackage {
 		if (isInited) return (HLSTreePackage)EPackage.Registry.INSTANCE.getEPackage(HLSTreePackage.eNS_URI);
 
 		// Obtain or create and register package
-		HLSTreePackageImpl theHLSTreePackage = (HLSTreePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof HLSTreePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new HLSTreePackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		HLSTreePackageImpl theHLSTreePackage = (HLSTreePackageImpl)(ePackage instanceof HLSTreePackageImpl ? ePackage : new HLSTreePackageImpl());
 
 		isInited = true;
 

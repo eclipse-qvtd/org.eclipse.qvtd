@@ -98,7 +98,8 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 		if (isInited) return (TbasePackage)EPackage.Registry.INSTANCE.getEPackage(TbasePackage.eNS_URI);
 
 		// Obtain or create and register package
-		TbasePackageImpl theTbasePackage = (TbasePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TbasePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TbasePackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TbasePackageImpl theTbasePackage = (TbasePackageImpl)(ePackage instanceof TbasePackageImpl ? ePackage : new TbasePackageImpl());
 
 		isInited = true;
 

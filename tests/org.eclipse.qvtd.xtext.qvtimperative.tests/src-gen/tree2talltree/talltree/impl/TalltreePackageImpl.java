@@ -85,7 +85,8 @@ public class TalltreePackageImpl extends EPackageImpl implements TalltreePackage
 		if (isInited) return (TalltreePackage)EPackage.Registry.INSTANCE.getEPackage(TalltreePackage.eNS_URI);
 
 		// Obtain or create and register package
-		TalltreePackageImpl theTalltreePackage = (TalltreePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TalltreePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TalltreePackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TalltreePackageImpl theTalltreePackage = (TalltreePackageImpl)(ePackage instanceof TalltreePackageImpl ? ePackage : new TalltreePackageImpl());
 
 		isInited = true;
 

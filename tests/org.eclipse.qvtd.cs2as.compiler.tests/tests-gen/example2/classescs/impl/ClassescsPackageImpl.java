@@ -166,7 +166,8 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 		if (isInited) return (ClassescsPackage)EPackage.Registry.INSTANCE.getEPackage(ClassescsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ClassescsPackageImpl theClassescsPackage = (ClassescsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ClassescsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ClassescsPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ClassescsPackageImpl theClassescsPackage = (ClassescsPackageImpl)(ePackage instanceof ClassescsPackageImpl ? ePackage : new ClassescsPackageImpl());
 
 		isInited = true;
 

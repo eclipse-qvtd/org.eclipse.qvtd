@@ -95,7 +95,8 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 		if (isInited) return (HSVTreePackage)EPackage.Registry.INSTANCE.getEPackage(HSVTreePackage.eNS_URI);
 
 		// Obtain or create and register package
-		HSVTreePackageImpl theHSVTreePackage = (HSVTreePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof HSVTreePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new HSVTreePackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		HSVTreePackageImpl theHSVTreePackage = (HSVTreePackageImpl)(ePackage instanceof HSVTreePackageImpl ? ePackage : new HSVTreePackageImpl());
 
 		isInited = true;
 

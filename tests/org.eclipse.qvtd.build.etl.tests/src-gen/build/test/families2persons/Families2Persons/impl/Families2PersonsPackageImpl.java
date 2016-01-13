@@ -93,7 +93,8 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 		if (isInited) return (Families2PersonsPackage)EPackage.Registry.INSTANCE.getEPackage(Families2PersonsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Families2PersonsPackageImpl theFamilies2PersonsPackage = (Families2PersonsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Families2PersonsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Families2PersonsPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		Families2PersonsPackageImpl theFamilies2PersonsPackage = (Families2PersonsPackageImpl)(ePackage instanceof Families2PersonsPackageImpl ? ePackage : new Families2PersonsPackageImpl());
 
 		isInited = true;
 

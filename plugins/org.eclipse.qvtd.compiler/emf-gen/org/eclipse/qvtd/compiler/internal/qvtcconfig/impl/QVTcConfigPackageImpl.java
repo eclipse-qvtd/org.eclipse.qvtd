@@ -120,7 +120,8 @@ public class QVTcConfigPackageImpl extends EPackageImpl implements QVTcConfigPac
 		if (isInited) return (QVTcConfigPackage)EPackage.Registry.INSTANCE.getEPackage(QVTcConfigPackage.eNS_URI);
 
 		// Obtain or create and register package
-		QVTcConfigPackageImpl theQVTcConfigPackage = (QVTcConfigPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QVTcConfigPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QVTcConfigPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTcConfigPackageImpl theQVTcConfigPackage = (QVTcConfigPackageImpl)(ePackage instanceof QVTcConfigPackageImpl ? ePackage : new QVTcConfigPackageImpl());
 
 		isInited = true;
 

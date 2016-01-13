@@ -83,7 +83,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		if (isInited) return (QVTcorePackage)EPackage.Registry.INSTANCE.getEPackage(QVTcorePackage.eNS_URI);
 
 		// Obtain or create and register package
-		QVTcorePackageImpl theQVTcorePackage = (QVTcorePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QVTcorePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QVTcorePackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTcorePackageImpl theQVTcorePackage = (QVTcorePackageImpl)(ePackage instanceof QVTcorePackageImpl ? ePackage : new QVTcorePackageImpl());
 
 		isInited = true;
 

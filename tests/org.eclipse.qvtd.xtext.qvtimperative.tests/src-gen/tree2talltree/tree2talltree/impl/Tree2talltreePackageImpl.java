@@ -85,7 +85,8 @@ public class Tree2talltreePackageImpl extends EPackageImpl implements Tree2tallt
 		if (isInited) return (Tree2talltreePackage)EPackage.Registry.INSTANCE.getEPackage(Tree2talltreePackage.eNS_URI);
 
 		// Obtain or create and register package
-		Tree2talltreePackageImpl theTree2talltreePackage = (Tree2talltreePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Tree2talltreePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Tree2talltreePackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		Tree2talltreePackageImpl theTree2talltreePackage = (Tree2talltreePackageImpl)(ePackage instanceof Tree2talltreePackageImpl ? ePackage : new Tree2talltreePackageImpl());
 
 		isInited = true;
 

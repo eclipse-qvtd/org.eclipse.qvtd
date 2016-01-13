@@ -85,7 +85,8 @@ public class HSV2HLSPackageImpl extends EPackageImpl implements HSV2HLSPackage {
 		if (isInited) return (HSV2HLSPackage)EPackage.Registry.INSTANCE.getEPackage(HSV2HLSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		HSV2HLSPackageImpl theHSV2HLSPackage = (HSV2HLSPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof HSV2HLSPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new HSV2HLSPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		HSV2HLSPackageImpl theHSV2HLSPackage = (HSV2HLSPackageImpl)(ePackage instanceof HSV2HLSPackageImpl ? ePackage : new HSV2HLSPackageImpl());
 
 		isInited = true;
 

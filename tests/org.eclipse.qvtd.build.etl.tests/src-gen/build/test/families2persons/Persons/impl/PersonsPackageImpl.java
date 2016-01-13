@@ -92,7 +92,8 @@ public class PersonsPackageImpl extends EPackageImpl implements PersonsPackage {
 		if (isInited) return (PersonsPackage)EPackage.Registry.INSTANCE.getEPackage(PersonsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		PersonsPackageImpl thePersonsPackage = (PersonsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof PersonsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new PersonsPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		PersonsPackageImpl thePersonsPackage = (PersonsPackageImpl)(ePackage instanceof PersonsPackageImpl ? ePackage : new PersonsPackageImpl());
 
 		isInited = true;
 

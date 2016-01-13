@@ -24,7 +24,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
-import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;

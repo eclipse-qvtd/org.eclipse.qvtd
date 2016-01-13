@@ -244,7 +244,8 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		if (isInited) return (QVTiCGModelPackage)EPackage.Registry.INSTANCE.getEPackage(QVTiCGModelPackage.eNS_URI);
 
 		// Obtain or create and register package
-		QVTiCGModelPackageImpl theQVTiCGModelPackage = (QVTiCGModelPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QVTiCGModelPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QVTiCGModelPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTiCGModelPackageImpl theQVTiCGModelPackage = (QVTiCGModelPackageImpl)(ePackage instanceof QVTiCGModelPackageImpl ? ePackage : new QVTiCGModelPackageImpl());
 
 		isInited = true;
 

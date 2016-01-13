@@ -101,7 +101,8 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 		if (isInited) return (KiamacsPackage)EPackage.Registry.INSTANCE.getEPackage(KiamacsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		KiamacsPackageImpl theKiamacsPackage = (KiamacsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof KiamacsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new KiamacsPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		KiamacsPackageImpl theKiamacsPackage = (KiamacsPackageImpl)(ePackage instanceof KiamacsPackageImpl ? ePackage : new KiamacsPackageImpl());
 
 		isInited = true;
 

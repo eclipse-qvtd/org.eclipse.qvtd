@@ -100,7 +100,8 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		if (isInited) return (QVTtemplatePackage)EPackage.Registry.INSTANCE.getEPackage(QVTtemplatePackage.eNS_URI);
 
 		// Obtain or create and register package
-		QVTtemplatePackageImpl theQVTtemplatePackage = (QVTtemplatePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QVTtemplatePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QVTtemplatePackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTtemplatePackageImpl theQVTtemplatePackage = (QVTtemplatePackageImpl)(ePackage instanceof QVTtemplatePackageImpl ? ePackage : new QVTtemplatePackageImpl());
 
 		isInited = true;
 

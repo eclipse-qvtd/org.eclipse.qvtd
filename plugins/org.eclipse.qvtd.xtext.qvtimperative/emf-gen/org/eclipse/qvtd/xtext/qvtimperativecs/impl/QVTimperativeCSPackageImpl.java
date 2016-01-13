@@ -144,7 +144,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		if (isInited) return (QVTimperativeCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTimperativeCSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		QVTimperativeCSPackageImpl theQVTimperativeCSPackage = (QVTimperativeCSPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QVTimperativeCSPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QVTimperativeCSPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTimperativeCSPackageImpl theQVTimperativeCSPackage = (QVTimperativeCSPackageImpl)(ePackage instanceof QVTimperativeCSPackageImpl ? ePackage : new QVTimperativeCSPackageImpl());
 
 		isInited = true;
 

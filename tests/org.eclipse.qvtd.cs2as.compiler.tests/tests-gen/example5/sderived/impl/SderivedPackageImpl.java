@@ -84,7 +84,8 @@ public class SderivedPackageImpl extends EPackageImpl implements SderivedPackage
 		if (isInited) return (SderivedPackage)EPackage.Registry.INSTANCE.getEPackage(SderivedPackage.eNS_URI);
 
 		// Obtain or create and register package
-		SderivedPackageImpl theSderivedPackage = (SderivedPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SderivedPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SderivedPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SderivedPackageImpl theSderivedPackage = (SderivedPackageImpl)(ePackage instanceof SderivedPackageImpl ? ePackage : new SderivedPackageImpl());
 
 		isInited = true;
 
