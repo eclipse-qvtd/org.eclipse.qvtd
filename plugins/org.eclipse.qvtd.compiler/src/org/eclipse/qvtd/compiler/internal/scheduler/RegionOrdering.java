@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 
 import com.google.common.collect.Iterables;
@@ -34,27 +35,27 @@ public class RegionOrdering
 	/**
 	 * Cached list of all incoming connections per-region; excludes recursions.
 	 */
-	private final @NonNull Map<Region, List<Connection>> region2incomingConnections = new HashMap<Region, List<Connection>>();
+	private final @NonNull Map<Region, @NonNull List<Connection>> region2incomingConnections = new HashMap<Region, @NonNull List<Connection>>();
 
 	/**
 	 * Cached list of all recursive/looping connections per-region.
 	 */
-	private final @NonNull Map<Region, List<Connection>> region2loopingConnections = new HashMap<Region, List<Connection>>();
+	private final @NonNull Map<Region, @NonNull List<Connection>> region2loopingConnections = new HashMap<Region, @NonNull List<Connection>>();
 
 	/**
 	 * Cached list of all outgoing connections per-region; excludes recursions.
 	 */
-	private final @NonNull Map<Region, List<Connection>> region2outgoingConnections = new HashMap<Region, List<Connection>>();
+	private final @NonNull Map<Region, @NonNull List<Connection>> region2outgoingConnections = new HashMap<Region, @NonNull List<Connection>>();
 
 	/**
 	 * Cached list of all source regions per-connection.
 	 */
-	private final @NonNull Map<Connection, List<Region>> connection2sourceRegions = new HashMap<Connection, List<Region>>();
+	private final @NonNull Map<Connection, @NonNull List<Region>> connection2sourceRegions = new HashMap<Connection, @NonNull List<Region>>();
 
 	/**
 	 * Cached list of all target regions per-connection.
 	 */
-	private final @NonNull Map<Connection, List<Region>> connection2targetRegions = new HashMap<Connection, List<Region>>();
+	private final @NonNull Map<Connection, @NonNull List<Region>> connection2targetRegions = new HashMap<Connection, @NonNull List<Region>>();
 	
 	/**
 	 * The connections that are not passed to any regions.
@@ -252,13 +253,17 @@ public class RegionOrdering
 				Region commonRegion = connection2commonRegion.get(connection);
 				assert commonRegion != null;
 				List<Region> intermediateRegions = new ArrayList<Region>();
-				for (@SuppressWarnings("null")@NonNull Region sourceRegion : connection2sourceRegions.get(connection)) {
+				List<Region> sourceRegions = connection2sourceRegions.get(connection);
+				assert sourceRegions != null;
+				for (@SuppressWarnings("null")@NonNull Region sourceRegion : sourceRegions) {
 					if (sourceRegion != commonRegion) {
-						@SuppressWarnings("null")@NonNull List<Region> sourceRegions = Collections.singletonList(sourceRegion);
-						installIntermediateConnections(intermediateRegions, sourceRegions, commonRegion);
+						@SuppressWarnings("null")@NonNull List<Region> sourceRegionList = Collections.singletonList(sourceRegion);
+						installIntermediateConnections(intermediateRegions, sourceRegionList, commonRegion);
 					}
 				}
-				for (@SuppressWarnings("null")@NonNull Region targetRegion : connection2targetRegions.get(connection)) {
+				List<Region> targetRegions = connection2targetRegions.get(connection);
+				assert targetRegions != null;
+				for (@SuppressWarnings("null")@NonNull Region targetRegion : targetRegions) {
 					if ((targetRegion != commonRegion) && connection.isPassed(targetRegion)) {
 						installIntermediateConnections(intermediateRegions, targetRegion.getCallableParents(), commonRegion);
 					}
@@ -294,7 +299,9 @@ public class RegionOrdering
 	 */
 	protected boolean refreshConnectionBlockage(@NonNull Connection connection) {
 		if (blockedConnections.contains(connection)) { 			// re-unblocking can occur when multiple regions are unblocked at once
-			for (Region region : connection2sourceRegions.get(connection)) {
+			List<Region> sourceRegions = connection2sourceRegions.get(connection);
+			assert sourceRegions != null;
+			for (Region region : sourceRegions) {
 				if (preferredBlockedRegions.contains(region) || mandatoryBlockedRegions.contains(region) || unblockedRegions.contains(region)) {  // Must not unblock connection before region ordered
 					return false;
 				}
@@ -313,7 +320,9 @@ public class RegionOrdering
 //		assert !orderedRegions.contains(region);		-- may be violated if scheduled despite preferredBlock
 		boolean isBlocked = false;
 		boolean isMandatoryBlocked = false;
-		for (Connection connection : region2incomingConnections.get(region)) {
+		List<Connection> incomingConnections = region2incomingConnections.get(region);
+		assert incomingConnections != null;
+		for (Connection connection : incomingConnections) {
 			if (blockedConnections.contains(connection)) {
 				isBlocked = true;
 				if (connection.isMandatory()) {
@@ -428,7 +437,9 @@ public class RegionOrdering
 			//
 			//	Ensure that connections are hosted by a mutually common region.
 			//
-			for (@SuppressWarnings("null")@NonNull Connection incomingConnection : region2incomingConnections.get(region)) {
+			List<Connection> incomingConnections = region2incomingConnections.get(region);
+			assert incomingConnections != null;
+			for (@SuppressWarnings("null")@NonNull Connection incomingConnection : incomingConnections) {
 				if (incomingConnection.isPassed(region)) {
 					updateConnectionLocality(incomingConnection, commonRegion);
 				}
@@ -457,7 +468,9 @@ public class RegionOrdering
 		Region commonRegion = connection2commonRegion.get(connection);
 		if ((commonRegion == null) || ((commonRegion != commonStackRegion) && (region2depth.getCommonRegion(commonRegion, commonStackRegion) != commonRegion))) {
 			commonRegion = commonStackRegion;
-			for (@SuppressWarnings("null")@NonNull Region sourceRegion : connection2sourceRegions.get(connection)) {
+			List<Region> sourceRegions = connection2sourceRegions.get(connection);
+			assert sourceRegions != null;
+			for (@SuppressWarnings("null")@NonNull Region sourceRegion : sourceRegions) {
 				Region sharedRegion = region2depth.getCommonRegion(commonRegion, sourceRegion);
 				assert sharedRegion != null;
 				commonRegion = sharedRegion;

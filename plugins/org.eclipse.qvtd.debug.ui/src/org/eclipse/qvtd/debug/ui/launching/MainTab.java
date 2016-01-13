@@ -407,9 +407,11 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 			row.path.setText(map.get(string));
 		}
 		for (; i < keys.size(); i++) {
-			@SuppressWarnings("null")@NonNull String string = keys.get(i);
-			@SuppressWarnings("null")@NonNull String parameterPath = map.get(string);
-			new ParameterRow(this, group, style, string, parameterPath);
+			String string = keys.get(i);
+			String parameterPath = map.get(string);
+			if ((string != null) && (parameterPath != null)) {
+				new ParameterRow(this, group, style, string, parameterPath);
+			}
 		}
 		for (; i < children.length; i++) {
 			children[i].dispose();

@@ -158,8 +158,9 @@ public class QvtrToQvtcTransformation
 				if (pattern.eContainer() instanceof Relation) {
 					Relation ir = (Relation) pattern.eContainer();
 					if (ir.getWhere() == pattern) {
-						if (relationCallExpsForRelation.get(r) != null) {
-							relationCallExpsForRelation.get(r).add(ri);
+						List<RelationCallExp> relationCallExps = relationCallExpsForRelation.get(r);
+						if (relationCallExps != null) {
+							relationCallExps.add(ri);
 						} else {
 							List<RelationCallExp> callExps = new ArrayList<RelationCallExp>();
 							callExps.add(ri);

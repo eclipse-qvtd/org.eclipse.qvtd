@@ -188,6 +188,7 @@ public class DependencyAnalyzer
 			assert type != null;
 			while (type instanceof CollectionType) {
 				type = ((CollectionType)type).getElementType();
+				assert type != null;
 			}
 			return (org.eclipse.ocl.pivot.Class) type;
 		}
@@ -832,7 +833,7 @@ public class DependencyAnalyzer
 		}
 		while (blockedAnalyses.size() > 0) {
 //			System.out.println("blocked");
-			Map<String, OperationAnalysis> map = new HashMap<String, OperationAnalysis>();
+			Map<String, @NonNull OperationAnalysis> map = new HashMap<String, @NonNull OperationAnalysis>();
 			for (OperationAnalysis analysis : blockedAnalyses) {
 				map.put(analysis.toString(), analysis);
 			}
@@ -842,6 +843,7 @@ public class DependencyAnalyzer
 			int mostBlockedCount = 0;
 			for (String key : keys) {
 				OperationAnalysis operationAnalysis = map.get(key);
+				assert operationAnalysis != null;
 //				System.out.println("  " + operationAnalysis);
 //				for (OperationAnalysis blockingAnalysis : operationAnalysis.failedAnalyses) {
 //					System.out.println("    " + blockingAnalysis);
@@ -861,7 +863,7 @@ public class DependencyAnalyzer
 				analysis.analyze();
 			}
 		}
-		Map<String, OperationAnalysis> map2 = new HashMap<String, OperationAnalysis>();
+		Map<String, @NonNull OperationAnalysis> map2 = new HashMap<String, @NonNull OperationAnalysis>();
 //		System.out.println("not blocked");
 		for (Map<List<DependencyPaths>, OperationAnalysis> values : operation2result.values()) {
 			for (OperationAnalysis analysis : values.values()) {
@@ -874,6 +876,7 @@ public class DependencyAnalyzer
 		Collections.sort(keys2);
 		for (String key : keys2) {
 			OperationAnalysis operationAnalysis = map2.get(key);
+			assert operationAnalysis != null;
 //			System.out.println("  " + operationAnalysis);
 //			if (operationAnalysis.failedAnalyses != null) {
 //				for (OperationAnalysis failedAnalysis : operationAnalysis.failedAnalyses) {

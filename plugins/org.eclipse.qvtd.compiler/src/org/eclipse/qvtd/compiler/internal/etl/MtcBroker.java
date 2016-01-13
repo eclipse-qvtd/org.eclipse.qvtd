@@ -805,7 +805,10 @@ public class MtcBroker {
 					etl.models.add(oclStdLibModel);
 					// TODO How to deal with multiple candidate metamodels?
 					// TODO Include middle and/or inputs
-					etl.models.add(candidateMetamodelContainmentTrees.get(RIGHT_DIR_NAME).get(0));
+					List<PivotModel> rightCandidateModel = candidateMetamodelContainmentTrees.get(RIGHT_DIR_NAME);
+					if (rightCandidateModel != null) {
+						etl.models.add(rightCandidateModel.get(0));
+					}
 					etl.execute();
 				}
 			}
@@ -867,7 +870,10 @@ public class MtcBroker {
 				eol.models.add(oclStdLibModel);
 				eol.models.add(configModel);
 				// TODO HOw to deal with multiple candidate metamodels?
-				eol.models.add(candidateMetamodelContainmentTrees.get(RIGHT_DIR_NAME).get(0));
+				List<PivotModel> rightCandidateModel = candidateMetamodelContainmentTrees.get(RIGHT_DIR_NAME);
+				if (rightCandidateModel != null) {
+					eol.models.add(rightCandidateModel.get(0));
+				}
 				eol.execute();
 			}
 		}

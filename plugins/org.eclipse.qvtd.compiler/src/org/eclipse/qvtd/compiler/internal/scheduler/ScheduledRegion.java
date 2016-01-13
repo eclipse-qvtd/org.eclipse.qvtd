@@ -161,13 +161,13 @@ public class ScheduledRegion extends AbstractRegion
 	 *-- relationship is included in every entry since it must be considered as an introducer for every possible
 	 *-- consumption.
 	 */
-	private final @NonNull Map<ClassDatumAnalysis, Set<Property>> containedClassDatumAnalysis2compositeProperties = new HashMap<ClassDatumAnalysis, Set<Property>>();
+	private final @NonNull Map<ClassDatumAnalysis, @NonNull Set<Property>> containedClassDatumAnalysis2compositeProperties = new HashMap<ClassDatumAnalysis, @NonNull Set<Property>>();
 
 	/**
 	 * The input model classes that may be used as independent inputs by mappings and the nodes at which they are consumed.
 	 * In the worst case a flat schedule just permutes allInstances() to provide all mapping inputs.
 	 */
-	private final @NonNull Map<ClassDatumAnalysis, List<Node>> consumedClassDatumAnalysis2headNodes = new HashMap<ClassDatumAnalysis, List<Node>>();
+	private final @NonNull Map<ClassDatumAnalysis, @NonNull List<Node>> consumedClassDatumAnalysis2headNodes = new HashMap<ClassDatumAnalysis, @NonNull List<Node>>();
 
 	/**
 	 * Mapping from each composite property to the classes consumed by mappings and transitive compositions.
@@ -176,7 +176,7 @@ public class ScheduledRegion extends AbstractRegion
 	 * For simple cases each composition introduces instances of just a single class corresponding to its composed type.
 	 * In more complex cases a composition may also introduce instances of superclasses of its composed type.
 	 */
-	private final @NonNull Map<Property, Set<ClassDatumAnalysis>> consumedCompositeProperty2introducedClassDatumAnalyses = new HashMap<Property, Set<ClassDatumAnalysis>>();
+	private final @NonNull Map<Property, @NonNull Set<ClassDatumAnalysis>> consumedCompositeProperty2introducedClassDatumAnalyses = new HashMap<Property, @NonNull Set<ClassDatumAnalysis>>();
 
 	/**
 	 * The per-class join nodes that identify all introducers.
@@ -186,7 +186,7 @@ public class ScheduledRegion extends AbstractRegion
 	/**
 	 * The Realized Nodes that produce each ClassDatum.
 	 */
-	private final @NonNull Map<ClassDatumAnalysis, List<Node>> producedClassDatumAnalysis2realizedNodes = new HashMap<ClassDatumAnalysis, List<Node>>();
+	private final @NonNull Map<ClassDatumAnalysis, @NonNull List<Node>> producedClassDatumAnalysis2realizedNodes = new HashMap<ClassDatumAnalysis, @NonNull List<Node>>();
 
 	/**
 	 * The Realized Edges that produce each PropertyDatum (or its opposite).
@@ -759,7 +759,7 @@ public class ScheduledRegion extends AbstractRegion
 			for (NavigationEdge predicatedEdge : region.getPredicatedNavigationEdges()) {
 				Node predicatedNode = predicatedEdge.getTarget();
 				if (!predicatedNode.isLoaded() && !predicatedNode.isConstant() && !isOnlyCastOrRecursed(predicatedNode)) {
-					Iterable<Connection> passedConnections = predicatedNode.getIncomingPassedConnections();
+//					Iterable<Connection> passedConnections = predicatedNode.getIncomingPassedConnections();
 //					Connection usedConnection = predicatedNode.getIncomingUsedConnection();
 //					boolean isNew = (usedConnection == null) && Iterables.isEmpty(passedConnections);
 //					if (!isNew) {		// FIXME could be multiple
@@ -1053,7 +1053,7 @@ public class ScheduledRegion extends AbstractRegion
 			}
 		} */
 		addRegion(rootContainmentRegion);
-		@SuppressWarnings("null")@NonNull Set<ClassDatumAnalysis> consumedClassDatumAnalyses = consumedClassDatumAnalysis2headNodes.keySet();		// FIXME all consumed classes
+		Set<ClassDatumAnalysis> consumedClassDatumAnalyses = consumedClassDatumAnalysis2headNodes.keySet();		// FIXME all consumed classes
 		for (@SuppressWarnings("null")@NonNull ClassDatumAnalysis consumedClassDatumAnalysis : consumedClassDatumAnalyses) {
 //			System.out.println("ScheduledRegion.createRootContainmentRegion: " + consumedClassDatumAnalysis);
 			boolean canBeAtRoot = !consumedClassDatumAnalysis.getDomainUsage().isEnforceable();
@@ -1431,9 +1431,10 @@ public class ScheduledRegion extends AbstractRegion
 		Stream<String> entries = consumedClassDatumAnalysis2headNodes.keySet().stream().map(
 			k -> {
 				List<Node> list = consumedClassDatumAnalysis2headNodes.get(k);
-					return String.valueOf(k) + " : " + list.stream().map(
-						p -> p.getDisplayName()
-					).sorted().reduce("", stringJoin("\n\t\t"));
+				assert list != null;
+				return String.valueOf(k) + " : " + list.stream().map(
+					p -> p.getDisplayName()
+				).sorted().reduce("", stringJoin("\n\t\t"));
 			}
 		);
 		return entries.sorted();
@@ -1443,6 +1444,7 @@ public class ScheduledRegion extends AbstractRegion
 		Stream<String> entries = consumedCompositeProperty2introducedClassDatumAnalyses.keySet().stream().map(
 			k -> {
 				Set<ClassDatumAnalysis> set = consumedCompositeProperty2introducedClassDatumAnalyses.get(k);
+				assert set != null;
 				return String.valueOf(k) + " : " +
 					set.stream().map(
 						p -> p.toString()
@@ -1456,6 +1458,7 @@ public class ScheduledRegion extends AbstractRegion
 		Stream<String> entries = containedClassDatumAnalysis2compositeProperties.keySet().stream().map(
 			k -> {
 				Set<Property> set = containedClassDatumAnalysis2compositeProperties.get(k);
+				assert set != null;
 				return String.valueOf(k) + " " + k.getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(k)) + " : " + set.stream().map(
 					p -> String.valueOf(p)).sorted().reduce("", stringJoin("\n\t\t")
 				);
@@ -1468,6 +1471,7 @@ public class ScheduledRegion extends AbstractRegion
 		Stream<String> entries = producedClassDatumAnalysis2realizedNodes.keySet().stream().map(
 			k -> {
 				List<Node> list = producedClassDatumAnalysis2realizedNodes.get(k);
+				assert list != null;
 				return String.valueOf(k) + " : " +
 					list.stream().map(
 						p -> p.getDisplayName()

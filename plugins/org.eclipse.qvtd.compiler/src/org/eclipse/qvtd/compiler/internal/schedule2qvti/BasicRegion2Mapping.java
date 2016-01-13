@@ -885,7 +885,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (@SuppressWarnings("null")@NonNull Node guardNode : guardNodes) {
 			ClassDatumAnalysis classDatumAnalysis = guardNode.getClassDatumAnalysis();
 			TypedModel typedModel = visitor.getQVTiTypedModel(classDatumAnalysis.getTypedModel());
-			GuardPattern guardPattern = typedModel2domain.get(typedModel).getGuardPattern();
+			ImperativeDomain domain = typedModel2domain.get(typedModel);
+			assert domain != null;
+			GuardPattern guardPattern = domain.getGuardPattern();
 			assert guardPattern != null;
 			createUnrealizedVariable(guardPattern, guardNode, null);
 		}
@@ -1120,7 +1122,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 		if (classAssignments != null) {
 			pruneClassAssignments(classAssignments);
-			@SuppressWarnings("null")@NonNull Collection<List<NavigationEdge>> values = classAssignments.values();
+			Collection<List<NavigationEdge>> values = classAssignments.values();
 			createClassPropertyAssignments(values);
 		}
 		ECollections.sort(mapping.getBottomPattern().getAssignment(), new Comparator<Assignment>()
@@ -1356,6 +1358,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private void pruneClassAssignments(@NonNull Map<Node, List<NavigationEdge>> classAssignments) {
 		for (Node sourceNode : new ArrayList<Node>(classAssignments.keySet())) {
 			List<NavigationEdge> forwardEdges = classAssignments.get(sourceNode);
+			assert forwardEdges != null;
 			for (int iForward = forwardEdges.size()-1; iForward >= 0; iForward--) {
 				NavigationEdge forwardEdge = forwardEdges.get(iForward);
 				Node targetNode = forwardEdge.getTarget();

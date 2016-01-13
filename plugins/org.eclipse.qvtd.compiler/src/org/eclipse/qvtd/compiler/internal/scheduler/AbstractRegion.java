@@ -687,10 +687,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 							if (!isLateMerge) {		// FIXME must locate in ancestry; if present can merge, if not cannot
 								return false;
 							}
-							for (@SuppressWarnings("null")@NonNull Node secondaryOriginNode : secondaryTargetNode.getUsedBindingSources()) {
-//								if (!region2depths.isAfter(secondaryOriginNode, this)) {
-									return false;
-//								}
+							for (@SuppressWarnings("unused") Node secondaryOriginNode : secondaryTargetNode.getUsedBindingSources()) {
+								return false;
 							}
 						}
 					}
@@ -760,7 +758,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public void computeCheckedOrEnforcedEdges(@NonNull Map<TypedModel, Map<Property, List<NavigationEdge>>> typedModel2property2predicatedEdges,
-				@NonNull Map<TypedModel, Map<Property, List<NavigationEdge>>> typedModel2property2realizedEdges) {
+				@NonNull Map<TypedModel, @NonNull Map<Property, @NonNull List<NavigationEdge>>> typedModel2property2realizedEdges) {
 		CompleteModel completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
 		boolean doDebug = QVTs2QVTiVisitor.POLLED_PROPERTIES.isActive();
 		if (doDebug) {
@@ -783,7 +781,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 							CompleteClass predicatedTargetType = predicatedTargetNode.getCompleteClass();
 							ClassDatumAnalysis classDatumAnalysis = laterNode.getClassDatumAnalysis();
 							TypedModel typedModel = classDatumAnalysis.getTypedModel();
-							Map<Property, List<NavigationEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
+							Map<Property, @NonNull List<NavigationEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
+							assert property2realizedEdges != null;
 							Property oclContainerProperty = getSchedulerConstants().getOclContainerProperty();
 							if (property == oclContainerProperty) {
 								Node containerNode = predicatedEdge.getTarget();
@@ -795,7 +794,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 										CompleteClass candidateContainerType = completeModel.getCompleteClass(candidateProperty.getOwningClass());
 										CompleteClass candidateContainedType = completeModel.getCompleteClass(candidateProperty.getType());
 	//									if (candidateContainerType.conformsTo(containerType) && containedType.conformsTo(candidateContainedType)) {
-											for (NavigationEdge realizedEdge : property2realizedEdges.get(candidateProperty)) {
+										List<NavigationEdge> realizedEdges = property2realizedEdges.get(candidateProperty);
+										assert realizedEdges != null;
+											for (NavigationEdge realizedEdge : realizedEdges) {
 												// FIXME recheck for narrower types ??
 												Region earlierRegion = realizedEdge.getRegion();
 												String isNotHazardous;
@@ -914,7 +915,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		//
 		//	Compute the inverse Set of all source nodes from which a particular target node can be reached by transitive to-one navigation.
 		//
-		final Map<Node,Set<Node>> target2sourceClosure = new HashMap<Node,Set<Node>>();
+		final Map<Node, @NonNull Set<Node>> target2sourceClosure = new HashMap<Node, @NonNull Set<Node>>();
 		for (Node targetNode : navigableNodes) {
 			Set<Node> sourceClosure = new HashSet<Node>();
 			target2sourceClosure.put(targetNode, sourceClosure);
@@ -940,8 +941,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		{
 			@Override
 			public int compare(Node o1, Node o2) {
-				int l1 = target2sourceClosure.get(o1).size();
-				int l2 = target2sourceClosure.get(o2).size();
+				Set<Node> set1 = target2sourceClosure.get(o1);
+				Set<Node> set2 = target2sourceClosure.get(o2);
+				assert (set1 != null) && (set2 != null);
+				int l1 = set1.size();
+				int l2 = set2.size();
 				return l1 - l2;
 			}
 		});
@@ -1353,8 +1357,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			s.append("\n");
 			s.append(name);
 		}
-		@SuppressWarnings("null")@NonNull String string = s.toString();
-		return string;
+		return s.toString();
 	}
 
 	@Override
@@ -1866,6 +1869,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		if (headNodeGroups.size() == 1) {			// FIXME multi-heads
 			for (Node headNode : headNodeGroups.get(0)) {
 				List<Node> nodeList = completeClass2node.get(headNode.getCompleteClass());
+				assert nodeList != null;
 				if (nodeList.size() <= 1) {
 					break;
 				}

@@ -34,7 +34,7 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 	private /*@LazyNonNull*/ ConnectionRole connectionRole;
 	protected final @NonNull ScheduledRegion region;
 	private @NonNull Set<Node> sourceNodes;
-	private @NonNull Map<Node, ConnectionRole> targetNode2role = new HashMap<Node, ConnectionRole>();
+	private @NonNull Map<Node, @NonNull ConnectionRole> targetNode2role = new HashMap<Node, @NonNull ConnectionRole>();
 	protected final @Nullable String name;
 
 	protected AbstractConnection(@NonNull ScheduledRegion region, @NonNull Set<Node> sourceNodes, @NonNull String name) {
@@ -213,12 +213,11 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 			}
 			s.append(source.getDisplayName());
 		}
-		@SuppressWarnings("null")@NonNull String string = s.toString();
-		return string;
+		return s.toString();
 	}
 
-	private @NonNull Map<Region, Integer> getSourceRegion2count() {
-		Map<Region, Integer> sourceRegion2count = new HashMap<Region, Integer>();
+	private @NonNull Map<Region, @NonNull Integer> getSourceRegion2count() {
+		Map<Region, @NonNull Integer> sourceRegion2count = new HashMap<Region, @NonNull Integer>();
 		for (@SuppressWarnings("null")@NonNull Node source : getSources()) {
 			Region sourceRegion = source.getRegion();
 			Integer count = sourceRegion2count.get(sourceRegion);
@@ -254,7 +253,6 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 		return targetNode;
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	public @NonNull Iterable<Node> getTargets() {
 		return targetNode2role.keySet();
@@ -320,7 +318,9 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 	public boolean isPassed(@NonNull Region targetRegion) {
 		for (Node targetNode : targetNode2role.keySet()) {
 			if (targetNode.getRegion() == targetRegion) {
-				if (targetNode2role.get(targetNode).isPassed()) {
+				ConnectionRole role = targetNode2role.get(targetNode);
+				assert role != null;
+				if (role.isPassed()) {
 					return true;
 				}
 			}
@@ -380,7 +380,8 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 				s.appendEdge(source, this, this);
 			}
 			for (@SuppressWarnings("null")@NonNull Node target : getTargets()) {
-				@SuppressWarnings("null")@NonNull ConnectionRole role = targetNode2role.get(target);
+				ConnectionRole role = targetNode2role.get(target);
+				assert role != null;
 				s.appendEdge(this, role, target);
 			}
 		}
@@ -388,8 +389,8 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 
 	@Override
 	public void toRegionGraph(@NonNull GraphStringBuilder s) {
-		Map<Region, Integer> sourceRegion2count = getSourceRegion2count();
-		Map<Region, List<ConnectionRole>> targetRegion2roles = new HashMap<Region, List<ConnectionRole>>();
+		Map<Region, @NonNull Integer> sourceRegion2count = getSourceRegion2count();
+		Map<Region, @NonNull List<ConnectionRole>> targetRegion2roles = new HashMap<Region, @NonNull List<ConnectionRole>>();
 		for (@SuppressWarnings("null")@NonNull Node target : targetNode2role.keySet()) {
 			ConnectionRole role = targetNode2role.get(target);
 			Region targetRegion = target.getRegion();
@@ -408,12 +409,16 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 		else {
 			s.appendNode(this);
 			for (@SuppressWarnings("null")@NonNull Region sourceRegion : sourceRegion2count.keySet()) {
-				for (int i = sourceRegion2count.get(sourceRegion); i > 0; i--) {
+				Integer counts = sourceRegion2count.get(sourceRegion);
+				assert counts != null;
+				for (int i = counts; i > 0; i--) {
 					s.appendEdge(sourceRegion, this, this);
 				}
 			}
 			for (@SuppressWarnings("null")@NonNull Region targetRegion : targetRegion2roles.keySet()) {
-				for (@SuppressWarnings("null")@NonNull ConnectionRole role : targetRegion2roles.get(targetRegion)) {
+				List<ConnectionRole> roles = targetRegion2roles.get(targetRegion);
+				assert roles != null;
+				for (@SuppressWarnings("null")@NonNull ConnectionRole role : roles) {
 					s.appendEdge(this, role, targetRegion);
 				}
 			}

@@ -56,10 +56,10 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 	protected final @NonNull MetamodelManager metamodelManager;
 	// TODO how to manage aliases?
 	/** Map a typed model to its resource (model). */
-	private @NonNull Map<TypedModel, Resource> modelResourceMap = new HashMap<TypedModel, Resource>();
+	private @NonNull Map<TypedModel, @NonNull Resource> modelResourceMap = new HashMap<TypedModel, @NonNull Resource>();
 	private @NonNull Map<Resource, TypedModel> resource2typedModel = new HashMap<Resource, TypedModel>();
 	
-	private @NonNull Map<TypedModel, List<EObject>> modelElementsMap = new HashMap<TypedModel, List<EObject>>();
+	private @NonNull Map<TypedModel, @NonNull List<EObject>> modelElementsMap = new HashMap<TypedModel, @NonNull List<EObject>>();
 
 	/**
 	 * The types upon which execution of the transformation may invoke allInstances().
@@ -94,7 +94,7 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 	    this.metamodelManager = transformationAnalysis.getMetamodelManager();
 	    this.allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
 	    int cacheIndexes = transformationAnalysis.getCacheIndexes();
-		this.unnavigableOpposites = new Map<?, ?>[cacheIndexes];
+		this.unnavigableOpposites = new @NonNull Map<?, ?>[cacheIndexes];
 		for (int i = 0; i < cacheIndexes; i++) {
 			this.unnavigableOpposites[i] = new HashMap<Object, Object>();
 		}
@@ -124,10 +124,15 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 	    
 	    List<EObject> elements = modelElementsMap.get(model);
 	    if (elements == null) {
-	        elements = new ArrayList<EObject>(modelResourceMap.get(model).getContents());
-		    modelElementsMap.put(model, elements);
+			Resource resource = modelResourceMap.get(model);
+			if (resource != null) {
+				elements = new ArrayList<EObject>(resource.getContents());
+			    modelElementsMap.put(model, elements);
+			}
 	    }
-	    elements.add((EObject) element);
+	    if (elements != null) {
+	    	elements.add((EObject) element);
+	    }
 	}
 
 	/**
@@ -192,7 +197,9 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
         List<Object> elements = new ArrayList<Object>();
         // Is the TypedModel the middle or output, hence we have elements in the elementsMap
         if (modelElementsMap.containsKey(model)) {
-            for (EObject root :  modelElementsMap.get(model)) {
+            List<EObject> roots = modelElementsMap.get(model);
+            assert roots != null;
+			for (EObject root : roots) {
                 if (root != null) {
 					//if (root.eClass().getName().equals(type.getName())) {
 					if (isInstance(type, root)) {
@@ -210,16 +217,19 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
             }
         }
         else {
-            for (TreeIterator<EObject> contents = modelResourceMap.get(model).getAllContents(); contents.hasNext();) {
-                EObject element = contents.next();
-                //System.out.println(type.getETarget());
-                //System.out.println(((EClassifier) type.getETarget()).getName());
-                //System.out.println(object.eClass().getName());
-                if ((element != null) && isInstance(type, element)) {
-//                if (((EClass) type.getETarget()).getName().equals(element.eClass().getName())) {
-                    elements.add(element);
-                }
-            }
+            Resource resource = modelResourceMap.get(model);
+            if (resource != null) {
+				for (TreeIterator<EObject> contents = resource.getAllContents(); contents.hasNext();) {
+	                EObject element = contents.next();
+	                //System.out.println(type.getETarget());
+	                //System.out.println(((EClassifier) type.getETarget()).getName());
+	                //System.out.println(object.eClass().getName());
+	                if ((element != null) && isInstance(type, element)) {
+	//                if (((EClass) type.getETarget()).getName().equals(element.eClass().getName())) {
+	                    elements.add(element);
+	                }
+	            }
+	        }
         }
         return elements;
     }
@@ -298,7 +308,9 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
             TypedModel key = entry.getKey();
             if (modelElementsMap.containsKey(key)) {       // Only save modified models
                 // Move elements without container to the resource contents
-                for (EObject e : modelElementsMap.get(key)) {
+                List<EObject> elements = modelElementsMap.get(key);
+                assert elements != null;
+				for (EObject e : elements) {
                     if (e.eContainer() == null) {
                         model.getContents().add(e);
                     }

@@ -83,7 +83,7 @@ public class QVTiTransformationAnalysis
 	/**
 	 *  Map from navigable property to sequential index in any TypedModel.
 	 */
-	private final @NonNull Map<Property, Integer> property2cacheIndex = new HashMap<Property, Integer>();
+	private final @NonNull Map<@NonNull Property, Integer> property2cacheIndex = new HashMap<@NonNull Property, Integer>();
 
 	/**
 	 *  Map from navigable property to sequential index in a checkable TypedModel.
@@ -395,7 +395,7 @@ public class QVTiTransformationAnalysis
 		return property2cacheIndex.size();
 	}
 
-	public @NonNull Map<Property, Integer> getCaches() {
+	public @NonNull Map<@NonNull Property, Integer> getCaches() {
 		return property2cacheIndex;
 	}
 	

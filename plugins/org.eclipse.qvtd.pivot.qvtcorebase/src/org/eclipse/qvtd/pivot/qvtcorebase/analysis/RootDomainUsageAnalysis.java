@@ -248,7 +248,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	/**
 	 * Map from Integer to all in-use Constant Usages
 	 */
-	private final @NonNull Map<Integer, DomainUsageConstant> constantUsages = new HashMap<Integer, DomainUsageConstant>();
+	private final @NonNull Map<Integer, @NonNull DomainUsageConstant> constantUsages = new HashMap<Integer, @NonNull DomainUsageConstant>();
 
 	/**
 	 * Map from Integer to all single TypedModel Constant Usages
@@ -283,7 +283,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	/**
 	 * The domains in which the referred type of a property may be used.
 	 */
-	protected final @NonNull Map<Property, DomainUsage> property2referredTypeUsage = new HashMap<Property, DomainUsage>();
+	protected final @NonNull Map<Property, @NonNull DomainUsage> property2referredTypeUsage = new HashMap<Property, @NonNull DomainUsage>();
 	
 	/**
 	 * The nested analyses for declared operations.
@@ -518,9 +518,10 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		return ClassUtil.nonNullState(middleUsage);
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull DomainUsage getNoneUsage() {
-		return constantUsages.get(NONE_USAGE_BIT_MASK);
+		DomainUsageConstant noneUsage = constantUsages.get(NONE_USAGE_BIT_MASK);
+		assert noneUsage != null;
+		return noneUsage;
 	}
 	
 //	public @NonNull TypedModel getPrimitiveTypeModel() {
@@ -579,9 +580,10 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		return primitiveTypeModel;
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull DomainUsage getPrimitiveUsage() {
-		return constantUsages.get(PRIMITIVE_USAGE_BIT_MASK);
+		DomainUsageConstant primitiveUsage = constantUsages.get(PRIMITIVE_USAGE_BIT_MASK);
+		assert primitiveUsage != null;
+		return primitiveUsage;
 	}
 
 	@Override

@@ -245,7 +245,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.pushIndentation(null);
 			for (int i = 0; i < sortedList.size(); i++) {
 				org.eclipse.ocl.pivot.Class instancesClass = sortedList.get(i);
-				List<org.eclipse.ocl.pivot.Class> superInstancesClasses = instancesClassAnalysis.get(instancesClass);
+				List<org.eclipse.ocl.pivot.Class> superInstancesClasses = ClassUtil.nonNullState(instancesClassAnalysis.get(instancesClass));
 				int startLength = js.length();
 				js.append("{");
 				boolean isFirst = true;
@@ -354,21 +354,22 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
    
 	protected void doOppositeCaches(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
-		Map<Property, Integer> opposites = transformationAnalysis.getCaches();
+		Map<@NonNull Property, Integer> opposites = transformationAnalysis.getCaches();
 		if (opposites.size() <= 0) {
 			return;
 		}
 		js.append("\n/*\n * Property-source to Property-target unnavigable navigation caches\n */\n");
-		Map<String, Property> key2property = new HashMap<String, Property>();
-		for (Map.Entry<Property, Integer> entry : opposites.entrySet()) {
-			@SuppressWarnings("null")@NonNull Property property = entry.getKey();
+		Map<String, @NonNull Property> key2property = new HashMap<String, @NonNull Property>();
+		for (Map.Entry<@NonNull Property, Integer> entry : opposites.entrySet()) {
+			Property property = entry.getKey();
 			String name = getGlobalContext().addOppositeProperty(property);
-			key2property.put(name, entry.getKey());
+			key2property.put(name, property);
 		}
 		List<String> sortedKeys = new ArrayList<String>(key2property.keySet());
 		Collections.sort(sortedKeys);
 		for (String key : sortedKeys) {
 			Property property = key2property.get(key);
+			assert property != null;
 			TypeDescriptor outerTypeDescriptor = context.getBoxedDescriptor(property.getOwningClass().getTypeId());
 			TypeDescriptor middleTypeDescriptor = context.getBoxedDescriptor(property.getType().getTypeId());
 			js.append("protected final ");

@@ -309,7 +309,7 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 		List<VariableDeclaration> pendingVariables = new ArrayList<VariableDeclaration>();
 		Map<VariableDeclaration, VariablePredicate> variable2predicate = new HashMap<VariableDeclaration, VariablePredicate>();
 		Map<VariableDeclaration, Set<VariablePredicate>> variable2predicates = new HashMap<VariableDeclaration, Set<VariablePredicate>>();
-		Map<VariablePredicate, Set<VariableDeclaration>> predicate2variables = new HashMap<VariablePredicate, Set<VariableDeclaration>>();
+		Map<VariablePredicate, @NonNull Set<VariableDeclaration>> predicate2variables = new HashMap<VariablePredicate, @NonNull Set<VariableDeclaration>>();
 		for (VariablePredicate asVariablePredicate : asVariablePredicates) {
 			for (TreeIterator<EObject> tit = asVariablePredicate.eAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
@@ -342,18 +342,23 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 			for (VariableDeclaration asVariable : pendingVariables) {
 				VariablePredicate asVariablePredicate1 = variable2predicate.get(asVariable);
 				Set<VariableDeclaration> variables = predicate2variables.get(asVariablePredicate1);
-				variables.retainAll(pendingVariables);
-				if (variables.size() <= 0) {
-					asSortedVariablePredicates.add(asVariablePredicate1);
-					Set<VariablePredicate> predicates = variable2predicates.get(asVariable);
-					if (predicates != null) {
-						for (VariablePredicate asVariablePredicate2 : predicates) {
-							predicate2variables.get(asVariablePredicate2).remove(asVariable);
+				if (variables != null){
+					variables.retainAll(pendingVariables);
+					if (variables.size() <= 0) {
+						asSortedVariablePredicates.add(asVariablePredicate1);
+						Set<VariablePredicate> predicates = variable2predicates.get(asVariable);
+						if (predicates != null) {
+							for (VariablePredicate asVariablePredicate2 : predicates) {
+								Set<VariableDeclaration> variables2 = predicate2variables.get(asVariablePredicate2);
+								if (variables2 != null) {
+									variables2.remove(asVariable);
+								}
+							}
 						}
+						pendingVariables.remove(asVariable);
+						predicate2variables.remove(asVariablePredicate1);
+						break;
 					}
-					pendingVariables.remove(asVariable);
-					predicate2variables.remove(asVariablePredicate1);
-					break;
 				}
 			}
 			if (asSortedVariablePredicates.size() == oldSize) {

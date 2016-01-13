@@ -86,7 +86,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 /**
  * AbstractDomainUsageAnalysis provides shared functionality for the overall analysis and for nested operational analyses.
  */
-public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTcoreBaseVisitor<DomainUsage, EnvironmentFactoryInternal> implements DomainUsageAnalysis.Internal
+public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTcoreBaseVisitor<DomainUsage, @NonNull EnvironmentFactoryInternal> implements DomainUsageAnalysis.Internal
 {
 	private DomainUsage selfUsage = null;
 	protected final @NonNull Map<Element, DomainUsage> element2usage = new HashMap<Element, DomainUsage>();
@@ -100,7 +100,8 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		@SuppressWarnings("unused")DomainUsage valueUsage = visit(object.getValue());
 		DomainUsage knownSourceUsage = getRootAnalysis().property2containingClassUsage.get(property);
 		if (knownSourceUsage != null) {
-			@SuppressWarnings("null")@NonNull DomainUsage knownTargetUsage = getRootAnalysis().property2referredTypeUsage.get(property);
+			DomainUsage knownTargetUsage = getRootAnalysis().property2referredTypeUsage.get(property);
+			assert knownTargetUsage != null;
 			intersection(knownSourceUsage, slotUsage);
 			return knownSourceUsage; //intersection(knownTargetUsage, valueUsage);
 		}
@@ -113,7 +114,8 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		DomainUsage actualSourceUsage = visit(object.getOwnedSource());
 		DomainUsage knownSourceUsage = getRootAnalysis().property2containingClassUsage.get(property);
 		if (knownSourceUsage != null) {
-			@SuppressWarnings("null")@NonNull DomainUsage knownTargetUsage = getRootAnalysis().property2referredTypeUsage.get(property);
+			DomainUsage knownTargetUsage = getRootAnalysis().property2referredTypeUsage.get(property);
+			assert knownTargetUsage != null;
 			return intersection(knownSourceUsage, actualSourceUsage);
 		}
 		else {
@@ -529,12 +531,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			PivotMetamodelManager metamodelManager = context.getMetamodelManager();
 			try {
 				ExpressionInOCL parseSpecification = metamodelManager.parseSpecification(bodyExpression);
-				if (parseSpecification != null) {
-					return visit(parseSpecification);
-				}
-				else {
-					return visit(object.getType());
-				}
+				return visit(parseSpecification);
 			} catch (ParserException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

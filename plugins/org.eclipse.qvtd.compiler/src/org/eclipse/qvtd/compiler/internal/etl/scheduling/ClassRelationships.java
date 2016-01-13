@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Model;
@@ -157,23 +158,25 @@ public class ClassRelationships {
 	}
 		
 	private void computeClass2SubClasses(Class aClass) {
-			 
-		for (Class superClass : class2superClasses.get(aClass)) {
-			if (aClass.getSuperClasses().contains(superClass)) {
-				Set<Class> directSubClasses = class2directSubClasses.get(superClass);
-				if (directSubClasses == null) {
-					directSubClasses = new LinkedHashSet<Class>();
-					class2directSubClasses.put(superClass, directSubClasses);
+		Set<@NonNull Class> superClasses = class2superClasses.get(aClass);
+		if (superClasses != null) {
+			for (Class superClass : superClasses) {
+				if (aClass.getSuperClasses().contains(superClass)) {
+					Set<Class> directSubClasses = class2directSubClasses.get(superClass);
+					if (directSubClasses == null) {
+						directSubClasses = new LinkedHashSet<Class>();
+						class2directSubClasses.put(superClass, directSubClasses);
+					}
+					directSubClasses.add(aClass);
 				}
-				directSubClasses.add(aClass);
+				
+				Set<Class> allSubClasses = class2allSubClasses.get(superClass);
+				if (allSubClasses == null) {
+					allSubClasses = new LinkedHashSet<Class>();
+					class2allSubClasses.put(superClass, allSubClasses);
+				}
+				allSubClasses.add(aClass);
 			}
-			
-			Set<Class> allSubClasses = class2allSubClasses.get(superClass);
-			if (allSubClasses == null) {
-				allSubClasses = new LinkedHashSet<Class>();
-				class2allSubClasses.put(superClass, allSubClasses);
-			}
-			allSubClasses.add(aClass);
 		}
 	}
 	

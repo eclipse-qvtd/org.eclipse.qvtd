@@ -339,7 +339,7 @@ public class Region2Depth
 	 */
 	public @NonNull <E extends Edge> Iterable<E> getSortedEdges(@NonNull Iterable<E> edges) {
 		Map<Node, E> node2edge = new HashMap<Node, E>();
-		Map<Node, Node> before2after = new HashMap<Node, Node>();
+//		Map<Node, Node> before2after = new HashMap<Node, Node>();
 		List<Node> orderedNodes = new ArrayList<Node>();
 /*		for (E edge : edges) {
 			Node target = edge.getTarget();
@@ -378,7 +378,9 @@ public class Region2Depth
 		} */
 		List<E> orderedEdges = new ArrayList<E>();
 		for (Node orderedNode : orderedNodes) {
-			orderedEdges.add(node2edge.get(orderedNode));
+			@Nullable E edge = node2edge.get(orderedNode);
+			assert edge != null;
+			orderedEdges.add(edge);
 		}
 		assert orderedEdges.size() == node2edge.size();
 		return orderedEdges;

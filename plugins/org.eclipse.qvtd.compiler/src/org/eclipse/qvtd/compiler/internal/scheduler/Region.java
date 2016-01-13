@@ -36,7 +36,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Schedulable
 	@Nullable Map<Node, Node> canMerge(@NonNull Region secondaryRegion, @NonNull Region2Depth region2depths, boolean isLateMerge);
 
 	void computeCheckedOrEnforcedEdges(@NonNull Map<TypedModel, Map<Property, List<NavigationEdge>>> typedModel2property2predicatedEdges,
-			@NonNull Map<TypedModel, Map<Property, List<NavigationEdge>>> typedModel2property2realizedEdges);
+			@NonNull Map<TypedModel, @NonNull Map<Property, @NonNull List<NavigationEdge>>> typedModel2property2realizedEdges);
 	@NonNull Iterable<MappingRegion> getAllMappingRegions();
 	
 	/**

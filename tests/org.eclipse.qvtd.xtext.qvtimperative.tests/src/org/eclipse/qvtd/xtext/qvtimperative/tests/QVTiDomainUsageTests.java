@@ -126,7 +126,9 @@ public class QVTiDomainUsageTests extends LoadTestCase
 			for (DomainUsage usage : sortedUsages) {
 				System.out.println(usage);
 				List<String> lines = new ArrayList<String>();
-				for (Element element : usage2elements.get(usage)) {
+				List<Element> elements = usage2elements.get(usage);
+				assert elements != null;
+				for (Element element : elements) {
 					lines.add(element.eClass().getName() + " " + element);
 				}
 				Collections.sort(lines);
