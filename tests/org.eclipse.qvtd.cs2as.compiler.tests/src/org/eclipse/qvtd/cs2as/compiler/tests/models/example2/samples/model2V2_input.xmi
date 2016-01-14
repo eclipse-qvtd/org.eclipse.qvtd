@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ASCII"?>
+<classescs:RootCS
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:classescs="http://cs2as/tests/example2/classescs/1.0">
+  <ownedPackages
+      name="P1">
+    <ownedClasses
+        name="C1">
+      <properties
+          name="prop1">
+        <typeRef>
+          <path
+              name="C1"/>
+        </typeRef>
+      </properties>
+    </ownedClasses>
+    <ownedClasses
+        name="C2">
+      <extends>
+        <path
+            name="C1"/>
+      </extends>
+      <operations
+          name="getProp1FromSuperClass">
+        <bodyExps>
+          <name>
+            <path
+                name="prop1"/>
+          </name>
+        </bodyExps>
+        <resultRef>
+          <path
+              name="C1"/>
+        </resultRef>
+      </operations>
+    </ownedClasses>
+  </ownedPackages>
+</classescs:RootCS>

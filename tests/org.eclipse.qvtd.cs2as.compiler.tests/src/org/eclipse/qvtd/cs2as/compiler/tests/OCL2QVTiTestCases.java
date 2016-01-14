@@ -298,6 +298,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		
 		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1V2");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2V2");
 	}
 	
 	@Test
@@ -528,6 +529,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT = createQVT();
 
 		executeModelsTX_CG(myQVT, txClass, baseURI, "model1V2");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model2V2");
 	}
 	
 	@Test

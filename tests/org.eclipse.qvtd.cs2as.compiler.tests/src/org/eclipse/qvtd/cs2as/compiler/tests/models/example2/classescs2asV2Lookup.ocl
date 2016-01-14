@@ -98,6 +98,12 @@ def : _qualified_env() : lookup::LookupEnvironment =
 .addElements(ownedProperties)
 def : _env(child : ocl::OclElement) : lookup::LookupEnvironment =
 	parentEnv().nestedEnv()
+		.addElements(let allSuperClasses = self->closure(superClass)
+					in allSuperClasses->collect(ownedProperties)
+					->includingAll(allSuperClasses.ownedOperations)
+					->asOrderedSet() -- FIXME
+		)
+		.nestedEnv()
 		.addElements(ownedOperations)
 		.addElements(ownedProperties)
 def : _exported_env(importer : ocl::OclElement) : lookup::LookupEnvironment =
