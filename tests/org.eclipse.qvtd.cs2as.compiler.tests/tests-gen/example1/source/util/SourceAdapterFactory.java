@@ -16,8 +16,8 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.jdt.annotation.Nullable;
+
 import example1.source.PathElementCS;
 import example1.source.PathNameCS;
 import example1.source.SElement;

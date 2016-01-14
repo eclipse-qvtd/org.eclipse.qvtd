@@ -153,7 +153,8 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 		if (isInited) return (TargetPackage)EPackage.Registry.INSTANCE.getEPackage(TargetPackage.eNS_URI);
 
 		// Obtain or create and register package
-		TargetPackageImpl theTargetPackage = (TargetPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TargetPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TargetPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TargetPackageImpl theTargetPackage = (TargetPackageImpl)(ePackage instanceof TargetPackageImpl ? ePackage : new TargetPackageImpl());
 
 		isInited = true;
 

@@ -9,17 +9,9 @@
 
 package example1.target.util;
 
-import example1.target.A;
-import example1.target.B;
-import example1.target.C;
-import example1.target.TargetPackage;
-import example1.target.lookup.EnvironmentPackage;
-import example1.target.lookup.LookupEnvironment;
-import example1.target.util.AbstractTargetCommonLookupVisitor;
-import example1.target.util.Visitable;
-import example1.target.util.Visitor;
 import java.util.Iterator;
 import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -34,6 +26,13 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
+
+import example1.target.A;
+import example1.target.B;
+import example1.target.C;
+import example1.target.TargetPackage;
+import example1.target.lookup.EnvironmentPackage;
+import example1.target.lookup.LookupEnvironment;
 
 public class AbstractTargetUnqualifiedLookupVisitor
 	extends AbstractTargetCommonLookupVisitor
@@ -197,7 +196,7 @@ public class AbstractTargetUnqualifiedLookupVisitor
     /**
      * visitB(element : target::B[1]) : lookup::LookupEnvironment[?]
      * 
-     * _'null' : lookup::LookupEnvironment[?]
+     * _'null' : lookup::LookupEnvironment[1]
      */
     @Override
     public /*@NonInvalid*/ LookupEnvironment visitB(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull B element_1) {
@@ -208,7 +207,7 @@ public class AbstractTargetUnqualifiedLookupVisitor
     /**
      * visitC(element : target::C[1]) : lookup::LookupEnvironment[?]
      * 
-     * _'null' : lookup::LookupEnvironment[?]
+     * _'null' : lookup::LookupEnvironment[1]
      */
     @Override
     public /*@NonInvalid*/ LookupEnvironment visitC(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull C element_2) {
@@ -219,7 +218,7 @@ public class AbstractTargetUnqualifiedLookupVisitor
     /**
      * visitD(element : target::D[1]) : lookup::LookupEnvironment[?]
      * 
-     * _'null' : lookup::LookupEnvironment[?]
+     * _'null' : lookup::LookupEnvironment[1]
      */
     @Override
     public /*@NonInvalid*/ LookupEnvironment visitD(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull D element_3) {
