@@ -20,7 +20,6 @@ import java.util.Set;
 import java.util.Stack;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 
 import com.google.common.collect.Iterables;
