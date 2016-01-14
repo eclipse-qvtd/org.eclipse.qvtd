@@ -9,17 +9,8 @@
 
 package example2.classes.util;
 
-import example2.classes.Class;
-import example2.classes.ClassesPackage;
-import example2.classes.Operation;
-import example2.classes.Package;
-import example2.classes.Property;
-import example2.classes.lookup.EnvironmentPackage;
-import example2.classes.lookup.LookupEnvironment;
-import example2.classes.util.AbstractClassesCommonLookupVisitor;
-import example2.classes.util.Visitable;
-import example2.classes.util.Visitor;
 import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -27,6 +18,14 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+
+import example2.classes.Class;
+import example2.classes.ClassesPackage;
+import example2.classes.Operation;
+import example2.classes.Package;
+import example2.classes.Property;
+import example2.classes.lookup.EnvironmentPackage;
+import example2.classes.lookup.LookupEnvironment;
 
 public class AbstractClassesUnqualifiedLookupVisitor
 	extends AbstractClassesCommonLookupVisitor

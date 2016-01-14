@@ -12,13 +12,13 @@
  */
 package example2.classescs.impl;
 
-import example2.classescs.ArgumentCS;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import example2.classescs.ArgumentCS;
 import example2.classescs.ClassCS;
 import example2.classescs.ClassescsFactory;
 import example2.classescs.ClassescsPackage;
