@@ -9,26 +9,17 @@
 
 package cg_qvtimperative_tests._hsv2hls;
 
-import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
-import org.eclipse.ocl.pivot.ids.DataTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfKindOperation;
-import test.hls.HLSTree.HLSNode;
 import test.hls.HLSTree.HLSTreeFactory;
 import test.hls.HLSTree.HLSTreePackage;
 import test.hsv.HSVTree.HSVNode;
@@ -183,7 +174,7 @@ public class hsv2hls extends AbstractTransformer
         middleRoot.setName(name);
         // mapping statements
         @SuppressWarnings("null")
-        final /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<HSVNode> children = hsvRoot.getChildren();
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
                 final /*@NonInvalid*/ test.hsv.HSVTree.@org.eclipse.jdt.annotation.NonNull HSVNode symbol_2 = (HSVNode)hsvChild;
@@ -234,7 +225,7 @@ public class hsv2hls extends AbstractTransformer
         middleNode_1.setName(name);
         // mapping statements
         @SuppressWarnings("null")
-        final /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<HSVNode> children = hsvNode.getChildren();
         for (HSVNode hsvChild : children) {
             if (hsvChild != null) {
                 final /*@NonInvalid*/ test.hsv.HSVTree.@org.eclipse.jdt.annotation.NonNull HSVNode symbol_3 = (HSVNode)hsvChild;
@@ -282,7 +273,7 @@ public class hsv2hls extends AbstractTransformer
         hlsNode.setName(name);
         // mapping statements
         @SuppressWarnings("null")
-        final /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode.getChildren();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<HSVNode2HLSNode> children = middleNode.getChildren();
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
                 final /*@NonInvalid*/ test.middle.HSV2HLS.@org.eclipse.jdt.annotation.NonNull HSVNode2HLSNode symbol_3 = (HSVNode2HLSNode)middleChild;
@@ -338,7 +329,7 @@ public class hsv2hls extends AbstractTransformer
         hlsNode.setName(name);
         // mapping statements
         @SuppressWarnings("null")
-        final /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode_0.getChildren();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<HSVNode2HLSNode> children = middleNode_0.getChildren();
         for (HSVNode2HLSNode middleChild : children) {
             if (middleChild != null) {
                 final /*@NonInvalid*/ test.middle.HSV2HLS.@org.eclipse.jdt.annotation.NonNull HSVNode2HLSNode symbol_3 = (HSVNode2HLSNode)middleChild;

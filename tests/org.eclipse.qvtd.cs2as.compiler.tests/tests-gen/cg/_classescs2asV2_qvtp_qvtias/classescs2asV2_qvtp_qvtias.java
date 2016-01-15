@@ -21,7 +21,6 @@ import example2.classes.PropertyCallExp;
 import example2.classes.Root;
 import example2.classes.lookup.util.ClassesLookupResult;
 import example2.classes.lookup.util.ClassesLookupSolver;
-import example2.classes.util.Visitable;
 import example2.classescs.ArgumentCS;
 import example2.classescs.ClassCS;
 import example2.classescs.ClassescsPackage;
@@ -29,22 +28,15 @@ import example2.classescs.NameExpCS;
 import example2.classescs.OperationCS;
 import example2.classescs.PackageCS;
 import example2.classescs.PathElementCS;
-import example2.classescs.PathNameCS;
 import example2.classescs.PropertyCS;
 import example2.classescs.RootCS;
-import example2.classescs.RoundedBracketClause;
 import java.util.Iterator;
 import java.util.List;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.PropertyId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContainerOperation;
@@ -60,9 +52,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
 
 /**
@@ -568,7 +558,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = classCS_1.getAst();
         final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class oclAsType = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Class_0));
-        final /*@Thrown*/ List<OperationCS> operations = classCS_1.getOperations();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<OperationCS> operations = classCS_1.getOperations();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_operations = idResolver.createOrderedSetOfAll(ORD_CLSSid_OperationCS, operations);
         /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Operation);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_operations.iterator();
@@ -592,7 +582,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             accumulator.add(oclAsType_0);
         }
         // property assignments
-        final /*@NonInvalid*/ List<Operation> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Operation.class, collect);
+        final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Operation> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Operation.class, collect);
         oclAsType.getOwnedOperations().addAll(ECORE_collect);
         return true;
     }
@@ -624,7 +614,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = classCS_2.getAst();
         final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class oclAsType = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Class_0));
-        final /*@Thrown*/ List<PropertyCS> properties = classCS_2.getProperties();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PropertyCS> properties = classCS_2.getProperties();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_properties = idResolver.createOrderedSetOfAll(ORD_CLSSid_PropertyCS, properties);
         /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Property);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_properties.iterator();
@@ -648,7 +638,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             accumulator.add(oclAsType_0);
         }
         // property assignments
-        final /*@NonInvalid*/ List<example2.classes.Property> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(example2.classes.Property.class, collect);
+        final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<example2.classes.Property> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(example2.classes.Property.class, collect);
         oclAsType.getOwnedProperties().addAll(ECORE_collect);
         return true;
     }
@@ -695,7 +685,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             if (aPathNameCS == null) {
                 throwNull(classCS_3, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
             }
-            final /*@Thrown*/ List<PathElementCS> segments_0 = aPathNameCS.getPath();
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = aPathNameCS.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0));
             final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
@@ -887,7 +877,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             if (aPathNameCS == null) {
                 throwNull(nameExpCS_2, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
             }
-            final /*@Thrown*/ List<PathElementCS> segments_0 = aPathNameCS.getPath();
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = aPathNameCS.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0));
             final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
@@ -999,7 +989,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             if (aPathNameCS_0 == null) {
                 throwNull(nameExpCS_2, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
             }
-            final /*@Thrown*/ List<PathElementCS> segments_1 = aPathNameCS_0.getPath();
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_1 = aPathNameCS_0.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_1);
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_3 = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_1));
             final /*@Thrown*/ boolean eq_2 = size_3.equals(INT_1);
@@ -1263,7 +1253,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         if (roundedBrackets_0 == null) {
             throwNull(nameExpCS_5, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::RoundedBracketClause::args\'");
         }
-        final /*@Thrown*/ List<ArgumentCS> args = roundedBrackets_0.getArgs();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<ArgumentCS> args = roundedBrackets_0.getArgs();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_args = idResolver.createOrderedSetOfAll(ORD_CLSSid_ArgumentCS, args);
         /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Argument);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_args.iterator();
@@ -1287,7 +1277,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             accumulator.add(oclAsType_0);
         }
         // property assignments
-        final /*@NonInvalid*/ List<Argument> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Argument.class, collect);
+        final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Argument> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Argument.class, collect);
         oclAsType.getOwnedArguments().addAll(ECORE_collect);
         return true;
     }
@@ -1349,7 +1339,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         if (oclIsKindOf) {
             final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull CallExp oclAsType_0 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_3));
             final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull OperationCallExp oclAsType_1 = ClassUtil.nonNullState((OperationCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclAsType_0, TYP_classes_c_c_OperationCallExp_0));
-            final /*@Thrown*/ List<Argument> args = oclAsType_1.getOwnedArguments();
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Argument> args = oclAsType_1.getOwnedArguments();
             final /*@Thrown*/ example2.classescs.@org.eclipse.jdt.annotation.Nullable PathNameCS aPathNameCS = nameExpCS_6.getName();
             final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable CallExp owningSource = oclAsType_0.getOwningSource();
             if (owningSource == null) {
@@ -1359,7 +1349,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             if (aPathNameCS == null) {
                 throwNull(nameExpCS_6, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
             }
-            final /*@Thrown*/ List<PathElementCS> segments_0 = aPathNameCS.getPath();
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = aPathNameCS.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0));
             final /*@Thrown*/ boolean eq = size.equals(INT_1);
@@ -1469,12 +1459,12 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         else {
             final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull CallExp oclAsType_3 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_3));
             final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull OperationCallExp oclAsType_4 = ClassUtil.nonNullState((OperationCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclAsType_3, TYP_classes_c_c_OperationCallExp_0));
-            final /*@Thrown*/ List<Argument> args_0 = oclAsType_4.getOwnedArguments();
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Argument> args_0 = oclAsType_4.getOwnedArguments();
             final /*@Thrown*/ example2.classescs.@org.eclipse.jdt.annotation.Nullable PathNameCS aPathNameCS_0 = nameExpCS_6.getName();
             if (aPathNameCS_0 == null) {
                 throwNull(nameExpCS_6, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
             }
-            final /*@Thrown*/ List<PathElementCS> segments_1 = aPathNameCS_0.getPath();
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_1 = aPathNameCS_0.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_1);
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_3 = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_1));
             final /*@Thrown*/ boolean eq_1 = size_3.equals(INT_1);
@@ -1712,7 +1702,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         if (aPathNameCS == null) {
             throwNull(operationCS_1, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
         }
-        final /*@Thrown*/ List<PathElementCS> segments_0 = aPathNameCS.getPath();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = aPathNameCS.getPath();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0));
         final /*@Thrown*/ boolean eq = size.equals(INT_1);
@@ -1799,7 +1789,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = operationCS_2.getAst();
         final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation oclAsType = ClassUtil.nonNullState((Operation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Operation_0));
-        final /*@Thrown*/ List<String> params = operationCS_2.getParams();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<String> params = operationCS_2.getParams();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_params = idResolver.createOrderedSetOfAll(ORD_PRIMid_String, params);
         /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Parameter);
         /*@Nullable*/ Iterator<?> ITERATOR_x = BOXED_params.iterator();
@@ -1821,7 +1811,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             accumulator.add(symbol_0);
         }
         // property assignments
-        final /*@NonInvalid*/ List<Parameter> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Parameter.class, collect);
+        final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Parameter> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Parameter.class, collect);
         oclAsType.getOwnedParameters().addAll(ECORE_collect);
         return true;
     }
@@ -1853,7 +1843,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = operationCS_3.getAst();
         final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation oclAsType = ClassUtil.nonNullState((Operation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Operation_0));
-        final /*@Thrown*/ List<NameExpCS> bodyExps = operationCS_3.getBodyExps();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<NameExpCS> bodyExps = operationCS_3.getBodyExps();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_bodyExps = idResolver.createOrderedSetOfAll(ORD_CLSSid_NameExpCS, bodyExps);
         /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_CallExp);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_bodyExps.iterator();
@@ -1877,7 +1867,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             accumulator.add(oclAsType_0);
         }
         // property assignments
-        final /*@NonInvalid*/ List<CallExp> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(CallExp.class, collect);
+        final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<CallExp> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(CallExp.class, collect);
         oclAsType.getOwnedExpressions().addAll(ECORE_collect);
         return true;
     }
@@ -1941,7 +1931,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = packageCS_1.getAst();
         final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Package_0));
-        final /*@Thrown*/ List<ClassCS> ownedClasses = packageCS_1.getOwnedClasses();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<ClassCS> ownedClasses = packageCS_1.getOwnedClasses();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
         /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedClasses.iterator();
@@ -1965,7 +1955,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             accumulator.add(oclAsType_0);
         }
         // property assignments
-        final /*@NonInvalid*/ List<example2.classes.Class> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(example2.classes.Class.class, collect);
+        final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<example2.classes.Class> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(example2.classes.Class.class, collect);
         oclAsType.getOwnedClasses().addAll(ECORE_collect);
         return true;
     }
@@ -1997,7 +1987,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = packageCS_2.getAst();
         final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Package_0));
-        final /*@Thrown*/ List<PackageCS> ownedPackages = packageCS_2.getOwnedPackages();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PackageCS> ownedPackages = packageCS_2.getOwnedPackages();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
         /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedPackages.iterator();
@@ -2020,7 +2010,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             accumulator.add(oclAsType_0);
         }
         // property assignments
-        final /*@NonInvalid*/ List<Package> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, collect);
+        final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, collect);
         oclAsType.getOwnedPackages().addAll(ECORE_collect);
         return true;
     }
@@ -2090,7 +2080,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         if (aPathNameCS == null) {
             throwNull(propertyCS_1, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::PathNameCS::path\'");
         }
-        final /*@Thrown*/ List<PathElementCS> segments_0 = aPathNameCS.getPath();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = aPathNameCS.getPath();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0));
         final /*@Thrown*/ boolean eq = size.equals(INT_1);
@@ -2177,7 +2167,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = rootCS_0.getAst();
         final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Root oclAsType = ClassUtil.nonNullState((Root)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Root_0));
-        final /*@Thrown*/ List<PackageCS> ownedPackages = rootCS_0.getOwnedPackages();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PackageCS> ownedPackages = rootCS_0.getOwnedPackages();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
         /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedPackages.iterator();
@@ -2201,7 +2191,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             accumulator.add(oclAsType_0);
         }
         // property assignments
-        final /*@NonInvalid*/ List<Package> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, collect);
+        final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, collect);
         oclAsType.getOwnedPackages().addAll(ECORE_collect);
         return true;
     }

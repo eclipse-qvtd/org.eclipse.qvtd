@@ -30,17 +30,11 @@ import example5.tderived.D;
 import example5.tderived.TderivedFactory;
 import example5.tderived.TderivedPackage;
 import java.util.Iterator;
-import java.util.List;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
@@ -48,9 +42,7 @@ import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
 
 /**
@@ -278,7 +270,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = x2_1.getAst();
         final /*@Thrown*/ example5.tderived.@org.eclipse.jdt.annotation.NonNull A2 oclAsType = ClassUtil.nonNullState((A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_tderived_c_c_A2_0));
-        final /*@Thrown*/ List<Y> ownsY = x2_1.getOwnsY();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Y> ownsY = x2_1.getOwnsY();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownsY = idResolver.createOrderedSetOfAll(ORD_CLSSid_Y, ownsY);
         /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_B);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownsY.iterator();
@@ -302,7 +294,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
             accumulator.add(oclAsType_0);
         }
         // property assignments
-        final /*@NonInvalid*/ List<B> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(B.class, collect);
+        final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<B> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(B.class, collect);
         oclAsType.getOwnsB().addAll(ECORE_collect);
         return true;
     }
@@ -334,7 +326,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = x2_2.getAst();
         final /*@Thrown*/ example5.tderived.@org.eclipse.jdt.annotation.NonNull A2 oclAsType = ClassUtil.nonNullState((A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_tderived_c_c_A2_0));
-        final /*@Thrown*/ List<W> ownsW = x2_2.getOwnsW();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<W> ownsW = x2_2.getOwnsW();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownsW = idResolver.createOrderedSetOfAll(ORD_CLSSid_W, ownsW);
         /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_D);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownsW.iterator();
@@ -358,7 +350,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
             accumulator.add(oclAsType_0);
         }
         // property assignments
-        final /*@NonInvalid*/ List<D> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(D.class, collect);
+        final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<D> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(D.class, collect);
         oclAsType.getOwnsD().addAll(ECORE_collect);
         return true;
     }
@@ -615,7 +607,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = sRoot_0.getAst();
         final /*@Thrown*/ example5.tbase.@org.eclipse.jdt.annotation.NonNull TRoot oclAsType = ClassUtil.nonNullState((TRoot)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_tbase_c_c_TRoot_0));
-        final /*@Thrown*/ List<X> ownedX = sRoot_0.getOwnedX();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<X> ownedX = sRoot_0.getOwnedX();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedX = idResolver.createOrderedSetOfAll(ORD_CLSSid_X, ownedX);
         /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_A);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedX.iterator();
@@ -639,7 +631,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
             accumulator.add(oclAsType_0);
         }
         // property assignments
-        final /*@NonInvalid*/ List<A> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(A.class, collect);
+        final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<A> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(A.class, collect);
         oclAsType.getOwnedA().addAll(ECORE_collect);
         return true;
     }
@@ -719,7 +711,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = x_1.getAst();
         final /*@Thrown*/ example5.tbase.@org.eclipse.jdt.annotation.NonNull A oclAsType = ClassUtil.nonNullState((A)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_tbase_c_c_A_0));
-        final /*@Thrown*/ List<Y> ownsY = x_1.getOwnsY();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Y> ownsY = x_1.getOwnsY();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownsY = idResolver.createOrderedSetOfAll(ORD_CLSSid_Y, ownsY);
         /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_B);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownsY.iterator();
@@ -743,7 +735,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
             accumulator.add(oclAsType_0);
         }
         // property assignments
-        final /*@NonInvalid*/ List<B> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(B.class, collect);
+        final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<B> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(B.class, collect);
         oclAsType.getOwnsB().addAll(ECORE_collect);
         return true;
     }

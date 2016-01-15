@@ -12,23 +12,16 @@ package cg_qvtimperative_tests._Tree2TallTree;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Class;
-import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.tx.AbstractInvocation;
 import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
-import org.eclipse.ocl.pivot.ids.DataTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
@@ -345,7 +338,7 @@ public class Tree2TallTree extends AbstractTransformer
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
             objectManager.getting(node2tallNode_0, Tree2talltreePackage.Literals.NODE2_TALL_NODE__CHILDREN);
             @SuppressWarnings("null")
-            final /*@Thrown*/ List<Node2TallNode> children_0 = node2tallNode_0.getChildren();
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Node2TallNode> children_0 = node2tallNode_0.getChildren();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue BOXED_children_0 = idResolver.createSetOfAll(SET_CLSSid_Node2TallNode, children_0);
             // variable assignments
             @SuppressWarnings("null")
@@ -428,7 +421,7 @@ public class Tree2TallTree extends AbstractTransformer
             node2tallNode_0.setTallNode(tallNode);
             objectManager.assigned(node2tallNode_0, Tree2talltreePackage.Literals.NODE2_TALL_NODE__TALL_NODE, tallNode);
             tallNode.setName(name);
-            final /*@NonInvalid*/ List<TallNode> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(TallNode.class, collect);
+            final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<TallNode> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(TallNode.class, collect);
             tallNode.getChildren().addAll(ECORE_collect);
             final int ECORE_symbol_0 = ValueUtil.intValueOf(symbol_0);
             tallNode.setHeight(ECORE_symbol_0);
