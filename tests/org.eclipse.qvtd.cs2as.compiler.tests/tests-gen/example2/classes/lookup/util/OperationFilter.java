@@ -2,26 +2,20 @@ package example2.classes.lookup.util;
 
 import java.util.List;
 
-
 import example2.classes.Argument;
-import example2.classes.NamedElement;
 import example2.classes.Operation;
 import example2.classes.Parameter;
 
-public class OperationFilter implements ClassesLookupFilter {
+public class OperationFilter extends AbstractClassesLookupFilter<Operation> {
 
 	private List<Argument> args;
 	
 	public OperationFilter(List<Argument> args) {
+		super(Operation.class);
 		this.args = args;
 	}
 	
-	@Override
-	public boolean matches(NamedElement namedElement) {
-		return namedElement instanceof Operation ? matches((Operation) namedElement) : false;
-	}
-	
-	private boolean matches(Operation op) {
+	protected boolean _matches(Operation op) {
 		// OCL expression TO be generated
 		if (!(args.size() == op.getOwnedParameters().size())) {
 			return true;
