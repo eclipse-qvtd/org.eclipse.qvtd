@@ -4,8 +4,8 @@
     modelPluginID="org.eclipse.qvtd.cs2as.compiler.tests" templateDirectory="" modelName="Example2Environment"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="8.0"
-    copyrightFields="false" usedGenPackages="Classes.genmodel#//classes" operationReflection="true"
-    importOrganizing="true" pluginKey="">
+    copyrightFields="false" usedGenPackages="Classes.genmodel#//classes platform:/plugin/org.eclipse.ocl.pivot/model/oclstdlib.genmodel#//oclstdlib"
+    operationReflection="true" importOrganizing="true" pluginKey="">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Delegates" value="false"/>
     <details key="Use Null Annotations" value="true"/>

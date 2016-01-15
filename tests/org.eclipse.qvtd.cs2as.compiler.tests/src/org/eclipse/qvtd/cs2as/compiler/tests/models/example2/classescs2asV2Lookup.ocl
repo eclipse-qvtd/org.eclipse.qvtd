@@ -100,7 +100,6 @@ def : _env(child : ocl::OclElement) : lookup::LookupEnvironment =
 		.addElements(let allSuperClasses = self->closure(superClass)
 					in let properties : Bag(NamedElement) = allSuperClasses->collect(ownedProperties)
 					in properties->includingAll(allSuperClasses.ownedOperations)
-					->asOrderedSet() -- FIXME
 		)
 		.nestedEnv()
 		.addElements(ownedOperations)
