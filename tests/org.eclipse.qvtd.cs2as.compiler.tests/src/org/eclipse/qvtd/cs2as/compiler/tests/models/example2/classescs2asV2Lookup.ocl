@@ -99,8 +99,8 @@ def : _qualified_env() : lookup::LookupEnvironment =
 def : _env(child : ocl::OclElement) : lookup::LookupEnvironment =
 	parentEnv().nestedEnv()
 		.addElements(let allSuperClasses = self->closure(superClass)
-					in allSuperClasses->collect(ownedProperties)
-					->includingAll(allSuperClasses.ownedOperations)
+					in let properties : Bag(NamedElement) = allSuperClasses->collect(ownedProperties)
+					in properties->includingAll(allSuperClasses.ownedOperations)
 					->asOrderedSet() -- FIXME
 		)
 		.nestedEnv()
