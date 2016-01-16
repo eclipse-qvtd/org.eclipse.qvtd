@@ -237,6 +237,26 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 	
 	@Test
+	public void testNewExample1_Interpreted() throws Exception {
+		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
+		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
+		loadGenModels(baseURI, "SourceMM1.genmodel", "TargetMM1.genmodel");
+		
+		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
+		URI txURI = qvtiTransf.eResource().getURI();
+		
+		myQVT.dispose();
+		myQVT = createQVT();
+		loadEcoreFile(baseURI.appendSegment("SourceMM1.ecore"), SourcePackage.eINSTANCE);
+		loadEcoreFile(baseURI.appendSegment("TargetMM1.ecore"), TargetPackage.eINSTANCE);
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
+//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3");
+	}
+	
+	@Test
 	public void testExample2_Interpreted() throws Exception {
 		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
@@ -435,6 +455,20 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	}
 
+	@Test
+	public void testNewExample1_CG() throws Exception {
+		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
+		loadGenModels(baseURI, "SourceMM1.genmodel", "TargetMM1.genmodel");
+		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
+				"example1.target.lookup.util.TargetLookupSolver",
+				"example1.target.lookup.util.TargetLookupResult",
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model3");
+	}
 
 	@Test
 	public void testExample2_CG() throws Exception {

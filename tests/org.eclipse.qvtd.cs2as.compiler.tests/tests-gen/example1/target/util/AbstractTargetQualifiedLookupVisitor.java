@@ -9,18 +9,17 @@
 
 package example1.target.util;
 
-import java.util.List;
-
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.TypeId;
-
 import example1.target.B;
 import example1.target.C;
 import example1.target.TargetPackage;
 import example1.target.lookup.EnvironmentPackage;
 import example1.target.lookup.LookupEnvironment;
+import example1.target.util.AbstractTargetCommonLookupVisitor;
+import example1.target.util.Visitor;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.TypeId;
 
 public class AbstractTargetQualifiedLookupVisitor
 	extends AbstractTargetCommonLookupVisitor
@@ -60,7 +59,7 @@ public class AbstractTargetQualifiedLookupVisitor
     @Override
     public /*@NonInvalid*/ LookupEnvironment visitA1(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A1 element_5) {
         @SuppressWarnings("null")
-        final /*@Thrown*/ List<B> ownsB = element_5.getOwnsB();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<B> ownsB = element_5.getOwnsB();
         @SuppressWarnings("null")
         final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements((EList<B>)ownsB);
         return addElements;
@@ -74,7 +73,7 @@ public class AbstractTargetQualifiedLookupVisitor
     @Override
     public /*@NonInvalid*/ LookupEnvironment visitA2(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A2 element_6) {
         @SuppressWarnings("null")
-        final /*@Thrown*/ List<C> ownsC = element_6.getOwnsC();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<C> ownsC = element_6.getOwnsC();
         @SuppressWarnings("null")
         final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements((EList<C>)ownsC);
         return addElements;

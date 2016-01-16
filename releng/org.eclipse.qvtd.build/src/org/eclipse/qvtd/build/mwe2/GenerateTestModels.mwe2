@@ -21,7 +21,7 @@ Workflow {
     bean = ProjectMapSetup{ resourceSet = resourceSet}
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
     
-//  component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample1Models {}
+    component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample1Models {}
     component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample2Models {}
     component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample3Models {}
     component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample4Models {}

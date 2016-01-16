@@ -2,3 +2,10 @@
 /Source2Target.oclas
 /Source2TargetDisambiguation.ocl.oclas
 /Source2TargetSchedule.xmi
+/*.dot
+/*.graphml
+/Source2Target.qvtias
+/Source2Target.qvtp.qvtias
+/Source2TargetDependencyGraph.xmi
+/SourceMM1ContainmentTree.xmi
+/TargetMM1ContainmentTree.xmi
