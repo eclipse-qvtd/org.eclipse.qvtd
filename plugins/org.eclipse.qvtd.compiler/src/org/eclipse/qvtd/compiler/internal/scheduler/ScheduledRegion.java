@@ -758,13 +758,7 @@ public class ScheduledRegion extends AbstractRegion
 			//
 			for (NavigationEdge predicatedEdge : region.getPredicatedNavigationEdges()) {
 				Node predicatedNode = predicatedEdge.getTarget();
-				if (!predicatedNode.isLoaded() && !predicatedNode.isConstant() && !isOnlyCastOrRecursed(predicatedNode)) {
-//					Iterable<Connection> passedConnections = predicatedNode.getIncomingPassedConnections();
-//					Connection usedConnection = predicatedNode.getIncomingUsedConnection();
-//					boolean isNew = (usedConnection == null) && Iterables.isEmpty(passedConnections);
-//					if (!isNew) {		// FIXME could be multiple
-//						isNew = (usedConnection == null) && Iterables.isEmpty(passedConnections);
-//					}		// FIXME could be multiple
+				if (predicatedEdge.isNavigation() && !predicatedEdge.isCast()) {			// FIXME isCast does not need to be isNavigation now that it can be isNavigable
 					PropertyDatum propertyDatum = getPropertyDatum(predicatedEdge);
 					List<NavigationEdge> realizedEdges = producedPropertyDatum2realizedEdges.get(propertyDatum);
 					if (realizedEdges != null) {
@@ -783,12 +777,43 @@ public class ScheduledRegion extends AbstractRegion
 								realizingNodes.add(realizedNode);
 							}
 						}
-						Connection predicatedConnection = getConnection(realizingNodes, predicatedNode.getClassDatumAnalysis());
-						if (!Iterables.contains(predicatedConnection.getTargets(), predicatedNode)) {
-							predicatedConnection.addUsedTargetNode(predicatedNode, false);
+						boolean isCast = false;
+						boolean isOther = false;
+						boolean isRecursion = false;
+						for (Edge outgoingEdge : predicatedNode.getOutgoingEdges()) {
+							if (outgoingEdge.isCast()) {
+								isCast = true;
+								Node castNode = outgoingEdge.getTarget();
+								assert !castNode.isConstant();
+								assert !castNode.isLoaded();
+								Connection predicatedConnection = getConnection(realizingNodes, castNode.getClassDatumAnalysis());
+								if (!Iterables.contains(predicatedConnection.getTargets(), castNode)) {
+									predicatedConnection.addUsedTargetNode(castNode, false);
+								}
+							}
+							else if (outgoingEdge.isRecursion()) {
+								isRecursion = true;
+							}
+							else {
+								isOther = true;
+							}
+						}
+						if (isOther || !(isCast || isRecursion)) {
+	//						Iterable<Connection> passedConnections = predicatedNode.getIncomingPassedConnections();
+	//						Connection usedConnection = predicatedNode.getIncomingUsedConnection();
+	//						boolean isNew = (usedConnection == null) && Iterables.isEmpty(passedConnections);
+	//						if (!isNew) {		// FIXME could be multiple
+	//							isNew = (usedConnection == null) && Iterables.isEmpty(passedConnections);
+	//						}		// FIXME could be multiple
+							Connection predicatedConnection = getConnection(realizingNodes, predicatedNode.getClassDatumAnalysis());
+							if (!Iterables.contains(predicatedConnection.getTargets(), predicatedNode)) {
+								predicatedConnection.addUsedTargetNode(predicatedNode, false);
+							}
 						}
 					}
 				}
+//				if (!predicatedNode.isLoaded() && !predicatedNode.isConstant() && !isOnlyCastOrRecursed(predicatedNode)) {
+//				}
 			}
 		}
 	}
@@ -1513,7 +1538,7 @@ public class ScheduledRegion extends AbstractRegion
 		if (connection != null) {
 			return connection;
 		}
-		String joinName = "-join-" + classDatumAnalysis.getCompleteClass().getName() + "-" + nodes2connection.size();
+		String joinName = "«join-" + classDatumAnalysis.getCompleteClass().getName() + "-" + nodes2connection.size() + "»";
 		connection = new BasicConnection(this, sources, joinName);
 		nodes2connection.put(sources, connection);
 		return connection;
@@ -1593,6 +1618,7 @@ public class ScheduledRegion extends AbstractRegion
 	}
 
 	protected @Nullable PropertyDatum getPropertyDatum(@NonNull NavigationEdge producedEdge) {
+		assert !producedEdge.isCast();				// Handled by caller
 		Property property = producedEdge.getProperty();
 		ClassDatumAnalysis classDatumAnalysis = producedEdge.getSource().getClassDatumAnalysis();
 		ClassDatum classDatum = classDatumAnalysis.getClassDatum();

@@ -110,8 +110,8 @@ public class Connections
 	}
 
 	/**
-	 * A MANDATORY connection passes a used input that must be fully computed before use. This is typically for a
-	 * collection,m since it is not possible to determine when a last partial addition is the last, therefore all
+	 * A MANDATORY connection 'passes' a used input that must be fully computed before use. This is typically for a
+	 * collection, since it is not possible to determine when a last partial addition is the last, therefore all
 	 * additions must occur before any access.
 	 */
 	public static final @NonNull ConnectionRole MANDATORY = new MandatoryConnectionRole();		
@@ -123,8 +123,8 @@ public class Connections
 	public static final @NonNull ConnectionRole PASSED = new PassedConnectionRole();		
 	
 	/**
-	 * A MANDATORY connection passes a used input that is beneficially bit not necessarily computed before use. 
-	 * If not computed before use run-time overheads are incurred to defer reads until writes have occurred.
+	 * A PREFERRED connection 'passes' a used input that is beneficially but not necessarily computed before use. 
+	 * If not computed before use, run-time overheads are incurred to defer reads until writes have occurred.
 	 */
 	public static final @NonNull ConnectionRole PREFERRED = new PreferredConnectionRole();
 }

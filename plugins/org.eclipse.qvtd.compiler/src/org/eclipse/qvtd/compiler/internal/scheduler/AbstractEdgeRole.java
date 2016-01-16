@@ -36,7 +36,7 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 
 	@Override
 	public @Nullable String getStyle() {
-		return null;
+		return isNavigable() ? null : "dashed";
 	}
 
 	@Override
@@ -61,6 +61,11 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 
 	@Override
 	public boolean isMergeable() {
+		return false;
+	}
+
+	@Override
+	public boolean isNavigable() {
 		return false;
 	}
 

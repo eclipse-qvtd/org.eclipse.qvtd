@@ -143,11 +143,6 @@ public abstract class AbstractEdge implements Edge
 		return edgeRole.isCast();
 	}
 
-//	@Override
-//	public boolean isComposedOrdering() {
-//		return edgeRole.isComposedOrdering();
-//	}
-
 	@Override
 	public boolean isComputation() {
 		return edgeRole.isComputation();
@@ -157,11 +152,6 @@ public abstract class AbstractEdge implements Edge
 	public boolean isConstant() {
 		return edgeRole.isConstant();
 	}
-	
-//	@Override
-//	public boolean isConsumedOrdering() {
-//		return edgeRole.isConsumedOrdering();
-//	}
 
 	@Override
 	public boolean isContainer() {
@@ -189,14 +179,14 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	@Override
+	public boolean isNavigable() {
+		return edgeRole.isNavigable();
+	}
+
+	@Override
 	public boolean isNavigation() {
 		return edgeRole.isNavigation();
 	}
-	
-//	@Override
-//	public boolean isOrdering() {
-//		return isComposedOrdering() || isConsumedOrdering();
-//	}
 
 	@Override
 	public boolean isPredicated() {

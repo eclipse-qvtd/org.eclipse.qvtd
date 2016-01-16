@@ -513,10 +513,10 @@ public class Nodes
 				return true;
 			}
 
-			@Override
-			public boolean isNavigable() {
-				return true;
-			}
+//			@Override
+//			public boolean isNavigable() {
+//				return true;
+//			}
 		}
 		
 		public static final @NonNull AbstractVariableNodeRole CONSTANT_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT);
@@ -603,11 +603,11 @@ public class Nodes
 		}
 
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region) {
-			return createSimpleNode(region, "-null-", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
+			return createSimpleNode(region, "«null»", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
 		}
 
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull TypedElement typedElement) {
-			return createSimpleNode(region, "-null-", typedElement);
+			return createSimpleNode(region, "«null»", typedElement);
 		}
 		
 		@Override
@@ -642,11 +642,6 @@ public class Nodes
 			@Override
 			public @NonNull String getShape() {
 				return "ellipse";
-			}
-
-			@Override
-			public @NonNull String getStyle() {
-				return "dashed";
 			}
 
 			@Override
@@ -793,8 +788,11 @@ public class Nodes
 	{
 		private static abstract class AbstractStepNodeRole extends AbstractSimpleNodeRole
 		{
-			protected AbstractStepNodeRole(@NonNull Phase phase) {
+			private final boolean isNavigable;
+			
+			protected AbstractStepNodeRole(@NonNull Phase phase, boolean isNavigable) {
 				super(phase);
+				this.isNavigable = isNavigable;
 			}
 
 			@Override
@@ -809,19 +807,19 @@ public class Nodes
 
 			@Override
 			public boolean isNavigable() {
-				return true;
+				return isNavigable;
 			}
 
 			@Override
 			public String toString() {
-				return getClass().getSimpleName();
+				return phase + (isNavigable ? "-NAVIGABLE-" : "-UNNAVIGABLE-") + getClass().getSimpleName();
 			}
 		}
 
 		private static final class LoadedStepNodeRole extends AbstractStepNodeRole
 		{
-			protected LoadedStepNodeRole() {
-				super(Role.Phase.LOADED);
+			protected LoadedStepNodeRole(boolean isNavigable) {
+				super(Role.Phase.LOADED, isNavigable);
 			}
 
 			@Override
@@ -835,8 +833,8 @@ public class Nodes
 
 		public static final class PredicatedStepNodeRole extends AbstractStepNodeRole
 		{
-			protected PredicatedStepNodeRole() {
-				super(Role.Phase.PREDICATED);
+			protected PredicatedStepNodeRole(boolean isNavigable) {
+				super(Role.Phase.PREDICATED, isNavigable);
 			}
 
 			@Override
@@ -851,14 +849,23 @@ public class Nodes
 			}
 		}
 
-		private static final @NonNull LoadedStepNodeRole LOADED_STEP = new LoadedStepNodeRole();
-		public static final @NonNull PredicatedStepNodeRole PREDICATED_STEP = new PredicatedStepNodeRole();
+		private static final @NonNull LoadedStepNodeRole LOADED_NAVIGABLE_STEP = new LoadedStepNodeRole(true);
+		private static final @NonNull LoadedStepNodeRole LOADED_UNNAVIGABLE_STEP = new LoadedStepNodeRole(false);
+		private static final @NonNull PredicatedStepNodeRole PREDICATED_NAVIGABLE_STEP = new PredicatedStepNodeRole(true);
+		private static final @NonNull PredicatedStepNodeRole PREDICATED_UNNAVIGABLE_STEP = new PredicatedStepNodeRole(false);
 		
+		private final @Nullable Boolean isNavigable;
+
+		public StepNodeRoleFactory(@Nullable Boolean isNavigable) {
+			this.isNavigable = isNavigable;
+		}
+
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name,
 				@NonNull CallExp callExp, @NonNull SimpleNode sourceNode) {
+			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
 			if (sourceNode.isPredicated() || domainUsage.isEnforceable() ) {
-				return PREDICATED_STEP.createSimpleNode(region, name, callExp);
+				return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
 			}
 			else {
 				boolean isDirty = false;
@@ -867,10 +874,10 @@ public class Nodes
 					isDirty = region.getSchedulerConstants().isDirty(referredProperty);
 				}
 				if (!isDirty) {
-					return LOADED_STEP.createSimpleNode(region, name, callExp);
+					return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
 				}
 				else {
-					return PREDICATED_STEP.createSimpleNode(region, name, callExp);
+					return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
 				}
 			}
 		}
@@ -887,7 +894,7 @@ public class Nodes
 			org.eclipse.ocl.pivot.Class booleanType = schedulerConstants.getStandardLibrary().getBooleanType();
 			DomainUsage primitiveUsage = schedulerConstants.getDomainAnalysis().getPrimitiveUsage();
 			ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel()));
-			return createSimpleNode(region, "-true-", classDatumAnalysis);
+			return createSimpleNode(region, "«true»", classDatumAnalysis);
 		}
 		
 		@Override
@@ -934,13 +941,15 @@ public class Nodes
 	public static final @NonNull GuardNodeRoleFactory GUARD = new GuardNodeRoleFactory();
 	public static final @NonNull IteratorNodeRoleFactory ITERATOR = new IteratorNodeRoleFactory();
 	public static final @NonNull LetNodeRoleFactory LET = new LetNodeRoleFactory();
+	public static final @NonNull StepNodeRoleFactory NAVIGABLE_STEP = new StepNodeRoleFactory(true);
 	public static final @NonNull NullNodeRole NULL = new NullNodeRole();
 	public static final @NonNull OperationNodeRoleFactory OPERATION = new OperationNodeRoleFactory();
 	public static final @NonNull AbstractVariableNodeRole PARAMETER = new ParameterNodeRole();
 	public static final AttributeNodeRoleFactory.@NonNull RealizedAttributeNodeRole REALIZED_ATTRIBUTE = new AttributeNodeRoleFactory.RealizedAttributeNodeRole();
 	public static final @NonNull AbstractVariableNodeRole REALIZED_VARIABLE = new RealizedVariableNodeRole();
-	public static final @NonNull StepNodeRoleFactory STEP = new StepNodeRoleFactory();
+	public static final @NonNull StepNodeRoleFactory STEP = new StepNodeRoleFactory(null);
 	public static final @NonNull TrueNodeRole TRUE = new TrueNodeRole();
 	public static final @NonNull NodeRole UNKNOWN = new UnknownNodeRole();
+	public static final @NonNull StepNodeRoleFactory UNNAVIGABLE_STEP = new StepNodeRoleFactory(false);
 	public static final @NonNull AbstractVariableNodeRole UNREALIZED_VARIABLE = new UnrealizedVariableNodeRole();
 }

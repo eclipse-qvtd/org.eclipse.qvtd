@@ -38,11 +38,11 @@ public class RootRegion extends AbstractRegion implements SimpleRegion
 		SchedulerConstants schedulerConstants = superRegion.getSchedulerConstants();
 		StandardLibrary standardLibrary = schedulerConstants.getStandardLibrary();
 		org.eclipse.ocl.pivot.Class collectionType = standardLibrary.getSetType();
-		this.root2childrenProperty = QVTimperativeUtil.createProperty("-root-", collectionType, true);
-		this.others2childrenProperty = QVTimperativeUtil.createProperty("-others-", collectionType, true);
+		this.root2childrenProperty = QVTimperativeUtil.createProperty("«root»", collectionType, true);
+		this.others2childrenProperty = QVTimperativeUtil.createProperty("«others»", collectionType, true);
 		TypedModel primitiveTypeModel = schedulerConstants.getDomainAnalysis().getPrimitiveTypeModel();
-		this.rootNode = Nodes.COMPOSING.createSimpleNode(this, "-root-", schedulerConstants.getClassDatumAnalysis(standardLibrary.getOclVoidType(), primitiveTypeModel));
-		this.othersNode = Nodes.COMPOSING.createSimpleNode(this, "-container-", schedulerConstants.getClassDatumAnalysis(standardLibrary.getOclAnyType(), primitiveTypeModel));
+		this.rootNode = Nodes.COMPOSING.createSimpleNode(this, "«root»", schedulerConstants.getClassDatumAnalysis(standardLibrary.getOclVoidType(), primitiveTypeModel));
+		this.othersNode = Nodes.COMPOSING.createSimpleNode(this, "«container»", schedulerConstants.getClassDatumAnalysis(standardLibrary.getOclAnyType(), primitiveTypeModel));
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class RootRegion extends AbstractRegion implements SimpleRegion
 		org.eclipse.ocl.pivot.Class elementType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
 		CollectionType selectedCollectionType = getSchedulerConstants().getEnvironmentFactory().getCompleteEnvironment().getCollectionType(collectionType, elementType, true,  null, null);
 		ClassDatumAnalysis selectedClassDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(selectedCollectionType, classDatumAnalysis.getTypedModel());
-		SimpleNode childNode = Nodes.COMPOSED.createSimpleNode(this, "-child-" + classDatumAnalysis.getCompleteClass().getName() + "-", selectedClassDatumAnalysis);
+		SimpleNode childNode = Nodes.COMPOSED.createSimpleNode(this, "«child-" + classDatumAnalysis.getCompleteClass().getName() + "»", selectedClassDatumAnalysis);
 		for (Property property : classDatumAnalysis.getCompleteClass().getProperties((FeatureFilter)null)) {
 			Property oppositeProperty = property.getOpposite();
 			if ((oppositeProperty != null) && oppositeProperty.isIsComposite()) {

@@ -64,7 +64,7 @@ public class OperationRegion extends AbstractMappingRegion
 		SimpleNode extraNode;
 		extraNode = selfNode;
 		//
-		resultNode = Nodes.STEP.createSimpleNode(this, "result", operationCallExp, extraNode);				
+		resultNode = Nodes.UNNAVIGABLE_STEP.createSimpleNode(this, "result", operationCallExp, extraNode);				
 		Edges.RESULT.createSimpleEdge(this, extraNode, null, resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();

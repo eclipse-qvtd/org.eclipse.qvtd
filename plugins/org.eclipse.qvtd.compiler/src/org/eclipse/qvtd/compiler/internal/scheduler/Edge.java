@@ -114,6 +114,11 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable
 	boolean isMergeable();
 	
 	/**
+	 * Return true if this edge is part of the to-one navigation from a head.
+	 */
+	boolean isNavigable();
+	
+	/**
 	 * Return true if this edge is a property navigation.
 	 */
 	boolean isNavigation();

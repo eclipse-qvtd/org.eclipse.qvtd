@@ -31,7 +31,7 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 
 	@Override
 	public @Nullable String getStyle() {
-		return null;
+		return isNavigable() || isRealized() ? null : "dashed";
 	}
 
 	@Override

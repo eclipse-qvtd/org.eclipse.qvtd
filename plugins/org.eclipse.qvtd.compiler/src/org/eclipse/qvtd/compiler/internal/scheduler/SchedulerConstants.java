@@ -208,7 +208,7 @@ public abstract class SchedulerConstants
 	public @NonNull Property getCastProperty(@NonNull Type type) {
 		Property castProperty = type2castProperty.get(type);
 		if (castProperty == null) {
-			castProperty = QVTimperativeUtil.createProperty("-cast-\\n" + type.toString(), type, true);
+			castProperty = QVTimperativeUtil.createProperty("«cast»\\n" + type.toString(), type, true);
 			type2castProperty.put(type, castProperty);
 		}
 		return castProperty;

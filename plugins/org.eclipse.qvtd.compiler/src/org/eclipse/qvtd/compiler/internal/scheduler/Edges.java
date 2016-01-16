@@ -43,8 +43,11 @@ public class Edges
 	
 	protected abstract static class AbstractNavigationEdgeRole extends AbstractEdgeRole implements EdgeRole.Navigation
 	{
-		protected AbstractNavigationEdgeRole(@NonNull Phase phase) {
+		private final boolean isNavigable;
+
+		protected AbstractNavigationEdgeRole(@NonNull Phase phase, boolean isNavigable) {
 			super(phase);
+			this.isNavigable = isNavigable;
 		}
 
 		@Override
@@ -71,10 +74,20 @@ public class Edges
 		public boolean isMergeable() {
 			return true;
 		}
-	
+		
 		@Override
-		public boolean isNavigation() {
+		public final boolean isNavigable() {
+			return isNavigable;
+		}
+		
+		@Override
+		public final boolean isNavigation() {
 			return true;
+		}
+
+		@Override
+		public String toString() {
+			return phase + (isNavigable ? "-NAVIGABLE-" : "-UNNAVIGABLE-") + getClass().getSimpleName();
 		}
 	}
 	
@@ -84,11 +97,6 @@ public class Edges
 		{
 			protected ArgumentEdgeRole(@NonNull Phase phase) {
 				super(phase);
-			}
-
-			@Override
-			public @NonNull String getStyle() {
-				return "dashed";
 			}
 
 			@Override
@@ -130,8 +138,8 @@ public class Edges
 	{
 		private static class CastEdgeRole extends AbstractNavigationEdgeRole
 		{
-			protected CastEdgeRole(@NonNull Phase phase) {
-				super(phase);
+			protected CastEdgeRole(@NonNull Phase phase, boolean isNavigable) {
+				super(phase, isNavigable);
 			}
 
 			@Override
@@ -140,15 +148,24 @@ public class Edges
 			}
 		}
 
-		private static final EdgeRole.@NonNull Navigation LOADED_CAST = new CastEdgeRole(Role.Phase.LOADED);
-		private static final EdgeRole.@NonNull Navigation PREDICATED_CAST = new CastEdgeRole(Role.Phase.PREDICATED);
+		private final EdgeRole.@NonNull Navigation LOADED_NAVIGABLE_CAST = new CastEdgeRole(Role.Phase.LOADED, true);
+		private final EdgeRole.@NonNull Navigation LOADED_UNNAVIGABLE_CAST = new CastEdgeRole(Role.Phase.LOADED, false);
+		private final EdgeRole.@NonNull Navigation PREDICATED_NAVIGABLE_CAST = new CastEdgeRole(Role.Phase.PREDICATED, true);
+		private final EdgeRole.@NonNull Navigation PREDICATED_UNNAVIGABLE_CAST = new CastEdgeRole(Role.Phase.PREDICATED, false);
+
+		private final @Nullable Boolean isNavigable;
+
+		public CastEdgeRoleFactory(@Nullable Boolean isNavigable) {
+			this.isNavigable = isNavigable;
+		}
 
 		public @NonNull SimpleEdge createSimpleEdge(@NonNull SimpleRegion region, @NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
+			boolean resolvedNavigation = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			if (sourceNode.isLoaded() && targetNode.isLoaded()) {
-				return new SimpleNavigationEdge(LOADED_CAST, region, sourceNode, source2targetProperty, targetNode);
+				return new SimpleNavigationEdge(resolvedNavigation ? LOADED_NAVIGABLE_CAST : LOADED_UNNAVIGABLE_CAST, region, sourceNode, source2targetProperty, targetNode);
 			}
 			else if (sourceNode.isPredicated() || targetNode.isPredicated()){
-				return new SimpleNavigationEdge(PREDICATED_CAST, region, sourceNode, source2targetProperty, targetNode);
+				return new SimpleNavigationEdge(resolvedNavigation ? PREDICATED_NAVIGABLE_CAST : PREDICATED_UNNAVIGABLE_CAST, region, sourceNode, source2targetProperty, targetNode);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -156,32 +173,10 @@ public class Edges
 		}
 	}
 
-/*	private static final class ComposedOrderingEdgeRole extends AbstractEdgeRole
-	{
-		protected ComposedOrderingEdgeRole() {
-			super(Phase.OTHER);
-		}
-
-		@Override
-		public @NonNull String getColor() {
-			return ORDERING_COLOR;
-		}
-
-		@Override
-		public @NonNull String getStyle() {
-			return "dashed";
-		}
-
-		@Override
-		public boolean isComposedOrdering() {
-			return true;
-		}
-	} */
-
 	private static final class CompositionEdgeRole extends AbstractNavigationEdgeRole
 	{
 		protected CompositionEdgeRole() {
-			super(Phase.LOADED);
+			super(Phase.LOADED, true);
 		}
 
 		@Override
@@ -190,32 +185,10 @@ public class Edges
 		}
 	}
 
-/*	private static final class ConsumedOrderingEdgeRole extends AbstractEdgeRole
-	{
-		protected ConsumedOrderingEdgeRole() {
-			super(Phase.OTHER);
-		}
-
-		@Override
-		public @NonNull String getColor() {
-			return ORDERING_COLOR;
-		}
-
-		@Override
-		public @NonNull String getStyle() {
-			return "dashed";
-		}
-
-		@Override
-		public boolean isConsumedOrdering() {
-			return true;
-		}
-	} */
-
 	private static final class ContainerEdgeRole extends AbstractNavigationEdgeRole
 	{
 		protected ContainerEdgeRole() {
-			super(Phase.LOADED);
+			super(Phase.LOADED, true);
 		}
 		
 		@Override
@@ -236,16 +209,6 @@ public class Edges
 		{
 			protected IteratedEdgeRole(@NonNull Phase phase) {
 				super(phase);
-			}
-
-			@Override
-			public boolean isCast() {
-				return true;
-			}
-
-			@Override
-			public boolean isMergeable() {
-				return true;
 			}
 		}
 
@@ -273,7 +236,7 @@ public class Edges
 		}
 	}
 
-	public static final class IteratingEdgeRoleFactory
+/*	public static final class IteratingEdgeRoleFactory
 	{
 		private static class IteratingEdgeRole extends AbstractComputationEdgeRole
 		{
@@ -314,21 +277,21 @@ public class Edges
 				throw new UnsupportedOperationException();
 			}
 		}
-	}
+	} */
 
 	public static final class NavigationEdgeRoleFactory
 	{
 		private static class NavigationEdgeRole extends AbstractNavigationEdgeRole
 		{
-			protected NavigationEdgeRole(@NonNull Phase phase) {
-				super(phase);
+			protected NavigationEdgeRole(@NonNull Phase phase, boolean isNavigable) {
+				super(phase, isNavigable);
 			}
 		}
 
 		private static final class PredicatedNavigationEdgeRole extends NavigationEdgeRole
 		{
-			protected PredicatedNavigationEdgeRole() {
-				super(Phase.PREDICATED);
+			protected PredicatedNavigationEdgeRole(boolean isNavigable) {
+				super(Phase.PREDICATED, isNavigable);
 			}
 
 			@Override
@@ -339,29 +302,39 @@ public class Edges
 				return super.merge(edgeRole);
 			}
 
-			@Override
-			public String toString() {
-				return getClass().getSimpleName();
-			}
+//			@Override
+//			public String toString() {
+//				return getClass().getSimpleName();
+//			}
 		}
 
-		private static final @NonNull NavigationEdgeRole CONSTANT_NAVIGATION = new NavigationEdgeRole(Role.Phase.CONSTANT);
-		private static final @NonNull NavigationEdgeRole LOADED_NAVIGATION = new NavigationEdgeRole(Role.Phase.LOADED);
-		private static final @NonNull NavigationEdgeRole PREDICATED_NAVIGATION = new PredicatedNavigationEdgeRole();
+		private static final @NonNull NavigationEdgeRole CONSTANT_NAVIGABLE_NAVIGATION = new NavigationEdgeRole(Role.Phase.CONSTANT, true);
+		private static final @NonNull NavigationEdgeRole CONSTANT_UNNAVIGABLE_NAVIGATION = new NavigationEdgeRole(Role.Phase.CONSTANT, false);
+		private static final @NonNull NavigationEdgeRole LOADED_NAVIGABLE_NAVIGATION = new NavigationEdgeRole(Role.Phase.LOADED, true);
+		private static final @NonNull NavigationEdgeRole LOADED_UNNAVIGABLE_NAVIGATION = new NavigationEdgeRole(Role.Phase.LOADED, false);
+		private static final @NonNull NavigationEdgeRole PREDICATED_NAVIGABLE_NAVIGATION = new PredicatedNavigationEdgeRole(true);
+		private static final @NonNull NavigationEdgeRole PREDICATED_UNNAVIGABLE_NAVIGATION = new PredicatedNavigationEdgeRole(false);
+
+		private final @Nullable Boolean isNavigable;
+
+		public NavigationEdgeRoleFactory(@Nullable Boolean isNavigable) {
+			this.isNavigable = isNavigable;
+		}
 
 		public @NonNull SimpleEdge createSimpleEdge(@NonNull SimpleRegion region, @NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
+			boolean resolvedNavigation = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			if (sourceNode.isRealized() || targetNode.isRealized()) {
 //				throw new UnsupportedOperationException();
 				return new SimpleNavigationEdge(REALIZED, region, sourceNode, source2targetProperty, targetNode);
 			}
 			else if (sourceNode.isPredicated() || targetNode.isPredicated()) {
-				return new SimpleNavigationEdge(PREDICATED_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
+				return new SimpleNavigationEdge(resolvedNavigation ? PREDICATED_NAVIGABLE_NAVIGATION : PREDICATED_UNNAVIGABLE_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
 			}
 			else if (sourceNode.isLoaded() || targetNode.isLoaded()) {
-				return new SimpleNavigationEdge(LOADED_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
+				return new SimpleNavigationEdge(resolvedNavigation ? LOADED_NAVIGABLE_NAVIGATION : LOADED_UNNAVIGABLE_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
 			}
 			else if (sourceNode.isConstant() || targetNode.isConstant()) {
-				return new SimpleNavigationEdge(CONSTANT_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
+				return new SimpleNavigationEdge(resolvedNavigation ? CONSTANT_NAVIGABLE_NAVIGATION : CONSTANT_UNNAVIGABLE_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -372,12 +345,12 @@ public class Edges
 	private static final class RealizedNavigationEdgeRole extends AbstractNavigationEdgeRole
 	{
 		protected RealizedNavigationEdgeRole() {
-			super(Phase.REALIZED);
+			super(Phase.REALIZED, true);
 		}
 
 		@Override
 		public @NonNull EdgeRole merge(@NonNull EdgeRole edgeRole) {
-			if (edgeRole == NavigationEdgeRoleFactory.PREDICATED_NAVIGATION) {
+			if (edgeRole == NavigationEdgeRoleFactory.PREDICATED_NAVIGABLE_NAVIGATION) {
 				return this;
 			}
 			return super.merge(edgeRole);
@@ -478,29 +451,16 @@ public class Edges
 	}
 	
 	public static final @NonNull ArgumentEdgeRoleFactory ARGUMENT = new ArgumentEdgeRoleFactory();
-	public static final @NonNull CastEdgeRoleFactory CAST = new CastEdgeRoleFactory();
+	public static final @NonNull CastEdgeRoleFactory CAST = new CastEdgeRoleFactory(null);
 	public static final EdgeRole.@NonNull Navigation COMPOSITION = new CompositionEdgeRole();
 	public static final EdgeRole.@NonNull Navigation CONTAINER = new ContainerEdgeRole();
 	public static final @NonNull IteratedEdgeRoleFactory ITERATED = new IteratedEdgeRoleFactory();		
-	public static final @NonNull IteratingEdgeRoleFactory ITERATING = new IteratingEdgeRoleFactory();		
-	public static final @NonNull NavigationEdgeRoleFactory NAVIGATION = new NavigationEdgeRoleFactory();
-
-	/**
-	 * A composed ordering edge defines a promoted ordering dependency upon the processing of two
-	 * containment properties. The statically determinate schedule must process all of the source
-	 * children before any of the target children.
-	 */
-//	public static final @NonNull EdgeRole COMPOSED_ORDERING = new ComposedOrderingEdgeRole();
-
-	/**
-	 * A consumed ordering edge defines a promoted ordering dependency upon the processing that exploits
-	 * a particular object. The statically determinate schedule must process the source consumer before
-	 * the target consumer.
-	 */
-//	public static final @NonNull EdgeRole CONSUMED_ORDERING = new ConsumedOrderingEdgeRole();
-	
+//	public static final @NonNull IteratingEdgeRoleFactory ITERATING = new IteratingEdgeRoleFactory();		
+//	public static final @NonNull CastEdgeRoleFactory NAVIGABLE_CAST = new CastEdgeRoleFactory(true);
+	public static final @NonNull NavigationEdgeRoleFactory NAVIGATION = new NavigationEdgeRoleFactory(null);
 	public static final EdgeRole.@NonNull Recursion PRIMARY_RECURSION = new RecursionEdgeRole(true);	
 	public static final EdgeRole.@NonNull Navigation REALIZED = new RealizedNavigationEdgeRole();
 	public static final @NonNull ResultEdgeRoleFactory RESULT = new ResultEdgeRoleFactory();
 	public static final EdgeRole.@NonNull Recursion SECONDARY_RECURSION = new RecursionEdgeRole(false);	
+//	public static final @NonNull CastEdgeRoleFactory UNNAVIGABLE_CAST = new CastEdgeRoleFactory(false);
 }

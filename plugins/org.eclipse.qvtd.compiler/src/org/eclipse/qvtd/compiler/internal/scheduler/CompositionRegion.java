@@ -34,7 +34,7 @@ public class CompositionRegion extends AbstractRegion implements SimpleRegion
 		this.typedModel = typedModel;
 		org.eclipse.ocl.pivot.Class owningClass = parent2childrenProperty.getOwningClass();
 		assert owningClass != null;
-		this.composingNode = Nodes.COMPOSING.createSimpleNode(this, "-parent-", getSchedulerConstants().getClassDatumAnalysis(owningClass, typedModel));
+		this.composingNode = Nodes.COMPOSING.createSimpleNode(this, "«parent»", getSchedulerConstants().getClassDatumAnalysis(owningClass, typedModel));
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class CompositionRegion extends AbstractRegion implements SimpleRegion
 			org.eclipse.ocl.pivot.Class elementType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
 			CollectionType selectedCollectionType = getSchedulerConstants().getEnvironmentFactory().getCompleteEnvironment().getCollectionType(collectionType, elementType, true,  null, null);
 			ClassDatumAnalysis selectedClassDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(selectedCollectionType, classDatumAnalysis.getTypedModel());
-			SimpleNode composedNode = Nodes.COMPOSED.createSimpleNode(this, "-child-" + classDatumAnalysis.getCompleteClass().getName() + "-", selectedClassDatumAnalysis);
+			SimpleNode composedNode = Nodes.COMPOSED.createSimpleNode(this, "«child-" + classDatumAnalysis.getCompleteClass().getName() + "»", selectedClassDatumAnalysis);
 			Edges.COMPOSITION.createEdge(this, composingNode, parent2childrenProperty, composedNode);
 			Property child2parentProperty = parent2childrenProperty.getOpposite();
 			if (child2parentProperty != null) {
@@ -61,7 +61,7 @@ public class CompositionRegion extends AbstractRegion implements SimpleRegion
 			org.eclipse.ocl.pivot.Class elementType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
 			CollectionType selectedCollectionType = getSchedulerConstants().getEnvironmentFactory().getCompleteEnvironment().getSetType(elementType, true,  null, null);
 			ClassDatumAnalysis selectedClassDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(selectedCollectionType, classDatumAnalysis.getTypedModel());
-			SimpleNode composedNode = Nodes.COMPOSED.createSimpleNode(this, "-child-" + classDatumAnalysis.getCompleteClass().getName() + "-", selectedClassDatumAnalysis);
+			SimpleNode composedNode = Nodes.COMPOSED.createSimpleNode(this, "«child-" + classDatumAnalysis.getCompleteClass().getName() + "»", selectedClassDatumAnalysis);
 			Edges.COMPOSITION.createEdge(this, composingNode, parent2childrenProperty, composedNode);
 			Property child2parentProperty = parent2childrenProperty.getOpposite();
 			if (child2parentProperty != null) {

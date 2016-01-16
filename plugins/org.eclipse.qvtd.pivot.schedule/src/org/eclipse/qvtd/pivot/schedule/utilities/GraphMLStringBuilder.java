@@ -92,7 +92,6 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		String shapeName = shape;
 		String fillColor = "#ffffff";
 		String lineColor = color;
-		LineType lineType = LineType.line;
 		Double width = Double.valueOf(penwidth);
 		s.pushTag("node");
 			s.appendElement("id", NODEID_PREFIX + id);

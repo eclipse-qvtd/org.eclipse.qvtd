@@ -457,6 +457,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 				if (referredTypeUsage == null) {
 					referredTypeUsage = visit(property.getType());
 				}
+				System.out.println(property + " => " + referredTypeUsage);
 				property2referredTypeUsage.put(property, referredTypeUsage);
 			}
 		}

@@ -221,7 +221,10 @@ public class RegionOrdering
 						Scheduler.REGION_ORDER.println(size + " : " + outgoingConnection);
 						outgoingConnection.setIndexes(size, size);
 						orderedSchedulables.add(outgoingConnection);
-						nextRegions.addAll(connection2targetRegions.get(outgoingConnection));
+						List<Region> targetRegions = connection2targetRegions.get(outgoingConnection);
+						if (targetRegions != null) {
+							nextRegions.addAll(targetRegions);
+						}
 					}
 				}
 			}

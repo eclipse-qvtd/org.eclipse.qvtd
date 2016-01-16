@@ -62,6 +62,15 @@ public interface EdgeRole extends Role
 	boolean isComposition();
 	boolean isComputation();
 	boolean isMergeable();
+	
+	/**
+	 * Return true if this edge forms part of the to-one navigation reachable from a head.
+	 */
+	boolean isNavigable();
+	
+	/**
+	 * Return true if this edge represents a property navigation.
+	 */
 	boolean isNavigation();
 	boolean isRecursion();
 	boolean isResult();

@@ -259,22 +259,25 @@ public class DependencyAnalyzer
 
 		public @NonNull DependencyPaths addHidden(@NonNull DependencyPaths secondPath) {
 			Set<List<DependencyStep>> newHiddenPaths = hiddenPaths;
-			if (secondPath.hiddenPaths != null) {
+			Set<List<DependencyStep>> secondPathHiddenPaths = secondPath.hiddenPaths;
+			if (secondPathHiddenPaths != null) {
 				if (newHiddenPaths != null) {
 					newHiddenPaths = new HashSet<List<DependencyStep>>(newHiddenPaths);
-					newHiddenPaths.addAll(secondPath.hiddenPaths);
+					newHiddenPaths.addAll(secondPathHiddenPaths);
 				}
 				else {
-					newHiddenPaths = secondPath.hiddenPaths;
+					newHiddenPaths = secondPathHiddenPaths;
 				}
 			}
-			if (secondPath.returnPaths != null) {
+			@Nullable
+			Set<List<DependencyStep>> secondPathReturnPaths = secondPath.returnPaths;
+			if (secondPathReturnPaths != null) {
 				if (newHiddenPaths != null) {
 					newHiddenPaths = new HashSet<List<DependencyStep>>(newHiddenPaths);
-					newHiddenPaths.addAll(secondPath.returnPaths);
+					newHiddenPaths.addAll(secondPathReturnPaths);
 				}
 				else {
-					newHiddenPaths = secondPath.returnPaths;
+					newHiddenPaths = secondPathReturnPaths;
 				}
 			}
 			return dependencyAnalyzer.createDependencyPaths(returnPaths, newHiddenPaths);
@@ -282,26 +285,29 @@ public class DependencyAnalyzer
 
 		public @NonNull DependencyPaths addReturn(@NonNull DependencyPaths secondPath) {
 			Set<List<DependencyStep>> newReturnPaths;
-			if (secondPath.returnPaths != null) {
+			@Nullable
+			Set<List<DependencyStep>> secondPathReturnPaths = secondPath.returnPaths;
+			if (secondPathReturnPaths != null) {
 				if (returnPaths != null) {
 					newReturnPaths = new HashSet<List<DependencyStep>>(returnPaths);
-					newReturnPaths.addAll(secondPath.returnPaths);
+					newReturnPaths.addAll(secondPathReturnPaths);
 				}
 				else {
-					newReturnPaths = secondPath.returnPaths;
+					newReturnPaths = secondPathReturnPaths;
 				}
 			}
 			else {
 				newReturnPaths = returnPaths;
 			}
 			Set<List<DependencyStep>> newHiddenPaths;
-			if (secondPath.hiddenPaths != null) {
+			Set<List<DependencyStep>> secondPathHiddenPaths = secondPath.hiddenPaths;
+			if (secondPathHiddenPaths != null) {
 				if (hiddenPaths != null) {
 					newHiddenPaths = new HashSet<List<DependencyStep>>(hiddenPaths);
-					newHiddenPaths.addAll(secondPath.hiddenPaths);
+					newHiddenPaths.addAll(secondPathHiddenPaths);
 				}
 				else {
-					newHiddenPaths = secondPath.hiddenPaths;
+					newHiddenPaths = secondPathHiddenPaths;
 				}
 			}
 			else {
