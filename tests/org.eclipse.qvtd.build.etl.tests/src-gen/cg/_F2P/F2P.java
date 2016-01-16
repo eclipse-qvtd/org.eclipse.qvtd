@@ -221,33 +221,33 @@ public class F2P extends AbstractTransformer
      * 
      * map _'Families%Family%daughters' in F2P {
      * 
-     *   family (_'-parent-' : Families::Family[1];
+     *   family (_'\\u00ABparent\\u00BB' : Families::Family[1];
      *  |)
      * { |}
-     * where (_'-join-Member-0' : Set(Families::Member[*|1]);
+     * where (_'\\u00ABjoin-Member-0\\u00BB' : Set(Families::Member[*|1]);
      *  |)
-     * {allChildren : Set(Families::Member) = _'-parent-'.daughters->selectByKind(Families::Member)
+     * {allChildren : Set(Families::Member) = _'\\u00ABparent\\u00BB'.daughters->selectByKind(Families::Member)
      *   ;
-     * _'-child-Member-' : Set(Families::Member[*|1]) = allChildren->selectByKind(Families::Member);
+     * _'\u00ABchild-Member\u00BB' : Set(Families::Member[*|1]) = allChildren->selectByKind(Families::Member);
      *  |
-     * _'-join-Member-0' += _'-child-Member-';
+     * _'\\u00ABjoin-Member-0\\u00BB' += _'\u00ABchild-Member\u00BB';
      * }
      * 
      */
-    protected boolean MAP_Families_37Family_37daughters(final SetValue.@NonNull Accumulator _m_join_m_Member_m_0, final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family _m_parent_m) throws ReflectiveOperationException {
+    protected boolean MAP_Families_37Family_37daughters(final SetValue.@NonNull Accumulator _92_u00ABjoin_m_Member_m_0_92_u00BB, final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family _92_u00ABparent_92_u00BB) throws ReflectiveOperationException {
         // predicates
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_Families_c_c_Member_1 = idResolver.getClass(CLSSid_Member, null);
         // variable assignments
         @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Member> daughters = _m_parent_m.getDaughters();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Member> daughters = _92_u00ABparent_92_u00BB.getDaughters();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue BOXED_daughters = idResolver.createSetOfAll(SET_CLSSid_Member, daughters);
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_daughters, TYP_Families_c_c_Member_1));
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_Families_c_c_Member_1));
         // connection assignments
         for (Member iterator : ValueUtil.typedIterable(Member.class, selectByKind_0)) {
             if (iterator instanceof Member) {
-                _m_join_m_Member_m_0.add(iterator);
+                _92_u00ABjoin_m_Member_m_0_92_u00BB.add(iterator);
             }
         }
         return true;
@@ -257,32 +257,32 @@ public class F2P extends AbstractTransformer
      * 
      * map _'Families%Family%father' in F2P {
      * 
-     *   family (_'-parent-' : Families::Family[1];
+     *   family (_'\\u00ABparent\\u00BB' : Families::Family[1];
      *  |)
      * { |}
-     * where (_'-join-Member-0' : Set(Families::Member[*|1]);
+     * where (_'\\u00ABjoin-Member-0\\u00BB' : Set(Families::Member[*|1]);
      *  |)
-     * {allChildren : Set(Families::Member[*|1]) = _'-parent-'.father.oclAsSet()
+     * {allChildren : Set(Families::Member[*|1]) = _'\\u00ABparent\\u00BB'.father.oclAsSet()
      *   ;
-     * _'-child-Member-' : Set(Families::Member[*|1]) = allChildren->selectByKind(Families::Member);
+     * _'\u00ABchild-Member\u00BB' : Set(Families::Member[*|1]) = allChildren->selectByKind(Families::Member);
      *  |
-     * _'-join-Member-0' += _'-child-Member-';
+     * _'\\u00ABjoin-Member-0\\u00BB' += _'\u00ABchild-Member\u00BB';
      * }
      * 
      */
-    protected boolean MAP_Families_37Family_37father(final SetValue.@NonNull Accumulator _m_join_m_Member_m_0_0, final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family _m_parent_m_0) throws ReflectiveOperationException {
+    protected boolean MAP_Families_37Family_37father(final SetValue.@NonNull Accumulator _92_u00ABjoin_m_Member_m_0_92_u00BB_0, final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family _92_u00ABparent_92_u00BB_0) throws ReflectiveOperationException {
         // predicates
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_Families_c_c_Member_0 = idResolver.getClass(CLSSid_Member, null);
         // variable assignments
         @SuppressWarnings("null")
-        final /*@Thrown*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Member father = _m_parent_m_0.getFather();
+        final /*@Thrown*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Member father = _92_u00ABparent_92_u00BB_0.getFather();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue oclAsSet = ClassUtil.nonNullState(OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Member, father));
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_Families_c_c_Member_0));
         // connection assignments
         for (Member iterator : ValueUtil.typedIterable(Member.class, selectByKind)) {
             if (iterator instanceof Member) {
-                _m_join_m_Member_m_0_0.add(iterator);
+                _92_u00ABjoin_m_Member_m_0_92_u00BB_0.add(iterator);
             }
         }
         return true;
@@ -292,32 +292,32 @@ public class F2P extends AbstractTransformer
      * 
      * map _'Families%Family%mother' in F2P {
      * 
-     *   family (_'-parent-' : Families::Family[1];
+     *   family (_'\\u00ABparent\\u00BB' : Families::Family[1];
      *  |)
      * { |}
-     * where (_'-join-Member-0' : Set(Families::Member[*|1]);
+     * where (_'\\u00ABjoin-Member-0\\u00BB' : Set(Families::Member[*|1]);
      *  |)
-     * {allChildren : Set(Families::Member[*|1]) = _'-parent-'.mother.oclAsSet()
+     * {allChildren : Set(Families::Member[*|1]) = _'\\u00ABparent\\u00BB'.mother.oclAsSet()
      *   ;
-     * _'-child-Member-' : Set(Families::Member[*|1]) = allChildren->selectByKind(Families::Member);
+     * _'\u00ABchild-Member\u00BB' : Set(Families::Member[*|1]) = allChildren->selectByKind(Families::Member);
      *  |
-     * _'-join-Member-0' += _'-child-Member-';
+     * _'\\u00ABjoin-Member-0\\u00BB' += _'\u00ABchild-Member\u00BB';
      * }
      * 
      */
-    protected boolean MAP_Families_37Family_37mother(final SetValue.@NonNull Accumulator _m_join_m_Member_m_0_1, final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family _m_parent_m_1) throws ReflectiveOperationException {
+    protected boolean MAP_Families_37Family_37mother(final SetValue.@NonNull Accumulator _92_u00ABjoin_m_Member_m_0_92_u00BB_1, final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family _92_u00ABparent_92_u00BB_1) throws ReflectiveOperationException {
         // predicates
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_Families_c_c_Member_0 = idResolver.getClass(CLSSid_Member, null);
         // variable assignments
         @SuppressWarnings("null")
-        final /*@Thrown*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Member mother = _m_parent_m_1.getMother();
+        final /*@Thrown*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Member mother = _92_u00ABparent_92_u00BB_1.getMother();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue oclAsSet = ClassUtil.nonNullState(OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Member, mother));
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_Families_c_c_Member_0));
         // connection assignments
         for (Member iterator : ValueUtil.typedIterable(Member.class, selectByKind)) {
             if (iterator instanceof Member) {
-                _m_join_m_Member_m_0_1.add(iterator);
+                _92_u00ABjoin_m_Member_m_0_92_u00BB_1.add(iterator);
             }
         }
         return true;
@@ -327,33 +327,33 @@ public class F2P extends AbstractTransformer
      * 
      * map _'Families%Family%sons' in F2P {
      * 
-     *   family (_'-parent-' : Families::Family[1];
+     *   family (_'\\u00ABparent\\u00BB' : Families::Family[1];
      *  |)
      * { |}
-     * where (_'-join-Member-0' : Set(Families::Member[*|1]);
+     * where (_'\\u00ABjoin-Member-0\\u00BB' : Set(Families::Member[*|1]);
      *  |)
-     * {allChildren : Set(Families::Member) = _'-parent-'.sons->selectByKind(Families::Member)
+     * {allChildren : Set(Families::Member) = _'\\u00ABparent\\u00BB'.sons->selectByKind(Families::Member)
      *   ;
-     * _'-child-Member-' : Set(Families::Member[*|1]) = allChildren->selectByKind(Families::Member);
+     * _'\u00ABchild-Member\u00BB' : Set(Families::Member[*|1]) = allChildren->selectByKind(Families::Member);
      *  |
-     * _'-join-Member-0' += _'-child-Member-';
+     * _'\\u00ABjoin-Member-0\\u00BB' += _'\u00ABchild-Member\u00BB';
      * }
      * 
      */
-    protected boolean MAP_Families_37Family_37sons(final SetValue.@NonNull Accumulator _m_join_m_Member_m_0_2, final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family _m_parent_m_2) throws ReflectiveOperationException {
+    protected boolean MAP_Families_37Family_37sons(final SetValue.@NonNull Accumulator _92_u00ABjoin_m_Member_m_0_92_u00BB_2, final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family _92_u00ABparent_92_u00BB_2) throws ReflectiveOperationException {
         // predicates
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_Families_c_c_Member_1 = idResolver.getClass(CLSSid_Member, null);
         // variable assignments
         @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Member> sons = _m_parent_m_2.getSons();
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Member> sons = _92_u00ABparent_92_u00BB_2.getSons();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue BOXED_sons = idResolver.createSetOfAll(SET_CLSSid_Member, sons);
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_sons, TYP_Families_c_c_Member_1));
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_Families_c_c_Member_1));
         // connection assignments
         for (Member iterator : ValueUtil.typedIterable(Member.class, selectByKind_0)) {
             if (iterator instanceof Member) {
-                _m_join_m_Member_m_0_2.add(iterator);
+                _92_u00ABjoin_m_Member_m_0_92_u00BB_2.add(iterator);
             }
         }
         return true;
@@ -473,43 +473,43 @@ public class F2P extends AbstractTransformer
      *   where ( |)
      * {roots : Set(OclElement) = family.rootObjects()
      *   ;
-     * _'-child-Family-' : Set(Families::Family[*|1]) = roots->selectByKind(Families::Family)
+     * _'\u00ABchild-Family\u00BB' : Set(Families::Family[*|1]) = roots->selectByKind(Families::Family)
      *   ;
-     * _'-join-Family-0' : Set(Families::Family[*|1]) = _'-child-Family-';
-     * _'-child-Member-' : Set(Families::Member[*|1]) = roots->selectByKind(Families::Member)
+     * _'\\u00ABjoin-Family-0\\u00BB' : Set(Families::Family[*|1]) = _'\u00ABchild-Family\u00BB';
+     * _'\u00ABchild-Member\u00BB' : Set(Families::Member[*|1]) = roots->selectByKind(Families::Member)
      *   ;
-     * _'-join-Member-0' : Set(Families::Member[*|1]) = _'-child-Member-';
+     * _'\\u00ABjoin-Member-0\\u00BB' : Set(Families::Member[*|1]) = _'\u00ABchild-Member\u00BB';
      *  |}
-     * for loop0 : Families::Family in _'-join-Family-0' {
+     * for loop0 : Families::Family in _'\\u00ABjoin-Family-0\\u00BB' {
      * 
      *     map _'Families%Family%father' {
-     * _'-join-Member-0' := _'-join-Member-0';
-     * _'-parent-' := loop0;
+     * _'\\u00ABjoin-Member-0\\u00BB' := _'\\u00ABjoin-Member-0\\u00BB';
+     * _'\\u00ABparent\\u00BB' := loop0;
      * }}
-     *   for loop0 : Families::Family in _'-join-Family-0' {
-     * 
-     *     map _'Families%Family%mother' {
-     * _'-join-Member-0' := _'-join-Member-0';
-     * _'-parent-' := loop0;
-     * }}
-     *   for loop0 : Families::Family in _'-join-Family-0' {
+     *   for loop0 : Families::Family in _'\\u00ABjoin-Family-0\\u00BB' {
      * 
      *     map _'Families%Family%daughters' {
-     * _'-join-Member-0' := _'-join-Member-0';
-     * _'-parent-' := loop0;
+     * _'\\u00ABjoin-Member-0\\u00BB' := _'\\u00ABjoin-Member-0\\u00BB';
+     * _'\\u00ABparent\\u00BB' := loop0;
      * }}
-     *   for loop0 : Families::Family in _'-join-Family-0' {
+     *   for loop0 : Families::Family in _'\\u00ABjoin-Family-0\\u00BB' {
      * 
      *     map _'Families%Family%sons' {
-     * _'-join-Member-0' := _'-join-Member-0';
-     * _'-parent-' := loop0;
+     * _'\\u00ABjoin-Member-0\\u00BB' := _'\\u00ABjoin-Member-0\\u00BB';
+     * _'\\u00ABparent\\u00BB' := loop0;
      * }}
-     *   for loop0 : Families::Member in _'-join-Member-0' {
+     *   for loop0 : Families::Family in _'\\u00ABjoin-Family-0\\u00BB' {
+     * 
+     *     map _'Families%Family%mother' {
+     * _'\\u00ABjoin-Member-0\\u00BB' := _'\\u00ABjoin-Member-0\\u00BB';
+     * _'\\u00ABparent\\u00BB' := loop0;
+     * }}
+     *   for loop0 : Families::Member in _'\\u00ABjoin-Member-0\\u00BB' {
      * 
      *     map Member2Female {
      * s := loop0;
      * }}
-     *   for loop0 : Families::Member in _'-join-Member-0' {
+     *   for loop0 : Families::Member in _'\\u00ABjoin-Member-0\\u00BB' {
      * 
      *     map Member2Male {
      * s := loop0;
@@ -525,36 +525,36 @@ public class F2P extends AbstractTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, rootObjects, TYP_Families_c_c_Family_0));
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, rootObjects, TYP_Families_c_c_Member_0));
         // connection variables
-        final SetValue.@NonNull Accumulator _m_join_m_Member_m_0_7 = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_Member);
+        final SetValue.@NonNull Accumulator _92_u00ABjoin_m_Member_m_0_92_u00BB_7 = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_Member);
         for (Member iterator : ValueUtil.typedIterable(Member.class, selectByKind_0)) {
-            _m_join_m_Member_m_0_7.add(iterator);
+            _92_u00ABjoin_m_Member_m_0_92_u00BB_7.add(iterator);
         }
         // mapping statements
         for (Family loop0 : ValueUtil.typedIterable(Family.class, selectByKind)) {
             if (loop0 != null) {
                 final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family symbol_0 = (Family)loop0;
-                MAP_Families_37Family_37father(_m_join_m_Member_m_0_7, symbol_0);
+                MAP_Families_37Family_37father(_92_u00ABjoin_m_Member_m_0_92_u00BB_7, symbol_0);
             }
         }
         for (Family loop0_0 : ValueUtil.typedIterable(Family.class, selectByKind)) {
             if (loop0_0 != null) {
                 final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family symbol_2 = (Family)loop0_0;
-                MAP_Families_37Family_37mother(_m_join_m_Member_m_0_7, symbol_2);
+                MAP_Families_37Family_37daughters(_92_u00ABjoin_m_Member_m_0_92_u00BB_7, symbol_2);
             }
         }
         for (Family loop0_1 : ValueUtil.typedIterable(Family.class, selectByKind)) {
             if (loop0_1 != null) {
                 final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family symbol_4 = (Family)loop0_1;
-                MAP_Families_37Family_37daughters(_m_join_m_Member_m_0_7, symbol_4);
+                MAP_Families_37Family_37sons(_92_u00ABjoin_m_Member_m_0_92_u00BB_7, symbol_4);
             }
         }
         for (Family loop0_2 : ValueUtil.typedIterable(Family.class, selectByKind)) {
             if (loop0_2 != null) {
                 final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family symbol_6 = (Family)loop0_2;
-                MAP_Families_37Family_37sons(_m_join_m_Member_m_0_7, symbol_6);
+                MAP_Families_37Family_37mother(_92_u00ABjoin_m_Member_m_0_92_u00BB_7, symbol_6);
             }
         }
-        for (Member loop0_3 : ValueUtil.typedIterable(Member.class, _m_join_m_Member_m_0_7)) {
+        for (Member loop0_3 : ValueUtil.typedIterable(Member.class, _92_u00ABjoin_m_Member_m_0_92_u00BB_7)) {
             if (loop0_3 != null) {
                 final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Member symbol_8 = (Member)loop0_3;
                 if (symbol_8 != null) {
@@ -562,7 +562,7 @@ public class F2P extends AbstractTransformer
                 }
             }
         }
-        for (Member loop0_4 : ValueUtil.typedIterable(Member.class, _m_join_m_Member_m_0_7)) {
+        for (Member loop0_4 : ValueUtil.typedIterable(Member.class, _92_u00ABjoin_m_Member_m_0_92_u00BB_7)) {
             if (loop0_4 != null) {
                 final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Member symbol_10 = (Member)loop0_4;
                 if (symbol_10 != null) {
