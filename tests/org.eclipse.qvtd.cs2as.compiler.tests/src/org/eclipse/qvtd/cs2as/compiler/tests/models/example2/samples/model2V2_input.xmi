@@ -2,7 +2,8 @@
 <classescs:RootCS
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:classescs="http://cs2as/tests/example2/classescs/1.0">
+    xmlns:classescs="http://cs2as/tests/example2/classescs/1.0"
+    xsi:schemaLocation="http://cs2as/tests/example2/classescs/1.0 ../ClassesCS.ecore">
   <ownedPackages
       name="P1">
     <ownedClasses
