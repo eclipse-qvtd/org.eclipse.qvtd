@@ -87,6 +87,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
+import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
@@ -650,7 +651,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	public @NonNull Boolean visitCGEcorePropertyCallExp(@NonNull CGEcorePropertyCallExp cgPropertyCallExp) {
 		boolean isHazardous = false;
 		Element asPropertyCallExp = cgPropertyCallExp.getAst();
-		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asPropertyCallExp);
+		CGMapping cgMapping = QVTiCGUtil.getContainingCGMapping(cgPropertyCallExp);
+		Mapping asMapping = cgMapping != null ? (Mapping) cgMapping.getAst() : null;
+		if ((asMapping != null) && "uPropertyCallExp_referredProperty".equals(asMapping.getName())) {
+			asMapping.getName();
+		}
 		if ((asMapping != null) && (asPropertyCallExp instanceof PropertyCallExp)) {
 			isHazardous = transformationAnalysis.isHazardousRead(asMapping, (PropertyCallExp)asPropertyCallExp);
 		}
