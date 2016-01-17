@@ -322,9 +322,14 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				Object result = implementation.dispatch(context, operationCallExp, null);
 				assert !(result instanceof NullValue);
 				return result;
-			} catch (InvalidValueException e) {
+			}
+			catch (InvalidValueException e) {
 				throw e;
-			} catch (Exception e) {
+			}
+			catch (InvocationFailedException e) {
+				throw e;
+			}
+			catch (Exception e) {
 				// This is a backstop. Library operations should catch their own exceptions
 				//  and produce a better reason as a result.
 				throw new InvalidValueException(e, PivotMessagesInternal.FailedToEvaluate_ERROR_, function, ILabelGenerator.Registry.INSTANCE.labelFor(null), operationCallExp);
