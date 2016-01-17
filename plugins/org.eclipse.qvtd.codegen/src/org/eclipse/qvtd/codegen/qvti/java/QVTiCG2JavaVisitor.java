@@ -28,7 +28,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOppositePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
@@ -64,14 +63,14 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -376,11 +375,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append("protected final ");
 			js.appendIsRequired(true);
 			js.append(" ");
-			js.appendClassReference(Map.class, false, middleTypeDescriptor, outerTypeDescriptor);
+			js.appendClassReference(null, Map.class, false, middleTypeDescriptor, outerTypeDescriptor);
 			js.append(" ");
 			js.append(key);
 			js.append(" = new ");
-			js.appendClassReference(HashMap.class, false, middleTypeDescriptor, outerTypeDescriptor);
+			js.appendClassReference(null, HashMap.class, false, middleTypeDescriptor, outerTypeDescriptor);
 			js.append("();\n");
 		}
     }
@@ -677,12 +676,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(");\n");
 		}
 		return appendCGEcorePropertyCallExp(cgPropertyCallExp, source);
-	}
-
-	@Override
-	public @Nullable Boolean visitCGEcoreOppositePropertyCallExp(@NonNull CGEcoreOppositePropertyCallExp object) {
-		// TODO Auto-generated method stub
-		return super.visitCGEcoreOppositePropertyCallExp(object);
 	}
 
 	@Override

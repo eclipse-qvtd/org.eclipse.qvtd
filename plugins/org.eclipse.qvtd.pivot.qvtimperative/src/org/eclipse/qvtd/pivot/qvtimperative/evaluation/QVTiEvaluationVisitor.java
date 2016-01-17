@@ -89,7 +89,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		@Override
 		public @Nullable Object dispatch(@NonNull Executor executor, @NonNull OperationCallExp callExp, @Nullable Object sourceValue) {
 			List<? extends OCLExpression> arguments = callExp.getOwnedArguments();
-			Object[] argumentValues = new Object[arguments.size()];
+			@Nullable Object[] argumentValues = new @Nullable Object[arguments.size()];
 			for (int i = 0; i < arguments.size(); i++) {
 				OCLExpression argument = arguments.get(i);
 				assert argument != null;
@@ -98,7 +98,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			return evaluate(executor, callExp, sourceValue, argumentValues);
 		}
 
-		private @Nullable Object evaluate(@NonNull Executor executor, @NonNull OperationCallExp callExp, @Nullable Object sourceValue, @NonNull Object... argumentValues) {
+		private @Nullable Object evaluate(@NonNull Executor executor, @NonNull OperationCallExp callExp, @Nullable Object sourceValue, @Nullable Object... argumentValues) {
 //			PivotUtil.checkExpression(expressionInOCL);
 			EvaluationEnvironment nestedEvaluationEnvironment = executor.pushEvaluationEnvironment(function, callExp);
 //			nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(expressionInOCL.getOwnedContext()), sourceValue);

@@ -50,7 +50,6 @@ import org.eclipse.qvtd.compiler.internal.etl.EtlTask;
 import org.eclipse.qvtd.compiler.internal.etl.MtcBroker;
 import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
 import org.eclipse.qvtd.compiler.internal.etl.QvtMtcExecutionException;
-import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
