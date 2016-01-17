@@ -94,6 +94,11 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	protected AbstractDomainUsageAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
 		super(environmentFactory);
 	}
+
+	@Override
+	public @Nullable DomainUsage basicGetUsage(@Nullable EObject element) {
+		return element2usage.get(element);
+	}
 	
 	protected @NonNull DomainUsage doPropertyAssignment(Property property, @NonNull PropertyAssignment object) {
 		DomainUsage slotUsage = visit(object.getSlotExpression());
@@ -145,8 +150,8 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	protected abstract @NonNull RootDomainUsageAnalysis getRootAnalysis();
 
 	@Override
-	public @Nullable DomainUsage getUsage(@Nullable EObject element) {
-		return element2usage.get(element);
+	public @NonNull DomainUsage getUsage(@NonNull EObject element) {
+		return ClassUtil.nonNullState(element2usage.get(element));
 	}
 
 	protected @NonNull DomainUsage intersection(@NonNull DomainUsage firstUsage, @NonNull DomainUsage secondUsage) {
@@ -249,6 +254,10 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	protected void setUsage(@NonNull Element element, @NonNull DomainUsage newUsage) {
 		element2usage.put(element, newUsage);
 		((DomainUsage.Internal)newUsage).addUsedBy(element);
+//		System.out.println("        setUsage " + getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this))
+//		+ " : " + element.eClass().getName() + "@" + Integer.toHexString(System.identityHashCode(element))
+//		+ " <= " + newUsage
+//			);
 	}
 
 	@Override
@@ -511,7 +520,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			if (eContainer instanceof PropertyAssignment) {
 				PropertyAssignment asPropertyAssignment = (PropertyAssignment) eContainer;
 				if (eObject == asPropertyAssignment.getValue()) {
-					return getUsage(asPropertyAssignment.getSlotExpression());
+					return basicGetUsage(asPropertyAssignment.getSlotExpression());
 				}
 			}
 		}
@@ -520,6 +529,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 
 	@Override
 	public @Nullable DomainUsage visitOperation(@NonNull Operation object) {
+//		System.out.println("    " + getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " : " + object);
 		DomainUsage savedUsage = pushSelfUsage(visit(object.getOwningClass()));
 		try {
 			for (@SuppressWarnings("null")@NonNull Parameter parameter : object.getOwnedParameters()) {
@@ -571,30 +581,28 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			}
 			DomainUsageAnalysis analysis = rootAnalysis.getAnalysis(operation);
 			Map<DomainUsage, DomainUsage> referred2specialized = new HashMap<DomainUsage, DomainUsage>();
-			List<Parameter> ownedParameters = operation.getOwnedParameters();
+			List<@NonNull Parameter> ownedParameters = ClassUtil.nullFree(operation.getOwnedParameters());
 			int iMax = Math.min(ownedParameters.size(), object.getOwnedArguments().size());
 			for (int i = 0; i < iMax; i++) {
 				Parameter parameter = ownedParameters.get(i);
 				OCLExpression argument = object.getOwnedArguments().get(i);
 				DomainUsage referredParameterUsage = analysis.getUsage(parameter);
-				if (referredParameterUsage != null) {
-					DomainUsage specializedParameterUsage;
-					if (referredParameterUsage.isConstant()) {
-						specializedParameterUsage = referredParameterUsage;
-					}
-					else {
-						specializedParameterUsage = referred2specialized.get(referredParameterUsage);
-						if (specializedParameterUsage == null) {
-//							specializedParameterUsage = new DomainUsageVariable(getRootAnalysis(), ((DomainUsage.Internal)referredParameterUsage).getMask());
-							specializedParameterUsage = ((DomainUsage.Internal)referredParameterUsage).cloneVariable();
-							referred2specialized.put(referredParameterUsage, specializedParameterUsage);
-						}
-					}
-					DomainUsage argumentUsage = visit(argument);
-					intersection(argumentUsage, specializedParameterUsage);
+				DomainUsage specializedParameterUsage;
+				if (referredParameterUsage.isConstant()) {
+					specializedParameterUsage = referredParameterUsage;
 				}
+				else {
+					specializedParameterUsage = referred2specialized.get(referredParameterUsage);
+					if (specializedParameterUsage == null) {
+//						specializedParameterUsage = new DomainUsageVariable(getRootAnalysis(), ((DomainUsage.Internal)referredParameterUsage).getMask());
+						specializedParameterUsage = ((DomainUsage.Internal)referredParameterUsage).cloneVariable();
+						referred2specialized.put(referredParameterUsage, specializedParameterUsage);
+					}
+				}
+				DomainUsage argumentUsage = visit(argument);
+				intersection(argumentUsage, specializedParameterUsage);
 			}
-			DomainUsage operationUsage = analysis.getUsage(operation);
+			DomainUsage operationUsage = analysis.basicGetUsage(operation);
 			if ((operationUsage != null) && !operationUsage.isConstant()) {
 //				operationUsage = new DomainUsageVariable(getRootAnalysis(), ((DomainUsage.Internal)operationUsage).getMask());
 				operationUsage = ((DomainUsage.Internal)operationUsage).cloneVariable();
@@ -703,8 +711,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 //		for (TypedModel typedModel : object.getModelParameter()) {			-- done in analyzeTransformation
 //			visit(typedModel);
 //		}
+//		System.out.println("  " + getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " : " + object);
 		Variable ownedContext = object.getOwnedContext();
-		DomainUsage domainUsage = getUsage(object);
+		DomainUsage domainUsage = basicGetUsage(object);
 		if ((ownedContext != null) && (domainUsage != null)) {
 			setUsage(ownedContext, domainUsage);
 		}

@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
@@ -35,6 +36,7 @@ import org.eclipse.ocl.pivot.internal.complete.CompleteModelInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -337,8 +339,10 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			EObject eObject = tit.next();
 			if (eObject instanceof PropertyAssignment) {
 				PropertyAssignment propertyAssignment = (PropertyAssignment)eObject;
-				DomainUsage domainUsage = getUsage(propertyAssignment.getSlotExpression());
-				if ((domainUsage == null) || (!domainUsage.isEnforceable() && !domainUsage.isMiddle())) {
+				OCLExpression slotExpression = propertyAssignment.getSlotExpression();
+				assert slotExpression != null;
+				DomainUsage domainUsage = getUsage(slotExpression);
+				if (!domainUsage.isEnforceable() && !domainUsage.isMiddle()) {
 					Property targetProperty = propertyAssignment.getTargetProperty();
 //					System.out.println("Dirty " + targetProperty + " for " + eObject);
 					dirtyProperties.add(targetProperty);
@@ -457,7 +461,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 				if (referredTypeUsage == null) {
 					referredTypeUsage = visit(property.getType());
 				}
-				System.out.println(property + " => " + referredTypeUsage);
+//				System.out.println(property + " => " + referredTypeUsage);
 				property2referredTypeUsage.put(property, referredTypeUsage);
 			}
 		}
@@ -472,6 +476,21 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		visit(transformation);
 		analyzePropertyAssignments(transformation);
 		return element2usage;
+	}
+
+	@Override
+	public @Nullable DomainUsage basicGetUsage(@Nullable EObject element) {
+		DomainUsage usage = super.basicGetUsage(element);
+		if (usage != null) {
+			return usage;
+		}
+		Operation operation = PivotUtil.getContainingOperation(element);
+		if (operation == null) {
+			return null;
+		}
+		DomainUsageAnalysis analyzeOperation = analyzeOperation(operation);
+		usage = analyzeOperation.basicGetUsage(element);
+		return usage;
 	}
 
 	protected @NonNull Nested createNestedAnalysis() {
@@ -605,6 +624,17 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		}
 		return domainUsage;
 	} */
+
+	public @NonNull DomainUsage getUsage(@NonNull Element element) {
+		DomainUsage usage = super.basicGetUsage(element);
+		if (usage != null) {
+			return usage;
+		}
+		Operation operation = ClassUtil.nonNullState(PivotUtil.getContainingOperation(element));
+		DomainUsageAnalysis analyzeOperation = analyzeOperation(operation);
+		usage = ClassUtil.nonNullState(analyzeOperation.getUsage(element));
+		return usage;
+	}
 
 	/**
 	 * Return a corresponding non-null usage if bitMask identifies a single domain.

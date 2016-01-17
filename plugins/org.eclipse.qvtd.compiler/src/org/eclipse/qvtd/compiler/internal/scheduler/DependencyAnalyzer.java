@@ -67,7 +67,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 
@@ -943,20 +942,6 @@ public class DependencyAnalyzer
 		return result;
 	} */
 
-	private @Nullable DomainUsage basicGetUsage(@NonNull Element element) {
-		DomainUsage usage = domainUsageAnalysis.getUsage(element);
-		if (usage != null) {
-			return usage;
-		}
-		Operation operation = PivotUtil.getContainingOperation(element);
-		if (operation == null) {
-			return null;
-		}
-		DomainUsageAnalysis analyzeOperation = domainUsageAnalysis.analyzeOperation(operation);
-		usage = analyzeOperation.getUsage(element);
-		return usage;
-	}
-
 	protected void block(@NonNull OperationAnalysis invokingAnalysis, @NonNull OperationAnalysis failedAnalysis) {
 		Scheduler.DEPENDENCY_ANALYSIS.println("Block " + invokingAnalysis + "\n  " + failedAnalysis);
 		blockedAnalyses.add(invokingAnalysis);
@@ -974,7 +959,7 @@ public class DependencyAnalyzer
 		while (type instanceof CollectionType) {
 			type = ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class) ((CollectionType)type).getElementType());
 		}
-		DomainUsage usage1 = basicGetUsage(type);
+		DomainUsage usage1 = domainUsageAnalysis.basicGetUsage(type);
 		DomainUsage usage = usage1 != null ? usage1 : getUsage(element);
 		DependencyStepFactory factory = getDependencyStepFactory(usage);
 		return factory.createClassDependencyStep(type, element);
@@ -1073,7 +1058,7 @@ public class DependencyAnalyzer
 	}
 
 	protected @NonNull DomainUsage getUsage(@NonNull Element element) {
-		DomainUsage usage = basicGetUsage(element);
+		DomainUsage usage = domainUsageAnalysis.basicGetUsage(element);
 		assert usage != null;
 		return usage;
 	}

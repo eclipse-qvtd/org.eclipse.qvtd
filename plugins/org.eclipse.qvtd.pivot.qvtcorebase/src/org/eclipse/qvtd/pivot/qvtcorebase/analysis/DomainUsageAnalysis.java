@@ -46,9 +46,14 @@ import org.eclipse.ocl.pivot.Element;
 public interface DomainUsageAnalysis
 {
 	/**
+	 * Return the DomainUsage bit mask for an AST element or null if not determined.
+	 */
+	@Nullable DomainUsage basicGetUsage(@Nullable EObject element);
+	
+	/**
 	 * Return the DomainUsage bit mask for an AST element.
 	 */
-	@Nullable DomainUsage getUsage(@Nullable EObject element);
+	@NonNull DomainUsage getUsage(@NonNull EObject element);
 	
 	public interface Internal extends DomainUsageAnalysis {
 		@NonNull DomainUsage visit(@Nullable Element element);

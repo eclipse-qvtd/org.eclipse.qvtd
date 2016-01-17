@@ -148,7 +148,7 @@ public class QVTiTransformationAnalysis
 			Integer size = property2cacheIndex.size();
 			property2cacheIndex.put(navigableProperty, size);
 			if (sourceExpression != null) {
-				DomainUsage sourceUsage = domainAnalysis.getUsage(sourceExpression);
+				DomainUsage sourceUsage = domainAnalysis.basicGetUsage(sourceExpression);
 				if ((sourceUsage != null) && sourceUsage.isCheckable()) {
 					sourceProperty2cacheIndex.put(navigableProperty, size);
 				}
@@ -503,7 +503,7 @@ public class QVTiTransformationAnalysis
 		}
 		for (PropertyAssignment propertyAssignment : propertyAssignments) {
 			OCLExpression slotExpression = propertyAssignment.getSlotExpression();
-			DomainUsage slotUsage = domainAnalysis.getUsage(slotExpression);
+			DomainUsage slotUsage = domainAnalysis.basicGetUsage(slotExpression);
 			if (domainUsage == slotUsage) {
 				return true;
 			}
@@ -564,7 +564,7 @@ public class QVTiTransformationAnalysis
 	public boolean isHazardousRead(@NonNull Mapping asMapping, @NonNull NavigationCallExp asNavigationCallExp) {
 		Property asProperty = PivotUtil.getReferredProperty(asNavigationCallExp);
 		OCLExpression asSource = asNavigationCallExp.getOwnedSource();
-		DomainUsage domainUsage = getDomainUsageAnalysis().getUsage(asSource);
+		DomainUsage domainUsage = getDomainUsageAnalysis().basicGetUsage(asSource);
 		if (domainUsage != null) {
 			TypedModel typedModel = domainUsage.getTypedModel();
 			if (typedModel != null) {
@@ -598,7 +598,7 @@ public class QVTiTransformationAnalysis
 	public boolean isHazardousWrite(@NonNull Mapping asMapping, @NonNull PropertyAssignment asPropertyAssignment) {
 		Property asProperty = asPropertyAssignment.getTargetProperty();
 		OCLExpression asSource = asPropertyAssignment.getSlotExpression();
-		DomainUsage domainUsage = getDomainUsageAnalysis().getUsage(asSource);
+		DomainUsage domainUsage = getDomainUsageAnalysis().basicGetUsage(asSource);
 		if (domainUsage != null) {
 			TypedModel typedModel = domainUsage.getTypedModel();
 			if (typedModel != null) {

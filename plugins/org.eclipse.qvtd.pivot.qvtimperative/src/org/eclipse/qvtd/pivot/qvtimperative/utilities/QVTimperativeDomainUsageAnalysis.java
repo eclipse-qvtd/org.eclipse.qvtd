@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -39,6 +40,11 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 {
 	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
 		super(environmentFactory);
+	}
+
+	@Override
+	public void setUsage(@NonNull Element element, @NonNull DomainUsage newUsage) {
+		super.setUsage(element, newUsage);
 	}
 
 	@Override
