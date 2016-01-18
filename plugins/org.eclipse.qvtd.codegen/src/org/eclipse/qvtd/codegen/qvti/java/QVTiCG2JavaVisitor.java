@@ -885,7 +885,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 						js.append(getMappingName(cgMapping));
 						js.append("(");
 						js.appendIsRequired(true);
-						js.append(" Object[] boundValues) {\n");
+						js.append(" Object ");
+						js.appendIsRequired(true);
+						js.append(" [] boundValues) {\n");
 						js.pushIndentation(null);
 						int i = 0;
 						for (@SuppressWarnings("null")@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
@@ -922,7 +924,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 						js.appendClassReference(IdResolver.class);
 						js.append(" idResolver, ");
 						js.appendIsRequired(true);
-						js.append(" Object[] thoseValues) {\n");
+						js.append(" Object ");
+						js.appendIsRequired(true);
+						js.append(" [] thoseValues) {\n");
 						js.pushIndentation(null);
 							js.append("return ");
 								int index = 0;
