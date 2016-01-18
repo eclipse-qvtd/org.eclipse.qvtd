@@ -4,3 +4,12 @@
 /Source2TargetDerived.oclas
 /Source2TargetDerivedSchedule.xmi
 /Source2TargetBaseSchedule.xmi
+/Source2TargetBase.qvtias
+/Source2TargetBase.qvtp.qvtias
+/Source2TargetDerived.qvtias
+/Source2TargetDerived.qvtp.qvtias
+/Source2TargetDerivedDependencyGraph.xmi
+/SourceBaseMMContainmentTree.xmi
+/SourceDerivedMMContainmentTree.xmi
+/TargetBaseMMContainmentTree.xmi
+/TargetDerivedMMContainmentTree.xmi
