@@ -148,7 +148,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 				List<CGGuardVariable> freeVariables = cgMapping.getFreeVariables();
 				if (freeVariables.size() > 0) {
 					CGGuardVariable cgGuardVariable = freeVariables.get(0);
-					js.append("throwNull(");
+					js.append("throw throwNull(");
 					js.appendValueName(cgGuardVariable);
 					js.append(", ");
 					js.appendString("Null " + cgGuardExp.getMessage());
