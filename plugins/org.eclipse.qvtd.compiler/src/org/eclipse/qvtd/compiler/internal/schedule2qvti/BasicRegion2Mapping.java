@@ -636,7 +636,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		createHeadAndGuardNodeVariables();
 		createExternalPredicates();
 		createNavigablePredicates();
-		createInternalPredicates();
 		createRealizedVariables();
 		createPropertyAssignments();
 		createConnectionAssignments();
@@ -895,26 +894,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//	Create any connectionVariable guards
 		//
 		createConnectionGuardVariables();
-	}
-
-	/**
-	 * Create unrealized variables for all the internally computed results.
-	 */
-	private void createInternalPredicates() {
-		@SuppressWarnings("null")@NonNull BottomPattern bottomPattern = mapping.getBottomPattern();
-//		Set<Node> reachableNodes = new HashSet<Node>(guardNodes);
-//		List<Node> sourcesList = new ArrayList<Node>(guardNodes);
-		for (Node node : region.getPredicatedNodes()) {
-			if (node.isInternal()) {
-				for (Edge edge : node.getIncomingEdges()) {
-					if (edge.isArgument()) {
-						OCLExpression initExpression = edge.getSource().getTypedElements().iterator().next().accept(expressionCreator);
-						createUnrealizedVariable(bottomPattern, node, initExpression);
-						break;
-					}
-				}
-			}
-		}
 	}
 
 	private @NonNull MappingCall createMappingCall(@NonNull AbstractRegion2Mapping calledRegion2Mapping, @NonNull List<MappingCallBinding> mappingCallBindings) {
@@ -1234,13 +1213,17 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 		else {
 			Variable variable = node2variable.get(node);
-/*			if (variable == null) {
-				if (node.isAttributeNode() || node.isInternal()) {
-					BottomPattern bottomPattern = mapping/*getArea(classDatumAnalysis.getDomainUsage())* /.getBottomPattern();
-					assert bottomPattern != null;
-					variable = createUnrealizedVariable(bottomPattern, node, null);
+			if (variable == null) {
+				for (Edge edge : node.getIncomingEdges()) {
+					if (edge.isArgument() || edge.isCast()) {
+						OCLExpression initExpression = edge.getSource().getTypedElements().iterator().next().accept(expressionCreator);
+						BottomPattern bottomPattern = mapping.getBottomPattern();
+						assert bottomPattern != null;
+						variable = createUnrealizedVariable(bottomPattern, node, initExpression);
+						break;
+					}
 				}
-			} */
+			}
 			assert variable != null;
 			return PivotUtil.createVariableExp(variable);
 		}
