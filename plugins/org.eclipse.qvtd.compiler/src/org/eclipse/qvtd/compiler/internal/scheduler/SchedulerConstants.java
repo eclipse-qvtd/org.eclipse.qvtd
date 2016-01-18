@@ -267,7 +267,6 @@ public abstract class SchedulerConstants
 		return getClassDatumAnalysis(classDatum);
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull Iterable<ClassDatumAnalysis> getClassDatumAnalyses() {
 		return classDatum2classDatumAnalysis.values();
 	}

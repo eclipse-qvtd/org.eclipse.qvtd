@@ -270,6 +270,17 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return dependencyAnalyzer2;
 	} */
 
+	private void instantiate(@NonNull SimpleNode instantiatedNode, @NonNull Node extraNode) {
+		for (NavigationEdge extraEdge : extraNode.getNavigationEdges()) {
+			Node extraTargetNode = extraEdge.getTarget();
+			String name = extraTargetNode.getName();
+			ClassDatumAnalysis classDatumAnalysis = extraTargetNode.getClassDatumAnalysis();
+			SimpleNode instantiatedTargetNode = Nodes.AttributeNodeRoleFactory.PREDICATED_CLASS.createSimpleNode(context, name, classDatumAnalysis);
+			Edges.NAVIGATION.createSimpleEdge(context, instantiatedNode, extraEdge.getProperty(), instantiatedTargetNode);
+			instantiate(instantiatedTargetNode, extraTargetNode);
+		}
+	}
+
 	@Override
 	public @NonNull SimpleNode visiting(@NonNull Visitable visitable) {
 		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
@@ -359,6 +370,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 	@Override
 	public @NonNull SimpleNode visitLoopExp(@NonNull LoopExp loopExp) {
+		assert !loopExp.isIsSafe();
 		SimpleNode sourceNode = analyze(loopExp.getOwnedSource());
 		List<Variable> ownedIterators = loopExp.getOwnedIterators();
 		SimpleNode[] argNodes = new SimpleNode[1+ownedIterators.size()];
@@ -417,6 +429,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 	@Override
 	public @NonNull SimpleNode visitNavigationCallExp(@NonNull NavigationCallExp navigationCallExp) {
+		assert !navigationCallExp.isIsSafe();
 		Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
 		assert referredProperty != null;
 		OCLExpression ownedSource = navigationCallExp.getOwnedSource();
@@ -465,6 +478,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 	@Override
 	public @NonNull SimpleNode visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
+		assert !operationCallExp.isIsSafe();
 		Operation referredOperation = operationCallExp.getReferredOperation();
 		OCLExpression ownedSource = operationCallExp.getOwnedSource();
 		if (ownedSource instanceof VariableExp) {
@@ -527,17 +541,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			else {
 				return operationNode;
 			}
-		}
-	}
-
-	private void instantiate(@NonNull SimpleNode instantiatedNode, @NonNull Node extraNode) {
-		for (NavigationEdge extraEdge : extraNode.getNavigationEdges()) {
-			Node extraTargetNode = extraEdge.getTarget();
-			String name = extraTargetNode.getName();
-			ClassDatumAnalysis classDatumAnalysis = extraTargetNode.getClassDatumAnalysis();
-			SimpleNode instantiatedTargetNode = Nodes.AttributeNodeRoleFactory.PREDICATED_CLASS.createSimpleNode(context, name, classDatumAnalysis);
-			Edges.NAVIGATION.createSimpleEdge(context, instantiatedNode, extraEdge.getProperty(), instantiatedTargetNode);
-			instantiate(instantiatedTargetNode, extraTargetNode);
 		}
 	}
 
