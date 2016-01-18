@@ -55,6 +55,7 @@ import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreDomainUsageAnalysis;
@@ -460,6 +461,7 @@ public class MtcBroker {
 		} catch (Exception e1) {
 			throw new QvtMtcExecutionException(e1.getMessage());
 		}
+		QVTbaseUtil.rewriteSafeNavigations(environmentFactory, asTransformation);
 		/*Map<Element, DomainUsage> analysis =*/ domainAnalysis.analyzeTransformation(asTransformation);
 		ClassRelationships classRelationships = new ClassRelationships(environmentFactory, pResourceSet);
 		QVTp2QVTg qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);
@@ -1232,7 +1234,7 @@ public class MtcBroker {
 		this.darkTheme = darkTheme;
 	}
 
-	public Transformation getTransformation(Resource resource) throws Exception {
+	public @NonNull Transformation getTransformation(Resource resource) throws Exception {
 		for (EObject eContent : resource.getContents()) {
 			if (eContent instanceof BaseModel) {
 	    		for (org.eclipse.ocl.pivot.Package aPackage : ((BaseModel)eContent).getOwnedPackages()) {
@@ -1247,7 +1249,7 @@ public class MtcBroker {
 		throw new Exception("The QVTd model does not have a Transformation element.");
 	}
 
-	public Schedule getSchedule() throws QvtMtcExecutionException {
+	public @NonNull Schedule getSchedule() throws QvtMtcExecutionException {
 		if (gModel != null)
 			for (EObject eContent : gModel.getResource().getContents()) {
 				if (eContent instanceof Schedule) {
