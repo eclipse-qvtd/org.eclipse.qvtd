@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.Type;
@@ -105,7 +106,6 @@ public class QVTp2QVTg {
 	}
 	
 	private void computeInitialCaches(Transformation tx) {
-		
 		for (Rule rule : tx.getRule()) {
 			AbstractMapping mapping = (AbstractMapping) rule;
 			TreeIterator<EObject> it = mapping.eAllContents();
@@ -142,20 +142,35 @@ public class QVTp2QVTg {
 		
 		dg = ScheduleFactory.eINSTANCE.createSchedule();
 				
-		BaseModel iModel = (BaseModel) qvtpModel.getContents().get(0);
-		org.eclipse.ocl.pivot.Package txPackage = iModel.getOwnedPackages().get(0);
-		Transformation tx = (Transformation) txPackage.getOwnedClasses().get(0);
-		
-		computeInitialCaches(tx);
-		for (Rule rule : tx.getRule()) {
-			createMappingAction((AbstractMapping) rule);
+		for (EObject eObject : qvtpModel.getContents()) {
+			if (eObject instanceof BaseModel) {
+				transformPackages(((BaseModel)eObject).getOwnedPackages());
+			}
 		}
 		
 		// We add the result to the output result
 		qvtsModel.getContents().clear();
 		qvtsModel.getContents().add(dg);
 	}
-	
+
+	protected void transformPackages(@NonNull List<Package> pPackages) {
+		for (org.eclipse.ocl.pivot.Package pPackage : pPackages) {
+			for (org.eclipse.ocl.pivot.Class pClass : pPackage.getOwnedClasses()) {
+				if (pClass instanceof Transformation) {
+					transformTransformation((Transformation)pClass);
+				}
+			}
+			transformPackages(pPackage.getOwnedPackages());
+		}
+	}
+
+	protected void transformTransformation(@NonNull Transformation pTransformation) {
+		computeInitialCaches(pTransformation);
+		for (Rule pRule : pTransformation.getRule()) {
+			createMappingAction((AbstractMapping) pRule);
+		}
+	}
+
 	protected MappingAction createMappingAction(AbstractMapping mapping) {
 		
 		MappingAction ma = ScheduleFactory.eINSTANCE.createMappingAction();
@@ -363,7 +378,7 @@ public class QVTp2QVTg {
 		return result;
 	}
 	
-	private Set<PropertyDatum> getPropertyDatums(OperationCallExp opCall, org.eclipse.ocl.pivot.Class context, Map<org.eclipse.ocl.pivot.Class, Set<Operation>> type2VisitedOps, Map<Variable, Set<org.eclipse.ocl.pivot.Class>> variable2BoundContext) {
+	private @NonNull Set<PropertyDatum> getPropertyDatums(OperationCallExp opCall, org.eclipse.ocl.pivot.Class context, Map<org.eclipse.ocl.pivot.Class, Set<Operation>> type2VisitedOps, Map<Variable, Set<org.eclipse.ocl.pivot.Class>> variable2BoundContext) {
 		
 		Set<Operation> visitedOps = type2VisitedOps.get(context);
 		if (visitedOps == null) {
@@ -394,7 +409,7 @@ public class QVTp2QVTg {
 		return result;
 	}
 	
-	private Set<PropertyDatum> getPropertyDatums(Operation op, org.eclipse.ocl.pivot.Class context, Map<org.eclipse.ocl.pivot.Class, Set<Operation>> type2VisitedOps) {
+	private @NonNull Set<PropertyDatum> getPropertyDatums(Operation op, org.eclipse.ocl.pivot.Class context, Map<org.eclipse.ocl.pivot.Class, Set<Operation>> type2VisitedOps) {
 		
 		Set<PropertyDatum> result = new LinkedHashSet<PropertyDatum>();
 		LanguageExpression langExp = op.getBodyExpression();
@@ -470,7 +485,7 @@ public class QVTp2QVTg {
 //		return "oclContainer".equals(op.getName()) && op.getOwnedParameters().isEmpty();
 	}
 
-	private Set<PropertyDatum> analyseOclContainerCall(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class context) {
+	private @NonNull Set<PropertyDatum> analyseOclContainerCall(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class context) {
 		
 		Set<PropertyDatum> result = new LinkedHashSet<PropertyDatum>();
 		
@@ -543,7 +558,7 @@ public class QVTp2QVTg {
 		OCLExpression source = callExp.getOwnedSource();
 		return computeContexts(source, variable2BoundContext);
 	}
-	private Set<org.eclipse.ocl.pivot.Class> getContainingTypes(org.eclipse.ocl.pivot.@NonNull Class aClass) {
+	private @NonNull Set<org.eclipse.ocl.pivot.Class> getContainingTypes(org.eclipse.ocl.pivot.@NonNull Class aClass) {
 		return classRelationships.getContainerClasses(aClass);
 	}
 	
@@ -552,7 +567,7 @@ public class QVTp2QVTg {
 		return ownedSource != null ? ownedSource.getType().isClass() : null;
 	}
 	
-	private Set<org.eclipse.ocl.pivot.Class> getAllSuperClasses(org.eclipse.ocl.pivot.@NonNull Class context) {
+	private @NonNull Set<org.eclipse.ocl.pivot.Class> getAllSuperClasses(org.eclipse.ocl.pivot.@NonNull Class context) {
 		return classRelationships.getAllSuperClasses(context);
 	}
 
@@ -563,7 +578,7 @@ public class QVTp2QVTg {
 //		return result;
 //	}
 
-	private Set<org.eclipse.ocl.pivot.Class> getAllSubClasses(org.eclipse.ocl.pivot.@NonNull Class context) {
+	private @NonNull Set<org.eclipse.ocl.pivot.Class> getAllSubClasses(org.eclipse.ocl.pivot.@NonNull Class context) {
 		return classRelationships.getAllSubClasses(context);
 	}
 
