@@ -295,6 +295,8 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	@SuppressWarnings("null")
 	private final @NonNull TypedModel primitiveTypeModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 
+	private /*@LazyNonNull*/ OperationId oclAnyEqualsOperationId;
+	private /*@LazyNonNull*/ OperationId oclAnyNotEqualsOperationId;
 	private /*@LazyNonNull*/ OperationId oclElementOclContainerId;
 	private /*@LazyNonNull*/ OperationId oclElementOclContentsId;
 	private /*@LazyNonNull*/ Property oclElementOclContainerProperty;
@@ -594,6 +596,30 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			oclElementOclContentsProperty = oclElementOclContentsProperty2;
 		}
 		return oclElementOclContentsProperty2;
+	}
+
+	public @NonNull OperationId getOclAnyEqualsOperationId() {
+		OperationId oclAnyEqualsOperationId2 = oclAnyEqualsOperationId;
+		if (oclAnyEqualsOperationId2 == null) {
+			StandardLibrary standardLibrary = context.getStandardLibrary();
+			org.eclipse.ocl.pivot.Class oclAnyType = standardLibrary.getOclAnyType();
+			Operation operation = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "=");
+			assert operation != null;
+			oclAnyEqualsOperationId = oclAnyEqualsOperationId2 = operation.getOperationId();
+		}
+		return oclAnyEqualsOperationId2;
+	}
+
+	public @NonNull OperationId getOclAnyNotEqualsOperationId() {
+		OperationId oclAnyNotEqualsOperationId2 = oclAnyNotEqualsOperationId;
+		if (oclAnyNotEqualsOperationId2 == null) {
+			StandardLibrary standardLibrary = context.getStandardLibrary();
+			org.eclipse.ocl.pivot.Class oclAnyType = standardLibrary.getOclAnyType();
+			Operation operation = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "<>");
+			assert operation != null;
+			oclAnyNotEqualsOperationId = oclAnyNotEqualsOperationId2 = operation.getOperationId();
+		}
+		return oclAnyNotEqualsOperationId2;
 	}
 	
 	public @NonNull TypedModel getPrimitiveTypeModel() {

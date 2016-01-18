@@ -59,6 +59,7 @@ import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
@@ -102,12 +103,13 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	
 	protected @NonNull DomainUsage doPropertyAssignment(Property property, @NonNull PropertyAssignment object) {
 		DomainUsage slotUsage = visit(object.getSlotExpression());
-		@SuppressWarnings("unused")DomainUsage valueUsage = visit(object.getValue());
+		DomainUsage valueUsage = visit(object.getValue());
 		DomainUsage knownSourceUsage = getRootAnalysis().property2containingClassUsage.get(property);
 		if (knownSourceUsage != null) {
 			DomainUsage knownTargetUsage = getRootAnalysis().property2referredTypeUsage.get(property);
 			assert knownTargetUsage != null;
 			intersection(knownSourceUsage, slotUsage);
+			intersection(knownTargetUsage, valueUsage);
 			return knownSourceUsage; //intersection(knownTargetUsage, valueUsage);
 		}
 		else {
@@ -516,15 +518,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 
 	@Override
 	public @Nullable DomainUsage visitNullLiteralExp(@NonNull NullLiteralExp object) {
-		for (EObject eObject = object, eContainer; (eContainer = eObject.eContainer()) != null; eObject = eContainer) {
-			if (eContainer instanceof PropertyAssignment) {
-				PropertyAssignment asPropertyAssignment = (PropertyAssignment) eContainer;
-				if (eObject == asPropertyAssignment.getValue()) {
-					return basicGetUsage(asPropertyAssignment.getSlotExpression());
-				}
-			}
-		}
-		return getRootAnalysis().getAnyUsage();
+		return getRootAnalysis().createVariableUsage(getRootAnalysis().getAnyMask());
 	}
 
 	@Override
@@ -563,8 +557,23 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		try {
 			Operation operation = ClassUtil.nonNullState(object.getReferredOperation());
 			RootDomainUsageAnalysis rootAnalysis = getRootAnalysis();
-			if ((operation.getOperationId() == rootAnalysis.getOclContainerId()) || (operation.getOperationId() == rootAnalysis.getOclContentsId())) {
+			OperationId operationId = operation.getOperationId();
+			//
+			//	Special case: usage of oclContainer()/oclContents() is unchanged from the usage of the source.
+			//
+			if ((operationId == rootAnalysis.getOclContainerId())
+			 || (operationId == rootAnalysis.getOclContentsId())) {
 				return sourceUsage;
+			}
+			//
+			//	Special case: left/right of "="/"<>" have same usage. Result is primitive.
+			//
+			if ((operationId == getRootAnalysis().getOclAnyEqualsOperationId())
+			 || (operationId == getRootAnalysis().getOclAnyNotEqualsOperationId())) {
+				DomainUsage leftUsage = visit(object.getOwnedSource());
+				DomainUsage rightUsage = visit(object.getOwnedArguments().get(0));
+				intersection(leftUsage, rightUsage);
+				return getRootAnalysis().getPrimitiveUsage();
 			}
 			TemplateParameter templateParameter = operation.getType().isTemplateParameter();
 			if (templateParameter != null) {			// Handle e.g oclAsType()
