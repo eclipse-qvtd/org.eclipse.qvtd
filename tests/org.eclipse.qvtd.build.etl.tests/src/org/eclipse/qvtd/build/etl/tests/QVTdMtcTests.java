@@ -13,6 +13,7 @@ package org.eclipse.qvtd.build.etl.tests;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -47,6 +48,8 @@ import org.eclipse.qvtd.build.etl.tests.Families2Persons.Families2PersonsNormali
 import org.eclipse.qvtd.build.etl.tests.UpperToLower.UpperToLowerNormalizer;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
+import org.eclipse.qvtd.compiler.AbstractCompilerChain;
+import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 //import org.eclipse.qvtd.build.etl.tests.UpperToLowerHete.UpperToLowerNormalizer;
 import org.eclipse.qvtd.compiler.internal.etl.MtcBroker;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -139,7 +142,7 @@ public class QVTdMtcTests extends LoadTestCase {
 		protected final @NonNull String testName;
 		protected final @NonNull URI baseURI;
 		protected final @NonNull URI samplesBaseUri;
-		private MtcBroker mtc = null;
+		private QVTcCompilerChain compilerChain = null;
 		private BasicQVTiExecutor interpretedExecutor = null;
 		private QVTiTransformationExecutor generatedExecutor = null;
 		private Set<@NonNull String> nsURIs = new HashSet<@NonNull String>();
@@ -151,16 +154,11 @@ public class QVTdMtcTests extends LoadTestCase {
 	        this.samplesBaseUri = baseURI.appendSegment("samples");
 		}
 
-		public @NonNull Transformation compileTransformation() throws Exception {
-			mtc = new MtcBroker(baseURI, testName + ".qvtcas", getEnvironmentFactory(), TestsXMLUtil.defaultSavingOptions);
-	    	mtc.setCreateGraphml(true);
-	    	Resource iResource = mtc.newExecute();
-	    	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
-	    	assertNoValidationErrors("QVTm validation", mtc.getmModel().getRooteObject());
-	        assertNoValidationErrors("QVTp validation", mtc.getpModel().getRooteObject());
-//	        assertNoValidationErrors("QVTs validation", mtc.getsModel().getRooteObject());
-	        assertNoValidationErrors("QVTi validation", iResource);
-			return mtc.getTransformation(mtc.getiResource());
+		public @NonNull Transformation compileTransformation(@NonNull String outputName) throws Exception {
+			Map<@NonNull String, Map<@NonNull String, Object>> options = new HashMap<@NonNull String, Map<@NonNull String, Object>>();
+			compilerChain = new QVTcCompilerChain(environmentFactory, baseURI.appendSegment(testName), null);
+			compilerChain.setOption(AbstractCompilerChain.DEFAULT_STEP, AbstractCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+	    	return compilerChain.execute(outputName);
 		}
 
 		public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
@@ -214,8 +212,8 @@ public class QVTdMtcTests extends LoadTestCase {
 			if (interpretedExecutor != null) {
 				interpretedExecutor.dispose();
 			}
-			if (mtc != null) {
-				mtc.disposeModels();
+			if (compilerChain != null) {
+				compilerChain.dispose();
 			}
 			/**
 			 * Remove the eInstances from the EPackage.Registry.INSTANCE so that global registrations from the calling test
@@ -355,7 +353,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	MyQVT myQVT = createQVT("Families2Persons");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
-	    	Transformation asTransformation = myQVT.compileTransformation();
+	    	Transformation asTransformation = myQVT.compileTransformation("person");
 	    	myQVT.createInterpretedExecutor(asTransformation);
 	    	myQVT.loadInput("family", "Families.xmi");
 	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
@@ -379,7 +377,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	MyQVT myQVT = createQVT("Families2Persons", Families2PersonsPackage.eINSTANCE, FamiliesPackage.eINSTANCE, PersonsPackage.eINSTANCE);
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-	    	Transformation asTransformation = myQVT.compileTransformation();
+	    	Transformation asTransformation = myQVT.compileTransformation("person");
 	        Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "Families2Persons.genmodel");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
@@ -403,7 +401,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	MyQVT myQVT = createQVT("HSV2HLS");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
-	    	Transformation asTransformation = myQVT.compileTransformation();
+	    	Transformation asTransformation = myQVT.compileTransformation("hls");
 	    	myQVT.createInterpretedExecutor(asTransformation);
 	    	myQVT.loadInput("hsv", "SolarizedHSV.xmi");
 	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HSV2HLS_trace.xmi");
@@ -426,7 +424,7 @@ public class QVTdMtcTests extends LoadTestCase {
 //		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
     	MyQVT myQVT = createQVT("HSV2HLS", HSV2HLSPackage.eINSTANCE, HSVTreePackage.eINSTANCE, HLSTreePackage.eINSTANCE);
 		try {	
-	        Transformation asTransformation = myQVT.compileTransformation();
+	        Transformation asTransformation = myQVT.compileTransformation("hls");
 	        myQVT.createGeneratedExecutor(asTransformation, "HSV2HLS.genmodel");
 			myQVT.loadInput("hsv", "SolarizedHSV.xmi");
 			myQVT.executeTransformation();
@@ -443,7 +441,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	MyQVT myQVT = createQVT("UpperToLower");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {	
-			Transformation asTransformation = myQVT.compileTransformation();
+			Transformation asTransformation = myQVT.compileTransformation("lowerGraph");
 	    	myQVT.createInterpretedExecutor(asTransformation);
 	    	myQVT.loadInput("upperGraph", "SimpleGraph.xmi");
 	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "UpperToLower_trace.xmi");
@@ -467,7 +465,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	MyQVT myQVT = createQVT("UpperToLower", Simplegraph2graphPackage.eINSTANCE, SimplegraphPackage.eINSTANCE);
 //		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
-    		Transformation asTransformation = myQVT.compileTransformation();
+    		Transformation asTransformation = myQVT.compileTransformation("lowerGraph");
 	        myQVT.createGeneratedExecutor(asTransformation, "SimpleGraph2Graph.genmodel");
 			myQVT.loadInput("upperGraph", "SimpleGraph.xmi");
 	    	myQVT.executeTransformation();

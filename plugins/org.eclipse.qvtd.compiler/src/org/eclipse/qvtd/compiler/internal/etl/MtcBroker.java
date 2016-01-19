@@ -171,6 +171,13 @@ public class MtcBroker {
 	@SuppressWarnings("unused")
 	private static final String MIDDLE_DIR_NAME = "M";
 
+	public static void assertNoResourceErrors(String prefix, Resource resource) {
+		String message = org.eclipse.ocl.pivot.utilities.PivotUtil.formatResourceDiagnostics(resource.getErrors(), prefix, "\n\t");
+		if (message != null)
+			assert false : message;
+	}
+
+
 	/** The Constant CREATE_GRAPHML. */
 	protected boolean createGraphml = false;
 
@@ -283,7 +290,6 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException the qvt mtc execution exception
 	 */
 	public MtcBroker(URI baseURI, String qvtcSource, @NonNull EnvironmentFactory environmentFactory, Map<?, ?> savingOptions) throws QvtMtcExecutionException {
-
 		this.savingOptions = savingOptions;
 		this.environmentFactory = environmentFactory;
 		this.baseUri = baseURI;
@@ -291,7 +297,6 @@ public class MtcBroker {
 		String dgPath = this.debugUri.appendSegment(qvtcSource).trimFileExtension() + "Dependencies";
 		String cgPath = this.debugUri.appendSegment(qvtcSource).trimFileExtension() + "Calls";
 		System.out.println("Executing the QVTc to QVTi MTC for " + qvtcSource);
-		this.baseUri = baseURI;
 		URI qvtcURI = baseURI.appendSegment(qvtcSource);
 		this.qvtcasUri = qvtcURI.toString();
     	URI modelsBaseUri = qvtcURI.trimFileExtension();
@@ -392,12 +397,6 @@ public class MtcBroker {
 		createContainmentTrees();
 	}
 
-	public static void assertNoResourceErrors(String prefix, Resource resource) {
-		String message = org.eclipse.ocl.pivot.utilities.PivotUtil.formatResourceDiagnostics(resource.getErrors(), prefix, "\n\t");
-		if (message != null)
-			assert false : message;
-	}
-
 	/**
 	 * Execute.
 	 *
@@ -426,32 +425,12 @@ public class MtcBroker {
 		assertNoResourceErrors("iModel", iModel.getResource());
 		iModel.store();
 	}
-	public @Nullable Resource newExecute() throws QvtMtcExecutionException {
-		loadConfigurationModel();
-		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
-		assertNoResourceErrors("cModel", cModel.getResource());
-		uModel = qvtcToQvtu(cModel, false);
-		assertNoResourceErrors("uModel", uModel.getResource());
-		mModel = qvtuToQvtm(uModel, false);
-		assertNoResourceErrors("mModel", mModel.getResource());
-		pModel = qvtmToQvtp(mModel, false);
-		assertNoResourceErrors("pModel", pModel.getResource());
-		try {
-			iResource = qvtp2qvti(false);
-		} catch (QvtMtcExecutionException e) {
-			throw e;
-		} catch (IOException e) {
-			throw new QvtMtcExecutionException("Failed to create regions", e);
-		}
-		return iResource;
-	}
 	
 	protected Resource qvtp2qvti(boolean useQVTip) throws IOException, QvtMtcExecutionException {
 		Resource pResource = pModel.getResource();
-		ResourceSet pResourceSet = pResource.getResourceSet();
 		RootDomainUsageAnalysis domainAnalysis = useQVTip
-				? new QVTimperativeDomainUsageAnalysis(this.environmentFactory)
-				: new QVTcoreDomainUsageAnalysis(this.environmentFactory);
+				? new QVTimperativeDomainUsageAnalysis(environmentFactory)
+				: new QVTcoreDomainUsageAnalysis(environmentFactory);
 		gModel = createASModel(scheduleUri, "QVTg", "QVT", QVTS_FULL_NS, false, true, false, true);
 		Resource gResource = gModel.getResource();
 		pModel.setCachingEnabled(true);
@@ -482,6 +461,7 @@ public class MtcBroker {
 		resource.save(savingOptions);
 		return resource;
 	}
+	
 	
 	protected void qvtsToGraphML(PivotModel sModel) throws QvtMtcExecutionException {
 		
@@ -641,6 +621,7 @@ public class MtcBroker {
 	 * 	executing the Flock script.
 	 */
 	private PivotModel qvtcToQvtu(EmfModel cModel, boolean useEpsilon) throws QvtMtcExecutionException {
+		Resource cResource = cModel.getResource();
 		if (useEpsilon) {
 			PivotModel uModel = null;
 			uModel = createASModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, false, true, false, false);
@@ -661,13 +642,13 @@ public class MtcBroker {
 				}
 			}
 			if (cModel != null) {
-				environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(cModel.getResource());
+				environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(cResource);
 			}
 			return uModel;
 		}
 		else {
 	        uModel = createASModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, false, true, false, false);
-	        for (EObject e : cModel.getResource().getContents()) {
+	        for (EObject e : cResource.getContents()) {
 	            CoreModel newE = (CoreModel) EcoreUtil.copy(e);
 	            newE.setExternalURI(((CoreModel) e).getExternalURI().replace(".qvtc", ".qvtu.qvtc"));
 	            newE.setName(((CoreModel) e).getName().replace(".qvtc", ".qvtu"));
@@ -1269,7 +1250,7 @@ public class MtcBroker {
 	    		}
 			}
 		}
-		throw new Exception("The QVTd model does not have a Transformation element.");
+		throw new QvtMtcExecutionException("The QVTd model does not have a Transformation element.");
 	}
 
 	public @NonNull Schedule getSchedule() throws QvtMtcExecutionException {
