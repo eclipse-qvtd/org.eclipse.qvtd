@@ -53,6 +53,9 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2PersonsNor
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2Persons.Families2PersonsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.PersonsPackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HLSTree.HLSTreePackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HSV2HLS.HSV2HLSPackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HSVTree.HSVTreePackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.Upper2LowerNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph.SimplegraphPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simplegraph2graphPackage;
@@ -296,6 +299,46 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.loadInput("family", "Families.xmi");
 	    	myQVT.executeTransformation();
 			myQVT.saveOutput("person", "Persons_CG.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
+	}
+    
+    @Test
+    public void testQVTcCompiler_HSVToHLS() throws Exception {
+//		AbstractTransformer.INVOCATIONS.setState(true);
+    	MyQVT myQVT = new MyQVT("hsv2hls");
+//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	try {
+	    	Transformation asTransformation = myQVT.compileTransformation("HSV2HLS", "hls");
+	    	myQVT.createInterpretedExecutor(asTransformation);
+	    	myQVT.loadInput("hsv", "SolarizedHSV.xmi");
+	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HSV2HLS_trace.xmi");
+	    	myQVT.createModel("hls", "SolarizedHLS_Interpreted.xmi");
+	    	myQVT.executeTransformation();
+	    	myQVT.saveOutput("hls", "SolarizedHLS_Interpreted.xmi", "SolarizedHLS_expected.xmi", null);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
+    }
+    
+    @Test
+    public void testQVTcCompiler_HSVToHLS_CG() throws Exception {
+//		AbstractTransformer.INVOCATIONS.setState(true);
+//		Scheduler.EDGE_ORDER.setState(true);
+//		Scheduler.REGION_DEPTH.setState(true);
+//		Scheduler.REGION_ORDER.setState(true);
+//		Scheduler.REGION_TRAVERSAL.setState(true);
+//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
+    	MyQVT myQVT = new MyQVT("hsv2hls", HSV2HLSPackage.eINSTANCE, HSVTreePackage.eINSTANCE, HLSTreePackage.eINSTANCE);
+		try {	
+	        Transformation asTransformation = myQVT.compileTransformation("HSV2HLS", "hls");
+	        myQVT.createGeneratedExecutor(asTransformation, "HSV2HLS.genmodel");
+			myQVT.loadInput("hsv", "SolarizedHSV.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("hls", "SolarizedHLS_CG.xmi", "SolarizedHLS_expected.xmi", null);
 		}
 		finally {
 	    	myQVT.dispose();
