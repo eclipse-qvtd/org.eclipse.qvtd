@@ -131,7 +131,6 @@ public class OCL2QVTiBroker extends MtcBroker {
 	}
 	
 
-	@Override
 	public Resource newExecute() throws QvtMtcExecutionException {
 		pModel = prepareQVTpModel();
 		

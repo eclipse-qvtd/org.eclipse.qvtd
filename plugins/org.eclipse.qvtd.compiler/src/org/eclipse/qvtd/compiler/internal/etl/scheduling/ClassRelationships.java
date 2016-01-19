@@ -78,10 +78,10 @@ public class ClassRelationships {
 	
 	private Set<@NonNull Package> processedPackage = new HashSet<@NonNull Package>(); 
 	
-	public ClassRelationships(@NonNull EnvironmentFactory ocl, @NonNull ResourceSet rSet) {
+	public ClassRelationships(@NonNull EnvironmentFactory ocl) {
 		mManager = ocl.getMetamodelManager();
 		((MetamodelManagerInternal)mManager).getASmetamodel();
-		initializeMaps(rSet);
+		initializeMaps(ocl.getMetamodelManager().getASResourceSet());
 	}
 	
 	private void initializeMaps(@NonNull ResourceSet resourceSet) {

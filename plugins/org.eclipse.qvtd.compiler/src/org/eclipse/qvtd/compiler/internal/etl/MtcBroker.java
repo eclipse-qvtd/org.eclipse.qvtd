@@ -462,7 +462,7 @@ public class MtcBroker {
 		}
 		QVTbaseUtil.rewriteSafeNavigations(environmentFactory, asTransformation);
 		/*Map<Element, DomainUsage> analysis =*/ domainAnalysis.analyzeTransformation(asTransformation);
-		ClassRelationships classRelationships = new ClassRelationships(environmentFactory, pResourceSet);
+		ClassRelationships classRelationships = new ClassRelationships(environmentFactory);
 		QVTp2QVTg qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);
 		qvtp2qvtg.run(pResource, gResource);
 		gResource.getContents().add(domainAnalysis.getPrimitiveTypeModel());
@@ -473,9 +473,11 @@ public class MtcBroker {
 		if (createGraphml) {
 			qvtsToGraphML(gModel);
 		}
-		org.eclipse.qvtd.compiler.internal.scheduler.Scheduler scheduler = new Scheduler(environmentFactory, getSchedule(), domainAnalysis, qvtp2qvtg);
+		org.eclipse.qvtd.compiler.internal.scheduler.Scheduler scheduler = new Scheduler(environmentFactory, getSchedule(), qvtp2qvtg);
 		ScheduledRegion rootRegion = scheduler.qvtp2qvts();
-		return scheduler.qvts2qvti(rootRegion, qvtiUri);
+		Resource resource = scheduler.qvts2qvti(rootRegion, URI.createURI(qvtiUri));
+		resource.save(savingOptions);
+		return resource;
 	}
 	
 	protected void qvtsToGraphML(PivotModel sModel) throws QvtMtcExecutionException {

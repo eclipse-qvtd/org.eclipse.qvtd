@@ -138,10 +138,10 @@ public abstract class SchedulerConstants
 	 */
 	private @Nullable DependencyAnalyzer dependencyAnalyzer = null;
 
-	public SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule dependencyGraph, @NonNull RootDomainUsageAnalysis domainAnalysis, @NonNull QVTp2QVTg qvtp2qvtg) {
+	public SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule dependencyGraph, @NonNull QVTp2QVTg qvtp2qvtg) {
 		this.environmentFactory = environmentFactory;
 		this.dependencyGraph = dependencyGraph;
-		this.domainAnalysis = domainAnalysis;
+		this.domainAnalysis = qvtp2qvtg.getDomainUsageAnalysis();
 		this.qvtp2qvtg = qvtp2qvtg;
 		this.transformation = ClassUtil.nonNullState(QVTbaseUtil.getContainingTransformation(((MappingAction)dependencyGraph.getActions().get(0)).getMapping()));
 		//

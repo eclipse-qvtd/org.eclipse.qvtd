@@ -33,12 +33,10 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
-import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.schedule2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
@@ -67,8 +65,8 @@ public class Scheduler extends SchedulerConstants
 
 	private final @NonNull List<AbstractAction> orderedActions;
 
-	public Scheduler(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule schedule, @NonNull RootDomainUsageAnalysis domainAnalysis, @NonNull QVTp2QVTg qvtp2qvtg) {
-		super(environmentFactory, schedule, domainAnalysis, qvtp2qvtg);
+	public Scheduler(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule schedule, @NonNull QVTp2QVTg qvtp2qvtg) {
+		super(environmentFactory, schedule, qvtp2qvtg);
 		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(schedule);
 		List<AbstractAction> orderedActions = orderer.computeOrdering();
 		if (orderedActions == null) {
@@ -349,16 +347,15 @@ public class Scheduler extends SchedulerConstants
 		return rootRegion;
 	}
 
-	public Resource qvts2qvti(@NonNull ScheduledRegion scheduledRegion, String qvtias) throws IOException {
+	public @NonNull Resource qvts2qvti(@NonNull ScheduledRegion scheduledRegion, @NonNull URI qvtiURI) {
 		Transformation transformation = getTransformation();
 		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(getEnvironmentFactory(), transformation, scheduledRegion.getRegionOrderer());
 		Model model = (Model)scheduledRegion.accept(visitor);
-		assert model != null;model.setExternalURI(qvtias);
+		assert model != null;
+		model.setExternalURI(qvtiURI.toString());
 		Resource eResource = getDependencyGraph().eResource();
-		Resource resource = eResource.getResourceSet().createResource(URI.createURI(qvtias));
+		Resource resource = eResource.getResourceSet().createResource(qvtiURI);
 		resource.getContents().add(model);
-		Map<Object, Object> saveOptions = XMIUtil.createSaveOptions();
-		resource.save(saveOptions);
 		return resource;
 	}
 

@@ -57,7 +57,8 @@ import org.eclipse.qvtd.pivot.schedule.ScheduleFactory;
 
 public class QVTp2QVTg {
 	
-	private Schedule dg;
+	private final @NonNull Schedule dg= ScheduleFactory.eINSTANCE.createSchedule();
+;
 	
 	// Caches
 	private Map<@NonNull TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>> typedModel2class2datum = new HashMap<@NonNull TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>>();
@@ -68,7 +69,6 @@ public class QVTp2QVTg {
 	
 	private final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	private final @NonNull ClassRelationships classRelationships;
-	
 
 	public QVTp2QVTg(@NonNull RootDomainUsageAnalysis domainAnalysis, @NonNull ClassRelationships classRelationships) {
 		this.domainUsageAnalysis = domainAnalysis;
@@ -139,8 +139,6 @@ public class QVTp2QVTg {
 	}
 	public void run(@NonNull Resource qvtpModel, @NonNull Resource qvtsModel) {
 		clearCaches();
-		
-		dg = ScheduleFactory.eINSTANCE.createSchedule();
 				
 		for (EObject eObject : qvtpModel.getContents()) {
 			if (eObject instanceof BaseModel) {
@@ -600,6 +598,10 @@ public class QVTp2QVTg {
 		Set<org.eclipse.ocl.pivot.Class> result = getAllSuperAndSubClasses(context);
 		result.add(context);
 		return result;
+	}
+	
+	public @NonNull RootDomainUsageAnalysis getDomainUsageAnalysis() {
+		return domainUsageAnalysis;
 	}
 	
 	private org.eclipse.ocl.pivot.Class getElementClass(TypedElement tElement) {
