@@ -1,0 +1,1491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvtc:CoreModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
+    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvtc="http://www.eclipse.org/qvt/2015/QVTcore" xmlns:qvtcb="http://www.eclipse.org/qvt/2015/QVTcoreBase"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage http://www.eclipse.org/qvt/2015/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage"
+    name="UmlToRdbms.qvtcas" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/uml2rdbms/UmlToRdbms.qvtcas">
+  <ownedImports name="SimpleUML" importedNamespace="pivot:Package SimpleUML.ecore.oclas#P.simpleuml"/>
+  <ownedImports name="SimpleRDBMS" importedNamespace="pivot:Package SimpleRDBMS.ecore.oclas#P.simplerdbms"/>
+  <ownedImports name="SimpleUML2RDBMS" importedNamespace="pivot:Package SimpleUML2RDBMS.ecore.oclas#P.simpleuml2rdbms"/>
+  <ownedPackages xmi:id="P." name="">
+    <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..umlRdbms" name="umlRdbms" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+      <modelParameter xmi:id="qT..umlRdbms.uml" name="uml" usedPackage="SimpleUML.ecore.oclas#P.simpleuml"/>
+      <modelParameter xmi:id="qT..umlRdbms.rdbms" name="rdbms" usedPackage="SimpleRDBMS.ecore.oclas#P.simplerdbms"/>
+      <modelParameter usedPackage="SimpleUML2RDBMS.ecore.oclas#P.simpleuml2rdbms"/>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.packageToSchema" name="packageToSchema">
+        <ownedComments body="-- Package and Schema mapping&#xA;class PackageToSchema {&#xA;composite classesToTables : Set(ClassToTable) opposites owner;&#xA;composite primitivesToNames : Set(PrimitiveToName) opposites owner;&#xA;name : String;&#xA;-- uml&#xA;umlPackage : Package;&#xA;-- rdbms&#xA;schema : Schema;&#xA;}"/>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
+          <guardPattern/>
+          <bottomPattern>
+            <variable xmi:id="qV..umlRdbms.packageToSchema.uml.bottom.p" name="p" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package"/>
+          </bottomPattern>
+        </domain>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..umlRdbms.rdbms">
+          <guardPattern/>
+          <bottomPattern>
+            <realizedVariable xmi:id="qV..umlRdbms.packageToSchema.rdbms.bottom.s" name="s" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema"/>
+          </bottomPattern>
+        </domain>
+        <guardPattern/>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PackageToSchema.umlPackage">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredVariable="#qV..umlRdbms.packageToSchema.uml.bottom.p"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                referredVariable="#qV..umlRdbms.packageToSchema.bottom.p2s"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PackageToSchema.schema">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema" referredVariable="#qV..umlRdbms.packageToSchema.rdbms.bottom.s"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                referredVariable="#qV..umlRdbms.packageToSchema.bottom.p2s"/>
+          </assignment>
+          <realizedVariable xmi:id="qV..umlRdbms.packageToSchema.bottom.p2s" name="p2s" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"/>
+        </bottomPattern>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredVariable="#qV..umlRdbms.packageToSchema.uml.bottom.p"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                  referredVariable="#qV..umlRdbms.packageToSchema.bottom.p2s"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema" referredVariable="#qV..umlRdbms.packageToSchema.rdbms.bottom.s"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                  referredVariable="#qV..umlRdbms.packageToSchema.bottom.p2s"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                    referredVariable="#qV..umlRdbms.packageToSchema.bottom.p2s"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredVariable="#qV..umlRdbms.packageToSchema.uml.bottom.p"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                    referredVariable="#qV..umlRdbms.packageToSchema.bottom.p2s"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema" referredVariable="#qV..umlRdbms.packageToSchema.rdbms.bottom.s"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.primitiveToName" name="primitiveToName" specification="#m..umlRdbms.integerToNumber #m..umlRdbms.booleanToBoolean #m..umlRdbms.stringToVarchar">
+        <ownedComments body="-- Primitive data type marshaling&#xA;class PrimitiveToName {&#xA;owner : PackageToSchema opposites primitivesToNames;&#xA;name : String;&#xA;-- uml&#xA;primitive : PrimitiveDataType;&#xA;-- rdbms&#xA;typeName : String;&#xA;}"/>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
+          <guardPattern>
+            <variable xmi:id="qV..umlRdbms.primitiveToName.uml.guard.p" name="p" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package"/>
+          </guardPattern>
+          <bottomPattern>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredProperty="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType" referredVariable="#qV..umlRdbms.primitiveToName.uml.bottom.prim"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredVariable="#qV..umlRdbms.primitiveToName.uml.guard.p"/>
+              </conditionExpression>
+            </predicate>
+            <variable xmi:id="qV..umlRdbms.primitiveToName.uml.bottom.prim" name="prim" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"/>
+          </bottomPattern>
+        </domain>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.rdbms">
+          <guardPattern/>
+          <bottomPattern>
+            <variable xmi:id="qV..umlRdbms.primitiveToName.rdbms.bottom.sqlType" name="sqlType" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+          </bottomPattern>
+        </domain>
+        <guardPattern>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PackageToSchema.umlPackage">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                    referredVariable="#qV..umlRdbms.primitiveToName.guard.p2s"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredVariable="#qV..umlRdbms.primitiveToName.uml.guard.p"/>
+            </conditionExpression>
+          </predicate>
+          <variable xmi:id="qV..umlRdbms.primitiveToName.guard.p2s" name="p2s" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"/>
+        </guardPattern>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PrimitiveToName.owner">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema" referredVariable="#qV..umlRdbms.primitiveToName.guard.p2s"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PrimitiveToName"
+                referredVariable="#qV..umlRdbms.primitiveToName.bottom.p2n"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PrimitiveToName.primitive">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType" referredVariable="#qV..umlRdbms.primitiveToName.uml.bottom.prim"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PrimitiveToName"
+                referredVariable="#qV..umlRdbms.primitiveToName.bottom.p2n"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PrimitiveToName.typeName">
+            <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String" referredVariable="#qV..umlRdbms.primitiveToName.rdbms.bottom.sqlType"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PrimitiveToName"
+                referredVariable="#qV..umlRdbms.primitiveToName.bottom.p2n"/>
+          </assignment>
+          <realizedVariable xmi:id="qV..umlRdbms.primitiveToName.bottom.p2n" name="p2n" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PrimitiveToName"/>
+        </bottomPattern>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.integerToNumber" name="integerToNumber" refinement="#m..umlRdbms.primitiveToName">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
+          <guardPattern/>
+          <bottomPattern>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType" referredVariable="#qV..umlRdbms.primitiveToName.uml.bottom.prim"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    stringSymbol="Integer"/>
+              </conditionExpression>
+            </predicate>
+          </bottomPattern>
+        </domain>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.rdbms">
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:VariableAssignment" isDefault="false" targetVariable="#qV..umlRdbms.primitiveToName.rdbms.bottom.sqlType">
+              <value xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  stringSymbol="NUMBER"/>
+            </assignment>
+          </bottomPattern>
+        </domain>
+        <guardPattern/>
+        <bottomPattern>
+          <realizedVariable xmi:id="qV..umlRdbms.integerToNumber.bottom.p2n" name="p2n" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.IntegerToNumber"/>
+        </bottomPattern>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+              <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                      referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType" referredVariable="#qV..umlRdbms.primitiveToName.uml.bottom.prim"/>
+                  </ownedSource>
+                  <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                      stringSymbol="2"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    stringSymbol="NUMBER"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.IntegerToNumber"
+                  referredVariable="#qV..umlRdbms.integerToNumber.bottom.p2n"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.booleanToBoolean" name="booleanToBoolean" refinement="#m..umlRdbms.primitiveToName">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
+          <guardPattern/>
+          <bottomPattern>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType" referredVariable="#qV..umlRdbms.primitiveToName.uml.bottom.prim"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    stringSymbol="Boolean"/>
+              </conditionExpression>
+            </predicate>
+          </bottomPattern>
+        </domain>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.rdbms">
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:VariableAssignment" isDefault="false" targetVariable="#qV..umlRdbms.primitiveToName.rdbms.bottom.sqlType">
+              <value xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  stringSymbol="BOOLEAN"/>
+            </assignment>
+          </bottomPattern>
+        </domain>
+        <guardPattern/>
+        <bottomPattern>
+          <realizedVariable xmi:id="qV..umlRdbms.booleanToBoolean.bottom.p2n" name="p2n" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.BooleanToBoolean"/>
+        </bottomPattern>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+              <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                      referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType" referredVariable="#qV..umlRdbms.primitiveToName.uml.bottom.prim"/>
+                  </ownedSource>
+                  <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                      stringSymbol="2"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    stringSymbol="BOOLEAN"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.BooleanToBoolean"
+                  referredVariable="#qV..umlRdbms.booleanToBoolean.bottom.p2n"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.stringToVarchar" name="stringToVarchar" refinement="#m..umlRdbms.primitiveToName">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
+          <guardPattern/>
+          <bottomPattern>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType" referredVariable="#qV..umlRdbms.primitiveToName.uml.bottom.prim"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    stringSymbol="String"/>
+              </conditionExpression>
+            </predicate>
+          </bottomPattern>
+        </domain>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.rdbms">
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:VariableAssignment" isDefault="false" targetVariable="#qV..umlRdbms.primitiveToName.rdbms.bottom.sqlType">
+              <value xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  stringSymbol="VARCHAR"/>
+            </assignment>
+          </bottomPattern>
+        </domain>
+        <guardPattern/>
+        <bottomPattern>
+          <realizedVariable xmi:id="qV..umlRdbms.stringToVarchar.bottom.p2n" name="p2n" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.StringToVarchar"/>
+        </bottomPattern>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+              <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                      referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType" referredVariable="#qV..umlRdbms.primitiveToName.uml.bottom.prim"/>
+                  </ownedSource>
+                  <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                      stringSymbol="2"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    stringSymbol="VARCHAR"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.StringToVarchar"
+                  referredVariable="#qV..umlRdbms.stringToVarchar.bottom.p2n"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.flattening" name="flattening" specification="#m..umlRdbms.associationToForeignKey #m..umlRdbms.attributes">
+        <guardPattern/>
+        <bottomPattern/>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.classToTable" name="classToTable">
+        <ownedComments body="query umlRdbms::getAllSupers(cls : SimpleUML::Class) : Set(SimpleUML::Class) {&#xA;cls.general->collect(gen | getAllSupers(gen))->including(cls)->asSet()&#xA;}&#xA;&#xA;query umlRdbms::getAllAttributes(cls :  SimpleUML::Class) : Set( SimpleUML::Attribute) {&#xA;getAllSupers(cls)->collect(c | c.attributes)&#xA;}&#xA;&#xA;query umlRdbms::getAllForwards(cls :  SimpleUML::Class) : Set( SimpleUML::Association) {&#xA;getAllSupers(cls)->collect(c | true)&#xA;}"/>
+        <ownedComments body="-- Class and Table mapping&#xA;class ClassToTable extends FromAttributeOwner, ToColumn {&#xA;owner : PackageToSchema opposites classesToTables;&#xA;composite associationToForeignKeys :&#xA;OrderedSet(AssociationToForeignKey) opposites owner;&#xA;name : String;&#xA;-- uml&#xA;umlClass : Class;&#xA;-- rdbms&#xA;table : Table;&#xA;primaryKey : Key;&#xA;}"/>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.uml">
+          <guardPattern>
+            <variable xmi:id="qV..umlRdbms.classToTable.uml.guard.p" name="p" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package"/>
+          </guardPattern>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
+              <value xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  stringSymbol="persistent"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.classToTable.uml.bottom.c"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredVariable="#qV..umlRdbms.classToTable.uml.guard.p"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.classToTable.uml.bottom.c"/>
+            </assignment>
+            <realizedVariable xmi:id="qV..umlRdbms.classToTable.uml.bottom.c" name="c" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"/>
+          </bottomPattern>
+        </domain>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.rdbms">
+          <guardPattern>
+            <variable xmi:id="qV..umlRdbms.classToTable.rdbms.guard.s" name="s" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema"/>
+          </guardPattern>
+          <bottomPattern>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="&lt;>" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%60%%62%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.classToTable.rdbms.bottom.t"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    stringSymbol="meta"/>
+              </conditionExpression>
+            </predicate>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="true" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind">
+              <value xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  stringSymbol="base"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.classToTable.rdbms.bottom.t"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Table.schema">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema" referredVariable="#qV..umlRdbms.classToTable.rdbms.guard.s"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.classToTable.rdbms.bottom.t"/>
+            </assignment>
+            <realizedVariable xmi:id="qV..umlRdbms.classToTable.rdbms.bottom.t" name="t" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"/>
+          </bottomPattern>
+        </domain>
+        <guardPattern>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PackageToSchema.umlPackage">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                    referredVariable="#qV..umlRdbms.classToTable.guard.p2s"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredVariable="#qV..umlRdbms.classToTable.uml.guard.p"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema" referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PackageToSchema.schema">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                    referredVariable="#qV..umlRdbms.classToTable.guard.p2s"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema" referredVariable="#qV..umlRdbms.classToTable.rdbms.guard.s"/>
+            </conditionExpression>
+          </predicate>
+          <variable xmi:id="qV..umlRdbms.classToTable.guard.p2s" name="p2s" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"/>
+        </guardPattern>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ClassToTable.owner">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema" referredVariable="#qV..umlRdbms.classToTable.guard.p2s"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                referredVariable="#qV..umlRdbms.classToTable.bottom.c2t"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ClassToTable.umlClass">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.classToTable.uml.bottom.c"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                referredVariable="#qV..umlRdbms.classToTable.bottom.c2t"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ClassToTable.table">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.classToTable.rdbms.bottom.t"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                referredVariable="#qV..umlRdbms.classToTable.bottom.c2t"/>
+          </assignment>
+          <realizedVariable xmi:id="qV..umlRdbms.classToTable.bottom.c2t" name="c2t" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"/>
+        </bottomPattern>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.classToTable.uml.bottom.c"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                  referredVariable="#qV..umlRdbms.classToTable.bottom.c2t"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.classToTable.rdbms.bottom.t"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                  referredVariable="#qV..umlRdbms.classToTable.bottom.c2t"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                    referredVariable="#qV..umlRdbms.classToTable.bottom.c2t"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.classToTable.uml.bottom.c"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                    referredVariable="#qV..umlRdbms.classToTable.bottom.c2t"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.classToTable.rdbms.bottom.t"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+        <local>
+          <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.rdbms">
+            <guardPattern/>
+            <bottomPattern>
+              <predicate>
+                <conditionExpression xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Collection.includes..ocl.OclAny">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.keys">
+                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@local.1/@domain.0/@bottomPattern/@realizedVariable.1"/>
+                  </ownedSource>
+                  <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@local.1/@domain.0/@bottomPattern/@realizedVariable.0"/>
+                </conditionExpression>
+              </predicate>
+              <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.owner">
+                <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.classToTable.rdbms.bottom.t"/>
+                <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@local.1/@domain.0/@bottomPattern/@realizedVariable.0"/>
+              </assignment>
+              <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind">
+                <value xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    stringSymbol="primary"/>
+                <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@local.1/@domain.0/@bottomPattern/@realizedVariable.0"/>
+              </assignment>
+              <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.owner">
+                <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.classToTable.rdbms.bottom.t"/>
+                <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@local.1/@domain.0/@bottomPattern/@realizedVariable.1"/>
+              </assignment>
+              <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="true" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.keys">
+                <value xsi:type="pivot:CollectionLiteralExp" type="#//@ownedPackages.1/@ownedClasses.1" kind="Set">
+                  <ownedParts xsi:type="pivot:CollectionItem" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key">
+                    <ownedItem xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@local.1/@domain.0/@bottomPattern/@realizedVariable.0"/>
+                  </ownedParts>
+                </value>
+                <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@local.1/@domain.0/@bottomPattern/@realizedVariable.1"/>
+              </assignment>
+              <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="true" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
+                <value xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    stringSymbol="NUMBER"/>
+                <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@local.1/@domain.0/@bottomPattern/@realizedVariable.1"/>
+              </assignment>
+              <realizedVariable name="pk" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"/>
+              <realizedVariable name="pc" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"/>
+            </bottomPattern>
+          </domain>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ClassToTable.primaryKey">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@local.1/@domain.0/@bottomPattern/@realizedVariable.0"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                  referredVariable="#qV..umlRdbms.classToTable.bottom.c2t"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ToColumn.column">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@local.1/@domain.0/@bottomPattern/@realizedVariable.1"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                  referredVariable="#qV..umlRdbms.classToTable.bottom.c2t"/>
+            </assignment>
+          </bottomPattern>
+          <local>
+            <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.rdbms">
+              <guardPattern/>
+              <bottomPattern>
+                <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+                  <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                      referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                    <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                        referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+                      <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.classToTable.rdbms.bottom.t"/>
+                    </ownedSource>
+                    <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                        stringSymbol="_tid"/>
+                  </value>
+                  <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@local.1/@domain.0/@bottomPattern/@realizedVariable.1"/>
+                </assignment>
+                <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+                  <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                      referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                    <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                        referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+                      <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.classToTable.rdbms.bottom.t"/>
+                    </ownedSource>
+                    <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                        stringSymbol="_pk"/>
+                  </value>
+                  <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@local.1/@domain.0/@bottomPattern/@realizedVariable.0"/>
+                </assignment>
+              </bottomPattern>
+            </domain>
+            <guardPattern/>
+            <bottomPattern/>
+          </local>
+        </local>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.associationToForeignKey" name="associationToForeignKey" refinement="#m..umlRdbms.flattening">
+        <ownedComments body="-- Association and ForeignKey mapping&#xA;class AssociationToForeignKey extends ToColumn {&#xA;referenced : ClassToTable;&#xA;owner : ClassToTable opposites associationToForeignKeys;&#xA;name : String;&#xA;-- uml&#xA;association : Association;&#xA;-- rdbms&#xA;foreignKey : ForeignKey;&#xA;}"/>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.uml">
+          <guardPattern>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredProperty="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.sc"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.p"/>
+              </conditionExpression>
+            </predicate>
+            <variable xmi:id="qV..umlRdbms.associationToForeignKey.uml.guard.p" name="p" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package"/>
+            <variable xmi:id="qV..umlRdbms.associationToForeignKey.uml.guard.sc" name="sc" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"/>
+            <variable xmi:id="qV..umlRdbms.associationToForeignKey.uml.guard.dc" name="dc" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"/>
+          </guardPattern>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="true" targetProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.source">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.sc"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="true" targetProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.destination">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.dc"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="true" targetProperty="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.p"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+            </assignment>
+            <realizedVariable xmi:id="qV..umlRdbms.associationToForeignKey.uml.bottom.a" name="a" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association"/>
+          </bottomPattern>
+        </domain>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.rdbms">
+          <guardPattern>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema" referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Table.schema">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.guard.st"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.guard.s"/>
+              </conditionExpression>
+            </predicate>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.owner">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.guard.rk"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.guard.dt"/>
+              </conditionExpression>
+            </predicate>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.guard.rk"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    stringSymbol="primary"/>
+              </conditionExpression>
+            </predicate>
+            <variable xmi:id="qV..umlRdbms.associationToForeignKey.rdbms.guard.s" name="s" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema"/>
+            <variable xmi:id="qV..umlRdbms.associationToForeignKey.rdbms.guard.st" name="st" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"/>
+            <variable xmi:id="qV..umlRdbms.associationToForeignKey.rdbms.guard.dt" name="dt" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"/>
+            <variable xmi:id="qV..umlRdbms.associationToForeignKey.rdbms.guard.rk" name="rk" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"/>
+          </guardPattern>
+          <bottomPattern>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Collection.includes..ocl.OclAny">
+                <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.2" referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.foreignKeys">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fc"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fk"/>
+              </conditionExpression>
+            </predicate>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.ForeignKey.owner">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.guard.st"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fk"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.owner">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.guard.st"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fc"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.ForeignKey.refersTo">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.guard.rk"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fk"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="true" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.foreignKeys">
+              <value xsi:type="pivot:CollectionLiteralExp" type="#//@ownedPackages.1/@ownedClasses.3" kind="Set">
+                <ownedParts xsi:type="pivot:CollectionItem" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey">
+                  <ownedItem xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fk"/>
+                </ownedParts>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fc"/>
+            </assignment>
+            <realizedVariable xmi:id="qV..umlRdbms.associationToForeignKey.rdbms.bottom.fk" name="fk" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"/>
+            <realizedVariable xmi:id="qV..umlRdbms.associationToForeignKey.rdbms.bottom.fc" name="fc" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"/>
+          </bottomPattern>
+        </domain>
+        <guardPattern>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ClassToTable.owner">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                    referredVariable="#qV..umlRdbms.associationToForeignKey.guard.sc2t"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                  referredVariable="#qV..umlRdbms.associationToForeignKey.guard.p2s"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PackageToSchema.umlPackage">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                    referredVariable="#qV..umlRdbms.associationToForeignKey.guard.p2s"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.p"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema" referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PackageToSchema.schema">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"
+                    referredVariable="#qV..umlRdbms.associationToForeignKey.guard.p2s"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.guard.s"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ClassToTable.table">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                    referredVariable="#qV..umlRdbms.associationToForeignKey.guard.sc2t"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.guard.st"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ClassToTable.table">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                    referredVariable="#qV..umlRdbms.associationToForeignKey.guard.dc2t"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.guard.dt"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ClassToTable.umlClass">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                    referredVariable="#qV..umlRdbms.associationToForeignKey.guard.sc2t"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.sc"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ClassToTable.umlClass">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                    referredVariable="#qV..umlRdbms.associationToForeignKey.guard.dc2t"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.dc"/>
+            </conditionExpression>
+          </predicate>
+          <variable xmi:id="qV..umlRdbms.associationToForeignKey.guard.p2s" name="p2s" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PackageToSchema"/>
+          <variable xmi:id="qV..umlRdbms.associationToForeignKey.guard.sc2t" name="sc2t" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"/>
+          <variable xmi:id="qV..umlRdbms.associationToForeignKey.guard.dc2t" name="dc2t" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"/>
+        </guardPattern>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.AssociationToForeignKey.owner">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable" referredVariable="#qV..umlRdbms.associationToForeignKey.guard.sc2t"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AssociationToForeignKey"
+                referredVariable="#qV..umlRdbms.associationToForeignKey.bottom.a2f"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.AssociationToForeignKey.referenced">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable" referredVariable="#qV..umlRdbms.associationToForeignKey.guard.dc2t"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AssociationToForeignKey"
+                referredVariable="#qV..umlRdbms.associationToForeignKey.bottom.a2f"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.AssociationToForeignKey.association">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AssociationToForeignKey"
+                referredVariable="#qV..umlRdbms.associationToForeignKey.bottom.a2f"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.AssociationToForeignKey.foreignKey">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fk"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AssociationToForeignKey"
+                referredVariable="#qV..umlRdbms.associationToForeignKey.bottom.a2f"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ToColumn.column">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fc"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AssociationToForeignKey"
+                referredVariable="#qV..umlRdbms.associationToForeignKey.bottom.a2f"/>
+          </assignment>
+          <realizedVariable xmi:id="qV..umlRdbms.associationToForeignKey.bottom.a2f" name="a2f" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AssociationToForeignKey"/>
+        </bottomPattern>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+              <value xsi:type="pivot:IfExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
+                <ownedCondition xsi:type="pivot:OperationCallExp" name="and" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.and..ocl.Boolean">
+                  <ownedSource xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                      referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                    <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.destination">
+                      <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                    </ownedSource>
+                    <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.dc"/>
+                  </ownedSource>
+                  <ownedArguments xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                      referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                    <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.source">
+                      <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                    </ownedSource>
+                    <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.sc"/>
+                  </ownedArguments>
+                </ownedCondition>
+                <ownedElse xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
+                  <ownedCondition xsi:type="pivot:OperationCallExp" name="and" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                      referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.and..ocl.Boolean">
+                    <ownedSource xsi:type="pivot:OperationCallExp" name="&lt;>" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                        referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%60%%62%..ocl.OclSelf">
+                      <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.destination">
+                        <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                      </ownedSource>
+                      <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.dc"/>
+                    </ownedSource>
+                    <ownedArguments xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                        referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                      <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.source">
+                        <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                      </ownedSource>
+                      <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.sc"/>
+                    </ownedArguments>
+                  </ownedCondition>
+                  <ownedElse xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
+                    <ownedCondition xsi:type="pivot:OperationCallExp" name="and" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                        referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.and..ocl.Boolean">
+                      <ownedSource xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                          referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                        <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.destination">
+                          <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                        </ownedSource>
+                        <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.dc"/>
+                      </ownedSource>
+                      <ownedArguments xsi:type="pivot:OperationCallExp" name="&lt;>" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                          referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%60%%62%..ocl.OclSelf">
+                        <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.source">
+                          <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                        </ownedSource>
+                        <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.sc"/>
+                      </ownedArguments>
+                    </ownedCondition>
+                    <ownedElse xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                        referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                      <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                          referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                        <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                            referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                          <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                              referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                            <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.dc"/>
+                            </ownedSource>
+                            <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                                stringSymbol="_"/>
+                          </ownedSource>
+                          <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                            <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association"
+                                referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                          </ownedArguments>
+                        </ownedSource>
+                        <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                            stringSymbol="_"/>
+                      </ownedSource>
+                      <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                          referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                        <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.sc"/>
+                      </ownedArguments>
+                    </ownedElse>
+                    <ownedThen xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                        referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                      <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                          referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                        <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                            referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                          <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                        </ownedSource>
+                        <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                            stringSymbol="_"/>
+                      </ownedSource>
+                      <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                          referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                        <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.sc"/>
+                      </ownedArguments>
+                    </ownedThen>
+                  </ownedElse>
+                  <ownedThen xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                      referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                    <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                        referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                      <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                          referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                        <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.dc"/>
+                      </ownedSource>
+                      <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                          stringSymbol="_"/>
+                    </ownedSource>
+                    <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                        referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                      <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                    </ownedArguments>
+                  </ownedThen>
+                </ownedElse>
+                <ownedThen xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                </ownedThen>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AssociationToForeignKey"
+                  referredVariable="#qV..umlRdbms.associationToForeignKey.bottom.a2f"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+              <value xsi:type="pivot:IfExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
+                <ownedCondition xsi:type="pivot:OperationCallExp" name="and" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Boolean.and..ocl.Boolean">
+                  <ownedSource xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                      referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                    <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.destination">
+                      <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                    </ownedSource>
+                    <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.dc"/>
+                  </ownedSource>
+                  <ownedArguments xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                      referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                    <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.source">
+                      <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                    </ownedSource>
+                    <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.guard.sc"/>
+                  </ownedArguments>
+                </ownedCondition>
+                <ownedElse xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+                </ownedElse>
+                <ownedThen xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AssociationToForeignKey"
+                      referredVariable="#qV..umlRdbms.associationToForeignKey.bottom.a2f"/>
+                </ownedThen>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association" referredVariable="#qV..umlRdbms.associationToForeignKey.uml.bottom.a"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AssociationToForeignKey"
+                    referredVariable="#qV..umlRdbms.associationToForeignKey.bottom.a2f"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fk"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fk"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AssociationToForeignKey"
+                  referredVariable="#qV..umlRdbms.associationToForeignKey.bottom.a2f"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+              <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AssociationToForeignKey"
+                      referredVariable="#qV..umlRdbms.associationToForeignKey.bottom.a2f"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    stringSymbol="_tid"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fc"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
+                <ownedSource xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
+                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OrderedCollection.first">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.4" referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.column">
+                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.guard.rk"/>
+                  </ownedSource>
+                </ownedSource>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.associationToForeignKey.rdbms.bottom.fc"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.attributes" name="attributes" refinement="#m..umlRdbms.flattening" specification="#m..umlRdbms.classAttributes #m..umlRdbms.primitiveAttribute #m..umlRdbms.complexAttributeAttributes #m..umlRdbms.complexAttribute">
+        <ownedComments body="-- attribute mapping&#xA;abstract class FromAttributeOwner {&#xA;composite fromAttributes : Set(FromAttribute) opposites owner;&#xA;}&#xA;abstract class FromAttribute {&#xA;name : String;&#xA;kind : String;&#xA;owner : FromAttributeOwner opposites fromAttributes;&#xA;leafs : Set(AttributeToColumn);&#xA;-- uml&#xA;attribute : Attribute;&#xA;}&#xA;abstract class ToColumn {&#xA;-- rdbms&#xA;column : Column;&#xA;}&#xA;class NonLeafAttribute extends FromAttributeOwner, FromAttribute {&#xA;leafs := fromAttributes.leafs;&#xA;}&#xA;class AttributeToColumn extends FromAttribute, ToColumn {&#xA;type : PrimitiveToName;&#xA;}"/>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.uml">
+          <guardPattern>
+            <variable xmi:id="qV..umlRdbms.attributes.uml.guard.c" name="c" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"/>
+          </guardPattern>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="true" targetProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.attributes.uml.guard.c"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute" referredVariable="#qV..umlRdbms.attributes.uml.bottom.a"/>
+            </assignment>
+            <realizedVariable xmi:id="qV..umlRdbms.attributes.uml.bottom.a" name="a" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute"/>
+          </bottomPattern>
+        </domain>
+        <guardPattern>
+          <variable xmi:id="qV..umlRdbms.attributes.guard.fao" name="fao" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttributeOwner"/>
+        </guardPattern>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttribute.attribute">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute" referredVariable="#qV..umlRdbms.attributes.uml.bottom.a"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute"
+                referredVariable="#qV..umlRdbms.attributes.bottom.fa"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttribute.owner">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttributeOwner" referredVariable="#qV..umlRdbms.attributes.guard.fao"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute"
+                referredVariable="#qV..umlRdbms.attributes.bottom.fa"/>
+          </assignment>
+          <realizedVariable xmi:id="qV..umlRdbms.attributes.bottom.fa" name="fa" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute"/>
+        </bottomPattern>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttribute.kind">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute" referredVariable="#qV..umlRdbms.attributes.uml.bottom.a"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute"
+                  referredVariable="#qV..umlRdbms.attributes.bottom.fa"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttribute.kind">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute"
+                    referredVariable="#qV..umlRdbms.attributes.bottom.fa"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute" referredVariable="#qV..umlRdbms.attributes.uml.bottom.a"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.classAttributes" name="classAttributes" refinement="#m..umlRdbms.attributes" specification="#m..umlRdbms.classPrimitiveAttributes #m..umlRdbms.classComplexAttributes">
+        <guardPattern>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ClassToTable.umlClass">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                    referredVariable="#qV..umlRdbms.classAttributes.guard.fao"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.attributes.uml.guard.c"/>
+            </conditionExpression>
+          </predicate>
+          <variable xmi:id="qV..umlRdbms.classAttributes.guard.fao" name="fao" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"/>
+        </guardPattern>
+        <bottomPattern/>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute" referredVariable="#qV..umlRdbms.attributes.uml.bottom.a"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute"
+                  referredVariable="#qV..umlRdbms.attributes.bottom.fa"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute"
+                    referredVariable="#qV..umlRdbms.attributes.bottom.fa"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute" referredVariable="#qV..umlRdbms.attributes.uml.bottom.a"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.primitiveAttribute" name="primitiveAttribute" refinement="#m..umlRdbms.attributes"
+          specification="#m..umlRdbms.classPrimitiveAttributes #m..umlRdbms.complexAttributePrimitiveAttributes">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.uml">
+          <guardPattern>
+            <variable xmi:id="qV..umlRdbms.primitiveAttribute.uml.guard.t" name="t" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"/>
+          </guardPattern>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType" referredVariable="#qV..umlRdbms.primitiveAttribute.uml.guard.t"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute" referredVariable="#qV..umlRdbms.attributes.uml.bottom.a"/>
+            </assignment>
+          </bottomPattern>
+        </domain>
+        <guardPattern>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType" referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PrimitiveToName.primitive">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PrimitiveToName"
+                    referredVariable="#qV..umlRdbms.primitiveAttribute.guard.p2n"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType" referredVariable="#qV..umlRdbms.primitiveAttribute.uml.guard.t"/>
+            </conditionExpression>
+          </predicate>
+          <variable xmi:id="qV..umlRdbms.primitiveAttribute.guard.p2n" name="p2n" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PrimitiveToName"/>
+        </guardPattern>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.AttributeToColumn.type">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PrimitiveToName" referredVariable="#qV..umlRdbms.primitiveAttribute.guard.p2n"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"
+                referredVariable="#qV..umlRdbms.primitiveAttribute.bottom.fa"/>
+          </assignment>
+          <realizedVariable xmi:id="qV..umlRdbms.primitiveAttribute.bottom.fa" name="fa" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"/>
+        </bottomPattern>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttribute.leafs">
+              <value xsi:type="pivot:CollectionLiteralExp" type="#//@ownedPackages.1/@ownedClasses.5" kind="Set">
+                <ownedParts xsi:type="pivot:CollectionItem" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn">
+                  <ownedItem xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"
+                      referredVariable="#qV..umlRdbms.primitiveAttribute.bottom.fa"/>
+                </ownedParts>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"
+                  referredVariable="#qV..umlRdbms.primitiveAttribute.bottom.fa"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.complexAttributeAttributes" name="complexAttributeAttributes" refinement="#m..umlRdbms.attributes"
+          specification="#m..umlRdbms.complexAttributePrimitiveAttributes #m..umlRdbms.complexAttributeComplexAttributes">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
+          <guardPattern>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Classifier" referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute" referredVariable="#qV..umlRdbms.complexAttributeAttributes.uml.guard.ca"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.attributes.uml.guard.c"/>
+              </conditionExpression>
+            </predicate>
+            <variable xmi:id="qV..umlRdbms.complexAttributeAttributes.uml.guard.ca" name="ca" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute"/>
+          </guardPattern>
+          <bottomPattern/>
+        </domain>
+        <guardPattern>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttribute.attribute">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.NonLeafAttribute"
+                    referredVariable="#qV..umlRdbms.complexAttributeAttributes.guard.fao"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute" referredVariable="#qV..umlRdbms.complexAttributeAttributes.uml.guard.ca"/>
+            </conditionExpression>
+          </predicate>
+          <variable xmi:id="qV..umlRdbms.complexAttributeAttributes.guard.fao" name="fao" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.NonLeafAttribute"/>
+        </guardPattern>
+        <bottomPattern/>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+              <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                      referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.NonLeafAttribute"
+                        referredVariable="#qV..umlRdbms.complexAttributeAttributes.guard.fao"/>
+                  </ownedSource>
+                  <ownedArguments xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                      stringSymbol="_"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute" referredVariable="#qV..umlRdbms.attributes.uml.bottom.a"/>
+                </ownedArguments>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute"
+                  referredVariable="#qV..umlRdbms.attributes.bottom.fa"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.complexAttribute" name="complexAttribute" refinement="#m..umlRdbms.attributes"
+          specification="#m..umlRdbms.classComplexAttributes #m..umlRdbms.complexAttributeComplexAttributes">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
+          <guardPattern>
+            <variable xmi:id="qV..umlRdbms.complexAttribute.uml.guard.t" name="t" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"/>
+          </guardPattern>
+          <bottomPattern>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Classifier" referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute" referredVariable="#qV..umlRdbms.attributes.uml.bottom.a"/>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class" referredVariable="#qV..umlRdbms.complexAttribute.uml.guard.t"/>
+              </conditionExpression>
+            </predicate>
+          </bottomPattern>
+        </domain>
+        <guardPattern/>
+        <bottomPattern>
+          <realizedVariable xmi:id="qV..umlRdbms.complexAttribute.bottom.fa" name="fa" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.NonLeafAttribute"/>
+        </bottomPattern>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttribute.leafs">
+              <value xsi:type="pivot:IteratorExp" name="collect" type="#//@ownedPackages.1/@ownedClasses.6" isImplicit="true" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.Set.collect..T">
+                <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.7" referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttributeOwner.fromAttributes">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttributeOwner"
+                      referredVariable="#qV..umlRdbms.attributes.guard.fao"/>
+                </ownedSource>
+                <ownedBody xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.8" referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttribute.leafs">
+                  <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute"
+                      isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.12/@local.0/@bottomPattern/@assignment.0/@value/@ownedIterators.0"/>
+                </ownedBody>
+                <ownedIterators name="1_" isRequired="false" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute"
+                    isImplicit="true" representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#i0i.ocl.Set.collect..T"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.NonLeafAttribute"
+                  referredVariable="#qV..umlRdbms.complexAttribute.bottom.fa"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.classPrimitiveAttributes" name="classPrimitiveAttributes" refinement="#m..umlRdbms.classAttributes #m..umlRdbms.primitiveAttribute">
+        <guardPattern/>
+        <bottomPattern/>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.classComplexAttributes" name="classComplexAttributes" refinement="#m..umlRdbms.classAttributes #m..umlRdbms.complexAttribute">
+        <guardPattern/>
+        <bottomPattern/>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.complexAttributePrimitiveAttributes" name="complexAttributePrimitiveAttributes"
+          refinement="#m..umlRdbms.complexAttributeAttributes #m..umlRdbms.primitiveAttribute">
+        <guardPattern/>
+        <bottomPattern/>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.complexAttributeComplexAttributes" name="complexAttributeComplexAttributes" refinement="#m..umlRdbms.complexAttributeAttributes #m..umlRdbms.complexAttribute">
+        <guardPattern/>
+        <bottomPattern/>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.attributeColumns" name="attributeColumns">
+        <ownedComments body="-- column mapping"/>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.rdbms">
+          <guardPattern>
+            <variable xmi:id="qV..umlRdbms.attributeColumns.rdbms.guard.t" name="t" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"/>
+          </guardPattern>
+          <bottomPattern>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Real.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Collection.size">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.keys">
+                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.attributeColumns.rdbms.bottom.c"/>
+                  </ownedSource>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:IntegerLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                    integerSymbol="0"/>
+              </conditionExpression>
+            </predicate>
+            <predicate>
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Real.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Collection.size">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.2" referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.foreignKeys">
+                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.attributeColumns.rdbms.bottom.c"/>
+                  </ownedSource>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:IntegerLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
+                    integerSymbol="0"/>
+              </conditionExpression>
+            </predicate>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.owner">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.attributeColumns.rdbms.guard.t"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.attributeColumns.rdbms.bottom.c"/>
+            </assignment>
+            <realizedVariable xmi:id="qV..umlRdbms.attributeColumns.rdbms.bottom.c" name="c" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"/>
+          </bottomPattern>
+        </domain>
+        <guardPattern>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ClassToTable.table">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                    referredVariable="#qV..umlRdbms.attributeColumns.guard.c2t"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Table" referredVariable="#qV..umlRdbms.attributeColumns.rdbms.guard.t"/>
+            </conditionExpression>
+          </predicate>
+          <variable xmi:id="qV..umlRdbms.attributeColumns.guard.c2t" name="c2t" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"/>
+        </guardPattern>
+        <bottomPattern>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Collection.includes..ocl.OclAny">
+              <ownedSource xsi:type="pivot:IteratorExp" name="collect" type="#//@ownedPackages.1/@ownedClasses.6" isImplicit="true" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.Set.collect..T">
+                <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.7" referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttributeOwner.fromAttributes">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable"
+                      referredVariable="#qV..umlRdbms.attributeColumns.guard.c2t"/>
+                </ownedSource>
+                <ownedBody xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.8" referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttribute.leafs">
+                  <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute"
+                      isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.17/@bottomPattern/@predicate.0/@conditionExpression/@ownedSource/@ownedIterators.0"/>
+                </ownedBody>
+                <ownedIterators name="1_" isRequired="false" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute"
+                    isImplicit="true" representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#i0i.ocl.Set.collect..T"/>
+              </ownedSource>
+              <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"
+                  referredVariable="#qV..umlRdbms.attributeColumns.bottom.a2c"/>
+            </conditionExpression>
+          </predicate>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.ToColumn.column">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.attributeColumns.rdbms.bottom.c"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"
+                referredVariable="#qV..umlRdbms.attributeColumns.bottom.a2c"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="true" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttribute.owner">
+            <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.ClassToTable" referredVariable="#qV..umlRdbms.attributeColumns.guard.c2t"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"
+                referredVariable="#qV..umlRdbms.attributeColumns.bottom.a2c"/>
+          </assignment>
+          <realizedVariable xmi:id="qV..umlRdbms.attributeColumns.bottom.a2c" name="a2c" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"/>
+        </bottomPattern>
+        <local>
+          <guardPattern>
+            <variable name="p2n" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PrimitiveToName"/>
+          </guardPattern>
+          <bottomPattern>
+            <variable name="ct" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.AttributeToColumn.type">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PrimitiveToName" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.17/@local.0/@guardPattern/@variable.0"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"
+                  referredVariable="#qV..umlRdbms.attributeColumns.bottom.a2c"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:VariableAssignment" isDefault="false" targetVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.17/@local.0/@bottomPattern/@variable.0">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.attributeColumns.rdbms.bottom.c"/>
+              </value>
+            </assignment>
+            <assignment xsi:type="qvtcb:VariableAssignment" isDefault="false" targetVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.17/@local.0/@bottomPattern/@variable.0">
+              <value xsi:type="pivot:PropertyCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PrimitiveToName.typeName">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PrimitiveToName"
+                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.17/@local.0/@guardPattern/@variable.0"/>
+              </value>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.PrimitiveToName.typeName">
+              <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.17/@local.0/@bottomPattern/@variable.0"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PrimitiveToName"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.17/@local.0/@guardPattern/@variable.0"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
+              <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.17/@local.0/@bottomPattern/@variable.0"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.attributeColumns.rdbms.bottom.c"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"
+                    referredVariable="#qV..umlRdbms.attributeColumns.bottom.a2c"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.attributeColumns.rdbms.bottom.c"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.UmlToRdbmsModelElement.name">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.attributeColumns.rdbms.bottom.c"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"
+                  referredVariable="#qV..umlRdbms.attributeColumns.bottom.a2c"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+        <local>
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttribute.kind">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"
+                    referredVariable="#qV..umlRdbms.attributeColumns.bottom.a2c"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.attributeColumns.rdbms.bottom.c"/>
+            </assignment>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUML2RDBMS.ecore.oclas#p.simpleuml2rdbms.FromAttribute.kind">
+              <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" referredVariable="#qV..umlRdbms.attributeColumns.rdbms.bottom.c"/>
+              </value>
+              <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"
+                  referredVariable="#qV..umlRdbms.attributeColumns.bottom.a2c"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+      </rule>
+      <ownedContext name="this"/>
+    </ownedClasses>
+  </ownedPackages>
+  <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.9 #//@ownedPackages.1/@ownedClasses.10"
+        elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.10" elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"
+        isNullFree="true">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.11 #//@ownedPackages.1/@ownedClasses.12"
+        elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.12" elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"
+        isNullFree="true">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.13 #//@ownedPackages.1/@ownedClasses.14"
+        elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.15" elementType="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn"
+        isNullFree="true">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:BagType" name="Bag" superClasses="#//@ownedPackages.1/@ownedClasses.16" elementType="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..BagT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.17" elementType="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.15" elementType="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.18" elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.18" elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.19" elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.19" elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.20" elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.20" elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.16" elementType="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.AttributeToColumn" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.21" elementType="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.FromAttribute" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+  </ownedPackages>
+</qvtc:CoreModel>
