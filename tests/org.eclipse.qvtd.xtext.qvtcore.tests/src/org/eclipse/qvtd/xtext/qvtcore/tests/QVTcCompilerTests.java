@@ -60,6 +60,7 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.Upper2LowerNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph.SimplegraphPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simplegraph2graphPackage;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
+import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -244,9 +245,10 @@ public class QVTcCompilerTests extends LoadTestCase
 		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		OCLstdlib.install();
-		QVTcoreStandaloneSetup.doSetup();
-		QVTcorePivotStandaloneSetup.doSetup();
-		QVTimperativePivotStandaloneSetup.doSetup();
+		QVTcTestUtil.doQVTcoreSetup();
+		QVTiTestUtil.doQVTimperativeSetup();
+//		QVTcorePivotStandaloneSetup.doSetup();
+//		QVTimperativePivotStandaloneSetup.doSetup();
     }
 
 	 /* (non-Javadoc)
@@ -344,6 +346,46 @@ public class QVTcCompilerTests extends LoadTestCase
 	    	myQVT.dispose();
 		}
 	}
+    
+/*    @Test -- fails through at least lack of multi-headed support, which may not be needed if better partitioned
+    public void testQVTcCompiler_SimpleUML2RDBMS() throws Exception {
+//		AbstractTransformer.INVOCATIONS.setState(true);
+    	MyQVT myQVT = new MyQVT("uml2rdbms");
+//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	try {
+	    	Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS", "rdbms");
+	    	myQVT.createInterpretedExecutor(asTransformation);
+	    	myQVT.loadInput("uml", "SimpleUMLPeople.xmi");
+	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "SimpleUML2RDBMS_trace.xmi");
+	    	myQVT.createModel("rdbms", "SimpleRDBMSPeople_Interpreted.xmi");
+	    	myQVT.executeTransformation();
+	    	myQVT.saveOutput("rdbms", "SimpleRDBMSPeople_Interpreted.xmi", "SimpleRDBMSPeople_expected.xmi", null);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
+    }
+    
+    @Test
+    public void testQVTcCompiler_SimpleUML2RDBMS_CG() throws Exception {
+//		AbstractTransformer.INVOCATIONS.setState(true);
+//		Scheduler.EDGE_ORDER.setState(true);
+//		Scheduler.REGION_DEPTH.setState(true);
+//		Scheduler.REGION_ORDER.setState(true);
+//		Scheduler.REGION_TRAVERSAL.setState(true);
+//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
+    	MyQVT myQVT = new MyQVT("uml2rdbms", Simpleuml2rdbmsPackage.eINSTANCE, SimpleumlPackage.eINSTANCE, SimplerdbmsPackage.eINSTANCE);
+		try {	
+	        Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS", "rdbms");
+	        myQVT.createGeneratedExecutor(asTransformation, "SimpleUML2RDBMS.genmodel");
+			myQVT.loadInput("uml", "SimpleUMLPeople.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("rdbms", "SimpleRDBMSPeople_CG.xmi", "SimpleRDBMSPeople_expected.xmi", null);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
+	} */
 
     @Test
     public void testQVTcCompiler_Upper2Lower() throws Exception {
