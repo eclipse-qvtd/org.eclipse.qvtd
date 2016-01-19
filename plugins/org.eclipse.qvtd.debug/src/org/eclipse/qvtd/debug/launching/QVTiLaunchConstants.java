@@ -22,20 +22,39 @@ public interface QVTiLaunchConstants
 	public static final @NonNull Map<String, String> EMPTY_MAP = new HashMap<String,String>();
 
 	/**
-	 * ILaunchConfiguration String attribute for the transformation resource.
+	 * ILaunchConfiguration Map<String,String> attribute for the intermediate resource per intermediate model name.
 	 */
-	public static final @NonNull String TX_KEY = "tx";
+	public static final @NonNull String INTERMEDIATES_KEY = "intermediates";
 
 	/**
 	 * ILaunchConfiguration Map<String,String> attribute for the input resource per input model name.
 	 */
-	public static final @NonNull String IN_KEY = "in";
+	public static final @NonNull String NEW_IN_KEY = "in";
 
 	/**
 	 * ILaunchConfiguration Map<String,String> attribute for the output resource per output model name.
 	 */
-	public static final @NonNull String OUT_KEY = "out";
+	public static final @NonNull String NEW_OUT_KEY = "out";
 
+	/**
+	 * ILaunchConfiguration Map<String,String> attribute for previous/reference input resource per input model name.
+	 */
+	public static final @NonNull String OLD_IN_KEY = "old-in";
+
+	/**
+	 * ILaunchConfiguration Map<String,String> attribute for the previous/referenceoutput resource per output model name.
+	 */
+	public static final @NonNull String OLD_OUT_KEY = "old-out";
+
+	/**
+	 * ILaunchConfiguration String attribute for the transformation resource.
+	 */
+	public static final @NonNull String TX_KEY = "tx";
+
+
+	public static final @NonNull String ENFORCE_UPDATE_MODE = "ENFORCE - UPDATE";
+	public static final @NonNull String ENFORCE_CREATE_MODE = "ENFORCE - CREATE";
+	public static final @NonNull String CHECK_MODE = "CHECK";
 
 
 //	String PREFIX = "org.eclipse.qvtd.debug.";  //$NON-NLS-1$

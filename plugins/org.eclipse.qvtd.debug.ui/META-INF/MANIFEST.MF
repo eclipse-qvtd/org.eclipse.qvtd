@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.qvtd.xtext.qvtcore;bundle-version="[0.13.0,0.14.0)",
  org.eclipse.qvtd.xtext.qvtimperative;bundle-version="[0.13.0,0.14.0)",
  org.eclipse.qvtd.xtext.qvtimperative.ui;bundle-version="[0.13.0,0.14.0)",
- org.eclipse.qvtd.xtext.qvtrelation;bundle-version="[0.13.0,0.14.0)"
+ org.eclipse.qvtd.xtext.qvtrelation;bundle-version="[0.13.0,0.14.0)",
+ org.eclipse.qvtd.compiler;bundle-version="[0.13.0,0.14.0)"
 Bundle-Activator: org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j

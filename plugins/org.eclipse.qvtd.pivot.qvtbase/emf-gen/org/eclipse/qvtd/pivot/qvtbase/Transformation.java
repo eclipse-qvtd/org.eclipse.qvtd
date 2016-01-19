@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.Variable;
 
@@ -49,7 +50,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Annotation> getOwnedTag();
+	@NonNull EList<Annotation> getOwnedTag();
 
 	/**
 	 * Returns the value of the '<em><b>Model Parameter</b></em>' containment reference list.
@@ -67,7 +68,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * @model opposite="transformation" containment="true"
 	 * @generated
 	 */
-	EList<TypedModel> getModelParameter();
+	@NonNull EList<TypedModel> getModelParameter();
 
 	/**
 	 * Returns the value of the '<em><b>Rule</b></em>' containment reference list.
@@ -85,7 +86,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * @model opposite="transformation" containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Rule> getRule();
+	@NonNull EList<Rule> getRule();
 
 	/**
 	 * Returns the value of the '<em><b>Extends</b></em>' reference.

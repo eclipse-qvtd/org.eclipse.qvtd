@@ -14,8 +14,10 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 
 /**
  * A BasicQVTrExecutor supports loading a QVTr transformation as source then loading models, performing a transformation
@@ -26,6 +28,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 public class BasicQVTrExecutor extends BasicQVTiExecutor
 {
     public BasicQVTrExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI transformationURI) throws IOException {
-    	super(environmentFactory, transformationURI);
+    	super(environmentFactory, QVTbaseUtil.loadTransformation(RelationModel.class, environmentFactory, transformationURI, environmentFactory.keepDebug()));
     }
 }

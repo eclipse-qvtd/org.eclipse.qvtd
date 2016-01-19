@@ -25,7 +25,7 @@ public interface QVTcLaunchConstants extends QVTiLaunchConstants
 	public static final @NonNull String MODE_KEY = "mode";
 
 	/**
-	 * ILaunchConfiguration Boolean attribute for the transformation partiality.
+	 * ILaunchConfiguration Boolean attribute for the transformation partial view selection.
 	 */
-	public static final @NonNull String PARTIAL_KEY = "partial";
+	public static final @NonNull String VIEW_KEY = "view";
 }

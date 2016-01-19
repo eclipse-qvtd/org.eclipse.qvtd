@@ -34,7 +34,9 @@ public class ParameterRow extends Composite implements ModifyListener
 		this.mainTab = mainTab;
 		setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		GridLayout gridLayout = new GridLayout(4, false);
+		gridLayout.marginHeight = 0;
 		gridLayout.marginWidth = 0;
+		gridLayout.verticalSpacing = 0;
 		setLayout(gridLayout);
 		
 		name = new Label(this, SWT.NONE);
@@ -51,7 +53,7 @@ public class ParameterRow extends Composite implements ModifyListener
 
 		path.addModifyListener(this);
 		boolean isSave = (style & SWT.SAVE) != 0;
-		LaunchingUtils.prepareBrowseWorkspaceButton(browseWS, /*name.getText(),*/ path, isSave);	// Awaiting OCL enhancement
+		LaunchingUtils.prepareBrowseWorkspaceButton(browseWS, name.getText(), path, isSave);
 		LaunchingUtils.prepareBrowseFileSystemButton(browseFile, path, isSave);
 	}
 

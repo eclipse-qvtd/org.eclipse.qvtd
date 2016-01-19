@@ -18,6 +18,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -45,9 +46,12 @@ public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
 	protected void updateDirection(@NonNull Transformation tansformation) {}
 
 	@Override
-	protected void updateGroups(@NonNull Transformation transformation, @NonNull Map<String, String> inputMap, @NonNull Map<String, String> outputMap) {
-		Set<TypedModel> inputs = new HashSet<TypedModel>();
-		Set<TypedModel> outputs = new HashSet<TypedModel>();
+	protected void updateGroups(@NonNull Transformation transformation,
+			@NonNull Map<@NonNull String, @Nullable String> oldInputsMap, @NonNull Map<@NonNull String, @Nullable String> newInputsMap,
+			@NonNull Map<@NonNull String, @Nullable String> oldOutputsMap, @NonNull Map<@NonNull String, @Nullable String> newOutputsMap,
+			@NonNull Map<@NonNull String, @Nullable String> intermediateMap) {
+		Set<@NonNull TypedModel> inputs = new HashSet<@NonNull TypedModel>();
+		Set<@NonNull TypedModel> outputs = new HashSet<@NonNull TypedModel>();
 		for (Rule rule : transformation.getRule()) {
 			if (rule instanceof Mapping) {
 				Mapping mapping = (Mapping)rule;
@@ -55,24 +59,34 @@ public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
 					if (domain instanceof CoreDomain) {
 						CoreDomain coreDomain = (CoreDomain)domain;
 						BottomPattern bottomPattern = coreDomain.getBottomPattern();
+						assert bottomPattern != null;
 						TypedModel typedModel = coreDomain.getTypedModel();
-						String name = typedModel.getName();
-						if (bottomPattern.getRealizedVariable().isEmpty()) {
-							if (inputs.add(typedModel)) {
-								inputMap.put(name, null); //getDefaultPath(inputsGroup, name));
+						assert typedModel != null;
+						if ((bottomPattern != null) && (typedModel != null)) {
+							String name = typedModel.getName();
+							if (bottomPattern.getRealizedVariable().isEmpty()) {
+								if (inputs.add(typedModel)) {
+									assert name != null;
+									if (name != null) {
+										newInputsMap.put(name, null); //getDefaultPath(inputsGroup, name));
+									}
+								}
 							}
-						}
-						else {
-							if (outputs.add(typedModel)) {
-								outputMap.put(name, null); //getDefaultPath(outputsGroup, name));
+							else {
+								if (outputs.add(typedModel)) {
+									assert name != null;
+									if (name != null) {
+										newOutputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
+									}
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-		for (String key : outputMap.keySet()) {
-			inputMap.remove(key);
+		for (String key : newOutputsMap.keySet()) {
+			newInputsMap.remove(key);
 		}
 	}
 

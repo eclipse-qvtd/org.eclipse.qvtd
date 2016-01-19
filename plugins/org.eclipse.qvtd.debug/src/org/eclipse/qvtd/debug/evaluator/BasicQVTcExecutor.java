@@ -14,6 +14,8 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
@@ -26,6 +28,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 public class BasicQVTcExecutor extends BasicQVTiExecutor
 {
     public BasicQVTcExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI transformationURI) throws IOException {
-    	super(environmentFactory, transformationURI);
+    	super(environmentFactory, QVTbaseUtil.loadTransformation(CoreModel.class, environmentFactory, transformationURI, environmentFactory.keepDebug()));
     }
 }

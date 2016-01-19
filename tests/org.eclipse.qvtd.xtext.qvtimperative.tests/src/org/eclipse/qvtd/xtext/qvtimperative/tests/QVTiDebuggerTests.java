@@ -99,13 +99,15 @@ public class QVTiDebuggerTests extends XtextTestCase
 	}
 
 	protected ILaunchConfigurationWorkingCopy createLaunchConfiguration(@NonNull IProject iProject, @NonNull String launchName,
-			@NonNull URI transformationURI, @NonNull Map<String,String> inKeys, @NonNull Map<String,String> outKeys) throws CoreException {
+			@NonNull URI transformationURI, @NonNull Map<String,String> newInKeys, @NonNull Map<String,String> newOutKeys) throws CoreException {
 		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
 		ILaunchConfigurationType launchConfigurationType = launchManager.getLaunchConfigurationType(QVTiLaunchConstants.LAUNCH_CONFIGURATION_TYPE_ID);
 		ILaunchConfigurationWorkingCopy launchConfiguration = launchConfigurationType.newInstance(iProject, launchName);
 		launchConfiguration.setAttribute(QVTiLaunchConstants.TX_KEY, transformationURI.toString());
-		launchConfiguration.setAttribute(QVTiLaunchConstants.IN_KEY, inKeys);
-		launchConfiguration.setAttribute(QVTiLaunchConstants.OUT_KEY, outKeys);
+//		launchConfiguration.setAttribute(QVTiLaunchConstants.OLD_IN_KEY, oldInKeys);
+		launchConfiguration.setAttribute(QVTiLaunchConstants.NEW_IN_KEY, newInKeys);
+//		launchConfiguration.setAttribute(QVTiLaunchConstants.OLD_OUT_KEY, oldOutKeys);
+		launchConfiguration.setAttribute(QVTiLaunchConstants.NEW_OUT_KEY, newOutKeys);
 		return launchConfiguration;
 	}
 

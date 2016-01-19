@@ -12,87 +12,51 @@
 package org.eclipse.qvtd.debug.ui.launching;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.debug.evaluator.BasicQVTrExecutor;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtrelation.Relation;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Group;
 
 public class QVTrMainTab extends DirectionalMainTab
 {
+	private static final @NonNull Map<@NonNull String, @NonNull String> intermediateDefaultExtensions = new HashMap<@NonNull String, @NonNull String>();
+	static {
+//		intermediateDefaultExtensions.put("QVTr", "qvtr");
+		intermediateDefaultExtensions.put("QVTc", "qvtcas");
+		intermediateDefaultExtensions.put("QVTu", "qvtu.qvtcas");
+		intermediateDefaultExtensions.put("QVTm", "qvpm.qvtcas");
+		intermediateDefaultExtensions.put("QVTp", "qvtp.qvtcas");
+		intermediateDefaultExtensions.put("QVTs", "qvts.xmi");
+		intermediateDefaultExtensions.put("QVTi", "qvtias");
+		intermediateDefaultExtensions.put("Java", "java");
+	}
+
+	protected @NonNull String getDefaultIntermediatePath(@NonNull Group group, @NonNull URI txURI, @NonNull String name) {
+		return String.valueOf(txURI.trimFileExtension().appendFileExtension(intermediateDefaultExtensions.get(name)));
+	}
+	
 	@Override
 	public Image getImage() {
 		return QVTdDebugUIPlugin.getDefault().createImage("icons/QVTrModelFile.gif");
 	}
 
-	private void gatherOutputModels(@NonNull List<TypedModel> outputModels, @NonNull TypedModel typedModel) {
-		if (!outputModels.contains(typedModel)) {
-			outputModels.add(typedModel);
-			for (TypedModel anotherTypedModel : typedModel.getDependsOn()) {
-				if (anotherTypedModel != null) {
-					gatherOutputModels(outputModels, anotherTypedModel);
-				}
-			}
-		}
-	}
-
 	@Override
-	protected void updateGroups(@NonNull Transformation transformation, @NonNull Map<String, String> inputMap, @NonNull Map<String, String> outputMap) {
-		Set<TypedModel> checkables = new HashSet<TypedModel>();
-		Set<TypedModel> enforceables = new HashSet<TypedModel>();
-		for (Rule rule : transformation.getRule()) {
-			if (rule instanceof Relation) {
-				Relation relation = (Relation)rule;
-				for (Domain domain : relation.getDomain()) {
-					if (domain instanceof RelationDomain) {
-						RelationDomain relationDomain = (RelationDomain)domain;
-						TypedModel typedModel = relationDomain.getTypedModel();
-						if (domain.isIsCheckable()) {
-							checkables.add(typedModel);
-						}
-						if (domain.isIsEnforceable()) {
-							enforceables.add(typedModel);
-						}
-					}
-				}
-			}
-		}
-		Set<TypedModel> inputs = new HashSet<TypedModel>();
-		Set<TypedModel> outputs = new HashSet<TypedModel>();
-		String directionName = directionCombo.getText();
-		List<TypedModel> outputModels = new ArrayList<TypedModel>();
-		for (TypedModel typedModel : transformation.getModelParameter()) {
-			if ((typedModel != null) && ClassUtil.safeEquals(typedModel.getName(), directionName)) {
-				gatherOutputModels(outputModels, typedModel);
-			}
-		}
-		for (TypedModel outputModel : outputModels) {
-			if (outputs.add(outputModel)) {
-				String name = outputModel.getName();
-				outputMap.put(name, null); //getDefaultPath(outputsGroup, name));
-			}
-		}
-		checkables.addAll(enforceables);
-		checkables.removeAll(outputModels);
-		for (TypedModel inputModel : checkables) {
-			if (inputs.add(inputModel)) {
-				String name = inputModel.getName();
-				inputMap.put(name, null); //getDefaultPath(inputsGroup, name));
-			}
+	protected void updateGroups(@NonNull Transformation transformation,
+			@NonNull Map<@NonNull String, @Nullable String> oldInputsMap, @NonNull Map<@NonNull String, @Nullable String> newInputsMap,
+			@NonNull Map<@NonNull String, @Nullable String> oldOutputsMap, @NonNull Map<@NonNull String, @Nullable String> newOutputsMap,
+			@NonNull Map<@NonNull String, @Nullable String> intermediateMap) {
+		System.out.println("QVTc::updateGroups");
+		super.updateGroups(transformation, oldInputsMap, newInputsMap, oldOutputsMap, newOutputsMap, intermediateMap);
+		for (String key : intermediateDefaultExtensions.keySet()) {
+			intermediateMap.put(key, intermediateDefaultExtensions.get(key));
 		}
 	}
 

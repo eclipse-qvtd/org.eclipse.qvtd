@@ -50,13 +50,13 @@ public class QVTiVMLaunchConfigurationDelegate extends VMLaunchConfigurationDele
 	
 	protected @NonNull QVTiEvaluationContext createEvaluationContext(@NonNull ILaunchConfiguration configuration) throws CoreException {
 		String txName = configuration.getAttribute(TX_KEY, "");
-		@SuppressWarnings("null")@NonNull URI txURI = URI.createURI(txName, true);
-		Map<String, String> inMap = configuration.getAttribute(IN_KEY, EMPTY_MAP);
+		URI txURI = URI.createURI(txName, true);
+		Map<String, String> inMap = configuration.getAttribute(NEW_IN_KEY, EMPTY_MAP);
 		Map<String, URI> inURIMap = new HashMap<String, URI>();
 		for (Map.Entry<String, String> inEntry : inMap.entrySet()) {
 			inURIMap.put(inEntry.getKey(), URI.createURI(inEntry.getValue(), true));
 		}
-		Map<String, String> outMap = configuration.getAttribute(OUT_KEY, EMPTY_MAP);
+		Map<String, String> outMap = configuration.getAttribute(NEW_OUT_KEY, EMPTY_MAP);
 		Map<String, URI> outURIMap = new HashMap<String, URI>();
 		for (Map.Entry<String, String> outEntry : outMap.entrySet()) {
 			outURIMap.put(outEntry.getKey(), URI.createURI(outEntry.getValue(), true));

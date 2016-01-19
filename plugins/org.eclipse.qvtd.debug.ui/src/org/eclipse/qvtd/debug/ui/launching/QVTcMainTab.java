@@ -12,63 +12,69 @@
 package org.eclipse.qvtd.debug.ui.launching;
 
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.resource.BasicProjectManager;
+import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 import org.eclipse.qvtd.debug.evaluator.BasicQVTcExecutor;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Group;
 
 public class QVTcMainTab extends DirectionalMainTab
 {
+	private static final @NonNull Map<@NonNull String, @NonNull String> intermediateDefaultExtensions = new HashMap<@NonNull String, @NonNull String>();
+	static {
+//		intermediateDefaultExtensions.put("QVTc", "qvtc");
+		intermediateDefaultExtensions.put("QVTu", "qvtu.qvtcas");
+		intermediateDefaultExtensions.put("QVTm", "qvpm.qvtcas");
+		intermediateDefaultExtensions.put("QVTp", "qvtp.qvtcas");
+		intermediateDefaultExtensions.put("QVTs", "qvts.xmi");
+		intermediateDefaultExtensions.put("QVTi", "qvtias");
+		intermediateDefaultExtensions.put("Java", "java");
+	}
+
+	protected void compile() {
+		QVTimperative myQVT = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, null);
+		QVTcCompilerChain chain = new QVTcCompilerChain(myQVT.getEnvironmentFactory(), URI.createURI(txPath.getText()), null);
+		try {
+			Transformation execute = chain.execute(directionCombo.getText());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	protected @NonNull String getDefaultIntermediatePath(@NonNull Group group, @NonNull URI txURI, @NonNull String name) {
+		return String.valueOf(txURI.trimFileExtension().appendFileExtension(intermediateDefaultExtensions.get(name)));//.deresolve(txURI));
+	}
+	
 	@Override
 	public Image getImage() {
 		return QVTdDebugUIPlugin.getDefault().createImage("icons/QVTcModelFile.gif");
 	}
 
 	@Override
-	protected void updateGroups(@NonNull Transformation transformation, @NonNull Map<String, String> inputMap, @NonNull Map<String, String> outputMap) {
-		Set<TypedModel> inputs = new HashSet<TypedModel>();
-		Set<TypedModel> outputs = new HashSet<TypedModel>();
-		for (Rule rule : transformation.getRule()) {
-			if (rule instanceof Mapping) {
-				Mapping mapping = (Mapping)rule;
-				for (Domain domain : mapping.getDomain()) {
-					if (domain instanceof CoreDomain) {
-						CoreDomain relationDomain = (CoreDomain)domain;
-//						BottomPattern bottomPattern = coreDomain.getBottomPattern();
-						TypedModel typedModel = relationDomain.getTypedModel();
-						String name = typedModel.getName();
-//						if (bottomPattern.getRealizedVariable().isEmpty()) {
-							if (inputs.add(typedModel)) {
-								inputMap.put(name, null); //getDefaultPath(inputsGroup, name));
-							}
-//						}
-//						else {
-							if (outputs.add(typedModel)) {
-								outputMap.put(name, null); //getDefaultPath(outputsGroup, name));
-							}
-						}
-//					}
-				}
-			}
-		}
-		for (String key : outputMap.keySet()) {
-			inputMap.remove(key);
+	protected void updateGroups(@NonNull Transformation transformation,
+			@NonNull Map<@NonNull String, @Nullable String> oldInputsMap, @NonNull Map<@NonNull String, @Nullable String> newInputsMap,
+			@NonNull Map<@NonNull String, @Nullable String> oldOutputsMap, @NonNull Map<@NonNull String, @Nullable String> newOutputsMap,
+			@NonNull Map<@NonNull String, @Nullable String> intermediateMap) {
+		System.out.println("QVTc::updateGroups");
+		super.updateGroups(transformation, oldInputsMap, newInputsMap, oldOutputsMap, newOutputsMap, intermediateMap);
+		for (String key : intermediateDefaultExtensions.keySet()) {
+			intermediateMap.put(key, intermediateDefaultExtensions.get(key));
 		}
 	}
 
 	protected @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException {
+		System.out.println("QVTc::updateTransformation");
 		QVTiEnvironmentFactory envFactory = getEnvironmentFactory();
 		BasicQVTcExecutor xtextEvaluator = new BasicQVTcExecutor(envFactory, txURI);
 		return xtextEvaluator.getTransformation();

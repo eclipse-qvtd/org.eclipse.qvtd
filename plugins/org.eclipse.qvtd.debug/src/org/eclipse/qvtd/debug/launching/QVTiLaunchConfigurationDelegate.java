@@ -35,6 +35,9 @@ import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
@@ -48,9 +51,9 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
         
 		try {
 			String txName = configuration.getAttribute(TX_KEY, "");
-			final Map<String, String> inMap = configuration.getAttribute(IN_KEY, EMPTY_MAP);
-			final Map<String, String> outMap = configuration.getAttribute(OUT_KEY, EMPTY_MAP);
-			final @SuppressWarnings("null")@NonNull URI txURI = URI.createURI(txName, true);
+			final Map<String, String> inMap = configuration.getAttribute(NEW_IN_KEY, EMPTY_MAP);
+			final Map<String, String> outMap = configuration.getAttribute(NEW_OUT_KEY, EMPTY_MAP);
+			final URI txURI = URI.createURI(txName, true);
 //            final QvtTransformation qvtTransformation = new QvtInterpretedTransformation(getQvtModule(configuration));
             final Monitor execMonitor = new BasicMonitor();
                                     
@@ -60,14 +63,19 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
                 
                 public void run() throws Exception { 
         			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null);
-        			BasicQVTiExecutor executor = new BasicQVTiExecutor(envFactory, txURI);
-        			for (@SuppressWarnings("null")@NonNull String inName : inMap.keySet()) {
-        				@SuppressWarnings("null")@NonNull URI inURI = URI.createURI(inMap.get(inName), true);
-        				executor.loadModel(inName, inURI, null);
+        	    	Transformation transformation = QVTbaseUtil.loadTransformation(ImperativeModel.class, envFactory, txURI, envFactory.keepDebug());
+        			BasicQVTiExecutor executor = new BasicQVTiExecutor(envFactory, transformation);
+        			for (String inName : inMap.keySet()) {
+        				if (inName != null) {
+	        				URI inURI = URI.createURI(inMap.get(inName), true);
+	        				executor.loadModel(inName, inURI, null);
+        				}
         			}
-        			for (@SuppressWarnings("null")@NonNull String outName : outMap.keySet()) {
-        				@SuppressWarnings("null")@NonNull URI outURI = URI.createURI(outMap.get(outName), true);
-        				executor.createModel(outName, outURI, null);
+        			for (String outName : outMap.keySet()) {
+        				if (outName != null) {
+	        				URI outURI = URI.createURI(outMap.get(outName), true);
+	        				executor.createModel(outName, outURI, null);
+	        			}
         			}
         			executor.execute();
         			executor.saveModels();

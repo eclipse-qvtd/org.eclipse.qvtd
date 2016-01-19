@@ -48,9 +48,11 @@ public class QVTcLaunchConfigurationDelegate extends LaunchConfigurationDelegate
         
 		try {
 			String txName = configuration.getAttribute(TX_KEY, "");
-			final Map<String, String> inMap = configuration.getAttribute(IN_KEY, EMPTY_MAP);
-			final Map<String, String> outMap = configuration.getAttribute(OUT_KEY, EMPTY_MAP);
-			final @SuppressWarnings("null")@NonNull URI txURI = URI.createURI(txName, true);
+			final Map<String, String> oldInMap = configuration.getAttribute(OLD_IN_KEY, EMPTY_MAP);
+			final Map<String, String> newInMap = configuration.getAttribute(NEW_IN_KEY, EMPTY_MAP);
+			final Map<String, String> oldOutMap = configuration.getAttribute(OLD_OUT_KEY, EMPTY_MAP);
+			final Map<String, String> newOutMap = configuration.getAttribute(NEW_OUT_KEY, EMPTY_MAP);
+			final URI txURI = URI.createURI(txName, true);
 //            final QvtTransformation qvtTransformation = new QvtInterpretedTransformation(getQvtModule(configuration));
             final Monitor execMonitor = new BasicMonitor();
                                     
@@ -61,13 +63,18 @@ public class QVTcLaunchConfigurationDelegate extends LaunchConfigurationDelegate
                 public void run() throws Exception { 
         			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null);
         			BasicQVTcExecutor xtextEvaluator = new BasicQVTcExecutor(envFactory, txURI);
-        			for (@SuppressWarnings("null")@NonNull String inName : inMap.keySet()) {
-        				@SuppressWarnings("null")@NonNull URI inURI = URI.createURI(inMap.get(inName), true);
-        				xtextEvaluator.loadModel(inName, inURI, null);
+        			// FIXME old models
+        			for (String inName : newInMap.keySet()) {
+        				if (inName != null) {
+	        				URI inURI = URI.createURI(newInMap.get(inName), true);
+	        				xtextEvaluator.loadModel(inName, inURI, null);
+        				}
         			}
-        			for (@SuppressWarnings("null")@NonNull String outName : outMap.keySet()) {
-        				@SuppressWarnings("null")@NonNull URI outURI = URI.createURI(outMap.get(outName), true);
-        				xtextEvaluator.createModel(outName, outURI, null);
+        			for (String outName : oldOutMap.keySet()) {
+        				if (outName != null) {
+        					URI outURI = URI.createURI(oldOutMap.get(outName), true);
+            				xtextEvaluator.createModel(outName, outURI, null);
+        				}
         			}
         			xtextEvaluator.execute();
         			xtextEvaluator.saveModels();

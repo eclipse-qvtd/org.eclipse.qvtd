@@ -168,8 +168,9 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
-	public Transformation getExtends() {
+	public @NonNull Transformation getExtends() {
 		if (extends_ != null && extends_.eIsProxy()) {
 			InternalEObject oldExtends = (InternalEObject)extends_;
 			extends_ = (Transformation)eResolveProxy(oldExtends);
