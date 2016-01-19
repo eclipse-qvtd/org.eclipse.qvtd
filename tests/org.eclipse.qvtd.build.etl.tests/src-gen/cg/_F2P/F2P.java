@@ -482,6 +482,12 @@ public class F2P extends AbstractTransformer
      *  |}
      * for loop0 : Families::Family in _'\\u00ABjoin-Family-0\\u00BB' {
      * 
+     *     map _'Families%Family%daughters' {
+     * _'\\u00ABjoin-Member-0\\u00BB' := _'\\u00ABjoin-Member-0\\u00BB';
+     * _'\\u00ABparent\\u00BB' := loop0;
+     * }}
+     *   for loop0 : Families::Family in _'\\u00ABjoin-Family-0\\u00BB' {
+     * 
      *     map _'Families%Family%father' {
      * _'\\u00ABjoin-Member-0\\u00BB' := _'\\u00ABjoin-Member-0\\u00BB';
      * _'\\u00ABparent\\u00BB' := loop0;
@@ -489,12 +495,6 @@ public class F2P extends AbstractTransformer
      *   for loop0 : Families::Family in _'\\u00ABjoin-Family-0\\u00BB' {
      * 
      *     map _'Families%Family%mother' {
-     * _'\\u00ABjoin-Member-0\\u00BB' := _'\\u00ABjoin-Member-0\\u00BB';
-     * _'\\u00ABparent\\u00BB' := loop0;
-     * }}
-     *   for loop0 : Families::Family in _'\\u00ABjoin-Family-0\\u00BB' {
-     * 
-     *     map _'Families%Family%daughters' {
      * _'\\u00ABjoin-Member-0\\u00BB' := _'\\u00ABjoin-Member-0\\u00BB';
      * _'\\u00ABparent\\u00BB' := loop0;
      * }}
@@ -533,19 +533,19 @@ public class F2P extends AbstractTransformer
         for (Family loop0 : ValueUtil.typedIterable(Family.class, selectByKind)) {
             if (loop0 != null) {
                 final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family symbol_0 = (Family)loop0;
-                MAP_Families_37Family_37father(_92_u00ABjoin_m_Member_m_0_92_u00BB_7, symbol_0);
+                MAP_Families_37Family_37daughters(_92_u00ABjoin_m_Member_m_0_92_u00BB_7, symbol_0);
             }
         }
         for (Family loop0_0 : ValueUtil.typedIterable(Family.class, selectByKind)) {
             if (loop0_0 != null) {
                 final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family symbol_2 = (Family)loop0_0;
-                MAP_Families_37Family_37mother(_92_u00ABjoin_m_Member_m_0_92_u00BB_7, symbol_2);
+                MAP_Families_37Family_37father(_92_u00ABjoin_m_Member_m_0_92_u00BB_7, symbol_2);
             }
         }
         for (Family loop0_1 : ValueUtil.typedIterable(Family.class, selectByKind)) {
             if (loop0_1 != null) {
                 final /*@NonInvalid*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Family symbol_4 = (Family)loop0_1;
-                MAP_Families_37Family_37daughters(_92_u00ABjoin_m_Member_m_0_92_u00BB_7, symbol_4);
+                MAP_Families_37Family_37mother(_92_u00ABjoin_m_Member_m_0_92_u00BB_7, symbol_4);
             }
         }
         for (Family loop0_2 : ValueUtil.typedIterable(Family.class, selectByKind)) {

@@ -373,25 +373,28 @@ public class RegionOrdering
 			}
 		}
 		//
-		//	Select any unblocked connection that has no outgoing passed regions to unblock all its consumers
-		//  before coming back to reconsider which region that actually involves some work is best.
-		//
-		for (@SuppressWarnings("null")@NonNull Region region : unblockedRegions) {
-			if (unpassedConnections.contains(region)) {
-				return region;
-			}
-		}
-		//
-		//	Select the 'first' region that is not blocked at all.
+		//	Select an unblock region
 		//
 		if (unblockedRegions.size() > 0) {		// FIXME deepest compatible with current context
-			for (Region region : unblockedRegions) {
-				if (region instanceof CompositionRegion) {
-					return region;		// FIXME Make UpperToLower deterministically awkward
-				}
-			}
 			List<Region> sorted = new ArrayList<Region>(unblockedRegions);
 			Collections.sort(sorted, NameUtil.NAMEABLE_COMPARATOR);
+			//
+			//	Select any unblocked connection that has no outgoing passed regions to unblock all its consumers
+			//  before coming back to reconsider which region that actually involves some work is best.
+			//
+			for (@SuppressWarnings("null")@NonNull Region region : sorted) {
+				if (unpassedConnections.contains(region)) {
+					return region;
+				}
+			}
+			for (Region region : sorted) {
+				if (region instanceof CompositionRegion) {
+					return region;		// FIXME this forces joins to the root. Not at root seemsto fail
+				}
+			}
+			//
+			//	Select the 'first' region that is not blocked at all.
+			//
 			return sorted.get(0);
 		}
 		//

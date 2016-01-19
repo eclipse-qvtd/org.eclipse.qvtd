@@ -368,18 +368,18 @@ public class SimplerKiama_qvtp_qvtias extends AbstractCS2ASTransformer
      *   leftCS (_'\\u00ABparent\\u00BB' : kiamacs::CompositeCS[1];
      *  |)
      * { |}
-     * where (_'\\u00ABjoin-CompositeCS-0\\u00BB' : Set(kiamacs::CompositeCS[*|1]);
-     * _'\\u00ABjoin-LeafCS-0\\u00BB' : Set(kiamacs::LeafCS[*|1]);
+     * where (_'\\u00ABjoin-LeafCS-0\\u00BB' : Set(kiamacs::LeafCS[*|1]);
+     * _'\\u00ABjoin-CompositeCS-0\\u00BB' : Set(kiamacs::CompositeCS[*|1]);
      *  |)
      * {allChildren : Set(kiamacs::NodeCS[*|1]) = _'\\u00ABparent\\u00BB'.child.oclAsSet()
      *   ;
-     * _'\u00ABchild-CompositeCS\u00BB' : Set(kiamacs::CompositeCS[*|1]) = allChildren->selectByKind(kiamacs::CompositeCS)
-     *   ;
      * _'\u00ABchild-LeafCS\u00BB' : Set(kiamacs::LeafCS[*|1]) = allChildren->selectByKind(kiamacs::LeafCS)
      *   ;
+     * _'\u00ABchild-CompositeCS\u00BB' : Set(kiamacs::CompositeCS[*|1]) = allChildren->selectByKind(kiamacs::CompositeCS)
+     *   ;
      *  |
-     * _'\\u00ABjoin-CompositeCS-0\\u00BB' += _'\u00ABchild-CompositeCS\u00BB';
      * _'\\u00ABjoin-LeafCS-0\\u00BB' += _'\u00ABchild-LeafCS\u00BB';
+     * _'\\u00ABjoin-CompositeCS-0\\u00BB' += _'\u00ABchild-CompositeCS\u00BB';
      * }
      * for aChild : kiamacs::CompositeCS in _'\u00ABchild-CompositeCS\u00BB' {
      * 
@@ -397,21 +397,21 @@ public class SimplerKiama_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ example4.kiamacs.@org.eclipse.jdt.annotation.Nullable NodeCS child = _92_u00ABparent_92_u00BB.getChild();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue oclAsSet = ClassUtil.nonNullState(OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_NodeCS, child));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_kiamacs_c_c_CompositeCS_0));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_kiamacs_c_c_LeafCS_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_kiamacs_c_c_LeafCS_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_kiamacs_c_c_CompositeCS_0));
         // connection assignments
-        for (CompositeCS iterator : ValueUtil.typedIterable(CompositeCS.class, selectByKind)) {
-            if (iterator instanceof CompositeCS) {
-                _92_u00ABjoin_m_CompositeCS_m_0_92_u00BB.add(iterator);
+        for (LeafCS iterator : ValueUtil.typedIterable(LeafCS.class, selectByKind)) {
+            if (iterator instanceof LeafCS) {
+                _92_u00ABjoin_m_LeafCS_m_0_92_u00BB.add(iterator);
             }
         }
-        for (LeafCS iterator_0 : ValueUtil.typedIterable(LeafCS.class, selectByKind_0)) {
-            if (iterator_0 instanceof LeafCS) {
-                _92_u00ABjoin_m_LeafCS_m_0_92_u00BB.add(iterator_0);
+        for (CompositeCS iterator_0 : ValueUtil.typedIterable(CompositeCS.class, selectByKind_0)) {
+            if (iterator_0 instanceof CompositeCS) {
+                _92_u00ABjoin_m_CompositeCS_m_0_92_u00BB.add(iterator_0);
             }
         }
         // mapping statements
-        for (CompositeCS aChild : ValueUtil.typedIterable(CompositeCS.class, selectByKind)) {
+        for (CompositeCS aChild : ValueUtil.typedIterable(CompositeCS.class, selectByKind_0)) {
             if (aChild != null) {
                 final /*@NonInvalid*/ example4.kiamacs.@org.eclipse.jdt.annotation.NonNull CompositeCS symbol_0 = (CompositeCS)aChild;
                 MAP_kiamacs_37CompositeCS_37child(_92_u00ABjoin_m_CompositeCS_m_0_92_u00BB, _92_u00ABjoin_m_LeafCS_m_0_92_u00BB, symbol_0);
@@ -427,19 +427,19 @@ public class SimplerKiama_qvtp_qvtias extends AbstractCS2ASTransformer
      *   leftCS (_'\\u00ABparent\\u00BB' : kiamacs::TopCS[1];
      *  |)
      * { |}
-     * where (_'\\u00ABjoin-CompositeCS-0\\u00BB' : Set(kiamacs::CompositeCS[*|1]);
-     * _'\\u00ABjoin-LeafCS-0\\u00BB' : Set(kiamacs::LeafCS[*|1]);
+     * where (_'\\u00ABjoin-LeafCS-0\\u00BB' : Set(kiamacs::LeafCS[*|1]);
      * _'\\u00ABjoin-CompositeCS-1\\u00BB' : Set(kiamacs::CompositeCS[*|1]);
+     * _'\\u00ABjoin-CompositeCS-0\\u00BB' : Set(kiamacs::CompositeCS[*|1]);
      *  |)
      * {allChildren : Set(kiamacs::NodeCS[*|1]) = _'\\u00ABparent\\u00BB'.node.oclAsSet()
      *   ;
-     * _'\u00ABchild-CompositeCS\u00BB' : Set(kiamacs::CompositeCS[*|1]) = allChildren->selectByKind(kiamacs::CompositeCS)
+     * _'\u00ABchild-LeafCS\u00BB' : Set(kiamacs::LeafCS[*|1]) = allChildren->selectByKind(kiamacs::LeafCS)
      *   ;
-     * _'\u00ABchild-LeafCS\u00BB' : Set(kiamacs::LeafCS[*|1]) = allChildren->selectByKind(kiamacs::LeafCS);
+     * _'\u00ABchild-CompositeCS\u00BB' : Set(kiamacs::CompositeCS[*|1]) = allChildren->selectByKind(kiamacs::CompositeCS);
      *  |
-     * _'\\u00ABjoin-CompositeCS-0\\u00BB' += _'\u00ABchild-CompositeCS\u00BB';
      * _'\\u00ABjoin-LeafCS-0\\u00BB' += _'\u00ABchild-LeafCS\u00BB';
      * _'\\u00ABjoin-CompositeCS-1\\u00BB' += _'\u00ABchild-CompositeCS\u00BB';
+     * _'\\u00ABjoin-CompositeCS-0\\u00BB' += _'\u00ABchild-CompositeCS\u00BB';
      * }
      * 
      */
@@ -451,22 +451,22 @@ public class SimplerKiama_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ example4.kiamacs.@org.eclipse.jdt.annotation.NonNull NodeCS node = _92_u00ABparent_92_u00BB_0.getNode();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue oclAsSet = ClassUtil.nonNullState(OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_NodeCS, node));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_kiamacs_c_c_CompositeCS_0));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_kiamacs_c_c_LeafCS_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_kiamacs_c_c_LeafCS_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_kiamacs_c_c_CompositeCS_0));
         // connection assignments
-        for (CompositeCS iterator : ValueUtil.typedIterable(CompositeCS.class, selectByKind)) {
-            if (iterator instanceof CompositeCS) {
-                _92_u00ABjoin_m_CompositeCS_m_0_92_u00BB_0.add(iterator);
+        for (LeafCS iterator : ValueUtil.typedIterable(LeafCS.class, selectByKind)) {
+            if (iterator instanceof LeafCS) {
+                _92_u00ABjoin_m_LeafCS_m_0_92_u00BB_0.add(iterator);
             }
         }
-        for (LeafCS iterator_0 : ValueUtil.typedIterable(LeafCS.class, selectByKind_0)) {
-            if (iterator_0 instanceof LeafCS) {
-                _92_u00ABjoin_m_LeafCS_m_0_92_u00BB_0.add(iterator_0);
+        for (CompositeCS iterator_0 : ValueUtil.typedIterable(CompositeCS.class, selectByKind_0)) {
+            if (iterator_0 instanceof CompositeCS) {
+                _92_u00ABjoin_m_CompositeCS_m_1_92_u00BB.add(iterator_0);
             }
         }
-        for (CompositeCS iterator_1 : ValueUtil.typedIterable(CompositeCS.class, selectByKind)) {
+        for (CompositeCS iterator_1 : ValueUtil.typedIterable(CompositeCS.class, selectByKind_0)) {
             if (iterator_1 instanceof CompositeCS) {
-                _92_u00ABjoin_m_CompositeCS_m_1_92_u00BB.add(iterator_1);
+                _92_u00ABjoin_m_CompositeCS_m_0_92_u00BB_0.add(iterator_1);
             }
         }
         return true;
