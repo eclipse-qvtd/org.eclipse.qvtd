@@ -19,6 +19,7 @@ import java.io.Writer;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -41,6 +42,7 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTm2QVTp;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTu2QVTm;
@@ -48,6 +50,7 @@ import org.eclipse.qvtd.compiler.internal.etl.scheduling.ClassRelationships;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.Configuration;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.Direction;
+import org.eclipse.qvtd.compiler.internal.qvtcconfig.Mode;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.QVTcConfigPackage;
 import org.eclipse.qvtd.compiler.internal.scheduler.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
@@ -670,7 +673,8 @@ public class MtcBroker {
 	            newE.setName(((CoreModel) e).getName().replace(".qvtc", ".qvtu"));
 	            uModel.getResource().getContents().add(newE);
 	        }
-	        QVTc2QVTu ctou = new QVTc2QVTu(environmentFactory, config);
+	        QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(); 
+	        QVTc2QVTu ctou = new QVTc2QVTu(environmentFactory, qvtuConfiguration);
 	        for (EObject e : uModel.getResource().getContents()) {
 	        	ctou.execute((CoreModel) e);
 	        }
@@ -1126,6 +1130,24 @@ public class MtcBroker {
 		return model;
 	}
 
+	/**
+	 * Create a QVTuConfiguration from the loaded config model.
+	 */
+	protected @NonNull QVTuConfiguration createQVTuConfiguration() {
+		Direction inputDirection = config.getInputDirection();
+		String inputName = inputDirection.getName();
+		assert inputName != null;
+		List<@NonNull String> inputNames = Collections.singletonList(inputName);
+		List<@NonNull String> outputNames = new ArrayList<@NonNull String>();
+		for (Direction outputDirection : config.getOutputDirection()) {
+		    String outputName = outputDirection.getName();
+		    assert outputName != null;
+		    outputNames.add(outputName);
+		}
+		QVTuConfiguration.Mode mode = config.getMode() == Mode.ENFORCE ? QVTuConfiguration.Mode.ENFORCE : QVTuConfiguration.Mode.CHECK;
+		QVTuConfiguration qvtuConfiguration = new QVTuConfiguration(mode, inputNames, outputNames);
+		return qvtuConfiguration;
+	}
 
 	/**
 	 * Creates the as model.
@@ -1144,23 +1166,23 @@ public class MtcBroker {
 	private PivotModel createASModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
 			boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean expand) throws QvtMtcExecutionException {
 
-	PivotModel model = new PivotModel(environmentFactory, true, savingOptions);
-	StringProperties properties = new StringProperties();
-	properties.put(EmfModel.PROPERTY_NAME, modelName);
-	properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
-	properties.put(EmfModel.PROPERTY_METAMODEL_URI, metamodelUris);
-	properties.put(EmfModel.PROPERTY_MODEL_URI, modeUri);
-	properties.put(EmfModel.PROPERTY_READONLOAD, String.valueOf(readOnLoad));
-	properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, String.valueOf(storeOnDispoal));
-	properties.put(EmfModel.PROPERTY_CACHED, String.valueOf(cached));
-	properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(expand));
-	try {
-		model.load(properties, "");
-	} catch (EolModelLoadingException e) {
-		throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
+		PivotModel model = new PivotModel(environmentFactory, true, savingOptions);
+		StringProperties properties = new StringProperties();
+		properties.put(EmfModel.PROPERTY_NAME, modelName);
+		properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
+		properties.put(EmfModel.PROPERTY_METAMODEL_URI, metamodelUris);
+		properties.put(EmfModel.PROPERTY_MODEL_URI, modeUri);
+		properties.put(EmfModel.PROPERTY_READONLOAD, String.valueOf(readOnLoad));
+		properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, String.valueOf(storeOnDispoal));
+		properties.put(EmfModel.PROPERTY_CACHED, String.valueOf(cached));
+		properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(expand));
+		try {
+			model.load(properties, "");
+		} catch (EolModelLoadingException e) {
+			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
+		}
+		return model;
 	}
-	return model;
-}
 
 	/**
 	 * Change resource to source.

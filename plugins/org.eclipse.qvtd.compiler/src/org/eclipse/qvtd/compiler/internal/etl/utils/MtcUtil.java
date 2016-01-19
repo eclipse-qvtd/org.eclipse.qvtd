@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionItem;
 import org.eclipse.ocl.pivot.CollectionLiteralExp;
@@ -15,7 +16,6 @@ import org.eclipse.ocl.pivot.CollectionRange;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.IteratorExp;
 import org.eclipse.ocl.pivot.LiteralExp;
-import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -26,15 +26,11 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.compiler.internal.qvtcconfig.Configuration;
-import org.eclipse.qvtd.compiler.internal.qvtcconfig.Direction;
-import org.eclipse.qvtd.compiler.internal.qvtcconfig.Mode;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
@@ -55,7 +51,7 @@ public class MtcUtil {
      * @param environmentFactory the environment factory
      * @return the operation call exp
      */
-    public static OperationCallExp assignmentToOclExp(Assignment aIn, EnvironmentFactory environmentFactory) {
+    public static OperationCallExp assignmentToOclExp(@NonNull Assignment aIn, @NonNull EnvironmentFactory environmentFactory) {
         OperationCallExp exp = PivotFactory.eINSTANCE.createOperationCallExp();
         for (Operation op : environmentFactory.getStandardLibrary().getOclAnyType().getOwnedOperations()) {
             if (op.getName().equals("=")) {
@@ -90,7 +86,7 @@ public class MtcUtil {
      * @param type the type
      * @return the sets the
      */
-    public static <T> Set<T> findExpsOfType(OCLExpression exp, java.lang.Class<T> type) {
+    public static <T> @NonNull Set<T> findExpsOfType(OCLExpression exp, java.lang.Class<T> type) {
         Set<T> vars = new HashSet<T>();
         if (type.isInstance(exp)) {
             vars.add(type.cast(exp));
@@ -141,8 +137,8 @@ public class MtcUtil {
      * @param a the a
      * @return the sets the
      */
-    public static Set<OperationCallExp> findOpCallExps(Assignment a) {
-        Set<OperationCallExp> exps = MtcUtil.findExpsOfType(a.getValue(), OperationCallExp.class);
+    public static @NonNull Set<@NonNull OperationCallExp> findOpCallExps(@NonNull Assignment a) {
+        Set<@NonNull OperationCallExp> exps = MtcUtil.findExpsOfType(a.getValue(), OperationCallExp.class);
         if (a instanceof PropertyAssignment) {
             exps.addAll(MtcUtil.findExpsOfType(((PropertyAssignment) a).getSlotExpression(), OperationCallExp.class));
         }
@@ -155,8 +151,8 @@ public class MtcUtil {
      * @param p the p
      * @return the sets the
      */
-    public static Set<OperationCallExp> findOpCallExps(Predicate p) {
-        Set<OperationCallExp> exps = MtcUtil.findExpsOfType(p.getConditionExpression(), OperationCallExp.class);
+    public static @NonNull Set<@NonNull OperationCallExp> findOpCallExps(@NonNull Predicate p) {
+        Set<@NonNull OperationCallExp> exps = MtcUtil.findExpsOfType(p.getConditionExpression(), OperationCallExp.class);
         return exps;
     }
 
@@ -166,13 +162,15 @@ public class MtcUtil {
      * @param ass the assignment
      * @return the sets the
      */
-    public static Set<Variable> findReferencedVariables(Assignment ass) {
+    public static @NonNull Set<@NonNull Variable> findReferencedVariables(@NonNull Assignment ass) {
 
-        Set<Variable> vars = findReferencedVariables(ass.getValue());
+        Set<@NonNull Variable> vars = findReferencedVariables(ass.getValue());
         if (ass instanceof PropertyAssignment) {
             vars.addAll(findReferencedVariables(((PropertyAssignment) ass).getSlotExpression()));
         } else if (ass instanceof VariableAssignment) {
-            vars.add(((VariableAssignment) ass).getTargetVariable());
+            Variable targetVariable = ((VariableAssignment) ass).getTargetVariable();
+            assert targetVariable != null;
+			vars.add(targetVariable);
         }
         return vars;
     }
@@ -183,7 +181,7 @@ public class MtcUtil {
      * @param exp the exp
      * @return the sets the
      */
-    public static Set<Variable> findReferencedVariables(OCLExpression exp) {
+    public static @NonNull Set<@NonNull Variable> findReferencedVariables(OCLExpression exp) {
 
         return findReferencedVariables(exp, null);
     }
@@ -197,11 +195,13 @@ public class MtcUtil {
      * @param exclude the excluded variables
      * @return the sets the
      */
-    public static Set<Variable> findReferencedVariables(OCLExpression exp, List<Variable> exclude) {
-        Set<Variable> vars = new HashSet<Variable>();
+    public static @NonNull Set<@NonNull Variable> findReferencedVariables(OCLExpression exp, List<Variable> exclude) {
+        Set<@NonNull Variable> vars = new HashSet<@NonNull Variable>();
         for (VariableExp varexp : MtcUtil.findVariableExps(exp)) {
             if (!(varexp.getReferredVariable().eContainer() instanceof IteratorExp)) {
-                vars.add((Variable) varexp.getReferredVariable());
+                Variable referredVariable = (Variable) varexp.getReferredVariable();
+                assert referredVariable != null;
+				vars.add(referredVariable);
             }
         }
         return vars;
@@ -213,9 +213,9 @@ public class MtcUtil {
      * @param ass the ass
      * @return the sets the
      */
-    public static Set<VariableExp> findVariableExps(Assignment ass) {
+    public static @NonNull Set<@NonNull VariableExp> findVariableExps(@NonNull Assignment ass) {
 
-        Set<VariableExp> exps = MtcUtil.findVariableExps(ass.getValue());
+        Set<@NonNull VariableExp> exps = MtcUtil.findVariableExps(ass.getValue());
         if (ass instanceof PropertyAssignment) {
             exps.addAll(MtcUtil.findVariableExps(((PropertyAssignment) ass).getSlotExpression()));
         }
@@ -228,8 +228,8 @@ public class MtcUtil {
      * @param exp the exp
      * @return the sets the
      */
-    public static Set<VariableExp> findVariableExps(OCLExpression exp) {
-        Set<VariableExp> exps = findExpsOfType(exp, VariableExp.class);
+    public static @NonNull Set<@NonNull VariableExp> findVariableExps(OCLExpression exp) {
+    	@NonNull Set<@NonNull VariableExp> exps = findExpsOfType(exp, VariableExp.class);
         return exps;
     }
 
@@ -239,7 +239,7 @@ public class MtcUtil {
      * @param pred the pred
      * @return the sets the
      */
-    public static Set<VariableExp> findVariableExps(Predicate pred) {
+    public static @NonNull Set<@NonNull VariableExp> findVariableExps(@NonNull Predicate pred) {
 
         return MtcUtil.findVariableExps(pred.getConditionExpression());
     }
@@ -250,27 +250,30 @@ public class MtcUtil {
      * @param source the source
      * @param refinedVars the refined vars
      */
-    public static void fixReferences(Area source, Map<Variable, Variable> refinedVars) {
+    public static void fixReferences(@NonNull Area source, @NonNull Map<@NonNull Variable, @NonNull Variable> refinedVars) {
         for (Variable gv : source.getGuardPattern().getVariable()) {
-            if (gv.getOwnedInit() != null)
-                fixReferences(gv.getOwnedInit(), refinedVars);
+            OCLExpression ownedInit = gv.getOwnedInit();
+			if (ownedInit != null)
+                fixReferences(ownedInit, refinedVars);
         }
         for (Variable bv : source.getBottomPattern().getVariable()) {
-            if (bv.getOwnedInit() != null)
-                fixReferences(bv.getOwnedInit(), refinedVars);
+            OCLExpression ownedInit = bv.getOwnedInit();
+			if (ownedInit != null)
+                fixReferences(ownedInit, refinedVars);
         }
         for (RealizedVariable brv : source.getBottomPattern().getRealizedVariable()) {
-            if (brv.getOwnedInit() != null)
-                fixReferences(brv.getOwnedInit(), refinedVars);
+            OCLExpression ownedInit = brv.getOwnedInit();
+			if (ownedInit != null)
+                fixReferences(ownedInit, refinedVars);
         }
         // Copy all predicates and assignments, might generate duplicates?
-        for (Predicate p : source.getGuardPattern().getPredicate()) {
+        for (Predicate p : ClassUtil.nullFree(source.getGuardPattern().getPredicate())) {
             fixReferences(p, refinedVars);
         }
-        for (Predicate p : source.getBottomPattern().getPredicate()) {
+        for (Predicate p : ClassUtil.nullFree(source.getBottomPattern().getPredicate())) {
             fixReferences(p, refinedVars);
         }
-        for (Assignment a : source.getBottomPattern().getAssignment()) {
+        for (Assignment a : ClassUtil.nullFree(source.getBottomPattern().getAssignment())) {
             fixReferences(a, refinedVars);
         }
 
@@ -282,7 +285,7 @@ public class MtcUtil {
      * @param a the a
      * @param refinedVars the refined vars
      */
-    public static void fixReferences(Assignment a, Map<Variable, Variable> refinedVars) {
+    public static void fixReferences(@NonNull Assignment a, @NonNull Map<@NonNull Variable, @NonNull Variable> refinedVars) {
 
         fixReferences(a.getValue(), refinedVars);
         if (a instanceof PropertyAssignment) {
@@ -301,7 +304,7 @@ public class MtcUtil {
 	 * @param exp the exp
 	 * @param refinedVars the refined vars
 	 */
-	public static void fixReferences(OCLExpression exp, Map<Variable, Variable> refinedVars) {
+	public static void fixReferences(OCLExpression exp, @NonNull Map<@NonNull Variable, @NonNull Variable> refinedVars) {
         for (VariableExp vExp : MtcUtil.findVariableExps(exp)) {
             fixVariableReferences(vExp, refinedVars);
             assert vExp.getReferredVariable() != null;
@@ -315,7 +318,7 @@ public class MtcUtil {
      * @param p the p
      * @param refinedVars the refined vars
      */
-    public static void fixReferences(Predicate p, Map<Variable, Variable> refinedVars) {
+    public static void fixReferences(@NonNull Predicate p, @NonNull Map<@NonNull Variable, @NonNull Variable> refinedVars) {
         fixReferences(p.getConditionExpression(), refinedVars);
 
     }
@@ -326,7 +329,7 @@ public class MtcUtil {
 	 * @param varexp the varexp
 	 * @param refinedVars the refined vars
 	 */
-	public static void fixVariableReferences(VariableExp varexp, Map<Variable, Variable> refinedVars) {
+	public static void fixVariableReferences(@NonNull VariableExp varexp, @NonNull Map<@NonNull Variable, @NonNull Variable> refinedVars) {
 
         Variable varIn = (Variable) varexp.getReferredVariable();
         if (varIn.eContainer() instanceof CorePattern) {
@@ -341,10 +344,10 @@ public class MtcUtil {
 	 * @param a the a
 	 * @return the all property assignments
 	 */
-	public static List<Predicate> getAllPredicates(Area a) {
-		List<Predicate> result = new ArrayList<Predicate>();
-		result.addAll(a.getGuardPattern().getPredicate());
-		result.addAll(a.getBottomPattern().getPredicate());
+	public static @NonNull List<@NonNull Predicate> getAllPredicates(@NonNull Area a) {
+		List<@NonNull Predicate> result = new ArrayList<@NonNull Predicate>();
+		result.addAll(ClassUtil.nullFree(a.getGuardPattern().getPredicate()));
+		result.addAll(ClassUtil.nullFree(a.getBottomPattern().getPredicate()));
 		return result;
 	}
 
@@ -354,10 +357,10 @@ public class MtcUtil {
 	 * @param m the m
 	 * @return the all property assignments
 	 */
-	public static List<Predicate> getAllPredicates(Mapping m) {
+	public static @NonNull List<@NonNull Predicate> getAllPredicates(@NonNull Mapping m) {
 		
-		List<Predicate> result = new ArrayList<Predicate>();
-		for (Domain d : m.getDomain()) {
+		List<@NonNull Predicate> result = new ArrayList<@NonNull Predicate>();
+		for (Domain d : ClassUtil.nullFree(m.getDomain())) {
 			result.addAll(getAllPredicates((CoreDomain) d));
 		}
 		result.addAll(getAllPredicates((Area) m));
@@ -370,8 +373,8 @@ public class MtcUtil {
 	 * @param a the a
 	 * @return the all property assignments
 	 */
-	public static List<PropertyAssignment> getAllPropertyAssignments(Area a) {
-		List<PropertyAssignment> result = new ArrayList<PropertyAssignment>();
+	public static @NonNull List<@NonNull PropertyAssignment> getAllPropertyAssignments(@NonNull Area a) {
+		List<@NonNull PropertyAssignment> result = new ArrayList<@NonNull PropertyAssignment>();
 		for (Assignment assg : a.getBottomPattern().getAssignment()) {
 			if (assg instanceof PropertyAssignment) {
 				result.add((PropertyAssignment) assg);
@@ -386,10 +389,10 @@ public class MtcUtil {
 	 * @param m the m
 	 * @return the all property assignments
 	 */
-	public static List<PropertyAssignment> getAllPropertyAssignments(Mapping m) {
+	public static @NonNull List<@NonNull PropertyAssignment> getAllPropertyAssignments(@NonNull Mapping m) {
 		
-		List<PropertyAssignment> result = new ArrayList<PropertyAssignment>();
-		for (Domain d : m.getDomain()) {
+		List<@NonNull PropertyAssignment> result = new ArrayList<@NonNull PropertyAssignment>();
+		for (Domain d : ClassUtil.nullFree(m.getDomain())) {
 			result.addAll(getAllPropertyAssignments((CoreDomain) d));
 		}
 		result.addAll(getAllPropertyAssignments((Area) m));
@@ -402,8 +405,8 @@ public class MtcUtil {
 	 * @param a the a
 	 * @return the all variable assignments
 	 */
-	public static List<VariableAssignment> getAllVariableAssignments(Area a) {
-		List<VariableAssignment> result = new ArrayList<VariableAssignment>();
+	public static @NonNull List<@NonNull VariableAssignment> getAllVariableAssignments(@NonNull Area a) {
+		List<@NonNull VariableAssignment> result = new ArrayList<@NonNull VariableAssignment>();
 		for (Assignment assg : a.getBottomPattern().getAssignment()) {
 			if (assg instanceof VariableAssignment) {
 				result.add((VariableAssignment) assg);
@@ -418,9 +421,9 @@ public class MtcUtil {
 	 * @param m the m
 	 * @return the all variable assignments
 	 */
-	public static List<VariableAssignment> getAllVariableAssignments(Mapping m) {
-		List<VariableAssignment> result = new ArrayList<VariableAssignment>();
-		for (Domain d : m.getDomain()) {
+	public static @NonNull List<@NonNull VariableAssignment> getAllVariableAssignments(@NonNull Mapping m) {
+		List<@NonNull VariableAssignment> result = new ArrayList<@NonNull VariableAssignment>();
+		for (Domain d : ClassUtil.nullFree(m.getDomain())) {
 			result.addAll(getAllVariableAssignments((CoreDomain) d));
 		}
 		result.addAll(getAllVariableAssignments((Area) m));
@@ -432,7 +435,7 @@ public class MtcUtil {
 	 *
 	 * @param exp the exp
 	 * @return the area
-	 */
+	 *
 	public static Area getArea(OCLExpression exp) {
 		if (exp instanceof VariableExp) {
 			Variable expV = (Variable) ((VariableExp)exp).getReferredVariable(); 
@@ -445,14 +448,14 @@ public class MtcUtil {
 			return null;
 		}
 		return null;
-	}
+	} */
 
 	/**
 	 * Gets the area.
 	 *
 	 * @param expV the exp v
 	 * @return the area
-	 */
+	 *
 	public static Area getArea(Variable expV) {
 		if (expV.getType() != null) {
 			CorePattern cp = oppositePattern(expV);
@@ -460,21 +463,21 @@ public class MtcUtil {
 			return cp.getArea();
 		}
 		return null;
-	}
+	} */
 	
 	/**
 	 * Checks if is check mode.
 	 *
 	 * @param config the config
 	 * @return true, if is check mode
-	 */
+	 *
 	public static boolean isCheckMode(Configuration config) {
     	return config.getMode().equals(Mode.CHECK);
     }
 	
 	public static boolean isEnforceMode(Configuration config) {
 		return config.getMode().equals(Mode.ENFORCE);
-	}
+	} */
 
 	/**
 	 * Checks if is from input domain.
@@ -482,10 +485,10 @@ public class MtcUtil {
 	 * @param exp the exp
 	 * @param config the config
 	 * @return true, if is from input domain
-	 */
+	 *
 	public static boolean isFromInputDomain(OCLExpression exp, Configuration config) {
 		return isInputDomain(getArea(exp), config);
-	}
+	} */
 	
 	/**
 	 * Checks if is from middle domain.
@@ -493,27 +496,10 @@ public class MtcUtil {
 	 * @param exp the exp
 	 * @param config the config
 	 * @return true, if is from middle domain
-	 */
+	 *
 	public static boolean isFromMiddleDomain(OCLExpression exp, Configuration config) {
 		return isMiddleDomain(getArea(exp));
-	}
-	
-	/**
-	 * Checks if is input domain.
-	 *
-	 * @param area the area
-	 * @param config the config
-	 * @return true, if is input domain
-	 */
-	public static boolean isInputDomain(Area area, Configuration config) {
-        return (area instanceof CoreDomain) && config.getInputDirection().getName().equals(((Domain) area).getName());
-		
-//		return (area instanceof CoreDomain) &&
-//				config.getInputDirection().stream()
-//					.map(Direction::getName)
-//					.collect(Collectors.toList())
-//					.contains(((CoreDomain) area).getName());
-	}
+	} */
 	
 	/**
 	 * Is a local variable to M .
@@ -521,7 +507,7 @@ public class MtcUtil {
 	 * @param a the a
 	 * @param config the config
 	 * @return true, if is localto m
-	 */
+	 *
 	public static boolean isLocaltoM(PropertyAssignment a, Configuration config) {
 		if (isFromMiddleDomain(a.getValue(), config) &&
 				(a.getValue() instanceof VariableExp)) {
@@ -531,14 +517,14 @@ public class MtcUtil {
 		}
 		return false;
 				
-	}
+	} */
 	
 	/**
      * Checks if is middle assignment.
      *
      * @param aIn the assignment
      * @return true, if is middle assignment
-     */
+     *
 	public static boolean isMiddleAssignment(Assignment aIn) {
         boolean use = true;
         BottomPattern cp = aIn.getBottomPattern();
@@ -555,18 +541,18 @@ public class MtcUtil {
             use = false;
         }
         return use;
-    }
+    } */
 	
 	/**
 	 * Checks if is middle domain.
 	 *
 	 * @param area the area
 	 * @return true, if is middle domain
-	 */
+	 *
 	public static boolean isMiddleDomain(Area area) {
 		
 		return area instanceof Mapping;
-	}
+	} */
 	
 	/**
 	 * Is a Middle to Left assignment.
@@ -574,7 +560,7 @@ public class MtcUtil {
 	 * @param a the a
 	 * @param config the config
 	 * @return true, if is mto l
-	 */
+	 *
 	public static boolean isMtoL(PropertyAssignment a, Configuration config) {
 		return isFromInputDomain(a.getSlotExpression(), config) &&
 				anyReferencedMiddleDomainVariables(a.getValue());
@@ -586,7 +572,7 @@ public class MtcUtil {
 			}
 		}
 		return false;
-	}
+	} */
 
 	/**
 	 * Checks if is middle to left.
@@ -594,11 +580,11 @@ public class MtcUtil {
 	 * @param a the a
 	 * @param config the config
 	 * @return true, if is mto l
-	 */
+	 *
 	public static boolean isMtoL(VariableAssignment a, Configuration config) {
 		return isInputDomain(getArea(a.getTargetVariable()), config) &&
 				anyReferencedMiddleDomainVariables(a.getValue());
-	}
+	} */
 	
 	/**
 	 * Checks if is middle to middle.
@@ -606,7 +592,7 @@ public class MtcUtil {
 	 * @param a the a
 	 * @param config the config
 	 * @return true, if is mto m
-	 */
+	 *
 	public static boolean isMtoM(VariableAssignment a, Configuration config) {
 		return isMiddleDomain(getArea(a.getTargetVariable())) &&
 				anyReferencedBottomMiddleDomainVariables(a.getValue());
@@ -618,7 +604,7 @@ public class MtcUtil {
 			}
 		}
 		return false;
-	}
+	} */
 
 	/**
 	 * Checks if is output domain.
@@ -626,9 +612,9 @@ public class MtcUtil {
 	 * @param domain the domain
 	 *
 	 * @return true, if is output domain
-	 */
+	 *
 	public static boolean isOutputDomain(Area area, Configuration config) {
-//        return (area instanceof CoreDomain) && config.getOutputDirection().getName().equals(((Domain) area).getName());
+//      return (area instanceof CoreDomain) && config.getOutputDirection().getName().equals(((Domain) area).getName());
 		if (!(area instanceof CoreDomain)) {
 			return false;
 		}
@@ -639,7 +625,19 @@ public class MtcUtil {
 			}
 		}
 		return false;
-    }
+  }
+	public static boolean isOutputDomain(Area area, @NonNull Iterable<TypedModel> outputTypedModels) {
+		if (!(area instanceof CoreDomain)) {
+			return false;
+		}
+		TypedModel typedModel = ((CoreDomain) area).getTypedModel();
+		for (TypedModel outputTypedModel : outputTypedModels) {
+			if (typedModel == outputTypedModel) {
+				return true;
+			}
+		}
+		return false;
+  } */
 
 	/**
 	 * Is a Right to Middle assignment.
@@ -647,7 +645,7 @@ public class MtcUtil {
 	 * @param a the a
 	 * @param config the config
 	 * @return true, if is rto m
-	 */
+	 *
 	public static boolean isRtoM(PropertyAssignment a, Configuration config) {
 		return isFromMiddleDomain(a.getSlotExpression(), config) &&
 				!(a.getValue() instanceof VariableExp) &&
@@ -661,7 +659,7 @@ public class MtcUtil {
 			}
 		}
 		return true;
-	}
+	} */
 
 	/**
 	 * Checks if is rto m.
@@ -669,24 +667,12 @@ public class MtcUtil {
 	 * @param a the a
 	 * @param config the config
 	 * @return true, if is rto m
-	 */
+	 *
 	public static boolean isRtoM(VariableAssignment a, Configuration config) {
 		return isMiddleDomain(getArea(a.getTargetVariable())) &&
 				!(a.getValue() instanceof VariableExp) &&
 				// TODO variable assignments to null? !(a.getValue() instanceof NullLiteralExp) &&
 				allMatchReferencedOutputDomainVariables(a.getValue(), config);
-	}
-
-    /**
-     * Opposite pattern.
-     *
-     * @param expV the exp v
-     * @return the core pattern
-     */
-    public static CorePattern oppositePattern(Variable expV) {
-		if (expV.eContainer() instanceof CorePattern)
-			return (CorePattern) expV.eContainer();
-		return null;
-	}
+	} */
 
 }

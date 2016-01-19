@@ -4,12 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.internal.etl.utils.MtcUtil;
-import org.eclipse.qvtd.compiler.internal.qvtcconfig.Configuration;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
@@ -23,21 +24,21 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
-public class QVTc2QVTu {
+public class QVTc2QVTu
+{
+	private final @NonNull EnvironmentFactory environmentFactory;
+	private final @NonNull QVTuConfiguration qvtuConfiguration;
+	private final @NonNull Map<@NonNull Variable, @NonNull Variable> refinedVars = new HashMap<@NonNull Variable, @NonNull Variable>();
 
-	private EnvironmentFactory environmentFactory;
-	private Configuration config;
-	Map<Variable, Variable> refinedVars = new HashMap<Variable, Variable>();
-    
-
-	public QVTc2QVTu(EnvironmentFactory environmentFactory, Configuration config) {
+	public QVTc2QVTu(@NonNull EnvironmentFactory environmentFactory, @NonNull QVTuConfiguration qvtuConfiguration) {
 		super();
         this.environmentFactory = environmentFactory;
-        this.config = config;
+        this.qvtuConfiguration = qvtuConfiguration;
 	}
 	
-	public void execute(CoreModel model) {
+	public void execute(@NonNull CoreModel model) {
 
         for (org.eclipse.ocl.pivot.Package p : model.getOwnedPackages()) {
             for (Class c : p.getOwnedClasses()) {
@@ -55,9 +56,8 @@ public class QVTc2QVTu {
 	 *  Change input realized variables to variables  
 	 * @param t
 	 */
-	private void direct(Transformation t) {
-		// TODO Auto-generated method stub
-		for (Rule r : t.getRule()) {
+	private void direct(@NonNull Transformation t) {
+		for (Rule r : ClassUtil.nullFree(t.getRule())) {
 			migrateVariables((Mapping) r);
             direct((Mapping) r);
         }
@@ -67,18 +67,18 @@ public class QVTc2QVTu {
 		}
 	}
 	
-	private void migrateVariables(Mapping m) {
+	private void migrateVariables(@NonNull Mapping m) {
 		
 		changeRealizedToVariable(m);
 		fixRealizedVariableReferences(m);
 	}
 	
-	private void fixRealizedVariableReferences(Mapping m) {
-		for (Domain d : m.getDomain()) {
+	private void fixRealizedVariableReferences(@NonNull Mapping m) {
+		for (Domain d : ClassUtil.nullFree(m.getDomain())) {
 			MtcUtil.fixReferences((Area) d, refinedVars);
 		}
 		MtcUtil.fixReferences(m, refinedVars);
-		for (Mapping lm : m.getLocal()) {
+		for (Mapping lm : ClassUtil.nullFree(m.getLocal())) {
 			fixRealizedVariableReferences(lm);
 		}
 		// Extending mappings can also have references that need fixing
@@ -87,10 +87,10 @@ public class QVTc2QVTu {
 //		}
 	}
 	
-	private void changeRealizedToVariable(Mapping m) {
+	private void changeRealizedToVariable(@NonNull Mapping m) {
 		
 		for (Domain d : m.getDomain()) {
-			if (MtcUtil.isInputDomain((Area) d, config)) {
+			if (qvtuConfiguration.isInputDomain((Area) d)) {
 				for (RealizedVariable rv : ((Area) d).getBottomPattern().getRealizedVariable()) {
 					//References to rv must be fixed
 					Variable v = PivotFactory.eINSTANCE.createVariable();
@@ -101,19 +101,17 @@ public class QVTc2QVTu {
 				}
 			}
 		}
-		for (Mapping lm : m.getLocal()) {
+		for (Mapping lm : ClassUtil.nullFree(m.getLocal())) {
 			changeRealizedToVariable(lm);
 		}
 	}
 
-	private void direct(Mapping m) {
+	private void direct(@NonNull Mapping m) {
 		// Delete Assignments
 		for (PropertyAssignment a : MtcUtil.getAllPropertyAssignments(m)) {
-			if (MtcUtil.isMtoL(a, config) ||
-					MtcUtil.isRtoM(a, config) ||
-					MtcUtil.isLocaltoM(a, config)) {
+			if (qvtuConfiguration.isMtoL(a) || qvtuConfiguration.isRtoM(a) || qvtuConfiguration.isLocaltoM(a)) {
 				EcoreUtil.delete(a, true);
-			} else if (MtcUtil.isFromInputDomain(a.getSlotExpression(), config) &&
+			} else if (qvtuConfiguration.isFromInputDomain(a.getSlotExpression()) &&
 					allReferencedVariablesInInputDomain(a)) {
 				// Assignments to Predicates
 				Predicate pOUt = QVTbaseFactory.eINSTANCE.createPredicate();
@@ -121,18 +119,16 @@ public class QVTc2QVTu {
 	            CorePattern cp = (CorePattern) a.eContainer();
 	            EcoreUtil.delete(a, true);
 	            cp.getPredicate().add(pOUt);
-			} else if(MtcUtil.isCheckMode(config) &&
+			} else if(qvtuConfiguration.isCheckMode() &&
 					a.isIsDefault() &&
-					MtcUtil.isOutputDomain(a.getBottomPattern().getArea(), config)
+					qvtuConfiguration.isOutputDomain(a.getBottomPattern().getArea())
 					) {
 				// Default assignments
 				a.setIsDefault(false);
 			}
 		}
 		for (VariableAssignment a : MtcUtil.getAllVariableAssignments(m)) {
-			if (MtcUtil.isMtoL(a, config) ||
-					MtcUtil.isRtoM(a, config) ||
-					MtcUtil.isMtoM(a, config)) {
+			if (qvtuConfiguration.isMtoL(a) || qvtuConfiguration.isRtoM(a) || qvtuConfiguration.isMtoM(a)) {
 				EcoreUtil.delete(a, true);
 			}
 		}
@@ -144,34 +140,34 @@ public class QVTc2QVTu {
 		}
 		for (Domain d : m.getDomain()) {
 			d.setName(d.getTypedModel().getName());			// Redundant replication of Epsilon functionality
-			if (MtcUtil.isInputDomain((Area) d, config)) {
+			if (qvtuConfiguration.isInputDomain((Area) d)) {
 				d.setIsEnforceable(false);
 				d.setIsCheckable(true);
 			} else {
-				if (MtcUtil.isCheckMode(config)) {
+				if (qvtuConfiguration.isCheckMode()) {
 					d.setIsEnforceable(false);
-				} else if (MtcUtil.isEnforceMode(config)) {
+				} else if (qvtuConfiguration.isEnforceMode()) {
 					d.setIsCheckable(false);
 				}
 			}
 		}
-		for (Mapping lm : m.getLocal()) {
+		for (Mapping lm : ClassUtil.nullFree(m.getLocal())) {
 			direct(lm);
 		}
 	}
 
-	private boolean allReferencedVariablesInInputDomain(PropertyAssignment a) {
+	private boolean allReferencedVariablesInInputDomain(@NonNull PropertyAssignment a) {
 		for (Variable v : MtcUtil.findReferencedVariables(a)) {
-			if (!MtcUtil.isInputDomain(MtcUtil.getArea(v), config)) {
+			if (!qvtuConfiguration.isInputDomain(QVTcoreBaseUtil.getContainingArea(v))) {
 				return false;
 			}
 		}
 		return true;
 	}
 
-	private boolean allReferencedVariablesInOutputDomain(Predicate p) {
+	private boolean allReferencedVariablesInOutputDomain(@NonNull Predicate p) {
 		for (Variable v : MtcUtil.findReferencedVariables(p.getConditionExpression())) {
-			if (!MtcUtil.isOutputDomain(MtcUtil.getArea(v), config)) {
+			if (!qvtuConfiguration.isOutputDomain(QVTcoreBaseUtil.getContainingArea(v))) {
 				return false;
 			}
 		}
