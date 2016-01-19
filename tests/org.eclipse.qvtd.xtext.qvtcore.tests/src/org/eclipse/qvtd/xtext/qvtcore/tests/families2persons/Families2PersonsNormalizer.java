@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2015, 2016 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   E.D.Willink - Initial API and implementation
+ */
 package org.eclipse.qvtd.xtext.qvtcore.tests.families2persons;
 
 import java.util.ArrayList;
@@ -13,9 +23,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.PersonsPackage;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
-
-import build.test.families2persons.Persons.PersonsPackage;
 
 /**
  * UpperToLowerNormalizer normalises the results of the UpperToLower transformation.

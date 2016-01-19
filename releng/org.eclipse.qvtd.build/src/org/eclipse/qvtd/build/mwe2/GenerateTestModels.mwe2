@@ -28,6 +28,9 @@ Workflow {
     component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample5Models {}
   
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
+    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/families2persons/Families2Persons.genmodel"
+    }
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
     	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/upper2lower/SimpleGraph2Graph.genmodel"
     }
 
