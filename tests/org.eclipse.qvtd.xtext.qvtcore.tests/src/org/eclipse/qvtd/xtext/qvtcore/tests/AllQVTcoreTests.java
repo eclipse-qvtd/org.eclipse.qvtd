@@ -30,10 +30,11 @@ public class AllQVTcoreTests extends TestCase
 	}
 
 	public static Test suite() {
-		TestSuite result = new TestSuite("QVTc Editor Support");			
+		TestSuite result = new TestSuite("All QVTcore Tests");			
 		result.addTestSuite(LoadTests.class);
 		result.addTestSuite(QVTcDomainUsageTests.class);
 		result.addTestSuite(QVTcSerializeTests.class);
+		result.addTestSuite(QVTcCompilerTests.class);
 		return result;
 	}
 
