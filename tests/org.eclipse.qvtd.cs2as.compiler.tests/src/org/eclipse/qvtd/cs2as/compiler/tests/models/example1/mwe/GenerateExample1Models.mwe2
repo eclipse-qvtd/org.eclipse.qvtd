@@ -49,14 +49,8 @@ Workflow {
 
     component = @SubGenerateAutoASModel { resourceSet = resourceSet
     	projectName = "${projectName}"
-    	modelName = "target"
-    	projectPrefix = "Target"
     	genModelFile = "${examplesFolder}/TargetMM1.genmodel"
     	lookupFilePath = "${examplesFolder}/Source2TargetLookup.ocl"
-    	javaFolder = "tests-gen"
-    	modelPackageName = "example1.target"
-		visitorClassName = "Visitor"
-    	visitableClassName = "Visitable"
     }
 }
 

@@ -12,6 +12,10 @@ package	example1.target.lookup.util;
 
 import org.eclipse.ocl.pivot.evaluation.Executor;
 
+import example1.target.util.TargetQualifiedLookupVisitor;
+import example1.target.util.TargetUnqualifiedLookupVisitor;
+
+
 public class TargetLookupSolver {
 	
 	private Executor executor;
