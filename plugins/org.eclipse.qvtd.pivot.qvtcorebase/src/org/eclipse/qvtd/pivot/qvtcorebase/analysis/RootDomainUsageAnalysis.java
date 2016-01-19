@@ -24,6 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -32,9 +33,9 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.ids.OperationId;
-import org.eclipse.ocl.pivot.internal.complete.CompleteModelInternal;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -309,7 +310,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	private final @NonNull Set<EReference> dirtyEReferences = new HashSet<EReference>();
 
 
-	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
+	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 		primitiveTypeModel.setName("$primitive$");
 		add(primitiveTypeModel);
@@ -371,7 +372,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation) {
 		int checkableMask = 0;
 		int enforceableMask = 0;
-		CompleteModelInternal completeModel = context.getCompleteModel();
+		CompleteModel completeModel = context.getCompleteModel();
 		for (@SuppressWarnings("null")@NonNull TypedModel typedModel : transformation.getModelParameter()) {
 			int nextBit = add(typedModel);
 			int bitMask = 1 << nextBit;
@@ -467,7 +468,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 				property2referredTypeUsage.put(property, referredTypeUsage);
 			}
 		}
-		class2usage.put(context.getStandardLibrary().getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
+		class2usage.put(((StandardLibraryInternal)context.getStandardLibrary()).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
 		checkableUsage = getConstantUsage(getAnyMask() & checkableMask);
 		enforceableUsage = getConstantUsage(getAnyMask() & enforceableMask);
 		middleUsage = getConstantUsage(getAnyMask() & ~checkableMask & ~enforceableMask);

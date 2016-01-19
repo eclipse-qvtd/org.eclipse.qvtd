@@ -39,7 +39,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTc2QVTu;
@@ -448,8 +447,8 @@ public class MtcBroker {
 		Resource pResource = pModel.getResource();
 		ResourceSet pResourceSet = pResource.getResourceSet();
 		RootDomainUsageAnalysis domainAnalysis = useQVTip
-				? new QVTimperativeDomainUsageAnalysis((EnvironmentFactoryInternal) this.environmentFactory)
-				: new QVTcoreDomainUsageAnalysis((EnvironmentFactoryInternal) this.environmentFactory);
+				? new QVTimperativeDomainUsageAnalysis(this.environmentFactory)
+				: new QVTcoreDomainUsageAnalysis(this.environmentFactory);
 		gModel = createASModel(scheduleUri, "QVTg", "QVT", QVTS_FULL_NS, false, true, false, true);
 		Resource gResource = gModel.getResource();
 		pModel.setCachingEnabled(true);

@@ -60,11 +60,12 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -87,12 +88,12 @@ import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 /**
  * AbstractDomainUsageAnalysis provides shared functionality for the overall analysis and for nested operational analyses.
  */
-public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTcoreBaseVisitor<DomainUsage, @NonNull EnvironmentFactoryInternal> implements DomainUsageAnalysis.Internal
+public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTcoreBaseVisitor<DomainUsage, @NonNull EnvironmentFactory> implements DomainUsageAnalysis.Internal
 {
 	private DomainUsage selfUsage = null;
 	protected final @NonNull Map<Element, DomainUsage> element2usage = new HashMap<Element, DomainUsage>();
 
-	protected AbstractDomainUsageAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
+	protected AbstractDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 	}
 
@@ -145,7 +146,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		return element2usage;
 	}
 
-	public @NonNull EnvironmentFactoryInternal getEnvironmentFactory() {
+	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		return context;
 	}
 
@@ -440,7 +441,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		}
 		visit(object.getOwnedResult());
 		@SuppressWarnings("unused") DomainUsage bodyUsage = visit(object.getOwnedBody());
-		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor(context, object.getOwnedSource().getType(), null);
+		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactoryInternal) context, object.getOwnedSource().getType(), null);
 		object.accept(visitor);
 		Iteration iteration = object.getReferredIteration();
 		for (EObject eObject = iteration; eObject != null; eObject = eObject.eContainer()) {
@@ -469,7 +470,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			}
 		}
 		@SuppressWarnings("unused") DomainUsage bodyUsage = visit(object.getOwnedBody());
-		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor(context, object.getOwnedSource().getType(), null);
+		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor((@NonNull EnvironmentFactoryInternal) context, object.getOwnedSource().getType(), null);
 		object.accept(visitor);
 		Iteration iteration = object.getReferredIteration();
 		for (EObject eObject = iteration; eObject != null; eObject = eObject.eContainer()) {
@@ -533,7 +534,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			if (bodyExpression == null) {
 				return visit(object.getType());
 			}
-			PivotMetamodelManager metamodelManager = context.getMetamodelManager();
+			MetamodelManager metamodelManager = context.getMetamodelManager();
 			try {
 				ExpressionInOCL parseSpecification = metamodelManager.parseSpecification(bodyExpression);
 				return visit(parseSpecification);

@@ -12,7 +12,7 @@ package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
  */
 public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTcoreVisitor<DomainUsage>
 {
-	public QVTcoreDomainUsageAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
+	public QVTcoreDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 	}
 

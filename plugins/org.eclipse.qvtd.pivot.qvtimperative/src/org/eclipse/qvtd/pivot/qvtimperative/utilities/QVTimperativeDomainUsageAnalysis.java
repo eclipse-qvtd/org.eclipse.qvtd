@@ -17,7 +17,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
@@ -38,7 +38,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  */
 public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTimperativeVisitor<DomainUsage>
 {
-	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
+	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 	}
 
@@ -122,7 +122,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	
 	@Override
 	public @Nullable DomainUsage visitVariableExp(@NonNull VariableExp object) {
-		StandardLibraryInternal standardLibrary = context.getStandardLibrary();
+		StandardLibraryInternal standardLibrary = (StandardLibraryInternal) context.getStandardLibrary();
 		Type transformationType = standardLibrary.getLibraryType("Transformation");
 		if ((transformationType != null) && object.getType().conformsTo(standardLibrary, transformationType)) {
 			return getNoneUsage();

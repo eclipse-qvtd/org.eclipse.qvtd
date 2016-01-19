@@ -33,7 +33,6 @@ import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -794,7 +793,7 @@ public class QVTm2QVTp
      */
     public QVTm2QVTp(@NonNull EnvironmentFactory environmentFactory) {
         this.environmentFactory = environmentFactory;
-		this.domainAnalysis = new QVTcoreDomainUsageAnalysis((EnvironmentFactoryInternal) environmentFactory);
+		this.domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
 		this.createVisitor = new CreateVisitor(this);
 		this.updateVisitor = new UpdateVisitor(this);
 	}
