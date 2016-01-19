@@ -71,10 +71,10 @@ public class UpperToLower extends AbstractTransformer
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Node2Node = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Node2Node);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Graph = TypeId.SET.getSpecializedId(CLSSid_Graph);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_OclElement = TypeId.SET.getSpecializedId(CLSSid_OclElement);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Edge);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue OrderedSet_1 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Node);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue OrderedSet_0 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Edge2Edge);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue OrderedSet_2 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Node2Node);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Edge);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue OrderedSet_0 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Edge2Edge);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue OrderedSet_1 = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Node);
     
     /*
      * Property-source to Property-target unnavigable navigation caches
@@ -452,17 +452,17 @@ public class UpperToLower extends AbstractTransformer
      *   upperGraph (_'\\u00ABparent\\u00BB' : simplegraph::Graph[1];
      *  |)
      * { |}
-     * where (_'\\u00ABjoin-Edge-0\\u00BB' : OrderedSet(simplegraph::Edge[*|1]);
-     * _'\\u00ABjoin-Node-0\\u00BB' : OrderedSet(simplegraph::Node[*|1]);
+     * where (_'\\u00ABjoin-Node-0\\u00BB' : OrderedSet(simplegraph::Node[*|1]);
+     * _'\\u00ABjoin-Edge-0\\u00BB' : OrderedSet(simplegraph::Edge[*|1]);
      *  |)
      * {allChildren : OrderedSet(simplegraph::Element) = _'\\u00ABparent\\u00BB'.element->selectByKind(simplegraph::Element)
      *   ;
-     * _'\u00ABchild-Edge\u00BB' : OrderedSet(simplegraph::Edge[*|1]) = allChildren->selectByKind(simplegraph::Edge)
+     * _'\u00ABchild-Node\u00BB' : OrderedSet(simplegraph::Node[*|1]) = allChildren->selectByKind(simplegraph::Node)
      *   ;
-     * _'\u00ABchild-Node\u00BB' : OrderedSet(simplegraph::Node[*|1]) = allChildren->selectByKind(simplegraph::Node);
+     * _'\u00ABchild-Edge\u00BB' : OrderedSet(simplegraph::Edge[*|1]) = allChildren->selectByKind(simplegraph::Edge);
      *  |
-     * _'\\u00ABjoin-Edge-0\\u00BB' += _'\u00ABchild-Edge\u00BB';
      * _'\\u00ABjoin-Node-0\\u00BB' += _'\u00ABchild-Node\u00BB';
+     * _'\\u00ABjoin-Edge-0\\u00BB' += _'\u00ABchild-Edge\u00BB';
      * }
      * 
      */
@@ -477,17 +477,17 @@ public class UpperToLower extends AbstractTransformer
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Element> element = _92_u00ABparent_92_u00BB.getElement();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_element = idResolver.createOrderedSetOfAll(ORD_CLSSid_Element, element);
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue selectByKind = ClassUtil.nonNullState((OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_element, TYP_simplegraph_c_c_Element_0));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue selectByKind_0 = ClassUtil.nonNullState((OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_simplegraph_c_c_Edge_0));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue selectByKind_1 = ClassUtil.nonNullState((OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_simplegraph_c_c_Node_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue selectByKind_0 = ClassUtil.nonNullState((OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_simplegraph_c_c_Node_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue selectByKind_1 = ClassUtil.nonNullState((OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_simplegraph_c_c_Edge_0));
         // connection assignments
-        for (Edge iterator : ValueUtil.typedIterable(Edge.class, selectByKind_0)) {
-            if (iterator instanceof Edge) {
-                _92_u00ABjoin_m_Edge_m_0_92_u00BB.add(iterator);
+        for (Node iterator : ValueUtil.typedIterable(Node.class, selectByKind_0)) {
+            if (iterator instanceof Node) {
+                _92_u00ABjoin_m_Node_m_0_92_u00BB.add(iterator);
             }
         }
-        for (Node iterator_0 : ValueUtil.typedIterable(Node.class, selectByKind_1)) {
-            if (iterator_0 instanceof Node) {
-                _92_u00ABjoin_m_Node_m_0_92_u00BB.add(iterator_0);
+        for (Edge iterator_0 : ValueUtil.typedIterable(Edge.class, selectByKind_1)) {
+            if (iterator_0 instanceof Edge) {
+                _92_u00ABjoin_m_Edge_m_0_92_u00BB.add(iterator_0);
             }
         }
         return true;

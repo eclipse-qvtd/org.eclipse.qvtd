@@ -471,7 +471,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
              */
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_target_c_c_A_0 = idResolver.getClass(CLSSid_A, null);
             if (_1 == null) {
-                throwNull(sRoot_0, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::SElement::ast\'");
+                throw throwNull(sRoot_0, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::SElement::ast\'");
             }
             final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_0 = _1.getAst();
             final /*@Thrown*/ example1.target.@org.eclipse.jdt.annotation.NonNull A oclAsType_0 = ClassUtil.nonNullState((A)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_target_c_c_A_0));
@@ -961,7 +961,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Thrown*/ example1.target.@org.eclipse.jdt.annotation.NonNull B oclAsType = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_B_0));
         final /*@Thrown*/ example1.source.@org.eclipse.jdt.annotation.Nullable Z ownsZ = y1_1.getOwnsZ();
         if (ownsZ == null) {
-            throwNull(y1_1, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::SElement::ast\'");
+            throw throwNull(y1_1, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::SElement::ast\'");
         }
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_0 = ownsZ.getAst();
         final /*@Thrown*/ example1.target.@org.eclipse.jdt.annotation.NonNull D oclAsType_0 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_target_c_c_D_0));
@@ -1032,7 +1032,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Thrown*/ example1.target.@org.eclipse.jdt.annotation.NonNull C oclAsType = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_C_0));
         final /*@Thrown*/ example1.source.@org.eclipse.jdt.annotation.Nullable Z ownsZ = y2_1.getOwnsZ();
         if (ownsZ == null) {
-            throwNull(y2_1, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::SElement::ast\'");
+            throw throwNull(y2_1, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::SElement::ast\'");
         }
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_0 = ownsZ.getAst();
         final /*@Thrown*/ example1.target.@org.eclipse.jdt.annotation.NonNull D oclAsType_0 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_target_c_c_D_0));
@@ -1153,7 +1153,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
             final /*@Thrown*/ example1.target.@org.eclipse.jdt.annotation.NonNull D self_0 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_D_0));
             final /*@Thrown*/ example1.source.@org.eclipse.jdt.annotation.Nullable PathNameCS aPathNameCS = z_2.getRefers();
             if (aPathNameCS == null) {
-                throwNull(z_2, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathNameCS::path\'");
+                throw throwNull(z_2, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathNameCS::path\'");
             }
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments = aPathNameCS.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments);
@@ -1163,7 +1163,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
             if (eq_0) {
                 final /*@Thrown*/ example1.source.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments);
                 if (aPathElementCS == null) {
-                    throwNull(z_2, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
+                    throw throwNull(z_2, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
                 }
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = aPathElementCS.getName();
                 TargetLookupResult<C> _lookupResult = lookupSolver._lookupC(self_0, name);
@@ -1180,7 +1180,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
                 final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments, INT_1, diff));
                 final /*@Thrown*/ example1.source.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments);
                 if (aPathElementCS_0 == null) {
-                    throwNull(z_2, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
+                    throw throwNull(z_2, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
                 }
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_0 = aPathElementCS_0.getName();
                 TargetLookupResult<A2> _lookupResult_0 = lookupSolver._lookupA2(self_0, name_0);
@@ -1205,7 +1205,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
                 else {
                     final /*@Thrown*/ example1.source.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_1 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_segments);
                     if (aPathElementCS_1 == null) {
-                        throwNull(z_2, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
+                        throw throwNull(z_2, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
                     }
                     final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_1 = aPathElementCS_1.getName();
                     TargetLookupResult<C> _lookupResult_1 = lookupSolver._lookupQualifiedC(_lookupA2, name_1);
@@ -1322,7 +1322,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
             final /*@Thrown*/ example1.target.@org.eclipse.jdt.annotation.NonNull D self_0 = ClassUtil.nonNullState((D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_target_c_c_D_0));
             final /*@Thrown*/ example1.source.@org.eclipse.jdt.annotation.Nullable PathNameCS aPathNameCS = z_4.getRefers();
             if (aPathNameCS == null) {
-                throwNull(z_4, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathNameCS::path\'");
+                throw throwNull(z_4, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathNameCS::path\'");
             }
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments = aPathNameCS.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments);
@@ -1332,7 +1332,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
             if (eq_0) {
                 final /*@Thrown*/ example1.source.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments);
                 if (aPathElementCS == null) {
-                    throwNull(z_4, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
+                    throw throwNull(z_4, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
                 }
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = aPathElementCS.getName();
                 TargetLookupResult<B> _lookupResult = lookupSolver._lookupB(self_0, name);
@@ -1349,7 +1349,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
                 final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments, INT_1, diff));
                 final /*@Thrown*/ example1.source.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments);
                 if (aPathElementCS_0 == null) {
-                    throwNull(z_4, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
+                    throw throwNull(z_4, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
                 }
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_0 = aPathElementCS_0.getName();
                 TargetLookupResult<A1> _lookupResult_0 = lookupSolver._lookupA1(self_0, name_0);
@@ -1374,7 +1374,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
                 else {
                     final /*@Thrown*/ example1.source.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_1 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_segments);
                     if (aPathElementCS_1 == null) {
-                        throwNull(z_4, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
+                        throw throwNull(z_4, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
                     }
                     final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_1 = aPathElementCS_1.getName();
                     TargetLookupResult<B> _lookupResult_1 = lookupSolver._lookupQualifiedB(_lookupA1, name_1);

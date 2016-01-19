@@ -329,7 +329,7 @@ public class Tree2TallTree extends AbstractTransformer
         protected final /*@NonInvalid*/ tree2talltree.tree2talltree.@org.eclipse.jdt.annotation.NonNull Node2TallNode node2tallNode_0;
         
         @SuppressWarnings("null")
-        public MAP_MiddleNode2TallNode(@NonNull Object[] boundValues) {
+        public MAP_MiddleNode2TallNode(@NonNull Object @NonNull [] boundValues) {
             node2tallNode_0 = (Node2TallNode)boundValues[0];
         }
         
@@ -429,7 +429,7 @@ public class Tree2TallTree extends AbstractTransformer
             return true;
         }
         
-        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object[] thoseValues) {
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
             return idResolver.oclEquals(node2tallNode_0, thoseValues[0]);
         }
     }

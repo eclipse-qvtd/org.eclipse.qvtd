@@ -2,39 +2,39 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree"
     xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree ../../../../../../../../../../org.eclipse.qvtd.compiler/model/ECoreContainmentTree.ecore">
   <eCoreContainemntTree:Node name="ElementCS" subTypes="/1 /2 /6 /3 /4 /7 /8 /9 /5 /10 /11">
-    <element href="ClassesCS.ecore#//ElementCS"/>
+    <element href="http://cs2as/tests/example2/classescs/1.0#//ElementCS"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="NamedElementCS" subTypes="/2 /3 /7 /8 /5 /11" superTypes="/0">
-    <element href="ClassesCS.ecore#//NamedElementCS"/>
+    <element href="http://cs2as/tests/example2/classescs/1.0#//NamedElementCS"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="PackageCS" parent="/2 /6" children="/2 /3" superTypes="/1 /0">
-    <element href="ClassesCS.ecore#//PackageCS"/>
+    <element href="http://cs2as/tests/example2/classescs/1.0#//PackageCS"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="ClassCS" parent="/2" children="/7 /8 /4" superTypes="/1 /0">
-    <element href="ClassesCS.ecore#//ClassCS"/>
+    <element href="http://cs2as/tests/example2/classescs/1.0#//ClassCS"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="PathNameCS" parent="/3 /7 /8 /9" children="/5" superTypes="/0">
-    <element href="ClassesCS.ecore#//PathNameCS"/>
+    <element href="http://cs2as/tests/example2/classescs/1.0#//PathNameCS"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="PathElementCS" parent="/4" superTypes="/1 /0">
-    <element href="ClassesCS.ecore#//PathElementCS"/>
+    <element href="http://cs2as/tests/example2/classescs/1.0#//PathElementCS"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="RootCS" children="/2" superTypes="/0">
-    <element href="ClassesCS.ecore#//RootCS"/>
+    <element href="http://cs2as/tests/example2/classescs/1.0#//RootCS"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="PropertyCS" parent="/3" children="/4" superTypes="/1 /0">
-    <element href="ClassesCS.ecore#//PropertyCS"/>
+    <element href="http://cs2as/tests/example2/classescs/1.0#//PropertyCS"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="OperationCS" parent="/3" children="/9 /4" superTypes="/1 /0">
-    <element href="ClassesCS.ecore#//OperationCS"/>
+    <element href="http://cs2as/tests/example2/classescs/1.0#//OperationCS"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="NameExpCS" parent="/8 /9" children="/9 /4 /10" superTypes="/0">
-    <element href="ClassesCS.ecore#//NameExpCS"/>
+    <element href="http://cs2as/tests/example2/classescs/1.0#//NameExpCS"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="RoundedBracketClause" parent="/9" children="/11" superTypes="/0">
-    <element href="ClassesCS.ecore#//RoundedBracketClause"/>
+    <element href="http://cs2as/tests/example2/classescs/1.0#//RoundedBracketClause"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="ArgumentCS" parent="/10" superTypes="/1 /0">
-    <element href="ClassesCS.ecore#//ArgumentCS"/>
+    <element href="http://cs2as/tests/example2/classescs/1.0#//ArgumentCS"/>
   </eCoreContainemntTree:Node>
 </xmi:XMI>

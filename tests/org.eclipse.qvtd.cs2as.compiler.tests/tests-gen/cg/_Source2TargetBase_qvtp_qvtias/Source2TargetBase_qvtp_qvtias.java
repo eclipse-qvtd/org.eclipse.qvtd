@@ -250,7 +250,7 @@ public class Source2TargetBase_qvtp_qvtias extends AbstractCS2ASTransformer
              */
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_tbase_c_c_A_0 = idResolver.getClass(CLSSid_A, null);
             if (_1 == null) {
-                throwNull(sRoot_0, "Null source for \'\'http://cs2as/tests/example5/sourceBaseMM/1.0\'::SElement::ast\'");
+                throw throwNull(sRoot_0, "Null source for \'\'http://cs2as/tests/example5/sourceBaseMM/1.0\'::SElement::ast\'");
             }
             final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_0 = _1.getAst();
             final /*@Thrown*/ example5.tbase.@org.eclipse.jdt.annotation.NonNull A oclAsType_0 = ClassUtil.nonNullState((A)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_tbase_c_c_A_0));
@@ -338,7 +338,7 @@ public class Source2TargetBase_qvtp_qvtias extends AbstractCS2ASTransformer
              */
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_tbase_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
             if (_1 == null) {
-                throwNull(x_1, "Null source for \'\'http://cs2as/tests/example5/sourceBaseMM/1.0\'::SElement::ast\'");
+                throw throwNull(x_1, "Null source for \'\'http://cs2as/tests/example5/sourceBaseMM/1.0\'::SElement::ast\'");
             }
             final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_0 = _1.getAst();
             final /*@Thrown*/ example5.tbase.@org.eclipse.jdt.annotation.NonNull B oclAsType_0 = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_tbase_c_c_B_0));
@@ -413,7 +413,7 @@ public class Source2TargetBase_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Thrown*/ example5.tbase.@org.eclipse.jdt.annotation.NonNull B oclAsType = ClassUtil.nonNullState((B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_tbase_c_c_B_0));
         final /*@Thrown*/ example5.sbase.@org.eclipse.jdt.annotation.Nullable Z ownsZ = y_1.getOwnsZ();
         if (ownsZ == null) {
-            throwNull(y_1, "Null source for \'\'http://cs2as/tests/example5/sourceBaseMM/1.0\'::SElement::ast\'");
+            throw throwNull(y_1, "Null source for \'\'http://cs2as/tests/example5/sourceBaseMM/1.0\'::SElement::ast\'");
         }
         final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_0 = ownsZ.getAst();
         final /*@Thrown*/ example5.tbase.@org.eclipse.jdt.annotation.NonNull C oclAsType_0 = ClassUtil.nonNullState((C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_tbase_c_c_C_0));
