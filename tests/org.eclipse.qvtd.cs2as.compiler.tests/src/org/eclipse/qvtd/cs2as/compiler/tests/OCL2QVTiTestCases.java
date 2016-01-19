@@ -15,8 +15,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.URI;
@@ -61,6 +62,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
@@ -92,38 +94,193 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	private static final String TESTS_PACKAGE_NAME = "cg";
 	private static final String DEBUG_SEGMENT = "debug";
 	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models", true);
-
-	/**
-	 * InstallMap supervises installation of test model declarations not available from the plugin extension points.
-	 */
-	@SuppressWarnings("serial")
-	protected class InstallMap extends HashMap<EPackage, URI>
+	
+	protected static class MyQVT extends QVTimperative
 	{
-		private final @NonNull URI baseURI;
+		protected final @NonNull String testName;
+		protected final @NonNull URI baseURI;
+//		protected final @NonNull URI samplesBaseUri;
+		private Set<@NonNull String> nsURIs = new HashSet<@NonNull String>();
 		
-		public InstallMap(@NonNull URI baseURI) {
-			this.baseURI = baseURI;
-		}
-		public void install(@NonNull EPackage ePackage) {
-			ResourceSetImpl resourceSet = (ResourceSetImpl) myQVT.getResourceSet();
-			URI nsUri = URI.createURI(ePackage.getNsURI());
-			resourceSet.getURIResourceMap().put(nsUri, ePackage.eResource());
-			EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
-			put(ePackage, nsUri);
+		public MyQVT(@NonNull String testName) {
+			super(new QVTiEnvironmentFactory(getProjectMap(), null));
+			this.testName = testName;
+			this.baseURI = TESTS_BASE_URI.appendSegment(testName);
+//	        this.samplesBaseUri = baseURI.appendSegment("samples");
 		}
 
-		public void install(@NonNull EPackage ePackage, @NonNull String relativeEcoreFileName) {
-			ResourceSetImpl resourceSet = (ResourceSetImpl) myQVT.getResourceSet();
-			URI fileURI = baseURI.appendSegment(relativeEcoreFileName);
-			resourceSet.getURIResourceMap().put(fileURI, ePackage.eResource());
-			EPackage.Registry.INSTANCE.put(ePackage.getNsURI(), ePackage);
-			put(ePackage, fileURI);
-		}
-
-		public void uninstall() {
-			for (EPackage ePackage : keySet()) {
-				EPackage.Registry.INSTANCE.remove(ePackage.getNsURI());
+		@Override
+		public synchronized void dispose() {
+			super.dispose();
+			/**
+			 * Remove the eInstances from the EPackage.Registry.INSTANCE so that global registrations from the calling test
+			 * do not confuse subsequent tests that may want to use dynamic models.
+			 */
+			for (String nsURI : nsURIs) {
+				EPackage.Registry.INSTANCE.remove(nsURI);
 			}
+		}
+		
+		//
+		// Execute the transformation with the interpreter
+		//
+		protected void executeModelsTX_CG(Class<? extends Transformer> txClass, String modelName) throws Exception {
+			TransformationExecutor evaluator = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
+			Transformer tx = evaluator.getTransformer();
+			URI samplesBaseUri = baseURI.appendSegment("samples");
+	    	URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
+	    	URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_CG.xmi", modelName));
+	    	URI expectedAsModelURI = samplesBaseUri.appendSegment(String.format("%s_output_ref.xmi", modelName));
+	    	saveEmptyModel(asModelURI);
+
+	    	ResourceSet rSet = getResourceSet();
+			Resource inputResource = rSet.getResource(csModelURI, true);
+			tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
+			assertTrue(tx.run());
+			Resource outputResource = rSet.createResource(asModelURI);
+			outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
+			outputResource.save(TestsXMLUtil.defaultSavingOptions);
+
+			Resource expected =  rSet.getResource(expectedAsModelURI, true);
+			assertSameModel(expected, rSet.getResource(asModelURI, true));
+		}
+
+		//
+		// Execute the transformation with the CGed transformation
+		//
+
+		protected void executeModelsTX_Interpreted(Transformation tx, String modelName) throws Exception {
+
+			URI samplesBaseUri = baseURI.appendSegment("samples");
+			URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
+			URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_Interpreted.xmi", modelName));
+			URI expectedAsModelURI = samplesBaseUri.appendSegment(String.format("%s_output_ref.xmi", modelName));
+			saveEmptyModel(asModelURI);
+
+			BasicQVTiExecutor testEvaluator = new QVTiIncrementalExecutor(getEnvironmentFactory(), tx, QVTiIncrementalExecutor.Mode.LAZY);
+			//testEvaluator.saveTransformation(null);
+		    testEvaluator.loadModel("leftCS", csModelURI);
+		    testEvaluator.createModel("rightAS", asModelURI, null);
+		    boolean success = testEvaluator.execute();
+		    testEvaluator.saveModels(TestsXMLUtil.defaultSavingOptions);
+		    testEvaluator.dispose();
+		    assertTrue(success);
+		    ResourceSet rSet = getResourceSet();
+		    Resource expected =  rSet.getResource(expectedAsModelURI, true);
+		    assertSameModel(expected, rSet.getResource(asModelURI, true));
+		}
+
+		protected Transformation executeNewOCL2QVTi_MTC(String oclDocName) throws Exception {
+			
+			OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, oclDocName, this, TestsXMLUtil.defaultSavingOptions);
+			mtc.setCreateGraphml(CREATE_GRAPHML);
+	    	mtc.newExecute();    	
+	    	if (CREATE_GRAPHML) {
+	    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(DEBUG_SEGMENT).appendSegment(oclDocName.replace(".ocl", "Schedule_complete.graphml")).toString(), false);
+	    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(DEBUG_SEGMENT).appendSegment(oclDocName.replace(".ocl", "Schedule_pruned.graphml")).toString(), true);
+	    	}
+	    	
+	    	Resource iResource = mtc.getiResource();
+	    	Transformation qvtiTransf = mtc.getTransformation(iResource);
+	    	
+	    	URI txURI = ClassUtil.nonNullState(iResource.getURI());
+	    	assertValidQVTiModel(txURI);
+
+	    	
+			URI inputURI = txURI;
+			URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvti");
+			doSerialize(inputURI, serializedURI);
+	    	
+	    	
+	    	return qvtiTransf;
+		}
+
+		protected PivotModel executeOCL2QVTi_MTC(String oclDocName) throws Exception {
+
+			return executeOCL2QVTi_MTC(Collections.singletonList(oclDocName));
+		}
+		
+		protected PivotModel executeOCL2QVTi_MTC(List<String> oclDocs) throws Exception {
+					
+			OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, oclDocs, this, TestsXMLUtil.defaultSavingOptions);
+			mtc.setCreateGraphml(CREATE_GRAPHML);
+	    	mtc.execute();
+	    	if (CREATE_GRAPHML) {
+	    		String oclDocName = oclDocs.get(0); // We will get the first oclDoc as the reference name
+	    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(DEBUG_SEGMENT).appendSegment(oclDocName.replace(".ocl", "Schedule_complete.graphml")).toString(), false);
+	    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(DEBUG_SEGMENT).appendSegment(oclDocName.replace(".ocl", "Schedule_pruned.graphml")).toString(), true);
+	    	}
+
+	    	PivotModel qvtiTransf = mtc.getiModel();
+
+	    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
+	    	assertValidQVTiModel(txURI);
+
+	    	
+			URI inputURI = txURI;
+			URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvti");
+			doSerialize(inputURI, serializedURI);
+	    	
+	    	
+	    	return qvtiTransf;
+		}
+
+		/**
+		 * Explicitly install the eInstances that would normally make it into the ProjectMap from extension point registrations.
+		 * Test models are not registered via extension point so we have to do this manually.
+		 */
+		public void install(@NonNull EPackage... eInstances) {
+			ResourceSetImpl resourceSet = (ResourceSetImpl) getResourceSet();
+			for (EPackage eInstance : eInstances) {
+				nsURIs.add(eInstance.getNsURI());
+				resourceSet.getURIResourceMap().put(baseURI.appendSegment(eInstance.getName()+".ecore"), eInstance.eResource());
+			}
+		}
+
+		public void install(@NonNull String genModelFileName, @NonNull String ecoreFileName, @NonNull EPackage ePackage) {
+			loadGenModel(baseURI.appendSegment(genModelFileName));
+			String nsURI = baseURI.appendSegment(ecoreFileName).toString();
+			EPackage.Registry.INSTANCE.put(nsURI, ePackage);
+			nsURIs.add(nsURI);
+		}
+		
+		protected void loadEcoreFile(URI fileURI, EPackage ePackage) {
+			ResourceSet rSet = getResourceSet();
+			rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
+		}
+
+		protected void loadGenModel(@NonNull URI genModelURI) {
+			ResourceSet resourceSet = getResourceSet();
+			MetamodelManagerInternal metamodelManager = getMetamodelManager();
+			Resource csGenResource = resourceSet.getResource(genModelURI, true);
+			for (EObject eObject : csGenResource.getContents()) {
+				if (eObject instanceof GenModel) {
+					GenModel genModel = (GenModel)eObject;
+					genModel.reconcile();
+					metamodelManager.addGenModel(genModel);
+				}
+			}
+		}
+		
+		protected void loadGenModels(String... genModelNames) {
+			if (genModelNames != null) {
+				for (String genModelName : genModelNames) {
+					loadGenModel(baseURI.appendSegment(genModelName));
+				}
+			}
+		}
+
+		// QVTiPivotEvaluator only saves models when something is created. If the transformation
+		// does nothing and nothing is created, the output model is not saved. Then I have to ensure
+		// that an empty model is serialized for the sake of the of the test cases results. The comparison
+		// between output model and the reference one, might be done with a previous output model
+		// TODO report QVTd bug
+		protected void saveEmptyModel( URI modelURI) throws IOException {
+
+			ResourceSet rSet = new ResourceSetImpl();
+			StandaloneProjectMap.getAdapter(rSet);
+			Resource r = rSet.createResource(modelURI);
+			r.save(TestsXMLUtil.defaultSavingOptions);
 		}
 	}
 
@@ -156,290 +313,24 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		}
 	}
 
-	@NonNull private QVTimperative myQVT;
-
-	protected void loadGenModel(@NonNull URI genModelURI) {
-		ResourceSet resourceSet = myQVT.getResourceSet();
-		MetamodelManagerInternal metamodelManager = myQVT.getMetamodelManager();
-		Resource csGenResource = resourceSet.getResource(genModelURI, true);
-		for (EObject eObject : csGenResource.getContents()) {
-			if (eObject instanceof GenModel) {
-				GenModel genModel = (GenModel)eObject;
-				genModel.reconcile();
-				metamodelManager.addGenModel(genModel);
-			}
-		}
-	}
-	
-	protected void loadEcoreFile(URI fileURI, EPackage ePackage) {
-		ResourceSet rSet = myQVT.getResourceSet();
-		rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
-	}
-	
-	protected void loadGenModels(URI baseURI, String... genModelNames) {
-		if (genModelNames != null) {
-			for (String genModelName : genModelNames) {
-				loadGenModel(baseURI.appendSegment(genModelName));
-			}
-		}
-	}
-
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 		QVTimperativeStandaloneSetup.doSetup(); // To be able to add QVTimperative.ocl validation
 		CompleteOCLStandaloneSetup.doSetup();
-		myQVT = createQVT();
 	}
 
 	@Override
 	@After
 	protected void tearDown() throws Exception {
-		myQVT.dispose();
 		super.tearDown();
 	}
-
-	protected @NonNull QVTimperative createQVT() {
-		return QVTimperative.newInstance(getProjectMap(), null);
-	}
-
-
-	@Test
-	public void testExample1_OCL2QVTp() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
-		URI oclDocURI = baseURI.appendSegment("Source2Target.ocl.oclas");
-		URI qvtpFileURI = baseURI.appendSegment("Source2Target.qvtp.qvtias");
-
-		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "Source2Target.ocl", myQVT);
-		mtc.runOCL2QVTp_MiddleFolded(oclDocURI, qvtpFileURI);
-		// Test the QVTp transformation can be loaded
-		assertValidQVTiModel(qvtpFileURI);
-	}
-
-	@Test
-	public void testExample1_Interpreted() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
-		loadGenModels(baseURI, "SourceMM1.genmodel", "TargetMM1.genmodel");
-
-		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
-
-		myQVT.dispose();
-		myQVT = createQVT();
-		// We need to load the metamodel ecore files to properly use the proper PackageImpl
-		loadEcoreFile(baseURI.appendSegment("SourceMM1.ecore"), SourcePackage.eINSTANCE);
-		loadEcoreFile(baseURI.appendSegment("TargetMM1.ecore"), TargetPackage.eINSTANCE);
-		
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3");
-	}
-	
-	@Test
-	public void testNewExample1_Interpreted() throws Exception {
-		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
-		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
-		loadGenModels(baseURI, "SourceMM1.genmodel", "TargetMM1.genmodel");
-		
-		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
-		URI txURI = qvtiTransf.eResource().getURI();
-		
-		myQVT.dispose();
-		myQVT = createQVT();
-		loadEcoreFile(baseURI.appendSegment("SourceMM1.ecore"), SourcePackage.eINSTANCE);
-		loadEcoreFile(baseURI.appendSegment("TargetMM1.ecore"), TargetPackage.eINSTANCE);
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
-//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3");
-	}
-	
-	@Test
-	public void testExample2_Interpreted() throws Exception {
-		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
-		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-		loadGenModels(baseURI, "ClassesCS.genmodel", "Classes.genmodel");
-		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
-		
-		myQVT.dispose();
-		myQVT = createQVT();
-		// We need to load the metamodel ecore files to properly use the proper PackageImpl
-		loadEcoreFile(baseURI.appendSegment("ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
-		loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
-		
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model4");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model5");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model6");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model7");
-	}
-	
-	@Test
-	public void testNewExample2_Interpreted() throws Exception {
-		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
-		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-		loadGenModels(baseURI, "ClassesCS.genmodel", "Classes.genmodel");
-		
-		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
-		URI txURI = qvtiTransf.eResource().getURI();
-		
-		myQVT.dispose();
-		myQVT = createQVT();
-		loadEcoreFile(baseURI.appendSegment("ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
-		loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
-//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model4");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model5");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model6");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model7");
-	}
-	
-	@Test
-	public void testExample2_V2_Interpreted() throws Exception {
-
-		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-		loadGenModels(baseURI, "ClassesCS.genmodel", "Classes.genmodel");
-		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2asV2.ocl");
-		
-		myQVT.dispose();
-		myQVT = createQVT();
-		// We need to load the metamodel ecore files to properly use the proper PackageImpl
-		loadEcoreFile(baseURI.appendSegment("ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
-		loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
-		
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1V2");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2V2");
-	}
-	
-	@Test
-	public void testNewExample2_V2_Interpreted() throws Exception {
-		testCaseAppender.uninstall();	// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
-		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-		loadGenModels(baseURI, "ClassesCS.genmodel", "Classes.genmodel");
-		
-		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "classescs2asV2.ocl");
-		URI txURI = qvtiTransf.eResource().getURI();
-		
-		myQVT.dispose();
-		myQVT = createQVT();
-		loadEcoreFile(baseURI.appendSegment("ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
-		loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1V2");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3V2");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model4V2");
-	}
-	
-	
-	
-	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler
-//	@Test
-//	public void testExample3_Interpreted() throws Exception {
-//
-//		URI baseURI = TESTS_BASE_URI.appendSegment("example3");
-//		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "KiamaRewrite.ocl");
-//    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
-//	}
-*/	
-	
-	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler
-	@Test
-	public void testExample4_Interpreted() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
-		InstallMap installMap = new InstallMap(baseURI);
-		installMap.install(KiamacsPackage.eINSTANCE, "SimplerKiamaCS.ecore");
-		installMap.install(KiamaasPackage.eINSTANCE, "SimplerKiamaAS.ecore");
-		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl");
-		
-		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
-		myQVT.dispose();
-		myQVT = createQVT();		
-		myQVT.getEnvironmentFactory().configureLoadStrategy(StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
-				
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());		
-// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
-//    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model0");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
-// FIXME fails    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
-//    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3");
-    	installMap.uninstall();
-	}*/
-	
-	@Test
-	public void testNewExample4_Interpreted() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
-		loadGenModels(baseURI, "SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
-		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl");
-		URI txURI = qvtiTransf.eResource().getURI();
-		
-		myQVT.dispose();
-		myQVT = createQVT();
-		loadEcoreFile(baseURI.appendSegment("SimplerKiamaCS.ecore"), KiamacsPackage.eINSTANCE);
-		loadEcoreFile(baseURI.appendSegment("SimplerKiamaAS.ecore"), KiamaasPackage.eINSTANCE);
-		
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
-//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.		
-//    	executeModelsTX_Interpreted(myQVT, qvtiTransf, baseURI, "model0");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3");
-	}
-	
-	@Test
-	public void testExample5_Interpreted() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example5");
-		loadGenModels(baseURI, "SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
-		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2TargetBase.ocl");
-		
-		Transformation tx = qvtiTransf.getTransformation();
-    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
-    	
-		myQVT.dispose();
-		myQVT = createQVT();
-
-		loadGenModels(baseURI, "SourceBaseMM.genmodel", "TargetBaseMM.genmodel", 
-				"SourceDerivedMM.genmodel", "TargetDerivedMM.genmodel");
-		List<String> oclDocs = new ArrayList<String>();
-		oclDocs.add("Source2TargetDerived.ocl");
-		oclDocs.add("Source2TargetBase.ocl");
-		qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, oclDocs);
-		
-		tx = qvtiTransf.getTransformation();	
-		executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
-	}
-	
-/*	@Test
-	public void testNewExample4_CG2() throws Exception {
-		AbstractTransformer.INVOCATIONS.setState(true);;
-		URI testBaseURI = TESTS_BASE_URI.appendSegment("example4");
-		install(testBaseURI, KiamacsPackage.eINSTANCE, KiamaasPackage.eINSTANCE);
-
-		QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
-		environmentFactory.configureLoadStrategy(StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
-		environmentFactory.setEvaluationTracingEnabled(true);
-				
-		executeModelsTX_CG(myQVT, SimplerKiama_qvtp_qvtias.class, testBaseURI, "model0");
-		executeModelsTX_CG(myQVT, SimplerKiama_qvtp_qvtias.class, testBaseURI, "model1");
-		executeModelsTX_CG(myQVT, SimplerKiama_qvtp_qvtias.class, testBaseURI, "model2");
-		executeModelsTX_CG(myQVT, SimplerKiama_qvtp_qvtias.class, testBaseURI, "model3");
-		uninstall(KiamacsPackage.eINSTANCE, KiamaasPackage.eINSTANCE);
-	} */
 	
 	@Test
 	public void testExample1_CG() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
-		loadGenModels(baseURI, "SourceMM1.genmodel", "TargetMM1.genmodel");
-		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
+		MyQVT myQVT = new MyQVT("example1");
+		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
+		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("Source2Target.ocl");
 
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example1.target.lookup.util.TargetLookupSolver",
@@ -448,35 +339,93 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
 		myQVT.dispose();
-		myQVT = createQVT();
+		myQVT = new MyQVT("example1");
 
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model3");
+		myQVT.executeModelsTX_CG(txClass, "model1");
+		myQVT.executeModelsTX_CG(txClass, "model2");
+		myQVT.executeModelsTX_CG(txClass, "model3");
+		myQVT.dispose();
+	}
 
+	@Test
+	public void testExample1_Interpreted() throws Exception {
+		MyQVT myQVT = new MyQVT("example1");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
+		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
+
+		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("Source2Target.ocl");
+
+		myQVT.dispose();
+		myQVT = new MyQVT("example1");
+		// We need to load the metamodel ecore files to properly use the proper PackageImpl
+		myQVT.loadEcoreFile(baseURI.appendSegment("SourceMM1.ecore"), SourcePackage.eINSTANCE);
+		myQVT.loadEcoreFile(baseURI.appendSegment("TargetMM1.ecore"), TargetPackage.eINSTANCE);
+		
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
+    	myQVT.executeModelsTX_Interpreted(tx, "model1");
+    	myQVT.executeModelsTX_Interpreted(tx, "model2");
+    	myQVT.executeModelsTX_Interpreted(tx, "model3");
+		myQVT.dispose();
 	}
 
 	@Test
 	public void testNewExample1_CG() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
-		loadGenModels(baseURI, "SourceMM1.genmodel", "TargetMM1.genmodel");
-		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
+		MyQVT myQVT = new MyQVT("example1");
+		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("Source2Target.ocl");
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example1.target.lookup.util.TargetLookupSolver",
 				"example1.target.lookup.util.TargetLookupResult",
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model3");
+		myQVT.executeModelsTX_CG(txClass, "model1");
+		myQVT.executeModelsTX_CG(txClass, "model2");
+		myQVT.executeModelsTX_CG(txClass, "model3");
+		myQVT.dispose();
+	}
+	
+	@Test
+	public void testNewExample1_Interpreted() throws Exception {
+		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
+		MyQVT myQVT = new MyQVT("example1");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
+		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
+		
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("Source2Target.ocl");
+		URI txURI = qvtiTransf.eResource().getURI();
+		
+		myQVT.dispose();
+		myQVT = new MyQVT("example1");
+		myQVT.loadEcoreFile(baseURI.appendSegment("SourceMM1.ecore"), SourcePackage.eINSTANCE);
+		myQVT.loadEcoreFile(baseURI.appendSegment("TargetMM1.ecore"), TargetPackage.eINSTANCE);
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
+//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	myQVT.executeModelsTX_Interpreted(tx, "model1");
+    	myQVT.executeModelsTX_Interpreted(tx, "model2");
+    	myQVT.executeModelsTX_Interpreted(tx, "model3");
+		myQVT.dispose();
+	}
+
+	@Test
+	public void testExample1_OCL2QVTp() throws Exception {
+		MyQVT myQVT = new MyQVT("example1");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
+		URI oclDocURI = baseURI.appendSegment("Source2Target.ocl.oclas");
+		URI qvtpFileURI = baseURI.appendSegment("Source2Target.qvtp.qvtias");
+
+		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "Source2Target.ocl", myQVT);
+		mtc.runOCL2QVTp_MiddleFolded(oclDocURI, qvtpFileURI);
+		// Test the QVTp transformation can be loaded
+		assertValidQVTiModel(qvtpFileURI);
+		myQVT.dispose();
 	}
 
 	@Test
 	public void testExample2_CG() throws Exception {
 		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
-		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-		loadGenModels(baseURI, "ClassesCS.genmodel", "Classes.genmodel");
-		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
+		MyQVT myQVT = new MyQVT("example2");
+		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
+		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("classescs2as.ocl");
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example2.classes.lookup.util.ClassesLookupSolver",
 				"example2.classes.lookup.util.ClassesLookupResult",
@@ -484,13 +433,39 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //		cgParams.setIsIncremental(true);
 		Transformation transformation = qvtiTransf.getTransformation();
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, transformation, cgParams);
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model3");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model4");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model5");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model6");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model7");
+		myQVT.executeModelsTX_CG(txClass, "model1");
+		myQVT.executeModelsTX_CG(txClass, "model2");
+		myQVT.executeModelsTX_CG(txClass, "model3");
+		myQVT.executeModelsTX_CG(txClass, "model4");
+		myQVT.executeModelsTX_CG(txClass, "model5");
+		myQVT.executeModelsTX_CG(txClass, "model6");
+		myQVT.executeModelsTX_CG(txClass, "model7");
+		myQVT.dispose();
+	}
+	
+	@Test
+	public void testExample2_Interpreted() throws Exception {
+		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
+		MyQVT myQVT = new MyQVT("example2");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
+		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
+		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("classescs2as.ocl");
+		
+		myQVT.dispose();
+		myQVT = new MyQVT("example2");
+		// We need to load the metamodel ecore files to properly use the proper PackageImpl
+		myQVT.loadEcoreFile(baseURI.appendSegment("ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
+		myQVT.loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
+		
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
+    	myQVT.executeModelsTX_Interpreted(tx, "model1");
+    	myQVT.executeModelsTX_Interpreted(tx, "model2");
+    	myQVT.executeModelsTX_Interpreted(tx, "model3");
+    	myQVT.executeModelsTX_Interpreted(tx, "model4");
+    	myQVT.executeModelsTX_Interpreted(tx, "model5");
+    	myQVT.executeModelsTX_Interpreted(tx, "model6");
+    	myQVT.executeModelsTX_Interpreted(tx, "model7");
+		myQVT.dispose();
 	}
 
 	@Test
@@ -502,21 +477,91 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 //		Scheduler.DEPENDENCY_ANALYSIS.setState(true);
 //		AbstractTransformer.INVOCATIONS.setState(true);
-		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-		loadGenModels(baseURI, "ClassesCS.genmodel", "Classes.genmodel");
-		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
+		MyQVT myQVT = new MyQVT("example2");
+		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("classescs2as.ocl");
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example2.classes.lookup.util.ClassesLookupSolver",
 				"example2.classes.lookup.util.ClassesLookupResult",
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model3");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model4");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model5");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model6");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model7");
+		myQVT.executeModelsTX_CG(txClass, "model1");
+		myQVT.executeModelsTX_CG(txClass, "model2");
+		myQVT.executeModelsTX_CG(txClass, "model3");
+		myQVT.executeModelsTX_CG(txClass, "model4");
+		myQVT.executeModelsTX_CG(txClass, "model5");
+		myQVT.executeModelsTX_CG(txClass, "model6");
+		myQVT.executeModelsTX_CG(txClass, "model7");
+		myQVT.dispose();
+	}
+	
+	@Test
+	public void testNewExample2_Interpreted() throws Exception {
+		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
+		MyQVT myQVT = new MyQVT("example2");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
+		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
+		
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("classescs2as.ocl");
+		URI txURI = qvtiTransf.eResource().getURI();
+		
+		myQVT.dispose();
+		myQVT = new MyQVT("example2");
+		myQVT.loadEcoreFile(baseURI.appendSegment("ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
+		myQVT.loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
+//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	myQVT.executeModelsTX_Interpreted(tx, "model1");
+    	myQVT.executeModelsTX_Interpreted(tx, "model2");
+    	myQVT.executeModelsTX_Interpreted(tx, "model3");
+    	myQVT.executeModelsTX_Interpreted(tx, "model4");
+    	myQVT.executeModelsTX_Interpreted(tx, "model5");
+    	myQVT.executeModelsTX_Interpreted(tx, "model6");
+    	myQVT.executeModelsTX_Interpreted(tx, "model7");
+		myQVT.dispose();
+	}
+
+	@Test
+	public void testExample2_V2_CG() throws Exception {
+		MyQVT myQVT = new MyQVT("example2");
+		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
+		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("classescs2asV2.ocl");
+
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
+				"example2.classes.lookup.util.ClassesLookupSolver",
+				"example2.classes.lookup.util.ClassesLookupResult",
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
+			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
+
+
+		// Execute CGed transformation
+		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore
+		myQVT.dispose();
+		myQVT = new MyQVT("example2");
+
+		myQVT.executeModelsTX_CG(txClass, "model1V2");
+		myQVT.executeModelsTX_CG(txClass, "model2V2");
+		myQVT.dispose();
+	}
+	
+	@Test
+	public void testExample2_V2_Interpreted() throws Exception {
+		MyQVT myQVT = new MyQVT("example2");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
+		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
+		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("classescs2asV2.ocl");
+		
+		myQVT.dispose();
+		myQVT = new MyQVT("example2");
+		// We need to load the metamodel ecore files to properly use the proper PackageImpl
+		myQVT.loadEcoreFile(baseURI.appendSegment("ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
+		myQVT.loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
+		
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
+    	myQVT.executeModelsTX_Interpreted(tx, "model1V2");
+    	myQVT.executeModelsTX_Interpreted(tx, "model2V2");
+		myQVT.dispose();
 	}
 
 	@Test
@@ -533,41 +578,148 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 //		Scheduler.DEPENDENCY_ANALYSIS.setState(true);
 //		AbstractTransformer.INVOCATIONS.setState(true);
-		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-		loadGenModels(baseURI, "ClassesCS.genmodel", "Classes.genmodel");
-		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "classescs2asV2.ocl");
+		MyQVT myQVT = new MyQVT("example2");
+		myQVT.install("ClassesCS.genmodel", "ClassesCS.ecore", ClassescsPackage.eINSTANCE);
+		myQVT.install("Classes.genmodel", "Classes.ecore", ClassesPackage.eINSTANCE);
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("classescs2asV2.ocl");
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example2.classes.lookup.util.ClassesLookupSolver",
 				"example2.classes.lookup.util.ClassesLookupResult",
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model1V2");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model3V2");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model4V2");
+		myQVT.executeModelsTX_CG(txClass, "model1V2");
+		myQVT.executeModelsTX_CG(txClass, "model3V2");
+		myQVT.executeModelsTX_CG(txClass, "model4V2");
+		myQVT.dispose();
 	}
-
+	
 	@Test
-	public void testExample2_V2_CG() throws Exception {
+	public void testNewExample2_V2_Interpreted() throws Exception {
+		testCaseAppender.uninstall();	// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
+		MyQVT myQVT = new MyQVT("example2");
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-		loadGenModels(baseURI, "ClassesCS.genmodel", "Classes.genmodel");
-		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2asV2.ocl");
+		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
+		
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("classescs2asV2.ocl");
+		URI txURI = qvtiTransf.eResource().getURI();
+		
+		myQVT.dispose();
+		myQVT = new MyQVT("example2");
+		myQVT.loadEcoreFile(baseURI.appendSegment("ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
+		myQVT.loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
+    	myQVT.executeModelsTX_Interpreted(tx, "model1V2");
+    	myQVT.executeModelsTX_Interpreted(tx, "model3V2");
+    	myQVT.executeModelsTX_Interpreted(tx, "model4V2");
+		myQVT.dispose();
+	}
+		
+	@Test
+	public void testExample2_OCL2QVTp_MiddleModel() throws Exception {
+		MyQVT myQVT = new MyQVT("example2");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
+		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
+		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtias");
+		URI tracesMMURI = baseURI.appendSegment("classescs2as.ecore.oclas");
+
+		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "classescs2as.ocl", myQVT, false);
+		mtc.runOCL2QVTp_MiddleModel(oclDocURI, qvtpFileURI, tracesMMURI);
+		// Test the QVTp transformation can be loaded
+		assertValidQVTiModel(qvtpFileURI);
+		myQVT.dispose();
+	}
+	
+	@Test
+	public void testExample2_OCL2QVTp_MiddleFolded() throws Exception {
+		MyQVT myQVT = new MyQVT("example2");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
+		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
+		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtias");
+
+		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "classescs2as.ocl", myQVT);
+		mtc.runOCL2QVTp_MiddleFolded(oclDocURI, qvtpFileURI);
+		// Test the QVTp transformation can be loaded
+		assertValidQVTiModel(qvtpFileURI);
+		myQVT.dispose();
+	}
+	
+	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler 
+	@Test
+	public void testExample3_CG() throws Exception {
+		URI baseURI = TESTS_BASE_URI.appendSegment("example3");
+
+		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("KiamaRewrite.ocl");
 
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
-				"example2.classes.lookup.util.ClassesLookupSolver",
-				"example2.classes.lookup.util.ClassesLookupResult",
+				"",
+				"",
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
 			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
 
+		// To avoid metamodel schizophrenia
+		myQVT.dispose();
+		myQVT = new MyQVT();
+		
+		// Execute CGed transformation
+		myQVT.executeModelsTX_CG(txClass, "model1");
+	}*/
+	
+	
+	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler
+//	@Test
+//	public void testExample3_Interpreted() throws Exception {
+//
+//		URI baseURI = TESTS_BASE_URI.appendSegment("example3");
+//		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("KiamaRewrite.ocl");
+//    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
+//	}
+*/	
+	
+	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler 
+	@Test
+	public void testExample4_CG() throws Exception {
+		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
+
+		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("SimplerKiama.ocl");
+
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
+				"",
+				"",
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
+			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
+
+		// To avoid metamodel schizophrenia
+		myQVT.dispose();
+		myQVT = new MyQVT();
 
 		// Execute CGed transformation
-		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore
+		myQVT.executeModelsTX_CG(txClass, "model1");
+	}*/
+	
+	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler
+	@Test
+	public void testExample4_Interpreted() throws Exception {
+		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
+		InstallMap installMap = new InstallMap(baseURI);
+		installMap.install(KiamacsPackage.eINSTANCE, "SimplerKiamaCS.ecore");
+		installMap.install(KiamaasPackage.eINSTANCE, "SimplerKiamaAS.ecore");
+		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("SimplerKiama.ocl");
+		
+		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
 		myQVT.dispose();
-		myQVT = createQVT();
-
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model1V2");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model2V2");
-	}
+		myQVT = new MyQVT();		
+		myQVT.getEnvironmentFactory().configureLoadStrategy(StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+				
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());		
+// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
+//    	myQVT.executeModelsTX_Interpreted(tx, "model0");
+    	myQVT.executeModelsTX_Interpreted(tx, "model1");
+// FIXME fails    	myQVT.executeModelsTX_Interpreted(tx, "model2");
+//    	myQVT.executeModelsTX_Interpreted(tx, "model3");
+    	installMap.uninstall();
+	}*/
 	
 	@Test
 	public void testNewExample4_CG() throws Exception {
@@ -583,69 +735,49 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //		Scheduler.REGION_TRAVERSAL.setState(true);
 //		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 //		AbstractTransformer.INVOCATIONS.setState(true);
-		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
-		loadGenModels(baseURI, "SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
-		Transformation qvtiTransf = executeNewOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl");
+		MyQVT myQVT = new MyQVT("example4");
+		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("SimplerKiama.ocl");
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("","",
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 //		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 // FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
 //		executeModelsTX_CG(myQVT, txClass, testBaseURI, "model0");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model3");
+		myQVT.executeModelsTX_CG(txClass, "model1");
+		myQVT.executeModelsTX_CG(txClass, "model2");
+		myQVT.executeModelsTX_CG(txClass, "model3");
+		myQVT.dispose();
 	}
 	
-	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler 
 	@Test
-	public void testExample3_CG() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example3");
-
-		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "KiamaRewrite.ocl");
-
-		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
-				"",
-				"",
-				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
-		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
-			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
-
-		// To avoid metamodel schizophrenia
-		myQVT.dispose();
-		myQVT = createQVT();
-		
-		// Execute CGed transformation
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
-	}*/
-	
-	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler 
-	@Test
-	public void testExample4_CG() throws Exception {
+	public void testNewExample4_Interpreted() throws Exception {
+		MyQVT myQVT = new MyQVT("example4");
 		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
-
-		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl");
-
-		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
-				"",
-				"",
-				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
-		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
-			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
-
-		// To avoid metamodel schizophrenia
+		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("SimplerKiama.ocl");
+		URI txURI = qvtiTransf.eResource().getURI();
+		
 		myQVT.dispose();
-		myQVT = createQVT();
-
-		// Execute CGed transformation
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
-	}*/
+		myQVT = new MyQVT("example4");
+		myQVT.loadEcoreFile(baseURI.appendSegment("SimplerKiamaCS.ecore"), KiamacsPackage.eINSTANCE);
+		myQVT.loadEcoreFile(baseURI.appendSegment("SimplerKiamaAS.ecore"), KiamaasPackage.eINSTANCE);
+		
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
+//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.		
+//    	executeModelsTX_Interpreted(myQVT, qvtiTransf, baseURI, "model0");
+    	myQVT.executeModelsTX_Interpreted(tx, "model1");
+    	myQVT.executeModelsTX_Interpreted(tx, "model2");
+    	myQVT.executeModelsTX_Interpreted(tx, "model3");
+		myQVT.dispose();
+	}
 	
 	@Test
 	public void testExample5_CG() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example5");
-		loadGenModels(baseURI, "SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
-		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2TargetBase.ocl");
+		MyQVT myQVT = new MyQVT("example5");
+		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
+		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("Source2TargetBase.ocl");
 
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"",
@@ -655,47 +787,47 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
 		
 		// Execute CGed transformation
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
+		myQVT.executeModelsTX_CG(txClass, "model1");
 		
 		myQVT.dispose();
-		myQVT = createQVT();
-		loadGenModels(baseURI, "SourceBaseMM.genmodel", "TargetBaseMM.genmodel", 
+		myQVT = new MyQVT("example5");
+		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel", 
 				"SourceDerivedMM.genmodel", "TargetDerivedMM.genmodel");
  
 		List<String> oclDocs = new ArrayList<String>();
 		oclDocs.add("Source2TargetDerived.ocl");
 		oclDocs.add("Source2TargetBase.ocl");
-		qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, oclDocs);
+		qvtiTransf = myQVT.executeOCL2QVTi_MTC(oclDocs);
 		txClass = new CS2ASJavaCompilerImpl()
 				.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
 			
 		// Execute CGed transformation
-		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
+		myQVT.executeModelsTX_CG(txClass, "model2");
+		myQVT.dispose();
 	}
 	
 	@Test
-	public void testExample2_OCL2QVTp_MiddleModel() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
-		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtias");
-		URI tracesMMURI = baseURI.appendSegment("classescs2as.ecore.oclas");
+	public void testExample5_Interpreted() throws Exception {
+		MyQVT myQVT = new MyQVT("example5");
+		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
+		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("Source2TargetBase.ocl");
+		
+		Transformation tx = qvtiTransf.getTransformation();
+    	myQVT.executeModelsTX_Interpreted(tx, "model1");
+    	
+		myQVT.dispose();
+		myQVT = new MyQVT("example5");
 
-		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "classescs2as.ocl", myQVT, false);
-		mtc.runOCL2QVTp_MiddleModel(oclDocURI, qvtpFileURI, tracesMMURI);
-		// Test the QVTp transformation can be loaded
-		assertValidQVTiModel(qvtpFileURI);
-	}
-	
-	@Test
-	public void testExample2_OCL2QVTp_MiddleFolded() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
-		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtias");
-
-		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "classescs2as.ocl", myQVT);
-		mtc.runOCL2QVTp_MiddleFolded(oclDocURI, qvtpFileURI);
-		// Test the QVTp transformation can be loaded
-		assertValidQVTiModel(qvtpFileURI);
+		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel", 
+				"SourceDerivedMM.genmodel", "TargetDerivedMM.genmodel");
+		List<String> oclDocs = new ArrayList<String>();
+		oclDocs.add("Source2TargetDerived.ocl");
+		oclDocs.add("Source2TargetBase.ocl");
+		qvtiTransf = myQVT.executeOCL2QVTi_MTC(oclDocs);
+		
+		tx = qvtiTransf.getTransformation();	
+		myQVT.executeModelsTX_Interpreted(tx, "model2");
+		myQVT.dispose();
 	}
 
 	/*
@@ -717,7 +849,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 
 
-	protected static void assertValidQVTiModel(@NonNull URI asURI ) {
+	protected static void assertValidQVTiModel(@NonNull URI asURI) {
 	    
 		OCLInternal ocl =  OCLInternal.newInstance();
 		EnvironmentFactoryInternal factory = ocl.getEnvironmentFactory();
@@ -732,128 +864,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE), null);
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), null);
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), null);
-
 		assertValidModel(asURI, asResourceSet);
 	}
-
-	protected PivotModel executeOCL2QVTi_MTC(QVTimperative qvt, URI baseURI, String oclDocName) throws Exception {
-
-		return executeOCL2QVTi_MTC(qvt, baseURI, Collections.singletonList(oclDocName));
-	}
-	
-	protected PivotModel executeOCL2QVTi_MTC(QVTimperative qvt, URI baseURI, List<String> oclDocs) throws Exception {
-				
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, oclDocs, qvt, TestsXMLUtil.defaultSavingOptions);
-		mtc.setCreateGraphml(CREATE_GRAPHML);
-    	mtc.execute();
-    	if (CREATE_GRAPHML) {
-    		String oclDocName = oclDocs.get(0); // We will get the first oclDoc as the reference name
-    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(DEBUG_SEGMENT).appendSegment(oclDocName.replace(".ocl", "Schedule_complete.graphml")).toString(), false);
-    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(DEBUG_SEGMENT).appendSegment(oclDocName.replace(".ocl", "Schedule_pruned.graphml")).toString(), true);
-    	}
-
-    	PivotModel qvtiTransf = mtc.getiModel();
-
-    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
-    	assertValidQVTiModel(txURI);
-
-    	
-		URI inputURI = txURI;
-		URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvti");
-		doSerialize(inputURI, serializedURI);
-    	
-    	
-    	return qvtiTransf;
-	}
-
-	protected Transformation executeNewOCL2QVTi_MTC(QVTimperative qvt, URI baseURI, String oclDocName) throws Exception {
-		
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, oclDocName, qvt, TestsXMLUtil.defaultSavingOptions);
-		mtc.setCreateGraphml(CREATE_GRAPHML);
-    	mtc.newExecute();    	
-    	if (CREATE_GRAPHML) {
-    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(DEBUG_SEGMENT).appendSegment(oclDocName.replace(".ocl", "Schedule_complete.graphml")).toString(), false);
-    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(DEBUG_SEGMENT).appendSegment(oclDocName.replace(".ocl", "Schedule_pruned.graphml")).toString(), true);
-    	}
-    	
-    	Resource iResource = mtc.getiResource();
-    	Transformation qvtiTransf = mtc.getTransformation(iResource);
-    	
-    	URI txURI = ClassUtil.nonNullState(iResource.getURI());
-    	assertValidQVTiModel(txURI);
-
-    	
-		URI inputURI = txURI;
-		URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvti");
-		doSerialize(inputURI, serializedURI);
-    	
-    	
-    	return qvtiTransf;
-	}
-	
-	//
-	// Execute the transformation with the interpreter
-	//
-	protected void executeModelsTX_CG(QVTimperative qvt, Class<? extends Transformer> txClass, URI baseURI, String modelName) throws Exception {
-		TransformationExecutor evaluator = new QVTiTransformationExecutor(qvt.getEnvironmentFactory(), txClass);
-		Transformer tx = evaluator.getTransformer();
-		URI samplesBaseUri = baseURI.appendSegment("samples");
-    	URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
-    	URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_CG.xmi", modelName));
-    	URI expectedAsModelURI = samplesBaseUri.appendSegment(String.format("%s_output_ref.xmi", modelName));
-    	saveEmptyModel(asModelURI);
-
-    	ResourceSet rSet = qvt.getResourceSet();
-		Resource inputResource = rSet.getResource(csModelURI, true);
-		tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
-		assertTrue(tx.run());
-		Resource outputResource = rSet.createResource(asModelURI);
-		outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
-		outputResource.save(TestsXMLUtil.defaultSavingOptions);
-
-		Resource expected =  rSet.getResource(expectedAsModelURI, true);
-		assertSameModel(expected, rSet.getResource(asModelURI, true));
-	}
-
-	//
-	// Execute the transformation with the CGed transformation
-	//
-
-	protected void executeModelsTX_Interpreted(QVTimperative qvt, Transformation tx, URI baseURI, String modelName) throws Exception {
-
-		URI samplesBaseUri = baseURI.appendSegment("samples");
-		URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
-		URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_Interpreted.xmi", modelName));
-		URI expectedAsModelURI = samplesBaseUri.appendSegment(String.format("%s_output_ref.xmi", modelName));
-		saveEmptyModel(asModelURI);
-
-		BasicQVTiExecutor testEvaluator = new QVTiIncrementalExecutor(qvt.getEnvironmentFactory(), tx, QVTiIncrementalExecutor.Mode.LAZY);
-		//testEvaluator.saveTransformation(null);
-	    testEvaluator.loadModel("leftCS", csModelURI);
-	    testEvaluator.createModel("rightAS", asModelURI, null);
-	    boolean success = testEvaluator.execute();
-	    testEvaluator.saveModels(TestsXMLUtil.defaultSavingOptions);
-	    testEvaluator.dispose();
-	    assertTrue(success);
-	    ResourceSet rSet = qvt.getResourceSet();
-	    Resource expected =  rSet.getResource(expectedAsModelURI, true);
-	    assertSameModel(expected, rSet.getResource(asModelURI, true));
-	}
-
-
-	// QVTiPivotEvaluator only saves models when something is created. If the transformation
-	// does nothing and nothing is created, the output model is not saved. Then I have to ensure
-	// that an empty model is serialized for the sake of the of the test cases results. The comparison
-	// between output model and the reference one, might be done with a previous output model
-	// TODO report QVTd bug
-	protected void saveEmptyModel( URI modelURI) throws IOException {
-
-		ResourceSet rSet = new ResourceSetImpl();
-		StandaloneProjectMap.getAdapter(rSet);
-		Resource r = rSet.createResource(modelURI);
-		r.save(TestsXMLUtil.defaultSavingOptions);
-	}
-
 
 	protected Transformation getTransformation(ResourceSet rSet, URI qvtiURI) {
 
@@ -871,29 +883,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		}
 		return null;
 	}	
-
-	/**
-	 * Explicitly install the eInstances that would normally make it into the ProjectMap from extension point registrations.
-	 * Test models are not registered via extension point so we have to do this manually.
-	 *
-	private void install(@NonNull URI testBaseURI, @NonNull EPackage... eInstances) {
-		ResourceSetImpl resourceSet = (ResourceSetImpl) myQVT.getResourceSet();
-		for (EPackage eInstance : eInstances) {
-			resourceSet.getURIResourceMap().put(testBaseURI.appendSegment(eInstance.getName()+".ecore"), eInstance.eResource());
-		}
-	} */
-
-	/**
-	 * Explicitly remove the eInstances from the EPackage.Registry.INSTANCE so that global registrations from the calling test
-	 * do not confuse subsequent tests that may want to use dynamic models.
-	 *
-	private void uninstall(@NonNull EPackage... eInstances) {
-		for (EPackage eInstance : eInstances) {
-			EPackage.Registry.INSTANCE.remove(eInstance.getNsURI());
-		}
-	} */
 	
-	private void launchQVTs2GraphMlTx(PivotModel qvtsModel, String graphMlURI, boolean pruneQVTs) throws QvtMtcExecutionException {
+	private static void launchQVTs2GraphMlTx(PivotModel qvtsModel, String graphMlURI, boolean pruneQVTs) throws QvtMtcExecutionException {
 		
 		try {
 			// Since pruning might modify QVTs model, we will ensure it's not stored on disposal
@@ -909,7 +900,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		
 	}
 	
-	private XmlModel createGraphMlModel(String graphMlURI) throws QvtMtcExecutionException {
+	private static XmlModel createGraphMlModel(String graphMlURI) throws QvtMtcExecutionException {
 		
 		try {
 			XmlModel xmlModel = new XmlModel();
@@ -956,7 +947,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		return xtextResource;
 	}
 
-	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
+	public static XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		//
 		//	Load QVTiAS
@@ -981,7 +972,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 
 
-	protected ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
+	protected static ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
 		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
 //		List<String> conversionErrors = new ArrayList<String>();
 //		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
