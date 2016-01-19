@@ -11,6 +11,10 @@
 package	example2.classes.lookup.util;
 
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import example2.classes.util.ClassesUnqualifiedLookupVisitor;
+import example2.classes.util.ClassesQualifiedLookupVisitor;
+import example2.classes.util.ClassesExportedLookupVisitor;
+
 
 public class ClassesLookupSolver {
 	
