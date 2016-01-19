@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
@@ -211,7 +212,7 @@ public class Scheduler extends SchedulerConstants
 		for (Region region : new ArrayList<Region>(allRegions)) {
 			if (region.getInvokingRegion() == null) {
 				if (rootRegion == null) {
-					@SuppressWarnings("null")@NonNull String name = getDependencyGraph().eResource().getURI().trimFileExtension().lastSegment();
+					String name = ClassUtil.nonNullState(getDependencyGraph().eResource().getURI().trimFileExtension().lastSegment());
 					rootRegion = new ScheduledRegion(name, region);
 				}
 				rootRegion.addRegion(region);
