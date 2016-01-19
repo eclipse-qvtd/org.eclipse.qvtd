@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.schedule.*;
 
 /**
@@ -82,7 +83,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDatum createClassDatum() {
+	public @NonNull ClassDatum createClassDatum() {
 		ClassDatumImpl classDatum = new ClassDatumImpl();
 		return classDatum;
 	}
@@ -92,7 +93,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataParameter createDataParameter() {
+	public @NonNull DataParameter createDataParameter() {
 		DataParameterImpl dataParameter = new DataParameterImpl();
 		return dataParameter;
 	}
@@ -102,7 +103,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InputAction createInputAction() {
+	public @NonNull InputAction createInputAction() {
 		InputActionImpl inputAction = new InputActionImpl();
 		return inputAction;
 	}
@@ -112,7 +113,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MappingAction createMappingAction() {
+	public @NonNull MappingAction createMappingAction() {
 		MappingActionImpl mappingAction = new MappingActionImpl();
 		return mappingAction;
 	}
@@ -122,7 +123,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OutputAction createOutputAction() {
+	public @NonNull OutputAction createOutputAction() {
 		OutputActionImpl outputAction = new OutputActionImpl();
 		return outputAction;
 	}
@@ -132,7 +133,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ParameterDerivation createParameterDerivation() {
+	public @NonNull ParameterDerivation createParameterDerivation() {
 		ParameterDerivationImpl parameterDerivation = new ParameterDerivationImpl();
 		return parameterDerivation;
 	}
@@ -142,7 +143,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PropertyDatum createPropertyDatum() {
+	public @NonNull PropertyDatum createPropertyDatum() {
 		PropertyDatumImpl propertyDatum = new PropertyDatumImpl();
 		return propertyDatum;
 	}
@@ -152,7 +153,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Schedule createSchedule() {
+	public @NonNull Schedule createSchedule() {
 		ScheduleImpl schedule = new ScheduleImpl();
 		return schedule;
 	}
@@ -162,7 +163,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SecondaryParameter createSecondaryParameter() {
+	public @NonNull SecondaryParameter createSecondaryParameter() {
 		SecondaryParameterImpl secondaryParameter = new SecondaryParameterImpl();
 		return secondaryParameter;
 	}

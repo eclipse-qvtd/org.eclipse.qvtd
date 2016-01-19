@@ -13,6 +13,7 @@
 package org.eclipse.qvtd.pivot.schedule;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,7 +39,7 @@ public interface ScheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Class Datum</em>'.
 	 * @generated
 	 */
-	ClassDatum createClassDatum();
+	@NonNull ClassDatum createClassDatum();
 
 	/**
 	 * Returns a new object of class '<em>Data Parameter</em>'.
@@ -47,7 +48,7 @@ public interface ScheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Data Parameter</em>'.
 	 * @generated
 	 */
-	DataParameter createDataParameter();
+	@NonNull DataParameter createDataParameter();
 
 	/**
 	 * Returns a new object of class '<em>Input Action</em>'.
@@ -56,7 +57,7 @@ public interface ScheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Input Action</em>'.
 	 * @generated
 	 */
-	InputAction createInputAction();
+	@NonNull InputAction createInputAction();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Action</em>'.
@@ -65,7 +66,7 @@ public interface ScheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Mapping Action</em>'.
 	 * @generated
 	 */
-	MappingAction createMappingAction();
+	@NonNull MappingAction createMappingAction();
 
 	/**
 	 * Returns a new object of class '<em>Output Action</em>'.
@@ -74,7 +75,7 @@ public interface ScheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Output Action</em>'.
 	 * @generated
 	 */
-	OutputAction createOutputAction();
+	@NonNull OutputAction createOutputAction();
 
 	/**
 	 * Returns a new object of class '<em>Parameter Derivation</em>'.
@@ -83,7 +84,7 @@ public interface ScheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Parameter Derivation</em>'.
 	 * @generated
 	 */
-	ParameterDerivation createParameterDerivation();
+	@NonNull ParameterDerivation createParameterDerivation();
 
 	/**
 	 * Returns a new object of class '<em>Property Datum</em>'.
@@ -92,7 +93,7 @@ public interface ScheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Property Datum</em>'.
 	 * @generated
 	 */
-	PropertyDatum createPropertyDatum();
+	@NonNull PropertyDatum createPropertyDatum();
 
 	/**
 	 * Returns a new object of class '<em>Schedule</em>'.
@@ -101,7 +102,7 @@ public interface ScheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Schedule</em>'.
 	 * @generated
 	 */
-	Schedule createSchedule();
+	@NonNull Schedule createSchedule();
 
 	/**
 	 * Returns a new object of class '<em>Secondary Parameter</em>'.
@@ -110,7 +111,7 @@ public interface ScheduleFactory extends EFactory {
 	 * @return a new object of class '<em>Secondary Parameter</em>'.
 	 * @generated
 	 */
-	SecondaryParameter createSecondaryParameter();
+	@NonNull SecondaryParameter createSecondaryParameter();
 
 	/**
 	 * Returns the package supported by this factory.
