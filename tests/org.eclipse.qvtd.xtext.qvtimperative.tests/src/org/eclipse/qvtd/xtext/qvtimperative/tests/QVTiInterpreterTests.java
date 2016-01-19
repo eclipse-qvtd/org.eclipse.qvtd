@@ -38,6 +38,7 @@ import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -103,9 +104,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 			this(environmentFactory, fileNamePrefix, transformationFileName, QVTiIncrementalExecutor.Mode.LAZY);
 		}
 		public MyQvtiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull String fileNamePrefix, @NonNull String transformationFileName, @NonNull Mode mode) throws IOException {
-			super(environmentFactory, getProjectFileURI(fileNamePrefix + "/"  + transformationFileName), mode);
+			super(environmentFactory, QVTbaseUtil.loadTransformation(ImperativeModel.class, environmentFactory, getProjectFileURI(fileNamePrefix + "/"  + transformationFileName), environmentFactory.keepDebug()), mode);
 			this.fileNamePrefix = fileNamePrefix + "/";
-		}
+	    }
 		
 		/**
 		 * Associates a typed model, identified by typedModelName, with a new resource with

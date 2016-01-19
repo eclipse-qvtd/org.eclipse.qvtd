@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
@@ -39,10 +38,8 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -102,11 +99,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		this.invocationManager = new LazyInvocationManager();
 		this.objectManager = new LazyObjectManager(invocationManager, mode != Mode.LAZY);
 	}
-	
-	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI transformationURI, @NonNull Mode mode) throws IOException {
-    	this(environmentFactory, QVTbaseUtil.loadTransformation(ImperativeModel.class, environmentFactory, transformationURI, environmentFactory.keepDebug()), mode);
-    }
-	
+
 	@Override
 	public @Nullable Object internalExecuteMappingCall(final @NonNull MappingCall mappingCall, final @NonNull Map<Variable, Object> variable2value, final @NonNull EvaluationVisitor undecoratedVisitor) {
 		if (mode == Mode.LAZY) {

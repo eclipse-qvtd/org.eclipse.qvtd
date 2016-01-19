@@ -12,14 +12,17 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
@@ -28,6 +31,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
@@ -50,7 +54,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -58,24 +61,17 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 {
-	private static @NonNull QVTiTransformationAnalysis createTransformationAnalysis(@NonNull  QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
-		QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
-    	transformationAnalysis.analyzeTransformation(transformation);
-		return transformationAnalysis;
-	}
-
     protected final @NonNull Transformation transformation;
-
-	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI transformationURI) throws IOException {
-    	this(environmentFactory, QVTbaseUtil.loadTransformation(ImperativeModel.class, environmentFactory, transformationURI, environmentFactory.keepDebug()));
-    }
+    private @Nullable QVTiTransformationAnalysis transformationAnalysis = null;
+    private @Nullable QVTiModelManager modelManager = null;
 
     public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
-    	this(environmentFactory, transformation, createTransformationAnalysis(environmentFactory, transformation));
-    }
-
-    private BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull QVTiTransformationAnalysis transformationAnalysis) {
-		super(environmentFactory, new QVTiModelManager(transformationAnalysis));
+		super(environmentFactory, new ModelManager() {		// FIXME waiting for simplified inherited constructor
+			@Override
+			public @NonNull Set<EObject> get(@NonNull Class type) {
+				throw new UnsupportedOperationException();
+			}
+		});
 		this.transformation = transformation;
 	}
 
@@ -126,6 +122,14 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		else {
 			return super.createRootEvaluationEnvironment(executableObject);
 		}
+	}
+	
+	@Override	
+	public void dispose() {
+		if (modelManager != null) {
+			modelManager.dispose();
+		}
+		super.dispose();
 	}
 
 	protected void doCommits(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
@@ -278,11 +282,24 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	
 	@Override
 	public @NonNull QVTiModelManager getModelManager() {
-		return (QVTiModelManager) modelManager;
+		QVTiModelManager modelManager2 = modelManager;
+		if (modelManager2 == null) {
+			modelManager = modelManager2 = new QVTiModelManager(getTransformationAnalysis());
+		}
+		return modelManager2;
 	}
-	
+
 	public @NonNull Transformation getTransformation() {
 		return transformation;
+	}
+	
+	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis() {
+		QVTiTransformationAnalysis transformationAnalysis2 = transformationAnalysis;
+		if (transformationAnalysis2 == null) {
+			transformationAnalysis = transformationAnalysis2 = getEnvironmentFactory().createTransformationAnalysis();
+			transformationAnalysis2.analyzeTransformation(transformation);
+		}
+		return transformationAnalysis2;
 	}
 
 	@Override
