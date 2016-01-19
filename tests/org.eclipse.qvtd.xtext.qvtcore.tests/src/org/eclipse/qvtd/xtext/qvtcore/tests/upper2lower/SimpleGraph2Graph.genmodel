@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.xtext.qvtcore.tests/src-gen"
+    modelPluginID="org.eclipse.qvtd.xtext.qvtcore.tests" modelName="SimpleGraph2Graph"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="8.0"
+    copyrightFields="false" operationReflection="true" importOrganizing="true" pluginKey="">
+  <foreignModel>SimpleGraph2Graph.ecore</foreignModel>
+  <genPackages prefix="Simplegraph2graph" basePackage="org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower"
+      disposableProviderFactory="true" ecorePackage="SimpleGraph2Graph.ecore#/">
+    <genClasses ecoreClass="SimpleGraph2Graph.ecore#//Graph2Graph">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleGraph2Graph.ecore#//Graph2Graph/graph1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleGraph2Graph.ecore#//Graph2Graph/graph2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleGraph2Graph.ecore#//Graph2Graph/element2Element"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleGraph2Graph.ecore#//Graph2Graph/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="SimpleGraph2Graph.ecore#//Element2Element">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleGraph2Graph.ecore#//Element2Element/owner"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleGraph2Graph.ecore#//Edge2Edge">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleGraph2Graph.ecore#//Edge2Edge/edge1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleGraph2Graph.ecore#//Edge2Edge/edge2"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleGraph2Graph.ecore#//Edge2Edge/target"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleGraph2Graph.ecore#//Edge2Edge/source"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleGraph2Graph.ecore#//Node2Node">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleGraph2Graph.ecore#//Node2Node/node1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleGraph2Graph.ecore#//Node2Node/node2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleGraph2Graph.ecore#//Node2Node/label"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Simplegraph" basePackage="org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower"
+      disposableProviderFactory="true" ecorePackage="SimpleGraph.ecore#/">
+    <genClasses ecoreClass="SimpleGraph.ecore#//Node">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleGraph.ecore#//Node/incoming"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleGraph.ecore#//Node/outgoing"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleGraph.ecore#//Node/label"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleGraph.ecore#//Edge">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleGraph.ecore#//Edge/target"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleGraph.ecore#//Edge/source"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="SimpleGraph.ecore#//Element">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleGraph.ecore#//Element/graph"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleGraph.ecore#//Graph">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleGraph.ecore#//Graph/element"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleGraph.ecore#//Graph/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
