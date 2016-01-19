@@ -34,6 +34,9 @@ Workflow {
     	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/hsv2hls/HSV2HLS.genmodel"
     }
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
+    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/uml2rdbms/SimpleUML2RDBMS.genmodel"
+    }
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
     	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/upper2lower/SimpleGraph2Graph.genmodel"
     }
 
