@@ -49,6 +49,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2PersonsNormalizer;
+import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesPackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2Persons.Families2PersonsPackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.PersonsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.Upper2LowerNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph.SimplegraphPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simplegraph2graphPackage;
@@ -127,7 +131,11 @@ public class QVTcCompilerTests extends LoadTestCase
 		
 		public void createGeneratedExecutor(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
 			Class<? extends Transformer> txClass = createGeneratedClass(asTransformation, genModelFiles);
-			generatedExecutor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
+			createGeneratedExecutor(txClass);
+		}
+
+		public QVTiTransformationExecutor createGeneratedExecutor(Class<? extends Transformer> txClass)  throws Exception {
+			return generatedExecutor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 		}
 
 		public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull Transformation asTransformation) throws Exception {
@@ -245,6 +253,54 @@ public class QVTcCompilerTests extends LoadTestCase
     public void tearDown() throws Exception {
 		super.tearDown();
     }
+
+	@Test
+    public void testQVTcCompiler_Families2Persons() throws Exception {
+//		AbstractTransformer.INVOCATIONS.setState(true);
+    	MyQVT myQVT = new MyQVT("families2persons");
+//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	try {
+	    	Transformation asTransformation = myQVT.compileTransformation("Families2Persons", "person");
+	    	myQVT.createInterpretedExecutor(asTransformation);
+	    	myQVT.loadInput("family", "Families.xmi");
+	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
+	    	myQVT.createModel("person", "Persons_Interpreted.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
+    }
+    
+    @Test
+    public void testQVTcCompiler_Families2Persons_CG() throws Exception {
+//		AbstractTransformer.INVOCATIONS.setState(true);
+//		Scheduler.EDGE_ORDER.setState(true);
+//		Scheduler.REGION_DEPTH.setState(true);
+//		Scheduler.REGION_ORDER.setState(true);
+//		Scheduler.REGION_TRAVERSAL.setState(true);
+//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
+    	MyQVT myQVT = new MyQVT("families2persons", Families2PersonsPackage.eINSTANCE, FamiliesPackage.eINSTANCE, PersonsPackage.eINSTANCE);
+//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		try {
+	    	Transformation asTransformation = myQVT.compileTransformation("Families2Persons", "person");
+	        Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "Families2Persons.genmodel");
+	    	//
+	        myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("family", "FamiliesBig.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("person", "PersonsBig_CG.xmi", "PersonsBig_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+	    	//
+	        myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("family", "Families.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("person", "Persons_CG.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
+	}
 
     @Test
     public void testQVTcCompiler_Upper2Lower() throws Exception {
