@@ -205,24 +205,31 @@ public class QVTbaseUtil
 	}
 	
     public static @NonNull Transformation loadTransformation(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+        CSResource xtextResource = null;
+		ASResource asResource;
 		// Load the transformation resource
-        CSResource xtextResource = (CSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
-        if (xtextResource == null) {
-            throw new IOException("Failed to load '" + transformationURI + "'");
-        }
-		String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
-		if (csMessage != null) {
-			throw new IOException(csMessage);
+		if (PivotUtilInternal.isASURI(transformationURI)) {
+			asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
+		}
+		else {
+	        xtextResource = (CSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
+	        if (xtextResource == null) {
+	            throw new IOException("Failed to load '" + transformationURI + "'");
+	        }
+			String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
+			if (csMessage != null) {
+				throw new IOException(csMessage);
+			}
+			asResource = xtextResource.getASResource();
 		}
 		try {
-			ASResource asResource = xtextResource.getASResource();
 			String asMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(asResource.getErrors()), "Failed to load '" + asResource.getURI() + "'", "\n");
 			if (asMessage != null) {
 				throw new IOException(asMessage);
 			}
 			for (EObject eContent : asResource.getContents()) {
 				if (modelClass.isInstance(eContent)) {
-	    			for (org.eclipse.ocl.pivot.Package asPackage : ((Model)eContent).getOwnedPackages()) {
+	    			for (org.eclipse.ocl.pivot.Package asPackage : ((Model)eContent).getOwnedPackages()) {		// FIXME nested classes
     	    			for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
     	    				if (asClass instanceof Transformation) {
     	    	                return (Transformation)asClass;
