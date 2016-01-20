@@ -37,15 +37,7 @@ Workflow {
     }
     component = GenerateScheduleVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.schedule"
-    	projectPrefix = "ScheduleModel"
-    	superProjectName = ""
     	genModelFile = "model/Schedule.genmodel"
-    	javaFolder = "emf-gen"
-    	modelPackageName = "org.eclipse.qvtd.pivot.schedule"
-    	visitorPackageName = "org.eclipse.qvtd.pivot.schedule.util"
-    	visitorClassName = "ScheduleVisitor"
-    	visitablePackageName = "org.eclipse.qvtd.pivot.schedule"
-    	visitableClassName= "ScheduleElement"
     }
 	component = ConvertToUnixLineEndings {
 		directory = "org.eclipse.qvtd.pivot.schedule/emf-gen"
