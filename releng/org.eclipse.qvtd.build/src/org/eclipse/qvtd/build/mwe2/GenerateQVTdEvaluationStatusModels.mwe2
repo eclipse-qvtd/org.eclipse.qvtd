@@ -35,18 +35,12 @@ Workflow {
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.qvtimperative/model/EvaluationStatus.genmodel" 	
     }
+    
     component = GenerateEvaluationStatusVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtimperative"
-    	projectPrefix = "EvaluationStatusModel"
-    	superProjectName = ""
     	genModelFile = "model/EvaluationStatus.genmodel"
-    	javaFolder = "emf-gen"
-    	modelPackageName = "org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus"
-    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util"
-    	visitorClassName = "EvaluationStatusVisitor"
-    	visitablePackageName = "org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus"
-    	visitableClassName= "EvaluationElement"
     }
+    
 	component = ConvertToUnixLineEndings {
 		directory = "org.eclipse.qvtd.pivot.qvtimperative/emf-gen"
 	}
