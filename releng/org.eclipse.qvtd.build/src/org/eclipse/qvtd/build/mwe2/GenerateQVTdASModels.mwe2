@@ -32,13 +32,13 @@ Workflow {
 
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtbase"
-    	modelName = "QVTbase"
-    	projectPrefix = "QVTbase"
+    	genModelFile =  "model/QVTbase.genmodel"
     	superProjectName = "org.eclipse.ocl.pivot"
-    	superProjectPrefix = ""
-    	modelPackageName = "org.eclipse.qvtd.pivot.qvtbase"
-//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtbase.util"
+    	superGenModelFile = "model/Pivot.genmodel"
+    	baseProjectName = "org.eclipse.ocl.pivot"
+    	baseGenModelFile = "model/Pivot.genmodel"
     }
+    
     component = GenerateOCLmetamodelXtend { //resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtbase"
     	modelFile = "model/QVTbase.ecore"
@@ -61,48 +61,43 @@ Workflow {
     }
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtcorebase"
-    	modelName = "QVTcoreBase"
-    	projectPrefix = "QVTcoreBase"
+    	genModelFile =  "model/QVTcoreBase.genmodel"
     	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"
-    	superProjectPrefix = "QVTbase"
-    	modelPackageName = "org.eclipse.qvtd.pivot.qvtcorebase"
-//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtcorebase.util"
+    	superGenModelFile = "model/QVTbase.genmodel"
+    	baseProjectName = "org.eclipse.ocl.pivot"
+    	baseGenModelFile = "model/Pivot.genmodel"
     }
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtcore"
-    	modelName = "QVTcore"
-    	projectPrefix = "QVTcore"
+    	genModelFile =  "model/QVTcore.genmodel"
     	superProjectName = "org.eclipse.qvtd.pivot.qvtcorebase"
-    	superProjectPrefix = "QVTcoreBase"
-    	modelPackageName = "org.eclipse.qvtd.pivot.qvtcore"
-//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtcore.util"
+    	superGenModelFile = "model/QVTcoreBase.genmodel"
+    	baseProjectName = "org.eclipse.ocl.pivot"
+    	baseGenModelFile = "model/Pivot.genmodel"
     }
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtimperative"
-    	modelName = "QVTimperative"
-    	projectPrefix = "QVTimperative"
+    	genModelFile =  "model/QVTimperative.genmodel"
     	superProjectName = "org.eclipse.qvtd.pivot.qvtcorebase"
-    	superProjectPrefix = "QVTcoreBase"
-    	modelPackageName = "org.eclipse.qvtd.pivot.qvtimperative"
-//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtimperative.util"
+    	superGenModelFile = "model/QVTcoreBase.genmodel"
+    	baseProjectName = "org.eclipse.ocl.pivot"
+    	baseGenModelFile = "model/Pivot.genmodel"
     }
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvttemplate"
-    	modelName = "QVTtemplate"
-    	projectPrefix = "QVTtemplate"
+    	genModelFile =  "model/QVTtemplate.genmodel"
     	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"
-    	superProjectPrefix = "QVTbase"
-    	modelPackageName = "org.eclipse.qvtd.pivot.qvttemplate"
-//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvttemplate.util"
+    	superGenModelFile = "model/QVTbase.genmodel"
+    	baseProjectName = "org.eclipse.ocl.pivot"
+    	baseGenModelFile = "model/Pivot.genmodel"
     }
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtrelation"
-    	modelName = "QVTrelation"
-    	projectPrefix = "QVTrelation"
+    	genModelFile =  "model/QVTrelation.genmodel"
     	superProjectName = "org.eclipse.qvtd.pivot.qvttemplate"
-    	superProjectPrefix = "QVTtemplate"
-    	modelPackageName = "org.eclipse.qvtd.pivot.qvtrelation"
-//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtrelation.util"
+    	superGenModelFile = "model/QVTtemplate.genmodel"
+    	baseProjectName = "org.eclipse.ocl.pivot"
+    	baseGenModelFile = "model/Pivot.genmodel"
     }
 //    component = @SubGenerateASModel { resourceSet = resourceSet
 //    	projectName = "org.eclipse.qvtd.pivot.schedule"
