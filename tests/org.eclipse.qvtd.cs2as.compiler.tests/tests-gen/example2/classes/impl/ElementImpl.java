@@ -46,12 +46,4 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 		return ClassesPackage.Literals.ELEMENT;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return visitor.visitElement(this);
-	}
-
 } //ElementImpl

@@ -18,8 +18,8 @@ import example2.classes.util.ClassesExportedLookupVisitor;
 
 public class ClassesLookupSolver {
 	
-	private Executor executor;
-		
+	protected Executor executor;
+	
 	public ClassesLookupSolver (Executor executor) {
 		this.executor = executor;
 	}

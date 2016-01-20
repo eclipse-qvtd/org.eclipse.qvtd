@@ -9,31 +9,15 @@
 
 package example2.classes.util;
 
-import example2.classes.ClassesPackage;
-import example2.classes.NamedElement;
-import example2.classes.Operation;
-import example2.classes.Package;
-import example2.classes.Property;
-import example2.classes.Root;
-import example2.classes.lookup.EnvironmentPackage;
-import example2.classes.lookup.LookupEnvironment;
-import example2.classes.util.AbstractClassesCommonLookupVisitor;
-import example2.classes.util.AbstractExtendingVisitor;
-import example2.classes.util.Visitor;
 import java.util.Iterator;
-import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
@@ -46,8 +30,15 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.BagValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue;
+
+import example2.classes.ClassesPackage;
+import example2.classes.NamedElement;
+import example2.classes.Operation;
+import example2.classes.Package;
+import example2.classes.Property;
+import example2.classes.lookup.EnvironmentPackage;
+import example2.classes.lookup.LookupEnvironment;
 
 public class ClassesUnqualifiedLookupVisitor
 	extends AbstractClassesCommonLookupVisitor
@@ -91,7 +82,7 @@ public class ClassesUnqualifiedLookupVisitor
      */
     protected @Nullable LookupEnvironment parentEnv(@NonNull EObject element) {
         EObject parent = element.eContainer();
-        if (parent instanceof Object) {
+        if (parent instanceof Visitable) {
             this.child = element;
             return ((Visitable)parent).accept(this);
         }
