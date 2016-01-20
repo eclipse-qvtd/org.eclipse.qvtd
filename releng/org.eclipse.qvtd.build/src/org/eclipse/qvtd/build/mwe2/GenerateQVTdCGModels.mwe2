@@ -39,18 +39,11 @@ Workflow {
     }
     component = GenerateCGVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.codegen"
-    	projectPrefix = "QVTiCGModel"
-    	superProjectName = "org.eclipse.ocl.examples.codegen"
-    	superProjectPrefix = "CGModel"
     	genModelFile = "model/qvticgmodel.genmodel"
-    	javaFolder = "emf-gen"
-    	modelPackageName = "org.eclipse.qvtd.codegen.qvticgmodel"
-    	visitorPackageName = "org.eclipse.qvtd.codegen.qvticgmodel.util"
-    	visitorClassName = "QVTiCGModelVisitor"
-    	superVisitorPackageName = "org.eclipse.ocl.examples.codegen.cgmodel.util"
-    	superVisitorClassName = "CGModelVisitor"
-    	visitablePackageName = "org.eclipse.ocl.examples.codegen.cgmodel"
-    	visitableClassName= "CGElement"
+    	superProjectName = "org.eclipse.ocl.examples.codegen"
+    	superGenModelFile = "model/cgmodel.genmodel"
+    	baseProjectName = "org.eclipse.ocl.examples.codegen"
+    	baseGenModelFile = "model/cgmodel.genmodel"
     }
 	component = ConvertToUnixLineEndings {
 		directory = "org.eclipse.qvtd.codegen/emf-gen"
