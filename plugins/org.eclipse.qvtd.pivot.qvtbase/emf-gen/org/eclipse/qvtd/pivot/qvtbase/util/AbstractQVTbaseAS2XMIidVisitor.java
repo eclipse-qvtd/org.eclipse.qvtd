@@ -21,7 +21,7 @@ import java.lang.Boolean;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
-import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
+import org.eclipse.ocl.pivot.utilities.PivotAS2XMIidVisitor;
 
 /**
  * An AbstractQVTbaseAS2XMIidVisitor provides a default implementation for each
@@ -31,7 +31,7 @@ import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTbaseAS2XMIidVisitor
-	extends AS2XMIidVisitor
+	extends PivotAS2XMIidVisitor
 	implements QVTbaseVisitor<Boolean>
 {
 	/**
