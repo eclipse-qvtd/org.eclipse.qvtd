@@ -72,8 +72,8 @@ public class QVTcoreBaseFormatter extends AbstractEssentialOCLFormatter {
 	}
 
 	protected void configureDirectionCS(FormattingConfig c, DirectionCSElements a) {
-		c.setNoSpace().before(a.getCommaKeyword_2_2_0());
-		c.setNoSpace().before(a.getCommaKeyword_3_2_0());
+		c.setNoSpace().before(a.getCommaKeyword_4_0());
+		c.setNoSpace().before(a.getCommaKeyword_5_2_0());
 	}
 
 	protected void configureGuardPatternCS(FormattingConfig c, GuardPatternCSElements a) {

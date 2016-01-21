@@ -378,9 +378,9 @@ ruleDirectionCS returns [EObject current=null]
 	    }
 
 )
-)?(	otherlv_2='imports' 
+)?	otherlv_2='imports' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getDirectionCSAccess().getImportsKeyword_2_0());
+    	newLeafNode(otherlv_2, grammarAccess.getDirectionCSAccess().getImportsKeyword_2());
     }
 (
 (
@@ -393,7 +393,7 @@ ruleDirectionCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_2_1_0()); 
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_3_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
@@ -402,7 +402,7 @@ ruleDirectionCS returns [EObject current=null]
 )
 )(	otherlv_4=',' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getDirectionCSAccess().getCommaKeyword_2_2_0());
+    	newLeafNode(otherlv_4, grammarAccess.getDirectionCSAccess().getCommaKeyword_4_0());
     }
 (
 (
@@ -415,16 +415,16 @@ ruleDirectionCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_2_2_1_0()); 
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_4_1_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*)?(	otherlv_6='uses' 
+))*(	otherlv_6='uses' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getDirectionCSAccess().getUsesKeyword_3_0());
+    	newLeafNode(otherlv_6, grammarAccess.getDirectionCSAccess().getUsesKeyword_5_0());
     }
 (
 (
@@ -437,7 +437,7 @@ ruleDirectionCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_3_1_0()); 
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_5_1_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
@@ -446,7 +446,7 @@ ruleDirectionCS returns [EObject current=null]
 )
 )(	otherlv_8=',' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getDirectionCSAccess().getCommaKeyword_3_2_0());
+    	newLeafNode(otherlv_8, grammarAccess.getDirectionCSAccess().getCommaKeyword_5_2_0());
     }
 (
 (
@@ -459,7 +459,7 @@ ruleDirectionCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_3_2_1_0()); 
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_5_2_1_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();

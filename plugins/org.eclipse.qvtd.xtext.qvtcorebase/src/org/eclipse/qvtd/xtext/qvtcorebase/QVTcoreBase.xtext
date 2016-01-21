@@ -34,7 +34,7 @@ BottomPatternCS:		// Bug 466385 explains the redundancy below
 ;
 	
 DirectionCS: {DirectionCS} name=UnrestrictedName?
-	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
+	'imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
 	('uses' uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (',' uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?
 ;
 	

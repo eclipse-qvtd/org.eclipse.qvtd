@@ -226,35 +226,34 @@ public class QVTcoreBaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cDirectionCSAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cImportsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cImportsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final CrossReference cImportsPackageCrossReference_2_1_0 = (CrossReference)cImportsAssignment_2_1.eContents().get(0);
-		private final RuleCall cImportsPackageUnrestrictedNameParserRuleCall_2_1_0_1 = (RuleCall)cImportsPackageCrossReference_2_1_0.eContents().get(1);
-		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
-		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
-		private final Assignment cImportsAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
-		private final CrossReference cImportsPackageCrossReference_2_2_1_0 = (CrossReference)cImportsAssignment_2_2_1.eContents().get(0);
-		private final RuleCall cImportsPackageUnrestrictedNameParserRuleCall_2_2_1_0_1 = (RuleCall)cImportsPackageCrossReference_2_2_1_0.eContents().get(1);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cUsesKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cUsesAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final CrossReference cUsesCoreDomainCrossReference_3_1_0 = (CrossReference)cUsesAssignment_3_1.eContents().get(0);
-		private final RuleCall cUsesCoreDomainUnrestrictedNameParserRuleCall_3_1_0_1 = (RuleCall)cUsesCoreDomainCrossReference_3_1_0.eContents().get(1);
-		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
-		private final Keyword cCommaKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
-		private final Assignment cUsesAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
-		private final CrossReference cUsesCoreDomainCrossReference_3_2_1_0 = (CrossReference)cUsesAssignment_3_2_1.eContents().get(0);
-		private final RuleCall cUsesCoreDomainUnrestrictedNameParserRuleCall_3_2_1_0_1 = (RuleCall)cUsesCoreDomainCrossReference_3_2_1_0.eContents().get(1);
+		private final Keyword cImportsKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cImportsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cImportsPackageCrossReference_3_0 = (CrossReference)cImportsAssignment_3.eContents().get(0);
+		private final RuleCall cImportsPackageUnrestrictedNameParserRuleCall_3_0_1 = (RuleCall)cImportsPackageCrossReference_3_0.eContents().get(1);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cImportsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final CrossReference cImportsPackageCrossReference_4_1_0 = (CrossReference)cImportsAssignment_4_1.eContents().get(0);
+		private final RuleCall cImportsPackageUnrestrictedNameParserRuleCall_4_1_0_1 = (RuleCall)cImportsPackageCrossReference_4_1_0.eContents().get(1);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cUsesKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cUsesAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final CrossReference cUsesCoreDomainCrossReference_5_1_0 = (CrossReference)cUsesAssignment_5_1.eContents().get(0);
+		private final RuleCall cUsesCoreDomainUnrestrictedNameParserRuleCall_5_1_0_1 = (RuleCall)cUsesCoreDomainCrossReference_5_1_0.eContents().get(1);
+		private final Group cGroup_5_2 = (Group)cGroup_5.eContents().get(2);
+		private final Keyword cCommaKeyword_5_2_0 = (Keyword)cGroup_5_2.eContents().get(0);
+		private final Assignment cUsesAssignment_5_2_1 = (Assignment)cGroup_5_2.eContents().get(1);
+		private final CrossReference cUsesCoreDomainCrossReference_5_2_1_0 = (CrossReference)cUsesAssignment_5_2_1.eContents().get(0);
+		private final RuleCall cUsesCoreDomainUnrestrictedNameParserRuleCall_5_2_1_0_1 = (RuleCall)cUsesCoreDomainCrossReference_5_2_1_0.eContents().get(1);
 		
 		//DirectionCS:
-		//	{DirectionCS} name=UnrestrictedName? ("imports" imports+=[pivot::Package|UnrestrictedName] (","
-		//	imports+=[pivot::Package|UnrestrictedName])*)? ("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (","
+		//	{DirectionCS} name=UnrestrictedName? "imports" imports+=[pivot::Package|UnrestrictedName] (","
+		//	imports+=[pivot::Package|UnrestrictedName])* ("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (","
 		//	uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{DirectionCS} name=UnrestrictedName? ("imports" imports+=[pivot::Package|UnrestrictedName] (","
-		//imports+=[pivot::Package|UnrestrictedName])*)? ("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (","
+		//{DirectionCS} name=UnrestrictedName? "imports" imports+=[pivot::Package|UnrestrictedName] (","
+		//imports+=[pivot::Package|UnrestrictedName])* ("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (","
 		//uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?
 		public Group getGroup() { return cGroup; }
 
@@ -267,65 +266,62 @@ public class QVTcoreBaseGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0() { return cNameUnrestrictedNameParserRuleCall_1_0; }
 
-		//("imports" imports+=[pivot::Package|UnrestrictedName] ("," imports+=[pivot::Package|UnrestrictedName])*)?
-		public Group getGroup_2() { return cGroup_2; }
-
 		//"imports"
-		public Keyword getImportsKeyword_2_0() { return cImportsKeyword_2_0; }
+		public Keyword getImportsKeyword_2() { return cImportsKeyword_2; }
 
 		//imports+=[pivot::Package|UnrestrictedName]
-		public Assignment getImportsAssignment_2_1() { return cImportsAssignment_2_1; }
+		public Assignment getImportsAssignment_3() { return cImportsAssignment_3; }
 
 		//[pivot::Package|UnrestrictedName]
-		public CrossReference getImportsPackageCrossReference_2_1_0() { return cImportsPackageCrossReference_2_1_0; }
+		public CrossReference getImportsPackageCrossReference_3_0() { return cImportsPackageCrossReference_3_0; }
 
 		//UnrestrictedName
-		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_2_1_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_2_1_0_1; }
+		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_3_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_3_0_1; }
 
 		//("," imports+=[pivot::Package|UnrestrictedName])*
-		public Group getGroup_2_2() { return cGroup_2_2; }
+		public Group getGroup_4() { return cGroup_4; }
 
 		//","
-		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
+		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 
 		//imports+=[pivot::Package|UnrestrictedName]
-		public Assignment getImportsAssignment_2_2_1() { return cImportsAssignment_2_2_1; }
+		public Assignment getImportsAssignment_4_1() { return cImportsAssignment_4_1; }
 
 		//[pivot::Package|UnrestrictedName]
-		public CrossReference getImportsPackageCrossReference_2_2_1_0() { return cImportsPackageCrossReference_2_2_1_0; }
+		public CrossReference getImportsPackageCrossReference_4_1_0() { return cImportsPackageCrossReference_4_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_2_2_1_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_2_2_1_0_1; }
+		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_4_1_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_4_1_0_1; }
 
 		//("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] ("," uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_5() { return cGroup_5; }
 
 		//"uses"
-		public Keyword getUsesKeyword_3_0() { return cUsesKeyword_3_0; }
+		public Keyword getUsesKeyword_5_0() { return cUsesKeyword_5_0; }
 
 		//uses+=[qvtcorebase::CoreDomain|UnrestrictedName]
-		public Assignment getUsesAssignment_3_1() { return cUsesAssignment_3_1; }
+		public Assignment getUsesAssignment_5_1() { return cUsesAssignment_5_1; }
 
 		//[qvtcorebase::CoreDomain|UnrestrictedName]
-		public CrossReference getUsesCoreDomainCrossReference_3_1_0() { return cUsesCoreDomainCrossReference_3_1_0; }
+		public CrossReference getUsesCoreDomainCrossReference_5_1_0() { return cUsesCoreDomainCrossReference_5_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getUsesCoreDomainUnrestrictedNameParserRuleCall_3_1_0_1() { return cUsesCoreDomainUnrestrictedNameParserRuleCall_3_1_0_1; }
+		public RuleCall getUsesCoreDomainUnrestrictedNameParserRuleCall_5_1_0_1() { return cUsesCoreDomainUnrestrictedNameParserRuleCall_5_1_0_1; }
 
 		//("," uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*
-		public Group getGroup_3_2() { return cGroup_3_2; }
+		public Group getGroup_5_2() { return cGroup_5_2; }
 
 		//","
-		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
+		public Keyword getCommaKeyword_5_2_0() { return cCommaKeyword_5_2_0; }
 
 		//uses+=[qvtcorebase::CoreDomain|UnrestrictedName]
-		public Assignment getUsesAssignment_3_2_1() { return cUsesAssignment_3_2_1; }
+		public Assignment getUsesAssignment_5_2_1() { return cUsesAssignment_5_2_1; }
 
 		//[qvtcorebase::CoreDomain|UnrestrictedName]
-		public CrossReference getUsesCoreDomainCrossReference_3_2_1_0() { return cUsesCoreDomainCrossReference_3_2_1_0; }
+		public CrossReference getUsesCoreDomainCrossReference_5_2_1_0() { return cUsesCoreDomainCrossReference_5_2_1_0; }
 
 		//UnrestrictedName
-		public RuleCall getUsesCoreDomainUnrestrictedNameParserRuleCall_3_2_1_0_1() { return cUsesCoreDomainUnrestrictedNameParserRuleCall_3_2_1_0_1; }
+		public RuleCall getUsesCoreDomainUnrestrictedNameParserRuleCall_5_2_1_0_1() { return cUsesCoreDomainUnrestrictedNameParserRuleCall_5_2_1_0_1; }
 	}
 
 	public class GuardPatternCSElements extends AbstractParserRuleElementFinder {
@@ -1220,8 +1216,8 @@ public class QVTcoreBaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DirectionCS:
-	//	{DirectionCS} name=UnrestrictedName? ("imports" imports+=[pivot::Package|UnrestrictedName] (","
-	//	imports+=[pivot::Package|UnrestrictedName])*)? ("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (","
+	//	{DirectionCS} name=UnrestrictedName? "imports" imports+=[pivot::Package|UnrestrictedName] (","
+	//	imports+=[pivot::Package|UnrestrictedName])* ("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (","
 	//	uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?;
 	public DirectionCSElements getDirectionCSAccess() {
 		return pDirectionCS;

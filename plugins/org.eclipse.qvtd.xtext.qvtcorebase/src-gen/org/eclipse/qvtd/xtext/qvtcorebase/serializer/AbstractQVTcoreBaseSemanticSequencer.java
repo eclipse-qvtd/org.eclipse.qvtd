@@ -435,7 +435,8 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	 * Constraint:
 	 *     (
 	 *         name=UnrestrictedName? 
-	 *         (imports+=[Package|UnrestrictedName] imports+=[Package|UnrestrictedName]*)? 
+	 *         imports+=[Package|UnrestrictedName] 
+	 *         imports+=[Package|UnrestrictedName]* 
 	 *         (uses+=[CoreDomain|UnrestrictedName] uses+=[CoreDomain|UnrestrictedName]*)?
 	 *     )
 	 */

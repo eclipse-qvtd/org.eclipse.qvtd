@@ -294,8 +294,8 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DirectionCS:
-	//	{DirectionCS} name=UnrestrictedName? ("imports" imports+=[pivot::Package|UnrestrictedName] (","
-	//	imports+=[pivot::Package|UnrestrictedName])*)? ("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (","
+	//	{DirectionCS} name=UnrestrictedName? "imports" imports+=[pivot::Package|UnrestrictedName] (","
+	//	imports+=[pivot::Package|UnrestrictedName])* ("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (","
 	//	uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?;
 	public QVTcoreBaseGrammarAccess.DirectionCSElements getDirectionCSAccess() {
 		return gaQVTcoreBase.getDirectionCSAccess();

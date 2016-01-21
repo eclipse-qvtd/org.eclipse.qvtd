@@ -96,10 +96,9 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBottomPatternCSAccess().getGroup_2(), "rule__BottomPatternCS__Group_2__0");
 					put(grammarAccess.getBottomPatternCSAccess().getGroup_3(), "rule__BottomPatternCS__Group_3__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup(), "rule__DirectionCS__Group__0");
-					put(grammarAccess.getDirectionCSAccess().getGroup_2(), "rule__DirectionCS__Group_2__0");
-					put(grammarAccess.getDirectionCSAccess().getGroup_2_2(), "rule__DirectionCS__Group_2_2__0");
-					put(grammarAccess.getDirectionCSAccess().getGroup_3(), "rule__DirectionCS__Group_3__0");
-					put(grammarAccess.getDirectionCSAccess().getGroup_3_2(), "rule__DirectionCS__Group_3_2__0");
+					put(grammarAccess.getDirectionCSAccess().getGroup_4(), "rule__DirectionCS__Group_4__0");
+					put(grammarAccess.getDirectionCSAccess().getGroup_5(), "rule__DirectionCS__Group_5__0");
+					put(grammarAccess.getDirectionCSAccess().getGroup_5_2(), "rule__DirectionCS__Group_5_2__0");
 					put(grammarAccess.getGuardPatternCSAccess().getGroup_0(), "rule__GuardPatternCS__Group_0__0");
 					put(grammarAccess.getGuardPatternCSAccess().getGroup_0_2(), "rule__GuardPatternCS__Group_0_2__0");
 					put(grammarAccess.getGuardPatternCSAccess().getGroup_1(), "rule__GuardPatternCS__Group_1__0");
@@ -245,10 +244,10 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBottomPatternCSAccess().getOwnedRealizedVariablesAssignment_1_2_1_1(), "rule__BottomPatternCS__OwnedRealizedVariablesAssignment_1_2_1_1");
 					put(grammarAccess.getBottomPatternCSAccess().getOwnedConstraintsAssignment_2_1(), "rule__BottomPatternCS__OwnedConstraintsAssignment_2_1");
 					put(grammarAccess.getDirectionCSAccess().getNameAssignment_1(), "rule__DirectionCS__NameAssignment_1");
-					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_2_1(), "rule__DirectionCS__ImportsAssignment_2_1");
-					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_2_2_1(), "rule__DirectionCS__ImportsAssignment_2_2_1");
-					put(grammarAccess.getDirectionCSAccess().getUsesAssignment_3_1(), "rule__DirectionCS__UsesAssignment_3_1");
-					put(grammarAccess.getDirectionCSAccess().getUsesAssignment_3_2_1(), "rule__DirectionCS__UsesAssignment_3_2_1");
+					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_3(), "rule__DirectionCS__ImportsAssignment_3");
+					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_4_1(), "rule__DirectionCS__ImportsAssignment_4_1");
+					put(grammarAccess.getDirectionCSAccess().getUsesAssignment_5_1(), "rule__DirectionCS__UsesAssignment_5_1");
+					put(grammarAccess.getDirectionCSAccess().getUsesAssignment_5_2_1(), "rule__DirectionCS__UsesAssignment_5_2_1");
 					put(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesAssignment_0_1(), "rule__GuardPatternCS__OwnedUnrealizedVariablesAssignment_0_1");
 					put(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesAssignment_0_2_1(), "rule__GuardPatternCS__OwnedUnrealizedVariablesAssignment_0_2_1");
 					put(grammarAccess.getGuardPatternCSAccess().getOwnedPredicatesAssignment_0_4(), "rule__GuardPatternCS__OwnedPredicatesAssignment_0_4");
