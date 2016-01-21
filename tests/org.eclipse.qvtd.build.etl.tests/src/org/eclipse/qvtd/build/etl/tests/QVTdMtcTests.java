@@ -13,7 +13,6 @@ package org.eclipse.qvtd.build.etl.tests;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -155,8 +154,7 @@ public class QVTdMtcTests extends LoadTestCase {
 		}
 
 		public @NonNull Transformation compileTransformation(@NonNull String outputName) throws Exception {
-			Map<@NonNull String, Map<@NonNull String, Object>> options = new HashMap<@NonNull String, Map<@NonNull String, Object>>();
-			compilerChain = new QVTcCompilerChain(environmentFactory, baseURI.appendSegment(testName), null);
+			compilerChain = new QVTcCompilerChain(environmentFactory, baseURI.appendSegment(testName).appendFileExtension("qvtcas"), null);
 			compilerChain.setOption(AbstractCompilerChain.DEFAULT_STEP, AbstractCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
 	    	return compilerChain.execute(outputName);
 		}

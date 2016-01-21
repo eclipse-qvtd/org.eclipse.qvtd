@@ -30,9 +30,10 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 		super(environmentFactory, prefixURI, options);
 	}
 
+	@Override
 	public @NonNull Transformation execute(@NonNull String enforcedOutputName) throws IOException {
-		URI qvtcURI = getURI(QVTC_STEP, URI_KEY, "qvtcas");
-		Resource cResource = getResource(qvtcURI);
+//		URI qvtcURI = getURI(QVTC_STEP, URI_KEY, "qvtcas");
+		Resource cResource = getResource(txURI);
 		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
 		Resource pResource = qvtc2qvtp(cResource, qvtuConfiguration);
 		return qvtp2qvti(pResource);

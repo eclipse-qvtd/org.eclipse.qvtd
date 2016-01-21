@@ -67,15 +67,20 @@ public abstract class AbstractCompilerChain
 		}	
 	}
 	
+	public static interface Listener
+	{
+		void compiled(@NonNull String step, @NonNull Resource resource);
+	}
+	
 	public static final @NonNull String DEFAULT_STEP = "default";
-	public static final @NonNull String QVTC_STEP = "qvtc";
-	public static final @NonNull String QVTG_STEP = "qvtg";
-	public static final @NonNull String QVTI_STEP = "qvti";
-	public static final @NonNull String QVTM_STEP = "qvtm";
-	public static final @NonNull String QVTP_STEP = "qvtp";
-	public static final @NonNull String QVTR_STEP = "qvtr";
-	public static final @NonNull String QVTS_STEP = "qvts";
-	public static final @NonNull String QVTU_STEP = "qvtu";
+	public static final @NonNull String QVTC_STEP = "QVTc";
+	public static final @NonNull String QVTG_STEP = "QVTg";
+	public static final @NonNull String QVTI_STEP = "QVTi";
+	public static final @NonNull String QVTM_STEP = "QVTm";
+	public static final @NonNull String QVTP_STEP = "QVTp";
+	public static final @NonNull String QVTR_STEP = "QVTr";
+	public static final @NonNull String QVTS_STEP = "QVTs";
+	public static final @NonNull String QVTU_STEP = "QVTu";
 	
 	public static final @NonNull Key<Boolean> CHECK_KEY = new Key<Boolean>("check");
 	public static final @NonNull Key<Map<?,?>> SAVE_OPTIONS_KEY = new Key<Map<?,?>>("save");
@@ -143,16 +148,30 @@ public abstract class AbstractCompilerChain
 	 */
 	protected final @NonNull Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options;
 	
+	protected final @NonNull URI txURI;
 	protected final @NonNull URI prefixURI;
 	
-	protected AbstractCompilerChain(@NonNull EnvironmentFactory environmentFactory, @NonNull URI prefixURI, @Nullable Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options) {
+	private @Nullable List<@NonNull Listener> listeners = null;
+	
+	protected AbstractCompilerChain(@NonNull EnvironmentFactory environmentFactory, @NonNull URI txURI, @Nullable Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options) {
 		this.environmentFactory = environmentFactory;
 		this.asResourceSet = environmentFactory.getMetamodelManager().getASResourceSet();
-    	this.prefixURI = prefixURI;
+    	this.txURI = txURI;
+    	this.prefixURI = txURI.trimFileExtension();
 //    	this.qvtcURI = prefixURI.appendFileExtension("qvtcas");
 		this.options = options != null ? options : new HashMap<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>>();
 	}
 
+	public void addListener(@NonNull Listener listener) {
+		List<@NonNull Listener> listeners2 = listeners;
+		if (listeners2 == null) {
+			listeners = listeners2 = new ArrayList<@NonNull Listener>();
+		}
+		if (!listeners2.contains(listener)) {
+			listeners2.add(listener);
+		}
+	}
+	
 	protected @NonNull QVTuConfiguration createQVTuConfiguration(@NonNull Resource cResource, QVTuConfiguration.Mode mode, @NonNull String enforcedOutputName) throws IOException {
 		Transformation transformation = getTransformation(cResource);
 		List<@NonNull String> inputNames = new ArrayList<@NonNull String>();
@@ -174,6 +193,8 @@ public abstract class AbstractCompilerChain
 	}
 
 	public void dispose() {}
+
+	public abstract Transformation execute(@NonNull String text) throws IOException;
 
 	public <T> @Nullable T getOption(@NonNull String stepKey, @NonNull Key<T> optionKey) {
 		Map<@NonNull Key<?>, @Nullable Object> stepOptions = options.get(stepKey);
@@ -316,6 +337,13 @@ public abstract class AbstractCompilerChain
 		return mResource;
 	}
 
+	public void removeListener(@NonNull Listener listener) {
+		List<@NonNull Listener> listeners2 = listeners;
+		if (listeners2 != null) {
+			listeners2.remove(listener);
+		}
+	}
+
 	protected void saveResource(@NonNull Resource resource, @NonNull String stepKey) throws IOException {
 		Map<?, ?> saveOptions = getOption(stepKey, SAVE_OPTIONS_KEY);
 		if (saveOptions != null) {
@@ -324,6 +352,12 @@ public abstract class AbstractCompilerChain
 		assertNoResourceErrors(stepKey, resource);
 		if (getOption(stepKey, VALIDATE_KEY) == Boolean.TRUE) {
 	        assertNoValidationErrors(stepKey, resource);
+		}
+		List<@NonNull Listener> listeners2 = listeners;
+		if (listeners2 != null) {
+			for (Listener listener : listeners2) {
+				listener.compiled(stepKey, resource);
+			}
 		}
 	}
 

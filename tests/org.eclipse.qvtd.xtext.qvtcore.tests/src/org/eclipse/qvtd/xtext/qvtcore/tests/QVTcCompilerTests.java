@@ -265,7 +265,7 @@ public class QVTcCompilerTests extends LoadTestCase
     	MyQVT myQVT = new MyQVT("families2persons");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
-	    	Transformation asTransformation = myQVT.compileTransformation("Families2Persons", "person");
+	    	Transformation asTransformation = myQVT.compileTransformation("Families2Persons.qvtcas", "person");
 	    	myQVT.createInterpretedExecutor(asTransformation);
 	    	myQVT.loadInput("family", "Families.xmi");
 	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
@@ -289,7 +289,7 @@ public class QVTcCompilerTests extends LoadTestCase
     	MyQVT myQVT = new MyQVT("families2persons", Families2PersonsPackage.eINSTANCE, FamiliesPackage.eINSTANCE, PersonsPackage.eINSTANCE);
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-	    	Transformation asTransformation = myQVT.compileTransformation("Families2Persons", "person");
+	    	Transformation asTransformation = myQVT.compileTransformation("Families2Persons.qvtcas", "person");
 	        Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "Families2Persons.genmodel");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
@@ -313,7 +313,7 @@ public class QVTcCompilerTests extends LoadTestCase
     	MyQVT myQVT = new MyQVT("hsv2hls");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
-	    	Transformation asTransformation = myQVT.compileTransformation("HSV2HLS", "hls");
+	    	Transformation asTransformation = myQVT.compileTransformation("HSV2HLS.qvtcas", "hls");
 	    	myQVT.createInterpretedExecutor(asTransformation);
 	    	myQVT.loadInput("hsv", "SolarizedHSV.xmi");
 	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HSV2HLS_trace.xmi");
@@ -336,7 +336,7 @@ public class QVTcCompilerTests extends LoadTestCase
 //		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
     	MyQVT myQVT = new MyQVT("hsv2hls", HSV2HLSPackage.eINSTANCE, HSVTreePackage.eINSTANCE, HLSTreePackage.eINSTANCE);
 		try {	
-	        Transformation asTransformation = myQVT.compileTransformation("HSV2HLS", "hls");
+	        Transformation asTransformation = myQVT.compileTransformation("HSV2HLS.qvtcas", "hls");
 	        myQVT.createGeneratedExecutor(asTransformation, "HSV2HLS.genmodel");
 			myQVT.loadInput("hsv", "SolarizedHSV.xmi");
 			myQVT.executeTransformation();
@@ -353,7 +353,7 @@ public class QVTcCompilerTests extends LoadTestCase
     	MyQVT myQVT = new MyQVT("uml2rdbms");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
-	    	Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS", "rdbms");
+	    	Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS.qvtcas", "rdbms");
 	    	myQVT.createInterpretedExecutor(asTransformation);
 	    	myQVT.loadInput("uml", "SimpleUMLPeople.xmi");
 	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "SimpleUML2RDBMS_trace.xmi");
@@ -376,7 +376,7 @@ public class QVTcCompilerTests extends LoadTestCase
 //		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
     	MyQVT myQVT = new MyQVT("uml2rdbms", Simpleuml2rdbmsPackage.eINSTANCE, SimpleumlPackage.eINSTANCE, SimplerdbmsPackage.eINSTANCE);
 		try {	
-	        Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS", "rdbms");
+	        Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS.qvtcas", "rdbms");
 	        myQVT.createGeneratedExecutor(asTransformation, "SimpleUML2RDBMS.genmodel");
 			myQVT.loadInput("uml", "SimpleUMLPeople.xmi");
 			myQVT.executeTransformation();
@@ -393,7 +393,7 @@ public class QVTcCompilerTests extends LoadTestCase
     	MyQVT myQVT = new MyQVT("upper2lower");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {	
-			Transformation asTransformation = myQVT.compileTransformation("Upper2Lower", "lowerGraph");
+			Transformation asTransformation = myQVT.compileTransformation("Upper2Lower.qvtcas", "lowerGraph");
 	    	myQVT.createInterpretedExecutor(asTransformation);
 	    	myQVT.loadInput("upperGraph", "SimpleGraph.xmi");
 	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Upper2Lower_trace.xmi");
@@ -417,7 +417,7 @@ public class QVTcCompilerTests extends LoadTestCase
     	MyQVT myQVT = new MyQVT("upper2lower", Simplegraph2graphPackage.eINSTANCE, SimplegraphPackage.eINSTANCE);
 //		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
-    		Transformation asTransformation = myQVT.compileTransformation("Upper2Lower", "lowerGraph");
+    		Transformation asTransformation = myQVT.compileTransformation("Upper2Lower.qvtcas", "lowerGraph");
 	        myQVT.createGeneratedExecutor(asTransformation, "SimpleGraph2Graph.genmodel");
 			myQVT.loadInput("upperGraph", "SimpleGraph.xmi");
 	    	myQVT.executeTransformation();
