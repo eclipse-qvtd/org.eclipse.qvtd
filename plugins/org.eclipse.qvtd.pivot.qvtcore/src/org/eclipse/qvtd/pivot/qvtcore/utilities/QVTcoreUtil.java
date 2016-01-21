@@ -10,12 +10,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
@@ -40,5 +45,9 @@ public class QVTcoreUtil extends QVTcoreBaseUtil
 			}
 		}
 		return null;
+	}
+
+	public static @NonNull Transformation loadTransformation(@NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+		return loadTransformation(CoreModel.class, environmentFactory, transformationURI, keepDebug);
 	}
 }

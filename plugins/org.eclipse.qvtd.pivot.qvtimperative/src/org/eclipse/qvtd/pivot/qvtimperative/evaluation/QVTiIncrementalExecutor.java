@@ -11,7 +11,6 @@
 
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +91,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	protected final @NonNull InvocationManager invocationManager;
 	protected final @NonNull ObjectManager objectManager;
 	
-	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull Mode mode) throws IOException {
+	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull Mode mode) {
 		super(environmentFactory, transformation);
 		this.mode = mode;
 		this.transformationAnalysis = getModelManager().getTransformationAnalysis();

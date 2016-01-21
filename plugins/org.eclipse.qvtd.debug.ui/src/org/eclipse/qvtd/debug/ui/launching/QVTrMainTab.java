@@ -12,36 +12,29 @@
 package org.eclipse.qvtd.debug.ui.launching;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.debug.evaluator.BasicQVTrExecutor;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Group;
 
 public class QVTrMainTab extends DirectionalMainTab
 {
-	private static final @NonNull Map<@NonNull String, @NonNull String> intermediateDefaultExtensions = new HashMap<@NonNull String, @NonNull String>();
-	static {
-//		intermediateDefaultExtensions.put("QVTr", "qvtr");
-		intermediateDefaultExtensions.put("QVTc", "qvtcas");
-		intermediateDefaultExtensions.put("QVTu", "qvtu.qvtcas");
-		intermediateDefaultExtensions.put("QVTm", "qvpm.qvtcas");
-		intermediateDefaultExtensions.put("QVTp", "qvtp.qvtcas");
-		intermediateDefaultExtensions.put("QVTs", "qvts.xmi");
-		intermediateDefaultExtensions.put("QVTi", "qvtias");
-		intermediateDefaultExtensions.put("Java", "java");
-	}
-
-	protected @NonNull String getDefaultIntermediatePath(@NonNull Group group, @NonNull URI txURI, @NonNull String name) {
-		return String.valueOf(txURI.trimFileExtension().appendFileExtension(intermediateDefaultExtensions.get(name)));
-	}
+	private static final @NonNull String @NonNull [] intermediateKeys = new @NonNull String[] {
+		CompilerChain.QVTR_STEP,
+		CompilerChain.QVTC_STEP,
+		CompilerChain.QVTU_STEP,
+		CompilerChain.QVTM_STEP,
+		CompilerChain.QVTP_STEP,
+		CompilerChain.QVTS_STEP,
+		CompilerChain.QVTI_STEP,
+		CompilerChain.JAVA_STEP,
+		CompilerChain.CLASS_STEP
+	};
 	
 	@Override
 	public Image getImage() {
@@ -49,20 +42,13 @@ public class QVTrMainTab extends DirectionalMainTab
 	}
 
 	@Override
-	protected void updateGroups(@NonNull Transformation transformation,
-			@NonNull Map<@NonNull String, @Nullable String> oldInputsMap, @NonNull Map<@NonNull String, @Nullable String> newInputsMap,
-			@NonNull Map<@NonNull String, @Nullable String> oldOutputsMap, @NonNull Map<@NonNull String, @Nullable String> newOutputsMap,
-			@NonNull Map<@NonNull String, @Nullable String> intermediateMap) {
-		System.out.println("QVTc::updateGroups");
-		super.updateGroups(transformation, oldInputsMap, newInputsMap, oldOutputsMap, newOutputsMap, intermediateMap);
-		for (String key : intermediateDefaultExtensions.keySet()) {
-			intermediateMap.put(key, intermediateDefaultExtensions.get(key));
-		}
+	protected @NonNull String @NonNull [] getIntermediateKeysInternal() {
+		return intermediateKeys;
 	}
 
+	@Override
 	protected @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException {
-		QVTiEnvironmentFactory envFactory = getEnvironmentFactory();
-		BasicQVTrExecutor xtextEvaluator = new BasicQVTrExecutor(envFactory, txURI);
-		return xtextEvaluator.getTransformation();
+		QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+    	return QVTrelationUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
 	}
 }

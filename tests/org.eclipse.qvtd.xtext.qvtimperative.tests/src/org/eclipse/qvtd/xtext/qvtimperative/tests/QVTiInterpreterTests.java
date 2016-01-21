@@ -38,7 +38,6 @@ import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -46,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNormalizer;
@@ -104,7 +104,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 			this(environmentFactory, fileNamePrefix, transformationFileName, QVTiIncrementalExecutor.Mode.LAZY);
 		}
 		public MyQvtiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull String fileNamePrefix, @NonNull String transformationFileName, @NonNull Mode mode) throws IOException {
-			super(environmentFactory, QVTbaseUtil.loadTransformation(ImperativeModel.class, environmentFactory, getProjectFileURI(fileNamePrefix + "/"  + transformationFileName), environmentFactory.keepDebug()), mode);
+			super(environmentFactory, QVTimperativeUtil.loadTransformation(environmentFactory, getProjectFileURI(fileNamePrefix + "/"  + transformationFileName), environmentFactory.keepDebug()), mode);
 			this.fileNamePrefix = fileNamePrefix + "/";
 	    }
 		

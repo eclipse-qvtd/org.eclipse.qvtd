@@ -47,7 +47,7 @@ import org.eclipse.qvtd.build.etl.tests.Families2Persons.Families2PersonsNormali
 import org.eclipse.qvtd.build.etl.tests.UpperToLower.UpperToLowerNormalizer;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
-import org.eclipse.qvtd.compiler.AbstractCompilerChain;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 //import org.eclipse.qvtd.build.etl.tests.UpperToLowerHete.UpperToLowerNormalizer;
 import org.eclipse.qvtd.compiler.internal.etl.MtcBroker;
@@ -154,9 +154,9 @@ public class QVTdMtcTests extends LoadTestCase {
 		}
 
 		public @NonNull Transformation compileTransformation(@NonNull String outputName) throws Exception {
-			compilerChain = new QVTcCompilerChain(environmentFactory, baseURI.appendSegment(testName).appendFileExtension("qvtcas"), null);
-			compilerChain.setOption(AbstractCompilerChain.DEFAULT_STEP, AbstractCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-	    	return compilerChain.execute(outputName);
+			compilerChain = new QVTcCompilerChain(getEnvironmentFactory(), baseURI.appendSegment(testName).appendFileExtension("qvtcas"), null);
+			compilerChain.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+	    	return compilerChain.compile(outputName);
 		}
 
 		public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {

@@ -23,11 +23,10 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 {
@@ -36,7 +35,7 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 	private long envId = 0;
 
     public QVTiVMExecutor(@NonNull IVMContext vmContext, @NonNull URI transformationURI) throws IOException {
-    	super((QVTiEnvironmentFactory) vmContext.getEnvironmentFactory(), QVTbaseUtil.loadTransformation(ImperativeModel.class, vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug()));
+    	super((QVTiEnvironmentFactory) vmContext.getEnvironmentFactory(), QVTimperativeUtil.loadTransformation(vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug()));
 		this.vmContext = vmContext;
     }
 

@@ -12,17 +12,14 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
-import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
@@ -31,7 +28,6 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
-import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
@@ -66,12 +62,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
     private @Nullable QVTiModelManager modelManager = null;
 
     public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
-		super(environmentFactory, new ModelManager() {		// FIXME waiting for simplified inherited constructor
-			@Override
-			public @NonNull Set<EObject> get(@NonNull Class type) {
-				throw new UnsupportedOperationException();
-			}
-		});
+		super(environmentFactory);
 		this.transformation = transformation;
 	}
 
@@ -93,7 +84,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		return visitor;
 	}
 
-    public void createModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
+    @Override
+	public void createModel(@NonNull String name, @NonNull URI modelURI, @Nullable String contentType) {
         TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
@@ -249,6 +241,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		return true;
 	}
 
+	@Override
 	public Boolean execute() {
 		initializeEvaluationEnvironment(transformation);
 		getRootEvaluationEnvironment();
@@ -408,7 +401,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
         }
     }
 
-	public void loadModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
+	@Override
+	public void loadModel(@NonNull String name, @NonNull URI modelURI, @Nullable String contentType) {
         TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
@@ -447,6 +441,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
         return resource;
     }
 
+	@Override
 	public void saveModels() {
 		getModelManager().saveModels();
 	}

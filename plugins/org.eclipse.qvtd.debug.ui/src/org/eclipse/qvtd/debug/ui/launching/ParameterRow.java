@@ -33,14 +33,12 @@ public class ParameterRow extends Composite implements ModifyListener
 		super(group, style);
 		this.mainTab = mainTab;
 		setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		GridLayout gridLayout = new GridLayout(4, false);
-		gridLayout.marginHeight = 0;
-		gridLayout.marginWidth = 0;
-		gridLayout.verticalSpacing = 0;
-		setLayout(gridLayout);
+		
+		createDerivedButtons();
 		
 		name = new Label(this, SWT.NONE);
 		name.setText(parameterName);
+		name.setSize(80,15);
 		
 		path = new Text(this, SWT.BORDER);
 		path.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -55,7 +53,15 @@ public class ParameterRow extends Composite implements ModifyListener
 		boolean isSave = (style & SWT.SAVE) != 0;
 		LaunchingUtils.prepareBrowseWorkspaceButton(browseWS, name.getText(), path, isSave);
 		LaunchingUtils.prepareBrowseFileSystemButton(browseFile, path, isSave);
+
+		GridLayout gridLayout = new GridLayout(getChildren().length, false);
+		gridLayout.marginHeight = 0;
+		gridLayout.marginWidth = 0;
+		gridLayout.verticalSpacing = 0;
+		setLayout(gridLayout);
 	}
+
+	protected void createDerivedButtons() {}
 
 	@Override
 	public void modifyText(ModifyEvent e) {

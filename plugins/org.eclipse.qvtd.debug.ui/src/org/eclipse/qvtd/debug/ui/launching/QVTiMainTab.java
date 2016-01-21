@@ -19,27 +19,39 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Group;
 
 public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
 {
+	private static final @NonNull String @NonNull [] intermediateKeys = new @NonNull String[] {
+		CompilerChain.QVTI_STEP,
+		CompilerChain.JAVA_STEP,
+		CompilerChain.CLASS_STEP
+	};
+
 	protected void createDirectionGroup(Group txGroup) {}
 	
 	@Override
 	public Image getImage() {
 		return QVTdDebugUIPlugin.getDefault().createImage("icons/QVTiModelFile.gif");
+	}
+
+	@Override
+	protected @NonNull String @NonNull [] getIntermediateKeysInternal() {
+		return intermediateKeys;
 	}
 
 	@Override
@@ -90,7 +102,9 @@ public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
 		}
 	}
 
+	@Override
 	protected @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException {
-		return QVTbaseUtil.loadTransformation(ImperativeModel.class, getEnvironmentFactory(), txURI, true);
+		QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+		return QVTimperativeUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
 	}
 }

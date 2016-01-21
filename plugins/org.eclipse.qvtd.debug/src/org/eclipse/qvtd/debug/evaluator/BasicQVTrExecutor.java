@@ -10,14 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.evaluator;
 
-import java.io.IOException;
-
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 
 /**
  * A BasicQVTrExecutor supports loading a QVTr transformation as source then loading models, performing a transformation
@@ -25,9 +22,9 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
  * 
  * @see BasicQVTiExecutor
  */
-public class BasicQVTrExecutor extends BasicQVTiExecutor
+public class BasicQVTrExecutor extends QVTiIncrementalExecutor
 {
-    public BasicQVTrExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI transformationURI) throws IOException {
-    	super(environmentFactory, QVTbaseUtil.loadTransformation(RelationModel.class, environmentFactory, transformationURI, environmentFactory.keepDebug()));
+    public BasicQVTrExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
+    	super(environmentFactory, transformation, Mode.LAZY);
     }
 }

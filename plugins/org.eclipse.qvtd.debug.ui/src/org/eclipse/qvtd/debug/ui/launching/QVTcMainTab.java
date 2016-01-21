@@ -12,71 +12,43 @@
 package org.eclipse.qvtd.debug.ui.launching;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.resource.BasicProjectManager;
-import org.eclipse.qvtd.compiler.QVTcCompilerChain;
-import org.eclipse.qvtd.debug.evaluator.BasicQVTcExecutor;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Group;
 
 public class QVTcMainTab extends DirectionalMainTab
 {
-	private static final @NonNull Map<@NonNull String, @NonNull String> intermediateDefaultExtensions = new HashMap<@NonNull String, @NonNull String>();
-	static {
-//		intermediateDefaultExtensions.put("QVTc", "qvtc");
-		intermediateDefaultExtensions.put("QVTu", "qvtu.qvtcas");
-		intermediateDefaultExtensions.put("QVTm", "qvpm.qvtcas");
-		intermediateDefaultExtensions.put("QVTp", "qvtp.qvtcas");
-		intermediateDefaultExtensions.put("QVTs", "qvts.xmi");
-		intermediateDefaultExtensions.put("QVTi", "qvtias");
-		intermediateDefaultExtensions.put("Java", "java");
-	}
+	private static final @NonNull String @NonNull [] intermediateKeys = new @NonNull String[] {
+		CompilerChain.QVTC_STEP,
+		CompilerChain.QVTU_STEP,
+		CompilerChain.QVTM_STEP,
+		CompilerChain.QVTP_STEP,
+		CompilerChain.QVTS_STEP,
+		CompilerChain.QVTI_STEP,
+		CompilerChain.JAVA_STEP,
+		CompilerChain.CLASS_STEP
+	};
 
-	protected void compile() {
-		QVTimperative myQVT = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, null);
-		QVTcCompilerChain chain = new QVTcCompilerChain(myQVT.getEnvironmentFactory(), URI.createURI(txPath.getText()), null);
-		try {
-			Transformation execute = chain.execute(directionCombo.getText());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	protected @NonNull String getDefaultIntermediatePath(@NonNull Group group, @NonNull URI txURI, @NonNull String name) {
-		return String.valueOf(txURI.trimFileExtension().appendFileExtension(intermediateDefaultExtensions.get(name)));//.deresolve(txURI));
-	}
-	
 	@Override
 	public Image getImage() {
 		return QVTdDebugUIPlugin.getDefault().createImage("icons/QVTcModelFile.gif");
 	}
 
 	@Override
-	protected void updateGroups(@NonNull Transformation transformation,
-			@NonNull Map<@NonNull String, @Nullable String> oldInputsMap, @NonNull Map<@NonNull String, @Nullable String> newInputsMap,
-			@NonNull Map<@NonNull String, @Nullable String> oldOutputsMap, @NonNull Map<@NonNull String, @Nullable String> newOutputsMap,
-			@NonNull Map<@NonNull String, @Nullable String> intermediateMap) {
-		System.out.println("QVTc::updateGroups");
-		super.updateGroups(transformation, oldInputsMap, newInputsMap, oldOutputsMap, newOutputsMap, intermediateMap);
-		for (String key : intermediateDefaultExtensions.keySet()) {
-			intermediateMap.put(key, intermediateDefaultExtensions.get(key));
-		}
+	protected @NonNull String @NonNull [] getIntermediateKeysInternal() {
+		return intermediateKeys;
 	}
 
+	@Override
 	protected @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException {
 		System.out.println("QVTc::updateTransformation");
-		QVTiEnvironmentFactory envFactory = getEnvironmentFactory();
-		BasicQVTcExecutor xtextEvaluator = new BasicQVTcExecutor(envFactory, txURI);
-		return xtextEvaluator.getTransformation();
+		QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
+    	return QVTcoreUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
 	}
 }

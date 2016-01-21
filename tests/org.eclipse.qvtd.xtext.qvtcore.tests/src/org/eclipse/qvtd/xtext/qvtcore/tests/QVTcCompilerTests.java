@@ -35,11 +35,9 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
-import org.eclipse.qvtd.compiler.AbstractCompilerChain;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
@@ -48,7 +46,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
-import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2PersonsNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2Persons.Families2PersonsPackage;
@@ -100,11 +97,23 @@ public class QVTcCompilerTests extends LoadTestCase
 			}
 		}
 
+		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String testFileName, @NonNull String outputName, @NonNull String @NonNull... genModelFiles) throws Exception {
+			Map<@NonNull String, @NonNull Map<CompilerChain.Key<?>, Object>> options = new HashMap<@NonNull String, @NonNull Map<CompilerChain.Key<?>, Object>>();
+			compilerChain = new QVTcCompilerChain(getEnvironmentFactory(), testFolderURI.appendSegment(testFileName), options);
+			compilerChain.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+//			Transformation asTransformation = compilerChain.compile(outputName);
+//			Class<? extends Transformer> txClass = createGeneratedClass(asTransformation, genModelFiles);
+			Class<? extends Transformer> txClass = compilerChain.build(outputName, genModelFiles);
+
+			createGeneratedExecutor(txClass);
+	        return txClass;
+		}
+
 		public @NonNull Transformation compileTransformation(@NonNull String testFileName, @NonNull String outputName) throws Exception {
-			Map<@NonNull String, @NonNull Map<AbstractCompilerChain.Key<?>, Object>> options = new HashMap<@NonNull String, @NonNull Map<AbstractCompilerChain.Key<?>, Object>>();
-			compilerChain = new QVTcCompilerChain(environmentFactory, testFolderURI.appendSegment(testFileName), options);
-			compilerChain.setOption(AbstractCompilerChain.DEFAULT_STEP, AbstractCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-	    	return compilerChain.execute(outputName);
+			Map<@NonNull String, @NonNull Map<CompilerChain.Key<?>, Object>> options = new HashMap<@NonNull String, @NonNull Map<CompilerChain.Key<?>, Object>>();
+			compilerChain = new QVTcCompilerChain(getEnvironmentFactory(), testFolderURI.appendSegment(testFileName), options);
+			compilerChain.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+	    	return compilerChain.compile(outputName);
 		}
 
 		public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
@@ -289,8 +298,7 @@ public class QVTcCompilerTests extends LoadTestCase
     	MyQVT myQVT = new MyQVT("families2persons", Families2PersonsPackage.eINSTANCE, FamiliesPackage.eINSTANCE, PersonsPackage.eINSTANCE);
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-	    	Transformation asTransformation = myQVT.compileTransformation("Families2Persons.qvtcas", "person");
-	        Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "Families2Persons.genmodel");
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("Families2Persons.qvtcas", "person", "Families2Persons.genmodel");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("family", "FamiliesBig.xmi");
@@ -336,8 +344,7 @@ public class QVTcCompilerTests extends LoadTestCase
 //		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
     	MyQVT myQVT = new MyQVT("hsv2hls", HSV2HLSPackage.eINSTANCE, HSVTreePackage.eINSTANCE, HLSTreePackage.eINSTANCE);
 		try {	
-	        Transformation asTransformation = myQVT.compileTransformation("HSV2HLS.qvtcas", "hls");
-	        myQVT.createGeneratedExecutor(asTransformation, "HSV2HLS.genmodel");
+	        myQVT.buildTransformation("HSV2HLS.qvtcas", "hls", "HSV2HLS.genmodel");
 			myQVT.loadInput("hsv", "SolarizedHSV.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("hls", "SolarizedHLS_CG.xmi", "SolarizedHLS_expected.xmi", null);
@@ -417,8 +424,7 @@ public class QVTcCompilerTests extends LoadTestCase
     	MyQVT myQVT = new MyQVT("upper2lower", Simplegraph2graphPackage.eINSTANCE, SimplegraphPackage.eINSTANCE);
 //		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
-    		Transformation asTransformation = myQVT.compileTransformation("Upper2Lower.qvtcas", "lowerGraph");
-	        myQVT.createGeneratedExecutor(asTransformation, "SimpleGraph2Graph.genmodel");
+    		myQVT.buildTransformation("Upper2Lower.qvtcas", "lowerGraph", "SimpleGraph2Graph.genmodel");
 			myQVT.loadInput("upperGraph", "SimpleGraph.xmi");
 	    	myQVT.executeTransformation();
 			myQVT.saveOutput("lowerGraph", "SimpleGraphLower_CG.xmi", "SimpleGraphLower_expected.xmi", Upper2LowerNormalizer.INSTANCE);

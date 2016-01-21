@@ -254,8 +254,10 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return transformationAnalysis;
 	}
 
-	public void saveSourceFile(@NonNull String savePath) throws IOException {
-		saveSourceFiles(ClassUtil.nonNullState(cgPackage), new File(savePath));
+	public @NonNull File saveSourceFile(@NonNull String savePath) throws IOException {
+		File saveFile = new File(savePath);
+		saveSourceFiles(ClassUtil.nonNullState(cgPackage), saveFile);
+		return saveFile;
 	}
 
 	public void saveSourceFiles(@NonNull CGPackage cgPackage, @NonNull File parentFolder) throws IOException {

@@ -17,23 +17,26 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTuConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 /**
  * The QVTcCompilerChain supports generation of a QVTi Transformation from a QVTc Transformation.
  */
 public class QVTcCompilerChain extends AbstractCompilerChain
 {
-	public QVTcCompilerChain(@NonNull EnvironmentFactory environmentFactory, @NonNull URI prefixURI, @Nullable Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options) {
+	public QVTcCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI prefixURI, @Nullable Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options) {
 		super(environmentFactory, prefixURI, options);
 	}
 
 	@Override
-	public @NonNull Transformation execute(@NonNull String enforcedOutputName) throws IOException {
-//		URI qvtcURI = getURI(QVTC_STEP, URI_KEY, "qvtcas");
-		Resource cResource = getResource(txURI);
+	public @NonNull Transformation compile(@NonNull String enforcedOutputName) throws IOException {
+		Transformation loadTransformation = QVTcoreUtil.loadTransformation(environmentFactory, txURI, false);
+		Resource cResource = ClassUtil.nonNullState(loadTransformation.eResource());
+		compiled(QVTC_STEP, cResource);
 		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
 		Resource pResource = qvtc2qvtp(cResource, qvtuConfiguration);
 		return qvtp2qvti(pResource);

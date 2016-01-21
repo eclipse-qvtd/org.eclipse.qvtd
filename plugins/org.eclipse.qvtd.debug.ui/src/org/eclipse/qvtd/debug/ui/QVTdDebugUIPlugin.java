@@ -14,12 +14,15 @@ import java.net.URL;
 import java.util.Collections;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ocl.examples.debug.vm.ui.DebugVMUIPlugin;
@@ -242,6 +245,14 @@ public class QVTdDebugUIPlugin extends AbstractUIPlugin {
 
 	public static IStatus createErrorStatus(String message) {
 		return createStatus(IStatus.ERROR, message);
+	}
+
+	public static @NonNull CoreException newCoreExceptionError(@NonNull String message, @Nullable Throwable e) {
+		return new CoreException(newCoreStatusError(message, e));
+	}
+
+	public static @NonNull IStatus newCoreStatusError(@NonNull String message, @Nullable Throwable e) {
+		return new Status(IStatus.ERROR, PLUGIN_ID, 0, message, e);
 	}
 	
 	@Override

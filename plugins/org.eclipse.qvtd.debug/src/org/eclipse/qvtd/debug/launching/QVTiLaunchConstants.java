@@ -17,14 +17,30 @@ import org.eclipse.jdt.annotation.NonNull;
 
 public interface QVTiLaunchConstants
 {
-	static final @NonNull String LAUNCH_CONFIGURATION_TYPE_ID = "org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate";
+	public static final @NonNull String LAUNCH_CONFIGURATION_TYPE_ID = "org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate";
+
+	/**
+	 * ILaunchConfiguration Boolean attribute for the auto-build of the transformation chain.
+	 */
+	public static final @NonNull String AUTO_BUILD_KEY = "auto-build";
+
 
 	public static final @NonNull Map<String, String> EMPTY_MAP = new HashMap<String,String>();
+
+	/**
+	 * ILaunchConfiguration String attribute for the genmodel resource.
+	 */
+	public static final @NonNull String GENMODEL_KEY = "genmodel";
 
 	/**
 	 * ILaunchConfiguration Map<String,String> attribute for the intermediate resource per intermediate model name.
 	 */
 	public static final @NonNull String INTERMEDIATES_KEY = "intermediates";
+
+	/**
+	 * ILaunchConfiguration Boolean attribute for the interpreted rather than code generated execution.
+	 */
+	public static final @NonNull String INTERPRETED_KEY = "interpreted";
 
 	/**
 	 * ILaunchConfiguration Map<String,String> attribute for the input resource per input model name.
@@ -45,6 +61,11 @@ public interface QVTiLaunchConstants
 	 * ILaunchConfiguration Map<String,String> attribute for the previous/referenceoutput resource per output model name.
 	 */
 	public static final @NonNull String OLD_OUT_KEY = "old-out";
+
+	/**
+	 * ILaunchConfiguration String attribute for the textual trace evaluation option.
+	 */
+	public static final @NonNull String TRACE_EVALUATION_KEY = "console-trace";
 
 	/**
 	 * ILaunchConfiguration String attribute for the transformation resource.

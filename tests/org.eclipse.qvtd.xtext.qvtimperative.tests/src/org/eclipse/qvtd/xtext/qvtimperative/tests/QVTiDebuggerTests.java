@@ -108,6 +108,8 @@ public class QVTiDebuggerTests extends XtextTestCase
 		launchConfiguration.setAttribute(QVTiLaunchConstants.NEW_IN_KEY, newInKeys);
 //		launchConfiguration.setAttribute(QVTiLaunchConstants.OLD_OUT_KEY, oldOutKeys);
 		launchConfiguration.setAttribute(QVTiLaunchConstants.NEW_OUT_KEY, newOutKeys);
+		launchConfiguration.setAttribute(QVTiLaunchConstants.INTERPRETED_KEY, true);
+		launchConfiguration.setAttribute(QVTiLaunchConstants.TRACE_EVALUATION_KEY, false);
 		return launchConfiguration;
 	}
 

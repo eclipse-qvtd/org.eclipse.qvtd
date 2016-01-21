@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.ocl.xtext.base;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.qvtd.pivot.qvtcore;bundle-version="[0.13.0,0.14.0)";visibility:=reexport,
  org.eclipse.qvtd.pivot.qvtrelation;bundle-version="[0.13.0,0.14.0)";visibility:=reexport,
- org.eclipse.qvtd.pivot.schedule;bundle-version="[0.13.0,0.14.0)";visibility:=reexport
+ org.eclipse.qvtd.pivot.schedule;bundle-version="[0.13.0,0.14.0)";visibility:=reexport,
+ org.eclipse.qvtd.codegen;bundle-version="[0.13.0,0.14.0)";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.epsilon.common.util;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",

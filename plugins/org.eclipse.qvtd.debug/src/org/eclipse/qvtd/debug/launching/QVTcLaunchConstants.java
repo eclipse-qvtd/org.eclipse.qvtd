@@ -14,6 +14,8 @@ import org.eclipse.jdt.annotation.NonNull;
 
 public interface QVTcLaunchConstants extends QVTiLaunchConstants
 {
+	public static final @NonNull String LAUNCH_CONFIGURATION_TYPE_ID = "org.eclipse.qvtd.debug.launching.QVTcLaunchConfigurationDelegate";
+
 	/**
 	 * ILaunchConfiguration String attribute for the transformation direction.
 	 */

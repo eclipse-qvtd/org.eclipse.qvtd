@@ -36,25 +36,38 @@ import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements QVTiLaunchConstants
 { 
     protected static final int LAUNCH_ERROR_CODE = 210;
     protected static final IStatus fgLaunchErrorStatus = new Status(IStatus.ERROR, QVTiDebugPlugin.PLUGIN_ID, LAUNCH_ERROR_CODE, "Launch configuration error", null); //$NON-NLS-1$	
-	
+
+	protected @NonNull QVTiExecutor createExecutor(@NonNull QVTiEnvironmentFactory envFactory, @NonNull Transformation transformation) {
+		return new BasicQVTiExecutor(envFactory, transformation);
+	}
+
+	protected @NonNull QVTiDebugCore getDebugCore() {
+		return QVTiDebugCore.INSTANCE;
+	}
+
+	protected @NonNull URI getTransformationURI(final ILaunchConfiguration configuration) throws CoreException {
+		String txName = configuration.getAttribute(TX_KEY, "");		// FIXME Change to intermediate - same as QVTc/QVTr
+		return URI.createURI(txName, true);
+	}
+
 	// FIXME - do refactoring of this area 
 	public void launch(final ILaunchConfiguration configuration, String mode, final ILaunch launch, IProgressMonitor monitor) throws CoreException {
         
 		try {
-			String txName = configuration.getAttribute(TX_KEY, "");
+			@SuppressWarnings("unused") boolean interpreted = configuration.getAttribute(INTERPRETED_KEY, false);
+			final boolean traceEvaluation = configuration.getAttribute(TRACE_EVALUATION_KEY, false);
 			final Map<String, String> inMap = configuration.getAttribute(NEW_IN_KEY, EMPTY_MAP);
 			final Map<String, String> outMap = configuration.getAttribute(NEW_OUT_KEY, EMPTY_MAP);
-			final URI txURI = URI.createURI(txName, true);
-//            final QvtTransformation qvtTransformation = new QvtInterpretedTransformation(getQvtModule(configuration));
+			final URI txURI = getTransformationURI(configuration);
             final Monitor execMonitor = new BasicMonitor();
                                     
             final StreamsProxy streamsProxy = new StreamsProxy();
@@ -62,9 +75,12 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
             ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
                 
                 public void run() throws Exception { 
-        			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null);
-        	    	Transformation transformation = QVTbaseUtil.loadTransformation(ImperativeModel.class, envFactory, txURI, envFactory.keepDebug());
-        			BasicQVTiExecutor executor = new BasicQVTiExecutor(envFactory, transformation);
+        			QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null);
+        			if (traceEvaluation) {
+        				environmentFactory.setEvaluationTracingEnabled(true);
+        			}
+        	    	Transformation transformation = QVTimperativeUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
+        			QVTiExecutor executor = createExecutor(environmentFactory, transformation);
         			for (String inName : inMap.keySet()) {
         				if (inName != null) {
 	        				URI inURI = URI.createURI(inMap.get(inName), true);
@@ -137,7 +153,7 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
 								}
 							}						
 							
-							getDebugCore().error(e);							
+							getDebugCore().error("Execution of launch '" + configuration.getName() + "' failed", e);							
 						}
 					}
 					
@@ -155,25 +171,5 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
 			throw new CoreException(MiscUtil.makeErrorStatus(e));
 		}
 	}
-
-	protected @NonNull QVTiDebugCore getDebugCore() {
-		return QVTiDebugCore.INSTANCE;
-	}
-	
-/*	@Override
-	public IEolExecutableModule createModule() {
-		return new EvlModule();
-	}
-	
-	@Override
-	protected EolDebugger createDebugger() {
-		return new EvlDebugger();
-	}
-	
-	@Override
-	protected void preExecute(IEolExecutableModule module) throws CoreException, EolRuntimeException {
-		super.preExecute(module);
-//		((EvlModule)module).setUnsatisfiedConstraintFixer(new ValidationViewFixer());
-	} */
 }
 

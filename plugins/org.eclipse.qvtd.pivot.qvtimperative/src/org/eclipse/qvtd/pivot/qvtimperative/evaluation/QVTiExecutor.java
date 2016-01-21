@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
@@ -25,6 +26,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 
 public interface QVTiExecutor extends ExecutorInternal
 {
+	void createModel(@NonNull String outName, @NonNull URI outURI, @Nullable String contentType);
+	Boolean execute();
 	@Override
 	@NonNull QVTiEvaluationEnvironment getEvaluationEnvironment();
 	@Override
@@ -34,4 +37,6 @@ public interface QVTiExecutor extends ExecutorInternal
 	void internalExecutePropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @NonNull Object slotObject, @Nullable Object ecoreValue);
 	@Nullable Object internalExecuteRealizedVariable(@NonNull RealizedVariable realizedVariable, @NonNull EvaluationVisitor undecoratedVisitor);
 	@Nullable Object internalExecuteTransformation(@NonNull Transformation transformation, @NonNull EvaluationVisitor undecoratedVisitor);
+	void loadModel(@NonNull String inName, @NonNull URI inURI, @Nullable String contentType);
+	void saveModels();
 }

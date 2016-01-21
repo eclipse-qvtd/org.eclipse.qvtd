@@ -10,15 +10,20 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 
 public class QVTrelationUtil extends QVTbaseUtil
 {
@@ -32,5 +37,9 @@ public class QVTrelationUtil extends QVTbaseUtil
 			}
 		}
 		return rootVariables;
+	}
+
+	public static @NonNull Transformation loadTransformation(@NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+		return loadTransformation(RelationModel.class, environmentFactory, transformationURI, keepDebug);
 	}
 }

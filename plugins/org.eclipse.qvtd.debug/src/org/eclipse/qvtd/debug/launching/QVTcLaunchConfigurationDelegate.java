@@ -15,164 +15,64 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.debug.core.DebugException;
-import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.IStatusHandler;
-import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
-import org.eclipse.emf.common.util.BasicMonitor;
-import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.vm.utils.MiscUtil;
-import org.eclipse.ocl.examples.debug.vm.utils.SafeRunner;
-import org.eclipse.ocl.examples.debug.vm.utils.ShallowProcess;
-import org.eclipse.ocl.examples.debug.vm.utils.StreamsProxy;
-import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
+import org.eclipse.ocl.pivot.utilities.XMIUtil;
+import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.evaluator.BasicQVTcExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
-public class QVTcLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements QVTiLaunchConstants
-{ 
-    protected static final int LAUNCH_ERROR_CODE = 210;
-    protected static final IStatus fgLaunchErrorStatus = new Status(IStatus.ERROR, QVTiDebugPlugin.PLUGIN_ID, LAUNCH_ERROR_CODE, "Launch configuration error", null); //$NON-NLS-1$	
-	
-	// FIXME - do refactoring of this area 
-	public void launch(final ILaunchConfiguration configuration, String mode, final ILaunch launch, IProgressMonitor monitor) throws CoreException {
-        
+public class QVTcLaunchConfigurationDelegate extends QVTiLaunchConfigurationDelegate implements QVTcLaunchConstants
+{
+	@Override
+	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor) throws CoreException {
+		String txName = configuration.getAttribute(TX_KEY, (String)null);
+		if (txName == null) {
+			throw QVTiDebugPlugin.newCoreExceptionError("No transformation to compile", null);
+		}
+		URI txURI = URI.createURI(txName);
+		String outputName = configuration.getAttribute(DIRECTION_KEY, (String)null);
+		if (outputName == null) {
+			throw QVTiDebugPlugin.newCoreExceptionError("No output direction for '" + txURI + "'", null);
+		}
+		Boolean interpreted = configuration.getAttribute(INTERPRETED_KEY, true);
+		//
+		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, null);
+		QVTiEnvironmentFactory environmentFactory = qvt.getEnvironmentFactory();
+		CompilerChain compilerChain = new QVTcCompilerChain(environmentFactory, txURI, null);
+		compilerChain.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions());
 		try {
-			String txName = configuration.getAttribute(TX_KEY, "");
-			final Map<String, String> oldInMap = configuration.getAttribute(OLD_IN_KEY, EMPTY_MAP);
-			final Map<String, String> newInMap = configuration.getAttribute(NEW_IN_KEY, EMPTY_MAP);
-			final Map<String, String> oldOutMap = configuration.getAttribute(OLD_OUT_KEY, EMPTY_MAP);
-			final Map<String, String> newOutMap = configuration.getAttribute(NEW_OUT_KEY, EMPTY_MAP);
-			final URI txURI = URI.createURI(txName, true);
-//            final QvtTransformation qvtTransformation = new QvtInterpretedTransformation(getQvtModule(configuration));
-            final Monitor execMonitor = new BasicMonitor();
-                                    
-            final StreamsProxy streamsProxy = new StreamsProxy();
-   
-            ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
-                
-                public void run() throws Exception { 
-        			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null);
-        			BasicQVTcExecutor xtextEvaluator = new BasicQVTcExecutor(envFactory, txURI);
-        			// FIXME old models
-        			for (String inName : newInMap.keySet()) {
-        				if (inName != null) {
-	        				URI inURI = URI.createURI(newInMap.get(inName), true);
-	        				xtextEvaluator.loadModel(inName, inURI, null);
-        				}
-        			}
-        			for (String outName : oldOutMap.keySet()) {
-        				if (outName != null) {
-        					URI outURI = URI.createURI(oldOutMap.get(outName), true);
-            				xtextEvaluator.createModel(outName, outURI, null);
-        				}
-        			}
-        			xtextEvaluator.execute();
-        			xtextEvaluator.saveModels();
-//                    IStatus status = QvtLaunchConfigurationDelegateBase.validate(qvtTransformation, configuration);                    
-//                    if(status.getSeverity() > IStatus.WARNING) {
-//                    	throw new CoreException(status);
-//                    }      	
-                	
-//                	Context context = QvtLaunchUtil.createContext(configuration);
-//                    context.setLog(new WriterLog(streamsProxy.getOutputWriter()));
-//                    context.setMonitor(execMonitor);
-                    
-//                	QvtLaunchConfigurationDelegateBase.doLaunch(qvtTransformation, configuration, context);
-                	
-//                	qvtTransformation.cleanup();
-                }
-            };
-            
-            
-            r = SafeRunner.getSafeRunnable(r);       
-            final ShallowProcess process = new ShallowProcess(launch, r) {
-            	boolean isTerminated = false;
-            	@Override
-            	public void terminate() throws DebugException {            		
-            		execMonitor.setCanceled(true);
-            		isTerminated = true;	            		
-            		super.terminate();            		
-            	}
+			if (interpreted) {
+				compilerChain.compile(outputName);
+			}
+			else {
+				compilerChain.build(outputName);
+			}
+		} catch (Exception e) {
+			throw QVTiDebugPlugin.newCoreExceptionError("Failed to compile transformation '" + txURI + "'", e);
+		}
+		return super.buildForLaunch(configuration, mode, monitor);		// FIXME override with the progress monitor
+	}
 
-            	@Override
-            	public boolean isTerminated() {            	
-            		return isTerminated || super.isTerminated();
-            	}
-            	
-            	@Override
-            	public boolean canTerminate() {
-            		return !isTerminated();
-            	}
-            };
-            
-            process.setStreamsProxy(streamsProxy);
-            
-            Thread processThread = new Thread(new Runnable() {
-            	public void run() {
-                    try {
-						process.run();
-					} catch (Exception e) {
-						if(e instanceof VMRuntimeException == false) {
-							// QVT runtime exception are legal QVT transformation level errors
-							
-							IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(fgLaunchErrorStatus);
-							if(statusHandler != null) {
-								IStatus actualStatus = new Status(IStatus.ERROR, QVTiDebugPlugin.PLUGIN_ID, LAUNCH_ERROR_CODE, 
-														e.getMessage(), e.getMessage() == null ? e : null);
-								try {
-									statusHandler.handleStatus(actualStatus, configuration);
-								} catch (CoreException coreExc) {
-									getDebugCore().log(coreExc.getStatus());
-								}
-							}						
-							
-							getDebugCore().error(e);							
-						}
-					}
-					
-					try {
-						launch.terminate();
-					} catch (DebugException e) {
-						getDebugCore().log(e.getStatus());
-					}
-            	}
-            }, "QVTi Run"); //$NON-NLS-1$
-            
-            processThread.start();
-		}
-		catch(Exception e) {
-			throw new CoreException(MiscUtil.makeErrorStatus(e));
-		}
+	protected @NonNull QVTiExecutor createExecutor(@NonNull QVTiEnvironmentFactory envFactory, @NonNull Transformation transformation) {
+		return new BasicQVTcExecutor(envFactory, transformation);
 	}
 
 	protected @NonNull QVTiDebugCore getDebugCore() {
-		return QVTiDebugCore.INSTANCE;
+		return QVTiDebugCore.INSTANCE;				// FIXME QVTcDebugCore with back-traceability
 	}
-	
-/*	@Override
-	public IEolExecutableModule createModule() {
-		return new EvlModule();
-	}
-	
-	@Override
-	protected EolDebugger createDebugger() {
-		return new EvlDebugger();
-	}
-	
-	@Override
-	protected void preExecute(IEolExecutableModule module) throws CoreException, EolRuntimeException {
-		super.preExecute(module);
-//		((EvlModule)module).setUnsatisfiedConstraintFixer(new ValidationViewFixer());
-	} */
-}
 
+	protected @NonNull URI getTransformationURI(final ILaunchConfiguration configuration) throws CoreException {
+		Map<String, String> intermediatesMap = configuration.getAttribute(INTERMEDIATES_KEY, EMPTY_MAP);
+		String qvtiName = intermediatesMap.get(CompilerChain.QVTI_STEP);
+		return URI.createURI(qvtiName, true);
+	}
+}
