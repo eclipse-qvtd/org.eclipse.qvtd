@@ -11,7 +11,7 @@
   </genAnnotations>
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
     <details key="Root Visitor Class" value="example2.classes.util.Visitor"/>
-    <details key="Visitable Class" value="example2.classes.util.Visitable"/>
+    <details key="Visitable Interface" value="example2.classes.util.Visitable"/>
   </genAnnotations>
   <foreignModel>Classes.ecore</foreignModel>
   <genPackages prefix="Classes" basePackage="example2" disposableProviderFactory="true"

@@ -42,14 +42,8 @@ Workflow {
 
     component = GenerateASVisitors { resourceSet = resourceSet
     	projectName = "${projectName}"
-    	projectPrefix = "Classes"
     	superProjectName = ""
     	genModelFile = "${examplesFolder}/Classes.genmodel"
-    	javaFolder = "tests-gen"
-    	modelPackageName = "example2.classes"
-    	visitorPackageName = "example2.classes.util"
-    	visitorClassName = "Visitor"
-    	visitableClassName = "Visitable"
     }
     
     component = @SubGenerateAutoASModel { resourceSet = resourceSet
