@@ -10,66 +10,31 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTcRelations;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.Rule;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 public class RelationalTransformationToTracePackage extends AbstractRule
 {
-	private static class Factory extends AbstractRule.Factory
-	{
-		@Override
-		public @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation, @NonNull EObject eo) {
-			Rule rule = null;
-			if (eo instanceof RelationalTransformation) {	
-				rule = new RelationalTransformationToTracePackage(transformation, (RelationalTransformation) eo);
-				Rule tracedRule = transformation.getRecord(rule.getRuleBindings());
-				if (tracedRule != null)
-					rule = tracedRule;
-			}
-			return rule;
-		}
+	// Relation
+	private final @NonNull RelationalTransformation rt;	
 
-		@Override
-		public @Nullable Rule createRule(
-				@NonNull QvtrToQvtcTransformation transformation,
-				@NonNull List<EObject> eos) {
-			return null;
-		}
-	}
-	
-	private class SubRecord {
-		
-		// Relations
-		@NonNull private Relation r;
-		public org.eclipse.ocl.pivot.Class rc;
-		
-		public SubRecord(@NonNull Relation r) {
-			this.r = r;
-		}
-		
-	}
-	
-
-	public static final Rule.@NonNull Factory FACTORY = new Factory(); 
-	
-	private final @NonNull RelationalTransformation rt;
 	// Core
 	private org.eclipse.ocl.pivot.Package p;
 	
 	// Primitives
 	private String rtn;
 	
-	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
+	// Mapping
+	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relation2class = new HashMap<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class>();
 
 	public RelationalTransformationToTracePackage(@NonNull QvtrToQvtcTransformation transformation, @NonNull RelationalTransformation rt) {
 		super(transformation);
@@ -79,9 +44,12 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	@Override
 	public void check() {
 		rtn = rt.getName();
-		for (org.eclipse.qvtd.pivot.qvtbase.Rule r : rt.getRule()) {
-			assert r!= null;
-			subRecords.add(new SubRecord((Relation) r));
+		for (org.eclipse.qvtd.pivot.qvtbase.Rule r : ClassUtil.nullFree(rt.getRule())) {
+			if (r instanceof Relation) {
+				org.eclipse.ocl.pivot.Class rc = PivotFactory.eINSTANCE.createClass();
+				assert rc != null;
+				relation2class.put((Relation)r, rc);
+			}
 		}
 	}
 	
@@ -95,20 +63,14 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 		assert p != null;
 		transformation.addOrphan(p);
 		transformation.putTransformationToPackageTrace(rt, p);
-		for (SubRecord subRecord : subRecords) {
-			org.eclipse.ocl.pivot.Class rc = PivotFactory.eINSTANCE.createClass();
-			assert rc != null;
+		for (Relation r : relation2class.keySet()) {
+			org.eclipse.ocl.pivot.Class rc = relation2class.get(r);
 			p.getOwnedClasses().add(rc);
-			subRecord.rc = rc;
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.build.qvtrtoqvtc.impl.AbstractRule#setAttributes()
-	 */
 	@Override
-	public void setAttributes() {
-		
+	public void setAttributes() {	
 		p.setName("P" + rtn);
 		p.setURI(p.getName());
 	}
@@ -116,10 +78,10 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	@Override
 	public void where() {
 		QVTr2QVTcRelations relations = new QVTr2QVTcRelations(transformation);
-		for (SubRecord subRecord : subRecords) {
-			final org.eclipse.ocl.pivot.Class rc2 = subRecord.rc;
-			assert (rc2 != null);
-			relations.doRelationToTraceClass(subRecord.r, rc2);
+		for (Relation r : relation2class.keySet()) {
+			org.eclipse.ocl.pivot.Class rc = relation2class.get(r);
+			assert rc != null;
+			relations.doRelationToTraceClass(r, rc);
 		}
 	}
 }

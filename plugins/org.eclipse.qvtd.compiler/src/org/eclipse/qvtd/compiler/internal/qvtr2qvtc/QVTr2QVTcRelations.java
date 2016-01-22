@@ -18,14 +18,11 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.Class;
-import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.EnumLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
@@ -72,9 +69,9 @@ public class QVTr2QVTcRelations
 	
 	private @NonNull final QvtrToQvtcTransformation transformation;
 	
-	private @NonNull final String OPPOSITE_UPPER_SOURCE = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper";
-	private @NonNull final String OPPOSITE_ROLE_NAME_SOURCE = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
-	private @NonNull final String EMF_ANNOTATION_DETAIL_KEY = "body";
+//	private @NonNull final String OPPOSITE_UPPER_SOURCE = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper";
+//	private @NonNull final String OPPOSITE_ROLE_NAME_SOURCE = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
+//	private @NonNull final String EMF_ANNOTATION_DETAIL_KEY = "body";
 //	private @NonNull final String OPPOSITE_UPPER_VALUE = "1";
 //	private @NonNull final String OPPOSITE_ROLE_NAME_VALUE = "middle";
 	
@@ -86,8 +83,8 @@ public class QVTr2QVTcRelations
 	
 	/*
 	 * Add oppositeUpper and oppositeRoleName annotations
-	 */
-	private void addMiddleSynthesisAnnotations(Property p) {
+	 *
+	private void zzaddMiddleSynthesisAnnotations(Property p) {
 		Annotation oppositeUpper = PivotFactory.eINSTANCE.createAnnotation();
 		oppositeUpper.setName(OPPOSITE_UPPER_SOURCE);
 		Detail oppositeUpperDetail = PivotFactory.eINSTANCE.createDetail();
@@ -102,7 +99,7 @@ public class QVTr2QVTcRelations
 		oppositeRoleNameDetail.getValues().add("OPPOSITE_ROLE_NAME_VALUE");
 		oppositeRoleName.getOwnedDetails().add(oppositeRoleNameDetail);
 		p.getOwnedAnnotations().add(oppositeRoleName);
-	}
+	} */
 	
 	/* =============  Queries ============= */
 	// TODO bug 453863
@@ -464,8 +461,7 @@ public class QVTr2QVTcRelations
 		}
 	}
 	
-	public void doRelationToTraceClass(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class rc) {
-		
+	public void doRelationToTraceClass(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class rc) {	
 		transformation.putRelationTrace(r, rc);
 		// check
 		String rn = r.getName();
@@ -501,16 +497,14 @@ public class QVTr2QVTcRelations
 		String vn = rv.getName();
 		assert vn != null;
 		// init
-		Property a = transformation.findProperty(vn, rc);
-		addMiddleSynthesisAnnotations(a);
-		assert a != null;
+		/*Property a =*/ transformation.whenTraceProperty(rc, vn, c);
+//		addMiddleSynthesisAnnotations(a);
+//		assert a != null;
 	    // assign
-	    a.setType(c);
+//	    a.setType(c);
 	}
 
-	private void doSubObjectTemplateToTraceClassProps(@NonNull TemplateExp t, 
-			org.eclipse.ocl.pivot.@NonNull Class rc) {
-		
+	private void doSubObjectTemplateToTraceClassProps(@NonNull TemplateExp t, org.eclipse.ocl.pivot.@NonNull Class rc) {	
 		// check
 		if (t instanceof ObjectTemplateExp) {
 			doObjectTemplateToTraceClassProps((ObjectTemplateExp) t, rc);
@@ -518,9 +512,7 @@ public class QVTr2QVTcRelations
 		
 	}
 	
-	private void doObjectTemplateToTraceClassProps(@NonNull ObjectTemplateExp t,
-			org.eclipse.ocl.pivot.@NonNull Class rc) {
-		
+	private void doObjectTemplateToTraceClassProps(@NonNull ObjectTemplateExp t, org.eclipse.ocl.pivot.@NonNull Class rc) {	
 		// check
 		Variable tv = t.getBindsTo();
 		assert tv != null;
@@ -529,9 +521,9 @@ public class QVTr2QVTcRelations
 		String vn = tv.getName();
 		assert vn != null;
 		// init
-		Property a = transformation.findProperty(vn, rc);
+		Property a = transformation.whenTraceProperty(rc, vn, c);
 		assert a != null;
-		addMiddleSynthesisAnnotations(a); 
+//		addMiddleSynthesisAnnotations(a); 
 		// where
 		for (PropertyTemplateItem pt : t.getPart()) {
 			OCLExpression value = pt.getValue();
@@ -543,12 +535,10 @@ public class QVTr2QVTcRelations
 			}
 		}
 	    // assign
-	    a.setType(c);
+//	    a.setType(c);
 	}
 
-	private void doSubCollectionTemplateToTraceClassProps(@NonNull TemplateExp t,
-			org.eclipse.ocl.pivot.@NonNull Class rc) {
-		
+	private void doSubCollectionTemplateToTraceClassProps(@NonNull TemplateExp t, org.eclipse.ocl.pivot.@NonNull Class rc) {
 		// check
 		if (t instanceof CollectionTemplateExp) {
 			doCollectionTemplateToTraceClassProps((CollectionTemplateExp) t, rc);
@@ -556,9 +546,7 @@ public class QVTr2QVTcRelations
 	}
 
 
-	private void doCollectionTemplateToTraceClassProps(@NonNull CollectionTemplateExp t,
-			org.eclipse.ocl.pivot.@NonNull Class rc) {
-		
+	private void doCollectionTemplateToTraceClassProps(@NonNull CollectionTemplateExp t, org.eclipse.ocl.pivot.@NonNull Class rc) {	
 		// check
 		for (OCLExpression m : t.getMember()) {
 			if (m instanceof TemplateExp) {
@@ -606,10 +594,10 @@ public class QVTr2QVTcRelations
 				}
 				assert mt != null;
 				// init
-				CoreDomain cd = transformation.findCoreDomain(m, dn);
-				GuardPattern dg = transformation.findGuardPattern(cd);
-				BottomPattern db = transformation.findBottomPattern(cd);
-				BottomPattern mb = transformation.findBottomPattern(m);
+				CoreDomain cd = transformation.whenCoreDomain(m, dn);
+				GuardPattern dg = transformation.whenGuardPattern(cd);
+				BottomPattern db = transformation.whenBottomPattern(cd);
+				BottomPattern mb = transformation.whenBottomPattern(m);
 				// where
 				Set<Variable> whenVars = new HashSet<Variable>();
 				if (r.getWhen() != null)
@@ -992,14 +980,14 @@ public class QVTr2QVTcRelations
 				if (rt != dir.getTransformation())
 					return;
 				// init
-				GuardPattern mg = transformation.findGuardPattern(cm);
+				GuardPattern mg = transformation.whenGuardPattern(cm);
 				Predicate pd = transformation.createPredicate();
 				OperationCallExp ee = transformation.createOperationCallExp();
 				PropertyCallExp pe = transformation.createPropertyCallExp();
 				VariableExp ve1 = transformation.createVariableExp();
 				VariableExp ve2 = transformation.createVariableExp();
-				CoreDomain cd = transformation.findCoreDomain(cm, dn);
-				GuardPattern cmdg = transformation.findGuardPattern(cd);
+				CoreDomain cd = transformation.whenCoreDomain(cm, dn);
+				GuardPattern cmdg = transformation.whenGuardPattern(cd);
 				// where
 				BottomPattern mb = cm.getBottomPattern();
 				assert mb != null;
@@ -1068,9 +1056,9 @@ public class QVTr2QVTcRelations
 			if (!(key.getPart().contains(pp)) && !(e instanceof TemplateExp)) {
 				String pn = pp.getName();
 				// init
-				Mapping cm = transformation.findMapping(mt, m.getName()+"_forNonIdentityProp");
-				BottomPattern bp = transformation.findBottomPattern(cm);
-				transformation.findGuardPattern(cm);
+				Mapping cm = transformation.whenMapping(mt, m.getName()+"_forNonIdentityProp");
+				BottomPattern bp = transformation.whenBottomPattern(cm);
+				transformation.whenGuardPattern(cm);
 				PropertyAssignment a = transformation.createPropertyAssignment();
 				VariableExp ve = transformation.createVariableExp();
 				// where
@@ -1223,7 +1211,7 @@ public class QVTr2QVTcRelations
 		Variable v = (Variable) ve.getReferredVariable();
 		assert v != null;
 		// init
-		Variable vd = transformation.findVariable(mg, tc.getName()+vdId+"_v", tc);
+		Variable vd = transformation.whenVariable(mg, tc.getName()+vdId+"_v", tc);
 		Predicate mgp = transformation.createPredicate();
 		OperationCallExp ee = transformation.createOperationCallExp();
 		PropertyCallExp pe = transformation.createPropertyCallExp();
@@ -1271,7 +1259,7 @@ public class QVTr2QVTcRelations
 	public @NonNull RealizedVariable doRVarToMRealizedVar(@NonNull Variable rv, 
 			@NonNull CorePattern pattern) {
 		
-		RealizedVariable mv = transformation.findRealizedVariable(pattern, rv);
+		RealizedVariable mv = transformation.whenRealizedVariable(pattern, rv);
 		return mv;
 	}
 	
@@ -1286,7 +1274,7 @@ public class QVTr2QVTcRelations
 	public @NonNull Variable doRVarToMVar(@NonNull Variable rv, 
 			@NonNull CorePattern pattern) {
 
-		Variable mv = transformation.findVariable(pattern, rv);
+		Variable mv = transformation.whenVariable(pattern, rv);
 		return mv;
 	}
 	
@@ -1309,7 +1297,7 @@ public class QVTr2QVTcRelations
 		// when
 		Type tc = transformation.getRelationTrace(r);
 		assert tc != null;
-		RealizedVariable mv = transformation.findTraceRealizedVariable(p, rn+"_"+dn+"_v", tc);
+		RealizedVariable mv = transformation.whenRealizedVariable(p, rn+"_"+dn+"_v", tc);
 		return mv;
 	}
 	
@@ -1350,10 +1338,10 @@ public class QVTr2QVTcRelations
 				}
 				assert mt != null;
 				// init
-				CoreDomain cd = transformation.findCoreDomain(m, dn);
-				GuardPattern dg = transformation.findGuardPattern(cd);
-				BottomPattern db = transformation.findBottomPattern(cd);
-				BottomPattern mb = transformation.findBottomPattern(m);
+				CoreDomain cd = transformation.whenCoreDomain(m, dn);
+				GuardPattern dg = transformation.whenGuardPattern(cd);
+				BottomPattern db = transformation.whenBottomPattern(cd);
+				BottomPattern mb = transformation.whenBottomPattern(m);
 				// where
 				Set<Variable> whenVars = new HashSet<Variable>();
 				if (r.getWhen() != null)
@@ -1425,7 +1413,7 @@ public class QVTr2QVTcRelations
 		Variable dv = rd.getRootVariable().get(0);
 		assert dv != null;
 		// init
-		Variable vd = transformation.findVariable(mg, tc.getName()+"_v", tc);
+		Variable vd = transformation.whenVariable(mg, tc.getName()+"_v", tc);
 		Predicate pd = transformation.createPredicate();
 		OperationCallExp ee = transformation.createOperationCallExp();
 		PropertyCallExp pe = transformation.createPropertyCallExp();

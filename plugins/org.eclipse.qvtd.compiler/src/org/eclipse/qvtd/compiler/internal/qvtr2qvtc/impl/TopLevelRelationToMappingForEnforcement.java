@@ -163,16 +163,16 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		for (SubRecord subRecord : subRecords) {
 			final Transformation mt2 = mt;
 			if (mt2 != null) {
-				Mapping m = transformation.findMapping(mt2, rn+'_'+subRecord.dn);
+				Mapping m = transformation.whenMapping(mt2, rn+'_'+subRecord.dn);
 				assert m != null;
 				subRecord.m = m;
-				GuardPattern mg = transformation.findGuardPattern(m);
+				GuardPattern mg = transformation.whenGuardPattern(m);
 				assert mg != null;
 				subRecord.mg = mg;
-				BottomPattern mb = transformation.findBottomPattern(m);
+				BottomPattern mb = transformation.whenBottomPattern(m);
 				assert mb != null;
 				subRecord.mb = mb;
-				CoreDomain md = transformation.findCoreDomain(m, subRecord.dn);
+				CoreDomain md = transformation.whenCoreDomain(m, subRecord.dn);
 				assert md != null;
 				subRecord.md = md;
 				TypedModel mdir = null;
@@ -186,10 +186,10 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 				}
 				assert mdir != null;
 				subRecord.mdir = mdir;
-				GuardPattern dg = transformation.findGuardPattern(md);
+				GuardPattern dg = transformation.whenGuardPattern(md);
 				assert dg != null;
 				subRecord.dg = dg;
-				BottomPattern db = transformation.findBottomPattern(md);
+				BottomPattern db = transformation.whenBottomPattern(md);
 				assert db != null;
 				subRecord.db = db;
 			} else {
