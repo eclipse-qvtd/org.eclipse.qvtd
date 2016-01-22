@@ -39,11 +39,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.InvokedRelationToMappingForEnforcement;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.QVTcoreBaseBottomPatternKey;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.QVTcoreBaseCoreDomainKey;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.QVTcoreBaseGuardPatternKey;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.QVTcoreMappingKey;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.QVTcoreVariableKey;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.RelationalTransformationToMappingTransformation;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.RelationalTransformationToTracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.RuleBindings;
@@ -90,29 +85,71 @@ public class QvtrToQvtcTransformation
 	private final @NonNull Map<Relation, org.eclipse.ocl.pivot.Class> relationToTraceClass = new HashMap<Relation, org.eclipse.ocl.pivot.Class>();
 	private final @NonNull Map<RelationalTransformation, org.eclipse.ocl.pivot.Package>  transformationToPackage = new HashMap<RelationalTransformation, org.eclipse.ocl.pivot.Package>();
 	// Un-navigable opposites
-	private final Map<Type, Key> keyForType = new HashMap<Type, Key>();
-	private final Map <Variable, TemplateExp> templateExpForVaraible = new HashMap<Variable, TemplateExp>();
+	//
+	//	The Key that identifies each Class.
+	// FIXME can there be two keys for the sane Class?
+	//
+	private final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key> class2key = new HashMap<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key>();
+	private final @NonNull Map<@NonNull Variable, @NonNull TemplateExp> variable2templateExp = new HashMap<@NonNull Variable, @NonNull TemplateExp>();
 	private final Map<Relation, List<RelationCallExp>> relationCallExpsForRelation = new HashMap<Relation, List<RelationCallExp>>();
 	private final Map<RelationCallExp, Relation> invokingRelationsForRelationCallExp = new HashMap<RelationCallExp, Relation>();
 	
 	private boolean doGlobalSearch = true;
 	private final @NonNull EnvironmentFactory environmentFactory;
-
-	private QVTcoreMappingKey mappings = new QVTcoreMappingKey();
 	
-	private QVTcoreBaseGuardPatternKey guardPatterns = new QVTcoreBaseGuardPatternKey();
+	private @NonNull CoreModel coreModel;
 
-	private QVTcoreBaseBottomPatternKey botttomPatterns = new QVTcoreBaseBottomPatternKey();
-	
-	private QVTcoreBaseCoreDomainKey coreDomains = new QVTcoreBaseCoreDomainKey();
+	/**
+	 * The lazily created Core BottomPattern for each Core Area.
+	 */
+	private @NonNull Map<@NonNull Area, @NonNull BottomPattern> area2bottomPattern = new HashMap<@NonNull Area, @NonNull BottomPattern>();
 
-	private PivotPropertyKey properties = new PivotPropertyKey();
+	/**
+	 * The lazily created Core GuardPattern for each Core Area.
+	 */
+	private @NonNull Map<@NonNull Area, @NonNull GuardPattern> area2guardPattern = new HashMap<@NonNull Area, @NonNull GuardPattern>();
+	
+	/**
+	 * The lazily created named Properties in each Core Class.
+	 */
+	private @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Map<@NonNull String, @NonNull Property>> class2name2property
+			= new HashMap<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Map<@NonNull String, @NonNull Property>>();	
+	
+	/**
+	 * The lazily created named RealizedVariables in each CorePattern.
+	 */
+	private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull String, @NonNull RealizedVariable>> pattern2name2realizedVariable
+			= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull String, @NonNull RealizedVariable>>();	
+	
+	/**
+	 * The lazily created named RealizedVariables in each CorePattern.
+	 */
+	private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull String, @NonNull Variable>> pattern2name2variable
+			= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull String, @NonNull Variable>>();	
+	
+	/**
+	 * The lazily created RealizedVariables per Relation Variable in each CorePattern.
+	 */
+	private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull RealizedVariable>> pattern2variable2realizedVariable
+			= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull RealizedVariable>>();
 
-	private QVTcoreVariableKey variables = new QVTcoreVariableKey();
+	/**
+	 * The lazily created Core Variable for each Relation Variable in each CorePattern.
+	 */
+	private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull Variable>> pattern2variable2variable
+			= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull Variable>>();
 	
-	private QVTcoreVariableKey realizedVariables = new QVTcoreVariableKey();
-	private CoreModel coreModel;
-	
+	/**
+	 * The lazily created named CoreDomain in each Rule.
+	 */
+	private @NonNull Map<org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule, @NonNull Map<@NonNull String, @NonNull CoreDomain>> rule2name2coreDomain
+			= new HashMap<org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule, @NonNull Map<@NonNull String, @NonNull CoreDomain>>();	
+
+	/**
+	 * The lazily created named Core mappings for each transformation.
+	 */
+	private @NonNull Map<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>> transformation2name2mapping
+			= new HashMap<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>>();	
 	
 	public QvtrToQvtcTransformation(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrModel, @NonNull Resource qvtcModel, @Nullable Resource qvtcTraceModel) {
 		
@@ -128,13 +165,18 @@ public class QvtrToQvtcTransformation
 		while(it.hasNext()) {
 			EObject eo = it.next();
 			if (eo instanceof Key) {
-				keyForType.put(((Key)eo).getIdentifies(), (Key) eo);
+				Key key = (Key)eo;
+				org.eclipse.ocl.pivot.Class identifies = key.getIdentifies();
+				assert identifies != null;
+				class2key.put(identifies, key);
 			}
 			// Populate bindsTo of DomainPattern
 			if (eo instanceof Pattern) {
 				Pattern p = (Pattern) eo;
 				for (Predicate pred : p.getPredicate()) {
-					p.getBindsTo().addAll(getVarsOfExp(pred.getConditionExpression()));
+					OCLExpression conditionExpression = pred.getConditionExpression();
+					assert conditionExpression != null;
+					p.getBindsTo().addAll(getVarsOfExp(conditionExpression));
 				}
 				if (eo instanceof DomainPattern) {
 					DomainPattern dp = (DomainPattern) eo;
@@ -147,7 +189,9 @@ public class QvtrToQvtcTransformation
 			}
 			if (eo instanceof TemplateExp) {
 				TemplateExp te = (TemplateExp) eo;
-				templateExpForVaraible.put(te.getBindsTo(), te);
+				Variable bindsTo = te.getBindsTo();
+				assert bindsTo != null;
+				variable2templateExp.put(bindsTo, te);
 			}
 			if (eo instanceof RelationCallExp) {
 				RelationCallExp ri = (RelationCallExp) eo; 
@@ -285,168 +329,155 @@ public class QvtrToQvtcTransformation
 		}
 	}
 	
-	public @NonNull BottomPattern findBottomPattern(@NonNull Area area) {
-		
-		BottomPattern mb = null;
-		if (doGlobalSearch) {
-			mb = botttomPatterns.get(area);
+	public @NonNull BottomPattern findBottomPattern(@NonNull Area coreArea) {
+		BottomPattern bottomPattern = area2bottomPattern.get(coreArea);
+		if (bottomPattern == null) {
+			bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+			bottomPattern.setArea(coreArea);
+//			bottomPattern.getBindsTo();
+			area2bottomPattern.put(coreArea, bottomPattern);
 		}
-		if (mb == null) {
-			mb = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
-			assert mb!= null;
-			mb.setArea(area);
-			mb.getBindsTo();
-			botttomPatterns.add(mb);
-			//addOrphan(mb);
-		}
-		return mb;
+		return bottomPattern;
 	}
 
-	public @NonNull CoreDomain findCoreDomain(@NonNull String name,
-			org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule rule) {
-		
-		CoreDomain md = null;
-		if (doGlobalSearch) {
-			md = coreDomains.get(name, rule);
+	public @NonNull CoreDomain findCoreDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule coreRule, @NonNull String name) {
+		Map<@NonNull String, @NonNull CoreDomain> name2coreDomain = rule2name2coreDomain.get(coreRule);
+		if (name2coreDomain == null) {
+			name2coreDomain = new HashMap<@NonNull String, @NonNull CoreDomain>();
+			rule2name2coreDomain.put(coreRule, name2coreDomain);
 		}
-		if (md == null) {
-			md = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
-			assert md!= null;
-			md.setName(name);
-			md.setRule(rule);
-			coreDomains.add(md);
-			//addOrphan(md);
+		CoreDomain coreDomain = name2coreDomain.get(name);
+		if (coreDomain == null) {
+			coreDomain = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+			coreDomain.setName(name);
+			coreDomain.setRule(coreRule);
+			name2coreDomain.put(name, coreDomain);
 		}
-		return md;
+		return coreDomain;
 	}
 	
-	public @NonNull GuardPattern findGuardPattern(@NonNull Area area) {
-		
-		GuardPattern mg = null;
-		if (doGlobalSearch) {
-			 mg = guardPatterns.get(area);
+	public @NonNull GuardPattern findGuardPattern(@NonNull Area coreArea) {
+		GuardPattern guardPattern = area2guardPattern.get(coreArea);
+		if (guardPattern == null) {
+			guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+			guardPattern.setArea(coreArea);
+			area2guardPattern.put(coreArea, guardPattern);
 		}
-		if (mg == null) {
-			mg = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
-			assert mg!= null;
-			mg.setArea(area);
-			guardPatterns.add(mg);
-			//addOrphan(mg);
-		}
-		
-		return mg;
+		return guardPattern;
 	}
 
-	public @NonNull Mapping findMapping(@NonNull String mn, @NonNull Transformation mt) {
-		
-		Mapping m = null;
-		if (doGlobalSearch) {
-			m = mappings.get(mn, mt);
+	public @NonNull Mapping findMapping(@NonNull Transformation coreTransformation, @NonNull String name) {
+		Map<@NonNull String, @NonNull Mapping> name2mapping = transformation2name2mapping.get(coreTransformation);
+		if (name2mapping == null) {
+			name2mapping = new HashMap<@NonNull String, @NonNull Mapping>();
+			transformation2name2mapping.put(coreTransformation, name2mapping);
 		}
-		if (m == null) {
-			m = QVTcoreFactory.eINSTANCE.createMapping();
-			assert m!= null;
-			m.setName(mn);
-			m.setTransformation(mt);
-			mappings.add(m);
+		Mapping coreMapping = name2mapping.get(name);
+		if (coreMapping == null) {
+			coreMapping = QVTcoreFactory.eINSTANCE.createMapping();
+			coreMapping.setName(name);
+			coreMapping.setTransformation(coreTransformation);
+			name2mapping.put(name, coreMapping);
 		}
-		return m;
+		return coreMapping;
 	}
 	
-	public Property findProperty(@NonNull String name, org.eclipse.ocl.pivot.@NonNull Class owningType) {
-		
-		Property p = null;
-		if (doGlobalSearch) {
-			p = properties.get(name, owningType);
+	public Property findProperty(@NonNull String name, org.eclipse.ocl.pivot.@NonNull Class coreClass) {
+		Map<@NonNull String, @NonNull Property> name2property = class2name2property.get(coreClass);
+		if (name2property == null) {
+			name2property = new HashMap<@NonNull String, @NonNull Property>();
+			class2name2property.put(coreClass, name2property);
 		}
-		if (p == null) {
-			p = PivotFactory.eINSTANCE.createProperty();
-			assert p!= null;
-			p.setName(name);
-			p.setOwningClass(owningType);
-			properties.add(p);
+		Property coreProperty = name2property.get(name);
+		if (coreProperty == null) {
+			coreProperty = PivotFactory.eINSTANCE.createProperty();
+			coreProperty.setName(name);
+			name2property.put(name, coreProperty);
+			coreProperty.setOwningClass(coreClass);
 		}
-		return p;
+		return coreProperty;
 	}
 
-	public @NonNull RealizedVariable findRealizedVariable(@NonNull Variable sv,
-			@NonNull CorePattern pattern) {
-		
-		RealizedVariable rv = null;
-		String name = sv.getName();
-		Type type = sv.getType();
-		assert (name != null) && (type != null);
-		if (doGlobalSearch) {
-			rv = (RealizedVariable) realizedVariables.get(name, type, pattern);
+	public @NonNull RealizedVariable findRealizedVariable(@NonNull CorePattern corePattern, @NonNull Variable relationVariable) {	
+		Map<@NonNull Variable, @NonNull RealizedVariable> variable2realizedVariable = pattern2variable2realizedVariable.get(corePattern);
+		if (variable2realizedVariable == null) {
+			variable2realizedVariable = new HashMap<@NonNull Variable, @NonNull RealizedVariable>();
+			pattern2variable2realizedVariable.put(corePattern, variable2realizedVariable);
 		}
-		if (rv == null) {
-			rv = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
-			assert rv!= null;
-			rv.setName(name);
-			rv.setType(type);
-			realizedVariables.add(rv, pattern);
-			pattern.getVariable().add(rv);
-			putVariableTrace(sv, rv);
+		RealizedVariable realizedVariable = variable2realizedVariable.get(relationVariable);
+		if (realizedVariable == null) {
+			String name = relationVariable.getName();
+			Type type = relationVariable.getType();
+			assert (name != null) && (type != null);
+			realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+			realizedVariable.setName(name);
+			realizedVariable.setType(type);
+			variable2realizedVariable.put(relationVariable, realizedVariable);
+			corePattern.getVariable().add(realizedVariable);
+			putVariableTrace(relationVariable, realizedVariable);
 		}
-		return rv;
+		return realizedVariable;
 	}
 	
-	public @NonNull RealizedVariable findTraceRealizedVariable(@NonNull String name,
-			@NonNull Type type, @NonNull CorePattern pattern) {
-		
-		RealizedVariable rv = null;
-		if (doGlobalSearch) {
-			rv = (RealizedVariable) realizedVariables.get(name, type, pattern);
+	public @NonNull RealizedVariable findTraceRealizedVariable(@NonNull CorePattern corePattern, @NonNull String name, @NonNull Type type) {	
+		Map<@NonNull String, @NonNull RealizedVariable> name2realizedVariable = pattern2name2realizedVariable.get(corePattern);
+		if (name2realizedVariable == null) {
+			name2realizedVariable = new HashMap<@NonNull String, @NonNull RealizedVariable>();
+			pattern2name2realizedVariable.put(corePattern, name2realizedVariable);
 		}
-		if (rv == null) {
-			rv = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
-			assert rv!= null;
-			rv.setName(name);
-			rv.setType(type);
-			realizedVariables.add(rv, pattern);
-			pattern.getVariable().add(rv);
+		RealizedVariable realizedVariable = name2realizedVariable.get(name);
+		if (realizedVariable == null) {
+			realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+			realizedVariable.setName(name);
+			realizedVariable.setType(type);
+			name2realizedVariable.put(name, realizedVariable);
+			corePattern.getVariable().add(realizedVariable);
 		}
-		return rv;
+		else {
+			assert realizedVariable.getType() == type;
+		}
+		return realizedVariable;
 	}
 	
-	public @NonNull Variable findVariable(@NonNull Variable sv,
-			@NonNull CorePattern pattern) {
-		
-		Variable v = null;
-		String name = sv.getName();
-		Type type = sv.getType();
-		assert (name != null) && (type != null);
-		if (doGlobalSearch) {
-			v = variables.get(name, type, pattern);
+	public @NonNull Variable findVariable(@NonNull CorePattern corePattern, @NonNull Variable relationVariable) {
+		Map<@NonNull Variable, @NonNull Variable> variable2variable = pattern2variable2variable.get(corePattern);
+		if (variable2variable == null) {
+			variable2variable = new HashMap<@NonNull Variable, @NonNull Variable>();
+			pattern2variable2variable.put(corePattern, variable2variable);
 		}
-		if (v == null) {
-			v = PivotFactory.eINSTANCE.createVariable();
-			assert v!= null;
-			v.setName(name);
-			v.setType(type);
-			variables.add(v, pattern);
-			pattern.getVariable().add(v);
-			putVariableTrace(sv, v);
+		Variable coreVariable = variable2variable.get(relationVariable);
+		if (coreVariable == null) {
+			String name = relationVariable.getName();
+			Type type = relationVariable.getType();
+			assert (name != null) && (type != null);
+			coreVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+			coreVariable.setName(name);
+			coreVariable.setType(type);
+			variable2variable.put(relationVariable, coreVariable);
+			corePattern.getVariable().add(coreVariable);
+			putVariableTrace(relationVariable, coreVariable);
 		}
-		return v;
+		return coreVariable;
 	}
 	
-	public @NonNull Variable findVariable(@NonNull String name,
-			@NonNull Type type, @NonNull CorePattern pattern) {
-		
-		Variable v = null;
-		if (doGlobalSearch) {
-			v = variables.get(name, type, pattern);
+	public @NonNull Variable findVariable(@NonNull CorePattern corePattern, @NonNull String name, @NonNull Type type) {
+		Map<@NonNull String, @NonNull Variable> name2variable = pattern2name2variable.get(corePattern);
+		if (name2variable == null) {
+			name2variable = new HashMap<@NonNull String, @NonNull Variable>();
+			pattern2name2variable.put(corePattern, name2variable);
 		}
-		if (v == null) {
-			v = PivotFactory.eINSTANCE.createVariable();
-			assert v!= null;
-			v.setName(name);
-			v.setType(type);
-			variables.add(v, pattern);
-			pattern.getVariable().add(v);
+		Variable coreVariable = name2variable.get(name);
+		if (coreVariable == null) {
+			coreVariable = PivotFactory.eINSTANCE.createVariable();
+			coreVariable.setName(name);
+			coreVariable.setType(type);
+			name2variable.put(name, coreVariable);
+			corePattern.getVariable().add(coreVariable);
 		}
-		return v;
+		else {
+			assert coreVariable.getType() == type;
+		}
+		return coreVariable;
 	}
 
 
@@ -455,7 +486,7 @@ public class QvtrToQvtcTransformation
 	}
 	
 	public @Nullable Key getKeyforType(@NonNull Type type) {
-		return keyForType.get(type);
+		return class2key.get(type);
 	}
 	
 	/**
@@ -468,12 +499,15 @@ public class QvtrToQvtcTransformation
 		return environmentFactory.getStandardLibrary();
 	}
 	
-	private Set<Variable> getNestedBindToVariable(ObjectTemplateExp ote) {
-		Set<Variable> vars = new HashSet<Variable>();
+	private @NonNull Set<@NonNull Variable> getNestedBindToVariable(@NonNull ObjectTemplateExp ote) {
+		Set<@NonNull Variable> vars = new HashSet<@NonNull Variable>();
 		for (PropertyTemplateItem p : ote.getPart()) {
 			OCLExpression e = p.getValue();
+			assert e != null;
 			if (e instanceof ObjectTemplateExp) {
-				vars.add(((ObjectTemplateExp)e).getBindsTo());
+				Variable bindsTo = ((ObjectTemplateExp)e).getBindsTo();
+				assert bindsTo != null;
+				vars.add(bindsTo);
 				vars.addAll(getNestedBindToVariable((ObjectTemplateExp) e));
 			} else {
 				vars.addAll(getVarsOfExp(e));
@@ -523,7 +557,7 @@ public class QvtrToQvtcTransformation
 	}
 	
 
-	private Set<Variable> getVarsOfExp(OCLExpression e) {
+	private @NonNull Set<@NonNull Variable> getVarsOfExp(@NonNull OCLExpression e) {
 		QVTr2QVTcRelations rels = new QVTr2QVTcRelations(this);
 		return rels.getVarsOfExp(e);
 	}
@@ -577,7 +611,7 @@ public class QvtrToQvtcTransformation
 	}
 
 
-	public void saveTrace(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<?, ?> options) throws IOException {
+	public void saveTrace(@NonNull Resource asResource, @NonNull Collection<@NonNull ? extends EObject> eObjects, @NonNull Map<?, ?> options) throws IOException {
         Model root = PivotFactory.eINSTANCE.createModel();
         root.setExternalURI(asResource.getURI().toString());
         asResource.getContents().add(root);
@@ -598,7 +632,7 @@ public class QvtrToQvtcTransformation
 		asResource.save(options);
 	}
 	
-	public void saveCore(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<?, ?> options) throws IOException {
+	public void saveCore(@NonNull Resource asResource, @NonNull Collection<@NonNull ? extends EObject> eObjects, @NonNull Map<?, ?> options) throws IOException {
         this.coreModel.setExternalURI(asResource.getURI().toString());
         // Copy imports
         
@@ -624,9 +658,8 @@ public class QvtrToQvtcTransformation
 	}
 
 	
-	public TemplateExp getTemplateExpression(Variable dv) {
-		
-		return templateExpForVaraible.get(dv);
+	public @Nullable TemplateExp getTemplateExpression(@NonNull Variable dv) {		
+		return variable2templateExp.get(dv);
 	}
 
 

@@ -70,13 +70,10 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 
 	public static final Rule.@NonNull Factory FACTORY = new Factory(); 
 	
-	// Relations
-	private static final RuleBindings.@NonNull KeySet RULE_BINDINGS = new RuleBindings.KeySet();
-	public static final RuleBindings.@NonNull RuleKey<@NonNull RelationalTransformation> RELATIONS_rt = RULE_BINDINGS.createRoot((RelationalTransformation)null, "rt");
-//	private static final RuleBindings.@NonNull RuleKey<TypedModel> RELATIONS_rtm = RULE_BINDINGS.create((TypedModel)null, "rtm");
 	
 	// Core
 	Transformation mt = null;
+	private final @NonNull RelationalTransformation rt;
 	org.eclipse.ocl.pivot.Package p = null;
 	TypedModel mmtm = null;
 	//public static final RuleBindings.@NonNull RuleKey<Transformation> CORE_mt = RULE_BINDINGS.create((Transformation)null, "mt");
@@ -93,12 +90,11 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	
 	public RelationalTransformationToMappingTransformation(@NonNull QvtrToQvtcTransformation transformation, @NonNull RelationalTransformation rt) {
 		super(transformation);
-		ruleBindings.put(RELATIONS_rt, rt);
+		this.rt = rt;
 	}
 
 	@Override
 	public void check() {
-		RelationalTransformation rt = ruleBindings.get(RELATIONS_rt);
 		rtn = rt.getName();
 		assert (rt != null) && (mt == null);
 		p = transformation.getTransformationToPackageTrace(rt);
@@ -113,11 +109,6 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	
 	public @Nullable Transformation getCore() {
 		return mt;
-	}
-
-	@Override
-	public RuleBindings.@NonNull KeySet getRuleBindingsKeys() {
-		return RULE_BINDINGS;
 	}
 
 	@Override
@@ -160,8 +151,6 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	 */
 	@Override
 	public boolean when() {
-		RelationalTransformation rt = ruleBindings.get(RELATIONS_rt);
-		assert rt != null;
 		RelationalTransformationToTracePackage whenRule = new RelationalTransformationToTracePackage(transformation, rt); 
 		RuleBindings whenBindings = whenRule.getRuleBindings();
 		RelationalTransformationToTracePackage whenRuleRecord = (RelationalTransformationToTracePackage) transformation.getRecord(whenBindings);

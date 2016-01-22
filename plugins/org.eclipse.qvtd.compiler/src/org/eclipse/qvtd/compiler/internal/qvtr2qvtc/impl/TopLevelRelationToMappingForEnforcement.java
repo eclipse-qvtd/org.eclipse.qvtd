@@ -20,10 +20,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTcRelations;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -66,36 +68,36 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	private class SubRecord 
 	{
 		// Relations
-		@NonNull private RelationDomain rd;
-		@NonNull private TypedModel dir;
-		@NonNull private String tmn;
-		@NonNull private String dn;
-		@NonNull private List<org.eclipse.ocl.pivot.Package> up;
-		@NonNull private ObjectTemplateExp te;
-		@NonNull private Variable tev;
-		@NonNull private List<RelationDomain> rOppositeDomains;
-		@NonNull private List<Variable> domainVars;
+		private @NonNull RelationDomain rd;
+//		private @NonNull TypedModel dir;
+		private @NonNull String tmn;
+		private @NonNull String dn;
+		private @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> up;
+		private @NonNull ObjectTemplateExp te;
+		private @NonNull Variable tev;
+		private @NonNull List<@NonNull RelationDomain> rOppositeDomains;
+		private @NonNull List<@NonNull Variable> domainVars;
 		
 		// Core
-		@Nullable private Mapping m;
-		@Nullable private GuardPattern mg;
-		@Nullable private BottomPattern mb;
-		@Nullable private RealizedVariable tcv;
-		@Nullable private CoreDomain md;
-		@Nullable private TypedModel mdir;
-		@Nullable private GuardPattern dg;
-		@Nullable private BottomPattern db;
-		@Nullable private RealizedVariable mtev;
-//		@Nullable public List<Variable> mbvars;
+		private @Nullable Mapping m;
+		private @Nullable GuardPattern mg;
+		private @Nullable BottomPattern mb;
+		private @Nullable RealizedVariable tcv;
+		private @Nullable CoreDomain md;
+		private @Nullable TypedModel mdir;
+		private @Nullable GuardPattern dg;
+		private @Nullable BottomPattern db;
+		private @Nullable RealizedVariable mtev;
+//		public @Nullable List<@NonNull Variable> mbvars;
 		
 		
 		public SubRecord(@NonNull RelationDomain rd, @NonNull TypedModel dir,
 				@NonNull String tmn, @NonNull String dn,
-				@NonNull List<org.eclipse.ocl.pivot.Package> up,@NonNull List<Variable> domainVars,
+				@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> up,@NonNull List<@NonNull Variable> domainVars,
 				@NonNull ObjectTemplateExp te, @NonNull Variable tev,
-				@NonNull List<RelationDomain> rOppositeDomains) {
+				@NonNull List<@NonNull RelationDomain> rOppositeDomains) {
 			this.rd = rd;
-			this.dir = dir;
+//			this.dir = dir;
 			this.tmn = tmn;
 			this.dn = dn;
 			this.up = up;
@@ -107,9 +109,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		
 	}
 
-	// Relations
-	private static final RuleBindings.@NonNull KeySet RULE_BINDINGS = new RuleBindings.KeySet();
-	private static final RuleBindings.@NonNull RuleKey<Relation> RELATIONS_r = RULE_BINDINGS.createRoot((Relation)null, "r");
+	private final @NonNull Relation r;
 
 	private String rn;
 
@@ -122,19 +122,17 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	public TopLevelRelationToMappingForEnforcement(@NonNull QvtrToQvtcTransformation transformation,
 			@NonNull Relation r) {
 		super(transformation);
-		ruleBindings.put(RELATIONS_r, r);
+		this.r = r;
 	}
 
 	// One Mapping per domain
 	@Override
 	public void check() {
-		Relation r = ruleBindings.get(RELATIONS_r);
-		assert (r != null);
 		rn = r.getName();
 		if (r.isIsTopLevel()) {
 			for (Domain d : r.getDomain()) {
 				RelationDomain rd = (RelationDomain) d;
-				if (rd.isIsEnforceable() && rd.getPattern().get(0).getTemplateExpression() instanceof ObjectTemplateExp) {
+				if (rd.isIsEnforceable() && QVTr2QVTcRelations.getDomainPattern(rd).getTemplateExpression() instanceof ObjectTemplateExp) {
 					//Mapping m = QVTcoreFactory.eINSTANCE.createMapping();
 					String dn = rd.getName();
 					assert dn != null;
@@ -143,7 +141,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 					assert tmn != null;
 					List<org.eclipse.ocl.pivot.Package> up = dir.getUsedPackage();
 					assert up != null;
-					DomainPattern dp = rd.getPattern().get(0);
+					DomainPattern dp = QVTr2QVTcRelations.getDomainPattern(rd);
 					List<Variable> domainVars = dp.getBindsTo();
 					ObjectTemplateExp te = (ObjectTemplateExp) dp.getTemplateExpression();
 					Variable tev = te.getBindsTo();
@@ -159,20 +157,13 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			}
 		}
 	}
-
-	@Override
-	public RuleBindings.@NonNull KeySet getRuleBindingsKeys() {
-		return RULE_BINDINGS;
-	}
 	
 	@Override
 	public void instantiateOutput() {
-		Relation r = ruleBindings.get(RELATIONS_r);
-		assert (r != null);
 		for (SubRecord subRecord : subRecords) {
 			final Transformation mt2 = mt;
 			if (mt2 != null) {
-				Mapping m = transformation.findMapping(rn+'_'+subRecord.dn, mt2);
+				Mapping m = transformation.findMapping(mt2, rn+'_'+subRecord.dn);
 				assert m != null;
 				subRecord.m = m;
 				GuardPattern mg = transformation.findGuardPattern(m);
@@ -181,7 +172,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 				BottomPattern mb = transformation.findBottomPattern(m);
 				assert mb != null;
 				subRecord.mb = mb;
-				CoreDomain md = transformation.findCoreDomain(subRecord.dn, m);
+				CoreDomain md = transformation.findCoreDomain(m, subRecord.dn);
 				assert md != null;
 				subRecord.md = md;
 				TypedModel mdir = null;
@@ -229,8 +220,6 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	
 	@Override
 	public boolean when() {
-		Relation r = ruleBindings.get(RELATIONS_r);
-		assert r != null;
 		RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
 		assert rt != null;
 		// This is the same code the factory has, and IMHO its better encapsulated by the factory.
@@ -240,7 +229,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		RuleBindings whenBindings = whenRule.getRuleBindings();
 		RelationalTransformationToMappingTransformation whenRuleRecord = (RelationalTransformationToMappingTransformation) transformation.getRecord(whenBindings);
 		if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
-			mt = (Transformation) whenRuleRecord.getCore();
+			mt = whenRuleRecord.getCore();
 			assert mt != null;
 			return true;
 		}
@@ -250,40 +239,37 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	@Override
 	public void where() {
 		QVTr2QVTcRelations relations = new QVTr2QVTcRelations(transformation);
-		Relation r = ruleBindings.get(RELATIONS_r);
-		assert r != null;
-		Set<Predicate> rpSet = new HashSet<Predicate>();
-		Set<Variable> whereVars = new HashSet<Variable>();
-		Set<Variable> whenVars = new HashSet<Variable>();
+		Set<@NonNull Predicate> rpSet = new HashSet<@NonNull Predicate>();
+		Set<@NonNull Variable> whereVars = new HashSet<@NonNull Variable>();
+		Set<@NonNull Variable> whenVars = new HashSet<@NonNull Variable>();
 		if (r.getWhen() != null) {
-			whenVars.addAll(r.getWhen().getBindsTo());
+			whenVars.addAll(ClassUtil.nullFree(r.getWhen().getBindsTo()));
 		}
-		if (r.getWhere() != null) {
-			rpSet.addAll(relations.rejectRelationCallPredicates(r.getWhere().getPredicate()));
-			whereVars.addAll(r.getWhere().getBindsTo());
+		Pattern rWhere = r.getWhere();
+		if (rWhere != null) {
+			rpSet.addAll(relations.rejectRelationCallPredicates(ClassUtil.nullFree(rWhere.getPredicate())));
+			whereVars.addAll(ClassUtil.nullFree(rWhere.getBindsTo()));
 		}
-		Set<Variable> sharedDomainVars = relations.getSharedDomainVars(r);
-		Set<Variable> allDomainVars = relations.getAllDomainVars(r);
-		Set<Variable> unsharedWhereVars = new HashSet<Variable>(whereVars);
+		Set<@NonNull Variable> sharedDomainVars = relations.getSharedDomainVars(r);
+		Set<@NonNull Variable> allDomainVars = relations.getAllDomainVars(r);
+		Set<@NonNull Variable> unsharedWhereVars = new HashSet<@NonNull Variable>(whereVars);
 		unsharedWhereVars.removeAll(whenVars);
 		unsharedWhereVars.removeAll(allDomainVars);
 		unsharedWhereVars.addAll(sharedDomainVars);
-		Set<Variable> unsharedWhenVars = new HashSet<Variable>(whenVars);
+		Set<@NonNull Variable> unsharedWhenVars = new HashSet<@NonNull Variable>(whenVars);
 		unsharedWhenVars.removeAll(allDomainVars);
 		for (SubRecord subRecord : subRecords) {
 			Set<Variable> oppositeDomainVars = new HashSet<Variable>();
 			for (Domain d : subRecord.rOppositeDomains) {
-				if (((RelationDomain)d).getPattern() != null) {
-					oppositeDomainVars.addAll(((RelationDomain)d).getPattern().get(0).getBindsTo());
-				}
+				oppositeDomainVars.addAll(QVTr2QVTcRelations.getDomainPattern(d).getBindsTo());
 			}
-			Set<Variable> domainBottomUnSharedVars = new HashSet<Variable>(subRecord.domainVars);
+			Set<@NonNull Variable> domainBottomUnSharedVars = new HashSet<@NonNull Variable>(subRecord.domainVars);
 			domainBottomUnSharedVars.removeAll(whenVars);
 			domainBottomUnSharedVars.removeAll(sharedDomainVars);
-			Set<Predicate> predicatesWithVarBindings = relations.filterOutPredicatesThatReferToVars(rpSet, domainBottomUnSharedVars);
-			Set<Predicate> predicatesWithoutVarBindings = new HashSet<Predicate>(rpSet);
+			Set<@NonNull Predicate> predicatesWithVarBindings = relations.filterOutPredicatesThatReferToVars(rpSet, domainBottomUnSharedVars);
+			Set<@NonNull Predicate> predicatesWithoutVarBindings = new HashSet<@NonNull Predicate>(rpSet);
 			predicatesWithoutVarBindings.removeAll(predicatesWithVarBindings);
-			Set<Variable> domainVarsSharedWithWhen = new HashSet<Variable>(subRecord.domainVars);
+			Set<@NonNull Variable> domainVarsSharedWithWhen = new HashSet<@NonNull Variable>(subRecord.domainVars);
 			domainVarsSharedWithWhen.retainAll(whenVars);
 			domainVarsSharedWithWhen.remove(subRecord.tev);
 			BottomPattern mb = subRecord.mb;

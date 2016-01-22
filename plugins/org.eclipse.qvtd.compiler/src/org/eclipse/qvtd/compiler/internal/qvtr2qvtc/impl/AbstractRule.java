@@ -65,11 +65,6 @@ public abstract class AbstractRule implements Rule
 		public @NonNull RuleBindings getRuleBindings() {
 			return ruleBindings;
 		}
-
-		@Override
-		public RuleBindings.@NonNull KeySet getRuleBindingsKeys() {
-			return (RuleBindings.KeySet) ruleBindings.keySet();
-		}
 	}
 	
 	protected final @NonNull QvtrToQvtcTransformation transformation;
@@ -94,11 +89,6 @@ public abstract class AbstractRule implements Rule
 	@NonNull
 	public RuleBindings getRuleBindings() {
 		return ruleBindings;
-	}
-
-	@Override
-	public RuleBindings.@NonNull KeySet getRuleBindingsKeys() {
-		return (RuleBindings.KeySet) ruleBindings.keySet();
 	}
 
 	@Override

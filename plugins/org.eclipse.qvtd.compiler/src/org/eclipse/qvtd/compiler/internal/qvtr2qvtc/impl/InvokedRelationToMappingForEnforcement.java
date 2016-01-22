@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTcRelations;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.Rule;
@@ -114,22 +115,18 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 		
 	}
 	
-	// Relations
-	private static final RuleBindings.@NonNull KeySet RULE_BINDINGS = new RuleBindings.KeySet();
-	private static final RuleBindings.@NonNull RuleKey<Relation> RELATIONS_r = RULE_BINDINGS.createRoot((Relation)null, "r");
-
-	public Transformation mt;
-	
 	public static final Rule.@NonNull Factory FACTORY = new Factory(); 
 	
+	private final @NonNull Relation r;
+	public Transformation mt;
 	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
 	private String rn;
 	
 	protected InvokedRelationToMappingForEnforcement(
-			@NonNull QvtrToQvtcTransformation transformation, Relation r) {
+			@NonNull QvtrToQvtcTransformation transformation, @NonNull Relation r) {
 		
 		super(transformation);
-		ruleBindings.put(RELATIONS_r, r);
+		this.r = r;
 	}
 
 	/* (non-Javadoc)
@@ -137,8 +134,6 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 	 */
 	@Override
 	public void check() {
-		Relation r = ruleBindings.get(RELATIONS_r);
-		assert (r != null);
 		rn = r.getName();
 		if (!r.isIsTopLevel()) {
 			List<RelationCallExp> ris = transformation.getRelationCallExpsForRelation(r);
@@ -149,10 +144,9 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 					assert ir != null;
 					String irn = ir.getName();
 					assert irn != null;
-					for (Domain d : r.getDomain()) {
-						RelationDomain rd = (RelationDomain) d;
-						DomainPattern dp = rd.getPattern().get(0);
-						assert dp != null;
+					for (Domain d : ClassUtil.nullFree(r.getDomain())) {
+						RelationDomain rd = (RelationDomain)d;
+						DomainPattern dp = QVTr2QVTcRelations.getDomainPattern(rd);
 						if (rd.isIsEnforceable() && dp.getTemplateExpression() instanceof ObjectTemplateExp) {
 							//Mapping m = QVTcoreFactory.eINSTANCE.createMapping();
 							String dn = rd.getName();
@@ -188,12 +182,11 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 	 */
 	@Override
 	public void instantiateOutput() {
-		Relation r = ruleBindings.get(RELATIONS_r);
-		assert (r != null) && (mt != null);
+		assert mt != null;
 		for (SubRecord subRecord : subRecords) {
 			final Transformation mt2 = mt;
 			if (mt2 != null) {
-				Mapping m = transformation.findMapping(rn+'_'+subRecord.irn+'_'+subRecord.dn, mt2);
+				Mapping m = transformation.findMapping(mt2, rn+'_'+subRecord.irn+'_'+subRecord.dn);
 				assert m != null;
 				subRecord.m = m;
 				GuardPattern mg = transformation.findGuardPattern(m);
@@ -202,7 +195,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 				BottomPattern mb = transformation.findBottomPattern(m);
 				assert mb != null;
 				subRecord.mb = mb;
-				CoreDomain md = transformation.findCoreDomain(subRecord.dn, m);
+				CoreDomain md = transformation.findCoreDomain(m, subRecord.dn);
 				assert md != null;
 				subRecord.md = md;
 				TypedModel mdir = null;
@@ -251,8 +244,6 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 	 */
 	@Override
 	public boolean when() {
-		Relation r = ruleBindings.get(RELATIONS_r);
-		assert r != null;
 		RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
 		assert rt != null;
 		// This is the same code the factory has, and IMHO its better encapsulated by the factory.
@@ -262,7 +253,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 		RuleBindings whenBindings = whenRule.getRuleBindings();
 		RelationalTransformationToMappingTransformation whenRuleRecord = (RelationalTransformationToMappingTransformation) transformation.getRecord(whenBindings);
 		if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
-			mt = (Transformation) whenRuleRecord.getCore();
+			mt = whenRuleRecord.getCore();
 			assert mt != null;
 			return true;
 		}
@@ -275,18 +266,16 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 	@Override
 	public void where() {
 		QVTr2QVTcRelations relations = new QVTr2QVTcRelations(transformation);
-		Relation r = ruleBindings.get(RELATIONS_r);
-		assert r != null;
-		Set<Variable> allDomainVars = relations.getAllDomainVars(r);
-		Set<Variable> whereVars = new HashSet<Variable>();
-		Set<Variable> whenVars = new HashSet<Variable>();
-		Set<Predicate> rpSet = new HashSet<Predicate>();
+		Set<@NonNull Variable> allDomainVars = relations.getAllDomainVars(r);
+		Set<@NonNull Variable> whereVars = new HashSet<@NonNull Variable>();
+		Set<@NonNull Variable> whenVars = new HashSet<@NonNull Variable>();
+		Set<@NonNull Predicate> rpSet = new HashSet<@NonNull Predicate>();
 		if (r.getWhen() != null) {
-			whenVars.addAll(r.getWhen().getBindsTo());
+			whenVars.addAll(ClassUtil.nullFree(r.getWhen().getBindsTo()));
 		}
 		if (r.getWhere() != null) {
-			rpSet.addAll(relations.rejectRelationCallPredicates(r.getWhere().getPredicate()));
-			whereVars.addAll(r.getWhere().getBindsTo());
+			rpSet.addAll(relations.rejectRelationCallPredicates(ClassUtil.nullFree(r.getWhere().getPredicate())));
+			whereVars.addAll(ClassUtil.nullFree(r.getWhere().getBindsTo()));
 		}
 		Set<Variable> sharedDomainVars = relations.getSharedDomainVars(r);
 		Set<Variable> unsharedWhereVars = new HashSet<Variable>(whereVars);
@@ -297,10 +286,8 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 		unsharedWhenVars.removeAll(allDomainVars);
 		for (SubRecord subRecord : subRecords) {
 			Set<Variable> oppositeDomainVars = new HashSet<Variable>();
-			for (Domain d : subRecord.rOppositeDomains) {
-				if (((RelationDomain)d).getPattern() != null) {
-					oppositeDomainVars.addAll(((RelationDomain)d).getPattern().get(0).getBindsTo());
-				}
+			for (Domain d : ClassUtil.nullFree(subRecord.rOppositeDomains)) {
+				oppositeDomainVars.addAll(QVTr2QVTcRelations.getDomainPattern(d).getBindsTo());
 			}
 			Set<Variable> domainBottomUnSharedVars = new HashSet<Variable>(subRecord.domainVars);
 			domainBottomUnSharedVars.removeAll(whenVars);

@@ -40,11 +40,6 @@ public interface Rule {
 	public interface SubRecord {
 		
 		@NonNull RuleBindings getRuleBindings();
-		
-		/**
-		 * Return the keys for all relations bindings of this rule.
-		 */
-		RuleBindings.@NonNull KeySet getRuleBindingsKeys();
 	}
 	
 	/**
@@ -59,11 +54,6 @@ public interface Rule {
 	
 
 	@NonNull RuleBindings getRuleBindings();
-	
-	/**
-	 * Return the keys for all relations bindings of this rule.
-	 */
-	RuleBindings.@NonNull KeySet getRuleBindingsKeys();
 	
 	/**
 	 * Was executed.

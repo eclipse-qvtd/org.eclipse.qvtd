@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
 
 public class TROppositeDomainsToMappingForEnforcement extends AbstractRule {
@@ -20,10 +21,8 @@ public class TROppositeDomainsToMappingForEnforcement extends AbstractRule {
 //		
 //	}
 	
-	protected TROppositeDomainsToMappingForEnforcement(
-			QvtrToQvtcTransformation transformation) {
+	protected TROppositeDomainsToMappingForEnforcement(@NonNull QvtrToQvtcTransformation transformation) {
 		super(transformation);
-	
 	}
 
 }
