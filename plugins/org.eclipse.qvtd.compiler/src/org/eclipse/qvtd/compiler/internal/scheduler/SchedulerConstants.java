@@ -145,10 +145,10 @@ public abstract class SchedulerConstants
 		this.qvtp2qvtg = qvtp2qvtg;
 		this.transformation = ClassUtil.nonNullState(QVTbaseUtil.getContainingTransformation(((MappingAction)dependencyGraph.getActions().get(0)).getMapping()));
 		//
-		int checkableMask = ((DomainUsage.Internal)domainAnalysis.getCheckableUsage()).getMask();
-		int enforceableMask = ((DomainUsage.Internal)domainAnalysis.getEnforceableUsage()).getMask();
-		int inputMask = checkableMask & ~enforceableMask;
-		this.inputUsage = domainAnalysis.getConstantUsage(inputMask);
+		this.inputUsage = domainAnalysis.getInputUsage();
+//		int outputMask = ((DomainUsage.Internal)domainAnalysis.getOutputUsage()).getMask();
+//		int inputMask = checkableMask & ~enforceableMask;
+//		this.inputUsage = domainAnalysis.getConstantUsage(inputMask);
 		//
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		org.eclipse.ocl.pivot.Class oclAnyType = standardLibrary.getOclAnyType();
@@ -368,7 +368,7 @@ public abstract class SchedulerConstants
 		}
 		DomainUsage usage = getDomainUsage(sourceVariable);
 		assert usage != null;
-		return !usage.isEnforceable();
+		return !usage.isOutput();
 	}
 
 	public void writeCallDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {

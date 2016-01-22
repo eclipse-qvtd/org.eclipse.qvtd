@@ -773,12 +773,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			Type type = classDatumAnalysis.getClassDatum().getType();
 			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {
 				DomainUsage domainUsage = classDatumAnalysis.getDomainUsage();
-				if (domainUsage.isCheckable()) {		// EObject is $primitive$
+				if (domainUsage.isInput()) {		// EObject is $primitive$
 					for (@SuppressWarnings("null")@NonNull TypedModel typedModel : domainUsage.getTypedModels()) {
 						checkableTypedModels.add(visitor.getQVTiTypedModel(typedModel));
 					}
 				}
-				if (domainUsage.isEnforceable()) {		// EObject is $primitive$
+				if (domainUsage.isOutput()) {		// EObject is $primitive$
 					for (@SuppressWarnings("null")@NonNull TypedModel typedModel : domainUsage.getTypedModels()) {
 						enforceableTypedModels.add(visitor.getQVTiTypedModel(typedModel));
 					}

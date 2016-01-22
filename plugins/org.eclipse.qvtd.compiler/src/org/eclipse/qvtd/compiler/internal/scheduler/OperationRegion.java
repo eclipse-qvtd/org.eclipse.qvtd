@@ -88,7 +88,7 @@ public class OperationRegion extends AbstractMappingRegion
 			if (steps.size() > 0) {
 				DependencyStep classStep = steps.get(0);
 				DomainUsage stepUsage = classStep.getUsage();
-				if (stepUsage.isEnforceable() && !stepUsage.isCheckable()) {
+				if (stepUsage.isOutput() && !stepUsage.isInput()) {
 //					System.out.println("!checkable && enforceable: " + steps);
 					org.eclipse.ocl.pivot.Class stepType = steps.get(0).getElementalType();
 					TypedModel typedModel = stepUsage.getTypedModel();

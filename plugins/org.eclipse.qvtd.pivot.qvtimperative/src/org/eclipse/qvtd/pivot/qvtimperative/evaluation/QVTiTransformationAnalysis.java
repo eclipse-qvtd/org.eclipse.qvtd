@@ -149,7 +149,7 @@ public class QVTiTransformationAnalysis
 			property2cacheIndex.put(navigableProperty, size);
 			if (sourceExpression != null) {
 				DomainUsage sourceUsage = domainAnalysis.basicGetUsage(sourceExpression);
-				if ((sourceUsage != null) && sourceUsage.isCheckable()) {
+				if ((sourceUsage != null) && sourceUsage.isInput()) {
 					sourceProperty2cacheIndex.put(navigableProperty, size);
 				}
 			}

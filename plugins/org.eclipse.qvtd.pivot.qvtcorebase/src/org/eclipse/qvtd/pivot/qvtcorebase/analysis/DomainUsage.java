@@ -58,7 +58,9 @@ public interface DomainUsage
 
 	/**
 	 * Return true if this usage includes usage in a checkable domain.
+	 * @deprecated use isInput()
 	 */
+	@Deprecated
 	boolean isCheckable();
 
 	/**
@@ -68,13 +70,25 @@ public interface DomainUsage
 
 	/**
 	 * Return true if this usage includes usage in an enforceable domain.
+	 * @deprecated use isOutput()
 	 */
+	@Deprecated
 	boolean isEnforceable();
 
 	/**
-	 * Return true if this usage includes usage in the middle domain.
+	 * Return true if this usage includes usage in an input domain, a domain the is fully not-enforceable transformation-wide.
+	 */
+	boolean isInput();
+
+	/**
+	 * Return true if this usage includes usage in the middle domain, a domain the is partially enforceable transformation-wide.
 	 */
 	boolean isMiddle();
+
+	/**
+	 * Return true if this usage includes usage in an output domain, a domain that is fully enforceable transformation-wide.
+	 */
+	boolean isOutput();
 	
 	public interface Internal extends DomainUsage, Comparable<DomainUsage.Internal>
 	{

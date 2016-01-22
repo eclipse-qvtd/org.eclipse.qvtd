@@ -592,7 +592,7 @@ public class ScheduledRegion extends AbstractRegion
 	private void computeInputModels() {
 		for (ClassDatumAnalysis classDatumAnalysis : getSchedulerConstants().getClassDatumAnalyses()) {
 			DomainUsage domainUsage = classDatumAnalysis.getDomainUsage();
-			if (domainUsage.isCheckable() && !domainUsage.isEnforceable()) {
+			if (domainUsage.isInput() && !domainUsage.isOutput()) {
 				Type type = classDatumAnalysis.getClassDatum().getType();
 				org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
 				if ((asPackage != null) && !PivotConstants.ORPHANAGE_URI.equals(asPackage.getURI())) {
@@ -1081,7 +1081,7 @@ public class ScheduledRegion extends AbstractRegion
 		Set<ClassDatumAnalysis> consumedClassDatumAnalyses = consumedClassDatumAnalysis2headNodes.keySet();		// FIXME all consumed classes
 		for (@SuppressWarnings("null")@NonNull ClassDatumAnalysis consumedClassDatumAnalysis : consumedClassDatumAnalyses) {
 //			System.out.println("ScheduledRegion.createRootContainmentRegion: " + consumedClassDatumAnalysis);
-			boolean canBeAtRoot = !consumedClassDatumAnalysis.getDomainUsage().isEnforceable();
+			boolean canBeAtRoot = !consumedClassDatumAnalysis.getDomainUsage().isOutput();
 			if (consumedClassDatumAnalysis.getClassDatum().getType() instanceof DataType) {
 				canBeAtRoot = false;
 			}

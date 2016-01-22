@@ -349,7 +349,7 @@ public class QVTm2QVTp
 		private boolean isLeft(@NonNull RootDomainUsageAnalysis domainUsageAnalysis, @NonNull Element element) {
 			DomainUsage usage = domainUsageAnalysis.getUsage(element);
 			assert usage != null;
-			if (usage.isCheckable() && !usage.isEnforceable()) {
+			if (usage.isInput() && !usage.isOutput()) {
 				return true;
 			}
 			for (TreeIterator<EObject> tit = element.eAllContents(); tit.hasNext(); ) {
@@ -357,7 +357,7 @@ public class QVTm2QVTp
 				assert eObject != null;
 				DomainUsage eObjectUsage = domainUsageAnalysis.getUsage(eObject);
 				assert eObjectUsage != null;
-				if (eObjectUsage.isCheckable() && !eObjectUsage.isEnforceable()) { // && !(eObject instanceof NullLiteralExp)) {
+				if (eObjectUsage.isInput() && !eObjectUsage.isOutput()) { // && !(eObject instanceof NullLiteralExp)) {
 					return true;
 				}
 			}
@@ -385,7 +385,7 @@ public class QVTm2QVTp
 		private boolean isRight(@NonNull RootDomainUsageAnalysis domainUsageAnalysis, @NonNull Element element) {
 			DomainUsage usage = domainUsageAnalysis.getUsage(element);
 			assert usage != null;
-			if (usage.isEnforceable() && !usage.isCheckable()) {
+			if (usage.isOutput() && !usage.isInput()) {
 				return true;
 			}
 			for (TreeIterator<EObject> tit = element.eAllContents(); tit.hasNext(); ) {
@@ -393,7 +393,7 @@ public class QVTm2QVTp
 				assert eObject != null;
 				DomainUsage eObjectUsage = domainUsageAnalysis.getUsage(eObject);
 				assert eObjectUsage != null;
-				if (eObjectUsage.isEnforceable() && !eObjectUsage.isCheckable()) { // && !(eObject instanceof NullLiteralExp)) {
+				if (eObjectUsage.isOutput() && !eObjectUsage.isInput()) { // && !(eObject instanceof NullLiteralExp)) {
 					return true;
 				}
 			}

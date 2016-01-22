@@ -475,7 +475,7 @@ public class Nodes
 		
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull VariableDeclaration guardVariable) {
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(guardVariable);
-			boolean isEnforceable = domainUsage.isEnforceable();
+			boolean isEnforceable = domainUsage.isOutput();
 			if (!isEnforceable) {
 				return LOADED_GUARD.createSimpleNode(region, guardVariable);
 			}
@@ -864,7 +864,7 @@ public class Nodes
 				@NonNull CallExp callExp, @NonNull SimpleNode sourceNode) {
 			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
-			if (sourceNode.isPredicated() || domainUsage.isEnforceable() ) {
+			if (sourceNode.isPredicated() || domainUsage.isOutput() ) {
 				return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
 			}
 			else {

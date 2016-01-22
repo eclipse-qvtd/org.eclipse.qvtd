@@ -208,7 +208,11 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 				gatherOutputModels(outputModels, typedModel);
 			}
 		}
-		inputModels.addAll(checkables);
+		for (TypedModel inputModel : ClassUtil.nullFree(transformation.getModelParameter())) {
+			if (inputModel.getName() != null) {
+				inputModels.add(inputModel);
+			}
+		}
 		inputModels.removeAll(outputModels);
 		String modeName = modeCombo.getText();
 		if (QVTiLaunchConstants.CHECK_MODE.equals(modeName)) {

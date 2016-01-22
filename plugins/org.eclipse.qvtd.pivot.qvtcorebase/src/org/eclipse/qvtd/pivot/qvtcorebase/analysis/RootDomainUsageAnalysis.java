@@ -101,17 +101,27 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 
 		@Override
 		public boolean isCheckable() {
-			return (bitMask & checkableUsage.bitMask) != 0;
+			return isInput();
 		}
 
 		@Override
 		public boolean isEnforceable() {
-			return (bitMask & enforceableUsage.bitMask) != 0;
+			return isOutput();
+		}
+
+		@Override
+		public boolean isInput() {
+			return (bitMask & inputUsage.bitMask) != 0;
 		}
 
 		@Override
 		public boolean isMiddle() {
 			return (bitMask & middleUsage.bitMask) != 0;
+		}
+
+		@Override
+		public boolean isOutput() {
+			return (bitMask & outputUsage.bitMask) != 0;
 		}
 
 		protected String toString(@NonNull String prefix) {
@@ -264,14 +274,14 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	private DomainUsageConstant middleUsage = null;
 
 	/**
-	 * The TypedModels that are checkable.
+	 * The TypedModels that are not enforceable.
 	 */
-	private DomainUsageConstant checkableUsage = null;
+	private DomainUsageConstant inputUsage = null;
 
 	/**
 	 * The TypedModels that are enforceable.
 	 */
-	private DomainUsageConstant enforceableUsage = null;
+	private DomainUsageConstant outputUsage = null;
 
 	/**
 	 * The domains in which each class may be used.
@@ -345,7 +355,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 				OCLExpression slotExpression = propertyAssignment.getSlotExpression();
 				assert slotExpression != null;
 				DomainUsage domainUsage = getUsage(slotExpression);
-				if (!domainUsage.isEnforceable() && !domainUsage.isMiddle()) {
+				if (!domainUsage.isOutput() && !domainUsage.isMiddle()) {
 					Property targetProperty = propertyAssignment.getTargetProperty();
 //					System.out.println("Dirty " + targetProperty + " for " + eObject);
 					dirtyProperties.add(targetProperty);
@@ -370,33 +380,33 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	}
 
 	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation) {
-		int checkableMask = 0;
+		int unenforceableMask = 0;
 		int enforceableMask = 0;
 		CompleteModel completeModel = context.getCompleteModel();
-		for (@SuppressWarnings("null")@NonNull TypedModel typedModel : transformation.getModelParameter()) {
+		for (TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {
 			int nextBit = add(typedModel);
 			int bitMask = 1 << nextBit;
 			DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);
 			validUsages.put(bitMask, typedModelUsage);
-			boolean isCheckable = false;
 			boolean isEnforceable = false;
+			boolean isUnenforceable = false;
 			for (Rule rule : transformation.getRule()) {
 				for (Domain domain : rule.getDomain()) {
 					if (domain.getTypedModel() == typedModel) {
-						if (domain.isIsCheckable()) {
-							isCheckable = true;
-						}
 						if (domain.isIsEnforceable()) {
 							isEnforceable = true;
+						}
+						else {
+							isUnenforceable = true;
 						}
 					}
 				}
 			}
-			if (isCheckable) {
-				checkableMask |= bitMask;
-			}
 			if (isEnforceable) {
 				enforceableMask |= bitMask;
+			}
+			if (isUnenforceable) {
+				unenforceableMask |= bitMask;
 			}
 			setUsage(typedModel, typedModelUsage);
 			Variable ownedContext = typedModel.getOwnedContext();
@@ -469,9 +479,9 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			}
 		}
 		class2usage.put(((StandardLibraryInternal)context.getStandardLibrary()).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
-		checkableUsage = getConstantUsage(getAnyMask() & checkableMask);
-		enforceableUsage = getConstantUsage(getAnyMask() & enforceableMask);
-		middleUsage = getConstantUsage(getAnyMask() & ~checkableMask & ~enforceableMask);
+		inputUsage = getConstantUsage(getAnyMask() & unenforceableMask);
+		outputUsage = getConstantUsage(getAnyMask() & enforceableMask);
+		middleUsage = getConstantUsage(getAnyMask() & ~unenforceableMask & ~enforceableMask);
 		Variable ownedContext = transformation.getOwnedContext();
 		if (ownedContext != null) {
 			setUsage(ownedContext, getAnyUsage());
@@ -520,8 +530,12 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		return getConstantUsage(getAnyMask());
 	}
 
+	/**
+	 * @deprecated use getInputUsage();
+	 */
+	@Deprecated
 	public @NonNull DomainUsage getCheckableUsage() {
-		return ClassUtil.nonNullState(checkableUsage);
+		return getInputUsage();
 	}
 
 	public @NonNull DomainUsageConstant getConstantUsage(int bitMask) {
@@ -533,8 +547,16 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		return usage;
 	}
 
+	/**
+	 * @deprecated use getOutputUsage();
+	 */
+	@Deprecated
 	public @NonNull DomainUsage getEnforceableUsage() {
-		return ClassUtil.nonNullState(enforceableUsage);
+		return getOutputUsage();
+	}
+
+	public @NonNull DomainUsage getInputUsage() {
+		return ClassUtil.nonNullState(inputUsage);
 	}
 
 	public @NonNull DomainUsage getMiddleUsage() {
@@ -545,6 +567,10 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		DomainUsageConstant noneUsage = constantUsages.get(NONE_USAGE_BIT_MASK);
 		assert noneUsage != null;
 		return noneUsage;
+	}
+
+	public @NonNull DomainUsage getOutputUsage() {
+		return ClassUtil.nonNullState(outputUsage);
 	}
 	
 //	public @NonNull TypedModel getPrimitiveTypeModel() {

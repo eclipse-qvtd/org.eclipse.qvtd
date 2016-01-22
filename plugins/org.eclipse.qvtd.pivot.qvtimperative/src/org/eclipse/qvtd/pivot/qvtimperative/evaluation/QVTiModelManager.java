@@ -154,8 +154,8 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 	@Override
 	public @NonNull Set<EObject> get(org.eclipse.ocl.pivot.@NonNull Class type) {
 		Set<EObject> elements = new HashSet<EObject>();
-		DomainUsage checkableUsage = transformationAnalysis.getDomainUsageAnalysis().getCheckableUsage();
-		for (@SuppressWarnings("null")@NonNull TypedModel typedModel : checkableUsage.getTypedModels()) {
+		DomainUsage inputUsage = transformationAnalysis.getDomainUsageAnalysis().getInputUsage();
+		for (@SuppressWarnings("null")@NonNull TypedModel typedModel : inputUsage.getTypedModels()) {
 			TypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
 			elements.addAll(typedModelInstance.getObjectsOfKind(type));
 		}

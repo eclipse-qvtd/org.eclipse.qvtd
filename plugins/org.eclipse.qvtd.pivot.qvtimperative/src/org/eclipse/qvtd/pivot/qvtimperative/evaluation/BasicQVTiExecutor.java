@@ -174,7 +174,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	protected void doEvaluations(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
 		for (Domain domain : mapping.getDomain()) {
 			if (!domain.isIsEnforceable()) {
-				assert domain.isIsCheckable();
 				CoreDomain checkableDomain = (CoreDomain)domain;
 				GuardPattern checkableGuardPattern = checkableDomain.getGuardPattern();
 				assert checkableGuardPattern.getPredicate().isEmpty();
