@@ -8,7 +8,7 @@
  * Contributors:
  *     Horacio Hoyos - initial API and implementation
  ******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl;
+package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -16,7 +16,6 @@ import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -28,11 +27,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
-public class RelationalTransformationToTracePackage
+/*public*/ class RelationalTransformationToTracePackage
 {
-	protected final @NonNull QvtrToQvtcTransformation qvtr2qvtc;
+	protected final @NonNull QVTrToQVTc qvtr2qvtc;
 
-	public RelationalTransformationToTracePackage(@NonNull QvtrToQvtcTransformation qvtr2qvtc) {
+	public RelationalTransformationToTracePackage(@NonNull QVTrToQVTc qvtr2qvtc) {
 		this.qvtr2qvtc = qvtr2qvtc;
 	}
 

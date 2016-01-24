@@ -37,7 +37,6 @@ Export-Package: org.eclipse.epsilon.common.util;x-friends:="org.eclipse.qvtd.cs2
    org.osgi.framework,
    org.eclipse.epsilon.eol",
  org.eclipse.qvtd.compiler.internal.qvtr2qvtc,
- org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl,
  org.eclipse.qvtd.compiler.internal.qvtr2qvtc.utilities,
  org.eclipse.qvtd.compiler.internal.schedule2qvti,
  org.eclipse.qvtd.compiler.internal.scheduler,

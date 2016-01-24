@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrToQVTc;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
@@ -106,7 +106,7 @@ public class QvtrToQvtcTests extends LoadTestCase {
     	URI qvtcTraceURI = qvtrURI.trimFileExtension();
     	qvtcTraceURI = qvtcTraceURI.appendFileExtension("ecore.oclas");
     	Resource qvtcTraceResource = asResourceSet.createResource(qvtcTraceURI, null);
-    	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(ocl.getEnvironmentFactory(), qvtrResource, qvtcResource, qvtcTraceResource);
+    	QVTrToQVTc t = new QVTrToQVTc(ocl.getEnvironmentFactory(), qvtrResource, qvtcResource, qvtcTraceResource);
 		t.prepare();
 		t.execute();		
         t.saveTrace(qvtcTraceResource, TestsXMLUtil.defaultSavingOptions);

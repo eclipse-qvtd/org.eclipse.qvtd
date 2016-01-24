@@ -8,7 +8,7 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl;
+package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -101,17 +101,16 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.util.PivotSwitch;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
 
 /**
  * A set of operations to correctly copy an OCLExp
  * @generated
  */
-public class OCLExpCopy extends PivotSwitch<@Nullable Element> {
+/*public*/ class OCLExpCopy extends PivotSwitch<@Nullable Element> {
 
-    @NonNull private QvtrToQvtcTransformation qvtr2qvtc;
+    @NonNull private QVTrToQVTc qvtr2qvtc;
     
-    public OCLExpCopy(@NonNull QvtrToQvtcTransformation qvtr2qvtc) {
+    public OCLExpCopy(@NonNull QVTrToQVTc qvtr2qvtc) {
         this.qvtr2qvtc = qvtr2qvtc;
     }
     
@@ -825,7 +824,7 @@ public class OCLExpCopy extends PivotSwitch<@Nullable Element> {
             out.setType((Type) doSwitch(_type));            
         Variable v = (Variable) in.getReferredVariable();
         assert v != null;
-        out.setReferredVariable(qvtr2qvtc.getVariableTrace(v));
+        out.setReferredVariable(qvtr2qvtc.getCoreVariable(v));
         for (ElementExtension _extension : in.getOwnedExtensions()) {
             out.getOwnedExtensions().add((ElementExtension) doSwitch(_extension));
         }

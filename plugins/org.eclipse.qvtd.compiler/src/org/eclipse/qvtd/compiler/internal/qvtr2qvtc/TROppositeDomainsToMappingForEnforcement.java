@@ -8,16 +8,15 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl;
+package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
 
-public class TROppositeDomainsToMappingForEnforcement
+/*public*/ class TROppositeDomainsToMappingForEnforcement
 {
-	protected final @NonNull QvtrToQvtcTransformation qvtr2qvtc;
+	protected final @NonNull QVTrToQVTc qvtr2qvtc;
 	
-	public TROppositeDomainsToMappingForEnforcement(@NonNull QvtrToQvtcTransformation qvtr2qvtc) {
+	public TROppositeDomainsToMappingForEnforcement(@NonNull QVTrToQVTc qvtr2qvtc) {
 		this.qvtr2qvtc = qvtr2qvtc;
 	}
 	

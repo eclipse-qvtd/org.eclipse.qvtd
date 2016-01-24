@@ -19,7 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTuConfiguration;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrToQVTc;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -52,7 +52,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		URI qvtctURI = prefixURI.appendFileExtension("ecore.oclas");
 		Resource cResource = createResource(qvtcURI);
 		Resource qvtcTraceResource = createResource(qvtctURI);
-    	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(environmentFactory, rResource, cResource, qvtcTraceResource);
+    	QVTrToQVTc t = new QVTrToQVTc(environmentFactory, rResource, cResource, qvtcTraceResource);
 		t.prepare();
 		t.execute();		
         t.saveTrace(qvtcTraceResource, XMIUtil.createSaveOptions());
