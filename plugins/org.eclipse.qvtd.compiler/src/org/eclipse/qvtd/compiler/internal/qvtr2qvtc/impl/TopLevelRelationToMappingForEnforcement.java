@@ -16,14 +16,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTcRelations;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -40,31 +38,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 
-public class TopLevelRelationToMappingForEnforcement extends AbstractRule
+public class TopLevelRelationToMappingForEnforcement
 {
-	
-	private static class Factory extends AbstractRule.Factory
-	{
-		@Override
-		public @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation, @NonNull EObject eo) {
-			Rule rule = null;
-			if (eo instanceof Relation) {	
-				rule = new TopLevelRelationToMappingForEnforcement(transformation, (Relation) eo);
-				Rule tracedRule = transformation.getRecord(rule.getRuleBindings());
-				if (tracedRule != null)
-					rule = tracedRule;
-			}
-			return rule;
-		}
-
-		@Override
-		public @Nullable Rule createRule(
-				@NonNull QvtrToQvtcTransformation transformation,
-				@NonNull List<EObject> eos) {
-			return null;
-		}
-	}
-	
 	private class SubRecord 
 	{
 		// Relations
@@ -106,33 +81,25 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			this.domainVars = domainVars;
 			this.rOppositeDomains = rOppositeDomains;
 		}
-		
 	}
 
-	private final @NonNull Relation r;
+	protected final @NonNull QvtrToQvtcTransformation qvtr2qvtc;
 
-	private String rn;
-
-	public Transformation mt;
-	
-	public static final Rule.@NonNull Factory FACTORY = new Factory(); 
-	
-	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
-
-	public TopLevelRelationToMappingForEnforcement(@NonNull QvtrToQvtcTransformation transformation,
-			@NonNull Relation r) {
-		super(transformation);
-		this.r = r;
+	public TopLevelRelationToMappingForEnforcement(@NonNull QvtrToQvtcTransformation qvtr2qvtc) {
+		this.qvtr2qvtc = qvtr2qvtc;
 	}
 
-	// One Mapping per domain
-	@Override
-	public void check() {
-		rn = r.getName();
+	public void doTopLevelRelationToMappingForEnforcement(@NonNull Relation r) {
+		RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
+		assert rt != null;
+		@NonNull Transformation mt = qvtr2qvtc.getCoreTransformation(rt);
+		@NonNull List<@NonNull SubRecord> subRecords = new ArrayList<@NonNull SubRecord>();
+		// check
+		String rn = r.getName();
 		if (r.isIsTopLevel()) {
 			for (Domain d : r.getDomain()) {
 				RelationDomain rd = (RelationDomain) d;
-				if (rd.isIsEnforceable() && transformation.getDomainPattern(rd).getTemplateExpression() instanceof ObjectTemplateExp) {
+				if (rd.isIsEnforceable() && qvtr2qvtc.getDomainPattern(rd).getTemplateExpression() instanceof ObjectTemplateExp) {
 					//Mapping m = QVTcoreFactory.eINSTANCE.createMapping();
 					String dn = rd.getName();
 					assert dn != null;
@@ -141,7 +108,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 					assert tmn != null;
 					List<org.eclipse.ocl.pivot.Package> up = dir.getUsedPackage();
 					assert up != null;
-					DomainPattern dp = transformation.getDomainPattern(rd);
+					DomainPattern dp = qvtr2qvtc.getDomainPattern(rd);
 					List<Variable> domainVars = dp.getBindsTo();
 					ObjectTemplateExp te = (ObjectTemplateExp) dp.getTemplateExpression();
 					Variable tev = te.getBindsTo();
@@ -156,89 +123,41 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 				}
 			}
 		}
-	}
-	
-	@Override
-	public void instantiateOutput() {
+		// instantiateOutput() {
 		for (SubRecord subRecord : subRecords) {
 			final Transformation mt2 = mt;
-			if (mt2 != null) {
-				Mapping m = transformation.whenMapping(mt2, rn+'_'+subRecord.dn);
-				assert m != null;
-				subRecord.m = m;
-				GuardPattern mg = transformation.whenGuardPattern(m);
-				assert mg != null;
-				subRecord.mg = mg;
-				BottomPattern mb = transformation.whenBottomPattern(m);
-				assert mb != null;
-				subRecord.mb = mb;
-				CoreDomain md = transformation.whenCoreDomain(m, subRecord.dn);
-				assert md != null;
-				subRecord.md = md;
-				TypedModel mdir = null;
-				for (TypedModel tm : mt2.getModelParameter()) {
-					if (tm.getName() == subRecord.tmn) {
-						if (tm.getUsedPackage().equals(subRecord.up)) {
-							mdir = tm;
-							break;
-						}
+			Mapping m = qvtr2qvtc.whenMapping(mt2, rn+'_'+subRecord.dn);
+			assert m != null;
+			subRecord.m = m;
+			GuardPattern mg = qvtr2qvtc.whenGuardPattern(m);
+			assert mg != null;
+			subRecord.mg = mg;
+			BottomPattern mb = qvtr2qvtc.whenBottomPattern(m);
+			assert mb != null;
+			subRecord.mb = mb;
+			CoreDomain md = qvtr2qvtc.whenCoreDomain(m, subRecord.dn);
+			assert md != null;
+			subRecord.md = md;
+			TypedModel mdir = null;
+			for (TypedModel tm : mt2.getModelParameter()) {
+				if (tm.getName() == subRecord.tmn) {
+					if (tm.getUsedPackage().equals(subRecord.up)) {
+						mdir = tm;
+						break;
 					}
 				}
-				assert mdir != null;
-				subRecord.mdir = mdir;
-				GuardPattern dg = transformation.whenGuardPattern(md);
-				assert dg != null;
-				subRecord.dg = dg;
-				BottomPattern db = transformation.whenBottomPattern(md);
-				assert db != null;
-				subRecord.db = db;
-			} else {
-				// TODO handle null value
 			}
+			assert mdir != null;
+			subRecord.mdir = mdir;
+			GuardPattern dg = qvtr2qvtc.whenGuardPattern(md);
+			assert dg != null;
+			subRecord.dg = dg;
+			BottomPattern db = qvtr2qvtc.whenBottomPattern(md);
+			assert db != null;
+			subRecord.db = db;
 		}
-	}
-
-	
-	@Override
-	public void setAttributes() {
-		for (SubRecord subRecord : subRecords) {
-			BottomPattern mb = subRecord.mb;
-			RealizedVariable tcv = subRecord.tcv;
-			assert (mb != null) && (tcv != null);
-			mb.getRealizedVariable().add(tcv);
-			//mb.getVariable().addAll(mbvars);
-			CoreDomain md = subRecord.md;
-			assert (md != null);
-			md.setTypedModel(subRecord.mdir);
-			md.setIsEnforceable(true);
-			BottomPattern db = subRecord.db;
-			RealizedVariable mtev = subRecord.mtev;
-			assert (db != null) && (mtev != null);
-			db.getRealizedVariable().add(mtev);
-		}
-	}	
-	
-	@Override
-	public boolean when() {
-		RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
-		assert rt != null;
-		// This is the same code the factory has, and IMHO its better encapsulated by the factory.
-		// The real issue is that the bindings needs a rule and to get a record (rule) we need a binding
-		//Rule whenRule = RelationalTransformationToMappingTransformation.FACTORY.createRule(transformation, rt);
-		RelationalTransformationToMappingTransformation whenRule = new RelationalTransformationToMappingTransformation(transformation, rt); 
-		RuleBindings whenBindings = whenRule.getRuleBindings();
-		RelationalTransformationToMappingTransformation whenRuleRecord = (RelationalTransformationToMappingTransformation) transformation.getRecord(whenBindings);
-		if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
-			mt = whenRuleRecord.getCore();
-			assert mt != null;
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public void where() {
-		QVTr2QVTcRelations relations = new QVTr2QVTcRelations(transformation);
+		// where() {
+		QVTr2QVTcRelations relations = new QVTr2QVTcRelations(qvtr2qvtc);
 		Set<@NonNull Predicate> rpSet = new HashSet<@NonNull Predicate>();
 		Set<@NonNull Variable> whereVars = new HashSet<@NonNull Variable>();
 		Set<@NonNull Variable> whenVars = new HashSet<@NonNull Variable>();
@@ -250,7 +169,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			rpSet.addAll(relations.rejectRelationCallPredicates(ClassUtil.nullFree(rWhere.getPredicate())));
 			whereVars.addAll(ClassUtil.nullFree(rWhere.getBindsTo()));
 		}
-		Set<@NonNull Variable> sharedDomainVars = transformation.getSharedDomainVars(r);
+		Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
 		Set<@NonNull Variable> allDomainVars = relations.getAllDomainVars(r);
 		Set<@NonNull Variable> unsharedWhereVars = new HashSet<@NonNull Variable>(whereVars);
 		unsharedWhereVars.removeAll(whenVars);
@@ -261,7 +180,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		for (SubRecord subRecord : subRecords) {
 			Set<Variable> oppositeDomainVars = new HashSet<Variable>();
 			for (Domain d : subRecord.rOppositeDomains) {
-				oppositeDomainVars.addAll(transformation.getDomainPattern(d).getBindsTo());
+				oppositeDomainVars.addAll(qvtr2qvtc.getDomainPattern(d).getBindsTo());
 			}
 			Set<@NonNull Variable> domainBottomUnSharedVars = new HashSet<@NonNull Variable>(subRecord.domainVars);
 			domainBottomUnSharedVars.removeAll(whenVars);
@@ -304,9 +223,23 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			relations.doROppositeDomainVarsToTraceClassProps(r, subRecord.rd, subRecord.te, oppositeDomainVars, mb);
 			relations.doRWhenPatternToMGuardPattern(r, mg);
 			relations.doRDomainToMDBottomForEnforcement(r, subRecord.rd, subRecord.te, predicatesWithoutVarBindings, domainBottomUnSharedVars, db);
-			relations.doRRelImplToMBottomEnforcementOperation(r, subRecord.rd, mb);
-			
+			relations.doRRelImplToMBottomEnforcementOperation(r, subRecord.rd, mb);			
+		}
+		// setAttributes() {
+		for (SubRecord subRecord : subRecords) {
+			BottomPattern mb = subRecord.mb;
+			RealizedVariable tcv = subRecord.tcv;
+			assert (mb != null) && (tcv != null);
+			mb.getRealizedVariable().add(tcv);
+			//mb.getVariable().addAll(mbvars);
+			CoreDomain md = subRecord.md;
+			assert (md != null);
+			md.setTypedModel(subRecord.mdir);
+			md.setIsEnforceable(true);
+			BottomPattern db = subRecord.db;
+			RealizedVariable mtev = subRecord.mtev;
+			assert (db != null) && (mtev != null);
+			db.getRealizedVariable().add(mtev);
 		}
 	}
-	
 }

@@ -67,13 +67,13 @@ public abstract class AbstractRule implements Rule
 		}
 	}
 	
-	protected final @NonNull QvtrToQvtcTransformation transformation;
+	protected final @NonNull QvtrToQvtcTransformation qvtr2qvtc;
 	protected final @NonNull RuleBindings ruleBindings = new RuleBindings(this);
 	
 	protected boolean executed = false;
 
-	protected AbstractRule(@NonNull QvtrToQvtcTransformation transformation) {
-		this.transformation = transformation;
+	protected AbstractRule(@NonNull QvtrToQvtcTransformation qvtr2qvtc) {
+		this.qvtr2qvtc = qvtr2qvtc;
 	}
 
 	@Override

@@ -30,10 +30,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class RelationalTransformationToTracePackage
 {
-	protected final@NonNull QvtrToQvtcTransformation transformation;
+	protected final @NonNull QvtrToQvtcTransformation qvtr2qvtc;
 
-	public RelationalTransformationToTracePackage(@NonNull QvtrToQvtcTransformation transformation) {
-		this.transformation = transformation;
+	public RelationalTransformationToTracePackage(@NonNull QvtrToQvtcTransformation qvtr2qvtc) {
+		this.qvtr2qvtc = qvtr2qvtc;
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Package doRelationalTransformationToTracePackage(@NonNull RelationalTransformation rt) {
@@ -41,7 +41,7 @@ public class RelationalTransformationToTracePackage
 		assert p != null;
 		p.setName("P" + rt.getName());
 		p.setURI(p.getName());
-		transformation.putTracePackage(rt, p);
+		qvtr2qvtc.putTracePackage(rt, p);
 		for (Rule r : ClassUtil.nullFree(rt.getRule())) {
 			if (r instanceof Relation) {
 				org.eclipse.ocl.pivot.Class rc = PivotFactory.eINSTANCE.createClass();
@@ -54,15 +54,15 @@ public class RelationalTransformationToTracePackage
 	}
 
 	private void doRelationToTraceClass(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class rc) {	
-		transformation.putRelationTrace(r, rc);
+		qvtr2qvtc.putRelationTrace(r, rc);
 		String rn = r.getName();
 		assert rn != null;
 		rc.setName("T"+rn);
-		for (Variable rv : transformation.getSharedDomainVars(r))  {
+		for (Variable rv : qvtr2qvtc.getSharedDomainVars(r))  {
 			String vn = rv.getName();
 			Type c = rv.getType();
 			assert (vn != null) && (c != null);
-			transformation.whenTraceProperty(rc, vn, c);
+			qvtr2qvtc.whenTraceProperty(rc, vn, c);
 		}
 		for (Domain d : ClassUtil.nullFree(r.getDomain())) {
 			for (DomainPattern rdp : ClassUtil.nullFree(((RelationDomain) d).getPattern())) {
@@ -97,7 +97,7 @@ public class RelationalTransformationToTracePackage
 		String vn = tv.getName();
 		Type c = tv.getType();
 		assert (vn != null) && (c != null);
-		transformation.whenTraceProperty(rc, vn, c);
+		qvtr2qvtc.whenTraceProperty(rc, vn, c);
 		for (PropertyTemplateItem pt : t.getPart()) {
 			OCLExpression value = pt.getValue();
 			assert value != null;

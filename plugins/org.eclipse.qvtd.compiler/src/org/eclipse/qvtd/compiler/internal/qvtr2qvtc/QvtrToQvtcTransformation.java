@@ -12,7 +12,6 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -82,7 +81,7 @@ public class QvtrToQvtcTransformation
 	
 	private final @NonNull List<@NonNull EObject> potentialOrphans = new ArrayList<@NonNull EObject>();
 	private final @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
-	private final @NonNull List<@NonNull EObject> coreRoots = new ArrayList<@NonNull EObject>();
+	private final @NonNull List<@NonNull Transformation> coreTransformations = new ArrayList<@NonNull Transformation>();
 	private final @NonNull Map<@NonNull Variable, @NonNull Variable> variableTrace = new HashMap<@NonNull Variable, @NonNull Variable>();
 	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relationToTraceClass = new HashMap<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class>();
 	// Un-navigable opposites
@@ -132,6 +131,18 @@ public class QvtrToQvtcTransformation
 	 */
 	private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull Variable>> pattern2variable2variable
 			= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull Variable>>();
+
+	/**
+	 * The core Transformation for each RelationalTransformation.
+	 */
+	private @NonNull Map<@NonNull RelationalTransformation, @NonNull Transformation> relationalTransformation2coreTransformation
+			= new HashMap<@NonNull RelationalTransformation, @NonNull Transformation>();	
+
+	/**
+	 * The trace Package for each RelationalTransformation.
+	 */
+	private @NonNull Map<@NonNull RelationalTransformation, org.eclipse.ocl.pivot.@NonNull Package> relationalTransformation2tracePackage
+			= new HashMap<@NonNull RelationalTransformation, org.eclipse.ocl.pivot.@NonNull Package>();	
 	
 	/**
 	 * The lazily created named CoreDomain in each Rule.
@@ -150,9 +161,6 @@ public class QvtrToQvtcTransformation
 	 */
 	private @NonNull Map<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>> transformation2name2mapping
 			= new HashMap<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>>();
-
-	private @NonNull Map<@NonNull RelationalTransformation, org.eclipse.ocl.pivot.@NonNull Package> relationalTransformation2tracePackage
-			= new HashMap<@NonNull RelationalTransformation, org.eclipse.ocl.pivot.@NonNull Package>();	
 	
 	public QvtrToQvtcTransformation(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource, @Nullable Resource traceResource) {	
 		this.environmentFactory = environmentFactory;
@@ -278,14 +286,20 @@ public class QvtrToQvtcTransformation
 				transformToTracePackages(tracePackages, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
 			}
 		}
-		executeFactory(RelationalTransformationToMappingTransformation.FACTORY);
-		executeFactory(TopLevelRelationToMappingForEnforcement.FACTORY);
-		executeFactory(InvokedRelationToMappingForEnforcement.FACTORY);
-		for (EObject eObject : potentialOrphans) {
-			if (eObject.eContainer() == null) {
-				coreRoots.add(eObject);
+		for (EObject eObject : qvtrResource.getContents()) {
+			if (eObject instanceof RelationModel) {
+				transformToCoreTransformations(coreTransformations, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
 			}
 		}
+		for (RelationalTransformation relationalTransformation : relationalTransformation2coreTransformation.keySet()) {
+			for (org.eclipse.qvtd.pivot.qvtbase.Rule rule : relationalTransformation.getRule()) {
+				if (rule instanceof Relation) {
+					TopLevelRelationToMappingForEnforcement topLevelRelationToMappingForEnforcement = new TopLevelRelationToMappingForEnforcement(this);
+					topLevelRelationToMappingForEnforcement.doTopLevelRelationToMappingForEnforcement((Relation)rule);
+				}
+			}
+		}
+		executeFactory(InvokedRelationToMappingForEnforcement.FACTORY);
 	}
 
 	public void executeFactory(Rule.@NonNull Factory factory) {
@@ -329,9 +343,9 @@ public class QvtrToQvtcTransformation
 		}
 	}
 
-
-	public @NonNull Collection<? extends EObject> getCoreRoots() {
-		return coreRoots;
+	public @NonNull Transformation getCoreTransformation(@NonNull RelationalTransformation rt) {
+		Transformation coreTransformation = relationalTransformation2coreTransformation.get(rt);
+		return ClassUtil.nonNullState(coreTransformation);
 	}
 	
 	public @NonNull DomainPattern getDomainPattern(@NonNull Domain d) {
@@ -414,9 +428,8 @@ public class QvtrToQvtcTransformation
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Package getTracePackage(@NonNull RelationalTransformation rt) {
-		Package tracePackage = relationalTransformation2tracePackage.get(rt);
-		assert tracePackage != null;
-		return tracePackage;
+		org.eclipse.ocl.pivot.Package tracePackage = relationalTransformation2tracePackage.get(rt);
+		return ClassUtil.nonNullState(tracePackage);
 	}
 
 	public @NonNull StandardLibrary getStandardLibrary() {
@@ -425,10 +438,6 @@ public class QvtrToQvtcTransformation
 
 	public @Nullable TemplateExp getTemplateExpression(@NonNull Variable dv) {		
 		return variable2templateExp.get(dv);
-	}
-
-	public @NonNull Collection<? extends EObject> getTraceRoots() {
-		return tracePackages;
 	}
 
 	public @Nullable Variable getVariableTrace(@NonNull Variable referredVariable) {
@@ -460,6 +469,10 @@ public class QvtrToQvtcTransformation
 //			}
 		}
 	}
+	
+	public void putCoreTransformation(@NonNull RelationalTransformation rt, @NonNull Transformation coreTransformation) {		
+		relationalTransformation2coreTransformation.put(rt, coreTransformation);
+	}
 
 	public void putRelationTrace(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class rc) {		
 		relationToTraceClass.put(r, rc);
@@ -481,17 +494,15 @@ public class QvtrToQvtcTransformation
         this.coreModel.setExternalURI(asResource.getURI().toString());
         // Copy imports
         
-        Package capsule = PivotFactory.eINSTANCE.createPackage();
-        this.coreModel.getOwnedPackages().add(capsule);
+        Package corePackage = PivotFactory.eINSTANCE.createPackage();
+        this.coreModel.getOwnedPackages().add(corePackage);
         asResource.getContents().add(this.coreModel);
-        for (EObject eObject : coreRoots) {
-        	if (eObject instanceof org.eclipse.qvtd.pivot.qvtbase.Transformation) {
-                capsule.getOwnedClasses().add((org.eclipse.qvtd.pivot.qvtbase.Transformation) eObject);
-        	}
-        	else {
-        		asResource.getContents().add(eObject);
-        	}
-        }
+        corePackage.getOwnedClasses().addAll(coreTransformations);
+		for (EObject eObject : potentialOrphans) {
+			if (eObject.eContainer() == null) {
+				asResource.getContents().add(eObject);
+			}
+		}
 		asResource.save(options);
 	}
 
@@ -508,6 +519,19 @@ public class QvtrToQvtcTransformation
             coreModel.getOwnedImports().add(i);
         }
 		asResource.save(options);
+	}
+	
+	private void transformToCoreTransformations(@NonNull List<@NonNull Transformation> coreTransformations, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
+		for (org.eclipse.ocl.pivot.Package relationPackage : relationPackages) {
+			for (org.eclipse.ocl.pivot.Class relationClass : relationPackage.getOwnedClasses()) {
+				if (relationClass instanceof RelationalTransformation) {
+					RelationalTransformationToMappingTransformation relationalTransformationToMappingTransformation = new RelationalTransformationToMappingTransformation(this);
+					Transformation coreTransformation = relationalTransformationToMappingTransformation.doRelationalTransformationToMappingTransformation((RelationalTransformation)relationClass);
+					coreTransformations.add(coreTransformation);
+				}
+			}
+			transformToCoreTransformations(coreTransformations, ClassUtil.nullFree(relationPackage.getOwnedPackages()));
+		}
 	}
 	
 	private void transformToTracePackages(@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {

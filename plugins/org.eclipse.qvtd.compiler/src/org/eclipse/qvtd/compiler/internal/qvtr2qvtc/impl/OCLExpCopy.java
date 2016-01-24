@@ -109,10 +109,10 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
  */
 public class OCLExpCopy extends PivotSwitch<@Nullable Element> {
 
-    @NonNull private QvtrToQvtcTransformation transformation;
+    @NonNull private QvtrToQvtcTransformation qvtr2qvtc;
     
-    public OCLExpCopy(@NonNull QvtrToQvtcTransformation transformation) {
-        this.transformation = transformation;
+    public OCLExpCopy(@NonNull QvtrToQvtcTransformation qvtr2qvtc) {
+        this.qvtr2qvtc = qvtr2qvtc;
     }
     
     /**
@@ -314,7 +314,7 @@ public class OCLExpCopy extends PivotSwitch<@Nullable Element> {
     public Element caseEnumLiteralExp(EnumLiteralExp in) {
 	    final EnumLiteralExp out = PivotFactory.eINSTANCE.createEnumLiteralExp();
 	    assert out != null;
-	    transformation.addOrphan(out);
+	    qvtr2qvtc.addOrphan(out);
 //	    out.setIsStatic(in.isStatic());
 	    out.setName(in.getName());
 	    out.setIsRequired(in.isIsRequired());
@@ -815,7 +815,7 @@ public class OCLExpCopy extends PivotSwitch<@Nullable Element> {
     public Element caseVariableExp(VariableExp in) {
         final VariableExp out = PivotFactory.eINSTANCE.createVariableExp();
         assert out != null;
-        transformation.addOrphan(out);
+        qvtr2qvtc.addOrphan(out);
 //        out.setIsStatic(in.isStatic());
         out.setName(in.getName());
         out.setIsRequired(in.isIsRequired());
@@ -825,7 +825,7 @@ public class OCLExpCopy extends PivotSwitch<@Nullable Element> {
             out.setType((Type) doSwitch(_type));            
         Variable v = (Variable) in.getReferredVariable();
         assert v != null;
-        out.setReferredVariable(transformation.getVariableTrace(v));
+        out.setReferredVariable(qvtr2qvtc.getVariableTrace(v));
         for (ElementExtension _extension : in.getOwnedExtensions()) {
             out.getOwnedExtensions().add((ElementExtension) doSwitch(_extension));
         }

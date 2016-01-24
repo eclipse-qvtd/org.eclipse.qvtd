@@ -13,44 +13,18 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
-public class RelationalTransformationToMappingTransformation extends AbstractRule
-{
-	private static class Factory extends AbstractRule.Factory
-	{
-		@Override
-		public @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation, @NonNull EObject eo) {
-			Rule rule = null;
-			if (eo instanceof RelationalTransformation) {
-				rule = new RelationalTransformationToMappingTransformation(transformation, (RelationalTransformation) eo);
-				Rule tracedRule = transformation.getRecord(rule.getRuleBindings());
-				if (tracedRule != null)
-					rule = tracedRule;
-			}
-			return rule;
-		}
-
-		@Override
-		public @Nullable Rule createRule(
-				@NonNull QvtrToQvtcTransformation transformation,
-				@NonNull List<EObject> eos) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	}
-	
+public class RelationalTransformationToMappingTransformation
+{	
 	private class SubRecord 
-	{
-		
+	{		
 		// Relations
 	//	@NonNull public TypedModel rtm;
 		@NonNull public String tmn;
@@ -64,40 +38,19 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 			this.tmn = tmn;
 			this.up = up;
 		}
-
-		
 	}
-
-	public static final Rule.@NonNull Factory FACTORY = new Factory(); 
-	
-	
-	// Core
-	Transformation mt = null;
-	private final @NonNull RelationalTransformation rt;
-	org.eclipse.ocl.pivot.Package p = null;
-	TypedModel mmtm = null;
-	//public static final RuleBindings.@NonNull RuleKey<Transformation> CORE_mt = RULE_BINDINGS.create((Transformation)null, "mt");
-//	public static final RuleBindings.@NonNull RuleKey<TypedModel> CORE_mtm = RULE_BINDINGS.create((TypedModel)null, "mtm");
-	
-	// Shared
-//	public static final RuleBindings.@NonNull RuleKey<String> SHARED_tmn = RULE_BINDINGS.create((String)null, "tmn");
-//	public static final RuleBindings.@NonNull RuleKey<List<org.eclipse.ocl.examples.pivot.Package>> SHARED_up = RULE_BINDINGS.create((List<org.eclipse.ocl.examples.pivot.Package>)null, "up");
-	String rtn;
 	 
-	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
+	protected final @NonNull QvtrToQvtcTransformation qvtr2qvtc;
 
-	
-	
-	public RelationalTransformationToMappingTransformation(@NonNull QvtrToQvtcTransformation transformation, @NonNull RelationalTransformation rt) {
-		super(transformation);
-		this.rt = rt;
+	public RelationalTransformationToMappingTransformation(@NonNull QvtrToQvtcTransformation qvtr2qvtc) {
+		this.qvtr2qvtc = qvtr2qvtc;
 	}
-
-	@Override
-	public void check() {
-		rtn = rt.getName();
-		assert (rt != null) && (mt == null);
-		p = transformation.getTracePackage(rt);
+	
+	public @NonNull Transformation doRelationalTransformationToMappingTransformation(@NonNull RelationalTransformation rt) {
+		@NonNull List<@NonNull SubRecord> subRecords = new ArrayList<@NonNull SubRecord>();
+		// check
+		String rtn = rt.getName();
+		org.eclipse.ocl.pivot.Package p = qvtr2qvtc.getTracePackage(rt);
 		assert p != null;
 		for (TypedModel rtm : rt.getModelParameter()) {
 			@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = rtm.getUsedPackage();
@@ -105,35 +58,17 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 			assert tmn != null;
 			subRecords.add(new SubRecord(rtm, tmn, usedPackage));
 		}
-	}
-	
-	public @Nullable Transformation getCore() {
-		return mt;
-	}
-
-	@Override
-	public void instantiateOutput() {
-		mt = QVTbaseFactory.eINSTANCE.createTransformation();
-		assert mt != null;
-		transformation.addOrphan(mt);
+		// instantiateOutput() {
+		Transformation mt = QVTbaseFactory.eINSTANCE.createTransformation();
+		mt.setName(rtn);
+		qvtr2qvtc.putCoreTransformation(rt, mt);
 		// One TypeModel for the middle model
-		mmtm =  QVTbaseFactory.eINSTANCE.createTypedModel();
+		TypedModel mmtm =  QVTbaseFactory.eINSTANCE.createTypedModel();
 		for (SubRecord subRecord : subRecords) {
 			TypedModel mtm =  QVTbaseFactory.eINSTANCE.createTypedModel();
 			subRecord.mtm = mtm;
 		}
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.build.qvtrtoqvtc.impl.AbstractRule#setAttributes()
-	 */
-	@Override
-	public void setAttributes() {
-		assert mt != null;
-		mt.setName(rtn);
-		assert p != null;
-		assert mmtm != null;
+		// setAttributes
 		mmtm.setName("");
 		mmtm.getUsedPackage().add(p);
 		mt.getModelParameter().add(mmtm);
@@ -144,18 +79,6 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 			mtm.getUsedPackage().addAll(subRecord.up);
 			mt.getModelParameter().add(mtm);
 		}
+		return mt;
 	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.build.qvtrtoqvtc.impl.AbstractRule#when()
-	 */
-	@Override
-	public boolean when() {
-		p = transformation.getTracePackage(rt);
-		assert p != null;
-		return true;
-	}
-	
-	
-	
 }
