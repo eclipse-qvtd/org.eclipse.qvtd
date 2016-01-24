@@ -13,14 +13,8 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
 
-public class TROppositeDomainsToMappingForEnforcement extends AbstractRule {
-	
-	
-	
-//	private class SubRecord {
-//		
-//	}
-	
+public class TROppositeDomainsToMappingForEnforcement extends AbstractRule
+{
 	protected TROppositeDomainsToMappingForEnforcement(@NonNull QvtrToQvtcTransformation transformation) {
 		super(transformation);
 	}

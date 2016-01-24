@@ -132,7 +132,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		if (r.isIsTopLevel()) {
 			for (Domain d : r.getDomain()) {
 				RelationDomain rd = (RelationDomain) d;
-				if (rd.isIsEnforceable() && QVTr2QVTcRelations.getDomainPattern(rd).getTemplateExpression() instanceof ObjectTemplateExp) {
+				if (rd.isIsEnforceable() && transformation.getDomainPattern(rd).getTemplateExpression() instanceof ObjectTemplateExp) {
 					//Mapping m = QVTcoreFactory.eINSTANCE.createMapping();
 					String dn = rd.getName();
 					assert dn != null;
@@ -141,7 +141,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 					assert tmn != null;
 					List<org.eclipse.ocl.pivot.Package> up = dir.getUsedPackage();
 					assert up != null;
-					DomainPattern dp = QVTr2QVTcRelations.getDomainPattern(rd);
+					DomainPattern dp = transformation.getDomainPattern(rd);
 					List<Variable> domainVars = dp.getBindsTo();
 					ObjectTemplateExp te = (ObjectTemplateExp) dp.getTemplateExpression();
 					Variable tev = te.getBindsTo();
@@ -250,7 +250,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			rpSet.addAll(relations.rejectRelationCallPredicates(ClassUtil.nullFree(rWhere.getPredicate())));
 			whereVars.addAll(ClassUtil.nullFree(rWhere.getBindsTo()));
 		}
-		Set<@NonNull Variable> sharedDomainVars = relations.getSharedDomainVars(r);
+		Set<@NonNull Variable> sharedDomainVars = transformation.getSharedDomainVars(r);
 		Set<@NonNull Variable> allDomainVars = relations.getAllDomainVars(r);
 		Set<@NonNull Variable> unsharedWhereVars = new HashSet<@NonNull Variable>(whereVars);
 		unsharedWhereVars.removeAll(whenVars);
@@ -261,7 +261,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		for (SubRecord subRecord : subRecords) {
 			Set<Variable> oppositeDomainVars = new HashSet<Variable>();
 			for (Domain d : subRecord.rOppositeDomains) {
-				oppositeDomainVars.addAll(QVTr2QVTcRelations.getDomainPattern(d).getBindsTo());
+				oppositeDomainVars.addAll(transformation.getDomainPattern(d).getBindsTo());
 			}
 			Set<@NonNull Variable> domainBottomUnSharedVars = new HashSet<@NonNull Variable>(subRecord.domainVars);
 			domainBottomUnSharedVars.removeAll(whenVars);

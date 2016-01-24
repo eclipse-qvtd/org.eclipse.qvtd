@@ -97,7 +97,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	public void check() {
 		rtn = rt.getName();
 		assert (rt != null) && (mt == null);
-		p = transformation.getTransformationToPackageTrace(rt);
+		p = transformation.getTracePackage(rt);
 		assert p != null;
 		for (TypedModel rtm : rt.getModelParameter()) {
 			@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = rtm.getUsedPackage();
@@ -151,15 +151,9 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	 */
 	@Override
 	public boolean when() {
-		RelationalTransformationToTracePackage whenRule = new RelationalTransformationToTracePackage(transformation, rt); 
-		RuleBindings whenBindings = whenRule.getRuleBindings();
-		RelationalTransformationToTracePackage whenRuleRecord = (RelationalTransformationToTracePackage) transformation.getRecord(whenBindings);
-		if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
-			p = whenRuleRecord.getCore();
-			assert p != null;
-			return true;
-		}
-		return false;
+		p = transformation.getTracePackage(rt);
+		assert p != null;
+		return true;
 	}
 	
 	

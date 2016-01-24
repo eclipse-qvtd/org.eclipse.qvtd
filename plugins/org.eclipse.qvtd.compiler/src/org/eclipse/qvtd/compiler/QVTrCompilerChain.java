@@ -55,9 +55,9 @@ public class QVTrCompilerChain extends AbstractCompilerChain
     	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(environmentFactory, rResource, cResource, qvtcTraceResource);
 		t.prepare();
 		t.execute();		
-//        t.saveTrace(qvtcTraceResource, XMIUtil.createSaveOptions());
+        t.saveTrace(qvtcTraceResource, XMIUtil.createSaveOptions());
         assertNoResourceErrors("Trace save", qvtcTraceResource);
-//        t.saveCore(cResource, XMIUtil.createSaveOptions());
+        t.saveCore(cResource, XMIUtil.createSaveOptions());
         assertNoResourceErrors("Core save", cResource);
 		return cResource;
 	}

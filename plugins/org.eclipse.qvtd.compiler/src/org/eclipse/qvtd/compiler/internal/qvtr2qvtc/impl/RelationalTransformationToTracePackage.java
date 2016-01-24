@@ -10,78 +10,100 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTcRelations;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
+import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
-public class RelationalTransformationToTracePackage extends AbstractRule
+public class RelationalTransformationToTracePackage
 {
-	// Relation
-	private final @NonNull RelationalTransformation rt;	
+	protected final@NonNull QvtrToQvtcTransformation transformation;
 
-	// Core
-	private org.eclipse.ocl.pivot.Package p;
-	
-	// Primitives
-	private String rtn;
-	
-	// Mapping
-	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relation2class = new HashMap<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class>();
-
-	public RelationalTransformationToTracePackage(@NonNull QvtrToQvtcTransformation transformation, @NonNull RelationalTransformation rt) {
-		super(transformation);
-		this.rt = rt;
+	public RelationalTransformationToTracePackage(@NonNull QvtrToQvtcTransformation transformation) {
+		this.transformation = transformation;
 	}
 
-	@Override
-	public void check() {
-		rtn = rt.getName();
-		for (org.eclipse.qvtd.pivot.qvtbase.Rule r : ClassUtil.nullFree(rt.getRule())) {
+	public org.eclipse.ocl.pivot.@NonNull Package doRelationalTransformationToTracePackage(@NonNull RelationalTransformation rt) {
+		org.eclipse.ocl.pivot.Package p = PivotFactory.eINSTANCE.createPackage();
+		assert p != null;
+		p.setName("P" + rt.getName());
+		p.setURI(p.getName());
+		transformation.putTracePackage(rt, p);
+		for (Rule r : ClassUtil.nullFree(rt.getRule())) {
 			if (r instanceof Relation) {
 				org.eclipse.ocl.pivot.Class rc = PivotFactory.eINSTANCE.createClass();
 				assert rc != null;
-				relation2class.put((Relation)r, rc);
+				p.getOwnedClasses().add(rc);
+				doRelationToTraceClass((Relation)r, rc);
 			}
 		}
-	}
-	
-	public org.eclipse.ocl.pivot.@Nullable Package getCore() {
 		return p;
 	}
 
-	@Override
-	public void instantiateOutput() {
-		p = PivotFactory.eINSTANCE.createPackage();
-		assert p != null;
-		transformation.addOrphan(p);
-		transformation.putTransformationToPackageTrace(rt, p);
-		for (Relation r : relation2class.keySet()) {
-			org.eclipse.ocl.pivot.Class rc = relation2class.get(r);
-			p.getOwnedClasses().add(rc);
+	private void doRelationToTraceClass(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class rc) {	
+		transformation.putRelationTrace(r, rc);
+		String rn = r.getName();
+		assert rn != null;
+		rc.setName("T"+rn);
+		for (Variable rv : transformation.getSharedDomainVars(r))  {
+			String vn = rv.getName();
+			Type c = rv.getType();
+			assert (vn != null) && (c != null);
+			transformation.whenTraceProperty(rc, vn, c);
+		}
+		for (Domain d : ClassUtil.nullFree(r.getDomain())) {
+			for (DomainPattern rdp : ClassUtil.nullFree(((RelationDomain) d).getPattern())) {
+				TemplateExp t = rdp.getTemplateExpression();
+				assert t != null;
+				doSubTemplateToTraceClassProps(t, rc);
+			}
 		}
 	}
 
-	@Override
-	public void setAttributes() {	
-		p.setName("P" + rtn);
-		p.setURI(p.getName());
+	private void doSubTemplateToTraceClassProps(@NonNull TemplateExp t, org.eclipse.ocl.pivot.@NonNull Class rc) {
+		if (t instanceof CollectionTemplateExp) {
+			doCollectionTemplateToTraceClassProps((CollectionTemplateExp) t, rc);
+		}
+		if (t instanceof ObjectTemplateExp) {
+			doObjectTemplateToTraceClassProps((ObjectTemplateExp) t, rc);
+		}
 	}
-	
-	@Override
-	public void where() {
-		QVTr2QVTcRelations relations = new QVTr2QVTcRelations(transformation);
-		for (Relation r : relation2class.keySet()) {
-			org.eclipse.ocl.pivot.Class rc = relation2class.get(r);
-			assert rc != null;
-			relations.doRelationToTraceClass(r, rc);
+
+	private void doCollectionTemplateToTraceClassProps(@NonNull CollectionTemplateExp t, org.eclipse.ocl.pivot.@NonNull Class rc) {	
+		for (OCLExpression m : t.getMember()) {
+			if (m instanceof TemplateExp) {
+				// Don't add trace attributes for collections, just for the members
+				doSubTemplateToTraceClassProps((TemplateExp) m, rc);
+			}
+		}
+	}
+
+	private void doObjectTemplateToTraceClassProps(@NonNull ObjectTemplateExp t, org.eclipse.ocl.pivot.@NonNull Class rc) {	
+		Variable tv = t.getBindsTo();
+		assert tv != null;
+		String vn = tv.getName();
+		Type c = tv.getType();
+		assert (vn != null) && (c != null);
+		transformation.whenTraceProperty(rc, vn, c);
+		for (PropertyTemplateItem pt : t.getPart()) {
+			OCLExpression value = pt.getValue();
+			assert value != null;
+			if (value instanceof TemplateExp) {
+				doSubTemplateToTraceClassProps((TemplateExp) value, rc);
+			}
 		}
 	}
 }

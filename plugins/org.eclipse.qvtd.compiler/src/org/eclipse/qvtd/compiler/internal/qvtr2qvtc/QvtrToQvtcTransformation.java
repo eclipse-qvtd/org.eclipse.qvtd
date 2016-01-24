@@ -47,6 +47,7 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.RuleBindings;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.TopLevelRelationToMappingForEnforcement;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.utilities.TransformationTraceData;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.utilities.TransformationTraceDataImpl;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
@@ -66,6 +67,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -78,12 +80,11 @@ public class QvtrToQvtcTransformation
 	private final @NonNull Resource qvtrResource;
 	private final @NonNull Resource qvtcResource;
 	
-	private final @NonNull List<EObject> potentialOrphans = new ArrayList<EObject>();
-	private final @NonNull List<EObject> traceRoots = new ArrayList<EObject>();
-	private final @NonNull List<EObject> coreRoots = new ArrayList<EObject>();
-	private final @NonNull Map<Variable, Variable> variableTrace = new HashMap<Variable, Variable>();
-	private final @NonNull Map<Relation, org.eclipse.ocl.pivot.Class> relationToTraceClass = new HashMap<Relation, org.eclipse.ocl.pivot.Class>();
-	private final @NonNull Map<RelationalTransformation, org.eclipse.ocl.pivot.Package>  transformationToPackage = new HashMap<RelationalTransformation, org.eclipse.ocl.pivot.Package>();
+	private final @NonNull List<@NonNull EObject> potentialOrphans = new ArrayList<@NonNull EObject>();
+	private final @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
+	private final @NonNull List<@NonNull EObject> coreRoots = new ArrayList<@NonNull EObject>();
+	private final @NonNull Map<@NonNull Variable, @NonNull Variable> variableTrace = new HashMap<@NonNull Variable, @NonNull Variable>();
+	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relationToTraceClass = new HashMap<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class>();
 	// Un-navigable opposites
 	//
 	//	The Key that identifies each Class.
@@ -139,7 +140,7 @@ public class QvtrToQvtcTransformation
 			= new HashMap<org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule, @NonNull Map<@NonNull String, @NonNull CoreDomain>>();	
 	
 	/**
-	 * The lazily created named Trace Properties in each Tracee Class.
+	 * The lazily created named Trace Properties in each Trace Class.
 	 */
 	private @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Map<@NonNull String, @NonNull Property>> traceClass2name2traceProperty
 			= new HashMap<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Map<@NonNull String, @NonNull Property>>();	
@@ -148,7 +149,10 @@ public class QvtrToQvtcTransformation
 	 * The lazily created named Core mappings for each transformation.
 	 */
 	private @NonNull Map<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>> transformation2name2mapping
-			= new HashMap<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>>();	
+			= new HashMap<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>>();
+
+	private @NonNull Map<@NonNull RelationalTransformation, org.eclipse.ocl.pivot.@NonNull Package> relationalTransformation2tracePackage
+			= new HashMap<@NonNull RelationalTransformation, org.eclipse.ocl.pivot.@NonNull Package>();	
 	
 	public QvtrToQvtcTransformation(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource, @Nullable Resource traceResource) {	
 		this.environmentFactory = environmentFactory;
@@ -271,16 +275,9 @@ public class QvtrToQvtcTransformation
 	public void execute() {
 		for (EObject eObject : qvtrResource.getContents()) {
 			if (eObject instanceof RelationModel) {
-				execute(ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
+				transformToTracePackages(tracePackages, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
 			}
 		}
-//		executeFactory(RelationalTransformationToTracePackage.FACTORY);
-		for (EObject eObject : potentialOrphans) {
-			if (eObject.eContainer() == null) {
-				traceRoots.add(eObject);
-			}
-		}
-		potentialOrphans.clear();
 		executeFactory(RelationalTransformationToMappingTransformation.FACTORY);
 		executeFactory(TopLevelRelationToMappingForEnforcement.FACTORY);
 		executeFactory(InvokedRelationToMappingForEnforcement.FACTORY);
@@ -290,23 +287,6 @@ public class QvtrToQvtcTransformation
 			}
 		}
 	}
-	
-	private void execute(@NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
-		for (org.eclipse.ocl.pivot.Package relationPackage : relationPackages) {
-			for (org.eclipse.ocl.pivot.Class relationClass : relationPackage.getOwnedClasses()) {
-				if (relationClass instanceof RelationalTransformation) {
-					execute((RelationalTransformation)relationClass);
-				}
-			}
-			execute(ClassUtil.nullFree(relationPackage.getOwnedPackages()));
-		}
-	}
-	
-	private void execute(@NonNull RelationalTransformation relationTransformation) {
-		Rule rule = new RelationalTransformationToTracePackage(this, relationTransformation);
-		executeTopLevelRule(rule);
-	}
-
 
 	public void executeFactory(Rule.@NonNull Factory factory) {
 		for (Rule rule : factory.getRules(this, qvtrResource)) {
@@ -354,6 +334,15 @@ public class QvtrToQvtcTransformation
 		return coreRoots;
 	}
 	
+	public @NonNull DomainPattern getDomainPattern(@NonNull Domain d) {
+		List<@NonNull DomainPattern> pattern = ClassUtil.nullFree(((RelationDomain) d).getPattern());
+		assert pattern.size() == 1;
+		DomainPattern domainPattern = pattern.get(0);
+		assert domainPattern != null;
+		return domainPattern;
+	}
+	
+	
 	public @Nullable Relation getInvokingRelationForRelationCallExp(@NonNull RelationCallExp e) {
 		
 		return invokingRelationsForRelationCallExp.get(e);
@@ -399,40 +388,47 @@ public class QvtrToQvtcTransformation
 	}
 
 
-	public @Nullable List<RelationCallExp> getRelationCallExpsForRelation(@NonNull Relation r) {
-		
+	public @Nullable List<RelationCallExp> getRelationCallExpsForRelation(@NonNull Relation r) {		
 		return relationCallExpsForRelation.get(r);
 	}
 	
-	public org.eclipse.ocl.pivot.@Nullable Class getRelationTrace(@NonNull Relation relation) {
-		
+	public org.eclipse.ocl.pivot.@Nullable Class getRelationTrace(@NonNull Relation relation) {		
 		return relationToTraceClass.get(relation);
 	}
-
-
-	/**
-		 * @return the metamodelManager
-		 */
-	//	public MetamodelManager getMetamodelManager() {
-	//	return metamodelManager;
-	//}
-		public @NonNull StandardLibrary getStandardLibrary() {
-			return environmentFactory.getStandardLibrary();
+	
+	/* =============  Queries ============= */
+	// TODO bug 453863
+	public @NonNull Set<@NonNull Variable> getSharedDomainVars(@NonNull Relation r) {	
+		Set<@NonNull Variable> vars = new HashSet<@NonNull Variable>();
+		for (Domain d : ClassUtil.nullFree(r.getDomain())) {
+			for (DomainPattern domainPattern : ClassUtil.nullFree(((RelationDomain) d).getPattern())) {
+				List<@NonNull Variable> bt = ClassUtil.nullFree(domainPattern.getBindsTo()); 
+				if (vars.isEmpty()) {
+					vars.addAll(bt);
+				} else {
+					vars.retainAll(bt);
+				}
+			}
 		}
+		return vars;
+	}
 
+	public org.eclipse.ocl.pivot.@NonNull Package getTracePackage(@NonNull RelationalTransformation rt) {
+		Package tracePackage = relationalTransformation2tracePackage.get(rt);
+		assert tracePackage != null;
+		return tracePackage;
+	}
+
+	public @NonNull StandardLibrary getStandardLibrary() {
+		return environmentFactory.getStandardLibrary();
+	}
 
 	public @Nullable TemplateExp getTemplateExpression(@NonNull Variable dv) {		
 		return variable2templateExp.get(dv);
 	}
 
-	
 	public @NonNull Collection<? extends EObject> getTraceRoots() {
-		return traceRoots;
-	}
-	
-	public org.eclipse.ocl.pivot.@Nullable Package getTransformationToPackageTrace(RelationalTransformation rt) {
-		
-		return transformationToPackage.get(rt);
+		return tracePackages;
 	}
 
 	public @Nullable Variable getVariableTrace(@NonNull Variable referredVariable) {
@@ -440,7 +436,6 @@ public class QvtrToQvtcTransformation
 		return variableTrace.get(referredVariable);
 	}
 	
-
 	private @NonNull Set<@NonNull Variable> getVarsOfExp(@NonNull OCLExpression e) {
 		QVTr2QVTcRelations rels = new QVTr2QVTcRelations(this);
 		return rels.getVarsOfExp(e);
@@ -466,18 +461,15 @@ public class QvtrToQvtcTransformation
 		}
 	}
 
-	public void putRelationTrace(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class rc) {
-		
+	public void putRelationTrace(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class rc) {		
 		relationToTraceClass.put(r, rc);
 	}
 	
-	public void putTransformationToPackageTrace(RelationalTransformation rt, org.eclipse.ocl.pivot.Package p) {
-		
-		transformationToPackage.put(rt, p);
+	public void putTracePackage(@NonNull RelationalTransformation rt, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {		
+		relationalTransformation2tracePackage.put(rt, tracePackage);
 	}
 	
 	public void putVariableTrace(@NonNull Variable rv, @NonNull Variable mv) {
-		
 		Variable oldVal = variableTrace.put(rv, mv);
 		// Variables should only be traced once
 		if (oldVal != null) {
@@ -485,15 +477,14 @@ public class QvtrToQvtcTransformation
 		}
 	}
 
-	
-	public void saveCore(@NonNull Resource asResource, @NonNull Collection<@NonNull ? extends EObject> eObjects, @NonNull Map<?, ?> options) throws IOException {
+	public void saveCore(@NonNull Resource asResource, @NonNull Map<?, ?> options) throws IOException {
         this.coreModel.setExternalURI(asResource.getURI().toString());
         // Copy imports
         
         Package capsule = PivotFactory.eINSTANCE.createPackage();
         this.coreModel.getOwnedPackages().add(capsule);
         asResource.getContents().add(this.coreModel);
-        for (EObject eObject : eObjects) {
+        for (EObject eObject : coreRoots) {
         	if (eObject instanceof org.eclipse.qvtd.pivot.qvtbase.Transformation) {
                 capsule.getOwnedClasses().add((org.eclipse.qvtd.pivot.qvtbase.Transformation) eObject);
         	}
@@ -504,27 +495,37 @@ public class QvtrToQvtcTransformation
 		asResource.save(options);
 	}
 
-	public void saveTrace(@NonNull Resource asResource, @NonNull Collection<@NonNull ? extends EObject> eObjects, @NonNull Map<?, ?> options) throws IOException {
+	public void saveTrace(@NonNull Resource asResource,  @NonNull Map<?, ?> options) throws IOException {
         Model root = PivotFactory.eINSTANCE.createModel();
         root.setExternalURI(asResource.getURI().toString());
         asResource.getContents().add(root);
-        for (EObject eObject : eObjects) {
-        	if (eObject instanceof org.eclipse.ocl.pivot.Package) {
-        		org.eclipse.ocl.pivot.Package p = (org.eclipse.ocl.pivot.Package)eObject; 
-                root.getOwnedPackages().add(p);
-                // Add the package to the CoreModel imports, there should be only one!!
-                Import i = PivotFactory.eINSTANCE.createImport();
-                i.setName(p.getName());
-                i.setImportedNamespace(p);
-                this.coreModel.getOwnedImports().add(i);
-        	}
-        	else {
-        		asResource.getContents().add(eObject);
-        	}
+        for (org.eclipse.ocl.pivot.Package p : tracePackages) {
+            root.getOwnedPackages().add(p);
+            // Add the package to the CoreModel imports, there should be only one!!
+            Import i = PivotFactory.eINSTANCE.createImport();
+            i.setName(p.getName());
+            i.setImportedNamespace(p);
+            coreModel.getOwnedImports().add(i);
         }
 		asResource.save(options);
 	}
 	
+	private void transformToTracePackages(@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
+		for (org.eclipse.ocl.pivot.Package relationPackage : relationPackages) {
+			for (org.eclipse.ocl.pivot.Class relationClass : relationPackage.getOwnedClasses()) {
+				if (relationClass instanceof RelationalTransformation) {
+					RelationalTransformationToTracePackage relationalTransformationToTracePackage = new RelationalTransformationToTracePackage(this);
+					org.eclipse.ocl.pivot.Package tracePackage = relationalTransformationToTracePackage.doRelationalTransformationToTracePackage((RelationalTransformation)relationClass);
+					tracePackages.add(tracePackage);
+				}
+			}
+			transformToTracePackages(tracePackages, ClassUtil.nullFree(relationPackage.getOwnedPackages()));
+		}
+	}
+	
+	/**
+	 * Lazily create the BottomPattern for a coreArea.
+	 */
 	public @NonNull BottomPattern whenBottomPattern(@NonNull Area coreArea) {
 		BottomPattern bottomPattern = area2bottomPattern.get(coreArea);
 		if (bottomPattern == null) {
@@ -536,6 +537,9 @@ public class QvtrToQvtcTransformation
 		return bottomPattern;
 	}
 
+	/**
+	 * Lazily create the name CoreDomain for a coreRule.
+	 */
 	public @NonNull CoreDomain whenCoreDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule coreRule, @NonNull String name) {
 		Map<@NonNull String, @NonNull CoreDomain> name2coreDomain = rule2name2coreDomain.get(coreRule);
 		if (name2coreDomain == null) {
@@ -552,6 +556,9 @@ public class QvtrToQvtcTransformation
 		return coreDomain;
 	}
 	
+	/**
+	 * Lazily create the GuardPattern for a coreArea.
+	 */
 	public @NonNull GuardPattern whenGuardPattern(@NonNull Area coreArea) {
 		GuardPattern guardPattern = area2guardPattern.get(coreArea);
 		if (guardPattern == null) {
@@ -562,6 +569,9 @@ public class QvtrToQvtcTransformation
 		return guardPattern;
 	}
 
+	/**
+	 * Lazily create the name Mapping for a coreTransformation.
+	 */
 	public @NonNull Mapping whenMapping(@NonNull Transformation coreTransformation, @NonNull String name) {
 		Map<@NonNull String, @NonNull Mapping> name2mapping = transformation2name2mapping.get(coreTransformation);
 		if (name2mapping == null) {
@@ -578,6 +588,9 @@ public class QvtrToQvtcTransformation
 		return coreMapping;
 	}
 
+	/**
+	 * Lazily create the RealizedVariable for a corePattern corresponding to a relationVariable.
+	 */
 	public @NonNull RealizedVariable whenRealizedVariable(@NonNull CorePattern corePattern, @NonNull Variable relationVariable) {	
 		Map<@NonNull Variable, @NonNull RealizedVariable> variable2realizedVariable = pattern2variable2realizedVariable.get(corePattern);
 		if (variable2realizedVariable == null) {
@@ -599,6 +612,9 @@ public class QvtrToQvtcTransformation
 		return realizedVariable;
 	}
 	
+	/**
+	 * Lazily create the name RealizedVariable for a corePattern with a type.
+	 */
 	public @NonNull RealizedVariable whenRealizedVariable(@NonNull CorePattern corePattern, @NonNull String name, @NonNull Type type) {	
 		Map<@NonNull String, @NonNull RealizedVariable> name2realizedVariable = pattern2name2realizedVariable.get(corePattern);
 		if (name2realizedVariable == null) {
@@ -619,6 +635,9 @@ public class QvtrToQvtcTransformation
 		return realizedVariable;
 	}
 	
+	/**
+	 * Lazily create the name Property for a traceClass with a type.
+	 */
 	public @NonNull Property whenTraceProperty(org.eclipse.ocl.pivot.@NonNull Class traceClass, @NonNull String name, @NonNull Type type) {
 		Map<@NonNull String, @NonNull Property> name2traceProperty = traceClass2name2traceProperty.get(traceClass);
 		if (name2traceProperty == null) {
@@ -650,6 +669,9 @@ public class QvtrToQvtcTransformation
 		return traceProperty;
 	}
 	
+	/**
+	 * Lazily create the Variable for a corePattern corresponding to a relationVariable.
+	 */
 	public @NonNull Variable whenVariable(@NonNull CorePattern corePattern, @NonNull Variable relationVariable) {
 		Map<@NonNull Variable, @NonNull Variable> variable2variable = pattern2variable2variable.get(corePattern);
 		if (variable2variable == null) {
@@ -671,6 +693,9 @@ public class QvtrToQvtcTransformation
 		return coreVariable;
 	}
 	
+	/**
+	 * Lazily create the name Variable for a corePattern with a type.
+	 */
 	public @NonNull Variable whenVariable(@NonNull CorePattern corePattern, @NonNull String name, @NonNull Type type) {
 		Map<@NonNull String, @NonNull Variable> name2variable = pattern2name2variable.get(corePattern);
 		if (name2variable == null) {

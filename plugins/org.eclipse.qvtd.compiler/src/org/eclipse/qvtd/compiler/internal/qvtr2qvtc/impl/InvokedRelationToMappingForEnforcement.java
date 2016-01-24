@@ -146,7 +146,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 					assert irn != null;
 					for (Domain d : ClassUtil.nullFree(r.getDomain())) {
 						RelationDomain rd = (RelationDomain)d;
-						DomainPattern dp = QVTr2QVTcRelations.getDomainPattern(rd);
+						DomainPattern dp = transformation.getDomainPattern(rd);
 						if (rd.isIsEnforceable() && dp.getTemplateExpression() instanceof ObjectTemplateExp) {
 							//Mapping m = QVTcoreFactory.eINSTANCE.createMapping();
 							String dn = rd.getName();
@@ -185,37 +185,35 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 		assert mt != null;
 		for (SubRecord subRecord : subRecords) {
 			final Transformation mt2 = mt;
-			if (mt2 != null) {
-				Mapping m = transformation.whenMapping(mt2, rn+'_'+subRecord.irn+'_'+subRecord.dn);
-				assert m != null;
-				subRecord.m = m;
-				GuardPattern mg = transformation.whenGuardPattern(m);
-				assert mg != null;
-				subRecord.mg = mg;
-				BottomPattern mb = transformation.whenBottomPattern(m);
-				assert mb != null;
-				subRecord.mb = mb;
-				CoreDomain md = transformation.whenCoreDomain(m, subRecord.dn);
-				assert md != null;
-				subRecord.md = md;
-				TypedModel mdir = null;
-				for (TypedModel tm : mt2.getModelParameter()) {
-					if (tm.getName() == subRecord.tmn) {
-						if (tm.getUsedPackage().equals(subRecord.up)) {
-							mdir = tm;
-							break;
-						}
+			Mapping m = transformation.whenMapping(mt2, rn+'_'+subRecord.irn+'_'+subRecord.dn);
+			assert m != null;
+			subRecord.m = m;
+			GuardPattern mg = transformation.whenGuardPattern(m);
+			assert mg != null;
+			subRecord.mg = mg;
+			BottomPattern mb = transformation.whenBottomPattern(m);
+			assert mb != null;
+			subRecord.mb = mb;
+			CoreDomain md = transformation.whenCoreDomain(m, subRecord.dn);
+			assert md != null;
+			subRecord.md = md;
+			TypedModel mdir = null;
+			for (TypedModel tm : mt2.getModelParameter()) {
+				if (tm.getName() == subRecord.tmn) {
+					if (tm.getUsedPackage().equals(subRecord.up)) {
+						mdir = tm;
+						break;
 					}
 				}
-				assert mdir != null;
-				subRecord.mdir = mdir;
-				GuardPattern dg = transformation.whenGuardPattern(md);
-				assert dg != null;
-				subRecord.dg = dg;
-				BottomPattern db = transformation.whenBottomPattern(md);
-				assert db != null;
-				subRecord.db = db;
 			}
+			assert mdir != null;
+			subRecord.mdir = mdir;
+			GuardPattern dg = transformation.whenGuardPattern(md);
+			assert dg != null;
+			subRecord.dg = dg;
+			BottomPattern db = transformation.whenBottomPattern(md);
+			assert db != null;
+			subRecord.db = db;
 		}
 	}
 	
@@ -277,7 +275,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 			rpSet.addAll(relations.rejectRelationCallPredicates(ClassUtil.nullFree(r.getWhere().getPredicate())));
 			whereVars.addAll(ClassUtil.nullFree(r.getWhere().getBindsTo()));
 		}
-		Set<Variable> sharedDomainVars = relations.getSharedDomainVars(r);
+		Set<Variable> sharedDomainVars = transformation.getSharedDomainVars(r);
 		Set<Variable> unsharedWhereVars = new HashSet<Variable>(whereVars);
 		unsharedWhereVars.removeAll(whenVars);
 		unsharedWhereVars.removeAll(allDomainVars);
@@ -287,7 +285,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 		for (SubRecord subRecord : subRecords) {
 			Set<Variable> oppositeDomainVars = new HashSet<Variable>();
 			for (Domain d : ClassUtil.nullFree(subRecord.rOppositeDomains)) {
-				oppositeDomainVars.addAll(QVTr2QVTcRelations.getDomainPattern(d).getBindsTo());
+				oppositeDomainVars.addAll(transformation.getDomainPattern(d).getBindsTo());
 			}
 			Set<Variable> domainBottomUnSharedVars = new HashSet<Variable>(subRecord.domainVars);
 			domainBottomUnSharedVars.removeAll(whenVars);

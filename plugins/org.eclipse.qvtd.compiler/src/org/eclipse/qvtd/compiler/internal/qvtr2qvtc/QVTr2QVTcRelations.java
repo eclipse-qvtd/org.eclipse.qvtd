@@ -18,7 +18,6 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.EnumLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -59,62 +58,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class QVTr2QVTcRelations
 {
-	public static @NonNull DomainPattern getDomainPattern(@NonNull Domain d) {
-		List<@NonNull DomainPattern> pattern = ClassUtil.nullFree(((RelationDomain) d).getPattern());
-		assert pattern.size() == 1;
-		DomainPattern domainPattern = pattern.get(0);
-		assert domainPattern != null;
-		return domainPattern;
-	}
-	
 	private @NonNull final QvtrToQvtcTransformation transformation;
-	
-//	private @NonNull final String OPPOSITE_UPPER_SOURCE = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper";
-//	private @NonNull final String OPPOSITE_ROLE_NAME_SOURCE = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
-//	private @NonNull final String EMF_ANNOTATION_DETAIL_KEY = "body";
-//	private @NonNull final String OPPOSITE_UPPER_VALUE = "1";
-//	private @NonNull final String OPPOSITE_ROLE_NAME_VALUE = "middle";
-	
-	
 
 	public QVTr2QVTcRelations(@NonNull QvtrToQvtcTransformation transformation) {
 		this.transformation = transformation;
-	}
-	
-	/*
-	 * Add oppositeUpper and oppositeRoleName annotations
-	 *
-	private void zzaddMiddleSynthesisAnnotations(Property p) {
-		Annotation oppositeUpper = PivotFactory.eINSTANCE.createAnnotation();
-		oppositeUpper.setName(OPPOSITE_UPPER_SOURCE);
-		Detail oppositeUpperDetail = PivotFactory.eINSTANCE.createDetail();
-		oppositeUpperDetail.setName(EMF_ANNOTATION_DETAIL_KEY);
-		oppositeUpperDetail.getValues().add("OPPOSITE_UPPER_VALUE");
-		oppositeUpper.getOwnedDetails().add(oppositeUpperDetail);
-		p.getOwnedAnnotations().add(oppositeUpper);
-		Annotation oppositeRoleName = PivotFactory.eINSTANCE.createAnnotation();
-		oppositeRoleName.setName(OPPOSITE_ROLE_NAME_SOURCE);
-		Detail oppositeRoleNameDetail = PivotFactory.eINSTANCE.createDetail();
-		oppositeRoleNameDetail.setName(EMF_ANNOTATION_DETAIL_KEY);
-		oppositeRoleNameDetail.getValues().add("OPPOSITE_ROLE_NAME_VALUE");
-		oppositeRoleName.getOwnedDetails().add(oppositeRoleNameDetail);
-		p.getOwnedAnnotations().add(oppositeRoleName);
-	} */
-	
-	/* =============  Queries ============= */
-	// TODO bug 453863
-	public @NonNull Set<@NonNull Variable> getSharedDomainVars(Relation r) {
-		
-		Set<@NonNull Variable> vars = new HashSet<@NonNull Variable>();
-		for (Domain d : ClassUtil.nullFree(r.getDomain())) {
-			List<@NonNull Variable> bt = ClassUtil.nullFree(QVTr2QVTcRelations.getDomainPattern(d).getBindsTo()); 
-			if (vars.isEmpty()) {
-				vars.addAll(bt);
-			} else {
-				vars.retainAll(bt);
-			}
-		}
-		return vars;
 	}
 	
 	/*
@@ -339,7 +286,7 @@ public class QVTr2QVTcRelations
 		pe.setReferredProperty(pep);
 		pe.setType(pep.getType());
 		ee.setOwnedSource(pe);
-		ee.setReferredOperation(getEqualsOPeration());
+		ee.setReferredOperation(getEqualsOperation());
 		ee.setType(transformation.getStandardLibrary().getBooleanType());
 		ave.setReferredVariable(mv);
 		ave.setType(mv.getType());
@@ -460,103 +407,6 @@ public class QVTr2QVTcRelations
 			}
 		}
 	}
-	
-	public void doRelationToTraceClass(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class rc) {	
-		transformation.putRelationTrace(r, rc);
-		// check
-		String rn = r.getName();
-		assert rn != null;
-		rc.setName("T"+rn);
-		Set<Variable> sharedDomainVars = getSharedDomainVars(r);
-		doRVarSetToTraceClassProps(new ArrayList<Variable>(sharedDomainVars), rc);
-		for (Domain d : ClassUtil.nullFree(r.getDomain())) {
-			DomainPattern rdp = getDomainPattern(d);
-			TemplateExp t = rdp.getTemplateExpression();
-			assert t != null;
-			doSubObjectTemplateToTraceClassProps(t, rc);
-		    doSubCollectionTemplateToTraceClassProps(t, rc);
-		}
-	}
-	
-	private void doRVarSetToTraceClassProps(@NonNull ArrayList<Variable> rvSeq, @NonNull Class rc) {
-		
-		if (!rvSeq.isEmpty()) {
-			// check
-			Variable rv = rvSeq.remove(0);
-			assert rv != null;
-			// when
-			RVarToTraceClassProp(rv, rc);
-			doRVarSetToTraceClassProps(rvSeq, rc);
-		}
-	}
-	
-	private void RVarToTraceClassProp(@NonNull Variable rv, @NonNull Class rc) {
-		
-		Type c = rv.getType();
-		assert c != null;
-		String vn = rv.getName();
-		assert vn != null;
-		// init
-		/*Property a =*/ transformation.whenTraceProperty(rc, vn, c);
-//		addMiddleSynthesisAnnotations(a);
-//		assert a != null;
-	    // assign
-//	    a.setType(c);
-	}
-
-	private void doSubObjectTemplateToTraceClassProps(@NonNull TemplateExp t, org.eclipse.ocl.pivot.@NonNull Class rc) {	
-		// check
-		if (t instanceof ObjectTemplateExp) {
-			doObjectTemplateToTraceClassProps((ObjectTemplateExp) t, rc);
-		}
-		
-	}
-	
-	private void doObjectTemplateToTraceClassProps(@NonNull ObjectTemplateExp t, org.eclipse.ocl.pivot.@NonNull Class rc) {	
-		// check
-		Variable tv = t.getBindsTo();
-		assert tv != null;
-		Type c = tv.getType();
-		assert c != null;
-		String vn = tv.getName();
-		assert vn != null;
-		// init
-		Property a = transformation.whenTraceProperty(rc, vn, c);
-		assert a != null;
-//		addMiddleSynthesisAnnotations(a); 
-		// where
-		for (PropertyTemplateItem pt : t.getPart()) {
-			OCLExpression value = pt.getValue();
-			assert value != null;
-			if (value instanceof TemplateExp) {
-				TemplateExp tp = (TemplateExp) value;
-				doSubObjectTemplateToTraceClassProps(tp, rc);
-			    doSubCollectionTemplateToTraceClassProps(tp, rc);
-			}
-		}
-	    // assign
-//	    a.setType(c);
-	}
-
-	private void doSubCollectionTemplateToTraceClassProps(@NonNull TemplateExp t, org.eclipse.ocl.pivot.@NonNull Class rc) {
-		// check
-		if (t instanceof CollectionTemplateExp) {
-			doCollectionTemplateToTraceClassProps((CollectionTemplateExp) t, rc);
-		}
-	}
-
-
-	private void doCollectionTemplateToTraceClassProps(@NonNull CollectionTemplateExp t, org.eclipse.ocl.pivot.@NonNull Class rc) {	
-		// check
-		for (OCLExpression m : t.getMember()) {
-			if (m instanceof TemplateExp) {
-				TemplateExp tp = (TemplateExp) m; 
-				// Dont add trace attributes for collections, just for the members
-				doSubObjectTemplateToTraceClassProps(tp, rc);
-			    doSubCollectionTemplateToTraceClassProps(tp, rc);
-			}
-		}
-	}
 
 	// 47
 	public void doTROppositeDomainsToMappingForEnforcement(@NonNull Relation r,
@@ -569,7 +419,7 @@ public class QVTr2QVTcRelations
 		rds.remove(rd); // guard
 		for (RelationDomain ord : rds) {
 			// check
-			DomainPattern dp = getDomainPattern(ord);
+			DomainPattern dp = transformation.getDomainPattern(ord);
 			if (dp.getTemplateExpression() instanceof ObjectTemplateExp) {
 				String dn = ord.getName();
 				assert dn != null;
@@ -604,7 +454,7 @@ public class QVTr2QVTcRelations
 					whenVars.addAll(r.getWhen().getBindsTo());
 				Set<Variable> domainTopVars = new HashSet<Variable>(domainVars);
 				domainTopVars.retainAll(whenVars);
-				Set<Variable> sharedDomainVars = getSharedDomainVars(r);
+				Set<Variable> sharedDomainVars = transformation.getSharedDomainVars(r);
 				Set<Variable> domainBottomUnSharedVars = new HashSet<Variable>(domainVars);
 				domainBottomUnSharedVars.removeAll(whenVars);
 				domainBottomUnSharedVars.removeAll(sharedDomainVars);
@@ -654,7 +504,7 @@ public class QVTr2QVTcRelations
 			@NonNull OCLExpression e, @NonNull BottomPattern mb) {
 
 		// when
-		Set<Variable> sharedDomainVars = getSharedDomainVars(r);
+		Set<Variable> sharedDomainVars = transformation.getSharedDomainVars(r);
 		// check
 		if ((e instanceof VariableExp) && sharedDomainVars.contains(((VariableExp)e).getReferredVariable()) ) {
 			String pn = pp.getName();
@@ -717,7 +567,7 @@ public class QVTr2QVTcRelations
 			@NonNull BottomPattern db) {
 		
 		// when 
-		Set<Variable> sharedDomainVars = getSharedDomainVars(r);
+		Set<Variable> sharedDomainVars = transformation.getSharedDomainVars(r);
 		// check
 		if (e instanceof ObjectTemplateExp) {
 			final Variable rev = ((ObjectTemplateExp)e).getBindsTo();
@@ -751,7 +601,7 @@ public class QVTr2QVTcRelations
 			@NonNull OCLExpression e, @NonNull BottomPattern db) {
 		
 		// when
-		Set<Variable> sharedDomainVars = getSharedDomainVars(r);
+		Set<Variable> sharedDomainVars = transformation.getSharedDomainVars(r);
 		// check
 		if ((e instanceof VariableExp) && !sharedDomainVars.contains(((VariableExp)e).getReferredVariable()) ) {
 			String pn = pp.getName();
@@ -868,7 +718,7 @@ public class QVTr2QVTcRelations
 			@NonNull BottomPattern mb) {
 		
 		// when
-		Set<Variable> sharedDomainVars = getSharedDomainVars(r);
+		Set<Variable> sharedDomainVars = transformation.getSharedDomainVars(r);
 		// check
 		Variable vte = te.getBindsTo();
 		assert vte != null;
@@ -911,7 +761,7 @@ public class QVTr2QVTcRelations
 			@NonNull Relation r, @NonNull ObjectTemplateExp te, 
 			@NonNull BottomPattern db) {
 		// when
-		Set<Variable> sharedDomainVars = getSharedDomainVars(r);
+		Set<Variable> sharedDomainVars = transformation.getSharedDomainVars(r);
 		// check
 		Variable vte = te.getBindsTo();
 		assert vte != null;
@@ -963,7 +813,7 @@ public class QVTr2QVTcRelations
 		}
 		assert mt != null;
 		// guard
-		DomainPattern rdp = getDomainPattern(rd);
+		DomainPattern rdp = transformation.getDomainPattern(rd);
 		TemplateExp rdt = rdp.getTemplateExpression();
 		if ((e instanceof VariableExp) && (rdt instanceof ObjectTemplateExp)) {
 			// check
@@ -1003,7 +853,7 @@ public class QVTr2QVTcRelations
 				pe.setReferredProperty(tp);
 				pe.setType(tp.getType());
 				ee.setOwnedSource(pe);
-				ee.setReferredOperation(getEqualsOPeration());
+				ee.setReferredOperation(getEqualsOperation());
 				ee.setType(transformation.getStandardLibrary().getBooleanType());
 				ve2.setReferredVariable(mv);
 				ve2.setType(mv.getType());
@@ -1229,7 +1079,7 @@ public class QVTr2QVTcRelations
 		assert pep != null;
 		pe.setReferredProperty(pep);
 		pe.setType(pep.getType());
-		ee.setReferredOperation(getEqualsOPeration());
+		ee.setReferredOperation(getEqualsOperation());
 		ee.setType(transformation.getStandardLibrary().getBooleanType());
 		ave.setReferredVariable(mv);
 		ave.setType(mv.getType());
@@ -1312,7 +1162,7 @@ public class QVTr2QVTcRelations
 		rds.remove(rd); // guard
 		for (RelationDomain ord : rds) {
 			// check
-			DomainPattern dp = getDomainPattern(ord);
+			DomainPattern dp = transformation.getDomainPattern(ord);
 			if (dp.getTemplateExpression() instanceof ObjectTemplateExp) {
 				String dn = ord.getName();
 				assert dn != null;
@@ -1349,7 +1199,7 @@ public class QVTr2QVTcRelations
 				Set<Variable> domainTopVars = new HashSet<Variable>(domainVars);
 				domainTopVars.retainAll(whenVars);
 				domainTopVars.add(tev);
-				Set<Variable> sharedDomainVars = getSharedDomainVars(r);
+				Set<Variable> sharedDomainVars = transformation.getSharedDomainVars(r);
 				Set<Variable> domainBottomUnSharedVars = new HashSet<Variable>(domainVars);
 				domainBottomUnSharedVars.removeAll(whenVars);
 				domainBottomUnSharedVars.removeAll(sharedDomainVars);
@@ -1431,7 +1281,7 @@ public class QVTr2QVTcRelations
 		assert pep != null;
 		pe.setReferredProperty(pep);
 		pe.setType(pep.getType());
-		ee.setReferredOperation(getEqualsOPeration());
+		ee.setReferredOperation(getEqualsOperation());
 		ee.setType(transformation.getStandardLibrary().getBooleanType());
 		ave.setReferredVariable(mdv);
 		ave.setType(mdv.getType());
@@ -1459,13 +1309,13 @@ public class QVTr2QVTcRelations
 	public @NonNull Set<@NonNull Variable> getAllDomainVars(@NonNull Relation r) {
 		Set<@NonNull Variable> allDomainVars = new HashSet<@NonNull Variable>();
 		for (Domain d : ClassUtil.nullFree(r.getDomain())) {
-			DomainPattern domainPattern = getDomainPattern(d);
+			DomainPattern domainPattern = transformation.getDomainPattern(d);
 			allDomainVars.addAll(ClassUtil.nullFree(domainPattern.getBindsTo()));
 		}
 		return allDomainVars;
 	}
 	
-	private @NonNull Operation getEqualsOPeration() {
+	private @NonNull Operation getEqualsOperation() {
 		for (Operation o : transformation.getStandardLibrary().getOclAnyType().getOwnedOperations()) {
 			if (o.getName().equals("=")) {
 				return o;

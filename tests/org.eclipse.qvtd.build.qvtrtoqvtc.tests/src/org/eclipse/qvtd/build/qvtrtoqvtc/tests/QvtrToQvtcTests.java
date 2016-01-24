@@ -109,9 +109,9 @@ public class QvtrToQvtcTests extends LoadTestCase {
     	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(ocl.getEnvironmentFactory(), qvtrResource, qvtcResource, qvtcTraceResource);
 		t.prepare();
 		t.execute();		
-        t.saveTrace(qvtcTraceResource, t.getTraceRoots(), TestsXMLUtil.defaultSavingOptions);
+        t.saveTrace(qvtcTraceResource, TestsXMLUtil.defaultSavingOptions);
         assertNoResourceErrors("Trace save", qvtcTraceResource);
-        t.saveCore(qvtcResource, t.getCoreRoots(), TestsXMLUtil.defaultSavingOptions);
+        t.saveCore(qvtcResource, TestsXMLUtil.defaultSavingOptions);
         assertNoResourceErrors("Core save", qvtcResource);
         ocl.dispose();
     }
