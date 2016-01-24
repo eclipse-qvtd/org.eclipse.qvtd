@@ -25,8 +25,11 @@ import org.eclipse.jdt.annotation.NonNull;
  * super class, (or transitively its first super class first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
- * The return in annotated as @NonNull.
+ * The return is annotated as @NonNull.
+ *
+ * @deprecated Explicit 'NonNull' functionality is obsolete with Java 8 @NonNull annotations.  
  */
+ @Deprecated
 public abstract class AbstractNonNullExtendingCS2ASCGModelVisitor<R, C>
 	extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractNonNullExtendingCGModelVisitor<R, C>
 	implements CS2ASCGModelVisitor<R>
@@ -36,7 +39,7 @@ public abstract class AbstractNonNullExtendingCS2ASCGModelVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNonNullExtendingCS2ASCGModelVisitor(@NonNull C context) {
+	protected AbstractNonNullExtendingCS2ASCGModelVisitor(C context) {
 		super(context);
 	}	
 

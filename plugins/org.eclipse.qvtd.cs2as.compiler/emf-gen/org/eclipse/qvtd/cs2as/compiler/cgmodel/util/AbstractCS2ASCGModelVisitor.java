@@ -17,7 +17,6 @@
  *******************************************************************************/
 package	org.eclipse.qvtd.cs2as.compiler.cgmodel.util;
 
-import org.eclipse.jdt.annotation.NonNull;
 
 /*
  * An AbstractCS2ASCGModelVisitor provides a default implementation of the visitor framework
@@ -32,7 +31,7 @@ public abstract class AbstractCS2ASCGModelVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractCS2ASCGModelVisitor(@NonNull C context) {
+	protected AbstractCS2ASCGModelVisitor(C context) {
 		super(context);
 	}
 }

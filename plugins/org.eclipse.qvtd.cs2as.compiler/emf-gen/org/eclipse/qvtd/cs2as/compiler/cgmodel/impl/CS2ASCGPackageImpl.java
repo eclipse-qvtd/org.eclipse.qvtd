@@ -76,7 +76,8 @@ public class CS2ASCGPackageImpl extends EPackageImpl implements CS2ASCGPackage {
 		if (isInited) return (CS2ASCGPackage)EPackage.Registry.INSTANCE.getEPackage(CS2ASCGPackage.eNS_URI);
 
 		// Obtain or create and register package
-		CS2ASCGPackageImpl theCS2ASCGPackage = (CS2ASCGPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CS2ASCGPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new CS2ASCGPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		CS2ASCGPackageImpl theCS2ASCGPackage = (CS2ASCGPackageImpl)(ePackage instanceof CS2ASCGPackageImpl ? ePackage : new CS2ASCGPackageImpl());
 
 		isInited = true;
 

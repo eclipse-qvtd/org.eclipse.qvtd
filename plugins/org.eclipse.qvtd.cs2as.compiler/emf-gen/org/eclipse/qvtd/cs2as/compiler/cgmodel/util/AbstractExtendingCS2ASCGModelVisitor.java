@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.cs2as.compiler.cgmodel.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractExtendingCS2ASCGModelVisitor provides a default implementation for each
@@ -36,12 +35,12 @@ public abstract class AbstractExtendingCS2ASCGModelVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtendingCS2ASCGModelVisitor(@NonNull C context) {
+	protected AbstractExtendingCS2ASCGModelVisitor(C context) {
 		super(context);
 	}	
 
 	@Override
-	public @Nullable R visitCGLookupCallExp(org.eclipse.qvtd.cs2as.compiler.cgmodel.@NonNull CGLookupCallExp object) {
+	public R visitCGLookupCallExp(org.eclipse.qvtd.cs2as.compiler.cgmodel.@NonNull CGLookupCallExp object) {
 		return visitCGOperationCallExp(object);
 	}
 }

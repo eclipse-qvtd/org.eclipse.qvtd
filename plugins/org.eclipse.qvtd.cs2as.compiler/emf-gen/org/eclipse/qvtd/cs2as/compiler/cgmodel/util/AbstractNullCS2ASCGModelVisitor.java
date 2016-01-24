@@ -23,8 +23,11 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * An AbstractNullCS2ASCGModelVisitor provides a default implementation for each
  * visitXxx method that returns null.
+ *
+ * @deprecated Explicit 'Null' functionality is obsolete with Java 8 @Nullable annotations.  
  */
-public abstract class AbstractNullCS2ASCGModelVisitor<R, C>
+ @Deprecated
+public abstract class AbstractNullCS2ASCGModelVisitor<@Nullable R, C>
 	extends org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractNullCGModelVisitor<R, C> implements CS2ASCGModelVisitor<R>
 {
 	/**
@@ -32,12 +35,12 @@ public abstract class AbstractNullCS2ASCGModelVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNullCS2ASCGModelVisitor(@NonNull C context) {
+	protected AbstractNullCS2ASCGModelVisitor(C context) {
 		super(context);
 	}	
 
 	@Override
-	public @Nullable R visitCGLookupCallExp(org.eclipse.qvtd.cs2as.compiler.cgmodel.@NonNull CGLookupCallExp object) {
+	public R visitCGLookupCallExp(org.eclipse.qvtd.cs2as.compiler.cgmodel.@NonNull CGLookupCallExp object) {
 		return null;
 	}
 }

@@ -33,20 +33,13 @@ Workflow {
     	genModel = "/${projectName}/model/cs2ascgmodel.genmodel"
     }
 
-    component = GenerateCGVisitors { resourceSet = resourceSet    	
+    component = GenerateCGVisitors { resourceSet = resourceSet
     	projectName = "${projectName}"
-    	projectPrefix = "CS2ASCGModel"
+		genModelFile = "model/cs2ascgmodel.genmodel"
     	superProjectName = "org.eclipse.ocl.examples.codegen"
-		superProjectPrefix = "CGModel"
-    	genModelFile = "model/cs2ascgmodel.genmodel"
-    	javaFolder = "emf-gen"
-    	modelPackageName = "org.eclipse.qvtd.cs2as.compiler.cgmodel"
-    	visitorPackageName = "org.eclipse.qvtd.cs2as.compiler.cgmodel.util"
-    	visitorClassName = "CS2ASCGModelVisitor"
-		superVisitorPackageName = "org.eclipse.ocl.examples.codegen.cgmodel.util"
-    	superVisitorClassName = "CGModelVisitor"
-    	visitablePackageName = "org.eclipse.ocl.examples.codegen.cgmodel"
-    	visitableClassName= "CGElement"
+    	superGenModelFile = "model/cgmodel.genmodel"
+    	baseProjectName = "org.eclipse.ocl.examples.codegen"
+    	baseGenModelFile = "model/cgmodel.genmodel"
     }
 }
 
