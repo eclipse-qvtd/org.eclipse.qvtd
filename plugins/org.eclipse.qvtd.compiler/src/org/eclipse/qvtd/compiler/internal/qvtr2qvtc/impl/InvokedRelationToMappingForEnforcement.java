@@ -16,14 +16,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTcRelations;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -40,30 +37,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 
-public class InvokedRelationToMappingForEnforcement extends AbstractRule {
-
-	private static class Factory extends AbstractRule.Factory
-	{
-		@Override
-		public @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation, @NonNull EObject eo) {
-			Rule rule = null;
-			if (eo instanceof Relation) {	
-				rule = new InvokedRelationToMappingForEnforcement(transformation, (Relation) eo);
-				Rule tracedRule = transformation.getRecord(rule.getRuleBindings());
-				if (tracedRule != null)
-					rule = tracedRule;
-			}
-			return rule;
-		}
-
-		@Override
-		public @Nullable Rule createRule(
-				@NonNull QvtrToQvtcTransformation transformation,
-				@NonNull List<EObject> eos) {
-			return null;
-		}
-	}
-	
+public class InvokedRelationToMappingForEnforcement
+{	
 	private class SubRecord
 	{
 
@@ -115,26 +90,20 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 		
 	}
 	
-	public static final Rule.@NonNull Factory FACTORY = new Factory(); 
+	protected final @NonNull QvtrToQvtcTransformation qvtr2qvtc;
 	
-	private final @NonNull Relation r;
-	public Transformation mt;
-	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
-	private String rn;
-	
-	protected InvokedRelationToMappingForEnforcement(
-			@NonNull QvtrToQvtcTransformation transformation, @NonNull Relation r) {
-		
-		super(transformation);
-		this.r = r;
+	public InvokedRelationToMappingForEnforcement(@NonNull QvtrToQvtcTransformation qvtr2qvtc) {
+		this.qvtr2qvtc = qvtr2qvtc;;
 	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.build.qvtrtoqvtc.impl.AbstractRule#check()
-	 */
-	@Override
-	public void check() {
-		rn = r.getName();
+	
+	public void doInvokedRelationToMappingForEnforcement(@NonNull Relation r) {
+		@NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
+		// when()
+		RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
+		assert rt != null;
+		@NonNull Transformation mt = qvtr2qvtc.getCoreTransformation(rt);
+		// check() {
+		String rn = r.getName();
 		if (!r.isIsTopLevel()) {
 			List<RelationCallExp> ris = qvtr2qvtc.getRelationCallExpsForRelation(r);
 			if (ris != null) {
@@ -172,17 +141,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 				}
 			}
 		}
-	}
-	
-	
-	
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.build.qvtrtoqvtc.impl.AbstractRule#instantiateOutput()
-	 */
-	@Override
-	public void instantiateOutput() {
-		assert mt != null;
+		// instantiateOutput() {
 		for (SubRecord subRecord : subRecords) {
 			final Transformation mt2 = mt;
 			Mapping m = qvtr2qvtc.whenMapping(mt2, rn+'_'+subRecord.irn+'_'+subRecord.dn);
@@ -215,45 +174,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 			assert db != null;
 			subRecord.db = db;
 		}
-	}
-	
-	
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.build.qvtrtoqvtc.impl.AbstractRule#setAttributes()
-	 */
-	@Override
-	public void setAttributes() {
-		for (SubRecord subRecord : subRecords) {
-			BottomPattern mb = subRecord.mb;
-			RealizedVariable tcv = subRecord.tcv;
-			assert (mb != null) && (tcv != null);
-			mb.getRealizedVariable().add(tcv);
-			//mb.getVariable().addAll(mbvars);
-			CoreDomain md = subRecord.md;
-			assert (md != null);
-			md.setTypedModel(subRecord.mdir);
-			md.setIsEnforceable(true);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.build.qvtrtoqvtc.impl.AbstractRule#when()
-	 */
-	@Override
-	public boolean when() {
-		RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
-		assert rt != null;
-		mt = qvtr2qvtc.getCoreTransformation(rt);
-		assert mt != null;
-		return true;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.build.qvtrtoqvtc.impl.AbstractRule#where()
-	 */
-	@Override
-	public void where() {
+		// where()
 		QVTr2QVTcRelations relations = new QVTr2QVTcRelations(qvtr2qvtc);
 		Set<@NonNull Variable> allDomainVars = relations.getAllDomainVars(r);
 		Set<@NonNull Variable> whereVars = new HashSet<@NonNull Variable>();
@@ -316,6 +237,17 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 			relations.doRDomainToMDBottomForEnforcement(r, subRecord.rd, subRecord.te, predicatesWithoutVarBindings, domainBottomUnSharedVars, db);
 			relations.doRRelImplToMBottomEnforcementOperation(r, subRecord.rd, mb);
 		}
+		// setAttributes() {
+		for (SubRecord subRecord : subRecords) {
+			BottomPattern mb = subRecord.mb;
+			RealizedVariable tcv = subRecord.tcv;
+			assert (mb != null) && (tcv != null);
+			mb.getRealizedVariable().add(tcv);
+			//mb.getVariable().addAll(mbvars);
+			CoreDomain md = subRecord.md;
+			assert (md != null);
+			md.setTypedModel(subRecord.mdir);
+			md.setIsEnforceable(true);
+		}
 	}
-	
 }

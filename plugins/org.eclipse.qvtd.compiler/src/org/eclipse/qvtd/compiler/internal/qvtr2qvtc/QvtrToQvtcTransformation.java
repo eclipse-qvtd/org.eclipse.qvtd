@@ -29,7 +29,6 @@ import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
@@ -42,10 +41,7 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.InvokedRelationToMappingForEnforcement;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.RelationalTransformationToMappingTransformation;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.RelationalTransformationToTracePackage;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.RuleBindings;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl.TopLevelRelationToMappingForEnforcement;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.utilities.TransformationTraceData;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.utilities.TransformationTraceDataImpl;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -75,7 +71,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class QvtrToQvtcTransformation
 {
-	private final @NonNull TransformationTraceData traceData;
 	private final @NonNull Resource qvtrResource;
 	private final @NonNull Resource qvtcResource;
 	
@@ -167,7 +162,6 @@ public class QvtrToQvtcTransformation
 		this.qvtrResource = qvtrResource;		
 		this.qvtcResource = qvtcResource;
 //		this.traceResource = traceResource;
-		traceData = new TransformationTraceDataImpl();
 		this.coreModel = QVTcoreFactory.eINSTANCE.createCoreModel();
         
 		// Create a cache of opposite relations and copy imports
@@ -299,46 +293,12 @@ public class QvtrToQvtcTransformation
 				}
 			}
 		}
-		executeFactory(InvokedRelationToMappingForEnforcement.FACTORY);
-	}
-
-	public void executeFactory(Rule.@NonNull Factory factory) {
-		for (Rule rule : factory.getRules(this, qvtrResource)) {
-			if (rule != null) {
-				executeTopLevelRule(rule);
-				if (rule.hasExecuted()) {
-					traceData.addRecord(rule);
+		for (RelationalTransformation relationalTransformation : relationalTransformation2coreTransformation.keySet()) {
+			for (org.eclipse.qvtd.pivot.qvtbase.Rule rule : relationalTransformation.getRule()) {
+				if (rule instanceof Relation) {
+					InvokedRelationToMappingForEnforcement invokedRelationToMappingForEnforcement = new InvokedRelationToMappingForEnforcement(this);
+					invokedRelationToMappingForEnforcement.doInvokedRelationToMappingForEnforcement((Relation)rule);
 				}
-			}
-		}
-	}
-	
-	public void executeNestedRule(@NonNull Rule rule) {
-		if (!rule.hasExecuted()) {
-			rule.check();
-			if (rule.when()) {
-				rule.instantiateOutput();
-				rule.setExecuted(true);
-				rule.where();
-				rule.setAttributes();
-			}
-		}
-		if (rule.hasExecuted()) {
-			traceData.addRecord(rule);
-		}
-	}
-	
-	public void executeTopLevelRule(@NonNull Rule rule) {
-		if (!rule.hasExecuted()) {
-			rule.check();
-			if (rule.when()) {
-				rule.instantiateOutput();
-				// After output instantiation the record can be said to be executed
-				// so recursive/nested mappings can be invoked
-				rule.setExecuted(true);
-				rule.where();
-				rule.setAttributes();
-				
 			}
 		}
 	}
@@ -395,12 +355,6 @@ public class QvtrToQvtcTransformation
 	public Resource getQvtcSource() {
 		return qvtcResource;
 	}
-
-
-	public @Nullable Rule getRecord(@NonNull RuleBindings relationsBindings) {
-		return traceData.getRecord(relationsBindings);
-	}
-
 
 	public @Nullable List<RelationCallExp> getRelationCallExpsForRelation(@NonNull Relation r) {		
 		return relationCallExpsForRelation.get(r);
@@ -494,7 +448,7 @@ public class QvtrToQvtcTransformation
         this.coreModel.setExternalURI(asResource.getURI().toString());
         // Copy imports
         
-        Package corePackage = PivotFactory.eINSTANCE.createPackage();
+        org.eclipse.ocl.pivot.Package corePackage = PivotFactory.eINSTANCE.createPackage();
         this.coreModel.getOwnedPackages().add(corePackage);
         asResource.getContents().add(this.coreModel);
         corePackage.getOwnedClasses().addAll(coreTransformations);

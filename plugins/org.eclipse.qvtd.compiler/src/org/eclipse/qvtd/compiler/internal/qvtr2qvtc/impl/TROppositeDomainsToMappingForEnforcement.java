@@ -13,10 +13,15 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QvtrToQvtcTransformation;
 
-public class TROppositeDomainsToMappingForEnforcement extends AbstractRule
+public class TROppositeDomainsToMappingForEnforcement
 {
-	protected TROppositeDomainsToMappingForEnforcement(@NonNull QvtrToQvtcTransformation transformation) {
-		super(transformation);
+	protected final @NonNull QvtrToQvtcTransformation qvtr2qvtc;
+	
+	public TROppositeDomainsToMappingForEnforcement(@NonNull QvtrToQvtcTransformation qvtr2qvtc) {
+		this.qvtr2qvtc = qvtr2qvtc;
 	}
-
+	
+	public void doTROppositeDomainsToMappingForEnforcement() {
+		throw new UnsupportedOperationException();
+	}
 }
