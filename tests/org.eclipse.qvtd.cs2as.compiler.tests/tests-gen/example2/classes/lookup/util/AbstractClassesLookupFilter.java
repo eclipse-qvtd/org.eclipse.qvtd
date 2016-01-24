@@ -29,5 +29,5 @@ public abstract class AbstractClassesLookupFilter<C extends NamedElement> implem
 		return _class.isInstance(namedElement) && _matches((C)namedElement);
 	}
 	
-	abstract protected boolean _matches(C element);
+	abstract protected Boolean _matches(C element);
 }

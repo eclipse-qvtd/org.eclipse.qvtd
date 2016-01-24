@@ -26,7 +26,7 @@ public class ClassesLookupSolver {
 	
 	
 	public ClassesLookupResult<example2.classes.Operation> _lookupExportedOperation(example2.classes.Class context, java.lang.Object importer, java.lang.String oName, java.util.List<example2.classes.Argument> args) {
-		OperationFilter filter = new OperationFilter(args);
+		OperationFilter filter = new OperationFilter(executor,args);
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.OPERATION,oName,filter);
 		ClassesExportedLookupVisitor _lookupVisitor = new ClassesExportedLookupVisitor(_lookupEnv, importer);
 		context.accept(_lookupVisitor);
@@ -43,7 +43,7 @@ public class ClassesLookupSolver {
 	}
 	
 	public ClassesLookupResult<example2.classes.Operation> _lookupQualifiedOperation(example2.classes.Class context, java.lang.String oName, java.util.List<example2.classes.Argument> args) {
-		OperationFilter filter = new OperationFilter(args);
+		OperationFilter filter = new OperationFilter(executor,args);
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.OPERATION,oName,filter);
 		ClassesQualifiedLookupVisitor _lookupVisitor = new ClassesQualifiedLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
@@ -84,7 +84,7 @@ public class ClassesLookupSolver {
 	}
 	
 	public ClassesLookupResult<example2.classes.Operation> _lookupOperation(example2.classes.util.Visitable context, java.lang.String oName, java.util.List<example2.classes.Argument> args) {
-		OperationFilter filter = new OperationFilter(args);
+		OperationFilter filter = new OperationFilter(executor,args);
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.OPERATION,oName,filter);
 		ClassesUnqualifiedLookupVisitor _lookupVisitor = new ClassesUnqualifiedLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
