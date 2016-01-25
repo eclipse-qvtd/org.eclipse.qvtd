@@ -9,6 +9,23 @@
 
 package cg._Source2TargetDerived_qvtp_qvtias;
 
+import java.util.Iterator;
+
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.SequenceValue;
+import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
+
 import example5.sbase.SRoot;
 import example5.sbase.SbasePackage;
 import example5.sbase.X;
@@ -29,21 +46,6 @@ import example5.tderived.B2;
 import example5.tderived.D;
 import example5.tderived.TderivedFactory;
 import example5.tderived.TderivedPackage;
-import java.util.Iterator;
-import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
-import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
-import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.SequenceValue;
-import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
 
 /**
  * The Source2TargetDerived_qvtp_qvtias transformation:

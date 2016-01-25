@@ -9,27 +9,8 @@
 
 package cg._Source2Target_qvtp_qvtias;
 
-import example1.source.PathElementCS;
-import example1.source.SRoot;
-import example1.source.SourcePackage;
-import example1.source.X;
-import example1.source.Y;
-import example1.source.Y1;
-import example1.source.Y2;
-import example1.source.Z;
-import example1.target.A;
-import example1.target.A1;
-import example1.target.A2;
-import example1.target.A3;
-import example1.target.B;
-import example1.target.C;
-import example1.target.D;
-import example1.target.TRoot;
-import example1.target.TargetFactory;
-import example1.target.TargetPackage;
-import example1.target.lookup.util.TargetLookupResult;
-import example1.target.lookup.util.TargetLookupSolver;
 import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
@@ -52,6 +33,27 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
+
+import example1.source.PathElementCS;
+import example1.source.SRoot;
+import example1.source.SourcePackage;
+import example1.source.X;
+import example1.source.Y;
+import example1.source.Y1;
+import example1.source.Y2;
+import example1.source.Z;
+import example1.target.A;
+import example1.target.A1;
+import example1.target.A2;
+import example1.target.A3;
+import example1.target.B;
+import example1.target.C;
+import example1.target.D;
+import example1.target.TRoot;
+import example1.target.TargetFactory;
+import example1.target.TargetPackage;
+import example1.target.lookup.util.TargetLookupResult;
+import example1.target.lookup.util.TargetLookupSolver;
 
 /**
  * The Source2Target_qvtp_qvtias transformation:

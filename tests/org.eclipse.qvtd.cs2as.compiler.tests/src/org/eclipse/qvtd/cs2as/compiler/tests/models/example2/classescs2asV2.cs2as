@@ -101,7 +101,7 @@ nameresolution {
 		named-element
 			filtered by args : OrderedSet(Argument)
 				when args->size() = ownedParameters->size() and
-						args->forAll(x | x.name = ownedParameters->at(args->indexOf(x)).name);				
+						args->forAll(x | x.name = ownedParameters->at(args->indexOf(x)).name);
 	}
 	
 	Property {

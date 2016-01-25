@@ -282,6 +282,7 @@ operation OCL!OCLExpression doReplacements(leftVar : QVTi!Variable) : OCL!OCLExp
 			asTypeOpCallExp.ownedSource = astPropCallExp;  
 			asTypeOpCallExp.referredOperation = getOclAnyOclAsTypeOp();
 			asTypeOpCallExp.type = castType;
+			asTypeOpCallExp.isSafe = astPropCallExp.isSafe; // If source is safe, the cast will also is
 			
 			var argTypeExp = new QVTi!TypeExp;
 			argTypeExp.referredType = castType;

@@ -9,19 +9,9 @@
 
 package cg._classescs2as_qvtp_qvtias;
 
-import example2.classes.ClassesFactory;
-import example2.classes.ClassesPackage;
-import example2.classes.Package;
-import example2.classes.Root;
-import example2.classes.lookup.util.ClassesLookupResult;
-import example2.classes.lookup.util.ClassesLookupSolver;
-import example2.classescs.ClassCS;
-import example2.classescs.ClassescsPackage;
-import example2.classescs.PackageCS;
-import example2.classescs.PathElementCS;
-import example2.classescs.RootCS;
 import java.util.Iterator;
 import java.util.List;
+
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
@@ -41,6 +31,18 @@ import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
+
+import example2.classes.ClassesFactory;
+import example2.classes.ClassesPackage;
+import example2.classes.Package;
+import example2.classes.Root;
+import example2.classes.lookup.util.ClassesLookupResult;
+import example2.classes.lookup.util.ClassesLookupSolver;
+import example2.classescs.ClassCS;
+import example2.classescs.ClassescsPackage;
+import example2.classescs.PackageCS;
+import example2.classescs.PathElementCS;
+import example2.classescs.RootCS;
 
 /**
  * The classescs2as_qvtp_qvtias transformation:

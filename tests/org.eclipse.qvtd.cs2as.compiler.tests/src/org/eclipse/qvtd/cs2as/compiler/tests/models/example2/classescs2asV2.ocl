@@ -45,7 +45,7 @@ context NameExpCS
 def : ast() : as::CallExp =
 	if isOpCallExp()
 	then as::OperationCallExp {
-		ownedCallExp = if ownedNameExp = null then null else ownedNameExp.ast() endif, -- FIXME, this is not properly CGed. See PropertyCallExp creation
+		ownedCallExp = ownedNameExp?.ast(),
 		ownedArguments = roundedBrackets.args.ast(), 
 	referredOperation = if oclContainer().oclIsKindOf(NameExpCS) then ast().lookupOperationFrom(ast().owningSource.type, name, ast().oclAsType(as::OperationCallExp).ownedArguments) else ast().lookupOperation(name, ast().oclAsType(as::OperationCallExp).ownedArguments) endif, 
 	type = ast().oclAsType(as::OperationCallExp).referredOperation?.type
@@ -53,7 +53,7 @@ def : ast() : as::CallExp =
 	else
 		if isPropCallExp()
 		then as::PropertyCallExp {
-			ownedCallExp = if ownedNameExp = null then null else ownedNameExp.ast() endif, 
+			ownedCallExp = ownedNameExp?.ast(), 
 		referredProperty = if oclContainer().oclIsKindOf(NameExpCS) then ast().lookupPropertyFrom(ast().owningSource.type, name) else ast().lookupProperty(name) endif, 
 		type = ast().oclAsType(as::PropertyCallExp).referredProperty?.type
 		}
