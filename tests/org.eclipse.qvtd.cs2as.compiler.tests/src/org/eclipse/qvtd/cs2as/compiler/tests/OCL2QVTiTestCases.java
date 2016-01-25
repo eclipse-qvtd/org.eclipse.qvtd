@@ -588,6 +588,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 		myQVT.executeModelsTX_CG(txClass, "model1V2");
+		myQVT.executeModelsTX_CG(txClass, "model2V2");
 		myQVT.executeModelsTX_CG(txClass, "model3V2");
 		myQVT.executeModelsTX_CG(txClass, "model4V2");
 		myQVT.dispose();
@@ -609,6 +610,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
 		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
     	myQVT.executeModelsTX_Interpreted(tx, "model1V2");
+    	myQVT.executeModelsTX_Interpreted(tx, "model2V2");
     	myQVT.executeModelsTX_Interpreted(tx, "model3V2");
     	myQVT.executeModelsTX_Interpreted(tx, "model4V2");
 		myQVT.dispose();
