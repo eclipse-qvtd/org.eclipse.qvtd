@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.OrderedSetValue;
 
 import example2.classes.Argument;
 import example2.classes.ClassesPackage;
@@ -48,9 +47,9 @@ public class OperationFilter
     
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
-    protected /*@Thrown*/ List<Argument> args;
+    protected final /*@Thrown*/ List<Argument> args;
     
-    public OperationFilter(@NonNull Executor executor, @NonNull/*@Thrown*/ List<Argument> args) {
+    public OperationFilter(@NonNull Executor executor,final /*@Thrown*/ List<Argument> args) {
         super(Operation.class);
         this.args =  args;
         this.executor = executor;
@@ -65,12 +64,8 @@ public class OperationFilter
     public /*@NonInvalid*/ Boolean _matches(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation element) {
         /*@Caught*/ @NonNull Object CAUGHT_eq;
         try {
-            final /*@Caught*/ @Nullable Object BOXED_null = args == null ? null : idResolver.createOrderedSetOfAll(ORD_CLSSid_Argument, args);
-            ;
-            if (BOXED_null instanceof InvalidValueException) {
-                throw (InvalidValueException)BOXED_null;
-            }
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_null));
+            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_null = idResolver.createOrderedSetOfAll(ORD_CLSSid_Argument, args);
+            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_null));
             @SuppressWarnings("null")
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Parameter> ownedParameters = element.getOwnedParameters();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(ORD_CLSSid_Parameter, ownedParameters);
@@ -83,16 +78,9 @@ public class OperationFilter
         }
         /*@Caught*/ @NonNull Object CAUGHT_forAll;
         try {
-            if (args == null) {
-                throw new InvalidValueException("Null source for \'Collection(T).forAll(Collection.T[?] | Lambda T() : Boolean[?]) : Boolean[?]\'");
-            }
-            final /*@Caught*/ @NonNull Object BOXED_null_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Argument, args);
-            ;
-            if (BOXED_null_0 instanceof InvalidValueException) {
-                throw (InvalidValueException)BOXED_null_0;
-            }
+            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_null_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Argument, args);
             /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-            @Nullable Iterator<?> ITERATOR_x = ((OrderedSetValue)BOXED_null_0).iterator();
+            @Nullable Iterator<?> ITERATOR_x = BOXED_null_0.iterator();
             /*@Thrown*/ boolean forAll;
             while (true) {
                 if (!ITERATOR_x.hasNext()) {
@@ -117,12 +105,7 @@ public class OperationFilter
                     @SuppressWarnings("null")
                     final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Parameter> ownedParameters_0 = element.getOwnedParameters();
                     final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedParameters_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Parameter, ownedParameters_0);
-                    final /*@Caught*/ @Nullable Object BOXED_null_1 = args == null ? null : idResolver.createOrderedSetOfAll(ORD_CLSSid_Argument, args);
-                    ;
-                    if (BOXED_null_1 instanceof InvalidValueException) {
-                        throw (InvalidValueException)BOXED_null_1;
-                    }
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue indexOf = ClassUtil.nonNullState(OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_null_1, x));
+                    final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue indexOf = ClassUtil.nonNullState(OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_null_0, x));
                     final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Parameter at = (Parameter)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_ownedParameters_0, indexOf);
                     if (at == null) {
                         throw new InvalidValueException("Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::NamedElement::name\'");
