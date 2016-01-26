@@ -575,12 +575,10 @@ public class QVTbaseMetamodel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Bag_T, _TypedModel)));
 			_Collection_Annotation.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Collection_T, _Annotation)));
-			_Collection_Package.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_Collection_T, _Package)));
-			_Collection_Variable.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_Collection_T, _Variable)));
 			_Collection_Domain.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Collection_T, _Domain)));
+			_Collection_Package.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_Collection_T, _Package)));
 			_Collection_Pattern.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Collection_T, _Pattern)));
 			_Collection_Predicate.getOwnedBindings().add(createTemplateBinding(
@@ -589,6 +587,8 @@ public class QVTbaseMetamodel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _Rule)));
 			_Collection_TypedModel.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Collection_T, _TypedModel)));
+			_Collection_Variable.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_Collection_T, _Variable)));
 			_OrderedCollection_Domain.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_OrderedCollection_T, _Domain)));
 			_OrderedCollection_TypedModel.getOwnedBindings().add(createTemplateBinding(
@@ -601,28 +601,28 @@ public class QVTbaseMetamodel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _Annotation)));
 			_Set_Package.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Set_T, _Package)));
-			_Set_Variable.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_Set_T, _Variable)));
 			_Set_Predicate.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Set_T, _Predicate)));
 			_Set_Rule.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Set_T, _Rule)));
 			_Set_TypedModel.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Set_T, _TypedModel)));
+			_Set_Variable.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_Set_T, _Variable)));
 			_UniqueCollection_Annotation.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Annotation)));
-			_UniqueCollection_Package.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_UniqueCollection_T, _Package)));
-			_UniqueCollection_Variable.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_UniqueCollection_T, _Variable)));
 			_UniqueCollection_Domain.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Domain)));
+			_UniqueCollection_Package.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_UniqueCollection_T, _Package)));
 			_UniqueCollection_Predicate.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Predicate)));
 			_UniqueCollection_Rule.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Rule)));
 			_UniqueCollection_TypedModel.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_UniqueCollection_T, _TypedModel)));
+			_UniqueCollection_Variable.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_UniqueCollection_T, _Variable)));
 		}
 		
 		private void installComments() {

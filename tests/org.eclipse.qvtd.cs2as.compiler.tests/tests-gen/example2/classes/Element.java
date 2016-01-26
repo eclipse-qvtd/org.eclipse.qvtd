@@ -13,9 +13,7 @@
 package example2.classes;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
 import example2.classes.util.Visitable;
-import example2.classes.util.Visitor;
 
 /**
  * <!-- begin-user-doc -->

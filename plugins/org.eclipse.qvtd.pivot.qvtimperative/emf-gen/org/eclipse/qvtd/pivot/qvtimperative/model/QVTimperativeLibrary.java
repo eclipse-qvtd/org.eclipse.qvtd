@@ -359,24 +359,24 @@ public class QVTimperativeLibrary extends ASResourceImpl
 		}
 		
 		private void installTemplateBindings() {
-			_Collection_OclElement.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_Collection_T, _OclElement)));
 			_Collection_Model_objectsOfKind_TT.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Collection_T, tp_Model_objectsOfKind_TT)));
 			_Collection_Model_objectsOfType_TT.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Collection_T, tp_Model_objectsOfType_TT)));
-			_Set_OclElement.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_Set_T, _OclElement)));
+			_Collection_OclElement.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_Collection_T, _OclElement)));
 			_Set_Model_objectsOfKind_TT.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Set_T, tp_Model_objectsOfKind_TT)));
 			_Set_Model_objectsOfType_TT.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Set_T, tp_Model_objectsOfType_TT)));
-			_UniqueCollection_OclElement.getOwnedBindings().add(createTemplateBinding(
-				createTemplateParameterSubstitution(_UniqueCollection_T, _OclElement)));
+			_Set_OclElement.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_Set_T, _OclElement)));
 			_UniqueCollection_Model_objectsOfKind_TT.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_UniqueCollection_T, tp_Model_objectsOfKind_TT)));
 			_UniqueCollection_Model_objectsOfType_TT.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_UniqueCollection_T, tp_Model_objectsOfType_TT)));
+			_UniqueCollection_OclElement.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_UniqueCollection_T, _OclElement)));
 		}
 		
 		private void installComments() {
