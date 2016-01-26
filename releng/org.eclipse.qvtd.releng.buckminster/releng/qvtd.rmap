@@ -25,9 +25,7 @@
   <rm:locator pattern="^org\.eclipse\.xtend.lib.*" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.eclipse\.xtend.*" searchPathRef="xpand"/>
   <rm:locator pattern="^org\.eclipse\.xtext.*" searchPathRef="xtext"/>
-  <!--rm:locator pattern="^org\.eclipse\.xsd.*" searchPathRef="emf"/-->
-  <!--rm:locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse-tests-source-code"/-->
-  <!--rm:locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse-tests-source-code"/-->
+  <rm:locator pattern="^org\.objectweb.*" searchPathRef="orbit"/>
   <rm:locator searchPathRef="eclipse-platform" failOnError="false"/>
   <rm:locator searchPathRef="orbit"/>
   <rm:searchPath name="qvtd-source-code">
