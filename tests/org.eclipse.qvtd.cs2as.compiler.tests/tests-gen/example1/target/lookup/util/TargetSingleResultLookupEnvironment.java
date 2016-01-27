@@ -11,9 +11,9 @@
 package	example1.target.lookup.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -63,8 +63,8 @@ public class TargetSingleResultLookupEnvironment extends LookupEnvironmentImpl  
 		if (namedElement != null) {
 			if (name.equals(namedElement.getName())) {
 				if (typeFilter.isInstance(namedElement)) {
-					if (expFilter == null || (expFilter != null /*null analysis bug? */ && expFilter.matches(namedElement))) {
-						EList<NamedElement> elements = getNamedElements();
+					if (expFilter == null || expFilter.matches(namedElement)) {
+						List<NamedElement> elements = getNamedElements();
 						if (!elements.contains(namedElement)) { 	// FIXME use a set ?
 							elements.add(namedElement);
 						}
@@ -78,7 +78,7 @@ public class TargetSingleResultLookupEnvironment extends LookupEnvironmentImpl  
 	@Override
 	@NonNull
 	public <NE extends NamedElement > LookupEnvironment addElements(
-			@Nullable EList<NE> namedElements) {
+			@Nullable Collection<NE> namedElements) {
 		
 		if (namedElements != null) {
 			for (NamedElement namedElement : namedElements) {

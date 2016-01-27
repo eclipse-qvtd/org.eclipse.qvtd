@@ -3,8 +3,8 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.cs2as.compiler.tests/tests-gen"
     modelPluginID="org.eclipse.qvtd.cs2as.compiler.tests" modelName="TargetMM1" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="8.0"
-    copyrightFields="false" usedGenPackages="EnvExample1.genmodel#//lookup" operationReflection="true"
-    importOrganizing="true" pluginKey="">
+    copyrightFields="false" usedGenPackages="EnvExample1.genmodel#//lookup platform:/plugin/org.eclipse.ocl.pivot/model/oclstdlib.genmodel#//oclstdlib"
+    operationReflection="true" importOrganizing="true" pluginKey="">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Delegates" value="false"/>
     <details key="Use Null Annotations" value="true"/>

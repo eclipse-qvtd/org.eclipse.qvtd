@@ -9,7 +9,6 @@
 
 package example1.target.util;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -53,28 +52,28 @@ public class TargetQualifiedLookupVisitor
     /**
      * visitA1(element : target::A1[1]) : lookup::LookupEnvironment[?]
      * 
-     * _'null' : lookup::LookupEnvironment[?]
+     * _'null' : lookup::LookupEnvironment[1]
      */
     @Override
     public /*@NonInvalid*/ LookupEnvironment visitA1(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A1 element_5) {
         @SuppressWarnings("null")
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<B> ownsB = element_5.getOwnsB();
         @SuppressWarnings("null")
-        final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements((EList<B>)ownsB);
+        final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownsB);
         return addElements;
     }
     
     /**
      * visitA2(element : target::A2[1]) : lookup::LookupEnvironment[?]
      * 
-     * _'null' : lookup::LookupEnvironment[?]
+     * _'null' : lookup::LookupEnvironment[1]
      */
     @Override
     public /*@NonInvalid*/ LookupEnvironment visitA2(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A2 element_6) {
         @SuppressWarnings("null")
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<C> ownsC = element_6.getOwnsC();
         @SuppressWarnings("null")
-        final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements((EList<C>)ownsC);
+        final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownsC);
         return addElements;
     }
 }

@@ -18,8 +18,8 @@ import example1.target.util.TargetUnqualifiedLookupVisitor;
 
 public class TargetLookupSolver {
 	
-	private Executor executor;
-		
+	protected Executor executor;
+	
 	public TargetLookupSolver (Executor executor) {
 		this.executor = executor;
 	}

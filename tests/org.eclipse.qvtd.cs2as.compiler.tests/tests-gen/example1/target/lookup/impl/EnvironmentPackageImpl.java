@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import example1.target.TargetPackage;
 import example1.target.impl.TargetPackageImpl;
 import example1.target.lookup.Env4CG;
@@ -145,7 +146,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getLookupEnvironment__AddElements__EList() {
+	public EOperation getLookupEnvironment__AddElements__Collection() {
 		return lookupEnvironmentEClass.getEOperations().get(0);
 	}
 
@@ -225,7 +226,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		lookupEnvironmentEClass = createEClass(LOOKUP_ENVIRONMENT);
 		createEReference(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT__NAMED_ELEMENTS);
 		createEReference(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT__PARENT_ENV);
-		createEOperation(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT___ADD_ELEMENTS__ELIST);
+		createEOperation(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT___ADD_ELEMENTS__COLLECTION);
 		createEOperation(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT);
 
 		env4CGEClass = createEClass(ENV4_CG);
@@ -260,6 +261,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 
 		// Obtain other dependent packages
 		TargetPackage theTargetPackage = (TargetPackage)EPackage.Registry.INSTANCE.getEPackage(TargetPackage.eNS_URI);
+		OCLstdlibPackage theOCLstdlibPackage = (OCLstdlibPackage)EPackage.Registry.INSTANCE.getEPackage(OCLstdlibPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -273,14 +275,16 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		initEReference(getLookupEnvironment_NamedElements(), theTargetPackage.getNamedElement(), null, "namedElements", null, 0, -1, LookupEnvironment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLookupEnvironment_ParentEnv(), this.getLookupEnvironment(), null, "parentEnv", null, 0, 1, LookupEnvironment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = initEOperation(getLookupEnvironment__AddElements__EList(), this.getLookupEnvironment(), "addElements", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = initEOperation(getLookupEnvironment__AddElements__Collection(), this.getLookupEnvironment(), "addElements", 1, 1, IS_UNIQUE, IS_ORDERED);
 		ETypeParameter t1 = addETypeParameter(op, "NE");
 		EGenericType g1 = createEGenericType(theTargetPackage.getNamedElement());
 		t1.getEBounds().add(g1);
-		g1 = createEGenericType(t1);
-		addEParameter(op, g1, "elements", 0, -1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theOCLstdlibPackage.getCollection());
+		EGenericType g2 = createEGenericType(t1);
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "elements", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getLookupEnvironment__AddElement__NamedElement(), this.getLookupEnvironment(), "addElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getLookupEnvironment__AddElement__NamedElement(), this.getLookupEnvironment(), "addElement", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theTargetPackage.getNamedElement(), "element", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(env4CGEClass, Env4CG.class, "Env4CG", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

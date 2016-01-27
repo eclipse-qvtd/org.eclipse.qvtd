@@ -165,7 +165,7 @@ public interface EnvironmentPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOOKUP_ENVIRONMENT___ADD_ELEMENTS__ELIST = ENV4_CG_OPERATION_COUNT + 0;
+	int LOOKUP_ENVIRONMENT___ADD_ELEMENTS__COLLECTION = ENV4_CG_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Add Element</em>' operation.
@@ -247,14 +247,14 @@ public interface EnvironmentPackage extends EPackage {
 	EReference getLookupEnvironment_ParentEnv();
 
 	/**
-	 * Returns the meta object for the '{@link example1.target.lookup.LookupEnvironment#addElements(org.eclipse.emf.common.util.EList) <em>Add Elements</em>}' operation.
+	 * Returns the meta object for the '{@link example1.target.lookup.LookupEnvironment#addElements(java.util.Collection) <em>Add Elements</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the '<em>Add Elements</em>' operation.
-	 * @see example1.target.lookup.LookupEnvironment#addElements(org.eclipse.emf.common.util.EList)
+	 * @see example1.target.lookup.LookupEnvironment#addElements(java.util.Collection)
 	 * @generated
 	 */
-	EOperation getLookupEnvironment__AddElements__EList();
+	EOperation getLookupEnvironment__AddElements__Collection();
 
 	/**
 	 * Returns the meta object for the '{@link example1.target.lookup.LookupEnvironment#addElement(example1.target.NamedElement) <em>Add Element</em>}' operation.
@@ -362,7 +362,7 @@ public interface EnvironmentPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation LOOKUP_ENVIRONMENT___ADD_ELEMENTS__ELIST = eINSTANCE.getLookupEnvironment__AddElements__EList();
+		EOperation LOOKUP_ENVIRONMENT___ADD_ELEMENTS__COLLECTION = eINSTANCE.getLookupEnvironment__AddElements__Collection();
 
 		/**
 		 * The meta object literal for the '<em><b>Add Element</b></em>' operation.

@@ -10,6 +10,7 @@
  *******************************************************************************/
 package	example1.target.lookup.util;
 
+import org.eclipse.jdt.annotation.NonNull;
 import example1.target.NamedElement;
 
 /**
@@ -17,6 +18,6 @@ import example1.target.NamedElement;
  */
 public interface TargetLookupFilter {
 	
-	boolean matches(NamedElement namedElement);
+	boolean matches(@NonNull NamedElement namedElement);
 	
 }

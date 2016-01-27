@@ -10,6 +10,7 @@
  *******************************************************************************/
 package	example1.target.lookup.util;
 
+import org.eclipse.jdt.annotation.NonNull;
 import example1.target.NamedElement;
 
 /**
@@ -17,17 +18,17 @@ import example1.target.NamedElement;
  */
 public abstract class AbstractTargetLookupFilter<C extends NamedElement> implements TargetLookupFilter {
 	
-	private Class<C> _class;
+	@NonNull private Class<C> _class;
 	
-	public AbstractTargetLookupFilter(Class<C> _class) {
+	public AbstractTargetLookupFilter(@NonNull Class<C> _class) {
 		this._class = _class;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean matches(NamedElement namedElement) {
+	public boolean matches(@NonNull NamedElement namedElement) {
 		return _class.isInstance(namedElement) && _matches((C)namedElement);
 	}
 	
-	abstract protected boolean _matches(C element);
+	abstract protected Boolean _matches(@NonNull C element);
 }
