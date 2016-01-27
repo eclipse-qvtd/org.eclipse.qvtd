@@ -10,18 +10,20 @@
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="LookupEnvironment" eSuperTypes="#//Env4CG">
-    <eOperations name="addElements" eType="#//LookupEnvironment">
+    <eOperations name="addElements" lowerBound="1" eType="#//LookupEnvironment">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="body" value="LookupEnvironment{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;namedElements = namedElements->includingAll(elements),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;parentEnv = parentEnv&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}"/>
       </eAnnotations>
       <eTypeParameters name="NE">
         <eBounds eClassifier="ecore:EClass TargetMM1.ecore#//NamedElement"/>
       </eTypeParameters>
-      <eParameters name="elements" upperBound="-1">
-        <eGenericType eTypeParameter="#//LookupEnvironment/addElements/NE"/>
+      <eParameters name="elements" lowerBound="1">
+        <eGenericType eClassifier="ecore:EClass platform:/plugin/org.eclipse.ocl.pivot/model-gen/oclstdlib.ecore#//Collection">
+          <eTypeArguments eTypeParameter="#//LookupEnvironment/addElements/NE"/>
+        </eGenericType>
       </eParameters>
     </eOperations>
-    <eOperations name="addElement" eType="#//LookupEnvironment">
+    <eOperations name="addElement" lowerBound="1" eType="#//LookupEnvironment">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="body" value="LookupEnvironment{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;namedElements = namedElements->including(element),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;parentEnv = parentEnv&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}"/>
       </eAnnotations>
