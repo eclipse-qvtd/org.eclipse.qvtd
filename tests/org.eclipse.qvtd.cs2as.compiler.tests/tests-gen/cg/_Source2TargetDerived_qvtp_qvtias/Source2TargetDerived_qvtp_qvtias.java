@@ -9,23 +9,6 @@
 
 package cg._Source2TargetDerived_qvtp_qvtias;
 
-import java.util.Iterator;
-
-import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
-import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
-import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
-import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.SequenceValue;
-import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
-
 import example5.sbase.SRoot;
 import example5.sbase.SbasePackage;
 import example5.sbase.X;
@@ -46,6 +29,21 @@ import example5.tderived.B2;
 import example5.tderived.D;
 import example5.tderived.TderivedFactory;
 import example5.tderived.TderivedPackage;
+import java.util.Iterator;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.SequenceValue;
+import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
 
 /**
  * The Source2TargetDerived_qvtp_qvtias transformation:
@@ -507,7 +505,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
         // predicates
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_sderived_c_c_X2_0 = idResolver.getClass(CLSSid_X2, null);
-        final /*@NonInvalid*/ boolean oclIsKindOf = ClassUtil.nonNullState(OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, x, TYP_sderived_c_c_X2_0).booleanValue());
+        final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, x, TYP_sderived_c_c_X2_0).booleanValue();
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -542,7 +540,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
         // predicates
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_sderived_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
-        final /*@NonInvalid*/ boolean oclIsKindOf = ClassUtil.nonNullState(OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, y, TYP_sderived_c_c_Y2_0).booleanValue());
+        final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, y, TYP_sderived_c_c_Y2_0).booleanValue();
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -663,7 +661,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
         // predicates
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_sderived_c_c_X2_0 = idResolver.getClass(CLSSid_X2, null);
-        final /*@NonInvalid*/ boolean oclIsKindOf = ClassUtil.nonNullState(OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, x_0, TYP_sderived_c_c_X2_0).booleanValue());
+        final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, x_0, TYP_sderived_c_c_X2_0).booleanValue();
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -704,7 +702,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
         // predicates
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_sderived_c_c_X2_0 = idResolver.getClass(CLSSid_X2, null);
-        final /*@NonInvalid*/ boolean oclIsKindOf = ClassUtil.nonNullState(OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, x_1, TYP_sderived_c_c_X2_0).booleanValue());
+        final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, x_1, TYP_sderived_c_c_X2_0).booleanValue();
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -767,7 +765,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
         // predicates
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_sderived_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
-        final /*@NonInvalid*/ boolean oclIsKindOf = ClassUtil.nonNullState(OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, y_0, TYP_sderived_c_c_Y2_0).booleanValue());
+        final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, y_0, TYP_sderived_c_c_Y2_0).booleanValue();
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -808,7 +806,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
         // predicates
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_sderived_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
-        final /*@NonInvalid*/ boolean oclIsKindOf = ClassUtil.nonNullState(OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, y_1, TYP_sderived_c_c_Y2_0).booleanValue());
+        final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, y_1, TYP_sderived_c_c_Y2_0).booleanValue();
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -937,11 +935,11 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_sderived_c_c_W_0 = idResolver.getClass(CLSSid_W, null);
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_sderived_c_c_X2_3 = idResolver.getClass(CLSSid_X2, null);
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_sderived_c_c_Y2_3 = idResolver.getClass(CLSSid_Y2, null);
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_12 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_SRoot, TYP_sbase_c_c_SRoot_1));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_13 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_X, TYP_sbase_c_c_X_2));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_15 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Y, TYP_sbase_c_c_Y_2));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_0 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_X2, TYP_sderived_c_c_X2_3));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_6 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Y2, TYP_sderived_c_c_Y2_3));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_12 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_SRoot, TYP_sbase_c_c_SRoot_1);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_13 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_X, TYP_sbase_c_c_X_2);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_15 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Y, TYP_sbase_c_c_Y_2);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_0 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_X2, TYP_sderived_c_c_X2_3);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Y2, TYP_sderived_c_c_Y2_3);
         for (X2 x2_7 : ValueUtil.typedIterable(X2.class, allInstances_0)) {
             if (x2_7 != null) {
                 final /*@NonInvalid*/ example5.sderived.@org.eclipse.jdt.annotation.NonNull X2 symbol_0 = (X2)x2_7;
@@ -972,7 +970,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
                 MAP_uA2_ownsB(symbol_12);
             }
         }
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_4 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_W, TYP_sderived_c_c_W_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_4 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_W, TYP_sderived_c_c_W_0);
         for (W w_1 : ValueUtil.typedIterable(W.class, allInstances_4)) {
             if (w_1 != null) {
                 final /*@NonInvalid*/ example5.sderived.@org.eclipse.jdt.annotation.NonNull W symbol_15 = (W)w_1;
@@ -997,7 +995,7 @@ public class Source2TargetDerived_qvtp_qvtias extends AbstractCS2ASTransformer
                 MAP_uB2_anotherName(symbol_24);
             }
         }
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_8 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Z, TYP_sbase_c_c_Z_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_8 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Z, TYP_sbase_c_c_Z_0);
         for (Z z_1 : ValueUtil.typedIterable(Z.class, allInstances_8)) {
             if (z_1 != null) {
                 final /*@NonInvalid*/ example5.sbase.@org.eclipse.jdt.annotation.NonNull Z symbol_27 = (Z)z_1;

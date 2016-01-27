@@ -271,7 +271,7 @@ public class MappingRegion extends AbstractMappingRegion implements Comparable<M
 		}
 		SimpleNode extraGuardNode = Nodes.EXTRA_GUARD.createSimpleNode(this, "«extra-" + (extraNodes.size()+1) + "»", extraNode.getClassDatumAnalysis());
 		extraNodes.add(extraGuardNode);
-		@SuppressWarnings("null")@NonNull List<Node> extraGuardNodeList = Collections.<Node>singletonList(extraGuardNode);
+		@NonNull List<Node> extraGuardNodeList = Collections.<Node>singletonList(extraGuardNode);
 		addHeadGroup(extraGuardNodeList);
 		return extraGuardNode;
 	}

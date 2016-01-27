@@ -398,7 +398,7 @@ public class classescs2as extends AbstractTransformer
             //
             accumulator_0.add(symbol_3);
         }
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue asOrderedSet = ClassUtil.nonNullState(CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
         // property assignments
         final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, asOrderedSet);
         root.getOwnedPackages().addAll(ECORE_asOrderedSet);
@@ -509,7 +509,7 @@ public class classescs2as extends AbstractTransformer
             //
             accumulator_0.add(symbol_4);
         }
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue asOrderedSet = ClassUtil.nonNullState(CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
         // property assignments
         final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<classes.Class> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(classes.Class.class, asOrderedSet);
         symbol_2.getOwnedClasses().addAll(ECORE_asOrderedSet);
@@ -601,17 +601,17 @@ public class classescs2as extends AbstractTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescstraces_c_c_ClassCS2Class_0 = idResolver.getClass(CLSSid_ClassCS2Class, null);
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescstraces_c_c_PackageCS2Package_0 = idResolver.getClass(CLSSid_PackageCS2Package, null);
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescstraces_c_c_RootCS2Root_0 = idResolver.getClass(CLSSid_RootCS2Root, null);
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_3 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, TYP_classes_c_c_Package_1));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_7 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_1));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_11 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_3 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, TYP_classes_c_c_Package_1);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_1);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_11 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1);
         for (PackageCS packageCS_5 : ValueUtil.typedIterable(PackageCS.class, allInstances)) {
             if (packageCS_5 != null) {
                 final /*@NonInvalid*/ classescs.@org.eclipse.jdt.annotation.NonNull PackageCS symbol_6 = (PackageCS)packageCS_5;
                 MAP_mPackageCS2Package_LM(symbol_6);
             }
         }
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_0 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS2Package, TYP_classescstraces_c_c_PackageCS2Package_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_0 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS2Package, TYP_classescstraces_c_c_PackageCS2Package_0);
         for (PackageCS2Package p2p_1 : ValueUtil.typedIterable(PackageCS2Package.class, allInstances_0)) {
             if (p2p_1 != null) {
                 final /*@NonInvalid*/ classescstraces.@org.eclipse.jdt.annotation.NonNull PackageCS2Package symbol_9 = (PackageCS2Package)p2p_1;
@@ -646,7 +646,7 @@ public class classescs2as extends AbstractTransformer
                 MAP_mClassCS2Class_LM(symbol_24);
             }
         }
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_6 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS2Class, TYP_classescstraces_c_c_ClassCS2Class_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS2Class, TYP_classescstraces_c_c_ClassCS2Class_0);
         for (ClassCS2Class c2c_1 : ValueUtil.typedIterable(ClassCS2Class.class, allInstances_6)) {
             if (c2c_1 != null) {
                 final /*@NonInvalid*/ classescstraces.@org.eclipse.jdt.annotation.NonNull ClassCS2Class symbol_27 = (ClassCS2Class)c2c_1;
@@ -656,7 +656,7 @@ public class classescs2as extends AbstractTransformer
         for (ClassCS classCS_4 : ValueUtil.typedIterable(ClassCS.class, allInstances_7)) {
             if (classCS_4 != null) {
                 final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
-                final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_8 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, TYP_classes_c_c_Class_0));
+                final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_8 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, TYP_classes_c_c_Class_0);
                 for (classes.Class symbol_34 : ValueUtil.typedIterable(classes.Class.class, allInstances_8)) {
                     if (symbol_34 != null) {
                         final /*@NonInvalid*/ classes.@org.eclipse.jdt.annotation.NonNull Class symbol_30 = (classes.Class)symbol_34;
@@ -672,7 +672,7 @@ public class classescs2as extends AbstractTransformer
                 MAP_mRootCS2Root_LM(symbol_36);
             }
         }
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_10 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS2Root, TYP_classescstraces_c_c_RootCS2Root_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_10 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS2Root, TYP_classescstraces_c_c_RootCS2Root_0);
         for (RootCS2Root r2r_1 : ValueUtil.typedIterable(RootCS2Root.class, allInstances_10)) {
             if (r2r_1 != null) {
                 final /*@NonInvalid*/ classescstraces.@org.eclipse.jdt.annotation.NonNull RootCS2Root symbol_39 = (RootCS2Root)r2r_1;
@@ -682,7 +682,7 @@ public class classescs2as extends AbstractTransformer
         for (RootCS rootCS_4 : ValueUtil.typedIterable(RootCS.class, allInstances_11)) {
             if (rootCS_4 != null) {
                 final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classes_c_c_Root_0 = idResolver.getClass(CLSSid_Root, null);
-                final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_12 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Root, TYP_classes_c_c_Root_0));
+                final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_12 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Root, TYP_classes_c_c_Root_0);
                 for (Root root_1 : ValueUtil.typedIterable(Root.class, allInstances_12)) {
                     if (root_1 != null) {
                         final /*@NonInvalid*/ classes.@org.eclipse.jdt.annotation.NonNull Root symbol_42 = (Root)root_1;

@@ -21,7 +21,6 @@ import example2.classes.PropertyCallExp;
 import example2.classes.Root;
 import example2.classes.lookup.util.ClassesLookupResult;
 import example2.classes.lookup.util.ClassesLookupSolver;
-import example2.classes.util.Visitable;
 import example2.classescs.ArgumentCS;
 import example2.classescs.ClassCS;
 import example2.classescs.ClassescsPackage;
@@ -29,22 +28,15 @@ import example2.classescs.NameExpCS;
 import example2.classescs.OperationCS;
 import example2.classescs.PackageCS;
 import example2.classescs.PathElementCS;
-import example2.classescs.PathNameCS;
 import example2.classescs.PropertyCS;
 import example2.classescs.RootCS;
-import example2.classescs.RoundedBracketClause;
 import java.util.Iterator;
 import java.util.List;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.PropertyId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContainerOperation;
@@ -60,9 +52,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
 
 /**
@@ -192,7 +182,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
     public /*@NonInvalid*/ Package lookupPackage(final /*@NonInvalid*/ example2.classes.util.@org.eclipse.jdt.annotation.NonNull Visitable self_0, final /*@NonInvalid*/ List<PathElementCS> segments) {
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments);
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments);
         final /*@NonInvalid*/ boolean eq = size.equals(INT_1);
         /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Package symbol_1;
         if (eq) {
@@ -211,8 +201,8 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             symbol_1 = _lookupPackage;
         }
         else {
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1));
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments, INT_1, diff));
+            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments, INT_1, diff);
             final List<PathElementCS> UNBOXED_qualifierSegments = qualifierSegments.asEcoreObjects(idResolver, PathElementCS.class);
             assert UNBOXED_qualifierSegments != null;
             final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Package qualifier = this.lookupPackage(self_0, UNBOXED_qualifierSegments);
@@ -697,7 +687,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             }
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = aPathNameCS.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0));
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
             final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
             /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Class symbol_2;
             if (eq_0) {
@@ -716,8 +706,8 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
                 symbol_2 = _lookupClass;
             }
             else {
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1));
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff));
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff);
                 final List<PathElementCS> UNBOXED_qualifierSegments = qualifierSegments.asEcoreObjects(idResolver, PathElementCS.class);
                 assert UNBOXED_qualifierSegments != null;
                 final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Package qualifier = this.lookupPackage(self_1, UNBOXED_qualifierSegments);
@@ -891,7 +881,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull PropertyCallExp oclAsType = ClassUtil.nonNullState((PropertyCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_PropertyCallExp_0));
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, nameExpCS_2);
-        final /*@Thrown*/ boolean oclIsKindOf = ClassUtil.nonNullState(OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_classescs_c_c_NameExpCS_0).booleanValue());
+        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_classescs_c_c_NameExpCS_0).booleanValue();
         /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Property symbol_8;
         if (oclIsKindOf) {
             final /*@Thrown*/ example2.classescs.@org.eclipse.jdt.annotation.Nullable PathNameCS aPathNameCS = nameExpCS_2.getName();
@@ -906,7 +896,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             }
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = aPathNameCS.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0));
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
             final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
             /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Property symbol_3;
             if (eq_0) {
@@ -925,9 +915,9 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
                 symbol_3 = _lookupExportedProperty;
             }
             else {
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1));
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff));
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_1 = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments));
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_1 = CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments);
                 final /*@Thrown*/ boolean eq_1 = size_1.equals(INT_1);
                 /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Class symbol_1;
                 if (eq_1) {
@@ -946,8 +936,8 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
                     symbol_1 = _lookupClass;
                 }
                 else {
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff_0 = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_1, INT_1));
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments_0 = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(qualifierSegments, INT_1, diff_0));
+                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff_0 = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_1, INT_1);
+                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments_0 = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(qualifierSegments, INT_1, diff_0);
                     final List<PathElementCS> UNBOXED_qualifierSegments_0 = qualifierSegments_0.asEcoreObjects(idResolver, PathElementCS.class);
                     assert UNBOXED_qualifierSegments_0 != null;
                     final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Package qualifier = this.lookupPackage(self_2, UNBOXED_qualifierSegments_0);
@@ -1018,7 +1008,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             }
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_1 = aPathNameCS_0.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_1);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_3 = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_1));
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_3 = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_1);
             final /*@Thrown*/ boolean eq_2 = size_3.equals(INT_1);
             /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Property symbol_7;
             if (eq_2) {
@@ -1037,9 +1027,9 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
                 symbol_7 = _lookupProperty;
             }
             else {
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff_1 = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_3, INT_1));
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments_1 = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_1, INT_1, diff_1));
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_5 = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments_1));
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff_1 = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_3, INT_1);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments_1 = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_1, INT_1, diff_1);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_5 = CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments_1);
                 final /*@Thrown*/ boolean eq_3 = size_5.equals(INT_1);
                 /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Class symbol_5;
                 if (eq_3) {
@@ -1058,8 +1048,8 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
                     symbol_5 = _lookupClass_0;
                 }
                 else {
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff_2 = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_5, INT_1));
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments_2 = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(qualifierSegments_1, INT_1, diff_2));
+                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff_2 = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_5, INT_1);
+                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments_2 = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(qualifierSegments_1, INT_1, diff_2);
                     final List<PathElementCS> UNBOXED_qualifierSegments_2 = qualifierSegments_2.asEcoreObjects(idResolver, PathElementCS.class);
                     assert UNBOXED_qualifierSegments_2 != null;
                     final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Package qualifier_0 = this.lookupPackage(self_2, UNBOXED_qualifierSegments_2);
@@ -1389,7 +1379,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         // variable assignments
         final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull OperationCallExp oclAsType = ClassUtil.nonNullState((OperationCallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_OperationCallExp_0));
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, nameExpCS_6);
-        final /*@Thrown*/ boolean oclIsKindOf = ClassUtil.nonNullState(OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_classescs_c_c_NameExpCS_0).booleanValue());
+        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_classescs_c_c_NameExpCS_0).booleanValue();
         /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Operation symbol_8;
         if (oclIsKindOf) {
             final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull CallExp oclAsType_0 = ClassUtil.nonNullState((CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_CallExp_3));
@@ -1406,7 +1396,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             }
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = aPathNameCS.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0));
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
             final /*@Thrown*/ boolean eq = size.equals(INT_1);
             /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Operation symbol_3;
             if (eq) {
@@ -1425,9 +1415,9 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
                 symbol_3 = _lookupExportedOperation;
             }
             else {
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1));
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff));
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_1 = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments));
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_1 = CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments);
                 final /*@Thrown*/ boolean eq_0 = size_1.equals(INT_1);
                 /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Class symbol_1;
                 if (eq_0) {
@@ -1446,8 +1436,8 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
                     symbol_1 = _lookupClass;
                 }
                 else {
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff_0 = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_1, INT_1));
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments_0 = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(qualifierSegments, INT_1, diff_0));
+                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff_0 = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_1, INT_1);
+                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments_0 = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(qualifierSegments, INT_1, diff_0);
                     final List<PathElementCS> UNBOXED_qualifierSegments_0 = qualifierSegments_0.asEcoreObjects(idResolver, PathElementCS.class);
                     assert UNBOXED_qualifierSegments_0 != null;
                     final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Package qualifier = this.lookupPackage(self_2, UNBOXED_qualifierSegments_0);
@@ -1521,7 +1511,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             }
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_1 = aPathNameCS_0.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_1);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_3 = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_1));
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_3 = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_1);
             final /*@Thrown*/ boolean eq_1 = size_3.equals(INT_1);
             /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Operation symbol_7;
             if (eq_1) {
@@ -1540,9 +1530,9 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
                 symbol_7 = _lookupOperation;
             }
             else {
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff_1 = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_3, INT_1));
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments_1 = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_1, INT_1, diff_1));
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_5 = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments_1));
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff_1 = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_3, INT_1);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments_1 = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_1, INT_1, diff_1);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_5 = CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments_1);
                 final /*@Thrown*/ boolean eq_2 = size_5.equals(INT_1);
                 /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Class symbol_5;
                 if (eq_2) {
@@ -1561,8 +1551,8 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
                     symbol_5 = _lookupClass_0;
                 }
                 else {
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff_2 = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_5, INT_1));
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments_2 = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(qualifierSegments_1, INT_1, diff_2));
+                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff_2 = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_5, INT_1);
+                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments_2 = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(qualifierSegments_1, INT_1, diff_2);
                     final List<PathElementCS> UNBOXED_qualifierSegments_2 = qualifierSegments_2.asEcoreObjects(idResolver, PathElementCS.class);
                     assert UNBOXED_qualifierSegments_2 != null;
                     final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Package qualifier_0 = this.lookupPackage(self_2, UNBOXED_qualifierSegments_2);
@@ -1759,7 +1749,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         }
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = aPathNameCS.getPath();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
         final /*@Thrown*/ boolean eq = size.equals(INT_1);
         /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Class symbol_1;
         if (eq) {
@@ -1778,8 +1768,8 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             symbol_1 = _lookupClass;
         }
         else {
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1));
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff));
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff);
             final List<PathElementCS> UNBOXED_qualifierSegments = qualifierSegments.asEcoreObjects(idResolver, PathElementCS.class);
             assert UNBOXED_qualifierSegments != null;
             final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Package qualifier = this.lookupPackage(self_1, UNBOXED_qualifierSegments);
@@ -2137,7 +2127,7 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         }
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = aPathNameCS.getPath();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
         final /*@Thrown*/ boolean eq = size.equals(INT_1);
         /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Class symbol_1;
         if (eq) {
@@ -2156,8 +2146,8 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
             symbol_1 = _lookupClass;
         }
         else {
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1));
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff));
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff);
             final List<PathElementCS> UNBOXED_qualifierSegments = qualifierSegments.asEcoreObjects(idResolver, PathElementCS.class);
             assert UNBOXED_qualifierSegments != null;
             final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Package qualifier = this.lookupPackage(self_1, UNBOXED_qualifierSegments);
@@ -2419,13 +2409,13 @@ public class classescs2asV2_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescs_c_c_PackageCS_3 = idResolver.getClass(CLSSid_PackageCS, null);
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescs_c_c_PropertyCS_2 = idResolver.getClass(CLSSid_PropertyCS, null);
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescs_c_c_RootCS_1 = idResolver.getClass(CLSSid_RootCS, null);
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_16 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ArgumentCS, TYP_classescs_c_c_ArgumentCS_1));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_6 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_4));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_13 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_NameExpCS, TYP_classescs_c_c_NameExpCS_8));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_18 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_OperationCS, TYP_classescs_c_c_OperationCS_4));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_2 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_3));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_25 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PropertyCS, TYP_classescs_c_c_PropertyCS_2));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_1 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_16 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ArgumentCS, TYP_classescs_c_c_ArgumentCS_1);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_4);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_13 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_NameExpCS, TYP_classescs_c_c_NameExpCS_8);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_18 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_OperationCS, TYP_classescs_c_c_OperationCS_4);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_2 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_3);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_25 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PropertyCS, TYP_classescs_c_c_PropertyCS_2);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1);
         for (RootCS rootCS_3 : ValueUtil.typedIterable(RootCS.class, allInstances_1)) {
             if (rootCS_3 != null) {
                 final /*@NonInvalid*/ example2.classescs.@org.eclipse.jdt.annotation.NonNull RootCS symbol_0 = (RootCS)rootCS_3;

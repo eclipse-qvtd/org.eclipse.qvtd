@@ -59,7 +59,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 			super(environmentFactory);
 		}
 
-		public @NonNull BasicQVTiExecutor createEvaluator(Transformation transformation) {
+		public @NonNull BasicQVTiExecutor createEvaluator(@NonNull Transformation transformation) {
 			return new BasicQVTiExecutor(getEnvironmentFactory(), transformation);
 		}
 
@@ -99,7 +99,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 			URI txURI = baseURI.appendSegment("classescs2as.qvtias");
 			
 			Transformation qvtiTransf = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
-	
+			assert qvtiTransf != null;
 			trackExample_Interpreted(myQVT, qvtiTransf, baseURI, "model1", results);
 			trackExample_Interpreted(myQVT, qvtiTransf, baseURI, "model2", results);
 			trackExample_Interpreted(myQVT, qvtiTransf, baseURI, "model3", results);
@@ -180,7 +180,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		System.out.println("Iteration on " +modelName+": " + (finalStamp - initStamp) + " ms");
 	}
 	
-	private void trackExample_Interpreted(MyQVT qvt, Transformation tx, URI baseURI, String modelName,
+	private void trackExample_Interpreted(MyQVT qvt, @NonNull Transformation tx, URI baseURI, String modelName,
 			Map<String, List<Integer>> results)  throws Exception  {
 		
 
@@ -215,7 +215,6 @@ public class ExecutionBenchmarks extends LoadTestCase {
 				for (Integer time : modelResults) {
 					fWriter.write(modelName+","+time.toString()+",\n");
 				}
-				fWriter.write(modelName+",,"+mean(modelResults)+"\n");	
 			}
 		}
 			
@@ -256,7 +255,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 	// Execute the transformation with the CGed transformation
 	//
 
-	protected void executeModelsTX_Interpreted(MyQVT qvt, Transformation tx, URI baseURI, String modelName) throws Exception {
+	protected void executeModelsTX_Interpreted(MyQVT qvt, @NonNull Transformation tx, URI baseURI, String modelName) throws Exception {
 		
 		URI samplesBaseUri = baseURI.appendSegment("samples");
 		URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));

@@ -138,8 +138,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		for (int i = 0; i < indentLevel; i++){
 		   outputBuffer.append(DEFAULT_INDENT);
 		}
-		@SuppressWarnings("null")@NonNull String string = outputBuffer.toString();
-		return string;
+		return outputBuffer.toString();
 	}
 	
 //	@Override

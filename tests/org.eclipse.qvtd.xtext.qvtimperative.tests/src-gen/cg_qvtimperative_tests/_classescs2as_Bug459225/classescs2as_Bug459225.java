@@ -108,7 +108,7 @@ public class classescs2as_Bug459225 extends AbstractTransformer
         /*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
         try {
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescs_c_c_NamedElementCS_0 = idResolver.getClass(CLSSid_NamedElementCS, null);
-            final /*@Thrown*/ boolean oclIsKindOf = ClassUtil.nonNullState(OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_classescs_c_c_NamedElementCS_0).booleanValue());
+            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_classescs_c_c_NamedElementCS_0).booleanValue();
             CAUGHT_oclIsKindOf = oclIsKindOf;
         }
         catch (Exception e) {
@@ -123,8 +123,8 @@ public class classescs2as_Bug459225 extends AbstractTransformer
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescs_c_c_NamedElementCS_1 = idResolver.getClass(CLSSid_NamedElementCS, null);
             final /*@Thrown*/ classescs.@org.eclipse.jdt.annotation.NonNull NamedElementCS oclAsType = ClassUtil.nonNullState((NamedElementCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_classescs_c_c_NamedElementCS_1));
             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String computeName = this.computeName(oclAsType);
-            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(computeName, STR__c_c));
-            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum, name_0));
+            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(computeName, STR__c_c);
+            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
             symbol_1 = sum_0;
         }
         else {
@@ -205,7 +205,7 @@ public class classescs2as_Bug459225 extends AbstractTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         // mapping statements
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
         for (PackageCS packageCS_1 : ValueUtil.typedIterable(PackageCS.class, allInstances)) {
             if (packageCS_1 != null) {
                 final /*@NonInvalid*/ classescs.@org.eclipse.jdt.annotation.NonNull PackageCS symbol_0 = (PackageCS)packageCS_1;

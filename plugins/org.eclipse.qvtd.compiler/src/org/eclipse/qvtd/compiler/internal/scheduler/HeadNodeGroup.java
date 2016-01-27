@@ -44,7 +44,6 @@ import org.eclipse.jdt.annotation.NonNull;
 			assert oldHeadNodes == null;
 		}
 
-		@SuppressWarnings("null")
 		public @NonNull Collection<MappingRegion> getRegions() {
 			return mappingRegion2headNodes.keySet();
 		}

@@ -88,7 +88,6 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	}
 
 	@Override
-	@SuppressWarnings("null")
 	protected @NonNull ImperativeDomainCS createCoreDomain(@NonNull CoreDomain asCoreDomain) {
 		return context.refreshElement(ImperativeDomainCS.class, QVTimperativeCSPackage.Literals.IMPERATIVE_DOMAIN_CS, asCoreDomain);
 	}

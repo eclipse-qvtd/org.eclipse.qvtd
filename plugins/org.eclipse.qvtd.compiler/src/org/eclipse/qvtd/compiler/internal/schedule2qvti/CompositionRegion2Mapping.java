@@ -268,7 +268,6 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 		return childrenVariable2;
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	public @NonNull List<Node> getGuardNodes() {
 		return Collections.singletonList(getHeadNode());

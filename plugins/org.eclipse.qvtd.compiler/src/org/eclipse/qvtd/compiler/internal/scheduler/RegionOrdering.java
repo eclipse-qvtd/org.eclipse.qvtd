@@ -259,7 +259,7 @@ public class RegionOrdering
 				assert sourceRegions != null;
 				for (@SuppressWarnings("null")@NonNull Region sourceRegion : sourceRegions) {
 					if (sourceRegion != commonRegion) {
-						@SuppressWarnings("null")@NonNull List<Region> sourceRegionList = Collections.singletonList(sourceRegion);
+						@NonNull List<Region> sourceRegionList = Collections.singletonList(sourceRegion);
 						installIntermediateConnections(intermediateRegions, sourceRegionList, commonRegion);
 					}
 				}

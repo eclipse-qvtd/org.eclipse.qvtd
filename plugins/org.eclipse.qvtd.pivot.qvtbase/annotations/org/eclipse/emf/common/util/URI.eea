@@ -1,0 +1,10 @@
+class org/eclipse/emf/common/util/URI
+appendFileExtension
+ (Ljava/lang/String;)Lorg/eclipse/emf/common/util/URI;
+ (Ljava/lang/String;)L1org/eclipse/emf/common/util/URI;
+appendSegment
+ (Ljava/lang/String;)Lorg/eclipse/emf/common/util/URI;
+ (Ljava/lang/String;)L1org/eclipse/emf/common/util/URI;
+createPlatformResourceURI
+ (Ljava/lang/String;Z)Lorg/eclipse/emf/common/util/URI;
+ (Ljava/lang/String;Z)L1org/eclipse/emf/common/util/URI;

@@ -746,7 +746,7 @@ public class MtcBroker {
     	if (useEpsilon) {
             PivotModel pModel = null;
             pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, false, true, false, true);
-    		if (mModel != null && pModel != null  ) {
+    		if (pModel != null) {
     			mModel.setCachingEnabled(true);
     			mModel.clearCache();
     			mModel.setStoredOnDisposal(false);

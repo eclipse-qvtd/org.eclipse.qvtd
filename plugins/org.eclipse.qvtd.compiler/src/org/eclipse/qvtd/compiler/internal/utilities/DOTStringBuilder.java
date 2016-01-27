@@ -235,7 +235,6 @@ public class DOTStringBuilder
 		attributes.put("penwidth",  value);
 	}
 	
-	@SuppressWarnings("null")
 	@Override
 	public @NonNull String toString() {
 		if (indents > 0) {

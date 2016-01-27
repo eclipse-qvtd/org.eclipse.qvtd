@@ -26,7 +26,6 @@ import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
@@ -242,8 +241,8 @@ public class F2P extends AbstractTransformer
         @SuppressWarnings("null")
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Member> daughters = _92_u00ABparent_92_u00BB.getDaughters();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue BOXED_daughters = idResolver.createSetOfAll(SET_CLSSid_Member, daughters);
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_daughters, TYP_Families_c_c_Member_1));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_Families_c_c_Member_1));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_daughters, TYP_Families_c_c_Member_1);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_Families_c_c_Member_1);
         // connection assignments
         for (Member iterator : ValueUtil.typedIterable(Member.class, selectByKind_0)) {
             if (iterator instanceof Member) {
@@ -277,8 +276,8 @@ public class F2P extends AbstractTransformer
         // variable assignments
         @SuppressWarnings("null")
         final /*@Thrown*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Member father = _92_u00ABparent_92_u00BB_0.getFather();
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue oclAsSet = ClassUtil.nonNullState(OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Member, father));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_Families_c_c_Member_0));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Member, father);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_Families_c_c_Member_0);
         // connection assignments
         for (Member iterator : ValueUtil.typedIterable(Member.class, selectByKind)) {
             if (iterator instanceof Member) {
@@ -312,8 +311,8 @@ public class F2P extends AbstractTransformer
         // variable assignments
         @SuppressWarnings("null")
         final /*@Thrown*/ build.test.families2persons.Families.@org.eclipse.jdt.annotation.NonNull Member mother = _92_u00ABparent_92_u00BB_1.getMother();
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue oclAsSet = ClassUtil.nonNullState(OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Member, mother));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_Families_c_c_Member_0));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Member, mother);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, oclAsSet, TYP_Families_c_c_Member_0);
         // connection assignments
         for (Member iterator : ValueUtil.typedIterable(Member.class, selectByKind)) {
             if (iterator instanceof Member) {
@@ -348,8 +347,8 @@ public class F2P extends AbstractTransformer
         @SuppressWarnings("null")
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Member> sons = _92_u00ABparent_92_u00BB_2.getSons();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue BOXED_sons = idResolver.createSetOfAll(SET_CLSSid_Member, sons);
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_sons, TYP_Families_c_c_Member_1));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_Families_c_c_Member_1));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_sons, TYP_Families_c_c_Member_1);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, selectByKind, TYP_Families_c_c_Member_1);
         // connection assignments
         for (Member iterator : ValueUtil.typedIterable(Member.class, selectByKind_0)) {
             if (iterator instanceof Member) {
@@ -395,9 +394,9 @@ public class F2P extends AbstractTransformer
         // variable assignments
         @SuppressWarnings("null")
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String firstName = s.getFirstName();
-        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(firstName, STR__32));
+        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(firstName, STR__32);
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String familyName = familyName(s);
-        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum, familyName));
+        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, familyName);
         // creations
         final /*@Thrown*/ build.test.families2persons.Families2Persons.@org.eclipse.jdt.annotation.Nullable Member2Female m2m = Families2PersonsFactory.eINSTANCE.createMember2Female();
         assert m2m != null;
@@ -449,9 +448,9 @@ public class F2P extends AbstractTransformer
         // variable assignments
         @SuppressWarnings("null")
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String firstName = s_0.getFirstName();
-        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(firstName, STR__32));
+        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(firstName, STR__32);
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String familyName = familyName(s_0);
-        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum, familyName));
+        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, familyName);
         // creations
         final /*@Thrown*/ build.test.families2persons.Families2Persons.@org.eclipse.jdt.annotation.Nullable Member2Male m2m = Families2PersonsFactory.eINSTANCE.createMember2Male();
         assert m2m != null;
@@ -521,9 +520,9 @@ public class F2P extends AbstractTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_Families_c_c_Family_0 = idResolver.getClass(CLSSid_Family, null);
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_Families_c_c_Member_0 = idResolver.getClass(CLSSid_Member, null);
         // variable assignments
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue rootObjects = ClassUtil.nonNullState(RootObjectsOperation.INSTANCE.evaluate(executor, SET_CLSSid_OclElement, models[0/*family*/]));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, rootObjects, TYP_Families_c_c_Family_0));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, rootObjects, TYP_Families_c_c_Member_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue rootObjects = RootObjectsOperation.INSTANCE.evaluate(executor, SET_CLSSid_OclElement, models[0/*family*/]);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, rootObjects, TYP_Families_c_c_Family_0);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind_0 = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, rootObjects, TYP_Families_c_c_Member_0);
         // connection variables
         final SetValue.@NonNull Accumulator _92_u00ABjoin_m_Member_m_0_92_u00BB_7 = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_Member);
         for (Member iterator : ValueUtil.typedIterable(Member.class, selectByKind_0)) {

@@ -9,8 +9,27 @@
 
 package cg._Source2Target_qvtp_qvtias;
 
+import example1.source.PathElementCS;
+import example1.source.SRoot;
+import example1.source.SourcePackage;
+import example1.source.X;
+import example1.source.Y;
+import example1.source.Y1;
+import example1.source.Y2;
+import example1.source.Z;
+import example1.target.A;
+import example1.target.A1;
+import example1.target.A2;
+import example1.target.A3;
+import example1.target.B;
+import example1.target.C;
+import example1.target.D;
+import example1.target.TRoot;
+import example1.target.TargetFactory;
+import example1.target.TargetPackage;
+import example1.target.lookup.util.TargetLookupResult;
+import example1.target.lookup.util.TargetLookupSolver;
 import java.util.Iterator;
-
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
@@ -33,27 +52,6 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
-
-import example1.source.PathElementCS;
-import example1.source.SRoot;
-import example1.source.SourcePackage;
-import example1.source.X;
-import example1.source.Y;
-import example1.source.Y1;
-import example1.source.Y2;
-import example1.source.Z;
-import example1.target.A;
-import example1.target.A1;
-import example1.target.A2;
-import example1.target.A3;
-import example1.target.B;
-import example1.target.C;
-import example1.target.D;
-import example1.target.TRoot;
-import example1.target.TargetFactory;
-import example1.target.TargetPackage;
-import example1.target.lookup.util.TargetLookupResult;
-import example1.target.lookup.util.TargetLookupSolver;
 
 /**
  * The Source2Target_qvtp_qvtias transformation:
@@ -375,13 +373,13 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_source_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, z);
-        final /*@Thrown*/ boolean oclIsTypeOf = ClassUtil.nonNullState(OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_source_c_c_Y2_0).booleanValue());
+        final /*@Thrown*/ boolean oclIsTypeOf = OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_source_c_c_Y2_0).booleanValue();
         if (oclIsTypeOf != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, z);
-        final /*@Thrown*/ boolean oclIsTypeOf_0 = ClassUtil.nonNullState(OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_source_c_c_Y1_0).booleanValue());
+        final /*@Thrown*/ boolean oclIsTypeOf_0 = OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_source_c_c_Y1_0).booleanValue();
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsTypeOf_0);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -417,7 +415,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, z_0);
-        final /*@Thrown*/ boolean oclIsTypeOf = ClassUtil.nonNullState(OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_source_c_c_Y1_0).booleanValue());
+        final /*@Thrown*/ boolean oclIsTypeOf = OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_source_c_c_Y1_0).booleanValue();
         if (oclIsTypeOf != ValueUtil.TRUE_VALUE) {
             return false;
         }
@@ -1072,13 +1070,13 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_source_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, z_1);
-        final /*@Thrown*/ boolean oclIsTypeOf = ClassUtil.nonNullState(OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_source_c_c_Y2_0).booleanValue());
+        final /*@Thrown*/ boolean oclIsTypeOf = OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_source_c_c_Y2_0).booleanValue();
         if (oclIsTypeOf != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, z_1);
-        final /*@Thrown*/ boolean oclIsTypeOf_0 = ClassUtil.nonNullState(OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_source_c_c_Y1_0).booleanValue());
+        final /*@Thrown*/ boolean oclIsTypeOf_0 = OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_source_c_c_Y1_0).booleanValue();
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsTypeOf_0);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -1130,13 +1128,13 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_source_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, z_2);
-        final /*@Thrown*/ boolean oclIsTypeOf = ClassUtil.nonNullState(OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_source_c_c_Y2_0).booleanValue());
+        final /*@Thrown*/ boolean oclIsTypeOf = OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_source_c_c_Y2_0).booleanValue();
         if (oclIsTypeOf != ValueUtil.TRUE_VALUE) {
             return false;
         }
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, z_2);
-        final /*@Thrown*/ boolean oclIsTypeOf_0 = ClassUtil.nonNullState(OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_source_c_c_Y1_0).booleanValue());
+        final /*@Thrown*/ boolean oclIsTypeOf_0 = OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_source_c_c_Y1_0).booleanValue();
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsTypeOf_0);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -1159,7 +1157,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
             }
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments = aPathNameCS.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments));
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments);
             final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
             /*@Thrown*/ example1.target.@org.eclipse.jdt.annotation.Nullable C symbol_1;
             if (eq_0) {
@@ -1178,8 +1176,8 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
                 symbol_1 = _lookupC;
             }
             else {
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1));
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments, INT_1, diff));
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments, INT_1, diff);
                 final /*@Thrown*/ example1.source.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments);
                 if (aPathElementCS_0 == null) {
                     throw throwNull(z_2, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
@@ -1256,7 +1254,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, z_3);
-        final /*@Thrown*/ boolean oclIsTypeOf = ClassUtil.nonNullState(OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_source_c_c_Y1_0).booleanValue());
+        final /*@Thrown*/ boolean oclIsTypeOf = OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_source_c_c_Y1_0).booleanValue();
         if (oclIsTypeOf != ValueUtil.TRUE_VALUE) {
             return false;
         }
@@ -1306,7 +1304,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
         final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, z_4);
-        final /*@Thrown*/ boolean oclIsTypeOf = ClassUtil.nonNullState(OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_source_c_c_Y1_0).booleanValue());
+        final /*@Thrown*/ boolean oclIsTypeOf = OclAnyOclIsTypeOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_source_c_c_Y1_0).booleanValue();
         if (oclIsTypeOf != ValueUtil.TRUE_VALUE) {
             return false;
         }
@@ -1328,7 +1326,7 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
             }
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments = aPathNameCS.getPath();
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = ClassUtil.nonNullState(CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments));
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments);
             final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
             /*@Thrown*/ example1.target.@org.eclipse.jdt.annotation.Nullable B symbol_1;
             if (eq_0) {
@@ -1347,8 +1345,8 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
                 symbol_1 = _lookupB;
             }
             else {
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = ClassUtil.nonNullState((IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1));
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = ClassUtil.nonNullState(OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments, INT_1, diff));
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments, INT_1, diff);
                 final /*@Thrown*/ example1.source.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments);
                 if (aPathElementCS_0 == null) {
                     throw throwNull(z_4, "Null source for \'\'http://cs2as/tests/example1/sourceMM/1.0\'::PathElementCS::name\'");
@@ -1528,11 +1526,11 @@ public class Source2Target_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_source_c_c_Y1_2 = idResolver.getClass(CLSSid_Y1, null);
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_source_c_c_Y2_2 = idResolver.getClass(CLSSid_Y2, null);
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_source_c_c_Z_5 = idResolver.getClass(CLSSid_Z, null);
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_3 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_SRoot, TYP_source_c_c_SRoot_1));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_1 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_X, TYP_source_c_c_X_8));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_15 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Y1, TYP_source_c_c_Y1_2));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_17 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Y2, TYP_source_c_c_Y2_2));
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_7 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Z, TYP_source_c_c_Z_5));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_3 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_SRoot, TYP_source_c_c_SRoot_1);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_X, TYP_source_c_c_X_8);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_15 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Y1, TYP_source_c_c_Y1_2);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_17 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Y2, TYP_source_c_c_Y2_2);
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Z, TYP_source_c_c_Z_5);
         for (SRoot sRoot_3 : ValueUtil.typedIterable(SRoot.class, allInstances_3)) {
             if (sRoot_3 != null) {
                 final /*@NonInvalid*/ example1.source.@org.eclipse.jdt.annotation.NonNull SRoot symbol_0 = (SRoot)sRoot_3;

@@ -9,8 +9,17 @@
 
 package example2.classes.util;
 
+import example2.classes.ClassesPackage;
+import example2.classes.NamedElement;
+import example2.classes.Operation;
+import example2.classes.Package;
+import example2.classes.Property;
+import example2.classes.lookup.EnvironmentPackage;
+import example2.classes.lookup.LookupEnvironment;
+import example2.classes.util.AbstractClassesCommonLookupVisitor;
+import example2.classes.util.Visitable;
+import example2.classes.util.Visitor;
 import java.util.Iterator;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -21,7 +30,6 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 import org.eclipse.ocl.pivot.library.LibraryIteration;
-import org.eclipse.ocl.pivot.library.collection.CollectionAsOrderedSetOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludingAllOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
@@ -30,14 +38,6 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.BagValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
-
-import example2.classes.ClassesPackage;
-import example2.classes.NamedElement;
-import example2.classes.Operation;
-import example2.classes.Package;
-import example2.classes.Property;
-import example2.classes.lookup.EnvironmentPackage;
-import example2.classes.lookup.LookupEnvironment;
 
 public class ClassesUnqualifiedLookupVisitor
 	extends AbstractClassesCommonLookupVisitor
@@ -64,7 +64,6 @@ public class ClassesUnqualifiedLookupVisitor
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Operation = TypeId.BAG.getSpecializedId(CLSSid_Operation);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Property = TypeId.BAG.getSpecializedId(CLSSid_Property);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Class = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Class);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_NamedElement = TypeId.ORDERED_SET.getSpecializedId(CLSSid_NamedElement);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Operation = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Operation);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Package = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Package);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Property = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Property);
@@ -189,10 +188,9 @@ public class ClassesUnqualifiedLookupVisitor
                 }
             }
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull BagValue includingAll = (BagValue)CollectionIncludingAllOperation.INSTANCE.evaluate(properties, collect);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(includingAll);
-            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<NamedElement> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(NamedElement.class, asOrderedSet);
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<NamedElement> ECORE_includingAll = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(NamedElement.class, includingAll);
             @SuppressWarnings("null")
-            final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner_0 = context.addElements(ECORE_asOrderedSet);
+            final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner_0 = context.addElements(ECORE_includingAll);
             final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
             /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_1;
             if (hasFinalResult_0) {

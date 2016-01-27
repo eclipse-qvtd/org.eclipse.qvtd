@@ -193,8 +193,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
                 accumulator.add(value);
             }
         }
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SequenceValue including = ClassUtil.nonNullState((SequenceValue)CollectionIncludingOperation.INSTANCE.evaluate(collect, cls));
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue asSet = ClassUtil.nonNullState(CollectionAsSetOperation.INSTANCE.evaluate(including));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SequenceValue including = (SequenceValue)CollectionIncludingOperation.INSTANCE.evaluate(collect, cls);
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(including);
         final List<manualuml2rdbms.uml.Class> UNBOXED_asSet = asSet.asEcoreObjects(idResolver, manualuml2rdbms.uml.Class.class);
         assert UNBOXED_asSet != null;
         return UNBOXED_asSet;
@@ -227,7 +227,7 @@ public class ManualUML2RDBMS extends AbstractTransformer
                 accumulator.add(value);
             }
         }
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue asSet = ClassUtil.nonNullState(CollectionAsSetOperation.INSTANCE.evaluate(collect));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
         final List<Attribute> UNBOXED_asSet = asSet.asEcoreObjects(idResolver, Attribute.class);
         assert UNBOXED_asSet != null;
         return UNBOXED_asSet;
@@ -260,7 +260,7 @@ public class ManualUML2RDBMS extends AbstractTransformer
                 accumulator.add(value);
             }
         }
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue asSet = ClassUtil.nonNullState(CollectionAsSetOperation.INSTANCE.evaluate(collect));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
         final List<Association> UNBOXED_asSet = asSet.asEcoreObjects(idResolver, Association.class);
         assert UNBOXED_asSet != null;
         return UNBOXED_asSet;
@@ -283,7 +283,7 @@ public class ManualUML2RDBMS extends AbstractTransformer
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         // mapping statements
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_uml_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, TYP_uml_c_c_Package_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_Package, TYP_uml_c_c_Package_0);
         for (Package p1 : ValueUtil.typedIterable(Package.class, allInstances)) {
             if (p1 != null) {
                 final /*@NonInvalid*/ manualuml2rdbms.uml.@org.eclipse.jdt.annotation.NonNull Package symbol_0 = (Package)p1;
@@ -526,8 +526,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
         }
         // variable assignments
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_0 = prim.getName();
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(name_0, STR_2));
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum, STR_NUMBER));
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR_2);
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_NUMBER);
         // creations
         final /*@Thrown*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.Nullable PrimitiveToName p2n_3 = UML2RDBMSFactory.eINSTANCE.createPrimitiveToName();
         assert p2n_3 != null;
@@ -558,8 +558,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
     protected boolean MAP_integerToNumberMR(final /*@NonInvalid*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.NonNull PrimitiveToName p2n, final /*@NonInvalid*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.NonNull PackageToSchema p2s_2) throws ReflectiveOperationException {
         // predicates
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = p2n.getName();
-        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(STR_Integer, STR_2));
-        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum, STR_NUMBER));
+        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(STR_Integer, STR_2);
+        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_NUMBER);
         final /*@Thrown*/ boolean eq = sum_0.equals(name);
         if (eq != ValueUtil.TRUE_VALUE) {
             return false;
@@ -615,8 +615,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
         }
         // variable assignments
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_0 = prim_0.getName();
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(name_0, STR_2));
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum, STR_BOOLEAN));
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR_2);
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_BOOLEAN);
         // creations
         final /*@Thrown*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.Nullable PrimitiveToName p2n_3 = UML2RDBMSFactory.eINSTANCE.createPrimitiveToName();
         assert p2n_3 != null;
@@ -647,8 +647,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
     protected boolean MAP_booleanToBooleanMR(final /*@NonInvalid*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.NonNull PrimitiveToName p2n_0, final /*@NonInvalid*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.NonNull PackageToSchema p2s_4) throws ReflectiveOperationException {
         // predicates
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = p2n_0.getName();
-        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(STR_Boolean, STR_2));
-        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum, STR_BOOLEAN));
+        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(STR_Boolean, STR_2);
+        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_BOOLEAN);
         final /*@Thrown*/ boolean eq = sum_0.equals(name);
         if (eq != ValueUtil.TRUE_VALUE) {
             return false;
@@ -704,8 +704,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
         }
         // variable assignments
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_0 = prim_1.getName();
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(name_0, STR_2));
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum, STR_VARCHAR));
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR_2);
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_VARCHAR);
         // creations
         final /*@Thrown*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.Nullable PrimitiveToName p2n_3 = UML2RDBMSFactory.eINSTANCE.createPrimitiveToName();
         assert p2n_3 != null;
@@ -736,8 +736,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
     protected boolean MAP_stringToVarcharMR(final /*@NonInvalid*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.NonNull PrimitiveToName p2n_1, final /*@NonInvalid*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.NonNull PackageToSchema p2s_6) throws ReflectiveOperationException {
         // predicates
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = p2n_1.getName();
-        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(STR_String, STR_2));
-        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum, STR_VARCHAR));
+        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(STR_String, STR_2);
+        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_VARCHAR);
         final /*@Thrown*/ boolean eq = sum_0.equals(name);
         if (eq != ValueUtil.TRUE_VALUE) {
             return false;
@@ -927,7 +927,7 @@ public class ManualUML2RDBMS extends AbstractTransformer
                 MAP_associationToForeignKeyMR(symbol_4, ClassToTable_0, t_0, p2s_8, primaryKey, s, ClassToTable_0, t_0);
             }
         }
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = ClassUtil.nonNullState((SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_fromAttributes, TYP_uml2rdbms_c_c_NonLeafAttribute_0));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_fromAttributes, TYP_uml2rdbms_c_c_NonLeafAttribute_0);
         /*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_FromAttribute);
         @NonNull Iterator<?> ITERATOR__1 = selectByKind.iterator();
         /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull BagValue collect;
@@ -949,7 +949,7 @@ public class ManualUML2RDBMS extends AbstractTransformer
                 accumulator.add(value);
             }
         }
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull BagValue union = ClassUtil.nonNullState((BagValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_fromAttributes, collect));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull BagValue union = (BagValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_fromAttributes, collect);
         for (FromAttribute child_0 : ValueUtil.typedIterable(FromAttribute.class, union)) {
             if (child_0 != null) {
                 final /*@NonInvalid*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.NonNull FromAttribute symbol_7 = (FromAttribute)child_0;
@@ -1097,8 +1097,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
         // predicates
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_0 = t_2_2.getName();
         // variable assignments
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(name_0, STR__tid));
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(name_0, STR__pk));
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR__tid);
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(name_0, STR__pk);
         // property assignments
         pc_2_2.setName(sum);
         pk_2_2.setName(sum_0);
@@ -1251,8 +1251,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
                     throw (InvalidValueException)dc;
                 }
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_0 = dc.getName();
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(name_0, STR__));
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum, name));
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR__);
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name);
                 symbol_1 = sum_0;
             }
             else {
@@ -1282,8 +1282,8 @@ public class ManualUML2RDBMS extends AbstractTransformer
                 }
                 /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String symbol_0;
                 if (and_1) {
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_1 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(name, STR__));
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_2 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum_1, name_6));
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(name, STR__);
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, name_6);
                     symbol_0 = sum_2;
                 }
                 else {
@@ -1294,10 +1294,10 @@ public class ManualUML2RDBMS extends AbstractTransformer
                         throw (InvalidValueException)dc;
                     }
                     final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_4 = dc.getName();
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_3 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(name_4, STR__));
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_4 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum_3, name));
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_5 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum_4, STR__));
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_6 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum_5, name_6));
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_3 = StringConcatOperation.INSTANCE.evaluate(name_4, STR__);
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_4 = StringConcatOperation.INSTANCE.evaluate(sum_3, name);
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_5 = StringConcatOperation.INSTANCE.evaluate(sum_4, STR__);
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_6 = StringConcatOperation.INSTANCE.evaluate(sum_5, name_6);
                     symbol_0 = sum_6;
                 }
                 symbol_1 = symbol_0;
@@ -1386,7 +1386,7 @@ public class ManualUML2RDBMS extends AbstractTransformer
         }
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = a2f.getName();
         // variable assignments
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(name, STR__tid));
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__tid);
         // creations
         final /*@Thrown*/ manualuml2rdbms.rdbms.@org.eclipse.jdt.annotation.Nullable Column fc_0 = RDBMSFactory.eINSTANCE.createColumn();
         assert fc_0 != null;
@@ -1638,7 +1638,7 @@ public class ManualUML2RDBMS extends AbstractTransformer
                 accumulator.add(value);
             }
         }
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue asSet = ClassUtil.nonNullState(CollectionAsSetOperation.INSTANCE.evaluate(collect));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
         // creations
         final /*@Thrown*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.Nullable NonLeafAttribute fa = UML2RDBMSFactory.eINSTANCE.createNonLeafAttribute();
         assert fa != null;
@@ -1754,9 +1754,9 @@ public class ManualUML2RDBMS extends AbstractTransformer
         // variable assignments
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String kind = a_1_0.getKind();
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = ca_1.getName();
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(name, STR__));
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__);
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_0 = a_1_0.getName();
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum, name_0));
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
         // creations
         final /*@Thrown*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.Nullable AttributeToColumn fa = UML2RDBMSFactory.eINSTANCE.createAttributeToColumn();
         assert fa != null;
@@ -1898,12 +1898,12 @@ public class ManualUML2RDBMS extends AbstractTransformer
                 accumulator.add(value);
             }
         }
-        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue asSet = ClassUtil.nonNullState(CollectionAsSetOperation.INSTANCE.evaluate(collect));
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue asSet = CollectionAsSetOperation.INSTANCE.evaluate(collect);
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String kind = a_1_1.getKind();
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = ca_1_0.getName();
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(name, STR__));
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__);
         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_0 = a_1_1.getName();
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = ClassUtil.nonNullState(StringConcatOperation.INSTANCE.evaluate(sum, name_0));
+        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
         // creations
         final /*@Thrown*/ manualuml2rdbms.uml2rdbms.@org.eclipse.jdt.annotation.Nullable NonLeafAttribute fa = UML2RDBMSFactory.eINSTANCE.createNonLeafAttribute();
         assert fa != null;

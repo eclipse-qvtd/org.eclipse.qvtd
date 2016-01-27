@@ -152,7 +152,7 @@ public class Tree2TallTree extends AbstractTransformer
         // mapping statements
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_tree2talltree_c_c_Node2TallNode_0 = idResolver.getClass(CLSSid_Node2TallNode, null);
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_tree_c_c_Node_1 = idResolver.getClass(CLSSid_Node, null);
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue objectsOfKind_0 = ClassUtil.nonNullState(ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Node, models[0/*tree*/], TYP_tree_c_c_Node_1));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue objectsOfKind_0 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Node, models[0/*tree*/], TYP_tree_c_c_Node_1);
         final org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYPE_sortedBy_0_0 = executor.getStaticTypeOf(objectsOfKind_0);
         final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_sortedBy_0_0 = (LibraryIteration.LibraryIterationExtension)TYPE_sortedBy_0_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
         final @NonNull Object ACC_sortedBy_0_0 = IMPL_sortedBy_0_0.createAccumulatorValue(executor, ORD_CLSSid_Node, TypeId.STRING);
@@ -190,7 +190,7 @@ public class Tree2TallTree extends AbstractTransformer
                 MAP_Edge2MiddleEdge(symbol_5, Node2TallNode);
             }
         }
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue objectsOfKind_1 = ClassUtil.nonNullState(ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Node2TallNode, models[2/*tree2talltree*/], TYP_tree2talltree_c_c_Node2TallNode_0));
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue objectsOfKind_1 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Node2TallNode, models[2/*tree2talltree*/], TYP_tree2talltree_c_c_Node2TallNode_0);
         final org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYPE_sortedBy_1_0 = executor.getStaticTypeOf(objectsOfKind_1);
         final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_sortedBy_1_0 = (LibraryIteration.LibraryIterationExtension)TYPE_sortedBy_1_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__sortedBy);
         final @NonNull Object ACC_sortedBy_1_0 = IMPL_sortedBy_1_0.createAccumulatorValue(executor, ORD_CLSSid_Node2TallNode, TypeId.STRING);
@@ -328,7 +328,6 @@ public class Tree2TallTree extends AbstractTransformer
     {
         protected final /*@NonInvalid*/ tree2talltree.tree2talltree.@org.eclipse.jdt.annotation.NonNull Node2TallNode node2tallNode_0;
         
-        @SuppressWarnings("null")
         public MAP_MiddleNode2TallNode(@NonNull Object @NonNull [] boundValues) {
             node2tallNode_0 = (Node2TallNode)boundValues[0];
         }
@@ -343,7 +342,7 @@ public class Tree2TallTree extends AbstractTransformer
             // variable assignments
             @SuppressWarnings("null")
             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String name = node2tallNode_0.getName();
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue safe_collect_sources = ClassUtil.nonNullState((SetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_children_0, null));
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue safe_collect_sources = (SetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_children_0, null);
             /*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_TallNode);
             @NonNull Iterator<?> ITERATOR__1 = safe_collect_sources.iterator();
             /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull BagValue collect;
@@ -363,7 +362,7 @@ public class Tree2TallTree extends AbstractTransformer
                 //
                 accumulator.add(tallNode_0);
             }
-            final /*@Thrown*/ boolean notEmpty = ClassUtil.nonNullState(CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_children_0).booleanValue());
+            final /*@Thrown*/ boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(BOXED_children_0).booleanValue();
             /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue symbol_0;
             if (notEmpty) {
                 /*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_TallNode);
@@ -406,8 +405,8 @@ public class Tree2TallTree extends AbstractTransformer
                     //
                     accumulator_1.add(BOXED_height);
                 }
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue max = ClassUtil.nonNullState((IntegerValue)CollectionMaxOperation.INSTANCE.evaluate(collect_0));
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue sum = ClassUtil.nonNullState((IntegerValue)NumericPlusOperation.INSTANCE.evaluate(max, INT_1));
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue max = (IntegerValue)CollectionMaxOperation.INSTANCE.evaluate(collect_0);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue sum = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(max, INT_1);
                 symbol_0 = sum;
             }
             else {

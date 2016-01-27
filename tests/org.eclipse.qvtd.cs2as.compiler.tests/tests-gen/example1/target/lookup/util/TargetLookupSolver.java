@@ -10,17 +10,17 @@
  *******************************************************************************/
 package	example1.target.lookup.util;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.Executor;
-
-import example1.target.util.TargetQualifiedLookupVisitor;
 import example1.target.util.TargetUnqualifiedLookupVisitor;
+import example1.target.util.TargetQualifiedLookupVisitor;
 
 
 public class TargetLookupSolver {
 	
-	protected Executor executor;
+	protected final @NonNull Executor executor;
 	
-	public TargetLookupSolver (Executor executor) {
+	public TargetLookupSolver (@NonNull Executor executor) {
 		this.executor = executor;
 	}
 	

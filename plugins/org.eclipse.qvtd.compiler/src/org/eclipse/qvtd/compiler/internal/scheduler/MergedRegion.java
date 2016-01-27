@@ -184,8 +184,7 @@ public class MergedRegion extends AbstractRegion
 			}
 			s.append(name);
 		}
-		@SuppressWarnings("null")@NonNull String string = s.toString();
-		return string;
+		return s.toString();
 	}
 	
 	@Override

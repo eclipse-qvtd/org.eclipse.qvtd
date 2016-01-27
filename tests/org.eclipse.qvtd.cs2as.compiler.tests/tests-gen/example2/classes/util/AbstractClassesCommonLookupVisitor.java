@@ -9,11 +9,12 @@
 
 package example2.classes.util;
 
+import example2.classes.lookup.LookupEnvironment;
+import example2.classes.util.AbstractExtendingVisitor;
+import example2.classes.util.Visitable;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.IdManager;
-
-import example2.classes.lookup.LookupEnvironment;
 
 public class AbstractClassesCommonLookupVisitor
 	extends AbstractExtendingVisitor<LookupEnvironment, LookupEnvironment>

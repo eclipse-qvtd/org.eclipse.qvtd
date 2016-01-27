@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
@@ -147,7 +148,7 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
 		GuardPattern asGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
 		if (asGuardPattern != null) {
-			context.refreshList(Predicate.class, asGuardPattern.getPredicate(), csElement.getOwnedPredicates());
+			context.refreshList(Predicate.class, ClassUtil.nullFree(asGuardPattern.getPredicate()), csElement.getOwnedPredicates());
 		}
 		return null;
 	} 

@@ -19,22 +19,19 @@ import org.eclipse.jdt.annotation.Nullable;
 
 public class ClassesLookupResultImpl<NE> implements ClassesLookupResult<NE> {
 	
-	private List<NE> results = new ArrayList<NE>();
+	private @NonNull List<NE> results = new ArrayList<NE>();
 	
 	public ClassesLookupResultImpl(List<NE> results){
 		this.results.addAll(results);
 	}
 	
-	@SuppressWarnings("null")
 	@Override
-	@NonNull
-	public List<NE> getAllResults() {
+	public @NonNull List<NE> getAllResults() {
 		return Collections.unmodifiableList(results);
 	}
 	
 	@Override
-	@Nullable
-	public NE getSingleResult() {
+	public @Nullable NE getSingleResult() {
 		return results.size() == 0 ? null : results.get(0);
 	}
 	

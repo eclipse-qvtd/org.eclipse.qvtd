@@ -34,7 +34,7 @@ import org.eclipse.ocl.pivot.utilities.MetamodelManager;
  * @param <C>
  */
 public class ClassRelationships {
-	private static final @SuppressWarnings("null")@NonNull Set<@NonNull Class> EMPTY_CLASS_SET = Collections.<@NonNull Class>emptySet();
+	private static final @NonNull Set<@NonNull Class> EMPTY_CLASS_SET = Collections.<@NonNull Class>emptySet();
 
 	public static class ContainerClass {
 		

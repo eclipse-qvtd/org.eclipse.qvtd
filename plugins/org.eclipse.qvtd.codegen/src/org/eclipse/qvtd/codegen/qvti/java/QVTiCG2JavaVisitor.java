@@ -880,7 +880,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 							js.append(";\n");
 						}
 						js.append("\n");
-						js.append("@SuppressWarnings(\"null\")\n");					
+//						js.append("@SuppressWarnings(\"null\")\n");					
 						js.append("public ");
 						js.append(getMappingName(cgMapping));
 						js.append("(");

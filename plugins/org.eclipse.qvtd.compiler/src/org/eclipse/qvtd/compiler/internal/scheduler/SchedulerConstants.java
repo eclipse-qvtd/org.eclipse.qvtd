@@ -57,16 +57,16 @@ import org.eclipse.qvtd.pivot.schedule.utilities.GraphMLStringBuilder;
 
 public abstract class SchedulerConstants
 {
-	public static final @SuppressWarnings("null")@NonNull List<Connection> EMPTY_CONNECTION_LIST = Collections.emptyList();
-	public static final @SuppressWarnings("null")@NonNull List<Edge> EMPTY_EDGE_LIST = Collections.emptyList();
-	//public static final @SuppressWarnings("null")@NonNull List<ExpressionEdge> EMPTY_EXPRESSION_EDGE_LIST = Collections.emptyList();
-	public static final @SuppressWarnings("null")@NonNull Set<MappingRegion> EMPTY_MAPPING_REGION_SET = Collections.emptySet();
-	public static final @SuppressWarnings("null")@NonNull List<NavigationEdge> EMPTY_NAVIGATION_EDGE_LIST = Collections.emptyList();
-	public static final @SuppressWarnings("null")@NonNull List<Node> EMPTY_NODE_LIST = Collections.emptyList();
-	public static final @SuppressWarnings("null")@NonNull List<Region> EMPTY_REGION_LIST = Collections.emptyList();
-	public static final @SuppressWarnings("null")@NonNull List<SimpleEdge> EMPTY_SIMPLE_EDGE_LIST = Collections.emptyList();
-	public static final @SuppressWarnings("null")@NonNull List<SimpleNode> EMPTY_SIMPLE_NODE_LIST = Collections.emptyList();
-	public static final @SuppressWarnings("null")@NonNull List<TypedElement> EMPTY_TYPED_ELEMENT_LIST = Collections.emptyList();
+	public static final @NonNull List<Connection> EMPTY_CONNECTION_LIST = Collections.emptyList();
+	public static final @NonNull List<Edge> EMPTY_EDGE_LIST = Collections.emptyList();
+	//public static final @NonNull List<ExpressionEdge> EMPTY_EXPRESSION_EDGE_LIST = Collections.emptyList();
+	public static final @NonNull Set<MappingRegion> EMPTY_MAPPING_REGION_SET = Collections.emptySet();
+	public static final @NonNull List<NavigationEdge> EMPTY_NAVIGATION_EDGE_LIST = Collections.emptyList();
+	public static final @NonNull List<Node> EMPTY_NODE_LIST = Collections.emptyList();
+	public static final @NonNull List<Region> EMPTY_REGION_LIST = Collections.emptyList();
+	public static final @NonNull List<SimpleEdge> EMPTY_SIMPLE_EDGE_LIST = Collections.emptyList();
+	public static final @NonNull List<SimpleNode> EMPTY_SIMPLE_NODE_LIST = Collections.emptyList();
+	public static final @NonNull List<TypedElement> EMPTY_TYPED_ELEMENT_LIST = Collections.emptyList();
 
 	public static @NonNull String getMultiplicity(@NonNull TypedElement typedElement) {
 		StringBuilder s = new StringBuilder();

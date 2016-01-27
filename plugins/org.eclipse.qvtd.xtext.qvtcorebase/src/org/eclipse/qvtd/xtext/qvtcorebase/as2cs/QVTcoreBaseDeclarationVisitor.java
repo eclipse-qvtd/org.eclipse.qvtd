@@ -109,7 +109,6 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		super(context);
 	}
 
-	@SuppressWarnings("null")
 	protected @NonNull DomainCS createCoreDomain(@NonNull CoreDomain asCoreDomain) {
 		return context.refreshElement(DomainCS.class, QVTcoreBaseCSPackage.Literals.DOMAIN_CS, asCoreDomain);
 	}

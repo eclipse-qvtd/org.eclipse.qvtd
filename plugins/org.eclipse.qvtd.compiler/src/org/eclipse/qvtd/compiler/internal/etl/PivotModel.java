@@ -191,7 +191,7 @@ public class PivotModel extends EmfModel {
 		return modelImpl.getContents().get(0);
 	}
 	
-	public Transformation getTransformation() throws Exception {
+	public @NonNull Transformation getTransformation() throws Exception {
 		for (EObject eContent : modelImpl.getContents()) {
 			if (eContent instanceof ImperativeModel) {
 	    		for (org.eclipse.ocl.pivot.Package aPackage : ((ImperativeModel)eContent).getOwnedPackages()) {

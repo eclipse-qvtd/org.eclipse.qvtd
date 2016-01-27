@@ -33,7 +33,7 @@ public class QVTiVariableFinder extends VariableFinder
 	}
 
 	@Override
-	public void collectChildVars(Object valueObject, @NonNull String[] parentPath, @Nullable String containerType, @NonNull List<VMVariableData> result) {
+	public void collectChildVars(Object valueObject, @NonNull String @NonNull [] parentPath, @Nullable String containerType, @NonNull List<@NonNull VMVariableData> result) {
 		if (valueObject instanceof QVTiTransformationInstance) {
 			String childPath[] = new String[parentPath.length + 1];
 			System.arraycopy(parentPath, 0, childPath, 0, parentPath.length);
@@ -69,7 +69,7 @@ public class QVTiVariableFinder extends VariableFinder
 
 	@Override
 	protected Object findChildObject(Object parentObj, @Nullable String optParentDeclaredType,
-			@NonNull String[] varTreePath, int pathIndex) {
+			@NonNull String @NonNull [] varTreePath, int pathIndex) {
 		Object nextObject = null;
 		String nextDeclaredType = null;
 		if (parentObj instanceof QVTiTransformationInstance) {

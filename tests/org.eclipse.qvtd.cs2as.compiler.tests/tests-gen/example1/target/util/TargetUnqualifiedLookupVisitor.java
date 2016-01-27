@@ -9,8 +9,16 @@
 
 package example1.target.util;
 
+import example1.target.A;
+import example1.target.B;
+import example1.target.C;
+import example1.target.TargetPackage;
+import example1.target.lookup.EnvironmentPackage;
+import example1.target.lookup.LookupEnvironment;
+import example1.target.util.AbstractTargetCommonLookupVisitor;
+import example1.target.util.Visitable;
+import example1.target.util.Visitor;
 import java.util.Iterator;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -23,13 +31,6 @@ import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanOperation;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
-
-import example1.target.A;
-import example1.target.B;
-import example1.target.C;
-import example1.target.TargetPackage;
-import example1.target.lookup.EnvironmentPackage;
-import example1.target.lookup.LookupEnvironment;
 
 public class TargetUnqualifiedLookupVisitor
 	extends AbstractTargetCommonLookupVisitor

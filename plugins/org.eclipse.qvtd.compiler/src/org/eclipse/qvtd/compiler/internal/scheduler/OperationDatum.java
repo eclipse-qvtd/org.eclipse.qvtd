@@ -30,7 +30,6 @@ public class OperationDatum implements IndexableIterable<ClassDatum>
 		}
 
 		@Override
-		@SuppressWarnings("null")
 		public @NonNull ClassDatum next() {
 			return classDatums[index++];
 		}
@@ -43,7 +42,7 @@ public class OperationDatum implements IndexableIterable<ClassDatum>
 
 	private final @NonNull Integer hashCode;
 	private final @NonNull String name;
-	private final @NonNull ClassDatum[] classDatums;
+	private final @NonNull ClassDatum @NonNull [] classDatums;
 
 	/**
 	 * Construct an OperationDatum for an Scheduler that has computed the hashCode for the classDatums.
@@ -118,7 +117,7 @@ public class OperationDatum implements IndexableIterable<ClassDatum>
 				s.append(',');
 			}
 			ClassDatum classDatum = classDatums[i];
-			s.append(classDatum != null ? classDatum.toString() : "null");
+			s.append(classDatum.toString());
 		}
 		s.append(')');
 		return s.toString();

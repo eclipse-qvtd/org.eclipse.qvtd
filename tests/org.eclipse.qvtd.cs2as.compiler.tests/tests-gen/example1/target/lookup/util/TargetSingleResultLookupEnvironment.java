@@ -63,7 +63,8 @@ public class TargetSingleResultLookupEnvironment extends LookupEnvironmentImpl  
 		if (namedElement != null) {
 			if (name.equals(namedElement.getName())) {
 				if (typeFilter.isInstance(namedElement)) {
-					if (expFilter == null || (expFilter != null /*null analysis bug? */ && expFilter.matches(namedElement))) {
+				    TargetLookupFilter expFilter2 = expFilter;
+					if (expFilter2 == null || expFilter2.matches(namedElement)) {
 						List<NamedElement> elements = getNamedElements();
 						if (!elements.contains(namedElement)) { 	// FIXME use a set ?
 							elements.add(namedElement);

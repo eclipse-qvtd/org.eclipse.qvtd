@@ -28,7 +28,7 @@ public class QVTiEditorTests extends LoadTestCase
 		OCL ocl = QVTimperative.newInstance(getProjectMap(), null);
 //		OCL ocl = OCL.newInstance(getProjectMap());
 		URI inputURI = getProjectFileURI(inputName);
-		@SuppressWarnings("null")@NonNull URI pivotURI = inputURI.trimFileExtension().appendFileExtension("qvtias");
+		@NonNull URI pivotURI = inputURI.trimFileExtension().appendFileExtension("qvtias");
 		doLoad_Concrete(ocl, inputURI, pivotURI);
 		ocl.dispose();
 	}

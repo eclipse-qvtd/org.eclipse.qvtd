@@ -201,8 +201,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
 			generator.safeVisit(cgPackage2);
 			Set<String> allImports = generator.getAllImports();
-			Map<String, String> long2ShortImportNames = ImportUtils.getLong2ShortImportNames(allImports);
-			javaSourceCode = javaSourceCode2 = ImportUtils.resolveImports(generator.toString(), long2ShortImportNames);
+			Map<@NonNull String, @Nullable String> long2ShortImportNames = ImportUtils.getLong2ShortImportNames(allImports);
+			javaSourceCode = javaSourceCode2 = ImportUtils.resolveImports(generator.toString(), long2ShortImportNames, false);
 		}
 		return javaSourceCode2;
 	}
@@ -232,8 +232,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		}
 		
 		s.append(transformation.getName());
-		@SuppressWarnings("null")@NonNull String string = s.toString();
-		return string;
+		return s.toString();
 	}
 	
 	private void appendSegmentName(@NonNull StringBuilder s, CGPackage sPackage) {

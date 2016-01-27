@@ -728,7 +728,7 @@ public abstract class AbstractNode implements Node
 			n.append("\\n");
 			n.append(PrettyPrinter.printType(getCompleteClass().getPrimaryClass()));
 		}
-		@SuppressWarnings("null")@NonNull String string = n.toString();
+		@NonNull String string = n.toString();
 		s.setLabel(string);
 	}
 	

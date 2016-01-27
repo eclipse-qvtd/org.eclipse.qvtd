@@ -26,7 +26,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.attributes.RelationModelAttribution;
 
 public class QVTrelationPivotScoping
 {	
-	private static final class FunctionDisambiguator implements Comparator<Function>
+	private static final class FunctionDisambiguator implements Comparator<@NonNull Function>
 	{
 		@Override
 		@SuppressWarnings("null")

@@ -343,7 +343,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 	
-	public static final @SuppressWarnings("null")@NonNull List<MergeableRegion> EMPTY_MERGEABLE_REGIONS = Collections.emptyList();
+	public static final @NonNull List<MergeableRegion> EMPTY_MERGEABLE_REGIONS = Collections.emptyList();
 
 	protected final @NonNull SuperRegion superRegion;
 	private @Nullable Region invokingRegion = null;

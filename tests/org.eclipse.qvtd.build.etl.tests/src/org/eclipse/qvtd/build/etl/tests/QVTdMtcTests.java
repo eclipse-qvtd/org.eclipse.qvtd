@@ -152,7 +152,7 @@ public class QVTdMtcTests extends LoadTestCase {
 		}
 
 		public @NonNull Transformation compileTransformation() throws Exception {
-			mtc = new MtcBroker(baseURI, testName + ".qvtcas", environmentFactory, TestsXMLUtil.defaultSavingOptions);
+			mtc = new MtcBroker(baseURI, testName + ".qvtcas", getEnvironmentFactory(), TestsXMLUtil.defaultSavingOptions);
 	    	mtc.setCreateGraphml(true);
 	    	Resource iResource = mtc.newExecute();
 	    	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
@@ -179,7 +179,7 @@ public class QVTdMtcTests extends LoadTestCase {
 			File explicitClassPath = new File("../org.eclipse.qvtd.build.etl.tests/bin");
 			String qualifiedClassName = cg.getQualifiedName();
 			String javaCodeSource = cg.generateClassFile();
-			OCL2JavaFileObject.saveClass(explicitClassPath.toString(), qualifiedClassName, javaCodeSource);	
+			OCL2JavaFileObject.saveClass(String.valueOf(explicitClassPath), qualifiedClassName, javaCodeSource);	
 			@SuppressWarnings("unchecked")
 			Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
 			if (txClass == null) {
@@ -199,8 +199,8 @@ public class QVTdMtcTests extends LoadTestCase {
 		}
 
 		public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull Transformation asTransformation) throws Exception {
-			interpretedExecutor = new QVTiIncrementalExecutor(getEnvironmentFactory(), asTransformation, QVTiIncrementalExecutor.Mode.LAZY);
-			return interpretedExecutor;
+			BasicQVTiExecutor interpretedExecutor2 = interpretedExecutor = new QVTiIncrementalExecutor(getEnvironmentFactory(), asTransformation, QVTiIncrementalExecutor.Mode.LAZY);
+			return interpretedExecutor2;
 		}
 
 		public void createModel(@NonNull String modelName, @NonNull String modelFile) {
@@ -281,7 +281,9 @@ public class QVTdMtcTests extends LoadTestCase {
 		public void install(@NonNull EPackage... eInstances) {
 			ResourceSetImpl resourceSet = (ResourceSetImpl) getResourceSet();
 			for (EPackage eInstance : eInstances) {
-				nsURIs.add(eInstance.getNsURI());
+				String nsURI = eInstance.getNsURI();
+				assert nsURI != null;
+				nsURIs.add(nsURI);
 				resourceSet.getURIResourceMap().put(baseURI.appendSegment(eInstance.getName()+".ecore"), eInstance.eResource());
 			}
 		}
@@ -324,7 +326,7 @@ public class QVTdMtcTests extends LoadTestCase {
 				outputResource.save(getSaveOptions());
 	        }
 			Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
-			assert referenceResource != null;
+			assert (referenceResource != null) && (outputResource != null);
 			if (normalizer != null) {
 				normalizer.normalize(referenceResource);
 				normalizer.normalize(outputResource);

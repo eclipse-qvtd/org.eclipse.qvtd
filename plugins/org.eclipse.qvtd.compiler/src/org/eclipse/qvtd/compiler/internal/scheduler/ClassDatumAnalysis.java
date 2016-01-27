@@ -125,7 +125,6 @@ public class ClassDatumAnalysis
 		return Iterables.concat(consumer2predicateNodes.values());
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull Set<Region> getConsumingRegions() {
 		return consumer2predicateNodes.keySet();
 	}
@@ -175,7 +174,6 @@ public class ClassDatumAnalysis
 		return Iterables.concat(consumer2predicateNodes.values());
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull Set<Region> getProducingRegions() {
 		return producer2assignmentNodes.keySet();
 	}

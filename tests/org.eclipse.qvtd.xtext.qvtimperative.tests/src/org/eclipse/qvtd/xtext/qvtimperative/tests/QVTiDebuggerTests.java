@@ -127,7 +127,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 		IFile inFile = TestUIUtil.copyIFile(iProject.getFile("HSVNode.xmi"), getProjectFileURI("HSV2HLS/HSVNode.xmi"), null);
 		IFile outFile = iProject.getFile("HLSNode.xmi");
 		IFile middleFile = iProject.getFile("HSV2HLSNode.xmi");
-		@SuppressWarnings("null")@NonNull URI txURI = URI.createPlatformResourceURI(txFile.getFullPath().toString(), true);
+		@NonNull URI txURI = URI.createPlatformResourceURI(txFile.getFullPath().toString(), true);
 		URI inURI = URI.createPlatformResourceURI(inFile.getFullPath().toString(), true);
 		URI outURI = URI.createPlatformResourceURI(outFile.getFullPath().toString(), true);
 		URI middleURI = URI.createPlatformResourceURI(middleFile.getFullPath().toString(), true);
@@ -175,7 +175,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 		IFile inFile = TestUIUtil.copyIFile(iProject.getFile("HSVNode.xmi"), getProjectFileURI("HSV2HLS/HSVNode.xmi"), null);
 		IFile outFile = iProject.getFile("HLSNode.xmi");
 		IFile middleFile = iProject.getFile("HSV2HLSNode.xmi");
-		@SuppressWarnings("null")@NonNull URI txURI = URI.createPlatformResourceURI(txFile.getFullPath().toString(), true);
+		@NonNull URI txURI = URI.createPlatformResourceURI(txFile.getFullPath().toString(), true);
 		URI inURI = URI.createPlatformResourceURI(inFile.getFullPath().toString(), true);
 		URI outURI = URI.createPlatformResourceURI(outFile.getFullPath().toString(), true);
 		URI middleURI = URI.createPlatformResourceURI(middleFile.getFullPath().toString(), true);

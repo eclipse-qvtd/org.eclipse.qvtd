@@ -335,6 +335,7 @@ public class QVTm2QVTp
 			}
 			for (TreeIterator<EObject> tit = element.eAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
+				assert eObject != null;
 				DomainUsage eObjectUsage = domainUsageAnalysis.getUsage(eObject);
 				assert eObjectUsage != null;
 				if (eObjectUsage.isCheckable() && !eObjectUsage.isEnforceable()) { // && !(eObject instanceof NullLiteralExp)) {
@@ -352,6 +353,7 @@ public class QVTm2QVTp
 			}
 			for (TreeIterator<EObject> tit = element.eAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
+				assert eObject != null;
 				DomainUsage eObjectUsage = domainUsageAnalysis.getUsage(eObject);
 				assert eObjectUsage != null;
 				if (eObjectUsage.isMiddle()) { // && !(eObject instanceof NullLiteralExp)) {
@@ -369,6 +371,7 @@ public class QVTm2QVTp
 			}
 			for (TreeIterator<EObject> tit = element.eAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
+				assert eObject != null;
 				DomainUsage eObjectUsage = domainUsageAnalysis.getUsage(eObject);
 				assert eObjectUsage != null;
 				if (eObjectUsage.isEnforceable() && !eObjectUsage.isCheckable()) { // && !(eObject instanceof NullLiteralExp)) {

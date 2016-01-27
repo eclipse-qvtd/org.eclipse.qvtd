@@ -451,7 +451,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	
 	// Copied from QVTiCompilerTest
 	@Override
-	public Class<? extends CS2ASTransformer> compileTransformation(@NonNull QVTimperative qvt,
+	public @NonNull Class<? extends CS2ASTransformer> compileTransformation(@NonNull QVTimperative qvt,
 			@NonNull Transformation transformation,	@NonNull CS2ASJavaCompilerParameters params) throws Exception {
 				
 		QVTiCodeGenerator cg = new CS2ASJavaCodeGenerator(qvt.getEnvironmentFactory(), transformation, params);
