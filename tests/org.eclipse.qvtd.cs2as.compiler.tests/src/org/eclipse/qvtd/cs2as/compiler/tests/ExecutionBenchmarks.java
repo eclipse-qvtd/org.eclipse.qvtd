@@ -210,11 +210,13 @@ public class ExecutionBenchmarks extends LoadTestCase {
 
 		for (String modelName : allResults.keySet()) {
 			List<Integer> modelResults = allResults.get(modelName);
-			modelResults.remove(0);	// We eliminate the first result with the warm-up
-			for (Integer time : modelResults) {
-				fWriter.write(modelName+","+time.toString()+",\n");
+			if (modelResults != null) {
+				modelResults.remove(0);	// We eliminate the first result with the warm-up
+				for (Integer time : modelResults) {
+					fWriter.write(modelName+","+time.toString()+",\n");
+				}
+				fWriter.write(modelName+",,"+mean(modelResults)+"\n");	
 			}
-			fWriter.write(modelName+",,"+mean(modelResults)+"\n");
 		}
 			
 		fWriter.close();
