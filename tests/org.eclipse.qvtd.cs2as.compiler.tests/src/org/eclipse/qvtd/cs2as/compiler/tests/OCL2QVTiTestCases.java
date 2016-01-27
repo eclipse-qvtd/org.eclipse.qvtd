@@ -93,6 +93,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	private static final boolean CREATE_GRAPHML = false; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
 	private static final @NonNull String TESTS_GEN_PATH = "../org.eclipse.qvtd.cs2as.compiler.tests/tests-gen/";
 	private static final @NonNull String TESTS_PACKAGE_NAME = "cg";
+	private static final @NonNull String NEW_TESTS_PACKAGE_NAME = "new_cg";
 	private static final @NonNull String DEBUG_SEGMENT = "debug";
 	private static @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models", true);
 	
@@ -384,7 +385,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example1.target.lookup.util.TargetLookupSolver",
 				"example1.target.lookup.util.TargetLookupResult",
-				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+				TESTS_GEN_PATH, NEW_TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 		myQVT.executeModelsTX_CG(txClass, "model1");
 		myQVT.executeModelsTX_CG(txClass, "model2");
@@ -491,7 +492,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example2.classes.lookup.util.ClassesLookupSolver",
 				"example2.classes.lookup.util.ClassesLookupResult",
-				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+				TESTS_GEN_PATH, NEW_TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 		myQVT.executeModelsTX_CG(txClass, "model1");
 		myQVT.executeModelsTX_CG(txClass, "model2");
@@ -594,7 +595,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example2.classes.lookup.util.ClassesLookupSolver",
 				"example2.classes.lookup.util.ClassesLookupResult",
-				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+				TESTS_GEN_PATH, NEW_TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 		myQVT.executeModelsTX_CG(txClass, "model1V2");
 		myQVT.executeModelsTX_CG(txClass, "model2V2");
@@ -751,7 +752,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("SimplerKiama.ocl");
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("","",
-				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+				TESTS_GEN_PATH, NEW_TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 //		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 // FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
