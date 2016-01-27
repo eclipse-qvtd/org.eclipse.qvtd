@@ -9,7 +9,6 @@
 
 package example2.classes.util;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -60,14 +59,14 @@ public class ClassesExportedLookupVisitor
     /**
      * visitClass(element : classes::Class[1]) : lookup::LookupEnvironment[?]
      * 
-     * _'null' : lookup::LookupEnvironment[?]
+     * _'null' : lookup::LookupEnvironment[1]
      */
     @Override
     public /*@NonInvalid*/ LookupEnvironment visitClass(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class element_6) {
         @SuppressWarnings("null")
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Property> ownedProperties = element_6.getOwnedProperties();
         @SuppressWarnings("null")
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements((EList<Property>)ownedProperties);
+        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownedProperties);
         return addElements;
     }
 }
