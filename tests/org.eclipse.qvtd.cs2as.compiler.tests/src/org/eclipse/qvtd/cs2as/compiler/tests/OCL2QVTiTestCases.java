@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -579,6 +580,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //		Scheduler.DEPENDENCY_ANALYSIS.setState(true);
 //		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("example2");
+		OCLstdlibPackage.eINSTANCE.getName();
 		myQVT.install("ClassesCS.genmodel", "ClassesCS.ecore", ClassescsPackage.eINSTANCE);
 		myQVT.install("Classes.genmodel", "Classes.ecore", ClassesPackage.eINSTANCE);
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("classescs2asV2.ocl");
@@ -606,6 +608,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		
 		myQVT.dispose();
 		myQVT = new MyQVT("example2");
+		OCLstdlibPackage.eINSTANCE.getName();
 		myQVT.loadEcoreFile(baseURI.appendSegment("ClassesCS.ecore"), ClassescsPackage.eINSTANCE);
 		myQVT.loadEcoreFile(baseURI.appendSegment("Classes.ecore"), ClassesPackage.eINSTANCE);
 		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
