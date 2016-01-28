@@ -52,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
@@ -151,8 +152,10 @@ public class QVTm2QVTp
 			@SuppressWarnings("null")@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
 			context.addTrace(mIn, mOut);
 	        mOut.setName(mappingName);
-	        mOut.setGuardPattern(QVTcoreBaseFactory.eINSTANCE.createGuardPattern());
-	        mOut.setBottomPattern(QVTcoreBaseFactory.eINSTANCE.createBottomPattern());
+			mOut.setGuardPattern(create(mIn.getGuardPattern()));
+			mOut.setBottomPattern(create(mIn.getBottomPattern()));
+//	        mOut.setGuardPattern(QVTcoreBaseFactory.eINSTANCE.createGuardPattern());
+//	        mOut.setBottomPattern(QVTcoreBaseFactory.eINSTANCE.createBottomPattern());
 			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
 	        return mOut;
 	    }
@@ -191,6 +194,7 @@ public class QVTm2QVTp
 			//
 			{
 				CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+				context.addTrace(mIn, dOut);
 				dOut.setIsCheckable(false);
 				dOut.setIsEnforceable(true);
 				dOut.setGuardPattern(create(mIn.getGuardPattern()));
@@ -254,6 +258,7 @@ public class QVTm2QVTp
 			//
 			{
 				CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+				context.addTrace(mIn, dOut);
 				dOut.setIsCheckable(false);
 				dOut.setIsEnforceable(true);
 				dOut.setGuardPattern(create(mIn.getGuardPattern()));
@@ -272,6 +277,7 @@ public class QVTm2QVTp
 			//
 			{
 				CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+				context.addTrace(mIn, dOut);
 				dOut.setIsCheckable(true);
 				dOut.setIsEnforceable(false);
 				dOut.setGuardPattern(create(mIn.getGuardPattern()));
@@ -395,7 +401,7 @@ public class QVTm2QVTp
 
 		@Override
 		public @NonNull BottomPattern visitBottomPattern(@NonNull BottomPattern bIn) {
-			@SuppressWarnings("null")@NonNull BottomPattern bOut = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+			BottomPattern bOut = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
 			context.addTrace(bIn, bOut);
 			// BottomPattern children are provided in a partitioned-domain-specific fashion by a derived visitMapping.
 	        return bOut;
@@ -412,7 +418,7 @@ public class QVTm2QVTp
 
 		@Override
 		public @Nullable Element visitCoreDomain(@NonNull CoreDomain dIn) {
-			@SuppressWarnings("null")@NonNull CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+			CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
 			context.addTrace(dIn, dOut);
 			dOut.setIsCheckable(dIn.isIsCheckable());
 			dOut.setIsEnforceable(dIn.isIsEnforceable());
@@ -427,6 +433,7 @@ public class QVTm2QVTp
 		    @SuppressWarnings("null")@NonNull CoreModel mOut = QVTcoreFactory.eINSTANCE.createCoreModel();
 		    context.addTrace(mIn, mOut);
 		    mOut.setExternalURI(mIn.getExternalURI().replace(".qvtm.qvtc", ".qvtp.qvtc"));
+		    createAll(mIn.getOwnedImports(), mOut.getOwnedImports());
 		    createAll(mIn.getOwnedPackages(), mOut.getOwnedPackages());
 			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
 		    return mOut;
@@ -458,11 +465,19 @@ public class QVTm2QVTp
 
 		@Override
 		public @NonNull GuardPattern visitGuardPattern(@NonNull GuardPattern gIn) {
-			@SuppressWarnings("null")@NonNull GuardPattern gOut = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+			GuardPattern gOut = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
 			context.addTrace(gIn, gOut);
 			// GuardPattern children are provided in a partitioned-domain-specific fashion by a derived visitMapping.
 	        return gOut;
 	    }
+
+		@Override
+		public @Nullable Element visitImport(@NonNull Import iIn) {
+		    @SuppressWarnings("null")@NonNull Import iOut = PivotFactory.eINSTANCE.createImport();
+		    context.addTrace(iIn, iOut);
+		    iOut.setImportedNamespace(iIn.getImportedNamespace());
+	        return null;
+		}
 
 		@Override
 		public @Nullable Element visitMapping(@NonNull Mapping mIn) {
@@ -498,7 +513,7 @@ public class QVTm2QVTp
 
 		@Override
 		public @Nullable Element visitPropertyAssignment(@NonNull PropertyAssignment paIn) {
-			@SuppressWarnings("null")@NonNull PropertyAssignment paOut = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
+			PropertyAssignment paOut = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
 			context.addTrace(paIn, paOut);
 			paOut.setIsDefault(paIn.isIsDefault());
 			paOut.setTargetProperty(paIn.getTargetProperty());
@@ -570,7 +585,7 @@ public class QVTm2QVTp
 
 		@Override
 		public @Nullable Element visitVariableAssignment(@NonNull VariableAssignment vaIn) {
-			@SuppressWarnings("null")@NonNull PropertyAssignment vaOut = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
+			PropertyAssignment vaOut = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
 			context.addTrace(vaIn, vaOut);
 			vaOut.setIsDefault(vaIn.isIsDefault());
 			createAll(vaIn.getOwnedComments(), vaOut.getOwnedComments());
@@ -595,6 +610,7 @@ public class QVTm2QVTp
 			EcoreUtil.Copier copier = new ExpressionCopier(context, sibling);
 			@SuppressWarnings("unchecked") T eOut = (T) copier.copy(eIn);			
 		    copier.copyReferences();
+		    context.addDebugCopies(copier); 
 			return eOut;
 		}
 
@@ -630,10 +646,10 @@ public class QVTm2QVTp
 
 		@Override
 		public @Nullable Object visitCoreDomain(@NonNull CoreDomain dOut) {
-			CoreDomain dIn = context.basicEquivalentSource(dOut);
+			Area dIn = context.basicEquivalentSource(dOut);
 			TypedModel tmOut;
-			if (dIn != null) {
-				tmOut = context.equivalentTarget(dIn.getTypedModel());
+			if (dIn instanceof CoreDomain) {
+				tmOut = context.equivalentTarget(((CoreDomain)dIn).getTypedModel());
 			}
 			else {
 				tmOut = context.getMiddleTypedModelTarget();
@@ -647,10 +663,8 @@ public class QVTm2QVTp
 
 		@Override
 		public @Nullable Object visitCoreModel(@NonNull CoreModel mOut) {
-		    CoreModel mIn = context.equivalentSource(mOut);
-		    for (Import oi : mIn.getOwnedImports()) {
-		        mOut.getOwnedImports().add(EcoreUtil.copy(oi));
-		    }
+		    @SuppressWarnings("unused")
+			CoreModel mIn = context.equivalentSource(mOut);
 			updateAllChildren(mOut.getOwnedPackages());
 			return null;
 		}
@@ -705,11 +719,13 @@ public class QVTm2QVTp
 				Property targetProperty = paIn.getTargetProperty();
 				assert targetProperty != null;
 				OCLExpression propertyCallExp = PivotUtil.createPropertyCallExp(slotExp, targetProperty);
+				context.addTrace(paIn, propertyCallExp);
 				OCLExpression valueExp = copy(paIn.getValue(), pOut);
 				Class oclAnyType = context.getEnvironmentFactory().getStandardLibrary().getOclAnyType();
 				Operation eqOperation = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "=");
 				assert eqOperation != null;
 				OCLExpression compareExp = PivotUtil.createOperationCallExp(propertyCallExp, eqOperation, valueExp);
+				context.addTrace(paIn, compareExp);
 				compareExp.setName(eqOperation.getName());		// FIXME Redundant legacy compatibility
 				pOut.setConditionExpression(compareExp);
 			}
@@ -785,6 +801,11 @@ public class QVTm2QVTp
      * Reverse traceability from a target object to its source.
      */
     private final @NonNull Map<Element, Element> target2source = new HashMap<Element, Element>();
+    
+    /**
+     * Reverse traceability from a target object to its source.
+     */
+    private final @NonNull Map<Element, Element> debugCopy2source = new HashMap<Element, Element>();
 	
     /**
      * Create a new QVTm to QVTp transformation using an environmentFactory.
@@ -798,7 +819,14 @@ public class QVTm2QVTp
 		this.updateVisitor = new UpdateVisitor(this);
 	}
 	
-    /**
+    public void addDebugCopies(@NonNull Map<EObject, EObject> copier) {
+	    for (EObject eSource : copier.keySet()) {
+	    	EObject eTarget = copier.get(eSource);
+	    	debugCopy2source.put((Element)eTarget, (Element)eSource);
+	    }
+	}
+
+	/**
      * Create a new trace for the given list of generated objects for the given
      * context.
      *
@@ -873,6 +901,14 @@ public class QVTm2QVTp
                 target.getContents().add(mOut);
             }
         }
+	    for (TreeIterator<EObject> tit = target.getAllContents(); tit.hasNext(); ) {
+	    	EObject eTarget = tit.next();
+	    	EObject eSource = target2source.get(eTarget);
+	    	EObject eCopied = debugCopy2source.get(eTarget);
+	        if ((eSource == null) && (eCopied == null)) {
+	    		System.out.println("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
+	    	}
+	    }
         // FIXME Following code fixes up missing source. Should be fixed earlier.
         List<OperationCallExp> missingSources = null; 
 	    for (TreeIterator<EObject> tit = target.getAllContents(); tit.hasNext(); ) {
