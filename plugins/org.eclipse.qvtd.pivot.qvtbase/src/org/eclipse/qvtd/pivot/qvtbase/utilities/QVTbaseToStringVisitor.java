@@ -103,14 +103,21 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 
 	@Override
 	public String visitPattern(@NonNull Pattern object) {
-		append("pattern ");
-//		appendName(object);
+		boolean isFirst = true;
+		for (Predicate predicate : object.getPredicate()) {
+			if (!isFirst) {
+				append(" ");
+			}
+			safeVisit(predicate);
+			isFirst = false;
+		}
 		return null;
 	}
 
 	@Override
 	public String visitPredicate(@NonNull Predicate object) {
 		safeVisit(object.getConditionExpression());
+		append(";");
 		return null;
 	}
 

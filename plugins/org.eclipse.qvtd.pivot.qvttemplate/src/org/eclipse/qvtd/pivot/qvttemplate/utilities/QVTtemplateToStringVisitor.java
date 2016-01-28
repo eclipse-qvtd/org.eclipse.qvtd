@@ -12,6 +12,8 @@ package org.eclipse.qvtd.pivot.qvttemplate.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
@@ -55,25 +57,51 @@ public class QVTtemplateToStringVisitor extends QVTbaseToStringVisitor implement
 
 	@Override
 	public String visitCollectionTemplateExp(@NonNull CollectionTemplateExp object) {
-		// TODO Auto-generated method stub
+		safeVisit(object.getBindsTo());
+		append("{");
+		boolean isFirst = true;
+		for (OCLExpression part : object.getMember()) {
+			if (!isFirst) {
+				append(", ");
+			}
+			safeVisit(part);
+			isFirst = false;
+		}
+		Variable rest = object.getRest();
+		if (rest != null) {
+			append(" ++ ");
+			safeVisit(rest);
+		}
+		append("}");
 		return null;
 	}
 
 	@Override
 	public String visitObjectTemplateExp(@NonNull ObjectTemplateExp object) {
-		// TODO Auto-generated method stub
+		safeVisit(object.getBindsTo());
+		append("{");
+		boolean isFirst = true;
+		for (PropertyTemplateItem part : object.getPart()) {
+			if (!isFirst) {
+				append(", ");
+			}
+			safeVisit(part);
+			isFirst = false;
+		}
+		append("}");
 		return null;
 	}
 
 	@Override
 	public String visitPropertyTemplateItem(@NonNull PropertyTemplateItem object) {
-		// TODO Auto-generated method stub
+		appendName(object.getReferredProperty());
+		append(" = ");
+        safeVisit(object.getValue());
 		return null;
 	}
 
 	@Override
 	public String visitTemplateExp(@NonNull TemplateExp object) {
-		// TODO Auto-generated method stub
-		return null;
+		return visiting(object);
 	}
 }

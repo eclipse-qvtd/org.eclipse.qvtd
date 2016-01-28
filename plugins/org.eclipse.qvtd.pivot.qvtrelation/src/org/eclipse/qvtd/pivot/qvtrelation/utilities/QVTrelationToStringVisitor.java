@@ -12,7 +12,10 @@ package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -61,37 +64,87 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 
 	@Override
 	public String visitDomainPattern(@NonNull DomainPattern object) {
-		// TODO Auto-generated method stub
+		safeVisit(object.getTemplateExpression());
 		return null;
 	}
 
 	@Override
 	public String visitKey(@NonNull Key object) {
-		// TODO Auto-generated method stub
+		append("key ");
+		safeVisit(object.getIdentifies());
+		append(" ");
+		append("{");
+		boolean isFirst = true;
+		for (Property part : object.getPart()) {
+			if (!isFirst) {
+				append(", ");
+			}
+			safeVisit(part);
+			isFirst = false;
+		}
+		for (Property part : object.getOppositePart()) {
+			if (!isFirst) {
+				append(", ");
+			}
+			append("opposite ");
+			safeVisit(part);
+			isFirst = false;
+		}
+		append("}");
 		return null;
 	}
 
 	@Override
 	public String visitRelation(@NonNull Relation object) {
-		append("Relation " + object.getName());
+		if (object.isIsTopLevel()) {
+			append("top ");
+		}
+		append("relation ");
+		appendName(object);
 		return null;
 	}
 
 	@Override
 	public String visitRelationCallExp(@NonNull RelationCallExp object) {
-		// TODO Auto-generated method stub
+		appendName(object.getReferredRelation());
+		append("(");
+		boolean isFirst = true;
+		for (OCLExpression argument : object.getArgument()) {
+			if (!isFirst) {
+				append(", ");
+			}
+			safeVisit(argument);
+			isFirst = false;
+		}
+		append(")");
 		return null;
 	}
 
 	@Override
 	public String visitRelationDomain(@NonNull RelationDomain object) {
-		append("RelationDomain " + object.getName());
+		if (object.isIsCheckable()) {
+			append("check ");
+		}
+		if (object.isIsEnforceable()) {
+			append("enforce ");
+		}
+		append("domain ");
+		appendName(object);
+/*		append(" ");
+		boolean isFirst = true;
+		for (DomainPattern pattern : object.getPattern()) {
+			if (!isFirst) {
+				append(", ");
+			}
+			safeVisit(pattern);
+			isFirst = false;
+		}
+		append(";"); */
 		return null;
 	}
 
 	@Override
 	public String visitRelationDomainAssignment(@NonNull RelationDomainAssignment object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -109,7 +162,18 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 
 	@Override
 	public String visitRelationalTransformation(@NonNull RelationalTransformation object) {
-		append("RelationalTransformation " + object.getName());
+		append("transformation ");
+		appendName(object);
+		append("(");
+		boolean isFirst = true;
+		for (TypedModel typedModel : object.getModelParameter()) {
+			if (!isFirst) {
+				append(", ");
+			}
+			safeVisit(typedModel);
+			isFirst = false;
+		}
+		append(")");
 		return null;
 	}
 }
