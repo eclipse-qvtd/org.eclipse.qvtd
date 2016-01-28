@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtcore;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +37,7 @@ public interface QVTcoreFactory extends EFactory {
 	 * @return a new object of class '<em>Core Model</em>'.
 	 * @generated
 	 */
-	CoreModel createCoreModel();
+	@NonNull CoreModel createCoreModel();
 
 	/**
 	 * Returns a new object of class '<em>Mapping</em>'.
@@ -45,7 +46,7 @@ public interface QVTcoreFactory extends EFactory {
 	 * @return a new object of class '<em>Mapping</em>'.
 	 * @generated
 	 */
-	Mapping createMapping();
+	@NonNull Mapping createMapping();
 
 	/**
 	 * Returns the package supported by this factory.

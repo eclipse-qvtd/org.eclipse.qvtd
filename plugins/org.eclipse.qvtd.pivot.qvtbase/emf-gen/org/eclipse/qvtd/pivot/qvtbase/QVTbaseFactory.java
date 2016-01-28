@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +37,7 @@ public interface QVTbaseFactory extends EFactory {
 	 * @return a new object of class '<em>Base Model</em>'.
 	 * @generated
 	 */
-	BaseModel createBaseModel();
+	@NonNull BaseModel createBaseModel();
 
 	/**
 	 * Returns a new object of class '<em>Function</em>'.
@@ -45,7 +46,7 @@ public interface QVTbaseFactory extends EFactory {
 	 * @return a new object of class '<em>Function</em>'.
 	 * @generated
 	 */
-	Function createFunction();
+	@NonNull Function createFunction();
 
 	/**
 	 * Returns a new object of class '<em>Function Parameter</em>'.
@@ -54,7 +55,7 @@ public interface QVTbaseFactory extends EFactory {
 	 * @return a new object of class '<em>Function Parameter</em>'.
 	 * @generated
 	 */
-	FunctionParameter createFunctionParameter();
+	@NonNull FunctionParameter createFunctionParameter();
 
 	/**
 	 * Returns a new object of class '<em>Pattern</em>'.
@@ -63,7 +64,7 @@ public interface QVTbaseFactory extends EFactory {
 	 * @return a new object of class '<em>Pattern</em>'.
 	 * @generated
 	 */
-	Pattern createPattern();
+	@NonNull Pattern createPattern();
 
 	/**
 	 * Returns a new object of class '<em>Predicate</em>'.
@@ -72,7 +73,7 @@ public interface QVTbaseFactory extends EFactory {
 	 * @return a new object of class '<em>Predicate</em>'.
 	 * @generated
 	 */
-	Predicate createPredicate();
+	@NonNull Predicate createPredicate();
 
 	/**
 	 * Returns a new object of class '<em>Transformation</em>'.
@@ -81,7 +82,7 @@ public interface QVTbaseFactory extends EFactory {
 	 * @return a new object of class '<em>Transformation</em>'.
 	 * @generated
 	 */
-	Transformation createTransformation();
+	@NonNull Transformation createTransformation();
 
 	/**
 	 * Returns a new object of class '<em>Typed Model</em>'.
@@ -90,7 +91,7 @@ public interface QVTbaseFactory extends EFactory {
 	 * @return a new object of class '<em>Typed Model</em>'.
 	 * @generated
 	 */
-	TypedModel createTypedModel();
+	@NonNull TypedModel createTypedModel();
 
 	/**
 	 * Returns the package supported by this factory.

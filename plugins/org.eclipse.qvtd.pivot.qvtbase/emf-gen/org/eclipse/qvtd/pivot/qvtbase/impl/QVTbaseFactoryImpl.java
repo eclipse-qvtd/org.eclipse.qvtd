@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -87,7 +88,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * @generated
 	 */
 	@Override
-	public BaseModel createBaseModel() {
+	public @NonNull BaseModel createBaseModel() {
 		BaseModelImpl baseModel = new BaseModelImpl();
 		return baseModel;
 	}
@@ -98,7 +99,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * @generated
 	 */
 	@Override
-	public Function createFunction() {
+	public @NonNull Function createFunction() {
 		FunctionImpl function = new FunctionImpl();
 		return function;
 	}
@@ -109,7 +110,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * @generated
 	 */
 	@Override
-	public FunctionParameter createFunctionParameter() {
+	public @NonNull FunctionParameter createFunctionParameter() {
 		FunctionParameterImpl functionParameter = new FunctionParameterImpl();
 		return functionParameter;
 	}
@@ -120,7 +121,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * @generated
 	 */
 	@Override
-	public Pattern createPattern() {
+	public @NonNull Pattern createPattern() {
 		PatternImpl pattern = new PatternImpl();
 		return pattern;
 	}
@@ -131,7 +132,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * @generated
 	 */
 	@Override
-	public Predicate createPredicate() {
+	public @NonNull Predicate createPredicate() {
 		PredicateImpl predicate = new PredicateImpl();
 		return predicate;
 	}
@@ -142,7 +143,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * @generated
 	 */
 	@Override
-	public Transformation createTransformation() {
+	public @NonNull Transformation createTransformation() {
 		TransformationImpl transformation = new TransformationImpl();
 		return transformation;
 	}
@@ -153,7 +154,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * @generated
 	 */
 	@Override
-	public TypedModel createTypedModel() {
+	public @NonNull TypedModel createTypedModel() {
 		TypedModelImpl typedModel = new TypedModelImpl();
 		return typedModel;
 	}

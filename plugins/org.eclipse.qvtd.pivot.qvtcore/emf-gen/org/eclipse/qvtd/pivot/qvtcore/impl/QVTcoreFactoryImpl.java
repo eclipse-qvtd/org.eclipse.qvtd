@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
@@ -77,7 +78,7 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * @generated
 	 */
 	@Override
-	public CoreModel createCoreModel() {
+	public @NonNull CoreModel createCoreModel() {
 		CoreModelImpl coreModel = new CoreModelImpl();
 		return coreModel;
 	}
@@ -88,7 +89,7 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * @generated
 	 */
 	@Override
-	public Mapping createMapping() {
+	public @NonNull Mapping createMapping() {
 		MappingImpl mapping = new MappingImpl();
 		return mapping;
 	}
