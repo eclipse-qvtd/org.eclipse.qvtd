@@ -2,7 +2,7 @@
  * «codeGenHelper.getCopyright(' * ')»
  *
  * This code is 100% auto-generated
- * using: org.eclipse.ocl.examples.codegen.java.JavaStream
+ * using: org.eclipse.ocl.examples.autogen.lookup.LookupUnqualifiedCodeGenerator
  *
  * Do not edit it.
  ********************************************************************************/
@@ -34,7 +34,6 @@ import org.eclipse.ocl.pivot.values.OrderedSetValue;
 
 public class TargetUnqualifiedLookupVisitor
 	extends AbstractTargetCommonLookupVisitor
-	implements Visitor<LookupEnvironment>
 {
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/env/1.0", null, EnvironmentPackage.eINSTANCE);
@@ -58,10 +57,19 @@ public class TargetUnqualifiedLookupVisitor
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_B = TypeId.ORDERED_SET.getSpecializedId(CLSSid_B);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_C = TypeId.ORDERED_SET.getSpecializedId(CLSSid_C);
     
+    protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
+    protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
     protected /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object child;
     
     public TargetUnqualifiedLookupVisitor(@NonNull LookupEnvironment context) {
         super(context);
+        this.executor = context.getExecutor();
+        this.idResolver = executor.getIdResolver();
+    }
+    
+    @Override
+    protected @Nullable LookupEnvironment doVisiting(@NonNull Visitable visitable) {
+        return parentEnv((EObject)visitable);
     }
     
     /**
@@ -76,11 +84,6 @@ public class TargetUnqualifiedLookupVisitor
         else {
             return context;
         }
-    }
-    
-    @Override
-    public @Nullable LookupEnvironment visiting(@NonNull Visitable visitable) {
-        return parentEnv((EObject)visitable);
     }
     
     /**

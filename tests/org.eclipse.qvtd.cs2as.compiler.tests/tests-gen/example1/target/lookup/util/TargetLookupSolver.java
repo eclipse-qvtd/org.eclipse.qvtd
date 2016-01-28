@@ -5,6 +5,7 @@
  *
  * This code is auto-generated
  * from: org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models/example1/TargetMM1.genmodel
+ * template: org.eclipse.ocl.examples.build.xtend.GenerateAutoLookupInfrastructureXtend
  *
  * Only the copyright statement is editable.
  *******************************************************************************/
@@ -14,7 +15,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import example1.target.util.TargetUnqualifiedLookupVisitor;
 import example1.target.util.TargetQualifiedLookupVisitor;
-
 
 public class TargetLookupSolver {
 	
