@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvtr:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot" xmlns:qvtr="http://www.eclipse.org/qvt/2015/QVTrelation"
+    xmlns:qvtt="http://www.eclipse.org/qvt/2015/QVTtemplate" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage http://www.eclipse.org/qvt/2015/QVTtemplate java://org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage"
+    name="SeqToStm.qvtr" externalURI="platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/src/org/eclipse/qvtd/build/qvtrtoqvtc/tests/seqtostm/SeqToStm.qvtr">
+  <ownedComments body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+  <ownedImports name="SeqMM" importedNamespace="pivot:Package SeqMM.ecore.oclas#P.SeqMM">
+    <ownedComments body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+  </ownedImports>
+  <ownedImports name="StmcMM" importedNamespace="pivot:Package StmcMM.ecore.oclas#P.StmcMM"/>
+  <ownedPackages xmi:id="P." name="">
+    <ownedClasses xsi:type="qvtr:RelationalTransformation" xmi:id="T..SeqToStm" name="SeqToStm"
+        superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+      <modelParameter xmi:id="qT..SeqToStm.seqDgm" name="seqDgm" usedPackage="SeqMM.ecore.oclas#P.SeqMM"/>
+      <modelParameter xmi:id="qT..SeqToStm.stm" name="stm" usedPackage="StmcMM.ecore.oclas#P.StmcMM"/>
+      <rule xsi:type="qvtr:Relation" name="InteractionToStateMachine" isTopLevel="true">
+        <domain xsi:type="qvtr:RelationDomain" xmi:id="qD..SeqToStm.InteractionToStateMachine.seqDgm"
+            isCheckable="true" isEnforceable="false" typedModel="#qT..SeqToStm.seqDgm"
+            rootVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@variable.1">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Interaction"
+                bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@variable.1"
+                referredClass="SeqMM.ecore.oclas#T.SeqMM.Interaction">
+              <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.Interaction.name">
+                <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@variable.0"/>
+              </part>
+            </templateExpression>
+          </pattern>
+        </domain>
+        <domain xsi:type="qvtr:RelationDomain" xmi:id="qD..SeqToStm.InteractionToStateMachine.stm"
+            isCheckable="true" isEnforceable="true" typedModel="#qT..SeqToStm.stm"
+            rootVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@variable.2">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.StateMachine"
+                bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@variable.2"
+                referredClass="StmcMM.ecore.oclas#T.StmcMM.StateMachine">
+              <part referredProperty="StmcMM.ecore.oclas#p.StmcMM.StateMachine.name">
+                <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@variable.0"/>
+              </part>
+            </templateExpression>
+          </pattern>
+        </domain>
+        <variable name="sn" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+        <variable name="i" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Interaction"/>
+        <variable name="s" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.StateMachine"/>
+      </rule>
+      <rule xsi:type="qvtr:Relation" name="StateToState" isTopLevel="true">
+        <domain xsi:type="qvtr:RelationDomain" xmi:id="qD..SeqToStm.StateToState.seqDgm"
+            isCheckable="true" isEnforceable="false" typedModel="#qT..SeqToStm.seqDgm"
+            rootVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@variable.1">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.State"
+                bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@variable.1"
+                referredClass="SeqMM.ecore.oclas#T.SeqMM.State">
+              <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.State.name">
+                <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@variable.0"/>
+              </part>
+              <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.State.lifeline">
+                <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.LifeLine"
+                    bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@variable.2"
+                    referredClass="SeqMM.ecore.oclas#T.SeqMM.LifeLine">
+                  <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.LifeLine.interaction">
+                    <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Interaction"
+                        bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@variable.3"
+                        referredClass="SeqMM.ecore.oclas#T.SeqMM.Interaction"/>
+                  </part>
+                </value>
+              </part>
+            </templateExpression>
+          </pattern>
+        </domain>
+        <domain xsi:type="qvtr:RelationDomain" xmi:id="qD..SeqToStm.StateToState.stm"
+            isCheckable="true" isEnforceable="true" typedModel="#qT..SeqToStm.stm"
+            rootVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@variable.4">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.State"
+                bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@variable.4"
+                referredClass="StmcMM.ecore.oclas#T.StmcMM.State">
+              <part referredProperty="StmcMM.ecore.oclas#p.StmcMM.State.name">
+                <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@variable.0"/>
+              </part>
+              <part referredProperty="StmcMM.ecore.oclas#p.StmcMM.State.owner">
+                <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.StateMachine"
+                    bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@variable.5"
+                    referredClass="StmcMM.ecore.oclas#T.StmcMM.StateMachine"/>
+              </part>
+            </templateExpression>
+          </pattern>
+        </domain>
+        <variable name="sn" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+        <variable name="st1" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.State"/>
+        <variable name="l" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.LifeLine"/>
+        <variable name="i" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Interaction"/>
+        <variable name="st2" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.State"/>
+        <variable name="s" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.StateMachine"/>
+        <when>
+          <predicate>
+            <conditionExpression xsi:type="qvtr:RelationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredRelation="#//@ownedPackages.0/@ownedClasses.0/@rule.0">
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Interaction"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@variable.3"/>
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.StateMachine"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@variable.5"/>
+            </conditionExpression>
+          </predicate>
+        </when>
+      </rule>
+      <rule xsi:type="qvtr:Relation" name="MessageToTransition" isTopLevel="true">
+        <domain xsi:type="qvtr:RelationDomain" xmi:id="qD..SeqToStm.MessageToTransition.seqDgm"
+            isCheckable="true" isEnforceable="false" typedModel="#qT..SeqToStm.seqDgm"
+            rootVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.1">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Message"
+                bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.1"
+                referredClass="SeqMM.ecore.oclas#T.SeqMM.Message">
+              <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.Message.messageId">
+                <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.0"/>
+              </part>
+              <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.Message.event">
+                <value xsi:type="qvtt:CollectionTemplateExp" type="#//@ownedPackages.1/@ownedClasses.0"
+                    bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.2"
+                    referredCollectionType="http://www.eclipse.org/ocl/2015/Orphanage#//@ownedClasses.30"
+                    rest="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.7">
+                  <member xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent"
+                      bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.3"
+                      referredClass="SeqMM.ecore.oclas#T.SeqMM.MessageEvent">
+                    <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.MessageEvent.type">
+                      <value xsi:type="pivot:EnumLiteralExp" type="pivot:Enumeration SeqMM.ecore.oclas#T.SeqMM.MessageEventType"
+                          referredLiteral="SeqMM.ecore.oclas#//@ownedPackages.0/@ownedClasses.7/@ownedLiterals.0"/>
+                    </part>
+                    <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.MessageEvent.state">
+                      <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.State"
+                          bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.4"
+                          referredClass="SeqMM.ecore.oclas#T.SeqMM.State"/>
+                    </part>
+                  </member>
+                  <member xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent"
+                      bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.5"
+                      referredClass="SeqMM.ecore.oclas#T.SeqMM.MessageEvent">
+                    <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.MessageEvent.type">
+                      <value xsi:type="pivot:EnumLiteralExp" type="pivot:Enumeration SeqMM.ecore.oclas#T.SeqMM.MessageEventType"
+                          referredLiteral="SeqMM.ecore.oclas#//@ownedPackages.0/@ownedClasses.7/@ownedLiterals.1"/>
+                    </part>
+                    <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.MessageEvent.state">
+                      <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.State"
+                          bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.6"
+                          referredClass="SeqMM.ecore.oclas#T.SeqMM.State"/>
+                    </part>
+                  </member>
+                </value>
+              </part>
+              <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.Message.interaction">
+                <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Interaction"
+                    bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.8"
+                    referredClass="SeqMM.ecore.oclas#T.SeqMM.Interaction"/>
+              </part>
+            </templateExpression>
+          </pattern>
+        </domain>
+        <domain xsi:type="qvtr:RelationDomain" xmi:id="qD..SeqToStm.MessageToTransition.stm"
+            isCheckable="true" isEnforceable="true" typedModel="#qT..SeqToStm.stm"
+            rootVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.9">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.Transition"
+                bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.9"
+                referredClass="StmcMM.ecore.oclas#T.StmcMM.Transition">
+              <part referredProperty="StmcMM.ecore.oclas#p.StmcMM.Transition.name">
+                <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.0"/>
+              </part>
+              <part referredProperty="StmcMM.ecore.oclas#p.StmcMM.Transition.fromState">
+                <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.State"
+                    bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.10"
+                    referredClass="StmcMM.ecore.oclas#T.StmcMM.State"/>
+              </part>
+              <part referredProperty="StmcMM.ecore.oclas#p.StmcMM.Transition.toState">
+                <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.State"
+                    bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.11"
+                    referredClass="StmcMM.ecore.oclas#T.StmcMM.State"/>
+              </part>
+              <part referredProperty="StmcMM.ecore.oclas#p.StmcMM.Transition.action">
+                <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.SendMsg"
+                    bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.12"
+                    referredClass="StmcMM.ecore.oclas#T.StmcMM.SendMsg">
+                  <part referredProperty="StmcMM.ecore.oclas#p.StmcMM.SendMsg.message">
+                    <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.Message"
+                        bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.13"
+                        referredClass="StmcMM.ecore.oclas#T.StmcMM.Message">
+                      <part referredProperty="StmcMM.ecore.oclas#p.StmcMM.Message.messageId">
+                        <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                            referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.0"/>
+                      </part>
+                    </value>
+                  </part>
+                </value>
+              </part>
+              <part referredProperty="StmcMM.ecore.oclas#p.StmcMM.Transition.owner">
+                <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.StateMachine"
+                    bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.14"
+                    referredClass="StmcMM.ecore.oclas#T.StmcMM.StateMachine"/>
+              </part>
+            </templateExpression>
+          </pattern>
+        </domain>
+        <variable name="mid" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+        <variable name="m1" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Message"/>
+        <variable name="eSet" type="#//@ownedPackages.1/@ownedClasses.0"/>
+        <variable name="send" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent"/>
+        <variable name="ist1" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.State"/>
+        <variable name="receive" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent"/>
+        <variable name="ist2" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.State"/>
+        <variable isImplicit="true"/>
+        <variable name="i" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Interaction"/>
+        <variable name="tr" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.Transition"/>
+        <variable name="fst" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.State"/>
+        <variable name="tst" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.State"/>
+        <variable name="sm" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.SendMsg"/>
+        <variable name="m2" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.Message"/>
+        <variable name="s" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.StateMachine"/>
+        <when>
+          <predicate>
+            <conditionExpression xsi:type="qvtr:RelationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredRelation="#//@ownedPackages.0/@ownedClasses.0/@rule.0">
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Interaction"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.8"/>
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.StateMachine"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.14"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="qvtr:RelationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredRelation="#//@ownedPackages.0/@ownedClasses.0/@rule.1">
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.State"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.4"/>
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.State"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.10"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="qvtr:RelationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredRelation="#//@ownedPackages.0/@ownedClasses.0/@rule.1">
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.State"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.6"/>
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.State"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@variable.11"/>
+            </conditionExpression>
+          </predicate>
+        </when>
+      </rule>
+      <rule xsi:type="qvtr:Relation" name="MessageSequenceToTransitionSequence" isTopLevel="true">
+        <domain xsi:type="qvtr:RelationDomain" xmi:id="qD..SeqToStm.MessageSequenceToTransitionSequence.seqDgm"
+            isCheckable="true" isEnforceable="false" typedModel="#qT..SeqToStm.seqDgm"
+            rootVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.0">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent"
+                bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.0"
+                referredClass="SeqMM.ecore.oclas#T.SeqMM.MessageEvent">
+              <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.MessageEvent.type">
+                <value xsi:type="pivot:EnumLiteralExp" type="pivot:Enumeration SeqMM.ecore.oclas#T.SeqMM.MessageEventType"
+                    referredLiteral="SeqMM.ecore.oclas#//@ownedPackages.0/@ownedClasses.7/@ownedLiterals.1"/>
+              </part>
+              <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.MessageEvent.message">
+                <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Message"
+                    bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.1"
+                    referredClass="SeqMM.ecore.oclas#T.SeqMM.Message"/>
+              </part>
+              <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.MessageEvent.state">
+                <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.State"
+                    bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.2"
+                    referredClass="SeqMM.ecore.oclas#T.SeqMM.State"/>
+              </part>
+              <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.MessageEvent.next">
+                <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent"
+                    bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.3"
+                    referredClass="SeqMM.ecore.oclas#T.SeqMM.MessageEvent">
+                  <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.MessageEvent.type">
+                    <value xsi:type="pivot:EnumLiteralExp" type="pivot:Enumeration SeqMM.ecore.oclas#T.SeqMM.MessageEventType"
+                        referredLiteral="SeqMM.ecore.oclas#//@ownedPackages.0/@ownedClasses.7/@ownedLiterals.0"/>
+                  </part>
+                  <part referredProperty="SeqMM.ecore.oclas#p.SeqMM.MessageEvent.message">
+                    <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Message"
+                        bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.4"
+                        referredClass="SeqMM.ecore.oclas#T.SeqMM.Message"/>
+                  </part>
+                </value>
+              </part>
+            </templateExpression>
+          </pattern>
+        </domain>
+        <domain xsi:type="qvtr:RelationDomain" xmi:id="qD..SeqToStm.MessageSequenceToTransitionSequence.stm"
+            isCheckable="true" isEnforceable="true" typedModel="#qT..SeqToStm.stm"
+            rootVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.5">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.Transition"
+                bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.5"
+                referredClass="StmcMM.ecore.oclas#T.StmcMM.Transition">
+              <part referredProperty="StmcMM.ecore.oclas#p.StmcMM.Transition.toState">
+                <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.State"
+                    bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.6"
+                    referredClass="StmcMM.ecore.oclas#T.StmcMM.State">
+                  <part referredProperty="StmcMM.ecore.oclas#p.StmcMM.State.outTransition">
+                    <value xsi:type="qvtt:ObjectTemplateExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.Transition"
+                        bindsTo="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.7"
+                        referredClass="StmcMM.ecore.oclas#T.StmcMM.Transition"/>
+                  </part>
+                </value>
+              </part>
+            </templateExpression>
+          </pattern>
+        </domain>
+        <variable name="ev1" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent"/>
+        <variable name="m1" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Message"/>
+        <variable name="est" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.State"/>
+        <variable name="ev2" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent"/>
+        <variable name="m2" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Message"/>
+        <variable name="tr1" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.Transition"/>
+        <variable name="tst" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.State"/>
+        <variable name="tr2" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.Transition"/>
+        <when>
+          <predicate>
+            <conditionExpression xsi:type="qvtr:RelationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredRelation="#//@ownedPackages.0/@ownedClasses.0/@rule.1">
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.State"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.2"/>
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.State"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.6"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="qvtr:RelationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredRelation="#//@ownedPackages.0/@ownedClasses.0/@rule.2">
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Message"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.1"/>
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.Transition"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.5"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="qvtr:RelationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredRelation="#//@ownedPackages.0/@ownedClasses.0/@rule.2">
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Message"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.4"/>
+              <argument xsi:type="pivot:VariableExp" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.Transition"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@variable.7"/>
+            </conditionExpression>
+          </predicate>
+        </when>
+      </rule>
+      <ownedKey identifies="StmcMM.ecore.oclas#T.StmcMM.StateMachine" part="StmcMM.ecore.oclas#p.StmcMM.StateMachine.name"/>
+      <ownedKey identifies="StmcMM.ecore.oclas#T.StmcMM.State" part="StmcMM.ecore.oclas#p.StmcMM.State.name StmcMM.ecore.oclas#p.StmcMM.State.owner"/>
+      <ownedKey identifies="StmcMM.ecore.oclas#T.StmcMM.Transition" part="StmcMM.ecore.oclas#p.StmcMM.Transition.name StmcMM.ecore.oclas#p.StmcMM.Transition.owner StmcMM.ecore.oclas#p.StmcMM.Transition.fromState StmcMM.ecore.oclas#p.StmcMM.Transition.toState"/>
+      <ownedKey identifies="StmcMM.ecore.oclas#T.StmcMM.SendMsg" part="StmcMM.ecore.oclas#p.StmcMM.SendMsg.message"/>
+      <ownedKey identifies="StmcMM.ecore.oclas#T.StmcMM.Message" part="StmcMM.ecore.oclas#p.StmcMM.Message.messageId"/>
+    </ownedClasses>
+  </ownedPackages>
+  <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage"
+      nsPrefix="orphanage">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.1"
+        elementType="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.2"
+        elementType="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SeqMM.ecore.oclas#T.SeqMM.MessageEvent"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+  </ownedPackages>
+</qvtr:RelationModel>

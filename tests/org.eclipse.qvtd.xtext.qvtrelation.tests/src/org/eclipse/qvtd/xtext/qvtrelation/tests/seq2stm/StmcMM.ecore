@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="StmcMM" nsURI="StmcMM">
+  <eClassifiers xsi:type="ecore:EClass" name="Dummy">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containsStateMachine" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//StateMachine" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containsMessage" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Message" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateMachine">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//State" containment="true" eOpposite="#//State/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Transition" containment="true" eOpposite="#//Transition/owner"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" ordered="false"
+        lowerBound="1" eType="#//StateMachine" eOpposite="#//StateMachine/state"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inTransition" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Transition" eOpposite="#//Transition/toState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outTransition" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Transition" eOpposite="#//Transition/fromState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="guard" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" ordered="false"
+        lowerBound="1" eType="#//StateMachine" eOpposite="#//StateMachine/transition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toState" ordered="false"
+        lowerBound="1" eType="#//State" eOpposite="#//State/inTransition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromState" ordered="false"
+        lowerBound="1" eType="#//State" eOpposite="#//State/outTransition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" ordered="false"
+        lowerBound="1" eType="#//Event" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" ordered="false"
+        lowerBound="1" eType="#//Action" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Message">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageId" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SendMsg" eSuperTypes="#//Action">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" ordered="false"
+        lowerBound="1" eType="#//Message"/>
+  </eClassifiers>
+</ecore:EPackage>

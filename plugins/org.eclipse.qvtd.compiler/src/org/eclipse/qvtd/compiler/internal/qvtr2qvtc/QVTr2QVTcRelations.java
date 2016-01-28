@@ -1127,6 +1127,9 @@ public class QVTr2QVTcRelations {
 				ve1.setType(tcv.getType());
 				a.setSlotExpression(ve1);
 				Property tp = getProperty(dv.getName(), tcv.getType());
+				if (tp == null) {
+					tp = getProperty(dv.getName(), tcv.getType());
+				}
 				assert tp != null : "Property " + dv.getName() + ". not found in trace class " + tcv.getType().getName();
 				a.setTargetProperty(tp);
 				ve2.setReferredVariable(mdv);

@@ -14,6 +14,8 @@ package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.util.Arrays;
 
+import org.eclipse.emf.common.EMFPlugin;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -30,7 +32,7 @@ public class AllQVTrelationTests extends TestCase
 	}
 
 	public static Test suite() {
-		TestSuite result = new TestSuite("QVTr Editor Support");			
+		TestSuite result = new TestSuite("All QVTrelation Tests");			
 		result.addTestSuite(LoadTests.class);
 //		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 //			result.addTestSuite(EditorTests.class);
@@ -38,6 +40,9 @@ public class AllQVTrelationTests extends TestCase
 //		else {	// Bug 370824 Bug 371394 causes this to fail on Hudson
 //			result.addTestSuite(UsageTests.class);
 //		}
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
+			result.addTestSuite(QVTrCompilerTests.class);
+		}
 		return result;
 	}
 
