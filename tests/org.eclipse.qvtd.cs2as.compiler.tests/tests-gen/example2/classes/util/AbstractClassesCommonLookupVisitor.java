@@ -1,40 +1,32 @@
 /*******************************************************************************
- * «codeGenHelper.getCopyright(' * ')»
+ * <copyright>
+ * 
+ * </copyright>
  *
- * This code is 100% auto-generated
- * using: org.eclipse.ocl.examples.codegen.java.JavaStream
+ * This code is auto-generated
+ * from: org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models/example2/Classes.genmodel
+ * template: org.eclipse.ocl.examples.build.xtend.GenerateAutoLookupInfrastructureXtend
  *
- * Do not edit it.
- ********************************************************************************/
-
-package example2.classes.util;
+ * Only the copyright statement is editable.
+ *******************************************************************************/
+package	example2.classes.util;
+import org.eclipse.jdt.annotation.NonNull;
 
 import example2.classes.lookup.LookupEnvironment;
-import example2.classes.util.AbstractExtendingVisitor;
-import example2.classes.util.Visitable;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.ids.IdManager;
 
-public class AbstractClassesCommonLookupVisitor
-	extends AbstractExtendingVisitor<LookupEnvironment, LookupEnvironment>
-{
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_org_eclipse_ocl_pivot_evaluation = IdManager.getRootPackageId("org.eclipse.ocl.pivot.evaluation");
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Executor = PACKid_org_eclipse_ocl_pivot_evaluation.getClassId("Executor", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_IdResolver = PACKid_org_eclipse_ocl_pivot_ids.getClassId("IdResolver", 0);
-    
-    protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
-    protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
-    
-    public AbstractClassesCommonLookupVisitor(@NonNull LookupEnvironment context) {
-        super(context);
-        this.executor = context.getExecutor();
-        this.idResolver = executor.getIdResolver();
-    }
-    
-    @Override
-    public @Nullable LookupEnvironment visiting(@NonNull Visitable visitable) {
-        throw new UnsupportedOperationException("Visiting "+visitable.toString()+" is not supported by \"" + getClass().getName() + "\"");
-    }
+public abstract class AbstractClassesCommonLookupVisitor
+	extends AbstractExtendingVisitor<LookupEnvironment, LookupEnvironment> {
+
+	protected AbstractClassesCommonLookupVisitor(LookupEnvironment context) {
+		super(context);
+	}
+	
+	@Override
+	public final LookupEnvironment visiting(@NonNull Visitable visitable) {
+		return doVisiting(visitable);
+	}
+	
+	
+	abstract protected LookupEnvironment doVisiting(@NonNull Visitable visitable);
+	
 }

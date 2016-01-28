@@ -5,6 +5,7 @@
  *
  * This code is auto-generated
  * from: org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models/example2/Classes.genmodel
+ * template: org.eclipse.ocl.examples.build.xtend.GenerateAutoLookupInfrastructureXtend
  *
  * Only the copyright statement is editable.
  *******************************************************************************/
@@ -15,7 +16,6 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import example2.classes.util.ClassesUnqualifiedLookupVisitor;
 import example2.classes.util.ClassesQualifiedLookupVisitor;
 import example2.classes.util.ClassesExportedLookupVisitor;
-
 
 public class ClassesLookupSolver {
 	

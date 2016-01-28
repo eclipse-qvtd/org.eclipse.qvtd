@@ -2,24 +2,15 @@
  * «codeGenHelper.getCopyright(' * ')»
  *
  * This code is 100% auto-generated
- * using: org.eclipse.ocl.examples.codegen.java.JavaStream
+ * using: org.eclipse.ocl.examples.autogen.lookup.LookupUnqualifiedCodeGenerator
  *
  * Do not edit it.
  ********************************************************************************/
 
 package example2.classes.util;
 
-import example2.classes.ClassesPackage;
-import example2.classes.NamedElement;
-import example2.classes.Operation;
-import example2.classes.Package;
-import example2.classes.Property;
-import example2.classes.lookup.EnvironmentPackage;
-import example2.classes.lookup.LookupEnvironment;
-import example2.classes.util.AbstractClassesCommonLookupVisitor;
-import example2.classes.util.Visitable;
-import example2.classes.util.Visitor;
 import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -39,9 +30,16 @@ import org.eclipse.ocl.pivot.values.BagValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
 
+import example2.classes.ClassesPackage;
+import example2.classes.NamedElement;
+import example2.classes.Operation;
+import example2.classes.Package;
+import example2.classes.Property;
+import example2.classes.lookup.EnvironmentPackage;
+import example2.classes.lookup.LookupEnvironment;
+
 public class ClassesUnqualifiedLookupVisitor
 	extends AbstractClassesCommonLookupVisitor
-	implements Visitor<LookupEnvironment>
 {
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, ClassesPackage.eINSTANCE);
@@ -69,10 +67,19 @@ public class ClassesUnqualifiedLookupVisitor
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Property = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Property);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Class = TypeId.SET.getSpecializedId(CLSSid_Class);
     
+    protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
+    protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
     protected /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object child;
     
     public ClassesUnqualifiedLookupVisitor(@NonNull LookupEnvironment context) {
         super(context);
+        this.executor = context.getExecutor();
+        this.idResolver = executor.getIdResolver();
+    }
+    
+    @Override
+    protected @Nullable LookupEnvironment doVisiting(@NonNull Visitable visitable) {
+        return parentEnv((EObject)visitable);
     }
     
     /**
@@ -87,11 +94,6 @@ public class ClassesUnqualifiedLookupVisitor
         else {
             return context;
         }
-    }
-    
-    @Override
-    public @Nullable LookupEnvironment visiting(@NonNull Visitable visitable) {
-        return parentEnv((EObject)visitable);
     }
     
     /**
