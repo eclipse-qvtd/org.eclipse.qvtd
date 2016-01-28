@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -34,6 +35,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -149,7 +151,7 @@ public class QVTm2QVTp
 	    }
 
 		private @NonNull Mapping doVisitMapping(@NonNull Mapping mIn, @NonNull String mappingName) {
-			@SuppressWarnings("null")@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
+			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
 			context.addTrace(mIn, mOut);
 	        mOut.setName(mappingName);
 			mOut.setGuardPattern(create(mIn.getGuardPattern()));
@@ -162,13 +164,17 @@ public class QVTm2QVTp
 
 		private @NonNull Mapping doVisitMapping_1(@NonNull Mapping mIn) {
 			String name = mIn.getName();
+//			System.out.println(name);
 			assert name != null;
 			Mapping mOut = doVisitMapping(mIn, name);
 			//
 			// LMR.L to LMR.L
 			//
-			for (Domain d : mIn.getDomain()) {
-				if (!d.isIsEnforceable()) {
+			for (Domain d : ClassUtil.nullFree(mIn.getDomain())) {
+				boolean isEnforceable = context.isEnforceableTransformationWide(d);
+//				System.out.println("  " + d + " " + d.isIsEnforceable());
+				if (!isEnforceable) {
+					assert !d.isIsEnforceable();
 					CoreDomain dIn = (CoreDomain)d;
 					CoreDomain dOut = create(dIn);
 					createAll(dIn.getGuardPattern().getPredicate(), mOut.getGuardPattern().getPredicate());		// Colocate all predicates
@@ -194,6 +200,7 @@ public class QVTm2QVTp
 			//
 			{
 				CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+//				System.out.println("  middle");
 				context.addTrace(mIn, dOut);
 				dOut.setIsCheckable(false);
 				dOut.setIsEnforceable(true);
@@ -206,8 +213,11 @@ public class QVTm2QVTp
 			//
 			// LMR.R to LMR.R
 			//
-			for (Domain d : mIn.getDomain()) {
-				if (!d.isIsCheckable()) {
+			for (Domain d : ClassUtil.nullFree(mIn.getDomain())) {
+				boolean isEnforceable = context.isEnforceableTransformationWide(d);
+//				System.out.println("  " + d + " " + d.isIsEnforceable());
+				if (isEnforceable) {
+					assert d.isIsEnforceable();
 					CoreDomain dIn = (CoreDomain)d;
 					CoreDomain dOut = create(dIn);
 					createAll(dIn.getGuardPattern().getVariable(), dOut.getGuardPattern().getVariable());
@@ -226,8 +236,10 @@ public class QVTm2QVTp
 			//
 			// LMR.L to LM.L
 			//
-			for (Domain d : mIn.getDomain()) {
-				if (!d.isIsEnforceable()) {
+			for (Domain d : ClassUtil.nullFree(mIn.getDomain())) {
+				boolean isEnforceable = context.isEnforceableTransformationWide(d);
+				if (!isEnforceable) {
+					assert !d.isIsEnforceable();
 					CoreDomain dIn = (CoreDomain)d;
 					CoreDomain dOut = create(dIn);
 					createAll(dIn.getGuardPattern().getPredicate(), mOut.getGuardPattern().getPredicate());		// Colocate all predicates
@@ -307,7 +319,7 @@ public class QVTm2QVTp
 						@SuppressWarnings("unused") boolean isR = isRight(domainUsageAnalysis, aIn);
 						boolean isMiddle = isMiddle(domainUsageAnalysis, aIn);
 						if (isMiddle && !isLeft) { // || (aIn.getValue() instanceof NullLiteralExp)) {
-							@SuppressWarnings("null")@NonNull Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
+							@NonNull Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
 							context.addTrace(aIn, pOut);
 							mOut.getGuardPattern().getPredicate().add(pOut);
 						}
@@ -317,8 +329,10 @@ public class QVTm2QVTp
 			//
 			//	LMR.R to MR.R 
 			//
-			for (Domain d : mIn.getDomain()) {
-				if (!d.isIsCheckable()) {
+			for (Domain d : ClassUtil.nullFree(mIn.getDomain())) {
+				boolean isEnforceable = context.isEnforceableTransformationWide(d);
+				if (isEnforceable) {
+					assert d.isIsEnforceable();
 					CoreDomain dIn = (CoreDomain)d;
 					CoreDomain dOut = create(dIn);
 					createAll(dIn.getGuardPattern().getVariable(), dOut.getGuardPattern().getVariable());
@@ -418,10 +432,12 @@ public class QVTm2QVTp
 
 		@Override
 		public @Nullable Element visitCoreDomain(@NonNull CoreDomain dIn) {
+			boolean isEnforceable = context.isEnforceableTransformationWide(dIn);
+			assert dIn.isIsEnforceable() == isEnforceable;
 			CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
 			context.addTrace(dIn, dOut);
 			dOut.setIsCheckable(dIn.isIsCheckable());
-			dOut.setIsEnforceable(dIn.isIsEnforceable());
+			dOut.setIsEnforceable(isEnforceable);
 			dOut.setGuardPattern(create(dIn.getGuardPattern()));
 			dOut.setBottomPattern(create(dIn.getBottomPattern()));
 			createAll(dIn.getOwnedComments(), dOut.getOwnedComments());
@@ -430,7 +446,7 @@ public class QVTm2QVTp
 
 		@Override
 		public @Nullable Element visitCoreModel(@NonNull CoreModel mIn) {
-		    @SuppressWarnings("null")@NonNull CoreModel mOut = QVTcoreFactory.eINSTANCE.createCoreModel();
+		    @NonNull CoreModel mOut = QVTcoreFactory.eINSTANCE.createCoreModel();
 		    context.addTrace(mIn, mOut);
 		    mOut.setExternalURI(mIn.getExternalURI().replace(".qvtm.qvtc", ".qvtp.qvtc"));
 		    createAll(mIn.getOwnedImports(), mOut.getOwnedImports());
@@ -441,7 +457,7 @@ public class QVTm2QVTp
 
 		@Override
 		public @NonNull Function visitFunction(@NonNull Function fIn) {
-			@SuppressWarnings("null")@NonNull Function fOut = QVTbaseFactory.eINSTANCE.createFunction();
+			@NonNull Function fOut = QVTbaseFactory.eINSTANCE.createFunction();
 			context.addTrace(fIn, fOut);
 			fOut.setName(fIn.getName());
 			fOut.setIsRequired(fIn.isIsRequired());
@@ -454,7 +470,7 @@ public class QVTm2QVTp
 
 		@Override
 		public @NonNull FunctionParameter visitFunctionParameter(@NonNull FunctionParameter fpIn) {
-			@SuppressWarnings("null")@NonNull FunctionParameter fpOut = QVTbaseFactory.eINSTANCE.createFunctionParameter();
+			@NonNull FunctionParameter fpOut = QVTbaseFactory.eINSTANCE.createFunctionParameter();
 			context.addTrace(fpIn, fpOut);
 			fpOut.setName(fpIn.getName());
 			fpOut.setIsRequired(fpIn.isIsRequired());
@@ -504,7 +520,7 @@ public class QVTm2QVTp
 
 		@Override
 		public @Nullable Element visitPredicate(@NonNull Predicate pIn) {
-			@SuppressWarnings("null")@NonNull Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
+			@NonNull Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
 	        context.addTrace(pIn, pOut);
 	        // The condition expression is copied during update once replacement variables exist.
 			createAll(pIn.getOwnedComments(), pOut.getOwnedComments());
@@ -536,7 +552,7 @@ public class QVTm2QVTp
 		@Override
 		public @Nullable Element visitTransformation(@NonNull Transformation tIn) {
 			context.getDomainUsageAnalysis().analyzeTransformation(tIn);
-			@SuppressWarnings("null")@NonNull Transformation tOut = QVTbaseFactory.eINSTANCE.createTransformation();
+			@NonNull Transformation tOut = QVTbaseFactory.eINSTANCE.createTransformation();
 			context.addTrace(tIn, tOut);
 		    tOut.setName(tIn.getName());
 		    createAll(tIn.getOwnedOperations(), tOut.getOwnedOperations());
@@ -562,7 +578,7 @@ public class QVTm2QVTp
 
 		@Override
 		public @Nullable Element visitTypedModel(@NonNull TypedModel tmIn) {
-			@SuppressWarnings("null")@NonNull TypedModel tmOut = QVTbaseFactory.eINSTANCE.createTypedModel();
+			@NonNull TypedModel tmOut = QVTbaseFactory.eINSTANCE.createTypedModel();
 			context.addTrace(tmIn, tmOut);
 			String name = tmIn.getName();
 			if (name == null) {
@@ -806,6 +822,11 @@ public class QVTm2QVTp
      * Reverse traceability from a target object to its source.
      */
     private final @NonNull Map<Element, Element> debugCopy2source = new HashMap<Element, Element>();
+
+    /**
+     * Set of all TypedModels that are enforceable for all domains in each trasformation. 
+     */
+    private final @NonNull Map<@NonNull Transformation, @NonNull Set<@NonNull TypedModel>> transformation2enforceableTypedModels = new HashMap<@NonNull Transformation, @NonNull Set<@NonNull TypedModel>>();
 	
     /**
      * Create a new QVTm to QVTp transformation using an environmentFactory.
@@ -887,11 +908,26 @@ public class QVTm2QVTp
 		return middleTypedModelTarget;
 	}
 
+	private boolean isEnforceableTransformationWide(@NonNull Domain domain) {
+		Transformation transformation = QVTbaseUtil.getContainingTransformation(domain);
+		assert transformation != null;
+		Set<@NonNull TypedModel> enforceableTypedModels = transformation2enforceableTypedModels.get(transformation);
+		if (enforceableTypedModels == null) {
+			enforceableTypedModels = QVTbaseUtil.getEnforceableTypedModels(transformation);
+			transformation2enforceableTypedModels.put(transformation, enforceableTypedModels);
+		}
+		TypedModel typedModel = domain.getTypedModel();
+		return enforceableTypedModels.contains(typedModel);
+	}
+	
 	private void setMiddleTypedModelTarget(@NonNull TypedModel middleTypedModelTarget) {
 		this.middleTypedModelTarget = middleTypedModelTarget;
 	}
 
     public void transform(@NonNull Resource source, @NonNull Resource target) {
+    	//
+    	//	Do the transformation for each CoreModel. First a createVisitor descent of the input, then an updateVisitor descent of the output. 
+    	//
         for (EObject eContent : source.getContents()) {
             if (eContent instanceof CoreModel) {
                 CoreModel mIn = (CoreModel) eContent;
@@ -901,6 +937,9 @@ public class QVTm2QVTp
                 target.getContents().add(mOut);
             }
         }
+    	//
+    	//	Debug code to conform that every output object is traceable to some input object. 
+    	//
 	    for (TreeIterator<EObject> tit = target.getAllContents(); tit.hasNext(); ) {
 	    	EObject eTarget = tit.next();
 	    	EObject eSource = target2source.get(eTarget);

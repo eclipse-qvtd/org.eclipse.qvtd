@@ -203,6 +203,28 @@ public class QVTbaseUtil
 		}
 		return elementType;
 	}
+
+	/**
+	 * Return the TypedModels that are enforced by all domains that reference them throughout the transformation.
+	 */
+	public static @NonNull Set<@NonNull TypedModel> getEnforceableTypedModels(@NonNull Transformation transformation) {
+		Set<@NonNull TypedModel> enforceableTypedModels = new HashSet<@NonNull TypedModel>();
+		Set<@NonNull TypedModel> notEnforceableTypedModels = new HashSet<@NonNull TypedModel>();
+		for (Rule rule : transformation.getRule()) {
+			for (Domain domain : rule.getDomain()) {
+				TypedModel typedModel = domain.getTypedModel();
+				assert typedModel != null;
+				if (domain.isIsEnforceable()) {
+					enforceableTypedModels.add(typedModel);
+				}
+				else {
+					notEnforceableTypedModels.add(typedModel);
+				}
+			}
+		}
+		enforceableTypedModels.removeAll(notEnforceableTypedModels);
+		return enforceableTypedModels;
+	}
 	
     public static @NonNull Transformation loadTransformation(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
         CSResource xtextResource = null;
