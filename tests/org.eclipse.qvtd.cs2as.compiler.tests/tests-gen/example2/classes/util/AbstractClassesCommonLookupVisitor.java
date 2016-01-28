@@ -11,8 +11,8 @@
  *******************************************************************************/
 package	example2.classes.util;
 import org.eclipse.jdt.annotation.NonNull;
-
 import example2.classes.lookup.LookupEnvironment;
+import example2.classes.util.Visitable;
 
 public abstract class AbstractClassesCommonLookupVisitor
 	extends AbstractExtendingVisitor<LookupEnvironment, LookupEnvironment> {

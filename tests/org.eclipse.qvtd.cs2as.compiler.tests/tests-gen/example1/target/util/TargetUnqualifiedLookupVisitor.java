@@ -17,7 +17,6 @@ import example1.target.lookup.EnvironmentPackage;
 import example1.target.lookup.LookupEnvironment;
 import example1.target.util.AbstractTargetCommonLookupVisitor;
 import example1.target.util.Visitable;
-import example1.target.util.Visitor;
 import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;

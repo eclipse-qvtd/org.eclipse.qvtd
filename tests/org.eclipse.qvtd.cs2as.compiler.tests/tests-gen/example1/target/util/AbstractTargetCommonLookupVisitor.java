@@ -26,5 +26,7 @@ public abstract class AbstractTargetCommonLookupVisitor
 		return doVisiting(visitable);
 	}
 	
+	
 	abstract protected LookupEnvironment doVisiting(@NonNull Visitable visitable);
+	
 }
