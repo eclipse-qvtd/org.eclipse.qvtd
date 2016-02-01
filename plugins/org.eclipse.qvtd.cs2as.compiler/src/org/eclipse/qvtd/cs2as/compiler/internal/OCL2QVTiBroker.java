@@ -195,21 +195,13 @@ public class OCL2QVTiBroker extends MtcBroker {
 	
 	protected PivotModel runOCL2QVTp_MiddleFolded (URI oclDocURI, URI qvtiFileURI, String traceabilityPropName) throws QvtMtcExecutionException {
 
-		try {
-			List<Variable> txVariables = new ArrayList<Variable>();
-			txVariables.add(new Variable("traceabilityPropName", traceabilityPropName, EolPrimitiveType.String));
-			txVariables.add(new Variable("oclDocURI", oclDocURI.toString(), EolPrimitiveType.String));
-			EtlTask etl = new EtlTask(OCL2QVTiBroker.class.getResource(OCL2QVTP_MIDDLE_FOLDED).toURI());
-			pModel= createQVTpModel(qvtiFileURI);
-			etl.addModel(createOCLModel(oclDocURI));
-			etl.addModel(pModel);
-			etl.addModel(createOclStdLibModel());
-			etl.execute(txVariables);
-
-		} catch (URISyntaxException e) {
-			throw new QvtMtcExecutionException("Exception launching OCL 2 QVTp transformation", e);
-		}
+		PivotModel oclModel = createOCLModel(oclDocURI);
+		pModel= createQVTpModel(qvtiFileURI);
 		
+		OCL2QVTp ocl2qvtp = new OCL2QVTp(environmentFactory, traceabilityPropName, savingOptions);
+		Resource resource = ocl2qvtp.run(oclModel.getResource().getResourceSet() , oclDocURI); // NB. cModel is the .ocl doc
+		
+		pModel.getResource().getContents().addAll(resource.getContents());
 		return pModel;
 	}
 	
