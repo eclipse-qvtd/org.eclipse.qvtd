@@ -399,13 +399,15 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		autoBuildCheckButton.setToolTipText("Whether the intermediates should be auto-built by the builder when relevant models change.");
 		autoBuildCheckButton.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1));
 		autoBuildCheckButton.setText("Auto-Build");
-		autoBuildCheckButton.setSelection(true);
+		autoBuildCheckButton.setSelection(false);
+		autoBuildCheckButton.setEnabled(false);		// FIXME disabled
 		
 		interpretedCheckButton = new Button(buildGroup, SWT.CHECK);
 		interpretedCheckButton.setToolTipText("Whether to prepare for interpreted execution bypassing the Java generation compilation step.");
 		interpretedCheckButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
 		interpretedCheckButton.setText("Interpreted");
 		interpretedCheckButton.setSelection(true);
+		interpretedCheckButton.setEnabled(false);		// FIXME BUG 486938 disabled until Java/Tx package-path discrepancy resolved
 		
 		traceEvaluationCheckButton = new Button(buildGroup, SWT.CHECK);
 		traceEvaluationCheckButton.setToolTipText("Whether to provide a textual evaluation trace to the console.");
@@ -694,9 +696,9 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 			uri = URI.createPlatformResourceURI(txAttribute, true);
 		}
 		txPath.setText(String.valueOf(uri));
-		autoBuildCheckButton.setSelection(configuration.getAttribute(AUTO_BUILD_KEY, true));
-		interpretedCheckButton.setSelection(configuration.getAttribute(INTERPRETED_KEY, true));
-		traceEvaluationCheckButton.setSelection(configuration.getAttribute(TRACE_EVALUATION_KEY, false));
+//		autoBuildCheckButton.setSelection(configuration.getAttribute(AUTO_BUILD_KEY, true));					// FIXME disabled
+//		interpretedCheckButton.setSelection(configuration.getAttribute(INTERPRETED_KEY, true));
+		traceEvaluationCheckButton.setSelection(configuration.getAttribute(TRACE_EVALUATION_KEY, false));		// FIXME BUG 486938 disabled until Java/Tx package-path discrepancy resolved
 		Map<String, String> oldInputsMap = configuration.getAttribute(OLD_IN_KEY, EMPTY_MAP);
 		Map<String, String> newInputsMap = configuration.getAttribute(NEW_IN_KEY, EMPTY_MAP);
 		Map<String, String> oldOutputsMap = configuration.getAttribute(OLD_OUT_KEY, EMPTY_MAP);
@@ -742,7 +744,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	}
 
 	protected boolean isInterpreted() {
-		return interpretedCheckButton.getSelection();
+		return true; //interpretedCheckButton.getSelection();		// FIXME BUG 486938 disabled until Java/Tx package-path discrepancy resolved
 	}
 
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {

@@ -61,7 +61,7 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 		
 		modeCombo = new Combo(directionGroup, SWT.NONE);
 		modeCombo.setToolTipText("Whether the execution\n- checks that the output corresponds to the input\n- creates new output model elements\n- updates existing model elements where possible ");
-		modeCombo.setItems(new String[] {CHECK_MODE, ENFORCE_CREATE_MODE, ENFORCE_UPDATE_MODE});
+		modeCombo.setItems(new String[] {/*CHECK_MODE,*/ ENFORCE_CREATE_MODE, /*ENFORCE_UPDATE_MODE*/});
 		modeCombo.select(0);
 		
 		Label directionLabel = new Label(directionGroup, SWT.NONE);
@@ -116,7 +116,7 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 		Collections.sort(directions);
 		directionCombo.setItems(directions.toArray(new String[directions.size()]));
 		directionCombo.setText(configuration.getAttribute(DIRECTION_KEY, "NONE"));
-		modeCombo.setText(configuration.getAttribute(MODE_KEY, "CHECK"));
+		modeCombo.setText(configuration.getAttribute(MODE_KEY, ENFORCE_CREATE_MODE));
 		viewCheckButton.setSelection(configuration.getAttribute(VIEW_KEY, false));
 	}
 
@@ -132,7 +132,7 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		super.setDefaults(configuration);
 		configuration.setAttribute(DIRECTION_KEY, "NONE");
-		configuration.setAttribute(MODE_KEY, "CHECK");
+		configuration.setAttribute(MODE_KEY, ENFORCE_CREATE_MODE);
 		configuration.setAttribute(VIEW_KEY, false);
 	}
 
