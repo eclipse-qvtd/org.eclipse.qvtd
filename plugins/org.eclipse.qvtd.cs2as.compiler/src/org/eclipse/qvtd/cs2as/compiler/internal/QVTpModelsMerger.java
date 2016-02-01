@@ -32,10 +32,12 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -116,16 +118,31 @@ public class QVTpModelsMerger {
 		for (Import _import : importsToRemove) {
 			resultQVTpModel.getOwnedImports().remove(_import);
 		}
-
-		// Mapping rules
+			
+		
 		Transformation resultTransformation = getTransformation(resultQVTpModel);
 		Transformation mergedTransformation = getTransformation(mergedQVTpModel);
+		
+		// TypedModels
+		Map<String, List<Package>> tmName2oldUsedPackages = new HashMap<String, List<Package>>();
+		for (TypedModel typedModel : mergedTransformation.getModelParameter()) {
+			tmName2oldUsedPackages.put(typedModel.getName(),typedModel.getUsedPackage());
+		}
+		Map<String, TypedModel> tmName2newTypedModel = new HashMap<String, TypedModel>();
+		for (TypedModel typedModel : resultTransformation.getModelParameter()) {
+			typedModel.getUsedPackage().addAll(tmName2oldUsedPackages.get(typedModel.getName()));
+			tmName2newTypedModel.put(typedModel.getName(), typedModel);
+		}
+		
+		// Mapping rules
 		EList<Rule> resultRules = resultTransformation.getRule();
 		for (Rule rule : mergedTransformation.getRule()) {
 			Mapping baseRule = (Mapping) EcoreUtil.copy(rule);
-			refactorMapping(envF, baseRule, inputType2RefiningMapping);
+			refactorMapping(envF, baseRule, inputType2RefiningMapping, tmName2newTypedModel);
 			resultRules.add(baseRule);
 		}
+		
+
 	}
 	
 	private static boolean doesNamespaceCorrespondToMergedQVTpModel(ImperativeModel mergedQVTpModel, Namespace ns) {
@@ -188,7 +205,13 @@ public class QVTpModelsMerger {
 		return true;
 	}
 	
-	private static void refactorMapping (EnvironmentFactory envF, Mapping mappingToRefactor, Map<Class, List<Mapping>> inputType2extendingMapping) {
+	private static void refactorMapping (EnvironmentFactory envF, Mapping mappingToRefactor, Map<Class, List<Mapping>> inputType2extendingMapping,
+			Map<String, TypedModel> tmName2newTypedModel) {
+		
+		// TypedModel refactor
+		for (Domain domain : mappingToRefactor.getDomain()) {
+			domain.setTypedModel(tmName2newTypedModel.get(domain.getTypedModel().getName()));
+		}
 		
 		Variable inputVar = getInputVariable(mappingToRefactor);
 		Type refinedType = inputVar.getType();
