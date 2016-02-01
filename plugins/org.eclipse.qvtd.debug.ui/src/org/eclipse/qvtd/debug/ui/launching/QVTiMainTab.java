@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.QVTiCompilerChain;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -42,6 +43,11 @@ public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
 		CompilerChain.CLASS_STEP
 	};
 
+	@Override
+	protected @NonNull QVTiCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI) {
+		return new QVTiCompilerChain(environmentFactory, txURI, null);
+	}
+
 	protected void createDirectionGroup(Group txGroup) {}
 	
 	@Override
@@ -62,6 +68,7 @@ public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
 			@NonNull Map<@NonNull String, @Nullable String> oldInputsMap, @NonNull Map<@NonNull String, @Nullable String> newInputsMap,
 			@NonNull Map<@NonNull String, @Nullable String> oldOutputsMap, @NonNull Map<@NonNull String, @Nullable String> newOutputsMap,
 			@NonNull Map<@NonNull String, @Nullable String> intermediateMap) {
+		super.updateGroups(transformation, oldInputsMap, newInputsMap, oldOutputsMap, newOutputsMap, intermediateMap);
 		Set<@NonNull TypedModel> inputs = new HashSet<@NonNull TypedModel>();
 		Set<@NonNull TypedModel> outputs = new HashSet<@NonNull TypedModel>();
 		for (Rule rule : transformation.getRule()) {

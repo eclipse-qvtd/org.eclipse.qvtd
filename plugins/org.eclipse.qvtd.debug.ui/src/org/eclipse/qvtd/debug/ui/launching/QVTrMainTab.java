@@ -16,6 +16,7 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -35,6 +36,11 @@ public class QVTrMainTab extends DirectionalMainTab
 		CompilerChain.JAVA_STEP,
 		CompilerChain.CLASS_STEP
 	};
+
+	@Override
+	protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI) {
+		return new QVTrCompilerChain(environmentFactory, txURI, null);
+	}
 	
 	@Override
 	public Image getImage() {

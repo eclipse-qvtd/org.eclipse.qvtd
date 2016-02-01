@@ -16,6 +16,7 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
@@ -36,6 +37,11 @@ public class QVTcMainTab extends DirectionalMainTab
 	};
 
 	@Override
+	protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI) {
+		return new QVTcCompilerChain(environmentFactory, txURI, null);
+	}
+
+	@Override
 	public Image getImage() {
 		return QVTdDebugUIPlugin.getDefault().createImage("icons/QVTcModelFile.gif");
 	}
@@ -47,7 +53,7 @@ public class QVTcMainTab extends DirectionalMainTab
 
 	@Override
 	protected @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException {
-		System.out.println("QVTc::updateTransformation");
+//		System.out.println("QVTc::updateTransformation");
 		QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
     	return QVTcoreUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
 	}

@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.launching;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,29 +19,42 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.debug.vm.ui.launching.LaunchingUtils;
+import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.XMIUtil;
+import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -50,12 +64,10 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConstants
@@ -68,7 +80,9 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 				CompileJob compileJob2 = createCompileJob();
 				if (compileJob2 != null) {
 					resetCompileStates();
-					compileButton.setText("Abort");
+					if (!compileButton.isDisposed()) {
+						compileButton.setText("Abort");
+					}
 					compileJob = compileJob2;
 					compileJob2.schedule();
 				}
@@ -82,15 +96,19 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	/**
 	 * Job scheduled on a worker thread to compile the transformation.
 	 */
-	protected abstract class CompileJob extends Job implements CompilerChain.Listener
+	protected class CompileJob extends Job implements CompilerChain.Listener
 	{
 		protected final @NonNull URI txURI;
 		protected final @NonNull String outputName;
+		protected final @Nullable String genmodelPath;
+		protected final @Nullable URI javaURI;
 
-		public CompileJob(@NonNull URI txURI, @NonNull String outputName) {
+		public CompileJob(@NonNull URI txURI, @NonNull String outputName, @Nullable String genmodelPath, @Nullable URI javaURI) {
 			super("Compile Transformation");
 			this.txURI = txURI;
 			this.outputName = outputName;
+			this.genmodelPath = genmodelPath;
+			this.javaURI = javaURI;
 		}
 
 		public void compiled(@NonNull String step, @Nullable Object object) {
@@ -103,6 +121,62 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 					}
 				}
 			});
+		}
+
+		public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull QVTimperative qvt, @NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
+			ResourceSet resourceSet = qvt.getResourceSet();
+			resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
+			for (String genModelFile : genModelFiles) {
+				URI genModelURI = URI.createURI(genModelFile).resolve(txURI);
+				loadGenModel(getEnvironmentFactory(), genModelURI);
+			}
+			QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), asTransformation);
+			QVTiCodeGenOptions options = cg.getOptions();
+			options.setUseNullAnnotations(true);
+			options.setPackagePrefix("cg");
+			cg.generateClassFile();
+			assert javaURI != null;
+			URI normalizedURI = resourceSet.getURIConverter().normalize(javaURI);
+			String fileString = ClassUtil.nonNullState(normalizedURI.toFileString());
+			cg.saveSourceFile(fileString);
+//			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtcore.tests/test-gen/");
+			File explicitClassPath = new File("../org.eclipse.qvtd.xtext.qvtcore.tests/bin");
+			String qualifiedClassName = cg.getQualifiedName();
+			String javaCodeSource = cg.generateClassFile();
+			OCL2JavaFileObject.saveClass(String.valueOf(explicitClassPath), qualifiedClassName, javaCodeSource);	
+			@SuppressWarnings("unchecked")
+			Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
+			if (txClass == null) {
+//				TestCase.fail("Failed to compile transformation");
+				throw new UnsupportedOperationException();
+			}
+			return txClass;
+		}
+
+		protected void doRun() throws Exception {
+			QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, null);
+			CompilerChain compilerChain2 = createCompilerChain(qvt.getEnvironmentFactory(), txURI);
+			compilerChain2.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions());
+			compilerChain2.addListener(this);
+			if (genmodelPath == null) {
+				compilerChain2.compile(outputName);
+			}
+			else {
+				compilerChain2.build(outputName);
+			}
+		}
+				
+		private void loadGenModel(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI genModelURI) {
+			ResourceSet resourceSet = environmentFactory.getResourceSet();
+			MetamodelManagerInternal metamodelManager = environmentFactory.getMetamodelManager();
+			Resource csGenResource = resourceSet.getResource(genModelURI, true);
+			for (EObject eObject : csGenResource.getContents()) {
+				if (eObject instanceof GenModel) {
+					GenModel genModel = (GenModel)eObject;
+					genModel.reconcile();
+					metamodelManager.addGenModel(genModel);
+				}
+			}
 		}
 		
 		@Override
@@ -121,8 +195,6 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 			});
 			return Status.OK_STATUS;
 		}
-
-		protected abstract void doRun() throws Exception;
 	}
 
 	protected class InterpretedCheckBoxAdapter extends SelectionAdapter
@@ -132,6 +204,17 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 			groupsModified = true;
 			updateLaunchConfigurationDialog();
 		}
+	}
+
+	protected class TransformationModeListener implements ModifyListener
+	{
+		@Override
+		public void modifyText(ModifyEvent e) {
+			if (setDirectionModified()) {
+				updateLaunchConfigurationDialog();
+			}
+		}
+
 	}
 
 	protected class TransformationModifyListener implements ModifyListener
@@ -179,17 +262,18 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	protected Group newInputsGroup;
 	protected Group oldOutputsGroup;
 	protected Group newOutputsGroup;
-	private Composite directionGroup;
-	protected Combo modeCombo;
-	protected Combo directionCombo;
-	protected Button viewCheckButton;
 	private Group intermediatesGroup;
 
 	private Group buildGroup;
-	protected Button autoBuildCheckButton;
-	protected Button interpretedCheckButton;
-	protected Button traceEvaluationCheckButton;
-	protected Button compileButton;
+	private Button autoBuildCheckButton;
+	private Button interpretedCheckButton;
+	private Button traceEvaluationCheckButton;
+	private Button compileButton;
+
+	private Group genmodelGroup;
+	private Text genmodelPath;
+	private Button genmodelBrowseWS;
+	private Button genmodelBrowseFile;
 	
 	/**
 	 * Internal flag to suppress redundant recursive updates while initializing controls.
@@ -209,11 +293,13 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		compileButton.addSelectionListener(new CompileButtonAdapter());
 		interpretedCheckButton.addSelectionListener(new InterpretedCheckBoxAdapter());
 		traceEvaluationCheckButton.addSelectionListener(new InterpretedCheckBoxAdapter());		// Cheap over-re-use
+//		TransformationModeListener listener = new TransformationModeListener();
+//FIXME		partialCheckButton.addSelectionListener(listener);
 	}
 
 	@Override
 	public boolean canSave() {
-		System.out.println("canSave");
+//		System.out.println("canSave");
 		assert !initializing;
 		ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
 		URIConverter uriConverter = resourceSet.getURIConverter();
@@ -257,7 +343,9 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	}
 
 	protected void cancelCompileJob(boolean force) {
-		compileButton.setText(force ? "Compile" : "Recompile");
+		if (!compileButton.isDisposed()) {
+			compileButton.setText(force ? "Compile" : "Recompile");
+		}
 		CompileJob compileJob2 = compileJob;
 		if (compileJob2 != null) {
 			compileJob = null;
@@ -266,19 +354,6 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 				resetCompileStates();
 			}
 		}
-	}
-
-	protected void resetCompileStates() {
-		for (Control child : intermediatesGroup.getChildren()) {
-			if (child instanceof CompileStepRow) {
-				CompileStepRow row = (CompileStepRow)child;
-				row.reset();
-			}
-		}
-	}
-
-	protected @Nullable CompileJob createCompileJob() {
-		return null;
 	}
 
 	public void compiled(@NonNull String step, @Nullable Object object) {
@@ -344,13 +419,30 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		compileButton.setText("  Compile  ");
 	}
 
+	protected @NonNull CompileJob createCompileJob() {
+		URI txURI = URI.createURI(txPath.getText());
+		String direction = getDirection();
+		if (isInterpreted()) {
+			return new CompileJob(txURI, direction, null, null);
+		}
+		else {
+			CompileStepRow compilerStepRow = getCompilerStepRow(CompilerChain.JAVA_STEP);
+			URI javaURI = compilerStepRow != null ? URI.createURI(compilerStepRow.name.getText()).resolve(txURI) : null;
+			return new CompileJob(txURI, direction, getGenmodelPath(), javaURI);
+		}
+	}
+
+	protected abstract @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI);
+
 	@SuppressWarnings("null")
 	public void createControl(Composite parent) {
-		System.out.println("createControl-start");
+//		System.out.println("createControl-start");
 		Composite control = createForm(parent);
 		addListeners();
 		LaunchingUtils.prepareBrowseWorkspaceButton(txBrowseWS, txPath, false);
 		LaunchingUtils.prepareBrowseFileSystemButton(txBrowseFile, txPath, false);
+		LaunchingUtils.prepareBrowseWorkspaceButton(genmodelBrowseWS, genmodelPath, false);
+		LaunchingUtils.prepareBrowseFileSystemButton(genmodelBrowseFile, genmodelPath, false);
 		updateParametersGroup(oldInputsGroup, SWT.NONE, EMPTY_MAP, null);
 		updateParametersGroup(oldOutputsGroup, SWT.SAVE, EMPTY_MAP, null);
 		updateParametersGroup(newInputsGroup, SWT.NONE, EMPTY_MAP, null);
@@ -359,53 +451,22 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		control.setBounds(0, 0, 300, 300);
 		control.layout();
 		control.pack();
-		for (Control child : oldInputsGroup.getChildren()) {
-			ParameterRow row = (ParameterRow)child;
-			System.out.println("  " + row.name + "=>" + row.path.getText());
-		}
-		for (Control child : newInputsGroup.getChildren()) {
-			ParameterRow row = (ParameterRow)child;
-			System.out.println("  " + row.name + "=>" + row.path.getText());
-		}
-		for (Control child : intermediatesGroup.getChildren()) {
-			ParameterRow row = (ParameterRow)child;
-			System.out.println("  " + row.name + "=>" + row.path.getText());
-		}
-		System.out.println("createControl-end");
+//		for (Control child : oldInputsGroup.getChildren()) {
+//			ParameterRow row = (ParameterRow)child;
+//			System.out.println("  " + row.name + "=>" + row.path.getText());
+//		}
+//		for (Control child : newInputsGroup.getChildren()) {
+//			ParameterRow row = (ParameterRow)child;
+//			System.out.println("  " + row.name + "=>" + row.path.getText());
+//		}
+//		for (Control child : intermediatesGroup.getChildren()) {
+//			ParameterRow row = (ParameterRow)child;
+//			System.out.println("  " + row.name + "=>" + row.path.getText());
+//		}
+//		System.out.println("createControl-end");
 	}
 
-	protected void createDirectionGroup(Group txGroup) {
-		directionGroup = new Composite(txGroup, SWT.NONE);
-		GridLayout gl_directionGroup = new GridLayout(5, false);
-		gl_directionGroup.marginWidth = 0;
-		gl_directionGroup.marginHeight = 0;
-		directionGroup.setLayout(gl_directionGroup);
-		directionGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		
-		Label modeLabel = new Label(directionGroup, SWT.NONE);
-		modeLabel.setSize(31, 15);
-		modeLabel.setText("Mode");
-		
-		modeCombo = new Combo(directionGroup, SWT.NONE);
-		modeCombo.setToolTipText("Whether the execution\n- checks that the output corresponds to the input\n- creates new output model elements\n- updates existing model elements where possible ");
-		modeCombo.setItems(new String[] {CHECK_MODE, ENFORCE_CREATE_MODE, ENFORCE_UPDATE_MODE});
-		modeCombo.select(0);
-		
-		Label directionLabel = new Label(directionGroup, SWT.NONE);
-		directionLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
-		directionLabel.setText("Direction");
-		
-		directionCombo = new Combo(directionGroup, SWT.NONE);
-		directionCombo.setToolTipText("Select enforceable output domain to choose the direction of a multi-directional transformation");
-		directionCombo.setItems(new String[] {"NONE"});
-		directionCombo.select(0);
-		
-		viewCheckButton = new Button(directionGroup, SWT.CHECK);
-		viewCheckButton.setToolTipText("Whether the output may be a view of a larger model, or must be the whole model.");
-		viewCheckButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
-		viewCheckButton.setText("Partial View");
-		viewCheckButton.setEnabled(false);
-	}
+	protected void createDirectionGroup(Group txGroup) {}
 
 	/**
 	 * @wbp.parser.entryPoint
@@ -485,7 +546,26 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 
 		return control;
 	}
-	protected void createGenmodelGroup(Composite control) {}
+
+	protected void createGenmodelGroup(Composite control) {
+		Group txGroup = new Group(control, SWT.NONE);
+		txGroup.setToolTipText("The genmodel for the generated models used by the generated transformation ");
+		txGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		txGroup.setText("GenModel");
+		txGroup.setLayout(new GridLayout(3, false));
+
+		genmodelPath = new Text(txGroup, SWT.BORDER);
+		genmodelPath.setToolTipText("The genmodel for generated models");
+		GridData gd_genmodelPath = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_genmodelPath.minimumWidth = 100;
+		genmodelPath.setLayoutData(gd_genmodelPath);
+		genmodelBrowseWS = new Button(txGroup, SWT.NONE);
+		genmodelBrowseWS.setText("Browse Workspace...");
+		genmodelBrowseFile = new Button(txGroup, SWT.NONE);
+		genmodelBrowseFile.setText("Browse File...");
+		
+		genmodelGroup = txGroup;
+	}
 
 	protected Group createTransformationGroup(Composite control) {
 		Group txGroup = new Group(control, SWT.NONE);
@@ -541,6 +621,10 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		}
 		return "";
 	}
+
+	protected @NonNull String getDirection() {
+		return "";
+	}
 	
 	protected @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 		OCLInternal ocl2 = ocl;
@@ -548,6 +632,10 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 			ocl = ocl2 = OCLInternal.newInstance(new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null));
 		}
 		return (QVTiEnvironmentFactory) ocl2.getEnvironmentFactory();
+	}
+
+	protected @NonNull String getGenmodelPath() {
+		return genmodelPath.getText();
 	}
 
 	@Override
@@ -582,7 +670,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	}
 
 	public void initializeFrom(ILaunchConfiguration configuration) {
-		System.out.println("initializeFrom");
+//		System.out.println("initializeFrom");
 		assert !initializing;
 		try {
 			initializing = true;
@@ -599,7 +687,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	}
 
 	protected void initializeInternal(@NonNull ILaunchConfiguration configuration) throws CoreException {
-		System.out.println("initializeInternal");
+//		System.out.println("initializeInternal");
 		String txAttribute = configuration.getAttribute(TX_KEY, "");
 		URI uri = URI.createURI(txAttribute);
 		if (uri.scheme() == null) {
@@ -607,7 +695,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		}
 		txPath.setText(String.valueOf(uri));
 		autoBuildCheckButton.setSelection(configuration.getAttribute(AUTO_BUILD_KEY, true));
-		interpretedCheckButton.setSelection(configuration.getAttribute(INTERPRETED_KEY, false));
+		interpretedCheckButton.setSelection(configuration.getAttribute(INTERPRETED_KEY, true));
 		traceEvaluationCheckButton.setSelection(configuration.getAttribute(TRACE_EVALUATION_KEY, false));
 		Map<String, String> oldInputsMap = configuration.getAttribute(OLD_IN_KEY, EMPTY_MAP);
 		Map<String, String> newInputsMap = configuration.getAttribute(NEW_IN_KEY, EMPTY_MAP);
@@ -629,18 +717,28 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		if (intermediatesMap != null) {
 			updateParametersGroup(ClassUtil.nonNullState(intermediatesGroup), SWT.SAVE, intermediatesMap, getIntermediateKeys());
 		}
-		for (Control child : oldInputsGroup.getChildren()) {
-			ParameterRow row = (ParameterRow)child;
-			System.out.println("  " + row.name + "=>" + row.path.getText());
+//		for (Control child : oldInputsGroup.getChildren()) {
+//			ParameterRow row = (ParameterRow)child;
+//			System.out.println("  " + row.name + "=>" + row.path.getText());
+//		}
+//		for (Control child : newInputsGroup.getChildren()) {
+//			ParameterRow row = (ParameterRow)child;
+//			System.out.println("  " + row.name + "=>" + row.path.getText());
+//		}
+//		for (Control child : intermediatesGroup.getChildren()) {
+//			ParameterRow row = (ParameterRow)child;
+//			System.out.println("  " + row.name + "=>" + row.path.getText());
+//		}
+		String genmodelAttribute = configuration.getAttribute(GENMODEL_KEY, "");
+		if (genmodelAttribute == null) {
+			Path path = new Path(genmodelAttribute);
+			genmodelAttribute = path.removeFileExtension().addFileExtension("genmodel").toString();
 		}
-		for (Control child : newInputsGroup.getChildren()) {
-			ParameterRow row = (ParameterRow)child;
-			System.out.println("  " + row.name + "=>" + row.path.getText());
+		uri = URI.createURI(genmodelAttribute);
+		if (uri.scheme() == null) {
+			uri = URI.createPlatformResourceURI(genmodelAttribute, true);
 		}
-		for (Control child : intermediatesGroup.getChildren()) {
-			ParameterRow row = (ParameterRow)child;
-			System.out.println("  " + row.name + "=>" + row.path.getText());
-		}
+		genmodelPath.setText(String.valueOf(uri));
 	}
 
 	protected boolean isInterpreted() {
@@ -648,9 +746,10 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	}
 
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		System.out.println("performApply");
+//		System.out.println("performApply");
 		configuration.setAttribute(TX_KEY, txPath.getText());
 		configuration.setAttribute(AUTO_BUILD_KEY, autoBuildCheckButton.getSelection());
+		configuration.setAttribute(GENMODEL_KEY, genmodelPath.getText());
 		configuration.setAttribute(INTERPRETED_KEY, interpretedCheckButton.getSelection());
 		configuration.setAttribute(TRACE_EVALUATION_KEY, traceEvaluationCheckButton.getSelection());
 		performApply_Map(configuration, oldInputsGroup, OLD_IN_KEY);
@@ -658,18 +757,18 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		performApply_Map(configuration, oldOutputsGroup, OLD_OUT_KEY);
 		performApply_Map(configuration, newOutputsGroup, NEW_OUT_KEY);
 		performApply_Map(configuration, intermediatesGroup, INTERMEDIATES_KEY);
-		for (Control child : oldInputsGroup.getChildren()) {
-			ParameterRow row = (ParameterRow)child;
-			System.out.println("  " + row.name + "=>" + row.path.getText());
-		}
-		for (Control child : newInputsGroup.getChildren()) {
-			ParameterRow row = (ParameterRow)child;
-			System.out.println("  " + row.name + "=>" + row.path.getText());
-		}
-		for (Control child : intermediatesGroup.getChildren()) {
-			ParameterRow row = (ParameterRow)child;
-			System.out.println("  " + row.name + "=>" + row.path.getText());
-		}
+//		for (Control child : oldInputsGroup.getChildren()) {
+//			ParameterRow row = (ParameterRow)child;
+//			System.out.println("  " + row.name + "=>" + row.path.getText());
+//		}
+//		for (Control child : newInputsGroup.getChildren()) {
+//			ParameterRow row = (ParameterRow)child;
+//			System.out.println("  " + row.name + "=>" + row.path.getText());
+//		}
+//		for (Control child : intermediatesGroup.getChildren()) {
+//			ParameterRow row = (ParameterRow)child;
+//			System.out.println("  " + row.name + "=>" + row.path.getText());
+//		}
 	}
 
 	private void performApply_Map(ILaunchConfigurationWorkingCopy configuration, Group group, @NonNull String mapKey) {
@@ -698,29 +797,44 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		group.layout();
 	} */
 
+	protected void resetCompileStates() {
+		for (Control child : intermediatesGroup.getChildren()) {
+			if (child instanceof CompileStepRow) {
+				CompileStepRow row = (CompileStepRow)child;
+				row.reset();
+			}
+		}
+	}
+
 	protected void setDefaults(@NonNull ILaunchConfigurationWorkingCopy configuration, @NonNull IFile iFile) {
-		System.out.println("setDefaults");
+//		System.out.println("setDefaults");
 		configuration.setAttribute(TX_KEY, iFile.getFullPath().toString());
 		configuration.setAttribute(GENMODEL_KEY, iFile.getFullPath().removeFileExtension().addFileExtension("genmodel").toString());
 		configuration.setAttribute(AUTO_BUILD_KEY, true);
-		configuration.setAttribute(INTERPRETED_KEY, false);
+		configuration.setAttribute(INTERPRETED_KEY, true);
 		configuration.setAttribute(TRACE_EVALUATION_KEY, false);
 		configuration.setAttribute(OLD_IN_KEY, EMPTY_MAP);
 		configuration.setAttribute(NEW_IN_KEY, EMPTY_MAP);
 		configuration.setAttribute(OLD_OUT_KEY, EMPTY_MAP);
 		configuration.setAttribute(NEW_OUT_KEY, EMPTY_MAP);
-		for (Control child : oldInputsGroup.getChildren()) {
-			ParameterRow row = (ParameterRow)child;
-			System.out.println("  " + row.name + "=>" + row.path.getText());
-		}
-		for (Control child : newInputsGroup.getChildren()) {
-			ParameterRow row = (ParameterRow)child;
-			System.out.println("  " + row.name + "=>" + row.path.getText());
-		}
-		for (Control child : intermediatesGroup.getChildren()) {
-			ParameterRow row = (ParameterRow)child;
-			System.out.println("  " + row.name + "=>" + row.path.getText());
-		}
+//		if (oldInputsGroup != null) {
+//			for (Control child : oldInputsGroup.getChildren()) {
+//				ParameterRow row = (ParameterRow)child;
+//				System.out.println("  " + row.name + "=>" + row.path.getText());
+//			}
+//		}
+//		if (newInputsGroup != null) {
+//			for (Control child : newInputsGroup.getChildren()) {
+//				ParameterRow row = (ParameterRow)child;
+//				System.out.println("  " + row.name + "=>" + row.path.getText());
+//			}
+//		}
+//		if (intermediatesGroup != null) {
+//			for (Control child : intermediatesGroup.getChildren()) {
+//				ParameterRow row = (ParameterRow)child;
+//				System.out.println("  " + row.name + "=>" + row.path.getText());
+//			}
+//		}
 	}
 
 	/**
@@ -728,7 +842,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	 * Returns true if the direction aspects were previously unmodified. 
 	 */
 	protected boolean setDirectionModified() {
-		System.out.println("setDirectionModified :" + directionModified);
+//		System.out.println("setDirectionModified :" + directionModified);
 		boolean wasDirectionModified = directionModified;
 		directionModified = true;
 		return !wasDirectionModified;
@@ -736,17 +850,27 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 
 	@Override
 	protected void setErrorMessage(String errorMessage) {
-		System.out.println("setErrorMessage: " + errorMessage);
+//		System.out.println("setErrorMessage: " + errorMessage);
 		super.setErrorMessage(errorMessage);
 	}
 
 	protected abstract void updateDirection(@NonNull Transformation tansformation);
 
+	protected void updateGenmodelGroup() {
+		GridData genmodelGridData = (GridData)genmodelGroup.getLayoutData();
+		boolean interpreted = isInterpreted();
+		if (genmodelGridData.exclude != interpreted) {
+			genmodelGridData.exclude = interpreted;
+			genmodelGroup.requestLayout();
+			genmodelGroup.setVisible(!interpreted);
+		}
+	}
+
 	protected void updateGroups(@NonNull Transformation transformation,
 			@NonNull Map<@NonNull String, @Nullable String> oldInputsMap, @NonNull Map<@NonNull String, @Nullable String> newInputsMap,
 			@NonNull Map<@NonNull String, @Nullable String> oldOutputsMap, @NonNull Map<@NonNull String, @Nullable String> newOutputsMap,
 			@NonNull Map<@NonNull String, @Nullable String> intermediateMap) {
-		System.out.println("updateGroups");
+//		System.out.println("updateGroups");
 		for (String key : getIntermediateKeys()) {
 			intermediateMap.put(key, AbstractCompilerChain.getDefaultExtension(key));
 		}
@@ -754,20 +878,20 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 
 	@Override
 	public void updateLaunchConfigurationDialog() {
-		System.out.println("updateLaunchConfigurationDialog: " + initializing + "," + updating);
+//		System.out.println("updateLaunchConfigurationDialog: " + initializing + "," + updating);
 		if (!initializing && !updating) {
-			for (Control child : oldInputsGroup.getChildren()) {
-				ParameterRow row = (ParameterRow)child;
-				System.out.println("  " + row.name + "=>" + row.path.getText());
-			}
-			for (Control child : newInputsGroup.getChildren()) {
-				ParameterRow row = (ParameterRow)child;
-				System.out.println("  " + row.name + "=>" + row.path.getText());
-			}
-			for (Control child : intermediatesGroup.getChildren()) {
-				ParameterRow row = (ParameterRow)child;
-				System.out.println("  " + row.name + "=>" + row.path.getText());
-			}
+//			for (Control child : oldInputsGroup.getChildren()) {
+//				ParameterRow row = (ParameterRow)child;
+//				System.out.println("  " + row.name + "=>" + row.path.getText());
+//			}
+//			for (Control child : newInputsGroup.getChildren()) {
+//				ParameterRow row = (ParameterRow)child;
+//				System.out.println("  " + row.name + "=>" + row.path.getText());
+//			}
+//			for (Control child : intermediatesGroup.getChildren()) {
+//				ParameterRow row = (ParameterRow)child;
+//				System.out.println("  " + row.name + "=>" + row.path.getText());
+//			}
 			updating = true;
 			try {
 				String txName = txPath.getText().trim();
@@ -841,10 +965,8 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		}
 	}
 
-	protected void updateGenmodelGroup() {}
-
 	protected void updateParametersGroup(@NonNull Group group, int style, @NonNull Map<String, String> map, @Nullable List<@NonNull String> sortedKeys) {
-		System.out.println("updateParametersGroup");
+//		System.out.println("updateParametersGroup");
 		Control[] children = group.getChildren();
 		int i = 0;
 		if (map.isEmpty()) {
