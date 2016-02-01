@@ -50,8 +50,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		public RelationDomain2CoreDomain(@NonNull RelationDomain rd) {
 			super(rd, getCoreMappingName(rd));
 			//
-			Set<@NonNull Variable> whenVars = getWhenVars(r);
-//			this.mtev = whenVars.contains(tev) ? null/*qvtr2qvtc.whenVariable(dg, tev)*/ : doRVarToMRealizedVar(tev, db);
 			this.mtev = doRVarToMRealizedVar(tev, db);
 		}
 
@@ -62,7 +60,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				rds.add((RelationDomain) d);
 			}
 			rds.remove(rd); // guard
-			for (RelationDomain ord : rds) {
+			for (RelationDomain ord : rds) {		// FIXME rOppositeDomains already computed
 				// check
 				DomainPattern dp = qvtr2qvtc.getDomainPattern(ord);
 				if (dp.getTemplateExpression() instanceof ObjectTemplateExp) {
@@ -138,14 +136,16 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			predicatesWithoutVarBindings.removeAll(predicatesWithVarBindings);
 			Set<@NonNull Variable> domainVarsSharedWithWhen = new HashSet<@NonNull Variable>(domainVars);
 			domainVarsSharedWithWhen.retainAll(whenVars);
-			domainVarsSharedWithWhen.remove(tev);			
+			if (!whenVars.contains(tev)) {						// This fixes Bug 486636
+				domainVarsSharedWithWhen.remove(tev);
+			}
 			// Relation Calls
 			//T5
-			doRPredicateSetToMBPredicateSet(new ArrayList<@NonNull Predicate>(predicatesWithVarBindings), mb);
-			doRVarSetToDGVarSet(new ArrayList<@NonNull Variable>(domainVarsSharedWithWhen), dg);
+			doRPredicateSetToMBPredicateSet(new ArrayList<@NonNull Predicate>(predicatesWithVarBindings), mb);		// FIXME new ArrayList redundant
+			doRVarSetToDGVarSet(new ArrayList<@NonNull Variable>(domainVarsSharedWithWhen), dg);		// FIXME new ArrayList redundant
 			
 			//T4
-			/* List<@NonNull Variable> mbvars =*/ doRVarSetToMBVarSet(new ArrayList<@NonNull Variable>(unsharedWhereVars), mb);
+			/* List<@NonNull Variable> mbvars =*/ doRVarSetToMBVarSet(new ArrayList<@NonNull Variable>(unsharedWhereVars), mb);		// FIXME new ArrayList redundant
 			//mbvars = mbvars;
 			//T3
 			doTROppositeDomainsToMappingForEnforcement();

@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
@@ -412,7 +413,7 @@ public class QVTrToQVTc
 	}
 	
 	/* =============  Queries ============= */
-	// TODO bug 453863
+	// TODO bug 45386 // ?? this is suspect for more than 2 domains. // FIXME What is 'shared'? a) any two domains b) output/any-input c) all domains
 	public @NonNull Set<@NonNull Variable> getSharedDomainVars(@NonNull Relation r) {	
 		Set<@NonNull Variable> vars = new HashSet<@NonNull Variable>();
 		for (Domain d : ClassUtil.nullFree(r.getDomain())) {
@@ -447,10 +448,40 @@ public class QVTrToQVTc
 	/*
 	 * Get variables occurring in an OCL expression
 	 */
-	// FIXME this function is not complete! It needs to be completed for other 
-	// type of expressions
 	public @NonNull Set<@NonNull Variable> getVarsOfExp(@NonNull OCLExpression e) {
 		
+		Set<@NonNull Variable> vs1 = new HashSet<@NonNull Variable>();
+		if (e instanceof VariableExp) {
+			VariableDeclaration referredVariable = ((VariableExp)e).getReferredVariable();
+			if (referredVariable instanceof Variable) {
+				vs1.add((Variable)referredVariable);
+			}
+		}
+		else if (e instanceof ObjectTemplateExp) {
+			ObjectTemplateExp te = (ObjectTemplateExp) e;
+			Variable bindsTo = te.getBindsTo();
+			if (bindsTo != null) {
+				vs1.add((Variable)bindsTo);
+			}
+		}
+		for (TreeIterator<EObject> tit = e.eAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof VariableExp) {
+				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
+				if (referredVariable instanceof Variable) {
+					vs1.add((Variable)referredVariable);
+				}
+			}
+			else if (eObject instanceof ObjectTemplateExp) {
+				ObjectTemplateExp te = (ObjectTemplateExp)eObject;
+				Variable bindsTo = te.getBindsTo();
+				if (bindsTo != null) {
+					vs1.add((Variable)bindsTo);
+				}
+			}
+		}
+		// FIXME this function is not complete! It needs to be completed for other 
+		// type of expressions
 		Set<@NonNull Variable> vs = new HashSet<@NonNull Variable>();
 		if (e instanceof VariableExp) {
 			Variable referredVariable = (Variable) ((VariableExp) e).getReferredVariable();
@@ -494,6 +525,7 @@ public class QVTrToQVTc
 		else {
 			assert false : "getVarsOfExp() missing case for " + e.eClass().getName();
 		}
+		assert vs.equals(vs1);
 		return vs;
 	}
 
@@ -685,6 +717,7 @@ public class QVTrToQVTc
 			realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
 			realizedVariable.setName(name);
 			realizedVariable.setType(type);
+			realizedVariable.setIsRequired(true);
 			variable2realizedVariable.put(relationVariable, realizedVariable);
 			corePattern.getRealizedVariable().add(realizedVariable);
 			putCoreVariable(relationVariable, realizedVariable);
@@ -706,6 +739,7 @@ public class QVTrToQVTc
 			realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
 			realizedVariable.setName(name);
 			realizedVariable.setType(type);
+			realizedVariable.setIsRequired(true);;
 			name2realizedVariable.put(name, realizedVariable);
 			corePattern.getRealizedVariable().add(realizedVariable);
 //			putTrace(realizedVariable, corePattern);
@@ -769,6 +803,7 @@ public class QVTrToQVTc
 			coreVariable = PivotFactory.eINSTANCE.createVariable();
 			coreVariable.setName(name);
 			coreVariable.setType(type);
+			coreVariable.setIsRequired(relationVariable.isIsRequired());
 			variable2variable.put(relationVariable, coreVariable);
 			corePattern.getVariable().add(coreVariable);
 			putCoreVariable(relationVariable, coreVariable);
@@ -790,6 +825,7 @@ public class QVTrToQVTc
 			coreVariable = PivotFactory.eINSTANCE.createVariable();
 			coreVariable.setName(name);
 			coreVariable.setType(type);
+			coreVariable.setIsRequired(true);
 			name2variable.put(name, coreVariable);
 			corePattern.getVariable().add(coreVariable);
 			putTrace(coreVariable, corePattern);

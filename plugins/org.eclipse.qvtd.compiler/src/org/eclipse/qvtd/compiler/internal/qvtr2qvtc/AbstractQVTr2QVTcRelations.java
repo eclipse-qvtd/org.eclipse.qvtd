@@ -217,7 +217,18 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		
 		// 29
 		protected void doRPredicateSetToMBPredicateSet(@NonNull ArrayList<@NonNull Predicate> predSeq, @NonNull BottomPattern mb) {
-			
+			for (Predicate rp : predSeq) {
+				OCLExpression re = rp.getConditionExpression();
+				assert re != null;
+				// init
+				@NonNull Predicate mp = qvtr2qvtc.createPredicate();
+				// when
+				@NonNull OCLExpression me = doRExpToMExp(re);
+				// assign
+				mp.setConditionExpression(me);
+				mb.getPredicate().add(mp);
+			}
+/*			
 			// check
 			if(predSeq.isEmpty()) {
 				return;
@@ -232,7 +243,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			doRPredicateSetToMBPredicateSet(predSeq, mb);
 			// assign
 			mp.setConditionExpression(me);
-			mb.getPredicate().add(mp);
+			mb.getPredicate().add(mp); */
 		}
 		
 		// 32
@@ -311,7 +322,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				VariableExp ve = qvtr2qvtc.createVariableExp();
 				VariableExp me = qvtr2qvtc.createVariableExp();
 				// where
-				@NonNull RealizedVariable mv = doRVarToMRealizedVar(v);
+				@NonNull Variable mv = doRVarToMRealizedVar(v);
 				@NonNull Variable mev = doRVarToMVar(rev);
 				// assign
 				ve.setReferredVariable(mv);
@@ -365,7 +376,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
 					VariableExp ve = qvtr2qvtc.createVariableExp();
 					VariableExp me = qvtr2qvtc.createVariableExp();
-					RealizedVariable mv = doRVarToMRealizedVar(v);
+					Variable mv = doRVarToMRealizedVar(v);
 					@NonNull Variable mev = doRVarToMVar(rev);
 					// assign
 					ve.setReferredVariable(mv);
@@ -395,7 +406,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				VariableExp ve = qvtr2qvtc.createVariableExp();
 				VariableExp me = qvtr2qvtc.createVariableExp();
 				// where
-				@NonNull RealizedVariable mv = doRVarToMRealizedVar(v);
+				@NonNull RealizedVariable mv = (RealizedVariable) doRVarToMRealizedVar(v);
 				@NonNull Variable mev = doRVarToMVar(rev);
 				// assign
 				ve.setReferredVariable(mv);
@@ -736,8 +747,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			return mv;
 		}
 		
-		private @NonNull RealizedVariable doRVarToMRealizedVar(@NonNull Variable rv) {		
-			@NonNull RealizedVariable mv = (RealizedVariable) qvtr2qvtc.getCoreVariable(rv);
+		private @NonNull /*Realized*/Variable doRVarToMRealizedVar(@NonNull Variable rv) {		
+			@NonNull /*Realized*/Variable mv = /*(RealizedVariable)*/ qvtr2qvtc.getCoreVariable(rv);
 			return mv;
 		}
 		
