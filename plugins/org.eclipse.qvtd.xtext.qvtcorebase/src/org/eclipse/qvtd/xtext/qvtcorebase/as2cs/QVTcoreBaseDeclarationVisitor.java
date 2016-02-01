@@ -305,6 +305,9 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	@Override
 	public ElementCS visitTypedModel(@NonNull TypedModel asTypedModel) {
 		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTcoreBaseCSPackage.Literals.DIRECTION_CS, asTypedModel, null);
+		if ("".equals(asTypedModel.getName())) {
+			csDirection.setName(null);
+		}	
 		csDirection.setPivot(asTypedModel);
 		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
 //		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
