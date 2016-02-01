@@ -13,7 +13,6 @@ package org.eclipse.qvtd.cs2as.compiler.tests;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -56,6 +55,7 @@ import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiBroker;
+import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiCompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
@@ -175,29 +175,21 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		    assert (expected != null) && (actual != null);
 			assertSameModel(expected, actual);
 		}
-
-		protected @NonNull Transformation executeNewOCL2QVTi_MTC(@NonNull String oclDocName) throws Exception {
-			
-			OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, oclDocName, this, TestsXMLUtil.defaultSavingOptions);
-			mtc.setCreateGraphml(CREATE_GRAPHML);
-	    	mtc.newExecute();    	
-	    	if (CREATE_GRAPHML) {
-	    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(DEBUG_SEGMENT).appendSegment(oclDocName.replace(".ocl", "Schedule_complete.graphml")).toString(), false);
-	    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(DEBUG_SEGMENT).appendSegment(oclDocName.replace(".ocl", "Schedule_pruned.graphml")).toString(), true);
-	    	}
-	    	
-	    	Resource iResource = mtc.getiResource();
-	    	Transformation qvtiTransf = mtc.getTransformation(iResource);
-	    	
-	    	URI txURI = ClassUtil.nonNullState(iResource.getURI());
-	    	assertValidQVTiModel(txURI);
-
-	    	
-			URI inputURI = txURI;
-			URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvti");
-			doSerialize(inputURI, serializedURI);
-	    	
-	    	
+		
+		protected @NonNull Transformation executeNewOCL2QVTi_CompilerChain (@NonNull String oclDoc, String... extendedOclDocs) throws IOException {
+			URI mainOclDocURI = baseURI.appendSegment(oclDoc);
+			URI[] oclDocURIs = new URI[extendedOclDocs.length];
+			for (int i=0; i < extendedOclDocs.length; i++) {
+				oclDocURIs[i] = baseURI.appendSegment(extendedOclDocs[i]);
+			}
+			OCL2QVTiCompilerChain compiler = new OCL2QVTiCompilerChain(this, null, "ast", mainOclDocURI, oclDocURIs);
+			Transformation qvtiTransf = compiler.compile();
+			URI txURI = qvtiTransf.eResource().getURI();
+			if (txURI != null) {
+				URI inputURI = txURI;
+				URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvti");
+				doSerialize(inputURI, serializedURI);
+			}
 	    	return qvtiTransf;
 		}
 
@@ -359,7 +351,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testNewExample1_CG() throws Exception {
 		MyQVT myQVT = new MyQVT("example1");
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
-		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("Source2Target.ocl");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2Target.ocl");
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example1.target.lookup.util.TargetLookupSolver",
 				"example1.target.lookup.util.TargetLookupResult",
@@ -377,7 +369,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example1");
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
 		
-		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("Source2Target.ocl");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2Target.ocl");
 		URI txURI = qvtiTransf.eResource().getURI();
 		
 		myQVT.dispose();
@@ -464,7 +456,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
-		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("classescs2as.ocl");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2as.ocl");
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example2.classes.lookup.util.ClassesLookupSolver",
 				"example2.classes.lookup.util.ClassesLookupResult",
@@ -486,7 +478,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 		
-		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("classescs2as.ocl");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2as.ocl");
 		URI txURI = qvtiTransf.eResource().getURI();
 		
 		myQVT.dispose();
@@ -564,7 +556,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example2");
 		OCLstdlibPackage.eINSTANCE.getName();
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
-		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("classescs2asV2.ocl");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2asV2.ocl");
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example2.classes.lookup.util.ClassesLookupSolver",
 				"example2.classes.lookup.util.ClassesLookupResult",
@@ -589,7 +581,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 		
-		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("classescs2asV2.ocl");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2asV2.ocl");
 		URI txURI = qvtiTransf.eResource().getURI();
 		
 		myQVT.dispose();
@@ -728,7 +720,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("example4");
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
-		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("SimplerKiama.ocl");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("SimplerKiama.ocl");
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("","",
 				TESTS_GEN_PATH, NEW_TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
@@ -745,7 +737,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testNewExample4_Interpreted() throws Exception {
 		MyQVT myQVT = new MyQVT("example4");
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
-		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_MTC("SimplerKiama.ocl");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("SimplerKiama.ocl");
 		URI txURI = qvtiTransf.eResource().getURI();
 		
 		myQVT.dispose();
@@ -767,14 +759,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testExample5_CG() throws Exception {
 		MyQVT myQVT = new MyQVT("example5");
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
-		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("Source2TargetBase.ocl");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
 
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"",
 				"",
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
-			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
+			.compileTransformation(myQVT, qvtiTransf, cgParams);
 		
 		// Execute CGed transformation
 		myQVT.executeModelsTX_CG(txClass, "model1");
@@ -784,12 +776,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel", 
 				"SourceDerivedMM.genmodel", "TargetDerivedMM.genmodel");
  
-		List<String> oclDocs = new ArrayList<String>();
-		oclDocs.add("Source2TargetDerived.ocl");
-		oclDocs.add("Source2TargetBase.ocl");
-		qvtiTransf = myQVT.executeOCL2QVTi_MTC(oclDocs);
+		qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2TargetDerived.ocl", 
+				"Source2TargetBase.ocl");
 		txClass = new CS2ASJavaCompilerImpl()
-				.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
+				.compileTransformation(myQVT, qvtiTransf, cgParams);
 			
 		// Execute CGed transformation
 		myQVT.executeModelsTX_CG(txClass, "model2");
@@ -800,9 +790,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testExample5_Interpreted() throws Exception {
 		MyQVT myQVT = new MyQVT("example5");
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
-		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("Source2TargetBase.ocl");
-		
-		Transformation tx = qvtiTransf.getTransformation();
+		Transformation tx = myQVT.executeNewOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
     	myQVT.executeModelsTX_Interpreted(tx, "model1");
     	
 		myQVT.dispose();
@@ -810,12 +798,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel", 
 				"SourceDerivedMM.genmodel", "TargetDerivedMM.genmodel");
-		List<String> oclDocs = new ArrayList<String>();
-		oclDocs.add("Source2TargetDerived.ocl");
-		oclDocs.add("Source2TargetBase.ocl");
-		qvtiTransf = myQVT.executeOCL2QVTi_MTC(oclDocs);
-		
-		tx = qvtiTransf.getTransformation();	
+		tx = myQVT.executeNewOCL2QVTi_CompilerChain("Source2TargetDerived.ocl", 
+				"Source2TargetBase.ocl");
 		myQVT.executeModelsTX_Interpreted(tx, "model2");
 		myQVT.dispose();
 	}
@@ -937,7 +921,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		return xtextResource;
 	}
 
-	public static XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws Exception {
+	public static XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		//
 		//	Load QVTiAS

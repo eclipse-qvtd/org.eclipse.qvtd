@@ -19,8 +19,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.epsilon.eol.execute.context.Variable;
-import org.eclipse.epsilon.eol.types.EolPrimitiveType;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -148,28 +146,15 @@ public class OCL2QVTiBroker extends MtcBroker {
 	
 	protected PivotModel prepareQVTpModel() throws QvtMtcExecutionException {
 				
-		List<PivotModel> qvtpModels = new ArrayList<PivotModel>();
-		PivotModel resultingPModel = null;
-		for (int i = 0; i < oclASUris.size() ; i++) {
-			URI oclASUri = oclASUris.get(i);
-			PivotModel pModel = (tracesASUris.isEmpty())	? runOCL2QVTp_MiddleFolded(oclASUri, qvtpUris.get(i), traceabilityPropName) 
-					: runOCL2QVTp_MiddleModel(oclASUri, qvtpUris.get(i), tracesASUris.get(i));
-			qvtpModels.add(pModel);
+		if (oclASUris.size() > 1) {
+			throw new IllegalStateException("Deprecated OCL2QVTiBroker doesn't support multiple ocl documents. Use "+ OCL2QVTiCompilerChain.class.getName());
 		}
-		if (qvtpModels.size() > 1) {
-			resultingPModel = QVTpModelsMerger.merge(environmentFactory , qvtpModels);
-			resultingPModel.store();
-			// unload unnecessary qvtpModels
-			for(PivotModel qvtpModel : qvtpModels) {
-				if (qvtpModel != resultingPModel) {
-					qvtpModel.getResource().unload();
-				}
-			}
-		}	else {
-			resultingPModel = qvtpModels.get(0);
-		}
-		assertNoResourceErrors("pModel", resultingPModel.getResource());
-		return resultingPModel;
+		URI oclASUri = oclASUris.get(0);
+		PivotModel pModel = (tracesASUris.isEmpty())	? runOCL2QVTp_MiddleFolded(oclASUri, qvtpUris.get(0), traceabilityPropName) 
+				: runOCL2QVTp_MiddleModel(oclASUri, qvtpUris.get(0), tracesASUris.get(0));
+		
+		assertNoResourceErrors("pModel", pModel.getResource());
+		return pModel;
 	}
 	protected PivotModel runOCL2QVTp_MiddleModel (URI oclDocURI, URI qvtiFileURI, URI tracesMMURI) throws QvtMtcExecutionException {
 		

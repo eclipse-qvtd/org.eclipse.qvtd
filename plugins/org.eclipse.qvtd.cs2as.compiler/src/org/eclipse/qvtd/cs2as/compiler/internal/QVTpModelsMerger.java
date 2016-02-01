@@ -31,7 +31,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
-import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
@@ -56,20 +55,16 @@ public class QVTpModelsMerger {
 	 * <li> Merging all the {@link Import imports} in the containing qvtp {@link ImperativeModel model}, taking care of import duplications </li>
 	 * </ul>
 	 *   
-	 * @param qvtpModels a list of the QVTp models to merge
+	 * @param extendedQVTpModels a list of the QVTp models to merge
 	 * @return a clone of the first QVTp model of the provided list, having merged the remaining QVTp models of that list  
 	 */
-	public static PivotModel merge(EnvironmentFactory envF, List<PivotModel> qvtpModels) {
+	public static void merge(EnvironmentFactory envF, Resource targetQVTpModel, List<Resource> extendedQVTpModels) {
 		
-		PivotModel firstModel = qvtpModels.get(0);
-		ImperativeModel qvtpModel = getImperativeModel(firstModel);
+		ImperativeModel qvtpModel = getImperativeModel(targetQVTpModel);
 		Map<Class, List<Mapping>> inputType2RefiningMapping = getRefiningMappingInputTypes(qvtpModel);
-		for (int i=1; i < qvtpModels.size(); i++) {
-			doMerge(envF, qvtpModel, getImperativeModel(qvtpModels.get(i)), inputType2RefiningMapping);
+		for (Resource extendedQVTpModel : extendedQVTpModels) {
+			doMerge(envF, qvtpModel, getImperativeModel(extendedQVTpModel), inputType2RefiningMapping);
 		}
-		
-		return firstModel;
-		
 	}
 	
 	private static Map<Class, List<Mapping>> getRefiningMappingInputTypes(ImperativeModel qvtpModel) {
@@ -187,15 +182,14 @@ public class QVTpModelsMerger {
 		throw new IllegalStateException(MessageFormat.format("The QVTd model '{0}' does not have a Transformation element.", iModel.getExternalURI()));
 	}
 	
-	private static ImperativeModel getImperativeModel(PivotModel qvtpModel) {
+	private static ImperativeModel getImperativeModel(Resource qvtpResource) {
 		
-		Resource modelImpl = qvtpModel.getResource();
-		for (EObject eContent : modelImpl.getContents()) {
+		for (EObject eContent : qvtpResource.getContents()) {
 			if (eContent instanceof ImperativeModel) {
 				return (ImperativeModel) eContent;
 			}
 		}
-		throw new IllegalStateException(MessageFormat.format("The QVTd model '{0}' does not have an ImperativeModel element.", modelImpl.getURI()));
+		throw new IllegalStateException(MessageFormat.format("The QVTd model '{0}' does not have an ImperativeModel element.", qvtpResource.getURI()));
 	}
 	
 	private static boolean assertCorrectQVTpModelFileExtenion(URI qvtpModelURI ) {
