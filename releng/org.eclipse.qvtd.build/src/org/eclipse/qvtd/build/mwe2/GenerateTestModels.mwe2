@@ -21,11 +21,11 @@ Workflow {
     bean = ProjectMapSetup{ resourceSet = resourceSet}
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
     
-    component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample1Models {}
-    component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample2Models {}
-    component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample3Models {}
-    component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample4Models {}
-    component = @org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample5Models {}
+    component = @org.eclipse.qvtd.build.mwe2.GenerateExample1Models {}
+    component = @org.eclipse.qvtd.build.mwe2.GenerateExample2Models {}
+    component = @org.eclipse.qvtd.build.mwe2.GenerateExample3Models {}
+    component = @org.eclipse.qvtd.build.mwe2.GenerateExample4Models {}
+    component = @org.eclipse.qvtd.build.mwe2.GenerateExample5Models {}
   
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
     	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/families2persons/Families2Persons.genmodel"

@@ -9,7 +9,7 @@
  *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial API and implementation
  * 
  *******************************************************************************/
-module org.eclipse.qvtd.cs2as.compiler.tests.GenerateExample2Models
+module org.eclipse.qvtd.build.mwe2.GenerateExample3Models
 
 import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.ocl.examples.build.xtend.*
@@ -17,7 +17,7 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 
 var projectName = "org.eclipse.qvtd.cs2as.compiler.tests"
-var examplesFolder = "src/org/eclipse/qvtd/cs2as/compiler/tests/models/example2"
+var examplesFolder = "src/org/eclipse/qvtd/cs2as/compiler/tests/models/example3"
 
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
@@ -25,32 +25,12 @@ Workflow {
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
 
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/Classes.genmodel"
+    	genModel = "/${projectName}/${examplesFolder}/KiamaAS.genmodel"
     }
     
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/Classescs.genmodel"
-    }
-    
-    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/EnvExample2.genmodel"
-    }
-    
-    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/Classescs2as.genmodel"
-    }
-
-    component = GenerateASVisitors { resourceSet = resourceSet
-    	projectName = "${projectName}"
-    	superProjectName = ""
-    	genModelFile = "${examplesFolder}/Classes.genmodel"
-    }
-    
-    component = @SubGenerateAutoASModel { resourceSet = resourceSet
-    	projectName = "${projectName}"
-    	genModelFile = "${examplesFolder}/Classes.genmodel"
-    	lookupFilePath = "${examplesFolder}/classescs2asV2Lookup.ocl"
-    }
+    	genModel = "/${projectName}/${examplesFolder}/KiamaCS.genmodel"
+    }   
 }
 
 
