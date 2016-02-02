@@ -19,9 +19,11 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.DataType;
@@ -38,6 +40,10 @@ import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -192,7 +198,7 @@ public class QVTrToQVTc
 	 */
 	private final @NonNull Map<@NonNull Variable, @NonNull Variable> variable2variable = new HashMap<@NonNull Variable, @NonNull Variable>();
 	
-	public QVTrToQVTc(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource, @Nullable Resource traceResource) {	
+	public QVTrToQVTc(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource) {	
 		this.environmentFactory = environmentFactory;
 		this.qvtrResource = qvtrResource;		
 		this.qvtcResource = qvtcResource;
@@ -555,6 +561,7 @@ public class QVTrToQVTc
         // Copy imports
         
         org.eclipse.ocl.pivot.Package corePackage = PivotFactory.eINSTANCE.createPackage();
+        corePackage.setName("");
         this.coreModel.getOwnedPackages().add(corePackage);
         asResource.getContents().add(this.coreModel);
         corePackage.getOwnedClasses().addAll(coreTransformations);
@@ -568,7 +575,8 @@ public class QVTrToQVTc
 
 	public void saveTrace(@NonNull Resource asResource,  @NonNull Map<?, ?> options) throws IOException {
         Model root = PivotFactory.eINSTANCE.createModel();
-        root.setExternalURI(asResource.getURI().toString());
+        URI traceURI = PivotUtilInternal.getNonASURI(asResource.getURI());
+		root.setExternalURI(traceURI.toString());
         asResource.getContents().add(root);
         for (org.eclipse.ocl.pivot.Package p : tracePackages) {
             root.getOwnedPackages().add(p);
@@ -578,9 +586,11 @@ public class QVTrToQVTc
             i.setImportedNamespace(p);
             coreModel.getOwnedImports().add(i);
         }
-		asResource.save(options);
+		AS2Ecore as2ecore = new AS2Ecore((EnvironmentFactoryInternal) environmentFactory, traceURI, null);
+		XMLResource ecoreResource = as2ecore.convertResource(asResource, traceURI);
+		ecoreResource.save(options);
 	}
-	
+
 	private void transformToCoreTransformations(@NonNull List<@NonNull Transformation> coreTransformations, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
 		for (org.eclipse.ocl.pivot.Package relationPackage : relationPackages) {
 			for (org.eclipse.ocl.pivot.Class relationClass : relationPackage.getOwnedClasses()) {

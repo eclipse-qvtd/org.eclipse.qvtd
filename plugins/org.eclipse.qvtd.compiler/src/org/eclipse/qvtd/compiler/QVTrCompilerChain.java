@@ -49,14 +49,14 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 
 	private @NonNull Resource qvtr2qvtc(@NonNull Resource rResource) throws IOException {
 		URI qvtcURI = getURI(QVTC_STEP, URI_KEY);
-		URI qvtctURI = prefixURI.appendFileExtension("ecore.oclas");
+		URI traceURI = getURI(TRACE_STEP, URI_KEY);
 		Resource cResource = createResource(qvtcURI);
-		Resource qvtcTraceResource = createResource(qvtctURI);
-    	QVTrToQVTc t = new QVTrToQVTc(environmentFactory, rResource, cResource, qvtcTraceResource);
+		Resource traceResource = createResource(traceURI);
+    	QVTrToQVTc t = new QVTrToQVTc(environmentFactory, rResource, cResource);
 		t.prepare();
 		t.execute();		
-        t.saveTrace(qvtcTraceResource, XMIUtil.createSaveOptions());
-        assertNoResourceErrors("Trace save", qvtcTraceResource);
+        t.saveTrace(traceResource, XMIUtil.createSaveOptions());
+        assertNoResourceErrors("Trace save", traceResource);
         t.saveCore(cResource, XMIUtil.createSaveOptions());
         assertNoResourceErrors("Core save", cResource);
 		return cResource;

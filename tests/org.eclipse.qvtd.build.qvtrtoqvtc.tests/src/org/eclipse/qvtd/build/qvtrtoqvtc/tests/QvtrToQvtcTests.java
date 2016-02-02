@@ -106,7 +106,7 @@ public class QvtrToQvtcTests extends LoadTestCase {
     	URI qvtcTraceURI = qvtrURI.trimFileExtension();
     	qvtcTraceURI = qvtcTraceURI.appendFileExtension("ecore.oclas");
     	Resource qvtcTraceResource = asResourceSet.createResource(qvtcTraceURI, null);
-    	QVTrToQVTc t = new QVTrToQVTc(ocl.getEnvironmentFactory(), qvtrResource, qvtcResource, qvtcTraceResource);
+    	QVTrToQVTc t = new QVTrToQVTc(ocl.getEnvironmentFactory(), qvtrResource, qvtcResource);
 		t.prepare();
 		t.execute();		
         t.saveTrace(qvtcTraceResource, TestsXMLUtil.defaultSavingOptions);

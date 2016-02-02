@@ -56,6 +56,7 @@ public interface CompilerChain
 	public static final @NonNull String QVTR_STEP = "QVTr";
 	public static final @NonNull String QVTS_STEP = "QVTs";
 	public static final @NonNull String QVTU_STEP = "QVTu";
+	public static final @NonNull String TRACE_STEP = "Trace";
 	
 	public static final @NonNull Key<Boolean> CHECK_KEY = new Key<Boolean>("check");
 	public static final @NonNull Key<@NonNull Map<?,?>> SAVE_OPTIONS_KEY = new Key<@NonNull Map<?,?>>("save");
