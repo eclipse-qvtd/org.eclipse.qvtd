@@ -41,7 +41,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.junit.Before;
 import org.junit.Test;
 
-import cg._classescs2as_qvtp_qvtias.classescs2as_qvtp_qvtias;
+import cg._classescs2as_qvtp_qvtcas.classescs2as_qvtp_qvtcas;
 
 /**
  * @author asbh500
@@ -126,13 +126,13 @@ public class ExecutionBenchmarks extends LoadTestCase {
 			
 			URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 			
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model1", results);
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model2", results);
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model3", results);
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model4", results);
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model5", results);
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model6", results);
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtias.class, baseURI, "model7", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model1", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model2", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model3", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model4", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model5", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model6", results);
+			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model7", results);
 			
 			myQVT.dispose();
 			

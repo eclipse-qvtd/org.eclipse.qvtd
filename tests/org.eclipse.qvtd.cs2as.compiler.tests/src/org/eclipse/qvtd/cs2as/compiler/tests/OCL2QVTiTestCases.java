@@ -229,13 +229,22 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			Resource r = rSet.createResource(modelURI);
 			r.save(TestsXMLUtil.defaultSavingOptions);
 		}
+		
+		protected  @NonNull Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> createTestCasesCompilerOptions() {
+			Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options = new HashMap<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>>();
+			Map<@NonNull Key<?>, @Nullable Object> defStepOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();
+			defStepOptions.put(OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+			// TODO problem hen validating  defStepOptions.put(OCL2QVTiCompilerChain.VALIDATE_KEY, true);
+			options.put(OCL2QVTiCompilerChain.DEFAULT_STEP, defStepOptions);
+			return options;
+		}
 	}
 
 	// For testing purpose
 	private static class OCL2QVTiCompilerTester extends OCL2QVTiCompilerChain {
 
 		public OCL2QVTiCompilerTester(@NonNull URI baseURI, @NonNull String oclDocName, @NonNull QVTimperative metaModelManager) {
-			super(metaModelManager, createTestCasesCompilerOptions(), baseURI.appendSegment(oclDocName));
+			super(metaModelManager, null, baseURI.appendSegment(oclDocName));
 		}
 	
 		// For testing purpose
@@ -716,13 +725,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		return (ASResource) asResource;
 	}
 
-	private static @NonNull Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> createTestCasesCompilerOptions() {
-		Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options = new HashMap<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>>();
-		Map<@NonNull Key<?>, @Nullable Object> defStepOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();
-		defStepOptions.put(OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-		// TODO problem hen validating  defStepOptions.put(OCL2QVTiCompilerChain.VALIDATE_KEY, true);
-		options.put(OCL2QVTiCompilerChain.DEFAULT_STEP, defStepOptions);
-		return options;
-	}
+
 	
 }

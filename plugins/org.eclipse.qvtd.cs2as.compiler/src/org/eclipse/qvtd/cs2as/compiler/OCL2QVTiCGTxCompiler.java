@@ -11,6 +11,8 @@
 package org.eclipse.qvtd.cs2as.compiler;
 
 
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -18,11 +20,13 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
-import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
-import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
+import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
-import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiBroker;
+import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiCompilerChain;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 
@@ -31,6 +35,7 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 	static {
 		CompleteOCLStandaloneSetup.doSetup();
 		QVTimperativeStandaloneSetup.doSetup();
+		QVTcorePivotStandaloneSetup.doSetup();
 	}
 		
 	@Override
@@ -41,33 +46,38 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 	
 	@Override
 	public Class<? extends Transformer> compileTransformation(@NonNull URI oclDocURI, @NonNull CS2ASJavaCompilerParameters params, @Nullable ResourceSet rSet, @NonNull String tracePropertyName) throws Exception {
+		return this.compileTransformation(rSet, params, tracePropertyName, oclDocURI);
+	}
+	
+	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet, @NonNull CS2ASJavaCompilerParameters params, @NonNull String tracePropertyName, @NonNull URI oclDocURI, URI... extendedOCLDocURIs) 
+			throws Exception {
 		
 		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, rSet);
 		try {
-			PivotModel qvtiTransf = executeOCL2QVTi_MTC(qvt, oclDocURI.trimSegments(1), oclDocURI.lastSegment(), tracePropertyName);
-			return createCompiler().compileTransformation(qvt, qvtiTransf.getTransformation(), (CS2ASJavaCompilerParameters) params);	
+			Transformation qvtiTransf = executeOCL2QVTi_CompilerChain(qvt, tracePropertyName, oclDocURI, extendedOCLDocURIs);
+			return createCompiler().compileTransformation(qvt, qvtiTransf, (CS2ASJavaCompilerParameters) params);	
 		} finally {
-			qvt.dispose();	
+			qvt.dispose();
 		}
 	}
 	
 	protected CS2ASJavaCompilerImpl createCompiler() {
 		return new CS2ASJavaCompilerImpl();
 	}
-		
-	/**
-	 * @param ocl
-	 * @param baseURI
-	 * @param oclDocName
-	 * @param tracePropName the name of the CS2AS traceability property
-	 * @return the {@link PivotModel} corresponding to the final QVTi transformation
-	 * @throws Exception
-	 */
-	protected PivotModel executeOCL2QVTi_MTC(OCL ocl, URI baseURI, String oclDocName, String tracePropName) throws Exception {
-		
-		// FIXME Map<?, ?> savingOptions = this.savingOptions == null ? XMIUtil.createSaveOptions() : this.savingOptions;
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, oclDocName, ocl, null, true, tracePropName);
-    	mtc.execute();
-    	return mtc.getiModel();
+
+	protected Transformation executeOCL2QVTi_CompilerChain(QVTimperative qvt, String tracePropName,  URI oclDocURI, URI... extendedOCLDocURIs) throws Exception {
+
+		Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options = new HashMap<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>>();
+		// OCL2QVTp options
+		@NonNull Map<@NonNull Key<?>, @Nullable Object> ocl2qvtpOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();
+		ocl2qvtpOptions.put(OCL2QVTiCompilerChain.TRACE_PROPERTY_NAME_KEY, tracePropName);
+		// Default options
+		@NonNull Map<@NonNull Key<?>, @Nullable Object> defStepOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();
+		defStepOptions.put(OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions()); // FIXME parametrize save options ?
+		options.put(OCL2QVTiCompilerChain.DEFAULT_STEP, defStepOptions);
+		options.put(OCL2QVTiCompilerChain.QVTP_STEP, ocl2qvtpOptions);
+	
+		OCL2QVTiCompilerChain compilerChain = new OCL2QVTiCompilerChain(qvt, options, oclDocURI, extendedOCLDocURIs);
+    	return compilerChain.compile();
 	}
 }
