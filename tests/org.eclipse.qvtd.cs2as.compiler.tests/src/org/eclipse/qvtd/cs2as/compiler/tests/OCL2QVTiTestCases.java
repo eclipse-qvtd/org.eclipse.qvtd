@@ -14,7 +14,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -31,6 +33,7 @@ import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.types.EolPrimitiveType;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.tx.TransformationExecutor;
 import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
@@ -46,6 +49,7 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
+import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.internal.etl.EtlTask;
 import org.eclipse.qvtd.compiler.internal.etl.MtcBroker;
 import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
@@ -53,7 +57,6 @@ import org.eclipse.qvtd.compiler.internal.etl.QvtMtcExecutionException;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
-import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiBroker;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiCompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -181,7 +184,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			for (int i=0; i < extendedOclDocs.length; i++) {
 				oclDocURIs[i] = baseURI.appendSegment(extendedOclDocs[i]);
 			}
-			OCL2QVTiCompilerChain compiler = new OCL2QVTiCompilerChain(this, null, "ast", mainOclDocURI, oclDocURIs);
+			OCL2QVTiCompilerChain compiler = new OCL2QVTiCompilerChain(this, createOcl2QVTpCompilerOptions(), mainOclDocURI, oclDocURIs);
 			Transformation qvtiTransf = compiler.compile();
 			URI txURI = qvtiTransf.eResource().getURI();
 			if (txURI != null) {
@@ -190,6 +193,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 				doSerialize(inputURI, serializedURI);
 			}
 	    	return qvtiTransf;
+		}
+		
+		protected @NonNull Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> createOcl2QVTpCompilerOptions() {
+			Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options = new HashMap<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>>();
+			Map<@NonNull Key<?>, @Nullable Object> ocl2qvtpOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();
+			ocl2qvtpOptions.put(OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+			options.put(OCL2QVTiCompilerChain.OCL2QVTP_STEP, ocl2qvtpOptions);
+			return options;
 		}
 		
 		protected void loadEcoreFile(String ecoreFileName, EPackage ePackage) {
@@ -237,7 +248,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	private static class OCL2QVTiCompilerTester extends OCL2QVTiCompilerChain {
 
 		public OCL2QVTiCompilerTester(@NonNull URI baseURI, @NonNull String oclDocName, @NonNull QVTimperative metaModelManager) {
-			super(metaModelManager, null, "ast", baseURI.appendSegment(oclDocName));
+			super(metaModelManager, null, baseURI.appendSegment(oclDocName));
 		}
 	
 		// For testing purpose
