@@ -93,7 +93,6 @@ public class QVTrCompilerTests extends LoadTestCase
 			URI prefixURI = testFolderURI.appendSegment(testFileName);
 			compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), prefixURI, options);
 			compilerChain.setOption(AbstractCompilerChain.DEFAULT_STEP, AbstractCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-			compilerChain.setOption(AbstractCompilerChain.QVTR_STEP, AbstractCompilerChain.URI_KEY, prefixURI.appendFileExtension("qvtr"));
 	    	return compilerChain.compile(outputName);
 		}
 
@@ -255,7 +254,7 @@ public class QVTrCompilerTests extends LoadTestCase
     	MyQVT myQVT = new MyQVT("seq2stm");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
-	    	Transformation asTransformation = myQVT.compileTransformation("SeqToStm", "stm");
+	    	Transformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm");
 	    	myQVT.createInterpretedExecutor(asTransformation);
 	    	myQVT.loadInput("seqDgm", "Seq.xmi");
 	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Seq2Stmc_trace.xmi");
