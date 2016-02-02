@@ -46,12 +46,14 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
@@ -266,6 +268,15 @@ public class QVTrToQVTc
 	}
 	
 	
+    public void addDebugCopies(@NonNull Map<EObject, EObject> copier) {
+	    for (EObject eSource : copier.keySet()) {
+	    	EObject eTarget = copier.get(eSource);
+	    	if (eTarget != null) {
+	    		putTrace((Element)eTarget, (Element)eSource);
+	    	}
+	    }
+	}
+	
 	public void addOrphan(@NonNull EObject eObject) {
 		potentialOrphans.add(eObject);
 	}
@@ -277,7 +288,7 @@ public class QVTrToQVTc
 		EcoreUtil.Copier copier = new ExpressionCopier(sibling);
 		@SuppressWarnings("unchecked") T eOut = (T) copier.copy(eIn);			
 	    copier.copyReferences();
-//	    context.addDebugCopies(copier);
+	    addDebugCopies(copier);
 	    assert eOut != null;
 		return eOut;
 	}
@@ -350,6 +361,16 @@ public class QVTrToQVTc
 				if (rule instanceof Relation) {
 					InvokedRelationToMappingForEnforcement invokedRelationToMappingForEnforcement = new InvokedRelationToMappingForEnforcement(this);
 					invokedRelationToMappingForEnforcement.doInvokedRelationToMappingForEnforcement((Relation)rule);
+				}
+			}
+		}
+		for (Transformation coreTransformation : relationalTransformation2coreTransformation.values()) {
+			for (Element target : target2source.keySet()) {
+				if (QVTbaseUtil.getContainingTransformation(target) == coreTransformation) {
+					DebugTraceBack traceBack = QVTbaseFactory.eINSTANCE.createDebugTraceBack();
+					traceBack.setTarget(target);
+					traceBack.getSources().add(target2source.get(target));
+					coreTransformation.getOwnedDebugTraceBacks().add(traceBack);
 				}
 			}
 		}
@@ -566,7 +587,7 @@ public class QVTrToQVTc
 
 	/*public*/ void putRelationTrace(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class traceClass) {		
 		relationToTraceClass.put(r, traceClass);
-		putTrace(traceClass, r);
+//		putTrace(traceClass, r);
 	}
 	
 	private void putTrace(@NonNull Element coreElement, @NonNull Element relationElement) {
@@ -584,7 +605,7 @@ public class QVTrToQVTc
 	
 	/*public*/ void putTracePackage(@NonNull RelationalTransformation rt, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {		
 		relationalTransformation2tracePackage.put(rt, tracePackage);
-		putTrace(tracePackage, rt);
+//		putTrace(tracePackage, rt);
 	}
 
 	public void saveCore(@NonNull Resource asResource, @NonNull Map<?, ?> options) throws IOException {
@@ -677,7 +698,10 @@ public class QVTrToQVTc
 	/**
 	 * Lazily create the name Mapping for a coreTransformation.
 	 */
-	/*public*/ @NonNull Mapping whenMapping(@NonNull Transformation coreTransformation, @NonNull String name) {
+	/*public*/ @NonNull Mapping whenMapping(@NonNull Relation relation, @NonNull String name) {
+		RelationalTransformation rt = (RelationalTransformation) relation.getTransformation();
+		assert rt != null;
+		@NonNull Transformation coreTransformation = getCoreTransformation(rt);
 		Map<@NonNull String, @NonNull Mapping> name2mapping = transformation2name2mapping.get(coreTransformation);
 		if (name2mapping == null) {
 			name2mapping = new HashMap<@NonNull String, @NonNull Mapping>();
@@ -686,6 +710,7 @@ public class QVTrToQVTc
 		Mapping coreMapping = name2mapping.get(name);
 		if (coreMapping == null) {
 			coreMapping = QVTcoreFactory.eINSTANCE.createMapping();
+			putTrace(coreMapping, relation);
 			coreMapping.setName(name);
 			coreMapping.setTransformation(coreTransformation);
 			name2mapping.put(name, coreMapping);

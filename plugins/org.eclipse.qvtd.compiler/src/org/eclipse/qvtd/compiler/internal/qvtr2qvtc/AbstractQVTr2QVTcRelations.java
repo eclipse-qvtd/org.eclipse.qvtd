@@ -88,7 +88,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			@NonNull TypedModel coreTypedModel = getCoreTypedModel(mt, ClassUtil.nonNullState(dir.getName()), ClassUtil.nullFree(dir.getUsedPackage()));
 			@NonNull Type tc = qvtr2qvtc.getTraceClass(r);
 			//
-			this.m = qvtr2qvtc.whenMapping(mt, coreMappingName);
+			this.m = qvtr2qvtc.whenMapping(r, coreMappingName);
 			this.mg = ClassUtil.nonNullState(m.getGuardPattern());
 			this.mb = ClassUtil.nonNullState(m.getBottomPattern());
 			this.mdir = coreTypedModel;
@@ -660,7 +660,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				if (!(key.getPart().contains(pp)) && !(e instanceof TemplateExp)) {
 					String pn = pp.getName();
 					// init
-					Mapping cm = qvtr2qvtc.whenMapping(mt, m.getName()+"_forNonIdentityProp");
+					Mapping cm = qvtr2qvtc.whenMapping(r, m.getName()+"_forNonIdentityProp");
 					BottomPattern bp = cm.getBottomPattern();
 					cm.getGuardPattern();
 					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
