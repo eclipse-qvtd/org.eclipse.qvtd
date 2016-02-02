@@ -103,9 +103,16 @@ public class OCL2QVTp {
 		
 			CoreModel iModel = QVTcoreFactory.eINSTANCE.createCoreModel();
 		
-		List<ShadowExp> shadowExps = getAllContents().apply(oclModel).filter(ShadowExp.class::isInstance)
+		List<Operation> allAstOps = getAllContents().apply(oclModel)
+					.filter(isAstOp())
+					.map(Operation.class::cast).collect(Collectors.toList());
+		List<ShadowExp> shadowExps = allAstOps.stream()
+					.flatMap(getAllContents())
+					.filter(ShadowExp.class::isInstance)
 					.map(ShadowExp.class::cast).collect(Collectors.toList());
-		List<ShadowPart> shadowParts = getAllContents().apply(oclModel).filter(ShadowPart.class::isInstance)
+		List<ShadowPart> shadowParts =  allAstOps.stream()
+					.flatMap(getAllContents())
+					.filter(ShadowPart.class::isInstance)
 					.map(ShadowPart.class::cast).collect(Collectors.toList());
 		
 		iModel.setExternalURI(oclModel.getExternalURI().replace(".ocl", ".qvtp.qvtcas")); // When the externalURI is set, also is its name
@@ -137,14 +144,14 @@ public class OCL2QVTp {
 		leftTypedModel.setName(LEFT_MODEL_TYPE_NAME);
 		leftTypedModel.getUsedPackage().add(
 				importedPackges.stream()
-				.filter(p -> p.getName() == getExpressionContextType().apply(shadowExps.get(0)).getOwningPackage().getName())
+				.filter(p -> p.getName().equals(getExpressionContextType().apply(shadowExps.get(0)).getOwningPackage().getName()))
 				.findFirst().get());
 		pTx.getModelParameter().add(leftTypedModel);
 		
 		rightTypedModel.setName(RIGHT_MODEL_TYPE_NAME);
 		rightTypedModel.getUsedPackage().add(
 				importedPackges.stream()
-				.filter(p -> p.getName() == shadowExps.get(0).getType().getOwningPackage().getName())
+				.filter(p -> p.getName().equals(shadowExps.get(0).getType().getOwningPackage().getName()))
 				.findFirst().get());
 		pTx.getModelParameter().add(rightTypedModel);
 		
@@ -453,8 +460,15 @@ public class OCL2QVTp {
 	
 	private Predicate<EObject> isAstOpCallExp() {
 		return element -> { 
-			return element instanceof OperationCallExp && 
-				"ast".equals(((OperationCallExp)element).getReferredOperation().getName());
+			return element instanceof OperationCallExp &&
+				isAstOp().test(((OperationCallExp)element).getReferredOperation());
+		};
+	}
+	
+	private Predicate<EObject> isAstOp() {
+		return element -> {
+				return element instanceof Operation &&
+				"ast".equals(((Operation)element).getName());
 		};
 	}
 	
