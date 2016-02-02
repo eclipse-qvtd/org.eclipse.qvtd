@@ -66,7 +66,7 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		step2extension.put(QVTR_STEP, "qvtras");
 		step2extension.put(QVTC_STEP, "qvtcas");
 		step2extension.put(QVTU_STEP, "qvtu.qvtcas");
-		step2extension.put(QVTM_STEP, "qvpm.qvtcas");
+		step2extension.put(QVTM_STEP, "qvtm.qvtcas");
 		step2extension.put(QVTP_STEP, "qvtp.qvtcas");
 		step2extension.put(QVTS_STEP, "qvts.xmi");
 		step2extension.put(QVTI_STEP, "qvtias");
