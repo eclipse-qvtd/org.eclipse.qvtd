@@ -17,13 +17,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrToQVTc;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 /**
  * The QVTcCompilerChain supports generation of a QVTi Transformation from a QVTc Transformation.
@@ -36,11 +36,10 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 
 	@Override
 	public @NonNull Transformation compile(@NonNull String enforcedOutputName) throws IOException {
-		URI qvtrURI = getURI(QVTR_STEP, URI_KEY);
-		Transformation transformation = QVTbaseUtil.loadTransformation(RelationModel.class, environmentFactory, qvtrURI, false);
-		Resource rResource = transformation.eResource();
-		assert rResource != null;
-		Resource cResource = qvtr2qvtc(rResource);;
+		Transformation loadTransformation = QVTrelationUtil.loadTransformation(environmentFactory, txURI, false);
+		Resource rResource = ClassUtil.nonNullState(loadTransformation.eResource());
+		compiled(QVTR_STEP, rResource);
+		Resource cResource = qvtr2qvtc(rResource);
 		assert cResource != null;
 		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
 		Resource pResource = qvtc2qvtp(cResource, qvtuConfiguration);
@@ -54,11 +53,12 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		Resource traceResource = createResource(traceURI);
     	QVTrToQVTc t = new QVTrToQVTc(environmentFactory, rResource, cResource);
 		t.prepare();
-		t.execute();		
+		t.execute();
         t.saveTrace(traceResource, XMIUtil.createSaveOptions());
         assertNoResourceErrors("Trace save", traceResource);
         t.saveCore(cResource, XMIUtil.createSaveOptions());
         assertNoResourceErrors("Core save", cResource);
+		compiled(QVTC_STEP, cResource);
 		return cResource;
 	}
 }

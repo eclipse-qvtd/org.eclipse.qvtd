@@ -343,7 +343,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	}
 
 	protected void cancelCompileJob(boolean force) {
-		if (!compileButton.isDisposed()) {
+		if ((compileButton != null) && !compileButton.isDisposed()) {
 			compileButton.setText(force ? "Compile" : "Recompile");
 		}
 		CompileJob compileJob2 = compileJob;
