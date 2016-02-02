@@ -49,6 +49,11 @@ public abstract class AbstractQVTbaseASSaverResolveVisitor
 	}
 
 	@Override
+	public @Nullable Object visitDebugTraceBack(org.eclipse.qvtd.pivot.qvtbase.@NonNull DebugTraceBack object) {
+		return visitElement(object);
+	}
+
+	@Override
 	public @Nullable Object visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return visitNamedElement(object);
 	}

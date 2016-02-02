@@ -17,6 +17,11 @@
   <genPackages prefix="QVTbase" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
       contentTypeIdentifier="org.eclipse.qvtd.qvtbase" fileExtensions="qvtbas" ecorePackage="QVTbase.ecore#/">
     <genClasses ecoreClass="QVTbase.ecore#//BaseModel"/>
+    <genClasses ecoreClass="QVTbase.ecore#//DebugTraceBack">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTbase.ecore#//DebugTraceBack/owningTransformation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#//DebugTraceBack/sources"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#//DebugTraceBack/target"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTbase.ecore#//Domain">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTbase.ecore#//Domain/isCheckable"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTbase.ecore#//Domain/isEnforceable"/>
@@ -48,6 +53,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Transformation/rule"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Transformation/extends"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Transformation/ownedContext"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbase.ecore#//Transformation/ownedDebugTraceBacks"/>
       <genOperations ecoreOperation="QVTbase.ecore#//Transformation/getFunction">
         <genParameters ecoreParameter="QVTbase.ecore#//Transformation/getFunction/name"/>
       </genOperations>

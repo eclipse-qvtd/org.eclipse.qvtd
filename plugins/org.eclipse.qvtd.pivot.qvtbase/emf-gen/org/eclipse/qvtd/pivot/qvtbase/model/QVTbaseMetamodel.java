@@ -163,11 +163,13 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		}
 		
 		private final @NonNull Class _Annotation = createClass(PivotPackage.Literals.ANNOTATION);
+		private final @NonNull Class _Element = createClass(PivotPackage.Literals.ELEMENT);
 		private final @NonNull Class _OCLExpression = createClass(PivotPackage.Literals.OCL_EXPRESSION);
 		private final @NonNull Class _Package = createClass(PivotPackage.Literals.PACKAGE);
 		private final @NonNull Class _Variable = createClass(PivotPackage.Literals.VARIABLE);
 		
 		private final @NonNull Class _BaseModel = createClass(QVTbasePackage.Literals.BASE_MODEL);
+		private final @NonNull Class _DebugTraceBack = createClass(QVTbasePackage.Literals.DEBUG_TRACE_BACK);
 		private final @NonNull Class _Domain = createClass(QVTbasePackage.Literals.DOMAIN);
 		private final @NonNull Class _Function = createClass(QVTbasePackage.Literals.FUNCTION);
 		private final @NonNull Class _FunctionParameter = createClass(QVTbasePackage.Literals.FUNCTION_PARAMETER);
@@ -177,20 +179,27 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Class _Transformation = createClass(QVTbasePackage.Literals.TRANSFORMATION);
 		private final @NonNull Class _TypedModel = createClass(QVTbasePackage.Literals.TYPED_MODEL);
 		
+		private final @NonNull BagType _Bag_DebugTraceBack = createBagType(_Bag, _DebugTraceBack);
 		private final @NonNull BagType _Bag_Domain = createBagType(_Bag, _Domain);
 		private final @NonNull BagType _Bag_Pattern = createBagType(_Bag, _Pattern);
 		private final @NonNull BagType _Bag_TypedModel = createBagType(_Bag, _TypedModel);
 		private final @NonNull CollectionType _Collection_Annotation = createCollectionType(_Collection, _Annotation);
+		private final @NonNull CollectionType _Collection_DebugTraceBack = createCollectionType(_Collection, _DebugTraceBack);
 		private final @NonNull CollectionType _Collection_Domain = createCollectionType(_Collection, _Domain);
+		private final @NonNull CollectionType _Collection_Element = createCollectionType(_Collection, _Element);
 		private final @NonNull CollectionType _Collection_Package = createCollectionType(_Collection, _Package);
 		private final @NonNull CollectionType _Collection_Pattern = createCollectionType(_Collection, _Pattern);
 		private final @NonNull CollectionType _Collection_Predicate = createCollectionType(_Collection, _Predicate);
 		private final @NonNull CollectionType _Collection_Rule = createCollectionType(_Collection, _Rule);
 		private final @NonNull CollectionType _Collection_TypedModel = createCollectionType(_Collection, _TypedModel);
 		private final @NonNull CollectionType _Collection_Variable = createCollectionType(_Collection, _Variable);
+		private final @NonNull CollectionType _OrderedCollection_DebugTraceBack = createCollectionType(_OrderedCollection, _DebugTraceBack);
 		private final @NonNull CollectionType _OrderedCollection_Domain = createCollectionType(_OrderedCollection, _Domain);
+		private final @NonNull CollectionType _OrderedCollection_Element = createCollectionType(_OrderedCollection, _Element);
 		private final @NonNull CollectionType _OrderedCollection_TypedModel = createCollectionType(_OrderedCollection, _TypedModel);
+		private final @NonNull OrderedSetType _OrderedSet_DebugTraceBack = createOrderedSetType(_OrderedSet, _DebugTraceBack);
 		private final @NonNull OrderedSetType _OrderedSet_Domain = createOrderedSetType(_OrderedSet, _Domain);
+		private final @NonNull OrderedSetType _OrderedSet_Element = createOrderedSetType(_OrderedSet, _Element);
 		private final @NonNull OrderedSetType _OrderedSet_TypedModel = createOrderedSetType(_OrderedSet, _TypedModel);
 		private final @NonNull SetType _Set_Annotation = createSetType(_Set, _Annotation);
 		private final @NonNull SetType _Set_Package = createSetType(_Set, _Package);
@@ -199,7 +208,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull SetType _Set_TypedModel = createSetType(_Set, _TypedModel);
 		private final @NonNull SetType _Set_Variable = createSetType(_Set, _Variable);
 		private final @NonNull CollectionType _UniqueCollection_Annotation = createCollectionType(_UniqueCollection, _Annotation);
+		private final @NonNull CollectionType _UniqueCollection_DebugTraceBack = createCollectionType(_UniqueCollection, _DebugTraceBack);
 		private final @NonNull CollectionType _UniqueCollection_Domain = createCollectionType(_UniqueCollection, _Domain);
+		private final @NonNull CollectionType _UniqueCollection_Element = createCollectionType(_UniqueCollection, _Element);
 		private final @NonNull CollectionType _UniqueCollection_Package = createCollectionType(_UniqueCollection, _Package);
 		private final @NonNull CollectionType _UniqueCollection_Predicate = createCollectionType(_UniqueCollection, _Predicate);
 		private final @NonNull CollectionType _UniqueCollection_Rule = createCollectionType(_UniqueCollection, _Rule);
@@ -215,6 +226,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _Annotation);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Element);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
 			ownedClasses.add(type = _OCLExpression);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
@@ -227,6 +241,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		
 			ownedClasses = qvtbase.getOwnedClasses();
 			ownedClasses.add(type = _BaseModel);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _DebugTraceBack);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Domain);
@@ -261,6 +278,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			CollectionType type;
 		
 			ownedClasses = orphanage.getOwnedClasses();
+			ownedClasses.add(type = _Bag_DebugTraceBack);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_DebugTraceBack);
 			ownedClasses.add(type = _Bag_Domain);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Domain);
@@ -273,7 +293,13 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _Collection_Annotation);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Collection_DebugTraceBack);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Collection_Domain);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Collection_Element);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Collection_Package);
@@ -294,16 +320,30 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _Collection_Variable);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
+			ownedClasses.add(type = _OrderedCollection_DebugTraceBack);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_DebugTraceBack);
 			ownedClasses.add(type = _OrderedCollection_Domain);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Domain);
+			ownedClasses.add(type = _OrderedCollection_Element);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_Element);
 			ownedClasses.add(type = _OrderedCollection_TypedModel);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_TypedModel);
+			ownedClasses.add(type = _OrderedSet_DebugTraceBack);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OrderedCollection_DebugTraceBack);
+			superClasses.add(_UniqueCollection_DebugTraceBack);
 			ownedClasses.add(type = _OrderedSet_Domain);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OrderedCollection_Domain);
 			superClasses.add(_UniqueCollection_Domain);
+			ownedClasses.add(type = _OrderedSet_Element);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OrderedCollection_Element);
+			superClasses.add(_UniqueCollection_Element);
 			ownedClasses.add(type = _OrderedSet_TypedModel);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OrderedCollection_TypedModel);
@@ -329,9 +369,15 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			ownedClasses.add(type = _UniqueCollection_Annotation);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Annotation);
+			ownedClasses.add(type = _UniqueCollection_DebugTraceBack);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_DebugTraceBack);
 			ownedClasses.add(type = _UniqueCollection_Domain);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Domain);
+			ownedClasses.add(type = _UniqueCollection_Element);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_Element);
 			ownedClasses.add(type = _UniqueCollection_Package);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_Collection_Package);
@@ -368,6 +414,8 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		}
 		
 		private final @NonNull Property pr_Annotation_Transformation_ownedTag = createProperty("Transformation", _Transformation);
+		private final @NonNull Property pr_Element_DebugTraceBack_sources = createProperty("DebugTraceBack", _Bag_DebugTraceBack);
+		private final @NonNull Property pr_Element_DebugTraceBack_target = createProperty("DebugTraceBack", _Bag_DebugTraceBack);
 		private final @NonNull Property pr_OCLExpression_Function_queryExpression = createProperty("Function", _Function);
 		private final @NonNull Property pr_OCLExpression_predicate_conditionExpression = createProperty("predicate", _Predicate);
 		private final @NonNull Property pr_Package_TypedModel_usedPackage = createProperty("TypedModel", _Bag_TypedModel);
@@ -375,6 +423,9 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_Variable_Transformation_ownedContext = createProperty("Transformation", _Transformation);
 		private final @NonNull Property pr_Variable_TypedModel_ownedContext = createProperty("TypedModel", _TypedModel);
 		
+		private final @NonNull Property pr_DebugTraceBack_owningTransformation = createProperty(QVTbasePackage.Literals.DEBUG_TRACE_BACK__OWNING_TRANSFORMATION, _Transformation);
+		private final @NonNull Property pr_DebugTraceBack_sources = createProperty(QVTbasePackage.Literals.DEBUG_TRACE_BACK__SOURCES, _OrderedSet_Element);
+		private final @NonNull Property pr_DebugTraceBack_target = createProperty(QVTbasePackage.Literals.DEBUG_TRACE_BACK__TARGET, _Element);
 		private final @NonNull Property pr_Domain_isCheckable = createProperty(QVTbasePackage.Literals.DOMAIN__IS_CHECKABLE, _Boolean);
 		private final @NonNull Property pr_Domain_isEnforceable = createProperty(QVTbasePackage.Literals.DOMAIN__IS_ENFORCEABLE, _Boolean);
 		private final @NonNull Property pr_Domain_rule = createProperty(QVTbasePackage.Literals.DOMAIN__RULE, _Rule);
@@ -392,6 +443,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		private final @NonNull Property pr_Transformation_extends = createProperty(QVTbasePackage.Literals.TRANSFORMATION__EXTENDS, _Transformation);
 		private final @NonNull Property pr_Transformation_modelParameter = createProperty(QVTbasePackage.Literals.TRANSFORMATION__MODEL_PARAMETER, _OrderedSet_TypedModel);
 		private final @NonNull Property pr_Transformation_ownedContext = createProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_CONTEXT, _Variable);
+		private final @NonNull Property pr_Transformation_ownedDebugTraceBacks = createProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS, _OrderedSet_DebugTraceBack);
 		private final @NonNull Property pr_Transformation_ownedTag = createProperty(QVTbasePackage.Literals.TRANSFORMATION__OWNED_TAG, _Set_Annotation);
 		private final @NonNull Property pr_Transformation_rule = createProperty(QVTbasePackage.Literals.TRANSFORMATION__RULE, _Set_Rule);
 		private final @NonNull Property pr_Transformation_extendedBy_extends = createProperty("extendedBy", _Transformation);
@@ -412,6 +464,16 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Transformation_ownedTag);
+		
+			ownedProperties = _Element.getOwnedProperties();
+			ownedProperties.add(property = pr_Element_DebugTraceBack_sources);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_DebugTraceBack_sources);
+			ownedProperties.add(property = pr_Element_DebugTraceBack_target);
+			property.setIsImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_DebugTraceBack_target);
 		
 			ownedProperties = _OCLExpression.getOwnedProperties();
 			ownedProperties.add(property = pr_OCLExpression_Function_queryExpression);
@@ -446,6 +508,17 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TypedModel_ownedContext);
+		
+			ownedProperties = _DebugTraceBack.getOwnedProperties();
+			ownedProperties.add(property = pr_DebugTraceBack_owningTransformation);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Transformation_ownedDebugTraceBacks);
+			ownedProperties.add(property = pr_DebugTraceBack_sources);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Element_DebugTraceBack_sources);
+			ownedProperties.add(property = pr_DebugTraceBack_target);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Element_DebugTraceBack_target);
 		
 			ownedProperties = _Domain.getOwnedProperties();
 			ownedProperties.add(property = pr_Domain_isCheckable);
@@ -525,6 +598,10 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Variable_Transformation_ownedContext);
+			ownedProperties.add(property = pr_Transformation_ownedDebugTraceBacks);
+			property.setIsComposite(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_DebugTraceBack_owningTransformation);
 			ownedProperties.add(property = pr_Transformation_ownedTag);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
@@ -567,6 +644,8 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		}
 		
 		private void installTemplateBindings() {
+			_Bag_DebugTraceBack.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_Bag_T, _DebugTraceBack)));
 			_Bag_Domain.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Bag_T, _Domain)));
 			_Bag_Pattern.getOwnedBindings().add(createTemplateBinding(
@@ -575,8 +654,12 @@ public class QVTbaseMetamodel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Bag_T, _TypedModel)));
 			_Collection_Annotation.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Collection_T, _Annotation)));
+			_Collection_DebugTraceBack.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_Collection_T, _DebugTraceBack)));
 			_Collection_Domain.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Collection_T, _Domain)));
+			_Collection_Element.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_Collection_T, _Element)));
 			_Collection_Package.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Collection_T, _Package)));
 			_Collection_Pattern.getOwnedBindings().add(createTemplateBinding(
@@ -589,12 +672,20 @@ public class QVTbaseMetamodel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _TypedModel)));
 			_Collection_Variable.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_Collection_T, _Variable)));
+			_OrderedCollection_DebugTraceBack.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_OrderedCollection_T, _DebugTraceBack)));
 			_OrderedCollection_Domain.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_OrderedCollection_T, _Domain)));
+			_OrderedCollection_Element.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_OrderedCollection_T, _Element)));
 			_OrderedCollection_TypedModel.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_OrderedCollection_T, _TypedModel)));
+			_OrderedSet_DebugTraceBack.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_OrderedSet_T, _DebugTraceBack)));
 			_OrderedSet_Domain.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_OrderedSet_T, _Domain)));
+			_OrderedSet_Element.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_OrderedSet_T, _Element)));
 			_OrderedSet_TypedModel.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_OrderedSet_T, _TypedModel)));
 			_Set_Annotation.getOwnedBindings().add(createTemplateBinding(
@@ -611,8 +702,12 @@ public class QVTbaseMetamodel extends ASResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _Variable)));
 			_UniqueCollection_Annotation.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Annotation)));
+			_UniqueCollection_DebugTraceBack.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_UniqueCollection_T, _DebugTraceBack)));
 			_UniqueCollection_Domain.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Domain)));
+			_UniqueCollection_Element.getOwnedBindings().add(createTemplateBinding(
+				createTemplateParameterSubstitution(_UniqueCollection_T, _Element)));
 			_UniqueCollection_Package.getOwnedBindings().add(createTemplateBinding(
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Package)));
 			_UniqueCollection_Predicate.getOwnedBindings().add(createTemplateBinding(

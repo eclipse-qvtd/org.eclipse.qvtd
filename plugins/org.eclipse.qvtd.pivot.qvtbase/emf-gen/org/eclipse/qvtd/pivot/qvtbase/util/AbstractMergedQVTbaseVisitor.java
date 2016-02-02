@@ -39,6 +39,11 @@ public abstract class AbstractMergedQVTbaseVisitor<R, C>
 	}
 
 	@Override
+	public R visitDebugTraceBack(org.eclipse.qvtd.pivot.qvtbase.@NonNull DebugTraceBack object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return visiting(object);
 	}

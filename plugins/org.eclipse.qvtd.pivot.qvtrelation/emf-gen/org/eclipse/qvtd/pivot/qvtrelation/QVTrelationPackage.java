@@ -1137,6 +1137,15 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATIONAL_TRANSFORMATION__OWNED_CONTEXT = QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT;
 
 	/**
+	 * The feature id for the '<em><b>Owned Debug Trace Backs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATIONAL_TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS = QVTbasePackage.TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS;
+
+	/**
 	 * The feature id for the '<em><b>Owned Key</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -34,6 +34,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
+import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -156,6 +157,11 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		csAssignment.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asConnectionAssignment.getValue()));
 		assert !asConnectionAssignment.isIsDefault();
 		return csAssignment;
+	}
+
+	@Override
+	public ElementCS visitDebugTraceBack(@NonNull DebugTraceBack object) {
+		return visiting(object);
 	}
 
 	@Override

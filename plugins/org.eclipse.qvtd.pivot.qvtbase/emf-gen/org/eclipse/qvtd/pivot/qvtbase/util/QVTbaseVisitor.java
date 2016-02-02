@@ -24,6 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface QVTbaseVisitor<R> extends org.eclipse.ocl.pivot.util.Visitor<R>
 {
 	R visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull BaseModel object);
+	R visitDebugTraceBack(org.eclipse.qvtd.pivot.qvtbase.@NonNull DebugTraceBack object);
 	R visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object);
 	R visitFunction(org.eclipse.qvtd.pivot.qvtbase.@NonNull Function object);
 	R visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object);

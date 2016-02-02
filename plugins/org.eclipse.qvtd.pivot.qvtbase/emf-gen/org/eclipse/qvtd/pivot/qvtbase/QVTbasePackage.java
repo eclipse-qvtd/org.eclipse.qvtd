@@ -173,6 +173,88 @@ public interface QVTbasePackage extends EPackage {
 	int BASE_MODEL_FEATURE_COUNT = PivotPackage.MODEL_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.DebugTraceBackImpl <em>Debug Trace Back</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtbase.impl.DebugTraceBackImpl
+	 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getDebugTraceBack()
+	 * @generated
+	 */
+	int DEBUG_TRACE_BACK = 1;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_TRACE_BACK__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_TRACE_BACK__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_TRACE_BACK__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_TRACE_BACK__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Transformation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_TRACE_BACK__OWNING_TRANSFORMATION = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Sources</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_TRACE_BACK__SOURCES = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_TRACE_BACK__TARGET = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Debug Trace Back</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_TRACE_BACK_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl <em>Domain</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -180,7 +262,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getDomain()
 	 * @generated
 	 */
-	int DOMAIN = 1;
+	int DOMAIN = 2;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -280,7 +362,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getFunction()
 	 * @generated
 	 */
-	int FUNCTION = 2;
+	int FUNCTION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -542,7 +624,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getFunctionParameter()
 	 * @generated
 	 */
-	int FUNCTION_PARAMETER = 3;
+	int FUNCTION_PARAMETER = 4;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -687,7 +769,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getPattern()
 	 * @generated
 	 */
-	int PATTERN = 4;
+	int PATTERN = 5;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -760,7 +842,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getPredicate()
 	 * @generated
 	 */
-	int PREDICATE = 5;
+	int PREDICATE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -833,7 +915,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getRule()
 	 * @generated
 	 */
-	int RULE = 6;
+	int RULE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -942,7 +1024,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getTransformation()
 	 * @generated
 	 */
-	int TRANSFORMATION = 7;
+	int TRANSFORMATION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1170,13 +1252,22 @@ public interface QVTbasePackage extends EPackage {
 	int TRANSFORMATION__OWNED_CONTEXT = PivotPackage.CLASS_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Owned Debug Trace Backs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS = PivotPackage.CLASS_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Transformation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_FEATURE_COUNT = PivotPackage.CLASS_FEATURE_COUNT + 5;
+	int TRANSFORMATION_FEATURE_COUNT = PivotPackage.CLASS_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl <em>Typed Model</em>}' class.
@@ -1186,7 +1277,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getTypedModel()
 	 * @generated
 	 */
-	int TYPED_MODEL = 8;
+	int TYPED_MODEL = 9;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1288,6 +1379,49 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBaseModel();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack <em>Debug Trace Back</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Debug Trace Back</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack
+	 * @generated
+	 */
+	EClass getDebugTraceBack();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack#getOwningTransformation <em>Owning Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Transformation</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack#getOwningTransformation()
+	 * @see #getDebugTraceBack()
+	 * @generated
+	 */
+	EReference getDebugTraceBack_OwningTransformation();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack#getSources <em>Sources</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Sources</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack#getSources()
+	 * @see #getDebugTraceBack()
+	 * @generated
+	 */
+	EReference getDebugTraceBack_Sources();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack#getTarget()
+	 * @see #getDebugTraceBack()
+	 * @generated
+	 */
+	EReference getDebugTraceBack_Target();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.Domain <em>Domain</em>}'.
@@ -1569,6 +1703,17 @@ public interface QVTbasePackage extends EPackage {
 	EReference getTransformation_OwnedContext();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getOwnedDebugTraceBacks <em>Owned Debug Trace Backs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Debug Trace Backs</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Transformation#getOwnedDebugTraceBacks()
+	 * @see #getTransformation()
+	 * @generated
+	 */
+	EReference getTransformation_OwnedDebugTraceBacks();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel <em>Typed Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1653,6 +1798,40 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EClass BASE_MODEL = eINSTANCE.getBaseModel();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.DebugTraceBackImpl <em>Debug Trace Back</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.DebugTraceBackImpl
+		 * @see org.eclipse.qvtd.pivot.qvtbase.impl.QVTbasePackageImpl#getDebugTraceBack()
+		 * @generated
+		 */
+		EClass DEBUG_TRACE_BACK = eINSTANCE.getDebugTraceBack();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Transformation</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEBUG_TRACE_BACK__OWNING_TRANSFORMATION = eINSTANCE.getDebugTraceBack_OwningTransformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEBUG_TRACE_BACK__SOURCES = eINSTANCE.getDebugTraceBack_Sources();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEBUG_TRACE_BACK__TARGET = eINSTANCE.getDebugTraceBack_Target();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl <em>Domain</em>}' class.
@@ -1875,6 +2054,14 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSFORMATION__OWNED_CONTEXT = eINSTANCE.getTransformation_OwnedContext();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Debug Trace Backs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS = eINSTANCE.getTransformation_OwnedDebugTraceBacks();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl <em>Typed Model</em>}' class.

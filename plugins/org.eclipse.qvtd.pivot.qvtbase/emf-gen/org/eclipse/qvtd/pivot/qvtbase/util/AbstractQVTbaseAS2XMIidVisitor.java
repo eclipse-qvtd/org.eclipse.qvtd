@@ -49,6 +49,11 @@ public abstract class AbstractQVTbaseAS2XMIidVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitDebugTraceBack(org.eclipse.qvtd.pivot.qvtbase.@NonNull DebugTraceBack object) {
+		return visitElement(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return visitNamedElement(object);
 	}

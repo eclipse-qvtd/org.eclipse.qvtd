@@ -44,6 +44,18 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 	}
 
 	@Override
+	public R visitDebugTraceBack(org.eclipse.qvtd.pivot.qvtbase.@NonNull DebugTraceBack object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitDebugTraceBack(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		@Nullable P prologue = preVisit(object);
 		try {

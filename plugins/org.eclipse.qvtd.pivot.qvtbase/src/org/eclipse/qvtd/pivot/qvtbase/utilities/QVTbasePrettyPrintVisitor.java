@@ -15,6 +15,7 @@ import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.internal.prettyprint.EssentialOCLPrettyPrintVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -34,6 +35,11 @@ public class QVTbasePrettyPrintVisitor extends EssentialOCLPrettyPrintVisitor im
 	@Override
 	public Object visitBaseModel(@NonNull BaseModel object) {
 		return super.visitModel(object);
+	}
+
+	@Override
+	public Object visitDebugTraceBack(@NonNull DebugTraceBack object) {
+		return null;
 	}
 
 	@Override

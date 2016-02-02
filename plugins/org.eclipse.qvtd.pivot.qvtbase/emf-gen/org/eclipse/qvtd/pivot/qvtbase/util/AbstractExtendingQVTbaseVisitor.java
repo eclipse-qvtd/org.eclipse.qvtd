@@ -45,6 +45,11 @@ public abstract class AbstractExtendingQVTbaseVisitor<R, C>
 	}
 
 	@Override
+	public R visitDebugTraceBack(org.eclipse.qvtd.pivot.qvtbase.@NonNull DebugTraceBack object) {
+		return visitElement(object);
+	}
+
+	@Override
 	public R visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return visitNamedElement(object);
 	}

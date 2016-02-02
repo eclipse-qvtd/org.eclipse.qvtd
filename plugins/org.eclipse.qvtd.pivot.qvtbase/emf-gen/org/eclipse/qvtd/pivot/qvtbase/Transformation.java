@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.Variable;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getRule <em>Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getOwnedContext <em>Owned Context</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getOwnedDebugTraceBacks <em>Owned Debug Trace Backs</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTransformation()
@@ -139,6 +140,24 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * @generated
 	 */
 	void setOwnedContext(Variable value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Debug Trace Backs</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack#getOwningTransformation <em>Owning Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Debug Trace Backs</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Debug Trace Backs</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTransformation_OwnedDebugTraceBacks()
+	 * @see org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack#getOwningTransformation
+	 * @model opposite="owningTransformation" containment="true"
+	 * @generated
+	 */
+	@NonNull EList<DebugTraceBack> getOwnedDebugTraceBacks();
 
 	/**
 	 * <!-- begin-user-doc -->

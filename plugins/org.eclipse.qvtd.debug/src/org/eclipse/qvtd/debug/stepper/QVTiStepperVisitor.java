@@ -16,6 +16,7 @@ import org.eclipse.ocl.examples.debug.stepper.NonStepper;
 import org.eclipse.ocl.examples.debug.stepper.OCLStepperVisitor;
 import org.eclipse.ocl.examples.debug.stepper.PostStepper;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
+import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -53,6 +54,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	@Override
 	public @Nullable IStepper visitBottomPattern(@NonNull BottomPattern object) {
 		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitDebugTraceBack(@NonNull DebugTraceBack object) {
+		return visiting(object);
 	}
 
 	@Override
