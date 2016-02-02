@@ -102,7 +102,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					// assign
 					TypedModel mdir = null;
 					for (TypedModel tm : mt.getModelParameter()) {
-						if (tm.getName().equals(tmn)) {
+						if (tmn.equals(tm.getName())) {
 							if (tm.getUsedPackage().equals(up)) {
 								mdir = tm;
 								break;

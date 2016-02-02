@@ -40,7 +40,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 		//	Create the middle TypedModel
 		//
 		@NonNull TypedModel coreMiddleTypedModel =  QVTbaseFactory.eINSTANCE.createTypedModel();
-		coreMiddleTypedModel.setName("");
+		coreMiddleTypedModel.setName(null);
 		coreMiddleTypedModel.getUsedPackage().add(corePackage);
 		coreModelParameters.add(coreMiddleTypedModel);
 		//
