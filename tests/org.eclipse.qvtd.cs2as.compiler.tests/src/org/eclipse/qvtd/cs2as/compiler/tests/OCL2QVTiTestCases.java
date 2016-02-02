@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -235,31 +234,16 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 
 	// For testing purpose
-	private static class OCL2QVTiBrokerTester extends OCL2QVTiBroker {
+	private static class OCL2QVTiCompilerTester extends OCL2QVTiCompilerChain {
 
-		public OCL2QVTiBrokerTester(@NonNull URI baseURI, @NonNull String oclDocName, @NonNull OCL metaModelManager)
-				throws Exception {
-			super(baseURI, oclDocName, metaModelManager, TestsXMLUtil.defaultSavingOptions);
+		public OCL2QVTiCompilerTester(@NonNull URI baseURI, @NonNull String oclDocName, @NonNull QVTimperative metaModelManager) {
+			super(metaModelManager, null, "ast", baseURI.appendSegment(oclDocName));
 		}
-
-
-		public OCL2QVTiBrokerTester(@NonNull URI baseURI, @NonNull String oclDocName, @NonNull OCL metaModelManager, boolean middleFolded)
-				throws Exception {
-			super(baseURI, oclDocName, metaModelManager, TestsXMLUtil.defaultSavingOptions, middleFolded, null);
-		}
-
+	
 		// For testing purpose
 		@Override
-		protected PivotModel runOCL2QVTp_MiddleModel(URI oclDocURI, URI qvtiFileURI, URI tracesMMURI)
-				throws QvtMtcExecutionException {
-			return super.runOCL2QVTp_MiddleModel(oclDocURI, qvtiFileURI, tracesMMURI);
-		}
-
-		// For testing purpose
-		@Override
-		protected PivotModel runOCL2QVTp_MiddleFolded(URI oclDocURI, URI qvtiFileURI)
-				throws QvtMtcExecutionException {
-			return super.runOCL2QVTp_MiddleFolded(oclDocURI, qvtiFileURI);
+		protected Resource ocl2qvtp(URI oclDocURI) {
+			return super.ocl2qvtp(oclDocURI);
 		}
 	}
 
@@ -277,7 +261,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 
 	@Test
-	public void testNewExample1_CG() throws Exception {
+	public void testExample1_CG() throws Exception {
 		MyQVT myQVT = new MyQVT("example1");
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2Target.ocl");
@@ -293,7 +277,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 	
 	@Test
-	public void testNewExample1_Interpreted() throws Exception {
+	public void testExample1_Interpreted() throws Exception {
 		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = new MyQVT("example1");
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
@@ -320,8 +304,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI oclDocURI = baseURI.appendSegment("Source2Target.ocl.oclas");
 		URI qvtpFileURI = baseURI.appendSegment("Source2Target.qvtp.qvtcas");
 
-		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "Source2Target.ocl", myQVT);
-		mtc.runOCL2QVTp_MiddleFolded(oclDocURI, qvtpFileURI);
+		OCL2QVTiCompilerTester mtc = new OCL2QVTiCompilerTester(baseURI, "Source2Target.ocl", myQVT);
+		mtc.ocl2qvtp(oclDocURI);
 		// Test the QVTp transformation can be loaded
 		assertValidQVTiModel(qvtpFileURI);
 		myQVT.dispose();
@@ -329,7 +313,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	
 
 	@Test
-	public void testNewExample2_CG() throws Exception {
+	public void testExample2_CG() throws Exception {
 //		Scheduler.EDGE_ORDER.setState(true);
 //		Scheduler.REGION_DEPTH.setState(true);
 //		Scheduler.REGION_ORDER.setState(true);
@@ -356,7 +340,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 	
 	@Test
-	public void testNewExample2_Interpreted() throws Exception {
+	public void testExample2_Interpreted() throws Exception {
 		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
@@ -381,7 +365,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 
 	@Test
-	public void testNewExample2_V2_CG() throws Exception {
+	public void testExample2_V2_CG() throws Exception {
 //		Scheduler.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 //		Scheduler.DUMP_CLASS_TO_CONTAINING_PROPERTIES.setState(true);
 //		Scheduler.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
@@ -417,7 +401,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 	
 	@Test
-	public void testNewExample2_V2_Interpreted() throws Exception {
+	public void testExample2_V2_Interpreted() throws Exception {
 		testCaseAppender.uninstall();	// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
@@ -461,8 +445,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
 		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtcas");
 
-		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "classescs2as.ocl", myQVT);
-		mtc.runOCL2QVTp_MiddleFolded(oclDocURI, qvtpFileURI);
+		OCL2QVTiCompilerTester mtc = new OCL2QVTiCompilerTester(baseURI, "classescs2as.ocl", myQVT);
+		mtc.ocl2qvtp(oclDocURI);
 		// Test the QVTp transformation can be loaded
 		assertValidQVTiModel(qvtpFileURI);
 		myQVT.dispose();
@@ -491,63 +475,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}*/
 	
 	
-	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler
-//	@Test
-//	public void testExample3_Interpreted() throws Exception {
-//
-//		URI baseURI = TESTS_BASE_URI.appendSegment("example3");
-//		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("KiamaRewrite.ocl");
-//    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
-//	}
-*/	
-	
-	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler 
 	@Test
 	public void testExample4_CG() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
-
-		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("SimplerKiama.ocl");
-
-		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
-				"",
-				"",
-				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
-		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
-			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
-
-		// To avoid metamodel schizophrenia
-		myQVT.dispose();
-		myQVT = new MyQVT();
-
-		// Execute CGed transformation
-		myQVT.executeModelsTX_CG(txClass, "model1");
-	}*/
-	
-	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler
-	@Test
-	public void testExample4_Interpreted() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
-		InstallMap installMap = new InstallMap(baseURI);
-		installMap.install(KiamacsPackage.eINSTANCE, "SimplerKiamaCS.ecore");
-		installMap.install(KiamaasPackage.eINSTANCE, "SimplerKiamaAS.ecore");
-		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("SimplerKiama.ocl");
-		
-		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
-		myQVT.dispose();
-		myQVT = new MyQVT();		
-		myQVT.getEnvironmentFactory().configureLoadStrategy(StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
-				
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());		
-// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
-//    	myQVT.executeModelsTX_Interpreted(tx, "model0");
-    	myQVT.executeModelsTX_Interpreted(tx, "model1");
-// FIXME fails    	myQVT.executeModelsTX_Interpreted(tx, "model2");
-//    	myQVT.executeModelsTX_Interpreted(tx, "model3");
-    	installMap.uninstall();
-	}*/
-	
-	@Test
-	public void testNewExample4_CG() throws Exception {
 //		CommonSubexpressionEliminator.CSE_BUILD.setState(true);
 //		CommonSubexpressionEliminator.CSE_PLACES.setState(true);
 //		CommonSubexpressionEliminator.CSE_PRUNE.setState(true);
@@ -576,7 +505,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 	
 	@Test
-	public void testNewExample4_Interpreted() throws Exception {
+	public void testExample4_Interpreted() throws Exception {
 		MyQVT myQVT = new MyQVT("example4");
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("SimplerKiama.ocl");
@@ -735,7 +664,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		
 	}
 	
-// FIXME move following clones to a Util class
+	// FIXME move following clones to a Util class
 	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
 		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, QVTimperativeCSPackage.eCONTENT_TYPE));
 		ocl.as2cs(asResource, (CSResource) xtextResource);
