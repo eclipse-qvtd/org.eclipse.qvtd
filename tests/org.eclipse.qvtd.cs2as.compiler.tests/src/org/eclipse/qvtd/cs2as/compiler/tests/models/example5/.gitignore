@@ -13,3 +13,5 @@
 /SourceDerivedMMContainmentTree.xmi
 /TargetBaseMMContainmentTree.xmi
 /TargetDerivedMMContainmentTree.xmi
+/*.dot
+/*.graphml
