@@ -194,6 +194,8 @@ public class QVTm2QVTp
 				for (@SuppressWarnings("null")@NonNull Assignment aIn : mIn.getBottomPattern().getAssignment()) {
 					mOut.getBottomPattern().getAssignment().add(create(aIn));
 				}
+				createAll(mIn.getBottomPattern().getPredicate(), mOut.getBottomPattern().getPredicate());
+				createAll(mIn.getBottomPattern().getVariable(), mOut.getBottomPattern().getVariable());
 			}
 			//
 			// LMR.M to LM.R
