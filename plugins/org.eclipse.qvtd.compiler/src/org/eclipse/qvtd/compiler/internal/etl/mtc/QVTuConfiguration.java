@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.etl.mtc;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
@@ -72,11 +73,12 @@ public class QVTuConfiguration
 	/**
 	 * Gets the area.
 	 */
-	private @Nullable Area getArea(Variable expV) {
-		if (expV.getType() != null) {
-			CorePattern cp = oppositePattern(expV);
-			if (cp!= null)
-			return cp.getArea();
+	private @Nullable Area getArea(@Nullable Variable expV) {
+		if ((expV != null) && (expV.getType() != null)) {
+			CorePattern cp = parentPattern(expV);
+			if (cp != null) {
+				return cp.getArea();
+			}
 		}
 		return null;
 	}
@@ -159,13 +161,13 @@ public class QVTuConfiguration
 	/**
 	 * Checks if is middle to middle.
 	 */
-	public boolean isMtoM(VariableAssignment a) {
+	public boolean isMtoM(@NonNull VariableAssignment a) {
 		return isMiddleDomain(getArea(a.getTargetVariable())) &&
 				anyReferencedBottomMiddleDomainVariables(a.getValue());
 	}
 	private boolean anyReferencedBottomMiddleDomainVariables(OCLExpression value) {
 		for (Variable v : MtcUtil.findReferencedVariables(value)) {
-			if (isMiddleDomain(getArea(v)) && (oppositePattern(v) instanceof BottomPattern)) {
+			if (isMiddleDomain(getArea(v)) && (parentPattern(v) instanceof BottomPattern)) {
 				return true;
 			}
 		}
@@ -175,20 +177,22 @@ public class QVTuConfiguration
 	/**
 	 * Checks if is output domain.
 	 */
-	public boolean isOutputDomain(Area area) {
+	public boolean isOutputDomain(@Nullable Area area) {
         return (area instanceof CoreDomain) && outputs.contains(((CoreDomain)area).getTypedModel().getName());
 	}
 
 	/**
 	 * Is a Right to Middle assignment.
 	 */
-	public boolean isRtoM(PropertyAssignment a) {
+	public boolean isRtoM(@NonNull PropertyAssignment a) {
+		OCLExpression value = a.getValue();
+		assert value != null;
 		return isFromMiddleDomain(a.getSlotExpression()) &&
-				!(a.getValue() instanceof VariableExp) &&
-				!(a.getValue() instanceof NullLiteralExp) &&
-				allMatchReferencedOutputDomainVariables(a.getValue());
+				!(value instanceof VariableExp) &&
+				!(value instanceof NullLiteralExp) &&
+				allMatchReferencedOutputDomainVariables(value);
 	}
-	private boolean allMatchReferencedOutputDomainVariables(OCLExpression value) {
+	private boolean allMatchReferencedOutputDomainVariables(@NonNull OCLExpression value) {
 		for (Variable v : MtcUtil.findReferencedVariables(value)) {
 			if (!isOutputDomain(getArea(v))) {
 				return false;
@@ -198,21 +202,24 @@ public class QVTuConfiguration
 	}
 
 	/**
-	 * Checks if is rto m.
+	 * Checks if is to m.
 	 */
-	public boolean isRtoM(VariableAssignment a) {
+	public boolean isRtoM(@NonNull VariableAssignment a) {
+		OCLExpression value = a.getValue();
+		assert value != null;
 		return isMiddleDomain(getArea(a.getTargetVariable())) &&
-				!(a.getValue() instanceof VariableExp) &&
+				!(value instanceof VariableExp) &&
 				// TODO variable assignments to null? !(a.getValue() instanceof NullLiteralExp) &&
-				allMatchReferencedOutputDomainVariables(a.getValue());
+				allMatchReferencedOutputDomainVariables(value);
 	}
 
     /**
-     * Opposite pattern.
+     * Parent pattern or null.
      */
-    private CorePattern oppositePattern(Variable expV) {
-		if (expV.eContainer() instanceof CorePattern)
-			return (CorePattern) expV.eContainer();
+    private CorePattern parentPattern(@NonNull Variable expV) {
+		EObject eContainer = expV.eContainer();
+		if (eContainer instanceof CorePattern)
+			return (CorePattern) eContainer;
 		return null;
 	}
 	
