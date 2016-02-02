@@ -1,165 +1,243 @@
+/*******************************************************************************
+ * Copyright (c) 2016 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial research
+ *     E.D.Willink - initial API and implementation based on MtcBroker
+ ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.etl.mtc;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Class;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.etl.utils.MtcUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
-import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
+import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
-public class QVTc2QVTu
+public class QVTc2QVTu extends AbstractQVTc2QVTc
 {
-	private final @NonNull EnvironmentFactory environmentFactory;
-	private final @NonNull QVTuConfiguration qvtuConfiguration;
-	private final @NonNull Map<@NonNull Variable, @NonNull Variable> refinedVars = new HashMap<@NonNull Variable, @NonNull Variable>();
-
-	public QVTc2QVTu(@NonNull EnvironmentFactory environmentFactory, @NonNull QVTuConfiguration qvtuConfiguration) {
-		super();
-        this.environmentFactory = environmentFactory;
-        this.qvtuConfiguration = qvtuConfiguration;
-	}
-	
-	public void execute(@NonNull CoreModel model) {
-
-        for (org.eclipse.ocl.pivot.Package p : model.getOwnedPackages()) {
-            for (Class c : p.getOwnedClasses()) {
-                if (c instanceof Transformation) {
-                    direct((Transformation) c);
-                }
-            }
-        }
-    }
-	
-	/**
-	 * Using the desired direction:
-	 * 	Remove assignments in the unwanted direction
-	 *  Change out-to-middle assignments to predicates
-	 *  Change input realized variables to variables  
-	 * @param t
-	 */
-	private void direct(@NonNull Transformation t) {
-		for (Rule r : ClassUtil.nullFree(t.getRule())) {
-			migrateVariables((Mapping) r);
-            direct((Mapping) r);
-        }
-		// Delete rv from model
-		for (Variable rv : refinedVars.keySet()) {
-			EcoreUtil.delete(rv, true);
+	protected class CreateVisitor extends AbstractCreateVisitor<QVTc2QVTu>
+	{
+		public CreateVisitor(@NonNull QVTc2QVTu context) {
+			super(QVTc2QVTu.this);
 		}
-	}
-	
-	private void migrateVariables(@NonNull Mapping m) {
 		
-		changeRealizedToVariable(m);
-		fixRealizedVariableReferences(m);
-	}
-	
-	private void fixRealizedVariableReferences(@NonNull Mapping m) {
-		for (Domain d : ClassUtil.nullFree(m.getDomain())) {
-			MtcUtil.fixReferences((Area) d, refinedVars);
-		}
-		MtcUtil.fixReferences(m, refinedVars);
-		for (Mapping lm : ClassUtil.nullFree(m.getLocal())) {
-			fixRealizedVariableReferences(lm);
-		}
-		// Extending mappings can also have references that need fixing
-//		for (Mapping rm : m.getRefinement()) {
-//			fixRealizedVariableReferences(rm);
-//		}
-	}
-	
-	private void changeRealizedToVariable(@NonNull Mapping m) {
-		for (Domain d : m.getDomain()) {
-			if (qvtuConfiguration.isInputDomain((Area) d)) {
-				for (RealizedVariable rv : ((Area) d).getBottomPattern().getRealizedVariable()) {
-					//References to rv must be fixed
-					Variable v = PivotFactory.eINSTANCE.createVariable();
-					v.setName(rv.getName());
-					v.setType(rv.getType());
-					((Area) d).getBottomPattern().getVariable().add(v);
-					refinedVars.put(rv, v);
+		//
+		//	Assignments may mutate to Predicates.
+		//
+		@Override
+		protected void doAssignments(@NonNull BottomPattern bIn, @NonNull BottomPattern bOut) {
+			for (@NonNull Assignment aIn : ClassUtil.nullFree(bIn.getAssignment())) {
+				Element aOut = create(aIn);
+				if (aOut instanceof Predicate) {
+					bOut.getPredicate().add((Predicate) aOut);
+				}
+				else if (aOut instanceof Assignment) {
+					bOut.getAssignment().add((Assignment) aOut);
+				}
+				else if (aOut != null) {
+					throw new UnsupportedOperationException();
 				}
 			}
 		}
-		for (Mapping lm : ClassUtil.nullFree(m.getLocal())) {
-			changeRealizedToVariable(lm);
-		}
-	}
 
-	private void direct(@NonNull Mapping m) {
-		// Delete Assignments
-		for (PropertyAssignment a : MtcUtil.getAllPropertyAssignments(m)) {
-			if (/*qvtuConfiguration.isMtoL(a) ||*/ qvtuConfiguration.isRtoM(a) || qvtuConfiguration.isLocaltoM(a)) {
-				EcoreUtil.delete(a, true);
-			} else if (qvtuConfiguration.isMtoL(a)) {
-				// Assignments to Predicates
-				Predicate pOUt = QVTbaseFactory.eINSTANCE.createPredicate();
-	            pOUt.setConditionExpression(MtcUtil.assignmentToOclExp(a, environmentFactory));
-	            CorePattern cp = (CorePattern) a.eContainer();
-	            EcoreUtil.delete(a, true);
-	            cp.getPredicate().add(pOUt);
-			} else if (qvtuConfiguration.isFromInputDomain(a.getSlotExpression()) &&
-					allReferencedVariablesInInputDomain(a)) {
-				// Assignments to Predicates
-				Predicate pOUt = QVTbaseFactory.eINSTANCE.createPredicate();
-	            pOUt.setConditionExpression(MtcUtil.assignmentToOclExp(a, environmentFactory));
-	            CorePattern cp = (CorePattern) a.eContainer();
-	            EcoreUtil.delete(a, true);
-	            cp.getPredicate().add(pOUt);
-			} else if(qvtuConfiguration.isCheckMode() &&
-					a.isIsDefault() &&
-					qvtuConfiguration.isOutputDomain(a.getBottomPattern().getArea())
-					) {
-				// Default assignments
-				a.setIsDefault(false);
+		//
+		//	RealizedVariables may mutate to Variables.
+		//
+		@Override
+		protected void doRealizedVariables(@NonNull BottomPattern bIn, @NonNull BottomPattern bOut) {
+			for (RealizedVariable rvIn : ClassUtil.nullFree(bIn.getRealizedVariable())) {
+				Variable vOut = create(rvIn);
+				if (vOut instanceof RealizedVariable) {
+					bOut.getRealizedVariable().add((RealizedVariable) vOut);
+				}
+				else {
+					bOut.getVariable().add(vOut);
+				}
 			}
 		}
-		for (VariableAssignment a : MtcUtil.getAllVariableAssignments(m)) {
-			if (qvtuConfiguration.isMtoL(a) || qvtuConfiguration.isRtoM(a) || qvtuConfiguration.isMtoM(a)) {
-				EcoreUtil.delete(a, true);
-			}
-		}
-		for (Predicate p : MtcUtil.getAllPredicates(m)) {
-			if (p.getPattern() instanceof BottomPattern &&
-					allReferencedVariablesInOutputDomain(p)) {
-				EcoreUtil.delete(p, true);
-			}
-		}
-		for (Domain d : m.getDomain()) {
-			d.setName(d.getTypedModel().getName());			// Redundant replication of Epsilon functionality
-			if (qvtuConfiguration.isInputDomain((Area) d)) {
-				d.setIsEnforceable(false);
-				d.setIsCheckable(true);
+
+		//
+		//	CoreDomains enforcement is aligned to the direction
+		//
+		@Override
+		public @NonNull CoreDomain visitCoreDomain(@NonNull CoreDomain dIn) {
+			CoreDomain dOut = super.visitCoreDomain(dIn);
+			dOut.setName(dIn.getTypedModel().getName());			// Redundant replication of Epsilon functionality
+			if (context.qvtuConfiguration.isInputDomain(dIn)) {
+				dOut.setIsEnforceable(false);
+				dOut.setIsCheckable(true);
 			} else {
 				if (qvtuConfiguration.isCheckMode()) {
-					d.setIsEnforceable(false);
+					dOut.setIsEnforceable(false);
 				} else if (qvtuConfiguration.isEnforceMode()) {
-					d.setIsCheckable(false);
+					dOut.setIsCheckable(false);
 				}
 			}
+			return dOut;
 		}
-		for (Mapping lm : ClassUtil.nullFree(m.getLocal())) {
-			direct(lm);
+
+		@Override
+		public @NonNull CoreModel visitCoreModel(@NonNull CoreModel mIn) {
+			CoreModel mOut = super.visitCoreModel(mIn);
+			mOut.setExternalURI(mIn.getExternalURI().replace(".qvtcas", ".qvtu.qvtcas"));
+			return mOut;
 		}
+
+		//
+		//	Output only bottom predicates are discarded.
+		//
+		@Override
+		public @Nullable Element visitPredicate(@NonNull Predicate pIn) {
+			if ((pIn.getPattern() instanceof BottomPattern) && allReferencedVariablesInOutputDomain(pIn)) {
+				return null;
+			}
+			return super.visitPredicate(pIn);
+		}
+
+		//
+		//	Right-to-Middle and Local-to-Middle property assignments are discarded.
+		//	Left-to-Left and Middle-to-Left property assignments change to predicates.
+		//	Left defaults are non-defaults.
+		//
+		@Override
+		public @Nullable Element visitPropertyAssignment(@NonNull PropertyAssignment paIn) {
+			if (qvtuConfiguration.isRtoM(paIn) || qvtuConfiguration.isLocaltoM(paIn)) {
+				return null;
+			}
+			if (qvtuConfiguration.isMtoL(paIn)) {
+				// Assignments to Predicates
+				Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
+				context.addTrace(paIn, pOut);
+	            pOut.setConditionExpression(MtcUtil.assignmentToOclExp(paIn, environmentFactory));
+	            return pOut;
+			}
+			if (qvtuConfiguration.isFromInputDomain(paIn.getSlotExpression()) && allReferencedVariablesInInputDomain(paIn)) {
+				// Assignments to Predicates
+				Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
+				context.addTrace(paIn, pOut);
+				pOut.setConditionExpression(MtcUtil.assignmentToOclExp(paIn, environmentFactory));
+	            return pOut;
+			}
+			if (qvtuConfiguration.isCheckMode() && paIn.isIsDefault() &&
+					qvtuConfiguration.isOutputDomain(paIn.getBottomPattern().getArea())
+					) {
+				// Default assignments
+				Element paOut = super.visitPropertyAssignment(paIn);
+				assert paOut != null;
+				((PropertyAssignment)paOut).setIsDefault(false);
+				return paOut;
+			}
+			return super.visitPropertyAssignment(paIn);
+		}
+
+		//
+		//	Input domain RealizedVariables are changed to unrealized Variables.
+		//
+		@Override
+		public @NonNull Variable visitRealizedVariable(@NonNull RealizedVariable rvIn) {
+			Area aIn = QVTcoreBaseUtil.getContainingArea(rvIn);
+			if (context.qvtuConfiguration.isInputDomain(aIn)) {
+				Variable vOut = PivotFactory.eINSTANCE.createVariable();
+				assert vOut != null;
+				context.addTrace(rvIn, vOut);
+				vOut.setName(rvIn.getName());
+				vOut.setType(rvIn.getType());
+				vOut.setIsRequired(rvIn.isIsRequired());
+		        return vOut;
+			}
+			else {
+				return super.visitRealizedVariable(rvIn);
+			}
+		}
+
+		//
+		//	Right-to-Middle and Middle-to-Middle variable assignments are discarded.
+		//	Middle-to-Left variable assignments change to predicates.
+		//
+		//	FIXME why different to PropertyAssignments
+		//
+		@Override
+		public @Nullable Element visitVariableAssignment(@NonNull VariableAssignment vaIn) {
+			if (qvtuConfiguration.isMtoL(vaIn) || qvtuConfiguration.isRtoM(vaIn) || qvtuConfiguration.isMtoM(vaIn)) {
+				return null;
+			}
+			return super.visitVariableAssignment(vaIn);
+		}
+	}
+	
+	protected class UpdateVisitor extends AbstractUpdateVisitor<QVTc2QVTu>
+	{
+		public UpdateVisitor(@NonNull QVTc2QVTu context) {
+			super(context);
+		}
+
+		//
+		//	Predicates that were PropertAssignments need a comparison to be synthesized.
+		//
+		@Override
+		public @Nullable Object visitPredicate(@NonNull Predicate pOut) {
+			Element pIn = context.equivalentSource(pOut);
+			if (pIn instanceof PropertyAssignment) {
+				PropertyAssignment paIn = (PropertyAssignment)pIn;
+		    	OCLExpression slotExpression = copy(paIn.getSlotExpression(), pOut);
+				Property targetProperty = paIn.getTargetProperty();
+		    	assert (slotExpression != null) && (targetProperty != null);
+		        OCLExpression valueExpression = copy(paIn.getValue(), pOut);
+				PropertyCallExp sourceExp = PivotUtil.createPropertyCallExp(slotExpression, targetProperty);
+				sourceExp.eUnset(PivotPackage.Literals.TYPED_ELEMENT__IS_REQUIRED);		// FIXME redundant compatibility
+		        Operation equalsOperation = getEqualsOperation();
+				OperationCallExp operationCallExp = PivotUtil.createOperationCallExp(sourceExp, equalsOperation, valueExpression);
+				operationCallExp.setName(equalsOperation.getName());		// FIXME redundant compatibility
+				pOut.setConditionExpression(operationCallExp);
+				checkOut(pOut);
+				return null;
+			}
+			else {
+				return super.visitPredicate(pOut);
+			}
+		}
+	 }
+	
+	private final @NonNull QVTuConfiguration qvtuConfiguration;
+
+	public QVTc2QVTu(@NonNull EnvironmentFactory environmentFactory, @NonNull QVTuConfiguration qvtuConfiguration) {
+		super(environmentFactory);
+        this.qvtuConfiguration = qvtuConfiguration;
+	}
+
+	@Override
+	protected @NonNull CreateVisitor createCreateVisitor() {
+		return new CreateVisitor(this);
+	}
+
+	@Override
+	protected @NonNull UpdateVisitor createUpdateVisitor() {
+		return new UpdateVisitor(this);
 	}
 
 	private boolean allReferencedVariablesInInputDomain(@NonNull PropertyAssignment a) {

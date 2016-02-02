@@ -318,16 +318,8 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	protected @NonNull Resource qvtc2qvtu(@NonNull Resource cResource, @NonNull QVTuConfiguration qvtuConfiguration) throws IOException {
 		URI qvtuURI = getURI(QVTU_STEP, URI_KEY);
 		Resource uResource = createResource(qvtuURI);
-        for (EObject e : cResource.getContents()) {
-            CoreModel newE = (CoreModel) EcoreUtil.copy(e);
-            newE.setExternalURI(((CoreModel) e).getExternalURI().replace(".qvtc", ".qvtu.qvtc"));
-            newE.setName(((CoreModel) e).getName().replace(".qvtc", ".qvtu"));
-            uResource.getContents().add(newE);
-        }
-        QVTc2QVTu ctou = new QVTc2QVTu(environmentFactory, qvtuConfiguration);
-        for (EObject e : ClassUtil.nullFree(uResource.getContents())) {
-        	ctou.execute((CoreModel) e);
-        }
+        QVTc2QVTu qvtc2qvtu = new QVTc2QVTu(environmentFactory, qvtuConfiguration);
+        qvtc2qvtu.transform(cResource, uResource);
 		saveResource(uResource, QVTU_STEP);
 		return uResource;
 	}
