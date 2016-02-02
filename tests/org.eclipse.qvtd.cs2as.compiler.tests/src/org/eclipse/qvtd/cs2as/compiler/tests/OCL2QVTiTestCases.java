@@ -61,6 +61,7 @@ import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiCompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -262,6 +263,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 		QVTimperativeStandaloneSetup.doSetup(); // To be able to add QVTimperative.ocl validation
+		QVTcorePivotStandaloneSetup.doSetup();
 		CompleteOCLStandaloneSetup.doSetup();
 	}
 
