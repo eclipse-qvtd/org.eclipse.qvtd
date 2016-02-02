@@ -88,7 +88,6 @@ public class QVTc2QVTu
 	}
 	
 	private void changeRealizedToVariable(@NonNull Mapping m) {
-		
 		for (Domain d : m.getDomain()) {
 			if (qvtuConfiguration.isInputDomain((Area) d)) {
 				for (RealizedVariable rv : ((Area) d).getBottomPattern().getRealizedVariable()) {
@@ -109,8 +108,15 @@ public class QVTc2QVTu
 	private void direct(@NonNull Mapping m) {
 		// Delete Assignments
 		for (PropertyAssignment a : MtcUtil.getAllPropertyAssignments(m)) {
-			if (qvtuConfiguration.isMtoL(a) || qvtuConfiguration.isRtoM(a) || qvtuConfiguration.isLocaltoM(a)) {
+			if (/*qvtuConfiguration.isMtoL(a) ||*/ qvtuConfiguration.isRtoM(a) || qvtuConfiguration.isLocaltoM(a)) {
 				EcoreUtil.delete(a, true);
+			} else if (qvtuConfiguration.isMtoL(a)) {
+				// Assignments to Predicates
+				Predicate pOUt = QVTbaseFactory.eINSTANCE.createPredicate();
+	            pOUt.setConditionExpression(MtcUtil.assignmentToOclExp(a, environmentFactory));
+	            CorePattern cp = (CorePattern) a.eContainer();
+	            EcoreUtil.delete(a, true);
+	            cp.getPredicate().add(pOUt);
 			} else if (qvtuConfiguration.isFromInputDomain(a.getSlotExpression()) &&
 					allReferencedVariablesInInputDomain(a)) {
 				// Assignments to Predicates
