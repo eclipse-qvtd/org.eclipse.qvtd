@@ -38,6 +38,7 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
@@ -89,8 +90,10 @@ public class QVTrCompilerTests extends LoadTestCase
 
 		public @NonNull Transformation compileTransformation(@NonNull String testFileName, @NonNull String outputName) throws Exception {
 			Map<@NonNull String, @NonNull Map<AbstractCompilerChain.Key<?>, Object>> options = new HashMap<@NonNull String, @NonNull Map<AbstractCompilerChain.Key<?>, Object>>();
-			compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), testFolderURI.appendSegment(testFileName), options);
+			URI prefixURI = testFolderURI.appendSegment(testFileName);
+			compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), prefixURI, options);
 			compilerChain.setOption(AbstractCompilerChain.DEFAULT_STEP, AbstractCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+			compilerChain.setOption(AbstractCompilerChain.QVTR_STEP, AbstractCompilerChain.URI_KEY, prefixURI.appendFileExtension("qvtr"));
 	    	return compilerChain.compile(outputName);
 		}
 
@@ -234,7 +237,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		OCLstdlib.install();
 		QVTrTestUtil.doQVTrelationSetup();
 		QVTiTestUtil.doQVTimperativeSetup();
-//		QVTcorePivotStandaloneSetup.doSetup();
+		QVTcorePivotStandaloneSetup.doSetup();
 //		QVTimperativePivotStandaloneSetup.doSetup();
     }
 
@@ -254,11 +257,11 @@ public class QVTrCompilerTests extends LoadTestCase
     	try {
 	    	Transformation asTransformation = myQVT.compileTransformation("SeqToStm", "stm");
 	    	myQVT.createInterpretedExecutor(asTransformation);
-	    	myQVT.loadInput("seqDgm", "Families.xmi");
-	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
-	    	myQVT.createModel("stm", "Persons_Interpreted.xmi");
+	    	myQVT.loadInput("seqDgm", "Seq.xmi");
+	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Seq2Stmc_trace.xmi");
+	    	myQVT.createModel("stm", "Stmc_Interpreted.xmi");
 	    	myQVT.executeTransformation();
-			myQVT.saveOutput("stm", "Persons_Interpreted.xmi", "Persons_expected.xmi", null);
+			myQVT.saveOutput("stm", "Stmc.xmi", "Stmc_expected.xmi", null);
 		}
 		finally {
 	    	myQVT.dispose();
