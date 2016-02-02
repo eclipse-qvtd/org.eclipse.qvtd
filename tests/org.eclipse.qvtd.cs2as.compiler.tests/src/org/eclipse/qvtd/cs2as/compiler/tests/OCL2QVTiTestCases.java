@@ -389,7 +389,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example1");
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 		URI oclDocURI = baseURI.appendSegment("Source2Target.ocl.oclas");
-		URI qvtpFileURI = baseURI.appendSegment("Source2Target.qvtp.qvtias");
+		URI qvtpFileURI = baseURI.appendSegment("Source2Target.qvtp.qvtcas");
 
 		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "Source2Target.ocl", myQVT);
 		mtc.runOCL2QVTp_MiddleFolded(oclDocURI, qvtpFileURI);
@@ -602,7 +602,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example2");
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
-		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtias");
+		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtcas");
 		URI tracesMMURI = baseURI.appendSegment("classescs2as.ecore.oclas");
 
 		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "classescs2as.ocl", myQVT, false);
@@ -617,7 +617,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example2");
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
-		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtias");
+		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtcas");
 
 		OCL2QVTiBrokerTester mtc = new OCL2QVTiBrokerTester(baseURI, "classescs2as.ocl", myQVT);
 		mtc.runOCL2QVTp_MiddleFolded(oclDocURI, qvtpFileURI);
@@ -924,7 +924,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public static XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		//
-		//	Load QVTiAS
+		//	Load QVTcAS
 		//		
 		OCL ocl = QVTbase.newInstance(OCL.NO_PROJECTS);
 		try {

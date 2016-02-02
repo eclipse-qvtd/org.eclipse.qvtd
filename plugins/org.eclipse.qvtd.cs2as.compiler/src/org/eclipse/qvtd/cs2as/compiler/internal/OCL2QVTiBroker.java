@@ -196,10 +196,10 @@ public class OCL2QVTiBroker extends MtcBroker {
 		
 	}
 	
-	private PivotModel createQVTpModel(URI qvtiFileURI) throws QvtMtcExecutionException { 
+	private PivotModel createQVTpModel(URI qvtpFileURI) throws QvtMtcExecutionException { 
 		String qvtiModelName = "QVTp";
 		String qvtiModelAlises = "QVTi,QVT"; // FIXME further steps should configure the aliases
-		return pmUtil.createPivotModel(qvtiFileURI.toString(), qvtiModelName, qvtiModelAlises, QVTI_FULL_NS, false, true, false, true, true, savingOptions);
+		return pmUtil.createPivotModel(qvtpFileURI.toString(), qvtiModelName, qvtiModelAlises, QVTC_FULL_NS, false, true, false, true, true, savingOptions);
 	}
 	
 	private PivotModel createTracesModel(URI tracesMMURI) throws QvtMtcExecutionException { 

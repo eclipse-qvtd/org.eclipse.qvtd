@@ -130,7 +130,7 @@ public class MtcBroker {
 	private static final String QVTI_URI = QVTimperativePackage.eNS_URI;
 
 	/** The Constant QVTC_FULL_NS. */
-	private static final String QVTC_FULL_NS = QVTC_URI + "," + QVTCB_URI + "," + QVTB_URI + "," + PIVOT_URI;
+	protected static final String QVTC_FULL_NS = QVTC_URI + "," + QVTCB_URI + "," + QVTB_URI + "," + PIVOT_URI;
 
 	/** The Constant QVTI_FULL_NS. */
 	protected static final String QVTI_FULL_NS = QVTI_URI + "," + QVTCB_URI + "," +  QVTB_URI + "," +  PIVOT_URI;

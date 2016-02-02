@@ -50,15 +50,15 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
-import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 
 public class OCL2QVTp {
 
@@ -89,10 +89,10 @@ public class OCL2QVTp {
 		EObject rootModel = input.getContents().get(0);
 		if (rootModel instanceof Model) {
 			Model model = (Model) rootModel;
-			ImperativeModel outputModel = oclModelToImperativeModel().apply(model);
+			CoreModel outputModel = oclModelToImperativeModel().apply(model);
 			
 			// We create the output resource
-			URI outputURI = oclDocURI.trimFileExtension().trimFileExtension().appendFileExtension("qvtp.qvtias");
+			URI outputURI = oclDocURI.trimFileExtension().trimFileExtension().appendFileExtension("qvtp.qvtcas");
 			Resource outputResource = resourceSet.createResource(outputURI);
 			outputResource.getContents().add(outputModel);
 			try {
@@ -109,17 +109,17 @@ public class OCL2QVTp {
 	private TypedModel leftTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 	private TypedModel rightTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 	
-	public Function<Model, ImperativeModel> oclModelToImperativeModel() {
+	public Function<Model, CoreModel> oclModelToImperativeModel() {
 		return oclModel -> {
 		
-		ImperativeModel iModel = QVTimperativeFactory.eINSTANCE.createImperativeModel();
+			CoreModel iModel = QVTcoreFactory.eINSTANCE.createCoreModel();
 		
 		List<ShadowExp> shadowExps = getAllContents().apply(oclModel).filter(ShadowExp.class::isInstance)
 					.map(ShadowExp.class::cast).collect(Collectors.toList());
 		List<ShadowPart> shadowParts = getAllContents().apply(oclModel).filter(ShadowPart.class::isInstance)
 					.map(ShadowPart.class::cast).collect(Collectors.toList());
 		
-		iModel.setExternalURI(oclModel.getExternalURI().replace(".ocl", ".qvtp.qvtias")); // When the externalURI is set, also is its name
+		iModel.setExternalURI(oclModel.getExternalURI().replace(".ocl", ".qvtp.qvtcas")); // When the externalURI is set, also is its name
 		iModel.getOwnedImports().addAll(oclModel.getOwnedImports().stream()
 				.map(importToImport())
 				.collect(Collectors.toList()));
@@ -190,7 +190,7 @@ public class OCL2QVTp {
 	
 	public Function<@NonNull ShadowExp, @NonNull Mapping>  shadowExpToCreationMapping() {
 		return shadowExp -> {
-			Mapping mapping = QVTimperativeFactory.eINSTANCE.createMapping();
+			Mapping mapping = QVTcoreFactory.eINSTANCE.createMapping();
 			mapping.setName(getCreationMappingName().apply(shadowExp));
 			
 			CoreDomain leftDomain = createCreationMapping_LeftDomain(shadowExp);
@@ -235,7 +235,7 @@ public class OCL2QVTp {
 	
 	public Function<@NonNull ShadowPart, @NonNull Mapping>  shadowPartToUpdateMapping() {
 		return shadowPart -> {
-			Mapping mapping = QVTimperativeFactory.eINSTANCE.createMapping();
+			Mapping mapping = QVTcoreFactory.eINSTANCE.createMapping();
 			mapping.setName(getUpdateMappingName().apply(shadowPart));
 			
 			ShadowExp shadowExp = (ShadowExp) shadowPart.eContainer();

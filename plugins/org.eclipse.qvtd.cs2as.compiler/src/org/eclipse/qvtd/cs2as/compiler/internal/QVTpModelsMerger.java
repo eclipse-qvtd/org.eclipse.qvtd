@@ -38,8 +38,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
-import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 public class QVTpModelsMerger {
 
@@ -52,7 +52,7 @@ public class QVTpModelsMerger {
 	 * <ul>
 	 * The merge utility will simply consist of:
 	 * <li> Merging all the qvtp {@link Mapping mappings} in one qvtp {@link Transformation transformation} </li>
-	 * <li> Merging all the {@link Import imports} in the containing qvtp {@link ImperativeModel model}, taking care of import duplications </li>
+	 * <li> Merging all the {@link Import imports} in the containing qvtp {@link CoreModel model}, taking care of import duplications </li>
 	 * </ul>
 	 *   
 	 * @param extendedQVTpModels a list of the QVTp models to merge
@@ -60,14 +60,14 @@ public class QVTpModelsMerger {
 	 */
 	public static void merge(EnvironmentFactory envF, Resource targetQVTpModel, List<Resource> extendedQVTpModels) {
 		
-		ImperativeModel qvtpModel = getImperativeModel(targetQVTpModel);
+		CoreModel qvtpModel = getCoreModel(targetQVTpModel);
 		Map<Class, List<Mapping>> inputType2RefiningMapping = getRefiningMappingInputTypes(qvtpModel);
 		for (Resource extendedQVTpModel : extendedQVTpModels) {
-			doMerge(envF, qvtpModel, getImperativeModel(extendedQVTpModel), inputType2RefiningMapping);
+			doMerge(envF, qvtpModel, getCoreModel(extendedQVTpModel), inputType2RefiningMapping);
 		}
 	}
 	
-	private static Map<Class, List<Mapping>> getRefiningMappingInputTypes(ImperativeModel qvtpModel) {
+	private static Map<Class, List<Mapping>> getRefiningMappingInputTypes(CoreModel qvtpModel) {
 		
 		Map<Class, List<Mapping>> result = new HashMap<Class, List<Mapping>>();
 		Package _package = qvtpModel.getOwnedPackages().get(0);
@@ -90,7 +90,7 @@ public class QVTpModelsMerger {
 	 * @param mergedQVTpModel
 	 * @param refMapInputTypes a list of the types involved in the mappings of the extending QVTp model
 	 */
-	private static void doMerge(EnvironmentFactory envF, ImperativeModel resultQVTpModel, ImperativeModel mergedQVTpModel, Map<Class, List<Mapping>> inputType2RefiningMapping) {
+	private static void doMerge(EnvironmentFactory envF, CoreModel resultQVTpModel, CoreModel mergedQVTpModel, Map<Class, List<Mapping>> inputType2RefiningMapping) {
 		
 		// Imports
 		Set<Namespace> alreadyImportedNamespaces = new HashSet<Namespace>();
@@ -140,7 +140,7 @@ public class QVTpModelsMerger {
 
 	}
 	
-	private static boolean doesNamespaceCorrespondToMergedQVTpModel(ImperativeModel mergedQVTpModel, Namespace ns) {
+	private static boolean doesNamespaceCorrespondToMergedQVTpModel(CoreModel mergedQVTpModel, Namespace ns) {
 		
 		if (ns instanceof Model && isAnOCLModel(ns)) { 
 			URI qvtpModelURI = URI.createURI(mergedQVTpModel.getExternalURI());
@@ -168,7 +168,7 @@ public class QVTpModelsMerger {
 		return true;
 	}
 
-	private static Transformation getTransformation(ImperativeModel iModel) {
+	private static Transformation getTransformation(CoreModel iModel) {
 				
 
 	    for (org.eclipse.ocl.pivot.Package aPackage : iModel.getOwnedPackages()) {
@@ -182,19 +182,19 @@ public class QVTpModelsMerger {
 		throw new IllegalStateException(MessageFormat.format("The QVTd model '{0}' does not have a Transformation element.", iModel.getExternalURI()));
 	}
 	
-	private static ImperativeModel getImperativeModel(Resource qvtpResource) {
+	private static CoreModel getCoreModel(Resource qvtpResource) {
 		
 		for (EObject eContent : qvtpResource.getContents()) {
-			if (eContent instanceof ImperativeModel) {
-				return (ImperativeModel) eContent;
+			if (eContent instanceof CoreModel) {
+				return (CoreModel) eContent;
 			}
 		}
-		throw new IllegalStateException(MessageFormat.format("The QVTd model '{0}' does not have an ImperativeModel element.", qvtpResource.getURI()));
+		throw new IllegalStateException(MessageFormat.format("The QVTd model '{0}' does not have an CoreModel element.", qvtpResource.getURI()));
 	}
 	
 	private static boolean assertCorrectQVTpModelFileExtenion(URI qvtpModelURI ) {
 		
-		assert qvtpModelURI.fileExtension().equals("qvtias");
+		assert qvtpModelURI.fileExtension().equals("qvtcas");
 		assert qvtpModelURI.trimFileExtension().fileExtension().equals("qvtp");
 		return true;
 	}
