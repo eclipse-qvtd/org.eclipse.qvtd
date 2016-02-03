@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
 public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
@@ -74,5 +77,19 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	private @NonNull String getTraceabilityPropertyName() {
 		String tracePropName = getOption(OCL2QVTP_STEP, TRACE_PROPERTY_NAME);
 		return tracePropName == null ? DEFAULT_TRACE_PROPERTY_NAME : tracePropName;
+	}
+	@Override
+	protected @NonNull Transformation qvtp2qvti(@NonNull Resource pResource) throws IOException {
+		rewriteSafeNavigations(pResource);
+		return super.qvtp2qvti(pResource);
+	}
+
+	// FIXME this workaround produces a new traversal of the resource
+	private void rewriteSafeNavigations(@NonNull Resource resource) {
+		for (EObject rootObject : resource.getContents()) {
+			if (rootObject instanceof Element) {
+				QVTbaseUtil.rewriteSafeNavigations(environmentFactory, (Element) rootObject);
+			}
+		}
 	}
 }
