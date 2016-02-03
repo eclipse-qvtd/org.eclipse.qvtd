@@ -38,9 +38,6 @@ import org.eclipse.ocl.pivot.evaluation.tx.TransformationExecutor;
 import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
-import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
-import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
-import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
@@ -48,7 +45,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
-import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.internal.etl.EtlTask;
 import org.eclipse.qvtd.compiler.internal.etl.MtcBroker;
@@ -58,13 +54,11 @@ import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiCompilerChain;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTp;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
@@ -96,7 +90,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	private static final boolean CREATE_GRAPHML = false; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
 	private static final @NonNull String TESTS_GEN_PATH = "../org.eclipse.qvtd.cs2as.compiler.tests/tests-gen/";
 	private static final @NonNull String TESTS_PACKAGE_NAME = "cg";
-	private static final @NonNull String NEW_TESTS_PACKAGE_NAME = "new_cg";
 	private static final @NonNull String DEBUG_SEGMENT = "debug";
 	private static @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models", true);
 	
@@ -140,7 +133,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	    	ResourceSet rSet = getResourceSet();
 			Resource inputResource = rSet.getResource(csModelURI, true);
-			tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
+			tx.addRootObjects(OCL2QVTp.LEFT_MODEL_TYPE_NAME, ClassUtil.nonNullState(inputResource.getContents()));
 			assertTrue(tx.run());
 			Resource outputResource = rSet.createResource(asModelURI);
 			outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
@@ -166,8 +159,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 			BasicQVTiExecutor testEvaluator = new QVTiIncrementalExecutor(getEnvironmentFactory(), tx, QVTiIncrementalExecutor.Mode.LAZY);
 			//testEvaluator.saveTransformation(null);
-		    testEvaluator.loadModel("leftCS", csModelURI);
-		    testEvaluator.createModel("rightAS", asModelURI, null);
+		    testEvaluator.loadModel(OCL2QVTp.LEFT_MODEL_TYPE_NAME, csModelURI);
+		    testEvaluator.createModel(OCL2QVTp.RIGHT_MODEL_TYPE_NAME, asModelURI, null);
 		    boolean success = testEvaluator.execute();
 		    testEvaluator.saveModels(TestsXMLUtil.defaultSavingOptions);
 		    testEvaluator.dispose();
@@ -185,7 +178,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			for (int i=0; i < extendedOclDocs.length; i++) {
 				oclDocURIs[i] = baseURI.appendSegment(extendedOclDocs[i]);
 			}
-			OCL2QVTiCompilerChain compiler = new OCL2QVTiCompilerChain(this, createOcl2QVTpCompilerOptions(), mainOclDocURI, oclDocURIs);
+			OCL2QVTiCompilerChain compiler = new OCL2QVTiCompilerChain(this, createTestCasesCompilerOptions(), mainOclDocURI, oclDocURIs);
 			Transformation qvtiTransf = compiler.compile();
 			URI txURI = qvtiTransf.eResource().getURI();
 			if (txURI != null) {
@@ -196,14 +189,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	    	return qvtiTransf;
 		}
 		
-		protected @NonNull Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> createOcl2QVTpCompilerOptions() {
-			Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options = new HashMap<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>>();
-			Map<@NonNull Key<?>, @Nullable Object> ocl2qvtpOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();
-			ocl2qvtpOptions.put(OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-			options.put(OCL2QVTiCompilerChain.OCL2QVTP_STEP, ocl2qvtpOptions);
-			return options;
-		}
-		
+
 		protected void loadEcoreFile(String ecoreFileName, EPackage ePackage) {
 			URI fileURI = baseURI.appendSegment(ecoreFileName);
 			ResourceSet rSet = getResourceSet();
@@ -249,12 +235,12 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	private static class OCL2QVTiCompilerTester extends OCL2QVTiCompilerChain {
 
 		public OCL2QVTiCompilerTester(@NonNull URI baseURI, @NonNull String oclDocName, @NonNull QVTimperative metaModelManager) {
-			super(metaModelManager, null, baseURI.appendSegment(oclDocName));
+			super(metaModelManager, createTestCasesCompilerOptions(), baseURI.appendSegment(oclDocName));
 		}
 	
 		// For testing purpose
 		@Override
-		protected Resource ocl2qvtp(URI oclDocURI) {
+		protected Resource ocl2qvtp(URI oclDocURI) throws IOException {
 			return super.ocl2qvtp(oclDocURI);
 		}
 	}
@@ -281,7 +267,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example1.target.lookup.util.TargetLookupSolver",
 				"example1.target.lookup.util.TargetLookupResult",
-				TESTS_GEN_PATH, NEW_TESTS_PACKAGE_NAME);
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 		myQVT.executeModelsTX_CG(txClass, "model1");
 		myQVT.executeModelsTX_CG(txClass, "model2");
@@ -340,7 +326,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example2.classes.lookup.util.ClassesLookupSolver",
 				"example2.classes.lookup.util.ClassesLookupResult",
-				TESTS_GEN_PATH, NEW_TESTS_PACKAGE_NAME);
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 		myQVT.executeModelsTX_CG(txClass, "model1");
 		myQVT.executeModelsTX_CG(txClass, "model2");
@@ -398,7 +384,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 				"example2.classes.lookup.util.ClassesLookupSolver",
 				"example2.classes.lookup.util.ClassesLookupResult",
-				TESTS_GEN_PATH, NEW_TESTS_PACKAGE_NAME);
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 		
 		myQVT.dispose();
@@ -506,7 +492,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("SimplerKiama.ocl");
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("","",
-				TESTS_GEN_PATH, NEW_TESTS_PACKAGE_NAME);
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
 //		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 // FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
@@ -609,20 +595,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	protected static void assertValidQVTiModel(@NonNull URI asURI) {
 	    
-		OCLInternal ocl =  OCLInternal.newInstance();
-		EnvironmentFactoryInternal factory = ocl.getEnvironmentFactory();
-		factory.configureLoadFirstStrategy();
-		ResourceSet asResourceSet = ocl.getMetamodelManager().getASResourceSet();
-
-		URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
-
-		CompleteOCLEObjectValidator validator = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, factory);
-		validator.initialize();
-		PivotEObjectValidator.install(asResourceSet, factory);
-		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE), null);
-		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), null);
-		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), null);
-		assertValidModel(asURI, asResourceSet);
+		// We don't generate QVTi models anymore. Perhaps do a QVTc validation if there is a QVTcore.ocl file
 	}
 
 	protected @NonNull Transformation getTransformation(ResourceSet rSet, URI qvtiURI) {
@@ -743,4 +716,13 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		return (ASResource) asResource;
 	}
 
+	private static @NonNull Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> createTestCasesCompilerOptions() {
+		Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options = new HashMap<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>>();
+		Map<@NonNull Key<?>, @Nullable Object> defStepOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();
+		defStepOptions.put(OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+		// TODO problem hen validating  defStepOptions.put(OCL2QVTiCompilerChain.VALIDATE_KEY, true);
+		options.put(OCL2QVTiCompilerChain.DEFAULT_STEP, defStepOptions);
+		return options;
+	}
+	
 }

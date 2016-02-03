@@ -9,7 +9,6 @@ import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getExpressio
 import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getSuperClasses;
 import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getUpdateMappingName;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +20,6 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -62,22 +60,17 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 
 public class OCL2QVTp {
 
-	private Logger logger = Logger.getLogger(getClass().getName());
+	private @NonNull Logger logger = Logger.getLogger(getClass().getName());
 	private @NonNull EnvironmentFactory envFact;
 	private @NonNull String traceabilityPropName;
 	private @Nullable Map<?,?> saveOptions;
 	
-	public static final String RIGHT_MODEL_TYPE_NAME = "rightAS";
-	public static final String LEFT_MODEL_TYPE_NAME = "leftCS";
+	public static final @NonNull String RIGHT_MODEL_TYPE_NAME = "rightAS";
+	public static final @NonNull String LEFT_MODEL_TYPE_NAME = "leftCS";
 	
 	public OCL2QVTp(@NonNull EnvironmentFactory envFact, @NonNull String traceabilityPropName) {
-		this(envFact, traceabilityPropName, null);
-	}
-	
-	public OCL2QVTp(@NonNull EnvironmentFactory envFact, @NonNull String traceabilityPropName, @Nullable Map<?, ?> saveOptions) {
 		this.envFact = envFact;
 		this.traceabilityPropName = traceabilityPropName;
-		this.saveOptions = saveOptions;
 	}
 	
 	public Resource run(ResourceSet resourceSet, URI oclDocURI) {
@@ -95,12 +88,8 @@ public class OCL2QVTp {
 			URI outputURI = oclDocURI.trimFileExtension().trimFileExtension().appendFileExtension("qvtp.qvtcas");
 			Resource outputResource = resourceSet.createResource(outputURI);
 			outputResource.getContents().add(outputModel);
-			try {
-				outputResource.save(saveOptions);
-				return outputResource;
-			} catch (IOException e) {
-				throw new WrappedException(e);
-			}
+			return outputResource;
+		
 		} else {
 			throw new IllegalArgumentException(oclDocURI.toString() + " doesn't contain an OCL Model");
 		}

@@ -12,6 +12,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
@@ -19,27 +20,34 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 
 	public @NonNull static final String DEFAULT_TRACE_PROPERTY_NAME = "ast"; 
-	public @NonNull static final String OCL2QVTP_STEP = "ocl2qvtp";  
-	public @NonNull static final Key<String> TRACE_PROPERTY_NAME = new Key<String>("ocl2qvtp.tracePropName");
+	public @NonNull static final Key<String> TRACE_PROPERTY_NAME_KEY = new Key<String>("ocl2qvtp.tracePropName");
 
 	private @NonNull URI oclASUri;
 	private @NonNull List<URI> extendedASUris = new ArrayList<URI>();	
 	private @Nullable String traceabilityPropName;
 	
+	/**
+	 * To provide a different traceabilityPropName different to the default {@link OCL2QVTiCompilerChain#DEFAULT_TRACE_PROPERTY_NAME "ast"} one,
+	 * it must be passed as an option using the {@link #TRACE_PROPERTY_NAME_KEY TRACE_PROPERTY_NAME_KEY} and the {@link CompilerChain#QVTP_STEP QVTP_STEP}
+	 * 
+	 * @param qvti mandatory {@link QVTimperative} instance
+	 * @param options optional options
+	 * @param oclDocURI the mandatory main OCL document URI to compile
+	 * @param extendedDocURIs optional OCL document URIs that the main one extends
+	 */
 	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @Nullable Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options,			
-			@NonNull URI oclDocURI, @NonNull URI... extendDocURIs) { 
+			@NonNull URI oclDocURI, URI... extendedDocURIs) { 
 		super(qvti.getEnvironmentFactory(), oclDocURI, options);
 		this.traceabilityPropName = getTraceabilityPropertyName();
 		this.oclASUri = qvti.parse(oclDocURI).getURI();
-		for (URI oclDocUri : extendDocURIs) {
+		for (URI oclDocUri : extendedDocURIs) {
 			this.extendedASUris.add(qvti.parse(oclDocUri).getURI()); // We add the AS URI
 		}
 	}
 
 	@Override
 	public @NonNull Transformation compile(@NonNull String enforcedOutputName) throws IOException {
-		Resource qvtpResource = ocl2qvtp();
-		return qvtp2qvti(qvtpResource);
+		return qvtp2qvti(ocl2qvtp());
 	}
 	
 	public @NonNull Transformation compile() throws IOException {
@@ -54,28 +62,23 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 				qvtpModels.add(ocl2qvtp(extendedQVTpModel));
 			}
 			QVTpModelsMerger.merge(environmentFactory , pModel, qvtpModels);
-			options.get(OCL2QVTP_STEP);
-			pModel.save(getOption(OCL2QVTP_STEP, SAVE_OPTIONS_KEY));
+			saveResource(pModel, QVTP_STEP);
 			for(Resource qvtpModel : qvtpModels) {	// unload unnecessary qvtpModels
 				qvtpModel.unload();
 			}
 		}
-		assertNoResourceErrors("pModel", pModel);
 		return pModel;
 	}
 	
-	protected Resource ocl2qvtp(URI oclURI) {
-		OCL2QVTp ocl2qvtp = new OCL2QVTp(environmentFactory, traceabilityPropName, getOption(OCL2QVTP_STEP, SAVE_OPTIONS_KEY));
-		return ocl2qvtp.run(environmentFactory.getMetamodelManager().getASResourceSet(),
-				oclURI); 
-	}
-	
-	private @Nullable Map<?, ?> getSavingOptions() {
-		return getOption(OCL2QVTP_STEP, SAVE_OPTIONS_KEY);
+	protected Resource ocl2qvtp(URI oclURI) throws IOException {
+		OCL2QVTp ocl2qvtp = new OCL2QVTp(environmentFactory, traceabilityPropName);
+		Resource pResource = ocl2qvtp.run(environmentFactory.getMetamodelManager().getASResourceSet(), oclURI);
+		saveResource(pResource, QVTP_STEP);
+		return pResource;
 	}
 	
 	private @NonNull String getTraceabilityPropertyName() {
-		String tracePropName = getOption(OCL2QVTP_STEP, TRACE_PROPERTY_NAME);
+		String tracePropName = getOption(QVTP_STEP, TRACE_PROPERTY_NAME_KEY);
 		return tracePropName == null ? DEFAULT_TRACE_PROPERTY_NAME : tracePropName;
 	}
 	@Override

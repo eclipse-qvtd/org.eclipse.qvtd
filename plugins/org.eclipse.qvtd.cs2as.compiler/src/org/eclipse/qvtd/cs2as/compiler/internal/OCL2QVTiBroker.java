@@ -183,7 +183,7 @@ public class OCL2QVTiBroker extends MtcBroker {
 		PivotModel oclModel = createOCLModel(oclDocURI);
 		pModel= createQVTpModel(qvtiFileURI);
 		
-		OCL2QVTp ocl2qvtp = new OCL2QVTp(environmentFactory, traceabilityPropName, savingOptions);
+		OCL2QVTp ocl2qvtp = new OCL2QVTp(environmentFactory, traceabilityPropName);
 		Resource resource = ocl2qvtp.run(oclModel.getResource().getResourceSet() , oclDocURI); // NB. cModel is the .ocl doc
 		
 		pModel.getResource().getContents().addAll(resource.getContents());
