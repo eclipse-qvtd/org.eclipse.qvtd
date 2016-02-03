@@ -88,9 +88,10 @@ public class OCL2QVTpUtil {
 	
 	public static Function<@NonNull ShadowPart, @NonNull String> getUpdateMappingName() {
 		return shadowPart -> {
-			ShadowExp ShadowExp = (ShadowExp)shadowPart.eContainer();
+			ShadowExp shadowExp = (ShadowExp)shadowPart.eContainer();
 		 	Property refProp = shadowPart.getReferredProperty();
-			return 'u' + getShadowTypeName().apply(ShadowExp) + '_' + refProp.getName();
+			return 'u' + getExpressionContextType().apply(shadowExp).getName() + "_2_" 
+		 			+ getShadowTypeName().apply(shadowExp) + '_' + refProp.getName(); 
 		};
 	}
 	
