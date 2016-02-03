@@ -208,10 +208,12 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 				Property targetProperty = paIn.getTargetProperty();
 		    	assert (slotExpression != null) && (targetProperty != null);
 		        OCLExpression valueExpression = copy(paIn.getValue(), pOut);
-				PropertyCallExp sourceExp = PivotUtil.createPropertyCallExp(slotExpression, targetProperty);
-				sourceExp.eUnset(PivotPackage.Literals.TYPED_ELEMENT__IS_REQUIRED);		// FIXME redundant compatibility
+				PropertyCallExp propertyCallExp = PivotUtil.createPropertyCallExp(slotExpression, targetProperty);
+				context.addTrace(pIn, propertyCallExp);
+				propertyCallExp.eUnset(PivotPackage.Literals.TYPED_ELEMENT__IS_REQUIRED);		// FIXME redundant compatibility
 		        Operation equalsOperation = getEqualsOperation();
-				OperationCallExp operationCallExp = PivotUtil.createOperationCallExp(sourceExp, equalsOperation, valueExpression);
+				OperationCallExp operationCallExp = PivotUtil.createOperationCallExp(propertyCallExp, equalsOperation, valueExpression);
+				context.addTrace(pIn, operationCallExp);
 				operationCallExp.setName(equalsOperation.getName());		// FIXME redundant compatibility
 				pOut.setConditionExpression(operationCallExp);
 				checkOut(pOut);

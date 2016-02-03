@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.Comment;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Variable;
@@ -39,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
@@ -368,8 +370,10 @@ public abstract class AbstractQVTc2QVTc
 	        }
 		}
 
-		private void updateChild(/*@NonNull*/ Element target) {
-			target.accept(this);
+		private void updateChild(@Nullable Element target) {
+			if (target != null) {
+				target.accept(this);
+			}
 		}
 
 		@Override
@@ -490,6 +494,7 @@ public abstract class AbstractQVTc2QVTc
 		@Override
 		public @Nullable Transformation visitTransformation(@NonNull Transformation tOut) {
 			Transformation tIn = context.equivalentSource(tOut);
+		    updateChild(tOut.getOwnedContext());
 		    updateAllChildren(tOut.getOwnedOperations());
 		    updateAllChildren(tOut.getModelParameter());
 		    updateAllChildren(tOut.getRule());
@@ -670,29 +675,9 @@ public abstract class AbstractQVTc2QVTc
 	    		System.out.println("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
 	    	}
 	    }
-        // FIXME Following code fixes up missing source. Should be fixed earlier.
-/*        List<OperationCallExp> missingSources = null; 
-	    for (TreeIterator<EObject> tit = target.getAllContents(); tit.hasNext(); ) {
-	    	EObject eObject = tit.next();
-	    	if (eObject instanceof OperationCallExp) {
-	    		OperationCallExp operationCallExp = (OperationCallExp)eObject;
-	    		if (operationCallExp.getOwnedSource() == null) {
-	    			if (missingSources == null) {
-	    				missingSources = new ArrayList<OperationCallExp>();
-	    			}
-	    			missingSources.add(operationCallExp);
-	    		}
-	    	}
-	    }
-	    if (missingSources != null) {
-			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-	    	for (OperationCallExp operationCallExp : missingSources) {
-    			Transformation transformation = QVTbaseUtil.getContainingTransformation(operationCallExp);
-    			if (transformation != null) {
-    				Variable thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
-					operationCallExp.setOwnedSource(PivotUtil.createVariableExp(thisVariable));
-    			}
-	    	}
-	    } */
+        List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
+        if (missingOperationCallSources != null) {
+        	System.err.println("Missing OperationCallExp sources  were fixed up for '" + target.getURI() + "'");
+        }
     }
 }

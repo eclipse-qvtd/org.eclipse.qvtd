@@ -11,15 +11,18 @@
 package org.eclipse.qvtd.compiler;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTuConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
@@ -36,6 +39,11 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 	public @NonNull Transformation compile(@NonNull String enforcedOutputName) throws IOException {
 		Transformation loadTransformation = QVTcoreUtil.loadTransformation(environmentFactory, txURI, false);
 		Resource cResource = ClassUtil.nonNullState(loadTransformation.eResource());
+        // FIXME Following code fixes up missing source. Should be fixed earlier.
+        List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, cResource);
+        if (missingOperationCallSources != null) {
+        	System.err.println("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
+        }
 		compiled(QVTC_STEP, cResource);
 		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
 		Resource pResource = qvtc2qvtp(cResource, qvtuConfiguration);

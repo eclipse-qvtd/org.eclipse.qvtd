@@ -557,6 +557,7 @@ public class QVTm2QVTp
 			@NonNull Transformation tOut = QVTbaseFactory.eINSTANCE.createTransformation();
 			context.addTrace(tIn, tOut);
 		    tOut.setName(tIn.getName());
+			tOut.setOwnedContext(create(tIn.getOwnedContext()));
 		    createAll(tIn.getOwnedOperations(), tOut.getOwnedOperations());
 		    createAll(tIn.getModelParameter(), tOut.getModelParameter());
 		    List<Rule> outRules = tOut.getRule();
@@ -644,8 +645,10 @@ public class QVTm2QVTp
 	        }
 		}
 
-		private void updateChild(/*@NonNull*/ Element target) {
-			target.accept(this);
+		private void updateChild(@Nullable Element target) {
+			if (target != null) {
+				target.accept(this);
+			}
 		}
 
 		@Override
@@ -770,6 +773,7 @@ public class QVTm2QVTp
 
 		@Override
 		public @Nullable Object visitTransformation(@NonNull Transformation tOut) {
+		    updateChild(tOut.getOwnedContext());
 		    updateAllChildren(tOut.getOwnedOperations());
 		    updateAllChildren(tOut.getModelParameter());
 		    updateAllChildren(tOut.getRule());

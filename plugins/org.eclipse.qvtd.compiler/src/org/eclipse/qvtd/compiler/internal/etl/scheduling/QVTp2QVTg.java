@@ -580,7 +580,14 @@ public class QVTp2QVTg {
 	
 	private org.eclipse.ocl.pivot.Class getContextType(CallExp callExp) {
 		OCLExpression ownedSource = callExp.getOwnedSource();
-		return ownedSource != null ? ownedSource.getType().isClass() : null;
+		if (ownedSource == null) {
+			return null;
+		}
+		Type type = ownedSource.getType();
+		if (type == null) {
+			return null;			// FIXME BUG 487123 type is null for ill-formed this declarations
+		}
+		return type.isClass();
 	}
 	
 	private @NonNull Set<org.eclipse.ocl.pivot.Class> getAllSuperClasses(org.eclipse.ocl.pivot.@NonNull Class context) {

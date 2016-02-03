@@ -266,7 +266,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testGraph2GraphMinimal() throws Exception {
     	MyQVT myQVT = createQVT();
-    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi");
@@ -459,7 +459,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     public void testClassesCS2AS_bug457239() throws Exception {
 	    TestUtil.doCompleteOCLSetup();
     	MyQVT myQVT = createQVT();
-    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
         MyQvtiExecutor testEvaluator = new MyQvtiExecutor(myQVT.getEnvironmentFactory(), "ClassesCS2AS/bug457239", "ClassesCS2AS.qvti");
     	testEvaluator.saveTransformation(null);
         

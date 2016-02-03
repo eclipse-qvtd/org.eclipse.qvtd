@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
@@ -31,6 +32,7 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
@@ -178,9 +180,13 @@ public class QVTbaseUtil
 	public static @NonNull Variable getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation transformation) {
 		Variable ownedContext = transformation.getOwnedContext();
         if (ownedContext == null) {
+        	org.eclipse.ocl.pivot.Class transformationType = ((StandardLibraryInternal)standardLibrary).getLibraryType("Transformation");
+//        	if (transformationType == null) {	// FIXME BUG 487123
+//        		throw new IllegalLibraryException("No Transformation type in standard library.");		// FIXME need to be using a derived EnvironmentFactory
+//        	}
         	ownedContext = PivotFactory.eINSTANCE.createVariable();
         	ownedContext.setName("this");
-        	ownedContext.setType(((StandardLibraryInternal)standardLibrary).getLibraryType("Transformation"));		// FIXME promote API
+			ownedContext.setType(transformationType);		// FIXME promote API
            	ownedContext.setTypeValue(transformation);
         	ownedContext.setIsRequired(true);
         	transformation.setOwnedContext(ownedContext);
@@ -278,6 +284,36 @@ public class QVTbaseUtil
 			}
 		}
         throw new IOException("Failed to locate a transformation in '" + transformationURI + "'");
+	}
+
+    /**
+     * Rewrite asResource to replace null OperationCallExp sources by a "this" expression.
+     */
+	public static @Nullable List<OperationCallExp> rewriteMissingOperationCallSources(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource asResource) {
+		List<OperationCallExp> missingSources = null; 
+	    for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+	    	EObject eObject = tit.next();
+	    	if (eObject instanceof OperationCallExp) {
+	    		OperationCallExp operationCallExp = (OperationCallExp)eObject;
+	    		if (operationCallExp.getOwnedSource() == null) {
+	    			if (missingSources == null) {
+	    				missingSources = new ArrayList<OperationCallExp>();
+	    			}
+	    			missingSources.add(operationCallExp);
+	    		}
+	    	}
+	    }
+	    if (missingSources != null) {
+			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
+	    	for (OperationCallExp operationCallExp : missingSources) {
+    			Transformation transformation = QVTbaseUtil.getContainingTransformation(operationCallExp);
+    			if (transformation != null) {
+    				Variable thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
+					operationCallExp.setOwnedSource(PivotUtil.createVariableExp(thisVariable));
+    			}
+	    	}
+	    }
+	    return missingSources;
 	}
 	
     /**

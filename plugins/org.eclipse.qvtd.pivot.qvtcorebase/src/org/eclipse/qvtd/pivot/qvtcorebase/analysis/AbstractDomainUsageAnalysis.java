@@ -73,6 +73,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
@@ -750,11 +751,8 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 //			visit(typedModel);
 //		}
 //		System.out.println("  " + getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " : " + object);
-		Variable ownedContext = object.getOwnedContext();
-		DomainUsage domainUsage = basicGetUsage(object);
-		if ((ownedContext != null) && (domainUsage != null)) {
-			setUsage(ownedContext, domainUsage);
-		}
+		Variable ownedContext = QVTbaseUtil.getContextVariable(getEnvironmentFactory().getStandardLibrary(), object);
+		setUsage(ownedContext, getRootAnalysis().getNoneUsage());
 		//
 		//	Ensure all operations are analyzed even if not used.
 		//

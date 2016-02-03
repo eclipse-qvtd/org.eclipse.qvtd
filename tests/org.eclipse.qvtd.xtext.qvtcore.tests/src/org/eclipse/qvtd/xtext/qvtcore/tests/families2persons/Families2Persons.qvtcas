@@ -242,7 +242,6 @@
           </bottomPattern>
         </local>
       </rule>
-      <ownedContext name="this"/>
     </ownedClasses>
   </ownedPackages>
 </qvtc:CoreModel>
