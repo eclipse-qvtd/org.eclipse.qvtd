@@ -47,7 +47,8 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 
 	@Override
 	public @NonNull Transformation compile(@NonNull String enforcedOutputName) throws IOException {
-		return qvtp2qvti(ocl2qvtp());
+		return qvtp2qvti(qvtm2qvtp(ocl2qvtm(oclASUri)));
+		// return qvtp2qvti(ocl2qvtp());
 	}
 	
 	public @NonNull Transformation compile() throws IOException {
@@ -75,6 +76,13 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 		Resource pResource = ocl2qvtp.run(environmentFactory.getMetamodelManager().getASResourceSet(), oclURI);
 		saveResource(pResource, QVTP_STEP);
 		return pResource;
+	}
+	
+	protected Resource ocl2qvtm(URI oclURI) throws IOException {
+		OCL2QVTp ocl2qvtm = new OCL2QVTp(environmentFactory, traceabilityPropName);
+		Resource mResource = ocl2qvtm.run(environmentFactory.getMetamodelManager().getASResourceSet(), oclURI);
+		saveResource(mResource, QVTM_STEP);
+		return mResource;
 	}
 	
 	private @NonNull String getTraceabilityPropertyName() {
