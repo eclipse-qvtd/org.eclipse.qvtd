@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -368,7 +369,24 @@ public class QVTp2QVTg {
 		if (oppositeProp != null) {
 			OCLExpression value = propAssign.getValue();
 			assert value != null;
-			TypedModel oppositeTypedModel = getTypedModel(value);
+			DomainUsage valueUsage = getUsage(value);
+			if (valueUsage == null) {
+				getUsage(value);
+				throw new IllegalStateException("No DomainUsage for " + value);
+			}
+			Type propertyType = targetProp.getType();
+			if ((propertyType != null) && (propertyType.getESObject() != EcorePackage.Literals.EOBJECT)) {		// FIXME Legacy fix tolerating undeclared import of EObject
+				DomainUsage propertyUsage = getUsage(propertyType);
+				if (propertyUsage == null) {
+					getUsage(propertyType);
+					throw new IllegalStateException("No DomainUsage for " + propertyType);
+				}
+				valueUsage = domainUsageAnalysis.intersection(propertyUsage, valueUsage);
+			}
+			TypedModel oppositeTypedModel = valueUsage.getTypedModel();
+			if (oppositeTypedModel == null) {
+				throw new IllegalStateException("No left/right DomainUsage commonality for \"" + propAssign + "\"");
+			}
 			PropertyDatum oppositeDatum = getPropertyDatum(oppositeTypedModel, ClassUtil.nonNullState(getElementClass(targetProp)), oppositeProp);
 			targetDatum.setOpposite(oppositeDatum);
 			result.add(oppositeDatum);

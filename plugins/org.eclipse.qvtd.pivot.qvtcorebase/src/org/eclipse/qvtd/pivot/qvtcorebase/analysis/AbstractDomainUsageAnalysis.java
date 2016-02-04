@@ -161,7 +161,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		return ClassUtil.nonNullState(element2usage.get(element));
 	}
 
-	protected @NonNull DomainUsage intersection(@NonNull DomainUsage firstUsage, @NonNull DomainUsage secondUsage) {
+	public @NonNull DomainUsage intersection(@NonNull DomainUsage firstUsage, @NonNull DomainUsage secondUsage) {
 		int firstMask = ((DomainUsage.Internal)firstUsage).getMask();
 		int secondMask = ((DomainUsage.Internal)secondUsage).getMask();
 		if (firstMask == secondMask) {
