@@ -569,8 +569,10 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			//
 			//	Special case: left/right of "="/"<>" have same usage. Result is primitive.
 			//
-			if ((operationId == getRootAnalysis().getOclAnyEqualsOperationId())
-			 || (operationId == getRootAnalysis().getOclAnyNotEqualsOperationId())) {
+//			if ((operationId == getRootAnalysis().getOclAnyEqualsOperationId())
+//			 || (operationId == getRootAnalysis().getOclAnyNotEqualsOperationId())) {
+			if ("=".equals(object.getReferredOperation().getName())						// FIXME BUG 487252 rationalize the derived operationIds
+			 || "<>".equals(object.getReferredOperation().getName())) {
 				DomainUsage leftUsage = visit(object.getOwnedSource());
 				DomainUsage rightUsage = visit(object.getOwnedArguments().get(0));
 				intersection(leftUsage, rightUsage);
@@ -782,7 +784,8 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	
 	@Override
 	public @Nullable DomainUsage visitTypeExp(@NonNull TypeExp object) {
-		return visit(object.getReferredType());
+		DomainUsage usage = visit(object.getReferredType());
+		return getRootAnalysis().getValidOrVariableUsage(usage);
 	}
 
 	@Override
