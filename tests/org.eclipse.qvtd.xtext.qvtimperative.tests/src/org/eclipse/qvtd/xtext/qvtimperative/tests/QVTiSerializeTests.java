@@ -13,7 +13,9 @@ package org.eclipse.qvtd.xtext.qvtimperative.tests;
 import java.io.IOException;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -39,8 +41,8 @@ import org.eclipse.xtext.resource.XtextResource;
 public class QVTiSerializeTests extends LoadTestCase
 {
 	protected void doSerializeRoundTrip(@NonNull String stem) throws Exception {
-		OCL ocl1 = QVTimperative.newInstance(OCL.NO_PROJECTS, null);
-		OCL ocl2 = QVTimperative.newInstance(OCL.NO_PROJECTS, null);
+		OCL ocl1 = QVTimperative.newInstance(OCL.CLASS_PATH, null);
+		OCL ocl2 = QVTimperative.newInstance(OCL.CLASS_PATH, null);
 		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvti", stem + ".qvtias");
 		URI inputURI = getProjectFileURI(stem + ".qvtias");
 		URI referenceURI = getProjectFileURI(stem + "ref.qvtias");
@@ -84,7 +86,8 @@ public class QVTiSerializeTests extends LoadTestCase
 			e.printStackTrace();
 			URI xmiURI = outputURI.appendFileExtension(".xmi");
 			Resource xmiResource = resourceSet.createResource(xmiURI);
-			xmiResource.getContents().addAll(xtextResource.getContents());
+			@SuppressWarnings("null")@NonNull EList<@NonNull EObject> contents = xtextResource.getContents();
+			xmiResource.getContents().addAll(contents);
 			xmiResource.save(TestsXMLUtil.defaultSavingOptions);
 			fail(e.toString());
 		}
