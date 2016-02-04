@@ -101,13 +101,13 @@ public class QVTbaseUtil
 	/**
 	 * Return the closure of typedModel.usedPackages and their importedPackages.
 	 */
-	public static @NonNull Set<org.eclipse.ocl.pivot.Package> getAllUsedPackages(@NonNull TypedModel typedModel) {
-		Set<org.eclipse.ocl.pivot.Package> allUsedPackages = new HashSet<org.eclipse.ocl.pivot.Package>();
+	public static @NonNull Set<org.eclipse.ocl.pivot.@NonNull Package> getAllUsedPackages(@NonNull TypedModel typedModel) {
+		Set<org.eclipse.ocl.pivot.@NonNull Package> allUsedPackages = new HashSet<org.eclipse.ocl.pivot.@NonNull Package>();
 		getAllUsedPackagesInternal(allUsedPackages, typedModel);
 		return allUsedPackages;
 	}
 
-	private static void getAllUsedPackagesInternal(@NonNull Set<org.eclipse.ocl.pivot.Package> allUsedPackages,
+	private static void getAllUsedPackagesInternal(@NonNull Set<org.eclipse.ocl.pivot.@NonNull Package> allUsedPackages,
 			@NonNull TypedModel typedModel) {
 		getAllUsedPackagesInternal(allUsedPackages, typedModel.getUsedPackage());
 		for (@SuppressWarnings("null")@NonNull TypedModel dependsOn : typedModel.getDependsOn()) {

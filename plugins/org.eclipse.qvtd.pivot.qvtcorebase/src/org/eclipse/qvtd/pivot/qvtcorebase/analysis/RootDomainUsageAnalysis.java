@@ -25,6 +25,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
+import org.eclipse.ocl.pivot.CompletePackage;
 import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -308,7 +309,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	 */
 	protected final @NonNull Map<Operation, DomainUsageAnalysis.Internal> operation2analysis = new HashMap<Operation, DomainUsageAnalysis.Internal>();
 
-	@SuppressWarnings("null")
 	private final @NonNull TypedModel primitiveTypeModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 
 	private /*@LazyNonNull*/ OperationId oclAnyEqualsOperationId;
@@ -429,16 +429,11 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 //			while (!pckQueue.isEmpty()) {
 //			Package asPackage = pckQueue.pop();
 			for (org.eclipse.ocl.pivot.Package asPackage : QVTbaseUtil.getAllUsedPackages(typedModel)) {
-				for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
-					if (asClass != null) {
-						for (CompleteClass completeClass : completeModel.getCompleteClass(asClass).getSuperCompleteClasses()) {
-							completeClasses.add(completeClass);
-//							Package superClassPackage = completeClass.getPrimaryClass().getOwningPackage();
-//							if (!allPackages.contains(superClassPackage)
-//									&& !isPivotMMPackage(superClassPackage)) {
-//								pckQueue.push(superClassPackage);
-//								allPackages.add(superClassPackage);
-//							}
+				CompletePackage completePackage = completeModel.getCompletePackage(asPackage);
+				for (CompleteClass completeClass : completePackage.getOwnedCompleteClasses()) {
+					if (completeClass != null) {
+						for (CompleteClass superCompleteClass : completeClass.getSuperCompleteClasses()) {
+							completeClasses.add(superCompleteClass);
 						}
 					}
 				}
