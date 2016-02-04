@@ -82,7 +82,7 @@ public class QVTiDomainUsageTests extends LoadTestCase
 				}
 				DomainUsage usage = analysis.get(eObject);
 				assert usage != null : "No usage for " + eObject.eClass().getName() + " " + eObject;
-				assert usage.isConstant() : "Variable usage for " + eObject;
+				assert usage.isConstant() : "Unresolved usage " + usage + " for " + eObject;
 				List<Element> list = usage2elements.get(usage);
 				if (list == null) {
 					list = new ArrayList<Element>();

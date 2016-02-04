@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
@@ -44,8 +45,12 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
+import org.eclipse.qvtd.pivot.qvtcorebase.Area;
+import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
 public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis implements QVTcoreBaseVisitor<DomainUsage>
 {
@@ -512,6 +517,32 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 
 	public @NonNull DomainUsage createVariableUsage(int intersectionMask) {
 		return new DomainUsageVariable(intersectionMask);
+	}
+
+	@Override				// FIXME BUG 487257 Revise this
+	protected @NonNull DomainUsage getAllInstancesUsage(@NonNull OperationCallExp asCallExp, @NonNull DomainUsage sourceUsage) {
+		Area area = QVTcoreBaseUtil.getContainingArea(asCallExp);
+		if (area instanceof CoreDomain) {
+			DomainUsage areaUsage = getUsage(area);
+			return intersection(sourceUsage, areaUsage);
+		}
+		else if (area instanceof AbstractMapping) {
+			DomainUsage inputUsage = getNoneUsage();
+			for (Domain domain : ((AbstractMapping)area).getDomain()) {
+				if (!domain.isIsEnforceable()) {
+					inputUsage = union(inputUsage, getUsage(domain));
+				}
+			}
+			if (inputUsage != getNoneUsage()) {
+				return intersection(sourceUsage, inputUsage);
+			}
+			else {				// Att root so no domains, use input
+				return intersection(sourceUsage, getInputUsage());
+			}
+		}
+		else {
+			return sourceUsage;
+		}
 	}
 
 	public @NonNull DomainUsageAnalysis getAnalysis(@NonNull Operation operation) {

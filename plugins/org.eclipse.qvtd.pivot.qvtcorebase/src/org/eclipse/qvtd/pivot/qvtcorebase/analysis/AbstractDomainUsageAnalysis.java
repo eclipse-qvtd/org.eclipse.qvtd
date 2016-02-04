@@ -131,7 +131,11 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			return actualSourceUsage;
 		}
 	}
-	
+
+	protected @NonNull DomainUsage getAllInstancesUsage(@NonNull OperationCallExp object, @NonNull DomainUsage sourceUsage) {
+		return sourceUsage;
+	}
+
 	protected @NonNull DomainUsage getDomainUsage(@Nullable EObject object) {
 		Domain domain = QVTcoreBaseUtil.getContainingDomain(object);
 		if (domain !=  null) {
@@ -285,6 +289,24 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			s.append(usage);
 		}
 		return s.toString();
+	}
+	
+	public @NonNull DomainUsage union(@NonNull DomainUsage firstUsage, @NonNull DomainUsage secondUsage) {
+		int firstMask = ((DomainUsage.Internal)firstUsage).getMask();
+		int secondMask = ((DomainUsage.Internal)secondUsage).getMask();
+		int unionMask = firstMask | secondMask;
+		if ((unionMask == firstMask) && firstUsage.isConstant()) {
+			return firstUsage;
+		}
+		else if ((unionMask == secondMask) && secondUsage.isConstant()) {
+			return secondUsage;
+		}
+		else if (firstUsage.isConstant() && secondUsage.isConstant()) {
+			return getRootAnalysis().getConstantUsage(unionMask);
+		}
+		else {
+			return getRootAnalysis().createVariableUsage(unionMask);
+		}
 	}
 
 	@Override
@@ -566,13 +588,17 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			 || (operationId == rootAnalysis.getOclContentsId())) {
 				return sourceUsage;
 			}
+			String operationName = object.getReferredOperation().getName();
+			if ("allInstances".equals(operationName)) {										// FIXME BUG 487257 Revise this
+				return getAllInstancesUsage(object, sourceUsage);
+			}
 			//
 			//	Special case: left/right of "="/"<>" have same usage. Result is primitive.
 			//
 //			if ((operationId == getRootAnalysis().getOclAnyEqualsOperationId())
 //			 || (operationId == getRootAnalysis().getOclAnyNotEqualsOperationId())) {
-			if ("=".equals(object.getReferredOperation().getName())						// FIXME BUG 487252 rationalize the derived operationIds
-			 || "<>".equals(object.getReferredOperation().getName())) {
+			if ("=".equals(operationName)						// FIXME BUG 487252 rationalize the derived operationIds
+			 || "<>".equals(operationName)) {
 				DomainUsage leftUsage = visit(object.getOwnedSource());
 				DomainUsage rightUsage = visit(object.getOwnedArguments().get(0));
 				intersection(leftUsage, rightUsage);
