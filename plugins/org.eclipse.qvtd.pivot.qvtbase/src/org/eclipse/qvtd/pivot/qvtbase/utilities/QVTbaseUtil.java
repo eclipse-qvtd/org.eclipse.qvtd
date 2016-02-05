@@ -24,6 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.CompletePackage;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.LetExp;
 import org.eclipse.ocl.pivot.Model;
@@ -52,6 +53,17 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 public class QVTbaseUtil
 {
+	public static void addAllClasses(@NonNull EnvironmentView environmentView, org.eclipse.ocl.pivot.@NonNull Package pPackage) {
+		String packageName = pPackage.getName();
+		if ((packageName == null) || "".equals(packageName)) {
+			environmentView.addNamedElements(pPackage.getOwnedClasses());
+		}
+		else {
+			CompletePackage completePackage = environmentView.getEnvironmentFactory().getCompleteModel().getCompletePackage(pPackage);
+			environmentView.addNamedElements(completePackage.getAllClasses());
+		}
+	}
+
 	public static <T extends NamedElement> void addAllNamedElements(@NonNull EnvironmentView environmentView, @NonNull Iterable<T> namedElements) {
 		String name = environmentView.getName();
 		if (name != null) {

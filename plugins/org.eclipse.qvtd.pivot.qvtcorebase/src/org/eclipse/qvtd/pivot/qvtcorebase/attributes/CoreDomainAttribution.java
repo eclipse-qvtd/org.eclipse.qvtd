@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.scoping.AbstractAttribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -29,9 +30,9 @@ public class CoreDomainAttribution extends AbstractAttribution
 		CoreDomain targetElement = (CoreDomain)target;
 		TypedModel typedModel = targetElement.getTypedModel();
 		if (typedModel != null) {
-			for (org.eclipse.ocl.pivot.Package pPackage : typedModel.getUsedPackage()) {
+			for (org.eclipse.ocl.pivot.Package pPackage : ClassUtil.nullFree(typedModel.getUsedPackage())) {
 				environmentView.addNamedElement(pPackage);
-				environmentView.addNamedElements(pPackage.getOwnedClasses());
+				QVTbaseUtil.addAllClasses(environmentView, pPackage);
 			}
 		}
 		for (EObject eContainer = targetElement.eContainer(); eContainer != null; eContainer = eContainer.eContainer()) {
