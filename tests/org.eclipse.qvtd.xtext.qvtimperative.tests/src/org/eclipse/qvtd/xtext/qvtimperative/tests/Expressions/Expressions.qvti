@@ -13,11 +13,12 @@ map expressionsLM in Expressions {
     call expressionsMR {
     	binaryPrecedence := (1 + 2) * (3*5 + 4);
     	unaryPrecedence := -1 * - -1;
+    	notPrecedence := not not (4 = 5);
     }
 }
 
 map expressionsMR in Expressions {
-	check middle(binaryPrecedence:OclAny, unaryPrecedence:OclAny) { }
+	check middle(binaryPrecedence:OclAny, unaryPrecedence:OclAny, notPrecedence:OclAny) { }
     enforce target() {}
     where () {}
 }
