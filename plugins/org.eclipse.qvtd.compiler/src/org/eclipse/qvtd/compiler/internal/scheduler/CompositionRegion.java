@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder;
 
@@ -78,6 +79,16 @@ public class CompositionRegion extends AbstractRegion implements SimpleRegion
 		return headNodeGroups;
 	}
 
+	@Override
+	protected @NonNull SymbolNameBuilder computeSymbolName() {
+		SymbolNameBuilder s = new SymbolNameBuilder();
+		s.appendString("r_");
+		s.appendName(parent2childrenProperty.getOwningClass().getName());
+		s.appendString("_");
+		s.appendName(parent2childrenProperty.getName());
+		return s;
+	}
+
 	public @NonNull Node getComposingNode() {
 		return composingNode;
 	}
@@ -85,7 +96,7 @@ public class CompositionRegion extends AbstractRegion implements SimpleRegion
 	@SuppressWarnings("null")
 	@Override
 	public @NonNull String getName() {
-		return parent2childrenProperty.toString().replace("::", "%");
+		return parent2childrenProperty.toString();//.replace("::", "%");
 	}
 
 	@Override

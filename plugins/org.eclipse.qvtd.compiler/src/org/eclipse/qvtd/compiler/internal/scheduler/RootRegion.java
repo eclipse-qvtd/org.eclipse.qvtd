@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder;
@@ -76,6 +77,13 @@ public class RootRegion extends AbstractRegion implements SimpleRegion
 	}
 
 	@Override
+	protected @NonNull SymbolNameBuilder computeSymbolName() {
+		SymbolNameBuilder s = new SymbolNameBuilder();
+		s.appendString("r_");
+		return s;
+	}
+
+	@Override
 	public @NonNull String getName() {
 		return QVTimperativeUtil.ROOT_MAPPING_NAME;
 	}
@@ -101,7 +109,7 @@ public class RootRegion extends AbstractRegion implements SimpleRegion
 	public boolean isRootRegion() {
 		return true;
 	}
-	
+
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
 		s.setLabel(getName());

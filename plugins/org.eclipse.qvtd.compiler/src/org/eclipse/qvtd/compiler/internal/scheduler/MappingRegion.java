@@ -171,6 +171,24 @@ public class MappingRegion extends AbstractMappingRegion implements Comparable<M
 		return visitor.visitMappingRegion(this);
 	}
 
+	@Override
+	public void addEdge(@NonNull Edge edge) {
+		assert (basicGetSymbolName() == null) || !edge.isNavigation();
+		super.addEdge(edge);
+	}
+
+	@Override
+	protected void addHeadGroup(@NonNull List<Node> headGroup) {
+		assert basicGetSymbolName() == null;
+		super.addHeadGroup(headGroup);
+	}
+
+	@Override
+	public void addNode(@NonNull Node node) {
+		assert basicGetSymbolName() == null;
+		super.addNode(node);
+	}
+
 	/**
 	 * Install the path equivalence that navigation of the successive path elements starting from sourceVariable reaches targetVariable.
 	 */
@@ -385,7 +403,7 @@ public class MappingRegion extends AbstractMappingRegion implements Comparable<M
 		}
 		return successors2;
 	}
-	
+
 	@Override
 	public @NonNull SimpleNode getUnknownNode(@NonNull TypedElement typedElement) {
 		assert !(typedElement instanceof Property);		// Property entries should be AttributeNodes

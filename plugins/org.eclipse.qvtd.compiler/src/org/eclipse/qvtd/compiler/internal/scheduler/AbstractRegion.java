@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.schedule2qvti.QVTs2QVTiVisitor;
+import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.ToDOT;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
@@ -395,6 +396,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	 * The per-typed model realized navigable edges for which an execution may be attempted elsewhere before assignment here.
 	 */
 	private @Nullable Map<TypedModel, Set<NavigationEdge>> typedModel2enforcedEdges = null;
+
+	private @Nullable String symbolName = null;
 	
 	@SuppressWarnings("unused")			// Used in the debugger
 	private final @NonNull ToDOT toDot = new ToDOT(this){};
@@ -523,6 +526,10 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 //		if (isHead) {
 //			s.append("}");
 //		}
+	}
+
+	protected @Nullable String basicGetSymbolName() {
+		return symbolName;
 	}
 
 	@Override
@@ -984,6 +991,40 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return headNodeGroups;
 	}
 
+	protected @NonNull SymbolNameBuilder computeSymbolName() {
+		List<String> names = new ArrayList<String>();
+		for (Region action : getAllMappingRegions()) {
+			names.add(action.getName());
+		}
+		Collections.sort(names);
+		SymbolNameBuilder s = null;
+		for (List<Node> headNodes : getHeadNodeGroups()) {
+			for (Node headNode : headNodes) {
+				s = new SymbolNameBuilder();
+				s.appendString("m_");
+				s.appendName(headNode.getCompleteClass().getName());
+				List<String> edgeNames = new ArrayList<String>();
+				for (NavigationEdge edge : headNode.getNavigationEdges()) {
+					edgeNames.add(edge.getProperty().getName());
+				}
+				Collections.sort(edgeNames);
+				for (String edgeName : edgeNames) {
+					s.appendString("_");
+					s.appendName(edgeName);
+				}
+				break;
+			}
+			if (s != null) {
+				break;
+			}
+		}
+		if (s == null) {
+			s = new SymbolNameBuilder();
+			s.appendString("m_");
+		}
+		return s;
+	}
+
 /*	protected @NonNull PredicateEdge createPredicateEdge(@NonNull ClassNode sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		PredicateEdge predicateEdge = new PredicateEdge(this, sourceNode, source2targetProperty, targetNode);
 		Property target2sourceProperty = source2targetProperty.getOpposite();
@@ -1343,7 +1384,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	public @NonNull Iterable<MergeableRegion> getMergeableRegions() {
 		return EMPTY_MERGEABLE_REGIONS;
 	}
-	
+
 	@Override
 	public @NonNull String getName() {
 		List<String> names = new ArrayList<String>();
@@ -1556,6 +1597,15 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	@Override
 	public @NonNull SuperRegion getSuperRegion() {
 		return superRegion;
+	}
+
+	@Override
+	public final @NonNull String getSymbolName() {
+		String symbolName2 = symbolName;
+		if (symbolName2 == null) {
+			symbolName = symbolName2 = getSchedulerConstants().reserveSymbolName(computeSymbolName(), this);
+		}
+		return symbolName2;
 	}
 
 	@Override

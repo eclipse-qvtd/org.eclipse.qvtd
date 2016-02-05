@@ -210,7 +210,7 @@ public class Scheduler extends SchedulerConstants
 		for (Region region : new ArrayList<Region>(allRegions)) {
 			if (region.getInvokingRegion() == null) {
 				if (rootRegion == null) {
-					String name = ClassUtil.nonNullState(getDependencyGraph().eResource().getURI().trimFileExtension().lastSegment());
+					String name = ClassUtil.nonNullState(getDependencyGraph().eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
 					rootRegion = new ScheduledRegion(name, region);
 				}
 				rootRegion.addRegion(region);

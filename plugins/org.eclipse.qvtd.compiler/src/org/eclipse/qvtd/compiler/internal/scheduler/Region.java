@@ -117,6 +117,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Schedulable
 	@Nullable String getShape();
 	@Nullable String getStyle();
 	@NonNull SuperRegion getSuperRegion();
+	@NonNull String getSymbolName();
 	@NonNull Iterable<Node> getTrueNodes();
 
 	/**

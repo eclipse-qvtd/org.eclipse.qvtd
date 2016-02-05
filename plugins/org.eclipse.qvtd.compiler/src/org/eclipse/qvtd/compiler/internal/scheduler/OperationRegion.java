@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.scheduler.DependencyAnalyzer.DependencyPaths;
 import org.eclipse.qvtd.compiler.internal.scheduler.DependencyAnalyzer.DependencyStep;
 import org.eclipse.qvtd.compiler.internal.scheduler.DependencyAnalyzer.NavigationDependencyStep;
+import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.schedule.utilities.GraphStringBuilder;
@@ -152,7 +153,15 @@ public class OperationRegion extends AbstractMappingRegion
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitOperationRegion(this);
 	}
-	
+
+	@Override
+	protected @NonNull SymbolNameBuilder computeSymbolName() {
+		SymbolNameBuilder s = new SymbolNameBuilder();
+		s.appendString("o_");
+		s.appendName(name);
+		return s;
+	}
+
 	@Override
 	public @NonNull SimpleNode createExtraGuard(@NonNull Node extraNode) {
 		throw new UnsupportedOperationException();
@@ -190,7 +199,7 @@ public class OperationRegion extends AbstractMappingRegion
 	public @NonNull SimpleNode getResultNode() {
 		return resultNode;
 	}
-	
+
 	@Override
 	public @NonNull SimpleNode getUnknownNode(@NonNull TypedElement typedElement) {
 		return ((AbstractMappingRegion)ClassUtil.nonNullState(getInvokingRegion())).getUnknownNode(typedElement);

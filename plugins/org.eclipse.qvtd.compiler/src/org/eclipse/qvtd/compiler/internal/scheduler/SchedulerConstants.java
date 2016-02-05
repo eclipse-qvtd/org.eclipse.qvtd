@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.pivot.values.Unlimited;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.ClassRelationships;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
+import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -137,6 +138,12 @@ public abstract class SchedulerConstants
 	 * OPeration depency analyzer and analyses.
 	 */
 	private @Nullable DependencyAnalyzer dependencyAnalyzer = null;
+	
+	/**
+	 * Map reserving a unique symbol name per region.
+	 */
+	private @NonNull Map<@NonNull String, @NonNull Region> symbolName2region = new HashMap<@NonNull String, @NonNull Region>();
+
 
 	public SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule dependencyGraph, @NonNull QVTp2QVTg qvtp2qvtg) {
 		this.environmentFactory = environmentFactory;
@@ -371,9 +378,29 @@ public abstract class SchedulerConstants
 		return !usage.isOutput();
 	}
 
+	public @NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Region region) {
+		String symbolName = symbolNameBuilder.toString();
+		Region oldRegion = symbolName2region.get(symbolName);
+		if (oldRegion == region) {
+			return symbolName;
+		}
+		if (oldRegion == null) {
+			symbolName2region.put(symbolName, region);
+			return symbolName;
+		}
+		for (int i = 1; true; i++) {
+			String newSymbolName = symbolName + "_" + i;
+			oldRegion = symbolName2region.get(newSymbolName);
+			if (oldRegion == null) {
+				symbolName2region.put(newSymbolName, region);
+				return newSymbolName;
+			}
+		}
+	}
+
 	public void writeCallDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
 		@SuppressWarnings("null")@NonNull URI baseURI = dependencyGraph.eResource().getURI();
-		URI dotURI = URI.createURI(region.getName().replace("\n",  "_").replace("\\n",  "_c") + suffix + ".dot").resolve(baseURI);
+		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_c") + suffix + ".dot").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
 			DOTStringBuilder s = new DOTStringBuilder();
@@ -388,7 +415,7 @@ public abstract class SchedulerConstants
 
 	public void writeCallGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
 		@SuppressWarnings("null")@NonNull URI baseURI = dependencyGraph.eResource().getURI();
-		URI dotURI = URI.createURI(region.getName().replace("\n",  "_").replace("\\n",  "_c") + suffix + ".graphml").resolve(baseURI);
+		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_c") + suffix + ".graphml").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
 			GraphMLStringBuilder s = new GraphMLStringBuilder();
@@ -403,7 +430,7 @@ public abstract class SchedulerConstants
 
 	public void writeDOTfile(@NonNull Region region, @NonNull String suffix) {
 		@SuppressWarnings("null")@NonNull URI baseURI = dependencyGraph.eResource().getURI();
-		URI dotURI = URI.createURI(region.getName().replace("\n",  "_").replace("\\n",  "_").replace("::",  "_") + suffix + ".dot").resolve(baseURI);
+		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_").replace("::",  "_") + suffix + ".dot").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
 			DOTStringBuilder s = new DOTStringBuilder();
@@ -418,7 +445,7 @@ public abstract class SchedulerConstants
 
 	public void writeGraphMLfile(@NonNull Region region, @NonNull String suffix) {
 		@SuppressWarnings("null")@NonNull URI baseURI = dependencyGraph.eResource().getURI();
-		URI dotURI = URI.createURI(region.getName().replace("\n",  "_").replace("\\n",  "_").replace("::",  "_") + suffix + ".graphml").resolve(baseURI);
+		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_").replace("::",  "_") + suffix + ".graphml").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
 			GraphMLStringBuilder s = new GraphMLStringBuilder();
@@ -433,7 +460,7 @@ public abstract class SchedulerConstants
 
 	public void writeRegionDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
 		@SuppressWarnings("null")@NonNull URI baseURI = dependencyGraph.eResource().getURI();
-		URI dotURI = URI.createURI(region.getName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".dot").resolve(baseURI);
+		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".dot").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
 			DOTStringBuilder s = new DOTStringBuilder();
@@ -448,7 +475,7 @@ public abstract class SchedulerConstants
 
 	public void writeRegionGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
 		@SuppressWarnings("null")@NonNull URI baseURI = dependencyGraph.eResource().getURI();
-		URI dotURI = URI.createURI(region.getName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".graphml").resolve(baseURI);
+		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".graphml").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
 			GraphMLStringBuilder s = new GraphMLStringBuilder();
