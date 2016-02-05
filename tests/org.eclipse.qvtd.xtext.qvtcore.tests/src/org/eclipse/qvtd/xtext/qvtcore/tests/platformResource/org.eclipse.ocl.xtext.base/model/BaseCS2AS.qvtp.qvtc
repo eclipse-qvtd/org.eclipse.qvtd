@@ -1,0 +1,1536 @@
+import 'BaseCS.ecore.oclas#/';
+import '../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#/';
+
+map cAnnotationCS_2_Annotation in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(annotationCS : AnnotationCS
+	|) {}
+
+	enforce rightAS() {
+		realize annotation : Annotation
+	|}
+
+	where() {
+		annotationCS.pivot := annotation;
+	}
+}
+map cAttributeCS_2_Property in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {
+		realize property : Property
+	|}
+
+	where() {
+		attributeCS.pivot := property;
+	}
+}
+map cConstraintCS_2_Constraint in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(constraintCS : ConstraintCS
+	|) {}
+
+	enforce rightAS() {
+		realize constraint : Constraint
+	|}
+
+	where() {
+		constraintCS.pivot := constraint;
+	}
+}
+map cDataTypeCS_2_DataType in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(dataTypeCS : DataTypeCS
+	|) {}
+
+	enforce rightAS() {
+		realize dataType : DataType
+	|}
+
+	where() {
+		dataTypeCS.pivot := dataType;
+	}
+}
+map cDetailCS_2_Detail in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(detailCS : DetailCS
+	|) {}
+
+	enforce rightAS() {
+		realize detail : Detail
+	|}
+
+	where() {
+		detailCS.pivot := detail;
+	}
+}
+map cEnumerationCS_2_Enumeration in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationCS : EnumerationCS
+	|) {}
+
+	enforce rightAS() {
+		realize enumeration : Enumeration
+	|}
+
+	where() {
+		enumerationCS.pivot := enumeration;
+	}
+}
+map cEnumerationLiteralCS_2_EnumerationLiteral in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationLiteralCS : EnumerationLiteralCS
+	|) {}
+
+	enforce rightAS() {
+		realize enumerationLiteral : EnumerationLiteral
+	|}
+
+	where() {
+		enumerationLiteralCS.pivot := enumerationLiteral;
+	}
+}
+map cImportCS_2_Import in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(importCS : ImportCS
+	|) {}
+
+	enforce rightAS() {
+		realize import : Import
+	|}
+
+	where() {
+		importCS.pivot := import;
+	}
+}
+map cLambdaTypeCS_2_LambdaType in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(lambdaTypeCS : LambdaTypeCS
+	|) {}
+
+	enforce rightAS() {
+		realize lambdaType : LambdaType
+	|}
+
+	where() {
+		lambdaTypeCS.pivot := lambdaType;
+	}
+}
+map cOperationCS_2_Operation in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(operationCS : OperationCS
+	|) {}
+
+	enforce rightAS() {
+		realize operation : Operation
+	|}
+
+	where() {
+		operationCS.pivot := operation;
+	}
+}
+map cPackageCS_2_Package in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(packageCS : PackageCS
+	|) {}
+
+	enforce rightAS() {
+		realize package : Package
+	|}
+
+	where() {
+		packageCS.pivot := package;
+	}
+}
+map cParameterCS_2_Parameter in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(parameterCS : ParameterCS
+	|) {}
+
+	enforce rightAS() {
+		realize parameter : Parameter
+	|}
+
+	where() {
+		parameterCS.pivot := parameter;
+	}
+}
+map cPrimitiveTypeRefCS_2_PrimitiveType in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(primitiveTypeRefCS : PrimitiveTypeRefCS
+	|) {}
+
+	enforce rightAS() {
+		realize primitiveType : PrimitiveType
+	|}
+
+	where() {
+		primitiveTypeRefCS.pivot := primitiveType;
+	}
+}
+map cReferenceCS_2_Property_0 in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {
+		realize property : Property
+	|}
+
+	where() {
+		referenceCS.pivot := property;
+	}
+}
+map cRootPackageCS_2_Model in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(rootPackageCS : RootPackageCS
+	|) {}
+
+	enforce rightAS() {
+		realize model : Model
+	|}
+
+	where() {
+		rootPackageCS.pivot := model;
+	}
+}
+map cSpecificationCS_2_LanguageExpression in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(specificationCS : SpecificationCS
+	|) {}
+
+	enforce rightAS() {
+		realize languageExpression : LanguageExpression
+	|}
+
+	where() {
+		specificationCS.pivot := languageExpression;
+	}
+}
+map cStructuredClassCS_2_Class in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(structuredClassCS : StructuredClassCS
+	|) {}
+
+	enforce rightAS() {
+		realize class : Class
+	|}
+
+	where() {
+		structuredClassCS.pivot := class;
+	}
+}
+map cTemplateBindingCS_2_TemplateBinding in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(templateBindingCS : TemplateBindingCS
+	|) {}
+
+	enforce rightAS() {
+		realize templateBinding : TemplateBinding
+	|}
+
+	where() {
+		templateBindingCS.pivot := templateBinding;
+	}
+}
+map cTemplateParameterSubstitutionCS_2_TemplateParameterSubstitution in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(templateParameterSubstitutionCS : TemplateParameterSubstitutionCS
+	|) {}
+
+	enforce rightAS() {
+		realize templateParameterSubstitution : TemplateParameterSubstitution
+	|}
+
+	where() {
+		templateParameterSubstitutionCS.pivot := templateParameterSubstitution;
+	}
+}
+map cTemplateSignatureCS_2_TemplateSignature in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(templateSignatureCS : TemplateSignatureCS
+	|) {}
+
+	enforce rightAS() {
+		realize templateSignature : TemplateSignature
+	|}
+
+	where() {
+		templateSignatureCS.pivot := templateSignature;
+	}
+}
+map cTuplePartCS_2_Property in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(tuplePartCS : TuplePartCS
+	|) {}
+
+	enforce rightAS() {
+		realize property : Property
+	|}
+
+	where() {
+		tuplePartCS.pivot := property;
+	}
+}
+map cTupleTypeCS_2_TupleType in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(tupleTypeCS : TupleTypeCS
+	|) {}
+
+	enforce rightAS() {
+		realize tupleType : TupleType
+	|}
+
+	where() {
+		tupleTypeCS.pivot := tupleType;
+	}
+}
+map cTypeParameterCS_2_TemplateParameter in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(typeParameterCS : TypeParameterCS
+	|) {}
+
+	enforce rightAS() {
+		realize templateParameter : TemplateParameter
+	|}
+
+	where() {
+		typeParameterCS.pivot := templateParameter;
+	}
+}
+map uAnnotationCS_2_Annotation_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(annotationCS : AnnotationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		annotationCS.pivot.oclAsType(pivot::Annotation).name := annotationCS.name;
+	}
+}
+map uAnnotationCS_2_Annotation_ownedDetails in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(annotationCS : AnnotationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		annotationCS.pivot.oclAsType(pivot::Annotation).ownedDetails :=
+		annotationCS.ownedDetails.pivot.oclAsType(pivot::Detail);
+	}
+}
+map uAnnotationCS_2_Annotation_ownedContents in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(annotationCS : AnnotationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		annotationCS.pivot.oclAsType(pivot::Annotation).ownedContents :=
+		annotationCS.ownedContents.pivot.oclAsType(pivot::Element);
+	}
+}
+map uAnnotationCS_2_Annotation_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(annotationCS : AnnotationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		annotationCS.pivot.oclAsType(pivot::Annotation).ownedAnnotations :=
+		annotationCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+	}
+}
+map uAnnotationCS_2_Annotation_references in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(annotationCS : AnnotationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		annotationCS.pivot.oclAsType(pivot::Annotation).references :=
+		annotationCS.ownedReferences.pivot.oclAsType(pivot::Element);
+	}
+}
+map uAttributeCS_2_Property_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).name := attributeCS.name;
+	}
+}
+map uAttributeCS_2_Property_isStatic in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).isStatic := attributeCS.qualifiers->includes('static');
+	}
+}
+map uAttributeCS_2_Property_isDerived in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).isDerived := attributeCS.qualifiers->includes('derived');
+	}
+}
+map uAttributeCS_2_Property_isID in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).isID := attributeCS.qualifiers->includes('id');
+	}
+}
+map uAttributeCS_2_Property_isReadOnly in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).isReadOnly := attributeCS.qualifiers->includes('readonly');
+	}
+}
+map uAttributeCS_2_Property_isTransient in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).isTransient := attributeCS.qualifiers->includes('transient');
+	}
+}
+map uAttributeCS_2_Property_isUnsettable in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).isUnsettable := attributeCS.qualifiers->includes('unsettable');
+	}
+}
+map uAttributeCS_2_Property_isVolatile in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).isVolatile := attributeCS.qualifiers->includes('volatile');
+	}
+}
+map uAttributeCS_2_Property_defaultValueString in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).defaultValueString := attributeCS._'default';
+	}
+}
+map uAttributeCS_2_Property_ownedExpression in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).ownedExpression :=
+		attributeCS.ownedDefaultExpressions.pivot.oclAsType(pivot::LanguageExpression);
+	}
+}
+map uAttributeCS_2_Property_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).ownedAnnotations :=
+		attributeCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+	}
+}
+map uAttributeCS_2_Property_type in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).type := attributeCS.ownedType.pivot.oclAsType(pivot::Element);
+	}
+}
+map uAttributeCS_2_Property_owningClass in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(attributeCS : AttributeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		attributeCS.pivot.oclAsType(pivot::Property).owningClass := if attributeCS.qualifiers->includes('definition') then
+		null
+		else null
+		endif;
+	}
+}
+map uConstraintCS_2_Constraint_ownedSpecification in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(constraintCS : ConstraintCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		constraintCS.pivot.oclAsType(pivot::Constraint).ownedSpecification :=
+		constraintCS.ownedSpecification.pivot.oclAsType(pivot::LanguageExpression);
+	}
+}
+map uDataTypeCS_2_DataType_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(dataTypeCS : DataTypeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		dataTypeCS.pivot.oclAsType(pivot::DataType).name := dataTypeCS.name;
+	}
+}
+map uDataTypeCS_2_DataType_ownedSignature in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(dataTypeCS : DataTypeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		dataTypeCS.pivot.oclAsType(pivot::DataType).ownedSignature :=
+		dataTypeCS.ownedSignature.pivot.oclAsType(pivot::TemplateSignature);
+	}
+}
+map uDataTypeCS_2_DataType_instanceClassName in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(dataTypeCS : DataTypeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		dataTypeCS.pivot.oclAsType(pivot::DataType).instanceClassName := dataTypeCS.instanceClassName;
+	}
+}
+map uDataTypeCS_2_DataType_isSerializable in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(dataTypeCS : DataTypeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		dataTypeCS.pivot.oclAsType(pivot::DataType).isSerializable := dataTypeCS.isSerializable;
+	}
+}
+map uDataTypeCS_2_DataType_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(dataTypeCS : DataTypeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		dataTypeCS.pivot.oclAsType(pivot::DataType).ownedAnnotations :=
+		dataTypeCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+	}
+}
+map uDataTypeCS_2_DataType_ownedInvariants in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(dataTypeCS : DataTypeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		dataTypeCS.pivot.oclAsType(pivot::DataType).ownedInvariants :=
+		dataTypeCS.ownedConstraints.pivot.oclAsType(pivot::Constraint);
+	}
+}
+map uDataTypeCS_2_DataType_superClasses in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(dataTypeCS : DataTypeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		dataTypeCS.pivot.oclAsType(pivot::DataType).superClasses := ocl::OclElement;
+	}
+}
+map uDetailCS_2_Detail_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(detailCS : DetailCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		detailCS.pivot.oclAsType(pivot::Detail).name := detailCS.name;
+	}
+}
+map uDetailCS_2_Detail_values in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(detailCS : DetailCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		detailCS.pivot.oclAsType(pivot::Detail).values := detailCS.values;
+	}
+}
+map uEnumerationCS_2_Enumeration_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationCS : EnumerationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		enumerationCS.pivot.oclAsType(ocl::Enumeration).name := enumerationCS.name;
+	}
+}
+map uEnumerationCS_2_Enumeration_instanceClassName in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationCS : EnumerationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		enumerationCS.pivot.oclAsType(ocl::Enumeration).instanceClassName := enumerationCS.instanceClassName;
+	}
+}
+map uEnumerationCS_2_Enumeration_isSerializable in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationCS : EnumerationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		enumerationCS.pivot.oclAsType(ocl::Enumeration).isSerializable := enumerationCS.isSerializable;
+	}
+}
+map uEnumerationCS_2_Enumeration_ownedLiterals in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationCS : EnumerationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		enumerationCS.pivot.oclAsType(ocl::Enumeration).ownedLiterals :=
+		enumerationCS.ownedLiterals.pivot.oclAsType(ocl::EnumerationLiteral);
+	}
+}
+map uEnumerationCS_2_Enumeration_ownedSignature in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationCS : EnumerationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		enumerationCS.pivot.oclAsType(ocl::Enumeration).ownedSignature :=
+		enumerationCS.ownedSignature.pivot.oclAsType(pivot::TemplateSignature);
+	}
+}
+map uEnumerationCS_2_Enumeration_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationCS : EnumerationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		enumerationCS.pivot.oclAsType(ocl::Enumeration).ownedAnnotations :=
+		enumerationCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+	}
+}
+map uEnumerationCS_2_Enumeration_ownedInvariants in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationCS : EnumerationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		enumerationCS.pivot.oclAsType(ocl::Enumeration).ownedInvariants :=
+		enumerationCS.ownedConstraints.pivot.oclAsType(pivot::Constraint);
+	}
+}
+map uEnumerationCS_2_Enumeration_superClasses in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationCS : EnumerationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		enumerationCS.pivot.oclAsType(ocl::Enumeration).superClasses := ocl::OclElement;
+	}
+}
+map uEnumerationLiteralCS_2_EnumerationLiteral_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationLiteralCS : EnumerationLiteralCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		enumerationLiteralCS.pivot.oclAsType(ocl::EnumerationLiteral).name := enumerationLiteralCS.name;
+	}
+}
+map uEnumerationLiteralCS_2_EnumerationLiteral_value in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationLiteralCS : EnumerationLiteralCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		enumerationLiteralCS.pivot.oclAsType(ocl::EnumerationLiteral).value := enumerationLiteralCS.value;
+	}
+}
+map uEnumerationLiteralCS_2_EnumerationLiteral_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(enumerationLiteralCS : EnumerationLiteralCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		enumerationLiteralCS.pivot.oclAsType(ocl::EnumerationLiteral).ownedAnnotations :=
+		enumerationLiteralCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+	}
+}
+map uImportCS_2_Import_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(importCS : ImportCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		importCS.pivot.oclAsType(pivot::Import).name := importCS.name;
+	}
+}
+map uImportCS_2_Import_importedNamespace in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(importCS : ImportCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		importCS.pivot.oclAsType(pivot::Import).importedNamespace := importCS.referredNamespace;
+	}
+}
+map uLambdaTypeCS_2_LambdaType_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(lambdaTypeCS : LambdaTypeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lambdaTypeCS.pivot.oclAsType(pivot::LambdaType).name := lambdaTypeCS.name;
+	}
+}
+map uLambdaTypeCS_2_LambdaType_contextType in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(lambdaTypeCS : LambdaTypeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lambdaTypeCS.pivot.oclAsType(pivot::LambdaType).contextType :=
+		lambdaTypeCS.ownedContextType.pivot.oclAsType(pivot::Element);
+	}
+}
+map uLambdaTypeCS_2_LambdaType_resultType in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(lambdaTypeCS : LambdaTypeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lambdaTypeCS.pivot.oclAsType(pivot::LambdaType).resultType :=
+		lambdaTypeCS.ownedResultType.pivot.oclAsType(pivot::Element);
+	}
+}
+map uLambdaTypeCS_2_LambdaType_parameterType in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(lambdaTypeCS : LambdaTypeCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lambdaTypeCS.pivot.oclAsType(pivot::LambdaType).parameterType :=
+		lambdaTypeCS.ownedParameterTypes.pivot.oclAsType(pivot::Element);
+	}
+}
+map uOperationCS_2_Operation_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(operationCS : OperationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		operationCS.pivot.oclAsType(pivot::Operation).name := operationCS.name;
+	}
+}
+map uOperationCS_2_Operation_isStatic in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(operationCS : OperationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		operationCS.pivot.oclAsType(pivot::Operation).isStatic := operationCS.qualifiers->includes('static');
+	}
+}
+map uOperationCS_2_Operation_ownedSignature in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(operationCS : OperationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		operationCS.pivot.oclAsType(pivot::Operation).ownedSignature :=
+		operationCS.ownedSignature.pivot.oclAsType(pivot::TemplateSignature);
+	}
+}
+map uOperationCS_2_Operation_ownedParameters in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(operationCS : OperationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		operationCS.pivot.oclAsType(pivot::Operation).ownedParameters :=
+		operationCS.ownedParameters.pivot.oclAsType(pivot::Parameter);
+	}
+}
+map uOperationCS_2_Operation_raisedExceptions in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(operationCS : OperationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		operationCS.pivot.oclAsType(pivot::Operation).raisedExceptions :=
+		operationCS.ownedExceptions.pivot.oclAsType(pivot::Element);
+	}
+}
+map uOperationCS_2_Operation_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(operationCS : OperationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		operationCS.pivot.oclAsType(pivot::Operation).ownedAnnotations :=
+		operationCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+	}
+}
+map uOperationCS_2_Operation_ownedPreconditions in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(operationCS : OperationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		operationCS.pivot.oclAsType(pivot::Operation).ownedPreconditions :=
+		operationCS.ownedPreconditions.pivot.oclAsType(pivot::Constraint);
+	}
+}
+map uOperationCS_2_Operation_ownedPostconditions in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(operationCS : OperationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		operationCS.pivot.oclAsType(pivot::Operation).ownedPostconditions :=
+		operationCS.ownedPostconditions.pivot.oclAsType(pivot::Constraint);
+	}
+}
+map uOperationCS_2_Operation_bodyExpression in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(operationCS : OperationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		operationCS.pivot.oclAsType(pivot::Operation).bodyExpression :=
+		operationCS.ownedBodyExpressions.pivot.oclAsType(pivot::LanguageExpression);
+	}
+}
+map uOperationCS_2_Operation_type in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(operationCS : OperationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		operationCS.pivot.oclAsType(pivot::Operation).type := operationCS.ownedType.pivot.oclAsType(pivot::Element);
+	}
+}
+map uOperationCS_2_Operation_owningClass in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(operationCS : OperationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		operationCS.pivot.oclAsType(pivot::Operation).owningClass := if operationCS.qualifiers->includes('definition') then
+		null
+		else null
+		endif;
+	}
+}
+map uPackageCS_2_Package_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(packageCS : PackageCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		packageCS.pivot.oclAsType(pivot::Package).name := packageCS.name;
+	}
+}
+map uPackageCS_2_Package_nsPrefix in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(packageCS : PackageCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		packageCS.pivot.oclAsType(pivot::Package).nsPrefix := packageCS.nsPrefix;
+	}
+}
+map uPackageCS_2_Package_URI in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(packageCS : PackageCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		packageCS.pivot.oclAsType(pivot::Package).URI := packageCS.nsURI;
+	}
+}
+map uPackageCS_2_Package_ownedPackages in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(packageCS : PackageCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		packageCS.pivot.oclAsType(pivot::Package).ownedPackages := packageCS.ownedPackages.pivot.oclAsType(pivot::Package);
+	}
+}
+map uPackageCS_2_Package_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(packageCS : PackageCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		packageCS.pivot.oclAsType(pivot::Package).ownedAnnotations :=
+		packageCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+	}
+}
+map uPackageCS_2_Package_ownedClasses in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(packageCS : PackageCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		packageCS.pivot.oclAsType(pivot::Package).ownedClasses := packageCS.ownedClasses.pivot.oclAsType(ocl::Class);
+	}
+}
+map uParameterCS_2_Parameter_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(parameterCS : ParameterCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		parameterCS.pivot.oclAsType(pivot::Parameter).name := parameterCS.name;
+	}
+}
+map uParameterCS_2_Parameter_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(parameterCS : ParameterCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		parameterCS.pivot.oclAsType(pivot::Parameter).ownedAnnotations :=
+		parameterCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+	}
+}
+map uParameterCS_2_Parameter_type in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(parameterCS : ParameterCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		parameterCS.pivot.oclAsType(pivot::Parameter).type := parameterCS.ownedType.pivot.oclAsType(pivot::Element);
+	}
+}
+map uPrimitiveTypeRefCS_2_PrimitiveType_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(primitiveTypeRefCS : PrimitiveTypeRefCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		primitiveTypeRefCS.pivot.oclAsType(pivot::PrimitiveType).name := primitiveTypeRefCS.name;
+	}
+}
+map uReferenceCS_2_Property_0_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).name := referenceCS.name;
+	}
+}
+map uReferenceCS_2_Property_0_isStatic in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).isStatic := referenceCS.qualifiers->includes('static');
+	}
+}
+map uReferenceCS_2_Property_0_isComposite in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).isComposite := referenceCS.qualifiers->includes('compososes');
+	}
+}
+map uReferenceCS_2_Property_0_isDerived in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).isDerived := referenceCS.qualifiers->includes('derived');
+	}
+}
+map uReferenceCS_2_Property_0_isReadOnly in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).isReadOnly := referenceCS.qualifiers->includes('readonly');
+	}
+}
+map uReferenceCS_2_Property_0_isResolveProxies in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).isResolveProxies := not referenceCS.qualifiers->exists(x : String |
+			x = '!resolve');
+	}
+}
+map uReferenceCS_2_Property_0_isTransient in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).isTransient := referenceCS.qualifiers->includes('transient');
+	}
+}
+map uReferenceCS_2_Property_0_isUnsettable in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).isUnsettable := referenceCS.qualifiers->includes('unsettable');
+	}
+}
+map uReferenceCS_2_Property_0_isVolatile in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).isVolatile := referenceCS.qualifiers->includes('volatile');
+	}
+}
+map uReferenceCS_2_Property_0_keys in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).keys := referenceCS.referredKeys;
+	}
+}
+map uReferenceCS_2_Property_0_defaultValueString in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).defaultValueString := referenceCS._'default';
+	}
+}
+map uReferenceCS_2_Property_0_ownedExpression in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).ownedExpression := if referenceCS.ownedDefaultExpressions->notEmpty()
+		then referenceCS.ownedDefaultExpressions.pivot.oclAsType(pivot::LanguageExpression) else null
+		endif;
+	}
+}
+map uReferenceCS_2_Property_0_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).ownedAnnotations :=
+		referenceCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+	}
+}
+map uReferenceCS_2_Property_0_type in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).type := referenceCS.ownedType.pivot.oclAsType(pivot::Element);
+	}
+}
+map uReferenceCS_2_Property_0_opposite in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).opposite := if not (referenceCS.referredOpposite = null) then
+		referenceCS.referredOpposite
+		else Property{name = referenceCS.pivot.oclAsType(pivot::Property).owningClass.name, isImplicit = true, isRequired =
+				false, owningClass = referenceCS.ownedType.pivot.oclAsType(pivot::Element)}endif;
+	}
+}
+map uReferenceCS_2_Property_0_owningClass in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(referenceCS : ReferenceCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		referenceCS.pivot.oclAsType(pivot::Property).owningClass := if referenceCS.qualifiers->includes('definition') then
+		null
+		else null
+		endif;
+	}
+}
+map uRootPackageCS_2_Model_ownedImports in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(rootPackageCS : RootPackageCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		rootPackageCS.pivot.oclAsType(pivot::Model).ownedImports :=
+		rootPackageCS.ownedImports.pivot.oclAsType(pivot::Import);
+	}
+}
+map uRootPackageCS_2_Model_ownedPackages in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(rootPackageCS : RootPackageCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		rootPackageCS.pivot.oclAsType(pivot::Model).ownedPackages :=
+		rootPackageCS.ownedPackages.pivot.oclAsType(pivot::Package);
+	}
+}
+map uSpecificationCS_2_LanguageExpression_language in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(specificationCS : SpecificationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		specificationCS.pivot.oclAsType(pivot::LanguageExpression).language := 'OCL';
+	}
+}
+map uSpecificationCS_2_LanguageExpression_body in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(specificationCS : SpecificationCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		specificationCS.pivot.oclAsType(pivot::LanguageExpression).body := Sequence(String){specificationCS.exprString};
+	}
+}
+map uStructuredClassCS_2_Class_name in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(structuredClassCS : StructuredClassCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		structuredClassCS.pivot.oclAsType(ocl::Class).name := structuredClassCS.name;
+	}
+}
+map uStructuredClassCS_2_Class_instanceClassName in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(structuredClassCS : StructuredClassCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		structuredClassCS.pivot.oclAsType(ocl::Class).instanceClassName := structuredClassCS.instanceClassName;
+	}
+}
+map uStructuredClassCS_2_Class_isAbstract in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(structuredClassCS : StructuredClassCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		structuredClassCS.pivot.oclAsType(ocl::Class).isAbstract := structuredClassCS.isAbstract;
+	}
+}
+map uStructuredClassCS_2_Class_isInterface in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(structuredClassCS : StructuredClassCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		structuredClassCS.pivot.oclAsType(ocl::Class).isInterface := structuredClassCS.isInterface;
+	}
+}
+map uStructuredClassCS_2_Class_ownedSignature in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(structuredClassCS : StructuredClassCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		structuredClassCS.pivot.oclAsType(ocl::Class).ownedSignature :=
+		structuredClassCS.ownedSignature.pivot.oclAsType(pivot::TemplateSignature);
+	}
+}
+map uStructuredClassCS_2_Class_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(structuredClassCS : StructuredClassCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		structuredClassCS.pivot.oclAsType(ocl::Class).ownedAnnotations :=
+		structuredClassCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+	}
+}
+map uStructuredClassCS_2_Class_ownedOperations in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(structuredClassCS : StructuredClassCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		structuredClassCS.pivot.oclAsType(ocl::Class).ownedOperations :=
+		structuredClassCS.ownedOperations.pivot.oclAsType(pivot::Operation);
+	}
+}
+map uStructuredClassCS_2_Class_ownedProperties in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(structuredClassCS : StructuredClassCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		structuredClassCS.pivot.oclAsType(ocl::Class).ownedProperties :=
+		structuredClassCS.ownedProperties.pivot.oclAsType(pivot::Element);
+	}
+}
+map uStructuredClassCS_2_Class_ownedInvariants in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(structuredClassCS : StructuredClassCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		structuredClassCS.pivot.oclAsType(ocl::Class).ownedInvariants :=
+		structuredClassCS.ownedConstraints.pivot.oclAsType(pivot::Constraint);
+	}
+}
+map uStructuredClassCS_2_Class_superClasses in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(structuredClassCS : StructuredClassCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		structuredClassCS.pivot.oclAsType(ocl::Class).superClasses := if structuredClassCS.ownedSuperTypes = null then
+		ocl::OclElement
+		else structuredClassCS.ownedSuperTypes.pivot.oclAsType(pivot::Element) endif;
+	}
+}
+map uTemplateBindingCS_2_TemplateBinding_ownedSubstitutions in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(templateBindingCS : TemplateBindingCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		templateBindingCS.pivot.oclAsType(pivot::TemplateBinding).ownedSubstitutions :=
+		templateBindingCS.ownedSubstitutions.pivot.oclAsType(pivot::TemplateParameterSubstitution);
+	}
+}
+map uTemplateBindingCS_2_TemplateBinding_templateSignature in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(templateBindingCS : TemplateBindingCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		templateBindingCS.pivot.oclAsType(pivot::TemplateBinding).templateSignature :=
+		templateBindingCS.owningElement.pivot.oclAsType(ocl::Class).unspecializedElement.ownedSignature;
+	}
+}
+map uTemplateParameterSubstitutionCS_2_TemplateParameterSubstitution_actual in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(templateParameterSubstitutionCS : TemplateParameterSubstitutionCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		templateParameterSubstitutionCS.pivot.oclAsType(pivot::TemplateParameterSubstitution).actual :=
+		templateParameterSubstitutionCS.ownedActualParameter.pivot.oclAsType(pivot::Element);
+	}
+}
+map uTemplateParameterSubstitutionCS_2_TemplateParameterSubstitution_formal in BaseCS2AS_qvtp_qvtcas
+{
+	check leftCS(templateParameterSubstitutionCS : TemplateParameterSubstitutionCS
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		templateParameterSubstitutionCS.pivot.oclAsType(pivot::TemplateParameterSubstitution).formal :=
+	let elementPosition : Integer =
+		templateParameterSubstitutionCS.owningBinding.ownedSubstitutions->indexOf(templateParameterSubstitutionCS)
+in
+	templateParameterSubstitutionCS.owningBinding.owningElement.pivot.oclAsType(ocl::Class).ownedSignature.ownedParameters->at(elementPosition);
+}
+}
+map uTemplateSignatureCS_2_TemplateSignature_ownedParameters in BaseCS2AS_qvtp_qvtcas
+{
+check leftCS(templateSignatureCS : TemplateSignatureCS
+|) {}
+
+enforce rightAS() {}
+
+where() {
+	templateSignatureCS.pivot.oclAsType(pivot::TemplateSignature).ownedParameters :=
+	templateSignatureCS.ownedParameters.pivot.oclAsType(pivot::Element);
+}
+}
+map uTuplePartCS_2_Property_name in BaseCS2AS_qvtp_qvtcas
+{
+check leftCS(tuplePartCS : TuplePartCS
+|) {}
+
+enforce rightAS() {}
+
+where() {
+	tuplePartCS.pivot.oclAsType(pivot::Property).name := tuplePartCS.name;
+}
+}
+map uTuplePartCS_2_Property_type in BaseCS2AS_qvtp_qvtcas
+{
+check leftCS(tuplePartCS : TuplePartCS
+|) {}
+
+enforce rightAS() {}
+
+where() {
+	tuplePartCS.pivot.oclAsType(pivot::Property).type := tuplePartCS.ownedType.pivot.oclAsType(pivot::Element);
+}
+}
+map uTupleTypeCS_2_TupleType_name in BaseCS2AS_qvtp_qvtcas
+{
+check leftCS(tupleTypeCS : TupleTypeCS
+|) {}
+
+enforce rightAS() {}
+
+where() {
+	tupleTypeCS.pivot.oclAsType(pivot::TupleType).name := tupleTypeCS.name;
+}
+}
+map uTupleTypeCS_2_TupleType_ownedProperties in BaseCS2AS_qvtp_qvtcas
+{
+check leftCS(tupleTypeCS : TupleTypeCS
+|) {}
+
+enforce rightAS() {}
+
+where() {
+	tupleTypeCS.pivot.oclAsType(pivot::TupleType).ownedProperties :=
+	tupleTypeCS.ownedParts.pivot.oclAsType(pivot::Property);
+}
+}
+map uTypeParameterCS_2_TemplateParameter_constrainingClasses in BaseCS2AS_qvtp_qvtcas
+{
+check leftCS(typeParameterCS : TypeParameterCS
+|) {}
+
+enforce rightAS() {}
+
+where() {
+	typeParameterCS.pivot.oclAsType(pivot::TemplateParameter).constrainingClasses := Set(ocl::Class){pivot::Class{name =
+			typeParameterCS.name, superClasses = typeParameterCS.ownedExtends.pivot.oclAsType(pivot::Element)}};
+}
+}
+
+transformation BaseCS2AS_qvtp_qvtcas
+{
+leftCS imports basecs;
+rightAS imports pivot;
+}
