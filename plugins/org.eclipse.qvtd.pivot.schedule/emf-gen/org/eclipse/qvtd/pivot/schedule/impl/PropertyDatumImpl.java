@@ -332,7 +332,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 
 	@Override
 	public String toString() {
-		return property.toString();
+		return String.valueOf(getClassDatum()) + "::" + (property != null ? property.getName() : "<null>");
 	}
 
 } //PropertyDatumImpl

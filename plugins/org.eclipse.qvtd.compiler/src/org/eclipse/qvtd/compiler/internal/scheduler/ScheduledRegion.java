@@ -355,11 +355,12 @@ public class ScheduledRegion extends AbstractRegion
 			edges = new ArrayList<NavigationEdge>();
 			producedPropertyDatum2realizedEdges.put(propertyDatum, edges);
 		}
-		assert !edges.contains(producedEdge);
-		edges.add(producedEdge);
-		for (AbstractDatum superAbstractDatum : propertyDatum.getSuper()) {
-			if (superAbstractDatum instanceof PropertyDatum) {
-				addProducedEdge(producedEdge, (PropertyDatum) superAbstractDatum);
+		if (!edges.contains(producedEdge)) {
+			edges.add(producedEdge);
+			for (AbstractDatum superAbstractDatum : propertyDatum.getSuper()) {
+				if (superAbstractDatum instanceof PropertyDatum) {
+					addProducedEdge(producedEdge, (PropertyDatum) superAbstractDatum);
+				}
 			}
 		}
 	}

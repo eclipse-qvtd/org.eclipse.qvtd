@@ -2015,7 +2015,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public String toString() {
-		return getName();
+		return symbolName != null ? symbolName : getName();
 	}
 
 //	@Override
