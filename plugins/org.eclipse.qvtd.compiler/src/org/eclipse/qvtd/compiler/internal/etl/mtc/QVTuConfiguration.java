@@ -21,7 +21,9 @@ import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.LiteralExp;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.qvtd.compiler.internal.etl.utils.MtcUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
@@ -31,6 +33,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
 /**
  * QVTuConfiguration captures the configuration to be imposed by a QVTc2QVTu transformation
@@ -83,6 +86,16 @@ public class QVTuConfiguration
 		return null;
 	}
 
+	private @Nullable VariableDeclaration getReferredVariable(@NonNull OCLExpression oclExpression) {
+		if (oclExpression instanceof VariableExp) {
+			return ((VariableExp)oclExpression).getReferredVariable();
+		}
+//		if (oclExpression instanceof TemplateExp) {
+//			return ((TemplateExp)oclExpression).getBindsTo();
+//		}
+		return null;
+	}
+
 	/**
 	 * Checks if is check mode.
 	 */
@@ -114,6 +127,32 @@ public class QVTuConfiguration
 	public boolean isInputDomain(@Nullable Area area) {
         return (area instanceof CoreDomain) && inputs.contains(((CoreDomain)area).getTypedModel().getName());
 	}
+
+	/**
+	 * Return true if oclExpression uses only the input domain variables.
+	 */
+	public boolean isInputDomainExpression(@NonNull OCLExpression oclExpression) {
+		VariableDeclaration referredVariable = getReferredVariable(oclExpression);
+		if ((referredVariable != null) && !isInputDomainVariable(referredVariable)) {
+			return false;
+		}
+		for (EObject eObject : oclExpression.eContents()) {
+			if (eObject instanceof OCLExpression) {
+				if (!isInputDomainExpression((OCLExpression)eObject)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Return true if variable is declared in the input domain.
+	 */
+	public boolean isInputDomainVariable(@NonNull VariableDeclaration variable) {
+		Area area = QVTcoreBaseUtil.getContainingArea(variable);
+		return isInputDomain(area);
+	}
 	
 	/**
 	 * Is a local variable to M .
@@ -135,7 +174,38 @@ public class QVTuConfiguration
 	public boolean isMiddleDomain(@Nullable Area area) {
 		return area instanceof Mapping;
 	}
-	
+
+	/**
+	 * Return the non-null PropertyCallExp if oclExpression is a PropertyCallExp in the middle domain.
+	 */
+	public @Nullable PropertyCallExp isMiddleDomainPropertyAccess(@NonNull OCLExpression oclExpression) {
+		if (!(oclExpression instanceof PropertyCallExp)) {
+			return null;
+		}
+		PropertyCallExp propertyCallExp = (PropertyCallExp)oclExpression;
+		OCLExpression sourceExpression = propertyCallExp.getOwnedSource();
+		if (!(sourceExpression instanceof VariableExp)) {
+			return null;
+		}
+		VariableExp variableExp = (VariableExp)sourceExpression;
+		VariableDeclaration variable = variableExp.getReferredVariable();
+		if (!(variable instanceof Variable)) {
+			return null;
+		}
+		if (!isMiddleDomainVariable(variable)) {
+			return null;
+		}
+		return propertyCallExp;
+	}
+
+	/**
+	 * Return true if variable is declared in the middle domain.
+	 */
+	public boolean isMiddleDomainVariable(@NonNull VariableDeclaration variable) {
+		Area area = QVTcoreBaseUtil.getContainingArea(variable);
+		return isMiddleDomain(area);
+	}
+
 	/**
 	 * Is a Middle to Left assignment.
 	 */

@@ -63,7 +63,14 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			}
 			return true;
 		}
-		
+
+/*		private @NonNull PropertyAssignment convertToPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull OCLExpression rightExpression) {
+			PropertyAssignment paOut = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
+			context.addTrace((Predicate)propertyCallExp.eContainer().eContainer(), paOut);
+			paOut.setTargetProperty(propertyCallExp.getReferredProperty());
+			return paOut;
+		} */
+	
 		//
 		//	Assignments may mutate to Predicates.
 		//
@@ -147,6 +154,24 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			if ((pIn.getPattern() instanceof BottomPattern) && allReferencedVariablesInOutputDomain(pIn)) {
 				return null;
 			}
+/*			OCLExpression conditionExpression = pIn.getConditionExpression();
+			if (conditionExpression instanceof OperationCallExp) {
+				OperationCallExp callExp = (OperationCallExp)conditionExpression;
+				if ("=".equals(callExp.getReferredOperation().getName()) && (callExp.getOwnedArguments().size() == 1)) {		// FIXME more accuracy
+					OCLExpression leftExpression= callExp.getOwnedSource();
+					OCLExpression rightExpression= callExp.getOwnedArguments().get(0);
+					if ((leftExpression != null) && (rightExpression != null)) {
+						PropertyCallExp middlePropertyAccess = qvtuConfiguration.isMiddleDomainPropertyAccess(leftExpression);
+						if ((middlePropertyAccess != null) && qvtuConfiguration.isInputDomainExpression(rightExpression)) {
+							return convertToPropertyAssignment(middlePropertyAccess, rightExpression);
+						}
+						middlePropertyAccess = qvtuConfiguration.isMiddleDomainPropertyAccess(rightExpression);
+						if ((middlePropertyAccess != null) && qvtuConfiguration.isInputDomainExpression(leftExpression)) {
+							return convertToPropertyAssignment(middlePropertyAccess, leftExpression);
+						}
+					}
+				}
+			} */
 			return super.visitPredicate(pIn);
 		}
 
@@ -162,10 +187,11 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			}
 			if (qvtuConfiguration.isMtoL(paIn)) {
 				// Assignments to Predicates
-				Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
-				context.addTrace(paIn, pOut);
-	            pOut.setConditionExpression(MtcUtil.assignmentToOclExp(paIn, environmentFactory));
-	            return pOut;
+//				Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
+//				context.addTrace(paIn, pOut);
+//	            pOut.setConditionExpression(MtcUtil.assignmentToOclExp(paIn, environmentFactory));
+//	            return pOut;
+				return null;
 			}
 			if (qvtuConfiguration.isFromInputDomain(paIn.getSlotExpression()) && allReferencedVariablesInInputDomain(paIn)) {
 				// Assignments to Predicates
