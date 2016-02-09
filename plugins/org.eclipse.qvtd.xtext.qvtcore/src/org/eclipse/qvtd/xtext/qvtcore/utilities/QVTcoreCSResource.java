@@ -26,6 +26,8 @@ import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASResourceFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
@@ -57,7 +59,6 @@ public class QVTcoreCSResource extends EssentialOCLCSResource
 	}
 
 	@Override
-	@SuppressWarnings("null")
 	public @NonNull URI getASURI(@NonNull URI csURI) {
 		return URI.createURI(csURI.toString() + "as");
 	}
@@ -76,6 +77,12 @@ public class QVTcoreCSResource extends EssentialOCLCSResource
 			return (RealizedVariable)element;
 		}
 		else if ((element instanceof Variable) && (element.eContainer() instanceof CorePattern)) {
+			return (Variable)element;
+		}
+		else if ((element instanceof Variable) && (element.eContainer() instanceof Transformation)) {
+			return (Variable)element;
+		}
+		else if ((element instanceof Variable) && (element.eContainer() instanceof TypedModel)) {
 			return (Variable)element;
 		}
 		else {
