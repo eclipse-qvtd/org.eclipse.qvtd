@@ -222,8 +222,8 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getWildcardTypeRefCSAccess().getGroup(), "rule__WildcardTypeRefCS__Group__0");
 					put(grammarAccess.getWildcardTypeRefCSAccess().getGroup_2(), "rule__WildcardTypeRefCS__Group_2__0");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedImportsAssignment_0(), "rule__TopLevelCS__OwnedImportsAssignment_0");
-					put(grammarAccess.getTopLevelCSAccess().getOwnedMappingsAssignment_1_0(), "rule__TopLevelCS__OwnedMappingsAssignment_1_0");
-					put(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsAssignment_1_1(), "rule__TopLevelCS__OwnedTransformationsAssignment_1_1");
+					put(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsAssignment_1_0(), "rule__TopLevelCS__OwnedTransformationsAssignment_1_0");
+					put(grammarAccess.getTopLevelCSAccess().getOwnedMappingsAssignment_1_1(), "rule__TopLevelCS__OwnedMappingsAssignment_1_1");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedQueriesAssignment_1_2(), "rule__TopLevelCS__OwnedQueriesAssignment_1_2");
 					put(grammarAccess.getMappingCSAccess().getIsDefaultAssignment_1(), "rule__MappingCS__IsDefaultAssignment_1");
 					put(grammarAccess.getMappingCSAccess().getNameAssignment_3(), "rule__MappingCS__NameAssignment_3");

@@ -33,18 +33,18 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cOwnedImportsImportCSParserRuleCall_0_0 = (RuleCall)cOwnedImportsAssignment_0.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Assignment cOwnedMappingsAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
-		private final RuleCall cOwnedMappingsMappingCSParserRuleCall_1_0_0 = (RuleCall)cOwnedMappingsAssignment_1_0.eContents().get(0);
-		private final Assignment cOwnedTransformationsAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final RuleCall cOwnedTransformationsTransformationCSParserRuleCall_1_1_0 = (RuleCall)cOwnedTransformationsAssignment_1_1.eContents().get(0);
+		private final Assignment cOwnedTransformationsAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final RuleCall cOwnedTransformationsTransformationCSParserRuleCall_1_0_0 = (RuleCall)cOwnedTransformationsAssignment_1_0.eContents().get(0);
+		private final Assignment cOwnedMappingsAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final RuleCall cOwnedMappingsMappingCSParserRuleCall_1_1_0 = (RuleCall)cOwnedMappingsAssignment_1_1.eContents().get(0);
 		private final Assignment cOwnedQueriesAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
 		private final RuleCall cOwnedQueriesQueryCSParserRuleCall_1_2_0 = (RuleCall)cOwnedQueriesAssignment_1_2.eContents().get(0);
 		
 		//TopLevelCS:
-		//	ownedImports+=ImportCS* (ownedMappings+=MappingCS | ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*;
+		//	ownedImports+=ImportCS* (ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ownedImports+=ImportCS* (ownedMappings+=MappingCS | ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*
+		//ownedImports+=ImportCS* (ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
 		public Group getGroup() { return cGroup; }
 
 		//ownedImports+=ImportCS*
@@ -53,20 +53,20 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//ImportCS
 		public RuleCall getOwnedImportsImportCSParserRuleCall_0_0() { return cOwnedImportsImportCSParserRuleCall_0_0; }
 
-		//(ownedMappings+=MappingCS | ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*
+		//(ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//ownedMappings+=MappingCS
-		public Assignment getOwnedMappingsAssignment_1_0() { return cOwnedMappingsAssignment_1_0; }
-
-		//MappingCS
-		public RuleCall getOwnedMappingsMappingCSParserRuleCall_1_0_0() { return cOwnedMappingsMappingCSParserRuleCall_1_0_0; }
-
 		//ownedTransformations+=TransformationCS
-		public Assignment getOwnedTransformationsAssignment_1_1() { return cOwnedTransformationsAssignment_1_1; }
+		public Assignment getOwnedTransformationsAssignment_1_0() { return cOwnedTransformationsAssignment_1_0; }
 
 		//TransformationCS
-		public RuleCall getOwnedTransformationsTransformationCSParserRuleCall_1_1_0() { return cOwnedTransformationsTransformationCSParserRuleCall_1_1_0; }
+		public RuleCall getOwnedTransformationsTransformationCSParserRuleCall_1_0_0() { return cOwnedTransformationsTransformationCSParserRuleCall_1_0_0; }
+
+		//ownedMappings+=MappingCS
+		public Assignment getOwnedMappingsAssignment_1_1() { return cOwnedMappingsAssignment_1_1; }
+
+		//MappingCS
+		public RuleCall getOwnedMappingsMappingCSParserRuleCall_1_1_0() { return cOwnedMappingsMappingCSParserRuleCall_1_1_0; }
 
 		//ownedQueries+=QueryCS
 		public Assignment getOwnedQueriesAssignment_1_2() { return cOwnedQueriesAssignment_1_2; }
@@ -256,7 +256,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//TopLevelCS:
-	//	ownedImports+=ImportCS* (ownedMappings+=MappingCS | ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*;
+	//	ownedImports+=ImportCS* (ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*;
 	public TopLevelCSElements getTopLevelCSAccess() {
 		return pTopLevelCS;
 	}
