@@ -71,6 +71,7 @@ public class QVTcoreFormatter extends QVTcoreBaseFormatter
 	    configureTransformationCS(c, f.getTransformationCSAccess());
 	    {
 	    	MappingCSElements a = f.getMappingCSAccess();
+			c.setLinewrap(2).before(a.getMapKeyword_2());
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_6(), a.getRightCurlyBracketKeyword_10());
 			setBraces(c, a.getLeftCurlyBracketKeyword_6(), a.getRightCurlyBracketKeyword_10());
 			c.setLinewrap(2).between(a.getOwnedDomainsAssignment_7(), a.getOwnedDomainsAssignment_7());
