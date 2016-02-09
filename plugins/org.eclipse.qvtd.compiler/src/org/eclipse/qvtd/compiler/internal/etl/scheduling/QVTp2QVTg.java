@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -49,6 +50,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.DataParameter;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
@@ -57,6 +59,22 @@ import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.pivot.schedule.ScheduleFactory;
 
 public class QVTp2QVTg {
+
+	public static @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum cDatum) {
+		return getAllPropertyDatumsInternal(new HashSet<@NonNull ClassDatum>(), new HashSet<@NonNull PropertyDatum>(), cDatum);
+	}
+	private static @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatumsInternal(@NonNull Set<@NonNull ClassDatum> classDatums, @NonNull Set<@NonNull PropertyDatum> propertyDatums, @NonNull ClassDatum cDatum) {
+		if (classDatums.add(cDatum)) {
+			propertyDatums.addAll(cDatum.getPropertyDatums());
+		}
+		for (AbstractDatum superClassDatum : cDatum.getSuper()) {
+			if (superClassDatum instanceof ClassDatum) {
+				getAllPropertyDatumsInternal(classDatums, propertyDatums, (@NonNull ClassDatum) superClassDatum);
+			}
+		}
+		return propertyDatums;
+	}
+	
 	
 	private final @NonNull Schedule dg= ScheduleFactory.eINSTANCE.createSchedule();
 ;
@@ -286,7 +304,7 @@ public class QVTp2QVTg {
 	@NonNull
 	protected PropertyDatum getPropertyDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class context, Property property) {
 		ClassDatum cDatum = getClassDatum(typedModel, context);
-		for (PropertyDatum pDatum : cDatum.getPropertyDatums()) {
+		for (PropertyDatum pDatum : getAllPropertyDatums(cDatum)) {
 			if (pDatum.getProperty().equals(property)) {
 				return pDatum;
 			}
@@ -294,7 +312,6 @@ public class QVTp2QVTg {
 		// If not found we create it
 		return createPropertyDatum(typedModel, context, property);
 	}
-	
 	
 	protected List<Variable> getInputVariables(AbstractMapping mapping) {
 

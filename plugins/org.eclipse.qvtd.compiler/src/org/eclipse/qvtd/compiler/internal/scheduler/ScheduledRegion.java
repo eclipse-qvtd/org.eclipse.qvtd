@@ -37,6 +37,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.schedule2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -1622,7 +1623,7 @@ public class ScheduledRegion extends AbstractRegion
 		Property property = producedEdge.getProperty();
 		ClassDatumAnalysis classDatumAnalysis = producedEdge.getSource().getClassDatumAnalysis();
 		ClassDatum classDatum = classDatumAnalysis.getClassDatum();
-		for (PropertyDatum propertyDatum : classDatum.getPropertyDatums()) {
+		for (PropertyDatum propertyDatum : QVTp2QVTg.getAllPropertyDatums(classDatum)) {
 			if (propertyDatum.getProperty() == property) {
 				return propertyDatum;
 			}
@@ -1630,7 +1631,7 @@ public class ScheduledRegion extends AbstractRegion
 		property = property.getOpposite();
 		classDatumAnalysis = producedEdge.getTarget().getClassDatumAnalysis();
 		classDatum = classDatumAnalysis.getClassDatum();
-		for (PropertyDatum propertyDatum : classDatum.getPropertyDatums()) {
+		for (PropertyDatum propertyDatum : QVTp2QVTg.getAllPropertyDatums(classDatum)) {
 			if (propertyDatum.getProperty() == property) {
 				return propertyDatum;
 			}
