@@ -128,7 +128,7 @@ public class OperationRegion extends AbstractMappingRegion
 								Edges.NAVIGATION.createSimpleEdge(this, extraNode2, iterateProperty, elementNode);
 								extraNode2 = elementNode;
 							}
-							SimpleNode nextNode = Nodes.ATTRIBUTE.createSimpleNode(this, extraNode2, navigationCallExp);
+							SimpleNode nextNode = Nodes.UNNAVIGABLE_ATTRIBUTE.createSimpleNode(this, extraNode2, navigationCallExp);
 							Edges.NAVIGATION.createSimpleEdge(this, extraNode2, propertyStep.getProperty(), nextNode);
 							extraNode2 = nextNode;
 						}

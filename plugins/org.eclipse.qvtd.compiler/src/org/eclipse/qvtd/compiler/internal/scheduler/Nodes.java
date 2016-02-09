@@ -75,13 +75,26 @@ public class Nodes
 	{
 		private static abstract class AbstractAttributeNodeRole extends AbstractSimpleNodeRole
 		{
-			protected AbstractAttributeNodeRole(@NonNull Phase phase) {
+			private final boolean isNavigable;
+
+			protected AbstractAttributeNodeRole(@NonNull Phase phase, boolean isNavigable) {
 				super(phase);
+				this.isNavigable = isNavigable;
 			}
 			
 			@Override
 			public boolean isAttributeNode() {
 				return true;
+			}
+
+			@Override
+			public boolean isNavigable() {
+				return isNavigable;
+			}
+
+			@Override
+			public String toString() {
+				return phase + (isNavigable ? "-NAVIGABLE-" : "-UNNAVIGABLE-") + getClass().getSimpleName();
 			}
 		}
 
@@ -89,8 +102,8 @@ public class Nodes
 		{
 			private boolean isAttribute;
 			
-			protected AttributeNodeRole(@NonNull Phase phase, boolean isAttribute) {
-				super(phase);
+			protected AttributeNodeRole(@NonNull Phase phase, boolean isAttribute, boolean isNavigable) {
+				super(phase, isNavigable);
 				this.isAttribute = isAttribute;
 			}
 
@@ -111,11 +124,6 @@ public class Nodes
 
 			@Override
 			public boolean isMatchable() {
-				return true;
-			}
-
-			@Override
-			public boolean isNavigable() {
 				return true;
 			}
 			
@@ -139,7 +147,7 @@ public class Nodes
 		public static class ExtraGuardNodeRole extends AbstractAttributeNodeRole
 		{
 			protected ExtraGuardNodeRole() {
-				super(Role.Phase.PREDICATED);
+				super(Role.Phase.PREDICATED, false);
 			}
 
 			@Override
@@ -161,7 +169,7 @@ public class Nodes
 		public static final class RealizedAttributeNodeRole extends AbstractAttributeNodeRole
 		{
 			protected RealizedAttributeNodeRole() {
-				super(Role.Phase.REALIZED);
+				super(Role.Phase.REALIZED, false);
 			}
 
 			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull SimpleNode parentNode, @NonNull Property property) {
@@ -205,7 +213,7 @@ public class Nodes
 		public static final class PredicatedInternalNodeRole extends AbstractAttributeNodeRole
 		{
 			protected PredicatedInternalNodeRole() {
-				super(Role.Phase.PREDICATED);
+				super(Role.Phase.PREDICATED, false);
 			}
 
 			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull SimpleNode parentNode, @NonNull PropertyAssignment propertyAssignment) {
@@ -243,24 +251,33 @@ public class Nodes
 			}
 		}
 		
-		private static final @NonNull AttributeNodeRole LOADED_ATTRIBUTE = new AttributeNodeRole(Role.Phase.LOADED, true);
-		private static final @NonNull AttributeNodeRole PREDICATED_ATTRIBUTE = new AttributeNodeRole(Role.Phase.PREDICATED, true);
+		private static final @NonNull AttributeNodeRole LOADED_NAVIGABLE_ATTRIBUTE = new AttributeNodeRole(Role.Phase.LOADED, true, true);
+		private static final @NonNull AttributeNodeRole LOADED_UNNAVIGABLE_ATTRIBUTE = new AttributeNodeRole(Role.Phase.LOADED, true, false);
+		private static final @NonNull AttributeNodeRole PREDICATED_NAVIGABLE_ATTRIBUTE = new AttributeNodeRole(Role.Phase.PREDICATED, true, true);
+		private static final @NonNull AttributeNodeRole PREDICATED_UNNAVIGABLE_ATTRIBUTE = new AttributeNodeRole(Role.Phase.PREDICATED, true, false);
 		public static final @NonNull PredicatedInternalNodeRole PREDICATED_CLASS = new PredicatedInternalNodeRole();
 
+		private final @Nullable Boolean isNavigable;
+
+		public AttributeNodeRoleFactory(@Nullable Boolean isNavigable) {
+			this.isNavigable = isNavigable;
+		}
+
 		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull SimpleNode parentNode, @NonNull NavigationCallExp navigationCallExp) {
+			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : parentNode.isNavigable();
 			if (parentNode.isLoaded()) {
 				Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
 				assert referredProperty != null;
 				boolean isDirty = region.getSchedulerConstants().isDirty(referredProperty);
 				if (!isDirty) {
-					return LOADED_ATTRIBUTE.createSimpleNode(parentNode.getRegion(), parentNode, navigationCallExp);
+					return (resolvedNavigable ? LOADED_NAVIGABLE_ATTRIBUTE : LOADED_UNNAVIGABLE_ATTRIBUTE).createSimpleNode(parentNode.getRegion(), parentNode, navigationCallExp);
 				}
 				else {
-					return PREDICATED_ATTRIBUTE.createSimpleNode(parentNode.getRegion(), parentNode, navigationCallExp);
+					return (resolvedNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE).createSimpleNode(parentNode.getRegion(), parentNode, navigationCallExp);
 				}
 			}
 			else if (parentNode.isPredicated()) {
-				return PREDICATED_ATTRIBUTE.createSimpleNode(parentNode.getRegion(), parentNode, navigationCallExp);
+				return (resolvedNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE).createSimpleNode(parentNode.getRegion(), parentNode, navigationCallExp);
 			}
 			else if (parentNode.isRealized()) {
 				Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);	// ??never happens
@@ -932,7 +949,7 @@ public class Nodes
 		}
 	}
 	
-	public static final @NonNull AttributeNodeRoleFactory ATTRIBUTE = new AttributeNodeRoleFactory();
+	public static final @NonNull AttributeNodeRoleFactory ATTRIBUTE = new AttributeNodeRoleFactory(null);
 	public static final @NonNull NodeRole COMPOSED = new ComposedNodeRole();
 	public static final @NonNull NodeRole COMPOSING = new ComposingNodeRole();
 	public static final @NonNull ElementNodeRoleFactory ELEMENT = new ElementNodeRoleFactory();
@@ -941,6 +958,7 @@ public class Nodes
 	public static final @NonNull GuardNodeRoleFactory GUARD = new GuardNodeRoleFactory();
 	public static final @NonNull IteratorNodeRoleFactory ITERATOR = new IteratorNodeRoleFactory();
 	public static final @NonNull LetNodeRoleFactory LET = new LetNodeRoleFactory();
+	public static final @NonNull AttributeNodeRoleFactory NAVIGABLE_ATTRIBUTE = new AttributeNodeRoleFactory(true);
 	public static final @NonNull StepNodeRoleFactory NAVIGABLE_STEP = new StepNodeRoleFactory(true);
 	public static final @NonNull NullNodeRole NULL = new NullNodeRole();
 	public static final @NonNull OperationNodeRoleFactory OPERATION = new OperationNodeRoleFactory();
@@ -950,6 +968,7 @@ public class Nodes
 	public static final @NonNull StepNodeRoleFactory STEP = new StepNodeRoleFactory(null);
 	public static final @NonNull TrueNodeRole TRUE = new TrueNodeRole();
 	public static final @NonNull NodeRole UNKNOWN = new UnknownNodeRole();
+	public static final @NonNull AttributeNodeRoleFactory UNNAVIGABLE_ATTRIBUTE = new AttributeNodeRoleFactory(false);
 	public static final @NonNull StepNodeRoleFactory UNNAVIGABLE_STEP = new StepNodeRoleFactory(false);
 	public static final @NonNull AbstractVariableNodeRole UNREALIZED_VARIABLE = new UnrealizedVariableNodeRole();
 }
