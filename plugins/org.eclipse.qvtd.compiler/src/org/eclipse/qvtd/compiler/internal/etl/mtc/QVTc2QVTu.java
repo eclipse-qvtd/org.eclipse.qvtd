@@ -64,6 +64,16 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			return true;
 		}
 
+		private boolean anyReferencedVariableInMiddleOrOutputDomain(@NonNull Predicate p) {
+			for (Variable v : MtcUtil.findReferencedVariables(p.getConditionExpression())) {
+				Area containingArea = QVTcoreBaseUtil.getContainingArea(v);
+				if (qvtuConfiguration.isOutputDomain(containingArea) || qvtuConfiguration.isMiddleDomain(containingArea)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
 /*		private @NonNull PropertyAssignment convertToPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull OCLExpression rightExpression) {
 			PropertyAssignment paOut = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
 			context.addTrace((Predicate)propertyCallExp.eContainer().eContainer(), paOut);
@@ -152,6 +162,9 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		@Override
 		public @Nullable Element visitPredicate(@NonNull Predicate pIn) {
 			if ((pIn.getPattern() instanceof BottomPattern) && allReferencedVariablesInOutputDomain(pIn)) {
+				return null;
+			}
+			if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedVariableInMiddleOrOutputDomain(pIn)) {
 				return null;
 			}
 /*			OCLExpression conditionExpression = pIn.getConditionExpression();
