@@ -12,7 +12,10 @@ package org.eclipse.qvtd.xtext.qvtcore.ui.model;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
+import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.xtext.base.ui.model.BaseCSorASDocumentProvider;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
 
 /**
@@ -21,6 +24,11 @@ import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
  */
 public class QVTcoreDocumentProvider extends BaseCSorASDocumentProvider
 {
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTcore.newInstance(BasicProjectManager.createDefaultProjectManager(), null);
+	}
+
 	@Override
 	protected @NonNull String createTestDocument(@NonNull URI uri, @NonNull String lastSegment) {
 		return "";
