@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.qvtd.compiler.internal.etl.utils.MtcUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -264,7 +265,7 @@ public class QVTuConfiguration
 	}
 	private boolean allMatchReferencedOutputDomainVariables(@NonNull OCLExpression value) {
 		for (Variable v : MtcUtil.findReferencedVariables(value)) {
-			if (!isOutputDomain(getArea(v))) {
+			if (!(v.eContainer() instanceof Transformation) && !isOutputDomain(getArea(v))) {
 				return false;
 			}
 		}
