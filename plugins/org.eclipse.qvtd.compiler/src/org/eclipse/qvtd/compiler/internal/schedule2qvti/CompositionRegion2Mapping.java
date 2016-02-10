@@ -284,11 +284,9 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 	private @NonNull Node getHeadNode() {
 		Node headNode2 = headNode;
 		if (headNode2 == null) {
-			List<List<Node>> headNodeGroups = region.getHeadNodeGroups();
-			assert headNodeGroups.size() == 1;
-			List<Node> headGroupNodes = headNodeGroups.get(0);
-			assert headGroupNodes.size() == 1;
-			headNode2 = headGroupNodes.get(0);
+			List<@NonNull Node> headNodes = region.getHeadNodes();
+			assert headNodes.size() == 1;
+			headNode2 = headNodes.get(0);
 			assert headNode2 != null;
 			headNode = headNode2;
 		}

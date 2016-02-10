@@ -160,7 +160,7 @@ public class MappingRegion extends AbstractMappingRegion implements Comparable<M
 			}
 		}
 		//
-		getHeadNodeGroups();
+		getHeadNodes();
 		toDOT();
 		toGraphML();
 		return;
@@ -178,9 +178,9 @@ public class MappingRegion extends AbstractMappingRegion implements Comparable<M
 	}
 
 	@Override
-	protected void addHeadGroup(@NonNull List<Node> headGroup) {
+	protected void addHeadNode(@NonNull Node headNode) {
 		assert basicGetSymbolName() == null;
-		super.addHeadGroup(headGroup);
+		super.addHeadNode(headNode);
 	}
 
 	@Override
@@ -289,8 +289,7 @@ public class MappingRegion extends AbstractMappingRegion implements Comparable<M
 		}
 		SimpleNode extraGuardNode = Nodes.EXTRA_GUARD.createSimpleNode(this, "«extra-" + (extraNodes.size()+1) + "»", extraNode.getClassDatumAnalysis());
 		extraNodes.add(extraGuardNode);
-		@NonNull List<Node> extraGuardNodeList = Collections.<Node>singletonList(extraGuardNode);
-		addHeadGroup(extraGuardNodeList);
+		addHeadNode(extraGuardNode);
 		return extraGuardNode;
 	}
 

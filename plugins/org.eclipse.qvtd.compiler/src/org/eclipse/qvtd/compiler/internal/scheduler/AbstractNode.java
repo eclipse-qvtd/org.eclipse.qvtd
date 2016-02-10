@@ -193,11 +193,9 @@ public abstract class AbstractNode implements Node
 	public void getAllAncestors(@NonNull Set<Node> ancestors) {
 		if (ancestors.add(this)) {
 			Region region = getRegion();
-			for (List<Node> headGroup : region.getHeadNodeGroups()) {
-				for (Node headNode : headGroup) {
-					for (Node passedBindingSource : headNode.getPassedBindingSources()) {
-						passedBindingSource.getAllAncestors(ancestors);
-					}
+			for (Node headNode : region.getHeadNodes()) {
+				for (Node passedBindingSource : headNode.getPassedBindingSources()) {
+					passedBindingSource.getAllAncestors(ancestors);
 				}
 			}
 		}

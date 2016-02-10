@@ -832,23 +832,18 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		if (Iterables.size(recursionEdges) > 0) {
 			headCallingRegions.add(region);
 		}
-		for (List<Node> headGroupNodes : region.getHeadNodeGroups()) {
+		for (Node headNode : region.getHeadNodes()) {
 			Node bestHeadNode = null;
-			int bestSize = 0;
 			boolean isExtraGuard = false;
-			for (Node node : headGroupNodes) {
-				Iterable<Node> callingSources = node.getPassedBindingSources();
-				int size = Iterables.size(callingSources);
-				if (size > bestSize) {
-					bestHeadNode = node;
-					bestSize = size;
-				}
-				else if (node.getNodeRole().isExtraGuardVariable()) {
-					isExtraGuard = true;
-				}
-				for (Node callingSource : callingSources) {
-					headCallingRegions.add(callingSource.getRegion());
-				}
+			Iterable<Node> callingSources = headNode.getPassedBindingSources();
+			if (!Iterables.isEmpty(callingSources)) {
+				bestHeadNode = headNode;
+			}
+			else if (headNode.getNodeRole().isExtraGuardVariable()) {
+				isExtraGuard = true;
+			}
+			for (Node callingSource : callingSources) {
+				headCallingRegions.add(callingSource.getRegion());
 			}
 			if (!isExtraGuard || (bestHeadNode != null)) {
 				assert bestHeadNode != null;

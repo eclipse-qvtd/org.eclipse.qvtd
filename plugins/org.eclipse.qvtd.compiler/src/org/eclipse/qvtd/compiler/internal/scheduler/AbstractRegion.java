@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.schedule2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
@@ -361,10 +362,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	
 	/**
 	 * The subsets of guardVariables from which all guardVariables are to-one navigable.
-	 * The inner lists form a mutually to-one navigable head group typically mutual opposites.
-	 * The outer lists identify distinct external inputs.
 	 */
-	private /*@LazyNonNull*/ @Nullable List<List<Node>> headNodeGroups = null;
+	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> headNodes = null;
 	
 	/**
 	 * The earliest index in the overall schedule at which this region can be executed.
@@ -477,8 +476,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			" in " + realizedEdge.getSource().getClassDatumAnalysis().getTypedModel() + " for " + this);
 	}
 
-	protected void addHeadGroup(@NonNull List<Node> headGroup) {
-		getHeadNodeGroups().add(headGroup);
+	protected void addHeadNode(@NonNull Node headNode) {
+		getHeadNodes().add(headNode);
 //		for (@SuppressWarnings("null")@NonNull ClassNode head : headGroup) {
 //			if (head instanceof GuardNode) {
 //				((GuardNode)head).setIsHead();
@@ -608,22 +607,18 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		//
 		//	Find the unambiguous head-node matches
 		//
-		List<List<Node>> secondaryHeadNodeGroups = secondaryRegion.getHeadNodeGroups();
-		assert secondaryHeadNodeGroups.size() == 1;
-		List<Node> secondaryHeadNodes = secondaryHeadNodeGroups.get(0);
-		for (Node secondaryHeadNode : secondaryHeadNodes) {
-			CompleteClass completeClass = secondaryHeadNode.getCompleteClass();
-			List<Node> primaryNodes = completeClass2node.get(completeClass);
-			if (primaryNodes != null) {
-				Node primaryHeadNode = selectMergedHeadNode(secondaryHeadNode, primaryNodes);
-				if (primaryHeadNode == null) {
-					return null;
-				}
-				if (secondaryNode2primaryNode == null) {
-					secondaryNode2primaryNode = new HashMap<Node, Node>();
-				}
-				secondaryNode2primaryNode.put(secondaryHeadNode, primaryHeadNode);
+		List<@NonNull Node> secondaryHeadNodes = secondaryRegion.getHeadNodes();
+		assert secondaryHeadNodes.size() == 1;
+		Node secondaryHeadNode = secondaryHeadNodes.get(0);
+		CompleteClass completeClass = secondaryHeadNode.getCompleteClass();
+		List<Node> primaryNodes = completeClass2node.get(completeClass);
+		if (primaryNodes != null) {
+			Node primaryHeadNode = selectMergedHeadNode(secondaryHeadNode, primaryNodes);
+			if (primaryHeadNode == null) {
+				return null;
 			}
+			secondaryNode2primaryNode = new HashMap<Node, Node>();
+			secondaryNode2primaryNode.put(secondaryHeadNode, primaryHeadNode);
 		}
 		if (secondaryNode2primaryNode == null) {
 			return null;
@@ -884,8 +879,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
-	protected @NonNull List<List<Node>> computeHeadNodeGroups() {
-		List<List<Node>> headNodeGroups = new ArrayList<List<Node>>();
+	protected @NonNull List<@NonNull Node> computeHeadNodes() {
+		List<@NonNull Node> headNodeGroups = new ArrayList<@NonNull Node>();
 		Iterable<Node> navigableNodes = getNavigableNodes();		// Excludes, null, attributes, constants, operations
 		//
 		//	Compute the Set of all target nodes that can be reached by transitive to-one navigation from a particular source node.
@@ -967,7 +962,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			assert sourceClosure != null;
 			Set<Node> targetClosure = source2targetClosure.get(headNode);
 			assert targetClosure != null;
-			List<Node> headGroup = new ArrayList<Node>();
+			List<@NonNull Node> headGroup = new ArrayList<@NonNull Node>();
 			headNode.setHead();
 			headGroup.add(headNode);
 			for (int i = 0; i < headLessNodes.size(); i++) {
@@ -986,7 +981,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			}
 			headLessNodes.removeAll(targetClosure);
 			targetClosure.removeAll(headGroup);
-			headNodeGroups.add(headGroup);
+			headNodeGroups.add(selectBestHeadNode(headGroup));
 		}
 		return headNodeGroups;
 	}
@@ -998,25 +993,20 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 		Collections.sort(names);
 		SymbolNameBuilder s = null;
-		for (List<Node> headNodes : getHeadNodeGroups()) {
-			for (Node headNode : headNodes) {
-				s = new SymbolNameBuilder();
-				s.appendString("m_");
-				s.appendName(headNode.getCompleteClass().getName());
-				List<String> edgeNames = new ArrayList<String>();
-				for (NavigationEdge edge : headNode.getNavigationEdges()) {
-					edgeNames.add(edge.getProperty().getName());
-				}
-				Collections.sort(edgeNames);
-				for (String edgeName : edgeNames) {
-					s.appendString("_");
-					s.appendName(edgeName);
-				}
-				break;
+		for (Node headNode : getHeadNodes()) {
+			s = new SymbolNameBuilder();
+			s.appendString("m_");
+			s.appendName(headNode.getCompleteClass().getName());
+			List<String> edgeNames = new ArrayList<String>();
+			for (NavigationEdge edge : headNode.getNavigationEdges()) {
+				edgeNames.add(edge.getProperty().getName());
 			}
-			if (s != null) {
-				break;
+			Collections.sort(edgeNames);
+			for (String edgeName : edgeNames) {
+				s.appendString("_");
+				s.appendName(edgeName);
 			}
+			break;
 		}
 		if (s == null) {
 			s = new SymbolNameBuilder();
@@ -1332,12 +1322,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
-	public @NonNull List<List<Node>> getHeadNodeGroups() {
-		List<List<Node>> headNodeGroups2 = headNodeGroups;
-		if (headNodeGroups2 == null) {
-			headNodeGroups = headNodeGroups2 = computeHeadNodeGroups();
+	public @NonNull List<@NonNull Node> getHeadNodes() {
+		List<@NonNull Node> headNodes2 = headNodes;
+		if (headNodes2 == null) {
+			headNodes = headNodes2 = computeHeadNodes();
 		}
-		return headNodeGroups2;
+		return headNodes2;
 	}
 
 	@Override
@@ -1428,11 +1418,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	@Override
 	public @NonNull List<Connection> getParentConnections() {		// FIXME cache
 		List<Connection> connections = new ArrayList<Connection>();
-		for (List<Node> headGroup : getHeadNodeGroups()) {
-			for (Node head : headGroup) {
-				for (Connection connection : head.getIncomingPassedConnections()) {
-					connections.add(connection);
-				}
+		for (Node headNode : getHeadNodes()) {
+			for (Connection connection : headNode.getIncomingPassedConnections()) {
+				connections.add(connection);
 			}
 		}
 		for (Node node : getPredicatedNodes()) {
@@ -1446,11 +1434,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	@Override
 	public @NonNull List<Connection> getParentPassedConnections() {		// FIXME cache
 		List<Connection> connections = new ArrayList<Connection>();
-		for (List<Node> headGroup : getHeadNodeGroups()) {
-			for (Node head : headGroup) {
-				for (Connection connection : head.getIncomingPassedConnections()) {
-					connections.add(connection);
-				}
+		for (Node headNode : getHeadNodes()) {
+			for (Connection connection : headNode.getIncomingPassedConnections()) {
+				connections.add(connection);
 			}
 		}
 		return connections;
@@ -1915,14 +1901,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	public void resolveRecursion() {
 		Map<CompleteClass, List<Node>> completeClass2node = getCompleteClass2Node();
-		List<List<Node>> headNodeGroups = getHeadNodeGroups();
-		if (headNodeGroups.size() == 1) {			// FIXME multi-heads
-			for (Node headNode : headNodeGroups.get(0)) {
-				List<Node> nodeList = completeClass2node.get(headNode.getCompleteClass());
-				assert nodeList != null;
-				if (nodeList.size() <= 1) {
-					break;
-				}
+		List<@NonNull Node> headNodes = getHeadNodes();
+		if (headNodes.size() == 1) {			// FIXME multi-heads
+			Node headNode = headNodes.get(0);
+			List<Node> nodeList = completeClass2node.get(headNode.getCompleteClass());
+			assert nodeList != null;
+			if (nodeList.size() > 1) {
 				for (@SuppressWarnings("null")@NonNull Node node : nodeList) {
 					if (node != headNode) {
 						Map<Node, Node> bindings = expandRecursion(headNode, node, new HashMap<Node, Node>());
@@ -1941,9 +1925,44 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
+	/**
+	 * Chose the headNode from a group of peer nodes that has the most non-implicit properties targeting its peers.
+	 */
+	protected @NonNull Node selectBestHeadNode(@NonNull List<@NonNull Node> headNodes) {
+		int size = headNodes.size();
+		assert size >= 1;
+		if (size == 1) {
+			return headNodes.get(0);
+		}
+		Node bestHeadNode = null;
+		int bestNonImplicits = -1;
+		List<@NonNull Node> sortedHeadNodes = new ArrayList<@NonNull Node>(headNodes);
+		Collections.sort(sortedHeadNodes, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize order
+		for (Node thisHeadNode : sortedHeadNodes) {
+			int nonImplicits = 0;
+			for (Node thatHeadNode : sortedHeadNodes) {
+				for (NavigationEdge edge : thisHeadNode.getNavigationEdges()) {
+					if (edge.getTarget() == thatHeadNode) {
+						Property property = edge.getProperty();
+						if (!property.isIsImplicit()) {
+							nonImplicits++;
+							break;
+						}
+					}
+				}
+			}
+			if (nonImplicits > bestNonImplicits) {
+				bestHeadNode = thisHeadNode;
+				bestNonImplicits = nonImplicits;
+			}
+		}
+		assert bestHeadNode != null;
+		return bestHeadNode;
+	}
+
 	private @Nullable Node selectMergedHeadNode(@NonNull Node headNode, @NonNull List<Node> mergedNodes) {
 		if (mergedNodes.size() == 1) {
-			Node mergedNode = mergedNodes.get(0);
+			Node mergedNode = selectBestHeadNode(mergedNodes);
 			if (mergedNode.isIterator()) {
 				return null;
 			}

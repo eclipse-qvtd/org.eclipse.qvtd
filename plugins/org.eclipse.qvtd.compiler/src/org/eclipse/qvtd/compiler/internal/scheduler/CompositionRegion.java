@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.scheduler;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -73,9 +72,9 @@ public class CompositionRegion extends AbstractRegion implements SimpleRegion
 	}
 
 	@Override
-	protected @NonNull List<List<Node>> computeHeadNodeGroups() {
-		List<List<Node>> headNodeGroups = new ArrayList<List<Node>>();
-		headNodeGroups.add(Collections.<Node>singletonList(composingNode));
+	protected @NonNull List<@NonNull Node> computeHeadNodes() {
+		List<@NonNull Node> headNodeGroups = new ArrayList<@NonNull Node>();
+		headNodeGroups.add(composingNode);
 		return headNodeGroups;
 	}
 

@@ -125,44 +125,15 @@ public class Scheduler extends SchedulerConstants
 	private @NonNull Map<ClassDatumAnalysis, HeadNodeGroup> createHeadGroups() {
 		Map<ClassDatumAnalysis, HeadNodeGroup> classDatumAnalysis2headGroup = new HashMap<ClassDatumAnalysis, HeadNodeGroup>();
 		for (@SuppressWarnings("null")@NonNull MappingRegion mappingRegion : action2mappingRegion.values()) {
-			List<List<Node>> headNodeGroups = mappingRegion.getHeadNodeGroups();
-			if (headNodeGroups.size() == 1) {
-//			for (@SuppressWarnings("null")@NonNull List<ClassNode> headNodes : headNodeGroups) {
-				@SuppressWarnings("null")@NonNull List<Node> headNodes = headNodeGroups.get(0);
-				HeadNodeGroup sharedHeadNodeGroup = null;
-				for (@SuppressWarnings("null")@NonNull Node headNode : headNodes) {
-					HeadNodeGroup headNodeGroup = classDatumAnalysis2headGroup.get(headNode.getClassDatumAnalysis());
-					if (headNodeGroup == null) {
-						if (sharedHeadNodeGroup == null) {
-							sharedHeadNodeGroup = headNodeGroup = new HeadNodeGroup();
-						}
-						else {
-							headNodeGroup = sharedHeadNodeGroup;
-						}
-					}
-					else {
-						if (sharedHeadNodeGroup == null) {
-							sharedHeadNodeGroup = headNodeGroup;
-						}
-						else {
-							for (@SuppressWarnings("null")Map.@NonNull Entry<MappingRegion, List<Node>> oldEntry : headNodeGroup) {
-								@SuppressWarnings("null")@NonNull MappingRegion oldMappingRegion = oldEntry.getKey();
-								@SuppressWarnings("null")@NonNull List<Node> oldClassNodes = oldEntry.getValue();
-								sharedHeadNodeGroup.addMappingRegion(oldMappingRegion, oldClassNodes);
-								for (@SuppressWarnings("null")@NonNull Node oldHeadNode : oldClassNodes) {
-									classDatumAnalysis2headGroup.put(oldHeadNode.getClassDatumAnalysis(), sharedHeadNodeGroup);
-								}
-							}
-							headNodeGroup = sharedHeadNodeGroup;
-						}
-					}
-//					head2group.put(headNode, headNodeGroup);
+			List<@NonNull Node> headNodes = mappingRegion.getHeadNodes();
+			if (headNodes.size() == 1) {
+				Node headNode = headNodes.get(0);
+				HeadNodeGroup headNodeGroup = classDatumAnalysis2headGroup.get(headNode.getClassDatumAnalysis());
+				if (headNodeGroup == null) {
+					headNodeGroup = new HeadNodeGroup();
 				}
-				assert sharedHeadNodeGroup != null;
-				sharedHeadNodeGroup.addMappingRegion(mappingRegion, headNodes);
-				for (@SuppressWarnings("null")@NonNull Node headNode : headNodes) {
-					classDatumAnalysis2headGroup.put(headNode.getClassDatumAnalysis(), sharedHeadNodeGroup);
-				}
+				headNodeGroup.addMappingRegion(mappingRegion, headNodes);
+				classDatumAnalysis2headGroup.put(headNode.getClassDatumAnalysis(), headNodeGroup);
 			}
 		}
 		return classDatumAnalysis2headGroup;
@@ -286,8 +257,8 @@ public class Scheduler extends SchedulerConstants
 	 * The primary region in a GuardedRegion must be single-headed. It may be multiply-produced, e.g. recursed.
 	 */
 	private boolean isEarlyMergePrimaryCandidate(@NonNull Region mappingRegion) {
-		List<List<Node>> headNodeGroups = mappingRegion.getHeadNodeGroups();
-		return headNodeGroups.size() == 1;
+		List<@NonNull Node> headNodes = mappingRegion.getHeadNodes();
+		return headNodes.size() == 1;
 	}
 
 	/**
@@ -296,13 +267,12 @@ public class Scheduler extends SchedulerConstants
 	 */
 	private boolean isEarlyMergeSecondaryCandidate(@NonNull Region primaryRegion,
 			@NonNull Region secondaryRegion, @NonNull Set<ClassDatumAnalysis> toOneReachableClasses) {
-		List<List<Node>> secondaryHeadNodeGroups = secondaryRegion.getHeadNodeGroups();
-		if (secondaryHeadNodeGroups.size() == 1) {
-			for (Node classNode : secondaryHeadNodeGroups.get(0)) {
-				ClassDatumAnalysis classDatumAnalysis = classNode.getClassDatumAnalysis();
-				if (toOneReachableClasses.contains(classDatumAnalysis)) {
-					return true;
-				}
+		List<@NonNull Node> secondaryHeadNodes = secondaryRegion.getHeadNodes();
+		if (secondaryHeadNodes.size() == 1) {
+			Node classNode = secondaryHeadNodes.get(0);
+			ClassDatumAnalysis classDatumAnalysis = classNode.getClassDatumAnalysis();
+			if (toOneReachableClasses.contains(classDatumAnalysis)) {
+				return true;
 			}
 		}
 		return false;
@@ -312,16 +282,11 @@ public class Scheduler extends SchedulerConstants
 	 * Return true if any primaryRegion head coincides with a secondaryRegion head.
 	 */
 	private boolean isSharedHead(@NonNull Region primaryRegion, @NonNull Region secondaryRegion) {
-		for (List<Node> primaryHeads : primaryRegion.getHeadNodeGroups()) {
-			for (Node primaryHead : primaryHeads) {
-				ClassDatumAnalysis primaryClassDatumAnalysis = primaryHead.getClassDatumAnalysis();
-				for (List<Node> secondaryHeads : secondaryRegion.getHeadNodeGroups()) {
-					for (Node secondaryHead : secondaryHeads) {
-						if (primaryClassDatumAnalysis == secondaryHead.getClassDatumAnalysis()) {
-							return true;
-						}
-					}
-					
+		for (Node primaryHead : primaryRegion.getHeadNodes()) {
+			ClassDatumAnalysis primaryClassDatumAnalysis = primaryHead.getClassDatumAnalysis();
+			for (Node secondaryHead : secondaryRegion.getHeadNodes()) {
+				if (primaryClassDatumAnalysis == secondaryHead.getClassDatumAnalysis()) {
+					return true;
 				}
 			}
 		}

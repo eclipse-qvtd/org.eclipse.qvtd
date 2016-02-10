@@ -123,12 +123,6 @@ public class MergedRegion extends AbstractRegion
 		}
 	}
 
-	@Override
-	protected @NonNull List<List<Node>> computeHeadNodeGroups() {
-		// TODO Auto-generated method stub
-		return super.computeHeadNodeGroups();
-	}
-
 	private @NonNull MergedEdge createMergedEdge(@NonNull Node sourceNode, @NonNull Edge edge, @NonNull Node targetNode) {
 		MergedNode mergedSource = getMergedNode(sourceNode);
 		MergedNode mergedTarget = getMergedNode(targetNode);

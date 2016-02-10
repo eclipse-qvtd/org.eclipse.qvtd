@@ -84,7 +84,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Schedulable
 	 * Return the GuardVariable nodes of the region (not Composing)
 	 */
 	@NonNull Iterable<Node> getGuardVariableNodes();
-	@NonNull List<List<Node>> getHeadNodeGroups();
+	@NonNull List<@NonNull Node> getHeadNodes();
 	@NonNull List<Connection> getIntermediateConnections();
 	@Nullable Region getInvokingRegion();
 	

@@ -144,7 +144,7 @@ public class OperationRegion extends AbstractMappingRegion
 		
 		
 		//
-		getHeadNodeGroups();
+		getHeadNodes();
 		toDOT();
 		toGraphML();
 	}
@@ -176,14 +176,14 @@ public class OperationRegion extends AbstractMappingRegion
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(type, typedModel);
 		SimpleNode parameterNode = Nodes.PARAMETER.createSimpleNode(this, name, classDatumAnalysis);
 		addVariableNode(variable, parameterNode);
-		addHeadGroup(ClassUtil.nonNullState(Collections.<Node>singletonList(parameterNode)));
+		addHeadNode(parameterNode);
 		return parameterNode;
 	}
 
 	private @NonNull SimpleNode createParameterNode(@NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull String name) {
 		SimpleNode parameterNode = Nodes.PARAMETER.createSimpleNode(this, name, classDatumAnalysis);
 //		addVariableNode(variable, parameterNode);
-		addHeadGroup(ClassUtil.nonNullState(Collections.<Node>singletonList(parameterNode)));
+		addHeadNode(parameterNode);
 		return parameterNode;
 	}
 

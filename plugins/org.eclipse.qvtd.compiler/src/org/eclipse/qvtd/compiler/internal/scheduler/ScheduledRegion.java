@@ -439,13 +439,10 @@ public class ScheduledRegion extends AbstractRegion
 					}
 				}
 			}
-			for (List<Node> headNodes : region.getHeadNodeGroups()) {
-				if (headNodes.size() == 1) {
-					Node headNode = headNodes.get(0);
-//					if (headNode.isKnown() && !headNode.isInternal()) {
-					if (headNode.isLoaded() && !headNode.isInternal()) {
-						addConsumedNode(headNode);
-					}
+			for (Node headNode : region.getHeadNodes()) {
+//				if (headNode.isKnown() && !headNode.isInternal()) {
+				if (headNode.isLoaded() && !headNode.isInternal()) {
+					addConsumedNode(headNode);
 				}
 			}
 		}
@@ -453,7 +450,7 @@ public class ScheduledRegion extends AbstractRegion
 		//	Multiple-node head groups contribute similarly, but just one corresponding class,
 		//	preferably one that is already consumed.
 		//
-		for (@SuppressWarnings("null")@NonNull Region region : getRegions()) {
+/*		for (@SuppressWarnings("null")@NonNull Region region : getRegions()) {
 			for (List<Node> headNodes : region.getHeadNodeGroups()) {
 				if (headNodes.size() != 1) {
 					boolean gotOne = false;
@@ -476,7 +473,7 @@ public class ScheduledRegion extends AbstractRegion
 					}
 				}
 			}
-		}
+		} */
 	}
 
 	/**
@@ -751,14 +748,7 @@ public class ScheduledRegion extends AbstractRegion
 			//	Single-node head groups contribute a corresponding consumed class provided the
 			//	class is part of the input model and is not an internal convenience.
 			//
-			for (List<Node> headNodes : region.getHeadNodeGroups()) {
-				Node headNode;
-				if (headNodes.size() == 1) {
-					headNode = headNodes.get(0);
-				}
-				else {
-					headNode = selectBestHeadNode(headNodes);
-				}
+			for (Node headNode : region.getHeadNodes()) {
 				if (/*headNode.isLoaded() &&*/ !headNode.isInternal()) {
 					createBinding(headNode);
 				}
@@ -1714,10 +1704,6 @@ public class ScheduledRegion extends AbstractRegion
 	public void removeConnection(@NonNull Connection connection) {
 		boolean wasRemoved = connections.remove(connection);
 		assert wasRemoved;
-	}
-
-	private @NonNull Node selectBestHeadNode(@NonNull List<Node> headNodes) {
-		return ClassUtil.nonNullState(headNodes.get(0));				// FIXME compute best navigability
 	}
 	
 //	@Override
