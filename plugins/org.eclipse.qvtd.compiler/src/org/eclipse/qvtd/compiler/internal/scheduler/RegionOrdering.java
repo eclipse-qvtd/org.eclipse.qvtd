@@ -22,8 +22,6 @@ import java.util.Stack;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 
-import com.google.common.collect.Iterables;
-
 /**
  * The RegionOrdering computes an ordering of the regions such that the sources of mandatory access dependencies precede their targets
  * and where possible the sources of preferred dependencies precede their targets.
@@ -214,7 +212,11 @@ public class RegionOrdering
 			assert loopingConnections != null;
 			assert outgoingConnections != null;
 			Set<Region> nextRegions = new HashSet<Region>();
-			for (@SuppressWarnings("null")@NonNull Connection outgoingConnection : Iterables.concat(loopingConnections, outgoingConnections)) {
+			List<Connection> connections = new ArrayList<Connection>();
+			connections.addAll(loopingConnections);
+			connections.addAll(outgoingConnections);
+			Collections.sort(connections, NameUtil.NAMEABLE_COMPARATOR);;
+			for (@SuppressWarnings("null")@NonNull Connection outgoingConnection : connections) {
 				if (refreshConnectionBlockage(outgoingConnection)) {
 					if (!orderedSchedulables.contains(outgoingConnection)) {			// re-unblocking can occur when multiple regions are unblocked at once
 						int size = orderedSchedulables.size();
