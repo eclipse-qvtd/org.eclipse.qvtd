@@ -482,7 +482,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		class2usage.put(((StandardLibraryInternal)context.getStandardLibrary()).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
 		inputUsage = getConstantUsage(getAnyMask() & unenforceableMask);
 		outputUsage = getConstantUsage(getAnyMask() & enforceableMask);
-		middleUsage = getConstantUsage(getAnyMask() & ~unenforceableMask & ~enforceableMask);
+		middleUsage = getConstantUsage(getAnyMask() & ~unenforceableMask & ~enforceableMask & ~PRIMITIVE_USAGE_BIT_MASK);
 		Variable ownedContext = transformation.getOwnedContext();
 		if (ownedContext != null) {
 			setUsage(ownedContext, getAnyUsage());
