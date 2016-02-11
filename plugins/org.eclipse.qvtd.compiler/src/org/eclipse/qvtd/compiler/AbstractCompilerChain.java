@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
@@ -51,7 +50,6 @@ import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -392,17 +390,8 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	protected @NonNull Resource qvtu2qvtm(@NonNull Resource uResource) throws IOException {
 		URI qvtmURI = getURI(QVTM_STEP, URI_KEY);
 		Resource mResource = createResource(qvtmURI);
-		for (EObject e : uResource.getContents()) {
-			CoreModel newE = (CoreModel) EcoreUtil.copy(e);
-			newE.setExternalURI(((CoreModel) e).getExternalURI()
-				.replace(".qvtu.qvtc", ".qvtm.qvtc"));
-			newE.setName(((CoreModel) e).getName().replace(".qvtu", ".qvtm"));
-			mResource.getContents().add(newE);
-		}
-		QVTu2QVTm utom = new QVTu2QVTm(environmentFactory);
-		for (EObject e : mResource.getContents()) {
-			utom.execute((CoreModel) e);
-		}
+		QVTu2QVTm qvtu2qvtm = new QVTu2QVTm(environmentFactory);
+		qvtu2qvtm.transform(uResource, mResource);
 		saveResource(mResource, QVTM_STEP);
 		return mResource;
 	}

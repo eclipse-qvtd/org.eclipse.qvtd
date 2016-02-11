@@ -213,6 +213,15 @@ public class QVTbaseUtil
 		return ownedContext;
 	}
 
+	public static @Nullable Domain getDomain(@NonNull Rule rule, @NonNull TypedModel typedModel) {
+		for (Domain domain : rule.getDomain()) {
+			if (domain.getTypedModel() == typedModel) {
+				return domain;
+			}
+		}
+		return null;
+	}
+
 	public static @NonNull Type getElementalType(@NonNull Type type) {
 		Type elementType = type;
 		while (elementType instanceof CollectionType) {

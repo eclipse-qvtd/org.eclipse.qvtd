@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
@@ -38,6 +39,10 @@ public class QVTcoreBaseUtil extends QVTbaseUtil
 			}
 		}
 		return null;
+	}
+
+	public static @Nullable CoreDomain getDomain(@NonNull AbstractMapping rule, @NonNull TypedModel typedModel) {
+		return (CoreDomain)getDomain((Rule)rule, typedModel);
 	}
 
 	public static @Nullable TypedModel getTypedModel(@Nullable Area area) {

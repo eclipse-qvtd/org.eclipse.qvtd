@@ -695,17 +695,8 @@ public class MtcBroker {
 		}
 		else {
 			mModel = createASModel(qvtmUri, "QVTm", "QVT", QVTC_FULL_NS, false, true, false, false);
-			for (EObject e : uModel.getResource().getContents()) {
-				CoreModel newE = (CoreModel) EcoreUtil.copy(e);
-				newE.setExternalURI(((CoreModel) e).getExternalURI()
-					.replace(".qvtu.qvtc", ".qvtm.qvtc"));
-				newE.setName(((CoreModel) e).getName().replace(".qvtu", ".qvtm"));
-				mModel.getResource().getContents().add(newE);
-			}
 			QVTu2QVTm utom = new QVTu2QVTm(environmentFactory);
-			for (EObject e : mModel.getResource().getContents()) {
-				utom.execute((CoreModel) e);
-			}
+			utom.transform(uModel.getResource(), mModel.getResource());
 			mModel.store();
 			System.out.println("QVTuToQVTm Done!");
 			return mModel;
