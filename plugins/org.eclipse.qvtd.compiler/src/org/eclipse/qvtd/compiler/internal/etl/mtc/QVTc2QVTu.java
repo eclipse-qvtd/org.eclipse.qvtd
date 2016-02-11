@@ -14,21 +14,16 @@ package org.eclipse.qvtd.compiler.internal.etl.mtc;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
-import org.eclipse.ocl.pivot.PivotPackage;
-import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.etl.utils.MtcUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -38,12 +33,35 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
+/**
+ * QVTc2QVTu transforms a QVTc transformation to impose the single direction defined by a QVTuConfiguration.
+ * - the output domain is enforced
+ * - other domains are not-enforced
+ */
 public class QVTc2QVTu extends AbstractQVTc2QVTc
 {
-	protected class CreateVisitor extends AbstractCreateVisitor<QVTc2QVTu>
+	protected class CreateVisitor extends AbstractCreateVisitor<@NonNull QVTc2QVTu>
 	{
 		public CreateVisitor(@NonNull QVTc2QVTu context) {
-			super(QVTc2QVTu.this);
+			super(context);
+		}
+
+		private boolean allReferencedVariablesInInputDomain(@NonNull PropertyAssignment a) {
+			for (Variable v : MtcUtil.findReferencedVariables(a)) {
+				if (!qvtuConfiguration.isInputDomain(QVTcoreBaseUtil.getContainingArea(v))) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		private boolean allReferencedVariablesInOutputDomain(@NonNull Predicate p) {
+			for (Variable v : MtcUtil.findReferencedVariables(p.getConditionExpression())) {
+				if (!qvtuConfiguration.isOutputDomain(QVTcoreBaseUtil.getContainingArea(v))) {
+					return false;
+				}
+			}
+			return true;
 		}
 		
 		//
@@ -101,11 +119,24 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			return dOut;
 		}
 
+		/*
+		 * Override to redefine external URI.
+		 */
 		@Override
 		public @NonNull CoreModel visitCoreModel(@NonNull CoreModel mIn) {
 			CoreModel mOut = super.visitCoreModel(mIn);
 			mOut.setExternalURI(mIn.getExternalURI().replace(".qvtcas", ".qvtu.qvtcas"));
 			return mOut;
+		}
+
+		/*
+		 * Override to suppresses nested scopes since QVTc references can be cross-domain and we convert mappings 1:1.
+		 */
+		@Override
+		public @Nullable Element visitMapping(@NonNull Mapping mIn) {
+			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
+			doMapping(mIn, mOut);
+	        return mOut;
 		}
 
 		//
@@ -190,34 +221,28 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		}
 	}
 	
-	protected class UpdateVisitor extends AbstractUpdateVisitor<QVTc2QVTu>
+	protected class UpdateVisitor extends AbstractUpdateVisitor<@NonNull QVTc2QVTu>
 	{
 		public UpdateVisitor(@NonNull QVTc2QVTu context) {
 			super(context);
 		}
 
+		/*
+		 * Override to suppresses nested scopes since QVTc references can be cross-domain and we convert mappings 1:1.
+		 */
+		@Override
+		public @NonNull Mapping visitMapping(@NonNull Mapping mOut) {
+			return doMapping(mOut);
+		}
+
 		//
-		//	Predicates that were PropertAssignments need a comparison to be synthesized.
+		//	Predicates that were PropertyAssignments need a comparison to be synthesized.
 		//
 		@Override
 		public @Nullable Object visitPredicate(@NonNull Predicate pOut) {
 			Element pIn = context.equivalentSource(pOut);
 			if (pIn instanceof PropertyAssignment) {
-				PropertyAssignment paIn = (PropertyAssignment)pIn;
-		    	OCLExpression slotExpression = copy(paIn.getSlotExpression(), pOut);
-				Property targetProperty = paIn.getTargetProperty();
-		    	assert (slotExpression != null) && (targetProperty != null);
-		        OCLExpression valueExpression = copy(paIn.getValue(), pOut);
-				PropertyCallExp propertyCallExp = PivotUtil.createPropertyCallExp(slotExpression, targetProperty);
-				context.addTrace(pIn, propertyCallExp);
-				propertyCallExp.eUnset(PivotPackage.Literals.TYPED_ELEMENT__IS_REQUIRED);		// FIXME redundant compatibility
-		        Operation equalsOperation = getEqualsOperation();
-				OperationCallExp operationCallExp = PivotUtil.createOperationCallExp(propertyCallExp, equalsOperation, valueExpression);
-				context.addTrace(pIn, operationCallExp);
-				operationCallExp.setName(equalsOperation.getName());		// FIXME redundant compatibility
-				pOut.setConditionExpression(operationCallExp);
-				checkOut(pOut);
-				return null;
+				return convertToPredicate((PropertyAssignment) pIn, pOut);
 			}
 			else {
 				return super.visitPredicate(pOut);
@@ -240,23 +265,5 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 	@Override
 	protected @NonNull UpdateVisitor createUpdateVisitor() {
 		return new UpdateVisitor(this);
-	}
-
-	private boolean allReferencedVariablesInInputDomain(@NonNull PropertyAssignment a) {
-		for (Variable v : MtcUtil.findReferencedVariables(a)) {
-			if (!qvtuConfiguration.isInputDomain(QVTcoreBaseUtil.getContainingArea(v))) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private boolean allReferencedVariablesInOutputDomain(@NonNull Predicate p) {
-		for (Variable v : MtcUtil.findReferencedVariables(p.getConditionExpression())) {
-			if (!qvtuConfiguration.isOutputDomain(QVTcoreBaseUtil.getContainingArea(v))) {
-				return false;
-			}
-		}
-		return true;
 	}
 }
