@@ -365,10 +365,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	myQVT.executeModelsTX_Interpreted(tx, "model1");
     	myQVT.executeModelsTX_Interpreted(tx, "model2");
     	myQVT.executeModelsTX_Interpreted(tx, "model3");
-    	myQVT.executeModelsTX_Interpreted(tx, "model4");
-    	myQVT.executeModelsTX_Interpreted(tx, "model5");
-    	myQVT.executeModelsTX_Interpreted(tx, "model6");
-    	myQVT.executeModelsTX_Interpreted(tx, "model7");
+//    	myQVT.executeModelsTX_Interpreted(tx, "model4");
+//    	myQVT.executeModelsTX_Interpreted(tx, "model5");
+//    	myQVT.executeModelsTX_Interpreted(tx, "model6");
+//    	myQVT.executeModelsTX_Interpreted(tx, "model7");
 		myQVT.dispose();
 	}
 
