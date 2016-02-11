@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -25,15 +26,24 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Comment;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotConstants;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -46,7 +56,6 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
@@ -63,14 +72,22 @@ public abstract class AbstractQVTc2QVTc
 {
 	/**
 	 * An ExpressionCopier deep copies an OCLExpression tree, exploiting the forward traceability of context to
-	 * update references and using sibling to distinguish multiple targets.
+	 * update references. Ambiguities should be resolved by performing the copy with respect to an appropriate
+	 * stack of resolution scopes.
 	 */
 	@SuppressWarnings("serial")
 	protected static class ExpressionCopier extends EcoreUtil.Copier
 	{	
 		private final @NonNull AbstractQVTc2QVTc context;
+		@Deprecated
 		private final @Nullable Element sibling;  // An object in the target domain used to select the appropriate source-target equivalence
 
+		public ExpressionCopier(@NonNull AbstractQVTc2QVTc context) {
+			this.context = context;
+			this.sibling = null;
+		}
+
+		@Deprecated
 		public ExpressionCopier(@NonNull AbstractQVTc2QVTc context, @Nullable Element sibling) {
 			this.context = context;
 			this.sibling = sibling;
@@ -79,37 +96,64 @@ public abstract class AbstractQVTc2QVTc
 		@Override
 		public EObject get(Object oIn) {
 			if (oIn instanceof Element) {
-				List<Element> oOuts = context.basicEquivalentTargets((Element)oIn);
-				if (oOuts != null) {
-					if (sibling == null) {
-						assert oOuts.size() == 1;
-						return oOuts.get(0);
-					}
-					Mapping containingMapping = QVTcoreUtil.getContainingMapping(sibling);
-					while ((containingMapping != null) && (containingMapping.getContext() != null)) {
-						containingMapping = containingMapping.getContext();
-					}
-					assert containingMapping != null;
-					Element theCopy = null;
-					for (Element oOut : oOuts) {
-						Mapping aMapping = QVTcoreUtil.getContainingMapping(oOut);
-						if ((aMapping == containingMapping) || (aMapping == null)) {
-							assert theCopy == null;
-							theCopy = oOut;
-						}
-					}
-//FIXME				assert theCopy != null;
-					return theCopy;
+				EObject eOut1 = get1(oIn);
+				EObject eOut2 = get2(oIn);
+				if (eOut1 != eOut2) {
+					eOut1 = get1(oIn);
+					eOut2 = get2(oIn);
+				}
+				assert eOut1 == eOut2;
+				if (eOut1 != null) {
+					return eOut1;
 				}
 			}
 			return super.get(oIn);
+		}
+
+		@Deprecated
+		private EObject get1(Object oIn) {
+			List<Element> oOuts = context.basicEquivalentTargets1((Element)oIn);
+			if (oOuts != null) {
+				if (sibling == null) {
+					assert oOuts.size() == 1;
+					return oOuts.get(0);
+				}
+				Mapping containingMapping = QVTcoreUtil.getContainingMapping(sibling);
+				while ((containingMapping != null) && (containingMapping.getContext() != null)) {
+					containingMapping = containingMapping.getContext();
+				}
+				assert containingMapping != null;
+				Element theCopy = null;
+				for (Element oOut : oOuts) {
+					Mapping aMapping = QVTcoreUtil.getContainingMapping(oOut);
+					if ((aMapping == containingMapping) || (aMapping == null)) {
+						assert theCopy == null;
+						theCopy = oOut;
+					}
+				}
+//FIXME				assert theCopy != null;
+				if (theCopy == null) {
+					return oOuts.get(0);
+				}
+				return theCopy;
+			}
+			EObject eOut = super.get(oIn);
+			return eOut != null ? eOut : (EObject)oIn;
+		}
+
+		private EObject get2(Object oIn) {
+			EObject eOut = super.get(oIn);
+			if (eOut == null) {
+				eOut = context.equivalentTarget2((Element)oIn);
+			}
+			return eOut;
 		}
 	}
 	
 	/**
 	 * The CreateVisitor performs the mostly 1:1 creation of the QVTp output tree from the QVTm input tree.
 	 * 
-	 * References are left unresolved. OCLExpressions are not copied.
+	 * References are left unresolved. OCLExpressions are not copied. doXXX methods provide join points for derived implementations.
 	 */
     protected static abstract class AbstractCreateVisitor<C extends AbstractQVTc2QVTc> extends AbstractExtendingQVTcoreVisitor<Element, C>
     {
@@ -138,9 +182,32 @@ public abstract class AbstractQVTc2QVTc
 			createAll(bIn.getAssignment(), bOut.getAssignment());
 		}
 
+		protected void doLocalMappings(@NonNull Mapping mIn, @NonNull Mapping mOut) {
+			createAll(mIn.getLocal(), mOut.getLocal());
+		}
+
+		protected void doMapping(@NonNull Mapping mIn, @NonNull Mapping mOut) {
+			context.addTrace(mIn, mOut);
+	        mOut.setName(mIn.getName());
+			mOut.setGuardPattern(create(mIn.getGuardPattern()));
+			mOut.setBottomPattern(create(mIn.getBottomPattern()));
+			createAll(mIn.getDomain(), mOut.getDomain());
+			doLocalMappings(mIn, mOut);
+//			createAll(mIn.getSpecification(), mOut.getSpecification());
+			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
+		}
+
 		protected void doRealizedVariables(@NonNull BottomPattern bIn, @NonNull BottomPattern bOut) {
 			createAll(bIn.getRealizedVariable(), bOut.getRealizedVariable());
 		}
+
+		protected void doRules(@NonNull Transformation tIn, @NonNull Transformation tOut) {
+			createAll(tIn.getRule(), tOut.getRule());
+		}
+
+//		public @NonNull EnvironmentFactory getEnvironmentFactory() {
+//			return context.getEnvironmentFactory();
+//		}
 
 		@Override
 		public @Nullable Element visiting(@NonNull Visitable visitable) {
@@ -183,23 +250,27 @@ public abstract class AbstractQVTc2QVTc
 		@Override
 		public @NonNull CoreModel visitCoreModel(@NonNull CoreModel mIn) {
 		    @NonNull CoreModel mOut = QVTcoreFactory.eINSTANCE.createCoreModel();
+			context.pushScope(mOut);
 		    context.addTrace(mIn, mOut);
 		    createAll(mIn.getOwnedImports(), mOut.getOwnedImports());
 		    createAll(mIn.getOwnedPackages(), mOut.getOwnedPackages());
 			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
+			context.popScope();
 		    return mOut;
 		}
 
 		@Override
 		public @NonNull Function visitFunction(@NonNull Function fIn) {
 			@NonNull Function fOut = QVTbaseFactory.eINSTANCE.createFunction();
-			context.addTrace(fIn, fOut);
+			context.addTrace(fIn, fOut);				// Global
+			context.pushScope(fOut);
 			fOut.setName(fIn.getName());
 			fOut.setIsRequired(fIn.isIsRequired());
 			fOut.setIsStatic(fIn.isIsStatic());
 			fOut.setIsTypeof(fIn.isIsTypeof());
 			createAll(fIn.getOwnedParameters(), fOut.getOwnedParameters());
 			createAll(fIn.getOwnedComments(), fOut.getOwnedComments());
+			context.popScope();
 		    return fOut;
 		}
 
@@ -237,22 +308,21 @@ public abstract class AbstractQVTc2QVTc
 		@Override
 		public @Nullable Element visitMapping(@NonNull Mapping mIn) {
 			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
-			context.addTrace(mIn, mOut);
-	        mOut.setName(mIn.getName());
-			mOut.setGuardPattern(create(mIn.getGuardPattern()));
-			mOut.setBottomPattern(create(mIn.getBottomPattern()));
-			createAll(mIn.getDomain(), mOut.getDomain());
-			createAll(mIn.getLocal(), mOut.getLocal());
-			createAll(mIn.getSpecification(), mOut.getSpecification());
-			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
+			context.pushScope(mOut);
+			doMapping(mIn, mOut);
+			context.popScope();
 	        return mOut;
 		}
 
 		@Override
 		public @Nullable Element visitPackage(@NonNull Package pIn) {
+			if (PivotConstants.ORPHANAGE_URI.equals(pIn.getURI())) {
+				return null;
+			}
 		    @SuppressWarnings("null")@NonNull Package pOut = PivotFactory.eINSTANCE.createPackage();
 		    context.addTrace(pIn, pOut);
 		    pOut.setName(pIn.getName());
+		    pOut.setURI(pIn.getURI());
 		    createAll(pIn.getOwnedClasses(), pOut.getOwnedClasses());
 		    createAll(pIn.getOwnedComments(), pOut.getOwnedComments());
 		    return pOut;
@@ -291,20 +361,20 @@ public abstract class AbstractQVTc2QVTc
 	    }
 
 		@Override
-		public @Nullable Element visitTransformation(@NonNull Transformation tIn) {
+		public @NonNull Transformation visitTransformation(@NonNull Transformation tIn) {
 			@NonNull Transformation tOut = QVTbaseFactory.eINSTANCE.createTransformation();
 			context.addTrace(tIn, tOut);
 		    tOut.setName(tIn.getName());
 		    tOut.setOwnedContext(create(tIn.getOwnedContext()));
 		    createAll(tIn.getOwnedOperations(), tOut.getOwnedOperations());
 		    createAll(tIn.getModelParameter(), tOut.getModelParameter());
-		    createAll(tIn.getRule(), tOut.getRule());
+		    doRules(tIn, tOut);
 			createAll(tIn.getOwnedComments(), tOut.getOwnedComments());
 		    return tOut;
 		}
 
 		@Override
-		public @Nullable Element visitTypedModel(@NonNull TypedModel tmIn) {
+		public @NonNull TypedModel visitTypedModel(@NonNull TypedModel tmIn) {
 			@NonNull TypedModel tmOut = QVTbaseFactory.eINSTANCE.createTypedModel();
 			context.addTrace(tmIn, tmOut);
 			String name = tmIn.getName();
@@ -319,7 +389,7 @@ public abstract class AbstractQVTc2QVTc
 		}
 
 		@Override
-		public @Nullable Element visitVariable(@NonNull Variable vIn) {
+		public @NonNull Variable visitVariable(@NonNull Variable vIn) {
 			@SuppressWarnings("null")@NonNull Variable vOut = PivotFactory.eINSTANCE.createVariable();
 			context.addTrace(vIn, vOut);
 			vOut.setName(vIn.getName());
@@ -329,7 +399,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @Nullable Element visitVariableAssignment(@NonNull VariableAssignment vaIn) {
-			PropertyAssignment vaOut = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
+			VariableAssignment vaOut = QVTcoreBaseFactory.eINSTANCE.createVariableAssignment();
 			context.addTrace(vaIn, vaOut);
 			vaOut.setIsDefault(vaIn.isIsDefault());
 			createAll(vaIn.getOwnedComments(), vaOut.getOwnedComments());
@@ -338,14 +408,71 @@ public abstract class AbstractQVTc2QVTc
     }
 
 	/**
-	 * The UpdateVisitor resolves the references and creates the OCLEXpressions omitted by the CreateVisitor..
+	 * The UpdateVisitor resolves the references and creates the OCLExpressions omitted by the CreateVisitor..
 	 */
     protected static abstract class AbstractUpdateVisitor<C extends AbstractQVTc2QVTc> extends AbstractExtendingQVTcoreVisitor<Object, C>
     {
-		public AbstractUpdateVisitor(@NonNull C context) {
+    	private Operation equalsOperation = null;
+
+    	public AbstractUpdateVisitor(@NonNull C context) {
 			super(context);
 		}
 
+		/**
+		 * Verify that variable references from the containment tree of outElement are to outElement's Resource.
+		 * 
+		 * This may not be valid for multi-package transformations, but it's a very helpful debug for straightforward single package transformations.
+		 */
+		protected void checkOut(@NonNull Element pOut) {
+			Resource eResource = pOut.eResource();
+			assert eResource != null;
+			for (TreeIterator<EObject> tit = pOut.eAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+				if (eObject instanceof VariableExp) {
+					VariableDeclaration variable = ((VariableExp)eObject).getReferredVariable();
+					Resource vResource = variable.eResource();
+//					assert vResource == eResource;
+					if (vResource != eResource) {
+						System.out.println(variable + " : " + NameUtil.debugFullName(variable) + " not in output resource.");
+						vResource = variable.eResource();
+					}
+				}
+			}
+		}
+
+		protected Object convertToPredicate(@NonNull PropertyAssignment paIn, @NonNull Predicate pOut) {
+			OCLExpression slotExpression = copy(paIn.getSlotExpression(), pOut);
+			Property targetProperty = paIn.getTargetProperty();
+			assert (slotExpression != null) && (targetProperty != null);
+			OCLExpression valueExpression = copy(paIn.getValue(), pOut);
+			PropertyCallExp propertyCallExp = PivotUtil.createPropertyCallExp(slotExpression, targetProperty);
+			context.addTrace(paIn, propertyCallExp);
+			propertyCallExp.eUnset(PivotPackage.Literals.TYPED_ELEMENT__IS_REQUIRED);		// FIXME redundant compatibility
+			Operation equalsOperation = getEqualsOperation();
+			OperationCallExp operationCallExp = PivotUtil.createOperationCallExp(propertyCallExp, equalsOperation, valueExpression);
+			context.addTrace(paIn, operationCallExp);
+			operationCallExp.setName(equalsOperation.getName());		// FIXME redundant compatibility
+			pOut.setConditionExpression(operationCallExp);
+			checkOut(pOut);
+			return null;
+		}
+
+		/**
+		 * Copy the eIn tree replacing all references by their souce2targets mapping, using a non-null sibling to prefer a target
+		 * in the same containing mapping.
+		 */
+		protected @Nullable <T extends Element> T copy(@Nullable T eIn) {
+			if (eIn == null) {
+				return null;
+			}
+			assert context != null;
+			EcoreUtil.Copier copier = new ExpressionCopier(context);
+			@SuppressWarnings("unchecked") T eOut = (T) copier.copy(eIn);			
+		    copier.copyReferences();
+		    context.addDebugCopies(copier); 
+			return eOut;
+		}
+		@Deprecated
 		protected @Nullable <T extends Element> T copy(@Nullable T eIn, @Nullable Element sibling) {
 			if (eIn == null) {
 				return null;
@@ -358,19 +485,42 @@ public abstract class AbstractQVTc2QVTc
 			return eOut;
 		}
 
-		private <T extends Element> void updateAllChildren(/*@NonNull*/ List<T> targets) {
+		protected @NonNull Mapping doMapping(@NonNull Mapping mOut) {
+			Mapping mIn = context.equivalentSource(mOut);
+	        updateChild(mOut.getGuardPattern());
+	        updateChild(mOut.getBottomPattern());
+	        updateAllChildren(mOut.getDomain());
+	        updateAllChildren(mOut.getLocal());
+	        updateAllReferences(mIn.getRefinement(), mOut.getRefinement());
+			return mIn;
+		}
+		
+	    public @NonNull Operation getEqualsOperation() {
+	    	if (equalsOperation != null) {
+	    		return equalsOperation;
+	    	}
+	       for (Operation op : context.environmentFactory.getStandardLibrary().getOclAnyType().getOwnedOperations()) {
+	            if (op.getName().equals("=")) {
+	            	equalsOperation = op;
+	                return op;
+	            }
+	        }
+	       	throw new IllegalStateException();
+	    }
+
+		protected <T extends Element> void updateAllChildren(/*@NonNull*/ List<T> targets) {
 			for (@SuppressWarnings("null")@NonNull T target : targets) {
 				target.accept(this);
 	        }
 		}
 
-		private <T extends Element> void updateAllReferences(/*@NonNull*/ List<T> sources, /*@NonNull*/ List<T> targets) {
+		protected <T extends Element> void updateAllReferences(/*@NonNull*/ List<T> sources, /*@NonNull*/ List<T> targets) {
 			for (@SuppressWarnings("null")@NonNull T source : sources) {
 				targets.add(context.equivalentTarget(source));
 	        }
 		}
 
-		private void updateChild(@Nullable Element target) {
+		protected void updateChild(@Nullable Element target) {
 			if (target != null) {
 				target.accept(this);
 			}
@@ -392,7 +542,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @Nullable Object visitCoreDomain(@NonNull CoreDomain dOut) {
-			Area dIn = context.basicEquivalentSource(dOut);
+			Element dIn = context.basicEquivalentSource(dOut);
 			TypedModel tmOut;
 			if (dIn instanceof CoreDomain) {
 				tmOut = context.equivalentTarget(((CoreDomain)dIn).getTypedModel());
@@ -411,17 +561,21 @@ public abstract class AbstractQVTc2QVTc
 		public @Nullable Object visitCoreModel(@NonNull CoreModel mOut) {
 		    @SuppressWarnings("unused")
 			CoreModel mIn = context.equivalentSource(mOut);
+			context.pushScope(mOut);
 			updateAllChildren(mOut.getOwnedPackages());
+			context.popScope();
 			return null;
 		}
 
 		@Override
 		public @Nullable Element visitFunction(@NonNull Function fOut) {
+			context.pushScope(fOut);
 			Function fIn = context.equivalentSource(fOut);
-			fOut.setQueryExpression(copy(fIn.getQueryExpression(), null));
+			fOut.setQueryExpression(copy(fIn.getQueryExpression()));
 			fOut.setType(fIn.getType());
 //			fOut.setTypeValue(fIn.getTypeValue());
 			updateAllChildren(fOut.getOwnedParameters());
+			context.popScope();
 	        return null;
 	    }
 
@@ -437,17 +591,17 @@ public abstract class AbstractQVTc2QVTc
 		public @Nullable Object visitGuardPattern(@NonNull GuardPattern gOut) {
 	        updateAllChildren(gOut.getPredicate());
 	        updateAllChildren(gOut.getVariable());
+	        for (Variable vOut : gOut.getVariable()) {
+	        	assert !(vOut instanceof RealizedVariable);
+	        }
 	        return null;
 	    }
 
 		@Override
 		public @NonNull Mapping visitMapping(@NonNull Mapping mOut) {
-	        Mapping mIn = context.equivalentSource(mOut);
-	        updateChild(mOut.getGuardPattern());
-	        updateChild(mOut.getBottomPattern());
-	        updateAllChildren(mOut.getDomain());
-	        updateAllChildren(mOut.getLocal());
-	        updateAllChildren(mOut.getSpecification());
+			context.pushScope(mOut);
+	        Mapping mIn = doMapping(mOut);
+			context.popScope();
 			return mIn;
 		}
 
@@ -459,20 +613,10 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @Nullable Object visitPredicate(@NonNull Predicate pOut) {
-			Element pIn = context.equivalentSource(pOut);
-			pOut.setConditionExpression(copy(((Predicate)pIn).getConditionExpression(), pOut));
+			Predicate pIn = context.equivalentSource(pOut);
+			pOut.setConditionExpression(copy(pIn.getConditionExpression(), pOut));
 			checkOut(pOut);
 			return null;
-		}
-
-		protected void checkOut(@NonNull Element pOut) {
-			for (TreeIterator<EObject> tit = pOut.eAllContents(); tit.hasNext(); ) {
-				EObject eObject = tit.next();
-				if (eObject instanceof VariableExp) {
-					VariableDeclaration variable = ((VariableExp)eObject).getReferredVariable();
-					assert variable.eResource() == pOut.eResource();
-				}
-			}
 		}
 
 		@Override
@@ -486,9 +630,9 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable rvOut) {
-			Variable vIn = context.equivalentSource(rvOut);
-			rvOut.setOwnedInit(copy(vIn.getOwnedInit(), rvOut));
-			return vIn;
+			RealizedVariable rvIn = context.equivalentSource(rvOut);
+			rvOut.setOwnedInit(copy(rvIn.getOwnedInit(), rvOut));
+			return rvIn;
 		}
 
 		@Override
@@ -534,22 +678,31 @@ public abstract class AbstractQVTc2QVTc
     protected final @NonNull AbstractCreateVisitor<?> createVisitor;
     protected final @NonNull AbstractUpdateVisitor<?> updateVisitor;
 	private TypedModel middleTypedModelTarget = null;
-	private Operation equalsOperation = null;
     
     /**
      * Forward traceability from a source object to its one or more targets; at most one target per cobtaining mapping.
      */
+	@Deprecated
     private final @NonNull Map<Element, List<Element>> source2targets = new HashMap<Element, List<Element>>();
+
+    /**
+     * Forward traceability from a source object to its targets for the current mapping. Top level entries ourside a maping are indexed for the null mapping.
+     */
+    private final @NonNull Map<@Nullable NamedElement, @NonNull Map<@NonNull Element, @NonNull List<@NonNull Element>>> scope2source2targets = new HashMap<@Nullable NamedElement, @NonNull Map<@NonNull Element, @NonNull List<@NonNull Element>>>();
+
+    private final @NonNull Stack<@NonNull NamedElement> scopeStack = new Stack<@NonNull NamedElement>();
+    /**
+     * Reverse traceability from a target object to its source.
+     */
+    private final @NonNull Map<@NonNull Element, @NonNull Element> target2source = new HashMap<@NonNull Element, @NonNull Element>();
     
     /**
      * Reverse traceability from a target object to its source.
      */
-    private final @NonNull Map<Element, Element> target2source = new HashMap<Element, Element>();
+    private final @NonNull Map<@NonNull Element, @NonNull Element> debugCopy2source = new HashMap<@NonNull Element, @NonNull Element>();
     
-    /**
-     * Reverse traceability from a target object to its source.
-     */
-    private final @NonNull Map<Element, Element> debugCopy2source = new HashMap<Element, Element>();
+    private @Nullable Resource debugSource = null;
+    private @Nullable Resource debugTarget = null;
 	
     /**
      * Create a new QVTc to QVTc transformation using an environmentFactory.
@@ -565,6 +718,7 @@ public abstract class AbstractQVTc2QVTc
     public void addDebugCopies(@NonNull Map<EObject, EObject> copier) {
 	    for (EObject eSource : copier.keySet()) {
 	    	EObject eTarget = copier.get(eSource);
+	    	assert (eSource != null) && (eTarget != null);
 	    	debugCopy2source.put((Element)eTarget, (Element)eSource);
 	    }
 	}
@@ -577,42 +731,100 @@ public abstract class AbstractQVTc2QVTc
      * @param generated the list of generated objects
      * @param context the context in which the trace is valid
      */
-	void addTrace(@NonNull Element source, @NonNull Element target) {
+    protected void addTrace(@NonNull Element source, @NonNull Element target) {
     	target2source.put(target, source);
-    	List<Element> targets = source2targets.get(source);
+    	//
+    	{
+	    	List<Element> targets = source2targets.get(source);
+	    	if (targets == null) {
+	    		targets = new ArrayList<Element>();
+	    		source2targets.put(source, targets);
+	    	}
+	    	assert !targets.contains(target);
+	    	targets.add(target);
+    	}
+    	//
+    	NamedElement scope = scopeStack.peek();
+    	Map<@NonNull Element, @NonNull List<@NonNull Element>> source2targets = scope2source2targets.get(scope);
+    	if (source2targets == null) {
+    		source2targets = new HashMap<@NonNull Element, @NonNull List<@NonNull Element>>();
+    		scope2source2targets.put(scope, source2targets);
+    	}
+    	List<@NonNull Element> targets = source2targets.get(source);
     	if (targets == null) {
-    		targets = new ArrayList<Element>();
+    		targets = new ArrayList<@NonNull Element>();
     		source2targets.put(source, targets);
     	}
     	assert !targets.contains(target);
     	targets.add(target);
     }
 
-	@Nullable <T extends Element> T basicEquivalentSource(@NonNull T target) {
-    	assert target.eResource() == null : "source element used for equivalentSource " + target;
-    	@SuppressWarnings("unchecked") T source = (T) target2source.get(target);
-    	return source;
+    protected @Nullable Element basicEquivalentSource(@Nullable Element target) {
+    	if (target == null) {
+    		return null;
+    	}
+    	assert target.eResource() != debugSource : "source element used for basicEquivalentSource " + target;
+    	return target2source.get(target);
 	}
 
 	private @Nullable <T extends Element> List<T> basicEquivalentTargets(/*@NonNull*/ T source) {
+		List<T> targets1 = basicEquivalentTargets1(source);
+		List<T> targets2 = basicEquivalentTargets2(source);
+		if (!ClassUtil.safeEquals(targets1, targets2)) {
+	    	targets1 = basicEquivalentTargets1(source);
+	    	targets2 = basicEquivalentTargets2(source);
+		}
+		assert ClassUtil.safeEquals(targets1, targets2);
+		return targets1;
+    }
+
+	@Deprecated
+	private @Nullable <T extends Element> List<T> basicEquivalentTargets1(/*@NonNull*/ T source) {
     	assert source != null;
     	@SuppressWarnings("unchecked") List<T> targets = (List<T>) source2targets.get(source);
     	return targets;
     }
+
+	private @Nullable <T extends Element> List<T> basicEquivalentTargets2(/*@NonNull*/ T source) {
+    	assert source != null;
+    	assert source.eResource() != debugTarget : "target element used for equivalentTarget " + source;
+    	List<@NonNull Element> targets = null;
+    	for (int i = scopeStack.size(); (targets == null) && (--i >= 0); ) {
+    		NamedElement scope = scopeStack.get(i);
+        	Map<@NonNull Element, @NonNull List<@NonNull Element>> source2targets = scope2source2targets.get(scope);
+    		if (source2targets != null) {
+    	    	targets = source2targets.get(source);
+    		}
+    	}
+    	return (@Nullable List<T>) targets;
+    }
 	
-	protected abstract @NonNull AbstractCreateVisitor<?> createCreateVisitor();
+	protected abstract @NonNull AbstractCreateVisitor<@NonNull ?> createCreateVisitor();
 	
-	protected abstract @NonNull AbstractUpdateVisitor<?> createUpdateVisitor();
+	protected abstract @NonNull AbstractUpdateVisitor<@NonNull ?> createUpdateVisitor();
 	
-	@NonNull <T extends Element> T equivalentSource(@NonNull T target) {
-    	assert target.eResource() == null : "source element used for equivalentSource " + target;
+	protected @NonNull <T extends Element> T equivalentSource(@NonNull T target) {
+    	assert target.eResource() != debugSource : "source element used for equivalentSource " + target;
     	@SuppressWarnings("unchecked") T source = (T) target2source.get(target);
     	assert source != null;
     	return source;
     }
 
-	@NonNull <T extends Element> T equivalentTarget(/*@NonNull*/ T source) {
+	protected @NonNull <T extends Element> T equivalentTarget(/*@NonNull*/ T source) {
+    	T target1 = equivalentTarget1(source);
+    	T target2 = equivalentTarget2(source);
+		if (target1 != target2) {
+	    	target1 = equivalentTarget1(source);
+	    	target2 = equivalentTarget2(source);
+		}
+		assert target1 == target2;
+		return target1;
+    }
+
+	@Deprecated
+	private @NonNull <T extends Element> T equivalentTarget1(/*@NonNull*/ T source) {
     	assert source != null;
+    	assert source.eResource() != debugTarget : "target element used for equivalentTarget " + source;
     	@SuppressWarnings("unchecked") List<T> targets = (List<T>) source2targets.get(source);
     	if (targets != null) {
 		    assert targets.size() == 1;
@@ -625,33 +837,57 @@ public abstract class AbstractQVTc2QVTc
     	}
     }
 
+	private @NonNull <T extends Element> T equivalentTarget2(/*@NonNull*/ T source) {
+    	assert source != null;
+    	assert source.eResource() != debugTarget : "target element used for equivalentTarget " + source;
+    	List<@NonNull Element> targets = null;
+    	for (int i = scopeStack.size(); (targets == null) && (--i >= 0); ) {
+    		NamedElement scope = scopeStack.get(i);
+        	Map<@NonNull Element, @NonNull List<@NonNull Element>> source2targets = scope2source2targets.get(scope);
+    		if (source2targets != null) {
+    	    	targets = source2targets.get(source);
+    		}
+    	}
+    	if (targets != null) {
+//		    assert targets.size() == 1;			-- multiple entries are allowed, the first/primary entry is used
+		    @SuppressWarnings("unchecked") T target = (T)targets.get(0);
+		    assert target != null;
+			return target;
+    	}
+    	else {
+    		return source;
+    	}
+    }
+
 	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		return environmentFactory;
 	}
-	
-    public @NonNull Operation getEqualsOperation() {
-    	if (equalsOperation != null) {
-    		return equalsOperation;
-    	}
-       for (Operation op : environmentFactory.getStandardLibrary().getOclAnyType().getOwnedOperations()) {
-            if (op.getName().equals("=")) {
-            	equalsOperation = op;
-                return op;
-            }
-        }
-       	throw new IllegalStateException();
-    }
 
-	@NonNull TypedModel getMiddleTypedModelTarget() {
+    protected @NonNull TypedModel getMiddleTypedModelTarget() {
 		assert middleTypedModelTarget != null;
 		return middleTypedModelTarget;
 	}
+    
+//    protected @NonNull NamedElement getScope() {
+//    	return scopeStack.peek();
+//    }
+
+    public void popScope() {
+    	scopeStack.pop();
+    }
+
+    public void pushScope(@NonNull NamedElement scope) {
+    	assert !scopeStack.contains(scope);
+    	scopeStack.push(scope);
+    }
 	
-	void setMiddleTypedModelTarget(@NonNull TypedModel middleTypedModelTarget) {
+    protected void setMiddleTypedModelTarget(@NonNull TypedModel middleTypedModelTarget) {
 		this.middleTypedModelTarget = middleTypedModelTarget;
 	}
 
     public void transform(@NonNull Resource source, @NonNull Resource target) {
+    	debugSource = source;
+    	debugTarget = target;
     	//
     	//	Do the transformation for each CoreModel. First a createVisitor descent of the input, then an updateVisitor descent of the output. 
     	//
@@ -660,8 +896,8 @@ public abstract class AbstractQVTc2QVTc
                 CoreModel mIn = (CoreModel) eContent;
         		CoreModel mOut = (CoreModel) mIn.accept(createVisitor);
         		assert mOut != null;
-                mOut.accept(updateVisitor);
                 target.getContents().add(mOut);
+                mOut.accept(updateVisitor);
             }
         }
     	//
@@ -675,6 +911,8 @@ public abstract class AbstractQVTc2QVTc
 	    		System.out.println("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
 	    	}
 	    }
+	    
+	    // FIXME the following lines should go obsolete
         List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
         if (missingOperationCallSources != null) {
         	System.err.println("Missing OperationCallExp sources  were fixed up for '" + target.getURI() + "'");
