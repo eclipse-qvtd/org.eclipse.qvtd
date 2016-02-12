@@ -127,16 +127,11 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		    //
 			for (@SuppressWarnings("null")@NonNull Rule inRule : tIn.getRule()) {
 				Mapping mIn = (Mapping) inRule;
-				if (isSingleInput(mIn)) {			// Single input Mappings cannot deadlock - no need to partition
-					outRules.add(create(mIn));
-				}
-				else {
-					Partitioning mappingPartitioning = new Partitioning(this, mIn);
-					mappingPartitioning.analyze();
-					StringBuilder s = new StringBuilder();
-					outRules.addAll(mappingPartitioning.synthesize(s));
-					System.out.println(s.toString());
-				}
+				Partitioning mappingPartitioning = new Partitioning(this, mIn);
+				mappingPartitioning.analyze();
+				StringBuilder s = new StringBuilder();
+				outRules.addAll(mappingPartitioning.synthesize(s));
+				System.out.println(s.toString());
 			}
 		}
 
@@ -146,14 +141,6 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 
 		protected String getMappingName(@NonNull Mapping mIn) {
 			return mIn.getName();
-		}
-
-		private boolean isSingleInput(@NonNull Mapping mIn) {
-			int guardCount = mIn.getGuardPattern().getVariable().size();
-			for (Domain dIn : mIn.getDomain()) {
-				guardCount += ((CoreDomain)dIn).getGuardPattern().getVariable().size();
-			}
-			return guardCount <= 1;
 		}
 
 		@Override
