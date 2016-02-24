@@ -1,6 +1,6 @@
 package org.eclipse.qvtd.cs2as.compiler.internal;
 
-import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.firstToLowerCase;
+import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.firstToUpperCase;
 import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getAllContainers;
 import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getAllContents;
 import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getAllContentsIncludingSelf;
@@ -296,7 +296,7 @@ public class OCL2QVTp {
 		domain.setBottomPattern(bottomPattern);
 		
 		Variable variable = PivotFactory.eINSTANCE.createVariable();
-		variable.setName(firstToLowerCase().apply(contextType.getName()));
+		variable.setName("l"+firstToUpperCase().apply(contextType.getName()));
 		variable.setType(contextType);
 		
 		guardPattern.getVariable().add(variable);
@@ -317,7 +317,7 @@ public class OCL2QVTp {
 		domain.setBottomPattern(bottomPattern);
 		
 		RealizedVariable variable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
-		variable.setName(firstToLowerCase().apply(constructedType.getName()));
+		variable.setName("r"+firstToUpperCase().apply(constructedType.getName()));
 		variable.setType(constructedType);
 		
 		bottomPattern.getRealizedVariable().add(variable);

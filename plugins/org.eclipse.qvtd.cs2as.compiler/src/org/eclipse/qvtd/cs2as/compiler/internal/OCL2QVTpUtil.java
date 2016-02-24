@@ -80,6 +80,17 @@ public class OCL2QVTpUtil {
 		};
 	}
 	
+	public static Function<@NonNull String, @NonNull String> firstToUpperCase() {
+		return input -> {
+			if (input.isEmpty()) {
+				return input;
+			}
+			char c[] = input.toCharArray();
+			c[0] = Character.toUpperCase(c[0]);
+			return new String(c);
+		};
+	}
+	
 	public static Function<@NonNull ShadowExp, @NonNull String> getCreationMappingName() { 
 		return shadowExp -> {
 			return "c" + getExpressionContextType().apply(shadowExp).getName() + "_2_" + getShadowTypeName().apply(shadowExp);
