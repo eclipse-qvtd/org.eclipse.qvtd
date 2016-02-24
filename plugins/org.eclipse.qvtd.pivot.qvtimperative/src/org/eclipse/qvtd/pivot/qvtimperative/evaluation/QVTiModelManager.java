@@ -152,10 +152,10 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 	 * The inherited 'allInstances' behavior is implemented as an accumulation of all instances from all input models.
 	 */
 	@Override
-	public @NonNull Set<EObject> get(org.eclipse.ocl.pivot.@NonNull Class type) {
-		Set<EObject> elements = new HashSet<EObject>();
+	public @NonNull Set<@NonNull EObject> get(org.eclipse.ocl.pivot.@NonNull Class type) {
+		Set<@NonNull EObject> elements = new HashSet<@NonNull EObject>();
 		DomainUsage inputUsage = transformationAnalysis.getDomainUsageAnalysis().getInputUsage();
-		for (@SuppressWarnings("null")@NonNull TypedModel typedModel : inputUsage.getTypedModels()) {
+		for (@NonNull TypedModel typedModel : inputUsage.getTypedModels()) {
 			TypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
 			elements.addAll(typedModelInstance.getObjectsOfKind(type));
 		}
@@ -192,9 +192,9 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
      * @param type the type of the elements that are retrieved
      * @return the instances
      */
-    public List<Object> getElementsByType(@Nullable TypedModel model, @NonNull Type type) {
+    public List<@NonNull Object> getElementsByType(@Nullable TypedModel model, @NonNull Type type) {
         
-        List<Object> elements = new ArrayList<Object>();
+        List<@NonNull Object> elements = new ArrayList<@NonNull Object>();
         // Is the TypedModel the middle or output, hence we have elements in the elementsMap
         if (modelElementsMap.containsKey(model)) {
             List<EObject> roots = modelElementsMap.get(model);
@@ -387,8 +387,8 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 	{
 		protected final @NonNull QVTiModelManager modelManager;
 		protected final @NonNull TypedModel typedModel;
-		private /*@LazyNonNull*/ Map<Type, Set<EObject>> kind2instances = null;
-		private /*@LazyNonNull*/ Map<Type, Set<EObject>> type2instances = null;
+		private /*@LazyNonNull*/ Map<@NonNull Type, @NonNull Set<@NonNull EObject>> kind2instances = null;
+		private /*@LazyNonNull*/ Map<@NonNull Type, @NonNull Set<@NonNull EObject>> type2instances = null;
 		
 		public QVTiTypedModelInstance(@NonNull QVTiModelManager modelManager, @NonNull TypedModel typedModel) {
 			this.modelManager = modelManager;
@@ -396,7 +396,7 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 		}
 
 		@Override
-		public @NonNull Set<EObject> getAllObjects() {
+		public @NonNull Set<@NonNull EObject> getAllObjects() {
 			throw new UnsupportedOperationException();
 		}
 		
@@ -406,13 +406,13 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 		}
 
 		@Override
-		public @NonNull Set<EObject> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
+		public @NonNull Set<@NonNull EObject> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
 			if (kind2instances == null) {
-				kind2instances = new HashMap<Type, Set<EObject>>();
+				kind2instances = new HashMap<@NonNull Type, @NonNull Set<@NonNull EObject>>();
 			}
-			Set<EObject> elements = kind2instances.get(type);
+			Set<@NonNull EObject> elements = kind2instances.get(type);
 			if (elements == null) {
-				elements = new HashSet<EObject>();
+				elements = new HashSet<@NonNull EObject>();
 				kind2instances.put(type, elements);
 				for (Object o : modelManager.getElementsByType(typedModel, type)) {
 					elements.add((EObject) o);
@@ -422,13 +422,13 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 		}
 
 		@Override
-		public @NonNull Set<EObject> getObjectsOfType(org.eclipse.ocl.pivot.@NonNull Class type) {
+		public @NonNull Set<@NonNull EObject> getObjectsOfType(org.eclipse.ocl.pivot.@NonNull Class type) {
 			if (type2instances == null) {
-				type2instances = new HashMap<Type, Set<EObject>>();
+				type2instances = new HashMap<@NonNull Type, @NonNull Set<@NonNull EObject>>();
 			}
-			Set<EObject> elements = type2instances.get(type);
+			Set<@NonNull EObject> elements = type2instances.get(type);
 			if (elements == null) {
-				elements = new HashSet<EObject>();
+				elements = new HashSet<@NonNull EObject>();
 				type2instances.put(type, elements);
 				EObject eClass = type.getESObject();
 				for (EObject eObject : getObjectsOfKind(type)) {
@@ -444,9 +444,8 @@ public class QVTiModelManager implements ModelManager.ModelManagerExtension
 			return modelManager;
 		}
 
-		@SuppressWarnings("null")
 		@Override
-		public @NonNull Collection<EObject> getRootObjects() {
+		public @NonNull Collection<@NonNull EObject> getRootObjects() {
 			Resource resource = modelManager.getModel(typedModel);
 			if (resource != null) {
 				return resource.getContents();

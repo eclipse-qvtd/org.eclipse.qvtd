@@ -54,7 +54,7 @@ public interface DomainUsage
 	/**
 	 * Return all the TypedModels for this usage. Note that a primitive TypedModel may be returned for DataType usage; it has no container.
 	 */
-	@NonNull Iterable<TypedModel> getTypedModels();
+	@NonNull Iterable<@NonNull TypedModel> getTypedModels();
 
 	/**
 	 * Return true if this usage includes usage in a checkable domain.

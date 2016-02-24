@@ -92,8 +92,8 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		}
 
 		@Override
-		public @NonNull Iterable<TypedModel> getTypedModels() {
-			List<TypedModel> typedModels = new ArrayList<TypedModel>();
+		public @NonNull Iterable<@NonNull TypedModel> getTypedModels() {
+			List<@NonNull TypedModel> typedModels = new ArrayList<@NonNull TypedModel>();
 			int residue = bitMask;
 			for (int i = 0; residue != 0; i++) {
 				int bit = 1 << i;
