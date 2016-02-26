@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.analyzer;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -58,8 +59,13 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 
 	@Override
 	public Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgEcorePropertyAssignment) {
-		rewriteAsEcore(cgEcorePropertyAssignment.getSlotValue(), cgEcorePropertyAssignment.getEStructuralFeature().getEContainingClass());
-		rewriteAsEcore(cgEcorePropertyAssignment.getInitValue(), cgEcorePropertyAssignment.getEStructuralFeature().getEType());
+		EStructuralFeature eStructuralFeature = cgEcorePropertyAssignment.getEStructuralFeature();
+		boolean isRequired = eStructuralFeature.isRequired();
+		rewriteAsEcore(cgEcorePropertyAssignment.getSlotValue(), eStructuralFeature.getEContainingClass());
+		rewriteAsEcore(cgEcorePropertyAssignment.getInitValue(), eStructuralFeature.getEType());
+		if (isRequired) {
+			rewriteAsGuarded(cgEcorePropertyAssignment.getInitValue(), false, "value");
+		}
 		return visitCGPropertyAssignment(cgEcorePropertyAssignment);
 	}
 
