@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
@@ -1076,13 +1075,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	@Override
 	public @NonNull Boolean visitCGMappingExp(@NonNull CGMappingExp cgMappingExp) {
 		assert cgMappingExp.getPredicates().isEmpty();		// Get rewritten during JavaPre pass
-		List<CGFinalVariable> cgVariableAssignments = cgMappingExp.getVariableAssignments();
-		if (cgVariableAssignments.size() > 0) {
-			js.append("// variable assignments\n");
-			for (CGVariable cgAssignment : cgVariableAssignments) {
-				cgAssignment.accept(this);
-			}
-		}
 		List<CGAccumulator> cgAccumulators = cgMappingExp.getOwnedAccumulators();
 		if (cgAccumulators.size() > 0) {
 			js.append("// connection variables\n");

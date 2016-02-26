@@ -75,9 +75,6 @@
         containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
         containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableAssignments" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGFinalVariable"
-        containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="connectionAssignments"
         upperBound="-1" eType="#//CGConnectionAssignment" containment="true" resolveProxies="false"
         eOpposite="#//CGConnectionAssignment/mappingExp"/>

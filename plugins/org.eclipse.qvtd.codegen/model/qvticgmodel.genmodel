@@ -59,7 +59,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingExp/predicates"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingExp/realizedVariables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingExp/body"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingExp/variableAssignments"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingExp/connectionAssignments"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingExp/ownedAccumulators"/>
     </genClasses>

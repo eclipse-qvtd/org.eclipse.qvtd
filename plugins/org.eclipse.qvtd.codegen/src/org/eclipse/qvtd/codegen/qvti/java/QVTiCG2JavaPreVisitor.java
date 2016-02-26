@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
@@ -141,10 +140,6 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 			return visitCGValuedElement(cgFirstPredicate);
 		}
 		else {
-			// Fudge, ensure VariableAssignments assign names to their constituents before PropertyAssignments access them
-			for (CGElement cgChild : cgMappingExp.getVariableAssignments()) {
-				cgChild.accept(this);
-			}
 			return visitCGValuedElement(cgMappingExp);
 		}
 	}

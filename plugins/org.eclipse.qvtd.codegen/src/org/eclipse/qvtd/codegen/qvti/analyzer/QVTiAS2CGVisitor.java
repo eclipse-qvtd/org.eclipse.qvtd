@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -167,6 +168,17 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		this.globalContext = globalContext;
 	}
 
+	protected @NonNull CGLetExp createCGLetExp(@NonNull Variable asVariable, @NonNull OCLExpression asInit) {
+		CGValuedElement initExpression = doVisit(CGValuedElement.class, asInit);
+		initExpression.setName(asVariable.getName());
+		CGFinalVariable cgVariable = (CGFinalVariable) createCGVariable(asVariable);		// FIXME Lose cast
+		cgVariable.setInit(initExpression);
+		CGLetExp cgLetExp = CGModelFactory.eINSTANCE.createCGLetExp();
+		setAst(cgLetExp, asVariable);
+		cgLetExp.setInit(cgVariable);
+		return cgLetExp;
+	}
+
 	@Override
 	protected <T extends EObject> @NonNull T createCopy(@NonNull T aPrototype) {
 	    Copier copier = new EcoreUtil.Copier();
@@ -194,7 +206,9 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		return castCopy;
 	}
 
-	protected void doBottoms(@NonNull Mapping pMapping, @NonNull CGMappingExp cgMappingExp) {
+	protected @NonNull CGValuedElement doBottoms(@NonNull Mapping pMapping, @NonNull CGMappingExp cgMappingExp) {
+		CGLetExp cgLetExpRoot = null;
+		CGLetExp cgLetExpLeaf = null;
 		List<BottomPattern> pBottomPatterns = new ArrayList<BottomPattern>();
 		{
 			BottomPattern pBottomPattern = pMapping.getBottomPattern();
@@ -210,14 +224,14 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				}
 			}
 		}
-		List<CGFinalVariable> cgVariableAssignments = cgMappingExp.getVariableAssignments();
 		List<RealizedVariable> pRealizedVariables = new ArrayList<RealizedVariable>();
 		for (@SuppressWarnings("null")@NonNull BottomPattern pBottomPattern : pBottomPatterns) {
 			pRealizedVariables.addAll(pBottomPattern.getRealizedVariable());
 			for (@SuppressWarnings("null")@NonNull Variable asVariable : pBottomPattern.getVariable()) {
+				OCLExpression asInit = asVariable.getOwnedInit();
 				if (QVTimperativeUtil.isConnectionAccumulator(asVariable)) {
-					if (asVariable.getOwnedInit() != null) {
-						CGValuedElement cgInit = doVisit(CGValuedElement.class, asVariable.getOwnedInit());
+					if (asInit != null) {
+						CGValuedElement cgInit = doVisit(CGValuedElement.class, asInit);
 						CGAccumulator cgAccumulator = CGModelFactory.eINSTANCE.createCGAccumulator();
 						cgAccumulator.setName(asVariable.getName());
 						cgAccumulator.setTypeId(cgInit.getTypeId());
@@ -229,8 +243,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 					}
 				}
 				else {
-					if (asVariable.getOwnedInit() != null) {
-						cgVariableAssignments.add(doVisit(CGFinalVariable.class, asVariable));
+					if (asInit != null) {
+						CGLetExp cgLetExp = createCGLetExp(asVariable, asInit);
+						if (cgLetExpRoot == null) {
+							cgLetExpRoot = cgLetExp;
+						}
+						if (cgLetExpLeaf != null) {
+							cgLetExpLeaf.setIn(cgLetExp);
+						}
+						cgLetExpLeaf = cgLetExp;
 					}
 				}
 			}
@@ -259,10 +280,29 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 					cgConnectionAssignments.add(doVisit(CGConnectionAssignment.class, pAssignment));
 				}
 				else {
-					cgVariableAssignments.add(doVisit(CGFinalVariable.class, pAssignment));
+					VariableAssignment asVariableAssignment = (VariableAssignment) pAssignment;
+					Variable asVariable = asVariableAssignment.getTargetVariable();
+					OCLExpression asInit = asVariableAssignment.getValue();
+					assert (asVariable != null) && (asInit != null);
+					CGLetExp cgLetExp = createCGLetExp(asVariable, asInit);
+					if (cgLetExpRoot == null) {
+						cgLetExpRoot = cgLetExp;
+					}
+					if (cgLetExpLeaf != null) {
+						cgLetExpLeaf.setIn(cgLetExp);
+					}
+					cgLetExpLeaf = cgLetExp;
+//					cgVariableAssignments.add(doVisit(CGFinalVariable.class, pAssignment));
 				}
 			}
 		}
+		if (cgLetExpRoot == null) {
+			return cgMappingExp;
+		}
+		if (cgLetExpLeaf != null) {
+			cgLetExpLeaf.setIn(cgMappingExp);
+		}
+		return cgLetExpRoot;
 	}
 
 	protected void doGuards(@NonNull Mapping pMapping, @NonNull CGMapping cgMapping, @NonNull CGMappingExp cgMappingExp) {
@@ -622,9 +662,10 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		setAst(cgMappingExp, pMapping);
 		TypeId pivotTypeId = TypeId.BOOLEAN; //pMapping.getTypeId();
 		cgMappingExp.setTypeId(context.getTypeId(pivotTypeId));
-		cgMapping.setBody(cgMappingExp);
+//		cgMapping.setBody(cgMappingExp);
 		doGuards(pMapping, cgMapping, cgMappingExp);
-		doBottoms(pMapping, cgMappingExp);
+		CGValuedElement cgMappingExpTree = doBottoms(pMapping, cgMappingExp);
+		cgMapping.setBody(cgMappingExpTree);
 		MappingStatement mappingStatements = pMapping.getMappingStatement();
 		if (mappingStatements != null) {
 			cgMappingExp.setBody(doVisit(CGValuedElement.class, mappingStatements));

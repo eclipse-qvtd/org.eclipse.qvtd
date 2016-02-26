@@ -1685,22 +1685,13 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_EXP__BODY = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Variable Assignments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
 	 * The feature id for the '<em><b>Connection Assignments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 6;
+	int CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Owned Accumulators</b></em>' containment reference list.
@@ -1709,7 +1700,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_EXP__OWNED_ACCUMULATORS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 7;
+	int CG_MAPPING_EXP__OWNED_ACCUMULATORS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>CG Mapping Exp</em>' class.
@@ -1718,7 +1709,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_EXP_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 8;
+	int CG_MAPPING_EXP_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingLoopImpl <em>CG Mapping Loop</em>}' class.
@@ -2881,17 +2872,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGMappingExp_Body();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getVariableAssignments <em>Variable Assignments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Variable Assignments</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getVariableAssignments()
-	 * @see #getCGMappingExp()
-	 * @generated
-	 */
-	EReference getCGMappingExp_VariableAssignments();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getConnectionAssignments <em>Connection Assignments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3453,14 +3433,6 @@ public interface QVTiCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CG_MAPPING_EXP__BODY = eINSTANCE.getCGMappingExp_Body();
-
-		/**
-		 * The meta object literal for the '<em><b>Variable Assignments</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_MAPPING_EXP__VARIABLE_ASSIGNMENTS = eINSTANCE.getCGMappingExp_VariableAssignments();
 
 		/**
 		 * The meta object literal for the '<em><b>Connection Assignments</b></em>' containment reference list feature.
