@@ -39,14 +39,8 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 	}
 		
 	@Override
-	public Class<? extends Transformer> compileTransformation(@NonNull URI oclDocURI, @NonNull CS2ASJavaCompilerParameters params, @Nullable ResourceSet rSet) throws Exception {
-		
-		return this.compileTransformation(oclDocURI, params, rSet, "ast");
-	}
-	
-	@Override
-	public Class<? extends Transformer> compileTransformation(@NonNull URI oclDocURI, @NonNull CS2ASJavaCompilerParameters params, @Nullable ResourceSet rSet, @NonNull String tracePropertyName) throws Exception {
-		return this.compileTransformation(rSet, params, tracePropertyName, oclDocURI);
+	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet, @NonNull CS2ASJavaCompilerParameters params, @NonNull URI oclDocURI, URI... extendedOCLDocURIs) throws Exception {
+		return this.compileTransformation(rSet, params, "ast", oclDocURI);
 	}
 	
 	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet, @NonNull CS2ASJavaCompilerParameters params, @NonNull String tracePropertyName, @NonNull URI oclDocURI, URI... extendedOCLDocURIs) 

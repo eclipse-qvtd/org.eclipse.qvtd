@@ -17,9 +17,14 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 
 public interface OCL2JavaTxCompiler<P extends OCL2JavaTxCompilerParams> {
+
+	// FIXME fix exception handling
 	
-	public Class<? extends Transformer> compileTransformation(@NonNull URI oclFileURI, @NonNull P params, @Nullable ResourceSet rset) throws Exception;
+	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet,
+			@NonNull CS2ASJavaCompilerParameters params, @NonNull URI oclDocURI,
+			URI... extendedOCLDocURIs) throws Exception; 
 	
-	// FIXME use better options/params
-	public Class<? extends Transformer> compileTransformation(@NonNull URI oclFileURI, @NonNull P params,  @Nullable ResourceSet rset, @NonNull String tracePropName) throws Exception;
+	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet,
+			@NonNull CS2ASJavaCompilerParameters params, @NonNull String tracePropertyName, @NonNull URI oclDocURI,
+			URI... extendedOCLDocURIs) throws Exception;
 }

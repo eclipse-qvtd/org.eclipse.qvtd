@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.cs2as.compiler;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -36,12 +37,18 @@ public class OCL2QVTiTransformationTechnology extends AbstractTransformationTech
 		String javaPackage = (String) parametersMap.get("javaPackage");
 		//
 		String oclFileURI = (String) parametersMap.get("oclFileURI");
+		@SuppressWarnings("unchecked")
+		List<String> extendedOclFileURIs = (List<String>) parametersMap.get("extendedOclFileURIs");
 		String traceabilityPropName = (String) parametersMap.get("traceabilityPropName");
 		//
 		URI oclDocURI = URI.createURI(oclFileURI);
+		URI[] extendedOclDocURIs = new URI[extendedOclFileURIs.size()];
+		for (int i=0; i< extendedOclFileURIs.size(); i++) {
+			extendedOclDocURIs[i] = URI.createURI(extendedOclFileURIs.get(i));
+		}
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(lookupSolverClassName, lookupResultItfName, javaFolder, javaPackage);
 		try {
-			new OCL2QVTiCGTxCompiler().compileTransformation(oclDocURI, cgParams, resourceSet, traceabilityPropName);
+			new OCL2QVTiCGTxCompiler().compileTransformation(resourceSet, cgParams, traceabilityPropName, oclDocURI, extendedOclDocURIs);
 			return new HashMap<String, Object>();
 		} catch (Exception e) {
 			throw new TransformationException(null, e, "Error while executing " + OCL2QVTiCGTxCompiler.class.getName());

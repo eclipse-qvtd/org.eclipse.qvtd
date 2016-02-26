@@ -68,7 +68,7 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 		try {
 			URI oclDocURI = URI.createURI(oclFileURI);
 			CS2ASJavaCompilerParameters cgParams = createParameters();
-			createCompiler().compileTransformation(oclDocURI, cgParams, resourceSet, traceabilityPropName);
+			createCompiler().compileTransformation(resourceSet, cgParams, traceabilityPropName, oclDocURI);
 		} catch (Exception e) {
 			issues.addError(this, "Error while executing " + GenerateCGedQVTiTransformation.class.getName(), null, e, null);
 		}		
