@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
@@ -77,13 +76,11 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -1259,35 +1256,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	@Override
-	public @NonNull Boolean visitCGPredicate(@NonNull CGPredicate cgPredicate) {
-		boolean booleanCondition = false;
-		CGValuedElement cgConditionExpression = cgPredicate.getConditionExpression();
-		if (cgConditionExpression != null) {
-			if (!js.appendLocalStatements(cgConditionExpression)) {
-				return false;
-			}
-		}
-		js.append("if (");
-		if (booleanCondition) {
-			js.append("!");
-			js.appendValueName(cgConditionExpression);
-		}
-		else {
-			js.appendValueName(cgConditionExpression);
-			js.append(" != ");
-			js.appendClassReference(ValueUtil.class);
-			js.append(".TRUE_VALUE");
-		}
-		js.append(") {\n");
-		js.pushIndentation(null);
-		js.append("return false;\n");
-		js.popIndentation();
-		js.append("}\n");
-		cgPredicate.getThenExpression().accept(this);
-		return true;
-	}
-
-	@Override
 	public @NonNull Boolean visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
 		CGExecutorProperty cgExecutorProperty = cgPropertyAssignment.getExecutorProperty();
 		CGValuedElement slotValue = cgPropertyAssignment.getSlotValue();
@@ -1389,40 +1357,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	@Override
 	public @NonNull Boolean visitCGTypedModel(@NonNull CGTypedModel object) {
-		return true;
-	}
-
-	@Override
-	public @NonNull Boolean visitCGVariablePredicate(@NonNull CGVariablePredicate cgVariablePredicate) {
-		CGValuedElement cgConditionExpression = ClassUtil.nonNullState(cgVariablePredicate.getConditionExpression());
-		CGVariable cgPredicateVariable = ClassUtil.nonNullState(cgVariablePredicate.getPredicateVariable());
-		TypeDescriptor sourceTypeDescriptor = context.getTypeDescriptor(cgConditionExpression);
-		TypeDescriptor targetTypeDescriptor = context.getTypeDescriptor(cgPredicateVariable);
-		if (!js.appendLocalStatements(cgConditionExpression)) {
-			return false;
-		}
-		if (targetTypeDescriptor.isAssignableFrom(sourceTypeDescriptor)) {
-			js.appendDeclaration(cgPredicateVariable);
-			js.append(" = ");
-			js.appendReferenceTo(cgConditionExpression);
-			js.append(";\n");
-		}
-		else {
-			js.append("if (!(");
-			js.appendValueName(cgConditionExpression);
-			js.append(" instanceof ");
-			js.appendClassReference(targetTypeDescriptor);
-			js.append(")) {\n");
-			js.pushIndentation(null);
-			js.append("return false;\n");
-			js.popIndentation();
-			js.append("}\n");
-			js.appendDeclaration(cgPredicateVariable);
-			js.append(" = ");
-			js.appendReferenceTo(targetTypeDescriptor, cgConditionExpression);
-			js.append(";\n");
-		}
-		cgVariablePredicate.getThenExpression().accept(this);
 		return true;
 	}
 }

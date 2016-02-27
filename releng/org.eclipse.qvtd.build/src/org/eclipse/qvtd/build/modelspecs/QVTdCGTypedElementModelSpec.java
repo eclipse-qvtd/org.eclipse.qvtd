@@ -17,7 +17,6 @@ import org.eclipse.ocl.examples.build.modelspecs.CGTypedElementModelSpec;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 
 /**
  * QVTdCGTypedElementModelSpec supports generation of the CGTypedElement.getASTypeId() method hierarchy.
@@ -35,7 +34,6 @@ public class QVTdCGTypedElementModelSpec extends CGTypedElementModelSpec
 	  public Register() {
 		new QVTdCGTypedElementModelSpec(CGMapping.class, ATI_BOOL);
 		new QVTdCGTypedElementModelSpec(CGMappingExp.class, ATI_BOOL);
-		new QVTdCGTypedElementModelSpec(CGPredicate.class, ATI_BOOL);
 	  }
 	}
 	

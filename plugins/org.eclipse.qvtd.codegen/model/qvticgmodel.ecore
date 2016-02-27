@@ -83,15 +83,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="CGMappingLoop" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGIterationCallExp"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyAssignment" eSuperTypes="#//CGEcorePropertyAssignment"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGOppositePropertyCallExp"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CGPredicate" abstract="true" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionExpression" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
-        containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingExp" lowerBound="1"
-        eType="#//CGMappingExp" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="thenExpression" eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
-        containment="true" resolveProxies="false"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGPropertyAssignment" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingExp" lowerBound="1"
         eType="#//CGMappingExp" resolveProxies="false" eOpposite="#//CGMappingExp/assignments"/>
@@ -134,10 +125,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" lowerBound="1"
         eType="#//CGTransformation" resolveProxies="false" eOpposite="#//CGTransformation/typedModels"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGVariablePredicate" eSuperTypes="#//CGPredicate">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="predicateVariable" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGVariable"
-        containment="true" resolveProxies="false"/>
   </eClassifiers>
 </ecore:EPackage>

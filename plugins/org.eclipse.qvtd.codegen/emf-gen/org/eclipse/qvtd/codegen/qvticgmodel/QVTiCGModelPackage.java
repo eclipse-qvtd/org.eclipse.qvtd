@@ -192,7 +192,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGPropertyAssignment()
 	 * @generated
 	 */
-	int CG_PROPERTY_ASSIGNMENT = 16;
+	int CG_PROPERTY_ASSIGNMENT = 15;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcorePropertyAssignmentImpl <em>CG Ecore Property Assignment</em>}' class.
@@ -222,7 +222,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGTransformation()
 	 * @generated
 	 */
-	int CG_TRANSFORMATION = 19;
+	int CG_TRANSFORMATION = 18;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment <em>CG Ecore Property Assignment</em>}'.
@@ -371,16 +371,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_CALL_BINDING = 10;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPredicateImpl <em>CG Predicate</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPredicateImpl
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGPredicate()
-	 * @generated
-	 */
-	int CG_PREDICATE = 15;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl <em>CG Realized Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -388,7 +378,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGRealizedVariable()
 	 * @generated
 	 */
-	int CG_REALIZED_VARIABLE = 17;
+	int CG_REALIZED_VARIABLE = 16;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcoreRealizedVariableImpl <em>CG Ecore Realized Variable</em>}' class.
@@ -2066,96 +2056,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MIDDLE_PROPERTY_CALL_EXP_FEATURE_COUNT = CGModelPackage.CG_OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Ast</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE__AST = CGModelPackage.CG_VALUED_ELEMENT__AST;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE__NAME = CGModelPackage.CG_VALUED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type Id</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE__TYPE_ID = CGModelPackage.CG_VALUED_ELEMENT__TYPE_ID;
-
-	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE__REQUIRED = CGModelPackage.CG_VALUED_ELEMENT__REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE__DEPENDS_ON = CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
-
-	/**
-	 * The feature id for the '<em><b>Condition Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE__CONDITION_EXPRESSION = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Mapping Exp</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE__MAPPING_EXP = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Then Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE__THEN_EXPRESSION = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>CG Predicate</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PREDICATE_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSequenceImpl <em>CG Sequence</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2163,7 +2063,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGSequence()
 	 * @generated
 	 */
-	int CG_SEQUENCE = 18;
+	int CG_SEQUENCE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2353,7 +2253,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGTypedModel()
 	 * @generated
 	 */
-	int CG_TYPED_MODEL = 20;
+	int CG_TYPED_MODEL = 19;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2399,115 +2299,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TYPED_MODEL_FEATURE_COUNT = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGVariablePredicateImpl <em>CG Variable Predicate</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGVariablePredicateImpl
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGVariablePredicate()
-	 * @generated
-	 */
-	int CG_VARIABLE_PREDICATE = 21;
-
-	/**
-	 * The feature id for the '<em><b>Ast</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_PREDICATE__AST = CG_PREDICATE__AST;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_PREDICATE__NAME = CG_PREDICATE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type Id</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_PREDICATE__TYPE_ID = CG_PREDICATE__TYPE_ID;
-
-	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_PREDICATE__REQUIRED = CG_PREDICATE__REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_PREDICATE__DEPENDS_ON = CG_PREDICATE__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_PREDICATE__OWNS = CG_PREDICATE__OWNS;
-
-	/**
-	 * The feature id for the '<em><b>Condition Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_PREDICATE__CONDITION_EXPRESSION = CG_PREDICATE__CONDITION_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Mapping Exp</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_PREDICATE__MAPPING_EXP = CG_PREDICATE__MAPPING_EXP;
-
-	/**
-	 * The feature id for the '<em><b>Then Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_PREDICATE__THEN_EXPRESSION = CG_PREDICATE__THEN_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Predicate Variable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_PREDICATE__PREDICATE_VARIABLE = CG_PREDICATE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>CG Variable Predicate</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_PREDICATE_FEATURE_COUNT = CG_PREDICATE_FEATURE_COUNT + 1;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment <em>CG Connection Assignment</em>}'.
@@ -2735,27 +2526,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EAttribute getCGTypedModel_ModelIndex();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate <em>CG Variable Predicate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>CG Variable Predicate</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate
-	 * @generated
-	 */
-	EClass getCGVariablePredicate();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate#getPredicateVariable <em>Predicate Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Predicate Variable</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate#getPredicateVariable()
-	 * @see #getCGVariablePredicate()
-	 * @generated
-	 */
-	EReference getCGVariablePredicate_PredicateVariable();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall <em>CG Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2902,49 +2672,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCGMiddlePropertyCallExp();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate <em>CG Predicate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>CG Predicate</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate
-	 * @generated
-	 */
-	EClass getCGPredicate();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getConditionExpression <em>Condition Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Condition Expression</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getConditionExpression()
-	 * @see #getCGPredicate()
-	 * @generated
-	 */
-	EReference getCGPredicate_ConditionExpression();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMappingExp <em>Mapping Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Mapping Exp</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMappingExp()
-	 * @see #getCGPredicate()
-	 * @generated
-	 */
-	EReference getCGPredicate_MappingExp();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getThenExpression <em>Then Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Then Expression</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getThenExpression()
-	 * @see #getCGPredicate()
-	 * @generated
-	 */
-	EReference getCGPredicate_ThenExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable <em>CG Realized Variable</em>}'.
@@ -3311,24 +3038,6 @@ public interface QVTiCGModelPackage extends EPackage {
 		EAttribute CG_TYPED_MODEL__MODEL_INDEX = eINSTANCE.getCGTypedModel_ModelIndex();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGVariablePredicateImpl <em>CG Variable Predicate</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGVariablePredicateImpl
-		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGVariablePredicate()
-		 * @generated
-		 */
-		EClass CG_VARIABLE_PREDICATE = eINSTANCE.getCGVariablePredicate();
-
-		/**
-		 * The meta object literal for the '<em><b>Predicate Variable</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_VARIABLE_PREDICATE__PREDICATE_VARIABLE = eINSTANCE.getCGVariablePredicate_PredicateVariable();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallImpl <em>CG Mapping Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3451,40 +3160,6 @@ public interface QVTiCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CG_MIDDLE_PROPERTY_CALL_EXP = eINSTANCE.getCGMiddlePropertyCallExp();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPredicateImpl <em>CG Predicate</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPredicateImpl
-		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGPredicate()
-		 * @generated
-		 */
-		EClass CG_PREDICATE = eINSTANCE.getCGPredicate();
-
-		/**
-		 * The meta object literal for the '<em><b>Condition Expression</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_PREDICATE__CONDITION_EXPRESSION = eINSTANCE.getCGPredicate_ConditionExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Mapping Exp</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_PREDICATE__MAPPING_EXP = eINSTANCE.getCGPredicate_MappingExp();
-
-		/**
-		 * The meta object literal for the '<em><b>Then Expression</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_PREDICATE__THEN_EXPRESSION = eINSTANCE.getCGPredicate_ThenExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl <em>CG Realized Variable</em>}' class.

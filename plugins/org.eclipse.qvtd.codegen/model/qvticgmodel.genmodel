@@ -64,11 +64,6 @@
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMappingLoop"/>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMiddlePropertyAssignment"/>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMiddlePropertyCallExp"/>
-    <genClasses ecoreClass="qvticgmodel.ecore#//CGPredicate">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPredicate/conditionExpression"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPredicate/mappingExp"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPredicate/thenExpression"/>
-    </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGPropertyAssignment">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/mappingExp"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGPropertyAssignment/slotValue"/>
@@ -90,9 +85,6 @@
     <genClasses ecoreClass="qvticgmodel.ecore#//CGTypedModel">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGTypedModel/transformation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qvticgmodel.ecore#//CGTypedModel/modelIndex"/>
-    </genClasses>
-    <genClasses ecoreClass="qvticgmodel.ecore#//CGVariablePredicate">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGVariablePredicate/predicateVariable"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

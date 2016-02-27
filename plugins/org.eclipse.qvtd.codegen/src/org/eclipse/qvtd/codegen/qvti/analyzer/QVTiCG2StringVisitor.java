@@ -17,14 +17,14 @@ import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -32,13 +32,11 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -202,14 +200,6 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	}
 
 	@Override
-	public @Nullable String visitCGPredicate(@NonNull CGPredicate cgPredicate) {
-		safeVisit(cgPredicate.getConditionExpression());
-		append(", ");
-		safeVisit(cgPredicate.getThenExpression());
-		return null;
-	}
-
-	@Override
 	public @Nullable String visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
 		safeVisit(cgPropertyAssignment.getSlotValue());
 		append(".");
@@ -242,16 +232,6 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	@Override
 	public @Nullable String visitCGVariableExp(@NonNull CGVariableExp v) {
 		appendName(v.getReferredVariable());
-		return null;
-	}
-
-	@Override
-	public @Nullable String visitCGVariablePredicate(@NonNull CGVariablePredicate cgVariablePredicate) {
-		appendName(cgVariablePredicate.getPredicateVariable());
-		append(" := ");
-		safeVisit(cgVariablePredicate.getConditionExpression());
-		append(", ");
-		safeVisit(cgVariablePredicate.getThenExpression());
 		return null;
 	}
 }

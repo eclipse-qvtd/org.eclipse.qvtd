@@ -30,13 +30,11 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 
@@ -133,11 +131,6 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 	}
 
 	@Override
-	public Object visitCGPredicate(@NonNull CGPredicate object) {
-		return visitCGValuedElement(object);
-	}
-
-	@Override
 	public Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
 		return visitCGValuedElement(object);
 	}
@@ -166,10 +159,5 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 	@Override
 	public Object visitCGTypedModel(@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
-	}
-
-	@Override
-	public Object visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
-		return visitCGPredicate(object);
 	}
 }

@@ -16,14 +16,14 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -31,13 +31,11 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 
@@ -158,13 +156,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass cgPredicateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass cgPropertyAssignmentEClass = null;
 
 	/**
@@ -194,13 +185,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * @generated
 	 */
 	private EClass cgTypedModelEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass cgVariablePredicateEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -623,46 +607,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * @generated
 	 */
 	@Override
-	public EClass getCGPredicate() {
-		return cgPredicateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCGPredicate_ConditionExpression() {
-		return (EReference)cgPredicateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCGPredicate_MappingExp() {
-		return (EReference)cgPredicateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCGPredicate_ThenExpression() {
-		return (EReference)cgPredicateEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getCGPropertyAssignment() {
 		return cgPropertyAssignmentEClass;
 	}
@@ -833,26 +777,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * @generated
 	 */
 	@Override
-	public EClass getCGVariablePredicate() {
-		return cgVariablePredicateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCGVariablePredicate_PredicateVariable() {
-		return (EReference)cgVariablePredicateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public QVTiCGModelFactory getQVTiCGModelFactory() {
 		return (QVTiCGModelFactory)getEFactoryInstance();
 	}
@@ -926,11 +850,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 
 		cgMiddlePropertyCallExpEClass = createEClass(CG_MIDDLE_PROPERTY_CALL_EXP);
 
-		cgPredicateEClass = createEClass(CG_PREDICATE);
-		createEReference(cgPredicateEClass, CG_PREDICATE__CONDITION_EXPRESSION);
-		createEReference(cgPredicateEClass, CG_PREDICATE__MAPPING_EXP);
-		createEReference(cgPredicateEClass, CG_PREDICATE__THEN_EXPRESSION);
-
 		cgPropertyAssignmentEClass = createEClass(CG_PROPERTY_ASSIGNMENT);
 		createEReference(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__MAPPING_EXP);
 		createEReference(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__SLOT_VALUE);
@@ -952,9 +871,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgTypedModelEClass = createEClass(CG_TYPED_MODEL);
 		createEReference(cgTypedModelEClass, CG_TYPED_MODEL__TRANSFORMATION);
 		createEAttribute(cgTypedModelEClass, CG_TYPED_MODEL__MODEL_INDEX);
-
-		cgVariablePredicateEClass = createEClass(CG_VARIABLE_PREDICATE);
-		createEReference(cgVariablePredicateEClass, CG_VARIABLE_PREDICATE__PREDICATE_VARIABLE);
 	}
 
 	/**
@@ -1003,13 +919,11 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgMappingLoopEClass.getESuperTypes().add(theCGModelPackage.getCGIterationCallExp());
 		cgMiddlePropertyAssignmentEClass.getESuperTypes().add(this.getCGEcorePropertyAssignment());
 		cgMiddlePropertyCallExpEClass.getESuperTypes().add(theCGModelPackage.getCGOppositePropertyCallExp());
-		cgPredicateEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgPropertyAssignmentEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgRealizedVariableEClass.getESuperTypes().add(theCGModelPackage.getCGVariable());
 		cgSequenceEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgTransformationEClass.getESuperTypes().add(theCGModelPackage.getCGClass());
 		cgTypedModelEClass.getESuperTypes().add(theCGModelPackage.getCGNamedElement());
-		cgVariablePredicateEClass.getESuperTypes().add(this.getCGPredicate());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(cgConnectionAssignmentEClass, CGConnectionAssignment.class, "CGConnectionAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1062,11 +976,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 
 		initEClass(cgMiddlePropertyCallExpEClass, CGMiddlePropertyCallExp.class, "CGMiddlePropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(cgPredicateEClass, CGPredicate.class, "CGPredicate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGPredicate_ConditionExpression(), theCGModelPackage.getCGValuedElement(), null, "conditionExpression", null, 1, 1, CGPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCGPredicate_MappingExp(), this.getCGMappingExp(), null, "mappingExp", null, 1, 1, CGPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCGPredicate_ThenExpression(), theCGModelPackage.getCGValuedElement(), null, "thenExpression", null, 0, 1, CGPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(cgPropertyAssignmentEClass, CGPropertyAssignment.class, "CGPropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGPropertyAssignment_MappingExp(), this.getCGMappingExp(), this.getCGMappingExp_Assignments(), "mappingExp", null, 1, 1, CGPropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGPropertyAssignment_SlotValue(), theCGModelPackage.getCGValuedElement(), null, "slotValue", null, 1, 1, CGPropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1088,9 +997,6 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		initEClass(cgTypedModelEClass, CGTypedModel.class, "CGTypedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGTypedModel_Transformation(), this.getCGTransformation(), this.getCGTransformation_TypedModels(), "transformation", null, 1, 1, CGTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCGTypedModel_ModelIndex(), ecorePackage.getEInt(), "modelIndex", null, 0, 1, CGTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(cgVariablePredicateEClass, CGVariablePredicate.class, "CGVariablePredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCGVariablePredicate_PredicateVariable(), theCGModelPackage.getCGVariable(), null, "predicateVariable", null, 1, 1, CGVariablePredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -140,15 +140,6 @@ public interface QVTiCGModelFactory extends EFactory {
 	@NonNull CGTypedModel createCGTypedModel();
 
 	/**
-	 * Returns a new object of class '<em>CG Variable Predicate</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Variable Predicate</em>'.
-	 * @generated
-	 */
-	@NonNull CGVariablePredicate createCGVariablePredicate();
-
-	/**
 	 * Returns a new object of class '<em>CG Mapping Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

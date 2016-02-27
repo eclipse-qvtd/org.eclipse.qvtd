@@ -149,10 +149,6 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGMiddlePropertyCallExpAdapter();
 			}
 			@Override
-			public Adapter caseCGPredicate(CGPredicate object) {
-				return createCGPredicateAdapter();
-			}
-			@Override
 			public Adapter caseCGPropertyAssignment(CGPropertyAssignment object) {
 				return createCGPropertyAssignmentAdapter();
 			}
@@ -171,10 +167,6 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGTypedModel(CGTypedModel object) {
 				return createCGTypedModelAdapter();
-			}
-			@Override
-			public Adapter caseCGVariablePredicate(CGVariablePredicate object) {
-				return createCGVariablePredicateAdapter();
 			}
 			@Override
 			public Adapter caseCGElement(CGElement object) {
@@ -425,20 +417,6 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate <em>CG Variable Predicate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate
-	 * @generated
-	 */
-	public Adapter createCGVariablePredicateAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall <em>CG Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -519,20 +497,6 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGMiddlePropertyCallExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate <em>CG Predicate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate
-	 * @generated
-	 */
-	public Adapter createCGPredicateAdapter() {
 		return null;
 	}
 

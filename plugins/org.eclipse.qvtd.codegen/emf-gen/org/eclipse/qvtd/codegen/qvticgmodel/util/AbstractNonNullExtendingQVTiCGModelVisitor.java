@@ -119,11 +119,6 @@ public abstract class AbstractNonNullExtendingQVTiCGModelVisitor<R, C>
 	}
 
 	@Override
-	public @NonNull R visitCGPredicate(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGPredicate object) {
-		return visitCGValuedElement(object);
-	}
-
-	@Override
 	public @NonNull R visitCGPropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGPropertyAssignment object) {
 		return visitCGValuedElement(object);
 	}
@@ -146,10 +141,5 @@ public abstract class AbstractNonNullExtendingQVTiCGModelVisitor<R, C>
 	@Override
 	public @NonNull R visitCGTypedModel(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
-	}
-
-	@Override
-	public @NonNull R visitCGVariablePredicate(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGVariablePredicate object) {
-		return visitCGPredicate(object);
 	}
 }

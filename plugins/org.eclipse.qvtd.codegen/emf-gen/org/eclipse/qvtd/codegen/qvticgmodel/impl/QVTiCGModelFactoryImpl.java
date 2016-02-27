@@ -33,7 +33,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 
@@ -101,7 +100,6 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 			case QVTiCGModelPackage.CG_SEQUENCE: return createCGSequence();
 			case QVTiCGModelPackage.CG_TRANSFORMATION: return createCGTransformation();
 			case QVTiCGModelPackage.CG_TYPED_MODEL: return createCGTypedModel();
-			case QVTiCGModelPackage.CG_VARIABLE_PREDICATE: return createCGVariablePredicate();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -325,17 +323,6 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	public @NonNull CGTypedModel createCGTypedModel() {
 		CGTypedModelImpl cgTypedModel = new CGTypedModelImpl();
 		return cgTypedModel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGVariablePredicate createCGVariablePredicate() {
-		CGVariablePredicateImpl cgVariablePredicate = new CGVariablePredicateImpl();
-		return cgVariablePredicate;
 	}
 
 	/**

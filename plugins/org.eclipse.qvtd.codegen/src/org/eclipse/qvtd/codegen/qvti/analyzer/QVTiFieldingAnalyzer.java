@@ -17,14 +17,14 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -32,13 +32,11 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 
 public class QVTiFieldingAnalyzer extends FieldingAnalyzer
@@ -125,11 +123,6 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGPredicate(@NonNull CGPredicate object) {
-			return visitCGValuedElement(object);
-		}
-
-		@Override
 		public @Nullable Set<CGVariable> visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
 			return visitCGValuedElement(object);
 		}
@@ -152,11 +145,6 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		@Override
 		public @Nullable Set<CGVariable> visitCGTypedModel(@NonNull CGTypedModel object) {
 			return visitCGNamedElement(object);
-		}
-
-		@Override
-		public @Nullable Set<CGVariable> visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
-			return visitCGPredicate(object);
 		}
 	}
 	
@@ -254,11 +242,6 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		}
 
 		@Override
-		public Boolean visitCGPredicate(@NonNull CGPredicate object) {
-			return visitCGValuedElement(object);
-		}
-
-		@Override
 		public Boolean visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
 			return visitCGValuedElement(object);
 		}
@@ -281,11 +264,6 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		@Override
 		public Boolean visitCGTypedModel(@NonNull CGTypedModel object) {
 			return visitCGNamedElement(object);
-		}
-
-		@Override
-		public Boolean visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
-			return visitCGPredicate(object);
 		}
 	}
 	

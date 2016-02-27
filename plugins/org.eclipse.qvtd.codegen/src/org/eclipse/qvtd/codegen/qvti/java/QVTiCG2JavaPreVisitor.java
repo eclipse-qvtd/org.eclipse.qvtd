@@ -28,13 +28,11 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 
 public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGModelVisitor<Object>
@@ -106,36 +104,7 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 
 	@Override
 	public Object visitCGMappingExp(@NonNull CGMappingExp cgMappingExp) {
-/*		List<CGPredicate> cgPredicates = cgMappingExp.getPredicates();
-		if (cgPredicates.size() > 0) {
-			DependencyVisitor dependencyVisitor = codeGenerator.createDependencyVisitor();
-			dependencyVisitor.visitAll(cgPredicates);
-			List<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies(false);
-			CGPredicate cgFirstPredicate = null;
-			CGPredicate cgLastPredicate = null;
-			for (CGValuedElement sortedDependency : sortedDependencies) {
-				if (sortedDependency instanceof CGPredicate) {
-					CGPredicate cgPredicate = (CGPredicate) sortedDependency;
-					if (cgFirstPredicate == null) {
-						cgFirstPredicate = cgPredicate;
-					}
-					else {
-						assert cgLastPredicate != null;
-						PivotUtilInternal.resetContainer(cgPredicate);
-						cgLastPredicate.setThenExpression(cgPredicate);
-					}
-					cgLastPredicate = cgPredicate;
-				}
-			}
-			assert cgFirstPredicate != null;
-			assert cgLastPredicate != null;
-			CGUtil.replace(cgMappingExp, cgFirstPredicate);
-			cgLastPredicate.setThenExpression(cgMappingExp);
-			return visitCGValuedElement(cgFirstPredicate);
-		}
-		else { */
-			return visitCGValuedElement(cgMappingExp);
-//		}
+		return visitCGValuedElement(cgMappingExp);
 	}
 
 	@Override
@@ -154,25 +123,12 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 	}
 
 	@Override
-	public Object visitCGPredicate(@NonNull CGPredicate object) {
-		return visitCGValuedElement(object);
-	}
-
-	@Override
 	public Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-//		Property pReferredProperty = cgPropertyAssignment.getReferredProperty();
-//		if (pReferredProperty != null) {
-//			localContext.getExecutorProperty(pReferredProperty);
-//		}
 		return visitCGValuedElement(cgPropertyAssignment);
 	}
 
 	@Override
 	public Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
-//		Type pType = ((RealizedVariable)cgRealizedVariable.getPivot()).getType();
-//		if (pType != null) {
-//			localContext.getExecutorType(pType);
-//		}
 		return visitCGVariable(cgRealizedVariable);
 	}
 
@@ -189,10 +145,5 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 	@Override
 	public Object visitCGTypedModel(@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
-	}
-
-	@Override
-	public Object visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
-		return visitCGPredicate(object);
 	}
 }

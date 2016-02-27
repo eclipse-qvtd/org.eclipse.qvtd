@@ -272,17 +272,6 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTiCGModelPackage.CG_PREDICATE: {
-				CGPredicate cgPredicate = (CGPredicate)theEObject;
-				T result = caseCGPredicate(cgPredicate);
-				if (result == null) result = caseCGValuedElement(cgPredicate);
-				if (result == null) result = caseCGTypedElement(cgPredicate);
-				if (result == null) result = caseCGNamedElement(cgPredicate);
-				if (result == null) result = caseCGElement(cgPredicate);
-				if (result == null) result = caseNameable(cgPredicate);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT: {
 				CGPropertyAssignment cgPropertyAssignment = (CGPropertyAssignment)theEObject;
 				T result = caseCGPropertyAssignment(cgPropertyAssignment);
@@ -333,18 +322,6 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseCGNamedElement(cgTypedModel);
 				if (result == null) result = caseCGElement(cgTypedModel);
 				if (result == null) result = caseNameable(cgTypedModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTiCGModelPackage.CG_VARIABLE_PREDICATE: {
-				CGVariablePredicate cgVariablePredicate = (CGVariablePredicate)theEObject;
-				T result = caseCGVariablePredicate(cgVariablePredicate);
-				if (result == null) result = caseCGPredicate(cgVariablePredicate);
-				if (result == null) result = caseCGValuedElement(cgVariablePredicate);
-				if (result == null) result = caseCGTypedElement(cgVariablePredicate);
-				if (result == null) result = caseCGNamedElement(cgVariablePredicate);
-				if (result == null) result = caseCGElement(cgVariablePredicate);
-				if (result == null) result = caseNameable(cgVariablePredicate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -533,21 +510,6 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>CG Variable Predicate</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>CG Variable Predicate</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCGVariablePredicate(CGVariablePredicate object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>CG Mapping Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -634,21 +596,6 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGMiddlePropertyCallExp(CGMiddlePropertyCallExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>CG Predicate</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>CG Predicate</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCGPredicate(CGPredicate object) {
 		return null;
 	}
 

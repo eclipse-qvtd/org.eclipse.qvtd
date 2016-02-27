@@ -20,7 +20,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 
@@ -113,11 +112,6 @@ public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGMo
 	}
 
 	@Override
-	public @Nullable List<Object> visitCGPredicate(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGPredicate object) {
-		return visitCGValuedElement(object);
-	}
-
-	@Override
 	public @Nullable List<Object> visitCGPropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGPropertyAssignment object) {
 		return visitCGValuedElement(object);
 	}
@@ -140,10 +134,5 @@ public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGMo
 	@Override
 	public @Nullable List<Object> visitCGTypedModel(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
-	}
-
-	@Override
-	public @Nullable List<Object> visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
-		return visitCGPredicate(object);
 	}
 }

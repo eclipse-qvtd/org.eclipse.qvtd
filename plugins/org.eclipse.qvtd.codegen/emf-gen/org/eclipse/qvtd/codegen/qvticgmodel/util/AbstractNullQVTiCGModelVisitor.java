@@ -115,11 +115,6 @@ public abstract class AbstractNullQVTiCGModelVisitor<@Nullable R, C>
 	}
 
 	@Override
-	public R visitCGPredicate(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGPredicate object) {
-		return null;
-	}
-
-	@Override
 	public R visitCGPropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGPropertyAssignment object) {
 		return null;
 	}
@@ -141,11 +136,6 @@ public abstract class AbstractNullQVTiCGModelVisitor<@Nullable R, C>
 
 	@Override
 	public R visitCGTypedModel(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGTypedModel object) {
-		return null;
-	}
-
-	@Override
-	public R visitCGVariablePredicate(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGVariablePredicate object) {
 		return null;
 	}
 }
