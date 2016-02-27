@@ -969,7 +969,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.pushIndentation(null);
 						js.append("// predicates\n");
 						cgBody.accept(this);
-						js.append("return true;\n");
+						js.append("return ");
+						js.appendValueName(cgBody);
+						js.append(";\n");
 					js.popIndentation();
 					js.append("}\n");
 				}
@@ -1074,7 +1076,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	@Override
 	public @NonNull Boolean visitCGMappingExp(@NonNull CGMappingExp cgMappingExp) {
-		assert cgMappingExp.getPredicates().isEmpty();		// Get rewritten during JavaPre pass
+//		assert cgMappingExp.getPredicates().isEmpty();		// Get rewritten during JavaPre pass
 		List<CGAccumulator> cgAccumulators = cgMappingExp.getOwnedAccumulators();
 		if (cgAccumulators.size() > 0) {
 			js.append("// connection variables\n");
@@ -1152,6 +1154,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append("// mapping statements\n");
 			body.accept(this);
 		}
+		js.append("boolean ");
+		js.appendValueName(cgMappingExp);
+		js.append(" = true;\n");
 		return true;
 	}
 

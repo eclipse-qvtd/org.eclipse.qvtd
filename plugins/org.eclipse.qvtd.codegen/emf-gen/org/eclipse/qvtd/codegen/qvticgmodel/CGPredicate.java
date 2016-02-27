@@ -27,7 +27,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * </ul>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPredicate()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface CGPredicate extends CGValuedElement {
@@ -58,28 +58,26 @@ public interface CGPredicate extends CGValuedElement {
 	void setConditionExpression(CGValuedElement value);
 
 	/**
-	 * Returns the value of the '<em><b>Mapping Exp</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getPredicates <em>Predicates</em>}'.
+	 * Returns the value of the '<em><b>Mapping Exp</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Mapping Exp</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Exp</em>' container reference.
+	 * @return the value of the '<em>Mapping Exp</em>' reference.
 	 * @see #setMappingExp(CGMappingExp)
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPredicate_MappingExp()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getPredicates
-	 * @model opposite="predicates" resolveProxies="false" required="true" transient="false"
+	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	CGMappingExp getMappingExp();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMappingExp <em>Mapping Exp</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMappingExp <em>Mapping Exp</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping Exp</em>' container reference.
+	 * @param value the new value of the '<em>Mapping Exp</em>' reference.
 	 * @see #getMappingExp()
 	 * @generated
 	 */

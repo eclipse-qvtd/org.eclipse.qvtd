@@ -18,21 +18,18 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
-import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.qvtd.codegen.qvti.cse.PredicatePlaces;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
-import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -49,7 +46,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  *
  * @generated
  */
-public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate {
+public abstract class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate {
 	/**
 	 * The cached value of the '{@link #getConditionExpression() <em>Condition Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -59,6 +56,16 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * @ordered
 	 */
 	protected CGValuedElement conditionExpression;
+
+	/**
+	 * The cached value of the '{@link #getMappingExp() <em>Mapping Exp</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMappingExp()
+	 * @generated
+	 * @ordered
+	 */
+	protected CGMappingExp mappingExp;
 
 	/**
 	 * The cached value of the '{@link #getThenExpression() <em>Then Expression</em>}' containment reference.
@@ -141,18 +148,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 */
 	@Override
 	public CGMappingExp getMappingExp() {
-		if (eContainerFeatureID() != QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP) return null;
-		return (CGMappingExp)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetMappingExp(CGMappingExp newMappingExp, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newMappingExp, QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP, msgs);
-		return msgs;
+		return mappingExp;
 	}
 
 	/**
@@ -162,19 +158,10 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 */
 	@Override
 	public void setMappingExp(CGMappingExp newMappingExp) {
-		if (newMappingExp != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP && newMappingExp != null)) {
-			if (EcoreUtil.isAncestor(this, newMappingExp))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newMappingExp != null)
-				msgs = ((InternalEObject)newMappingExp).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING_EXP__PREDICATES, CGMappingExp.class, msgs);
-			msgs = basicSetMappingExp(newMappingExp, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP, newMappingExp, newMappingExp));
+		CGMappingExp oldMappingExp = mappingExp;
+		mappingExp = newMappingExp;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP, oldMappingExp, mappingExp));
 	}
 
 	/**
@@ -228,46 +215,14 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetMappingExp((CGMappingExp)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTiCGModelPackage.CG_PREDICATE__CONDITION_EXPRESSION:
 				return basicSetConditionExpression(null, msgs);
-			case QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP:
-				return basicSetMappingExp(null, msgs);
 			case QVTiCGModelPackage.CG_PREDICATE__THEN_EXPRESSION:
 				return basicSetThenExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP:
-				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING_EXP__PREDICATES, CGMappingExp.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -341,21 +296,11 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 			case QVTiCGModelPackage.CG_PREDICATE__CONDITION_EXPRESSION:
 				return conditionExpression != null;
 			case QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP:
-				return getMappingExp() != null;
+				return mappingExp != null;
 			case QVTiCGModelPackage.CG_PREDICATE__THEN_EXPRESSION:
 				return thenExpression != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGPredicate(this);
 	}
 
 	/**

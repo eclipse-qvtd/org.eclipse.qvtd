@@ -37,7 +37,6 @@ import org.eclipse.qvtd.codegen.qvti.cse.MappingExpPlaces;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
@@ -53,7 +52,6 @@ import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getAssignments <em>Assignments</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getMapping <em>Mapping</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getPredicates <em>Predicates</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getRealizedVariables <em>Realized Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getConnectionAssignments <em>Connection Assignments</em>}</li>
@@ -72,16 +70,6 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * @ordered
 	 */
 	protected EList<CGPropertyAssignment> assignments;
-
-	/**
-	 * The cached value of the '{@link #getPredicates() <em>Predicates</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPredicates()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<CGPredicate> predicates;
 
 	/**
 	 * The cached value of the '{@link #getRealizedVariables() <em>Realized Variables</em>}' containment reference list.
@@ -185,19 +173,6 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * @generated
 	 */
 	@Override
-	public List<CGPredicate> getPredicates() {
-		if (predicates == null) {
-			predicates = new EObjectContainmentWithInverseEList<CGPredicate>(CGPredicate.class, this, QVTiCGModelPackage.CG_MAPPING_EXP__PREDICATES, QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP);
-		}
-		return predicates;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public List<CGValuedElement> getRealizedVariables() {
 		if (realizedVariables == null) {
 			realizedVariables = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES);
@@ -287,8 +262,6 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 		switch (featureID) {
 			case QVTiCGModelPackage.CG_MAPPING_EXP__ASSIGNMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAssignments()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING_EXP__PREDICATES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPredicates()).basicAdd(otherEnd, msgs);
 			case QVTiCGModelPackage.CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConnectionAssignments()).basicAdd(otherEnd, msgs);
 		}
@@ -305,8 +278,6 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 		switch (featureID) {
 			case QVTiCGModelPackage.CG_MAPPING_EXP__ASSIGNMENTS:
 				return ((InternalEList<?>)getAssignments()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING_EXP__PREDICATES:
-				return ((InternalEList<?>)getPredicates()).basicRemove(otherEnd, msgs);
 			case QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES:
 				return ((InternalEList<?>)getRealizedVariables()).basicRemove(otherEnd, msgs);
 			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:
@@ -331,8 +302,6 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				return getAssignments();
 			case QVTiCGModelPackage.CG_MAPPING_EXP__MAPPING:
 				return getMapping();
-			case QVTiCGModelPackage.CG_MAPPING_EXP__PREDICATES:
-				return getPredicates();
 			case QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES:
 				return getRealizedVariables();
 			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:
@@ -360,10 +329,6 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				return;
 			case QVTiCGModelPackage.CG_MAPPING_EXP__MAPPING:
 				setMapping((CGMapping)newValue);
-				return;
-			case QVTiCGModelPackage.CG_MAPPING_EXP__PREDICATES:
-				getPredicates().clear();
-				getPredicates().addAll((Collection<? extends CGPredicate>)newValue);
 				return;
 			case QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES:
 				getRealizedVariables().clear();
@@ -398,9 +363,6 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 			case QVTiCGModelPackage.CG_MAPPING_EXP__MAPPING:
 				setMapping((CGMapping)null);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING_EXP__PREDICATES:
-				getPredicates().clear();
-				return;
 			case QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES:
 				getRealizedVariables().clear();
 				return;
@@ -429,8 +391,6 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 				return assignments != null && !assignments.isEmpty();
 			case QVTiCGModelPackage.CG_MAPPING_EXP__MAPPING:
 				return getMapping() != null;
-			case QVTiCGModelPackage.CG_MAPPING_EXP__PREDICATES:
-				return predicates != null && !predicates.isEmpty();
 			case QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES:
 				return realizedVariables != null && !realizedVariables.isEmpty();
 			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:

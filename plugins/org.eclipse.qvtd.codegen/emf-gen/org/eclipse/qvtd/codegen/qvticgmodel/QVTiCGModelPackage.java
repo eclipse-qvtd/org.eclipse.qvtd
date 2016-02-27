@@ -1658,22 +1658,13 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_EXP__MAPPING = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Predicates</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_EXP__PREDICATES = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Realized Variables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_EXP__REALIZED_VARIABLES = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
+	int CG_MAPPING_EXP__REALIZED_VARIABLES = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -1682,7 +1673,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_EXP__BODY = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 4;
+	int CG_MAPPING_EXP__BODY = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Connection Assignments</b></em>' containment reference list.
@@ -1691,7 +1682,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 5;
+	int CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Owned Accumulators</b></em>' containment reference list.
@@ -1700,7 +1691,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_EXP__OWNED_ACCUMULATORS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 6;
+	int CG_MAPPING_EXP__OWNED_ACCUMULATORS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>CG Mapping Exp</em>' class.
@@ -1709,7 +1700,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_EXP_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 7;
+	int CG_MAPPING_EXP_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingLoopImpl <em>CG Mapping Loop</em>}' class.
@@ -2138,7 +2129,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_PREDICATE__CONDITION_EXPRESSION = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Exp</b></em>' container reference.
+	 * The feature id for the '<em><b>Mapping Exp</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2483,7 +2474,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_VARIABLE_PREDICATE__CONDITION_EXPRESSION = CG_PREDICATE__CONDITION_EXPRESSION;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Exp</b></em>' container reference.
+	 * The feature id for the '<em><b>Mapping Exp</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2839,17 +2830,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGMappingExp_Mapping();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getPredicates <em>Predicates</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Predicates</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getPredicates()
-	 * @see #getCGMappingExp()
-	 * @generated
-	 */
-	EReference getCGMappingExp_Predicates();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getRealizedVariables <em>Realized Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2945,10 +2925,10 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGPredicate_ConditionExpression();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMappingExp <em>Mapping Exp</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMappingExp <em>Mapping Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Mapping Exp</em>'.
+	 * @return the meta object for the reference '<em>Mapping Exp</em>'.
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMappingExp()
 	 * @see #getCGPredicate()
 	 * @generated
@@ -3411,14 +3391,6 @@ public interface QVTiCGModelPackage extends EPackage {
 		EReference CG_MAPPING_EXP__MAPPING = eINSTANCE.getCGMappingExp_Mapping();
 
 		/**
-		 * The meta object literal for the '<em><b>Predicates</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_MAPPING_EXP__PREDICATES = eINSTANCE.getCGMappingExp_Predicates();
-
-		/**
 		 * The meta object literal for the '<em><b>Realized Variables</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3499,7 +3471,7 @@ public interface QVTiCGModelPackage extends EPackage {
 		EReference CG_PREDICATE__CONDITION_EXPRESSION = eINSTANCE.getCGPredicate_ConditionExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Exp</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Mapping Exp</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

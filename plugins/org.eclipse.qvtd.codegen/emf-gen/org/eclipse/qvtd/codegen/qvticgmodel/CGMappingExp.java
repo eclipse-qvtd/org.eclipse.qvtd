@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getAssignments <em>Assignments</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getMapping <em>Mapping</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getPredicates <em>Predicates</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getRealizedVariables <em>Realized Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getConnectionAssignments <em>Connection Assignments</em>}</li>
@@ -81,24 +80,6 @@ public interface CGMappingExp extends CGValuedElement {
 	 * @generated
 	 */
 	void setMapping(CGMapping value);
-
-	/**
-	 * Returns the value of the '<em><b>Predicates</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMappingExp <em>Mapping Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Predicates</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Predicates</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingExp_Predicates()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMappingExp
-	 * @model opposite="mappingExp" containment="true"
-	 * @generated
-	 */
-	List<CGPredicate> getPredicates();
 
 	/**
 	 * Returns the value of the '<em><b>Realized Variables</b></em>' containment reference list.

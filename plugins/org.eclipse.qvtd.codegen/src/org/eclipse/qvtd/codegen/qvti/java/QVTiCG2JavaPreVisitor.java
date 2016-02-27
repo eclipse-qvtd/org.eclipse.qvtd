@@ -10,23 +10,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.java;
 
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
-import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -112,7 +106,7 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 
 	@Override
 	public Object visitCGMappingExp(@NonNull CGMappingExp cgMappingExp) {
-		List<CGPredicate> cgPredicates = cgMappingExp.getPredicates();
+/*		List<CGPredicate> cgPredicates = cgMappingExp.getPredicates();
 		if (cgPredicates.size() > 0) {
 			DependencyVisitor dependencyVisitor = codeGenerator.createDependencyVisitor();
 			dependencyVisitor.visitAll(cgPredicates);
@@ -139,9 +133,9 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 			cgLastPredicate.setThenExpression(cgMappingExp);
 			return visitCGValuedElement(cgFirstPredicate);
 		}
-		else {
+		else { */
 			return visitCGValuedElement(cgMappingExp);
-		}
+//		}
 	}
 
 	@Override

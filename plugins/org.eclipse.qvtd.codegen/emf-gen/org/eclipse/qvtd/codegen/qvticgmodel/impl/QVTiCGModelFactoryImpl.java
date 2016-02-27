@@ -29,7 +29,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
@@ -97,7 +96,6 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 			case QVTiCGModelPackage.CG_MAPPING_LOOP: return createCGMappingLoop();
 			case QVTiCGModelPackage.CG_MIDDLE_PROPERTY_ASSIGNMENT: return createCGMiddlePropertyAssignment();
 			case QVTiCGModelPackage.CG_MIDDLE_PROPERTY_CALL_EXP: return createCGMiddlePropertyCallExp();
-			case QVTiCGModelPackage.CG_PREDICATE: return createCGPredicate();
 			case QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT: return createCGPropertyAssignment();
 			case QVTiCGModelPackage.CG_REALIZED_VARIABLE: return createCGRealizedVariable();
 			case QVTiCGModelPackage.CG_SEQUENCE: return createCGSequence();
@@ -272,17 +270,6 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	public @NonNull CGMiddlePropertyCallExp createCGMiddlePropertyCallExp() {
 		CGMiddlePropertyCallExpImpl cgMiddlePropertyCallExp = new CGMiddlePropertyCallExpImpl();
 		return cgMiddlePropertyCallExp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGPredicate createCGPredicate() {
-		CGPredicateImpl cgPredicate = new CGPredicateImpl();
-		return cgPredicate;
 	}
 
 	/**

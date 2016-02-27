@@ -68,8 +68,6 @@
         eOpposite="#//CGPropertyAssignment/mappingExp"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
         eType="#//CGMapping" volatile="true" transient="true" derived="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="predicates" upperBound="-1"
-        eType="#//CGPredicate" containment="true" resolveProxies="false" eOpposite="#//CGPredicate/mappingExp"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="realizedVariables" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
         containment="true" resolveProxies="false"/>
@@ -85,12 +83,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="CGMappingLoop" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGIterationCallExp"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyAssignment" eSuperTypes="#//CGEcorePropertyAssignment"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGOppositePropertyCallExp"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CGPredicate" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="CGPredicate" abstract="true" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditionExpression" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
         containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingExp" lowerBound="1"
-        eType="#//CGMappingExp" resolveProxies="false" eOpposite="#//CGMappingExp/predicates"/>
+        eType="#//CGMappingExp" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="thenExpression" eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
         containment="true" resolveProxies="false"/>
   </eClassifiers>

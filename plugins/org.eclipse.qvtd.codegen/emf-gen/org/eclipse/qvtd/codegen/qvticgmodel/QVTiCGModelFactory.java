@@ -203,15 +203,6 @@ public interface QVTiCGModelFactory extends EFactory {
 	@NonNull CGMiddlePropertyCallExp createCGMiddlePropertyCallExp();
 
 	/**
-	 * Returns a new object of class '<em>CG Predicate</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG Predicate</em>'.
-	 * @generated
-	 */
-	@NonNull CGPredicate createCGPredicate();
-
-	/**
 	 * Returns a new object of class '<em>CG Realized Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
