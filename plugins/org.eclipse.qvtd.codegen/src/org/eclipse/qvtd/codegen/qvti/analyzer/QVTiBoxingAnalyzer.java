@@ -12,8 +12,10 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
@@ -43,6 +45,14 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 {
 	public QVTiBoxingAnalyzer(@NonNull QVTiAnalyzer analyzer) {
 		super(analyzer);
+	}
+
+	@Override
+	protected CGValuedElement rewriteAsCast(@Nullable CGVariableExp cgChild) {
+		if ((cgChild != null) && (cgChild.eContainer() instanceof CGMappingCallBinding)) {
+			return cgChild;
+		}
+		return super.rewriteAsCast(cgChild);
 	}
 
 	@Override
