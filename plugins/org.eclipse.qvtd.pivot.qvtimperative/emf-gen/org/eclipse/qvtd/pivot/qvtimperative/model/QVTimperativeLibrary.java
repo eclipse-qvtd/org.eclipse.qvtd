@@ -334,10 +334,10 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			superClasses.add(_Collection_Model_objectsOfType_TT);
 		}
 		
-		private final @NonNull Operation op_Model_allObjects = createOperation("allObjects", _Set_OclElement, "org.eclipse.qvtd.pivot.qvtimperative.library.model.AllObjectsOperation", org.eclipse.qvtd.pivot.qvtimperative.library.model.AllObjectsOperation.INSTANCE);
-		private final @NonNull Operation op_Model_objectsOfKind = createOperation("objectsOfKind", _Set_Model_objectsOfKind_TT, "org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfKindOperation", org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfKindOperation.INSTANCE, tp_Model_objectsOfKind_TT);
-		private final @NonNull Operation op_Model_objectsOfType = createOperation("objectsOfType", _Set_Model_objectsOfType_TT, "org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfTypeOperation", org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfTypeOperation.INSTANCE, tp_Model_objectsOfType_TT);
-		private final @NonNull Operation op_Model_rootObjects = createOperation("rootObjects", _Set_OclElement, "org.eclipse.qvtd.pivot.qvtimperative.library.model.RootObjectsOperation", org.eclipse.qvtd.pivot.qvtimperative.library.model.RootObjectsOperation.INSTANCE);
+		private final @NonNull Operation op_Model_allObjects = createOperation("allObjects", _Set_OclElement, "org.eclipse.ocl.pivot.library.model.AllObjectsOperation", org.eclipse.ocl.pivot.library.model.AllObjectsOperation.INSTANCE);
+		private final @NonNull Operation op_Model_objectsOfKind = createOperation("objectsOfKind", _Set_Model_objectsOfKind_TT, "org.eclipse.ocl.pivot.library.model.ModelObjectsOfKindOperation", org.eclipse.ocl.pivot.library.model.ModelObjectsOfKindOperation.INSTANCE, tp_Model_objectsOfKind_TT);
+		private final @NonNull Operation op_Model_objectsOfType = createOperation("objectsOfType", _Set_Model_objectsOfType_TT, "org.eclipse.ocl.pivot.library.model.ModelObjectsOfTypeOperation", org.eclipse.ocl.pivot.library.model.ModelObjectsOfTypeOperation.INSTANCE, tp_Model_objectsOfType_TT);
+		private final @NonNull Operation op_Model_rootObjects = createOperation("rootObjects", _Set_OclElement, "org.eclipse.ocl.pivot.library.model.RootObjectsOperation", org.eclipse.ocl.pivot.library.model.RootObjectsOperation.INSTANCE);
 		
 		private void installOperations() {
 			List<Operation> ownedOperations;

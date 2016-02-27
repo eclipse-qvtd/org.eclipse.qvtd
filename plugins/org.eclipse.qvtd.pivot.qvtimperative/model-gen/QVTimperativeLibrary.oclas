@@ -5,23 +5,23 @@
   <ownedPackages xsi:type="pivot:Library" xmi:id="P.qvtbaselibrary" URI="http://www.eclipse.org/qvt/2015/QVTbaseLibrary" name="qvtbaselibrary"
       nsPrefix="qvtbaselib">
     <ownedClasses xmi:id="T.qvtbaselibrary.Model" name="Model" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
-      <ownedOperations xmi:id="o.qvtbaselibrary.Model.allObjects" implementationClass="org.eclipse.qvtd.pivot.qvtimperative.library.model.AllObjectsOperation"
+      <ownedOperations xmi:id="o.qvtbaselibrary.Model.allObjects" implementationClass="org.eclipse.ocl.pivot.library.model.AllObjectsOperation"
           name="allObjects" type="#//@ownedPackages.1/@ownedClasses.3"/>
-      <ownedOperations xmi:id="o.qvtbaselibrary.Model.objectsOfKind..TT" implementationClass="org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfKindOperation"
+      <ownedOperations xmi:id="o.qvtbaselibrary.Model.objectsOfKind..TT" implementationClass="org.eclipse.ocl.pivot.library.model.ModelObjectsOfKindOperation"
           name="objectsOfKind" type="#//@ownedPackages.1/@ownedClasses.4">
         <ownedParameters xmi:id="p0o.qvtbaselibrary.Model.objectsOfKind..TT" isRequired="false" isTypeof="true" name="type" type="#t.qvtbaselibrary.Model..objectsOfKindTT"/>
         <ownedSignature xmi:id="s.o.qvtbaselibrary.Model.objectsOfKind..TT">
           <ownedParameters xmi:id="t.qvtbaselibrary.Model..objectsOfKindTT" name="TT"/>
         </ownedSignature>
       </ownedOperations>
-      <ownedOperations xmi:id="o.qvtbaselibrary.Model.objectsOfType..TT" implementationClass="org.eclipse.qvtd.pivot.qvtimperative.library.model.ModelObjectsOfTypeOperation"
+      <ownedOperations xmi:id="o.qvtbaselibrary.Model.objectsOfType..TT" implementationClass="org.eclipse.ocl.pivot.library.model.ModelObjectsOfTypeOperation"
           name="objectsOfType" type="#//@ownedPackages.1/@ownedClasses.5">
         <ownedParameters xmi:id="p0o.qvtbaselibrary.Model.objectsOfType..TT" isRequired="false" isTypeof="true" name="type" type="#t.qvtbaselibrary.Model..objectsOfTypeTT"/>
         <ownedSignature xmi:id="s.o.qvtbaselibrary.Model.objectsOfType..TT">
           <ownedParameters xmi:id="t.qvtbaselibrary.Model..objectsOfTypeTT" name="TT"/>
         </ownedSignature>
       </ownedOperations>
-      <ownedOperations xmi:id="o.qvtbaselibrary.Model.rootObjects" implementationClass="org.eclipse.qvtd.pivot.qvtimperative.library.model.RootObjectsOperation"
+      <ownedOperations xmi:id="o.qvtbaselibrary.Model.rootObjects" implementationClass="org.eclipse.ocl.pivot.library.model.RootObjectsOperation"
           name="rootObjects" type="#//@ownedPackages.1/@ownedClasses.3"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.qvtbaselibrary.Transformation" name="Transformation" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"/>
