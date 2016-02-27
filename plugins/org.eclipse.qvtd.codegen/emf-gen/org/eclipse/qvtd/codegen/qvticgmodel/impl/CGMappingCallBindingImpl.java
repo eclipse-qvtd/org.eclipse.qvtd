@@ -209,6 +209,51 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * @generated
 	 */
 	@Override
+	public @NonNull CGValuedElement getNamedValue() {
+		return value != null ? value.getNamedValue() : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGValuedElement getReferredValue() {
+		return value != null ? value : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGValuedElement getSourceValue() {
+		return value != null ? value.getSourceValue() : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGValuedElement getTypedValue() {
+		return value != null ? value.getTypedValue() : this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable String getValueName() {
+		return value != null ? value.getValueName() : null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isBoxed() {
 		return (value != null) && value.isBoxed();
 	}
