@@ -798,6 +798,10 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		}
 		group.layout();
 	} */
+	
+	private void requestLayout (@NonNull Control control) {
+		getShell ().layout (new Control[] {control}, SWT.DEFER);
+	}
 
 	protected void resetCompileStates() {
 		for (Control child : intermediatesGroup.getChildren()) {
@@ -863,7 +867,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		boolean interpreted = isInterpreted();
 		if (genmodelGridData.exclude != interpreted) {
 			genmodelGridData.exclude = interpreted;
-			genmodelGroup.requestLayout();
+			requestLayout(genmodelGroup);
 			genmodelGroup.setVisible(!interpreted);
 		}
 	}
@@ -1022,7 +1026,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		for (; i < children.length; i++) {
 			children[i].dispose();
 		}
-		group.requestLayout();
+		requestLayout(group);
 	}
 	
 	protected abstract @NonNull Transformation updateTransformation(@NonNull URI txURI) throws IOException;
