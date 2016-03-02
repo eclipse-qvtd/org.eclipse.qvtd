@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.CompletePackage;
+import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -516,6 +517,9 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 
 	@Override				// FIXME BUG 487257 Revise this
 	protected @NonNull DomainUsage getAllInstancesUsage(@NonNull OperationCallExp asCallExp, @NonNull DomainUsage sourceUsage) {
+		if (asCallExp.getOwnedSource().getTypeValue() instanceof DataType) {
+			return getPrimitiveUsage();
+		}
 		Area area = QVTcoreBaseUtil.getContainingArea(asCallExp);
 		if (area instanceof CoreDomain) {
 			DomainUsage areaUsage = getUsage(area);
