@@ -31,9 +31,7 @@ mappings {
 		ownedExpressions := bodyExps.resolve; 
 	}
 	
-	map as::PropertyCallExp from NameExpCS {
-		when isPropCallExp;
-		
+	map as::PropertyCallExp from NameExpCS when isPropCallExp {		
 		ownedCallExp := ownedNameExp?.resolve;
 		referredProperty := if oclContainer().oclIsKindOf(NameExpCS) 
 							then resolve.lookupFrom(Property, resolve.owningSource.type, name)
@@ -42,9 +40,7 @@ mappings {
 		type := resolve.oclAsType(as::PropertyCallExp).referredProperty.type;
 	}
 	
-	map as::OperationCallExp from NameExpCS {
-		when isOpCallExp;
-	
+	map as::OperationCallExp from NameExpCS when isOpCallExp {	
 		ownedCallExp := ownedNameExp?.resolve;
 		ownedArguments := roundedBrackets.args.resolve;
 		referredOperation := if oclContainer().oclIsKindOf(NameExpCS) 
@@ -75,26 +71,33 @@ nameresolution {
 	name-qualifier PathNameCS name-segments-property path; /*from source */
 	
 	Root {
-		same-scope ownedPackages;
+		scopes-resetting 
+			Package using ownedPackages;
 	}
 	
 	Package {
 		named-element 
-			qualifying Package using ownedPackages,
+			qualifies Package using ownedPackages,
 					   Class using ownedClasses;
 		
-		nested-scope ownedPackages, ownedClasses;
+		scopes-occluding 
+			Package using ownedPackages
+			Class using ownedClasses;
 	}
-	
+
 	Class {
 		named-element
-			qualifying Operation using ownedOperations,
+			qualifies Operation using ownedOperations,
 					   Property using ownedProperties;
 					   
-		nested-scope ownedOperations, ownedProperties;
+		scopes-occluding
+			Operation using ownedOperations occluding self->closure(superClass).ownedOperations
+			Property using ownedProperties occluding self->closure(superClass).ownedProperties;
 		
-		exports Operation using ownedOperations; 
-	    exports Property using ownedProperties; /* FIXME */
+		exports 
+			Operation using ownedOperations;
+	    exports /* FIXME allow many contributions in one exports statement*/
+	    	Property using ownedProperties; 
 	}
 	
 	Operation {
