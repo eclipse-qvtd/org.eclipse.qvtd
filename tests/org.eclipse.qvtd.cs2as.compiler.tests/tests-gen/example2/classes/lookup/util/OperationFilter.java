@@ -9,13 +9,9 @@
 
 package example2.classes.lookup.util;
 
-import example2.classes.Argument;
-import example2.classes.ClassesPackage;
-import example2.classes.Operation;
-import example2.classes.Parameter;
-import example2.classes.lookup.util.AbstractClassesLookupFilter;
 import java.util.Iterator;
 import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -29,6 +25,11 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
+
+import example2.classes.Argument;
+import example2.classes.ClassesPackage;
+import example2.classes.Operation;
+import example2.classes.Parameter;
 
 public class OperationFilter
 	extends AbstractClassesLookupFilter<Operation>

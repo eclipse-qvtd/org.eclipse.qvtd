@@ -13,7 +13,10 @@ package	example2.classes.lookup.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.Executor;
-import example2.classes.util.ClassesUnqualifiedLookupVisitor;
+import example2.classes.util.ClassesUnqualifiedClassLookupVisitor;
+import example2.classes.util.ClassesUnqualifiedOperationLookupVisitor;
+import example2.classes.util.ClassesUnqualifiedPackageLookupVisitor;
+import example2.classes.util.ClassesUnqualifiedPropertyLookupVisitor;
 import example2.classes.util.ClassesQualifiedLookupVisitor;
 import example2.classes.util.ClassesExportedLookupVisitor;
 
@@ -76,34 +79,34 @@ public class ClassesLookupSolver {
 				(_lookupEnv.getNamedElementsByKind(example2.classes.Package.class));
 	}
 	
-	public ClassesLookupResult<example2.classes.Class> _lookupClass(example2.classes.util.Visitable context, java.lang.String cName) {
+	public ClassesLookupResult<example2.classes.Class> _lookupUnqualifiedClass(example2.classes.util.Visitable context, java.lang.String cName) {
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.CLASS,cName);
-		ClassesUnqualifiedLookupVisitor _lookupVisitor = new ClassesUnqualifiedLookupVisitor(_lookupEnv);
+		ClassesUnqualifiedClassLookupVisitor _lookupVisitor = new ClassesUnqualifiedClassLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new ClassesLookupResultImpl<example2.classes.Class>
 				(_lookupEnv.getNamedElementsByKind(example2.classes.Class.class));
 	}
 	
-	public ClassesLookupResult<example2.classes.Operation> _lookupOperation(example2.classes.util.Visitable context, java.lang.String oName, java.util.List<example2.classes.Argument> args) {
+	public ClassesLookupResult<example2.classes.Operation> _lookupUnqualifiedOperation(example2.classes.util.Visitable context, java.lang.String oName, java.util.List<example2.classes.Argument> args) {
 		OperationFilter filter = new OperationFilter(executor, args);
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.OPERATION,oName,filter);
-		ClassesUnqualifiedLookupVisitor _lookupVisitor = new ClassesUnqualifiedLookupVisitor(_lookupEnv);
+		ClassesUnqualifiedOperationLookupVisitor _lookupVisitor = new ClassesUnqualifiedOperationLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new ClassesLookupResultImpl<example2.classes.Operation>
 				(_lookupEnv.getNamedElementsByKind(example2.classes.Operation.class));
 	}
 	
-	public ClassesLookupResult<example2.classes.Package> _lookupPackage(example2.classes.util.Visitable context, java.lang.String pName) {
+	public ClassesLookupResult<example2.classes.Package> _lookupUnqualifiedPackage(example2.classes.util.Visitable context, java.lang.String pName) {
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.PACKAGE,pName);
-		ClassesUnqualifiedLookupVisitor _lookupVisitor = new ClassesUnqualifiedLookupVisitor(_lookupEnv);
+		ClassesUnqualifiedPackageLookupVisitor _lookupVisitor = new ClassesUnqualifiedPackageLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new ClassesLookupResultImpl<example2.classes.Package>
 				(_lookupEnv.getNamedElementsByKind(example2.classes.Package.class));
 	}
 	
-	public ClassesLookupResult<example2.classes.Property> _lookupProperty(example2.classes.util.Visitable context, java.lang.String pName) {
+	public ClassesLookupResult<example2.classes.Property> _lookupUnqualifiedProperty(example2.classes.util.Visitable context, java.lang.String pName) {
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.PROPERTY,pName);
-		ClassesUnqualifiedLookupVisitor _lookupVisitor = new ClassesUnqualifiedLookupVisitor(_lookupEnv);
+		ClassesUnqualifiedPropertyLookupVisitor _lookupVisitor = new ClassesUnqualifiedPropertyLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new ClassesLookupResultImpl<example2.classes.Property>
 				(_lookupEnv.getNamedElementsByKind(example2.classes.Property.class));

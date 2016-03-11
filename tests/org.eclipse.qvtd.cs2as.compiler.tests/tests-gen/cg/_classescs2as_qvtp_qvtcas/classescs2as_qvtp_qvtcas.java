@@ -136,14 +136,14 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
                 throw new InvalidValueException("Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::NamedElementCS::name\'");
             }
             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = aPathElementCS.getName();
-            ClassesLookupResult<Package> _lookupResult = lookupSolver._lookupPackage(self_0, name);
-            Package _lookupPackage = null;
+            ClassesLookupResult<Package> _lookupResult = lookupSolver._lookupUnqualifiedPackage(self_0, name);
+            Package _lookupUnqualifiedPackage = null;
             if (_lookupResult.size() == 1) {
-                _lookupPackage = _lookupResult.getSingleResult();
+                _lookupUnqualifiedPackage = _lookupResult.getSingleResult();
             } else {
                 handleLookupError(aPathElementCS,name);
             };
-            symbol_1 = _lookupPackage;
+            symbol_1 = _lookupUnqualifiedPackage;
         }
         else {
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
@@ -245,15 +245,15 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
      *     map _'uPackageCS_2_Package_name\\nuPackageCS_2_Package_ownedClasses\\nuPackageCS_2_Package_ownedPackages' {
      * lPackageCS := loop0;
      * }}
-     *   for loop0 : classescs::RootCS in _'\\u00ABjoin-RootCS-0\\u00BB' {
-     * 
-     *     map uRootCS_2_Root_ownedPackages {
-     * lRootCS := loop0;
-     * }}
      *   for loop0 : classescs::ClassCS in _'\\u00ABjoin-ClassCS-0\\u00BB' {
      * 
      *     map uClassCS_2_Class_superClass {
      * lClassCS := loop0;
+     * }}
+     *   for loop0 : classescs::RootCS in _'\\u00ABjoin-RootCS-0\\u00BB' {
+     * 
+     *     map uRootCS_2_Root_ownedPackages {
+     * lRootCS := loop0;
      * }}
      */
     protected boolean MAP___root__() throws ReflectiveOperationException {
@@ -304,11 +304,11 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
         for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS loop0_6 : ValueUtil.typedIterable(PackageCS.class, _92_u00ABjoin_m_PackageCS_m_0_92_u00BB_3)) {
             MAP_uPackageCS_2_Package_name_92nuPackageCS_2_Package_ownedClasses_92nuPackageCS_2_Package_ownedPackages(loop0_6);
         }
-        for (example2.classescs.@org.eclipse.jdt.annotation.NonNull RootCS loop0_7 : ValueUtil.typedIterable(RootCS.class, _171_child_m_RootCS_187)) {
-            MAP_uRootCS_2_Root_ownedPackages(loop0_7);
+        for (example2.classescs.@org.eclipse.jdt.annotation.NonNull ClassCS loop0_7 : ValueUtil.typedIterable(ClassCS.class, _92_u00ABjoin_m_ClassCS_m_0_92_u00BB_1)) {
+            MAP_uClassCS_2_Class_superClass(loop0_7);
         }
-        for (example2.classescs.@org.eclipse.jdt.annotation.NonNull ClassCS loop0_8 : ValueUtil.typedIterable(ClassCS.class, _92_u00ABjoin_m_ClassCS_m_0_92_u00BB_1)) {
-            MAP_uClassCS_2_Class_superClass(loop0_8);
+        for (example2.classescs.@org.eclipse.jdt.annotation.NonNull RootCS loop0_8 : ValueUtil.typedIterable(RootCS.class, _171_child_m_RootCS_187)) {
+            MAP_uRootCS_2_Root_ownedPackages(loop0_8);
         }
         boolean __root__ = ValueUtil.TRUE_VALUE;
         return __root__;
@@ -595,14 +595,14 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
                     throw throwNull(lClassCS_1, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::NamedElementCS::name\'");
                 }
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = aPathElementCS.getName();
-                ClassesLookupResult<example2.classes.Class> _lookupResult = lookupSolver._lookupClass(aClass, name);
-                example2.classes.Class _lookupClass = null;
+                ClassesLookupResult<example2.classes.Class> _lookupResult = lookupSolver._lookupUnqualifiedClass(aClass, name);
+                example2.classes.Class _lookupUnqualifiedClass = null;
                 if (_lookupResult.size() == 1) {
-                    _lookupClass = _lookupResult.getSingleResult();
+                    _lookupUnqualifiedClass = _lookupResult.getSingleResult();
                 } else {
                     handleLookupError(aPathElementCS,name);
                 };
-                symbol_2 = _lookupClass;
+                symbol_2 = _lookupUnqualifiedClass;
             }
             else {
                 final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);

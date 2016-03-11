@@ -10,35 +10,38 @@
 package example2.classes.util;
 
 import example2.classes.ClassesPackage;
-import example2.classes.NamedElement;
-import example2.classes.Operation;
-import example2.classes.Package;
 import example2.classes.Property;
 import example2.classes.lookup.EnvironmentPackage;
 import example2.classes.lookup.LookupEnvironment;
 import example2.classes.util.AbstractClassesCommonLookupVisitor;
 import example2.classes.util.Visitable;
 import java.util.Iterator;
+import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 import org.eclipse.ocl.pivot.library.LibraryIteration;
-import org.eclipse.ocl.pivot.library.collection.CollectionIncludingAllOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.BagValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue;
 
-public class ClassesUnqualifiedLookupVisitor
+public class ClassesUnqualifiedPropertyLookupVisitor
 	extends AbstractClassesCommonLookupVisitor
 {
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
@@ -48,22 +51,13 @@ public class ClassesUnqualifiedLookupVisitor
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_org_eclipse_ocl_pivot_evaluation = IdManager.getRootPackageId("org.eclipse.ocl.pivot.evaluation");
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Class", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ClassesUnqualifiedLookupVisitor = PACKid_java_c_s_s_example2_classes_util.getClassId("ClassesUnqualifiedLookupVisitor", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ClassesUnqualifiedPropertyLookupVisitor = PACKid_java_c_s_s_example2_classes_util.getClassId("ClassesUnqualifiedPropertyLookupVisitor", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Executor = PACKid_org_eclipse_ocl_pivot_evaluation.getClassId("Executor", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_IdResolver = PACKid_org_eclipse_ocl_pivot_ids.getClassId("IdResolver", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_LookupEnvironment = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("LookupEnvironment", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_NamedElement = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("NamedElement", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Operation = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Operation", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Package = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Package", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Property = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Property", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Root = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Root", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_NamedElement = TypeId.BAG.getSpecializedId(CLSSid_NamedElement);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Operation = TypeId.BAG.getSpecializedId(CLSSid_Operation);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Property = TypeId.BAG.getSpecializedId(CLSSid_Property);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Class = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Class);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Operation = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Operation);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Package = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Package);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Property = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Property);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Class = TypeId.SET.getSpecializedId(CLSSid_Class);
     
@@ -71,7 +65,7 @@ public class ClassesUnqualifiedLookupVisitor
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
     protected /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object child;
     
-    public ClassesUnqualifiedLookupVisitor(@NonNull LookupEnvironment context) {
+    public ClassesUnqualifiedPropertyLookupVisitor(@NonNull LookupEnvironment context) {
         super(context);
         this.executor = context.getExecutor();
         this.idResolver = executor.getIdResolver();
@@ -106,13 +100,9 @@ public class ClassesUnqualifiedLookupVisitor
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
         @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Operation> ownedOperations = element.getOwnedOperations();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownedOperations);
-        @SuppressWarnings("null")
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Property> ownedProperties = element.getOwnedProperties();
         @SuppressWarnings("null")
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = addElements.addElements(ownedProperties);
+        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ownedProperties);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
         /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_2;
         if (hasFinalResult) {
@@ -120,13 +110,13 @@ public class ClassesUnqualifiedLookupVisitor
         }
         else {
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, element);
-            final org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYPE_allSuperClasses_0 = executor.getStaticTypeOf(oclAsSet);
-            final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_allSuperClasses_0 = (LibraryIteration.LibraryIterationExtension)TYPE_allSuperClasses_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
-            final @NonNull Object ACC_allSuperClasses_0 = IMPL_allSuperClasses_0.createAccumulatorValue(executor, SET_CLSSid_Class, CLSSid_Class);
+            final org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
+            final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+            final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, SET_CLSSid_Class, CLSSid_Class);
             /**
              * Implementation of the iterator body.
              */
-            final @NonNull AbstractBinaryOperation BODY_allSuperClasses_0 = new AbstractBinaryOperation()
+            final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation()
             {
                 /**
                  * _'null' : classes::Class[?]
@@ -141,14 +131,14 @@ public class ClassesUnqualifiedLookupVisitor
                     return superClass;
                 }
             };
-            final @NonNull  ExecutorSingleIterationManager MGR_allSuperClasses_0 = new ExecutorSingleIterationManager(executor, SET_CLSSid_Class, BODY_allSuperClasses_0, oclAsSet, ACC_allSuperClasses_0);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue allSuperClasses = ClassUtil.nonNullState((SetValue)IMPL_allSuperClasses_0.evaluateIteration(MGR_allSuperClasses_0));
+            final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, SET_CLSSid_Class, BODY_closure_0, oclAsSet, ACC_closure_0);
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
             /*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_Property);
-            @Nullable Iterator<?> ITERATOR__1_0 = allSuperClasses.iterator();
-            /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull BagValue properties;
+            @Nullable Iterator<?> ITERATOR__1_0 = closure.iterator();
+            /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull BagValue collect;
             while (true) {
                 if (!ITERATOR__1_0.hasNext()) {
-                    properties = accumulator;
+                    collect = accumulator;
                     break;
                 }
                 /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Class _1_0 = (example2.classes.Class)ITERATOR__1_0.next();
@@ -166,33 +156,9 @@ public class ClassesUnqualifiedLookupVisitor
                     accumulator.add(value);
                 }
             }
-            /*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_Operation);
-            @Nullable Iterator<?> ITERATOR__1_1 = allSuperClasses.iterator();
-            /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull BagValue collect;
-            while (true) {
-                if (!ITERATOR__1_1.hasNext()) {
-                    collect = accumulator_0;
-                    break;
-                }
-                /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Class _1_1 = (example2.classes.Class)ITERATOR__1_1.next();
-                /**
-                 * _'null' : OrderedSet(classes::Operation)
-                 */
-                if (_1_1 == null) {
-                    throw new InvalidValueException("Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::Class::ownedOperations\'");
-                }
-                @SuppressWarnings("null")
-                final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Operation> ownedOperations_0 = _1_1.getOwnedOperations();
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedOperations_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Operation, ownedOperations_0);
-                //
-                for (Object value : BOXED_ownedOperations_0.flatten().getElements()) {
-                    accumulator_0.add(value);
-                }
-            }
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull BagValue includingAll = (BagValue)CollectionIncludingAllOperation.INSTANCE.evaluate(properties, collect);
-            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<NamedElement> ECORE_includingAll = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(NamedElement.class, includingAll);
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Property> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Property.class, collect);
             @SuppressWarnings("null")
-            final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner_0 = context.addElements(ECORE_includingAll);
+            final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner_0 = context.addElements(ECORE_collect);
             final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
             /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_1;
             if (hasFinalResult_0) {
@@ -205,72 +171,5 @@ public class ClassesUnqualifiedLookupVisitor
             symbol_2 = symbol_1;
         }
         return symbol_2;
-    }
-    
-    /**
-     * visitOperation(element : classes::Operation[1]) : lookup::LookupEnvironment[?]
-     * 
-     * _'null' : lookup::LookupEnvironment[1]
-     */
-    @Override
-    public /*@NonInvalid*/ LookupEnvironment visitOperation(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation element_0) {
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv = this.parentEnv(element_0);
-        return parentEnv;
-    }
-    
-    /**
-     * visitPackage(element : classes::Package[1]) : lookup::LookupEnvironment[?]
-     * 
-     * _'null' : lookup::LookupEnvironment[1]
-     */
-    @Override
-    public /*@NonInvalid*/ LookupEnvironment visitPackage(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package element_1) {
-        @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element_1.getOwnedPackages();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownedPackages);
-        @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<example2.classes.Class> ownedClasses = element_1.getOwnedClasses();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = addElements.addElements(ownedClasses);
-        final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
-        /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
-        if (hasFinalResult) {
-            symbol_0 = inner;
-        }
-        else {
-            final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv = this.parentEnv(element_1);
-            symbol_0 = parentEnv;
-        }
-        return symbol_0;
-    }
-    
-    /**
-     * visitProperty(element : classes::Property[1]) : lookup::LookupEnvironment[?]
-     * 
-     * _'null' : lookup::LookupEnvironment[1]
-     */
-    @Override
-    public /*@NonInvalid*/ LookupEnvironment visitProperty(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Property element_2) {
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv = this.parentEnv(element_2);
-        return parentEnv;
-    }
-    
-    /**
-     * visitRoot(element : classes::Root[1]) : lookup::LookupEnvironment[?]
-     * 
-     * _'null' : lookup::LookupEnvironment[1]
-     */
-    @Override
-    public /*@NonInvalid*/ LookupEnvironment visitRoot(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Root element_3) {
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv = this.parentEnv(element_3);
-        if (parentEnv == null) {
-            throw new InvalidValueException("Null source for \'lookup::LookupEnvironment::addElements(NE)(Collection(addElements.NE)) : lookup::LookupEnvironment[1]\'");
-        }
-        @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element_3.getOwnedPackages();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = parentEnv.addElements(ownedPackages);
-        return addElements;
     }
 }
