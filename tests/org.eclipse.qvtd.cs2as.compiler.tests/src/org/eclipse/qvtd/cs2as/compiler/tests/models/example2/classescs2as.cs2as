@@ -30,15 +30,18 @@ nameresolution {
 	name-qualifier PathNameCS name-segments-property path; /*from source */
 	
 	Root {
-		same-scope ownedPackages;
+		scopes-resetting
+			Package using ownedPackages;
 	}
 	
 	Package {
 		named-element 
-			qualifying Package using ownedPackages,
+			qualifies Package using ownedPackages,
 					   Class using ownedClasses;
 		
-		nested-scope ownedPackages, ownedClasses;
+		scopes-occluding 
+			Package using ownedPackages
+			Class using ownedClasses;
 	}
 	
 	Class {
