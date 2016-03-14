@@ -30,7 +30,7 @@ nameresolution {
 	name-qualifier PathNameCS name-segments-property path; /*from source */
 	
 	Root {
-		scopes-resetting
+		scopes
 			Package using ownedPackages;
 	}
 	
