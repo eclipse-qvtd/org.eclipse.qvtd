@@ -52,15 +52,12 @@ package _target
 	
 context TRoot
 def : _unqualified_env_A1(child : ocl::OclElement) : lookup::LookupEnvironment =
-	let env = lookup::LookupEnvironment {}
-	in env
+	parentEnv_A1()
 		.addElements(ownedA)
 		
 def : _unqualified_env_A2(child : ocl::OclElement) : lookup::LookupEnvironment =
-	let env = lookup::LookupEnvironment {}
-	in env
+	parentEnv_A2()
 		.addElements(ownedA)
-		
 	
 context A1
 	
@@ -80,7 +77,7 @@ def : _qualified_env() : lookup::LookupEnvironment =
 		.addElements(ownsB)
 def : _unqualified_env_B(child : ocl::OclElement) : lookup::LookupEnvironment =
 	if ownsB->includes(child)
-	then parentEnv_B()
+	then parentEnv_B().nestedEnv()
 		.addElements(ownsB->select(x | self.ownsB->indexOf(x) < self.ownsB->indexOf(child)))
 		
 	else parentEnv_B()
@@ -104,7 +101,7 @@ def : _qualified_env() : lookup::LookupEnvironment =
 		.addElements(ownsC)
 def : _unqualified_env_C(child : ocl::OclElement) : lookup::LookupEnvironment =
 	if ownsC->includes(child)
-	then parentEnv_C()
+	then parentEnv_C().nestedEnv()
 		.addElements(ownsC->select(x | self.ownsC->indexOf(x) < self.ownsC->indexOf(child)))
 		
 	else parentEnv_C()
