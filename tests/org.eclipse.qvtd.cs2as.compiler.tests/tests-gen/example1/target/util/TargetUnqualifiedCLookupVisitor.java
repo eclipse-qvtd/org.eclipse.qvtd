@@ -9,33 +9,24 @@
 
 package example1.target.util;
 
-import example1.target.A2;
-import example1.target.C;
-import example1.target.TargetPackage;
-import example1.target.lookup.EnvironmentPackage;
-import example1.target.lookup.LookupEnvironment;
-import example1.target.util.AbstractTargetCommonLookupVisitor;
-import example1.target.util.Visitable;
 import java.util.Iterator;
-import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.pivot.library.collection.OrderedCollectionIndexOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanOperation;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.IntegerValue;
-import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
+
+import example1.target.C;
+import example1.target.TargetPackage;
+import example1.target.lookup.EnvironmentPackage;
+import example1.target.lookup.LookupEnvironment;
 
 public class TargetUnqualifiedCLookupVisitor
 	extends AbstractTargetCommonLookupVisitor
@@ -93,14 +84,10 @@ public class TargetUnqualifiedCLookupVisitor
     public /*@NonInvalid*/ LookupEnvironment visitA2(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A2 element) {
         @SuppressWarnings("null")
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<C> ownsC = element.getOwnsC();
-        final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = this.parentEnv(element);
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownsC = idResolver.createOrderedSetOfAll(ORD_CLSSid_C, ownsC);
         final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownsC, child).booleanValue();
-        /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
+        /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_1;
         if (includes) {
-            if (parentEnv_0 == null) {
-                throw new InvalidValueException("Null source for \'lookup::LookupEnvironment::addElements(NE)(Collection(addElements.NE)) : lookup::LookupEnvironment[1]\'");
-            }
             /*@Thrown*/ OrderedSetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
             @Nullable Iterator<?> ITERATOR_x = BOXED_ownsC.iterator();
             /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue select;
@@ -123,12 +110,22 @@ public class TargetUnqualifiedCLookupVisitor
             }
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<C> ECORE_select = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(C.class, select);
             @SuppressWarnings("null")
-            final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = parentEnv_0.addElements(ECORE_select);
-            symbol_0 = addElements;
+            final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ECORE_select);
+            final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
+            /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
+            if (hasFinalResult) {
+                symbol_0 = inner;
+            }
+            else {
+                final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv = this.parentEnv(element);
+                symbol_0 = parentEnv;
+            }
+            symbol_1 = symbol_0;
         }
         else {
-            symbol_0 = parentEnv_0;
+            final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = this.parentEnv(element);
+            symbol_1 = parentEnv_0;
         }
-        return symbol_0;
+        return symbol_1;
     }
 }
