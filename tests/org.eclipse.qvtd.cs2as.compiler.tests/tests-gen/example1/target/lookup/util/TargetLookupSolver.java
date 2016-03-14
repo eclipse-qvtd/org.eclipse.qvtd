@@ -13,7 +13,10 @@ package	example1.target.lookup.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.Executor;
-import example1.target.util.TargetUnqualifiedLookupVisitor;
+import example1.target.util.TargetUnqualifiedA1LookupVisitor;
+import example1.target.util.TargetUnqualifiedA2LookupVisitor;
+import example1.target.util.TargetUnqualifiedBLookupVisitor;
+import example1.target.util.TargetUnqualifiedCLookupVisitor;
 import example1.target.util.TargetQualifiedLookupVisitor;
 
 public class TargetLookupSolver {
@@ -41,33 +44,33 @@ public class TargetLookupSolver {
 				(_lookupEnv.getNamedElementsByKind(example1.target.C.class));
 	}
 	
-	public TargetLookupResult<example1.target.A1> _lookupA1(example1.target.util.Visitable context, java.lang.String aName) {
+	public TargetLookupResult<example1.target.A1> _lookupUnqualifiedA1(example1.target.util.Visitable context, java.lang.String aName) {
 		TargetSingleResultLookupEnvironment _lookupEnv = new TargetSingleResultLookupEnvironment(executor, example1.target.TargetPackage.Literals.A1,aName);
-		TargetUnqualifiedLookupVisitor _lookupVisitor = new TargetUnqualifiedLookupVisitor(_lookupEnv);
+		TargetUnqualifiedA1LookupVisitor _lookupVisitor = new TargetUnqualifiedA1LookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new TargetLookupResultImpl<example1.target.A1>
 				(_lookupEnv.getNamedElementsByKind(example1.target.A1.class));
 	}
 	
-	public TargetLookupResult<example1.target.A2> _lookupA2(example1.target.util.Visitable context, java.lang.String aName) {
+	public TargetLookupResult<example1.target.A2> _lookupUnqualifiedA2(example1.target.util.Visitable context, java.lang.String aName) {
 		TargetSingleResultLookupEnvironment _lookupEnv = new TargetSingleResultLookupEnvironment(executor, example1.target.TargetPackage.Literals.A2,aName);
-		TargetUnqualifiedLookupVisitor _lookupVisitor = new TargetUnqualifiedLookupVisitor(_lookupEnv);
+		TargetUnqualifiedA2LookupVisitor _lookupVisitor = new TargetUnqualifiedA2LookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new TargetLookupResultImpl<example1.target.A2>
 				(_lookupEnv.getNamedElementsByKind(example1.target.A2.class));
 	}
 	
-	public TargetLookupResult<example1.target.B> _lookupB(example1.target.util.Visitable context, java.lang.String bName) {
+	public TargetLookupResult<example1.target.B> _lookupUnqualifiedB(example1.target.util.Visitable context, java.lang.String bName) {
 		TargetSingleResultLookupEnvironment _lookupEnv = new TargetSingleResultLookupEnvironment(executor, example1.target.TargetPackage.Literals.B,bName);
-		TargetUnqualifiedLookupVisitor _lookupVisitor = new TargetUnqualifiedLookupVisitor(_lookupEnv);
+		TargetUnqualifiedBLookupVisitor _lookupVisitor = new TargetUnqualifiedBLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new TargetLookupResultImpl<example1.target.B>
 				(_lookupEnv.getNamedElementsByKind(example1.target.B.class));
 	}
 	
-	public TargetLookupResult<example1.target.C> _lookupC(example1.target.util.Visitable context, java.lang.String cName) {
+	public TargetLookupResult<example1.target.C> _lookupUnqualifiedC(example1.target.util.Visitable context, java.lang.String cName) {
 		TargetSingleResultLookupEnvironment _lookupEnv = new TargetSingleResultLookupEnvironment(executor, example1.target.TargetPackage.Literals.C,cName);
-		TargetUnqualifiedLookupVisitor _lookupVisitor = new TargetUnqualifiedLookupVisitor(_lookupEnv);
+		TargetUnqualifiedCLookupVisitor _lookupVisitor = new TargetUnqualifiedCLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new TargetLookupResultImpl<example1.target.C>
 				(_lookupEnv.getNamedElementsByKind(example1.target.C.class));
