@@ -6,21 +6,18 @@ mappings {
 		ownedA := ownedX.resolve;
 	}
 	
-	map _target::A1 from X {
-		when isA1;
+	map _target::A1 from X when isA1 {
 		name := name;
 		ownsB := ownsY.oclAsType(Y1).resolve;
 	}
 	
 	
-	map _target::A2 from X {
-		when isA2;
+	map _target::A2 from X when isA2 {
 		name := name;
 		ownsC := ownsY.oclAsType(Y2).resolve;
 	}
 
-	map _target::A3 from X {
-		when isA3;
+	map _target::A3 from X when isA3 {
 		name := name;
 		ownsC := ownsY.oclAsType(Y2).resolve;
 	}
@@ -35,15 +32,13 @@ mappings {
 		ownsD := ownsZ.resolve;
 	}
 	
-	map _target::D from Z {
-		when parentIsY1;
+	map _target::D from Z when parentIsY1 {
 		toA := toY.oclAsType(_'source'::Y1).resolve.toA1;
 		refsB := if refers = null then null else resolve.lookup(B,refers) endif;
 	}
 	
 	
-	map _target::D from Z {
-		when parentIsY2;
+	map _target::D from Z when parentIsY2{
 		toA := toY.oclAsType(_'source'::Y2).resolve.toA2;
 		refsC := if refers = null then null else resolve.lookup(C,refers) endif;
 	}
@@ -69,21 +64,23 @@ nameresolution {
 	name-qualifier PathNameCS name-segments-property path; /*from source */
 		
 	TRoot {
-		new-scope ownsA;
+		scopes-resetting A1, A2 using ownedA;
 	}
 	
 	A1 {
 		named-element /*name-property name*/
-			qualifying B using ownsB;
+			qualifies B using ownsB;
 		
-		new-scope following ownsB for ownsB;
+		for ownsB
+			scopes B using following ownsB;
 	}
 	
 	A2 {
 		named-element
-			qualifying C using ownsC;		
+			qualifies C using ownsC;		
 		
-		new-scope following ownsC for ownsC;
+		for ownsC
+			scopes C using following ownsC;
 	}
 	
 	B {
@@ -94,5 +91,5 @@ nameresolution {
 		named-element;
 	}
 	
-	D{} -- FIXME, just to generate the env method
+	--D{} -- FIXME, just to generate the env method
 }
