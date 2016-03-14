@@ -13,11 +13,12 @@ package	example1.target.lookup.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+
+import example1.target.util.TargetQualifiedLookupVisitor;
 import example1.target.util.TargetUnqualifiedA1LookupVisitor;
 import example1.target.util.TargetUnqualifiedA2LookupVisitor;
 import example1.target.util.TargetUnqualifiedBLookupVisitor;
 import example1.target.util.TargetUnqualifiedCLookupVisitor;
-import example1.target.util.TargetQualifiedLookupVisitor;
 
 public class TargetLookupSolver {
 	
