@@ -9,26 +9,17 @@
 
 package example2.classes.util;
 
-import example2.classes.ClassesPackage;
-import example2.classes.Package;
-import example2.classes.Root;
-import example2.classes.lookup.EnvironmentPackage;
-import example2.classes.lookup.LookupEnvironment;
-import example2.classes.util.AbstractClassesCommonLookupVisitor;
-import example2.classes.util.Visitable;
-import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Class;
-import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
+
+import example2.classes.ClassesPackage;
+import example2.classes.Package;
+import example2.classes.lookup.EnvironmentPackage;
+import example2.classes.lookup.LookupEnvironment;
 
 public class ClassesUnqualifiedPackageLookupVisitor
 	extends AbstractClassesCommonLookupVisitor
@@ -107,12 +98,14 @@ public class ClassesUnqualifiedPackageLookupVisitor
      */
     @Override
     public /*@NonInvalid*/ LookupEnvironment visitRoot(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Root element_0) {
-        final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_lookup_c_c_LookupEnvironment_0 = idResolver.getClass(CLSSid_LookupEnvironment, null);
-        final /*@NonInvalid*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment env = (LookupEnvironment)TYP_lookup_c_c_LookupEnvironment_0.createInstance();
+        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv = this.parentEnv(element_0);
+        if (parentEnv == null) {
+            throw new InvalidValueException("Null source for \'lookup::LookupEnvironment::addElements(NE)(Collection(addElements.NE)) : lookup::LookupEnvironment[1]\'");
+        }
         @SuppressWarnings("null")
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element_0.getOwnedPackages();
         @SuppressWarnings("null")
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = env.addElements(ownedPackages);
+        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = parentEnv.addElements(ownedPackages);
         return addElements;
     }
 }
