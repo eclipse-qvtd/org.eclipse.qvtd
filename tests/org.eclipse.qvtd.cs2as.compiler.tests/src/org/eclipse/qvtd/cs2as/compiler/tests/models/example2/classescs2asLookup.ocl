@@ -40,11 +40,9 @@ package as
 	
 context Root
 def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
-	let env = lookup::LookupEnvironment {}
-	in env
+	parentEnv_Package()
 		.addElements(ownedPackages)
 		
-	
 context Package
 	
 def : _lookupQualifiedPackage(pName : String) : Package[?] =
