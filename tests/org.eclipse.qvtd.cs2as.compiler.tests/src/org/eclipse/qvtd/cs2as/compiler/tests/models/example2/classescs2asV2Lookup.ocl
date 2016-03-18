@@ -4,7 +4,7 @@ import 'EnvExample2.ecore'
 import 'classescs2asV2Helpers.ocl'
 
 package ocl
----- Default Environment related functionality
+
 context OclElement
 -- Domain specific default functionality
 def : unqualified_env_Class() : lookup::LookupEnvironment[1] =
@@ -67,30 +67,32 @@ def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironm
 context Package
 	
 def : _lookupQualifiedPackage(pName : String) : Package[?] =
-	let foundPackage = _lookupPackage(_qualified_env(), pName)
+	let foundPackage = _lookupPackage(_qualified_env_Package(), pName)
 	in  if foundPackage->isEmpty()
 		then null
 		else foundPackage->first()
 		endif
+def : _qualified_env_Package() : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment{}
+	in env
+		.addElements(ownedPackages)
 def : lookupQualifiedPackage(aPathElementCS : cs::PathElementCS) : Package[?] =
    _lookupQualifiedPackage(aPathElementCS.name)
    
 	
 def : _lookupQualifiedClass(cName : String) : Class[?] =
-	let foundClass = _lookupClass(_qualified_env(), cName)
+	let foundClass = _lookupClass(_qualified_env_Class(), cName)
 	in  if foundClass->isEmpty()
 		then null
 		else foundClass->first()
 		endif
+def : _qualified_env_Class() : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment{}
+	in env
+		.addElements(ownedClasses)
 def : lookupQualifiedClass(aPathElementCS : cs::PathElementCS) : Class[?] =
    _lookupQualifiedClass(aPathElementCS.name)
    
-	
-def : _qualified_env() : lookup::LookupEnvironment =
-	let env = lookup::LookupEnvironment{}
-	in env
-		.addElements(ownedPackages)
-.addElements(ownedClasses)
 def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
 	parentEnv_Package().nestedEnv()
 		.addElements(ownedPackages)
@@ -103,30 +105,32 @@ def : _unqualified_env_Class(child : ocl::OclElement) : lookup::LookupEnvironmen
 context Class
 	
 def : _lookupQualifiedOperation(oName : String, args : OrderedSet(Argument)) : Operation[?] =
-	let foundOperation = _lookupOperation(_qualified_env(), oName, args)
+	let foundOperation = _lookupOperation(_qualified_env_Operation(), oName, args)
 	in  if foundOperation->isEmpty()
 		then null
 		else foundOperation->first()
 		endif
+def : _qualified_env_Operation() : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment{}
+	in env
+	.addElements(ownedOperations)
 def : lookupQualifiedOperation(aPathElementCS : cs::PathElementCS, args : OrderedSet(Argument)) : Operation[?] =
    _lookupQualifiedOperation(aPathElementCS.name, args)
    
 	
 def : _lookupQualifiedProperty(pName : String) : Property[?] =
-	let foundProperty = _lookupProperty(_qualified_env(), pName)
+	let foundProperty = _lookupProperty(_qualified_env_Property(), pName)
 	in  if foundProperty->isEmpty()
 		then null
 		else foundProperty->first()
 		endif
+def : _qualified_env_Property() : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment{}
+	in env
+	.addElements(ownedProperties)
 def : lookupQualifiedProperty(aPathElementCS : cs::PathElementCS) : Property[?] =
    _lookupQualifiedProperty(aPathElementCS.name)
    
-	
-def : _qualified_env() : lookup::LookupEnvironment =
-	let env = lookup::LookupEnvironment{}
-	in env
-		.addElements(ownedOperations)
-.addElements(ownedProperties)
 def : _unqualified_env_Operation(child : ocl::OclElement) : lookup::LookupEnvironment =
 	parentEnv_Operation().nestedEnv()
 		.addElements(self->closure(superClass).ownedOperations)
