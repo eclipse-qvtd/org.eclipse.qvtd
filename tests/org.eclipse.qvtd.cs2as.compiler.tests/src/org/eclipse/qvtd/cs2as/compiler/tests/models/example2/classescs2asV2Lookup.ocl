@@ -6,10 +6,6 @@ import 'classescs2asV2Helpers.ocl'
 package ocl
 ---- Default Environment related functionality
 context OclElement
---	
-def : _exported_env(importer : OclElement) : lookup::LookupEnvironment[1] =
-	lookup::LookupEnvironment { }
-	
 -- Domain specific default functionality
 def : unqualified_env_Class() : lookup::LookupEnvironment[1] =
 	_unqualified_env_Class(null)
@@ -37,15 +33,26 @@ def : parentEnv_Operation() : lookup::LookupEnvironment[1] =
 	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_Operation(self) endif
 def : parentEnv_Property() : lookup::LookupEnvironment[1] =
 	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_Property(self) endif
+
+def : _exported_env_Class(importer : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+def : _exported_env_Package(importer : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+def : _exported_env_Operation(importer : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+def : _exported_env_Property(importer : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
 -- End of domain specific default functionality
 endpackage 
 
 package lookup
+-- Some common lookup functionality
 context LookupEnvironment
-def : nestedEnv() : LookupEnvironment[1] = 
+def : nestedEnv() : LookupEnvironment[1] =
 	LookupEnvironment {
 		parentEnv = self
 	}
+-- End of common lookup functionality
 endpackage
 
 package as
@@ -53,7 +60,7 @@ package as
 	
 context Root
 def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
-	parentEnv_Package()
+	parentEnv_Package().nestedEnv()
 		.addElements(ownedPackages)
 		
 	
@@ -132,13 +139,19 @@ def : _unqualified_env_Property(child : ocl::OclElement) : lookup::LookupEnviron
 		.nestedEnv()
 		.addElements(ownedProperties)
 		
-def : _exported_env(importer : ocl::OclElement) : lookup::LookupEnvironment =
+def : _exported_env_Operation(importer : ocl::OclElement) : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment {}
+	in env
+		.addElements(ownedOperations)
+	
+def : _exported_env_Property(importer : ocl::OclElement) : lookup::LookupEnvironment =
 	let env = lookup::LookupEnvironment {}
 	in env
 		.addElements(ownedProperties)
 	
+	
 def : _lookupExportedOperation(importer : ocl::OclElement, oName : String, args : OrderedSet(Argument)) : Operation[?] =
-	let foundOperation = _lookupOperation(_exported_env(importer), oName, args)
+	let foundOperation = _lookupOperation(_exported_env_Operation(importer), oName, args)
 	in  if foundOperation->isEmpty()
 		then null
 		else foundOperation->first()
@@ -148,7 +161,7 @@ def : lookupExportedOperation(importer : ocl::OclElement, aPathElementCS : cs::P
 	_lookupExportedOperation(importer, aPathElementCS.name, args)
 	
 def : _lookupExportedProperty(importer : ocl::OclElement, pName : String) : Property[?] =
-	let foundProperty = _lookupProperty(_exported_env(importer), pName)
+	let foundProperty = _lookupProperty(_exported_env_Property(importer), pName)
 	in  if foundProperty->isEmpty()
 		then null
 		else foundProperty->first()
