@@ -209,7 +209,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 				Property targetProperty = propertyAssignment.getTargetProperty();
 				assert targetProperty != null;
 				EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
-				objectManager.assigned((EObject)sourceObject, eFeature, ecoreValue);
+				objectManager.assigned(sourceObject, eFeature, ecoreValue);
 			}
 		}
 		else {
@@ -218,7 +218,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
 			InterpretedInvocation currentInvocation2 = currentInvocation;
 			assert currentInvocation2 != null;
-			objectManager.assigned(currentInvocation2, (EObject)sourceObject, eFeature, ecoreValue);
+			objectManager.assigned(currentInvocation2, sourceObject, eFeature, ecoreValue);
 		}
 	}
 	

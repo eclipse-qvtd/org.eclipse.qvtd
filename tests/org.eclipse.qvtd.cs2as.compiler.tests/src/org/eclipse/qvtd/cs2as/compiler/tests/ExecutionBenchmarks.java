@@ -246,7 +246,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
 		boolean success = tx.run();
 		Resource outputResource = rSet.createResource(asModelURI);
-		outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
+		outputResource.getContents().addAll(tx.getRootEObjects("rightAS"));
 		outputResource.save(TestsXMLUtil.defaultSavingOptions);
 		assertTrue(success);
 	}

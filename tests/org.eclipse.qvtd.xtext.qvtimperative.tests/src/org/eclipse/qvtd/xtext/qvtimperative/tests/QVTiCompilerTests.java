@@ -175,7 +175,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		public void saveOutput(@NonNull Transformer tx, @NonNull String outputModelName, @NonNull URI outputModelURI, @Nullable URI referenceModelURI, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
 			ResourceSet resourceSet = getResourceSet();
 			Resource outputResource = resourceSet.createResource(outputModelURI);
-			outputResource.getContents().addAll(tx.getRootObjects(outputModelName));
+			outputResource.getContents().addAll(tx.getRootEObjects(outputModelName));
 			outputResource.save(getSaveOptions());
 			Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
 			assert referenceResource != null;

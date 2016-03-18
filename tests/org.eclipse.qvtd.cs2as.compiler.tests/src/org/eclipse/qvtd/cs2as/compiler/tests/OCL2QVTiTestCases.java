@@ -136,7 +136,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			tx.addRootObjects(OCL2QVTp.LEFT_MODEL_TYPE_NAME, ClassUtil.nonNullState(inputResource.getContents()));
 			assertTrue(tx.run());
 			Resource outputResource = rSet.createResource(asModelURI);
-			outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
+			outputResource.getContents().addAll(tx.getRootEObjects("rightAS"));
 			outputResource.save(TestsXMLUtil.defaultSavingOptions);
 
 			Resource expected =  rSet.getResource(expectedAsModelURI, true);

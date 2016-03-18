@@ -212,7 +212,7 @@ public class QVTrCompilerTests extends LoadTestCase
 	        }
 	        else {
 				outputResource = resourceSet.createResource(modelURI);
-				outputResource.getContents().addAll(generatedExecutor.getTransformer().getRootObjects(modelName));
+				outputResource.getContents().addAll(generatedExecutor.getTransformer().getRootEObjects(modelName));
 				outputResource.save(getSaveOptions());
 	        }
 			Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
