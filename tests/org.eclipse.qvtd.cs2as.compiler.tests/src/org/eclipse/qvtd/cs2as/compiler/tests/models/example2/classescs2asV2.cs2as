@@ -95,8 +95,7 @@ nameresolution {
 			Property using ownedProperties occluding self->closure(superClass).ownedProperties;
 		
 		exports 
-			Operation using ownedOperations;
-	    exports /* FIXME allow many contributions in one exports statement*/
+			Operation using ownedOperations
 	    	Property using ownedProperties; 
 	}
 	
