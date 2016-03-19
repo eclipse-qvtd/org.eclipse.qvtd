@@ -17,8 +17,13 @@ import example2.classes.util.ClassesUnqualifiedClassLookupVisitor;
 import example2.classes.util.ClassesUnqualifiedOperationLookupVisitor;
 import example2.classes.util.ClassesUnqualifiedPackageLookupVisitor;
 import example2.classes.util.ClassesUnqualifiedPropertyLookupVisitor;
-import example2.classes.util.ClassesQualifiedLookupVisitor;
-import example2.classes.util.ClassesExportedLookupVisitor;
+import example2.classes.util.ClassesExportedPropertyLookupVisitor;
+import example2.classes.util.ClassesExportedOperationLookupVisitor;
+import example2.classes.util.ClassesQualifiedClassLookupVisitor;
+import example2.classes.util.ClassesQualifiedOperationLookupVisitor;
+import example2.classes.util.ClassesQualifiedPackageLookupVisitor;
+import example2.classes.util.ClassesQualifiedPropertyLookupVisitor;
+
 
 public class ClassesLookupSolver {
 	
@@ -32,7 +37,7 @@ public class ClassesLookupSolver {
 	public ClassesLookupResult<example2.classes.Operation> _lookupExportedOperation(example2.classes.Class context, java.lang.Object importer, java.lang.String oName, java.util.List<example2.classes.Argument> args) {
 		OperationFilter filter = new OperationFilter(executor, args);
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.OPERATION,oName,filter);
-		ClassesExportedLookupVisitor _lookupVisitor = new ClassesExportedLookupVisitor(_lookupEnv, importer);
+		ClassesExportedOperationLookupVisitor _lookupVisitor = new ClassesExportedOperationLookupVisitor(_lookupEnv, importer);
 		context.accept(_lookupVisitor);
 		return new ClassesLookupResultImpl<example2.classes.Operation>
 				(_lookupEnv.getNamedElementsByKind(example2.classes.Operation.class));
@@ -40,7 +45,7 @@ public class ClassesLookupSolver {
 	
 	public ClassesLookupResult<example2.classes.Property> _lookupExportedProperty(example2.classes.Class context, java.lang.Object importer, java.lang.String pName) {
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.PROPERTY,pName);
-		ClassesExportedLookupVisitor _lookupVisitor = new ClassesExportedLookupVisitor(_lookupEnv, importer);
+		ClassesExportedPropertyLookupVisitor _lookupVisitor = new ClassesExportedPropertyLookupVisitor(_lookupEnv, importer);
 		context.accept(_lookupVisitor);
 		return new ClassesLookupResultImpl<example2.classes.Property>
 				(_lookupEnv.getNamedElementsByKind(example2.classes.Property.class));
@@ -49,7 +54,7 @@ public class ClassesLookupSolver {
 	public ClassesLookupResult<example2.classes.Operation> _lookupQualifiedOperation(example2.classes.Class context, java.lang.String oName, java.util.List<example2.classes.Argument> args) {
 		OperationFilter filter = new OperationFilter(executor, args);
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.OPERATION,oName,filter);
-		ClassesQualifiedLookupVisitor _lookupVisitor = new ClassesQualifiedLookupVisitor(_lookupEnv);
+		ClassesQualifiedOperationLookupVisitor _lookupVisitor = new ClassesQualifiedOperationLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new ClassesLookupResultImpl<example2.classes.Operation>
 				(_lookupEnv.getNamedElementsByKind(example2.classes.Operation.class));
@@ -57,7 +62,7 @@ public class ClassesLookupSolver {
 	
 	public ClassesLookupResult<example2.classes.Property> _lookupQualifiedProperty(example2.classes.Class context, java.lang.String pName) {
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.PROPERTY,pName);
-		ClassesQualifiedLookupVisitor _lookupVisitor = new ClassesQualifiedLookupVisitor(_lookupEnv);
+		ClassesQualifiedPropertyLookupVisitor _lookupVisitor = new ClassesQualifiedPropertyLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new ClassesLookupResultImpl<example2.classes.Property>
 				(_lookupEnv.getNamedElementsByKind(example2.classes.Property.class));
@@ -65,7 +70,7 @@ public class ClassesLookupSolver {
 	
 	public ClassesLookupResult<example2.classes.Class> _lookupQualifiedClass(example2.classes.Package context, java.lang.String cName) {
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.CLASS,cName);
-		ClassesQualifiedLookupVisitor _lookupVisitor = new ClassesQualifiedLookupVisitor(_lookupEnv);
+		ClassesQualifiedClassLookupVisitor _lookupVisitor = new ClassesQualifiedClassLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new ClassesLookupResultImpl<example2.classes.Class>
 				(_lookupEnv.getNamedElementsByKind(example2.classes.Class.class));
@@ -73,7 +78,7 @@ public class ClassesLookupSolver {
 	
 	public ClassesLookupResult<example2.classes.Package> _lookupQualifiedPackage(example2.classes.Package context, java.lang.String pName) {
 		ClassesSingleResultLookupEnvironment _lookupEnv = new ClassesSingleResultLookupEnvironment(executor, example2.classes.ClassesPackage.Literals.PACKAGE,pName);
-		ClassesQualifiedLookupVisitor _lookupVisitor = new ClassesQualifiedLookupVisitor(_lookupEnv);
+		ClassesQualifiedPackageLookupVisitor _lookupVisitor = new ClassesQualifiedPackageLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new ClassesLookupResultImpl<example2.classes.Package>
 				(_lookupEnv.getNamedElementsByKind(example2.classes.Package.class));
