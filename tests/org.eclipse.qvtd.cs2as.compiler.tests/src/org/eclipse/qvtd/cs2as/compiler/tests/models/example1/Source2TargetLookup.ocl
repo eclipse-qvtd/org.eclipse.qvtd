@@ -36,6 +36,13 @@ def : parentEnv_B() : lookup::LookupEnvironment[1] =
 	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_B(self) endif
 def : parentEnv_C() : lookup::LookupEnvironment[1] =
 	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_C(self) endif
+	
+def : _qualified_env_B(child : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment {}
+	
+def : _qualified_env_C(child : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment {}
+	
 -- End of domain specific default functionality
 endpackage 
 
@@ -62,16 +69,15 @@ def : _unqualified_env_A2(child : ocl::OclElement) : lookup::LookupEnvironment =
 context A1
 	
 def : _lookupQualifiedB(bName : String) : B[?] =
-	let foundB = _lookupB(_qualified_env(), bName)
+	let foundB = _lookupB(_qualified_env_B(), bName)
 	in  if foundB->isEmpty()
 		then null
 		else foundB->first()
 		endif
 def : lookupQualifiedB(aPathElementCS : _source::PathElementCS) : B[?] =
    _lookupQualifiedB(aPathElementCS.name)
-   
 	
-def : _qualified_env() : lookup::LookupEnvironment =
+def : _qualified_env_B() : lookup::LookupEnvironment =
 	let env = lookup::LookupEnvironment{}
 	in env
 		.addElements(ownsB)
@@ -86,7 +92,7 @@ def : _unqualified_env_B(child : ocl::OclElement) : lookup::LookupEnvironment =
 context A2
 	
 def : _lookupQualifiedC(cName : String) : C[?] =
-	let foundC = _lookupC(_qualified_env(), cName)
+	let foundC = _lookupC(_qualified_env_C(), cName)
 	in  if foundC->isEmpty()
 		then null
 		else foundC->first()
@@ -95,7 +101,7 @@ def : lookupQualifiedC(aPathElementCS : _source::PathElementCS) : C[?] =
    _lookupQualifiedC(aPathElementCS.name)
    
 	
-def : _qualified_env() : lookup::LookupEnvironment =
+def : _qualified_env_C() : lookup::LookupEnvironment =
 	let env = lookup::LookupEnvironment{}
 	in env
 		.addElements(ownsC)
