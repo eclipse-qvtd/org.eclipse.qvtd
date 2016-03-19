@@ -6,6 +6,7 @@ import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getAllConten
 import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getAllContentsIncludingSelf;
 import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getCreationMappingName;
 import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getExpressionContextType;
+import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getOwningPackage;
 import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getSuperClasses;
 import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getUpdateMappingName;
 
@@ -30,7 +31,6 @@ import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -128,31 +128,18 @@ public class OCL2QVTp {
 		pTx.setName(iModel.getName().replace('.', '_')); // FIXME . as part of the name is causing issues in the CG);
 		pPackage.getOwnedClasses().add(pTx);
 		
-		List<Package> importedPackges = new ArrayList<Package>();
-		for (Namespace ns : iModel.getOwnedImports().stream()
-							.map(x -> x.getImportedNamespace())
-							.collect(Collectors.toList())) {
-			if (ns instanceof Model) {
-				importedPackges.addAll(((Model)ns).getOwnedPackages());
-			} else if (ns instanceof Package) {
-				importedPackges.add((Package) ns);
-			} else {
-				logger.warning("imported namespace not recognised: " + ns.getName());
-			}
-		}
-		
 		leftTypedModel.setName(LEFT_MODEL_TYPE_NAME);
-		leftTypedModel.getUsedPackage().add(
-				importedPackges.stream()
-				.filter(p -> p.getName().equals(getExpressionContextType().apply(shadowExps.get(0)).getOwningPackage().getName()))
-				.findFirst().get());
+		leftTypedModel.getUsedPackage().addAll(shadowExps.stream()
+				.map(getExpressionContextType())
+				.map(getOwningPackage())
+				.collect(Collectors.toSet()));
 		pTx.getModelParameter().add(leftTypedModel);
 		
 		rightTypedModel.setName(RIGHT_MODEL_TYPE_NAME);
-		rightTypedModel.getUsedPackage().add(
-				importedPackges.stream()
-				.filter(p -> p.getName().equals(shadowExps.get(0).getType().getOwningPackage().getName()))
-				.findFirst().get());
+		rightTypedModel.getUsedPackage().addAll(shadowExps.stream()
+				.map(x -> x.getType())
+				.map(getOwningPackage())
+				.collect(Collectors.toSet()));
 		pTx.getModelParameter().add(rightTypedModel);
 		
 		pTx.getRule().addAll(shadowExps.stream()
@@ -490,6 +477,7 @@ public class OCL2QVTp {
 			.findFirst().get();
 	}
 	
+
 	private @NonNull Operation getOclAnyEqualsOp() {
 		Class oclAny = envFact.getStandardLibrary().getOclAnyType();
 		return envFact.getMetamodelManager().getPrimaryClass(oclAny).getOwnedOperations().stream()

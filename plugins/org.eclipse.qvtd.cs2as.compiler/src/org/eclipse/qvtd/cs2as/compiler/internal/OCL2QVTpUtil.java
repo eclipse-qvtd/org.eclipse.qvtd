@@ -14,7 +14,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.ShadowPart;
@@ -36,7 +38,7 @@ public class OCL2QVTpUtil {
 				allContents.add(it.next());
 			}
 			allContents.add(eObject);
-			return StreamSupport.stream(allContents.spliterator(),false);
+			return allContents.stream();
 		};
 	}
 	
@@ -122,6 +124,22 @@ public class OCL2QVTpUtil {
 		};
 	}
 	
+	
+	public static Function<@NonNull Class, @NonNull Package>  getOwningPackage() {
+		return aClass -> {
+			return aClass.getOwningPackage();
+		};
+	}
+	
+	public static Function<@NonNull Class, @NonNull String>  getOwningPackageName() {
+		return aClass -> {
+			return getName().apply(getOwningPackage().apply(aClass));
+		};
+	}
+	
+	private static Function<@NonNull NamedElement, @NonNull String> getName() {
+		return namedElement -> { return namedElement == null ? "" : namedElement.getName(); };
+	}
 	
 	public static Function<@NonNull Class, @NonNull Set<@NonNull Class>> getSuperClasses() {
 		// FIXME ClassRelantionghip has cashes
