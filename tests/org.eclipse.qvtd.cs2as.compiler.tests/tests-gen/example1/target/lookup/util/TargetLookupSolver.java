@@ -13,12 +13,13 @@ package	example1.target.lookup.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.Executor;
-
-import example1.target.util.TargetQualifiedLookupVisitor;
 import example1.target.util.TargetUnqualifiedA1LookupVisitor;
 import example1.target.util.TargetUnqualifiedA2LookupVisitor;
 import example1.target.util.TargetUnqualifiedBLookupVisitor;
 import example1.target.util.TargetUnqualifiedCLookupVisitor;
+import example1.target.util.TargetQualifiedBLookupVisitor;
+import example1.target.util.TargetQualifiedCLookupVisitor;
+
 
 public class TargetLookupSolver {
 	
@@ -31,7 +32,7 @@ public class TargetLookupSolver {
 	
 	public TargetLookupResult<example1.target.B> _lookupQualifiedB(example1.target.A1 context, java.lang.String bName) {
 		TargetSingleResultLookupEnvironment _lookupEnv = new TargetSingleResultLookupEnvironment(executor, example1.target.TargetPackage.Literals.B,bName);
-		TargetQualifiedLookupVisitor _lookupVisitor = new TargetQualifiedLookupVisitor(_lookupEnv);
+		TargetQualifiedBLookupVisitor _lookupVisitor = new TargetQualifiedBLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new TargetLookupResultImpl<example1.target.B>
 				(_lookupEnv.getNamedElementsByKind(example1.target.B.class));
@@ -39,7 +40,7 @@ public class TargetLookupSolver {
 	
 	public TargetLookupResult<example1.target.C> _lookupQualifiedC(example1.target.A2 context, java.lang.String cName) {
 		TargetSingleResultLookupEnvironment _lookupEnv = new TargetSingleResultLookupEnvironment(executor, example1.target.TargetPackage.Literals.C,cName);
-		TargetQualifiedLookupVisitor _lookupVisitor = new TargetQualifiedLookupVisitor(_lookupEnv);
+		TargetQualifiedCLookupVisitor _lookupVisitor = new TargetQualifiedCLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new TargetLookupResultImpl<example1.target.C>
 				(_lookupEnv.getNamedElementsByKind(example1.target.C.class));
