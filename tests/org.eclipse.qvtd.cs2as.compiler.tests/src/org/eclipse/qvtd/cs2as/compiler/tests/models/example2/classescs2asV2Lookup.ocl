@@ -34,13 +34,18 @@ def : parentEnv_Operation() : lookup::LookupEnvironment[1] =
 def : parentEnv_Property() : lookup::LookupEnvironment[1] =
 	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_Property(self) endif
 
-def : _exported_env_Class(importer : OclElement) : lookup::LookupEnvironment[1] =
-	lookup::LookupEnvironment { }
-def : _exported_env_Package(importer : OclElement) : lookup::LookupEnvironment[1] =
-	lookup::LookupEnvironment { }
 def : _exported_env_Operation(importer : OclElement) : lookup::LookupEnvironment[1] =
 	lookup::LookupEnvironment { }
 def : _exported_env_Property(importer : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+	
+def : _qualified_env_Class(child : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+def : _qualified_env_Package(child : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+def : _qualified_env_Operation(child : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+def : _qualified_env_Property(child : OclElement) : lookup::LookupEnvironment[1] =
 	lookup::LookupEnvironment { }
 -- End of domain specific default functionality
 endpackage 
