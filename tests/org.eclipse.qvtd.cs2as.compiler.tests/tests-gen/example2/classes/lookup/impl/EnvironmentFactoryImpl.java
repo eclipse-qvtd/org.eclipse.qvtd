@@ -2,6 +2,7 @@
  */
 package example2.classes.lookup.impl;
 
+import example2.classes.lookup.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -57,6 +58,7 @@ public class EnvironmentFactoryImpl extends EFactoryImpl implements EnvironmentF
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case EnvironmentPackage.LOOKUP_ENVIRONMENT: return createLookupEnvironment();
+			case EnvironmentPackage.ENV_ENTRY: return createEnvEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -70,6 +72,16 @@ public class EnvironmentFactoryImpl extends EFactoryImpl implements EnvironmentF
 	public LookupEnvironment createLookupEnvironment() {
 		LookupEnvironmentImpl lookupEnvironment = new LookupEnvironmentImpl();
 		return lookupEnvironment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EnvEntry createEnvEntry() {
+		EnvEntryImpl envEntry = new EnvEntryImpl();
+		return envEntry;
 	}
 
 	/**

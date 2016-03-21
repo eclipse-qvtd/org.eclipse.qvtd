@@ -79,6 +79,10 @@ public class EnvironmentAdapterFactory extends AdapterFactoryImpl {
 				return createEnv4CGAdapter();
 			}
 			@Override
+			public Adapter caseEnvEntry(EnvEntry object) {
+				return createEnvEntryAdapter();
+			}
+			@Override
 			public Adapter caseExecutor(Executor object) {
 				return createExecutorAdapter();
 			}
@@ -127,6 +131,20 @@ public class EnvironmentAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEnv4CGAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example2.classes.lookup.EnvEntry <em>Env Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example2.classes.lookup.EnvEntry
+	 * @generated
+	 */
+	public Adapter createEnvEntryAdapter() {
 		return null;
 	}
 

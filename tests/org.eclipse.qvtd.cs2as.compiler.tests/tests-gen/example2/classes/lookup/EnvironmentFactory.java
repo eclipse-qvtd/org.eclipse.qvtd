@@ -31,6 +31,15 @@ public interface EnvironmentFactory extends EFactory {
 	LookupEnvironment createLookupEnvironment();
 
 	/**
+	 * Returns a new object of class '<em>Env Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Env Entry</em>'.
+	 * @generated
+	 */
+	EnvEntry createEnvEntry();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

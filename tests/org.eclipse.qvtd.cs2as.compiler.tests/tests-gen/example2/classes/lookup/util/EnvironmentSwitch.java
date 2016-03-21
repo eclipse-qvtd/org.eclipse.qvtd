@@ -82,6 +82,12 @@ public class EnvironmentSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case EnvironmentPackage.ENV_ENTRY: {
+				EnvEntry envEntry = (EnvEntry)theEObject;
+				T result = caseEnvEntry(envEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case EnvironmentPackage.EXECUTOR: {
 				Executor executor = (Executor)theEObject;
 				T result = caseExecutor(executor);
@@ -119,6 +125,21 @@ public class EnvironmentSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEnv4CG(Env4CG object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Env Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Env Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnvEntry(EnvEntry object) {
 		return null;
 	}
 

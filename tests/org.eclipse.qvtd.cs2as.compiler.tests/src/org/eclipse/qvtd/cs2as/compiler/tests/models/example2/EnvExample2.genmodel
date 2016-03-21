@@ -17,7 +17,7 @@
   <genPackages prefix="Environment" basePackage="example2.classes" disposableProviderFactory="true"
       ecorePackage="EnvExample2.ecore#/">
     <genClasses ecoreClass="EnvExample2.ecore#//LookupEnvironment">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EnvExample2.ecore#//LookupEnvironment/namedElements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EnvExample2.ecore#//LookupEnvironment/entries"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EnvExample2.ecore#//LookupEnvironment/parentEnv"/>
       <genOperations ecoreOperation="EnvExample2.ecore#//LookupEnvironment/addElements">
         <genParameters ecoreParameter="EnvExample2.ecore#//LookupEnvironment/addElements/elements"/>
@@ -26,10 +26,22 @@
       <genOperations ecoreOperation="EnvExample2.ecore#//LookupEnvironment/addElement">
         <genParameters ecoreParameter="EnvExample2.ecore#//LookupEnvironment/addElement/element"/>
       </genOperations>
+      <genOperations ecoreOperation="EnvExample2.ecore#//LookupEnvironment/addElementWithName">
+        <genParameters ecoreParameter="EnvExample2.ecore#//LookupEnvironment/addElementWithName/entryName"/>
+        <genParameters ecoreParameter="EnvExample2.ecore#//LookupEnvironment/addElementWithName/element"/>
+      </genOperations>
+      <genOperations ecoreOperation="EnvExample2.ecore#//LookupEnvironment/getNamedElements">
+        <genParameters ecoreParameter="EnvExample2.ecore#//LookupEnvironment/getNamedElements/entryName"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="EnvExample2.ecore#//Env4CG">
       <genOperations ecoreOperation="EnvExample2.ecore#//Env4CG/hasFinalResult"/>
       <genOperations ecoreOperation="EnvExample2.ecore#//Env4CG/getExecutor"/>
+    </genClasses>
+    <genClasses ecoreClass="EnvExample2.ecore#//EnvEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EnvExample2.ecore#//EnvEntry/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EnvExample2.ecore#//EnvEntry/namedElements"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference EnvExample2.ecore#//EnvEntry/env"/>
     </genClasses>
     <genClasses image="false" ecoreClass="EnvExample2.ecore#//Executor"/>
   </genPackages>

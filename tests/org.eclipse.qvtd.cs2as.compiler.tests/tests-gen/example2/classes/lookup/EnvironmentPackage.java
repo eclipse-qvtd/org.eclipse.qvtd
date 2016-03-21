@@ -2,6 +2,7 @@
  */
 package example2.classes.lookup;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -114,13 +115,13 @@ public interface EnvironmentPackage extends EPackage {
 	int LOOKUP_ENVIRONMENT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Named Elements</b></em>' reference list.
+	 * The feature id for the '<em><b>Entries</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOOKUP_ENVIRONMENT__NAMED_ELEMENTS = ENV4_CG_FEATURE_COUNT + 0;
+	int LOOKUP_ENVIRONMENT__ENTRIES = ENV4_CG_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent Env</b></em>' reference.
@@ -177,13 +178,86 @@ public interface EnvironmentPackage extends EPackage {
 	int LOOKUP_ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT = ENV4_CG_OPERATION_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Add Element With Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOKUP_ENVIRONMENT___ADD_ELEMENT_WITH_NAME__STRING_NAMEDELEMENT = ENV4_CG_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Get Named Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOKUP_ENVIRONMENT___GET_NAMED_ELEMENTS__STRING = ENV4_CG_OPERATION_COUNT + 3;
+
+	/**
 	 * The number of operations of the '<em>Lookup Environment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOOKUP_ENVIRONMENT_OPERATION_COUNT = ENV4_CG_OPERATION_COUNT + 2;
+	int LOOKUP_ENVIRONMENT_OPERATION_COUNT = ENV4_CG_OPERATION_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link example2.classes.lookup.impl.EnvEntryImpl <em>Env Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example2.classes.lookup.impl.EnvEntryImpl
+	 * @see example2.classes.lookup.impl.EnvironmentPackageImpl#getEnvEntry()
+	 * @generated
+	 */
+	int ENV_ENTRY = 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENV_ENTRY__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Named Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENV_ENTRY__NAMED_ELEMENTS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Env</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENV_ENTRY__ENV = 2;
+
+	/**
+	 * The number of structural features of the '<em>Env Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENV_ENTRY_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Env Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENV_ENTRY_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.pivot.evaluation.Executor <em>Executor</em>}' class.
@@ -193,7 +267,7 @@ public interface EnvironmentPackage extends EPackage {
 	 * @see example2.classes.lookup.impl.EnvironmentPackageImpl#getExecutor()
 	 * @generated
 	 */
-	int EXECUTOR = 2;
+	int EXECUTOR = 3;
 
 	/**
 	 * The number of structural features of the '<em>Executor</em>' class.
@@ -225,15 +299,15 @@ public interface EnvironmentPackage extends EPackage {
 	EClass getLookupEnvironment();
 
 	/**
-	 * Returns the meta object for the reference list '{@link example2.classes.lookup.LookupEnvironment#getNamedElements <em>Named Elements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link example2.classes.lookup.LookupEnvironment#getEntries <em>Entries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Named Elements</em>'.
-	 * @see example2.classes.lookup.LookupEnvironment#getNamedElements()
+	 * @return the meta object for the containment reference list '<em>Entries</em>'.
+	 * @see example2.classes.lookup.LookupEnvironment#getEntries()
 	 * @see #getLookupEnvironment()
 	 * @generated
 	 */
-	EReference getLookupEnvironment_NamedElements();
+	EReference getLookupEnvironment_Entries();
 
 	/**
 	 * Returns the meta object for the reference '{@link example2.classes.lookup.LookupEnvironment#getParentEnv <em>Parent Env</em>}'.
@@ -267,6 +341,26 @@ public interface EnvironmentPackage extends EPackage {
 	EOperation getLookupEnvironment__AddElement__NamedElement();
 
 	/**
+	 * Returns the meta object for the '{@link example2.classes.lookup.LookupEnvironment#addElementWithName(java.lang.String, example2.classes.NamedElement) <em>Add Element With Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Add Element With Name</em>' operation.
+	 * @see example2.classes.lookup.LookupEnvironment#addElementWithName(java.lang.String, example2.classes.NamedElement)
+	 * @generated
+	 */
+	EOperation getLookupEnvironment__AddElementWithName__String_NamedElement();
+
+	/**
+	 * Returns the meta object for the '{@link example2.classes.lookup.LookupEnvironment#getNamedElements(java.lang.String) <em>Get Named Elements</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Named Elements</em>' operation.
+	 * @see example2.classes.lookup.LookupEnvironment#getNamedElements(java.lang.String)
+	 * @generated
+	 */
+	EOperation getLookupEnvironment__GetNamedElements__String();
+
+	/**
 	 * Returns the meta object for class '{@link example2.classes.lookup.Env4CG <em>Env4 CG</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -295,6 +389,49 @@ public interface EnvironmentPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getEnv4CG__GetExecutor();
+
+	/**
+	 * Returns the meta object for class '{@link example2.classes.lookup.EnvEntry <em>Env Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Env Entry</em>'.
+	 * @see example2.classes.lookup.EnvEntry
+	 * @generated
+	 */
+	EClass getEnvEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link example2.classes.lookup.EnvEntry#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see example2.classes.lookup.EnvEntry#getName()
+	 * @see #getEnvEntry()
+	 * @generated
+	 */
+	EAttribute getEnvEntry_Name();
+
+	/**
+	 * Returns the meta object for the reference list '{@link example2.classes.lookup.EnvEntry#getNamedElements <em>Named Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Named Elements</em>'.
+	 * @see example2.classes.lookup.EnvEntry#getNamedElements()
+	 * @see #getEnvEntry()
+	 * @generated
+	 */
+	EReference getEnvEntry_NamedElements();
+
+	/**
+	 * Returns the meta object for the container reference '{@link example2.classes.lookup.EnvEntry#getEnv <em>Env</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Env</em>'.
+	 * @see example2.classes.lookup.EnvEntry#getEnv()
+	 * @see #getEnvEntry()
+	 * @generated
+	 */
+	EReference getEnvEntry_Env();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.pivot.evaluation.Executor <em>Executor</em>}'.
@@ -341,12 +478,12 @@ public interface EnvironmentPackage extends EPackage {
 		EClass LOOKUP_ENVIRONMENT = eINSTANCE.getLookupEnvironment();
 
 		/**
-		 * The meta object literal for the '<em><b>Named Elements</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Entries</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LOOKUP_ENVIRONMENT__NAMED_ELEMENTS = eINSTANCE.getLookupEnvironment_NamedElements();
+		EReference LOOKUP_ENVIRONMENT__ENTRIES = eINSTANCE.getLookupEnvironment_Entries();
 
 		/**
 		 * The meta object literal for the '<em><b>Parent Env</b></em>' reference feature.
@@ -373,6 +510,22 @@ public interface EnvironmentPackage extends EPackage {
 		EOperation LOOKUP_ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT = eINSTANCE.getLookupEnvironment__AddElement__NamedElement();
 
 		/**
+		 * The meta object literal for the '<em><b>Add Element With Name</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation LOOKUP_ENVIRONMENT___ADD_ELEMENT_WITH_NAME__STRING_NAMEDELEMENT = eINSTANCE.getLookupEnvironment__AddElementWithName__String_NamedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Named Elements</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation LOOKUP_ENVIRONMENT___GET_NAMED_ELEMENTS__STRING = eINSTANCE.getLookupEnvironment__GetNamedElements__String();
+
+		/**
 		 * The meta object literal for the '{@link example2.classes.lookup.Env4CG <em>Env4 CG</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -397,6 +550,40 @@ public interface EnvironmentPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation ENV4_CG___GET_EXECUTOR = eINSTANCE.getEnv4CG__GetExecutor();
+
+		/**
+		 * The meta object literal for the '{@link example2.classes.lookup.impl.EnvEntryImpl <em>Env Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see example2.classes.lookup.impl.EnvEntryImpl
+		 * @see example2.classes.lookup.impl.EnvironmentPackageImpl#getEnvEntry()
+		 * @generated
+		 */
+		EClass ENV_ENTRY = eINSTANCE.getEnvEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ENV_ENTRY__NAME = eINSTANCE.getEnvEntry_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Named Elements</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENV_ENTRY__NAMED_ELEMENTS = eINSTANCE.getEnvEntry_NamedElements();
+
+		/**
+		 * The meta object literal for the '<em><b>Env</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENV_ENTRY__ENV = eINSTANCE.getEnvEntry_Env();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.pivot.evaluation.Executor <em>Executor</em>}' class.
