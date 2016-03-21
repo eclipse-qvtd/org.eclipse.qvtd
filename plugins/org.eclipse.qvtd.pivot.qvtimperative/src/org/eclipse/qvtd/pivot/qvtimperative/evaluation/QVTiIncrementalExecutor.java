@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -180,7 +179,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		if ((asMapping != null) && transformationAnalysis.isHazardousRead(asMapping, navigationCallExp)) {		// null within queries
 			assert sourceValue != null;
 			EStructuralFeature eFeature = (EStructuralFeature)referredProperty.getESObject();
-			objectManager.getting((EObject)sourceValue, eFeature);
+			objectManager.getting(sourceValue, eFeature, false);
 			ecoreValue = super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
 			AbstractTransformer.INVOCATIONS.println("got " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + sourceValue + " = " + ecoreValue);
 		}
@@ -193,15 +192,15 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 				assert sourceValue != null;
 				EStructuralFeature eFeature = (EStructuralFeature)referredProperty.getESObject();
 				assert currentInvocation2 != null;
-				objectManager.got(currentInvocation2, (EObject)sourceValue, eFeature, ecoreValue);
+				objectManager.got(currentInvocation2, sourceValue, eFeature, ecoreValue);
 			}
 		}
 		return ecoreValue;
 	}
 
 	@Override
-	public void internalExecutePropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @NonNull Object sourceObject, @Nullable Object ecoreValue) {
-		super.internalExecutePropertyAssignment(propertyAssignment, sourceObject, ecoreValue);
+	public void internalExecutePropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @NonNull Object sourceObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
+		super.internalExecutePropertyAssignment(propertyAssignment, sourceObject, ecoreValue, childKey);
 		if (mode == Mode.LAZY) {
 			Mapping asMapping = QVTimperativeUtil.getContainingMapping(propertyAssignment);
 			assert asMapping != null;
@@ -209,7 +208,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 				Property targetProperty = propertyAssignment.getTargetProperty();
 				assert targetProperty != null;
 				EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
-				objectManager.assigned(sourceObject, eFeature, ecoreValue);
+				objectManager.assigned(sourceObject, eFeature, ecoreValue, childKey);
 			}
 		}
 		else {
@@ -218,7 +217,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
 			InterpretedInvocation currentInvocation2 = currentInvocation;
 			assert currentInvocation2 != null;
-			objectManager.assigned(currentInvocation2, sourceObject, eFeature, ecoreValue);
+			objectManager.assigned(currentInvocation2, sourceObject, eFeature, ecoreValue, childKey);
 		}
 	}
 	
@@ -228,7 +227,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		if ((element != null) && (mode == Mode.INCREMENTAL)) {
 			InterpretedInvocation currentInvocation2 = currentInvocation;
 			assert currentInvocation2 != null;
-			objectManager.created(currentInvocation2, (EObject)element);
+			objectManager.created(currentInvocation2, element);
 /*			DomainUsage domainUsage = getEvaluationEnvironment().getUsageFor(realizedVariable);
 			ClassStatus classStatus = statusManager.getClassStatus(domainUsage, realizedVariable.getType(), (EObject)element);
 			MappingStatus mappingStatus = findMappingStatus();

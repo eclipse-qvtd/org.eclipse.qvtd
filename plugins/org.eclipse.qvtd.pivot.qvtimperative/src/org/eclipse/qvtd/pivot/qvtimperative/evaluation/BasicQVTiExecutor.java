@@ -341,7 +341,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 	
 	@Override
-	public void internalExecutePropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @NonNull Object slotObject, @Nullable Object ecoreValue) {
+	public void internalExecutePropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @NonNull Object slotObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
 		Property targetProperty = propertyAssignment.getTargetProperty();
 		targetProperty.initValue(slotObject, ecoreValue);
     	QVTiModelManager modelManager = getModelManager();

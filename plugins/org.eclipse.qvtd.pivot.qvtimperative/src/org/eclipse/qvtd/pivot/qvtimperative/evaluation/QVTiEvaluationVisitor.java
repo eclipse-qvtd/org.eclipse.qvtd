@@ -397,11 +397,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				Property targetProperty = propertyAssignment.getTargetProperty();
 				Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
 				Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);
-				executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, ecoreValue);
+				executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, ecoreValue, null);
 				return null;
 			}
 			catch (InvocationFailedException e) {
-				executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, e);
+				executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, e, null);
 //				throw e;
 			}
 		} else {

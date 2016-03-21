@@ -688,7 +688,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
 			js.append(", ");
 			js.appendValueName(cgInit);
-			js.append(");\n");
+			js.append(", null);\n");
 		}
 		return true;
 	}
@@ -720,7 +720,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
 			js.append(".Literals.");
 			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
-			js.append(");\n");
+			js.append(", false);\n");
 		}
 		Boolean status = appendCGEcorePropertyCallExp(cgPropertyCallExp, source);
 		if (status != ValueUtil.TRUE_VALUE) {
