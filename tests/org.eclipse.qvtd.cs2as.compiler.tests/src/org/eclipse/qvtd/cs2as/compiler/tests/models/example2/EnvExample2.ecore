@@ -12,7 +12,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="LookupEnvironment" eSuperTypes="#//Env4CG">
     <eOperations name="addElements" lowerBound="1" eType="#//LookupEnvironment">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="LookupEnvironment{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;namedElements = namedElements->includingAll(elements),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;parentEnv = parentEnv&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}"/>
+        <details key="body" value="elements->iterate(x : classes::NamedElement ; acc : LookupEnvironment = self | acc.addElement(x))"/>
       </eAnnotations>
       <eTypeParameters name="NE">
         <eBounds eClassifier="ecore:EClass Classes.ecore#//NamedElement"/>
@@ -25,12 +25,25 @@
     </eOperations>
     <eOperations name="addElement" lowerBound="1" eType="#//LookupEnvironment">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="LookupEnvironment{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;namedElements = namedElements->including(element),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;parentEnv = parentEnv&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}"/>
+        <details key="body" value="addElementWithName(element.name, element)"/>
       </eAnnotations>
-      <eParameters name="element" eType="ecore:EClass Classes.ecore#//NamedElement"/>
+      <eParameters name="element" lowerBound="1" eType="ecore:EClass Classes.ecore#//NamedElement"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="namedElements" upperBound="-1"
-        eType="ecore:EClass Classes.ecore#//NamedElement"/>
+    <eOperations name="addElementWithName" lowerBound="1" eType="#//LookupEnvironment">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let entry = entries->select(name = entryName)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;in LookupEnvironment {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;entries = if entry = null &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;then entries->including( EnvEntry {name=entryName, namedElements = OrderedSet{element}} )&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else entries->excluding(entry)->including( EnvEntry {name=entryName, namedElements = entry.namedElements->including(element)})&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eParameters name="entryName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="element" lowerBound="1" eType="ecore:EClass Classes.ecore#//NamedElement"/>
+    </eOperations>
+    <eOperations name="getNamedElements" upperBound="-1" eType="ecore:EClass Classes.ecore#//NamedElement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let entry = entries->select(name = entryName)&#xA;&#x9;&#x9;&#x9;&#x9;in if entry = null then OrderedSet(classes::NamedElement){} else entry.namedElements endif"/>
+      </eAnnotations>
+      <eParameters name="entryName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+        eType="#//EnvEntry" containment="true" eOpposite="#//EnvEntry/env"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentEnv" eType="#//LookupEnvironment"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Env4CG" abstract="true" interface="true">
@@ -44,6 +57,13 @@
         <details key="body" value="throw new &lt;%java.lang.UnsupportedOperationException%>(&quot;LookupEnvironment::getEvaluator() has been created for CG purposes. Don't call this method&quot;);"/>
       </eAnnotations>
     </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnvEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namedElements" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass Classes.ecore#//NamedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="env" eType="#//LookupEnvironment"
+        eOpposite="#//LookupEnvironment/entries"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Executor" instanceClassName="org.eclipse.ocl.pivot.evaluation.Executor"
       abstract="true" interface="true"/>

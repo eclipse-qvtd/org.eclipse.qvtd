@@ -82,7 +82,7 @@ def : _unqualified_env_Class(child : ocl::OclElement) : lookup::LookupEnvironmen
 context Visitable
 -- Package lookup
 def : _lookupPackage(env : lookup::LookupEnvironment, pName : String) : OrderedSet(Package) =
-let foundPackage = env.namedElements->selectByKind(Package)->select(name = pName)
+let foundPackage = env.getNamedElements(pName)->selectByKind(Package)
 in  if foundPackage->isEmpty() and not (env.parentEnv = null)
 	then _lookupPackage(env.parentEnv, pName)
 	else foundPackage
@@ -114,7 +114,7 @@ def : lookupPackage(segments : OrderedSet(cs::PathElementCS)) : Package[?] =
 
 -- Class lookup
 def : _lookupClass(env : lookup::LookupEnvironment, cName : String) : OrderedSet(Class) =
-let foundClass = env.namedElements->selectByKind(Class)->select(name = cName)
+let foundClass = env.getNamedElements(cName)->selectByKind(Class)
 in  if foundClass->isEmpty() and not (env.parentEnv = null)
 	then _lookupClass(env.parentEnv, cName)
 	else foundClass
