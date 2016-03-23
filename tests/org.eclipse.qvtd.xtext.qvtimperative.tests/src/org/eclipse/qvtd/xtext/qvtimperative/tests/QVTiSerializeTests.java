@@ -86,7 +86,7 @@ public class QVTiSerializeTests extends LoadTestCase
 			e.printStackTrace();
 			URI xmiURI = outputURI.appendFileExtension(".xmi");
 			Resource xmiResource = resourceSet.createResource(xmiURI);
-			@SuppressWarnings("null")@NonNull EList<@NonNull EObject> contents = xtextResource.getContents();
+			@NonNull EList<@NonNull EObject> contents = xtextResource.getContents();
 			xmiResource.getContents().addAll(contents);
 			xmiResource.save(TestsXMLUtil.defaultSavingOptions);
 			fail(e.toString());
@@ -150,6 +150,10 @@ public class QVTiSerializeTests extends LoadTestCase
 	
 	public void testSerialize_HSV2HLSas_qvtias() throws Exception {
 		doSerialize("HSV2HLS/HSV2HLSas");
+	}
+	
+	public void testSerialize_KiamaRewrite_qvti() throws Exception {
+		doSerializeRoundTrip("KiamaRewrite/KiamaRewrite");
 	}
 	
 	public void testSerialize_ManualUML2RDBMS_qvti() throws Exception {

@@ -1,0 +1,319 @@
+import 'KiamaAS.ecore#/';
+import 'KiamaCS.ecore#/';
+
+transformation KiamaRewrite_qvtp_qvtcas
+{
+	leftCS imports kiamacs;
+	rightAS imports kiamaas;
+}
+
+map __root__ in KiamaRewrite_qvtp_qvtcas
+{
+	where () {
+		roots : Set(ocl::OclElement) := leftCS.rootObjects(),
+		_'«child-NumCS»' : Set(kiamacs::NumCS) := roots->selectByKind(kiamacs::NumCS),
+		ji_NumCS1 : Set(kiamacs::NumCS) := _'«child-NumCS»',
+		_'«child-PlusCS»' : Set(kiamacs::PlusCS) := roots->selectByKind(kiamacs::PlusCS),
+		ji_PlusCS1 : Set(kiamacs::PlusCS) := _'«child-PlusCS»',
+		ji_PlusCS_31 : Set(kiamacs::PlusCS) := _'«child-PlusCS»',
+		_'«child-TopCS»' : Set(kiamacs::TopCS) := roots->selectByKind(kiamacs::TopCS),
+		ji_TopCS1 : Set(kiamacs::TopCS) := _'«child-TopCS»'
+	|}
+	for loop0 : kiamacs::TopCS in ji_TopCS1 {
+		call m_TopCS_ast {
+			lTopCS := loop0;
+		}
+	}
+	for loop0 : kiamacs::TopCS in ji_TopCS1 {
+		call r_TopCS_node {
+			ji_NumCS := ji_NumCS1;
+			ji_PlusCS := ji_PlusCS1;
+			ji_PlusCS_3 := ji_PlusCS_31;
+			_'«parent»' := loop0;
+		}
+	}
+	for loop0 : kiamacs::PlusCS in ji_PlusCS_31 {
+		infinite call r__PlusCS {
+			ji_NumCS := ji_NumCS1;
+			ji_PlusCS := ji_PlusCS1;
+			_'«head»' := loop0;
+		}
+	}
+	for loop0 : kiamacs::NumCS in ji_NumCS1 {
+		call m_NumCS_ast {
+			lNumCS := loop0;
+		}
+	}
+	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
+		call m_PlusCS_ast_2 {
+			lPlusCS := loop0;
+		}
+	}
+	for loop0 : kiamacs::NumCS in ji_NumCS1 {
+		call m_NumCS_ast_value_1 {
+			lNumCS := loop0;
+		}
+	}
+	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
+		call m_PlusCS_ast_left {
+			lPlusCS := loop0;
+		}
+	}
+	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
+		call m_PlusCS_ast_right {
+			lPlusCS := loop0;
+		}
+	}
+	for loop0 : kiamacs::TopCS in ji_TopCS1 {
+		call m_TopCS_ast_node {
+			lTopCS := loop0;
+		}
+	}
+	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
+		call m_PlusCS_ast_1 {
+			lPlusCS := loop0;
+		}
+	}
+	for loop0 : kiamacs::NumCS in ji_NumCS1 {
+		call m_NumCS_ast_2 {
+			lNumCS := loop0;
+		}
+	}
+	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
+		call m_PlusCS_ast {
+			lPlusCS := loop0;
+		}
+	}
+}
+
+map m_NumCS_ast in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(lNumCS : NumCS) {}
+	enforce rightAS() {
+		realize rNum : Num
+	}
+	where () {
+		lNumCS.ast := rNum;
+	}
+}
+
+map m_NumCS_ast_2 in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(lNumCS : NumCS) {}
+	enforce rightAS {
+		enforce kiamaas::Node::depth }() {}
+	where () {
+		ast : ecore::EObject := lNumCS.ast,
+		aNum : kiamaas::Num := ast.oclAsType(kiamaas::Num),
+		oclContainer : ocl::OclElement := aNum.oclContainer,
+		_'oclIsKindOf\nkiamaas::Top' : Boolean := oclContainer.oclIsKindOf(kiamaas::Top),
+		_'if' : Integer := if _'oclIsKindOf\nkiamaas::Top'
+		then 0
+		else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif
+	|
+		aNum.depth := _'if';
+	}
+}
+
+map m_NumCS_ast_value_1 in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(lNumCS : NumCS) {}
+	enforce rightAS {
+		enforce kiamaas::Node::height }() {}
+	where () {
+		ast : ecore::EObject := lNumCS.ast,
+		value : ecore::EInt := lNumCS.value,
+		aNum : kiamaas::Num := ast.oclAsType(kiamaas::Num)
+	|
+		aNum.height := 0;
+		aNum.value := value;
+	}
+}
+
+map m_PlusCS_ast in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(lPlusCS : PlusCS) {}
+	enforce rightAS {
+		check kiamaas::Node::height enforce kiamaas::Node::height }() {}
+	where () {
+		ast : ecore::EObject := lPlusCS.ast,
+		aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus),
+		left : kiamaas::Node := aPlus.left,
+		right : kiamaas::Node := aPlus.right,
+		height : ecore::EIntegerObject := left.height,
+		height1 : ecore::EIntegerObject := right.height,
+		oclAsSet : Set(ecore::EIntegerObject) := height.oclAsSet(),
+		including : Set(ecore::EIntegerObject) := oclAsSet->including(height1),
+		max : ecore::EIntegerObject := including->max(),
+		_'+' : Integer := max + 1
+	|
+		aPlus.height := _'+';
+	}
+}
+
+map m_PlusCS_ast_1 in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(lPlusCS : PlusCS) {}
+	enforce rightAS {
+		check kiamaas::Node::depth enforce kiamaas::Node::depth }() {}
+	where () {
+		ast : ecore::EObject := lPlusCS.ast,
+		aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus),
+		oclContainer : ocl::OclElement := aPlus.oclContainer,
+		_'oclIsKindOf\nkiamaas::Top' : Boolean := oclContainer.oclIsKindOf(kiamaas::Top),
+		_'if' : Integer := if _'oclIsKindOf\nkiamaas::Top'
+		then 0
+		else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif
+	|
+		aPlus.depth := _'if';
+	}
+}
+
+map m_PlusCS_ast_2 in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(lPlusCS : PlusCS) {}
+	enforce rightAS() {
+		realize rPlus : Plus
+	}
+	where () {
+		lPlusCS.ast := rPlus;
+	}
+}
+
+map m_PlusCS_ast_left in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(lPlusCS : PlusCS) {}
+	enforce rightAS() {}
+	where () {
+		ast : ecore::EObject := lPlusCS.ast,
+		left : kiamacs::NodeCS := lPlusCS.left,
+		aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus),
+		ast1 : ecore::EObject := left.ast,
+		aNode : kiamaas::Node := ast1.oclAsType(kiamaas::Node)
+	|
+		aPlus.left := aNode;
+	}
+}
+
+map m_PlusCS_ast_right in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(lPlusCS : PlusCS) {}
+	enforce rightAS() {}
+	where () {
+		ast : ecore::EObject := lPlusCS.ast,
+		right : kiamacs::NodeCS := lPlusCS.right,
+		aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus),
+		ast1 : ecore::EObject := right.ast,
+		aNode : kiamaas::Node := ast1.oclAsType(kiamaas::Node)
+	|
+		aPlus.right := aNode;
+	}
+}
+
+map m_TopCS_ast in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(lTopCS : TopCS) {}
+	enforce rightAS() {
+		realize rTop : Top
+	}
+	where () {
+		lTopCS.ast := rTop;
+	}
+}
+
+map m_TopCS_ast_node in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(lTopCS : TopCS) {}
+	enforce rightAS() {}
+	where () {
+		ast : ecore::EObject := lTopCS.ast,
+		node : kiamacs::NodeCS := lTopCS.node,
+		aTop : kiamaas::Top := ast.oclAsType(kiamaas::Top),
+		ast1 : ecore::EObject := node.ast,
+		aNode : kiamaas::Node := ast1.oclAsType(kiamaas::Node)
+	|
+		aTop.node := aNode;
+	}
+}
+
+map r_PlusCS_left in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(_'«parent»' : PlusCS) {}
+	where (ji_PlusCS : Set(kiamacs::PlusCS), ji_NumCS : Set(kiamacs::NumCS) |) {
+		allChildren : Set(kiamacs::NodeCS) := _'«parent»'.left.oclAsSet(),
+		_'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS),
+		_'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS)
+	|
+		ji_PlusCS += _'«child-PlusCS»';
+		ji_NumCS += _'«child-NumCS»';
+	}
+	for aChild : kiamacs::PlusCS in _'«child-PlusCS»' {
+		call r_PlusCS_left {
+			_'«parent»' := aChild;
+			ji_PlusCS := ji_PlusCS;
+			ji_NumCS := ji_NumCS;
+		}
+	}
+}
+
+map r_PlusCS_right in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(_'«parent»' : PlusCS) {}
+	where (ji_PlusCS : Set(kiamacs::PlusCS), ji_NumCS : Set(kiamacs::NumCS) |) {
+		allChildren : Set(kiamacs::NodeCS) := _'«parent»'.right.oclAsSet(),
+		_'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS),
+		_'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS)
+	|
+		ji_PlusCS += _'«child-PlusCS»';
+		ji_NumCS += _'«child-NumCS»';
+	}
+	for aChild : kiamacs::PlusCS in _'«child-PlusCS»' {
+		call r_PlusCS_right {
+			_'«parent»' := aChild;
+			ji_PlusCS := ji_PlusCS;
+			ji_NumCS := ji_NumCS;
+		}
+	}
+}
+
+map r_TopCS_node in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(_'«parent»' : TopCS) {}
+	where (ji_PlusCS : Set(kiamacs::PlusCS), ji_PlusCS_3 : Set(kiamacs::PlusCS), ji_NumCS : Set(kiamacs::NumCS) |) {
+		allChildren : Set(kiamacs::NodeCS) := _'«parent»'.node.oclAsSet(),
+		_'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS),
+		_'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS)
+	|
+		ji_PlusCS += _'«child-PlusCS»';
+		ji_PlusCS_3 += _'«child-PlusCS»';
+		ji_NumCS += _'«child-NumCS»';
+	}
+}
+
+map r__PlusCS in KiamaRewrite_qvtp_qvtcas
+{
+	check leftCS(_'«head»' : PlusCS) {}
+	where (ji_PlusCS : Set(kiamacs::PlusCS), ji_NumCS : Set(kiamacs::NumCS) |) {
+		_'«local»' : Set(kiamacs::PlusCS),
+		_'«new»' : Set(kiamacs::PlusCS)
+	|}
+	call r_PlusCS_left {
+		ji_NumCS := ji_NumCS;
+		ji_PlusCS := _'«local»';
+		_'«parent»' := _'«head»';
+	}
+	call r_PlusCS_right {
+		ji_NumCS := ji_NumCS;
+		ji_PlusCS := _'«local»';
+		_'«parent»' := _'«head»';
+	}
+	_'«new»' += _'«local»'->excludingAll(ji_PlusCS);
+	ji_PlusCS += _'«new»';
+	for loop0 : kiamacs::PlusCS in _'«new»' {
+		infinite call r__PlusCS {
+			ji_NumCS := ji_NumCS;
+			ji_PlusCS := ji_PlusCS;
+			_'«head»' := loop0;
+		}
+	}
+}
