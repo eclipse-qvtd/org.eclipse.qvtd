@@ -44,6 +44,30 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 	}
 
 	@Override
+	public R visitConnectionStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionStatement object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitConnectionStatement(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitConnectionVariable(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitImperativeBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeBottomPattern object) {
 		@Nullable P prologue = preVisit(object);
 		try {

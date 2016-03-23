@@ -41,6 +41,16 @@ public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, D extends QVT
 	}
 
 	@Override
+	public R visitConnectionStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionStatement object) {
+		return delegate.visitConnectionStatement(object);
+	}
+
+	@Override
+	public R visitConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable object) {
+		return delegate.visitConnectionVariable(object);
+	}
+
+	@Override
 	public R visitImperativeBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeBottomPattern object) {
 		return delegate.visitImperativeBottomPattern(object);
 	}

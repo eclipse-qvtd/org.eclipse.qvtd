@@ -14,14 +14,16 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import org.eclipse.ocl.pivot.Variable;
-
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Connection Assignment</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * A ConnectionAssignment assigns initial values to a ConnectionVariable.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
@@ -43,11 +45,11 @@ public interface ConnectionAssignment extends Assignment {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target Variable</em>' reference.
-	 * @see #setTargetVariable(Variable)
+	 * @see #setTargetVariable(ConnectionVariable)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getConnectionAssignment_TargetVariable()
 	 * @generated
 	 */
-	Variable getTargetVariable();
+	ConnectionVariable getTargetVariable();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment#getTargetVariable <em>Target Variable</em>}' reference.
@@ -57,6 +59,6 @@ public interface ConnectionAssignment extends Assignment {
 	 * @see #getTargetVariable()
 	 * @generated
 	 */
-	void setTargetVariable(Variable value);
+	void setTargetVariable(ConnectionVariable value);
 
 } // ConnectionAssignment

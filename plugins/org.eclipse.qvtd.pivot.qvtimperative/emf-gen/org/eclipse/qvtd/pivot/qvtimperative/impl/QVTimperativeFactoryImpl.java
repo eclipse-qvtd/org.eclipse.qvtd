@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -72,6 +73,8 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case QVTimperativePackage.CONNECTION_ASSIGNMENT: return createConnectionAssignment();
+			case QVTimperativePackage.CONNECTION_STATEMENT: return createConnectionStatement();
+			case QVTimperativePackage.CONNECTION_VARIABLE: return createConnectionVariable();
 			case QVTimperativePackage.IMPERATIVE_BOTTOM_PATTERN: return createImperativeBottomPattern();
 			case QVTimperativePackage.IMPERATIVE_DOMAIN: return createImperativeDomain();
 			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
@@ -92,7 +95,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public ConnectionAssignment createConnectionAssignment() {
+	public @NonNull ConnectionAssignment createConnectionAssignment() {
 		ConnectionAssignmentImpl connectionAssignment = new ConnectionAssignmentImpl();
 		return connectionAssignment;
 	}
@@ -103,7 +106,29 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public ImperativeBottomPattern createImperativeBottomPattern() {
+	public @NonNull ConnectionStatement createConnectionStatement() {
+		ConnectionStatementImpl connectionStatement = new ConnectionStatementImpl();
+		return connectionStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull ConnectionVariable createConnectionVariable() {
+		ConnectionVariableImpl connectionVariable = new ConnectionVariableImpl();
+		return connectionVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull ImperativeBottomPattern createImperativeBottomPattern() {
 		ImperativeBottomPatternImpl imperativeBottomPattern = new ImperativeBottomPatternImpl();
 		return imperativeBottomPattern;
 	}
@@ -114,7 +139,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public ImperativeDomain createImperativeDomain() {
+	public @NonNull ImperativeDomain createImperativeDomain() {
 		ImperativeDomainImpl imperativeDomain = new ImperativeDomainImpl();
 		return imperativeDomain;
 	}
@@ -125,7 +150,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public ImperativeModel createImperativeModel() {
+	public@NonNull ImperativeModel createImperativeModel() {
 		ImperativeModelImpl imperativeModel = new ImperativeModelImpl();
 		return imperativeModel;
 	}
@@ -136,7 +161,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public Mapping createMapping() {
+	public @NonNull Mapping createMapping() {
 		MappingImpl mapping = new MappingImpl();
 		return mapping;
 	}
@@ -147,7 +172,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public MappingCall createMappingCall() {
+	public @NonNull MappingCall createMappingCall() {
 		MappingCallImpl mappingCall = new MappingCallImpl();
 		return mappingCall;
 	}
@@ -158,7 +183,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public MappingCallBinding createMappingCallBinding() {
+	public @NonNull MappingCallBinding createMappingCallBinding() {
 		MappingCallBindingImpl mappingCallBinding = new MappingCallBindingImpl();
 		return mappingCallBinding;
 	}
@@ -169,7 +194,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public MappingLoop createMappingLoop() {
+	public @NonNull MappingLoop createMappingLoop() {
 		MappingLoopImpl mappingLoop = new MappingLoopImpl();
 		return mappingLoop;
 	}
@@ -180,7 +205,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public MappingSequence createMappingSequence() {
+	public @NonNull MappingSequence createMappingSequence() {
 		MappingSequenceImpl mappingSequence = new MappingSequenceImpl();
 		return mappingSequence;
 	}
@@ -191,7 +216,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public VariablePredicate createVariablePredicate() {
+	public @NonNull VariablePredicate createVariablePredicate() {
 		VariablePredicateImpl variablePredicate = new VariablePredicateImpl();
 		return variablePredicate;
 	}

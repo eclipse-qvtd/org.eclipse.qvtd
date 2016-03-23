@@ -247,6 +247,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Domain);
+			type.setIsAbstract(true);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Function);
@@ -262,6 +263,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Rule);
+			type.setIsAbstract(true);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Transformation);

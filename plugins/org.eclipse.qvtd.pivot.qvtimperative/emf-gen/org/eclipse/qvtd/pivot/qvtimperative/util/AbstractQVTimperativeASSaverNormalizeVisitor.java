@@ -51,6 +51,16 @@ public abstract class AbstractQVTimperativeASSaverNormalizeVisitor
 	}
 
 	@Override
+	public @Nullable Object visitConnectionStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionStatement object) {
+		return visitMappingStatement(object);
+	}
+
+	@Override
+	public @Nullable Object visitConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
 	public @Nullable Object visitImperativeBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeBottomPattern object) {
 		return visitBottomPattern(object);
 	}

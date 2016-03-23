@@ -19,6 +19,8 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
@@ -46,6 +48,20 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass connectionAssignmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass connectionStatementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass connectionVariableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,6 +223,46 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EReference getConnectionAssignment_TargetVariable() {
 		return (EReference)connectionAssignmentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getConnectionStatement() {
+		return connectionStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConnectionStatement_TargetVariable() {
+		return (EReference)connectionStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConnectionStatement_Value() {
+		return (EReference)connectionStatementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getConnectionVariable() {
+		return connectionVariableEClass;
 	}
 
 	/**
@@ -511,6 +567,12 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		connectionAssignmentEClass = createEClass(CONNECTION_ASSIGNMENT);
 		createEReference(connectionAssignmentEClass, CONNECTION_ASSIGNMENT__TARGET_VARIABLE);
 
+		connectionStatementEClass = createEClass(CONNECTION_STATEMENT);
+		createEReference(connectionStatementEClass, CONNECTION_STATEMENT__TARGET_VARIABLE);
+		createEReference(connectionStatementEClass, CONNECTION_STATEMENT__VALUE);
+
+		connectionVariableEClass = createEClass(CONNECTION_VARIABLE);
+
 		imperativeAreaEClass = createEClass(IMPERATIVE_AREA);
 		createEReference(imperativeAreaEClass, IMPERATIVE_AREA__CHECKED_PROPERTIES);
 		createEReference(imperativeAreaEClass, IMPERATIVE_AREA__ENFORCED_PROPERTIES);
@@ -584,6 +646,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		// Add supertypes to classes
 		connectionAssignmentEClass.getESuperTypes().add(theQVTcoreBasePackage.getAssignment());
+		connectionStatementEClass.getESuperTypes().add(this.getMappingStatement());
+		connectionVariableEClass.getESuperTypes().add(thePivotPackage.getVariable());
 		imperativeAreaEClass.getESuperTypes().add(theQVTcoreBasePackage.getArea());
 		imperativeBottomPatternEClass.getESuperTypes().add(theQVTcoreBasePackage.getBottomPattern());
 		imperativeDomainEClass.getESuperTypes().add(theQVTcoreBasePackage.getCoreDomain());
@@ -602,7 +666,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(connectionAssignmentEClass, ConnectionAssignment.class, "ConnectionAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConnectionAssignment_TargetVariable(), thePivotPackage.getVariable(), null, "targetVariable", null, 1, 1, ConnectionAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConnectionAssignment_TargetVariable(), this.getConnectionVariable(), null, "targetVariable", null, 1, 1, ConnectionAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(connectionStatementEClass, ConnectionStatement.class, "ConnectionStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConnectionStatement_TargetVariable(), this.getConnectionVariable(), null, "targetVariable", null, 1, 1, ConnectionStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConnectionStatement_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, ConnectionStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(connectionVariableEClass, ConnectionVariable.class, "ConnectionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(imperativeAreaEClass, ImperativeArea.class, "ImperativeArea", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getImperativeArea_CheckedProperties(), thePivotPackage.getProperty(), null, "checkedProperties", null, 0, -1, ImperativeArea.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -684,6 +754,18 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		   source, 
 		   new String[] {
 			 "body", "assignment"
+		   });	
+		addAnnotation
+		  (getConnectionStatement_TargetVariable(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });	
+		addAnnotation
+		  (getConnectionStatement_Value(), 
+		   source, 
+		   new String[] {
+			 "body", "valueAssignment"
 		   });	
 		addAnnotation
 		  (getVariablePredicate_TargetVariable(), 

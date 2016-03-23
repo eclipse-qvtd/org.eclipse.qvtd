@@ -19,7 +19,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A VariablePredicate validates the initialization of a guard pattern varaible.
+ * A VariablePredicate validates the initialization of a guard pattern variable.
  * <!-- end-model-doc -->
  *
  * <p>

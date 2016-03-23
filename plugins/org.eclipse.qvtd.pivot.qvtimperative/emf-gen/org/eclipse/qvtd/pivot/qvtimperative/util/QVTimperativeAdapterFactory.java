@@ -23,6 +23,8 @@ import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -109,6 +111,14 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createConnectionAssignmentAdapter();
 			}
 			@Override
+			public Adapter caseConnectionStatement(ConnectionStatement object) {
+				return createConnectionStatementAdapter();
+			}
+			@Override
+			public Adapter caseConnectionVariable(ConnectionVariable object) {
+				return createConnectionVariableAdapter();
+			}
+			@Override
 			public Adapter caseImperativeArea(ImperativeArea object) {
 				return createImperativeAreaAdapter();
 			}
@@ -165,6 +175,30 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createAssignmentAdapter();
 			}
 			@Override
+			public Adapter caseNameable(Nameable object) {
+				return createNameableAdapter();
+			}
+			@Override
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseTypedElement(TypedElement object) {
+				return createTypedElementAdapter();
+			}
+			@Override
+			public Adapter caseOCLExpression(OCLExpression object) {
+				return createOCLExpressionAdapter();
+			}
+			@Override
+			public Adapter caseVariableDeclaration(VariableDeclaration object) {
+				return createVariableDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseVariable(Variable object) {
+				return createVariableAdapter();
+			}
+			@Override
 			public Adapter caseArea(Area object) {
 				return createAreaAdapter();
 			}
@@ -179,14 +213,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseBottomPattern(BottomPattern object) {
 				return createBottomPatternAdapter();
-			}
-			@Override
-			public Adapter caseNameable(Nameable object) {
-				return createNameableAdapter();
-			}
-			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
 			}
 			@Override
 			public Adapter caseReferringElement(ReferringElement object) {
@@ -219,14 +245,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAbstractMapping(AbstractMapping object) {
 				return createAbstractMappingAdapter();
-			}
-			@Override
-			public Adapter caseTypedElement(TypedElement object) {
-				return createTypedElementAdapter();
-			}
-			@Override
-			public Adapter caseOCLExpression(OCLExpression object) {
-				return createOCLExpressionAdapter();
 			}
 			@Override
 			public Adapter caseCallExp(CallExp object) {
@@ -267,6 +285,34 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConnectionAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement <em>Connection Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement
+	 * @generated
+	 */
+	public Adapter createConnectionStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable <em>Connection Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable
+	 * @generated
+	 */
+	public Adapter createConnectionVariableAdapter() {
 		return null;
 	}
 
@@ -645,6 +691,34 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOCLExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.VariableDeclaration <em>Variable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.pivot.VariableDeclaration
+	 * @generated
+	 */
+	public Adapter createVariableDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Variable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.pivot.Variable
+	 * @generated
+	 */
+	public Adapter createVariableAdapter() {
 		return null;
 	}
 

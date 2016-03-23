@@ -23,13 +23,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import org.eclipse.ocl.pivot.Variable;
-
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtcorebase.impl.AssignmentImpl;
 
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -56,7 +55,7 @@ public class ConnectionAssignmentImpl extends AssignmentImpl implements Connecti
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable targetVariable;
+	protected ConnectionVariable targetVariable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,10 +82,10 @@ public class ConnectionAssignmentImpl extends AssignmentImpl implements Connecti
 	 * @generated
 	 */
 	@Override
-	public Variable getTargetVariable() {
+	public ConnectionVariable getTargetVariable() {
 		if (targetVariable != null && targetVariable.eIsProxy()) {
 			InternalEObject oldTargetVariable = (InternalEObject)targetVariable;
-			targetVariable = (Variable)eResolveProxy(oldTargetVariable);
+			targetVariable = (ConnectionVariable)eResolveProxy(oldTargetVariable);
 			if (targetVariable != oldTargetVariable) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.CONNECTION_ASSIGNMENT__TARGET_VARIABLE, oldTargetVariable, targetVariable));
@@ -100,7 +99,7 @@ public class ConnectionAssignmentImpl extends AssignmentImpl implements Connecti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetTargetVariable() {
+	public ConnectionVariable basicGetTargetVariable() {
 		return targetVariable;
 	}
 
@@ -110,8 +109,8 @@ public class ConnectionAssignmentImpl extends AssignmentImpl implements Connecti
 	 * @generated
 	 */
 	@Override
-	public void setTargetVariable(Variable newTargetVariable) {
-		Variable oldTargetVariable = targetVariable;
+	public void setTargetVariable(ConnectionVariable newTargetVariable) {
+		ConnectionVariable oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.CONNECTION_ASSIGNMENT__TARGET_VARIABLE, oldTargetVariable, targetVariable));
@@ -141,7 +140,7 @@ public class ConnectionAssignmentImpl extends AssignmentImpl implements Connecti
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTimperativePackage.CONNECTION_ASSIGNMENT__TARGET_VARIABLE:
-				setTargetVariable((Variable)newValue);
+				setTargetVariable((ConnectionVariable)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -156,7 +155,7 @@ public class ConnectionAssignmentImpl extends AssignmentImpl implements Connecti
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTimperativePackage.CONNECTION_ASSIGNMENT__TARGET_VARIABLE:
-				setTargetVariable((Variable)null);
+				setTargetVariable((ConnectionVariable)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -21,6 +21,11 @@
     <genClasses ecoreClass="QVTimperative.ecore#//ConnectionAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ConnectionAssignment/targetVariable"/>
     </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//ConnectionStatement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ConnectionStatement/targetVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ConnectionStatement/value"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//ConnectionVariable"/>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#//ImperativeArea">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ImperativeArea/checkedProperties"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ImperativeArea/enforcedProperties"/>

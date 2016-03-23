@@ -22,6 +22,8 @@ import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -110,6 +112,32 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseAssignment(connectionAssignment);
 				if (result == null) result = caseElement(connectionAssignment);
 				if (result == null) result = caseVisitable(connectionAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.CONNECTION_STATEMENT: {
+				ConnectionStatement connectionStatement = (ConnectionStatement)theEObject;
+				T result = caseConnectionStatement(connectionStatement);
+				if (result == null) result = caseMappingStatement(connectionStatement);
+				if (result == null) result = caseOCLExpression(connectionStatement);
+				if (result == null) result = caseTypedElement(connectionStatement);
+				if (result == null) result = caseNamedElement(connectionStatement);
+				if (result == null) result = caseElement(connectionStatement);
+				if (result == null) result = caseNameable(connectionStatement);
+				if (result == null) result = caseVisitable(connectionStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.CONNECTION_VARIABLE: {
+				ConnectionVariable connectionVariable = (ConnectionVariable)theEObject;
+				T result = caseConnectionVariable(connectionVariable);
+				if (result == null) result = caseVariable(connectionVariable);
+				if (result == null) result = caseVariableDeclaration(connectionVariable);
+				if (result == null) result = caseTypedElement(connectionVariable);
+				if (result == null) result = caseNamedElement(connectionVariable);
+				if (result == null) result = caseElement(connectionVariable);
+				if (result == null) result = caseNameable(connectionVariable);
+				if (result == null) result = caseVisitable(connectionVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -261,6 +289,36 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseConnectionAssignment(ConnectionAssignment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Connection Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Connection Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConnectionStatement(ConnectionStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Connection Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Connection Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConnectionVariable(ConnectionVariable object) {
 		return null;
 	}
 
@@ -666,6 +724,36 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOCLExpression(OCLExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableDeclaration(VariableDeclaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariable(Variable object) {
 		return null;
 	}
 

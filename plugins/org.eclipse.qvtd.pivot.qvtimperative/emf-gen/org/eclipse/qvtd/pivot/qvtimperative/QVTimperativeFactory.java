@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +37,25 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Connection Assignment</em>'.
 	 * @generated
 	 */
-	ConnectionAssignment createConnectionAssignment();
+	@NonNull ConnectionAssignment createConnectionAssignment();
+
+	/**
+	 * Returns a new object of class '<em>Connection Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Connection Statement</em>'.
+	 * @generated
+	 */
+	@NonNull ConnectionStatement createConnectionStatement();
+
+	/**
+	 * Returns a new object of class '<em>Connection Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Connection Variable</em>'.
+	 * @generated
+	 */
+	@NonNull ConnectionVariable createConnectionVariable();
 
 	/**
 	 * Returns a new object of class '<em>Imperative Bottom Pattern</em>'.
@@ -45,7 +64,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Imperative Bottom Pattern</em>'.
 	 * @generated
 	 */
-	ImperativeBottomPattern createImperativeBottomPattern();
+	@NonNull ImperativeBottomPattern createImperativeBottomPattern();
 
 	/**
 	 * Returns a new object of class '<em>Imperative Domain</em>'.
@@ -54,7 +73,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Imperative Domain</em>'.
 	 * @generated
 	 */
-	ImperativeDomain createImperativeDomain();
+	@NonNull ImperativeDomain createImperativeDomain();
 
 	/**
 	 * Returns a new object of class '<em>Imperative Model</em>'.
@@ -63,7 +82,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Imperative Model</em>'.
 	 * @generated
 	 */
-	ImperativeModel createImperativeModel();
+	@NonNull ImperativeModel createImperativeModel();
 
 	/**
 	 * Returns a new object of class '<em>Mapping</em>'.
@@ -72,7 +91,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Mapping</em>'.
 	 * @generated
 	 */
-	Mapping createMapping();
+	@NonNull Mapping createMapping();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Call</em>'.
@@ -81,7 +100,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Mapping Call</em>'.
 	 * @generated
 	 */
-	MappingCall createMappingCall();
+	@NonNull MappingCall createMappingCall();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Call Binding</em>'.
@@ -90,7 +109,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Mapping Call Binding</em>'.
 	 * @generated
 	 */
-	MappingCallBinding createMappingCallBinding();
+	@NonNull MappingCallBinding createMappingCallBinding();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Loop</em>'.
@@ -99,7 +118,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Mapping Loop</em>'.
 	 * @generated
 	 */
-	MappingLoop createMappingLoop();
+	@NonNull MappingLoop createMappingLoop();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Sequence</em>'.
@@ -108,7 +127,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Mapping Sequence</em>'.
 	 * @generated
 	 */
-	MappingSequence createMappingSequence();
+	@NonNull MappingSequence createMappingSequence();
 
 	/**
 	 * Returns a new object of class '<em>Variable Predicate</em>'.
@@ -117,7 +136,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Variable Predicate</em>'.
 	 * @generated
 	 */
-	VariablePredicate createVariablePredicate();
+	@NonNull VariablePredicate createVariablePredicate();
 
 	/**
 	 * Returns the package supported by this factory.
