@@ -24,7 +24,9 @@ TopLevelCS:
 	ownedImports+=ImportCS*
 	(ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
 ;
-	
+
+ConnectionStatementCS: targetVariable=[pivot::Variable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
+
 DirectionCS returns qvtcorebasecs::DirectionCS : {qvtcorebasecs::DirectionCS} name=UnrestrictedName
 	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
 	('uses' uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (',' uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?
@@ -45,7 +47,7 @@ MappingIteratorCS returns essentialocl::VariableCS: name=UnrestrictedName (':' o
 
 MappingSequenceCS: ownedMappingStatements+=MappingStatementCS+;
 	
-MappingStatementCS: MappingCallCS | MappingLoopCS;
+MappingStatementCS: ConnectionStatementCS | MappingCallCS | MappingLoopCS;
 
 ImperativePredicateOrAssignmentCS: isDefault?='default'? ownedTarget=ExpCS ((':='|isAccumulate?='+=') ownedInitExpression=ExpCS)? ';';
 	
