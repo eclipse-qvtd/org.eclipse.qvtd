@@ -19,9 +19,15 @@ package	org.eclipse.qvtd.xtext.qvtimperativecs.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
+import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.xtext.qvtcorebase.cs2as.QVTcoreBaseCSPostOrderVisitor;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 
 /**
  * An AbstractQVTimperativeCSPostOrderVisitor provides a default implementation for each
@@ -34,6 +40,18 @@ public abstract class AbstractQVTimperativeCSPostOrderVisitor
 	extends QVTcoreBaseCSPostOrderVisitor
 	implements QVTimperativeCSVisitor<Continuation<?>>
 {
+	@Override
+	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull PredicateOrAssignmentCS csConstraint) {
+		Assignment variableAssignment = PivotUtil.getPivot(Assignment.class, csConstraint);
+		if (variableAssignment instanceof ConnectionAssignment) {
+			((ConnectionAssignment)variableAssignment).setTargetVariable((ConnectionVariable) variableExp.getReferredVariable());
+			return variableAssignment;
+		}
+		else {
+			return super.refreshVariableAssignment(variableExp, csConstraint);
+		}
+	}
+	
 	/**
 	 * Initializes me with an initial value for my result.
 	 * 

@@ -29,6 +29,8 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
@@ -40,6 +42,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
@@ -88,6 +91,20 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
 		}
 		return propertyAssignment;
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitConnectionStatementCS(@NonNull ConnectionStatementCS csElement) {
+		ConnectionStatement asConnectionStatement = PivotUtil.getPivot(ConnectionStatement.class, csElement);
+		if (asConnectionStatement != null) {
+			asConnectionStatement.setTargetVariable((ConnectionVariable) csElement.getTargetVariable());
+			ExpCS csInitialiser = csElement.getOwnedExpression();
+			if (csInitialiser != null) {
+				OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
+				asConnectionStatement.setValue(initialiser);
+			}
+		}
+		return null;
 	}
 
 	@Override

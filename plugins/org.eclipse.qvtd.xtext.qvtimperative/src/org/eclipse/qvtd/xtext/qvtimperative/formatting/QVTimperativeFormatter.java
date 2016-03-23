@@ -15,6 +15,7 @@ import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.Guar
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.RealizedVariableCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.ScopeNameCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ConnectionStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DirectionCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ImperativePredicateOrAssignmentCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCSElements;
@@ -88,6 +89,10 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 
 
 		{
+			ConnectionStatementCSElements a = f.getConnectionStatementCSAccess();
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
+		}
+		{
 			ImperativePredicateOrAssignmentCSElements a = f.getImperativePredicateOrAssignmentCSAccess();
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
 		}
@@ -102,7 +107,9 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    }
 	    {
 	    	MappingCallCSElements a = f.getMappingCallCSAccess();
+			c.setLinewrap(1).before(a.getIsInfiniteInfiniteKeyword_1_0());
 			c.setLinewrap(1).before(a.getCallKeyword_2());
+			c.setNoLinewrap().after(a.getIsInfiniteInfiniteKeyword_1_0());
 			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
 //		    c.setIndentation(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 	    }
@@ -166,7 +173,7 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 			c.setLinewrap().before(a.getRightParenthesisKeyword_0_5());	
 			c.setLinewrap().after(a.getRightParenthesisKeyword_0_5());	
 			c.setNoSpace().after(a.getLeftParenthesisKeyword_0_0());
-			c.setNoSpace().after(a.getCommaKeyword_0_2_0());
+			c.setNoSpace().before(a.getCommaKeyword_0_2_0());
 			c.setNoSpace().before(a.getRightParenthesisKeyword_0_5());
 			//
 			c.setNoLinewrap().before(a.getLeftParenthesisKeyword_1_0());	
@@ -174,7 +181,7 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 			c.setLinewrap().before(a.getRightParenthesisKeyword_1_3());	
 			c.setLinewrap().after(a.getRightParenthesisKeyword_1_3());	
 			c.setNoSpace().after(a.getLeftParenthesisKeyword_1_0());
-			c.setNoSpace().after(a.getCommaKeyword_1_2_0());
+			c.setNoSpace().before(a.getCommaKeyword_1_2_0());
 			c.setNoSpace().before(a.getRightParenthesisKeyword_1_3());
 			//
 			c.setNoLinewrap().before(a.getLeftParenthesisKeyword_2_0());	

@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
@@ -28,6 +29,7 @@ import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.PrimitiveTypeRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -43,6 +45,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -58,10 +63,15 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -87,6 +97,12 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitConnectionStatementCS(@NonNull ConnectionStatementCS csElement) {
+		context.refreshModelElement(ConnectionStatement.class, QVTimperativePackage.Literals.CONNECTION_STATEMENT, csElement);
+		return null;
+	}
+
+	@Override
 	public Continuation<?> visitDirectionCS(@NonNull DirectionCS csElement) {
 		Continuation<?> continuation = super.visitDirectionCS(csElement);
 		TypedModel asTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
@@ -94,6 +110,27 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			QVTbaseUtil.getContextVariable(standardLibrary, asTypedModel);
 		}
 		return continuation;
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitImperativePredicateOrAssignmentCS(@NonNull ImperativePredicateOrAssignmentCS csElement) {
+		ExpCS csTarget = csElement.getOwnedTarget();
+		EObject eContainer = csElement.eContainer();
+		if ((csElement.getOwnedInitExpression() == null) || (eContainer instanceof GuardPatternCS)) {
+			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
+		}
+		else if (csTarget instanceof NameExpCS) {
+			if (csElement.isIsAccumulate()) {
+				context.refreshModelElement(ConnectionAssignment.class, QVTimperativePackage.Literals.CONNECTION_ASSIGNMENT, csElement);
+			}
+			else {
+				context.refreshModelElement(VariableAssignment.class, QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
+			}
+		}
+		else {
+			context.refreshModelElement(PropertyAssignment.class, QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
+		}
+		return null;
 	}
 
 	@Override
@@ -267,5 +304,22 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
 		}
 		return continuation;
+	}
+
+	@Override
+	public Continuation<?> visitUnrealizedVariableCS(@NonNull UnrealizedVariableCS csElement) {
+		EObject eContainer = csElement.eContainer();
+		if ((eContainer instanceof PatternCS) && !(csElement.getOwnedType() instanceof PrimitiveTypeRefCS)) {		// FIXME need clearer syntax
+			EObject eContainerContainer = eContainer.eContainer();
+			if (eContainerContainer instanceof ImperativeDomainCS) {
+				TypedModel typedModel = ((ImperativeDomainCS)eContainerContainer).getDirection();
+				if (typedModel == null) {
+					refreshNamedElement(ConnectionVariable.class, QVTimperativePackage.Literals.CONNECTION_VARIABLE, csElement);
+					return null;
+				}
+			}
+		}
+		refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, csElement);
+		return null;
 	}
 }

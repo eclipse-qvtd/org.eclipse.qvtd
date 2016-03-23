@@ -73,6 +73,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -164,8 +165,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 
 	@Override
 	public ElementCS visitConnectionStatement(@NonNull ConnectionStatement asConnectionStatement) {
-		return visiting(asConnectionStatement);
-/*		ConnectionStatementCS csStatement = context.refreshElement(ConnectionStatementCS.class, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS, asConnectionStatement);
+		ConnectionStatementCS csStatement = context.refreshElement(ConnectionStatementCS.class, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS, asConnectionStatement);
 		csStatement.setPivot(asConnectionStatement);
 		Variable asVariable = asConnectionStatement.getTargetVariable();
 		if (asVariable != null) {
@@ -173,7 +173,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 			csStatement.setTargetVariable(asVariable);
 		}
 		csStatement.setOwnedExpression(context.visitDeclaration(ExpCS.class, asConnectionStatement.getValue()));
-		return csStatement; */
+		return csStatement;
 	}
 
 	@Override
