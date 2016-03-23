@@ -1,0 +1,4 @@
+class org/eclipse/emf/ecore/util/EcoreUtil
+copy
+ <T::Lorg/eclipse/emf/ecore/EObject;>(TT;)TT;
+ <T::Lorg/eclipse/emf/ecore/EObject;>(TT;)T1T;
