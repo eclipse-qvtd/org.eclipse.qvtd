@@ -2020,7 +2020,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			s.appendNode(node);
 		}
 		for (@SuppressWarnings("null")@NonNull Edge edge : getEdges()) {
-			s.appendEdge(edge);
+			s.appendEdge(edge.getSource(), edge, edge.getTarget());
 		}
 		s.popCluster();
 	}

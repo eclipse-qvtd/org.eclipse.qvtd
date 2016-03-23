@@ -119,7 +119,7 @@ public class RootRegion extends AbstractRegion implements SimpleRegion
 			s.appendNode(node);
 		}
 		for (@SuppressWarnings("null")@NonNull Edge edge : getEdges()) {
-			s.appendEdge(edge);
+			s.appendEdge(edge.getSource(), edge, edge.getTarget());
 		}
 		s.popCluster();
 	}

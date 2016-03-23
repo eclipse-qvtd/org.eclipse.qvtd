@@ -11,16 +11,16 @@ public interface GraphStringBuilder
 	
 	public static interface GraphEdge
 	{
-		void appendEdgeAttributes(@NonNull GraphStringBuilder s);
+//		void appendEdgeAttributes(@NonNull GraphStringBuilder s);
 		void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target);
 		@NonNull GraphNode getSource();
 		@NonNull GraphNode getTarget();
 	}
 
-	void appendAttributedEdge(@NonNull GraphEdge edge);
+//	void appendAttributedEdge(@NonNull GraphEdge edge);
 	void appendAttributedEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target);
 	void appendAttributedNode(@NonNull String nodeName);
-	void appendEdge(@NonNull GraphEdge edge);
+//	void appendEdge(@NonNull GraphEdge edge);
 	void appendEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target);
 	@NonNull String appendNode(@NonNull GraphNode node);
 	void popCluster();

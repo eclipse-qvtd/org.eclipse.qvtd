@@ -18,21 +18,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNo
 abstract class AbstractConnectionRole implements ConnectionRole
 {
 	@Override
-	public void appendEdgeAttributes(@NonNull GraphStringBuilder s) {
-		s.setColor(getColor());
-		String style = getStyle();
-		if (style != null) {
-			s.setStyle(style);
-		}
-		String arrowhead = getArrowhead();
-		if (arrowhead != null) {
-			s.setArrowhead(arrowhead);
-		}
-		s.setPenwidth(getPenwidth());
-		s.appendAttributedEdge(this);
-	}
-
-	@Override
 	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
 		s.setColor(getColor());
 		String style = getStyle();

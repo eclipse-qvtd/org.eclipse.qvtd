@@ -40,25 +40,6 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	@Override
-	public void appendEdgeAttributes(@NonNull GraphStringBuilder s) {
-		s.setColor(getColor());
-		String label = getLabel();
-		if (label != null) {
-			s.setLabel(label);
-		}
-		String style = getStyle();
-		if (style != null) {
-			s.setStyle(style);
-		}
-		String arrowhead = getArrowhead();
-		if (arrowhead != null) {
-			s.setArrowhead(arrowhead);
-		}
-		s.setPenwidth(getPenwidth());
-		s.appendAttributedEdge(this);
-	}
-
-	@Override
 	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
 		s.setColor(getColor());
 		String label = getLabel();
@@ -235,7 +216,7 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	public void toDOT(@NonNull DOTStringBuilder s) {
-		s.appendEdge(this);
+		s.appendEdge(getSource(), this, getTarget());
 	}
 
 	public String toGraphML() {
@@ -245,7 +226,7 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	public void toGraphML(@NonNull GraphMLStringBuilder s) {
-		s.appendEdge(this);
+		s.appendEdge(getSource(), this, getTarget());
 	}
 
 	@Override

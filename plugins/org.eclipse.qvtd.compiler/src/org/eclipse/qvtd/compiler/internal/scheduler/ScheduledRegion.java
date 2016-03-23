@@ -1737,7 +1737,7 @@ public class ScheduledRegion extends AbstractRegion
 			s.appendNode(node);
 		}
 		for (@SuppressWarnings("null")@NonNull Edge edge : getEdges()) {
-			s.appendEdge(edge);
+			s.appendEdge(edge.getSource(), edge, edge.getTarget());
 		}
 		for (@SuppressWarnings("null")@NonNull Connection connection : getConnections()) {
 			connection.toGraph(s);

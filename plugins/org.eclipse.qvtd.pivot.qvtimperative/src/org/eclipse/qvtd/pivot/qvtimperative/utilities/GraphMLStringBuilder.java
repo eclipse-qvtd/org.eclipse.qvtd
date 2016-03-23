@@ -37,30 +37,6 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		open();
 	}
 
-	@Override
-	public void appendAttributedEdge(@NonNull GraphEdge edge) {
-		String sourceName = appendNode(edge.getSource());
-		String targetName = appendNode(edge.getTarget());
-		String sourceId = sourceName;
-		String targetId = targetName;
-		String lineColor = color;
-		Double width = Double.valueOf(penwidth);
-		s.pushTag("edge");
-			appendEdgeId();
-			appendEdgeSource(sourceId);
-			appendEdgeTarget(targetId);
-			s.pushTag("data");
-				s.appendElement("key", "d9");
-				s.pushTag("y:PolyLineEdge");
-					appendLineStyle(new LineStyle(lineColor, lineType, width));
-					appendArrows(sourceArrowType.name(), targetArrowType.name());
-					appendEdgeLabel(label, labelColor);
-				s.popTag();
-			s.popTag();
-		s.popTag();
-		resetAttributes();
-	}
-
 //	@Override
 	@Override
 	public void appendAttributedEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
@@ -110,13 +86,6 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 				s.popTag();
 			s.popTag();
 		s.popTag();
-		resetAttributes();
-	}
-
-	@Override
-	public void appendEdge(@NonNull GraphEdge edge) {
-		resetAttributes();
-		edge.appendEdgeAttributes(this);
 		resetAttributes();
 	}
 
@@ -206,7 +175,6 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		this.label = replace;
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	public void setPenwidth(@NonNull Integer penwidth) {
 		this.penwidth = penwidth.toString();

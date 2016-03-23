@@ -64,27 +64,6 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 	}
 
 	@Override
-	public void appendEdgeAttributes(@NonNull GraphStringBuilder s) {
-		s.setColor(getColor());
-		if (isRegion2Region()) {
-			String indexText = getIndexText();
-			if (indexText != null) {
-				s.setLabel(indexText);
-			}
-		}
-		String style = getStyle();
-		if (style != null) {
-			s.setStyle(style);
-		}
-		String arrowhead = getArrowhead();
-		if (arrowhead != null) {
-			s.setArrowhead(arrowhead);
-		}
-		s.setPenwidth(getPenwidth());
-		s.appendAttributedEdge(this);
-	}
-
-	@Override
 	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
 		s.setColor(getColor());
 		if (isRegion2Region()) {
@@ -364,7 +343,7 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 	}
 
 	public void toDOT(@NonNull DOTStringBuilder s) {
-		s.appendEdge(this);
+		s.appendEdge(getSource(), this, getTarget());
 	}
 
 	@Override

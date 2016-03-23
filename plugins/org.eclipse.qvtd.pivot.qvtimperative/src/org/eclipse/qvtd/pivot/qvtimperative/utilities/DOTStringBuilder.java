@@ -73,10 +73,6 @@ public class DOTStringBuilder implements GraphStringBuilder
 	}
 
 	@Override
-	public void appendAttributedEdge(@NonNull GraphEdge edge) {
-	}
-
-	@Override
 	public void appendAttributedEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
 	}
 
@@ -111,26 +107,6 @@ public class DOTStringBuilder implements GraphStringBuilder
 			s.append("]");
 		}
 		attributes.clear();
-	}
-
-	@Override
-	public void appendEdge(@NonNull GraphEdge edge) {
-		String sourceName = appendNode(edge.getSource());
-		String targetName = appendNode(edge.getTarget());
-		Set<String> edgeSet = edges.get(sourceName);
-		if (edgeSet == null) {
-			edgeSet = new HashSet<String> ();
-			edges.put(sourceName, edgeSet);
-		}
-		if (edgeSet.add(targetName)) {
-			append(sourceName);
-			append(" -> ");
-			append(targetName);
-			attributes.clear();
-			edge.appendEdgeAttributes(this);
-			appendAttributes();
-			newLine();
-		}
 	}
 
 	public void appendEdge(@NonNull GraphNode source, @NonNull GraphNode target) {
@@ -168,7 +144,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 			append(" -> ");
 			append(targetName);
 			attributes.clear();
-			edge.appendEdgeAttributes(this);
+			edge.appendEdgeAttributes(this, source, target);
 			appendAttributes();
 			newLine();
 //		}

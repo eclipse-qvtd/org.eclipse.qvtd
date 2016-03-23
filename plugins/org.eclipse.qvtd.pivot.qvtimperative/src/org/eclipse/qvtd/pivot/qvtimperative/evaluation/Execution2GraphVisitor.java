@@ -54,12 +54,6 @@ public class Execution2GraphVisitor implements ExecutionVisitor<String>
 		}
 
 		@Override
-		public void appendEdgeAttributes(@NonNull GraphStringBuilder s) {
-			s.setColor(color);
-			s.appendAttributedEdge(this);
-		}
-
-		@Override
 		public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
 			s.setColor(color);
 			s.appendAttributedEdge(source, this, target);
@@ -93,7 +87,7 @@ public class Execution2GraphVisitor implements ExecutionVisitor<String>
 	}
 
 	protected void appendEdge(@NonNull GraphNode sourceNode, @NonNull GraphNode targetNode, @NonNull String color) {
-		context.appendEdge(new ExecutionEdge(sourceNode, targetNode, color));
+		context.appendEdge(sourceNode, new ExecutionEdge(sourceNode, targetNode, color), targetNode);
 	}
 
 	protected @NonNull String getAssociationColor(@NonNull AssociationStatus associationStatus) {
