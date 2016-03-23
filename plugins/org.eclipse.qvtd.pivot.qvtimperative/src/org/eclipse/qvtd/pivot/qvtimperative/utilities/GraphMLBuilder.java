@@ -395,10 +395,7 @@ public class GraphMLBuilder implements GraphBuilder
 	}
 
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		return s.toString();
 	}
-
-
-
 }

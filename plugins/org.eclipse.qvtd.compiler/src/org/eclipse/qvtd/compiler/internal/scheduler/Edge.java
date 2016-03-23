@@ -146,4 +146,6 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable
 	void setSource(@NonNull Node sourceNode);
 
 	void setTarget(@NonNull Node targetNode);
+
+	void toGraph(@NonNull GraphStringBuilder s);
 }

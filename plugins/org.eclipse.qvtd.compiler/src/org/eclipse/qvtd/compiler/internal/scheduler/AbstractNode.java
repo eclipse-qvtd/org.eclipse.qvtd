@@ -27,10 +27,8 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage.Internal;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;
 
@@ -729,24 +727,9 @@ public abstract class AbstractNode implements Node
 		@NonNull String string = n.toString();
 		s.setLabel(string);
 	}
-	
-	public String toDOT() {
-		DOTStringBuilder s = new DOTStringBuilder();
-		toDOT(s);
-		return s.toString();
-	}
 
-	public void toDOT(@NonNull DOTStringBuilder s) {
-		s.appendNode(this);
-	}
-	
-	public String toGraphML() {
-		GraphMLStringBuilder s = new GraphMLStringBuilder();
-		toGraphML(s);
-		return s.toString();
-	}
-
-	public void toGraphML(@NonNull GraphMLStringBuilder s) {
+	@Override
+	public void toGraph(@NonNull GraphStringBuilder s) {
 		s.appendNode(this);
 	}
 

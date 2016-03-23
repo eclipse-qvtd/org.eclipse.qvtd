@@ -35,8 +35,6 @@ import org.eclipse.qvtd.compiler.internal.schedule2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.ToDOT;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 
@@ -2004,13 +2002,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		this.earliestIndex = earliestIndex;
 		this.latestIndex = latestIndex;
 	}
-
-	@Override
-	public String toDOT() {
-		DOTStringBuilder s = new DOTStringBuilder();
-		toGraph(s);
-		return s.toString();
-	}
 	
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
@@ -2023,13 +2014,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			s.appendEdge(edge.getSource(), edge, edge.getTarget());
 		}
 		s.popCluster();
-	}
-
-	@Override
-	public String toGraphML() {
-		GraphMLStringBuilder s = new GraphMLStringBuilder();
-		toGraph(s);
-		return s.toString();
 	}
 
 	@Override

@@ -12,8 +12,6 @@ package org.eclipse.qvtd.compiler.internal.scheduler;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 
@@ -209,23 +207,8 @@ public abstract class AbstractEdge implements Edge
 		this.targetNode.addIncomingEdge(this);
 	}
 
-	public String toDOT() {
-		DOTStringBuilder s = new DOTStringBuilder();
-		toDOT(s);
-		return s.toString();
-	}
-
-	public void toDOT(@NonNull DOTStringBuilder s) {
-		s.appendEdge(getSource(), this, getTarget());
-	}
-
-	public String toGraphML() {
-		GraphMLStringBuilder s = new GraphMLStringBuilder();
-		toGraphML(s);
-		return s.toString();
-	}
-
-	public void toGraphML(@NonNull GraphMLStringBuilder s) {
+	@Override
+	public void toGraph(@NonNull GraphStringBuilder s) {
 		s.appendEdge(getSource(), this, getTarget());
 	}
 

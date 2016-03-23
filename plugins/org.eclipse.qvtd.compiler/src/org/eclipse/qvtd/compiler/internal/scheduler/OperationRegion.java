@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.scheduler;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +36,8 @@ import org.eclipse.qvtd.compiler.internal.scheduler.DependencyAnalyzer.Navigatio
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;
@@ -145,8 +146,8 @@ public class OperationRegion extends AbstractMappingRegion
 		
 		//
 		getHeadNodes();
-		toDOT();
-		toGraphML();
+		toGraph(new DOTStringBuilder());
+		toGraph(new GraphMLStringBuilder());
 	}
 
 	@Override

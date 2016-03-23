@@ -39,6 +39,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
@@ -161,8 +163,8 @@ public class MappingRegion extends AbstractMappingRegion implements Comparable<M
 		}
 		//
 		getHeadNodes();
-		toDOT();
-		toGraphML();
+		toGraph(new DOTStringBuilder());
+		toGraph(new GraphMLStringBuilder());
 		return;
 	}
 

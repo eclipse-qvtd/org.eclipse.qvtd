@@ -37,7 +37,6 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		open();
 	}
 
-//	@Override
 	@Override
 	public void appendAttributedEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
 		String sourceName = appendNode(source);
@@ -199,7 +198,6 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		}
 	}
 	
-	@SuppressWarnings("null")
 	@Override
 	public @NonNull String toString() {
 		close();

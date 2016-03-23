@@ -219,4 +219,6 @@ public interface Node extends GraphStringBuilder.GraphNode, Nameable
 	void removeOutgoingEdge(@NonNull Edge edge);
 	
 	void setHead();
+
+	void toGraph(@NonNull GraphStringBuilder s);
 }

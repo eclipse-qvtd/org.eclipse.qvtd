@@ -132,7 +132,5 @@ public interface Region extends Visitable, GraphNode, Nameable, Schedulable
 	void removeEdge(@NonNull Edge edge);
 	void removeNode(@NonNull Node node);
 	void setInvokingRegion(@NonNull Region invokingRegion);
-	String toDOT();
 	void toGraph(@NonNull GraphStringBuilder s);
-	String toGraphML();
 }

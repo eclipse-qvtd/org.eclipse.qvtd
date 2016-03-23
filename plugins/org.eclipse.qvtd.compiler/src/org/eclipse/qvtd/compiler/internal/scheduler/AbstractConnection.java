@@ -22,7 +22,6 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 
@@ -334,16 +333,6 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 		else if (this.connectionRole != connectionRole) {
 			this.connectionRole = this.connectionRole.merge(connectionRole);
 		}
-	}
-
-	public String toDOT() {
-		DOTStringBuilder s = new DOTStringBuilder();
-		toDOT(s);
-		return s.toString();
-	}
-
-	public void toDOT(@NonNull DOTStringBuilder s) {
-		s.appendEdge(getSource(), this, getTarget());
 	}
 
 	@Override
