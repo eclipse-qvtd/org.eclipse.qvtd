@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 
 /**
@@ -30,6 +31,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatement <em>Mapping Statement</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getPolledClasses <em>Polled Classes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedKeyExpression <em>Owned Key Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping()
@@ -74,6 +76,31 @@ public interface Mapping extends AbstractMapping, ImperativeArea {
 	 * @generated
 	 */
 	EList<org.eclipse.ocl.pivot.Class> getPolledClasses();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Key Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Key Expression</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Key Expression</em>' containment reference.
+	 * @see #setOwnedKeyExpression(OCLExpression)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_OwnedKeyExpression()
+	 * @generated
+	 */
+	OCLExpression getOwnedKeyExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedKeyExpression <em>Owned Key Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Key Expression</em>' containment reference.
+	 * @see #getOwnedKeyExpression()
+	 * @generated
+	 */
+	void setOwnedKeyExpression(OCLExpression value);
 
 	/**
 	 * <!-- begin-user-doc -->

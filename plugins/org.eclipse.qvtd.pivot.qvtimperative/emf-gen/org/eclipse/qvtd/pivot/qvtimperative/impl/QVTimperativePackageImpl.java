@@ -371,6 +371,16 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public EReference getMapping_OwnedKeyExpression() {
+		return (EReference)mappingEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMappingCall() {
 		return mappingCallEClass;
 	}
@@ -587,6 +597,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		mappingEClass = createEClass(MAPPING);
 		createEReference(mappingEClass, MAPPING__MAPPING_STATEMENT);
 		createEReference(mappingEClass, MAPPING__POLLED_CLASSES);
+		createEReference(mappingEClass, MAPPING__OWNED_KEY_EXPRESSION);
 
 		mappingCallEClass = createEClass(MAPPING_CALL);
 		createEReference(mappingCallEClass, MAPPING_CALL__BINDING);
@@ -688,6 +699,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(mappingEClass, Mapping.class, "Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMapping_MappingStatement(), this.getMappingStatement(), null, "mappingStatement", null, 0, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMapping_PolledClasses(), thePivotPackage.getClass_(), null, "polledClasses", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMapping_OwnedKeyExpression(), thePivotPackage.getOCLExpression(), null, "ownedKeyExpression", null, 0, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(mappingEClass, this.getMapping(), "getAllMappings", 0, -1, IS_UNIQUE, !IS_ORDERED);
 
