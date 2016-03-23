@@ -79,6 +79,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -457,6 +458,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 				else break;
 			}
 		else if(semanticObject.eClass().getEPackage() == QVTimperativeCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case QVTimperativeCSPackage.CONNECTION_STATEMENT_CS:
+				sequence_ConnectionStatementCS(context, (ConnectionStatementCS) semanticObject); 
+				return; 
 			case QVTimperativeCSPackage.IMPERATIVE_DOMAIN_CS:
 				if(context == grammarAccess.getMiddleDomainCSRule()) {
 					sequence_MiddleDomainCS(context, (ImperativeDomainCS) semanticObject); 
@@ -495,6 +499,15 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Constraint:
+	 *     (targetVariable=[Variable|UnrestrictedName] ownedExpression=ExpCS)
+	 */
+	protected void sequence_ConnectionStatementCS(EObject context, ConnectionStatementCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * Constraint:

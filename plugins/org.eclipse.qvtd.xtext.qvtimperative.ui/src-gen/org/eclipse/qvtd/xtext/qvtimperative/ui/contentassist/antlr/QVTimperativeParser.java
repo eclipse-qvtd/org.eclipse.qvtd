@@ -91,6 +91,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIDAccess().getAlternatives(), "rule__ID__Alternatives");
 					put(grammarAccess.getUPPERAccess().getAlternatives(), "rule__UPPER__Alternatives");
 					put(grammarAccess.getTopLevelCSAccess().getGroup(), "rule__TopLevelCS__Group__0");
+					put(grammarAccess.getConnectionStatementCSAccess().getGroup(), "rule__ConnectionStatementCS__Group__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup(), "rule__DirectionCS__Group__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup_2(), "rule__DirectionCS__Group_2__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup_2_2(), "rule__DirectionCS__Group_2_2__0");
@@ -276,6 +277,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsAssignment_1_0(), "rule__TopLevelCS__OwnedTransformationsAssignment_1_0");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedMappingsAssignment_1_1(), "rule__TopLevelCS__OwnedMappingsAssignment_1_1");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedQueriesAssignment_1_2(), "rule__TopLevelCS__OwnedQueriesAssignment_1_2");
+					put(grammarAccess.getConnectionStatementCSAccess().getTargetVariableAssignment_0(), "rule__ConnectionStatementCS__TargetVariableAssignment_0");
+					put(grammarAccess.getConnectionStatementCSAccess().getOwnedExpressionAssignment_2(), "rule__ConnectionStatementCS__OwnedExpressionAssignment_2");
 					put(grammarAccess.getDirectionCSAccess().getNameAssignment_1(), "rule__DirectionCS__NameAssignment_1");
 					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_2_1(), "rule__DirectionCS__ImportsAssignment_2_1");
 					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_2_2_1(), "rule__DirectionCS__ImportsAssignment_2_2_1");

@@ -171,6 +171,71 @@ ruleTopLevelCS returns [EObject current=null]
 
 
 
+// Entry rule entryRuleConnectionStatementCS
+entryRuleConnectionStatementCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getConnectionStatementCSRule()); }
+	 iv_ruleConnectionStatementCS=ruleConnectionStatementCS 
+	 { $current=$iv_ruleConnectionStatementCS.current; } 
+	 EOF 
+;
+
+// Rule ConnectionStatementCS
+ruleConnectionStatementCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		{ 
+		  /* */ 
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getConnectionStatementCSRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getConnectionStatementCSAccess().getTargetVariableVariableCrossReference_0_0()); 
+	    }
+		ruleUnrestrictedName		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_1='+=' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getConnectionStatementCSAccess().getPlusSignEqualsSignKeyword_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getConnectionStatementCSAccess().getOwnedExpressionExpCSParserRuleCall_2_0()); 
+	    }
+		lv_ownedExpression_2_0=ruleExpCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getConnectionStatementCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedExpression",
+        		lv_ownedExpression_2_0, 
+        		"ExpCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3=';' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getConnectionStatementCSAccess().getSemicolonKeyword_3());
+    }
+)
+;
+
+
+
+
+
 // Entry rule entryRuleDirectionCS
 entryRuleDirectionCS returns [EObject current=null] 
 	:
@@ -908,11 +973,11 @@ ruleMappingStatementCS returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        newCompositeNode(grammarAccess.getMappingStatementCSAccess().getMappingCallCSParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getMappingStatementCSAccess().getConnectionStatementCSParserRuleCall_0()); 
     }
-    this_MappingCallCS_0=ruleMappingCallCS
+    this_ConnectionStatementCS_0=ruleConnectionStatementCS
     { 
-        $current = $this_MappingCallCS_0.current; 
+        $current = $this_ConnectionStatementCS_0.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -921,11 +986,24 @@ ruleMappingStatementCS returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        newCompositeNode(grammarAccess.getMappingStatementCSAccess().getMappingLoopCSParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getMappingStatementCSAccess().getMappingCallCSParserRuleCall_1()); 
     }
-    this_MappingLoopCS_1=ruleMappingLoopCS
+    this_MappingCallCS_1=ruleMappingCallCS
     { 
-        $current = $this_MappingLoopCS_1.current; 
+        $current = $this_MappingCallCS_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        newCompositeNode(grammarAccess.getMappingStatementCSAccess().getMappingLoopCSParserRuleCall_2()); 
+    }
+    this_MappingLoopCS_2=ruleMappingLoopCS
+    { 
+        $current = $this_MappingLoopCS_2.current; 
         afterParserOrEnumRuleCall();
     }
 )
