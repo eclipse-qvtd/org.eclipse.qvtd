@@ -14,7 +14,8 @@
         eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
         containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="connectionVariable" lowerBound="1"
-        eType="#//CGConnectionVariable" resolveProxies="false"/>
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGVariable"
+        resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGConnectionVariable" eSuperTypes="#//CGGuardVariable"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGEcorePropertyAssignment" eSuperTypes="#//CGPropertyAssignment">
