@@ -929,7 +929,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		initEClass(cgConnectionAssignmentEClass, CGConnectionAssignment.class, "CGConnectionAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGConnectionAssignment_MappingExp(), this.getCGMappingExp(), this.getCGMappingExp_ConnectionAssignments(), "mappingExp", null, 1, 1, CGConnectionAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGConnectionAssignment_InitValue(), theCGModelPackage.getCGValuedElement(), null, "initValue", null, 1, 1, CGConnectionAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCGConnectionAssignment_ConnectionVariable(), this.getCGConnectionVariable(), null, "connectionVariable", null, 1, 1, CGConnectionAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGConnectionAssignment_ConnectionVariable(), theCGModelPackage.getCGVariable(), null, "connectionVariable", null, 1, 1, CGConnectionAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgConnectionVariableEClass, CGConnectionVariable.class, "CGConnectionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

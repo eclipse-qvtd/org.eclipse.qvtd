@@ -24,10 +24,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
@@ -66,7 +66,7 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	 * @generated
 	 * @ordered
 	 */
-	protected CGConnectionVariable connectionVariable;
+	protected CGVariable connectionVariable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -181,7 +181,7 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	 * @generated
 	 */
 	@Override
-	public CGConnectionVariable getConnectionVariable() {
+	public CGVariable getConnectionVariable() {
 		return connectionVariable;
 	}
 
@@ -191,8 +191,8 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	 * @generated
 	 */
 	@Override
-	public void setConnectionVariable(CGConnectionVariable newConnectionVariable) {
-		CGConnectionVariable oldConnectionVariable = connectionVariable;
+	public void setConnectionVariable(CGVariable newConnectionVariable) {
+		CGVariable oldConnectionVariable = connectionVariable;
 		connectionVariable = newConnectionVariable;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE, oldConnectionVariable, connectionVariable));
@@ -277,7 +277,7 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 				setInitValue((CGValuedElement)newValue);
 				return;
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE:
-				setConnectionVariable((CGConnectionVariable)newValue);
+				setConnectionVariable((CGVariable)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -298,7 +298,7 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 				setInitValue((CGValuedElement)null);
 				return;
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE:
-				setConnectionVariable((CGConnectionVariable)null);
+				setConnectionVariable((CGVariable)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 
 /**
  * <!-- begin-user-doc -->
@@ -98,12 +99,12 @@ public interface CGConnectionAssignment extends CGValuedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Connection Variable</em>' reference.
-	 * @see #setConnectionVariable(CGConnectionVariable)
+	 * @see #setConnectionVariable(CGVariable)
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGConnectionAssignment_ConnectionVariable()
 	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
-	CGConnectionVariable getConnectionVariable();
+	CGVariable getConnectionVariable();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getConnectionVariable <em>Connection Variable</em>}' reference.
@@ -113,6 +114,6 @@ public interface CGConnectionAssignment extends CGValuedElement {
 	 * @see #getConnectionVariable()
 	 * @generated
 	 */
-	void setConnectionVariable(CGConnectionVariable value);
+	void setConnectionVariable(CGVariable value);
 
 } // CGConnectionAssignment
