@@ -88,6 +88,18 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case QVTimperativeCSPackage.CONNECTION_STATEMENT_CS: {
+				ConnectionStatementCS connectionStatementCS = (ConnectionStatementCS)theEObject;
+				T result = caseConnectionStatementCS(connectionStatementCS);
+				if (result == null) result = caseMappingStatementCS(connectionStatementCS);
+				if (result == null) result = caseModelElementCS(connectionStatementCS);
+				if (result == null) result = casePivotableElementCS(connectionStatementCS);
+				if (result == null) result = caseElementCS(connectionStatementCS);
+				if (result == null) result = casePivotable(connectionStatementCS);
+				if (result == null) result = caseVisitableCS(connectionStatementCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativeCSPackage.IMPERATIVE_DOMAIN_CS: {
 				ImperativeDomainCS imperativeDomainCS = (ImperativeDomainCS)theEObject;
 				T result = caseImperativeDomainCS(imperativeDomainCS);
@@ -205,6 +217,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Connection Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Connection Statement CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConnectionStatementCS(ConnectionStatementCS object) {
+		return null;
 	}
 
 	/**

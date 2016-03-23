@@ -89,6 +89,10 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	protected QVTimperativeCSSwitch<@Nullable Adapter> modelSwitch =
 		new QVTimperativeCSSwitch<@Nullable Adapter>() {
 			@Override
+			public Adapter caseConnectionStatementCS(ConnectionStatementCS object) {
+				return createConnectionStatementCSAdapter();
+			}
+			@Override
 			public Adapter caseImperativeDomainCS(ImperativeDomainCS object) {
 				return createImperativeDomainCSAdapter();
 			}
@@ -203,6 +207,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS <em>Connection Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS
+	 * @generated
+	 */
+	public Adapter createConnectionStatementCSAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS <em>Mapping CS</em>}'.

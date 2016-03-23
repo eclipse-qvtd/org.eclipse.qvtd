@@ -40,6 +40,11 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 	}	
 
 	@Override
+	public R visitConnectionStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ConnectionStatementCS object) {
+		return visitMappingStatementCS(object);
+	}
+
+	@Override
 	public R visitImperativeDomainCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ImperativeDomainCS object) {
 		return visitDomainCS(object);
 	}

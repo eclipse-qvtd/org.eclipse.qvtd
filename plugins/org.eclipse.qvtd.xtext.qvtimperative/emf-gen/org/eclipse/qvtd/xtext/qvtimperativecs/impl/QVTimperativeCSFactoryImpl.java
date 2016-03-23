@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.xtext.qvtimperativecs.*;
 
 /**
@@ -61,6 +62,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTimperativeCSPackage.CONNECTION_STATEMENT_CS: return createConnectionStatementCS();
 			case QVTimperativeCSPackage.IMPERATIVE_DOMAIN_CS: return createImperativeDomainCS();
 			case QVTimperativeCSPackage.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS: return createImperativePredicateOrAssignmentCS();
 			case QVTimperativeCSPackage.MAPPING_CS: return createMappingCS();
@@ -80,7 +82,18 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public MappingCS createMappingCS() {
+	public @NonNull ConnectionStatementCS createConnectionStatementCS() {
+		ConnectionStatementCSImpl connectionStatementCS = new ConnectionStatementCSImpl();
+		return connectionStatementCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull MappingCS createMappingCS() {
 		MappingCSImpl mappingCS = new MappingCSImpl();
 		return mappingCS;
 	}
@@ -91,7 +104,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public MappingCallBindingCS createMappingCallBindingCS() {
+	public @NonNull MappingCallBindingCS createMappingCallBindingCS() {
 		MappingCallBindingCSImpl mappingCallBindingCS = new MappingCallBindingCSImpl();
 		return mappingCallBindingCS;
 	}
@@ -102,7 +115,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public MappingCallCS createMappingCallCS() {
+	public @NonNull MappingCallCS createMappingCallCS() {
 		MappingCallCSImpl mappingCallCS = new MappingCallCSImpl();
 		return mappingCallCS;
 	}
@@ -113,7 +126,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public MappingLoopCS createMappingLoopCS() {
+	public @NonNull MappingLoopCS createMappingLoopCS() {
 		MappingLoopCSImpl mappingLoopCS = new MappingLoopCSImpl();
 		return mappingLoopCS;
 	}
@@ -124,7 +137,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public MappingSequenceCS createMappingSequenceCS() {
+	public @NonNull MappingSequenceCS createMappingSequenceCS() {
 		MappingSequenceCSImpl mappingSequenceCS = new MappingSequenceCSImpl();
 		return mappingSequenceCS;
 	}
@@ -135,7 +148,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public TopLevelCS createTopLevelCS() {
+	public @NonNull TopLevelCS createTopLevelCS() {
 		TopLevelCSImpl topLevelCS = new TopLevelCSImpl();
 		return topLevelCS;
 	}
@@ -146,7 +159,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public ImperativeDomainCS createImperativeDomainCS() {
+	public @NonNull ImperativeDomainCS createImperativeDomainCS() {
 		ImperativeDomainCSImpl imperativeDomainCS = new ImperativeDomainCSImpl();
 		return imperativeDomainCS;
 	}
@@ -157,7 +170,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public ImperativePredicateOrAssignmentCS createImperativePredicateOrAssignmentCS() {
+	public @NonNull ImperativePredicateOrAssignmentCS createImperativePredicateOrAssignmentCS() {
 		ImperativePredicateOrAssignmentCSImpl imperativePredicateOrAssignmentCS = new ImperativePredicateOrAssignmentCSImpl();
 		return imperativePredicateOrAssignmentCS;
 	}

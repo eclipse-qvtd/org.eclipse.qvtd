@@ -20,6 +20,7 @@ import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -39,6 +40,13 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
  * @generated
  */
 public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimperativeCSPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass connectionStatementCSEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -166,6 +174,36 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativeCSPackage.eNS_URI, theQVTimperativeCSPackage);
 		return theQVTimperativeCSPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getConnectionStatementCS() {
+		return connectionStatementCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConnectionStatementCS_OwnedExpression() {
+		return (EReference)connectionStatementCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConnectionStatementCS_TargetVariable() {
+		return (EReference)connectionStatementCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -487,6 +525,10 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		isCreated = true;
 
 		// Create classes and their features
+		connectionStatementCSEClass = createEClass(CONNECTION_STATEMENT_CS);
+		createEReference(connectionStatementCSEClass, CONNECTION_STATEMENT_CS__OWNED_EXPRESSION);
+		createEReference(connectionStatementCSEClass, CONNECTION_STATEMENT_CS__TARGET_VARIABLE);
+
 		imperativeDomainCSEClass = createEClass(IMPERATIVE_DOMAIN_CS);
 		createEReference(imperativeDomainCSEClass, IMPERATIVE_DOMAIN_CS__CHECKED_PROPERTIES);
 		createEReference(imperativeDomainCSEClass, IMPERATIVE_DOMAIN_CS__ENFORCED_PROPERTIES);
@@ -550,10 +592,10 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		QVTcoreBaseCSPackage theQVTcoreBaseCSPackage = (QVTcoreBaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTcoreBaseCSPackage.eNS_URI);
-		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
 		EssentialOCLCSPackage theEssentialOCLCSPackage = (EssentialOCLCSPackage)EPackage.Registry.INSTANCE.getEPackage(EssentialOCLCSPackage.eNS_URI);
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
+		QVTcoreBaseCSPackage theQVTcoreBaseCSPackage = (QVTcoreBaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTcoreBaseCSPackage.eNS_URI);
+		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
 		QVTimperativePackage theQVTimperativePackage = (QVTimperativePackage)EPackage.Registry.INSTANCE.getEPackage(QVTimperativePackage.eNS_URI);
 
 		// Create type parameters
@@ -561,6 +603,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		connectionStatementCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		imperativeDomainCSEClass.getESuperTypes().add(theQVTcoreBaseCSPackage.getDomainCS());
 		imperativePredicateOrAssignmentCSEClass.getESuperTypes().add(theQVTcoreBaseCSPackage.getPredicateOrAssignmentCS());
 		mappingCSEClass.getESuperTypes().add(theQVTcoreBaseCSPackage.getAbstractMappingCS());
@@ -572,6 +615,10 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		topLevelCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(connectionStatementCSEClass, ConnectionStatementCS.class, "ConnectionStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConnectionStatementCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, ConnectionStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConnectionStatementCS_TargetVariable(), thePivotPackage.getVariable(), null, "targetVariable", null, 1, 1, ConnectionStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(imperativeDomainCSEClass, ImperativeDomainCS.class, "ImperativeDomainCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getImperativeDomainCS_CheckedProperties(), theBaseCSPackage.getPathNameCS(), null, "checkedProperties", null, 0, -1, ImperativeDomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getImperativeDomainCS_EnforcedProperties(), theBaseCSPackage.getPathNameCS(), null, "enforcedProperties", null, 0, -1, ImperativeDomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

@@ -15,6 +15,10 @@
   <foreignModel>QVTimperativeCS.ecore</foreignModel>
   <genPackages prefix="QVTimperativeCS" basePackage="org.eclipse.qvtd.xtext" disposableProviderFactory="true"
       fileExtensions="qvtics" ecorePackage="QVTimperativeCS.ecore#/">
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//ConnectionStatementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ConnectionStatementCS/ownedExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ConnectionStatementCS/targetVariable"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//ImperativeDomainCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ImperativeDomainCS/checkedProperties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ImperativeDomainCS/enforcedProperties"/>

@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,13 +31,22 @@ public interface QVTimperativeCSFactory extends EFactory {
 	QVTimperativeCSFactory eINSTANCE = org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Connection Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Connection Statement CS</em>'.
+	 * @generated
+	 */
+	@NonNull ConnectionStatementCS createConnectionStatementCS();
+
+	/**
 	 * Returns a new object of class '<em>Mapping CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Mapping CS</em>'.
 	 * @generated
 	 */
-	MappingCS createMappingCS();
+	@NonNull MappingCS createMappingCS();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Call Binding CS</em>'.
@@ -45,7 +55,7 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @return a new object of class '<em>Mapping Call Binding CS</em>'.
 	 * @generated
 	 */
-	MappingCallBindingCS createMappingCallBindingCS();
+	@NonNull MappingCallBindingCS createMappingCallBindingCS();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Call CS</em>'.
@@ -54,7 +64,7 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @return a new object of class '<em>Mapping Call CS</em>'.
 	 * @generated
 	 */
-	MappingCallCS createMappingCallCS();
+	@NonNull MappingCallCS createMappingCallCS();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Loop CS</em>'.
@@ -63,7 +73,7 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @return a new object of class '<em>Mapping Loop CS</em>'.
 	 * @generated
 	 */
-	MappingLoopCS createMappingLoopCS();
+	@NonNull MappingLoopCS createMappingLoopCS();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Sequence CS</em>'.
@@ -72,7 +82,7 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @return a new object of class '<em>Mapping Sequence CS</em>'.
 	 * @generated
 	 */
-	MappingSequenceCS createMappingSequenceCS();
+	@NonNull MappingSequenceCS createMappingSequenceCS();
 
 	/**
 	 * Returns a new object of class '<em>Top Level CS</em>'.
@@ -81,7 +91,7 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @return a new object of class '<em>Top Level CS</em>'.
 	 * @generated
 	 */
-	TopLevelCS createTopLevelCS();
+	@NonNull TopLevelCS createTopLevelCS();
 
 	/**
 	 * Returns a new object of class '<em>Imperative Domain CS</em>'.
@@ -90,7 +100,7 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @return a new object of class '<em>Imperative Domain CS</em>'.
 	 * @generated
 	 */
-	ImperativeDomainCS createImperativeDomainCS();
+	@NonNull ImperativeDomainCS createImperativeDomainCS();
 
 	/**
 	 * Returns a new object of class '<em>Imperative Predicate Or Assignment CS</em>'.
@@ -99,7 +109,7 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @return a new object of class '<em>Imperative Predicate Or Assignment CS</em>'.
 	 * @generated
 	 */
-	ImperativePredicateOrAssignmentCS createImperativePredicateOrAssignmentCS();
+	@NonNull ImperativePredicateOrAssignmentCS createImperativePredicateOrAssignmentCS();
 
 	/**
 	 * Returns the package supported by this factory.
