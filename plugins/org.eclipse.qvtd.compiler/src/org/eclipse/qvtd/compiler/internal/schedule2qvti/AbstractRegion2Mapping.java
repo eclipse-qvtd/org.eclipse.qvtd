@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -45,14 +44,14 @@ import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.pivot.utilities.StringUtil;
-import org.eclipse.qvtd.compiler.internal.scheduler.Connection;
 import org.eclipse.qvtd.compiler.internal.scheduler.Node;
+import org.eclipse.qvtd.compiler.internal.scheduler.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.scheduler.Region;
 import org.eclipse.qvtd.compiler.internal.scheduler.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -66,30 +65,30 @@ public abstract class AbstractRegion2Mapping
 	/**
 	 * Mapping from QVTp expression to Schedule Node.
 	 */
-	private final @NonNull Map<TypedElement, Node> qvtp2node = new HashMap<TypedElement, Node>();
+	private final @NonNull Map<@NonNull TypedElement, @NonNull Node> qvtp2node = new HashMap<@NonNull TypedElement, @NonNull Node>();
 	
 	/**
 	 * Safe name for each node
 	 */
-	private final @NonNull Map<Node, String> node2name = new HashMap<Node, String>();
+	private final @NonNull Map<@NonNull Node, @NonNull String> node2name = new HashMap<@NonNull Node, @NonNull String>();
 	
 	/**
 	 * Safe name for each node
 	 */
-	private final @NonNull Set<String> names;
+	private final @NonNull Set<@NonNull String> names;
 
 	/**
 	 * The QVTi variable for each connection.
 	 */
-	protected Map<Connection, Variable> connection2variable = null;
+	protected Map<@NonNull NodeConnection, @NonNull Variable> connection2variable = null;
 
 	public AbstractRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		this.visitor = visitor;
 		this.region = region;
-		String name = region.getName();
+		String name = region.getSymbolName();
 		assert name != null;
 		this.mapping = QVTimperativeUtil.createMapping(name);
-		this.names = new HashSet<String>(visitor.getReservedNames());
+		this.names = new HashSet<@NonNull String>(visitor.getReservedNames());
 		for (Node node : region.getNodes()) {
 			for (TypedElement typedElement : node.getTypedElements()) {
 				Node oldNode = qvtp2node.put(typedElement, node);
@@ -123,7 +122,7 @@ public abstract class AbstractRegion2Mapping
 		mapping.getBottomPattern().getAssignment().add(connectionAssignment);
 	}
 
-	protected @NonNull ConnectionVariable createConnectionVariable(@NonNull Connection connection) {
+	protected @NonNull ConnectionVariable createConnectionVariable(@NonNull NodeConnection connection) {
 		Type asType = getConnectionSourcesType(connection);
 		String name = connection.getName();
 		assert name != null;
@@ -140,10 +139,10 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	protected void createConnectionGuardVariables() {
-		List<Connection> intermediateConnections = region.getIntermediateConnections();
+		List<@NonNull NodeConnection> intermediateConnections = region.getIntermediateConnections();
 		if (intermediateConnections.size() > 0) {
-			connection2variable = new HashMap<Connection, Variable>();
-			for (@SuppressWarnings("null")@NonNull Connection connection : intermediateConnections) {
+			connection2variable = new HashMap<@NonNull NodeConnection, @NonNull Variable>();
+			for (@NonNull NodeConnection connection : intermediateConnections) {
 				ConnectionVariable connectionVariable = createConnectionVariable(connection);
 				connection2variable.put(connection, connectionVariable);
 				mapping.getGuardPattern().getVariable().add(connectionVariable);
@@ -226,45 +225,29 @@ public abstract class AbstractRegion2Mapping
 		return asTypeExp;
 	}
 
-
-	protected @NonNull Variable createVariable(@NonNull Connection connection) {
-		IdResolver idResolver = visitor.getEnvironmentFactory().getIdResolver();
-		Type asType = connection.getType(idResolver);
-		assert asType != null;
-		String name = connection.getName();
-		assert name != null;
-		return PivotUtil.createVariable(getSafeName(name), asType, true, null);
-	}
-
 	protected @NonNull Variable createVariable(@NonNull Node node) {
 		Type asType = node.getClassDatumAnalysis().getCompleteClass().getPrimaryClass();
 		assert asType != null;
 		return PivotUtil.createVariable(getSafeName(node), asType, true, null);
 	}
 
-	protected @NonNull Type getConnectionSourcesType(@NonNull Connection connection) {
-		IdResolver idResolver = visitor.getEnvironmentFactory().getIdResolver();
-		Type commonType = null;
-		for (@NonNull Node node : connection.getSources()) {
-			Type nodeType = node.getCompleteClass().getPrimaryClass();
-//			System.out.println("  nodeType " + nodeType);
-			CompleteEnvironment environment = idResolver.getEnvironment();
-			if (!(nodeType instanceof CollectionType)) {		// RealizedVariable accumulated on Connection
-				nodeType = /*isOrdered() ? environment.getOrderedSetType(nodeType, true, null, null) :*/ environment.getSetType(nodeType, true, null, null);
-			}
-			if (commonType == null) {
-				commonType = nodeType;
-			}
-			else if (nodeType != commonType) {
-				commonType = commonType.getCommonType(idResolver, nodeType);
-			}
+	protected int getCollectionDepth(@NonNull Type type) {
+		if (type instanceof CollectionType) {
+			Type elementType = ((CollectionType)type).getElementType();
+			assert elementType != null;
+			return getCollectionDepth(elementType) + 1;
 		}
-//		System.out.println("=> " + commonType);
-		assert commonType != null;
-		return commonType;
+		return 0;
 	}
 
-	public @NonNull Variable getConnectionVariable(@NonNull Connection connection) {
+	protected @NonNull Type getConnectionSourcesType(@NonNull NodeConnection connection) {
+		IdResolver idResolver = visitor.getEnvironmentFactory().getIdResolver();
+		Type asType = connection.getSourcesType(idResolver);
+		assert asType != null;
+		return asType;
+	}
+
+	public @NonNull Variable getConnectionVariable(@NonNull NodeConnection connection) {
 		assert connection2variable != null;
 		Variable connectionVariable = connection2variable.get(connection);
 		assert connectionVariable != null;
@@ -275,7 +258,7 @@ public abstract class AbstractRegion2Mapping
 //		return AbstractRegion.EarliestRegionComparator.sort(region.getCalledRegions());
 //	}
 
-	public abstract @NonNull List<Node> getGuardNodes();
+	public abstract @NonNull List<@NonNull Node> getGuardNodes();
 
 	public abstract @NonNull Variable getGuardVariable(@NonNull Node node);
 
@@ -350,7 +333,7 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	protected @NonNull String getSafeName(@NonNull String rawName) {
-		String stem = StringUtil.convertToOCLString(rawName);
+		String stem = rawName; //StringUtil.convertToOCLString(rawName);
 		String name = stem;
 		assert name != null;
 		int suffix = 1;
@@ -388,5 +371,9 @@ public abstract class AbstractRegion2Mapping
 	@Override
 	public String toString() {
 		return mapping.toString();
+	}
+
+	public @NonNull MappingCall createMappingCall(@NonNull List<@NonNull MappingCallBinding> mappingCallBindings) {
+		return QVTimperativeUtil.createMappingCall(getMapping(), mappingCallBindings);
 	}
 }

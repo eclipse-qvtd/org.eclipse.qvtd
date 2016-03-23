@@ -41,6 +41,7 @@ import org.eclipse.ocl.pivot.values.Unlimited;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.ClassRelationships;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
+import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -58,16 +59,18 @@ import org.eclipse.qvtd.pivot.schedule.Schedule;
 
 public abstract class SchedulerConstants
 {
-	public static final @NonNull List<Connection> EMPTY_CONNECTION_LIST = Collections.emptyList();
-	public static final @NonNull List<Edge> EMPTY_EDGE_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull Connection> EMPTY_CONNECTION_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull EdgeConnection> EMPTY_EDGE_CONNECTION_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull Edge> EMPTY_EDGE_LIST = Collections.emptyList();
 	//public static final @NonNull List<ExpressionEdge> EMPTY_EXPRESSION_EDGE_LIST = Collections.emptyList();
-	public static final @NonNull Set<MappingRegion> EMPTY_MAPPING_REGION_SET = Collections.emptySet();
-	public static final @NonNull List<NavigationEdge> EMPTY_NAVIGATION_EDGE_LIST = Collections.emptyList();
-	public static final @NonNull List<Node> EMPTY_NODE_LIST = Collections.emptyList();
-	public static final @NonNull List<Region> EMPTY_REGION_LIST = Collections.emptyList();
-	public static final @NonNull List<SimpleEdge> EMPTY_SIMPLE_EDGE_LIST = Collections.emptyList();
-	public static final @NonNull List<SimpleNode> EMPTY_SIMPLE_NODE_LIST = Collections.emptyList();
-	public static final @NonNull List<TypedElement> EMPTY_TYPED_ELEMENT_LIST = Collections.emptyList();
+	public static final @NonNull Set<@NonNull SimpleMappingRegion> EMPTY_MAPPING_REGION_SET = Collections.emptySet();
+	public static final @NonNull List<@NonNull NavigationEdge> EMPTY_NAVIGATION_EDGE_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull Node> EMPTY_NODE_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull NodeConnection> EMPTY_NODE_CONNECTION_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull Region> EMPTY_REGION_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull SimpleEdge> EMPTY_SIMPLE_EDGE_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull SimpleNode> EMPTY_SIMPLE_NODE_LIST = Collections.emptyList();
+	public static final @NonNull List<@NonNull TypedElement> EMPTY_TYPED_ELEMENT_LIST = Collections.emptyList();
 
 	public static @NonNull String getMultiplicity(@NonNull TypedElement typedElement) {
 		StringBuilder s = new StringBuilder();
@@ -95,6 +98,7 @@ public abstract class SchedulerConstants
 	private final @NonNull EnvironmentFactory environmentFactory;
 	private final @NonNull Transformation transformation;
 
+	private final @NonNull OperationId collectionSelectByKindId;
 	private final @NonNull OperationId oclAnyEqualsId;
 	private final @NonNull OperationId oclAnyOclAsSetId;
 	private final @NonNull OperationId oclAnyOclAsTypeId;
@@ -140,10 +144,9 @@ public abstract class SchedulerConstants
 	private @Nullable DependencyAnalyzer dependencyAnalyzer = null;
 	
 	/**
-	 * Map reserving a unique symbol name per region.
+	 * Map reserving a unique symbol name per region or connection.
 	 */
-	private @NonNull Map<@NonNull String, @NonNull Region> symbolName2region = new HashMap<@NonNull String, @NonNull Region>();
-
+	private @NonNull SymbolNameReservation symbolNameReservation = new SymbolNameReservation();
 
 	public SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule dependencyGraph, @NonNull QVTp2QVTg qvtp2qvtg) {
 		this.environmentFactory = environmentFactory;
@@ -175,6 +178,9 @@ public abstract class SchedulerConstants
 		Operation operation5 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "oclAsSet");
 		assert operation5 != null;
 		oclAnyOclAsSetId = operation5.getOperationId();
+		Operation operation6 = NameUtil.getNameable(standardLibrary.getCollectionType().getOwnedOperations(), "selectByKind");
+		assert operation6 != null;
+		collectionSelectByKindId = operation6.getOperationId();
 		oclVoidClassDatumAnalysis = getClassDatumAnalysis(standardLibrary.getOclVoidType(), domainAnalysis.getPrimitiveTypeModel());
 		//
 		Property candidateOclContainerProperty = NameUtil.getNameable(oclElementType.getOwnedProperties(), "oclContainer");
@@ -287,6 +293,10 @@ public abstract class SchedulerConstants
 //		return classDatum2classDatumAnalysis.keySet();
 //	}
 
+	public @NonNull OperationId getCollectionSelectByKindId() {
+		return collectionSelectByKindId;
+	}
+
 	public @NonNull DependencyAnalyzer getDependencyAnalyzer() {
 		@Nullable
 		DependencyAnalyzer dependencyAnalyzer2 = dependencyAnalyzer;
@@ -362,6 +372,10 @@ public abstract class SchedulerConstants
 		return transformation;
 	}
 
+	public @NonNull SymbolNameReservation getSymbolNameReservation() {
+		return symbolNameReservation;
+	}
+
 	/**
 	 * Return true if a mapping may assign this property in an input model.
 	 */
@@ -378,24 +392,8 @@ public abstract class SchedulerConstants
 		return !usage.isOutput();
 	}
 
-	public @NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Region region) {
-		String symbolName = symbolNameBuilder.toString();
-		Region oldRegion = symbolName2region.get(symbolName);
-		if (oldRegion == region) {
-			return symbolName;
-		}
-		if (oldRegion == null) {
-			symbolName2region.put(symbolName, region);
-			return symbolName;
-		}
-		for (int i = 1; true; i++) {
-			String newSymbolName = symbolName + "_" + i;
-			oldRegion = symbolName2region.get(newSymbolName);
-			if (oldRegion == null) {
-				symbolName2region.put(newSymbolName, region);
-				return newSymbolName;
-			}
-		}
+	public @NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Symbolable symbolable) {
+		return symbolNameReservation.reserveSymbolName(symbolNameBuilder, symbolable);
 	}
 
 	public void writeCallDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
@@ -471,6 +469,11 @@ public abstract class SchedulerConstants
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		for (@NonNull Region nestedRegion : region.getRegions()) {
+			if (nestedRegion instanceof ScheduledRegion) {
+				writeRegionDOTfile((@NonNull ScheduledRegion)nestedRegion, suffix);
+			}
+		}
 	}
 
 	public void writeRegionGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
@@ -485,6 +488,11 @@ public abstract class SchedulerConstants
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		for (@NonNull Region nestedRegion : region.getRegions()) {
+			if (nestedRegion instanceof ScheduledRegion) {
+				writeRegionGraphMLfile((@NonNull ScheduledRegion)nestedRegion, suffix);
+			}
 		}
 	}
 }

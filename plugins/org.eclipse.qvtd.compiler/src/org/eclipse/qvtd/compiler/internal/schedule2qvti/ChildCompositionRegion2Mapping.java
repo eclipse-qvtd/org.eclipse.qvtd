@@ -26,11 +26,12 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.scheduler.ChildCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.scheduler.ClassDatumAnalysis;
-import org.eclipse.qvtd.compiler.internal.scheduler.Connection;
 import org.eclipse.qvtd.compiler.internal.scheduler.Edge;
 import org.eclipse.qvtd.compiler.internal.scheduler.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.scheduler.Node;
+import org.eclipse.qvtd.compiler.internal.scheduler.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.scheduler.Region;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
@@ -42,7 +43,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
-public class CompositionRegion2Mapping extends AbstractRegion2Mapping
+public class ChildCompositionRegion2Mapping extends AbstractRegion2Mapping
 {	
 	/**
 	 * The one and only head node.
@@ -64,7 +65,7 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	private final @NonNull Map<Node, Variable> node2variable = new HashMap<Node, Variable>();
 
-	public CompositionRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
+	public ChildCompositionRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull ChildCompositionRegion region) {
 		super(visitor, region);
 		//
 		//	Create the domain
@@ -127,7 +128,7 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 			Mapping calledMapping = calledRegion2Mapping.getMapping();
 			VariableExp loopVariableExpression = PivotUtil.createVariableExp(loopVariable);
 			Variable guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
-			List<MappingCallBinding> mappingCallBindings = new ArrayList<MappingCallBinding>();
+			List<@NonNull MappingCallBinding> mappingCallBindings = new ArrayList<@NonNull MappingCallBinding>();
 			MappingCallBinding mappingCallBinding = QVTimperativeUtil.createMappingCallBinding(guardVariable, loopVariableExpression);
 			setLegacyIsPolled(calledMapping, mappingCallBinding);
 			mappingCallBindings.add(mappingCallBinding);
@@ -142,15 +143,15 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 				setLegacyIsPolled(calledMapping, mappingCallBinding);
 				mappingCallBindings.add(mappingCallBinding);
 			}
-			if (connection2variable != null) {
-				for (@SuppressWarnings("null")@NonNull Variable connectionVariable : connection2variable.values()) {
+			if (calledRegion2Mapping.connection2variable != null) {				// FIXME Use shared more accurate calling code
+				for (@NonNull Variable connectionVariable : calledRegion2Mapping.connection2variable.values()) {
 					OCLExpression connectionVariableExpression = PivotUtil.createVariableExp(connectionVariable);
 					mappingCallBinding = QVTimperativeUtil.createMappingCallBinding(connectionVariable, connectionVariableExpression);
 					setLegacyIsPolled(calledMapping, mappingCallBinding);
 					mappingCallBindings.add(mappingCallBinding);
 				}
 			}
-			MappingCall mappingCall = QVTimperativeUtil.createMappingCall(calledMapping, mappingCallBindings);
+			MappingCall mappingCall = calledRegion2Mapping.createMappingCall(mappingCallBindings);
 			return QVTimperativeUtil.createMappingLoop(sourceExpression, loopVariable, mappingCall);
 	}
 
@@ -179,8 +180,8 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 		//	Create accumulation assignments for connections.
 		//
 		if (connection2variable != null) {
-			for (Connection connection : connection2variable.keySet()) {
-				ConnectionVariable connectionVariable = (ConnectionVariable) connection2variable.get(connection);
+			for (NodeConnection connection : connection2variable.keySet()) {
+				ConnectionVariable connectionVariable = (ConnectionVariable)connection2variable.get(connection);
 				assert connectionVariable != null;
 				Node resultNode = connection.getSource(region);
 				OCLExpression sourceExpression = createSelectByKind(resultNode);
@@ -191,11 +192,11 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 		//	Create a loop for each distinct consumer of the children.
 		//
 		MappingStatement mappingStatement = null;
-		for (@SuppressWarnings("null")@NonNull Region childRegion : region.getCallableChildren()) {
+		for (@NonNull Region childRegion : region.getCallableChildren()) {
 				Region calledRegion = childRegion;
 				AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
-				for (@SuppressWarnings("null")@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
-					for (Node callingNode : calledGuardNode.getPassedBindingSources()) {
+				for (@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
+					for (@NonNull Node callingNode : calledGuardNode.getPassedBindingSources()) {
 						if (callingNode.getRegion() == region) {
 							MappingStatement mappingLoop = createChildLoop(childrenVariable, callingNode, calledGuardNode);
 							mappingStatement = QVTimperativeUtil.addMappingStatement(mappingStatement, mappingLoop);
@@ -207,7 +208,7 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 		//
 		//	Create a loop for each distinct child recursion.
 		//
-		for (@SuppressWarnings("null")@NonNull Edge recursionEdge : region.getRecursionEdges()) {
+		for (@NonNull Edge recursionEdge : region.getRecursionEdges()) {
 			Node sourceNode = recursionEdge.getSource();
 			Node targetNode = recursionEdge.getTarget();
 			assert targetNode == headNode;		// FIXME contra-Recursion
@@ -270,7 +271,7 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	@Override
-	public @NonNull List<Node> getGuardNodes() {
+	public @NonNull List<@NonNull Node> getGuardNodes() {
 		return Collections.singletonList(getHeadNode());
 	}
 

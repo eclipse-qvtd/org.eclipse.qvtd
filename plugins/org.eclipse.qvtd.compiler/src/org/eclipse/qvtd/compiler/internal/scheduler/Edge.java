@@ -59,7 +59,7 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable
 	@Override
 	@NonNull Node getSource();
 
-	@NonNull Iterable<SimpleEdge> getSimpleEdges();
+	@NonNull Iterable<@NonNull SimpleEdge> getSimpleEdges();
 
 	/**
 	 * Return the target Node.

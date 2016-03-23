@@ -26,182 +26,34 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 public class Region2Depth
 {
-/*	private final @NonNull Comparator<Region> depthComparator = new Comparator<Region>()			// Deepest first
-	{
-		@Override
-		public int compare(Region o1, Region o2) {
-			assert o1 != null;
-			assert o2 != null;
-			return getRegionDepth(o2) - getRegionDepth(o1);
-		}
-	}; */
-
 	/**
 	 * The lazily computed depth of each region; 0 at root, +1 for each region invocation.
 	 */
-	private @NonNull Map<Region, Integer> region2depth = new HashMap<Region, Integer>();
+	private @NonNull Map<@NonNull Region, @Nullable Integer> region2depth = new HashMap<@NonNull Region, @Nullable Integer>();
 
 	/**
 	 * The lazily computed parents (invokers) of each region.
 	 */
-	private @NonNull Map<Region, List<Region>> region2parents = new HashMap<Region, List<Region>>();
+	private @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> region2parents = new HashMap<@NonNull Region, @NonNull List<@NonNull Region>>();
 
 	/**
 	 * The lazily computed children (invoked) of each region.
 	 */
-	private @NonNull Map<Region, List<Region>> region2children = new HashMap<Region, List<Region>>();
+	private @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> region2children = new HashMap<@NonNull Region, @NonNull List<@NonNull Region>>();
 
 	/**
-	 * The lazily computed parents closure (invokers) of each region.
+	 * The lazily computed parents closure (invokers) of each region all of whose depth is less than that of the region.
+	 * I.e. for regions in a cycle the ancestors depends on and is consistent with the choice of the shallowest node
+	 * in the cycle.
 	 */
-	private @NonNull Map<Region, Set<Region>> region2ancestors = new HashMap<Region, Set<Region>>();
-
-	/**
-	 * The lazily computed depth of each edge; 0 within root, +1 for each composition/to-join/from-joint/binding.
-	 * NB the edge depth may be up to three times the region depth.
-	 */
-//	private @NonNull Map<InterRegionEdge, Integer> edge2depth = new HashMap<InterRegionEdge, Integer>();
-
-	/**
-	 * Propagate the source and target of a used binding edge up to an ordering edge in their common region.
-	 *
-	public @NonNull Set<Edge> accumulateOrderingDependency(@NonNull Node sourceNode, @NonNull Node targetNode) {
-		Set<Edge> orderingEdges = new HashSet<Edge>();
-		Region targetRegion = targetNode.getRegion();
-		Region sourceRegion = sourceNode.getRegion();
-		Region commonRegion = getCommonRegion(sourceRegion, targetRegion);
-		if (commonRegion != null) {
-			Iterable<Node> sourceAncestors = commonRegion.getAncestorsOf(sourceNode);			// FIXME caches
-			Iterable<Node> targetAncestors = commonRegion.getAncestorsOf(targetNode);
-			for (@SuppressWarnings("null")@NonNull Node sourceAncestor : sourceAncestors) {
-				for (/*@SuppressWarnings("null")@NonNull* / Node targetAncestor : targetAncestors) {
-					assert targetAncestor != null;
-					if (sourceAncestor != targetAncestor) {
-						if (!targetAncestor.isRealized()) {
-							Edge orderingEdge = null;
-							for (Edge containerEdge : targetAncestor.getContainerEdges()) {
-								if (containerEdge.getTarget() == sourceAncestor) {
-									orderingEdge = containerEdge;
-									break;
-								}
-							}
-							if (orderingEdge == null) {
-								orderingEdge = sourceAncestor.getComposedOrderingEdge(targetAncestor);
-								if ((orderingEdge == null)) {
-									orderingEdge = Edges.COMPOSED_ORDERING.createEdge(commonRegion, sourceAncestor, null, targetAncestor);
-								}
-								orderingEdges.add(orderingEdge);
-							}
-						}
-					}
-					else {
-						int commonChildDepth = region2depths.getDepth(commonRegion)+1;
-						Set<Node> allSourceAncestors = new HashSet<Node>();
-						Set<Node> allTargetAncestors = new HashSet<Node>();
-						sourceNode.getAllAncestors(allSourceAncestors);
-						targetNode.getAllAncestors(allTargetAncestors);
-						for (Node sourceSubAncestor : allSourceAncestors) {
-							if (region2depths.getDepth(sourceSubAncestor.getRegion()) == commonChildDepth) {
-								for (Node targetSubAncestor : allTargetAncestors) {
-									if (region2depths.getDepth(targetSubAncestor.getRegion()) == commonChildDepth) {
-										for (List<Node> sourceHeadGroup : sourceSubAncestor.getRegion().getHeadNodeGroups()) {
-											for (Node sourceHead : sourceHeadGroup) {
-												for (List<Node> targetHeadGroup : targetSubAncestor.getRegion().getHeadNodeGroups()) {
-													for (@SuppressWarnings("null")@NonNull Node targetHead : targetHeadGroup) {
-														if (targetHead != sourceHead) {
-															Edge orderingEdge = sourceHead.getConsumedOrderingEdge(targetHead);
-															if (orderingEdge == null) {
-																orderingEdge = Edges.CONSUMED_ORDERING.createEdge(commonRegion, sourceHead, null, targetHead);
-															}
-															orderingEdges.add(orderingEdge);
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		return orderingEdges;
-	} */
+	private @NonNull Map<@NonNull Region, @NonNull Set<@NonNull Region>> region2properAncestors = new HashMap<@NonNull Region, @NonNull Set<@NonNull Region>>();
 	
-	public void addRegion(@NonNull MergedRegion region) {
+	public void addRegion(@NonNull Region region) {
 		region2children.clear();	// FIXME do intelligent update rather than recalculate
 		region2depth.clear();
 		region2parents.clear();
 		Scheduler.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " <reset> : " + region.getName());
 	}
-
-	public @NonNull Set<Region> getAncestorRegions(@NonNull Region childRegion) {
-		Set<Region> ancestorRegions = region2ancestors.get(childRegion);
-		if (ancestorRegions == null) {
-			ancestorRegions = new HashSet<Region>();
-			ancestorRegions.add(childRegion);
-			for (@SuppressWarnings("null")@NonNull Region parentRegion : getParentRegions(childRegion)) {
-				ancestorRegions.addAll(getAncestorRegions(parentRegion));
-			}
-			region2ancestors.put(childRegion, ancestorRegions);
-		}
-		return ancestorRegions;
-	}
-
-	/**
-	 * Return the 1-based index of the childRegion within parentRegion.
-	 * Returns -1 if childRegion is not a child of parentRegion.
-	 * Returns 0 if childRegion is the parentRegion.
-	 *
-	public int getChildIndexOf(@NonNull Region parentRegion, @NonNull Region childRegion) {
-		if (parentRegion == childRegion) {
-			return 0;
-		}
-		Region thisRegion = parentRegion;
-		Region thatRegion = childRegion;
-		if (getRegionDepth(thisRegion) >= getRegionDepth(thatRegion)) {
-			return -1;
-		}
-		Region thatChildRegion = childRegion;
-		while (getRegionDepth(thatRegion) > getRegionDepth(thisRegion)) {
-			thatChildRegion = thatRegion;
-			thatRegion = getMinimumDepthParentRegion(thatRegion);
-			if (thatRegion == null) {
-				return -1;
-			}
-		}
-		return 1 + getChildRegions(parentRegion).indexOf(thatChildRegion);
-	} */
-
-/*	public @NonNull List<Region> getChildRegions(@NonNull Region parentRegion) {
-		List<Region> childRegions = region2children.get(parentRegion);
-		if (childRegions == null) {
-			childRegions = new ArrayList<Region>();
-			for (InterRegionEdge childEdge1 : parentRegion.getChildPassedBindingEdges()) {
-				Node childNode1 = childEdge1.getTarget();
-				if (childNode1.isConnection()) {
-					for (InterRegionEdge childEdge2 : childNode1.getOutgoingPassedBindingEdges()) {
-						Node childNode2 = childEdge2.getTarget();
-						Region childRegion = childNode2.getRegion();
-						if (!childRegions.contains(childRegion)) {
-							childRegions.add(childRegion);
-						}
-					}
-				}
-				else {
-					Region childRegion = childNode1.getRegion();
-					if (!childRegions.contains(childRegion)) {
-						childRegions.add(childRegion);
-					}
-				}
-			}
-			Collections.sort(childRegions, new EarliestRegionComparator());
-			region2children.put(parentRegion, childRegions);
-		}
-		return childRegions;
-	} */
 	
 	/**
 	 * Return the deepest region in the region call tree that is common to firstRegion and secondRegion.
@@ -236,52 +88,13 @@ public class Region2Depth
 	}
 
 	/**
-	 * Return the edge depth as determined by the InterRegionEdge call tree. 0 at root.
-	 *
-	public int getEdgeDepth(@NonNull InterRegionEdge edge) {
-		Integer depth = edge2depth.get(edge);
-		if (depth == null) {
-			if (edge2depth.containsKey(edge)) {
-				Scheduler.EDGE_DEPTH.println( + " <loop> : " + edge);
-				return 0;
-			}
-			edge2depth.put(edge, null);
-			depth = 0;
-			Iterable<InterRegionEdge> parentEdges = getParentEdges(edge);
-			for (@SuppressWarnings("null")@NonNull InterRegionEdge parentEdge : parentEdges) {
-				int parentDepth = getEdgeDepth(parentEdge);
-				if (parentDepth >= depth) {
-					depth = parentDepth+1;
-				}
-			}
-			edge2depth.put(edge, depth);
-			Scheduler.EDGE_DEPTH.println( + " " + depth + " : " + edge);
-		}
-		return depth.intValue();
-	} */
-	
-/*	public @Nullable Region getMaximumDepthParentRegion(@NonNull Region childRegion) {
-		Region maximumDepthParentRegion = null;
-		int maximumDepth = -1;
-		int thisDepth = getRegionDepth(childRegion);
-		for (@SuppressWarnings("null")@NonNull Region parentRegion : getParentRegions(childRegion)) {
-			int parentDepth = getRegionDepth(parentRegion);
-			if ((parentDepth <thisDepth) && ((maximumDepthParentRegion == null) || (parentDepth > maximumDepth))) {
-				maximumDepthParentRegion = parentRegion;
-				maximumDepth = parentDepth;
-			}
-		}
-		return maximumDepthParentRegion;
-	} */
-
-	/**
 	 * Return a/the parent region that is no deeper than any other parent region.
 	 * Returns null at the root.
 	 */
 	public @Nullable Region getMinimumDepthParentRegion(@NonNull Region childRegion) {
 		Region minimumDepthParentRegion = null;
 		int minimumDepth = Integer.MAX_VALUE;
-		for (@SuppressWarnings("null")@NonNull Region parentRegion : getParentRegions(childRegion)) {
+		for (@NonNull Region parentRegion : getParentRegions(childRegion)) {
 			int parentDepth = getRegionDepth(parentRegion);
 			if ((minimumDepthParentRegion == null) || (parentDepth < minimumDepth)) {
 				minimumDepthParentRegion = parentRegion;
@@ -291,21 +104,50 @@ public class Region2Depth
 		return minimumDepthParentRegion;
 	}
 
-	public @NonNull Iterable<Region> getParentRegions(@NonNull Region childRegion) {
-		List<Region> parentRegions = region2parents.get(childRegion);
+	public @NonNull Iterable<@NonNull Region> getParentRegions(@NonNull Region childRegion) {
+		ScheduledRegion childInvokingRegion = childRegion.getInvokingRegion();
+		int childInvokingRegionDepth = childInvokingRegion != null ? getRegionDepth(childInvokingRegion) : 0;
+		List<@NonNull Region> parentRegions = region2parents.get(childRegion);
 		if (parentRegions == null) {
-			parentRegions = new ArrayList<Region>();
-			for (Connection parentConnection : childRegion.getParentPassedConnections()) {
-				for (Node source : parentConnection.getSources()) {
-					Region parentRegion = source.getRegion();
-					if (!parentRegions.contains(parentRegion)) {
-						parentRegions.add(parentRegion);
-					}
+			parentRegions = new ArrayList<@NonNull Region>();
+			for (@NonNull DatumConnection parentConnection : childRegion.getIncomingPassedConnections()) {
+				for (@NonNull Node source : parentConnection.getSourceNodes()) {
+					Region sourceRegion = source.getRegion();
+					ScheduledRegion sourceInvokingRegion = sourceRegion.getInvokingRegion();
+					int sourceInvokingRegionDepth = sourceInvokingRegion != null ? getRegionDepth(sourceInvokingRegion) : 0;
+					Region parentRegion = sourceInvokingRegionDepth < childInvokingRegionDepth ? childInvokingRegion : sourceRegion;
+//					if ((scheduledRegion == null)
+//					 || (parentRegion == scheduledRegion)
+//					 || (parentRegion.getInvokingRegion() == scheduledRegion)) {
+						if ((parentRegion != null) && !parentRegions.contains(parentRegion)) {
+							parentRegions.add(parentRegion);
+						}
+//					}
 				}
+			}
+			if (parentRegions.isEmpty() && (childInvokingRegion != null)) {
+				parentRegions.add(childInvokingRegion);
 			}
 			region2parents.put(childRegion, parentRegions);
 		}
 		return parentRegions;
+	}
+
+	protected @NonNull Set<@NonNull Region> getProperAncestorRegions(@NonNull Region childRegion) {
+		Set<@NonNull Region> properAncestorRegions = region2properAncestors.get(childRegion);
+		if (properAncestorRegions == null) {
+			properAncestorRegions = new HashSet<@NonNull Region>();
+			int childDepth = getRegionDepth(childRegion);
+			for (@NonNull Region parentRegion : getParentRegions(childRegion)) {
+				int parentDepth = getRegionDepth(parentRegion);
+				if (parentDepth < childDepth) {
+					properAncestorRegions.add(parentRegion);
+					properAncestorRegions.addAll(getProperAncestorRegions(parentRegion));
+				}
+			}
+			region2properAncestors.put(childRegion, properAncestorRegions);
+		}
+		return properAncestorRegions;
 	}
 
 	/**
@@ -320,8 +162,8 @@ public class Region2Depth
 			}
 			region2depth.put(region, null);
 			depth = 0;
-			Iterable<Region> parentRegions = getParentRegions(region);
-			for (@SuppressWarnings("null")@NonNull Region callingRegion : parentRegions) {
+			Iterable<@NonNull Region> parentRegions = getParentRegions(region);
+			for (@NonNull Region callingRegion : parentRegions) {
 				int callingDepth = getRegionDepth(callingRegion);
 				if (callingDepth >= depth) {
 					depth = callingDepth+1;
@@ -337,10 +179,10 @@ public class Region2Depth
 	 * Return the edges deterministically ordered and in so far as
 	 * possible respecting ordering edges between the target nodes. 
 	 */
-	public @NonNull <E extends Edge> Iterable<E> getSortedEdges(@NonNull Iterable<E> edges) {
-		Map<Node, E> node2edge = new HashMap<Node, E>();
+	public @NonNull <@NonNull E extends Edge> Iterable<@NonNull E> getSortedEdges(@NonNull Iterable<@NonNull E> edges) {
+		Map<@NonNull Node, @NonNull E> node2edge = new HashMap<@NonNull Node, @NonNull E>();
 //		Map<Node, Node> before2after = new HashMap<Node, Node>();
-		List<Node> orderedNodes = new ArrayList<Node>();
+		List<@NonNull Node> orderedNodes = new ArrayList<@NonNull Node>();
 /*		for (E edge : edges) {
 			Node target = edge.getTarget();
 			Edge oldEdge = node2edge.put(target, edge);
@@ -376,8 +218,8 @@ public class Region2Depth
 				System.out.println("Ordering loop broken by arbitrary choice of " + arbitraryNode);
 			}			
 		} */
-		List<E> orderedEdges = new ArrayList<E>();
-		for (Node orderedNode : orderedNodes) {
+		List<@NonNull E> orderedEdges = new ArrayList<@NonNull E>();
+		for (@NonNull Node orderedNode : orderedNodes) {
 			@Nullable E edge = node2edge.get(orderedNode);
 			assert edge != null;
 			orderedEdges.add(edge);
@@ -471,9 +313,9 @@ public class Region2Depth
 
 
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		StringBuilder s = new StringBuilder();
-		for (Map.Entry<Region,Integer> entry : region2depth.entrySet()) {
+		for (Map.@NonNull Entry<@NonNull Region, @Nullable Integer> entry : region2depth.entrySet()) {
 			if (s.length() > 0) {
 				s.append("\n");
 			}

@@ -51,7 +51,7 @@ import org.eclipse.qvtd.compiler.internal.qvtcconfig.Configuration;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.Direction;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.Mode;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.QVTcConfigPackage;
-import org.eclipse.qvtd.compiler.internal.scheduler.ScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.scheduler.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -454,8 +454,8 @@ public class MtcBroker {
 			qvtsToGraphML(gModel);
 		}
 		org.eclipse.qvtd.compiler.internal.scheduler.Scheduler scheduler = new Scheduler(environmentFactory, getSchedule(), qvtp2qvtg);
-		ScheduledRegion rootRegion = scheduler.qvtp2qvts();
-		Resource resource = scheduler.qvts2qvti(rootRegion, URI.createURI(qvtiUri));
+		RootScheduledRegion rootRegion = scheduler.qvtp2qvts();
+		Resource resource = scheduler.qvts2qvti(rootRegion, URI.createURI(qvtiUri), scheduler.getSymbolNameReservation());
 		resource.save(savingOptions);
 		return resource;
 	}

@@ -12,65 +12,68 @@ package org.eclipse.qvtd.compiler.internal.scheduler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.CompleteEnvironment;
-import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 
 /**
- * AbstractEdge.
+ * AbstractConnection.
  */
-public abstract class AbstractConnection implements Connection, GraphStringBuilder.GraphEdge, GraphStringBuilder.GraphNode
+public abstract class AbstractConnection<CE extends ConnectionEnd> implements DatumConnection, GraphStringBuilder.GraphEdge, GraphStringBuilder.GraphNode
 {
-	private /*@LazyNonNull*/ ConnectionRole connectionRole;
 	protected final @NonNull ScheduledRegion region;
-	private @NonNull Set<Node> sourceNodes;
-	private @NonNull Map<Node, @NonNull ConnectionRole> targetNode2role = new HashMap<Node, @NonNull ConnectionRole>();
-	protected final @Nullable String name;
+	protected final @NonNull String name;
+	private /*@LazyNonNull*/ ConnectionRole connectionRole;
+	protected @NonNull Set<@NonNull CE> sourceEnds;
+	protected @NonNull Map<@NonNull CE, @NonNull ConnectionRole> targetEnd2role = new HashMap<@NonNull CE, @NonNull ConnectionRole>();
+	
+	/**
+	 * The indexes in the overall schedule at which this connection propagates additional values.
+	 */
+	private @Nullable List<@NonNull Integer> indexes = null;
 
-	protected AbstractConnection(@NonNull ScheduledRegion region, @NonNull Set<Node> sourceNodes, @NonNull String name) {
+	protected AbstractConnection(@NonNull ScheduledRegion region, @NonNull Set<@NonNull CE> sourceEnds, @NonNull SymbolNameBuilder symbolNameBuilder) {
 		this.region = region;
-		this.name = name;
-		this.sourceNodes = sourceNodes;
-		region.addConnection(this);
-		for (@SuppressWarnings("null")@NonNull Node sourceNode : sourceNodes) {
-			sourceNode.addOutgoingConnection(this);
+		this.name = region.getSchedulerConstants().reserveSymbolName(symbolNameBuilder, this);
+		this.sourceEnds = sourceEnds;
+	}
+	
+	@Override
+	public boolean addIndex(int index) {
+		List<@NonNull Integer> indexes2 = indexes;
+		if (indexes2 == null) {
+			indexes = indexes2 = new ArrayList<@NonNull Integer>();
 		}
-	}
-
-	@Override
-	public void addPassedTargetNode(@NonNull Node targetNode) {
-		mergeRole(Connections.PASSED);
-		assert !targetNode2role.containsKey(targetNode);
-		targetNode2role.put(targetNode, Connections.PASSED);
-		targetNode.addIncomingConnection(this);
-	}
-
-	@Override
-	public void addUsedTargetNode(@NonNull Node targetNode, boolean mustBeLater) {
-		mergeRole(mustBeLater ? Connections.MANDATORY : Connections.PREFERRED);
-		assert !targetNode2role.containsKey(targetNode);
-		targetNode2role.put(targetNode, mustBeLater ? Connections.MANDATORY : Connections.PREFERRED);
-		targetNode.addIncomingConnection(this);
+		for (int i = 0; i < indexes2.size(); i++) {
+			Integer anIndex = indexes2.get(i);
+			if (index == anIndex) {
+				return false;
+			}
+			if (index < anIndex) {
+				indexes2.add(i, index);
+				return true;
+			}
+		}
+		indexes2.add(index);
+		return true;
 	}
 
 	@Override
 	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
 		s.setColor(getColor());
-		if (isRegion2Region()) {
+/*		if (isRegion2Region()) {
 			String indexText = getIndexText();
 			if (indexText != null) {
 				s.setLabel(indexText);
 			}
-		}
+		} */
 		String style = getStyle();
 		if (style != null) {
 			s.setStyle(style);
@@ -101,26 +104,12 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 		s.appendAttributedNode(nodeName);
 	}
 
-	@Override
-	public @Nullable Node basicGetSource(@NonNull Region sourceRegion) {
-		Node sourceNode = null;
-		for (Node node : sourceNodes) {
-			if (node.getRegion() == sourceRegion) {
-				assert sourceNode == null;
-				sourceNode = node;
-			}
-		}
-		return sourceNode;
+	protected @Nullable ConnectionRole basicGetConnectionRole() {
+		return connectionRole;
 	}
 
 	@Override
 	public void destroy() {
-		for (Node sourceNode : sourceNodes) {
-			sourceNode.removeOutgoingConnection(this);
-		}
-		for (Node targetNode : targetNode2role.keySet()) {
-			targetNode.removeIncomingConnection(this);
-		}
 		region.removeConnection(this);
 	}
 
@@ -134,19 +123,46 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 		return getConnectionRole().getColor();
 	}
 
+	public @NonNull ConnectionRole getConnectionRole(@NonNull CE targetEnd) {
+		ConnectionRole connectionRole = targetEnd2role.get(targetEnd);
+		assert connectionRole != null;
+		return connectionRole;
+	}
+
 	@Override
 	public @NonNull ConnectionRole getConnectionRole() {
 		assert connectionRole != null;
 		return connectionRole;
 	}
 
+//	@Override
+	public @Nullable String getIndexText() {
+		List<@NonNull Integer> indexes2 = indexes;
+		if (indexes2 == null) {
+			return null;
+		}
+		StringBuilder s = new StringBuilder();
+		for (@NonNull Integer index : indexes2) {
+			if (s.length() > 0) {
+				s.append(",");
+			}
+			s.append(index.toString());
+		}
+		return s.toString();
+	}
+
 	@Override
-	public @Nullable String getLabel() {
+	public @Nullable List<@NonNull Integer> getIndexes() {
+		return indexes;
+	}
+
+	@Override
+	public @NonNull String getLabel() {
 		return name;
 	}
 
 	@Override
-	public @Nullable String getName() {
+	public @NonNull String getName() {
 		return name;
 	}
 
@@ -155,10 +171,10 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 		return /*connectionRole.isRealized() ? 2*penwidth :*/ penwidth;
 	}
 
-//	@Override
-//	public @NonNull Region getRegion() {
-//		return region;
-//	}
+	@Override
+	public @NonNull ScheduledRegion getRegion() {
+		return region;
+	}
 
 	public @NonNull String getShape() {
 		return "ellipse";
@@ -170,22 +186,22 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 	}
 
 	@Override
-	public @NonNull Node getSource(@NonNull Region sourceRegion) {
-		Node sourceNode = null;
-		for (Node node : sourceNodes) {
-			if (node.getRegion() == sourceRegion) {
-				assert sourceNode == null;
-				sourceNode = node;
+	public @NonNull CE getSource(@NonNull Region sourceRegion) {
+		@Nullable CE sourceEnd = null;
+		for (@NonNull CE end : sourceEnds) {
+			if (end.getRegion() == sourceRegion) {
+				assert sourceEnd == null;
+				sourceEnd = end;
 			}
 		}
-		assert sourceNode != null;
-		return sourceNode;
+		assert sourceEnd != null;
+		return sourceEnd;
 	}
 
 	@Override
 	public @NonNull String getSourceDisplayNames() {
 		StringBuilder s = new StringBuilder();
-		for (Node source : getSources()) {
+		for (@NonNull CE source : getSources()) {
 			if (s.length() > 0) {
 				s.append(",");
 			}
@@ -194,23 +210,41 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 		return s.toString();
 	}
 
-	private @NonNull Map<Region, @NonNull Integer> getSourceRegion2count() {
-		Map<Region, @NonNull Integer> sourceRegion2count = new HashMap<Region, @NonNull Integer>();
-		for (@SuppressWarnings("null")@NonNull Node source : getSources()) {
-			Region sourceRegion = source.getRegion();
-			Integer count = sourceRegion2count.get(sourceRegion);
-			sourceRegion2count.put(sourceRegion, count = (count != null ? count.intValue() : 0) + 1);
+	@Override
+	public @NonNull Set<@NonNull Region> getSourceRegions() {
+		Set<@NonNull Region> sourceRegions = new HashSet<@NonNull Region>();
+		for (@NonNull ConnectionEnd sourceEnd : getSources()) {
+			Region sourceRegion = sourceEnd.getRegion();
+			sourceRegions.add(sourceRegion);
 		}
-		return sourceRegion2count;
+		return sourceRegions;
 	}
 
 	@Override
-	public @NonNull Iterable<Node> getSources() {
-		return sourceNodes;
+	public @NonNull Iterable<@NonNull Region> getSourceRegions(@NonNull ScheduledRegion scheduledRegion) {
+		Set<@NonNull Region> sourceRegions = new HashSet<@NonNull Region>();
+		for (@NonNull ConnectionEnd sourceEnd : getSources()) {
+			Region sourceRegion = sourceEnd.getRegion();
+			sourceRegion = scheduledRegion.getNormalizedRegion(sourceRegion);
+			if (sourceRegion != null) {
+				sourceRegions.add(sourceRegion);
+			}
+		}
+		return sourceRegions;
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull CE> getSources() {
+		return sourceEnds;
 	}
 
 	public @Nullable String getStyle() {
 		return getConnectionRole().getStyle();
+	}
+
+	@Override
+	public @NonNull String getSymbolName() {
+		return name;
 	}
 
 	@Override
@@ -219,111 +253,52 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 	}
 
 	@Override
-	public @NonNull Node getTarget(@NonNull Region targetRegion) {
-		Node targetNode = null;
-		for (Node node : targetNode2role.keySet()) {
-			if (node.getRegion() == targetRegion) {
-				assert targetNode == null;
-				targetNode = node;
+	public @NonNull CE getTarget(@NonNull Region targetRegion) {
+		@Nullable CE targetEnd = null;
+		for (@NonNull CE end : targetEnd2role.keySet()) {
+			if (end.getRegion() == targetRegion) {
+				assert targetEnd == null;
+				targetEnd = end;
 			}
 		}
-		assert targetNode != null;
-		return targetNode;
+		assert targetEnd != null;
+		return targetEnd;
 	}
 
 	@Override
-	public @NonNull Iterable<Node> getTargets() {
-		return targetNode2role.keySet();
+	public @NonNull Set<@NonNull Region> getTargetRegions() {
+		Set<@NonNull Region> targetRegions = new HashSet<@NonNull Region>();
+		for (@NonNull ConnectionEnd targetEnd : getTargets().keySet()) {
+			Region targetRegion = targetEnd.getRegion();
+			targetRegions.add(targetRegion);
+		}
+		return targetRegions;
 	}
 
 	@Override
-	public @NonNull Type getType(@NonNull IdResolver idResolver) {
-//		System.out.println("commonType of " + this);
-		Type commonType = null;
-		for (Node node : getSources()) {
-			Type nodeType = node.getCompleteClass().getPrimaryClass();
-//			System.out.println("  nodeType " + nodeType);
-			if (!(nodeType instanceof CollectionType)) {		// RealizedVariable accumulated on Connection
-				CompleteEnvironment environment = idResolver.getEnvironment();
-				nodeType = isOrdered() ? environment.getOrderedSetType(nodeType, true, null, null) : environment.getSetType(nodeType, true, null, null);
-			}
-			if (commonType == null) {
-				commonType = nodeType;
-			}
-			else {
-				commonType = commonType.getCommonType(idResolver, nodeType);
+	public @NonNull Iterable<@NonNull Region> getTargetRegions(@NonNull ScheduledRegion scheduledRegion) {
+		Set<@NonNull Region> targetRegions = new HashSet<@NonNull Region>();
+		for (@NonNull ConnectionEnd targetEnd : getTargets().keySet()) {
+			Region targetRegion = targetEnd.getRegion();
+			targetRegion = scheduledRegion.getNormalizedRegion(targetRegion);
+			if (targetRegion != null) {
+				targetRegions.add(targetRegion);
 			}
 		}
-//		System.out.println("=> " + commonType);
-		assert commonType != null;
-		return commonType;
+		return targetRegions;
 	}
 
 	@Override
-	public boolean isMandatory() {
-		return getConnectionRole().isMandatory();
+	public @NonNull Map<@NonNull ? extends ConnectionEnd, @NonNull ConnectionRole> getTargets() {
+		return targetEnd2role;
 	}
 
-	public boolean isNode2Node() {
-		return (sourceNodes.size() == 1) && (targetNode2role.size() == 1);
-	}
+//	private boolean isRegion2Region() {
+//		return isRegion2Region(getSourceRegion2count());
+//	}
 
-	/**
-	 * Return true if this connections should be ordered since its source could be ordered.
-	 */
-	private boolean isOrdered() {
-		boolean isOrdered = false;
-		for (Node sourceNode1 : getSources()) {
-			Region sourceRegion = sourceNode1.getRegion();
-			for (Connection passedConnection : sourceRegion.getParentPassedConnections()) {
-				for (Node sourceNode2 : passedConnection.getSources()) {
-					Type sourceType2 = sourceNode2.getClassDatumAnalysis().getCompleteClass().getPrimaryClass();
-					if ((sourceType2 instanceof CollectionType) && ((CollectionType)sourceType2).isOrdered()) {
-						return true;
-					}
-				}
-			}
-		}
-		return isOrdered;
-	}
-
-	@Override
-	public boolean isPassed() {
-		return getConnectionRole().isPassed();
-	}
-
-	@Override
-	public boolean isPassed(@NonNull Region targetRegion) {
-		for (Node targetNode : targetNode2role.keySet()) {
-			if (targetNode.getRegion() == targetRegion) {
-				ConnectionRole role = targetNode2role.get(targetNode);
-				assert role != null;
-				if (role.isPassed()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public boolean isRegion2Region() {
-		return isRegion2Region(getSourceRegion2count());
-	}
-
-	public boolean isRegion2Region(@NonNull Map<Region, Integer> sourceRegion2count) {
-		return (sourceRegion2count.size() == 1) && (targetNode2role.size() == 1);
-	}
-
-	@Override
-	public boolean isUsed() {
-		return getConnectionRole().isPreferred();
-	}
-
-	@Override
-	public boolean isUsed(@NonNull Node targetNode) {
-		ConnectionRole targetConnectionRole = targetNode2role.get(targetNode);
-		assert targetConnectionRole != null;
-		return targetConnectionRole.isPreferred();
+	private boolean isRegion2Region(@NonNull Map<Region, Integer> sourceRegion2count, @NonNull Map<@NonNull Region, @NonNull List<@NonNull ConnectionRole>> targetRegion2roles) {
+		return (sourceRegion2count.size() == 1) && (targetRegion2roles.size() == 1) && (targetRegion2roles.values().iterator().next().size() == 1); //(targetEnd2role.size() == 1);
 	}
 
 	protected void mergeRole(@NonNull ConnectionRole connectionRole) {
@@ -337,57 +312,88 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
-		if (isNode2Node()) {
-			@SuppressWarnings("null")@NonNull Node sourceNode = sourceNodes.iterator().next();
-			@SuppressWarnings("null")@NonNull Node targetNode = targetNode2role.keySet().iterator().next();
-			s.appendEdge(sourceNode, this, targetNode);
-		}
-		else {
-			s.appendNode(this);
-			for (@SuppressWarnings("null")@NonNull Node source : getSources()) {
-				s.appendEdge(source, this, this);
-			}
-			for (@SuppressWarnings("null")@NonNull Node target : getTargets()) {
-				ConnectionRole role = targetNode2role.get(target);
-				assert role != null;
-				s.appendEdge(this, role, target);
-			}
-		}
+		s.appendEdge(getSource(), this, getTarget());
 	}
 
 	@Override
-	public void toRegionGraph(@NonNull GraphStringBuilder s) {
-		Map<Region, @NonNull Integer> sourceRegion2count = getSourceRegion2count();
-		Map<Region, @NonNull List<ConnectionRole>> targetRegion2roles = new HashMap<Region, @NonNull List<ConnectionRole>>();
-		for (@SuppressWarnings("null")@NonNull Node target : targetNode2role.keySet()) {
-			ConnectionRole role = targetNode2role.get(target);
-			Region targetRegion = target.getRegion();
-			List<ConnectionRole> roles = targetRegion2roles.get(targetRegion);
-			if (roles == null) {
-				roles = new ArrayList<ConnectionRole>();
-				targetRegion2roles.put(targetRegion, roles);
+	public void toRegionGraph(@NonNull ScheduledRegion scheduledRegion, @NonNull GraphStringBuilder s) {
+		Map<@NonNull Region, @NonNull Integer> sourceRegion2count = new HashMap<@NonNull Region, @NonNull Integer>();
+		for (@NonNull Node source : getSourceNodes()) {
+			Region sourceRegion = scheduledRegion.getNormalizedRegion(source.getRegion());
+			if (sourceRegion != null) {
+//				Integer count = sourceRegion2count.get(sourceRegion);
+				sourceRegion2count.put(sourceRegion, 1); //(count != null ? count.intValue() : 0) + 1);
 			}
-			roles.add(role);
 		}
-		if (isRegion2Region(sourceRegion2count)) {
-			@SuppressWarnings("null")@NonNull Region sourceRegion = sourceRegion2count.keySet().iterator().next();
-			@SuppressWarnings("null")@NonNull Region targetRegion = targetRegion2roles.keySet().iterator().next();
+		Map<@NonNull Region, @NonNull List<@NonNull ConnectionRole>> targetRegion2roles = new HashMap<@NonNull Region, @NonNull List<@NonNull ConnectionRole>>();
+		for (@NonNull ConnectionEnd target : targetEnd2role.keySet()) {
+			ConnectionRole role = targetEnd2role.get(target);
+			assert role != null;
+			Region targetRegion = scheduledRegion.getNormalizedRegion(target.getRegion());
+			if (targetRegion != null) {
+				List<@NonNull ConnectionRole> roles = targetRegion2roles.get(targetRegion);
+				if (roles == null) {
+					roles = new ArrayList<@NonNull ConnectionRole>();
+					targetRegion2roles.put(targetRegion, roles);
+				}
+				if (!roles.contains(role)) {
+					roles.add(role);
+				}
+			}
+		}
+		if (isRegion2Region(sourceRegion2count, targetRegion2roles)) {
+			Region sourceRegion = sourceRegion2count.keySet().iterator().next();
+			Region targetRegion = targetRegion2roles.keySet().iterator().next();
 			s.appendEdge(sourceRegion, this, targetRegion);
 		}
 		else {
 			s.appendNode(this);
-			for (@SuppressWarnings("null")@NonNull Region sourceRegion : sourceRegion2count.keySet()) {
+			for (@NonNull Region sourceRegion : sourceRegion2count.keySet()) {
 				Integer counts = sourceRegion2count.get(sourceRegion);
 				assert counts != null;
 				for (int i = counts; i > 0; i--) {
 					s.appendEdge(sourceRegion, this, this);
 				}
 			}
-			for (@SuppressWarnings("null")@NonNull Region targetRegion : targetRegion2roles.keySet()) {
-				List<ConnectionRole> roles = targetRegion2roles.get(targetRegion);
+			for (@NonNull Region targetRegion : targetRegion2roles.keySet()) {
+				List<@NonNull ConnectionRole> roles = targetRegion2roles.get(targetRegion);
 				assert roles != null;
-				for (@SuppressWarnings("null")@NonNull ConnectionRole role : roles) {
+				for (@NonNull ConnectionRole role : roles) {
 					s.appendEdge(this, role, targetRegion);
+//				GraphNode targetNode = /*targetRegion.isCyclicRegion() ? getTarget(targetRegion) :*/ targetRegion;
+//				for (@SuppressWarnings("null")@NonNull ConnectionRole role : targetRegion2roles.get(targetRegion)) {
+//					s.appendEdge(this, role, targetNode);
+				}
+			}
+			Node headNode = null;
+			if (sourceRegion2count.size() == 0) {
+/*				@Nullable ConnectionEnd targetEnd = null;
+				for (@NonNull ConnectionEnd end : targetEnd2role.keySet()) {
+					if (end.getRegion() == scheduledRegion) {
+						assert targetEnd == null;
+						targetEnd = end;
+					}
+				}
+				if (targetEnd instanceof Node) {
+					Node node = (Node)targetEnd;
+					if (node.isHead()) {
+						headNode = node;
+						s.appendEdge(headNode, this, this);
+					}
+				} */
+				@Nullable ConnectionEnd sourceEnd = null;
+				for (@NonNull ConnectionEnd end : sourceEnds) {
+					if (end.getRegion() == scheduledRegion) {
+						assert sourceEnd == null;
+						sourceEnd = end;
+					}
+				}
+				if (sourceEnd instanceof Node) {
+					Node node = (Node)sourceEnd;
+					if (node.isHead()) {
+						headNode = node;
+						s.appendEdge(headNode, this, this);
+					}
 				}
 			}
 		}
@@ -395,22 +401,35 @@ public abstract class AbstractConnection implements Connection, GraphStringBuild
 
 	@Override
 	public String toString() {
+		return getSymbolName();
+    }
+	
+	public String toString2() {
 		StringBuilder s = new StringBuilder();
+		ConnectionRole connectionRole = basicGetConnectionRole();
 		if (connectionRole != null) {
 			s.append(connectionRole);
 		}
 		s.append(getName());
 		s.append("(");
-		for (@SuppressWarnings("null")@NonNull Node sourceNode : sourceNodes) {
-			s.append(sourceNode.getDisplayName());
-			s.append(" ");
+		boolean isFirst = true;
+		for (@NonNull ConnectionEnd sourceEnd : sourceEnds) {
+			if (!isFirst) {
+				s.append(",");
+			}
+			s.append(sourceEnd.getDisplayName());
+			isFirst = false;
 		}
-		s.append("=>");
-		for (@SuppressWarnings("null")@NonNull Node targetNode : targetNode2role.keySet()) {
-			s.append(" ");
-			ConnectionRole targetConnectionRole = targetNode2role.get(targetNode);
+		s.append(" => ");
+		isFirst = true;
+		for (@NonNull ConnectionEnd targetEnd : targetEnd2role.keySet()) {
+			if (!isFirst) {
+				s.append(",");
+			}
+			ConnectionRole targetConnectionRole = targetEnd2role.get(targetEnd);
 			s.append(targetConnectionRole);
-			s.append(targetNode.getDisplayName());
+			s.append(targetEnd.getDisplayName());
+			isFirst = false;
 		}
 		s.append(")");
         return s.toString();

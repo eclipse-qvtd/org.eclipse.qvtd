@@ -20,15 +20,15 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public class MergedEdge extends AbstractEdge
 {
-	protected final @NonNull List<SimpleEdge> simpleEdges = new ArrayList<SimpleEdge>();
+	protected final @NonNull List<@NonNull SimpleEdge> simpleEdges = new ArrayList<@NonNull SimpleEdge>();
 		
-	public MergedEdge(@NonNull MergedRegion mergedRegion, @NonNull MergedNode sourceNode, @NonNull Edge primaryEdge, @NonNull MergedNode targetNode) {
+	public MergedEdge(@NonNull MergedMappingRegion mergedRegion, @NonNull MergedNode sourceNode, @NonNull Edge primaryEdge, @NonNull MergedNode targetNode) {
 		super(primaryEdge.getEdgeRole(), mergedRegion, sourceNode, primaryEdge.getName(), targetNode);
 		addEdge(primaryEdge);
 	}
 
 	public void addEdge(@NonNull Edge edge) {
-		for (SimpleEdge simpleEdge : edge.getSimpleEdges()) {
+		for (@NonNull SimpleEdge simpleEdge : edge.getSimpleEdges()) {
 			assert !simpleEdges.contains(simpleEdge);
 			simpleEdges.add(simpleEdge);
 			mergeRole(simpleEdge.getEdgeRole());
@@ -40,7 +40,7 @@ public class MergedEdge extends AbstractEdge
 	}
 
 	@Override
-	public @NonNull Iterable<SimpleEdge> getSimpleEdges() {
+	public @NonNull Iterable<@NonNull SimpleEdge> getSimpleEdges() {
 		return simpleEdges;
 	}
 }

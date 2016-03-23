@@ -50,7 +50,7 @@ public interface NodeRole extends Role
 	boolean isGuardVariable();
 	
 	boolean isHead();
-	
+//	boolean isInput();
 	boolean isInternal();
 	
 	boolean isIterator();
@@ -62,7 +62,7 @@ public interface NodeRole extends Role
 	boolean isNull();
 	
 	boolean isOperation();
-
+//	boolean isOutput();
 	boolean isRealizedVariable();
 
 	boolean isResult();
@@ -75,4 +75,5 @@ public interface NodeRole extends Role
 	@NonNull NodeRole merge(@NonNull NodeRole nodeRole);
 
 	@NonNull NodeRole setHead();
+
 }

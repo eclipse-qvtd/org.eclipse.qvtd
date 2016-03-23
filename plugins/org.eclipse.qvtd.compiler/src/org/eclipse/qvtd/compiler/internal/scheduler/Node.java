@@ -25,11 +25,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
  * Node provides the analysis and status of a node in the pattern match or construction of a Mapping
  * or Composite Region.
  */
-public interface Node extends GraphStringBuilder.GraphNode, Nameable
+public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Nameable
 {
-	void addIncomingConnection(@NonNull Connection connection);
+	void addIncomingConnection(@NonNull NodeConnection connection);
 	void addIncomingEdge(@NonNull Edge edge);
-	void addOutgoingConnection(@NonNull Connection connection);
+	void addOutgoingConnection(@NonNull NodeConnection connection);
 	void addOutgoingEdge(@NonNull Edge edge);
 //	void cloneIn(@NonNull Region clonedRegion, @NonNull Map<Node, Node> node2clone);
 	void destroy();
@@ -38,62 +38,60 @@ public interface Node extends GraphStringBuilder.GraphNode, Nameable
 	 * Accumulate this node and all passed binding sources in the call-tree ancestry of this node.
 	 * On completion there is exactly one entry per region from each possible call path.
 	 */
-	void getAllAncestors(@NonNull Set<Node> ancestors);
-	@NonNull Iterable<Edge> getArgumentEdges();
+	void getAllAncestors(@NonNull Set<@NonNull Node> ancestors);
+	@NonNull Iterable<@NonNull Edge> getArgumentEdges();
 	@Nullable Edge getAssignmentEdge(@NonNull Property source2targetProperty);
-	@NonNull Iterable<NavigationEdge> getAssignmentEdges();
+	@NonNull Iterable<@NonNull NavigationEdge> getAssignmentEdges();
 	@NonNull ClassDatumAnalysis getClassDatumAnalysis();
 	@NonNull CompleteClass getCompleteClass();
-	@NonNull Iterable<Edge> getComputationEdges();
-	@NonNull Iterable<NavigationEdge> getContainerEdges();
-	@NonNull Iterable<NavigationEdge> getContainmentEdges();
-	@NonNull String getDisplayName();
-	@NonNull List<Connection> getIncomingConnections();
-	@NonNull List<Edge> getIncomingEdges();
+	@NonNull Iterable<@NonNull Edge> getComputationEdges();
+	@NonNull Iterable<@NonNull NavigationEdge> getContainerEdges();
+	@NonNull Iterable<@NonNull NavigationEdge> getContainmentEdges();
+	@Nullable NodeConnection getIncomingConnection();
+	@NonNull List<@NonNull Edge> getIncomingEdges();
 //	@Nullable InterRegionEdge getIncomingPassedBindingEdge();
-	@NonNull Iterable<Connection> getIncomingPassedConnections();
-	@NonNull Iterable<Connection> getIncomingUsedConnections();
+	@Nullable NodeConnection getIncomingPassedConnection();
+	@Nullable NodeConnection getIncomingUsedConnection();
 	@NonNull String getLabel();
-	@NonNull Iterable<Edge> getMergeableEdges();
+	@NonNull Iterable<@NonNull Edge> getMergeableEdges();
 	@Override
 	@NonNull String getName();
 	@Nullable NavigationEdge getNavigationEdge(@NonNull Property source2targetProperty);
-	@NonNull Iterable<NavigationEdge> getNavigationEdges();
+	@NonNull Iterable<@NonNull NavigationEdge> getNavigationEdges();
 	@Nullable Node getNavigationTarget(@NonNull Property source2targetProperty);
-	@NonNull Iterable<Node> getNavigationTargets();
+	@NonNull Iterable<@NonNull Node> getNavigationTargets();
 	@NonNull NodeRole getNodeRole();
-	@NonNull List<Connection> getOutgoingConnections();
-	@NonNull List<Edge> getOutgoingEdges();
+	@NonNull List<@NonNull NodeConnection> getOutgoingConnections();
+	@NonNull List<@NonNull Edge> getOutgoingEdges();
 //	@Nullable InterRegionEdge getPassedBindingEdge();
-	@NonNull Iterable<Connection> getOutgoingPassedConnections();
-	@NonNull Iterable<Connection> getOutgoingUsedBindingEdges();
+	@NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections();
+	@NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedBindingEdges();
 	
 	/**
 	 * Get all sources that pass a value to this target.
 	 */
-	@NonNull Iterable<Node> getPassedBindingSources();
+	@NonNull Iterable<@NonNull Node> getPassedBindingSources();
 	
 	/**
 	 * Get all targets that are passed a value from this source.
 	 */
-	@NonNull Iterable<Node> getPassedBindingTargets();
-	@NonNull Iterable<NavigationEdge> getPredicateEdges();
-	@NonNull Iterable<Edge> getRecursionEdges();
+	@NonNull Iterable<@NonNull Node> getPassedBindingTargets();
+	@NonNull Iterable<@NonNull NavigationEdge> getPredicateEdges();
+	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
 	
 	/**
 	 * Get all 'targets' that pass a value to this target recursively.
 	 */
-	@NonNull Iterable<Node> getRecursionSources();
+	@NonNull Iterable<@NonNull Node> getRecursionSources();
 	
 	/**
 	 * Get all 'sources' that pass a value to this target recursively.
 	 */
-	@NonNull Iterable<Node> getRecursionTargets();
-	@NonNull Region getRegion();
+	@NonNull Iterable<@NonNull Node> getRecursionTargets();
 	@NonNull SchedulerConstants getSchedulerConstants();
-	@NonNull Iterable<SimpleNode> getSimpleNodes();
-	@NonNull Iterable<TypedElement> getTypedElements();
-	@NonNull Iterable<Node> getUsedBindingSources();
+	@NonNull Iterable<@NonNull SimpleNode> getSimpleNodes();
+	@NonNull Iterable<@NonNull TypedElement> getTypedElements();
+	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
 
 	/**
 	 * Return true if this node is an attribute value.
@@ -133,6 +131,11 @@ public interface Node extends GraphStringBuilder.GraphNode, Nameable
 	 * Return true if this node is part of a head group from which many other nodes are navigable.
 	 */
 	boolean isHead();
+	
+	/**
+	 * Return true if this node is an input port of a nested region.
+	 */
+//	boolean isInput();
 
 	/**
 	 * Return true if this node's dependencies can be resolved within the containing region.
@@ -181,7 +184,11 @@ public interface Node extends GraphStringBuilder.GraphNode, Nameable
 	boolean isNull();
 
 	boolean isOperation();
-
+	
+	/**
+	 * Return true if this node is an output port of a nested region.
+	 */
+//	boolean isOutput();
 	/**
 	 * Return true if the value of this node is part of the navigation path that must be validated
 	 * by predicate matching prior to execution of a mapping.
@@ -213,9 +220,9 @@ public interface Node extends GraphStringBuilder.GraphNode, Nameable
 	boolean isTrue();
 	
 	boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis);
-	void removeIncomingConnection(@NonNull Connection connection);
+	void removeIncomingConnection(@NonNull NodeConnection connection);
 	void removeIncomingEdge(@NonNull Edge edge);
-	void removeOutgoingConnection(@NonNull Connection connection);
+	void removeOutgoingConnection(@NonNull NodeConnection connection);
 	void removeOutgoingEdge(@NonNull Edge edge);
 	
 	void setHead();

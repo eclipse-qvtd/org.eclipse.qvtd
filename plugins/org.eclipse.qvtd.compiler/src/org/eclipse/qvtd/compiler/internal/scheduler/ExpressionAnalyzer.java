@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.IfExp;
+import org.eclipse.ocl.pivot.IterateExp;
 import org.eclipse.ocl.pivot.LetExp;
 import org.eclipse.ocl.pivot.LiteralExp;
 import org.eclipse.ocl.pivot.LoopExp;
@@ -56,7 +57,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 
-public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@NonNull SimpleNode, @NonNull AbstractMappingRegion>
+public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@NonNull SimpleNode, @NonNull SimpleMappingRegion>
 {
 	public class ConditionalExpressionAnalyzer extends ExpressionAnalyzer
 	{
@@ -74,7 +75,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	private /*@LazyNonNull*/ ConditionalExpressionAnalyzer conditionalExpressionAnalyzer = null;
 //	private /*@LazyNonNull*/ DependencyAnalyzer dependencyAnalyzer;
 	
-	protected ExpressionAnalyzer(@NonNull AbstractMappingRegion context) {
+	protected ExpressionAnalyzer(@NonNull SimpleMappingRegion context) {
 		super(context);
 		this.scheduler = context.getSchedulerConstants();
 //		this.dependencyAnalyzer = getDependencyAnalyzer();
@@ -373,11 +374,21 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		assert !loopExp.isIsSafe();
 		SimpleNode sourceNode = analyze(loopExp.getOwnedSource());
 		List<Variable> ownedIterators = loopExp.getOwnedIterators();
-		SimpleNode[] argNodes = new SimpleNode[1+ownedIterators.size()];
+		SimpleNode[] argNodes = new SimpleNode[1+ownedIterators.size()+(loopExp instanceof IterateExp ? 1 : 0)];
 		int i = 1;
 		for (@SuppressWarnings("null")@NonNull Variable iterator : ownedIterators) {
 			SimpleNode iteratorNode = Nodes.ITERATOR.createSimpleNode(context, iterator, sourceNode);
 			Type iteratorType = iterator.getType();
+			assert iteratorType != null;
+//			Property iterateProperty = context.getSchedulerConstants().getIterateProperty(iteratorType);
+			Edges.ITERATED.createSimpleEdge(context, sourceNode, iteratorNode);
+			argNodes[i++] = iteratorNode;
+		}
+		if (loopExp instanceof IterateExp) {
+			Variable accumulator = ((IterateExp)loopExp).getOwnedResult();
+			assert accumulator != null;
+			SimpleNode iteratorNode = Nodes.ITERATOR.createSimpleNode(context, accumulator, sourceNode);
+			Type iteratorType = accumulator.getType();
 			assert iteratorType != null;
 //			Property iterateProperty = context.getSchedulerConstants().getIterateProperty(iteratorType);
 			Edges.ITERATED.createSimpleEdge(context, sourceNode, iteratorNode);
@@ -505,6 +516,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 		SimpleNode sourceNode = analyze(ownedSource);
 		OperationId operationId = referredOperation.getOperationId();
+		// FIXME "=" can identify that LHS and RHS can be coalesced
+		// FIXME "includes" may also indicate a coalesce
 		if (operationId == scheduler.getOclAnyOclAsTypeId()) {
 			return analyzeOperationCallExp_oclAsType(sourceNode, operationCallExp);
 		}
@@ -528,10 +541,17 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			}
 			if (referredOperation.getBodyExpression() != null) {
 				OperationRegion operationRegion = context.getSuperRegion().analyzeOperation(operationCallExp);
-				for (@SuppressWarnings("null")@NonNull Node extraNode : operationRegion.getExtraNodes()) {
-					SimpleNode instantiatedNode = context.createExtraGuard(extraNode);
-					Edges.ARGUMENT.createSimpleEdge(context, instantiatedNode, instantiatedNode.getName(), operationNode);
-					instantiate(instantiatedNode, extraNode);
+				List<@NonNull Node> extraNodes = operationRegion.getExtraNodes();
+				if (extraNodes.size() > 0) {
+					for (@NonNull Node extraNode : extraNodes) {
+						ClassDatumAnalysis classDatumAnalysis = extraNode.getClassDatumAnalysis();
+						SimpleNode extraGuard = context.getExtraGuard(classDatumAnalysis);
+						if (extraGuard == null) {
+							extraGuard = context.createExtraGuard(classDatumAnalysis);
+							Edges.ARGUMENT.createSimpleEdge(context, extraGuard, extraGuard.getName(), operationNode);
+							instantiate(extraGuard, extraNode);
+						}
+					}
 				}
 			}
 			Type returnType = operationCallExp.getType();
@@ -550,6 +570,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		assert property != null;
 		SimpleNode slotNode = analyze(propertyAssignment.getSlotExpression());
 		assert slotNode.isClassNode();
+//		context.get
 		SimpleNode valueNode = analyze(propertyAssignment.getValue());
 //		if (!valueNode.isClassNode() && !valueNode.isNull()) {
 		if (valueNode.isExpression()) {
@@ -566,10 +587,14 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 				Edges.ARGUMENT.createSimpleEdge(context, computedValueNode, null, valueNode);
 			}
 		}
+		SimpleNavigationEdge navigationEdge = slotNode.getNavigationEdge(property);
 		context.addAssignmentEdge(slotNode, property, valueNode);
 		Property oppositeProperty = property.getOpposite();
 		if (valueNode.isClassNode() && (oppositeProperty != null) && !oppositeProperty.isIsMany()) {
 			context.addAssignmentEdge(valueNode, oppositeProperty, slotNode);
+		}
+		if (navigationEdge != null) {
+			context.mergeInto(navigationEdge.getTarget(), valueNode);
 		}
 		return slotNode;
 	}

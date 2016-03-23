@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.schedule2qvti.QVTs2QVTiVisitor;
+import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
@@ -45,6 +46,9 @@ import org.eclipse.qvtd.pivot.schedule.utilities.DependencyUtil;
 
 public class Scheduler extends SchedulerConstants
 {
+	public static final @NonNull TracingOption CONNECTION_CREATION = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/connectionCreation");
+	public static final @NonNull TracingOption CONNECTION_ROUTING = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/connectionRouting");
+	public static final @NonNull TracingOption DEBUG_GRAPHS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/debugGraphs");
 	public static final @NonNull TracingOption DEPENDENCY_ANALYSIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/dependencyAnalysis");
 	public static final @NonNull TracingOption DUMP_CLASS_TO_CONSUMING_NODES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/dump/class2consumingNodes");
 	public static final @NonNull TracingOption DUMP_CLASS_TO_CONTAINING_PROPERTIES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/dump/class2containingProperty");
@@ -52,8 +56,9 @@ public class Scheduler extends SchedulerConstants
 	public static final @NonNull TracingOption DUMP_INPUT_MODEL_TO_DOMAIN_USAGE = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/dump/inputModel2domainUsage");
 	public static final @NonNull TracingOption DUMP_PROPERTY_TO_CONSUMING_CLASSES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/dump/property2consumingClass");
 	public static final @NonNull TracingOption EDGE_ORDER = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/edgeOrder");
+	public static final @NonNull TracingOption REGION_CYCLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionCycles");
 	public static final @NonNull TracingOption REGION_DEPTH = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionDepth");
-	public static final @NonNull TracingOption REGION_LOCALITY = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionLocality");
+//	public static final @NonNull TracingOption REGION_LOCALITY = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionLocality");
 	public static final @NonNull TracingOption REGION_ORDER = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionOrder");
 	public static final @NonNull TracingOption REGION_STACK = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionStack");
 	public static final @NonNull TracingOption REGION_TRAVERSAL = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionTraversal");
@@ -61,14 +66,14 @@ public class Scheduler extends SchedulerConstants
 	/**
 	 * The Region to which each action is allocated.
 	 */
-	private final @NonNull Map<AbstractAction, MappingRegion> action2mappingRegion = new HashMap<AbstractAction, MappingRegion>();
+	private final @NonNull Map<@NonNull AbstractAction, @NonNull SimpleMappingRegion> action2mappingRegion = new HashMap<@NonNull AbstractAction, @NonNull SimpleMappingRegion>();
 
-	private final @NonNull List<AbstractAction> orderedActions;
+	private final @NonNull List<@NonNull AbstractAction> orderedActions;
 
 	public Scheduler(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule schedule, @NonNull QVTp2QVTg qvtp2qvtg) {
 		super(environmentFactory, schedule, qvtp2qvtg);
 		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(schedule);
-		List<AbstractAction> orderedActions = orderer.computeOrdering();
+		List<@NonNull AbstractAction> orderedActions = orderer.computeOrdering();
 		if (orderedActions == null) {
 			throw new IllegalArgumentException(orderer.diagnoseOrderingFailure());
 		}
@@ -89,8 +94,9 @@ public class Scheduler extends SchedulerConstants
 			if (operationRegion == null) {
 				operationRegion = new OperationRegion(superRegion, operationDatum, specification, operationCallExp);
 				map.put(operationDatum, operationRegion);
-				writeDOTfile(operationRegion, "-1-create");
-				writeGraphMLfile(operationRegion, "-1-create");
+				if (Scheduler.DEBUG_GRAPHS.isActive()) {
+					operationRegion.writeDebugGraphs("1-create");
+				}
 			}
 			return operationRegion;
 		} catch (ParserException e) {
@@ -122,9 +128,9 @@ public class Scheduler extends SchedulerConstants
 	/**
 	 * Unify the head groups of each mapping region to create a simple uniform ClassDatum to HeadNodeGroup map.
 	 */
-	private @NonNull Map<ClassDatumAnalysis, HeadNodeGroup> createHeadGroups() {
-		Map<ClassDatumAnalysis, HeadNodeGroup> classDatumAnalysis2headGroup = new HashMap<ClassDatumAnalysis, HeadNodeGroup>();
-		for (@SuppressWarnings("null")@NonNull MappingRegion mappingRegion : action2mappingRegion.values()) {
+	private @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull HeadNodeGroup> createHeadGroups() {
+		Map<@NonNull ClassDatumAnalysis, @NonNull HeadNodeGroup> classDatumAnalysis2headGroup = new HashMap<@NonNull ClassDatumAnalysis, @NonNull HeadNodeGroup>();
+		for (@NonNull SimpleMappingRegion mappingRegion : action2mappingRegion.values()) {
 			List<@NonNull Node> headNodes = mappingRegion.getHeadNodes();
 			if (headNodes.size() == 1) {
 				Node headNode = headNodes.get(0);
@@ -139,50 +145,51 @@ public class Scheduler extends SchedulerConstants
 		return classDatumAnalysis2headGroup;
 	}
 
-	private @NonNull List<Region> createSuperRegions() {
+	private @NonNull List<@NonNull Region> createSuperRegions() {
 		SuperRegion superRegion = new SuperRegion(this);
 		//
 		//	Extract salient characteristics from within each MappingAction.
 		//
 		for (int i = 0; i < orderedActions.size(); i++) {
-			@SuppressWarnings("null")@NonNull AbstractAction abstractAction = orderedActions.get(i);
+			@NonNull AbstractAction abstractAction = orderedActions.get(i);
 			if (abstractAction instanceof MappingAction) {
 				MappingAction mappingAction = (MappingAction) abstractAction;
-				MappingRegion mappingRegion = new MappingRegion(superRegion, mappingAction, i);
+				SimpleMappingRegion mappingRegion = new SimpleMappingRegion(superRegion, mappingAction, i);
 				action2mappingRegion.put(abstractAction, mappingRegion);
 			}
 		}
-		for (@SuppressWarnings("null")@NonNull MappingRegion mappingRegion : action2mappingRegion.values()) {
+		for (@NonNull SimpleMappingRegion mappingRegion : action2mappingRegion.values()) {
 			mappingRegion.registerConsumptionsAndProductions();
 		}
-		for (@SuppressWarnings("null")@NonNull MappingRegion mappingRegion : action2mappingRegion.values()) {
-			writeDOTfile(mappingRegion, "-1-create");
-			writeGraphMLfile(mappingRegion, "-1-create");
+		if (Scheduler.DEBUG_GRAPHS.isActive()) {
+			for (@NonNull SimpleMappingRegion mappingRegion : action2mappingRegion.values()) {
+				mappingRegion.writeDebugGraphs("1-create");
+			}
 		}
 		@SuppressWarnings("unused")
-		Map<ClassDatumAnalysis, HeadNodeGroup> classDatumAnalysis2headNodeGroup = createHeadGroups();
-		List<MappingRegion> orderedRegions = new ArrayList<MappingRegion>();
-		for (@SuppressWarnings("null")@NonNull AbstractAction abstractAction : orderedActions) {
-			MappingRegion mappingRegion = action2mappingRegion.get(abstractAction);
+		Map<@NonNull ClassDatumAnalysis, @NonNull HeadNodeGroup> classDatumAnalysis2headNodeGroup = createHeadGroups();
+		List<@NonNull SimpleMappingRegion> orderedRegions = new ArrayList<@NonNull SimpleMappingRegion>();
+		for (@NonNull AbstractAction abstractAction : orderedActions) {
+			SimpleMappingRegion mappingRegion = action2mappingRegion.get(abstractAction);
 			assert mappingRegion != null;
 			orderedRegions.add(mappingRegion);
 			mappingRegion.resolveRecursion();
 		}
-		List<Region> allRegions = new ArrayList<Region>(earlyRegionMerge(orderedRegions));
+		List<@NonNull Region> allRegions = new ArrayList<@NonNull Region>(earlyRegionMerge(orderedRegions));
 //		@NonNull List<Region> allRegions = superRegion.identifyRegions();
-		for (OperationRegion operationRegion : superRegion.getOperationRegions()) {
+		for (@NonNull OperationRegion operationRegion : superRegion.getOperationRegions()) {
 			allRegions.add(operationRegion);
 		}
 		return allRegions;
 	}
 
-	private @NonNull ScheduledRegion createRootRegion(@NonNull List<Region> allRegions) {
-		ScheduledRegion rootRegion = null;
-		for (Region region : new ArrayList<Region>(allRegions)) {
+	private @NonNull RootScheduledRegion createRootRegion(@NonNull List<@NonNull Region> allRegions) {
+		RootScheduledRegion rootRegion = null;
+		for (@NonNull Region region : new ArrayList<@NonNull Region>(allRegions)) {
 			if (region.getInvokingRegion() == null) {
 				if (rootRegion == null) {
 					String name = ClassUtil.nonNullState(getDependencyGraph().eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
-					rootRegion = new ScheduledRegion(name, region);
+					rootRegion = new RootScheduledRegion(name, region);
 				}
 				rootRegion.addRegion(region);
 			}
@@ -197,27 +204,27 @@ public class Scheduler extends SchedulerConstants
 	 * 
 	 * Returns the orderedRegions plus the new aggregates less those aggregated. 
 	 */
-	public @NonNull List<Region> earlyRegionMerge(@NonNull List<MappingRegion> orderedRegions) {
+	public @NonNull List<@NonNull Region> earlyRegionMerge(@NonNull List<@NonNull SimpleMappingRegion> orderedRegions) {
 		Region2Depth region2depths = new Region2Depth();
-		List<Region> outputRegions = new ArrayList<Region>();
-		LinkedHashSet<MappingRegion> residualInputRegions = new LinkedHashSet<MappingRegion>(orderedRegions);	// order preserving fast random removal
+		List<@NonNull Region> outputRegions = new ArrayList<@NonNull Region>();
+		LinkedHashSet<@NonNull SimpleMappingRegion> residualInputRegions = new LinkedHashSet<@NonNull SimpleMappingRegion>(orderedRegions);	// order preserving fast random removal
 		while (!residualInputRegions.isEmpty()) {
-			@SuppressWarnings("null")@NonNull Region candidateRegion = residualInputRegions.iterator().next();
+			@NonNull Region candidateRegion = residualInputRegions.iterator().next();
 			boolean isMerged = false;
 			if (isEarlyMergePrimaryCandidate(candidateRegion)) {
-				List<Region> secondaryRegions = selectSecondaryRegions(candidateRegion);
+				List<@NonNull Region> secondaryRegions = selectSecondaryRegions(candidateRegion);
 				if (secondaryRegions != null) {
 					Region primaryRegion = candidateRegion;
-					MergedRegion mergedRegion = null;
-					for (Region secondaryRegion : secondaryRegions) {
+					MergedMappingRegion mergedRegion = null;
+					for (@NonNull Region secondaryRegion : secondaryRegions) {
 						assert secondaryRegion != null;
 						if (residualInputRegions.contains(secondaryRegion)) {
-							Map<Node, Node> secondaryNode2primaryNode = primaryRegion.canMerge(secondaryRegion, region2depths, false);
+							Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode = primaryRegion.canMerge(secondaryRegion, region2depths, false);
 							if (secondaryNode2primaryNode != null) {
 								boolean isSharedHead = isSharedHead(primaryRegion, secondaryRegion);
 								if (!isSharedHead || (secondaryRegion.canMerge(primaryRegion, region2depths, false) != null)) {
 									if (mergedRegion == null) {
-										mergedRegion = new MergedRegion((MergeableRegion)primaryRegion);
+										mergedRegion = new MergedMappingRegion((MergeableRegion)primaryRegion);
 										residualInputRegions.remove(primaryRegion);
 										primaryRegion = mergedRegion;
 									}
@@ -230,8 +237,9 @@ public class Scheduler extends SchedulerConstants
 					}
 					if (mergedRegion != null) {
 //						mergedRegion.resolveRecursion();
-						writeDOTfile(mergedRegion, "-2-merged");
-						writeGraphMLfile(mergedRegion, "-2-merged");
+						if (Scheduler.DEBUG_GRAPHS.isActive()) {
+							mergedRegion.writeDebugGraphs("2-merged");
+						}
 //						GuardedRegion guardedRegion = createGuardedRegion(mergedRegion, mergeableRegions);
 //						outputRegions.add(guardedRegion);
 						outputRegions.add(mergedRegion);
@@ -247,8 +255,8 @@ public class Scheduler extends SchedulerConstants
 		return outputRegions;
 	}
 
-	public @NonNull MappingRegion getMappingRegion(@NonNull AbstractAction action) {
-		MappingRegion mappingRegion = action2mappingRegion.get(action);
+	public @NonNull SimpleMappingRegion getMappingRegion(@NonNull AbstractAction action) {
+		SimpleMappingRegion mappingRegion = action2mappingRegion.get(action);
 		assert mappingRegion != null;
 		return mappingRegion;
 	}
@@ -293,28 +301,16 @@ public class Scheduler extends SchedulerConstants
 		return false;
 	}
 
-	public @NonNull ScheduledRegion qvtp2qvts() throws IOException {
-		List<Region> allRegions = createSuperRegions();
-		ScheduledRegion rootRegion = createRootRegion(allRegions);
+	public @NonNull RootScheduledRegion qvtp2qvts() throws IOException {
+		List<@NonNull Region> allRegions = createSuperRegions();
+		RootScheduledRegion rootRegion = createRootRegion(allRegions);
 		rootRegion.createSchedule();
-		//
-/*		for (Region region : allRegions) {
-			if (region instanceof CompositeStartRegion) {
-//				if (region.getAllMappingRegions().size() > 1) {
-					writeDOTfile(region);
-//				}
-			}
-		} */
-		writeRegionDOTfile(rootRegion, "-9r-final");
-		writeRegionGraphMLfile(rootRegion, "-9r-final");
-		writeDOTfile(rootRegion, "-9-final");
-		writeGraphMLfile(rootRegion, "-9-final");
 		return rootRegion;
 	}
 
-	public @NonNull Resource qvts2qvti(@NonNull ScheduledRegion scheduledRegion, @NonNull URI qvtiURI) {
+	public @NonNull Resource qvts2qvti(@NonNull RootScheduledRegion scheduledRegion, @NonNull URI qvtiURI, @NonNull SymbolNameReservation symbolNameReservation) {
 		Transformation transformation = getTransformation();
-		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(getEnvironmentFactory(), transformation, scheduledRegion.getRegionOrderer());
+		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(getEnvironmentFactory(), transformation, symbolNameReservation);
 		Model model = (Model)scheduledRegion.accept(visitor);
 		assert model != null;
 		model.setExternalURI(qvtiURI.toString());
@@ -327,32 +323,32 @@ public class Scheduler extends SchedulerConstants
 	/**
 	 * Return a list of single-headed to-one navigable regions whose head is transitively to-one reachable from the primaryRegion's head.
 	 */
-	private @Nullable List<Region> selectSecondaryRegions(@NonNull Region primaryRegion) {
+	private @Nullable List<@NonNull Region> selectSecondaryRegions(@NonNull Region primaryRegion) {
 		//
 		//	All regions that consume one of the primary nodes.
 		//
-		Set<Region> allConsumingRegions = new HashSet<Region>();
+		Set<@NonNull Region> allConsumingRegions = new HashSet<@NonNull Region>();
 		allConsumingRegions.add(primaryRegion);
 		//
 		//	All classes reachable from the primary head.
 		//
-		Set<ClassDatumAnalysis> toOneReachableClasses = new HashSet<ClassDatumAnalysis>();
-		List<Region> secondaryRegions = null;
-		List<Region> allConsumingRegionsList = new ArrayList<Region>(allConsumingRegions);	// CME-proof iterable List shadowing a mutating Set 
+		Set<@NonNull ClassDatumAnalysis> toOneReachableClasses = new HashSet<@NonNull ClassDatumAnalysis>();
+		List<@NonNull Region> secondaryRegions = null;
+		List<@NonNull Region> allConsumingRegionsList = new ArrayList<@NonNull Region>(allConsumingRegions);	// CME-proof iterable List shadowing a mutating Set 
 		for (int i = 0; i < allConsumingRegionsList.size(); i++) {
-			@SuppressWarnings("null")@NonNull Region secondaryRegion = allConsumingRegionsList.get(i);
+			@NonNull Region secondaryRegion = allConsumingRegionsList.get(i);
 			if ((i == 0) || isEarlyMergeSecondaryCandidate(primaryRegion, secondaryRegion, toOneReachableClasses)) {
 				if (i > 0) {
 					if (secondaryRegions == null) {
-						secondaryRegions = new ArrayList<Region>();
+						secondaryRegions = new ArrayList<@NonNull Region>();
 					}
 					secondaryRegions.add(secondaryRegion);
 				}
-				for (@SuppressWarnings("null")@NonNull Node predicatedNode : secondaryRegion.getMatchableNodes()) {
+				for (@NonNull Node predicatedNode : secondaryRegion.getMatchableNodes()) {
 					if (predicatedNode.isClassNode()) {							// Ignore nulls, attributes
 						ClassDatumAnalysis predicatedClassDatumAnalysis = predicatedNode.getClassDatumAnalysis();
 						if (toOneReachableClasses.add(predicatedClassDatumAnalysis)) {
-							for (Region consumingRegion : predicatedClassDatumAnalysis.getConsumingRegions()) {
+							for (@NonNull Region consumingRegion : predicatedClassDatumAnalysis.getConsumingRegions()) {
 								if (allConsumingRegions.add(consumingRegion)) {
 									allConsumingRegionsList.add(consumingRegion);
 								}
@@ -360,12 +356,12 @@ public class Scheduler extends SchedulerConstants
 						}
 					}
 				}
-				if (secondaryRegion instanceof MappingRegion) {
-					for (Node assignedNode : ((MappingRegion)secondaryRegion).getComputedNodes()) {
+				if (secondaryRegion instanceof SimpleMappingRegion) {
+					for (@NonNull Node assignedNode : ((SimpleMappingRegion)secondaryRegion).getComputedNodes()) {
 						if (assignedNode.isClassNode()) {							// Ignore nulls, attributes
 							ClassDatumAnalysis consumingClassDatumAnalysis = assignedNode.getClassDatumAnalysis();
 							if (toOneReachableClasses.add(consumingClassDatumAnalysis)) {
-								for (Region consumingRegion : consumingClassDatumAnalysis.getConsumingRegions()) {
+								for (@NonNull Region consumingRegion : consumingClassDatumAnalysis.getConsumingRegions()) {
 									if (allConsumingRegions.add(consumingRegion)) {
 										allConsumingRegionsList.add(consumingRegion);
 									}

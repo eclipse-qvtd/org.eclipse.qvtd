@@ -10,93 +10,152 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.scheduler;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 
-public abstract class AbstractMappingRegion extends AbstractRegion implements SimpleRegion
+import com.google.common.collect.Iterables;
+
+public abstract class AbstractMappingRegion extends AbstractRegion implements MappingRegion
 {
 	/**
-	 * The node for each navigable VariableDeclaration.
+	 * The subsets of guardVariables from which all guardVariables are to-one navigable.
 	 */
-	private final @NonNull Map<VariableDeclaration, SimpleNode> variable2simpleNode = new HashMap<VariableDeclaration, SimpleNode>();
+	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> headNodes = null;
 
 	protected AbstractMappingRegion(@NonNull SuperRegion superRegion) {
 		super(superRegion);
 	}
-	
-	public void addAssignmentEdge(@NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
-		assert sourceNode.isClassNode();
-		Edge assignmentEdge = sourceNode.getAssignmentEdge(source2targetProperty);
-		if (assignmentEdge == null) {
-			Edges.REALIZED.createEdge(this, sourceNode, source2targetProperty, targetNode);
-		}
-		else {
-			assert assignmentEdge.getTarget() == targetNode;
-		}
-	}
-	
-	public void addPredicateEdge(@NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
-		assert sourceNode.isClassNode();
-		SimpleEdge predicateEdge = sourceNode.getPredicateEdge(source2targetProperty);
-		if (predicateEdge == null) {
-			Edges.NAVIGATION.createSimpleEdge(this, sourceNode, source2targetProperty, targetNode);
-		}
-		else {
-			assert predicateEdge.getTarget() == targetNode;
-		}
+
+	protected void addHeadNode(@NonNull Node headNode) {
+		getHeadNodes().add(headNode);
 	}
 
-	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull SimpleNode simpleNode) {
-		variable2simpleNode.put(typedElement, simpleNode);
-	}
-	
-	public abstract @NonNull SimpleNode createExtraGuard(@NonNull Node extraNode);
-	
-	/**
-	 * Create a navigable path from startNode following the edges of protoPath, re-using edges and nodes where possible.
-	 * Returns a mapping of the proto-edges to the created/re-used edges.
-	 *
-	protected @NonNull Map<SimpleEdge, SimpleEdge> createPath(@NonNull SimpleNode startNode, @NonNull List<SimpleNavigationEdge> protoPath) {
-		Map<SimpleEdge, SimpleEdge> path = new HashMap<SimpleEdge, SimpleEdge>();
-		SimpleRegion region = startNode.getRegion();
-		SimpleNode sourceNode = startNode;
-		for (SimpleNavigationEdge protoEdge : protoPath) {
-			SimpleNavigationEdge edge = sourceNode.getNavigationEdge(protoEdge.getProperty());
-			if (edge == null) {
-				SimpleNode protoTarget = protoEdge.getTarget();
-				SimpleNode targetNode = protoTarget.getNodeRole().createSimpleNode(region, protoTarget.getName(), protoTarget.getClassDatumAnalysis());
-				edge = ((NavigationEdgeRole)protoEdge.getEdgeRole()).createSimpleEdge(region, sourceNode, protoEdge.getProperty(), targetNode);
+	protected @NonNull List<@NonNull Node> computeHeadNodes() {
+		List<@NonNull Node> headNodeGroups = new ArrayList<@NonNull Node>();
+		Iterable<@NonNull Node> navigableNodes = getNavigableNodes();		// Excludes, null, attributes, constants, operations
+		//
+		//	Compute the Set of all target nodes that can be reached by transitive to-one navigation from a particular source node.
+		//
+		Map<@NonNull Node, @NonNull Set<@NonNull Node>> source2targetClosure = new HashMap<@NonNull Node, @NonNull Set<@NonNull Node>>();
+		for (@NonNull Node navigableNode : navigableNodes) {
+			Set<@NonNull Node> targetClosure = new HashSet<@NonNull Node>();
+			source2targetClosure.put(navigableNode, targetClosure);
+			targetClosure.add(navigableNode);
+			for (@NonNull Edge navigationEdge : navigableNode.getNavigationEdges()) {
+				if (!navigationEdge.isRealized()) {
+					targetClosure.add(navigationEdge.getTarget());
+				}
 			}
-			sourceNode = edge.getTarget();
-			path.put(protoEdge, edge);
+			for (@NonNull Edge computationEdge : navigableNode.getComputationEdges()) {
+				targetClosure.add(computationEdge.getSource());
+			}
 		}
-		return path;
-	} */
-
-	public @NonNull SimpleNode getReferenceNode(@NonNull VariableDeclaration variable) {
-		SimpleNode node = variable2simpleNode.get(variable);
-		assert node != null;
-		return node;
-/*		if (variable instanceof RealizedVariable) {
-			return Nodes.REALIZED_VARIABLE.createNode(this, (RealizedVariable)variable);
+		boolean isChanged = true;
+		while (isChanged) {
+			isChanged = false;
+			for (@NonNull Node sourceNode : navigableNodes) {
+				Set<Node> targetClosure = source2targetClosure.get(sourceNode);
+				if (targetClosure != null) {
+					for (@NonNull Node nextNode : new ArrayList<@NonNull Node>(targetClosure)) {
+						Set<@NonNull Node> nextTargetClosure = source2targetClosure.get(nextNode);
+						if ((nextTargetClosure != null) && targetClosure.addAll(nextTargetClosure)) {
+							isChanged = true;
+						}
+					}
+				}
+			}
 		}
-		else if (variable.eContainer() instanceof BottomPattern) {
-			return Nodes.UNREALIZED_VARIABLE.createNode(this, variable);
+		//
+		//	Compute the inverse Set of all source nodes from which a particular target node can be reached by transitive to-one navigation.
+		//
+		final Map<@NonNull Node, @NonNull Set<@NonNull Node>> target2sourceClosure = new HashMap<@NonNull Node, @NonNull Set<@NonNull Node>>();
+		for (@NonNull Node targetNode : navigableNodes) {
+			Set<@NonNull Node> sourceClosure = new HashSet<@NonNull Node>();
+			target2sourceClosure.put(targetNode, sourceClosure);
+			sourceClosure.add(targetNode);
 		}
-		else {
-			return new GuardVariableNode(this, variable);
-		} */
+		for (@NonNull Node sourceNode : navigableNodes) {
+			Set<@NonNull Node> targetClosure = source2targetClosure.get(sourceNode);
+			assert targetClosure != null;
+			for (@NonNull Node targetNode : targetClosure) {
+				Set<@NonNull Node> sourceClosure = target2sourceClosure.get(targetNode);
+				if (sourceClosure != null) {
+					sourceClosure.add(sourceNode);
+				}
+			}
+		}
+		//
+		//	Sort the guardNodes into least reachable first order enabling the heads to be identified
+		//	by successive removal from the start of the list.
+		//
+		List<@NonNull Node> headLessNodes = new ArrayList<@NonNull Node>();
+		Iterables.addAll(headLessNodes, navigableNodes);
+		Collections.sort(headLessNodes, new Comparator<@NonNull Node>()
+		{
+			@Override
+			public int compare(@NonNull Node o1, @NonNull Node o2) {
+				Set<@NonNull Node> set1 = target2sourceClosure.get(o1);
+				Set<@NonNull Node> set2 = target2sourceClosure.get(o2);
+				assert (set1 != null) && (set2 != null);
+				int l1 = set1.size();
+				int l2 = set2.size();
+				return l1 - l2;
+			}
+		});
+		//
+		//	Loop to keep removing distinct inputs until all guard nodes are reachable from some head, taking
+		//	care to group mutually reachable heads as a single input.
+		//
+		while (!headLessNodes.isEmpty()) {
+			Node headNode = headLessNodes.remove(0);
+			assert headNode != null;
+			Set<@NonNull Node> sourceClosure = target2sourceClosure.get(headNode);
+			assert sourceClosure != null;
+			Set<@NonNull Node> targetClosure = source2targetClosure.get(headNode);
+			assert targetClosure != null;
+			List<@NonNull Node> headGroup = new ArrayList<@NonNull Node>();
+			headNode.setHead();
+			assert !headGroup.contains(headNode);
+			headGroup.add(headNode);
+			for (int i = 0; i < headLessNodes.size(); i++) {
+				Node nextNode = headLessNodes.get(i);
+				assert nextNode != null;
+				Set<@NonNull Node> nextClosure = target2sourceClosure.get(nextNode);
+				assert nextClosure != null;
+				if (nextClosure.size() > sourceClosure.size()) {
+					break;
+				}
+				if (nextClosure.equals(sourceClosure)) {
+//					nextNode.setHead();
+					assert !headGroup.contains(nextNode);
+					headGroup.add(nextNode);
+					headLessNodes.remove(nextNode);
+				}
+			}
+			headLessNodes.removeAll(targetClosure);
+			targetClosure.removeAll(headGroup);
+			Node bestHeadNode = selectBestHeadNode(headGroup);
+			assert !headNodeGroups.contains(bestHeadNode);
+			headNodeGroups.add(bestHeadNode);
+		}
+		return headNodeGroups;
 	}
 
-	public @Nullable SimpleNode getSimpleNode(@NonNull TypedElement typedElement) {
-		return variable2simpleNode.get(typedElement);
+	@Override
+	public @NonNull List<@NonNull Node> getHeadNodes() {
+		List<@NonNull Node> headNodes2 = headNodes;
+		if (headNodes2 == null) {
+			headNodes = headNodes2 = computeHeadNodes();
+		}
+		return headNodes2;
 	}
-
-	public abstract @NonNull SimpleNode getUnknownNode(@NonNull TypedElement typedElement);
 }

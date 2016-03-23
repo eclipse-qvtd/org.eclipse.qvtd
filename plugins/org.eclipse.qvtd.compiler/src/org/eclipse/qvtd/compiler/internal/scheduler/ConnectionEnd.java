@@ -10,19 +10,13 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.scheduler;
 
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
- * A Schedulable object has a linear scheduled index.
+ * A ConnectionEnd may be the Node/Edge at the end of a NodeConnection/EdgeConnection.
  */
-public interface Schedulable
+public interface ConnectionEnd
 {
-	boolean addIndex(int index);
-	int getEarliestIndex();
-	@Nullable String getIndexText();
-	@Nullable List<@NonNull Integer> getIndexes();
-	int getLatestIndex();
+	@NonNull String getDisplayName();
+	@NonNull Region getRegion();
 }

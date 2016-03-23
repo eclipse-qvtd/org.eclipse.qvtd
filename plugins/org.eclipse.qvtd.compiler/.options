@@ -1,5 +1,11 @@
 # Debugging options for the org.eclipse.ocl.examples.codegen plug-in
 
+# Turn on tracing of connection creation 
+org.eclipse.qvtd.compiler/qvtp2qvts/connectionCreation=false
+# Turn on tracing of connection reouting 
+org.eclipse.qvtd.compiler/qvtp2qvts/connectionRouting=false
+# Turn on generation of debug graphs 
+org.eclipse.qvtd.compiler/qvtp2qvts/debugGraphs=false
 # Turn on tracing of the operation dependency analysis 
 org.eclipse.qvtd.compiler/qvtp2qvts/dependencyAnalysis=false
 # Turn on dump of the consuming node for each class 
@@ -12,10 +18,10 @@ org.eclipse.qvtd.compiler/qvtp2qvts/dump/class2realizedNodes=false
 org.eclipse.qvtd.compiler/qvtp2qvts/dump/inputModel2domainUsage=false
 # Turn on dump of the possible containing properties for each class 
 org.eclipse.qvtd.compiler/qvtp2qvts/dump/property2consumingClass=false
+# Turn on tracing of the region cycle resolution 
+org.eclipse.qvtd.compiler/qvtp2qvts/regionCycles=false
 # Turn on tracing of the region depth computation 
 org.eclipse.qvtd.compiler/qvtp2qvts/regionDepth=false
-# Turn on tracing of the region connection locality computation 
-org.eclipse.qvtd.compiler/qvtp2qvts/regionLOcality=false
 # Turn on tracing of the region order computation 
 org.eclipse.qvtd.compiler/qvtp2qvts/regionOrder=false
 # Turn on tracing of the region call stack computation 

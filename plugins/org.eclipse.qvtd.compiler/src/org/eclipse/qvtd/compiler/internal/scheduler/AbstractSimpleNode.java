@@ -23,7 +23,7 @@ import com.google.common.collect.Iterables;
 
 public abstract class AbstractSimpleNode extends AbstractNode implements SimpleNode
 {
-	private final @NonNull List<TypedElement> typedElements = new ArrayList<TypedElement>();
+	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<@NonNull TypedElement>();
 
 	protected AbstractSimpleNode(@NonNull NodeRole nodeRole, @NonNull SimpleRegion region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		super(nodeRole, region, name, classDatumAnalysis);
@@ -36,9 +36,9 @@ public abstract class AbstractSimpleNode extends AbstractNode implements SimpleN
 	}
 
 	@Override
-	public final @NonNull Iterable<SimpleNavigationEdge> getCastEdges() {
-		@SuppressWarnings({"null", "unchecked"})
-		@NonNull Iterable<SimpleNavigationEdge> filter = (Iterable<SimpleNavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsCastEdgePredicate.INSTANCE);
+	public final @NonNull Iterable<@NonNull SimpleNavigationEdge> getCastEdges() {
+		@SuppressWarnings("unchecked")
+		@NonNull Iterable<@NonNull SimpleNavigationEdge> filter = (Iterable<@NonNull SimpleNavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsCastEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -70,24 +70,24 @@ public abstract class AbstractSimpleNode extends AbstractNode implements SimpleN
 	}
 
 	@Override
-	public final @NonNull Iterable<? extends SimpleEdge> getResultEdges() {
-		@SuppressWarnings({"null", "unchecked"})
-		@NonNull Iterable<SimpleEdge> filter = (Iterable<SimpleEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsExpressionEdgePredicate.INSTANCE);
+	public final @NonNull Iterable<@NonNull ? extends SimpleEdge> getResultEdges() {
+		@SuppressWarnings("unchecked")
+		@NonNull Iterable<@NonNull SimpleEdge> filter = (Iterable<@NonNull SimpleEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsExpressionEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
-	public @NonNull Iterable<SimpleNode> getSimpleNodes() {
+	public @NonNull Iterable<@NonNull SimpleNode> getSimpleNodes() {
 		return this;
 	}
 
 	@Override
-	public Iterator<SimpleNode> iterator() {
-		return new SingletonIterator<SimpleNode>(this);
+	public @NonNull Iterator<@NonNull SimpleNode> iterator() {
+		return new SingletonIterator<@NonNull SimpleNode>(this);
 	}
 
 	@Override
-	public @NonNull Iterable<TypedElement> getTypedElements() {
+	public @NonNull Iterable<@NonNull TypedElement> getTypedElements() {
 		return typedElements;
 	}
 }

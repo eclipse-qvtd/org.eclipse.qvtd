@@ -10,25 +10,23 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.scheduler;
 
-import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 
-public interface NavigationEdge extends Edge, ConnectionEnd//, GraphStringBuilder.GraphNode
+/**
+ * An EdgeConnection supports an existence dependency between the region(s) that produce a navigation edge
+ * and the region(s) that consume it.
+ */
+public interface EdgeConnection extends DatumConnection
 {
-	void addIncomingConnection(@NonNull EdgeConnection edgeConnection);
-	void addOutgoingConnection(@NonNull EdgeConnection edgeConnection);
-
-	@Nullable EdgeConnection getIncomingConnection();
-	@NonNull List<@NonNull EdgeConnection> getOutgoingConnections();
-
-	/**
-	 * Return the property that this edge navigates from source to target. 
-	 */
+	void addUsedTargetEdge(@NonNull NavigationEdge targetEdge, boolean mustBeLater);
 	@NonNull Property getProperty();
-
-	void removeIncomingConnection(@NonNull EdgeConnection edgeConnection);
-	void removeOutgoingConnection(@NonNull EdgeConnection edgeConnection);
+	@Override
+	@NonNull Iterable<@NonNull NavigationEdge> getSources();
+	@NonNull ConnectionRole getConnectionRole(@NonNull NavigationEdge targetEdge);
+	@NonNull Iterable<@NonNull NavigationEdge> getTargetEdges();
+	@Override
+	@NonNull Map<@NonNull NavigationEdge, @NonNull ConnectionRole> getTargets();
 }

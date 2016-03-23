@@ -54,12 +54,11 @@ public class SuperRegion
 		return castProperty;
 	} */
 
-	public @NonNull MappingRegion getMappingRegion(@NonNull AbstractAction action) {
+	public @NonNull SimpleMappingRegion getMappingRegion(@NonNull AbstractAction action) {
 		return scheduler.getMappingRegion(action);
 	}
 
-	@SuppressWarnings("null")
-	public @NonNull Iterable<OperationRegion> getOperationRegions() {
+	public @NonNull Iterable<@NonNull OperationRegion> getOperationRegions() {
 		return Iterables.filter(allRegions, OperationRegion.class);
 	}
 

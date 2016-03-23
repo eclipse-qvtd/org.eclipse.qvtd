@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.ids.OperationId;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -40,17 +41,19 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.scheduler.AbstractRegion;
-import org.eclipse.qvtd.compiler.internal.scheduler.CompositionRegion;
-import org.eclipse.qvtd.compiler.internal.scheduler.MappingRegion;
-import org.eclipse.qvtd.compiler.internal.scheduler.MergedRegion;
+import org.eclipse.qvtd.compiler.internal.scheduler.ChildCompositionRegion;
+import org.eclipse.qvtd.compiler.internal.scheduler.CyclicScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.scheduler.MergedMappingRegion;
 import org.eclipse.qvtd.compiler.internal.scheduler.OperationRegion;
 import org.eclipse.qvtd.compiler.internal.scheduler.Region;
 import org.eclipse.qvtd.compiler.internal.scheduler.Region2Depth;
-import org.eclipse.qvtd.compiler.internal.scheduler.RegionOrdering;
-import org.eclipse.qvtd.compiler.internal.scheduler.RootRegion;
-import org.eclipse.qvtd.compiler.internal.scheduler.ScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.scheduler.RootCompositionRegion;
+import org.eclipse.qvtd.compiler.internal.scheduler.RootScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.scheduler.SimpleMappingRegion;
 import org.eclipse.qvtd.compiler.internal.scheduler.Visitable;
 import org.eclipse.qvtd.compiler.internal.scheduler.Visitor;
+import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
+import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -74,30 +77,25 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 	
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull Transformation qvtpTransformation;
-	protected final @NonNull RegionOrdering regionOrdering;
+	protected final @NonNull SymbolNameReservation symbolNameReservation;
 
 	protected final @NonNull Transformation qvtiTransformation;
-	protected final @NonNull Map<TypedModel, TypedModel> qvtpTypedModel2qvtiTypedModel = new HashMap<TypedModel, TypedModel>();
-	protected final @NonNull List<TypedModel> checkableTypedModels = new ArrayList<TypedModel>();
-	protected final @NonNull List<TypedModel> checkableAndEnforceableTypedModels = new ArrayList<TypedModel>();
-	protected final @NonNull List<TypedModel> enforceableTypedModels = new ArrayList<TypedModel>();
-	protected final @NonNull Map<Region, AbstractRegion2Mapping> region2region2mapping = new HashMap<Region, AbstractRegion2Mapping>();
-	private @Nullable Set<String> reservedNames = null;
-	private @NonNull Map<Operation, Operation> qvtpOperation2qvtiOperation = new HashMap<Operation, Operation>();
+	protected final @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> qvtpTypedModel2qvtiTypedModel = new HashMap<@NonNull TypedModel, @NonNull TypedModel>();
+	protected final @NonNull List<@NonNull TypedModel> checkableTypedModels = new ArrayList<@NonNull TypedModel>();
+	protected final @NonNull List<@NonNull TypedModel> checkableAndEnforceableTypedModels = new ArrayList<@NonNull TypedModel>();
+	protected final @NonNull List<@NonNull TypedModel> enforceableTypedModels = new ArrayList<@NonNull TypedModel>();
+	protected final @NonNull Map<@NonNull Region, @NonNull AbstractRegion2Mapping> region2region2mapping = new HashMap<@NonNull Region, @NonNull AbstractRegion2Mapping>();
+	private @Nullable Set<@NonNull String> reservedNames = null;
+	private @NonNull Map<@NonNull Operation, @NonNull Operation> qvtpOperation2qvtiOperation = new HashMap<@NonNull Operation, @NonNull Operation>();
 	private final @NonNull Region2Depth region2depth = new Region2Depth();
 	
-	private final @NonNull Set<Transformation> otherTransformations = new HashSet<Transformation>();	// Workaround Bug 481658
-	private final @NonNull Map<String, Operation> name2operation = new HashMap<String, Operation>();	// Workaround Bug 481658
+	private final @NonNull Set<@NonNull Transformation> otherTransformations = new HashSet<@NonNull Transformation>();	// Workaround Bug 481658
+	private final @NonNull Map<@NonNull String, @NonNull Operation> name2operation = new HashMap<@NonNull String, @NonNull Operation>();	// Workaround Bug 481658
 	
-	 /**
-	  * Mapping from connection to the common Region that hosts the connection variable.
-	  */
-//	private final @NonNull Map<Connection, Region> connection2commonRegion = new HashMap<Connection, Region>();
-	
-	public QVTs2QVTiVisitor(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation qvtpTransformation, @NonNull RegionOrdering regionOrdering) {
+	public QVTs2QVTiVisitor(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation qvtpTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
 		this.environmentFactory = environmentFactory;
 		this.qvtpTransformation = qvtpTransformation;
-		this.regionOrdering = regionOrdering;
+		this.symbolNameReservation = symbolNameReservation;
 		String transformationName = qvtpTransformation.getName();
 		assert transformationName != null;
 		qvtiTransformation = QVTimperativeUtil.createTransformation(transformationName);
@@ -111,7 +109,7 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 				EObject eObject = tit.next();
 				if (eObject instanceof Operation) {
 					Operation operation = (Operation) eObject;
-					String name = operation.toString();
+					String name = String.valueOf(operation);
 					name2operation.put(name, operation);
 				}
 			}
@@ -187,11 +185,14 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 		AbstractRegion2Mapping region2mapping = region2region2mapping.get(region);
 		assert region2mapping == null : "Re-AbstractRegion2Mapping for " + region;
 //		assert !region.isConnectionRegion();
-		if (region.isCompositionRegion()) {
-			region2mapping = new CompositionRegion2Mapping(this, region);
+		if (region.isChildCompositionRegion()) {
+			region2mapping = new ChildCompositionRegion2Mapping(this, (@NonNull ChildCompositionRegion) region);
 		}
-		else if (region.isRootRegion()) {
-			region2mapping = new RootRegion2Mapping(this, region);
+		else if (region.isCyclicScheduledRegion()) {
+			region2mapping = new CyclicScheduledRegion2Mapping(this, (CyclicScheduledRegion)region);
+		}
+		else if (region.isRootCompositionRegion()) {
+			region2mapping = new RootRegion2Mapping(this, (RootCompositionRegion)region);
 		}
 		else {
 			region2mapping = new BasicRegion2Mapping(this, region);
@@ -281,19 +282,19 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 		return region2mapping;
 	}
 
-	public @NonNull Set<String> getReservedNames() {
-		Set<String> reservedNames2 = reservedNames;
+	public @NonNull Set<@NonNull String> getReservedNames() {
+		Set<@NonNull String> reservedNames2 = reservedNames;
 		if (reservedNames2 == null) {
-			reservedNames = reservedNames2 = new HashSet<String>();
-			reservedNames2.add(qvtpTransformation.getName());
+			reservedNames = reservedNames2 = new HashSet<@NonNull String>();
+			reservedNames2.add(ClassUtil.nonNull(qvtpTransformation.getName()));
 			for (TypedModel typedModel : qvtpTransformation.getModelParameter()) {
-				reservedNames2.add(typedModel.getName());
+				reservedNames2.add(ClassUtil.nonNullState(typedModel.getName()));
 			}
 			for (Operation operation : qvtpTransformation.getOwnedOperations()) {
-				reservedNames2.add(operation.getName());
+				reservedNames2.add(ClassUtil.nonNull(operation.getName()));
 			}
 			for (Property property : qvtpTransformation.getOwnedProperties()) {
-				reservedNames2.add(property.getName());
+				reservedNames2.add(ClassUtil.nonNull(property.getName()));
 			}
 		}
 		return reservedNames2;
@@ -307,6 +308,10 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 		return qvtiTransformation;
 	}
 
+	public @NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Object object) {
+		return symbolNameReservation.reserveSymbolName(symbolNameBuilder, object);
+	}
+
 //	private @NonNull Node selectHeadNode(@NonNull List<Node> headNodes) {
 //		return headNodes.get(0);			// FIXME best
 //	}
@@ -317,8 +322,8 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 	}
 
 	@Override
-	public @Nullable Element visitCompositionRegion(@NonNull CompositionRegion containmentRegion) {
-		AbstractRegion2Mapping region2mapping = getRegion2Mapping(containmentRegion);
+	public @Nullable Element visitChildCompositionRegion(@NonNull ChildCompositionRegion childCompositionRegion) {
+		AbstractRegion2Mapping region2mapping = getRegion2Mapping(childCompositionRegion);
 		Mapping mapping = region2mapping.getMapping();
 /*		MappingStatement mappingStatement = null;
 		for (@SuppressWarnings("null")@NonNull List<Node> headNodes : containmentRegion.getHeadNodeGroups()) {
@@ -355,14 +360,37 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 	}
 	
 	@Override
-	public @Nullable Element visitMappingRegion(@NonNull MappingRegion mappingRegion) {
-		AbstractRegion2Mapping region2mapping = getRegion2Mapping(mappingRegion);
+	public @Nullable Element visitCyclicScheduledRegion(@NonNull CyclicScheduledRegion cyclicScheduledRegion) {
+		List<@NonNull Region> callableRegions = new ArrayList<@NonNull Region>();
+		for (@NonNull Region region : cyclicScheduledRegion.getRegions()) {
+			if (region.isOperationRegion()) {}
+//			else if (region.isConnectionRegion()) {
+//				callableRegions.add(region);
+//			}
+			else {
+				callableRegions.add(region);
+			}
+		}
+
+		List<@NonNull Region> sortedRegions = AbstractRegion.EarliestRegionComparator.sort(callableRegions);
+		for (@NonNull Region region : sortedRegions) {
+//			if (!region.isConnectionRegion()) {
+				createRegion2Mapping(region);
+//			}
+		}
+		for (@NonNull Region region : sortedRegions) {
+//			if (!region.isConnectionRegion()) {
+				AbstractRegion2Mapping region2Mapping = getRegion2Mapping(region);
+				region2Mapping.createStatements();
+//			}
+		}
+		AbstractRegion2Mapping region2mapping = getRegion2Mapping(cyclicScheduledRegion);
 		return region2mapping.getMapping();
 	}
 
 	@Override
-	public @Nullable Element visitMergedRegion(@NonNull MergedRegion mergedRegion) {
-		AbstractRegion2Mapping region2mapping = getRegion2Mapping(mergedRegion);
+	public @Nullable Element visitMergedMappingRegion(@NonNull MergedMappingRegion mergedMappingRegion) {
+		AbstractRegion2Mapping region2mapping = getRegion2Mapping(mergedMappingRegion);
 		Mapping mapping = region2mapping.getMapping();
 		return mapping;
 	}
@@ -373,8 +401,8 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 	}
 	
 	@Override
-	public @Nullable Element visitRootCompositionRegion(@NonNull RootRegion rootContainmentRegion) {
-		AbstractRegion2Mapping region2mapping = getRegion2Mapping(rootContainmentRegion);
+	public @Nullable Element visitRootCompositionRegion(@NonNull RootCompositionRegion rootCompositionRegion) {
+		AbstractRegion2Mapping region2mapping = getRegion2Mapping(rootCompositionRegion);
 		Mapping mapping = region2mapping.getMapping();
 //		for (@SuppressWarnings("null")@NonNull List<Node> headNodes : rootContainmentRegion.getHeadNodeGroups()) {
 //			Node headNode = selectHeadNode(headNodes);
@@ -385,12 +413,12 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 	}
 	
 	@Override
-	public @Nullable Element visitRootRegion(@NonNull ScheduledRegion scheduledRegion) {
+	public @Nullable Element visitRootScheduledRegion(@NonNull RootScheduledRegion rootScheduledRegion) {
 //		String name = rootRegion.getName();
 		org.eclipse.ocl.pivot.Package rootPackage = PivotUtil.createPackage("", "yy", "zz", null);
 		//
-		List<Region> callableRegions = new ArrayList<Region>();
-		for (@SuppressWarnings("null")@NonNull Region region : scheduledRegion.getRegions()) {
+		List<@NonNull Region> callableRegions = new ArrayList<@NonNull Region>();
+		for (@NonNull Region region : rootScheduledRegion.getRegions()) {
 			if (region.isOperationRegion()) {}
 //			else if (region.isConnectionRegion()) {
 //				callableRegions.add(region);
@@ -400,8 +428,8 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 			}
 		}
 
-		List<Region> sortedRegions = AbstractRegion.EarliestRegionComparator.sort(callableRegions);
-		for (@SuppressWarnings("null")@NonNull Region region : sortedRegions) {
+		List<@NonNull Region> sortedRegions = AbstractRegion.EarliestRegionComparator.sort(callableRegions);
+		for (@NonNull Region region : sortedRegions) {
 //			if (!region.isConnectionRegion()) {
 				createRegion2Mapping(region);
 //			}
@@ -436,7 +464,7 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 			AbstractRegion2Mapping region2Mapping = getRegion2Mapping(region);
 			region2Mapping.checkAndEnforceRealizations(typedModel2property2realizedEdges);
 		} */
-		for (@SuppressWarnings("null")@NonNull Region region : sortedRegions) {
+		for (@NonNull Region region : sortedRegions) {
 //			if (!region.isConnectionRegion()) {
 				AbstractRegion2Mapping region2Mapping = getRegion2Mapping(region);
 				region2Mapping.createStatements();
@@ -446,22 +474,25 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 		ECollections.sort(qvtiTransformation.getRule(), NameUtil.NameableComparator.INSTANCE);
 		Model model = PivotUtil.createModel(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, null);
 		model.getOwnedPackages().add(rootPackage);
-		List<Namespace> importedNamespaces = new ArrayList<Namespace>();
-		for (TypedModel typedModel : qvtpTypedModel2qvtiTypedModel.values()) {
-			if (typedModel != null) {
-				for (Namespace importedNamespace : typedModel.getUsedPackage()) {
-					if (!importedNamespaces.contains(importedNamespace)) {
-						importedNamespaces.add(importedNamespace);
-					}
+		List<@NonNull Namespace> importedNamespaces = new ArrayList<@NonNull Namespace>();
+		for (@NonNull TypedModel typedModel : qvtpTypedModel2qvtiTypedModel.values()) {
+			for (Namespace importedNamespace : ClassUtil.nullFree(typedModel.getUsedPackage())) {
+				if (!importedNamespaces.contains(importedNamespace)) {
+					importedNamespaces.add(importedNamespace);
 				}
 			}
 		}
 		Collections.sort(importedNamespaces, NameUtil.NAMEABLE_COMPARATOR);
 		List<Import> ownedImports = model.getOwnedImports();
-		for (@SuppressWarnings("null")@NonNull Namespace importedNamespace : importedNamespaces) {
+		for (@NonNull Namespace importedNamespace : importedNamespaces) {
 			ownedImports.add(createImport(null, importedNamespace));
 		}
 		return model;
 	}
-
+	
+	@Override
+	public @Nullable Element visitSimpleMappingRegion(@NonNull SimpleMappingRegion simpleMappingRegion) {
+		AbstractRegion2Mapping region2mapping = getRegion2Mapping(simpleMappingRegion);
+		return region2mapping.getMapping();
+	}
 }

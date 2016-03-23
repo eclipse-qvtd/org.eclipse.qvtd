@@ -348,6 +348,11 @@ public class DependencyAnalyzer
 			return dependencyAnalyzer.createDependencyPaths(newReturnPaths, hiddenPaths);
 		}
 
+		public boolean conformsTo(Type typeValue) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
 		public @NonNull Iterable<List<DependencyStep>> getHiddenPaths() {
 			Map<String, List<DependencyStep>> map = new HashMap<String, List<DependencyStep>>();
 			if (hiddenPaths != null) {
@@ -568,6 +573,9 @@ public class DependencyAnalyzer
 			if (PivotUtil.isSameOperation(operationId, scheduler.getOclElementOclContainerId())) {
 				return executeOperationCallExp_oclContainer(operationCallExp, argumentPaths);
 			}
+//			if (PivotUtil.isSameOperation(operationId, scheduler.getCollectionSelectByKindId())) {
+//				return executeOperationCallExp_collectionSelectByKind(operationCallExp, argumentPaths);
+//			}
 //			else if (PivotUtil.isSameOperation(operationId, scheduler.getOclAnyOclIsKindOfId())) {
 //				return analyzeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
 //			}
@@ -577,6 +585,19 @@ public class DependencyAnalyzer
 			DependencyPaths result = createDependencyPaths(step);
 			for (@SuppressWarnings("null")@NonNull DependencyPaths argumentPath : argumentPaths) {
 				result = result.addHidden(argumentPath);
+			}
+			return result;
+		}
+
+		private @NonNull DependencyPaths executeOperationCallExp_collectionSelectByKind(@NonNull OperationCallExp operationCallExp,
+				List<DependencyPaths> argumentPaths) {
+			OCLExpression oclExpression = operationCallExp.getOwnedArguments().get(0);
+			Type typeValue = oclExpression.getTypeValue();
+			DependencyPaths result = emptyDependencyPaths;
+			for (DependencyPaths argumentPath : argumentPaths) {
+				if (argumentPath.conformsTo(typeValue)) {
+					result.addReturn(argumentPath);
+				}
 			}
 			return result;
 		}

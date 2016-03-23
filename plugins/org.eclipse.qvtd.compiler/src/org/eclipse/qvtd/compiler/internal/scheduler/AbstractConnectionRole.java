@@ -17,6 +17,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNo
 
 abstract class AbstractConnectionRole implements ConnectionRole
 {
+	protected final boolean isNode;
+	
+	protected AbstractConnectionRole(boolean isNode) {
+		this.isNode = isNode;
+	}
+
 	@Override
 	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
 		s.setColor(getColor());
@@ -39,7 +45,7 @@ abstract class AbstractConnectionRole implements ConnectionRole
 
 	@Override
 	public @NonNull String getColor() {
-		return Role.BINDING_COLOR;
+		return isNode ? Role.BINDING_COLOR : Role.ORDERING_COLOR;
 	}
 
 	@Override

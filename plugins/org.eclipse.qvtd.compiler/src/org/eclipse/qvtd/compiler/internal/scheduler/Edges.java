@@ -376,7 +376,7 @@ public class Edges
 			return new AbstractEdge(this, region, sourceNode, null, targetNode)
 			{
 				@Override
-				public @NonNull Iterable<SimpleEdge> getSimpleEdges() {
+				public @NonNull Iterable<@NonNull SimpleEdge> getSimpleEdges() {
 					return SchedulerConstants.EMPTY_SIMPLE_EDGE_LIST;
 				}
 			};

@@ -68,7 +68,12 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	public boolean isHead() {
 		return false;
 	}
-	
+
+//	@Override
+//	public boolean isInput() {
+//		return false;
+//	}
+
 	@Override
 	public boolean isInternal() {
 		return false;
@@ -98,6 +103,11 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	public boolean isOperation() {
 		return false;
 	}
+
+//	@Override
+//	public boolean isOutput() {
+//		return false;
+//	}
 
 	@Override
 	public boolean isRealizedVariable() {

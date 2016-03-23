@@ -22,24 +22,26 @@ import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
-public class CompositionRegion extends AbstractRegion implements SimpleRegion
+public class ChildCompositionRegion extends AbstractRegion implements SimpleRegion
 {
 	protected final @NonNull Property parent2childrenProperty;
 	protected final @NonNull TypedModel typedModel;
 	protected final @NonNull SimpleNode composingNode;
+	private final @NonNull List<@NonNull Node> headNodes = new ArrayList<@NonNull Node>();
 
-	public CompositionRegion(@NonNull SuperRegion superRegion, @NonNull Property parent2childrenProperty, @NonNull TypedModel typedModel) {
+	public ChildCompositionRegion(@NonNull SuperRegion superRegion, @NonNull Property parent2childrenProperty, @NonNull TypedModel typedModel) {
 		super(superRegion);
 		this.parent2childrenProperty = parent2childrenProperty;
 		this.typedModel = typedModel;
 		org.eclipse.ocl.pivot.Class owningClass = parent2childrenProperty.getOwningClass();
 		assert owningClass != null;
 		this.composingNode = Nodes.COMPOSING.createSimpleNode(this, "«parent»", getSchedulerConstants().getClassDatumAnalysis(owningClass, typedModel));
+		headNodes.add(composingNode);
 	}
 
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return visitor.visitCompositionRegion(this);
+		return visitor.visitChildCompositionRegion(this);
 	}
 
 	public @NonNull Node addClassDatumAnalysis(@NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -72,13 +74,6 @@ public class CompositionRegion extends AbstractRegion implements SimpleRegion
 	}
 
 	@Override
-	protected @NonNull List<@NonNull Node> computeHeadNodes() {
-		List<@NonNull Node> headNodeGroups = new ArrayList<@NonNull Node>();
-		headNodeGroups.add(composingNode);
-		return headNodeGroups;
-	}
-
-	@Override
 	protected @NonNull SymbolNameBuilder computeSymbolName() {
 		SymbolNameBuilder s = new SymbolNameBuilder();
 		s.appendString("r_");
@@ -88,8 +83,40 @@ public class CompositionRegion extends AbstractRegion implements SimpleRegion
 		return s;
 	}
 
+	@Override
+	public void createIncomingConnections() {
+		ScheduledRegion invokingRegion2 = getInvokingRegion();
+		assert invokingRegion2 != null;
+		RootScheduledRegion rootScheduledRegion = invokingRegion2.getRootScheduledRegion();
+		ClassDatumAnalysis classDatumAnalysis = composingNode.getClassDatumAnalysis();
+		List<@NonNull Node> headSources = null;
+		//
+		//	Locate compatible introducers
+		//
+		Iterable<@NonNull Node> introducingNodes = rootScheduledRegion.getIntroducingNodes(classDatumAnalysis);
+		if (introducingNodes != null) {
+			for (@NonNull Node introducingNode : introducingNodes) {
+				if (introducingNode.getRegion() != this) {
+					if (headSources == null) {
+						headSources = new ArrayList<@NonNull Node>();
+					}
+					headSources.add(introducingNode);
+				}
+			}
+		}
+		if (headSources != null) {
+			NodeConnection headConnection = invokingRegion2.getNodeConnection(headSources, classDatumAnalysis);
+			headConnection.addPassedTargetNode(composingNode);
+		}
+	}
+
 	public @NonNull Node getComposingNode() {
 		return composingNode;
+	}
+
+	@Override
+	public @NonNull List<@NonNull Node> getHeadNodes() {
+		return headNodes;
 	}
 
 	@SuppressWarnings("null")
@@ -99,7 +126,7 @@ public class CompositionRegion extends AbstractRegion implements SimpleRegion
 	}
 
 	@Override
-	public boolean isCompositionRegion() {
+	public boolean isChildCompositionRegion() {
 		return true;
 	}
 	
@@ -114,10 +141,10 @@ public class CompositionRegion extends AbstractRegion implements SimpleRegion
 		s.setColor("lightblue");
 		s.setPenwidth(Role.LINE_WIDTH);
 		s.pushCluster();
-		for (@SuppressWarnings("null")@NonNull Node node : getNodes()) {
+		for (@NonNull Node node : getNodes()) {
 			s.appendNode(node);
 		}
-		for (@SuppressWarnings("null")@NonNull Edge edge : getEdges()) {
+		for (@NonNull Edge edge : getEdges()) {
 			s.appendEdge(edge.getSource(), edge, edge.getTarget());
 		}
 		s.popCluster();

@@ -23,10 +23,10 @@ import org.eclipse.jdt.annotation.NonNull;
 	 * The 1:1 guarantees that if any group member is available, all group members are equally available.
 	 * Therefore production/consumption of one is not distinct from production/consumption of another.
 	 */
-	public class HeadNodeGroup implements Iterable<Map.Entry<MappingRegion, List<Node>>>
+	public class HeadNodeGroup implements Iterable<Map.Entry<SimpleMappingRegion, List<Node>>>
 	{
 //		private @NonNull List<ClassNode> headNodes = new ArrayList<ClassNode>();
-		private @NonNull Map<MappingRegion, List<Node>> mappingRegion2headNodes = new HashMap<MappingRegion, List<Node>>();
+		private @NonNull Map<SimpleMappingRegion, List<Node>> mappingRegion2headNodes = new HashMap<SimpleMappingRegion, List<Node>>();
 
 //		public void add(@NonNull ClassNode headNode) {
 //			if (!headNodes.contains(headNode)) {
@@ -35,23 +35,23 @@ import org.eclipse.jdt.annotation.NonNull;
 //		}
 
 		@Override
-		public Iterator<Map.Entry<MappingRegion, List<Node>>> iterator() {
+		public Iterator<Map.Entry<SimpleMappingRegion, List<Node>>> iterator() {
 			return mappingRegion2headNodes.entrySet().iterator();
 		}
 
-		public void addMappingRegion(@NonNull MappingRegion mappingRegion, @NonNull List<Node> headNodes) {
+		public void addMappingRegion(@NonNull SimpleMappingRegion mappingRegion, @NonNull List<Node> headNodes) {
 			List<Node> oldHeadNodes = mappingRegion2headNodes.put(mappingRegion, headNodes);
 			assert oldHeadNodes == null;
 		}
 
-		public @NonNull Collection<MappingRegion> getRegions() {
+		public @NonNull Collection<SimpleMappingRegion> getRegions() {
 			return mappingRegion2headNodes.keySet();
 		}
 
 		@Override
 		public String toString() {
 			StringBuilder s = new StringBuilder();
-			for (Map.Entry<MappingRegion, List<Node>> entry : this) {
+			for (Map.Entry<SimpleMappingRegion, List<Node>> entry : this) {
 				if (s.length() > 0) {
 					s.append("\n\t");
 				}

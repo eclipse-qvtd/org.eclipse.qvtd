@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.scheduler.DependencyAnalyzer.DependencyPaths;
@@ -42,14 +41,15 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;
 
-public class OperationRegion extends AbstractMappingRegion
+public class OperationRegion extends AbstractRegion implements SimpleRegion
 {
 	protected final @NonNull Operation operation;
 	protected final @NonNull ExpressionInOCL specification;
 	protected final @NonNull String name;
+	private final @NonNull List<@NonNull Node> headNodes = new ArrayList<@NonNull Node>();
 //	private final @NonNull List<SimpleNode> iteratorNodes = new ArrayList<SimpleNode>();
 	private final @NonNull SimpleNode resultNode;
-	private final @NonNull List<Node> extraNodes = new ArrayList<Node>();
+	private final @NonNull List<@NonNull Node> extraNodes = new ArrayList<@NonNull Node>();
 	
 	protected OperationRegion(@NonNull SuperRegion superRegion, @NonNull OperationDatum operationDatum, @NonNull ExpressionInOCL specification, @NonNull OperationCallExp operationCallExp) {//, @NonNull SimpleNode sourceNode) {
 		super(superRegion);
@@ -145,7 +145,6 @@ public class OperationRegion extends AbstractMappingRegion
 		
 		
 		//
-		getHeadNodes();
 		toGraph(new DOTStringBuilder());
 		toGraph(new GraphMLStringBuilder());
 	}
@@ -163,11 +162,6 @@ public class OperationRegion extends AbstractMappingRegion
 		return s;
 	}
 
-	@Override
-	public @NonNull SimpleNode createExtraGuard(@NonNull Node extraNode) {
-		throw new UnsupportedOperationException();
-	}
-
 	private @NonNull SimpleNode createParameterNode(@NonNull Variable variable, @NonNull String name, @NonNull OCLExpression expression) {
 		SchedulerConstants schedulerConstants = getSchedulerConstants();
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)expression.getType();
@@ -176,20 +170,25 @@ public class OperationRegion extends AbstractMappingRegion
 		assert typedModel != null;
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(type, typedModel);
 		SimpleNode parameterNode = Nodes.PARAMETER.createSimpleNode(this, name, classDatumAnalysis);
-		addVariableNode(variable, parameterNode);
-		addHeadNode(parameterNode);
+//		addVariableNode(variable, parameterNode);
+		headNodes.add(parameterNode);
 		return parameterNode;
 	}
 
 	private @NonNull SimpleNode createParameterNode(@NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull String name) {
 		SimpleNode parameterNode = Nodes.PARAMETER.createSimpleNode(this, name, classDatumAnalysis);
 //		addVariableNode(variable, parameterNode);
-		addHeadNode(parameterNode);
+		headNodes.add(parameterNode);
 		return parameterNode;
 	}
 
-	public @NonNull List<Node> getExtraNodes() {
+	public @NonNull List<@NonNull Node> getExtraNodes() {
 		return extraNodes;
+	}
+
+	@Override
+	public @NonNull List<@NonNull Node> getHeadNodes() {
+		return headNodes;
 	}
 
 	@Override
@@ -201,10 +200,10 @@ public class OperationRegion extends AbstractMappingRegion
 		return resultNode;
 	}
 
-	@Override
-	public @NonNull SimpleNode getUnknownNode(@NonNull TypedElement typedElement) {
-		return ((AbstractMappingRegion)ClassUtil.nonNullState(getInvokingRegion())).getUnknownNode(typedElement);
-	}
+//	@Override
+//	public @NonNull SimpleNode getUnknownNode(@NonNull TypedElement typedElement) {
+//		return ((BasicMappingRegion)ClassUtil.nonNullState(getInvokingRegion())).getUnknownNode(typedElement);
+//	}
 
 	@Override
 	public boolean isOperationRegion() {

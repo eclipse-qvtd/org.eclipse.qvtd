@@ -16,10 +16,11 @@ public interface Visitor<R>
 {
 	R visiting(@NonNull Visitable visitable);
 
-	R visitCompositionRegion(@NonNull CompositionRegion containmentRegion);
-	R visitMappingRegion(@NonNull MappingRegion mappingRegion);
-	R visitMergedRegion(@NonNull MergedRegion mergedRegion);
+	R visitChildCompositionRegion(@NonNull ChildCompositionRegion childCompositionRegion);
+	R visitCyclicScheduledRegion(@NonNull CyclicScheduledRegion cyclicScheduledRegion);
+	R visitMergedMappingRegion(@NonNull MergedMappingRegion mergedMappingRegion);
 	R visitOperationRegion(@NonNull OperationRegion operationRegion);
-	R visitRootCompositionRegion(@NonNull RootRegion rootContainmentRegion);
-	R visitRootRegion(@NonNull ScheduledRegion rootRegion);
+	R visitRootCompositionRegion(@NonNull RootCompositionRegion rootCompositionRegion);
+	R visitRootScheduledRegion(@NonNull RootScheduledRegion rootScheduledRegion);
+	R visitSimpleMappingRegion(@NonNull SimpleMappingRegion simpleMappingRegion);
 }

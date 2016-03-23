@@ -37,12 +37,12 @@ import com.google.common.collect.Iterables;
 
 public class ClassDatumAnalysis
 {
-	protected static final class MultiOppositeComparator implements Comparator<Property>
+	protected static final class MultiOppositeComparator implements Comparator<@NonNull Property>
 	{
-		public static final Comparator<? super Property> INSTANCE = new MultiOppositeComparator();
+		public static final Comparator<@NonNull ? super Property> INSTANCE = new MultiOppositeComparator();
 
 		@Override
-		public int compare(Property o1, Property o2) {
+		public int compare(@NonNull Property o1, @NonNull Property o2) {
 			boolean c1 = o1.isIsComposite();
 			boolean c2 = o1.isIsComposite();
 			if (c1 != c2) {
@@ -62,14 +62,14 @@ public class ClassDatumAnalysis
 	/**
 	 * The non-to-one properties that may terminate in a given ClassDatum.
 	 */
-	private /* @LazyNonNull*/ List<Property> multiOpposites = null;
+	private /* @LazyNonNull*/ List<@NonNull Property> multiOpposites = null;
 
 //	private final @NonNull HeadNodeGroup headNodeGroup;
 
-	private final @NonNull Map<Region, List<Node>> introducer2assignmentNodes = new HashMap<Region, List<Node>>();
-	private final @NonNull Map<Region, List<Node>> consumer2predicateNodes = new HashMap<Region, List<Node>>();
-	private final @NonNull Map<Region, List<Node>> producer2assignmentNodes = new HashMap<Region, List<Node>>();
-	private /*@LazyNonNull*/ List<ClassDatumAnalysis> superClassDatumAnalyses = null;
+	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> introducer2assignmentNodes = new HashMap<@NonNull Region, @NonNull List<@NonNull Node>>();
+	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> consumer2predicateNodes = new HashMap<@NonNull Region, @NonNull List<@NonNull Node>>();
+	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> producer2assignmentNodes = new HashMap<@NonNull Region, @NonNull List<@NonNull Node>>();
+	private /*@LazyNonNull*/ List<@NonNull ClassDatumAnalysis> superClassDatumAnalyses = null;
 	
 	public ClassDatumAnalysis(@NonNull SchedulerConstants schedulerConstants, @NonNull ClassDatum classDatum) {
 		this.schedulerConstants = schedulerConstants;
@@ -81,9 +81,9 @@ public class ClassDatumAnalysis
 	}
 
 	public void addConsumption(@NonNull Region consumer, @NonNull Node consumingNode) {
-		List<Node> predicateNodes = consumer2predicateNodes.get(consumer);
+		List<@NonNull Node> predicateNodes = consumer2predicateNodes.get(consumer);
 		if (predicateNodes == null) {
-			predicateNodes = new ArrayList<Node>();
+			predicateNodes = new ArrayList<@NonNull Node>();
 			consumer2predicateNodes.put(consumer, predicateNodes);
 		}
 		if (!predicateNodes.contains(consumingNode)) {			// predicate may consume multiple producers
@@ -92,19 +92,19 @@ public class ClassDatumAnalysis
 	}
 
 	public void addIntroduction(@NonNull Region introducer, @NonNull Node introducingNode) {
-		List<Node> assignmentNodes = introducer2assignmentNodes.get(introducer);
+		List<@NonNull Node> assignmentNodes = introducer2assignmentNodes.get(introducer);
 		if (assignmentNodes == null) {
-			assignmentNodes = new ArrayList<Node>();
+			assignmentNodes = new ArrayList<@NonNull Node>();
 			introducer2assignmentNodes.put(introducer, assignmentNodes);
 		}
 		assert !assignmentNodes.contains(introducingNode);
 		assignmentNodes.add(introducingNode);
 	}
 
-	public void addProduction(@NonNull MappingRegion producer, @NonNull Node producingNode) {
-		List<Node> assignmentNodes = producer2assignmentNodes.get(producer);
+	public void addProduction(@NonNull SimpleMappingRegion producer, @NonNull Node producingNode) {
+		List<@NonNull Node> assignmentNodes = producer2assignmentNodes.get(producer);
 		if (assignmentNodes == null) {
-			assignmentNodes = new ArrayList<Node>();
+			assignmentNodes = new ArrayList<@NonNull Node>();
 			producer2assignmentNodes.put(producer, assignmentNodes);
 		}
 		if (!assignmentNodes.contains(producingNode)) {			// assignment may be recursive
@@ -120,12 +120,11 @@ public class ClassDatumAnalysis
 		return completeClass;
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull Iterable<Node> getConsumingNodes() {
 		return Iterables.concat(consumer2predicateNodes.values());
 	}
 
-	public @NonNull Set<Region> getConsumingRegions() {
+	public @NonNull Set<@NonNull Region> getConsumingRegions() {
 		return consumer2predicateNodes.keySet();
 	}
 
@@ -134,13 +133,13 @@ public class ClassDatumAnalysis
 	}
 
 	public @Nullable List<Property> getMultiOpposites() {
-		List<Property> multiOpposites2 = multiOpposites;
+		List<@NonNull Property> multiOpposites2 = multiOpposites;
 		if (multiOpposites2 == null) {
 			EnvironmentFactory environmentFactory = schedulerConstants.getEnvironmentFactory();
 			Type asClass = classDatum.getType();
 			assert asClass != null;
 			CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(asClass);
-			for (Property property : completeClass.getProperties((FeatureFilter)null)) {
+			for (@SuppressWarnings("null")@NonNull Property property : completeClass.getProperties((FeatureFilter)null)) {
 				Property oppositeProperty = property.getOpposite();
 				if ((oppositeProperty != null) && oppositeProperty.isIsMany() && !oppositeProperty.isIsDerived()) {
 					Type childrenType = oppositeProperty.getType();
@@ -150,7 +149,7 @@ public class ClassDatumAnalysis
 						StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 						if (asClass.conformsTo(standardLibrary, childType)) {					// FIXME bi-conforming types
 							if (multiOpposites2 == null) {
-								multiOpposites = multiOpposites2 = new ArrayList<Property>();
+								multiOpposites = multiOpposites2 = new ArrayList<@NonNull Property>();
 							}
 							multiOpposites2.add(oppositeProperty);
 						}
@@ -169,7 +168,6 @@ public class ClassDatumAnalysis
 //		return producer2assignmentNodes.keySet();
 //	}
 
-	@SuppressWarnings("null")
 	public @NonNull Iterable<Node> getProducingNodes() {
 		return Iterables.concat(consumer2predicateNodes.values());
 	}
@@ -187,10 +185,10 @@ public class ClassDatumAnalysis
 		return !values.hasNext() && (firstProductions.size() == 1) ? firstProductions.get(0) : null;
 	}
 
-	public @NonNull Iterable<ClassDatumAnalysis> getSuperClassDatumAnalyses() {
-		List<ClassDatumAnalysis> superClassDatumAnalyses2 = superClassDatumAnalyses;
+	public @NonNull Iterable<@NonNull ClassDatumAnalysis> getSuperClassDatumAnalyses() {
+		List<@NonNull ClassDatumAnalysis> superClassDatumAnalyses2 = superClassDatumAnalyses;
 		if (superClassDatumAnalyses2  == null) {
-			superClassDatumAnalyses = superClassDatumAnalyses2 = new ArrayList<ClassDatumAnalysis>();
+			superClassDatumAnalyses = superClassDatumAnalyses2 = new ArrayList<@NonNull ClassDatumAnalysis>();
 			for (@SuppressWarnings("null")@NonNull CompleteClass completeSuperClass : completeClass.getSuperCompleteClasses()) {
 				superClassDatumAnalyses2.add(schedulerConstants.getClassDatumAnalysis(completeSuperClass.getPrimaryClass(), ClassUtil.nonNullState(domainUsage.getTypedModel())));
 			}

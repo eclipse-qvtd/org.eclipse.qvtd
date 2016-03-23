@@ -28,23 +28,18 @@ public class SimpleVariableNode extends AbstractSimpleNode
 		this.variable = variable;
 		assert variable.eContainer() != null;
 		assert variable.getName() != null;
-		if (region instanceof AbstractMappingRegion) {
-			((AbstractMappingRegion)region).addVariableNode(getVariable(), this);
+		if (region instanceof SimpleMappingRegion) {
+			((SimpleMappingRegion)region).addVariableNode(getVariable(), this);
 		}
 		addTypedElement(variable);
 	}
-
-//	@Override
-//	public void cloneIn(@NonNull Region region, @NonNull Map<Node, Node> node2clone) {
-//		node2clone.put(this, new SimpleVariableNode(getNodeRole(), (SimpleRegion) region, variable));
-//	}
 
 	public @NonNull VariableDeclaration getVariable() {
 		return variable;
 	}
 
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
         return getNodeRole().toString() + "(" + variable.toString() + ")";
     }
 }

@@ -23,7 +23,7 @@ public class ToDOT
 	}
 	
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		DOTStringBuilder s = new DOTStringBuilder();
 		toDot.toGraph(s);
 		return s.toString();

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -65,11 +64,11 @@ public class QVTp2QVTg {
 	}
 	private static @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatumsInternal(@NonNull Set<@NonNull ClassDatum> classDatums, @NonNull Set<@NonNull PropertyDatum> propertyDatums, @NonNull ClassDatum cDatum) {
 		if (classDatums.add(cDatum)) {
-			propertyDatums.addAll(cDatum.getPropertyDatums());
+			propertyDatums.addAll(ClassUtil.nullFree(cDatum.getPropertyDatums()));
 		}
-		for (AbstractDatum superClassDatum : cDatum.getSuper()) {
+		for (AbstractDatum superClassDatum : ClassUtil.nullFree(cDatum.getSuper())) {
 			if (superClassDatum instanceof ClassDatum) {
-				getAllPropertyDatumsInternal(classDatums, propertyDatums, (@NonNull ClassDatum) superClassDatum);
+				getAllPropertyDatumsInternal(classDatums, propertyDatums, (ClassDatum) superClassDatum);
 			}
 		}
 		return propertyDatums;

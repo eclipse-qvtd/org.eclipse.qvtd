@@ -45,7 +45,7 @@ import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTu2QVTm;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.ClassRelationships;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
-import org.eclipse.qvtd.compiler.internal.scheduler.ScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.scheduler.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -326,10 +326,10 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		URI qvtiURI = getURI(QVTI_STEP, URI_KEY);
 		Schedule schedule = getSchedule(gResource);
 		Scheduler scheduler = new Scheduler(environmentFactory, schedule, qvtp2qvtg);
-		ScheduledRegion rootRegion = scheduler.qvtp2qvts();
+		RootScheduledRegion rootRegion = scheduler.qvtp2qvts();
 		compiled(QVTS_STEP, gResource);			// FIXME
 //		saveResource(sResource, QVTS_STEP);
-		Resource iResource = scheduler.qvts2qvti(rootRegion, qvtiURI);
+		Resource iResource = scheduler.qvts2qvti(rootRegion, qvtiURI, scheduler.getSymbolNameReservation());
 		saveResource(iResource, QVTI_STEP);
 		return iResource;
 	}

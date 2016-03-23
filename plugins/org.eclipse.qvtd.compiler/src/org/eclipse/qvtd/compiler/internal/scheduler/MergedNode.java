@@ -25,20 +25,20 @@ import com.google.common.collect.Iterables;
  */
 public class MergedNode extends AbstractNode
 {
-	private static final class NodeToTypedElementsFunction implements Function<Node, Iterable<TypedElement>>
+	private static final class NodeToTypedElementsFunction implements Function<@NonNull Node, @NonNull Iterable<@NonNull TypedElement>>
 	{
 		public static final @NonNull NodeToTypedElementsFunction INSTANCE = new NodeToTypedElementsFunction();
 
 		@Override
-		public Iterable<TypedElement> apply(Node node) {
+		public @NonNull Iterable<@NonNull TypedElement> apply(@NonNull Node node) {
 			return node.getTypedElements();
 		}
 	}
 
-	protected final @NonNull List<SimpleNode> simpleNodes = new ArrayList<SimpleNode>();
+	protected final @NonNull List<@NonNull SimpleNode> simpleNodes = new ArrayList<@NonNull SimpleNode>();
 //	private @Nullable MergedNode recursionNode = null;
 
-	public MergedNode(@NonNull MergedRegion mergedRegion, @NonNull Node node) {
+	public MergedNode(@NonNull MergedMappingRegion mergedRegion, @NonNull Node node) {
 		super(node.getNodeRole(), mergedRegion, node.getName(), node.getClassDatumAnalysis());
 	}
 
@@ -61,14 +61,14 @@ public class MergedNode extends AbstractNode
 //	}
 
 	@Override
-	public @NonNull Iterable<SimpleNode> getSimpleNodes() {
+	public @NonNull Iterable<@NonNull SimpleNode> getSimpleNodes() {
 		return simpleNodes;
 	}
 
 	@Override
-	public @NonNull Iterable<TypedElement> getTypedElements() {
-		Iterable<Iterable<TypedElement>> transform = Iterables.transform(simpleNodes, NodeToTypedElementsFunction.INSTANCE);
-		@SuppressWarnings("null")@NonNull Iterable<TypedElement> concat = Iterables.concat(transform);
+	public @NonNull Iterable<@NonNull TypedElement> getTypedElements() {
+		@NonNull Iterable<@NonNull Iterable<@NonNull TypedElement>> transform = Iterables.transform(simpleNodes, NodeToTypedElementsFunction.INSTANCE);
+		@NonNull Iterable<@NonNull TypedElement> concat = Iterables.concat(transform);
 		return concat;
 	}
 

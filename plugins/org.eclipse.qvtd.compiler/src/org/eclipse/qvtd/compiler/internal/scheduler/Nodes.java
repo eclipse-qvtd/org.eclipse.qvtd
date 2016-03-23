@@ -468,6 +468,14 @@ public class Nodes
 			}
 
 			@Override
+			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
+				if (nodeRole.isConstant()) {
+					return nodeRole;
+				}
+				return super.merge(nodeRole);
+			}
+
+			@Override
 			public @NonNull NodeRole setHead() {
 				return headNode;
 			}
@@ -482,6 +490,14 @@ public class Nodes
 			@Override
 			public boolean isHead() {
 				return true;
+			}
+
+			@Override
+			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
+				if ((phase == Phase.LOADED) && (nodeRole.getPhase() == Phase.LOADED) && (nodeRole instanceof GuardNodeRole)) {
+					return nodeRole;
+				}
+				return super.merge(nodeRole);
 			}
 		}
 		
@@ -726,6 +742,89 @@ public class Nodes
 		}
 	}
 	
+	public static final class PortNodeRoleFactory
+	{
+		private static final class PortNodeRole extends AbstractNodeRole
+		{
+//			private final boolean isHead;
+
+			protected PortNodeRole(@NonNull Phase phase) { //, boolean isHead) {
+				super(phase);
+//				this.isHead = isHead;
+			}
+
+			@Override
+			public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+				return new ComplexTypedNode(this, region, name, classDatumAnalysis);
+			}
+
+			@Override
+			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			
+			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull TypedElement typedElement) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public @NonNull Integer getPenwidth() {
+				return Role.HEAD_WIDTH; //isHead ? Role.HEAD_WIDTH : Role.GUARD_WIDTH;
+			}
+
+			@Override
+			public boolean isHead() {
+				return true; //isHead;
+			}
+
+//			@Override
+//			public boolean isInput() {
+//				return isHead;
+//			}
+
+//			@Override
+//			public boolean isNavigable() {
+//				return true;
+//			}
+
+//			@Override
+//			public boolean isOutput() {
+//				return !isHead;
+//			}
+		}
+		
+		private static final @NonNull PortNodeRole CONSTANT_INPUT = new PortNodeRole(Role.Phase.CONSTANT); //, true);
+//		private static final @NonNull PortNodeRole CONSTANT_OUTPUT = new PortNodeRole(Role.Phase.CONSTANT, false);
+		private static final @NonNull PortNodeRole LOADED_INPUT = new PortNodeRole(Role.Phase.LOADED); //, true);
+//		private static final @NonNull PortNodeRole LOADED_OUTPUT = new PortNodeRole(Role.Phase.LOADED, false);
+		private static final @NonNull PortNodeRole PREDICATED_INPUT = new PortNodeRole(Role.Phase.PREDICATED); //, true);
+//		private static final @NonNull PortNodeRole PREDICATED_OUTPUT = new PortNodeRole(Role.Phase.PREDICATED, false);
+		private static final @NonNull PortNodeRole REALIZED_INPUT = new PortNodeRole(Role.Phase.REALIZED); //, true);
+//		private static final @NonNull PortNodeRole REALIZED_OUTPUT = new PortNodeRole(Role.Phase.REALIZED, false);
+		
+//		private final boolean isHead;
+
+		public PortNodeRoleFactory(/*boolean isHead*/) {
+//			this.isHead = isHead;
+		}
+
+		public @NonNull Node createNode(@NonNull Region region, NodeRole.@NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+			switch (nodeRolePhase) {
+				case CONSTANT: return CONSTANT_INPUT.createNode(region, name, classDatumAnalysis);
+				case LOADED: return LOADED_INPUT.createNode(region, name, classDatumAnalysis);
+				case PREDICATED: return PREDICATED_INPUT.createNode(region, name, classDatumAnalysis);
+				case REALIZED: return REALIZED_INPUT.createNode(region, name, classDatumAnalysis);
+//				case CONSTANT: return (isHead ? CONSTANT_INPUT : CONSTANT_OUTPUT).createNode(region, name, classDatumAnalysis);
+//				case LOADED: return (isHead ? LOADED_INPUT : LOADED_OUTPUT).createNode(region, name, classDatumAnalysis);
+//				case PREDICATED: return (isHead ? PREDICATED_INPUT : PREDICATED_OUTPUT).createNode(region, name, classDatumAnalysis);
+//				case REALIZED: return (isHead ? REALIZED_INPUT : REALIZED_OUTPUT).createNode(region, name, classDatumAnalysis);
+				default: throw new UnsupportedOperationException();
+			}
+		}
+	}
+
 	private static final class RealizedVariableNodeRole extends AbstractVariableNodeRole
 	{
 		protected RealizedVariableNodeRole() {
@@ -956,12 +1055,14 @@ public class Nodes
 	public static final @NonNull NodeRole ERROR = new ErrorNodeRole();
 	public static final @NonNull NodeRole EXTRA_GUARD = new AttributeNodeRoleFactory.ExtraGuardNodeRole();
 	public static final @NonNull GuardNodeRoleFactory GUARD = new GuardNodeRoleFactory();
+	public static final @NonNull PortNodeRoleFactory INPUT = new PortNodeRoleFactory(); //true);
 	public static final @NonNull IteratorNodeRoleFactory ITERATOR = new IteratorNodeRoleFactory();
 	public static final @NonNull LetNodeRoleFactory LET = new LetNodeRoleFactory();
 	public static final @NonNull AttributeNodeRoleFactory NAVIGABLE_ATTRIBUTE = new AttributeNodeRoleFactory(true);
 	public static final @NonNull StepNodeRoleFactory NAVIGABLE_STEP = new StepNodeRoleFactory(true);
 	public static final @NonNull NullNodeRole NULL = new NullNodeRole();
 	public static final @NonNull OperationNodeRoleFactory OPERATION = new OperationNodeRoleFactory();
+//	public static final @NonNull PortNodeRoleFactory OUTPUT = new PortNodeRoleFactory(false);
 	public static final @NonNull AbstractVariableNodeRole PARAMETER = new ParameterNodeRole();
 	public static final AttributeNodeRoleFactory.@NonNull RealizedAttributeNodeRole REALIZED_ATTRIBUTE = new AttributeNodeRoleFactory.RealizedAttributeNodeRole();
 	public static final @NonNull AbstractVariableNodeRole REALIZED_VARIABLE = new RealizedVariableNodeRole();

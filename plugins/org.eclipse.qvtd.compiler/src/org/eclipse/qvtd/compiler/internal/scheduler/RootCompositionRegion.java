@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
@@ -25,15 +26,16 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
-public class RootRegion extends AbstractRegion implements SimpleRegion
+public class RootCompositionRegion extends AbstractRegion implements SimpleRegion
 {
 	protected final @NonNull Property root2childrenProperty;	
 	protected final @NonNull Property others2childrenProperty;
 	protected final @NonNull SimpleNode rootNode;
 	protected final @NonNull SimpleNode othersNode;
 	protected @Nullable SimpleNode nullNode = null;
+	private final @NonNull List<@NonNull Node> headNodes = new ArrayList<@NonNull Node>();
 	
-	protected RootRegion(@NonNull SuperRegion superRegion) {
+	protected RootCompositionRegion(@NonNull SuperRegion superRegion) {
 		super(superRegion);
 		SchedulerConstants schedulerConstants = superRegion.getSchedulerConstants();
 		StandardLibrary standardLibrary = schedulerConstants.getStandardLibrary();
@@ -43,6 +45,8 @@ public class RootRegion extends AbstractRegion implements SimpleRegion
 		TypedModel primitiveTypeModel = schedulerConstants.getDomainAnalysis().getPrimitiveTypeModel();
 		this.rootNode = Nodes.COMPOSING.createSimpleNode(this, "«root»", schedulerConstants.getClassDatumAnalysis(standardLibrary.getOclVoidType(), primitiveTypeModel));
 		this.othersNode = Nodes.COMPOSING.createSimpleNode(this, "«container»", schedulerConstants.getClassDatumAnalysis(standardLibrary.getOclAnyType(), primitiveTypeModel));
+		headNodes.add(rootNode);
+		headNodes.add(othersNode);
 	}
 
 	@Override
@@ -51,7 +55,9 @@ public class RootRegion extends AbstractRegion implements SimpleRegion
 	}
 
 	public @NonNull Node addClassDatumAnalysis(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		CollectionType collectionType = PivotUtil.getUnspecializedTemplateableElement((CollectionType) root2childrenProperty.getType());
+		Type type = root2childrenProperty.getType();
+		assert type != null;
+		CollectionType collectionType = PivotUtil.getUnspecializedTemplateableElement((CollectionType) type);
 		org.eclipse.ocl.pivot.Class elementType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
 		CollectionType selectedCollectionType = getSchedulerConstants().getEnvironmentFactory().getCompleteEnvironment().getCollectionType(collectionType, elementType, true,  null, null);
 		ClassDatumAnalysis selectedClassDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(selectedCollectionType, classDatumAnalysis.getTypedModel());
@@ -68,23 +74,23 @@ public class RootRegion extends AbstractRegion implements SimpleRegion
 	}
 
 	@Override
-	protected @NonNull List<@NonNull Node> computeHeadNodes() {
-		List<@NonNull Node> headNodeGroups = new ArrayList<@NonNull Node>();
-		headNodeGroups.add(rootNode);
-		headNodeGroups.add(othersNode);
-		return headNodeGroups;
-	}
-
-	@Override
 	protected @NonNull SymbolNameBuilder computeSymbolName() {
 		SymbolNameBuilder s = new SymbolNameBuilder();
-		s.appendString("r_");
+		s.appendString(QVTimperativeUtil.ROOT_MAPPING_NAME);
 		return s;
 	}
 
 	@Override
+	public void createIncomingConnections() {}
+
+	@Override
 	public @NonNull String getName() {
 		return QVTimperativeUtil.ROOT_MAPPING_NAME;
+	}
+
+	@Override
+	public @NonNull List<@NonNull Node> getHeadNodes() {
+		return headNodes;
 	}
 
 	private @NonNull SimpleNode getNullNode() {
@@ -105,7 +111,7 @@ public class RootRegion extends AbstractRegion implements SimpleRegion
 	}
 
 	@Override
-	public boolean isRootRegion() {
+	public boolean isRootCompositionRegion() {
 		return true;
 	}
 
@@ -115,10 +121,10 @@ public class RootRegion extends AbstractRegion implements SimpleRegion
 		s.setColor("lightblue");
 		s.setPenwidth(Role.LINE_WIDTH);
 		s.pushCluster();
-		for (@SuppressWarnings("null")@NonNull Node node : getNodes()) {
+		for (@NonNull Node node : getNodes()) {
 			s.appendNode(node);
 		}
-		for (@SuppressWarnings("null")@NonNull Edge edge : getEdges()) {
+		for (@NonNull Edge edge : getEdges()) {
 			s.appendEdge(edge.getSource(), edge, edge.getTarget());
 		}
 		s.popCluster();

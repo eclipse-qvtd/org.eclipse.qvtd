@@ -18,7 +18,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNo
 /**
  * AbstractEdge.
  */
-public abstract class AbstractEdge implements Edge
+public abstract class AbstractEdge implements Edge//, GraphStringBuilder.GraphNode
 {
 	private @NonNull EdgeRole edgeRole;
 	protected final @NonNull Region region;
@@ -55,6 +55,71 @@ public abstract class AbstractEdge implements Edge
 		s.setPenwidth(getPenwidth());
 		s.appendAttributedEdge(source, this, target);
 	}
+
+	protected void appendEdgeWithNode(@NonNull GraphStringBuilder s) {
+		final Node sourceNode = getSource();
+		final Node targetNode = getTarget();
+		s.appendEdge(sourceNode, this, targetNode);
+/*		GraphEdge graphEdge1 = new GraphEdge()
+		{
+			@Override
+			public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
+				s.setColor(getColor());
+				s.setPenwidth(getPenwidth());
+				s.appendAttributedEdge(source, this, target);
+			}
+
+			@Override
+			public @NonNull GraphNode getSource() {
+				return sourceNode;
+			}
+
+			@Override
+			public @NonNull GraphNode getTarget() {
+				return AbstractEdge.this;
+			}
+		};
+		GraphEdge graphEdge2 = new GraphEdge()
+		{
+			@Override
+			public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
+				s.setColor(getColor());
+				s.setPenwidth(getPenwidth());
+				s.appendAttributedEdge(source, this, target);
+			}
+
+			@Override
+			public @NonNull GraphNode getSource() {
+				return AbstractEdge.this;
+			}
+
+			@Override
+			public @NonNull GraphNode getTarget() {
+				return targetNode;
+			}
+		};
+		s.appendNode(this);
+		s.appendEdge(graphEdge1.getSource(), graphEdge1, graphEdge1.getTarget());
+		s.appendEdge(graphEdge2.getSource(), graphEdge2, graphEdge2.getTarget()); */
+	}
+
+/*	@Override
+	public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+		String name = getName();
+/ *		String indexText = getIndexText();
+		if (indexText != null) {
+			name = name + "\\n " + indexText;
+		} * /
+		s.setLabel(name);
+		s.setShape("ellipse");
+//		String style = getStyle();
+//		if (style != null) {
+//			s.setStyle(style);
+//		}
+		s.setColor(getColor());
+		s.setPenwidth(getPenwidth());
+		s.appendAttributedNode(nodeName);
+	} */
 
 	@Override
 	public void destroy() {
@@ -213,7 +278,7 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
         return edgeRole.toString() + "(" + getSource().toString() + "=>" + getName() + "=>" + getTarget().toString() + ")";
     }
 }

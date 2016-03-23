@@ -15,22 +15,19 @@ import java.util.Iterator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 
-public class SimpleNavigationEdge extends AbstractNavigationEdge implements SimpleEdge, Iterable<SimpleEdge>
+public class SimpleNavigationEdge extends AbstractNavigationEdge implements SimpleEdge, Iterable<@NonNull SimpleEdge>
 {
 	public SimpleNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull SimpleRegion region, @NonNull SimpleNode parentNode, @NonNull Property source2targetProperty, @NonNull SimpleNode childrenNode) {
 		super(edgeRole, region, parentNode, source2targetProperty, childrenNode);
 	}
 
-/*	@Override
-	public void cloneIn(@NonNull Region clonedRegion, @NonNull Map<Node, Node> node2clone) {
-		SimpleNode clonedSourceNode = (SimpleNode) node2clone.get(getSource());
-		SimpleNode clonedTargetNode = (SimpleNode) node2clone.get(getTarget());
-		assert (clonedSourceNode != null) && (clonedTargetNode != null);
-		new SimpleNavigationEdge((NavigationEdgeRole) getEdgeRole(), (SimpleRegion) clonedRegion, clonedSourceNode, source2targetProperty, clonedTargetNode);
-	} */
+	@Override
+	public @NonNull String getDisplayName() {
+		return source2targetProperty.getOwningClass().getName() + "::" + source2targetProperty.getName();
+	}
 
 	@Override
-	public @NonNull Iterable<SimpleEdge> getSimpleEdges() {
+	public @NonNull Iterable<@NonNull SimpleEdge> getSimpleEdges() {
 		return this;
 	}
 
@@ -45,7 +42,7 @@ public class SimpleNavigationEdge extends AbstractNavigationEdge implements Simp
 	}
 
 	@Override
-	public Iterator<SimpleEdge> iterator() {
-		return new SingletonIterator<SimpleEdge>(this);
+	public @NonNull Iterator<@NonNull SimpleEdge> iterator() {
+		return new SingletonIterator<@NonNull SimpleEdge>(this);
 	}
 }

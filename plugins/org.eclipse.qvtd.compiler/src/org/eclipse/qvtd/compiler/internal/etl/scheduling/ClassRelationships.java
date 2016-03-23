@@ -129,7 +129,7 @@ public class ClassRelationships {
 	 * @param aClass
 	 * @return a set with all the all classess
 	 */
-	private Set<@NonNull Class> computeClass2SuperClasses(@NonNull Class aClass) {
+	private @NonNull Set<@NonNull Class> computeClass2SuperClasses(@NonNull Class aClass) {
 		
 		//aClass = mManager.getPrimaryClass(aClass);
 		Set<@NonNull Class> superRels = class2superClasses.get(aClass);
@@ -141,7 +141,7 @@ public class ClassRelationships {
 		}
 		
 		// Super class inheritance might be shortcut 
-		for (Class superClass : ClassUtil.nullFree(aClass.getSuperClasses())) {
+		for (@NonNull Class superClass : ClassUtil.nullFree(aClass.getSuperClasses())) {
 			//superClass = mManager.getPrimaryClass(superClass);
 			superRels.add(superClass);
 			superRels.addAll(computeClass2SuperClasses(superClass));

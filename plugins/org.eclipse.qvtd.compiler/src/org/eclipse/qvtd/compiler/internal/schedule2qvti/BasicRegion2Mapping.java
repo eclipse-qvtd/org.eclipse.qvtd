@@ -21,6 +21,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -67,11 +70,11 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TypeUtil;
 import org.eclipse.qvtd.compiler.internal.scheduler.ClassDatumAnalysis;
-import org.eclipse.qvtd.compiler.internal.scheduler.Connection;
 import org.eclipse.qvtd.compiler.internal.scheduler.Edge;
 import org.eclipse.qvtd.compiler.internal.scheduler.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.scheduler.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.scheduler.Node;
+import org.eclipse.qvtd.compiler.internal.scheduler.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.scheduler.Region;
 import org.eclipse.qvtd.compiler.internal.scheduler.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -93,7 +96,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
@@ -103,12 +105,12 @@ import com.google.common.collect.Iterables;
 
 public class BasicRegion2Mapping extends AbstractRegion2Mapping
 {		
-	private static final class DomainNameComparator implements Comparator<Domain>
+	private static final class DomainNameComparator implements Comparator<@NonNull Domain>
 	{
 		public static final @NonNull DomainNameComparator INSTANCE = new DomainNameComparator();
 
 		@Override
-		public int compare(Domain o1, Domain o2) {
+		public int compare(@NonNull Domain o1, @NonNull Domain o2) {
 			TypedModel t1 = o1.getTypedModel();
 			TypedModel t2 = o2.getTypedModel();
 			String n1 = t1 != null ? t1.getName() : null;
@@ -119,8 +121,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	private class ExpressionCreator extends AbstractExtendingQVTimperativeVisitor<@NonNull OCLExpression, @NonNull BasicRegion2Mapping>
 	{
-		protected final @NonNull Set<Node> multiAccessedNodes = new HashSet<Node>();
-		protected final @NonNull Set<Node> conditionalNodes = new HashSet<Node>();
+		protected final @NonNull Set<@NonNull Node> multiAccessedNodes = new HashSet<@NonNull Node>();
+		protected final @NonNull Set<@NonNull Node> conditionalNodes = new HashSet<@NonNull Node>();
 
 		public ExpressionCreator() {
 			super(BasicRegion2Mapping.this);
@@ -131,8 +133,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		 * Compute the nodes that are only evaluated if a run-time if-condition is satisfied, and the nodes that are always accessed more than once.
 		 */
 		private void analyzeExpressions(@NonNull Set<Node> multiAccessedNodes, @NonNull Set<Node> conditionalNodes) {
-			Set<Node> unconditionalNodes = new HashSet<Node>();
-			for (@SuppressWarnings("null")@NonNull Edge edge : region.getRealizedEdges()) {
+			Set<@NonNull Node> unconditionalNodes = new HashSet<@NonNull Node>();
+			for (@NonNull Edge edge : region.getRealizedEdges()) {
 				analyzeIncomingPath(edge.getTarget(), unconditionalNodes, conditionalNodes, false);
 			}
 			conditionalNodes.removeAll(unconditionalNodes);
@@ -142,9 +144,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 //					System.out.println("  " + conditionalNode);
 //				}
 //			}
-			for (@SuppressWarnings("null")@NonNull Node node : unconditionalNodes) {
+			for (@NonNull Node node : unconditionalNodes) {
 				int accesses = 0;
-				for (Edge outgoingEdge : node.getOutgoingEdges()) {
+				for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
 					if (outgoingEdge.isNavigation() || outgoingEdge.isComputation()) {
 						accesses++;
 					}
@@ -164,7 +166,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		private void analyzeIncomingPath(@NonNull Node node, @NonNull Set<Node> unconditionalNodes, @NonNull Set<Node> conditionalNodes, boolean isConditional) {
 			if ((isConditional ? conditionalNodes : unconditionalNodes).add(node)) {
 				boolean isIf = isIfExp(node);
-				for (@SuppressWarnings("null")@NonNull Edge edge : node.getIncomingEdges()) {
+				for (@NonNull Edge edge : node.getIncomingEdges()) {
 					if (edge.isComputation()) {
 						boolean isIfThenOrElse = isIf && ("then".equals(edge.getName()) || "else".equals(edge.getName()));
 						analyzeIncomingPath(edge.getSource(), unconditionalNodes, conditionalNodes, isConditional || isIfThenOrElse);
@@ -192,7 +194,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 //				theVariable = PivotUtil.createVariable(getSafeName(node), type, true, newExpression);
 //				mapping.getBottomPattern().getVariable().add(theVariable);
 //				node2variable.put(node, theVariable);
-				if ((initExpression instanceof PrimitiveLiteralExp) || conditionalNodes.contains(node)) {
+				if ((initExpression instanceof PrimitiveLiteralExp) || hasRealizedVariableReference(initExpression) || conditionalNodes.contains(node)) {
 					return initExpression;
 				}
 				@SuppressWarnings("null")@NonNull BottomPattern bottomPattern = mapping.getBottomPattern();
@@ -215,6 +217,16 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			else {
 				return oldTypedElement.accept(this);
 			}
+		}
+
+		private @NonNull List<@NonNull OCLExpression> createAll(@NonNull List<@NonNull OCLExpression> oldTypedElements) {
+			List<@NonNull OCLExpression> newTypedElements = new ArrayList<@NonNull OCLExpression>(oldTypedElements.size());
+			for (@NonNull OCLExpression oldTypedElement : oldTypedElements) {
+				OCLExpression newTypedElement = create(oldTypedElement);
+				assert newTypedElement != null;
+				newTypedElements.add(newTypedElement);
+			}
+			return newTypedElements;
 		}
 
 		private @NonNull CollectionItem createCollectionItem(@NonNull OCLExpression asItem) {
@@ -243,6 +255,41 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			return collectionRange;
 		}
 
+		public @NonNull IterateExp createIterateExp(@NonNull OCLExpression asSource, @NonNull Iteration asIteration, @NonNull List<@NonNull ? extends Variable> asIterators, @NonNull Variable asResult, @NonNull OCLExpression asBody) {
+			IterateExp asCallExp = PivotFactory.eINSTANCE.createIterateExp();
+			asCallExp.setReferredIteration(asIteration);
+			asCallExp.setOwnedSource(asSource);
+			asCallExp.getOwnedIterators().addAll(asIterators);
+			asCallExp.setOwnedResult(asResult);
+			asCallExp.setOwnedBody(asBody);
+			Type formalType = asIteration.getType();
+			assert formalType != null;
+			asCallExp.setType(formalType);
+			asCallExp.setIsRequired(asIteration.isIsRequired());
+			Type actualType = asSource.getType();
+			assert actualType != null;
+			Type returnType = getMetamodelManager().specializeType(formalType, asCallExp, actualType, asSource.getTypeValue());
+			asCallExp.setType(returnType);
+			return asCallExp;
+		}
+
+		public @NonNull IteratorExp createIteratorExp(@NonNull OCLExpression asSource, @NonNull Iteration asIteration, @NonNull List<@NonNull ? extends Variable> asIterators, @NonNull OCLExpression asBody) {
+			IteratorExp asCallExp = PivotFactory.eINSTANCE.createIteratorExp();
+			asCallExp.setReferredIteration(asIteration);
+			asCallExp.setOwnedSource(asSource);
+			asCallExp.getOwnedIterators().addAll(asIterators);
+			asCallExp.setOwnedBody(asBody);
+			Type formalType = asIteration.getType();
+			assert formalType != null;
+			asCallExp.setType(formalType);
+			asCallExp.setIsRequired(asIteration.isIsRequired());
+			Type actualType = asSource.getType();
+			assert actualType != null;
+			Type returnType = getMetamodelManager().specializeType(formalType, asCallExp, actualType, asSource.getTypeValue());
+			asCallExp.setType(returnType);
+			return asCallExp;
+		}
+
 		private @NonNull OCLExpression createMapLiteralExp(@NonNull MapType asType, @NonNull Iterable<MapLiteralPart> asParts) {
 			MapLiteralExp mapLiteralExp = PivotFactory.eINSTANCE.createMapLiteralExp();
 			Iterables.addAll(mapLiteralExp.getOwnedParts(), asParts);
@@ -258,6 +305,43 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 //			mapLiteralPart.setType(asItem.getType());
 //			mapLiteralPart.setIsRequired(true);
 			return mapLiteralPart;
+		}
+
+		private @NonNull OCLExpression createNonNull(@Nullable OCLExpression oldTypedElement) {
+			assert oldTypedElement != null;
+			Node node = context.getNode(oldTypedElement);
+			if (node == null) {
+				node = context.getNode(oldTypedElement);		// FIXME debugging
+			}
+			return create(node);
+		}
+
+		public @NonNull OperationCallExp createOperationCallExp(@Nullable OCLExpression asSource, @NonNull Operation asOperation, @NonNull List<OCLExpression> asArguments) {
+			Type formalType = asOperation.getType();
+			OperationCallExp asCallExp = PivotFactory.eINSTANCE.createOperationCallExp();
+			asCallExp.setReferredOperation(asOperation);
+			asCallExp.setOwnedSource(asSource);
+			asCallExp.getOwnedArguments().addAll(asArguments);
+			asCallExp.setIsRequired(asOperation.isIsRequired());
+
+			Type sourceType = null;
+			Type sourceTypeValue = null;
+			if (asSource != null) {
+				sourceType = asSource.getType();
+				sourceTypeValue = asSource.getTypeValue();
+			}
+			Type returnType = null;
+			if ((formalType != null) && (sourceType != null)) {
+				PivotMetamodelManager metamodelManager = getMetamodelManager();
+				if (asOperation.isIsTypeof()) {
+					returnType = metamodelManager.specializeType(formalType, asCallExp, sourceType, null);
+				}
+				else {
+					returnType = metamodelManager.specializeType(formalType, asCallExp, sourceType, sourceTypeValue);
+				}
+			}
+			asCallExp.setType(returnType);
+			return asCallExp;
 		}
 
 		private @NonNull OCLExpression createShadowExp(org.eclipse.ocl.pivot.@NonNull Class asClass, @NonNull Iterable<ShadowPart> asParts) {
@@ -294,38 +378,26 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			return tupleLiteralPart;
 		}
 
-		private @NonNull OCLExpression createNonNull(@Nullable OCLExpression oldTypedElement) {
-			assert oldTypedElement != null;
-			Node node = context.getNode(oldTypedElement);
-			if (node == null) {
-				node = context.getNode(oldTypedElement);		// FIXME debugging
-			}
-			return create(node);
-		}
-
-		private @NonNull List<OCLExpression> createAll(@NonNull List<OCLExpression> oldTypedElements) {
-			List<OCLExpression> newTypedElements = new ArrayList<OCLExpression>(oldTypedElements.size());
-			for (@SuppressWarnings("null")@NonNull OCLExpression oldTypedElement : oldTypedElements) {
-				newTypedElements.add(create(oldTypedElement));
-			}
-			return newTypedElements;
-		}
-
-		private @NonNull List<Variable> createVariables(@NonNull List<Variable> oldVariables) {
-			List<Variable> newVariables = new ArrayList<Variable>(oldVariables.size());
-			for (@SuppressWarnings("null")@NonNull Variable oldVariable : oldVariables) {
-				String name = oldVariable.getName();
-				assert name != null;
-				Type type = oldVariable.getType();
-				assert type != null;
-				Variable newVariable = PivotUtil.createVariable(name, type, oldVariable.isIsRequired(), create(oldVariable.getOwnedInit()));
+		private @NonNull List<@NonNull Variable> createVariables(@NonNull List<@NonNull Variable> oldVariables) {
+			List<@NonNull Variable> newVariables = new ArrayList<@NonNull Variable>(oldVariables.size());
+			for (@NonNull Variable oldVariable : oldVariables) {
+				Variable newVariable = createVariable(oldVariable);
 				newVariables.add(newVariable);
-				Node variableNode = getNode(oldVariable);
-				if (variableNode != null) {
-					node2variable.put(variableNode, newVariable);
-				}
 			}
 			return newVariables;
+		}
+
+		private @NonNull Variable createVariable(@NonNull Variable oldVariable) {
+			String name = oldVariable.getName();
+			assert name != null;
+			Type type = oldVariable.getType();
+			assert type != null;
+			Variable newVariable = PivotUtil.createVariable(name, type, oldVariable.isIsRequired(), create(oldVariable.getOwnedInit()));
+			Node variableNode = getNode(oldVariable);
+			if (variableNode != null) {
+				node2variable.put(variableNode, newVariable);
+			}
+			return newVariable;
 		}
 
 		@Override
@@ -346,7 +418,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			if (variable != null) {
 				return PivotUtil.createVariableExp(variable);
 			}
-			for (Edge edge : node.getArgumentEdges()) {
+			for (@NonNull Edge edge : node.getArgumentEdges()) {
 				Node expNode = edge.getSource();
 //				TypedElement oldTypedElement = expNode.getTypedElements().iterator().next();
 //				assert oldTypedElement != null;
@@ -361,7 +433,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				}
 				return clonedElement;
 			}
-			for (Edge edge : node.getIncomingEdges()) {
+			for (@NonNull Edge edge : node.getIncomingEdges()) {
 				EdgeRole edgeRole = edge.getEdgeRole();
 				if (edgeRole.isNavigation() && edgeRole.isLoaded()) {
 					OCLExpression source = getExpression(edge.getSource());
@@ -373,14 +445,26 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			return null;
 		}
 
+		private boolean hasRealizedVariableReference(@NonNull OCLExpression oclExpression) {
+			for (TreeIterator<EObject> tit = oclExpression.eAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+				if (eObject instanceof VariableExp) {
+					if (((VariableExp)eObject).getReferredVariable() instanceof RealizedVariable) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
 		public boolean isConditional(@NonNull Node node) {
 			return conditionalNodes.contains(node);
 		}
 
 		@Override
 		public @NonNull OCLExpression visitCollectionLiteralExp(@NonNull CollectionLiteralExp pCollectionLiteralExp) {
-			List<CollectionLiteralPart> clonedParts = new ArrayList<CollectionLiteralPart>();
-			for (CollectionLiteralPart pPart : pCollectionLiteralExp.getOwnedParts()) {
+			List<@NonNull CollectionLiteralPart> clonedParts = new ArrayList<@NonNull CollectionLiteralPart>();
+			for (@NonNull CollectionLiteralPart pPart : ClassUtil.nullFree(pCollectionLiteralExp.getOwnedParts())) {
 				if (pPart instanceof CollectionItem) {
 					OCLExpression item = createNonNull(((CollectionItem)pPart).getOwnedItem());
 					clonedParts.add(createCollectionItem(item));
@@ -407,14 +491,22 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		@Override
 		public @NonNull OCLExpression visitIterateExp(@NonNull IterateExp pIterateExp) {
-			return visiting(pIterateExp);
+			OCLExpression iSource = create(pIterateExp.getOwnedSource());
+			assert iSource != null;
+			List<@NonNull ? extends Variable> iIterators = createVariables(ClassUtil.nullFree(pIterateExp.getOwnedIterators()));
+			Variable result = createVariable(ClassUtil.nonNull(pIterateExp.getOwnedResult()));
+			Iteration referredIteration = (Iteration) visitor.create(pIterateExp.getReferredIteration());
+			assert referredIteration != null;
+			OCLExpression iBody = inlineExpressionCreator.create(pIterateExp.getOwnedBody());
+			assert iBody != null;
+			return createIterateExp(iSource, referredIteration, iIterators, result, iBody);
 		}
 
 		@Override
 		public @NonNull OCLExpression visitIteratorExp(@NonNull IteratorExp pIteratorExp) {
 			OCLExpression iSource = create(pIteratorExp.getOwnedSource());
 			assert iSource != null;
-			List<? extends Variable> iIterators = createVariables(pIteratorExp.getOwnedIterators());
+			List<@NonNull ? extends Variable> iIterators = createVariables(ClassUtil.nullFree(pIteratorExp.getOwnedIterators()));
 			Iteration referredIteration = (Iteration) visitor.create(pIteratorExp.getReferredIteration());
 			assert referredIteration != null;
 			OCLExpression iBody = inlineExpressionCreator.create(pIteratorExp.getOwnedBody());
@@ -422,27 +514,10 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			return createIteratorExp(iSource, referredIteration, iIterators, iBody);
 		}
 
-		public @NonNull IteratorExp createIteratorExp(@NonNull OCLExpression asSource, @NonNull Iteration asIteration, @NonNull List<? extends Variable> asIterators, @NonNull OCLExpression asBody) {
-			IteratorExp asCallExp = PivotFactory.eINSTANCE.createIteratorExp();
-			asCallExp.setReferredIteration(asIteration);
-			asCallExp.setOwnedSource(asSource);
-			asCallExp.getOwnedIterators().addAll(asIterators);
-			asCallExp.setOwnedBody(asBody);
-			Type formalType = asIteration.getType();
-			assert formalType != null;
-			asCallExp.setType(formalType);
-			asCallExp.setIsRequired(asIteration.isIsRequired());
-			Type actualType = asSource.getType();
-			assert actualType != null;
-			Type returnType = getMetamodelManager().specializeType(formalType, asCallExp, actualType, asSource.getTypeValue());
-			asCallExp.setType(returnType);
-			return asCallExp;
-		}
-
 		@Override
 		public @NonNull OCLExpression visitMapLiteralExp(@NonNull MapLiteralExp pMapLiteralExp) {
-			List<MapLiteralPart> clonedParts = new ArrayList<MapLiteralPart>();
-			for (MapLiteralPart pPart : pMapLiteralExp.getOwnedParts()) {
+			List<@NonNull MapLiteralPart> clonedParts = new ArrayList<@NonNull MapLiteralPart>();
+			for (@NonNull MapLiteralPart pPart : ClassUtil.nullFree(pMapLiteralExp.getOwnedParts())) {
 				OCLExpression key = createNonNull(pPart.getOwnedKey());
 				OCLExpression value = createNonNull(pPart.getOwnedValue());
 				clonedParts.add(createMapLiteralPart(key, value));
@@ -455,7 +530,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		@Override
 		public @NonNull OCLExpression visitOperationCallExp(@NonNull OperationCallExp pOperationCallExp) {
 			OCLExpression iSource = create(pOperationCallExp.getOwnedSource());
-			List<OCLExpression> iArguments = createAll(pOperationCallExp.getOwnedArguments());
+			List<@NonNull OCLExpression> iArguments = createAll(ClassUtil.nullFree(pOperationCallExp.getOwnedArguments()));
 			Operation referredOperation = visitor.create(pOperationCallExp.getReferredOperation());
 			assert referredOperation != null;
 			if ((iSource == null) && (referredOperation instanceof Function)) {
@@ -465,34 +540,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				iSource = PivotUtil.createVariableExp(thisVariable);
 			}
 			return createOperationCallExp(iSource, referredOperation, iArguments);
-		}
-
-		public @NonNull OperationCallExp createOperationCallExp(@Nullable OCLExpression asSource, @NonNull Operation asOperation, @NonNull List<OCLExpression> asArguments) {
-			Type formalType = asOperation.getType();
-			OperationCallExp asCallExp = PivotFactory.eINSTANCE.createOperationCallExp();
-			asCallExp.setReferredOperation(asOperation);
-			asCallExp.setOwnedSource(asSource);
-			asCallExp.getOwnedArguments().addAll(asArguments);
-			asCallExp.setIsRequired(asOperation.isIsRequired());
-
-			Type sourceType = null;
-			Type sourceTypeValue = null;
-			if (asSource != null) {
-				sourceType = asSource.getType();
-				sourceTypeValue = asSource.getTypeValue();
-			}
-			Type returnType = null;
-			if ((formalType != null) && (sourceType != null)) {
-				PivotMetamodelManager metamodelManager = getMetamodelManager();
-				if (asOperation.isIsTypeof()) {
-					returnType = metamodelManager.specializeType(formalType, asCallExp, sourceType, null);
-				}
-				else {
-					returnType = metamodelManager.specializeType(formalType, asCallExp, sourceType, sourceTypeValue);
-				}
-			}
-			asCallExp.setType(returnType);
-			return asCallExp;
 		}
 
 		@Override
@@ -519,8 +566,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		@Override
 		public @NonNull OCLExpression visitShadowExp(@NonNull ShadowExp pShadowExp) {
-			List<ShadowPart> clonedParts = new ArrayList<ShadowPart>();
-			for (ShadowPart pPart : pShadowExp.getOwnedParts()) {
+			List<@NonNull ShadowPart> clonedParts = new ArrayList<@NonNull ShadowPart>();
+			for (@NonNull ShadowPart pPart : ClassUtil.nullFree(pShadowExp.getOwnedParts())) {
 				OCLExpression init = createNonNull(pPart.getOwnedInit());
 				String name = pPart.getName();
 				Type type = pPart.getType();
@@ -536,8 +583,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		@Override
 		public @NonNull OCLExpression visitTupleLiteralExp(@NonNull TupleLiteralExp pTupleLiteralExp) {
-			List<TupleLiteralPart> clonedParts = new ArrayList<TupleLiteralPart>();
-			for (TupleLiteralPart pPart : pTupleLiteralExp.getOwnedParts()) {
+			List<@NonNull TupleLiteralPart> clonedParts = new ArrayList<@NonNull TupleLiteralPart>();
+			for (@NonNull TupleLiteralPart pPart : ClassUtil.nullFree(pTupleLiteralExp.getOwnedParts())) {
 				OCLExpression init = createNonNull(pPart.getOwnedInit());
 				String name = pPart.getName();
 				Type type = pPart.getType();
@@ -594,9 +641,20 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			if (theVariable == null) {
 				TypedElement oldTypedElement = node.getTypedElements().iterator().next();
 				assert oldTypedElement != null;
-				OCLExpression initExpression = oldTypedElement.accept(this);
-				assert initExpression != null;
-				return initExpression;
+				if ((oldTypedElement instanceof Variable) && (((Variable)oldTypedElement).getOwnedInit() == null)) {
+//					for (@NonNull Edge edge : node.getIncomingEdges()) {
+//						if (edge.isArgument() || edge.isCast()) {
+							BottomPattern bottomPattern = mapping.getBottomPattern();
+							assert bottomPattern != null;
+							theVariable = createUnrealizedVariable(bottomPattern, node, null);
+//							break;
+//						}
+//					}
+				}
+				else {
+					return oldTypedElement.accept(this);
+				}
+				assert theVariable != null;
 			}
 			return PivotUtil.createVariableExp(theVariable);
 		}
@@ -605,22 +663,22 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	/**
 	 * The selected head from each head group that is actually passed. Other heads are computed.
 	 */
-	private final @NonNull List<Node> headNodes = new ArrayList<Node>();
+	private final @NonNull List<@NonNull Node> headNodes = new ArrayList<@NonNull Node>();
 
 	/**
 	 * The subset of possible guard nodes that all callers can pass..
 	 */
-	private final @NonNull List<Node> guardNodes = new ArrayList<Node>();
+	private final @NonNull List<@NonNull Node> guardNodes = new ArrayList<@NonNull Node>();
 
 	/**
 	 * Mapping from the scheduled Nodes to their QVTi variables.
 	 */
-	private final @NonNull Map<Node, Variable> node2variable = new HashMap<Node, Variable>();
+	private final @NonNull Map<@NonNull Node, @NonNull Variable> node2variable = new HashMap<@NonNull Node, @NonNull Variable>();
 
 	/**
 	 * Mapping from the TypedModel to its ImperativeDomain.
 	 */
-	private final @NonNull Map<TypedModel, ImperativeDomain> typedModel2domain = new HashMap<TypedModel, ImperativeDomain>();
+	private final @NonNull Map<@NonNull TypedModel, @NonNull ImperativeDomain> typedModel2domain = new HashMap<@NonNull TypedModel, @NonNull ImperativeDomain>();
 	
 	/**
 	 * Mapping from QVTi expression to Schedule Node.
@@ -734,9 +792,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 	} */
 
-	private void createClassPropertyAssignments(@NonNull Iterable<List<NavigationEdge>> classAssignments) {
-		for (List<NavigationEdge> edges : classAssignments) {
-			for (NavigationEdge edge : edges) {
+	private void createClassPropertyAssignments(@NonNull Iterable<@NonNull List<@NonNull NavigationEdge>> classAssignments) {
+		for (@NonNull List<@NonNull NavigationEdge> edges : classAssignments) {
+			for (@NonNull NavigationEdge edge : edges) {
 				Node sourceNode = edge.getSource();
 				Node targetNode = edge.getTarget();
 				OCLExpression slotVariableExp = createVariableExp(sourceNode);
@@ -753,12 +811,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	private void createConnectionAssignments() {
 		if (connection2variable != null) {
-			for (Connection connection : connection2variable.keySet()) {
+			for (@NonNull NodeConnection connection : connection2variable.keySet()) {
 				Node sourceNode = connection.getSource(region);
 				OCLExpression variableExpression = createVariableExp(sourceNode);
-				Variable connectionVariable = connection2variable.get(connection);
+				ConnectionVariable connectionVariable = (ConnectionVariable)connection2variable.get(connection);
 				assert connectionVariable != null;
-				createConnectionAssignment((@NonNull ConnectionVariable) connectionVariable, variableExpression);
+				createConnectionAssignment(connectionVariable, variableExpression);
 			}
 		}
 	}
@@ -767,41 +825,45 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 * Create the domains and guard/bottom patterns.
 	 */
 	private void createEmptyDomainsAndPatterns() {
-		Set<TypedModel> checkableTypedModels = new HashSet<TypedModel>();
-		Set<TypedModel> enforceableTypedModels = new HashSet<TypedModel>();
-		for (Node node : region.getNodes()) {
+		Set<@NonNull TypedModel> checkableTypedModels = new HashSet<@NonNull TypedModel>();
+		Set<@NonNull TypedModel> enforceableTypedModels = new HashSet<@NonNull TypedModel>();
+		for (@NonNull Node node : region.getNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
 			Type type = classDatumAnalysis.getClassDatum().getType();
 			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {
 				DomainUsage domainUsage = classDatumAnalysis.getDomainUsage();
 				if (domainUsage.isInput()) {		// EObject is $primitive$
-					for (@SuppressWarnings("null")@NonNull TypedModel typedModel : domainUsage.getTypedModels()) {
-						checkableTypedModels.add(visitor.getQVTiTypedModel(typedModel));
+					for (@NonNull TypedModel typedModel : domainUsage.getTypedModels()) {
+						TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(typedModel);
+						assert qvtiTypedModel != null;
+						checkableTypedModels.add(qvtiTypedModel);
 					}
 				}
 				if (domainUsage.isOutput()) {		// EObject is $primitive$
-					for (@SuppressWarnings("null")@NonNull TypedModel typedModel : domainUsage.getTypedModels()) {
-						enforceableTypedModels.add(visitor.getQVTiTypedModel(typedModel));
+					for (@NonNull TypedModel typedModel : domainUsage.getTypedModels()) {
+						TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(typedModel);
+						assert qvtiTypedModel != null;
+						enforceableTypedModels.add(qvtiTypedModel);
 					}
 				}
 			}
 		}
 		checkableTypedModels.removeAll(enforceableTypedModels);
-		for (@SuppressWarnings("null")@NonNull TypedModel qvtiTypedModel : checkableTypedModels) {
+		for (@NonNull TypedModel qvtiTypedModel : checkableTypedModels) {
 			ImperativeDomain domain = QVTimperativeUtil.createImperativeDomain(qvtiTypedModel);
 			domain.setIsCheckable(true);
 			mapping.getDomain().add(domain);
 			ImperativeDomain oldDomain = typedModel2domain.put(qvtiTypedModel, domain);
 			assert oldDomain == null;
 		}
-		for (@SuppressWarnings("null")@NonNull TypedModel qvtiTypedModel : enforceableTypedModels) {
+		for (@NonNull TypedModel qvtiTypedModel : enforceableTypedModels) {
 			ImperativeDomain domain = QVTimperativeUtil.createImperativeDomain(qvtiTypedModel);
 			domain.setIsEnforceable(true);
 			mapping.getDomain().add(domain);
 			ImperativeDomain oldDomain = typedModel2domain.put(qvtiTypedModel, domain);
 			assert oldDomain == null;
 		}
-		ECollections.sort(mapping.getDomain(), DomainNameComparator.INSTANCE);
+		ECollections.sort(ClassUtil.nullFree(mapping.getDomain()), DomainNameComparator.INSTANCE);
 	}
 
 	/**
@@ -828,22 +890,22 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 * Identify the headNodes/guardNodes and create a guard variable for each guard node.
 	 */
 	private void createHeadAndGuardNodeVariables() {
-		Set<Region> headCallingRegions = new HashSet<Region>();
-		Iterable<Edge> recursionEdges = region.getRecursionEdges();
+		Set<@NonNull Region> headCallingRegions = new HashSet<@NonNull Region>();
+		Iterable<@NonNull Edge> recursionEdges = region.getRecursionEdges();
 		if (Iterables.size(recursionEdges) > 0) {
 			headCallingRegions.add(region);
 		}
-		for (Node headNode : region.getHeadNodes()) {
+		for (@NonNull Node headNode : region.getHeadNodes()) {
 			Node bestHeadNode = null;
 			boolean isExtraGuard = false;
-			Iterable<Node> callingSources = headNode.getPassedBindingSources();
+			Iterable<@NonNull Node> callingSources = headNode.getPassedBindingSources();
 			if (!Iterables.isEmpty(callingSources)) {
 				bestHeadNode = headNode;
 			}
 			else if (headNode.getNodeRole().isExtraGuardVariable()) {
 				isExtraGuard = true;
 			}
-			for (Node callingSource : callingSources) {
+			for (@NonNull Node callingSource : callingSources) {
 				headCallingRegions.add(callingSource.getRegion());
 			}
 			if (!isExtraGuard || (bestHeadNode != null)) {
@@ -852,20 +914,20 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 		guardNodes.addAll(headNodes);
-		for (Node guardNode : region.getGuardNodes()) {
+		for (@NonNull Node guardNode : region.getGuardNodes()) {
 			if (!guardNodes.contains(guardNode)) {
-				for (Connection connection : guardNode.getIncomingUsedConnections()) {
-//				if (connection != null) {				// null for LOADED
+				NodeConnection connection = guardNode.getIncomingUsedConnection();
+				if (connection != null) {				// null for LOADED
 					Set<Region> guardCallingRegions = new HashSet<Region>();
 					boolean canBeGuard = true;
-					for (Node callingSource : guardNode.getUsedBindingSources()) {
+					for (@NonNull Node callingSource : guardNode.getUsedBindingSources()) {
 						if (callingSource.getNodeRole().isComposed()) {
 							canBeGuard = false;
 							break;
 						}
 						guardCallingRegions.add(callingSource.getRegion());
 					}
-					for (Node recursionSource : guardNode.getRecursionSources()) {
+					for (@NonNull Node recursionSource : guardNode.getRecursionSources()) {
 						guardCallingRegions.add(recursionSource.getRegion());
 					}
 					if (canBeGuard && guardCallingRegions.containsAll(headCallingRegions) && guardCallingRegions.contains(connection.getCommonRegion())) {
@@ -877,7 +939,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 		Collections.sort(guardNodes, NameUtil.NAMEABLE_COMPARATOR);
-		for (@SuppressWarnings("null")@NonNull Node guardNode : guardNodes) {
+		for (@NonNull Node guardNode : guardNodes) {
 			ClassDatumAnalysis classDatumAnalysis = guardNode.getClassDatumAnalysis();
 			TypedModel typedModel = visitor.getQVTiTypedModel(classDatumAnalysis.getTypedModel());
 			ImperativeDomain domain = typedModel2domain.get(typedModel);
@@ -892,29 +954,21 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		createConnectionGuardVariables();
 	}
 
-	private @NonNull MappingCall createMappingCall(@NonNull AbstractRegion2Mapping calledRegion2Mapping, @NonNull List<MappingCallBinding> mappingCallBindings) {
-		MappingCall mappingCall = QVTimperativeUtil.createMappingCall(calledRegion2Mapping.getMapping(), mappingCallBindings);
-		if (calledRegion2Mapping.isInfinite()) {
-			mappingCall.setIsInfinite(true);
-		}
-		return mappingCall;
-	}
-
-	private void createMappingStatements(@NonNull Map<Region, Map<Node, Node>> calls) {
+	private void createMappingStatements(@NonNull Map<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> calls) {
 		MappingStatement mappingStatement = null;
-		Map<Variable, OCLExpression> loopVariables = null;
-		for (Map.Entry<Region, Map<Node, Node>> entry : calls.entrySet()) {
-			@SuppressWarnings("null")@NonNull Region calledRegion = entry.getKey();
+		Map<@NonNull Variable, @NonNull OCLExpression> loopVariables = null;
+		for (Map.Entry<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> entry : calls.entrySet()) {
+			@NonNull Region calledRegion = entry.getKey();
 			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
-			List<MappingCallBinding> mappingCallBindings = new ArrayList<MappingCallBinding>();
-			for (Map.Entry<Node, Node> entry2 : entry.getValue().entrySet()) {
-				@SuppressWarnings("null")@NonNull Node sourceNode = entry2.getKey();
-				@SuppressWarnings("null")@NonNull Node targetNode = entry2.getValue();
+			List<@NonNull MappingCallBinding> mappingCallBindings = new ArrayList<@NonNull MappingCallBinding>();
+			for (Map.Entry<@NonNull Node, @NonNull Node> entry2 : entry.getValue().entrySet()) {
+				@NonNull Node sourceNode = entry2.getKey();
+				@NonNull Node targetNode = entry2.getValue();
 				OCLExpression sourceExpression = getSourceExpression(sourceNode);
 				Type type = sourceExpression.getType();
 				if (type instanceof CollectionType) {
 					if (loopVariables == null) {
-						loopVariables = new HashMap<Variable, OCLExpression>();
+						loopVariables = new HashMap<@NonNull Variable, @NonNull OCLExpression>();
 					}
 					Type elementType = ((CollectionType)type).getElementType();
 					assert elementType != null;
@@ -945,11 +999,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				}
 			} */
 			Collections.sort(mappingCallBindings, QVTimperativeUtil.MappingCallBindingComparator.INSTANCE);
-			MappingStatement mappingCallStatement = createMappingCall(calledRegion2Mapping, mappingCallBindings);
+			MappingStatement mappingCallStatement = calledRegion2Mapping.createMappingCall(mappingCallBindings);
 			if (loopVariables != null) {
-				for (Map.Entry<Variable, OCLExpression> loopEntry : loopVariables.entrySet()) {
-					@SuppressWarnings("null")@NonNull Variable loopVariable = loopEntry.getKey();
-					@SuppressWarnings("null")@NonNull OCLExpression loopSource = loopEntry.getValue();
+				for (Map.Entry<@NonNull Variable, @NonNull OCLExpression> loopEntry : loopVariables.entrySet()) {
+					@NonNull Variable loopVariable = loopEntry.getKey();
+					@NonNull OCLExpression loopSource = loopEntry.getValue();
 					mappingCallStatement = QVTimperativeUtil.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
 				}				
 			}
@@ -963,11 +1017,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	private void createNavigablePredicates() {
 		@SuppressWarnings("null")@NonNull BottomPattern bottomPattern = mapping.getBottomPattern();
-		Set<Node> reachableNodes = new HashSet<Node>(guardNodes);
-		List<Node> sourcesList = new ArrayList<Node>(guardNodes);
+		Set<@NonNull Node> reachableNodes = new HashSet<@NonNull Node>(guardNodes);
+		List<@NonNull Node> sourcesList = new ArrayList<@NonNull Node>(guardNodes);
 		for (int i = 0; i < sourcesList.size(); i++) {
-			@SuppressWarnings("null")@NonNull Node sourceNode = sourcesList.get(i);
-			for (NavigationEdge edge : sourceNode.getNavigationEdges()) {		// if !edge.getEdgeRole().isRealized() && !targetNode.isNull()
+			@NonNull Node sourceNode = sourcesList.get(i);
+			for (@NonNull NavigationEdge edge : sourceNode.getNavigationEdges()) {		// if !edge.getEdgeRole().isRealized() && !targetNode.isNull()
 				EdgeRole edgeRole = edge.getEdgeRole();
 				if (!edgeRole.isRealized() && !edgeRole.isComposition()) {
 					Node targetNode = edge.getTarget();
@@ -1026,7 +1080,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 							}
 							else {
 								sourcesList.add(targetNode);
-								Iterable<Node> callingSources = targetNode.getPassedBindingSources();		// Used
+								Iterable<@NonNull Node> callingSources = targetNode.getPassedBindingSources();		// Used
 								if (Iterables.size(callingSources) <= 0) {			// FIXME check predicate in source etc
 									OCLExpression sourceExp = createVariableExp(sourceNode);
 									OCLExpression targetExp = createVariableExp(targetNode);
@@ -1046,21 +1100,21 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	private void createPollingDependencies() {
 		DomainUsage anyUsage = region.getSchedulerConstants().getDomainAnalysis().getAnyUsage();
-		for (@SuppressWarnings("null")@NonNull TypedModel qvtpTypedModel : anyUsage.getTypedModels()) {
+		for (@NonNull TypedModel qvtpTypedModel : anyUsage.getTypedModels()) {
 			TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtpTypedModel);
 			ImperativeDomain domain = typedModel2domain.get(qvtiTypedModel);
 			ImperativeArea imperativeArea = domain != null ? (ImperativeArea)domain : mapping;
-			Iterable<NavigationEdge> checkedEdges = region.getCheckedEdges(qvtpTypedModel);
+			Iterable<@NonNull NavigationEdge> checkedEdges = region.getCheckedEdges(qvtpTypedModel);
 			if (checkedEdges != null) {
 				List<Property> checkedProperties = imperativeArea.getCheckedProperties();
 				for (NavigationEdge checkedEdge : checkedEdges) {
 					checkedProperties.add(checkedEdge.getProperty());
 				}
 			}
-			Iterable<NavigationEdge> enforcedEdges = region.getEnforcedEdges(qvtpTypedModel);
+			Iterable<@NonNull NavigationEdge> enforcedEdges = region.getEnforcedEdges(qvtpTypedModel);
 			if (enforcedEdges != null) {
-				List<Property> enforcedProperties = imperativeArea.getEnforcedProperties();
-				for (NavigationEdge enforcedEdge : enforcedEdges) {
+				List<@NonNull Property> enforcedProperties = ClassUtil.nullFree(imperativeArea.getEnforcedProperties());
+				for (@NonNull NavigationEdge enforcedEdge : enforcedEdges) {
 					enforcedProperties.add(enforcedEdge.getProperty());
 				}
 			}
@@ -1068,8 +1122,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	private void createPropertyAssignments() {
-		Map<Node, List<NavigationEdge>> classAssignments = null;
-		for (NavigationEdge edge : region.getRealizedNavigationEdges()) {
+		Map<@NonNull Node, @NonNull List<@NonNull NavigationEdge>> classAssignments = null;
+		for (@NonNull NavigationEdge edge : region.getRealizedNavigationEdges()) {
 			Node sourceNode = edge.getSource();
 			Node targetNode = edge.getTarget();
 			if (targetNode.isAttributeNode()) {
@@ -1079,17 +1133,21 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				if (valueExp == null) {
 					valueExp = expressionCreator.getExpression(targetNode);		// FIXME debugging
 				}
-				assert valueExp != null;
-				PropertyAssignment propertyAssignment = QVTimperativeUtil.createPropertyAssignment(slotVariableExp, property, valueExp);
-				mapping.getBottomPattern().getAssignment().add(propertyAssignment);
+				if (valueExp != null) {
+					PropertyAssignment propertyAssignment = QVTimperativeUtil.createPropertyAssignment(slotVariableExp, property, valueExp);
+					mapping.getBottomPattern().getAssignment().add(propertyAssignment);
+				}
+				else {
+					System.err.println("No assignment in " + this + " to " + slotVariableExp);
+				}
 			}
 			else {
 				if (classAssignments == null) {
-					classAssignments = new HashMap<Node, List<NavigationEdge>>();
+					classAssignments = new HashMap<@NonNull Node, @NonNull List<@NonNull NavigationEdge>>();
 				}
-				List<NavigationEdge> edges = classAssignments.get(sourceNode);
+				List<@NonNull NavigationEdge> edges = classAssignments.get(sourceNode);
 				if (edges == null) {
-					edges = new ArrayList<NavigationEdge>();
+					edges = new ArrayList<@NonNull NavigationEdge>();
 					classAssignments.put(sourceNode, edges);
 				}
 				edges.add(edge);
@@ -1097,13 +1155,14 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 		if (classAssignments != null) {
 			pruneClassAssignments(classAssignments);
-			Collection<List<NavigationEdge>> values = classAssignments.values();
+			Collection<@NonNull List<@NonNull NavigationEdge>> values = classAssignments.values();
 			createClassPropertyAssignments(values);
 		}
-		ECollections.sort(mapping.getBottomPattern().getAssignment(), new Comparator<Assignment>()
+		@SuppressWarnings("null") EList<@NonNull Assignment> bottomAssignments = mapping.getBottomPattern().getAssignment();
+		ECollections.sort(bottomAssignments, new Comparator<@NonNull Assignment>()
 		{
 			@Override
-			public int compare(Assignment o1, Assignment o2) {
+			public int compare(@NonNull Assignment o1, @NonNull Assignment o2) {
 				if (o1 instanceof PropertyAssignment) {
 					if (o2 instanceof PropertyAssignment) {
 						Property p1 = ((PropertyAssignment)o1).getTargetProperty();
@@ -1140,7 +1199,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	private void createRealizedVariables() {
-		for (Node node : region.getRealizedVariableNodes()) {
+		for (@NonNull Node node : region.getRealizedVariableNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
 			BottomPattern bottomPattern = getArea(classDatumAnalysis.getDomainUsage()).getBottomPattern();
 			RealizedVariable realizedVariable = QVTimperativeUtil.createRealizedVariable(getSafeName(node), classDatumAnalysis.getCompleteClass().getPrimaryClass());
@@ -1152,26 +1211,26 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	@Override
 	public void createStatements() {
-		Map<Region, Map<Node, Node>> calls = null;
+		Map<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> calls = null;
 //		for (@SuppressWarnings("null")@NonNull Region calledRegion : getEarliestFirstCalledRegions()) {
-		for (@SuppressWarnings("null")@NonNull Region calledRegion : region.getCallableChildren()) {
+		for (@NonNull Region calledRegion : region.getCallableChildren()) {
 			if (calls == null) {
-				calls = new HashMap<Region, Map<Node, Node>>();
+				calls = new HashMap<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>>();
 			}
-			Map<Node, Node> source2target = calls.get(calledRegion);
+			Map<@NonNull Node, @NonNull Node> source2target = calls.get(calledRegion);
 			if (source2target == null) {
-				source2target = new HashMap<Node, Node>();
+				source2target = new HashMap<@NonNull Node, @NonNull Node>();
 				calls.put(calledRegion, source2target);
 			}
 			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
-			for (Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
-				for (Node callingNode : calledGuardNode.getPassedBindingSources()) {
+			for (@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
+				for (@NonNull Node callingNode : calledGuardNode.getPassedBindingSources()) {
 					if (callingNode.getRegion() == region) {
 						Node oldNode = source2target.put(callingNode, calledGuardNode);
 						assert oldNode == null;
 					}
 				}
-				for (Node callingNode : calledGuardNode.getUsedBindingSources()) {
+				for (@NonNull Node callingNode : calledGuardNode.getUsedBindingSources()) {
 					if (callingNode.getRegion() == region) {
 						Node oldNode = source2target.put(callingNode, calledGuardNode);
 						assert oldNode == null;
@@ -1210,8 +1269,22 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		else {
 			Variable variable = node2variable.get(node);
 			if (variable == null) {
-				for (Edge edge : node.getIncomingEdges()) {
+				for (@NonNull Edge edge : node.getIncomingEdges()) {
 					if (edge.isArgument() || edge.isCast()) {
+						OCLExpression initExpression = edge.getSource().getTypedElements().iterator().next().accept(expressionCreator);
+						BottomPattern bottomPattern = mapping.getBottomPattern();
+						assert bottomPattern != null;
+						variable = createUnrealizedVariable(bottomPattern, node, initExpression);
+						break;
+					}
+				}
+			}
+			if (variable == null) {
+				for (@NonNull Edge edge : node.getIncomingEdges()) {
+					boolean isPredicated = edge.isPredicated();
+					boolean isNavigable = edge.isNavigable();
+					boolean isNavigation = edge.isNavigation();
+					if (isPredicated && !isNavigable && isNavigation) {
 						OCLExpression initExpression = edge.getSource().getTypedElements().iterator().next().accept(expressionCreator);
 						BottomPattern bottomPattern = mapping.getBottomPattern();
 						assert bottomPattern != null;
@@ -1279,7 +1352,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	@Override
-	public @NonNull List<Node> getGuardNodes() {
+	public @NonNull List<@NonNull Node> getGuardNodes() {
 		return guardNodes;
 	}
 
@@ -1334,14 +1407,14 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	/**
 	 * Filter classAssignments to retain only one of each opposite-property assignment pair.
 	 */
-	private void pruneClassAssignments(@NonNull Map<Node, List<NavigationEdge>> classAssignments) {
-		for (Node sourceNode : new ArrayList<Node>(classAssignments.keySet())) {
-			List<NavigationEdge> forwardEdges = classAssignments.get(sourceNode);
+	private void pruneClassAssignments(@NonNull Map<@NonNull Node, @NonNull List<@NonNull NavigationEdge>> classAssignments) {
+		for (@NonNull Node sourceNode : new ArrayList<@NonNull Node>(classAssignments.keySet())) {
+			List<@NonNull NavigationEdge> forwardEdges = classAssignments.get(sourceNode);
 			assert forwardEdges != null;
 			for (int iForward = forwardEdges.size()-1; iForward >= 0; iForward--) {
 				NavigationEdge forwardEdge = forwardEdges.get(iForward);
 				Node targetNode = forwardEdge.getTarget();
-				List<NavigationEdge> reverseEdges = classAssignments.get(targetNode);
+				List<@NonNull NavigationEdge> reverseEdges = classAssignments.get(targetNode);
 				if (reverseEdges != null) {
 					for (int iReverse = reverseEdges.size()-1; iReverse >= 0; iReverse--) {
 						NavigationEdge reverseEdge = reverseEdges.get(iReverse);

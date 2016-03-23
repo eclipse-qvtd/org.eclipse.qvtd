@@ -30,7 +30,7 @@ public class BasicSimpleEdge extends AbstractEdge implements SimpleEdge
 	} */
 
 	@Override
-	public @NonNull Iterable<SimpleEdge> getSimpleEdges() {
+	public @NonNull Iterable<@NonNull SimpleEdge> getSimpleEdges() {
 		return this;
 	}
 
@@ -45,7 +45,7 @@ public class BasicSimpleEdge extends AbstractEdge implements SimpleEdge
 	}
 
 	@Override
-	public Iterator<SimpleEdge> iterator() {
-		return new SingletonIterator<SimpleEdge>(this);
+	public Iterator<@NonNull SimpleEdge> iterator() {
+		return new SingletonIterator<@NonNull SimpleEdge>(this);
 	}
 }

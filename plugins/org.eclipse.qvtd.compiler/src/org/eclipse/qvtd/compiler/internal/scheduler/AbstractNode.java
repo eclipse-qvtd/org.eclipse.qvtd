@@ -38,12 +38,12 @@ import com.google.common.collect.Iterables;
  */
 public abstract class AbstractNode implements Node
 {
-	public static final class NodeComparator implements Comparator<Node>
+	public static final class NodeComparator implements Comparator<@NonNull Node>
 	{	
 		public static final @NonNull NodeComparator INSTANCE = new NodeComparator();
 	
 		@Override
-		public int compare(Node o1, Node o2) {
+		public int compare(@NonNull Node o1, @NonNull Node o2) {
 			String n1 = NameUtil.getSafeName(o1);
 			String n2 = NameUtil.getSafeName(o2);
 			int diff = ClassUtil.safeCompareTo(n1, n2);
@@ -63,10 +63,10 @@ public abstract class AbstractNode implements Node
 	private @NonNull NodeRole nodeRole;
 	protected final @NonNull Region region;
 	protected final @NonNull String name;
-	private @Nullable List<Connection> incomingConnections = null;
-	private @Nullable List<Edge> incomingEdges = null;
-	private @Nullable List<Connection> outgoingConnections = null;
-	private @Nullable List<Edge> outgoingEdges = null;
+	private @Nullable NodeConnection incomingConnection = null;
+	private @Nullable List<@NonNull Edge> incomingEdges = null;
+	private @Nullable List<@NonNull NodeConnection> outgoingConnections = null;
+	private @Nullable List<@NonNull Edge> outgoingEdges = null;
 
 	private @NonNull ClassDatumAnalysis classDatumAnalysis;
 
@@ -81,13 +81,11 @@ public abstract class AbstractNode implements Node
 	@Override
 	public void destroy() {
 		region.removeNode(this);
-		List<Connection> incomingConnections2 = incomingConnections;
-		if (incomingConnections2 != null) {
-			while (!incomingConnections2.isEmpty()) {
-				incomingConnections2.get(0).destroy();
-			}
+		Connection incomingConnection2 = incomingConnection;
+		if (incomingConnection2 != null) {
+			incomingConnection2.destroy();
 		}
-		List<Connection> outgoingConnections2 = outgoingConnections;
+		List<NodeConnection> outgoingConnections2 = outgoingConnections;
 		if (outgoingConnections2 != null) {
 			while (!outgoingConnections2.isEmpty()) {
 				outgoingConnections2.get(0).destroy();
@@ -108,26 +106,20 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public final void addIncomingConnection(@NonNull Connection connection) {
-		assert Iterables.contains(connection.getTargets(), this);
+	public final void addIncomingConnection(@NonNull NodeConnection connection) {
+		assert (incomingConnection == null) || (incomingConnection == connection);
+		assert Iterables.contains(connection.getTargetNodes(), this);
 //		assert edge.getRegion() == getRegion();
-		List<Connection> incomingConnections2 = incomingConnections;
-		if (incomingConnections2 == null) {
-			incomingConnections = incomingConnections2 = new ArrayList<Connection>();
-		}
-		else {
-			assert !incomingConnections2.contains(connection);
-		}
-		incomingConnections2.add(connection);
+		incomingConnection = connection;
 	}
 
 	@Override
 	public final void addIncomingEdge(@NonNull Edge edge) {
 		assert edge.getTarget() == this;
 //		assert edge.getRegion() == getRegion();
-		List<Edge> incomingEdges2 = incomingEdges;
+		List<@NonNull Edge> incomingEdges2 = incomingEdges;
 		if (incomingEdges2 == null) {
-			incomingEdges = incomingEdges2 = new ArrayList<Edge>();
+			incomingEdges = incomingEdges2 = new ArrayList<@NonNull Edge>();
 		}
 		else {
 			assert !incomingEdges2.contains(edge);
@@ -136,12 +128,12 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public final void addOutgoingConnection(@NonNull Connection connection) {
+	public final void addOutgoingConnection(@NonNull NodeConnection connection) {
 		assert Iterables.contains(connection.getSources(), this);
 //		assert edge.getRegion() == getRegion();
-		List<Connection> outgoingConnections2 = outgoingConnections;
+		List<@NonNull NodeConnection> outgoingConnections2 = outgoingConnections;
 		if (outgoingConnections2 == null) {
-			outgoingConnections = outgoingConnections2 = new ArrayList<Connection>();
+			outgoingConnections = outgoingConnections2 = new ArrayList<@NonNull NodeConnection>();
 		}
 		else {
 			assert !outgoingConnections2.contains(connection);
@@ -153,9 +145,9 @@ public abstract class AbstractNode implements Node
 	public final void addOutgoingEdge(@NonNull Edge edge) {
 		assert edge.getSource() == this;
 //		assert edge.getRegion() == getRegion();
-		List<Edge> outgoingEdges2 = outgoingEdges;
+		List<@NonNull Edge> outgoingEdges2 = outgoingEdges;
 		if (outgoingEdges2 == null) {
-			outgoingEdges = outgoingEdges2 = new ArrayList<Edge>();
+			outgoingEdges = outgoingEdges2 = new ArrayList<@NonNull Edge>();
 		}
 		else {
 			assert !outgoingEdges2.contains(edge);
@@ -188,11 +180,11 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public void getAllAncestors(@NonNull Set<Node> ancestors) {
+	public void getAllAncestors(@NonNull Set<@NonNull Node> ancestors) {
 		if (ancestors.add(this)) {
 			Region region = getRegion();
-			for (Node headNode : region.getHeadNodes()) {
-				for (Node passedBindingSource : headNode.getPassedBindingSources()) {
+			for (@NonNull Node headNode : region.getHeadNodes()) {
+				for (@NonNull Node passedBindingSource : headNode.getPassedBindingSources()) {
 					passedBindingSource.getAllAncestors(ancestors);
 				}
 			}
@@ -200,9 +192,8 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public final @NonNull Iterable<Edge> getArgumentEdges() {
-		@SuppressWarnings("null")
-		@NonNull Iterable<Edge> filter = Iterables.filter(getIncomingEdges(), AbstractRegion.IsExpressionEdgePredicate.INSTANCE);
+	public final @NonNull Iterable<@NonNull Edge> getArgumentEdges() {
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getIncomingEdges(), AbstractRegion.IsExpressionEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -218,11 +209,10 @@ public abstract class AbstractNode implements Node
 		return null;
 	}
 
-	@SuppressWarnings("null")
 	@Override
-	public final @NonNull Iterable<NavigationEdge> getAssignmentEdges() {
+	public final @NonNull Iterable<@NonNull NavigationEdge> getAssignmentEdges() {
 		@SuppressWarnings("unchecked")
-		Iterable<NavigationEdge> filter = (Iterable<NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsAssignmentEdgePredicate.INSTANCE);
+		Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsAssignmentEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -270,9 +260,8 @@ public abstract class AbstractNode implements Node
 //	}
 
 	@Override
-	public final @NonNull Iterable<Edge> getComputationEdges() {
-		@SuppressWarnings("null")
-		@NonNull Iterable<Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsComputationEdgePredicate.INSTANCE);
+	public final @NonNull Iterable<@NonNull Edge> getComputationEdges() {
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsComputationEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -293,19 +282,17 @@ public abstract class AbstractNode implements Node
 //		return filter;
 //	}
 
-	@SuppressWarnings("null")
 	@Override
-	public final @NonNull Iterable<NavigationEdge> getContainerEdges() {
+	public final @NonNull Iterable<@NonNull NavigationEdge> getContainerEdges() {
 		@SuppressWarnings("unchecked")
-		Iterable<NavigationEdge> filter = (Iterable<NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsContainerEdgePredicate.INSTANCE);
+		Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsContainerEdgePredicate.INSTANCE);
 		return filter;
 	}
 
-	@SuppressWarnings("null")
 	@Override
-	public final @NonNull Iterable<NavigationEdge> getContainmentEdges() {
+	public final @NonNull Iterable<@NonNull NavigationEdge> getContainmentEdges() {
 		@SuppressWarnings("unchecked")
-		Iterable<NavigationEdge> filter = (Iterable<NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsContainmentEdgePredicate.INSTANCE);
+		Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsContainmentEdgePredicate.INSTANCE);
 		return filter;
 	}
 	
@@ -315,27 +302,35 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public final @NonNull List<Connection> getIncomingConnections() {
-		return incomingConnections != null ? incomingConnections : SchedulerConstants.EMPTY_CONNECTION_LIST;
+	public final @Nullable NodeConnection getIncomingConnection() {
+		return incomingConnection;
 	}
 
 	@Override
-	public final @NonNull List<Edge> getIncomingEdges() {
+	public final @NonNull List<@NonNull Edge> getIncomingEdges() {
 		return incomingEdges != null ? incomingEdges : SchedulerConstants.EMPTY_EDGE_LIST;
 	}
 
 	@Override
-	public final @NonNull Iterable<Connection> getIncomingPassedConnections() {
-		@SuppressWarnings({"null"})
-		@NonNull Iterable<Connection> filter = Iterables.filter(getIncomingConnections(), ScheduledRegion.IsPassedBindingEdgePredicate.INSTANCE);
-		return filter;
+	public final @Nullable NodeConnection getIncomingPassedConnection() {
+		NodeConnection incomingConnection2 = incomingConnection;
+		if ((incomingConnection2 != null) && incomingConnection2.isPassed()) {
+			return incomingConnection2;
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override
-	public @NonNull Iterable<Connection> getIncomingUsedConnections() {
-		@SuppressWarnings({"null"})
-		@NonNull Iterable<Connection> filter = Iterables.filter(getIncomingConnections(), ScheduledRegion.IsUsedBindingEdgePredicate.INSTANCE);
-		return filter;
+	public @Nullable NodeConnection getIncomingUsedConnection() {
+		NodeConnection incomingConnection2 = incomingConnection;
+		if ((incomingConnection2 != null) && incomingConnection2.isUsed()) {
+			return incomingConnection2;
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override
@@ -344,9 +339,8 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public final @NonNull Iterable<Edge> getMergeableEdges() {
-		@SuppressWarnings("null")
-		@NonNull Iterable<Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsMergeableEdgePredicate.INSTANCE);
+	public final @NonNull Iterable<@NonNull Edge> getMergeableEdges() {
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsMergeableEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -357,7 +351,7 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public @Nullable NavigationEdge getNavigationEdge(@NonNull Property source2targetProperty) {
-		for (Edge edge : getOutgoingEdges()) {
+		for (@NonNull Edge edge : getOutgoingEdges()) {
 			if (edge instanceof NavigationEdge) {
 				NavigationEdge navigationEdge = (NavigationEdge)edge;
 				if (navigationEdge.getProperty() == source2targetProperty) {
@@ -369,15 +363,15 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public final @NonNull Iterable<NavigationEdge> getNavigationEdges() {
-		@SuppressWarnings({"null", "unchecked"})
-		@NonNull Iterable<NavigationEdge> filter = (Iterable<NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsNavigationEdgePredicate.INSTANCE);
+	public final @NonNull Iterable<@NonNull NavigationEdge> getNavigationEdges() {
+		@SuppressWarnings("unchecked")
+		@NonNull Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsNavigationEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
 	public @Nullable Node getNavigationTarget(@NonNull Property source2targetProperty) {
-		for (Edge edge : getOutgoingEdges()) {
+		for (@NonNull Edge edge : getOutgoingEdges()) {
 			if (edge instanceof NavigationEdge) {
 				NavigationEdge navigationEdge = (NavigationEdge)edge;
 				if (navigationEdge.getProperty() == source2targetProperty) {
@@ -389,9 +383,9 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public @NonNull Iterable<Node> getNavigationTargets() {
-		@SuppressWarnings("null")@NonNull Iterable<Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsNavigationEdgePredicate.INSTANCE);
-		@SuppressWarnings("null")@NonNull Iterable<Node> transform = Iterables.transform(filter, AbstractRegion.EdgeTargetFunction.INSTANCE);
+	public @NonNull Iterable<@NonNull Node> getNavigationTargets() {
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsNavigationEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Node> transform = Iterables.transform(filter, AbstractRegion.EdgeTargetFunction.INSTANCE);
 		return transform;
 	}
 
@@ -401,34 +395,33 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public final @NonNull List<Connection> getOutgoingConnections() {
-		return outgoingConnections != null ? outgoingConnections : SchedulerConstants.EMPTY_CONNECTION_LIST;
+	public final @NonNull List<@NonNull NodeConnection> getOutgoingConnections() {
+		return outgoingConnections != null ? outgoingConnections : SchedulerConstants.EMPTY_NODE_CONNECTION_LIST;
 	}
 
 	@Override
-	public final @NonNull List<Edge> getOutgoingEdges() {
+	public final @NonNull List<@NonNull Edge> getOutgoingEdges() {
 		return outgoingEdges != null ? outgoingEdges : SchedulerConstants.EMPTY_EDGE_LIST;
 	}
 
 	@Override
-	public final @NonNull Iterable<Connection> getOutgoingPassedConnections() {
-		@SuppressWarnings({"null"})
-		@NonNull Iterable<Connection> filter = Iterables.filter(getOutgoingConnections(), ScheduledRegion.IsPassedBindingEdgePredicate.INSTANCE);
+	public final @NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections() {
+		@NonNull Iterable<@NonNull NodeConnection> filter = Iterables.filter(getOutgoingConnections(), RootScheduledRegion.IsPassedBindingEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
-	public final @NonNull Iterable<Connection> getOutgoingUsedBindingEdges() {
-		@SuppressWarnings({"null"})
-		@NonNull Iterable<Connection> filter = Iterables.filter(getOutgoingConnections(), ScheduledRegion.IsUsedBindingEdgePredicate.INSTANCE);
+	public final @NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedBindingEdges() {
+		@NonNull Iterable<@NonNull NodeConnection> filter = Iterables.filter(getOutgoingConnections(), RootScheduledRegion.IsUsedBindingEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
-	public @NonNull Iterable<Node> getPassedBindingSources() {
-		List<Node> sources = new ArrayList<Node>();
-		for (Connection connection : getIncomingPassedConnections()) {
-			for (Node source : connection.getSources()) {
+	public @NonNull Iterable<@NonNull Node> getPassedBindingSources() {
+		List<@NonNull Node> sources = new ArrayList<@NonNull Node>();
+		NodeConnection connection = getIncomingPassedConnection();
+		if (connection != null) {
+			for (@NonNull Node source : connection.getSources()) {
 				if (!sources.contains(source)) {
 					sources.add(source);
 				}
@@ -438,10 +431,10 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public @NonNull Iterable<Node> getPassedBindingTargets() {
-		List<Node> targets = new ArrayList<Node>();
-		for (Connection connection : getOutgoingPassedConnections()) {
-			for (Node target : connection.getTargets()) {
+	public @NonNull Iterable<@NonNull Node> getPassedBindingTargets() {
+		List<@NonNull Node> targets = new ArrayList<@NonNull Node>();
+		for (@NonNull NodeConnection connection : getOutgoingPassedConnections()) {
+			for (@NonNull Node target : connection.getTargetNodes()) {
 				if (!targets.contains(target)) {
 					targets.add(target);
 				}
@@ -454,32 +447,30 @@ public abstract class AbstractNode implements Node
 		return nodeRole.getPenwidth();
 	}
 
-	@SuppressWarnings("null")
 	@Override
-	public final @NonNull Iterable<NavigationEdge> getPredicateEdges() {
+	public final @NonNull Iterable<@NonNull NavigationEdge> getPredicateEdges() {
 		@SuppressWarnings("unchecked")
-		Iterable<NavigationEdge> filter = (Iterable<NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsPredicatedEdgePredicate.INSTANCE);
+		Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsPredicatedEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
-	public final @NonNull Iterable<Edge> getRecursionEdges() {
-		@SuppressWarnings("null")
-		@NonNull Iterable<Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsRecursionEdgePredicate.INSTANCE);
+	public final @NonNull Iterable<@NonNull Edge> getRecursionEdges() {
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsRecursionEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
-	public @NonNull Iterable<Node> getRecursionSources() {
-		@SuppressWarnings("null")@NonNull Iterable<Edge> filter = Iterables.filter(getIncomingEdges(), AbstractRegion.IsRecursionEdgePredicate.INSTANCE);
-		@SuppressWarnings("null")@NonNull Iterable<Node> transform = Iterables.transform(filter, AbstractRegion.EdgeSourceFunction.INSTANCE);
+	public @NonNull Iterable<@NonNull Node> getRecursionSources() {
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getIncomingEdges(), AbstractRegion.IsRecursionEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Node> transform = Iterables.transform(filter, AbstractRegion.EdgeSourceFunction.INSTANCE);
 		return transform;
 	}
 
 	@Override
-	public @NonNull Iterable<Node> getRecursionTargets() {
-		@SuppressWarnings("null")@NonNull Iterable<Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsRecursionEdgePredicate.INSTANCE);
-		@SuppressWarnings("null")@NonNull Iterable<Node> transform = Iterables.transform(filter, AbstractRegion.EdgeTargetFunction.INSTANCE);
+	public @NonNull Iterable<@NonNull Node> getRecursionTargets() {
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsRecursionEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull Node> transform = Iterables.transform(filter, AbstractRegion.EdgeTargetFunction.INSTANCE);
 		return transform;
 	}
 
@@ -502,10 +493,11 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public @NonNull Iterable<Node> getUsedBindingSources() {
-		List<Node> sources = new ArrayList<Node>();
-		for (Connection connection : getIncomingUsedConnections()) {
-			for (Node source : connection.getSources()) {
+	public @NonNull Iterable<@NonNull Node> getUsedBindingSources() {
+		List<@NonNull Node> sources = new ArrayList<@NonNull Node>();
+		NodeConnection connection = getIncomingUsedConnection();
+		if (connection != null) {
+			for (@NonNull Node source : connection.getSources()) {
 				if (!sources.contains(source)) {
 					sources.add(source);
 				}
@@ -565,6 +557,11 @@ public abstract class AbstractNode implements Node
 		return nodeRole.isHead();
 	}
 
+//	@Override
+//	public boolean isInput() {
+//		return nodeRole.isInput();
+//	}
+
 	@Override
 	public boolean isInternal() {
 		return nodeRole.isInternal();
@@ -606,6 +603,11 @@ public abstract class AbstractNode implements Node
 		return nodeRole.isOperation();
 	}
 
+//	@Override
+//	public boolean isOutput() {
+//		return nodeRole.isOutput();
+//	}
+
 	@Override
 	public boolean isPredicated() {
 		return nodeRole.isPredicated();
@@ -631,7 +633,7 @@ public abstract class AbstractNode implements Node
 		return nodeRole.isTrue();
 	}
 
-	protected void mergeRole(@NonNull NodeRole nodeRole) {
+	public void mergeRole(@NonNull NodeRole nodeRole) {
 		if (this.nodeRole != nodeRole) {
 			this.nodeRole = this.nodeRole.merge(nodeRole);
 		}
@@ -673,13 +675,11 @@ public abstract class AbstractNode implements Node
 	}
 	
 	@Override
-	public final void removeIncomingConnection(@NonNull Connection connection) {
-		assert Iterables.contains(connection.getTargets(), this);
+	public final void removeIncomingConnection(@NonNull NodeConnection connection) {
+		assert Iterables.contains(connection.getTargetNodes(), this);
 //		assert edge.getRegion() == getRegion();
-		List<Connection> incomingConnections2 = incomingConnections;
-		assert incomingConnections2 != null;
-		boolean wasRemoved = incomingConnections2.remove(connection);
-		assert wasRemoved;
+		assert incomingConnection != null;
+		incomingConnection = null;
 	}
 	
 	@Override
@@ -693,13 +693,13 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public final void removeOutgoingConnection(@NonNull Connection connection) {
+	public final void removeOutgoingConnection(@NonNull NodeConnection connection) {
 		assert Iterables.contains(connection.getSources(), this);
 //		assert edge.getRegion() == getRegion();
-		List<Connection> outgoingConnections2 = outgoingConnections;
+		List<NodeConnection> outgoingConnections2 = outgoingConnections;
 		assert outgoingConnections2 != null;
 		boolean wasRemoved = outgoingConnections2.remove(connection);
-		assert wasRemoved;
+//		assert wasRemoved;
 	}
 
 	@Override
@@ -734,7 +734,7 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
         return nodeRole.toString() + "(" + getName() + " : " + classDatumAnalysis.toString() + ")";
     }
 }
