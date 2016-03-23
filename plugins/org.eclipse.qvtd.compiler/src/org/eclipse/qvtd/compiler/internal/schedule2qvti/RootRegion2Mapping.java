@@ -48,6 +48,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -131,7 +132,7 @@ public class RootRegion2Mapping extends AbstractRegion2Mapping
 	private @NonNull Variable createRootConnectionVariable(@NonNull CorePattern pattern, @NonNull String name, @NonNull Type type, @Nullable OCLExpression initExpression) {
 //		Type variableType = visitor.getEnvironmentFactory().getCompleteEnvironment().getSetType(node.getCompleteClass().getPrimaryClass(), true, null, null);
 //		assert variableType != null;
-		Variable variable = PivotUtil.createVariable(getSafeName(name), type, true, initExpression);
+		ConnectionVariable variable = createConnectionVariable(getSafeName(name), type, initExpression);
 		pattern.getVariable().add(variable);
 //		Variable oldVariable = node2variable.put(node, variable);
 //		assert oldVariable == null;

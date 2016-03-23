@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VoidType;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.basecs.BaseCSFactory;
@@ -47,6 +48,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -96,7 +99,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	protected void refreshReferredMapping(@NonNull MappingCallCS csMappingCall, @NonNull MappingCall asMappingCall) {
 		Mapping asMapping = asMappingCall.getReferredMapping();
 		if (asMapping != null) {
-			@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+			@NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
 			csMappingCall.setOwnedPathName(csPathName);
 			context.refreshPathName(csPathName, asMapping, QVTbaseUtil.getContainingTransformation(asMappingCall));
 		}
@@ -105,10 +108,10 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		}
 	}
 
-	protected void refreshUsedProperties(@NonNull Transformation asTransformation, /*@NonNull*/ List<PathNameCS> csPathNames, /*@NonNull*/ List<Property> asProperties) {
+	protected void refreshUsedProperties(@NonNull Transformation asTransformation, /*@NonNull*/ List<PathNameCS> csPathNames, /*@NonNull*/ List<@NonNull Property> asProperties) {
 		List<PathNameCS> pathNames = new ArrayList<PathNameCS>();
-		for (@SuppressWarnings("null") @NonNull Property asProperty : asProperties) {
-			@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+		for (@NonNull Property asProperty : asProperties) {
+			@NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
 			pathNames.add(csPathName);
 			context.refreshPathName(csPathName, asProperty, asTransformation);
 		}
@@ -117,8 +120,8 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 
 	protected void refreshUsedTypes(@NonNull MappingCS csMapping, @NonNull Mapping asMapping) {
 		List<PathNameCS> csPathNames = new ArrayList<PathNameCS>();
-		for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class asClass : asMapping.getPolledClasses()) {
-			@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+		for (org.eclipse.ocl.pivot.@NonNull Class asClass : ClassUtil.nullFree(asMapping.getPolledClasses())) {
+			@NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
 			csPathNames.add(csPathName);
 			Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asMapping);
 			context.refreshPathName(csPathName, asClass, asTransformation);
@@ -160,6 +163,25 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	}
 
 	@Override
+	public ElementCS visitConnectionStatement(@NonNull ConnectionStatement asConnectionStatement) {
+		return visiting(asConnectionStatement);
+/*		ConnectionStatementCS csStatement = context.refreshElement(ConnectionStatementCS.class, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS, asConnectionStatement);
+		csStatement.setPivot(asConnectionStatement);
+		Variable asVariable = asConnectionStatement.getTargetVariable();
+		if (asVariable != null) {
+			assert asVariable.eContainer().eContainer() instanceof Mapping;
+			csStatement.setTargetVariable(asVariable);
+		}
+		csStatement.setOwnedExpression(context.visitDeclaration(ExpCS.class, asConnectionStatement.getValue()));
+		return csStatement; */
+	}
+
+	@Override
+	public ElementCS visitConnectionVariable(@NonNull ConnectionVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
 	public ElementCS visitDebugTraceBack(@NonNull DebugTraceBack object) {
 		return visiting(object);
 	}
@@ -189,8 +211,8 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		ImperativeDomainCS csDomain = (ImperativeDomainCS) visitCoreDomain(asImperativeDomain);
 		Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asImperativeDomain);
 		assert asTransformation != null;
-		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), asImperativeDomain.getCheckedProperties());
-		refreshUsedProperties(asTransformation, csDomain.getEnforcedProperties(), asImperativeDomain.getEnforcedProperties());
+		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), ClassUtil.nullFree(asImperativeDomain.getCheckedProperties()));
+		refreshUsedProperties(asTransformation, csDomain.getEnforcedProperties(), ClassUtil.nullFree(asImperativeDomain.getEnforcedProperties()));
 		return csDomain;
 	}
 
@@ -252,8 +274,8 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
 		Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asMapping);
 		assert asTransformation != null;
-		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), asMapping.getCheckedProperties());
-		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), asMapping.getCheckedProperties());
+		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), ClassUtil.nullFree(asMapping.getCheckedProperties()));
+		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), ClassUtil.nullFree(asMapping.getCheckedProperties()));
 		csMapping.setOwnedMiddle(csDomain);
 		MappingStatementCS csMappingStatement = context.visitDeclaration(MappingStatementCS.class, asMapping.getMappingStatement());
 		MappingSequenceCS csMappingSequence;

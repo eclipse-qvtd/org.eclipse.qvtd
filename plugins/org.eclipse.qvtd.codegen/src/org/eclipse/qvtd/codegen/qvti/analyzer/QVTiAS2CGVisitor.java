@@ -112,6 +112,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -492,7 +494,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	public @NonNull CGGuardVariable getGuardVariable(@NonNull Variable asVariable) {
 		CGGuardVariable cgGuardVariable = (CGGuardVariable) getVariablesStack().getParameter(asVariable);
 		assert cgGuardVariable == null;
-		boolean isConnectionVariable = QVTimperativeUtil.isConnectionVariable(asVariable);
+		boolean isConnectionVariable = asVariable instanceof ConnectionVariable;
 		boolean isPrimitiveVariable = QVTimperativeUtil.isPrimitiveVariable(asVariable);
 		if (isConnectionVariable) {
 			cgGuardVariable = QVTiCGModelFactory.eINSTANCE.createCGConnectionVariable();
@@ -512,7 +514,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	public @NonNull CGRealizedVariable getRealizedVariable(@NonNull RealizedVariable pRealizedVariable) {
 		Variables variablesStack = getVariablesStack();
-		CGRealizedVariable cgVariable = (CGRealizedVariable) variablesStack.getVariable(pRealizedVariable);
+		CGVariable cgVariable2 = variablesStack.getVariable(pRealizedVariable);
+		CGRealizedVariable cgVariable = (CGRealizedVariable) cgVariable2;
 		if (cgVariable == null) {
 			EClassifier eClassifier = getEClassifier(pRealizedVariable.getType());
 			if (eClassifier != null) {
@@ -574,6 +577,34 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgConnectionAssignment.setTypeId(initValue.getTypeId());
 		cgConnectionAssignment.setRequired(initValue.isRequired());
 		return cgConnectionAssignment;
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitConnectionStatement(@NonNull ConnectionStatement asConnectionStatement) {
+		Variable asVariable = asConnectionStatement.getTargetVariable();
+		if (asVariable == null) {
+			return null;
+		}
+		CGVariable cgVariable = getVariable(asVariable);
+		OCLExpression asInitValue = asConnectionStatement.getValue();
+		assert (cgVariable instanceof CGConnectionVariable) || (cgVariable instanceof CGAccumulator);
+		CGValuedElement initValue = doVisit(CGValuedElement.class, asInitValue);
+		CGConnectionAssignment cgConnectionAssignment = QVTiCGModelFactory.eINSTANCE.createCGConnectionAssignment();
+		cgConnectionAssignment.setConnectionVariable((CGConnectionVariable) cgVariable);
+		cgConnectionAssignment.setInitValue(initValue);
+		cgConnectionAssignment.setTypeId(initValue.getTypeId());
+		cgConnectionAssignment.setRequired(initValue.isRequired());
+		return cgConnectionAssignment;
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitConnectionVariable(@NonNull ConnectionVariable asConnectionVariable) {
+		CGVariable cgVariable = getVariable(asConnectionVariable);
+		CGValuedElement initValue = doVisit(CGValuedElement.class, asConnectionVariable.getOwnedInit());
+		cgVariable.setInit(initValue);
+		cgVariable.setTypeId(initValue.getTypeId());
+		cgVariable.setRequired(initValue.isRequired());
+		return cgVariable;
 	}
 
 	@Override

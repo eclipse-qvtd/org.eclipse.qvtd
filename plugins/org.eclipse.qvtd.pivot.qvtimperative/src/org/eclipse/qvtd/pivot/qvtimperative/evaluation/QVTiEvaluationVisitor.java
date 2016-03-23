@@ -60,6 +60,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -130,6 +132,28 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
         this.executor = executor;
     }
 
+	private @Nullable Object doConnectionAccumulation(@NonNull ConnectionVariable targetVariable, @NonNull OCLExpression valueExpression) {
+		try {
+			Object connection = context.getValueOf(targetVariable);
+			CollectionValue.Accumulator connectionCollection = (Accumulator) ValueUtil.asCollectionValue(connection);
+			Object values = valueExpression.accept(undecoratedVisitor);
+			if (values instanceof Iterable<?>) {
+				CollectionValue valuesCollection = ValueUtil.asCollectionValue(values);
+				for (Object value : valuesCollection) {
+					connectionCollection.add(value);
+				}
+			}
+			else {
+				connectionCollection.add(values);
+			}
+			return connectionCollection;
+		}
+		catch (RuntimeException e) {
+			context.replace(targetVariable, e);
+			throw e;
+		}
+	}
+
     @Override
 	public @Nullable Object visitAssignment(@NonNull Assignment object) {
 		return visiting(object);
@@ -147,39 +171,37 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
     @Override
 	public @Nullable Object visitConnectionAssignment(@NonNull ConnectionAssignment connectionAssignment) {
-    	Variable targetVariable = connectionAssignment.getTargetVariable() ;
+    	ConnectionVariable targetVariable = connectionAssignment.getTargetVariable() ;
 		if (targetVariable != null) {
 			OCLExpression valueExpression = connectionAssignment.getValue();
 			if (valueExpression != null) {
-				try {
-//					context.replace(targetVariable, value);
-					Object connection = context.getValueOf(targetVariable);
-					CollectionValue.Accumulator connectionCollection = (Accumulator) ValueUtil.asCollectionValue(connection);
-					Object values = valueExpression.accept(undecoratedVisitor);
-					if (values instanceof Iterable<?>) {
-						CollectionValue valuesCollection = ValueUtil.asCollectionValue(values);
-						for (Object value : valuesCollection) {
-							connectionCollection.add(value);
-						}
-					}
-					else {
-						connectionCollection.add(values);
-					}
-					return connectionCollection;
-				}
-				catch (RuntimeException e) {
-					context.replace(targetVariable, e);
-					throw e;
-				}
+				return doConnectionAccumulation(targetVariable, valueExpression);
 			}
 		}
 		return null;
     }
-    
-    @Override
+
+	@Override
+	public @Nullable Object visitConnectionStatement(@NonNull ConnectionStatement connectionStatement) {
+    	ConnectionVariable targetVariable = connectionStatement.getTargetVariable() ;
+		if (targetVariable != null) {
+			OCLExpression valueExpression = connectionStatement.getValue();
+			if (valueExpression != null) {
+				return doConnectionAccumulation(targetVariable, valueExpression);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Object visitConnectionVariable(@NonNull ConnectionVariable object) {
+		return visiting(object);
+	}
+
+	@Override
 	public @Nullable Object visitCoreDomain(@NonNull CoreDomain object) {
 		return visiting(object);
-    }
+	}
 
 	@Override
 	public @Nullable Object visitDomain(@NonNull Domain object) {

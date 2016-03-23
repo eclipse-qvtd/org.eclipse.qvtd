@@ -35,6 +35,7 @@ import org.eclipse.qvtd.compiler.internal.scheduler.Region;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -179,7 +180,7 @@ public class CompositionRegion2Mapping extends AbstractRegion2Mapping
 		//
 		if (connection2variable != null) {
 			for (Connection connection : connection2variable.keySet()) {
-				Variable connectionVariable = connection2variable.get(connection);
+				ConnectionVariable connectionVariable = (ConnectionVariable) connection2variable.get(connection);
 				assert connectionVariable != null;
 				Node resultNode = connection.getSource(region);
 				OCLExpression sourceExpression = createSelectByKind(resultNode);

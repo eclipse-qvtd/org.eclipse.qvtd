@@ -90,6 +90,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -757,7 +758,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				OCLExpression variableExpression = createVariableExp(sourceNode);
 				Variable connectionVariable = connection2variable.get(connection);
 				assert connectionVariable != null;
-				createConnectionAssignment(connectionVariable, variableExpression);
+				createConnectionAssignment((@NonNull ConnectionVariable) connectionVariable, variableExpression);
 			}
 		}
 	}

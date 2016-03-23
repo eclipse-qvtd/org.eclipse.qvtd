@@ -19,7 +19,9 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -49,6 +51,7 @@ import org.eclipse.qvtd.compiler.internal.scheduler.Node;
 import org.eclipse.qvtd.compiler.internal.scheduler.Region;
 import org.eclipse.qvtd.compiler.internal.scheduler.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
@@ -113,11 +116,27 @@ public abstract class AbstractRegion2Mapping
 		return PivotUtil.createNavigationCallExp(asSource, asProperty);
 	}
 
-	protected void createConnectionAssignment(@NonNull Variable connectionVariable, @NonNull OCLExpression childrenExpression) {
+	protected void createConnectionAssignment(@NonNull ConnectionVariable connectionVariable, @NonNull OCLExpression childrenExpression) {
 		ConnectionAssignment connectionAssignment = QVTimperativeFactory.eINSTANCE.createConnectionAssignment();
 		connectionAssignment.setTargetVariable(connectionVariable);
 		connectionAssignment.setValue(childrenExpression);
 		mapping.getBottomPattern().getAssignment().add(connectionAssignment);
+	}
+
+	protected @NonNull ConnectionVariable createConnectionVariable(@NonNull Connection connection) {
+		Type asType = getConnectionSourcesType(connection);
+		String name = connection.getName();
+		assert name != null;
+		return createConnectionVariable(name, asType, null);
+	}
+
+	protected @NonNull ConnectionVariable createConnectionVariable(@NonNull String name, @NonNull Type asType, @Nullable OCLExpression initExpression) {
+		ConnectionVariable asVariable = QVTimperativeFactory.eINSTANCE.createConnectionVariable();
+		asVariable.setName(getSafeName(name));
+		asVariable.setType(asType);
+		asVariable.setIsRequired(true);
+		asVariable.setOwnedInit(initExpression);
+		return asVariable;
 	}
 
 	protected void createConnectionGuardVariables() {
@@ -125,7 +144,7 @@ public abstract class AbstractRegion2Mapping
 		if (intermediateConnections.size() > 0) {
 			connection2variable = new HashMap<Connection, Variable>();
 			for (@SuppressWarnings("null")@NonNull Connection connection : intermediateConnections) {
-				Variable connectionVariable = createVariable(connection);
+				ConnectionVariable connectionVariable = createConnectionVariable(connection);
 				connection2variable.put(connection, connectionVariable);
 				mapping.getGuardPattern().getVariable().add(connectionVariable);
 			}
@@ -221,6 +240,28 @@ public abstract class AbstractRegion2Mapping
 		Type asType = node.getClassDatumAnalysis().getCompleteClass().getPrimaryClass();
 		assert asType != null;
 		return PivotUtil.createVariable(getSafeName(node), asType, true, null);
+	}
+
+	protected @NonNull Type getConnectionSourcesType(@NonNull Connection connection) {
+		IdResolver idResolver = visitor.getEnvironmentFactory().getIdResolver();
+		Type commonType = null;
+		for (@NonNull Node node : connection.getSources()) {
+			Type nodeType = node.getCompleteClass().getPrimaryClass();
+//			System.out.println("  nodeType " + nodeType);
+			CompleteEnvironment environment = idResolver.getEnvironment();
+			if (!(nodeType instanceof CollectionType)) {		// RealizedVariable accumulated on Connection
+				nodeType = /*isOrdered() ? environment.getOrderedSetType(nodeType, true, null, null) :*/ environment.getSetType(nodeType, true, null, null);
+			}
+			if (commonType == null) {
+				commonType = nodeType;
+			}
+			else if (nodeType != commonType) {
+				commonType = commonType.getCommonType(idResolver, nodeType);
+			}
+		}
+//		System.out.println("=> " + commonType);
+		assert commonType != null;
+		return commonType;
 	}
 
 	public @NonNull Variable getConnectionVariable(@NonNull Connection connection) {

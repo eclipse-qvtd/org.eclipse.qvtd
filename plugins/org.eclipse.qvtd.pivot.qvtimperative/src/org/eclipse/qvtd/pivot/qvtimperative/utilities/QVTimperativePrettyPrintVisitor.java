@@ -27,10 +27,12 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBasePrettyPrintVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -83,6 +85,20 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 	}
 
 	@Override
+	public Object visitConnectionStatement(@NonNull ConnectionStatement asConnectionStatement) {
+		context.appendName(asConnectionStatement.getTargetVariable());
+		context.append(" += ");
+		safeVisit(asConnectionStatement.getValue());
+		context.append(";\n");
+		return null;
+	}
+
+	@Override
+	public Object visitConnectionVariable(@NonNull ConnectionVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
 	public Object visitGuardPattern(@NonNull GuardPattern pGuardPattern) {
 		for (Variable pVariable : pGuardPattern.getVariable()) {
 			safeVisit(pVariable);
@@ -120,7 +136,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		context.appendName(pMapping);
 		context.append(" in ");
 		context.appendName(pMapping.getTransformation());
-		context.append(" {\n");
+		context.append(" {");
 		context.push("", "");
 		for (Domain pDomain : pMapping.getDomain()) {
 			if (pDomain instanceof CoreDomain) {
@@ -140,7 +156,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		if (pMappingCall.isIsInfinite()) {
 			context.append("infinite ");
 		}
-		context.append("map ");
+		context.append("call ");
 		context.appendName(pMappingCall.getReferredMapping());
 		context.append(" {\n");
 		context.push("", "");
@@ -167,7 +183,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		context.appendElement(pMappingLoop.getOwnedIterators().get(0));
 		context.append(" in ");
 		context.appendElement(pMappingLoop.getOwnedSource());
-		context.append(" {\n");
+		context.append(" {");
 		context.push("", "");
 		safeVisit(pMappingLoop.getOwnedBody());
 		context.append("}");
