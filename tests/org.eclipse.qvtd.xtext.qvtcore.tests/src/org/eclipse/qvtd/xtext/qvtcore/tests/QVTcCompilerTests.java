@@ -301,14 +301,14 @@ public class QVTcCompilerTests extends LoadTestCase
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("Families2Persons.qvtcas", "person", "Families2Persons.genmodel");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
-			myQVT.loadInput("family", "FamiliesBig.xmi");
-	    	myQVT.executeTransformation();
-			myQVT.saveOutput("person", "PersonsBig_CG.xmi", "PersonsBig_expected.xmi", Families2PersonsNormalizer.INSTANCE);
-	    	//
-	        myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("family", "Families.xmi");
 	    	myQVT.executeTransformation();
 			myQVT.saveOutput("person", "Persons_CG.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+	    	//
+	        myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("family", "FamiliesBig.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("person", "PersonsBig_CG.xmi", "PersonsBig_expected.xmi", Families2PersonsNormalizer.INSTANCE);
 		}
 		finally {
 	    	myQVT.dispose();

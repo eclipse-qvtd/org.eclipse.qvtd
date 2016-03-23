@@ -29,8 +29,8 @@ public class OCL2QVTiTransformationTechnology extends AbstractTransformationTech
 	}
 
 	@Override
-	public @NonNull Map<String, Object> execute(@NonNull ResourceSet resourceSet, @NonNull Map<String, Object> modelMap,
-			@NonNull Map<String, Object> parametersMap) throws TransformationException {
+	public @NonNull Map<@NonNull String, Object> execute(@NonNull ResourceSet resourceSet, @NonNull Map<String, Object> modelMap,
+			@NonNull Map<@NonNull String, Object> parametersMap) throws TransformationException {
 		String lookupSolverClassName = (String) parametersMap.get("lookupSolverClassName");
 		String lookupResultItfName = (String) parametersMap.get("lookupResultItfName");
 		String javaFolder = (String) parametersMap.get("javaFolder");
@@ -49,7 +49,7 @@ public class OCL2QVTiTransformationTechnology extends AbstractTransformationTech
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(lookupSolverClassName, lookupResultItfName, javaFolder, javaPackage);
 		try {
 			new OCL2QVTiCGTxCompiler().compileTransformation(resourceSet, cgParams, traceabilityPropName, oclDocURI, extendedOclDocURIs);
-			return new HashMap<String, Object>();
+			return new HashMap<@NonNull String, Object>();
 		} catch (Exception e) {
 			throw new TransformationException(null, e, "Error while executing " + OCL2QVTiCGTxCompiler.class.getName());
 		}

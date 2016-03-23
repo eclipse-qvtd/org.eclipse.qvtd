@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 
@@ -56,9 +57,8 @@ public class ClassesCSModelsGen {
 	}
 	
 	
-	public RootCS createRootCS(int nRootPackages, int maxDepth, int nClassesPPackage, int nPackagesPPackage) {
-		
-		RootCS r = ClassescsFactory.eINSTANCE.createRootCS();
+	public @NonNull RootCS createRootCS(int nRootPackages, int maxDepth, int nClassesPPackage, int nPackagesPPackage) {
+		@SuppressWarnings("null")@NonNull RootCS r = ClassescsFactory.eINSTANCE.createRootCS();
 		for (int i = 1; i <= nRootPackages; i++) {
 			
 			r.getOwnedPackages().add(createPackage(String.valueOf(i), nClassesPPackage, nPackagesPPackage, maxDepth));

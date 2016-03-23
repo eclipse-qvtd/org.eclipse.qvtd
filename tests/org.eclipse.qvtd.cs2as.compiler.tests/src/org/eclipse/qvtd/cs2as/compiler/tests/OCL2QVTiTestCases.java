@@ -10,10 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.cs2as.compiler.tests;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -27,11 +24,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.epsilon.common.util.StringProperties;
-import org.eclipse.epsilon.emc.emf.xml.XmlModel;
-import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
-import org.eclipse.epsilon.eol.execute.context.Variable;
-import org.eclipse.epsilon.eol.types.EolPrimitiveType;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.tx.TransformationExecutor;
@@ -46,10 +38,6 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
-import org.eclipse.qvtd.compiler.internal.etl.EtlTask;
-import org.eclipse.qvtd.compiler.internal.etl.MtcBroker;
-import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
-import org.eclipse.qvtd.compiler.internal.etl.QvtMtcExecutionException;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
@@ -87,10 +75,10 @@ import example4.kiamacs.KiamacsPackage;
  */
 public class OCL2QVTiTestCases extends LoadTestCase {
 
-	private static final boolean CREATE_GRAPHML = false; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
+//	private static final boolean CREATE_GRAPHML = false; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
 	private static final @NonNull String TESTS_GEN_PATH = "../org.eclipse.qvtd.cs2as.compiler.tests/tests-gen/";
 	private static final @NonNull String TESTS_PACKAGE_NAME = "cg";
-	private static final @NonNull String DEBUG_SEGMENT = "debug";
+//	private static final @NonNull String DEBUG_SEGMENT = "debug";
 	private static @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models", true);
 	
 	protected static class MyQVT extends QVTimperative
@@ -624,41 +612,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		throw new IllegalStateException("No transformation");
 	}	
 	
-	private static void launchQVTs2GraphMlTx(PivotModel qvtsModel, String graphMlURI, boolean pruneQVTs) throws QvtMtcExecutionException {
-		
-		try {
-			// Since pruning might modify QVTs model, we will ensure it's not stored on disposal
-			qvtsModel.setStoredOnDisposal(false);
-			EtlTask etl = new EtlTask(MtcBroker.class.getResource("extras/QVTsToGraphML.etl").toURI());
-			XmlModel graphMl = createGraphMlModel(graphMlURI);
-			etl.addModel(qvtsModel);
-			etl.addModel(graphMl);
-			etl.execute(Collections.singletonList(new Variable("pruneModel", pruneQVTs, EolPrimitiveType.Boolean)));
-		} catch (URISyntaxException e) {
-			throw new QvtMtcExecutionException("Exception launching QVTs 2 GraphMl transformation", e);
-		}
-		
-	}
-	
-	private static XmlModel createGraphMlModel(String graphMlURI) throws QvtMtcExecutionException {
-		
-		try {
-			XmlModel xmlModel = new XmlModel();
-		    StringProperties properties = new StringProperties();
-		    properties.put(XmlModel.PROPERTY_NAME, "GML");
-		    properties.put(XmlModel.PROPERTY_ALIASES, "GML");
-		    properties.put(XmlModel.PROPERTY_MODEL_URI, graphMlURI);
-		    properties.put(XmlModel.PROPERTY_XSD_FILE, new File("schema/ygraphml.xsd").getAbsolutePath());
-		    properties.put(XmlModel.PROPERTY_READONLOAD, "false");
-		    properties.put(XmlModel.PROPERTY_STOREONDISPOSAL, "true");
-		    xmlModel.load(properties);
-		    return xmlModel;
-		} catch (EolModelLoadingException e) {
-			throw new QvtMtcExecutionException("Error loading graphml transformation", e);
-		}
-		
-	}
-	
 	// FIXME move following clones to a Util class
 	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
 		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, QVTimperativeCSPackage.eCONTENT_TYPE));
@@ -680,7 +633,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			e.printStackTrace();
 			URI xmiURI = outputURI.appendFileExtension(".xmi");
 			Resource xmiResource = resourceSet.createResource(xmiURI);
-			xmiResource.getContents().addAll(xtextResource.getContents());
+			xmiResource.getContents().addAll(ClassUtil.nullFree(xtextResource.getContents()));
 			xmiResource.save(TestsXMLUtil.defaultSavingOptions);
 			fail(e.toString());
 		}
