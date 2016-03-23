@@ -305,7 +305,7 @@ map classToTableMR_2 in ManualUML2RDBMS {
         pk.owner := t_2;
         pk.kind := 'primary';
         pc.owner := t_2;
-        pc.key := OrderedSet(Key){pk};
+        pc._'key' := OrderedSet(Key){pk};
         pc.type := 'NUMBER';
     }
     call classToTableMR_2_1 {

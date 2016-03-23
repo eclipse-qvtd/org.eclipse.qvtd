@@ -155,6 +155,11 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 					asPredicates.add(j++, asVariablePredicate);
 				}
 			}
+			ExpCS expression = csElement.getOwnedKeyExpression();
+			if (expression != null) {
+				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
+				asMapping.setOwnedKeyExpression(target);
+			}
 		}
 		return null;
 	}

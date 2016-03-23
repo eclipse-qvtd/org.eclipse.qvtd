@@ -99,11 +99,12 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    {
 	    	MappingCSElements a = f.getMappingCSAccess();
 			c.setLinewrap(2).before(a.getMapKeyword_2());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_6(), a.getRightCurlyBracketKeyword_10());
-			setBraces(c, a.getLeftCurlyBracketKeyword_6(), a.getRightCurlyBracketKeyword_10());
+			c.setNoSpace().before(a.getSemicolonKeyword_6_2());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_11());
+			setBraces(c, a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_11());
 //			c.setLinewrap(2).between(a.getDomainsAssignment_5(), a.getDomainsAssignment_5());
-			c.setLinewrap(1).before(a.getOwnedDomainsAssignment_7());
-			c.setLinewrap(1).before(a.getWhereKeyword_8_0());
+			c.setLinewrap(1).before(a.getOwnedDomainsAssignment_8());
+			c.setLinewrap(1).before(a.getWhereKeyword_9_0());
 	    }
 	    {
 	    	MappingCallCSElements a = f.getMappingCallCSAccess();

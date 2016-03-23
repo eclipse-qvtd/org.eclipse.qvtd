@@ -277,6 +277,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), ClassUtil.nullFree(asMapping.getCheckedProperties()));
 		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), ClassUtil.nullFree(asMapping.getCheckedProperties()));
 		csMapping.setOwnedMiddle(csDomain);
+		csMapping.setOwnedKeyExpression(createExpCS(asMapping.getOwnedKeyExpression()));
 		MappingStatementCS csMappingStatement = context.visitDeclaration(MappingStatementCS.class, asMapping.getMappingStatement());
 		MappingSequenceCS csMappingSequence;
 		if (csMappingStatement instanceof MappingSequenceCS) {
