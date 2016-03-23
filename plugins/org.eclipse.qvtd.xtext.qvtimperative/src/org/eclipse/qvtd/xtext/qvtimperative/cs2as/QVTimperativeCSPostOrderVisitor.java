@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
@@ -29,6 +30,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -91,6 +93,18 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
 		}
 		return propertyAssignment;
+	}
+	
+	@Override
+	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull PredicateOrAssignmentCS csConstraint) {
+		Assignment variableAssignment = PivotUtil.getPivot(Assignment.class, csConstraint);
+		if (variableAssignment instanceof ConnectionAssignment) {
+			((ConnectionAssignment)variableAssignment).setTargetVariable((ConnectionVariable) variableExp.getReferredVariable());
+			return variableAssignment;
+		}
+		else {
+			return super.refreshVariableAssignment(variableExp, csConstraint);
+		}
 	}
 
 	@Override

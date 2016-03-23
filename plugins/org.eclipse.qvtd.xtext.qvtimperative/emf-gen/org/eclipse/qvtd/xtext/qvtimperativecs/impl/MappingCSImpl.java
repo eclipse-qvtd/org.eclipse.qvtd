@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AbstractMappingCSImpl;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS;
@@ -36,6 +37,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedKeyExpression <em>Owned Key Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedUsesPathNames <em>Owned Uses Path Names</em>}</li>
  * </ul>
@@ -43,6 +45,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * @generated
  */
 public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
+	/**
+	 * The cached value of the '{@link #getOwnedKeyExpression() <em>Owned Key Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedKeyExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExpCS ownedKeyExpression;
 	/**
 	 * The cached value of the '{@link #getOwnedMappingSequence() <em>Owned Mapping Sequence</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -78,6 +89,51 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativeCSPackage.Literals.MAPPING_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpCS getOwnedKeyExpression() {
+		return ownedKeyExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedKeyExpression(ExpCS newOwnedKeyExpression, NotificationChain msgs) {
+		ExpCS oldOwnedKeyExpression = ownedKeyExpression;
+		ownedKeyExpression = newOwnedKeyExpression;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION, oldOwnedKeyExpression, newOwnedKeyExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedKeyExpression(ExpCS newOwnedKeyExpression) {
+		if (newOwnedKeyExpression != ownedKeyExpression) {
+			NotificationChain msgs = null;
+			if (ownedKeyExpression != null)
+				msgs = ((InternalEObject)ownedKeyExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION, null, msgs);
+			if (newOwnedKeyExpression != null)
+				msgs = ((InternalEObject)newOwnedKeyExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION, null, msgs);
+			msgs = basicSetOwnedKeyExpression(newOwnedKeyExpression, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION, newOwnedKeyExpression, newOwnedKeyExpression));
 	}
 
 	/**
@@ -146,6 +202,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
+				return basicSetOwnedKeyExpression(null, msgs);
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				return basicSetOwnedMappingSequence(null, msgs);
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
@@ -162,6 +220,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
+				return getOwnedKeyExpression();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				return getOwnedMappingSequence();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
@@ -179,6 +239,9 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
+				setOwnedKeyExpression((ExpCS)newValue);
+				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				setOwnedMappingSequence((MappingSequenceCS)newValue);
 				return;
@@ -198,6 +261,9 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
+				setOwnedKeyExpression((ExpCS)null);
+				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				setOwnedMappingSequence((MappingSequenceCS)null);
 				return;
@@ -216,6 +282,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
+				return ownedKeyExpression != null;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				return ownedMappingSequence != null;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:

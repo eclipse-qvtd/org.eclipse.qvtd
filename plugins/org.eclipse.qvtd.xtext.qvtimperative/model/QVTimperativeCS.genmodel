@@ -27,6 +27,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//ImperativePredicateOrAssignmentCS/isAccumulate"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedKeyExpression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedMappingSequence"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedUsesPathNames"/>
     </genClasses>

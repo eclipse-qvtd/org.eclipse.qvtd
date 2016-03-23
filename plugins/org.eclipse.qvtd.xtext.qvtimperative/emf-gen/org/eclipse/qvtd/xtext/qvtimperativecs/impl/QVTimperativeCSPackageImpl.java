@@ -222,7 +222,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_OwnedMappingSequence() {
+	public EReference getMappingCS_OwnedKeyExpression() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -232,8 +232,18 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_OwnedUsesPathNames() {
+	public EReference getMappingCS_OwnedMappingSequence() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getMappingCS_OwnedUsesPathNames() {
+		return (EReference)mappingCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -537,6 +547,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEAttribute(imperativePredicateOrAssignmentCSEClass, IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE);
 
 		mappingCSEClass = createEClass(MAPPING_CS);
+		createEReference(mappingCSEClass, MAPPING_CS__OWNED_KEY_EXPRESSION);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_MAPPING_SEQUENCE);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_USES_PATH_NAMES);
 
@@ -627,6 +638,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEAttribute(getImperativePredicateOrAssignmentCS_IsAccumulate(), ecorePackage.getEBoolean(), "isAccumulate", "false", 0, 1, ImperativePredicateOrAssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCSEClass, MappingCS.class, "MappingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMappingCS_OwnedKeyExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedKeyExpression", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedMappingSequence(), this.getMappingSequenceCS(), null, "ownedMappingSequence", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedUsesPathNames(), theBaseCSPackage.getPathNameCS(), null, "ownedUsesPathNames", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

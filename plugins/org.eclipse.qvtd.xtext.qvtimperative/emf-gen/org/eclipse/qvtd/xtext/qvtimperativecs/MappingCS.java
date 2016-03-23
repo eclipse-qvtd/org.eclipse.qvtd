@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
 
 /**
@@ -23,6 +24,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedKeyExpression <em>Owned Key Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedUsesPathNames <em>Owned Uses Path Names</em>}</li>
  * </ul>
@@ -32,6 +34,32 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
  * @generated
  */
 public interface MappingCS extends AbstractMappingCS {
+	/**
+	 * Returns the value of the '<em><b>Owned Key Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Key Expression</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Key Expression</em>' containment reference.
+	 * @see #setOwnedKeyExpression(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_OwnedKeyExpression()
+	 * @model containment="true"
+	 * @generated
+	 */
+	ExpCS getOwnedKeyExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedKeyExpression <em>Owned Key Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Key Expression</em>' containment reference.
+	 * @see #getOwnedKeyExpression()
+	 * @generated
+	 */
+	void setOwnedKeyExpression(ExpCS value);
+
 	/**
 	 * Returns the value of the '<em><b>Owned Mapping Sequence</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
