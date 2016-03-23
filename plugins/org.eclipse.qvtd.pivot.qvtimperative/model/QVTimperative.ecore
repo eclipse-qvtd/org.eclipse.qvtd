@@ -81,6 +81,8 @@
         <details key="documentation" value="The classes whse instances must be polled for readiness prior to use."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedKeyExpression" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCall" eSuperTypes="#//MappingStatement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//ReferringElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
