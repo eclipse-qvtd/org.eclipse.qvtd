@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
@@ -42,10 +41,10 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTm2QVTp;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTu2QVTm;
+import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.ClassRelationships;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.qvtcconfig.Configuration;
@@ -58,7 +57,6 @@ import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
@@ -650,7 +648,11 @@ public class MtcBroker {
 	        uModel = createASModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, false, true, false, false);
 	        QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(); 
 	        QVTc2QVTu qvtc2qvtu = new QVTc2QVTu(environmentFactory, qvtuConfiguration);
-	        qvtc2qvtu.transform(cResource, uModel.getResource());
+	        try {
+				qvtc2qvtu.transform(cResource, uModel.getResource());
+			} catch (IOException e) {
+				throw new QvtMtcExecutionException("qvtc2qvtu failure", e);
+			}
 	        uModel.store();
 	        System.out.println("QVTcToQVTu Done!");
 			return uModel;
@@ -696,7 +698,11 @@ public class MtcBroker {
 		else {
 			mModel = createASModel(qvtmUri, "QVTm", "QVT", QVTC_FULL_NS, false, true, false, false);
 			QVTu2QVTm utom = new QVTu2QVTm(environmentFactory);
-			utom.transform(uModel.getResource(), mModel.getResource());
+			try {
+				utom.transform(uModel.getResource(), mModel.getResource());
+			} catch (IOException e) {
+				throw new QvtMtcExecutionException("qvtu2qvtm failure", e);
+			}
 			mModel.store();
 			System.out.println("QVTuToQVTm Done!");
 			return mModel;
@@ -741,7 +747,11 @@ public class MtcBroker {
 	        PivotModel pModel = null;
 	        pModel = createASModel(partitionUri.replace("qvtias",  "qvtcas"), "QVTp", "QVT", QVTI_FULL_NS, false, true, false, true);
 	        QVTm2QVTp tx = new QVTm2QVTp(environmentFactory);
-	        tx.transform(mModel.getResource(), pModel.getResource());
+	        try {
+				tx.transform(mModel.getResource(), pModel.getResource());
+			} catch (IOException e) {
+				throw new QvtMtcExecutionException("qvtm2qvtp failure", e);
+			}
 	        environmentFactory.getMetamodelManager().getASResourceSet().getResources().remove(mModel.getResource());
 			pModel.store();
 	        return pModel;

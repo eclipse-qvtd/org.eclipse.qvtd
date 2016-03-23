@@ -11,6 +11,7 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.etl.mtc;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.Map;
 import java.util.Stack;
 
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -767,36 +769,11 @@ public abstract class AbstractQVTc2QVTc
     	return target2source.get(target);
 	}
 
-	private @Nullable <T extends Element> List<T> basicEquivalentTargets(/*@NonNull*/ T source) {
-		List<T> targets1 = basicEquivalentTargets1(source);
-		List<T> targets2 = basicEquivalentTargets2(source);
-		if (!ClassUtil.safeEquals(targets1, targets2)) {
-	    	targets1 = basicEquivalentTargets1(source);
-	    	targets2 = basicEquivalentTargets2(source);
-		}
-		assert ClassUtil.safeEquals(targets1, targets2);
-		return targets1;
-    }
-
 	@Deprecated
 	private @Nullable <T extends Element> List<T> basicEquivalentTargets1(/*@NonNull*/ T source) {
     	assert source != null;
     	@SuppressWarnings("unchecked") List<T> targets = (List<T>) source2targets.get(source);
     	return targets;
-    }
-
-	private @Nullable <T extends Element> List<T> basicEquivalentTargets2(/*@NonNull*/ T source) {
-    	assert source != null;
-    	assert source.eResource() != debugTarget : "target element used for equivalentTarget " + source;
-    	List<@NonNull Element> targets = null;
-    	for (int i = scopeStack.size(); (targets == null) && (--i >= 0); ) {
-    		NamedElement scope = scopeStack.get(i);
-        	Map<@NonNull Element, @NonNull List<@NonNull Element>> source2targets = scope2source2targets.get(scope);
-    		if (source2targets != null) {
-    	    	targets = source2targets.get(source);
-    		}
-    	}
-    	return (@Nullable List<T>) targets;
     }
 	
 	protected abstract @NonNull AbstractCreateVisitor<@NonNull ?> createCreateVisitor();
@@ -885,7 +862,7 @@ public abstract class AbstractQVTc2QVTc
 		this.middleTypedModelTarget = middleTypedModelTarget;
 	}
 
-    public void transform(@NonNull Resource source, @NonNull Resource target) {
+    public void transform(@NonNull Resource source, @NonNull Resource target) throws IOException {
     	debugSource = source;
     	debugTarget = target;
     	//
@@ -894,10 +871,7 @@ public abstract class AbstractQVTc2QVTc
         for (EObject eContent : source.getContents()) {
             if (eContent instanceof CoreModel) {
                 CoreModel mIn = (CoreModel) eContent;
-        		CoreModel mOut = (CoreModel) mIn.accept(createVisitor);
-        		assert mOut != null;
-                target.getContents().add(mOut);
-                mOut.accept(updateVisitor);
+        		transform(mIn, target.getContents());
             }
         }
     	//
@@ -918,4 +892,20 @@ public abstract class AbstractQVTc2QVTc
         	System.err.println("Missing OperationCallExp sources  were fixed up for '" + target.getURI() + "'");
         }
     }
+
+	protected void transform(@NonNull CoreModel mIn, @NonNull List<@NonNull EObject> mOuts) throws IOException {
+		try {
+			CoreModel mOut = (CoreModel) mIn.accept(createVisitor);
+			assert mOut != null;
+			mOuts.add(mOut);
+			mOut.accept(updateVisitor);
+		}
+		catch (WrappedException e) {
+			Throwable t = e.getCause();
+			if (t instanceof IOException) {
+				throw (IOException)t;
+			}
+			throw e;
+		}
+	}
 }

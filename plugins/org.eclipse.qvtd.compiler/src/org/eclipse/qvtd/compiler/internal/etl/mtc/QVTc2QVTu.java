@@ -11,16 +11,31 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.etl.mtc;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.IfExp;
+import org.eclipse.ocl.pivot.LiteralExp;
+import org.eclipse.ocl.pivot.LoopExp;
+import org.eclipse.ocl.pivot.NullLiteralExp;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.internal.etl.utils.MtcUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
@@ -28,6 +43,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
@@ -46,32 +63,91 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			super(context);
 		}
 
-		private boolean allReferencedVariablesInInputDomain(@NonNull PropertyAssignment a) {
-			for (Variable v : MtcUtil.findReferencedVariables(a)) {
-				if (!qvtuConfiguration.isInputDomain(QVTcoreBaseUtil.getContainingArea(v))) {
+/*		private boolean allMatchReferencedOutputDomainVariables(@NonNull OCLExpression value) {
+			for (Variable v : MtcUtil.findReferencedVariables(value)) {
+				if (!(v.eContainer() instanceof Transformation) && !isOutputDomain(getArea(v))) {
+					return false;
+				}
+			}
+			return true;
+		} */
+
+		private boolean allReferencedVariablesInInputDomain(@NonNull Element a) {
+			VariableDeclaration referredVariable = getReferredMappingVariable(a);
+			if ((referredVariable != null) && !isInputDomain(basicGetArea(referredVariable))) {
+				return false;
+			}
+			for (TreeIterator<EObject> tit = a.eAllContents(); tit.hasNext(); ) {
+				referredVariable = getReferredMappingVariable(tit.next());
+				if ((referredVariable != null) && !isInputDomain(basicGetArea(referredVariable))) {
 					return false;
 				}
 			}
 			return true;
 		}
 
-		private boolean allReferencedVariablesInOutputDomain(@NonNull Predicate p) {
-			for (Variable v : MtcUtil.findReferencedVariables(p.getConditionExpression())) {
-				if (!qvtuConfiguration.isOutputDomain(QVTcoreBaseUtil.getContainingArea(v))) {
+		private boolean allReferencedVariablesInOutputDomain(@NonNull Element a) {
+			VariableDeclaration referredVariable = getReferredMappingVariable(a);
+			if ((referredVariable != null) && !isOutputDomain(basicGetArea(referredVariable))) {
+				return false;
+			}
+			for (TreeIterator<EObject> tit = a.eAllContents(); tit.hasNext(); ) {
+				referredVariable = getReferredMappingVariable(tit.next());
+				if ((referredVariable != null) && !isOutputDomain(basicGetArea(referredVariable))) {
 					return false;
 				}
 			}
 			return true;
 		}
 
-		private boolean anyReferencedVariableInMiddleOrOutputDomain(@NonNull Predicate p) {
-			for (Variable v : MtcUtil.findReferencedVariables(p.getConditionExpression())) {
-				Area containingArea = QVTcoreBaseUtil.getContainingArea(v);
-				if (qvtuConfiguration.isOutputDomain(containingArea) || qvtuConfiguration.isMiddleDomain(containingArea)) {
+/*		private boolean allReferencedVariablesInOutputDomain(@NonNull Predicate p) {
+			for (VariableDeclaration v : findReferencedVariables(p.getConditionExpression())) {
+				if (!isOutputDomain(getArea2(v))) {
+					return false;
+				}
+			}
+			return true;
+		} */
+
+/*		private boolean anyReferencedVariableInMiddleOrOutputDomain(@NonNull Predicate p) {
+			for (VariableDeclaration v : findReferencedVariables(p.getConditionExpression())) {
+				Area containingArea = getArea2(v);
+				if (isOutputDomain(containingArea) || isMiddleDomain(containingArea)) {
 					return true;
 				}
 			}
 			return false;
+		} */
+		private boolean anyReferencedBottomMiddleDomainVariables(@NonNull OCLExpression value) {
+			VariableDeclaration referredVariable = getReferredMappingVariable(value);
+			if (isMiddleDomainVariable(referredVariable)) {
+				return true;
+			}
+			for (TreeIterator<EObject> tit = value.eAllContents(); tit.hasNext(); ) {
+				referredVariable = getReferredMappingVariable(tit.next());
+				if (isMiddleDomainVariable(referredVariable)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		private boolean anyReferencedMiddleDomainVariables(@NonNull OCLExpression value) {
+			VariableDeclaration referredVariable = getReferredMappingVariable(value);
+			if ((referredVariable != null) && isMiddleDomain(basicGetArea(referredVariable))) {
+				return true;
+			}
+			for (TreeIterator<EObject> tit = value.eAllContents(); tit.hasNext(); ) {
+				referredVariable = getReferredMappingVariable(tit.next());
+				if ((referredVariable != null) && isMiddleDomain(basicGetArea(referredVariable))) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		private @Nullable Area basicGetArea(@Nullable VariableDeclaration variable) {
+			return QVTcoreBaseUtil.getContainingArea(variable);
 		}
 
 /*		private @NonNull PropertyAssignment convertToPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull OCLExpression rightExpression) {
@@ -86,10 +162,12 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		//
 		@Override
 		protected void doAssignments(@NonNull BottomPattern bIn, @NonNull BottomPattern bOut) {
+			GuardPattern gOut = context.equivalentTarget(bIn.getArea().getGuardPattern());
+			assert gOut != null;
 			for (@NonNull Assignment aIn : ClassUtil.nullFree(bIn.getAssignment())) {
 				Element aOut = create(aIn);
 				if (aOut instanceof Predicate) {
-					bOut.getPredicate().add((Predicate) aOut);
+					gOut.getPredicate().add((Predicate) aOut);
 				}
 				else if (aOut instanceof Assignment) {
 					bOut.getAssignment().add((Assignment) aOut);
@@ -105,15 +183,65 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		//
 		@Override
 		protected void doRealizedVariables(@NonNull BottomPattern bIn, @NonNull BottomPattern bOut) {
+			GuardPattern gOut = context.equivalentTarget(bIn.getArea().getGuardPattern());
+			assert gOut != null;
 			for (RealizedVariable rvIn : ClassUtil.nullFree(bIn.getRealizedVariable())) {
 				Variable vOut = create(rvIn);
 				if (vOut instanceof RealizedVariable) {
 					bOut.getRealizedVariable().add((RealizedVariable) vOut);
 				}
 				else {
-					bOut.getVariable().add(vOut);
+					gOut.getVariable().add(vOut);
 				}
 			}
+		}
+
+		private @NonNull Area getContainingArea(@NonNull VariableDeclaration variable) {
+			Area targetArea = QVTcoreBaseUtil.getContainingArea(variable);
+			assert targetArea != null;
+			return targetArea;
+		}
+
+		private @Nullable VariableDeclaration getReferredMappingVariable(@Nullable EObject value) {
+			if (value instanceof VariableExp) {
+				VariableDeclaration referredVariable = ((VariableExp)value).getReferredVariable();
+				EObject eContainer = referredVariable.eContainer();
+				if (eContainer instanceof Transformation) {			// "this" is not a mapping variable (has no domain)
+					return null;
+				}
+				if (eContainer instanceof LoopExp) {				// iterators/accumulators are not mapping variables (has no domain)
+					return null;
+				}
+				return referredVariable;
+			}
+			else {
+				return null;
+			}
+		}
+
+		private @Nullable Area getSourceVariableArea(@Nullable OCLExpression exp) {
+			if (exp instanceof VariableExp) {
+				Variable expV = (Variable) ((VariableExp)exp).getReferredVariable(); 
+				return basicGetArea(expV);
+			} else if (exp instanceof CallExp) {
+				return getSourceVariableArea(((CallExp) exp).getOwnedSource());
+			} else if (exp instanceof IfExp) {
+				return getSourceVariableArea(((IfExp) exp).getOwnedCondition());
+			} else if (exp instanceof LiteralExp) {
+				return null;
+			}
+			return null;
+		}
+
+		private boolean isMiddleDomainVariable(@Nullable VariableDeclaration variable) {
+			if (variable == null) {
+				return false;
+			}
+			CorePattern pattern = QVTcoreBaseUtil.getContainingPattern(variable);
+			if (!(pattern instanceof BottomPattern)) {
+				return false;
+			}
+			return pattern.getArea() instanceof Mapping;
 		}
 
 		//
@@ -122,8 +250,9 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		@Override
 		public @NonNull CoreDomain visitCoreDomain(@NonNull CoreDomain dIn) {
 			CoreDomain dOut = super.visitCoreDomain(dIn);
-			dOut.setName(dIn.getTypedModel().getName());			// Redundant replication of Epsilon functionality
-			if (context.qvtuConfiguration.isInputDomain(dIn)) {
+			String name = dIn.getTypedModel().getName();
+			dOut.setName(name);			// Redundant replication of Epsilon functionality
+			if (qvtuConfiguration.isInput(name)) {
 				dOut.setIsEnforceable(false);
 				dOut.setIsCheckable(true);
 			} else {
@@ -151,6 +280,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		 */
 		@Override
 		public @Nullable Element visitMapping(@NonNull Mapping mIn) {
+			getMappingMode(mIn);
 			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
 			doMapping(mIn, mOut);
 	        return mOut;
@@ -161,12 +291,23 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		//
 		@Override
 		public @Nullable Element visitPredicate(@NonNull Predicate pIn) {
-			if ((pIn.getPattern() instanceof BottomPattern) && allReferencedVariablesInOutputDomain(pIn)) {
+//			boolean oldResult = true;
+//			if ((pIn.getPattern() instanceof BottomPattern) && allReferencedVariablesInOutputDomain(pIn)) {
+//				oldResult = false;
+//			}
+//			else if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedVariableInMiddleOrOutputDomain(pIn)) {
+//				oldResult = false;
+//			}
+			if ((pIn.getPattern() instanceof BottomPattern) && !allReferencedVariablesInInputDomain(pIn)) {
+//				assert !oldResult;
 				return null;
 			}
-			if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedVariableInMiddleOrOutputDomain(pIn)) {
-				return null;
-			}
+//			if (!oldResult) {
+//				anyReferencedNonInputDomainVariables2(pIn);
+//				allReferencedVariablesInOutputDomain(pIn);
+//				anyReferencedVariableInMiddleOrOutputDomain(pIn);
+//			}
+//			assert oldResult;
 /*			OCLExpression conditionExpression = pIn.getConditionExpression();
 			if (conditionExpression instanceof OperationCallExp) {
 				OperationCallExp callExp = (OperationCallExp)conditionExpression;
@@ -174,12 +315,12 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 					OCLExpression leftExpression= callExp.getOwnedSource();
 					OCLExpression rightExpression= callExp.getOwnedArguments().get(0);
 					if ((leftExpression != null) && (rightExpression != null)) {
-						PropertyCallExp middlePropertyAccess = qvtuConfiguration.isMiddleDomainPropertyAccess(leftExpression);
-						if ((middlePropertyAccess != null) && qvtuConfiguration.isInputDomainExpression(rightExpression)) {
+						PropertyCallExp middlePropertyAccess = isMiddleDomainPropertyAccess(leftExpression);
+						if ((middlePropertyAccess != null) && isInputDomainExpression(rightExpression)) {
 							return convertToPropertyAssignment(middlePropertyAccess, rightExpression);
 						}
-						middlePropertyAccess = qvtuConfiguration.isMiddleDomainPropertyAccess(rightExpression);
-						if ((middlePropertyAccess != null) && qvtuConfiguration.isInputDomainExpression(leftExpression)) {
+						middlePropertyAccess = isMiddleDomainPropertyAccess(rightExpression);
+						if ((middlePropertyAccess != null) && isInputDomainExpression(leftExpression)) {
 							return convertToPropertyAssignment(middlePropertyAccess, leftExpression);
 						}
 					}
@@ -195,10 +336,44 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		//
 		@Override
 		public @Nullable Element visitPropertyAssignment(@NonNull PropertyAssignment paIn) {
-			if (qvtuConfiguration.isRtoM(paIn) || qvtuConfiguration.isLocaltoM(paIn)) {
+			OCLExpression slotExpression = paIn.getSlotExpression();
+			OCLExpression value = paIn.getValue();
+			assert (slotExpression != null) && (value != null);
+			Area sourceArea = getSourceVariableArea(value);
+			Area targetArea = getSourceVariableArea(slotExpression);
+			if (isNonOutputDomain(targetArea) &&
+					!(value instanceof VariableExp) &&			// why?
+					!(value instanceof NullLiteralExp) &&		// why?
+					allReferencedVariablesInOutputDomain(value)) {
 				return null;
 			}
-			if (qvtuConfiguration.isMtoL(paIn)) {
+			if (isInputDomain(sourceArea)) {
+				VariableDeclaration referredVariable = getReferredMappingVariable(value);
+				if (isMiddleDomainVariable(referredVariable)) {	
+					return null;
+				}
+//				if (referredVariable != null) {
+//					Area area = basicGetArea(referredVariable);
+//					if (isMiddleDomain(area) && (area instanceof BottomPattern)) {		// FIXME are is never a BottomPattern
+//						return null;
+//					}
+//				}
+			}
+			if (isMiddleDomain(sourceArea)) {								// isLocaltoM
+				VariableDeclaration referredVariable = getReferredMappingVariable(value);
+				if (isMiddleDomainVariable(referredVariable)) {	
+					return null;
+				}
+//				if (referredVariable != null) {
+//					Area area = basicGetArea(referredVariable);
+//					if (isMiddleDomain(area) && (area instanceof BottomPattern)) {		// FIXME are is never a BottomPattern
+//						return null;
+//					}
+//				}
+			}
+
+//			if (isInputDomain(targetArea) && anyReferencedMiddleDomainVariables(value)) {		// isMtoL
+			if (isInputDomain(targetArea) && anyReferencedMiddleDomainVariables(value)) {		// isMtoL
 				// Assignments to Predicates
 //				Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
 //				context.addTrace(paIn, pOut);
@@ -206,23 +381,20 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 //	            return pOut;
 				return null;
 			}
-			if (qvtuConfiguration.isFromInputDomain(paIn.getSlotExpression()) && allReferencedVariablesInInputDomain(paIn)) {
+			if (isInputDomain(targetArea) && allReferencedVariablesInInputDomain(paIn)) {
 				// Assignments to Predicates
 				Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
 				context.addTrace(paIn, pOut);
 				pOut.setConditionExpression(MtcUtil.assignmentToOclExp(paIn, environmentFactory));
 	            return pOut;
 			}
-			if (qvtuConfiguration.isCheckMode() && paIn.isIsDefault() &&
-					qvtuConfiguration.isOutputDomain(paIn.getBottomPattern().getArea())
-					) {
+			PropertyAssignment paOut = (PropertyAssignment) super.visitPropertyAssignment(paIn);
+			assert paOut != null;
+			if (qvtuConfiguration.isCheckMode() && paIn.isIsDefault() && isOutputDomain(paIn.getBottomPattern().getArea())) {
 				// Default assignments
-				Element paOut = super.visitPropertyAssignment(paIn);
-				assert paOut != null;
-				((PropertyAssignment)paOut).setIsDefault(false);
-				return paOut;
+				paOut.setIsDefault(false);
 			}
-			return super.visitPropertyAssignment(paIn);
+			return paOut;
 		}
 
 		//
@@ -230,8 +402,8 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		//
 		@Override
 		public @NonNull Variable visitRealizedVariable(@NonNull RealizedVariable rvIn) {
-			Area aIn = QVTcoreBaseUtil.getContainingArea(rvIn);
-			if (context.qvtuConfiguration.isInputDomain(aIn)) {
+			Area aIn = getContainingArea(rvIn);
+			if (isInputDomain(aIn)) {
 				Variable vOut = PivotFactory.eINSTANCE.createVariable();
 				assert vOut != null;
 				context.addTrace(rvIn, vOut);
@@ -245,6 +417,12 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			}
 		}
 
+//		@Override
+//		public @NonNull Transformation visitTransformation(@NonNull Transformation tIn) {
+//			domainUsageAnalysis.analyzeTransformation(tIn);
+//			return super.visitTransformation(tIn);
+//		}
+
 		//
 		//	Right-to-Middle and Middle-to-Middle variable assignments are discarded.
 		//	Middle-to-Left variable assignments change to predicates.
@@ -253,7 +431,20 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		//
 		@Override
 		public @Nullable Element visitVariableAssignment(@NonNull VariableAssignment vaIn) {
-			if (qvtuConfiguration.isMtoL(vaIn) || qvtuConfiguration.isRtoM(vaIn) || qvtuConfiguration.isMtoM(vaIn)) {
+			Variable targetVariable = vaIn.getTargetVariable();
+			OCLExpression value = vaIn.getValue();
+			assert (targetVariable != null) && (value != null);
+			Area targetArea = getContainingArea(targetVariable);
+			if (isInputDomain(targetArea) && !allReferencedVariablesInInputDomain(value)) {	// an output-to-input assignment
+				return null;
+			}
+//			if (isInputDomain1(targetArea) && anyReferencedMiddleDomainVariables(value)) {	// isMtoL
+//				return null;
+//			}
+//			if (isMiddleDomain(targetArea) /*&& !(value instanceof VariableExp)*/ && allMatchReferencedOutputDomainVariables(value)) {	// isRtoM
+//				return null;
+//			}
+			if ((targetArea instanceof Mapping) && anyReferencedBottomMiddleDomainVariables(value)) {	// isMtoM
 				return null;
 			}
 			return super.visitVariableAssignment(vaIn);
@@ -289,11 +480,67 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		}
 	 }
 	
+	private enum DomainMode {
+		INPUT,
+		MIDDLE,
+		OUTPUT
+	}
+	
+	private static final int IS_INPUT_MASK = 1;
+	private static final int IS_OUTPUT_MASK = 2;
+	
+	private enum MappingMode {
+		NULL(0),
+		LEFT2MIDDLE(IS_INPUT_MASK),
+		MIDDLE2RIGHT(IS_OUTPUT_MASK),
+		LEFT2RIGHT(IS_INPUT_MASK | IS_OUTPUT_MASK);
+		
+		private int flags;
+		
+		private MappingMode(int flags) { this.flags = flags; }
+
+		private @NonNull MappingMode get(int flagsUnion) {
+			switch (flagsUnion) {
+				case 1 : return LEFT2MIDDLE;
+				case 2 : return MIDDLE2RIGHT;
+				case 3 : return LEFT2RIGHT;
+			}
+			return NULL;
+		}
+
+		public @NonNull MappingMode asInput() {
+			return get(flags | IS_INPUT_MASK);
+		}
+
+		public @NonNull MappingMode asOutput() {
+			return get(flags | IS_OUTPUT_MASK);
+		}
+		
+		public boolean hasInputDomain() { return (flags & IS_INPUT_MASK) != 0; }
+		public boolean hasOutputDomain() { return (flags & IS_OUTPUT_MASK) != 0; }
+
+		public @NonNull MappingMode union(@NonNull MappingMode anotherMappingMode) {
+			return get(flags | anotherMappingMode.flags);
+		}
+	}
+
 	private final @NonNull QVTuConfiguration qvtuConfiguration;
+//	private final @NonNull QVTcoreDomainUsageAnalysis domainUsageAnalysis;
+	
+	/**
+	 * Cached INPUT/MIDDLE/OUTPUT state of each Area, aggregating refined and/or local states.
+	 */
+	private final @NonNull Map<@NonNull Area, @NonNull DomainMode> domain2mode = new HashMap<@NonNull Area, @NonNull DomainMode>();
+
+	/**
+	 * Cached LEFT2MIDDLE/MIDDLE2RIGHT/LEFT2RIGHT state of each top or local Mapping aggregating refined states.
+	 */
+	private final @NonNull Map<@NonNull Mapping, @NonNull MappingMode> mapping2mode = new HashMap<@NonNull Mapping, @NonNull MappingMode>();
 
 	public QVTc2QVTu(@NonNull EnvironmentFactory environmentFactory, @NonNull QVTuConfiguration qvtuConfiguration) {
 		super(environmentFactory);
         this.qvtuConfiguration = qvtuConfiguration;
+//    	this.domainUsageAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
 	}
 
 	@Override
@@ -305,4 +552,152 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 	protected @NonNull UpdateVisitor createUpdateVisitor() {
 		return new UpdateVisitor(this);
 	}
+
+	private @NonNull MappingMode getComposedMappingMode(@NonNull Mapping mapping) {
+		MappingMode mergedMode = MappingMode.NULL;
+		for (@NonNull Domain domain: ClassUtil.nullFree(mapping.getDomain())) {
+			String name = domain.getTypedModel().getName();
+			if (qvtuConfiguration.isInput(name)) {
+				mergedMode = mergedMode.asInput();
+				domain2mode.put((CoreDomain)domain, DomainMode.INPUT);
+			}
+			else if (qvtuConfiguration.isOutput(name)) {
+				mergedMode = mergedMode.asOutput();
+				domain2mode.put((CoreDomain)domain, DomainMode.OUTPUT);
+			}
+		}
+		for (@NonNull Mapping localMapping : ClassUtil.nullFree(mapping.getLocal())) {
+			mergedMode = mergedMode.union(getMappingMode(localMapping));
+		}
+		return mergedMode;
+	}
+
+	private @NonNull MappingMode getMappingMode(@NonNull Mapping mapping) {
+		MappingMode mergedMode = mapping2mode.get(mapping);
+		if (mergedMode == null) {
+			mergedMode = getComposedMappingMode(mapping);
+			for (@NonNull Mapping refinedMapping : ClassUtil.nullFree(mapping.getRefinement())) {
+				mergedMode = mergedMode.union(getComposedMappingMode(refinedMapping));
+			}
+			mapping2mode.put(mapping, mergedMode);
+			setMappingDomainModes(mapping, mergedMode);
+		}
+		return mergedMode;
+	}
+	
+	private boolean isInputDomain(@Nullable Area area) {
+		if (area == null) {
+			return false;
+		}
+		DomainMode domainMode = domain2mode.get(area);
+		assert domainMode != null;
+		return domainMode == DomainMode.INPUT;
+	}
+
+	private boolean isMiddleDomain(@Nullable Area area) {
+		if (area == null) {
+			return false;
+		}
+		DomainMode domainMode = domain2mode.get(area);
+		assert domainMode != null;
+		return domainMode == DomainMode.MIDDLE;
+	}
+	
+	private boolean isNonOutputDomain(@Nullable Area area) {
+		if (area == null) {
+			return false;
+		}
+		DomainMode domainMode = domain2mode.get(area);
+		assert domainMode != null;
+		return domainMode != DomainMode.OUTPUT;
+	}
+	
+	private boolean isOutputDomain(@Nullable Area area) {
+		if (area == null) {
+			return false;
+		}
+		DomainMode domainMode = domain2mode.get(area);
+		assert domainMode != null;
+		return domainMode == DomainMode.OUTPUT;
+	}
+
+	private void setMappingDomainModes(@NonNull Mapping mapping, @NonNull MappingMode mode) {
+		domain2mode.put(mapping, !mode.hasInputDomain() ? DomainMode.INPUT : !mode.hasOutputDomain() ? DomainMode.OUTPUT : DomainMode.MIDDLE);
+		for (@NonNull Mapping localMapping : ClassUtil.nullFree(mapping.getLocal())) {
+			setMappingDomainModes(localMapping, mode);
+		}
+	}
+
+	/**
+	 * Return true if oclExpression uses only the input domain variables.
+	 *
+	private boolean isInputDomainExpression(@NonNull OCLExpression oclExpression) {
+		if (oclExpression instanceof VariableExp) {
+			VariableDeclaration referredVariable = ((VariableExp)oclExpression).getReferredVariable();
+			if ((referredVariable != null) && !isInputDomainVariable(referredVariable)) {
+				return false;
+			}
+		}
+		for (EObject eObject : oclExpression.eContents()) {
+			if (eObject instanceof OCLExpression) {
+				if (!isInputDomainExpression((OCLExpression)eObject)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	} */
+
+	/**
+	 * Return true if variable is declared in the input domain.
+	 *
+	private boolean isInputDomainVariable(@NonNull VariableDeclaration variable) {
+		Area area = getArea2(variable);
+		return isInputDomain(area);
+	} */
+
+	/**
+	 * Return the non-null PropertyCallExp if oclExpression is a PropertyCallExp in the middle domain.
+	 *
+	private @Nullable PropertyCallExp isMiddleDomainPropertyAccess(@NonNull OCLExpression oclExpression) {
+		if (!(oclExpression instanceof PropertyCallExp)) {
+			return null;
+		}
+		PropertyCallExp propertyCallExp = (PropertyCallExp)oclExpression;
+		OCLExpression sourceExpression = propertyCallExp.getOwnedSource();
+		if (!(sourceExpression instanceof VariableExp)) {
+			return null;
+		}
+		VariableExp variableExp = (VariableExp)sourceExpression;
+		VariableDeclaration variable = variableExp.getReferredVariable();
+		if (!(variable instanceof Variable)) {
+			return null;
+		}
+		if (!isMiddleDomainVariable(variable)) {
+			return null;
+		}
+		return propertyCallExp;
+	} */
+
+	/**
+	 * Return true if variable is declared in the middle domain.
+	 *
+	private boolean isMiddleDomainVariable(@NonNull VariableDeclaration variable) {
+		Area area = getArea2(variable);
+		return isMiddleDomain(area);
+	} */
+	
+
+	/**
+	 * Checks if is output domain.
+	 */
+//	public boolean isOutputDomain(@Nullable Area area) {
+//		boolean isOutput1 = isOutputDomain1(area);
+//		boolean isOutput2 = isOutputDomain2(area);
+//		assert isOutput1 == isOutput2;
+//        return isOutput1;
+//	}
+//	public boolean isOutputDomain1(@Nullable Area area) {
+//        return (area instanceof CoreDomain) && qvtuConfiguration.isOutput(((CoreDomain)area).getTypedModel().getName());
+//	}
 }
