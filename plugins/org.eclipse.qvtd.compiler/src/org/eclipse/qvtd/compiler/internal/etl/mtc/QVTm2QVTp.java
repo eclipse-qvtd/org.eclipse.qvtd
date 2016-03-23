@@ -11,6 +11,7 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.etl.mtc;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,19 +21,27 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.NavigationCallExp;
+import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
@@ -54,8 +63,11 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+
+import com.google.common.collect.Iterables;
 
 /**
  * The Class QVTmToQVTip.
@@ -69,8 +81,26 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 	 */
     protected static class CreateVisitor extends AbstractCreateVisitor<@NonNull QVTm2QVTp>
     {
-		public CreateVisitor(@NonNull QVTm2QVTp context) {
+        /**
+         * The mappings using each middle type as identity. Should not be more than one per type.
+         */
+        private final @NonNull Map<@NonNull Type, @NonNull List<@NonNull Partitioning>> middleType2partitionings = new HashMap<@NonNull Type, @NonNull List<@NonNull Partitioning>>();
+
+        public CreateVisitor(@NonNull QVTm2QVTp context) {
 			super(context);
+		}
+
+		private void addSecondaryHead(@NonNull RealizedVariable secondaryHead, @NonNull Partitioning partitioning) {
+			Type secondaryType = secondaryHead.getType();
+			assert secondaryType != null;
+			assert context.getDomainUsageAnalysis().getUsage(secondaryHead).isMiddle();
+			List<@NonNull Partitioning> partitionings = middleType2partitionings.get(secondaryType);
+			if (partitionings == null) {
+				partitionings = new ArrayList<@NonNull Partitioning>();
+				middleType2partitionings.put(secondaryType, partitionings);
+			}
+			assert !partitionings.contains(partitioning);
+			partitionings.add(partitioning);
 		}
 
 		protected void createAllPredicatesOrAssignments(@NonNull Iterable</*@NonNull*/ Assignment> aIns,
@@ -89,23 +119,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			}
 		}
 
-		protected void createAllRealizedVariables(@NonNull Iterable</*@NonNull*/ RealizedVariable> rvIns,
-				@NonNull List</*@NonNull*/ Variable> vOuts, @NonNull List</*@NonNull*/ RealizedVariable> rvOuts) {
-			for (RealizedVariable rvIn : rvIns) {
-				Element eOut = create(rvIn);
-				if (eOut instanceof RealizedVariable) {
-					rvOuts.add((RealizedVariable)eOut);
-				}
-				else if (eOut instanceof Variable) {
-					vOuts.add((Variable)eOut);
-				}
-				else {
-					assert eOut == null;
-				}
-			}
-		}
-
-		protected void createAllVariables(@NonNull Iterable</*@NonNull*/ Variable> vIns,
+		protected void createAllVariables(@NonNull Iterable</*@NonNull*/? extends Variable> vIns,
 				@NonNull List</*@NonNull*/ Variable> gvOuts, @NonNull List</*@NonNull*/ Variable> bvOuts) {
 			for (Variable vIn : vIns) {
 				Variable vOut = create(vIn);
@@ -119,19 +133,104 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			}
 		}
 
+		private void discriminate(@NonNull List<@NonNull Partitioning> partitionings) throws IOException {
+			Map<@NonNull Partitioning, @NonNull Map<@NonNull Property, @Nullable OCLExpression>> partitioning2property2value = new HashMap<@NonNull Partitioning, @NonNull Map<@NonNull Property, @Nullable OCLExpression>>();
+			Set<@NonNull Property> commonProperties = null;
+			for (@NonNull Partitioning partitioning : partitionings) {
+				Map<@NonNull Property, @Nullable OCLExpression> rootPaths = partitioning.getRootPaths();
+				if (rootPaths != null) {
+					partitioning2property2value.put(partitioning, rootPaths);
+					if (commonProperties == null) {
+						commonProperties = new HashSet<@NonNull Property>(rootPaths.keySet());
+					}
+					else {
+						commonProperties.retainAll(rootPaths.keySet());
+					}
+				}
+			}
+			assert commonProperties != null;
+			if (commonProperties.isEmpty()) {
+				throw new IOException("No common properties to disambiguate ");
+			}
+			CompleteModel completeModel = context.getEnvironmentFactory().getCompleteModel();
+			List<@NonNull Property> sortedProperties = new ArrayList<@NonNull Property>(commonProperties);
+			Collections.sort(sortedProperties, NameUtil.NAMEABLE_COMPARATOR);
+			for (@NonNull Property property : sortedProperties) {
+				boolean isDiscriminant = true;
+				List<@Nullable CompleteClass> valueCompleteClasses = new ArrayList<@Nullable CompleteClass>();
+				for (@NonNull Partitioning partitioning : partitionings) {
+					Map<@NonNull Property, @Nullable OCLExpression> property2value = partitioning2property2value.get(partitioning);
+					assert property2value != null;
+					@Nullable Type type = null;
+					@Nullable OCLExpression value = property2value.get(property);
+					if (value instanceof VariableExp) {
+						VariableDeclaration referredVariable = ((VariableExp)value).getReferredVariable();
+						assert referredVariable != null;
+						type = referredVariable.getType();
+					}
+					else if ((value != null) && !(value instanceof NullLiteralExp)) {
+						type = value.getType();
+					}
+					@Nullable CompleteClass thisCompleteClass = type != null ? completeModel.getCompleteClass(type) : null;
+					for (@Nullable CompleteClass thatCompleteClass : valueCompleteClasses) {
+						if (!isDiscriminant(thisCompleteClass, thatCompleteClass)) {
+							isDiscriminant = false;
+							break;
+						}
+					}
+					valueCompleteClasses.add(thisCompleteClass);
+					if (!isDiscriminant) {
+						break;
+					}
+				}
+				System.out.println(valueCompleteClasses);
+				if (isDiscriminant) {
+					for (@NonNull Partitioning partitioning : partitionings) {
+						partitioning.setDiscriminant(property);
+					}
+					return;
+				}
+			}
+			throw new IOException("Unable to disambiguate ");
+		}
+
 		@Override
 		protected void doRules(@NonNull Transformation tIn, @NonNull Transformation tOut) {
-		    List<Rule> outRules = tOut.getRule();
 		    //
 		    //	Generate a Mapping per partitioned mapping.
 		    //
-			for (@SuppressWarnings("null")@NonNull Rule inRule : tIn.getRule()) {
+		    List<@NonNull Partitioning> allPartitionings = new ArrayList<@NonNull Partitioning>();
+			for (@NonNull Rule inRule : ClassUtil.nullFree(tIn.getRule())) {
 				Mapping mIn = (Mapping) inRule;
-				Partitioning mappingPartitioning = new Partitioning(this, mIn);
-				mappingPartitioning.analyze();
+				Partitioning partitioning = new Partitioning(this, mIn);
 				StringBuilder s = new StringBuilder();
-				outRules.addAll(mappingPartitioning.synthesize(s));
-				System.out.println(s.toString());
+				try {
+					partitioning.analyze(s);
+					RealizedVariable secondaryHead = partitioning.getSecondaryHead();
+					if (secondaryHead != null) {
+						addSecondaryHead(secondaryHead, partitioning);
+					}
+				}
+				finally {
+					System.out.println(s.toString());
+				}
+				allPartitionings.add(partitioning);
+			}
+			try {
+				for (@NonNull List<@NonNull Partitioning> ambiguousPartitionings : middleType2partitionings.values()) {
+					if (ambiguousPartitionings.size() > 1) {
+						discriminate(ambiguousPartitionings);
+					}
+				}
+			} catch (IOException e) {
+				throw new WrappedException(e);
+			}
+		    //
+		    //	Generate a Mapping per partitioned mapping.
+		    //
+		    List<Rule> outRules = tOut.getRule();
+			for (@NonNull Partitioning partitioning : allPartitionings) {
+				outRules.addAll(partitioning.synthesize());
 			}
 		}
 
@@ -139,8 +238,24 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			return context;
 		}
 
-		protected String getMappingName(@NonNull Mapping mIn) {
-			return mIn.getName();
+		/**
+		 * Return true if thisCompleteClass and thatCompleteClass have no mutual conformance and so may be used to discriminate
+		 * ambiguous middle types.
+		 */
+		private boolean isDiscriminant(@Nullable CompleteClass thisCompleteClass, @Nullable CompleteClass thatCompleteClass) {
+			if (thisCompleteClass == thatCompleteClass) {
+				return false;
+			}
+			if ((thisCompleteClass == null) || (thatCompleteClass == null)) {
+				return true;
+			}
+			if (thisCompleteClass.conformsTo(thatCompleteClass)) {
+				return false;
+			}
+			if (thatCompleteClass.conformsTo(thisCompleteClass)) {
+				return false;
+			}
+			return true;
 		}
 
 		@Override
@@ -173,37 +288,12 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 	        return gOut;
 	    }
 
-/*		@Override
-		public @Nullable Element visitMapping(@NonNull Mapping mIn) {
-			Partitioning mappingPartitioning = new Partitioning(thismIn);
-			mappingPartitioning.analyze();
-			StringBuilder s = new StringBuilder();
-			Map<Set<@NonNull Part>, @NonNull List<@NonNull Part>> dependentParts2commitParts = mappingPartitioning.partition(s);
-			System.out.println(s.toString());
-			if (dependentParts2commitParts == null) {
-				return super.visitMapping(mIn);
-			}
-			else {
-				for (List<@NonNull Part> commitParts : dependentParts2commitParts.values()) {
-					
-				}
-				return super.visitMapping(mIn);
-//				try {
-//					return doVisitMapping_1(mIn);
-//				}
-//				finally {
-//					context.popScope();
-//				}
-			}
-			
-		} */
-
 		@Override
 		public @NonNull Mapping visitMapping(@NonNull Mapping mIn) {
 			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
 			context.pushScope(mOut);
 			context.addTrace(mIn, mOut);
-	        mOut.setName(getMappingName(mIn));;
+	        mOut.setName(mIn.getName());
 			mOut.setGuardPattern(create(mIn.getGuardPattern()));
 			mOut.setBottomPattern(create(mIn.getBottomPattern()));
 			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
@@ -224,7 +314,8 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 				BottomPattern bIn = mIn.getBottomPattern();
 				createAllPredicatesOrAssignments(bIn.getAssignment(), mOut.getGuardPattern().getPredicate(), mOut.getBottomPattern().getAssignment());		// Colocate all assignments
 				createAll(bIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
-				createAllRealizedVariables(bIn.getRealizedVariable(), dOut.getGuardPattern().getVariable(), dOut.getBottomPattern().getRealizedVariable());
+//				createAllRealizedVariables(bIn.getRealizedVariable(), dOut.getGuardPattern().getVariable(), dOut.getBottomPattern().getRealizedVariable());
+				createAll(bIn.getRealizedVariable(), dOut.getBottomPattern().getRealizedVariable());
 				createAllVariables(bIn.getVariable(), mOut.getGuardPattern().getVariable(), mOut.getBottomPattern().getVariable());			// Colocate all bottom variables
 				mOut.getDomain().add(dOut);
 			}
@@ -244,7 +335,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 				BottomPattern bIn = dIn.getBottomPattern();
 				createAllPredicatesOrAssignments(bIn.getAssignment(), mOut.getGuardPattern().getPredicate(), mOut.getBottomPattern().getAssignment());		// Colocate all assignments
 				createAll(bIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
-				createAllRealizedVariables(bIn.getRealizedVariable(), dOut.getGuardPattern().getVariable(), dOut.getBottomPattern().getRealizedVariable());
+				createAll(bIn.getRealizedVariable(), dOut.getBottomPattern().getRealizedVariable());
 				createAllVariables(bIn.getVariable(), dOut.getGuardPattern().getVariable(), dOut.getBottomPattern().getVariable());
 				mOut.getDomain().add(dOut);
 			}
@@ -283,6 +374,22 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			this.primaryAssignments = primaryAssignments;
 		}
 
+/*		protected void createAllRealizedVariables(@NonNull Iterable</*@NonNull* / RealizedVariable> rvIns,
+				@NonNull List</*@NonNull* / Variable> vOuts, @NonNull List</*@NonNull* / RealizedVariable> rvOuts) {
+			for (RealizedVariable rvIn : rvIns) {
+				Element eOut = create(rvIn);
+				if (eOut instanceof RealizedVariable) {
+					rvOuts.add((RealizedVariable)eOut);
+				}
+				else if (eOut instanceof Variable) {
+					vOuts.add((Variable)eOut);
+				}
+				else {
+					assert eOut == null;
+				}
+			}
+		} */
+
 		@Override
 		public @Nullable Element visitPropertyAssignment(@NonNull PropertyAssignment paIn) {
 			if (primaryAssignments.contains(paIn)) {
@@ -298,30 +405,338 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 	 * The SecondaryCreateVisitor creates a secondary mapping that complements a primary mapping by servicing one or more secondary PropertyAssignments that
 	 * could not be performed by the primary without a deadlock hazard.
 	 */
-    protected static class SecondaryCreateVisitor extends CreateVisitor
+    protected static abstract class AbstractSecondaryCreateVisitor extends CreateVisitor
     {
     	protected final @NonNull String mappingName;
-    	
-    	/**
-    	 * Assignments made by the primary mapping. Need to be converted to predicates in the secondary mapping.
-    	 */
-    	protected final @NonNull List<@NonNull PropertyAssignment> primaryAssignments;
 
     	/**
     	 * Assignments to be made by this secondary mapping.
     	 */
     	protected final @NonNull List<@NonNull PropertyAssignment> secondaryAssignments;
 
-		public SecondaryCreateVisitor(@NonNull QVTm2QVTp context, @NonNull String mappingName, @NonNull List<@NonNull PropertyAssignment> primaryAssignments, @NonNull List<@NonNull PropertyAssignment> secondaryAssignments) {
+    	/**
+    	 * The variables used (transitively) by the secondaryAssignments
+    	 */
+    	protected final @NonNull Set<@NonNull Variable> usedVariables;
+
+    	public AbstractSecondaryCreateVisitor(@NonNull QVTm2QVTp context, @NonNull String mappingName,
+				@NonNull List<@NonNull PropertyAssignment> secondaryAssignments) {
 			super(context);
 			this.mappingName = mappingName;
-			this.primaryAssignments = primaryAssignments;
 			this.secondaryAssignments = secondaryAssignments;
+			usedVariables = computeDirectlyReferencedVariables(secondaryAssignments);
+		}
+
+		protected <T extends Element> @NonNull T create2(@NonNull T source) {
+			@SuppressWarnings("unchecked") @Nullable T target = (T) source.accept(this);
+			assert target != null;
+			return target;
+		}
+
+		protected void createAllAssignmentPredicates(@NonNull Iterable</*@NonNull*/ Assignment> aIns, @NonNull List</*@NonNull*/ Predicate> pOuts) {
+			for (Assignment aIn : aIns) {
+				if (aIn instanceof VariableAssignment) {
+					VariableAssignment vaIn = (VariableAssignment)aIn;
+					if (usedVariables.contains(vaIn.getTargetVariable())) {
+						Element pOut = vaIn.accept(this);
+						pOuts.add((Predicate)pOut);
+					}
+				}
+				else if (aIn instanceof PropertyAssignment) {
+					PropertyAssignment paIn = (PropertyAssignment)aIn;
+					Variable vIn = getVariable(paIn.getValue());
+					if ((vIn != null) && usedVariables.contains(vIn)) {
+						Element pOut = paIn.accept(this);
+						if (pOut != null) {
+							pOuts.add((Predicate)pOut);
+						}
+					}
+				}
+			}
+		}
+
+		protected void createAllPredicatePredicates(@NonNull Iterable</*@NonNull*/ Predicate> pIns, @NonNull List</*@NonNull*/ Predicate> pOuts) {
+			for (Predicate pIn : pIns) {
+				OCLExpression eIn = pIn.getConditionExpression();
+				if (eIn instanceof OperationCallExp) {
+					OperationCallExp oIn = (OperationCallExp)eIn;
+					if ("=".equals(oIn.getReferredOperation().getName())) {
+						Variable lvIn = getVariable(oIn.getOwnedSource());
+						Variable rvIn = getVariable(oIn.getOwnedArguments().get(0));
+						if (((lvIn != null) && usedVariables.contains(lvIn)) || ((rvIn != null) && usedVariables.contains(rvIn))) {
+							Element pOut = pIn.accept(this);
+							pOuts.add((Predicate)pOut);
+						}
+					}
+				}
+			}
 		}
 
 		@Override
-		protected String getMappingName(@NonNull Mapping mIn) {
-			return mappingName;
+		protected void createAllPredicatesOrAssignments(@NonNull Iterable</*@NonNull*/ Assignment> aIns,
+				@NonNull List</*@NonNull*/ Predicate> pOuts, @NonNull List</*@NonNull*/ Assignment> aOuts) {
+/*			for (Assignment aIn : aIns) {
+				Element eOut = create(aIn);
+				if (eOut instanceof Predicate) {
+					pOuts.add((Predicate)eOut);
+				}
+				else if (eOut instanceof Assignment) {
+					aOuts.add((Assignment)eOut);
+				}
+				else {
+					assert eOut == null;
+				}
+			} */
+			throw new UnsupportedOperationException();
+		}
+
+//		protected void createAllRealizedVariables(@NonNull Iterable<RealizedVariable> rvIns, @NonNull List<Variable> vOuts, @NonNull List<RealizedVariable> rvOuts) {
+//			// There are no secondary RealizedVariables
+//		}
+
+		@Override
+		protected void createAllVariables(@NonNull Iterable</*@NonNull*/ ? extends Variable> vIns,
+				@NonNull List</*@NonNull*/ Variable> gvOuts, @NonNull List</*@NonNull*/ Variable> bvOuts) {
+			for (Variable vIn : vIns) {
+				if ((vIn != getSecondaryHead()) && usedVariables.contains(vIn)) {
+					Variable vOut = create(vIn);
+					assert vOut != null;
+					if (vIn.getOwnedInit() != null) {
+						bvOuts.add(vOut);
+					}
+					else {
+						gvOuts.add(vOut);
+					}
+				}
+			}
+		}
+
+		protected abstract @Nullable RealizedVariable getSecondaryHead();
+
+		@Override
+		public @Nullable Element visitPredicate(@NonNull Predicate pIn) {
+			return null;
+		}
+
+		@Override
+		public @Nullable Element visitPropertyAssignment(@NonNull PropertyAssignment paIn) {
+			if (secondaryAssignments.contains(paIn)) {
+				return super.visitPropertyAssignment(paIn);
+			}
+			else {
+				return null;
+			}
+		}
+
+		//
+		//	The secondary RealizedVariables are converted to Variables
+		//
+		@Override
+		public @NonNull Variable visitRealizedVariable(@NonNull RealizedVariable rvIn) {
+			return super.visitVariable(rvIn);
+		}
+	}
+	
+	/**
+	 * The SecondaryCreateVisitor creates a secondary mapping that complements a primary mapping by servicing one or more secondary PropertyAssignments that
+	 * could not be performed by the primary without a deadlock hazard.
+	 */
+	protected static class FoldedSecondaryCreateVisitor extends AbstractSecondaryCreateVisitor
+	{
+		public FoldedSecondaryCreateVisitor(@NonNull QVTm2QVTp context, @NonNull String mappingName,
+				@NonNull List<@NonNull PropertyAssignment> secondaryAssignments) {
+			super(context, mappingName, secondaryAssignments);
+		}
+
+		@Override
+		protected @Nullable RealizedVariable getSecondaryHead() {
+			return null;
+		}
+
+		@Override
+		public @NonNull Mapping visitMapping(@NonNull Mapping mIn) {
+			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
+			context.pushScope(mOut);
+			context.addTrace(mIn, mOut);
+	        mOut.setName(mappingName);
+			mOut.setGuardPattern(create(mIn.getGuardPattern()));
+			mOut.setBottomPattern(create(mIn.getBottomPattern()));
+			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
+			//
+			// Middle domain
+			//
+			{
+				CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+//				System.out.println("  middle");
+				context.addTrace(mIn, dOut);
+				GuardPattern gOut = create(mIn.getGuardPattern());
+				BottomPattern bOut = create(mIn.getBottomPattern());
+				assert (gOut != null) && (bOut != null);
+				dOut.setGuardPattern(gOut);
+				dOut.setBottomPattern(bOut);
+				dOut.setIsCheckable(false);
+				dOut.setIsEnforceable(true);
+				GuardPattern gIn = mIn.getGuardPattern();
+//				createAll(gIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
+				BottomPattern bIn = mIn.getBottomPattern();
+//				createAllPredicatesOrAssignments(bIn.getAssignment(), mOut.getGuardPattern().getPredicate(), mOut.getBottomPattern().getAssignment());		// Colocate all assignments
+				createAllPredicatePredicates(bIn.getPredicate(), mOut.getBottomPattern().getPredicate());
+				createAllAssignmentPredicates(bIn.getAssignment(), mOut.getBottomPattern().getPredicate());
+//				createAll(bIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
+//				gOut.getVariable().add(create2(secondaryHead));
+				createAllVariables(gIn.getVariable(), gOut.getVariable(), bOut.getVariable());
+				createAllVariables(bIn.getVariable(), bOut.getVariable(), bOut.getVariable());
+				createAllVariables(bIn.getRealizedVariable(), bOut.getVariable(), bOut.getVariable());
+				for (@NonNull PropertyAssignment aIn : secondaryAssignments) {
+					mOut.getBottomPattern().getAssignment().add(create2(aIn));
+				}
+				mOut.getDomain().add(dOut);
+			}
+			//
+			// Side domains
+			//
+			for (Domain d : ClassUtil.nullFree(mIn.getDomain())) {
+				CoreDomain dIn = (CoreDomain)d;
+				CoreDomain dOut = create(dIn);
+				assert dOut != null;
+				GuardPattern gOut = dOut.getGuardPattern();
+				BottomPattern bOut = dOut.getBottomPattern();
+				boolean isEnforceable = context.isEnforceableTransformationWide(d);
+//				System.out.println("  " + d + " " + d.isIsEnforceable());
+				assert d.isIsEnforceable() == isEnforceable;
+				GuardPattern gIn = dIn.getGuardPattern();
+//				createAll(gIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
+				BottomPattern bIn = dIn.getBottomPattern();
+//				createAllPredicatesOrAssignments(bIn.getAssignment(), mOut.getGuardPattern().getPredicate(), mOut.getBottomPattern().getAssignment());		// Colocate all assignments
+				createAllAssignmentPredicates(bIn.getAssignment(), mOut.getBottomPattern().getPredicate());
+				createAllPredicatePredicates(bIn.getPredicate(), mOut.getBottomPattern().getPredicate());
+//				createAll(bIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
+				createAllVariables(gIn.getVariable(), gOut.getVariable(), bOut.getVariable());
+				createAllVariables(bIn.getVariable(), bOut.getVariable(), bOut.getVariable());
+				createAllVariables(bIn.getRealizedVariable(), bOut.getVariable(), bOut.getVariable());
+				mOut.getDomain().add(dOut);
+			}
+			//
+			//
+			//
+//			PropertyAssignment discriminantAssignment2 = discriminantAssignment;
+//			if (discriminantAssignment2 != null) {
+//				mOut.getGuardPattern().getPredicate().add((Predicate) discriminantAssignment2.accept(this));
+//			}
+			context.popScope();
+			return mOut;
+		}
+	}
+	
+	/**
+	 * The SecondaryCreateVisitor creates a secondary mapping that complements a primary mapping by servicing one or more secondary PropertyAssignments that
+	 * could not be performed by the primary without a deadlock hazard.
+	 */
+	protected static class SecondaryCreateVisitor extends AbstractSecondaryCreateVisitor
+	{
+    	protected final @NonNull RealizedVariable secondaryHead;
+    	
+    	/**
+    	 * Assignments made by the primary mapping. Need to be converted to predicates in the secondary mapping.
+    	 */
+    	protected final @NonNull List<@NonNull PropertyAssignment> primaryAssignments;
+    	
+    	protected final @Nullable PropertyAssignment discriminantAssignment;
+
+		public SecondaryCreateVisitor(@NonNull QVTm2QVTp context, @NonNull String mappingName, @NonNull RealizedVariable secondaryHead,
+				@NonNull List<@NonNull PropertyAssignment> primaryAssignments, @Nullable PropertyAssignment discriminantAssignment,
+				@NonNull List<@NonNull PropertyAssignment> secondaryAssignments) {
+			super(context, mappingName, secondaryAssignments);
+			this.secondaryHead = secondaryHead;
+			this.primaryAssignments = primaryAssignments;
+			this.discriminantAssignment = discriminantAssignment;
+			if (discriminantAssignment != null) {
+				Variable discriminantVariable = getVariable(discriminantAssignment.getValue());
+				if (discriminantVariable != null) {
+					usedVariables.add(discriminantVariable);
+				}
+			}
+			Iterables.addAll(usedVariables, computeIndirectlyReferencedVariables(usedVariables, primaryAssignments));
+			assert usedVariables.contains(secondaryHead);
+		}
+
+		@Override
+		protected @Nullable RealizedVariable getSecondaryHead() {
+			return secondaryHead;
+		}
+
+		@Override
+		public @NonNull Mapping visitMapping(@NonNull Mapping mIn) {
+			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
+			context.pushScope(mOut);
+			context.addTrace(mIn, mOut);
+	        mOut.setName(mappingName);
+			mOut.setGuardPattern(create(mIn.getGuardPattern()));
+			mOut.setBottomPattern(create(mIn.getBottomPattern()));
+			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
+			//
+			// Middle domain
+			//
+			{
+				CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+//				System.out.println("  middle");
+				context.addTrace(mIn, dOut);
+				GuardPattern gOut = create(mIn.getGuardPattern());
+				BottomPattern bOut = create(mIn.getBottomPattern());
+				assert (gOut != null) && (bOut != null);
+				dOut.setGuardPattern(gOut);
+				dOut.setBottomPattern(bOut);
+				dOut.setIsCheckable(false);
+				dOut.setIsEnforceable(true);
+				GuardPattern gIn = mIn.getGuardPattern();
+//				createAll(gIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
+				BottomPattern bIn = mIn.getBottomPattern();
+//				createAllPredicatesOrAssignments(bIn.getAssignment(), mOut.getGuardPattern().getPredicate(), mOut.getBottomPattern().getAssignment());		// Colocate all assignments
+				createAllPredicatePredicates(bIn.getPredicate(), mOut.getBottomPattern().getPredicate());
+				createAllAssignmentPredicates(bIn.getAssignment(), mOut.getBottomPattern().getPredicate());
+//				createAll(bIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
+				gOut.getVariable().add(create2(secondaryHead));
+				createAllVariables(gIn.getVariable(), gOut.getVariable(), bOut.getVariable());
+				createAllVariables(bIn.getVariable(), bOut.getVariable(), bOut.getVariable());
+				createAllVariables(bIn.getRealizedVariable(), bOut.getVariable(), bOut.getVariable());
+				for (@NonNull PropertyAssignment aIn : secondaryAssignments) {
+					mOut.getBottomPattern().getAssignment().add(create2(aIn));
+				}
+				mOut.getDomain().add(dOut);
+			}
+			//
+			// Side domains
+			//
+			for (Domain d : ClassUtil.nullFree(mIn.getDomain())) {
+				CoreDomain dIn = (CoreDomain)d;
+				CoreDomain dOut = create(dIn);
+				assert dOut != null;
+				GuardPattern gOut = dOut.getGuardPattern();
+				BottomPattern bOut = dOut.getBottomPattern();
+				boolean isEnforceable = context.isEnforceableTransformationWide(d);
+//				System.out.println("  " + d + " " + d.isIsEnforceable());
+				assert d.isIsEnforceable() == isEnforceable;
+				GuardPattern gIn = dIn.getGuardPattern();
+//				createAll(gIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
+				BottomPattern bIn = dIn.getBottomPattern();
+//				createAllPredicatesOrAssignments(bIn.getAssignment(), mOut.getGuardPattern().getPredicate(), mOut.getBottomPattern().getAssignment());		// Colocate all assignments
+				createAllAssignmentPredicates(bIn.getAssignment(), mOut.getBottomPattern().getPredicate());
+				createAllPredicatePredicates(bIn.getPredicate(), mOut.getBottomPattern().getPredicate());
+//				createAll(bIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
+				createAllVariables(gIn.getVariable(), gOut.getVariable(), bOut.getVariable());
+				createAllVariables(bIn.getVariable(), bOut.getVariable(), bOut.getVariable());
+				createAllVariables(bIn.getRealizedVariable(), bOut.getVariable(), bOut.getVariable());
+				mOut.getDomain().add(dOut);
+			}
+			//
+			//
+			//
+			PropertyAssignment discriminantAssignment2 = discriminantAssignment;
+			if (discriminantAssignment2 != null) {
+				mOut.getGuardPattern().getPredicate().add((Predicate) discriminantAssignment2.accept(this));
+			}
+			context.popScope();
+			return mOut;
 		}
 
 		@Override
@@ -332,17 +747,15 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		        // The condition expression is copied during update once replacement variables exist.
 				createAll(paIn.getOwnedComments(), pOut.getOwnedComments());
 		        return pOut;
-			}
-			else if (secondaryAssignments.contains(paIn)) {
-				return super.visitPropertyAssignment(paIn);
+//				return null;
 			}
 			else {
-				return null;
+				return super.visitPropertyAssignment(paIn);
 			}
 		}
 
 		//
-		//	RealizedVariables are converted to Variables
+		//	The secondary RealizedVariables are converted to Variables
 		//
 		@Override
 		public @NonNull Variable visitRealizedVariable(@NonNull RealizedVariable rvIn) {
@@ -355,7 +768,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
      */
     protected static interface Part extends Nameable, Comparable<@NonNull Part>
     {
-		@Nullable Set<@NonNull Part> analyzeDependencies();
+		@Nullable Set<@NonNull Part> analyzeRequiredParts();
 		@Override
 		@NonNull String getName() ;
     }
@@ -389,12 +802,12 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		}
 
 		@Override
-		public @Nullable Set<@NonNull Part> analyzeDependencies() {
+		public @Nullable Set<@NonNull Part> analyzeRequiredParts() {
 			OCLExpression value2 = value;
 			if (value2 == null) {
 				return null;
 			}
-			return partitioning.analyzeDependencies(value2);
+			return partitioning.analyzeRequiredParts(value2);
 		}
 
 		public @Nullable OCLExpression getValue() {
@@ -458,8 +871,8 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		}
 
 		@Override
-		public @Nullable Set<@NonNull Part> analyzeDependencies() {
-			return partitioning.analyzeDependencies(predicate);
+		public @Nullable Set<@NonNull Part> analyzeRequiredParts() {
+			return partitioning.analyzeRequiredParts(predicate);
 		}
 
 		@Override
@@ -486,20 +899,24 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
     protected static class PropertyPart extends AbstractPart
     {
 		private final @NonNull Property property;
-		
+
 		public PropertyPart(@NonNull Partitioning partitioning, @NonNull Property property) {
 			super(partitioning);
 			this.property = property;
 		}
 
 		@Override
-		public @Nullable Set<@NonNull Part> analyzeDependencies() {
+		public @Nullable Set<@NonNull Part> analyzeRequiredParts() {
 			return null;
 		}
 
 		@Override
 		public @NonNull String getName() {
 			return property.getOwningClass().getName() + "::" + property.getName();
+		}
+
+		public @NonNull Property getProperty() {
+			return property;
 		}
     }
 
@@ -558,6 +975,10 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		public @Nullable Iterable<@NonNull VariablePropertyPart> getPropertyParts() {
 			return property2part != null ? property2part.values() : null;
 		}
+
+		public @NonNull Variable getVariable() {
+			return variable;
+		}
     }
 
     protected static class VariablePropertyPart extends PropertyAssignablePart
@@ -573,13 +994,13 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		}
 
 		@Override
-		public @Nullable Set<@NonNull Part> analyzeDependencies() {
-			Set<@NonNull Part> analyzeDependencies = super.analyzeDependencies();
-			if (analyzeDependencies == null) {
-				analyzeDependencies = new HashSet<@NonNull Part>();
+		public @Nullable Set<@NonNull Part> analyzeRequiredParts() {
+			Set<@NonNull Part> requiredParts = super.analyzeRequiredParts();
+			if (requiredParts == null) {
+				requiredParts = new HashSet<@NonNull Part>();
 			}
-			analyzeDependencies.add(variablePart);
-			return analyzeDependencies;
+			requiredParts.add(variablePart);
+			return requiredParts;
 		}
 
 		@Override
@@ -607,16 +1028,28 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		protected final @NonNull Mapping mapping;
 		private final @NonNull Map<@NonNull Variable, @NonNull VariablePart> variable2part = new HashMap<@NonNull Variable, @NonNull VariablePart>();
 		private @Nullable List<@NonNull VariablePart> allBottomVariables = null;
-		private final @NonNull List<@NonNull VariablePart> allGuardVariables = new ArrayList<@NonNull VariablePart>();
+		private @Nullable List<@NonNull VariablePart> allGuardVariables = null;
 		private @Nullable List<@NonNull PredicatePart> allPredicates = null;
 		private final @NonNull List<@NonNull AssignablePart> allPropertyAssignments = new ArrayList<@NonNull AssignablePart>();
 		private final @NonNull List<@NonNull VariablePart> allRealizedVariables = new ArrayList<@NonNull VariablePart>();
 		private @Nullable Map<@NonNull Property, @NonNull PropertyPart> allPropertyParts = null;
-		private final @NonNull Map<@NonNull Part, @Nullable Set<@NonNull Part>> part2parts = new HashMap<@NonNull Part, @Nullable Set<@NonNull Part>>();
+		private @Nullable List<@NonNull PropertyAssignment> primaryAssignments = null;
+		private @Nullable RealizedVariable secondaryHead = null;
+		
+		/**
+		 * The parts that must be available to support evaluation of each part.
+		 */
+		private final @NonNull Map<@NonNull Part, @Nullable Set<@NonNull Part>> part2requiredParts = new HashMap<@NonNull Part, @Nullable Set<@NonNull Part>>();
 		private final @NonNull List<@NonNull Part> allParts = new ArrayList<@NonNull Part>();
 		
 		private final @NonNull Set<@NonNull Part> partitionedParts = new HashSet<@NonNull Part>();
 		private final @NonNull Set<@NonNull Part> remainingParts = new HashSet<@NonNull Part>();
+		private @Nullable Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> requiredParts2requiringParts = null;
+		
+		/**
+		 * Property access from secondary head used to discriminate ambiguous middle type usage.
+		 */
+		private @Nullable Property discriminant = null;
 		
 		public Partitioning(@NonNull CreateVisitor createVisitor, @NonNull Mapping mapping) {
 			this.createVisitor = createVisitor;
@@ -652,17 +1085,21 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		}
 
 		private void addGuardVariables(@NonNull GuardPattern guardPattern) {
+			List<@NonNull VariablePart> allGuardVariables2 = allGuardVariables;
 			for (Variable variable : ClassUtil.nullFree(guardPattern.getVariable())) {
 				VariablePart variablePart = new VariablePart(this, variable);
-				allGuardVariables.add(variablePart);
+				if (allGuardVariables2 == null) {
+					allGuardVariables = allGuardVariables2 = new ArrayList<@NonNull VariablePart>();
+				}
+				allGuardVariables2.add(variablePart);
 				VariablePart oldVariablePart = variable2part.put(variable, variablePart);
 				assert oldVariablePart == null;
 			}
 		}
 
 		private void addPart(@NonNull Part part) {
-			assert !part2parts.containsKey(part);
-			part2parts.put(part, null);
+			assert !part2requiredParts.containsKey(part);
+			part2requiredParts.put(part, null);
 			allParts.add(part);
 		}
 
@@ -725,18 +1162,22 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			return variablePart;
 		}
 
-		public void analyze() {
+		public void analyze(@Nullable StringBuilder s) {
 			for (Domain domain : ClassUtil.nullFree(mapping.getDomain())) {
 				analyzeArea((CoreDomain)domain);
 			}
 			analyzeArea(mapping);
-			Collections.sort(allGuardVariables);
 			Collections.sort(allPropertyAssignments);
 			Collections.sort(allRealizedVariables);
 			for (int i = 0; i < allParts.size(); i++) {			// Avoids CME
 				Part part = allParts.get(i);
-				part2parts.put(part, part.analyzeDependencies());
+				part2requiredParts.put(part, part.analyzeRequiredParts());
 				remainingParts.add(part);
+			}
+			Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> requiredParts2requiringParts = this.requiredParts2requiringParts = partition(s);
+			if ((requiredParts2requiringParts != null) && (requiredParts2requiringParts.size() > 0)) {
+				List<@NonNull PropertyAssignment> primaryAssignments2 = primaryAssignments = synthesizeComputePrimaryAssignments(requiredParts2requiringParts);
+				secondaryHead = synthesizeComputeSecondaryHead(allRealizedVariables, primaryAssignments2);
 			}
 		}
 
@@ -753,29 +1194,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			addAssignments(bottomPattern);
 		}
 
-		protected @Nullable Set<@NonNull Part> analyzeDependencies(@NonNull Element element) {
-			Set<@NonNull Part> dependencies = null;
-			Part dependency = analyzeDependency(element);
-			if (dependency != null) {
-				dependencies = new HashSet<@NonNull Part>();
-				dependencies.add(dependency);
-			}
-			for (TreeIterator<EObject> tit = element.eAllContents(); tit.hasNext(); ) {
-				EObject eObject = tit.next();
-				if (eObject instanceof Element) {
-					dependency = analyzeDependency((Element)eObject);
-					if (dependency != null) {
-						if (dependencies == null) {
-							dependencies = new HashSet<@NonNull Part>();
-						}
-						dependencies.add(dependency);
-					}
-				}
-			}
-			return dependencies;
-		}
-
-		private @Nullable Part analyzeDependency(@NonNull Element eObject) {
+		private @Nullable Part analyzeRequiredPart(@NonNull Element eObject) {
 			if (eObject instanceof VariableExp) {
 				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
 				VariablePart variablePart = variable2part.get(referredVariable);
@@ -783,20 +1202,50 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 					return variablePart;
 				}
 			}
-			else if (eObject instanceof PropertyCallExp) {
-				PropertyCallExp propertyCallExp = (PropertyCallExp)eObject;
-				OCLExpression source = propertyCallExp.getOwnedSource();
-				Property property = propertyCallExp.getReferredProperty();
+			else if (eObject instanceof NavigationCallExp) {
+				NavigationCallExp navigationCallExp = (NavigationCallExp)eObject;
+				OCLExpression source = navigationCallExp.getOwnedSource();
+				assert source != null;
+				DomainUsage usage = createVisitor.getContext().domainAnalysis.getUsage(source);
+				if (usage.isInput()) {
+					return null;
+				}
+				Property property = PivotUtil.getReferredProperty(navigationCallExp);
 				assert property != null;
 				if (source instanceof VariableExp) {
 					VariablePart variablePart = basicGetVariablePart(source);
 					if (variablePart != null) {
-						return variablePart.getPropertyPart(property);
+						VariablePropertyPart propertyPart = variablePart.basicGetPropertyPart(property);
+						if (propertyPart != null) {
+							return propertyPart;
+						}
 					}
 				}
 				return addPropertyPart(property);
 			}
 			return null;
+		}
+
+		protected @Nullable Set<@NonNull Part> analyzeRequiredParts(@NonNull Element element) {
+			Set<@NonNull Part> requiredParts = null;
+			Part requiredPart = analyzeRequiredPart(element);
+			if (requiredPart != null) {
+				requiredParts = new HashSet<@NonNull Part>();
+				requiredParts.add(requiredPart);
+			}
+			for (TreeIterator<EObject> tit = element.eAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+				if (eObject instanceof Element) {
+					requiredPart = analyzeRequiredPart((Element)eObject);
+					if (requiredPart != null) {
+						if (requiredParts == null) {
+							requiredParts = new HashSet<@NonNull Part>();
+						}
+						requiredParts.add(requiredPart);
+					}
+				}
+			}
+			return requiredParts;
 		}
 
 /*		private @Nullable AssignablePart basicGetAssignablePart(@NonNull PropertyAssignment propertyAssignment) {
@@ -824,7 +1273,29 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			return variable2part.get(referredVariable);
 		}
 
-		public @Nullable Map<Set<@NonNull Part>, @NonNull List<@NonNull Part>> partition(@Nullable StringBuilder s) {
+		public @Nullable Map<@NonNull Property, @Nullable OCLExpression> getRootPaths() {
+			Map<@NonNull Property, @Nullable OCLExpression> property2value = null;
+			List<@NonNull PropertyAssignment> primaryAssignments2 = primaryAssignments;
+			RealizedVariable secondaryHead2 = secondaryHead;
+			if ((secondaryHead2 != null) && (primaryAssignments2 != null)) {
+				property2value = new HashMap<@NonNull Property, @Nullable OCLExpression>();
+				for (@NonNull PropertyAssignment propertyAssignment : primaryAssignments2) {
+					Variable leftVariable = getVariable(propertyAssignment.getSlotExpression());
+					if (leftVariable == secondaryHead2) {
+						Property targetProperty = propertyAssignment.getTargetProperty();
+						assert targetProperty != null;
+						property2value.put(targetProperty, propertyAssignment.getValue());
+					}
+				}
+			}
+			return property2value;
+		}
+
+		public @Nullable RealizedVariable getSecondaryHead() {
+			return secondaryHead;
+		}
+
+		public @Nullable Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> partition(@Nullable StringBuilder s) {
 			Collections.sort(allParts);
 			if (s != null) {
 				s.append(mapping + "\n");
@@ -833,25 +1304,36 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			partitionGuardVariables(s);
 			partitionBottomVariables(s);
 			partitionPredicates(s);
-			Set<@NonNull VariablePropertyPart> realizedPropertyParts = partitionRealizedVariables(s);
-			Map<Set<@NonNull Part>, @NonNull List<@NonNull Part>> dependentParts2commitParts = partitionCommitParts(realizedPropertyParts);
-			if (dependentParts2commitParts != null) {
+			Set<@NonNull VariablePropertyPart> simpleRealizedPropertyParts = partitionSimpleRealizedVariables(s);
+			Map<@NonNull Part, @NonNull List<@NonNull Part>> requiredPart2requiringParts = partitionRealizedPropertyParts(simpleRealizedPropertyParts);
+			if (requiredPart2requiringParts != null) {
 				if (s != null) {
-					showCommitParts(s, dependentParts2commitParts);
-				}
-				while (partitionRecurseCommits(dependentParts2commitParts)) {
-					if (s != null) {
-						showCommitParts(s, dependentParts2commitParts);
+					s.append("  partitioned parts:\n");
+					s.append("   ");
+					for (Part partitionedPart : partitionedParts) {
+						s.append(" " + partitionedPart.getName());
 					}
+					s.append("\n");
+					showRequiredPart2requiringParts(s, requiredPart2requiringParts);
 				}
+				Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> requiredParts2requiringParts = partitionRecurseCommits(requiredPart2requiringParts);
+//				while (partitionRecurseCommits(requiredPart2requiringParts)) {
+//					if (s != null) {
+//						showCommitParts(s, requiredPart2requiringParts);
+//					}
+//				}
+				if (s != null) {
+					showRequiredParts2requiringParts(s, requiredParts2requiringParts);
+				}
+				return requiredParts2requiringParts;
 			}
-			return dependentParts2commitParts;
+			return null;
 		}
 
 		private void partitionBottomVariables(@Nullable StringBuilder s) {
 			List<@NonNull VariablePart> allBottomVariables2 = allBottomVariables;
 			if (allBottomVariables2 != null) {
-				Collections.sort(allBottomVariables);
+				Collections.sort(allBottomVariables2);
 				if (s != null) s.append("  bottom variables:");
 				for (VariablePart part : allBottomVariables2) {
 					if (s != null) s.append(" " + part.getName());
@@ -861,47 +1343,21 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			}
 		}
 
-		private @Nullable Map<Set<@NonNull Part>, @NonNull List<@NonNull Part>> partitionCommitParts(@Nullable Set<@NonNull VariablePropertyPart> realizedPropertyParts) {
-			Map<Set<@NonNull Part>, @NonNull List<@NonNull Part>> dependentParts2commitParts = new HashMap<Set<@NonNull Part>, @NonNull List<@NonNull Part>>();
-			for (Part commitPart : remainingParts) {
-				Set<@NonNull Part> dependentParts = part2parts.get(commitPart);
-				if (dependentParts != null) {
-					dependentParts.removeAll(partitionedParts);
-					List<@NonNull Part> commitParts = dependentParts2commitParts.get(dependentParts);
-					if (commitParts == null) {
-						commitParts = new ArrayList<@NonNull Part>();
-						dependentParts2commitParts.put(dependentParts, commitParts);
-					}
-					commitParts.add(commitPart);
-				}
-			}
-			if (realizedPropertyParts != null) {
-				List<@NonNull Part> commitParts = dependentParts2commitParts.get(Collections.emptySet());
-				if (commitParts != null) {				// Can be null for trivial 
-					for (VariablePropertyPart realizedPropertyPart : realizedPropertyParts) {
-						if (!commitParts.contains(realizedPropertyPart)) {
-							commitParts.add(realizedPropertyPart);
-						}
-					}
-				}
-				else {
-					assert remainingParts.isEmpty();
-				}
-			}
-			return dependentParts2commitParts;
-		}
-
 		private void partitionGuardVariables(@Nullable StringBuilder s) {
-			if (s != null) s.append("  guard variables:");
-			for (VariablePart part : allGuardVariables) {
-				if (s != null) s.append(" " + part.getName());
-				partitionPart(part);
+			List<@NonNull VariablePart> allGuardVariables2 = allGuardVariables;
+			if (allGuardVariables2 != null) {
+				Collections.sort(allGuardVariables2);
+				if (s != null) s.append("  guard variables:");
+				for (VariablePart part : allGuardVariables2) {
+					if (s != null) s.append(" " + part.getName());
+					partitionPart(part);
+				}
+				if (s != null) s.append("\n");
 			}
-			if (s != null) s.append("\n");
 		}
 
 		private void partitionPart(@NonNull Part part) {
-			Set<@NonNull Part> dependsOns = part2parts.get(part);
+			Set<@NonNull Part> dependsOns = part2requiredParts.get(part);
 			if (dependsOns != null) {
 				for (Part dependsOn : dependsOns) {
 					assert partitionedParts.contains(dependsOn);
@@ -919,7 +1375,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			Collections.sort(allPredicates2);
 			Set<@NonNull Part> predicateDependencies = null;
 			for (PredicatePart predicatePart : allPredicates2) {
-				Set<@NonNull Part> parts = part2parts.get(predicatePart);
+				Set<@NonNull Part> parts = part2requiredParts.get(predicatePart);
 				if (parts != null) {
 					for (Part part : parts) {
 						if (!partitionedParts.contains(part)) {
@@ -950,7 +1406,115 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			}
 		}
 
-		private @Nullable Set<@NonNull VariablePropertyPart> partitionRealizedVariables(@Nullable StringBuilder s) {
+		private @Nullable Map<@NonNull Part, @NonNull List<@NonNull Part>> partitionRealizedPropertyParts(@Nullable Set<@NonNull VariablePropertyPart> realizedPropertyParts) {
+			Set<@NonNull Part> checkParts = part2requiredParts.keySet();
+			assert partitionedParts.size() + remainingParts.size() == allParts.size();
+			assert checkParts.equals(new HashSet<@NonNull Part>(allParts));
+			assert checkParts.containsAll(partitionedParts);
+			assert checkParts.containsAll(remainingParts);
+			Map<@NonNull Part, @NonNull List<@NonNull Part>> requiredPart2requiringParts = new HashMap<@NonNull Part, @NonNull List<@NonNull Part>>();
+//			dependentParts2commitParts.put(Collections.emptySet(), new ArrayList<@NonNull Part>(partitionedParts));
+			for (Part remainingPart : remainingParts) {
+				Set<@NonNull Part> requiredParts = part2requiredParts.get(remainingPart);
+				if (requiredParts != null) {
+					for (Part requiredPart : requiredParts) {
+						if (!partitionedParts.contains(requiredPart)) {
+							List<@NonNull Part> requiringParts = requiredPart2requiringParts.get(requiredPart);
+							if (requiringParts == null) {
+								requiringParts = new ArrayList<@NonNull Part>();
+								requiredPart2requiringParts.put(requiredPart, requiringParts);
+							}
+							assert !requiringParts.contains(remainingPart);
+							requiringParts.add(remainingPart);
+						}
+					}
+//					requiredParts.removeAll(partitionedParts);
+//					List<@NonNull Part> requiringParts = requiredParts2requiringParts.get(requiredParts);
+//					if (requiringParts == null) {
+//						requiringParts = new ArrayList<@NonNull Part>();
+//						requiredParts2requiringParts.put(requiredParts, requiringParts);
+//					}
+//					requiringParts.add(remainingPart);
+				}
+			}
+/*			if (realizedPropertyParts != null) {
+				Set<@NonNull Part> noRequiredParts = Collections.emptySet();
+				List<@NonNull Part> requiringParts = requiredParts2requiringParts.get(noRequiredParts);
+				if (requiringParts == null) {				// Can be null for trivial 
+					requiringParts = new ArrayList<@NonNull Part>();
+					requiredParts2requiringParts.put(noRequiredParts, requiringParts);
+				}
+				for (VariablePropertyPart realizedPropertyPart : realizedPropertyParts) {
+					if (!requiringParts.contains(realizedPropertyPart)) {
+						requiringParts.add(realizedPropertyPart);
+					}
+				}
+//				}
+//				else {
+//					assert remainingParts.isEmpty();
+//				}
+			} */
+			return requiredPart2requiringParts;
+		}
+
+		private @NonNull Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> partitionRecurseCommits(@NonNull Map<@NonNull Part, @NonNull List<@NonNull Part>> requiredPart2requiringParts) {
+//			List<@NonNull Part> readyCommitParts = requiredParts2requiringParts.get(Collections.emptySet());
+//			if (readyCommitParts == null) {
+//				return false;
+//			}
+			List<@NonNull Part> requiredPartsRequiredOnlyOnce = null;
+			for (Part requiredPart : requiredPart2requiringParts.keySet()) {
+				List<@NonNull Part> requiringParts = requiredPart2requiringParts.get(requiredPart);
+				assert requiringParts != null;
+				if ((requiringParts.size() == 1) && (requiredPart2requiringParts.get(requiringParts.get(0)) != null)) {
+					if (requiredPartsRequiredOnlyOnce == null) {
+						requiredPartsRequiredOnlyOnce = new ArrayList<@NonNull Part>();
+					}
+					requiredPartsRequiredOnlyOnce.add(requiredPart);
+				}
+/*				Set<@NonNull Part> newRequiredParts = new HashSet<@NonNull Part>(oldRequiredParts);
+				if (newRequiredParts.removeAll(readyCommitParts)) {
+					gotOne = true;
+					List<@NonNull Part> oldCommitsList = requiredParts2requiringParts.remove(oldRequiredParts);
+					assert oldCommitsList != null;
+					List<@NonNull Part> newCommitsList = requiredParts2requiringParts.get(newRequiredParts);
+					if (newCommitsList == null) {
+						newCommitsList = new ArrayList<@NonNull Part>();
+						requiredParts2requiringParts.put(newRequiredParts, newCommitsList);
+					}
+					for (Part oldCommit : oldCommitsList) {
+						if (!newCommitsList.contains(oldCommit)) {
+							newCommitsList.add(oldCommit);
+						}
+					}
+				} */
+			}
+			@NonNull Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> requiredParts2requiringParts = new HashMap<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>>();
+			if (requiredPartsRequiredOnlyOnce != null) {
+				for (Part requiredPart : requiredPartsRequiredOnlyOnce) {
+					List<@NonNull Part> requiringParts = requiredPart2requiringParts.remove(requiredPart);
+					assert (requiringParts != null) && (requiringParts.size() == 1);
+					Part requiringPart = requiringParts.get(0);
+					List<@NonNull Part> requiringRequiringParts = requiredPart2requiringParts.remove(requiringPart);
+					if (requiringRequiringParts != null) {
+						ArrayList<@NonNull Part> mergedRequiredParts = new ArrayList<@NonNull Part>();
+						mergedRequiredParts.add(requiredPart);
+						mergedRequiredParts.add(requiringPart);
+						ArrayList<@NonNull Part> mergedRequiringParts = new ArrayList<@NonNull Part>(requiringRequiringParts);
+						mergedRequiringParts.add(requiringPart);
+						requiredParts2requiringParts.put(mergedRequiredParts, mergedRequiringParts);
+					}
+				}
+			}
+			for (Part requiredPart : requiredPart2requiringParts.keySet()) {
+				List<@NonNull Part> requiringParts = requiredPart2requiringParts.get(requiredPart);
+				assert requiringParts != null;
+				requiredParts2requiringParts.put(Collections.singletonList(requiredPart), requiringParts);
+			}
+			return requiredParts2requiringParts;
+		}
+
+		private @Nullable Set<@NonNull VariablePropertyPart> partitionSimpleRealizedVariables(@Nullable StringBuilder s) {
 			Set<@NonNull VariablePropertyPart> realizedPropertyParts = null;
 			if (s != null) s.append("  realized variables:");
 			for (VariablePart part : allRealizedVariables) {
@@ -961,7 +1525,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 					for (VariablePropertyPart propertyPart : propertyParts) {
 						VariablePart variablePart = propertyPart.getVariablePartInitializer();
 //						if ((variablePart != null) && partitionedParts.contains(variablePart)) {
-						if (variablePart != null) {
+						if (variablePart != null) {			// Property assignments with nasty dependencies must wait till later
 							if (realizedPropertyParts == null) {
 								realizedPropertyParts = new HashSet<@NonNull VariablePropertyPart>();
 							}
@@ -982,94 +1546,104 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			return realizedPropertyParts;
 		}
 
-		private boolean partitionRecurseCommits(@NonNull Map<@NonNull Set<@NonNull Part>, @NonNull List<@NonNull Part>> dependentParts2commitParts) {
-			List<@NonNull Part> readyCommitParts = dependentParts2commitParts.get(Collections.emptySet());
-			if (readyCommitParts == null) {
-				return false;
-			}
-			boolean gotOne = false;
-			for (Set<@NonNull Part> oldDependentParts : new ArrayList<@NonNull Set<@NonNull Part>>(dependentParts2commitParts.keySet())) {
-				Set<@NonNull Part> newDependentParts = new HashSet<@NonNull Part>(oldDependentParts);
-				if (newDependentParts.removeAll(readyCommitParts)) {
-					gotOne = true;
-					List<@NonNull Part> oldCommitsList = dependentParts2commitParts.remove(oldDependentParts);
-					assert oldCommitsList != null;
-					List<@NonNull Part> newCommitsList = dependentParts2commitParts.get(newDependentParts);
-					if (newCommitsList == null) {
-						newCommitsList = new ArrayList<@NonNull Part>();
-						dependentParts2commitParts.put(newDependentParts, newCommitsList);
-					}
-					for (Part oldCommit : oldCommitsList) {
-						if (!newCommitsList.contains(oldCommit)) {
-							newCommitsList.add(oldCommit);
-						}
-					}
-				}
-			}
-			return gotOne;
+		public void setDiscriminant(@NonNull Property property) {
+			assert discriminant == null;
+			this.discriminant = property;
 		}
 
 		private void showAllParts(@NonNull StringBuilder s) {
 			for (Part part : allParts) {
 				if (s != null) s.append("    " + part + " : {");
-				Set<@NonNull Part> parts = part2parts.get(part);
+				Set<@NonNull Part> parts = part2requiredParts.get(part);
 				if (parts != null) {
 					List<@NonNull Part> sortedDependentParts = new ArrayList<@NonNull Part>(parts);
 					Collections.sort(sortedDependentParts);
 					for (Part dependentPart : sortedDependentParts) {
 						if (s != null) s.append(" " + dependentPart.getName());
-						assert part2parts.containsKey(dependentPart);
+						assert part2requiredParts.containsKey(dependentPart);
 					}
 				}
 				if (s != null) s.append(" }\n");
 			}
 		}
 
-		private void showCommitParts(@NonNull StringBuilder s, @NonNull Map<Set<@NonNull Part>, @NonNull List<@NonNull Part>> dependentParts2commitParts) {
-			s.append("  commit parts:\n");
-			for (Set<@NonNull Part> dependentParts : dependentParts2commitParts.keySet()) {
-				List<@NonNull Part> sortedDependentParts = new ArrayList<@NonNull Part>(dependentParts);
-				Collections.sort(sortedDependentParts);
-				s.append("    {");
-				for (Part dependentPart : sortedDependentParts) {
-					s.append(" " + dependentPart.getName());
-				}
-				s.append(" } => {");
-				List<@NonNull Part> commitParts = dependentParts2commitParts.get(dependentParts);
-				assert commitParts != null;
-				Collections.sort(commitParts);
-				for (Part commitPart : commitParts) {
-					s.append(" " + commitPart.getName());
+		private void showRequiredPart2requiringParts(@NonNull StringBuilder s, @NonNull Map<@NonNull Part, @NonNull List<@NonNull Part>> requiredPart2requiringParts) {
+			s.append("  required part => requiring parts:\n");
+			for (Part requiredPart : requiredPart2requiringParts.keySet()) {
+				s.append("    ");
+				s.append(requiredPart.getName());
+				s.append(" => {");
+				List<@NonNull Part> requiringParts = requiredPart2requiringParts.get(requiredPart);
+				assert requiringParts != null;
+				Collections.sort(requiringParts);
+				for (Part requiringPart : requiringParts) {
+					s.append(" " + requiringPart.getName());
 				}
 				s.append(" }\n");
 			}
 		}
 
-		public @NonNull List<@NonNull Mapping> synthesize(@Nullable StringBuilder s) {
-			Map<Set<@NonNull Part>, @NonNull List<@NonNull Part>> dependentParts2commitParts = partition(s);
-			if ((dependentParts2commitParts == null) || (dependentParts2commitParts.size() <= 1)) {
+		private void showRequiredParts2requiringParts(@NonNull StringBuilder s, @NonNull Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> requiredParts2requiringParts) {
+			s.append("  required part => requiring parts:\n");
+			for (List<@NonNull Part> requiredParts : requiredParts2requiringParts.keySet()) {
+				s.append("    {");
+				for (Part requiredPart : requiredParts) {
+					s.append(" " + requiredPart.getName());
+				}
+				s.append(" } => {");
+				List<@NonNull Part> requiringParts = requiredParts2requiringParts.get(requiredParts);
+				assert requiringParts != null;
+				Collections.sort(requiringParts);
+				for (Part requiringPart : requiringParts) {
+					s.append(" " + requiringPart.getName());
+				}
+				s.append(" }\n");
+			}
+		}
+
+		public @NonNull List<@NonNull Mapping> synthesize() {
+			Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> requiredParts2requiringParts2 = requiredParts2requiringParts;
+			if ((requiredParts2requiringParts2 == null) || (requiredParts2requiringParts2.size() <= 0)) {
 				Mapping mOut = createVisitor.create(mapping);
 				assert mOut != null;
 				return Collections.singletonList(mOut);
 			}
 			else {
 				List<@NonNull Mapping> mOuts = new ArrayList<@NonNull Mapping>();
-				List<@NonNull PropertyAssignment> primaryAssignments = synthesizeComputePrimaryAssignments(dependentParts2commitParts);
-				Map<Set<@NonNull Part>, @NonNull String> dependentParts2mappingName = synthesizeComputeMappingNames(dependentParts2commitParts);
+				List<@NonNull PropertyAssignment> primaryAssignments2 = primaryAssignments;
+				RealizedVariable secondaryHead2 = secondaryHead;
+				assert primaryAssignments2 != null;// && (secondaryHead2 != null);
+				Map<@NonNull List<@NonNull Part>, @NonNull String> dependentParts2mappingName = synthesizeComputeMappingNames(requiredParts2requiringParts2);
 				QVTm2QVTp context = createVisitor.getContext();
-				for (Map.Entry<Set<@NonNull Part>, @NonNull List<@NonNull Part>> entry : dependentParts2commitParts.entrySet()) {
-					Set<@NonNull Part> dependentParts = entry.getKey();
-					CreateVisitor refinedCreateVisitor;
-					if (dependentParts.isEmpty()) {
-						refinedCreateVisitor = new PrimaryCreateVisitor(context, primaryAssignments);
+				CreateVisitor refinedCreateVisitor = new PrimaryCreateVisitor(context, primaryAssignments2);
+				Mapping mOut = refinedCreateVisitor.create(mapping);
+				assert mOut != null;
+				mOuts.add(mOut);
+				PropertyAssignment discriminantAssignment = null;
+				if (discriminant != null) {
+					for (PropertyAssignment primaryAssignment : primaryAssignments2) {
+						if (primaryAssignment.getTargetProperty() == discriminant) {
+							Variable slotVariable = getVariable(primaryAssignment.getSlotExpression());
+							if (slotVariable == secondaryHead2) {
+								discriminantAssignment = primaryAssignment;
+//								primaryAssignments2.remove(discriminantAssignment);
+								break;
+							}
+						}
+					}
+				}
+				for (Map.Entry<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> entry : requiredParts2requiringParts2.entrySet()) {
+					List<@NonNull Part> dependentParts = entry.getKey();
+					List<@NonNull PropertyAssignment> secondaryAssignments = synthesizeComputeSecondaryAssignments(entry.getValue());
+					String mappingName = dependentParts2mappingName.get(dependentParts);
+					assert mappingName != null;
+					if (secondaryHead2 !=  null) {
+						refinedCreateVisitor = new SecondaryCreateVisitor(context, mappingName, secondaryHead2, primaryAssignments2, discriminantAssignment, secondaryAssignments);
 					}
 					else {
-						List<@NonNull PropertyAssignment> secondaryAssignments = synthesizeComputeSecondaryAssignments(entry.getValue());
-						String mappingName = dependentParts2mappingName.get(dependentParts);
-						assert mappingName != null;
-						refinedCreateVisitor = new SecondaryCreateVisitor(context, mappingName, primaryAssignments, secondaryAssignments);
+						refinedCreateVisitor = new FoldedSecondaryCreateVisitor(context, mappingName, secondaryAssignments);
 					}
-					Mapping mOut = refinedCreateVisitor.create(mapping);
+					mOut = refinedCreateVisitor.create(mapping);
 					assert mOut != null;
 					mOuts.add(mOut);
 				}
@@ -1077,26 +1651,114 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			}
 		}
 
-		private @NonNull Map<Set<@NonNull Part>, @NonNull String> synthesizeComputeMappingNames(@NonNull Map<Set<@NonNull Part>, @NonNull List<@NonNull Part>> dependentParts2commitParts) {
-			Map<Set<@NonNull Part>, @NonNull String> dependentParts2mappingNames = new HashMap<Set<@NonNull Part>, @NonNull String>();
+		/**
+		 * Return the RealizedVariable that will be the sole head of all secondary mappings.
+		 * It is a RealizedVariable from which all other RealizedVariables are reachable by primaryAssignments.
+		 * 
+		 * FIXME This implementation requires directly rather than transitively reachable.
+		 */
+		private @Nullable RealizedVariable synthesizeComputeSecondaryHead(@NonNull List<@NonNull VariablePart> allRealizedVariables,
+				@NonNull List<@NonNull PropertyAssignment> primaryAssignments) {
+			RealizedVariable bestRealizedVariable = null;
+			int bestRealizedVariableCount = 0;
+//			Map<@NonNull RealizedVariable, @Nullable List<@NonNull RealizedVariable>> source2targets = new HashMap<@NonNull RealizedVariable, @Nullable List<@NonNull RealizedVariable>>();
+			for (@NonNull VariablePart realizedVariablePart : allRealizedVariables) {
+				RealizedVariable realizedVariable = (RealizedVariable) realizedVariablePart.getVariable();
+				DomainUsage usage = createVisitor.getContext().getDomainUsageAnalysis().getUsage(realizedVariable);
+				if (usage.isMiddle()) {
+					int realizedVariableCount = 0;
+					@NonNull Iterable<@NonNull Variable> definedVariables = computeIndirectlyDefinedVariables(Collections.singletonList(realizedVariable), primaryAssignments);
+					for (@NonNull Variable definedVariable : definedVariables) {
+						if (definedVariable instanceof RealizedVariable) {
+							realizedVariableCount++;
+						}
+					}
+					if ((bestRealizedVariable == null) || (realizedVariableCount >= bestRealizedVariableCount)) {
+						bestRealizedVariable = realizedVariable;
+						bestRealizedVariableCount = realizedVariableCount;
+					}
+//					source2targets.put(realizedVariable, null);
+				}
+			}
+/*			for (@NonNull PropertyAssignment primaryAssignment : primaryAssignments) {
+				Variable slotVariable = getVariable(primaryAssignment.getSlotExpression());
+				if ((slotVariable != null) && source2targets.containsKey(slotVariable)) {
+					Variable valueVariable = getVariable(primaryAssignment.getValue());
+					if ((valueVariable != null) && source2targets.containsKey(valueVariable)) {
+						List<@NonNull RealizedVariable> targets = source2targets.get(slotVariable);
+						if (targets == null) {
+							targets = new ArrayList<@NonNull RealizedVariable>();
+							source2targets.put((RealizedVariable)slotVariable, targets);
+						}
+						if (!targets.contains(valueVariable)) {
+							targets.add((RealizedVariable)valueVariable);
+						}
+					}
+				}
+			} */
+/*			Set<@NonNull RealizedVariable> sourceVariables = source2targets.keySet();
+			int sourceVariablesSizeMinusOne = sourceVariables.size() - 1;
+			assert sourceVariablesSizeMinusOne >= 0;
+			for (@NonNull RealizedVariable sourceVariable : sourceVariables) {
+				List<@NonNull RealizedVariable> targets = source2targets.get(sourceVariable);
+				if ((targets != null) && (targets.size() >= sourceVariablesSizeMinusOne)) {
+					bestRealizedVariable = sourceVariable;
+				}
+			} */
+			return bestRealizedVariable;
+		}
+
+		private @NonNull Map<@NonNull List<@NonNull Part>, @NonNull String> synthesizeComputeMappingNames(@NonNull Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> dependentParts2commitParts) {
+			Map<@NonNull List<@NonNull Part>, @NonNull String> dependentParts2mappingNames = new HashMap<@NonNull List<@NonNull Part>, @NonNull String>();
 			int i = 0;
-			for (Map.Entry<Set<@NonNull Part>, @NonNull List<@NonNull Part>> entry : dependentParts2commitParts.entrySet()) {	// FIXME Stabilize order
-				Set<@NonNull Part> dependentParts = entry.getKey();
-				String name = mapping.getName() + i;				// FIXME More readble name
+			Map<@NonNull String, @NonNull List<@NonNull Part>> key2dependentParts = new HashMap<@NonNull String, @NonNull List<@NonNull Part>>();
+			for (List<@NonNull Part> dependentParts : dependentParts2commitParts.keySet()) {
+//				assert dependentParts !
+				StringBuilder s = new StringBuilder();
+				for (Part dependentPart : dependentParts) {
+					s.append("_");
+					s.append(dependentPart.getName());
+				}
+				key2dependentParts.put(s.toString(), dependentParts);
+			}
+			List<@NonNull String> sortedKeys = new ArrayList<@NonNull String>(key2dependentParts.keySet());
+			Collections.sort(sortedKeys);
+			for (String key : sortedKeys) {
+				List<@NonNull Part> dependentParts = key2dependentParts.get(key);
+				assert dependentParts != null;
+				String name = mapping.getName() + i++;				// FIXME More readable name
 				dependentParts2mappingNames.put(dependentParts, name);
 			}
 			return dependentParts2mappingNames;
 		}
 
-		private @NonNull List<@NonNull PropertyAssignment> synthesizeComputePrimaryAssignments(@NonNull Map<Set<@NonNull Part>, @NonNull List<@NonNull Part>> dependentParts2commitParts) {
+		private @NonNull List<@NonNull PropertyAssignment> synthesizeComputePrimaryAssignments(@NonNull Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> requiredParts2requiringParts) {
 			List<@NonNull PropertyAssignment> primaryAssignments = new ArrayList<@NonNull PropertyAssignment>();
-			List<@NonNull Part> primaryCommits = dependentParts2commitParts.get(Collections.emptySet());
-			assert primaryCommits != null;
-			for (Part primaryCommit : primaryCommits) {
+			for (AssignablePart part : allPropertyAssignments) {
+				if (part instanceof PropertyAssignablePart) {
+					PropertyAssignment propertyAssignment = ((PropertyAssignablePart)part).getPropertyAssignment();
+					if (propertyAssignment != null) {
+						primaryAssignments.add(propertyAssignment);
+					}
+				}
+			}
+//			List<@NonNull Part> primaryCommits = dependentParts2commitParts.get(Collections.emptySet());
+//			assert primaryCommits != null;
+/*			for (Part primaryCommit : partitionedParts) {
 				if (primaryCommit instanceof PropertyAssignablePart) {
 					PropertyAssignment propertyAssignment = ((PropertyAssignablePart)primaryCommit).getPropertyAssignment();
 					if (propertyAssignment != null) {
 						primaryAssignments.add(propertyAssignment);
+					}
+				}
+			} */
+			for (List<@NonNull Part> requiringParts : requiredParts2requiringParts.values()) {
+				for (Part requiringPart : requiringParts) {
+					if (requiringPart instanceof PropertyAssignablePart) {
+						PropertyAssignment propertyAssignment = ((PropertyAssignablePart)requiringPart).getPropertyAssignment();
+						if (propertyAssignment != null) {
+							primaryAssignments.remove(propertyAssignment);
+						}
 					}
 				}
 			}
@@ -1115,15 +1777,26 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			}
 			return secondaryAssignments;
 		}
+
+		@Override
+		public String toString() {
+			return mapping.toString();
+		}
     }
 
 	/**
-	 * The UpdateVisitor resolves the references and creates the OCLEXpressions omitted by the CreateVisitor..
+	 * The UpdateVisitor resolves the references and creates the OCLExpressions omitted by the CreateVisitor..
 	 */
     protected static class UpdateVisitor extends AbstractUpdateVisitor<@NonNull QVTm2QVTp>
     {
 		public UpdateVisitor(@NonNull QVTm2QVTp context) {
 			super(context);
+		}
+
+		@Override
+		public @Nullable Object visitCoreModel(@NonNull CoreModel mOut) {
+//			context.discriminate();
+			return super.visitCoreModel(mOut);
 		}
 
 		@Override
@@ -1138,14 +1811,89 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			return null;
 		}
 	}
-		
-    protected final @NonNull RootDomainUsageAnalysis domainAnalysis;
+
+    /**
+     * Return all variables directly referenced by any of propertyAssignments.
+     */
+	private static @NonNull Set<@NonNull Variable> computeDirectlyReferencedVariables(@NonNull List<@NonNull PropertyAssignment> propertyAssignments) {
+		Set<@NonNull Variable> usedVariables = new HashSet<@NonNull Variable>();
+		for (PropertyAssignment propertyAssignment : propertyAssignments) {
+			for (TreeIterator<EObject> tit = propertyAssignment.eAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+				if (eObject instanceof VariableExp) {
+					VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
+					if (referredVariable instanceof Variable) {
+						usedVariables.add((Variable)referredVariable);
+					}
+				}
+			}
+		}
+		return usedVariables;
+	}
+
+	/**
+     * Return all variables indirectly defined byVariables using propertyAssignments. i.e. if A is defined in A.b := C, C is defined too.
+     */
+	private static @NonNull Iterable<@NonNull Variable> computeIndirectlyDefinedVariables(@NonNull Iterable<@NonNull Variable> byVariables, @NonNull List<@NonNull PropertyAssignment> propertyAssignments) {
+		List<@NonNull Variable> variablesList = new ArrayList<@NonNull Variable>();
+		Iterables.addAll(variablesList, byVariables);
+		for (int i = 0; i < variablesList.size(); i++) {
+			Variable usedVariable = variablesList.get(i);
+			for (PropertyAssignment propertyAssignment : propertyAssignments) {
+				Variable rightVariable = getVariable(propertyAssignment.getValue());
+				Variable leftVariable = getVariable(propertyAssignment.getSlotExpression());
+				if ((leftVariable == usedVariable) && (rightVariable != null)) {
+					if (!variablesList.contains(rightVariable)) {
+						variablesList.add(rightVariable);
+					}
+				}
+			}
+		}
+		return variablesList;
+	}
+
+    /**
+     * Return all variables indirectly referenced byVariables using propertyAssignments. i.e. if C is referenced in A.b := C, A is referenced too.
+     */
+	private static @NonNull Iterable<@NonNull Variable> computeIndirectlyReferencedVariables(@NonNull Iterable<@NonNull Variable> byVariables, @NonNull List<@NonNull PropertyAssignment> propertyAssignments) {
+		List<@NonNull Variable> variablesList = new ArrayList<@NonNull Variable>();
+		Iterables.addAll(variablesList, byVariables);
+		for (int i = 0; i < variablesList.size(); i++) {
+			Variable usedVariable = variablesList.get(i);
+			for (PropertyAssignment propertyAssignment : propertyAssignments) {
+				Variable rightVariable = getVariable(propertyAssignment.getValue());
+				Variable leftVariable = getVariable(propertyAssignment.getSlotExpression());
+				if ((rightVariable == usedVariable) && (leftVariable != null)) {
+					if (!variablesList.contains(leftVariable)) {
+						variablesList.add(leftVariable);
+					}
+				}
+			}
+		}
+		return variablesList;
+	}
+
+	/**
+	 * Return the non-null referred Variable if anExpression is a VariableExp.
+	 */
+	private static @Nullable Variable getVariable(@Nullable OCLExpression anExpression) {
+		if (!(anExpression instanceof VariableExp)) {
+			return null;
+		}
+		VariableDeclaration referredVariable = ((VariableExp)anExpression).getReferredVariable();
+		if (!(referredVariable instanceof Variable)) {
+			return null;
+		}
+		return (@Nullable Variable) referredVariable;
+	}
+
+	protected final @NonNull RootDomainUsageAnalysis domainAnalysis;
 
     /**
      * Set of all TypedModels that are enforceable for all domains in each trasformation. 
      */
     private final @NonNull Map<@NonNull Transformation, @NonNull Set<@NonNull TypedModel>> transformation2enforceableTypedModels = new HashMap<@NonNull Transformation, @NonNull Set<@NonNull TypedModel>>();
-	
+
     /**
      * Create a new QVTm to QVTp transformation using an environmentFactory.
      *
@@ -1155,7 +1903,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
         super(environmentFactory);
 		this.domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
 	}
-
+	
 	@Override
 	protected @NonNull CreateVisitor createCreateVisitor() {
 		return new CreateVisitor(this);
