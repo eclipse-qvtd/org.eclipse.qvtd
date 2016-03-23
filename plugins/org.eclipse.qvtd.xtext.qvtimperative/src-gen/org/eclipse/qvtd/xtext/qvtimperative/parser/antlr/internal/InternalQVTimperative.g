@@ -498,39 +498,65 @@ ruleMappingCS returns [EObject current=null]
 	    }
 
 )
-))*)?	otherlv_10='{' 
+))*)?(	otherlv_10='key' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getMappingCSAccess().getLeftCurlyBracketKeyword_6());
+    	newLeafNode(otherlv_10, grammarAccess.getMappingCSAccess().getKeyKeyword_6_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedKeyExpressionExpCSParserRuleCall_6_1_0()); 
+	    }
+		lv_ownedKeyExpression_11_0=ruleExpCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedKeyExpression",
+        		lv_ownedKeyExpression_11_0, 
+        		"ExpCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_12=';' 
+    {
+    	newLeafNode(otherlv_12, grammarAccess.getMappingCSAccess().getSemicolonKeyword_6_2());
+    }
+)?	otherlv_13='{' 
+    {
+    	newLeafNode(otherlv_13, grammarAccess.getMappingCSAccess().getLeftCurlyBracketKeyword_7());
     }
 (
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedDomainsSourceDomainCSParserRuleCall_7_0_0()); 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedDomainsSourceDomainCSParserRuleCall_8_0_0()); 
 	    }
-		lv_ownedDomains_11_1=ruleSourceDomainCS		{
+		lv_ownedDomains_14_1=ruleSourceDomainCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
 	        }
        		add(
        			$current, 
        			"ownedDomains",
-        		lv_ownedDomains_11_1, 
+        		lv_ownedDomains_14_1, 
         		"SourceDomainCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
     |		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedDomainsTargetDomainCSParserRuleCall_7_0_1()); 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedDomainsTargetDomainCSParserRuleCall_8_0_1()); 
 	    }
-		lv_ownedDomains_11_2=ruleTargetDomainCS		{
+		lv_ownedDomains_14_2=ruleTargetDomainCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
 	        }
        		add(
        			$current, 
        			"ownedDomains",
-        		lv_ownedDomains_11_2, 
+        		lv_ownedDomains_14_2, 
         		"TargetDomainCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -538,23 +564,23 @@ ruleMappingCS returns [EObject current=null]
 )
 
 )
-)*(	otherlv_12='where' 
+)*(	otherlv_15='where' 
     {
-    	newLeafNode(otherlv_12, grammarAccess.getMappingCSAccess().getWhereKeyword_8_0());
+    	newLeafNode(otherlv_15, grammarAccess.getMappingCSAccess().getWhereKeyword_9_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedMiddleMiddleDomainCSParserRuleCall_8_1_0()); 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedMiddleMiddleDomainCSParserRuleCall_9_1_0()); 
 	    }
-		lv_ownedMiddle_13_0=ruleMiddleDomainCS		{
+		lv_ownedMiddle_16_0=ruleMiddleDomainCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
 	        }
        		set(
        			$current, 
        			"ownedMiddle",
-        		lv_ownedMiddle_13_0, 
+        		lv_ownedMiddle_16_0, 
         		"MiddleDomainCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -563,24 +589,24 @@ ruleMappingCS returns [EObject current=null]
 ))?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedMappingSequenceMappingSequenceCSParserRuleCall_9_0()); 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedMappingSequenceMappingSequenceCSParserRuleCall_10_0()); 
 	    }
-		lv_ownedMappingSequence_14_0=ruleMappingSequenceCS		{
+		lv_ownedMappingSequence_17_0=ruleMappingSequenceCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
 	        }
        		set(
        			$current, 
        			"ownedMappingSequence",
-        		lv_ownedMappingSequence_14_0, 
+        		lv_ownedMappingSequence_17_0, 
         		"MappingSequenceCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)?	otherlv_15='}' 
+)?	otherlv_18='}' 
     {
-    	newLeafNode(otherlv_15, grammarAccess.getMappingCSAccess().getRightCurlyBracketKeyword_10());
+    	newLeafNode(otherlv_18, grammarAccess.getMappingCSAccess().getRightCurlyBracketKeyword_11());
     }
 )
 ;
