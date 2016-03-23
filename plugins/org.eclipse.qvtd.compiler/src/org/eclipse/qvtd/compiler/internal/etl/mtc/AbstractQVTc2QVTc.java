@@ -41,7 +41,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
@@ -57,7 +56,6 @@ import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
@@ -81,72 +79,16 @@ public abstract class AbstractQVTc2QVTc
 	protected static class ExpressionCopier extends EcoreUtil.Copier
 	{	
 		private final @NonNull AbstractQVTc2QVTc context;
-		@Deprecated
-		private final @Nullable Element sibling;  // An object in the target domain used to select the appropriate source-target equivalence
 
 		public ExpressionCopier(@NonNull AbstractQVTc2QVTc context) {
 			this.context = context;
-			this.sibling = null;
-		}
-
-		@Deprecated
-		public ExpressionCopier(@NonNull AbstractQVTc2QVTc context, @Nullable Element sibling) {
-			this.context = context;
-			this.sibling = sibling;
 		}
 
 		@Override
 		public EObject get(Object oIn) {
-			if (oIn instanceof Element) {
-				EObject eOut1 = get1(oIn);
-				EObject eOut2 = get2(oIn);
-				if (eOut1 != eOut2) {
-					eOut1 = get1(oIn);
-					eOut2 = get2(oIn);
-				}
-				assert eOut1 == eOut2;
-				if (eOut1 != null) {
-					return eOut1;
-				}
-			}
-			return super.get(oIn);
-		}
-
-		@Deprecated
-		private EObject get1(Object oIn) {
-			List<Element> oOuts = context.basicEquivalentTargets1((Element)oIn);
-			if (oOuts != null) {
-				if (sibling == null) {
-					assert oOuts.size() == 1;
-					return oOuts.get(0);
-				}
-				Mapping containingMapping = QVTcoreUtil.getContainingMapping(sibling);
-				while ((containingMapping != null) && (containingMapping.getContext() != null)) {
-					containingMapping = containingMapping.getContext();
-				}
-				assert containingMapping != null;
-				Element theCopy = null;
-				for (Element oOut : oOuts) {
-					Mapping aMapping = QVTcoreUtil.getContainingMapping(oOut);
-					if ((aMapping == containingMapping) || (aMapping == null)) {
-						assert theCopy == null;
-						theCopy = oOut;
-					}
-				}
-//FIXME				assert theCopy != null;
-				if (theCopy == null) {
-					return oOuts.get(0);
-				}
-				return theCopy;
-			}
-			EObject eOut = super.get(oIn);
-			return eOut != null ? eOut : (EObject)oIn;
-		}
-
-		private EObject get2(Object oIn) {
 			EObject eOut = super.get(oIn);
 			if (eOut == null) {
-				eOut = context.equivalentTarget2((Element)oIn);
+				eOut = context.equivalentTarget((Element)oIn);
 			}
 			return eOut;
 		}
@@ -443,10 +385,10 @@ public abstract class AbstractQVTc2QVTc
 		}
 
 		protected Object convertToPredicate(@NonNull PropertyAssignment paIn, @NonNull Predicate pOut) {
-			OCLExpression slotExpression = copy(paIn.getSlotExpression(), pOut);
+			OCLExpression slotExpression = copy(paIn.getSlotExpression());
 			Property targetProperty = paIn.getTargetProperty();
 			assert (slotExpression != null) && (targetProperty != null);
-			OCLExpression valueExpression = copy(paIn.getValue(), pOut);
+			OCLExpression valueExpression = copy(paIn.getValue());
 			PropertyCallExp propertyCallExp = PivotUtil.createPropertyCallExp(slotExpression, targetProperty);
 			context.addTrace(paIn, propertyCallExp);
 			propertyCallExp.eUnset(PivotPackage.Literals.TYPED_ELEMENT__IS_REQUIRED);		// FIXME redundant compatibility
@@ -469,18 +411,6 @@ public abstract class AbstractQVTc2QVTc
 			}
 			assert context != null;
 			EcoreUtil.Copier copier = new ExpressionCopier(context);
-			@SuppressWarnings("unchecked") T eOut = (T) copier.copy(eIn);			
-		    copier.copyReferences();
-		    context.addDebugCopies(copier); 
-			return eOut;
-		}
-		@Deprecated
-		protected @Nullable <T extends Element> T copy(@Nullable T eIn, @Nullable Element sibling) {
-			if (eIn == null) {
-				return null;
-			}
-			assert context != null;
-			EcoreUtil.Copier copier = new ExpressionCopier(context, sibling);
 			@SuppressWarnings("unchecked") T eOut = (T) copier.copy(eIn);			
 		    copier.copyReferences();
 		    context.addDebugCopies(copier); 
@@ -616,7 +546,7 @@ public abstract class AbstractQVTc2QVTc
 		@Override
 		public @Nullable Object visitPredicate(@NonNull Predicate pOut) {
 			Predicate pIn = context.equivalentSource(pOut);
-			pOut.setConditionExpression(copy(pIn.getConditionExpression(), pOut));
+			pOut.setConditionExpression(copy(pIn.getConditionExpression()));
 			checkOut(pOut);
 			return null;
 		}
@@ -624,8 +554,8 @@ public abstract class AbstractQVTc2QVTc
 		@Override
 		public @Nullable Element visitPropertyAssignment(@NonNull PropertyAssignment paOut) {
 			PropertyAssignment paIn = context.equivalentSource(paOut);
-			paOut.setSlotExpression(copy(paIn.getSlotExpression(), paOut));
-			paOut.setValue(copy(paIn.getValue(), paOut));
+			paOut.setSlotExpression(copy(paIn.getSlotExpression()));
+			paOut.setValue(copy(paIn.getValue()));
 			checkOut(paOut);
 	        return paIn;
 		}
@@ -633,7 +563,7 @@ public abstract class AbstractQVTc2QVTc
 		@Override
 		public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable rvOut) {
 			RealizedVariable rvIn = context.equivalentSource(rvOut);
-			rvOut.setOwnedInit(copy(rvIn.getOwnedInit(), rvOut));
+			rvOut.setOwnedInit(copy(rvIn.getOwnedInit()));
 			return rvIn;
 		}
 
@@ -661,7 +591,7 @@ public abstract class AbstractQVTc2QVTc
 	        vOut.setName(vIn.getName());
 	        vOut.setIsImplicit(vIn.isIsImplicit());
 	        vOut.setIsRequired(vIn.isIsRequired());
-	        vOut.setOwnedInit(copy(vIn.getOwnedInit(), vOut));
+	        vOut.setOwnedInit(copy(vIn.getOwnedInit()));
 	        vOut.setType(vIn.getType());
 	        vOut.setTypeValue(vIn.getTypeValue());
 			return vIn;
@@ -671,7 +601,7 @@ public abstract class AbstractQVTc2QVTc
 		public @Nullable Element visitVariableAssignment(@NonNull VariableAssignment vaOut) {
 			VariableAssignment vaIn = context.equivalentSource(vaOut);
 			vaOut.setTargetVariable(context.equivalentTarget(vaIn.getTargetVariable()));
-			vaOut.setValue(copy(vaIn.getValue(), vaOut));
+			vaOut.setValue(copy(vaIn.getValue()));
 	        return vaIn;
 		}
 	}
@@ -680,12 +610,6 @@ public abstract class AbstractQVTc2QVTc
     protected final @NonNull AbstractCreateVisitor<?> createVisitor;
     protected final @NonNull AbstractUpdateVisitor<?> updateVisitor;
 	private TypedModel middleTypedModelTarget = null;
-    
-    /**
-     * Forward traceability from a source object to its one or more targets; at most one target per cobtaining mapping.
-     */
-	@Deprecated
-    private final @NonNull Map<Element, List<Element>> source2targets = new HashMap<Element, List<Element>>();
 
     /**
      * Forward traceability from a source object to its targets for the current mapping. Top level entries ourside a maping are indexed for the null mapping.
@@ -736,16 +660,6 @@ public abstract class AbstractQVTc2QVTc
     protected void addTrace(@NonNull Element source, @NonNull Element target) {
     	target2source.put(target, source);
     	//
-    	{
-	    	List<Element> targets = source2targets.get(source);
-	    	if (targets == null) {
-	    		targets = new ArrayList<Element>();
-	    		source2targets.put(source, targets);
-	    	}
-	    	assert !targets.contains(target);
-	    	targets.add(target);
-    	}
-    	//
     	NamedElement scope = scopeStack.peek();
     	Map<@NonNull Element, @NonNull List<@NonNull Element>> source2targets = scope2source2targets.get(scope);
     	if (source2targets == null) {
@@ -768,13 +682,6 @@ public abstract class AbstractQVTc2QVTc
     	assert target.eResource() != debugSource : "source element used for basicEquivalentSource " + target;
     	return target2source.get(target);
 	}
-
-	@Deprecated
-	private @Nullable <T extends Element> List<T> basicEquivalentTargets1(/*@NonNull*/ T source) {
-    	assert source != null;
-    	@SuppressWarnings("unchecked") List<T> targets = (List<T>) source2targets.get(source);
-    	return targets;
-    }
 	
 	protected abstract @NonNull AbstractCreateVisitor<@NonNull ?> createCreateVisitor();
 	
@@ -788,33 +695,6 @@ public abstract class AbstractQVTc2QVTc
     }
 
 	protected @NonNull <T extends Element> T equivalentTarget(/*@NonNull*/ T source) {
-    	T target1 = equivalentTarget1(source);
-    	T target2 = equivalentTarget2(source);
-		if (target1 != target2) {
-	    	target1 = equivalentTarget1(source);
-	    	target2 = equivalentTarget2(source);
-		}
-		assert target1 == target2;
-		return target1;
-    }
-
-	@Deprecated
-	private @NonNull <T extends Element> T equivalentTarget1(/*@NonNull*/ T source) {
-    	assert source != null;
-    	assert source.eResource() != debugTarget : "target element used for equivalentTarget " + source;
-    	@SuppressWarnings("unchecked") List<T> targets = (List<T>) source2targets.get(source);
-    	if (targets != null) {
-		    assert targets.size() == 1;
-		    T target = targets.get(0);
-		    assert target != null;
-			return target;
-    	}
-    	else {
-    		return source;
-    	}
-    }
-
-	private @NonNull <T extends Element> T equivalentTarget2(/*@NonNull*/ T source) {
     	assert source != null;
     	assert source.eResource() != debugTarget : "target element used for equivalentTarget " + source;
     	List<@NonNull Element> targets = null;

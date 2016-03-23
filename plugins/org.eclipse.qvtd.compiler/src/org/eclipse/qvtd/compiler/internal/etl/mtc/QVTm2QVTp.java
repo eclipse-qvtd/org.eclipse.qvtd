@@ -1133,7 +1133,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 				return convertToPredicate((PropertyAssignment) pIn, pOut);
 			}
 			else {
-				pOut.setConditionExpression(copy(((Predicate)pIn).getConditionExpression(), pOut));
+				pOut.setConditionExpression(copy(((Predicate)pIn).getConditionExpression()));
 			}
 			return null;
 		}
