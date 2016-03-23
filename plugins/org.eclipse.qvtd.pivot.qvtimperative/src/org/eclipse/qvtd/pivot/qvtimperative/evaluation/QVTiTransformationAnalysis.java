@@ -78,12 +78,12 @@ public class QVTiTransformationAnalysis
 	/**
 	 *  Set of all types for which allInstances() is invoked.
 	 */
-	private final @NonNull Set<org.eclipse.ocl.pivot.Class> allInstancesClasses = new HashSet<org.eclipse.ocl.pivot.Class>();
+	private final @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses = new HashSet<org.eclipse.ocl.pivot.@NonNull Class>();
 
 	/**
 	 *  Map from navigable property to sequential index in any TypedModel.
 	 */
-	private final @NonNull Map<@NonNull Property, Integer> property2cacheIndex = new HashMap<@NonNull Property, Integer>();
+	private final @NonNull Map<@NonNull Property, @NonNull Integer> property2cacheIndex = new HashMap<@NonNull Property, @NonNull Integer>();
 
 	/**
 	 *  Map from navigable property to sequential index in a checkable TypedModel.
@@ -379,7 +379,7 @@ public class QVTiTransformationAnalysis
 		analyzeProperties();
 	}
 
-	public @NonNull Set<org.eclipse.ocl.pivot.Class> getAllInstancesClasses() {
+	public @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> getAllInstancesClasses() {
 		return allInstancesClasses;
 	}
 
@@ -395,7 +395,7 @@ public class QVTiTransformationAnalysis
 		return property2cacheIndex.size();
 	}
 
-	public @NonNull Map<@NonNull Property, Integer> getCaches() {
+	public @NonNull Map<@NonNull Property, @NonNull Integer> getCaches() {
 		return property2cacheIndex;
 	}
 	
@@ -410,18 +410,18 @@ public class QVTiTransformationAnalysis
 	/**
 	 * Return a Map from each instanceClasses to the subset of instanceClasses that are transitive superClasses of the particular instanceClass.
 	 */
-	public @NonNull Map<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>> getInstancesClassAnalysis(@NonNull Iterable<org.eclipse.ocl.pivot.Class> instanceClasses) {
-		Map<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>> instancesClassAnalysis = new HashMap<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>>();
+	public @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @Nullable List<org.eclipse.ocl.pivot.@NonNull Class>> getInstancesClassAnalysis(@NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Class> instanceClasses) {
+		Map<org.eclipse.ocl.pivot.@NonNull Class, @Nullable List<org.eclipse.ocl.pivot.@NonNull Class>> instancesClassAnalysis = new HashMap<org.eclipse.ocl.pivot.@NonNull Class, @Nullable List<org.eclipse.ocl.pivot.@NonNull Class>>();
 		MetamodelManagerInternal metamodelManager = environmentFactory.getMetamodelManager();
-		for (@SuppressWarnings("null")org.eclipse.ocl.pivot.@NonNull Class instanceClass : instanceClasses) {
+		for (org.eclipse.ocl.pivot.@NonNull Class instanceClass : instanceClasses) {
 			CompleteClass completeInstanceClass = metamodelManager.getCompleteClass(instanceClass);
-			instancesClassAnalysis.put(completeInstanceClass.getPrimaryClass(),  null);
+			instancesClassAnalysis.put(completeInstanceClass.getPrimaryClass(), null);
 		}
-		for (@SuppressWarnings("null")org.eclipse.ocl.pivot.@NonNull Class instanceClass : instancesClassAnalysis.keySet()) {
+		for (org.eclipse.ocl.pivot.@NonNull Class instanceClass : instancesClassAnalysis.keySet()) {
 			List<org.eclipse.ocl.pivot.Class> superInstanceClasses = new ArrayList<org.eclipse.ocl.pivot.Class>();
 			superInstanceClasses.add(instanceClass);
 			CompleteClass completeClass = metamodelManager.getCompleteClass(instanceClass);
-			for (CompleteClass superCompleteClass : completeClass.getProperSuperCompleteClasses()) {
+			for (@NonNull CompleteClass superCompleteClass : completeClass.getProperSuperCompleteClasses()) {
 				org.eclipse.ocl.pivot.Class superClass = superCompleteClass.getPrimaryClass();
 				if (instancesClassAnalysis.containsKey(superClass)) {
 					superInstanceClasses.add(superClass);

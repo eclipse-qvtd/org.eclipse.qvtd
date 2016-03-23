@@ -253,20 +253,38 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		List<RealizedVariable> pRealizedVariables = new ArrayList<RealizedVariable>();
 		for (@SuppressWarnings("null")@NonNull BottomPattern pBottomPattern : pBottomPatterns) {
 			pRealizedVariables.addAll(pBottomPattern.getRealizedVariable());
+		}
+		Collections.sort(pRealizedVariables, new Comparator<NamedElement>()
+		{
+			@Override
+			public int compare(NamedElement o1, NamedElement o2) {
+				return o1.getName().compareTo(o2.getName());
+			}		
+		});
+		List<CGValuedElement> cgRealizedVariables = cgMappingExp.getRealizedVariables();
+		for (@SuppressWarnings("null")@NonNull RealizedVariable pRealizedVariable : pRealizedVariables) {
+			CGRealizedVariable cgVariable = getRealizedVariable(pRealizedVariable);
+			cgRealizedVariables.add(cgVariable);
+		}
+		for (@SuppressWarnings("null")@NonNull BottomPattern pBottomPattern : pBottomPatterns) {
 			for (@SuppressWarnings("null")@NonNull Variable asVariable : pBottomPattern.getVariable()) {
 				OCLExpression asInit = asVariable.getOwnedInit();
-				if (QVTimperativeUtil.isConnectionAccumulator(asVariable)) {
+				if (asVariable instanceof ConnectionVariable) {
+					CGAccumulator cgAccumulator = CGModelFactory.eINSTANCE.createCGAccumulator();
+					cgAccumulator.setAst(asVariable);
+					cgAccumulator.setName(asVariable.getName());
 					if (asInit != null) {
 						CGValuedElement cgInit = doVisit(CGValuedElement.class, asInit);
-						CGAccumulator cgAccumulator = CGModelFactory.eINSTANCE.createCGAccumulator();
-						cgAccumulator.setName(asVariable.getName());
 						cgAccumulator.setTypeId(cgInit.getTypeId());
 						cgAccumulator.setInit(cgInit);
 //						cgAccumulator.setRequired(true);
-						cgAccumulator.setNonNull();
-						cgMappingExp.getOwnedAccumulators().add(cgAccumulator);
-						getVariablesStack().putVariable(asVariable, cgAccumulator);
 					}
+					else {
+						cgAccumulator.setTypeId(context.getTypeId(asVariable.getTypeId()));
+					}
+					cgAccumulator.setNonNull();
+					cgMappingExp.getOwnedAccumulators().add(cgAccumulator);
+					getVariablesStack().putVariable(asVariable, cgAccumulator);
 				}
 				else {
 					if (asInit != null) {
@@ -274,18 +292,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 					}
 				}
 			}
-		}
-		Collections.sort(pRealizedVariables, new Comparator<NamedElement>()
-			{
-				@Override
-				public int compare(NamedElement o1, NamedElement o2) {
-					return o1.getName().compareTo(o2.getName());
-				}		
-			});
-		List<CGValuedElement> cgRealizedVariables = cgMappingExp.getRealizedVariables();
-		for (@SuppressWarnings("null")@NonNull RealizedVariable pRealizedVariable : pRealizedVariables) {
-			CGRealizedVariable cgVariable = getRealizedVariable(pRealizedVariable);
-			cgRealizedVariables.add(cgVariable);
 		}
 		List<CGConnectionAssignment> cgConnectionAssignments = cgMappingExp.getConnectionAssignments();
 		List<CGPropertyAssignment> cgPropertyAssignments = cgMappingExp.getAssignments();
@@ -572,7 +578,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		assert cgVariable instanceof CGConnectionVariable;
 		CGValuedElement initValue = doVisit(CGValuedElement.class, asInitValue);
 		CGConnectionAssignment cgConnectionAssignment = QVTiCGModelFactory.eINSTANCE.createCGConnectionAssignment();
-		cgConnectionAssignment.setConnectionVariable((CGConnectionVariable) cgVariable);
+		cgConnectionAssignment.setConnectionVariable(cgVariable);
 		cgConnectionAssignment.setInitValue(initValue);
 		cgConnectionAssignment.setTypeId(initValue.getTypeId());
 		cgConnectionAssignment.setRequired(initValue.isRequired());
@@ -590,7 +596,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		assert (cgVariable instanceof CGConnectionVariable) || (cgVariable instanceof CGAccumulator);
 		CGValuedElement initValue = doVisit(CGValuedElement.class, asInitValue);
 		CGConnectionAssignment cgConnectionAssignment = QVTiCGModelFactory.eINSTANCE.createCGConnectionAssignment();
-		cgConnectionAssignment.setConnectionVariable((CGConnectionVariable) cgVariable);
+		cgConnectionAssignment.setConnectionVariable(cgVariable);
 		cgConnectionAssignment.setInitValue(initValue);
 		cgConnectionAssignment.setTypeId(initValue.getTypeId());
 		cgConnectionAssignment.setRequired(initValue.isRequired());

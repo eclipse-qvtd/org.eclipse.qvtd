@@ -30,7 +30,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<QVTiCodeGenerator>
 	/**
 	 * Map from an oppositeProperty that requites a cache to the global name of that cache. 
 	 */
-	private /*@LazyNonNull*/ Map<Property, String> oppositeProperty2oppositeCacheName = null;
+	private /*@LazyNonNull*/ Map<@NonNull Property, @NonNull String> oppositeProperty2oppositeCacheName = null;
 
 	public QVTiGlobalContext(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
@@ -38,15 +38,17 @@ public class QVTiGlobalContext extends JavaGlobalContext<QVTiCodeGenerator>
 		nameManager.reserveName(MODELS_NAME, null);
 	}
 
-	public String addOppositeProperty(@NonNull Property pivotProperty) {
+	public @NonNull String addOppositeProperty(@NonNull Property pivotProperty) {
 		assert !pivotProperty.isIsImplicit();
 		if (oppositeProperty2oppositeCacheName == null) {
-			oppositeProperty2oppositeCacheName = new HashMap<Property, String>();
+			oppositeProperty2oppositeCacheName = new HashMap<@NonNull Property, @NonNull String>();
 		}
 		if (!oppositeProperty2oppositeCacheName.containsKey(pivotProperty)) {
 			oppositeProperty2oppositeCacheName.put(pivotProperty, nameManager.getGlobalSymbolName(null, "OPPOSITE_OF_" + pivotProperty.getOwningClass().getName() + "_" + pivotProperty.getName()));
 		}
-		return oppositeProperty2oppositeCacheName.get(pivotProperty);
+		String name = oppositeProperty2oppositeCacheName.get(pivotProperty);
+		assert name != null;
+		return name;
 	}
 	
 	@Override
@@ -54,7 +56,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<QVTiCodeGenerator>
 		return new QVTiLocalContext(this, cgScope);
 	}
 
-	public @Nullable Map<Property, String> getOppositeProperties() {
+	public @Nullable Map<@NonNull Property, @NonNull String> getOppositeProperties() {
 		return oppositeProperty2oppositeCacheName;
 	}
 }

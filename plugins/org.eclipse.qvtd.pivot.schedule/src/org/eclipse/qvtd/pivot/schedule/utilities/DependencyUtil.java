@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
@@ -24,23 +25,23 @@ public class DependencyUtil
 		/**
 		 * Set of AbstractDatums that have been fully-produced (all producing actions have been ordered).
 		 */
-		private final @NonNull Set<AbstractDatum> fullyProducedDatums = new HashSet<AbstractDatum>();
+		private final @NonNull Set<@NonNull AbstractDatum> fullyProducedDatums = new HashSet<@NonNull AbstractDatum>();
 
 		/**
 		 * Set of AbstractDatums that have been partially-produced (at least one producing actions has been ordered).
 		 */
-		private final @NonNull Set<AbstractDatum> partiallyProducedDatums = new HashSet<AbstractDatum>();
+		private final @NonNull Set<@NonNull AbstractDatum> partiallyProducedDatums = new HashSet<@NonNull AbstractDatum>();
 
 		/**
 		 * Queue of AbstractDatums that have been fully produced but whose requirers have yet to be ordered.
 		 */
-		private final @NonNull Deque<AbstractDatum> fullyReadyDatums = new LinkedList<AbstractDatum>();
+		private final @NonNull Deque<@NonNull AbstractDatum> fullyReadyDatums = new LinkedList<@NonNull AbstractDatum>();
 
 		/**
 		 * Set of MappingActions whose order has been determined. 
 		 */
-		private final @NonNull Set<AbstractAction> orderedActions = new HashSet<AbstractAction>();
-		private final @NonNull List<AbstractAction> orderedActionList = new ArrayList<AbstractAction>();
+		private final @NonNull Set<@NonNull AbstractAction> orderedActions = new HashSet<@NonNull AbstractAction>();
+		private final @NonNull List<@NonNull AbstractAction> orderedActionList = new ArrayList<@NonNull AbstractAction>();
 		
 		public NaturalOrderer(@NonNull Schedule schedule) {
 			this.schedule = schedule;
@@ -54,11 +55,11 @@ public class DependencyUtil
 			assert !orderedActions.contains(abstractAction) : abstractAction.getClass().getSimpleName() + " " + abstractAction + " has already been ordered";
 			orderedActions.add(abstractAction);
 			orderedActionList.add(abstractAction);
-			for (AbstractDatum abstractDatum : abstractAction.getProductions()) {
+			for (@NonNull AbstractDatum abstractDatum : ClassUtil.nullFree(abstractAction.getProductions())) {
 				partiallyProducedDatums.add(abstractDatum);
 //				System.out.println("Partially produced " + abstractDatum);
 				boolean fullyProduced = true;
-				for (AbstractAction producingAction : abstractDatum.getProducedBy()) {
+				for (@NonNull AbstractAction producingAction : ClassUtil.nullFree(abstractDatum.getProducedBy())) {
 					if (!orderedActions.contains(producingAction)) {
 						fullyProduced = false;
 						break;
@@ -102,15 +103,15 @@ public class DependencyUtil
 		/**
 		 * Return the actions as an ordered list, or null if an ordering could not be established.
 		 */
-		public @Nullable List<AbstractAction> computeOrdering() {
+		public @Nullable List<@NonNull AbstractAction> computeOrdering() {
 			/**
 			 * Queue of AbstractDatums that have been partially produced but whose requirers have yet to be ordered.
 			 */
-			Deque<AbstractAction> partiallyReadyActions = new LinkedList<AbstractAction>();
+			Deque<@NonNull AbstractAction> partiallyReadyActions = new LinkedList<@NonNull AbstractAction>();
 			/**
 			 * Queue of AbstractDatums that have been partially produced but whose requirers have yet to be ordered.
 			 */
-			Deque<AbstractAction> notReadyActions = new LinkedList<AbstractAction>();
+			Deque<@NonNull AbstractAction> notReadyActions = new LinkedList<@NonNull AbstractAction>();
 			//
 			//	Assign all un-produced AbstractDatum (inputs) to the readyDatums Set.
 			//
@@ -144,12 +145,12 @@ public class DependencyUtil
 			for (boolean hasFullyReadyDatum; (hasFullyReadyDatum = !fullyReadyDatums.isEmpty()) || !partiallyReadyActions.isEmpty() || !notReadyActions.isEmpty(); ) {
 				if (hasFullyReadyDatum) {
 					AbstractDatum readyDatum = fullyReadyDatums.pop();
-					for (AbstractAction candidateAction : readyDatum.getRequiredBy()) {
+					for (@NonNull AbstractAction candidateAction : ClassUtil.nullFree(readyDatum.getRequiredBy())) {
 //						System.out.println("candidateAction " + candidateAction);
 						if (!orderedActions.contains(candidateAction)) {
 							boolean allRequisitesFullyProduced = true;
 							boolean allRequisitesPartiallyProduced = true;
-							for (AbstractDatum abstractDatum : candidateAction.getRequisites()) {
+							for (@NonNull AbstractDatum abstractDatum : ClassUtil.nullFree(candidateAction.getRequisites())) {
 								if (!partiallyProducedDatums.contains(abstractDatum)) {
 									allRequisitesFullyProduced = false;
 									allRequisitesPartiallyProduced = false;

@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.CompletePackage;
@@ -258,22 +259,22 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	/**
 	 * The model name to typed model bit mapping.
 	 */
-	protected final @NonNull Map<String, Integer> name2bit = new HashMap<String, Integer>();
+	protected final @NonNull Map<@Nullable String, @NonNull Integer> name2bit = new HashMap<@Nullable String, @NonNull Integer>();
 
 	/**
 	 * The bit number to typed model 'mapping'.
 	 */
-	protected final @NonNull List<TypedModel> bit2typedModel = new ArrayList<TypedModel>();
+	protected final @NonNull List<@NonNull TypedModel> bit2typedModel = new ArrayList<@NonNull TypedModel>();
 	
 	/**
 	 * Map from Integer to all in-use Constant Usages
 	 */
-	private final @NonNull Map<Integer, @NonNull DomainUsageConstant> constantUsages = new HashMap<Integer, @NonNull DomainUsageConstant>();
+	private final @NonNull Map<@NonNull Integer, @NonNull DomainUsageConstant> constantUsages = new HashMap<@NonNull Integer, @NonNull DomainUsageConstant>();
 
 	/**
 	 * Map from Integer to all single TypedModel Constant Usages
 	 */
-	private final @NonNull Map<Integer, DomainUsageConstant> validUsages = new HashMap<Integer, DomainUsageConstant>();
+	private final @NonNull Map<@NonNull Integer, @NonNull DomainUsageConstant> validUsages = new HashMap<@NonNull Integer, @NonNull DomainUsageConstant>();
 
 	/**
 	 * The TypedModels that are not primitive and not checkable and not enforceable.
@@ -293,22 +294,22 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	/**
 	 * The domains in which each class may be used.
 	 */
-	protected final @NonNull Map<org.eclipse.ocl.pivot.Class, DomainUsageConstant> class2usage = new HashMap<org.eclipse.ocl.pivot.Class, DomainUsageConstant>();
+	protected final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull DomainUsageConstant> class2usage = new HashMap<org.eclipse.ocl.pivot.@NonNull Class, @NonNull DomainUsageConstant>();
 
 	/**
 	 * The domains in which the containing class of a property may be used.
 	 */
-	protected final @NonNull Map<Property, DomainUsage> property2containingClassUsage = new HashMap<Property, DomainUsage>();
+	protected final @NonNull Map<@NonNull Property, @NonNull DomainUsage> property2containingClassUsage = new HashMap<@NonNull Property, @NonNull DomainUsage>();
 
 	/**
 	 * The domains in which the referred type of a property may be used.
 	 */
-	protected final @NonNull Map<Property, @NonNull DomainUsage> property2referredTypeUsage = new HashMap<Property, @NonNull DomainUsage>();
+	protected final @NonNull Map<@NonNull Property, @NonNull DomainUsage> property2referredTypeUsage = new HashMap<@NonNull Property, @NonNull DomainUsage>();
 	
 	/**
 	 * The nested analyses for declared operations.
 	 */
-	protected final @NonNull Map<Operation, DomainUsageAnalysis.Internal> operation2analysis = new HashMap<Operation, DomainUsageAnalysis.Internal>();
+	protected final @NonNull Map<@NonNull Operation, DomainUsageAnalysis.@NonNull Internal> operation2analysis = new HashMap<@NonNull Operation, DomainUsageAnalysis.@NonNull Internal>();
 
 	private final @NonNull TypedModel primitiveTypeModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 
@@ -389,10 +390,10 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		int unenforceableMask = 0;
 		int enforceableMask = 0;
 		CompleteModel completeModel = context.getCompleteModel();
-		for (TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {
+		for (@NonNull TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {
 			int nextBit = add(typedModel);
 			int bitMask = 1 << nextBit;
-			DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);
+			@NonNull DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);
 			validUsages.put(bitMask, typedModelUsage);
 			boolean isEnforceable = false;
 			boolean isUnenforceable = false;
@@ -419,7 +420,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			if (ownedContext != null) {
 				setUsage(ownedContext, typedModelUsage);
 			}
-			Set<CompleteClass> completeClasses = new HashSet<CompleteClass>();
+			Set<@NonNull CompleteClass> completeClasses = new HashSet<@NonNull CompleteClass>();
 // TODO		There is an issue with extending transformations, because just classes extended by the
 //			the extending metamodel are tracked. Following code tries to workaround this issue. Also take into account
 //			that pivot/ocl are filtered. This might be an issue, when the transformations involve the own pivot metamodel 
@@ -429,27 +430,30 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 //			pckQueue.addAll(allPackages);
 //			while (!pckQueue.isEmpty()) {
 //			Package asPackage = pckQueue.pop();
-			for (org.eclipse.ocl.pivot.Package asPackage : QVTbaseUtil.getAllUsedPackages(typedModel)) {
+			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : QVTbaseUtil.getAllUsedPackages(typedModel)) {
 				CompletePackage completePackage = completeModel.getCompletePackage(asPackage);
-				for (CompleteClass completeClass : completePackage.getOwnedCompleteClasses()) {
-					if (completeClass != null) {
-						for (CompleteClass superCompleteClass : completeClass.getSuperCompleteClasses()) {
-							completeClasses.add(superCompleteClass);
-						}
+				for (@NonNull CompleteClass completeClass : ClassUtil.nullFree(completePackage.getOwnedCompleteClasses())) {
+					for (@NonNull CompleteClass superCompleteClass : completeClass.getSuperCompleteClasses()) {
+						completeClasses.add(superCompleteClass);
 					}
 				}
 			}
-			for (CompleteClass completeClass : completeClasses) {
-				for (org.eclipse.ocl.pivot.Class asClass : completeClass.getPartialClasses()) {
+			for (@NonNull CompleteClass completeClass : completeClasses) {
+				for (org.eclipse.ocl.pivot.@NonNull Class asClass : completeClass.getPartialClasses()) {
 					DomainUsageConstant oldUsage = class2usage.get(asClass);
-					DomainUsageConstant newUsage = oldUsage != null ? typedModelUsage.union(oldUsage) : typedModelUsage;
+					DomainUsageConstant classUsage = typedModelUsage;
+					if ((asClass instanceof DataType) && !(asClass instanceof CollectionType)) {	// FIXME use a visitor ? perhaps CollectionTypes are not evidence of usage
+						classUsage = getPrimitiveUsage();
+					}
+					DomainUsageConstant newUsage = oldUsage != null ? classUsage.union(oldUsage) : classUsage;
 					class2usage.put(asClass, newUsage);
 				}
 			}
 		}
-		for (org.eclipse.ocl.pivot.Class asClass : class2usage.keySet()) {
+		for (org.eclipse.ocl.pivot.@NonNull Class asClass : class2usage.keySet()) {
 			DomainUsage newUsage = class2usage.get(asClass);
-			for (Property property : asClass.getOwnedProperties()) {
+			assert newUsage != null;
+			for (@NonNull Property property : ClassUtil.nullFree(asClass.getOwnedProperties())) {
 				property2containingClassUsage.put(property, newUsage);
 				DomainUsage referredTypeUsage = null;
 				for (Element annotation : property.getOwnedAnnotations()) {
@@ -683,7 +687,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		return primitiveTypeModel;
 	}
 
-	public @NonNull DomainUsage getPrimitiveUsage() {
+	public @NonNull DomainUsageConstant getPrimitiveUsage() {
 		DomainUsageConstant primitiveUsage = constantUsages.get(PRIMITIVE_USAGE_BIT_MASK);
 		assert primitiveUsage != null;
 		return primitiveUsage;
@@ -694,7 +698,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		return this;
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull TypedModel getTypedModel(int i) {
 		return bit2typedModel.get(i);
 	}

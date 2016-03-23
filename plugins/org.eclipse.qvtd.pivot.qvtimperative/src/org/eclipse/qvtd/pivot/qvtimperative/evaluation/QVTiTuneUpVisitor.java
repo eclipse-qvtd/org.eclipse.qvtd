@@ -44,6 +44,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
@@ -165,6 +166,11 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 		if ((ownedLast != null) && (ownedLast.accept(this) != Boolean.TRUE)) {
 			return Boolean.FALSE;
 		}
+		return Boolean.TRUE;
+	}
+
+	@Override
+	public Boolean visitConnectionStatement(@NonNull ConnectionStatement object) {
 		return Boolean.TRUE;
 	}
 

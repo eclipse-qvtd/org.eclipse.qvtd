@@ -846,8 +846,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	
 	@Override
 	public @Nullable DomainUsage visitVariableExp(@NonNull VariableExp object) {
-		DomainUsage usage = element2usage.get(object.getReferredVariable());
-		assert usage != null : object.getReferredVariable() + " usage not defined";
+		VariableDeclaration referredVariable = object.getReferredVariable();
+		DomainUsage usage = visit(referredVariable);
+		assert usage != null : referredVariable + " usage not defined";
 		return usage;
 	}
 }

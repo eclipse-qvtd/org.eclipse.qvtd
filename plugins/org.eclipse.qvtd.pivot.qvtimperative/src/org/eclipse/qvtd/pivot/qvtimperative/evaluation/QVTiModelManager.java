@@ -56,15 +56,15 @@ public class QVTiModelManager extends AbstractModelManager
 	protected final @NonNull MetamodelManager metamodelManager;
 	// TODO how to manage aliases?
 	/** Map a typed model to its resource (model). */
-	private @NonNull Map<TypedModel, @NonNull Resource> modelResourceMap = new HashMap<TypedModel, @NonNull Resource>();
-	private @NonNull Map<Resource, TypedModel> resource2typedModel = new HashMap<Resource, TypedModel>();
+	private @NonNull Map<@NonNull TypedModel, @NonNull Resource> modelResourceMap = new HashMap<@NonNull TypedModel, @NonNull Resource>();
+	private @NonNull Map<@NonNull Resource, @NonNull TypedModel> resource2typedModel = new HashMap<@NonNull Resource, @NonNull TypedModel>();
 	
-	private @NonNull Map<TypedModel, @NonNull List<EObject>> modelElementsMap = new HashMap<TypedModel, @NonNull List<EObject>>();
+	private @NonNull Map<@NonNull TypedModel, @NonNull List<@NonNull EObject>> modelElementsMap = new HashMap<@NonNull TypedModel, @NonNull List<@NonNull EObject>>();
 
 	/**
 	 * The types upon which execution of the transformation may invoke allInstances().
 	 */
-	private @NonNull Set<org.eclipse.ocl.pivot.Class> allInstancesClasses;
+	private @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses;
 
 	/**
 	 * Array of caches for the un-navigable opposite of each used property. 
@@ -83,7 +83,7 @@ public class QVTiModelManager extends AbstractModelManager
 	/**
 	 * The run-time instance of each TypedModel.
 	 */
-	private /*@LazyNonNull*/ Map<TypedModel, TypedModelInstance> typedModel2typedModelInstance = null;
+	private /*@LazyNonNull*/ Map<@NonNull TypedModel, @NonNull TypedModelInstance> typedModel2typedModelInstance = null;
 	
 	/**
 	 * Instantiates a new QVTi Domain Manager. Responsible for creating new
@@ -122,11 +122,11 @@ public class QVTiModelManager extends AbstractModelManager
 	 */
 	public void addModelElement(@NonNull TypedModel model, @NonNull Object element) {
 	    
-	    List<EObject> elements = modelElementsMap.get(model);
+	    List<@NonNull EObject> elements = modelElementsMap.get(model);
 	    if (elements == null) {
 			Resource resource = modelResourceMap.get(model);
 			if (resource != null) {
-				elements = new ArrayList<EObject>(resource.getContents());
+				elements = new ArrayList<@NonNull EObject>(resource.getContents());
 			    modelElementsMap.put(model, elements);
 			}
 	    }
@@ -181,7 +181,7 @@ public class QVTiModelManager extends AbstractModelManager
 	 *
 	 * @return a collection of all the resources
 	 */
-	public Collection<Resource> getAllModelResources() {
+	public @NonNull Collection<@NonNull Resource> getAllModelResources() {
 		return modelResourceMap.values();
 	}
 
@@ -192,15 +192,14 @@ public class QVTiModelManager extends AbstractModelManager
      * @param type the type of the elements that are retrieved
      * @return the instances
      */
-    public List<@NonNull Object> getElementsByType(@Nullable TypedModel model, @NonNull Type type) {
-        
+    public @NonNull List<@NonNull Object> getElementsByType(@Nullable TypedModel model, @NonNull Type type) {
         List<@NonNull Object> elements = new ArrayList<@NonNull Object>();
         // Is the TypedModel the middle or output, hence we have elements in the elementsMap
         if (modelElementsMap.containsKey(model)) {
-            List<EObject> roots = modelElementsMap.get(model);
+            List<@NonNull EObject> roots = modelElementsMap.get(model);
             assert roots != null;
-			for (EObject root : roots) {
-                if (root != null) {
+			for (@NonNull EObject root : roots) {
+    //            if (root != null) {
 					//if (root.eClass().getName().equals(type.getName())) {
 					if (isInstance(type, root)) {
 						elements.add(root);
@@ -213,7 +212,7 @@ public class QVTiModelManager extends AbstractModelManager
 							elements.add(element);
 						}
 					}
-				}
+	//			}
             }
         }
         else {
@@ -414,7 +413,7 @@ public class QVTiModelManager extends AbstractModelManager
 			if (elements == null) {
 				elements = new HashSet<@NonNull Object>();
 				kind2instances.put(type, elements);
-				for (Object o : modelManager.getElementsByType(typedModel, type)) {
+				for (@NonNull Object o : modelManager.getElementsByType(typedModel, type)) {
 					elements.add(o);
 				}
 			}
@@ -431,7 +430,7 @@ public class QVTiModelManager extends AbstractModelManager
 				elements = new HashSet<@NonNull Object>();
 				type2instances.put(type, elements);
 				EObject eClass = type.getESObject();
-				for (Object eObject : getObjectsOfKind(type)) {
+				for (@NonNull Object eObject : getObjectsOfKind(type)) {
 					if (modelManager.eClass(eObject) == eClass) {
 						elements.add(eObject);
 					}
@@ -470,7 +469,7 @@ public class QVTiModelManager extends AbstractModelManager
 
 	public @NonNull TypedModelInstance getTypedModelInstance(@NonNull TypedModel typedModel) {
 		if (typedModel2typedModelInstance == null) {
-			typedModel2typedModelInstance = new HashMap<TypedModel, TypedModelInstance>();
+			typedModel2typedModelInstance = new HashMap<@NonNull TypedModel, @NonNull TypedModelInstance>();
 		}
 		TypedModelInstance typedModelInstance = typedModel2typedModelInstance.get(typedModel);
 		if (typedModelInstance == null) {

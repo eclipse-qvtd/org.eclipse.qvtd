@@ -28,9 +28,12 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
+import org.eclipse.ocl.pivot.evaluation.tx.InvocationFailedException;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.CollectionValue;
@@ -50,6 +53,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -183,7 +187,14 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				BottomPattern enforceableBottomPattern = enforceableDomain.getBottomPattern();
 				assert enforceableBottomPattern.getAssignment().isEmpty();
 				assert enforceableBottomPattern.getPredicate().isEmpty();
-				for (Variable rVar : enforceableBottomPattern.getVariable()) {
+				for (@NonNull Variable rVar : ClassUtil.nullFree(enforceableBottomPattern.getVariable())) {
+					OCLExpression ownedInit = rVar.getOwnedInit();
+					if (ownedInit != null) {
+						Object initValue = ownedInit.accept(undecoratedVisitor);
+						replace(rVar, initValue);
+					}
+				}
+				for (@NonNull RealizedVariable rVar : ClassUtil.nullFree(enforceableBottomPattern.getRealizedVariable())) {
 					OCLExpression ownedInit = rVar.getOwnedInit();
 					if (ownedInit != null) {
 						Object initValue = ownedInit.accept(undecoratedVisitor);
@@ -200,20 +211,27 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
         // variable declarations/initializations
 		//
 		for (Variable rVar : middleBottomPattern.getVariable()) {
-			OCLExpression ownedInit = rVar.getOwnedInit();
-			if (ownedInit != null) {
-				Object initValue = ownedInit.accept(undecoratedVisitor);
-//				assert initValue != null;
-				if (QVTimperativeUtil.isConnectionAccumulator(rVar)) {
-					CollectionValue.Accumulator accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) ownedInit.getTypeId());
+			if (rVar instanceof ConnectionVariable) {
+				CollectionValue.Accumulator accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) rVar.getTypeId());
+				OCLExpression ownedInit = rVar.getOwnedInit();
+				if (ownedInit != null) {
+					Object initValue = ownedInit.accept(undecoratedVisitor);
+					accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) ownedInit.getTypeId());
 					if (initValue != null) {
 						for (Object value : (Iterable<?>)initValue) {
 							accumulator.add(value);
 						}
 					}
-					replace(rVar, accumulator);
 				}
 				else {
+					accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) rVar.getTypeId());
+				}
+				replace(rVar, accumulator);
+			}
+			else {
+				OCLExpression ownedInit = rVar.getOwnedInit();
+				if (ownedInit != null) {
+					Object initValue = ownedInit.accept(undecoratedVisitor);
 					replace(rVar, initValue);
 				}
 			}
@@ -315,16 +333,26 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 
 	@Override
 	public @Nullable Object internalExecuteMapping(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
-		//
-		//	Check the predicates
-		//
-		if (!doPredicates(mapping, undecoratedVisitor)) {
-			return false;
+		try {
+			//
+			//	Check the predicates
+			//
+			if (!doPredicates(mapping, undecoratedVisitor)) {
+				return false;
+			}
+			//
+			//	Evaluate the enforceable domain expressions.
+			//
+			doEvaluations(mapping, undecoratedVisitor);
 		}
-		//
-		//	Evaluate the enforceable domain expressions.
-		//
-		doEvaluations(mapping, undecoratedVisitor);
+		catch (InvocationFailedException e) {
+			throw e;
+		}
+		catch (Throwable e) {
+			// Mapping failure are just mappings that never happened.
+	    	AbstractTransformer.EXCEPTIONS.println("Execution failure in " + mapping.getName() + " : " + e);
+	    	return false;
+		}
 		//
 		//	Perform the instance model addition and property assignment only after all expressions have been evaluated
 		//	possibly throwing a not-ready exception that bypasses premature commits.

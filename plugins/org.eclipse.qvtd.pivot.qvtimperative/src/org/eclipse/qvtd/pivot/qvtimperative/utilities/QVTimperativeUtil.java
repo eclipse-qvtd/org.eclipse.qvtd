@@ -25,7 +25,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.IterateExp;
 import org.eclipse.ocl.pivot.Iteration;
@@ -94,7 +93,7 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 			return mappingStatementOrStatements;
 		}
 		else  {
-			@SuppressWarnings("null")@NonNull MappingSequence mappingSequence = QVTimperativeFactory.eINSTANCE.createMappingSequence();
+			MappingSequence mappingSequence = QVTimperativeFactory.eINSTANCE.createMappingSequence();
 			List<MappingStatement> mappingStatements = mappingSequence.getMappingStatements();
 			mappingStatements.add(mappingStatementOrStatements);
 			mappingStatements.add(mappingStatement);
@@ -153,19 +152,9 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 		return ml;
 	}
 
-	public static @NonNull MappingSequence createMappingSequence(@NonNull List<MappingStatement> mappingStatements) {
+	public static @NonNull MappingSequence createMappingSequence(@NonNull List<@NonNull MappingStatement> mappingStatements) {
 		MappingSequence mappingSequence = QVTimperativeFactory.eINSTANCE.createMappingSequence();
 		mappingSequence.getMappingStatements().addAll(mappingStatements);
-		return mappingSequence;
-	}
-
-	public static @NonNull MappingSequence zzcreateMappingSequence(MappingStatement... mappingStatements)  {
-		@SuppressWarnings("null")@NonNull MappingSequence mappingSequence = QVTimperativeFactory.eINSTANCE.createMappingSequence();
-		if (mappingStatements != null) {
-			for (@SuppressWarnings("null")@NonNull MappingStatement mappingStatement : mappingStatements) {
-				mappingSequence.getMappingStatements().add(mappingStatement);
-			}
-		}
 		return mappingSequence;
 	}
 
@@ -205,7 +194,7 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 		return propertyCallExp;
 	} */
 
-	public static RealizedVariable createRealizedVariable(@NonNull String name, @NonNull Type type) {
+	public static @NonNull RealizedVariable createRealizedVariable(@NonNull String name, @NonNull Type type) {
 		RealizedVariable realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
 		realizedVariable.setName(name);
 		realizedVariable.setType(type);
@@ -246,51 +235,6 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 			}
 		}
 		return null;
-	}
-
-	public static boolean isConnectionAccumulator(@NonNull Variable asVariable) {
-		OCLExpression ownedInit = asVariable.getOwnedInit();
-		if (!(ownedInit instanceof VariableExp) && !(ownedInit instanceof CollectionLiteralExp)) {
-			return false;
-		}
-		Mapping asMapping = getContainingMapping(asVariable);
-		assert asMapping != null;
-		return isConnectionAccumulator(asVariable, asMapping.getMappingStatement());
-	}
-	private static boolean isConnectionAccumulator(@NonNull VariableDeclaration asVariable, MappingStatement mappingStatement) {
-		if (mappingStatement instanceof MappingCall) {
-			for (MappingCallBinding asBinding : ((MappingCall)mappingStatement).getBinding()) {
-				if ((asBinding.getValue() instanceof VariableExp) && (((VariableExp)asBinding.getValue()).getReferredVariable() == asVariable)) {
-					Variable boundVariable = asBinding.getBoundVariable();
-					assert boundVariable != null;
-					if (isConnectionVariable(boundVariable)) {
-						return true;
-					}
-				}
-			}
-		}
-		else if (mappingStatement instanceof MappingSequence) {
-			for (MappingStatement childStatement : ((MappingSequence)mappingStatement).getMappingStatements()) {
-				if (isConnectionAccumulator(asVariable, childStatement)) {
-					return true;
-				}
-			}
-		}
-		else if (mappingStatement instanceof MappingLoop) {
-			OCLExpression mappingBody = ((MappingLoop)mappingStatement).getOwnedBody();
-			if ((mappingBody instanceof MappingStatement) && isConnectionAccumulator(asVariable, (MappingStatement) mappingBody)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public static boolean isConnectionVariable(@NonNull Variable asVariable) {
-		Area asArea = QVTimperativeUtil.getContainingArea(asVariable);
-		if ((asArea instanceof Mapping) && (asVariable.getType() instanceof CollectionType))  {
-			return true;
-		}
-		return false;
 	}
 
 	public static boolean isPrimitiveVariable(@NonNull Variable asVariable) {

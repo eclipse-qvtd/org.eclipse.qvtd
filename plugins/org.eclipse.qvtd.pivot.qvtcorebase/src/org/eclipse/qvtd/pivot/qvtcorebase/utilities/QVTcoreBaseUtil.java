@@ -20,6 +20,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 
 public class QVTcoreBaseUtil extends QVTbaseUtil
 {
@@ -36,6 +37,15 @@ public class QVTcoreBaseUtil extends QVTbaseUtil
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Area) {
 				return (Area) eObject;
+			}
+		}
+		return null;
+	}
+
+	public static @Nullable CorePattern getContainingPattern(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof CorePattern) {
+				return (CorePattern) eObject;
 			}
 		}
 		return null;

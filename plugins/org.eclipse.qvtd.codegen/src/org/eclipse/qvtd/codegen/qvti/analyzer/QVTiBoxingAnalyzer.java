@@ -38,8 +38,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVisitor<Object>
 {
@@ -124,7 +124,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 		MappingCallBinding mappingCallBinding = (MappingCallBinding)cgMappingCallBinding.getAst();
 		Variable boundVariable = mappingCallBinding.getBoundVariable();
 		assert boundVariable != null;
-		if (QVTimperativeUtil.isConnectionVariable(boundVariable)) {
+		if (boundVariable instanceof ConnectionVariable) {
 			//
 		}
 		else if (cgMappingCallBinding.isRequired()) {

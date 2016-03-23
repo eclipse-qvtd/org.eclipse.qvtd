@@ -95,6 +95,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -150,7 +151,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (pArea != null) {
 			BottomPattern pBottomPattern = pArea.getBottomPattern();
 			if (pBottomPattern != null) {
-				for (Assignment pAssignment : pBottomPattern.getAssignment()) {
+				for (@NonNull Assignment pAssignment : ClassUtil.nullFree(pBottomPattern.getAssignment())) {
 					if (pAssignment instanceof PropertyAssignment) {
 						Property pProperty = ((PropertyAssignment)pAssignment).getTargetProperty();
 						if (pProperty != null) {
@@ -180,15 +181,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected @NonNull String @Nullable [] doAllInstances(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
-		Set<org.eclipse.ocl.pivot.Class> allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
+		Set<org.eclipse.ocl.pivot.@NonNull Class> allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
 		if (allInstancesClasses.size() > 0) {
 			NameManager nameManager = getGlobalContext().getNameManager();
-			Map<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>> instancesClassAnalysis = transformationAnalysis.getInstancesClassAnalysis(allInstancesClasses);
+			Map<org.eclipse.ocl.pivot.@NonNull Class, @Nullable List<org.eclipse.ocl.pivot.@NonNull Class>> instancesClassAnalysis = transformationAnalysis.getInstancesClassAnalysis(allInstancesClasses);
 			//
 			// Populate a mapping from instancesClass to linear index.
 			//
-			Map<org.eclipse.ocl.pivot.Class, Integer> instancesClass2index = new HashMap<org.eclipse.ocl.pivot.Class, Integer>(instancesClassAnalysis.size());
-			List<org.eclipse.ocl.pivot.Class> sortedList = new ArrayList<org.eclipse.ocl.pivot.Class>(instancesClassAnalysis.keySet());
+			Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Integer> instancesClass2index = new HashMap<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Integer>(instancesClassAnalysis.size());
+			List<org.eclipse.ocl.pivot.@NonNull Class> sortedList = new ArrayList<org.eclipse.ocl.pivot.@NonNull Class>(instancesClassAnalysis.keySet());
 			Collections.sort(sortedList, NameUtil.NameableComparator.INSTANCE);
 			for (int i = 0; i < sortedList.size(); i++) {
 				instancesClass2index.put(sortedList.get(i), i);
@@ -256,11 +257,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.pushIndentation(null);
 			for (int i = 0; i < sortedList.size(); i++) {
 				org.eclipse.ocl.pivot.Class instancesClass = sortedList.get(i);
-				List<org.eclipse.ocl.pivot.Class> superInstancesClasses = ClassUtil.nonNullState(instancesClassAnalysis.get(instancesClass));
+				List<org.eclipse.ocl.pivot.@NonNull Class> superInstancesClasses = ClassUtil.nonNullState(instancesClassAnalysis.get(instancesClass));
 				int startLength = js.length();
 				js.append("{");
 				boolean isFirst = true;
-				for (org.eclipse.ocl.pivot.Class superInstancesClass : superInstancesClasses) {
+				for (org.eclipse.ocl.pivot.@NonNull Class superInstancesClass : superInstancesClasses) {
 					if (!isFirst) {
 						js.append(",");
 					}
@@ -278,7 +279,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.append(instancesClass.getName());
 				js.append(" -> {");
 				isFirst = true;
-				for (org.eclipse.ocl.pivot.Class superInstancesClass : superInstancesClasses) {
+				for (org.eclipse.ocl.pivot.@NonNull Class superInstancesClass : superInstancesClasses) {
 					if (!isFirst) {
 						js.append(",");
 					}
@@ -311,7 +312,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.appendIsRequired(true);
 		js.append(" String[] {");
 		boolean isFirst = true;
-		for (CGTypedModel cgTypedModel : cgTransformation.getTypedModels()) {
+		for (@NonNull CGTypedModel cgTypedModel : ClassUtil.nullFree(cgTransformation.getTypedModels())) {
 			if (!isFirst) {
 				js.append(", ");
 			}
@@ -337,7 +338,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(", null, null");
 		}
 		js.append(");\n");
-		for (@SuppressWarnings("null")@NonNull CGMapping cgMapping : cgTransformation.getMappings()) {
+		for (@NonNull CGMapping cgMapping : ClassUtil.nullFree(cgTransformation.getMappings())) {
 			if (useClass(cgMapping) && (cgMapping.getFreeVariables().size() > 0)) {
 //				js.append("protected final ");
 //				js.appendIsRequired(true);
@@ -352,8 +353,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("}\n");
 	}
 
-	protected void doConstructorConstants(/*@NonNull*/ List<CGMapping> cgMappings) {
-		for (@SuppressWarnings("null")@NonNull CGMapping cgMapping : cgMappings) {
+	protected void doConstructorConstants(/*@NonNull*/ List<@NonNull CGMapping> cgMappings) {
+		for (@NonNull CGMapping cgMapping : cgMappings) {
 			if (useClass(cgMapping) && (cgMapping.getFreeVariables().size() > 0)) {
 				js.append("protected final ");
 				js.appendIsRequired(true);
@@ -393,15 +394,16 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected void doOppositeCaches(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
-		Map<@NonNull Property, Integer> opposites = transformationAnalysis.getCaches();
+		Map<@NonNull Property, @NonNull Integer> opposites = transformationAnalysis.getCaches();
 		if (opposites.size() <= 0) {
 			return;
 		}
 		js.append("\n/*\n * Property-source to Property-target unnavigable navigation caches\n */\n");
-		Map<String, @NonNull Property> key2property = new HashMap<String, @NonNull Property>();
-		for (Map.Entry<@NonNull Property, Integer> entry : opposites.entrySet()) {
+		Map<@NonNull String, @NonNull Property> key2property = new HashMap<@NonNull String, @NonNull Property>();
+		for (Map.Entry<@NonNull Property, @NonNull Integer> entry : opposites.entrySet()) {
 			Property property = entry.getKey();
 			String name = getGlobalContext().addOppositeProperty(property);
+			
 			key2property.put(name, property);
 		}
 		List<String> sortedKeys = new ArrayList<String>(key2property.keySet());
@@ -519,7 +521,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		MappingCallBinding mappingCallBinding = (MappingCallBinding)cgMappingCallBinding.getAst();
 		Variable boundVariable = mappingCallBinding.getBoundVariable();
 		assert boundVariable != null;
-		if (QVTimperativeUtil.isConnectionVariable(boundVariable)) {
+		if (boundVariable instanceof ConnectionVariable) {
 			return null;
 		}
 		CGValuedElement value = cgMappingCallBinding.getValue();
@@ -699,9 +701,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		Element asPropertyCallExp = cgPropertyCallExp.getAst();
 		CGMapping cgMapping = QVTiCGUtil.getContainingCGMapping(cgPropertyCallExp);
 		Mapping asMapping = cgMapping != null ? (Mapping) cgMapping.getAst() : null;
-		if ((asMapping != null) && "uPropertyCallExp_referredProperty".equals(asMapping.getName())) {
-			asMapping.getName();
-		}
 		if ((asMapping != null) && (asPropertyCallExp instanceof PropertyCallExp)) {
 			isHazardous = transformationAnalysis.isHazardousRead(asMapping, (PropertyCallExp)asPropertyCallExp);
 		}
@@ -920,9 +919,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	@Override
 	public @NonNull Boolean visitCGMapping(@NonNull CGMapping cgMapping) {
-//		if ("associationToForeignKeyLM".equals(cgMapping.getName())) {
-//			System.out.println("Got it");
-//		}
 		JavaLocalContext<?> localContext2 = globalContext.getLocalContext(cgMapping);
 		if (localContext2 != null) {
 			localContext = localContext2;
@@ -941,7 +937,18 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.pushIndentation(null);
 						for (@SuppressWarnings("null")@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
 							js.append("protected ");
-							js.appendDeclaration(cgFreeVariable);
+//							js.appendDeclaration(cgFreeVariable);
+							if (cgFreeVariable instanceof CGConnectionVariable) {
+								js.append("final ");
+								js.appendClassReference(null, cgFreeVariable);
+								js.append(".");
+								js.appendIsRequired(true);
+								js.append(" Accumulator ");						// FIXME Embed properly as a nested typeid
+								js.append(getValueName(cgFreeVariable));
+							}
+							else{
+								js.appendDeclaration(cgFreeVariable);
+							}
 							js.append(";\n");
 						}
 						js.append("\n");
@@ -959,7 +966,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 							String valueName = getValueName(cgFreeVariable);
 							js.append(valueName);
 							js.append(" = ");
-							js.appendClassCast(cgFreeVariable);
+//							js.appendClassCast(cgFreeVariable);
+							if (cgFreeVariable instanceof CGConnectionVariable) {
+								js.append("(");
+								js.appendClassReference(null, cgFreeVariable);
+								js.append(".Accumulator)");						// FIXME Embed properly as a nested typeid
+							}
+							else{
+								js.appendClassCast(cgFreeVariable);
+							}
 							js.append("boundValues[" + i++);
 							js.append("];\n");
 						}
@@ -969,6 +984,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 						js.append("public boolean execute() throws ");
 						js.appendClassReference(ReflectiveOperationException.class);
 						js.append(" {\n");
+						js.pushIndentation(null);
+						js.append("try {\n");
 						js.pushIndentation(null);
 							String savedLocalPrefix = localPrefix;
 							try {
@@ -982,6 +999,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 							finally {
 								localPrefix = savedLocalPrefix;
 							}
+							js.popIndentation();
+							js.append("} catch (Throwable e) {\n");
+							js.pushIndentation(null);
+							js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", e);\n");
+							js.popIndentation();
+							js.append("}\n");
 						js.popIndentation();
 						js.append("}\n");
 						js.append("\n");	
@@ -1035,11 +1058,19 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.appendClassReference(ReflectiveOperationException.class);
 					js.append(" {\n");
 					js.pushIndentation(null);
-						js.append("// predicates and unrealized variables\n");
-						cgBody.accept(this);
-						js.append("return ");
-						js.appendValueName(cgBody);
-						js.append(";\n");
+						js.append("try {\n");
+						js.pushIndentation(null);
+							js.append("// predicates and unrealized variables\n");
+							cgBody.accept(this);
+							js.append("return ");
+							js.appendValueName(cgBody);
+							js.append(";\n");
+						js.popIndentation();
+						js.append("} catch (Throwable e) {\n");
+						js.pushIndentation(null);
+						js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", e);\n");
+						js.popIndentation();
+						js.append("}\n");
 					js.popIndentation();
 					js.append("}\n");
 				}
@@ -1145,10 +1176,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	@Override
 	public @NonNull Boolean visitCGMappingExp(@NonNull CGMappingExp cgMappingExp) {
 //		assert cgMappingExp.getPredicates().isEmpty();		// Get rewritten during JavaPre pass
-		List<CGAccumulator> cgAccumulators = cgMappingExp.getOwnedAccumulators();
+		List<@NonNull CGAccumulator> cgAccumulators = ClassUtil.nullFree(cgMappingExp.getOwnedAccumulators());
 		if (cgAccumulators.size() > 0) {
 			js.append("// connection variables\n");
-			for (CGAccumulator cgAccumulator : cgAccumulators) {
+			for (@NonNull CGAccumulator cgAccumulator : cgAccumulators) {
 				js.append("final ");
 				js.appendClassReference(null, cgAccumulator);
 				js.append(".");
@@ -1164,7 +1195,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.append(");\n");
 				//
 				CGValuedElement cgInit = cgAccumulator.getInit();
-				if (!(cgInit instanceof CGCollectionExp) || !Iterables.isEmpty(((CGCollectionExp)cgInit).getParts())) {
+				if ((cgInit != null) && (!(cgInit instanceof CGCollectionExp) || !Iterables.isEmpty(((CGCollectionExp)cgInit).getParts()))) {
 					final String iteratorName = getSymbolName(null, "iterator");
 					CollectionTypeId collectionTypeId = (CollectionTypeId)cgInit.getASTypeId();
 					assert collectionTypeId != null;
@@ -1196,24 +1227,24 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				}
 			}
 		}
-		List<CGValuedElement> cgRealizedVariables = cgMappingExp.getRealizedVariables();
+		List<@NonNull CGValuedElement> cgRealizedVariables = ClassUtil.nullFree(cgMappingExp.getRealizedVariables());
 		if (cgRealizedVariables.size() > 0) {
 			js.append("// creations\n");
-			for (CGValuedElement cgRealizedVariable : cgRealizedVariables) {
+			for (@NonNull CGValuedElement cgRealizedVariable : cgRealizedVariables) {
 				cgRealizedVariable.accept(this);
 			}
 		}
-		List<CGPropertyAssignment> cgPropertyAssignments = cgMappingExp.getAssignments();
+		List<@NonNull CGPropertyAssignment> cgPropertyAssignments = ClassUtil.nullFree(cgMappingExp.getAssignments());
 		if (cgPropertyAssignments.size()> 0) {
 			js.append("// property assignments\n");
-			for (CGPropertyAssignment cgAssignment : cgPropertyAssignments) {
+			for (@NonNull CGPropertyAssignment cgAssignment : cgPropertyAssignments) {
 				cgAssignment.accept(this);
 			}
 		}
-		List<CGConnectionAssignment> cgConnectionAssignments = cgMappingExp.getConnectionAssignments();
+		List<@NonNull CGConnectionAssignment> cgConnectionAssignments = ClassUtil.nullFree(cgMappingExp.getConnectionAssignments());
 		if (cgConnectionAssignments.size() > 0) {
 			js.append("// connection assignments\n");
-			for (CGConnectionAssignment cgConnectionAssignment : cgConnectionAssignments) {
+			for (@NonNull CGConnectionAssignment cgConnectionAssignment : cgConnectionAssignments) {
 				cgConnectionAssignment.accept(this);
 			}
 		}
@@ -1279,7 +1310,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGValuedElement slotValue = cgMiddlePropertyAssignment.getSlotValue();
 		CGValuedElement initValue = cgMiddlePropertyAssignment.getInitValue();
 		if ((slotValue != null) && (initValue != null)) {
-			Map<Property, String> oppositeProperties = getGlobalContext().getOppositeProperties();
+			Map<@NonNull Property, @NonNull String> oppositeProperties = getGlobalContext().getOppositeProperties();
 			if (oppositeProperties != null) {
 				String cacheName = oppositeProperties.get(pReferredProperty);
 				if (cacheName != null) {
@@ -1361,7 +1392,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	@Override
 	public @Nullable Boolean visitCGSequence(@NonNull CGSequence cgSequence) {
-		for (CGValuedElement cgStatement : cgSequence.getStatements()) {
+		for (@NonNull CGValuedElement cgStatement : ClassUtil.nullFree(cgSequence.getStatements())) {
 			cgStatement.accept(this);
 		}
 		return true;
@@ -1405,7 +1436,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 		@NonNull String @Nullable [] allInstancesNames = doAllInstances(transformationAnalysis);
 		js.append("\n");
-		doConstructorConstants(cgTransformation.getMappings());
+		doConstructorConstants(ClassUtil.nullFree(cgTransformation.getMappings()));
 		js.append("\n");
 		doConstructor(cgTransformation, oppositeIndex2propertyIdName, allInstancesNames);
 		js.append("\n");
@@ -1414,11 +1445,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append("\n");
 		}
 		doRun(cgTransformation);
-		for (CGOperation cgOperation : cgTransformation.getOperations()) {
+		for (@NonNull CGOperation cgOperation : ClassUtil.nullFree(cgTransformation.getOperations())) {
 			js.append("\n");
 			cgOperation.accept(this);
 		}
-		for (CGMapping cgMapping : cgTransformation.getMappings()) {
+		for (@NonNull CGMapping cgMapping : ClassUtil.nullFree(cgTransformation.getMappings())) {
 			js.append("\n");
 			cgMapping.accept(this);
 		}
