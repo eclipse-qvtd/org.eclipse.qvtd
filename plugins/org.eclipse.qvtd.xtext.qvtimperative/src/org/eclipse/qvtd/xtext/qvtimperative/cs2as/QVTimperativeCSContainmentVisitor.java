@@ -70,7 +70,6 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
@@ -78,6 +77,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeDomainCSImpl;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSContainmentVisitor;
 
 public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSContainmentVisitor
@@ -311,8 +311,8 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		EObject eContainer = csElement.eContainer();
 		if ((eContainer instanceof PatternCS) && !(csElement.getOwnedType() instanceof PrimitiveTypeRefCS)) {		// FIXME need clearer syntax
 			EObject eContainerContainer = eContainer.eContainer();
-			if (eContainerContainer instanceof ImperativeDomainCS) {
-				TypedModel typedModel = ((ImperativeDomainCS)eContainerContainer).getDirection();
+			if (eContainerContainer instanceof ImperativeDomainCSImpl) {
+				TypedModel typedModel = ((ImperativeDomainCSImpl)eContainerContainer).basicGetDirection();
 				if (typedModel == null) {
 					refreshNamedElement(ConnectionVariable.class, QVTimperativePackage.Literals.CONNECTION_VARIABLE, csElement);
 					return null;
