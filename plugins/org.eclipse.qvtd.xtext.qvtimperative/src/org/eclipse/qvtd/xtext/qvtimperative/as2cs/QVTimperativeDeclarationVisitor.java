@@ -14,6 +14,7 @@ package org.eclipse.qvtd.xtext.qvtimperative.as2cs;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Element;
@@ -362,6 +363,21 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	@Override
 	public ElementCS visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);
+	}
+
+	@Override
+	public ElementCS visitPredicate(@NonNull Predicate asPredicate) {
+		EObject eContainer = asPredicate.eContainer();
+		if (eContainer instanceof BottomPattern) {
+			Area area = ((BottomPattern)eContainer).getArea();
+			if (area instanceof Mapping) {
+				ImperativePredicateOrAssignmentCS csPredicate = context.refreshElement(ImperativePredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS, asPredicate);
+				csPredicate.setPivot(asPredicate);
+				csPredicate.setOwnedTarget(createExpCS(asPredicate.getConditionExpression()));
+				return csPredicate;
+			}
+		}
+		return super.visitPredicate(asPredicate);
 	}
 
 	@Override
