@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * An AbstractDelegatingQVTcoreBaseCSVisitor delegates all visits.
  */
-public abstract class AbstractDelegatingQVTcoreBaseCSVisitor<R, C, D extends QVTcoreBaseCSVisitor<R>>
+public abstract class AbstractDelegatingQVTcoreBaseCSVisitor<R, C, @NonNull D extends QVTcoreBaseCSVisitor<R>>
 	extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractDelegatingEssentialOCLCSVisitor<R, C, D>
 	implements QVTcoreBaseCSVisitor<R>
 {

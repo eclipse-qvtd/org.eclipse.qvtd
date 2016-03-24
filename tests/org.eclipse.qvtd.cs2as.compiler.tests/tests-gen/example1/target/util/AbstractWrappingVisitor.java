@@ -16,11 +16,11 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * An AbstractWrappingVisitor delegates all visits wrapping the delegation in a call to a preVisit function and a postVisit function.
  */
-public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
+public abstract class AbstractWrappingVisitor<R, C, @NonNull D extends Visitor<R>, P>
 	extends AbstractVisitor<R, C>
 	implements Visitor<R>
 {
-	protected final D delegate;
+	protected final @NonNull D delegate;
 	
 	protected AbstractWrappingVisitor(@NonNull D delegate, C context) {
 		super(context);
@@ -48,7 +48,6 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	 * 
 	 * @return my wrapped visitor
 	 */
-	@SuppressWarnings("null")
 	protected @NonNull D getDelegate() {
 		return delegate;
 	}

@@ -15,13 +15,13 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * An AbstractDelegatingVisitor delegates all visits.
  */
-public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
+public abstract class AbstractDelegatingVisitor<R, C, @NonNull D extends Visitor<R>>
 	extends AbstractVisitor<R, C>
 	implements Visitor<R>
 {
 	protected final D delegate;
 	
-	protected AbstractDelegatingVisitor(@NonNull D delegate, C context) {
+	protected AbstractDelegatingVisitor(D delegate, C context) {
 		super(context);
 	//	assert delegate != null : "cannot decorate a null visitor"; //$NON-NLS-1$
 		this.delegate = delegate;		
@@ -40,8 +40,7 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 	 * 
 	 * @return my decorated visitor
 	 */
-	@SuppressWarnings("null")
-	protected final @NonNull D getDelegate() {
+	protected final D getDelegate() {
 		return delegate;
 	}
 

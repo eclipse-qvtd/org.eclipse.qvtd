@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * An AbstractDelegatingQVTimperativeVisitor delegates all visits.
  */
-public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, D extends QVTimperativeVisitor<R>>
+public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, @NonNull D extends QVTimperativeVisitor<R>>
 	extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractDelegatingQVTcoreBaseVisitor<R, C, D>
 	implements QVTimperativeVisitor<R>
 {
