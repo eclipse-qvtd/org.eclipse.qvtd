@@ -701,6 +701,29 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		createPollingDependencies();
 	}
 
+	/**
+	 * Add asPredicate to the bottom pattern if any bottom variable is referenced, otherwise add to the guard pattern.
+	 */
+	protected void addPredicate(@NonNull Predicate asPredicate) {
+		boolean isBottom = false;
+		for (TreeIterator<EObject> tit = asPredicate.eAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof VariableExp) {
+				VariableDeclaration variable = ((VariableExp)eObject).getReferredVariable();
+				if ((variable != null) && (variable.eContainer() instanceof BottomPattern)) {
+					isBottom = true;
+					break;
+				}
+			}
+		}
+		if (isBottom) {
+			mapping.getBottomPattern().getPredicate().add(asPredicate);
+		}
+		else {
+			mapping.getGuardPattern().getPredicate().add(asPredicate);
+		}
+	}
+
 /*	@Override
 	public void checkAndEnforceRealizations(@NonNull Map<TypedModel, Map<Property, List<NavigationEdge>>> typedModel2property2realizedEdges) {
 		boolean doDebug = QVTs2QVTiVisitor.POLLED_PROPERTIES.isActive();
@@ -870,16 +893,15 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 * Create a predicate expression for each TRUE 'head'.
 	 */
 	private void createExternalPredicates() {
-		List<Predicate> predicates = mapping.getGuardPattern().getPredicate();
 		for (Node node : region.getNodes()) {
 			if (node.isTrue()) {
 				for (Edge edge : node.getArgumentEdges()) {
 					Node predicateNode = edge.getSource();
 					for (TypedElement typedElement : predicateNode.getTypedElements()) {
 						OCLExpression conditionExpression = typedElement.accept(inlineExpressionCreator);
-						Predicate predicate = QVTbaseFactory.eINSTANCE.createPredicate();
-						predicate.setConditionExpression(conditionExpression);
-						predicates.add(predicate);
+						Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
+						asPredicate.setConditionExpression(conditionExpression);
+						addPredicate(asPredicate);
 					}
 				}
 			}
@@ -1088,7 +1110,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 									OCLExpression matchesExp = createOperationCallExp(targetExp, visitor.getEqualsOperation(), source2targetExp);
 									Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
 									asPredicate.setConditionExpression(matchesExp);
-									mapping.getGuardPattern().getPredicate().add(asPredicate);
+									addPredicate(asPredicate);
 								}
 							}
 						}
