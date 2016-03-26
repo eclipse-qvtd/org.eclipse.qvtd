@@ -76,6 +76,7 @@ import org.eclipse.qvtd.compiler.internal.scheduler.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.scheduler.Node;
 import org.eclipse.qvtd.compiler.internal.scheduler.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.scheduler.Region;
+import org.eclipse.qvtd.compiler.internal.scheduler.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.scheduler.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -435,10 +436,18 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 			for (@NonNull Edge edge : node.getIncomingEdges()) {
 				EdgeRole edgeRole = edge.getEdgeRole();
-				if (edgeRole.isNavigation() && edgeRole.isLoaded()) {
-					OCLExpression source = getExpression(edge.getSource());
-					if (source != null) {
-						return PivotUtil.createNavigationCallExp(source, ((NavigationEdge)edge).getProperty());
+				if (edgeRole.isNavigation()) {
+					if (edgeRole.isLoaded()) {
+						OCLExpression source = getExpression(edge.getSource());
+						if (source != null) {
+							return PivotUtil.createNavigationCallExp(source, ((NavigationEdge)edge).getProperty());
+						}
+					}
+					else if (edgeRole.isPredicated()) {
+						OCLExpression source = create(edge.getSource());
+						if (source != null) {
+							return PivotUtil.createNavigationCallExp(source, ((NavigationEdge)edge).getProperty());
+						}
 					}
 				}
 			}
@@ -691,10 +700,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	public BasicRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		super(visitor, region);
 		this.expressionCreator = new ExpressionCreator();
+		@SuppressWarnings("unused")String name = region.getName();
 		createEmptyDomainsAndPatterns();
 		createHeadAndGuardNodeVariables();
-		createExternalPredicates();
 		createNavigablePredicates();
+		createExternalPredicates();
 		createRealizedVariables();
 		createPropertyAssignments();
 		createConnectionAssignments();
@@ -893,11 +903,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 * Create a predicate expression for each TRUE 'head'.
 	 */
 	private void createExternalPredicates() {
-		for (Node node : region.getNodes()) {
+		for (@NonNull Node node : region.getNodes()) {
 			if (node.isTrue()) {
-				for (Edge edge : node.getArgumentEdges()) {
+				for (@NonNull Edge edge : node.getArgumentEdges()) {
 					Node predicateNode = edge.getSource();
-					for (TypedElement typedElement : predicateNode.getTypedElements()) {
+					for (@NonNull TypedElement typedElement : predicateNode.getTypedElements()) {
 						OCLExpression conditionExpression = typedElement.accept(inlineExpressionCreator);
 						Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
 						asPredicate.setConditionExpression(conditionExpression);
@@ -1038,8 +1048,210 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 * Recurse over the guard nodes and loaded/predicates region and convert the edges to predicates and non-guard nodes to unrealized variables.
 	 */
 	private void createNavigablePredicates() {
-		@SuppressWarnings("null")@NonNull BottomPattern bottomPattern = mapping.getBottomPattern();
-		Set<@NonNull Node> reachableNodes = new HashSet<@NonNull Node>(guardNodes);
+		String name = region.getName();
+		//
+		//	Categorize the relevant navigation edges
+		//
+		Set<@NonNull NavigationEdge> backwardEdges = new HashSet<@NonNull NavigationEdge>();
+		Set<@NonNull NavigationEdge> forwardEdges = new HashSet<@NonNull NavigationEdge>();
+//		Set<@NonNull NavigationEdge> attributeEdges = new HashSet<@NonNull NavigationEdge>();
+		/*
+		 * The nodes that form the traversal forest.
+		 */
+		Set<@NonNull Node> navigableNodes = new HashSet<@NonNull Node>();
+		/*
+		 * The edges that are not traversed while locating each node.
+		 */
+		Set<@NonNull NavigationEdge> untraversedEdges = new HashSet<@NonNull NavigationEdge>();
+		for (@NonNull NavigationEdge edge : region.getNavigationEdges()) {
+			if (edge.isRealized()) {}
+			else if (!edge.isNavigable()) {}
+			else if (edge.isCast()) {}
+			else {
+				assert !edge.isArgument();
+				assert !edge.isComputation();
+				Node sourceNode = edge.getSource();
+				navigableNodes.add(sourceNode);
+				Node targetNode = edge.getTarget();
+				if (targetNode.isNull()) {
+					untraversedEdges.add(edge);
+				}
+				else {
+					targetNode = RegionUtil.getCastTarget(targetNode);
+					Property property = edge.getProperty();
+					if (property.isIsImplicit()) {
+						backwardEdges.add(edge);
+						navigableNodes.add(targetNode);
+					}
+	//				else if (targetNode.isAttributeNode()) {
+	//					attributeEdges.add(edge);
+	//				}
+					else {
+						forwardEdges.add(edge);
+						navigableNodes.add(targetNode);
+					}
+				}
+			}
+		}
+		//
+		//	Identify the edges that need traversal to reach as all nodes preferring forwardEdges.
+		//
+		/*
+		 * The edges that are traversed while locating each node and their depth in the traversal forest.
+		 */
+		Map<@NonNull NavigationEdge, @NonNull Integer> traversedEdge2depth = new HashMap<@NonNull NavigationEdge, @NonNull Integer>();
+		/*
+		 * The incoming edge for each node in the traversal forest, null at a root.
+		 */
+		Map<@NonNull Node, @Nullable NavigationEdge> traversedNode2incomingEdge = new HashMap<@NonNull Node, @Nullable NavigationEdge>();
+		for (@NonNull Node guardNode : guardNodes) {
+			traversedNode2incomingEdge.put(guardNode, null);
+		}
+		Set<@NonNull Node> moreNodes = new HashSet<@NonNull Node>(guardNodes);
+		int depth = 0;
+		while (moreNodes.size() > 0) {
+			//
+			//	Select the forward edges that make progress.
+			//
+			Set<@NonNull Node> moreMoreNodes = new HashSet<@NonNull Node>();
+			for (@NonNull Node sourceNode : moreNodes) {
+				for (@NonNull NavigationEdge edge : sourceNode.getNavigationEdges()) {
+					if (forwardEdges.contains(edge)) {
+						Node targetNode = RegionUtil.getCastTarget(edge.getTarget());
+						if (!traversedNode2incomingEdge.containsKey(targetNode)) {
+							traversedNode2incomingEdge.put(targetNode, edge);
+							moreMoreNodes.add(targetNode);
+							traversedEdge2depth.put(edge, depth);
+						}
+						else {
+							untraversedEdges.add(edge);
+						}
+					}
+				}
+			}
+			if (moreMoreNodes.isEmpty() && (traversedNode2incomingEdge.size() < navigableNodes.size())) {
+				//
+				//	Unblock an incomplete traversal by choosing a backward edge.
+				//
+				for (@NonNull NavigationEdge edge : backwardEdges) {		// FIXME maintain reducing list of possibles
+					Node sourceNode = edge.getSource();
+					if (traversedNode2incomingEdge.containsKey(sourceNode)) {
+						Node targetNode = edge.getTarget();
+						if (!traversedNode2incomingEdge.containsKey(targetNode)) {
+							traversedNode2incomingEdge.put(targetNode, edge);
+							moreMoreNodes.add(targetNode);
+							traversedEdge2depth.put(edge, depth);
+							break;
+						}
+					}
+				}
+			}
+			moreNodes = moreMoreNodes;
+			depth++;
+		}
+		//
+		//	Traverse the attributes too.
+		//
+/*		for (@NonNull NavigationEdge edge : attributeEdges) {
+			Node targetNode = edge.getTarget();
+			if (!traversedNode2incomingEdge.containsKey(targetNode)) {
+				traversedNode2incomingEdge.put(targetNode, edge);
+			}
+			else {
+				untraversedEdges.add(edge);
+			}
+		} */
+		//
+		//	Identify the remaining untraversed edges that are not used to reach nodes and so must be reified as predicates to check nodes.
+		//
+		for (@NonNull NavigationEdge edge : forwardEdges) {
+			if (!traversedEdge2depth.containsKey(edge)) {
+				NavigationEdge oppositeEdge = getOppositeEdge(edge);
+				if ((oppositeEdge == null) || !traversedEdge2depth.containsKey(oppositeEdge)) {
+					untraversedEdges.add(edge);
+				}
+			}
+		}
+		for (@NonNull NavigationEdge edge : backwardEdges) {
+			if (!traversedEdge2depth.containsKey(edge) && !untraversedEdges.contains(edge)) {
+				NavigationEdge oppositeEdge = getOppositeEdge(edge);
+				if ((oppositeEdge == null) || (!traversedEdge2depth.containsKey(oppositeEdge) && !untraversedEdges.contains(edge))) {
+					untraversedEdges.add(edge);
+				}
+			}
+		}
+		//
+		//	Order the traversal edges shallowest first then alphabetically.
+		//
+		List<@NonNull NavigationEdge> traversedEdges = new ArrayList<@NonNull NavigationEdge>(traversedEdge2depth.keySet());
+		Collections.sort(traversedEdges, new Comparator<@NonNull NavigationEdge>() {
+			@Override
+			public int compare(@NonNull NavigationEdge o1, @NonNull NavigationEdge o2) {
+				Integer d1 = traversedEdge2depth.get(o1);
+				Integer d2 = traversedEdge2depth.get(o2);
+				assert (d1 != null) && (d2 != null);
+				if (d1 != d2) {
+					return d1 - d2;
+				}
+				String n1 = o1.getDisplayName();
+				String n2 = o2.getDisplayName();
+				return n1.compareTo(n2);
+			}
+		});
+		//
+		//	Convert the traversed edges to unrealized variables and initializers.
+		//
+		BottomPattern bottomPattern = mapping.getBottomPattern();
+		assert bottomPattern != null;
+		for (@NonNull NavigationEdge traversedEdge : traversedEdges) {
+			Node sourceNode = traversedEdge.getSource();
+			Node targetNode = traversedEdge.getTarget();
+			Property property = traversedEdge.getProperty();
+			OCLExpression sourceExp = createVariableExp(sourceNode);
+			OCLExpression source2targetExp = createCallExp(sourceExp, property);
+			if (targetNode.isAttributeNode()) {
+				Variable attributeVariable = node2variable.get(targetNode);
+				assert attributeVariable == null;
+				createUnrealizedVariable(bottomPattern, targetNode, source2targetExp);
+			}
+			else {
+				Variable classVariable = node2variable.get(targetNode);
+				assert classVariable == null;
+				createUnrealizedVariable(bottomPattern, targetNode, source2targetExp);
+/*				}
+				else {
+					OCLExpression ownedInit = classVariable.getOwnedInit();
+					assert ownedInit == null;
+					if (source2targetExp != null) {
+						Type variableType = classVariable.getType();
+						Type initType = source2targetExp.getType();
+						assert variableType != null;
+						if (!initType.conformsTo(visitor.getStandardLibrary(), variableType)) {
+							source2targetExp = createOclAsTypeCallExp(source2targetExp, variableType);
+						}
+					}
+					classVariable.setOwnedInit(source2targetExp);
+				} */
+			}
+		}
+		//
+		//	Convert the untraversed edges to predicates.
+		//
+		for (@NonNull NavigationEdge untraversedEdge : untraversedEdges) {
+			Node sourceNode = untraversedEdge.getSource();
+			Node targetNode = untraversedEdge.getTarget();
+			Property property = untraversedEdge.getProperty();
+			OCLExpression sourceExp = createVariableExp(sourceNode);
+			OCLExpression targetExp = createVariableExp(targetNode);
+			OCLExpression source2targetExp = createCallExp(sourceExp, property);
+			OCLExpression matchesExp = targetNode.isNull()
+					? createOperationCallExp(source2targetExp, visitor.getEqualsOperation(), targetExp)
+					: createOperationCallExp(targetExp, visitor.getEqualsOperation(), source2targetExp);
+			Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
+			asPredicate.setConditionExpression(matchesExp);
+			addPredicate(asPredicate);
+		}
+/*		Set<@NonNull Node> reachableNodes = new HashSet<@NonNull Node>(guardNodes);
 		List<@NonNull Node> sourcesList = new ArrayList<@NonNull Node>(guardNodes);
 		for (int i = 0; i < sourcesList.size(); i++) {
 			@NonNull Node sourceNode = sourcesList.get(i);
@@ -1073,7 +1285,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 										Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
 										asPredicate.setConditionExpression(matchesExp);
 										mapping.getBottomPattern().getPredicate().add(asPredicate);
-									} */
+									} * /
 							}
 							else if (expressionCreator.isConditional(targetNode)) {
 								
@@ -1089,6 +1301,14 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 								else {
 									OCLExpression ownedInit = classVariable.getOwnedInit();
 									assert ownedInit == null;
+									if (source2targetExp != null) {
+										Type variableType = classVariable.getType();
+										Type initType = source2targetExp.getType();
+										assert variableType != null;
+										if (!initType.conformsTo(visitor.getStandardLibrary(), variableType)) {
+											source2targetExp = createOclAsTypeCallExp(source2targetExp, variableType);
+										}
+									}
 									classVariable.setOwnedInit(source2targetExp);
 								}
 								
@@ -1098,7 +1318,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 										Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
 										asPredicate.setConditionExpression(matchesExp);
 										mapping.getBottomPattern().getPredicate().add(asPredicate);
-									} */
+									} * /
 							}
 							else {
 								sourcesList.add(targetNode);
@@ -1117,7 +1337,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 			}
-		}
+		} */
 	}
 
 	private void createPollingDependencies() {
@@ -1398,6 +1618,21 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			return super.getNode(typedElement);
 		}
 	} */
+
+	private @Nullable NavigationEdge getOppositeEdge(@NonNull NavigationEdge edge) {
+		Node targetNode = edge.getTarget();
+		Property property = edge.getProperty();
+		Property oppositeProperty = property.getOpposite();
+		if (oppositeProperty == null) {
+			return null;
+		}
+		NavigationEdge oppositeEdge = targetNode.getNavigationEdge(oppositeProperty);
+		if (oppositeEdge == null) {
+			return null;
+		}
+		assert oppositeEdge.getTarget() == edge.getSource();
+		return oppositeEdge;
+	}
 
 	private @NonNull OCLExpression getSourceExpression(@NonNull Node sourceNode) {
 		return createVariableExp(sourceNode);

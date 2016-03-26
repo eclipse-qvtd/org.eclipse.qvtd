@@ -835,9 +835,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				if (edgeConnection != null) {
 					for (@NonNull NavigationEdge usedEdge : edgeConnection.getSources()) {
 						Region usedRegion = usedEdge.getRegion();
+						usedRegion.addEnforcedEdge(usedEdge);
 						if (usedRegion.getFinalExecutionIndex() >= getInvocationIndex()) {
 							addCheckedEdge(predicatedEdge);
-							usedRegion.addEnforcedEdge(usedEdge);
 						}
 					}
 				}
@@ -916,35 +916,43 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 								else {
 									for (@NonNull NavigationEdge realizedEdge : realizedEdges) {
 										Region earlierRegion = realizedEdge.getRegion();
-//										String isNotHazardous;
-		//								if (this == earlierRegion) {
-		//									isNotHazardous = "same region";
-		//								}
-		//								else if (earlierRegion.getLatestIndex() < getEarliestIndex()) {
-		//									isNotHazardous = "later";
-		//								}
-		//								else {
-											Node realizedSourceNode = realizedEdge.getSource();
-											Node realizedTargetNode = realizedEdge.getTarget();
-											CompleteClass realizedSourceType = realizedSourceNode.getCompleteClass();
-											CompleteClass realizedTargetType = realizedTargetNode.getCompleteClass();
-											if (realizedSourceType.conformsTo(predicatedSourceType) && realizedTargetType.conformsTo(predicatedTargetType)) {
-												assert getFinalExecutionIndex() >= earlierRegion.getInvocationIndex();
-//												isNotHazardous = null;
-											}
-											else {
-												// The QVTi AS has insufficent precision to identify which of multiple references is hazardous
-//												isNotHazardous = "incompatible";
-											}
-		//								}
-//										if (isNotHazardous == null) {
+										String checkIsHazardFreeBecause;
+										String enforceIsHazardFreeBecause;
+										Node realizedSourceNode = realizedEdge.getSource();
+										Node realizedTargetNode = realizedEdge.getTarget();
+										CompleteClass realizedSourceType = realizedSourceNode.getCompleteClass();
+										CompleteClass realizedTargetType = realizedTargetNode.getCompleteClass();
+										if (!realizedSourceType.conformsTo(predicatedSourceType) || !realizedTargetType.conformsTo(predicatedTargetType)) {
+											checkIsHazardFreeBecause = "incompatible";
+											enforceIsHazardFreeBecause = "incompatible";
+										}
+										else if (this == earlierRegion) {
+											checkIsHazardFreeBecause = null; 		// Same region requires inter-recursion check
+											enforceIsHazardFreeBecause = null; 		// Same region requires inter-recursion enforce to be available for check
+										}
+										else if (earlierRegion.getFinalExecutionIndex() < getInvocationIndex()) {
+											checkIsHazardFreeBecause = "later";
+											enforceIsHazardFreeBecause = null; 		// Enforce required for later check
+										}
+										else {
+											// The QVTi AS has insufficient precision to identify which of multiple references is hazardous
+											checkIsHazardFreeBecause = null;
+											enforceIsHazardFreeBecause = null;
+										}
+										if (checkIsHazardFreeBecause == null) {
 											addCheckedEdge(predicatedEdge);
+										}
+										else if (doDebug) {
+											QVTs2QVTiVisitor.POLLED_PROPERTIES.println("    ignored check for " + this + "::" + laterNode.getName() + "(" + getIndexRangeText() + ")" + 
+												" " + checkIsHazardFreeBecause + " (" + earlierRegion.getIndexRangeText() + ")" + earlierRegion + "::" + realizedEdge.getSource().getName());
+										}
+										if (enforceIsHazardFreeBecause == null) {
 											earlierRegion.addEnforcedEdge(realizedEdge);
-//										}
-//										else if (doDebug) {
-//											QVTs2QVTiVisitor.POLLED_PROPERTIES.println("    ignored " + this + "::" + laterNode.getName() + "(" + getEarliestIndex() + ".." + getLatestIndex() + ")" + 
-//												" " + isNotHazardous + " (" + earlierRegion.getEarliestIndex() + ".." + earlierRegion.getLatestIndex() + ")" + earlierRegion + "::" + realizedEdge.getSource().getName());
-//										}
+										}
+										else if (doDebug) {
+											QVTs2QVTiVisitor.POLLED_PROPERTIES.println("    ignored enforce " + this + "::" + laterNode.getName() + "(" + getIndexRangeText() + ")" + 
+												" " + enforceIsHazardFreeBecause + " (" + earlierRegion.getIndexRangeText() + ")" + earlierRegion + "::" + realizedEdge.getSource().getName());
+										}
 									}
 								}
 							}

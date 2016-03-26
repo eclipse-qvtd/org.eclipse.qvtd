@@ -462,5 +462,6 @@ public class Edges
 	public static final EdgeRole.@NonNull Navigation REALIZED = new RealizedNavigationEdgeRole();
 	public static final @NonNull ResultEdgeRoleFactory RESULT = new ResultEdgeRoleFactory();
 	public static final EdgeRole.@NonNull Recursion SECONDARY_RECURSION = new RecursionEdgeRole(false);	
-//	public static final @NonNull CastEdgeRoleFactory UNNAVIGABLE_CAST = new CastEdgeRoleFactory(false);
+	public static final @NonNull CastEdgeRoleFactory UNNAVIGABLE_CAST = new CastEdgeRoleFactory(false);
+	public static final @NonNull NavigationEdgeRoleFactory UNNAVIGABLE_NAVIGATION = new NavigationEdgeRoleFactory(false);
 }

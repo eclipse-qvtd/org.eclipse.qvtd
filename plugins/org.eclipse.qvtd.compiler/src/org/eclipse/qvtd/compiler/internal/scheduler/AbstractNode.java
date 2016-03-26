@@ -325,7 +325,7 @@ public abstract class AbstractNode implements Node
 	@Override
 	public @Nullable NodeConnection getIncomingUsedConnection() {
 		NodeConnection incomingConnection2 = incomingConnection;
-		if ((incomingConnection2 != null) && incomingConnection2.isUsed()) {
+		if ((incomingConnection2 != null) && incomingConnection2.isUsed(this)) {
 			return incomingConnection2;
 		}
 		else {

@@ -365,6 +365,20 @@ public class MergedMappingRegion extends AbstractMappingRegion
 						addEdgeToMergedEdge(secondaryEdge, mergedEdge);
 					}
 				}
+				else if (secondaryEdge.isArgument()) {
+					boolean gotIt = false;
+					MergedNode mergedTargetNode = getMergedNode(secondaryEdge.getTarget());
+					for (Edge edge : mergedSourceNode.getOutgoingEdges()) {
+						if ((edge.isArgument()) && (edge.getTarget() == mergedTargetNode)) {
+							if (edge.isArgument() && ClassUtil.safeEquals(edge.getName(), secondaryEdge.getName())) {
+								gotIt = true;
+							}
+						}
+					}
+					if (!gotIt) {
+						createMergedEdge(primarySource, secondaryEdge, primaryTarget);
+					}
+				}
 				else {
 					createMergedEdge(primarySource, secondaryEdge, primaryTarget);
 				}

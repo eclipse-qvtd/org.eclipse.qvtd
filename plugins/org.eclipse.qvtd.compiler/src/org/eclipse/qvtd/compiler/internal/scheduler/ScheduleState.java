@@ -47,7 +47,7 @@ public abstract class ScheduleState extends ScheduleCache
 	private final @NonNull Map<@NonNull Region, @NonNull Integer> callableRegion2blockedConnectionCount = new HashMap<@NonNull Region, @NonNull Integer>();
 
 	/**
-	 * Working state: Whether the source has unserviced content for eacg region's connection source.
+	 * Working state: Whether the source has unserviced content for each region's connection source.
 	 */
 	private final @NonNull Map<@NonNull DatumConnection, @NonNull Map<@NonNull Region, @NonNull Boolean>> connection2sourceRegion2hasContent = new HashMap<@NonNull DatumConnection, @NonNull Map<@NonNull Region, @NonNull Boolean>>();
 	
@@ -62,7 +62,7 @@ public abstract class ScheduleState extends ScheduleCache
 	private final @NonNull Stack<@NonNull Region> callStack = new Stack<@NonNull Region>();
 	
 	/**
-	 * Working state: the schedulables that have been ordered.
+	 * Working state: the regions that have a schedule index to define their order.
 	 */
 	private final @NonNull List<@NonNull Region> orderedRegions = new ArrayList<@NonNull Region>();
 
@@ -265,20 +265,26 @@ public abstract class ScheduleState extends ScheduleCache
 
 	private void propagateIndexes(@NonNull DatumConnection connection) {
 		List<@NonNull Integer> connectionIndexes = connection.getIndexes();
-		if (connectionIndexes != null) {			// Null for dead inputs
+		if (connectionIndexes.size() > 0) {			// Empty for dead inputs
 			for (@NonNull Region region : getTargetRegions(connection)) {
-				@Nullable List<@NonNull Integer> regionIndexes = region.getIndexes();
-				assert regionIndexes != null;
-				Integer firstRegionIndex = regionIndexes.get(0);
+				int invocationIndex = region.getInvocationIndex();
+				boolean propagateThroughRegion = false;
 				for (int connectionIndex : connectionIndexes) {
-					if (connectionIndex > firstRegionIndex) {
-						if (region.addIndex(connectionIndex)) {
-							@Nullable
-							Iterable<@NonNull DatumConnection> outgoingConnections = getOutgoingConnections(region);
-							assert outgoingConnections != null;
-							for (@NonNull DatumConnection targetConnection : outgoingConnections) {
-								propagateIndexes(targetConnection);
+					if ((connectionIndex > invocationIndex) && region.addIndex(connectionIndex)) {
+						propagateThroughRegion = true;
+					}
+				}
+				if (propagateThroughRegion) {
+					Iterable<@NonNull DatumConnection> outgoingConnections = getOutgoingConnections(region);
+					for (@NonNull DatumConnection targetConnection : outgoingConnections) {
+						boolean propagateThroughConnection = false;
+						for (int connectionIndex : connectionIndexes) {
+							if (targetConnection.addIndex(connectionIndex)) {
+								propagateThroughConnection = true;
 							}
+						}
+						if (propagateThroughConnection) {
+							propagateIndexes(targetConnection);
 						}
 					}
 				}
@@ -344,7 +350,8 @@ public abstract class ScheduleState extends ScheduleCache
 	}
 
 	/**
-	 * Update the state of region following the unblocking of one of its incoming connections.
+	 * Update the state of region following the unblocking of one of its incoming connections,
+	 * returning true if unblocked.
 	 */
 	private boolean refreshRegionBlockage(@NonNull Region region) {
 		ScheduledRegion invokingRegion = region.getInvokingRegion();
@@ -364,6 +371,7 @@ public abstract class ScheduleState extends ScheduleCache
 				}
 			}
 			if (!isBlocked) {
+				assert !orderedRegions.contains(scheduledRegion);
 				blockedScheduledRegions.remove(scheduledRegion);
 				unblockedRegions.add(scheduledRegion);
 				callableRegion2blockedConnectionCount.remove(region);
@@ -408,10 +416,13 @@ public abstract class ScheduleState extends ScheduleCache
 				assert !unblockedRegions.contains(region);
 				callableRegion2blockedConnectionCount.put(region, blockedConnectionCount);
 			}
-			else {
+			else if (!orderedRegions.contains(region)) {
 				unblockedRegions.add(region);
 				callableRegion2blockedConnectionCount.remove(region);
 				return true;
+			}
+			else {
+				assert !unblockedRegions.contains(region);
 			}
 		}
 		return false;

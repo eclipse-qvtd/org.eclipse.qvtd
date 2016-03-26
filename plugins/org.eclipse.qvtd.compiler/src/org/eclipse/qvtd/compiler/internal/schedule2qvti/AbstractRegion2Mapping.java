@@ -97,7 +97,7 @@ public abstract class AbstractRegion2Mapping
 		}
 	}
 	
-	protected @Nullable CallExp createCallExp(@NonNull OCLExpression asSource, @NonNull Property asProperty) {
+	protected @NonNull CallExp createCallExp(@NonNull OCLExpression asSource, @NonNull Property asProperty) {
 		if (asProperty.eContainer() == null) {
 			Type asType = asProperty.getType();
 			SchedulerConstants schedulerConstants = getRegion().getSchedulerConstants();

@@ -136,7 +136,7 @@ public class ScheduleIndexer extends ScheduleState
 //				Scheduler.REGION_ORDER.println("        " + connection); 
 //			}
 			Scheduler.REGION_ORDER.println("      blocked connections:"); 
-			for (Connection connection : blockedConnectionsList) {
+			for (@NonNull Connection connection : blockedConnectionsList) {
 				Scheduler.REGION_ORDER.println("        " + connection); 
 			}
 		}
@@ -180,7 +180,9 @@ public class ScheduleIndexer extends ScheduleState
 				bestBlockedConnectionCount = blockedConnectionCount;
 				bestRegions.clear();
 			}
-			bestRegions.add(region);
+			if (blockedConnectionCount <= bestBlockedConnectionCount) {
+				bestRegions.add(region);
+			}
 		}
 		if (bestRegions.size() > 0) {
 			Collections.sort(bestRegions, NameUtil.NAMEABLE_COMPARATOR);

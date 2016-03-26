@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.scheduler;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -31,6 +32,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
@@ -158,11 +160,13 @@ public class Scheduler extends SchedulerConstants
 				action2mappingRegion.put(abstractAction, mappingRegion);
 			}
 		}
-		for (@NonNull SimpleMappingRegion mappingRegion : action2mappingRegion.values()) {
+		List<@NonNull SimpleMappingRegion> mappingRegions = new ArrayList<@NonNull SimpleMappingRegion>(action2mappingRegion.values());
+		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
+		for (@NonNull SimpleMappingRegion mappingRegion : mappingRegions) {
 			mappingRegion.registerConsumptionsAndProductions();
 		}
 		if (Scheduler.DEBUG_GRAPHS.isActive()) {
-			for (@NonNull SimpleMappingRegion mappingRegion : action2mappingRegion.values()) {
+			for (@NonNull SimpleMappingRegion mappingRegion : mappingRegions) {
 				mappingRegion.writeDebugGraphs("1-create");
 			}
 		}

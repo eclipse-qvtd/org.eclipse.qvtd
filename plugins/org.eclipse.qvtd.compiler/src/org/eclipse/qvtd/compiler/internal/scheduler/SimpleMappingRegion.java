@@ -157,18 +157,19 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		}
 		//
 		for (BottomPattern bottomPattern : bottomPatterns) {
-			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
-				SimpleNode variableNode = getReferenceNode(variable);
-				OCLExpression ownedInit = variable.getOwnedInit();
-				if (ownedInit != null) {
-					SimpleNode initNode = ownedInit.accept(expressionAnalyzer);
-					assert initNode != null;
-					Edges.ARGUMENT.createSimpleEdge(this, initNode, null, variableNode);
-					if (initNode.isConstant()) {
-						variableNode.mergeRole(initNode.getNodeRole());
-					}
-				}
-			}
+//			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
+//				SimpleNode variableNode = getReferenceNode(variable);
+//				OCLExpression ownedInit = variable.getOwnedInit();
+//				if (ownedInit != null) {
+//					SimpleNode initNode = ownedInit.accept(expressionAnalyzer);
+//					assert initNode != null;
+//					variable2simpleNode.put(variable, initNode);
+//					Edges.ARGUMENT.createSimpleEdge(this, initNode, null, variableNode);
+//					if (initNode.isConstant()) {
+//						variableNode.mergeRole(initNode.getNodeRole());
+//					}
+//				}
+//			}
 			for (@SuppressWarnings("null")@NonNull Assignment assignment : bottomPattern.getAssignment()) {
 				assignment.accept(expressionAnalyzer);
 			}
@@ -256,12 +257,25 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		//	and cache those that are too hard to analyze as complex predicates.
 		//
 		for (CorePattern corePattern : corePatterns) {
-			for (@SuppressWarnings("null")@NonNull VariableDeclaration guardVariable : corePattern.getVariable()) {
-				Nodes.GUARD.createSimpleNode(this, guardVariable);
+			for (@NonNull Variable variable : ClassUtil.nullFree(corePattern.getVariable())) {
+				if (corePattern instanceof GuardPattern) {
+					Nodes.GUARD.createSimpleNode(this, variable);
+				}
+				else {
+					OCLExpression ownedInit = variable.getOwnedInit();
+					if (ownedInit != null) {
+						SimpleNode initNode = ownedInit.accept(expressionAnalyzer);
+						assert initNode != null;
+						variable2simpleNode.put(variable, initNode);
+					}
+					else {
+						Nodes.GUARD.createSimpleNode(this, variable);		// FIXME ?? should have been guard not bottom
+					}
+				}
 			}
 		}
-		for (CorePattern corePattern : corePatterns) {
-		 	for (Predicate predicate : corePattern.getPredicate()) {
+		for (@NonNull CorePattern corePattern : corePatterns) {
+		 	for (@NonNull Predicate predicate : ClassUtil.nullFree(corePattern.getPredicate())) {
 				OCLExpression conditionExpression = predicate.getConditionExpression();
 				if (conditionExpression != null) {
 					OCLExpression boundExpression = getPredicateComparisonBoundExpression(conditionExpression);
