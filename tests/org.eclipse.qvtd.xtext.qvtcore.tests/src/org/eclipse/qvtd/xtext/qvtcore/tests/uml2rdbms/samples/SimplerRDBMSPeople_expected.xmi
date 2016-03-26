@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simplerdbms:Schema
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simplerdbms="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/SimpleRDBMS"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/SimpleRDBMS ../SimpleRDBMS.ecore"
+    name="People">
+  <tables name="Address"
+      kind="base">
+    <columns
+        name="Address_tid"
+        type="NUMBER"
+        keys="//@tables.0/@keys.0"/>
+    <columns
+        name="street"
+        type="VARCHAR"/>
+    <columns
+        name="number"
+        type="VARCHAR"/>
+    <keys name="Address_pk"
+        kind="primary"
+        column="//@tables.0/@columns.0"/>
+  </tables>
+</simplerdbms:Schema>

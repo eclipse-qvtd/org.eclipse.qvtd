@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simpleuml:Package
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simpleuml="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/simpleUML"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/simpleUML ../SimpleUML.ecore"
+    kind=""
+    name="People">
+  <elements
+      xsi:type="simpleuml:Class"
+      kind="persistent"
+      name="Address"
+      reverse="//@elements.2"/>
+  <elements
+      xsi:type="simpleuml:Class"
+      kind="persistent"
+      name="Professor"
+      forward="//@elements.2"/>
+  <elements
+      xsi:type="simpleuml:Association"
+      kind=""
+      name="professorLivesAt"
+      destination="//@elements.0"
+      source="//@elements.1"/>
+</simpleuml:Package>

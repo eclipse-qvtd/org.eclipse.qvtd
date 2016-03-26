@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simpleuml:Package
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simpleuml="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/simpleUML"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/UML2RDBMS/1.0/simpleUML ../SimpleUML.ecore"
+    kind=""
+    name="People">
+  <elements
+      xsi:type="simpleuml:Class"
+      kind="persistent"
+      name="Address">
+    <attributes
+        name="street"
+        type="//@elements.1"/>
+    <attributes
+        name="number"
+        type="//@elements.1"/>
+  </elements>
+  <elements
+      xsi:type="simpleuml:PrimitiveDataType"
+      name="String"
+      typeOpposite="//@elements.0/@attributes.0 //@elements.0/@attributes.1"/>
+</simpleuml:Package>
