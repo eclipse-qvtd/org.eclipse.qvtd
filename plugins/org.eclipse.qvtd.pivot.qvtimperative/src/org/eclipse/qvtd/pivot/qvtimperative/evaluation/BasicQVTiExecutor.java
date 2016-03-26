@@ -167,8 +167,20 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 //		}
 	}
 
-	protected void doEvaluations(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
-		for (Domain domain : mapping.getDomain()) {
+	protected boolean doPredicatesAndEvaluations(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
+		//
+        // middle guard predicates
+		//
+		GuardPattern middleGuardPattern = mapping.getGuardPattern();
+//		assert middleGuardPattern.getVariable().isEmpty();		middle guards are connection variables
+		for (@NonNull Predicate predicate : ClassUtil.nullFree(middleGuardPattern.getPredicate())) {
+			// If the predicate is not true, the binding is not valid
+			Object result = predicate.accept(undecoratedVisitor);
+			if (result != Boolean.TRUE) {
+				return false;
+			}
+		}
+		for (@NonNull Domain domain : ClassUtil.nullFree(mapping.getDomain())) {
 			if (!domain.isIsEnforceable()) {
 				CoreDomain checkableDomain = (CoreDomain)domain;
 				GuardPattern checkableGuardPattern = checkableDomain.getGuardPattern();
@@ -205,12 +217,11 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		}
 		BottomPattern middleBottomPattern = mapping.getBottomPattern();
 		assert middleBottomPattern.getEnforcementOperation().isEmpty();
-		assert middleBottomPattern.getPredicate().isEmpty();
 		assert middleBottomPattern.getRealizedVariable().isEmpty();
 		//
         // variable declarations/initializations
 		//
-		for (Variable rVar : middleBottomPattern.getVariable()) {
+		for (@NonNull Variable rVar : ClassUtil.nullFree(middleBottomPattern.getVariable())) {
 			if (rVar instanceof ConnectionVariable) {
 				CollectionValue.Accumulator accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) rVar.getTypeId());
 				OCLExpression ownedInit = rVar.getOwnedInit();
@@ -239,17 +250,15 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		//
         // variable assignments
 		//
-		for (Assignment assignment : middleBottomPattern.getAssignment()) {
+		for (@NonNull Assignment assignment : ClassUtil.nullFree(middleBottomPattern.getAssignment())) {
 			if (assignment instanceof VariableAssignment) {
 				assignment.accept(undecoratedVisitor);
 			}
 		}
-	}
-
-	protected boolean doPredicates(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
-		GuardPattern middleGuardPattern = mapping.getGuardPattern();
-//		assert middleGuardPattern.getVariable().isEmpty();		middle guards are connection variables
-		for (Predicate predicate : middleGuardPattern.getPredicate()) {
+		//
+        // middle bottom predicates
+		//
+		for (@NonNull Predicate predicate : ClassUtil.nullFree(middleBottomPattern.getPredicate())) {
 			// If the predicate is not true, the binding is not valid
 			Object result = predicate.accept(undecoratedVisitor);
 			if (result != Boolean.TRUE) {
@@ -337,13 +346,9 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			//
 			//	Check the predicates
 			//
-			if (!doPredicates(mapping, undecoratedVisitor)) {
+			if (!doPredicatesAndEvaluations(mapping, undecoratedVisitor)) {
 				return false;
 			}
-			//
-			//	Evaluate the enforceable domain expressions.
-			//
-			doEvaluations(mapping, undecoratedVisitor);
 		}
 		catch (InvocationFailedException e) {
 			throw e;

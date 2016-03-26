@@ -65,6 +65,13 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 			safeVisit(pVariable);
 		}
 		context.append(" |");
+		List<Predicate> predicates = pBottomPattern.getPredicate();
+		if (predicates.size() > 0) {
+			context.append("\n");
+			for (Predicate pPredicate : predicates) {
+				safeVisit(pPredicate);
+			}
+		}
 		List<Assignment> assignments = pBottomPattern.getAssignment();
 		if (assignments.size() > 0) {
 			context.append("\n");

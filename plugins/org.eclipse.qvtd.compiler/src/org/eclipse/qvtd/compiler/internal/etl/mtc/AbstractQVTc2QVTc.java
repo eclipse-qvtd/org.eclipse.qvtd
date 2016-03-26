@@ -412,7 +412,7 @@ public abstract class AbstractQVTc2QVTc
 			assert context != null;
 			EcoreUtil.Copier copier = new ExpressionCopier(context);
 			@SuppressWarnings("unchecked") T eOut = (T) copier.copy(eIn);
-		    copier.copyReferences();
+			copier.copyReferences();
 		    context.addDebugCopies(copier); 
 			return eOut;
 		}
@@ -543,12 +543,23 @@ public abstract class AbstractQVTc2QVTc
 			return null;
 		}
 
+		//
+		//	Predicates that were PropertyAssignments need a comparison to be synthesized.
+		//
 		@Override
 		public @Nullable Object visitPredicate(@NonNull Predicate pOut) {
-			Predicate pIn = context.equivalentSource(pOut);
-			pOut.setConditionExpression(copy(pIn.getConditionExpression()));
-			checkOut(pOut);
-			return null;
+			Element pIn = context.equivalentSource(pOut);
+			if (pIn instanceof PropertyAssignment) {
+				return convertToPredicate((PropertyAssignment)pIn, pOut);
+			}
+			else if (pIn instanceof Predicate) {
+				pOut.setConditionExpression(copy(((Predicate)pIn).getConditionExpression()));
+				checkOut(pOut);
+				return null;
+			}
+			else {
+				return visiting(pOut);
+			}
 		}
 
 		@Override
