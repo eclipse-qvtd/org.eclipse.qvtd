@@ -23,11 +23,12 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 
-public interface Region extends Visitable, GraphNode, Nameable, Schedulable, Symbolable
+public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 {		
 	void addCallToChild(@NonNull Region region);
 	void addEdge(@NonNull Edge edge);
 	void addEnforcedEdge(@NonNull NavigationEdge realizedEdge);
+	boolean addIndex(int index);
 	void addIntermediateConnection(@NonNull NodeConnection connection);
 	void addNode(@NonNull Node node);
 	void addRootConnection(@NonNull NodeConnection connection);
@@ -73,6 +74,12 @@ public interface Region extends Visitable, GraphNode, Nameable, Schedulable, Sym
 	@Nullable Iterable<@NonNull NavigationEdge> getEnforcedEdges(@NonNull TypedModel typedModel);
 
 	@NonNull Iterable<@NonNull Edge> getExpressionEdges();
+
+	/**
+	 * The schedule index at which the latest dependent becomes available and consequently the latest that deferred execution may occur.
+	 */
+	int getFinalExecutionIndex();
+
 	/**
 	 * Return the Guard nodes of the region (GuardVariable or Composing)
 	 */
@@ -87,15 +94,22 @@ public interface Region extends Visitable, GraphNode, Nameable, Schedulable, Sym
 	@NonNull Iterable<@NonNull DatumConnection> getIncomingConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getIncomingUsedConnections();
+	@NonNull String getIndexRangeText();
+	@NonNull List<@NonNull Integer> getIndexes();
 	@NonNull List<@NonNull NodeConnection> getIntermediateConnections();
+	
+	/**
+	 * The schedule index at which ALL invocations of this region occur.
+	 */
+	int getInvocationIndex();
 	@Nullable ScheduledRegion getInvokingRegion();
 	@NonNull List<@NonNull DatumConnection> getLoopingConnections();
-	
+
 	/**
 	 * Return the nodes that are matched or evaluated by the region's predicate.
 	 */
 	@NonNull Iterable<@NonNull Node> getMatchableNodes();
-	
+
 	@NonNull Iterable<@NonNull MergeableRegion> getMergeableRegions();
 	@Override
 	@NonNull String getName();
@@ -109,7 +123,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Schedulable, Sym
 	 * Where this is a hierarchical region the connections are those from the hierarchical head to its immediate internal regions.
 	 */
 	@NonNull Iterable<@NonNull DatumConnection> getNextConnections();
-	
+
 	@NonNull Collection<@NonNull Node> getNodes();
 
 	/**

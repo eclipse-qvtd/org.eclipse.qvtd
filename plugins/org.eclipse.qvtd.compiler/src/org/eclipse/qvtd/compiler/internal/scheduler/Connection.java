@@ -19,7 +19,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
  * A Connection is a directed hyper edge between one or more source nodes in one or more regions and
  * one or more target nodes in one or more target regions.
  */
-public interface Connection extends /*Edge*/ Nameable, Symbolable//, Schedulable
+public interface Connection extends /*Edge*/ Nameable, Symbolable
 {
 	void destroy();
 

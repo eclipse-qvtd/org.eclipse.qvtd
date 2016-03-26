@@ -58,8 +58,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		
 		@Override
 		public int compare(@NonNull Region o1, @NonNull Region o2) {
-			int i1 = o1.getEarliestIndex();
-			int i2 = o2.getEarliestIndex();
+			int i1 = o1.getInvocationIndex();
+			int i2 = o2.getInvocationIndex();
 			return i1 - i2;
 		}
 	}
@@ -342,17 +342,18 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	/**
 	 * All the edges defined in this region, but not those in nested regions.
 	 */
-	private @NonNull List<@NonNull Edge> edges = new ArrayList<@NonNull Edge>();
+	private final @NonNull List<@NonNull Edge> edges = new ArrayList<@NonNull Edge>();
 
 	/**
 	 * All the nodes defined in this region, but not those in nested regions.
 	 */
-	private @NonNull List<@NonNull Node> nodes = new ArrayList<@NonNull Node>();
+	private final @NonNull List<@NonNull Node> nodes = new ArrayList<@NonNull Node>();
 	
 	/**
-	 * The indexes in the overall schedule at which this region can be executed.
+	 * The indexes in the overall schedule at which this region can be executed. The first index is the index at which ALL
+	 * invocations occur. Subsequent indexes are when a referenced value may become available enabling a deferred execution.
 	 */
-	private @Nullable List<@NonNull Integer> indexes = null;
+	private final @NonNull List<@NonNull Integer> indexes = new ArrayList<@NonNull Integer>();
 	
 	/**
 	 * Ordered list of regions that call this region
@@ -391,7 +392,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	private @NonNull List<@NonNull NodeConnection> intermediateConnections = new ArrayList<@NonNull NodeConnection>();
 
 	/**
-	 * Set true of this region recurses on its outputs.
+	 * Set true if this region recurses on its outputs.
 	 */
 	private boolean isCyclic = false;
 	
@@ -438,8 +439,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 		checkedEdges.add(predicatedEdge);
 		QVTs2QVTiVisitor.POLLED_PROPERTIES.println("    checked " + predicatedEdge.getProperty() +
-			" at " + getEarliestIndex() + ".." + getLatestIndex() +
-			" in " + typedModel + " for " + this);
+			" at " + getIndexRangeText() + " in " + typedModel + " for " + this);
 	}
 
 	@Override
@@ -456,27 +456,23 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 		enforcedEdges.add(realizedEdge);
 		QVTs2QVTiVisitor.POLLED_PROPERTIES.println("    enforced " + realizedEdge.getProperty() +
-			" at " + getEarliestIndex() + ".." + getLatestIndex() +
+			" at " + getIndexRangeText() +
 			" in " + realizedEdge.getSource().getClassDatumAnalysis().getTypedModel() + " for " + this);
 	}
 	
 	@Override
 	public boolean addIndex(int index) {
-		List<@NonNull Integer> indexes2 = indexes;
-		if (indexes2 == null) {
-			indexes = indexes2 = new ArrayList<@NonNull Integer>();
-		}
-		for (int i = 0; i < indexes2.size(); i++) {
-			Integer anIndex = indexes2.get(i);
+		for (int i = 0; i < indexes.size(); i++) {
+			Integer anIndex = indexes.get(i);
 			if (index == anIndex) {
 				return false;
 			}
 			if (index < anIndex) {
-				indexes2.add(i, index);
+				indexes.add(i, index);
 				return true;
 			}
 		}
-		indexes2.add(index);
+		indexes.add(index);
 		return true;
 	}
 
@@ -827,7 +823,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 //		CompleteModel completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
 		boolean doDebug = QVTs2QVTiVisitor.POLLED_PROPERTIES.isActive();
 		if (doDebug) {
-			QVTs2QVTiVisitor.POLLED_PROPERTIES.println("analyzing " + this + " (" + getEarliestIndex() + ".." + getLatestIndex() + ")");
+			QVTs2QVTiVisitor.POLLED_PROPERTIES.println("analyzing " + this + " (" + getIndexRangeText() + ")");
 		}
 		for (@NonNull NavigationEdge predicatedEdge : getPredicatedNavigationEdges()) {
 			if (!predicatedEdge.isCast()) {
@@ -839,7 +835,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				if (edgeConnection != null) {
 					for (@NonNull NavigationEdge usedEdge : edgeConnection.getSources()) {
 						Region usedRegion = usedEdge.getRegion();
-						if (usedRegion.getLatestIndex() >= getEarliestIndex()) {			// FIXME =
+						if (usedRegion.getFinalExecutionIndex() >= getInvocationIndex()) {
 							addCheckedEdge(predicatedEdge);
 							usedRegion.addEnforcedEdge(usedEdge);
 						}
@@ -853,7 +849,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				if (usedConnection != null) {
 					for (@NonNull Node usedSourceNode : usedConnection.getSources()) {
 						Region usedRegion = usedSourceNode.getRegion();
-						if (usedRegion.getLatestIndex() >= getEarliestIndex()) {			// FIXME =
+						if (usedRegion.getFinalExecutionIndex() >= getInvocationIndex()) {			// FIXME =
 							CompleteClass predicatedSourceType = predicatedSourceNode.getCompleteClass();
 							CompleteClass predicatedTargetType = predicatedTargetNode.getCompleteClass();
 							ClassDatumAnalysis classDatumAnalysis = laterNode.getClassDatumAnalysis();
@@ -889,13 +885,13 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 													CompleteClass realizedSourceType = realizedSourceNode.getCompleteClass();
 													CompleteClass realizedTargetType = realizedTargetNode.getCompleteClass();
 													if (realizedSourceType.conformsTo(predicatedSourceType) && realizedTargetType.conformsTo(predicatedTargetType)) {
-														assert getLatestIndex() >= earlierRegion.getEarliestIndex();
+														assert getFinalExecutionIndex() >= earlierRegion.getInvocationIndex();
 //														isNotHazardous = null;
 													}
 													else {
 //														isNotHazardous = "incompatible";
 													}
-													assert getLatestIndex() >= earlierRegion.getEarliestIndex();
+													assert getFinalExecutionIndex() >= earlierRegion.getInvocationIndex();
 //													isNotHazardous = null;
 	//											}
 //												if (isNotHazardous == null) {
@@ -933,7 +929,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 											CompleteClass realizedSourceType = realizedSourceNode.getCompleteClass();
 											CompleteClass realizedTargetType = realizedTargetNode.getCompleteClass();
 											if (realizedSourceType.conformsTo(predicatedSourceType) && realizedTargetType.conformsTo(predicatedTargetType)) {
-												assert getLatestIndex() >= earlierRegion.getEarliestIndex();
+												assert getFinalExecutionIndex() >= earlierRegion.getInvocationIndex();
 //												isNotHazardous = null;
 											}
 											else {
@@ -1074,15 +1070,15 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		ScheduledRegion invokingRegion2 = invokingRegion;
 		assert invokingRegion2 != null;
 		RootScheduledRegion rootScheduledRegion = invokingRegion2.getRootScheduledRegion();
-		NavigationEdge castEdge = getCastTarget(predicatedEdge);
-		Node castTarget = getCastTarget(castEdge.getTarget());
+		NavigationEdge castEdge = RegionUtil.getCastTarget(predicatedEdge);
+		Node castTarget = RegionUtil.getCastTarget(castEdge.getTarget());
 		ClassDatumAnalysis classDatumAnalysis = castTarget.getClassDatumAnalysis();
 		if (classDatumAnalysis.getCompleteClass().getPrimaryClass() instanceof DataType) {
 			Iterable<@NonNull NavigationEdge> realizedEdges = rootScheduledRegion.getRealizedEdges(predicatedEdge, classDatumAnalysis);
 			if (realizedEdges != null) {
 				List<@NonNull Node> sourceNodes = new ArrayList<@NonNull Node>();
 				for (@NonNull NavigationEdge realizedEdge : realizedEdges) {
-					if (isConformantSource(realizedEdge, predicatedEdge) && isConformantTarget(realizedEdge, predicatedEdge)) {
+					if (RegionUtil.isConformantSource(realizedEdge, predicatedEdge) && RegionUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
 						sourceNodes.add(realizedEdge.getTarget());
 					}
 				}
@@ -1121,7 +1117,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 						Set<@NonNull Region> conformantEdgeSourceRegions = null;
 						List<@NonNull NavigationEdge> thoseEdges = null;
 						for (@NonNull NavigationEdge realizedEdge : realizedEdges) {
-							if (isConformantSource(realizedEdge, predicatedEdge) && isConformantTarget(realizedEdge, predicatedEdge)) {
+							if (RegionUtil.isConformantSource(realizedEdge, predicatedEdge) && RegionUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
 								if (thoseEdges == null) {
 									thoseEdges = new ArrayList<@NonNull NavigationEdge>();
 									conformantEdgeSourceRegions = new HashSet<@NonNull Region>();
@@ -1594,52 +1590,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return callingRegions;
 	}
 
-	/**
-	 * Return the edge unless it is subject to a cast chain in which case return the final cast.
-	 */
-	private @NonNull NavigationEdge getCastTarget(@NonNull NavigationEdge edge) {
-		@NonNull NavigationEdge sourceEdge = edge;
-		while (true) {
-			@Nullable NavigationEdge targetEdge = null;
-			for (@NonNull Edge nextEdge : sourceEdge.getTarget().getOutgoingEdges()) {
-				if (!nextEdge.isCast() && !nextEdge.isRecursion()) {
-					return sourceEdge;
-				}
-				if (targetEdge != null) {			// FIXME multi-cast support
-					return sourceEdge;
-				}
-				targetEdge = (@Nullable NavigationEdge) nextEdge;
-			}
-			if (targetEdge == null) {
-				return sourceEdge;
-			}
-			sourceEdge = targetEdge;
-		}
-	}
-
-	/**
-	 * Return the node unless it is subject to a cast chain in which case return the final cast.
-	 */
-	private @NonNull Node getCastTarget(@NonNull Node node) {
-		@NonNull Node sourceNode = node;
-		while (true) {
-			@Nullable Node targetNode = null;
-			for (@NonNull Edge edge : sourceNode.getOutgoingEdges()) {
-				if (!edge.isCast() && !edge.isRecursion()) {
-					return sourceNode;
-				}
-				if (targetNode != null) {			// FIXME multi-cast support
-					return sourceNode;
-				}
-				targetNode = edge.getTarget();
-			}
-			if (targetNode == null) {
-				return sourceNode;
-			}
-			sourceNode = targetNode;
-		}
-	}
-
 	@Override
 	public @Nullable Set<@NonNull NavigationEdge> getCheckedEdges(@NonNull TypedModel typedModel) {
 		assert typedModel2checkedEdges != null;
@@ -1710,13 +1660,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
-	public int getEarliestIndex() {
-		List<Integer> indexes2 = indexes;
-		assert (indexes2 != null) && (indexes2.size() > 0);
-		return indexes2.get(0);
-	}
-
-	@Override
 	public @NonNull Collection<@NonNull Edge> getEdges() {
 		return edges;
 	}
@@ -1731,6 +1674,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	public final @NonNull Iterable<@NonNull Edge> getExpressionEdges() {
 		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(edges, IsExpressionEdgePredicate.INSTANCE);
 		return filter;
+	}
+
+	@Override
+	public int getFinalExecutionIndex() {
+		assert indexes.size() > 0;
+		return indexes.get(indexes.size()-1);
 	}
 
 	@Override
@@ -1797,23 +1746,26 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
+	public @NonNull String getIndexRangeText() {
+		return getInvocationIndex() + ".." + getFinalExecutionIndex();
+	}
+
 	public @Nullable String getIndexText() {
-		List<@NonNull Integer> indexes2 = indexes;
-		if (indexes2 == null) {
-			return null;
-		}
-		StringBuilder s = new StringBuilder();
-		for (@NonNull Integer index : indexes2) {
-			if (s.length() > 0) {
+		StringBuilder s = null;
+		for (@NonNull Integer index : indexes) {
+			if (s == null) {
+				s = new StringBuilder();
+			}
+			else {
 				s.append(",");
 			}
 			s.append(index.toString());
 		}
-		return s.toString();
+		return s != null ? s.toString() : null;
 	}
 
 	@Override
-	public @Nullable List<@NonNull Integer> getIndexes() {
+	public @NonNull List<@NonNull Integer> getIndexes() {
 		return indexes;
 	}
 
@@ -1823,15 +1775,14 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
-	public @Nullable ScheduledRegion getInvokingRegion() {
-		return invokingRegion;
+	public int getInvocationIndex() {
+		assert indexes.size() > 0;
+		return indexes.get(0);
 	}
 
 	@Override
-	public int getLatestIndex() {
-		List<Integer> indexes2 = indexes;
-		assert (indexes2 != null) && (indexes2.size() > 0);
-		return indexes2.get(indexes2.size()-1);
+	public @Nullable ScheduledRegion getInvokingRegion() {
+		return invokingRegion;
 	}
 
 	@Override
@@ -2196,45 +2147,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public boolean isChildCompositionRegion() {
-		return false;
-	}
-
-	/**
-	 * Return true if the source of thatEdge is compatible with the source of thisEdge.
-	 */
-	private boolean isConformantSource(@NonNull NavigationEdge thatEdge, @NonNull NavigationEdge thisEdge) {
-		Node thatSource = thatEdge.getSource();
-		CompleteClass thatType = thatSource.getCompleteClass();
-		CompleteClass thisType = thisEdge.getSource().getCompleteClass();
-		if (thatType.conformsTo(thisType)) {
-			return true;
-		}
-		if (thatSource.isRealized()) {
-			return false;
-		}
-		if (thisType.conformsTo(thatType)) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Return true if the target of thatEdge is compatible with the target of thisEdge.
-	 */
-	private boolean isConformantTarget(@NonNull NavigationEdge thatEdge, @NonNull NavigationEdge thisEdge) {
-		Node thatTarget = getCastTarget(thatEdge.getTarget());
-		Node thisTarget = getCastTarget(thisEdge.getTarget());
-		CompleteClass thatType = thatTarget.getCompleteClass();
-		CompleteClass thisType = thisTarget.getCompleteClass();
-		if (thatType.conformsTo(thisType)) {
-			return true;
-		}
-		if (thatTarget.isRealized()) {
-			return false;
-		}
-		if (thisType.conformsTo(thatType)) {
-			return true;
-		}
 		return false;
 	}
 
@@ -2604,7 +2516,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 				@Override
 				public @NonNull GraphNode getTarget() {
-					return (AbstractConnection)connection;
+					return (AbstractConnection<?>)connection;
 				}
 			};
 			s.appendEdge(graphEdge1.getSource(), graphEdge1, graphEdge1.getTarget());
@@ -2618,7 +2530,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 					@Override
 					public @NonNull GraphNode getSource() {
-						return (AbstractConnection)connection;
+						return (AbstractConnection<?>)connection;
 					}
 
 					@Override

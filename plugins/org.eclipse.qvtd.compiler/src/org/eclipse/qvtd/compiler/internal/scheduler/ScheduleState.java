@@ -64,7 +64,7 @@ public abstract class ScheduleState extends ScheduleCache
 	/**
 	 * Working state: the schedulables that have been ordered.
 	 */
-	private final @NonNull List<@NonNull Schedulable> orderedSchedulables = new ArrayList<@NonNull Schedulable>();
+	private final @NonNull List<@NonNull Region> orderedRegions = new ArrayList<@NonNull Region>();
 
 	/**
 	 * Working state: connections that block a region.
@@ -186,8 +186,8 @@ public abstract class ScheduleState extends ScheduleCache
 		return minimumDepthParentRegion;
 	}
 
-	public @NonNull List<@NonNull Schedulable> getOrdering() {
-		return orderedSchedulables;
+	public @NonNull List<@NonNull Region> getOrdering() {
+		return orderedRegions;
 	}
 
 	private @NonNull Map<@NonNull Region, @NonNull Boolean> getSourceRegion2hasContent(@NonNull DatumConnection connection) {
@@ -418,11 +418,11 @@ public abstract class ScheduleState extends ScheduleCache
 	}
 
 	protected void scheduleRegion(@NonNull Region region) {
-		int thisIndex = orderedSchedulables.size();
-		assert !orderedSchedulables.contains(region);
+		int thisIndex = orderedRegions.size();
+		assert !orderedRegions.contains(region);
 		Scheduler.REGION_ORDER.println(thisIndex + " : " + region);
 		region.addIndex(thisIndex);
-		orderedSchedulables.add(region);
+		orderedRegions.add(region);
 		unblock(region);
 		//
 		//	Drain incomingConnections wrt selectedRegion

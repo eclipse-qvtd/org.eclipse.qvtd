@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * A DatumConnection establishes that one or more source edges/nodes are available for use by one or more target edges/nodes.
@@ -23,7 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 public interface DatumConnection extends Connection
 {
 	boolean addIndex(int index);
-	@Nullable List<@NonNull Integer> getIndexes();
+	@NonNull List<@NonNull Integer> getIndexes();
 	@NonNull ConnectionEnd getSource(@NonNull Region sourceRegion);
 	@NonNull String getSourceDisplayNames();
 	@NonNull Iterable<@NonNull Node> getSourceNodes();

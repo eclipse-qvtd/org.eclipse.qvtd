@@ -113,7 +113,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	}
 
 	@Override
-	public void createLocalSchedule2(@NonNull List<@NonNull Schedulable> schedulableOrdering) {
+	public void createLocalSchedule2(@NonNull List<@NonNull Region> orderedRegions) {
 //		region2order.computeRegionIndexes(getCallableRegions());
 //		Iterable<Region> sortedCallableRegions = regionOrdering;//AbstractRegion.EarliestRegionComparator.sort(getCallableRegions());
 		//
@@ -121,19 +121,13 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		//
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2predicatedEdges = new HashMap<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>>();
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2realizedEdges = new HashMap<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>>();
-		for (@NonNull Schedulable schedulable : schedulableOrdering) {
-			if (schedulable instanceof Region) {
-				Region region = (Region) schedulable;
-				QVTs2QVTiVisitor.POLLED_PROPERTIES.println("building indexes for " + region + " " + region.getEarliestIndex() + ".." + region.getLatestIndex());
-				region.buildPredicatedNavigationEdgesIndex(typedModel2property2predicatedEdges);
-				region.buildRealizedNavigationEdgesIndex(typedModel2property2realizedEdges);
-			}
+		for (@NonNull Region region : orderedRegions) {
+			QVTs2QVTiVisitor.POLLED_PROPERTIES.println("building indexes for " + region + " " + region.getIndexRangeText());
+			region.buildPredicatedNavigationEdgesIndex(typedModel2property2predicatedEdges);
+			region.buildRealizedNavigationEdgesIndex(typedModel2property2realizedEdges);
 		}
-		for (@NonNull Schedulable schedulable : schedulableOrdering) {
-			if (schedulable instanceof Region) {
-				Region region = (Region) schedulable;
-				region.computeCheckedOrEnforcedEdges(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
-			}
+		for (@NonNull Region region : orderedRegions) {
+			region.computeCheckedOrEnforcedEdges(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
 		}
 		/*	suspended - just an optimization - needs more hierarchical consideration
 		//

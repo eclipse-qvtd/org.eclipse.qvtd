@@ -32,12 +32,12 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 	protected final @NonNull String name;
 	private /*@LazyNonNull*/ ConnectionRole connectionRole;
 	protected @NonNull Set<@NonNull CE> sourceEnds;
-	protected @NonNull Map<@NonNull CE, @NonNull ConnectionRole> targetEnd2role = new HashMap<@NonNull CE, @NonNull ConnectionRole>();
+	protected final @NonNull Map<@NonNull CE, @NonNull ConnectionRole> targetEnd2role = new HashMap<@NonNull CE, @NonNull ConnectionRole>();
 	
 	/**
 	 * The indexes in the overall schedule at which this connection propagates additional values.
 	 */
-	private @Nullable List<@NonNull Integer> indexes = null;
+	private final @NonNull List<@NonNull Integer> indexes = new ArrayList<@NonNull Integer>();
 
 	protected AbstractConnection(@NonNull ScheduledRegion region, @NonNull Set<@NonNull CE> sourceEnds, @NonNull SymbolNameBuilder symbolNameBuilder) {
 		this.region = region;
@@ -47,21 +47,17 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 	
 	@Override
 	public boolean addIndex(int index) {
-		List<@NonNull Integer> indexes2 = indexes;
-		if (indexes2 == null) {
-			indexes = indexes2 = new ArrayList<@NonNull Integer>();
-		}
-		for (int i = 0; i < indexes2.size(); i++) {
-			Integer anIndex = indexes2.get(i);
+		for (int i = 0; i < indexes.size(); i++) {
+			Integer anIndex = indexes.get(i);
 			if (index == anIndex) {
 				return false;
 			}
 			if (index < anIndex) {
-				indexes2.add(i, index);
+				indexes.add(i, index);
 				return true;
 			}
 		}
-		indexes2.add(index);
+		indexes.add(index);
 		return true;
 	}
 
@@ -135,24 +131,22 @@ public abstract class AbstractConnection<CE extends ConnectionEnd> implements Da
 		return connectionRole;
 	}
 
-//	@Override
 	public @Nullable String getIndexText() {
-		List<@NonNull Integer> indexes2 = indexes;
-		if (indexes2 == null) {
-			return null;
-		}
-		StringBuilder s = new StringBuilder();
-		for (@NonNull Integer index : indexes2) {
-			if (s.length() > 0) {
+		StringBuilder s = null;
+		for (@NonNull Integer index : indexes) {
+			if (s == null) {
+				s = new StringBuilder();
+			}
+			else {
 				s.append(",");
 			}
 			s.append(index.toString());
 		}
-		return s.toString();
+		return s != null ? s.toString() : null;
 	}
 
 	@Override
-	public @Nullable List<@NonNull Integer> getIndexes() {
+	public @NonNull List<@NonNull Integer> getIndexes() {
 		return indexes;
 	}
 
