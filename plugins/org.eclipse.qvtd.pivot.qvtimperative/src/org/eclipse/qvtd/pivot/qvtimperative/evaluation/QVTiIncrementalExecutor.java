@@ -177,7 +177,10 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		Mapping asMapping = QVTimperativeUtil.getContainingMapping(navigationCallExp);
 		Object ecoreValue;
 		if ((asMapping != null) && transformationAnalysis.isHazardousRead(asMapping, navigationCallExp)) {		// null within queries
-			assert sourceValue != null;
+//			assert sourceValue != null;
+			if (sourceValue == null) {
+				throw new InvalidValueException("Null source for '" + referredProperty + "'", sourceValue, navigationCallExp);
+			}
 			EStructuralFeature eFeature = (EStructuralFeature)referredProperty.getESObject();
 			objectManager.getting(sourceValue, eFeature, false);
 			ecoreValue = super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
