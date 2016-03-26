@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
@@ -25,13 +26,15 @@ import org.eclipse.ocl.pivot.LiteralExp;
 import org.eclipse.ocl.pivot.LoopExp;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.compiler.internal.etl.utils.MtcUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
@@ -118,6 +121,40 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			}
 			return false;
 		}
+
+	    /**
+	     * Create an ocl expression from an assignment than can be used as the
+	     * condition expression of a predicate.
+	     *
+	     * @param aIn the a in
+	     * @param environmentFactory the environment factory
+	     * @return the operation call exp
+	     */
+	    private OperationCallExp assignmentToOclExp(@NonNull Assignment aIn) {
+	        OperationCallExp exp = PivotFactory.eINSTANCE.createOperationCallExp();
+	        for (Operation op : environmentFactory.getStandardLibrary().getOclAnyType().getOwnedOperations()) {
+	            if (op.getName().equals("=")) {
+	                exp.setReferredOperation(op);
+	                exp.setName(op.getName());
+	                exp.setType(op.getType());
+	                break;
+	            }
+	        }
+	        exp.getOwnedArguments().add(EcoreUtil.copy(aIn.getValue()));
+	        if (aIn instanceof PropertyAssignment) {
+	            PropertyCallExp sourceExp = PivotFactory.eINSTANCE.createPropertyCallExp();
+	            sourceExp.setReferredProperty(((PropertyAssignment) aIn).getTargetProperty());
+	            sourceExp.setType(((PropertyAssignment) aIn).getTargetProperty().getType());
+	            sourceExp.setOwnedSource(EcoreUtil.copy(((PropertyAssignment) aIn).getSlotExpression()));
+	            exp.setOwnedSource(sourceExp);
+	        } else { // aIn instanceof VariableAssignment
+	            VariableExp varExp = PivotFactory.eINSTANCE.createVariableExp();
+	            varExp.setIsImplicit(false);
+	            varExp.setReferredVariable(((VariableAssignment) aIn).getTargetVariable());
+	            exp.setOwnedSource(varExp);
+	        }
+	        return exp;
+	    }
 
 		private @Nullable Area basicGetArea(@Nullable VariableDeclaration variable) {
 			return QVTcoreBaseUtil.getContainingArea(variable);
@@ -354,7 +391,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 				// Assignments to Predicates
 				Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
 				context.addTrace(paIn, pOut);
-				pOut.setConditionExpression(MtcUtil.assignmentToOclExp(paIn, environmentFactory));
+				pOut.setConditionExpression(assignmentToOclExp(paIn));
 	            return pOut;
 			}
 			PropertyAssignment paOut = (PropertyAssignment) super.visitPropertyAssignment(paIn);

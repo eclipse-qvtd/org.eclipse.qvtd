@@ -3,43 +3,19 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.compiler;singleton:=true
 Bundle-Version: 0.13.0.qualifier
-Bundle-ClassPath: .,
- lib/org.eclipse.epsilon.common_1.3.0.201503231233.jar,
- lib/org.eclipse.epsilon.eol.engine_1.3.0.201503231233.jar,
- lib/org.eclipse.epsilon.etl.engine_1.3.0.201503231233.jar,
- lib/org.eclipse.epsilon.flock.engine_1.3.0.201503231233.jar,
- lib/org.eclipse.epsilon.erl.engine_1.3.0.201503231233.jar,
- lib/org.eclipse.epsilon.emc.emf_1.3.0.201503231233.jar
+Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
- org.eclipse.ocl.xtext.base;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.qvtd.pivot.qvtcore;bundle-version="[0.13.0,0.14.0)";visibility:=reexport,
  org.eclipse.qvtd.pivot.qvtrelation;bundle-version="[0.13.0,0.14.0)";visibility:=reexport,
  org.eclipse.qvtd.pivot.schedule;bundle-version="[0.13.0,0.14.0)";visibility:=reexport,
  org.eclipse.qvtd.codegen;bundle-version="[0.13.0,0.14.0)";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.epsilon.common.util;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
- org.eclipse.epsilon.emc.emf;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
- org.eclipse.epsilon.emc.emf.xml;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
- org.eclipse.epsilon.eol.exceptions;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
- org.eclipse.epsilon.eol.exceptions.models;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
- org.eclipse.epsilon.eol.execute.context;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
- org.eclipse.epsilon.eol.models;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
- org.eclipse.epsilon.eol.types;x-friends:="org.eclipse.qvtd.cs2as.compiler,org.eclipse.qvtd.cs2as.compiler.tests",
- org.eclipse.qvtd.compiler,
- org.eclipse.qvtd.compiler.internal.etl;
-  uses:="org.eclipse.ocl.pivot,
-   org.eclipse.epsilon.eol.models,
-   org.eclipse.ui.plugin,
-   org.eclipse.epsilon.etl.trace,
-   org.osgi.framework,
-   org.eclipse.epsilon.eol",
+Export-Package: org.eclipse.qvtd.compiler,
  org.eclipse.qvtd.compiler.internal.qvtr2qvtc,
- org.eclipse.qvtd.compiler.internal.qvtr2qvtc.utilities,
  org.eclipse.qvtd.compiler.internal.schedule2qvti,
- org.eclipse.qvtd.compiler.internal.scheduler,
- org.eclipse.qvtd.compiler.internal.utilities
+ org.eclipse.qvtd.compiler.internal.scheduler
 Import-Package: com.google.common.base,
  com.google.common.collect

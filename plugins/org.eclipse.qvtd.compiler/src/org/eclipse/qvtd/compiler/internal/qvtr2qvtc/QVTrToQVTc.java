@@ -369,7 +369,7 @@ public class QVTrToQVTc
 				if (QVTbaseUtil.getContainingTransformation(target) == coreTransformation) {
 					DebugTraceBack traceBack = QVTbaseFactory.eINSTANCE.createDebugTraceBack();
 					traceBack.setTarget(target);
-					traceBack.getSources().add(target2source.get(target));
+// FIXME true source URI					traceBack.getSources().add(target2source.get(target));
 					coreTransformation.getOwnedDebugTraceBacks().add(traceBack);
 				}
 			}

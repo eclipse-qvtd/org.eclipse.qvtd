@@ -49,8 +49,6 @@ import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
-//import org.eclipse.qvtd.build.etl.tests.UpperToLowerHete.UpperToLowerNormalizer;
-import org.eclipse.qvtd.compiler.internal.etl.MtcBroker;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
@@ -479,7 +477,7 @@ public class QVTdMtcTests extends LoadTestCase {
      *  probably breakable by classComplexAttributes_LM, but still we can't schedule it.
     */
 
-//    @Test -- too slow and not a full test anyway
+/*    @Test -- too slow and not a full test anyway
     public void zztestUmlToRdbms() throws Exception {
     	MyQVT myQVT = createQVT("UmlToRdbms");
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("UmlToRdbms");;
@@ -513,10 +511,10 @@ public class QVTdMtcTests extends LoadTestCase {
         Resource actual =  myQVT.getEnvironmentFactory().getResourceSet().getResource(outputURI, true);
         assertSameModel(expected, actual);
        
-        qvtiExecutor.dispose(); */
+        qvtiExecutor.dispose(); * /
         mtc.disposeModels();
     	myQVT.dispose();
-    }
+    } */
 
 /*    @Test -- fails through lack of multi-headed support, which may not be needed if better partitioned
     public void testNewUmlToRdbms() throws Exception {
