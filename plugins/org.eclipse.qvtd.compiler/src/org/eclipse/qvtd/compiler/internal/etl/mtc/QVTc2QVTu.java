@@ -63,15 +63,6 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			super(context);
 		}
 
-/*		private boolean allMatchReferencedOutputDomainVariables(@NonNull OCLExpression value) {
-			for (Variable v : MtcUtil.findReferencedVariables(value)) {
-				if (!(v.eContainer() instanceof Transformation) && !isOutputDomain(getArea(v))) {
-					return false;
-				}
-			}
-			return true;
-		} */
-
 		private boolean allReferencedVariablesInInputDomain(@NonNull Element a) {
 			VariableDeclaration referredVariable = getReferredMappingVariable(a);
 			if ((referredVariable != null) && !isInputDomain(basicGetArea(referredVariable))) {
@@ -100,24 +91,6 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			return true;
 		}
 
-/*		private boolean allReferencedVariablesInOutputDomain(@NonNull Predicate p) {
-			for (VariableDeclaration v : findReferencedVariables(p.getConditionExpression())) {
-				if (!isOutputDomain(getArea2(v))) {
-					return false;
-				}
-			}
-			return true;
-		} */
-
-/*		private boolean anyReferencedVariableInMiddleOrOutputDomain(@NonNull Predicate p) {
-			for (VariableDeclaration v : findReferencedVariables(p.getConditionExpression())) {
-				Area containingArea = getArea2(v);
-				if (isOutputDomain(containingArea) || isMiddleDomain(containingArea)) {
-					return true;
-				}
-			}
-			return false;
-		} */
 		private boolean anyReferencedBottomMiddleDomainVariables(@NonNull OCLExpression value) {
 			VariableDeclaration referredVariable = getReferredMappingVariable(value);
 			if (isMiddleDomainVariable(referredVariable)) {
@@ -150,13 +123,6 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			return QVTcoreBaseUtil.getContainingArea(variable);
 		}
 
-/*		private @NonNull PropertyAssignment convertToPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull OCLExpression rightExpression) {
-			PropertyAssignment paOut = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
-			context.addTrace((Predicate)propertyCallExp.eContainer().eContainer(), paOut);
-			paOut.setTargetProperty(propertyCallExp.getReferredProperty());
-			return paOut;
-		} */
-	
 		//
 		//	Assignments may mutate to Predicates.
 		//
@@ -339,18 +305,21 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			OCLExpression slotExpression = paIn.getSlotExpression();
 			OCLExpression value = paIn.getValue();
 			assert (slotExpression != null) && (value != null);
-			Area sourceArea = getSourceVariableArea(value);
+//			Area sourceArea = getSourceVariableArea(value);
 			Area targetArea = getSourceVariableArea(slotExpression);
-			if (isNonOutputDomain(targetArea) &&
+			if (isNonOutputDomain(targetArea) &&								// is RtoM or MtoL or RtoL
 					!(value instanceof VariableExp) &&			// why?
 					!(value instanceof NullLiteralExp) &&		// why?
 					allReferencedVariablesInOutputDomain(value)) {
 				return null;
 			}
-			if (isInputDomain(sourceArea)) {
+			if (isInputDomain(targetArea) && (targetArea instanceof Mapping) && anyReferencedBottomMiddleDomainVariables(value)) {	// isMtoM
+				return null;
+			}
+/*			if (isInputDomain(sourceArea)) {
 				VariableDeclaration referredVariable = getReferredMappingVariable(value);
 				if (isMiddleDomainVariable(referredVariable)) {	
-					return null;
+//					return null;
 				}
 //				if (referredVariable != null) {
 //					Area area = basicGetArea(referredVariable);
@@ -370,7 +339,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 //						return null;
 //					}
 //				}
-			}
+			} */
 
 //			if (isInputDomain(targetArea) && anyReferencedMiddleDomainVariables(value)) {		// isMtoL
 			if (isInputDomain(targetArea) && anyReferencedMiddleDomainVariables(value)) {		// isMtoL
@@ -417,12 +386,6 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			}
 		}
 
-//		@Override
-//		public @NonNull Transformation visitTransformation(@NonNull Transformation tIn) {
-//			domainUsageAnalysis.analyzeTransformation(tIn);
-//			return super.visitTransformation(tIn);
-//		}
-
 		//
 		//	Right-to-Middle and Middle-to-Middle variable assignments are discarded.
 		//	Middle-to-Left variable assignments change to predicates.
@@ -463,20 +426,6 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		@Override
 		public @NonNull Mapping visitMapping(@NonNull Mapping mOut) {
 			return doMapping(mOut);
-		}
-
-		//
-		//	Predicates that were PropertyAssignments need a comparison to be synthesized.
-		//
-		@Override
-		public @Nullable Object visitPredicate(@NonNull Predicate pOut) {
-			Element pIn = context.equivalentSource(pOut);
-			if (pIn instanceof PropertyAssignment) {
-				return convertToPredicate((PropertyAssignment) pIn, pOut);
-			}
-			else {
-				return super.visitPredicate(pOut);
-			}
 		}
 	 }
 	
@@ -525,7 +474,6 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 	}
 
 	private final @NonNull QVTuConfiguration qvtuConfiguration;
-//	private final @NonNull QVTcoreDomainUsageAnalysis domainUsageAnalysis;
 	
 	/**
 	 * Cached INPUT/MIDDLE/OUTPUT state of each Area, aggregating refined and/or local states.
@@ -540,7 +488,6 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 	public QVTc2QVTu(@NonNull EnvironmentFactory environmentFactory, @NonNull QVTuConfiguration qvtuConfiguration) {
 		super(environmentFactory);
         this.qvtuConfiguration = qvtuConfiguration;
-//    	this.domainUsageAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
 	}
 
 	@Override
@@ -627,77 +574,4 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			setMappingDomainModes(localMapping, mode);
 		}
 	}
-
-	/**
-	 * Return true if oclExpression uses only the input domain variables.
-	 *
-	private boolean isInputDomainExpression(@NonNull OCLExpression oclExpression) {
-		if (oclExpression instanceof VariableExp) {
-			VariableDeclaration referredVariable = ((VariableExp)oclExpression).getReferredVariable();
-			if ((referredVariable != null) && !isInputDomainVariable(referredVariable)) {
-				return false;
-			}
-		}
-		for (EObject eObject : oclExpression.eContents()) {
-			if (eObject instanceof OCLExpression) {
-				if (!isInputDomainExpression((OCLExpression)eObject)) {
-					return false;
-				}
-			}
-		}
-		return true;
-	} */
-
-	/**
-	 * Return true if variable is declared in the input domain.
-	 *
-	private boolean isInputDomainVariable(@NonNull VariableDeclaration variable) {
-		Area area = getArea2(variable);
-		return isInputDomain(area);
-	} */
-
-	/**
-	 * Return the non-null PropertyCallExp if oclExpression is a PropertyCallExp in the middle domain.
-	 *
-	private @Nullable PropertyCallExp isMiddleDomainPropertyAccess(@NonNull OCLExpression oclExpression) {
-		if (!(oclExpression instanceof PropertyCallExp)) {
-			return null;
-		}
-		PropertyCallExp propertyCallExp = (PropertyCallExp)oclExpression;
-		OCLExpression sourceExpression = propertyCallExp.getOwnedSource();
-		if (!(sourceExpression instanceof VariableExp)) {
-			return null;
-		}
-		VariableExp variableExp = (VariableExp)sourceExpression;
-		VariableDeclaration variable = variableExp.getReferredVariable();
-		if (!(variable instanceof Variable)) {
-			return null;
-		}
-		if (!isMiddleDomainVariable(variable)) {
-			return null;
-		}
-		return propertyCallExp;
-	} */
-
-	/**
-	 * Return true if variable is declared in the middle domain.
-	 *
-	private boolean isMiddleDomainVariable(@NonNull VariableDeclaration variable) {
-		Area area = getArea2(variable);
-		return isMiddleDomain(area);
-	} */
-	
-
-	/**
-	 * Checks if is output domain.
-	 */
-//	public boolean isOutputDomain(@Nullable Area area) {
-//		boolean isOutput1 = isOutputDomain1(area);
-//		boolean isOutput2 = isOutputDomain2(area);
-//		assert isOutput1 == isOutput2;
-//        return isOutput1;
-//	}
-//	public boolean isOutputDomain1(@Nullable Area area) {
-//        return (area instanceof CoreDomain) && qvtuConfiguration.isOutput(((CoreDomain)area).getTypedModel().getName());
-//	}
 }
