@@ -14,6 +14,7 @@ package org.eclipse.qvtd.compiler.internal.etl.mtc;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -31,7 +32,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -65,12 +65,15 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 /**
- * The Class QVTmToQVTip.
+ * QVTm2QVTp partitions minimal unidirectional QVTc mappings into multiple mappings each of which can be executed once its predicates
+ * are satisfied. Execution once started willnot deadlock.
  */
 public class QVTm2QVTp extends AbstractQVTc2QVTc
 {
@@ -79,58 +82,28 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 	 * 
 	 * References are left unresolved. OCLExpressions are not copied.
 	 */
-    protected static class CreateVisitor extends AbstractCreateVisitor<@NonNull QVTm2QVTp>
+    protected static abstract class AbstractPartCreateVisitor extends AbstractCreateVisitor<@NonNull QVTm2QVTp>
     {
         /**
-         * The mappings using each middle type as identity. Should not be more than one per type.
+         * The mappings using each secondary head type as identity. More than one per type requires a discriminant.
          */
-        private final @NonNull Map<@NonNull Type, @NonNull List<@NonNull Partitioning>> middleType2partitionings = new HashMap<@NonNull Type, @NonNull List<@NonNull Partitioning>>();
+        private final @NonNull Map<@NonNull Type, @NonNull List<@NonNull Partitioning>> secondaryHeadType2partitionings = new HashMap<@NonNull Type, @NonNull List<@NonNull Partitioning>>();
 
-        public CreateVisitor(@NonNull QVTm2QVTp context) {
+        protected AbstractPartCreateVisitor(@NonNull QVTm2QVTp context) {
 			super(context);
 		}
 
 		private void addSecondaryHead(@NonNull RealizedVariable secondaryHead, @NonNull Partitioning partitioning) {
 			Type secondaryType = secondaryHead.getType();
 			assert secondaryType != null;
-			assert context.getDomainUsageAnalysis().getUsage(secondaryHead).isMiddle();
-			List<@NonNull Partitioning> partitionings = middleType2partitionings.get(secondaryType);
+//			assert !context.getDomainUsageAnalysis().getUsage(secondaryHead).isMiddle();
+			List<@NonNull Partitioning> partitionings = secondaryHeadType2partitionings.get(secondaryType);
 			if (partitionings == null) {
 				partitionings = new ArrayList<@NonNull Partitioning>();
-				middleType2partitionings.put(secondaryType, partitionings);
+				secondaryHeadType2partitionings.put(secondaryType, partitionings);
 			}
 			assert !partitionings.contains(partitioning);
 			partitionings.add(partitioning);
-		}
-
-		protected void createAllPredicatesOrAssignments(@NonNull Iterable</*@NonNull*/ Assignment> aIns,
-				@NonNull List</*@NonNull*/ Predicate> pOuts, @NonNull List</*@NonNull*/ Assignment> aOuts) {
-			for (Assignment aIn : aIns) {
-				Element eOut = create(aIn);
-				if (eOut instanceof Predicate) {
-					pOuts.add((Predicate)eOut);
-				}
-				else if (eOut instanceof Assignment) {
-					aOuts.add((Assignment)eOut);
-				}
-				else {
-					assert eOut == null;
-				}
-			}
-		}
-
-		protected void createAllVariables(@NonNull Iterable</*@NonNull*/? extends Variable> vIns,
-				@NonNull List</*@NonNull*/ Variable> gvOuts, @NonNull List</*@NonNull*/ Variable> bvOuts) {
-			for (Variable vIn : vIns) {
-				Variable vOut = create(vIn);
-				assert vOut != null;
-				if (vIn.getOwnedInit() != null) {
-					bvOuts.add(vOut);
-				}
-				else {
-					gvOuts.add(vOut);
-				}
-			}
 		}
 
 		private void discriminate(@NonNull List<@NonNull Partitioning> partitionings) throws IOException {
@@ -217,7 +190,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 				allPartitionings.add(partitioning);
 			}
 			try {
-				for (@NonNull List<@NonNull Partitioning> ambiguousPartitionings : middleType2partitionings.values()) {
+				for (@NonNull List<@NonNull Partitioning> ambiguousPartitionings : secondaryHeadType2partitionings.values()) {
 					if (ambiguousPartitionings.size() > 1) {
 						discriminate(ambiguousPartitionings);
 					}
@@ -289,6 +262,67 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 	    }
 
 		@Override
+		public abstract @NonNull Mapping visitMapping(@NonNull Mapping mIn);
+
+		@Override
+		public @NonNull Transformation visitTransformation(@NonNull Transformation tIn) {
+			context.getDomainUsageAnalysis().analyzeTransformation(tIn);
+			return super.visitTransformation(tIn);
+		}
+
+		@Override
+		public @NonNull TypedModel visitTypedModel(@NonNull TypedModel tmIn) {
+			@NonNull TypedModel tmOut = super.visitTypedModel(tmIn);
+			String name = tmIn.getName();
+			if (name == null) {
+				name = QVTimperativeUtil.MIDDLE_DOMAIN_NAME;
+				tmOut.setName(name);
+			}
+		    return tmOut;
+		}
+    }
+
+	/**
+	 * The PrimaryPartCreateVisitor creates a primary mapping that services all aspects of the mapping except those secondary PropertyAssignments that
+	 * could cause dependency deadlocks which are therefore serviced by secondary mappings. 
+	 */
+    protected static abstract class AbstractPrimaryCreateVisitor extends AbstractPartCreateVisitor
+    {
+		public AbstractPrimaryCreateVisitor(@NonNull QVTm2QVTp context) {
+			super(context);
+		}
+
+		protected void createAllPredicatesOrAssignments(@NonNull Iterable</*@NonNull*/ Assignment> aIns,
+				@NonNull List</*@NonNull*/ Predicate> pOuts, @NonNull List</*@NonNull*/ Assignment> aOuts) {
+			for (Assignment aIn : aIns) {
+				Element eOut = create(aIn);
+				if (eOut instanceof Predicate) {
+					pOuts.add((Predicate)eOut);
+				}
+				else if (eOut instanceof Assignment) {
+					aOuts.add((Assignment)eOut);
+				}
+				else {
+					assert eOut == null;
+				}
+			}
+		}
+
+		protected void createAllVariables(@NonNull Iterable</*@NonNull*/? extends Variable> vIns,
+				@NonNull List</*@NonNull*/ Variable> gvOuts, @NonNull List</*@NonNull*/ Variable> bvOuts) {
+			for (Variable vIn : vIns) {
+				Variable vOut = create(vIn);
+				assert vOut != null;
+				if (vIn.getOwnedInit() != null) {
+					bvOuts.add(vOut);
+				}
+				else {
+					gvOuts.add(vOut);
+				}
+			}
+		}
+
+		@Override
 		public @NonNull Mapping visitMapping(@NonNull Mapping mIn) {
 			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
 			context.pushScope(mOut);
@@ -342,53 +376,30 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			context.popScope();
 			return mOut;
 		}
+    }
 
-		@Override
-		public @NonNull Transformation visitTransformation(@NonNull Transformation tIn) {
-			context.getDomainUsageAnalysis().analyzeTransformation(tIn);
-			return super.visitTransformation(tIn);
-		}
-
-		@Override
-		public @NonNull TypedModel visitTypedModel(@NonNull TypedModel tmIn) {
-			@NonNull TypedModel tmOut = super.visitTypedModel(tmIn);
-			String name = tmIn.getName();
-			if (name == null) {
-				name = QVTimperativeUtil.MIDDLE_DOMAIN_NAME;
-				tmOut.setName(name);
-			}
-		    return tmOut;
+	/**
+	 * The SimpleCreateVisitor creates a mapping that services all aspects of the mapping without any recourse to secondaries. 
+	 */
+    protected static class SimpleCreateVisitor extends AbstractPrimaryCreateVisitor
+    {
+		public SimpleCreateVisitor(@NonNull QVTm2QVTp context) {
+			super(context);
 		}
     }
 
 	/**
-	 * The PrimaryCreateVisitor creates a primary mapping that services all aspects of the mapping except those secondary PropertyAssignments that
+	 * The PrimaryPartCreateVisitor creates a primary mapping that services all aspects of the mapping except those secondary PropertyAssignments that
 	 * could cause dependency deadlocks which are therefore serviced by secondary mappings. 
 	 */
-    protected static class PrimaryCreateVisitor extends CreateVisitor
+    protected static class PrimaryPartCreateVisitor extends AbstractPrimaryCreateVisitor
     {
     	protected final @NonNull List<@NonNull PropertyAssignment> primaryAssignments;
 
-		public PrimaryCreateVisitor(@NonNull QVTm2QVTp context, @NonNull List<@NonNull PropertyAssignment> primaryAssignments) {
+		public PrimaryPartCreateVisitor(@NonNull QVTm2QVTp context, @NonNull List<@NonNull PropertyAssignment> primaryAssignments) {
 			super(context);
 			this.primaryAssignments = primaryAssignments;
 		}
-
-/*		protected void createAllRealizedVariables(@NonNull Iterable</*@NonNull* / RealizedVariable> rvIns,
-				@NonNull List</*@NonNull* / Variable> vOuts, @NonNull List</*@NonNull* / RealizedVariable> rvOuts) {
-			for (RealizedVariable rvIn : rvIns) {
-				Element eOut = create(rvIn);
-				if (eOut instanceof RealizedVariable) {
-					rvOuts.add((RealizedVariable)eOut);
-				}
-				else if (eOut instanceof Variable) {
-					vOuts.add((Variable)eOut);
-				}
-				else {
-					assert eOut == null;
-				}
-			}
-		} */
 
 		@Override
 		public @Nullable Element visitPropertyAssignment(@NonNull PropertyAssignment paIn) {
@@ -402,12 +413,17 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
     }
 
 	/**
-	 * The SecondaryCreateVisitor creates a secondary mapping that complements a primary mapping by servicing one or more secondary PropertyAssignments that
+	 * The SecondaryPartCreateVisitor creates a secondary mapping that complements a primary mapping by servicing one or more secondary PropertyAssignments that
 	 * could not be performed by the primary without a deadlock hazard.
 	 */
-    protected static abstract class AbstractSecondaryCreateVisitor extends CreateVisitor
+    protected static class SecondaryPartCreateVisitor extends AbstractPartCreateVisitor
     {
     	protected final @NonNull String mappingName;
+
+    	/**
+    	 * Assignments made by the primary mapping. Need to be converted to predicates in the secondary mapping.
+    	 */
+    	protected final @NonNull List<@NonNull PropertyAssignment> primaryAssignments;
 
     	/**
     	 * Assignments to be made by this secondary mapping.
@@ -415,16 +431,36 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
     	protected final @NonNull List<@NonNull PropertyAssignment> secondaryAssignments;
 
     	/**
-    	 * The variables used (transitively) by the secondaryAssignments
+    	 * The variables required in the guard patterns by the discriminantAssignments.
     	 */
-    	protected final @NonNull Set<@NonNull Variable> usedVariables;
+    	protected final @NonNull Set<@NonNull Variable> guardVariables;
 
-    	public AbstractSecondaryCreateVisitor(@NonNull QVTm2QVTp context, @NonNull String mappingName,
+    	/**
+    	 * The variables required in the bottom patterns by the secondaryAssignments.
+    	 */
+    	protected final @NonNull Set<@NonNull Variable> bottomVariables;
+
+		public SecondaryPartCreateVisitor(@NonNull QVTm2QVTp context, @NonNull String mappingName, @NonNull RealizedVariable secondaryHead,
+				@NonNull List<@NonNull PropertyAssignment> primaryAssignments, @NonNull List<@NonNull PropertyAssignment> discriminantAssignments,
 				@NonNull List<@NonNull PropertyAssignment> secondaryAssignments) {
 			super(context);
 			this.mappingName = mappingName;
+			this.primaryAssignments = primaryAssignments;
 			this.secondaryAssignments = secondaryAssignments;
-			usedVariables = computeDirectlyReferencedVariables(secondaryAssignments);
+			assert primaryAssignments.containsAll(discriminantAssignments);
+			assert Sets.intersection(Sets.newHashSet(primaryAssignments), Sets.newHashSet(secondaryAssignments)).isEmpty();
+			Set<@NonNull Variable> primaryVariables = computeDirectlyReferencedVariables(primaryAssignments);
+			Set<@NonNull Variable> discriminantVariables = computeDirectlyReferencedVariables(discriminantAssignments);
+			Set<@NonNull Variable> secondaryVariables = computeDirectlyReferencedVariables(secondaryAssignments);
+			discriminantVariables.add(secondaryHead);
+			List<@NonNull Variable> indirectlyReferencedVariables = computeIndirectlyReferencedVariables(secondaryVariables, primaryAssignments);
+			assert indirectlyReferencedVariables.containsAll(secondaryVariables);
+			assert primaryVariables.containsAll(discriminantVariables);
+			guardVariables = new HashSet<@NonNull Variable>(primaryVariables);
+			guardVariables.retainAll(indirectlyReferencedVariables);
+			guardVariables.addAll(discriminantVariables);
+			bottomVariables = new HashSet<@NonNull Variable>(secondaryVariables);
+			bottomVariables.removeAll(guardVariables);
 		}
 
 		protected <T extends Element> @NonNull T create2(@NonNull T source) {
@@ -433,325 +469,100 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			return target;
 		}
 
-		protected void createAllAssignmentPredicates(@NonNull Iterable</*@NonNull*/ Assignment> aIns, @NonNull List</*@NonNull*/ Predicate> pOuts) {
-			for (Assignment aIn : aIns) {
-				if (aIn instanceof VariableAssignment) {
-					VariableAssignment vaIn = (VariableAssignment)aIn;
-					if (usedVariables.contains(vaIn.getTargetVariable())) {
-						Element pOut = vaIn.accept(this);
-						pOuts.add((Predicate)pOut);
-					}
-				}
-				else if (aIn instanceof PropertyAssignment) {
-					PropertyAssignment paIn = (PropertyAssignment)aIn;
-					Variable vIn = getVariable(paIn.getValue());
-					if ((vIn != null) && usedVariables.contains(vIn)) {
-						Element pOut = paIn.accept(this);
-						if (pOut != null) {
-							pOuts.add((Predicate)pOut);
+		@Override
+		public @NonNull Mapping visitMapping(@NonNull Mapping mIn) {
+			Map<@Nullable TypedModel, @NonNull CoreDomain> tmIn2dOut = new HashMap<@Nullable TypedModel, @NonNull CoreDomain>();
+			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
+			context.pushScope(mOut);
+			context.addTrace(mIn, mOut);
+	        mOut.setName(mappingName);
+			mOut.setGuardPattern(create(mIn.getGuardPattern()));
+			mOut.setBottomPattern(create(mIn.getBottomPattern()));
+			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
+			//
+			// Middle domain
+			//
+			{
+				CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+//				System.out.println("  middle");
+				context.addTrace(mIn, dOut);
+				GuardPattern gOut = create(mIn.getGuardPattern());
+				BottomPattern bOut = create(mIn.getBottomPattern());
+				assert (gOut != null) && (bOut != null);
+				dOut.setGuardPattern(gOut);
+				dOut.setBottomPattern(bOut);
+				dOut.setIsCheckable(false);
+				dOut.setIsEnforceable(true);
+				mOut.getDomain().add(dOut);
+				tmIn2dOut.put(null, dOut);
+			}
+			//
+			// Side domains
+			//
+			for (Domain d : ClassUtil.nullFree(mIn.getDomain())) {
+				CoreDomain dIn = (CoreDomain)d;
+				CoreDomain dOut = create(dIn);
+				assert dOut != null;
+				boolean isEnforceable = context.isEnforceableTransformationWide(d);
+				assert d.isIsEnforceable() == isEnforceable;
+				mOut.getDomain().add(dOut);
+				tmIn2dOut.put(dIn.getTypedModel(), dOut);
+			}
+			//
+			//	Create the guard variables
+			//
+			for (@NonNull Variable vIn : guardVariables) {
+				CoreDomain dOut = tmIn2dOut.get(getTypedModel(vIn));
+				assert dOut != null;
+				Variable vOut = create(vIn);
+				dOut.getGuardPattern().getVariable().add(vOut);
+			}
+			//
+			//	Create the bottom variables
+			//
+			for (@NonNull Variable vIn : bottomVariables) {
+				CoreDomain dOut = tmIn2dOut.get(getTypedModel(vIn));
+				assert dOut != null;
+				Variable vOut = create(vIn);
+				dOut.getBottomPattern().getVariable().add(vOut);
+			}
+			//
+			//	Create the guard predicates
+			//
+			for (@NonNull Assignment aIn : primaryAssignments) {
+				if (aIn instanceof PropertyAssignment) {
+					Set<@NonNull Variable> usedVariables = new HashSet<@NonNull Variable>();
+					PropertyAssignment paIn = (PropertyAssignment) aIn;
+					if (paIn.getValue() instanceof VariableExp) {
+						computeDirectlyReferencedVariables(paIn, usedVariables);
+						if (guardVariables.containsAll(usedVariables)) {
+							@NonNull Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
+					        context.addTrace(aIn, pOut);
+					        // The condition expression is copied during update once replacement variables exist.
+							createAll(aIn.getOwnedComments(), pOut.getOwnedComments());
+							mOut.getGuardPattern().getPredicate().add(pOut);
 						}
 					}
 				}
 			}
-		}
-
-		protected void createAllPredicatePredicates(@NonNull Iterable</*@NonNull*/ Predicate> pIns, @NonNull List</*@NonNull*/ Predicate> pOuts) {
-			for (Predicate pIn : pIns) {
-				OCLExpression eIn = pIn.getConditionExpression();
-				if (eIn instanceof OperationCallExp) {
-					OperationCallExp oIn = (OperationCallExp)eIn;
-					if ("=".equals(oIn.getReferredOperation().getName())) {
-						Variable lvIn = getVariable(oIn.getOwnedSource());
-						Variable rvIn = getVariable(oIn.getOwnedArguments().get(0));
-						if (((lvIn != null) && usedVariables.contains(lvIn)) || ((rvIn != null) && usedVariables.contains(rvIn))) {
-							Element pOut = pIn.accept(this);
-							pOuts.add((Predicate)pOut);
-						}
-					}
-				}
+			//
+			//	Create the bottom assignments
+			//
+			for (@NonNull PropertyAssignment aIn : secondaryAssignments) {
+				mOut.getBottomPattern().getAssignment().add(create2(aIn));
 			}
+			context.popScope();
+			return mOut;
 		}
 
-		@Override
-		protected void createAllPredicatesOrAssignments(@NonNull Iterable</*@NonNull*/ Assignment> aIns,
-				@NonNull List</*@NonNull*/ Predicate> pOuts, @NonNull List</*@NonNull*/ Assignment> aOuts) {
-/*			for (Assignment aIn : aIns) {
-				Element eOut = create(aIn);
-				if (eOut instanceof Predicate) {
-					pOuts.add((Predicate)eOut);
-				}
-				else if (eOut instanceof Assignment) {
-					aOuts.add((Assignment)eOut);
-				}
-				else {
-					assert eOut == null;
-				}
-			} */
-			throw new UnsupportedOperationException();
+		private @Nullable TypedModel getTypedModel(@NonNull Variable vIn) {
+			CoreDomain dIn = (CoreDomain) QVTcoreBaseUtil.getContainingDomain(vIn);
+			return dIn != null ? dIn.getTypedModel() : null;
 		}
-
-//		protected void createAllRealizedVariables(@NonNull Iterable<RealizedVariable> rvIns, @NonNull List<Variable> vOuts, @NonNull List<RealizedVariable> rvOuts) {
-//			// There are no secondary RealizedVariables
-//		}
-
-		@Override
-		protected void createAllVariables(@NonNull Iterable</*@NonNull*/ ? extends Variable> vIns,
-				@NonNull List</*@NonNull*/ Variable> gvOuts, @NonNull List</*@NonNull*/ Variable> bvOuts) {
-			for (Variable vIn : vIns) {
-				if ((vIn != getSecondaryHead()) && usedVariables.contains(vIn)) {
-					Variable vOut = create(vIn);
-					assert vOut != null;
-					if (vIn.getOwnedInit() != null) {
-						bvOuts.add(vOut);
-					}
-					else {
-						gvOuts.add(vOut);
-					}
-				}
-			}
-		}
-
-		protected abstract @Nullable RealizedVariable getSecondaryHead();
 
 		@Override
 		public @Nullable Element visitPredicate(@NonNull Predicate pIn) {
 			return null;
-		}
-
-		@Override
-		public @Nullable Element visitPropertyAssignment(@NonNull PropertyAssignment paIn) {
-			if (secondaryAssignments.contains(paIn)) {
-				return super.visitPropertyAssignment(paIn);
-			}
-			else {
-				return null;
-			}
-		}
-
-		//
-		//	The secondary RealizedVariables are converted to Variables
-		//
-		@Override
-		public @NonNull Variable visitRealizedVariable(@NonNull RealizedVariable rvIn) {
-			return super.visitVariable(rvIn);
-		}
-	}
-	
-	/**
-	 * The SecondaryCreateVisitor creates a secondary mapping that complements a primary mapping by servicing one or more secondary PropertyAssignments that
-	 * could not be performed by the primary without a deadlock hazard.
-	 */
-	protected static class FoldedSecondaryCreateVisitor extends AbstractSecondaryCreateVisitor
-	{
-		public FoldedSecondaryCreateVisitor(@NonNull QVTm2QVTp context, @NonNull String mappingName,
-				@NonNull List<@NonNull PropertyAssignment> secondaryAssignments) {
-			super(context, mappingName, secondaryAssignments);
-		}
-
-		@Override
-		protected @Nullable RealizedVariable getSecondaryHead() {
-			return null;
-		}
-
-		@Override
-		public @NonNull Mapping visitMapping(@NonNull Mapping mIn) {
-			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
-			context.pushScope(mOut);
-			context.addTrace(mIn, mOut);
-	        mOut.setName(mappingName);
-			mOut.setGuardPattern(create(mIn.getGuardPattern()));
-			mOut.setBottomPattern(create(mIn.getBottomPattern()));
-			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
-			//
-			// Middle domain
-			//
-			{
-				CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
-//				System.out.println("  middle");
-				context.addTrace(mIn, dOut);
-				GuardPattern gOut = create(mIn.getGuardPattern());
-				BottomPattern bOut = create(mIn.getBottomPattern());
-				assert (gOut != null) && (bOut != null);
-				dOut.setGuardPattern(gOut);
-				dOut.setBottomPattern(bOut);
-				dOut.setIsCheckable(false);
-				dOut.setIsEnforceable(true);
-				GuardPattern gIn = mIn.getGuardPattern();
-//				createAll(gIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
-				BottomPattern bIn = mIn.getBottomPattern();
-//				createAllPredicatesOrAssignments(bIn.getAssignment(), mOut.getGuardPattern().getPredicate(), mOut.getBottomPattern().getAssignment());		// Colocate all assignments
-				createAllPredicatePredicates(bIn.getPredicate(), mOut.getBottomPattern().getPredicate());
-				createAllAssignmentPredicates(bIn.getAssignment(), mOut.getBottomPattern().getPredicate());
-//				createAll(bIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
-//				gOut.getVariable().add(create2(secondaryHead));
-				createAllVariables(gIn.getVariable(), gOut.getVariable(), bOut.getVariable());
-				createAllVariables(bIn.getVariable(), bOut.getVariable(), bOut.getVariable());
-				createAllVariables(bIn.getRealizedVariable(), bOut.getVariable(), bOut.getVariable());
-				for (@NonNull PropertyAssignment aIn : secondaryAssignments) {
-					mOut.getBottomPattern().getAssignment().add(create2(aIn));
-				}
-				mOut.getDomain().add(dOut);
-			}
-			//
-			// Side domains
-			//
-			for (Domain d : ClassUtil.nullFree(mIn.getDomain())) {
-				CoreDomain dIn = (CoreDomain)d;
-				CoreDomain dOut = create(dIn);
-				assert dOut != null;
-				GuardPattern gOut = dOut.getGuardPattern();
-				BottomPattern bOut = dOut.getBottomPattern();
-				boolean isEnforceable = context.isEnforceableTransformationWide(d);
-//				System.out.println("  " + d + " " + d.isIsEnforceable());
-				assert d.isIsEnforceable() == isEnforceable;
-				GuardPattern gIn = dIn.getGuardPattern();
-//				createAll(gIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
-				BottomPattern bIn = dIn.getBottomPattern();
-//				createAllPredicatesOrAssignments(bIn.getAssignment(), mOut.getGuardPattern().getPredicate(), mOut.getBottomPattern().getAssignment());		// Colocate all assignments
-				createAllAssignmentPredicates(bIn.getAssignment(), mOut.getBottomPattern().getPredicate());
-				createAllPredicatePredicates(bIn.getPredicate(), mOut.getBottomPattern().getPredicate());
-//				createAll(bIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
-				createAllVariables(gIn.getVariable(), gOut.getVariable(), bOut.getVariable());
-				createAllVariables(bIn.getVariable(), bOut.getVariable(), bOut.getVariable());
-				createAllVariables(bIn.getRealizedVariable(), bOut.getVariable(), bOut.getVariable());
-				mOut.getDomain().add(dOut);
-			}
-			//
-			//
-			//
-//			PropertyAssignment discriminantAssignment2 = discriminantAssignment;
-//			if (discriminantAssignment2 != null) {
-//				mOut.getGuardPattern().getPredicate().add((Predicate) discriminantAssignment2.accept(this));
-//			}
-			context.popScope();
-			return mOut;
-		}
-	}
-	
-	/**
-	 * The SecondaryCreateVisitor creates a secondary mapping that complements a primary mapping by servicing one or more secondary PropertyAssignments that
-	 * could not be performed by the primary without a deadlock hazard.
-	 */
-	protected static class SecondaryCreateVisitor extends AbstractSecondaryCreateVisitor
-	{
-    	protected final @NonNull RealizedVariable secondaryHead;
-    	
-    	/**
-    	 * Assignments made by the primary mapping. Need to be converted to predicates in the secondary mapping.
-    	 */
-    	protected final @NonNull List<@NonNull PropertyAssignment> primaryAssignments;
-    	
-    	protected final @Nullable PropertyAssignment discriminantAssignment;
-
-		public SecondaryCreateVisitor(@NonNull QVTm2QVTp context, @NonNull String mappingName, @NonNull RealizedVariable secondaryHead,
-				@NonNull List<@NonNull PropertyAssignment> primaryAssignments, @Nullable PropertyAssignment discriminantAssignment,
-				@NonNull List<@NonNull PropertyAssignment> secondaryAssignments) {
-			super(context, mappingName, secondaryAssignments);
-			this.secondaryHead = secondaryHead;
-			this.primaryAssignments = primaryAssignments;
-			this.discriminantAssignment = discriminantAssignment;
-			if (discriminantAssignment != null) {
-				Variable discriminantVariable = getVariable(discriminantAssignment.getValue());
-				if (discriminantVariable != null) {
-					usedVariables.add(discriminantVariable);
-				}
-			}
-			Iterables.addAll(usedVariables, computeIndirectlyReferencedVariables(usedVariables, primaryAssignments));
-			assert usedVariables.contains(secondaryHead);
-		}
-
-		@Override
-		protected @Nullable RealizedVariable getSecondaryHead() {
-			return secondaryHead;
-		}
-
-		@Override
-		public @NonNull Mapping visitMapping(@NonNull Mapping mIn) {
-			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
-			context.pushScope(mOut);
-			context.addTrace(mIn, mOut);
-	        mOut.setName(mappingName);
-			mOut.setGuardPattern(create(mIn.getGuardPattern()));
-			mOut.setBottomPattern(create(mIn.getBottomPattern()));
-			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
-			//
-			// Middle domain
-			//
-			{
-				CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
-//				System.out.println("  middle");
-				context.addTrace(mIn, dOut);
-				GuardPattern gOut = create(mIn.getGuardPattern());
-				BottomPattern bOut = create(mIn.getBottomPattern());
-				assert (gOut != null) && (bOut != null);
-				dOut.setGuardPattern(gOut);
-				dOut.setBottomPattern(bOut);
-				dOut.setIsCheckable(false);
-				dOut.setIsEnforceable(true);
-				GuardPattern gIn = mIn.getGuardPattern();
-//				createAll(gIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
-				BottomPattern bIn = mIn.getBottomPattern();
-//				createAllPredicatesOrAssignments(bIn.getAssignment(), mOut.getGuardPattern().getPredicate(), mOut.getBottomPattern().getAssignment());		// Colocate all assignments
-				createAllPredicatePredicates(bIn.getPredicate(), mOut.getBottomPattern().getPredicate());
-				createAllAssignmentPredicates(bIn.getAssignment(), mOut.getBottomPattern().getPredicate());
-//				createAll(bIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
-				gOut.getVariable().add(create2(secondaryHead));
-				createAllVariables(gIn.getVariable(), gOut.getVariable(), bOut.getVariable());
-				createAllVariables(bIn.getVariable(), bOut.getVariable(), bOut.getVariable());
-				createAllVariables(bIn.getRealizedVariable(), bOut.getVariable(), bOut.getVariable());
-				for (@NonNull PropertyAssignment aIn : secondaryAssignments) {
-					mOut.getBottomPattern().getAssignment().add(create2(aIn));
-				}
-				mOut.getDomain().add(dOut);
-			}
-			//
-			// Side domains
-			//
-			for (Domain d : ClassUtil.nullFree(mIn.getDomain())) {
-				CoreDomain dIn = (CoreDomain)d;
-				CoreDomain dOut = create(dIn);
-				assert dOut != null;
-				GuardPattern gOut = dOut.getGuardPattern();
-				BottomPattern bOut = dOut.getBottomPattern();
-				boolean isEnforceable = context.isEnforceableTransformationWide(d);
-//				System.out.println("  " + d + " " + d.isIsEnforceable());
-				assert d.isIsEnforceable() == isEnforceable;
-				GuardPattern gIn = dIn.getGuardPattern();
-//				createAll(gIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
-				BottomPattern bIn = dIn.getBottomPattern();
-//				createAllPredicatesOrAssignments(bIn.getAssignment(), mOut.getGuardPattern().getPredicate(), mOut.getBottomPattern().getAssignment());		// Colocate all assignments
-				createAllAssignmentPredicates(bIn.getAssignment(), mOut.getBottomPattern().getPredicate());
-				createAllPredicatePredicates(bIn.getPredicate(), mOut.getBottomPattern().getPredicate());
-//				createAll(bIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
-				createAllVariables(gIn.getVariable(), gOut.getVariable(), bOut.getVariable());
-				createAllVariables(bIn.getVariable(), bOut.getVariable(), bOut.getVariable());
-				createAllVariables(bIn.getRealizedVariable(), bOut.getVariable(), bOut.getVariable());
-				mOut.getDomain().add(dOut);
-			}
-			//
-			//
-			//
-			PropertyAssignment discriminantAssignment2 = discriminantAssignment;
-			if (discriminantAssignment2 != null) {
-				mOut.getGuardPattern().getPredicate().add((Predicate) discriminantAssignment2.accept(this));
-			}
-			context.popScope();
-			return mOut;
-		}
-
-		@Override
-		public @Nullable Element visitPropertyAssignment(@NonNull PropertyAssignment paIn) {
-			if (primaryAssignments.contains(paIn)) {
-				@NonNull Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
-		        context.addTrace(paIn, pOut);
-		        // The condition expression is copied during update once replacement variables exist.
-				createAll(paIn.getOwnedComments(), pOut.getOwnedComments());
-		        return pOut;
-//				return null;
-			}
-			else {
-				return super.visitPropertyAssignment(paIn);
-			}
 		}
 
 		//
@@ -1024,7 +835,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 
     protected static class Partitioning
     {
-    	protected final @NonNull CreateVisitor createVisitor;
+    	protected final @NonNull AbstractPartCreateVisitor createVisitor;
 		protected final @NonNull Mapping mapping;
 		private final @NonNull Map<@NonNull Variable, @NonNull VariablePart> variable2part = new HashMap<@NonNull Variable, @NonNull VariablePart>();
 		private @Nullable List<@NonNull VariablePart> allBottomVariables = null;
@@ -1051,7 +862,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		 */
 		private @Nullable Property discriminant = null;
 		
-		public Partitioning(@NonNull CreateVisitor createVisitor, @NonNull Mapping mapping) {
+		public Partitioning(@NonNull AbstractPartCreateVisitor createVisitor, @NonNull Mapping mapping) {
 			this.createVisitor = createVisitor;
 			this.mapping = mapping;
 		}
@@ -1178,6 +989,9 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			if ((requiredParts2requiringParts != null) && (requiredParts2requiringParts.size() > 0)) {
 				List<@NonNull PropertyAssignment> primaryAssignments2 = primaryAssignments = synthesizeComputePrimaryAssignments(requiredParts2requiringParts);
 				secondaryHead = synthesizeComputeSecondaryHead(allRealizedVariables, primaryAssignments2);
+				if (secondaryHead == null) {
+					secondaryHead = synthesizeComputeSecondaryHead(allRealizedVariables, primaryAssignments2);	// FIXME debugging
+				}
 			}
 		}
 
@@ -1357,12 +1171,12 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		}
 
 		private void partitionPart(@NonNull Part part) {
-			Set<@NonNull Part> dependsOns = part2requiredParts.get(part);
-			if (dependsOns != null) {
-				for (Part dependsOn : dependsOns) {
-					assert partitionedParts.contains(dependsOn);
-				}
-			}
+//			Set<@NonNull Part> dependsOns = part2requiredParts.get(part);
+//			if (dependsOns != null) {
+//				for (Part dependsOn : dependsOns) {
+//					assert partitionedParts.contains(dependsOn);
+//				}
+//			}
 			partitionedParts.add(part);
 			remainingParts.remove(part);
 		}
@@ -1602,6 +1416,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		}
 
 		public @NonNull List<@NonNull Mapping> synthesize() {
+			@SuppressWarnings("unused")String name = mapping.getName();
 			Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> requiredParts2requiringParts2 = requiredParts2requiringParts;
 			if ((requiredParts2requiringParts2 == null) || (requiredParts2requiringParts2.size() <= 0)) {
 				Mapping mOut = createVisitor.create(mapping);
@@ -1615,7 +1430,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 				assert primaryAssignments2 != null;// && (secondaryHead2 != null);
 				Map<@NonNull List<@NonNull Part>, @NonNull String> dependentParts2mappingName = synthesizeComputeMappingNames(requiredParts2requiringParts2);
 				QVTm2QVTp context = createVisitor.getContext();
-				CreateVisitor refinedCreateVisitor = new PrimaryCreateVisitor(context, primaryAssignments2);
+				AbstractPartCreateVisitor refinedCreateVisitor = new PrimaryPartCreateVisitor(context, primaryAssignments2);
 				Mapping mOut = refinedCreateVisitor.create(mapping);
 				assert mOut != null;
 				mOuts.add(mOut);
@@ -1632,17 +1447,28 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 						}
 					}
 				}
-				for (Map.Entry<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> entry : requiredParts2requiringParts2.entrySet()) {
-					List<@NonNull Part> dependentParts = entry.getKey();
-					List<@NonNull PropertyAssignment> secondaryAssignments = synthesizeComputeSecondaryAssignments(entry.getValue());
+				List<@NonNull List<@NonNull Part>> requiredPartsList = new ArrayList<@NonNull List<@NonNull Part>>(requiredParts2requiringParts2.keySet());
+				Collections.sort(requiredPartsList, new Comparator<@NonNull List<@NonNull Part>>() {
+					@Override
+					public int compare(@NonNull List<@NonNull Part> o1, @NonNull List<@NonNull Part> o2) {
+						String n1 = dependentParts2mappingName.get(o1);
+						String n2 = dependentParts2mappingName.get(o2);
+						return ClassUtil.safeCompareTo(n1, n2);
+					}
+				});
+				for (@NonNull List<@NonNull Part> dependentParts : requiredPartsList) {
+					List<@NonNull Part> requiringParts = requiredParts2requiringParts2.get(dependentParts);
+					assert requiringParts != null;
+					List<@NonNull PropertyAssignment> secondaryAssignments = synthesizeComputeSecondaryAssignments(requiringParts);
 					String mappingName = dependentParts2mappingName.get(dependentParts);
 					assert mappingName != null;
-					if (secondaryHead2 !=  null) {
-						refinedCreateVisitor = new SecondaryCreateVisitor(context, mappingName, secondaryHead2, primaryAssignments2, discriminantAssignment, secondaryAssignments);
-					}
-					else {
-						refinedCreateVisitor = new FoldedSecondaryCreateVisitor(context, mappingName, secondaryAssignments);
-					}
+					assert (secondaryHead2 !=  null);// {
+						refinedCreateVisitor = new SecondaryPartCreateVisitor(context, mappingName, secondaryHead2, primaryAssignments2,
+							discriminantAssignment != null ? Collections.singletonList(discriminantAssignment) : Collections.emptyList(), secondaryAssignments);
+//					}
+//					else {
+//						refinedCreateVisitor = new FoldedSecondaryCreateVisitor(context, mappingName, secondaryAssignments);
+//					}
 					mOut = refinedCreateVisitor.create(mapping);
 					assert mOut != null;
 					mOuts.add(mOut);
@@ -1680,6 +1506,26 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 //					source2targets.put(realizedVariable, null);
 				}
 			}
+			if (bestRealizedVariable == null) {
+				for (@NonNull VariablePart realizedVariablePart : allRealizedVariables) {
+					RealizedVariable realizedVariable = (RealizedVariable) realizedVariablePart.getVariable();
+					DomainUsage usage = createVisitor.getContext().getDomainUsageAnalysis().getUsage(realizedVariable);
+					if (usage.isOutput()) {
+						int realizedVariableCount = 0;
+						@NonNull Iterable<@NonNull Variable> definedVariables = computeIndirectlyDefinedVariables(Collections.singletonList(realizedVariable), primaryAssignments);
+						for (@NonNull Variable definedVariable : definedVariables) {
+							if (definedVariable instanceof RealizedVariable) {
+								realizedVariableCount++;
+							}
+						}
+						if ((bestRealizedVariable == null) || (realizedVariableCount >= bestRealizedVariableCount)) {
+							bestRealizedVariable = realizedVariable;
+							bestRealizedVariableCount = realizedVariableCount;
+						}
+//						source2targets.put(realizedVariable, null);
+					}
+				}
+			}
 /*			for (@NonNull PropertyAssignment primaryAssignment : primaryAssignments) {
 				Variable slotVariable = getVariable(primaryAssignment.getSlotExpression());
 				if ((slotVariable != null) && source2targets.containsKey(slotVariable)) {
@@ -1715,7 +1561,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			for (List<@NonNull Part> dependentParts : dependentParts2commitParts.keySet()) {
 //				assert dependentParts !
 				StringBuilder s = new StringBuilder();
-				for (Part dependentPart : dependentParts) {
+				for (@NonNull Part dependentPart : dependentParts) {
 					s.append("_");
 					s.append(dependentPart.getName());
 				}
@@ -1723,7 +1569,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			}
 			List<@NonNull String> sortedKeys = new ArrayList<@NonNull String>(key2dependentParts.keySet());
 			Collections.sort(sortedKeys);
-			for (String key : sortedKeys) {
+			for (@NonNull String key : sortedKeys) {
 				List<@NonNull Part> dependentParts = key2dependentParts.get(key);
 				assert dependentParts != null;
 				String name = mapping.getName() + i++;				// FIXME More readable name
@@ -1734,7 +1580,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 
 		private @NonNull List<@NonNull PropertyAssignment> synthesizeComputePrimaryAssignments(@NonNull Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> requiredParts2requiringParts) {
 			List<@NonNull PropertyAssignment> primaryAssignments = new ArrayList<@NonNull PropertyAssignment>();
-			for (AssignablePart part : allPropertyAssignments) {
+			for (@NonNull AssignablePart part : allPropertyAssignments) {
 				if (part instanceof PropertyAssignablePart) {
 					PropertyAssignment propertyAssignment = ((PropertyAssignablePart)part).getPropertyAssignment();
 					if (propertyAssignment != null) {
@@ -1752,8 +1598,8 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 					}
 				}
 			} */
-			for (List<@NonNull Part> requiringParts : requiredParts2requiringParts.values()) {
-				for (Part requiringPart : requiringParts) {
+			for (@NonNull List<@NonNull Part> requiringParts : requiredParts2requiringParts.values()) {
+				for (@NonNull Part requiringPart : requiringParts) {
 					if (requiringPart instanceof PropertyAssignablePart) {
 						PropertyAssignment propertyAssignment = ((PropertyAssignablePart)requiringPart).getPropertyAssignment();
 						if (propertyAssignment != null) {
@@ -1767,7 +1613,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 
 		private @NonNull List<@NonNull PropertyAssignment> synthesizeComputeSecondaryAssignments(@NonNull List<@NonNull Part> commitParts) {
 			List<@NonNull PropertyAssignment> secondaryAssignments = new ArrayList<@NonNull PropertyAssignment>();
-			for (Part secondaryCommit : commitParts) {
+			for (@NonNull Part secondaryCommit : commitParts) {
 				if (secondaryCommit instanceof PropertyAssignablePart) {
 					PropertyAssignment propertyAssignment = ((PropertyAssignablePart)secondaryCommit).getPropertyAssignment();
 					if (propertyAssignment != null) {
@@ -1798,18 +1644,6 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 //			context.discriminate();
 			return super.visitCoreModel(mOut);
 		}
-
-		@Override
-		public @Nullable Object visitPredicate(@NonNull Predicate pOut) {
-			Element pIn = context.equivalentSource(pOut);
-			if (pIn instanceof PropertyAssignment) {
-				return convertToPredicate((PropertyAssignment) pIn, pOut);
-			}
-			else {
-				pOut.setConditionExpression(copy(((Predicate)pIn).getConditionExpression()));
-			}
-			return null;
-		}
 	}
 
     /**
@@ -1818,17 +1652,21 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 	private static @NonNull Set<@NonNull Variable> computeDirectlyReferencedVariables(@NonNull List<@NonNull PropertyAssignment> propertyAssignments) {
 		Set<@NonNull Variable> usedVariables = new HashSet<@NonNull Variable>();
 		for (PropertyAssignment propertyAssignment : propertyAssignments) {
-			for (TreeIterator<EObject> tit = propertyAssignment.eAllContents(); tit.hasNext(); ) {
-				EObject eObject = tit.next();
-				if (eObject instanceof VariableExp) {
-					VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
-					if (referredVariable instanceof Variable) {
-						usedVariables.add((Variable)referredVariable);
-					}
+			computeDirectlyReferencedVariables(propertyAssignment, usedVariables);
+		}
+		return usedVariables;
+	}
+
+	private static void computeDirectlyReferencedVariables(@NonNull PropertyAssignment propertyAssignment, @NonNull Set<@NonNull Variable> usedVariables) {
+		for (TreeIterator<EObject> tit = propertyAssignment.eAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof VariableExp) {
+				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
+				if ((referredVariable instanceof Variable) && !(referredVariable.eContainer() instanceof Transformation)) {
+					usedVariables.add((Variable)referredVariable);
 				}
 			}
 		}
-		return usedVariables;
 	}
 
 	/**
@@ -1839,7 +1677,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		Iterables.addAll(variablesList, byVariables);
 		for (int i = 0; i < variablesList.size(); i++) {
 			Variable usedVariable = variablesList.get(i);
-			for (PropertyAssignment propertyAssignment : propertyAssignments) {
+			for (@NonNull PropertyAssignment propertyAssignment : propertyAssignments) {
 				Variable rightVariable = getVariable(propertyAssignment.getValue());
 				Variable leftVariable = getVariable(propertyAssignment.getSlotExpression());
 				if ((leftVariable == usedVariable) && (rightVariable != null)) {
@@ -1855,7 +1693,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
     /**
      * Return all variables indirectly referenced byVariables using propertyAssignments. i.e. if C is referenced in A.b := C, A is referenced too.
      */
-	private static @NonNull Iterable<@NonNull Variable> computeIndirectlyReferencedVariables(@NonNull Iterable<@NonNull Variable> byVariables, @NonNull List<@NonNull PropertyAssignment> propertyAssignments) {
+	private static @NonNull List<@NonNull Variable> computeIndirectlyReferencedVariables(@NonNull Iterable<@NonNull Variable> byVariables, @NonNull List<@NonNull PropertyAssignment> propertyAssignments) {
 		List<@NonNull Variable> variablesList = new ArrayList<@NonNull Variable>();
 		Iterables.addAll(variablesList, byVariables);
 		for (int i = 0; i < variablesList.size(); i++) {
@@ -1905,8 +1743,8 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 	}
 	
 	@Override
-	protected @NonNull CreateVisitor createCreateVisitor() {
-		return new CreateVisitor(this);
+	protected @NonNull AbstractPartCreateVisitor createCreateVisitor() {
+		return new SimpleCreateVisitor(this);
 	}
 
 	@Override
