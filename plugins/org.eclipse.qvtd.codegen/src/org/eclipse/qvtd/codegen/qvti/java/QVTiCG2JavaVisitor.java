@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
@@ -43,17 +44,17 @@ import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.tx.AbstractInvocation;
 import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
-import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.evaluation.tx.InvocationManager;
 import org.eclipse.ocl.pivot.evaluation.tx.ObjectManager;
+import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
@@ -295,6 +296,33 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return null;
     }
 
+	protected void doAssigned(@NonNull CGEcorePropertyAssignment cgPropertyAssignment) {
+		EStructuralFeature eStructuralFeature = ClassUtil.nonNullModel(cgPropertyAssignment.getEStructuralFeature());
+		CGValuedElement cgSlot = getExpression(cgPropertyAssignment.getSlotValue());
+		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
+		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
+		boolean isHazardous = false;
+		Element asPropertyAssignment = cgPropertyAssignment.getAst();
+		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asPropertyAssignment);
+		if ((asMapping != null) && (asPropertyAssignment instanceof PropertyAssignment)) {
+			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (PropertyAssignment)asPropertyAssignment);
+		}
+		if (isHazardous || isIncremental) {
+			js.append("objectManager.assigned(");
+			if (isIncremental) {
+				js.append("this, ");
+			}
+			js.appendValueName(cgSlot);
+			js.append(", ");
+			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
+			js.append(".Literals.");
+			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+			js.append(", ");
+			js.appendValueName(cgInit);
+			js.append(", null);\n");
+		}
+	}
+
 	protected void doConstructor(@NonNull CGTransformation cgTransformation, @Nullable String oppositeName, @NonNull String @Nullable [] allInstancesNames) {
 //		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
 		String evaluatorName = JavaConstants.EXECUTOR_NAME;
@@ -391,6 +419,46 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(")invocationManager);\n");
 		js.popIndentation();		
 		js.append("}\n");
+	}
+
+	protected void doGetting(@NonNull CGNavigationCallExp cgPropertyCallExp, @NonNull EStructuralFeature eStructuralFeature, boolean isOpposite) {
+		Element asPropertyCallExp = cgPropertyCallExp.getAst();
+		CGMapping cgMapping = QVTiCGUtil.getContainingCGMapping(cgPropertyCallExp);
+		Mapping asMapping = cgMapping != null ? (Mapping) cgMapping.getAst() : null;
+		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
+		boolean isHazardous = false;
+		if ((asMapping != null) && (asPropertyCallExp instanceof NavigationCallExp)) {
+			isHazardous = transformationAnalysis.isHazardousRead(asMapping, (NavigationCallExp)asPropertyCallExp);
+		}
+		if (isHazardous) {
+			EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
+			//
+			js.append("objectManager.getting(");
+			js.appendValueName(source);
+			js.append(", ");
+			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
+			js.append(".Literals.");
+			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+			js.append(", ");
+			js.appendBooleanString(isOpposite);
+			js.append(");\n");
+		}
+	}
+
+	protected void doGot(@NonNull CGNavigationCallExp cgPropertyCallExp, @NonNull CGValuedElement source, @NonNull EStructuralFeature eStructuralFeature) {
+		if (useGot) {
+			EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
+			//
+			js.append("objectManager.got(this, ");
+			js.appendValueName(source);
+			js.append(", ");
+			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
+			js.append(".Literals.");
+			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+			js.append(", ");
+			js.appendValueName(cgPropertyCallExp);
+			js.append(");\n");
+		}
 	}
 
 	protected void doOppositeCaches(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
@@ -639,7 +707,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 //		CGTypeId cgTypeId = analyzer.getTypeId(pivotProperty.getOwningType().getTypeId());
 //		JavaTypeDescriptor requiredTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId, false);
 		EStructuralFeature eStructuralFeature = ClassUtil.nonNullModel(cgPropertyAssignment.getEStructuralFeature());
-		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
 		CGValuedElement cgSlot = getExpression(cgPropertyAssignment.getSlotValue());
 		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
 //		Class<?> requiredJavaClass = requiredTypeDescriptor.getJavaClass();
@@ -672,73 +739,24 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.appendValueName(cgInit);
 			js.append(");\n");
 		}
-		boolean isHazardous = false;
-		Element asPropertyAssignment = cgPropertyAssignment.getAst();
-		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asPropertyAssignment);
-		if ((asMapping != null) && (asPropertyAssignment instanceof PropertyAssignment)) {
-			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (PropertyAssignment)asPropertyAssignment);
-		}
-		if (isHazardous || isIncremental) {
-			js.append("objectManager.assigned(");
-			if (isIncremental) {
-				js.append("this, ");
-			}
-			js.appendValueName(cgSlot);
-			js.append(", ");
-			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
-			js.append(".Literals.");
-			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
-			js.append(", ");
-			js.appendValueName(cgInit);
-			js.append(", null);\n");
-		}
+		doAssigned(cgPropertyAssignment);
 		return true;
 	}
 
 	@Override
 	public @NonNull Boolean visitCGEcorePropertyCallExp(@NonNull CGEcorePropertyCallExp cgPropertyCallExp) {
-		boolean isHazardous = false;
-		Element asPropertyCallExp = cgPropertyCallExp.getAst();
-		CGMapping cgMapping = QVTiCGUtil.getContainingCGMapping(cgPropertyCallExp);
-		Mapping asMapping = cgMapping != null ? (Mapping) cgMapping.getAst() : null;
-		if ((asMapping != null) && (asPropertyCallExp instanceof PropertyCallExp)) {
-			isHazardous = transformationAnalysis.isHazardousRead(asMapping, (PropertyCallExp)asPropertyCallExp);
-		}
 		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
 		//
 		if (!js.appendLocalStatements(source)) {
 			return false;
 		}
-		if (isHazardous) {
-			EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
-			EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
-			//
-			js.append("objectManager.getting(");
-			js.appendValueName(source);
-			js.append(", ");
-			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
-			js.append(".Literals.");
-			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
-			js.append(", false);\n");
-		}
+		EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
+		doGetting(cgPropertyCallExp, eStructuralFeature, false);
 		Boolean status = appendCGEcorePropertyCallExp(cgPropertyCallExp, source);
 		if (status != ValueUtil.TRUE_VALUE) {
 			return status;
 		}
-		if (useGot) {
-			EStructuralFeature eStructuralFeature = ClassUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
-			EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
-			//
-			js.append("objectManager.got(this, ");
-			js.appendValueName(source);
-			js.append(", ");
-			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
-			js.append(".Literals.");
-			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
-			js.append(", ");
-			js.appendValueName(cgPropertyCallExp);
-			js.append(");\n");
-		}
+		doGot(cgPropertyCallExp, source, eStructuralFeature);
 		return status;
 	}
 
@@ -1196,6 +1214,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				//
 				CGValuedElement cgInit = cgAccumulator.getInit();
 				if ((cgInit != null) && (!(cgInit instanceof CGCollectionExp) || !Iterables.isEmpty(((CGCollectionExp)cgInit).getParts()))) {
+					if (!js.appendLocalStatements(cgInit)) {
+						return false;
+					}
 					final String iteratorName = getSymbolName(null, "iterator");
 					CollectionTypeId collectionTypeId = (CollectionTypeId)cgInit.getASTypeId();
 					assert collectionTypeId != null;
@@ -1304,7 +1325,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	@Override
 	public @NonNull Boolean visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment cgMiddlePropertyAssignment) {
-		visitCGEcorePropertyAssignment(cgMiddlePropertyAssignment);
 		Property pReferredProperty = ClassUtil.nonNullModel(cgMiddlePropertyAssignment.getReferredProperty());
 		assert !pReferredProperty.isIsImplicit();
 		CGValuedElement slotValue = cgMiddlePropertyAssignment.getSlotValue();
@@ -1323,24 +1343,26 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				}
 			}
 		}
-		return true;
+		return visitCGEcorePropertyAssignment(cgMiddlePropertyAssignment);
 	}
 
 	@Override
 	public @NonNull Boolean visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp cgPropertyCallExp) {
-		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
-		assert !pivotProperty.isIsImplicit();
+		Property asProperty = cgPropertyCallExp.getReferredProperty();
+		assert !asProperty.isIsImplicit();
 		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
 		//
 		if (!js.appendLocalStatements(source)) {
 			return false;
 		}
 		//
+		EStructuralFeature eStructuralFeature = ClassUtil.nonNullState((EStructuralFeature) asProperty.getESObject());
+		doGetting(cgPropertyCallExp, eStructuralFeature, true);
 		js.appendDeclaration(cgPropertyCallExp);
 		js.append(" = ");
 		Map<Property, String> oppositeProperties = getGlobalContext().getOppositeProperties();
 		if (oppositeProperties != null) {
-			String cacheName = oppositeProperties.get(pivotProperty);
+			String cacheName = oppositeProperties.get(asProperty);
 			if (cacheName != null) {
 				js.appendClassReference(ClassUtil.class);
 				js.append(".nonNullState (");
@@ -1351,6 +1373,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 			js.append(";\n");
 		}
+		doGot(cgPropertyCallExp, source, eStructuralFeature);
 		return true;
 	}
 
