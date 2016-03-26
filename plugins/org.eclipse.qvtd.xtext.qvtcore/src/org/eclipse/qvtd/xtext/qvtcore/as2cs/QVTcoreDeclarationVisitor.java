@@ -135,7 +135,7 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
 		csMapping.setOwnedMiddle(csDomain);
 		context.refreshList(csMapping.getOwnedComposedMappings(), context.visitDeclarations(MappingCS.class, asMapping.getLocal(), null));
-		PivotUtilInternal.refreshList(csMapping.getRefines(), asMapping.getRefinement());
+		PivotUtilInternal.refreshList(csMapping.getRefines(), asMapping.getSpecification());
 		return csMapping;
 	}
 }

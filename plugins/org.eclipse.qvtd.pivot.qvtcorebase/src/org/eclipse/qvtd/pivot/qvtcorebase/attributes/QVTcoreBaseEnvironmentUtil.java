@@ -65,7 +65,7 @@ public class QVTcoreBaseEnvironmentUtil
 				}
 			}
 		}
-		for (@SuppressWarnings("null")@NonNull AbstractMapping refinedMapping : mapping.getRefinement()) {
+		for (@SuppressWarnings("null")@NonNull AbstractMapping refinedMapping : mapping.getSpecification()) {
 			addMiddleVariables(environmentView, refinedMapping, bottomToo);
 		}
 	}
@@ -105,7 +105,7 @@ public class QVTcoreBaseEnvironmentUtil
 				}
 			}
 		}
-		for (@SuppressWarnings("null")@NonNull AbstractMapping refinedMapping : mapping.getRefinement()) {
+		for (@SuppressWarnings("null")@NonNull AbstractMapping refinedMapping : mapping.getSpecification()) {
 			addSideVariables(environmentView, refinedMapping, typedModel, bottomToo);
 		}
 	}

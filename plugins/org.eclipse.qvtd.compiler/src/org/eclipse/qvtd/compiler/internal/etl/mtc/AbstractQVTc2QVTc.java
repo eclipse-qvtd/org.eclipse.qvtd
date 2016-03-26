@@ -411,7 +411,7 @@ public abstract class AbstractQVTc2QVTc
 			}
 			assert context != null;
 			EcoreUtil.Copier copier = new ExpressionCopier(context);
-			@SuppressWarnings("unchecked") T eOut = (T) copier.copy(eIn);			
+			@SuppressWarnings("unchecked") T eOut = (T) copier.copy(eIn);
 		    copier.copyReferences();
 		    context.addDebugCopies(copier); 
 			return eOut;
@@ -423,7 +423,7 @@ public abstract class AbstractQVTc2QVTc
 	        updateChild(mOut.getBottomPattern());
 	        updateAllChildren(mOut.getDomain());
 	        updateAllChildren(mOut.getLocal());
-	        updateAllReferences(mIn.getRefinement(), mOut.getRefinement());
+	        updateAllReferences(mIn.getSpecification(), mOut.getSpecification());
 			return mIn;
 		}
 		

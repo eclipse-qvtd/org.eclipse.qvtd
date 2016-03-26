@@ -635,4 +635,14 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	public EList<AbstractMapping> getRefinement() {
 		return NO_MAPPINGS;
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public EList<AbstractMapping> getSpecification() {
+		return NO_MAPPINGS;
+	}
 } //MappingImpl

@@ -576,7 +576,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		MappingMode mergedMode = mapping2mode.get(mapping);
 		if (mergedMode == null) {
 			mergedMode = getComposedMappingMode(mapping);
-			for (@NonNull Mapping refinedMapping : ClassUtil.nullFree(mapping.getRefinement())) {
+			for (@NonNull Mapping refinedMapping : ClassUtil.nullFree(mapping.getSpecification())) {
 				mergedMode = mergedMode.union(getComposedMappingMode(refinedMapping));
 			}
 			mapping2mode.put(mapping, mergedMode);

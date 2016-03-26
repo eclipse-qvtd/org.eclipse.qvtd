@@ -77,7 +77,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.primitiveToName" name="primitiveToName" specification="#m..umlRdbms.integerToNumber #m..umlRdbms.booleanToBoolean #m..umlRdbms.stringToVarchar">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.primitiveToName" name="primitiveToName" refinement="#m..umlRdbms.integerToNumber #m..umlRdbms.booleanToBoolean #m..umlRdbms.stringToVarchar">
         <ownedComments body="-- Primitive data type marshaling&#xA;class PrimitiveToName {&#xA;owner : PackageToSchema opposites primitivesToNames;&#xA;name : String;&#xA;-- uml&#xA;primitive : PrimitiveDataType;&#xA;-- rdbms&#xA;typeName : String;&#xA;}"/>
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
           <guardPattern>
@@ -134,7 +134,7 @@
           <realizedVariable xmi:id="qV..umlRdbms.primitiveToName.bottom.p2n" name="p2n" type="pivot:Class SimpleUML2RDBMS.ecore.oclas#T.simpleuml2rdbms.PrimitiveToName"/>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.integerToNumber" name="integerToNumber" refinement="#m..umlRdbms.primitiveToName">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.integerToNumber" name="integerToNumber" specification="#m..umlRdbms.primitiveToName">
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
           <guardPattern/>
           <bottomPattern>
@@ -188,7 +188,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.booleanToBoolean" name="booleanToBoolean" refinement="#m..umlRdbms.primitiveToName">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.booleanToBoolean" name="booleanToBoolean" specification="#m..umlRdbms.primitiveToName">
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
           <guardPattern/>
           <bottomPattern>
@@ -242,7 +242,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.stringToVarchar" name="stringToVarchar" refinement="#m..umlRdbms.primitiveToName">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.stringToVarchar" name="stringToVarchar" specification="#m..umlRdbms.primitiveToName">
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
           <guardPattern/>
           <bottomPattern>
@@ -296,7 +296,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.flattening" name="flattening" specification="#m..umlRdbms.associationToForeignKey #m..umlRdbms.attributes">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.flattening" name="flattening" refinement="#m..umlRdbms.associationToForeignKey #m..umlRdbms.attributes">
         <guardPattern/>
         <bottomPattern/>
       </rule>
@@ -517,7 +517,7 @@
           </local>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.associationToForeignKey" name="associationToForeignKey" refinement="#m..umlRdbms.flattening">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.associationToForeignKey" name="associationToForeignKey" specification="#m..umlRdbms.flattening">
         <ownedComments body="-- Association and ForeignKey mapping&#xA;class AssociationToForeignKey extends ToColumn {&#xA;referenced : ClassToTable;&#xA;owner : ClassToTable opposites associationToForeignKeys;&#xA;name : String;&#xA;-- uml&#xA;association : Association;&#xA;-- rdbms&#xA;foreignKey : ForeignKey;&#xA;}"/>
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.uml">
           <guardPattern>
@@ -938,7 +938,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.attributes" name="attributes" refinement="#m..umlRdbms.flattening" specification="#m..umlRdbms.classAttributes #m..umlRdbms.primitiveAttribute #m..umlRdbms.complexAttributeAttributes #m..umlRdbms.complexAttribute">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.attributes" name="attributes" specification="#m..umlRdbms.flattening" refinement="#m..umlRdbms.classAttributes #m..umlRdbms.primitiveAttribute #m..umlRdbms.complexAttributeAttributes #m..umlRdbms.complexAttribute">
         <ownedComments body="-- attribute mapping&#xA;abstract class FromAttributeOwner {&#xA;composite fromAttributes : Set(FromAttribute) opposites owner;&#xA;}&#xA;abstract class FromAttribute {&#xA;name : String;&#xA;kind : String;&#xA;owner : FromAttributeOwner opposites fromAttributes;&#xA;leafs : Set(AttributeToColumn);&#xA;-- uml&#xA;attribute : Attribute;&#xA;}&#xA;abstract class ToColumn {&#xA;-- rdbms&#xA;column : Column;&#xA;}&#xA;class NonLeafAttribute extends FromAttributeOwner, FromAttribute {&#xA;leafs := fromAttributes.leafs;&#xA;}&#xA;class AttributeToColumn extends FromAttribute, ToColumn {&#xA;type : PrimitiveToName;&#xA;}"/>
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.uml">
           <guardPattern>
@@ -990,7 +990,7 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.classAttributes" name="classAttributes" refinement="#m..umlRdbms.attributes" specification="#m..umlRdbms.classPrimitiveAttributes #m..umlRdbms.classComplexAttributes">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.classAttributes" name="classAttributes" specification="#m..umlRdbms.attributes" refinement="#m..umlRdbms.classPrimitiveAttributes #m..umlRdbms.classComplexAttributes">
         <guardPattern>
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
@@ -1028,8 +1028,8 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.primitiveAttribute" name="primitiveAttribute" refinement="#m..umlRdbms.attributes"
-          specification="#m..umlRdbms.classPrimitiveAttributes #m..umlRdbms.complexAttributePrimitiveAttributes">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.primitiveAttribute" name="primitiveAttribute" specification="#m..umlRdbms.attributes"
+          refinement="#m..umlRdbms.classPrimitiveAttributes #m..umlRdbms.complexAttributePrimitiveAttributes">
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="true" typedModel="#qT..umlRdbms.uml">
           <guardPattern>
             <variable xmi:id="qV..umlRdbms.primitiveAttribute.uml.guard.t" name="t" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"/>
@@ -1078,8 +1078,8 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.complexAttributeAttributes" name="complexAttributeAttributes" refinement="#m..umlRdbms.attributes"
-          specification="#m..umlRdbms.complexAttributePrimitiveAttributes #m..umlRdbms.complexAttributeComplexAttributes">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.complexAttributeAttributes" name="complexAttributeAttributes" specification="#m..umlRdbms.attributes"
+          refinement="#m..umlRdbms.complexAttributePrimitiveAttributes #m..umlRdbms.complexAttributeComplexAttributes">
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
           <guardPattern>
             <predicate>
@@ -1137,8 +1137,8 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.complexAttribute" name="complexAttribute" refinement="#m..umlRdbms.attributes"
-          specification="#m..umlRdbms.classComplexAttributes #m..umlRdbms.complexAttributeComplexAttributes">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.complexAttribute" name="complexAttribute" specification="#m..umlRdbms.attributes"
+          refinement="#m..umlRdbms.classComplexAttributes #m..umlRdbms.complexAttributeComplexAttributes">
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..umlRdbms.uml">
           <guardPattern>
             <variable xmi:id="qV..umlRdbms.complexAttribute.uml.guard.t" name="t" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"/>
@@ -1181,20 +1181,20 @@
           </bottomPattern>
         </local>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.classPrimitiveAttributes" name="classPrimitiveAttributes" refinement="#m..umlRdbms.classAttributes #m..umlRdbms.primitiveAttribute">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.classPrimitiveAttributes" name="classPrimitiveAttributes" specification="#m..umlRdbms.classAttributes #m..umlRdbms.primitiveAttribute">
         <guardPattern/>
         <bottomPattern/>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.classComplexAttributes" name="classComplexAttributes" refinement="#m..umlRdbms.classAttributes #m..umlRdbms.complexAttribute">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.classComplexAttributes" name="classComplexAttributes" specification="#m..umlRdbms.classAttributes #m..umlRdbms.complexAttribute">
         <guardPattern/>
         <bottomPattern/>
       </rule>
       <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.complexAttributePrimitiveAttributes" name="complexAttributePrimitiveAttributes"
-          refinement="#m..umlRdbms.complexAttributeAttributes #m..umlRdbms.primitiveAttribute">
+          specification="#m..umlRdbms.complexAttributeAttributes #m..umlRdbms.primitiveAttribute">
         <guardPattern/>
         <bottomPattern/>
       </rule>
-      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.complexAttributeComplexAttributes" name="complexAttributeComplexAttributes" refinement="#m..umlRdbms.complexAttributeAttributes #m..umlRdbms.complexAttribute">
+      <rule xsi:type="qvtc:Mapping" xmi:id="m..umlRdbms.complexAttributeComplexAttributes" name="complexAttributeComplexAttributes" specification="#m..umlRdbms.complexAttributeAttributes #m..umlRdbms.complexAttribute">
         <guardPattern/>
         <bottomPattern/>
       </rule>

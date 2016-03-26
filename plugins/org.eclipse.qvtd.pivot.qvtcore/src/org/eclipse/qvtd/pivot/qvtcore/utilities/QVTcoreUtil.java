@@ -32,7 +32,7 @@ public class QVTcoreUtil extends QVTcoreBaseUtil
 
 	private static @NonNull Set<Mapping> getAllRefinedMappings(@NonNull Set<Mapping> allMappings, @NonNull Mapping mapping) {
 		if (allMappings.add(mapping)) {
-			for (@SuppressWarnings("null")@NonNull Mapping refinedMapping : mapping.getRefinement()) {
+			for (@SuppressWarnings("null")@NonNull Mapping refinedMapping : mapping.getSpecification()) {
 				getAllRefinedMappings(allMappings, refinedMapping);
 			}
 		}

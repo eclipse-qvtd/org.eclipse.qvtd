@@ -78,6 +78,7 @@ public interface Mapping extends AbstractMapping {
 	 * @model opposite="refinement" ordered="false"
 	 * @generated
 	 */
+	@Override
 	EList<Mapping> getSpecification();
 
 	/**

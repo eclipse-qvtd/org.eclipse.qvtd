@@ -35,9 +35,19 @@ public interface AbstractMapping extends Rule, Area {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * The mappings that refine this mapping as part of their specification.
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated NOT
 	 */
 	EList<? extends AbstractMapping> getRefinement();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * The mappings that are refined to contribute to the specification of  this mapping.
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated NOT
+	 */
+	EList<? extends AbstractMapping> getSpecification();
 } // AbstractMapping

@@ -30,7 +30,7 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		Mapping pMapping = PivotUtil.getPivot(Mapping.class, csElement);
 		if (pMapping != null) {
-			PivotUtilInternal.refreshList(pMapping.getRefinement(), csElement.getRefines());
+			PivotUtilInternal.refreshList(pMapping.getSpecification(), csElement.getRefines());
 		}
 		return null;
 	}
