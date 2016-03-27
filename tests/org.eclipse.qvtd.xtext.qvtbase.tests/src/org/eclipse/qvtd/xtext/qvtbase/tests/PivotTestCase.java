@@ -19,8 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
@@ -42,6 +40,7 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.ocl.pivot.values.Value;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
@@ -52,13 +51,16 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 
+import junit.framework.TestCase;
+
 /**
  * Tests for OclAny operations.
  */
 @SuppressWarnings("nls")
 public class PivotTestCase extends TestCase
 {
-	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.tests";
+	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtbase.tests";
+	public static final @NonNull TracingOption TEST_START = new TracingOption(PLUGIN_ID, "test/start");
 	private static StandaloneProjectMap projectMap = null;
 
 	public static void assertNoDiagnosticErrors(String message, XtextResource xtextResource) {
@@ -283,5 +285,11 @@ public class PivotTestCase extends TestCase
 		if (!noDebug) {
 			System.out.println(string);
 		}		
+	}
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		TEST_START.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
 	}
 }
