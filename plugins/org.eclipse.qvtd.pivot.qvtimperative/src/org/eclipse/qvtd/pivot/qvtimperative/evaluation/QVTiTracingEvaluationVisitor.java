@@ -75,7 +75,7 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 			logger.append("\n");
 			return visit;
 		}
-		catch (RuntimeException e) {
+		catch (Throwable e) {
 			if (indentableLogger != null) {
 				indentableLogger.popIndentation();
 			}
