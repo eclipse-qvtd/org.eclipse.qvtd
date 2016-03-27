@@ -42,6 +42,8 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.TracingOption;
+import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
@@ -77,6 +79,8 @@ import com.google.common.collect.Sets;
  */
 public class QVTm2QVTp extends AbstractQVTc2QVTc
 {
+	public static final @NonNull TracingOption PARTITIONING = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtm2qvtp/partitioning");
+
 	/**
 	 * The CreateVisitor performs the mostly 1:1 creation of the QVTp output tree from the QVTm input tree.
 	 * 
@@ -156,7 +160,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 						break;
 					}
 				}
-				System.out.println(valueCompleteClasses);
+				PARTITIONING.println(valueCompleteClasses.toString());
 				if (isDiscriminant) {
 					for (@NonNull Partitioning partitioning : partitionings) {
 						partitioning.setDiscriminant(property);
@@ -176,7 +180,8 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			for (@NonNull Rule inRule : ClassUtil.nullFree(tIn.getRule())) {
 				Mapping mIn = (Mapping) inRule;
 				Partitioning partitioning = new Partitioning(this, mIn);
-				StringBuilder s = new StringBuilder();
+				boolean doDebug = PARTITIONING.isActive();
+				StringBuilder s = doDebug ? new StringBuilder() : null;
 				try {
 					partitioning.analyze(s);
 					RealizedVariable secondaryHead = partitioning.getSecondaryHead();
@@ -185,7 +190,9 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 					}
 				}
 				finally {
-					System.out.println(s.toString());
+					if (s != null) {
+						PARTITIONING.println(s.toString());
+					}
 				}
 				allPartitionings.add(partitioning);
 			}
@@ -974,7 +981,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		}
 
 		public void analyze(@Nullable StringBuilder s) {
-			for (Domain domain : ClassUtil.nullFree(mapping.getDomain())) {
+			for (@NonNull Domain domain : ClassUtil.nullFree(mapping.getDomain())) {
 				analyzeArea((CoreDomain)domain);
 			}
 			analyzeArea(mapping);

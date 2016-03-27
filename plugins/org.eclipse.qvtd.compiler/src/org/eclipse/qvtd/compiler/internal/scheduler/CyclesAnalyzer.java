@@ -403,16 +403,16 @@ public class CyclesAnalyzer
 				assert debugNewPreviousRegions.equals(debugNewOldPreviousRegions);
 				Set<@NonNull Region> intersection = Sets.intersection(debugNewNextRegions, debugNewOldNextRegions);
 				for (@NonNull Region region : Sets.difference(debugNewNextRegions, debugNewOldNextRegions)) {
-					System.out.println("Missing New Next Region: " + region);
+					Scheduler.REGION_CYCLES.println("Missing New Next Region: " + region);
 				}
 				for (@NonNull Region region : Sets.difference(debugNewOldNextRegions, debugNewNextRegions)) {
-					System.out.println("Missing New Old Next Region: " + region);
+					Scheduler.REGION_CYCLES.println("Missing New Old Next Region: " + region);
 				}
 				for (@NonNull Region region : debugNewNextRegions) {
-					System.out.println("New Next Region: " + region + " " + intersection.contains(region));
+					Scheduler.REGION_CYCLES.println("New Next Region: " + region + " " + intersection.contains(region));
 				}
 				for (@NonNull Region region : debugNewOldNextRegions) {
-					System.out.println("New Old Next Region: " + region + " " + intersection.contains(region));
+					Scheduler.REGION_CYCLES.println("New Old Next Region: " + region + " " + intersection.contains(region));
 				}
 				assert debugNewNextRegions.equals(debugNewOldNextRegions);
 				
@@ -550,7 +550,7 @@ public class CyclesAnalyzer
 			s.append(region);
 			first = false;
 		}
-		System.out.println(s.toString());
+		Scheduler.REGION_CYCLES.println(s.toString());
 	}
 
 	private void showAll(@NonNull String prefix, @NonNull Map<@NonNull Region, @NonNull List<@NonNull NodeConnection>> region2connections) {
@@ -569,13 +569,13 @@ public class CyclesAnalyzer
 				s.append(connection);
 				first = false;
 			}
-			System.out.println(s.toString());
+			Scheduler.REGION_CYCLES.println(s.toString());
 		}
 	}
 
 	private void showNew(@NonNull CyclicScheduledRegion cyclicRegion) {
 		Set<@NonNull NodeConnection> externalConnections = new HashSet<@NonNull NodeConnection>();
-		System.out.println("New Region: " + cyclicRegion);
+		Scheduler.REGION_CYCLES.println("New Region: " + cyclicRegion);
 		@NonNull
 		List<@NonNull Node> sortedHeadNodes = Lists.newArrayList(cyclicRegion.getHeadNodes());
 		Collections.sort(sortedHeadNodes, NameUtil.NAMEABLE_COMPARATOR);
@@ -585,14 +585,14 @@ public class CyclesAnalyzer
 			s.append(headNode);
 			s.append("  ");
 			s.append(headNode.getIncomingConnection());
-			System.out.println(s.toString());
+			Scheduler.REGION_CYCLES.println(s.toString());
 		}
 		Iterables.addAll(externalConnections, cyclicRegion.getIncomingPassedConnections());
 		Iterables.addAll(externalConnections, cyclicRegion.getOutgoingPassedConnections());
 		List<@NonNull NodeConnection> sortedExternalConnections = Lists.newArrayList(externalConnections);
 		Collections.sort(sortedExternalConnections, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull NodeConnection externalConnection : sortedExternalConnections) {
-			System.out.println("New Connection: " + externalConnection);
+			Scheduler.REGION_CYCLES.println("New Connection: " + externalConnection);
 		}
 	}
 
@@ -603,7 +603,7 @@ public class CyclesAnalyzer
 		Collections.sort(sortedOldRegions, SymbolableComparator.INSTANCE);
 		Set<@NonNull NodeConnection> debugOldConnections = new HashSet<@NonNull NodeConnection>();
 		for (@NonNull Region debugOldRegion : sortedOldRegions) {
-			System.out.println("Old Region: " + debugOldRegion);
+			Scheduler.REGION_CYCLES.println("Old Region: " + debugOldRegion);
 			Iterables.addAll(debugOldConnections, debugOldRegion.getIncomingPassedConnections());
 			Iterables.addAll(debugOldConnections, debugOldRegion.getOutgoingPassedConnections());
 		}
@@ -614,7 +614,7 @@ public class CyclesAnalyzer
 		Map<@NonNull Region, @NonNull List<@NonNull NodeConnection>> allInternalTargetRegions = new HashMap<@NonNull Region, @NonNull List<@NonNull NodeConnection>>();
 		Map<@NonNull Region, @NonNull List<@NonNull NodeConnection>> allExternalTargetRegions = new HashMap<@NonNull Region, @NonNull List<@NonNull NodeConnection>>();
 		for (@NonNull NodeConnection debugOldConnection : sortedOldConnections) {
-			System.out.println("Old Connection: " + debugOldConnection);
+			Scheduler.REGION_CYCLES.println("Old Connection: " + debugOldConnection);
 
 			Set<@NonNull Region> internalSourceRegions = Sets.newHashSet(debugOldConnection.getSourceRegions());
 			internalSourceRegions.retainAll(debugOldRegions);

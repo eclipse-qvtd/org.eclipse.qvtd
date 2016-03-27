@@ -1,5 +1,7 @@
 # Debugging options for the org.eclipse.ocl.examples.codegen plug-in
 
+# Turn on tracing of partitioining 
+org.eclipse.qvtd.compiler/qvtm2qvtp/partitioining=false
 # Turn on tracing of connection creation 
 org.eclipse.qvtd.compiler/qvtp2qvts/connectionCreation=false
 # Turn on tracing of connection reouting 

@@ -39,11 +39,11 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationE
 
 	@Override
 	public void addUsedTargetEdge(@NonNull NavigationEdge targetEdge, boolean mustBeLater) {
-		if (getSourceRegions().contains(targetEdge.getRegion())) {
-			System.out.println("Cyclic dependency arbitrarily ignored: " + this);
+//		if (getSourceRegions().contains(targetEdge.getRegion())) {
+//			System.out.println("Cyclic dependency arbitrarily ignored: " + this);
 //			mergeRole(Connections.PREFERRED_EDGE);
 //			return;
-		}
+//		}
 		mergeRole(mustBeLater ? Connections.MANDATORY_EDGE : Connections.PREFERRED_EDGE);
 		assert !targetEnd2role.containsKey(targetEdge);
 		targetEnd2role.put(targetEdge, mustBeLater ? Connections.MANDATORY_EDGE : Connections.PREFERRED_EDGE);

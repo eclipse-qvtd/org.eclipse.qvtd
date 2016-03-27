@@ -117,6 +117,9 @@ public class MergedMappingRegion extends AbstractMappingRegion
 			else if (edge.isMergeable()) {
 				createMergedEdge(edge.getSource(), edge, edge.getTarget());
 			}
+			else if (edge.isRecursion()) {
+//				createMergedEdge(edge.getSource(), edge, edge.getTarget());	-- recomputed
+			}
 			else {
 				System.out.println("Unmerged edge" + edge);
 			}

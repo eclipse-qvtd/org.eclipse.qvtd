@@ -37,7 +37,6 @@ import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
-import org.eclipse.qvtd.compiler.internal.schedule2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -350,7 +349,7 @@ public class QVTcCompilerTests extends LoadTestCase
 //		Scheduler.REGION_DEPTH.setState(true);
 //		Scheduler.REGION_ORDER.setState(true);
 //		Scheduler.REGION_TRAVERSAL.setState(true);
-		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
+//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
     	MyQVT myQVT = new MyQVT("hsv2hls", HSV2HLSPackage.eINSTANCE, HSVTreePackage.eINSTANCE, HLSTreePackage.eINSTANCE);
 		try {	
 	        myQVT.buildTransformation("HSV2HLS.qvtcas", "hls", "HSV2HLS.genmodel");

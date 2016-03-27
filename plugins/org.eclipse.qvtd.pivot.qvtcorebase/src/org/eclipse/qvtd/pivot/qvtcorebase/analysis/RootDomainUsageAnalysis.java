@@ -375,13 +375,13 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		}
 		for (Property dirtyProperty : dirtyProperties) {
 			if (!dirtyProperty.isIsTransient()) {
-				System.out.println("Dirty " + dirtyProperty + " is not transient");
+				System.err.println("Dirty " + dirtyProperty + " is not transient");
 			}
 			if (dirtyProperty.isIsReadOnly()) {
-				System.out.println("Dirty " + dirtyProperty + " is readonly");
+				System.err.println("Dirty " + dirtyProperty + " is readonly");
 			}
 			if (dirtyProperty.isIsRequired()) {
-				System.out.println("Dirty " + dirtyProperty + " is required");
+				System.err.println("Dirty " + dirtyProperty + " is required");
 			}
 		}
 	}
@@ -439,7 +439,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 				}
 			}
 			for (@NonNull CompleteClass completeClass : completeClasses) {
-				for (org.eclipse.ocl.pivot.@NonNull Class asClass : completeClass.getPartialClasses()) {
+				for (org.eclipse.ocl.pivot.@NonNull Class asClass : ClassUtil.nullFree(completeClass.getPartialClasses())) {
 					DomainUsageConstant oldUsage = class2usage.get(asClass);
 					DomainUsageConstant classUsage = typedModelUsage;
 					if ((asClass instanceof DataType) && !(asClass instanceof CollectionType)) {	// FIXME use a visitor ? perhaps CollectionTypes are not evidence of usage
