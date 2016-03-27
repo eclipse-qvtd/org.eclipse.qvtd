@@ -52,6 +52,7 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2PersonsNor
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2Persons.Families2PersonsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.PersonsPackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HSV2HLSNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HLSTree.HLSTreePackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HSV2HLS.HSV2HLSPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HSVTree.HSVTreePackage;
@@ -334,7 +335,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HSV2HLS_trace.xmi");
 	    	myQVT.createModel("hls", "SolarizedHLS_Interpreted.xmi");
 	    	myQVT.executeTransformation();
-	    	myQVT.saveOutput("hls", "SolarizedHLS_Interpreted.xmi", "SolarizedHLS_expected.xmi", null);
+	    	myQVT.saveOutput("hls", "SolarizedHLS_Interpreted.xmi", "SolarizedHLS_expected.xmi", HSV2HLSNormalizer.INSTANCE);	// FIXME Bug 490497 remove normalizer
 		}
 		finally {
 	    	myQVT.dispose();
@@ -355,7 +356,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	        myQVT.buildTransformation("HSV2HLS.qvtcas", "hls", "HSV2HLS.genmodel");
 			myQVT.loadInput("hsv", "SolarizedHSV.xmi");
 			myQVT.executeTransformation();
-			myQVT.saveOutput("hls", "SolarizedHLS_CG.xmi", "SolarizedHLS_expected.xmi", null);
+			myQVT.saveOutput("hls", "SolarizedHLS_CG.xmi", "SolarizedHLS_expected.xmi", HSV2HLSNormalizer.INSTANCE);	// FIXME Bug 490497 remove normalizer
 		}
 		finally {
 	    	myQVT.dispose();
@@ -409,14 +410,14 @@ public class QVTcCompilerTests extends LoadTestCase
 		try {	
 	        Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS.qvtcas", "rdbms");
 	        myQVT.createGeneratedExecutor(asTransformation, "SimpleUML2RDBMS.genmodel");
-			myQVT.loadInput("uml", "SimplerUMLPeople2.xmi");
-			myQVT.executeTransformation();
-			myQVT.saveOutput("rdbms", "SimplerRDBMSPeople2_CG.xmi", "SimplerRDBMSPeople2_expected.xmi", SimpleRDBMSNormalizer.INSTANCE);
-			//
-	        myQVT.createGeneratedExecutor(asTransformation, "SimpleUML2RDBMS.genmodel");
 			myQVT.loadInput("uml", "SimplerUMLPeople.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("rdbms", "SimplerRDBMSPeople_CG.xmi", "SimplerRDBMSPeople_expected.xmi", SimpleRDBMSNormalizer.INSTANCE);
+			//
+	        myQVT.createGeneratedExecutor(asTransformation, "SimpleUML2RDBMS.genmodel");
+			myQVT.loadInput("uml", "SimplerUMLPeople2.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("rdbms", "SimplerRDBMSPeople2_CG.xmi", "SimplerRDBMSPeople2_expected.xmi", SimpleRDBMSNormalizer.INSTANCE);
 			//
 			myQVT.createGeneratedExecutor(asTransformation, "SimpleUML2RDBMS.genmodel");
 			myQVT.loadInput("uml", "SimpleUMLPeople.xmi");
