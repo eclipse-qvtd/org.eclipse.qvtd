@@ -59,7 +59,6 @@ public interface EdgeRole extends Role
 	boolean isArgument();
 
 	boolean isCast();
-	boolean isComposition();
 	boolean isComputation();
 	boolean isMergeable();
 	

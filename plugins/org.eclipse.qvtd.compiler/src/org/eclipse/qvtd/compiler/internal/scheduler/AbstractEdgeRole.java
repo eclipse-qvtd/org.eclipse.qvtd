@@ -50,11 +50,6 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 	}
 
 	@Override
-	public boolean isComposition() {
-		return false;
-	}
-
-	@Override
 	public boolean isComputation() {
 		return false;
 	}

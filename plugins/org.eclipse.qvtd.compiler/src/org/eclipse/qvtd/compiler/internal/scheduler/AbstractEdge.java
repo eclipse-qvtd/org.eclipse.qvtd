@@ -198,16 +198,6 @@ public abstract class AbstractEdge implements Edge//, GraphStringBuilder.GraphNo
 	}
 
 	@Override
-	public boolean isContainer() {
-		return false;
-	}
-
-	@Override
-	public boolean isContainment() {
-		return false;
-	}
-
-	@Override
 	public boolean isKnown() {
 		return sourceNode.isKnown();
 	}

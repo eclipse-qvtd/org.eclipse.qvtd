@@ -41,7 +41,6 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.scheduler.AbstractRegion;
-import org.eclipse.qvtd.compiler.internal.scheduler.ChildCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.scheduler.CyclicScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.scheduler.MergedMappingRegion;
 import org.eclipse.qvtd.compiler.internal.scheduler.OperationRegion;
@@ -185,10 +184,7 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 		AbstractRegion2Mapping region2mapping = region2region2mapping.get(region);
 		assert region2mapping == null : "Re-AbstractRegion2Mapping for " + region;
 //		assert !region.isConnectionRegion();
-		if (region.isChildCompositionRegion()) {
-			region2mapping = new ChildCompositionRegion2Mapping(this, (@NonNull ChildCompositionRegion) region);
-		}
-		else if (region.isCyclicScheduledRegion()) {
+		if (region.isCyclicScheduledRegion()) {
 			region2mapping = new CyclicScheduledRegion2Mapping(this, (CyclicScheduledRegion)region);
 		}
 		else if (region.isRootCompositionRegion()) {
@@ -319,44 +315,6 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 	@Override
 	public @Nullable Element visiting(@NonNull Visitable visitable) {
 		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
-	}
-
-	@Override
-	public @Nullable Element visitChildCompositionRegion(@NonNull ChildCompositionRegion childCompositionRegion) {
-		AbstractRegion2Mapping region2mapping = getRegion2Mapping(childCompositionRegion);
-		Mapping mapping = region2mapping.getMapping();
-/*		MappingStatement mappingStatement = null;
-		for (@SuppressWarnings("null")@NonNull List<Node> headNodes : containmentRegion.getHeadNodeGroups()) {
-			Node headNode = selectHeadNode(headNodes);
-			Variable headVariable = region2mapping.getGuardVariable(headNode);
-			for (NavigationEdge edge : AbstractEdge.getSortedEdges(headNode.getNavigationEdges())) {
-				if (edge.getProperty().isIsMany()) {
-					Node targetNode = edge.getTarget();
-					Variable loopVariable = PivotUtil.createVariable(targetNode.getName(), targetNode.getClassDatumAnalysis().getCompleteClass().getPrimaryClass(), true, null);
-					mapping.getBottomPattern().getVariable().add(loopVariable);
-					MappingStatement loopStatement = null;
-					for (Node calledNode : AbstractNode.getSortedTargets(targetNode.getPassedBindingTargets())) {
-						Region calledRegion = calledNode.getRegion();
-						Region2Mapping calledRegion2Mapping = getRegion2Mapping(calledRegion);
-						Mapping calledMapping = calledRegion2Mapping.getMapping();
-						VariableExp variableExp = PivotUtil.createVariableExp(loopVariable);
-						Variable calledGuardVariable = calledRegion2Mapping.getGuardVariable(calledNode);
-						MappingCallBinding mappingCallBinding = QVTimperativeUtil.createMappingCallBinding(calledGuardVariable, variableExp);
-						MappingCall mappingCall = QVTimperativeUtil.createMappingCall(calledMapping, Collections.singletonList(mappingCallBinding));
-						loopStatement = QVTimperativeUtil.addMappingStatement(loopStatement, mappingCall);
-					}
-					assert loopStatement != null;
-					VariableExp headExp = PivotUtil.createVariableExp(headVariable);
-					PropertyCallExp propertyCallExp = PivotUtil.createPropertyCallExp(headExp, edge.getProperty());
-					MappingLoop mappingLoop = QVTimperativeUtil.createMappingLoop(propertyCallExp, loopVariable, loopStatement);
-					mappingStatement = QVTimperativeUtil.addMappingStatement(mappingStatement, mappingLoop);
-				}
-			}
-		}
-		if (mappingStatement !=  null) {
-			mapping.setMappingStatement(mappingStatement);
-		} */
-		return mapping;
 	}
 	
 	@Override

@@ -661,46 +661,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	}
 
 	/**
-	 * Create a ContainmentRegion for each in-use composition property with a head consuming node to consume the containing class
-	 * and an introduced node for each class by which the composed instances are consumed. 
-	 */
-	private @NonNull List<@NonNull Region> createContainmentRegions() {
-		List<@NonNull Region> containmentRegions = new ArrayList<@NonNull Region>();
-		for (Map.Entry<@NonNull Property, @NonNull Set<@NonNull ClassDatumAnalysis>> entry : consumedCompositeProperty2introducedClassDatumAnalyses.entrySet()) {
-			@NonNull Property parent2childrenProperty = entry.getKey();
-			TypedModel typedModel = entry.getValue().iterator().next().getTypedModel();
-			DomainUsage usage = getSchedulerConstants().getDomainUsage(typedModel);
-			assert usage.isInput();
-			ChildCompositionRegion containmentRegion = new ChildCompositionRegion(superRegion, parent2childrenProperty, typedModel);
-			Node headNode = containmentRegion.getComposingNode();
-			CompleteClass parentClass = headNode.getCompleteClass();
-			addConsumedNode(headNode);
-			for (@NonNull ClassDatumAnalysis classDatumAnalysis : entry.getValue()) {
-				Node introducedNode = containmentRegion.addClassDatumAnalysis(classDatumAnalysis);
-				addIntroducedNode(introducedNode);
-				CompleteClass childClass = introducedNode.getCompleteClass();
-				Type childType = childClass.getPrimaryClass();
-				if (childType instanceof CollectionType) {
-					@SuppressWarnings("null")@NonNull Type elementType = ((CollectionType)childType).getElementType();
-					childClass = getSchedulerConstants().getEnvironmentFactory().getCompleteModel().getCompleteClass(elementType);
-				}
-				if (childClass.conformsTo(parentClass)) {
-					Edges.PRIMARY_RECURSION.createEdge(containmentRegion, introducedNode, headNode);
-				}
-				if (Scheduler.DEBUG_GRAPHS.isActive()) {
-					containmentRegion.writeDebugGraphs("1-create");
-				}
-			}
-			containmentRegions.add(containmentRegion);
-			if (Scheduler.DEBUG_GRAPHS.isActive()) {
-				writeDebugGraphs("3-contained", true, false, false);
-			}
-			addRegion(containmentRegion);
-		}
-		return containmentRegions;
-	}
-
-	/**
 	 * Create the Used Binding edges and join nodes between all introducers and their corresponding non-head guards.
 	 *
 	private void createNonHeadUsedBindings() {
@@ -882,11 +842,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		if (Scheduler.DUMP_PROPERTY_TO_CONSUMING_CLASSES.isActive()) {
 			Scheduler.DUMP_PROPERTY_TO_CONSUMING_CLASSES.println(dumpClass2ConsumingProperty().reduce("", stringJoin("\n\t")));
 		}
-		//
-		//	Create containment regions to traverse all in-use compositions to introduce all consumed classes.
-		//
-		@SuppressWarnings("unused")
-		List<Region> containmentRegions = createContainmentRegions();
 		//
 		//	Create the root containment region to introduce all root and otherwise contained consumed classes.
 		//

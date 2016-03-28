@@ -158,11 +158,6 @@ public class ScheduleIndexer extends ScheduleState
 			//
 			//	Select the 'first' region that is not blocked at all.
 			//
-			for (@NonNull Region region : unblockedRegionsList) {
-				if (region instanceof ChildCompositionRegion) {
-					return region;		// FIXME Make UpperToLower deterministically awkward
-				}
-			}
 			return unblockedRegionsList.get(0);
 		}
 		//

@@ -173,36 +173,6 @@ public class Edges
 		}
 	}
 
-	private static final class CompositionEdgeRole extends AbstractNavigationEdgeRole
-	{
-		protected CompositionEdgeRole() {
-			super(Phase.LOADED, true);
-		}
-
-		@Override
-		public boolean isComposition() {
-			return true;
-		}
-	}
-
-	private static final class ContainerEdgeRole extends AbstractNavigationEdgeRole
-	{
-		protected ContainerEdgeRole() {
-			super(Phase.LOADED, true);
-		}
-		
-		@Override
-		public @NonNull String getLabel(@NonNull Property source2targetProperty) {
-			Property opposite = source2targetProperty; //.getOpposite();
-//			if (opposite != null) {
-				return opposite.getName() + "\\n" + SchedulerConstants.getMultiplicity(opposite);
-//			}
-//			else {
-//				return "oclContainer()\\n[?]";
-//			}
-		}
-	}
-
 	public static final class IteratedEdgeRoleFactory
 	{
 		private static class IteratedEdgeRole extends AbstractComputationEdgeRole
@@ -452,8 +422,6 @@ public class Edges
 	
 	public static final @NonNull ArgumentEdgeRoleFactory ARGUMENT = new ArgumentEdgeRoleFactory();
 	public static final @NonNull CastEdgeRoleFactory CAST = new CastEdgeRoleFactory(null);
-	public static final EdgeRole.@NonNull Navigation COMPOSITION = new CompositionEdgeRole();
-	public static final EdgeRole.@NonNull Navigation CONTAINER = new ContainerEdgeRole();
 	public static final @NonNull IteratedEdgeRoleFactory ITERATED = new IteratedEdgeRoleFactory();		
 //	public static final @NonNull IteratingEdgeRoleFactory ITERATING = new IteratingEdgeRoleFactory();		
 //	public static final @NonNull CastEdgeRoleFactory NAVIGABLE_CAST = new CastEdgeRoleFactory(true);

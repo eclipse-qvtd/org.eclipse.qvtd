@@ -153,26 +153,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			return node.isRealized();
 		}
 	}
-
-	public static final class IsContainerEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsContainerEdgePredicate INSTANCE = new IsContainerEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			return edge.isContainer();
-		}
-	}
-
-	public static final class IsContainmentEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsContainmentEdgePredicate INSTANCE = new IsContainmentEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			return edge.isContainment();
-		}
-	}
 	
 	public static final class IsExpressionEdgePredicate implements Predicate<@NonNull Edge>
 	{
@@ -1291,7 +1271,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		if (Scheduler.CONNECTION_CREATION.isActive()) {
 			Scheduler.CONNECTION_CREATION.println("connecting " + this);
 		}
-		assert !(this instanceof ChildCompositionRegion) && !(this instanceof RootCompositionRegion);
+		assert !(this instanceof RootCompositionRegion);
 		Iterable<@NonNull NodeConnection> headConnections = createHeadConnections();
 		if (headConnections != null) {
 			for (@NonNull NavigationEdge predicatedEdge : getPredicatedNavigationEdges()) {
@@ -1655,18 +1635,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		@NonNull Iterable<Edge> filter = Iterables.filter(edges, IsConsumedOrderingEdgePredicate.INSTANCE);
 		return filter;
 	} */
-
-	public final @NonNull Iterable<@NonNull ? extends NavigationEdge> getContainmentEdges() {
-		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(edges, IsContainmentEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	public final @NonNull Iterable<@NonNull ? extends NavigationEdge> getContainerEdges() {
-		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(edges, IsContainerEdgePredicate.INSTANCE);
-		return filter;
-	}
 
 	private int getCost(@NonNull List<@NonNull NavigationEdge> path) {
 		int cost = 0;

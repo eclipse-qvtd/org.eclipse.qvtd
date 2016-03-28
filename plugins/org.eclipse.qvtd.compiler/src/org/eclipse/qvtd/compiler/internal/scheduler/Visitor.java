@@ -16,7 +16,6 @@ public interface Visitor<R>
 {
 	R visiting(@NonNull Visitable visitable);
 
-	R visitChildCompositionRegion(@NonNull ChildCompositionRegion childCompositionRegion);
 	R visitCyclicScheduledRegion(@NonNull CyclicScheduledRegion cyclicScheduledRegion);
 	R visitMergedMappingRegion(@NonNull MergedMappingRegion mergedMappingRegion);
 	R visitOperationRegion(@NonNull OperationRegion operationRegion);

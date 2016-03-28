@@ -281,20 +281,6 @@ public abstract class AbstractNode implements Node
 //		@NonNull Iterable<Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsConsumedOrderingEdgePredicate.INSTANCE);
 //		return filter;
 //	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull NavigationEdge> getContainerEdges() {
-		@SuppressWarnings("unchecked")
-		Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsContainerEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull NavigationEdge> getContainmentEdges() {
-		@SuppressWarnings("unchecked")
-		Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsContainmentEdgePredicate.INSTANCE);
-		return filter;
-	}
 	
 	@Override
 	public @NonNull String getDisplayName() {

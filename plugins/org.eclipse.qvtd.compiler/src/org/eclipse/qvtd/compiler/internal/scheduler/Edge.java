@@ -88,16 +88,6 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable
 	boolean isConstant();
 
 	/**
-	 * Return true if this edge is for a container (child to parent inverse composition).
-	 */
-	boolean isContainer();
-
-	/**
-	 * Return true if this edge is for an containment (parent to child composition).
-	 */
-	boolean isContainment();
-
-	/**
 	 * Return true if the source of this edge has a known value, because it is inherently constant, or
 	 * is available once sufficient input models have been loaded.
 	 */

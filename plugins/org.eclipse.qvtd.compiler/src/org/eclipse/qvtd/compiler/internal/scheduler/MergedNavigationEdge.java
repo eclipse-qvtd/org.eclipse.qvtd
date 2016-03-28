@@ -82,17 +82,6 @@ public class MergedNavigationEdge extends MergedEdge implements NavigationEdge
 	}
 
 	@Override
-	public boolean isContainer() {
-		Property target2sourceProperty = source2targetProperty.getOpposite();
-		return (target2sourceProperty != null) && target2sourceProperty.isIsComposite();
-	}
-
-	@Override
-	public boolean isContainment() {
-		return source2targetProperty.isIsComposite();
-	}
-
-	@Override
 	public final void removeIncomingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert Iterables.contains(edgeConnection.getTargetEdges(), this);
 //		assert edge.getRegion() == getRegion();

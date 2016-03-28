@@ -65,11 +65,11 @@ public class RootCompositionRegion extends AbstractRegion implements SimpleRegio
 		for (Property property : classDatumAnalysis.getCompleteClass().getProperties((FeatureFilter)null)) {
 			Property oppositeProperty = property.getOpposite();
 			if ((oppositeProperty != null) && oppositeProperty.isIsComposite()) {
-				Edges.COMPOSITION.createEdge(this, childNode, property, getNullNode());
+//				Edges.COMPOSITION.createEdge(this, childNode, property, getNullNode());
 			}
 		}
-		Edges.COMPOSITION.createEdge(this, rootNode, root2childrenProperty, childNode);
-		Edges.COMPOSITION.createEdge(this, othersNode, others2childrenProperty, childNode);
+//		Edges.COMPOSITION.createEdge(this, rootNode, root2childrenProperty, childNode);
+//		Edges.COMPOSITION.createEdge(this, othersNode, others2childrenProperty, childNode);
 		return childNode;
 	}
 

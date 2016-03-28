@@ -45,11 +45,8 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	@NonNull ClassDatumAnalysis getClassDatumAnalysis();
 	@NonNull CompleteClass getCompleteClass();
 	@NonNull Iterable<@NonNull Edge> getComputationEdges();
-	@NonNull Iterable<@NonNull NavigationEdge> getContainerEdges();
-	@NonNull Iterable<@NonNull NavigationEdge> getContainmentEdges();
 	@Nullable NodeConnection getIncomingConnection();
 	@NonNull List<@NonNull Edge> getIncomingEdges();
-//	@Nullable InterRegionEdge getIncomingPassedBindingEdge();
 	@Nullable NodeConnection getIncomingPassedConnection();
 	@Nullable NodeConnection getIncomingUsedConnection();
 	@NonNull String getLabel();
