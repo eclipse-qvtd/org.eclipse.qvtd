@@ -34,6 +34,13 @@ public class QVTimperativeBottomPatternAttribution extends AbstractAttribution
 		AbstractMapping mapping;
 		if (area instanceof AbstractMapping) {
 			mapping = (AbstractMapping)area;;
+		}
+		else {
+			CoreDomain domain = (CoreDomain)area;
+			mapping = (AbstractMapping) domain.getRule();
+		}
+		QVTcoreBaseEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);
+		if (!environmentView.hasFinalResult() && (area instanceof AbstractMapping)) {
 			Transformation transformation = QVTbaseUtil.getContainingTransformation(mapping);
 			if (transformation != null) {
 				for (TypedModel typedModel : transformation.getModelParameter()) {
@@ -44,11 +51,6 @@ public class QVTimperativeBottomPatternAttribution extends AbstractAttribution
 				}
 			}
 		}
-		else {
-			CoreDomain domain = (CoreDomain)area;
-			mapping = (AbstractMapping) domain.getRule();
-		}
-		QVTcoreBaseEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);
 		return scopeView.getParent();
 	}
 }

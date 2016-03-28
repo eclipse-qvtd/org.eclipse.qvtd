@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
@@ -46,6 +47,19 @@ public class QVTiSerializeTests extends LoadTestCase
 		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvti", stem + ".qvtias");
 		URI inputURI = getProjectFileURI(stem + ".qvtias");
 		URI referenceURI = getProjectFileURI(stem + "ref.qvtias");
+		doSerialize(inputURI, stem, referenceURI, null, true, true);
+		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvti", stem + ".serialized.qvtias");
+		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
+		assertSameModel(asResource1, asResource3);
+		ocl1.dispose();
+		ocl2.dispose();
+	}	
+	protected void doSerializeRoundTripFromAS(@NonNull String stem) throws Exception {
+		OCL ocl1 = OCL.newInstance(OCL.NO_PROJECTS);
+		OCL ocl2 = OCL.newInstance(OCL.NO_PROJECTS);
+		URI inputURI = getProjectFileURI(stem + ".qvtias");
+		Resource asResource1 = ocl1.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
+		URI referenceURI = getProjectFileURI(stem + "ref.qvtcas");
 		doSerialize(inputURI, stem, referenceURI, null, true, true);
 		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvti", stem + ".serialized.qvtias");
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
@@ -124,6 +138,7 @@ public class QVTiSerializeTests extends LoadTestCase
 	@Override
 	public void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
+		TestUtil.doCompleteOCLSetup();
 		QVTiTestUtil.doQVTimperativeSetup();
 		super.setUp();
 	}
@@ -166,6 +181,14 @@ public class QVTiSerializeTests extends LoadTestCase
 	
 	public void testSerialize_Tree2TallTree_qvti() throws Exception {
 		doSerializeRoundTrip("Tree2TallTree/Tree2TallTree");
+	}
+	
+	public void zztestSerialize_platformResource_BaseCS2AS() throws Exception {
+		doSerializeRoundTripFromAS("platformResource/org.eclipse.ocl.xtext.base/model/BaseCS2AS");
+	}
+	
+	public void zztestSerialize_platformResource_EssentialOCLCS2AS() throws Exception {
+		doSerializeRoundTripFromAS("platformResource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS2AS");
 	}
 	
 	protected void doSerialize(@NonNull String stem) throws Exception {
