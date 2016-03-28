@@ -160,9 +160,9 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_0_0());	
 			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_0_0());	
 			c.setNoSpace().before(a.getCommaKeyword_0_1_2_0());
-			c.setLinewrap().after(a.getCommaKeyword_0_1_2_0());	
+			c.setLinewrap().after(a.getGroup_0_1());	
 			c.setNoSpace().before(a.getCommaKeyword_0_2_2_0());
-			c.setLinewrap().after(a.getCommaKeyword_0_2_2_0());	
+			c.setLinewrap().after(a.getGroup_0_2());	
 			c.setLinewrap().after(a.getRightCurlyBracketKeyword_0_3());	
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_0_0(), a.getRightCurlyBracketKeyword_0_3());
 			c.setIndentation(a.getLeftCurlyBracketKeyword_0_0(), a.getRightCurlyBracketKeyword_0_3());
