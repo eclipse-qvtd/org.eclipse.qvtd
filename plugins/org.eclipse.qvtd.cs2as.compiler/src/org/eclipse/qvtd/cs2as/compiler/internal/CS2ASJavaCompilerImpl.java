@@ -409,17 +409,16 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	}
 	
 	protected static class CS2ASReferencesVisitor extends QVTiReferencesVisitor
-		implements CS2ASCGModelVisitor<List<Object>> {
+		implements CS2ASCGModelVisitor<@NonNull List<@Nullable Object>> {
 	
 		protected static CS2ASReferencesVisitor INSTANCE = new CS2ASReferencesVisitor(new Object());
 		
-		public CS2ASReferencesVisitor(Object context) {
+		public CS2ASReferencesVisitor(@Nullable Object context) {
 			super(context);
 		}
 	
 		@Override
-		@Nullable
-		public List<Object> visitCGLookupCallExp(CGLookupCallExp object) {
+		public @NonNull List<@Nullable Object> visitCGLookupCallExp(@NonNull CGLookupCallExp object) {
 			return visitCGOperationCallExp(object);
 		}
 	}
