@@ -181,8 +181,14 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			if (sourceValue == null) {
 				throw new InvalidValueException("Null source for '" + referredProperty + "'", sourceValue, navigationCallExp);
 			}
+			boolean isOpposite = false;
 			EStructuralFeature eFeature = (EStructuralFeature)referredProperty.getESObject();
-			objectManager.getting(sourceValue, eFeature, false);
+			if (eFeature == null) {
+				assert referredProperty.isIsImplicit();
+				isOpposite = true;
+				eFeature = (EStructuralFeature)referredProperty.getOpposite().getESObject();
+			}
+			objectManager.getting(sourceValue, eFeature, isOpposite);
 			ecoreValue = super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
 			AbstractTransformer.INVOCATIONS.println("got " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + sourceValue + " = " + ecoreValue);
 		}

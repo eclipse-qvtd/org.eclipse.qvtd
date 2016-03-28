@@ -17,6 +17,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -414,16 +415,27 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
 		Object slotObject = propertyAssignment.getSlotExpression().accept(undecoratedVisitor);
 		if (slotObject instanceof EObject) {
+			Integer childKey = null;
 			try {
 				Object boxedValue = propertyAssignment.getValue().accept(undecoratedVisitor);
 				Property targetProperty = propertyAssignment.getTargetProperty();
 				Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
 				Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);
-				executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, ecoreValue, null);
+				Property oppositeProperty = targetProperty.getOpposite();
+				if (oppositeProperty != null) {
+					Type type = oppositeProperty.getType();
+					if (type instanceof CollectionType) {
+						boolean isOrdered = ((CollectionType)type).isOrdered();
+						if (isOrdered) {
+							
+						}
+					}
+				}
+				executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, ecoreValue, childKey);
 				return null;
 			}
 			catch (InvocationFailedException e) {
-				executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, e, null);
+				executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, e, childKey);
 //				throw e;
 			}
 		} else {

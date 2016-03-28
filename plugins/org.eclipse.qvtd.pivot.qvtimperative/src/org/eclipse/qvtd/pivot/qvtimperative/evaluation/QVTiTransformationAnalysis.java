@@ -49,6 +49,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -568,17 +569,19 @@ public class QVTiTransformationAnalysis
 		if (domainUsage != null) {
 			TypedModel typedModel = domainUsage.getTypedModel();
 			if (typedModel != null) {
-				Area area = null;
-				for (Domain domain : asMapping.getDomain()) {
-					if (domain.getTypedModel() == typedModel) {
-						area = (CoreDomain)domain;
-						break;
-					}
-				}
-				if (area == null) {
-					area = asMapping;
-				}
+				Area area = QVTcoreBaseUtil.getArea(asMapping, typedModel);
 				if ((area instanceof ImperativeArea) && ((ImperativeArea)area).getCheckedProperties().contains(asProperty)) {
+					return true;
+				}
+			}
+		}
+		Property asOppositeProperty = asProperty.getOpposite();
+		domainUsage = getDomainUsageAnalysis().basicGetUsage(asProperty.getType());
+		if (domainUsage != null) {
+			TypedModel typedModel = domainUsage.getTypedModel();
+			if (typedModel != null) {
+				Area area = QVTcoreBaseUtil.getArea(asMapping, typedModel);
+				if ((area instanceof ImperativeArea) && ((ImperativeArea)area).getCheckedProperties().contains(asOppositeProperty)) {
 					return true;
 				}
 			}
