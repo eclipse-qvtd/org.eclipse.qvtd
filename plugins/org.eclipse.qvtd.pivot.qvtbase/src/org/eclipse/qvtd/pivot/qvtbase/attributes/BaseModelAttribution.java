@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtbase.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.internal.attributes.ModelAttribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
@@ -29,9 +28,6 @@ public class BaseModelAttribution extends ModelAttribution
 		org.eclipse.ocl.pivot.Package unnamedPackage = NameUtil.getNameable(targetElement.getOwnedPackages(), "");
 		if (unnamedPackage != null) {
 			environmentView.addAllTypes(unnamedPackage);
-		}
-		for (Import asUnit : targetElement.getOwnedImports()) {			
-			environmentView.addElement(asUnit.getName(), asUnit.getImportedNamespace());
 		}
 		return super.computeLookup(target, environmentView, scopeView);
 	}
