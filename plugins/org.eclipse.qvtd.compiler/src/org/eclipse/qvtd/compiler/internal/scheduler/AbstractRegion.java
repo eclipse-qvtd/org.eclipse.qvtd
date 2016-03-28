@@ -833,11 +833,19 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				}
 				EdgeConnection edgeConnection = predicatedEdge.getIncomingConnection();
 				if (edgeConnection != null) {
+					boolean isChecked = false;
 					for (@NonNull NavigationEdge usedEdge : edgeConnection.getSources()) {
 						Region usedRegion = usedEdge.getRegion();
 						usedRegion.addEnforcedEdge(usedEdge);
 						if (usedRegion.getFinalExecutionIndex() >= getInvocationIndex()) {
 							addCheckedEdge(predicatedEdge);
+							isChecked = true;
+						}
+					}
+					if (isChecked) {
+						for (@NonNull NavigationEdge usedEdge : edgeConnection.getSources()) {
+							Region usedRegion = usedEdge.getRegion();
+							usedRegion.addEnforcedEdge(usedEdge);
 						}
 					}
 				}
@@ -1107,7 +1115,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 		else {
 			Iterable<@NonNull Node> sourceNodes = rootScheduledRegion.getIntroducingOrProducingNodes(classDatumAnalysis);
-			if (sourceNodes != null) {
+//			if (sourceNodes != null) {
 				Iterable<@NonNull NavigationEdge> realizedEdges = rootScheduledRegion.getRealizedEdges(predicatedEdge, classDatumAnalysis);
 				if (realizedEdges != null) {
 					Set<@NonNull Region> edgeSourceRegions = new HashSet<@NonNull Region>();
@@ -1115,8 +1123,10 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 					for (@NonNull NavigationEdge realizedEdge : realizedEdges) {
 						edgeSourceRegions.add(realizedEdge.getRegion());
 					}
-					for (@NonNull Node sourceNode : sourceNodes) {
-						nodeSourceRegions.add(sourceNode.getRegion());
+					if (sourceNodes != null) {
+						for (@NonNull Node sourceNode : sourceNodes) {
+							nodeSourceRegions.add(sourceNode.getRegion());
+						}
 					}
 					//
 					// Create an EdgeConnection for the edge realizations unless all edges are sources by node sources.
@@ -1151,7 +1161,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				//
 				// Create a NodeConnection for the node realizations.
 				//
-				if (!castTarget.isLoaded()			// WIP and !isOnlyCast
+				if ((sourceNodes != null)
+				 && !castTarget.isLoaded()			// WIP and !isOnlyCast
 				 && !castTarget.isConstant()
 				 && !castTarget.isHead()
 				 && !castTarget.isOperation()
@@ -1167,7 +1178,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 						Scheduler.CONNECTION_CREATION.println("  NodeConnection from " + castTarget);
 					}
 				}
-			}
+//			}
 		}
 	}
 
@@ -1185,7 +1196,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		//
 		//	Locate compatible introducers and non-recursive producers
 		//
-		Iterable<@NonNull Node> sourceNodes = rootScheduledRegion.getIntroducingOrProducingNodes(classDatumAnalysis);
+		Iterable<@NonNull Node> sourceNodes = rootScheduledRegion.getIntroducingOrProducingNodes(headNode);
 		if (sourceNodes != null) {
 			for (@NonNull Node sourceNode : sourceNodes) {
 				Region sourceRegion = sourceNode.getRegion();
