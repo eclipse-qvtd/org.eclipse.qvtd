@@ -425,6 +425,7 @@ public class Edges
 	public static final @NonNull IteratedEdgeRoleFactory ITERATED = new IteratedEdgeRoleFactory();		
 //	public static final @NonNull IteratingEdgeRoleFactory ITERATING = new IteratingEdgeRoleFactory();		
 //	public static final @NonNull CastEdgeRoleFactory NAVIGABLE_CAST = new CastEdgeRoleFactory(true);
+	public static final @NonNull NavigationEdgeRoleFactory NAVIGABLE_NAVIGATION = new NavigationEdgeRoleFactory(true);
 	public static final @NonNull NavigationEdgeRoleFactory NAVIGATION = new NavigationEdgeRoleFactory(null);
 	public static final EdgeRole.@NonNull Recursion PRIMARY_RECURSION = new RecursionEdgeRole(true);	
 	public static final EdgeRole.@NonNull Navigation REALIZED = new RealizedNavigationEdgeRole();

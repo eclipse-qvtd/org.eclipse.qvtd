@@ -27,20 +27,17 @@ import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
-import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.ClassRelationships;
 import org.eclipse.qvtd.compiler.internal.etl.scheduling.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
@@ -126,6 +123,8 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 * The Realized Edges that produce each PropertyDatum (or its opposite).
 	 */
 	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigationEdge>> producedPropertyDatum2realizedEdges = new HashMap<@NonNull PropertyDatum, @NonNull List<@NonNull NavigationEdge>>();
+
+	private final @NonNull RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(superRegion);
 
 	public RootScheduledRegion(@NonNull String name, @NonNull Region primaryRegion) {
 		super(primaryRegion.getSuperRegion());
@@ -595,54 +594,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	}
 
 	/**
-	 * Where multiple child consumers are ordered, redirect the later consumers to use the
-	 * preceding consumer making all the state of the preceding consumers available for re-use.
-	 *
-	@SuppressWarnings("unused")
-	private void convertConsumedOrdering(@NonNull Region commonRegion, @NonNull Map<Edge, Set<Edge>> orderingEdge2usedEdges) {
-		for (Node node : commonRegion.getNodes()) {
-			Iterable<Node> passedBindingTargets = node.getPassedBindingTargets();
-			if (Iterables.size(passedBindingTargets) > 0) {
-				Iterable<Node> sortedCalledNodes = AbstractNode.getSortedTargets(passedBindingTargets);
-				Set<Node> availableSources = new HashSet<Node>();
-				Set<Node> oldConnections = null;
-				Node sourceNode = node;
-				availableSources.add(sourceNode);
-				for (Node calledNode : sortedCalledNodes) {
-					Edge callingEdge = calledNode.getPassedBindingEdge();
-					assert callingEdge != null;
-					Node oldSource = callingEdge.getSource();
-					if (oldSource.isConnection()) {
-						if (oldConnections == null) {
-							oldConnections = new HashSet<Node>();
-						}
-						oldConnections.add(oldSource);
-					}
-					Set<Node> requiredSources = new HashSet<Node>();
-					for (Node requiredSource : calledNode.getPassedBindingSources()) {
-						requiredSources.add(requiredSource);
-					}
-					requiredSources.removeAll(availableSources);
-					requiredSources.add(sourceNode);
-					Node sourceOrConnectionNode = getSourceOrConnectionNode(requiredSources, sourceNode.getClassDatumAnalysis());
-					if (oldSource != sourceOrConnectionNode) {
-						callingEdge.setSource(sourceOrConnectionNode);
-					}
-					availableSources.addAll(requiredSources);
-					sourceNode = calledNode;
-				}
-				if (oldConnections != null) {
-					for (Node oldConnection : oldConnections) {
-						if (oldConnection.getOutgoingEdges().size() <= 0) {
-							oldConnection.destroy();
-						}
-					}
-				}
-			}
-		}
-	} */
-
-	/**
 	 * Create the Passed and Used Connections between all introducers and their corresponding consuming nodes. 
 	 */
 	private void createConnections() {
@@ -661,100 +612,11 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	}
 
 	/**
-	 * Create the Used Binding edges and join nodes between all introducers and their corresponding non-head guards.
-	 *
-	private void createNonHeadUsedBindings() {
-		for (Region region : getRegions()) {
-			for (Node predicatedNode : region.getMatchableNodes()) {
-				if (/*!predicatedNode.isHead() &&* / predicatedNode.isClassNode()) {
-					if (/*!predicatedNode.isLoaded() &&* / !predicatedNode.isHead() && !predicatedNode.isInternal() && (predicatedNode == predicatedNode.getCastEquivalentNode())) {
-//						predicatedNode = predicatedNode.getCastEquivalentNode();
-						createNonHeadUsedBinding(predicatedNode);
-					}
-				}
-			}
-		}
-	} */
-	/**
-	 * Create the bindings and if necessary a join node to ensure that all sources of consumingNode's
-	 * ClassDatum are passed to consumingNode using a bindingFactory edge.
-	 *
-	private void createNonHeadUsedBinding(@NonNull Node guardNode) {
-		List<Node> sourceNodes = null;
-		ClassDatumAnalysis classDatumAnalysis = guardNode.getClassDatumAnalysis();
-		//
-		//	Locate viable introducers
-		//
-		List<Node> introducingNodes = introducedClassDatumAnalysis2nodes.get(classDatumAnalysis);
-		if (introducingNodes != null) {
-			for (Node introducingNode : introducingNodes) {
-				if (introducingNode.getRegion().isConflictFree(introducingNode, guardNode)) {
-					if (sourceNodes == null) {
-						sourceNodes = new ArrayList<Node>();
-					}
-					sourceNodes.add(introducingNode);
-				}
-			}
-		}
-		//
-		//	Locate viable producers
-		//
-		List<Node> producingNodes = producedClassDatumAnalysis2realizedNodes.get(classDatumAnalysis);
-		if (producingNodes != null) {
-			for (Node producingNode : producingNodes) {
-				if (producingNode.getRegion().isConflictFree(producingNode, guardNode)) {
-					if (sourceNodes == null) {
-						sourceNodes = new ArrayList<Node>();
-					}
-					sourceNodes.add(producingNode);
-				}
-			}
-		}
-		//
-		//	Connection them up
-		//
-		ClassDatumAnalysis classDatumAnalysis = guardNode.getClassDatumAnalysis();
-		List<Node> introducedNodes = introducedClassDatumAnalysis2nodes.get(classDatumAnalysis);
-		List<Node> producedNodes = producedClassDatumAnalysis2realizedNodes.get(classDatumAnalysis);
-		int size = (introducedNodes != null ? introducedNodes.size() : 0) + (producedNodes != null ? producedNodes.size() : 0);
-		if (size <= 1) {
-			if (introducedNodes != null) {
-				for (@SuppressWarnings("null")@NonNull Node introducedNode : introducedNodes) {
-					Edges.USED_BINDING.createEdge(this, introducedNode, null, guardNode);
-				}
-			}
-			if (producedNodes != null) {
-				for (@SuppressWarnings("null")@NonNull Node producedNode : producedNodes) {
-					Edges.USED_BINDING.createEdge(this, producedNode, null, guardNode);
-				}
-			}
-		}
-		else {
-			Node joinNode = classDatumAnalysis2joinNodes.get(classDatumAnalysis);
-			if (joinNode == null) {
-				joinNode = Nodes.JOIN.createNode(this, "-join-", classDatumAnalysis);
-				classDatumAnalysis2joinNodes.put(classDatumAnalysis, joinNode);
-				if (introducedNodes != null) {
-					for (@SuppressWarnings("null")@NonNull Node introducedNode : introducedNodes) {
-						Edges.PASSED_BINDING.createEdge(this, introducedNode, null, joinNode);
-					}
-				}
-				if (producedNodes != null) {
-					for (@SuppressWarnings("null")@NonNull Node producedNode : producedNodes) {
-						Edges.PASSED_BINDING.createEdge(this, producedNode, null, joinNode);
-					}
-				}
-			}
-			Edges.USED_BINDING.createEdge(this, joinNode, null, guardNode);
-		}
-	} */
-
-	/**
 	 * Create a RootContainmentRegion that introduces model elements directly from the input model root, or from
 	 * composition relationships that form part of an extended metamodel that is not known until run-time.
 	 */
 	private @NonNull RootCompositionRegion createRootContainmentRegion() {
-		RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(superRegion);
+//		RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(superRegion);
 /*		Set<ClassDatumAnalysis> rootClassDatumAnalyses = new HashSet<ClassDatumAnalysis>();
 		for (Entry<Property, Set<ClassDatumAnalysis>> entry : consumedCompositeProperty2introducedClassDatumAnalyses.entrySet()) {
 			@SuppressWarnings("null")@NonNull Property parent2childrenProperty = entry.getKey();
@@ -769,7 +631,64 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			}
 		} */
 		addRegion(rootContainmentRegion);
-		Set<ClassDatumAnalysis> consumedClassDatumAnalyses = consumedClassDatumAnalysis2headNodes.keySet();		// FIXME all consumed classes
+		
+		for (@NonNull Region region : getCallableRegions()) {
+			for (@NonNull Node node : region.getHeadNodes()) {
+				Node introducedNode = rootContainmentRegion.getIntroducerNode(node);
+				addIntroducedNode(introducedNode);
+			}
+		}
+/*		for (Map.Entry<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> entry : consumedClassDatumAnalysis2headNodes.entrySet()) {
+			@NonNull ClassDatumAnalysis classDatumAnalysis = entry.getKey();
+			CompleteClass completeClass = classDatumAnalysis.getCompleteClass();
+			Type childType = completeClass.getPrimaryClass();
+			if (childType instanceof DataType) {
+				continue;
+			}
+			@NonNull List<@NonNull Node> nodes = entry.getValue();
+			for (@NonNull Node node : nodes) {
+				Property compositeProperty = null;
+				for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
+					Property property = edge.getProperty();
+					if (property.isIsComposite()) {
+						compositeProperty = property;
+						break;
+					}
+				}
+				Node introducedNode = rootContainmentRegion.addClassDatumAnalysis(classDatumAnalysis, compositeProperty);
+				addIntroducedNode(introducedNode);
+			}
+		} */
+/*		for (Map.Entry<@NonNull Property, @NonNull Set<@NonNull ClassDatumAnalysis>> entry : consumedCompositeProperty2introducedClassDatumAnalyses.entrySet()) {
+			@NonNull Property parent2childrenProperty = entry.getKey();
+			@NonNull Set<@NonNull ClassDatumAnalysis> classDatumAnalyses = entry.getValue();
+			TypedModel typedModel = classDatumAnalyses.iterator().next().getTypedModel();
+			DomainUsage usage = getSchedulerConstants().getDomainUsage(typedModel);
+			assert usage.isInput();
+			
+			
+			
+//			ChildCompositionRegion containmentRegion = new ChildCompositionRegion(superRegion, parent2childrenProperty, typedModel);
+//			Node headNode = containmentRegion.getComposingNode();
+//			CompleteClass parentClass = headNode.getCompleteClass();
+//			addConsumedNode(headNode);
+			for (@NonNull ClassDatumAnalysis classDatumAnalysis : classDatumAnalyses) {
+				Node introducedNode = rootContainmentRegion.addClassDatumAnalysis(classDatumAnalysis, parent2childrenProperty);
+				addIntroducedNode(introducedNode);
+				CompleteClass childClass = introducedNode.getCompleteClass();
+				Type childType = childClass.getPrimaryClass();
+				if (childType instanceof CollectionType) {
+					@SuppressWarnings("null")@NonNull Type elementType = ((CollectionType)childType).getElementType();
+					childClass = getSchedulerConstants().getEnvironmentFactory().getCompleteModel().getCompleteClass(elementType);
+				}
+//				if (childClass.conformsTo(parentClass)) {
+//					Edges.PRIMARY_RECURSION.createEdge(containmentRegion, introducedNode, headNode);
+//				}
+			}
+		} */
+		
+		
+/*		Set<ClassDatumAnalysis> consumedClassDatumAnalyses = consumedClassDatumAnalysis2headNodes.keySet();		// FIXME all consumed classes
 		for (@SuppressWarnings("null")@NonNull ClassDatumAnalysis consumedClassDatumAnalysis : consumedClassDatumAnalyses) {
 			boolean canBeAtRoot = !consumedClassDatumAnalysis.getDomainUsage().isOutput();
 			if (consumedClassDatumAnalysis.getClassDatum().getType() instanceof DataType) {
@@ -799,7 +718,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 				Node introducedNode = rootContainmentRegion.addClassDatumAnalysis(consumedClassDatumAnalysis);
 				addIntroducedNode(introducedNode);
 			}
-		}
+		} */
 		if (Scheduler.DEBUG_GRAPHS.isActive()) {
 			rootContainmentRegion.writeDebugGraphs("1-create");
 		}
@@ -845,8 +764,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		//
 		//	Create the root containment region to introduce all root and otherwise contained consumed classes.
 		//
-		@SuppressWarnings("unused")
-		RootCompositionRegion rootContainmentRegion = createRootContainmentRegion();
+		createRootContainmentRegion();
 		//
 		//	Create a connection between each consumer and the corresponding introducer/producer.
 		//
@@ -1114,25 +1032,35 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		return introducedClassDatumAnalysis2nodes.get(classDatumAnalysis);	// Separate introduction of each consumed type
 	}
 
-	public @Nullable Iterable<@NonNull Node> getIntroducingOrProducingNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		Iterable<@NonNull Node> introducedNodes = introducedClassDatumAnalysis2nodes.get(classDatumAnalysis);
-		Iterable<@NonNull Node> producedNodes = producedClassDatumAnalysis2realizedNodes.get(classDatumAnalysis);
-		if (introducedNodes != null) {
-			if (producedNodes != null) {
-				return Iterables.concat(introducedNodes, producedNodes);
-			}
-			else {
-				return introducedNodes;
-			}
+	public @Nullable Iterable<@NonNull Node> getIntroducingOrProducingNodes(@NonNull Node headNode) {
+		ClassDatumAnalysis classDatumAnalysis = headNode.getClassDatumAnalysis();
+		if (classDatumAnalysis.getDomainUsage().isInput()) {
+			return Collections.singletonList(rootContainmentRegion.getIntroducerNode(headNode));
 		}
 		else {
+			return getIntroducingOrProducingNodes(classDatumAnalysis);
+		}
+	}
+
+	public @Nullable Iterable<@NonNull Node> getIntroducingOrProducingNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+//		Iterable<@NonNull Node> introducedNodes = introducedClassDatumAnalysis2nodes.get(classDatumAnalysis);
+		Iterable<@NonNull Node> producedNodes = producedClassDatumAnalysis2realizedNodes.get(classDatumAnalysis);
+//		if (introducedNodes != null) {
+//			if (producedNodes != null) {
+//				return Iterables.concat(introducedNodes, producedNodes);
+//			}
+//			else {
+//				return introducedNodes;
+//			}
+//		}
+//		else {
 			if (producedNodes != null) {
 				return producedNodes;
 			}
 			else {
 				return null;
 			}
-		}
+//		}
 	}
 
 /*	public @NonNull List<ConnectionRegion> getConnectionRegions(@NonNull Region toRegion) {

@@ -262,6 +262,15 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 	public @NonNull MetamodelManager getMetamodelManager() {
 		return environmentFactory.getMetamodelManager();
 	}
+
+	public @NonNull Operation getNotEqualsOperation() {
+		StandardLibrary standardLibrary = getStandardLibrary();
+		org.eclipse.ocl.pivot.Class oclAnyType = standardLibrary.getOclAnyType();
+		Operation operation1 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "<>");
+		assert operation1 != null;
+		OperationId oclAnyEqualsId = operation1.getOperationId();
+		return environmentFactory.getIdResolver().getOperation(oclAnyEqualsId);
+	}
 	
 	public @Nullable TypedModel getQVTiTypedModel(@Nullable TypedModel qvtpTypedModel) {
 		TypedModel qvtiTypedModel = qvtpTypedModel2qvtiTypedModel.get(qvtpTypedModel);

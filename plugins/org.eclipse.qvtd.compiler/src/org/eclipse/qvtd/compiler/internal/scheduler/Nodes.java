@@ -290,23 +290,6 @@ public class Nodes
 		}
 	}
 
-	private static final class ComposedNodeRole extends AbstractSimpleNodeRole
-	{
-		protected ComposedNodeRole() {
-			super(Role.Phase.LOADED);
-		}
-
-		@Override
-		public boolean isClassNode() {
-			return true;
-		}
-
-		@Override
-		public boolean isComposed() {
-			return true;
-		}
-	}
-
 	private static final class ComposingNodeRole extends AbstractSimpleNodeRole
 	{
 		protected ComposingNodeRole() {
@@ -315,11 +298,6 @@ public class Nodes
 
 		@Override
 		public boolean isClassNode() {
-			return true;
-		}
-
-		@Override
-		public boolean isHead() {
 			return true;
 		}
 
@@ -1049,7 +1027,6 @@ public class Nodes
 	}
 	
 	public static final @NonNull AttributeNodeRoleFactory ATTRIBUTE = new AttributeNodeRoleFactory(null);
-	public static final @NonNull NodeRole COMPOSED = new ComposedNodeRole();
 	public static final @NonNull NodeRole COMPOSING = new ComposingNodeRole();
 	public static final @NonNull ElementNodeRoleFactory ELEMENT = new ElementNodeRoleFactory();
 	public static final @NonNull NodeRole ERROR = new ErrorNodeRole();

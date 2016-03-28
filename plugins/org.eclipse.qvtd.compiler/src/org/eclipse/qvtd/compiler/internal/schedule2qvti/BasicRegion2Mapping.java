@@ -1349,7 +1349,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			if (!initType.conformsTo(visitor.getStandardLibrary(), variableType)) {
 				initExpression = createOclAsTypeCallExp(initExpression, variableType);
 			}
-			isRequired = initExpression.isIsRequired();
+			isRequired = true; //initExpression.isIsRequired();
 		}
 		Variable variable = PivotUtil.createVariable(getSafeName(node), variableType, isRequired, initExpression);
 		pattern.getVariable().add(variable);
