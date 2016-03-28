@@ -92,6 +92,17 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		this.scheduler = context.getSchedulerConstants();
 //		this.dependencyAnalyzer = getDependencyAnalyzer();
 	}
+
+	protected void addPredicateEdge(@NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
+		assert sourceNode.isClassNode();
+		SimpleEdge predicateEdge = sourceNode.getPredicateEdge(source2targetProperty);
+		if (predicateEdge == null) {
+			createNavigationEdge(sourceNode, source2targetProperty, targetNode);
+		}
+		else {
+			assert predicateEdge.getTarget() == targetNode;
+		}
+	}
 	
 	public @NonNull SimpleNode analyze(/*@NonNull*/ Visitable element) {
 		SimpleNode accept = element.accept(this);
@@ -527,14 +538,14 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			Type type = referredProperty.getType();
 			if (type instanceof DataType) {
 				SimpleNode attributeNode = context.getPredicatedAttributeNode(sourceReferenceNode, navigationCallExp);
-				context.addPredicateEdge(sourceReferenceNode, referredProperty, attributeNode);
+				addPredicateEdge(sourceReferenceNode, referredProperty, attributeNode);
 				return attributeNode;
 			}
 			else {
 				String name = referredProperty.getName();
 				assert (name != null) && (type != null);
 				SimpleNode targetReferenceNode = createStepNode(name, navigationCallExp, sourceNode);
-				context.addPredicateEdge(sourceReferenceNode, referredProperty, targetReferenceNode);
+				addPredicateEdge(sourceReferenceNode, referredProperty, targetReferenceNode);
 				return targetReferenceNode;
 			}
 		}

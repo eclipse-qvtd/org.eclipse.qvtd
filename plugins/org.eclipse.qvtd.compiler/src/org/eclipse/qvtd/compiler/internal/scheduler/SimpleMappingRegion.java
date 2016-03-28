@@ -214,17 +214,6 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		assert basicGetSymbolName() == null;
 		super.addNode(node);
 	}
-	
-	public void addPredicateEdge(@NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
-		assert sourceNode.isClassNode();
-		SimpleEdge predicateEdge = sourceNode.getPredicateEdge(source2targetProperty);
-		if (predicateEdge == null) {
-			Edges.NAVIGATION.createSimpleEdge(this, sourceNode, source2targetProperty, targetNode);
-		}
-		else {
-			assert predicateEdge.getTarget() == targetNode;
-		}
-	}
 
 	/**
 	 * Install the path equivalence that navigation of the successive path elements starting from sourceVariable reaches targetVariable.
@@ -239,7 +228,14 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		SimpleNode targetNode = targetVariable != null ? getReferenceNode(targetVariable) : Nodes.NULL.createSimpleNode(this);
 		assert sourceNode.isGuardVariable();
 		assert (targetVariable == null) || targetNode.isGuardVariable();
-		addPredicateEdge(sourceNode, property, targetNode);
+		assert sourceNode.isClassNode();
+		SimpleEdge predicateEdge = sourceNode.getPredicateEdge(property);
+		if (predicateEdge == null) {
+			Edges.NAVIGATION.createSimpleEdge(this, sourceNode, property, targetNode);
+		}
+		else {
+			assert predicateEdge.getTarget() == targetNode;
+		}
 	}
 
 	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull SimpleNode simpleNode) {
