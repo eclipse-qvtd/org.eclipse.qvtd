@@ -19,8 +19,18 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.CollectionItem;
+import org.eclipse.ocl.pivot.CollectionLiteralExp;
+import org.eclipse.ocl.pivot.CollectionLiteralPart;
+import org.eclipse.ocl.pivot.CollectionRange;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.IterateExp;
+import org.eclipse.ocl.pivot.Iteration;
+import org.eclipse.ocl.pivot.IteratorExp;
+import org.eclipse.ocl.pivot.MapLiteralExp;
+import org.eclipse.ocl.pivot.MapLiteralPart;
+import org.eclipse.ocl.pivot.MapType;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -29,8 +39,13 @@ import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.ShadowExp;
+import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.TemplateParameter;
 import org.eclipse.ocl.pivot.TemplateableElement;
+import org.eclipse.ocl.pivot.TupleLiteralExp;
+import org.eclipse.ocl.pivot.TupleLiteralPart;
+import org.eclipse.ocl.pivot.TupleType;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -39,11 +54,13 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.OperationId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.TypeUtil;
 import org.eclipse.qvtd.compiler.internal.scheduler.Node;
 import org.eclipse.qvtd.compiler.internal.scheduler.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.scheduler.Region;
@@ -55,6 +72,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+
+import com.google.common.collect.Iterables;
 
 public abstract class AbstractRegion2Mapping
 {
@@ -150,6 +169,84 @@ public abstract class AbstractRegion2Mapping
 		}
 	}
 
+	protected @NonNull CollectionItem createCollectionItem(@NonNull OCLExpression asItem) {
+		CollectionItem collectionItem = PivotFactory.eINSTANCE.createCollectionItem();
+		collectionItem.setOwnedItem(asItem);
+		collectionItem.setType(asItem.getType());
+		collectionItem.setIsRequired(asItem.isIsRequired());
+		return collectionItem;
+	}
+
+	protected @NonNull OCLExpression createCollectionLiteralExp(@NonNull CollectionType asType, @NonNull Iterable<CollectionLiteralPart> asParts) {
+		CollectionLiteralExp collectionLiteralExp = PivotFactory.eINSTANCE.createCollectionLiteralExp();
+		Iterables.addAll(collectionLiteralExp.getOwnedParts(), asParts);
+		collectionLiteralExp.setType(asType);
+		collectionLiteralExp.setKind(TypeUtil.getCollectionKind(asType));
+		collectionLiteralExp.setIsRequired(true);
+		return collectionLiteralExp;
+	}
+
+	protected @NonNull CollectionRange createCollectionRange(@NonNull OCLExpression asFirst, @NonNull OCLExpression asLast) {
+		CollectionRange collectionRange = PivotFactory.eINSTANCE.createCollectionRange();
+		collectionRange.setOwnedFirst(asFirst);
+		collectionRange.setOwnedLast(asLast);
+		collectionRange.setType(visitor.getStandardLibrary().getIntegerType());
+		collectionRange.setIsRequired(true);
+		return collectionRange;
+	}
+
+	protected @NonNull IterateExp createIterateExp(@NonNull OCLExpression asSource, @NonNull Iteration asIteration, @NonNull List<@NonNull ? extends Variable> asIterators, @NonNull Variable asResult, @NonNull OCLExpression asBody) {
+		IterateExp asCallExp = PivotFactory.eINSTANCE.createIterateExp();
+		asCallExp.setReferredIteration(asIteration);
+		asCallExp.setOwnedSource(asSource);
+		asCallExp.getOwnedIterators().addAll(asIterators);
+		asCallExp.setOwnedResult(asResult);
+		asCallExp.setOwnedBody(asBody);
+		Type formalType = asIteration.getType();
+		assert formalType != null;
+		asCallExp.setType(formalType);
+		asCallExp.setIsRequired(asIteration.isIsRequired());
+		Type actualType = asSource.getType();
+		assert actualType != null;
+		Type returnType = getMetamodelManager().specializeType(formalType, asCallExp, actualType, asSource.getTypeValue());
+		asCallExp.setType(returnType);
+		return asCallExp;
+	}
+
+	protected @NonNull IteratorExp createIteratorExp(@NonNull OCLExpression asSource, @NonNull Iteration asIteration, @NonNull List<@NonNull ? extends Variable> asIterators, @NonNull OCLExpression asBody) {
+		IteratorExp asCallExp = PivotFactory.eINSTANCE.createIteratorExp();
+		asCallExp.setReferredIteration(asIteration);
+		asCallExp.setOwnedSource(asSource);
+		asCallExp.getOwnedIterators().addAll(asIterators);
+		asCallExp.setOwnedBody(asBody);
+		Type formalType = asIteration.getType();
+		assert formalType != null;
+		asCallExp.setType(formalType);
+		asCallExp.setIsRequired(asIteration.isIsRequired());
+		Type actualType = asSource.getType();
+		assert actualType != null;
+		Type returnType = getMetamodelManager().specializeType(formalType, asCallExp, actualType, asSource.getTypeValue());
+		asCallExp.setType(returnType);
+		return asCallExp;
+	}
+
+	protected @NonNull OCLExpression createMapLiteralExp(@NonNull MapType asType, @NonNull Iterable<MapLiteralPart> asParts) {
+		MapLiteralExp mapLiteralExp = PivotFactory.eINSTANCE.createMapLiteralExp();
+		Iterables.addAll(mapLiteralExp.getOwnedParts(), asParts);
+		mapLiteralExp.setType(asType);
+		mapLiteralExp.setIsRequired(true);
+		return mapLiteralExp;
+	}
+
+	protected @NonNull MapLiteralPart createMapLiteralPart(@NonNull OCLExpression asKey, @NonNull OCLExpression asValue) {
+		MapLiteralPart mapLiteralPart = PivotFactory.eINSTANCE.createMapLiteralPart();
+		mapLiteralPart.setOwnedKey(asKey);
+		mapLiteralPart.setOwnedValue(asValue);
+//		mapLiteralPart.setType(asItem.getType());
+//		mapLiteralPart.setIsRequired(true);
+		return mapLiteralPart;
+	}
+
 	protected @NonNull NullLiteralExp createNullLiteralExp() {
 		return getMetamodelManager().createNullLiteralExp();
 	}
@@ -164,7 +261,7 @@ public abstract class AbstractRegion2Mapping
 		SchedulerConstants schedulerConstants = getRegion().getSchedulerConstants();
 		IdResolver idResolver = schedulerConstants.getEnvironmentFactory().getIdResolver();
 		CompleteClass completeClass = schedulerConstants.getEnvironmentFactory().getCompleteModel().getCompleteClass(asType);
-		TypeExp asTypeExp = createTypeExp(completeClass);
+		TypeExp asTypeExp = createTypeExp(completeClass.getPrimaryClass());
 		return createOperationCallExp(asSource, idResolver.getOperation(schedulerConstants.getOclAnyOclAsTypeId()), asTypeExp);
 	}
 
@@ -200,6 +297,69 @@ public abstract class AbstractRegion2Mapping
 		return asCallExp;
 	}
 
+	// FIXME Unify two createOperationCallExp's 
+	protected @NonNull OperationCallExp createOperationCallExp(@Nullable OCLExpression asSource, @NonNull Operation asOperation, @NonNull List<OCLExpression> asArguments) {
+		Type formalType = asOperation.getType();
+		OperationCallExp asCallExp = PivotFactory.eINSTANCE.createOperationCallExp();
+		asCallExp.setReferredOperation(asOperation);
+		asCallExp.setOwnedSource(asSource);
+		asCallExp.getOwnedArguments().addAll(asArguments);
+		asCallExp.setIsRequired(asOperation.isIsRequired());
+
+		Type sourceType = null;
+		Type sourceTypeValue = null;
+		if (asSource != null) {
+			sourceType = asSource.getType();
+			sourceTypeValue = asSource.getTypeValue();
+		}
+		Type returnType = null;
+		if ((formalType != null) && (sourceType != null)) {
+			PivotMetamodelManager metamodelManager = getMetamodelManager();
+			if (asOperation.isIsTypeof()) {
+				returnType = metamodelManager.specializeType(formalType, asCallExp, sourceType, null);
+			}
+			else {
+				returnType = metamodelManager.specializeType(formalType, asCallExp, sourceType, sourceTypeValue);
+			}
+		}
+		asCallExp.setType(returnType);
+		return asCallExp;
+	}
+
+	protected @NonNull OCLExpression createShadowExp(org.eclipse.ocl.pivot.@NonNull Class asClass, @NonNull Iterable<ShadowPart> asParts) {
+		ShadowExp shadowExp = PivotFactory.eINSTANCE.createShadowExp();
+		Iterables.addAll(shadowExp.getOwnedParts(), asParts);
+		shadowExp.setType(asClass);
+		shadowExp.setIsRequired(true);
+		return shadowExp;
+	}
+
+	protected @NonNull ShadowPart createShadowPart(@NonNull Property asProperty, @NonNull OCLExpression asValue) {
+		ShadowPart shadowPart = PivotFactory.eINSTANCE.createShadowPart();
+		shadowPart.setReferredProperty(asProperty);
+		shadowPart.setType(asProperty.getType());
+		shadowPart.setIsRequired(asProperty.isIsRequired());
+		shadowPart.setOwnedInit(asValue);
+		return shadowPart;
+	}
+
+	protected @NonNull OCLExpression createTupleLiteralExp(@NonNull TupleType asType, @NonNull Iterable<TupleLiteralPart> asParts) {
+		TupleLiteralExp tupleLiteralExp = PivotFactory.eINSTANCE.createTupleLiteralExp();
+		Iterables.addAll(tupleLiteralExp.getOwnedParts(), asParts);
+		tupleLiteralExp.setType(asType);
+		tupleLiteralExp.setIsRequired(true);
+		return tupleLiteralExp;
+	}
+
+	protected @NonNull TupleLiteralPart createTupleLiteralPart(@NonNull String name, @NonNull Type asType, boolean isRequired, @NonNull OCLExpression asValue) {
+		TupleLiteralPart tupleLiteralPart = PivotFactory.eINSTANCE.createTupleLiteralPart();
+		tupleLiteralPart.setName(name);
+		tupleLiteralPart.setType(asType);
+		tupleLiteralPart.setIsRequired(isRequired);
+		tupleLiteralPart.setOwnedInit(asValue);
+		return tupleLiteralPart;
+	}
+
 	public abstract void createStatements();
 
 /*	private @NonNull OCLExpression createUnrealizedVariableExp(@NonNull Node node) {	// FIXME redundant
@@ -216,12 +376,12 @@ public abstract class AbstractRegion2Mapping
 		return PivotUtil.createVariableExp(variable);
 	} */
 
-	protected @NonNull TypeExp createTypeExp(@NonNull CompleteClass completeClass) {
+	protected @NonNull TypeExp createTypeExp(@NonNull Type type) {
 		TypeExp asTypeExp = PivotFactory.eINSTANCE.createTypeExp();
-		asTypeExp.setIsRequired(true);;
-		asTypeExp.setReferredType(completeClass.getPrimaryClass());
+		asTypeExp.setIsRequired(true);
+		asTypeExp.setReferredType(type);
 		asTypeExp.setType(visitor.getStandardLibrary().getClassType());
-		asTypeExp.setTypeValue(completeClass.getPrimaryClass());
+		asTypeExp.setTypeValue(type);
 		return asTypeExp;
 	}
 
@@ -310,6 +470,21 @@ public abstract class AbstractRegion2Mapping
 		else {
 			return null;
 		}
+	}
+
+	protected @NonNull Operation getObjectsOfKindOperation() {
+		StandardLibraryInternal standardLibrary = (StandardLibraryInternal)visitor.getStandardLibrary();
+		Type modelType = standardLibrary.getLibraryType("Model");
+		OperationId objectsOfKindOperationId = modelType.getTypeId().getOperationId(1, "objectsOfKind", IdManager.getParametersId(TypeId.T_1));
+		Operation objectsOfKindOperation = visitor.getEnvironmentFactory().getIdResolver().getOperation(objectsOfKindOperationId);
+		return objectsOfKindOperation;
+	}
+
+	protected @NonNull Operation getOclIsKindOfOperation() {
+		org.eclipse.ocl.pivot.Class oclAnyType = ((StandardLibraryInternal)visitor.getStandardLibrary()).getOclAnyType();
+		Operation oclIsKindOfOperation = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "oclIsKindOf");
+		assert oclIsKindOfOperation != null;
+		return oclIsKindOfOperation;
 	}
 
 	public @NonNull Region getRegion() {
