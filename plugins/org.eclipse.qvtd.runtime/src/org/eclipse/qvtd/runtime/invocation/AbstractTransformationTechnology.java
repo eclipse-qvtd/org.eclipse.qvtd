@@ -8,10 +8,9 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.runtime.evaluation;
+package org.eclipse.qvtd.runtime.invocation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.runtime.internal.evaluation.TransformationTechnology;
 
 /**
  * AbstractTransformationTechnology provides the mandatory shared functionality of TransformationTechnology

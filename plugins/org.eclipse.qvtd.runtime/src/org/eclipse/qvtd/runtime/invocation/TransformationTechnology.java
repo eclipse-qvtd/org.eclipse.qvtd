@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.runtime.internal.evaluation;
+package org.eclipse.qvtd.runtime.invocation;
 
 import java.util.Map;
 
