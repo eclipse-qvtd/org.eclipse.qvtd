@@ -10,18 +10,21 @@
  *******************************************************************************/
 package org.eclipse.qvtd.cs2as.compiler.internal;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 
 public class CS2ASJavaCompilerParametersImpl implements CS2ASJavaCompilerParameters  {
-
 	private @NonNull String lookupSolverName;
 	private @Nullable String savePath;
 	private @NonNull String packagePrefix;
 	private @NonNull String lookupResultName;
 	private @NonNull String namedElementClassName;
 	private boolean isIncremental = false;
+	private @NonNull Map<@NonNull String, @NonNull String> packageRenameMap = new HashMap<@NonNull String, @NonNull String>();
 	
 	public CS2ASJavaCompilerParametersImpl(@NonNull String lookupSolverClassName,
 			@Nullable String lookupResultClassName,
@@ -30,6 +33,13 @@ public class CS2ASJavaCompilerParametersImpl implements CS2ASJavaCompilerParamet
 		this.savePath = savePath;
 		this.packagePrefix = packagePrefix;
 		this.lookupResultName = lookupResultClassName;
+	}
+
+	/**
+	 * Defines a package rename only from some package to another package.
+	 */
+	public void addPackageRename(@NonNull String fromPackage, @NonNull String toPackage) {
+		packageRenameMap.put(fromPackage, toPackage);
 	}
 	
 	/**
@@ -62,6 +72,11 @@ public class CS2ASJavaCompilerParametersImpl implements CS2ASJavaCompilerParamet
 	@NonNull
 	public String getPackageName() {
 		return packagePrefix;
+	}
+
+	@Override
+	public @NonNull Map<@NonNull String, @NonNull String> getPackageRenames() {
+		return packageRenameMap;
 	}
 
 	@Override

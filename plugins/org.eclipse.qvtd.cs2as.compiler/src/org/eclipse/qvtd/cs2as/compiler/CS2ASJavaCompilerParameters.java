@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.cs2as.compiler;
 
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 
 public interface CS2ASJavaCompilerParameters extends OCL2JavaTxCompilerParams {
@@ -39,7 +41,11 @@ public interface CS2ASJavaCompilerParameters extends OCL2JavaTxCompilerParams {
 	 */
 	@NonNull
 	public String getPackageName();
-	
+
+	/**
+	 * @return the map of Java package renames to replicate the localization of the run-time packages.
+	 */	
+	public @NonNull Map<@NonNull String, @NonNull String> getPackageRenames();
 
 	/**
 	 * @return true to generate an incremental transformation

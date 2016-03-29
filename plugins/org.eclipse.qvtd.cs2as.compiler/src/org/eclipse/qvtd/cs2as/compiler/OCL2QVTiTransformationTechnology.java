@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformationTechnology;
+import org.eclipse.qvtd.runtime.invocation.AbstractTransformationTechnology;
 
 public class OCL2QVTiTransformationTechnology extends AbstractTransformationTechnology
 {
@@ -38,6 +38,8 @@ public class OCL2QVTiTransformationTechnology extends AbstractTransformationTech
 		//
 		String oclFileURI = (String) parametersMap.get("oclFileURI");
 		@SuppressWarnings("unchecked")
+		Map<String, String> packageRenames = (Map<String, String>) parametersMap.get("packageRenames");
+		@SuppressWarnings("unchecked")
 		List<String> extendedOclFileURIs = (List<String>) parametersMap.get("extendedOclFileURIs");
 		String traceabilityPropName = (String) parametersMap.get("traceabilityPropName");
 		//
@@ -46,7 +48,16 @@ public class OCL2QVTiTransformationTechnology extends AbstractTransformationTech
 		for (int i=0; i< extendedOclFileURIs.size(); i++) {
 			extendedOclDocURIs[i] = URI.createURI(extendedOclFileURIs.get(i));
 		}
-		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(lookupSolverClassName, lookupResultItfName, javaFolder, javaPackage);
+		CS2ASJavaCompilerParametersImpl cgParams = new CS2ASJavaCompilerParametersImpl(lookupSolverClassName, lookupResultItfName, javaFolder, javaPackage);
+		if (packageRenames != null) {
+			for (Map.Entry<String, String> entry : packageRenames.entrySet()) {
+				String fromPackage = entry.getKey();
+				String toPackage = entry.getValue();
+				if ((fromPackage != null) && (toPackage != null)) {
+					cgParams.addPackageRename(fromPackage, toPackage);
+				}
+			}
+		}
 		try {
 			new OCL2QVTiCGTxCompiler().compileTransformation(resourceSet, cgParams, traceabilityPropName, oclDocURI, extendedOclDocURIs);
 			return new HashMap<@NonNull String, Object>();

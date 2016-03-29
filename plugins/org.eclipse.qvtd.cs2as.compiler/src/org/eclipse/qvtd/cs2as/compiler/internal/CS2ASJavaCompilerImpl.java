@@ -12,6 +12,7 @@ package org.eclipse.qvtd.cs2as.compiler.internal;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -453,7 +454,19 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	public @NonNull Class<? extends CS2ASTransformer> compileTransformation(@NonNull QVTimperative qvt,
 			@NonNull Transformation transformation,	@NonNull CS2ASJavaCompilerParameters params) throws Exception {
 				
-		QVTiCodeGenerator cg = new CS2ASJavaCodeGenerator(qvt.getEnvironmentFactory(), transformation, params);
+		QVTiCodeGenerator cg = new CS2ASJavaCodeGenerator(qvt.getEnvironmentFactory(), transformation, params)
+		{
+			@Override
+			protected @NonNull String createClassFileContent() {
+				String classFileContent = super.createClassFileContent();
+				for (Map.Entry<@NonNull String, @NonNull String> entry : params.getPackageRenames().entrySet()) {
+					String fromPackage = entry.getKey();
+					String toPackage = entry.getValue();
+					classFileContent = classFileContent.replace(fromPackage, toPackage);
+				}
+				return classFileContent;
+			}			
+		};
 		QVTiCodeGenOptions options = cg.getOptions();
 		options.setUseNullAnnotations(true);
 		options.setIsIncremental(params.isIncremental());

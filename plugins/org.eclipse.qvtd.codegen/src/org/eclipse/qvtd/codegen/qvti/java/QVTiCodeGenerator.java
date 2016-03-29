@@ -118,6 +118,20 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		
 		return cgPackage;
 	}
+
+	protected @NonNull String createClassFileContent() {
+		String javaSourceCode2;
+		CGPackage cgPackage2 = createCGPackage();
+		cgPackage = cgPackage2;
+		optimize(cgPackage2);
+		List<CGValuedElement> sortedGlobals = prepareGlobals();
+		QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
+		generator.safeVisit(cgPackage2);
+		Set<String> allImports = generator.getAllImports();
+		Map<@NonNull String, @Nullable String> long2ShortImportNames = ImportUtils.getLong2ShortImportNames(allImports);
+		javaSourceCode2 = ImportUtils.resolveImports(generator.toString(), long2ShortImportNames, false);
+		return javaSourceCode2;
+	}
 	
 	protected @NonNull CGPackage createPrefixedCGPackage(org.eclipse.ocl.pivot.@NonNull Package asPackage, String packagePrefix) {
 		
@@ -194,15 +208,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	public @NonNull String generateClassFile() {
 		String javaSourceCode2 = javaSourceCode;
 		if (javaSourceCode2 == null) {
-			CGPackage cgPackage2 = createCGPackage();
-			cgPackage = cgPackage2;
-			optimize(cgPackage2);
-			List<CGValuedElement> sortedGlobals = prepareGlobals();
-			QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
-			generator.safeVisit(cgPackage2);
-			Set<String> allImports = generator.getAllImports();
-			Map<@NonNull String, @Nullable String> long2ShortImportNames = ImportUtils.getLong2ShortImportNames(allImports);
-			javaSourceCode = javaSourceCode2 = ImportUtils.resolveImports(generator.toString(), long2ShortImportNames, false);
+			javaSourceCode = javaSourceCode2 = createClassFileContent();
 		}
 		return javaSourceCode2;
 	}
