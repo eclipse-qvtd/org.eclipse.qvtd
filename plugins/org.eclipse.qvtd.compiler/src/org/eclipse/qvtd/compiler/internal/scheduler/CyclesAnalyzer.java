@@ -94,9 +94,9 @@ public class CyclesAnalyzer
 //					assert (checkDepth != null) && (checkDepth == 0);
 					assert depth == 0;
 				}
-				else{
+				else if (checkDepth != null) {	// null for no inputs.
 					assert partialSourceDepth != null;
-					assert (checkDepth != null) && (depth == (checkDepth+1));
+					assert depth == checkDepth + 1;
 				}
 			}
 			else {

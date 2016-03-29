@@ -1224,6 +1224,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				NodeConnection headConnection = createHeadConnection(headNode);
 				if (headConnection == null) {
 					if (!headNode.getNodeRole().isExtraGuardVariable()) {	// We don't know if extra guards are needed or not
+						System.err.println("createHeadConnections abandoned for " + headNode + " of " + this);
 						return null;										//  so matching only fails for unmatchable real heads
 					}
 				}

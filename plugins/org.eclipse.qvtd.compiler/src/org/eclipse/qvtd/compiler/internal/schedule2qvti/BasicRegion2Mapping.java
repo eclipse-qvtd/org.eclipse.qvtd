@@ -794,9 +794,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			for (@NonNull Node callingSource : callingSources) {
 				headCallingRegions.add(callingSource.getRegion());
 			}
-			if (!isExtraGuard || (bestHeadNode != null)) {
-				assert bestHeadNode != null;
+			if (bestHeadNode != null) {
 				headNodes.add(bestHeadNode);
+			}
+			else if (!isExtraGuard) {
+				System.err.println("No best head for " + region);
 			}
 		}
 		guardNodes.addAll(headNodes);
@@ -1389,7 +1391,17 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 			}
-			assert variable != null;
+			if (variable == null) {
+				System.err.println("Creating dummy variable for " + node + " in " + region);
+				BottomPattern bottomPattern = mapping.getBottomPattern();
+				assert bottomPattern != null;
+				Type variableType = node.getCompleteClass().getPrimaryClass();
+				assert variableType != null;
+				variable = PivotUtil.createVariable(getSafeName(node), variableType, false, null);
+				bottomPattern.getVariable().add(variable);
+				Variable oldVariable = node2variable.put(node, variable);
+				assert oldVariable == null;
+			}
 			return PivotUtil.createVariableExp(variable);
 		}
 	}
