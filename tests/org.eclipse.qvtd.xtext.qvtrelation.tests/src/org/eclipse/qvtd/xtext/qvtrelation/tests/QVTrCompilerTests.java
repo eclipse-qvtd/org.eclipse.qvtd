@@ -36,6 +36,7 @@ import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
+import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -251,6 +252,7 @@ public class QVTrCompilerTests extends LoadTestCase
 	@Test
     public void testQVTrCompiler_SeqToStm() throws Exception {
 //		AbstractTransformer.INVOCATIONS.setState(true);
+		Scheduler.DEBUG_GRAPHS.setState(true);;
     	MyQVT myQVT = new MyQVT("seq2stm");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
