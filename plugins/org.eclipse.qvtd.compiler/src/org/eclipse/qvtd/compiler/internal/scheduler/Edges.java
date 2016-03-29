@@ -86,6 +86,20 @@ public class Edges
 		}
 
 		@Override
+		public @NonNull EdgeRole merge(@NonNull EdgeRole edgeRole) {
+			if (edgeRole instanceof AbstractNavigationEdgeRole)
+			if (phase == ((AbstractNavigationEdgeRole)edgeRole).phase) {
+				if (isNavigable) {
+					return this;
+				}
+				else if (((AbstractNavigationEdgeRole)edgeRole).isNavigable) {
+					return edgeRole;
+				}
+			}
+			return super.merge(edgeRole);
+		}
+
+		@Override
 		public String toString() {
 			return phase + (isNavigable ? "-NAVIGABLE-" : "-UNNAVIGABLE-") + getClass().getSimpleName();
 		}
