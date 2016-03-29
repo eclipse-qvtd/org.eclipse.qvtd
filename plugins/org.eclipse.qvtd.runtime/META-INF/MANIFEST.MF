@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.qvtd.runtime;singleton:=true
+Bundle-Vendor: %providerName
+Bundle-Version: 0.13.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.osgi;bundle-version="3.11.0",
+ org.eclipse.jdt.annotation;bundle-version="2.1.0",
+ org.eclipse.ocl.pivot;bundle-version="1.1.0"
+Export-Package: org.eclipse.qvtd.runtime.evaluation,
+ org.eclipse.qvtd.runtime.internal.cs2as,
+ org.eclipse.qvtd.runtime.internal.evaluation,
+ org.eclipse.qvtd.runtime.library.model

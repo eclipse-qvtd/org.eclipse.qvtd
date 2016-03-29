@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ocl.pivot.label_generator">
+      <generator for="org.eclipse.qvtd.runtime.evaluation.TransformationInstance"
+      	class="org.eclipse.qvtd.runtime.labels.TransformationInstanceLabelGenerator"/>
+      <generator for="org.eclipse.qvtd.runtime.evaluation.TypedModelInstance"
+      	class="org.eclipse.qvtd.runtime.labels.TypedModelInstanceLabelGenerator"/>
+   </extension>
+
+</plugin>
