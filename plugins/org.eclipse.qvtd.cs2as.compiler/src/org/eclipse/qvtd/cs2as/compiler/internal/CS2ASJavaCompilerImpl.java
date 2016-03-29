@@ -38,10 +38,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
-import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASTransformer;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalysisVisitor;
@@ -66,6 +63,9 @@ import org.eclipse.qvtd.cs2as.compiler.internal.utilities.CS2ASCGModelResourceFa
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.internal.cs2as.AbstractCS2ASTransformer;
+import org.eclipse.qvtd.runtime.internal.cs2as.CS2ASTransformer;
 
 
 public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {

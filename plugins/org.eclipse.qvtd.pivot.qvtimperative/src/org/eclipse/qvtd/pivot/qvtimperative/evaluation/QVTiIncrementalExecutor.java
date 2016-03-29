@@ -23,17 +23,7 @@ import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
-import org.eclipse.ocl.pivot.evaluation.tx.AbstractInvocation;
-import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
-import org.eclipse.ocl.pivot.evaluation.tx.InvocationFailedException;
-import org.eclipse.ocl.pivot.evaluation.tx.InvocationManager;
-import org.eclipse.ocl.pivot.evaluation.tx.ObjectManager;
-import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.internal.evaluation.tx.IncrementalInvocationManager;
-import org.eclipse.ocl.pivot.internal.evaluation.tx.IncrementalObjectManager;
-import org.eclipse.ocl.pivot.internal.evaluation.tx.LazyInvocationManager;
-import org.eclipse.ocl.pivot.internal.evaluation.tx.LazyObjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
@@ -45,6 +35,16 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
+import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
+import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
+import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalInvocationManager;
+import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalObjectManager;
+import org.eclipse.qvtd.runtime.internal.evaluation.LazyInvocationManager;
+import org.eclipse.qvtd.runtime.internal.evaluation.LazyObjectManager;
 
 /**
  * An evaluator implementation for OCL expressions.

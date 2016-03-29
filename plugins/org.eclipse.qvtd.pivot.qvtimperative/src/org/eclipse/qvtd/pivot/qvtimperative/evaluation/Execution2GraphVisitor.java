@@ -23,12 +23,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.tx.ExecutionVisitor;
-import org.eclipse.ocl.pivot.evaluation.tx.Invocation;
-import org.eclipse.ocl.pivot.evaluation.tx.InvocationManager;
-import org.eclipse.ocl.pivot.evaluation.tx.ObjectManager;
-import org.eclipse.ocl.pivot.evaluation.tx.SlotState;
-import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AssociationStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AttributeStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ClassStatus;
@@ -36,6 +30,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.PropertyStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
+import org.eclipse.qvtd.runtime.evaluation.Invocation;
+import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
+import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
+import org.eclipse.qvtd.runtime.evaluation.SlotState;
+import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 import com.google.common.collect.Iterables;
 

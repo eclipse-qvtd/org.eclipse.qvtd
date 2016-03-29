@@ -31,11 +31,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformationInstance;
-import org.eclipse.ocl.pivot.evaluation.tx.AbstractTypedModelInstance;
-import org.eclipse.ocl.pivot.evaluation.tx.TransformationInstance;
-import org.eclipse.ocl.pivot.evaluation.tx.TypedModelInstance;
-import org.eclipse.ocl.pivot.internal.evaluation.tx.AbstractModelManager;
+import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ParserException;
@@ -43,6 +39,10 @@ import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformationInstance;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
+import org.eclipse.qvtd.runtime.evaluation.TransformationInstance;
+import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 
 /**
  * QVTc Domain Manager is the class responsible for managing the QVTc virtual

@@ -28,7 +28,6 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.evaluation.tx.InvocationFailedException;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
@@ -73,6 +72,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
+import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 
 /**
  * QVTimperativeEvaluationVisitor is the class for ...
@@ -353,9 +353,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				return result;
 			}
 			catch (InvalidValueException e) {
-				throw e;
-			}
-			catch (InvocationFailedException e) {
 				throw e;
 			}
 			catch (Exception e) {

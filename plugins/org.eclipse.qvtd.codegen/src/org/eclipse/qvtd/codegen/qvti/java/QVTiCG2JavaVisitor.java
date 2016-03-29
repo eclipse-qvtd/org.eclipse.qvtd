@@ -50,18 +50,11 @@ import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.evaluation.tx.AbstractInvocation;
-import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer;
-import org.eclipse.ocl.pivot.evaluation.tx.InvocationManager;
-import org.eclipse.ocl.pivot.evaluation.tx.ObjectManager;
-import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.evaluation.tx.IncrementalInvocationManager;
-import org.eclipse.ocl.pivot.internal.evaluation.tx.IncrementalObjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
@@ -103,6 +96,13 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
+import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
+import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalInvocationManager;
+import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalObjectManager;
 
 import com.google.common.collect.Iterables;
 
@@ -567,7 +567,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		for (String anImport : super.getAllImports()) {
 			allImports.add(anImport);
 			if (anImport.endsWith(".Model")) {
-				allImports.add(org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformer.class.getName() + ".Model");
+				allImports.add(org.eclipse.qvtd.runtime.evaluation.AbstractTransformer.class.getName() + ".Model");
 			}
 		}
 		return allImports;

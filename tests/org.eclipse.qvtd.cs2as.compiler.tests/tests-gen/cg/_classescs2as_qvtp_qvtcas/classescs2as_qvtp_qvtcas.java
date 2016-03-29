@@ -15,26 +15,31 @@ import example2.classes.Package;
 import example2.classes.Root;
 import example2.classes.lookup.util.ClassesLookupResult;
 import example2.classes.lookup.util.ClassesLookupSolver;
+import example2.classes.util.Visitable;
 import example2.classescs.ClassCS;
 import example2.classescs.ClassescsPackage;
 import example2.classescs.PackageCS;
 import example2.classescs.PathElementCS;
+import example2.classescs.PathNameCS;
 import example2.classescs.RootCS;
 import java.util.Iterator;
 import java.util.List;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.pivot.library.collection.OrderedCollectionFirstOperation;
 import org.eclipse.ocl.pivot.library.collection.OrderedCollectionLastOperation;
 import org.eclipse.ocl.pivot.library.collection.OrderedSetSubOrderedSetOperation;
-import org.eclipse.ocl.pivot.library.model.RootObjectsOperation;
 import org.eclipse.ocl.pivot.library.numeric.NumericMinusOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -44,7 +49,8 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
-import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformer;
+import org.eclipse.qvtd.runtime.internal.cs2as.AbstractCS2ASTransformer;
+import org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation;
 
 /**
  * The classescs2as_qvtp_qvtcas transformation:
@@ -70,7 +76,6 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class_0 = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Class", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EObject = PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EObject", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Model = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary.getClassId("Model", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Package = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Package", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_PackageCS = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classescs_s_1_0.getClassId("PackageCS", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_PathElementCS = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classescs_s_1_0.getClassId("PathElementCS", 0);
@@ -85,15 +90,34 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_CLSSid_Class = TypeId.SEQUENCE.getSpecializedId(CLSSid_Class_0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_CLSSid_Package = TypeId.SEQUENCE.getSpecializedId(CLSSid_Package);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_ClassCS = TypeId.SET.getSpecializedId(CLSSid_ClassCS);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_OclElement = TypeId.SET.getSpecializedId(CLSSid_OclElement);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_PackageCS = TypeId.SET.getSpecializedId(CLSSid_PackageCS);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_RootCS = TypeId.SET.getSpecializedId(CLSSid_RootCS);
     
+    /*
+     * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
+     */
+    private static final @NonNull ClassId[] classIndex2classId = new @NonNull ClassId[]{
+        CLSSid_ClassCS,                 // 0 => ClassCS
+        CLSSid_PackageCS,               // 1 => PackageCS
+        CLSSid_RootCS                   // 2 => RootCS
+    };
+    
+    /*
+     * Mapping from each ClassIndex to all the ClassIndexes to which an object of the outer index
+     * may contribute results to an allInstances() invocation.
+     * Non trivial inner arrays arise when one ClassId is a derivation of another and so an
+     * instance of the derived classId contributes to derived and inherited ClassIndexes.
+     */
+    private final static int @NonNull [] @NonNull [] classIndex2allClassIndexes = new int @NonNull [] @NonNull [] {
+        {0},                    // 0 : ClassCS -> {ClassCS}
+        {1},                    // 1 : PackageCS -> {PackageCS}
+        {2}                     // 2 : RootCS -> {RootCS}
+    };
     
     private final ClassesLookupSolver lookupSolver = new ClassesLookupSolver(executor);
     
     public classescs2as_qvtp_qvtcas(final @NonNull Executor executor) throws ReflectiveOperationException {
-        super(executor, new @NonNull String[] {"leftCS", "rightAS"}, null, null, null);
+        super(executor, new @NonNull String[] {"leftCS", "rightAS"}, null, classIndex2classId, classIndex2allClassIndexes);
     }
     
     @Override
@@ -157,6 +181,9 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
                 safe_lookupQualifiedPackage_source = null;
             }
             else {
+                if (qualifier == null) {
+                    throw new InvalidValueException("Null where non-null value required");
+                }
                 final /*@Thrown*/ example2.classescs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_segments);
                 if (aPathElementCS_0 == null) {
                     throw new InvalidValueException("Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::NamedElementCS::name\'");
@@ -180,50 +207,27 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
      * 
      * map __root__ in classescs2as_qvtp_qvtcas {
      *   where ( |)
-     * {roots : Set(OclElement) = leftCS.rootObjects()
+     * {_'\u00ABClassCS\u00BB' : Set(classescs::ClassCS) = leftCS.objectsOfKind(classescs::ClassCS)
      *   ;
-     * _'\u00ABchild-ClassCS\u00BB' : Set(classescs::ClassCS[*|1]) = roots->selectByKind(classescs::ClassCS)
+     * ji_ClassCS1 : Set(classescs::ClassCS[*|1]) = _'\u00ABClassCS\u00BB';
+     * _'\u00ABPackageCS\u00BB' : Set(classescs::PackageCS) = leftCS.objectsOfKind(classescs::PackageCS)
      *   ;
-     * ji_ClassCS1 : Set(classescs::ClassCS[*|1]) = _'\u00ABchild-ClassCS\u00BB';
-     * _'\u00ABchild-PackageCS\u00BB' : Set(classescs::PackageCS[*|1]) = roots->selectByKind(classescs::PackageCS)
+     * ji_PackageCS1 : Set(classescs::PackageCS[*|1]) = _'\u00ABPackageCS\u00BB';
+     * _'\u00ABRootCS\u00BB' : Set(classescs::RootCS) = leftCS.objectsOfKind(classescs::RootCS)
      *   ;
-     * ji_PackageCS1 : Set(classescs::PackageCS[*|1]) = _'\u00ABchild-PackageCS\u00BB';
-     * ji_PackageCS_11 : Set(classescs::PackageCS[*|1]) = _'\u00ABchild-PackageCS\u00BB';
-     * _'\u00ABchild-RootCS\u00BB' : Set(classescs::RootCS[*|1]) = roots->selectByKind(classescs::RootCS)
-     *   ;
-     * ji_RootCS1 : Set(classescs::RootCS[*|1]) = _'\u00ABchild-RootCS\u00BB';
+     * ji_RootCS1 : Set(classescs::RootCS[*|1]) = _'\u00ABRootCS\u00BB';
      *  |}
-     * for loop0 : classescs::RootCS in ji_RootCS1 {
-     *     call m_RootCS_ast {
-     * lRootCS := loop0;
-     * }}
-     *   for loop0 : classescs::RootCS in ji_RootCS1 {
-     *     call r_RootCS_ownedPackages {
-     * ji_PackageCS := ji_PackageCS1;
-     * ji_PackageCS_1 := ji_PackageCS_11;
-     * _'\u00ABparent\u00BB' := loop0;
-     * }}
-     *   for loop0 : classescs::PackageCS in ji_PackageCS_11 {
-     *     call r_PackageCS_ownedPackages {
-     * ji_PackageCS := ji_PackageCS1;
-     * _'\u00ABparent\u00BB' := loop0;
+     * for loop0 : classescs::ClassCS in ji_ClassCS1 {
+     *     call m_ClassCS_ast {
+     * lClassCS := loop0;
      * }}
      *   for loop0 : classescs::PackageCS in ji_PackageCS1 {
      *     call m_PackageCS_ast {
      * lPackageCS := loop0;
      * }}
      *   for loop0 : classescs::RootCS in ji_RootCS1 {
-     *     call m_RootCS_ast_ownedPackages {
+     *     call m_RootCS_ast {
      * lRootCS := loop0;
-     * }}
-     *   for loop0 : classescs::PackageCS in ji_PackageCS1 {
-     *     call r_PackageCS_ownedClasses {
-     * ji_ClassCS := ji_ClassCS1;
-     * _'\u00ABparent\u00BB' := loop0;
-     * }}
-     *   for loop0 : classescs::ClassCS in ji_ClassCS1 {
-     *     call m_ClassCS_ast {
-     * lClassCS := loop0;
      * }}
      *   for loop0 : classescs::ClassCS in ji_ClassCS1 {
      *     call m_ClassCS_ast_name {
@@ -232,6 +236,10 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
      *   for loop0 : classescs::PackageCS in ji_PackageCS1 {
      *     call m_PackageCS_ast_name_ownedClasses_ownedPackages {
      * lPackageCS := loop0;
+     * }}
+     *   for loop0 : classescs::RootCS in ji_RootCS1 {
+     *     call m_RootCS_ast_ownedPackages {
+     * lRootCS := loop0;
      * }}
      *   for loop0 : classescs::ClassCS in ji_ClassCS1 {
      *     call m_ClassCS_ast_extends {
@@ -242,60 +250,46 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
         try {
             // predicates and unrealized variables
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue roots = RootObjectsOperation.INSTANCE.evaluate(executor, SET_CLSSid_OclElement, models[0/*leftCS*/]);
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescs_c_c_ClassCS_0 = idResolver.getClass(CLSSid_ClassCS, null);
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue _171_child_m_ClassCS_187 = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, roots, TYP_classescs_c_c_ClassCS_0);
+            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue _171_ClassCS_187 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassCS, models[0/*leftCS*/], TYP_classescs_c_c_ClassCS_0);
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue _171_child_m_PackageCS_187 = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, roots, TYP_classescs_c_c_PackageCS_0);
+            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue _171_PackageCS_187 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_PackageCS, models[0/*leftCS*/], TYP_classescs_c_c_PackageCS_0);
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescs_c_c_RootCS_0 = idResolver.getClass(CLSSid_RootCS, null);
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue _171_child_m_RootCS_187 = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, roots, TYP_classescs_c_c_RootCS_0);
+            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue _171_RootCS_187 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS, models[0/*leftCS*/], TYP_classescs_c_c_RootCS_0);
             // connection variables
             final SetValue.@NonNull Accumulator ji_ClassCS1 = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_ClassCS);
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull ClassCS iterator : ValueUtil.typedIterable(ClassCS.class, _171_child_m_ClassCS_187)) {
+            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull ClassCS iterator : ValueUtil.typedIterable(ClassCS.class, _171_ClassCS_187)) {
                 ji_ClassCS1.add(iterator);
             }
             final SetValue.@NonNull Accumulator ji_PackageCS1 = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_PackageCS);
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS iterator_0 : ValueUtil.typedIterable(PackageCS.class, _171_child_m_PackageCS_187)) {
+            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS iterator_0 : ValueUtil.typedIterable(PackageCS.class, _171_PackageCS_187)) {
                 ji_PackageCS1.add(iterator_0);
             }
-            final SetValue.@NonNull Accumulator ji_PackageCS_11 = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_PackageCS);
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS iterator_1 : ValueUtil.typedIterable(PackageCS.class, _171_child_m_PackageCS_187)) {
-                ji_PackageCS_11.add(iterator_1);
-            }
             final SetValue.@NonNull Accumulator ji_RootCS1 = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_RootCS);
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull RootCS iterator_2 : ValueUtil.typedIterable(RootCS.class, _171_child_m_RootCS_187)) {
-                ji_RootCS1.add(iterator_2);
+            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull RootCS iterator_1 : ValueUtil.typedIterable(RootCS.class, _171_RootCS_187)) {
+                ji_RootCS1.add(iterator_1);
             }
             // mapping statements
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull RootCS loop0 : ValueUtil.typedIterable(RootCS.class, ji_RootCS1)) {
-                MAP_m_RootCS_ast(loop0);
+            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull ClassCS loop0 : ValueUtil.typedIterable(ClassCS.class, ji_ClassCS1)) {
+                MAP_m_ClassCS_ast(loop0);
             }
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull RootCS loop0_0 : ValueUtil.typedIterable(RootCS.class, ji_RootCS1)) {
-                MAP_r_RootCS_ownedPackages(ji_PackageCS1, ji_PackageCS_11, loop0_0);
+            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS loop0_0 : ValueUtil.typedIterable(PackageCS.class, ji_PackageCS1)) {
+                MAP_m_PackageCS_ast(loop0_0);
             }
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS loop0_1 : ValueUtil.typedIterable(PackageCS.class, ji_PackageCS_11)) {
-                MAP_r_PackageCS_ownedPackages(ji_PackageCS1, loop0_1);
+            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull RootCS loop0_1 : ValueUtil.typedIterable(RootCS.class, ji_RootCS1)) {
+                MAP_m_RootCS_ast(loop0_1);
             }
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS loop0_2 : ValueUtil.typedIterable(PackageCS.class, ji_PackageCS1)) {
-                MAP_m_PackageCS_ast(loop0_2);
+            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull ClassCS loop0_2 : ValueUtil.typedIterable(ClassCS.class, ji_ClassCS1)) {
+                MAP_m_ClassCS_ast_name(loop0_2);
             }
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull RootCS loop0_3 : ValueUtil.typedIterable(RootCS.class, ji_RootCS1)) {
-                MAP_m_RootCS_ast_ownedPackages(loop0_3);
+            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS loop0_3 : ValueUtil.typedIterable(PackageCS.class, ji_PackageCS1)) {
+                MAP_m_PackageCS_ast_name_ownedClasses_ownedPackages(loop0_3);
             }
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS loop0_4 : ValueUtil.typedIterable(PackageCS.class, ji_PackageCS1)) {
-                MAP_r_PackageCS_ownedClasses(ji_ClassCS1, loop0_4);
+            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull RootCS loop0_4 : ValueUtil.typedIterable(RootCS.class, ji_RootCS1)) {
+                MAP_m_RootCS_ast_ownedPackages(loop0_4);
             }
             for (example2.classescs.@org.eclipse.jdt.annotation.NonNull ClassCS loop0_5 : ValueUtil.typedIterable(ClassCS.class, ji_ClassCS1)) {
-                MAP_m_ClassCS_ast(loop0_5);
-            }
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull ClassCS loop0_6 : ValueUtil.typedIterable(ClassCS.class, ji_ClassCS1)) {
-                MAP_m_ClassCS_ast_name(loop0_6);
-            }
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS loop0_7 : ValueUtil.typedIterable(PackageCS.class, ji_PackageCS1)) {
-                MAP_m_PackageCS_ast_name_ownedClasses_ownedPackages(loop0_7);
-            }
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull ClassCS loop0_8 : ValueUtil.typedIterable(ClassCS.class, ji_ClassCS1)) {
-                MAP_m_ClassCS_ast_extends(loop0_8);
+                MAP_m_ClassCS_ast_extends(loop0_5);
             }
             boolean __root__ = ValueUtil.TRUE_VALUE;
             return __root__;
@@ -343,9 +337,9 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
      * rightAS ( |)
      * { |}
      * where ( |)
-     * {ast : ecore::EObject[?] = lClassCS.ast;
-     * extends : classescs::PathNameCS[?] = lClassCS.extends;
-     * aClass : classes::Class[1] = ast.oclAsType(classes::Class);
+     * {extends : classescs::PathNameCS[?] = lClassCS.extends;
+     * ast : ecore::EObject[?] = lClassCS.ast;
+     * aClass : classes::Class[1] = lClassCS.ast.oclAsType(classes::Class);
      * _'=' : Boolean[1] = extends =
      *   null;
      * superClass : classes::Class[?] = if _'='
@@ -361,10 +355,11 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
         try {
             // predicates and unrealized variables
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
-            final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = lClassCS_0.getAst();
             final /*@Thrown*/ example2.classescs.@org.eclipse.jdt.annotation.Nullable PathNameCS symbol_0 = lClassCS_0.getExtends();
+            final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = lClassCS_0.getAst();
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class_0, null);
-            final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class aClass = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Class_0));
+            final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_0 = lClassCS_0.getAst();
+            final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class aClass = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_Class_0));
             final /*@Thrown*/ boolean eq = symbol_0 == null;
             /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Class superClass;
             if (eq) {
@@ -414,6 +409,9 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
                         safe_lookupQualifiedClass_source = null;
                     }
                     else {
+                        if (qualifier == null) {
+                            throw throwNull(lClassCS_0, "Null where non-null value required");
+                        }
                         final /*@Thrown*/ example2.classescs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_segments_0);
                         if (aPathElementCS_0 == null) {
                             throw throwNull(lClassCS_0, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::NamedElementCS::name\'");
@@ -452,7 +450,7 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
      * where ( |)
      * {ast : ecore::EObject[?] = lClassCS.ast;
      * name : String[?] = lClassCS.name;
-     * aClass : classes::Class[1] = ast.oclAsType(classes::Class);
+     * aClass : classes::Class[1] = lClassCS.ast.oclAsType(classes::Class);
      *  |
      * aClass.name := name;
      * }
@@ -465,7 +463,8 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
             final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast = lClassCS_1.getAst();
             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = lClassCS_1.getName();
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class_0, null);
-            final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class aClass = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Class_0));
+            final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_0 = lClassCS_1.getAst();
+            final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class aClass = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_Class_0));
             // property assignments
             aClass.setName(name);
             boolean m_ClassCS_ast_name = ValueUtil.TRUE_VALUE;
@@ -518,17 +517,17 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
      * name : String[?] = lPackageCS.name;
      * ownedClasses : OrderedSet(classescs::ClassCS) = lPackageCS.ownedClasses;
      * ownedPackages : OrderedSet(classescs::PackageCS) = lPackageCS.ownedPackages;
-     * aPackage : classes::Package[1] = ast.oclAsType(classes::Package)
+     * aPackage : classes::Package[1] = lPackageCS.ast.oclAsType(classes::Package)
      *   ;
-     * _'\u00ABcollect\u00BB' : Sequence(classes::Class) = ownedClasses->collect(_'1_' |
-     *     _'1_'.ast.oclAsType(classes::Class))
+     * _'\u00ABcollect\u00BB' : Sequence(classes::Package) = ownedPackages->collect(_'1_' |
+     *     _'1_'.ast.oclAsType(classes::Package))
      *   ;
-     * _'\u00ABcollect\u00BB1' : Sequence(classes::Package) = ownedPackages->collect(_'1_' |
-     *     _'1_'.ast.oclAsType(classes::Package));
+     * _'\u00ABcollect\u00BB1' : Sequence(classes::Class) = ownedClasses->collect(_'1_' |
+     *     _'1_'.ast.oclAsType(classes::Class));
      *  |
      * aPackage.name := name;
-     * aPackage.ownedClasses := _'\u00ABcollect\u00BB';
-     * aPackage.ownedPackages := _'\u00ABcollect\u00BB1';
+     * aPackage.ownedClasses := _'\u00ABcollect\u00BB1';
+     * aPackage.ownedPackages := _'\u00ABcollect\u00BB';
      * }
      * 
      */
@@ -543,56 +542,57 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
             @SuppressWarnings("null")
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PackageCS> ownedPackages = lPackageCS_0.getOwnedPackages();
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
-            final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package aPackage = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Package_0));
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
-            /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
-            @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedClasses.iterator();
+            final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_0 = lPackageCS_0.getAst();
+            final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package aPackage = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_Package_0));
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
+            /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
+            @Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedPackages.iterator();
             /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SequenceValue _171_collect_187;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
                     _171_collect_187 = accumulator;
                     break;
                 }
-                /*@NonInvalid*/ example2.classescs.@org.eclipse.jdt.annotation.Nullable ClassCS _1 = (ClassCS)ITERATOR__1.next();
+                /*@NonInvalid*/ example2.classescs.@org.eclipse.jdt.annotation.Nullable PackageCS _1 = (PackageCS)ITERATOR__1.next();
                 /**
-                 * _'1_'.ast.oclAsType(classes::Class)
+                 * _'1_'.ast.oclAsType(classes::Package)
                  */
-                final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class_0, null);
                 if (_1 == null) {
                     throw throwNull(lPackageCS_0, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::ElementCS::ast\'");
                 }
-                final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_0 = _1.getAst();
-                final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class oclAsType = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_Class_0));
+                final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_1 = _1.getAst();
+                final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_1, TYP_classes_c_c_Package_0));
                 //
                 accumulator.add(oclAsType);
             }
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
-            /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
-            @Nullable Iterator<?> ITERATOR__1_0 = BOXED_ownedPackages.iterator();
+            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
+            /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
+            @Nullable Iterator<Object> ITERATOR__1_0 = BOXED_ownedClasses.iterator();
             /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SequenceValue _171_collect_187_1;
             while (true) {
                 if (!ITERATOR__1_0.hasNext()) {
                     _171_collect_187_1 = accumulator_0;
                     break;
                 }
-                /*@NonInvalid*/ example2.classescs.@org.eclipse.jdt.annotation.Nullable PackageCS _1_0 = (PackageCS)ITERATOR__1_0.next();
+                /*@NonInvalid*/ example2.classescs.@org.eclipse.jdt.annotation.Nullable ClassCS _1_0 = (ClassCS)ITERATOR__1_0.next();
                 /**
-                 * _'1_'.ast.oclAsType(classes::Package)
+                 * _'1_'.ast.oclAsType(classes::Class)
                  */
+                final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class_0, null);
                 if (_1_0 == null) {
                     throw throwNull(lPackageCS_0, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::ElementCS::ast\'");
                 }
-                final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_1 = _1_0.getAst();
-                final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package oclAsType_0 = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_1, TYP_classes_c_c_Package_0));
+                final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_2 = _1_0.getAst();
+                final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class oclAsType_0 = ClassUtil.nonNullState((example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_2, TYP_classes_c_c_Class_0));
                 //
                 accumulator_0.add(oclAsType_0);
             }
             // property assignments
             aPackage.setName(name);
-            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<example2.classes.Class> ECORE__171_collect_187 = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(example2.classes.Class.class, _171_collect_187);
-            aPackage.getOwnedClasses().addAll(ECORE__171_collect_187);
-            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ECORE__171_collect_187_1 = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, _171_collect_187_1);
-            aPackage.getOwnedPackages().addAll(ECORE__171_collect_187_1);
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<example2.classes.Class> ECORE__171_collect_187_1 = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(example2.classes.Class.class, _171_collect_187_1);
+            aPackage.getOwnedClasses().addAll(ECORE__171_collect_187_1);
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ECORE__171_collect_187 = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, _171_collect_187);
+            aPackage.getOwnedPackages().addAll(ECORE__171_collect_187);
             boolean m_PackageCS_ast_name_ownedClasses_ownedPackages = ValueUtil.TRUE_VALUE;
             return m_PackageCS_ast_name_ownedClasses_ownedPackages;
         } catch (Throwable e) {
@@ -641,7 +641,7 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
      * where ( |)
      * {ast : ecore::EObject[?] = lRootCS.ast;
      * ownedPackages : OrderedSet(classescs::PackageCS) = lRootCS.ownedPackages;
-     * aRoot : classes::Root[1] = ast.oclAsType(classes::Root)
+     * aRoot : classes::Root[1] = lRootCS.ast.oclAsType(classes::Root)
      *   ;
      * _'\u00ABcollect\u00BB' : Sequence(classes::Package) = ownedPackages->collect(_'1_' |
      *     _'1_'.ast.oclAsType(classes::Package));
@@ -658,10 +658,11 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
             @SuppressWarnings("null")
             final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PackageCS> ownedPackages = lRootCS_0.getOwnedPackages();
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classes_c_c_Root_0 = idResolver.getClass(CLSSid_Root, null);
-            final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Root aRoot = ClassUtil.nonNullState((Root)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast, TYP_classes_c_c_Root_0));
+            final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_0 = lRootCS_0.getAst();
+            final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Root aRoot = ClassUtil.nonNullState((Root)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_Root_0));
             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
             /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
-            @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedPackages.iterator();
+            @Nullable Iterator<Object> ITERATOR__1 = BOXED_ownedPackages.iterator();
             /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SequenceValue _171_collect_187;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
@@ -676,8 +677,8 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
                 if (_1 == null) {
                     throw throwNull(lRootCS_0, "Null source for \'\'http://cs2as/tests/example2/classescs/1.0\'::ElementCS::ast\'");
                 }
-                final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_0 = _1.getAst();
-                final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_0, TYP_classes_c_c_Package_0));
+                final /*@Thrown*/ org.eclipse.emf.ecore.@org.eclipse.jdt.annotation.Nullable EObject ast_1 = _1.getAst();
+                final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_1, TYP_classes_c_c_Package_0));
                 //
                 accumulator.add(oclAsType);
             }
@@ -688,131 +689,6 @@ public class classescs2as_qvtp_qvtcas extends AbstractCS2ASTransformer
             return m_RootCS_ast_ownedPackages;
         } catch (Throwable e) {
             return handleExecutionFailure("MAP_m_RootCS_ast_ownedPackages", e);
-        }
-    }
-    
-    /**
-     * 
-     * map r_PackageCS_ownedClasses in classescs2as_qvtp_qvtcas {
-     *   leftCS (_'\u00ABparent\u00BB' : classescs::PackageCS[1];
-     *  |)
-     * { |}
-     * where (ji_ClassCS : Set(classescs::ClassCS[*|1]);
-     *  |)
-     * {allChildren : OrderedSet(classescs::ClassCS) = _'\u00ABparent\u00BB'.ownedClasses->selectByKind(classescs::ClassCS)
-     *   ;
-     * _'\u00ABchild-ClassCS\u00BB' : OrderedSet(classescs::ClassCS[*|1]) = allChildren->selectByKind(classescs::ClassCS);
-     *  |
-     * ji_ClassCS += _'\u00ABchild-ClassCS\u00BB';
-     * }
-     * 
-     */
-    protected boolean MAP_r_PackageCS_ownedClasses(final SetValue.@NonNull Accumulator ji_ClassCS, final /*@NonInvalid*/ example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS _171_parent_187) throws ReflectiveOperationException {
-        try {
-            // predicates and unrealized variables
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescs_c_c_ClassCS_0 = idResolver.getClass(CLSSid_ClassCS, null);
-            @SuppressWarnings("null")
-            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<ClassCS> ownedClasses = _171_parent_187.getOwnedClasses();
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue allChildren = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_ownedClasses, TYP_classescs_c_c_ClassCS_0);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue _171_child_m_ClassCS_187 = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, allChildren, TYP_classescs_c_c_ClassCS_0);
-            // connection assignments
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull ClassCS iterator : ValueUtil.typedIterable(ClassCS.class, _171_child_m_ClassCS_187)) {
-                ji_ClassCS.add(iterator);
-            }
-            boolean r_PackageCS_ownedClasses = ValueUtil.TRUE_VALUE;
-            return r_PackageCS_ownedClasses;
-        } catch (Throwable e) {
-            return handleExecutionFailure("MAP_r_PackageCS_ownedClasses", e);
-        }
-    }
-    
-    /**
-     * 
-     * map r_PackageCS_ownedPackages in classescs2as_qvtp_qvtcas {
-     *   leftCS (_'\u00ABparent\u00BB' : classescs::PackageCS[1];
-     *  |)
-     * { |}
-     * where (ji_PackageCS : Set(classescs::PackageCS[*|1]);
-     *  |)
-     * {allChildren : OrderedSet(classescs::PackageCS) = _'\u00ABparent\u00BB'.ownedPackages->selectByKind(classescs::PackageCS)
-     *   ;
-     * _'\u00ABchild-PackageCS\u00BB' : OrderedSet(classescs::PackageCS[*|1]) = allChildren->selectByKind(classescs::PackageCS)
-     *   ;
-     *  |
-     * ji_PackageCS += _'\u00ABchild-PackageCS\u00BB';
-     * }
-     * for aChild : classescs::PackageCS in allChildren {
-     *     call r_PackageCS_ownedPackages {
-     * ji_PackageCS := ji_PackageCS;
-     * _'\u00ABparent\u00BB' := aChild;
-     * }}
-     */
-    protected boolean MAP_r_PackageCS_ownedPackages(final SetValue.@NonNull Accumulator ji_PackageCS, final /*@NonInvalid*/ example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS _171_parent_187_0) throws ReflectiveOperationException {
-        try {
-            // predicates and unrealized variables
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
-            @SuppressWarnings("null")
-            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PackageCS> ownedPackages = _171_parent_187_0.getOwnedPackages();
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue allChildren = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_ownedPackages, TYP_classescs_c_c_PackageCS_0);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue _171_child_m_PackageCS_187 = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, allChildren, TYP_classescs_c_c_PackageCS_0);
-            // connection assignments
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS iterator : ValueUtil.typedIterable(PackageCS.class, _171_child_m_PackageCS_187)) {
-                ji_PackageCS.add(iterator);
-            }
-            // mapping statements
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS aChild : ValueUtil.typedIterable(PackageCS.class, allChildren)) {
-                MAP_r_PackageCS_ownedPackages(ji_PackageCS, aChild);
-            }
-            boolean r_PackageCS_ownedPackages = ValueUtil.TRUE_VALUE;
-            return r_PackageCS_ownedPackages;
-        } catch (Throwable e) {
-            return handleExecutionFailure("MAP_r_PackageCS_ownedPackages", e);
-        }
-    }
-    
-    /**
-     * 
-     * map r_RootCS_ownedPackages in classescs2as_qvtp_qvtcas {
-     *   leftCS (_'\u00ABparent\u00BB' : classescs::RootCS[1];
-     *  |)
-     * { |}
-     * where (ji_PackageCS : Set(classescs::PackageCS[*|1]);
-     * ji_PackageCS_1 : Set(classescs::PackageCS[*|1]);
-     *  |)
-     * {allChildren : OrderedSet(classescs::PackageCS) = _'\u00ABparent\u00BB'.ownedPackages->selectByKind(classescs::PackageCS)
-     *   ;
-     * _'\u00ABchild-PackageCS\u00BB' : OrderedSet(classescs::PackageCS[*|1]) = allChildren->selectByKind(classescs::PackageCS);
-     *  |
-     * ji_PackageCS += _'\u00ABchild-PackageCS\u00BB';
-     * ji_PackageCS_1 += _'\u00ABchild-PackageCS\u00BB';
-     * }
-     * 
-     */
-    protected boolean MAP_r_RootCS_ownedPackages(final SetValue.@NonNull Accumulator ji_PackageCS_0, final SetValue.@NonNull Accumulator ji_PackageCS_1, final /*@NonInvalid*/ example2.classescs.@org.eclipse.jdt.annotation.NonNull RootCS _171_parent_187_1) throws ReflectiveOperationException {
-        try {
-            // predicates and unrealized variables
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
-            @SuppressWarnings("null")
-            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PackageCS> ownedPackages = _171_parent_187_1.getOwnedPackages();
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue allChildren = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_ownedPackages, TYP_classescs_c_c_PackageCS_0);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue _171_child_m_PackageCS_187 = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, allChildren, TYP_classescs_c_c_PackageCS_0);
-            // connection assignments
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS iterator : ValueUtil.typedIterable(PackageCS.class, _171_child_m_PackageCS_187)) {
-                ji_PackageCS_0.add(iterator);
-            }
-            for (example2.classescs.@org.eclipse.jdt.annotation.NonNull PackageCS iterator_0 : ValueUtil.typedIterable(PackageCS.class, _171_child_m_PackageCS_187)) {
-                ji_PackageCS_1.add(iterator_0);
-            }
-            boolean r_RootCS_ownedPackages = ValueUtil.TRUE_VALUE;
-            return r_RootCS_ownedPackages;
-        } catch (Throwable e) {
-            return handleExecutionFailure("MAP_r_RootCS_ownedPackages", e);
         }
     }
 }

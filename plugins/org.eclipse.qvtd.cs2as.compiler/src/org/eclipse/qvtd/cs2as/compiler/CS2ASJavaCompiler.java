@@ -11,9 +11,9 @@
 package org.eclipse.qvtd.cs2as.compiler;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASTransformer;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.runtime.internal.cs2as.CS2ASTransformer;
 
 public interface CS2ASJavaCompiler {
 

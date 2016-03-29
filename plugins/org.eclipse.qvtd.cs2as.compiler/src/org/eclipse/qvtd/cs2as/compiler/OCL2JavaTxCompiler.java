@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
+import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 public interface OCL2JavaTxCompiler<P extends OCL2JavaTxCompilerParams> {
 

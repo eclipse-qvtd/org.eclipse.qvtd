@@ -15,8 +15,8 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.tx.Transformer;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 public interface CompilerChain 
 {

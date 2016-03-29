@@ -17,8 +17,8 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.evaluation.tx.AbstractTransformationTechnology;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformationTechnology;
 
 public class OCL2QVTiTransformationTechnology extends AbstractTransformationTechnology
 {
