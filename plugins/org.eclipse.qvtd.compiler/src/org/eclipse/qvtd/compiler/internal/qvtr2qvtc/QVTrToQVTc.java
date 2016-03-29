@@ -46,6 +46,7 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -272,6 +273,7 @@ public class QVTrToQVTc
 	    for (EObject eSource : copier.keySet()) {
 	    	EObject eTarget = copier.get(eSource);
 	    	if (eTarget != null) {
+	    		assert eSource != null;
 	    		putTrace((Element)eTarget, (Element)eSource);
 	    	}
 	    }
@@ -323,9 +325,8 @@ public class QVTrToQVTc
 		return pce;
 	}
 
-
-	public @NonNull VariableExp createVariableExp() {
-		VariableExp ve = PivotFactory.eINSTANCE.createVariableExp();
+	public @NonNull VariableExp createVariableExp(@NonNull Variable asVariable) {
+		VariableExp ve = PivotUtil.createVariableExp(asVariable);
 		assert ve != null;
 		addOrphan(ve);
 		return ve;
@@ -482,7 +483,7 @@ public class QVTrToQVTc
 			ObjectTemplateExp te = (ObjectTemplateExp) e;
 			Variable bindsTo = te.getBindsTo();
 			if (bindsTo != null) {
-				vs1.add((Variable)bindsTo);
+				vs1.add(bindsTo);
 			}
 		}
 		for (TreeIterator<EObject> tit = e.eAllContents(); tit.hasNext(); ) {
@@ -497,7 +498,7 @@ public class QVTrToQVTc
 				ObjectTemplateExp te = (ObjectTemplateExp)eObject;
 				Variable bindsTo = te.getBindsTo();
 				if (bindsTo != null) {
-					vs1.add((Variable)bindsTo);
+					vs1.add(bindsTo);
 				}
 			}
 		}
@@ -627,7 +628,8 @@ public class QVTrToQVTc
 
 	public void saveTrace(@NonNull Resource asResource,  @NonNull Map<?, ?> options) throws IOException {
         Model root = PivotFactory.eINSTANCE.createModel();
-        URI traceURI = PivotUtilInternal.getNonASURI(asResource.getURI());
+        URI asURI = ClassUtil.nonNullState(asResource.getURI());
+		URI traceURI = PivotUtilInternal.getNonASURI(asURI);
 		root.setExternalURI(traceURI.toString());
         asResource.getContents().add(root);
         for (org.eclipse.ocl.pivot.Package p : tracePackages) {
@@ -657,7 +659,7 @@ public class QVTrToQVTc
 	}
 	
 	private void transformToTracePackages(@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
-		for (org.eclipse.ocl.pivot.Package relationPackage : relationPackages) {
+		for (org.eclipse.ocl.pivot.@NonNull Package relationPackage : relationPackages) {
 			for (org.eclipse.ocl.pivot.Class relationClass : relationPackage.getOwnedClasses()) {
 				if (relationClass instanceof RelationalTransformation) {
 					RelationalTransformationToTracePackage relationalTransformationToTracePackage = new RelationalTransformationToTracePackage(this);

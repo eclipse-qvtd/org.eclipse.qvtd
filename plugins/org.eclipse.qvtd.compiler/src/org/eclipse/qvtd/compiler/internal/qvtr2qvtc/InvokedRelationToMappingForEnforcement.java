@@ -151,23 +151,19 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			Predicate pd = qvtr2qvtc.createPredicate();
 			OperationCallExp ee = qvtr2qvtc.createOperationCallExp();
 			PropertyCallExp pe = qvtr2qvtc.createPropertyCallExp();
-			VariableExp mve = qvtr2qvtc.createVariableExp();
-			VariableExp ave = qvtr2qvtc.createVariableExp();
 			// where
 			Variable mdv = doRVarToMVar(dv);
 			// assign
+			VariableExp mve = qvtr2qvtc.createVariableExp(vd);
+			VariableExp ave = qvtr2qvtc.createVariableExp(mdv);
 			pd.setConditionExpression(ee);
 			ee.setOwnedSource(pe);
 			pe.setOwnedSource(mve);
-			mve.setReferredVariable(vd);
-			mve.setType(vd.getType());
 			@NonNull Property pep = getProperty(vd.getType(), vn);
 			pe.setReferredProperty(pep);
 			pe.setType(pep.getType());
 			ee.setReferredOperation(getEqualsOperation());
 			ee.setType(qvtr2qvtc.getStandardLibrary().getBooleanType());
-			ave.setReferredVariable(mdv);
-			ave.setType(mdv.getType());
 			ee.getOwnedArguments().add(ave);
 			
 			mg.getPredicate().add(pd);

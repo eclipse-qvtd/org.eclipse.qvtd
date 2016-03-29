@@ -141,8 +141,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			Predicate pd = qvtr2qvtc.createPredicate();
 			OperationCallExp ee = qvtr2qvtc.createOperationCallExp();
 			PropertyCallExp pe = qvtr2qvtc.createPropertyCallExp();
-			VariableExp pve = qvtr2qvtc.createVariableExp();
-			VariableExp ave = qvtr2qvtc.createVariableExp();
 			// where
 			@NonNull Variable mv = doRVarToMVar(v);
 			Set<@NonNull Variable> remainingUnBoundDomainVars = new HashSet<@NonNull Variable>(unboundDomainVars);
@@ -151,8 +149,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					filterOutPredicatesThatReferToVars(predicatesWithoutVarBindings, remainingUnBoundDomainVars);
 			doRPredicateSetToMBPredicateSet(new ArrayList<@NonNull Predicate>(predicatesWithVarBindings), mb);
 			// assign
-			pve.setReferredVariable(tcv);
-			pve.setType(tcv.getType());
+			VariableExp pve = qvtr2qvtc.createVariableExp(tcv);
+			VariableExp ave = qvtr2qvtc.createVariableExp(mv);
 			pe.setOwnedSource(pve);
 			@NonNull Property pep = getProperty(tcv.getType(), v.getName());
 			pe.setReferredProperty(pep);
@@ -160,8 +158,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			ee.setOwnedSource(pe);
 			ee.setReferredOperation(getEqualsOperation());
 			ee.setType(qvtr2qvtc.getStandardLibrary().getBooleanType());
-			ave.setReferredVariable(mv);
-			ave.setType(mv.getType());
 			ee.getOwnedArguments().add(ave);
 			pd.setConditionExpression(ee);
 			mb.getPredicate().add(pd);
@@ -319,19 +315,15 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				assert rev != null;
 				// init
 				PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-				VariableExp ve = qvtr2qvtc.createVariableExp();
-				VariableExp me = qvtr2qvtc.createVariableExp();
 				// where
 				@NonNull Variable mv = doRVarToMRealizedVar(v);
 				@NonNull Variable mev = doRVarToMVar(rev);
 				// assign
-				ve.setReferredVariable(mv);
-				ve.setType(mv.getType());
+				VariableExp ve = qvtr2qvtc.createVariableExp(mv);
+				VariableExp me = qvtr2qvtc.createVariableExp(mev);
 				a.setSlotExpression(ve);
 				@NonNull Property tp = getProperty(mv.getType(), pn);
 				a.setTargetProperty(tp);
-				me.setReferredVariable(mev);
-				me.setType(mev.getType());
 				a.setValue(me);
 				mb.getAssignment().add(a);
 			}
@@ -346,14 +338,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				String pn = pp.getName();
 				// init
 				PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-				VariableExp ve = qvtr2qvtc.createVariableExp();
 				// where
 				@NonNull Variable mv = doRVarToMVar(v);
 				@NonNull OCLExpression me = doRExpToMExp(e);
 				// assign
+				VariableExp ve = qvtr2qvtc.createVariableExp(mv);
 				a.setSlotExpression(ve);
-				ve.setReferredVariable(mv);
-				ve.setType(mv.getType());
 				@NonNull Property tp = getProperty(mv.getType(), pn); 
 				a.setTargetProperty(tp);
 				a.setValue(me);
@@ -374,18 +364,14 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					String pn = pp.getName();
 					// init
 					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-					VariableExp ve = qvtr2qvtc.createVariableExp();
-					VariableExp me = qvtr2qvtc.createVariableExp();
 					Variable mv = doRVarToMRealizedVar(v);
 					@NonNull Variable mev = doRVarToMVar(rev);
 					// assign
-					ve.setReferredVariable(mv);
-					ve.setType(mv.getType());
+					VariableExp ve = qvtr2qvtc.createVariableExp(mv);
+					VariableExp me = qvtr2qvtc.createVariableExp(mev);
 					a.setSlotExpression(ve);
 					@NonNull Property tp = getProperty(mv.getType(), pn);
 					a.setTargetProperty(tp);
-					me.setReferredVariable(mev);
-					me.setType(mev.getType());
 					a.setValue(me);
 					db.getAssignment().add(a);
 				}
@@ -403,19 +389,15 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				assert rev != null;
 				// init
 				PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-				VariableExp ve = qvtr2qvtc.createVariableExp();
-				VariableExp me = qvtr2qvtc.createVariableExp();
 				// where
 				@NonNull RealizedVariable mv = (RealizedVariable) doRVarToMRealizedVar(v);
 				@NonNull Variable mev = doRVarToMVar(rev);
 				// assign
-				ve.setReferredVariable(mv);
-				ve.setType(mv.getType());
+				VariableExp ve = qvtr2qvtc.createVariableExp(mv);
+				VariableExp me = qvtr2qvtc.createVariableExp(mev);
 				a.setSlotExpression(ve);
 				@NonNull Property tp = getProperty(mv.getType(), pn);
 				a.setTargetProperty(tp);
-				me.setReferredVariable(mev);
-				me.setType(mev.getType());
 				a.setValue(me);
 				
 				db.getRealizedVariable().add(mv);
@@ -442,20 +424,16 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					assert vpte != null;
 					// init
 					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-					VariableExp ve1 = qvtr2qvtc.createVariableExp();
-					VariableExp ve2 = qvtr2qvtc.createVariableExp();
 					// where
 					@NonNull Variable mvte = doRVarToMVar(vte);
 					@NonNull Variable mvpte = doRVarToMVar(vpte);
 					doRDomainPatternToMDBottomPattern(pte);
 					// assign
+					VariableExp ve1 = qvtr2qvtc.createVariableExp(mvte);
+					VariableExp ve2 = qvtr2qvtc.createVariableExp(mvpte);
 					@NonNull Property tp = getProperty(mvte.getType(), pn);
-					ve1.setReferredVariable(mvte);
-					ve1.setType(mvte.getType());
 					a.setSlotExpression(ve1);
 					a.setTargetProperty(tp);
-					ve2.setReferredVariable(mvpte);
-					ve2.setType(mvpte.getType());
 					a.setValue(ve2);
 					db.getAssignment().add(a);
 				}
@@ -477,13 +455,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					String pn = pp.getName();
 					// init
 					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-					VariableExp ve = qvtr2qvtc.createVariableExp();
 					// where
 					@NonNull Variable mvte = doRVarToMVar(vte);
 					@NonNull OCLExpression me = doRExpToMExp(e);
 					// assign
-					ve.setReferredVariable(mvte);
-					ve.setType(mvte.getType());
+					VariableExp ve = qvtr2qvtc.createVariableExp(mvte);
 					@NonNull Property tp = getProperty(mvte.getType(), pn);
 					a.setTargetProperty(tp);
 					a.setSlotExpression(ve);
@@ -515,14 +491,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 						String pn = pt.getReferredProperty().getName(); 
 						// init
 						PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-						VariableExp ve1 = qvtr2qvtc.createVariableExp();
-						VariableExp ve2 = qvtr2qvtc.createVariableExp();
 						// where
 						@NonNull Variable mvte = doRVarToMVar(vte);
 						@NonNull Variable mvpte = doRVarToMVar(vpte);
 						// assign
-					    ve1.setReferredVariable(mvte);
-					    ve2.setReferredVariable(mvpte);
+						VariableExp ve1 = qvtr2qvtc.createVariableExp(mvte);
+						VariableExp ve2 = qvtr2qvtc.createVariableExp(mvpte);
 					    @NonNull Property tp = getProperty(mvte.getType(), pn);
 						a.setSlotExpression(ve1);
 						a.setTargetProperty(tp);
@@ -555,14 +529,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 						String pn = pt.getReferredProperty().getName(); 
 						// init
 						PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-						VariableExp ve1 = qvtr2qvtc.createVariableExp();
-						VariableExp ve2 = qvtr2qvtc.createVariableExp();
 						// where
 						@NonNull Variable mvte = doRVarToMVar(vte);
 						@NonNull Variable mvpte = doRVarToMVar(vpte);
 						// assign
-					    ve1.setReferredVariable(mvte);
-					    ve2.setReferredVariable(mvpte);
+						VariableExp ve1 = qvtr2qvtc.createVariableExp(mvte);
+						VariableExp ve2 = qvtr2qvtc.createVariableExp(mvpte);
 					    @NonNull Property tp = getProperty(mvte.getType(), pn);
 						a.setSlotExpression(ve1);
 						a.setTargetProperty(tp);
@@ -603,8 +575,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					Predicate pd = qvtr2qvtc.createPredicate();
 					OperationCallExp ee = qvtr2qvtc.createOperationCallExp();
 					PropertyCallExp pe = qvtr2qvtc.createPropertyCallExp();
-					VariableExp ve1 = qvtr2qvtc.createVariableExp();
-					VariableExp ve2 = qvtr2qvtc.createVariableExp();
 					CoreDomain cd = qvtr2qvtc.whenCoreDomain(cm, dn);
 					GuardPattern cmdg = cd.getGuardPattern();
 					// where
@@ -612,8 +582,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					assert mb != null;
 					@NonNull Variable mv = doRVarToMVar(v);
 					// assign
-					ve1.setReferredVariable(tcv);
-					ve1.setType(tcv.getType());
+					VariableExp ve1 = qvtr2qvtc.createVariableExp(tcv);
+					VariableExp ve2 = qvtr2qvtc.createVariableExp(mv);
 					@NonNull Property tp = getProperty(mv.getType(), mv.getName());
 					pe.setOwnedSource(ve1);
 					pe.setReferredProperty(tp);
@@ -621,8 +591,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					ee.setOwnedSource(pe);
 					ee.setReferredOperation(getEqualsOperation());
 					ee.setType(qvtr2qvtc.getStandardLibrary().getBooleanType());
-					ve2.setReferredVariable(mv);
-					ve2.setType(mv.getType());
 					ee.getOwnedArguments().add(ve2);
 					pd.setConditionExpression(ee);
 					mg.getPredicate().add(pd);
@@ -664,15 +632,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					BottomPattern bp = cm.getBottomPattern();
 					cm.getGuardPattern();
 					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-					VariableExp ve = qvtr2qvtc.createVariableExp();
 					// where
 					@NonNull Variable mv = doRVarToMVar(v);
 					@NonNull OCLExpression me = doRExpToMExp(e);
 					// where
 					doRDomainToMComposedMappingGuard(e, cm);
 					// assign
-					ve.setReferredVariable(mv);
-					ve.setType(mv.getType());
+					VariableExp ve = qvtr2qvtc.createVariableExp(mv);
 					a.setSlotExpression(ve);
 					@NonNull Property tp = getProperty(mv.getType(), pn);
 					a.setTargetProperty(tp);
@@ -693,18 +659,14 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			Variable v = ClassUtil.nonNullState(te.getBindsTo());
 			// init
 			PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-			VariableExp ve1 = qvtr2qvtc.createVariableExp();
-			VariableExp ve2 = qvtr2qvtc.createVariableExp();
 			// where
 			@NonNull Variable mv = doRVarToMVar(v);
 			// assign
-			ve1.setReferredVariable(tcv);
-			ve1.setType(tcv.getType());
+			VariableExp ve1 = qvtr2qvtc.createVariableExp(tcv);
+			VariableExp ve2 = qvtr2qvtc.createVariableExp(mv);
 			a.setSlotExpression(ve1);
 			@NonNull Property tp = getProperty(tcv.getType(), v.getName());
 			a.setTargetProperty(tp);
-			ve2.setReferredVariable(mv);
-			ve2.setType(mv.getType());
 			a.setValue(ve2);
 			
 			mb.getAssignment().add(a);
@@ -789,18 +751,14 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				if (qvtr2qvtc.getTemplateExpression(dv) != null) {
 					// init
 					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-					VariableExp ve1 = qvtr2qvtc.createVariableExp();
-					VariableExp ve2 = qvtr2qvtc.createVariableExp();
 					// where
 					@NonNull Variable mdv = doRVarToMVar(dv);
 					// assign
-					ve1.setReferredVariable(tcv);
-					ve1.setType(tcv.getType());
+					VariableExp ve1 = qvtr2qvtc.createVariableExp(tcv);
+					VariableExp ve2 = qvtr2qvtc.createVariableExp(mdv);
 					a.setSlotExpression(ve1);
 					@NonNull Property tp = getProperty(tcv.getType(), dv.getName());
 					a.setTargetProperty(tp);
-					ve2.setReferredVariable(mdv);
-					ve2.setType(mdv.getType());
 					a.setValue(ve2);
 					mb.getAssignment().add(a);
 				}
@@ -890,23 +848,19 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		Predicate mgp = qvtr2qvtc.createPredicate();
 		OperationCallExp ee = qvtr2qvtc.createOperationCallExp();
 		PropertyCallExp pe = qvtr2qvtc.createPropertyCallExp();
-		VariableExp pve = qvtr2qvtc.createVariableExp();
-		VariableExp ave = qvtr2qvtc.createVariableExp();
 		// where
 		@NonNull Variable mv = doRVarToMVar(v);
 		// assign
+		VariableExp pve = qvtr2qvtc.createVariableExp(vd);
+		VariableExp ave = qvtr2qvtc.createVariableExp(mv);
 		mgp.setConditionExpression(ee);
 		ee.setOwnedSource(pe);
 		pe.setOwnedSource(pve);
-		pve.setReferredVariable(vd);
-		pve.setType(vd.getType());
 		@NonNull Property pep = getProperty(vd.getType(), dvn);
 		pe.setReferredProperty(pep);
 		pe.setType(pep.getType());
 		ee.setReferredOperation(getEqualsOperation());
 		ee.setType(qvtr2qvtc.getStandardLibrary().getBooleanType());
-		ave.setReferredVariable(mv);
-		ave.setType(mv.getType());
 		ee.getOwnedArguments().add(ave);
 		
 		mg.getPredicate().add(mgp);
