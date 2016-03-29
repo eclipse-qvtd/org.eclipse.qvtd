@@ -49,6 +49,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
@@ -344,6 +345,14 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			assert (slotExpression != null) && (value != null);
 //			Area sourceArea = getSourceVariableArea(value);
 			Area targetArea = getSourceVariableArea(slotExpression);
+			//
+			// A backward "p.q := v" rewrites as a forward "v := p.q". 
+			//
+			if (isInputDomain(targetArea) && (value instanceof VariableExp) && anyReferencedMiddleDomainVariables(value)) {		// isMtoL
+				VariableAssignment vaOut = QVTcoreBaseFactory.eINSTANCE.createVariableAssignment();
+				context.addTrace(paIn, vaOut);
+	            return vaOut;
+			}
 			if (isNonOutputDomain(targetArea) &&								// is RtoM or MtoL or RtoL
 					!(value instanceof VariableExp) &&			// why?
 					!(value instanceof NullLiteralExp) &&		// why?
@@ -378,7 +387,6 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 //				}
 			} */
 
-//			if (isInputDomain(targetArea) && anyReferencedMiddleDomainVariables(value)) {		// isMtoL
 			if (isInputDomain(targetArea) && anyReferencedMiddleDomainVariables(value)) {		// isMtoL
 				// Assignments to Predicates
 //				Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
@@ -463,6 +471,20 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		@Override
 		public @NonNull Mapping visitMapping(@NonNull Mapping mOut) {
 			return doMapping(mOut);
+		}
+
+		/*
+		 * Override to handle the backward "p.q := v" rewrite as "v := p.q". 
+		 */
+		@Override
+		public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment vaOut) {
+			Element pIn = context.equivalentSource(vaOut);
+			if (pIn instanceof PropertyAssignment) {
+				return convertToVariableAssignment((PropertyAssignment)pIn, vaOut);
+			}
+			else {
+				return super.visitVariableAssignment(vaOut);
+			}
 		}
 	 }
 	

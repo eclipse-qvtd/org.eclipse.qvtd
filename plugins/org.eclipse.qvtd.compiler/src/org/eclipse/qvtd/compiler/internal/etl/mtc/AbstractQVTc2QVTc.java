@@ -99,7 +99,7 @@ public abstract class AbstractQVTc2QVTc
 	 * 
 	 * References are left unresolved. OCLExpressions are not copied. doXXX methods provide join points for derived implementations.
 	 */
-    protected static abstract class AbstractCreateVisitor<C extends AbstractQVTc2QVTc> extends AbstractExtendingQVTcoreVisitor<Element, C>
+    protected static abstract class AbstractCreateVisitor<@NonNull C extends AbstractQVTc2QVTc> extends AbstractExtendingQVTcoreVisitor<Element, C>
     {
 		public AbstractCreateVisitor(@NonNull C context) {
 			super(context);
@@ -354,7 +354,7 @@ public abstract class AbstractQVTc2QVTc
 	/**
 	 * The UpdateVisitor resolves the references and creates the OCLExpressions omitted by the CreateVisitor..
 	 */
-    protected static abstract class AbstractUpdateVisitor<C extends AbstractQVTc2QVTc> extends AbstractExtendingQVTcoreVisitor<Object, C>
+    protected static abstract class AbstractUpdateVisitor<@NonNull C extends AbstractQVTc2QVTc> extends AbstractExtendingQVTcoreVisitor<Object, C>
     {
     	private Operation equalsOperation = null;
 
@@ -398,6 +398,24 @@ public abstract class AbstractQVTc2QVTc
 			operationCallExp.setName(equalsOperation.getName());		// FIXME redundant compatibility
 			pOut.setConditionExpression(operationCallExp);
 			checkOut(pOut);
+			return null;
+		}
+
+		protected @Nullable Object convertToVariableAssignment(@NonNull PropertyAssignment paIn, @NonNull VariableAssignment vaOut) {
+			OCLExpression veIn = paIn.getValue();
+			assert veIn instanceof VariableExp;
+			VariableDeclaration vIn = ((VariableExp)veIn).getReferredVariable();
+			assert vIn instanceof Variable;
+			Variable vOut = context.equivalentTarget((Variable)vIn);
+			vaOut.setTargetVariable(vOut);
+			OCLExpression slotExpression = copy(paIn.getSlotExpression());
+			Property targetProperty = paIn.getTargetProperty();
+			assert (slotExpression != null) && (targetProperty != null);
+			PropertyCallExp propertyCallExp = PivotUtil.createPropertyCallExp(slotExpression, targetProperty);
+			context.addTrace(paIn, propertyCallExp);
+			propertyCallExp.eUnset(PivotPackage.Literals.TYPED_ELEMENT__IS_REQUIRED);		// FIXME redundant compatibility
+			vaOut.setValue(propertyCallExp);
+			checkOut(vaOut);
 			return null;
 		}
 
@@ -609,7 +627,7 @@ public abstract class AbstractQVTc2QVTc
 		}
 
 		@Override
-		public @Nullable Element visitVariableAssignment(@NonNull VariableAssignment vaOut) {
+		public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment vaOut) {
 			VariableAssignment vaIn = context.equivalentSource(vaOut);
 			vaOut.setTargetVariable(context.equivalentTarget(vaIn.getTargetVariable()));
 			vaOut.setValue(copy(vaIn.getValue()));
