@@ -340,34 +340,40 @@ public class QVTrToQVTc
 	}
 
 	public void execute() throws CompilerChainException {
-		for (EObject eObject : qvtrResource.getContents()) {
+		for (@NonNull EObject eObject : qvtrResource.getContents()) {
 			if (eObject instanceof RelationModel) {
 				transformToTracePackages(tracePackages, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
 			}
 		}
-		for (EObject eObject : qvtrResource.getContents()) {
+		for (@NonNull EObject eObject : qvtrResource.getContents()) {
 			if (eObject instanceof RelationModel) {
 				transformToCoreTransformations(coreTransformations, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
 			}
 		}
-		for (RelationalTransformation relationalTransformation : relationalTransformation2coreTransformation.keySet()) {
-			for (Rule rule : relationalTransformation.getRule()) {
+		for (@NonNull RelationalTransformation relationalTransformation : relationalTransformation2coreTransformation.keySet()) {
+			for (@NonNull Rule rule : ClassUtil.nullFree(relationalTransformation.getRule())) {
 				if (rule instanceof Relation) {
-					TopLevelRelationToMappingForEnforcement topLevelRelationToMappingForEnforcement = new TopLevelRelationToMappingForEnforcement(this);
-					topLevelRelationToMappingForEnforcement.doTopLevelRelationToMappingForEnforcement((Relation)rule);
+					Relation relation = (Relation)rule;
+					if (relation.isIsTopLevel()) {
+						TopLevelRelationToMappingForEnforcement topLevelRelationToMappingForEnforcement = new TopLevelRelationToMappingForEnforcement(this);
+						topLevelRelationToMappingForEnforcement.doTopLevelRelationToMappingForEnforcement((Relation)rule);
+					}
 				}
 			}
 		}
-		for (RelationalTransformation relationalTransformation : relationalTransformation2coreTransformation.keySet()) {
-			for (Rule rule : relationalTransformation.getRule()) {
+		for (@NonNull RelationalTransformation relationalTransformation : relationalTransformation2coreTransformation.keySet()) {
+			for (@NonNull Rule rule : ClassUtil.nullFree(relationalTransformation.getRule())) {
 				if (rule instanceof Relation) {
-					InvokedRelationToMappingForEnforcement invokedRelationToMappingForEnforcement = new InvokedRelationToMappingForEnforcement(this);
-					invokedRelationToMappingForEnforcement.doInvokedRelationToMappingForEnforcement((Relation)rule);
+					Relation relation = (Relation)rule;
+					if (!relation.isIsTopLevel()) {
+						InvokedRelationToMappingForEnforcement invokedRelationToMappingForEnforcement = new InvokedRelationToMappingForEnforcement(this);
+						invokedRelationToMappingForEnforcement.doInvokedRelationToMappingForEnforcement(relation);
+					}
 				}
 			}
 		}
-		for (Transformation coreTransformation : relationalTransformation2coreTransformation.values()) {
-			for (Element target : target2source.keySet()) {
+		for (@NonNull Transformation coreTransformation : relationalTransformation2coreTransformation.values()) {
+			for (@NonNull Element target : target2source.keySet()) {
 				if (QVTbaseUtil.getContainingTransformation(target) == coreTransformation) {
 					DebugTraceBack traceBack = QVTbaseFactory.eINSTANCE.createDebugTraceBack();
 					traceBack.setTarget(target);
@@ -436,11 +442,14 @@ public class QVTrToQVTc
 	}
 	
 	/* =============  Queries ============= */
-	// TODO bug 45386 // ?? this is suspect for more than 2 domains. // FIXME What is 'shared'? a) any two domains b) output/any-input c) all domains
+	// TODO bug 453863 // ?? this is suspect for more than 2 domains. // FIXME What is 'shared'? a) any two domains b) output/any-input c) all domains
+	/**
+	 * Return the variables that are used by all domains of the relation.
+	 */
 	public @NonNull Set<@NonNull Variable> getSharedDomainVars(@NonNull Relation r) {	
 		Set<@NonNull Variable> vars = new HashSet<@NonNull Variable>();
-		for (Domain d : ClassUtil.nullFree(r.getDomain())) {
-			for (DomainPattern domainPattern : ClassUtil.nullFree(((RelationDomain) d).getPattern())) {
+		for (@NonNull Domain d : ClassUtil.nullFree(r.getDomain())) {
+			for (@NonNull DomainPattern domainPattern : ClassUtil.nullFree(((RelationDomain) d).getPattern())) {
 				List<@NonNull Variable> bt = ClassUtil.nullFree(domainPattern.getBindsTo()); 
 				if (vars.isEmpty()) {
 					vars.addAll(bt);
@@ -647,8 +656,8 @@ public class QVTrToQVTc
 	}
 
 	private void transformToCoreTransformations(@NonNull List<@NonNull Transformation> coreTransformations, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
-		for (org.eclipse.ocl.pivot.Package relationPackage : relationPackages) {
-			for (org.eclipse.ocl.pivot.Class relationClass : relationPackage.getOwnedClasses()) {
+		for (org.eclipse.ocl.pivot.@NonNull Package relationPackage : relationPackages) {
+			for (org.eclipse.ocl.pivot.@NonNull Class relationClass : ClassUtil.nullFree(relationPackage.getOwnedClasses())) {
 				if (relationClass instanceof RelationalTransformation) {
 					RelationalTransformationToMappingTransformation relationalTransformationToMappingTransformation = new RelationalTransformationToMappingTransformation(this);
 					Transformation coreTransformation = relationalTransformationToMappingTransformation.doRelationalTransformationToMappingTransformation((RelationalTransformation)relationClass);
@@ -661,7 +670,7 @@ public class QVTrToQVTc
 	
 	private void transformToTracePackages(@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
 		for (org.eclipse.ocl.pivot.@NonNull Package relationPackage : relationPackages) {
-			for (org.eclipse.ocl.pivot.Class relationClass : relationPackage.getOwnedClasses()) {
+			for (org.eclipse.ocl.pivot.@NonNull Class relationClass : ClassUtil.nullFree(relationPackage.getOwnedClasses())) {
 				if (relationClass instanceof RelationalTransformation) {
 					RelationalTransformationToTracePackage relationalTransformationToTracePackage = new RelationalTransformationToTracePackage(this);
 					org.eclipse.ocl.pivot.Package tracePackage = relationalTransformationToTracePackage.doRelationalTransformationToTracePackage((RelationalTransformation)relationClass);

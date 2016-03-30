@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
@@ -36,7 +35,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
@@ -75,14 +73,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					String dn = ClassUtil.nonNullState(ord.getName());
 					TypedModel dir = ClassUtil.nonNullState(ord.getTypedModel());
 					String tmn = ClassUtil.nonNullState(dir.getName());
-					RelationalTransformation rt = (RelationalTransformation) ClassUtil.nonNullState(dir.getTransformation());
 					List<org.eclipse.ocl.pivot.Package> up = dir.getUsedPackage();
 					boolean c = ord.isIsCheckable();
 					List<@NonNull Variable> domainVars = ClassUtil.nullFree(dp.getBindsTo());
 					ObjectTemplateExp te = (ObjectTemplateExp) ClassUtil.nonNullState(dp.getTemplateExpression());
 					Variable tev = ClassUtil.nonNullState(te.getBindsTo());
 					// when
-					@NonNull Transformation mt = qvtr2qvtc.getCoreTransformation(rt);
 					// init
 					CoreDomain cd = qvtr2qvtc.whenCoreDomain(m, dn);
 					GuardPattern dg = ClassUtil.nonNullState(cd.getGuardPattern());
@@ -105,25 +101,18 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					domainBottomSharedVars.retainAll(sharedDomainVars);
 					domainBottomSharedVars.remove(tev);
 					
-					doRVarSetToDGVarSet(new ArrayList<@NonNull Variable>(domainTopVars), dg);
-					doRVarSetToMBVarSet(new ArrayList<@NonNull Variable>(domainBottomUnSharedVars), db);
-					doRVarSetToMBVarSet(new ArrayList<@NonNull Variable>(domainBottomSharedVars), mb);
+					doRVarSetToDGVarSet(domainTopVars, dg);
+					doRVarSetToMBVarSet(domainBottomUnSharedVars, db);
+					doRVarSetToMBVarSet(domainBottomSharedVars, mb);
 					doRDomainPatternToMDBottomPattern(te);
 					// assign
-					TypedModel mdir = null;
-					for (TypedModel tm : mt.getModelParameter()) {
-						if (tm.getName().equals(tmn)) {
-							if (tm.getUsedPackage().equals(up)) {
-								mdir = tm;
-								break;
-							}
-						}
-					}
+					TypedModel mdir = getTypedModel(tmn, up);
 					cd.setTypedModel(mdir);
 					cd.setIsCheckable(c);
 					cd.setIsEnforceable(false);
 					cd.setGuardPattern(dg);
-					m.setBottomPattern(mb);
+					assert m.getBottomPattern() == mb;
+					m.setBottomPattern(mb);					// FIXME redundant
 				}
 			}		
 		}
@@ -186,10 +175,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			domainTopVars.add(tev);
 			// Relation Calls
 			// T5
-			doRPredicateSetToMBPredicateSet(new ArrayList<@NonNull Predicate>(predicatesWithVarBindings), mb);
-			doRVarSetToDGVarSet(new ArrayList<@NonNull Variable>(domainTopVars), dg);
+			doRPredicateSetToMBPredicateSet(predicatesWithVarBindings, mb);
+			doRVarSetToDGVarSet(domainTopVars, dg);
 			//T4
-			doRVarSetToMBVarSet(new ArrayList<@NonNull Variable>(unsharedWhereVars), mb);
+			doRVarSetToMBVarSet(unsharedWhereVars, mb);
 			//T3
 			doIROppositeDomainsToMappingForEnforcement();
 			doRInvokerToMGuard();
@@ -205,10 +194,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 	
 	public void doInvokedRelationToMappingForEnforcement(@NonNull Relation r) throws CompilerChainException {
+		assert !r.isIsTopLevel();
 		// check() {
-		if (r.isIsTopLevel()) {
-			return;
-		}
 		@NonNull List<@NonNull RelationDomain2CoreDomain> relation2mappings = new ArrayList<@NonNull RelationDomain2CoreDomain>();
 		for (@NonNull RelationCallExp ri : qvtr2qvtc.getRelationCallExpsForRelation(r)) {
 			for (@NonNull Domain d : ClassUtil.nullFree(r.getDomain())) {
