@@ -171,7 +171,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			for (@NonNull Assignment aIn : ClassUtil.nullFree(bIn.getAssignment())) {
 				Element aOut = create(aIn);
 				if (aOut instanceof Predicate) {
-					gOut.getPredicate().add((Predicate) aOut);
+					bOut.getPredicate().add((Predicate) aOut);
 				}
 				else if (aOut instanceof Assignment) {
 					bOut.getAssignment().add((Assignment) aOut);
