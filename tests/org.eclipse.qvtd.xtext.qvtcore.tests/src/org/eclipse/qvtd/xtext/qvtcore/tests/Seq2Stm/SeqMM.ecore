@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="SeqMM" nsURI="SeqMM" nsPrefix="seq">
+  <eClassifiers xsi:type="ecore:EClass" name="Dummy">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasInteraction" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Interaction" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containedState" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//State" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Interaction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lifeline" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//LifeLine" containment="true" eOpposite="#//LifeLine/interaction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Message" containment="true" eOpposite="#//Message/interaction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LifeLine">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="msgEvent" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//MessageEvent" containment="true"
+        eOpposite="#//MessageEvent/lifeline"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//State" eOpposite="#//State/lifeline"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interaction" ordered="false"
+        lowerBound="1" eType="#//Interaction" eOpposite="#//Interaction/lifeline"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Message">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageId" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interaction" ordered="false"
+        lowerBound="1" eType="#//Interaction" eOpposite="#//Interaction/message"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//MessageEvent" eOpposite="#//MessageEvent/message"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messageevent" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//MessageEvent" eOpposite="#//MessageEvent/state"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lifeline" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//LifeLine" eOpposite="#//LifeLine/state"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageEvent" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" ordered="false" lowerBound="1"
+        eType="#//MessageEventType" defaultValueLiteral="Send"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prev" ordered="false" lowerBound="1"
+        eType="#//MessageEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next" ordered="false" lowerBound="1"
+        eType="#//MessageEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" ordered="false"
+        lowerBound="1" eType="#//Message" eOpposite="#//Message/event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lifeline" ordered="false"
+        lowerBound="1" eType="#//LifeLine" eOpposite="#//LifeLine/msgEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" ordered="false"
+        lowerBound="1" eType="#//State" eOpposite="#//State/messageevent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MessageEventType">
+    <eLiterals name="Send"/>
+    <eLiterals name="Receive"/>
+  </eClassifiers>
+</ecore:EPackage>
