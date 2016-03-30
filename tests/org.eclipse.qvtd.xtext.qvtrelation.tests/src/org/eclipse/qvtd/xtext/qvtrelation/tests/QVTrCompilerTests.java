@@ -38,13 +38,13 @@ import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -109,8 +109,8 @@ public class QVTrCompilerTests extends LoadTestCase
 			options.setUseNullAnnotations(true);
 			options.setPackagePrefix("cg");
 			cg.generateClassFile();
-			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtcore.tests/test-gen/");
-			File explicitClassPath = new File("../org.eclipse.qvtd.xtext.qvtcore.tests/bin");
+			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtrelation.tests/test-gen/");
+			File explicitClassPath = new File("../org.eclipse.qvtd.xtext.qvtrelation.tests/bin");
 			String qualifiedClassName = cg.getQualifiedName();
 			String javaCodeSource = cg.generateClassFile();
 			OCL2JavaFileObject.saveClass(explicitClassPath.toString(), qualifiedClassName, javaCodeSource);	
@@ -237,7 +237,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		OCLstdlib.install();
 		QVTrTestUtil.doQVTrelationSetup();
 		QVTiTestUtil.doQVTimperativeSetup();
-		QVTcorePivotStandaloneSetup.doSetup();
+//		QVTrelationPivotStandaloneSetup.doSetup();
 //		QVTimperativePivotStandaloneSetup.doSetup();
     }
 
@@ -251,10 +251,11 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
     public void testQVTrCompiler_SeqToStm() throws Exception {
-//		AbstractTransformer.INVOCATIONS.setState(true);
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
 		Scheduler.DEBUG_GRAPHS.setState(true);;
     	MyQVT myQVT = new MyQVT("seq2stm");
-//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
 	    	Transformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm");
 	    	myQVT.createInterpretedExecutor(asTransformation);
@@ -262,39 +263,31 @@ public class QVTrCompilerTests extends LoadTestCase
 	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Seq2Stmc_trace.xmi");
 	    	myQVT.createModel("stm", "Stmc_Interpreted.xmi");
 	    	myQVT.executeTransformation();
-			myQVT.saveOutput("stm", "Stmc.xmi", "Stmc_expected.xmi", null);
+			myQVT.saveOutput("stm", "Stmc_Interpreted.xmi", "Stmc_expected.xmi", null);
 		}
 		finally {
 	    	myQVT.dispose();
 		}
     }
-    
-/*    @Test
-    public void testQVTrCompiler_Families2Persons_CG() throws Exception {
-//		AbstractTransformer.INVOCATIONS.setState(true);
-//		Scheduler.EDGE_ORDER.setState(true);
-//		Scheduler.REGION_DEPTH.setState(true);
-//		Scheduler.REGION_ORDER.setState(true);
-//		Scheduler.REGION_TRAVERSAL.setState(true);
-//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
-    	MyQVT myQVT = new MyQVT("families2persons", Families2PersonsPackage.eINSTANCE, FamiliesPackage.eINSTANCE, PersonsPackage.eINSTANCE);
+
+	@Test
+    public void testQVTrCompiler_SeqToStm_CG() throws Exception {
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
+		Scheduler.DEBUG_GRAPHS.setState(true);;
+    	MyQVT myQVT = new MyQVT("seq2stm");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-		try {
-	    	Transformation asTransformation = myQVT.compileTransformation("Families2Persons", "person");
-	        Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "Families2Persons.genmodel");
+    	try {
+	    	Transformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm");
+	        Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "SeqToStm.genmodel");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
-			myQVT.loadInput("family", "FamiliesBig.xmi");
+	    	myQVT.loadInput("seqDgm", "Seq.xmi");
 	    	myQVT.executeTransformation();
-			myQVT.saveOutput("person", "PersonsBig_CG.xmi", "PersonsBig_expected.xmi", Families2PersonsNormalizer.INSTANCE);
-	    	//
-	        myQVT.createGeneratedExecutor(txClass);
-			myQVT.loadInput("family", "Families.xmi");
-	    	myQVT.executeTransformation();
-			myQVT.saveOutput("person", "Persons_CG.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+			myQVT.saveOutput("stm", "Stmc_CG.xmi", "Stmc_expected.xmi", null);
 		}
 		finally {
 	    	myQVT.dispose();
 		}
-	}*/
+    }
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2015, 2016 Willink Transformations and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  E.D.Willink - Initial API and implementation"
+    modelDirectory="/org.eclipse.qvtd.xtext.qvtrelation.tests/src-gen" modelPluginID="org.eclipse.qvtd.xtext.qvtrelation.tests"
+    modelName="SeqToStm" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="8.0"
+    copyrightFields="false" operationReflection="true" importOrganizing="true" pluginKey="">
+  <foreignModel>SeqToStm.ecore</foreignModel>
+  <genPackages prefix="PSeqToStm" basePackage="org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm"
+      disposableProviderFactory="true" ecorePackage="SeqToStm.ecore#/">
+    <genClasses ecoreClass="SeqToStm.ecore#//TInteractionToStateMachine">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SeqToStm.ecore#//TInteractionToStateMachine/sn"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqToStm.ecore#//TInteractionToStateMachine/i"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqToStm.ecore#//TInteractionToStateMachine/s"/>
+    </genClasses>
+    <genClasses ecoreClass="SeqToStm.ecore#//TStateToState">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SeqToStm.ecore#//TStateToState/sn"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqToStm.ecore#//TStateToState/st1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqToStm.ecore#//TStateToState/l"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqToStm.ecore#//TStateToState/i"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqToStm.ecore#//TStateToState/st2"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqToStm.ecore#//TStateToState/s"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="SeqMM" basePackage="org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm"
+      disposableProviderFactory="true" ecorePackage="SeqMM.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="SeqMM.ecore#//MessageEventType">
+      <genEnumLiterals ecoreEnumLiteral="SeqMM.ecore#//MessageEventType/Send"/>
+      <genEnumLiterals ecoreEnumLiteral="SeqMM.ecore#//MessageEventType/Receive"/>
+    </genEnums>
+    <genClasses ecoreClass="SeqMM.ecore#//Dummy">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SeqMM.ecore#//Dummy/hasInteraction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SeqMM.ecore#//Dummy/containedState"/>
+    </genClasses>
+    <genClasses ecoreClass="SeqMM.ecore#//Interaction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SeqMM.ecore#//Interaction/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SeqMM.ecore#//Interaction/lifeline"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SeqMM.ecore#//Interaction/message"/>
+    </genClasses>
+    <genClasses ecoreClass="SeqMM.ecore#//LifeLine">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SeqMM.ecore#//LifeLine/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SeqMM.ecore#//LifeLine/msgEvent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqMM.ecore#//LifeLine/state"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SeqMM.ecore#//LifeLine/interaction"/>
+    </genClasses>
+    <genClasses ecoreClass="SeqMM.ecore#//Message">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SeqMM.ecore#//Message/messageId"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SeqMM.ecore#//Message/interaction"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqMM.ecore#//Message/event"/>
+    </genClasses>
+    <genClasses ecoreClass="SeqMM.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SeqMM.ecore#//State/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqMM.ecore#//State/messageevent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqMM.ecore#//State/lifeline"/>
+    </genClasses>
+    <genClasses ecoreClass="SeqMM.ecore#//Event"/>
+    <genClasses ecoreClass="SeqMM.ecore#//MessageEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SeqMM.ecore#//MessageEvent/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqMM.ecore#//MessageEvent/prev"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqMM.ecore#//MessageEvent/next"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqMM.ecore#//MessageEvent/message"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SeqMM.ecore#//MessageEvent/lifeline"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SeqMM.ecore#//MessageEvent/state"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="StmcMM" basePackage="org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm"
+      disposableProviderFactory="true" ecorePackage="StmcMM.ecore#/">
+    <genClasses ecoreClass="StmcMM.ecore#//Dummy">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference StmcMM.ecore#//Dummy/containsStateMachine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference StmcMM.ecore#//Dummy/containsMessage"/>
+    </genClasses>
+    <genClasses ecoreClass="StmcMM.ecore#//StateMachine">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute StmcMM.ecore#//StateMachine/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference StmcMM.ecore#//StateMachine/state"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference StmcMM.ecore#//StateMachine/transition"/>
+    </genClasses>
+    <genClasses ecoreClass="StmcMM.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute StmcMM.ecore#//State/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference StmcMM.ecore#//State/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference StmcMM.ecore#//State/inTransition"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference StmcMM.ecore#//State/outTransition"/>
+    </genClasses>
+    <genClasses ecoreClass="StmcMM.ecore#//Transition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute StmcMM.ecore#//Transition/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute StmcMM.ecore#//Transition/guard"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference StmcMM.ecore#//Transition/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference StmcMM.ecore#//Transition/toState"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference StmcMM.ecore#//Transition/fromState"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference StmcMM.ecore#//Transition/trigger"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference StmcMM.ecore#//Transition/action"/>
+    </genClasses>
+    <genClasses ecoreClass="StmcMM.ecore#//Event">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute StmcMM.ecore#//Event/name"/>
+    </genClasses>
+    <genClasses ecoreClass="StmcMM.ecore#//Action">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute StmcMM.ecore#//Action/name"/>
+    </genClasses>
+    <genClasses ecoreClass="StmcMM.ecore#//Message">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute StmcMM.ecore#//Message/messageId"/>
+    </genClasses>
+    <genClasses ecoreClass="StmcMM.ecore#//SendMsg">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference StmcMM.ecore#//SendMsg/message"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

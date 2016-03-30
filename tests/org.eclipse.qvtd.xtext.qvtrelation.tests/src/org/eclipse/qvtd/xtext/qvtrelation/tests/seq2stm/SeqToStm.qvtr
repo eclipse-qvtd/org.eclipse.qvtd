@@ -36,6 +36,7 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
           st1:State 
           {
                name = sn,
+--               lifeline = set:Set(LifeLine){l:LifeLine{interaction = i:Interaction{}} ++ _}
                lifeline = l:LifeLine{interaction = i:Interaction{}}
           };
 
@@ -50,9 +51,9 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
           {
                InteractionToStateMachine(i, s);
           }
-     }
+     } */
      
-     top relation MessageToTransition
+/*     top relation MessageToTransition
      {
           mid: String;
 
