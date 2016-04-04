@@ -1463,22 +1463,28 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 						return ClassUtil.safeCompareTo(n1, n2);
 					}
 				});
+				Set<@NonNull Part> resolvedRequiringParts = new HashSet<@NonNull Part>();
 				for (@NonNull List<@NonNull Part> dependentParts : requiredPartsList) {
 					List<@NonNull Part> requiringParts = requiredParts2requiringParts2.get(dependentParts);
 					assert requiringParts != null;
-					List<@NonNull PropertyAssignment> secondaryAssignments = synthesizeComputeSecondaryAssignments(requiringParts);
-					String mappingName = dependentParts2mappingName.get(dependentParts);
-					assert mappingName != null;
-					assert (secondaryHead2 !=  null);// {
-						refinedCreateVisitor = new SecondaryPartCreateVisitor(context, mappingName, secondaryHead2, primaryAssignments2,
-							discriminantAssignment != null ? Collections.singletonList(discriminantAssignment) : Collections.emptyList(), secondaryAssignments);
-//					}
-//					else {
-//						refinedCreateVisitor = new FoldedSecondaryCreateVisitor(context, mappingName, secondaryAssignments);
-//					}
-					mOut = refinedCreateVisitor.create(mapping);
-					assert mOut != null;
-					mOuts.add(mOut);
+					requiringParts = new ArrayList<@NonNull Part>(requiringParts);
+					requiringParts.removeAll(resolvedRequiringParts);
+					if (requiringParts.size() > 0) {
+						List<@NonNull PropertyAssignment> secondaryAssignments = synthesizeComputeSecondaryAssignments(requiringParts);
+						String mappingName = dependentParts2mappingName.get(dependentParts);
+						assert mappingName != null;
+						assert (secondaryHead2 !=  null);// {
+							refinedCreateVisitor = new SecondaryPartCreateVisitor(context, mappingName, secondaryHead2, primaryAssignments2,
+								discriminantAssignment != null ? Collections.singletonList(discriminantAssignment) : Collections.emptyList(), secondaryAssignments);
+	//					}
+	//					else {
+	//						refinedCreateVisitor = new FoldedSecondaryCreateVisitor(context, mappingName, secondaryAssignments);
+	//					}
+						mOut = refinedCreateVisitor.create(mapping);
+						assert mOut != null;
+						mOuts.add(mOut);
+						resolvedRequiringParts.addAll(requiringParts);
+					}
 				}
 				return mOuts;
 			}
