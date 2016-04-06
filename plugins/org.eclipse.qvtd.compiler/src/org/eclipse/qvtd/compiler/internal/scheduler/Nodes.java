@@ -450,6 +450,9 @@ public class Nodes
 				if (nodeRole.isConstant()) {
 					return nodeRole;
 				}
+//				if ((phase == Phase.PREDICATED) && (nodeRole.getPhase() == Phase.PREDICATED) && nodeRole.isHead()) {
+//					return this;
+//				}
 				return super.merge(nodeRole);
 			}
 
@@ -475,6 +478,9 @@ public class Nodes
 				if ((phase == Phase.LOADED) && (nodeRole.getPhase() == Phase.LOADED) && (nodeRole instanceof GuardNodeRole)) {
 					return nodeRole;
 				}
+//				if ((phase == Phase.PREDICATED) && (nodeRole.getPhase() == Phase.PREDICATED) && (nodeRole instanceof GuardNodeRole)) {
+//					return nodeRole;
+//				}
 				return super.merge(nodeRole);
 			}
 		}

@@ -172,7 +172,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @Nullable Element visitComment(@NonNull Comment cIn) {
-			@SuppressWarnings("null")@NonNull Comment cOut = PivotFactory.eINSTANCE.createComment();
+			Comment cOut = PivotFactory.eINSTANCE.createComment();
 			context.addTrace(cIn, cOut);
 			cOut.setBody(cIn.getBody());
 			createAll(cIn.getOwnedComments(), cOut.getOwnedComments());
@@ -241,7 +241,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @Nullable Element visitImport(@NonNull Import iIn) {
-		    @SuppressWarnings("null")@NonNull Import iOut = PivotFactory.eINSTANCE.createImport();
+		    Import iOut = PivotFactory.eINSTANCE.createImport();
 		    context.addTrace(iIn, iOut);
 		    iOut.setName(iIn.getName());
 		    iOut.setImportedNamespace(iIn.getImportedNamespace());
@@ -263,7 +263,7 @@ public abstract class AbstractQVTc2QVTc
 			if (PivotConstants.ORPHANAGE_URI.equals(pIn.getURI())) {
 				return null;
 			}
-		    @SuppressWarnings("null")@NonNull Package pOut = PivotFactory.eINSTANCE.createPackage();
+		    Package pOut = PivotFactory.eINSTANCE.createPackage();
 		    context.addTrace(pIn, pOut);
 		    pOut.setName(pIn.getName());
 		    pOut.setURI(pIn.getURI());
@@ -334,7 +334,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @NonNull Variable visitVariable(@NonNull Variable vIn) {
-			@SuppressWarnings("null")@NonNull Variable vOut = PivotFactory.eINSTANCE.createVariable();
+			Variable vOut = PivotFactory.eINSTANCE.createVariable();
 			context.addTrace(vIn, vOut);
 			vOut.setName(vIn.getName());
 			createAll(vIn.getOwnedComments(), vOut.getOwnedComments());
