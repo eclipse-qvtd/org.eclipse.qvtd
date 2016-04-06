@@ -180,7 +180,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		
 		protected @NonNull OCLExpression create(/*@NonNull*/ Node node) {
 			if (node.isNull()) {
-				return createNullLiteralExp();
+				return helper.createNullLiteralExp();
 			}
 			Variable theVariable = node2variable.get(node);
 			if (theVariable == null) {
@@ -271,7 +271,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		public @Nullable OCLExpression getExpression(@NonNull Node node) {		
 			if (node.isNull()) {
-				return createNullLiteralExp();
+				return helper.createNullLiteralExp();
 			}
 			Variable variable = node2variable.get(node);
 			if (variable != null) {
@@ -334,18 +334,18 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			for (@NonNull CollectionLiteralPart pPart : ClassUtil.nullFree(pCollectionLiteralExp.getOwnedParts())) {
 				if (pPart instanceof CollectionItem) {
 					OCLExpression item = createNonNull(((CollectionItem)pPart).getOwnedItem());
-					clonedParts.add(createCollectionItem(item));
+					clonedParts.add(helper.createCollectionItem(item));
 				}
 				else {
 					CollectionRange pCollectionRange = (CollectionRange)pPart;
 					OCLExpression first = createNonNull(pCollectionRange.getOwnedFirst());
 					OCLExpression last = createNonNull(pCollectionRange.getOwnedLast());
-					clonedParts.add(createCollectionRange(first, last));
+					clonedParts.add(helper.createCollectionRange(first, last));
 				}
 			}
 			CollectionType collectionType = (CollectionType)pCollectionLiteralExp.getType();
 			assert collectionType != null;
-			return createCollectionLiteralExp(collectionType, clonedParts);
+			return helper.createCollectionLiteralExp(collectionType, clonedParts);
 		}
 
 		@Override
@@ -366,7 +366,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			assert referredIteration != null;
 			OCLExpression iBody = inlineExpressionCreator.create(pIterateExp.getOwnedBody());
 			assert iBody != null;
-			return createIterateExp(iSource, referredIteration, iIterators, result, iBody);
+			return helper.createIterateExp(iSource, referredIteration, iIterators, result, iBody);
 		}
 
 		@Override
@@ -378,7 +378,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			assert referredIteration != null;
 			OCLExpression iBody = inlineExpressionCreator.create(pIteratorExp.getOwnedBody());
 			assert iBody != null;
-			return createIteratorExp(iSource, referredIteration, iIterators, iBody);
+			return helper.createIteratorExp(iSource, referredIteration, iIterators, iBody);
 		}
 
 		@Override
@@ -387,11 +387,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			for (@NonNull MapLiteralPart pPart : ClassUtil.nullFree(pMapLiteralExp.getOwnedParts())) {
 				OCLExpression key = createNonNull(pPart.getOwnedKey());
 				OCLExpression value = createNonNull(pPart.getOwnedValue());
-				clonedParts.add(createMapLiteralPart(key, value));
+				clonedParts.add(helper.createMapLiteralPart(key, value));
 			}
 			MapType mapType = (MapType)pMapLiteralExp.getType();
 			assert mapType != null;
-			return createMapLiteralExp(mapType, clonedParts);
+			return helper.createMapLiteralExp(mapType, clonedParts);
 		}
 
 		@Override
@@ -406,7 +406,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				Variable thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, visitor.getTransformation());
 				iSource = PivotUtil.createVariableExp(thisVariable);
 			}
-			return createOperationCallExp(iSource, referredOperation, iArguments);
+			return helper.createOperationCallExp(iSource, referredOperation, iArguments);
 		}
 
 		@Override
@@ -441,11 +441,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				assert (name != null) && (type != null);
 				Property referredProperty = pPart.getReferredProperty();
 				assert referredProperty != null;
-				clonedParts.add(createShadowPart(referredProperty, init));
+				clonedParts.add(helper.createShadowPart(referredProperty, init));
 			}
 			org.eclipse.ocl.pivot.Class shadowType = pShadowExp.getType();
 			assert shadowType != null;
-			return createShadowExp(shadowType, clonedParts);
+			return helper.createShadowExp(shadowType, clonedParts);
 		}
 
 		@Override
@@ -456,18 +456,18 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				String name = pPart.getName();
 				Type type = pPart.getType();
 				assert (name != null) && (type != null);
-				clonedParts.add(createTupleLiteralPart(name, type, pPart.isIsRequired(), init));
+				clonedParts.add(helper.createTupleLiteralPart(name, type, pPart.isIsRequired(), init));
 			}
 			TupleType tupleType = (TupleType)pTupleLiteralExp.getType();
 			assert tupleType != null;
-			return createTupleLiteralExp(tupleType, clonedParts);
+			return helper.createTupleLiteralExp(tupleType, clonedParts);
 		}
 
 		@Override
 		public @NonNull OCLExpression visitTypeExp(@NonNull TypeExp pTypeExp) {
 			Type referredType = pTypeExp.getReferredType();
 			assert referredType != null;
-			return createTypeExp(referredType);
+			return helper.createTypeExp(referredType);
 		}
 
 		@Override
@@ -486,10 +486,23 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 			}
-			assert node != null;
-			Variable iVariable = getVariable(node);
-			assert iVariable != null;
-			return PivotUtil.createVariableExp(iVariable);
+			if (node != null) {
+				Variable iVariable = getVariable(node);
+				assert iVariable != null;
+				return PivotUtil.createVariableExp(iVariable);
+			}
+			else {
+				System.out.println("Creating unexpected variable for " + pVariable + " in " + region);
+				BottomPattern bottomPattern = mapping.getBottomPattern();
+				assert bottomPattern != null;
+				Type variableType = pVariable.getType();
+				assert variableType != null;
+				Variable iVariable = PivotUtil.createVariable(getSafeName(pVariable.getName()), variableType, pVariable.isIsRequired(), null);
+				bottomPattern.getVariable().add(iVariable);
+//				Variable oldVariable = node2variable.put(node, iVariable);
+//				assert oldVariable == null;
+				return PivotUtil.createVariableExp(iVariable);
+			}
 		}
 	}
 	
@@ -498,7 +511,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		@Override
 		public @NonNull OCLExpression create(/*@NonNull*/ Node node) {
 			if (node.isNull()) {
-				return createNullLiteralExp();
+				return helper.createNullLiteralExp();
 			}
 			Variable theVariable = node2variable.get(node);
 			if (theVariable == null) {
@@ -1101,8 +1114,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			OCLExpression targetExp = createVariableExp(targetNode);
 			OCLExpression source2targetExp = createCallExp(sourceExp, property);
 			OCLExpression matchesExp = targetNode.isNull()
-					? createOperationCallExp(source2targetExp, visitor.getEqualsOperation(), targetExp)
-					: createOperationCallExp(targetExp, visitor.getEqualsOperation(), source2targetExp);
+					? helper.createOperationCallExp(source2targetExp, "=", targetExp)
+					: helper.createOperationCallExp(targetExp, "=", source2targetExp);
 			Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
 			asPredicate.setConditionExpression(matchesExp);
 			addPredicate(asPredicate);
@@ -1362,7 +1375,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	private @NonNull OCLExpression createVariableExp(@NonNull Node node) {
 		if (node.isNull()) {
-			return createNullLiteralExp();
+			return helper.createNullLiteralExp();
 		}
 		else {
 			Variable variable = node2variable.get(node);

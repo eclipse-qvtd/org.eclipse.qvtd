@@ -115,27 +115,26 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		if (allInstancesVariable == null) {
 			Type collectionType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
 			Type elementType = ((CollectionType)collectionType).getElementType();
+			assert elementType != null;
+			assert !(elementType instanceof CollectionType);
 			StandardLibraryInternal standardLibrary = (StandardLibraryInternal)visitor.getStandardLibrary();
 			TypedModel typedModel = visitor.getQVTiTypedModel(classDatumAnalysis.getTypedModel());
 			assert typedModel != null;
 			Variable contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
-			VariableExp modelExp = PivotUtil.createVariableExp(contextVariable);
-			TypeExp typeExp = PivotFactory.eINSTANCE.createTypeExp();
-			typeExp.setReferredType(elementType);
-			typeExp.setType(standardLibrary.getClassType());
-			typeExp.setTypeValue(elementType);
-			OCLExpression asSource = createOperationCallExp(modelExp, getObjectsOfKindOperation(), typeExp);
+			VariableExp modelExp = helper.createVariableExp(contextVariable);
+			TypeExp typeExp = helper.createTypeExp(elementType);
+			OCLExpression asSource = helper.createOperationCallExp(modelExp, "objectsOfKind", typeExp);
 			allInstancesVariable = PivotUtil.createVariable(resultNode.getName(), asSource);
 			mapping.getBottomPattern().getVariable().add(allInstancesVariable);
 			classDatumAnalysis2variable.put(classDatumAnalysis, allInstancesVariable);
 		}
-		return PivotUtil.createVariableExp(allInstancesVariable);
+		return helper.createVariableExp(allInstancesVariable);
 	}
 	
 	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull CorePattern pattern, @NonNull String name, @NonNull Type type, @Nullable OCLExpression initExpression) {
 //		Type variableType = visitor.getEnvironmentFactory().getCompleteEnvironment().getSetType(node.getCompleteClass().getPrimaryClass(), true, null, null);
 //		assert variableType != null;
-		ConnectionVariable variable = createConnectionVariable(getSafeName(name), type, initExpression);
+		ConnectionVariable variable = helper.createConnectionVariable(getSafeName(name), type, initExpression);
 		pattern.getVariable().add(variable);
 //		Variable oldVariable = node2variable.put(node, variable);
 //		assert oldVariable == null;
@@ -197,7 +196,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			mapping.getBottomPattern().getVariable().add(resultVariable);
 			node2variable.put(resultNode, resultVariable);
 		}
-		return PivotUtil.createVariableExp(resultVariable); */
+		return helper.createVariableExp(resultVariable); */
 	}
 
 	@Override
@@ -229,7 +228,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 						Region connectionRegion = connectionNode.getRegion();
 						Variable connectionVariable = connection2variable.get(connectionRegion);
 						if (connectionVariable != null) {
-							OCLExpression collection1 = PivotUtil.createVariableExp(connectionVariable);
+							OCLExpression collection1 = helper.createVariableExp(connectionVariable);
 							OCLExpression collection2 = createSelectByKind(node);
 							OCLExpression union = createOperationCallExp(collection1, asOperation, collection2);
 							VariableAssignment variableAssignment = QVTcoreBaseFactory.eINSTANCE.createVariableAssignment();
@@ -276,15 +275,15 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		@NonNull Variable asIterator = PivotUtil.createVariable("i", elementType, true, null);
 		Property child2parentProperty = edge.getProperty().getOpposite();
 		assert child2parentProperty != null;
-		OCLExpression propertyCallExp = PivotUtil.createPropertyCallExp(PivotUtil.createVariableExp(asIterator), child2parentProperty);
+		OCLExpression propertyCallExp = PivotUtil.createPropertyCallExp(helper.createVariableExp(asIterator), child2parentProperty);
 		if (edge.getSource().isNull()) {
-			OCLExpression equalsExp = createOperationCallExp(propertyCallExp, visitor.getEqualsOperation(), createNullLiteralExp());
-			initExpression = createIteratorExp(initExpression, getSelectIteration(), Collections.singletonList(asIterator), equalsExp);
+			OCLExpression equalsExp = helper.createOperationCallExp(propertyCallExp, "=", helper.createNullLiteralExp());
+			initExpression = helper.createIteratorExp(initExpression, getSelectIteration(), Collections.singletonList(asIterator), equalsExp);
 		}
 		else {
-//			OCLExpression equalsExp = createOperationCallExp(propertyCallExp, getOclIsKindOfOperation(), createTypeExp());
-			OCLExpression notEqualsExp = createOperationCallExp(propertyCallExp, visitor.getNotEqualsOperation(), createNullLiteralExp());
-			initExpression = createIteratorExp(initExpression, getSelectIteration(), Collections.singletonList(asIterator), notEqualsExp);
+//			OCLExpression equalsExp = helper.createOperationCallExp(propertyCallExp, getOclIsKindOfOperation(), createTypeExp());
+			OCLExpression notEqualsExp = helper.createOperationCallExp(propertyCallExp, "<>", helper.createNullLiteralExp());
+			initExpression = helper.createIteratorExp(initExpression, getSelectIteration(), Collections.singletonList(asIterator), notEqualsExp);
 		}
 		return initExpression;
 	}
@@ -308,12 +307,12 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			TypedModel typedModel = visitor.getQVTiTypedModel(resultNode.getClassDatumAnalysis().getTypedModel());
 			assert typedModel != null;
 			Variable contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
-			VariableExp modelExp = PivotUtil.createVariableExp(contextVariable);
+			VariableExp modelExp = helper.createVariableExp(contextVariable);
 			OCLExpression asSource = createOperationCallExp(modelExp, getRootObjectsOperation());
 			rootsVariable = rootsVariable2 = PivotUtil.createVariable("roots", asSource);
 			mapping.getBottomPattern().getVariable().add(rootsVariable2);
 		}
-		return PivotUtil.createVariableExp(rootsVariable2);
+		return helper.createVariableExp(rootsVariable2);
 	} */
 
 	protected @NonNull Iteration getSelectIteration() {

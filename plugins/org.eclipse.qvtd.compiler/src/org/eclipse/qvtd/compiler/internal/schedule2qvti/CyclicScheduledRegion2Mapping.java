@@ -126,13 +126,13 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 //					incoming2outgoing.put(incomingConnection, internallyPassedConnection);
 			Type asType = getConnectionSourcesType(incomingConnection);
 			String localName = "«local" + (index > 0 ? Integer.toString(index) : "") + "»";
-			localVariable = createConnectionVariable(localName, asType, null);
+			localVariable = helper.createConnectionVariable(localName, asType, null);
 			mapping.getBottomPattern().getVariable().add(localVariable);
 			connection2variable.put(outgoingConnection, localVariable);
 	//
 			if ((asType instanceof CollectionType) && ((CollectionType)asType).isUnique()) {
 				String newName = "«new" + (index > 0 ? Integer.toString(index) : "") + "»";
-				ConnectionVariable newVariable2 = newVariable = createConnectionVariable(newName, asType, null);
+				ConnectionVariable newVariable2 = newVariable = helper.createConnectionVariable(newName, asType, null);
 				mapping.getBottomPattern().getVariable().add(newVariable2);
 				connection2variable.put(outgoingConnection, newVariable2);
 			}
@@ -232,7 +232,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			if (connectionVariable == null) {
 				String name = intermediateConnection.getName();
 				assert name != null;
-				connectionVariable = createConnectionVariable(name, getConnectionSourcesType(intermediateConnection), null);
+				connectionVariable = helper.createConnectionVariable(name, getConnectionSourcesType(intermediateConnection), null);
 				connection2variable.put(intermediateConnection, connectionVariable);
 				mapping.getGuardPattern().getVariable().add(connectionVariable);
 			}

@@ -19,33 +19,13 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
-import org.eclipse.ocl.pivot.CollectionItem;
-import org.eclipse.ocl.pivot.CollectionLiteralExp;
-import org.eclipse.ocl.pivot.CollectionLiteralPart;
-import org.eclipse.ocl.pivot.CollectionRange;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.IterateExp;
-import org.eclipse.ocl.pivot.Iteration;
-import org.eclipse.ocl.pivot.IteratorExp;
-import org.eclipse.ocl.pivot.MapLiteralExp;
-import org.eclipse.ocl.pivot.MapLiteralPart;
-import org.eclipse.ocl.pivot.MapType;
-import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
-import org.eclipse.ocl.pivot.ShadowExp;
-import org.eclipse.ocl.pivot.ShadowPart;
-import org.eclipse.ocl.pivot.TemplateParameter;
-import org.eclipse.ocl.pivot.TemplateableElement;
-import org.eclipse.ocl.pivot.TupleLiteralExp;
-import org.eclipse.ocl.pivot.TupleLiteralPart;
-import org.eclipse.ocl.pivot.TupleType;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -60,7 +40,6 @@ import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.pivot.utilities.TypeUtil;
 import org.eclipse.qvtd.compiler.internal.scheduler.Node;
 import org.eclipse.qvtd.compiler.internal.scheduler.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.scheduler.Region;
@@ -70,14 +49,13 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-
-import com.google.common.collect.Iterables;
 
 public abstract class AbstractRegion2Mapping
 {
 	protected final @NonNull QVTs2QVTiVisitor visitor;
+	protected final @NonNull QVTimperativeHelper helper;
 	protected final @NonNull Region region;
 	protected final @NonNull Mapping mapping;
 	
@@ -103,6 +81,7 @@ public abstract class AbstractRegion2Mapping
 
 	public AbstractRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		this.visitor = visitor;
+		this.helper = new QVTimperativeHelper(visitor.getEnvironmentFactory());
 		this.region = region;
 		String name = region.getSymbolName();
 		assert name != null;
@@ -120,9 +99,8 @@ public abstract class AbstractRegion2Mapping
 		if (asProperty.eContainer() == null) {
 			Type asType = asProperty.getType();
 			SchedulerConstants schedulerConstants = getRegion().getSchedulerConstants();
-			IdResolver idResolver = schedulerConstants.getEnvironmentFactory().getIdResolver();
 			if (asProperty == schedulerConstants.getOclContainerProperty()) {
-				return createOperationCallExp(asSource, idResolver.getOperation(schedulerConstants.getOclElementOclContainerId()));
+				return helper.createOperationCallExp(asSource, "oclContainer");
 			}
 			else if ((asType != null) && (asProperty == schedulerConstants.getCastProperty(asType))) {
 				return createOclAsTypeCallExp(asSource, asType);
@@ -135,9 +113,7 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	protected void createConnectionAssignment(@NonNull ConnectionVariable connectionVariable, @NonNull OCLExpression childrenExpression) {
-		ConnectionAssignment connectionAssignment = QVTimperativeFactory.eINSTANCE.createConnectionAssignment();
-		connectionAssignment.setTargetVariable(connectionVariable);
-		connectionAssignment.setValue(childrenExpression);
+		ConnectionAssignment connectionAssignment = helper.createConnectionAssignment(connectionVariable, childrenExpression);
 		mapping.getBottomPattern().getAssignment().add(connectionAssignment);
 	}
 
@@ -145,16 +121,7 @@ public abstract class AbstractRegion2Mapping
 		Type asType = getConnectionSourcesType(connection);
 		String name = connection.getName();
 		assert name != null;
-		return createConnectionVariable(name, asType, null);
-	}
-
-	protected @NonNull ConnectionVariable createConnectionVariable(@NonNull String name, @NonNull Type asType, @Nullable OCLExpression initExpression) {
-		ConnectionVariable asVariable = QVTimperativeFactory.eINSTANCE.createConnectionVariable();
-		asVariable.setName(getSafeName(name));
-		asVariable.setType(asType);
-		asVariable.setIsRequired(true);
-		asVariable.setOwnedInit(initExpression);
-		return asVariable;
+		return helper.createConnectionVariable(getSafeName(name), asType, null);
 	}
 
 	protected void createConnectionGuardVariables() {
@@ -169,103 +136,14 @@ public abstract class AbstractRegion2Mapping
 		}
 	}
 
-	protected @NonNull CollectionItem createCollectionItem(@NonNull OCLExpression asItem) {
-		CollectionItem collectionItem = PivotFactory.eINSTANCE.createCollectionItem();
-		collectionItem.setOwnedItem(asItem);
-		collectionItem.setType(asItem.getType());
-		collectionItem.setIsRequired(asItem.isIsRequired());
-		return collectionItem;
-	}
-
-	protected @NonNull OCLExpression createCollectionLiteralExp(@NonNull CollectionType asType, @NonNull Iterable<CollectionLiteralPart> asParts) {
-		CollectionLiteralExp collectionLiteralExp = PivotFactory.eINSTANCE.createCollectionLiteralExp();
-		Iterables.addAll(collectionLiteralExp.getOwnedParts(), asParts);
-		collectionLiteralExp.setType(asType);
-		collectionLiteralExp.setKind(TypeUtil.getCollectionKind(asType));
-		collectionLiteralExp.setIsRequired(true);
-		return collectionLiteralExp;
-	}
-
-	protected @NonNull CollectionRange createCollectionRange(@NonNull OCLExpression asFirst, @NonNull OCLExpression asLast) {
-		CollectionRange collectionRange = PivotFactory.eINSTANCE.createCollectionRange();
-		collectionRange.setOwnedFirst(asFirst);
-		collectionRange.setOwnedLast(asLast);
-		collectionRange.setType(visitor.getStandardLibrary().getIntegerType());
-		collectionRange.setIsRequired(true);
-		return collectionRange;
-	}
-
-	protected @NonNull IterateExp createIterateExp(@NonNull OCLExpression asSource, @NonNull Iteration asIteration, @NonNull List<@NonNull ? extends Variable> asIterators, @NonNull Variable asResult, @NonNull OCLExpression asBody) {
-		IterateExp asCallExp = PivotFactory.eINSTANCE.createIterateExp();
-		asCallExp.setReferredIteration(asIteration);
-		asCallExp.setOwnedSource(asSource);
-		asCallExp.getOwnedIterators().addAll(asIterators);
-		asCallExp.setOwnedResult(asResult);
-		asCallExp.setOwnedBody(asBody);
-		Type formalType = asIteration.getType();
-		assert formalType != null;
-		asCallExp.setType(formalType);
-		asCallExp.setIsRequired(asIteration.isIsRequired());
-		Type actualType = asSource.getType();
-		assert actualType != null;
-		Type returnType = getMetamodelManager().specializeType(formalType, asCallExp, actualType, asSource.getTypeValue());
-		asCallExp.setType(returnType);
-		return asCallExp;
-	}
-
-	protected @NonNull IteratorExp createIteratorExp(@NonNull OCLExpression asSource, @NonNull Iteration asIteration, @NonNull List<@NonNull ? extends Variable> asIterators, @NonNull OCLExpression asBody) {
-		IteratorExp asCallExp = PivotFactory.eINSTANCE.createIteratorExp();
-		asCallExp.setReferredIteration(asIteration);
-		asCallExp.setOwnedSource(asSource);
-		asCallExp.getOwnedIterators().addAll(asIterators);
-		asCallExp.setOwnedBody(asBody);
-		Type formalType = asIteration.getType();
-		assert formalType != null;
-		asCallExp.setType(formalType);
-		asCallExp.setIsRequired(asIteration.isIsRequired());
-		Type actualType = asSource.getType();
-		assert actualType != null;
-		Type returnType = getMetamodelManager().specializeType(formalType, asCallExp, actualType, asSource.getTypeValue());
-		asCallExp.setType(returnType);
-		return asCallExp;
-	}
-
-	protected @NonNull OCLExpression createMapLiteralExp(@NonNull MapType asType, @NonNull Iterable<MapLiteralPart> asParts) {
-		MapLiteralExp mapLiteralExp = PivotFactory.eINSTANCE.createMapLiteralExp();
-		Iterables.addAll(mapLiteralExp.getOwnedParts(), asParts);
-		mapLiteralExp.setType(asType);
-		mapLiteralExp.setIsRequired(true);
-		return mapLiteralExp;
-	}
-
-	protected @NonNull MapLiteralPart createMapLiteralPart(@NonNull OCLExpression asKey, @NonNull OCLExpression asValue) {
-		MapLiteralPart mapLiteralPart = PivotFactory.eINSTANCE.createMapLiteralPart();
-		mapLiteralPart.setOwnedKey(asKey);
-		mapLiteralPart.setOwnedValue(asValue);
-//		mapLiteralPart.setType(asItem.getType());
-//		mapLiteralPart.setIsRequired(true);
-		return mapLiteralPart;
-	}
-
-	protected @NonNull NullLiteralExp createNullLiteralExp() {
-		return getMetamodelManager().createNullLiteralExp();
-	}
-
-	protected @NonNull CallExp createOclAsSetCallExp(@NonNull OCLExpression asSource) {
-		SchedulerConstants schedulerConstants = getRegion().getSchedulerConstants();
-		IdResolver idResolver = schedulerConstants.getEnvironmentFactory().getIdResolver();
-		return createOperationCallExp(asSource, idResolver.getOperation(schedulerConstants.getOclAnyOclAsSetId()));
-	}
-
 	protected @NonNull CallExp createOclAsTypeCallExp(@NonNull OCLExpression asSource, @NonNull Type asType) {
 		SchedulerConstants schedulerConstants = getRegion().getSchedulerConstants();
-		IdResolver idResolver = schedulerConstants.getEnvironmentFactory().getIdResolver();
 		CompleteClass completeClass = schedulerConstants.getEnvironmentFactory().getCompleteModel().getCompleteClass(asType);
-		TypeExp asTypeExp = createTypeExp(completeClass.getPrimaryClass());
-		return createOperationCallExp(asSource, idResolver.getOperation(schedulerConstants.getOclAnyOclAsTypeId()), asTypeExp);
+		TypeExp asTypeExp = helper.createTypeExp(completeClass.getPrimaryClass());
+		return helper.createOperationCallExp(asSource, "oclAsType", asTypeExp);
 	}
 
-	protected @NonNull OperationCallExp createOperationCallExp(@NonNull OCLExpression asSource, @NonNull Operation asOperation, /*@NonNull*/ OCLExpression... asArguments) {
+/*	protected @NonNull OperationCallExp createOperationCallExp(@NonNull OCLExpression asSource, @NonNull Operation asOperation, /*@NonNull* / OCLExpression... asArguments) {
 		PivotMetamodelManager metamodelManager = getMetamodelManager();
 		StandardLibraryInternal standardLibrary = metamodelManager.getStandardLibrary();
 		@NonNull Operation asBestOperation = asOperation;
@@ -324,41 +202,7 @@ public abstract class AbstractRegion2Mapping
 		}
 		asCallExp.setType(returnType);
 		return asCallExp;
-	}
-
-	protected @NonNull OCLExpression createShadowExp(org.eclipse.ocl.pivot.@NonNull Class asClass, @NonNull Iterable<ShadowPart> asParts) {
-		ShadowExp shadowExp = PivotFactory.eINSTANCE.createShadowExp();
-		Iterables.addAll(shadowExp.getOwnedParts(), asParts);
-		shadowExp.setType(asClass);
-		shadowExp.setIsRequired(true);
-		return shadowExp;
-	}
-
-	protected @NonNull ShadowPart createShadowPart(@NonNull Property asProperty, @NonNull OCLExpression asValue) {
-		ShadowPart shadowPart = PivotFactory.eINSTANCE.createShadowPart();
-		shadowPart.setReferredProperty(asProperty);
-		shadowPart.setType(asProperty.getType());
-		shadowPart.setIsRequired(asProperty.isIsRequired());
-		shadowPart.setOwnedInit(asValue);
-		return shadowPart;
-	}
-
-	protected @NonNull OCLExpression createTupleLiteralExp(@NonNull TupleType asType, @NonNull Iterable<TupleLiteralPart> asParts) {
-		TupleLiteralExp tupleLiteralExp = PivotFactory.eINSTANCE.createTupleLiteralExp();
-		Iterables.addAll(tupleLiteralExp.getOwnedParts(), asParts);
-		tupleLiteralExp.setType(asType);
-		tupleLiteralExp.setIsRequired(true);
-		return tupleLiteralExp;
-	}
-
-	protected @NonNull TupleLiteralPart createTupleLiteralPart(@NonNull String name, @NonNull Type asType, boolean isRequired, @NonNull OCLExpression asValue) {
-		TupleLiteralPart tupleLiteralPart = PivotFactory.eINSTANCE.createTupleLiteralPart();
-		tupleLiteralPart.setName(name);
-		tupleLiteralPart.setType(asType);
-		tupleLiteralPart.setIsRequired(isRequired);
-		tupleLiteralPart.setOwnedInit(asValue);
-		return tupleLiteralPart;
-	}
+	} */
 
 	public abstract void createStatements();
 
@@ -375,15 +219,6 @@ public abstract class AbstractRegion2Mapping
 		}
 		return PivotUtil.createVariableExp(variable);
 	} */
-
-	protected @NonNull TypeExp createTypeExp(@NonNull Type type) {
-		TypeExp asTypeExp = PivotFactory.eINSTANCE.createTypeExp();
-		asTypeExp.setIsRequired(true);
-		asTypeExp.setReferredType(type);
-		asTypeExp.setType(visitor.getStandardLibrary().getClassType());
-		asTypeExp.setTypeValue(type);
-		return asTypeExp;
-	}
 
 	protected @NonNull Variable createVariable(@NonNull Node node) {
 		Type asType = node.getClassDatumAnalysis().getCompleteClass().getPrimaryClass();
