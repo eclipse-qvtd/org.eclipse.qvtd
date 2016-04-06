@@ -151,20 +151,20 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 				guardPredicates.addAll(ClassUtil.nullFree(thisGuardPattern.getPredicate()));
 				gatherVariables(thisGuardPattern.getVariable(), MergedVariable.GUARD);
 				@SuppressWarnings("null")@NonNull BottomPattern thisBottomPattern = thisArea.getBottomPattern();
+				gatherVariables(thisBottomPattern.getVariable(), MergedVariable.BOTTOM);
 				gatherAssignments(thisBottomPattern.getAssignment(), ASSIGNMENT);
 				bottomPredicates.addAll(ClassUtil.nullFree(thisBottomPattern.getPredicate()));
 				gatherVariables(thisBottomPattern.getRealizedVariable(), MergedVariable.BOTTOM);
-				gatherVariables(thisBottomPattern.getVariable(), MergedVariable.BOTTOM);
 			}
 			for (@NonNull Area childArea : getChildAreas()) {
 				@SuppressWarnings("null")@NonNull GuardPattern childGuardPattern = childArea.getGuardPattern();
 				guardPredicates.addAll(ClassUtil.nullFree(childGuardPattern.getPredicate()));
 				gatherVariables(childGuardPattern.getVariable(), MergedVariable.GUARD);
 				@SuppressWarnings("null")@NonNull BottomPattern childBottomPattern = childArea.getBottomPattern();
+				gatherVariables(childBottomPattern.getVariable(), MergedVariable.BOTTOM);
 				gatherAssignments(childBottomPattern.getAssignment(), ASSIGNMENT);
 				bottomPredicates.addAll(ClassUtil.nullFree(childBottomPattern.getPredicate()));
 				gatherVariables(childBottomPattern.getRealizedVariable(), MergedVariable.BOTTOM);
-				gatherVariables(childBottomPattern.getVariable(), MergedVariable.BOTTOM);
 			}
 			for (@NonNull Area parentArea : getParentAreas()) {
 				assert (parentArea != thisArea);
@@ -172,10 +172,10 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 				guardPredicates.addAll(ClassUtil.nullFree(parentGuardPattern.getPredicate()));
 				gatherVariables(parentGuardPattern.getVariable(), MergedVariable.GUARD);
 				@SuppressWarnings("null")@NonNull BottomPattern parentBottomPattern = parentArea.getBottomPattern();
+				gatherVariables(parentBottomPattern.getVariable(), MergedVariable.GUARD);			// Hoist
 				gatherAssignments(parentBottomPattern.getAssignment(), PREDICATE);
 				guardPredicates.addAll(ClassUtil.nullFree(parentBottomPattern.getPredicate()));									// Hoist
 				gatherVariables(parentBottomPattern.getRealizedVariable(), MergedVariable.GUARD);	// Hoist
-				gatherVariables(parentBottomPattern.getVariable(), MergedVariable.GUARD);			// Hoist
 			}
 			for (@NonNull Area siblingArea : getSiblingAreas()) {
 				if (siblingArea != thisArea) {
@@ -183,13 +183,21 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 					guardPredicates.addAll(ClassUtil.nullFree(siblingGuardPattern.getPredicate()));
 					gatherVariables(siblingGuardPattern.getVariable(), MergedVariable.GUARD);
 					@SuppressWarnings("null")@NonNull BottomPattern siblingBottomPattern = siblingArea.getBottomPattern();
+					gatherVariables(siblingBottomPattern.getVariable(), MergedVariable.BOTTOM);		// FIXME legacy compatibility
 					gatherAssignments(siblingBottomPattern.getAssignment(), ASSIGNMENT);
 					bottomPredicates.addAll(ClassUtil.nullFree(siblingBottomPattern.getPredicate()));		// FIXME legacy compatibility
 					gatherVariables(siblingBottomPattern.getRealizedVariable(), MergedVariable.BOTTOM);
-					gatherVariables(siblingBottomPattern.getVariable(), MergedVariable.BOTTOM);		// FIXME legacy compatibility
 				}
 			}
 			return true;
+		}
+
+		protected @Nullable MergedVariable basicGetMergedVariable(@NonNull String name) {
+			LinkedHashMap<@NonNull String, @NonNull MergedVariable> variableName2mergedVariables2 = variableName2mergedVariables;
+			if (variableName2mergedVariables2 == null) {
+				return null;
+			}
+			return variableName2mergedVariables2.get(name);
 		}
 
 		private void gatherAssignments(@NonNull Iterable</*@NonNull*/ Assignment> aIns, boolean asAssignment) {
@@ -255,7 +263,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 
 		protected abstract @NonNull Mapping getMapping();
 
-		private @NonNull MergedVariable getMergedVariable(@NonNull String name) {
+		protected @NonNull MergedVariable getMergedVariable(@NonNull String name) {
 			LinkedHashMap<@NonNull String, @NonNull MergedVariable> variableName2mergedVariables2 = variableName2mergedVariables;
 			if (variableName2mergedVariables2 == null) {
 				variableName2mergedVariables = variableName2mergedVariables2 = new LinkedHashMap<@NonNull String, @NonNull MergedVariable>();
@@ -576,6 +584,17 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		}
 
 		@Override
+		protected @NonNull MergedVariable getMergedVariable(@NonNull String name) {
+			for (@NonNull MergedDomain mergedDomain : uTypedModel2mergedDomain.values()) {
+				MergedVariable mergedVariable = mergedDomain.basicGetMergedVariable(name);
+				if (mergedVariable != null) {
+					return mergedVariable;
+				}
+			}
+			return super.getMergedVariable(name);
+		}
+
+		@Override
 		protected @NonNull Iterable<@NonNull Mapping> getParentAreas() {
 			return parentMappings;
 		}
@@ -714,7 +733,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 				VariableAssignment mVariableAssignment = createVisitor.create(assignments2.get(0));
 				assert mVariableAssignment != null;
 				for (@NonNull VariableAssignment uVariableAssignment : assignments2) {
-					createVisitor.getContext().addTrace(uVariableAssignment, mVariableAssignment);
+//					createVisitor.getContext().addTrace(uVariableAssignment, mVariableAssignment);
 				}
 			}
 		}
