@@ -636,8 +636,8 @@ public abstract class AbstractQVTc2QVTc
 	}
 		
     protected final @NonNull EnvironmentFactory environmentFactory;
-    protected final @NonNull AbstractCreateVisitor<?> createVisitor;
-    protected final @NonNull AbstractUpdateVisitor<?> updateVisitor;
+    protected final @NonNull AbstractCreateVisitor<@NonNull ?> createVisitor;
+    protected final @NonNull AbstractUpdateVisitor<@NonNull ?> updateVisitor;
 	private TypedModel middleTypedModelTarget = null;
 
     /**
