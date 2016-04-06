@@ -260,9 +260,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 				else {
 					OCLExpression ownedInit = variable.getOwnedInit();
 					if (ownedInit != null) {
-						SimpleNode initNode = ownedInit.accept(expressionAnalyzer);
-						assert initNode != null;
-						variable2simpleNode.put(variable, initNode);
+						analyzeVariable(variable, ownedInit);
 					}
 					else {
 						Nodes.GUARD.createSimpleNode(this, variable);		// FIXME ?? should have been guard not bottom
@@ -326,6 +324,14 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 				}
 			}
 		}
+	}
+
+	private @NonNull SimpleNode analyzeVariable(@NonNull Variable variable, @NonNull OCLExpression ownedInit) {
+		SimpleNode initNode = ownedInit.accept(expressionAnalyzer);
+		assert initNode != null;
+		initNode.addTypedElement(variable);
+		addVariableNode(variable, initNode);
+		return initNode;
 	}
 
 	@Override
@@ -467,7 +473,15 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 
 	public @NonNull SimpleNode getReferenceNode(@NonNull VariableDeclaration variable) {
 		SimpleNode node = variable2simpleNode.get(variable);
-		assert node != null;
+		if (node == null) {
+			if (variable instanceof Variable) {
+				OCLExpression ownedInit = ((Variable)variable).getOwnedInit();
+				if (ownedInit != null) {
+					node = analyzeVariable((Variable) variable, ownedInit);
+				}
+			}
+		}
+		assert node != null : "No variable2simpleNode entry for " + variable;
 		return node;
 /*		if (variable instanceof RealizedVariable) {
 			return Nodes.REALIZED_VARIABLE.createNode(this, (RealizedVariable)variable);
