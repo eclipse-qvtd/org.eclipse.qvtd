@@ -148,13 +148,22 @@ public interface PSeqToStmPackage extends EPackage {
 	int TSTATE_TO_STATE__ST1 = 1;
 
 	/**
+	 * The feature id for the '<em><b>Set</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TSTATE_TO_STATE__SET = 2;
+
+	/**
 	 * The feature id for the '<em><b>L</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TSTATE_TO_STATE__L = 2;
+	int TSTATE_TO_STATE__L = 3;
 
 	/**
 	 * The feature id for the '<em><b>I</b></em>' reference.
@@ -163,7 +172,16 @@ public interface PSeqToStmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TSTATE_TO_STATE__I = 3;
+	int TSTATE_TO_STATE__I = 4;
+
+	/**
+	 * The feature id for the '<em><b>4</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TSTATE_TO_STATE__4 = 5;
 
 	/**
 	 * The feature id for the '<em><b>St2</b></em>' reference.
@@ -172,7 +190,7 @@ public interface PSeqToStmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TSTATE_TO_STATE__ST2 = 4;
+	int TSTATE_TO_STATE__ST2 = 6;
 
 	/**
 	 * The feature id for the '<em><b>S</b></em>' reference.
@@ -181,7 +199,7 @@ public interface PSeqToStmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TSTATE_TO_STATE__S = 5;
+	int TSTATE_TO_STATE__S = 7;
 
 	/**
 	 * The number of structural features of the '<em>TState To State</em>' class.
@@ -190,7 +208,7 @@ public interface PSeqToStmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TSTATE_TO_STATE_FEATURE_COUNT = 6;
+	int TSTATE_TO_STATE_FEATURE_COUNT = 8;
 
 	/**
 	 * The number of operations of the '<em>TState To State</em>' class.
@@ -278,6 +296,17 @@ public interface PSeqToStmPackage extends EPackage {
 	EReference getTStateToState_St1();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#getSet <em>Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Set</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#getSet()
+	 * @see #getTStateToState()
+	 * @generated
+	 */
+	EReference getTStateToState_Set();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#getL <em>L</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -298,6 +327,17 @@ public interface PSeqToStmPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTStateToState_I();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#get_4 <em>4</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>4</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#get_4()
+	 * @see #getTStateToState()
+	 * @generated
+	 */
+	EReference getTStateToState__4();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#getSt2 <em>St2</em>}'.
@@ -405,6 +445,14 @@ public interface PSeqToStmPackage extends EPackage {
 		EReference TSTATE_TO_STATE__ST1 = eINSTANCE.getTStateToState_St1();
 
 		/**
+		 * The meta object literal for the '<em><b>Set</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TSTATE_TO_STATE__SET = eINSTANCE.getTStateToState_Set();
+
+		/**
 		 * The meta object literal for the '<em><b>L</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -419,6 +467,14 @@ public interface PSeqToStmPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TSTATE_TO_STATE__I = eINSTANCE.getTStateToState_I();
+
+		/**
+		 * The meta object literal for the '<em><b>4</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TSTATE_TO_STATE__4 = eINSTANCE.getTStateToState__4();
 
 		/**
 		 * The meta object literal for the '<em><b>St2</b></em>' reference feature.

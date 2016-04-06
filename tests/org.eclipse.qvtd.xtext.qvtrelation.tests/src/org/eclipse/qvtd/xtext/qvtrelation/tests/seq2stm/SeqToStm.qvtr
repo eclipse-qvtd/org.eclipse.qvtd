@@ -28,7 +28,7 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
           enforce domain stm s:StateMachine{name = sn};
      }
      
-/*     top relation StateToState
+     top relation StateToState
      {
           sn: String;
 
@@ -36,8 +36,8 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
           st1:State 
           {
                name = sn,
---               lifeline = set:Set(LifeLine){l:LifeLine{interaction = i:Interaction{}} ++ _}
-               lifeline = l:LifeLine{interaction = i:Interaction{}}
+               lifeline = set:Set(LifeLine){l:LifeLine{interaction = i:Interaction{}} ++ _}
+--               lifeline = l:LifeLine{interaction = i:Interaction{}}
           };
 
           enforce domain stm 
@@ -51,7 +51,7 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
           {
                InteractionToStateMachine(i, s);
           }
-     } */
+     }
      
 /*     top relation MessageToTransition
      {

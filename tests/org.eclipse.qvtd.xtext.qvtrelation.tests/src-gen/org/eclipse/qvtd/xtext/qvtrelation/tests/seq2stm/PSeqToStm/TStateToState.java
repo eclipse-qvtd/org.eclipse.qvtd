@@ -10,6 +10,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.SeqMM.Interaction;
@@ -29,8 +30,10 @@ import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.StmcMM.StateMachine;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#getSn <em>Sn</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#getSt1 <em>St1</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#getSet <em>Set</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#getL <em>L</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#getI <em>I</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#get_4 <em>4</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#getSt2 <em>St2</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState#getS <em>S</em>}</li>
  * </ul>
@@ -94,6 +97,22 @@ public interface TStateToState extends EObject {
 	void setSt1(State value);
 
 	/**
+	 * Returns the value of the '<em><b>Set</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.SeqMM.LifeLine}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Set</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Set</em>' reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.PSeqToStmPackage#getTStateToState_Set()
+	 * @model ordered="false"
+	 * @generated
+	 */
+	EList<LifeLine> getSet();
+
+	/**
 	 * Returns the value of the '<em><b>L</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -146,6 +165,22 @@ public interface TStateToState extends EObject {
 	 * @generated
 	 */
 	void setI(Interaction value);
+
+	/**
+	 * Returns the value of the '<em><b>4</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.SeqMM.LifeLine}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>4</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>4</em>' reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.PSeqToStmPackage#getTStateToState__4()
+	 * @model ordered="false"
+	 * @generated
+	 */
+	EList<LifeLine> get_4();
 
 	/**
 	 * Returns the value of the '<em><b>St2</b></em>' reference.

@@ -30,12 +30,14 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
+import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
+import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTm2QVTp;
 import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -48,8 +50,12 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
+import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.PSeqToStmPackage;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.SeqMM.SeqMMPackage;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.StmcMM.StmcMMPackage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -93,7 +99,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			Map<@NonNull String, @NonNull Map<AbstractCompilerChain.Key<?>, Object>> options = new HashMap<@NonNull String, @NonNull Map<AbstractCompilerChain.Key<?>, Object>>();
 			URI prefixURI = testFolderURI.appendSegment(testFileName);
 			compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), prefixURI, options);
-			compilerChain.setOption(AbstractCompilerChain.DEFAULT_STEP, AbstractCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+			compilerChain.setOption(AbstractCompilerChain.DEFAULT_STEP, AbstractCompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
 	    	return compilerChain.compile(outputName);
 		}
 
@@ -176,7 +182,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 
 		public @NonNull Map<Object, Object> getSaveOptions() {		
-			return TestsXMLUtil.defaultSavingOptions;
+			Map<Object, Object> saveOptions = new HashMap<Object, Object>(TestsXMLUtil.defaultSavingOptions);
+			saveOptions.put(ASResource.OPTION_NORMALIZE_CONTENTS, Boolean.TRUE);
+			return saveOptions;
 		}
 				
 		private void loadGenModel(@NonNull URI genModelURI) {
@@ -236,6 +244,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		super.setUp();
 		OCLstdlib.install();
 		QVTrTestUtil.doQVTrelationSetup();
+		QVTcTestUtil.doQVTcoreSetup();
 		QVTiTestUtil.doQVTimperativeSetup();
 //		QVTrelationPivotStandaloneSetup.doSetup();
 //		QVTimperativePivotStandaloneSetup.doSetup();
@@ -275,7 +284,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		AbstractTransformer.EXCEPTIONS.setState(true);
 		AbstractTransformer.INVOCATIONS.setState(true);
 		Scheduler.DEBUG_GRAPHS.setState(true);;
-    	MyQVT myQVT = new MyQVT("seq2stm");
+    	QVTm2QVTp.PARTITIONING.setState(true);
+    	MyQVT myQVT = new MyQVT("seq2stm", SeqMMPackage.eINSTANCE, StmcMMPackage.eINSTANCE, PSeqToStmPackage.eINSTANCE);
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
 	    	Transformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm");

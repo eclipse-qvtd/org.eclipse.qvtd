@@ -188,7 +188,7 @@ public class PSeqToStmPackageImpl extends EPackageImpl implements PSeqToStmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTStateToState_L() {
+	public EReference getTStateToState_Set() {
 		return (EReference)tStateToStateEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -197,7 +197,7 @@ public class PSeqToStmPackageImpl extends EPackageImpl implements PSeqToStmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTStateToState_I() {
+	public EReference getTStateToState_L() {
 		return (EReference)tStateToStateEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -206,7 +206,7 @@ public class PSeqToStmPackageImpl extends EPackageImpl implements PSeqToStmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTStateToState_St2() {
+	public EReference getTStateToState_I() {
 		return (EReference)tStateToStateEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -215,8 +215,26 @@ public class PSeqToStmPackageImpl extends EPackageImpl implements PSeqToStmPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTStateToState_S() {
+	public EReference getTStateToState__4() {
 		return (EReference)tStateToStateEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTStateToState_St2() {
+		return (EReference)tStateToStateEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTStateToState_S() {
+		return (EReference)tStateToStateEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -255,8 +273,10 @@ public class PSeqToStmPackageImpl extends EPackageImpl implements PSeqToStmPacka
 		tStateToStateEClass = createEClass(TSTATE_TO_STATE);
 		createEAttribute(tStateToStateEClass, TSTATE_TO_STATE__SN);
 		createEReference(tStateToStateEClass, TSTATE_TO_STATE__ST1);
+		createEReference(tStateToStateEClass, TSTATE_TO_STATE__SET);
 		createEReference(tStateToStateEClass, TSTATE_TO_STATE__L);
 		createEReference(tStateToStateEClass, TSTATE_TO_STATE__I);
+		createEReference(tStateToStateEClass, TSTATE_TO_STATE__4);
 		createEReference(tStateToStateEClass, TSTATE_TO_STATE__ST2);
 		createEReference(tStateToStateEClass, TSTATE_TO_STATE__S);
 	}
@@ -303,8 +323,10 @@ public class PSeqToStmPackageImpl extends EPackageImpl implements PSeqToStmPacka
 		initEClass(tStateToStateEClass, TStateToState.class, "TStateToState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTStateToState_Sn(), ecorePackage.getEString(), "sn", null, 1, 1, TStateToState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTStateToState_St1(), theSeqMMPackage.getState(), null, "st1", null, 1, 1, TStateToState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTStateToState_Set(), theSeqMMPackage.getLifeLine(), null, "set", null, 0, -1, TStateToState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTStateToState_L(), theSeqMMPackage.getLifeLine(), null, "l", null, 1, 1, TStateToState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTStateToState_I(), theSeqMMPackage.getInteraction(), null, "i", null, 1, 1, TStateToState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTStateToState__4(), theSeqMMPackage.getLifeLine(), null, "_4", null, 0, -1, TStateToState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTStateToState_St2(), theStmcMMPackage.getState(), null, "st2", null, 1, 1, TStateToState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTStateToState_S(), theStmcMMPackage.getStateMachine(), null, "s", null, 1, 1, TStateToState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

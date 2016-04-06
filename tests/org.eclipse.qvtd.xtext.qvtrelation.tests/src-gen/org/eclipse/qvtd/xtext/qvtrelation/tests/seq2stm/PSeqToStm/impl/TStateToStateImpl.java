@@ -10,14 +10,17 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.PSeqToStmPackage;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.TStateToState;
 
@@ -37,8 +40,10 @@ import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.StmcMM.StateMachine;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.impl.TStateToStateImpl#getSn <em>Sn</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.impl.TStateToStateImpl#getSt1 <em>St1</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.impl.TStateToStateImpl#getSet <em>Set</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.impl.TStateToStateImpl#getL <em>L</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.impl.TStateToStateImpl#getI <em>I</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.impl.TStateToStateImpl#get_4 <em>4</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.impl.TStateToStateImpl#getSt2 <em>St2</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.impl.TStateToStateImpl#getS <em>S</em>}</li>
  * </ul>
@@ -77,6 +82,16 @@ public class TStateToStateImpl extends MinimalEObjectImpl.Container implements T
 	protected State st1;
 
 	/**
+	 * The cached value of the '{@link #getSet() <em>Set</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSet()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<LifeLine> set;
+
+	/**
 	 * The cached value of the '{@link #getL() <em>L</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -95,6 +110,16 @@ public class TStateToStateImpl extends MinimalEObjectImpl.Container implements T
 	 * @ordered
 	 */
 	protected Interaction i;
+
+	/**
+	 * The cached value of the '{@link #get_4() <em>4</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_4()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<LifeLine> _4;
 
 	/**
 	 * The cached value of the '{@link #getSt2() <em>St2</em>}' reference.
@@ -199,6 +224,18 @@ public class TStateToStateImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<LifeLine> getSet() {
+		if (set == null) {
+			set = new EObjectResolvingEList<LifeLine>(LifeLine.class, this, PSeqToStmPackage.TSTATE_TO_STATE__SET);
+		}
+		return set;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public LifeLine getL() {
 		if (l != null && l.eIsProxy()) {
 			InternalEObject oldL = (InternalEObject)l;
@@ -268,6 +305,18 @@ public class TStateToStateImpl extends MinimalEObjectImpl.Container implements T
 		i = newI;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PSeqToStmPackage.TSTATE_TO_STATE__I, oldI, i));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<LifeLine> get_4() {
+		if (_4 == null) {
+			_4 = new EObjectResolvingEList<LifeLine>(LifeLine.class, this, PSeqToStmPackage.TSTATE_TO_STATE__4);
+		}
+		return _4;
 	}
 
 	/**
@@ -359,12 +408,16 @@ public class TStateToStateImpl extends MinimalEObjectImpl.Container implements T
 			case PSeqToStmPackage.TSTATE_TO_STATE__ST1:
 				if (resolve) return getSt1();
 				return basicGetSt1();
+			case PSeqToStmPackage.TSTATE_TO_STATE__SET:
+				return getSet();
 			case PSeqToStmPackage.TSTATE_TO_STATE__L:
 				if (resolve) return getL();
 				return basicGetL();
 			case PSeqToStmPackage.TSTATE_TO_STATE__I:
 				if (resolve) return getI();
 				return basicGetI();
+			case PSeqToStmPackage.TSTATE_TO_STATE__4:
+				return get_4();
 			case PSeqToStmPackage.TSTATE_TO_STATE__ST2:
 				if (resolve) return getSt2();
 				return basicGetSt2();
@@ -380,6 +433,7 @@ public class TStateToStateImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -389,11 +443,19 @@ public class TStateToStateImpl extends MinimalEObjectImpl.Container implements T
 			case PSeqToStmPackage.TSTATE_TO_STATE__ST1:
 				setSt1((State)newValue);
 				return;
+			case PSeqToStmPackage.TSTATE_TO_STATE__SET:
+				getSet().clear();
+				getSet().addAll((Collection<? extends LifeLine>)newValue);
+				return;
 			case PSeqToStmPackage.TSTATE_TO_STATE__L:
 				setL((LifeLine)newValue);
 				return;
 			case PSeqToStmPackage.TSTATE_TO_STATE__I:
 				setI((Interaction)newValue);
+				return;
+			case PSeqToStmPackage.TSTATE_TO_STATE__4:
+				get_4().clear();
+				get_4().addAll((Collection<? extends LifeLine>)newValue);
 				return;
 			case PSeqToStmPackage.TSTATE_TO_STATE__ST2:
 				setSt2((org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.StmcMM.State)newValue);
@@ -419,11 +481,17 @@ public class TStateToStateImpl extends MinimalEObjectImpl.Container implements T
 			case PSeqToStmPackage.TSTATE_TO_STATE__ST1:
 				setSt1((State)null);
 				return;
+			case PSeqToStmPackage.TSTATE_TO_STATE__SET:
+				getSet().clear();
+				return;
 			case PSeqToStmPackage.TSTATE_TO_STATE__L:
 				setL((LifeLine)null);
 				return;
 			case PSeqToStmPackage.TSTATE_TO_STATE__I:
 				setI((Interaction)null);
+				return;
+			case PSeqToStmPackage.TSTATE_TO_STATE__4:
+				get_4().clear();
 				return;
 			case PSeqToStmPackage.TSTATE_TO_STATE__ST2:
 				setSt2((org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.StmcMM.State)null);
@@ -447,10 +515,14 @@ public class TStateToStateImpl extends MinimalEObjectImpl.Container implements T
 				return SN_EDEFAULT == null ? sn != null : !SN_EDEFAULT.equals(sn);
 			case PSeqToStmPackage.TSTATE_TO_STATE__ST1:
 				return st1 != null;
+			case PSeqToStmPackage.TSTATE_TO_STATE__SET:
+				return set != null && !set.isEmpty();
 			case PSeqToStmPackage.TSTATE_TO_STATE__L:
 				return l != null;
 			case PSeqToStmPackage.TSTATE_TO_STATE__I:
 				return i != null;
+			case PSeqToStmPackage.TSTATE_TO_STATE__4:
+				return _4 != null && !_4.isEmpty();
 			case PSeqToStmPackage.TSTATE_TO_STATE__ST2:
 				return st2 != null;
 			case PSeqToStmPackage.TSTATE_TO_STATE__S:

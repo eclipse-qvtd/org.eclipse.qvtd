@@ -24,6 +24,8 @@
         <details key="lower" value="1"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="set" ordered="false" upperBound="-1"
+        eType="ecore:EClass SeqMM.ecore#//LifeLine"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="l" lowerBound="1" eType="ecore:EClass SeqMM.ecore#//LifeLine">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="TStateToState"/>
@@ -36,6 +38,8 @@
         <details key="lower" value="1"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="_4" ordered="false" upperBound="-1"
+        eType="ecore:EClass SeqMM.ecore#//LifeLine"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="st2" lowerBound="1" eType="ecore:EClass StmcMM.ecore#//State">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="TStateToState"/>
