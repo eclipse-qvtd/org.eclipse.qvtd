@@ -14,6 +14,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.qvtd.compiler,
+ org.eclipse.qvtd.compiler.internal.etl.mtc,
  org.eclipse.qvtd.compiler.internal.qvtr2qvtc,
  org.eclipse.qvtd.compiler.internal.schedule2qvti,
  org.eclipse.qvtd.compiler.internal.scheduler
