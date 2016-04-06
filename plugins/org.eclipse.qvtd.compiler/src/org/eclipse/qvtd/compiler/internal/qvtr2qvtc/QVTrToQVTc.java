@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -46,8 +47,9 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -64,7 +66,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -121,13 +122,12 @@ public class QVTrToQVTc
 		}
 	}
 	
-	private final @NonNull EnvironmentFactory environmentFactory;	
+	protected final @NonNull EnvironmentFactory environmentFactory;	
 	private final @NonNull Resource qvtrResource;
 	private final @NonNull Resource qvtcResource;
 	private final @NonNull Map<@NonNull Element, @NonNull Element> target2source = new HashMap<@NonNull Element, @NonNull Element>();
 	private final @NonNull Map<@NonNull Element, @NonNull List<@NonNull Element>> source2targets = new HashMap<@NonNull Element, @NonNull List<@NonNull Element>>();
 	
-	private final @NonNull List<@NonNull EObject> potentialOrphans = new ArrayList<@NonNull EObject>();
 	private final @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
 	private final @NonNull List<@NonNull Transformation> coreTransformations = new ArrayList<@NonNull Transformation>();
 	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relationToTraceClass = new HashMap<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class>();
@@ -201,6 +201,11 @@ public class QVTrToQVTc
 	 * The core Variable for each relation Variable
 	 */
 	private final @NonNull Map<@NonNull Variable, @NonNull Variable> variable2variable = new HashMap<@NonNull Variable, @NonNull Variable>();
+	
+	/**
+	 * The names allocated in each relation.
+	 */
+	private final @NonNull Map<@NonNull Relation, @NonNull Map<@NonNull String, @NonNull Element>> rule2name2element = new HashMap<@NonNull Relation, @NonNull Map<@NonNull String, @NonNull Element>>();
 	
 	public QVTrToQVTc(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource) {	
 		this.environmentFactory = environmentFactory;
@@ -279,10 +284,6 @@ public class QVTrToQVTc
 	    	}
 	    }
 	}
-	
-	public void addOrphan(@NonNull EObject eObject) {
-		potentialOrphans.add(eObject);
-	}
 
 	/*public*/ @NonNull <T extends Element> T copy(@NonNull T eIn, @Nullable Element sibling) {
 //		if (eIn == null) {
@@ -296,43 +297,6 @@ public class QVTrToQVTc
 		return eOut;
 	}
 
-	public @NonNull OperationCallExp createOperationCallExp() {
-		OperationCallExp oce = PivotFactory.eINSTANCE.createOperationCallExp();
-		assert oce != null;
-		addOrphan(oce);
-		return oce;
-	}
-
-
-	public @NonNull Predicate createPredicate() {
-		Predicate pd = QVTbaseFactory.eINSTANCE.createPredicate();
-		assert pd != null;
-		addOrphan(pd);
-		return pd;
-	}
-
-	public @NonNull PropertyAssignment createPropertyAssignment() {
-		PropertyAssignment a = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
-		assert a != null;
-		addOrphan(a);
-		return a;
-	}
-	
-	
-	public @NonNull PropertyCallExp createPropertyCallExp() {
-		PropertyCallExp pce = PivotFactory.eINSTANCE.createPropertyCallExp();
-		assert pce != null;
-		addOrphan(pce);
-		return pce;
-	}
-
-	public @NonNull VariableExp createVariableExp(@NonNull Variable asVariable) {
-		VariableExp ve = PivotUtil.createVariableExp(asVariable);
-		assert ve != null;
-		addOrphan(ve);
-		return ve;
-	}
-
 	// Save the qvtc resource
 	public void dispose() {
 		// What about the trace model? we need to separate them
@@ -343,15 +307,21 @@ public class QVTrToQVTc
 		for (@NonNull EObject eObject : qvtrResource.getContents()) {
 			if (eObject instanceof RelationModel) {
 				transformToTracePackages(tracePackages, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
+				CompilerUtil.normalizeNameables(tracePackages);
 			}
 		}
 		for (@NonNull EObject eObject : qvtrResource.getContents()) {
 			if (eObject instanceof RelationModel) {
 				transformToCoreTransformations(coreTransformations, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
+				CompilerUtil.normalizeNameables(coreTransformations);
 			}
 		}
-		for (@NonNull RelationalTransformation relationalTransformation : relationalTransformation2coreTransformation.keySet()) {
-			for (@NonNull Rule rule : ClassUtil.nullFree(relationalTransformation.getRule())) {
+		List<@NonNull RelationalTransformation> relationalTransformations = new ArrayList<@NonNull RelationalTransformation>(relationalTransformation2coreTransformation.keySet());
+		Collections.sort(relationalTransformations, NameUtil.NAMEABLE_COMPARATOR);
+		for (@NonNull RelationalTransformation relationalTransformation : relationalTransformations) {
+			List<@NonNull Rule> rules = new ArrayList<@NonNull Rule>(ClassUtil.nullFree(relationalTransformation.getRule()));
+			Collections.sort(rules, NameUtil.NAMEABLE_COMPARATOR);
+			for (@NonNull Rule rule : rules) {
 				if (rule instanceof Relation) {
 					Relation relation = (Relation)rule;
 					if (relation.isIsTopLevel()) {
@@ -360,9 +330,11 @@ public class QVTrToQVTc
 					}
 				}
 			}
-		}
-		for (@NonNull RelationalTransformation relationalTransformation : relationalTransformation2coreTransformation.keySet()) {
-			for (@NonNull Rule rule : ClassUtil.nullFree(relationalTransformation.getRule())) {
+//		}
+//		for (@NonNull RelationalTransformation relationalTransformation : relationalTransformations) {
+//			List<@NonNull Rule> rules = new ArrayList<@NonNull Rule>(ClassUtil.nullFree(relationalTransformation.getRule()));
+//			Collections.sort(rules, NameUtil.NAMEABLE_COMPARATOR);
+			for (@NonNull Rule rule : rules) {
 				if (rule instanceof Relation) {
 					Relation relation = (Relation)rule;
 					if (!relation.isIsTopLevel()) {
@@ -373,14 +345,16 @@ public class QVTrToQVTc
 			}
 		}
 		for (@NonNull Transformation coreTransformation : relationalTransformation2coreTransformation.values()) {
+			List<DebugTraceBack> debugTraceBacks = coreTransformation.getOwnedDebugTraceBacks();
 			for (@NonNull Element target : target2source.keySet()) {
 				if (QVTbaseUtil.getContainingTransformation(target) == coreTransformation) {
 					DebugTraceBack traceBack = QVTbaseFactory.eINSTANCE.createDebugTraceBack();
 					traceBack.setTarget(target);
 // FIXME true source URI					traceBack.getSources().add(target2source.get(target));
-					coreTransformation.getOwnedDebugTraceBacks().add(traceBack);
+					debugTraceBacks.add(traceBack);
 				}
 			}
+//			CompilerUtil.normalizeNameables(debugTraceBacks);
 		}
 	}
 
@@ -398,6 +372,10 @@ public class QVTrToQVTc
 		DomainPattern domainPattern = pattern.get(0);
 		assert domainPattern != null;
 		return domainPattern;
+	}
+
+	public @NonNull EnvironmentFactory getEnvironmentFactory() {
+		return environmentFactory;
 	}
 	
 	/*public*/ @NonNull Relation getInvokingRelationForRelationCallExp(@NonNull RelationCallExp e) {	
@@ -442,6 +420,31 @@ public class QVTrToQVTc
 	}
 	
 	/* =============  Queries ============= */
+	
+	public @NonNull String getSafeName(@NonNull Relation relation, @NonNull Element newElement, @NonNull String name) {
+		Map<@NonNull String, @NonNull Element> name2element = rule2name2element.get(relation);
+		if (name2element == null) {
+			name2element = new HashMap<@NonNull String, @NonNull Element>();
+			rule2name2element.put(relation, name2element);
+		}
+		Element oldElement = name2element.get(name);
+		if (oldElement == newElement) {
+			return name;
+		}
+		if (oldElement == null) {
+			name2element.put(name, newElement);
+			return name;
+		}
+		for (int i = 1; true; i++) {
+			String newName = name + "_" + i;
+			oldElement = name2element.get(newName);
+			if (oldElement == null) {
+				name2element.put(newName, newElement);
+				return newName;
+			}
+		}
+	}
+	
 	// TODO bug 453863 // ?? this is suspect for more than 2 domains. // FIXME What is 'shared'? a) any two domains b) output/any-input c) all domains
 	/**
 	 * Return the variables that are used by all domains of the relation.
@@ -628,11 +631,12 @@ public class QVTrToQVTc
         this.coreModel.getOwnedPackages().add(corePackage);
         asResource.getContents().add(this.coreModel);
         corePackage.getOwnedClasses().addAll(coreTransformations);
-		for (EObject eObject : potentialOrphans) {
-			if (eObject.eContainer() == null) {
-				asResource.getContents().add(eObject);
-			}
-		}
+//		-- scan for dangling references if this is really wanted
+//		for (EObject eObject : potentialOrphans) {
+//			if (eObject.eContainer() == null) {
+//				asResource.getContents().add(eObject);
+//			}
+//		}
 		asResource.save(options);
 	}
 

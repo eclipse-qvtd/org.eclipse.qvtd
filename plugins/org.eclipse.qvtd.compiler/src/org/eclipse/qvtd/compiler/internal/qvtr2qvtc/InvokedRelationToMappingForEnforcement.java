@@ -66,7 +66,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				rds.add((RelationDomain) d);
 			}
 			rds.remove(rd); // guard
-			for (RelationDomain ord : rds) {
+			for (@NonNull RelationDomain ord : rds) {
 				// check
 				DomainPattern dp = qvtr2qvtc.getDomainPattern(ord);
 				if (dp.getTemplateExpression() instanceof ObjectTemplateExp) {
@@ -130,32 +130,18 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 
 		private void doRInvokerToMGuardPredicate(@NonNull VariableExp ve) throws CompilerChainException {
-			// when
-			@NonNull Type tc = qvtr2qvtc.getTraceClass(ir);
-			// check
+			Type tc = qvtr2qvtc.getTraceClass(ir);
 			Variable v = (Variable) ClassUtil.nonNullState(ve.getReferredVariable());
 			String vn = ClassUtil.nonNullState(v.getName());
 			Variable dv = ClassUtil.nonNullState(rd.getRootVariable().get(0));
-			// init
 			Variable vd = qvtr2qvtc.whenVariable(mg, tc.getName()+"_v", tc);
-			Predicate pd = qvtr2qvtc.createPredicate();
-			OperationCallExp ee = qvtr2qvtc.createOperationCallExp();
-			PropertyCallExp pe = qvtr2qvtc.createPropertyCallExp();
-			// where
 			Variable mdv = doRVarToMVar(dv);
-			// assign
-			VariableExp mve = qvtr2qvtc.createVariableExp(vd);
-			VariableExp ave = qvtr2qvtc.createVariableExp(mdv);
-			pd.setConditionExpression(ee);
-			ee.setOwnedSource(pe);
-			pe.setOwnedSource(mve);
-			@NonNull Property pep = getProperty(vd.getType(), vn);
-			pe.setReferredProperty(pep);
-			pe.setType(pep.getType());
-			ee.setReferredOperation(getEqualsOperation());
-			ee.setType(qvtr2qvtc.getStandardLibrary().getBooleanType());
-			ee.getOwnedArguments().add(ave);
-			
+			VariableExp mve = createVariableExp(vd);
+			VariableExp ave = createVariableExp(mdv);
+			Property pep = getProperty(vd.getType(), vn);
+			PropertyCallExp pe = createPropertyCallExp(mve, pep);
+			OperationCallExp ee = createOperationCallExp(pe, "=", ave);
+			Predicate pd = createPredicate(ee);
 			mg.getPredicate().add(pd);
 		}
 

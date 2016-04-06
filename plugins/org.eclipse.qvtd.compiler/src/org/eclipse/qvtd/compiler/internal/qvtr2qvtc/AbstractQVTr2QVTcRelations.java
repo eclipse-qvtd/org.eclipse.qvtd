@@ -11,14 +11,19 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.CollectionLiteralExp;
+import org.eclipse.ocl.pivot.CollectionLiteralPart;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Property;
@@ -35,12 +40,14 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -52,7 +59,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
-/*public*/ abstract class AbstractQVTr2QVTcRelations
+/*public*/ abstract class AbstractQVTr2QVTcRelations extends QVTcoreHelper
 {
 	protected abstract class AbstractRelationDomain2CoreDomain 
 	{
@@ -74,7 +81,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		protected final @NonNull GuardPattern dg;									// The resultant enforced domain guard pattern
 		protected final @NonNull BottomPattern db;									// The resultant enforced domain bottom pattern
 		protected final @NonNull RealizedVariable tcv;								// The trace class variable (the middle variable identifying the middle object)
-			
+		
 		public AbstractRelationDomain2CoreDomain(@NonNull RelationDomain rd, @NonNull String coreMappingName) {
 			this.rd = rd;
 			//
@@ -113,11 +120,193 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}*/
 		
 		// 10
-		protected void doRDomainPatternToMDBottomPattern(@NonNull ObjectTemplateExp pte) throws CompilerChainException {
-			doRDomainPatternToMDBottomPatternComposite(pte);
-			doRDomainPatternToMDBottomPatternSimpleNonVarExpr(pte);
-		    doRDomainPatternToMDBottomPatternSimpleUnSharedVarExpr(pte);
-		    doRDomainPatternToMDBottomPatternSimpleSharedVarExpr(pte);
+		protected void doRDomainPatternToMDBottomPattern(@NonNull ObjectTemplateExp te) throws CompilerChainException {
+			Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
+			Variable vte = ClassUtil.nonNullState(te.getBindsTo());
+			for (@NonNull PropertyTemplateItem pt : ClassUtil.nullFree(te.getPart())) {
+				Property pp = ClassUtil.nonNullState(pt.getReferredProperty());
+				String pn = pp.getName();
+				Variable mvte = doRVarToMVar(vte);
+			    Property tp = getProperty(mvte.getType(), pn);
+				VariableExp ve1 = createVariableExp(mvte);
+				OCLExpression ptv = ClassUtil.nonNullState(pt.getValue());
+				if (ptv instanceof VariableExp) {
+					/**
+					 * Each PropertyTemplateItem whose value is a simple VariableExp
+					 * converts to a domain(unshared) / middle(shared) PropertyAssignment.
+					 * 
+					 * ve1:T{tp = ve2}   =>   ve1.tp := ve2;
+					 */
+					VariableExp e = (VariableExp)ptv;
+					Variable vpte = ClassUtil.nonNullState((Variable) e.getReferredVariable());
+					Variable mvpte = doRVarToMVar(vpte);
+					VariableExp ve2 = createVariableExp(mvpte);
+					PropertyAssignment a = createPropertyAssignment(ve1, tp, ve2);
+					if (sharedDomainVars.contains(vpte)) {
+						mb.getAssignment().add(a);
+					}
+					else {
+						db.getAssignment().add(a);
+					}
+				}
+				else if (ptv instanceof CollectionTemplateExp) {
+					/**
+					 * Each PropertyTemplateItem whose value is a CollectionTemplateExp
+					 * converts to a VariableAssignment and Predicates.
+					 * 
+					 * ve1:T1{tp = ve2:Collection{a++b}}		=>   ve2 := ve1.tp;
+					 */
+					CollectionTemplateExp cte = (CollectionTemplateExp) ptv;
+					Variable vcte = ClassUtil.nonNullState(cte.getBindsTo());
+					Variable mvcte = doRVarToMVar(vcte);
+					PropertyCallExp pce =  createPropertyCallExp(ve1, tp);
+					VariableAssignment a = createVariableAssignment(mvcte, pce);
+					mb.getAssignment().add(a);
+					/**
+					 * Each CollectionTemplateExp member that is not a variable
+					 * converts to a VariableAssignment of a new variable the member expression.
+					 * 
+					 * ve1:T1{tp = ve2:Collection{a++b}}		=>   a := a;
+					 */
+					Map<@NonNull OCLExpression, @NonNull Variable> rMember2mVariable = new HashMap<@NonNull OCLExpression, @NonNull Variable>();
+					List<@NonNull OCLExpression> rMembers = ClassUtil.nullFree(cte.getMember());
+					for (@NonNull OCLExpression rMember : rMembers) {
+						Variable mVariable;
+						if (rMember instanceof ObjectTemplateExp) {
+							doRDomainPatternToMDBottomPattern((ObjectTemplateExp)rMember);
+							Variable rVariable = ClassUtil.nonNullState(((ObjectTemplateExp)rMember).getBindsTo());
+							mVariable = doRVarToMVar(rVariable);
+						}
+						else if (rMember instanceof VariableExp) {
+							Variable rVariable = ClassUtil.nonNullState((Variable)((VariableExp)rMember).getReferredVariable());
+							mVariable = doRVarToMVar(rVariable);
+						}
+						else {
+							OCLExpression mMember = doRExpToMExp(rMember);
+							mVariable = createVariable(qvtr2qvtc.getSafeName(r, mMember, "member"), mMember);
+						}
+						rMember2mVariable.put(rMember, mVariable);
+					}
+//					CollectionTemplateExp cte = (CollectionTemplateExp) ptv;
+//					Variable vcte = ClassUtil.nonNullState(cte.getBindsTo());
+//					Variable mvcte = doRVarToMVar(vcte);
+//					PropertyCallExp pce =  createPropertyCallExp(ve1, tp);
+//					VariableAssignment a = createVariableAssignment(mvcte, pce);
+//					mb.getAssignment().add(a);
+
+					
+					CollectionType collectionType = ClassUtil.nonNullState(cte.getReferredCollectionType());
+					int size = rMembers.size();
+					Variable rRest = cte.getRest();
+					if (rRest == null) {
+						/**
+						 * The predicate for a CollectionTemplateExp without a rest variable is a total comparison.
+						 * 
+						 * ve1:T1{tp = ve2:Collection{a++b}}		=>   ve2 := ve1.tp; ve2 = Collection{a,b};
+						 */
+						List<@NonNull CollectionLiteralPart> mParts = new ArrayList<@NonNull CollectionLiteralPart>();
+						for (@NonNull OCLExpression rMember : rMembers) {
+							Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
+							CollectionLiteralPart mItem = createCollectionItem(createVariableExp(mVariable));
+							mParts.add(mItem);
+						}
+						CollectionLiteralExp cle = createCollectionLiteralExp(collectionType, mParts);
+						VariableExp ve2 = createVariableExp(mvcte);
+						OperationCallExp eTerm = createOperationCallExp(ve2, "=", cle);
+						Predicate pd = createPredicate(eTerm);
+						mb.getPredicate().add(pd);
+					}
+					else {
+						Variable mRest = doRVarToMVar(rRest);
+						if (collectionType.isOrdered()) {
+							/**
+							 * The assignment for an ordered CollectionTemplateExp rest variable is a sub-collection assignment.
+							 * 
+							 * ve1:T1{tp = ve2:Collection{a,b++c}}		=>   c := ve2->subCollection(3,ve2->size());
+							 */
+							VariableExp vRest = createVariableExp(rRest);
+							String opName = collectionType.isUnique() ? "subOrderedSet" : "subSequence";
+							IntegerLiteralExp eStart = createIntegerLiteralExp(size);
+							OCLExpression eFinish = createOperationCallExp(createVariableExp(mvcte), "size");
+							OCLExpression eTail = createOperationCallExp(createVariableExp(mvcte), opName, vRest, eStart, eFinish);
+							VariableAssignment aRest = createVariableAssignment(mRest, eTail);
+							mb.getAssignment().add(aRest);
+							/**
+							 * The predicates for each ordered CollectionTemplateExp member variable is an element comparison.
+							 * 
+							 * ve1:T1{tp = ve2:Collection{a,b++c}}		=>   a = ve2->at(1);
+							 */
+							for (int i = 0; i < size; i++) {
+								IntegerLiteralExp eIndex = createIntegerLiteralExp(i+1);
+								OCLExpression vElement = createOperationCallExp(createVariableExp(mvcte), "at", eIndex);
+								OCLExpression rMember = rMembers.get(i);
+								Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
+								OperationCallExp eTerm = createOperationCallExp(createVariableExp(mVariable), "=", vElement);
+								Predicate pd = createPredicate(eTerm);
+								mb.getPredicate().add(pd);
+							}
+						}
+						else { 
+							/**
+							 * The assignment for an unordered CollectionTemplateExp rest variable is a cumulative exclusion.
+							 * 
+							 * ve1:T1{tp = ve2:Collection{a,b++c}}		=>   c := ve2->excluding(a)->excluding(b);
+							 */
+							OCLExpression exclusions = createVariableExp(mvcte);
+							for (@NonNull OCLExpression rMember : rMembers) {
+								Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
+								exclusions = createOperationCallExp(exclusions, "excluding", createVariableExp(mVariable));
+							}
+							VariableAssignment aRest = createVariableAssignment(mRest, exclusions);
+							mb.getAssignment().add(aRest);
+							/**
+							 * The predicates for each unordered CollectionTemplateExp member variable is an excluded inclusion test.
+							 * 
+							 * ve1:T1{tp = ve2:Collection{a,b++c}}		=>   ve2->excluding(a)->includes(b);
+							 */
+							for (int i = 0; i < size; i++) {
+								@NonNull OCLExpression eTerm = createVariableExp(mvcte);
+								for (int j = 0; j < i; j++) {
+									OCLExpression rMember = rMembers.get(j);
+									Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
+									eTerm = createOperationCallExp(eTerm, "excluding", createVariableExp(mVariable));
+								}
+								OCLExpression rMember = rMembers.get(i);
+								Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
+								eTerm = createOperationCallExp(eTerm, "includes", createVariableExp(mVariable));
+								Predicate pd = createPredicate(eTerm);
+								mb.getPredicate().add(pd);
+							}
+						}
+					}
+				}
+				else if (ptv instanceof ObjectTemplateExp) {
+					/**
+					 * Each PropertyTemplateItem whose value is an ObjectTemplateExp
+					 * converts to a PropertyAssignment.
+					 * 
+					 * ve1:T1{tp = ve2:T2{...}}   =>   ve1.tp := ve2;
+					 */
+					ObjectTemplateExp pte = (ObjectTemplateExp) ptv;
+					Variable vpte = ClassUtil.nonNullState(pte.getBindsTo());
+					Variable mvpte = doRVarToMVar(vpte);
+					doRDomainPatternToMDBottomPattern(pte);
+					VariableExp ve2 = createVariableExp(mvpte);
+					PropertyAssignment a = createPropertyAssignment(ve1, tp, ve2);
+					mb.getAssignment().add(a);
+				}
+				else {
+					/**
+					 * Each PropertyTemplateItem whose value is not a TemplateExp and not a VariableExp
+					 * converts to a PropertyAssignment.
+					 * 
+					 * ve1:T{tp = me}   =>   ve1.tp := me;
+					 */
+					OCLExpression me = doRExpToMExp(ptv);
+					PropertyAssignment a = createPropertyAssignment(ve1, tp, me);
+					mb.getAssignment().add(a);
+				}
+			}
 		}
 
 		// 15
@@ -133,9 +322,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			Variable v = te.getBindsTo();
 			assert v != null;
 			// init
-			Predicate pd = qvtr2qvtc.createPredicate();
-			OperationCallExp ee = qvtr2qvtc.createOperationCallExp();
-			PropertyCallExp pe = qvtr2qvtc.createPropertyCallExp();
 			// where
 			@NonNull Variable mv = doRVarToMVar(v);
 			Set<@NonNull Variable> remainingUnBoundDomainVars = new HashSet<@NonNull Variable>(unboundDomainVars);
@@ -144,17 +330,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					filterOutPredicatesThatReferToVars(predicatesWithoutVarBindings, remainingUnBoundDomainVars);
 			doRPredicateSetToMBPredicateSet(predicatesWithVarBindings, mb);
 			// assign
-			VariableExp pve = qvtr2qvtc.createVariableExp(tcv);
-			VariableExp ave = qvtr2qvtc.createVariableExp(mv);
-			pe.setOwnedSource(pve);
-			@NonNull Property pep = getProperty(tcv.getType(), v.getName());
-			pe.setReferredProperty(pep);
-			pe.setType(pep.getType());
-			ee.setOwnedSource(pe);
-			ee.setReferredOperation(getEqualsOperation());
-			ee.setType(qvtr2qvtc.getStandardLibrary().getBooleanType());
-			ee.getOwnedArguments().add(ave);
-			pd.setConditionExpression(ee);
+			VariableExp pve = createVariableExp(tcv);
+			Property pep = getProperty(tcv.getType(), v.getName());
+			PropertyCallExp pe = createPropertyCallExp(pve, pep);
+			VariableExp ave = createVariableExp(mv);
+			OperationCallExp ee = createOperationCallExp(pe, "=", ave);
+			Predicate pd = createPredicate(ee);
 			mb.getPredicate().add(pd);
 		}
 		
@@ -209,14 +390,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		// 29
 		protected void doRPredicateSetToMBPredicateSet(@NonNull Iterable<@NonNull Predicate> predSeq, @NonNull BottomPattern mb) {
 			for (@NonNull Predicate rp : predSeq) {
-				OCLExpression re = rp.getConditionExpression();
-				assert re != null;
-				// init
-				@NonNull Predicate mp = qvtr2qvtc.createPredicate();
-				// when
+				OCLExpression re = ClassUtil.nonNullState(rp.getConditionExpression());
 				@NonNull OCLExpression me = doRExpToMExp(re);
-				// assign
-				mp.setConditionExpression(me);
+				Predicate mp = createPredicate(me);
 				mb.getPredicate().add(mp);
 			}
 /*			
@@ -228,7 +404,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			OCLExpression re = rp.getConditionExpression();
 			assert re != null;
 			// init
-			@NonNull Predicate mp = qvtr2qvtc.createPredicate();
+			@NonNull Predicate mp = createPredicate();
 			// when
 			@NonNull OCLExpression me = doRExpToMExp(re);
 			doRPredicateSetToMBPredicateSet(predSeq, mb);
@@ -240,13 +416,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		// 32
 		private void doRSimplePatternToMPattern(@NonNull Pattern rp) {
 			for (@NonNull Predicate pd : ClassUtil.nullFree(rp.getPredicate())) {
-				// check
-				OCLExpression ce = pd.getConditionExpression();
-				assert ce != null;
+				OCLExpression ce = ClassUtil.nonNullState(pd.getConditionExpression());
 				if (!(ce instanceof RelationCallExp)) {
-					@NonNull Predicate mpd = qvtr2qvtc.createPredicate();
-					@NonNull OCLExpression me = doRExpToMExp(ce);
-					mpd.setConditionExpression(me);
+					OCLExpression me = doRExpToMExp(ce);
+					Predicate mpd = createPredicate(me);		// FIXME orphan
+					throw new UnsupportedOperationException("FIXME orphan");
 				}
 			}
 		}
@@ -293,74 +467,46 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		
 		// 6
 		private void doRDomainPatternExprToMappingBottomVarAssignment(@NonNull Variable v, @NonNull Property pp, @NonNull OCLExpression e) throws CompilerChainException {
-
-			// when
 			Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
-			// check
 			if ((e instanceof VariableExp) && sharedDomainVars.contains(((VariableExp)e).getReferredVariable()) ) {
 				String pn = pp.getName();
-				Variable rev = (Variable) ((VariableExp)e).getReferredVariable();
-				assert rev != null;
-				// init
-				PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-				// where
-				@NonNull Variable mv = doRVarToMRealizedVar(v);
-				@NonNull Variable mev = doRVarToMVar(rev);
-				// assign
-				VariableExp ve = qvtr2qvtc.createVariableExp(mv);
-				VariableExp me = qvtr2qvtc.createVariableExp(mev);
-				a.setSlotExpression(ve);
-				@NonNull Property tp = getProperty(mv.getType(), pn);
-				a.setTargetProperty(tp);
-				a.setValue(me);
+				Variable rev = ClassUtil.nonNullState((Variable) ((VariableExp)e).getReferredVariable());
+				Variable mv = doRVarToMRealizedVar(v);
+				Variable mev = doRVarToMVar(rev);
+				VariableExp ve = createVariableExp(mv);
+				Property tp = getProperty(mv.getType(), pn);
+				VariableExp me = createVariableExp(mev);
+				PropertyAssignment a = createPropertyAssignment(ve, tp, me);
 				mb.getAssignment().add(a);
 			}
 		}
 
-		
 		// 7
 		private void doRDomainPatternExprToMappingDomainAssignment(@NonNull Variable v, @NonNull Property pp, @NonNull OCLExpression e) throws CompilerChainException {
-			
-			// check
 			if (!(e instanceof VariableExp) &&  !(e instanceof ObjectTemplateExp)) {
 				String pn = pp.getName();
-				// init
-				PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-				// where
-				@NonNull Variable mv = doRVarToMVar(v);
-				@NonNull OCLExpression me = doRExpToMExp(e);
-				// assign
-				VariableExp ve = qvtr2qvtc.createVariableExp(mv);
-				a.setSlotExpression(ve);
-				@NonNull Property tp = getProperty(mv.getType(), pn); 
-				a.setTargetProperty(tp);
-				a.setValue(me);
+				Variable mv = doRVarToMVar(v);
+				VariableExp ve = createVariableExp(mv);
+				Property tp = getProperty(mv.getType(), pn); 
+				OCLExpression me = doRExpToMExp(e);
+				PropertyAssignment a = createPropertyAssignment(ve, tp, me);
 				db.getAssignment().add(a);
 			}
-			
 		}
 			
 		// 8
 		private void doRDomainPatternExprToMappingDomainTemplateVarAssignment(@NonNull Variable v, @NonNull Property pp, @NonNull OCLExpression e) throws CompilerChainException {
-			// when 
 			Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
-			// check
 			if (e instanceof ObjectTemplateExp) {
-				final Variable rev = ((ObjectTemplateExp)e).getBindsTo();
-				assert rev != null;
+				Variable rev = ClassUtil.nonNullState(((ObjectTemplateExp)e).getBindsTo());
 				if (!sharedDomainVars.contains(rev)) {
 					String pn = pp.getName();
-					// init
-					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
 					Variable mv = doRVarToMRealizedVar(v);
-					@NonNull Variable mev = doRVarToMVar(rev);
-					// assign
-					VariableExp ve = qvtr2qvtc.createVariableExp(mv);
-					VariableExp me = qvtr2qvtc.createVariableExp(mev);
-					a.setSlotExpression(ve);
-					@NonNull Property tp = getProperty(mv.getType(), pn);
-					a.setTargetProperty(tp);
-					a.setValue(me);
+					Variable mev = doRVarToMVar(rev);
+					VariableExp ve = createVariableExp(mv);
+					Property tp = getProperty(mv.getType(), pn);
+					VariableExp me = createVariableExp(mev);
+					PropertyAssignment a = createPropertyAssignment(ve, tp, me);
 					db.getAssignment().add(a);
 				}
 			}
@@ -368,170 +514,19 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			
 		// 9
 		private void doRDomainPatternExprToMappingDomainVarAssignment(@NonNull Variable v, @NonNull Property pp, @NonNull OCLExpression e) throws CompilerChainException {
-			// when
 			Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
-			// check
 			if ((e instanceof VariableExp) && !sharedDomainVars.contains(((VariableExp)e).getReferredVariable()) ) {
 				String pn = pp.getName();
-				Variable rev = (Variable) ((VariableExp) e).getReferredVariable();
-				assert rev != null;
-				// init
-				PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-				// where
-				@NonNull RealizedVariable mv = (RealizedVariable) doRVarToMRealizedVar(v);
-				@NonNull Variable mev = doRVarToMVar(rev);
-				// assign
-				VariableExp ve = qvtr2qvtc.createVariableExp(mv);
-				VariableExp me = qvtr2qvtc.createVariableExp(mev);
-				a.setSlotExpression(ve);
-				@NonNull Property tp = getProperty(mv.getType(), pn);
-				a.setTargetProperty(tp);
-				a.setValue(me);
-				
+				Variable rev = ClassUtil.nonNullState((Variable) ((VariableExp) e).getReferredVariable());
+				RealizedVariable mv = (RealizedVariable) doRVarToMRealizedVar(v);
+				Variable mev = doRVarToMVar(rev);
 				db.getRealizedVariable().add(mv);
+				VariableExp ve = createVariableExp(mv);
+				Property tp = getProperty(mv.getType(), pn);
+				VariableExp me = createVariableExp(mev);
+				PropertyAssignment a = createPropertyAssignment(ve, tp, me);
 				db.getAssignment().add(a);
 			}
-		}
-		
-		// 11
-		/*
-		 * Recursively create an assignment for each ObjectTemplateExp
-		 */
-		private void doRDomainPatternToMDBottomPatternComposite(@NonNull ObjectTemplateExp te) throws CompilerChainException {
-			// check
-			for (@NonNull PropertyTemplateItem pt : ClassUtil.nullFree(te.getPart())) {
-				OCLExpression value = pt.getValue();
-				if (value instanceof ObjectTemplateExp) {
-					Variable vte = te.getBindsTo();
-					assert vte != null;
-					Property pp = pt.getReferredProperty();
-					assert pp != null;
-					String pn = pp.getName();
-					ObjectTemplateExp pte = (ObjectTemplateExp) value;
-					Variable vpte = pte.getBindsTo();
-					assert vpte != null;
-					// init
-					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();				// FIXME pp->includes(v) if Collection/Scalar, pp := Collection{v} for Scalar/Collection
-					// where
-					@NonNull Variable mvte = doRVarToMVar(vte);
-					@NonNull Variable mvpte = doRVarToMVar(vpte);
-					doRDomainPatternToMDBottomPattern(pte);
-					// assign
-					VariableExp ve1 = qvtr2qvtc.createVariableExp(mvte);
-					VariableExp ve2 = qvtr2qvtc.createVariableExp(mvpte);
-					@NonNull Property tp = getProperty(mvte.getType(), pn);
-					a.setSlotExpression(ve1);
-					a.setTargetProperty(tp);
-					a.setValue(ve2);
-					db.getAssignment().add(a);
-				}
-			}
-		}
-		
-		// 12
-		private void doRDomainPatternToMDBottomPatternSimpleNonVarExpr(@NonNull ObjectTemplateExp te) throws CompilerChainException {
-			// check
-			Variable vte = te.getBindsTo();
-			assert vte != null;
-			for (@NonNull PropertyTemplateItem pt : ClassUtil.nullFree(te.getPart())) {
-				OCLExpression e = pt.getValue();
-				assert e != null;
-				// guard
-				if (!(e instanceof TemplateExp) && !(e instanceof VariableExp)) {
-					Property pp = pt.getReferredProperty();
-					assert pp != null;
-					String pn = pp.getName();
-					// init
-					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-					// where
-					@NonNull Variable mvte = doRVarToMVar(vte);
-					@NonNull OCLExpression me = doRExpToMExp(e);
-					// assign
-					VariableExp ve = qvtr2qvtc.createVariableExp(mvte);
-					@NonNull Property tp = getProperty(mvte.getType(), pn);
-					a.setTargetProperty(tp);
-					a.setSlotExpression(ve);
-					a.setValue(me);
-					db.getAssignment().add(a);
-				}
-			}
-		}
-		
-		
-		// 13
-		/*
-		 * Create a PropertyAssignment for each property assignment of the te
-		 * that does not reference a shared domain var
-		 */
-		private void doRDomainPatternToMDBottomPatternSimpleSharedVarExpr(@NonNull ObjectTemplateExp te) throws CompilerChainException {
-			// when
-			Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
-			// check
-			Variable vte = te.getBindsTo();
-			assert vte != null;
-			for (@NonNull PropertyTemplateItem pt : ClassUtil.nullFree(te.getPart())) {
-				if (pt.getValue() instanceof VariableExp) {
-					VariableExp e = (VariableExp) pt.getValue();
-					Variable vpte = (Variable) e.getReferredVariable();
-					assert vpte != null;
-					// guard
-					if (sharedDomainVars.contains(vpte)) {
-						String pn = pt.getReferredProperty().getName(); 
-						// init
-						PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-						// where
-						@NonNull Variable mvte = doRVarToMVar(vte);
-						@NonNull Variable mvpte = doRVarToMVar(vpte);
-						// assign
-						VariableExp ve1 = qvtr2qvtc.createVariableExp(mvte);
-						VariableExp ve2 = qvtr2qvtc.createVariableExp(mvpte);
-					    @NonNull Property tp = getProperty(mvte.getType(), pn);
-						a.setSlotExpression(ve1);
-						a.setTargetProperty(tp);
-						a.setValue(ve2);
-						mb.getAssignment().add(a);
-					}
-				}
-			}
-		}
-			
-		// 14 Opposite guard as 13
-		/*
-		 * Create a PropertyAssignment for each property assignment of the te
-		 * that does reference a shared domain var
-		 */
-		
-		private void doRDomainPatternToMDBottomPatternSimpleUnSharedVarExpr(@NonNull ObjectTemplateExp te) throws CompilerChainException {
-			// when
-			Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
-			// check
-			Variable vte = te.getBindsTo();
-			assert vte != null;
-			for (@NonNull PropertyTemplateItem pt : ClassUtil.nullFree(te.getPart())) {
-				if (pt.getValue() instanceof VariableExp) {
-					VariableExp e = (VariableExp) pt.getValue();
-					Variable vpte = (Variable) e.getReferredVariable();
-					assert vpte != null;
-					// guard
-					if (!sharedDomainVars.contains(vpte)) {
-						String pn = pt.getReferredProperty().getName(); 
-						// init
-						PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-						// where
-						@NonNull Variable mvte = doRVarToMVar(vte);
-						@NonNull Variable mvpte = doRVarToMVar(vpte);
-						// assign
-						VariableExp ve1 = qvtr2qvtc.createVariableExp(mvte);
-						VariableExp ve2 = qvtr2qvtc.createVariableExp(mvpte);
-					    @NonNull Property tp = getProperty(mvte.getType(), pn);
-						a.setSlotExpression(ve1);
-						a.setTargetProperty(tp);
-						a.setValue(ve2);
-						db.getAssignment().add(a);
-					}
-				}
-			}
-			
 		}
 			
 		// 16
@@ -556,9 +551,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 						return;
 					// init
 					GuardPattern mg = cm.getGuardPattern();
-					Predicate pd = qvtr2qvtc.createPredicate();
-					OperationCallExp ee = qvtr2qvtc.createOperationCallExp();
-					PropertyCallExp pe = qvtr2qvtc.createPropertyCallExp();
 					CoreDomain cd = qvtr2qvtc.whenCoreDomain(cm, dn);
 					GuardPattern cmdg = cd.getGuardPattern();
 					// where
@@ -566,17 +558,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					assert mb != null;
 					@NonNull Variable mv = doRVarToMVar(v);
 					// assign
-					VariableExp ve1 = qvtr2qvtc.createVariableExp(tcv);
-					VariableExp ve2 = qvtr2qvtc.createVariableExp(mv);
-					@NonNull Property tp = getProperty(mv.getType(), mv.getName());
-					pe.setOwnedSource(ve1);
-					pe.setReferredProperty(tp);
-					pe.setType(tp.getType());
-					ee.setOwnedSource(pe);
-					ee.setReferredOperation(getEqualsOperation());
-					ee.setType(qvtr2qvtc.getStandardLibrary().getBooleanType());
-					ee.getOwnedArguments().add(ve2);
-					pd.setConditionExpression(ee);
+					VariableExp ve1 = createVariableExp(tcv);
+					VariableExp ve2 = createVariableExp(mv);
+					Property tp = getProperty(mv.getType(), mv.getName());
+					PropertyCallExp pe = createPropertyCallExp(ve1, tp);
+					OperationCallExp ee = createOperationCallExp(pe, "=", ve2);
+					Predicate pd = createPredicate(ee);
 					mg.getPredicate().add(pd);
 					TypedModel mdir = getTypedModel(tmn, up);
 					cd.setTypedModel(mdir);
@@ -604,18 +591,15 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					Mapping cm = qvtr2qvtc.whenMapping(r, m.getName()+"_forNonIdentityProp");
 					BottomPattern bp = cm.getBottomPattern();
 					cm.getGuardPattern();
-					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
 					// where
 					@NonNull Variable mv = doRVarToMVar(v);
 					@NonNull OCLExpression me = doRExpToMExp(e);
 					// where
 					doRDomainToMComposedMappingGuard(e, cm);
 					// assign
-					VariableExp ve = qvtr2qvtc.createVariableExp(mv);
-					a.setSlotExpression(ve);
-					@NonNull Property tp = getProperty(mv.getType(), pn);
-					a.setTargetProperty(tp);
-					a.setValue(me);
+					VariableExp ve = createVariableExp(mv);
+					Property tp = getProperty(mv.getType(), pn);
+					PropertyAssignment a = createPropertyAssignment(ve, tp, me);
 					bp.getAssignment().add(a);
 					m.getLocal().add(cm);
 				}
@@ -628,20 +612,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		 */
 		private void doRDomainVarToMDBottomAssignmnetForEnforcement() throws CompilerChainException
 		{
-			// check
 			Variable v = ClassUtil.nonNullState(te.getBindsTo());
-			// init
-			PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-			// where
-			@NonNull Variable mv = doRVarToMVar(v);
-			// assign
-			VariableExp ve1 = qvtr2qvtc.createVariableExp(tcv);
-			VariableExp ve2 = qvtr2qvtc.createVariableExp(mv);
-			a.setSlotExpression(ve1);
-			@NonNull Property tp = getProperty(tcv.getType(), v.getName());
-			a.setTargetProperty(tp);
-			a.setValue(ve2);
-			
+			Variable mv = doRVarToMVar(v);
+			VariableExp ve1 = createVariableExp(tcv);
+			Property tp = getProperty(tcv.getType(), v.getName());
+			VariableExp ve2 = createVariableExp(mv);
+			PropertyAssignment a = createPropertyAssignment(ve1, tp, ve2);
 			mb.getAssignment().add(a);
 		}
 		
@@ -710,55 +686,26 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			// check
 			for (@NonNull Variable dv : domainVars) {
 				TemplateExp dvte = qvtr2qvtc.getTemplateExpression(dv);
-				if (dvte instanceof ObjectTemplateExp) {
-					// init
-					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-					// where
-					@NonNull Variable mdv = doRVarToMVar(dv);
-					// assign
-					VariableExp ve1 = qvtr2qvtc.createVariableExp(tcv);
-					VariableExp ve2 = qvtr2qvtc.createVariableExp(mdv);
-					a.setSlotExpression(ve1);
-					@NonNull Property tp = getProperty(tcv.getType(), dv.getName());
-					a.setTargetProperty(tp);
-					a.setValue(ve2);
+//				if (dvte instanceof ObjectTemplateExp) {
+					// tp=dv:T{...} => tcv.tp := dv;
+					Variable mdv = doRVarToMVar(dv);
+					VariableExp ve1 = createVariableExp(tcv);
+					Property tp = getProperty(tcv.getType(), dv.getName());
+					VariableExp ve2 = createVariableExp(mdv);
+					PropertyAssignment a = createPropertyAssignment(ve1, tp, ve2);
 					mb.getAssignment().add(a);
-				}
-				else if (dvte instanceof CollectionTemplateExp) {
-					Variable rest = ((CollectionTemplateExp)dvte).getRest();
-					if (rest == null) {
-						// q=Collection{a,b} => q=Collection{a,b}
-						// init
-						PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
-						// where
-						@NonNull Variable mdv = doRVarToMVar(dv);
-						// assign
-						VariableExp ve1 = qvtr2qvtc.createVariableExp(tcv);
-						VariableExp ve2 = qvtr2qvtc.createVariableExp(mdv);
-						a.setSlotExpression(ve1);
-						@NonNull Property tp = getProperty(tcv.getType(), dv.getName());
-						a.setTargetProperty(tp);
-						a.setValue(ve2);
-						mb.getAssignment().add(a);
-					}
-					else {
-						// q=ordered{a,b++c} => q->at(1)=a, q->at(2)=b, q->subOrdered(3)=c
-						// q=set{a,b++c} => q->includes(a), q->includes(b), q->excluding(a)->excluding(b)=c
-						// q=bag{a,b++c} => q->includes(a) and let q1 = q->excluding(a) in q1->includes(b) and q1->excluding(b)=c
-						// init
-						Predicate a = qvtr2qvtc.createPredicate();
-						// where
-//						@NonNull Variable mdv = doRVarToMVar(dv);
-						// assign
-						VariableExp ve1 = qvtr2qvtc.createVariableExp(tcv);
-//						VariableExp ve2 = qvtr2qvtc.createVariableExp(mdv);
-	//					a.setSlotExpression(ve1);
-	//					@NonNull Property tp = getProperty(tcv.getType(), dv.getName());
-	//					a.setTargetProperty(tp);
-	//					a.setValue(ve2);
-						mb.getPredicate().add(a);
-					}
-				}
+//				}
+/*				else if (dvte instanceof CollectionTemplateExp) {
+					// tp=dv:T{...} => tcv.tp := dv;
+					Variable mdv = doRVarToMVar(dv);
+//					VariableExp ve1 = createVariableExp(tcv);
+					VariableExp ve2 = createVariableExp(mdv);
+					VariableAssignment a = createVariableAssignment(mdv, ve2);
+					mb.getAssignment().add(a);
+				} */
+/*				else if (dvte instanceof CollectionTemplateExp) {
+					CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)dvte;
+				} */
 			}
 			
 		}	
@@ -835,6 +782,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	protected @NonNull final QVTrToQVTc qvtr2qvtc;
 
 	protected AbstractQVTr2QVTcRelations(@NonNull QVTrToQVTc qvtr2qvtc) {
+		super(qvtr2qvtc.getEnvironmentFactory());
 		this.qvtr2qvtc = qvtr2qvtc;
 	}
 	
@@ -870,31 +818,17 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	// 39
 	private void doRWhenRelCallArgToMGuardPredicate(@NonNull Relation r, @NonNull VariableExp ve,
 			@NonNull RelationDomain d, @NonNull GuardPattern mg, @NonNull String vdId) throws CompilerChainException {
-		// when
-		@NonNull Type tc = qvtr2qvtc.getTraceClass(r);
-		// check
+		Type tc = qvtr2qvtc.getTraceClass(r);
 		String dvn = ClassUtil.nonNullState(d.getRootVariable().get(0).getName());
 		Variable v = (Variable) ClassUtil.nonNullState(ve.getReferredVariable());
-		// init
 		Variable vd = qvtr2qvtc.whenVariable(mg, tc.getName()+vdId+"_v", tc);
-		Predicate mgp = qvtr2qvtc.createPredicate();
-		OperationCallExp ee = qvtr2qvtc.createOperationCallExp();
-		PropertyCallExp pe = qvtr2qvtc.createPropertyCallExp();
-		// where
-		@NonNull Variable mv = doRVarToMVar(v);
-		// assign
-		VariableExp pve = qvtr2qvtc.createVariableExp(vd);
-		VariableExp ave = qvtr2qvtc.createVariableExp(mv);
-		mgp.setConditionExpression(ee);
-		ee.setOwnedSource(pe);
-		pe.setOwnedSource(pve);
-		@NonNull Property pep = getProperty(vd.getType(), dvn);
-		pe.setReferredProperty(pep);
-		pe.setType(pep.getType());
-		ee.setReferredOperation(getEqualsOperation());
-		ee.setType(qvtr2qvtc.getStandardLibrary().getBooleanType());
-		ee.getOwnedArguments().add(ave);
-		
+		Variable mv = doRVarToMVar(v);
+		VariableExp pve = createVariableExp(vd);
+		VariableExp ave = createVariableExp(mv);
+		Property pep = getProperty(vd.getType(), dvn);
+		PropertyCallExp pe = createPropertyCallExp(pve, pep);
+		OperationCallExp ee = createOperationCallExp(pe, "=", ave);
+		Predicate mgp = createPredicate(ee);
 		mg.getPredicate().add(mgp);
 		
 	}
@@ -937,15 +871,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		return ClassUtil.nonNullState(null);
 	}
-	
-	protected @NonNull Operation getEqualsOperation() {
-		for (Operation o : qvtr2qvtc.getStandardLibrary().getOclAnyType().getOwnedOperations()) {
-			if (o.getName().equals("=")) {
-				return o;
-			}
-		}
-		throw new IllegalStateException("No = operation");
-	}
 
 	protected @NonNull List<@NonNull RelationDomain> getOtherDomains(@NonNull RelationDomain rd) {
 		List<@NonNull RelationDomain> rOtherDomains = new ArrayList<@NonNull RelationDomain>();
@@ -969,7 +894,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	protected @NonNull Property getProperty(/*@NonNull*/ Type traceClass, /*@NonNull*/ String name) throws CompilerChainException {
 		assert (traceClass != null) && (name != null);
 		if (traceClass instanceof org.eclipse.ocl.pivot.Class) {
-			for (Property p : ((org.eclipse.ocl.pivot.Class)traceClass).getOwnedProperties()) {
+			for (@NonNull Property p : ClassUtil.nullFree(((org.eclipse.ocl.pivot.Class)traceClass).getOwnedProperties())) {
 				if (name.equals(p.getName()))
 					return p;
 			}
