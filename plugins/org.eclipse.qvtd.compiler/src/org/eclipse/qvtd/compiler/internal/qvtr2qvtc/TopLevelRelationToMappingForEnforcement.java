@@ -19,6 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -54,7 +55,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 
 		// 47
-		public void doTROppositeDomainsToMappingForEnforcement() {
+		public void doTROppositeDomainsToMappingForEnforcement() throws CompilerChainException {
 			Set<@NonNull RelationDomain> rds = new HashSet<@NonNull RelationDomain>();
 			for (Domain d : ClassUtil.nullFree(r.getDomain())) {
 				rds.add((RelationDomain) d);
@@ -126,7 +127,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 		@Override
 		protected void where(@NonNull Set<@NonNull Variable> whenVars, @NonNull Set<@NonNull Predicate> rpSet,
-				@NonNull Set<@NonNull Variable> sharedDomainVars, @NonNull Set<@NonNull Variable> unsharedWhereVars) {
+				@NonNull Set<@NonNull Variable> sharedDomainVars, @NonNull Set<@NonNull Variable> unsharedWhereVars) throws CompilerChainException {
 			Set<@NonNull Variable> oppositeDomainVars = getOppositeDomainVars();
 			Set<@NonNull Variable> domainBottomUnSharedVars = new HashSet<@NonNull Variable>(domainVars);
 			domainBottomUnSharedVars.removeAll(whenVars);
@@ -161,7 +162,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		super(qvtr2qvtc);
 	}
 
-	public void doTopLevelRelationToMappingForEnforcement(@NonNull Relation r) {
+	public void doTopLevelRelationToMappingForEnforcement(@NonNull Relation r) throws CompilerChainException {
 		// check
 		if (!r.isIsTopLevel()) {
 			return;

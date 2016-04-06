@@ -47,6 +47,7 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -338,7 +339,7 @@ public class QVTrToQVTc
 		//qvtcSource.getContents().addAll(traceData.getRootOutputELements());
 	}
 
-	public void execute() {
+	public void execute() throws CompilerChainException {
 		for (EObject eObject : qvtrResource.getContents()) {
 			if (eObject instanceof RelationModel) {
 				transformToTracePackages(tracePackages, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));

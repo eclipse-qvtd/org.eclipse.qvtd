@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -46,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -110,7 +112,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}*/
 		
 		// 10
-		protected void doRDomainPatternToMDBottomPattern(@NonNull ObjectTemplateExp pte) {
+		protected void doRDomainPatternToMDBottomPattern(@NonNull ObjectTemplateExp pte) throws CompilerChainException {
 			
 			CoreDomain cd = (CoreDomain) db.getArea();
 			assert cd != null;
@@ -132,7 +134,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		 * 		trace.<v.name> = v;
 		 * TODO Suggest better name: RDomainPatternVariableToTracePredicate?
 		 */
-		private void doRDomainToMBottomPredicateForEnforcement(@NonNull Set<@NonNull Predicate> predicatesWithoutVarBindings, @NonNull Set<@NonNull Variable> unboundDomainVars)
+		private void doRDomainToMBottomPredicateForEnforcement(@NonNull Set<@NonNull Predicate> predicatesWithoutVarBindings, @NonNull Set<@NonNull Variable> unboundDomainVars) throws CompilerChainException
 		{
 			// check
 			Variable v = te.getBindsTo();
@@ -167,7 +169,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		/*
 		 * Creates Assignments for each part of the ObjectTemplateExp
 		 */
-		private void doRDomainToMDBottomForEnforcementOfIdentityProp()
+		private void doRDomainToMDBottomForEnforcementOfIdentityProp() throws CompilerChainException
 		{
 			// check
 			Variable v = te.getBindsTo();
@@ -264,7 +266,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		
 		// 40
-		private void doRWhenRelCallToMGuard(@NonNull Pattern rp) {
+		private void doRWhenRelCallToMGuard(@NonNull Pattern rp) throws CompilerChainException {
 			
 			for (Predicate p : rp.getPredicate()) {
 				// check
@@ -304,7 +306,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		/* =============  T5 ============= */
 		
 		// 6
-		private void doRDomainPatternExprToMappingBottomVarAssignment(@NonNull Variable v, @NonNull Property pp, @NonNull OCLExpression e) {
+		private void doRDomainPatternExprToMappingBottomVarAssignment(@NonNull Variable v, @NonNull Property pp, @NonNull OCLExpression e) throws CompilerChainException {
 
 			// when
 			Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
@@ -331,7 +333,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 		
 		// 7
-		private void doRDomainPatternExprToMappingDomainAssignment(@NonNull Variable v, @NonNull Property pp, @NonNull OCLExpression e) {
+		private void doRDomainPatternExprToMappingDomainAssignment(@NonNull Variable v, @NonNull Property pp, @NonNull OCLExpression e) throws CompilerChainException {
 			
 			// check
 			if (!(e instanceof VariableExp) &&  !(e instanceof ObjectTemplateExp)) {
@@ -353,7 +355,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 			
 		// 8
-		private void doRDomainPatternExprToMappingDomainTemplateVarAssignment(@NonNull Variable v, @NonNull Property pp, @NonNull OCLExpression e) {
+		private void doRDomainPatternExprToMappingDomainTemplateVarAssignment(@NonNull Variable v, @NonNull Property pp, @NonNull OCLExpression e) throws CompilerChainException {
 			// when 
 			Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
 			// check
@@ -379,7 +381,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 			
 		// 9
-		private void doRDomainPatternExprToMappingDomainVarAssignment(@NonNull Variable v, @NonNull Property pp, @NonNull OCLExpression e) {
+		private void doRDomainPatternExprToMappingDomainVarAssignment(@NonNull Variable v, @NonNull Property pp, @NonNull OCLExpression e) throws CompilerChainException {
 			// when
 			Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
 			// check
@@ -409,8 +411,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		/*
 		 * Recursively create an assignment for each ObjectTemplateExp
 		 */
-		private void doRDomainPatternToMDBottomPatternComposite(@NonNull ObjectTemplateExp te) {
-			
+		private void doRDomainPatternToMDBottomPatternComposite(@NonNull ObjectTemplateExp te) throws CompilerChainException {
 			// check
 			for (PropertyTemplateItem pt : te.getPart()) {
 				if (pt.getValue() instanceof ObjectTemplateExp) {
@@ -441,7 +442,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		
 		// 12
-		private void doRDomainPatternToMDBottomPatternSimpleNonVarExpr(@NonNull ObjectTemplateExp te) {
+		private void doRDomainPatternToMDBottomPatternSimpleNonVarExpr(@NonNull ObjectTemplateExp te) throws CompilerChainException {
 			// check
 			Variable vte = te.getBindsTo();
 			assert vte != null;
@@ -475,7 +476,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		 * Create a PropertyAssignment for each property assignment of the te
 		 * that does not reference a shared domain var
 		 */
-		private void doRDomainPatternToMDBottomPatternSimpleSharedVarExpr(@NonNull ObjectTemplateExp te) {
+		private void doRDomainPatternToMDBottomPatternSimpleSharedVarExpr(@NonNull ObjectTemplateExp te) throws CompilerChainException {
 			// when
 			Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
 			// check
@@ -513,7 +514,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		 * that does reference a shared domain var
 		 */
 		
-		private void doRDomainPatternToMDBottomPatternSimpleUnSharedVarExpr(@NonNull ObjectTemplateExp te) {
+		private void doRDomainPatternToMDBottomPatternSimpleUnSharedVarExpr(@NonNull ObjectTemplateExp te) throws CompilerChainException {
 			// when
 			Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
 			// check
@@ -547,8 +548,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 			
 		// 16
-		private void doRDomainToMComposedMappingGuard(@NonNull OCLExpression e, @NonNull Mapping cm) {
-			
+		private void doRDomainToMComposedMappingGuard(@NonNull OCLExpression e, @NonNull Mapping cm) throws CompilerChainException {			
 			// when
 			RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
 			assert rt != null;
@@ -611,7 +611,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 
 		// 21
-		private void doRDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive()
+		private void doRDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive() throws CompilerChainException
 		{
 			// when
 			RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
@@ -653,7 +653,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		/*
 		 * Creates the assignment of the middle model to the L/R models
 		 */
-		private void doRDomainVarToMDBottomAssignmnetForEnforcement()
+		private void doRDomainVarToMDBottomAssignmnetForEnforcement() throws CompilerChainException
 		{
 			// check
 			Variable v = ClassUtil.nonNullState(te.getBindsTo());
@@ -715,7 +715,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		
 		// 17
-		protected void doRDomainToMDBottomForEnforcement(@NonNull Set<@NonNull Predicate> predicatesWithoutVarBindings,  @NonNull Set<@NonNull Variable> unboundDomainVars)
+		protected void doRDomainToMDBottomForEnforcement(@NonNull Set<@NonNull Predicate> predicatesWithoutVarBindings,  @NonNull Set<@NonNull Variable> unboundDomainVars) throws CompilerChainException
 		{
 			// check
 			Variable v = te.getBindsTo();
@@ -745,10 +745,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		
 		
 		// 28
-		protected void doROppositeDomainVarsToTraceClassProps(@NonNull Set<@NonNull Variable> domainVars) {			
+		protected void doROppositeDomainVarsToTraceClassProps(@NonNull Set<@NonNull Variable> domainVars) throws CompilerChainException {			
 			// check
 			for (@NonNull Variable dv : domainVars) {
-				if (qvtr2qvtc.getTemplateExpression(dv) != null) {
+				TemplateExp dvte = qvtr2qvtc.getTemplateExpression(dv);
+				if (dvte instanceof ObjectTemplateExp) {
 					// init
 					PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
 					// where
@@ -761,6 +762,41 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					a.setTargetProperty(tp);
 					a.setValue(ve2);
 					mb.getAssignment().add(a);
+				}
+				else if (dvte instanceof CollectionTemplateExp) {
+					Variable rest = ((CollectionTemplateExp)dvte).getRest();
+					if (rest == null) {
+						// q=Collection{a,b} => q=Collection{a,b}
+						// init
+						PropertyAssignment a = qvtr2qvtc.createPropertyAssignment();
+						// where
+						@NonNull Variable mdv = doRVarToMVar(dv);
+						// assign
+						VariableExp ve1 = qvtr2qvtc.createVariableExp(tcv);
+						VariableExp ve2 = qvtr2qvtc.createVariableExp(mdv);
+						a.setSlotExpression(ve1);
+						@NonNull Property tp = getProperty(tcv.getType(), dv.getName());
+						a.setTargetProperty(tp);
+						a.setValue(ve2);
+						mb.getAssignment().add(a);
+					}
+					else {
+						// q=ordered{a,b++c} => q->at(1)=a, q->at(2)=b, q->subOrdered(3)=c
+						// q=set{a,b++c} => q->includes(a), q->includes(b), q->excluding(a)->excluding(b)=c
+						// q=bag{a,b++c} => q->includes(a) and let q1 = q->excluding(a) in q1->includes(b) and q1->excluding(b)=c
+						// init
+						Predicate a = qvtr2qvtc.createPredicate();
+						// where
+//						@NonNull Variable mdv = doRVarToMVar(dv);
+						// assign
+						VariableExp ve1 = qvtr2qvtc.createVariableExp(tcv);
+//						VariableExp ve2 = qvtr2qvtc.createVariableExp(mdv);
+	//					a.setSlotExpression(ve1);
+	//					@NonNull Property tp = getProperty(tcv.getType(), dv.getName());
+	//					a.setTargetProperty(tp);
+	//					a.setValue(ve2);
+						mb.getPredicate().add(a);
+					}
 				}
 			}
 			
@@ -781,7 +817,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		
 		// 38
-		protected void doRWhenPatternToMGuardPattern() {			
+		protected void doRWhenPatternToMGuardPattern() throws CompilerChainException {			
 			// check
 			Pattern whenp = r.getWhen();
 			if (whenp != null) {
@@ -815,7 +851,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		
 		protected abstract void where(@NonNull Set<@NonNull Variable> whenVars, @NonNull Set<@NonNull Predicate> rpSet,
-				@NonNull Set<@NonNull Variable> sharedDomainVars, @NonNull Set<@NonNull Variable> unsharedWhereVars);
+				@NonNull Set<@NonNull Variable> sharedDomainVars, @NonNull Set<@NonNull Variable> unsharedWhereVars) throws CompilerChainException;
 	}
 
 	protected @NonNull final QVTrToQVTc qvtr2qvtc;
@@ -837,7 +873,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	
 	// 39
 	private void doRWhenRelCallArgToMGuardPredicate(@NonNull Relation r, @NonNull VariableExp ve,
-			@NonNull RelationDomain d, @NonNull GuardPattern mg, @NonNull String vdId) {
+			@NonNull RelationDomain d, @NonNull GuardPattern mg, @NonNull String vdId) throws CompilerChainException {
 		// when
 		@NonNull Type tc = qvtr2qvtc.getTraceClass(r);
 		// check
@@ -932,7 +968,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return rpSet;
 	}
 
-	protected @NonNull Property getProperty(/*@NonNull*/ Type traceClass, /*@NonNull*/ String name) {
+	protected @NonNull Property getProperty(/*@NonNull*/ Type traceClass, /*@NonNull*/ String name) throws CompilerChainException {
 		assert (traceClass != null) && (name != null);
 		if (traceClass instanceof org.eclipse.ocl.pivot.Class) {
 			for (Property p : ((org.eclipse.ocl.pivot.Class)traceClass).getOwnedProperties()) {
@@ -940,7 +976,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					return p;
 			}
 		}
-		return ClassUtil.nonNullState(null);
+		throw new CompilerChainException("No " + traceClass + "::" + name + " in the trace class");
 	}
 
 	protected @NonNull Set<@NonNull Variable> getUnsharedWhenVars(@NonNull Set<@NonNull Variable> whenVars, @NonNull Set<@NonNull Variable> allDomainVars) {
@@ -1007,7 +1043,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return rpSet;
 	}
 
-	protected void where(@NonNull Relation r, @NonNull List<@NonNull ? extends AbstractRelationDomain2CoreDomain> relation2mappings) {
+	protected void where(@NonNull Relation r, @NonNull List<@NonNull ? extends AbstractRelationDomain2CoreDomain> relation2mappings) throws CompilerChainException {
 		Set<@NonNull Variable> allDomainVars = getAllDomainVars(r);
 		Set<@NonNull Variable> whenVars = getWhenVars(r);
 		Set<@NonNull Variable> whereVars = getWhereVars(r);
