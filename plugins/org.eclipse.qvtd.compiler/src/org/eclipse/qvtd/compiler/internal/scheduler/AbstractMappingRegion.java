@@ -21,6 +21,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.Type;
 
 import com.google.common.collect.Iterables;
 
@@ -47,6 +49,11 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		//
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> source2targetClosure = new HashMap<@NonNull Node, @NonNull Set<@NonNull Node>>();
 		for (@NonNull Node navigableNode : navigableNodes) {
+			Type type = navigableNode.getCompleteClass().getPrimaryClass();
+			if (type instanceof CollectionType) {
+				System.err.println("No head created for CollectionType " + type + " in " + this);
+				continue;
+			}
 			Set<@NonNull Node> targetClosure = new HashSet<@NonNull Node>();
 			source2targetClosure.put(navigableNode, targetClosure);
 			targetClosure.add(navigableNode);
@@ -83,7 +90,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 			target2sourceClosure.put(targetNode, sourceClosure);
 			sourceClosure.add(targetNode);
 		}
-		for (@NonNull Node sourceNode : navigableNodes) {
+		for (@NonNull Node sourceNode : source2targetClosure.keySet()) {
 			Set<@NonNull Node> targetClosure = source2targetClosure.get(sourceNode);
 			assert targetClosure != null;
 			for (@NonNull Node targetNode : targetClosure) {
@@ -98,7 +105,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		//	by successive removal from the start of the list.
 		//
 		List<@NonNull Node> headLessNodes = new ArrayList<@NonNull Node>();
-		Iterables.addAll(headLessNodes, navigableNodes);
+		Iterables.addAll(headLessNodes, source2targetClosure.keySet());
 		Collections.sort(headLessNodes, new Comparator<@NonNull Node>()
 		{
 			@Override
@@ -108,7 +115,18 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 				assert (set1 != null) && (set2 != null);
 				int l1 = set1.size();
 				int l2 = set2.size();
-				return l1 - l2;
+				int diff = l1 - l2;
+				if (diff != 0) {
+					return diff;
+				}
+				for (@NonNull NavigationEdge e : o1.getNavigationEdges()) {
+					if (e.getTarget() == o2) {
+						return e.getProperty().isIsImplicit() ? 1 : -1;
+					}
+				}			
+				String n1 = o1.getName();
+				String n2 = o2.getName();
+				return n1.compareTo(n2);
 			}
 		});
 		//
