@@ -354,7 +354,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 				createAll(gIn.getVariable(), dOut.getGuardPattern().getVariable());
 				BottomPattern bIn = mIn.getBottomPattern();
 				createAllPredicatesOrAssignments(bIn.getAssignment(), mOut.getGuardPattern().getPredicate(), mOut.getBottomPattern().getAssignment());		// Colocate all assignments
-				createAll(bIn.getPredicate(), mOut.getGuardPattern().getPredicate());			// Colocate all predicates
+				createAll(bIn.getPredicate(), mOut.getBottomPattern().getPredicate());			// Colocate all predicates
 //				createAllRealizedVariables(bIn.getRealizedVariable(), dOut.getGuardPattern().getVariable(), dOut.getBottomPattern().getRealizedVariable());
 				createAll(bIn.getRealizedVariable(), dOut.getBottomPattern().getRealizedVariable());
 				createAllVariables(bIn.getVariable(), mOut.getGuardPattern().getVariable(), mOut.getBottomPattern().getVariable());			// Colocate all bottom variables
