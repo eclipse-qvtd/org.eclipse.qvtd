@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.NavigationCallExp;
@@ -30,6 +31,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
+import org.eclipse.ocl.pivot.PrimitiveType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
@@ -141,6 +143,18 @@ public class QVTiTransformationAnalysis
 	public QVTiTransformationAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
 	    this.environmentFactory = environmentFactory;
 		this.domainAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory);
+	}
+
+	private void addAllInstancesClass(@NonNull OCLExpression asExpression) {
+		Type asType = asExpression.getTypeValue();
+		if (asType == null) {
+			asType = asExpression.getType();
+		}
+		if (asType instanceof org.eclipse.ocl.pivot.Class) {
+			assert !(asType instanceof PrimitiveType);
+			assert !(asType instanceof CollectionType);
+			allInstancesClasses.add((org.eclipse.ocl.pivot.Class)asType);
+		}
 	}
 	
 	protected @NonNull Integer allocateCacheIndex(@Nullable OCLExpression sourceExpression, @NonNull Property navigableProperty) {
@@ -332,25 +346,13 @@ public class QVTiTransformationAnalysis
 					if (operationId == allInstancesOperationId) {
 						OCLExpression source = operationCallExp.getOwnedSource();
 						if (source != null) {
-							Type sourceType = source.getTypeValue();
-							if (sourceType == null) {
-								sourceType = source.getType();
-							}
-							if (sourceType instanceof org.eclipse.ocl.pivot.Class) {
-								allInstancesClasses.add((org.eclipse.ocl.pivot.Class)sourceType);
-							}
+							addAllInstancesClass(source);
 						}
 					}
 					else if ((operationId == objectsOfKindOperationId) || (operationId == objectsOfTypeOperationId)) {
 						OCLExpression argument = operationCallExp.getOwnedArguments().get(0);
 						if (argument != null) {
-							Type argumentType = argument.getTypeValue();
-							if (argumentType == null) {
-								argumentType = argument.getType();
-							}
-							if (argumentType instanceof org.eclipse.ocl.pivot.Class) {
-								allInstancesClasses.add((org.eclipse.ocl.pivot.Class)argumentType);
-							}
+							addAllInstancesClass(argument);
 						}
 					}
 				}
