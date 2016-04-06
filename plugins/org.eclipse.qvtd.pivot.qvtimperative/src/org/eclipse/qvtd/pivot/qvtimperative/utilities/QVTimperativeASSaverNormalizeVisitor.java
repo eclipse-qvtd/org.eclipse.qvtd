@@ -11,7 +11,10 @@
 package	org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeASSaverNormalizeVisitor;
 
 public class QVTimperativeASSaverNormalizeVisitor extends AbstractQVTimperativeASSaverNormalizeVisitor
@@ -19,4 +22,10 @@ public class QVTimperativeASSaverNormalizeVisitor extends AbstractQVTimperativeA
 	public QVTimperativeASSaverNormalizeVisitor(@NonNull ASSaver context) {
 		super(context);
 	}	
+
+	@Override
+	public @Nullable Boolean visitMappingCall(@NonNull MappingCall object) {
+		ClassUtil.sort(ClassUtil.nullFree(object.getBinding()), QVTimperativeUtil.MappingCallBindingComparator.INSTANCE);
+		return null;
+	}
 }

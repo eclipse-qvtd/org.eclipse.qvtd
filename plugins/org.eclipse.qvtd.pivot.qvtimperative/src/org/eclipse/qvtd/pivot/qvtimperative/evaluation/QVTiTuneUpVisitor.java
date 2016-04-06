@@ -33,16 +33,18 @@ import org.eclipse.ocl.pivot.TupleLiteralPart;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -129,7 +131,7 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 		}
 		variableAssignments.addAll(propertyAssignments);
 		ECollections.setEList(object.getAssignment(), variableAssignments);
-		return Boolean.TRUE;
+		return super.visitBottomPattern(object);
 	}
 
 	@Override
@@ -182,7 +184,9 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 	}
 
 	@Override
-	public @Nullable Boolean visitGuardPattern(@NonNull GuardPattern object) {
+	public Boolean visitCorePattern(@NonNull CorePattern object) {
+		List<@NonNull Variable> variables = ClassUtil.nullFree(object.getVariable());
+		QVTcoreBaseUtil.sortPatternVariables(variables);
 		return Boolean.TRUE;
 	}
 

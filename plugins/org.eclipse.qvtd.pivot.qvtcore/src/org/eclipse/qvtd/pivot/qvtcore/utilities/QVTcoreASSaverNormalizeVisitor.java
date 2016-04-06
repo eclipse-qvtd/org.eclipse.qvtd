@@ -18,5 +18,5 @@ public class QVTcoreASSaverNormalizeVisitor extends AbstractQVTcoreASSaverNormal
 {
 	public QVTcoreASSaverNormalizeVisitor(@NonNull ASSaver context) {
 		super(context);
-	}	
+	}
 }

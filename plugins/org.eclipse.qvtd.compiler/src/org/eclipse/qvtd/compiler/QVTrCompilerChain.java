@@ -62,9 +62,13 @@ public class QVTrCompilerChain extends AbstractCompilerChain
     	QVTrToQVTc t = new QVTrToQVTc(environmentFactory, rResource, cResource);
 		t.prepare();
 		t.execute();
-        t.saveTrace(traceResource, XMIUtil.createSaveOptions());
+		Map<?, ?> saveOptions = getOption(QVTR_STEP, SAVE_OPTIONS_KEY);
+		if (saveOptions == null) {
+			saveOptions = XMIUtil.createSaveOptions();
+		}
+        t.saveTrace(traceResource, saveOptions);
         assertNoResourceErrors("Trace save", traceResource);
-        t.saveCore(cResource, XMIUtil.createSaveOptions());
+        t.saveCore(cResource, saveOptions);
         assertNoResourceErrors("Core save", cResource);
 		compiled(QVTC_STEP, cResource);
 		return cResource;
