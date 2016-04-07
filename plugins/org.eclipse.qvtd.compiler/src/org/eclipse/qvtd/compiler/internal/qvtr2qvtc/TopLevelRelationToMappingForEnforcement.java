@@ -46,12 +46,14 @@ import com.google.common.collect.Sets;
 
 	private class RelationDomain2CoreDomain extends AbstractRelationDomain2CoreDomain
 	{
-		private @NonNull RealizedVariable mtev;			// The mapping template expression variable (the realized variable enforced by the domain pattern)
+		private @Nullable RealizedVariable mtev;			// The mapping template expression variable (the realized variable enforced by the domain pattern)
+															// null if it is a when argument
 			
 		public RelationDomain2CoreDomain(@NonNull RelationDomain rd) {
 			super(rd, getCoreMappingName(rd));
 			//
-			this.mtev = doRVarToMRealizedVar(tev, db);
+			Set<@NonNull Variable> whenVars = getWhenVars(r);
+			this.mtev = whenVars.contains(tev) ? null : doRVarToMRealizedVar(tev, db);
 		}
 
 		// 47
@@ -116,7 +118,9 @@ import com.google.common.collect.Sets;
 		@Override
 		protected void setAttributes() {
 			super.setAttributes();
-			db.getRealizedVariable().add(mtev);
+			if (mtev != null) {
+				db.getRealizedVariable().add(mtev);
+			}
 		}
 
 		@Override
