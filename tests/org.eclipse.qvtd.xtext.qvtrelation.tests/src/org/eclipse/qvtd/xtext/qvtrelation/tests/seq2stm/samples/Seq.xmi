@@ -2,8 +2,8 @@
 <Dummy xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="SeqMM"
-    xsi:schemaLocation="SeqMM ../SeqMM.ecore">
+    xmlns="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqMM"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqMM ../SeqMM.ecore">
   <hasInteraction
       name="interactions1">
     <lifeline

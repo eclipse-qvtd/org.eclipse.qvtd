@@ -62,7 +62,8 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	private static final @NonNull Map<@NonNull String, @NonNull String> step2extension = new HashMap<@NonNull String, @NonNull String>();
 	static {
 		step2extension.put(QVTR_STEP, "qvtras");
-		step2extension.put(TRACE_STEP, "ecore.oclas");
+		step2extension.put(TRACE_STEP, "ecore");
+		step2extension.put(GENMODEL_STEP, "genmodel");
 		step2extension.put(QVTC_STEP, "qvtcas");
 		step2extension.put(QVTU_STEP, "qvtu.qvtcas");
 		step2extension.put(QVTM_STEP, "qvtm.qvtcas");

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<stmc:StateMachine xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmc="StmcMM"
-    xsi:schemaLocation="StmcMM java://org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.StmcMM.StmcMMPackage" name="interactions1">
+<stmc:StateMachine xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmc="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/StmcMM"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/StmcMM ../StmcMM.ecore" name="interactions1">
   <state name="state1"/>
 </stmc:StateMachine>

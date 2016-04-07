@@ -53,7 +53,7 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
           }
      }
      
-/*     top relation MessageToTransition
+     top relation MessageToTransition
      {
           mid: String;
 
@@ -112,6 +112,6 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
                MessageToTransition(m1, tr1);
                MessageToTransition(m2, tr2);
           }
-     } */
+     }
 
 }

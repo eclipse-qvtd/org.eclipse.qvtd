@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -36,6 +37,7 @@ import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTm2QVTp;
 import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
@@ -49,13 +51,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.JavaSourceFileObject;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
-import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.PSeqToStm.PSeqToStmPackage;
-import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.SeqMM.SeqMMPackage;
-import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.StmcMM.StmcMMPackage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +67,8 @@ import junit.framework.TestCase;
  */
 public class QVTrCompilerTests extends LoadTestCase
 {
-	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtrelation.tests/bin/org/eclipse/qvtd/xtext/qvtrelation/tests", true);
+	private static final @NonNull String PROJECT_NAME = "org.eclipse.qvtd.xtext.qvtrelation.tests";
+	private static final @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME + "/bin/" + PROJECT_NAME.replace(".",  "/"), true);
 
 	protected static class MyQVT extends QVTimperative
 	{
@@ -84,22 +85,21 @@ public class QVTrCompilerTests extends LoadTestCase
 			this.testFolderName = testFolderName;
 			this.testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
 	        this.samplesBaseUri = testFolderURI.appendSegment("samples");
-			//
-			// Explicitly install the eInstances that would normally make it into the ProjectMap from extension point registrations.
-			// Test models are not registered via extension point so we have to do this manually.
-			//
-			ResourceSetImpl resourceSet = (ResourceSetImpl) getResourceSet();
-			for (EPackage eInstance : eInstances) {
-				nsURIs.add(eInstance.getNsURI());
-				resourceSet.getURIResourceMap().put(testFolderURI.appendSegment(eInstance.getName()+".ecore"), eInstance.eResource());
-			}
+			installEPackages(eInstances);
 		}
 
-		public @NonNull Transformation compileTransformation(@NonNull String testFileName, @NonNull String outputName) throws Exception {
+		public @NonNull Transformation compileTransformation(@NonNull String testFileName, @NonNull String outputName, @NonNull String basePrefix, @NonNull String middleNsURI) throws Exception {
 			Map<@NonNull String, @NonNull Map<AbstractCompilerChain.Key<?>, Object>> options = new HashMap<@NonNull String, @NonNull Map<AbstractCompilerChain.Key<?>, Object>>();
 			URI prefixURI = testFolderURI.appendSegment(testFileName);
 			compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), prefixURI, options);
-			compilerChain.setOption(AbstractCompilerChain.DEFAULT_STEP, AbstractCompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
+			compilerChain.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
+			Map<@NonNull String, @Nullable String> traceOptions = new HashMap<@NonNull String, @Nullable String>();
+			traceOptions.put(CompilerChain.TRACE_NS_URI, middleNsURI);
+			compilerChain.setOption(CompilerChain.TRACE_STEP, CompilerChain.TRACE_OPTIONS_KEY, traceOptions);
+			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<@NonNull String, @Nullable String>();
+			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, basePrefix);
+			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
+			compilerChain.setOption(CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
 	    	return compilerChain.compile(outputName);
 		}
 
@@ -186,6 +186,18 @@ public class QVTrCompilerTests extends LoadTestCase
 			saveOptions.put(ASResource.OPTION_NORMALIZE_CONTENTS, Boolean.TRUE);
 			return saveOptions;
 		}
+
+		/**
+		 * Explicitly install the eInstances that would normally make it into the ProjectMap from extension point registrations.
+		 * Test models are not registered via extension point so we have to do this manually.
+		 */
+		public void installEPackages(EPackage... eInstances) {
+			ResourceSetImpl resourceSet = (ResourceSetImpl) getResourceSet();
+			for (EPackage eInstance : eInstances) {
+				nsURIs.add(eInstance.getNsURI());
+				resourceSet.getURIResourceMap().put(testFolderURI.appendSegment(eInstance.getName()+".ecore"), eInstance.eResource());
+			}
+		}
 				
 		private void loadGenModel(@NonNull URI genModelURI) {
 			ResourceSet resourceSet = getResourceSet();
@@ -266,7 +278,7 @@ public class QVTrCompilerTests extends LoadTestCase
     	MyQVT myQVT = new MyQVT("seq2stm");
     	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
-	    	Transformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm");
+	    	Transformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm", PROJECT_NAME + ".seq2stm", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm");
 	    	myQVT.createInterpretedExecutor(asTransformation);
 	    	myQVT.loadInput("seqDgm", "Seq.xmi");
 	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Seq2Stmc_trace.xmi");
@@ -285,11 +297,16 @@ public class QVTrCompilerTests extends LoadTestCase
 		AbstractTransformer.INVOCATIONS.setState(true);
 		Scheduler.DEBUG_GRAPHS.setState(true);;
     	QVTm2QVTp.PARTITIONING.setState(true);
-    	MyQVT myQVT = new MyQVT("seq2stm", SeqMMPackage.eINSTANCE, StmcMMPackage.eINSTANCE, PSeqToStmPackage.eINSTANCE);
-//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	MyQVT myQVT = new MyQVT("seq2stm"); //, SeqMMPackage.eINSTANCE, StmcMMPackage.eINSTANCE, PSeqToStmPackage.eINSTANCE);
     	try {
-	    	Transformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm");
-	        Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "SeqToStm.genmodel");
+	    	String projectTestName = PROJECT_NAME + ".seq2stm";
+			Transformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm");
+			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
+	    	Class<?> seqmmClass = Class.forName(projectTestName + ".SeqMM.SeqMMPackage");
+	    	Field seqmmField = seqmmClass.getDeclaredField("eINSTANCE");
+	    	EPackage seqmmEPackage = (EPackage) seqmmField.get(null);
+	    	myQVT.getResourceSet().getPackageRegistry().put(seqmmEPackage.getNsURI(), seqmmEPackage);
+	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "SeqToStm.genmodel");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
 	    	myQVT.loadInput("seqDgm", "Seq.xmi");

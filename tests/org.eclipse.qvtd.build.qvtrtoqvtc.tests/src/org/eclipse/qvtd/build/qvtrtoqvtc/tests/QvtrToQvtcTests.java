@@ -92,7 +92,7 @@ public class QvtrToQvtcTests extends LoadTestCase {
 		
     }*/
     
-    @Test
+/*    @Test
     public void testSeqToStm() throws Exception {
     	
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("seqtostm");
@@ -109,11 +109,11 @@ public class QvtrToQvtcTests extends LoadTestCase {
     	QVTrToQVTc t = new QVTrToQVTc(ocl.getEnvironmentFactory(), qvtrResource, qvtcResource);
 		t.prepare();
 		t.execute();		
-        t.saveTrace(qvtcTraceResource, TestsXMLUtil.defaultSavingOptions);
+        t.saveTrace(qvtcTraceResource, qvtcTraceURI, TestsXMLUtil.defaultSavingOptions);
         assertNoResourceErrors("Trace save", qvtcTraceResource);
         t.saveCore(qvtcResource, TestsXMLUtil.defaultSavingOptions);
         assertNoResourceErrors("Core save", qvtcResource);
         ocl.dispose();
-    }
+    } */
 
 }

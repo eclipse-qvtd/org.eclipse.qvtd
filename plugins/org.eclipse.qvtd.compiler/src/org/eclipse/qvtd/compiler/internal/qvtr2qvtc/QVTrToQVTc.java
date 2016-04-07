@@ -19,19 +19,39 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.codegen.ecore.generator.Generator;
+import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
+import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory.Descriptor.Registry;
+import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
+import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
+import org.eclipse.emf.codegen.ecore.genmodel.util.GenModelUtil;
+import org.eclipse.emf.common.util.BasicMonitor;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.importer.ecore.EcoreImporter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.EnumLiteralExp;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
@@ -44,10 +64,11 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.util.DerivedConstants;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
@@ -58,6 +79,7 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
@@ -82,6 +104,29 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class QVTrToQVTc
 {
+	private class Issues {
+
+		public void addError(QVTrToQVTc qvTrToQVTc, String message,
+				Object object, Object object2, Throwable throwable,
+				List<Object> data) {
+			System.err.println(message);
+		}
+
+		public void addWarning(QVTrToQVTc qvTrToQVTc, String message,
+				Object object, Object object2, Throwable throwable,
+				List<Object> data) {
+			System.out.println(message);
+		}
+
+		public void addError(QVTrToQVTc qvTrToQVTc, String string) {
+			System.err.println(string);
+		}
+
+		public void addWarning(QVTrToQVTc qvTrToQVTc, String string) {
+			System.out.println(string);
+		}
+		
+	}
 	/**
 	 * An ExpressionCopier deep copies an OCLExpression tree, exploiting the forward traceability of context to
 	 * update references and using sibling to distinguish multiple targets.
@@ -125,6 +170,11 @@ public class QVTrToQVTc
 	protected final @NonNull EnvironmentFactory environmentFactory;	
 	private final @NonNull Resource qvtrResource;
 	private final @NonNull Resource qvtcResource;
+	
+	/**
+	 * Optional configuration of the NsURI of the trace package.
+	 */
+	private @Nullable String traceNsURI = null;
 	private final @NonNull Map<@NonNull Element, @NonNull Element> target2source = new HashMap<@NonNull Element, @NonNull Element>();
 	private final @NonNull Map<@NonNull Element, @NonNull List<@NonNull Element>> source2targets = new HashMap<@NonNull Element, @NonNull List<@NonNull Element>>();
 	
@@ -621,16 +671,59 @@ public class QVTrToQVTc
 		relationalTransformation2tracePackage.put(rt, tracePackage);
 //		putTrace(tracePackage, rt);
 	}
+	
+	protected void reportDiagnostics(Issues issues, Diagnostic diagnostic) {
+		int severity = diagnostic.getSeverity();
+		if (severity != Diagnostic.OK) {
+			List<Diagnostic> children = diagnostic.getChildren();
+			if (children.size() > 0) {
+				for (Diagnostic child : children) {
+					severity = child.getSeverity();
+					@SuppressWarnings("unchecked") List<Object> data = (List<Object>) child.getData();
+					Throwable throwable = null;
+					String message;
+					if ((data.size() == 1) && (data.get(0) instanceof Throwable)) {
+						throwable = (Throwable) data.get(0);
+						data = null;
+						message = child.getMessage();
+					}
+					else {
+						message = child.toString();
+					}
+					if (severity == Diagnostic.ERROR) {
+						issues.addError(this, message, null, null, throwable, data);
+					}
+					else if (severity == Diagnostic.WARNING) {
+						issues.addWarning(this, message, null, null, throwable, data);
+					}
+				}
+			}
+			else {
+				if (severity == Diagnostic.ERROR) {
+					issues.addError(this, diagnostic.toString());
+				}
+				else if (severity == Diagnostic.WARNING) {
+					issues.addWarning(this, diagnostic.toString());
+				}
+			}
+		}
+	}
 
 	public void saveCore(@NonNull Resource asResource, @NonNull Map<?, ?> options) throws IOException {
         this.coreModel.setExternalURI(asResource.getURI().toString());
-        // Copy imports
-        
         org.eclipse.ocl.pivot.Package corePackage = PivotFactory.eINSTANCE.createPackage();
         corePackage.setName("");
         this.coreModel.getOwnedPackages().add(corePackage);
         asResource.getContents().add(this.coreModel);
         corePackage.getOwnedClasses().addAll(coreTransformations);
+        // Copy imports
+        
+        for (org.eclipse.ocl.pivot.@NonNull Package asPackage : tracePackages) {
+            Import asImport = PivotFactory.eINSTANCE.createImport();
+//            asImport.setName(asPackage.getName());			// FIXME safe name
+            asImport.setImportedNamespace(asPackage);
+            coreModel.getOwnedImports().add(asImport);
+        }
 //		-- scan for dangling references if this is really wanted
 //		for (EObject eObject : potentialOrphans) {
 //			if (eObject.eContainer() == null) {
@@ -640,23 +733,180 @@ public class QVTrToQVTc
 		asResource.save(options);
 	}
 
-	public void saveTrace(@NonNull Resource asResource,  @NonNull Map<?, ?> options) throws IOException {
+	public @NonNull Resource saveGenModel(@NonNull Resource asResource, @NonNull URI traceURI, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @NonNull Map<Object, Object> saveOptions2) throws IOException {
+		URI trimFileExtension = traceURI.trimFileExtension();
+		String projectName;
+		if (trimFileExtension.isPlatform()) {
+			projectName = trimFileExtension.segment(1);
+		}
+		else {
+			projectName = trimFileExtension.segment(0);
+		}
+		Resource genmodelResource = environmentFactory.getResourceSet().createResource(genModelURI);
+		GenModel genModel = GenModelFactory.eINSTANCE.createGenModel();
+		genModel.getForeignModel().add(traceURI.lastSegment());
+		String copyrightText = genModelOptions != null ? genModelOptions.get(CompilerChain.GENMODEL_COPYRIGHT_TEXT) : null;
+		if (copyrightText != null) {
+			genModel.setCopyrightText(copyrightText);
+		}
+		genModel.setModelDirectory("/" + projectName + "/test-gen");
+		genModel.setModelPluginID(projectName);
+		genModel.setModelName(trimFileExtension.lastSegment());
+		genModel.setBundleManifest(false);
+		genModel.setUpdateClasspath(false);
+		genModel.setImporterID(new EcoreImporter().getID());
+		genModel.setComplianceLevel(GenJDKLevel.JDK80_LITERAL);
+		genModel.setCopyrightFields(false);
+		genModel.setOperationReflection(true);
+		genModel.setImportOrganizing(true);
+		genModel.setRootExtendsClass(MinimalEObjectImpl.Container.class.getName());
+		genModel.setPluginKey("");
+		genmodelResource.getContents().add(genModel);
+		String basePrefix = genModelOptions != null ? genModelOptions.get(CompilerChain.GENMODEL_BASE_PREFIX) : null;
+		List<GenPackage> genPackages = genModel.getGenPackages();
+		for (EObject eObject : asResource.getContents()) {
+			if (eObject instanceof Model) {
+				Model asModel = (Model)eObject;
+				for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(asModel.getOwnedPackages())) {
+					GenPackage genPackage = genModel.createGenPackage();
+					EPackage ePackage = (EPackage) asPackage.getESObject();
+					genPackage.setEcorePackage(ePackage);
+					genPackage.setPrefix(ePackage.getName());
+					if (basePrefix != null) {
+						genPackage.setBasePackage(basePrefix);
+					}
+					genPackages.add(genPackage);
+				}
+				Set<org.eclipse.ocl.pivot.@NonNull Package> asPackages = new HashSet<org.eclipse.ocl.pivot.@NonNull Package>();
+				for (EObject element : new TreeIterable(asModel, false)) {
+					if (element instanceof Property) {
+						Property property = (Property)element;
+						Type type = property.getType();
+						while (type instanceof CollectionType) {
+							type = ((CollectionType)type).getElementType();
+						}
+						if (type instanceof org.eclipse.ocl.pivot.Class) {
+							 org.eclipse.ocl.pivot.Package asPackage = ((org.eclipse.ocl.pivot.Class)type).getOwningPackage();
+							 if (asPackage != null) {
+								 asPackages.add(asPackage);
+							 }
+						}
+					}
+				}
+				for (@NonNull Import asImport : ClassUtil.nullFree(asModel.getOwnedImports())) {
+					Namespace asNamespace = asImport.getImportedNamespace();
+					if (asNamespace instanceof org.eclipse.ocl.pivot.Package) {
+						org.eclipse.ocl.pivot.@NonNull Package asPackage = (org.eclipse.ocl.pivot.Package)asNamespace;
+						asPackages.add(asPackage);
+					}
+				}
+				List<org.eclipse.ocl.pivot.@NonNull Package> asPackageList = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>(asPackages);
+				Collections.sort(asPackageList, NameUtil.NAMEABLE_COMPARATOR);
+				for (org.eclipse.ocl.pivot.@NonNull Package asPackage : asPackageList) {
+					EPackage ePackage = (EPackage) asPackage.getESObject();
+					if (ePackage != null) {
+						GenPackage genPackage = genModel.createGenPackage();
+						genPackage.setEcorePackage(ePackage);
+						genPackage.setPrefix(ePackage.getName());
+						if (basePrefix != null) {
+							genPackage.setBasePackage(basePrefix);
+						}
+						genPackages.add(genPackage);
+					}
+				}
+			}
+		}
+		genModel.reconcile();
+		Map<Object, Object> saveOptions = new HashMap<Object, Object>();
+		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
+		saveOptions.put(DerivedConstants.RESOURCE_OPTION_LINE_DELIMITER, "\n");
+	    saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+	    saveOptions.put(Resource.OPTION_LINE_DELIMITER, Resource.OPTION_LINE_DELIMITER_UNSPECIFIED);
+		genmodelResource.save(saveOptions);
+
+		
+		
+		generateModels(genModel);
+		
+		
+		return genmodelResource;
+	}
+
+	private void generateModels(@NonNull GenModel genModel) {
+		Registry generatorAdapterDescriptorRegistry = GeneratorAdapterFactory.Descriptor.Registry.INSTANCE;
+		if (!generatorAdapterDescriptorRegistry.getDescriptors(GenModelPackage.eNS_URI).contains(GenModelGeneratorAdapterFactory.DESCRIPTOR)) {
+			generatorAdapterDescriptorRegistry.addDescriptor(GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
+		}
+		if (!generatorAdapterDescriptorRegistry.getDescriptors(GenModelPackage.eNS_URI).contains(OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR)) {
+			generatorAdapterDescriptorRegistry.addDescriptor(GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
+		}
+//**		ResourceUtils.checkResourceSet(resourceSet);
+		// genModel.setCanGenerate(true);
+		// validate();
+
+		
+		
+		genModel.setValidateModel(true); // The more checks the better
+//		genModel.setCodeFormatting(true); // Normalize layout
+		genModel.setForceOverwrite(false); // Don't overwrite read-only
+											// files
+		genModel.setCanGenerate(true);
+		// genModel.setFacadeHelperClass(null); // Non-null gives JDT
+		// default NPEs
+//		genModel.setFacadeHelperClass(ASTFacadeHelper.class.getName()); // Bug 308069
+		// genModel.setValidateModel(true);
+//		genModel.setBundleManifest(false); // New manifests should be
+//											// generated manually
+//		genModel.setUpdateClasspath(false); // New class-paths should be
+//											// generated manually
+//		if (genModel.getComplianceLevel().compareTo(GenJDKLevel.JDK50_LITERAL) < 0) {
+//			genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
+//		}
+		// genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
+		Diagnostic diagnostic = genModel.diagnose();
+		reportDiagnostics(new Issues(), diagnostic);
+
+		/*
+		 * JavaModelManager.getJavaModelManager().initializePreferences();
+		 * new
+		 * JavaCorePreferenceInitializer().initializeDefaultPreferences();
+		 * 
+		 * GenJDKLevel genSDKcomplianceLevel =
+		 * genModel.getComplianceLevel(); String complianceLevel =
+		 * JavaCore.VERSION_1_5; switch (genSDKcomplianceLevel) { case
+		 * JDK60_LITERAL: complianceLevel = JavaCore.VERSION_1_6; case
+		 * JDK14_LITERAL: complianceLevel = JavaCore.VERSION_1_4; default:
+		 * complianceLevel = JavaCore.VERSION_1_5; } // Hashtable<?,?>
+		 * defaultOptions = JavaCore.getDefaultOptions(); //
+		 * JavaCore.setComplianceOptions(complianceLevel, defaultOptions);
+		 * // JavaCore.setOptions(defaultOptions);
+		 */
+
+//		Generator generator = new Generator();
+//		generator.setInput(genModel);
+		Generator generator = GenModelUtil.createGenerator(genModel);
+		Monitor monitor = /*showProgress ? new LoggerMonitor(log) :*/ new BasicMonitor();
+		diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, monitor);
+		reportDiagnostics(new Issues(), diagnostic);
+	}
+
+
+	public @NonNull Resource saveTrace(@NonNull Resource asResource, @NonNull URI traceURI, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> traceOptions, @NonNull Map<?, ?> saveOptions) throws IOException {
         Model root = PivotFactory.eINSTANCE.createModel();
-        URI asURI = ClassUtil.nonNullState(asResource.getURI());
-		URI traceURI = PivotUtilInternal.getNonASURI(asURI);
 		root.setExternalURI(traceURI.toString());
         asResource.getContents().add(root);
-        for (org.eclipse.ocl.pivot.Package p : tracePackages) {
-            root.getOwnedPackages().add(p);
-            // Add the package to the CoreModel imports, there should be only one!!
-            Import i = PivotFactory.eINSTANCE.createImport();
-            i.setName(p.getName());
-            i.setImportedNamespace(p);
-            coreModel.getOwnedImports().add(i);
-        }
+		if ((traceNsURI != null) && (tracePackages.size() == 1)) {
+			tracePackages.get(0).setURI(traceNsURI);
+		}
+        root.getOwnedPackages().addAll(tracePackages);
 		AS2Ecore as2ecore = new AS2Ecore((EnvironmentFactoryInternal) environmentFactory, traceURI, null);
 		XMLResource ecoreResource = as2ecore.convertResource(asResource, traceURI);
-		ecoreResource.save(options);
+		ecoreResource.save(saveOptions);
+		return ecoreResource;
+	}
+
+	public void setTraceNsURI(@Nullable String traceNsURI) {
+		this.traceNsURI = traceNsURI;
 	}
 
 	private void transformToCoreTransformations(@NonNull List<@NonNull Transformation> coreTransformations, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
@@ -876,4 +1126,5 @@ public class QVTrToQVTc
 		}
 		return coreVariable;
 	}
+
 }

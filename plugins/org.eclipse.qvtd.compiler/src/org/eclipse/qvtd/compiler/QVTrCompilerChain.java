@@ -16,9 +16,11 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTuConfiguration;
@@ -46,7 +48,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
         if (missingOperationCallSources != null) {
         	System.err.println("Missing OperationCallExp sources  were fixed up for '" + txURI + "'");
         }
-		compiled(QVTR_STEP, rResource);
+//		compiled(QVTR_STEP, rResource);
 		Resource cResource = qvtr2qvtc(rResource);
 		assert cResource != null;
 		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
@@ -57,20 +59,40 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	private @NonNull Resource qvtr2qvtc(@NonNull Resource rResource) throws IOException {
 		URI qvtcURI = getURI(QVTC_STEP, URI_KEY);
 		URI traceURI = getURI(TRACE_STEP, URI_KEY);
+		URI genModelURI = getURI(GENMODEL_STEP, URI_KEY);
+		Map<@NonNull String, @Nullable String> traceOptions = getOption(TRACE_STEP, TRACE_OPTIONS_KEY);
+		String traceNsURI = traceOptions != null ? traceOptions.get(TRACE_NS_URI) : null;
 		Resource cResource = createResource(qvtcURI);
-		Resource traceResource = createResource(traceURI);
+		Resource traceResource = createResource(PivotUtilInternal.getASURI(traceURI));
     	QVTrToQVTc t = new QVTrToQVTc(environmentFactory, rResource, cResource);
+    	if (traceNsURI != null) {
+    		t.setTraceNsURI(traceNsURI);
+    	}
 		t.prepare();
 		t.execute();
-		Map<?, ?> saveOptions = getOption(QVTR_STEP, SAVE_OPTIONS_KEY);
+		Map<Object, Object> saveOptions = getOption(TRACE_STEP, SAVE_OPTIONS_KEY);
 		if (saveOptions == null) {
 			saveOptions = XMIUtil.createSaveOptions();
 		}
-        t.saveTrace(traceResource, saveOptions);
+		t.saveTrace(traceResource, traceURI, genModelURI, traceOptions, saveOptions);
         assertNoResourceErrors("Trace save", traceResource);
+		compiled(TRACE_STEP, cResource);
+		saveOptions = getOption(QVTR_STEP, SAVE_OPTIONS_KEY);
+		if (saveOptions == null) {
+			saveOptions = XMIUtil.createSaveOptions();
+		}
         t.saveCore(cResource, saveOptions);
         assertNoResourceErrors("Core save", cResource);
 		compiled(QVTC_STEP, cResource);
+//		if (genModelURI != null) {
+			saveOptions = getOption(GENMODEL_STEP, SAVE_OPTIONS_KEY);
+			if (saveOptions == null) {
+				saveOptions = XMIUtil.createSaveOptions();
+			}
+			saveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
+		    t.saveGenModel(traceResource, traceURI, genModelURI, getOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY), saveOptions);
+			compiled(GENMODEL_STEP, cResource);
+//		}
 		return cResource;
 	}
 }

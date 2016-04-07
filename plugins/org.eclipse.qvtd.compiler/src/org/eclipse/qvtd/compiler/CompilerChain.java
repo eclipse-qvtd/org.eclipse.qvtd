@@ -47,6 +47,7 @@ public interface CompilerChain
 
 	public static final @NonNull String CLASS_STEP = "Class";
 	public static final @NonNull String DEFAULT_STEP = "default";
+	public static final @NonNull String GENMODEL_STEP = "GenModel";
 	public static final @NonNull String JAVA_STEP = "Java";
 	public static final @NonNull String QVTC_STEP = "QVTc";
 	public static final @NonNull String QVTG_STEP = "QVTg";
@@ -59,9 +60,16 @@ public interface CompilerChain
 	public static final @NonNull String TRACE_STEP = "Trace";
 	
 	public static final @NonNull Key<Boolean> CHECK_KEY = new Key<Boolean>("check");
-	public static final @NonNull Key<@NonNull Map<?,?>> SAVE_OPTIONS_KEY = new Key<@NonNull Map<?,?>>("save");
+	public static final @NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> GENMODEL_OPTIONS_KEY = new Key<@NonNull Map<@NonNull String, @Nullable String>>("genmodel");
+	public static final @NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> TRACE_OPTIONS_KEY = new Key<@NonNull Map<@NonNull String, @Nullable String>>("genmodel");
+	public static final @NonNull Key<@NonNull Map<Object, Object>> SAVE_OPTIONS_KEY = new Key<@NonNull Map<Object, Object>>("save");
 	public static final @NonNull Key<URI> URI_KEY = new Key<URI>("uri");
 	public static final @NonNull Key<Boolean> VALIDATE_KEY = new Key<Boolean>("validate");
+
+	public static final @NonNull String GENMODEL_BASE_PREFIX = "genModelBasePrefix";
+	public static final @NonNull String GENMODEL_COPYRIGHT_TEXT = "genModelCopyrightText";
+
+	public static final @NonNull String TRACE_NS_URI = "traceNsURI";
 
 	void addListener(@NonNull Listener listener);
 	@NonNull Class<? extends Transformer> build(@NonNull String outputName, @NonNull String ... genModelFiles) throws Exception;

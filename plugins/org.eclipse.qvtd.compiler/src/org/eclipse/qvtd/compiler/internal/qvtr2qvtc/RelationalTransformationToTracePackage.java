@@ -42,7 +42,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		org.eclipse.ocl.pivot.Package p = PivotFactory.eINSTANCE.createPackage();
 		p.setName("P" + rt.getName());
 		p.setNsPrefix("P" + rt.getName());
-		p.setURI(p.getName());
+//		p.setURI(p.getName());
 		qvtr2qvtc.putTracePackage(rt, p);
 		List<org.eclipse.ocl.pivot.@NonNull Class> ownedClasses = ClassUtil.nullFree(p.getOwnedClasses());
 		for (@NonNull Rule r : ClassUtil.nullFree(rt.getRule())) {
