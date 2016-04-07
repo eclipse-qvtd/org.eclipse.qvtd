@@ -280,7 +280,7 @@ public class QVTcCompilerTests extends LoadTestCase
     	MyQVT myQVT = new MyQVT("families2persons");
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
-	    	Transformation asTransformation = myQVT.compileTransformation("Families2Persons.qvtcas", "person");
+	    	Transformation asTransformation = myQVT.compileTransformation("Families2Persons.qvtc", "person");
 	    	myQVT.createInterpretedExecutor(asTransformation);
 	    	myQVT.loadInput("family", "Families.xmi");
 	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
@@ -304,7 +304,7 @@ public class QVTcCompilerTests extends LoadTestCase
     	MyQVT myQVT = new MyQVT("families2persons", Families2PersonsPackage.eINSTANCE, FamiliesPackage.eINSTANCE, PersonsPackage.eINSTANCE);
 //    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Class<? extends Transformer> txClass = myQVT.buildTransformation("Families2Persons.qvtcas", "person", "Families2Persons.genmodel");
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("Families2Persons.qvtc", "person", "Families2Persons.genmodel");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("family", "Families.xmi");
