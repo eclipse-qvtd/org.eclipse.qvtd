@@ -41,6 +41,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
@@ -56,6 +57,7 @@ import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
@@ -241,10 +243,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @Nullable Element visitImport(@NonNull Import iIn) {
-		    Import iOut = PivotFactory.eINSTANCE.createImport();
-		    context.addTrace(iIn, iOut);
-		    iOut.setName(iIn.getName());
-		    iOut.setImportedNamespace(iIn.getImportedNamespace());
+		    Import iOut = context.createImport(iIn);
 			createAll(iIn.getOwnedComments(), iOut.getOwnedComments());
 	        return iOut;
 		}
@@ -263,11 +262,9 @@ public abstract class AbstractQVTc2QVTc
 			if (PivotConstants.ORPHANAGE_URI.equals(pIn.getURI())) {
 				return null;
 			}
-		    Package pOut = PivotFactory.eINSTANCE.createPackage();
-		    context.addTrace(pIn, pOut);
-		    pOut.setName(pIn.getName());
-		    pOut.setURI(pIn.getURI());
+		    Package pOut = context.createPackage(pIn);
 		    createAll(pIn.getOwnedClasses(), pOut.getOwnedClasses());
+		    createAll(pIn.getOwnedPackages(), pOut.getOwnedPackages());
 		    createAll(pIn.getOwnedComments(), pOut.getOwnedComments());
 		    return pOut;
 		}
@@ -558,6 +555,7 @@ public abstract class AbstractQVTc2QVTc
 		@Override
 		public @Nullable Object visitPackage(@NonNull Package pOut) {
 			updateAllChildren(pOut.getOwnedClasses());
+			updateAllChildren(pOut.getOwnedPackages());
 			return null;
 		}
 
@@ -638,6 +636,7 @@ public abstract class AbstractQVTc2QVTc
     protected final @NonNull EnvironmentFactory environmentFactory;
     protected final @NonNull AbstractCreateVisitor<@NonNull ?> createVisitor;
     protected final @NonNull AbstractUpdateVisitor<@NonNull ?> updateVisitor;
+    private final @NonNull QVTcoreHelper helper;
 	private TypedModel middleTypedModelTarget = null;
 
     /**
@@ -668,6 +667,7 @@ public abstract class AbstractQVTc2QVTc
         this.environmentFactory = environmentFactory;
 		this.createVisitor = createCreateVisitor();
 		this.updateVisitor = createUpdateVisitor();
+		this.helper = new QVTcoreHelper(environmentFactory);
 	}
 	
     public void addDebugCopies(@NonNull Map<EObject, EObject> copier) {
@@ -713,6 +713,18 @@ public abstract class AbstractQVTc2QVTc
 	}
 	
 	protected abstract @NonNull AbstractCreateVisitor<@NonNull ?> createCreateVisitor();
+
+	protected @NonNull Import createImport(@NonNull Import iIn) {
+	    Import iOut = helper.createImport(iIn.getName(), ClassUtil.nonNull(iIn.getImportedNamespace()));
+	    addTrace(iIn, iOut);
+        return iOut;
+	}
+
+	protected org.eclipse.ocl.pivot.@NonNull Package createPackage(org.eclipse.ocl.pivot.@NonNull Package pIn) {
+		org.eclipse.ocl.pivot.Package pOut = helper.createPackage(ClassUtil.nonNull(pIn.getName()), pIn.getNsPrefix(), pIn.getURI());
+	    addTrace(pIn, pOut);
+		return pOut;
+	}
 	
 	protected abstract @NonNull AbstractUpdateVisitor<@NonNull ?> createUpdateVisitor();
 	

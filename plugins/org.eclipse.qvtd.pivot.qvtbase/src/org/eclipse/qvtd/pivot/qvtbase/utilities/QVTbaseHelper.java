@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.CollectionRange;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.IfExp;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.pivot.IterateExp;
@@ -31,10 +32,12 @@ import org.eclipse.ocl.pivot.LetExp;
 import org.eclipse.ocl.pivot.MapLiteralExp;
 import org.eclipse.ocl.pivot.MapLiteralPart;
 import org.eclipse.ocl.pivot.MapType;
+import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
@@ -122,6 +125,13 @@ public class QVTbaseHelper // FIXME extends PivotHelper
 		asIf.setType(commonType);
 		asIf.setIsRequired(asThen.isIsRequired() && asElse.isIsRequired());
 		return asIf;
+	}
+	
+	public  @NonNull Import createImport(@Nullable String name, @NonNull Namespace namespace) {
+		Import asImport = PivotFactory.eINSTANCE.createImport();
+		asImport.setName(name);
+		asImport.setImportedNamespace(namespace);
+		return asImport;
 	}
 
 	public @NonNull IntegerLiteralExp createIntegerLiteralExp(@NonNull Number integerSymbol) {
@@ -294,6 +304,18 @@ public class QVTbaseHelper // FIXME extends PivotHelper
 		}
 		asOperationCallExp.setType(returnType);
 		return asOperationCallExp;
+	}
+
+	public org.eclipse.ocl.pivot.@NonNull Package createPackage(@NonNull String name, @Nullable String nsPrefix, @Nullable String nsURI) {
+		Package asPackage = PivotFactory.eINSTANCE.createPackage();
+		asPackage.setName(name);
+		if (nsPrefix != null) {
+			asPackage.setNsPrefix(nsPrefix);
+		}
+		if (nsURI != null) {
+			asPackage.setURI(nsURI);
+		}
+		return asPackage;
 	}
 
 	public @NonNull Predicate createPredicate(@NonNull OCLExpression asConditionExpression) {

@@ -16,6 +16,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -49,5 +50,9 @@ public class QVTcoreUtil extends QVTcoreBaseUtil
 
 	public static @NonNull Transformation loadTransformation(@NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
 		return loadTransformation(CoreModel.class, environmentFactory, transformationURI, keepDebug);
+	}
+
+	public static @NonNull Resource loadTransformations(@NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+		return loadTransformations(CoreModel.class, environmentFactory, transformationURI, keepDebug);
 	}
 }

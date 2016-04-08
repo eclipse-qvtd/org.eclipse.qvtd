@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrToQVTc;
@@ -41,8 +40,9 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 
 	@Override
 	public @NonNull Transformation compile(@NonNull String enforcedOutputName) throws IOException {
-		Transformation loadTransformation = QVTrelationUtil.loadTransformation(environmentFactory, txURI, false);
-		Resource rResource = ClassUtil.nonNullState(loadTransformation.eResource());
+//		Transformation loadTransformation = QVTrelationUtil.loadTransformation(environmentFactory, txURI, false);
+//		Resource rResource = ClassUtil.nonNullState(loadTransformation.eResource());
+		Resource rResource = QVTrelationUtil.loadTransformations(environmentFactory, txURI, false);
         // FIXME Following code fixes up missing source. Should be fixed earlier.
         List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, rResource);
         if (missingOperationCallSources != null) {

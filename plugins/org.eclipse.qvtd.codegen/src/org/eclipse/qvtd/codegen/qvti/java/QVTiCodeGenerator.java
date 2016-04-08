@@ -72,6 +72,10 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		this.transformation = transformation;
 	}
 
+	protected @NonNull QVTiAS2CGVisitor createAS2CGVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext gContext) {
+		return new QVTiAS2CGVisitor(analyzer, gContext);
+	}
+
 	@Override
 	public @NonNull AnalysisVisitor createAnalysisVisitor() {
 		return new QVTiAnalysisVisitor(cgAnalyzer);
@@ -92,13 +96,32 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	protected @NonNull CGPackage createCGPackage() {
-		CGPackage cgPackage = createPrefixedCGPackage(ClassUtil.nonNullModel(transformation.getOwningPackage()), getOptions().getPackagePrefix());
 		QVTiAS2CGVisitor pivot2CGVisitor = createAS2CGVisitor(cgAnalyzer, getGlobalContext());
 		CGTransformation cgTransformation = (CGTransformation) ClassUtil.nonNullState(transformation.accept(pivot2CGVisitor));
-		cgPackage.getClasses().add(cgTransformation);
-		while (cgPackage.eContainer() != null) {
-			cgPackage = (CGPackage)cgPackage.eContainer();
+		CGPackage cgPackage = null;
+		for (org.eclipse.ocl.pivot.Package asPackage = transformation.getOwningPackage(); asPackage != null; asPackage = asPackage.getOwningPackage()) {
+			CGPackage cgPackage2 = createCGPackage(asPackage);
+			if (cgTransformation != null) {
+				cgPackage2.getClasses().add(cgTransformation);
+				cgTransformation = null;
+			}
+			else {
+				cgPackage2.getPackages().add(cgPackage);
+			}
+			cgPackage = cgPackage2;
+		}			
+		String packagePrefix = getOptions().getPackagePrefix();
+		if (packagePrefix != null) {
+			String[] segments = packagePrefix.split("\\.");
+			for (int i = segments.length; --i >= 0; ) {
+				String segment = segments[i];
+				CGPackage cgPackage2 = CGModelFactory.eINSTANCE.createCGPackage();
+				cgPackage2.setName(segment);
+				cgPackage2.getPackages().add(cgPackage);
+				cgPackage = cgPackage2;
+			}
 		}
+		assert cgPackage != null;
 		return cgPackage;
 	}
 
@@ -132,36 +155,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		javaSourceCode2 = ImportUtils.resolveImports(generator.toString(), long2ShortImportNames, false);
 		return javaSourceCode2;
 	}
-	
-	protected @NonNull CGPackage createPrefixedCGPackage(org.eclipse.ocl.pivot.@NonNull Package asPackage, String packagePrefix) {
-		
-		CGPackage cgPackage = createCGPackage(asPackage);
-		// Prefix Packages		
-		if (packagePrefix != null) {
-			CGPackage lastSPackage = null;
-			for (String segment : packagePrefix.split("\\.")) {
-				CGPackage sPackage = CGModelFactory.eINSTANCE.createCGPackage();
-				sPackage.setName(segment);
-				if (lastSPackage != null) {
-					lastSPackage.getPackages().add(sPackage);
-				}
-				lastSPackage = sPackage;
-			}
-			// We add the root created CG Package to the last prefix segment CG Package
-			if (lastSPackage != null) {
-				CGPackage cgParentPackage = cgPackage;
-				while (cgParentPackage.eContainer() != null) {
-					cgParentPackage = (CGPackage)cgParentPackage.eContainer();
-				}
-				lastSPackage.getPackages().add(cgParentPackage);
-			}
-		}
-		return cgPackage;
-	}
 
-	protected @NonNull QVTiAS2CGVisitor createAS2CGVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext gContext) {
-		return new QVTiAS2CGVisitor(analyzer, gContext);
-	}
 	@Override
 	public @NonNull CGModelResourceFactory getCGResourceFactory() {
 		return QVTiCGModelResourceFactory.INSTANCE;

@@ -85,6 +85,29 @@ public class QVTbaseUtil
 	}
 
 	/**
+	 * Return all transformations in asModel.
+	 */
+	public static @NonNull List<@NonNull Transformation> getAllTransformations(@NonNull Model asModel) {
+		List<@NonNull Transformation> asTransformations = new ArrayList<@NonNull Transformation>();
+		getAllTransformations(ClassUtil.nullFree(asModel.getOwnedPackages()), asTransformations);
+		return asTransformations;
+	}
+
+	/**
+	 * Accumlate all transformations transitively in asPackages into asTransformations.
+	 */
+	public static void getAllTransformations(@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> asPackages, @NonNull List<@NonNull Transformation> asTransformations) {
+		for (org.eclipse.ocl.pivot.@NonNull Package asPackage : asPackages) {
+			for (org.eclipse.ocl.pivot.@NonNull Class asClass : ClassUtil.nullFree(asPackage.getOwnedClasses())) {
+				if (asClass instanceof Transformation) {
+					asTransformations.add((Transformation)asClass);
+				}
+			}
+			getAllTransformations(ClassUtil.nullFree(asPackage.getOwnedPackages()), asTransformations);
+		}
+	}
+
+	/**
 	 * Return the closure of typedModel and its dependsOn.
 	 */
 	public static @NonNull Set<TypedModel> getAllTypedModels(@NonNull TypedModel typedModel) {
@@ -293,6 +316,52 @@ public class QVTbaseUtil
 			}
 		}
         throw new IOException("Failed to locate a transformation in '" + transformationURI + "'");
+	}
+	
+    public static @NonNull Resource loadTransformations(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+        CSResource xtextResource = null;
+		ASResource asResource;
+		// Load the transformation resource
+		if (PivotUtilInternal.isASURI(transformationURI)) {
+			asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
+		}
+		else {
+	        xtextResource = (CSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
+	        if (xtextResource == null) {
+	            throw new IOException("Failed to load '" + transformationURI + "'");
+	        }
+			String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
+			if (csMessage != null) {
+				throw new IOException(csMessage);
+			}
+			asResource = xtextResource.getASResource();
+		}	
+		if (asResource == null) {
+			throw new IOException("Failed to load '" + transformationURI + "'");
+		}
+		return asResource;
+/*		try {
+			String asMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(asResource.getErrors()), "Failed to load '" + asResource.getURI() + "'", "\n");
+			if (asMessage != null) {
+				throw new IOException(asMessage);
+			}
+			for (EObject eContent : asResource.getContents()) {
+				if (modelClass.isInstance(eContent)) {
+	    			for (org.eclipse.ocl.pivot.Package asPackage : ((Model)eContent).getOwnedPackages()) {		// FIXME nested classes
+    	    			for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
+    	    				if (asClass instanceof Transformation) {
+    	    	                return (Transformation)asClass;
+    	    				}
+    	    			}
+	    			}
+				}
+			}
+		} finally {
+			if (!keepDebug && (xtextResource instanceof CSResource.CSResourceExtension)) {
+				((CSResource.CSResourceExtension)xtextResource).dispose();
+			}
+		}
+        throw new IOException("Failed to locate a transformation in '" + transformationURI + "'"); */
 	}
 
     /**

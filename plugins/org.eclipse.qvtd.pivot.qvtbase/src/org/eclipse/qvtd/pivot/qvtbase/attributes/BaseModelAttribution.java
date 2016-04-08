@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
 public class BaseModelAttribution extends ModelAttribution
 {
@@ -29,6 +30,10 @@ public class BaseModelAttribution extends ModelAttribution
 		if (unnamedPackage != null) {
 			environmentView.addAllTypes(unnamedPackage);
 		}
-		return super.computeLookup(target, environmentView, scopeView);
+		ScopeView nextScopeView = super.computeLookup(target, environmentView, scopeView);
+		if (!environmentView.hasFinalResult()) {
+			environmentView.addNamedElements(QVTbaseUtil.getAllTransformations(targetElement));
+		}
+		return nextScopeView;
 	}
 }

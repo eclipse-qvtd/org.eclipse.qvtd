@@ -233,10 +233,10 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		importPackages(csElement);
 		@NonNull ImperativeModel asModel = refreshRoot(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, csElement);
 		context.refreshPivotList(Import.class, asModel.getOwnedImports(), csElement.getOwnedImports());
-		List<TransformationCS> csTransformations = csElement.getOwnedTransformations();
+		List<@NonNull TransformationCS> csTransformations = ClassUtil.nullFree(csElement.getOwnedTransformations());
 //		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
-		for (TransformationCS csTransformation : csTransformations) {
+		for (@NonNull TransformationCS csTransformation : csTransformations) {
 			Transformation pTransformation = PivotUtil.getPivot(Transformation.class, csTransformation);
 			tx2mappings.put(pTransformation, new ArrayList<Mapping>());
 //			txList.add(pTransformation);
@@ -246,7 +246,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 //			PivotUtil.refreshList(asModel.getOwnedTransformations(), txList);
 //		}
 //		List<TransformationCS> csTransformations = csElement.getTransformations();
-		List<org.eclipse.ocl.pivot.Package> asPackages = resolveTransformations(csTransformations, asModel);
+		List<org.eclipse.ocl.pivot.@NonNull Package> asPackages = resolveTransformations(csTransformations, asModel);
 		PivotUtilInternal.refreshList(asModel.getOwnedPackages(), asPackages);
 		//
 		Resource eResource = csElement.eResource();

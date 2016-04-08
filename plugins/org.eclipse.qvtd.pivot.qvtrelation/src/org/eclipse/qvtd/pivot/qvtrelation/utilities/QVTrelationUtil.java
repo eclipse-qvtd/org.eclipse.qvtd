@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -41,5 +42,9 @@ public class QVTrelationUtil extends QVTbaseUtil
 
 	public static @NonNull Transformation loadTransformation(@NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
 		return loadTransformation(RelationModel.class, environmentFactory, transformationURI, keepDebug);
+	}
+
+	public static @NonNull Resource loadTransformations(@NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+		return loadTransformations(RelationModel.class, environmentFactory, transformationURI, keepDebug);
 	}
 }

@@ -275,7 +275,14 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		@Override
 		public @NonNull CoreModel visitCoreModel(@NonNull CoreModel mIn) {
 			CoreModel mOut = super.visitCoreModel(mIn);
-			mOut.setExternalURI(mIn.getExternalURI().replace(".qvtcas", ".qvtu.qvtcas"));
+			String externalURI = mIn.getExternalURI();
+			if (externalURI.endsWith(".qvtcas")) {
+				externalURI = externalURI.replace(".qvtcas", ".qvtu.qvtcas");
+			}
+			else if (externalURI.endsWith(".qvtc")) {
+				externalURI = externalURI.replace(".qvtc", ".qvtu.qvtcas");
+			}
+			mOut.setExternalURI(externalURI);
 			return mOut;
 		}
 

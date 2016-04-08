@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.schedule2qvti;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -25,11 +24,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.Import;
-import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.ids.OperationId;
@@ -37,7 +32,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.scheduler.AbstractRegion;
@@ -58,23 +52,14 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
-public class QVTs2QVTiVisitor implements Visitor<Element>
+public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Element>
 {
-	public static @NonNull Import createImport(@Nullable String name, @NonNull Namespace namespace) {
-		Import asImport = PivotFactory.eINSTANCE.createImport();
-		asImport.setName(name);
-		asImport.setImportedNamespace(namespace);
-		return asImport;
-	}
-
 	public static final @NonNull TracingOption POLLED_PROPERTIES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvti/polledProperties");
 	
-	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull Transformation qvtpTransformation;
 	protected final @NonNull SymbolNameReservation symbolNameReservation;
 
@@ -92,7 +77,7 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 	private final @NonNull Map<@NonNull String, @NonNull Operation> name2operation = new HashMap<@NonNull String, @NonNull Operation>();	// Workaround Bug 481658
 	
 	public QVTs2QVTiVisitor(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation qvtpTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
-		this.environmentFactory = environmentFactory;
+		super(environmentFactory);
 		this.qvtpTransformation = qvtpTransformation;
 		this.symbolNameReservation = symbolNameReservation;
 		String transformationName = qvtpTransformation.getName();
@@ -157,6 +142,7 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 			Transformation containingTransformation = QVTbaseUtil.getContainingTransformation(pOperation);
 			if (containingTransformation == qvtpTransformation) {
 				iOperation = EcoreUtil.copy(pOperation);
+				assert iOperation != null;
 				qvtpOperation2qvtiOperation.put(pOperation, iOperation);
 				qvtiTransformation.getOwnedOperations().add(iOperation);
 			}
@@ -168,6 +154,7 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 				Operation otherOperation = name2operation.get(pOperation.toString());
 				if (otherOperation != null) {
 					iOperation = EcoreUtil.copy(pOperation);
+					assert iOperation != null;
 					qvtpOperation2qvtiOperation.put(pOperation, iOperation);
 					qvtiTransformation.getOwnedOperations().add(iOperation);
 				}
@@ -382,7 +369,6 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 	@Override
 	public @Nullable Element visitRootScheduledRegion(@NonNull RootScheduledRegion rootScheduledRegion) {
 //		String name = rootRegion.getName();
-		org.eclipse.ocl.pivot.Package rootPackage = PivotUtil.createPackage("", "yy", "zz", null);
 		//
 		List<@NonNull Region> callableRegions = new ArrayList<@NonNull Region>();
 		for (@NonNull Region region : rootScheduledRegion.getRegions()) {
@@ -437,8 +423,9 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 				region2Mapping.createStatements();
 //			}
 		}
-		rootPackage.getOwnedClasses().add(qvtiTransformation);
 		ECollections.sort(qvtiTransformation.getRule(), NameUtil.NameableComparator.INSTANCE);
+/*		org.eclipse.ocl.pivot.Package rootPackage = PivotUtil.createPackage("", "yy", "zz", null);
+		rootPackage.getOwnedClasses().add(qvtiTransformation);
 		Model model = PivotUtil.createModel(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, null);
 		model.getOwnedPackages().add(rootPackage);
 		List<@NonNull Namespace> importedNamespaces = new ArrayList<@NonNull Namespace>();
@@ -453,8 +440,8 @@ public class QVTs2QVTiVisitor implements Visitor<Element>
 		List<Import> ownedImports = model.getOwnedImports();
 		for (@NonNull Namespace importedNamespace : importedNamespaces) {
 			ownedImports.add(createImport(null, importedNamespace));
-		}
-		return model;
+		} */
+		return qvtiTransformation;
 	}
 	
 	@Override

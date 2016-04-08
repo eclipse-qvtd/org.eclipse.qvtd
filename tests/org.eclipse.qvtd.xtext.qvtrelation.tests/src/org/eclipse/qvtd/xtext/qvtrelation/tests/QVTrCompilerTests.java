@@ -113,10 +113,10 @@ public class QVTrCompilerTests extends LoadTestCase
 			QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), asTransformation);
 			QVTiCodeGenOptions options = cg.getOptions();
 			options.setUseNullAnnotations(true);
-			options.setPackagePrefix("cg");
+//			options.setPackagePrefix("cg");
 			cg.generateClassFile();
-			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtrelation.tests/test-gen/");
-			File explicitClassPath = new File("../org.eclipse.qvtd.xtext.qvtrelation.tests/bin");
+			cg.saveSourceFile("../" + PROJECT_NAME + "/test-gen/");
+			File explicitClassPath = new File("../" + PROJECT_NAME + "/bin");
 			String qualifiedClassName = cg.getQualifiedName();
 			String javaCodeSource = cg.generateClassFile();
 			OCL2JavaFileObject.saveClass(explicitClassPath.toString(), qualifiedClassName, javaCodeSource);	

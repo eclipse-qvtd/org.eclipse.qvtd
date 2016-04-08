@@ -11,17 +11,11 @@
 package org.eclipse.qvtd.build.qvtrtoqvtc.tests;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrToQVTc;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 
 public class QvtrToQvtcTests extends LoadTestCase {

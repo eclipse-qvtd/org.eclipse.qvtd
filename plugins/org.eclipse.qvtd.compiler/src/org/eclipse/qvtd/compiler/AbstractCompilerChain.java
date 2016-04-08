@@ -49,6 +49,7 @@ import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -262,18 +263,21 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	}
 
 	public @NonNull Transformation getTransformation(Resource resource) throws IOException {
+		List<@NonNull Transformation> asTransformations = new ArrayList<@NonNull Transformation>();
 		for (EObject eContent : resource.getContents()) {
 			if (eContent instanceof BaseModel) {
-	    		for (org.eclipse.ocl.pivot.Package aPackage : ((BaseModel)eContent).getOwnedPackages()) {
-	    			for (org.eclipse.ocl.pivot.Class aClass : aPackage.getOwnedClasses()) {
-	    				if (aClass instanceof Transformation) {
-		                    return (Transformation) aClass;
-		    			}
-	    			}
-	    		}
+				QVTbaseUtil.getAllTransformations(ClassUtil.nullFree(((BaseModel)eContent).getOwnedPackages()), asTransformations);
 			}
 		}
-		throw new IOException("No Transformation element in " + resource.getURI());
+		if (asTransformations.size() == 1) {
+			return asTransformations.get(0);
+		}
+		else if (asTransformations.size() == 1) {
+			throw new IOException("No Transformation element in " + resource.getURI());
+		}
+		else {
+			throw new IOException("Multiple Transformation elements in " + resource.getURI());
+		}
 	}
 	
 	protected @NonNull URI getURI(@NonNull String stepKey, @NonNull Key<URI> uriKey) {

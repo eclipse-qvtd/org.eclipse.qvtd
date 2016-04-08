@@ -12,7 +12,7 @@
 import SeqMM : 'SeqMM.ecore'::SeqMM; 
 import StmcMM : 'StmcMM.ecore'::StmcMM; 
 
-transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
+transformation org::eclipse::qvtd::xtext::qvtrelation::tests::seq2stm::SeqToStm(seqDgm: SeqMM, stm: StmcMM)
 {
      key StmcMM::StateMachine{name};
      key StmcMM::State{name,owner};

@@ -2,7 +2,7 @@ import fMM : 'Families.ecore#/';
 import pMM : 'Persons.ecore#/';
 import f2pMM : 'Families2Persons.ecore#/';
 
-transformation Families2Persons
+transformation org::eclipse::qvtd::xtext::qvtcore::tests::families2persons::Families2Persons
 {
 	family imports Families;
 	person imports Persons;
