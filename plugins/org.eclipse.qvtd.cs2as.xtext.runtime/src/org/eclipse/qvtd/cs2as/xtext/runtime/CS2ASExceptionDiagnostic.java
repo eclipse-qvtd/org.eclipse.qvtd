@@ -12,7 +12,7 @@ package org.eclipse.qvtd.cs2as.xtext.runtime;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASException;
+import org.eclipse.qvtd.runtime.internal.cs2as.CS2ASException;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
