@@ -9,15 +9,17 @@
 
 package example1.target.util;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.TypeId;
-
 import example1.target.C;
 import example1.target.TargetPackage;
 import example1.target.lookup.EnvironmentPackage;
 import example1.target.lookup.LookupEnvironment;
+import example1.target.util.AbstractTargetCommonLookupVisitor;
+import example1.target.util.Visitable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 public class TargetQualifiedCLookupVisitor
 	extends AbstractTargetCommonLookupVisitor
@@ -38,7 +40,7 @@ public class TargetQualifiedCLookupVisitor
     
     public TargetQualifiedCLookupVisitor(@NonNull LookupEnvironment context) {
         super(context);
-        this.executor = context.getExecutor();
+        this.executor = ClassUtil.nonNull(context.getExecutor());
         this.idResolver = executor.getIdResolver();
     }
     

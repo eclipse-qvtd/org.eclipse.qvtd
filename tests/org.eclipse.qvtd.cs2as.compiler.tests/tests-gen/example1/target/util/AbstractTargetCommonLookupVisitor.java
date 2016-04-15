@@ -11,13 +11,15 @@
  *******************************************************************************/
 package	example1.target.util;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import example1.target.lookup.LookupEnvironment;
 import example1.target.util.Visitable;
 
 public abstract class AbstractTargetCommonLookupVisitor
-	extends AbstractExtendingVisitor<LookupEnvironment, LookupEnvironment> {
+	extends AbstractExtendingVisitor<@Nullable LookupEnvironment, @NonNull LookupEnvironment> {
 
-	protected AbstractTargetCommonLookupVisitor(LookupEnvironment context) {
+	protected AbstractTargetCommonLookupVisitor(@NonNull LookupEnvironment context) {
 		super(context);
 	}
 	

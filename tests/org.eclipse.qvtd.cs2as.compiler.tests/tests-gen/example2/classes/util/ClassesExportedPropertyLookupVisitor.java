@@ -9,15 +9,17 @@
 
 package example2.classes.util;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.TypeId;
-
 import example2.classes.ClassesPackage;
 import example2.classes.Property;
 import example2.classes.lookup.EnvironmentPackage;
 import example2.classes.lookup.LookupEnvironment;
+import example2.classes.util.AbstractClassesCommonLookupVisitor;
+import example2.classes.util.Visitable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 public class ClassesExportedPropertyLookupVisitor
 	extends AbstractClassesCommonLookupVisitor
@@ -41,7 +43,7 @@ public class ClassesExportedPropertyLookupVisitor
     
     public ClassesExportedPropertyLookupVisitor(@NonNull LookupEnvironment context, @NonNull Object importer) {
         super(context);
-        this.executor = context.getExecutor();
+        this.executor = ClassUtil.nonNull(context.getExecutor());
         this.idResolver = executor.getIdResolver();
         this.importer = importer;
     }

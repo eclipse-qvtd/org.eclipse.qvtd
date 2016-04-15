@@ -20,9 +20,9 @@ public abstract class AbstractWrappingVisitor<R, C, @NonNull D extends Visitor<R
 	extends AbstractVisitor<R, C>
 	implements Visitor<R>
 {
-	protected final D delegate;
+	protected final @NonNull D delegate;
 	
-	protected AbstractWrappingVisitor(D delegate, C context) {
+	protected AbstractWrappingVisitor(@NonNull D delegate, C context) {
 		super(context);
 		this.delegate = delegate;		
 	//	delegate.setUndecoratedVisitor(this);
@@ -48,7 +48,7 @@ public abstract class AbstractWrappingVisitor<R, C, @NonNull D extends Visitor<R
 	 * 
 	 * @return my wrapped visitor
 	 */
-	protected D getDelegate() {
+	protected @NonNull D getDelegate() {
 		return delegate;
 	}
 
