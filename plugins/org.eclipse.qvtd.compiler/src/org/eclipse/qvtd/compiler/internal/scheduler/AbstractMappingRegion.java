@@ -49,6 +49,9 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		//
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> source2targetClosure = new HashMap<@NonNull Node, @NonNull Set<@NonNull Node>>();
 		for (@NonNull Node navigableNode : navigableNodes) {
+			if (navigableNode.isAttributeNode()) {
+				continue;									// FIXME avoid even considering these nodes
+			}
 			Type type = navigableNode.getCompleteClass().getPrimaryClass();
 			if (type instanceof CollectionType) {
 				System.err.println("No head created for CollectionType " + type + " in " + this);
