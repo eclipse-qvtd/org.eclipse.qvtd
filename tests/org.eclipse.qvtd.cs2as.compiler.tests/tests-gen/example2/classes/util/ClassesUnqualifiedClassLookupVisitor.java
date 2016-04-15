@@ -11,22 +11,14 @@ package example2.classes.util;
 
 import example2.classes.Class;
 import example2.classes.ClassesPackage;
-import example2.classes.Package;
 import example2.classes.lookup.EnvironmentPackage;
 import example2.classes.lookup.LookupEnvironment;
 import example2.classes.util.AbstractClassesCommonLookupVisitor;
 import example2.classes.util.Visitable;
-import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 
 public class ClassesUnqualifiedClassLookupVisitor
