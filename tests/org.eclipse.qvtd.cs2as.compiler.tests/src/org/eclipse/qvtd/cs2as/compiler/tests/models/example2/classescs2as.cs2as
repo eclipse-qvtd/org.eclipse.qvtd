@@ -3,21 +3,20 @@ target as : 'Classes.ecore#/'
 
 mappings {
 	map as::Root from RootCS {
-		ownedPackages := ownedPackages.resolve;
+		ownedPackages := ownedPackages.trace;
 	}
 
 	map as::Package from PackageCS {
 		name := name;
-		ownedClasses := ownedClasses.resolve;
-		ownedPackages := ownedPackages.resolve;
+		ownedClasses := ownedClasses.trace;
+		ownedPackages := ownedPackages.trace;
 	}
 
 	map classes::Class from ClassCS {
 		name := name;
-		superClass := if _extends = null then null else resolve.lookup(Class,_extends) endif; 
+		superClass := if _extends = null then null else trace.lookup(Class,_extends) endif; 
 	}	
 }
-
 
 disambiguation {
 	

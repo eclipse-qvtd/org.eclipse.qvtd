@@ -3,12 +3,8 @@ import  as : 'Classes.ecore#/'
 import 'EnvExample2.ecore'
 
 package ocl
----- Default Environment related functionality
+
 context OclElement
---	
-def : _exported_env(importer : OclElement) : lookup::LookupEnvironment[1] =
-	lookup::LookupEnvironment { }
-	
 -- Domain specific default functionality
 def : unqualified_env_Class() : lookup::LookupEnvironment[1] =
 	_unqualified_env_Class(null)
@@ -24,15 +20,23 @@ def : parentEnv_Class() : lookup::LookupEnvironment[1] =
 	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_Class(self) endif
 def : parentEnv_Package() : lookup::LookupEnvironment[1] =
 	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_Package(self) endif
+
+
+def : _qualified_env_Class(qualifier : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+def : _qualified_env_Package(qualifier : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
 -- End of domain specific default functionality
 endpackage 
 
 package lookup
+-- Some common lookup functionality
 context LookupEnvironment
-def : nestedEnv() : LookupEnvironment[1] = 
+def : nestedEnv() : LookupEnvironment[1] =
 	LookupEnvironment {
 		parentEnv = self
 	}
+-- End of common lookup functionality
 endpackage
 
 package as
@@ -40,36 +44,39 @@ package as
 	
 context Root
 def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
-	parentEnv_Package()
+	parentEnv_Package().nestedEnv()
 		.addElements(ownedPackages)
 		
+	
 context Package
 	
 def : _lookupQualifiedPackage(pName : String) : Package[?] =
-	let foundPackage = _lookupPackage(_qualified_env(), pName)
+	let foundPackage = _lookupPackage(_qualified_env_Package(), pName)
 	in  if foundPackage->isEmpty()
 		then null
 		else foundPackage->first()
 		endif
+def : _qualified_env_Package() : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment{}
+	in env
+	.addElements(ownedPackages)
 def : lookupQualifiedPackage(aPathElementCS : cs::PathElementCS) : Package[?] =
    _lookupQualifiedPackage(aPathElementCS.name)
    
 	
 def : _lookupQualifiedClass(cName : String) : Class[?] =
-	let foundClass = _lookupClass(_qualified_env(), cName)
+	let foundClass = _lookupClass(_qualified_env_Class(), cName)
 	in  if foundClass->isEmpty()
 		then null
 		else foundClass->first()
 		endif
+def : _qualified_env_Class() : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment{}
+	in env
+	.addElements(ownedClasses)
 def : lookupQualifiedClass(aPathElementCS : cs::PathElementCS) : Class[?] =
    _lookupQualifiedClass(aPathElementCS.name)
    
-	
-def : _qualified_env() : lookup::LookupEnvironment =
-	let env = lookup::LookupEnvironment{}
-	in env
-		.addElements(ownedPackages)
-.addElements(ownedClasses)
 def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
 	parentEnv_Package().nestedEnv()
 		.addElements(ownedPackages)
