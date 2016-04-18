@@ -14,23 +14,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
+import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.invocation.AbstractTransformationTechnology;
 
 public class OCL2QVTiTransformationTechnology extends AbstractTransformationTechnology
 {
 	public static final @NonNull OCL2QVTiTransformationTechnology INSTANCE = new OCL2QVTiTransformationTechnology("org.eclipse.qvtd.ocl2qvti");
 	
+	protected @Nullable Log log = null;
+	
 	private OCL2QVTiTransformationTechnology(@NonNull String name) {
 		super(name);
+//		Scheduler.DEBUG_GRAPHS.setState(true);
 	}
 
 	@Override
 	public @NonNull Map<@NonNull String, Object> execute(@NonNull ResourceSet resourceSet, @NonNull Map<String, Object> modelMap,
 			@NonNull Map<@NonNull String, Object> parametersMap) throws TransformationException {
+		Object logObject = parametersMap.get("log");
+		if (logObject instanceof Log) {
+			log = (Log)logObject;
+		}
 		String lookupSolverClassName = (String) parametersMap.get("lookupSolverClassName");
 		String lookupResultItfName = (String) parametersMap.get("lookupResultItfName");
 		String javaFolder = (String) parametersMap.get("javaFolder");
@@ -59,10 +69,17 @@ public class OCL2QVTiTransformationTechnology extends AbstractTransformationTech
 			}
 		}
 		try {
-			new OCL2QVTiCGTxCompiler().compileTransformation(resourceSet, cgParams, traceabilityPropName, oclDocURI, extendedOclDocURIs);
+			OCL2QVTiCGTxCompiler ocl2qvTiCGTxCompiler = new OCL2QVTiCGTxCompiler();
+			ocl2qvTiCGTxCompiler.setLog(log);
+			Class<? extends Transformer> transformationClass = ocl2qvTiCGTxCompiler.compileTransformation(resourceSet, cgParams, traceabilityPropName, oclDocURI, extendedOclDocURIs);
+			if (log != null) {
+				log.info("Created " + transformationClass);
+			}
 			return new HashMap<@NonNull String, Object>();
 		} catch (Exception e) {
 			throw new TransformationException(null, e, "Error while executing " + OCL2QVTiCGTxCompiler.class.getName());
+		} finally {
+			log = null;
 		}
 	}
 }

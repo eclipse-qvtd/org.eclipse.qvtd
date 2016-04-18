@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
@@ -437,6 +438,8 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			return visitCGOperationCallExp(object);
 		}
 	}
+
+	private @Nullable Log log = null;
 	
 	// Copied from QVTiCompilerTest
 	protected Class<? extends CS2ASTransformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg) throws Exception {
@@ -475,7 +478,15 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		String savePath = params.getSavePath();
 		if (savePath != null) {
 			cg.saveSourceFile(savePath);
+			if (log != null) {
+				log.info("Saved " + savePath + cg.getQualifiedName());
+			}
+
 		}
 		return compileTransformation(new File(new File(savePath).getParentFile(), "bin"), cg);
+	}
+
+	public void setLog(@Nullable Log log) {
+		this.log  = log;
 	}
 }

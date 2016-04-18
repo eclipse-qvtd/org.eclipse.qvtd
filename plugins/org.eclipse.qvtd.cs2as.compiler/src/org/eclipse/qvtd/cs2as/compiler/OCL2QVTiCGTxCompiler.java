@@ -14,13 +14,16 @@ package org.eclipse.qvtd.cs2as.compiler;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTiCompilerChain;
@@ -37,6 +40,8 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 		QVTimperativeStandaloneSetup.doSetup();
 		QVTcorePivotStandaloneSetup.doSetup();
 	}
+
+	private @Nullable Log log = null;
 		
 	@Override
 	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet, @NonNull CS2ASJavaCompilerParameters params, @NonNull URI oclDocURI, URI... extendedOCLDocURIs) throws Exception {
@@ -49,7 +54,9 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, rSet);
 		try {
 			Transformation qvtiTransf = executeOCL2QVTi_CompilerChain(qvt, tracePropertyName, oclDocURI, extendedOCLDocURIs);
-			return createCompiler().compileTransformation(qvt, qvtiTransf, (CS2ASJavaCompilerParameters) params);	
+			CS2ASJavaCompilerImpl compiler = createCompiler();
+			compiler.setLog(log);
+			return compiler.compileTransformation(qvt, qvtiTransf, (CS2ASJavaCompilerParameters) params);	
 		} finally {
 			qvt.dispose();
 		}
@@ -72,6 +79,24 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 		options.put(OCL2QVTiCompilerChain.QVTP_STEP, ocl2qvtpOptions);
 	
 		OCL2QVTiCompilerChain compilerChain = new OCL2QVTiCompilerChain(qvt, options, oclDocURI, extendedOCLDocURIs);
+		if (log != null) {
+			compilerChain.addListener(new CompilerChain.Listener() {
+	
+				@Override
+				public void compiled(@NonNull String step, @Nullable Object object) {
+					if (object instanceof Resource) {
+						log.info(step + " step completed => " + ((Resource)object).getURI());
+					}
+					else {
+						log.info(step + " step completed => " + object);
+					}
+				}
+			});
+		}
     	return compilerChain.compile();
+	}
+
+	public void setLog(@Nullable Log log) {
+		this.log  = log;
 	}
 }
