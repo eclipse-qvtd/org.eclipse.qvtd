@@ -114,11 +114,6 @@ public abstract class SchedulerConstants
 	private final @NonNull Map<ClassDatum, ClassDatumAnalysis> classDatum2classDatumAnalysis = new HashMap<ClassDatum, ClassDatumAnalysis>();
 
 	/**
-	 * The analysis of each class.	// FIXME domains
-	 */
-//	private final @NonNull Map<org.eclipse.ocl.pivot.Class, ClassDatum> class2classDatum = new HashMap<org.eclipse.ocl.pivot.Class, ClassDatum>();
-
-	/**
 	 * The PropertyDatum for each property.	// FIXME domains
 	 */
 	private final @NonNull Map<Property, PropertyDatum> property2propertyDatum = new HashMap<Property, PropertyDatum>();
@@ -327,6 +322,10 @@ public abstract class SchedulerConstants
 		return environmentFactory;
 	}
 
+	protected @NonNull URI getGraphsBaseURI() {
+		return dependencyGraph.eResource().getURI().trimSegments(1).appendSegment("graphs").appendSegment("");
+	}
+
 	public @NonNull Property getIterateProperty(@NonNull Type type) {
 		Property iterateProperty = type2iterateProperty.get(type);
 		if (iterateProperty == null) {
@@ -397,7 +396,7 @@ public abstract class SchedulerConstants
 	}
 
 	public void writeCallDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
-		@SuppressWarnings("null")@NonNull URI baseURI = dependencyGraph.eResource().getURI();
+		URI baseURI = getGraphsBaseURI();
 		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_c") + suffix + ".dot").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
@@ -406,13 +405,12 @@ public abstract class SchedulerConstants
 			outputStream.write(s.toString().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
 	}
 
 	public void writeCallGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
-		@SuppressWarnings("null")@NonNull URI baseURI = dependencyGraph.eResource().getURI();
+		URI baseURI = getGraphsBaseURI();
 		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_c") + suffix + ".graphml").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
@@ -421,13 +419,12 @@ public abstract class SchedulerConstants
 			outputStream.write(s.toString().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
 	}
 
 	public void writeDOTfile(@NonNull Region region, @NonNull String suffix) {
-		@SuppressWarnings("null")@NonNull URI baseURI = dependencyGraph.eResource().getURI();
+		URI baseURI = getGraphsBaseURI();
 		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_").replace("::",  "_") + suffix + ".dot").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
@@ -436,13 +433,12 @@ public abstract class SchedulerConstants
 			outputStream.write(s.toString().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
 	}
 
 	public void writeGraphMLfile(@NonNull Region region, @NonNull String suffix) {
-		@SuppressWarnings("null")@NonNull URI baseURI = dependencyGraph.eResource().getURI();
+		URI baseURI = getGraphsBaseURI();
 		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_").replace("::",  "_") + suffix + ".graphml").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
@@ -451,13 +447,12 @@ public abstract class SchedulerConstants
 			outputStream.write(s.toString().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
 	}
 
 	public void writeRegionDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
-		@SuppressWarnings("null")@NonNull URI baseURI = dependencyGraph.eResource().getURI();
+		URI baseURI = getGraphsBaseURI();
 		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".dot").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
@@ -466,8 +461,7 @@ public abstract class SchedulerConstants
 			outputStream.write(s.toString().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
 		for (@NonNull Region nestedRegion : region.getRegions()) {
 			if (nestedRegion instanceof ScheduledRegion) {
@@ -477,7 +471,7 @@ public abstract class SchedulerConstants
 	}
 
 	public void writeRegionGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
-		@SuppressWarnings("null")@NonNull URI baseURI = dependencyGraph.eResource().getURI();
+		URI baseURI = getGraphsBaseURI();
 		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".graphml").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
@@ -486,8 +480,7 @@ public abstract class SchedulerConstants
 			outputStream.write(s.toString().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
 		for (@NonNull Region nestedRegion : region.getRegions()) {
 			if (nestedRegion instanceof ScheduledRegion) {
