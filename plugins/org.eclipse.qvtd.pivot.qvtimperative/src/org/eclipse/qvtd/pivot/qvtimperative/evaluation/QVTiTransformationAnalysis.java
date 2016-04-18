@@ -307,14 +307,14 @@ public class QVTiTransformationAnalysis
 				else {
 					for (Domain domain : mapping.getDomain()) {
 						if (domain instanceof ImperativeDomain) {
-							if (((ImperativeDomain)domain).getCheckedProperties().size() > 0) {
+							ImperativeDomain imperativeDomain = (ImperativeDomain)domain;
+							if (imperativeDomain.getCheckedProperties().size() > 0) {
 								hazardousMappings.add(mapping);
 								hasPropertyAccessDeclarations = true;
 								break;
 							}
-							if (((ImperativeDomain)domain).getEnforcedProperties().size() > 0) {
+							if (imperativeDomain.getEnforcedProperties().size() > 0) {
 								hasPropertyAccessDeclarations = true;
-								break;
 							}
 						}
 					}
