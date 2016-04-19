@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
+import org.eclipse.ocl.examples.codegen.java.types.UnboxedDescriptor;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -211,7 +212,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 				CGValuedElement cgArgument = cgArguments.get(i);
 				Parameter pParameter = pParameters.get(i);
 				CGTypeId cgTypeId = analyzer.getTypeId(pParameter.getTypeId());
-				TypeDescriptor parameterTypeDescriptor = context.getUnboxedDescriptor(ClassUtil.nonNullState(cgTypeId.getElementId()));
+				UnboxedDescriptor parameterTypeDescriptor = context.getUnboxedDescriptor(ClassUtil.nonNullState(cgTypeId.getElementId()));
 				CGValuedElement argument = getExpression(cgArgument);
 				js.appendReferenceTo(parameterTypeDescriptor, argument);
 			}
@@ -346,7 +347,16 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		@Override
 		@Nullable
 		public Object visitCGLookupCallExp(CGLookupCallExp object) {
-			return visitCGOperationCallExp(object);
+	        super.visitCGOperationCallExp(object);
+	        CGValuedElement cgSource = object.getSource();
+	        rewriteAsGuarded(cgSource, isSafe(object), "source for '" + object.getReferredOperation() + "'");
+	        rewriteAsUnboxed(cgSource);
+	        List<CGValuedElement> cgArguments = object.getArguments();
+	        int iMax = cgArguments.size();
+	        for (int i = 0; i < iMax; i++) {	// Avoid CME from rewrite
+	            rewriteAsUnboxed(cgArguments.get(i));
+	        }
+	        return null; 
 		}
 	}
 	
