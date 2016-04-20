@@ -31,9 +31,9 @@
             category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"
             class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
             project="true"
-            name="%UML2RDBMSQVTc_name"
+            name="%QVTc_UML2RDBMS_name"
             icon="$nl$/icons/QVTcModelFile.gif">
-         <description>%UML2RDBMSQVTc_description</description>
+         <description>%QVTc_UML2RDBMS_description</description>
       </wizard>
       <wizard id="org.eclipse.qvtd.examples.qvtrelation.empty"           
             canFinishEarly="true"
@@ -62,6 +62,26 @@
             icon="$nl$/icons/QVTrModelFile.gif">
          <description>%RelToCore_description</description>
       </wizard>
+   </extension>
+   <extension point="org.eclipse.emf.common.ui.examples">
+      <example id="org.eclipse.qvtd.examples.project.qvtcore.empty"
+            wizardID="org.eclipse.qvtd.examples.qvtcore.empty"
+            pageImage="$nl$/icons/QVTcModelFile.gif">
+         <projectDescriptor name="org.eclipse.ocl.examples.project.completeocltutorial"
+               contentURI="zips/qvtc/empty.zip"
+               description="%CompleteOCL_Tutorial_description"/>
+         <fileToOpen location="org.eclipse.ocl.examples.project.completeocltutorial/model/ExtraEcoreValidation.ocl"
+               editorID="org.eclipse.qvtd.xtext.qvtcore.QVTcore"/>
+      </example>
+      <example id="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"
+            wizardID="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"
+            pageImage="$nl$/icons/QVTcModelFile.gif">
+         <projectDescriptor name="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"
+               contentURI="zips/qvtc/uml2rdbms.zip"
+               description="%QVTc_UML2RDBMS_description"/>
+         <fileToOpen location="org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/SimpleUML2RDBMS.qvtc"
+               editorID="org.eclipse.qvtd.xtext.qvtcore.QVTcore"/>
+      </example>
    </extension>
 
    <extension point="org.eclipse.ui.intro.configExtension">
