@@ -6,13 +6,10 @@
 	<dependencies>
 		<!-- QVTd Examples dependencies to build the zips -->
 		<dependency name="org.eclipse.qvtd.examples.qvtcore.empty" componentType="unknown"/>
+		<dependency name="org.eclipse.qvtd.examples.qvtcore.uml2rdbms" componentType="unknown"/>
 		<dependency name="org.eclipse.qvtd.examples.qvtrelation.empty" componentType="unknown"/>
 		<dependency name="org.eclipse.qvtd.examples.qvtrelation.modelmorf" componentType="unknown"/>
 		<dependency name="org.eclipse.qvtd.examples.qvtrelation.reltocore" componentType="unknown"/>
-		<!-- EMF Examples dependencies to build the zips >
-		<dependency name="org.eclipse.emf.examples.library" componentType="osgi.bundle"/>
-		<dependency name="org.eclipse.emf.examples.library.edit" componentType="osgi.bundle"/>
-		<dependency name="org.eclipse.emf.examples.library.editor" componentType="osgi.bundle"/-->
 	</dependencies>
 	<actions>
 		<public name="buckminster.prebind" actor="ant">

@@ -27,6 +27,16 @@
             icon="$nl$/icons/QVTcModelFile.gif">
          <description>%EmptyQVTc_description</description>
       </wizard>
+      <wizard id="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"           
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"
+            class="org.eclipse.qvtd.examples.qvtc.wizards.UML2RDBMSExampleWizard"
+            hasPages="false"
+            project="true"
+            name="%UML2RDBMSQVTc_name"
+            icon="$nl$/icons/QVTcModelFile.gif">
+         <description>%UML2RDBMSQVTc_description</description>
+      </wizard>
       <wizard id="org.eclipse.qvtd.examples.qvtrelation.empty"           
             canFinishEarly="true"
             category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"

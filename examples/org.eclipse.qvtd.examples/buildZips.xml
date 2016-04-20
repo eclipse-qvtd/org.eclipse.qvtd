@@ -3,7 +3,7 @@
 	<target name="init">
 	</target>
 
-	<patternset id="qvtc.excludes" excludes="qvtcbin/**"/>
+	<patternset id="qvtc.excludes" excludes="bin/** qvtcbin/** src-gen/org/**"/>
 	<patternset id="qvtr.excludes" excludes="bin/** qvtrbin/** src/** .settings/** META-INF/** .classpath build.properties about.html"/>
 
 	<target name="zip.examples" depends="init">
@@ -20,6 +20,9 @@
 		</delete>
 		<mkdir dir="zips/qvtc"/>
 		<zip destfile="zips/qvtc/empty.zip" basedir="${examplesDir}org.eclipse.qvtd.examples.qvtcore.empty">
+			<patternset refid="qvtc.excludes"/>
+		</zip>
+		<zip destfile="zips/qvtc/uml2rdbms.zip" basedir="${examplesDir}org.eclipse.qvtd.examples.qvtcore.uml2rdbms">
 			<patternset refid="qvtc.excludes"/>
 		</zip>
 		<mkdir dir="zips/qvtr"/>
