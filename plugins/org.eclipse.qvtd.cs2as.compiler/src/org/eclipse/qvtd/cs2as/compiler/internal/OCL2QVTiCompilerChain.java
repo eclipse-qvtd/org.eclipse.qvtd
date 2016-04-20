@@ -72,7 +72,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	
 	protected Resource ocl2qvtp(URI oclURI) throws IOException {
 		OCL2QVTp ocl2qvtp = new OCL2QVTp(environmentFactory, traceabilityPropName);
-		Resource pResource = ocl2qvtp.run(environmentFactory.getMetamodelManager().getASResourceSet(), oclURI);
+		Resource pResource = ocl2qvtp.run(environmentFactory.getMetamodelManager().getASResourceSet(), oclURI, extendedASUris);
 		saveResource(pResource, QVTP_STEP);
 		return pResource;
 	}
