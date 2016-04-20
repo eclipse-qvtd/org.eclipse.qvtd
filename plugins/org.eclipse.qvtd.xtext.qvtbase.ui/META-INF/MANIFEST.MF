@@ -2,11 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.xtext.qvtbase.ui;singleton:=true
-Bundle-Version: 0.13.0.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Localization: plugin
 Bundle-Vendor: %providerName
-Require-Bundle: org.eclipse.qvtd.pivot.qvtbase;bundle-version="[0.13.0,0.14.0)";visibility:=reexport,
+Require-Bundle: org.eclipse.qvtd.pivot.qvtbase;bundle-version="[1.0.0,2.0.0)";visibility:=reexport,
  org.eclipse.ocl.xtext.essentialocl.ui;bundle-version="[1.0.0,1.2.0)";visibility:=reexport
 Export-Package: org.eclipse.qvtd.xtext.qvtbase.ui.labeling,
  org.eclipse.qvtd.xtext.qvtbase.ui.outline
