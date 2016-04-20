@@ -20,8 +20,7 @@
       <wizard id="org.eclipse.qvtd.examples.qvtcore.empty"           
             canFinishEarly="true"
             category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"
-            class="org.eclipse.qvtd.examples.qvtc.wizards.EmptyExampleWizard"
-            hasPages="false"
+            class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
             project="true"
             name="%EmptyQVTc_name"
             icon="$nl$/icons/QVTcModelFile.gif">
@@ -30,8 +29,7 @@
       <wizard id="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"           
             canFinishEarly="true"
             category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"
-            class="org.eclipse.qvtd.examples.qvtc.wizards.UML2RDBMSExampleWizard"
-            hasPages="false"
+            class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
             project="true"
             name="%UML2RDBMSQVTc_name"
             icon="$nl$/icons/QVTcModelFile.gif">
@@ -40,8 +38,7 @@
       <wizard id="org.eclipse.qvtd.examples.qvtrelation.empty"           
             canFinishEarly="true"
             category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"
-            class="org.eclipse.qvtd.examples.qvtr.wizards.EmptyExampleWizard"
-            hasPages="false"
+            class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
             project="true"
             name="%EmptyQVTr_name"
             icon="$nl$/icons/QVTrModelFile.gif">
@@ -50,8 +47,7 @@
       <wizard id="org.eclipse.qvtd.examples.qvtrelation.modelmorf"           
             canFinishEarly="true"
             category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"
-            class="org.eclipse.qvtd.examples.qvtr.wizards.ModelMorfExampleWizard"
-            hasPages="false"
+            class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
             project="true"
             name="%ModelMorf_name"
             icon="$nl$/icons/QVTrModelFile.gif">
@@ -60,8 +56,7 @@
       <wizard id="org.eclipse.qvtd.examples.qvtrelation.reltocore"           
             canFinishEarly="true"
             category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"
-            class="org.eclipse.qvtd.examples.qvtr.wizards.RelToCoreExampleWizard"
-            hasPages="false"
+            class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
             project="true"
             name="%RelToCore_name"
             icon="$nl$/icons/QVTrModelFile.gif">
@@ -69,11 +64,7 @@
       </wizard>
    </extension>
 
-   <extension
-         point="org.eclipse.ui.intro.configExtension">
-      <configExtension
-            content="intro/sample.xml"
-            configId="org.eclipse.ui.intro.universalConfig">
-      </configExtension>
+   <extension point="org.eclipse.ui.intro.configExtension">
+      <configExtension content="intro/sample.xml" configId="org.eclipse.ui.intro.universalConfig"/>
    </extension>
 </plugin>
