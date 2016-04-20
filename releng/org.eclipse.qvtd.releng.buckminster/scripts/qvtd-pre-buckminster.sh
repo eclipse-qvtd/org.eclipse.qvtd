@@ -10,7 +10,7 @@
 #*******************************************************************************
 #!/bin/bash
 
-rm -rf buildroot MMT-QVTd.*
+rm -rf buildroot QVTd.*
 mkdir buildroot
 :
 COMPACT_BUILD_ID="${BUILD_ID//[-_]}"
@@ -66,9 +66,9 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "eclipse.download=file:/home/data/httpd/download.eclipse.org"
 	echo
 	echo "# Required Properties for Publishing (added by Hudson job definition)"
-	echo "packages.base=MMT-QVTd.downloads"
-	echo "tests.base=MMT-QVTd.test.results"
-	echo "javadoc.base=MMT-QVTd.javadoc"
+	echo "packages.base=QVTd.downloads"
+	echo "tests.base=QVTd.test.results"
+	echo "javadoc.base=QVTd.javadoc"
 	echo "version=1.0.0"
 	echo "downloads.area=/home/data/httpd/download.eclipse.org/mmt/qvtd"
 	echo "generateSourceReferences=true"

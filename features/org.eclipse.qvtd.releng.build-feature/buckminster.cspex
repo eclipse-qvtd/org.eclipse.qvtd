@@ -39,14 +39,14 @@
 			</cs:prerequisites>
 		</cs:private>
 		
-		<cs:public name="package.mmt-qvtd-Update" actor="ant">
+		<cs:public name="package.qvtd-Update" actor="ant">
 			<cs:actorProperties>
 				<cs:property key="buildFile" value="packaging.ant" />
 				<cs:property key="targets" value="package.site" />
 			</cs:actorProperties>
 			<cs:properties>
 				<cs:property key="target.platform.ius" value="org.eclipse.qvtd.all.source,org.eclipse.qvtd.all.sdk.source,org.eclipse.qvtd.core.sdk.source" />			
-				<cs:property key="package.name" value="mmt-qvtd-Update" />
+				<cs:property key="package.name" value="qvtd-Update" />
 			</cs:properties>
 			<cs:prerequisites>
 				<cs:attribute name="create.category.xml" alias="create.category" />
@@ -56,7 +56,7 @@
 			<cs:products alias="output" base="${buckminster.output}/zips/" />
 		</cs:public>		
 
-		<cs:public name="package.mmt-qvtd-SDK" actor="ant">
+		<cs:public name="package.qvtd-SDK" actor="ant">
 			<cs:actorProperties>
 				<cs:property key="buildFile" value="packaging.ant" />
 				<cs:property key="targets" value="package.ius" />
@@ -64,7 +64,7 @@
 			<cs:properties>
 				<cs:property key="content.ius" value="org.eclipse.qvtd.all.sdk.feature.group" />
 				<cs:property key="target.platform.ius" value="lpg.runtime.java,lpg.runtime.java.source" />
-				<cs:property key="package.name" value="mmt-qvtd-SDK" />
+				<cs:property key="package.name" value="qvtd-SDK" />
 			</cs:properties>
 			<cs:prerequisites>
 				<cs:attribute name="site.p2" alias="repository" />
@@ -73,14 +73,14 @@
 			<cs:products alias="output" base="${buckminster.output}/zips/" />
 		</cs:public>
 		
-		<cs:public name="package.mmt-qvtd-examples" actor="ant">
+		<cs:public name="package.qvtd-examples" actor="ant">
 			<cs:actorProperties>
 				<cs:property key="buildFile" value="packaging.ant" />
 				<cs:property key="targets" value="package.ius" />
 			</cs:actorProperties>
 			<cs:properties>
 				<cs:property key="content.ius" value="org.eclipse.qvtd.examples.feature.group" />
-				<cs:property key="package.name" value="mmt-qvtd-examples" />
+				<cs:property key="package.name" value="qvtd-examples" />
 			</cs:properties>
 			<cs:prerequisites>
 				<cs:attribute name="site.p2" alias="repository" />
@@ -100,9 +100,9 @@
 
 	<cs:groups>
 		<cs:public name="build">
-			<cs:attribute name="package.mmt-qvtd-Update" />
-			<!--cs:attribute name="package.mmt-qvtd-SDK" /> 
-			<cs:attribute name="package.mmt-qvtd-examples" /--> 
+			<cs:attribute name="package.qvtd-Update" />
+			<!--cs:attribute name="package.qvtd-SDK" /> 
+			<cs:attribute name="package.qvtd-examples" /--> 
 		</cs:public>
 	</cs:groups>
 </cs:cspecExtension>
