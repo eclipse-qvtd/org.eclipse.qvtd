@@ -1228,7 +1228,7 @@ map uReferenceCS_2_Property_0_opposite in BaseCS2AS_qvtp_qvtcas
 		referenceCS.pivot.oclAsType(pivot::Property).opposite := if not (referenceCS.referredOpposite = null) then
 		referenceCS.referredOpposite
 		else Property{name = referenceCS.pivot.oclAsType(pivot::Property).owningClass.name, isImplicit = true, isRequired =
-				false, owningClass = referenceCS.ownedType.pivot.oclAsType(pivot::Element)}endif;
+				false, owningClass = referenceCS.ownedType.pivot.oclAsType(pivot::Class)}endif;
 	}
 }
 map uReferenceCS_2_Property_0_owningClass in BaseCS2AS_qvtp_qvtcas
@@ -1525,7 +1525,7 @@ enforce rightAS() {}
 
 where() {
 	typeParameterCS.pivot.oclAsType(pivot::TemplateParameter).constrainingClasses := Set(ocl::Class){pivot::Class{name =
-			typeParameterCS.name, superClasses = typeParameterCS.ownedExtends.pivot.oclAsType(pivot::Element)}};
+			typeParameterCS.name, superClasses = typeParameterCS.ownedExtends.pivot.oclAsType(pivot::Class)->asSet()}};
 }
 }
 
