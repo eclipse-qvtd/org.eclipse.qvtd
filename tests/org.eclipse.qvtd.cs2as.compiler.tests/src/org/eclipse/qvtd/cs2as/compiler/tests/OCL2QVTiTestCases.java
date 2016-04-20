@@ -447,29 +447,38 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		assertValidQVTiModel(qvtpFileURI);
 		myQVT.dispose();
 	}
-	
-	/* Commented. This doesn't work with normal scheduler. It needs to use the new scheduler 
+
 	@Test
 	public void testExample3_CG() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example3");
-
-		PivotModel qvtiTransf = myQVT.executeOCL2QVTi_MTC("KiamaRewrite.ocl");
-
-		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
-				"",
-				"",
+//		Scheduler.CONNECTION_CREATION.setState(true);
+//		Scheduler.CONNECTION_ROUTING.setState(true);
+//		Scheduler.DEBUG_GRAPHS.setState(true);
+//		Scheduler.EDGE_ORDER.setState(true);
+//		Scheduler.REGION_CYCLES.setState(true);
+//		Scheduler.REGION_DEPTH.setState(true);
+//		Scheduler.REGION_ORDER.setState(true);
+//		Scheduler.REGION_STACK.setState(true);
+		MyQVT myQVT = new MyQVT("example3");
+		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
+		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("","",
 				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
-		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()
-			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
-
-		// To avoid metamodel schizophrenia
-		myQVT.dispose();
-		myQVT = new MyQVT();
-		
-		// Execute CGed transformation
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
+//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
+//		executeModelsTX_CG(myQVT, txClass, testBaseURI, "model0");
 		myQVT.executeModelsTX_CG(txClass, "model1");
-	}*/
+		myQVT.dispose();
+	}
 	
+	@Test
+	public void testExample3_Interpreted() throws Exception {
+		MyQVT myQVT = new MyQVT("example3");
+		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
+		Transformation tx = myQVT.executeNewOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
+    	myQVT.executeModelsTX_Interpreted(tx, "model1");
+		myQVT.dispose();
+	}	
 	
 	@Test
 	public void testExample4_CG() throws Exception {
