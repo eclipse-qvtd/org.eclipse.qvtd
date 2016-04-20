@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.qvtd.debug.launching.QVTcLaunchConfigurationDelegate">
+<booleanAttribute key="auto-build" value="false"/>
+<booleanAttribute key="console-trace" value="false"/>
+<stringAttribute key="direction" value="rdbms"/>
+<stringAttribute key="genmodel" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/SimpleUML2RDBMS.genmodel"/>
+<mapAttribute key="in">
+<mapEntry key="uml" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/SimpleUMLPeople.xmi"/>
+</mapAttribute>
+<mapAttribute key="intermediates">
+<mapEntry key="QVTc" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/SimpleUML2RDBMS.qvtcas"/>
+<mapEntry key="QVTi" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/SimpleUML2RDBMS.qvtias"/>
+<mapEntry key="QVTm" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/SimpleUML2RDBMS.qvtm.qvtcas"/>
+<mapEntry key="QVTp" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/SimpleUML2RDBMS.qvtp.qvtcas"/>
+<mapEntry key="QVTs" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/SimpleUML2RDBMS.qvts.xmi"/>
+<mapEntry key="QVTu" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/SimpleUML2RDBMS.qvtu.qvtcas"/>
+</mapAttribute>
+<booleanAttribute key="interpreted" value="true"/>
+<stringAttribute key="mode" value="ENFORCE - CREATE"/>
+<mapAttribute key="old-in"/>
+<mapAttribute key="old-out"/>
+<mapAttribute key="out">
+<mapEntry key="rdbms" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/SimpleRDBMSPeople.xmi"/>
+</mapAttribute>
+<stringAttribute key="tx" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/SimpleUML2RDBMS.qvtc"/>
+<booleanAttribute key="view" value="false"/>
+</launchConfiguration>

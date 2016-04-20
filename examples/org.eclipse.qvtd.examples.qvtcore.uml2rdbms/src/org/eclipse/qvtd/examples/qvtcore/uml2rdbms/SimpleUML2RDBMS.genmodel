@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2015, 2016 Willink Transformations and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  E.D.Willink - Initial API and implementation"
+    modelDirectory="/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src-gen" modelPluginID="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"
+    modelName="SimpleUML2RDBMS" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="8.0"
+    copyrightFields="false" runtimeVersion="2.7" operationReflection="true" importOrganizing="true"
+    pluginKey="">
+  <foreignModel>SimpleUML2RDBMS.ecore</foreignModel>
+  <genPackages prefix="Simpleuml2rdbms" basePackage="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"
+      disposableProviderFactory="true" ecorePackage="SimpleUML2RDBMS.ecore#/">
+    <genClasses ecoreClass="SimpleUML2RDBMS.ecore#//AttributeToColumn">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//AttributeToColumn/type"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleUML2RDBMS.ecore#//AssociationToForeignKey">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//AssociationToForeignKey/association"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//AssociationToForeignKey/foreignKey"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//AssociationToForeignKey/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//AssociationToForeignKey/referenced"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleUML2RDBMS.ecore#//BooleanToBoolean"/>
+    <genClasses ecoreClass="SimpleUML2RDBMS.ecore#//ClassToTable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//ClassToTable/associationsToForeignKeys"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//ClassToTable/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//ClassToTable/primaryKey"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//ClassToTable/table"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//ClassToTable/umlClass"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="SimpleUML2RDBMS.ecore#//FromAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleUML2RDBMS.ecore#//FromAttribute/kind"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//FromAttribute/attribute"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//FromAttribute/leafs"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//FromAttribute/owner"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="SimpleUML2RDBMS.ecore#//FromAttributeOwner">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//FromAttributeOwner/fromAttributes"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleUML2RDBMS.ecore#//IntegerToNumber"/>
+    <genClasses ecoreClass="SimpleUML2RDBMS.ecore#//NonLeafAttribute"/>
+    <genClasses ecoreClass="SimpleUML2RDBMS.ecore#//PackageToSchema">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//PackageToSchema/classesToTables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//PackageToSchema/primitivesToNames"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//PackageToSchema/schema"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//PackageToSchema/umlPackage"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="SimpleUML2RDBMS.ecore#//PrimitiveToName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleUML2RDBMS.ecore#//PrimitiveToName/typeName"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//PrimitiveToName/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//PrimitiveToName/primitive"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleUML2RDBMS.ecore#//StringToVarchar"/>
+    <genClasses image="false" ecoreClass="SimpleUML2RDBMS.ecore#//ToColumn">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//ToColumn/column"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="SimpleUML2RDBMS.ecore#//UmlToRdbmsModelElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleUML2RDBMS.ecore#//UmlToRdbmsModelElement/name"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Simpleuml" basePackage="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"
+      disposableProviderFactory="true" ecorePackage="SimpleUML.ecore#/">
+    <genClasses ecoreClass="SimpleUML.ecore#//Attribute">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleUML.ecore#//Attribute/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML.ecore#//Attribute/type"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleUML.ecore#//Association">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML.ecore#//Association/destination"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML.ecore#//Association/source"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleUML.ecore#//Class">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleUML.ecore#//Class/attributes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML.ecore#//Class/forward"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML.ecore#//Class/general"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML.ecore#//Class/generalOpposite"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML.ecore#//Class/reverse"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="SimpleUML.ecore#//Classifier">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML.ecore#//Classifier/typeOpposite"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleUML.ecore#//Package">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleUML.ecore#//Package/elements"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="SimpleUML.ecore#//PackageElement">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleUML.ecore#//PackageElement/namespace"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleUML.ecore#//PrimitiveDataType"/>
+    <genClasses image="false" ecoreClass="SimpleUML.ecore#//UMLModelElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleUML.ecore#//UMLModelElement/kind"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleUML.ecore#//UMLModelElement/name"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Simplerdbms" basePackage="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"
+      disposableProviderFactory="true" ecorePackage="SimpleRDBMS.ecore#/">
+    <genDataTypes ecoreDataType="SimpleRDBMS.ecore#//String"/>
+    <genClasses ecoreClass="SimpleRDBMS.ecore#//Column">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleRDBMS.ecore#//Column/type"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//Column/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//Column/foreignKeys"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//Column/keys"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleRDBMS.ecore#//ForeignKey">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//ForeignKey/refersTo"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//ForeignKey/columns"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//ForeignKey/owner"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleRDBMS.ecore#//Key">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//Key/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//Key/column"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="SimpleRDBMS.ecore#//RModelElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleRDBMS.ecore#//RModelElement/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleRDBMS.ecore#//RModelElement/kind"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleRDBMS.ecore#//Schema">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//Schema/tables"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleRDBMS.ecore#//Table">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//Table/columns"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//Table/schema"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//Table/keys"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleRDBMS.ecore#//Table/foreignKeys"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
