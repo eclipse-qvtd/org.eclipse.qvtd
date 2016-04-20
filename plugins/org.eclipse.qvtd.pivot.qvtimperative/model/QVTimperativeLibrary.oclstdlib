@@ -3,10 +3,10 @@ import 'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.o
 library qvtbaselibrary : qvtbaselib = 'http://www.eclipse.org/qvt/2015/QVTbaseLibrary'
 {
 type Model : TypedModel {
-	operation allObjects() : ocl::Set(ocl::OclElement) => 'org.eclipse.ocl.pivot.library.model.AllObjectsOperation';
-	operation objectsOfKind(TT)(type : typeof(TT)) : ocl::Set(TT) => 'org.eclipse.ocl.pivot.library.model.ModelObjectsOfKindOperation';
-	operation objectsOfType(TT)(type : typeof(TT)) : ocl::Set(TT) => 'org.eclipse.ocl.pivot.library.model.ModelObjectsOfTypeOperation';
-	operation rootObjects() : ocl::Set(ocl::OclElement) => 'org.eclipse.ocl.pivot.library.model.RootObjectsOperation';
+	operation allObjects() : ocl::Set(ocl::OclElement) => 'org.eclipse.qvtd.runtime.library.model.AllObjectsOperation';
+	operation objectsOfKind(TT)(type : typeof(TT)) : ocl::Set(TT) => 'org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation';
+	operation objectsOfType(TT)(type : typeof(TT)) : ocl::Set(TT) => 'org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation';
+	operation rootObjects() : ocl::Set(ocl::OclElement) => 'org.eclipse.qvtd.runtime.library.model.RootObjectsOperation';
 }
 type Transformation : Transformation {}
 }
