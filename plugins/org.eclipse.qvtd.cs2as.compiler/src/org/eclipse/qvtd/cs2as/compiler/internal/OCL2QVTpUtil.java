@@ -12,8 +12,11 @@ import java.util.stream.StreamSupport;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Package;
@@ -67,6 +70,19 @@ public class OCL2QVTpUtil {
 			}
 			assert(container != null); // Assuming all expression are contained in an ExpressionInOCL
 			return (ExpressionInOCL)container;
+		};
+	}
+	
+	public static Function<Element, @Nullable Model> getModel() {
+		return element -> {
+			EObject eObject = element;
+			while (eObject != null) {
+				if (eObject instanceof Model) {
+					return (Model)eObject;
+				}
+				eObject = eObject.eContainer();
+			}
+			return null;
 		};
 	}
 	
