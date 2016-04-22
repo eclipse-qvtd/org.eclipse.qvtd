@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -52,6 +53,7 @@ import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
@@ -188,7 +190,7 @@ public class QVTrToQVTc
 	private final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key> class2key = new HashMap<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key>();
 	private final @NonNull Map<@NonNull Variable, @NonNull TemplateExp> variable2templateExp = new HashMap<@NonNull Variable, @NonNull TemplateExp>();
 	private final @NonNull Map<@NonNull Relation, @NonNull List<@NonNull RelationCallExp>> relationCallExpsForRelation = new HashMap<@NonNull Relation, @NonNull List<@NonNull RelationCallExp>>();
-	private final @NonNull Map<@NonNull RelationCallExp, @NonNull Relation> invokingRelationsForRelationCallExp = new HashMap<@NonNull RelationCallExp, @NonNull Relation>();
+	private final @NonNull Map<@NonNull RelationCallExp, @NonNull Relation> rInvocation2invokingRelation = new HashMap<@NonNull RelationCallExp, @NonNull Relation>();
 	
 	private @NonNull CoreModel coreModel;
 	
@@ -247,9 +249,9 @@ public class QVTrToQVTc
 			= new HashMap<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>>();
 	
 	/**
-	 * The core Variable for each relation Variable
+	 * The core Variable for each relation Variable in a chosen mapping.
 	 */
-	private final @NonNull Map<@NonNull Variable, @NonNull Variable> variable2variable = new HashMap<@NonNull Variable, @NonNull Variable>();
+	private final @NonNull Map<@NonNull Mapping, @NonNull Map<@NonNull Variable, @NonNull Variable>> mapping2variable2variable = new HashMap<@NonNull Mapping, @NonNull Map<@NonNull Variable, @NonNull Variable>>();
 	
 	/**
 	 * The names allocated in each relation.
@@ -314,7 +316,7 @@ public class QVTrToQVTc
 							callExps.add(ri);
 							relationCallExpsForRelation.put(r, callExps);
 						}
-						invokingRelationsForRelationCallExp.put(ri, ir);
+						rInvocation2invokingRelation.put(ri, ir);
 					}
 				}
 			}
@@ -347,6 +349,15 @@ public class QVTrToQVTc
 		return eOut;
 	}
 
+	public @NonNull Mapping createMapping() {
+		Mapping coreMapping = QVTcoreFactory.eINSTANCE.createMapping();
+		GuardPattern guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+		coreMapping.setGuardPattern(guardPattern);
+		BottomPattern bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+		coreMapping.setBottomPattern(bottomPattern);
+		return coreMapping;
+	}
+
 	// Save the qvtc resource
 	public void dispose() {
 		// What about the trace model? we need to separate them
@@ -354,95 +365,56 @@ public class QVTrToQVTc
 	}
 
 	public void execute() throws CompilerChainException {
-		for (@NonNull EObject eObject : qvtrResource.getContents()) {
-			if (eObject instanceof RelationModel) {
-				transformToTracePackages(tracePackages, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
-				CompilerUtil.normalizeNameables(tracePackages);
-			}
-		}
-		for (@NonNull EObject eObject : qvtrResource.getContents()) {
-			if (eObject instanceof RelationModel) {
-				RelationModel relationModel = (RelationModel)eObject;
-				String externalURI = relationModel.getExternalURI();
-				if (externalURI.endsWith(".qvtras")) {
-					externalURI = externalURI.replace(".qvtras", ".qvtcas");
-				}
-				else if (externalURI.endsWith(".qvtr")) {
-					externalURI = externalURI.replace(".qvtr", ".qvtcas");
-				}
-				coreModel.setExternalURI(externalURI);
-				transformToCoreTransformations(ClassUtil.nullFree(coreModel.getOwnedPackages()), ClassUtil.nullFree(relationModel.getOwnedPackages()));
-//				CompilerUtil.normalizeNameables(coreTransformations);
-			}
-		}
-		List<@NonNull RelationalTransformation> relationalTransformations = new ArrayList<@NonNull RelationalTransformation>(relationalTransformation2coreTransformation.keySet());
-		Collections.sort(relationalTransformations, NameUtil.NAMEABLE_COMPARATOR);
-		for (@NonNull RelationalTransformation relationalTransformation : relationalTransformations) {
-			List<@NonNull Rule> rules = new ArrayList<@NonNull Rule>(ClassUtil.nullFree(relationalTransformation.getRule()));
-			Collections.sort(rules, NameUtil.NAMEABLE_COMPARATOR);
-			for (@NonNull Rule rule : rules) {
-				if (rule instanceof Relation) {
-					Relation relation = (Relation)rule;
-					if (relation.isIsTopLevel()) {
-						TopLevelRelationToMappingForEnforcement topLevelRelationToMappingForEnforcement = new TopLevelRelationToMappingForEnforcement(this);
-						topLevelRelationToMappingForEnforcement.doTopLevelRelationToMappingForEnforcement((Relation)rule);
-					}
-				}
-			}
-//		}
-//		for (@NonNull RelationalTransformation relationalTransformation : relationalTransformations) {
-//			List<@NonNull Rule> rules = new ArrayList<@NonNull Rule>(ClassUtil.nullFree(relationalTransformation.getRule()));
-//			Collections.sort(rules, NameUtil.NAMEABLE_COMPARATOR);
-			for (@NonNull Rule rule : rules) {
-				if (rule instanceof Relation) {
-					Relation relation = (Relation)rule;
-					if (!relation.isIsTopLevel()) {
-						InvokedRelationToMappingForEnforcement invokedRelationToMappingForEnforcement = new InvokedRelationToMappingForEnforcement(this);
-						invokedRelationToMappingForEnforcement.doInvokedRelationToMappingForEnforcement(relation);
-					}
-				}
-			}
-		}
-		for (@NonNull Transformation coreTransformation : relationalTransformation2coreTransformation.values()) {
-			List<DebugTraceBack> debugTraceBacks = coreTransformation.getOwnedDebugTraceBacks();
-			for (@NonNull Element target : target2source.keySet()) {
-				if (QVTbaseUtil.getContainingTransformation(target) == coreTransformation) {
-					DebugTraceBack traceBack = QVTbaseFactory.eINSTANCE.createDebugTraceBack();
-					traceBack.setTarget(target);
-// FIXME true source URI					traceBack.getSources().add(target2source.get(target));
-					debugTraceBacks.add(traceBack);
-				}
-			}
-//			CompilerUtil.normalizeNameables(debugTraceBacks);
-		}
+		transformToTracePackages();
+		transformToCoreTransformations();
 	}
 
 	/*public*/ @NonNull Transformation getCoreTransformation(@NonNull RelationalTransformation relationalTransformation) {
 		return ClassUtil.nonNullState(relationalTransformation2coreTransformation.get(relationalTransformation));
 	}
 
-	/*public*/ @NonNull Variable getCoreVariable(@NonNull Variable relationVariable) {
-		return ClassUtil.nonNullState(variable2variable.get(relationVariable));
+	/*public*/ @NonNull Variable getCoreVariable(@NonNull Mapping mapping, @NonNull Variable relationVariable) {
+		Map<@NonNull Variable, @NonNull Variable> variable2variable = mapping2variable2variable.get(mapping);
+		return ClassUtil.nonNullState(ClassUtil.nonNullState(variable2variable).get(relationVariable));
 	}
 	
-	public @NonNull DomainPattern getDomainPattern(@NonNull Domain d) {
+/*	public @NonNull DomainPattern getDomainPattern(@NonNull Domain d) {
 		List<@NonNull DomainPattern> pattern = ClassUtil.nullFree(((RelationDomain) d).getPattern());
 		assert pattern.size() == 1;
 		DomainPattern domainPattern = pattern.get(0);
 		assert domainPattern != null;
 		return domainPattern;
-	}
+	} */
 
 	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		return environmentFactory;
 	}
 	
-	/*public*/ @NonNull Relation getInvokingRelationForRelationCallExp(@NonNull RelationCallExp e) {	
-		return ClassUtil.nonNullState(invokingRelationsForRelationCallExp.get(e));
+	/*public*/ @NonNull Relation getInvokingRelationForRelationCallExp(@NonNull RelationCallExp rInvocation) {	
+		return ClassUtil.nonNullState(rInvocation2invokingRelation.get(rInvocation));
 	}
 
 	public @Nullable Key getKeyforType(@NonNull Type type) {
 		return class2key.get(type);
+	}
+	
+	// TODO bug 453863 // ?? this is suspect for more than 2 domains. // FIXME What is 'shared'? a) any two domains b) output/any-input c) all domains
+	/**
+	 * Return the variables that are used by more than one domain of the relation and so must be middle variables.
+	 */
+	public @NonNull Set<@NonNull Variable> getMiddleDomainVariables(@NonNull Relation rRelation) {	
+		Set<@NonNull Variable> rDomainVariables = new HashSet<@NonNull Variable>();
+		Set<@NonNull Variable> rMiddleDomainVariables = new HashSet<@NonNull Variable>();
+		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
+			for (@NonNull DomainPattern rDomainPattern : ClassUtil.nullFree(((RelationDomain) rDomain).getPattern())) {
+				for (Variable rVariable : rDomainPattern.getBindsTo()) {
+					if ((rVariable != null) && !rDomainVariables.add(rVariable)) {
+						rMiddleDomainVariables.add(rVariable);				// Accumulate second (and higher) usages
+					}
+				}
+			}
+		}
+		return rMiddleDomainVariables;
 	}
 	
 	private @NonNull Set<@NonNull Variable> getNestedBindToVariable(@NonNull ObjectTemplateExp ote) {
@@ -502,25 +474,6 @@ public class QVTrToQVTc
 				return newName;
 			}
 		}
-	}
-	
-	// TODO bug 453863 // ?? this is suspect for more than 2 domains. // FIXME What is 'shared'? a) any two domains b) output/any-input c) all domains
-	/**
-	 * Return the variables that are used by all domains of the relation.
-	 */
-	public @NonNull Set<@NonNull Variable> getSharedDomainVars(@NonNull Relation r) {	
-		Set<@NonNull Variable> vars = new HashSet<@NonNull Variable>();
-		for (@NonNull Domain d : ClassUtil.nullFree(r.getDomain())) {
-			for (@NonNull DomainPattern domainPattern : ClassUtil.nullFree(((RelationDomain) d).getPattern())) {
-				List<@NonNull Variable> bt = ClassUtil.nullFree(domainPattern.getBindsTo()); 
-				if (vars.isEmpty()) {
-					vars.addAll(bt);
-				} else {
-					vars.retainAll(bt);
-				}
-			}
-		}
-		return vars;
 	}
 
 	public @NonNull StandardLibrary getStandardLibrary() {
@@ -597,6 +550,13 @@ public class QVTrToQVTc
 
 
 	/*public*/ void putCoreVariable(@NonNull Variable relationVariable, @NonNull Variable coreVariable) {
+		Mapping mapping = QVTcoreUtil.getContainingMapping(coreVariable);
+		assert mapping != null;
+		Map<@NonNull Variable, @NonNull Variable> variable2variable = mapping2variable2variable.get(mapping);
+		if (variable2variable == null) {
+			variable2variable = new HashMap<@NonNull Variable, @NonNull Variable>();
+			mapping2variable2variable.put(mapping, variable2variable);
+		}
 		Variable oldVal = variable2variable.put(relationVariable, coreVariable);
 		// Variables should only be traced once
 		if (oldVal != null) {
@@ -682,7 +642,7 @@ public class QVTrToQVTc
 		asResource.save(options);
 	}
 
-	public @NonNull Resource saveGenModel(@NonNull Resource asResource, @NonNull URI traceURI, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @NonNull Map<Object, Object> saveOptions2) throws IOException {
+	public @NonNull Resource saveGenModel(@NonNull Resource asResource, @NonNull URI traceURI, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @NonNull Map<Object, Object> saveOptions2, @Nullable Collection<@NonNull ? extends GenPackage> usedGenPackages) throws IOException {
 		URI trimFileExtension = traceURI.trimFileExtension();
 		String projectName;
 		if (trimFileExtension.isPlatform()) {
@@ -697,6 +657,9 @@ public class QVTrToQVTc
 		String copyrightText = genModelOptions != null ? genModelOptions.get(CompilerChain.GENMODEL_COPYRIGHT_TEXT) : null;
 		if (copyrightText != null) {
 			genModel.setCopyrightText(copyrightText);
+		}
+		if (usedGenPackages != null) {
+			genModel.getUsedGenPackages().addAll(usedGenPackages);
 		}
 		genModel.setModelDirectory("/" + projectName + "/test-gen");
 		genModel.setModelPluginID(projectName);
@@ -754,30 +717,37 @@ public class QVTrToQVTc
 				for (org.eclipse.ocl.pivot.@NonNull Package asPackage : asPackageList) {
 					EPackage ePackage = (EPackage) asPackage.getESObject();
 					if (ePackage != null) {
-						GenPackage genPackage = genModel.createGenPackage();
-						genPackage.setEcorePackage(ePackage);
-						genPackage.setPrefix(ePackage.getName());
-						if (basePrefix != null) {
-							genPackage.setBasePackage(basePrefix);
+						GenPackage genPackage = null;
+						if (usedGenPackages != null) {
+							for (@NonNull GenPackage usedGenPackage : usedGenPackages) {
+								EPackage ecorePackage = usedGenPackage.getEcorePackage();
+								if ((ecorePackage != null) && ClassUtil.safeEquals(ecorePackage.getNsURI(), ePackage.getNsURI())) {
+									genPackage = usedGenPackage;
+									break;
+								}
+							}		
 						}
-						genPackages.add(genPackage);
+						if (genPackage == null) {
+							genPackage = genModel.createGenPackage();
+							genPackage.setEcorePackage(ePackage);
+							genPackage.setPrefix(ePackage.getName());
+							if (basePrefix != null) {
+								genPackage.setBasePackage(basePrefix);
+							}
+							genPackages.add(genPackage);
+						}
 					}
 				}
 			}
 		}
 		genModel.reconcile();
-		Map<Object, Object> saveOptions = new HashMap<Object, Object>();
+		Map<Object, Object> saveOptions = new HashMap<Object, Object>(saveOptions2);
 		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
 		saveOptions.put(DerivedConstants.RESOURCE_OPTION_LINE_DELIMITER, "\n");
 	    saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 	    saveOptions.put(Resource.OPTION_LINE_DELIMITER, Resource.OPTION_LINE_DELIMITER_UNSPECIFIED);
 		genmodelResource.save(saveOptions);
-
-		
-		
 		generateModels(genModel);
-		
-		
 		return genmodelResource;
 	}
 
@@ -858,6 +828,65 @@ public class QVTrToQVTc
 		this.traceNsURI = traceNsURI;
 	}
 
+	public void transformToCoreTransformations() throws CompilerChainException {
+		for (@NonNull EObject eObject : qvtrResource.getContents()) {
+			if (eObject instanceof RelationModel) {
+				RelationModel relationModel = (RelationModel)eObject;
+				String externalURI = relationModel.getExternalURI();
+				if (externalURI.endsWith(".qvtras")) {
+					externalURI = externalURI.replace(".qvtras", ".qvtcas");
+				}
+				else if (externalURI.endsWith(".qvtr")) {
+					externalURI = externalURI.replace(".qvtr", ".qvtcas");
+				}
+				coreModel.setExternalURI(externalURI);
+				transformToCoreTransformations(ClassUtil.nullFree(coreModel.getOwnedPackages()), ClassUtil.nullFree(relationModel.getOwnedPackages()));
+//				CompilerUtil.normalizeNameables(coreTransformations);
+			}
+		}
+		List<@NonNull RelationalTransformation> relationalTransformations = new ArrayList<@NonNull RelationalTransformation>(relationalTransformation2coreTransformation.keySet());
+		Collections.sort(relationalTransformations, NameUtil.NAMEABLE_COMPARATOR);
+		for (@NonNull RelationalTransformation relationalTransformation : relationalTransformations) {
+			List<@NonNull Rule> rules = new ArrayList<@NonNull Rule>(ClassUtil.nullFree(relationalTransformation.getRule()));
+			Collections.sort(rules, NameUtil.NAMEABLE_COMPARATOR);
+			for (@NonNull Rule rule : rules) {
+				if (rule instanceof Relation) {
+					Relation rRelation = (Relation)rule;
+					if (rRelation.isIsTopLevel()) {
+						TopLevelRelationToMappingForEnforcement topLevelRelationToMappingForEnforcement = new TopLevelRelationToMappingForEnforcement(this, rRelation);
+						topLevelRelationToMappingForEnforcement.doTopLevelRelationToMappingForEnforcement();
+					}
+				}
+			}
+//		}
+//		for (@NonNull RelationalTransformation relationalTransformation : relationalTransformations) {
+//			List<@NonNull Rule> rules = new ArrayList<@NonNull Rule>(ClassUtil.nullFree(relationalTransformation.getRule()));
+//			Collections.sort(rules, NameUtil.NAMEABLE_COMPARATOR);
+			for (@NonNull Rule rule : rules) {
+				if (rule instanceof Relation) {
+					Relation rRelation = (Relation)rule;
+					if (!rRelation.isIsTopLevel()) {
+						InvokedRelationToMappingForEnforcement invokedRelationToMappingForEnforcement = new InvokedRelationToMappingForEnforcement(this, rRelation);
+						invokedRelationToMappingForEnforcement.doInvokedRelationToMappingForEnforcement();
+					}
+				}
+			}
+		}
+		for (@NonNull Transformation coreTransformation : relationalTransformation2coreTransformation.values()) {
+			List<DebugTraceBack> debugTraceBacks = coreTransformation.getOwnedDebugTraceBacks();
+			for (@NonNull Element target : target2source.keySet()) {
+				if (QVTbaseUtil.getContainingTransformation(target) == coreTransformation) {
+					DebugTraceBack traceBack = QVTbaseFactory.eINSTANCE.createDebugTraceBack();
+					traceBack.setTarget(target);
+// FIXME true source URI					traceBack.getSources().add(target2source.get(target));
+					debugTraceBacks.add(traceBack);
+				}
+			}
+//			CompilerUtil.normalizeNameables(debugTraceBacks);
+		}
+	}
+
+
 	private void transformToCoreTransformations(@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> corePackages, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
 		for (org.eclipse.ocl.pivot.@NonNull Package relationPackage : relationPackages) {
 			String name = relationPackage.getName();
@@ -873,6 +902,16 @@ public class QVTrToQVTc
 			}
 			transformToCoreTransformations(ClassUtil.nullFree(corePackage.getOwnedPackages()), ClassUtil.nullFree(relationPackage.getOwnedPackages()));
 		}
+	}
+
+	public @NonNull List<@NonNull Package> transformToTracePackages() {
+		for (@NonNull EObject eObject : qvtrResource.getContents()) {
+			if (eObject instanceof RelationModel) {
+				transformToTracePackages(tracePackages, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
+				CompilerUtil.normalizeNameables(tracePackages);
+			}
+		}
+		return tracePackages;
 	}
 	
 	private void transformToTracePackages(@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
@@ -928,18 +967,11 @@ public class QVTrToQVTc
 		}
 		Mapping coreMapping = name2mapping.get(name);
 		if (coreMapping == null) {
-			coreMapping = QVTcoreFactory.eINSTANCE.createMapping();
+			coreMapping = createMapping();
 			putTrace(coreMapping, relation);
 			coreMapping.setName(name);
 			coreMapping.setTransformation(coreTransformation);
 			name2mapping.put(name, coreMapping);
-//			putTrace(coreMapping, coreTransformation);
-			GuardPattern guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
-			coreMapping.setGuardPattern(guardPattern);
-//			putTrace(guardPattern, coreTransformation);
-			BottomPattern bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
-			coreMapping.setBottomPattern(bottomPattern);
-//			putTrace(bottomPattern, coreTransformation);
 		}
 		return coreMapping;
 	}

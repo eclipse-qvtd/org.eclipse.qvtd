@@ -33,6 +33,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
@@ -44,6 +45,38 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.AbstractQVTrelationCSPostOrderV
 
 public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrderVisitor
 {
+/*	public static class ElementTemplateCompletion extends SingleContinuation<ElementTemplateCS>
+	{
+		public ElementTemplateCompletion(@NonNull CS2ASConversion context, @NonNull ElementTemplateCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public boolean canExecute() {
+			if (!super.canExecute()) {
+				return false;
+			}
+			VariableExp pivotElement = PivotUtil.getPivot(VariableExp.class, csElement);
+			assert pivotElement != null;
+			VariableDeclaration asVariable = pivotElement.getReferredVariable();
+			assert asVariable != null;
+			Type type = asVariable.getType();
+			return type != null;
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			VariableExp asVariableExp = PivotUtil.getPivot(VariableExp.class, csElement);
+			assert asVariableExp != null;
+			VariableDeclaration asVariable = asVariableExp.getReferredVariable();
+			assert asVariable != null;
+			asVariableExp.setType(asVariable.getType());
+			asVariableExp.setTypeValue(asVariable.getTypeValue());
+			asVariableExp.setIsRequired(asVariable.isIsRequired());
+			return null;
+		}
+	} */
+
 	public static class PredicateExpressionCompletion extends SingleContinuation<PredicateCS>
 	{
 		public PredicateExpressionCompletion(@NonNull CS2ASConversion context, @NonNull PredicateCS csElement) {
@@ -147,6 +180,17 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 			pivotElement.setValueExp(oclExpression);
 		}
 		return null;
+	}
+
+	@Override
+	public Continuation<?> visitElementTemplateCS(@NonNull ElementTemplateCS csElement) {
+//		Element pivotElement = PivotUtil.getPivot(Element.class, csElement);
+//		if ((pivotElement instanceof VariableExp) && (((VariableExp)pivotElement).getReferredVariable() != null)) {
+//			return new ElementTemplateCompletion(context, csElement);
+//		}
+//		else {
+			return null;
+//		}
 	}
 
 	@Override

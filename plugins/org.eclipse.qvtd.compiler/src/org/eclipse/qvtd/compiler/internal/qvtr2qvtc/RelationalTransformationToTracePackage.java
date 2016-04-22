@@ -61,7 +61,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		qvtr2qvtc.putRelationTrace(r, rc);
 		String rn = ClassUtil.nonNullState(r.getName());
 		rc.setName("T"+rn);
-		for (@NonNull Variable rv : qvtr2qvtc.getSharedDomainVars(r))  {
+		for (@NonNull Variable rv : qvtr2qvtc.getMiddleDomainVariables(r))  {
 			createTraceProperty(rc, rv);
 		}
 		for (@NonNull Domain d : ClassUtil.nullFree(r.getDomain())) {

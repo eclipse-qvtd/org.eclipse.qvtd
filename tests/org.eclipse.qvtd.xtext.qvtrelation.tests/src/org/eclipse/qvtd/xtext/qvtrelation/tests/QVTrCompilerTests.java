@@ -13,6 +13,8 @@ package org.eclipse.qvtd.xtext.qvtrelation.tests;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -20,6 +22,7 @@ import java.util.Set;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -79,6 +82,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		private BasicQVTiExecutor interpretedExecutor = null;
 		private QVTiTransformationExecutor generatedExecutor = null;
 		private Set<@NonNull String> nsURIs = new HashSet<@NonNull String>();
+    	private Collection<@NonNull GenPackage> usedGenPackages = null;
 		
 		public MyQVT(@NonNull String testFolderName, @NonNull EPackage... eInstances) {
 			super(new QVTiEnvironmentFactory(getProjectMap(), null));
@@ -86,6 +90,17 @@ public class QVTrCompilerTests extends LoadTestCase
 			this.testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
 	        this.samplesBaseUri = testFolderURI.appendSegment("samples");
 			installEPackages(eInstances);
+		}
+
+		public void addUsedGenPackage(@NonNull String resourcePath, @Nullable String fragment) {
+	    	if (usedGenPackages == null) {
+	    		usedGenPackages = new ArrayList<@NonNull GenPackage>();
+	    	}
+	    	URI uri = URI.createPlatformResourceURI(resourcePath, false);
+	    	if (fragment != null) {
+	    		uri = uri.appendFragment(fragment);
+	    	}
+			usedGenPackages.add((@NonNull GenPackage)getResourceSet().getEObject(uri, true));
 		}
 
 		public @NonNull Transformation compileTransformation(@NonNull String testFileName, @NonNull String outputName, @NonNull String basePrefix, @NonNull String middleNsURI) throws Exception {
@@ -99,6 +114,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<@NonNull String, @Nullable String>();
 			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, basePrefix);
 			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
+			compilerChain.setOption(CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
 			compilerChain.setOption(CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
 	    	return compilerChain.compile(outputName);
 		}
@@ -312,6 +328,39 @@ public class QVTrCompilerTests extends LoadTestCase
 	    	myQVT.loadInput("seqDgm", "Seq.xmi");
 	    	myQVT.executeTransformation();
 			myQVT.saveOutput("stm", "Stmc_CG.xmi", "Stmc_expected.xmi", null);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
+    }
+
+	@Test
+    public void testQVTrCompiler_SimplerRel2Core_CG() throws Exception {
+//		AbstractTransformer.EXCEPTIONS.setState(true);
+//		AbstractTransformer.INVOCATIONS.setState(true);
+ //   	QVTm2QVTp.PARTITIONING.setState(true);
+    	MyQVT myQVT = new MyQVT("rel2core");
+    	try {
+	    	String projectTestName = PROJECT_NAME + ".rel2core";
+	    	myQVT.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
+			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
+			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
+			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
+	    	Transformation asTransformation = myQVT.compileTransformation("SimplerRelToCorePivotizedBeautyfied.qvtr", "core", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/rel2core/SeqToStm");
+			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
+//	    	myQVT.installClassName(projectTestName + ".SeqMM.SeqMMPackage");
+//	    	myQVT.installClassName(projectTestName + ".PSeqToStm.PSeqToStmPackage");
+	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "SimplerRelToCorePivotizedBeautyfied.genmodel");
+	    	//
+	        myQVT.createGeneratedExecutor(txClass);
+	    	myQVT.loadInput("relations", "Rel2Core.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("core", "Rel2Core_CG.xmi", "Rel2Core_expected.xmi", null);
+	    	//
+//	        myQVT.createGeneratedExecutor(txClass);
+//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
+//	    	myQVT.executeTransformation();
+//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
 		}
 		finally {
 	    	myQVT.dispose();

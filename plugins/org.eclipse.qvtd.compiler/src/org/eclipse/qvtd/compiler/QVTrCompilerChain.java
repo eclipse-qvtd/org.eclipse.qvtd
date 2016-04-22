@@ -11,9 +11,11 @@
 package org.eclipse.qvtd.compiler;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -69,7 +71,8 @@ public class QVTrCompilerChain extends AbstractCompilerChain
     		t.setTraceNsURI(traceNsURI);
     	}
 		t.prepare();
-		t.execute();
+		//
+		t.transformToTracePackages();
 		Map<Object, Object> saveOptions = getOption(TRACE_STEP, SAVE_OPTIONS_KEY);
 		if (saveOptions == null) {
 			saveOptions = XMIUtil.createSaveOptions();
@@ -77,6 +80,8 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		t.saveTrace(traceResource, traceURI, genModelURI, traceOptions, saveOptions);
         assertNoResourceErrors("Trace save", traceResource);
 		compiled(TRACE_STEP, cResource);
+		//
+		t.transformToCoreTransformations();
 		saveOptions = getOption(QVTR_STEP, SAVE_OPTIONS_KEY);
 		if (saveOptions == null) {
 			saveOptions = XMIUtil.createSaveOptions();
@@ -90,7 +95,8 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				saveOptions = XMIUtil.createSaveOptions();
 			}
 			saveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-		    t.saveGenModel(traceResource, traceURI, genModelURI, getOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY), saveOptions);
+			Collection<@NonNull ? extends GenPackage> usedGenPackages = getOption(GENMODEL_STEP, GENMODEL_USED_GENPACKAGES_KEY);
+		    t.saveGenModel(traceResource, traceURI, genModelURI, getOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY), saveOptions, usedGenPackages);
 			compiled(GENMODEL_STEP, cResource);
 //		}
 		return cResource;

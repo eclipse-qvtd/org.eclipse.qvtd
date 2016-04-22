@@ -204,11 +204,23 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	protected @NonNull QVTuConfiguration createQVTuConfiguration(@NonNull Resource cResource, QVTuConfiguration.Mode mode, @NonNull String enforcedOutputName) throws IOException {
 		Transformation transformation = getTransformation(cResource);
 		List<@NonNull String> inputNames = new ArrayList<@NonNull String>();
+		boolean gotOutput = false;
 		for (TypedModel typedModel : transformation.getModelParameter()) {
 			String modelName = typedModel.getName();
-			if ((modelName != null) && !modelName.equals(enforcedOutputName)) {
-				inputNames.add(modelName);
+			if (modelName != null) {
+				if (modelName.equals(enforcedOutputName)) {
+					if (gotOutput) {
+						throw new CompilerChainException("Ambiguous output domain ''{0}''", enforcedOutputName);
+					}
+					gotOutput = true;
+				}
+				else {
+					inputNames.add(modelName);
+				}
 			}
+		}
+		if (!gotOutput) {
+			throw new CompilerChainException("Unknown output domain ''{0}''", enforcedOutputName);
 		}
 		return new QVTuConfiguration(QVTuConfiguration.Mode.ENFORCE, inputNames, Collections.singletonList(enforcedOutputName));
 	}

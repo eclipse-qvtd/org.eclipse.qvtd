@@ -255,4 +255,12 @@ public class PropertyAssignmentImpl extends AssignmentImpl implements PropertyAs
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTcoreBaseVisitor<?>)visitor).visitPropertyAssignment(this);
 	}
+
+	@Override
+	public void setValue(OCLExpression newValue) {
+		if (newValue != null) {
+			assert !newValue.eClass().getName().endsWith("TemplateExp");
+		}
+		super.setValue(newValue);
+	}
 } //PropertyAssignmentImpl

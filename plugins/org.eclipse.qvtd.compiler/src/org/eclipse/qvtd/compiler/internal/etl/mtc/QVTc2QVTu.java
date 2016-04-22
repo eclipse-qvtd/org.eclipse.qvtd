@@ -291,7 +291,10 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		 */
 		@Override
 		public @Nullable Element visitMapping(@NonNull Mapping mIn) {
-			getMappingMode(mIn);
+			MappingMode mappingMode = getMappingMode(mIn);
+			if (mappingMode == null) {
+				return null;
+			}
 			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
 			doMapping(mIn, mOut);
 	        return mOut;
@@ -566,7 +569,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		return new UpdateVisitor(this);
 	}
 
-	private @NonNull MappingMode getComposedMappingMode(@NonNull Mapping mapping) {
+	private @Nullable MappingMode getComposedMappingMode(@NonNull Mapping mapping) {
 		MappingMode mergedMode = MappingMode.NULL;
 		for (@NonNull Domain domain: ClassUtil.nullFree(mapping.getDomain())) {
 			String name = domain.getTypedModel().getName();
@@ -575,22 +578,36 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 				domain2mode.put((CoreDomain)domain, DomainMode.INPUT);
 			}
 			else if (qvtuConfiguration.isOutput(name)) {
+				if (!domain.isIsEnforceable()) {
+					return null;
+				}
 				mergedMode = mergedMode.asOutput();
 				domain2mode.put((CoreDomain)domain, DomainMode.OUTPUT);
 			}
 		}
 		for (@NonNull Mapping localMapping : ClassUtil.nullFree(mapping.getLocal())) {
-			mergedMode = mergedMode.union(getMappingMode(localMapping));
+			MappingMode mappingMode = getMappingMode(localMapping);
+			if (mappingMode == null) {
+				return null;
+			}
+			mergedMode = mergedMode.union(mappingMode);
 		}
 		return mergedMode;
 	}
 
-	private @NonNull MappingMode getMappingMode(@NonNull Mapping mapping) {
+	private @Nullable MappingMode getMappingMode(@NonNull Mapping mapping) {
 		MappingMode mergedMode = mapping2mode.get(mapping);
 		if (mergedMode == null) {
 			mergedMode = getComposedMappingMode(mapping);
+			if (mergedMode == null) {
+				return null;
+			}
 			for (@NonNull Mapping refinedMapping : ClassUtil.nullFree(mapping.getSpecification())) {
-				mergedMode = mergedMode.union(getComposedMappingMode(refinedMapping));
+				MappingMode composedMappingMode = getComposedMappingMode(refinedMapping);
+				if (composedMappingMode == null) {
+					return null;
+				}
+				mergedMode = mergedMode.union(composedMappingMode);
 			}
 			mapping2mode.put(mapping, mergedMode);
 			setMappingDomainModes(mapping, mergedMode);

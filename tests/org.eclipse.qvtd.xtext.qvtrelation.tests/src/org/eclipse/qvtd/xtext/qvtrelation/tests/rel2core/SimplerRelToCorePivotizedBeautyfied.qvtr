@@ -1,0 +1,114 @@
+--------------------------------------------------------------------------------
+-- Copyright (c) 2008 Tata Consultancy Services and others.
+-- All rights reserved. This program and the accompanying materials
+-- are made available under the terms of the Eclipse Public License v1.0
+-- which accompanies this distribution, and is available at
+-- http://www.eclipse.org/legal/epl-v10.html
+--
+-- Contributors:
+--     S.Reddy - Section 10.3 of the OMG MOF-QVT 1.0 specification
+--     E.D.Willink - contributions to drafts of the above
+--     E.D.Willink - adaptation to comply with QVT specification
+--     H. Hoyos - adaptation to comply with QVT 1.2 and bug fixes
+--------------------------------------------------------------------------------
+import pivotocl     :   'platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore'::pivot;                            -- HHR Use Pivot metamodels
+import qvtbase      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'::qvtbase;               -- HHR Use Pivot metamodels
+import qvttemplate  :   'platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore'::qvttemplate;   -- HHR Use Pivot metamodels
+import qvtrelation  :   'platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore'::qvtrelation;   -- HHR Use Pivot metamodels
+import qvtcorebase  :   'platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore'::qvtcorebase;   -- HHR Use Pivot metamodels
+import qvtcore      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore'::qvtcore;               -- HHR Use Pivot metamodels
+
+
+
+transformation org::eclipse::qvtd::xtext::qvtrelation::tests::rel2core::relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, core:{qvtcore,qvtcorebase,qvtbase,pivotocl}) -- HHR Use Pivot metamodels
+{    
+    -- Rule 1: Corresponding to each relation there exists a trace class in core.
+    -- The trace class contains a property corresponding to each object node in the
+    -- pattern of each domain of the relation.
+    --
+    top relation RelationToTraceClass
+    {
+        relationName:String;     
+        rootVariableName:String;       
+        domain relations
+            _'relation':Relation {
+                name = relationName,
+                domain = relationDomain:RelationDomain {
+                    pattern = relationDomainPattern:DomainPattern {
+                        templateExpression = rootTemplateExp:TemplateExp {
+                            bindsTo = rootVariable:Variable {
+                                name = rootVariableName,
+                                type = rootVariableType:Class {}
+                            }
+                        }
+                    }
+                }
+            };
+        enforce domain
+            core traceClass:Class {
+                name = 'T'+relationName,
+                ownedProperties = traceClassProperty:pivotocl::Property {
+                    name = rootVariableName,
+                    type = rootVariableType
+                }
+            };
+/*        where {
+--            CollectionTemplateToTraceClassProps(rootTemplateExp, traceClass);
+            ObjectTemplateToTraceClassProps(rootTemplateExp, traceClass);
+        } */
+    }
+    
+/*    relation CollectionTemplateToTraceClassProps
+    {
+        variableName: String;   
+        domain relations
+            t:CollectionTemplateExp {
+                member = ms:Set(OCLExpression) {
+                	templateExp:TemplateExp {
+	                    bindsTo = templateVariable:Variable {
+	                        name = variableName,
+	                        type = variableType:Class {}
+	                    }
+                	} 
+                 ++ _ }
+            };
+        enforce domain
+            core traceClass:Class {
+                ownedProperties = traceClassProperty:pivotocl::Property {
+                    name=variableName,
+                    type=variableType
+                }
+            };
+        where {
+            CollectionTemplateToTraceClassProps(templateExp, traceClass);
+            ObjectTemplateToTraceClassProps(templateExp, traceClass);
+        }
+    } */
+    
+/*    relation ObjectTemplateToTraceClassProps
+    {
+        variableName: String;     
+        domain relations
+            t:ObjectTemplateExp {
+                part = pt:PropertyTemplateItem {
+                    value = templateExp:TemplateExp {
+                        bindsTo = templateVariable:Variable {
+                            name = variableName,
+                            type = variableType:Class {}
+                        }
+                    }
+                }
+            };
+        enforce domain
+            core traceClass:Class {
+                ownedProperties = traceClassProperty:pivotocl::Property {
+                    name=variableName,
+                    type=variableType
+                }
+            };
+        where {
+--            CollectionTemplateToTraceClassProps(templateExp, traceClass);
+            ObjectTemplateToTraceClassProps(templateExp, traceClass);
+        }
+    } */
+}

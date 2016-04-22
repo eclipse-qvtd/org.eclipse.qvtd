@@ -15,8 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -29,6 +31,15 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 public class QVTrelationUtil extends QVTbaseUtil
 {
 	public static final @NonNull String DUMMY_VARIABLE_NAME = "_";
+
+	public static @Nullable Relation getContainingRelation(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Relation) {
+				return (Relation) eObject;
+			}
+		}
+		return null;
+	}
 	
 	public static @NonNull List<Variable> getRootVariables(@NonNull Relation relation) {
 		List<Variable> rootVariables = new ArrayList<Variable>();

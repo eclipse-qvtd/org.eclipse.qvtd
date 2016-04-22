@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
@@ -33,84 +32,64 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
-import com.google.common.collect.Sets;
-
 /*public*/ class TopLevelRelationToMappingForEnforcement extends AbstractQVTr2QVTcRelations
 {
-	private @NonNull String getCoreMappingName(@NonNull RelationDomain rd) {
-		@NonNull Relation r = (@NonNull Relation) ClassUtil.nonNullState(rd.getRule());
-		@NonNull String rn = ClassUtil.nonNullState(r.getName());
-		@NonNull String dn = ClassUtil.nonNullState(rd.getName());
-		return rn+'_'+dn;
-	}
-
-	private class RelationDomain2CoreDomain extends AbstractRelationDomain2CoreDomain
+	private class TopEnforceableRelationDomain2CoreMapping extends AbstractEnforceableRelationDomain2CoreMapping
 	{
-		private @Nullable RealizedVariable mtev;			// The mapping template expression variable (the realized variable enforced by the domain pattern)
-															// null if it is a when argument
+		private @NonNull List<@NonNull RealizedVariable> cEnforcedRootVariables;	// The mapping template expression variables (the realized variable enforced by the domain pattern)
+															// except when arguments
 			
-		public RelationDomain2CoreDomain(@NonNull RelationDomain rd) {
-			super(rd, getCoreMappingName(rd));
-			//
-			Set<@NonNull Variable> whenVars = getWhenVars(r);
-			this.mtev = whenVars.contains(tev) ? null : doRVarToMRealizedVar(tev, db);
+		public TopEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) {
+			super(rEnforcedDomain, cMappingName);
+			this.cEnforcedRootVariables = new ArrayList<@NonNull RealizedVariable>(rEnforcedRootVariables.size());
+			for (@NonNull Variable rEnforcedRootVariable : rEnforcedRootVariables) {
+				if (!rWhenVariables.contains(rEnforcedRootVariable)) {
+					this.cEnforcedRootVariables.add(mapRealizedVariable(rEnforcedRootVariable));
+				}
+			}
 		}
 
-		// 47
-		public void doTROppositeDomainsToMappingForEnforcement() throws CompilerChainException {
-			Set<@NonNull RelationDomain> rds = new HashSet<@NonNull RelationDomain>();
-			for (@NonNull Domain d : ClassUtil.nullFree(r.getDomain())) {
-				rds.add((RelationDomain) d);
-			}
-			rds.remove(rd); // guard
-			assert rds.equals(Sets.newHashSet(rOtherDomains));
-			for (@NonNull RelationDomain ord : rds) {		// FIXME rOppositeDomains already computed
-				// check
-				DomainPattern dp = qvtr2qvtc.getDomainPattern(ord);
-				TemplateExp dpte = dp.getTemplateExpression();
-				if (dpte instanceof ObjectTemplateExp) {
-					String dn = ClassUtil.nonNullState(ord.getName());
-					TypedModel dir = ClassUtil.nonNullState(ord.getTypedModel());
-					String tmn = ClassUtil.nonNullState(dir.getName());
-					List<org.eclipse.ocl.pivot.@NonNull Package> up = ClassUtil.nullFree(dir.getUsedPackage());
-					boolean c = ord.isIsCheckable();
-					List<@NonNull Variable> domainVars = ClassUtil.nullFree(dp.getBindsTo());
-					ObjectTemplateExp te = (ObjectTemplateExp)dpte;
-					Variable tev = ClassUtil.nonNullState(te.getBindsTo());
-					// when
-					// init
-					CoreDomain cd = qvtr2qvtc.whenCoreDomain(m, dn);
-					GuardPattern dg = ClassUtil.nonNullState(cd.getGuardPattern());
-					BottomPattern db = ClassUtil.nonNullState(cd.getBottomPattern());
-					BottomPattern mb = ClassUtil.nonNullState(m.getBottomPattern());
-					assert mb == this.mb;
-					// where
-					Set<@NonNull Variable> whenVars = getWhenVars(r);
-					Set<@NonNull Variable> domainTopVars = new HashSet<@NonNull Variable>(domainVars);
-					domainTopVars.retainAll(whenVars);
-					domainTopVars.add(tev);
-					Set<@NonNull Variable> sharedDomainVars = qvtr2qvtc.getSharedDomainVars(r);
-					Set<@NonNull Variable> domainBottomUnSharedVars = new HashSet<@NonNull Variable>(domainVars);
-					domainBottomUnSharedVars.removeAll(whenVars);
-					domainBottomUnSharedVars.removeAll(sharedDomainVars);
-					domainBottomUnSharedVars.remove(tev);
-					Set<@NonNull Variable> domainBottomSharedVars = new HashSet<@NonNull Variable>(domainVars);
-					domainBottomSharedVars.removeAll(whenVars);
-					domainBottomSharedVars.retainAll(sharedDomainVars);
-					domainBottomSharedVars.remove(tev);
-					
-					/*List<Variable> dgVars =*/ doRVarSetToDGVarSet(domainTopVars, dg);
-					/*List<Variable> dbVars =*/ doRVarSetToMBVarSet(domainBottomUnSharedVars, db);
-					doRVarSetToMBVarSet(domainBottomSharedVars, mb);
-					doRDomainPatternToMDBottomPattern(te);
-					// assign
-					TypedModel mdir = getTypedModel(tmn, up);
-					cd.setTypedModel(mdir);
-					cd.setIsCheckable(c);
-					cd.setIsEnforceable(false);
-					cd.setGuardPattern(dg);
-					assert m.getBottomPattern() == mb;
-					m.setBottomPattern(mb);					// FIXME redundant
+		// TROppositeDomainsToMappingForEnforcement
+		public void mapOtherDomainsToDomainsVariablesAndPatterns() throws CompilerChainException {
+			for (@NonNull RelationDomain rOtherDomain : rOtherDomains) {
+				String rOtherDomainName = ClassUtil.nonNullState(rOtherDomain.getName());
+				TypedModel rOtherTypedModel = ClassUtil.nonNullState(rOtherDomain.getTypedModel());
+				TypedModel cOtherTypedModel = getCoreTypedModel(rOtherTypedModel);
+				CoreDomain cOtherDomain = qvtr2qvtc.whenCoreDomain(cMapping, rOtherDomainName);
+				GuardPattern cOtherGuardPattern = ClassUtil.nonNullState(cOtherDomain.getGuardPattern());
+				BottomPattern cOtherBottomPattern = ClassUtil.nonNullState(cOtherDomain.getBottomPattern());
+				cOtherDomain.setTypedModel(cOtherTypedModel);
+				cOtherDomain.setIsCheckable(rOtherDomain.isIsCheckable());
+				cOtherDomain.setIsEnforceable(false);
+				cOtherDomain.setGuardPattern(cOtherGuardPattern);		// FIXME redundant
+				for (@NonNull DomainPattern rOtherDomainPattern : ClassUtil.nullFree(rOtherDomain.getPattern())) {
+					List<@NonNull Variable> rOtherDomainVariables = ClassUtil.nullFree(rOtherDomainPattern.getBindsTo());
+					TemplateExp rOtherTemplateExpression = rOtherDomainPattern.getTemplateExpression();
+					Variable rOtherRootVariable = ClassUtil.nonNullState(rOtherTemplateExpression.getBindsTo());
+//					if (rOtherTemplateExpression instanceof ObjectTemplateExp) {
+//						ObjectTemplateExp rOtherObjectTemplateExpression = (ObjectTemplateExp)rOtherTemplateExpression;
+						Set<@NonNull Variable> rOtherGuardDomainVariables = new HashSet<@NonNull Variable>(rOtherDomainVariables);
+						rOtherGuardDomainVariables.retainAll(rWhenVariables);
+						rOtherGuardDomainVariables.add(rOtherRootVariable);
+						//
+						Set<@NonNull Variable> rOtherBottomDomainVariables = new HashSet<@NonNull Variable>(rOtherDomainVariables);
+						rOtherBottomDomainVariables.removeAll(rWhenVariables);
+						rOtherBottomDomainVariables.removeAll(rMiddleDomainVariables);
+						rOtherBottomDomainVariables.remove(rOtherRootVariable);
+						//
+						Set<@NonNull Variable> rMiddleBottomDomainVariables = new HashSet<@NonNull Variable>(rOtherDomainVariables);
+						rMiddleBottomDomainVariables.removeAll(rWhenVariables);
+						rMiddleBottomDomainVariables.retainAll(rMiddleDomainVariables);
+						rMiddleBottomDomainVariables.remove(rOtherRootVariable);
+						//
+						mapVariablesToVariables(rOtherGuardDomainVariables, cOtherGuardPattern);
+						mapVariablesToVariables(rOtherBottomDomainVariables, cOtherBottomPattern);
+						mapVariablesToVariables(rMiddleBottomDomainVariables, cMiddleBottomPattern);
+						addTemplateExpressionToMiddleBottom(rOtherTemplateExpression);
+//					}
+//					else {
+//						throw new CompilerChainException("Missing doTROppositeDomainsToMappingForEnforcement support for CollectionTemplateExp");
+//					}
 				}
 			}
 		}
@@ -118,65 +97,69 @@ import com.google.common.collect.Sets;
 		@Override
 		protected void setAttributes() {
 			super.setAttributes();
-			if (mtev != null) {
-				db.getRealizedVariable().add(mtev);
-			}
+			cEnforcedBottomPattern.getRealizedVariable().addAll(cEnforcedRootVariables);
 		}
 
 		@Override
-		protected void where(@NonNull Set<@NonNull Variable> whenVars, @NonNull Set<@NonNull Predicate> rpSet,
-				@NonNull Set<@NonNull Variable> sharedDomainVars, @NonNull Set<@NonNull Variable> unsharedWhereVars) throws CompilerChainException {
-			Set<@NonNull Variable> oppositeDomainVars = getOppositeDomainVars();
-			Set<@NonNull Variable> domainBottomUnSharedVars = new HashSet<@NonNull Variable>(domainVars);
-			domainBottomUnSharedVars.removeAll(whenVars);
-			domainBottomUnSharedVars.removeAll(sharedDomainVars);
-			Set<@NonNull Predicate> predicatesWithVarBindings = filterOutPredicatesThatReferToVars(rpSet, domainBottomUnSharedVars);
-			Set<@NonNull Predicate> predicatesWithoutVarBindings = new HashSet<@NonNull Predicate>(rpSet);
-			predicatesWithoutVarBindings.removeAll(predicatesWithVarBindings);
-			Set<@NonNull Variable> domainVarsSharedWithWhen = new HashSet<@NonNull Variable>(domainVars);
-			domainVarsSharedWithWhen.retainAll(whenVars);
-			if (!whenVars.contains(tev)) {						// This fixes Bug 486636
-				domainVarsSharedWithWhen.remove(tev);
-			}
+		protected void where() throws CompilerChainException {
+			Set<@NonNull Variable> rEnforcedBottomDomainVariables = new HashSet<@NonNull Variable>(rEnforcedDomainVariables);
+			rEnforcedBottomDomainVariables.removeAll(rWhenVariables);
+			rEnforcedBottomDomainVariables.removeAll(rMiddleDomainVariables);
+			//
+			Set<@NonNull Predicate> rPredicatesWithVariableBindings = selectPredicatesThatReferToVariables(rPredicates, rEnforcedBottomDomainVariables);
+			Set<@NonNull Predicate> rPredicatesWithoutVariableBindings = new HashSet<@NonNull Predicate>(rPredicates);
+			rPredicatesWithoutVariableBindings.removeAll(rPredicatesWithVariableBindings);
+			//
+			Set<@NonNull Variable> rEnforcedDomainGuardVariables = new HashSet<@NonNull Variable>(rEnforcedDomainVariables);
+			rEnforcedDomainGuardVariables.retainAll(rWhenVariables);
+			//
+			List<@NonNull Variable> nonWhenRootVariables2 = rEnforcedRootVariables;
+			nonWhenRootVariables2.removeAll(rWhenVariables);
+			rEnforcedDomainGuardVariables.remove(nonWhenRootVariables2);						// This fixes Bug 486636
 			// Relation Calls
-			//T5
-			doRPredicateSetToMBPredicateSet(predicatesWithVarBindings, mb);
-			doRVarSetToDGVarSet(domainVarsSharedWithWhen, dg);
-			
-			//T4
-			/* List<@NonNull Variable> mbvars =*/ doRVarSetToMBVarSet(unsharedWhereVars, mb);
-			//mbvars = mbvars;
-			//T3
-			doTROppositeDomainsToMappingForEnforcement();
+			mapPredicatesToPredicates(rPredicatesWithVariableBindings);
+			mapVariablesToVariables(rEnforcedDomainGuardVariables, cEnforcedGuardPattern);		
+			mapVariablesToVariables(rMiddleBottomDomainVariables, cMiddleBottomPattern);
+			mapOtherDomainsToDomainsVariablesAndPatterns();
 			// Invoked here so the variables are instantiated
-			doROppositeDomainVarsToTraceClassProps(oppositeDomainVars);
-			doRWhenPatternToMGuardPattern();
-			doRDomainToMDBottomForEnforcement(predicatesWithoutVarBindings, domainBottomUnSharedVars);
-			doRRelImplToMBottomEnforcementOperation();
+			mapDomainVariablesToMiddleVariableAssignments(rOtherDomainVariables);
+			mapWhenPatternToGuardPatterns();
+			mapEnforcedDomain(rPredicatesWithoutVariableBindings, rEnforcedBottomDomainVariables);
+			mapRelationImplemantationToEnforcementOperation();
 		}
 	}
-
-	public TopLevelRelationToMappingForEnforcement(@NonNull QVTrToQVTc qvtr2qvtc) {
-		super(qvtr2qvtc);
+	
+	public TopLevelRelationToMappingForEnforcement(@NonNull QVTrToQVTc qvtr2qvtc, @NonNull Relation rRelation) {
+		super(qvtr2qvtc, rRelation);
+		assert rRelation.isIsTopLevel();
 	}
 
-	public void doTopLevelRelationToMappingForEnforcement(@NonNull Relation r) throws CompilerChainException {
-		assert r.isIsTopLevel();
+	public void doTopLevelRelationToMappingForEnforcement() throws CompilerChainException {
 		// check
-		@NonNull List<@NonNull RelationDomain2CoreDomain> relation2mappings = new ArrayList<@NonNull RelationDomain2CoreDomain>();
-		for (@NonNull Domain d : ClassUtil.nullFree(r.getDomain())) {
-			if (d.isIsEnforceable()) {
-				RelationDomain rd = (RelationDomain)d;
-				for (@NonNull DomainPattern pattern : ClassUtil.nullFree(rd.getPattern())) {
-					TemplateExp templateExpression = pattern.getTemplateExpression();
-					if (templateExpression instanceof ObjectTemplateExp) {
-						relation2mappings.add(new RelationDomain2CoreDomain(rd));
+		@NonNull List<@NonNull TopEnforceableRelationDomain2CoreMapping> enforceableRelationDomain2coreMappings = new ArrayList<@NonNull TopEnforceableRelationDomain2CoreMapping>();
+		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
+			if (rDomain.isIsEnforceable()) {
+				RelationDomain rEnforcedDomain = (RelationDomain)rDomain;
+				for (@NonNull DomainPattern rEnforcedPattern : ClassUtil.nullFree(rEnforcedDomain.getPattern())) {
+					TemplateExp rEnforcedTemplateExpression = rEnforcedPattern.getTemplateExpression();
+					if (rEnforcedTemplateExpression instanceof ObjectTemplateExp) {
+						enforceableRelationDomain2coreMappings.add(new TopEnforceableRelationDomain2CoreMapping(rEnforcedDomain, getCoreMappingName(rEnforcedDomain)));
 						break;
+					}
+					else {
+						throw new CompilerChainException("Missing doTopLevelRelationToMappingForEnforcement support for CollectionTemplateExp");
 					}
 				}
 			}
 		}
 		// where() {
-		where(r, relation2mappings);
+		where(rRelation, enforceableRelationDomain2coreMappings);
 	}
+	
+	private @NonNull String getCoreMappingName(@NonNull RelationDomain rEnforcedDomain) {
+		@NonNull String rRelationName = ClassUtil.nonNullState(rRelation.getName());
+		@NonNull String rEnforcedDomainName = ClassUtil.nonNullState(rEnforcedDomain.getName());
+		return rRelationName + '_' + rEnforcedDomainName;
+	}
+
 }
