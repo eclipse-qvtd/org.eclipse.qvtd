@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmi:id="_uyi6QEPiEdurkaVVcVejrg"
+    xmlns="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/classmodel2classmodel/ClassMM"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/classmodel2classmodel/ClassMM ../ClassMM.ecore">
+  <Class xmi:id="_vmF3EEPiEdurkaVVcVejrg" subs="_yFEa8EPiEdurkaVVcVejrg _1C428EPiEdurkaVVcVejrg" name="Polygon"/>
+  <Class xmi:id="_yFEa8EPiEdurkaVVcVejrg" subs="_02YE8EPiEdurkaVVcVejrg _0oXeIEPiEdurkaVVcVejrg" supers="_vmF3EEPiEdurkaVVcVejrg" name="Quadrilateral"/>
+  <Class xmi:id="_1C428EPiEdurkaVVcVejrg" subs="_xzossEPiEdurkaVVcVejrg _0EAz4EPiEdurkaVVcVejrg" supers="_vmF3EEPiEdurkaVVcVejrg" name="Triangle"/>
+  <Class xmi:id="_02YE8EPiEdurkaVVcVejrg" subs="_0Wyl8EPiEdurkaVVcVejrg" supers="_yFEa8EPiEdurkaVVcVejrg" name="Rhombus"/>
+  <Class xmi:id="_0oXeIEPiEdurkaVVcVejrg" subs="_0Wyl8EPiEdurkaVVcVejrg" supers="_yFEa8EPiEdurkaVVcVejrg" name="Rectangle"/>
+  <Class xmi:id="_0Wyl8EPiEdurkaVVcVejrg" supers="_02YE8EPiEdurkaVVcVejrg _0oXeIEPiEdurkaVVcVejrg" name="Square"/>
+  <Class xmi:id="_xzossEPiEdurkaVVcVejrg" subs="_z2TvEEPiEdurkaVVcVejrg" supers="_1C428EPiEdurkaVVcVejrg" name="IsoscelesTriangle"/>
+  <Class xmi:id="_0EAz4EPiEdurkaVVcVejrg" supers="_1C428EPiEdurkaVVcVejrg" name="ScaleneTriangle"/>
+  <Class xmi:id="_z2TvEEPiEdurkaVVcVejrg" supers="_xzossEPiEdurkaVVcVejrg" name="EquilateralTriangle"/>
+</xmi:XMI>

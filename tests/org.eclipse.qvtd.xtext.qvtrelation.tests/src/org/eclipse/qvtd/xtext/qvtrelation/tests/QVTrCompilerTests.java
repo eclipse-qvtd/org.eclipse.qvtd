@@ -42,7 +42,6 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
-import org.eclipse.qvtd.compiler.internal.etl.mtc.QVTm2QVTp;
 import org.eclipse.qvtd.compiler.internal.scheduler.Scheduler;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -51,7 +50,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.JavaSourceFileObject;
@@ -204,6 +202,13 @@ public class QVTrCompilerTests extends LoadTestCase
 			return saveOptions;
 		}
 
+		public void installClassName(@NonNull String className) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
+			Class<?> middleClass = Class.forName(className);
+			Field middleField = middleClass.getDeclaredField("eINSTANCE");
+			EPackage middleEPackage = (EPackage) middleField.get(null);
+			getResourceSet().getPackageRegistry().put(middleEPackage.getNsURI(), middleEPackage);
+		}
+
 		/**
 		 * Explicitly install the eInstances that would normally make it into the ProjectMap from extension point registrations.
 		 * Test models are not registered via extension point so we have to do this manually.
@@ -268,8 +273,8 @@ public class QVTrCompilerTests extends LoadTestCase
 	 */
 	@Before
     public void setUp() throws Exception {
-
 		BaseLinkingService.DEBUG_RETRY.setState(true);
+		Scheduler.DEBUG_GRAPHS.setState(true);;
 		super.setUp();
 		OCLstdlib.install();
 		QVTrTestUtil.doQVTrelationSetup();
@@ -287,11 +292,54 @@ public class QVTrCompilerTests extends LoadTestCase
 		super.tearDown();
     }
 
+/*	@Test
+    public void testQVTrCompiler_ClassModelToClassModel() throws Exception {
+//		AbstractTransformer.EXCEPTIONS.setState(true);
+//		AbstractTransformer.INVOCATIONS.setState(true);
+    	MyQVT myQVT = new MyQVT("classmodel2classmodel");
+    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	try {
+	    	Transformation asTransformation = myQVT.compileTransformation("ClassModelToClassModel.qvtr", "uml1", PROJECT_NAME + ".classmodel2classmodel", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/classmodel2classmodel/ClassModelToClassModel");
+	    	myQVT.createInterpretedExecutor(asTransformation);
+	    	myQVT.loadInput("uml1", "ClassUM1.xmi");
+	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "classmodel2classmodelc_trace.xmi");
+	    	myQVT.createModel("uml2", "ClassUM1_Interpreted.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("uml2", "ClassUM1_Interpreted.xmi", "ClassUM1_expected.xmi", null);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
+    }
+
+	@Test
+    public void testQVTrCompiler_ClassModelToClassModel_CG() throws Exception {
+//		AbstractTransformer.EXCEPTIONS.setState(true);
+//		AbstractTransformer.INVOCATIONS.setState(true);
+//    	QVTm2QVTp.PARTITIONING.setState(true);
+    	MyQVT myQVT = new MyQVT("classmodel2classmodel");
+    	try {
+	    	String projectTestName = PROJECT_NAME + ".classmodel2classmodel";
+			Transformation asTransformation = myQVT.compileTransformation("ClassModelToClassModel.qvtr", "uml2", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/classmodel2classmodel/ClassModelToClassModel");
+			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
+	    	myQVT.installClassName(projectTestName + ".ClassMM.ClassMMPackage");
+	    	myQVT.installClassName(projectTestName + ".PClassModelToClassModel.PClassModelToClassModelPackage");
+	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "ClassModelToClassModel.genmodel");
+	    	//
+	        myQVT.createGeneratedExecutor(txClass);
+	    	myQVT.loadInput("uml1", "ClassUM1.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("uml2", "ClassUM1_CG.xmi", "ClassUM1.xmi", null);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
+    } */
+
 	@Test
     public void testQVTrCompiler_SeqToStm() throws Exception {
-		AbstractTransformer.EXCEPTIONS.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
-		Scheduler.DEBUG_GRAPHS.setState(true);;
+//		AbstractTransformer.EXCEPTIONS.setState(true);
+//		AbstractTransformer.INVOCATIONS.setState(true);
     	MyQVT myQVT = new MyQVT("seq2stm");
     	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
@@ -310,25 +358,27 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
     public void testQVTrCompiler_SeqToStm_CG() throws Exception {
-		AbstractTransformer.EXCEPTIONS.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
-		Scheduler.DEBUG_GRAPHS.setState(true);;
-    	QVTm2QVTp.PARTITIONING.setState(true);
-    	MyQVT myQVT = new MyQVT("seq2stm"); //, SeqMMPackage.eINSTANCE, StmcMMPackage.eINSTANCE, PSeqToStmPackage.eINSTANCE);
+//		AbstractTransformer.EXCEPTIONS.setState(true);
+//		AbstractTransformer.INVOCATIONS.setState(true);
+ //   	QVTm2QVTp.PARTITIONING.setState(true);
+    	MyQVT myQVT = new MyQVT("seq2stm");
     	try {
 	    	String projectTestName = PROJECT_NAME + ".seq2stm";
 			Transformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm");
 			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
-	    	Class<?> seqmmClass = Class.forName(projectTestName + ".SeqMM.SeqMMPackage");
-	    	Field seqmmField = seqmmClass.getDeclaredField("eINSTANCE");
-	    	EPackage seqmmEPackage = (EPackage) seqmmField.get(null);
-	    	myQVT.getResourceSet().getPackageRegistry().put(seqmmEPackage.getNsURI(), seqmmEPackage);
+	    	myQVT.installClassName(projectTestName + ".SeqMM.SeqMMPackage");
+	    	myQVT.installClassName(projectTestName + ".PSeqToStm.PSeqToStmPackage");
 	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "SeqToStm.genmodel");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
 	    	myQVT.loadInput("seqDgm", "Seq.xmi");
 	    	myQVT.executeTransformation();
 			myQVT.saveOutput("stm", "Stmc_CG.xmi", "Stmc_expected.xmi", null);
+	    	//
+//	        myQVT.createGeneratedExecutor(txClass);
+//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
+//	    	myQVT.executeTransformation();
+//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
 		}
 		finally {
 	    	myQVT.dispose();
