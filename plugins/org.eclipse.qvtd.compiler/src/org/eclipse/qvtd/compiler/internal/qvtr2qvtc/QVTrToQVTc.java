@@ -48,15 +48,12 @@ import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFac
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.EnumLiteralExp;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -545,85 +542,32 @@ public class QVTrToQVTc
 	/*
 	 * Get variables occurring in an OCL expression
 	 */
-	public @NonNull Set<@NonNull Variable> getVarsOfExp(@NonNull OCLExpression e) {
-		
-		Set<@NonNull Variable> vs1 = new HashSet<@NonNull Variable>();
-		if (e instanceof VariableExp) {
-			VariableDeclaration referredVariable = ((VariableExp)e).getReferredVariable();
-			if (referredVariable instanceof Variable) {
-				vs1.add((Variable)referredVariable);
-			}
-		}
-		else if (e instanceof ObjectTemplateExp) {
-			ObjectTemplateExp te = (ObjectTemplateExp) e;
-			Variable bindsTo = te.getBindsTo();
-			if (bindsTo != null) {
-				vs1.add(bindsTo);
-			}
-		}
-		for (TreeIterator<EObject> tit = e.eAllContents(); tit.hasNext(); ) {
-			EObject eObject = tit.next();
+	public @NonNull Set<@NonNull Variable> getVarsOfExp(@NonNull OCLExpression e) {		
+		Set<@NonNull Variable> variables = new HashSet<@NonNull Variable>();
+		for (EObject eObject : new TreeIterable(e, true)) {
 			if (eObject instanceof VariableExp) {
 				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
 				if (referredVariable instanceof Variable) {
-					vs1.add((Variable)referredVariable);
+					variables.add((Variable)referredVariable);
 				}
 			}
-			else if (eObject instanceof ObjectTemplateExp) {
-				ObjectTemplateExp te = (ObjectTemplateExp)eObject;
-				Variable bindsTo = te.getBindsTo();
+			else if (eObject instanceof Variable) {
+				variables.add((Variable)eObject);
+			}
+			else if (eObject instanceof TemplateExp) {
+				Variable bindsTo = ((TemplateExp)eObject).getBindsTo();
 				if (bindsTo != null) {
-					vs1.add(bindsTo);
+					variables.add(bindsTo);
+				}
+				if (eObject instanceof CollectionTemplateExp) {
+					Variable rest = ((CollectionTemplateExp)eObject).getRest();
+					if (rest != null) {
+						variables.add(rest);
+					}
 				}
 			}
 		}
-		// FIXME this function is not complete! It needs to be completed for other 
-		// type of expressions
-		Set<@NonNull Variable> vs = new HashSet<@NonNull Variable>();
-		if (e instanceof VariableExp) {
-			Variable referredVariable = (Variable) ((VariableExp) e).getReferredVariable();
-			assert referredVariable != null;
-			vs.add(referredVariable);
-		} else if (e instanceof OperationCallExp) {
-			OperationCallExp oc = (OperationCallExp) e;
-			OCLExpression ownedSource = oc.getOwnedSource();
-			assert ownedSource != null;
-			vs.addAll(getVarsOfExp(ownedSource));
-			for (OCLExpression a : ClassUtil.nullFree(oc.getOwnedArguments())) {
-				vs.addAll(getVarsOfExp(a));
-			}
-		} else if (e instanceof PropertyCallExp) {
-			OCLExpression ownedSource = ((PropertyCallExp) e).getOwnedSource();
-			assert ownedSource != null;
-			vs.addAll(getVarsOfExp( ownedSource));
-		} else if (e instanceof RelationCallExp) {
-			RelationCallExp rc = (RelationCallExp) e;
-			for (OCLExpression a : ClassUtil.nullFree(rc.getArgument())) {
-				vs.addAll(getVarsOfExp(a));
-			}
-		} else if (e instanceof EnumLiteralExp) {
-			
-		} 
-		else if (e instanceof ObjectTemplateExp) {
-			ObjectTemplateExp te = (ObjectTemplateExp) e;
-			Variable bindsTo = te.getBindsTo();
-			assert bindsTo != null;
-			vs.add(bindsTo);
-			for (PropertyTemplateItem p : te.getPart()) {
-				OCLExpression value = p.getValue();
-				assert value != null;
-				vs.addAll(getVarsOfExp(value));
-			}
-		} else if (e instanceof CollectionTemplateExp) {
-			CollectionTemplateExp cte = (CollectionTemplateExp) e;
-			for (OCLExpression m : ClassUtil.nullFree(cte.getMember()))
-				vs.addAll(getVarsOfExp(m));
-		}
-		else {
-			assert false : "getVarsOfExp() missing case for " + e.eClass().getName();
-		}
-		assert vs.equals(vs1);
-		return vs;
+		return variables;
 	}
 
 	// Create the top rules, and search the input model for the appropriate types, when possible?

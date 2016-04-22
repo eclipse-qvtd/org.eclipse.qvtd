@@ -33,7 +33,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
-import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -63,8 +62,10 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 				if (collectionType != null) {
 					pivotElement.setReferredCollectionType(collectionType);
 					pivotElement.setType(collectionType);
-					Variable variable = pivotElement.getBindsTo();
-					variable.setType(collectionType);
+					Variable asVariable = pivotElement.getBindsTo();
+					asVariable.setType(collectionType);
+					asVariable.setTypeValue(null);
+					asVariable.setIsRequired(true);
 				}
 			}
 			return null;
@@ -92,30 +93,29 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 
 		@Override
 		public BasicContinuation<?> execute() {
-			CollectionTemplateExp asCollectionTemplateExp = PivotUtil.getPivot(CollectionTemplateExp.class, (Pivotable)csElement.getParent());
+			Element asElement = PivotUtil.getPivot(Element.class, csElement);
+			CollectionTemplateCS csCollectionTemplate = (CollectionTemplateCS)csElement.getParent();
+			CollectionTemplateExp asCollectionTemplateExp = PivotUtil.getPivot(CollectionTemplateExp.class, csCollectionTemplate);
 			assert asCollectionTemplateExp != null;
 			CollectionType asCollectionType = (CollectionType) asCollectionTemplateExp.getType();
-			Type asElementType = asCollectionType.getElementType();
-			String name = csElement.getName();
-			boolean isImplicit = QVTrelationUtil.DUMMY_VARIABLE_NAME.equals(name);
-			boolean isNullFree = asCollectionType.isIsNullFree();
-			VariableExp asVariableExp = null;
-			Variable asVariable;
-			Element asElement = PivotUtil.getPivot(Element.class, csElement);
-			if (asElement instanceof VariableExp) {
-				asVariableExp = (VariableExp) asElement;
-				asVariableExp.setType(asElementType);
-				asVariableExp.setIsRequired(isNullFree);
-				asVariable = (Variable)asVariableExp.getReferredVariable();
-				asVariable.setType(asElementType);
-				asVariable.setIsRequired(isNullFree);
-				asVariable.setIsImplicit(isImplicit);
+			if (asElement instanceof Variable) {
+				assert csCollectionTemplate.getOwnedRestIdentifier() == csElement;
+				Variable asVariable = (Variable)asElement;
+				if (asVariable.isIsImplicit()) {
+					asVariable.setType(asCollectionType);
+					asVariable.setTypeValue(null);
+					asVariable.setIsRequired(true);
+				}
 			}
-			else if (asElement instanceof Variable){
-				asVariable = (Variable) asElement;
-				asVariable.setType(asCollectionType);
-				asVariable.setIsRequired(true);
-				asVariable.setIsImplicit(isImplicit);
+			else if (asElement instanceof VariableExp) {
+				assert csCollectionTemplate.getOwnedMemberIdentifiers().contains(csElement);
+				VariableExp asVariableExp = (VariableExp)asElement;
+				Variable asVariable = (Variable)asVariableExp.getReferredVariable();
+				if ((asVariable != null) && asVariable.isIsImplicit()) {
+					asVariable.setType(asCollectionType.getElementType());
+					asVariable.setTypeValue(null);
+					asVariable.setIsRequired(true);
+				}
 			}
 			return null;
 		}

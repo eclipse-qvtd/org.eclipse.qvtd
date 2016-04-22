@@ -70,7 +70,7 @@ public class QVTtemplateToStringVisitor extends QVTbaseToStringVisitor implement
 		Variable rest = object.getRest();
 		if (rest != null) {
 			append(" ++ ");
-			safeVisit(rest);
+			appendName(rest);
 		}
 		append("}");
 		return null;
