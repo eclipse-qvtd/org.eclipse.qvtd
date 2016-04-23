@@ -4,9 +4,23 @@ import 'classescs2asV2Helpers.ocl'
 import 'classescs2asV2Lookup.ocl'
 package cs
 
+-- FIXME manually added
+context ElementCS
+def : ast() : as::Element =
+	invalid -- to be overriden
+	
+context NameExpCS 
+def : lookupOperation() : as::Operation = 
+	if oclContainer().oclIsKindOf(NameExpCS) 
+	then ast().lookupOperationFrom(ast().oclAsType(as::OperationCallExp).owningSource.type, self.name, ast().oclAsType(as::OperationCallExp).ownedArguments) 
+	else ast().lookupOperation(name, ast().oclAsType(as::OperationCallExp).ownedArguments)
+	endif
+-- END OF manual addition
+	
 context NameExpCS
 def : isOpCallExp() : Boolean =
-	roundedBrackets <> null
+	lookupOperation() <> null
 def : isPropCallExp() : Boolean =
 	roundedBrackets = null
+	
 endpackage
