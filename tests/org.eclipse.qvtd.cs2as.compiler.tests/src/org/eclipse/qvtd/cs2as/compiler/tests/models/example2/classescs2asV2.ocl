@@ -47,7 +47,7 @@ def : ast() : as::CallExp =
 	then as::OperationCallExp {
 		ownedCallExp = ownedNameExp?.ast(),
 		ownedArguments = roundedBrackets.args.ast(), 
-	referredOperation = if oclContainer().oclIsKindOf(NameExpCS) then ast().lookupOperationFrom(ast().owningSource.type, name, ast().oclAsType(as::OperationCallExp).ownedArguments) else ast().lookupOperation(name, ast().oclAsType(as::OperationCallExp).ownedArguments) endif, 
+	referredOperation = lookupOperation(), 
 	type = ast().oclAsType(as::OperationCallExp).referredOperation?.type
 	}
 	else
