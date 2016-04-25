@@ -169,6 +169,9 @@ public class ScheduleIndexer extends ScheduleState
 		int bestBlockedConnectionCount = Integer.MAX_VALUE;
 		List<@NonNull Region> bestRegions = new ArrayList<@NonNull Region>();
 		for (@NonNull Region region : getBlockedCallableRegions()) {
+			if (Iterables.isEmpty(region.getOutgoingConnections())) {
+				continue;	// No outgoing connecrtions is not going to help
+			}
 			Integer blockedConnectionCount = getBlockedConnectionCount(region);
 			assert blockedConnectionCount != null;
 			if (blockedConnectionCount < bestBlockedConnectionCount) {
