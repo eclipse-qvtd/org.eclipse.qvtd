@@ -14,4 +14,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: org.eclipse.qvtd.xtext.qvtcore.tests
+Export-Package: cg.org.eclipse.qvtd.xtext.qvtcore.tests.families2persons,
+ org.eclipse.qvtd.xtext.qvtcore.tests,
+ org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families,
+ org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons

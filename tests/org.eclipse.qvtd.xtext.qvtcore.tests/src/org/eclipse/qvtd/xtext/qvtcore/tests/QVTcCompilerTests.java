@@ -230,7 +230,6 @@ public class QVTcCompilerTests extends LoadTestCase
 
 		public void saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
 	        URI modelURI = samplesBaseUri.appendSegment(modelFile);
-	        URI referenceModelURI = samplesBaseUri.appendSegment(expectedFile);
 			ResourceSet resourceSet = getResourceSet();
 			Resource outputResource;
 	        if (interpretedExecutor != null) {
@@ -241,13 +240,16 @@ public class QVTcCompilerTests extends LoadTestCase
 				outputResource.getContents().addAll(generatedExecutor.getTransformer().getRootEObjects(modelName));
 				outputResource.save(getSaveOptions());
 	        }
-			Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
-			assert referenceResource != null;
-			if (normalizer != null) {
-				normalizer.normalize(referenceResource);
-				normalizer.normalize(outputResource);
-			}
-	        assertSameModel(referenceResource, outputResource);
+	        if (expectedFile != null) {
+		        URI referenceModelURI = samplesBaseUri.appendSegment(expectedFile);
+				Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
+				assert referenceResource != null;
+				if (normalizer != null) {
+					normalizer.normalize(referenceResource);
+					normalizer.normalize(outputResource);
+				}
+		        assertSameModel(referenceResource, outputResource);
+	        }
 		}
 	}
 

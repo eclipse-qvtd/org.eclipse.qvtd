@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
@@ -30,6 +31,7 @@ public interface QVTiExecutor extends ExecutorInternal
 	Boolean execute();
 	@Override
 	@NonNull QVTiEvaluationEnvironment getEvaluationEnvironment();
+	@Nullable Resource getModel(@NonNull String name);
 	@Override
 	@NonNull QVTiModelManager getModelManager();
 	@Nullable Object internalExecuteMapping(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor);

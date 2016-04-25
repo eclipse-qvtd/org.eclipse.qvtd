@@ -298,6 +298,18 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	public @NonNull QVTiEvaluationEnvironment getEvaluationEnvironment() {
 		return (QVTiEvaluationEnvironment) super.getEvaluationEnvironment();
 	}
+
+	/**
+	 * Gets the named TypedModel.
+	 */
+	@Override
+	public @Nullable Resource getModel(@NonNull String name) {
+        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
+        if (typedModel == null) {
+        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
+        }
+        return getModelManager().getModel(typedModel);
+    }
 	
 	@Override
 	public @NonNull QVTiModelManager getModelManager() {
@@ -409,7 +421,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
         if (rule == null) {
         	throw new IllegalStateException("Transformation " + transformation.getName() + " has no root mapping");
         }
-        @SuppressWarnings("null")@NonNull CallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();		// FIXME TransformationCallExp
+        CallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();		// FIXME TransformationCallExp
         pushEvaluationEnvironment(rule, callExp);
         try {
         	rule.accept(undecoratedVisitor);
