@@ -492,7 +492,7 @@ public interface SimpleumlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__KIND = UML_MODEL_ELEMENT__KIND;
+	int PACKAGE__KIND = PACKAGE_ELEMENT__KIND;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -501,7 +501,16 @@ public interface SimpleumlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__NAME = UML_MODEL_ELEMENT__NAME;
+	int PACKAGE__NAME = PACKAGE_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__NAMESPACE = PACKAGE_ELEMENT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -510,7 +519,7 @@ public interface SimpleumlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__ELEMENTS = UML_MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int PACKAGE__ELEMENTS = PACKAGE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Package</em>' class.
@@ -519,7 +528,7 @@ public interface SimpleumlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_FEATURE_COUNT = UML_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int PACKAGE_FEATURE_COUNT = PACKAGE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Package</em>' class.
@@ -528,7 +537,7 @@ public interface SimpleumlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_OPERATION_COUNT = UML_MODEL_ELEMENT_OPERATION_COUNT + 0;
+	int PACKAGE_OPERATION_COUNT = PACKAGE_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.impl.PrimitiveDataTypeImpl <em>Primitive Data Type</em>}' class.

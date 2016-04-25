@@ -41,7 +41,7 @@ public interface PackageElement extends UMLModelElement {
 	 * @see #setNamespace(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.SimpleumlPackage#getPackageElement_Namespace()
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package#getElements
-	 * @model opposite="elements" required="true" transient="false"
+	 * @model opposite="elements" transient="false"
 	 * @generated
 	 */
 	org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package getNamespace();
