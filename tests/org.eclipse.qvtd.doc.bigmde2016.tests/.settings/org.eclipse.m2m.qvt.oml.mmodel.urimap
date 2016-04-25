@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ASCII"?>
+<uriMap:MappingContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:uriMap="http:///www.eclipse.org/m2m/qvt/oml/MModelUriMap/1.0.0">
+  <mapping sourceURI="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/Upper2Lower/1.0/Persons" targetURI="platform:/resource/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/families2persons/Persons.ecore"/>
+  <mapping sourceURI="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/Upper2Lower/1.0/Families" targetURI="platform:/resource/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/families2persons/Families.ecore"/>
+</uriMap:MappingContainer>

@@ -1,0 +1,38 @@
+modeltype fMM uses 'http://www.eclipse.org/qvtd/xtext/qvtcore/tests/Upper2Lower/1.0/Families';
+modeltype pMM uses 'http://www.eclipse.org/qvtd/xtext/qvtcore/tests/Upper2Lower/1.0/Persons';
+
+transformation Families2Persons(in family : fMM, out pMM);
+
+main() {
+	family.rootObjects()[fMM::Family].sons->map Member2Person();
+	family.rootObjects()[fMM::Family].daughters->map Member2Person();
+}
+
+query fMM::Member::familyName() : String
+{
+	return if not self.familyFather.oclIsUndefined() then self.familyFather.lastName else if not
+			self.familyMother.oclIsUndefined() then self.familyMother.lastName else if not self.familySon.oclIsUndefined()
+			then self.familySon.lastName else self.familyDaughter.lastName endif endif endif
+}
+
+query fMM::Member::isFemale() : Boolean
+{
+	return if not self.familyMother.oclIsUndefined() then true
+	else if not self.familyDaughter.oclIsUndefined() then true
+		else false
+		endif endif
+}
+
+
+mapping fMM::Member::Member2Person() : pMM::Person
+disjuncts fMM::Member::Member2Female, fMM::Member::Member2Male {}
+
+mapping fMM::Member::Member2Female() : pMM::Female when {self.isFemale(); }
+{
+	result.fullName := self.firstName + ' ' + self.familyName();
+}
+
+mapping fMM::Member::Member2Male() : pMM::Male when { not self.isFemale(); }
+{
+	result.fullName := self.firstName + ' ' + self.familyName();
+}
