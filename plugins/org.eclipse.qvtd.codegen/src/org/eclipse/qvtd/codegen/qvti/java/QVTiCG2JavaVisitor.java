@@ -1003,26 +1003,35 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 						js.appendClassReference(ReflectiveOperationException.class);
 						js.append(" {\n");
 						js.pushIndentation(null);
-						js.append("try {\n");
-						js.pushIndentation(null);
-							String savedLocalPrefix = localPrefix;
-							try {
-								localPrefix = cgMapping.getTransformation().getName();
-								js.append("// predicates and unrealized variables\n");
-								cgBody.accept(this);
-								js.append("return ");
-								js.appendValueName(cgBody);
-								js.append(";\n");
-							}
-							finally {
-								localPrefix = savedLocalPrefix;
-							}
-							js.popIndentation();
-							js.append("} catch (Throwable e) {\n");
+						if (cgBody.isInvalid()) {
+							js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", ");
+							js.appendValueName(cgBody);
+							js.append(");\n");
+						}
+						else {
+							js.append("try {\n");
 							js.pushIndentation(null);
-							js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", e);\n");
+								String savedLocalPrefix = localPrefix;
+								try {
+									localPrefix = cgMapping.getTransformation().getName();
+									js.append("// predicates and unrealized variables\n");
+									if (!cgBody.isInlined()) {
+										cgBody.accept(this);
+									}
+									js.append("return ");
+									js.appendValueName(cgBody);
+									js.append(";\n");
+								}
+								finally {
+									localPrefix = savedLocalPrefix;
+								}
+								js.popIndentation();
+								js.append("} catch (Throwable e) {\n");
+								js.pushIndentation(null);
+								js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", e);\n");
 							js.popIndentation();
 							js.append("}\n");
+						}
 						js.popIndentation();
 						js.append("}\n");
 						js.append("\n");	
@@ -1076,19 +1085,28 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.appendClassReference(ReflectiveOperationException.class);
 					js.append(" {\n");
 					js.pushIndentation(null);
-						js.append("try {\n");
-						js.pushIndentation(null);
-							js.append("// predicates and unrealized variables\n");
-							cgBody.accept(this);
-							js.append("return ");
+						if (cgBody.isInvalid()) {
+							js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", ");
 							js.appendValueName(cgBody);
-							js.append(";\n");
-						js.popIndentation();
-						js.append("} catch (Throwable e) {\n");
-						js.pushIndentation(null);
-						js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", e);\n");
-						js.popIndentation();
-						js.append("}\n");
+							js.append(");\n");
+						}
+						else {
+							js.append("try {\n");
+							js.pushIndentation(null);
+								js.append("// predicates and unrealized variables\n");
+								if (!cgBody.isInlined()) {
+									cgBody.accept(this);
+								}
+								js.append("return ");
+								js.appendValueName(cgBody);
+								js.append(";\n");
+							js.popIndentation();
+							js.append("} catch (Throwable e) {\n");
+							js.pushIndentation(null);
+							js.append("return handleExecutionFailure(\"" + getMappingName(cgMapping) + "\", e);\n");
+							js.popIndentation();
+							js.append("}\n");
+						}
 					js.popIndentation();
 					js.append("}\n");
 				}
