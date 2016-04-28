@@ -229,12 +229,24 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		assert sourceNode.isGuardVariable();
 		assert (targetVariable == null) || targetNode.isGuardVariable();
 		assert sourceNode.isClassNode();
-		SimpleEdge predicateEdge = sourceNode.getPredicateEdge(property);
-		if (predicateEdge == null) {
-			Edges.NAVIGATION.createSimpleEdge(this, sourceNode, property, targetNode);
+		if (!property.isIsMany()) {
+			SimpleEdge predicateEdge = sourceNode.getPredicateEdge(property);
+			if (predicateEdge == null) {
+				Edges.NAVIGATION.createSimpleEdge(this, sourceNode, property, targetNode);
+			}
+			else {
+				assert predicateEdge.getTarget() == targetNode;
+			}
 		}
-		else {
-			assert predicateEdge.getTarget() == targetNode;
+		Property oppositeProperty = property.getOpposite();
+		if ((oppositeProperty != null) && !oppositeProperty.isIsMany()) {
+			SimpleEdge predicateEdge = targetNode.getPredicateEdge(oppositeProperty);
+			if (predicateEdge == null) {
+				Edges.NAVIGATION.createSimpleEdge(this, targetNode, oppositeProperty, sourceNode);
+			}
+			else {
+				assert predicateEdge.getTarget() == sourceNode;
+			}
 		}
 	}
 
@@ -301,44 +313,16 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	//
 	private void analyzeSimplePredicate(@Nullable VariableDeclaration boundVariable, @NonNull OCLExpression referenceExpression) {
 		List<Property> path = new ArrayList<Property>();
-		boolean isReversed = false;
-		boolean isReversible = true;
 		for (OCLExpression expression = referenceExpression; expression instanceof NavigationCallExp; ) {
 			NavigationCallExp navigationCallExp = (NavigationCallExp)expression;
 			Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
 			assert referredProperty != null;
-			Property oppositeProperty = referredProperty.getOpposite();
-			if (referredProperty.isIsMany()) {
-				assert oppositeProperty != null;
-				assert !isReversed;		// FIXME support multi-node inverse ptredicate.
-				path.add(0, oppositeProperty);
-				isReversible = false;
-				isReversed = true;
-			}
-			else {
-				path.add(0, referredProperty);
-				if ((oppositeProperty == null) || oppositeProperty.isIsMany()) {
-					isReversible = false;
-				}
-			}
+			path.add(0, referredProperty);
 			expression = navigationCallExp.getOwnedSource();
 			if (expression instanceof VariableExp) {
 				VariableDeclaration sourceVariable = ((VariableExp)expression).getReferredVariable();
 				assert sourceVariable != null;
-				if (isReversed) {
-					assert boundVariable != null;
-					addPredicateNavigation(boundVariable, path, sourceVariable);
-				}
-				else {
-					addPredicateNavigation(sourceVariable, path, boundVariable);
-					if (isReversible && (boundVariable != null)) {
-						List<Property> oppositePath = new ArrayList<Property>();
-						for (Property property : path) {
-							oppositePath.add(0, property.getOpposite());
-						}
-						addPredicateNavigation(boundVariable, oppositePath, sourceVariable);
-					}
-				}
+				addPredicateNavigation(sourceVariable, path, boundVariable);
 			}
 		}
 	}
