@@ -463,19 +463,24 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	protected @NonNull CGValuedElement generateOppositePropertyCallExp(@NonNull CGValuedElement cgSource, @NonNull OppositePropertyCallExp asOppositePropertyCallExp) {
 		Property asOppositeProperty = ClassUtil.nonNullModel(asOppositePropertyCallExp.getReferredProperty());
 		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
-		globalContext.addOppositeProperty(asOppositeProperty);
-//		LibraryProperty libraryProperty = metamodelManager.getImplementation(asProperty);
-		CGMiddlePropertyCallExp cgPropertyCallExp = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyCallExp();
-		cgPropertyCallExp.setAst(asOppositePropertyCallExp);
-//		CGExecutorProperty cgExecutorProperty = context.getExecutorProperty(asProperty);
-//		cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
-//		cgPropertyCallExp = cgExecutorPropertyCallExp;
-//		cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
-		cgPropertyCallExp.setReferredProperty(asOppositeProperty);
-		setAst(cgPropertyCallExp, asOppositePropertyCallExp);
-		cgPropertyCallExp.setRequired(asProperty.isIsRequired());
-		cgPropertyCallExp.setSource(cgSource);
-		return cgPropertyCallExp;
+		if (asOppositeProperty.isIsComposite()) {
+			return super.generateOppositePropertyCallExp(cgSource, asOppositePropertyCallExp);
+		}
+		else {
+			globalContext.addOppositeProperty(asOppositeProperty);
+	//		LibraryProperty libraryProperty = metamodelManager.getImplementation(asProperty);
+			CGMiddlePropertyCallExp cgPropertyCallExp = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyCallExp();
+			cgPropertyCallExp.setAst(asOppositePropertyCallExp);
+	//		CGExecutorProperty cgExecutorProperty = context.getExecutorProperty(asProperty);
+	//		cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
+	//		cgPropertyCallExp = cgExecutorPropertyCallExp;
+	//		cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
+			cgPropertyCallExp.setReferredProperty(asOppositeProperty);
+			setAst(cgPropertyCallExp, asOppositePropertyCallExp);
+			cgPropertyCallExp.setRequired(asProperty.isIsRequired());
+			cgPropertyCallExp.setSource(cgSource);
+			return cgPropertyCallExp;
+		}
 	}
 
 	protected @Nullable EClassifier getEClassifier(@Nullable Type type) {
