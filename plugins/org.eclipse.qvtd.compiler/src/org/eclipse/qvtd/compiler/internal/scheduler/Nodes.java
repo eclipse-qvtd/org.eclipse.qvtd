@@ -963,16 +963,19 @@ public class Nodes
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name,
 				@NonNull CallExp callExp, @NonNull SimpleNode sourceNode) {
 			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
+			boolean isDirty = false;
+			if (callExp instanceof NavigationCallExp) {
+				Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);
+				isDirty = region.getSchedulerConstants().isDirty(referredProperty);
+			}
+			if (!isDirty && sourceNode.isLoaded()) {
+				return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
+			}
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
 			if (sourceNode.isPredicated() || domainUsage.isOutput() ) {
 				return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
 			}
 			else {
-				boolean isDirty = false;
-				if (callExp instanceof NavigationCallExp) {
-					Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);
-					isDirty = region.getSchedulerConstants().isDirty(referredProperty);
-				}
 				if (!isDirty) {
 					return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
 				}
