@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtcorebase.analysis;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
@@ -48,8 +49,19 @@ public interface DomainUsage
 	/**
 	 * Return the TypedModel for this usage, null for none, non-null for one, Exception for more than one.
 	 * Note that a primitive TypedModel may be returned for DataType usage; it has no container.
+	 * 
+	 * @deprecated specify a context
 	 */
+	@Deprecated
 	@Nullable TypedModel getTypedModel() throws IllegalStateException;
+	
+	/**
+	 * Return the TypedModel for this usage, null for none, non-null for one, Exception for more than one.
+	 * Note that a primitive TypedModel may be returned for DataType usage; it has no container.
+	 * 
+	 * Any ambiguous usgae is diagnosed with respect to the optional context.
+	 */
+	@Nullable TypedModel getTypedModel(@Nullable Element context) throws IllegalStateException;
 
 	/**
 	 * Return all the TypedModels for this usage. Note that a primitive TypedModel may be returned for DataType usage; it has no container.
@@ -76,12 +88,12 @@ public interface DomainUsage
 	boolean isEnforceable();
 
 	/**
-	 * Return true if this usage includes usage in an input domain, a domain the is fully not-enforceable transformation-wide.
+	 * Return true if this usage includes usage in an input domain, a domain that is fully not-enforceable transformation-wide.
 	 */
 	boolean isInput();
 
 	/**
-	 * Return true if this usage includes usage in the middle domain, a domain the is partially enforceable transformation-wide.
+	 * Return true if this usage includes usage in the middle domain, a domain that is partially enforceable transformation-wide.
 	 */
 	boolean isMiddle();
 
@@ -89,6 +101,11 @@ public interface DomainUsage
 	 * Return true if this usage includes usage in an output domain, a domain that is fully enforceable transformation-wide.
 	 */
 	boolean isOutput();
+
+	/**
+	 * Return true if this usage includes usage in a primitive domain, a domain that is just used.
+	 */
+	boolean isPrimitive();
 	
 	public interface Internal extends DomainUsage, Comparable<DomainUsage.Internal>
 	{

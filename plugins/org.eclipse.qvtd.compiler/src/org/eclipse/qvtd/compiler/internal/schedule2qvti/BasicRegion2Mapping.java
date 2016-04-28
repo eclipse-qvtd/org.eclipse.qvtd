@@ -303,9 +303,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 					else if (edgeRole.isPredicated()) {
 						OCLExpression source = create(edge.getSource());
-						if (source != null) {
-							return PivotUtil.createNavigationCallExp(source, ((NavigationEdge)edge).getProperty());
-						}
+						return PivotUtil.createNavigationCallExp(source, ((NavigationEdge)edge).getProperty());
 					}
 				}
 			}
@@ -324,9 +322,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			return false;
 		}
 
-		public boolean isConditional(@NonNull Node node) {
-			return conditionalNodes.contains(node);
-		}
+//		public boolean isConditional(@NonNull Node node) {
+//			return conditionalNodes.contains(node);
+//		}
 
 		@Override
 		public @NonNull OCLExpression visitCollectionLiteralExp(@NonNull CollectionLiteralExp pCollectionLiteralExp) {
@@ -1312,7 +1310,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private void createRealizedVariables() {
 		for (@NonNull Node node : region.getRealizedVariableNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
-			BottomPattern bottomPattern = getArea(classDatumAnalysis.getDomainUsage()).getBottomPattern();
+			BottomPattern bottomPattern = getArea(classDatumAnalysis).getBottomPattern();
 			RealizedVariable realizedVariable = QVTimperativeUtil.createRealizedVariable(getSafeName(node), classDatumAnalysis.getCompleteClass().getPrimaryClass());
 			bottomPattern.getRealizedVariable().add(realizedVariable);
 			Variable oldVariable = node2variable.put(node, realizedVariable);
@@ -1453,8 +1451,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		return recursiveDepth;
 	} */
 
-	private @NonNull Area getArea(@NonNull DomainUsage domainUsage) {	
-		TypedModel qvtpTypedModel = domainUsage.getTypedModel();
+	private @NonNull Area getArea(@NonNull ClassDatumAnalysis classDatumAnalysis) {	
+		TypedModel qvtpTypedModel = classDatumAnalysis.getTypedModel();
 		ImperativeDomain coreDomain = typedModel2domain.get(qvtpTypedModel);
 		if (coreDomain != null) {
 			return coreDomain;

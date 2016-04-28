@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -77,6 +78,11 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 
 		@Override
 		public @Nullable TypedModel getTypedModel() throws IllegalStateException {
+			return getTypedModel(null);
+		}
+
+		@Override
+		public @Nullable TypedModel getTypedModel(@Nullable Element context) throws IllegalStateException {
 			int residue = bitMask;
 			for (int i = 0; residue != 0; i++) {
 				int bit = 1 << i;
@@ -85,7 +91,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 					if (residue == 0) {
 						return RootDomainUsageAnalysis.this.getTypedModel(i);
 					}
-					System.err.println("Ambiguous TypedModel: " + this);
+					System.err.println("Ambiguous TypedModel: " + this + " for " + LabelUtil.getLabel(context));
 //					throw new IllegalStateException("Ambiguous TypedModel: " + this);
 					return RootDomainUsageAnalysis.this.getTypedModel(i);
 				}
@@ -130,6 +136,11 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		@Override
 		public boolean isOutput() {
 			return (bitMask & outputUsage.bitMask) != 0;
+		}
+
+		@Override
+		public boolean isPrimitive() {
+			return (bitMask & PRIMITIVE_USAGE_BIT_MASK) != 0;
 		}
 
 		protected String toString(@NonNull String prefix) {

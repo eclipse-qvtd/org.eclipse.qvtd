@@ -139,7 +139,7 @@ public class ClassDatumAnalysis
 			Type asClass = classDatum.getType();
 			assert asClass != null;
 			CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(asClass);
-			for (@SuppressWarnings("null")@NonNull Property property : completeClass.getProperties((FeatureFilter)null)) {
+			for (@NonNull Property property : completeClass.getProperties((FeatureFilter)null)) {
 				Property oppositeProperty = property.getOpposite();
 				if ((oppositeProperty != null) && oppositeProperty.isIsMany() && !oppositeProperty.isIsDerived()) {
 					Type childrenType = oppositeProperty.getType();
@@ -189,8 +189,8 @@ public class ClassDatumAnalysis
 		List<@NonNull ClassDatumAnalysis> superClassDatumAnalyses2 = superClassDatumAnalyses;
 		if (superClassDatumAnalyses2  == null) {
 			superClassDatumAnalyses = superClassDatumAnalyses2 = new ArrayList<@NonNull ClassDatumAnalysis>();
-			for (@SuppressWarnings("null")@NonNull CompleteClass completeSuperClass : completeClass.getSuperCompleteClasses()) {
-				superClassDatumAnalyses2.add(schedulerConstants.getClassDatumAnalysis(completeSuperClass.getPrimaryClass(), ClassUtil.nonNullState(domainUsage.getTypedModel())));
+			for (@NonNull CompleteClass completeSuperClass : completeClass.getSuperCompleteClasses()) {
+				superClassDatumAnalyses2.add(schedulerConstants.getClassDatumAnalysis(completeSuperClass.getPrimaryClass(), ClassUtil.nonNullState(domainUsage.getTypedModel(completeClass))));
 			}
 		}
 		return superClassDatumAnalyses2;

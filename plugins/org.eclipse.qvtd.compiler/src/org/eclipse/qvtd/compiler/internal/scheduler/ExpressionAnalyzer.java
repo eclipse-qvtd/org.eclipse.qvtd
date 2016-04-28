@@ -726,7 +726,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		DomainUsage domainUsage = scheduler.getDomainUsage(typeExp);
 		Type referredType = typeExp.getReferredType();
 		assert referredType != null;
-		TypedModel typedModel = domainUsage.getTypedModel();
+		TypedModel typedModel = domainUsage.getTypedModel(typeExp);
 		assert typedModel != null;
 		ClassDatumAnalysis classDatumAnalysis = scheduler.getClassDatumAnalysis((org.eclipse.ocl.pivot.Class)referredType, typedModel);
 		String typeName = PrettyPrinter.printType(classDatumAnalysis.getCompleteClass());

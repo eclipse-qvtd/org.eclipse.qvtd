@@ -93,7 +93,7 @@ public class OperationRegion extends AbstractRegion implements SimpleRegion
 				if (stepUsage.isOutput() && !stepUsage.isInput()) {
 //					System.out.println("!checkable && enforceable: " + steps);
 					org.eclipse.ocl.pivot.Class stepType = steps.get(0).getElementalType();
-					TypedModel typedModel = stepUsage.getTypedModel();
+					TypedModel typedModel = stepUsage.getTypedModel(classStep.getElement());
 					assert typedModel != null;
 					ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(stepType, typedModel);
 					if (!(classDatumAnalysis.getCompleteClass().getPrimaryClass() instanceof DataType)) {
@@ -166,7 +166,7 @@ public class OperationRegion extends AbstractRegion implements SimpleRegion
 		SchedulerConstants schedulerConstants = getSchedulerConstants();
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)expression.getType();
 		assert type != null;
-		TypedModel typedModel = schedulerConstants.getDomainUsage(expression).getTypedModel();
+		TypedModel typedModel = schedulerConstants.getDomainUsage(expression).getTypedModel(expression);
 		assert typedModel != null;
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(type, typedModel);
 		SimpleNode parameterNode = Nodes.PARAMETER.createSimpleNode(this, name, classDatumAnalysis);

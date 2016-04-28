@@ -233,7 +233,7 @@ public abstract class SchedulerConstants
 		else {
 			DomainUsage domainUsage = getDomainUsage(asTypedElement);
 			assert domainUsage != null;
-			typedModel = domainUsage.getTypedModel();
+			typedModel = domainUsage.getTypedModel(asTypedElement);
 			assert typedModel != null;
 		}
 		return qvtp2qvtg.getClassDatum(typedModel, asType);

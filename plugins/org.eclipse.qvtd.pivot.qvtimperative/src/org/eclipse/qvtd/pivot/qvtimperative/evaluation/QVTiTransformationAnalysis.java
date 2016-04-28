@@ -569,7 +569,7 @@ public class QVTiTransformationAnalysis
 		OCLExpression asSource = asNavigationCallExp.getOwnedSource();
 		DomainUsage domainUsage = getDomainUsageAnalysis().basicGetUsage(asSource);
 		if (domainUsage != null) {
-			TypedModel typedModel = domainUsage.getTypedModel();
+			TypedModel typedModel = domainUsage.getTypedModel(asSource);
 			if (typedModel != null) {
 				Area area = QVTcoreBaseUtil.getArea(asMapping, typedModel);
 				if ((area instanceof ImperativeArea) && ((ImperativeArea)area).getCheckedProperties().contains(asProperty)) {
@@ -580,7 +580,7 @@ public class QVTiTransformationAnalysis
 		Property asOppositeProperty = asProperty.getOpposite();
 		domainUsage = getDomainUsageAnalysis().basicGetUsage(asProperty.getType());
 		if (domainUsage != null) {
-			TypedModel typedModel = domainUsage.getTypedModel();
+			TypedModel typedModel = domainUsage.getTypedModel(asProperty);
 			if (typedModel != null) {
 				Area area = QVTcoreBaseUtil.getArea(asMapping, typedModel);
 				if ((area instanceof ImperativeArea) && ((ImperativeArea)area).getCheckedProperties().contains(asOppositeProperty)) {
@@ -605,7 +605,7 @@ public class QVTiTransformationAnalysis
 		OCLExpression asSource = asPropertyAssignment.getSlotExpression();
 		DomainUsage domainUsage = getDomainUsageAnalysis().basicGetUsage(asSource);
 		if (domainUsage != null) {
-			TypedModel typedModel = domainUsage.getTypedModel();
+			TypedModel typedModel = domainUsage.getTypedModel(asSource);
 			if (typedModel != null) {
 				Area area = null;
 				for (Domain domain : asMapping.getDomain()) {

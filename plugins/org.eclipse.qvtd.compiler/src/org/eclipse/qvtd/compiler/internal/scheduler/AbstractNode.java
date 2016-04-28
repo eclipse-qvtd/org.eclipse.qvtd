@@ -635,7 +635,7 @@ public abstract class AbstractNode implements Node
 			DomainUsage.Internal newDomainUsage = (Internal) newClassDatumAnalysis.getDomainUsage();
 			int refinedBitMask = oldDomainUsage.getMask() & newDomainUsage.getMask();
 			DomainUsage refinedDomainUsage = domainAnalysis.getConstantUsage(refinedBitMask);
-			TypedModel refinedTypedModel = refinedDomainUsage.getTypedModel();
+			TypedModel refinedTypedModel = refinedDomainUsage.getTypedModel(oldCompleteClass);
 			assert refinedTypedModel != null;
 			classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(oldCompleteClass.getPrimaryClass(), refinedTypedModel);
 			return true;
@@ -646,7 +646,7 @@ public abstract class AbstractNode implements Node
 			DomainUsage.Internal newDomainUsage = (Internal) newClassDatumAnalysis.getDomainUsage();
 			int refinedBitMask = oldDomainUsage.getMask() & newDomainUsage.getMask();
 			DomainUsage refinedDomainUsage = domainAnalysis.getConstantUsage(refinedBitMask);
-			TypedModel refinedTypedModel = refinedDomainUsage.getTypedModel();
+			TypedModel refinedTypedModel = refinedDomainUsage.getTypedModel(newCompleteClass);
 			assert refinedTypedModel != null;
 			classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(newCompleteClass.getPrimaryClass(), refinedTypedModel);
 			return true;

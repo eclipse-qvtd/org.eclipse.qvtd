@@ -399,7 +399,7 @@ public class QVTp2QVTg {
 				}
 				valueUsage = domainUsageAnalysis.intersection(propertyUsage, valueUsage);
 			}
-			TypedModel oppositeTypedModel = valueUsage.getTypedModel();
+			TypedModel oppositeTypedModel = valueUsage.getTypedModel(propAssign);
 			if (oppositeTypedModel == null) {
 				throw new IllegalStateException("No left/right DomainUsage commonality for \"" + propAssign + "\"");
 			}

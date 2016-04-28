@@ -80,7 +80,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	/**
 	 * The input models that may introduce model elements for transformation. 
 	 */
-	private final @NonNull HashMap<@NonNull Model, @NonNull DomainUsage> inputModels = new HashMap<@NonNull Model, @NonNull DomainUsage>();
+	private final @NonNull Map<@NonNull Model, @NonNull DomainUsage> inputModels = new HashMap<@NonNull Model, @NonNull DomainUsage>();
 	
 	/**
 	 * Mapping from each input class to the composite properties that may contain the class or its subclasses.
@@ -387,6 +387,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		List<org.eclipse.ocl.pivot.@NonNull Package> allPackagesList = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
 		for (@NonNull Model asModel : inputModels.keySet()) {
 			DomainUsage domainUsage = inputModels.get(asModel);
+			assert domainUsage != null;
 			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(asModel.getOwnedPackages())) {
 				if (allPackagesSet.put(asPackage, domainUsage) == null) {
 					allPackagesList.add(asPackage);
@@ -437,7 +438,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	private void computeContainedClassDatumAnalysis2compositeProperties3(@NonNull Property asProperty, @NonNull DomainUsage domainUsage) {
 		Type asType = QVTbaseUtil.getElementalType(ClassUtil.nonNullState(asProperty.getType()));
 		if (asType instanceof org.eclipse.ocl.pivot.Class) {
-			ClassDatumAnalysis classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis((Class) asType, ClassUtil.nonNullState(domainUsage.getTypedModel()));
+			ClassDatumAnalysis classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis((Class) asType, ClassUtil.nonNullState(domainUsage.getTypedModel(null)));
 			Set<@NonNull Property> compositeProperties = containedClassDatumAnalysis2compositeProperties.get(classDatumAnalysis);
 			if (compositeProperties == null) {
 				compositeProperties = new HashSet<@NonNull Property>();
