@@ -37,6 +37,8 @@ import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -432,6 +434,24 @@ public abstract class AbstractQVTc2QVTc
 			return eOut;
 		}
 
+		protected @Nullable OCLExpression createCastCopy(@Nullable OCLExpression eIn, @Nullable Type toType) {
+			if ((eIn == null) || (toType == null)) {
+				return null;
+			}
+			OCLExpression eOut = copy(eIn);
+			if (eOut == null) {
+				return null;
+			}
+		    Type eType = eOut.getType();
+	        StandardLibrary standardLibrary = context.getEnvironmentFactory().getStandardLibrary();
+			if (eType.conformsTo(standardLibrary, toType)) {
+				return eOut;
+			}
+			assert (toType.conformsTo(standardLibrary, eType));
+		    QVTcoreHelper helper = context.getHelper();
+		    return helper.createOperationCallExp(eOut, "oclAsType", helper.createTypeExp(toType));
+		}
+
 		protected @NonNull Mapping doMapping(@NonNull Mapping mOut) {
 			Mapping mIn = context.equivalentSource(mOut);
 	        updateChild(mOut.getGuardPattern());
@@ -618,9 +638,10 @@ public abstract class AbstractQVTc2QVTc
 	        vOut.setName(vIn.getName());
 	        vOut.setIsImplicit(vIn.isIsImplicit());
 	        vOut.setIsRequired(vIn.isIsRequired());
-	        vOut.setOwnedInit(copy(vIn.getOwnedInit()));
-	        vOut.setType(vIn.getType());
+	        Type tVar = vIn.getType();
+			vOut.setType(tVar);
 	        vOut.setTypeValue(vIn.getTypeValue());
+	        vOut.setOwnedInit(createCastCopy(vIn.getOwnedInit(), tVar));
 			return vIn;
 		}
 
@@ -759,6 +780,10 @@ public abstract class AbstractQVTc2QVTc
 
 	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		return environmentFactory;
+	}
+	
+	public @NonNull QVTcoreHelper getHelper() {
+		return helper;
 	}
 
     protected @NonNull TypedModel getMiddleTypedModelTarget() {

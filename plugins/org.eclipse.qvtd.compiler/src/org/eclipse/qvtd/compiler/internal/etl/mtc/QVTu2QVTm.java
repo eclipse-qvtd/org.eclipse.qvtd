@@ -719,7 +719,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 					{
 						@Override
 						public void update(@NonNull UpdateVisitor updateVisitor) {
-							finalMVariable.setOwnedInit(updateVisitor.copy(assignments2.get(0).getValue()));
+							finalMVariable.setOwnedInit(updateVisitor.createCastCopy(assignments2.get(0).getValue(), finalMVariable.getType()));
 							for (@NonNull VariableAssignment uVariableAssignment : assignments2) {
 								createVisitor.getContext().addTrace(uVariableAssignment, finalMVariable);
 								createVisitor.createAll(uVariableAssignment.getOwnedComments(), finalMVariable.getOwnedComments());
