@@ -125,7 +125,12 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		if (knownSourceUsage != null) {
 			DomainUsage knownTargetUsage = getRootAnalysis().property2referredTypeUsage.get(property);
 			assert knownTargetUsage != null;
-//			return intersection(knownSourceUsage, actualSourceUsage);			// FIXME Why?
+			if (knownTargetUsage.isPrimitive()) {				// Primitive usage is primitive from whereever.		
+				return knownTargetUsage;
+			}
+			if (actualSourceUsage.isInput() && !property.isIsTransient()) {		// Inputs can only persist input model elements
+				return actualSourceUsage;
+			}
 			return knownTargetUsage;
 		}
 		else {
