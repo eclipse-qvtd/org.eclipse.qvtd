@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.scheduler;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
@@ -291,7 +292,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Nodes.AttributeNodeRoleFactory.PREDICATED_CLASS.createSimpleNode(context, name, classDatumAnalysis);
 	}
 
-	protected @NonNull SimpleEdge createRealizedArumentEdge(@NonNull SimpleNode sourceNode, @Nullable String name, @NonNull SimpleNode targetNode) {
+	protected @NonNull SimpleEdge createRealizedArgumentEdge(@NonNull SimpleNode sourceNode, @Nullable String name, @NonNull SimpleNode targetNode) {
 		return Edges.ArgumentEdgeRoleFactory.REALIZED_ARGUMENT.createEdge(context, sourceNode, name, targetNode);
 	}
 
@@ -646,7 +647,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		assert property != null;
 		SimpleNode slotNode = analyze(propertyAssignment.getSlotExpression());
 		assert slotNode.isClassNode();
-//		context.get
 		SimpleNode valueNode = analyze(propertyAssignment.getValue());
 //		if (!valueNode.isClassNode() && !valueNode.isNull()) {
 		if (valueNode.isExpression()) {
@@ -654,7 +654,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			Type type = property.getType();
 			if (type instanceof DataType) {
 				valueNode = context.getAssignedAttributeNode(slotNode, property);
-				createRealizedArumentEdge(computedValueNode, null, valueNode);
+				createRealizedArgumentEdge(computedValueNode, null, valueNode);
 			}
 			else {
 				String name = property.getName();
@@ -664,6 +664,17 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			}
 		}
 		SimpleNavigationEdge navigationEdge = slotNode.getNavigationEdge(property);
+		CompleteClass valueCompleteClass = valueNode.getCompleteClass();
+		Type propertyType = ClassUtil.nonNullState(property.getType());
+		CompleteClass targetCompleteClass = scheduler.getEnvironmentFactory().getCompleteModel().getCompleteClass(propertyType);
+		if (!valueCompleteClass.conformsTo(targetCompleteClass)) {
+			if (targetCompleteClass.getPrimaryClass().getESObject() != EcorePackage.Literals.EOBJECT) {		// FIXME fudge for Adolfo's suspect tests
+				// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm/QVTp
+				if (!valueCompleteClass.conformsTo(targetCompleteClass)) {
+					throw new IllegalStateException("Incompatible types for " + propertyAssignment);
+				}
+			}
+		}
 		context.addAssignmentEdge(slotNode, property, valueNode);
 		Property oppositeProperty = property.getOpposite();
 		if (valueNode.isClassNode() && (oppositeProperty != null) && !oppositeProperty.isIsMany()) {
