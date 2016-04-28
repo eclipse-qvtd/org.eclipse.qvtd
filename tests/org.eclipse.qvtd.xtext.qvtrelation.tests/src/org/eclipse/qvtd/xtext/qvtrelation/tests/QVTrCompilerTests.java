@@ -59,6 +59,7 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.rel2core.PivotNormalizer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -234,7 +235,7 @@ public class QVTrCompilerTests extends LoadTestCase
 				interpretedExecutor.loadModel(modelName, modelURI);
 	        }
 	        else {
-	        	Resource inputResource = getResourceSet().getResource(modelURI, true);
+	        	Resource inputResource = /*getResourceSet()*/environmentFactory.getMetamodelManager().getASResourceSet().getResource(modelURI, true);
 				generatedExecutor.getTransformer().addRootObjects(modelName, ClassUtil.nonNullState(inputResource.getContents()));
 	        }
 		}
@@ -242,7 +243,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		public void saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
 	        URI modelURI = samplesBaseUri.appendSegment(modelFile);
 	        URI referenceModelURI = samplesBaseUri.appendSegment(expectedFile);
-			ResourceSet resourceSet = getResourceSet();
+			ResourceSet resourceSet = /*getResourceSet()*/environmentFactory.getMetamodelManager().getASResourceSet();
 			Resource outputResource;
 	        if (interpretedExecutor != null) {
 		        outputResource = interpretedExecutor.saveModel(modelName, modelURI, null, getSaveOptions());
@@ -347,15 +348,17 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
 	    	Transformation asTransformation = myQVT.compileTransformation("SimplerRelToCorePivotizedBeautyfied.qvtr", "core", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/rel2core/SeqToStm");
+	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "SimplerRelToCorePivotizedBeautyfied.genmodel");
 			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
 //	    	myQVT.installClassName(projectTestName + ".SeqMM.SeqMMPackage");
 //	    	myQVT.installClassName(projectTestName + ".PSeqToStm.PSeqToStmPackage");
-	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "SimplerRelToCorePivotizedBeautyfied.genmodel");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
-	    	myQVT.loadInput("relations", "Rel2Core.xmi");
+	    	myQVT.loadInput("relations", "SimplerRelToCorePivotizedBeautyfied.qvtras");
 	    	myQVT.executeTransformation();
-			myQVT.saveOutput("core", "Rel2Core_CG.xmi", "Rel2Core_expected.xmi", null);
+//	    	myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore",  new EcoreResourceFactoryImpl());
+//	    	myQVT.getEnvironmentFactory().getMetamodelManager().getASResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore",  new EcoreResourceFactoryImpl());
+			myQVT.saveOutput("core", "Rel2Core_CG.ecore", "Rel2Core_expected.ecore", PivotNormalizer.INSTANCE);
 	    	//
 //	        myQVT.createGeneratedExecutor(txClass);
 //	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
