@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -108,7 +108,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			Variable vd = qvtr2qvtc.whenVariable(cMiddleGuardPattern, tc.getName()+"_v", tc);
 			Variable mdv = getCoreVariable(dv);
 			Property pep = getProperty(vd.getType(), v);
-			PropertyCallExp pe = createPropertyCallExp(createVariableExp(vd), pep);
+			NavigationCallExp pe = createNavigationCallExp(createVariableExp(vd), pep);
 			addConditionPredicate(cMiddleGuardPattern, pe, createVariableExp(mdv));
 		}
 

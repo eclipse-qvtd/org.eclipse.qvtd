@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.Comment;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -36,7 +37,6 @@ import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -388,7 +388,7 @@ public abstract class AbstractQVTc2QVTc
 			Property targetProperty = paIn.getTargetProperty();
 			assert (slotExpression != null) && (targetProperty != null);
 			OCLExpression valueExpression = copy(paIn.getValue());
-			PropertyCallExp propertyCallExp = PivotUtil.createPropertyCallExp(slotExpression, targetProperty);
+			NavigationCallExp propertyCallExp = context.getHelper().createNavigationCallExp(slotExpression, targetProperty);
 			context.addTrace(paIn, propertyCallExp);
 			propertyCallExp.eUnset(PivotPackage.Literals.TYPED_ELEMENT__IS_REQUIRED);		// FIXME redundant compatibility
 			Operation equalsOperation = getEqualsOperation();
@@ -410,7 +410,7 @@ public abstract class AbstractQVTc2QVTc
 			OCLExpression slotExpression = copy(paIn.getSlotExpression());
 			Property targetProperty = paIn.getTargetProperty();
 			assert (slotExpression != null) && (targetProperty != null);
-			PropertyCallExp propertyCallExp = PivotUtil.createPropertyCallExp(slotExpression, targetProperty);
+			NavigationCallExp propertyCallExp = context.getHelper().createNavigationCallExp(slotExpression, targetProperty);
 			context.addTrace(paIn, propertyCallExp);
 			propertyCallExp.eUnset(PivotPackage.Literals.TYPED_ELEMENT__IS_REQUIRED);		// FIXME redundant compatibility
 			vaOut.setValue(propertyCallExp);

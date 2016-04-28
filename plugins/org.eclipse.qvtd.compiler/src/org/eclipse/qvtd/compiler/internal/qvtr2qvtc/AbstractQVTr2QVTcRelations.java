@@ -24,10 +24,10 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -136,7 +136,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			 */
 			Variable vcte = ClassUtil.nonNullState(cte.getBindsTo());
 			Variable mvcte = getCoreVariable(vcte);
-			PropertyCallExp pce =  createPropertyCallExp(createVariableExp(cTemplateVariable), traceProperty);
+			NavigationCallExp pce =  createNavigationCallExp(createVariableExp(cTemplateVariable), traceProperty);
 			VariableAssignment a = createVariableAssignment(mvcte, pce);
 			cMiddleBottomPattern.getAssignment().add(a);
 			/**
@@ -402,7 +402,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			for (@NonNull Variable v : rEnforcedRootVariables) {
 				@NonNull Variable mv = getCoreVariable(v);
 				Property pep = getProperty(cMiddleRealizedVariable.getType(), v);
-				PropertyCallExp pe = createPropertyCallExp(createVariableExp(cMiddleRealizedVariable), pep);
+				NavigationCallExp pe = createNavigationCallExp(createVariableExp(cMiddleRealizedVariable), pep);
 				addConditionPredicate(cMiddleBottomPattern, pe, createVariableExp(mv));
 			}
 		}
@@ -634,7 +634,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 										Variable cReferredVariable = getCoreVariable(rReferredVariable);
 										// assign
 										Property cTargetProperty = getProperty(cReferredVariable.getType(), cReferredVariable);
-										PropertyCallExp cPropertyCallExp = createPropertyCallExp(createVariableExp(cMiddleRealizedVariable), cTargetProperty);
+										NavigationCallExp cPropertyCallExp = createNavigationCallExp(createVariableExp(cMiddleRealizedVariable), cTargetProperty);
 										addConditionPredicate(composedMappingGuardPattern, cPropertyCallExp, createVariableExp(cReferredVariable));
 										TypedModel cTypedModel = getCoreTypedModel(rTypedModel);
 										composedEnforcedDomain.setTypedModel(cTypedModel);
@@ -760,7 +760,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 							Variable vd = qvtr2qvtc.whenVariable(cMiddleGuardPattern, tc.getName()+vdId+"_v", tc);
 							Variable mv = getCoreVariable(v);
 							Property pep = getProperty(vd.getType(), dv);
-							PropertyCallExp pe = createPropertyCallExp(createVariableExp(vd), pep);
+							NavigationCallExp pe = createNavigationCallExp(createVariableExp(vd), pep);
 							addConditionPredicate(cMiddleGuardPattern, pe, createVariableExp(mv));
 						}
 					}

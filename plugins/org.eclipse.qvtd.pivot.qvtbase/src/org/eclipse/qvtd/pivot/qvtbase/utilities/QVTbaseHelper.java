@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.MapLiteralExp;
 import org.eclipse.ocl.pivot.MapLiteralPart;
 import org.eclipse.ocl.pivot.MapType;
 import org.eclipse.ocl.pivot.Namespace;
+import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -40,7 +41,6 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.RealLiteralExp;
 import org.eclipse.ocl.pivot.SelfType;
 import org.eclipse.ocl.pivot.ShadowExp;
@@ -214,6 +214,10 @@ public class QVTbaseHelper // FIXME extends PivotHelper
 //		mapLiteralPart.setIsRequired(true);
 		return mapLiteralPart;
 	}
+	
+	public @NonNull NavigationCallExp createNavigationCallExp(@NonNull OCLExpression asSourceExpression, @NonNull Property asProperty) {
+		return PivotUtil.createNavigationCallExp(asSourceExpression, asProperty);
+	}
 
 	public @NonNull NullLiteralExp createNullLiteralExp() {
 		NullLiteralExp asNull = PivotFactory.eINSTANCE.createNullLiteralExp();
@@ -322,17 +326,6 @@ public class QVTbaseHelper // FIXME extends PivotHelper
 		Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
 		asPredicate.setConditionExpression(asConditionExpression);
 		return asPredicate;
-	}
-	
-	public @NonNull PropertyCallExp createPropertyCallExp(@NonNull OCLExpression asSourceExpression, @NonNull Property asProperty) {
-		PropertyCallExp asPropertyCallExp = PivotFactory.eINSTANCE.createPropertyCallExp();
-		asPropertyCallExp.setOwnedSource(asSourceExpression);
-		asPropertyCallExp.setReferredProperty(asProperty);
-		asPropertyCallExp.setType(asProperty.getType());
-//		asPropertyCallExp.setTypeValue(asProperty.getTypeValue());
-		asPropertyCallExp.setIsRequired(asProperty.isIsRequired());
-//		-- specialize
-		return asPropertyCallExp;
 	}
 
 	public @NonNull RealLiteralExp createRealLiteralExp(@NonNull Number realSymbol) {

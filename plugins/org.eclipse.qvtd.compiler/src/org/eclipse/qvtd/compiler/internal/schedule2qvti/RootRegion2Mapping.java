@@ -275,7 +275,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		@NonNull Variable asIterator = PivotUtil.createVariable("i", elementType, true, null);
 		Property child2parentProperty = edge.getProperty().getOpposite();
 		assert child2parentProperty != null;
-		OCLExpression propertyCallExp = PivotUtil.createPropertyCallExp(helper.createVariableExp(asIterator), child2parentProperty);
+		OCLExpression propertyCallExp = helper.createNavigationCallExp(helper.createVariableExp(asIterator), child2parentProperty);
 		if (edge.getSource().isNull()) {
 			OCLExpression equalsExp = helper.createOperationCallExp(propertyCallExp, "=", helper.createNullLiteralExp());
 			initExpression = helper.createIteratorExp(initExpression, getSelectIteration(), Collections.singletonList(asIterator), equalsExp);

@@ -426,7 +426,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			Property referredProperty = pPropertyCallExp.getReferredProperty();
 			assert referredProperty != null;
 			assert referredProperty.eContainer() != null;
-			return PivotUtil.createNavigationCallExp(iSource, referredProperty);
+			return helper.createNavigationCallExp(iSource, referredProperty);
 		}
 
 		@Override
