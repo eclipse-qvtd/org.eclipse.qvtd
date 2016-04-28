@@ -220,7 +220,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			for (EObject prototypeEObject : copier.keySet()) {
 				EObject clonedEObject = copier.get(prototypeEObject);
 				assert clonedEObject != null;
-				DomainUsage usage = domainUsageAnalysis.basicGetUsage(prototypeEObject);
+				DomainUsage usage = domainUsageAnalysis.basicGetUsage((Element)prototypeEObject);
 //				System.out.println("    " + prototypeEObject.eClass().getName() + "@" + Integer.toHexString(System.identityHashCode(prototypeEObject)) + " => " + usage + " : " + prototypeEObject);
 				if (usage != null) {
 //					System.out.println("    " + clonedEObject.eClass().getName() + "@" + Integer.toHexString(System.identityHashCode(clonedEObject)) + " <= " + usage + " : " + clonedEObject);

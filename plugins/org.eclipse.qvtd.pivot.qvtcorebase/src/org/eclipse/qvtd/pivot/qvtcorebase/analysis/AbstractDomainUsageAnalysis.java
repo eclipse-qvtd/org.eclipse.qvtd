@@ -56,6 +56,7 @@ import org.eclipse.ocl.pivot.TupleLiteralPart;
 import org.eclipse.ocl.pivot.TupleType;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -99,7 +100,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	}
 
 	@Override
-	public @Nullable DomainUsage basicGetUsage(@Nullable EObject element) {
+	public @Nullable DomainUsage basicGetUsage(@Nullable Element element) {
 		return element2usage.get(element);
 	}
 	
@@ -163,8 +164,17 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	protected abstract @NonNull RootDomainUsageAnalysis getRootAnalysis();
 
 	@Override
-	public @NonNull DomainUsage getUsage(@NonNull EObject element) {
-		return ClassUtil.nonNullState(element2usage.get(element));
+	public @NonNull DomainUsage getUsage(@NonNull Element element) {
+		DomainUsage usage = element2usage.get(element);
+		if (usage == null) {
+			usage = element.accept(this);
+			if (usage == null) {						// FIXME debugging
+				usage = element.accept(this);
+			}
+			assert usage != null : "null usage for " + element.eClass().getName() + " " + element;
+			setUsage(element, usage);
+		}
+		return usage;
 	}
 
 	public @NonNull DomainUsage intersection(@NonNull DomainUsage firstUsage, @NonNull DomainUsage secondUsage) {
@@ -815,6 +825,11 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	public @Nullable DomainUsage visitTypeExp(@NonNull TypeExp object) {
 		DomainUsage usage = visit(object.getReferredType());
 		return getRootAnalysis().getValidOrVariableUsage(usage);
+	}
+
+	@Override
+	public @Nullable DomainUsage visitTypedElement(@NonNull TypedElement object) {
+		return visit(object.getType());
 	}
 
 	@Override

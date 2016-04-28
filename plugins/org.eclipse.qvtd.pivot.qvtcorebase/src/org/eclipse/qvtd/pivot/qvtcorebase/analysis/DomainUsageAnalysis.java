@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcorebase.analysis;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
@@ -48,12 +47,12 @@ public interface DomainUsageAnalysis
 	/**
 	 * Return the DomainUsage bit mask for an AST element or null if not determined.
 	 */
-	@Nullable DomainUsage basicGetUsage(@Nullable EObject element);
+	@Nullable DomainUsage basicGetUsage(@Nullable Element element);
 	
 	/**
 	 * Return the DomainUsage bit mask for an AST element.
 	 */
-	@NonNull DomainUsage getUsage(@NonNull EObject element);
+	@NonNull DomainUsage getUsage(@NonNull Element element);
 	
 	public interface Internal extends DomainUsageAnalysis {
 		@NonNull DomainUsage visit(@Nullable Element element);

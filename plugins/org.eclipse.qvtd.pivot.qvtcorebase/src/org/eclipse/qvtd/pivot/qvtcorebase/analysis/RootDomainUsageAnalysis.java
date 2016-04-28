@@ -508,7 +508,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	}
 
 	@Override
-	public @Nullable DomainUsage basicGetUsage(@Nullable EObject element) {
+	public @Nullable DomainUsage basicGetUsage(@Nullable Element element) {
 		DomainUsage usage = super.basicGetUsage(element);
 		if (usage != null) {
 			return usage;
@@ -722,15 +722,16 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		return domainUsage;
 	} */
 
+	@Override
 	public @NonNull DomainUsage getUsage(@NonNull Element element) {
-		DomainUsage usage = super.basicGetUsage(element);
-		if (usage != null) {
-			return usage;
+		Operation operation = PivotUtil.getContainingOperation(element);
+		if (operation != null) {
+			DomainUsageAnalysis analyzeOperation = analyzeOperation(operation);
+			return ClassUtil.nonNullState(analyzeOperation.getUsage(element));
 		}
-		Operation operation = ClassUtil.nonNullState(PivotUtil.getContainingOperation(element));
-		DomainUsageAnalysis analyzeOperation = analyzeOperation(operation);
-		usage = ClassUtil.nonNullState(analyzeOperation.getUsage(element));
-		return usage;
+		else {
+			return super.getUsage(element);
+		}
 	}
 
 	/**

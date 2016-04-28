@@ -99,7 +99,7 @@ public class QVTiDomainUsageTests extends LoadTestCase
 				for (TreeIterator<EObject> tit = operation.eAllContents(); tit.hasNext(); ) {
 					EObject eObject = tit.next();
 					assert eObject != null;
-					DomainUsage usage = operationAnalysis.getUsage(eObject);
+					DomainUsage usage = operationAnalysis.getUsage((Element)eObject);
 					assert usage != null : "No nested usage for " + eObject.eClass().getName() + " " + eObject;
 //					assert usage instanceof DomainUsageConstant : "Variable usage for " + eObject;
 					List<Element> list = usage2elements.get(usage);
