@@ -615,10 +615,25 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 //			 || (operationId == getRootAnalysis().getOclAnyNotEqualsOperationId())) {
 			if ("=".equals(operationName)						// FIXME BUG 487252 rationalize the derived operationIds
 			 || "<>".equals(operationName)) {
-				DomainUsage leftUsage = visit(object.getOwnedSource());
 				DomainUsage rightUsage = visit(object.getOwnedArguments().get(0));
-				intersection(leftUsage, rightUsage);
+				intersection(sourceUsage, rightUsage);
 				return getRootAnalysis().getPrimitiveUsage();
+			}
+			if ("oclAsType".equals(operationName) && !sourceUsage.isPrimitive()) {		// FIXME fudge for Adolfo's suspect EObjects
+				TemplateParameter templateParameter = operation.getType().isTemplateParameter();
+				if (templateParameter != null) {
+					List<Parameter> ownedParameters = operation.getOwnedParameters();
+					int iMax = Math.min(ownedParameters.size(), object.getOwnedArguments().size());
+					for (int i = 0; i < iMax; i++) {
+						Parameter parameter = ownedParameters.get(i);
+						if (parameter.isIsTypeof() && (parameter.getType() == templateParameter)) {
+							OCLExpression argument = object.getOwnedArguments().get(i);
+							DomainUsage argumentUsage = visit(argument);
+							intersection(sourceUsage, argumentUsage);
+						}
+					}
+				}
+				return sourceUsage;
 			}
 			TemplateParameter templateParameter = operation.getType().isTemplateParameter();
 			if (templateParameter != null) {			// Handle e.g oclAsType()
