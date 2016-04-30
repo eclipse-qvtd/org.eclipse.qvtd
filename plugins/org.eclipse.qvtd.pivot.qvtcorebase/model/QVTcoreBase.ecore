@@ -57,7 +57,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="area" lowerBound="1" eType="#//Area"
         transient="true" eOpposite="#//Area/guardPattern"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyAssignment" eSuperTypes="#//Assignment">
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationAssignment" abstract="true"
+      eSuperTypes="#//Assignment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="slotExpression" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true">
@@ -65,6 +66,16 @@
         <details key="body" value="slotAssignment"/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OppositePropertyAssignment" eSuperTypes="#//NavigationAssignment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetProperty" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="assignment"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyAssignment" eSuperTypes="#//NavigationAssignment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetProperty" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
