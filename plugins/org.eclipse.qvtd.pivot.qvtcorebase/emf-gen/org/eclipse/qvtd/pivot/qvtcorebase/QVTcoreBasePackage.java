@@ -848,14 +848,14 @@ public interface QVTcoreBasePackage extends EPackage {
 	int GUARD_PATTERN_FEATURE_COUNT = CORE_PATTERN_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.PropertyAssignmentImpl <em>Property Assignment</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.NavigationAssignmentImpl <em>Navigation Assignment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.PropertyAssignmentImpl
-	 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.QVTcoreBasePackageImpl#getPropertyAssignment()
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.NavigationAssignmentImpl
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.QVTcoreBasePackageImpl#getNavigationAssignment()
 	 * @generated
 	 */
-	int PROPERTY_ASSIGNMENT = 8;
+	int NAVIGATION_ASSIGNMENT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -864,7 +864,7 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__ANNOTATING_COMMENTS = ASSIGNMENT__ANNOTATING_COMMENTS;
+	int NAVIGATION_ASSIGNMENT__ANNOTATING_COMMENTS = ASSIGNMENT__ANNOTATING_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -873,7 +873,7 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__OWNED_ANNOTATIONS = ASSIGNMENT__OWNED_ANNOTATIONS;
+	int NAVIGATION_ASSIGNMENT__OWNED_ANNOTATIONS = ASSIGNMENT__OWNED_ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
@@ -882,7 +882,7 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__OWNED_COMMENTS = ASSIGNMENT__OWNED_COMMENTS;
+	int NAVIGATION_ASSIGNMENT__OWNED_COMMENTS = ASSIGNMENT__OWNED_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
@@ -891,7 +891,7 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__OWNED_EXTENSIONS = ASSIGNMENT__OWNED_EXTENSIONS;
+	int NAVIGATION_ASSIGNMENT__OWNED_EXTENSIONS = ASSIGNMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Bottom Pattern</b></em>' container reference.
@@ -900,7 +900,7 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__BOTTOM_PATTERN = ASSIGNMENT__BOTTOM_PATTERN;
+	int NAVIGATION_ASSIGNMENT__BOTTOM_PATTERN = ASSIGNMENT__BOTTOM_PATTERN;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -909,7 +909,7 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__VALUE = ASSIGNMENT__VALUE;
+	int NAVIGATION_ASSIGNMENT__VALUE = ASSIGNMENT__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
@@ -918,7 +918,7 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__IS_DEFAULT = ASSIGNMENT__IS_DEFAULT;
+	int NAVIGATION_ASSIGNMENT__IS_DEFAULT = ASSIGNMENT__IS_DEFAULT;
 
 	/**
 	 * The feature id for the '<em><b>Slot Expression</b></em>' containment reference.
@@ -927,7 +927,98 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__SLOT_EXPRESSION = ASSIGNMENT_FEATURE_COUNT + 0;
+	int NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION = ASSIGNMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Navigation Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_ASSIGNMENT_FEATURE_COUNT = ASSIGNMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.OppositePropertyAssignmentImpl <em>Opposite Property Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.OppositePropertyAssignmentImpl
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.QVTcoreBasePackageImpl#getOppositePropertyAssignment()
+	 * @generated
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT = 9;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT__ANNOTATING_COMMENTS = NAVIGATION_ASSIGNMENT__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT__OWNED_ANNOTATIONS = NAVIGATION_ASSIGNMENT__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT__OWNED_COMMENTS = NAVIGATION_ASSIGNMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT__OWNED_EXTENSIONS = NAVIGATION_ASSIGNMENT__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Bottom Pattern</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT__BOTTOM_PATTERN = NAVIGATION_ASSIGNMENT__BOTTOM_PATTERN;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT__VALUE = NAVIGATION_ASSIGNMENT__VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT__IS_DEFAULT = NAVIGATION_ASSIGNMENT__IS_DEFAULT;
+
+	/**
+	 * The feature id for the '<em><b>Slot Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT__SLOT_EXPRESSION = NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Target Property</b></em>' reference.
@@ -936,7 +1027,107 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__TARGET_PROPERTY = ASSIGNMENT_FEATURE_COUNT + 1;
+	int OPPOSITE_PROPERTY_ASSIGNMENT__TARGET_PROPERTY = NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Opposite Property Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT_FEATURE_COUNT = NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.PropertyAssignmentImpl <em>Property Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.PropertyAssignmentImpl
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.QVTcoreBasePackageImpl#getPropertyAssignment()
+	 * @generated
+	 */
+	int PROPERTY_ASSIGNMENT = 10;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT__ANNOTATING_COMMENTS = NAVIGATION_ASSIGNMENT__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT__OWNED_ANNOTATIONS = NAVIGATION_ASSIGNMENT__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT__OWNED_COMMENTS = NAVIGATION_ASSIGNMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT__OWNED_EXTENSIONS = NAVIGATION_ASSIGNMENT__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Bottom Pattern</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT__BOTTOM_PATTERN = NAVIGATION_ASSIGNMENT__BOTTOM_PATTERN;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT__VALUE = NAVIGATION_ASSIGNMENT__VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT__IS_DEFAULT = NAVIGATION_ASSIGNMENT__IS_DEFAULT;
+
+	/**
+	 * The feature id for the '<em><b>Slot Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT__SLOT_EXPRESSION = NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Target Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT__TARGET_PROPERTY = NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Property Assignment</em>' class.
@@ -945,7 +1136,7 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT_FEATURE_COUNT = ASSIGNMENT_FEATURE_COUNT + 2;
+	int PROPERTY_ASSIGNMENT_FEATURE_COUNT = NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.RealizedVariableImpl <em>Realized Variable</em>}' class.
@@ -955,7 +1146,7 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.QVTcoreBasePackageImpl#getRealizedVariable()
 	 * @generated
 	 */
-	int REALIZED_VARIABLE = 9;
+	int REALIZED_VARIABLE = 11;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1082,7 +1273,7 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.QVTcoreBasePackageImpl#getVariableAssignment()
 	 * @generated
 	 */
-	int VARIABLE_ASSIGNMENT = 10;
+	int VARIABLE_ASSIGNMENT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1173,7 +1364,7 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.QVTcoreBasePackageImpl#getEnforcementMode()
 	 * @generated
 	 */
-	int ENFORCEMENT_MODE = 11;
+	int ENFORCEMENT_MODE = 13;
 
 
 	/**
@@ -1411,6 +1602,48 @@ public interface QVTcoreBasePackage extends EPackage {
 	EReference getGuardPattern_Area();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment <em>Navigation Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Navigation Assignment</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment
+	 * @generated
+	 */
+	EClass getNavigationAssignment();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment#getSlotExpression <em>Slot Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Slot Expression</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment#getSlotExpression()
+	 * @see #getNavigationAssignment()
+	 * @generated
+	 */
+	EReference getNavigationAssignment_SlotExpression();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment <em>Opposite Property Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Opposite Property Assignment</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment
+	 * @generated
+	 */
+	EClass getOppositePropertyAssignment();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment#getTargetProperty <em>Target Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target Property</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment#getTargetProperty()
+	 * @see #getOppositePropertyAssignment()
+	 * @generated
+	 */
+	EReference getOppositePropertyAssignment_TargetProperty();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment <em>Property Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1419,17 +1652,6 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getPropertyAssignment();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment#getSlotExpression <em>Slot Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Slot Expression</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment#getSlotExpression()
-	 * @see #getPropertyAssignment()
-	 * @generated
-	 */
-	EReference getPropertyAssignment_SlotExpression();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment#getTargetProperty <em>Target Property</em>}'.
@@ -1698,6 +1920,42 @@ public interface QVTcoreBasePackage extends EPackage {
 		EReference GUARD_PATTERN__AREA = eINSTANCE.getGuardPattern_Area();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.NavigationAssignmentImpl <em>Navigation Assignment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.NavigationAssignmentImpl
+		 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.QVTcoreBasePackageImpl#getNavigationAssignment()
+		 * @generated
+		 */
+		EClass NAVIGATION_ASSIGNMENT = eINSTANCE.getNavigationAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>Slot Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION = eINSTANCE.getNavigationAssignment_SlotExpression();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.OppositePropertyAssignmentImpl <em>Opposite Property Assignment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.OppositePropertyAssignmentImpl
+		 * @see org.eclipse.qvtd.pivot.qvtcorebase.impl.QVTcoreBasePackageImpl#getOppositePropertyAssignment()
+		 * @generated
+		 */
+		EClass OPPOSITE_PROPERTY_ASSIGNMENT = eINSTANCE.getOppositePropertyAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPPOSITE_PROPERTY_ASSIGNMENT__TARGET_PROPERTY = eINSTANCE.getOppositePropertyAssignment_TargetProperty();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.PropertyAssignmentImpl <em>Property Assignment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1706,14 +1964,6 @@ public interface QVTcoreBasePackage extends EPackage {
 		 * @generated
 		 */
 		EClass PROPERTY_ASSIGNMENT = eINSTANCE.getPropertyAssignment();
-
-		/**
-		 * The meta object literal for the '<em><b>Slot Expression</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PROPERTY_ASSIGNMENT__SLOT_EXPRESSION = eINSTANCE.getPropertyAssignment_SlotExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Target Property</b></em>' reference feature.

@@ -74,8 +74,18 @@ public abstract class AbstractQVTcoreBaseAS2XMIidVisitor
 	}
 
 	@Override
-	public @Nullable Boolean visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
+	public @Nullable Boolean visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull NavigationAssignment object) {
 		return visitAssignment(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull OppositePropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
+		return visitNavigationAssignment(object);
 	}
 
 	@Override

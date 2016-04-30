@@ -70,6 +70,16 @@ public abstract class AbstractNullQVTcoreBaseVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull NavigationAssignment object) {
+		return null;
+	}
+
+	@Override
+	public R visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull OppositePropertyAssignment object) {
+		return null;
+	}
+
+	@Override
 	public R visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
 		return null;
 	}

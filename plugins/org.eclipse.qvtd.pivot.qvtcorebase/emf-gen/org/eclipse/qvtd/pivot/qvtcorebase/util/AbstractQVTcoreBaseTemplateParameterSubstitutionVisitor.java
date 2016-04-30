@@ -77,8 +77,18 @@ public abstract class AbstractQVTcoreBaseTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
-	public @Nullable Object visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
+	public @Nullable Object visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull NavigationAssignment object) {
 		return visitAssignment(object);
+	}
+
+	@Override
+	public @Nullable Object visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull OppositePropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	@Override
+	public @Nullable Object visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
+		return visitNavigationAssignment(object);
 	}
 
 	@Override

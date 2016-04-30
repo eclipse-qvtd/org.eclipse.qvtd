@@ -64,6 +64,16 @@ public abstract class AbstractMergedQVTcoreBaseVisitor<R, C>
 	}
 
 	@Override
+	public R visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull NavigationAssignment object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull OppositePropertyAssignment object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
 		return visiting(object);
 	}

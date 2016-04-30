@@ -23,6 +23,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementMode;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
@@ -78,6 +79,7 @@ public class QVTcoreBaseFactoryImpl extends EFactoryImpl implements QVTcoreBaseF
 			case QVTcoreBasePackage.CORE_PATTERN: return createCorePattern();
 			case QVTcoreBasePackage.ENFORCEMENT_OPERATION: return createEnforcementOperation();
 			case QVTcoreBasePackage.GUARD_PATTERN: return createGuardPattern();
+			case QVTcoreBasePackage.OPPOSITE_PROPERTY_ASSIGNMENT: return createOppositePropertyAssignment();
 			case QVTcoreBasePackage.PROPERTY_ASSIGNMENT: return createPropertyAssignment();
 			case QVTcoreBasePackage.REALIZED_VARIABLE: return createRealizedVariable();
 			case QVTcoreBasePackage.VARIABLE_ASSIGNMENT: return createVariableAssignment();
@@ -169,6 +171,17 @@ public class QVTcoreBaseFactoryImpl extends EFactoryImpl implements QVTcoreBaseF
 	public @NonNull GuardPattern createGuardPattern() {
 		GuardPatternImpl guardPattern = new GuardPatternImpl();
 		return guardPattern;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull OppositePropertyAssignment createOppositePropertyAssignment() {
+		OppositePropertyAssignmentImpl oppositePropertyAssignment = new OppositePropertyAssignmentImpl();
+		return oppositePropertyAssignment;
 	}
 
 	/**

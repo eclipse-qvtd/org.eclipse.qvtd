@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtcorebase.*;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
@@ -126,6 +127,14 @@ public class QVTcoreBaseAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseGuardPattern(GuardPattern object) {
 				return createGuardPatternAdapter();
+			}
+			@Override
+			public Adapter caseNavigationAssignment(NavigationAssignment object) {
+				return createNavigationAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseOppositePropertyAssignment(OppositePropertyAssignment object) {
+				return createOppositePropertyAssignmentAdapter();
 			}
 			@Override
 			public Adapter casePropertyAssignment(PropertyAssignment object) {
@@ -312,6 +321,34 @@ public class QVTcoreBaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGuardPatternAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment <em>Navigation Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment
+	 * @generated
+	 */
+	public Adapter createNavigationAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment <em>Opposite Property Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment
+	 * @generated
+	 */
+	public Adapter createOppositePropertyAssignmentAdapter() {
 		return null;
 	}
 

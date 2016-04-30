@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtcorebase.*;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
@@ -173,9 +174,29 @@ public class QVTcoreBaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTcoreBasePackage.NAVIGATION_ASSIGNMENT: {
+				NavigationAssignment navigationAssignment = (NavigationAssignment)theEObject;
+				T result = caseNavigationAssignment(navigationAssignment);
+				if (result == null) result = caseAssignment(navigationAssignment);
+				if (result == null) result = caseElement(navigationAssignment);
+				if (result == null) result = caseVisitable(navigationAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTcoreBasePackage.OPPOSITE_PROPERTY_ASSIGNMENT: {
+				OppositePropertyAssignment oppositePropertyAssignment = (OppositePropertyAssignment)theEObject;
+				T result = caseOppositePropertyAssignment(oppositePropertyAssignment);
+				if (result == null) result = caseNavigationAssignment(oppositePropertyAssignment);
+				if (result == null) result = caseAssignment(oppositePropertyAssignment);
+				if (result == null) result = caseElement(oppositePropertyAssignment);
+				if (result == null) result = caseVisitable(oppositePropertyAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTcoreBasePackage.PROPERTY_ASSIGNMENT: {
 				PropertyAssignment propertyAssignment = (PropertyAssignment)theEObject;
 				T result = casePropertyAssignment(propertyAssignment);
+				if (result == null) result = caseNavigationAssignment(propertyAssignment);
 				if (result == null) result = caseAssignment(propertyAssignment);
 				if (result == null) result = caseElement(propertyAssignment);
 				if (result == null) result = caseVisitable(propertyAssignment);
@@ -325,6 +346,36 @@ public class QVTcoreBaseSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGuardPattern(GuardPattern object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Navigation Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Navigation Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNavigationAssignment(NavigationAssignment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Opposite Property Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Opposite Property Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOppositePropertyAssignment(OppositePropertyAssignment object) {
 		return null;
 	}
 

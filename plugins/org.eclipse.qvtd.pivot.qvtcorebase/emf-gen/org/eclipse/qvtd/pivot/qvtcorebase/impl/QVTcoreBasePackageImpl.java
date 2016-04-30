@@ -27,6 +27,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementMode;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
@@ -95,6 +97,20 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * @generated
 	 */
 	private EClass guardPatternEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass navigationAssignmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass oppositePropertyAssignmentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -415,6 +431,46 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * @generated
 	 */
 	@Override
+	public EClass getNavigationAssignment() {
+		return navigationAssignmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getNavigationAssignment_SlotExpression() {
+		return (EReference)navigationAssignmentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getOppositePropertyAssignment() {
+		return oppositePropertyAssignmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getOppositePropertyAssignment_TargetProperty() {
+		return (EReference)oppositePropertyAssignmentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getPropertyAssignment() {
 		return propertyAssignmentEClass;
 	}
@@ -425,18 +481,8 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * @generated
 	 */
 	@Override
-	public EReference getPropertyAssignment_SlotExpression() {
-		return (EReference)propertyAssignmentEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getPropertyAssignment_TargetProperty() {
-		return (EReference)propertyAssignmentEClass.getEStructuralFeatures().get(1);
+		return (EReference)propertyAssignmentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -538,8 +584,13 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 		guardPatternEClass = createEClass(GUARD_PATTERN);
 		createEReference(guardPatternEClass, GUARD_PATTERN__AREA);
 
+		navigationAssignmentEClass = createEClass(NAVIGATION_ASSIGNMENT);
+		createEReference(navigationAssignmentEClass, NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION);
+
+		oppositePropertyAssignmentEClass = createEClass(OPPOSITE_PROPERTY_ASSIGNMENT);
+		createEReference(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT__TARGET_PROPERTY);
+
 		propertyAssignmentEClass = createEClass(PROPERTY_ASSIGNMENT);
-		createEReference(propertyAssignmentEClass, PROPERTY_ASSIGNMENT__SLOT_EXPRESSION);
 		createEReference(propertyAssignmentEClass, PROPERTY_ASSIGNMENT__TARGET_PROPERTY);
 
 		realizedVariableEClass = createEClass(REALIZED_VARIABLE);
@@ -593,7 +644,9 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 		corePatternEClass.getESuperTypes().add(theQVTbasePackage.getPattern());
 		enforcementOperationEClass.getESuperTypes().add(thePivotPackage.getElement());
 		guardPatternEClass.getESuperTypes().add(this.getCorePattern());
-		propertyAssignmentEClass.getESuperTypes().add(this.getAssignment());
+		navigationAssignmentEClass.getESuperTypes().add(this.getAssignment());
+		oppositePropertyAssignmentEClass.getESuperTypes().add(this.getNavigationAssignment());
+		propertyAssignmentEClass.getESuperTypes().add(this.getNavigationAssignment());
 		realizedVariableEClass.getESuperTypes().add(thePivotPackage.getVariable());
 		variableAssignmentEClass.getESuperTypes().add(this.getAssignment());
 
@@ -638,8 +691,13 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 		initEClass(guardPatternEClass, GuardPattern.class, "GuardPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardPattern_Area(), this.getArea(), this.getArea_GuardPattern(), "area", null, 1, 1, GuardPattern.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(navigationAssignmentEClass, NavigationAssignment.class, "NavigationAssignment", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNavigationAssignment_SlotExpression(), thePivotPackage.getOCLExpression(), null, "slotExpression", null, 1, 1, NavigationAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(oppositePropertyAssignmentEClass, OppositePropertyAssignment.class, "OppositePropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOppositePropertyAssignment_TargetProperty(), thePivotPackage.getProperty(), null, "targetProperty", null, 1, 1, OppositePropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(propertyAssignmentEClass, PropertyAssignment.class, "PropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPropertyAssignment_SlotExpression(), thePivotPackage.getOCLExpression(), null, "slotExpression", null, 1, 1, PropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyAssignment_TargetProperty(), thePivotPackage.getProperty(), null, "targetProperty", null, 1, 1, PropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(realizedVariableEClass, RealizedVariable.class, "RealizedVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -675,10 +733,16 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 			 "body", "valueAssignment"
 		   });	
 		addAnnotation
-		  (getPropertyAssignment_SlotExpression(), 
+		  (getNavigationAssignment_SlotExpression(), 
 		   source, 
 		   new String[] {
 			 "body", "slotAssignment"
+		   });	
+		addAnnotation
+		  (getOppositePropertyAssignment_TargetProperty(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
 		   });	
 		addAnnotation
 		  (getPropertyAssignment_TargetProperty(), 

@@ -66,6 +66,16 @@ public abstract class AbstractDelegatingQVTcoreBaseVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull NavigationAssignment object) {
+		return delegate.visitNavigationAssignment(object);
+	}
+
+	@Override
+	public R visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull OppositePropertyAssignment object) {
+		return delegate.visitOppositePropertyAssignment(object);
+	}
+
+	@Override
 	public R visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
 		return delegate.visitPropertyAssignment(object);
 	}

@@ -104,6 +104,30 @@ public abstract class AbstractWrappingQVTcoreBaseVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull NavigationAssignment object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitNavigationAssignment(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull OppositePropertyAssignment object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitOppositePropertyAssignment(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
 		@Nullable P prologue = preVisit(object);
 		try {

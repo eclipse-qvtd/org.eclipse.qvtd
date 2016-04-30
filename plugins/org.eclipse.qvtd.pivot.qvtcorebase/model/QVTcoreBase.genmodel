@@ -55,8 +55,13 @@
     <genClasses ecoreClass="QVTcoreBase.ecore#//GuardPattern">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcoreBase.ecore#//GuardPattern/area"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="QVTcoreBase.ecore#//NavigationAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBase.ecore#//NavigationAssignment/slotExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreBase.ecore#//OppositePropertyAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreBase.ecore#//OppositePropertyAssignment/targetProperty"/>
+    </genClasses>
     <genClasses ecoreClass="QVTcoreBase.ecore#//PropertyAssignment">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreBase.ecore#//PropertyAssignment/slotExpression"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreBase.ecore#//PropertyAssignment/targetProperty"/>
     </genClasses>
     <genClasses ecoreClass="QVTcoreBase.ecore#//RealizedVariable"/>

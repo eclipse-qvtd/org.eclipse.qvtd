@@ -76,6 +76,15 @@ public interface QVTcoreBaseFactory extends EFactory {
 	@NonNull GuardPattern createGuardPattern();
 
 	/**
+	 * Returns a new object of class '<em>Opposite Property Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Opposite Property Assignment</em>'.
+	 * @generated
+	 */
+	@NonNull OppositePropertyAssignment createOppositePropertyAssignment();
+
+	/**
 	 * Returns a new object of class '<em>Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
