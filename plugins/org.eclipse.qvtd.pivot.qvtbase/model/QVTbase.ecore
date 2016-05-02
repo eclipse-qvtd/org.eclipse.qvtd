@@ -2,14 +2,6 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtbase" nsURI="http://www.eclipse.org/qvt/2015/QVTbase" nsPrefix="qvtb">
   <eClassifiers xsi:type="ecore:EClass" name="BaseModel" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Model"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DebugTraceBack" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owningTransformation" lowerBound="1"
-        eType="#//Transformation" eOpposite="#//Transformation/ownedDebugTraceBacks"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Domain" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//NamedElement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//ReferringElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCheckable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         unsettable="true"/>
@@ -82,8 +74,6 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedContext" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDebugTraceBacks" upperBound="-1"
-        eType="#//DebugTraceBack" containment="true" eOpposite="#//DebugTraceBack/owningTransformation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypedModel" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" lowerBound="1"
