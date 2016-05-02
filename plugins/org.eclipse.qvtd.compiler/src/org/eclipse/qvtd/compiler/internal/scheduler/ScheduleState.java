@@ -409,10 +409,12 @@ public abstract class ScheduleState extends ScheduleCache
 				assert !callableRegion2blockedConnectionCount.containsKey(region);
 			}
 			else if (blockedConnectionCount > 0) {
+				assert !orderedRegions.contains(region);
 				assert !unblockedRegions.contains(region);
 				callableRegion2blockedConnectionCount.put(region, blockedConnectionCount);
 			}
 			else if (blockedRegions.contains(invokingRegion)) {
+				assert !orderedRegions.contains(region);
 				assert !unblockedRegions.contains(region);
 				callableRegion2blockedConnectionCount.put(region, blockedConnectionCount);
 			}
@@ -430,8 +432,8 @@ public abstract class ScheduleState extends ScheduleCache
 
 	protected void scheduleRegion(@NonNull Region region) {
 		int thisIndex = orderedRegions.size();
-		assert !orderedRegions.contains(region);
 		Scheduler.REGION_ORDER.println(thisIndex + " : " + region);
+		assert !orderedRegions.contains(region) : "Attempting to re-order " + region;
 		region.addIndex(thisIndex);
 		orderedRegions.add(region);
 		unblock(region);
@@ -499,7 +501,9 @@ public abstract class ScheduleState extends ScheduleCache
 		//	Unblock regions whose source connections were unblocked.
 		//
 		for (@NonNull Region nextRegion : nextRegions) {
-			refreshRegionBlockage(nextRegion);
+			if (!orderedRegions.contains(nextRegion)) {
+				refreshRegionBlockage(nextRegion);
+			}
 		}
 		updateCallStack(region);
 		if (region instanceof ScheduledRegion) {
