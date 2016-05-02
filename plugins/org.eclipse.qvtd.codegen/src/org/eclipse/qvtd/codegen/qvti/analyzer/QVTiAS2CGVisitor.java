@@ -88,7 +88,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
-import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -631,11 +630,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitCorePattern(@NonNull CorePattern object) {
-		return visiting(object);
-	}
-
-	@Override
-	public @Nullable CGNamedElement visitDebugTraceBack(@NonNull DebugTraceBack object) {
 		return visiting(object);
 	}
 

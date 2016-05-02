@@ -36,7 +36,6 @@ import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
-import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -180,11 +179,6 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	@Override
 	public ElementCS visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visitVariable(object);
-	}
-
-	@Override
-	public ElementCS visitDebugTraceBack(@NonNull DebugTraceBack object) {
-		return visiting(object);
 	}
 
 	@Override

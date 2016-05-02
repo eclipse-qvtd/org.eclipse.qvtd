@@ -21,7 +21,6 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
-import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -105,11 +104,6 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 			csDocument.getOwnedQueries().clear();
 		}
 		return csDocument;
-	}
-
-	@Override
-	public ElementCS visitDebugTraceBack(@NonNull DebugTraceBack object) {
-		return null;
 	}
 
 	@Override

@@ -70,14 +70,11 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
@@ -872,7 +869,7 @@ public class QVTrToQVTc
 				}
 			}
 		}
-		for (@NonNull Transformation coreTransformation : relationalTransformation2coreTransformation.values()) {
+/*		for (@NonNull Transformation coreTransformation : relationalTransformation2coreTransformation.values()) {
 			List<DebugTraceBack> debugTraceBacks = coreTransformation.getOwnedDebugTraceBacks();
 			for (@NonNull Element target : target2source.keySet()) {
 				if (QVTbaseUtil.getContainingTransformation(target) == coreTransformation) {
@@ -883,7 +880,7 @@ public class QVTrToQVTc
 				}
 			}
 //			CompilerUtil.normalizeNameables(debugTraceBacks);
-		}
+		} */
 	}
 
 
