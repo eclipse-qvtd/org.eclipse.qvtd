@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.ClassImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -48,7 +47,6 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getRule <em>Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedContext <em>Owned Context</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl#getOwnedDebugTraceBacks <em>Owned Debug Trace Backs</em>}</li>
  * </ul>
  *
  * @generated
@@ -103,16 +101,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @ordered
 	 */
 	protected Variable ownedContext;
-
-	/**
-	 * The cached value of the '{@link #getOwnedDebugTraceBacks() <em>Owned Debug Trace Backs</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedDebugTraceBacks()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DebugTraceBack> ownedDebugTraceBacks;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -266,20 +254,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("null")
-	@Override
-	public @NonNull EList<DebugTraceBack> getOwnedDebugTraceBacks() {
-		if (ownedDebugTraceBacks == null) {
-			ownedDebugTraceBacks = new EObjectContainmentWithInverseEList<DebugTraceBack>(DebugTraceBack.class, this, QVTbasePackage.TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS, QVTbasePackage.DEBUG_TRACE_BACK__OWNING_TRANSFORMATION);
-		}
-		return ownedDebugTraceBacks;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Function getFunction(String name) {
 		// TODO: implement this method
@@ -300,8 +274,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getModelParameter()).basicAdd(otherEnd, msgs);
 			case QVTbasePackage.TRANSFORMATION__RULE:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRule()).basicAdd(otherEnd, msgs);
-			case QVTbasePackage.TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedDebugTraceBacks()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -322,8 +294,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return ((InternalEList<?>)getRule()).basicRemove(otherEnd, msgs);
 			case QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT:
 				return basicSetOwnedContext(null, msgs);
-			case QVTbasePackage.TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS:
-				return ((InternalEList<?>)getOwnedDebugTraceBacks()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -347,8 +317,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return basicGetExtends();
 			case QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT:
 				return getOwnedContext();
-			case QVTbasePackage.TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS:
-				return getOwnedDebugTraceBacks();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -380,10 +348,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT:
 				setOwnedContext((Variable)newValue);
 				return;
-			case QVTbasePackage.TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS:
-				getOwnedDebugTraceBacks().clear();
-				getOwnedDebugTraceBacks().addAll((Collection<? extends DebugTraceBack>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -411,9 +375,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 			case QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT:
 				setOwnedContext((Variable)null);
 				return;
-			case QVTbasePackage.TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS:
-				getOwnedDebugTraceBacks().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -436,8 +397,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return extends_ != null;
 			case QVTbasePackage.TRANSFORMATION__OWNED_CONTEXT:
 				return ownedContext != null;
-			case QVTbasePackage.TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS:
-				return ownedDebugTraceBacks != null && !ownedDebugTraceBacks.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -29,7 +29,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.pivot.qvtbase.*;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -107,14 +106,6 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElement(baseModel);
 				if (result == null) result = caseNameable(baseModel);
 				if (result == null) result = caseVisitable(baseModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTbasePackage.DEBUG_TRACE_BACK: {
-				DebugTraceBack debugTraceBack = (DebugTraceBack)theEObject;
-				T result = caseDebugTraceBack(debugTraceBack);
-				if (result == null) result = caseElement(debugTraceBack);
-				if (result == null) result = caseVisitable(debugTraceBack);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -224,21 +215,6 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBaseModel(BaseModel object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Debug Trace Back</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Debug Trace Back</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDebugTraceBack(DebugTraceBack object) {
 		return null;
 	}
 

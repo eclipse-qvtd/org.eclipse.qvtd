@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtbase.*;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -72,7 +71,6 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case QVTbasePackage.BASE_MODEL: return createBaseModel();
-			case QVTbasePackage.DEBUG_TRACE_BACK: return createDebugTraceBack();
 			case QVTbasePackage.FUNCTION: return createFunction();
 			case QVTbasePackage.FUNCTION_PARAMETER: return createFunctionParameter();
 			case QVTbasePackage.PATTERN: return createPattern();
@@ -93,17 +91,6 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	public @NonNull BaseModel createBaseModel() {
 		BaseModelImpl baseModel = new BaseModelImpl();
 		return baseModel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull DebugTraceBack createDebugTraceBack() {
-		DebugTraceBackImpl debugTraceBack = new DebugTraceBackImpl();
-		return debugTraceBack;
 	}
 
 	/**

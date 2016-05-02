@@ -40,15 +40,6 @@ public interface QVTbaseFactory extends EFactory {
 	@NonNull BaseModel createBaseModel();
 
 	/**
-	 * Returns a new object of class '<em>Debug Trace Back</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Debug Trace Back</em>'.
-	 * @generated
-	 */
-	@NonNull DebugTraceBack createDebugTraceBack();
-
-	/**
 	 * Returns a new object of class '<em>Function</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

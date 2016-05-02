@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
-import org.eclipse.qvtd.pivot.qvtbase.DebugTraceBack;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -43,13 +42,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	private EClass baseModelEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass debugTraceBackEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,46 +172,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	@Override
 	public EClass getBaseModel() {
 		return baseModelEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDebugTraceBack() {
-		return debugTraceBackEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDebugTraceBack_OwningTransformation() {
-		return (EReference)debugTraceBackEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDebugTraceBack_Sources() {
-		return (EReference)debugTraceBackEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDebugTraceBack_Target() {
-		return (EReference)debugTraceBackEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -488,16 +440,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformation_OwnedDebugTraceBacks() {
-		return (EReference)transformationEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getTypedModel() {
 		return typedModelEClass;
 	}
@@ -573,11 +515,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		// Create classes and their features
 		baseModelEClass = createEClass(BASE_MODEL);
 
-		debugTraceBackEClass = createEClass(DEBUG_TRACE_BACK);
-		createEReference(debugTraceBackEClass, DEBUG_TRACE_BACK__OWNING_TRANSFORMATION);
-		createEReference(debugTraceBackEClass, DEBUG_TRACE_BACK__SOURCES);
-		createEReference(debugTraceBackEClass, DEBUG_TRACE_BACK__TARGET);
-
 		domainEClass = createEClass(DOMAIN);
 		createEAttribute(domainEClass, DOMAIN__IS_CHECKABLE);
 		createEAttribute(domainEClass, DOMAIN__IS_ENFORCEABLE);
@@ -610,7 +547,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEReference(transformationEClass, TRANSFORMATION__RULE);
 		createEReference(transformationEClass, TRANSFORMATION__EXTENDS);
 		createEReference(transformationEClass, TRANSFORMATION__OWNED_CONTEXT);
-		createEReference(transformationEClass, TRANSFORMATION__OWNED_DEBUG_TRACE_BACKS);
 
 		typedModelEClass = createEClass(TYPED_MODEL);
 		createEReference(typedModelEClass, TYPED_MODEL__TRANSFORMATION);
@@ -651,7 +587,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		// Add supertypes to classes
 		baseModelEClass.getESuperTypes().add(thePivotPackage.getModel());
-		debugTraceBackEClass.getESuperTypes().add(thePivotPackage.getElement());
 		domainEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		domainEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 		functionEClass.getESuperTypes().add(thePivotPackage.getOperation());
@@ -665,11 +600,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(baseModelEClass, BaseModel.class, "BaseModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(debugTraceBackEClass, DebugTraceBack.class, "DebugTraceBack", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDebugTraceBack_OwningTransformation(), this.getTransformation(), this.getTransformation_OwnedDebugTraceBacks(), "owningTransformation", null, 1, 1, DebugTraceBack.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDebugTraceBack_Sources(), thePivotPackage.getElement(), null, "sources", null, 0, -1, DebugTraceBack.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDebugTraceBack_Target(), thePivotPackage.getElement(), null, "target", null, 1, 1, DebugTraceBack.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainEClass, Domain.class, "Domain", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomain_IsCheckable(), ecorePackage.getEBoolean(), "isCheckable", null, 0, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -703,7 +633,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getTransformation_Rule(), this.getRule(), this.getRule_Transformation(), "rule", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTransformation_Extends(), this.getTransformation(), null, "extends", null, 0, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformation_OwnedContext(), thePivotPackage.getVariable(), null, "ownedContext", null, 0, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransformation_OwnedDebugTraceBacks(), this.getDebugTraceBack(), this.getDebugTraceBack_OwningTransformation(), "ownedDebugTraceBacks", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(transformationEClass, this.getFunction(), "getFunction", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);

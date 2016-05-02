@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvtcorebase.analysis;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
