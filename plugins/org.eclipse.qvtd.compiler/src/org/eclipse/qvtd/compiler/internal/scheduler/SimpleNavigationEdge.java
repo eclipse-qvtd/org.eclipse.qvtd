@@ -17,8 +17,8 @@ import org.eclipse.ocl.pivot.Property;
 
 public class SimpleNavigationEdge extends AbstractNavigationEdge implements SimpleEdge, Iterable<@NonNull SimpleEdge>
 {
-	public SimpleNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull SimpleRegion region, @NonNull SimpleNode parentNode, @NonNull Property source2targetProperty, @NonNull SimpleNode childrenNode) {
-		super(edgeRole, region, parentNode, source2targetProperty, childrenNode);
+	public SimpleNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull SimpleRegion region, @NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
+		super(edgeRole, region, sourceNode, source2targetProperty, targetNode);
 	}
 
 	@Override

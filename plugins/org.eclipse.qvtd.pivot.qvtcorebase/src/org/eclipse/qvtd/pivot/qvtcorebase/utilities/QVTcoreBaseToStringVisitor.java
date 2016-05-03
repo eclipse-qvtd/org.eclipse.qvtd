@@ -21,6 +21,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
@@ -101,13 +103,23 @@ public class QVTcoreBaseToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	@Override
-	public String visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
-		safeVisit(propertyAssignment.getSlotExpression());
+	public String visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
+		safeVisit(asNavigationAssignment.getSlotExpression());
 		append(".");
-		appendName(propertyAssignment.getTargetProperty());
+		appendName(QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment));
 		append(" := ");
-		safeVisit(propertyAssignment.getValue());
+		safeVisit(asNavigationAssignment.getValue());
 		return null;
+	}
+
+	@Override
+	public String visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment asNavigationAssignment) {
+		return visitNavigationAssignment(asNavigationAssignment);
+	}
+
+	@Override
+	public String visitPropertyAssignment(@NonNull PropertyAssignment asNavigationAssignment) {
+		return visitNavigationAssignment(asNavigationAssignment);
 	}
 
 	@Override

@@ -10,35 +10,69 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcorebase.utilities;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
+import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
 
-public class QVTcoreBasePrettyPrintVisitor extends QVTbasePrettyPrintVisitor implements QVTcoreBaseVisitor<Object>
+public abstract class QVTcoreBasePrettyPrintVisitor extends QVTbasePrettyPrintVisitor implements QVTcoreBaseVisitor<Object>
 {	
 	public QVTcoreBasePrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}
 
+	protected void doArea(@NonNull Area pArea) {
+		context.append(" (");
+		safeVisit(pArea.getGuardPattern());
+		context.append(")\n{");
+		safeVisit(pArea.getBottomPattern());
+		context.append("}\n");
+	}
+
 	@Override
 	public Object visitAssignment(@NonNull Assignment object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Object visitBottomPattern(@NonNull BottomPattern object) {
-		// TODO Auto-generated method stub
+	public Object visitBottomPattern(@NonNull BottomPattern pBottomPattern) {
+		for (RealizedVariable pRealizedVariable : pBottomPattern.getRealizedVariable()) {
+			safeVisit(pRealizedVariable);
+		}
+		for (Variable pVariable : pBottomPattern.getVariable()) {
+			safeVisit(pVariable);
+		}
+		context.append(" |");
+		List<Predicate> predicates = pBottomPattern.getPredicate();
+		if (predicates.size() > 0) {
+			context.append("\n");
+			for (Predicate pPredicate : predicates) {
+				safeVisit(pPredicate);
+			}
+		}
+		List<Assignment> assignments = pBottomPattern.getAssignment();
+		if (assignments.size() > 0) {
+			context.append("\n");
+			for (Assignment pAssignment : assignments) {
+				safeVisit(pAssignment);
+			}
+		}
 		return null;
 	}
 
@@ -61,25 +95,61 @@ public class QVTcoreBasePrettyPrintVisitor extends QVTbasePrettyPrintVisitor imp
 	}
 
 	@Override
-	public Object visitGuardPattern(@NonNull GuardPattern object) {
-		// TODO Auto-generated method stub
+	public Object visitGuardPattern(@NonNull GuardPattern pGuardPattern) {
+		for (Variable pVariable : pGuardPattern.getVariable()) {
+			safeVisit(pVariable);
+		}
+		context.append(" |");
+		List<Predicate> predicates = pGuardPattern.getPredicate();
+		if (predicates.size() > 0) {
+			context.append("\n");
+			for (Predicate pPredicate : predicates) {
+				safeVisit(pPredicate);
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public Object visitPropertyAssignment(@NonNull PropertyAssignment object) {
-		// TODO Auto-generated method stub
+	public Object visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
+		safeVisit(asNavigationAssignment.getSlotExpression());
+		context.append(".");
+		context.appendName(QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment));
+		context.append(" := ");
+		safeVisit(asNavigationAssignment.getValue());
+		context.append(";\n");
 		return null;
 	}
 
 	@Override
-	public Object visitRealizedVariable(@NonNull RealizedVariable object) {
-		return visitVariable(object);
+	public Object visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment asNavigationAssignment) {
+		return visitNavigationAssignment(asNavigationAssignment);
 	}
 
 	@Override
-	public Object visitVariableAssignment(@NonNull VariableAssignment object) {
-		// TODO Auto-generated method stub
+	public Object visitPredicate(@NonNull Predicate pPredicate) {
+		safeVisit(pPredicate.getConditionExpression());
+		return null;
+	}
+
+	@Override
+	public Object visitPropertyAssignment(@NonNull PropertyAssignment asNavigationAssignment) {
+		return visitNavigationAssignment(asNavigationAssignment);
+	}
+
+	@Override
+	public Object visitRealizedVariable(@NonNull RealizedVariable pRealizedVariable) {
+		context.append("realize ");
+		visitVariable(pRealizedVariable);
+		return null;
+	}
+
+	@Override
+	public Object visitVariableAssignment(@NonNull VariableAssignment pVariableAssignment) {
+		context.appendName(pVariableAssignment.getTargetVariable());
+		context.append(" := ");
+		safeVisit(pVariableAssignment.getValue());
+		context.append(";\n");
 		return null;
 	}
 }

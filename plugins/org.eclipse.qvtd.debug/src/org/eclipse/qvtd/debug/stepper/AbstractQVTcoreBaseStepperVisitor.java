@@ -59,8 +59,16 @@ public abstract class AbstractQVTcoreBaseStepperVisitor
 		return visitCorePattern(object);
 	}
 
-	public @Nullable IStepper visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
+	public @Nullable IStepper visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull NavigationAssignment object) {
 		return visitAssignment(object);
+	}
+
+	public @Nullable IStepper visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull OppositePropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	public @Nullable IStepper visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
+		return visitNavigationAssignment(object);
 	}
 
 	public @Nullable IStepper visitRealizedVariable(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull RealizedVariable object) {

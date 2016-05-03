@@ -16,6 +16,8 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
@@ -29,12 +31,21 @@ public class QVTcoreBaseHelper extends QVTbaseHelper
 		super(environmentFactory);
 	}
 
-	public @NonNull PropertyAssignment createPropertyAssignment(@NonNull OCLExpression asSlotExpression, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression) {
-		PropertyAssignment asPropertyAssignment = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
-		asPropertyAssignment.setSlotExpression(asSlotExpression);
-		asPropertyAssignment.setTargetProperty(asProperty);
-		asPropertyAssignment.setValue(asValueExpression);
-		return asPropertyAssignment;
+	public @NonNull NavigationAssignment createNavigationAssignment(@NonNull OCLExpression asSlotExpression, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression) {
+		NavigationAssignment asNavigationAssignment;
+		if (asProperty.isIsImplicit()) {
+			OppositePropertyAssignment asPropertyAssignment = QVTcoreBaseFactory.eINSTANCE.createOppositePropertyAssignment();
+			asPropertyAssignment.setTargetProperty(asProperty.getOpposite());
+			asNavigationAssignment = asPropertyAssignment;
+		}
+		else {
+			PropertyAssignment asPropertyAssignment = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
+			asPropertyAssignment.setTargetProperty(asProperty);
+			asNavigationAssignment = asPropertyAssignment;
+		}
+		asNavigationAssignment.setSlotExpression(asSlotExpression);
+		asNavigationAssignment.setValue(asValueExpression);
+		return asNavigationAssignment;
 	}
 
 	public @NonNull VariableAssignment createVariableAssignment(@NonNull Variable asVariable, @NonNull OCLExpression asValueExpression) {

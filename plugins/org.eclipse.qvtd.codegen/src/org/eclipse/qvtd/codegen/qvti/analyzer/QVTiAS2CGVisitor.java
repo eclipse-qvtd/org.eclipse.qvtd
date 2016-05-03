@@ -104,6 +104,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
@@ -800,6 +802,67 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
+	public @Nullable CGNamedElement visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
+		Transformation asTransformation = ClassUtil.nonNullModel(QVTbaseUtil.getContainingTransformation(asNavigationAssignment));
+		QVTiTransformationAnalysis transformationAnalysis = analyzer.getCodeGenerator().getTransformationAnalysis(asTransformation);
+		Integer cacheIndex = transformationAnalysis.getCacheIndex(asNavigationAssignment);
+		if (cacheIndex != null) {
+//			Property asProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
+			CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
+			setAst(cgPropertyAssignment, asNavigationAssignment);
+			cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, asNavigationAssignment.getSlotExpression()));
+			Property asProperty = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
+			cgPropertyAssignment.setReferredProperty(asProperty);
+//			cgPredicate.setName(asPredicate.getName());
+			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
+//			cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asNavigationAssignment.getValue()));
+			EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();
+			if (eStructuralFeature != null) {
+				try {
+					genModelHelper.getGetAccessor(eStructuralFeature);
+					cgPropertyAssignment.setEStructuralFeature(eStructuralFeature);
+				} catch (GenModelException e) {
+					System.out.println("Missing getAccessor for " + eStructuralFeature + "ignored.");
+				}
+			}
+			return cgPropertyAssignment;
+		}
+		else {
+			Property asTargetProperty = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
+			LibraryProperty libraryProperty = metamodelManager.getImplementation(asNavigationAssignment, null, asTargetProperty);
+			CGPropertyAssignment cgPropertyAssignment = null;
+			if (isEcoreProperty(libraryProperty)) {
+				EStructuralFeature eStructuralFeature = (EStructuralFeature) asTargetProperty.getESObject();
+				if (eStructuralFeature != null) {
+					try {
+						genModelHelper.getGetAccessor(eStructuralFeature);
+						CGEcorePropertyAssignment cgEcorePropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGEcorePropertyAssignment();
+						cgEcorePropertyAssignment.setEStructuralFeature(eStructuralFeature);
+						cgPropertyAssignment = cgEcorePropertyAssignment;
+					} catch (GenModelException e) {
+						System.out.println("Missing getAccessor for " + eStructuralFeature + "ignored.");
+					}
+				}
+			}
+			if (cgPropertyAssignment == null) {
+				cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
+			}
+			setAst(cgPropertyAssignment, asNavigationAssignment);
+			cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, asNavigationAssignment.getSlotExpression()));
+			cgPropertyAssignment.setReferredProperty(asTargetProperty);
+	//		cgPredicate.setName(asPredicate.getName());
+			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
+	//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asNavigationAssignment.getValue()));
+	
+			CGExecutorProperty cgExecutorProperty = context.createExecutorProperty(asTargetProperty);
+			cgPropertyAssignment.setExecutorProperty(cgExecutorProperty);
+			return cgPropertyAssignment;
+		}
+	}
+
+	@Override
 	public @Nullable CGNamedElement visitPattern(@NonNull Pattern object) {
 		return visiting(object);
 	}
@@ -844,66 +907,13 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	} */
 
 	@Override
+	public @Nullable CGNamedElement visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment asPropertyAssignment) {
+		return visitNavigationAssignment(asPropertyAssignment);
+	}
+
+	@Override
 	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
-		Transformation asTransformation = ClassUtil.nonNullModel(QVTbaseUtil.getContainingTransformation(asPropertyAssignment));
-		QVTiTransformationAnalysis transformationAnalysis = analyzer.getCodeGenerator().getTransformationAnalysis(asTransformation);
-		Integer cacheIndex = transformationAnalysis.getCacheIndex(asPropertyAssignment);
-		if (cacheIndex != null) {
-//			Property asProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
-			CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
-			setAst(cgPropertyAssignment, asPropertyAssignment);
-			cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, asPropertyAssignment.getSlotExpression()));
-			Property asProperty = asPropertyAssignment.getTargetProperty();
-			cgPropertyAssignment.setReferredProperty(asProperty);
-//			cgPredicate.setName(asPredicate.getName());
-			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
-//			cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
-			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asPropertyAssignment.getValue()));
-			EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();
-			if (eStructuralFeature != null) {
-				try {
-					genModelHelper.getGetAccessor(eStructuralFeature);
-					cgPropertyAssignment.setEStructuralFeature(eStructuralFeature);
-				} catch (GenModelException e) {
-					System.out.println("Missing getAccessor for " + eStructuralFeature + "ignored.");
-				}
-			}
-			return cgPropertyAssignment;
-		}
-		else {
-			Property asTargetProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
-			LibraryProperty libraryProperty = metamodelManager.getImplementation(asPropertyAssignment, null, asTargetProperty);
-			CGPropertyAssignment cgPropertyAssignment = null;
-			if (isEcoreProperty(libraryProperty)) {
-				EStructuralFeature eStructuralFeature = (EStructuralFeature) asTargetProperty.getESObject();
-				if (eStructuralFeature != null) {
-					try {
-						genModelHelper.getGetAccessor(eStructuralFeature);
-						CGEcorePropertyAssignment cgEcorePropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGEcorePropertyAssignment();
-						cgEcorePropertyAssignment.setEStructuralFeature(eStructuralFeature);
-						cgPropertyAssignment = cgEcorePropertyAssignment;
-					} catch (GenModelException e) {
-						System.out.println("Missing getAccessor for " + eStructuralFeature + "ignored.");
-					}
-				}
-			}
-			if (cgPropertyAssignment == null) {
-				cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
-			}
-			setAst(cgPropertyAssignment, asPropertyAssignment);
-			cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, asPropertyAssignment.getSlotExpression()));
-			cgPropertyAssignment.setReferredProperty(asTargetProperty);
-	//		cgPredicate.setName(asPredicate.getName());
-			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
-	//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
-			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asPropertyAssignment.getValue()));
-	
-			CGExecutorProperty cgExecutorProperty = context.createExecutorProperty(asTargetProperty);
-			cgPropertyAssignment.setExecutorProperty(cgExecutorProperty);
-			
-			
-			return cgPropertyAssignment;
-		}
+		return visitNavigationAssignment(asPropertyAssignment);
 	}
 
 	@Override

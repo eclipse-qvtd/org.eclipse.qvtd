@@ -56,8 +56,11 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 
 public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@NonNull SimpleNode, @NonNull SimpleMappingRegion>
@@ -284,8 +287,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Nodes.OPERATION.createSimpleNode(context, name, typedElement, argNodes);
 	}
 
-	protected @NonNull SimpleNode createPredicatedClassNode(@NonNull SimpleNode parentNode, @NonNull PropertyAssignment propertyAssignment) {
-		return Nodes.AttributeNodeRoleFactory.PREDICATED_CLASS.createSimpleNode(context, parentNode, propertyAssignment);
+	protected @NonNull SimpleNode createPredicatedClassNode(@NonNull SimpleNode parentNode, @NonNull NavigationAssignment navigationAssignment) {
+		return Nodes.AttributeNodeRoleFactory.PREDICATED_CLASS.createSimpleNode(context, parentNode, navigationAssignment);
 	}
 
 	protected @NonNull SimpleNode createPredicatedClassNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -515,6 +518,51 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	@Override
+	public @NonNull SimpleNode visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
+		Property property = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
+		assert property != null;
+		SimpleNode slotNode = analyze(asNavigationAssignment.getSlotExpression());
+		assert slotNode.isClassNode();
+		SimpleNode valueNode = analyze(asNavigationAssignment.getValue());
+//		if (!valueNode.isClassNode() && !valueNode.isNull()) {
+		if (valueNode.isExpression()) {
+			SimpleNode computedValueNode = valueNode;
+			Type type = property.getType();
+			if (type instanceof DataType) {
+				valueNode = context.getAssignedAttributeNode(slotNode, property);
+				createRealizedArgumentEdge(computedValueNode, null, valueNode);
+			}
+			else {
+				String name = property.getName();
+				assert (name != null) && (type != null);
+				valueNode = createPredicatedClassNode(slotNode, asNavigationAssignment);
+				createArgumentEdge(computedValueNode, null, valueNode);
+			}
+		}
+		SimpleNavigationEdge navigationEdge = slotNode.getNavigationEdge(property);
+		CompleteClass valueCompleteClass = valueNode.getCompleteClass();
+		Type propertyType = ClassUtil.nonNullState(property.getType());
+		CompleteClass targetCompleteClass = scheduler.getEnvironmentFactory().getCompleteModel().getCompleteClass(propertyType);
+		if (!valueCompleteClass.conformsTo(targetCompleteClass)) {
+			if (targetCompleteClass.getPrimaryClass().getESObject() != EcorePackage.Literals.EOBJECT) {		// FIXME fudge for Adolfo's suspect tests
+				// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm/QVTp
+				if (!valueCompleteClass.conformsTo(targetCompleteClass)) {
+					throw new IllegalStateException("Incompatible types for " + asNavigationAssignment);
+				}
+			}
+		}
+		context.addAssignmentEdge(slotNode, property, valueNode);
+		Property oppositeProperty = property.getOpposite();
+		if (valueNode.isClassNode() && (oppositeProperty != null) && !oppositeProperty.isIsMany()) {
+			context.addAssignmentEdge(valueNode, oppositeProperty, slotNode);
+		}
+		if (navigationEdge != null) {
+			context.mergeInto(navigationEdge.getTarget(), valueNode);
+		}
+		return slotNode;
+	}
+
+	@Override
 	public @NonNull SimpleNode visitNavigationCallExp(@NonNull NavigationCallExp navigationCallExp) {
 		assert !navigationCallExp.isIsSafe();
 		Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
@@ -642,48 +690,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	@Override
-	public @NonNull SimpleNode visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
-		Property property = propertyAssignment.getTargetProperty();
-		assert property != null;
-		SimpleNode slotNode = analyze(propertyAssignment.getSlotExpression());
-		assert slotNode.isClassNode();
-		SimpleNode valueNode = analyze(propertyAssignment.getValue());
-//		if (!valueNode.isClassNode() && !valueNode.isNull()) {
-		if (valueNode.isExpression()) {
-			SimpleNode computedValueNode = valueNode;
-			Type type = property.getType();
-			if (type instanceof DataType) {
-				valueNode = context.getAssignedAttributeNode(slotNode, property);
-				createRealizedArgumentEdge(computedValueNode, null, valueNode);
-			}
-			else {
-				String name = property.getName();
-				assert (name != null) && (type != null);
-				valueNode = createPredicatedClassNode(slotNode, propertyAssignment);
-				createArgumentEdge(computedValueNode, null, valueNode);
-			}
-		}
-		SimpleNavigationEdge navigationEdge = slotNode.getNavigationEdge(property);
-		CompleteClass valueCompleteClass = valueNode.getCompleteClass();
-		Type propertyType = ClassUtil.nonNullState(property.getType());
-		CompleteClass targetCompleteClass = scheduler.getEnvironmentFactory().getCompleteModel().getCompleteClass(propertyType);
-		if (!valueCompleteClass.conformsTo(targetCompleteClass)) {
-			if (targetCompleteClass.getPrimaryClass().getESObject() != EcorePackage.Literals.EOBJECT) {		// FIXME fudge for Adolfo's suspect tests
-				// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm/QVTp
-				if (!valueCompleteClass.conformsTo(targetCompleteClass)) {
-					throw new IllegalStateException("Incompatible types for " + propertyAssignment);
-				}
-			}
-		}
-		context.addAssignmentEdge(slotNode, property, valueNode);
-		Property oppositeProperty = property.getOpposite();
-		if (valueNode.isClassNode() && (oppositeProperty != null) && !oppositeProperty.isIsMany()) {
-			context.addAssignmentEdge(valueNode, oppositeProperty, slotNode);
-		}
-		if (navigationEdge != null) {
-			context.mergeInto(navigationEdge.getTarget(), valueNode);
-		}
-		return slotNode;
+	public @NonNull SimpleNode visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment asNavigationAssignment) {
+		return visitNavigationAssignment(asNavigationAssignment);
+	}
+
+	@Override
+	public @NonNull SimpleNode visitPropertyAssignment(@NonNull PropertyAssignment asNavigationAssignment) {
+		return visitNavigationAssignment(asNavigationAssignment);
 	}
 
 	@Override

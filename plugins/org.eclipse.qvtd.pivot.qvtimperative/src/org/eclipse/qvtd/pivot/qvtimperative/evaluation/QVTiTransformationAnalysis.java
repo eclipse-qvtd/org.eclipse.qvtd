@@ -49,6 +49,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
@@ -96,7 +97,7 @@ public class QVTiTransformationAnalysis
 	/**
 	 * Map from propertyAssignment to the cache index of an un-navigable lookup cache to be updated by the assignment.
 	 */
-	private final @NonNull Map<PropertyAssignment, Integer> propertyAssignment2cacheIndex = new HashMap<PropertyAssignment, Integer>();
+	private final @NonNull Map<NavigationAssignment, Integer> navigationAssignment2cacheIndex = new HashMap<NavigationAssignment, Integer>();
 
 	/**
 	 * Map from oppositePropertyCallExp to the cache index identifying the relevant un-navigable lookup cache.
@@ -374,7 +375,7 @@ public class QVTiTransformationAnalysis
 			if (navigableProperty != null) {
 				Integer cacheIndex = property2cacheIndex.get(navigableProperty);
 				if (cacheIndex != null) { 		// No need to set cacheIndex if it is never accessed by an OppositePropertyCallExp
-					propertyAssignment2cacheIndex.put(propertyAssignment, cacheIndex);
+					navigationAssignment2cacheIndex.put(propertyAssignment, cacheIndex);
 				}
 			}
 		}
@@ -390,8 +391,8 @@ public class QVTiTransformationAnalysis
 		return oppositePropertyCallExp2cacheIndex.get(oppositePropertyCallExp);
 	}
 
-	public @Nullable Integer getCacheIndex(@NonNull PropertyAssignment propertyAssignment) {
-		return propertyAssignment2cacheIndex.get(propertyAssignment);
+	public @Nullable Integer getCacheIndex(@NonNull NavigationAssignment navigationAssignment) {
+		return navigationAssignment2cacheIndex.get(navigationAssignment);
 	}
 
 	public int getCacheIndexes() {
@@ -600,9 +601,9 @@ public class QVTiTransformationAnalysis
 		return false;
 	}
 
-	public boolean isHazardousWrite(@NonNull Mapping asMapping, @NonNull PropertyAssignment asPropertyAssignment) {
-		Property asProperty = asPropertyAssignment.getTargetProperty();
-		OCLExpression asSource = asPropertyAssignment.getSlotExpression();
+	public boolean isHazardousWrite(@NonNull Mapping asMapping, @NonNull NavigationAssignment asNavigationAssignment) {
+		Property asProperty = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
+		OCLExpression asSource = asNavigationAssignment.getSlotExpression();
 		DomainUsage domainUsage = getDomainUsageAnalysis().basicGetUsage(asSource);
 		if (domainUsage != null) {
 			TypedModel typedModel = domainUsage.getTypedModel(asSource);
@@ -629,12 +630,7 @@ public class QVTiTransformationAnalysis
 			}
 		}
 		if (!hasPropertyAccessDeclarations()) {		// See Bug 481840
-			if (asProperty != null) {
-				return isHazardous(asProperty);
-			}
-			else {
-				return false;
-			}
+			return isHazardous(asProperty);
 		}
 		return false;
 	}

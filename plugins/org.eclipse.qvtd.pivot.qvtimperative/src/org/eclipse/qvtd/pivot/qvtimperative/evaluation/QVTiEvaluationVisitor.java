@@ -55,9 +55,12 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -334,6 +337,40 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	public @Nullable Object visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);	// MappingStatement is abstract
 	}
+    
+    @Override
+	public @Nullable Object visitNavigationAssignment(@NonNull NavigationAssignment navigationAssignment) {
+		Object slotObject = navigationAssignment.getSlotExpression().accept(undecoratedVisitor);
+		if (slotObject instanceof EObject) {
+			Integer childKey = null;
+			try {
+				Object boxedValue = navigationAssignment.getValue().accept(undecoratedVisitor);
+				Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+				Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
+				Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);
+				Property oppositeProperty = targetProperty.getOpposite();
+				if (oppositeProperty != null) {
+					Type type = oppositeProperty.getType();
+					if (type instanceof CollectionType) {
+						boolean isOrdered = ((CollectionType)type).isOrdered();
+						if (isOrdered) {
+							
+						}
+					}
+				}
+				executor.internalExecuteNavigationAssignment(navigationAssignment, slotObject, ecoreValue, childKey);
+				return null;
+			}
+			catch (InvocationFailedException e) {
+				executor.internalExecuteNavigationAssignment(navigationAssignment, slotObject, e, childKey);
+//				throw e;
+			}
+		} else {
+			throw new IllegalArgumentException("Unsupported " + navigationAssignment.eClass().getName()
+				+ " specification. The assigment slot expression evaluates to non-ecore value");
+		}
+        return true;
+	}
 
 	@Override
 	public Object visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
@@ -358,6 +395,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		else {
 			return super.visitOperationCallExp(operationCallExp);
 		}
+	}
+    
+    @Override
+	public @Nullable Object visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment navigationAssignment) {
+    	return visitNavigationAssignment(navigationAssignment);
 	}
 
 /*	@Override
@@ -403,37 +445,8 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
     
     @Override
-	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
-		Object slotObject = propertyAssignment.getSlotExpression().accept(undecoratedVisitor);
-		if (slotObject instanceof EObject) {
-			Integer childKey = null;
-			try {
-				Object boxedValue = propertyAssignment.getValue().accept(undecoratedVisitor);
-				Property targetProperty = propertyAssignment.getTargetProperty();
-				Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
-				Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);
-				Property oppositeProperty = targetProperty.getOpposite();
-				if (oppositeProperty != null) {
-					Type type = oppositeProperty.getType();
-					if (type instanceof CollectionType) {
-						boolean isOrdered = ((CollectionType)type).isOrdered();
-						if (isOrdered) {
-							
-						}
-					}
-				}
-				executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, ecoreValue, childKey);
-				return null;
-			}
-			catch (InvocationFailedException e) {
-				executor.internalExecutePropertyAssignment(propertyAssignment, slotObject, e, childKey);
-//				throw e;
-			}
-		} else {
-			throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-				+ " specification. The assigment slot expression evaluates to non-ecore value");
-		}
-        return true;
+	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment navigationAssignment) {
+    	return visitNavigationAssignment(navigationAssignment);
 	}
 
     @Override

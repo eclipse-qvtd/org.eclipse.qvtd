@@ -28,8 +28,9 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -208,20 +209,20 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	}
 
 	@Override
-	public void internalExecutePropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @NonNull Object sourceObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
-		super.internalExecutePropertyAssignment(propertyAssignment, sourceObject, ecoreValue, childKey);
+	public void internalExecuteNavigationAssignment(@NonNull NavigationAssignment navigationAssignment, @NonNull Object sourceObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
+		super.internalExecuteNavigationAssignment(navigationAssignment, sourceObject, ecoreValue, childKey);
 		if (mode == Mode.LAZY) {
-			Mapping asMapping = QVTimperativeUtil.getContainingMapping(propertyAssignment);
+			Mapping asMapping = QVTimperativeUtil.getContainingMapping(navigationAssignment);
 			assert asMapping != null;
-			if (transformationAnalysis.isHazardousWrite(asMapping, propertyAssignment)) {
-				Property targetProperty = propertyAssignment.getTargetProperty();
+			if (transformationAnalysis.isHazardousWrite(asMapping, navigationAssignment)) {
+				Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
 				assert targetProperty != null;
 				EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
 				objectManager.assigned(sourceObject, eFeature, ecoreValue, childKey);
 			}
 		}
 		else {
-			Property targetProperty = propertyAssignment.getTargetProperty();
+			Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
 			assert targetProperty != null;
 			EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
 			InterpretedInvocation currentInvocation2 = currentInvocation;

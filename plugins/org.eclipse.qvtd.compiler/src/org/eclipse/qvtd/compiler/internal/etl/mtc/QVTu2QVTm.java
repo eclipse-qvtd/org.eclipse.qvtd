@@ -50,6 +50,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
@@ -137,8 +138,8 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		private final @NonNull List<@NonNull Predicate> guardPredicates = new ArrayList<@NonNull Predicate>();
 		private final @NonNull List<@NonNull Predicate> bottomPredicates = new ArrayList<@NonNull Predicate>();
 		private @Nullable LinkedHashMap<@NonNull String, @NonNull MergedVariable> variableName2mergedVariables = null;
-		private @Nullable LinkedHashMap<@NonNull String, @NonNull List<@NonNull PropertyAssignment>> variableName_property2propertyAssignments = null;
-		private @Nullable List<@NonNull PropertyAssignment> propertyAssignmentsAsPredicates = null;
+		private @Nullable LinkedHashMap<@NonNull String, @NonNull List<@NonNull NavigationAssignment>> variableName_property2navigationAssignments = null;
+		private @Nullable List<@NonNull NavigationAssignment> navigationAssignmentsAsPredicates = null;
 		
 		protected MergedArea(@NonNull CreateVisitor createVisitor) {
 			this.createVisitor = createVisitor;
@@ -210,32 +211,32 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 					MergedVariable mergedVariable = getMergedVariable(name);
 					mergedVariable.addAssignment(vaIn);
 				}
-				else if (aIn instanceof PropertyAssignment) {
-					PropertyAssignment paIn = (PropertyAssignment)aIn;
+				else if (aIn instanceof NavigationAssignment) {
+					NavigationAssignment paIn = (NavigationAssignment)aIn;
 					if (!asAssignment) {
-						List<@NonNull PropertyAssignment> propertyAssignmentsAsPredicates2 = propertyAssignmentsAsPredicates;
-						if (propertyAssignmentsAsPredicates2 == null) {
-							propertyAssignmentsAsPredicates2 = propertyAssignmentsAsPredicates = new ArrayList<@NonNull PropertyAssignment>();
+						List<@NonNull NavigationAssignment> navigationAssignmentsAsPredicates2 = navigationAssignmentsAsPredicates;
+						if (navigationAssignmentsAsPredicates2 == null) {
+							navigationAssignmentsAsPredicates2 = navigationAssignmentsAsPredicates = new ArrayList<@NonNull NavigationAssignment>();
 						}
-						propertyAssignmentsAsPredicates2.add(paIn);
+						navigationAssignmentsAsPredicates2.add(paIn);
 					}
 					else {
 						OCLExpression eIn = paIn.getSlotExpression();
-						Property targetProperty = paIn.getTargetProperty();
-						if ((eIn instanceof VariableExp) && (targetProperty != null)) {
+						Property targetProperty = QVTcoreBaseUtil.getTargetProperty(paIn);
+						if (eIn instanceof VariableExp) {
 							VariableDeclaration vIn = ((VariableExp)eIn).getReferredVariable();
 							String key = vIn.getName() + "%" + targetProperty.toString();
 							assert key != null;
-							LinkedHashMap<@NonNull String, @NonNull List<@NonNull PropertyAssignment>> variableName_property2propertyAssignments2 = variableName_property2propertyAssignments;
-							if (variableName_property2propertyAssignments2 == null) {
-								variableName_property2propertyAssignments2 = variableName_property2propertyAssignments = new LinkedHashMap<@NonNull String, @NonNull List<@NonNull PropertyAssignment>>();
+							LinkedHashMap<@NonNull String, @NonNull List<@NonNull NavigationAssignment>> variableName_property2navigationAssignments2 = variableName_property2navigationAssignments;
+							if (variableName_property2navigationAssignments2 == null) {
+								variableName_property2navigationAssignments2 = variableName_property2navigationAssignments = new LinkedHashMap<@NonNull String, @NonNull List<@NonNull NavigationAssignment>>();
 							}
-							List<@NonNull PropertyAssignment> propertyAssignments = variableName_property2propertyAssignments2.get(key);
-							if (propertyAssignments == null) {
-								propertyAssignments = new ArrayList<@NonNull PropertyAssignment>();
-								variableName_property2propertyAssignments2.put(key, propertyAssignments);
+							List<@NonNull NavigationAssignment> navigationAssignments = variableName_property2navigationAssignments2.get(key);
+							if (navigationAssignments == null) {
+								navigationAssignments = new ArrayList<@NonNull NavigationAssignment>();
+								variableName_property2navigationAssignments2.put(key, navigationAssignments);
 							}
-							propertyAssignments.add(paIn);
+							navigationAssignments.add(paIn);
 						}
 					}
 				}
@@ -288,8 +289,8 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			GuardPattern mGuardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
 			mArea.setGuardPattern(mGuardPattern);
 			createVisitor.createAll(guardPredicates, mGuardPattern.getPredicate());
-			if (propertyAssignmentsAsPredicates != null) {
-				for (@NonNull PropertyAssignment paIn : propertyAssignmentsAsPredicates) {
+			if (navigationAssignmentsAsPredicates != null) {
+				for (@NonNull NavigationAssignment paIn : navigationAssignmentsAsPredicates) {
 					@NonNull Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
 					createVisitor.getContext().addTrace(paIn, pOut);
 					// The condition expression is copied during update once replacement variables exist.
@@ -301,7 +302,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			BottomPattern mBottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
 			mArea.setBottomPattern(mBottomPattern);
 			createVisitor.createAll(bottomPredicates, mBottomPattern.getPredicate());
-			synthesizePropertyAssignments(mBottomPattern.getAssignment());
+			synthesizeNavigationAssignments(mBottomPattern.getAssignment());
 			if (variableName2mergedVariables != null) {
 				for (@NonNull MergedVariable mergedVariable : variableName2mergedVariables.values()) {		// FIXME Change to alphabetical sort
 					mergedVariable.synthesize(mArea);
@@ -325,18 +326,18 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			}
 		}
 
-		private void synthesizePropertyAssignment(@NonNull List<@NonNull PropertyAssignment> propertyAssignments, @NonNull List<Assignment> uAssignments) {
-			for (@NonNull PropertyAssignment propertyAssignment : propertyAssignments) {
-				uAssignments.add(createVisitor.create(propertyAssignment));	// FIXME merge
+		private void synthesizeNavigationAssignment(@NonNull List<@NonNull NavigationAssignment> navigationAssignments, @NonNull List<Assignment> uAssignments) {
+			for (@NonNull NavigationAssignment navigationAssignment : navigationAssignments) {
+				uAssignments.add(createVisitor.create(navigationAssignment));	// FIXME merge
 				// break;
 			}
 		}
 
-		private void synthesizePropertyAssignments(@NonNull List</*@NoonNull*/ Assignment> uAssignments) {
-			LinkedHashMap<@NonNull String, @NonNull List<@NonNull PropertyAssignment>> variableName_property2propertyAssignments2 = variableName_property2propertyAssignments;
-			if (variableName_property2propertyAssignments2 != null) {
-				for (@NonNull List<@NonNull PropertyAssignment> propertyAssignments : variableName_property2propertyAssignments2.values()) {		// FIXME Change to alphabetical sort
-					synthesizePropertyAssignment(propertyAssignments, uAssignments);
+		private void synthesizeNavigationAssignments(@NonNull List</*@NoonNull*/ Assignment> uAssignments) {
+			LinkedHashMap<@NonNull String, @NonNull List<@NonNull NavigationAssignment>> variableName_property2navigationAssignments2 = variableName_property2navigationAssignments;
+			if (variableName_property2navigationAssignments2 != null) {
+				for (@NonNull List<@NonNull NavigationAssignment> navigationAssignments : variableName_property2navigationAssignments2.values()) {		// FIXME Change to alphabetical sort
+					synthesizeNavigationAssignment(navigationAssignments, uAssignments);
 				}
 			}
 		}

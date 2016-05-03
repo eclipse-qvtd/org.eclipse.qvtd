@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -33,6 +34,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 
 public class QVTcoreBaseUtil extends QVTbaseUtil
 {
@@ -88,6 +92,17 @@ public class QVTcoreBaseUtil extends QVTbaseUtil
 
 	public static @Nullable CoreDomain getDomain(@NonNull AbstractMapping rule, @NonNull TypedModel typedModel) {
 		return (CoreDomain)getDomain((Rule)rule, typedModel);
+	}
+
+	public static @NonNull Property getTargetProperty(@NonNull NavigationAssignment asNavigationAssignment) {
+		if (asNavigationAssignment instanceof PropertyAssignment) {
+			return ClassUtil.nonNullState(((PropertyAssignment)asNavigationAssignment).getTargetProperty());
+		}
+		else if (asNavigationAssignment instanceof OppositePropertyAssignment) {
+			Property referredProperty = ClassUtil.nonNullState(((OppositePropertyAssignment)asNavigationAssignment).getTargetProperty());
+			return ClassUtil.nonNullState(referredProperty.getOpposite());
+		}
+		throw new UnsupportedOperationException("Unsupported " + asNavigationAssignment.eClass().getName());
 	}
 
 	public static @Nullable TypedModel getTypedModel(@Nullable Area area) {

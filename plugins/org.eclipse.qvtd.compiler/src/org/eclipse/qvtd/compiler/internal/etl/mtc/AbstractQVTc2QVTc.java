@@ -63,11 +63,14 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
 /**
  * AbstractQVTc2QVTc provides shared functionality for steps in the QVTC/QVTu/QVTm chain. 
@@ -260,6 +263,23 @@ public abstract class AbstractQVTc2QVTc
 		}
 
 		@Override
+		public final @Nullable Element visitNavigationAssignment(@NonNull NavigationAssignment object) {			// Override must be of derived classes
+			return visiting(object);
+		}
+
+		@Override
+		public @Nullable Element visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment paIn) {
+			OppositePropertyAssignment paOut = QVTcoreBaseFactory.eINSTANCE.createOppositePropertyAssignment();
+			context.addTrace(paIn, paOut);
+			if (paIn.eIsSet(QVTcoreBasePackage.Literals.ASSIGNMENT__IS_DEFAULT)) {
+				paOut.setIsDefault(paIn.isIsDefault());
+			}
+			paOut.setTargetProperty(paIn.getTargetProperty());
+			createAll(paIn.getOwnedComments(), paOut.getOwnedComments());
+	        return paOut;
+		}
+
+		@Override
 		public @Nullable Element visitPackage(@NonNull Package pIn) {
 			if (PivotConstants.ORPHANAGE_URI.equals(pIn.getURI())) {
 				return null;
@@ -383,9 +403,9 @@ public abstract class AbstractQVTc2QVTc
 			}
 		}
 
-		protected Object convertToPredicate(@NonNull PropertyAssignment paIn, @NonNull Predicate pOut) {
+		protected Object convertToPredicate(@NonNull NavigationAssignment paIn, @NonNull Predicate pOut) {
 			OCLExpression slotExpression = copy(paIn.getSlotExpression());
-			Property targetProperty = paIn.getTargetProperty();
+			Property targetProperty = QVTcoreBaseUtil.getTargetProperty(paIn);
 			assert (slotExpression != null) && (targetProperty != null);
 			OCLExpression valueExpression = copy(paIn.getValue());
 			NavigationCallExp propertyCallExp = context.getHelper().createNavigationCallExp(slotExpression, targetProperty);
@@ -400,7 +420,7 @@ public abstract class AbstractQVTc2QVTc
 			return null;
 		}
 
-		protected @Nullable Object convertToVariableAssignment(@NonNull PropertyAssignment paIn, @NonNull VariableAssignment vaOut) {
+		protected @Nullable Object convertToVariableAssignment(@NonNull NavigationAssignment paIn, @NonNull VariableAssignment vaOut) {
 			OCLExpression veIn = paIn.getValue();
 			assert veIn instanceof VariableExp;
 			VariableDeclaration vIn = ((VariableExp)veIn).getReferredVariable();
@@ -408,7 +428,7 @@ public abstract class AbstractQVTc2QVTc
 			Variable vOut = context.equivalentTarget((Variable)vIn);
 			vaOut.setTargetVariable(vOut);
 			OCLExpression slotExpression = copy(paIn.getSlotExpression());
-			Property targetProperty = paIn.getTargetProperty();
+			Property targetProperty = QVTcoreBaseUtil.getTargetProperty(paIn);
 			assert (slotExpression != null) && (targetProperty != null);
 			NavigationCallExp propertyCallExp = context.getHelper().createNavigationCallExp(slotExpression, targetProperty);
 			context.addTrace(paIn, propertyCallExp);
@@ -573,6 +593,20 @@ public abstract class AbstractQVTc2QVTc
 		}
 
 		@Override
+		public final Object visitNavigationAssignment(@NonNull NavigationAssignment object) {			// Override must be of derived classes
+			return visiting(object);
+		}
+
+		@Override
+		public @Nullable Element visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment paOut) {
+			OppositePropertyAssignment paIn = context.equivalentSource(paOut);
+			paOut.setSlotExpression(copy(paIn.getSlotExpression()));
+			paOut.setValue(copy(paIn.getValue()));
+			checkOut(paOut);
+	        return paIn;
+		}
+
+		@Override
 		public @Nullable Object visitPackage(@NonNull Package pOut) {
 			updateAllChildren(pOut.getOwnedClasses());
 			updateAllChildren(pOut.getOwnedPackages());
@@ -585,8 +619,8 @@ public abstract class AbstractQVTc2QVTc
 		@Override
 		public @Nullable Object visitPredicate(@NonNull Predicate pOut) {
 			Element pIn = context.equivalentSource(pOut);
-			if (pIn instanceof PropertyAssignment) {
-				return convertToPredicate((PropertyAssignment)pIn, pOut);
+			if (pIn instanceof NavigationAssignment) {
+				return convertToPredicate((NavigationAssignment)pIn, pOut);
 			}
 			else if (pIn instanceof Predicate) {
 				pOut.setConditionExpression(copy(((Predicate)pIn).getConditionExpression()));

@@ -12,9 +12,11 @@ package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
+import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBasePrettyPrintVisitor;
 
 public class QVTcorePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisitor implements QVTcoreVisitor<Object>
@@ -30,8 +32,22 @@ public class QVTcorePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisitor imp
 	}
 
 	@Override
-	public Object visitMapping(@NonNull Mapping object) {
-		// TODO Auto-generated method stub
+	public Object visitMapping(@NonNull Mapping pMapping) {
+		context.append("map ");
+		context.appendName(pMapping);
+		context.append(" in ");
+		context.appendName(pMapping.getTransformation());
+		context.append(" {");
+		context.push("", "");
+		for (Domain pDomain : pMapping.getDomain()) {
+			if (pDomain instanceof CoreDomain) {
+				context.appendName(pDomain);
+				doArea((CoreDomain)pDomain);
+			}
+		}
+		context.append("where");
+		doArea(pMapping);
+		context.pop();
 		return null;
 	}
 }

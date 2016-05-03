@@ -10,22 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBasePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
@@ -46,40 +36,6 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 {	
 	public QVTimperativePrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
-	}
-
-	private void doArea(Area pArea) {
-		context.append(" (");
-		safeVisit(pArea.getGuardPattern());
-		context.append(")\n{");
-		safeVisit(pArea.getBottomPattern());
-		context.append("}\n");
-	}
-
-	@Override
-	public Object visitBottomPattern(@NonNull BottomPattern pBottomPattern) {
-		for (RealizedVariable pRealizedVariable : pBottomPattern.getRealizedVariable()) {
-			safeVisit(pRealizedVariable);
-		}
-		for (Variable pVariable : pBottomPattern.getVariable()) {
-			safeVisit(pVariable);
-		}
-		context.append(" |");
-		List<Predicate> predicates = pBottomPattern.getPredicate();
-		if (predicates.size() > 0) {
-			context.append("\n");
-			for (Predicate pPredicate : predicates) {
-				safeVisit(pPredicate);
-			}
-		}
-		List<Assignment> assignments = pBottomPattern.getAssignment();
-		if (assignments.size() > 0) {
-			context.append("\n");
-			for (Assignment pAssignment : assignments) {
-				safeVisit(pAssignment);
-			}
-		}
-		return null;
 	}
 
 	@Override
@@ -103,22 +59,6 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 	@Override
 	public Object visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visitVariable(object);
-	}
-
-	@Override
-	public Object visitGuardPattern(@NonNull GuardPattern pGuardPattern) {
-		for (Variable pVariable : pGuardPattern.getVariable()) {
-			safeVisit(pVariable);
-		}
-		context.append(" |");
-		List<Predicate> predicates = pGuardPattern.getPredicate();
-		if (predicates.size() > 0) {
-			context.append("\n");
-			for (Predicate pPredicate : predicates) {
-				safeVisit(pPredicate);
-			}
-		}
-		return null;
 	}
 
 	@Override
@@ -212,30 +152,6 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 	}
 
 	@Override
-	public Object visitPredicate(@NonNull Predicate pPredicate) {
-		safeVisit(pPredicate.getConditionExpression());
-		return null;
-	}
-
-	@Override
-	public Object visitPropertyAssignment(@NonNull PropertyAssignment pPropertyAssignment) {
-		safeVisit(pPropertyAssignment.getSlotExpression());
-		context.append(".");
-		context.appendName(pPropertyAssignment.getTargetProperty());
-		context.append(" := ");
-		safeVisit(pPropertyAssignment.getValue());
-		context.append(";\n");
-		return null;
-	}
-
-	@Override
-	public Object visitRealizedVariable(@NonNull RealizedVariable pRealizedVariable) {
-		context.append("realize ");
-		visitVariable(pRealizedVariable);
-		return null;
-	}
-
-	@Override
 	public Object visitVariable(@NonNull Variable pVariable) {
 		if (pVariable.eContainer() instanceof MappingLoop) {
 			context.appendName(pVariable);
@@ -246,15 +162,6 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 			super.visitVariable(pVariable);
 			context.append(";\n");
 		}
-		return null;
-	}
-
-	@Override
-	public Object visitVariableAssignment(@NonNull VariableAssignment pVariableAssignment) {
-		context.appendName(pVariableAssignment.getTargetVariable());
-		context.append(" := ");
-		safeVisit(pVariableAssignment.getValue());
-		context.append(";\n");
 		return null;
 	}
 

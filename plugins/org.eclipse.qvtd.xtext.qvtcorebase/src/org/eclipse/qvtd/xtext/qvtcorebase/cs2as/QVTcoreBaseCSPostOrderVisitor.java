@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -56,11 +56,12 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 		super(context);
 	}
 
-	protected @Nullable Assignment refreshPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull PredicateOrAssignmentCS csConstraint) {
+	protected @Nullable Assignment refreshPropertyAssignment(@NonNull NavigationCallExp target, @NonNull PredicateOrAssignmentCS csConstraint) {
 		PropertyAssignment propertyAssignment = PivotUtil.getPivot(PropertyAssignment.class, csConstraint);
 		if (propertyAssignment != null) {
-			propertyAssignment.setSlotExpression(propertyCallExp.getOwnedSource());
-			propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
+			propertyAssignment.setSlotExpression(target.getOwnedSource());
+			propertyAssignment.setTargetProperty(PivotUtil.getReferredProperty(target));
+//			propertyAssignment.setIsOpposite(target instanceof FeatureCallExp);		// FIXME isOpposite
 		}
 		return propertyAssignment;
 	}
@@ -91,8 +92,8 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 				OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
 				if (csInitialiser != null) {
 					Assignment assignment = null;
-					if (target instanceof PropertyCallExp) {
-						assignment = refreshPropertyAssignment((PropertyCallExp)target, csConstraint);
+					if (target instanceof NavigationCallExp) {
+						assignment = refreshPropertyAssignment((NavigationCallExp)target, csConstraint);
 					}
 					else if (target instanceof VariableExp) {
 						assignment = refreshVariableAssignment((VariableExp)target, csConstraint);

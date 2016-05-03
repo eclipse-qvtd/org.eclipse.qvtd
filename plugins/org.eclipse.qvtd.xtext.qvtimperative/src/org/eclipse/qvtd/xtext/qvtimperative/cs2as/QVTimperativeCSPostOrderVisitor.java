@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
@@ -78,7 +79,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	}
 
 	@Override
-	protected @Nullable Assignment refreshPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull PredicateOrAssignmentCS csConstraint) {
+	protected @Nullable Assignment refreshPropertyAssignment(@NonNull NavigationCallExp propertyCallExp, @NonNull PredicateOrAssignmentCS csConstraint) {
 		@Nullable PropertyAssignment propertyAssignment;
 //		Property referredProperty = propertyCallExp.getReferredProperty();
 //		Property oppositeProperty = referredProperty.getOpposite();
@@ -90,7 +91,8 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 //		}
 		if (propertyAssignment != null) {
 			propertyAssignment.setSlotExpression(propertyCallExp.getOwnedSource());
-			propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
+			propertyAssignment.setTargetProperty(PivotUtil.getReferredProperty(propertyCallExp));
+//			propertyAssignment.setIsOpposite(target instanceof FeatureCallExp);		// FIXME isOpposite
 		}
 		return propertyAssignment;
 	}

@@ -61,6 +61,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
@@ -401,11 +403,21 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 	 */
     protected static class PrimaryPartCreateVisitor extends AbstractPrimaryCreateVisitor
     {
-    	protected final @NonNull List<@NonNull PropertyAssignment> primaryAssignments;
+    	protected final @NonNull List<@NonNull NavigationAssignment> primaryAssignments;
 
-		public PrimaryPartCreateVisitor(@NonNull QVTm2QVTp context, @NonNull List<@NonNull PropertyAssignment> primaryAssignments) {
+		public PrimaryPartCreateVisitor(@NonNull QVTm2QVTp context, @NonNull List<@NonNull NavigationAssignment> primaryAssignments) {
 			super(context);
 			this.primaryAssignments = primaryAssignments;
+		}
+
+		@Override
+		public @Nullable Element visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment paIn) {
+			if (primaryAssignments.contains(paIn)) {
+				return super.visitOppositePropertyAssignment(paIn);
+			}
+			else {
+				return null;
+			}
 		}
 
 		@Override
@@ -430,12 +442,12 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
     	/**
     	 * Assignments made by the primary mapping. Need to be converted to predicates in the secondary mapping.
     	 */
-    	protected final @NonNull List<@NonNull PropertyAssignment> primaryAssignments;
+    	protected final @NonNull List<@NonNull NavigationAssignment> primaryAssignments;
 
     	/**
     	 * Assignments to be made by this secondary mapping.
     	 */
-    	protected final @NonNull List<@NonNull PropertyAssignment> secondaryAssignments;
+    	protected final @NonNull List<@NonNull NavigationAssignment> secondaryAssignments;
 
     	/**
     	 * The variables required in the guard patterns by the discriminantAssignments.
@@ -448,8 +460,8 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
     	protected final @NonNull Set<@NonNull Variable> bottomVariables;
 
 		public SecondaryPartCreateVisitor(@NonNull QVTm2QVTp context, @NonNull String mappingName, @NonNull RealizedVariable secondaryHead,
-				@NonNull List<@NonNull PropertyAssignment> primaryAssignments, @NonNull List<@NonNull PropertyAssignment> discriminantAssignments,
-				@NonNull List<@NonNull PropertyAssignment> secondaryAssignments) {
+				@NonNull List<@NonNull NavigationAssignment> primaryAssignments, @NonNull List<@NonNull NavigationAssignment> discriminantAssignments,
+				@NonNull List<@NonNull NavigationAssignment> secondaryAssignments) {
 			super(context);
 			this.mappingName = mappingName;
 			this.primaryAssignments = primaryAssignments;
@@ -537,9 +549,9 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			//	Create the guard predicates
 			//
 			for (@NonNull Assignment aIn : primaryAssignments) {
-				if (aIn instanceof PropertyAssignment) {
+				if (aIn instanceof NavigationAssignment) {
 					Set<@NonNull Variable> usedVariables = new HashSet<@NonNull Variable>();
-					PropertyAssignment paIn = (PropertyAssignment) aIn;
+					NavigationAssignment paIn = (NavigationAssignment) aIn;
 					if (paIn.getValue() instanceof VariableExp) {
 						computeDirectlyReferencedVariables(paIn, usedVariables);
 						if (guardVariables.containsAll(usedVariables)) {
@@ -555,7 +567,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			//
 			//	Create the bottom assignments
 			//
-			for (@NonNull PropertyAssignment aIn : secondaryAssignments) {
+			for (@NonNull NavigationAssignment aIn : secondaryAssignments) {
 				mOut.getBottomPattern().getAssignment().add(create2(aIn));
 			}
 			context.popScope();
@@ -661,21 +673,21 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 
     protected static class ComplexPart extends PropertyAssignablePart
     {
-       	protected final @NonNull PropertyAssignment propertyAssignment;
+       	protected final @NonNull NavigationAssignment navigationAssignment;
 
-		public ComplexPart(@NonNull Partitioning partitioning, @NonNull PropertyAssignment propertyAssignment) {
+		public ComplexPart(@NonNull Partitioning partitioning, @NonNull NavigationAssignment navigationAssignment) {
 			super(partitioning);
-			this.propertyAssignment = propertyAssignment;
+			this.navigationAssignment = navigationAssignment;
 		}
 
 		@Override
 		public @NonNull String getName() {
-			return propertyAssignment.getSlotExpression() + "." + propertyAssignment.getTargetProperty().getName();
+			return navigationAssignment.getSlotExpression() + "." + QVTcoreBaseUtil.getTargetProperty(navigationAssignment).getName();
 		}
 
 		@Override
-		public @NonNull PropertyAssignment getPropertyAssignment() {
-			return propertyAssignment;
+		public @NonNull NavigationAssignment getNavigationAssignment() {
+			return navigationAssignment;
 		}
     }
 
@@ -705,7 +717,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			super(partitioning);
 		}
 
-		public abstract @Nullable PropertyAssignment getPropertyAssignment();
+		public abstract @Nullable NavigationAssignment getNavigationAssignment();
     }
 
     /**
@@ -782,11 +794,11 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			return propertyPart;
 		}
 
-		public @NonNull VariablePropertyPart getPropertyPart(@NonNull PropertyAssignment propertyAssignment) {
-			Property property = propertyAssignment.getTargetProperty();
+		public @NonNull VariablePropertyPart getPropertyPart(@NonNull NavigationAssignment navigationAssignment) {
+			Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
 			assert property != null;
 			VariablePropertyPart part = getPropertyPart(property);
-			part.setPropertyAssignment(propertyAssignment);
+			part.setNavigationAssignment(navigationAssignment);
 			return part;
 		}
 
@@ -803,7 +815,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
     {
     	protected final @NonNull VariablePart variablePart;
 		private final @NonNull Property property;
-		private @Nullable PropertyAssignment propertyAssignment = null;
+		private @Nullable NavigationAssignment navigationAssignment = null;
 		
 		public VariablePropertyPart(@NonNull Partitioning partitioning, @NonNull VariablePart variablePart, @NonNull Property property) {
 			super(partitioning);
@@ -827,14 +839,14 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		}
 
 		@Override
-		public @Nullable PropertyAssignment getPropertyAssignment() {
-			return propertyAssignment;
+		public @Nullable NavigationAssignment getNavigationAssignment() {
+			return navigationAssignment;
 		}
 
-		public void setPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
-			assert this.propertyAssignment == null : "Duplicate PropertyAssignment";
-			this.propertyAssignment = propertyAssignment;
-			OCLExpression value = propertyAssignment.getValue();
+		public void setNavigationAssignment(@NonNull NavigationAssignment navigationAssignment) {
+			assert this.navigationAssignment == null : "Duplicate NavigationAssignment";
+			this.navigationAssignment = navigationAssignment;
+			OCLExpression value = navigationAssignment.getValue();
 			assert value != null;
 			setValue(value);
 		}
@@ -851,7 +863,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		private final @NonNull List<@NonNull AssignablePart> allPropertyAssignments = new ArrayList<@NonNull AssignablePart>();
 		private final @NonNull List<@NonNull VariablePart> allRealizedVariables = new ArrayList<@NonNull VariablePart>();
 		private @Nullable Map<@NonNull Property, @NonNull PropertyPart> allPropertyParts = null;
-		private @Nullable List<@NonNull PropertyAssignment> primaryAssignments = null;
+		private @Nullable List<@NonNull NavigationAssignment> primaryAssignments = null;
 		private @Nullable RealizedVariable secondaryHead = null;
 		
 		/**
@@ -881,7 +893,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 					assignablePart = addVariableAssignment((VariableAssignment)assignment);
 				}
 				else {
-					assignablePart = addPropertyAssignment((PropertyAssignment)assignment);
+					assignablePart = addNavigationAssignment((NavigationAssignment)assignment);
 				}
 				OCLExpression value = assignment.getValue();
 				assert value != null;
@@ -915,6 +927,21 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			}
 		}
 
+		private @NonNull AssignablePart addNavigationAssignment(@NonNull NavigationAssignment navigationAssignment) {
+			AssignablePart assignablePart;
+			OCLExpression slotExpression = navigationAssignment.getSlotExpression();
+			assert slotExpression != null;
+			VariablePart variablePart = basicGetVariablePart(slotExpression);
+			if (variablePart != null) {
+				assignablePart = variablePart.getPropertyPart(navigationAssignment);
+			}
+			else {
+				assignablePart = new ComplexPart(this, navigationAssignment);
+			}
+			allPropertyAssignments.add(assignablePart);
+			return assignablePart;
+		}
+
 		private void addPart(@NonNull Part part) {
 			assert !part2requiredParts.containsKey(part);
 			part2requiredParts.put(part, null);
@@ -930,21 +957,6 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 				}
 				allPredicates2.add(predicatePart);
 			}
-		}
-
-		private @NonNull AssignablePart addPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
-			AssignablePart assignablePart;
-			OCLExpression slotExpression = propertyAssignment.getSlotExpression();
-			assert slotExpression != null;
-			VariablePart variablePart = basicGetVariablePart(slotExpression);
-			if (variablePart != null) {
-				assignablePart = variablePart.getPropertyPart(propertyAssignment);
-			}
-			else {
-				assignablePart = new ComplexPart(this, propertyAssignment);
-			}
-			allPropertyAssignments.add(assignablePart);
-			return assignablePart;
 		}
 
 		private @NonNull PropertyPart addPropertyPart(@NonNull Property property) {
@@ -994,7 +1006,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			}
 			Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> requiredParts2requiringParts = this.requiredParts2requiringParts = partition(s);
 			if ((requiredParts2requiringParts != null) && (requiredParts2requiringParts.size() > 0)) {
-				List<@NonNull PropertyAssignment> primaryAssignments2 = primaryAssignments = synthesizeComputePrimaryAssignments(requiredParts2requiringParts);
+				List<@NonNull NavigationAssignment> primaryAssignments2 = primaryAssignments = synthesizeComputePrimaryAssignments(requiredParts2requiringParts);
 				secondaryHead = synthesizeComputeSecondaryHead(allRealizedVariables, primaryAssignments2);
 				if (secondaryHead == null) {
 					secondaryHead = synthesizeComputeSecondaryHead(allRealizedVariables, primaryAssignments2);	// FIXME debugging
@@ -1096,16 +1108,16 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 
 		public @Nullable Map<@NonNull Property, @Nullable OCLExpression> getRootPaths() {
 			Map<@NonNull Property, @Nullable OCLExpression> property2value = null;
-			List<@NonNull PropertyAssignment> primaryAssignments2 = primaryAssignments;
+			List<@NonNull NavigationAssignment> primaryAssignments2 = primaryAssignments;
 			RealizedVariable secondaryHead2 = secondaryHead;
 			if ((secondaryHead2 != null) && (primaryAssignments2 != null)) {
 				property2value = new HashMap<@NonNull Property, @Nullable OCLExpression>();
-				for (@NonNull PropertyAssignment propertyAssignment : primaryAssignments2) {
-					Variable leftVariable = getVariable(propertyAssignment.getSlotExpression());
+				for (@NonNull NavigationAssignment navigationAssignment : primaryAssignments2) {
+					Variable leftVariable = getVariable(navigationAssignment.getSlotExpression());
 					if (leftVariable == secondaryHead2) {
-						Property targetProperty = propertyAssignment.getTargetProperty();
+						Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
 						assert targetProperty != null;
-						property2value.put(targetProperty, propertyAssignment.getValue());
+						property2value.put(targetProperty, navigationAssignment.getValue());
 					}
 				}
 			}
@@ -1432,7 +1444,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			}
 			else {
 				List<@NonNull Mapping> mOuts = new ArrayList<@NonNull Mapping>();
-				List<@NonNull PropertyAssignment> primaryAssignments2 = primaryAssignments;
+				List<@NonNull NavigationAssignment> primaryAssignments2 = primaryAssignments;
 				RealizedVariable secondaryHead2 = secondaryHead;
 				assert primaryAssignments2 != null;// && (secondaryHead2 != null);
 				Map<@NonNull List<@NonNull Part>, @NonNull String> dependentParts2mappingName = synthesizeComputeMappingNames(requiredParts2requiringParts2);
@@ -1441,10 +1453,10 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 				Mapping mOut = refinedCreateVisitor.create(mapping);
 				assert mOut != null;
 				mOuts.add(mOut);
-				PropertyAssignment discriminantAssignment = null;
+				NavigationAssignment discriminantAssignment = null;
 				if (discriminant != null) {
-					for (PropertyAssignment primaryAssignment : primaryAssignments2) {
-						if (primaryAssignment.getTargetProperty() == discriminant) {
+					for (NavigationAssignment primaryAssignment : primaryAssignments2) {
+						if (QVTcoreBaseUtil.getTargetProperty(primaryAssignment) == discriminant) {
 							Variable slotVariable = getVariable(primaryAssignment.getSlotExpression());
 							if (slotVariable == secondaryHead2) {
 								discriminantAssignment = primaryAssignment;
@@ -1470,7 +1482,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 					requiringParts = new ArrayList<@NonNull Part>(requiringParts);
 					requiringParts.removeAll(resolvedRequiringParts);
 					if (requiringParts.size() > 0) {
-						List<@NonNull PropertyAssignment> secondaryAssignments = synthesizeComputeSecondaryAssignments(requiringParts);
+						List<@NonNull NavigationAssignment> secondaryAssignments = synthesizeComputeSecondaryAssignments(requiringParts);
 						String mappingName = dependentParts2mappingName.get(dependentParts);
 						assert mappingName != null;
 						assert (secondaryHead2 !=  null);// {
@@ -1497,7 +1509,7 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 		 * FIXME This implementation requires directly rather than transitively reachable.
 		 */
 		private @Nullable RealizedVariable synthesizeComputeSecondaryHead(@NonNull List<@NonNull VariablePart> allRealizedVariables,
-				@NonNull List<@NonNull PropertyAssignment> primaryAssignments) {
+				@NonNull List<@NonNull NavigationAssignment> primaryAssignments) {
 			RealizedVariable bestRealizedVariable = null;
 			int bestRealizedVariableCount = 0;
 //			Map<@NonNull RealizedVariable, @Nullable List<@NonNull RealizedVariable>> source2targets = new HashMap<@NonNull RealizedVariable, @Nullable List<@NonNull RealizedVariable>>();
@@ -1591,13 +1603,13 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			return dependentParts2mappingNames;
 		}
 
-		private @NonNull List<@NonNull PropertyAssignment> synthesizeComputePrimaryAssignments(@NonNull Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> requiredParts2requiringParts) {
-			List<@NonNull PropertyAssignment> primaryAssignments = new ArrayList<@NonNull PropertyAssignment>();
+		private @NonNull List<@NonNull NavigationAssignment> synthesizeComputePrimaryAssignments(@NonNull Map<@NonNull List<@NonNull Part>, @NonNull List<@NonNull Part>> requiredParts2requiringParts) {
+			List<@NonNull NavigationAssignment> primaryAssignments = new ArrayList<@NonNull NavigationAssignment>();
 			for (@NonNull AssignablePart part : allPropertyAssignments) {
 				if (part instanceof PropertyAssignablePart) {
-					PropertyAssignment propertyAssignment = ((PropertyAssignablePart)part).getPropertyAssignment();
-					if (propertyAssignment != null) {
-						primaryAssignments.add(propertyAssignment);
+					NavigationAssignment navigationAssignment = ((PropertyAssignablePart)part).getNavigationAssignment();
+					if (navigationAssignment != null) {
+						primaryAssignments.add(navigationAssignment);
 					}
 				}
 			}
@@ -1614,9 +1626,9 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			for (@NonNull List<@NonNull Part> requiringParts : requiredParts2requiringParts.values()) {
 				for (@NonNull Part requiringPart : requiringParts) {
 					if (requiringPart instanceof PropertyAssignablePart) {
-						PropertyAssignment propertyAssignment = ((PropertyAssignablePart)requiringPart).getPropertyAssignment();
-						if (propertyAssignment != null) {
-							primaryAssignments.remove(propertyAssignment);
+						NavigationAssignment navigationAssignment = ((PropertyAssignablePart)requiringPart).getNavigationAssignment();
+						if (navigationAssignment != null) {
+							primaryAssignments.remove(navigationAssignment);
 						}
 					}
 				}
@@ -1624,11 +1636,11 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 			return primaryAssignments;
 		}
 
-		private @NonNull List<@NonNull PropertyAssignment> synthesizeComputeSecondaryAssignments(@NonNull List<@NonNull Part> commitParts) {
-			List<@NonNull PropertyAssignment> secondaryAssignments = new ArrayList<@NonNull PropertyAssignment>();
+		private @NonNull List<@NonNull NavigationAssignment> synthesizeComputeSecondaryAssignments(@NonNull List<@NonNull Part> commitParts) {
+			List<@NonNull NavigationAssignment> secondaryAssignments = new ArrayList<@NonNull NavigationAssignment>();
 			for (@NonNull Part secondaryCommit : commitParts) {
 				if (secondaryCommit instanceof PropertyAssignablePart) {
-					PropertyAssignment propertyAssignment = ((PropertyAssignablePart)secondaryCommit).getPropertyAssignment();
+					NavigationAssignment propertyAssignment = ((PropertyAssignablePart)secondaryCommit).getNavigationAssignment();
 					if (propertyAssignment != null) {
 						secondaryAssignments.add(propertyAssignment);
 					}
@@ -1662,16 +1674,16 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
     /**
      * Return all variables directly referenced by any of propertyAssignments.
      */
-	private static @NonNull Set<@NonNull Variable> computeDirectlyReferencedVariables(@NonNull List<@NonNull PropertyAssignment> propertyAssignments) {
+	private static @NonNull Set<@NonNull Variable> computeDirectlyReferencedVariables(@NonNull List<@NonNull NavigationAssignment> navigationAssignments) {
 		Set<@NonNull Variable> usedVariables = new HashSet<@NonNull Variable>();
-		for (PropertyAssignment propertyAssignment : propertyAssignments) {
-			computeDirectlyReferencedVariables(propertyAssignment, usedVariables);
+		for (NavigationAssignment navigationAssignment : navigationAssignments) {
+			computeDirectlyReferencedVariables(navigationAssignment, usedVariables);
 		}
 		return usedVariables;
 	}
 
-	private static void computeDirectlyReferencedVariables(@NonNull PropertyAssignment propertyAssignment, @NonNull Set<@NonNull Variable> usedVariables) {
-		for (TreeIterator<EObject> tit = propertyAssignment.eAllContents(); tit.hasNext(); ) {
+	private static void computeDirectlyReferencedVariables(@NonNull NavigationAssignment navigationAssignment, @NonNull Set<@NonNull Variable> usedVariables) {
+		for (TreeIterator<EObject> tit = navigationAssignment.eAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof VariableExp) {
 				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
@@ -1685,14 +1697,14 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
 	/**
      * Return all variables indirectly defined byVariables using propertyAssignments. i.e. if A is defined in A.b := C, C is defined too.
      */
-	private static @NonNull Iterable<@NonNull Variable> computeIndirectlyDefinedVariables(@NonNull Iterable<@NonNull Variable> byVariables, @NonNull List<@NonNull PropertyAssignment> propertyAssignments) {
+	private static @NonNull Iterable<@NonNull Variable> computeIndirectlyDefinedVariables(@NonNull Iterable<@NonNull Variable> byVariables, @NonNull List<@NonNull NavigationAssignment> navigationAssignments) {
 		List<@NonNull Variable> variablesList = new ArrayList<@NonNull Variable>();
 		Iterables.addAll(variablesList, byVariables);
 		for (int i = 0; i < variablesList.size(); i++) {
 			Variable usedVariable = variablesList.get(i);
-			for (@NonNull PropertyAssignment propertyAssignment : propertyAssignments) {
-				Variable rightVariable = getVariable(propertyAssignment.getValue());
-				Variable leftVariable = getVariable(propertyAssignment.getSlotExpression());
+			for (@NonNull NavigationAssignment navigationAssignment : navigationAssignments) {
+				Variable rightVariable = getVariable(navigationAssignment.getValue());
+				Variable leftVariable = getVariable(navigationAssignment.getSlotExpression());
 				if ((leftVariable == usedVariable) && (rightVariable != null)) {
 					if (!variablesList.contains(rightVariable)) {
 						variablesList.add(rightVariable);
@@ -1706,14 +1718,14 @@ public class QVTm2QVTp extends AbstractQVTc2QVTc
     /**
      * Return all variables indirectly referenced byVariables using propertyAssignments. i.e. if C is referenced in A.b := C, A is referenced too.
      */
-	private static @NonNull List<@NonNull Variable> computeIndirectlyReferencedVariables(@NonNull Iterable<@NonNull Variable> byVariables, @NonNull List<@NonNull PropertyAssignment> propertyAssignments) {
+	private static @NonNull List<@NonNull Variable> computeIndirectlyReferencedVariables(@NonNull Iterable<@NonNull Variable> byVariables, @NonNull List<@NonNull NavigationAssignment> navigationAssignments) {
 		List<@NonNull Variable> variablesList = new ArrayList<@NonNull Variable>();
 		Iterables.addAll(variablesList, byVariables);
 		for (int i = 0; i < variablesList.size(); i++) {
 			Variable usedVariable = variablesList.get(i);
-			for (PropertyAssignment propertyAssignment : propertyAssignments) {
-				Variable rightVariable = getVariable(propertyAssignment.getValue());
-				Variable leftVariable = getVariable(propertyAssignment.getSlotExpression());
+			for (NavigationAssignment navigationAssignment : navigationAssignments) {
+				Variable rightVariable = getVariable(navigationAssignment.getValue());
+				Variable leftVariable = getVariable(navigationAssignment.getSlotExpression());
 				if ((rightVariable == usedVariable) && (leftVariable != null)) {
 					if (!variablesList.contains(leftVariable)) {
 						variablesList.add(leftVariable);

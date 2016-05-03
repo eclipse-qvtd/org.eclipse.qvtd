@@ -60,6 +60,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
@@ -165,12 +167,12 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	protected void refreshOwnedInTransformation(@NonNull AbstractMappingCS csMapping, @NonNull AbstractMapping asMapping) {
 		Transformation asTransformation = asMapping.getTransformation();
 		if (asTransformation != null) {
-			@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
 			csMapping.setOwnedInPathName(csPathName);
 			org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage();
 			String asPackageName = asPackage != null ? asPackage.getName() : null;
 			if ((asPackageName == null) || "".equals(asPackageName)) {
-				@SuppressWarnings("null") @NonNull PathElementCS csPathElement = BaseCSFactory.eINSTANCE.createPathElementCS();
+				PathElementCS csPathElement = BaseCSFactory.eINSTANCE.createPathElementCS();
 				csPathName.getOwnedPathElements().add(csPathElement);
 				csPathElement.setReferredElement(asTransformation);
 			}
@@ -240,6 +242,23 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	}
 
 	@Override
+	public ElementCS visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
+		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTcoreBaseCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asNavigationAssignment);
+		csAssignment.setPivot(asNavigationAssignment);
+		ExpCS csSlotExp = createExpCS(asNavigationAssignment.getSlotExpression());
+		NameExpCS csPropName = createNameExpCS(QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment));
+		csAssignment.setOwnedTarget(createInfixExpCS(csSlotExp, ".", csPropName));
+		csAssignment.setOwnedInitExpression(createExpCS(asNavigationAssignment.getValue()));
+		csAssignment.setIsDefault(asNavigationAssignment.isIsDefault());
+		return csAssignment;
+	}
+
+	@Override
+	public ElementCS visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment asNavigationAssignment) {
+		return visitNavigationAssignment(asNavigationAssignment);
+	}
+
+	@Override
 	public ElementCS visitPattern(@NonNull Pattern object) {
 		throw new UnsupportedOperationException();
 	}
@@ -261,15 +280,8 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	}
 
 	@Override
-	public ElementCS visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
-		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTcoreBaseCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asPropertyAssignment);
-		csAssignment.setPivot(asPropertyAssignment);
-		ExpCS csSlotExp = createExpCS(asPropertyAssignment.getSlotExpression());
-		NameExpCS csPropName = createNameExpCS(asPropertyAssignment.getTargetProperty());
-		csAssignment.setOwnedTarget(createInfixExpCS(csSlotExp, ".", csPropName));
-		csAssignment.setOwnedInitExpression(createExpCS(asPropertyAssignment.getValue()));
-		csAssignment.setIsDefault(asPropertyAssignment.isIsDefault());
-		return csAssignment;
+	public ElementCS visitPropertyAssignment(@NonNull PropertyAssignment asNavigationAssignment) {
+		return visitNavigationAssignment(asNavigationAssignment);
 	}
 
 	@Override
@@ -294,7 +306,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 			csTransformation.setOwnedPathName(null);
 		}
 		else {
-			@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
 			csTransformation.setOwnedPathName(csPathName);
 			context.refreshPathName(csPathName, owningPackage, null);
 		}
@@ -336,7 +348,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		ImportCS csImport = context.refreshElement(ImportCS.class, BaseCSPackage.Literals.IMPORT_CS, asUnit);
 		csImport.setPivot(asUnit);
 		csImport.setName(asUnit.getName());
-		@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+		PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
 		List<PathElementCS> csPath = csPathName.getOwnedPathElements();
 		PathElementWithURICS csSimpleRef = BaseCSFactory.eINSTANCE.createPathElementWithURICS();
 		csSimpleRef.setReferredElement(asNamespace);

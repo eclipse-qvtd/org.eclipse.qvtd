@@ -178,7 +178,7 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 	@Override
 	public void setValue(OCLExpression newValue) {
 		if (newValue != null) {
-			assert !newValue.eClass().getName().endsWith("TemplateExp");
+			assert !newValue.eClass().getName().endsWith("TemplateExp");	// FIXME debugging
 		}
 		super.setValue(newValue);
 	}

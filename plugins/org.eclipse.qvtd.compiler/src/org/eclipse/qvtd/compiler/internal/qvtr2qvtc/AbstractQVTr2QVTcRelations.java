@@ -46,7 +46,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -284,9 +284,20 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		 * Add the PropertyAssignment "cVariable.cProperty := cExpression" to the cBottomPattern.
 		 */
 		private void addPropertyAssignment(@NonNull BottomPattern cBottomPattern, @NonNull Variable cVariable, @NonNull Property cProperty, @NonNull OCLExpression cExpression) {
-			VariableExp cSlotVariableExp = createVariableExp(cVariable);
-			PropertyAssignment cAssignment = createPropertyAssignment(cSlotVariableExp, cProperty, cExpression);
-			cBottomPattern.getAssignment().add(cAssignment);
+			if (!cProperty.isIsMany() || (cExpression.getType() instanceof CollectionType)) {
+				VariableExp cSlotVariableExp = createVariableExp(cVariable);
+				NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, cProperty, cExpression);
+				cBottomPattern.getAssignment().add(cAssignment);
+				return;
+			}
+			Property cOppositeProperty = cProperty.getOpposite();
+			if ((cOppositeProperty != null) && (cExpression instanceof VariableExp) && (!cOppositeProperty.isIsMany() || (cVariable.getType() instanceof CollectionType))) {
+				VariableExp cSlotVariableExp = (VariableExp)cExpression;
+				NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, cOppositeProperty, createVariableExp(cVariable));
+				cBottomPattern.getAssignment().add(cAssignment);
+				return;
+			}
+			throw new IllegalStateException("Unsupported collection assign " + cVariable + "." + cProperty + ":=" + cExpression);
 		}
 
 		// Quad call of RDomainPatternExprToMappingXXXX

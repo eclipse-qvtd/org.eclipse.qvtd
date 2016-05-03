@@ -47,7 +47,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
@@ -386,11 +386,11 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 	
 	@Override
-	public void internalExecutePropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @NonNull Object slotObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
-		Property targetProperty = propertyAssignment.getTargetProperty();
+	public void internalExecuteNavigationAssignment(@NonNull NavigationAssignment navigationAssignment, @NonNull Object slotObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
+		Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
 		targetProperty.initValue(slotObject, ecoreValue);
     	QVTiModelManager modelManager = getModelManager();
-		Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex(propertyAssignment);
+		Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex(navigationAssignment);
 		if (cacheIndex != null) {
 			modelManager.setUnnavigableOpposite(cacheIndex, slotObject, ecoreValue);
 		}

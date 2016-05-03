@@ -44,11 +44,12 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.DataParameter;
@@ -82,7 +83,7 @@ public class QVTp2QVTg {
 	private Map<@NonNull TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>> typedModel2class2datum = new HashMap<@NonNull TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>>();
 	
 	private Map<AbstractMapping, List<OperationCallExp>> mapping2opCallExps = new HashMap<AbstractMapping, List<OperationCallExp>>();
-	private Map<AbstractMapping, List<@NonNull PropertyAssignment>> mapping2propAssigns = new HashMap<@NonNull AbstractMapping, List<@NonNull PropertyAssignment>>();
+	private Map<AbstractMapping, List<@NonNull NavigationAssignment>> mapping2propAssigns = new HashMap<@NonNull AbstractMapping, List<@NonNull NavigationAssignment>>();
 	private Map<AbstractMapping, List<NavigationCallExp>> mapping2navCallExps = new HashMap<AbstractMapping, List<NavigationCallExp>>();
 	
 	private final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
@@ -136,13 +137,13 @@ public class QVTp2QVTg {
 						mapping2opCallExps.put(mapping, opCallExps);
 					}
 					opCallExps.add((OperationCallExp)eObj);
-				} else if (eObj instanceof PropertyAssignment) {
-					List<PropertyAssignment> propAssigns = mapping2propAssigns.get(mapping);
+				} else if (eObj instanceof NavigationAssignment) {
+					List<NavigationAssignment> propAssigns = mapping2propAssigns.get(mapping);
 					if (propAssigns == null) {
-						propAssigns = new ArrayList<PropertyAssignment>();
+						propAssigns = new ArrayList<NavigationAssignment>();
 						mapping2propAssigns.put(mapping, propAssigns);
 					}
-					propAssigns.add((PropertyAssignment)eObj);
+					propAssigns.add((NavigationAssignment)eObj);
 				} else if (eObj instanceof NavigationCallExp) {
 					List<NavigationCallExp> navCallExps = mapping2navCallExps.get(mapping);
 					if (navCallExps == null) {
@@ -211,7 +212,7 @@ public class QVTp2QVTg {
 			ma.getRequisites().add(getPropertyDatum(propRead));
 		}
 		
-		for (PropertyAssignment propWrite : getPropertyAssignments(mapping)){
+		for (NavigationAssignment propWrite : getNavigationAssignments(mapping)){
 			ma.getProductions().addAll(getPropertyDatum(propWrite));
 			
 		}
@@ -347,9 +348,9 @@ public class QVTp2QVTg {
 		return navCallExps == null ? Collections.<NavigationCallExp>emptyList() : navCallExps;
 	}
 
-	protected List<@NonNull PropertyAssignment> getPropertyAssignments(AbstractMapping mapping) {	
-		List<@NonNull PropertyAssignment> propAssigns = mapping2propAssigns.get(mapping);
-		return propAssigns == null ? Collections.<@NonNull PropertyAssignment>emptyList() : propAssigns;
+	protected List<@NonNull NavigationAssignment> getNavigationAssignments(AbstractMapping mapping) {	
+		List<@NonNull NavigationAssignment> propAssigns = mapping2propAssigns.get(mapping);
+		return propAssigns == null ? Collections.<@NonNull NavigationAssignment>emptyList() : propAssigns;
 	}
 	
 	protected List<OperationCallExp> getOperationCallExps(AbstractMapping mapping) {
@@ -374,9 +375,9 @@ public class QVTp2QVTg {
 	}
 	
 	@NonNull
-	protected Set<PropertyDatum> getPropertyDatum(@NonNull PropertyAssignment propAssign) {
+	protected Set<PropertyDatum> getPropertyDatum(@NonNull NavigationAssignment propAssign) {
 		Set<PropertyDatum> result = new LinkedHashSet<PropertyDatum>();
-		Property targetProp = propAssign.getTargetProperty();
+		Property targetProp = QVTcoreBaseUtil.getTargetProperty(propAssign);
 		OCLExpression slotExpression = ClassUtil.nonNullState(propAssign.getSlotExpression());
 		TypedModel typedModel = getTypedModel(slotExpression);
 		PropertyDatum targetDatum = getPropertyDatum(typedModel, ClassUtil.nonNullState(slotExpression.getType().isClass()), targetProp);

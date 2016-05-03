@@ -24,8 +24,9 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 
 /**
@@ -216,10 +217,10 @@ public class Nodes
 				super(Role.Phase.PREDICATED, false);
 			}
 
-			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull SimpleNode parentNode, @NonNull PropertyAssignment propertyAssignment) {
+			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull SimpleNode parentNode, @NonNull NavigationAssignment navigationAssignment) {
 				assert parentNode.isClassNode();
 				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
-				Property property = propertyAssignment.getTargetProperty();
+				Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
 				assert property != null;
 				org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
 				assert type != null;

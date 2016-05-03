@@ -65,6 +65,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
@@ -620,6 +621,11 @@ public class DependencyAnalyzer
 				}
 			}
 			return result;
+		}
+
+		@Override
+		public @NonNull DependencyPaths visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment propertyAssignment) {
+			return visiting(propertyAssignment);		// No OppositePropertyAssignment in Operation
 		}
 
 		@Override
