@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Type;
@@ -47,51 +48,60 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		List<org.eclipse.ocl.pivot.@NonNull Class> ownedClasses = ClassUtil.nullFree(p.getOwnedClasses());
 		for (@NonNull Rule r : ClassUtil.nullFree(rt.getRule())) {
 			if (r instanceof Relation) {
-				org.eclipse.ocl.pivot.Class rc = PivotFactory.eINSTANCE.createClass();
-				ownedClasses.add(rc);
-				doRelationToTraceClass((Relation)r, rc);
-				CompilerUtil.normalizeNameables(ClassUtil.nullFree(rc.getOwnedProperties()));
+				ownedClasses.add(doRelationToTraceClass((Relation)r));
 			}
 		}
 		CompilerUtil.normalizeNameables(ownedClasses);
 		return p;
 	}
 
-	private void doRelationToTraceClass(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class rc) {	
-		qvtr2qvtc.putRelationTrace(r, rc);
-		String rn = ClassUtil.nonNullState(r.getName());
-		rc.setName("T"+rn);
-		for (@NonNull Variable rv : qvtr2qvtc.getMiddleDomainVariables(r))  {
-			createTraceProperty(rc, rv);
+	private org.eclipse.ocl.pivot.@NonNull Class doRelationToTraceClass(@NonNull Relation rRelation) {	
+		@SuppressWarnings("null")org.eclipse.ocl.pivot.@NonNull Class traceClass = PivotFactory.eINSTANCE.createClass();
+		qvtr2qvtc.putRelationTrace(rRelation, traceClass);
+		traceClass.setName("T" + rRelation.getName());
+		for (@NonNull Variable rVariable : qvtr2qvtc.getMiddleDomainVariables(rRelation))  {
+			createTraceProperty(traceClass, rVariable);
 		}
-		for (@NonNull Domain d : ClassUtil.nullFree(r.getDomain())) {
-			for (@NonNull DomainPattern rdp : ClassUtil.nullFree(((RelationDomain) d).getPattern())) {
-				TemplateExp t = ClassUtil.nonNullState(rdp.getTemplateExpression());
-				doSubTemplateToTraceClassProps(t, rc);
+		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
+			for (@NonNull DomainPattern rDomainPattern : ClassUtil.nullFree(((RelationDomain)rDomain).getPattern())) {
+				TemplateExp rTemplateExp = ClassUtil.nonNullState(rDomainPattern.getTemplateExpression());
+				doSubTemplateToTraceClassProps(rTemplateExp, traceClass);
 			}
 		}
+		CompilerUtil.normalizeNameables(ClassUtil.nullFree(traceClass.getOwnedProperties()));
+		return traceClass;
 	}
 
-	private void doSubTemplateToTraceClassProps(@NonNull OCLExpression t, org.eclipse.ocl.pivot.@NonNull Class rc) {
-		if (t instanceof TemplateExp) {
-			TemplateExp te = (TemplateExp) t;
-			Variable tv = ClassUtil.nonNullState(te.getBindsTo());
+	private void doSubTemplateToTraceClassProps(@NonNull TemplateExp te, org.eclipse.ocl.pivot.@NonNull Class rc) {
+		Variable tv = ClassUtil.nonNullState(te.getBindsTo());
+		if (te instanceof CollectionTemplateExp) {
 			createTraceProperty(rc, tv);			// ?? not required for CollectionTemplateExp's
-			if (te instanceof CollectionTemplateExp) {
-				CollectionTemplateExp cte = (CollectionTemplateExp) t;
-				for (@NonNull OCLExpression m : ClassUtil.nullFree(cte.getMember())) {
-					doSubTemplateToTraceClassProps(m, rc);
+			CollectionTemplateExp cte = (CollectionTemplateExp) te;
+			Variable collectionVariable = cte.getBindsTo();
+			CollectionType collectionType = (CollectionType)collectionVariable.getType();
+			Type elementType = ClassUtil.nonNullState(collectionType.getElementType());
+			int argIndex = 0;
+			for (@NonNull OCLExpression m : ClassUtil.nullFree(cte.getMember())) {
+				if (m instanceof TemplateExp) {
+					doSubTemplateToTraceClassProps((TemplateExp)m, rc);
 				}
-				Variable rv = cte.getRest();
-				if (rv != null) {
-					createTraceProperty(rc, rv);
+				else {
+					createTraceProperty(rc, collectionVariable.getName() + "_" + argIndex, elementType);
 				}
+				argIndex++;
 			}
-			else if (te instanceof ObjectTemplateExp) {
-				ObjectTemplateExp ote = (ObjectTemplateExp) te;
-				for (@NonNull PropertyTemplateItem pt : ClassUtil.nullFree(ote.getPart())) {
-					OCLExpression value = ClassUtil.nonNullState(pt.getValue());
-					doSubTemplateToTraceClassProps(value, rc);
+			Variable rv = cte.getRest();
+			if (rv != null) {
+				createTraceProperty(rc, rv);
+			}
+		}
+		else if (te instanceof ObjectTemplateExp) {
+			createTraceProperty(rc, tv);			// ?? not required for CollectionTemplateExp's
+			ObjectTemplateExp ote = (ObjectTemplateExp) te;
+			for (@NonNull PropertyTemplateItem pt : ClassUtil.nullFree(ote.getPart())) {
+				OCLExpression value = ClassUtil.nonNullState(pt.getValue());
+				if (value instanceof TemplateExp) {
+					doSubTemplateToTraceClassProps((TemplateExp)value, rc);
 				}
 			}
 		}
@@ -101,5 +111,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		String vn = ClassUtil.nonNullState(tv.getName());
 		Type c = ClassUtil.nonNullState(tv.getType());
 		qvtr2qvtc.whenTraceProperty(rc, vn, c);
+	}
+
+	private void createTraceProperty(org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull String name, @NonNull Type type) {
+		qvtr2qvtc.whenTraceProperty(rc, name, type);
 	}
 }

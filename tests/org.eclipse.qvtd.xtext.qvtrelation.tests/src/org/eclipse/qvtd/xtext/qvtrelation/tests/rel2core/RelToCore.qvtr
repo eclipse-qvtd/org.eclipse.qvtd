@@ -20,50 +20,112 @@ import qvtcore      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model
 
 
 
-transformation org::eclipse::qvtd::xtext::qvtrelation::tests::rel2core::relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, core:{qvtcore,qvtcorebase,qvtbase,pivotocl}) -- HHR Use Pivot metamodels
+transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, core:{qvtcore,qvtcorebase,qvtbase,pivotocl}) -- HHR Use Pivot metamodels
 {    
     -- Rule 1: Corresponding to each relation there exists a trace class in core.
     -- The trace class contains a property corresponding to each object node in the
     -- pattern of each domain of the relation.
     --
+    top relation PackageToTracePackage
+    {
+        packageName:String;
+        domain relations
+            relationsPackage:Package {
+                name = packageName
+            };
+        enforce domain core
+        	tracePackage:Package {
+                name = packageName
+            };
+    }
+    
+     top relation NestedPackageToTracePackage
+    {
+        packageName:String;
+        domain relations
+            relationsParent:Package {
+                ownedPackages = relationsChild:Package {}
+            };
+        enforce domain core
+        	traceParent:Package {
+                ownedPackages = traceChild:Package {}
+            };
+        when {
+           PackageToTracePackage(relationsParent, traceParent);
+           PackageToTracePackage(relationsChild, traceChild);
+        }
+    }
+    
+/*    top relation TransformationToTracePackage
+    {
+        domain relations
+            rTransformation:Transformation {
+                name = transformationName:String{},
+                owningPackage = rParent:Package{}
+            };
+        enforce domain core
+        	tracePackage:Package {
+                name = 'T'+transformationName,
+                owningPackage = traceParent:Package{}
+            };
+        when {
+            PackageToTracePackage(rParent, traceParent);
+        }
+    }
+    
     top relation RelationToTraceClass
     {
-        relationName:String;     
-        rootVariableName:String;       
         domain relations
-            _'relation':Relation {
-                name = relationName,
+            rRelation: Relation {
+                name = relationName:String{},
+                _'transformation' = rParent:Transformation{}
+            };
+        enforce domain
+            core traceClass:Class {
+                name = 'T'+relationName,
+                owningPackage = traceParent:Package{}
+            };
+        when {
+            TransformationToTracePackage(rParent, traceParent);
+        }
+    }
+    
+    relation RootVariableToTraceClassProperty
+    {
+        domain relations
+            rRelation: Relation {
                 domain = relationDomain:RelationDomain {
                     pattern = relationDomainPattern:DomainPattern {
                         templateExpression = rootTemplateExp:TemplateExp {
                             bindsTo = rootVariable:Variable {
-                                name = rootVariableName,
+                                name = rootVariableName:String{},
                                 type = rootVariableType:Class {}
                             }
                         }
                     }
                 }
             };
-        enforce domain
-            core traceClass:Class {
-                name = 'T'+relationName,
-                ownedProperties = traceClassProperty:pivotocl::Property {
-                    name = rootVariableName,
-                    type = rootVariableType
-                }
+        enforce domain core
+            traceProperty:Property {
+            	owningClass = traceClass:Class{},
+                name = rootVariableName,
+                type = rootVariableType
             };
-/*        where {
+        when {
+            RelationToTraceClass(rRelation, traceClass);
+        }
+        where {
 --            CollectionTemplateToTraceClassProps(rootTemplateExp, traceClass);
-            ObjectTemplateToTraceClassProps(rootTemplateExp, traceClass);
-        } */
-    }
+--            ObjectTemplateToTraceClassProps(rootTemplateExp, traceClass);
+        }
+    } */
     
 /*    relation CollectionTemplateToTraceClassProps
     {
         variableName: String;   
         domain relations
-            t:CollectionTemplateExp {
-                member = ms:Set(OCLExpression) {
+            collectionTemplateExp:CollectionTemplateExp {
+                member = members:Set(OCLExpression) {
                 	templateExp:TemplateExp {
 	                    bindsTo = templateVariable:Variable {
 	                        name = variableName,
@@ -89,8 +151,8 @@ transformation org::eclipse::qvtd::xtext::qvtrelation::tests::rel2core::relToCor
     {
         variableName: String;     
         domain relations
-            t:ObjectTemplateExp {
-                part = pt:PropertyTemplateItem {
+            objectTemplateExp:ObjectTemplateExp {
+                part = propertyTemplateItem:PropertyTemplateItem {
                     value = templateExp:TemplateExp {
                         bindsTo = templateVariable:Variable {
                             name = variableName,
@@ -108,7 +170,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation::tests::rel2core::relToCor
             };
         where {
 --            CollectionTemplateToTraceClassProps(templateExp, traceClass);
-            ObjectTemplateToTraceClassProps(templateExp, traceClass);
+--            ObjectTemplateToTraceClassProps(templateExp, traceClass);
         }
     } */
 }

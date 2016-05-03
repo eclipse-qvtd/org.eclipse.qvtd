@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Checked2Enforced" nsURI="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/rel2core/Checked2Enforced"
+    nsPrefix="Checked2Enforced">
+  <eClassifiers xsi:type="ecore:EClass" name="TChecked2Enforced">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="checkedRootVariable" lowerBound="1"
+        eType="ecore:EClass Checked.ecore#//CheckedClass">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="TObjectTemplateToTraceClassProps"/>
+        <details key="lower" value="1"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enforcedRootVariable" lowerBound="1"
+        eType="ecore:EClass Enforced.ecore#//EnforcedClass">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="TObjectTemplateToTraceClassProps"/>
+        <details key="lower" value="1"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

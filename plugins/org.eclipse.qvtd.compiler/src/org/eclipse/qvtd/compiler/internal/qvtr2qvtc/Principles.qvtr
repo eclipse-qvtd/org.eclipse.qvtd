@@ -1,0 +1,16 @@
+import CheckedMM    :   'Checked.ecore';
+import EnforcedMM   :   'Enforced.ecore';
+
+transformation Principles(checkedDomain:CheckedMM, enforcedDomain:EnforcedMM)
+{
+	relation Checked2Enforced {
+		domain checkedDomain
+			checkedRootVariable:CheckedClass {
+				
+			};
+		enforce domain enforcedDomain
+			enforcedRootVariable:EnforcedClass {
+				
+			};
+	}
+}

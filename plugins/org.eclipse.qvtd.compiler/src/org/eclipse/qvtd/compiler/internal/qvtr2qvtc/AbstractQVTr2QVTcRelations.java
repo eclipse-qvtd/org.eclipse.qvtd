@@ -17,16 +17,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -36,17 +41,16 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -64,8 +68,56 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 {
 	protected abstract class AbstractEnforceableRelationDomain2CoreMapping 
 	{
+		protected abstract class AbstractOtherRelationDomain2CoreDomain 
+		{
+			protected final @NonNull RelationDomain rOtherDomain;		// A not-enforced domain wrt the enforced domain
+			protected final @NonNull String rOtherDomainName;
+			protected final @NonNull TypedModel rOtherTypedModel;
+			protected final @NonNull TypedModel cOtherTypedModel;
+			protected final @NonNull CoreDomain cOtherDomain;
+			protected final @NonNull GuardPattern cOtherGuardPattern;
+			protected final @NonNull BottomPattern cOtherBottomPattern;
+			
+			public AbstractOtherRelationDomain2CoreDomain(@NonNull RelationDomain rOtherDomain) {
+				this.rOtherDomain = rOtherDomain;
+				this.rOtherDomainName = ClassUtil.nonNullState(rOtherDomain.getName());
+				this.rOtherTypedModel = ClassUtil.nonNullState(rOtherDomain.getTypedModel());
+				this.cOtherTypedModel = getCoreTypedModel(rOtherTypedModel);
+				this.cOtherDomain = qvtr2qvtc.whenCoreDomain(cMapping, rOtherDomainName);
+				cOtherDomain.setTypedModel(cOtherTypedModel);
+				cOtherDomain.setIsCheckable(rOtherDomain.isIsCheckable());
+				cOtherDomain.setIsEnforceable(false);
+				this.cOtherGuardPattern = ClassUtil.nonNullState(cOtherDomain.getGuardPattern());
+				this.cOtherBottomPattern = ClassUtil.nonNullState(cOtherDomain.getBottomPattern());
+			}
+
+			public abstract void mapOtherDomainToDomainVariablesAndPatterns() throws CompilerChainException;
+		}
+
+		/**
+		 * An ExpressionCopier deep copies an OCLExpression tree, exploiting the forward traceability of context to
+		 * update references and using sibling to distinguish multiple targets.
+		 */
+		@SuppressWarnings("serial")
+		protected class ExpressionCopier extends EcoreUtil.Copier
+		{	
+			@Override
+			public EObject get(Object oIn) {
+				if (oIn instanceof Element) {
+					List<Element> oOuts = source2targets.get(oIn);
+					if (oOuts != null) {
+						assert oOuts.size() == 1;
+						return oOuts.get(0);
+					}
+				}
+				return super.get(oIn);
+			}
+		}
+		
 		// Relations
 		protected final @NonNull RelationDomain rEnforcedDomain;					// rd: This source enforced domain
+		protected final @NonNull TypedModel rEnforcedTypedModel;					// rEnforcedDomain.getTypedModel()
+		protected final @NonNull String rEnforcedDomainName;						// rEnforcedDomain.getName()
 		protected final @NonNull List<@NonNull Variable> rEnforcedDomainVariables;	// All variables defined or referenced in this domain
 //		@Deprecated
 //		protected final @NonNull /*Object*/TemplateExp rEnforcedTemplateExpression;	// te: The template expression defining the enforced domain pattern
@@ -73,7 +125,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 //		@Deprecated
 //		protected final @NonNull Variable rEnforcedRootVariable;					// tev: The template expression variable (the root variable of the enforced domain pattern)
 		protected final @NonNull List<@NonNull Variable> rEnforcedRootVariables;					// tev: The template expression variable (the root variable of the enforced domain pattern)
-		protected final @NonNull List<@NonNull RelationDomain> rOtherDomains;		// All other domains sharing the parent of this domain
+		protected final @NonNull List<@NonNull AbstractOtherRelationDomain2CoreDomain> otherDomain2coreDomains;		// All other domains sharing the parent of this domain
 		protected final @NonNull Set<@NonNull Variable> rOtherDomainVariables;		// All variables defined or referenced in other domains
 		// Core
 		protected final @NonNull Mapping cMapping;									// m: The resultant mapping
@@ -85,6 +137,43 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		protected final @NonNull BottomPattern cEnforcedBottomPattern;				// db: The resultant enforced domain bottom pattern
 		protected final @NonNull RealizedVariable cMiddleRealizedVariable;		// tcv: The trace class variable (the middle variable identifying the middle object)
 		
+		/**
+		 * The lazily created named RealizedVariables in each CorePattern.
+		 */
+		private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull String, @NonNull RealizedVariable>> pattern2name2realizedVariable
+				= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull String, @NonNull RealizedVariable>>();	
+		
+		/**
+		 * The lazily created named RealizedVariables in each CorePattern.
+		 */
+		private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull String, @NonNull Variable>> pattern2name2variable
+				= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull String, @NonNull Variable>>();	
+		
+		/**
+		 * The lazily created RealizedVariables per Relation Variable in each CorePattern.
+		 */
+		private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull RealizedVariable>> pattern2variable2realizedVariable
+				= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull RealizedVariable>>();
+
+		/**
+		 * The lazily created Core Variable for each Relation Variable in each CorePattern.
+		 */
+		private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull Variable>> pattern2variable2variable
+				= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull Variable>>();
+
+		/**
+		 * The core Variable for each relation Variable in a chosen mapping.
+		 */
+		private final @NonNull Map<@NonNull Variable, @NonNull Variable> rVariable2cVariable = new HashMap<@NonNull Variable, @NonNull Variable>();
+		
+		/**
+		 * The names allocated in each relation.
+		 */
+		private final @NonNull Map<@NonNull String, @NonNull Element> name2element = new HashMap<@NonNull String, @NonNull Element>();
+
+		private final @NonNull Map<@NonNull Element, @NonNull List<@NonNull Element>> source2targets = new HashMap<@NonNull Element, @NonNull List<@NonNull Element>>();
+		private final @NonNull Map<@NonNull Element, @NonNull Element> target2source = new HashMap<@NonNull Element, @NonNull Element>();
+		
 		public AbstractEnforceableRelationDomain2CoreMapping(@NonNull RelationDomain rEnforcedDomain, @NonNull String cMappingName) {
 			this.rEnforcedDomain = rEnforcedDomain;
 			//
@@ -94,20 +183,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			this.rEnforcedRootVariables = getRootVariables(rEnforcedDomain);
 //			this.rEnforcedTemplateExpression = /*(ObjectTemplateExp)*/ ClassUtil.nonNullState(rEnforcedDomainPattern.getTemplateExpression());
 //			this.rEnforcedRootVariable = ClassUtil.nonNullState(rEnforcedTemplateExpression.getBindsTo());			
-			@NonNull TypedModel rEnforcedTypedModel = ClassUtil.nonNullState(rEnforcedDomain.getTypedModel());
+			this.rEnforcedTypedModel = ClassUtil.nonNullState(rEnforcedDomain.getTypedModel());
 			@NonNull String rRelationName = ClassUtil.nonNullState(rRelation.getName());
-			@NonNull String rEnforcedDomainName = ClassUtil.nonNullState(rEnforcedDomain.getName());
+			this.rEnforcedDomainName = ClassUtil.nonNullState(rEnforcedDomain.getName());
 			@NonNull Type traceClass = qvtr2qvtc.getTraceClass(rRelation);
-			//
-			this.rOtherDomains = new ArrayList<@NonNull RelationDomain>();
-			this.rOtherDomainVariables = new HashSet<@NonNull Variable>();
-			for (@NonNull Domain rDomain : ClassUtil.nullFree(rEnforcedDomain.getRule().getDomain())) {
-				if ((rDomain != rEnforcedDomain) && (rDomain instanceof RelationDomain)) {
-					RelationDomain rRelationDomain = (RelationDomain)rDomain;
-					rOtherDomains.add(rRelationDomain);
-					rOtherDomainVariables.addAll(getDomainVariables(rRelationDomain));
-				}
-			}
 			//
 			this.cEnforcedTypedModel = getCoreTypedModel(rEnforcedTypedModel);
 			this.cMapping = qvtr2qvtc.whenMapping(rRelation, cMappingName);
@@ -116,7 +195,17 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			this.cEnforcedDomain = qvtr2qvtc.whenCoreDomain(cMapping, rEnforcedDomainName);
 			this.cEnforcedGuardPattern = ClassUtil.nonNullState(cEnforcedDomain.getGuardPattern());
 			this.cEnforcedBottomPattern = ClassUtil.nonNullState(cEnforcedDomain.getBottomPattern());
-			this.cMiddleRealizedVariable = qvtr2qvtc.whenRealizedVariable(cMiddleBottomPattern, rRelationName+"_"+rEnforcedDomainName+"_v", traceClass);	// 42
+			this.cMiddleRealizedVariable = whenRealizedVariable(cMiddleBottomPattern, rRelationName+"_"+rEnforcedDomainName+"_v", traceClass);	// 42
+			//
+			this.otherDomain2coreDomains = new ArrayList<@NonNull AbstractOtherRelationDomain2CoreDomain>();
+			this.rOtherDomainVariables = new HashSet<@NonNull Variable>();
+			for (@NonNull Domain rDomain : ClassUtil.nullFree(rEnforcedDomain.getRule().getDomain())) {
+				if ((rDomain != rEnforcedDomain) && (rDomain instanceof RelationDomain)) {
+					RelationDomain rRelationDomain = (RelationDomain)rDomain;
+					otherDomain2coreDomains.add(createOtherDomain2CoreDomain(rRelationDomain));
+					rOtherDomainVariables.addAll(getDomainVariables(rRelationDomain));
+				}
+			}
 		}
 		
 		// 2
@@ -161,7 +250,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				}
 				else {
 					OCLExpression mMember = mapExpression(rMember);
-					mVariable = createVariable(qvtr2qvtc.getSafeName(rRelation, mMember, "member"), mMember);
+					mVariable = createVariable(getSafeName(mMember, "member"), mMember);
 				}
 				rMember2mVariable.put(rMember, mVariable);
 			}
@@ -276,6 +365,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		
 		protected void addPredicate(@NonNull CorePattern cCorePattern, @NonNull OCLExpression cExpression) {
+			System.out.println("addPredicate " + cExpression);
 			Predicate cPredicate = createPredicate(cExpression);
 			cCorePattern.getPredicate().add(cPredicate);
 		}
@@ -287,6 +377,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			if (!cProperty.isIsMany() || (cExpression.getType() instanceof CollectionType)) {
 				VariableExp cSlotVariableExp = createVariableExp(cVariable);
 				NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, cProperty, cExpression);
+				System.out.println("addPropertyAssignment " + cAssignment);
 				cBottomPattern.getAssignment().add(cAssignment);
 				return;
 			}
@@ -294,6 +385,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			if ((cOppositeProperty != null) && (cExpression instanceof VariableExp) && (!cOppositeProperty.isIsMany() || (cVariable.getType() instanceof CollectionType))) {
 				VariableExp cSlotVariableExp = (VariableExp)cExpression;
 				NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, cOppositeProperty, createVariableExp(cVariable));
+				System.out.println("addPropertyAssignment " + cAssignment);
 				cBottomPattern.getAssignment().add(cAssignment);
 				return;
 			}
@@ -307,22 +399,22 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			if (rExpression instanceof ObjectTemplateExp) {
 				// body of RDomainPatternExprToMappingDomainTemplateVarAssignment
 				Variable rBoundVariable = ClassUtil.nonNullState(((ObjectTemplateExp)rExpression).getBindsTo());
-				if (!rMiddleDomainVariables.contains(rBoundVariable)) {
-					Variable cBoundVariable = getCoreVariable(rBoundVariable);
-					cTargetVariable = doRVarToMRealizedVar(rTargetVariable);
+				if (!rSharedVariables.contains(rBoundVariable)) {
+					Variable cBoundVariable = getCoreVariable(rBoundVariable);  // FIXME whenVariable(cMiddleBottomPattern, rBoundVariable);
+					cTargetVariable = getCoreVariable(rTargetVariable); //getCoreRealizedVariable(rTargetVariable);
 					cExpression = createVariableExp(cBoundVariable);
 				}
 			}
 			else if (rExpression instanceof VariableExp) {
 				Variable rReferredVariable = ClassUtil.nonNullState((Variable) ((VariableExp)rExpression).getReferredVariable());
 				Variable cReferredVariable = getCoreVariable(rReferredVariable);
-				if (rMiddleDomainVariables.contains(rReferredVariable) ) {
+				if (rSharedVariables.contains(rReferredVariable) ) {
 					// body of RDomainPatternExprToMappingBottomVarAssignment
-					cTargetVariable = doRVarToMRealizedVar(rTargetVariable);
+					cTargetVariable = getCoreRealizedVariable(rTargetVariable);
 				}
 				else {
 					// body of RDomainPatternExprToMappingDomainVarAssignment
-					cTargetVariable = doRVarToMRealizedVar(rTargetVariable);
+					cTargetVariable = getCoreRealizedVariable(rTargetVariable);
 					cEnforcedBottomPattern.getRealizedVariable().add((RealizedVariable)cTargetVariable);
 				}
 				cExpression = createVariableExp(cReferredVariable);
@@ -346,14 +438,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			 * 
 			 * ve1:T{tp = ve2}   =>   ve1.tp := ve2;
 			 */
-			Variable vpte = ClassUtil.nonNullState((Variable) e.getReferredVariable());
-			Variable mvpte = getCoreVariable(vpte);
-			if (rMiddleDomainVariables.contains(vpte)) {
-				addPropertyAssignment(cMiddleBottomPattern, cTemplateVariable, traceProperty, createVariableExp(mvpte));
-			}
-			else {
-				addPropertyAssignment(cEnforcedBottomPattern, cTemplateVariable, traceProperty, createVariableExp(mvpte));
-			}
+			Variable rVariable/*vpte*/ = ClassUtil.nonNullState((Variable) e.getReferredVariable());
+			Variable cVariable/*mvpte*/ = getCoreVariable(rVariable);
+			BottomPattern cBottomPattern = rSharedVariables.contains(rVariable) ? cMiddleBottomPattern : cEnforcedBottomPattern;
+			addPropertyAssignment(cBottomPattern, cTemplateVariable, traceProperty, createVariableExp(cVariable));
 		}
 		
 		// // RDomainPatternToMDBottomPattern
@@ -382,6 +470,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			else {
 				
 			}
+			OCLExpression rGuardPredicate = rTemplateExpression.getWhere();
+			if (rGuardPredicate != null) {
+				cMiddleBottomPattern.getPredicate().add(createPredicate(mapExpression(rGuardPredicate)));
+			}
 		}
 
 		// loop body of RDomainPatternToMDBottomPatternSimpleNonVarExpr
@@ -395,41 +487,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			addPropertyAssignment(cMiddleBottomPattern, cTemplateVariable, traceProperty, mapExpression(ptv));
 		}
 
-		// 15
-		/*
-		 * Creates a Predicate, who's ConditionExpression is an
-		 * OperationCallExp:
-		 * 		trace.<v.name> = v;
-		 * TODO Suggest better name: RDomainPatternVariableToTracePredicate?
-		 */
-		private void doRDomainToMBottomPredicateForEnforcement(@NonNull Set<@NonNull Predicate> predicatesWithoutVarBindings, @NonNull Set<@NonNull Variable> unboundDomainVars) throws CompilerChainException
-		{
-			Set<@NonNull Variable> remainingUnBoundDomainVars = new HashSet<@NonNull Variable>(unboundDomainVars);
-			remainingUnBoundDomainVars.removeAll(rEnforcedRootVariables);
-			Set<@NonNull Predicate> predicatesWithVarBindings = 
-					selectPredicatesThatReferToVariables(predicatesWithoutVarBindings, remainingUnBoundDomainVars);
-			mapPredicatesToPredicates(predicatesWithVarBindings);
-				// assign
-			for (@NonNull Variable v : rEnforcedRootVariables) {
-				@NonNull Variable mv = getCoreVariable(v);
-				Property pep = getProperty(cMiddleRealizedVariable.getType(), v);
-				NavigationCallExp pe = createNavigationCallExp(createVariableExp(cMiddleRealizedVariable), pep);
-				addConditionPredicate(cMiddleBottomPattern, pe, createVariableExp(mv));
-			}
-		}
-		
-		// 20
-		private void doRDomainToMDBottomForEnforcementOfNonIdentityPropObject(@NonNull Set<@NonNull Predicate> predicatesWithoutVarBindings, @NonNull Set<@NonNull Variable> unboundDomainVars)
-		{
-			// check
-			// FIXME not c.key.part->includes(pp)
-			// when
-//			RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
-//			assert rt != null;
-//			@NonNull Transformation mt = qvtr2qvtc.getCoreTransformation(rt);
-			// TODO Finish when clear about if the call should be uncommented
-			// ...
-		}
+		protected abstract @NonNull AbstractOtherRelationDomain2CoreDomain createOtherDomain2CoreDomain(@NonNull RelationDomain rRelationDomain);
 
 		// 50
 		/*
@@ -459,46 +517,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}*/
 
 		
-		// 18
-		/*
-		 * Creates Assignments for each part of the ObjectTemplateExp
-		 */
-		private void doRDomainToMDBottomForEnforcementOfIdentityProp() throws CompilerChainException
-		{
-			for (@NonNull TemplateExp rEnforcedTemplateExpression : rEnforcedTemplateExpressions) {
-				Variable v = rEnforcedTemplateExpression.getBindsTo();
-				assert v != null;
-				Type c = v.getType();
-				assert c != null;
-				Area area = cEnforcedBottomPattern.getArea();
-				assert area instanceof CoreDomain : "Missing CoreDomain for doRDomainToMDBottomForEnforcementOfIdentityProp";
-				CoreDomain cd = (CoreDomain) area;
-				Rule rule = cd.getRule();
-				assert rule instanceof Mapping : "Missing Mapping for doRDomainToMDBottomForEnforcementOfIdentityProp";
-				Mapping m = (Mapping) rule;
-				BottomPattern mb = m.getBottomPattern();
-				assert mb != null;
-				if (rEnforcedTemplateExpression instanceof ObjectTemplateExp) {
-					for (@NonNull PropertyTemplateItem pt : ClassUtil.nullFree(((ObjectTemplateExp)rEnforcedTemplateExpression).getPart())) {
-						final Property partProperty = ClassUtil.nonNullState(pt.getReferredProperty());
-						// check relations
-						Key key = qvtr2qvtc.getKeyforType(c);
-						if ((key != null) && key.getPart().contains(partProperty)) {
-							final OCLExpression partValue = ClassUtil.nonNullState(pt.getValue());
-							addPropertyAssignmentToMiddleBottomPattern(v, partProperty, partValue);
-						}
-					}
-				}
-				else {
-	//				throw new CompilerChainException("Missing doInvokedRelationToMappingForEnforcement support for CollectionTemplateExp");
-					System.err.println("Missing doRDomainToMDBottomForEnforcementOfIdentityProp support for CollectionTemplateExp");			
-				}
-			}
-		}
-		
-		private @NonNull /*Realized*/Variable doRVarToMRealizedVar(@NonNull Variable rv) {		
-			@NonNull /*Realized*/Variable mv = /*(RealizedVariable)*/ qvtr2qvtc.getCoreVariable(cMapping, rv);
-			return mv;
+		private @NonNull RealizedVariable getCoreRealizedVariable(@NonNull Variable rv) {		
+			@NonNull /*Realized*/Variable mv = /*(RealizedVariable)*/ getCoreVariable(rv);
+			return (@NonNull RealizedVariable) mv;
 		}
 
 		protected @NonNull TypedModel getCoreTypedModel(@NonNull TypedModel rTypedModel) {
@@ -514,7 +535,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		
 		protected @NonNull Variable getCoreVariable(@NonNull Variable rVariable) {			// doRVarToMVar
-			return qvtr2qvtc.getCoreVariable(cMapping, rVariable);
+			return ClassUtil.nonNullState(rVariable2cVariable.get(rVariable));
 		}
 
 		protected @NonNull List<@NonNull Variable> getDomainVariables(@NonNull RelationDomain rRelationDomain) {
@@ -543,6 +564,25 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 			relationDomains.remove(rEnforcedDomain);
 			return relationDomains;
+		}
+		
+		public @NonNull String getSafeName(@NonNull Element newElement, @NonNull String name) {
+			Element oldElement = name2element.get(name);
+			if (oldElement == newElement) {
+				return name;
+			}
+			if (oldElement == null) {
+				name2element.put(name, newElement);
+				return name;
+			}
+			for (int i = 1; true; i++) {
+				String newName = name + "_" + i;
+				oldElement = name2element.get(newName);
+				if (oldElement == null) {
+					name2element.put(newName, newElement);
+					return newName;
+				}
+			}
 		}
 
 		protected @NonNull List<@NonNull TemplateExp> getTemplateExpressions(@NonNull RelationDomain rRelationDomain) {
@@ -578,9 +618,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				TemplateExp rTemplateExpression = qvtr2qvtc.getTemplateExpression(rDomainVariable);
 //				if (dvte instanceof ObjectTemplateExp) {
 					// tp=dv:T{...} => tcv.tp := dv;
-					Variable cVariable = getCoreVariable(rDomainVariable);
-					Property cProperty = getProperty(cMiddleRealizedVariable.getType(), rDomainVariable);
-					addPropertyAssignment(cMiddleBottomPattern, cMiddleRealizedVariable, cProperty, createVariableExp(cVariable));
+					Property cProperty = basicGetProperty(cMiddleRealizedVariable.getType(), rDomainVariable);
+					if (cProperty != null) {			// null for dead variables
+						Variable cVariable = getCoreVariable(rDomainVariable);
+						addPropertyAssignment(cMiddleBottomPattern, cMiddleRealizedVariable, cProperty, createVariableExp(cVariable));
+					}
 //				}
 /*				else if (dvte instanceof CollectionTemplateExp) {
 					// tp=dv:T{...} => tcv.tp := dv;
@@ -605,9 +647,17 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			Set<@NonNull Predicate> predicatesWithVarBindings = selectPredicatesThatReferToVariables(predicatesWithoutVarBindings, nonRootEnforcedBottomDomainVariables);	
 			Set<@NonNull Predicate> remainingPredicatesWithoutVarBindings = new HashSet<@NonNull Predicate>(predicatesWithoutVarBindings);
 			remainingPredicatesWithoutVarBindings.removeAll(predicatesWithVarBindings);
-			for (@NonNull TemplateExp rEnforcedTemplateExpression : rEnforcedTemplateExpressions) {
-				Variable rTemplateVariable = ClassUtil.nonNullState(rEnforcedTemplateExpression.getBindsTo());
-				Type rTemplateVariableType = ClassUtil.nonNullState(rTemplateVariable.getType());
+			for (@NonNull TemplateExp rEnforcedTemplateExpression/*te*/ : rEnforcedTemplateExpressions) {
+				mapEnforcedDomain(rEnforcedTemplateExpression);
+			}
+		}	
+		
+		// RDomainToMDBottomForEnforcement
+		private void mapEnforcedDomain(@NonNull TemplateExp rEnforcedTemplateExpression/*te*/) throws CompilerChainException
+		{
+//			for (@NonNull TemplateExp rEnforcedTemplateExpression/*te*/ : rEnforcedTemplateExpressions) {
+				Variable rTemplateVariable/*v*/ = ClassUtil.nonNullState(rEnforcedTemplateExpression.getBindsTo());
+				Type rTemplateVariableType/*c*/ = ClassUtil.nonNullState(rTemplateVariable.getType());
 				Key key = qvtr2qvtc.getKeyforType(rTemplateVariableType);
 //				if (key == null){
 //					// Nothing to do
@@ -615,16 +665,45 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				/*else*/ if (rEnforcedTemplateExpression instanceof ObjectTemplateExp) {
 					for (@NonNull PropertyTemplateItem pt : ClassUtil.nullFree(((ObjectTemplateExp)rEnforcedTemplateExpression).getPart())) {
 						Property rPartProperty = ClassUtil.nonNullState(pt.getReferredProperty());
-						OCLExpression rPartValue = ClassUtil.nonNullState(pt.getValue());
+						OCLExpression rPartValue/*pte*/ = ClassUtil.nonNullState(pt.getValue());
 						if ((key != null) && key.getPart().contains(rPartProperty)) {
 							//  body of RDomainToMDBottomForEnforcementOfIdentityProp
 							addPropertyAssignmentToMiddleBottomPattern(rTemplateVariable, rPartProperty, rPartValue);
 						}
-						else if (!(rPartValue instanceof TemplateExp)) {
+						else if (rPartValue instanceof TemplateExp) {
+							// body of RDomainToMDBottomForEnforcementOfNonIdentityPropObject
+							TemplateExp pte = (TemplateExp)rPartValue;
+							Variable pv = pte.getBindsTo();
+							Mapping composedMapping = cMapping; //qvtr2qvtc.createMapping(); //whenMapping(rRelation, cMapping.getName()+"_for_"+pv.name);
+//							GuardPattern composedMappingGuardPattern = ClassUtil.nonNullState(composedMapping.getGuardPattern());
+							CoreDomain composedEnforcedDomain = cEnforcedDomain;//qvtr2qvtc.whenCoreDomain(composedMapping, rEnforcedDomainName);
+//							composedEnforcedDomain.setIsEnforceable(true);
+//							composedEnforcedDomain.setTypedModel(cEnforcedTypedModel);
+//							GuardPattern composedEnforcedGuardPattern = composedEnforcedDomain.getGuardPattern();
+							BottomPattern composedEnforcedBottomPattern = cEnforcedBottomPattern;//ClassUtil.nonNullState(composedEnforcedDomain.getBottomPattern());
+
+							
+//							/*Realized*/Variable cTargetVariable/*mpv*/ = mapRealizedVariable(pv);
+							/*Realized*/Variable cTargetVariable/*mpv*/ = rWhenVariables.contains(pv) ? getCoreVariable(pv) : whenRealizedVariable(composedEnforcedBottomPattern, pv);
+
+							Variable cTemplateVariable/*mv*/ = getCoreVariable(rTemplateVariable);
+							Property cTargetProperty = getProperty(cTemplateVariable.getType(), rPartProperty);
+							addPropertyAssignment(composedEnforcedBottomPattern, cTemplateVariable, cTargetProperty, createVariableExp(cTargetVariable));
+// FIXME							mapEnforcedDomain(pte);
+//							cMapping.getLocal().add(composedMapping);
+							Property cTargetProperty2 = getProperty(cMiddleRealizedVariable.getType(), cTargetVariable);
+							addPropertyAssignment(cMiddleBottomPattern, cMiddleRealizedVariable, cTargetProperty2, createVariableExp(cTargetVariable));
+						}
+						else {
 							// body of RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
-							Mapping composedMapping = qvtr2qvtc.createMapping(); //whenMapping(rRelation, cMapping.getName()+"_forNonIdentityProp");
-							BottomPattern composedBottomPattern = ClassUtil.nonNullState(composedMapping.getBottomPattern());
+							Mapping composedMapping = cMapping; //qvtr2qvtc.createMapping(); //whenMapping(rRelation, cMapping.getName()+"_forNonIdentityProp");
+							BottomPattern composedBottomPattern = cMiddleBottomPattern; //BClassUtil.nonNullState(composedMapping.getBottomPattern());
 //							composedMapping.getGuardPattern();
+							GuardPattern composedMappingGuardPattern = ClassUtil.nonNullState(composedMapping.getGuardPattern());
+							CoreDomain composedEnforcedDomain = cEnforcedDomain;//qvtr2qvtc.whenCoreDomain(composedMapping, rEnforcedDomainName);
+							GuardPattern composedEnforcedGuardPattern = cEnforcedGuardPattern;//composedEnforcedDomain.getGuardPattern();
+							// where
+							@SuppressWarnings("unused")BottomPattern composedMappingBottomPattern = cMiddleBottomPattern;//ClassUtil.nonNullState(composedMapping.getBottomPattern());
 							Variable cTemplateVariable = getCoreVariable(rTemplateVariable);
 							//RDomainToMComposedMappingGuardrEnforcedDomain
 							for (@NonNull TemplateExp rTemplateExpression : rEnforcedTemplateExpressions) {
@@ -632,30 +711,19 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 									// check
 									Variable rReferredVariable = (Variable) ClassUtil.nonNullState(((VariableExp) rPartValue).getReferredVariable());
 									if (isVarBoundToSomeOtherTemplate((ObjectTemplateExp) rTemplateExpression, rEnforcedTemplateExpression, rReferredVariable)) {
-										String rEnforcedDomainName = ClassUtil.nonNullState(rEnforcedDomain.getName());
-										TypedModel rTypedModel = rEnforcedDomain.getTypedModel();
-										if (rTransformation != rTypedModel.getTransformation())
-											return;
-										// init
-										GuardPattern composedMappingGuardPattern = ClassUtil.nonNullState(composedMapping.getGuardPattern());
-										CoreDomain composedEnforcedDomain = qvtr2qvtc.whenCoreDomain(composedMapping, rEnforcedDomainName);
-										GuardPattern composedEnforcedGuardPattern = composedEnforcedDomain.getGuardPattern();
-										// where
-										@SuppressWarnings("unused")BottomPattern composedMappingBottomPattern = ClassUtil.nonNullState(composedMapping.getBottomPattern());
 										Variable cReferredVariable = getCoreVariable(rReferredVariable);
 										// assign
 										Property cTargetProperty = getProperty(cReferredVariable.getType(), cReferredVariable);
 										NavigationCallExp cPropertyCallExp = createNavigationCallExp(createVariableExp(cMiddleRealizedVariable), cTargetProperty);
 										addConditionPredicate(composedMappingGuardPattern, cPropertyCallExp, createVariableExp(cReferredVariable));
-										TypedModel cTypedModel = getCoreTypedModel(rTypedModel);
-										composedEnforcedDomain.setTypedModel(cTypedModel);
+//										composedEnforcedDomain.setTypedModel(cEnforcedTypedModel);
 										composedEnforcedGuardPattern.getBindsTo().add(cReferredVariable);
-										composedEnforcedDomain.setGuardPattern(composedEnforcedGuardPattern);
+//										composedEnforcedDomain.setGuardPattern(composedEnforcedGuardPattern);
 									}
 								}
 								Property cTargetProperty = getProperty(cTemplateVariable.getType(), rPartProperty);
 								addPropertyAssignment(composedBottomPattern, cTemplateVariable, cTargetProperty, mapExpression(rPartValue));
-								cMapping.getLocal().add(composedMapping);
+//								cMapping.getLocal().add(composedMapping);
 							}
 						}
 					}
@@ -674,8 +742,31 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				Variable cTemplateVariable = getCoreVariable(rTemplateVariable);
 				Property cTargetProperty = getProperty(cMiddleRealizedVariable.getType(), rTemplateVariable);
 				addPropertyAssignment(cMiddleBottomPattern, cMiddleRealizedVariable, cTargetProperty, createVariableExp(cTemplateVariable));
-			}
+//			}
 		}	
+
+		// 15
+		/*
+		 * Creates a Predicate, who's ConditionExpression is an
+		 * OperationCallExp:
+		 * 		trace.<v.name> = v;
+		 * TODO Suggest better name: RDomainPatternVariableToTracePredicate?
+		 *
+		private void doRDomainToMBottomPredicateForEnforcement(@NonNull Set<@NonNull Predicate> predicatesWithoutVarBindings, @NonNull Set<@NonNull Variable> unboundDomainVars) throws CompilerChainException
+		{
+			Set<@NonNull Variable> remainingUnBoundDomainVars = new HashSet<@NonNull Variable>(unboundDomainVars);
+			remainingUnBoundDomainVars.removeAll(rEnforcedRootVariables);
+			Set<@NonNull Predicate> predicatesWithVarBindings = 
+					selectPredicatesThatReferToVariables(predicatesWithoutVarBindings, remainingUnBoundDomainVars);
+			mapPredicatesToPredicates(predicatesWithVarBindings);
+				// assign
+			for (@NonNull Variable v : rEnforcedRootVariables) {
+				@NonNull Variable mv = getCoreVariable(v);
+				Property pep = getProperty(cMiddleRealizedVariable.getType(), v);
+				NavigationCallExp pe = createNavigationCallExp(createVariableExp(cMiddleRealizedVariable), pep);
+				addConditionPredicate(cMiddleBottomPattern, pe, createVariableExp(mv));
+			}
+		} */
 
 		/*
 		 * The issue with this method is that all variables should have been
@@ -685,10 +776,18 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		 */
 		// 25
 		protected @NonNull OCLExpression mapExpression(@NonNull OCLExpression rExpression) {
-//			OCLExpCopy oCLExpCopy = new OCLExpCopy(qvtr2qvtc);
-			
-//			return (OCLExpression) ClassUtil.nonNullState(oCLExpCopy.doSwitch(re));
-			return qvtr2qvtc.copy(rExpression, null);
+			EcoreUtil.Copier copier = new ExpressionCopier();
+			OCLExpression eOut = (OCLExpression) copier.copy(rExpression);			
+		    copier.copyReferences();
+		    for (EObject eSource : copier.keySet()) {
+		    	EObject eTarget = copier.get(eSource);
+		    	if (eTarget != null) {
+		    		assert eSource != null;
+		    		putTrace((Element)eTarget, (Element)eSource);
+		    	}
+		    }
+		    assert eOut != null;
+			return eOut;
 		}
 		
 		protected void mapPredicatesToPredicates(@NonNull Iterable<@NonNull Predicate> rPredicates) {	// RPredicateSetToMBPredicateSet
@@ -715,7 +814,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		
 		protected @NonNull RealizedVariable mapRealizedVariable(@NonNull Variable rVariable) {		
-			return qvtr2qvtc.whenRealizedVariable(cEnforcedBottomPattern, rVariable);
+			return whenRealizedVariable(cEnforcedBottomPattern, rVariable);
 		}
 
 		/**
@@ -726,7 +825,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		 * @param cMiddleBottomPattern the mb
 		 */
 		// RRelImplToMBottomEnforcementOperation
-		protected void mapRelationImplemantationToEnforcementOperation() {
+		protected void mapRelationImplementationToEnforcementOperation() {
 			
 			// TODO Code this when testing transformations with operational implementations.
 			
@@ -734,7 +833,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		
 		protected void mapVariablesToVariables(@NonNull Iterable<@NonNull Variable> rVariables, @NonNull CorePattern cPattern) {		// RVarSetToDGVarSet, RVarSetToMBVarSet
 			for (@NonNull Variable rVariable : rVariables) {
-				qvtr2qvtc.whenVariable(cPattern, rVariable);
+				whenVariable(cPattern, rVariable);
 			}
 		}
 		
@@ -768,7 +867,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 							//RWhenRelCallArgToMGuardPredicate
 							Variable dv = rRelationDomain.getRootVariable().get(0);
 							Variable v = (Variable) ClassUtil.nonNullState(ve.getReferredVariable());
-							Variable vd = qvtr2qvtc.whenVariable(cMiddleGuardPattern, tc.getName()+vdId+"_v", tc);
+							Variable vd = whenVariable(cMiddleGuardPattern, tc.getName()+vdId+"_v", tc);
 							Variable mv = getCoreVariable(v);
 							Property pep = getProperty(vd.getType(), dv);
 							NavigationCallExp pe = createNavigationCallExp(createVariableExp(vd), pep);
@@ -785,6 +884,28 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				//doUnsharedWhenVarsToMgVars(unsharedWhenVars, mg);
 				mapVariablesToVariables(rMiddleGuardDomainVariables, cMiddleGuardPattern);
 			}
+		}
+
+		protected void putCoreVariable(@NonNull Variable relationVariable, @NonNull Variable coreVariable) {
+//			Mapping mapping = QVTcoreUtil.getContainingMapping(coreVariable);
+//			assert mapping != null;
+			Variable oldVal = rVariable2cVariable.put(relationVariable, coreVariable);
+			// Variables should only be traced once
+			if (oldVal != null) {
+				System.out.println("putCoreVariable replacing value for " + relationVariable.getName());
+			}
+			putTrace(coreVariable, relationVariable);
+		}
+		
+		private void putTrace(@NonNull Element coreElement, @NonNull Element relationElement) {
+			Element oldRelationElement = target2source.put(coreElement, relationElement);
+			assert oldRelationElement == null;
+			List<@NonNull Element> targets = source2targets.get(relationElement);
+			if (targets == null) {
+				targets = new ArrayList<@NonNull Element> ();
+				source2targets.put(relationElement, targets);
+			}
+			targets.add(coreElement);
 		}
 
 		protected @NonNull Set<@NonNull Predicate> selectPredicatesThatReferToVariables(@NonNull Set<@NonNull Predicate> rPredicates, @NonNull Set<@NonNull Variable> rVariables) {
@@ -810,7 +931,108 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 		@Override
 		public @NonNull String toString() {
-			return rRelation.getName() + "::" + rEnforcedDomain.getName() + " => " + cMapping.getName() + "::" + cEnforcedDomain.getName();
+			return rRelation.getName() + "::" + rEnforcedDomainName + " => " + cMapping.getName() + "::" + cEnforcedDomain.getName();
+		}
+
+		/**
+		 * Lazily create the RealizedVariable for a corePattern corresponding to a relationVariable.
+		 */
+		private @NonNull RealizedVariable whenRealizedVariable(@NonNull BottomPattern corePattern, @NonNull Variable relationVariable) {	
+			Map<@NonNull Variable, @NonNull RealizedVariable> variable2realizedVariable = pattern2variable2realizedVariable.get(corePattern);
+			if (variable2realizedVariable == null) {
+				variable2realizedVariable = new HashMap<@NonNull Variable, @NonNull RealizedVariable>();
+				pattern2variable2realizedVariable.put(corePattern, variable2realizedVariable);
+			}
+			RealizedVariable realizedVariable = variable2realizedVariable.get(relationVariable);
+			if (realizedVariable == null) {
+				String name = relationVariable.getName();
+				Type type = relationVariable.getType();
+				assert (name != null) && (type != null);
+				realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+				realizedVariable.setName(name);
+				realizedVariable.setType(type);
+				realizedVariable.setIsRequired(true);
+				variable2realizedVariable.put(relationVariable, realizedVariable);
+				corePattern.getRealizedVariable().add(realizedVariable);
+				putCoreVariable(relationVariable, realizedVariable);
+			}
+			return realizedVariable;
+		}
+		
+		/**
+		 * Lazily create the name RealizedVariable for a corePattern with a type.
+		 */
+		private @NonNull RealizedVariable whenRealizedVariable(@NonNull BottomPattern corePattern, @NonNull String name, @NonNull Type type) {	
+			Map<@NonNull String, @NonNull RealizedVariable> name2realizedVariable = pattern2name2realizedVariable.get(corePattern);
+			if (name2realizedVariable == null) {
+				name2realizedVariable = new HashMap<@NonNull String, @NonNull RealizedVariable>();
+				pattern2name2realizedVariable.put(corePattern, name2realizedVariable);
+			}
+			RealizedVariable realizedVariable = name2realizedVariable.get(name);
+			if (realizedVariable == null) {
+				realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+				realizedVariable.setName(name);
+				realizedVariable.setType(type);
+				realizedVariable.setIsRequired(true);;
+				name2realizedVariable.put(name, realizedVariable);
+				corePattern.getRealizedVariable().add(realizedVariable);
+//				putTrace(realizedVariable, corePattern);
+			}
+			else {
+				assert realizedVariable.getType() == type;
+			}
+			return realizedVariable;
+		}
+		
+		/**
+		 * Lazily create the Variable for a corePattern corresponding to a relationVariable.
+		 */
+		private @NonNull Variable whenVariable(@NonNull CorePattern corePattern, @NonNull Variable relationVariable) {
+			String name2 = relationVariable.getName();
+			Map<@NonNull Variable, @NonNull Variable> variable2variable = pattern2variable2variable.get(corePattern);
+			if (variable2variable == null) {
+				variable2variable = new HashMap<@NonNull Variable, @NonNull Variable>();
+				pattern2variable2variable.put(corePattern, variable2variable);
+			}
+			Variable coreVariable = variable2variable.get(relationVariable);
+			if (coreVariable == null) {
+				String name = relationVariable.getName();
+				Type type = relationVariable.getType();
+				assert (name != null) && (type != null);
+				coreVariable = PivotFactory.eINSTANCE.createVariable();
+				coreVariable.setName(name);
+				coreVariable.setType(type);
+				coreVariable.setIsRequired(relationVariable.isIsRequired());
+				variable2variable.put(relationVariable, coreVariable);
+				corePattern.getVariable().add(coreVariable);
+				putCoreVariable(relationVariable, coreVariable);
+			}
+			return coreVariable;
+		}
+		
+		/**
+		 * Lazily create the name Variable for a corePattern with a type.
+		 */
+		protected @NonNull Variable whenVariable(@NonNull CorePattern corePattern, @NonNull String name, @NonNull Type type) {
+			Map<@NonNull String, @NonNull Variable> name2variable = pattern2name2variable.get(corePattern);
+			if (name2variable == null) {
+				name2variable = new HashMap<@NonNull String, @NonNull Variable>();
+				pattern2name2variable.put(corePattern, name2variable);
+			}
+			Variable coreVariable = name2variable.get(name);
+			if (coreVariable == null) {
+				coreVariable = PivotFactory.eINSTANCE.createVariable();
+				coreVariable.setName(name);
+				coreVariable.setType(type);
+				coreVariable.setIsRequired(true);
+				name2variable.put(name, coreVariable);
+				corePattern.getVariable().add(coreVariable);
+				putTrace(coreVariable, corePattern);
+			}
+			else {
+				assert coreVariable.getType() == type;
+			}
+			return coreVariable;
 		}
 		
 		protected abstract void where() throws CompilerChainException;
@@ -820,11 +1042,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	// Relations
 	protected final @NonNull Relation rRelation;								// r: Parent relation of this domain
 	protected final @NonNull RelationalTransformation rTransformation;			// Parent transformation of parent relation of enforced domain
-	protected final @NonNull Set<@NonNull Variable> rAllBoundDomainVariables;	// All pattern variables declared in all domains (not CollectionTemplateExp member/rest, Let/Iterator variables)
+	protected final @NonNull Set<@NonNull Variable> rAllBoundDomainVariables;	// ??All pattern variables declared in all domains (not CollectionTemplateExp member/rest, Let/Iterator variables)
 	protected final @NonNull Set<@NonNull Variable> rWhenVariables;				// All pattern variables used in when calls
-	protected final @NonNull Set<@NonNull Variable> rWhereVariables;			// All pattern variables used as where calls
+	protected final @NonNull Set<@NonNull Variable> rWhereVariables;			// All pattern variables used in where calls
 	protected final @NonNull Set<@NonNull Predicate> rPredicates;				// All non-RelationCallExp predicates
-	protected final @NonNull Set<@NonNull Variable> rMiddleDomainVariables;		// All pattern variables shared by more than one domain
+	protected final @NonNull Set<@NonNull Variable> rSharedVariables;			// All pattern variables shared by more than one domain
+//	protected final @NonNull Set<@NonNull Variable> rUniquePatternVariables;	// All pattern variables that bind to exactly one object
+//	protected final @NonNull Set<@NonNull Variable> rNonUniquePatternVariables;	// All pattern variables that bind to more than one object, typically as a Collection iterator
 	protected final @NonNull Set<@NonNull Variable> rMiddleBottomDomainVariables;
 	// Core
 	protected final @NonNull Transformation cTransformation;					// mt: The transformation containing the result mapping
@@ -835,12 +1059,21 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		this.rRelation = rRelation;
 		this.rTransformation = (RelationalTransformation) ClassUtil.nonNullState(rRelation.getTransformation());
 		//
+//		this.rUniquePatternVariables = new HashSet<@NonNull Variable>();
+//		this.rNonUniquePatternVariables = new HashSet<@NonNull Variable>();
+//		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
+//			for (@NonNull DomainPattern rDomainPattern : ClassUtil.nullFree(((RelationDomain)rDomain).getPattern())) {
+//				gatherPatternVariables(this.rUniquePatternVariables, this.rNonUniquePatternVariables, true, rDomainPattern.getTemplateExpression());
+//			}
+//		}
 		this.rAllBoundDomainVariables = new HashSet<@NonNull Variable>();
 		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
 			for (@NonNull DomainPattern rDomainPattern : ClassUtil.nullFree(((RelationDomain)rDomain).getPattern())) {
 				this.rAllBoundDomainVariables.addAll(ClassUtil.nullFree(rDomainPattern.getBindsTo()));
 			}
 		}
+//		rAllBoundDomainVariables.addAll(rUniquePatternVariables);
+//		rAllBoundDomainVariables.addAll(rNonUniquePatternVariables);
 		//
 		this.rWhenVariables = new HashSet<@NonNull Variable>();
 		Pattern rWhenPattern = rRelation.getWhen();
@@ -860,17 +1093,49 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 		}
 		//
-		this.rMiddleDomainVariables = qvtr2qvtc.getMiddleDomainVariables(rRelation);
+		this.rSharedVariables = qvtr2qvtc.getMiddleDomainVariables(rRelation);
 		//
 		this.rMiddleBottomDomainVariables = new HashSet<@NonNull Variable>(rWhereVariables);
 		rMiddleBottomDomainVariables.removeAll(rWhenVariables);
 		rMiddleBottomDomainVariables.removeAll(rAllBoundDomainVariables);
-		rMiddleBottomDomainVariables.addAll(rMiddleDomainVariables);			// FIXME this stinks
+		rMiddleBottomDomainVariables.addAll(rSharedVariables);			// FIXME this stinks
 		//
 		this.cTransformation = qvtr2qvtc.getCoreTransformation(rTransformation);
 	}
+
+	protected @Nullable Property basicGetProperty(/*@NonNull*/ Type aClass, @NonNull NamedElement rNamedElement) throws CompilerChainException {
+		/*@NonNull*/ String name = rNamedElement.getName();
+		assert (aClass != null) && (name != null);
+		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(aClass);
+		return completeClass.getProperty(name);
+	}
 	
-	/* =============  Helpers ============= */
+	/**
+	 * Add each of the domain variables within templateExpression to either uniquePatternVariables or nonUniquePatternVariables
+	 * according to whether the variable has a single or multiple bindings in the overall context. The isUnique parameter is
+	 * propagated during the recursion as true until a collection is traversed.
+	 *
+	private void gatherPatternVariables(@NonNull Set<@NonNull Variable> uniquePatternVariables, @NonNull Set<@NonNull Variable> nonUniquePatternVariables,
+			boolean isUnique, @NonNull TemplateExp templateExpression) {
+		Variable templateVariable = ClassUtil.nonNullState(templateExpression.getBindsTo());
+		(isUnique ? uniquePatternVariables : nonUniquePatternVariables).add(templateVariable);
+		if (templateExpression instanceof ObjectTemplateExp) {
+			for (@NonNull PropertyTemplateItem propertyTemplateItem : ClassUtil.nullFree(((ObjectTemplateExp)templateExpression).getPart())) {
+				Property property = propertyTemplateItem.getReferredProperty();
+				OCLExpression value = propertyTemplateItem.getValue();
+				if (value instanceof TemplateExp) {
+					gatherPatternVariables(uniquePatternVariables, nonUniquePatternVariables, isUnique && !property.isIsMany(), (@NonNull TemplateExp) value);
+				}
+			}
+		}
+		else if (templateExpression instanceof CollectionTemplateExp) {
+			for (@NonNull OCLExpression memberExpression : ClassUtil.nullFree(((CollectionTemplateExp)templateExpression).getMember())) {
+				if (memberExpression instanceof TemplateExp) {
+					gatherPatternVariables(uniquePatternVariables, nonUniquePatternVariables, false, (@NonNull TemplateExp) memberExpression);
+				}
+			}
+		}
+	} */
 
 	protected @NonNull Property getProperty(/*@NonNull*/ Type aClass, @NonNull NamedElement rNamedElement) throws CompilerChainException {
 		/*@NonNull*/ String name = rNamedElement.getName();

@@ -550,7 +550,7 @@ public abstract class ScheduleState extends ScheduleCache
 		//
 		//	If the caller is a recursion, ensure the the caller's caller is on the stack.
 		//
-		for (@NonNull DatumConnection incomingConnection1 : getIncomingConnections(region)) {		// FIXME passed
+/*		for (@NonNull DatumConnection incomingConnection1 : getIncomingConnections(region)) {		// FIXME passed
 			for (@NonNull Region sourceRegion1 : getSourceRegions(incomingConnection1)) {
 				if (sourceRegion1.getLoopingConnections().size() > 0) {
 					for (@NonNull DatumConnection incomingConnection2 : getIncomingConnections(sourceRegion1)) {		// FIXME passed
@@ -560,7 +560,7 @@ public abstract class ScheduleState extends ScheduleCache
 					}
 				}
 			}
-		}
+		} */
 		while (!callStack.contains(commonRegion)) {
 			commonRegion = getMinimumDepthParentRegion(commonRegion);
 			assert commonRegion != null;

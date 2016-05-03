@@ -1,0 +1,39 @@
+import Checked    :   'Checked.ecore';
+import Checked2Enforced    :   'Checked2Enforced.ecore';
+import Enforced   :   'Enforced.ecore';
+
+transformation Principles
+{
+	middle imports Checked2Enforced;
+	checkedDomain imports Checked;
+	enforcedDomain imports Enforced;
+}
+
+map Checked2Enforced__enforced in Principles
+{
+	check checkedDomain(
+		checkedRootVariable:CheckedClass
+	|) {}
+
+	enforce enforcedDomain() {
+		realize enforcedRootVariable:EnforcedClass
+	|}
+
+	enforce middle() {
+		realize Checked2Enforced__enforced_v : TChecked2Enforced
+	|}
+
+	where() {
+/*		RelationToTraceClass_core_v.relation := relation;
+		RelationToTraceClass_core_v.relationDomain := relationDomain;
+		RelationToTraceClass_core_v.relationDomainPattern := relationDomainPattern;
+		RelationToTraceClass_core_v.relationName := relationName;
+		RelationToTraceClass_core_v.rootTemplateExp := rootTemplateExp;
+		RelationToTraceClass_core_v.traceClass := traceClass;
+		relation.name := relationName;
+		relationDomain.rule := relation;
+		relationDomainPattern.RelationDomain := relationDomain;
+		relationDomainPattern.templateExpression := rootTemplateExp;
+		traceClass.name := 'T' + relationName; */
+	}
+}

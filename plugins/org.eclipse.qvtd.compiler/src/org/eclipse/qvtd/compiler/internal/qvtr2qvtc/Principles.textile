@@ -1,0 +1,122 @@
+h3. Relation
+
+Defines domain2domain equivalence of values (objects, or collections)
+
+h3. TraceClass
+
+(supports multidirectional)
+
+h4. Incremental TraceClass
+
+caches everything needed for re-execution, therefore all accessed variable including those accessed by queries.
+RelToCore only attempts direct accesses. Transitive support could require an indeterminate structure.
+Incremental uch better handled by run-time analysis rather than compile-time bloat.
+
+h4. Necessary TraceClass Properties
+
+One property of each domain variable necessary to uniquely distinquish the relation invocation from all its siblings.
+Since not supporting incremental, there is no need for trace-properties for values derived by to-one navigation.
+
+h4. Explicit CollectionTemplate TraceClass Properties
+
+The entire collection has a bound variable; this is a trace class property.
+Members may vay for distinct invocations => each member is a trace class property.
+Rest can be deduced by all less enumerated members => rest is not a trace class property
+
+h3. Implicit Collection matches
+
+aParent:Parent { children = aChild:Child }
+
+Is this a pattern for children=Set{aChild} or children->includes(aChild) (which is also aChild.Parent=aParent) ?
+7.11.2.4 specifies the includes interpretation.
+
+parent:Parent { children = theChildren:Set(Child){aChild++_}} is children->includes(aChild)
+parent:Parent { children = theChildren:Set(Child){aChild}} is children=Set{aChild}
+
+The shorthand trace is {aParent,aChild}
+The explicit includes trace is {aParent,theChildren,aChild}
+The explicit exact trace is {aParent,theChildren,aChild}
+
+theChildren is to-one navigable from aParent, so theChildren is NOT part of the trace.
+
+h3. Nested Implicit Collection matches
+
+Given
+check abcd a:A{bs = b:B{cs = c:C{ds = d:D{}}}
+enforce wxyz w:W{xs = x:X{ys = y:Y{zs = z:Z{}}}
+
+Does this require the invoker to discover a,b,c,d 'before' invocation so that each of a,b,c,d are traced as single objects.
+Corrolary all actions for a,b,c are repeated redundantly for d. Ripples to requiring collection QVTc semnatics.
+
+Or does it require the invoker to discover a, with b,c,d being iterated over a nest of composed mappings?
+
+QVTr: who cares, just do it.
+QVTc: a nest of composed mappings exposes the functionality.
+
+If functionality is all in the a,b,c,d mapping, what happens when there are no ds, the a,b,c must still happen. Composed mappings give this optional behaviour internally. Otherwuse we need more mappings. (QVTc2QVTu splits the composed mappings into the more mappings.)
+
+How are a/w, b/x, c/y, d/z correlated?
+
+"where b2x(b,x)" is an obvious indication that b,x share a composed mapping.
+
+Maybe check and enforce provoke independent composed mapping nests that merge to satisfy mutual variable visiblity.
+
+[Final AttributeToColumn example of Rule 6 is very smelly for an attribute-less class. The use of "attribute" rather than "attributes" has hidden the mutiple. The smelly c.attribute=a meaning c.attributes->includes(a) can be rewritten as a.Class=c to remove the smell.]
+
+aName:String,bName:String,cName:String;
+check abcd a:A{name=aName, bs = b:B{name=bName, cs = c:C{name=cName,ds = d:D{name=dName}}}
+enforce wxyz w:W{name=aName, xs = x:X{name=bName, ys = y:Y{name=cName, zs = z:Z{name=dName}}}
+
+If seen as an optional iteration nest wrt a=>w, bName,cName are multi-valued.
+If seen as ancestry for d=>z, are the ancestor assignments redundant/poor style/pattern matches?
+If seen as a one-valued truth for a,b,c,d then w,x,y,z are find/create. No d is not a truth.
+
+[?? to allow no d, we could allow ds = d:D[?]{name=dName}??]
+
+one-valued truth seems to be promising interpretation.
+
+But which of w,x,y,z are realized? All of them excepting those re-used by when/key.
+
+h2. Annotated Mapping Rules
+
+This section clarifies the approach taken to the QVT's 10.2 Mappinf Rules section.
+
+h3. Rule 1
+
+bq. Corresponding to each relation there exists a trace class in core. The trace class contains a property corresponding to each
+object node in the pattern of each domain of the relation. For example:
+
+bq. relation ClassToTable
+{
+checkonly domain uml c:Class {namespace=p:Package {}, kind='Persistent',
+name=cn}
+checkonly domain rdbms t:Table {schema=s:Schema {}, name=cn}
+}
+
+bq. class TClassToTable
+{
+c: Class;
+p: Package;
+t: Table;
+s: Schema;
+}
+
+bq. For mapping to core we distinguish between two kinds of relations of a transformation: top-level relations and invoked
+relations. By a top-level relation we mean a relation that is not invoked from the where clause of any other relation; by an
+invoked relation we mean a relation that is invoked from the where clause of another relation.
+
+bq. A top-level relation maps to a single core mapping (perhaps with composed mappings), whereas an invoked relation maps
+to a separate mapping for each invoker-invoked combination.
+
+bq. For mapping to core we also distinguish between check-only relations and enforceable relations. A check-only relation
+maps to a single core mapping, whereas an enforceable relation may map to a composite hierarchy of core mappings.
+
+h3. Rule 1 Notes
+
+The surrounding Package is omitted. We generalize and so need a Package hierarchy copy.
+
+"corresponding to each object node in the pattern of each domain of the relation" is vague.
+- it plausibly excludes bloat from attribute values
+- it cannot include implicit/explicit collection iterators
+
+p and s have to-one relationship to c and t so are not needed in the trace.

@@ -80,13 +80,10 @@ import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -124,45 +121,6 @@ public class QVTrToQVTc
 		}
 		
 	}
-	/**
-	 * An ExpressionCopier deep copies an OCLExpression tree, exploiting the forward traceability of context to
-	 * update references and using sibling to distinguish multiple targets.
-	 */
-	@SuppressWarnings("serial")
-	protected class ExpressionCopier extends EcoreUtil.Copier
-	{	
-		private final @Nullable Element sibling;
-
-		public ExpressionCopier(@Nullable Element sibling) {
-			this.sibling = sibling;
-		}
-
-		@Override
-		public EObject get(Object oIn) {
-			if (oIn instanceof Element) {
-				List<Element> oOuts = source2targets.get(oIn);
-				if (oOuts != null) {
-					if (sibling == null) {
-						assert oOuts.size() == 1;
-						return oOuts.get(0);
-					}
-					Mapping containingMapping = QVTcoreUtil.getContainingMapping(sibling);
-					assert containingMapping != null;
-					Element theCopy = null;
-					for (Element oOut : oOuts) {
-						Mapping aMapping = QVTcoreUtil.getContainingMapping(oOut);
-						if ((aMapping == containingMapping) || (aMapping == null)) {
-							assert theCopy == null;
-							theCopy = oOut;
-						}
-					}
-//FIXME				assert theCopy != null;
-					return theCopy;
-				}
-			}
-			return super.get(oIn);
-		}
-	}
 	
 	protected final @NonNull EnvironmentFactory environmentFactory;	
 	private final @NonNull Resource qvtrResource;
@@ -173,8 +131,8 @@ public class QVTrToQVTc
 	 * Optional configuration of the NsURI of the trace package.
 	 */
 	private @Nullable String traceNsURI = null;
-	private final @NonNull Map<@NonNull Element, @NonNull Element> target2source = new HashMap<@NonNull Element, @NonNull Element>();
-	private final @NonNull Map<@NonNull Element, @NonNull List<@NonNull Element>> source2targets = new HashMap<@NonNull Element, @NonNull List<@NonNull Element>>();
+	private final @NonNull Map<@NonNull Element, @NonNull Element> globalTarget2source = new HashMap<@NonNull Element, @NonNull Element>();
+	private final @NonNull Map<@NonNull Element, @NonNull List<@NonNull Element>> globalSource2targets = new HashMap<@NonNull Element, @NonNull List<@NonNull Element>>();
 	
 	private final @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
 //	private final @NonNull List<@NonNull Transformation> coreTransformations = new ArrayList<@NonNull Transformation>();
@@ -190,30 +148,6 @@ public class QVTrToQVTc
 	private final @NonNull Map<@NonNull RelationCallExp, @NonNull Relation> rInvocation2invokingRelation = new HashMap<@NonNull RelationCallExp, @NonNull Relation>();
 	
 	private @NonNull CoreModel coreModel;
-	
-	/**
-	 * The lazily created named RealizedVariables in each CorePattern.
-	 */
-	private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull String, @NonNull RealizedVariable>> pattern2name2realizedVariable
-			= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull String, @NonNull RealizedVariable>>();	
-	
-	/**
-	 * The lazily created named RealizedVariables in each CorePattern.
-	 */
-	private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull String, @NonNull Variable>> pattern2name2variable
-			= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull String, @NonNull Variable>>();	
-	
-	/**
-	 * The lazily created RealizedVariables per Relation Variable in each CorePattern.
-	 */
-	private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull RealizedVariable>> pattern2variable2realizedVariable
-			= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull RealizedVariable>>();
-
-	/**
-	 * The lazily created Core Variable for each Relation Variable in each CorePattern.
-	 */
-	private @NonNull Map<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull Variable>> pattern2variable2variable
-			= new HashMap<@NonNull CorePattern, @NonNull Map<@NonNull Variable, @NonNull Variable>>();
 
 	/**
 	 * The core Transformation for each RelationalTransformation.
@@ -244,16 +178,6 @@ public class QVTrToQVTc
 	 */
 	private @NonNull Map<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>> transformation2name2mapping
 			= new HashMap<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>>();
-	
-	/**
-	 * The core Variable for each relation Variable in a chosen mapping.
-	 */
-	private final @NonNull Map<@NonNull Mapping, @NonNull Map<@NonNull Variable, @NonNull Variable>> mapping2variable2variable = new HashMap<@NonNull Mapping, @NonNull Map<@NonNull Variable, @NonNull Variable>>();
-	
-	/**
-	 * The names allocated in each relation.
-	 */
-	private final @NonNull Map<@NonNull Relation, @NonNull Map<@NonNull String, @NonNull Element>> rule2name2element = new HashMap<@NonNull Relation, @NonNull Map<@NonNull String, @NonNull Element>>();
 	
 	public QVTrToQVTc(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource) {	
 		this.environmentFactory = environmentFactory;
@@ -323,29 +247,6 @@ public class QVTrToQVTc
 		}
 	}
 	
-	
-    public void addDebugCopies(@NonNull Map<EObject, EObject> copier) {
-	    for (EObject eSource : copier.keySet()) {
-	    	EObject eTarget = copier.get(eSource);
-	    	if (eTarget != null) {
-	    		assert eSource != null;
-	    		putTrace((Element)eTarget, (Element)eSource);
-	    	}
-	    }
-	}
-
-	/*public*/ @NonNull <T extends Element> T copy(@NonNull T eIn, @Nullable Element sibling) {
-//		if (eIn == null) {
-//			return null;
-//		}
-		EcoreUtil.Copier copier = new ExpressionCopier(sibling);
-		@SuppressWarnings("unchecked") T eOut = (T) copier.copy(eIn);			
-	    copier.copyReferences();
-	    addDebugCopies(copier);
-	    assert eOut != null;
-		return eOut;
-	}
-
 	public @NonNull Mapping createMapping() {
 		Mapping coreMapping = QVTcoreFactory.eINSTANCE.createMapping();
 		GuardPattern guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
@@ -368,11 +269,6 @@ public class QVTrToQVTc
 
 	/*public*/ @NonNull Transformation getCoreTransformation(@NonNull RelationalTransformation relationalTransformation) {
 		return ClassUtil.nonNullState(relationalTransformation2coreTransformation.get(relationalTransformation));
-	}
-
-	/*public*/ @NonNull Variable getCoreVariable(@NonNull Mapping mapping, @NonNull Variable relationVariable) {
-		Map<@NonNull Variable, @NonNull Variable> variable2variable = mapping2variable2variable.get(mapping);
-		return ClassUtil.nonNullState(ClassUtil.nonNullState(variable2variable).get(relationVariable));
 	}
 	
 /*	public @NonNull DomainPattern getDomainPattern(@NonNull Domain d) {
@@ -403,9 +299,9 @@ public class QVTrToQVTc
 		Set<@NonNull Variable> rDomainVariables = new HashSet<@NonNull Variable>();
 		Set<@NonNull Variable> rMiddleDomainVariables = new HashSet<@NonNull Variable>();
 		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
-			for (@NonNull DomainPattern rDomainPattern : ClassUtil.nullFree(((RelationDomain) rDomain).getPattern())) {
-				for (Variable rVariable : rDomainPattern.getBindsTo()) {
-					if ((rVariable != null) && !rDomainVariables.add(rVariable)) {
+			for (@NonNull DomainPattern rDomainPattern : ClassUtil.nullFree(((RelationDomain)rDomain).getPattern())) {
+				for (@NonNull Variable rVariable : ClassUtil.nullFree(rDomainPattern.getBindsTo())) {
+					if (!rDomainVariables.add(rVariable)) {
 						rMiddleDomainVariables.add(rVariable);				// Accumulate second (and higher) usages
 					}
 				}
@@ -448,30 +344,6 @@ public class QVTrToQVTc
 	}
 	
 	/* =============  Queries ============= */
-	
-	public @NonNull String getSafeName(@NonNull Relation relation, @NonNull Element newElement, @NonNull String name) {
-		Map<@NonNull String, @NonNull Element> name2element = rule2name2element.get(relation);
-		if (name2element == null) {
-			name2element = new HashMap<@NonNull String, @NonNull Element>();
-			rule2name2element.put(relation, name2element);
-		}
-		Element oldElement = name2element.get(name);
-		if (oldElement == newElement) {
-			return name;
-		}
-		if (oldElement == null) {
-			name2element.put(name, newElement);
-			return name;
-		}
-		for (int i = 1; true; i++) {
-			String newName = name + "_" + i;
-			oldElement = name2element.get(newName);
-			if (oldElement == null) {
-				name2element.put(newName, newElement);
-				return newName;
-			}
-		}
-	}
 
 	public @NonNull StandardLibrary getStandardLibrary() {
 		return environmentFactory.getStandardLibrary();
@@ -542,42 +414,25 @@ public class QVTrToQVTc
 	
 	/*public*/ void putCoreTransformation(@NonNull RelationalTransformation relationTransformation, @NonNull Transformation coreTransformation) {		
 		relationalTransformation2coreTransformation.put(relationTransformation, coreTransformation);
-		putTrace(coreTransformation, relationTransformation);
+		putGlobalTrace(coreTransformation, relationTransformation);
 	}
-
-
-	/*public*/ void putCoreVariable(@NonNull Variable relationVariable, @NonNull Variable coreVariable) {
-		Mapping mapping = QVTcoreUtil.getContainingMapping(coreVariable);
-		assert mapping != null;
-		Map<@NonNull Variable, @NonNull Variable> variable2variable = mapping2variable2variable.get(mapping);
-		if (variable2variable == null) {
-			variable2variable = new HashMap<@NonNull Variable, @NonNull Variable>();
-			mapping2variable2variable.put(mapping, variable2variable);
-		}
-		Variable oldVal = variable2variable.put(relationVariable, coreVariable);
-		// Variables should only be traced once
-		if (oldVal != null) {
-			System.out.println("putCoreVariable replacing value for " + relationVariable.getName());
-		}
-		putTrace(coreVariable, relationVariable);
+	
+	/*private*/ void putGlobalTrace(@NonNull Element coreElement, @NonNull Element relationElement) {
+//		if (relationElement != null) {
+			Element oldRelationElement = globalTarget2source.put(coreElement, relationElement);
+			assert oldRelationElement == null;
+			List<@NonNull Element> targets = globalSource2targets.get(relationElement);
+			if (targets == null) {
+				targets = new ArrayList<@NonNull Element> ();
+				globalSource2targets.put(relationElement, targets);
+			}
+			targets.add(coreElement);
+//		}
 	}
 
 	/*public*/ void putRelationTrace(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class traceClass) {		
 		relationToTraceClass.put(r, traceClass);
 //		putTrace(traceClass, r);
-	}
-	
-	private void putTrace(@NonNull Element coreElement, @NonNull Element relationElement) {
-//		if (relationElement != null) {
-			Element oldRelationElement = target2source.put(coreElement, relationElement);
-			assert oldRelationElement == null;
-			List<@NonNull Element> targets = source2targets.get(relationElement);
-			if (targets == null) {
-				targets = new ArrayList<@NonNull Element> ();
-				source2targets.put(relationElement, targets);
-			}
-			targets.add(coreElement);
-//		}
 	}
 	
 	/*public*/ void putTracePackage(@NonNull RelationalTransformation rt, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {		
@@ -850,6 +705,7 @@ public class QVTrToQVTc
 				if (rule instanceof Relation) {
 					Relation rRelation = (Relation)rule;
 					if (rRelation.isIsTopLevel()) {
+						System.out.println("topLevel " + rRelation);
 						TopLevelRelationToMappingForEnforcement topLevelRelationToMappingForEnforcement = new TopLevelRelationToMappingForEnforcement(this, rRelation);
 						topLevelRelationToMappingForEnforcement.doTopLevelRelationToMappingForEnforcement();
 					}
@@ -965,62 +821,12 @@ public class QVTrToQVTc
 		Mapping coreMapping = name2mapping.get(name);
 		if (coreMapping == null) {
 			coreMapping = createMapping();
-			putTrace(coreMapping, relation);
+			putGlobalTrace(coreMapping, relation);
 			coreMapping.setName(name);
 			coreMapping.setTransformation(coreTransformation);
 			name2mapping.put(name, coreMapping);
 		}
 		return coreMapping;
-	}
-
-	/**
-	 * Lazily create the RealizedVariable for a corePattern corresponding to a relationVariable.
-	 */
-	/*public*/ @NonNull RealizedVariable whenRealizedVariable(@NonNull BottomPattern corePattern, @NonNull Variable relationVariable) {	
-		Map<@NonNull Variable, @NonNull RealizedVariable> variable2realizedVariable = pattern2variable2realizedVariable.get(corePattern);
-		if (variable2realizedVariable == null) {
-			variable2realizedVariable = new HashMap<@NonNull Variable, @NonNull RealizedVariable>();
-			pattern2variable2realizedVariable.put(corePattern, variable2realizedVariable);
-		}
-		RealizedVariable realizedVariable = variable2realizedVariable.get(relationVariable);
-		if (realizedVariable == null) {
-			String name = relationVariable.getName();
-			Type type = relationVariable.getType();
-			assert (name != null) && (type != null);
-			realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
-			realizedVariable.setName(name);
-			realizedVariable.setType(type);
-			realizedVariable.setIsRequired(true);
-			variable2realizedVariable.put(relationVariable, realizedVariable);
-			corePattern.getRealizedVariable().add(realizedVariable);
-			putCoreVariable(relationVariable, realizedVariable);
-		}
-		return realizedVariable;
-	}
-	
-	/**
-	 * Lazily create the name RealizedVariable for a corePattern with a type.
-	 */
-	/*public*/ @NonNull RealizedVariable whenRealizedVariable(@NonNull BottomPattern corePattern, @NonNull String name, @NonNull Type type) {	
-		Map<@NonNull String, @NonNull RealizedVariable> name2realizedVariable = pattern2name2realizedVariable.get(corePattern);
-		if (name2realizedVariable == null) {
-			name2realizedVariable = new HashMap<@NonNull String, @NonNull RealizedVariable>();
-			pattern2name2realizedVariable.put(corePattern, name2realizedVariable);
-		}
-		RealizedVariable realizedVariable = name2realizedVariable.get(name);
-		if (realizedVariable == null) {
-			realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
-			realizedVariable.setName(name);
-			realizedVariable.setType(type);
-			realizedVariable.setIsRequired(true);;
-			name2realizedVariable.put(name, realizedVariable);
-			corePattern.getRealizedVariable().add(realizedVariable);
-//			putTrace(realizedVariable, corePattern);
-		}
-		else {
-			assert realizedVariable.getType() == type;
-		}
-		return realizedVariable;
 	}
 	
 	/**
@@ -1058,55 +864,4 @@ public class QVTrToQVTc
 		}
 		return traceProperty;
 	}
-	
-	/**
-	 * Lazily create the Variable for a corePattern corresponding to a relationVariable.
-	 */
-	/*public*/ @NonNull Variable whenVariable(@NonNull CorePattern corePattern, @NonNull Variable relationVariable) {
-		Map<@NonNull Variable, @NonNull Variable> variable2variable = pattern2variable2variable.get(corePattern);
-		if (variable2variable == null) {
-			variable2variable = new HashMap<@NonNull Variable, @NonNull Variable>();
-			pattern2variable2variable.put(corePattern, variable2variable);
-		}
-		Variable coreVariable = variable2variable.get(relationVariable);
-		if (coreVariable == null) {
-			String name = relationVariable.getName();
-			Type type = relationVariable.getType();
-			assert (name != null) && (type != null);
-			coreVariable = PivotFactory.eINSTANCE.createVariable();
-			coreVariable.setName(name);
-			coreVariable.setType(type);
-			coreVariable.setIsRequired(relationVariable.isIsRequired());
-			variable2variable.put(relationVariable, coreVariable);
-			corePattern.getVariable().add(coreVariable);
-			putCoreVariable(relationVariable, coreVariable);
-		}
-		return coreVariable;
-	}
-	
-	/**
-	 * Lazily create the name Variable for a corePattern with a type.
-	 */
-	/*public*/ @NonNull Variable whenVariable(@NonNull CorePattern corePattern, @NonNull String name, @NonNull Type type) {
-		Map<@NonNull String, @NonNull Variable> name2variable = pattern2name2variable.get(corePattern);
-		if (name2variable == null) {
-			name2variable = new HashMap<@NonNull String, @NonNull Variable>();
-			pattern2name2variable.put(corePattern, name2variable);
-		}
-		Variable coreVariable = name2variable.get(name);
-		if (coreVariable == null) {
-			coreVariable = PivotFactory.eINSTANCE.createVariable();
-			coreVariable.setName(name);
-			coreVariable.setType(type);
-			coreVariable.setIsRequired(true);
-			name2variable.put(name, coreVariable);
-			corePattern.getVariable().add(coreVariable);
-			putTrace(coreVariable, corePattern);
-		}
-		else {
-			assert coreVariable.getType() == type;
-		}
-		return coreVariable;
-	}
-
 }

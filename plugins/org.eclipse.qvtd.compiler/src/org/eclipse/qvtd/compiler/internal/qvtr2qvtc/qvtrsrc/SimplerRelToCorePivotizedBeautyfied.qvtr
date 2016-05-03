@@ -20,7 +20,7 @@ import qvtcore      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model
 
 
 
-transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, core:{qvtcore,qvtcorebase,qvtbase,pivotocl}) -- HHR Use Pivot metamodels
+transformation org::eclipse::qvtd::compiler::qvtr::relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, core:{qvtcore,qvtcorebase,qvtbase,pivotocl}) -- HHR Use Pivot metamodels
 {
     
     key qvtcore::Mapping{name, transformation};

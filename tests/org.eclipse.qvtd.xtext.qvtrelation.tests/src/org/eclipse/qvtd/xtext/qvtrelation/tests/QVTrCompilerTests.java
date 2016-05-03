@@ -397,18 +397,18 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
-	    	Transformation asTransformation = myQVT.compileTransformation("SimplerRelToCorePivotizedBeautyfied.qvtr", "core", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/rel2core/SeqToStm");
-	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "SimplerRelToCorePivotizedBeautyfied.genmodel");
+	    	Transformation asTransformation = myQVT.compileTransformation("RelToCore.qvtr", "core", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/rel2core/RelToCore");
+	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "RelToCore.genmodel");
 			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
 //	    	myQVT.installClassName(projectTestName + ".SeqMM.SeqMMPackage");
 //	    	myQVT.installClassName(projectTestName + ".PSeqToStm.PSeqToStmPackage");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
-	    	myQVT.loadInput("relations", "SimplerRelToCorePivotizedBeautyfied.qvtras");
+	    	myQVT.loadInput("relations", "Rel2Core.qvtras");
 	    	myQVT.executeTransformation();
 //	    	myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore",  new EcoreResourceFactoryImpl());
 //	    	myQVT.getEnvironmentFactory().getMetamodelManager().getASResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore",  new EcoreResourceFactoryImpl());
-			myQVT.saveOutput("core", "Rel2Core_CG.ecore", "Rel2Core_expected.ecore", PivotNormalizer.INSTANCE);
+			myQVT.saveOutput("core", "Rel2Core_CG.oclas", "Rel2Core_expected.oclas", PivotNormalizer.INSTANCE);
 	    	//
 //	        myQVT.createGeneratedExecutor(txClass);
 //	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
