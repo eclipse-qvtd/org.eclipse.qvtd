@@ -41,7 +41,7 @@ public class AllQVTrelationTests extends TestCase
 //			result.addTestSuite(UsageTests.class);
 //		}
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
-			result.addTestSuite(QVTrCompilerTests.class);
+//			result.addTestSuite(QVTrCompilerTests.class);
 		}
 		return result;
 	}
