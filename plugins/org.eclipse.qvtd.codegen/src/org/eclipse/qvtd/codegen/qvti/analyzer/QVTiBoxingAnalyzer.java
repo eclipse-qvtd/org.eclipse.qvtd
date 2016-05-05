@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -67,6 +68,18 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	@Override
 	public Object visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
 		return visitCGGuardVariable(object);
+	}
+
+	@Override
+	public Object visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment cgEcoreContainerAssignment) {
+		EStructuralFeature eStructuralFeature = cgEcoreContainerAssignment.getEStructuralFeature();
+		boolean isRequired = eStructuralFeature.isRequired();
+		rewriteAsEcore(cgEcoreContainerAssignment.getSlotValue(), eStructuralFeature.getEType());
+		rewriteAsEcore(cgEcoreContainerAssignment.getInitValue(), eStructuralFeature.getEContainingClass());
+		if (isRequired) {
+			rewriteAsGuarded(cgEcoreContainerAssignment.getSlotValue(), false, "value");
+		}
+		return visitCGPropertyAssignment(cgEcoreContainerAssignment);
 	}
 
 	@Override

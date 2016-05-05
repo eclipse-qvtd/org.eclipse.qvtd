@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
@@ -44,6 +45,11 @@ public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGMo
 	@Override
 	public @NonNull List<@Nullable Object> visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
 		return visitCGGuardVariable(object);
+	}
+
+	@Override
+	public @NonNull List<@Nullable Object> visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment object) {
+		return visitCGPropertyAssignment(object);
 	}
 
 	@Override

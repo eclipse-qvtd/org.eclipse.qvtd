@@ -61,6 +61,7 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -295,6 +296,33 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 		return null;
     }
+
+	protected void doAssigned(@NonNull CGEcoreContainerAssignment cgPropertyAssignment) {
+		EStructuralFeature eStructuralFeature = ClassUtil.nonNullModel(cgPropertyAssignment.getEStructuralFeature());
+		CGValuedElement cgSlot = getExpression(cgPropertyAssignment.getSlotValue());
+		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
+		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
+		boolean isHazardous = false;
+		Element asPropertyAssignment = cgPropertyAssignment.getAst();
+		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asPropertyAssignment);
+		if ((asMapping != null) && (asPropertyAssignment instanceof PropertyAssignment)) {
+			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (PropertyAssignment)asPropertyAssignment);
+		}
+		if (isHazardous || isIncremental) {
+			js.append("objectManager.assigned(");
+			if (isIncremental) {
+				js.append("this, ");
+			}
+			js.appendValueName(cgInit);
+			js.append(", ");
+			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
+			js.append(".Literals.");
+			js.append(genModelHelper.getEcoreLiteralName(eStructuralFeature));
+			js.append(", ");
+			js.appendValueName(cgSlot);
+			js.append(", null);\n");
+		}
+	}
 
 	protected void doAssigned(@NonNull CGEcorePropertyAssignment cgPropertyAssignment) {
 		EStructuralFeature eStructuralFeature = ClassUtil.nonNullModel(cgPropertyAssignment.getEStructuralFeature());
@@ -698,6 +726,49 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	@Override
 	public @NonNull Boolean visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
 		return visitCGGuardVariable(object);
+	}
+
+	@Override
+	public @NonNull Boolean visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment cgPropertyAssignment) {
+//		Property referredProperty = cgPropertyAssignment.getReferredProperty();
+//		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
+//		CGTypeId cgTypeId = analyzer.getTypeId(pivotProperty.getOwningType().getTypeId());
+//		JavaTypeDescriptor requiredTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId, false);
+		EStructuralFeature eStructuralFeature = ClassUtil.nonNullModel(cgPropertyAssignment.getEStructuralFeature());
+		CGValuedElement cgSlot = getExpression(cgPropertyAssignment.getSlotValue());
+		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
+//		Class<?> requiredJavaClass = requiredTypeDescriptor.getJavaClass();
+//		Method leastDerivedMethod = requiredJavaClass != null ? getLeastDerivedMethod(requiredJavaClass, getAccessor) : null;
+//		Class<?> unboxedSourceClass = leastDerivedMethod != null ? leastDerivedMethod.getDeclaringClass() : requiredJavaClass;
+		//
+		if (!js.appendLocalStatements(cgSlot)) {
+			return false;
+		}
+		if (!js.appendLocalStatements(cgInit)) {
+			return false;
+		}
+		if (eStructuralFeature.isMany()) {
+			String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
+			//
+			js.appendValueName(cgInit);
+			js.append(".");
+			js.append(getAccessor);
+			js.append("().add(");
+			js.appendValueName(cgSlot);
+			js.append(");\n");
+		}
+		else {
+			String setAccessor = genModelHelper.getSetAccessor(eStructuralFeature);
+			//
+			js.appendValueName(cgInit);
+			js.append(".");
+			js.append(setAccessor);
+			js.append("(");
+			js.appendValueName(cgSlot);
+			js.append(");\n");
+		}
+		doAssigned(cgPropertyAssignment);
+		return true;
 	}
 
 	@Override

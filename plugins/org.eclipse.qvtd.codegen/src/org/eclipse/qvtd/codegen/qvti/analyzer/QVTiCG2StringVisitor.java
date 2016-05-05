@@ -19,6 +19,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -100,8 +101,12 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	}
 
 	@Override
-	@Nullable
-	public String visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
+	public @Nullable String visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment object) {
+		return visitCGPropertyAssignment(object);
+	}
+
+	@Override
+	public @Nullable String visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 

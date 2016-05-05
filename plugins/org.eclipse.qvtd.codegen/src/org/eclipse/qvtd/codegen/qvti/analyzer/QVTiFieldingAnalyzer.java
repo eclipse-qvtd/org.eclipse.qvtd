@@ -19,6 +19,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -55,6 +56,11 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		@Override
 		public @Nullable Set<CGVariable> visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
 			return visitCGGuardVariable(object);
+		}
+
+		@Override
+		public @Nullable Set<CGVariable> visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment object) {
+			return visitCGPropertyAssignment(object);
 		}
 
 		@Override
@@ -162,6 +168,11 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		@Override
 		public Boolean visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
 			return visitCGGuardVariable(object);
+		}
+
+		@Override
+		public Boolean visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment object) {
+			return visitCGPropertyAssignment(object);
 		}
 
 		@Override

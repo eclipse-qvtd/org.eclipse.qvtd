@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
@@ -68,6 +69,7 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -842,6 +844,21 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 						cgPropertyAssignment = cgEcorePropertyAssignment;
 					} catch (GenModelException e) {
 						System.out.println("Missing getAccessor for " + eStructuralFeature + "ignored.");
+					}
+				}
+				else {
+					Property asOppositeProperty = asTargetProperty.getOpposite();
+					eStructuralFeature = (EStructuralFeature) (asOppositeProperty != null ? asOppositeProperty.getESObject() : null);
+					if (eStructuralFeature != null) {
+						assert ((EReference)eStructuralFeature).isContainment();
+						try {
+							genModelHelper.getGetAccessor(eStructuralFeature);
+							CGEcoreContainerAssignment cgEcoreContainerAssignment = QVTiCGModelFactory.eINSTANCE.createCGEcoreContainerAssignment();
+							cgEcoreContainerAssignment.setEStructuralFeature(eStructuralFeature);
+							cgPropertyAssignment = cgEcoreContainerAssignment;
+						} catch (GenModelException e) {
+							System.out.println("Missing getAccessor for " + eStructuralFeature + "ignored.");
+						}
 					}
 				}
 			}

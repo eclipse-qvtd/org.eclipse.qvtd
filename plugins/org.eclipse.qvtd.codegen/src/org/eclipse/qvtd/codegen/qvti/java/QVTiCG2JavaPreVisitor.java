@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -49,6 +50,11 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 	@Override
 	public Object visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
 		return visitCGGuardVariable(object);
+	}
+
+	@Override
+	public Object visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment object) {
+		return visitCGPropertyAssignment(object);
 	}
 
 	@Override
