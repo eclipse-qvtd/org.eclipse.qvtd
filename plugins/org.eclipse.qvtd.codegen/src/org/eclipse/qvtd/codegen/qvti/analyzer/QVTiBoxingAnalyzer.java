@@ -77,7 +77,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 		rewriteAsEcore(cgEcoreContainerAssignment.getSlotValue(), eStructuralFeature.getEType());
 		rewriteAsEcore(cgEcoreContainerAssignment.getInitValue(), eStructuralFeature.getEContainingClass());
 		if (isRequired) {
-			rewriteAsGuarded(cgEcoreContainerAssignment.getSlotValue(), false, "value");
+			rewriteAsGuarded(cgEcoreContainerAssignment.getSlotValue(), false, "value for " + cgEcoreContainerAssignment.getReferredProperty() + " assignment");
 		}
 		return visitCGPropertyAssignment(cgEcoreContainerAssignment);
 	}
@@ -89,7 +89,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 		rewriteAsEcore(cgEcorePropertyAssignment.getSlotValue(), eStructuralFeature.getEContainingClass());
 		rewriteAsEcore(cgEcorePropertyAssignment.getInitValue(), eStructuralFeature.getEType());
 		if (isRequired) {
-			rewriteAsGuarded(cgEcorePropertyAssignment.getInitValue(), false, "value");
+			rewriteAsGuarded(cgEcorePropertyAssignment.getInitValue(), false, "value for " + cgEcorePropertyAssignment.getReferredProperty() + " assignment");
 		}
 		return visitCGPropertyAssignment(cgEcorePropertyAssignment);
 	}
