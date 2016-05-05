@@ -18,6 +18,11 @@
         resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGConnectionVariable" eSuperTypes="#//CGGuardVariable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CGEcoreContainerAssignment" eSuperTypes="#//CGPropertyAssignment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eStructuralFeature" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"
+        resolveProxies="false"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGEcorePropertyAssignment" eSuperTypes="#//CGPropertyAssignment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="eStructuralFeature" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"
