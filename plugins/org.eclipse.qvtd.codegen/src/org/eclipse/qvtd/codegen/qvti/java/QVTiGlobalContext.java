@@ -39,7 +39,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<QVTiCodeGenerator>
 	}
 
 	public @NonNull String addOppositeProperty(@NonNull Property pivotProperty) {
-		assert !pivotProperty.isIsImplicit();
+		assert !pivotProperty.isIsImplicit() && !pivotProperty.isIsComposite();
 		if (oppositeProperty2oppositeCacheName == null) {
 			oppositeProperty2oppositeCacheName = new HashMap<@NonNull Property, @NonNull String>();
 		}

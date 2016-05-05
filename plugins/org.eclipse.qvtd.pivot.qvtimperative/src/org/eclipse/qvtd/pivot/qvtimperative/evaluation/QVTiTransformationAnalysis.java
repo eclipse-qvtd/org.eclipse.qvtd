@@ -331,7 +331,7 @@ public class QVTiTransformationAnalysis
 			else if (eObject instanceof OppositePropertyCallExp) {
 				OppositePropertyCallExp oppositePropertyCallExp = (OppositePropertyCallExp)eObject;
 				Property navigableProperty = oppositePropertyCallExp.getReferredProperty();
-				if (navigableProperty != null) {
+				if ((navigableProperty != null) && !navigableProperty.isIsComposite()) {
 					int cacheIndex = allocateCacheIndex(oppositePropertyCallExp.getOwnedSource(), navigableProperty);
 					oppositePropertyCallExp2cacheIndex.put(oppositePropertyCallExp, cacheIndex);
 				}
