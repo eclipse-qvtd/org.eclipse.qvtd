@@ -192,7 +192,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGPropertyAssignment()
 	 * @generated
 	 */
-	int CG_PROPERTY_ASSIGNMENT = 15;
+	int CG_PROPERTY_ASSIGNMENT = 16;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcorePropertyAssignmentImpl <em>CG Ecore Property Assignment</em>}' class.
@@ -202,7 +202,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGEcorePropertyAssignment()
 	 * @generated
 	 */
-	int CG_ECORE_PROPERTY_ASSIGNMENT = 2;
+	int CG_ECORE_PROPERTY_ASSIGNMENT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl <em>CG Mapping</em>}' class.
@@ -212,7 +212,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMapping()
 	 * @generated
 	 */
-	int CG_MAPPING = 8;
+	int CG_MAPPING = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTransformationImpl <em>CG Transformation</em>}' class.
@@ -222,7 +222,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGTransformation()
 	 * @generated
 	 */
-	int CG_TRANSFORMATION = 18;
+	int CG_TRANSFORMATION = 19;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment <em>CG Ecore Property Assignment</em>}'.
@@ -358,7 +358,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingCall()
 	 * @generated
 	 */
-	int CG_MAPPING_CALL = 9;
+	int CG_MAPPING_CALL = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallBindingImpl <em>CG Mapping Call Binding</em>}' class.
@@ -368,7 +368,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingCallBinding()
 	 * @generated
 	 */
-	int CG_MAPPING_CALL_BINDING = 10;
+	int CG_MAPPING_CALL_BINDING = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl <em>CG Realized Variable</em>}' class.
@@ -378,7 +378,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGRealizedVariable()
 	 * @generated
 	 */
-	int CG_REALIZED_VARIABLE = 16;
+	int CG_REALIZED_VARIABLE = 17;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcoreRealizedVariableImpl <em>CG Ecore Realized Variable</em>}' class.
@@ -388,7 +388,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGEcoreRealizedVariable()
 	 * @generated
 	 */
-	int CG_ECORE_REALIZED_VARIABLE = 3;
+	int CG_ECORE_REALIZED_VARIABLE = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGFunctionImpl <em>CG Function</em>}' class.
@@ -398,7 +398,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGFunction()
 	 * @generated
 	 */
-	int CG_FUNCTION = 4;
+	int CG_FUNCTION = 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGFunctionCallExpImpl <em>CG Function Call Exp</em>}' class.
@@ -408,7 +408,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGFunctionCallExp()
 	 * @generated
 	 */
-	int CG_FUNCTION_CALL_EXP = 5;
+	int CG_FUNCTION_CALL_EXP = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGFunctionParameterImpl <em>CG Function Parameter</em>}' class.
@@ -418,7 +418,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGFunctionParameter()
 	 * @generated
 	 */
-	int CG_FUNCTION_PARAMETER = 6;
+	int CG_FUNCTION_PARAMETER = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGGuardVariableImpl <em>CG Guard Variable</em>}' class.
@@ -428,7 +428,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGGuardVariable()
 	 * @generated
 	 */
-	int CG_GUARD_VARIABLE = 7;
+	int CG_GUARD_VARIABLE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -745,6 +745,133 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcoreContainerAssignmentImpl <em>CG Ecore Container Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcoreContainerAssignmentImpl
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGEcoreContainerAssignment()
+	 * @generated
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__AST = CG_PROPERTY_ASSIGNMENT__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__NAME = CG_PROPERTY_ASSIGNMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__TYPE_ID = CG_PROPERTY_ASSIGNMENT__TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__REQUIRED = CG_PROPERTY_ASSIGNMENT__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__DEPENDS_ON = CG_PROPERTY_ASSIGNMENT__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__OWNS = CG_PROPERTY_ASSIGNMENT__OWNS;
+
+	/**
+	 * The feature id for the '<em><b>Mapping Exp</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__MAPPING_EXP = CG_PROPERTY_ASSIGNMENT__MAPPING_EXP;
+
+	/**
+	 * The feature id for the '<em><b>Slot Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__SLOT_VALUE = CG_PROPERTY_ASSIGNMENT__SLOT_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__REFERRED_PROPERTY = CG_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY;
+
+	/**
+	 * The feature id for the '<em><b>Init Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__INIT_VALUE = CG_PROPERTY_ASSIGNMENT__INIT_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Executor Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__EXECUTOR_PROPERTY = CG_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY;
+
+	/**
+	 * The feature id for the '<em><b>EStructural Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__ESTRUCTURAL_FEATURE = CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>CG Ecore Container Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT_FEATURE_COUNT = CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1573,7 +1700,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingExp()
 	 * @generated
 	 */
-	int CG_MAPPING_EXP = 11;
+	int CG_MAPPING_EXP = 12;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1700,7 +1827,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingLoop()
 	 * @generated
 	 */
-	int CG_MAPPING_LOOP = 12;
+	int CG_MAPPING_LOOP = 13;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1827,7 +1954,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMiddlePropertyAssignment()
 	 * @generated
 	 */
-	int CG_MIDDLE_PROPERTY_ASSIGNMENT = 13;
+	int CG_MIDDLE_PROPERTY_ASSIGNMENT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1954,7 +2081,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMiddlePropertyCallExp()
 	 * @generated
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP = 14;
+	int CG_MIDDLE_PROPERTY_CALL_EXP = 15;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2063,7 +2190,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGSequence()
 	 * @generated
 	 */
-	int CG_SEQUENCE = 17;
+	int CG_SEQUENCE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2253,7 +2380,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGTypedModel()
 	 * @generated
 	 */
-	int CG_TYPED_MODEL = 19;
+	int CG_TYPED_MODEL = 20;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2352,6 +2479,27 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCGConnectionVariable();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment <em>CG Ecore Container Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG Ecore Container Assignment</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment
+	 * @generated
+	 */
+	EClass getCGEcoreContainerAssignment();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment#getEStructuralFeature <em>EStructural Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EStructural Feature</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment#getEStructuralFeature()
+	 * @see #getCGEcoreContainerAssignment()
+	 * @generated
+	 */
+	EReference getCGEcoreContainerAssignment_EStructuralFeature();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment <em>CG Property Assignment</em>}'.
@@ -2792,6 +2940,24 @@ public interface QVTiCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CG_CONNECTION_VARIABLE = eINSTANCE.getCGConnectionVariable();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcoreContainerAssignmentImpl <em>CG Ecore Container Assignment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcoreContainerAssignmentImpl
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGEcoreContainerAssignment()
+		 * @generated
+		 */
+		EClass CG_ECORE_CONTAINER_ASSIGNMENT = eINSTANCE.getCGEcoreContainerAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>EStructural Feature</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_ECORE_CONTAINER_ASSIGNMENT__ESTRUCTURAL_FEATURE = eINSTANCE.getCGEcoreContainerAssignment_EStructuralFeature();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcorePropertyAssignmentImpl <em>CG Ecore Property Assignment</em>}' class.

@@ -50,6 +50,11 @@ public abstract class AbstractNullQVTiCGModelVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitCGEcoreContainerAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreContainerAssignment object) {
+		return null;
+	}
+
+	@Override
 	public R visitCGEcorePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcorePropertyAssignment object) {
 		return null;
 	}

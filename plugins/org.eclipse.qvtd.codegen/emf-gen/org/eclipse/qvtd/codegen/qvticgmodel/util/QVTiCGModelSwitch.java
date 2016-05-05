@@ -113,6 +113,18 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTiCGModelPackage.CG_ECORE_CONTAINER_ASSIGNMENT: {
+				CGEcoreContainerAssignment cgEcoreContainerAssignment = (CGEcoreContainerAssignment)theEObject;
+				T result = caseCGEcoreContainerAssignment(cgEcoreContainerAssignment);
+				if (result == null) result = caseCGPropertyAssignment(cgEcoreContainerAssignment);
+				if (result == null) result = caseCGValuedElement(cgEcoreContainerAssignment);
+				if (result == null) result = caseCGTypedElement(cgEcoreContainerAssignment);
+				if (result == null) result = caseCGNamedElement(cgEcoreContainerAssignment);
+				if (result == null) result = caseCGElement(cgEcoreContainerAssignment);
+				if (result == null) result = caseNameable(cgEcoreContainerAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTiCGModelPackage.CG_ECORE_PROPERTY_ASSIGNMENT: {
 				CGEcorePropertyAssignment cgEcorePropertyAssignment = (CGEcorePropertyAssignment)theEObject;
 				T result = caseCGEcorePropertyAssignment(cgEcorePropertyAssignment);
@@ -356,6 +368,21 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGConnectionVariable(CGConnectionVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Ecore Container Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Ecore Container Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGEcoreContainerAssignment(CGEcoreContainerAssignment object) {
 		return null;
 	}
 

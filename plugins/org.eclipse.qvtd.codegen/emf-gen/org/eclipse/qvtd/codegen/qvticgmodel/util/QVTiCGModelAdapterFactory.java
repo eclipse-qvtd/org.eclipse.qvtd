@@ -97,6 +97,10 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGConnectionVariableAdapter();
 			}
 			@Override
+			public Adapter caseCGEcoreContainerAssignment(CGEcoreContainerAssignment object) {
+				return createCGEcoreContainerAssignmentAdapter();
+			}
+			@Override
 			public Adapter caseCGEcorePropertyAssignment(CGEcorePropertyAssignment object) {
 				return createCGEcorePropertyAssignmentAdapter();
 			}
@@ -273,6 +277,20 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGConnectionVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment <em>CG Ecore Container Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment
+	 * @generated
+	 */
+	public Adapter createCGEcoreContainerAssignmentAdapter() {
 		return null;
 	}
 

@@ -25,6 +25,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGConnectionAssignment/connectionVariable"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGConnectionVariable"/>
+    <genClasses ecoreClass="qvticgmodel.ecore#//CGEcoreContainerAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGEcoreContainerAssignment/eStructuralFeature"/>
+    </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGEcorePropertyAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGEcorePropertyAssignment/eStructuralFeature"/>
     </genClasses>

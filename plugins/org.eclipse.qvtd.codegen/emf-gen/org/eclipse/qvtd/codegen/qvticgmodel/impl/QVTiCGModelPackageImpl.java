@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -59,6 +60,13 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * @generated
 	 */
 	private EClass cgConnectionVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgEcoreContainerAssignmentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -299,6 +307,26 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	@Override
 	public EClass getCGConnectionVariable() {
 		return cgConnectionVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCGEcoreContainerAssignment() {
+		return cgEcoreContainerAssignmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCGEcoreContainerAssignment_EStructuralFeature() {
+		return (EReference)cgEcoreContainerAssignmentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -807,6 +835,9 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 
 		cgConnectionVariableEClass = createEClass(CG_CONNECTION_VARIABLE);
 
+		cgEcoreContainerAssignmentEClass = createEClass(CG_ECORE_CONTAINER_ASSIGNMENT);
+		createEReference(cgEcoreContainerAssignmentEClass, CG_ECORE_CONTAINER_ASSIGNMENT__ESTRUCTURAL_FEATURE);
+
 		cgEcorePropertyAssignmentEClass = createEClass(CG_ECORE_PROPERTY_ASSIGNMENT);
 		createEReference(cgEcorePropertyAssignmentEClass, CG_ECORE_PROPERTY_ASSIGNMENT__ESTRUCTURAL_FEATURE);
 
@@ -906,6 +937,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		// Add supertypes to classes
 		cgConnectionAssignmentEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgConnectionVariableEClass.getESuperTypes().add(this.getCGGuardVariable());
+		cgEcoreContainerAssignmentEClass.getESuperTypes().add(this.getCGPropertyAssignment());
 		cgEcorePropertyAssignmentEClass.getESuperTypes().add(this.getCGPropertyAssignment());
 		cgEcoreRealizedVariableEClass.getESuperTypes().add(this.getCGRealizedVariable());
 		cgFunctionEClass.getESuperTypes().add(theCGModelPackage.getCGOperation());
@@ -932,6 +964,9 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		initEReference(getCGConnectionAssignment_ConnectionVariable(), theCGModelPackage.getCGVariable(), null, "connectionVariable", null, 1, 1, CGConnectionAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgConnectionVariableEClass, CGConnectionVariable.class, "CGConnectionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(cgEcoreContainerAssignmentEClass, CGEcoreContainerAssignment.class, "CGEcoreContainerAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCGEcoreContainerAssignment_EStructuralFeature(), ecorePackage.getEStructuralFeature(), null, "eStructuralFeature", null, 1, 1, CGEcoreContainerAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgEcorePropertyAssignmentEClass, CGEcorePropertyAssignment.class, "CGEcorePropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGEcorePropertyAssignment_EStructuralFeature(), ecorePackage.getEStructuralFeature(), null, "eStructuralFeature", null, 1, 1, CGEcorePropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

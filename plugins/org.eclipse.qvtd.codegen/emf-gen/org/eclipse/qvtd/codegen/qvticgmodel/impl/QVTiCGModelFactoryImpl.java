@@ -82,6 +82,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 		switch (eClass.getClassifierID()) {
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT: return createCGConnectionAssignment();
 			case QVTiCGModelPackage.CG_CONNECTION_VARIABLE: return createCGConnectionVariable();
+			case QVTiCGModelPackage.CG_ECORE_CONTAINER_ASSIGNMENT: return createCGEcoreContainerAssignment();
 			case QVTiCGModelPackage.CG_ECORE_PROPERTY_ASSIGNMENT: return createCGEcorePropertyAssignment();
 			case QVTiCGModelPackage.CG_ECORE_REALIZED_VARIABLE: return createCGEcoreRealizedVariable();
 			case QVTiCGModelPackage.CG_FUNCTION: return createCGFunction();
@@ -125,6 +126,17 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	public @NonNull CGConnectionVariable createCGConnectionVariable() {
 		CGConnectionVariableImpl cgConnectionVariable = new CGConnectionVariableImpl();
 		return cgConnectionVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGEcoreContainerAssignment createCGEcoreContainerAssignment() {
+		CGEcoreContainerAssignmentImpl cgEcoreContainerAssignment = new CGEcoreContainerAssignmentImpl();
+		return cgEcoreContainerAssignment;
 	}
 
 	/**

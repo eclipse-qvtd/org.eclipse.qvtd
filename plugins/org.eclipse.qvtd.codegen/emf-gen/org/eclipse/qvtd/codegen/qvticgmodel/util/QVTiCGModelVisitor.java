@@ -25,6 +25,7 @@ public interface QVTiCGModelVisitor<R> extends org.eclipse.ocl.examples.codegen.
 {
 	R visitCGConnectionAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGConnectionAssignment object);
 	R visitCGConnectionVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGConnectionVariable object);
+	R visitCGEcoreContainerAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreContainerAssignment object);
 	R visitCGEcorePropertyAssignment(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcorePropertyAssignment object);
 	R visitCGEcoreRealizedVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGEcoreRealizedVariable object);
 	R visitCGFunction(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunction object);
