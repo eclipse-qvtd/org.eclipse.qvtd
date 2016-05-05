@@ -26,6 +26,22 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
     -- The trace class contains a property corresponding to each object node in the
     -- pattern of each domain of the relation.
     --
+    top relation ModelToTraceModel
+    {
+        modelName:String;
+        modelURI:String;
+        domain relations
+            relationsModel:RelationModel {
+                name = modelName,
+                externalURI = modelURI
+            };
+        enforce domain core
+        	traceModel:Model {
+                name = modelName,
+                externalURI = modelURI
+            };
+    }
+    
     top relation PackageToTracePackage
     {
         packageName:String;
@@ -39,9 +55,24 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
             };
     }
     
-    top relation NestedPackageToTracePackage
+    top relation PackageToTraceModelOwnership
     {
-        packageName:String;
+        domain relations
+            relationsParent:RelationModel {
+                ownedPackages = relationsChild:Package {}
+            };
+        enforce domain core
+        	traceParent:Model {
+                ownedPackages = traceChild:Package {}
+            };
+        when {
+           ModelToTraceModel(relationsParent, traceParent);
+           PackageToTracePackage(relationsChild, traceChild);
+        }
+    }
+    
+    top relation PackageToTracePackageOwnership
+    {
         domain relations
             relationsParent:Package {
                 ownedPackages = relationsChild:Package {}
@@ -56,20 +87,31 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
         }
     }
     
-/*    top relation TransformationToTracePackage
+    top relation TransformationToTracePackage
     {
         domain relations
-            rTransformation:Transformation {
-                name = transformationName:String{},
-                owningPackage = rParent:Package{}
+            rTransformation:RelationalTransformation {
+                name = transformationName:String{}
             };
         enforce domain core
         	tracePackage:Package {
-                name = 'T'+transformationName,
-                owningPackage = traceParent:Package{}
+                name = 'T'+transformationName
+            };
+    }
+    
+    top relation TransformationToTracePackageOwnership
+    {
+        domain relations
+            relationsParent:Package {
+                ownedClasses = relationsChild:RelationalTransformation {}
+            };
+        enforce domain core
+        	traceParent:Package {
+                ownedPackages = traceChild:Package {}
             };
         when {
-            PackageToTracePackage(rParent, traceParent);
+           PackageToTracePackage(relationsParent, traceParent);
+           TransformationToTracePackage(relationsChild, traceChild);
         }
     }
     
@@ -78,7 +120,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
         domain relations
             rRelation: Relation {
                 name = relationName:String{},
-                _'transformation' = rParent:Transformation{}
+                _'transformation' = rParent:RelationalTransformation{}
             };
         enforce domain
             core traceClass:Class {
@@ -90,7 +132,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
         }
     }
     
-    relation RootVariableToTraceClassProperty
+/*    relation RootVariableToTraceClassProperty
     {
         domain relations
             rRelation: Relation {

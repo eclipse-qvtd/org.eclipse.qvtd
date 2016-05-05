@@ -1,14 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
-    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage">
-  <pivot:Package xmi:id="P.$$" name="$$"/>
-  <pivot:Package xmi:id="P.org" name="org">
+<pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" externalURI="platform:/resource/org.eclipse.qvtd.compiler/src/org/eclipse/qvtd/compiler/internal/qvtr2qvtc/qvtrsrc/SimplerRelToCorePivotizedBeautyfied.qvtr"
+    name="SimplerRelToCorePivotizedBeautyfied.qvtr">
+  <ownedPackages xmi:id="P.org" name="org">
     <ownedPackages xmi:id="P.org.eclipse" name="eclipse">
       <ownedPackages xmi:id="P.org.eclipse.qvtd" name="qvtd">
         <ownedPackages xmi:id="P.org.eclipse.qvtd.compiler" name="compiler">
-          <ownedPackages xmi:id="P.org.eclipse.qvtd.compiler.qvtr" name="qvtr"/>
+          <ownedPackages xmi:id="P.org.eclipse.qvtd.compiler.qvtr" name="qvtr">
+            <ownedPackages xmi:id="P.org.eclipse.qvtd.compiler.qvtr.TrelToCore" name="TrelToCore">
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TDomainBottomUnSharedVarsToDbVars" name="TDomainBottomUnSharedVarsToDbVars"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TDomainVarsSharedWithWhenToDgVars" name="TDomainVarsSharedWithWhenToDgVars"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TIROppositeDomainsToMappingForEnforcement" name="TIROppositeDomainsToMappingForEnforcement"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TInvokedRelationToMappingForChecking" name="TInvokedRelationToMappingForChecking"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TInvokedRelationToMappingForEnforcement" name="TInvokedRelationToMappingForEnforcement"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainPatternExprToMappingBottomVarAssignment" name="TRDomainPatternExprToMappingBottomVarAssignment"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainPatternExprToMappingDomainAssignment" name="TRDomainPatternExprToMappingDomainAssignment"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainPatternExprToMappingDomainTemplateVarAssignment"
+                  name="TRDomainPatternExprToMappingDomainTemplateVarAssignment"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainPatternExprToMappingDomainVarAssignment" name="TRDomainPatternExprToMappingDomainVarAssignment"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainPatternToMDBottomPattern" name="TRDomainPatternToMDBottomPattern"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainPatternToMDBottomPatternComposite" name="TRDomainPatternToMDBottomPatternComposite"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainPatternToMDBottomPatternSimpleNonVarExpr" name="TRDomainPatternToMDBottomPatternSimpleNonVarExpr"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainPatternToMDBottomPatternSimpleSharedVarExpr" name="TRDomainPatternToMDBottomPatternSimpleSharedVarExpr"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainPatternToMDBottomPatternSimpleUnSharedVarExpr"
+                  name="TRDomainPatternToMDBottomPatternSimpleUnSharedVarExpr"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMBottomPredicateForEnforcement" name="TRDomainToMBottomPredicateForEnforcement"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMComposedMappingGuard" name="TRDomainToMComposedMappingGuard"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcement" name="TRDomainToMDBottomForEnforcement"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfIdentityProp" name="TRDomainToMDBottomForEnforcementOfIdentityProp"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfIdentityPropObject"
+                  name="TRDomainToMDBottomForEnforcementOfIdentityPropObject"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfNonIdentityPropObject"
+                  name="TRDomainToMDBottomForEnforcementOfNonIdentityPropObject"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive"
+                  name="TRDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDomainForChecking" name="TRDomainToMDomainForChecking"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainVarToMDBottomAssignmnetForEnforcement" name="TRDomainVarToMDBottomAssignmnetForEnforcement"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainVarsToTraceClassProps" name="TRDomainVarsToTraceClassProps"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRExpToMExp" name="TRExpToMExp"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRInvokerToMGuard" name="TRInvokerToMGuard"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRInvokerToMGuardPredicate" name="TRInvokerToMGuardPredicate"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TROppositeDomainVarsToTraceClassProps" name="TROppositeDomainVarsToTraceClassProps"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRPredicateSetToMBPredicateSet" name="TRPredicateSetToMBPredicateSet"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRRelDomainsToMOpCallArg" name="TRRelDomainsToMOpCallArg"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRRelImplToMBottomEnforcementOperation" name="TRRelImplToMBottomEnforcementOperation"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRSimplePatternToMPattern" name="TRSimplePatternToMPattern"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToDGVarSet" name="TRVarSetToDGVarSet"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToMBVarSet" name="TRVarSetToMBVarSet"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToMVarSet" name="TRVarSetToMVarSet"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarToMRealizedVar" name="TRVarToMRealizedVar"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarToMVar" name="TRVarToMVar"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRWhenPatternToMGuardPattern" name="TRWhenPatternToMGuardPattern"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRWhenRelCallArgToMGuardPredicate" name="TRWhenRelCallArgToMGuardPredicate"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRWhenRelCallToMGuard" name="TRWhenRelCallToMGuard"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRWherePatternToMPattern" name="TRWherePatternToMPattern"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRelationDomainToTraceClassVar" name="TRelationDomainToTraceClassVar"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRelationToTraceClass" name="TRelationToTraceClass"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRelationToTraceClassVar" name="TRelationToTraceClassVar"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRelationalTransformationToMappingTransformation" name="TRelationalTransformationToMappingTransformation"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TSubTemplateToTraceClassProps" name="TSubTemplateToTraceClassProps"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TTROppositeDomainsToMappingForEnforcement" name="TTROppositeDomainsToMappingForEnforcement"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TTopLevelRelationToMappingForChecking" name="TTopLevelRelationToMappingForChecking"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TTopLevelRelationToMappingForEnforcement" name="TTopLevelRelationToMappingForEnforcement"/>
+              <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TUnsharedWhenVarsToMgVars" name="TUnsharedWhenVarsToMgVars"/>
+            </ownedPackages>
+          </ownedPackages>
         </ownedPackages>
       </ownedPackages>
     </ownedPackages>
-  </pivot:Package>
-</xmi:XMI>
+  </ownedPackages>
+  <ownedPackages xmi:id="P.$$" name="$$"/>
+</pivot:Model>

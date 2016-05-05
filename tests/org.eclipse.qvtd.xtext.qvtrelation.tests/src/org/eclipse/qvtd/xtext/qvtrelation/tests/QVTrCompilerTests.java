@@ -395,6 +395,8 @@ public class QVTrCompilerTests extends LoadTestCase
 	    	String projectTestName = PROJECT_NAME + ".rel2core";
 	    	myQVT.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
+			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.genmodel", "//qvtcore");
+			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel", "//qvtcorebase");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
 	    	Transformation asTransformation = myQVT.compileTransformation("RelToCore.qvtr", "core", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/rel2core/RelToCore");
