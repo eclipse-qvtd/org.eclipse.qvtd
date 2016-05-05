@@ -39,7 +39,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
             };
     }
     
-     top relation NestedPackageToTracePackage
+    top relation NestedPackageToTracePackage
     {
         packageName:String;
         domain relations
