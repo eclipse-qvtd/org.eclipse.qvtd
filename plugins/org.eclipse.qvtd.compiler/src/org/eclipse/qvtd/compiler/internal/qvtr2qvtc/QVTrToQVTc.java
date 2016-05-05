@@ -331,6 +331,16 @@ public class QVTrToQVTc
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public @NonNull String getProjectName(@NonNull URI traceURI) {
+		URI trimFileExtension = traceURI.trimFileExtension();
+		if (trimFileExtension.isPlatform()) {
+			return trimFileExtension.segment(1);
+		}
+		else {
+			return trimFileExtension.segment(0);
+		}
+	}
 	
 	/**
 	 * @return the qvtcSource
@@ -494,17 +504,11 @@ public class QVTrToQVTc
 		asResource.save(options);
 	}
 
-	public @NonNull Resource saveGenModel(@NonNull Resource asResource, @NonNull URI traceURI, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @NonNull Map<Object, Object> saveOptions2, @Nullable Collection<@NonNull ? extends GenPackage> usedGenPackages) throws IOException {
+	public @NonNull GenModel saveGenModel(@NonNull Resource asResource, @NonNull URI traceURI, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @NonNull Map<Object, Object> saveOptions2, @Nullable Collection<@NonNull ? extends GenPackage> usedGenPackages) throws IOException {
 		URI trimFileExtension = traceURI.trimFileExtension();
-		String projectName;
-		if (trimFileExtension.isPlatform()) {
-			projectName = trimFileExtension.segment(1);
-		}
-		else {
-			projectName = trimFileExtension.segment(0);
-		}
+		String projectName = getProjectName(traceURI);
 		Resource genmodelResource = environmentFactory.getResourceSet().createResource(genModelURI);
-		GenModel genModel = GenModelFactory.eINSTANCE.createGenModel();
+		@SuppressWarnings("null")@NonNull GenModel genModel = GenModelFactory.eINSTANCE.createGenModel();
 		genModel.getForeignModel().add(traceURI.lastSegment());
 		String copyrightText = genModelOptions != null ? genModelOptions.get(CompilerChain.GENMODEL_COPYRIGHT_TEXT) : null;
 		if (copyrightText != null) {
@@ -599,11 +603,10 @@ public class QVTrToQVTc
 	    saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 	    saveOptions.put(Resource.OPTION_LINE_DELIMITER, Resource.OPTION_LINE_DELIMITER_UNSPECIFIED);
 		genmodelResource.save(saveOptions);
-		generateModels(genModel);
-		return genmodelResource;
+		return genModel;
 	}
 
-	private void generateModels(@NonNull GenModel genModel) {
+	public void generateModels(@NonNull GenModel genModel) {
 		Registry generatorAdapterDescriptorRegistry = GeneratorAdapterFactory.Descriptor.Registry.INSTANCE;
 		if (!generatorAdapterDescriptorRegistry.getDescriptors(GenModelPackage.eNS_URI).contains(GenModelGeneratorAdapterFactory.DESCRIPTOR)) {
 			generatorAdapterDescriptorRegistry.addDescriptor(GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);

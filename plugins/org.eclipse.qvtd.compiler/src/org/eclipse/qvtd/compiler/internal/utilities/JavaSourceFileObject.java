@@ -8,7 +8,7 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.xtext.qvtbase.tests.utilities;
+package org.eclipse.qvtd.compiler.internal.utilities;
 
 import java.io.File;
 import java.io.FileReader;
@@ -33,7 +33,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 /**
- * JavaSourceFileObject supporets use of a File as a Java compilation unit.
+ * JavaSourceFileObject supports use of a File as a Java compilation unit.
  * 
  * The compileClasses utility method support compilation of a source package and subpackages.
  */
@@ -89,13 +89,16 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 		if (compilationUnits == null) {
 			compilationUnits = new ArrayList<@NonNull JavaFileObject>();
 		}
-		for (File file : folder.listFiles()) {
-			if (file.isDirectory()) {
-				gatherCompilationUnits(file, compilationUnits);
-			}
-			else if (file.isFile() && file.getName().endsWith(".java")) {
-				URI uri = file.getCanonicalFile().toURI();
-				compilationUnits.add(new JavaSourceFileObject(uri));
+		File[] listFiles = folder.listFiles();
+		if (listFiles != null) {
+			for (File file : listFiles) {
+				if (file.isDirectory()) {
+					gatherCompilationUnits(file, compilationUnits);
+				}
+				else if (file.isFile() && file.getName().endsWith(".java")) {
+					URI uri = file.getCanonicalFile().toURI();
+					compilationUnits.add(new JavaSourceFileObject(uri));
+				}
 			}
 		}
 		return compilationUnits;
