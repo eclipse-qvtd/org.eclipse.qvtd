@@ -118,9 +118,9 @@ ExpCSOrTemplateCS returns essentialocl::ExpCS: ExpCS | TemplateCS;
 TypedTypeRefCS returns base::TypedTypeRefCS: ownedPathName=PathNameCS;
 
 TypedRefCS returns base::TypedRefCS:
-	PrimitiveTypeCS
-|	CollectionTypeCS
-|	TypedTypeRefCS
+	(PrimitiveTypeCS ownedMultiplicity=MultiplicityCS?)
+|	(CollectionTypeCS ownedMultiplicity=MultiplicityCS?)
+|	(TypedTypeRefCS ownedMultiplicity=MultiplicityCS?)
 ;
 
 //ExpCS returns essentialocl::ExpCS:
