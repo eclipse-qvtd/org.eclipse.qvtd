@@ -132,7 +132,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
         }
     }
     
-/*    relation RootVariableToTraceClassProperty
+    top relation RootVariableToTraceClassProperty
     {
         domain relations
             rRelation: Relation {
@@ -160,7 +160,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
 --            CollectionTemplateToTraceClassProps(rootTemplateExp, traceClass);
 --            ObjectTemplateToTraceClassProps(rootTemplateExp, traceClass);
         }
-    } */
+    }
     
 /*    relation CollectionTemplateToTraceClassProps
     {
