@@ -215,7 +215,8 @@ public class FunctionImpl extends OperationImpl implements Function {
 		
 		@Override
 		public Type getType() {
-			return getQueryExpression().getType();
+			OCLExpression queryExpression = getQueryExpression();
+			return queryExpression != null ? queryExpression.getType() : null;
 		}
 	}
 
