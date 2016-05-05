@@ -86,7 +86,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					doSubTemplateToTraceClassProps((TemplateExp)m, rc);
 				}
 				else {
-					createTraceProperty(rc, collectionVariable.getName() + "_" + argIndex, elementType);
+					createTraceProperty(rc, collectionVariable.getName() + "_" + argIndex, elementType, collectionType.isIsNullFree());
 				}
 				argIndex++;
 			}
@@ -110,10 +110,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	private void createTraceProperty(org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull Variable tv) {
 		String vn = ClassUtil.nonNullState(tv.getName());
 		Type c = ClassUtil.nonNullState(tv.getType());
-		qvtr2qvtc.whenTraceProperty(rc, vn, c);
+		qvtr2qvtc.whenTraceProperty(rc, vn, c, tv.isIsRequired());
 	}
 
-	private void createTraceProperty(org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull String name, @NonNull Type type) {
-		qvtr2qvtc.whenTraceProperty(rc, name, type);
+	private void createTraceProperty(org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull String name, @NonNull Type type, boolean isRequired) {
+		qvtr2qvtc.whenTraceProperty(rc, name, type, isRequired);
 	}
 }

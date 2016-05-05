@@ -9,14 +9,14 @@
           <ownedPackages xmi:id="P.org.eclipse.qvtd.compiler.qvtr" name="qvtr">
             <ownedPackages xmi:id="P.org.eclipse.qvtd.compiler.qvtr.TrelToCore" name="TrelToCore">
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TDomainBottomUnSharedVarsToDbVars" name="TDomainBottomUnSharedVarsToDbVars">
-                <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TDomainBottomUnSharedVarsToDbVars.domainBottomUnSharedVars"
-                    name="domainBottomUnSharedVars" type="#//@ownedPackages.2/@ownedClasses.6"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TDomainBottomUnSharedVarsToDbVars.db" name="db" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore.oclas#T.qvtcorebase.BottomPattern"/>
+                <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TDomainBottomUnSharedVarsToDbVars.domainBottomUnSharedVars"
+                    name="domainBottomUnSharedVars" type="#//@ownedPackages.1/@ownedClasses.6"/>
               </ownedClasses>
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TDomainVarsSharedWithWhenToDgVars" name="TDomainVarsSharedWithWhenToDgVars">
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TDomainVarsSharedWithWhenToDgVars.dg" name="dg" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore.oclas#T.qvtcorebase.GuardPattern"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TDomainVarsSharedWithWhenToDgVars.domainVarsSharedWithWhen"
-                    name="domainVarsSharedWithWhen" type="#//@ownedPackages.2/@ownedClasses.6"/>
+                    name="domainVarsSharedWithWhen" type="#//@ownedPackages.1/@ownedClasses.6"/>
               </ownedClasses>
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TIROppositeDomainsToMappingForEnforcement" name="TIROppositeDomainsToMappingForEnforcement">
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TIROppositeDomainsToMappingForEnforcement.ir" name="ir"
@@ -127,7 +127,7 @@
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMBottomPredicateForEnforcement.mb" name="mb"
                     type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore.oclas#T.qvtcorebase.BottomPattern"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMBottomPredicateForEnforcement.predicatesWithoutVarBindings"
-                    name="predicatesWithoutVarBindings" type="#//@ownedPackages.2/@ownedClasses.7"/>
+                    name="predicatesWithoutVarBindings" type="#//@ownedPackages.1/@ownedClasses.7"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMBottomPredicateForEnforcement.r" name="r"
                     type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore.oclas#T.qvtrelation.Relation"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMBottomPredicateForEnforcement.rd" name="rd"
@@ -135,7 +135,7 @@
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMBottomPredicateForEnforcement.te" name="te"
                     type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore.oclas#T.qvttemplate.ObjectTemplateExp"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMBottomPredicateForEnforcement.unboundDomainVars"
-                    name="unboundDomainVars" type="#//@ownedPackages.2/@ownedClasses.6"/>
+                    name="unboundDomainVars" type="#//@ownedPackages.1/@ownedClasses.6"/>
               </ownedClasses>
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMComposedMappingGuard" name="TRDomainToMComposedMappingGuard">
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMComposedMappingGuard.cm" name="cm" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore.oclas#T.qvtcore.Mapping"/>
@@ -147,12 +147,12 @@
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcement" name="TRDomainToMDBottomForEnforcement">
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcement.db" name="db" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore.oclas#T.qvtcorebase.BottomPattern"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcement.predicatesWithoutVarBindings"
-                    name="predicatesWithoutVarBindings" type="#//@ownedPackages.2/@ownedClasses.7"/>
+                    name="predicatesWithoutVarBindings" type="#//@ownedPackages.1/@ownedClasses.7"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcement.r" name="r" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore.oclas#T.qvtrelation.Relation"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcement.rd" name="rd" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore.oclas#T.qvtrelation.RelationDomain"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcement.te" name="te" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore.oclas#T.qvttemplate.ObjectTemplateExp"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcement.unboundDomainVars"
-                    name="unboundDomainVars" type="#//@ownedPackages.2/@ownedClasses.6"/>
+                    name="unboundDomainVars" type="#//@ownedPackages.1/@ownedClasses.6"/>
               </ownedClasses>
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfIdentityProp" name="TRDomainToMDBottomForEnforcementOfIdentityProp">
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfIdentityProp.db"
@@ -178,7 +178,7 @@
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfNonIdentityPropObject.m"
                     name="m" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore.oclas#T.qvtcore.Mapping"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfNonIdentityPropObject.predicatesWithoutVarBindings"
-                    name="predicatesWithoutVarBindings" type="#//@ownedPackages.2/@ownedClasses.7"/>
+                    name="predicatesWithoutVarBindings" type="#//@ownedPackages.1/@ownedClasses.7"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfNonIdentityPropObject.r"
                     name="r" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore.oclas#T.qvtrelation.Relation"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfNonIdentityPropObject.rd"
@@ -186,7 +186,7 @@
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfNonIdentityPropObject.te"
                     name="te" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore.oclas#T.qvttemplate.ObjectTemplateExp"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfNonIdentityPropObject.unboundDomainVars"
-                    name="unboundDomainVars" type="#//@ownedPackages.2/@ownedClasses.6"/>
+                    name="unboundDomainVars" type="#//@ownedPackages.1/@ownedClasses.6"/>
               </ownedClasses>
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive"
                   name="TRDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive">
@@ -235,7 +235,7 @@
               </ownedClasses>
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TROppositeDomainVarsToTraceClassProps" name="TROppositeDomainVarsToTraceClassProps">
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TROppositeDomainVarsToTraceClassProps.domainVars"
-                    name="domainVars" type="#//@ownedPackages.2/@ownedClasses.6"/>
+                    name="domainVars" type="#//@ownedPackages.1/@ownedClasses.6"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TROppositeDomainVarsToTraceClassProps.mb" name="mb"
                     type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore.oclas#T.qvtcorebase.BottomPattern"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TROppositeDomainVarsToTraceClassProps.r" name="r"
@@ -246,7 +246,7 @@
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRPredicateSetToMBPredicateSet" name="TRPredicateSetToMBPredicateSet">
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRPredicateSetToMBPredicateSet.mb" name="mb" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore.oclas#T.qvtcorebase.BottomPattern"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRPredicateSetToMBPredicateSet.predSeq" name="predSeq"
-                    type="#//@ownedPackages.2/@ownedClasses.5"/>
+                    type="#//@ownedPackages.1/@ownedClasses.5"/>
               </ownedClasses>
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRRelDomainsToMOpCallArg" name="TRRelDomainsToMOpCallArg">
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRRelDomainsToMOpCallArg.oce" name="oce" type="pivot:Class ../../../../../../../../../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.OperationCallExp"/>
@@ -266,15 +266,15 @@
               </ownedClasses>
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToDGVarSet" name="TRVarSetToDGVarSet">
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToDGVarSet.dg" name="dg" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore.oclas#T.qvtcorebase.GuardPattern"/>
-                <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToDGVarSet.rvSeq" name="rvSeq" type="#//@ownedPackages.2/@ownedClasses.4"/>
+                <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToDGVarSet.rvSeq" name="rvSeq" type="#//@ownedPackages.1/@ownedClasses.4"/>
               </ownedClasses>
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToMBVarSet" name="TRVarSetToMBVarSet">
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToMBVarSet.mb" name="mb" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore.oclas#T.qvtcorebase.BottomPattern"/>
-                <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToMBVarSet.rvSeq" name="rvSeq" type="#//@ownedPackages.2/@ownedClasses.4"/>
+                <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToMBVarSet.rvSeq" name="rvSeq" type="#//@ownedPackages.1/@ownedClasses.4"/>
               </ownedClasses>
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToMVarSet" name="TRVarSetToMVarSet">
-                <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToMVarSet.mvSet" name="mvSet" type="#//@ownedPackages.2/@ownedClasses.6"/>
-                <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToMVarSet.rvSeq" name="rvSeq" type="#//@ownedPackages.2/@ownedClasses.4"/>
+                <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToMVarSet.mvSet" name="mvSet" type="#//@ownedPackages.1/@ownedClasses.6"/>
+                <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarSetToMVarSet.rvSeq" name="rvSeq" type="#//@ownedPackages.1/@ownedClasses.4"/>
               </ownedClasses>
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarToMRealizedVar" name="TRVarToMRealizedVar">
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TRVarToMRealizedVar.mv" name="mv" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore.oclas#T.qvtcorebase.RealizedVariable"/>
@@ -348,7 +348,7 @@
               <ownedClasses xmi:id="T.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TUnsharedWhenVarsToMgVars" name="TUnsharedWhenVarsToMgVars">
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TUnsharedWhenVarsToMgVars.mg" name="mg" type="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore.oclas#T.qvtcorebase.GuardPattern"/>
                 <ownedProperties xmi:id="p.org.eclipse.qvtd.compiler.qvtr.TrelToCore.TUnsharedWhenVarsToMgVars.unsharedWhenVars" name="unsharedWhenVars"
-                    type="#//@ownedPackages.2/@ownedClasses.6"/>
+                    type="#//@ownedPackages.1/@ownedClasses.6"/>
               </ownedClasses>
             </ownedPackages>
           </ownedPackages>
@@ -356,8 +356,7 @@
       </ownedPackages>
     </ownedPackages>
   </ownedPackages>
-  <ownedPackages xmi:id="P.$$" name="$$"/>
-  <ownedPackages xmi:id="_3gMPgBKyEeay29n01ZeJcw" URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
+  <ownedPackages xmi:id="P.$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$">
     <ownedClasses xsi:type="pivot:CollectionType" elementType="pivot:Class ../../../../../../../../../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"
         name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
       <ownedBindings>
@@ -373,56 +372,56 @@
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" elementType="pivot:Class ../../../../../../../../../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"
-        name="OrderedCollection" superClasses="#//@ownedPackages.2/@ownedClasses.0">
+        name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.0">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../../../../../../../../../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" elementType="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore.oclas#T.qvtbase.Predicate"
-        name="OrderedCollection" superClasses="#//@ownedPackages.2/@ownedClasses.1">
+        name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.1">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore.oclas#T.qvtbase.Predicate"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:SequenceType" elementType="pivot:Class ../../../../../../../../../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"
-        name="Sequence" superClasses="#//@ownedPackages.2/@ownedClasses.2">
+        name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.2">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../../../../../../../../../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SequenceT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:SequenceType" elementType="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore.oclas#T.qvtbase.Predicate"
-        name="Sequence" superClasses="#//@ownedPackages.2/@ownedClasses.3">
+        name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.3">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore.oclas#T.qvtbase.Predicate"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SequenceT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:SetType" elementType="pivot:Class ../../../../../../../../../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"
-        name="Set" superClasses="#//@ownedPackages.2/@ownedClasses.8">
+        name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.8">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../../../../../../../../../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:SetType" elementType="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore.oclas#T.qvtbase.Predicate"
-        name="Set" superClasses="#//@ownedPackages.2/@ownedClasses.9">
+        name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.9">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore.oclas#T.qvtbase.Predicate"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" elementType="pivot:Class ../../../../../../../../../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"
-        name="UniqueCollection" superClasses="#//@ownedPackages.2/@ownedClasses.0">
+        name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.0">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../../../../../../../../../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" elementType="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore.oclas#T.qvtbase.Predicate"
-        name="UniqueCollection" superClasses="#//@ownedPackages.2/@ownedClasses.1">
+        name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.1">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ../../../../../../../../../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore.oclas#T.qvtbase.Predicate"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>

@@ -44,14 +44,17 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
     
     top relation PackageToTracePackage
     {
-        packageName:String;
+        packageName:String[?];
+        packageURI:String[?];
         domain relations
             relationsPackage:Package {
-                name = packageName
+                name = packageName,
+                URI = packageURI
             };
         enforce domain core
         	tracePackage:Package {
-                name = packageName
+                name = packageName,
+                URI = packageURI
             };
     }
     

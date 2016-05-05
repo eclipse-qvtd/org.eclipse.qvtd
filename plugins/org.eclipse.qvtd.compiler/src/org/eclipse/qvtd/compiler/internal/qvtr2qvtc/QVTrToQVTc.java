@@ -832,7 +832,7 @@ public class QVTrToQVTc
 	/**
 	 * Lazily create the name Property for a traceClass with a type.
 	 */
-	/*public*/ @NonNull Property whenTraceProperty(org.eclipse.ocl.pivot.@NonNull Class traceClass, @NonNull String name, @NonNull Type type) {
+	/*public*/ @NonNull Property whenTraceProperty(org.eclipse.ocl.pivot.@NonNull Class traceClass, @NonNull String name, @NonNull Type type, boolean isRequired) {
 		Map<@NonNull String, @NonNull Property> name2traceProperty = traceClass2name2traceProperty.get(traceClass);
 		if (name2traceProperty == null) {
 			name2traceProperty = new HashMap<@NonNull String, @NonNull Property>();
@@ -843,7 +843,7 @@ public class QVTrToQVTc
 			traceProperty = PivotFactory.eINSTANCE.createProperty();
 			traceProperty.setName(name);
 			traceProperty.setType(type);
-			traceProperty.setIsRequired(true);
+			traceProperty.setIsRequired(isRequired);
 			name2traceProperty.put(name, traceProperty);
 			traceProperty.setOwningClass(traceClass);
 			if (!(type instanceof DataType)) {
