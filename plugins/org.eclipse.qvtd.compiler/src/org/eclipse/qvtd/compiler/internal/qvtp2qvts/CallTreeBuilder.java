@@ -131,19 +131,37 @@ public class CallTreeBuilder
 		assert topOfStack != null;
 		@NonNull Region commonRegion = getCommonRegion(topOfStack, region);
 		//
-		//	If the caller is a recursion, ensure the the caller's caller is on the stack.
+		//	Must identify the call point at which all source values are available.
 		//
-/*		for (@NonNull DatumConnection incomingConnection1 : getIncomingConnections(region)) {		// FIXME passed
-			for (@NonNull Region sourceRegion1 : getSourceRegions(incomingConnection1)) {
+		//	The 'easy' safe inefficient case is the caller of the common region of all sources. 
+		//
+		//	FIXME: The optimized case for a single-headed region ensures that for all candidate sources for the head,
+		//	the to-one region from the head's source covers all the required producer-consumer dependencies.
+		//
+		//	Obsolete special case: If the caller is a recursion, ensure the the caller's caller is on the stack.
+		//
+/*		for (@NonNull DatumConnection incomingConnection1 : scheduleCache.getIncomingConnections(region)) {		// FIXME passed
+			for (@NonNull Region sourceRegion1 : scheduleCache.getSourceRegions(incomingConnection1)) {
 				if (sourceRegion1.getLoopingConnections().size() > 0) {
-					for (@NonNull DatumConnection incomingConnection2 : getIncomingConnections(sourceRegion1)) {		// FIXME passed
-						for (@NonNull Region sourceRegion2 : getSourceRegions(incomingConnection2)) {
+					for (@NonNull DatumConnection incomingConnection2 : scheduleCache.getIncomingConnections(sourceRegion1)) {		// FIXME passed
+						for (@NonNull Region sourceRegion2 : scheduleCache.getSourceRegions(incomingConnection2)) {
 							commonRegion = getCommonRegion(commonRegion, sourceRegion2);
 						}
 					}
 				}
 			}
 		} */
+		for (@NonNull DatumConnection incomingConnection1 : scheduleCache.getIncomingConnections(region)) {
+			for (@NonNull Region sourceRegion1 : scheduleCache.getSourceRegions(incomingConnection1)) {
+//				if (sourceRegion1.getLoopingConnections().size() > 0) {
+					for (@NonNull DatumConnection incomingConnection2 : scheduleCache.getIncomingConnections(sourceRegion1)) {
+						for (@NonNull Region sourceRegion2 : scheduleCache.getSourceRegions(incomingConnection2)) {
+							commonRegion = getCommonRegion(commonRegion, sourceRegion2);
+						}
+					}
+//				}
+			}
+		}
 		while (!callStack.contains(commonRegion)) {
 			commonRegion = getMinimumDepthParentRegion(commonRegion);
 			assert commonRegion != null;
