@@ -158,9 +158,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 				else break;
 			case BaseCSPackage.PRIMITIVE_TYPE_REF_CS:
 				if(context == grammarAccess.getPrimitiveTypeCSRule() ||
-				   context == grammarAccess.getTypeLiteralCSRule() ||
-				   context == grammarAccess.getTypeRefCSRule() ||
-				   context == grammarAccess.getTypedRefCSRule()) {
+				   context == grammarAccess.getTypeLiteralCSRule()) {
 					sequence_PrimitiveTypeCS(context, (PrimitiveTypeRefCS) semanticObject); 
 					return; 
 				}
@@ -170,6 +168,11 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 				}
 				else if(context == grammarAccess.getTypeLiteralWithMultiplicityCSRule()) {
 					sequence_PrimitiveTypeCS_TypeLiteralWithMultiplicityCS(context, (PrimitiveTypeRefCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getTypeRefCSRule() ||
+				   context == grammarAccess.getTypedRefCSRule()) {
+					sequence_PrimitiveTypeCS_TypedRefCS(context, (PrimitiveTypeRefCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -204,8 +207,16 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 				sequence_TypeParameterCS(context, (TypeParameterCS) semanticObject); 
 				return; 
 			case BaseCSPackage.TYPED_TYPE_REF_CS:
-				sequence_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject); 
-				return; 
+				if(context == grammarAccess.getTypeRefCSRule() ||
+				   context == grammarAccess.getTypedRefCSRule()) {
+					sequence_TypedRefCS_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getTypedTypeRefCSRule()) {
+					sequence_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject); 
+					return; 
+				}
+				else break;
 			case BaseCSPackage.WILDCARD_TYPE_REF_CS:
 				sequence_WildcardTypeRefCS(context, (WildcardTypeRefCS) semanticObject); 
 				return; 
@@ -232,9 +243,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 				else break;
 			case EssentialOCLCSPackage.COLLECTION_TYPE_CS:
 				if(context == grammarAccess.getCollectionTypeCSRule() ||
-				   context == grammarAccess.getTypeLiteralCSRule() ||
-				   context == grammarAccess.getTypeRefCSRule() ||
-				   context == grammarAccess.getTypedRefCSRule()) {
+				   context == grammarAccess.getTypeLiteralCSRule()) {
 					sequence_CollectionTypeCS(context, (CollectionTypeCS) semanticObject); 
 					return; 
 				}
@@ -244,6 +253,11 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 				}
 				else if(context == grammarAccess.getTypeLiteralWithMultiplicityCSRule()) {
 					sequence_CollectionTypeCS_TypeLiteralWithMultiplicityCS(context, (CollectionTypeCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getTypeRefCSRule() ||
+				   context == grammarAccess.getTypedRefCSRule()) {
+					sequence_CollectionTypeCS_TypedRefCS(context, (CollectionTypeCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -505,6 +519,15 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
+	 *     (name=CollectionTypeIdentifier ownedType=TypeExpCS? ownedMultiplicity=MultiplicityCS?)
+	 */
+	protected void sequence_CollectionTypeCS_TypedRefCS(EObject context, CollectionTypeCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (propertyId=[Variable|UnrestrictedName] ownedInitExpression=ExpCS)
 	 */
 	protected void sequence_DefaultValueCS(EObject context, DefaultValueCS semanticObject) {
@@ -614,6 +637,15 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
+	 *     (name=PrimitiveTypeIdentifier ownedMultiplicity=MultiplicityCS?)
+	 */
+	protected void sequence_PrimitiveTypeCS_TypedRefCS(EObject context, PrimitiveTypeRefCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (name=UnrestrictedName ownedType=TypedRefCS)
 	 */
 	protected void sequence_PrimitiveTypeDomainCS(EObject context, PrimitiveTypeDomainCS semanticObject) {
@@ -688,6 +720,15 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 	 *     )
 	 */
 	protected void sequence_TransformationCS(EObject context, TransformationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedPathName=PathNameCS ownedMultiplicity=MultiplicityCS?)
+	 */
+	protected void sequence_TypedRefCS_TypedTypeRefCS(EObject context, TypedTypeRefCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

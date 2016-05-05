@@ -1528,25 +1528,63 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	public class TypedRefCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypedRefCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cPrimitiveTypeCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cCollectionTypeCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cTypedTypeRefCSParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final RuleCall cPrimitiveTypeCSParserRuleCall_0_0 = (RuleCall)cGroup_0.eContents().get(0);
+		private final Assignment cOwnedMultiplicityAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cOwnedMultiplicityMultiplicityCSParserRuleCall_0_1_0 = (RuleCall)cOwnedMultiplicityAssignment_0_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final RuleCall cCollectionTypeCSParserRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
+		private final Assignment cOwnedMultiplicityAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cOwnedMultiplicityMultiplicityCSParserRuleCall_1_1_0 = (RuleCall)cOwnedMultiplicityAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
+		private final RuleCall cTypedTypeRefCSParserRuleCall_2_0 = (RuleCall)cGroup_2.eContents().get(0);
+		private final Assignment cOwnedMultiplicityAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cOwnedMultiplicityMultiplicityCSParserRuleCall_2_1_0 = (RuleCall)cOwnedMultiplicityAssignment_2_1.eContents().get(0);
 		
 		//TypedRefCS returns base::TypedRefCS:
-		//	PrimitiveTypeCS | CollectionTypeCS | TypedTypeRefCS;
+		//	PrimitiveTypeCS ownedMultiplicity=MultiplicityCS? | CollectionTypeCS ownedMultiplicity=MultiplicityCS? |
+		//	TypedTypeRefCS ownedMultiplicity=MultiplicityCS?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//PrimitiveTypeCS | CollectionTypeCS | TypedTypeRefCS
+		//PrimitiveTypeCS ownedMultiplicity=MultiplicityCS? | CollectionTypeCS ownedMultiplicity=MultiplicityCS? | TypedTypeRefCS
+		//ownedMultiplicity=MultiplicityCS?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
+		//PrimitiveTypeCS ownedMultiplicity=MultiplicityCS?
+		public Group getGroup_0() { return cGroup_0; }
+
 		//PrimitiveTypeCS
-		public RuleCall getPrimitiveTypeCSParserRuleCall_0() { return cPrimitiveTypeCSParserRuleCall_0; }
+		public RuleCall getPrimitiveTypeCSParserRuleCall_0_0() { return cPrimitiveTypeCSParserRuleCall_0_0; }
+
+		//ownedMultiplicity=MultiplicityCS?
+		public Assignment getOwnedMultiplicityAssignment_0_1() { return cOwnedMultiplicityAssignment_0_1; }
+
+		//MultiplicityCS
+		public RuleCall getOwnedMultiplicityMultiplicityCSParserRuleCall_0_1_0() { return cOwnedMultiplicityMultiplicityCSParserRuleCall_0_1_0; }
+
+		//CollectionTypeCS ownedMultiplicity=MultiplicityCS?
+		public Group getGroup_1() { return cGroup_1; }
 
 		//CollectionTypeCS
-		public RuleCall getCollectionTypeCSParserRuleCall_1() { return cCollectionTypeCSParserRuleCall_1; }
+		public RuleCall getCollectionTypeCSParserRuleCall_1_0() { return cCollectionTypeCSParserRuleCall_1_0; }
+
+		//ownedMultiplicity=MultiplicityCS?
+		public Assignment getOwnedMultiplicityAssignment_1_1() { return cOwnedMultiplicityAssignment_1_1; }
+
+		//MultiplicityCS
+		public RuleCall getOwnedMultiplicityMultiplicityCSParserRuleCall_1_1_0() { return cOwnedMultiplicityMultiplicityCSParserRuleCall_1_1_0; }
+
+		//TypedTypeRefCS ownedMultiplicity=MultiplicityCS?
+		public Group getGroup_2() { return cGroup_2; }
 
 		//TypedTypeRefCS
-		public RuleCall getTypedTypeRefCSParserRuleCall_2() { return cTypedTypeRefCSParserRuleCall_2; }
+		public RuleCall getTypedTypeRefCSParserRuleCall_2_0() { return cTypedTypeRefCSParserRuleCall_2_0; }
+
+		//ownedMultiplicity=MultiplicityCS?
+		public Assignment getOwnedMultiplicityAssignment_2_1() { return cOwnedMultiplicityAssignment_2_1; }
+
+		//MultiplicityCS
+		public RuleCall getOwnedMultiplicityMultiplicityCSParserRuleCall_2_1_0() { return cOwnedMultiplicityMultiplicityCSParserRuleCall_2_1_0; }
 	}
 
 	public class UnrestrictedNameElements extends AbstractParserRuleElementFinder {
@@ -2026,7 +2064,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypedRefCS returns base::TypedRefCS:
-	//	PrimitiveTypeCS | CollectionTypeCS | TypedTypeRefCS;
+	//	PrimitiveTypeCS ownedMultiplicity=MultiplicityCS? | CollectionTypeCS ownedMultiplicity=MultiplicityCS? |
+	//	TypedTypeRefCS ownedMultiplicity=MultiplicityCS?;
 	public TypedRefCSElements getTypedRefCSAccess() {
 		return pTypedRefCS;
 	}

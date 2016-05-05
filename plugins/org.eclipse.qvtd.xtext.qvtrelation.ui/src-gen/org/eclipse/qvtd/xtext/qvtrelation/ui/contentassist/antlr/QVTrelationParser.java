@@ -135,6 +135,9 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVarDeclarationCSAccess().getGroup_3(), "rule__VarDeclarationCS__Group_3__0");
 					put(grammarAccess.getWhenCSAccess().getGroup(), "rule__WhenCS__Group__0");
 					put(grammarAccess.getWhereCSAccess().getGroup(), "rule__WhereCS__Group__0");
+					put(grammarAccess.getTypedRefCSAccess().getGroup_0(), "rule__TypedRefCS__Group_0__0");
+					put(grammarAccess.getTypedRefCSAccess().getGroup_1(), "rule__TypedRefCS__Group_1__0");
+					put(grammarAccess.getTypedRefCSAccess().getGroup_2(), "rule__TypedRefCS__Group_2__0");
 					put(grammarAccess.getURIPathNameCSAccess().getGroup(), "rule__URIPathNameCS__Group__0");
 					put(grammarAccess.getURIPathNameCSAccess().getGroup_1(), "rule__URIPathNameCS__Group_1__0");
 					put(grammarAccess.getURIFirstPathElementCSAccess().getGroup_1(), "rule__URIFirstPathElementCS__Group_1__0");
@@ -303,6 +306,9 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getWhenCSAccess().getOwnedPredicatesAssignment_3(), "rule__WhenCS__OwnedPredicatesAssignment_3");
 					put(grammarAccess.getWhereCSAccess().getOwnedPredicatesAssignment_3(), "rule__WhereCS__OwnedPredicatesAssignment_3");
 					put(grammarAccess.getTypedTypeRefCSAccess().getOwnedPathNameAssignment(), "rule__TypedTypeRefCS__OwnedPathNameAssignment");
+					put(grammarAccess.getTypedRefCSAccess().getOwnedMultiplicityAssignment_0_1(), "rule__TypedRefCS__OwnedMultiplicityAssignment_0_1");
+					put(grammarAccess.getTypedRefCSAccess().getOwnedMultiplicityAssignment_1_1(), "rule__TypedRefCS__OwnedMultiplicityAssignment_1_1");
+					put(grammarAccess.getTypedRefCSAccess().getOwnedMultiplicityAssignment_2_1(), "rule__TypedRefCS__OwnedMultiplicityAssignment_2_1");
 					put(grammarAccess.getModelAccess().getOwnedExpressionAssignment(), "rule__Model__OwnedExpressionAssignment");
 					put(grammarAccess.getURIPathNameCSAccess().getOwnedPathElementsAssignment_0(), "rule__URIPathNameCS__OwnedPathElementsAssignment_0");
 					put(grammarAccess.getURIPathNameCSAccess().getOwnedPathElementsAssignment_1_1(), "rule__URIPathNameCS__OwnedPathElementsAssignment_1_1");
