@@ -97,6 +97,11 @@ public interface DomainUsage
 	boolean isMiddle();
 
 	/**
+	 * Return true if this usage includes usage in no domain.
+	 */
+	boolean isNone();
+
+	/**
 	 * Return true if this usage includes usage in an output domain, a domain that is fully enforceable transformation-wide.
 	 */
 	boolean isOutput();

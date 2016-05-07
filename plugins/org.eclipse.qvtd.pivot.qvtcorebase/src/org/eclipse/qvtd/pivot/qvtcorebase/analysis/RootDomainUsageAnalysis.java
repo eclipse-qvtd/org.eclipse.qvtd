@@ -134,6 +134,11 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		}
 
 		@Override
+		public boolean isNone() {
+			return bitMask == 0;
+		}
+
+		@Override
 		public boolean isOutput() {
 			return (bitMask & outputUsage.bitMask) != 0;
 		}
@@ -334,8 +339,8 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	 * The properties of the input models that are assigned by mappings and which cannot therefore
 	 * be trusted to be loaded from the input models.
 	 */
-	private final @NonNull Set<Property> dirtyProperties = new HashSet<Property>();
-	private final @NonNull Set<EReference> dirtyEReferences = new HashSet<EReference>();
+	private final @NonNull Set<@NonNull Property> dirtyProperties = new HashSet<@NonNull Property>();
+	private final @NonNull Set<@NonNull EReference> dirtyEReferences = new HashSet<@NonNull EReference>();
 
 
 	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
@@ -370,11 +375,14 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			EObject eObject = tit.next();
 			if (eObject instanceof PropertyAssignment) {
 				PropertyAssignment propertyAssignment = (PropertyAssignment)eObject;
+//				if ("s.name := sn".equals(eObject.toString())) {
+//					eObject.toString();
+//				}
 				OCLExpression slotExpression = propertyAssignment.getSlotExpression();
 				assert slotExpression != null;
 				DomainUsage domainUsage = getUsage(slotExpression);
 				if (!domainUsage.isOutput() && !domainUsage.isMiddle()) {
-					Property targetProperty = propertyAssignment.getTargetProperty();
+					Property targetProperty = ClassUtil.nonNullState(propertyAssignment.getTargetProperty());
 //					System.out.println("Dirty " + targetProperty + " for " + eObject);
 					dirtyProperties.add(targetProperty);
 					EObject eProperty = targetProperty.getESObject();
@@ -384,7 +392,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 				}
 			}
 		}
-		for (Property dirtyProperty : dirtyProperties) {
+		for (@NonNull Property dirtyProperty : dirtyProperties) {
 			if (!dirtyProperty.isIsTransient()) {
 				System.err.println("Dirty " + dirtyProperty + " is not transient");
 			}

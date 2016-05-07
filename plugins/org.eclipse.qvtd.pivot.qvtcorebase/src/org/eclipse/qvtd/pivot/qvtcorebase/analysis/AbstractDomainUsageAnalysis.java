@@ -170,7 +170,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		DomainUsage usage = element2usage.get(element);
 		if (usage == null) {
 			usage = element.accept(this);
-			if (usage == null) {						// FIXME debugging
+			if ((usage == null) || usage.isNone()) {						// FIXME debugging
 				usage = element.accept(this);
 			}
 			assert usage != null : "null usage for " + element.eClass().getName() + " " + element;
@@ -266,7 +266,8 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			for (Variable variable : ((AbstractMapping)rule).getGuardPattern().getVariable()) {
 				if (variable != null) {
 					DomainUsage variableUsage = visit(variable.getType());
-					if (variableUsage != primitiveUsage) {
+//					if (variableUsage != primitiveUsage) {
+					if (!variableUsage.isInput() && !variableUsage.isOutput() && !variableUsage.isPrimitive()) {
 						variableUsage = middleUsage;
 					}
 					assert variableUsage != null;
@@ -277,6 +278,12 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	}
 	
 	protected void setUsage(@NonNull Element element, @NonNull DomainUsage newUsage) {
+//		if (newUsage.isNone()) {
+//			element.toString();
+//		}
+//		if ("s".equals(element.toString())) {
+//			element.toString();
+//		}
 		element2usage.put(element, newUsage);
 		((DomainUsage.Internal)newUsage).addUsedBy(element);
 //		System.out.println("        setUsage " + getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this))
@@ -334,6 +341,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		}
 		DomainUsage usage = element2usage.get(element);
 		if (usage == null) {
+//			if ("s : StmcMM::StateMachine[1]".equals(element.toString())) {
+//				element.toString();
+//			}
 			usage = element.accept(this);
 			if (usage == null) {						// FIXME debugging
 				usage = element.accept(this);
@@ -871,7 +881,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			return visit(ownedInit);
 		}
 		Area area = QVTcoreBaseUtil.getContainingArea(object);
-		if (area != null) {
+		if (area instanceof Domain) {
 			return visit(area);
 		}
 		else {
