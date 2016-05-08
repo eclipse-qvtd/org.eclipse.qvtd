@@ -28,6 +28,14 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 	public RelationalTransformationToMappingTransformation(@NonNull QVTrToQVTc qvtr2qvtc) {
 		this.qvtr2qvtc = qvtr2qvtc;
 	}
+
+	private @NonNull TypedModel createTypedModel(@NonNull Transformation coreTransformation, @Nullable String name, @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> usedPackages) {
+		TypedModel coreTypedModel =  QVTbaseFactory.eINSTANCE.createTypedModel();
+		coreTypedModel.setName(name);
+		coreTypedModel.getUsedPackage().addAll(usedPackages);
+		coreTransformation.getModelParameter().add(coreTypedModel);
+		return coreTypedModel;
+	}
 	
 	public @NonNull Transformation doRelationalTransformationToMappingTransformation(@NonNull RelationalTransformation relationalTransformation) {
 		//
@@ -45,16 +53,9 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 		//	Create a non-middle TypedModel per model parameter
 		//
 		for (@NonNull TypedModel relationTypedModel : ClassUtil.nullFree(relationalTransformation.getModelParameter())) {
-			createTypedModel(coreTransformation, relationTypedModel.getName(), ClassUtil.nullFree(relationTypedModel.getUsedPackage()));
+			TypedModel coreTypedModel = createTypedModel(coreTransformation, relationTypedModel.getName(), ClassUtil.nullFree(relationTypedModel.getUsedPackage()));
+			qvtr2qvtc.putTypedModel(relationTypedModel, coreTypedModel);
 		}
 		return coreTransformation;
-	}
-
-	private @NonNull TypedModel createTypedModel(@NonNull Transformation coreTransformation, @Nullable String name, @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> usedPackages) {
-		TypedModel coreTypedModel =  QVTbaseFactory.eINSTANCE.createTypedModel();
-		coreTypedModel.setName(name);
-		coreTypedModel.getUsedPackage().addAll(usedPackages);
-		coreTransformation.getModelParameter().add(coreTypedModel);
-		return coreTypedModel;
 	}
 }

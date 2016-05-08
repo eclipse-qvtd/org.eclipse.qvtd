@@ -400,6 +400,16 @@ public class QVTbaseHelper // FIXME extends PivotHelper
 		return asVariable;
 	}
 
+	public @NonNull Variable createVariable(@NonNull String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression asInitExpression) {
+		Variable asVariable = PivotUtil.createVariable(name, asType, isRequired, asInitExpression);
+		return asVariable;
+	}
+
+	public @NonNull Variable  createVariable(@NonNull TypedElement typedElement) {
+		Variable asVariable = PivotUtil.createVariable(typedElement.getName(), typedElement.getType(), typedElement.isIsRequired(), null);
+		return asVariable;
+	}
+
 	public @NonNull VariableExp createVariableExp(@NonNull Variable asVariable) {
 		VariableExp asVariableExp = PivotUtil.createVariableExp(asVariable);
 		return asVariableExp;

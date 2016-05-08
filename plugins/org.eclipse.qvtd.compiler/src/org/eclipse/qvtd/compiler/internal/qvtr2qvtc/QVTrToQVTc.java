@@ -47,10 +47,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Package;
@@ -58,6 +60,7 @@ import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -77,15 +80,20 @@ import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
+import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
+import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -93,9 +101,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
-import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
-import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
-import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class QVTrToQVTc
@@ -140,16 +145,30 @@ public class QVTrToQVTc
 	
 	private final @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
 //	private final @NonNull List<@NonNull Transformation> coreTransformations = new ArrayList<@NonNull Transformation>();
-	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relationToTraceClass = new HashMap<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class>();
+	
+	/**
+	 * Mapping from each relation to its corresponding trace class.
+	 */
+	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relation2traceClass = new HashMap<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class>();
+
 	// Un-navigable opposites
 	//
 	//	The Key that identifies each Class.
-	// FIXME can there be two keys for the sane Class?
+	// FIXME can there be two keys for the same Class?
 	//
 	private final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key> class2key = new HashMap<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key>();
-	private final @NonNull Map<@NonNull Variable, @NonNull TemplateExp> variable2templateExp = new HashMap<@NonNull Variable, @NonNull TemplateExp>();
-	private final @NonNull Map<@NonNull Relation, @NonNull List<@NonNull RelationCallExp>> relationCallExpsForRelation = new HashMap<@NonNull Relation, @NonNull List<@NonNull RelationCallExp>>();
-	private final @NonNull Map<@NonNull RelationCallExp, @NonNull Relation> rInvocation2invokingRelation = new HashMap<@NonNull RelationCallExp, @NonNull Relation>();
+
+	/**
+	 * Map from each relation to all the expressions that call the relation.
+	 */
+	private final @NonNull Map<@NonNull Relation, @NonNull List<@NonNull RelationCallExp>> relation2invocations = new HashMap<@NonNull Relation, @NonNull List<@NonNull RelationCallExp>>();
+
+	/**
+	 * Map from each relation invocation the relation whose where predicate contains the invocation.
+	 * @deprecated computable - no cache required
+	 */
+	@Deprecated
+	private final @NonNull Map<@NonNull RelationCallExp, @NonNull Relation> invocation2invokingRelation = new HashMap<@NonNull RelationCallExp, @NonNull Relation>();
 	
 	private @NonNull CoreModel coreModel;
 
@@ -164,12 +183,12 @@ public class QVTrToQVTc
 	 */
 	private @NonNull Map<@NonNull RelationalTransformation, org.eclipse.ocl.pivot.@NonNull Package> relationalTransformation2tracePackage
 			= new HashMap<@NonNull RelationalTransformation, org.eclipse.ocl.pivot.@NonNull Package>();	
-	
+
 	/**
-	 * The lazily created named CoreDomain in each Rule.
+	 * The core TypedModel for each Relational TypedModel.
 	 */
-	private @NonNull Map<@NonNull Rule, @NonNull Map<@NonNull String, @NonNull CoreDomain>> rule2name2coreDomain
-			= new HashMap<@NonNull Rule, @NonNull Map<@NonNull String, @NonNull CoreDomain>>();	
+	private @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> relationalTypedModel2coreTypedModel
+			= new HashMap<@NonNull TypedModel, @NonNull TypedModel>();	
 	
 	/**
 	 * The lazily created named Trace Properties in each Trace Class.
@@ -182,6 +201,11 @@ public class QVTrToQVTc
 	 */
 	private @NonNull Map<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>> transformation2name2mapping
 			= new HashMap<@NonNull Transformation, @NonNull Map<@NonNull String, @NonNull Mapping>>();
+
+	/**
+	 * The root variables (in relation call order) of each relation.
+	 */
+	private @NonNull Map<@NonNull Relation, @NonNull List<@NonNull Variable>> relation2rootVariables = new HashMap<@NonNull Relation, @NonNull List<@NonNull Variable>>();
 	
 	public QVTrToQVTc(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource) {	
 		this.environmentFactory = environmentFactory;
@@ -193,57 +217,15 @@ public class QVTrToQVTc
         
 		// Create a cache of opposite relations and copy imports
 		TreeIterator<EObject> it = qvtrResource.getAllContents();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			EObject eo = it.next();
 			if (eo instanceof Key) {
-				Key key = (Key)eo;
-				org.eclipse.ocl.pivot.Class identifies = key.getIdentifies();
-				assert identifies != null;
-				class2key.put(identifies, key);
+				analyzeKey((Key)eo);
 			}
-			// Populate bindsTo of DomainPattern
-			if (eo instanceof Pattern) {
-				Pattern p = (Pattern) eo;
-				for (Predicate pred : p.getPredicate()) {
-					OCLExpression conditionExpression = pred.getConditionExpression();
-					assert conditionExpression != null;
-					p.getBindsTo().addAll(getVarsOfExp(conditionExpression));
-				}
-				if (eo instanceof DomainPattern) {
-					DomainPattern dp = (DomainPattern) eo;
-					TemplateExp te = dp.getTemplateExpression();
-					dp.getBindsTo().add(te.getBindsTo());
-					if (te instanceof ObjectTemplateExp) {
-						dp.getBindsTo().addAll(getNestedBindToVariable((ObjectTemplateExp) te));
-					}
-				}
-			}
-			if (eo instanceof TemplateExp) {
-				TemplateExp te = (TemplateExp) eo;
-				Variable bindsTo = te.getBindsTo();
-				assert bindsTo != null;
-				variable2templateExp.put(bindsTo, te);
-			}
-			if (eo instanceof RelationCallExp) {
-				RelationCallExp ri = (RelationCallExp) eo; 
-				Relation r = ri.getReferredRelation();
-				assert r != null;
-				Predicate p = (Predicate) ri.eContainer();
-				Pattern pattern = p.getPattern();
-				if (pattern.eContainer() instanceof Relation) {
-					Relation ir = (Relation) pattern.eContainer();
-					if (ir.getWhere() == pattern) {
-						List<RelationCallExp> relationCallExps = relationCallExpsForRelation.get(r);
-						if (relationCallExps != null) {
-							relationCallExps.add(ri);
-						} else {
-							List<RelationCallExp> callExps = new ArrayList<RelationCallExp>();
-							callExps.add(ri);
-							relationCallExpsForRelation.put(r, callExps);
-						}
-						rInvocation2invokingRelation.put(ri, ir);
-					}
-				}
+			if (eo instanceof Relation) {
+				Relation relation = (Relation)eo;
+				analyzeInvocations(relation);
+				analyzeRootVariables(relation);
 			}
 			if (eo instanceof Import) {
 				this.coreModel.getOwnedImports().add((Import) EcoreUtil.copy(eo));
@@ -251,13 +233,148 @@ public class QVTrToQVTc
 		}
 	}
 	
-	public @NonNull Mapping createMapping() {
-		Mapping coreMapping = QVTcoreFactory.eINSTANCE.createMapping();
+	/**
+	 * Add the NavigationAssignment "cVariable.cProperty := cExpression" to the cBottomPattern inverting the usage
+	 * of a Collection element assignment to "cExpression.cOppositeProperty := cVariable".
+	 */
+	public void addNavigationAssignment(@NonNull BottomPattern cBottomPattern, @NonNull Variable cVariable, @NonNull Property cProperty, @NonNull OCLExpression cExpression) {
+		if (!cProperty.isIsMany() || (cExpression.getType() instanceof CollectionType)) {
+			VariableExp cSlotVariableExp = helper.createVariableExp(cVariable);
+			NavigationAssignment cAssignment = helper.createNavigationAssignment(cSlotVariableExp, cProperty, cExpression);
+			System.out.println("addPropertyAssignment " + cAssignment);
+			assertNewAssignment(cBottomPattern.getAssignment(), cAssignment);
+			cBottomPattern.getAssignment().add(cAssignment);
+			return;
+		}
+		Property cOppositeProperty = cProperty.getOpposite();
+		if ((cOppositeProperty != null) && (cExpression instanceof VariableExp) && (!cOppositeProperty.isIsMany() || (cVariable.getType() instanceof CollectionType))) {
+			VariableExp cSlotVariableExp = (VariableExp)cExpression;
+			NavigationAssignment cAssignment = helper.createNavigationAssignment(cSlotVariableExp, cOppositeProperty, helper.createVariableExp(cVariable));
+			System.out.println("addOppositePropertyAssignment " + cAssignment);
+			assertNewAssignment(cBottomPattern.getAssignment(), cAssignment);
+			cBottomPattern.getAssignment().add(cAssignment);
+			return;
+		}
+		throw new IllegalStateException("Unsupported collection assign " + cVariable + "." + cProperty + ":=" + cExpression);
+	}
+
+	protected void analyzeInvocations(@NonNull Relation callingRelation) {
+		Pattern wherePattern = callingRelation.getWhere();
+		if (wherePattern != null) {
+			for (Predicate predicate : wherePattern.getPredicate()) {
+				OCLExpression predicateExpression = predicate.getConditionExpression();
+				if (predicateExpression instanceof RelationCallExp) {
+					RelationCallExp relationInvocation = (RelationCallExp) predicateExpression; 
+					Relation calledRelation = ClassUtil.nonNullState(relationInvocation.getReferredRelation());
+					List<@NonNull RelationCallExp> relationInvocations = relation2invocations.get(calledRelation);
+					if (relationInvocations == null) {
+						relationInvocations = new ArrayList<@NonNull RelationCallExp>();
+						relation2invocations.put(calledRelation, relationInvocations);
+					}
+					relationInvocations.add(relationInvocation);
+					invocation2invokingRelation.put(relationInvocation, callingRelation);
+				}
+			}
+		}
+	}
+
+	protected void analyzeKey(@NonNull Key key) {
+		org.eclipse.ocl.pivot.Class identifies = key.getIdentifies();
+		assert identifies != null;
+		class2key.put(identifies, key);
+	}
+
+	protected void analyzeRootVariables(@NonNull Relation relation) {
+		List<@NonNull Variable> rootVariables = new ArrayList<@NonNull Variable>();
+		for (@NonNull Domain rDomain : ClassUtil.nullFree(relation.getDomain())) {
+			for (@NonNull DomainPattern rDomainPattern : ClassUtil.nullFree(((RelationDomain)rDomain).getPattern())) {
+				TemplateExp rRootTemplateExpression = rDomainPattern.getTemplateExpression();
+				if (rRootTemplateExpression != null) {
+					Variable rRootVariable = rRootTemplateExpression.getBindsTo();
+					if (rRootVariable != null) {
+						rootVariables.add(rRootVariable);
+					}
+				}
+			}
+		}
+		relation2rootVariables.put(relation, rootVariables);
+	}
+	
+	private void assertNewAssignment(@NonNull List<Assignment> oldAssignments, @NonNull NavigationAssignment newAssignment) {
+//		if ("tr.action := sm".equals(newAssignment.toString())) {
+//			newAssignment.toString();
+//		}
+		OCLExpression newSlotExpression = newAssignment.getSlotExpression();
+		if (newSlotExpression instanceof VariableExp) {
+			VariableDeclaration newVariable = ((VariableExp)newSlotExpression).getReferredVariable();
+			Property targetProperty = QVTcoreBaseUtil.getTargetProperty(newAssignment);
+			for (Assignment oldAssignment : oldAssignments) {
+				if (oldAssignment instanceof NavigationAssignment) {				
+					if (QVTcoreBaseUtil.getTargetProperty((NavigationAssignment)oldAssignment) == targetProperty) {
+						OCLExpression oldSlotExpression = ((NavigationAssignment)oldAssignment).getSlotExpression();
+						if (oldSlotExpression instanceof VariableExp) {
+							VariableDeclaration oldVariable = ((VariableExp)oldSlotExpression).getReferredVariable();
+							assert oldVariable != newVariable : "Repeated assignment: \"" + oldAssignment + "\", \"" + newAssignment + "\"";
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public @Nullable Property basicGetProperty(/*@NonNull*/ Type aClass, @NonNull NamedElement rNamedElement) throws CompilerChainException {
+		/*@NonNull*/ String name = rNamedElement.getName();
+		assert (aClass != null) && (name != null);
+		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(aClass);
+		return completeClass.getProperty(name);
+	}
+
+	public @NonNull CoreDomain createCoreDomain(@NonNull TypedModel typedModel) {
+		CoreDomain coreDomain = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+		coreDomain.setTypedModel(typedModel);
+		coreDomain.setName(ClassUtil.nonNullState(typedModel.getName()));
+//			putTrace(coreDomain, coreRule);
 		GuardPattern guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
-		coreMapping.setGuardPattern(guardPattern);
+		coreDomain.setGuardPattern(guardPattern);
+//			putTrace(guardPattern, coreRule);
 		BottomPattern bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
-		coreMapping.setBottomPattern(bottomPattern);
+		coreDomain.setBottomPattern(bottomPattern);
+		return coreDomain;
+	}
+
+	/**
+	 * Create the name Mapping for a coreTransformation.
+	 */
+	/*public*/ @NonNull Mapping createMapping(@NonNull Relation relation, @NonNull String name) {
+		RelationalTransformation rt = (RelationalTransformation) relation.getTransformation();
+		assert rt != null;
+		@NonNull Transformation coreTransformation = getCoreTransformation(rt);
+		Map<@NonNull String, @NonNull Mapping> name2mapping = transformation2name2mapping.get(coreTransformation);
+		if (name2mapping == null) {
+			name2mapping = new HashMap<@NonNull String, @NonNull Mapping>();
+			transformation2name2mapping.put(coreTransformation, name2mapping);
+		}
+		Mapping coreMapping = name2mapping.get(name);
+		assert (coreMapping == null);// {
+			coreMapping = helper.createMapping(name);
+			putGlobalTrace(coreMapping, relation);
+			coreMapping.setTransformation(coreTransformation);
+			name2mapping.put(name, coreMapping);
+//		}
 		return coreMapping;
+	}
+	
+
+	public @NonNull RealizedVariable createRealizedVariable(@NonNull TypedElement typedElement) {
+		return createRealizedVariable(ClassUtil.nonNullState(typedElement.getName()), ClassUtil.nonNullState(typedElement.getType()));
+	}
+
+	public @NonNull RealizedVariable createRealizedVariable(@NonNull String name, @NonNull Type type) {
+		RealizedVariable realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+		realizedVariable.setName(name);
+		realizedVariable.setType(type);
+		realizedVariable.setIsRequired(true);
+		return realizedVariable;
 	}
 
 	// Save the qvtc resource
@@ -271,8 +388,70 @@ public class QVTrToQVTc
 		transformToCoreTransformations();
 	}
 
+	public void generateModels(@NonNull GenModel genModel) {
+		Registry generatorAdapterDescriptorRegistry = GeneratorAdapterFactory.Descriptor.Registry.INSTANCE;
+		if (!generatorAdapterDescriptorRegistry.getDescriptors(GenModelPackage.eNS_URI).contains(GenModelGeneratorAdapterFactory.DESCRIPTOR)) {
+			generatorAdapterDescriptorRegistry.addDescriptor(GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
+		}
+		if (!generatorAdapterDescriptorRegistry.getDescriptors(GenModelPackage.eNS_URI).contains(OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR)) {
+			generatorAdapterDescriptorRegistry.addDescriptor(GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
+		}
+//**		ResourceUtils.checkResourceSet(resourceSet);
+		// genModel.setCanGenerate(true);
+		// validate();
+
+		
+		
+		genModel.setValidateModel(true); // The more checks the better
+//		genModel.setCodeFormatting(true); // Normalize layout
+		genModel.setForceOverwrite(false); // Don't overwrite read-only
+											// files
+		genModel.setCanGenerate(true);
+		// genModel.setFacadeHelperClass(null); // Non-null gives JDT
+		// default NPEs
+//		genModel.setFacadeHelperClass(ASTFacadeHelper.class.getName()); // Bug 308069
+		// genModel.setValidateModel(true);
+//		genModel.setBundleManifest(false); // New manifests should be
+//											// generated manually
+//		genModel.setUpdateClasspath(false); // New class-paths should be
+//											// generated manually
+//		if (genModel.getComplianceLevel().compareTo(GenJDKLevel.JDK50_LITERAL) < 0) {
+//			genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
+//		}
+		// genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
+		Diagnostic diagnostic = genModel.diagnose();
+		reportDiagnostics(new Issues(), diagnostic);
+
+		/*
+		 * JavaModelManager.getJavaModelManager().initializePreferences();
+		 * new
+		 * JavaCorePreferenceInitializer().initializeDefaultPreferences();
+		 * 
+		 * GenJDKLevel genSDKcomplianceLevel =
+		 * genModel.getComplianceLevel(); String complianceLevel =
+		 * JavaCore.VERSION_1_5; switch (genSDKcomplianceLevel) { case
+		 * JDK60_LITERAL: complianceLevel = JavaCore.VERSION_1_6; case
+		 * JDK14_LITERAL: complianceLevel = JavaCore.VERSION_1_4; default:
+		 * complianceLevel = JavaCore.VERSION_1_5; } // Hashtable<?,?>
+		 * defaultOptions = JavaCore.getDefaultOptions(); //
+		 * JavaCore.setComplianceOptions(complianceLevel, defaultOptions);
+		 * // JavaCore.setOptions(defaultOptions);
+		 */
+
+//		Generator generator = new Generator();
+//		generator.setInput(genModel);
+		Generator generator = GenModelUtil.createGenerator(genModel);
+		Monitor monitor = /*showProgress ? new LoggerMonitor(log) :*/ new BasicMonitor();
+		diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, monitor);
+		reportDiagnostics(new Issues(), diagnostic);
+	}
+
 	/*public*/ @NonNull Transformation getCoreTransformation(@NonNull RelationalTransformation relationalTransformation) {
 		return ClassUtil.nonNullState(relationalTransformation2coreTransformation.get(relationalTransformation));
+	}
+	
+	/*public*/ @NonNull TypedModel getCoreTypedModel(@NonNull TypedModel relationTypedModel) {		
+		return ClassUtil.nonNullState(relationalTypedModel2coreTypedModel.get(relationTypedModel));
 	}
 	
 /*	public @NonNull DomainPattern getDomainPattern(@NonNull Domain d) {
@@ -286,49 +465,20 @@ public class QVTrToQVTc
 	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		return environmentFactory;
 	}
+
+	public @NonNull QVTcoreHelper getHelper() {
+		return helper;
+	}
 	
-	/*public*/ @NonNull Relation getInvokingRelationForRelationCallExp(@NonNull RelationCallExp rInvocation) {	
-		return ClassUtil.nonNullState(rInvocation2invokingRelation.get(rInvocation));
+	/*public*/ @NonNull Relation getInvokingRelation(@NonNull RelationCallExp rInvocation) {	
+		Relation rRelation1 = ClassUtil.nonNullState(invocation2invokingRelation.get(rInvocation));
+		Relation rRelation2 = (Relation) ((Predicate)rInvocation.eContainer()).getPattern().eContainer();
+		assert rRelation1 == rRelation2;
+		return rRelation1;
 	}
 
-	public @Nullable Key getKeyforType(@NonNull Type type) {
+	public @Nullable Key getKeyForType(@NonNull Type type) {
 		return class2key.get(type);
-	}
-	
-	// TODO bug 453863 // ?? this is suspect for more than 2 domains. // FIXME What is 'shared'? a) any two domains b) output/any-input c) all domains
-	/**
-	 * Return the variables that are used by more than one domain of the relation and so must be middle variables.
-	 */
-	public @NonNull Set<@NonNull Variable> getMiddleDomainVariables(@NonNull Relation rRelation) {	
-		Set<@NonNull Variable> rDomainVariables = new HashSet<@NonNull Variable>();
-		Set<@NonNull Variable> rMiddleDomainVariables = new HashSet<@NonNull Variable>();
-		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
-			for (@NonNull DomainPattern rDomainPattern : ClassUtil.nullFree(((RelationDomain)rDomain).getPattern())) {
-				for (@NonNull Variable rVariable : ClassUtil.nullFree(rDomainPattern.getBindsTo())) {
-					if (!rDomainVariables.add(rVariable)) {
-						rMiddleDomainVariables.add(rVariable);				// Accumulate second (and higher) usages
-					}
-				}
-			}
-		}
-		return rMiddleDomainVariables;
-	}
-	
-	private @NonNull Set<@NonNull Variable> getNestedBindToVariable(@NonNull ObjectTemplateExp ote) {
-		Set<@NonNull Variable> vars = new HashSet<@NonNull Variable>();
-		for (PropertyTemplateItem p : ote.getPart()) {
-			OCLExpression e = p.getValue();
-			assert e != null;
-			if (e instanceof ObjectTemplateExp) {
-				Variable bindsTo = ((ObjectTemplateExp)e).getBindsTo();
-				assert bindsTo != null;
-				vars.add(bindsTo);
-				vars.addAll(getNestedBindToVariable((ObjectTemplateExp) e));
-			} else {
-				vars.addAll(getVarsOfExp(e));
-			}
-		}
-		return vars;
 	}
 	
 	public Predicate getPredicateForRelationCallExp(RelationCallExp ri) {
@@ -345,6 +495,22 @@ public class QVTrToQVTc
 			return trimFileExtension.segment(0);
 		}
 	}
+
+	/**
+	 * Return the property of aClass whose name corresponds to rNamedElement. 
+	 * @throws CompilerChainException if no such property
+	 */
+	protected @NonNull Property getProperty(/*@NonNull*/ Type aClass, @NonNull NamedElement rNamedElement) throws CompilerChainException {
+		return getProperty(aClass, rNamedElement.getName());
+	}
+	protected @NonNull Property getProperty(/*@NonNull*/ Type aClass, /*@NonNull*/ String name) throws CompilerChainException {
+		assert (aClass != null) && (name != null);
+		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(aClass);
+		Property p = completeClass.getProperty(name);
+		if (p != null)
+			return p;
+		throw new CompilerChainException("No property '" + name + "' in '" + aClass + "::" + "'");
+	}
 	
 	/**
 	 * @return the qvtcSource
@@ -353,58 +519,33 @@ public class QVTrToQVTc
 		return qvtcResource;
 	}
 
-	public @NonNull List<@NonNull RelationCallExp> getRelationCallExpsForRelation(@NonNull Relation r) {		
-		return ClassUtil.nonNullState(relationCallExpsForRelation.get(r));
+	public @NonNull List<@NonNull RelationCallExp> getRelationCallExpsForRelation(@NonNull Relation relation) {		
+		return ClassUtil.nonNullState(relation2invocations.get(relation));
 	}
-	
-	/* =============  Queries ============= */
+
+	public @NonNull List<@NonNull Variable> getRootVariables(@NonNull Relation relation) {
+		return ClassUtil.nonNullState(relation2rootVariables.get(relation));
+	}
 
 	public @NonNull StandardLibrary getStandardLibrary() {
 		return environmentFactory.getStandardLibrary();
 	}
-
-	/*public*/ @Nullable TemplateExp getTemplateExpression(@NonNull Variable dv) {		
-		return variable2templateExp.get(dv);
-	}
 	
 	/*public*/ org.eclipse.ocl.pivot.@NonNull Class getTraceClass(@NonNull Relation relation) {		
-		return ClassUtil.nonNullState(relationToTraceClass.get(relation));
+		return ClassUtil.nonNullState(relation2traceClass.get(relation));
 	}
 
 	/*public*/ org.eclipse.ocl.pivot.@NonNull Package getTracePackage(@NonNull RelationalTransformation relationalTransformation) {
 		return ClassUtil.nonNullState(relationalTransformation2tracePackage.get(relationalTransformation));
 	}
-	
-	/*
-	 * Get variables occurring in an OCL expression
-	 */
-	public @NonNull Set<@NonNull Variable> getVarsOfExp(@NonNull OCLExpression e) {		
-		Set<@NonNull Variable> variables = new HashSet<@NonNull Variable>();
-		for (EObject eObject : new TreeIterable(e, true)) {
-			if (eObject instanceof VariableExp) {
-				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
-				if (referredVariable instanceof Variable) {
-					variables.add((Variable)referredVariable);
-				}
-			}
-			else if (eObject instanceof Variable) {
-				variables.add((Variable)eObject);
-			}
-			else if (eObject instanceof TemplateExp) {
-				Variable bindsTo = ((TemplateExp)eObject).getBindsTo();
-				if (bindsTo != null) {
-					variables.add(bindsTo);
-				}
-				if (eObject instanceof CollectionTemplateExp) {
-					Variable rest = ((CollectionTemplateExp)eObject).getRest();
-					if (rest != null) {
-						variables.add(rest);
-					}
-				}
-			}
+
+/*	public @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> getUsedClasses(@NonNull TypedModel rTypedModel) {
+		Set<org.eclipse.ocl.pivot.@NonNull Class> usedClasses = new HashSet<org.eclipse.ocl.pivot.@NonNull Class>();
+		for (org.eclipse.ocl.pivot.@NonNull Package rPackage : ClassUtil.nullFree(rTypedModel.getUsedPackage())) {
+			usedClasses.addAll(ClassUtil.nullFree(rPackage.getOwnedClasses()));
 		}
-		return variables;
-	}
+		return usedClasses;
+	} */
 
 	// Create the top rules, and search the input model for the appropriate types, when possible?
 	public void prepare() {
@@ -444,14 +585,21 @@ public class QVTrToQVTc
 //		}
 	}
 
-	/*public*/ void putRelationTrace(@NonNull Relation r, org.eclipse.ocl.pivot.@NonNull Class traceClass) {		
-		relationToTraceClass.put(r, traceClass);
+	/*public*/ void putRelationTrace(@NonNull Relation rRelation, org.eclipse.ocl.pivot.@NonNull Class traceClass) {		
+		org.eclipse.ocl.pivot.Class oldTraceClass = relation2traceClass.put(rRelation, traceClass);
+		assert oldTraceClass == null;
 //		putTrace(traceClass, r);
 	}
 	
 	/*public*/ void putTracePackage(@NonNull RelationalTransformation rt, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {		
-		relationalTransformation2tracePackage.put(rt, tracePackage);
+		org.eclipse.ocl.pivot.Package oldTracePackage = relationalTransformation2tracePackage.put(rt, tracePackage);
+		assert oldTracePackage == null;
 //		putTrace(tracePackage, rt);
+	}
+
+	public void putTypedModel(@NonNull TypedModel relationTypedModel, @NonNull TypedModel coreTypedModel) {
+		TypedModel oldTypedModel = relationalTypedModel2coreTypedModel.put(relationTypedModel, coreTypedModel);
+		assert oldTypedModel == null;
 	}
 	
 	protected void reportDiagnostics(Issues issues, Diagnostic diagnostic) {
@@ -610,65 +758,6 @@ public class QVTrToQVTc
 		return genModel;
 	}
 
-	public void generateModels(@NonNull GenModel genModel) {
-		Registry generatorAdapterDescriptorRegistry = GeneratorAdapterFactory.Descriptor.Registry.INSTANCE;
-		if (!generatorAdapterDescriptorRegistry.getDescriptors(GenModelPackage.eNS_URI).contains(GenModelGeneratorAdapterFactory.DESCRIPTOR)) {
-			generatorAdapterDescriptorRegistry.addDescriptor(GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
-		}
-		if (!generatorAdapterDescriptorRegistry.getDescriptors(GenModelPackage.eNS_URI).contains(OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR)) {
-			generatorAdapterDescriptorRegistry.addDescriptor(GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
-		}
-//**		ResourceUtils.checkResourceSet(resourceSet);
-		// genModel.setCanGenerate(true);
-		// validate();
-
-		
-		
-		genModel.setValidateModel(true); // The more checks the better
-//		genModel.setCodeFormatting(true); // Normalize layout
-		genModel.setForceOverwrite(false); // Don't overwrite read-only
-											// files
-		genModel.setCanGenerate(true);
-		// genModel.setFacadeHelperClass(null); // Non-null gives JDT
-		// default NPEs
-//		genModel.setFacadeHelperClass(ASTFacadeHelper.class.getName()); // Bug 308069
-		// genModel.setValidateModel(true);
-//		genModel.setBundleManifest(false); // New manifests should be
-//											// generated manually
-//		genModel.setUpdateClasspath(false); // New class-paths should be
-//											// generated manually
-//		if (genModel.getComplianceLevel().compareTo(GenJDKLevel.JDK50_LITERAL) < 0) {
-//			genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
-//		}
-		// genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
-		Diagnostic diagnostic = genModel.diagnose();
-		reportDiagnostics(new Issues(), diagnostic);
-
-		/*
-		 * JavaModelManager.getJavaModelManager().initializePreferences();
-		 * new
-		 * JavaCorePreferenceInitializer().initializeDefaultPreferences();
-		 * 
-		 * GenJDKLevel genSDKcomplianceLevel =
-		 * genModel.getComplianceLevel(); String complianceLevel =
-		 * JavaCore.VERSION_1_5; switch (genSDKcomplianceLevel) { case
-		 * JDK60_LITERAL: complianceLevel = JavaCore.VERSION_1_6; case
-		 * JDK14_LITERAL: complianceLevel = JavaCore.VERSION_1_4; default:
-		 * complianceLevel = JavaCore.VERSION_1_5; } // Hashtable<?,?>
-		 * defaultOptions = JavaCore.getDefaultOptions(); //
-		 * JavaCore.setComplianceOptions(complianceLevel, defaultOptions);
-		 * // JavaCore.setOptions(defaultOptions);
-		 */
-
-//		Generator generator = new Generator();
-//		generator.setInput(genModel);
-		Generator generator = GenModelUtil.createGenerator(genModel);
-		Monitor monitor = /*showProgress ? new LoggerMonitor(log) :*/ new BasicMonitor();
-		diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, monitor);
-		reportDiagnostics(new Issues(), diagnostic);
-	}
-
-
 	public @NonNull Resource saveTrace(@NonNull Resource asResource, @NonNull URI traceURI, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> traceOptions, @NonNull Map<?, ?> saveOptions) throws IOException {
         Model root = PivotFactory.eINSTANCE.createModel();
 		root.setExternalURI(traceURI.toString());
@@ -699,8 +788,7 @@ public class QVTrToQVTc
 					externalURI = externalURI.replace(".qvtr", ".qvtcas");
 				}
 				coreModel.setExternalURI(externalURI);
-				transformToCoreTransformations(ClassUtil.nullFree(coreModel.getOwnedPackages()), ClassUtil.nullFree(relationModel.getOwnedPackages()));
-//				CompilerUtil.normalizeNameables(coreTransformations);
+				transformToCoreTransformationHierarchy(ClassUtil.nullFree(coreModel.getOwnedPackages()), ClassUtil.nullFree(relationModel.getOwnedPackages()));
 			}
 		}
 		List<@NonNull RelationalTransformation> relationalTransformations = new ArrayList<@NonNull RelationalTransformation>(relationalTransformation2coreTransformation.keySet());
@@ -708,13 +796,27 @@ public class QVTrToQVTc
 		for (@NonNull RelationalTransformation relationalTransformation : relationalTransformations) {
 			List<@NonNull Rule> rules = new ArrayList<@NonNull Rule>(ClassUtil.nullFree(relationalTransformation.getRule()));
 			Collections.sort(rules, NameUtil.NAMEABLE_COMPARATOR);
+			Transformation coreTransformation = getCoreTransformation(relationalTransformation);
+			List<@NonNull TypedModel> rEnforceableTypdModels = new ArrayList<@NonNull TypedModel>();
+			for (@NonNull Rule rule : rules) {
+				if (rule instanceof Relation) {
+					for (@NonNull Domain rDomain : ClassUtil.nullFree(rule.getDomain())) {
+						if (rDomain.isIsEnforceable()) {
+							TypedModel rTypedModel = ClassUtil.nonNullState(rDomain.getTypedModel());
+							if (!rEnforceableTypdModels.contains(rTypedModel)) {
+								rEnforceableTypdModels.add(rTypedModel);
+							}
+						}
+					}
+				}
+			}
 			for (@NonNull Rule rule : rules) {
 				if (rule instanceof Relation) {
 					Relation rRelation = (Relation)rule;
 					if (rRelation.isIsTopLevel()) {
 						QVTrToQVTc.SYNTHESIS.println("topLevel " + rRelation);
 						TopLevelRelationToMappingForEnforcement topLevelRelationToMappingForEnforcement = new TopLevelRelationToMappingForEnforcement(this, rRelation);
-						topLevelRelationToMappingForEnforcement.doTopLevelRelationToMappingForEnforcement();
+						topLevelRelationToMappingForEnforcement.transform();
 					}
 				}
 			}
@@ -727,10 +829,11 @@ public class QVTrToQVTc
 					Relation rRelation = (Relation)rule;
 					if (!rRelation.isIsTopLevel()) {
 						InvokedRelationToMappingForEnforcement invokedRelationToMappingForEnforcement = new InvokedRelationToMappingForEnforcement(this, rRelation);
-						invokedRelationToMappingForEnforcement.doInvokedRelationToMappingForEnforcement();
+						invokedRelationToMappingForEnforcement.transform();
 					}
 				}
 			}
+			CompilerUtil.normalizeNameables(ClassUtil.nullFree(coreTransformation.getRule()));
 		}
 /*		for (@NonNull Transformation coreTransformation : relationalTransformation2coreTransformation.values()) {
 			List<DebugTraceBack> debugTraceBacks = coreTransformation.getOwnedDebugTraceBacks();
@@ -746,8 +849,7 @@ public class QVTrToQVTc
 		} */
 	}
 
-
-	private void transformToCoreTransformations(@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> corePackages, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
+	private void transformToCoreTransformationHierarchy(@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> corePackages, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
 		for (org.eclipse.ocl.pivot.@NonNull Package relationPackage : relationPackages) {
 			String name = relationPackage.getName();
 			assert name != null;
@@ -758,23 +860,25 @@ public class QVTrToQVTc
 					RelationalTransformationToMappingTransformation relationalTransformationToMappingTransformation = new RelationalTransformationToMappingTransformation(this);
 					Transformation coreTransformation = relationalTransformationToMappingTransformation.doRelationalTransformationToMappingTransformation((RelationalTransformation)relationClass);
 					corePackage.getOwnedClasses().add(coreTransformation);
+					CompilerUtil.normalizeNameables(ClassUtil.nullFree(coreTransformation.getRule()));
 				}
 			}
-			transformToCoreTransformations(ClassUtil.nullFree(corePackage.getOwnedPackages()), ClassUtil.nullFree(relationPackage.getOwnedPackages()));
+			CompilerUtil.normalizeNameables(ClassUtil.nullFree(corePackage.getOwnedClasses()));
+			transformToCoreTransformationHierarchy(ClassUtil.nullFree(corePackage.getOwnedPackages()), ClassUtil.nullFree(relationPackage.getOwnedPackages()));
 		}
 	}
 
 	public @NonNull List<@NonNull Package> transformToTracePackages() {
 		for (@NonNull EObject eObject : qvtrResource.getContents()) {
 			if (eObject instanceof RelationModel) {
-				transformToTracePackages(tracePackages, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
+				transformToTracePackageHierarchy(tracePackages, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
 				CompilerUtil.normalizeNameables(tracePackages);
 			}
 		}
 		return tracePackages;
 	}
 	
-	private void transformToTracePackages(@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
+	private void transformToTracePackageHierarchy(@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
 		for (org.eclipse.ocl.pivot.@NonNull Package relationPackage : relationPackages) {
 			for (org.eclipse.ocl.pivot.@NonNull Class relationClass : ClassUtil.nullFree(relationPackage.getOwnedClasses())) {
 				if (relationClass instanceof RelationalTransformation) {
@@ -783,59 +887,9 @@ public class QVTrToQVTc
 					tracePackages.add(tracePackage);
 				}
 			}
-			transformToTracePackages(tracePackages, ClassUtil.nullFree(relationPackage.getOwnedPackages()));
+			transformToTracePackageHierarchy(tracePackages, ClassUtil.nullFree(relationPackage.getOwnedPackages()));
 		}
 	}
-
-	/**
-	 * Lazily create the name CoreDomain for a coreRule.
-	 */
-	/*public*/ @NonNull CoreDomain whenCoreDomain(@NonNull Rule coreRule, @NonNull String name) {
-		Map<@NonNull String, @NonNull CoreDomain> name2coreDomain = rule2name2coreDomain.get(coreRule);
-		if (name2coreDomain == null) {
-			name2coreDomain = new HashMap<@NonNull String, @NonNull CoreDomain>();
-			rule2name2coreDomain.put(coreRule, name2coreDomain);
-		}
-		CoreDomain coreDomain = name2coreDomain.get(name);
-		if (coreDomain == null) {
-			coreDomain = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
-			coreDomain.setName(name);
-			coreDomain.setRule(coreRule);
-			name2coreDomain.put(name, coreDomain);
-//			putTrace(coreDomain, coreRule);
-			GuardPattern guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
-			coreDomain.setGuardPattern(guardPattern);
-//			putTrace(guardPattern, coreRule);
-			BottomPattern bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
-			coreDomain.setBottomPattern(bottomPattern);
-//			putTrace(bottomPattern, coreRule);
-		}
-		return coreDomain;
-	}
-
-	/**
-	 * Lazily create the name Mapping for a coreTransformation.
-	 */
-	/*public*/ @NonNull Mapping whenMapping(@NonNull Relation relation, @NonNull String name) {
-		RelationalTransformation rt = (RelationalTransformation) relation.getTransformation();
-		assert rt != null;
-		@NonNull Transformation coreTransformation = getCoreTransformation(rt);
-		Map<@NonNull String, @NonNull Mapping> name2mapping = transformation2name2mapping.get(coreTransformation);
-		if (name2mapping == null) {
-			name2mapping = new HashMap<@NonNull String, @NonNull Mapping>();
-			transformation2name2mapping.put(coreTransformation, name2mapping);
-		}
-		Mapping coreMapping = name2mapping.get(name);
-		if (coreMapping == null) {
-			coreMapping = createMapping();
-			putGlobalTrace(coreMapping, relation);
-			coreMapping.setName(name);
-			coreMapping.setTransformation(coreTransformation);
-			name2mapping.put(name, coreMapping);
-		}
-		return coreMapping;
-	}
-	
 	/**
 	 * Lazily create the name Property for a traceClass with a type.
 	 */

@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -39,16 +40,16 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		this.qvtr2qvtc = qvtr2qvtc;
 	}
 
-	public org.eclipse.ocl.pivot.@NonNull Package doRelationalTransformationToTracePackage(@NonNull RelationalTransformation rt) {
+	public org.eclipse.ocl.pivot.@NonNull Package doRelationalTransformationToTracePackage(@NonNull RelationalTransformation rTransformation) {
 		org.eclipse.ocl.pivot.Package p = PivotFactory.eINSTANCE.createPackage();
-		p.setName("P" + rt.getName());
-		p.setNsPrefix("P" + rt.getName());
+		p.setName("P" + rTransformation.getName());
+		p.setNsPrefix("P" + rTransformation.getName());
 //		p.setURI(p.getName());
-		qvtr2qvtc.putTracePackage(rt, p);
+		qvtr2qvtc.putTracePackage(rTransformation, p);
 		List<org.eclipse.ocl.pivot.@NonNull Class> ownedClasses = ClassUtil.nullFree(p.getOwnedClasses());
-		for (@NonNull Rule r : ClassUtil.nullFree(rt.getRule())) {
-			if (r instanceof Relation) {
-				ownedClasses.add(doRelationToTraceClass((Relation)r));
+		for (@NonNull Rule rRule : ClassUtil.nullFree(rTransformation.getRule())) {
+			if (rRule instanceof Relation) {
+				ownedClasses.add(doRelationToTraceClass((Relation)rRule));
 			}
 		}
 		CompilerUtil.normalizeNameables(ownedClasses);
@@ -59,7 +60,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		@SuppressWarnings("null")org.eclipse.ocl.pivot.@NonNull Class traceClass = PivotFactory.eINSTANCE.createClass();
 		qvtr2qvtc.putRelationTrace(rRelation, traceClass);
 		traceClass.setName("T" + rRelation.getName());
-		for (@NonNull Variable rVariable : qvtr2qvtc.getMiddleDomainVariables(rRelation))  {
+		for (@NonNull Variable rVariable : VariablesAnalysis.getMiddleDomainVariables(rRelation))  {
 			createTraceProperty(traceClass, rVariable);
 		}
 		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
@@ -107,7 +108,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 	}
 
-	private void createTraceProperty(org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull Variable tv) {
+	private void createTraceProperty(org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull TypedElement tv) {
 		String vn = ClassUtil.nonNullState(tv.getName());
 		Type c = ClassUtil.nonNullState(tv.getType());
 		qvtr2qvtc.whenTraceProperty(rc, vn, c, tv.isIsRequired());

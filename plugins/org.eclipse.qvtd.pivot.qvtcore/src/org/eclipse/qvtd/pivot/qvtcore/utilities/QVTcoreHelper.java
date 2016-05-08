@@ -11,7 +11,13 @@
 package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
+import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseHelper;
 
 /**
@@ -21,5 +27,15 @@ public class QVTcoreHelper extends QVTcoreBaseHelper
 {
 	public QVTcoreHelper(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
+	}
+
+	public @NonNull Mapping createMapping(@Nullable String name) {
+		Mapping coreMapping = QVTcoreFactory.eINSTANCE.createMapping();
+		coreMapping.setName(name);
+		GuardPattern guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+		coreMapping.setGuardPattern(guardPattern);
+		BottomPattern bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+		coreMapping.setBottomPattern(bottomPattern);
+		return coreMapping;
 	}
 }
