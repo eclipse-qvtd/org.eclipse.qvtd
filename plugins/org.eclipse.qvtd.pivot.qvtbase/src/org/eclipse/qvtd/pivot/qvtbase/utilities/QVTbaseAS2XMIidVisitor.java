@@ -10,15 +10,18 @@
  *******************************************************************************/
 package	org.eclipse.qvtd.pivot.qvtbase.utilities;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseAS2XMIidVisitor;
 
@@ -54,6 +57,11 @@ public class QVTbaseAS2XMIidVisitor extends AbstractQVTbaseAS2XMIidVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitImport(@NonNull Import object) {
+		return null;
+	}
+
+	@Override
 	public @Nullable Boolean visitPattern(@NonNull Pattern object) {
 		return false;
 	}
@@ -83,7 +91,26 @@ public class QVTbaseAS2XMIidVisitor extends AbstractQVTbaseAS2XMIidVisitor
 	}
 
 	@Override
-	public @Nullable Boolean visitImport(@NonNull Import object) {
-		return null;
+	public @Nullable Boolean visitVariable(@NonNull Variable object) {
+		EObject eContainer = object.eContainer();
+		if (eContainer instanceof Transformation) {
+			String name = object.getName();
+			if (name != null) {
+				s.append(VARIABLE_PREFIX);
+				appendParent(object);
+				appendName(name);
+				return true;
+			}
+		}
+		else if (eContainer instanceof TypedModel) {
+			String name = object.getName();
+			if (name != null) {
+				s.append(VARIABLE_PREFIX);
+				appendParent(object);
+				appendName(name);
+				return true;
+			}
+		}
+		return super.visitVariable(object);
 	}
 }

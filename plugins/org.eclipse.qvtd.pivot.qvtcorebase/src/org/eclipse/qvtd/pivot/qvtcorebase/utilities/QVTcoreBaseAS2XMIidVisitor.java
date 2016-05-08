@@ -10,6 +10,7 @@
  *******************************************************************************/
 package	org.eclipse.qvtd.pivot.qvtcorebase.utilities;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
@@ -84,7 +85,8 @@ public class QVTcoreBaseAS2XMIidVisitor extends AbstractQVTcoreBaseAS2XMIidVisit
 
 	@Override
 	public @Nullable Boolean visitVariable(@NonNull Variable object) {
-		if (object.eContainer() instanceof CorePattern) {
+		EObject eContainer = object.eContainer();
+		if (eContainer instanceof CorePattern) {
 			Rule rule = QVTcoreBaseUtil.getContainingRule(object);
 			if((rule != null) && (rule.getName() != null)) {
 				String name = object.getName();
