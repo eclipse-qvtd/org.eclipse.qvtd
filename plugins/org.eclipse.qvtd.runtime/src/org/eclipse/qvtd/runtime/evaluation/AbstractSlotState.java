@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * The abstract implementation of a SlotState provides the mandatory shared functionality for maintaining
@@ -63,7 +62,7 @@ public abstract class AbstractSlotState implements SlotState
 	}
 
 	@Override
-	public @Nullable <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
+	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
 		return visitor.visitSlotState(this);
 	}
 }

@@ -26,7 +26,6 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.ocl.pivot.utilities.NameUtil.NameableComparator;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 
 public class PivotNormalizer implements ModelNormalizer

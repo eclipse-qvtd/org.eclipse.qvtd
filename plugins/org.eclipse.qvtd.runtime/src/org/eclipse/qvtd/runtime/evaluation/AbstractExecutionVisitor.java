@@ -20,18 +20,44 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * @since 1.1
  */
-public interface ExecutionVisitor<R>
+public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisitor<R>
 {
 	/**
 	 * Return the result of visiting a visitable for which no more specific pivot type method
 	 * is available.
 	 */
-//	R visiting(@NonNull ExecutionVisitable visitable);
+	public R visiting(@NonNull ExecutionVisitable visitable) {
+		throw new UnsupportedOperationException("No " + getClass().getSimpleName() + " suupport for a " + visitable.getClass().getSimpleName());
+	}
 
-	R visitIdentification(@NonNull Identification object);
-	R visitInvocation(@NonNull Invocation object);
-	R visitInvocationManager(@NonNull InvocationManager object);
-	R visitObjectManager(@NonNull ObjectManager object);
-	R visitSlotState(@NonNull SlotState object);
-	R visitTransformer(@NonNull Transformer object);
+	@Override
+	public R visitIdentification(@NonNull Identification object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitInvocation(@NonNull Invocation object) {
+		return visiting(object);
+	}
+	
+	@Override
+	public R visitInvocationManager(@NonNull InvocationManager object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitObjectManager(@NonNull ObjectManager object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitSlotState(@NonNull SlotState object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitTransformer(@NonNull Transformer object) {
+		return visiting(object);
+	}
+
 }

@@ -16,14 +16,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationInternal;
 
 /**
  * AbstractInvocation provides the mandatory shared functionality of the intrusive blocked/waiting linked list functionality.
  * @since 1.1
  */
-public abstract class AbstractInvocation extends AbstractInvocationInternal
+public abstract class AbstractInvocation extends AbstractInvocationInternal implements Invocation
 {
 	public abstract static class Incremental extends AbstractInvocation implements Invocation.Incremental
 	{
@@ -77,7 +76,7 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 	}
 
 	@Override
-	public @Nullable <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
+	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
 		return visitor.visitInvocation(this);
 	}
 }

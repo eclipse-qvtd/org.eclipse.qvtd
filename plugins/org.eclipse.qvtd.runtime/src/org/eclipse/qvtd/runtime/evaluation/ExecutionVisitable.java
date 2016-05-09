@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /** 
  * ExecutionVisitable defines the common visitable capability of all run-time execution objects.
@@ -27,5 +26,5 @@ public interface ExecutionVisitable
 	 * variant of visitXXX() to facilitate derived-class-specific
 	 * processing or just visit() when no such method is available.
 	 */
-	@Nullable <R> R accept(@NonNull ExecutionVisitor<R> visitor);
+	<R> R accept(@NonNull ExecutionVisitor<R> visitor);
 }

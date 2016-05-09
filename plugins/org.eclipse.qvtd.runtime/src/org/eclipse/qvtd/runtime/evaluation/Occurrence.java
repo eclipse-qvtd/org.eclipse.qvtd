@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2015 Willink Transformations and others.
+ * Copyright (c) 2016 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,16 +11,22 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 
-/**
- * AbstractInvocationManager provides the mandatory shared functionality for a mapping invocation manager.
+/** 
+ * An Occurrence identifies an object creation or execution that must only happen once.
+ * 
+ * @noimplement clients should derive from AbstractSingleton
  * @since 1.1
  */
-public abstract class AbstractInvocationManager implements InvocationManager
+public interface Occurrence extends ExecutionVisitable
 {
-
-	@Override
-	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
-		return visitor.visitInvocationManager(this);
+	/**
+	 * Return true if an occurrence with thoseValues would be a re-occurrence.
+	 */
+	boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues);
+	
+	public interface Incremental extends Occurrence
+	{
 	}
 }

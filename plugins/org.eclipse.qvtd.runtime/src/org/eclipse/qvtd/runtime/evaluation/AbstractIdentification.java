@@ -10,32 +10,16 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
- * AbstractObjectManager provides the mandatory shared functionality for an object state manager.
+ * AbstractIdentification provides the mandatory shared functionality of the uniqiuely idenmtified object functionality.
  * @since 1.1
  */
-public abstract class AbstractObjectManager implements ObjectManager
+public abstract class AbstractIdentification extends AbstractOccurrence implements Identification
 {
-	protected static final @NonNull List<@NonNull SlotState> EMPTY_SLOT_STATE_LIST = Collections.emptyList();
-
-	protected final @NonNull InvocationManager invocationManager;
-	
-	protected AbstractObjectManager(@NonNull InvocationManager invocationManager) {
-		this.invocationManager = invocationManager;
-	}
-
 	@Override
 	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
-		return visitor.visitObjectManager(this);
-	}
-
-	@Override
-	public void unblock(@NonNull Invocation anInvocation) {
-		invocationManager.unblock(anInvocation);
+		return visitor.visitIdentification(this);
 	}
 }

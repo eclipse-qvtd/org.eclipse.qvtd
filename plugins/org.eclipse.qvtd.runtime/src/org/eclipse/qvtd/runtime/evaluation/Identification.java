@@ -12,15 +12,20 @@ package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-/**
- * AbstractInvocationManager provides the mandatory shared functionality for a mapping invocation manager.
+/** 
+ * An Identification identifies a unique object with its bound values. This is used to support
+ * - a function cache which associates a result with its arguments.
+ * - an OCL shadow which identifies objects from all its properties.
+ * - a QVTr key which identifies objects from a subset of their properties.
+ * 
+ * @noimplement clients should derive from AbstractIdentification
  * @since 1.1
  */
-public abstract class AbstractInvocationManager implements InvocationManager
+public interface Identification extends Occurrence
 {
-
-	@Override
-	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
-		return visitor.visitInvocationManager(this);
+	@NonNull Object getInstance();
+	
+	public interface Incremental extends Identification, Occurrence.Incremental
+	{
 	}
 }

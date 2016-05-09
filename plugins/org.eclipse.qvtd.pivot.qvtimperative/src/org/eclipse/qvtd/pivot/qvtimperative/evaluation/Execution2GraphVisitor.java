@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.PropertyStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
-import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
+import org.eclipse.qvtd.runtime.evaluation.AbstractExecutionVisitor;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
@@ -39,7 +39,7 @@ import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 import com.google.common.collect.Iterables;
 
-public class Execution2GraphVisitor implements ExecutionVisitor<String>
+public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 {
 	protected static final class ExecutionEdge implements GraphEdge
 	{

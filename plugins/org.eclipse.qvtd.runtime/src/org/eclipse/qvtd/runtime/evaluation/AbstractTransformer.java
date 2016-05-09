@@ -37,7 +37,7 @@ public abstract class AbstractTransformer extends AbstractTransformerInternal
 	}
 
 	@Override
-	public @Nullable <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
+	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
 		return visitor.visitTransformer(this);
 	}
 }
