@@ -50,6 +50,10 @@ MappingSequenceCS: ownedMappingStatements+=MappingStatementCS+;
 MappingStatementCS: ConnectionStatementCS | MappingCallCS | MappingLoopCS;
 
 ImperativePredicateOrAssignmentCS: isDefault?='default'? ownedTarget=ExpCS ((':='|isAccumulate?='+=') ownedInitExpression=ExpCS)? ';';
+
+RealizedVariableCS returns ImperativeRealizedVariableCS:
+	'realize' name=UnrestrictedName ':' ownedType=TypeExpCS (':=' ownedInitExpression=ExpCS)?
+;
 	
 SourceDomainCS returns ImperativeDomainCS: isCheck?='check' direction=[qvtbase::TypedModel|UnrestrictedName]
 	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
