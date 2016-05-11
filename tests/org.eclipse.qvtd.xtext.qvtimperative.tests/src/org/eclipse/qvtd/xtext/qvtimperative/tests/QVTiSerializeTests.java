@@ -143,6 +143,10 @@ public class QVTiSerializeTests extends LoadTestCase
 		super.setUp();
 	}
 	
+	public void testSerialize_Constructors() throws Exception {
+		doSerializeRoundTrip("Constructors/Constructors");
+	}
+	
 	public void testSerialize_Dependencies() throws Exception {
 		doSerializeRoundTrip("Dependencies/Dependencies");
 	}

@@ -1,0 +1,22 @@
+import ecore : 'http://www.eclipse.org/emf/2002/Ecore';
+
+transformation Constructors {
+	source imports ecore;
+	target imports ecore;
+	middle imports ecore;
+}
+
+query Constructors::createEPackage(name2 : String) : ecore::EPackage {
+	ecore::EPackage{name = name2}
+}
+
+map ep2ep in Constructors {
+	check source (epIn:EPackage) {}
+	enforce target () {
+		realize epOut1 : EPackage := this.createEPackage(epIn.name),
+		realize epOut2 : EPackage
+	}
+    where () {
+    	epOut2.name := epIn.name;
+    }
+}
