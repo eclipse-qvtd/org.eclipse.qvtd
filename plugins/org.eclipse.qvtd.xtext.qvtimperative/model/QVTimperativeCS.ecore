@@ -28,6 +28,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAccumulate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImperativeRealizedVariableCS" eSuperTypes="../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore#//RealizedVariableCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInitExpression" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCS" eSuperTypes="../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore#//AbstractMappingCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedKeyExpression" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
