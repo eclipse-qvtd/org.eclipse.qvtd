@@ -75,13 +75,13 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -440,9 +440,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 			case QVTcoreBaseCSPackage.QUERY_CS:
 				sequence_QueryCS(context, (QueryCS) semanticObject); 
 				return; 
-			case QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS:
-				sequence_RealizedVariableCS(context, (RealizedVariableCS) semanticObject); 
-				return; 
 			case QVTcoreBaseCSPackage.TRANSFORMATION_CS:
 				sequence_TransformationCS(context, (TransformationCS) semanticObject); 
 				return; 
@@ -477,6 +474,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 				else break;
 			case QVTimperativeCSPackage.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS:
 				sequence_ImperativePredicateOrAssignmentCS(context, (ImperativePredicateOrAssignmentCS) semanticObject); 
+				return; 
+			case QVTimperativeCSPackage.IMPERATIVE_REALIZED_VARIABLE_CS:
+				sequence_RealizedVariableCS(context, (ImperativeRealizedVariableCS) semanticObject); 
 				return; 
 			case QVTimperativeCSPackage.MAPPING_CS:
 				sequence_MappingCS(context, (MappingCS) semanticObject); 
@@ -603,6 +603,15 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	 *     )
 	 */
 	protected void sequence_MiddleDomainCS(EObject context, ImperativeDomainCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=UnrestrictedName ownedType=TypeExpCS ownedInitExpression=ExpCS?)
+	 */
+	protected void sequence_RealizedVariableCS(EObject context, ImperativeRealizedVariableCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

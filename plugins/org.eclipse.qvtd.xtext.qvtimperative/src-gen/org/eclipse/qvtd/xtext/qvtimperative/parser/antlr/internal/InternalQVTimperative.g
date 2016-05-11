@@ -1135,6 +1135,93 @@ ruleImperativePredicateOrAssignmentCS returns [EObject current=null]
 
 
 
+// Entry rule entryRuleRealizedVariableCS
+entryRuleRealizedVariableCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getRealizedVariableCSRule()); }
+	 iv_ruleRealizedVariableCS=ruleRealizedVariableCS 
+	 { $current=$iv_ruleRealizedVariableCS.current; } 
+	 EOF 
+;
+
+// Rule RealizedVariableCS
+ruleRealizedVariableCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='realize' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getRealizedVariableCSAccess().getRealizeKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRealizedVariableCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
+	    }
+		lv_name_1_0=ruleUnrestrictedName		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRealizedVariableCSRule());
+	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"UnrestrictedName");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_2=':' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getRealizedVariableCSAccess().getColonKeyword_2());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRealizedVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_3_0()); 
+	    }
+		lv_ownedType_3_0=ruleTypeExpCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRealizedVariableCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedType",
+        		lv_ownedType_3_0, 
+        		"TypeExpCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_4=':=' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getRealizedVariableCSAccess().getColonEqualsSignKeyword_4_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRealizedVariableCSAccess().getOwnedInitExpressionExpCSParserRuleCall_4_1_0()); 
+	    }
+		lv_ownedInitExpression_5_0=ruleExpCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRealizedVariableCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedInitExpression",
+        		lv_ownedInitExpression_5_0, 
+        		"ExpCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?)
+;
+
+
+
+
+
 // Entry rule entryRuleSourceDomainCS
 entryRuleSourceDomainCS returns [EObject current=null] 
 	:
@@ -3404,71 +3491,6 @@ ruleUnrealizedVariableCS returns [EObject current=null]
 
 )
 ))?)
-;
-
-
-
-
-
-// Entry rule entryRuleRealizedVariableCS
-entryRuleRealizedVariableCS returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getRealizedVariableCSRule()); }
-	 iv_ruleRealizedVariableCS=ruleRealizedVariableCS 
-	 { $current=$iv_ruleRealizedVariableCS.current; } 
-	 EOF 
-;
-
-// Rule RealizedVariableCS
-ruleRealizedVariableCS returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(	otherlv_0='realize' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getRealizedVariableCSAccess().getRealizeKeyword_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getRealizedVariableCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
-	    }
-		lv_name_1_0=ruleUnrestrictedName		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getRealizedVariableCSRule());
-	        }
-       		set(
-       			$current, 
-       			"name",
-        		lv_name_1_0, 
-        		"UnrestrictedName");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)	otherlv_2=':' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getRealizedVariableCSAccess().getColonKeyword_2());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getRealizedVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_3_0()); 
-	    }
-		lv_ownedType_3_0=ruleTypeExpCS		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getRealizedVariableCSRule());
-	        }
-       		set(
-       			$current, 
-       			"ownedType",
-        		lv_ownedType_3_0, 
-        		"TypeExpCS");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))
 ;
 
 

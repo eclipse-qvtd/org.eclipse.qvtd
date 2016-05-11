@@ -673,6 +673,58 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
+	public class RealizedVariableCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RealizedVariableCS");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cRealizeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cOwnedTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cOwnedTypeTypeExpCSParserRuleCall_3_0 = (RuleCall)cOwnedTypeAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cColonEqualsSignKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cOwnedInitExpressionAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cOwnedInitExpressionExpCSParserRuleCall_4_1_0 = (RuleCall)cOwnedInitExpressionAssignment_4_1.eContents().get(0);
+		
+		//RealizedVariableCS returns ImperativeRealizedVariableCS:
+		//	"realize" name=UnrestrictedName ":" ownedType=TypeExpCS (":=" ownedInitExpression=ExpCS)?;
+		@Override public ParserRule getRule() { return rule; }
+
+		//"realize" name=UnrestrictedName ":" ownedType=TypeExpCS (":=" ownedInitExpression=ExpCS)?
+		public Group getGroup() { return cGroup; }
+
+		//"realize"
+		public Keyword getRealizeKeyword_0() { return cRealizeKeyword_0; }
+
+		//name=UnrestrictedName
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//UnrestrictedName
+		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0() { return cNameUnrestrictedNameParserRuleCall_1_0; }
+
+		//":"
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+
+		//ownedType=TypeExpCS
+		public Assignment getOwnedTypeAssignment_3() { return cOwnedTypeAssignment_3; }
+
+		//TypeExpCS
+		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_3_0() { return cOwnedTypeTypeExpCSParserRuleCall_3_0; }
+
+		//(":=" ownedInitExpression=ExpCS)?
+		public Group getGroup_4() { return cGroup_4; }
+
+		//":="
+		public Keyword getColonEqualsSignKeyword_4_0() { return cColonEqualsSignKeyword_4_0; }
+
+		//ownedInitExpression=ExpCS
+		public Assignment getOwnedInitExpressionAssignment_4_1() { return cOwnedInitExpressionAssignment_4_1; }
+
+		//ExpCS
+		public RuleCall getOwnedInitExpressionExpCSParserRuleCall_4_1_0() { return cOwnedInitExpressionExpCSParserRuleCall_4_1_0; }
+	}
+
 	public class SourceDomainCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SourceDomainCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1448,6 +1500,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	private final MappingSequenceCSElements pMappingSequenceCS;
 	private final MappingStatementCSElements pMappingStatementCS;
 	private final ImperativePredicateOrAssignmentCSElements pImperativePredicateOrAssignmentCS;
+	private final RealizedVariableCSElements pRealizedVariableCS;
 	private final SourceDomainCSElements pSourceDomainCS;
 	private final SourceBottomPatternCSElements pSourceBottomPatternCS;
 	private final SourceGuardPatternCSElements pSourceGuardPatternCS;
@@ -1478,6 +1531,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		this.pMappingSequenceCS = new MappingSequenceCSElements();
 		this.pMappingStatementCS = new MappingStatementCSElements();
 		this.pImperativePredicateOrAssignmentCS = new ImperativePredicateOrAssignmentCSElements();
+		this.pRealizedVariableCS = new RealizedVariableCSElements();
 		this.pSourceDomainCS = new SourceDomainCSElements();
 		this.pSourceBottomPatternCS = new SourceBottomPatternCSElements();
 		this.pSourceGuardPatternCS = new SourceGuardPatternCSElements();
@@ -1629,6 +1683,16 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getImperativePredicateOrAssignmentCSRule() {
 		return getImperativePredicateOrAssignmentCSAccess().getRule();
+	}
+
+	//RealizedVariableCS returns ImperativeRealizedVariableCS:
+	//	"realize" name=UnrestrictedName ":" ownedType=TypeExpCS (":=" ownedInitExpression=ExpCS)?;
+	public RealizedVariableCSElements getRealizedVariableCSAccess() {
+		return pRealizedVariableCS;
+	}
+	
+	public ParserRule getRealizedVariableCSRule() {
+		return getRealizedVariableCSAccess().getRule();
 	}
 
 	//SourceDomainCS returns ImperativeDomainCS:
@@ -1879,17 +1943,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getUnrealizedVariableCSRule() {
 		return getUnrealizedVariableCSAccess().getRule();
-	}
-
-	////RealizedVariable := �realized� VariableName �:� TypeDeclaration
-	// RealizedVariableCS:
-	//	"realize" name=UnrestrictedName ":" ownedType=TypeExpCS;
-	public QVTcoreBaseGrammarAccess.RealizedVariableCSElements getRealizedVariableCSAccess() {
-		return gaQVTcoreBase.getRealizedVariableCSAccess();
-	}
-	
-	public ParserRule getRealizedVariableCSRule() {
-		return getRealizedVariableCSAccess().getRule();
 	}
 
 	//UnnamedDomainCS returns DomainCS:

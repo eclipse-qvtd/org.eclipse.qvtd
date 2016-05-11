@@ -110,6 +110,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMappingIteratorCSAccess().getGroup_1(), "rule__MappingIteratorCS__Group_1__0");
 					put(grammarAccess.getImperativePredicateOrAssignmentCSAccess().getGroup(), "rule__ImperativePredicateOrAssignmentCS__Group__0");
 					put(grammarAccess.getImperativePredicateOrAssignmentCSAccess().getGroup_2(), "rule__ImperativePredicateOrAssignmentCS__Group_2__0");
+					put(grammarAccess.getRealizedVariableCSAccess().getGroup(), "rule__RealizedVariableCS__Group__0");
+					put(grammarAccess.getRealizedVariableCSAccess().getGroup_4(), "rule__RealizedVariableCS__Group_4__0");
 					put(grammarAccess.getSourceDomainCSAccess().getGroup(), "rule__SourceDomainCS__Group__0");
 					put(grammarAccess.getSourceDomainCSAccess().getGroup_2(), "rule__SourceDomainCS__Group_2__0");
 					put(grammarAccess.getSourceDomainCSAccess().getGroup_2_1(), "rule__SourceDomainCS__Group_2_1__0");
@@ -178,7 +180,6 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getUnrealizedVariableCSAccess().getGroup(), "rule__UnrealizedVariableCS__Group__0");
 					put(grammarAccess.getUnrealizedVariableCSAccess().getGroup_1(), "rule__UnrealizedVariableCS__Group_1__0");
 					put(grammarAccess.getUnrealizedVariableCSAccess().getGroup_2(), "rule__UnrealizedVariableCS__Group_2__0");
-					put(grammarAccess.getRealizedVariableCSAccess().getGroup(), "rule__RealizedVariableCS__Group__0");
 					put(grammarAccess.getUnnamedDomainCSAccess().getGroup(), "rule__UnnamedDomainCS__Group__0");
 					put(grammarAccess.getURIPathNameCSAccess().getGroup(), "rule__URIPathNameCS__Group__0");
 					put(grammarAccess.getURIPathNameCSAccess().getGroup_1(), "rule__URIPathNameCS__Group_1__0");
@@ -310,6 +311,9 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImperativePredicateOrAssignmentCSAccess().getOwnedTargetAssignment_1(), "rule__ImperativePredicateOrAssignmentCS__OwnedTargetAssignment_1");
 					put(grammarAccess.getImperativePredicateOrAssignmentCSAccess().getIsAccumulateAssignment_2_0_1(), "rule__ImperativePredicateOrAssignmentCS__IsAccumulateAssignment_2_0_1");
 					put(grammarAccess.getImperativePredicateOrAssignmentCSAccess().getOwnedInitExpressionAssignment_2_1(), "rule__ImperativePredicateOrAssignmentCS__OwnedInitExpressionAssignment_2_1");
+					put(grammarAccess.getRealizedVariableCSAccess().getNameAssignment_1(), "rule__RealizedVariableCS__NameAssignment_1");
+					put(grammarAccess.getRealizedVariableCSAccess().getOwnedTypeAssignment_3(), "rule__RealizedVariableCS__OwnedTypeAssignment_3");
+					put(grammarAccess.getRealizedVariableCSAccess().getOwnedInitExpressionAssignment_4_1(), "rule__RealizedVariableCS__OwnedInitExpressionAssignment_4_1");
 					put(grammarAccess.getSourceDomainCSAccess().getIsCheckAssignment_0(), "rule__SourceDomainCS__IsCheckAssignment_0");
 					put(grammarAccess.getSourceDomainCSAccess().getDirectionAssignment_1(), "rule__SourceDomainCS__DirectionAssignment_1");
 					put(grammarAccess.getSourceDomainCSAccess().getCheckedPropertiesAssignment_2_1_1(), "rule__SourceDomainCS__CheckedPropertiesAssignment_2_1_1");
@@ -394,8 +398,6 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getUnrealizedVariableCSAccess().getNameAssignment_0(), "rule__UnrealizedVariableCS__NameAssignment_0");
 					put(grammarAccess.getUnrealizedVariableCSAccess().getOwnedTypeAssignment_1_1(), "rule__UnrealizedVariableCS__OwnedTypeAssignment_1_1");
 					put(grammarAccess.getUnrealizedVariableCSAccess().getOwnedInitExpressionAssignment_2_1(), "rule__UnrealizedVariableCS__OwnedInitExpressionAssignment_2_1");
-					put(grammarAccess.getRealizedVariableCSAccess().getNameAssignment_1(), "rule__RealizedVariableCS__NameAssignment_1");
-					put(grammarAccess.getRealizedVariableCSAccess().getOwnedTypeAssignment_3(), "rule__RealizedVariableCS__OwnedTypeAssignment_3");
 					put(grammarAccess.getUnnamedDomainCSAccess().getOwnedGuardPatternAssignment_1(), "rule__UnnamedDomainCS__OwnedGuardPatternAssignment_1");
 					put(grammarAccess.getUnnamedDomainCSAccess().getOwnedBottomPatternAssignment_2(), "rule__UnnamedDomainCS__OwnedBottomPatternAssignment_2");
 					put(grammarAccess.getModelAccess().getOwnedExpressionAssignment(), "rule__Model__OwnedExpressionAssignment");
