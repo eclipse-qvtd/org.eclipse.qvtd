@@ -23,6 +23,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -109,6 +110,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	private EClass imperativePredicateOrAssignmentCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imperativeRealizedVariableCSEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -511,6 +519,24 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getImperativeRealizedVariableCS() {
+		return imperativeRealizedVariableCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getImperativeRealizedVariableCS_OwnedInitExpression() {
+		return (EReference)imperativeRealizedVariableCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public QVTimperativeCSFactory getQVTimperativeCSFactory() {
 		return (QVTimperativeCSFactory)getEFactoryInstance();
@@ -545,6 +571,9 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		imperativePredicateOrAssignmentCSEClass = createEClass(IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS);
 		createEAttribute(imperativePredicateOrAssignmentCSEClass, IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE);
+
+		imperativeRealizedVariableCSEClass = createEClass(IMPERATIVE_REALIZED_VARIABLE_CS);
+		createEReference(imperativeRealizedVariableCSEClass, IMPERATIVE_REALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION);
 
 		mappingCSEClass = createEClass(MAPPING_CS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_KEY_EXPRESSION);
@@ -617,6 +646,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		connectionStatementCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		imperativeDomainCSEClass.getESuperTypes().add(theQVTcoreBaseCSPackage.getDomainCS());
 		imperativePredicateOrAssignmentCSEClass.getESuperTypes().add(theQVTcoreBaseCSPackage.getPredicateOrAssignmentCS());
+		imperativeRealizedVariableCSEClass.getESuperTypes().add(theQVTcoreBaseCSPackage.getRealizedVariableCS());
 		mappingCSEClass.getESuperTypes().add(theQVTcoreBaseCSPackage.getAbstractMappingCS());
 		mappingCallBindingCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		mappingCallCSEClass.getESuperTypes().add(this.getMappingStatementCS());
@@ -636,6 +666,9 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		initEClass(imperativePredicateOrAssignmentCSEClass, ImperativePredicateOrAssignmentCS.class, "ImperativePredicateOrAssignmentCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImperativePredicateOrAssignmentCS_IsAccumulate(), ecorePackage.getEBoolean(), "isAccumulate", "false", 0, 1, ImperativePredicateOrAssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(imperativeRealizedVariableCSEClass, ImperativeRealizedVariableCS.class, "ImperativeRealizedVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getImperativeRealizedVariableCS_OwnedInitExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInitExpression", null, 0, 1, ImperativeRealizedVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCSEClass, MappingCS.class, "MappingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCS_OwnedKeyExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedKeyExpression", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

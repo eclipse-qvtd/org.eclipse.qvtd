@@ -55,6 +55,11 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 	}
 
 	@Override
+	public R visitImperativeRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ImperativeRealizedVariableCS object) {
+		return visitRealizedVariableCS(object);
+	}
+
+	@Override
 	public R visitMappingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCS object) {
 		return visitAbstractMappingCS(object);
 	}

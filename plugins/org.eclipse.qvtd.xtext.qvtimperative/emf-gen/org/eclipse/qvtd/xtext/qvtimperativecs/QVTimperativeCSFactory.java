@@ -112,6 +112,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull ImperativePredicateOrAssignmentCS createImperativePredicateOrAssignmentCS();
 
 	/**
+	 * Returns a new object of class '<em>Imperative Realized Variable CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Imperative Realized Variable CS</em>'.
+	 * @generated
+	 */
+	ImperativeRealizedVariableCS createImperativeRealizedVariableCS();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

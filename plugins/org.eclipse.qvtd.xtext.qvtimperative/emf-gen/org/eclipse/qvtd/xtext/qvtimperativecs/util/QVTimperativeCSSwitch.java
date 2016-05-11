@@ -23,12 +23,15 @@ import org.eclipse.ocl.xtext.basecs.PackageOwnerCS;
 import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
 import org.eclipse.ocl.xtext.basecs.RootCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
+import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.*;
 
 /**
@@ -125,6 +128,22 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElementCS(imperativePredicateOrAssignmentCS);
 				if (result == null) result = casePivotable(imperativePredicateOrAssignmentCS);
 				if (result == null) result = caseVisitableCS(imperativePredicateOrAssignmentCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.IMPERATIVE_REALIZED_VARIABLE_CS: {
+				ImperativeRealizedVariableCS imperativeRealizedVariableCS = (ImperativeRealizedVariableCS)theEObject;
+				T result = caseImperativeRealizedVariableCS(imperativeRealizedVariableCS);
+				if (result == null) result = caseRealizedVariableCS(imperativeRealizedVariableCS);
+				if (result == null) result = caseRealizeableVariableCS(imperativeRealizedVariableCS);
+				if (result == null) result = caseTypedElementCS(imperativeRealizedVariableCS);
+				if (result == null) result = caseNamedElementCS(imperativeRealizedVariableCS);
+				if (result == null) result = caseModelElementCS(imperativeRealizedVariableCS);
+				if (result == null) result = caseNameable(imperativeRealizedVariableCS);
+				if (result == null) result = casePivotableElementCS(imperativeRealizedVariableCS);
+				if (result == null) result = caseElementCS(imperativeRealizedVariableCS);
+				if (result == null) result = casePivotable(imperativeRealizedVariableCS);
+				if (result == null) result = caseVisitableCS(imperativeRealizedVariableCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -370,6 +389,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Imperative Realized Variable CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Imperative Realized Variable CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImperativeRealizedVariableCS(ImperativeRealizedVariableCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Visitable CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -516,6 +550,51 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePredicateOrAssignmentCS(PredicateOrAssignmentCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Typed Element CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Typed Element CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypedElementCS(TypedElementCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Realizeable Variable CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Realizeable Variable CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRealizeableVariableCS(RealizeableVariableCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Realized Variable CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Realized Variable CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRealizedVariableCS(RealizedVariableCS object) {
 		return null;
 	}
 

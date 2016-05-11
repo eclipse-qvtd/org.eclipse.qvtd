@@ -82,7 +82,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCS()
 	 * @generated
 	 */
-	int MAPPING_CS = 3;
+	int MAPPING_CS = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl <em>Mapping Call Binding CS</em>}' class.
@@ -92,7 +92,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCallBindingCS()
 	 * @generated
 	 */
-	int MAPPING_CALL_BINDING_CS = 4;
+	int MAPPING_CALL_BINDING_CS = 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingStatementCSImpl <em>Mapping Statement CS</em>}' class.
@@ -102,7 +102,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingStatementCS()
 	 * @generated
 	 */
-	int MAPPING_STATEMENT_CS = 8;
+	int MAPPING_STATEMENT_CS = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
@@ -112,7 +112,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCallCS()
 	 * @generated
 	 */
-	int MAPPING_CALL_CS = 5;
+	int MAPPING_CALL_CS = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingSequenceCSImpl <em>Mapping Sequence CS</em>}' class.
@@ -122,7 +122,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingSequenceCS()
 	 * @generated
 	 */
-	int MAPPING_SEQUENCE_CS = 7;
+	int MAPPING_SEQUENCE_CS = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl <em>Mapping Loop CS</em>}' class.
@@ -132,7 +132,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingLoopCS()
 	 * @generated
 	 */
-	int MAPPING_LOOP_CS = 6;
+	int MAPPING_LOOP_CS = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
@@ -142,7 +142,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getTopLevelCS()
 	 * @generated
 	 */
-	int TOP_LEVEL_CS = 9;
+	int TOP_LEVEL_CS = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeDomainCSImpl <em>Imperative Domain CS</em>}' class.
@@ -578,6 +578,115 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS_FEATURE_COUNT = QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeRealizedVariableCSImpl <em>Imperative Realized Variable CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeRealizedVariableCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getImperativeRealizedVariableCS()
+	 * @generated
+	 */
+	int IMPERATIVE_REALIZED_VARIABLE_CS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_REALIZED_VARIABLE_CS__CSI = QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_REALIZED_VARIABLE_CS__PARENT = QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_REALIZED_VARIABLE_CS__PIVOT = QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_REALIZED_VARIABLE_CS__ORIGINAL_XMI_ID = QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_REALIZED_VARIABLE_CS__OWNED_ANNOTATIONS = QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_REALIZED_VARIABLE_CS__NAME = QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_REALIZED_VARIABLE_CS__IS_OPTIONAL = QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS__IS_OPTIONAL;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_REALIZED_VARIABLE_CS__OWNED_TYPE = QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS__OWNED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Qualifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_REALIZED_VARIABLE_CS__QUALIFIERS = QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS__QUALIFIERS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_REALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION = QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Imperative Realized Variable CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_REALIZED_VARIABLE_CS_FEATURE_COUNT = QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1545,6 +1654,27 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EAttribute getImperativePredicateOrAssignmentCS_IsAccumulate();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS <em>Imperative Realized Variable CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Imperative Realized Variable CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS
+	 * @generated
+	 */
+	EClass getImperativeRealizedVariableCS();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS#getOwnedInitExpression <em>Owned Init Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Init Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS#getOwnedInitExpression()
+	 * @see #getImperativeRealizedVariableCS()
+	 * @generated
+	 */
+	EReference getImperativeRealizedVariableCS_OwnedInitExpression();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1849,6 +1979,24 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE = eINSTANCE.getImperativePredicateOrAssignmentCS_IsAccumulate();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeRealizedVariableCSImpl <em>Imperative Realized Variable CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeRealizedVariableCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getImperativeRealizedVariableCS()
+		 * @generated
+		 */
+		EClass IMPERATIVE_REALIZED_VARIABLE_CS = eINSTANCE.getImperativeRealizedVariableCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Init Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IMPERATIVE_REALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION = eINSTANCE.getImperativeRealizedVariableCS_OwnedInitExpression();
 
 	}
 

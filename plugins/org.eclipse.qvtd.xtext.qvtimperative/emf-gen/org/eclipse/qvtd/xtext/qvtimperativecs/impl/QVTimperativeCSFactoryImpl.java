@@ -65,6 +65,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			case QVTimperativeCSPackage.CONNECTION_STATEMENT_CS: return createConnectionStatementCS();
 			case QVTimperativeCSPackage.IMPERATIVE_DOMAIN_CS: return createImperativeDomainCS();
 			case QVTimperativeCSPackage.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS: return createImperativePredicateOrAssignmentCS();
+			case QVTimperativeCSPackage.IMPERATIVE_REALIZED_VARIABLE_CS: return createImperativeRealizedVariableCS();
 			case QVTimperativeCSPackage.MAPPING_CS: return createMappingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS: return createMappingCallBindingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS: return createMappingCallCS();
@@ -173,6 +174,16 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull ImperativePredicateOrAssignmentCS createImperativePredicateOrAssignmentCS() {
 		ImperativePredicateOrAssignmentCSImpl imperativePredicateOrAssignmentCS = new ImperativePredicateOrAssignmentCSImpl();
 		return imperativePredicateOrAssignmentCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImperativeRealizedVariableCS createImperativeRealizedVariableCS() {
+		ImperativeRealizedVariableCSImpl imperativeRealizedVariableCS = new ImperativeRealizedVariableCSImpl();
+		return imperativeRealizedVariableCS;
 	}
 
 	/**

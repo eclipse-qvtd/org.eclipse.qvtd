@@ -59,6 +59,11 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 	}
 
 	@Override
+	public @Nullable Element visitImperativeRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ImperativeRealizedVariableCS csElement) {
+		return visitRealizedVariableCS(csElement);
+	}
+
+	@Override
 	public @Nullable Element visitMappingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCS csElement) {
 		return visitAbstractMappingCS(csElement);
 	}
