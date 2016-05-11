@@ -46,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
@@ -70,12 +71,12 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -142,7 +143,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 			context.refreshList(csBottomPattern.getOwnedUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asBottomPattern.getVariable(), null));
 		}
 		else {
-			context.refreshList(csBottomPattern.getOwnedRealizedVariables(), context.visitDeclarations(RealizedVariableCS.class, asBottomPattern.getRealizedVariable(), null));
+			context.refreshList(csBottomPattern.getOwnedRealizedVariables(), context.visitDeclarations(ImperativeRealizedVariableCS.class, asBottomPattern.getRealizedVariable(), null));
 			context.refreshList(csBottomPattern.getOwnedUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asBottomPattern.getVariable(), null));
 		}
 		return csBottomPattern;
@@ -384,6 +385,15 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		csAssignment.setOwnedInitExpression(createExpCS(asPropertyAssignment.getValue()));
 		csAssignment.setIsDefault(asPropertyAssignment.isIsDefault());
 		return csAssignment;
+	}
+
+	@Override
+	public ElementCS visitRealizedVariable(@NonNull RealizedVariable asRealizedVariable) {
+		ImperativeRealizedVariableCS csRealizedVariable = context.refreshNamedElement(ImperativeRealizedVariableCS.class, QVTimperativeCSPackage.Literals.IMPERATIVE_REALIZED_VARIABLE_CS, asRealizedVariable);
+		csRealizedVariable.setPivot(asRealizedVariable);
+		csRealizedVariable.setOwnedType(createTypeRefCS(asRealizedVariable.getType(), getScope(asRealizedVariable)));
+		csRealizedVariable.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asRealizedVariable.getOwnedInit()));
+		return csRealizedVariable;
 	}
 
 	@Override

@@ -30,6 +30,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -45,6 +46,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
@@ -117,6 +119,19 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			if (csInitialiser != null) {
 				OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
 				asConnectionStatement.setValue(initialiser);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitImperativeRealizedVariableCS(@NonNull ImperativeRealizedVariableCS csElement) {
+		RealizedVariable asRealizedVariable = PivotUtil.getPivot(RealizedVariable.class, csElement);
+		if (asRealizedVariable != null) {
+			ExpCS expression = csElement.getOwnedInitExpression();
+			if (expression != null) {
+				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
+				asRealizedVariable.setOwnedInit(target);
 			}
 		}
 		return null;
