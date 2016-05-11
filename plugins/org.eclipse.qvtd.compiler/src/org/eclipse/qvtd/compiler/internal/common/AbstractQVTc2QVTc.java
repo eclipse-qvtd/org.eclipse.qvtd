@@ -396,7 +396,7 @@ public abstract class AbstractQVTc2QVTc
 					Resource vResource = variable.eResource();
 //					assert vResource == eResource;
 					if (vResource != eResource) {
-						System.out.println(variable + " : " + NameUtil.debugFullName(variable) + " not in output resource.");
+						System.err.println(variable + " : " + NameUtil.debugFullName(variable) + " not in output resource.");
 						vResource = variable.eResource();
 					}
 				}
@@ -862,7 +862,7 @@ public abstract class AbstractQVTc2QVTc
 	    	EObject eSource = target2source.get(eTarget);
 	    	EObject eCopied = debugCopy2source.get(eTarget);
 	        if ((eSource == null) && (eCopied == null)) {
-	    		System.out.println("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
+	    		System.err.println("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
 	    	}
 	    }
 	    

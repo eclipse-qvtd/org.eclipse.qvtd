@@ -149,7 +149,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		// check() {
 		@NonNull List<@NonNull InvokedEnforceableRelationDomain2CoreMapping> enforceableRelationDomain2coreMappings = new ArrayList<@NonNull InvokedEnforceableRelationDomain2CoreMapping>();
 		for (@NonNull RelationCallExp rInvocation : qvtr2qvtc.getRelationCallExpsForRelation(rRelation)) {
-			System.out.println("invocation" + rRelation + " from " + rInvocation);
+			QVTrToQVTc.SYNTHESIS.println("invocation of " + rRelation + " from " + rInvocation);
 			for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
 				if (rDomain.isIsEnforceable()) {
 					RelationDomain rEnforcedDomain = (RelationDomain)rDomain;

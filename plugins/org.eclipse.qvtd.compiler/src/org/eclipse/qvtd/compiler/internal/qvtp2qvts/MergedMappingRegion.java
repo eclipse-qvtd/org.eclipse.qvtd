@@ -121,7 +121,7 @@ public class MergedMappingRegion extends AbstractMappingRegion
 //				createMergedEdge(edge.getSource(), edge, edge.getTarget());	-- recomputed
 			}
 			else {
-				System.out.println("Unmerged edge" + edge);
+				System.err.println("Unmerged edge" + edge);
 			}
 		}
 	}

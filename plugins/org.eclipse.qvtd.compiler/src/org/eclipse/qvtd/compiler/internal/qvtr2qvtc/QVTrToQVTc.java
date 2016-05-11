@@ -67,8 +67,10 @@ import org.eclipse.ocl.pivot.util.DerivedConstants;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -98,6 +100,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class QVTrToQVTc
 {
+	public static final @NonNull TracingOption SYNTHESIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/synthesis");
+
 	private class Issues {
 
 		public void addError(QVTrToQVTc qvTrToQVTc, String message,
@@ -708,7 +712,7 @@ public class QVTrToQVTc
 				if (rule instanceof Relation) {
 					Relation rRelation = (Relation)rule;
 					if (rRelation.isIsTopLevel()) {
-						System.out.println("topLevel " + rRelation);
+						QVTrToQVTc.SYNTHESIS.println("topLevel " + rRelation);
 						TopLevelRelationToMappingForEnforcement topLevelRelationToMappingForEnforcement = new TopLevelRelationToMappingForEnforcement(this, rRelation);
 						topLevelRelationToMappingForEnforcement.doTopLevelRelationToMappingForEnforcement();
 					}

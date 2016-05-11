@@ -33,3 +33,6 @@ org.eclipse.qvtd.compiler/qvtp2qvts/regionTraversal=false
 
 # Turn on tracing of the polled properties computation 
 org.eclipse.qvtd.compiler/qvts2qvti/polledProperties=false
+
+# Turn on tracing of the QVTc synthesis 
+org.eclipse.qvtd.compiler/qvtr2qvtc/synthesize=false

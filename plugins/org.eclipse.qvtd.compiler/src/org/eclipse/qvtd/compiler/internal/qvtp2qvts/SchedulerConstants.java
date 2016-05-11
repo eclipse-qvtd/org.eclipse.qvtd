@@ -403,7 +403,7 @@ public abstract class SchedulerConstants
 			outputStream.write(s.toString().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
-			System.out.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
 	}
 
@@ -417,7 +417,7 @@ public abstract class SchedulerConstants
 			outputStream.write(s.toString().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
-			System.out.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
 	}
 
@@ -431,7 +431,7 @@ public abstract class SchedulerConstants
 			outputStream.write(s.toString().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
-			System.out.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
 	}
 
@@ -445,7 +445,7 @@ public abstract class SchedulerConstants
 			outputStream.write(s.toString().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
-			System.out.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
 	}
 
@@ -459,7 +459,7 @@ public abstract class SchedulerConstants
 			outputStream.write(s.toString().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
-			System.out.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
 		for (@NonNull Region nestedRegion : region.getRegions()) {
 			if (nestedRegion instanceof ScheduledRegion) {
@@ -478,7 +478,7 @@ public abstract class SchedulerConstants
 			outputStream.write(s.toString().getBytes());
 			outputStream.close();
 		} catch (IOException e) {
-			System.out.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
 		for (@NonNull Region nestedRegion : region.getRegions()) {
 			if (nestedRegion instanceof ScheduledRegion) {

@@ -490,7 +490,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				return PivotUtil.createVariableExp(iVariable);
 			}
 			else {
-				System.out.println("Creating unexpected variable for " + pVariable + " in " + region);
+				System.err.println("Creating unexpected variable for " + pVariable + " in " + region);
 				BottomPattern bottomPattern = mapping.getBottomPattern();
 				assert bottomPattern != null;
 				Type variableType = pVariable.getType();

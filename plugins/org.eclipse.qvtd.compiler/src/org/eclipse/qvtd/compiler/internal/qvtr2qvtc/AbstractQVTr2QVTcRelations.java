@@ -365,7 +365,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 		
 		protected void addPredicate(@NonNull CorePattern cCorePattern, @NonNull OCLExpression cExpression) {
-			System.out.println("addPredicate " + cExpression);
+			QVTrToQVTc.SYNTHESIS.println("addPredicate " + cExpression);
 			Predicate cPredicate = createPredicate(cExpression);
 			cCorePattern.getPredicate().add(cPredicate);
 		}
