@@ -507,9 +507,14 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public final boolean isClassNode() {
-//		boolean isClassNode1 = nodeRole.isClassNode();		// FIXME OperationNode
-		boolean isClassNode2 = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();
+		boolean isClassNode1 = nodeRole.isClassNode();		// FIXME OperationNode / InternalNode
+		boolean isClassNode2 = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();// && !isOperation();
 //		assert isClassNode1 == isClassNode2;
+		if (isClassNode1 != isClassNode2) {
+//			System.err.println("Inconsistent isClassNode for " + this);
+			isClassNode1 = nodeRole.isClassNode();
+			isClassNode2 = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();// && !isOperation();
+		}
 		return isClassNode2;
 	}
 

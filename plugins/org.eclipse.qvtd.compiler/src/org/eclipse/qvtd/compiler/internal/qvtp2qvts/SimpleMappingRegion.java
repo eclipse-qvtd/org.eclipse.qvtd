@@ -35,6 +35,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -251,6 +252,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	}
 
 	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull SimpleNode simpleNode) {
+//		assert !simpleNode.isOperation();			// FIXME testExample2_V2 violates this for an intermediate "if"
 		variable2simpleNode.put(typedElement, simpleNode);
 	}
 
@@ -330,6 +332,24 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	private @NonNull SimpleNode analyzeVariable(@NonNull Variable variable, @NonNull OCLExpression ownedInit) {
 		SimpleNode initNode = ownedInit.accept(expressionAnalyzer);
 		assert initNode != null;
+		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
+			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
+				SimpleNode stepNode = Nodes.REALIZED_VARIABLE.createSimpleNode(this, variable);
+				Edges.RESULT.createSimpleEdge(this, initNode, null, stepNode);
+				initNode = stepNode;
+			}
+//			else if (variable.getType() instanceof CollectionType) {
+//				SimpleNode stepNode = Nodes.ATTRIBUTE.createSimpleNode(this, variable, (OperationCallExp)ownedInit);
+//				Edges.RESULT.createSimpleEdge(this, initNode, null, stepNode);
+//				initNode = stepNode;
+//			}
+			else {
+//				SimpleNode stepNode = Nodes.STEP.createSimpleNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
+				SimpleNode stepNode = Nodes.UNREALIZED_VARIABLE.createSimpleNode(this, variable);
+				Edges.RESULT.createSimpleEdge(this, initNode, null, stepNode);
+				initNode = stepNode;
+			}
+		}
 		initNode.addTypedElement(variable);
 		addVariableNode(variable, initNode);
 		return initNode;

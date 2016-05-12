@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -49,6 +50,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -274,6 +276,19 @@ public class QVTbaseUtil
 		}
 		enforceableTypedModels.removeAll(notEnforceableTypedModels);
 		return enforceableTypedModels;
+	}
+
+	/**
+	 * Return true if asOperation is an Identification - an operation whose result is a singleton object.
+	 */
+	public static boolean isIdentification(Operation asOperation) {
+		if (asOperation instanceof Function) {
+			OCLExpression queryExpression = ((Function)asOperation).getQueryExpression();
+			if (queryExpression instanceof ShadowExp) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
     public static @NonNull Transformation loadTransformation(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {

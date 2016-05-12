@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Package;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.RealLiteralExp;
@@ -63,6 +64,8 @@ import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TypeUtil;
 import org.eclipse.ocl.pivot.values.TemplateParameterSubstitutions;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 
@@ -113,6 +116,27 @@ public class QVTbaseHelper // FIXME extends PivotHelper
 		collectionRange.setType(environmentFactory.getStandardLibrary().getIntegerType());
 		collectionRange.setIsRequired(true);
 		return collectionRange;
+	}
+
+	public @NonNull Function createFunction(@NonNull String name, @NonNull Type returnType, boolean returnIsRequired, @Nullable List<@NonNull FunctionParameter> asParameters) {
+		Function asFunction = QVTbaseFactory.eINSTANCE.createFunction();
+		asFunction.setName(name);
+		asFunction.setType(returnType);
+		asFunction.setIsRequired(returnIsRequired);
+		if (asParameters != null) {
+			asFunction.getOwnedParameters().addAll(asParameters);
+		}
+		return asFunction;
+	}
+
+	public @NonNull FunctionParameter createFunctionParameter(@NonNull TypedElement typedElement) {
+		String name = ClassUtil.nonNullState(typedElement.getName());
+		Type type = ClassUtil.nonNullState(typedElement.getType());
+		FunctionParameter asParameter = QVTbaseFactory.eINSTANCE.createFunctionParameter();
+		asParameter.setName(name);
+		asParameter.setType(type);
+		asParameter.setIsRequired(typedElement.isIsRequired());
+		return asParameter;
 	}
 
 	public @NonNull IfExp createIfExp(@NonNull OCLExpression asCondition, @NonNull OCLExpression asThen, @NonNull OCLExpression asElse) {
@@ -322,6 +346,13 @@ public class QVTbaseHelper // FIXME extends PivotHelper
 		return asPackage;
 	}
 
+	public @NonNull Parameter createParameter(@NonNull TypedElement typedElement) {
+		String name = ClassUtil.nonNullState(typedElement.getName());
+		Type type = ClassUtil.nonNullState(typedElement.getType());
+		Parameter asParameter = PivotUtil.createParameter(name, type, typedElement.isIsRequired());
+		return asParameter;
+	}
+
 	public @NonNull Predicate createPredicate(@NonNull OCLExpression asConditionExpression) {
 		Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
 		asPredicate.setConditionExpression(asConditionExpression);
@@ -405,8 +436,10 @@ public class QVTbaseHelper // FIXME extends PivotHelper
 		return asVariable;
 	}
 
-	public @NonNull Variable  createVariable(@NonNull TypedElement typedElement) {
-		Variable asVariable = PivotUtil.createVariable(typedElement.getName(), typedElement.getType(), typedElement.isIsRequired(), null);
+	public @NonNull Variable createVariable(@NonNull TypedElement typedElement) {
+		String name = ClassUtil.nonNullState(typedElement.getName());
+		Type type = ClassUtil.nonNullState(typedElement.getType());
+		Variable asVariable = PivotUtil.createVariable(name, type, typedElement.isIsRequired(), null);
 		return asVariable;
 	}
 

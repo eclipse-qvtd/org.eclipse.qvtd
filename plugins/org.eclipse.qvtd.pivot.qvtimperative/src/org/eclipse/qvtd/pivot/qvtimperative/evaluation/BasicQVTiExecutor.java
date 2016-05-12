@@ -137,7 +137,23 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				CoreDomain enforceableDomain = (CoreDomain)domain;
 				BottomPattern enforceableBottomPattern = enforceableDomain.getBottomPattern();
 				for (RealizedVariable realizedVariable : enforceableBottomPattern.getRealizedVariable()) {
-					realizedVariable.accept(undecoratedVisitor);
+					OCLExpression ownedInit = realizedVariable.getOwnedInit();
+					if (ownedInit != null) {
+						Object initValue = ownedInit.accept(undecoratedVisitor);
+						getEvaluationEnvironment().add(realizedVariable, initValue);
+				        replace(realizedVariable, initValue);
+				        Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
+				        TypedModel typedModel = QVTcoreBaseUtil.getTypedModel(area);
+				        assert typedModel != null;
+						Object ecoreValue = getIdResolver().ecoreValueOf(null, initValue);
+						assert ecoreValue != null;
+				        getModelManager().addModelElement(typedModel, ecoreValue);
+					}
+				}
+				for (RealizedVariable realizedVariable : enforceableBottomPattern.getRealizedVariable()) {
+					if (realizedVariable.getOwnedInit() == null) {
+						realizedVariable.accept(undecoratedVisitor);
+					}
 				}
 			}
 		}
@@ -200,13 +216,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				assert enforceableBottomPattern.getAssignment().isEmpty();
 				assert enforceableBottomPattern.getPredicate().isEmpty();
 				for (@NonNull Variable rVar : ClassUtil.nullFree(enforceableBottomPattern.getVariable())) {
-					OCLExpression ownedInit = rVar.getOwnedInit();
-					if (ownedInit != null) {
-						Object initValue = ownedInit.accept(undecoratedVisitor);
-						replace(rVar, initValue);
-					}
-				}
-				for (@NonNull RealizedVariable rVar : ClassUtil.nullFree(enforceableBottomPattern.getRealizedVariable())) {
 					OCLExpression ownedInit = rVar.getOwnedInit();
 					if (ownedInit != null) {
 						Object initValue = ownedInit.accept(undecoratedVisitor);

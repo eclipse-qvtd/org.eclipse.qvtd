@@ -40,6 +40,6 @@ public class SimpleVariableNode extends AbstractSimpleNode
 
 	@Override
 	public @NonNull String toString() {
-        return getNodeRole().toString() + "(" + variable.toString() + ")";
+        return getNodeRole().toString() + "(" + (variable != null ? variable.toString() : name) + ")";
     }
 }

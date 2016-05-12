@@ -15,6 +15,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.NavigationCallExp;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -58,17 +60,22 @@ public class Nodes
 	
 	public static abstract class AbstractVariableNodeRole extends AbstractSimpleNodeRole
 	{
-		protected AbstractVariableNodeRole(@NonNull Phase phase) {
+		protected final boolean isClassNode;
+		
+		protected AbstractVariableNodeRole(@NonNull Phase phase, boolean isClassNode) {
 			super(phase);
+			this.isClassNode = isClassNode;
 		}
 
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull VariableDeclaration variable) {
+			assert isClassNode == !(variable.getType() instanceof DataType);
 			return new SimpleVariableNode(this, region, variable);
 		}
 
 		@Override
 		public boolean isClassNode() {
-			return true;
+//			return !(classDatumAnalysis.getClassDatum().getType() instanceof DataType);
+			return isClassNode;
 		}
 	}
 	
@@ -409,8 +416,8 @@ public class Nodes
 	{
 		private static abstract class AbstractGuardNodeRole extends AbstractVariableNodeRole
 		{
-			protected AbstractGuardNodeRole(@NonNull Phase phase) {
-				super(phase);
+			protected AbstractGuardNodeRole(@NonNull Phase phase, boolean isClassNode) {
+				super(phase, isClassNode);
 			}
 
 			@Override
@@ -441,8 +448,8 @@ public class Nodes
 		{
 			private final @NonNull HeadNodeRole headNode;
 			
-			protected GuardNodeRole(@NonNull Phase phase, @NonNull HeadNodeRole headNode) {
-				super(phase);
+			protected GuardNodeRole(@NonNull Phase phase, @NonNull HeadNodeRole headNode, boolean isClassNode) {
+				super(phase, isClassNode);
 				this.headNode = headNode;
 			}
 
@@ -466,7 +473,7 @@ public class Nodes
 		private static final class HeadNodeRole extends AbstractGuardNodeRole
 		{		
 			protected HeadNodeRole(@NonNull Phase phase) {
-				super(phase);
+				super(phase, true);
 			}
 
 			@Override
@@ -487,18 +494,30 @@ public class Nodes
 		}
 		
 		private static final @NonNull HeadNodeRole LOADED_HEAD = new HeadNodeRole(Role.Phase.LOADED);
-		private static final @NonNull GuardNodeRole LOADED_GUARD = new GuardNodeRole(Role.Phase.LOADED, LOADED_HEAD);
+		private static final @NonNull GuardNodeRole LOADED_ATTRIBUTE_GUARD = new GuardNodeRole(Role.Phase.LOADED, LOADED_HEAD,false);
+		private static final @NonNull GuardNodeRole LOADED_CLASS_GUARD = new GuardNodeRole(Role.Phase.LOADED, LOADED_HEAD, true);
 		private static final @NonNull HeadNodeRole PREDICATED_HEAD = new HeadNodeRole(Role.Phase.PREDICATED);
-		private static final @NonNull GuardNodeRole PREDICATED_GUARD = new GuardNodeRole(Role.Phase.PREDICATED, PREDICATED_HEAD);
+		private static final @NonNull GuardNodeRole PREDICATED_ATTRIBUTE_GUARD = new GuardNodeRole(Role.Phase.PREDICATED, PREDICATED_HEAD, false);
+		private static final @NonNull GuardNodeRole PREDICATED_CLASS_GUARD = new GuardNodeRole(Role.Phase.PREDICATED, PREDICATED_HEAD, true);
+		
+		private final @Nullable Boolean isClassNode;
+
+		public GuardNodeRoleFactory(@Nullable Boolean isClassNode) {
+			this.isClassNode = isClassNode;
+		}
 		
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull VariableDeclaration guardVariable) {
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(guardVariable);
 			boolean isEnforceable = domainUsage.isOutput();
+			Boolean resolvedIsClassNode = isClassNode;
+			if (resolvedIsClassNode == null) {
+				resolvedIsClassNode = !(guardVariable.getType() instanceof DataType);
+			}
 			if (!isEnforceable) {
-				return LOADED_GUARD.createSimpleNode(region, guardVariable);
+				return (resolvedIsClassNode ? LOADED_CLASS_GUARD : LOADED_ATTRIBUTE_GUARD).createSimpleNode(region, guardVariable);
 			}
 			else {
-				return PREDICATED_GUARD.createSimpleNode(region, guardVariable);
+				return (resolvedIsClassNode ? PREDICATED_CLASS_GUARD : PREDICATED_ATTRIBUTE_GUARD).createSimpleNode(region, guardVariable);
 			}
 		}
 	}
@@ -507,8 +526,8 @@ public class Nodes
 	{
 		private static final class IteratorNodeRole extends AbstractVariableNodeRole
 		{
-			protected IteratorNodeRole(@NonNull Phase phase) {
-				super(phase);
+			protected IteratorNodeRole(@NonNull Phase phase, boolean isClassNode) {
+				super(phase, isClassNode);
 			}
 
 //			@Override
@@ -537,19 +556,32 @@ public class Nodes
 //			}
 		}
 		
-		public static final @NonNull AbstractVariableNodeRole CONSTANT_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT);
-		public static final @NonNull AbstractVariableNodeRole LOADED_ITERATOR = new IteratorNodeRole(Role.Phase.LOADED);
-		public static final @NonNull AbstractVariableNodeRole PREDICATED_ITERATOR = new IteratorNodeRole(Role.Phase.PREDICATED);
+		private static final @NonNull AbstractVariableNodeRole CONSTANT_ATTRIBUTE_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT, false);
+		private static final @NonNull AbstractVariableNodeRole CONSTANT_CLASS_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT, true);
+		private static final @NonNull AbstractVariableNodeRole LOADED_ATTRIBUTE_ITERATOR = new IteratorNodeRole(Role.Phase.LOADED, false);
+		private static final @NonNull AbstractVariableNodeRole LOADED_CLASS_ITERATOR = new IteratorNodeRole(Role.Phase.LOADED, true);
+		private static final @NonNull AbstractVariableNodeRole PREDICATED_ATTRIBUTE_ITERATOR = new IteratorNodeRole(Role.Phase.PREDICATED, false);
+		private static final @NonNull AbstractVariableNodeRole PREDICATED_CLASS_ITERATOR = new IteratorNodeRole(Role.Phase.PREDICATED, true);
+		
+		private final @Nullable Boolean isClassNode;
+
+		public IteratorNodeRoleFactory(@Nullable Boolean isClassNode) {
+			this.isClassNode = isClassNode;
+		}
 
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull Variable iterator, @NonNull SimpleNode sourceNode) {
+			Boolean resolvedIsClassNode = isClassNode;
+			if (resolvedIsClassNode == null) {
+				resolvedIsClassNode = !(iterator.getType() instanceof DataType);
+			}
 			if (sourceNode.isConstant()) {
-				return CONSTANT_ITERATOR.createSimpleNode(region, iterator);
+				return (resolvedIsClassNode ? CONSTANT_CLASS_ITERATOR : CONSTANT_ATTRIBUTE_ITERATOR).createSimpleNode(region, iterator);
 			}
 			else if (sourceNode.isLoaded()) {
-				return LOADED_ITERATOR.createSimpleNode(region, iterator);
+				return (resolvedIsClassNode ? LOADED_CLASS_ITERATOR : LOADED_ATTRIBUTE_ITERATOR).createSimpleNode(region, iterator);
 			}
 			else {
-				return PREDICATED_ITERATOR.createSimpleNode(region, iterator);
+				return (resolvedIsClassNode ? PREDICATED_CLASS_ITERATOR : PREDICATED_ATTRIBUTE_ITERATOR).createSimpleNode(region, iterator);
 			}
 		}
 	}
@@ -560,8 +592,8 @@ public class Nodes
 		{
 			private boolean isNavigable;
 			
-			protected LetVariableNodeRole(@NonNull Phase phase, boolean isNavigable) {
-				super(phase);
+			protected LetVariableNodeRole(@NonNull Phase phase, boolean isNavigable, boolean isClassNode) {
+				super(phase, isClassNode);
 				this.isNavigable = isNavigable;
 			}
 
@@ -581,34 +613,50 @@ public class Nodes
 			}
 		}
 		
-		public static final @NonNull AbstractVariableNodeRole CONSTANT_NAVIGABLE_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, true);
-		public static final @NonNull AbstractVariableNodeRole CONSTANT_UNNAVIGABLE_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, false);
-		public static final @NonNull AbstractVariableNodeRole LOADED_NAVIGABLE_LET = new LetVariableNodeRole(Role.Phase.LOADED, true);
-		public static final @NonNull AbstractVariableNodeRole LOADED_UNNAVIGABLE_LET = new LetVariableNodeRole(Role.Phase.LOADED, false);
-		public static final @NonNull AbstractVariableNodeRole PREDICATED_NAVIGABLE_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, true);
-		public static final @NonNull AbstractVariableNodeRole PREDICATED_UNNAVIGABLE_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, false);
+		private static final @NonNull AbstractVariableNodeRole CONSTANT_NAVIGABLE_ATTRIBUTE_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, true, false);
+		private static final @NonNull AbstractVariableNodeRole CONSTANT_NAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, true, true);
+		private static final @NonNull AbstractVariableNodeRole CONSTANT_UNNAVIGABLE_ATTRIBUTE_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, false, false);
+		private static final @NonNull AbstractVariableNodeRole CONSTANT_UNNAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, false, true);
+		private static final @NonNull AbstractVariableNodeRole LOADED_NAVIGABLE_ATTRIBUTE_LET = new LetVariableNodeRole(Role.Phase.LOADED, true, false);
+		private static final @NonNull AbstractVariableNodeRole LOADED_NAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.LOADED, true, true);
+		private static final @NonNull AbstractVariableNodeRole LOADED_UNNAVIGABLE_ATTRIBUTE_LET = new LetVariableNodeRole(Role.Phase.LOADED, false, false);
+		private static final @NonNull AbstractVariableNodeRole LOADED_UNNAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.LOADED, false, true);
+		private static final @NonNull AbstractVariableNodeRole PREDICATED_NAVIGABLE_ATTRIBUTE_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, true, false);
+		private static final @NonNull AbstractVariableNodeRole PREDICATED_NAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, true, true);
+		private static final @NonNull AbstractVariableNodeRole PREDICATED_UNNAVIGABLE_ATTRIBUTE_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, false, false);
+		private static final @NonNull AbstractVariableNodeRole PREDICATED_UNNAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, false, true);
+		
+		private final @Nullable Boolean isClassNode;
+
+		public LetNodeRoleFactory(@Nullable Boolean isClassNode) {
+			this.isClassNode = isClassNode;
+		}
 
 		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull Variable letVariable, @NonNull SimpleNode inNode) {
+			Boolean resolvedIsClassNode = isClassNode;
+			if (resolvedIsClassNode == null) {
+				resolvedIsClassNode = !(letVariable.getType() instanceof DataType);
+			}
 			if (inNode.isNavigable()) {
 				if (inNode.isConstant()) {
-					return CONSTANT_NAVIGABLE_LET.createSimpleNode(region, letVariable);
+					return (resolvedIsClassNode ? CONSTANT_NAVIGABLE_CLASS_LET : CONSTANT_NAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
 				}
 				else if (inNode.isLoaded()) {
-					return LOADED_NAVIGABLE_LET.createSimpleNode(region, letVariable);
+					return (resolvedIsClassNode ? LOADED_NAVIGABLE_CLASS_LET : LOADED_NAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
 				}
 				else {
-					return PREDICATED_NAVIGABLE_LET.createSimpleNode(region, letVariable);
+					return (resolvedIsClassNode ? PREDICATED_NAVIGABLE_CLASS_LET : PREDICATED_NAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
 				}
 			}
 			else {
 				if (inNode.isConstant()) {
-					return CONSTANT_UNNAVIGABLE_LET.createSimpleNode(region, letVariable);
+					return (resolvedIsClassNode ? CONSTANT_UNNAVIGABLE_CLASS_LET : CONSTANT_UNNAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
 				}
 				else if (inNode.isLoaded()) {
-					return LOADED_UNNAVIGABLE_LET.createSimpleNode(region, letVariable);
+					return (resolvedIsClassNode ? LOADED_UNNAVIGABLE_CLASS_LET : LOADED_UNNAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
 				}
 				else {
-					return PREDICATED_UNNAVIGABLE_LET.createSimpleNode(region, letVariable);
+					return (resolvedIsClassNode ? PREDICATED_UNNAVIGABLE_CLASS_LET : PREDICATED_UNNAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
 				}
 			}
 		}
@@ -700,6 +748,15 @@ public class Nodes
 					}
 				}
 			}
+			if (typedElement instanceof OperationCallExp) {
+				Operation asOperation = ((OperationCallExp)typedElement).getReferredOperation();
+				if (QVTbaseUtil.isIdentification(asOperation)) {
+					DomainUsage usage = region.getSchedulerConstants().getDomainUsage(typedElement);
+					if (!usage.isInput()) {
+						isRealized = true;
+					}
+				}
+			}
 			if (isRealized) {
 				return REALIZED_OPERATION.createSimpleNode(region, name, typedElement);
 			}
@@ -715,15 +772,36 @@ public class Nodes
 		}
 	}
 	
-	private static final class ParameterNodeRole extends AbstractVariableNodeRole
-	{
-		protected ParameterNodeRole() {
-			super(Role.Phase.PREDICATED);
+	public static final class ParameterNodeRoleFactory
+	{		
+		private static final class ParameterNodeRole extends AbstractVariableNodeRole
+		{
+			protected ParameterNodeRole(boolean isClassNode) {
+				super(Role.Phase.PREDICATED, isClassNode);
+			}
+
+			@Override
+			public boolean isHead() {
+				return true;
+			}
 		}
 
-		@Override
-		public boolean isHead() {
-			return true;
+		
+		private static final @NonNull ParameterNodeRole ATTRIBUTE_PARAMETER = new ParameterNodeRole(false);
+		private static final @NonNull ParameterNodeRole CLASS_PARAMETER = new ParameterNodeRole(true);
+		
+		private final @Nullable Boolean isClassNode;
+
+		public ParameterNodeRoleFactory(@Nullable Boolean isClassNode) {
+			this.isClassNode = isClassNode;
+		}
+
+		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+			Boolean resolvedIsClassNode = isClassNode;
+			if (resolvedIsClassNode == null) {
+				resolvedIsClassNode = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType);
+			}
+			return (resolvedIsClassNode ? CLASS_PARAMETER : ATTRIBUTE_PARAMETER).createSimpleNode(region, name, classDatumAnalysis);
 		}
 	}
 	
@@ -813,7 +891,7 @@ public class Nodes
 	private static final class RealizedVariableNodeRole extends AbstractVariableNodeRole
 	{
 		protected RealizedVariableNodeRole() {
-			super(Role.Phase.REALIZED);
+			super(Role.Phase.REALIZED, true);
 		}
 		
 		@Override
@@ -1028,11 +1106,31 @@ public class Nodes
 			return ERROR_COLOR;
 		}
 	}
-	
-	private static final class UnrealizedVariableNodeRole extends AbstractVariableNodeRole
-	{
-		protected UnrealizedVariableNodeRole() {
-			super(Role.Phase.LOADED);
+
+	public static final class UnrealizedVariableNodeRoleFactory
+	{		
+		private static final class UnrealizedVariableNodeRole extends AbstractVariableNodeRole
+		{
+			protected UnrealizedVariableNodeRole(boolean isClassNode) {
+				super(Role.Phase.LOADED, isClassNode);
+			}
+		}
+		
+		private static final @NonNull UnrealizedVariableNodeRole UNREALIZED_ATTRIBUTE_VARIABLE = new UnrealizedVariableNodeRole(false);
+		private static final @NonNull UnrealizedVariableNodeRole UNREALIZED_CLASS_VARIABLE = new UnrealizedVariableNodeRole(true);
+		
+		private final @Nullable Boolean isClassNode;
+
+		public UnrealizedVariableNodeRoleFactory(@Nullable Boolean isClassNode) {
+			this.isClassNode = isClassNode;
+		}
+
+		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull Variable variable) {
+			Boolean resolvedIsClassNode = isClassNode;
+			if (resolvedIsClassNode == null) {
+				resolvedIsClassNode = !(variable.getType() instanceof DataType);
+			}
+			return (resolvedIsClassNode ? UNREALIZED_CLASS_VARIABLE : UNREALIZED_ATTRIBUTE_VARIABLE).createSimpleNode(region, variable);
 		}
 	}
 	
@@ -1041,16 +1139,16 @@ public class Nodes
 	public static final @NonNull ElementNodeRoleFactory ELEMENT = new ElementNodeRoleFactory();
 	public static final @NonNull NodeRole ERROR = new ErrorNodeRole();
 	public static final @NonNull NodeRole EXTRA_GUARD = new AttributeNodeRoleFactory.ExtraGuardNodeRole();
-	public static final @NonNull GuardNodeRoleFactory GUARD = new GuardNodeRoleFactory();
+	public static final @NonNull GuardNodeRoleFactory GUARD = new GuardNodeRoleFactory(null);
 	public static final @NonNull PortNodeRoleFactory INPUT = new PortNodeRoleFactory(); //true);
-	public static final @NonNull IteratorNodeRoleFactory ITERATOR = new IteratorNodeRoleFactory();
-	public static final @NonNull LetNodeRoleFactory LET = new LetNodeRoleFactory();
+	public static final @NonNull IteratorNodeRoleFactory ITERATOR = new IteratorNodeRoleFactory(null);
+	public static final @NonNull LetNodeRoleFactory LET = new LetNodeRoleFactory(null);
 	public static final @NonNull AttributeNodeRoleFactory NAVIGABLE_ATTRIBUTE = new AttributeNodeRoleFactory(true);
 	public static final @NonNull StepNodeRoleFactory NAVIGABLE_STEP = new StepNodeRoleFactory(true);
 	public static final @NonNull NullNodeRole NULL = new NullNodeRole();
 	public static final @NonNull OperationNodeRoleFactory OPERATION = new OperationNodeRoleFactory();
 //	public static final @NonNull PortNodeRoleFactory OUTPUT = new PortNodeRoleFactory(false);
-	public static final @NonNull AbstractVariableNodeRole PARAMETER = new ParameterNodeRole();
+	public static final @NonNull ParameterNodeRoleFactory PARAMETER = new ParameterNodeRoleFactory(null);
 	public static final AttributeNodeRoleFactory.@NonNull RealizedAttributeNodeRole REALIZED_ATTRIBUTE = new AttributeNodeRoleFactory.RealizedAttributeNodeRole();
 	public static final @NonNull AbstractVariableNodeRole REALIZED_VARIABLE = new RealizedVariableNodeRole();
 	public static final @NonNull StepNodeRoleFactory STEP = new StepNodeRoleFactory(null);
@@ -1058,5 +1156,5 @@ public class Nodes
 	public static final @NonNull NodeRole UNKNOWN = new UnknownNodeRole();
 	public static final @NonNull AttributeNodeRoleFactory UNNAVIGABLE_ATTRIBUTE = new AttributeNodeRoleFactory(false);
 	public static final @NonNull StepNodeRoleFactory UNNAVIGABLE_STEP = new StepNodeRoleFactory(false);
-	public static final @NonNull AbstractVariableNodeRole UNREALIZED_VARIABLE = new UnrealizedVariableNodeRole();
+	public static final @NonNull UnrealizedVariableNodeRoleFactory UNREALIZED_VARIABLE = new UnrealizedVariableNodeRoleFactory(null);
 }

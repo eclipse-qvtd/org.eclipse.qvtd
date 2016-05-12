@@ -1309,9 +1309,19 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	private void createRealizedVariables() {
 		for (@NonNull Node node : region.getRealizedVariableNodes()) {
+			OCLExpression constructor = null;
+			for (Edge edge : node.getIncomingEdges()) {
+				if (edge.isResult()) {
+					Node sourceNode = edge.getSource();
+					if (sourceNode.isOperation()) {
+						constructor = ((OperationCallExp)sourceNode.getTypedElements().iterator().next()).accept(expressionCreator);
+					}
+				}
+			}
 			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
 			BottomPattern bottomPattern = getArea(classDatumAnalysis).getBottomPattern();
 			RealizedVariable realizedVariable = QVTimperativeUtil.createRealizedVariable(getSafeName(node), classDatumAnalysis.getCompleteClass().getPrimaryClass());
+			realizedVariable.setOwnedInit(constructor);
 			bottomPattern.getRealizedVariable().add(realizedVariable);
 			Variable oldVariable = node2variable.put(node, realizedVariable);
 			assert oldVariable == null;

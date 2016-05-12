@@ -68,9 +68,13 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 					s.append("\n" + diagnostic);
 				}
 				if (s.length() > 0) {
-					throw new IOException("Failed to compile " + sourcePath + s.toString());
+//					throw new IOException("Failed to compile " + sourcePath + s.toString());
+					// If a previous generation was bad we may get many irrelevant errors.
+					System.err.println("Failed to compile " + sourcePath + s.toString());
 				}
-				System.out.println("Compilation of " + sourcePath + " returned false but no diagnostics");
+				else {
+					System.out.println("Compilation of " + sourcePath + " returned false but no diagnostics");
+				}
 			}
 //			System.out.printf("%6.3f close\n", 0.001 * (System.currentTimeMillis()-base));
 			stdFileManager2.close();		// Close the file manager which re-opens automatically

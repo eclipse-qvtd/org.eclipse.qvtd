@@ -247,9 +247,9 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		
 		
 		@Override
-		protected void doConstructorConstants(List<CGMapping> cgMappings) {
+		protected void doMappingConstructorConstants(List<CGMapping> cgMappings) {
 
-			super.doConstructorConstants(cgMappings);
+			super.doMappingConstructorConstants(cgMappings);
 			
 			CS2ASJavaCompilerParameters params = ((CS2ASJavaCodeGenerator)getCodeGenerator()).getCGParameters();
 			String lookupSolver = params.getLookupSolverClassName();

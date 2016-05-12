@@ -298,7 +298,15 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		}
 		List<@NonNull RealizedVariable> pRealizedVariables = new ArrayList<@NonNull RealizedVariable>();
 		for (@NonNull BottomPattern pBottomPattern : pBottomPatterns) {
-			pRealizedVariables.addAll(ClassUtil.nullFree(pBottomPattern.getRealizedVariable()));
+			for (@NonNull RealizedVariable asRealizedVariable : ClassUtil.nullFree(pBottomPattern.getRealizedVariable())) {
+				OCLExpression asInit = asRealizedVariable.getOwnedInit();
+				if (asInit == null) {
+					pRealizedVariables.add(asRealizedVariable);
+				}
+				else {
+					cgLeafExp = createBooleanCGLetExp(cgMapping, cgLeafExp, asRealizedVariable, asInit);
+				}
+			}
 		}
 		Collections.sort(pRealizedVariables, NameUtil.NAMEABLE_COMPARATOR);
 		List<@NonNull CGValuedElement> cgRealizedVariables = ClassUtil.nullFree(cgMappingExp.getRealizedVariables());

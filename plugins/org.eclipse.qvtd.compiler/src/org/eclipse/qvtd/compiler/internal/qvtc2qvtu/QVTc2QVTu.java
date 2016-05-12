@@ -485,9 +485,9 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 //			if (isMiddleDomain(targetArea) /*&& !(value instanceof VariableExp)*/ && allMatchReferencedOutputDomainVariables(value)) {	// isRtoM
 //				return null;
 //			}
-			if ((targetArea instanceof Mapping) && anyReferencedBottomMiddleDomainVariables(value)) {	// isMtoM
-				return null;
-			}
+//			if ((targetArea instanceof Mapping) && anyReferencedBottomMiddleDomainVariables(value)) {	// isMtoM
+//				return null;
+//			}
 			return super.visitVariableAssignment(vaIn);
 		}
 	}

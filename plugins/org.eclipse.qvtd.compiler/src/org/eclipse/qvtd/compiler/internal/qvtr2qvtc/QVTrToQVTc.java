@@ -62,8 +62,6 @@ import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.util.DerivedConstants;
@@ -76,6 +74,7 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -86,14 +85,11 @@ import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -135,6 +131,7 @@ public class QVTrToQVTc
 	private final @NonNull Resource qvtrResource;
 	private final @NonNull Resource qvtcResource;
 	protected final @NonNull QVTcoreHelper helper;
+	protected final @NonNull QVTrNameGenerator nameGenerator;
 	
 	/**
 	 * Optional configuration of the NsURI of the trace package.
@@ -147,9 +144,9 @@ public class QVTrToQVTc
 //	private final @NonNull List<@NonNull Transformation> coreTransformations = new ArrayList<@NonNull Transformation>();
 	
 	/**
-	 * Mapping from each relation to its corresponding trace class.
+	 * Mapping from each key to its corresponding identification constructor function.
 	 */
-	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relation2traceClass = new HashMap<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class>();
+	private final @NonNull Map<@NonNull Key, @NonNull Function> key2function = new HashMap<@NonNull Key, @NonNull Function>();
 
 	// Un-navigable opposites
 	//
@@ -157,6 +154,11 @@ public class QVTrToQVTc
 	// FIXME can there be two keys for the same Class?
 	//
 	private final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key> class2key = new HashMap<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Key>();
+	
+	/**
+	 * Mapping from each relation to its corresponding trace class.
+	 */
+	private final @NonNull Map<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class> relation2traceClass = new HashMap<@NonNull Relation, org.eclipse.ocl.pivot.@NonNull Class>();
 
 	/**
 	 * Map from each relation to all the expressions that call the relation.
@@ -213,6 +215,7 @@ public class QVTrToQVTc
 		this.qvtcResource = qvtcResource;
 //		this.traceResource = traceResource;
 		this.helper = new QVTcoreHelper(environmentFactory);
+		this.nameGenerator = new QVTrNameGenerator(this);
 		this.coreModel = QVTcoreFactory.eINSTANCE.createCoreModel();
         
 		// Create a cache of opposite relations and copy imports
@@ -231,31 +234,6 @@ public class QVTrToQVTc
 				this.coreModel.getOwnedImports().add((Import) EcoreUtil.copy(eo));
 			}
 		}
-	}
-	
-	/**
-	 * Add the NavigationAssignment "cVariable.cProperty := cExpression" to the cBottomPattern inverting the usage
-	 * of a Collection element assignment to "cExpression.cOppositeProperty := cVariable".
-	 */
-	public void addNavigationAssignment(@NonNull BottomPattern cBottomPattern, @NonNull Variable cVariable, @NonNull Property cProperty, @NonNull OCLExpression cExpression) {
-		if (!cProperty.isIsMany() || (cExpression.getType() instanceof CollectionType)) {
-			VariableExp cSlotVariableExp = helper.createVariableExp(cVariable);
-			NavigationAssignment cAssignment = helper.createNavigationAssignment(cSlotVariableExp, cProperty, cExpression);
-			System.out.println("addPropertyAssignment " + cAssignment);
-			assertNewAssignment(cBottomPattern.getAssignment(), cAssignment);
-			cBottomPattern.getAssignment().add(cAssignment);
-			return;
-		}
-		Property cOppositeProperty = cProperty.getOpposite();
-		if ((cOppositeProperty != null) && (cExpression instanceof VariableExp) && (!cOppositeProperty.isIsMany() || (cVariable.getType() instanceof CollectionType))) {
-			VariableExp cSlotVariableExp = (VariableExp)cExpression;
-			NavigationAssignment cAssignment = helper.createNavigationAssignment(cSlotVariableExp, cOppositeProperty, helper.createVariableExp(cVariable));
-			System.out.println("addOppositePropertyAssignment " + cAssignment);
-			assertNewAssignment(cBottomPattern.getAssignment(), cAssignment);
-			cBottomPattern.getAssignment().add(cAssignment);
-			return;
-		}
-		throw new IllegalStateException("Unsupported collection assign " + cVariable + "." + cProperty + ":=" + cExpression);
 	}
 
 	protected void analyzeInvocations(@NonNull Relation callingRelation) {
@@ -299,28 +277,6 @@ public class QVTrToQVTc
 		}
 		relation2rootVariables.put(relation, rootVariables);
 	}
-	
-	private void assertNewAssignment(@NonNull List<Assignment> oldAssignments, @NonNull NavigationAssignment newAssignment) {
-//		if ("tr.action := sm".equals(newAssignment.toString())) {
-//			newAssignment.toString();
-//		}
-		OCLExpression newSlotExpression = newAssignment.getSlotExpression();
-		if (newSlotExpression instanceof VariableExp) {
-			VariableDeclaration newVariable = ((VariableExp)newSlotExpression).getReferredVariable();
-			Property targetProperty = QVTcoreBaseUtil.getTargetProperty(newAssignment);
-			for (Assignment oldAssignment : oldAssignments) {
-				if (oldAssignment instanceof NavigationAssignment) {				
-					if (QVTcoreBaseUtil.getTargetProperty((NavigationAssignment)oldAssignment) == targetProperty) {
-						OCLExpression oldSlotExpression = ((NavigationAssignment)oldAssignment).getSlotExpression();
-						if (oldSlotExpression instanceof VariableExp) {
-							VariableDeclaration oldVariable = ((VariableExp)oldSlotExpression).getReferredVariable();
-							assert oldVariable != newVariable : "Repeated assignment: \"" + oldAssignment + "\", \"" + newAssignment + "\"";
-						}
-					}
-				}
-			}
-		}
-	}
 
 	public @Nullable Property basicGetProperty(/*@NonNull*/ Type aClass, @NonNull NamedElement rNamedElement) throws CompilerChainException {
 		/*@NonNull*/ String name = rNamedElement.getName();
@@ -340,6 +296,14 @@ public class QVTrToQVTc
 		BottomPattern bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
 		coreDomain.setBottomPattern(bottomPattern);
 		return coreDomain;
+	}
+
+	public @NonNull String createKeyFunctionName(@NonNull Key rKey) {
+		return nameGenerator.createKeyFunctionName(rKey);
+	}
+
+	public @NonNull String createKeyedVariableName(@NonNull Variable identifiedVariable) {
+		return nameGenerator.createKeyedVariableName(identifiedVariable);
 	}
 
 	/**
@@ -375,6 +339,10 @@ public class QVTrToQVTc
 		realizedVariable.setType(type);
 		realizedVariable.setIsRequired(true);
 		return realizedVariable;
+	}
+
+	public @NonNull String createTraceClassName(@NonNull Relation relation) {
+		return nameGenerator.createTraceClassName(relation);
 	}
 
 	// Save the qvtc resource
@@ -481,6 +449,10 @@ public class QVTrToQVTc
 		return class2key.get(type);
 	}
 	
+	/*public*/ @NonNull Function getKeyFunction(@NonNull Key key) {		
+		return ClassUtil.nonNullState(key2function.get(key));
+	}
+	
 	public Predicate getPredicateForRelationCallExp(RelationCallExp ri) {
 		// TODO Auto-generated method stub
 		return null;
@@ -501,7 +473,11 @@ public class QVTrToQVTc
 	 * @throws CompilerChainException if no such property
 	 */
 	protected @NonNull Property getProperty(/*@NonNull*/ Type aClass, @NonNull NamedElement rNamedElement) throws CompilerChainException {
-		return getProperty(aClass, rNamedElement.getName());
+		Property property = getProperty(aClass, rNamedElement.getName());
+		if (rNamedElement instanceof Property) {
+			assert rNamedElement == property;
+		}
+		return property;
 	}
 	protected @NonNull Property getProperty(/*@NonNull*/ Type aClass, /*@NonNull*/ String name) throws CompilerChainException {
 		assert (aClass != null) && (name != null);
@@ -539,13 +515,13 @@ public class QVTrToQVTc
 		return ClassUtil.nonNullState(relationalTransformation2tracePackage.get(relationalTransformation));
 	}
 
-/*	public @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> getUsedClasses(@NonNull TypedModel rTypedModel) {
+	public @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> getUsedClasses(@NonNull TypedModel rTypedModel) {
 		Set<org.eclipse.ocl.pivot.@NonNull Class> usedClasses = new HashSet<org.eclipse.ocl.pivot.@NonNull Class>();
 		for (org.eclipse.ocl.pivot.@NonNull Package rPackage : ClassUtil.nullFree(rTypedModel.getUsedPackage())) {
 			usedClasses.addAll(ClassUtil.nullFree(rPackage.getOwnedClasses()));
 		}
 		return usedClasses;
-	} */
+	}
 
 	// Create the top rules, and search the input model for the appropriate types, when possible?
 	public void prepare() {
@@ -583,6 +559,12 @@ public class QVTrToQVTc
 			}
 			targets.add(coreElement);
 //		}
+	}
+
+	/*public*/ void putKeyFunction(@NonNull Key rKey, @NonNull Function keyFunction) {		
+		Function oldFunction = key2function.put(rKey, keyFunction);
+		assert oldFunction == null;
+//		putTrace(traceClass, r);
 	}
 
 	/*public*/ void putRelationTrace(@NonNull Relation rRelation, org.eclipse.ocl.pivot.@NonNull Class traceClass) {		
@@ -797,6 +779,8 @@ public class QVTrToQVTc
 			List<@NonNull Rule> rules = new ArrayList<@NonNull Rule>(ClassUtil.nullFree(relationalTransformation.getRule()));
 			Collections.sort(rules, NameUtil.NAMEABLE_COMPARATOR);
 			Transformation coreTransformation = getCoreTransformation(relationalTransformation);
+			List<@NonNull Key> rKeys = new ArrayList<@NonNull Key>(ClassUtil.nullFree(relationalTransformation.getOwnedKey()));
+//			Collections.sort(keys, NameUtil.NAMEABLE_COMPARATOR);
 			List<@NonNull TypedModel> rEnforceableTypdModels = new ArrayList<@NonNull TypedModel>();
 			for (@NonNull Rule rule : rules) {
 				if (rule instanceof Relation) {
@@ -807,6 +791,19 @@ public class QVTrToQVTc
 								rEnforceableTypdModels.add(rTypedModel);
 							}
 						}
+					}
+				}
+			}
+			for (@NonNull TypedModel rTypedModel : rEnforceableTypdModels) {
+				Set<org.eclipse.ocl.pivot.@NonNull Class> usedClasses = getUsedClasses(rTypedModel);
+				for (@NonNull Key rKey : rKeys) {
+					org.eclipse.ocl.pivot.@NonNull Class identifiedClass = ClassUtil.nonNullState(rKey.getIdentifies());
+					if (usedClasses.contains(identifiedClass)) {
+						QVTrToQVTc.SYNTHESIS.println("key " + rKey);
+						KeyToFunctionForIdentification keyToMapping = new KeyToFunctionForIdentification(this, rKey);
+						Function cKeyFunction = keyToMapping.transform();
+						putKeyFunction(rKey, cKeyFunction);
+						coreTransformation.getOwnedOperations().add(cKeyFunction);
 					}
 				}
 			}
@@ -833,6 +830,7 @@ public class QVTrToQVTc
 					}
 				}
 			}
+			CompilerUtil.normalizeNameables(ClassUtil.nullFree(coreTransformation.getOwnedOperations()));
 			CompilerUtil.normalizeNameables(ClassUtil.nullFree(coreTransformation.getRule()));
 		}
 /*		for (@NonNull Transformation coreTransformation : relationalTransformation2coreTransformation.values()) {
