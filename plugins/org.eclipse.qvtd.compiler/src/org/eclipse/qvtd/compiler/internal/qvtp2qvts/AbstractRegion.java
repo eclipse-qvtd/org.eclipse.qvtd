@@ -995,27 +995,73 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 		Collections.sort(names);
 		SymbolNameBuilder s = null;
-		for (@NonNull Node headNode : getHeadNodes()) {
+		Set<@NonNull Node> bestToOneSubRegion = null;
+		Node bestNamingNode = null;
+		for (@NonNull Node node : getRealizedNodes()) {
+			Set<@NonNull Node> toOneSubRegion = computeToOneSubRegion(new HashSet<@NonNull Node>(), node);
+			if ((bestToOneSubRegion == null) || (toOneSubRegion.size() > bestToOneSubRegion.size())) {
+				bestToOneSubRegion = toOneSubRegion;
+				bestNamingNode = node;
+			}
+			else if ((bestNamingNode != null) && (toOneSubRegion.size() == bestToOneSubRegion.size())) {
+				if (ClassUtil.safeCompareTo(bestNamingNode.getCompleteClass().getName(), node.getCompleteClass().getName()) > 0) {
+					bestToOneSubRegion = toOneSubRegion;
+					bestNamingNode = node;
+				}
+			}
+		}
+		if (bestNamingNode != null) {
 			s = new SymbolNameBuilder();
 			s.appendString("m_");
-			s.appendName(headNode.getCompleteClass().getName());
-			List<String> edgeNames = new ArrayList<String>();
-			for (@NonNull NavigationEdge edge : headNode.getNavigationEdges()) {
-				String propertyName = edge.getProperty().getName();
-				edgeNames.add(edge.getTarget().isNull() ? propertyName + "0" : propertyName);
+			s.appendName(bestNamingNode.getCompleteClass().getName());
+			List<@NonNull String> headNames = new ArrayList<@NonNull String>();
+			for (@NonNull Node headNode : getHeadNodes()) {
+				String name = headNode.getCompleteClass().getName();
+				if (name != null) {
+					headNames.add(name);
+				}
 			}
-			Collections.sort(edgeNames);
-			for (String edgeName : edgeNames) {
+			for (@NonNull String headName : headNames) {
 				s.appendString("_");
-				s.appendName(edgeName);
+				s.appendString(headName);
 			}
-			break;
+		}
+		else {
+			for (@NonNull Node headNode : getHeadNodes()) {
+				s = new SymbolNameBuilder();
+				s.appendString("m_");
+				s.appendName(headNode.getCompleteClass().getName());
+				List<String> edgeNames = new ArrayList<String>();
+				for (@NonNull NavigationEdge edge : headNode.getNavigationEdges()) {
+					String propertyName = edge.getProperty().getName();
+					edgeNames.add(edge.getTarget().isNull() ? propertyName + "0" : propertyName);
+				}
+				Collections.sort(edgeNames);
+				for (String edgeName : edgeNames) {
+					s.appendString("_");
+					s.appendName(edgeName);
+				}
+				break;
+			}
 		}
 		if (s == null) {
 			s = new SymbolNameBuilder();
 			s.appendString("m_");
 		}
 		return s;
+	}
+
+	private @NonNull Set<@NonNull Node> computeToOneSubRegion(@NonNull Set<@NonNull Node> toOneSubRegion, @NonNull Node atNode) {
+		if (toOneSubRegion.add(atNode)) {
+			for (@NonNull NavigationEdge edge : atNode.getNavigationEdges()) {
+				assert edge.getSource() == atNode;
+				Property source2target = edge.getProperty();
+				if (!source2target.isIsMany() && !source2target.isIsImplicit()) {
+					computeToOneSubRegion(toOneSubRegion, edge.getTarget());
+				}
+			}
+		}
+		return toOneSubRegion;
 	}
 
 	/**
