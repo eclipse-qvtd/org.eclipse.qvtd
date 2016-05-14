@@ -16,6 +16,9 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
@@ -44,6 +47,15 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 
 	public void addTypedModel(@NonNull TypedModel pTypedModel, @NonNull CGTypedModel cgTypedModel) {
 		cgTypedModels.put(pTypedModel, cgTypedModel);
+	}
+
+	public @NonNull CGVariableExp createCGVariableExp(@NonNull CGVariable cgVariable) {
+		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
+		cgVariableExp.setTypeId(cgVariable.getTypeId());
+		cgVariableExp.setAst(cgVariable.getAst());
+		cgVariableExp.setReferredVariable(cgVariable);
+		cgVariableExp.setRequired(cgVariable.isRequired());
+		return cgVariableExp;
 	}
 
 	@Override
