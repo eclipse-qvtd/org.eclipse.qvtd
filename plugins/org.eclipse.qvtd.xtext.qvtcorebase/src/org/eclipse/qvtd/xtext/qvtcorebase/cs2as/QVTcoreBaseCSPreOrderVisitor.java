@@ -81,7 +81,6 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 			Variable pivotElement = PivotUtil.getPivot(Variable.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
-				pivotElement.setIsRequired(true);
 			}
 			return null;
 		}
