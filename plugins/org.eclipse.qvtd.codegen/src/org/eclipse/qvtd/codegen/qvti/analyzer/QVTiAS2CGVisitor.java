@@ -486,7 +486,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	//		cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
 	//		cgPropertyCallExp = cgExecutorPropertyCallExp;
 	//		cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
-			cgPropertyCallExp.setReferredProperty(asOppositeProperty);
+			cgPropertyCallExp.setReferredProperty(asProperty);
 			setAst(cgPropertyCallExp, asOppositePropertyCallExp);
 			cgPropertyCallExp.setRequired(asProperty.isIsRequired());
 			cgPropertyCallExp.setSource(cgSource);

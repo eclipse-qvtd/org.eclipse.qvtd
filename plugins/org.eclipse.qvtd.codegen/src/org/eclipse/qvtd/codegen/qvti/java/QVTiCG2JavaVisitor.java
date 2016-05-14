@@ -98,6 +98,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
@@ -339,10 +340,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
 		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
 		boolean isHazardous = false;
-		Element asPropertyAssignment = cgPropertyAssignment.getAst();
-		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asPropertyAssignment);
-		if ((asMapping != null) && (asPropertyAssignment instanceof PropertyAssignment)) {
-			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (PropertyAssignment)asPropertyAssignment);
+		Element asNavigationAssignment = cgPropertyAssignment.getAst();
+		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asNavigationAssignment);
+		if ((asMapping != null) && (asNavigationAssignment instanceof NavigationAssignment)) {
+			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (NavigationAssignment)asNavigationAssignment);
 		}
 		if (isHazardous || isIncremental) {
 			js.append("objectManager.assigned(");
@@ -366,10 +367,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
 		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
 		boolean isHazardous = false;
-		Element asPropertyAssignment = cgPropertyAssignment.getAst();
-		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asPropertyAssignment);
-		if ((asMapping != null) && (asPropertyAssignment instanceof PropertyAssignment)) {
-			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (PropertyAssignment)asPropertyAssignment);
+		Element asNavigationAssignment = cgPropertyAssignment.getAst();
+		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asNavigationAssignment);
+		if ((asMapping != null) && (asNavigationAssignment instanceof NavigationAssignment)) {
+			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (NavigationAssignment)asNavigationAssignment);
 		}
 		if (isHazardous || isIncremental) {
 			js.append("objectManager.assigned(");
@@ -1691,7 +1692,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	@Override
 	public @NonNull Boolean visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp cgPropertyCallExp) {
-		Property asProperty = cgPropertyCallExp.getReferredProperty();
+		Property asOppositeProperty = ClassUtil.nonNullModel(cgPropertyCallExp.getReferredProperty());
+		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
 		assert !asProperty.isIsImplicit();
 		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
 		//
