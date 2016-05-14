@@ -1372,11 +1372,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 		if (initExpression != null) {
-			Type initType = initExpression.getType();
-			assert variableType != null;
-			if (!initType.conformsTo(visitor.getStandardLibrary(), variableType)) {
-				initExpression = createOclAsTypeCallExp(initExpression, variableType);
-			}
+//			Type initType = initExpression.getType();
+//			assert variableType != null;
+//			if (!initType.conformsTo(visitor.getStandardLibrary(), variableType)) {		// Let CG sort it out as a predicate
+//				initExpression = createOclAsTypeCallExp(initExpression, variableType);
+//			}
 			if (initExpression.isIsRequired()) {
 				isRequired = true;
 			}

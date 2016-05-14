@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -25,6 +26,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
@@ -35,6 +37,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.CollectionValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -480,7 +483,24 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
         }
     }
 
-    public Resource saveModel(@NonNull String name, @NonNull URI modelURI, String contentType, @Nullable Map<?, ?> savingOptions) throws IOException {
+    @Override
+	public void replace(@NonNull TypedElement asVariable, @Nullable Object value) {
+		if (value == null) {
+			if (asVariable.isIsRequired()) {
+				throw new InvalidValueException("Attempted to assign null value to " + asVariable);
+			}
+		}
+		else if (!(value instanceof Throwable)){
+			Type valueType = getIdResolver().getDynamicTypeOf(value);
+			Type variableType = ClassUtil.nonNullState(asVariable.getType());
+			if (!valueType.conformsTo(getStandardLibrary(), variableType) && (variableType.getESObject() != EcorePackage.Literals.EOBJECT)) {	// FIXME EObject fudge for Adolfo's test models
+				throw new InvalidValueException("Attempted to assign incompatible value to " + asVariable);
+			}
+		}
+		super.replace(asVariable, value);
+	}
+
+	public Resource saveModel(@NonNull String name, @NonNull URI modelURI, String contentType, @Nullable Map<?, ?> savingOptions) throws IOException {
         TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
