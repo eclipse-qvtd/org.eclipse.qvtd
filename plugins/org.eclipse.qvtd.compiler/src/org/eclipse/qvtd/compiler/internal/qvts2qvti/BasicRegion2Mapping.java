@@ -1365,14 +1365,21 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private @NonNull Variable createUnrealizedVariable(@NonNull CorePattern pattern, @NonNull Node node, @Nullable OCLExpression initExpression) {
 		Type variableType = node.getCompleteClass().getPrimaryClass();
 		assert variableType != null;
-		boolean isRequired = false;
+		boolean isRequired = true;
+		for (@NonNull TypedElement typedElement : node.getTypedElements()) {
+			if (!typedElement.isIsRequired()) {
+				isRequired = false;
+			}
+		}
 		if (initExpression != null) {
 			Type initType = initExpression.getType();
 			assert variableType != null;
 			if (!initType.conformsTo(visitor.getStandardLibrary(), variableType)) {
 				initExpression = createOclAsTypeCallExp(initExpression, variableType);
 			}
-			isRequired = initExpression.isIsRequired();
+			if (initExpression.isIsRequired()) {
+				isRequired = true;
+			}
 		}
 		Variable variable = PivotUtil.createVariable(getSafeName(node), variableType, isRequired, initExpression);
 		pattern.getVariable().add(variable);
