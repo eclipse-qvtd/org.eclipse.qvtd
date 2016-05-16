@@ -209,7 +209,11 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				assert checkableBottomPattern.getEnforcementOperation().isEmpty();
 				assert checkableBottomPattern.getPredicate().isEmpty();
 				assert checkableBottomPattern.getRealizedVariable().isEmpty();
-				assert checkableBottomPattern.getVariable().isEmpty();
+//				assert checkableBottomPattern.getVariable().isEmpty();
+				for (@NonNull Variable rVar : ClassUtil.nullFree(checkableBottomPattern.getVariable())) {
+					OCLExpression ownedInit = rVar.getOwnedInit();
+					assert ownedInit == null;
+				}
 			}
 			else {
 				CoreDomain enforceableDomain = (CoreDomain)domain;

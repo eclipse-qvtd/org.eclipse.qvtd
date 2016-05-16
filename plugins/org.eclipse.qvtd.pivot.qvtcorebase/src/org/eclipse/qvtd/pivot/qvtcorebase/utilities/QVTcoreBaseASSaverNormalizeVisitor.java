@@ -11,6 +11,7 @@
 package	org.eclipse.qvtd.pivot.qvtcorebase.utilities;
 
 import java.util.Comparator;
+import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -25,20 +26,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractQVTcoreBaseASSaverNormali
 
 public class QVTcoreBaseASSaverNormalizeVisitor extends AbstractQVTcoreBaseASSaverNormalizeVisitor
 {
-	protected static final class AssignmentComparator implements Comparator<@NonNull Assignment>
-	{
-		public static final @NonNull Comparator<@NonNull Assignment> INSTANCE = new AssignmentComparator();
-
-		@Override
-		public int compare(@NonNull Assignment o1, @NonNull Assignment o2) {
-			String n1 = o1.toString();
-			String n2 = o2.toString();
-			if (n1 == null) n1 = "";
-			if (n2 == null) n2 = "";
-			return n1.compareTo(n2);
-		}
-	}
-	
 	protected static final class PredicateComparator implements Comparator<@NonNull Predicate>
 	{
 		public static final @NonNull Comparator<@NonNull Predicate> INSTANCE = new PredicateComparator();
@@ -59,7 +46,8 @@ public class QVTcoreBaseASSaverNormalizeVisitor extends AbstractQVTcoreBaseASSav
 
 	@Override
 	public @Nullable Object visitBottomPattern(@NonNull BottomPattern object) {
-		ClassUtil.sort(ClassUtil.nullFree(object.getAssignment()), AssignmentComparator.INSTANCE);
+		List<@NonNull Assignment> assignments = ClassUtil.nullFree(object.getAssignment());
+		ClassUtil.sort(assignments, new AssignmentComparator(assignments));
 		ClassUtil.sort(ClassUtil.nullFree(object.getRealizedVariable()), NameUtil.NAMEABLE_COMPARATOR);
 		return super.visitBottomPattern(object);
 	}
