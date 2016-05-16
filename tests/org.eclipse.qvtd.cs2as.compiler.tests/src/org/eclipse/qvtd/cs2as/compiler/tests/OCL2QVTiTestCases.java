@@ -26,8 +26,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.PivotTables;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
+import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
@@ -492,6 +494,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //		Scheduler.REGION_ORDER.setState(true);
 //		Scheduler.REGION_TRAVERSAL.setState(true);
 //		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
+//		AbstractTransformer.EXCEPTIONS.setState(true);
 //		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("example4");
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
@@ -646,6 +649,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//	Load QVTcAS
 		//		
 		OCL ocl = QVTbase.newInstance(OCL.NO_PROJECTS);
+		ocl.getEnvironmentFactory().setSeverity(PivotTables.STR_Variable_c_c_CompatibleInitialiserType, StatusCodes.Severity.IGNORE);
 		try {
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
