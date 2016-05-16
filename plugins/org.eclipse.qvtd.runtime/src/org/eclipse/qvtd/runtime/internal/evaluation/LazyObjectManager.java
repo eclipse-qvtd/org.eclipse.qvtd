@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -25,9 +27,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EReferenceImpl;
+import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.UnlimitedNaturalValue;
 import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractSlotState;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -48,8 +55,9 @@ public class LazyObjectManager extends AbstractObjectManager
 	protected static class EOppositeReferenceImpl extends EReferenceImpl
 	{
 		public EOppositeReferenceImpl(@NonNull EReference eReference) {
-			assert eReference.getEOpposite() == null;
+			assert eOpposite == null;
 			setEOpposite(eReference);
+			assert eOpposite == eReference;
 		}
 
 		@Override
@@ -64,7 +72,7 @@ public class LazyObjectManager extends AbstractObjectManager
 
 		@Override
 		public EClass getEContainingClass() {
-			return getEOpposite().getEReferenceType();
+			return eOpposite.getEReferenceType();
 		}
 
 		@Override
@@ -74,7 +82,7 @@ public class LazyObjectManager extends AbstractObjectManager
 
 		@Override
 		public EClass getEReferenceType() {
-			return getEOpposite().getEContainingClass();
+			return eOpposite.getEContainingClass();
 		}
 
 		@Override
@@ -83,22 +91,12 @@ public class LazyObjectManager extends AbstractObjectManager
 		}
 
 		@Override
-		public int getLowerBound() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
 		public String getName() {
-			return "«opposite»" + getEOpposite().getName();
+			return "«opposite»" + eOpposite.getName();
 		}
 
 		@Override
 		public String getNameGen() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public int getUpperBound() {
 			throw new UnsupportedOperationException();
 		}
 
@@ -123,17 +121,7 @@ public class LazyObjectManager extends AbstractObjectManager
 		}
 
 		@Override
-		public boolean isOrdered() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
 		public boolean isTransient() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public boolean isUnique() {
 			throw new UnsupportedOperationException();
 		}
 
@@ -502,7 +490,7 @@ public class LazyObjectManager extends AbstractObjectManager
 			assert ecoreValue != null;
 			@SuppressWarnings("unchecked")
 			List<? extends EObject> ecoreValues = (List<? extends EObject>)ecoreValue;
-			EReference eOppositeReference = ((EReference)eFeature).getEOpposite();
+			EReference eOppositeReference = getEOppositeReference(((EReference)eFeature));
 			for (EObject element : ecoreValues) {
 				if (element != null) {
 					Map<EStructuralFeature, SlotState> elementObjectState = getObjectState(element);
@@ -571,6 +559,19 @@ public class LazyObjectManager extends AbstractObjectManager
 			}
 		}
 		
+		protected OneToManyElementSlotState(@NonNull Object eObject, @NonNull EReference eFeature, @NonNull EReference eOppositeFeature) {
+			super(eObject, eFeature);
+			assert !eFeature.isMany();
+			if (eFeature == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
+				assert eFeature.getEOpposite() == null;
+			}
+			else {
+				assert eFeature.getEOpposite() == null;
+				assert eOppositeFeature.getEOpposite() == eFeature;
+				assert eOppositeFeature.isMany();
+			}
+		}
+		
 		public OneToManyElementSlotState(@NonNull Object eObject, @NonNull EReference eFeature, @NonNull Object eAggregator) {
 			super(eObject, eFeature, eAggregator);
 			assert !eFeature.isMany();
@@ -589,6 +590,42 @@ public class LazyObjectManager extends AbstractObjectManager
 			if (!isAssigned() && (ecoreValue != null)) {
 				EObject eOpposite = (EObject) ecoreValue;
 				EReference eOppositeReference = ((EReference)eFeature).getEOpposite();
+				if (eFeature == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
+					eOppositeReference = ((EObject)eObject).eContainmentFeature();
+					assert eOppositeReference != null;
+					SlotState aggregatorSlotState = getSlotState(eOpposite, eOppositeReference);
+					aggregatorSlotState.assigned(eOpposite, eOppositeReference, eObject);
+				}
+				else {
+					assert eOppositeReference != null;
+					OneToManyAggregatorSlotState aggregatorSlotState = (OneToManyAggregatorSlotState) getSlotState(eOpposite, eOppositeReference);
+					aggregatorSlotState.assignedElement(eOpposite, eOppositeReference, eObject);
+				}
+			}
+			assigned(LazyObjectManager.this, eObject, eFeature, ecoreValue);
+		}
+	}
+	
+	class OneToManyElementWithImplicitOppositeSlotState extends BasicSlotState
+	{
+		public OneToManyElementWithImplicitOppositeSlotState(@NonNull Object eObject, @NonNull EReference eFeature, @NonNull EReference eOppositeFeature) {
+			super(eObject, eFeature);
+			assert !eFeature.isMany();
+//			if (eFeature == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
+//				assert eFeature.getEOpposite() == null;
+//			}
+//			else {
+				assert eFeature.getEOpposite() == null;
+				assert eOppositeFeature.getEOpposite() == eFeature;
+				assert eOppositeFeature.isMany();
+//			}
+		}
+
+		@Override
+		public synchronized void assigned(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue) {
+			if (!isAssigned() && (ecoreValue != null)) {
+				EObject eOpposite = (EObject) ecoreValue;
+				EReference eOppositeReference = getEOppositeReference(((EReference)eFeature));
 				if (eFeature == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
 					eOppositeReference = ((EObject)eObject).eContainmentFeature();
 					assert eOppositeReference != null;
@@ -744,8 +781,8 @@ public class LazyObjectManager extends AbstractObjectManager
 			}
 			else {
 				EReference eReference = (EReference)eFeature;
-				EReference eOppositeReference = eReference.getEOpposite();
-				if (eOppositeReference != null) {
+				EReference eOppositeReference = getEOppositeReference(eReference);
+				if (!(eOppositeReference instanceof EOppositeReferenceImpl)) {
 //					if (ecoreValue != null) {
 //						Map<EStructuralFeature, SlotState> oppositeObjectState = getObjectState((EObject) ecoreValue);
 //						SlotState oppositeSlotState = oppositeObjectState.get(eOppositeReference);
@@ -795,8 +832,14 @@ public class LazyObjectManager extends AbstractObjectManager
 						Map<EStructuralFeature, SlotState> oppositeObjectState = getObjectState(ecoreValue);
 						slotState = oppositeObjectState.get(eOppositeReference);
 						if (slotState == null) {
-							slotState = new SimpleSlotState(eObject, eFeature, ecoreValue);
-							oppositeObjectState.put(eOppositeReference, slotState);
+							if (eOppositeReference.isMany()) {
+								slotState = new OneToManyElementWithImplicitOppositeSlotState(eObject, (EReference) eFeature, eOppositeReference);
+								oppositeObjectState.put(eOppositeReference, slotState);
+							}
+							else {
+								slotState = new SimpleSlotState(eObject, eFeature, ecoreValue);
+								oppositeObjectState.put(eOppositeReference, slotState);
+							}
 						}
 						else {
 							slotState.assigned(ecoreValue, eOppositeReference, eObject);		
@@ -866,6 +909,36 @@ public class LazyObjectManager extends AbstractObjectManager
 			EOppositeReferenceImpl eOppositeReference2 = eReference2eOppositeReference.get(eReference);
 			if (eOppositeReference2 == null) {
 				eOppositeReference2 = new EOppositeReferenceImpl(eReference);
+				EAnnotation oppositeRole = eReference.getEAnnotation(EMOFExtendedMetaData.EMOF_PROPERTY_OPPOSITE_ROLE_NAME_ANNOTATION_SOURCE);
+				if (oppositeRole != null) {
+					EMap<String, String> details = oppositeRole.getDetails();
+					String oppositeName = details.get(EMOFExtendedMetaData.EMOF_COMMENT_BODY);
+					if (oppositeName != null) {
+						eOppositeReference2.setName(oppositeName);
+						String lowerValue = details.get("lower");
+						IntegerValue lower = lowerValue != null ? ValueUtil.integerValueOf(lowerValue) :  PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_LOWER_VALUE;
+						if (lower.isInvalid()) {
+//							logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_LOWER_KEY + " " + lower);
+							lower = PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_LOWER_VALUE;
+						}
+						eOppositeReference2.setLowerBound(lower.intValue());
+						String upperValue = details.get("upper");
+						UnlimitedNaturalValue upper = upperValue != null ? ValueUtil.unlimitedNaturalValueOf(upperValue) : PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_UPPER_VALUE;
+						if (upper.isInvalid()) {
+//							logger.error("Invalid " + PROPERTY_OPPOSITE_ROLE_UPPER_KEY + " " + upper);
+							upper = PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_UPPER_VALUE;
+						}
+						eOppositeReference2.setUpperBound(upper.isUnlimited() ? -1 : upper.intValue());
+						if (!upper.equals(ValueUtil.ONE_VALUE)) {
+							String uniqueValue = details.get("unique");
+							boolean isUnique = uniqueValue != null ? Boolean.valueOf(uniqueValue) : PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_UNIQUE;
+							eOppositeReference2.setUnique(isUnique);
+							String orderedValue = details.get("ordered");
+							boolean isOrdered = orderedValue != null ? Boolean.valueOf(orderedValue) : PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_ORDERED;
+							eOppositeReference2.setOrdered(isOrdered);
+						}
+					}
+				}
 				eReference2eOppositeReference.put(eReference, eOppositeReference2);
 			}
 			eOppositeReference = eOppositeReference2;
@@ -898,7 +971,7 @@ public class LazyObjectManager extends AbstractObjectManager
 			}
 			else {
 				EReference eReference = (EReference)eFeature;
-				EReference eOppositeReference = eReference.getEOpposite();			// FIXME there is always a Pivot opposite
+				EReference eOppositeReference = getEOppositeReference(eReference);
 				if (eReference instanceof EOppositeReferenceImpl) {
 					if (eOppositeReference.isMany()) {
 						slotState = new OneToManyElementSlotState(eObject, eReference);
@@ -907,7 +980,7 @@ public class LazyObjectManager extends AbstractObjectManager
 						slotState = new OneToOneSlotState(eObject, eReference);
 					}
 				}
-				else if (eOppositeReference != null) {
+				else if (!(eOppositeReference instanceof EOppositeReferenceImpl)) {
 					if (eReference.isMany()) {
 						if (eOppositeReference.isMany()) {
 							slotState = new ManyToManySlotState(eObject, eReference);
