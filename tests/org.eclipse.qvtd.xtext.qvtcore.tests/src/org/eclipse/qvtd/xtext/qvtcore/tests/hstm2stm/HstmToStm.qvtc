@@ -1,0 +1,102 @@
+/*******************************************************************************
+ * Copyright (c) 2007,2008 Tata Consultancy Services and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     TCS - initial implementation for ModelMorf
+ *     E.D.Willink - alignment with evolved specification
+ *     Horacio Hoyos - transliterate to QVTc
+ *******************************************************************************/
+import hstmMM : 'hstmMM.emof'::hstmMM_p;
+import stmMM : 'stmMM.emof'::stmMM_p;
+import hstm2stmMM : 'hstm2stmMM.ecore'::Hstm2Stm;
+
+transformation HstmToStm {
+    hstm imports hstmMM;
+    stm imports stmMM;
+    imports hstm2stmMM;
+}
+
+query HstmToStm::StateContainsState(cState:hstmMM_p::State, mState:hstmMM_p::State ) : Boolean {
+
+    if (mState.containedInState->isEmpty()) then
+        false
+    else
+        if (mState.containedInState = cState) then
+            true
+        else
+            StateContainsState(cState, mState.containedInState)
+        endif
+    endif
+}
+
+map LStateToState in HstmToStm {
+
+    hstm (s1:State |
+        s1.containsState->isEmpty();) {
+    }
+    enforce stm () {
+        realize s2 : State |
+    }
+    where () {
+        realize s2s : HstateToState |
+        s2s.hstate := s1;
+        s2s.state := s2;
+    }
+    map {
+        where () {
+            s2s.name := s1.name;
+            s1.name := s2s.name;
+            s2s.name := s2.name;
+            s2.name := s2s.name;
+        }
+    }
+}
+
+map CStateToState in HstmToStm {
+    hstm (fs1:State, ts1:State) {
+        t1:Trans,
+        ms1:State,
+        ms2:State |
+        t1.fromState = fs1;
+        t1.toState = ts1;
+    }
+    enforce stm (ts2:State) {
+        realize fs2:State,
+        realize t2 : Trans |
+        t2.fromState := fs2;
+        t2.toState := ts2;
+    }
+    -- s2s1 -> ms1
+    -- s2s1 -> ms2
+    where (s2s1:HstateToState, s2s2:HstateToState |) {
+        realize s2s : HstateToState,
+        realize t2t : HtransToTrans |
+        ms1 := s2s1.hstate;
+        ms2 := s2s2.hstate;
+        s2s.hstate := fs1;
+        s2s.state := fs2;
+        t2t.htrans := t1;
+        t2t.trans := t2;
+    }
+    map {
+        hstm(
+            ms1 = fs1 or StateContainsState(fs1, ms1);
+            ms2 = ts1 or StateContainsState(ts1, ms2);) {}
+        where ( )
+        {
+            s2s.name := fs1.name;
+            fs1.name := s2s.name;
+            s2s.name := fs2.name;
+            fs2.name := s2s.name;
+            t2t.name := t1.name;
+            t1.name := t2t.name;
+            t2t.name := t2.name;
+            t2.name := t2t.name;
+
+        }
+    }
+}

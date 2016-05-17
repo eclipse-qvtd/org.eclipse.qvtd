@@ -324,6 +324,27 @@ public class QVTcCompilerTests extends LoadTestCase
 	}
     
     @Test
+    public void testQVTcCompiler_HstmToStm() throws Exception {
+//		AbstractTransformer.EXCEPTIONS.setState(true);
+//		AbstractTransformer.INVOCATIONS.setState(true);
+    	Scheduler.DEBUG_GRAPHS.setState(true);
+    	MyQVT myQVT = new MyQVT("hstm2stm");
+//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	try {
+	    	Transformation asTransformation = myQVT.compileTransformation("HstmToStm.qvtc", "stm");
+	    	myQVT.createInterpretedExecutor(asTransformation);
+	    	myQVT.loadInput("hstm", "SolarizedHSV.xmi");
+	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HstmToStm_trace.xmi");
+	    	myQVT.createModel("stm", "SolarizedHLS_Interpreted.xmi");
+	    	myQVT.executeTransformation();
+	    	myQVT.saveOutput("stm", "SolarizedHLS_Interpreted.xmi", "SolarizedHLS_expected.xmi", HSV2HLSNormalizer.INSTANCE);	// FIXME Bug 490497 remove normalizer
+		}
+		finally {
+	    	myQVT.dispose();
+		}
+    }
+    
+    @Test
     public void testQVTcCompiler_HSVToHLS() throws Exception {
 //		AbstractTransformer.EXCEPTIONS.setState(true);
 //		AbstractTransformer.INVOCATIONS.setState(true);
