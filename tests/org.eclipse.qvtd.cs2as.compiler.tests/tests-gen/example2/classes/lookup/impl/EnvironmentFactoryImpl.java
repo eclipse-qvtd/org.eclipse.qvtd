@@ -2,6 +2,7 @@
  */
 package example2.classes.lookup.impl;
 
+import example2.classes.lookup.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;

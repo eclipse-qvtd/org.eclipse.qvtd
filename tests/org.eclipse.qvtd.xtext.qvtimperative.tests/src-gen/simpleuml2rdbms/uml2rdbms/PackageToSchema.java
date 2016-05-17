@@ -84,8 +84,7 @@ public interface PackageToSchema extends UmlToRdbmsModelElement {
 	 * @see #setSchema(Schema)
 	 * @see simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage#getPackageToSchema_Schema()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper body='1'"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle'"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle' upper='1'"
 	 * @generated
 	 */
 	Schema getSchema();
@@ -112,8 +111,7 @@ public interface PackageToSchema extends UmlToRdbmsModelElement {
 	 * @see #setUmlPackage(simpleuml2rdbms.uml.Package)
 	 * @see simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage#getPackageToSchema_UmlPackage()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper body='1'"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle'"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle' upper='1'"
 	 * @generated
 	 */
 	simpleuml2rdbms.uml.Package getUmlPackage();

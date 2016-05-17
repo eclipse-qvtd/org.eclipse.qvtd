@@ -374,58 +374,10 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper
-		createEmofAnnotations();
 		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
-		createEmof_1Annotations();
+		createEmofAnnotations();
 		// http://www.eclipse.org/qvt#Domains
 		createQvtDomainsAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper";	
-		addAnnotation
-		  (getGraph2Graph_Graph1(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getGraph2Graph_Graph2(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getEdge2Edge_Edge1(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getEdge2Edge_Edge2(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getNode2Node_Node1(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getNode2Node_Node2(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });
 	}
 
 	/**
@@ -434,43 +386,49 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createEmof_1Annotations() {
+	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
 		  (getGraph2Graph_Graph1(), 
 		   source, 
 		   new String[] {
-			 "body", "middle1"
+			 "body", "middle1",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getGraph2Graph_Graph2(), 
 		   source, 
 		   new String[] {
-			 "body", "middle2"
+			 "body", "middle2",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getEdge2Edge_Edge1(), 
 		   source, 
 		   new String[] {
-			 "body", "middle1"
+			 "body", "middle1",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getEdge2Edge_Edge2(), 
 		   source, 
 		   new String[] {
-			 "body", "middle2"
+			 "body", "middle2",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getNode2Node_Node1(), 
 		   source, 
 		   new String[] {
-			 "body", "middle1"
+			 "body", "middle1",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getNode2Node_Node2(), 
 		   source, 
 		   new String[] {
-			 "body", "middle2"
+			 "body", "middle2",
+			 "upper", "1"
 		   });
 	}
 

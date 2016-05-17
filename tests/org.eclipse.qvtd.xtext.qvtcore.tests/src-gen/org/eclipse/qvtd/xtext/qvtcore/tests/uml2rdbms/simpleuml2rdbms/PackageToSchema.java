@@ -82,8 +82,7 @@ public interface PackageToSchema extends UmlToRdbmsModelElement {
 	 * @see #setSchema(Schema)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.Simpleuml2rdbmsPackage#getPackageToSchema_Schema()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper body='1'"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle'"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle' upper='1'"
 	 * @generated
 	 */
 	Schema getSchema();
@@ -110,8 +109,7 @@ public interface PackageToSchema extends UmlToRdbmsModelElement {
 	 * @see #setUmlPackage(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.Simpleuml2rdbmsPackage#getPackageToSchema_UmlPackage()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper body='1'"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle'"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle' upper='1'"
 	 * @generated
 	 */
 	org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package getUmlPackage();

@@ -97,8 +97,7 @@ public interface PrimitiveToName extends UmlToRdbmsModelElement {
 	 * @see #setPrimitive(PrimitiveDataType)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.Simpleuml2rdbmsPackage#getPrimitiveToName_Primitive()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper body='1'"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle'"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle' upper='1'"
 	 * @generated
 	 */
 	PrimitiveDataType getPrimitive();

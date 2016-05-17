@@ -4,19 +4,15 @@
     nsPrefix="families2Persons">
   <eClassifiers xsi:type="ecore:EClass" name="MemberToPerson" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="member" eType="ecore:EClass Families.ecore#//Member">
-      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper">
-        <details key="body" value="1"/>
-      </eAnnotations>
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="middle"/>
+        <details key="upper" value="1"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="person" eType="ecore:EClass Persons.ecore#//Person">
-      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper">
-        <details key="body" value="1"/>
-      </eAnnotations>
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="middle"/>
+        <details key="upper" value="1"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

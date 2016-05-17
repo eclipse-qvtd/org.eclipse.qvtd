@@ -95,8 +95,7 @@ public interface ClassToTable extends FromAttributeOwner, ToColumn, UmlToRdbmsMo
 	 * @return the value of the '<em>Primary Key</em>' reference.
 	 * @see #setPrimaryKey(Key)
 	 * @see simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage#getClassToTable_PrimaryKey()
-	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper body='1'"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle'"
+	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle' upper='1'"
 	 * @generated
 	 */
 	Key getPrimaryKey();
@@ -122,8 +121,7 @@ public interface ClassToTable extends FromAttributeOwner, ToColumn, UmlToRdbmsMo
 	 * @return the value of the '<em>Table</em>' reference.
 	 * @see #setTable(Table)
 	 * @see simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage#getClassToTable_Table()
-	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper body='1'"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle'"
+	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle' upper='1'"
 	 * @generated
 	 */
 	Table getTable();
@@ -149,8 +147,7 @@ public interface ClassToTable extends FromAttributeOwner, ToColumn, UmlToRdbmsMo
 	 * @return the value of the '<em>Uml Class</em>' reference.
 	 * @see #setUmlClass(simpleuml2rdbms.uml.Class)
 	 * @see simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage#getClassToTable_UmlClass()
-	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper body='1'"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle'"
+	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle' upper='1'"
 	 * @generated
 	 */
 	simpleuml2rdbms.uml.Class getUmlClass();

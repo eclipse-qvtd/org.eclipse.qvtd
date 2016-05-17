@@ -43,8 +43,7 @@ public interface Edge2Edge extends Element2Element {
 	 * @return the value of the '<em>Edge1</em>' reference.
 	 * @see #setEdge1(Edge)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simplegraph2graphPackage#getEdge2Edge_Edge1()
-	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper body='1'"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle1'"
+	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle1' upper='1'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='upperGraph'"
 	 * @generated
 	 */
@@ -71,8 +70,7 @@ public interface Edge2Edge extends Element2Element {
 	 * @return the value of the '<em>Edge2</em>' reference.
 	 * @see #setEdge2(Edge)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simplegraph2graphPackage#getEdge2Edge_Edge2()
-	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper body='1'"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle2'"
+	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle2' upper='1'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='lowerGraph'"
 	 * @generated
 	 */

@@ -724,80 +724,8 @@ public class Simpleuml2rdbmsPackageImpl extends EPackageImpl implements Simpleum
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper
-		createEmofAnnotations();
 		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
-		createEmof_1Annotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper";	
-		addAnnotation
-		  (getAssociationToForeignKey_Association(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getAssociationToForeignKey_ForeignKey(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getClassToTable_PrimaryKey(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getClassToTable_Table(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getClassToTable_UmlClass(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getFromAttribute_Attribute(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getPackageToSchema_Schema(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getPackageToSchema_UmlPackage(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getPrimitiveToName_Primitive(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getToColumn_Column(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });
+		createEmofAnnotations();
 	}
 
 	/**
@@ -806,25 +734,28 @@ public class Simpleuml2rdbmsPackageImpl extends EPackageImpl implements Simpleum
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createEmof_1Annotations() {
+	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
 		  (getAssociationToForeignKey_Association(), 
 		   source, 
 		   new String[] {
-			 "body", "middle"
+			 "body", "middle",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getAssociationToForeignKey_ForeignKey(), 
 		   source, 
 		   new String[] {
-			 "body", "middle"
+			 "body", "middle",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getClassToTable_PrimaryKey(), 
 		   source, 
 		   new String[] {
-			 "body", "middle"
+			 "body", "middle",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getClassToTable_Table(), 
@@ -836,37 +767,43 @@ public class Simpleuml2rdbmsPackageImpl extends EPackageImpl implements Simpleum
 		  (getClassToTable_UmlClass(), 
 		   source, 
 		   new String[] {
-			 "body", "middle"
+			 "body", "middle",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getFromAttribute_Attribute(), 
 		   source, 
 		   new String[] {
-			 "body", "middle"
+			 "body", "middle",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getPackageToSchema_Schema(), 
 		   source, 
 		   new String[] {
-			 "body", "middle"
+			 "body", "middle",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getPackageToSchema_UmlPackage(), 
 		   source, 
 		   new String[] {
-			 "body", "middle"
+			 "body", "middle",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getPrimitiveToName_Primitive(), 
 		   source, 
 		   new String[] {
-			 "body", "middle"
+			 "body", "middle",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getToColumn_Column(), 
 		   source, 
 		   new String[] {
-			 "body", "middle"
+			 "body", "middle",
+			 "upper", "1"
 		   });
 	}
 

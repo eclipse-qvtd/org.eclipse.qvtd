@@ -281,32 +281,8 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper
-		createEmofAnnotations();
 		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
-		createEmof_1Annotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper";	
-		addAnnotation
-		  (getMemberToPerson_Member(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });	
-		addAnnotation
-		  (getMemberToPerson_Person(), 
-		   source, 
-		   new String[] {
-			 "body", "1"
-		   });
+		createEmofAnnotations();
 	}
 
 	/**
@@ -315,19 +291,21 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createEmof_1Annotations() {
+	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
 		  (getMemberToPerson_Member(), 
 		   source, 
 		   new String[] {
-			 "body", "middle"
+			 "body", "middle",
+			 "upper", "1"
 		   });	
 		addAnnotation
 		  (getMemberToPerson_Person(), 
 		   source, 
 		   new String[] {
-			 "body", "middle"
+			 "body", "middle",
+			 "upper", "1"
 		   });
 	}
 

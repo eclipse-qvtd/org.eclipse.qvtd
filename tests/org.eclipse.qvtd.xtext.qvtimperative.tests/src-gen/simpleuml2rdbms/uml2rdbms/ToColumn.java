@@ -45,8 +45,7 @@ public interface ToColumn extends EObject {
 	 * @see #setColumn(Column)
 	 * @see simpleuml2rdbms.uml2rdbms.UML2RDBMSPackage#getToColumn_Column()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper body='1'"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle'"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle' upper='1'"
 	 * @generated
 	 */
 	Column getColumn();
