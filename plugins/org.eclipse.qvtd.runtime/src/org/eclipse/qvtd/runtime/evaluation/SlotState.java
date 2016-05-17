@@ -15,7 +15,14 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 /**
- * A SlotState identifies the assigned/not assigned state of an Object slot.
+ * A SlotState identifies the assigned/not assigned state of an Object slot. Except for debug purposes, it does not
+ * maintain the assigned values, just whether an assignment has occurred.
+ * 
+ * Derived classes handle different usages:
+ * A SimpleSlotState supports a unidirectional state such as an EAttribute.
+ * A OneToOneSlotState supports both ends of a 1:1 EReference.
+ * A OnetoManyElementSlotState and OneToManyAggregatorSlotState support the 1:N and N:1 ends of a 1:N EReference.
+ * A ManyToManySlotState supports one end of an M:N EReference.
  * 
  * @since 1.1
  * @noimplement clients should derive from AbstractSlotState
