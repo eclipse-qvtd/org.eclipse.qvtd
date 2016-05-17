@@ -69,7 +69,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "packages.base=QVTd.downloads"
 	echo "tests.base=QVTd.test.results"
 	echo "javadoc.base=QVTd.javadoc"
-	echo "version=1.0.0"
+	echo "version=0.13.0"
 	echo "downloads.area=/home/data/httpd/download.eclipse.org/mmt/qvtd"
 	echo "generateSourceReferences=true"
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.qvtd.releng.build"
-      label="QVTd Build Site"
-      version="1.0.0.qualifier"
+      label="QVTd Build Site (Incubation)"
+      version="0.13.0.qualifier"
       provider-name="%providerName"
       license-feature="org.eclipse.license"
       license-feature-version="0.0.0">
