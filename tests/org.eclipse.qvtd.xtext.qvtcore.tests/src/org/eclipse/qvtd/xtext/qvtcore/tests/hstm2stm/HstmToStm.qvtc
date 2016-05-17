@@ -58,9 +58,7 @@ map LStateToState in HstmToStm {
 
 map CStateToState in HstmToStm {
     hstm (fs1:State, ts1:State) {
-        t1:Trans,
-        ms1:State,
-        ms2:State |
+        t1:Trans |
         t1.fromState = fs1;
         t1.toState = ts1;
     }
@@ -74,7 +72,9 @@ map CStateToState in HstmToStm {
     -- s2s1 -> ms2
     where (s2s1:HstateToState, s2s2:HstateToState |) {
         realize s2s : HstateToState,
-        realize t2t : HtransToTrans |
+        realize t2t : HtransToTrans,
+        ms1:hstmMM::State,
+        ms2:hstmMM::State |
         ms1 := s2s1.hstate;
         ms2 := s2s2.hstate;
         s2s.hstate := fs1;
