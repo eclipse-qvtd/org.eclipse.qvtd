@@ -1038,23 +1038,18 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			return true;
 		}
 		Mapping asMapping = ClassUtil.nonNullState((Mapping) cgMapping.getAst());
-		if (transformationAnalysis.hasPropertyAccessDeclarations()) {
-			boolean isHazardous = false;
-			if (asMapping.getCheckedProperties().size() > 0) {
+		boolean isHazardous = false;
+		if (asMapping.getCheckedProperties().size() > 0) {
+			isHazardous = true;
+		}
+		for (Domain domain : asMapping.getDomain()) {
+			if ((domain instanceof ImperativeArea) && (((ImperativeArea)domain).getCheckedProperties().size() > 0)) {
 				isHazardous = true;
+				break;
 			}
-			for (Domain domain : asMapping.getDomain()) {
-				if ((domain instanceof ImperativeArea) && (((ImperativeArea)domain).getCheckedProperties().size() > 0)) {
-					isHazardous = true;
-					break;
-				}
-			}
-			assert isHazardous == transformationAnalysis.isHazardous(asMapping);
-			return isHazardous;
 		}
-		else {
-			return transformationAnalysis.isHazardous(asMapping);
-		}
+		assert isHazardous == transformationAnalysis.isHazardous(asMapping);
+		return isHazardous;
 	}
 
 	@Override

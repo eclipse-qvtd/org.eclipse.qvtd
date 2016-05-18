@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -20,12 +19,10 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -135,11 +132,6 @@ public class QVTiTransformationAnalysis
 	 * Map of all oclContainer() accesses.
 	 */
 	private final @NonNull Map<Type, List<Type>> parentClass2childClasses = new HashMap<Type, List<Type>>();
-	
-	/**
-	 * FIXME. Legacy/new policy detection.
-	 */
-	private boolean hasPropertyAccessDeclarations = false;
 
 	public QVTiTransformationAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
 	    this.environmentFactory = environmentFactory;
@@ -303,7 +295,6 @@ public class QVTiTransformationAnalysis
 				analyzeMappingPropertyAssignments(mapping);
 				if (mapping.getCheckedProperties().size() > 0) {
 					hazardousMappings.add(mapping);
-					hasPropertyAccessDeclarations = true;
 				}
 				else {
 					for (Domain domain : mapping.getDomain()) {
@@ -311,11 +302,7 @@ public class QVTiTransformationAnalysis
 							ImperativeDomain imperativeDomain = (ImperativeDomain)domain;
 							if (imperativeDomain.getCheckedProperties().size() > 0) {
 								hazardousMappings.add(mapping);
-								hasPropertyAccessDeclarations = true;
 								break;
-							}
-							if (imperativeDomain.getEnforcedProperties().size() > 0) {
-								hasPropertyAccessDeclarations = true;
 							}
 						}
 					}
@@ -468,10 +455,6 @@ public class QVTiTransformationAnalysis
 	public @NonNull Map<Property, Integer> getSourceCaches() {
 		return sourceProperty2cacheIndex;
 	}
-	
-	public boolean hasPropertyAccessDeclarations() {
-		return hasPropertyAccessDeclarations;
-	}
 
 	public boolean hasHazardousRead(@NonNull MappingCall mappingCall) {
 		for (MappingCallBinding callBinding : mappingCall.getBinding()) {
@@ -544,31 +527,10 @@ public class QVTiTransformationAnalysis
 		return hazardousMappings.contains(mapping);
 	}
 
-	private boolean isHazardous(@NonNull Mapping asMapping, @NonNull Property asProperty) {
-		if (!isHazardous(asMapping)) {
-			return false;
-		}
-		List<org.eclipse.ocl.pivot.Class> asPolledClasses = Collections.emptyList(); //asMapping.getPolledClasses();
-		if (asPolledClasses.isEmpty()) {		// FIXME obsolete legacy backward compatibility
-			return hazardousProperties.contains(asProperty);
-		}
-		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
-		Type referencedType = asProperty.getType();
-		if (referencedType.getESObject() == EcorePackage.Literals.EOBJECT) {		// FIXME is this really right?
-			return true;
-		}
-		for (@SuppressWarnings("null")org.eclipse.ocl.pivot.@NonNull Class asPolledClass : asPolledClasses) {
-			if (referencedType.conformsTo(standardLibrary, asPolledClass)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public boolean isHazardousRead(@NonNull Mapping asMapping, @NonNull NavigationCallExp asNavigationCallExp) {
 		Property asProperty = PivotUtil.getReferredProperty(asNavigationCallExp);
 		OCLExpression asSource = asNavigationCallExp.getOwnedSource();
-		DomainUsage domainUsage = getDomainUsageAnalysis().basicGetUsage(asSource);
+		DomainUsage domainUsage = domainAnalysis.basicGetUsage(asSource);
 		if (domainUsage != null) {
 			TypedModel typedModel = domainUsage.getTypedModel(asSource);
 			if (typedModel != null) {
@@ -579,23 +541,15 @@ public class QVTiTransformationAnalysis
 			}
 		}
 		Property asOppositeProperty = asProperty.getOpposite();
-		domainUsage = getDomainUsageAnalysis().basicGetUsage(asProperty.getType());
-		if (domainUsage != null) {
-			TypedModel typedModel = domainUsage.getTypedModel(asProperty);
+		domainUsage = domainAnalysis.basicGetUsage(asProperty.getType());
+		DomainUsage domainUsage2 = domainAnalysis.basicGetUsage(asNavigationCallExp);
+		if (domainUsage2 != null) {
+			TypedModel typedModel = domainUsage2.getTypedModel(asProperty);
 			if (typedModel != null) {
 				Area area = QVTcoreBaseUtil.getArea(asMapping, typedModel);
 				if ((area instanceof ImperativeArea) && ((ImperativeArea)area).getCheckedProperties().contains(asOppositeProperty)) {
 					return true;
 				}
-			}
-		}
-		if (!hasPropertyAccessDeclarations()) {		// See Bug 481840
-			Type type = asProperty.getType();
-			if (type instanceof DataType) {
-				return isHazardous(asProperty);
-			}
-			else {
-				return isHazardous(asMapping, asProperty);
 			}
 		}
 		return false;
@@ -628,9 +582,6 @@ public class QVTiTransformationAnalysis
 					}
 				}
 			}
-		}
-		if (!hasPropertyAccessDeclarations()) {		// See Bug 481840
-			return isHazardous(asProperty);
 		}
 		return false;
 	}
