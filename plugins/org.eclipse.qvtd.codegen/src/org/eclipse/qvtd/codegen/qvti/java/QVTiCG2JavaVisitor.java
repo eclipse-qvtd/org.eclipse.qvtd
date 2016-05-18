@@ -1702,14 +1702,20 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(" = ");
 		Map<Property, String> oppositeProperties = getGlobalContext().getOppositeProperties();
 		if (oppositeProperties != null) {
+			boolean isRequired = cgPropertyCallExp.isRequired();
 			String cacheName = oppositeProperties.get(asProperty);
 			if (cacheName != null) {
-				js.appendClassReference(ClassUtil.class);
-				js.append(".nonNullState (");
+				if (isRequired) {
+					js.appendClassReference(ClassUtil.class);
+					js.append(".nonNullState (");
+				}
 				js.append(cacheName);
 				js.append(".get(");
 				js.appendValueName(source);
-				js.append("))");
+				js.append(")");
+				if (isRequired) {
+					js.append(")");
+				}
 			}
 			js.append(";\n");
 		}
