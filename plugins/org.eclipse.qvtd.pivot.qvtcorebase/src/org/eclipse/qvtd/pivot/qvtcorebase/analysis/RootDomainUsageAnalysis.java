@@ -56,7 +56,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
-public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis implements QVTcoreBaseVisitor<DomainUsage>
+public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis implements QVTcoreBaseVisitor<@NonNull DomainUsage>
 {
 	protected abstract class AbstractDomainUsage implements DomainUsage.Internal
 	{
@@ -316,11 +316,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	 * The domains in which the containing class of a property may be used.
 	 */
 	protected final @NonNull Map<@NonNull Property, @NonNull DomainUsage> property2containingClassUsage = new HashMap<@NonNull Property, @NonNull DomainUsage>();
-
-	/**
-	 * The domains in which the referred type of a property may be used.
-	 */
-	protected final @NonNull Map<@NonNull Property, @NonNull DomainUsage> property2referredTypeUsage = new HashMap<@NonNull Property, @NonNull DomainUsage>();
 	
 	/**
 	 * The nested analyses for declared operations.
@@ -474,32 +469,12 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			assert newUsage != null;
 			for (@NonNull Property property : ClassUtil.nullFree(asClass.getOwnedProperties())) {
 				property2containingClassUsage.put(property, newUsage);
-				DomainUsage referredTypeUsage = null;
-				for (Element annotation : property.getOwnedAnnotations()) {
-					if (annotation instanceof Annotation) {
-						Annotation annotation2 = (Annotation)annotation;
-						if (DomainUsage.QVT_DOMAINS_ANNOTATION_SOURCE.equals(annotation2.getName())) {
-							for (Detail detail : annotation2.getOwnedDetails()) {
-								if (DomainUsage.QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN.equals(detail.getName())) {
-									int mask = 0;
-									for (String value : detail.getValues()) {
-										Integer bit = name2bit.get(value.trim());
-										if (bit != null) {
-											mask |= 1 << bit;
-										}
-									}
-									referredTypeUsage = getValidUsage(mask);
-								}
-							}
-						}
-						
-					}
-				}
+				DomainUsage referredTypeUsage = getAnnotatedUsage(property);
 				if (referredTypeUsage == null) {
 					referredTypeUsage = visit(property.getType());
 				}
 //				System.out.println(property + " => " + referredTypeUsage);
-				property2referredTypeUsage.put(property, referredTypeUsage);
+//				property2referredTypeUsage.put(property, referredTypeUsage);
 			}
 		}
 		class2usage.put(((StandardLibraryInternal)context.getStandardLibrary()).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
@@ -573,6 +548,31 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			analysis = analyzeOperation(operation);
 		}
 		return analysis;
+	}
+
+	protected @Nullable DomainUsage getAnnotatedUsage(@NonNull Property property) {
+		DomainUsage referredTypeUsage = null;
+		for (Element annotation : property.getOwnedAnnotations()) {
+			if (annotation instanceof Annotation) {
+				Annotation annotation2 = (Annotation)annotation;
+				if (DomainUsage.QVT_DOMAINS_ANNOTATION_SOURCE.equals(annotation2.getName())) {
+					for (Detail detail : annotation2.getOwnedDetails()) {
+						if (DomainUsage.QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN.equals(detail.getName())) {
+							int mask = 0;
+							for (String value : detail.getValues()) {
+								Integer bit = name2bit.get(value.trim());
+								if (bit != null) {
+									mask |= 1 << bit;
+								}
+							}
+							referredTypeUsage = getValidUsage(mask);
+						}
+					}
+				}
+				
+			}
+		}
+		return referredTypeUsage;
 	}
 
 	protected int getAnyMask() {

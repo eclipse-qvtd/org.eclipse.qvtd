@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
@@ -23,7 +22,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 /**
  * A QVTcoreDomainUsageAnalysis identifies a constrained domain result from the DomainUsageAnalysis of an OCL AST node.
  */
-public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTcoreVisitor<DomainUsage>
+public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTcoreVisitor<@NonNull DomainUsage>
 {
 	public QVTcoreDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
@@ -42,12 +41,12 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 	}
 
 	@Override
-	public @Nullable DomainUsage visitCoreModel(@NonNull CoreModel object) {
+	public @NonNull DomainUsage visitCoreModel(@NonNull CoreModel object) {
 		return visitBaseModel(object);
 	}
 
 	@Override
-	public @Nullable DomainUsage visitMapping(@NonNull Mapping object) {
+	public @NonNull DomainUsage visitMapping(@NonNull Mapping object) {
 		DomainUsage usage = getRootAnalysis().getNoneUsage();
 		setUsage(object, usage);
 		visitRule(object);

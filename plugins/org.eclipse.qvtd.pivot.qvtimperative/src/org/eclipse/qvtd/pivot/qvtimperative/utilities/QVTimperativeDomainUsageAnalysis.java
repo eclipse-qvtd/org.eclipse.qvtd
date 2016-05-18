@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -38,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 /**
  * A QVTimperativeDomainUsageAnalysis identifies a constrained domain result from the DomainUsageAnalysis of an OCL AST node.
  */
-public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTimperativeVisitor<DomainUsage>
+public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTimperativeVisitor<@NonNull DomainUsage>
 {
 	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
@@ -50,41 +49,41 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	}
 
 	@Override
-	public @Nullable DomainUsage visitConnectionAssignment(@NonNull ConnectionAssignment object) {
+	public @NonNull DomainUsage visitConnectionAssignment(@NonNull ConnectionAssignment object) {
 		DomainUsage valueUsage = visit(object.getValue());
 		DomainUsage variableUsage = visit(object.getTargetVariable());
 		return intersection(variableUsage, valueUsage);
 	}
 
 	@Override
-	public @Nullable DomainUsage visitConnectionStatement(@NonNull ConnectionStatement object) {
+	public @NonNull DomainUsage visitConnectionStatement(@NonNull ConnectionStatement object) {
 		DomainUsage valueUsage = visit(object.getValue());
 		DomainUsage variableUsage = visit(object.getTargetVariable());
 		return intersection(variableUsage, valueUsage);
 	}
 
 	@Override
-	public @Nullable DomainUsage visitConnectionVariable(@NonNull ConnectionVariable object) {
+	public @NonNull DomainUsage visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visitVariable(object);
 	}
 
 	@Override
-	public @Nullable DomainUsage visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
+	public @NonNull DomainUsage visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
 		return visitBottomPattern(object);
 	}
 
 	@Override
-	public @Nullable DomainUsage visitImperativeDomain(@NonNull ImperativeDomain object) {
+	public @NonNull DomainUsage visitImperativeDomain(@NonNull ImperativeDomain object) {
 		return visitCoreDomain(object);
 	}
 
 	@Override
-	public @Nullable DomainUsage visitImperativeModel(@NonNull ImperativeModel object) {
+	public @NonNull DomainUsage visitImperativeModel(@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
 	}
 
 	@Override
-	public @Nullable DomainUsage visitMapping(@NonNull Mapping object) {
+	public @NonNull DomainUsage visitMapping(@NonNull Mapping object) {
 		DomainUsage usage = getNoneUsage();
 		setUsage(object, usage);
 		visitRule(object);
@@ -95,7 +94,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	}
 
 	@Override
-	public @Nullable DomainUsage visitMappingCall(@NonNull MappingCall object) {
+	public @NonNull DomainUsage visitMappingCall(@NonNull MappingCall object) {
 		for (MappingCallBinding mappingCallBinding : object.getBinding()) {
 			visit(mappingCallBinding);
 		}
@@ -103,14 +102,14 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	}
 
 	@Override
-	public @Nullable DomainUsage visitMappingCallBinding(@NonNull MappingCallBinding object) {
+	public @NonNull DomainUsage visitMappingCallBinding(@NonNull MappingCallBinding object) {
 		DomainUsage valueUsage = visit(object.getValue());
 		DomainUsage variableUsage = visit(object.getBoundVariable());
 		return intersection(valueUsage, variableUsage);
 	}
 
 	@Override
-	public @Nullable DomainUsage visitMappingLoop(@NonNull MappingLoop object) {
+	public @NonNull DomainUsage visitMappingLoop(@NonNull MappingLoop object) {
 		DomainUsage sourceUsage = visit(object.getOwnedSource());
 		for (Variable iterator : object.getOwnedIterators()) {
 			if (iterator != null) {
@@ -122,7 +121,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	}
 
 	@Override
-	public @Nullable DomainUsage visitMappingSequence(@NonNull MappingSequence object) {
+	public @NonNull DomainUsage visitMappingSequence(@NonNull MappingSequence object) {
 		for (MappingStatement mappingStatement : object.getMappingStatements()) {
 			visit(mappingStatement);
 		}
@@ -130,12 +129,12 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	}
 
 	@Override
-	public @Nullable DomainUsage visitMappingStatement(@NonNull MappingStatement object) {
+	public @NonNull DomainUsage visitMappingStatement(@NonNull MappingStatement object) {
 		return visitOCLExpression(object);
 	}
 	
 	@Override
-	public @Nullable DomainUsage visitVariableExp(@NonNull VariableExp object) {
+	public @NonNull DomainUsage visitVariableExp(@NonNull VariableExp object) {
 		StandardLibraryInternal standardLibrary = (StandardLibraryInternal) context.getStandardLibrary();
 		Type transformationType = standardLibrary.getLibraryType("Transformation");
 		if ((transformationType != null) && object.getType().conformsTo(standardLibrary, transformationType)) {
@@ -145,7 +144,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	}
 
 	@Override
-	public @Nullable DomainUsage visitVariablePredicate(@NonNull VariablePredicate object) {
+	public @NonNull DomainUsage visitVariablePredicate(@NonNull VariablePredicate object) {
 		return visitPredicate(object);
 	}
 }

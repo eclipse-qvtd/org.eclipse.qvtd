@@ -530,9 +530,9 @@ public class QVTiTransformationAnalysis
 	public boolean isHazardousRead(@NonNull Mapping asMapping, @NonNull NavigationCallExp asNavigationCallExp) {
 		Property asProperty = PivotUtil.getReferredProperty(asNavigationCallExp);
 		OCLExpression asSource = asNavigationCallExp.getOwnedSource();
-		DomainUsage domainUsage = domainAnalysis.basicGetUsage(asSource);
-		if (domainUsage != null) {
-			TypedModel typedModel = domainUsage.getTypedModel(asSource);
+		DomainUsage domainUsage1 = domainAnalysis.basicGetUsage(asSource);
+		if (domainUsage1 != null) {
+			TypedModel typedModel = domainUsage1.getTypedModel(asSource);
 			if (typedModel != null) {
 				Area area = QVTcoreBaseUtil.getArea(asMapping, typedModel);
 				if ((area instanceof ImperativeArea) && ((ImperativeArea)area).getCheckedProperties().contains(asProperty)) {
@@ -541,7 +541,6 @@ public class QVTiTransformationAnalysis
 			}
 		}
 		Property asOppositeProperty = asProperty.getOpposite();
-		domainUsage = domainAnalysis.basicGetUsage(asProperty.getType());
 		DomainUsage domainUsage2 = domainAnalysis.basicGetUsage(asNavigationCallExp);
 		if (domainUsage2 != null) {
 			TypedModel typedModel = domainUsage2.getTypedModel(asProperty);
