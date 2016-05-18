@@ -41,8 +41,6 @@ import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.junit.Before;
 import org.junit.Test;
 
-import cg._classescs2as_qvtp_qvtcas.classescs2as_qvtp_qvtcas;
-
 /**
  * @author asbh500
  * 
@@ -125,14 +123,16 @@ public class ExecutionBenchmarks extends LoadTestCase {
 			MyQVT myQVT = createQVT();
 			
 			URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-			
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model1", results);
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model2", results);
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model3", results);
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model4", results);
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model5", results);
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model6", results);
-			trackExample_CG(myQVT, classescs2as_qvtp_qvtcas.class, baseURI, "model7", results);
+			@SuppressWarnings("unchecked")
+			Class<? extends Transformer> txClass = (Class<? extends Transformer>) Class.forName("cg._classescs2as_qvtp_qvtcas.classescs2as_qvtp_qvtcas");
+			assert txClass != null;
+			trackExample_CG(myQVT, txClass, baseURI, "model1", results);
+			trackExample_CG(myQVT, txClass, baseURI, "model2", results);
+			trackExample_CG(myQVT, txClass, baseURI, "model3", results);
+			trackExample_CG(myQVT, txClass, baseURI, "model4", results);
+			trackExample_CG(myQVT, txClass, baseURI, "model5", results);
+			trackExample_CG(myQVT, txClass, baseURI, "model6", results);
+			trackExample_CG(myQVT, txClass, baseURI, "model7", results);
 			
 			myQVT.dispose();
 			
@@ -222,6 +222,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 	}
 	
 	
+	@SuppressWarnings("unused")
 	private static float mean(List<Integer> list) {
 		int result = 0; 
 		for (Integer value : list) {
