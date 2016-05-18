@@ -44,8 +44,8 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
     
     top relation PackageToTracePackage
     {
-        packageName:String[?];
-        packageURI:String[?];
+        packageName:String;
+        packageURI:String;
         domain relations
             relationsPackage:Package {
                 name = packageName,
@@ -142,24 +142,20 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
                 domain = relationDomain:RelationDomain {
                     pattern = relationDomainPattern:DomainPattern {
                         templateExpression = rootTemplateExp:TemplateExp {
-                            bindsTo = rootVariable:Variable {
-                                name = rootVariableName:String{},
-                                type = rootVariableType:Class {}
-                            }
+                            bindsTo = rootVariable:Variable {}
                         }
                     }
                 }
             };
         enforce domain core
-            traceProperty:Property {
-            	owningClass = traceClass:Class{},
-                name = rootVariableName,
-                type = rootVariableType
+            traceClass:Class{
+            	ownedProperties = traceProperty:Property{}
             };
         when {
             RelationToTraceClass(rRelation, traceClass);
         }
         where {
+            VariableToTraceClassProperty(rootVariable, traceProperty);
 --            CollectionTemplateToTraceClassProps(rootTemplateExp, traceClass);
 --            ObjectTemplateToTraceClassProps(rootTemplateExp, traceClass);
         }
@@ -181,7 +177,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
             };
         enforce domain
             core traceClass:Class {
-                ownedProperties = traceClassProperty:pivotocl::Property {
+                ownedProperties = traceClassProperty:Property {
                     name=variableName,
                     type=variableType
                 }
@@ -192,30 +188,38 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
         }
     } */
     
-/*    relation ObjectTemplateToTraceClassProps
+    relation ObjectTemplateToTraceClassProps
     {
-        variableName: String;     
         domain relations
             objectTemplateExp:ObjectTemplateExp {
                 part = propertyTemplateItem:PropertyTemplateItem {
                     value = templateExp:TemplateExp {
-                        bindsTo = templateVariable:Variable {
-                            name = variableName,
-                            type = variableType:Class {}
-                        }
+                        bindsTo = templateVariable:Variable {}
                     }
                 }
             };
         enforce domain
             core traceClass:Class {
-                ownedProperties = traceClassProperty:pivotocl::Property {
-                    name=variableName,
-                    type=variableType
-                }
+                ownedProperties = traceProperty:Property {}
             };
         where {
+--            VariableToTraceClassProperty(templateVariable, traceProperty);
 --            CollectionTemplateToTraceClassProps(templateExp, traceClass);
 --            ObjectTemplateToTraceClassProps(templateExp, traceClass);
         }
-    } */
+    }
+    
+    relation VariableToTraceClassProperty
+    {
+        domain relations
+            variable:Variable {
+                name = variableName : String{},
+                type = variableType : Class{}
+            };
+        enforce domain core
+        	traceProperty:Property {
+                name = variableName,
+	        	type = variableType
+            };
+    }
 }

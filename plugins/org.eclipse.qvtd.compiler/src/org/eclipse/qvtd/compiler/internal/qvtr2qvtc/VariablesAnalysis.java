@@ -46,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
@@ -141,12 +142,57 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 
 	/**
-	 * A VariableAnalysis accumulates the usage of a relation varaible and eventually synthesizes an appropriate core variable.
+	 * An AbstractVariableAnalysis accumulates the usage of a core or relation variable and eventually synthesizes an appropriate core variable.
 	 */
-	protected class VariableAnalysis
+	protected abstract class AbstractVariableAnalysis
+	{
+		protected final @NonNull String name;
+		
+		protected AbstractVariableAnalysis(@NonNull String name) {
+			this.name = getUniqueVariableName(name, this);
+		}
+
+		public abstract @NonNull CorePattern getCorePattern();
+	}
+
+	/**
+	 * A CoreVariableAnalysis accumulates the usage of a core variable that has no relation variable counterpart and eventually synthesizes an appropriate core variable.
+	 */
+	protected class CoreVariableAnalysis extends AbstractVariableAnalysis
+	{
+		private @NonNull Variable cVariable;
+
+		private CoreVariableAnalysis(@NonNull String name, @NonNull Type type, @Nullable OCLExpression initValue) {
+			super(name);
+			this.cVariable = createVariable(this.name, type, true, initValue);
+		}
+
+		private CoreVariableAnalysis(@NonNull String name, @NonNull Type type) {
+			super(name);
+			this.cVariable = createRealizedVariable(this.name, type);
+		}
+
+		
+		@Override
+		public @NonNull CorePattern getCorePattern() {
+			return cVariable instanceof RealizedVariable ? cMiddleBottomPattern : cMiddleGuardPattern;
+		}
+
+		public @NonNull RealizedVariable getCoreRealizedVariable() {
+			return (@NonNull RealizedVariable) cVariable;
+		}
+
+		public @NonNull Variable getCoreVariable() {
+			return cVariable;
+		}
+	}
+
+	/**
+	 * A RelationVariableAnalysis accumulates the usage of a relation variable and eventually synthesizes an appropriate core variable.
+	 */
+	protected class RelationVariableAnalysis extends AbstractVariableAnalysis
 	{
 		protected final @NonNull Variable rVariable;
-		protected final @NonNull String name;
 		private @Nullable Key rKey = null;
 		private @Nullable TemplateExp rTemplateExp = null;
 		private boolean isEnforcedBound = false;
@@ -158,17 +204,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		private boolean isWhere = false;
 		private @Nullable Variable cVariable;
 		
-		private VariableAnalysis(@NonNull Variable rVariable) {
+		private RelationVariableAnalysis(@NonNull Variable rVariable) {
+			super(ClassUtil.nonNullState(rVariable.getName()));
 			this.rVariable = rVariable;
-			this.name = getUniqueVariableName(ClassUtil.nonNullState(rVariable.getName()), this);
-		}
-		
-		/**
-		 * Add the predicate "cLeftExpression = cRightExpression" to cCorePattern.
-		 */
-		protected void addConditionPredicate(@NonNull CorePattern cCorePattern, @NonNull OCLExpression cLeftExpression, @NonNull OCLExpression cRightExpression) {
-			OperationCallExp eTerm = createOperationCallExp(cLeftExpression, "=", cRightExpression);
-			addPredicate(cCorePattern, eTerm);
 		}
 		
 		/**
@@ -189,7 +227,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			if (!targetProperty.isIsMany() || (cExpression.getType() instanceof CollectionType)) {
 				VariableExp cSlotVariableExp = createVariableExp(cVariable2);
 				NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, targetProperty, cExpression);
-				QVTr2QVTc.SYNTHESIS.println("addPropertyAssignment " + cAssignment);
+				QVTr2QVTc.SYNTHESIS.println("  addPropertyAssignment " + cAssignment);
 				assertNewAssignment(cMiddleBottomPattern.getAssignment(), cAssignment);
 				cMiddleBottomPattern.getAssignment().add(cAssignment);
 				return;
@@ -198,18 +236,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			if ((cOppositeProperty != null) && (cExpression instanceof VariableExp) && (!cOppositeProperty.isIsMany() || (cVariable2.getType() instanceof CollectionType))) {
 				VariableExp cSlotVariableExp = (VariableExp)cExpression;
 				NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, cOppositeProperty, createVariableExp(cVariable2));
-				QVTr2QVTc.SYNTHESIS.println("addOppositePropertyAssignment " + cAssignment);
+				QVTr2QVTc.SYNTHESIS.println("  addOppositePropertyAssignment " + cAssignment);
 				assertNewAssignment(cMiddleBottomPattern.getAssignment(), cAssignment);
 				cMiddleBottomPattern.getAssignment().add(cAssignment);
 				return;
 			}
 			throw new IllegalStateException("Unsupported collection assign " + cVariable2 + " . " + targetProperty + " := " + cExpression);
-		}
-
-		protected void addPredicate(@NonNull CorePattern cCorePattern, @NonNull OCLExpression cExpression) {
-			QVTr2QVTc.SYNTHESIS.println("addPredicate " + cExpression);
-			Predicate cPredicate = createPredicate(cExpression);
-			cCorePattern.getPredicate().add(cPredicate);
 		}
 
 		public @Nullable RealizedVariable basicGetCoreRealizedVariable() {
@@ -231,18 +263,19 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			assert (cVariable instanceof RealizedVariable) == isRealized;
 		}
 		
-		private @NonNull CorePattern getCorePattern() {
+		@Override
+		public @NonNull CorePattern getCorePattern() {
 			Area cArea = null;
 			boolean isGuard = false;
 			if (isWhen) {
-//				isGuard = true;
+				isGuard = true;
 				assert isEnforcedBound || (otherBound != null);
 				cArea = isEnforcedBound ? cEnforcedDomain : otherBound;
 			}
 //				else if (isWhere) {
 //				}
 			else if (isEnforcedBound) {
-				isGuard = false; //rKey != null;
+				isGuard = isInvoked; //rKey != null;
 				cArea = rKey != null ? cMapping : cEnforcedDomain;
 			}
 			else if (otherBound != null) {
@@ -302,6 +335,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			boolean isKeyed = false;
 			if (isWhen) {
 			}
+			else if (isInvoked) {
+			}
 //				else if (isWhere) {
 //				}
 			else if (isEnforcedBound) {
@@ -313,6 +348,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		private boolean isRealized() {
 			boolean isRealized = false;
 			if (isWhen) {
+			}
+			else if (isInvoked) {
 			}
 //				else if (isWhere) {
 //				}
@@ -367,19 +404,21 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				//
 				Type type = ClassUtil.nonNullState(rVariable.getType());
 				if (isKeyed) {
-					cVariable = cVariable2 = createVariable(name, type, true, null);
+					cVariable2 = createVariable(name, type, true, null);
 					initializeKeyedVariable(cVariable2);
 					cPattern.getVariable().add(cVariable2);
 				}
 				else if (!isRealized) {
-					cVariable = cVariable2 = createVariable(name, type, rVariable.isIsRequired(), null);
+					cVariable2 = createVariable(name, type, rVariable.isIsRequired(), null);
 					cPattern.getVariable().add(cVariable2);
 				}
 				else  {
 					RealizedVariable cRealizedVariable = createRealizedVariable(name, type);
 					((BottomPattern)cPattern).getRealizedVariable().add(cRealizedVariable);
-					cVariable = cVariable2 = cRealizedVariable;
+					cVariable2 = cRealizedVariable;
 				}
+				cVariable = cVariable2;
+				cVariable2analysis.put(cVariable2, this);
 			}
 			return cVariable2;
 		}
@@ -393,6 +432,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 			if (isWhere) {
 				s.append(" WHERE");
+			}
+			if (isInvoked) {
+				s.append(" INVOKED");
 			}
 			if (isRoot) {
 				s.append(" ROOT");
@@ -422,32 +464,117 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 	protected final @NonNull CoreDomain cEnforcedDomain;
 	protected final @NonNull Mapping cMapping;
+	protected final boolean isInvoked;
 	protected final @NonNull Transformation cTransformation;
 	protected final @NonNull BottomPattern cMiddleBottomPattern;
+	protected final @NonNull GuardPattern cMiddleGuardPattern;
 	protected final @NonNull RealizedVariable cMiddleRealizedVariable;		// tcv: The trace class variable (the middle variable identifying the middle object)
 
 	/**
 	 * Map from the each core variable name in use to an originating object, typically the VariableAnalysis of a relation variable,
 	 * but the RElationCallExp of a where, the invoking relation of a call-from invocation, or this for the middle variable.
 	 */
-	private @NonNull Map<@NonNull String, @NonNull Object> name2originator = new HashMap<@NonNull String, @NonNull Object>();	
+	private @NonNull Map<@NonNull String, @NonNull AbstractVariableAnalysis> name2originator = new HashMap<@NonNull String, @NonNull AbstractVariableAnalysis>();	
 	
 	/**
 	 * The analysis of each relation variable.
 	 */
-	private final @NonNull Map<@NonNull Variable, @NonNull VariableAnalysis> rVariable2analysis = new HashMap<@NonNull Variable, @NonNull VariableAnalysis>();
+	private final @NonNull Map<@NonNull Variable, @NonNull RelationVariableAnalysis> rVariable2analysis = new HashMap<@NonNull Variable, @NonNull RelationVariableAnalysis>();
 	
-	public VariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass) {
+	/**
+	 * The analysis of each core variable.
+	 */
+	private final @NonNull Map<@NonNull Variable, @NonNull AbstractVariableAnalysis> cVariable2analysis = new HashMap<@NonNull Variable, @NonNull AbstractVariableAnalysis>();
+	
+	public VariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass, boolean isInvoked) {
 		super(qvtr2qvtc.getEnvironmentFactory());
 		this.qvtr2qvtc = qvtr2qvtc;
 		this.cEnforcedDomain = cEnforcedDomain;
 		this.cMapping = ClassUtil.nonNullState(QVTcoreUtil.getContainingMapping(cEnforcedDomain));
+		this.isInvoked = isInvoked;
 		this.cTransformation = ClassUtil.nonNullState(cMapping.getTransformation());
 		this.cMiddleBottomPattern = ClassUtil.nonNullState(cMapping.getBottomPattern());
+		this.cMiddleGuardPattern = ClassUtil.nonNullState(cMapping.getGuardPattern());
 		//
-		String middleRealizedVariableName = getUniqueVariableName("trace", this);
-		this.cMiddleRealizedVariable = createRealizedVariable(middleRealizedVariableName, traceClass);
-		cMiddleBottomPattern.getRealizedVariable().add(cMiddleRealizedVariable);
+		this.cMiddleRealizedVariable = addCoreRealizedVariable("trace", traceClass);
+	}
+
+	/**
+	 * Add the predicate "cLeftExpression = cRightExpression" to cCorePattern.
+	 */
+	protected void addConditionPredicate(@NonNull CorePattern cCorePattern, @NonNull OCLExpression cLeftExpression, @NonNull OCLExpression cRightExpression) {
+		OperationCallExp eTerm = createOperationCallExp(cLeftExpression, "=", cRightExpression);
+		addPredicate(cCorePattern, eTerm);
+	}
+	
+	/**
+	 * Create a core Variable with a name and type in the middle guard pattern. The variable has no corresponding relation variable.
+	 */
+	public @NonNull Variable addCoreGuardVariable(@NonNull String name, @NonNull Type type) {
+		CoreVariableAnalysis analysis = new CoreVariableAnalysis(name, type, null);
+		Variable cVariable = analysis.getCoreVariable();
+		cVariable2analysis.put(cVariable, analysis);
+		cMiddleGuardPattern.getVariable().add(cVariable);
+		return cVariable;
+	}
+	
+	/**
+	 * Create a core RealizedVariable with a name and type in the middle bottom pattern. The variable has no corresponding relation variable.
+	 */
+	public @NonNull RealizedVariable addCoreRealizedVariable(@NonNull String name, @NonNull Type type) {
+		CoreVariableAnalysis analysis = new CoreVariableAnalysis(name, type);
+		RealizedVariable cVariable = analysis.getCoreRealizedVariable();
+		cVariable2analysis.put(cVariable, analysis);
+		cMiddleBottomPattern.getRealizedVariable().add(cVariable);
+		return cVariable;
+	}
+	
+	public @NonNull Variable addCoreVariable(@NonNull String name, @NonNull OCLExpression mMember) {
+		CoreVariableAnalysis analysis = new CoreVariableAnalysis(name, mMember.getType(), mMember);
+		Variable cVariable = analysis.getCoreVariable();
+		cVariable2analysis.put(cVariable, analysis);
+		cMiddleGuardPattern.getVariable().add(cVariable);
+		return cVariable;
+	}
+
+	protected void addPredicate(@NonNull CorePattern cExpectedCorePattern, @NonNull OCLExpression cExpression) {
+		assert cMapping == QVTcoreUtil.getContainingMapping(cExpectedCorePattern);
+		QVTr2QVTc.SYNTHESIS.println("  addPredicate " + cExpression);
+		Set<@NonNull Variable> cReferredVariables = new HashSet<@NonNull Variable>();
+		gatherReferredVariables(cReferredVariables, cExpression);
+		boolean isGuard = true;
+		boolean isMiddle = false;
+		CorePattern cReferredPattern = null;
+		for (@NonNull Variable cReferredVariable : cReferredVariables) {
+			AbstractVariableAnalysis analysis = cVariable2analysis.get(cReferredVariable);
+			if (analysis == null) {
+				isGuard = false;
+				isMiddle = true;
+				break;
+			}
+			else {
+				CorePattern corePattern = analysis.getCorePattern();
+				if (!(corePattern instanceof GuardPattern)) {
+					isGuard = false;
+				}
+				if (cReferredPattern == null) {
+					cReferredPattern = corePattern;
+				}
+				else if (cReferredPattern != corePattern) {
+					isMiddle = true;
+				}
+			}
+		}
+		if (isMiddle) {
+			cReferredPattern = isGuard ? cMiddleGuardPattern : cMiddleBottomPattern;
+		}
+		else {
+			assert cReferredPattern != null;
+			cReferredPattern = isGuard ? cReferredPattern.getArea().getGuardPattern() : cReferredPattern.getArea().getBottomPattern();
+		}
+//		assert cExpectedCorePattern == cReferredPattern;
+		Predicate cPredicate = createPredicate(cExpression);
+		/*cExpectedCorePattern*/cReferredPattern.getPredicate().add(cPredicate);
 	}
 
 	public void addNavigationAssignment(@NonNull Variable rTargetVariable, @NonNull Property targetProperty, @NonNull OCLExpression cExpression) {
@@ -461,7 +588,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		assert (!targetProperty.isIsMany() || (cExpression.getType() instanceof CollectionType));
 		VariableExp cSlotVariableExp = createVariableExp(cMiddleRealizedVariable);
 		NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, targetProperty, cExpression);
-		QVTr2QVTc.SYNTHESIS.println("addPropertyAssignment " + cAssignment);
+		QVTr2QVTc.SYNTHESIS.println("  addPropertyAssignment " + cAssignment);
 		assertNewAssignment(cMiddleBottomPattern.getAssignment(), cAssignment);
 		cMiddleBottomPattern.getAssignment().add(cAssignment);
 	}
@@ -489,21 +616,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 	
 	public void check() {
-		for (@NonNull VariableAnalysis analysis : rVariable2analysis.values()) {
+		for (@NonNull RelationVariableAnalysis analysis : rVariable2analysis.values()) {
 			analysis.check();
 		}
 	}
-	
-	/**
-	 * Create a core Variable with a name and type in the middle guard pattern. The variable has no corresponding relation variable.
-	 * @param originator 
-	 */
-	public @NonNull Variable createCoreOnlyVariable(@NonNull String name, @NonNull Type type, @NonNull Element originator) {
-		String uniqueName = getUniqueVariableName(name, originator);
-		return createVariable(uniqueName, type, true, null);
-	}
 
-	public @NonNull Iterable<@NonNull VariableAnalysis> getAnalyses() {
+	public @NonNull Iterable<@NonNull RelationVariableAnalysis> getAnalyses() {
 		return rVariable2analysis.values();
 	}
 	
@@ -535,7 +653,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return null;
 	}
 
-	public @NonNull String getUniqueVariableName(@NonNull String name, @NonNull Object originator) {
+	public @NonNull String getUniqueVariableName(@NonNull String name, @NonNull AbstractVariableAnalysis originator) {
 		Object oldOriginator = name2originator.get(name);
 		if (oldOriginator != null) {
 			assert oldOriginator != originator;		// Lazy re-creation should not occur.
@@ -551,11 +669,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return name;
 	}
 
-	protected @NonNull VariableAnalysis getVariableAnalysis(@NonNull Variable relationVariable) {
-		VariableAnalysis analysis = rVariable2analysis.get(relationVariable);
+	protected @NonNull RelationVariableAnalysis getVariableAnalysis(@NonNull Variable relationVariable) {
+		RelationVariableAnalysis analysis = rVariable2analysis.get(relationVariable);
 		if (analysis == null) {
 			assert QVTbaseUtil.getContainingTransformation(relationVariable) instanceof RelationalTransformation;
-			analysis = new VariableAnalysis(relationVariable);
+			analysis = new RelationVariableAnalysis(relationVariable);
 			rVariable2analysis.put(relationVariable, analysis);
 		}
 		return analysis;

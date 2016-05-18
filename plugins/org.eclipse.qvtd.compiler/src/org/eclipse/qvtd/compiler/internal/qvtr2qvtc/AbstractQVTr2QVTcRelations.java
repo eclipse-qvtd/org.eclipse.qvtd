@@ -28,14 +28,14 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.VariablesAnalysis.VariableAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.InvokedRelationToMappingForEnforcement.InvokedEnforceableRelationDomain2CoreMapping;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.VariablesAnalysis.RelationVariableAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -45,7 +45,6 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
@@ -144,8 +143,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					}
 					else {
 						OCLExpression mMember = mapExpression(rMember);
-						String uniqueName = variablesAnalysis.getUniqueVariableName("member", mMember);
-						mVariable = createVariable(uniqueName, mMember);		// FIXME orphan
+						mVariable = variablesAnalysis.addCoreVariable("member", mMember);
 					}
 					rMember2mVariable.put(rMember, mVariable);
 				}
@@ -173,7 +171,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 						mParts.add(mItem);
 					}
 					CollectionLiteralExp cle = createCollectionLiteralExp(collectionType, mParts);
-					addConditionPredicate(cMiddleBottomPattern, createVariableExp(mvcte), cle);
+					variablesAnalysis.addConditionPredicate(cMiddleBottomPattern, createVariableExp(mvcte), cle);
 				}
 				else {
 					Variable mRest = variablesAnalysis.getCoreVariable(rRest);
@@ -200,7 +198,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 							OCLExpression vElement = createOperationCallExp(createVariableExp(mvcte), "at", eIndex);
 							OCLExpression rMember = rMembers.get(i);
 							Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
-							addConditionPredicate(cMiddleBottomPattern, createVariableExp(mVariable), vElement);
+							variablesAnalysis.addConditionPredicate(cMiddleBottomPattern, createVariableExp(mVariable), vElement);
 						}
 					}
 					else { 
@@ -231,7 +229,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 							OCLExpression rMember = rMembers.get(i);
 							Variable mVariable = ClassUtil.nonNullState(rMember2mVariable.get(rMember));
 							eTerm = createOperationCallExp(eTerm, "includes", createVariableExp(mVariable));
-							addPredicate(cMiddleBottomPattern, eTerm);
+							variablesAnalysis.addPredicate(cMiddleBottomPattern, eTerm);
 						}
 					}
 				}
@@ -383,7 +381,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			this.cEnforcedGuardPattern = ClassUtil.nonNullState(cEnforcedDomain.getGuardPattern());
 			this.cEnforcedBottomPattern = ClassUtil.nonNullState(cEnforcedDomain.getBottomPattern());
 			//
-			this.variablesAnalysis = new VariablesAnalysis(qvtr2qvtc, cEnforcedDomain, traceClass);
+			this.variablesAnalysis = new VariablesAnalysis(qvtr2qvtc, cEnforcedDomain, traceClass, this instanceof InvokedEnforceableRelationDomain2CoreMapping);
 			this.cMiddleRealizedVariable = variablesAnalysis.getMiddleRealizedVariable();
 //			putTrace(cMiddleRealizedVariable, cMiddleBottomPattern);
 			//
@@ -417,26 +415,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				variablesAnalysis.getVariableAnalysis(rVariable).setIsRoot();
 			}
 			//
-			variablesAnalysis.toString();			// FIXME debugging
-			for (@NonNull VariableAnalysis analysis : variablesAnalysis.getAnalyses()) {
+			QVTr2QVTc.VARIABLES.println(" In " + cMapping + "\n\t\t" + variablesAnalysis.toString().replace("\n", "\n\t\t"));
+			for (@NonNull RelationVariableAnalysis analysis : variablesAnalysis.getAnalyses()) {
 				Variable rVariable = analysis.getRelationVariable();
 				Variable cVariable = analysis.synthesize();
 				putTrace(cVariable, rVariable);
 			}
-		}
-
-		/**
-		 * Add the predicate "cLeftExpression = cRightExpression" to cCorePattern.
-		 */
-		protected void addConditionPredicate(@NonNull CorePattern cCorePattern, @NonNull OCLExpression cLeftExpression, @NonNull OCLExpression cRightExpression) {
-			OperationCallExp eTerm = createOperationCallExp(cLeftExpression, "=", cRightExpression);
-			addPredicate(cCorePattern, eTerm);
-		}
-
-		protected void addPredicate(@NonNull CorePattern cCorePattern, @NonNull OCLExpression cExpression) {
-			QVTr2QVTc.SYNTHESIS.println("addPredicate " + cExpression);
-			Predicate cPredicate = createPredicate(cExpression);
-			cCorePattern.getPredicate().add(cPredicate);
 		}
 
 		// Quad call of RDomainPatternExprToMappingXXXX
@@ -594,7 +578,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 								Variable cReferredVariable = variablesAnalysis.getCoreVariable(rReferredVariable);
 								Property cTargetProperty = qvtr2qvtc.getProperty(cReferredVariable.getType(), cReferredVariable);
 								NavigationCallExp cPropertyCallExp = createNavigationCallExp(createVariableExp(cMiddleRealizedVariable), cTargetProperty);
-								addConditionPredicate(cMiddleGuardPattern, cPropertyCallExp, createVariableExp(cReferredVariable));
+								variablesAnalysis.addConditionPredicate(cMiddleGuardPattern, cPropertyCallExp, createVariableExp(cReferredVariable));
 								cEnforcedGuardPattern.getBindsTo().add(cReferredVariable);
 							}
 						}
@@ -760,8 +744,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 							s.append(a.getReferredVariable().getName());
 						}
 						String vdId = s.toString(); */
-						Variable cCalledVariable/*vd*/ = variablesAnalysis.createCoreOnlyVariable("when_" + invokedTraceClass.getName()/* + vdId*/, invokedTraceClass, rConditionExpression);	// FIXME
-						cMiddleGuardPattern.getVariable().add(cCalledVariable);
+						String invokedName = "when_" + invokedTraceClass.getName()/* + vdId*/;
+						Variable cCalledVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable(invokedName, invokedTraceClass);	// FIXME
 						List<@NonNull Variable> rParameters = qvtr2qvtc.getRootVariables(rInvokedRelation);
 						int iSize = rArguments.size();
 						assert iSize == rParameters.size();
@@ -773,13 +757,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 							Variable cArgumentVariable/*mv*/ = variablesAnalysis.getCoreVariable(rArgumentVariable);
 							Property cCalledProperty/*pep*/ = qvtr2qvtc.getProperty(cCalledVariable.getType(), rParameter);
 							NavigationCallExp cCalledValue/*pe*/ = createNavigationCallExp(createVariableExp(cCalledVariable), cCalledProperty);
-							addConditionPredicate(cMiddleGuardPattern, cCalledValue, createVariableExp(cArgumentVariable));
+							variablesAnalysis.addConditionPredicate(cMiddleGuardPattern, cCalledValue, createVariableExp(cArgumentVariable));
 						}
 					}
 					else {
 						// body of RSimplePatternToMPattern
 						OCLExpression cConditionExpression = mapExpression(rConditionExpression);
-						addPredicate(cMiddleGuardPattern, cConditionExpression);
+						variablesAnalysis.addPredicate(cMiddleGuardPattern, cConditionExpression);
 //						Predicate mpd = createPredicate(mapExpression(rConditionExpression));		// FIXME orphan
 //						addPredicate(composedMappingGuardPattern, cConditionExpression);
 					}
@@ -793,7 +777,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		protected void mapWhereBottomPredicates(@NonNull Iterable<@NonNull Predicate> rWherePredicates) {
 			for (@NonNull Predicate rWherePredicate : rWherePredicates) {
 				OCLExpression rExpression = ClassUtil.nonNullState(rWherePredicate.getConditionExpression());
-				addPredicate(cMiddleBottomPattern, mapExpression(rExpression));
+				variablesAnalysis.addPredicate(cMiddleBottomPattern, mapExpression(rExpression));
 			}
 /*			
 			// check

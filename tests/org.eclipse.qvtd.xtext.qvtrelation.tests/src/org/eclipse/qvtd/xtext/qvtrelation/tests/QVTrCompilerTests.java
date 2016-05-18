@@ -43,6 +43,7 @@ import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.utilities.JavaSourceFileObject;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -101,6 +102,17 @@ public class QVTrCompilerTests extends LoadTestCase
 	    		uri = uri.appendFragment(fragment);
 	    	}
 			usedGenPackages.add((@NonNull GenPackage)getResourceSet().getEObject(uri, true));
+		}
+
+		public void checkOutput(@NonNull Resource outputResource, @NonNull String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
+		        URI referenceModelURI = samplesBaseUri.appendSegment(expectedFile);
+				Resource referenceResource = outputResource.getResourceSet().getResource(referenceModelURI, true);
+				assert referenceResource != null;
+				if (normalizer != null) {
+					normalizer.normalize(referenceResource);
+					normalizer.normalize(outputResource);
+				}
+		        assertSameModel(referenceResource, outputResource);
 		}
 
 		public @NonNull Transformation compileTransformation(@NonNull String testFileName, @NonNull String outputName, @NonNull String basePrefix, @NonNull String middleNsURI) throws Exception {
@@ -246,9 +258,8 @@ public class QVTrCompilerTests extends LoadTestCase
 	        }
 		}
 
-		public void saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
+		public @NonNull Resource saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
 	        URI modelURI = samplesBaseUri.appendSegment(modelFile);
-	        URI referenceModelURI = samplesBaseUri.appendSegment(expectedFile);
 			ResourceSet resourceSet = /*getResourceSet()*/environmentFactory.getMetamodelManager().getASResourceSet();
 			Resource outputResource;
 	        if (interpretedExecutor != null) {
@@ -259,13 +270,10 @@ public class QVTrCompilerTests extends LoadTestCase
 				outputResource.getContents().addAll(generatedExecutor.getTransformer().getRootEObjects(modelName));
 				outputResource.save(getSaveOptions());
 	        }
-			Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
-			assert referenceResource != null;
-			if (normalizer != null) {
-				normalizer.normalize(referenceResource);
-				normalizer.normalize(outputResource);
-			}
-	        assertSameModel(referenceResource, outputResource);
+	        if (expectedFile != null) {
+	        	checkOutput(outputResource, expectedFile, normalizer);
+	        }
+	        return outputResource;
 		}
 	}
 
@@ -391,6 +399,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		AbstractTransformer.EXCEPTIONS.setState(true);
 		AbstractTransformer.INVOCATIONS.setState(true);
  //   	QVTm2QVTp.PARTITIONING.setState(true);
+		QVTr2QVTc.SYNTHESIS.setState(true);
+		QVTr2QVTc.VARIABLES.setState(true);
     	MyQVT myQVT = new MyQVT("rel2core");
     	try {
 	    	String projectTestName = PROJECT_NAME + ".rel2core";
@@ -407,11 +417,13 @@ public class QVTrCompilerTests extends LoadTestCase
 //	    	myQVT.installClassName(projectTestName + ".PSeqToStm.PSeqToStmPackage");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
-	    	myQVT.loadInput("relations", "Rel2Core.qvtras");
+	    	myQVT.loadInput("relations", "MiniSeq2Stm.qvtras");
 	    	myQVT.executeTransformation();
 //	    	myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore",  new EcoreResourceFactoryImpl());
 //	    	myQVT.getEnvironmentFactory().getMetamodelManager().getASResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore",  new EcoreResourceFactoryImpl());
-			myQVT.saveOutput("core", "Rel2Core_CG.oclas", "Rel2Core_expected.oclas", PivotNormalizer.INSTANCE);
+			Resource outputResource = myQVT.saveOutput("core", "MiniSeq2Stm_CG.oclas", null, null);
+			myQVT.saveOutput("middle", "MiniSeq2Stm_CG_Trace.xmi", null, null);
+			myQVT.checkOutput(outputResource, "MiniSeq2Stm_expected.oclas", PivotNormalizer.INSTANCE);
 	    	//
 //	        myQVT.createGeneratedExecutor(txClass);
 //	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");

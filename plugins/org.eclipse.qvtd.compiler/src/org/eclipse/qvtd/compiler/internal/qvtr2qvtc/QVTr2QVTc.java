@@ -46,9 +46,11 @@ import org.eclipse.emf.importer.ecore.EcoreImporter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
+import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
+import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
@@ -90,6 +92,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -102,6 +105,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 public class QVTr2QVTc
 {
 	public static final @NonNull TracingOption SYNTHESIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/synthesis");
+	public static final @NonNull TracingOption VARIABLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/variables");
 
 	private class Issues {
 
@@ -496,7 +500,8 @@ public class QVTr2QVTc
 	}
 
 	public @NonNull List<@NonNull RelationCallExp> getRelationCallExpsForRelation(@NonNull Relation relation) {		
-		return ClassUtil.nonNullState(relation2invocations.get(relation));
+		List<@NonNull RelationCallExp> invocations = relation2invocations.get(relation);
+		return invocations != null ? invocations : Collections.emptyList();
 	}
 
 	public @NonNull List<@NonNull Variable> getRootVariables(@NonNull Relation relation) {
@@ -890,8 +895,9 @@ public class QVTr2QVTc
 	}
 	/**
 	 * Lazily create the name Property for a traceClass with a type.
+	 * @param isMany 
 	 */
-	/*public*/ @NonNull Property whenTraceProperty(org.eclipse.ocl.pivot.@NonNull Class traceClass, @NonNull String name, @NonNull Type type, boolean isRequired) {
+	/*public*/ @NonNull Property whenTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class traceClass, @NonNull String name, @NonNull Type type, boolean isRequired, boolean isMany) {
 		Map<@NonNull String, @NonNull Property> name2traceProperty = traceClass2name2traceProperty.get(traceClass);
 		if (name2traceProperty == null) {
 			name2traceProperty = new HashMap<@NonNull String, @NonNull Property>();
@@ -903,13 +909,24 @@ public class QVTr2QVTc
 			traceProperty.setName(name);
 			traceProperty.setType(type);
 			traceProperty.setIsRequired(isRequired);
+			if (rDomain != null) {
+				Annotation domainAnnotation = PivotFactory.eINSTANCE.createAnnotation();
+				domainAnnotation.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_SOURCE);
+				Detail domainDetail = PivotFactory.eINSTANCE.createDetail();
+				domainDetail.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN);
+				domainDetail.getValues().add(rDomain.getName());
+				domainAnnotation.getOwnedDetails().add(domainDetail);
+				traceProperty.getOwnedAnnotations().add(domainAnnotation);
+			}
 			name2traceProperty.put(name, traceProperty);
 			traceProperty.setOwningClass(traceClass);
 			if (!(type instanceof DataType)) {
 				Property oppositeProperty = PivotFactory.eINSTANCE.createProperty();
 				oppositeProperty.setName(traceClass.getName());		// FIXME unique, mutable Class
-				oppositeProperty.setType(traceClass);
-				oppositeProperty.setIsRequired(true);
+				oppositeProperty.setType(isMany ? environmentFactory.getCompleteEnvironment().getSetType(traceClass, true, null, null) : traceClass);
+				oppositeProperty.setIsRequired(isMany);
+//				oppositeProperty.setType(traceClass);
+//				oppositeProperty.setIsRequired(false);
 				oppositeProperty.setIsImplicit(true);
 				oppositeProperty.setOwningClass((org.eclipse.ocl.pivot.@NonNull Class)type);
 				traceProperty.setOpposite(oppositeProperty);

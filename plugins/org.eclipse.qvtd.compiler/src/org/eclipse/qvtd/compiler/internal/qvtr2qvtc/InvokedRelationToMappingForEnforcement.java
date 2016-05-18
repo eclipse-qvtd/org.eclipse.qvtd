@@ -104,8 +104,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 		@Override
 		protected void mapInvocation() throws CompilerChainException {
 			Type invokingTraceClass = qvtr2qvtc.getTraceClass(rInvokingRelation);
-			Variable cInvocationVariable/*vd*/ = variablesAnalysis.createCoreOnlyVariable("from_" + invokingTraceClass.getName(), invokingTraceClass, rInvokingRelation);
-			cMiddleGuardPattern.getVariable().add(cInvocationVariable);
+			Variable cInvocationVariable/*vd*/ = variablesAnalysis.addCoreGuardVariable("from_" + invokingTraceClass.getName(), invokingTraceClass);
 			Type cInvocationType = cInvocationVariable.getType();
 			assert cInvocationType == invokingTraceClass;			// FIXME
 			List<@NonNull OCLExpression> rArguments = ClassUtil.nullFree(rInvocation.getArgument());
@@ -121,7 +120,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 				Variable cParameter = variablesAnalysis.getCoreVariable(rParameter);
 				Property cProperty = qvtr2qvtc.getProperty(cInvocationType, rArgumentVariable);
 				NavigationCallExp cInvocationValue = createNavigationCallExp(createVariableExp(cInvocationVariable), cProperty);
-				addConditionPredicate(cMiddleGuardPattern, cInvocationValue, createVariableExp(cParameter));
+				variablesAnalysis.addConditionPredicate(cMiddleGuardPattern, cInvocationValue, createVariableExp(cParameter));
 			}
 		}
 	}

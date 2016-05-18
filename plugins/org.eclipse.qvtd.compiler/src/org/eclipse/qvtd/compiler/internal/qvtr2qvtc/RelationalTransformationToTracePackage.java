@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
@@ -61,22 +62,25 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		qvtr2qvtc.putRelationTrace(rRelation, traceClass);
 		traceClass.setName("T" + rRelation.getName());
 		for (@NonNull Variable rVariable : VariablesAnalysis.getMiddleDomainVariables(rRelation))  {
-			createTraceProperty(traceClass, rVariable);
+			createTraceProperty(null, traceClass, rVariable, false);
 		}
 		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
 			for (@NonNull DomainPattern rDomainPattern : ClassUtil.nullFree(((RelationDomain)rDomain).getPattern())) {
 				TemplateExp rTemplateExp = ClassUtil.nonNullState(rDomainPattern.getTemplateExpression());
-				doSubTemplateToTraceClassProps(rTemplateExp, traceClass);
+				doSubTemplateToTraceClassProps(rDomain, rTemplateExp, traceClass);
 			}
 		}
 		CompilerUtil.normalizeNameables(ClassUtil.nullFree(traceClass.getOwnedProperties()));
 		return traceClass;
 	}
 
-	private void doSubTemplateToTraceClassProps(@NonNull TemplateExp te, org.eclipse.ocl.pivot.@NonNull Class rc) {
+	/**
+	 * Returns true if there are many subtemplate matches. 
+	 */
+	private boolean doSubTemplateToTraceClassProps(@NonNull Domain rDomain, @NonNull TemplateExp te, org.eclipse.ocl.pivot.@NonNull Class rc) {
+		boolean isMany = false;
 		Variable tv = ClassUtil.nonNullState(te.getBindsTo());
 		if (te instanceof CollectionTemplateExp) {
-			createTraceProperty(rc, tv);			// ?? not required for CollectionTemplateExp's
 			CollectionTemplateExp cte = (CollectionTemplateExp) te;
 			Variable collectionVariable = cte.getBindsTo();
 			CollectionType collectionType = (CollectionType)collectionVariable.getType();
@@ -84,37 +88,46 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			int argIndex = 0;
 			for (@NonNull OCLExpression m : ClassUtil.nullFree(cte.getMember())) {
 				if (m instanceof TemplateExp) {
-					doSubTemplateToTraceClassProps((TemplateExp)m, rc);
+					if (doSubTemplateToTraceClassProps(rDomain, (TemplateExp)m, rc)) {
+						isMany = true;
+					}
 				}
 				else {
-					createTraceProperty(rc, collectionVariable.getName() + "_" + argIndex, elementType, collectionType.isIsNullFree());
+					createTraceProperty(rDomain, rc, collectionVariable.getName() + "_" + argIndex, elementType, collectionType.isIsNullFree());
 				}
 				argIndex++;
 			}
 			Variable rv = cte.getRest();
 			if (rv != null) {
-				createTraceProperty(rc, rv);
+				createTraceProperty(rDomain, rc, rv, isMany);
 			}
+			createTraceProperty(rDomain, rc, tv, isMany);			// ?? not required for CollectionTemplateExp's
 		}
 		else if (te instanceof ObjectTemplateExp) {
-			createTraceProperty(rc, tv);			// ?? not required for CollectionTemplateExp's
 			ObjectTemplateExp ote = (ObjectTemplateExp) te;
 			for (@NonNull PropertyTemplateItem pt : ClassUtil.nullFree(ote.getPart())) {
+				if (pt.getReferredProperty().isIsMany()) {
+					isMany = true;
+				}
 				OCLExpression value = ClassUtil.nonNullState(pt.getValue());
 				if (value instanceof TemplateExp) {
-					doSubTemplateToTraceClassProps((TemplateExp)value, rc);
+					if (doSubTemplateToTraceClassProps(rDomain, (TemplateExp)value, rc)) {
+						isMany = true;
+					}
 				}
 			}
+			createTraceProperty(rDomain, rc, tv, isMany);			// ?? not required for CollectionTemplateExp's
 		}
+		return isMany;
 	}
 
-	private void createTraceProperty(org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull TypedElement tv) {
+	private void createTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull TypedElement tv, boolean isMany) {
 		String vn = ClassUtil.nonNullState(tv.getName());
 		Type c = ClassUtil.nonNullState(tv.getType());
-		qvtr2qvtc.whenTraceProperty(rc, vn, c, tv.isIsRequired());
+		qvtr2qvtc.whenTraceProperty(rDomain, rc, vn, c, tv.isIsRequired(), isMany);
 	}
 
-	private void createTraceProperty(org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull String name, @NonNull Type type, boolean isRequired) {
-		qvtr2qvtc.whenTraceProperty(rc, name, type, isRequired);
+	private void createTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class rc, @NonNull String name, @NonNull Type type, boolean isRequired) {
+		qvtr2qvtc.whenTraceProperty(rDomain, rc, name, type, isRequired, false);
 	}
 }

@@ -36,3 +36,5 @@ org.eclipse.qvtd.compiler/qvts2qvti/polledProperties=false
 
 # Turn on tracing of the QVTc synthesis 
 org.eclipse.qvtd.compiler/qvtr2qvtc/synthesize=false
+# Turn on tracing of the QVTr variables analysis 
+org.eclipse.qvtd.compiler/qvtr2qvtc/variables=false
