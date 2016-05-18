@@ -32,10 +32,10 @@ import org.eclipse.qvtd.pivot.qvtrelation.Key;
  */
 public class KeyToFunctionForIdentification
 {
-	protected final @NonNull QVTrToQVTc qvtr2qvtc;
+	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 	protected final @NonNull Key rKey;
 	
-	public KeyToFunctionForIdentification(@NonNull QVTrToQVTc qvtr2qvtc, @NonNull Key rKey) {
+	public KeyToFunctionForIdentification(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Key rKey) {
 		this.qvtr2qvtc = qvtr2qvtc;
 		this.rKey = rKey;
 	}

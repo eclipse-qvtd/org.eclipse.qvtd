@@ -23,9 +23,9 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 /*public*/ class RelationalTransformationToMappingTransformation
 {	
-	protected final @NonNull QVTrToQVTc qvtr2qvtc;
+	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 
-	public RelationalTransformationToMappingTransformation(@NonNull QVTrToQVTc qvtr2qvtc) {
+	public RelationalTransformationToMappingTransformation(@NonNull QVTr2QVTc qvtr2qvtc) {
 		this.qvtr2qvtc = qvtr2qvtc;
 	}
 

@@ -434,7 +434,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 
 		protected void addPredicate(@NonNull CorePattern cCorePattern, @NonNull OCLExpression cExpression) {
-			QVTrToQVTc.SYNTHESIS.println("addPredicate " + cExpression);
+			QVTr2QVTc.SYNTHESIS.println("addPredicate " + cExpression);
 			Predicate cPredicate = createPredicate(cExpression);
 			cCorePattern.getPredicate().add(cPredicate);
 		}
@@ -883,7 +883,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 	}
 
-	protected @NonNull final QVTrToQVTc qvtr2qvtc;
+	protected @NonNull final QVTr2QVTc qvtr2qvtc;
 	// Relations
 	protected final @NonNull Relation rRelation;								// r: Parent relation of this domain
 	protected final @NonNull RelationalTransformation rTransformation;			// Parent transformation of parent relation of enforced domain
@@ -898,7 +898,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	// Core
 	protected final @NonNull Transformation cTransformation;					// mt: The transformation containing the result mapping
 
-	protected AbstractQVTr2QVTcRelations(@NonNull QVTrToQVTc qvtr2qvtc, @NonNull Relation rRelation) {
+	protected AbstractQVTr2QVTcRelations(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
 		super(qvtr2qvtc.getEnvironmentFactory());
 		this.qvtr2qvtc = qvtr2qvtc;
 		this.rRelation = rRelation;

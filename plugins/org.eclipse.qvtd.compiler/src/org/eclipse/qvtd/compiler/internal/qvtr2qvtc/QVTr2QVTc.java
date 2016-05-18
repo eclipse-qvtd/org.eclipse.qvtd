@@ -99,29 +99,29 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
-public class QVTrToQVTc
+public class QVTr2QVTc
 {
 	public static final @NonNull TracingOption SYNTHESIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/synthesis");
 
 	private class Issues {
 
-		public void addError(QVTrToQVTc qvTrToQVTc, String message,
+		public void addError(QVTr2QVTc qvTrToQVTc, String message,
 				Object object, Object object2, Throwable throwable,
 				List<Object> data) {
 			System.err.println(message);
 		}
 
-		public void addWarning(QVTrToQVTc qvTrToQVTc, String message,
+		public void addWarning(QVTr2QVTc qvTrToQVTc, String message,
 				Object object, Object object2, Throwable throwable,
 				List<Object> data) {
 			System.out.println(message);
 		}
 
-		public void addError(QVTrToQVTc qvTrToQVTc, String string) {
+		public void addError(QVTr2QVTc qvTrToQVTc, String string) {
 			System.err.println(string);
 		}
 
-		public void addWarning(QVTrToQVTc qvTrToQVTc, String string) {
+		public void addWarning(QVTr2QVTc qvTrToQVTc, String string) {
 			System.out.println(string);
 		}
 		
@@ -209,7 +209,7 @@ public class QVTrToQVTc
 	 */
 	private @NonNull Map<@NonNull Relation, @NonNull List<@NonNull Variable>> relation2rootVariables = new HashMap<@NonNull Relation, @NonNull List<@NonNull Variable>>();
 	
-	public QVTrToQVTc(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource) {	
+	public QVTr2QVTc(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource) {	
 		this.environmentFactory = environmentFactory;
 		this.qvtrResource = qvtrResource;		
 		this.qvtcResource = qvtcResource;
@@ -799,7 +799,7 @@ public class QVTrToQVTc
 				for (@NonNull Key rKey : rKeys) {
 					org.eclipse.ocl.pivot.@NonNull Class identifiedClass = ClassUtil.nonNullState(rKey.getIdentifies());
 					if (usedClasses.contains(identifiedClass)) {
-						QVTrToQVTc.SYNTHESIS.println("key " + rKey);
+						QVTr2QVTc.SYNTHESIS.println("key " + rKey);
 						KeyToFunctionForIdentification keyToMapping = new KeyToFunctionForIdentification(this, rKey);
 						Function cKeyFunction = keyToMapping.transform();
 						putKeyFunction(rKey, cKeyFunction);
@@ -811,7 +811,7 @@ public class QVTrToQVTc
 				if (rule instanceof Relation) {
 					Relation rRelation = (Relation)rule;
 					if (rRelation.isIsTopLevel()) {
-						QVTrToQVTc.SYNTHESIS.println("topLevel " + rRelation);
+						QVTr2QVTc.SYNTHESIS.println("topLevel " + rRelation);
 						TopLevelRelationToMappingForEnforcement topLevelRelationToMappingForEnforcement = new TopLevelRelationToMappingForEnforcement(this, rRelation);
 						topLevelRelationToMappingForEnforcement.transform();
 					}

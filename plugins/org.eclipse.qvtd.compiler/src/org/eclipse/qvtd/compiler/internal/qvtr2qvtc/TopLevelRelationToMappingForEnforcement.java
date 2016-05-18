@@ -113,7 +113,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 		}
 	}
 	
-	public TopLevelRelationToMappingForEnforcement(@NonNull QVTrToQVTc qvtr2qvtc, @NonNull Relation rRelation) {
+	public TopLevelRelationToMappingForEnforcement(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
 		super(qvtr2qvtc, rRelation);
 		assert rRelation.isIsTopLevel();
 	}

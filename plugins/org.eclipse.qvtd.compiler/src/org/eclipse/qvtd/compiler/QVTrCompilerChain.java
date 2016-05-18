@@ -26,7 +26,7 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrToQVTc;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.utilities.JavaSourceFileObject;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -68,7 +68,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		String traceNsURI = traceOptions != null ? traceOptions.get(TRACE_NS_URI) : null;
 		Resource cResource = createResource(qvtcURI);
 		Resource traceResource = createResource(PivotUtilInternal.getASURI(traceURI));
-    	QVTrToQVTc t = new QVTrToQVTc(environmentFactory, rResource, cResource);
+    	QVTr2QVTc t = new QVTr2QVTc(environmentFactory, rResource, cResource);
     	if (traceNsURI != null) {
     		t.setTraceNsURI(traceNsURI);
     	}

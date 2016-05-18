@@ -25,9 +25,9 @@ public class QVTrNameGenerator
 	public static final @NonNull String KEYED_INSTANCE_PROPERTY_NAME = "instance";
 	public static final @NonNull String KEY2INSTANCE_VARIABLE_NAME = "key2instance";
 
-	protected final @NonNull QVTrToQVTc qvtr2qvtc;
+	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 	
-	public QVTrNameGenerator(@NonNull QVTrToQVTc qvtr2qvtc) {
+	public QVTrNameGenerator(@NonNull QVTr2QVTc qvtr2qvtc) {
 		this.qvtr2qvtc = qvtr2qvtc;
 	}
 

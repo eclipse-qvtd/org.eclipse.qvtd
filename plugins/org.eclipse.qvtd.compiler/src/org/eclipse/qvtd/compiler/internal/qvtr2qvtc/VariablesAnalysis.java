@@ -189,7 +189,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			if (!targetProperty.isIsMany() || (cExpression.getType() instanceof CollectionType)) {
 				VariableExp cSlotVariableExp = createVariableExp(cVariable2);
 				NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, targetProperty, cExpression);
-				QVTrToQVTc.SYNTHESIS.println("addPropertyAssignment " + cAssignment);
+				QVTr2QVTc.SYNTHESIS.println("addPropertyAssignment " + cAssignment);
 				assertNewAssignment(cMiddleBottomPattern.getAssignment(), cAssignment);
 				cMiddleBottomPattern.getAssignment().add(cAssignment);
 				return;
@@ -198,7 +198,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			if ((cOppositeProperty != null) && (cExpression instanceof VariableExp) && (!cOppositeProperty.isIsMany() || (cVariable2.getType() instanceof CollectionType))) {
 				VariableExp cSlotVariableExp = (VariableExp)cExpression;
 				NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, cOppositeProperty, createVariableExp(cVariable2));
-				QVTrToQVTc.SYNTHESIS.println("addOppositePropertyAssignment " + cAssignment);
+				QVTr2QVTc.SYNTHESIS.println("addOppositePropertyAssignment " + cAssignment);
 				assertNewAssignment(cMiddleBottomPattern.getAssignment(), cAssignment);
 				cMiddleBottomPattern.getAssignment().add(cAssignment);
 				return;
@@ -207,7 +207,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 
 		protected void addPredicate(@NonNull CorePattern cCorePattern, @NonNull OCLExpression cExpression) {
-			QVTrToQVTc.SYNTHESIS.println("addPredicate " + cExpression);
+			QVTr2QVTc.SYNTHESIS.println("addPredicate " + cExpression);
 			Predicate cPredicate = createPredicate(cExpression);
 			cCorePattern.getPredicate().add(cPredicate);
 		}
@@ -419,7 +419,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 	}
 	
-	protected final @NonNull QVTrToQVTc qvtr2qvtc;
+	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 	protected final @NonNull CoreDomain cEnforcedDomain;
 	protected final @NonNull Mapping cMapping;
 	protected final @NonNull Transformation cTransformation;
@@ -437,7 +437,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	 */
 	private final @NonNull Map<@NonNull Variable, @NonNull VariableAnalysis> rVariable2analysis = new HashMap<@NonNull Variable, @NonNull VariableAnalysis>();
 	
-	public VariablesAnalysis(@NonNull QVTrToQVTc qvtr2qvtc, @NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass) {
+	public VariablesAnalysis(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull CoreDomain cEnforcedDomain, @NonNull Type traceClass) {
 		super(qvtr2qvtc.getEnvironmentFactory());
 		this.qvtr2qvtc = qvtr2qvtc;
 		this.cEnforcedDomain = cEnforcedDomain;
@@ -461,7 +461,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		assert (!targetProperty.isIsMany() || (cExpression.getType() instanceof CollectionType));
 		VariableExp cSlotVariableExp = createVariableExp(cMiddleRealizedVariable);
 		NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, targetProperty, cExpression);
-		QVTrToQVTc.SYNTHESIS.println("addPropertyAssignment " + cAssignment);
+		QVTr2QVTc.SYNTHESIS.println("addPropertyAssignment " + cAssignment);
 		assertNewAssignment(cMiddleBottomPattern.getAssignment(), cAssignment);
 		cMiddleBottomPattern.getAssignment().add(cAssignment);
 	}

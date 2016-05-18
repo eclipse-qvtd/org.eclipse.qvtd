@@ -34,9 +34,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 /*public*/ class RelationalTransformationToTracePackage
 {
-	protected final @NonNull QVTrToQVTc qvtr2qvtc;
+	protected final @NonNull QVTr2QVTc qvtr2qvtc;
 
-	public RelationalTransformationToTracePackage(@NonNull QVTrToQVTc qvtr2qvtc) {
+	public RelationalTransformationToTracePackage(@NonNull QVTr2QVTc qvtr2qvtc) {
 		this.qvtr2qvtc = qvtr2qvtc;
 	}
 

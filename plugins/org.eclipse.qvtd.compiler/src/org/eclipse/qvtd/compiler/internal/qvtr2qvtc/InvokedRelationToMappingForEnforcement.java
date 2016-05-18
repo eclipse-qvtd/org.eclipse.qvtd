@@ -126,7 +126,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 		}
 	}
 	
-	public InvokedRelationToMappingForEnforcement(@NonNull QVTrToQVTc qvtr2qvtc, @NonNull Relation rRelation) {
+	public InvokedRelationToMappingForEnforcement(@NonNull QVTr2QVTc qvtr2qvtc, @NonNull Relation rRelation) {
 		super(qvtr2qvtc, rRelation);
 		assert !rRelation.isIsTopLevel();
 	}
@@ -138,7 +138,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 	protected @NonNull List<@NonNull InvokedEnforceableRelationDomain2CoreMapping> analyze() throws CompilerChainException {
 		List<@NonNull InvokedEnforceableRelationDomain2CoreMapping> enforceableRelationDomain2coreMappings = new ArrayList<@NonNull InvokedEnforceableRelationDomain2CoreMapping>();
 		for (@NonNull RelationCallExp rInvocation : qvtr2qvtc.getRelationCallExpsForRelation(rRelation)) {
-			QVTrToQVTc.SYNTHESIS.println("invocation of " + rRelation + " from " + rInvocation);
+			QVTr2QVTc.SYNTHESIS.println("invocation of " + rRelation + " from " + rInvocation);
 			@NonNull Relation rInvokingRelation = qvtr2qvtc.getInvokingRelation(rInvocation);
 			@NonNull String rInvokingRelationName = ClassUtil.nonNullState(rInvokingRelation.getName());
 			for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
