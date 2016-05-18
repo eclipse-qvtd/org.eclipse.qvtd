@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtrelation.tests/src/org/eclipse/qvtd/xtext/qvtrelation/tests/seq2stm/MiniSeqToStm2.qvtr"
+    name="MiniSeqToStm2.qvtr">
+  <ownedPackages xmi:id="P.$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$">
+    <ownedClasses xsi:type="pivot:CollectionType" elementType="pivot:Class SeqMM.ecore.oclas#T.SeqMM.LifeLine" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SeqMM.ecore.oclas#T.SeqMM.LifeLine" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" elementType="pivot:Class SeqMM.ecore.oclas#T.SeqMM.LifeLine" name="Set" superClasses="#//@ownedPackages.0/@ownedClasses.2">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SeqMM.ecore.oclas#T.SeqMM.LifeLine" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" elementType="pivot:Class SeqMM.ecore.oclas#T.SeqMM.LifeLine" name="UniqueCollection"
+        superClasses="#//@ownedPackages.0/@ownedClasses.0">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SeqMM.ecore.oclas#T.SeqMM.LifeLine" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+  </ownedPackages>
+  <ownedPackages xmi:id="P." name="">
+    <ownedPackages xmi:id="P..TSeqToStm" name="TSeqToStm">
+      <ownedClasses xmi:id="T..TSeqToStm.TInteractionToStateMachine" name="TInteractionToStateMachine">
+        <ownedProperties xmi:id="p..TSeqToStm.TInteractionToStateMachine.s" name="s" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.StateMachine"/>
+        <ownedProperties xmi:id="p..TSeqToStm.TInteractionToStateMachine.i" name="i" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.Interaction"/>
+      </ownedClasses>
+      <ownedClasses xmi:id="T..TSeqToStm.TStateToState" name="TStateToState">
+        <ownedProperties xmi:id="p..TSeqToStm.TStateToState.s" name="s" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.StateMachine"/>
+        <ownedProperties xmi:id="p..TSeqToStm.TStateToState.set" name="set" type="#//@ownedPackages.0/@ownedClasses.1"/>
+        <ownedProperties xmi:id="p..TSeqToStm.TStateToState.st1" name="st1" type="pivot:Class SeqMM.ecore.oclas#T.SeqMM.State"/>
+        <ownedProperties xmi:id="p..TSeqToStm.TStateToState.st2" name="st2" type="pivot:Class StmcMM.ecore.oclas#T.StmcMM.State"/>
+      </ownedClasses>
+    </ownedPackages>
+  </ownedPackages>
+</pivot:Model>

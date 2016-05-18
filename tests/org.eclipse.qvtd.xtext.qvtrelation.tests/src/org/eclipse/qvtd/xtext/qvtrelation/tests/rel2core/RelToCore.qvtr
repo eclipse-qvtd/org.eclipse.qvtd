@@ -157,7 +157,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
         where {
             VariableToTraceClassProperty(rootVariable, traceProperty);
 --            CollectionTemplateToTraceClassProps(rootTemplateExp, traceClass);
---            ObjectTemplateToTraceClassProps(rootTemplateExp, traceClass);
+            ObjectTemplateToTraceClassProps(rootTemplateExp, traceClass);
         }
     }
     
@@ -203,7 +203,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCo
                 ownedProperties = traceProperty:Property {}
             };
         where {
---            VariableToTraceClassProperty(templateVariable, traceProperty);
+            VariableToTraceClassProperty(templateVariable, traceProperty);
 --            CollectionTemplateToTraceClassProps(templateExp, traceClass);
 --            ObjectTemplateToTraceClassProps(templateExp, traceClass);
         }

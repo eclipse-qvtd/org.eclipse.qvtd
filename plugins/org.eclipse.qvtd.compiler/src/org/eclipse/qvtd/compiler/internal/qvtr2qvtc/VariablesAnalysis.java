@@ -275,7 +275,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 //				else if (isWhere) {
 //				}
 			else if (isEnforcedBound) {
-				isGuard = isInvoked; //rKey != null;
+				isGuard = isInvoked && isRoot; //rKey != null;
 				cArea = rKey != null ? cMapping : cEnforcedDomain;
 			}
 			else if (otherBound != null) {
@@ -335,7 +335,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			boolean isKeyed = false;
 			if (isWhen) {
 			}
-			else if (isInvoked) {
+			else if (isInvoked && isRoot) {
 			}
 //				else if (isWhere) {
 //				}
@@ -349,7 +349,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			boolean isRealized = false;
 			if (isWhen) {
 			}
-			else if (isInvoked) {
+			else if (isInvoked && isRoot) {
 			}
 //				else if (isWhere) {
 //				}
@@ -530,7 +530,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 	
 	public @NonNull Variable addCoreVariable(@NonNull String name, @NonNull OCLExpression mMember) {
-		CoreVariableAnalysis analysis = new CoreVariableAnalysis(name, mMember.getType(), mMember);
+		CoreVariableAnalysis analysis = new CoreVariableAnalysis(name, ClassUtil.nonNullState(mMember.getType()), mMember);
 		Variable cVariable = analysis.getCoreVariable();
 		cVariable2analysis.put(cVariable, analysis);
 		cMiddleGuardPattern.getVariable().add(cVariable);
