@@ -53,7 +53,10 @@ import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -122,6 +125,56 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 		}
 	}
+	public static void gatherReferredVariablesWithDomains(@NonNull Map<@NonNull Variable, @Nullable RelationDomain> referredVariable2domain, @NonNull Element asRoot) {		
+		for (EObject eObject : new TreeIterable(asRoot, true)) {
+			if (eObject instanceof VariableExp) {
+				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
+				if (referredVariable instanceof Variable) {
+					EObject eContainer = eObject.eContainer();
+					if (eContainer instanceof RelationCallExp) {
+						RelationCallExp relationCallExp = (RelationCallExp)eContainer;
+						int argument = relationCallExp.getArgument().indexOf(eObject);
+						assert argument >= 0;
+						Relation referredRelation = ClassUtil.nonNullState(relationCallExp.getReferredRelation());
+						List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(referredRelation);
+						assert argument < rootVariables.size();
+						Variable rootVariable = rootVariables.get(argument);
+						RelationDomain relationDomain = QVTrelationUtil.getRootVariableDomain(rootVariable);
+						gatherReferredVariablesWithDomainsAdd(referredVariable2domain, (Variable)referredVariable, relationDomain);
+					}
+					else {
+						gatherReferredVariablesWithDomainsAdd(referredVariable2domain, (Variable)referredVariable, null);
+					}
+				}
+			}
+			else if (eObject instanceof Variable) {
+				gatherReferredVariablesWithDomainsAdd(referredVariable2domain, (Variable)eObject, null);
+			}
+			else if (eObject instanceof TemplateExp) {
+				Variable bindsTo = ((TemplateExp)eObject).getBindsTo();
+				if (bindsTo != null) {
+					gatherReferredVariablesWithDomainsAdd(referredVariable2domain, bindsTo, null);
+				}
+				if (eObject instanceof CollectionTemplateExp) {
+					Variable rest = ((CollectionTemplateExp)eObject).getRest();
+					if (rest != null) {
+						gatherReferredVariablesWithDomainsAdd(referredVariable2domain, rest, null);
+					}
+				}
+			}
+		}
+	}
+	private static void gatherReferredVariablesWithDomainsAdd(@NonNull Map<@NonNull Variable, @Nullable RelationDomain> referredVariable2domain,
+			@NonNull Variable variable, @Nullable RelationDomain relationDomain) {
+		if (relationDomain != null) {
+			RelationDomain oldDomain = referredVariable2domain.put(variable, relationDomain);
+			assert (oldDomain == relationDomain) || (oldDomain == null);
+		}
+		else if (!referredVariable2domain.containsKey(variable)) {
+			referredVariable2domain.put(variable, null);
+		}
+	}
+	
 	// TODO bug 453863 // ?? this is suspect for more than 2 domains. // FIXME What is 'shared'? a) any two domains b) output/any-input c) all domains
 	/**
 	 * Return the variables that are used by more than one domain of the relation and so must be middle variables.
@@ -197,11 +250,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		private @Nullable TemplateExp rTemplateExp = null;
 		private boolean isEnforcedBound = false;
 		private boolean isEnforcedReferred = false;
-		private @Nullable CoreDomain otherBound = null;
-		private boolean isOtherReferred = false;
+		private @Nullable CoreDomain cOtherBound = null;
+		private @Nullable CoreDomain cOtherReferred = null;
 		private boolean isRoot = false;
-		private boolean isWhen = false;
-		private boolean isWhere = false;
+		private @Nullable CoreDomain cWhenDomain = null;
+		private @Nullable CoreDomain cWhereDomain = null;
 		private @Nullable Variable cVariable;
 		
 		private RelationVariableAnalysis(@NonNull Variable rVariable) {
@@ -267,10 +320,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		public @NonNull CorePattern getCorePattern() {
 			Area cArea = null;
 			boolean isGuard = false;
-			if (isWhen) {
+			if (cWhenDomain != null) {
 				isGuard = true;
-				assert isEnforcedBound || (otherBound != null);
-				cArea = isEnforcedBound ? cEnforcedDomain : otherBound;
+//				assert isEnforcedBound || (otherBound != null);
+				cArea = cWhenDomain; //isEnforcedBound ? cEnforcedDomain : otherBound;
 			}
 //				else if (isWhere) {
 //				}
@@ -278,13 +331,17 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				isGuard = isInvoked && isRoot; //rKey != null;
 				cArea = rKey != null ? cMapping : cEnforcedDomain;
 			}
-			else if (otherBound != null) {
+			else if (cOtherBound != null) {
 				isGuard = isRoot;
-				cArea = otherBound;
+				cArea = cOtherBound;
 			}
-			else if (isEnforcedReferred && isOtherReferred) {
+			else if (isEnforcedReferred && (cOtherReferred != null)) {
 				isGuard = false;
 				cArea = cMapping;
+			}			
+			else if (cOtherReferred != null) {
+				isGuard = false;
+				cArea = cOtherReferred;
 			}			
 			assert cArea != null;
 			return ClassUtil.nonNullState(isGuard ? cArea.getGuardPattern() : cArea.getBottomPattern());
@@ -333,7 +390,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		
 		private boolean isKeyed() {
 			boolean isKeyed = false;
-			if (isWhen) {
+			if (cWhenDomain != null) {
 			}
 			else if (isInvoked && isRoot) {
 			}
@@ -347,7 +404,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		
 		private boolean isRealized() {
 			boolean isRealized = false;
-			if (isWhen) {
+			if (cWhenDomain != null) {
 			}
 			else if (isInvoked && isRoot) {
 			}
@@ -361,7 +418,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 		public void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @Nullable Key rKey) {
 			assert !isEnforcedBound;
-			assert this.otherBound == null;
+			assert this.cOtherBound == null;
 			assert this.rKey == null;
 			assert this.rTemplateExp == null;
 			this.isEnforcedBound = true;
@@ -377,22 +434,25 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			this.isRoot = true;
 		}
 
-		public void setIsWhen() {
-			this.isWhen = true;
+		public void setWhen(@NonNull CoreDomain cWhenDomain) {
+			assert (this.cWhenDomain == null) || (this.cWhenDomain == cWhenDomain);
+			this.cWhenDomain = cWhenDomain;
 		}
 
-		public void setIsWhere() {
-			this.isWhere = true;
+		public void setWhere(@NonNull CoreDomain cWhereDomain) {
+			assert (this.cWhereDomain == null) || (this.cWhereDomain == cWhereDomain);
+			this.cWhereDomain = cWhereDomain;
 		}
 
 		public void setOtherBound(@NonNull CoreDomain otherDomain) {
 			assert !isEnforcedBound;
-			assert this.otherBound == null;
-			this.otherBound = otherDomain;
+			assert this.cOtherBound == null;
+			this.cOtherBound = otherDomain;
 		}
 
-		public void setOtherReferred(@NonNull CoreDomain otherDomain) {
-			this.isOtherReferred = true;
+		public void setOtherReferred(@NonNull CoreDomain cOtherDomain) {
+			assert (this.cOtherReferred == null) || (this.cOtherReferred == cOtherDomain);
+			this.cOtherReferred = cOtherDomain;
 		}
 
 		public @NonNull Variable synthesize() {
@@ -427,11 +487,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		public String toString() {
 			StringBuilder s = new StringBuilder();
 			s.append(rVariable.toString());
-			if (isWhen) {
-				s.append(" WHEN");
+			if (cWhenDomain != null) {
+				s.append(" WHEN:" + cWhenDomain.getName());
 			}
-			if (isWhere) {
-				s.append(" WHERE");
+			if (cWhereDomain != null) {
+				s.append(" WHERE:" + cWhereDomain.getName());
 			}
 			if (isInvoked) {
 				s.append(" INVOKED");
@@ -448,11 +508,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			else if (isEnforcedReferred) {
 				s.append(" enforced");
 			}
-			if (otherBound != null) {
-				s.append(" OTHER");
+			if (cOtherBound != null) {
+				s.append(" OTHER:" + cOtherBound.getName());
 			}
-			else if (isOtherReferred) {
-				s.append(" other");
+			else if (cOtherReferred != null) {
+				s.append(" other:" + cOtherReferred.getName());
 			}			
 			if (rTemplateExp != null) {
 				s.append(" " + rTemplateExp);

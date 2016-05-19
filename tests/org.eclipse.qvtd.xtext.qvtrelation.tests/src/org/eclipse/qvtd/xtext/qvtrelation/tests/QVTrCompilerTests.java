@@ -59,6 +59,7 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.hstm2fstm.FlatStateMachineNormalizer;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.rel2core.PivotNormalizer;
 import org.junit.After;
 import org.junit.Before;
@@ -344,6 +345,81 @@ public class QVTrCompilerTests extends LoadTestCase
 	    	myQVT.dispose();
 		}
     } */
+
+	@Test
+    public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine() throws Exception {
+//		AbstractTransformer.EXCEPTIONS.setState(true);
+//		AbstractTransformer.INVOCATIONS.setState(true);
+    	MyQVT myQVT = new MyQVT("hstm2fstm");
+    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+    	try {
+	    	Transformation asTransformation = myQVT.compileTransformation("HierarchicalStateMachine2FlatStateMachine.qvtr", "flat", PROJECT_NAME + ".HierarchicalStateMachine2FlatStateMachine", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine");
+	    	//
+	    	myQVT.createInterpretedExecutor(asTransformation);
+	    	myQVT.loadInput("hier", "MiniModel.xmi");
+//	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HierarchicalStateMachine2FlatStateMachine_trace.xmi");
+	    	myQVT.createModel("flat", "MiniModel_Interpreted.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("flat", "MiniModel_Interpreted.xmi", "MiniModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+	    	//
+	    	myQVT.createInterpretedExecutor(asTransformation);
+	    	myQVT.loadInput("hier", "SimpleModel.xmi");
+//	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HierarchicalStateMachine2FlatStateMachine_trace.xmi");
+	    	myQVT.createModel("flat", "SimpleModel_Interpreted.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("flat", "SimpleModel_Interpreted.xmi", "SimpleModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+	    	//
+	    	myQVT.createInterpretedExecutor(asTransformation);
+	    	myQVT.loadInput("hier", "LargerModel.xmi");
+//	    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HierarchicalStateMachine2FlatStateMachine_trace.xmi");
+	    	myQVT.createModel("flat", "LargerModel_Interpreted.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("flat", "LargerModel_Interpreted.xmi", "LargerModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
+    }
+
+	@Test
+    public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_CG() throws Exception {
+		Scheduler.DEBUG_GRAPHS.setState(true);
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
+ //   	QVTm2QVTp.PARTITIONING.setState(true);
+    	MyQVT myQVT = new MyQVT("hstm2fstm");
+    	try {
+	    	String projectTestName = PROJECT_NAME + ".HierarchicalStateMachine2FlatStateMachine";
+			Transformation asTransformation = myQVT.compileTransformation("HierarchicalStateMachine2FlatStateMachine.qvtr", "flat", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine");
+			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
+	    	myQVT.installClassName(projectTestName + ".FlatStateMachine.FlatStateMachinePackage");
+	    	myQVT.installClassName(projectTestName + ".HierarchicalStateMachine.HierarchicalStateMachinePackage");
+	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "HierarchicalStateMachine2FlatStateMachine.genmodel");
+	    	//
+	        myQVT.createGeneratedExecutor(txClass);
+	    	myQVT.loadInput("hier", "MiniModel.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("flat", "MiniModel_CG.xmi", "MiniModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+	    	//
+	        myQVT.createGeneratedExecutor(txClass);
+	    	myQVT.loadInput("hier", "SimpleModel.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("flat", "SimpleModel_CG.xmi", "SimpleModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+	    	//
+	        myQVT.createGeneratedExecutor(txClass);
+	    	myQVT.loadInput("hier", "LargerModel.xmi");
+	    	myQVT.executeTransformation();
+			myQVT.saveOutput("flat", "LargerModel_CG.xmi", "LargerModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+	    	//
+//	        myQVT.createGeneratedExecutor(txClass);
+//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
+//	    	myQVT.executeTransformation();
+//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
+		}
+		finally {
+	    	myQVT.dispose();
+		}
+    }
 
 	@Test
     public void testQVTrCompiler_SeqToStm() throws Exception {

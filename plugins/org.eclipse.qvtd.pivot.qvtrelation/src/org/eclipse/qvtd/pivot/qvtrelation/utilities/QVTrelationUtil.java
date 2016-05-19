@@ -20,13 +20,16 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
+import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class QVTrelationUtil extends QVTbaseUtil
 {
@@ -41,12 +44,50 @@ public class QVTrelationUtil extends QVTbaseUtil
 		return null;
 	}
 	
-	public static @NonNull List<Variable> getRootVariables(@NonNull Relation relation) {
-		List<Variable> rootVariables = new ArrayList<Variable>();
-		for (Domain domain : relation.getDomain()) {
-			if (domain instanceof RelationDomain) {
-				rootVariables.addAll(((RelationDomain)domain).getRootVariable());
+	/**
+	 * Return the domain of a given root variable.
+	 * Throws an IllegalStateException if there is no such domain.
+	 */
+	public static @NonNull RelationDomain getRootVariableDomain(@NonNull Variable rootVariable) {
+		Relation relation = ClassUtil.nonNullState(getContainingRelation(rootVariable));
+		for (@NonNull Domain domain : ClassUtil.nullFree(relation.getDomain())) {
+			RelationDomain relationDomain = (RelationDomain)domain;
+			for (@NonNull DomainPattern domainPattern : ClassUtil.nullFree(relationDomain.getPattern())) {
+				TemplateExp templateExpression = domainPattern.getTemplateExpression();
+				if (rootVariable == templateExpression.getBindsTo()) {
+					return relationDomain;
+				}
 			}
+		}
+		throw new IllegalStateException("No RelationDomain for " + rootVariable);
+	}
+	
+	/**
+	 * Return all the root variables of relation in RelationCallExp order.
+	 */
+	public static @NonNull List<@NonNull Variable> getRootVariables(@NonNull Relation relation) {
+		List<@NonNull Variable> rootVariables = new ArrayList<@NonNull Variable>();
+		for (@NonNull Domain domain : ClassUtil.nullFree(relation.getDomain())) {
+			for (@NonNull DomainPattern domainPattern : ClassUtil.nullFree(((RelationDomain)domain).getPattern())) {
+				TemplateExp templateExpression = domainPattern.getTemplateExpression();
+				Variable rootVariable = templateExpression.getBindsTo();
+				assert rootVariable != null;
+				rootVariables.add(rootVariable);
+			}
+		}
+		return rootVariables;
+	}
+	
+	/**
+	 * Return all the root variables of relationDomain (in partial RelationCallExp order).
+	 */
+	public static @NonNull List<@NonNull Variable> getRootVariables(@NonNull RelationDomain relationDomain) {
+		List<@NonNull Variable> rootVariables = new ArrayList<@NonNull Variable>();
+		for (@NonNull DomainPattern domainPattern : ClassUtil.nullFree(relationDomain.getPattern())) {
+			TemplateExp templateExpression = domainPattern.getTemplateExpression();
+			Variable rootVariable = templateExpression.getBindsTo();
+			assert rootVariable != null;
+			rootVariables.add(rootVariable);
 		}
 		return rootVariables;
 	}

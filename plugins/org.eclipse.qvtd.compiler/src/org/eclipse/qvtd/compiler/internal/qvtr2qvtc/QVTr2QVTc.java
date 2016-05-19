@@ -57,6 +57,7 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
@@ -74,6 +75,7 @@ import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerConstants;
+import org.eclipse.qvtd.compiler.internal.common.AbstractQVTc2QVTc;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -82,6 +84,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
@@ -102,10 +105,17 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
-public class QVTr2QVTc
+public class QVTr2QVTc extends AbstractQVTc2QVTc
 {
 	public static final @NonNull TracingOption SYNTHESIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/synthesis");
 	public static final @NonNull TracingOption VARIABLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtr2qvtc/variables");
+
+	protected static class CreateVisitor extends AbstractCreateVisitor<@NonNull QVTr2QVTc>
+	{
+		public CreateVisitor(@NonNull QVTr2QVTc context) {
+			super(context);
+		}
+	}
 
 	private class Issues {
 
@@ -127,11 +137,16 @@ public class QVTr2QVTc
 
 		public void addWarning(QVTr2QVTc qvTrToQVTc, String string) {
 			System.out.println(string);
+		}		
+	}
+
+	protected static class UpdateVisitor extends AbstractUpdateVisitor<@NonNull QVTr2QVTc>
+	{
+		public UpdateVisitor(@NonNull QVTr2QVTc context) {
+			super(context);
 		}
-		
 	}
 	
-	protected final @NonNull EnvironmentFactory environmentFactory;	
 	private final @NonNull Resource qvtrResource;
 	private final @NonNull Resource qvtcResource;
 	protected final @NonNull QVTcoreHelper helper;
@@ -214,7 +229,7 @@ public class QVTr2QVTc
 	private @NonNull Map<@NonNull Relation, @NonNull List<@NonNull Variable>> relation2rootVariables = new HashMap<@NonNull Relation, @NonNull List<@NonNull Variable>>();
 	
 	public QVTr2QVTc(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource) {	
-		this.environmentFactory = environmentFactory;
+		super(environmentFactory);
 		this.qvtrResource = qvtrResource;		
 		this.qvtcResource = qvtcResource;
 //		this.traceResource = traceResource;
@@ -302,6 +317,11 @@ public class QVTr2QVTc
 		return coreDomain;
 	}
 
+	@Override
+	protected @NonNull AbstractCreateVisitor<@NonNull ?> createCreateVisitor() {
+		return new CreateVisitor(this);
+	}
+
 	public @NonNull String createKeyFunctionName(@NonNull Key rKey) {
 		return nameGenerator.createKeyFunctionName(rKey);
 	}
@@ -347,6 +367,11 @@ public class QVTr2QVTc
 
 	public @NonNull String createTraceClassName(@NonNull Relation relation) {
 		return nameGenerator.createTraceClassName(relation);
+	}
+
+	@Override
+	protected @NonNull AbstractUpdateVisitor<@NonNull ?> createUpdateVisitor() {
+		return new UpdateVisitor(this);
 	}
 
 	// Save the qvtc resource
@@ -434,10 +459,12 @@ public class QVTr2QVTc
 		return domainPattern;
 	} */
 
+	@Override
 	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		return environmentFactory;
 	}
 
+	@Override
 	public @NonNull QVTcoreHelper getHelper() {
 		return helper;
 	}
@@ -511,6 +538,15 @@ public class QVTr2QVTc
 	public @NonNull StandardLibrary getStandardLibrary() {
 		return environmentFactory.getStandardLibrary();
 	}
+
+	public @Nullable List<@NonNull Element> getGlobalTargets(@NonNull Element element) {
+		List<@NonNull Element> list = globalSource2targets.get(element);
+		if (list != null) {
+			return list;
+		}
+		@NonNull Element equivalentTarget = equivalentTarget(element);
+		return Collections.singletonList(equivalentTarget);
+	}
 	
 	/*public*/ org.eclipse.ocl.pivot.@NonNull Class getTraceClass(@NonNull Relation relation) {		
 		return ClassUtil.nonNullState(relation2traceClass.get(relation));
@@ -526,6 +562,20 @@ public class QVTr2QVTc
 			usedClasses.addAll(ClassUtil.nullFree(rPackage.getOwnedClasses()));
 		}
 		return usedClasses;
+	}
+
+	private void mapFunctions(@NonNull RelationalTransformation relationalTransformation, @NonNull Transformation coreTransformation) {
+		List<@NonNull Operation> cOperations = new ArrayList<@NonNull Operation>();
+		for (@NonNull Operation rOperation : ClassUtil.nullFree(relationalTransformation.getOwnedOperations())) {
+			Element cOperation = rOperation.accept(createVisitor);
+			if (cOperation instanceof Operation) {
+				cOperations.add((Operation) cOperation);
+			}
+		}
+		coreTransformation.getOwnedOperations().addAll(cOperations);
+		for (@NonNull Operation cOperation : cOperations) {
+			cOperation.accept(updateVisitor);
+		}
 	}
 
 	// Create the top rules, and search the input model for the appropriate types, when possible?
@@ -764,6 +814,7 @@ public class QVTr2QVTc
 	}
 
 	public void transformToCoreTransformations() throws CompilerChainException {
+		setDebugSource(qvtrResource);
 		for (@NonNull EObject eObject : qvtrResource.getContents()) {
 			if (eObject instanceof RelationModel) {
 				RelationModel relationModel = (RelationModel)eObject;
@@ -778,12 +829,18 @@ public class QVTr2QVTc
 				transformToCoreTransformationHierarchy(ClassUtil.nullFree(coreModel.getOwnedPackages()), ClassUtil.nullFree(relationModel.getOwnedPackages()));
 			}
 		}
+		StandardLibrary standardLibrary = getStandardLibrary();
 		List<@NonNull RelationalTransformation> relationalTransformations = new ArrayList<@NonNull RelationalTransformation>(relationalTransformation2coreTransformation.keySet());
 		Collections.sort(relationalTransformations, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull RelationalTransformation relationalTransformation : relationalTransformations) {
 			List<@NonNull Rule> rules = new ArrayList<@NonNull Rule>(ClassUtil.nullFree(relationalTransformation.getRule()));
 			Collections.sort(rules, NameUtil.NAMEABLE_COMPARATOR);
 			Transformation coreTransformation = getCoreTransformation(relationalTransformation);
+			pushScope(coreTransformation);
+			Variable cThis = QVTbaseUtil.getContextVariable(standardLibrary, coreTransformation);
+			Variable rThis = QVTbaseUtil.getContextVariable(standardLibrary, relationalTransformation);
+//			putGlobalTrace(cThis, rThis);
+			addTrace(rThis, cThis);
 			List<@NonNull Key> rKeys = new ArrayList<@NonNull Key>(ClassUtil.nullFree(relationalTransformation.getOwnedKey()));
 //			Collections.sort(keys, NameUtil.NAMEABLE_COMPARATOR);
 			List<@NonNull TypedModel> rEnforceableTypdModels = new ArrayList<@NonNull TypedModel>();
@@ -812,6 +869,7 @@ public class QVTr2QVTc
 					}
 				}
 			}
+			mapFunctions(relationalTransformation, coreTransformation);
 			for (@NonNull Rule rule : rules) {
 				if (rule instanceof Relation) {
 					Relation rRelation = (Relation)rule;
@@ -837,6 +895,7 @@ public class QVTr2QVTc
 			}
 			CompilerUtil.normalizeNameables(ClassUtil.nullFree(coreTransformation.getOwnedOperations()));
 			CompilerUtil.normalizeNameables(ClassUtil.nullFree(coreTransformation.getRule()));
+			popScope();
 		}
 /*		for (@NonNull Transformation coreTransformation : relationalTransformation2coreTransformation.values()) {
 			List<DebugTraceBack> debugTraceBacks = coreTransformation.getOwnedDebugTraceBacks();

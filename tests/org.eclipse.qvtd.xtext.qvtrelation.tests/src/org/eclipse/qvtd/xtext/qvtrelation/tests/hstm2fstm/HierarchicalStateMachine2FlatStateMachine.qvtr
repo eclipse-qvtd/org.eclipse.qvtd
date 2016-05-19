@@ -1,0 +1,110 @@
+/*******************************************************************************
+ * Copyright (c) 2007,2008 Tata Consultancy Services and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     TCS - initial implementation for ModelMorf
+ *     E.D.Willink - alignment with evolved specification
+ *     E.D.Willink - rename / comment
+ *******************************************************************************/
+import hierMM : 'HierarchicalStateMachine.ecore'::HierarchicalStateMachine; 
+import flatMM : 'FlatStateMachine.ecore'::FlatStateMachine; 
+
+/**
+ * Transform a hierarchical StateMachine into a flat StateMachine.
+ */
+transformation org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm::HierarchicalStateMachine2FlatStateMachine(hier:hierMM, flat:flatMM)
+{
+--	key hierMM::State {name};
+--	key hierMM::Trans {name, fromState, toState};
+--	key flatMM::State {name};
+--	key flatMM::Trans {name, fromState, toState};
+
+	/**
+	 * Return true if leafState is a leaf state and is nested below hierarchicalState.
+	 */
+	query HierarchicalStateContainsLeafState(hierarchicalState : hierMM::State, leafState : hierMM::State) : Boolean {
+		if (leafState.nestingState->isEmpty())
+		then
+			false
+		else if (leafState.nestingState = hierarchicalState)
+			then
+				true
+			else
+				HierarchicalStateContainsLeafState(hierarchicalState, leafState.nestingState)
+			endif
+		endif
+	}
+
+	/**
+	 *  Map each hierarchical StateMachine to a flat StateMachine
+	 */
+	top relation HierachicalStateMachine2FlatStateMachine {
+		domain hier hierarchicalStateMachine : StateMachine {
+			name = stateMachineName : String{}
+		};	   
+		enforce domain flat flatStateMachine : StateMachine {
+			name = stateMachineName
+		};
+	}   
+
+	/**
+	 *  Map each Leaf State to a Flat State in the corresponding StateMachine.
+	 */
+	top relation LeafState2FlatState {
+		domain hier leafState : State {
+			owningStateMachine = hierarchicalStateMachine : hierMM::StateMachine{},
+	   		name = stateName : String{}
+		} {leafState.nestedStates->isEmpty()};
+	   
+		enforce domain flat flatState : State {
+			owningStateMachine = flatStateMachine : StateMachine{},
+			name = stateName
+		};	
+		when {
+			HierachicalStateMachine2FlatStateMachine(hierarchicalStateMachine, flatStateMachine);
+		}
+	}   
+
+	/**
+	 *  Map each hierarchical Transition to a Flat Transition in the corresponding StateMachine
+	 *  for each combination of possible leaf end states
+	 */
+	top relation HierachicalTransition2FlatTransition
+	{
+		leafFromState : hierMM::State;
+		leafToState : hierMM::State;
+		domain hier hierarchicalFromState : State {
+			outTransitions = hierarchicalTransition : Transition {
+				owningStateMachine = hierarchicalStateMachine : StateMachine{},
+				name = transitionName : String{},
+				toState = hierarchicalToState : State{}
+			}
+		};	   
+		enforce domain flat flatFromState : State {
+			outTransitions = flatTransition : Transition {
+				owningStateMachine = flatStateMachine : StateMachine{},
+				name = transitionName,
+				toState = flatToState : State{}
+			}
+		};		
+		when  {
+			HierachicalStateMachine2FlatStateMachine(hierarchicalStateMachine, flatStateMachine);
+			LeafState2FlatState(leafFromState, flatFromState);
+			(
+				leafFromState = hierarchicalFromState
+				or
+				HierarchicalStateContainsLeafState(hierarchicalFromState, leafFromState)
+			);
+			LeafState2FlatState(leafToState, flatToState);
+			(
+				leafToState = hierarchicalToState
+				or
+				HierarchicalStateContainsLeafState(hierarchicalToState, leafToState)
+			);
+		}
+	}   
+}

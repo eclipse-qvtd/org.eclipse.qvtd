@@ -160,7 +160,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(".");
 			js.append(getAccessor);
 			js.append("().addAll(");
-			js.appendValueName(cgInit);
+			js.appendAtomicReferenceTo(cgInit);
 			js.append(");\n");
 		}
 		else {
@@ -170,7 +170,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(".");
 			js.append(setAccessor);
 			js.append("(");
-			js.appendValueName(cgInit);
+			js.appendAtomicReferenceTo(cgInit);
 			js.append(");\n");
 		}
 	}
@@ -1613,8 +1613,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append("// mapping statements\n");
 			body.accept(this);
 		}
-		js.append("boolean ");
-		js.appendValueName(cgMappingExp);
+		js.appendDeclaration(cgMappingExp);
 		js.append(" = ");
 		js.appendClassReference(ValueUtil.class);
 		js.append(".TRUE_VALUE;\n");

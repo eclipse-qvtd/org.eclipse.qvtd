@@ -54,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -95,7 +96,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				VariablesAnalysis.gatherBoundVariables(rOtherBoundVariables, rOtherDomain);
 				this.rOtherReferredVariables = new HashSet<@NonNull Variable>();
 				VariablesAnalysis.gatherReferredVariables(rOtherReferredVariables, rOtherDomain);
-				this.rOtherRootVariables = getRootVariables(rOtherDomain);			
+				this.rOtherRootVariables = QVTrelationUtil.getRootVariables(rOtherDomain);			
 
 				for (@NonNull Variable rVariable : rOtherBoundVariables.keySet()) {
 					variablesAnalysis.getVariableAnalysis(rVariable).setOtherBound(cOtherDomain);
@@ -328,6 +329,11 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 						assert oOuts.size() == 1;
 						return oOuts.get(0);
 					}
+					oOuts = qvtr2qvtc.getGlobalTargets((Element) oIn);
+					if (oOuts != null) {
+						assert oOuts.size() == 1;
+						return oOuts.get(0);
+					}
 				}
 				return super.get(oIn);
 			}
@@ -368,7 +374,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			this.rEnforcedReferredVariables = new HashSet<@NonNull Variable>();
 			VariablesAnalysis.gatherReferredVariables(rEnforcedReferredVariables, rEnforcedDomain);
 			this.rEnforcedTemplateExpressions = getTemplateExpressions(rEnforcedDomain);
-			this.rEnforcedRootVariables = getRootVariables(rEnforcedDomain);
+			this.rEnforcedRootVariables = QVTrelationUtil.getRootVariables(rEnforcedDomain);
 			this.rEnforcedTypedModel = ClassUtil.nonNullState(rEnforcedDomain.getTypedModel());
 			this.rEnforcedDomainName = ClassUtil.nonNullState(rEnforcedDomain.getName());
 			@NonNull Type traceClass = qvtr2qvtc.getTraceClass(rRelation);
@@ -398,11 +404,17 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			this.rAllOtherReferredVariables = new HashSet<@NonNull Variable>(rAllDomainVariables);
 			rAllOtherReferredVariables.removeAll(rUnsharedEnforcedDomainVariables);
 			//
-			for (@NonNull Variable rVariable : rWhenVariables) {
-				variablesAnalysis.getVariableAnalysis(rVariable).setIsWhen();
+			for (Map.Entry<@NonNull Variable, @Nullable RelationDomain> entry : rWhenVariable2rDomain.entrySet()) {
+				RelationDomain rWhenDomain = entry.getValue();
+				if (rWhenDomain != null) {
+					variablesAnalysis.getVariableAnalysis(entry.getKey()).setWhen(getCoreDomain(rWhenDomain));
+				}
 			}
-			for (@NonNull Variable rVariable : rWhereVariables) {
-				variablesAnalysis.getVariableAnalysis(rVariable).setIsWhere();
+			for (Map.Entry<@NonNull Variable, @Nullable RelationDomain> entry : rWhereVariable2rDomain.entrySet()) {
+				RelationDomain rWhereDomain = entry.getValue();
+				if (rWhereDomain != null) {
+					variablesAnalysis.getVariableAnalysis(entry.getKey()).setWhere(getCoreDomain(rWhereDomain));
+				}
 			}
 			for (@NonNull Variable rVariable : rEnforcedBoundVariables.keySet()) {
 				Key rKey = qvtr2qvtc.getKeyForType(ClassUtil.nonNullState(rVariable.getType()));
@@ -471,6 +483,17 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 		protected abstract @NonNull AbstractOtherRelationDomain2CoreDomain createOtherDomain2CoreDomain(@NonNull RelationDomain rRelationDomain);
 
+		protected @NonNull CoreDomain getCoreDomain(@NonNull RelationDomain rDomain) {
+			TypedModel rTypedModel = ClassUtil.nonNullState(rDomain.getTypedModel());
+			TypedModel cTypedModel = getCoreTypedModel(rTypedModel);
+			for (@NonNull Domain cDomain : ClassUtil.nullFree(cMapping.getDomain())) {	// FIXME provide a Map cache
+				if (cDomain.getTypedModel() == cTypedModel) {
+					return (CoreDomain) cDomain;
+				}
+			}
+			throw new IllegalStateException();
+		}
+
 		protected @NonNull TypedModel getCoreTypedModel(@NonNull TypedModel rTypedModel) {
 			String name = ClassUtil.nonNullState(rTypedModel.getName());
 			List<org.eclipse.ocl.pivot.@NonNull Package> usedPackages = ClassUtil.nullFree(rTypedModel.getUsedPackage());
@@ -494,17 +517,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 			relationDomains.remove(rEnforcedDomain);
 			return relationDomains;
-		}
-
-		protected @NonNull List<@NonNull Variable> getRootVariables(@NonNull RelationDomain rRelationDomain) {
-			List<@NonNull Variable> rRootVariables = new ArrayList<@NonNull Variable>();
-			for (@NonNull DomainPattern rDomainPattern : ClassUtil.nullFree(rRelationDomain.getPattern())) {
-				TemplateExp rTemplateExpression = rDomainPattern.getTemplateExpression();
-				Variable rRootVariable = rTemplateExpression.getBindsTo();
-				assert rRootVariable != null;
-				rRootVariables.add(rRootVariable);
-			}
-			return rRootVariables;
 		}
 
 		protected @NonNull List<@NonNull TemplateExp> getTemplateExpressions(@NonNull RelationDomain rRelationDomain) {
@@ -725,7 +737,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		protected void mapWhenPattern() throws CompilerChainException {			
 			Pattern rWhenPattern = rRelation.getWhen();
 			if (rWhenPattern != null) {
-				Set<@NonNull Variable> rMiddleGuardDomainVariables = new HashSet<@NonNull Variable>(rWhenVariables);
+				Set<@NonNull Variable> rMiddleGuardDomainVariables = new HashSet<@NonNull Variable>(rWhenVariable2rDomain.keySet());
 				rMiddleGuardDomainVariables.removeAll(rAllDomainVariables);
 				//
 				for (Predicate rWhenPredicate : rWhenPattern.getPredicate()) {
@@ -874,8 +886,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	protected final @NonNull String rRelationName;								// rRelation.getName()
 	protected final @NonNull Set<@NonNull Variable> rAllDomainVariables;		// ??All pattern variables declared in all domains (not CollectionTemplateExp member/rest, Let/Iterator variables)
 //	protected final @NonNull List<@NonNull Variable> rAllRootVariables;			// The root variables of each domain in relation call order.
-	protected final @NonNull Set<@NonNull Variable> rWhenVariables;				// All pattern variables used in when calls
-	protected final @NonNull Set<@NonNull Variable> rWhereVariables;			// All pattern variables used in where calls
+	protected final @NonNull Map<@NonNull Variable, @Nullable RelationDomain> rWhenVariable2rDomain;	// All pattern variables used in when calls and their associated domain
+	protected final @NonNull Map<@NonNull Variable, @Nullable RelationDomain> rWhereVariable2rDomain;// All pattern variables used in where calls and their associated domain
 	protected final @NonNull Set<@NonNull Predicate> rWherePredicates;			// All non-RelationCallExp where predicates
 	protected final @NonNull Set<@NonNull Variable> rSharedVariables;			// All pattern variables shared by more than one domain
 	protected final @NonNull Set<@NonNull Variable> rMiddleBottomDomainVariables;
@@ -889,19 +901,19 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		this.rTransformation = (RelationalTransformation) ClassUtil.nonNullState(rRelation.getTransformation());
 		this.rRelationName = ClassUtil.nonNullState(rRelation.getName());
 		//
-		this.rWhenVariables = new HashSet<@NonNull Variable>();
+		this.rWhenVariable2rDomain = new HashMap<@NonNull Variable, @Nullable RelationDomain>();
 		Pattern rWhenPattern = rRelation.getWhen();
 		if (rWhenPattern != null) {
-			VariablesAnalysis.gatherReferredVariables(rWhenVariables, rWhenPattern);
+			VariablesAnalysis.gatherReferredVariablesWithDomains(rWhenVariable2rDomain, rWhenPattern);
 // FIXME	assert rWhenPattern.getBindsTo().equals(rWhenVariables);
 //			rWhenPattern.getBindsTo().addAll(rWhenVariables);
 		}
 		//
-		this.rWhereVariables = new HashSet<@NonNull Variable>();
+		this.rWhereVariable2rDomain = new HashMap<@NonNull Variable, @Nullable RelationDomain>();
 		this.rWherePredicates = new HashSet<@NonNull Predicate>();
 		Pattern rWherePattern = rRelation.getWhere();
 		if (rWherePattern != null) {
-			VariablesAnalysis.gatherReferredVariables(rWhereVariables, rWherePattern);
+			VariablesAnalysis.gatherReferredVariablesWithDomains(rWhereVariable2rDomain, rWherePattern);
 // FIXME	assert rWherePattern.getBindsTo().equals(rWhereVariables);
 //			rWherePattern.getBindsTo().addAll(rWhereVariables);
 			for (@NonNull Predicate rWherePredicate : ClassUtil.nullFree(rWherePattern.getPredicate())) {
@@ -925,8 +937,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		//
 		this.rSharedVariables = VariablesAnalysis.getMiddleDomainVariables(rRelation);
 		//
-		this.rMiddleBottomDomainVariables = new HashSet<@NonNull Variable>(rWhereVariables);
-		rMiddleBottomDomainVariables.removeAll(rWhenVariables);
+		this.rMiddleBottomDomainVariables = new HashSet<@NonNull Variable>(rWhereVariable2rDomain.keySet());
+		rMiddleBottomDomainVariables.removeAll(rWhenVariable2rDomain.keySet());
 		rMiddleBottomDomainVariables.removeAll(rAllDomainVariables);
 		rMiddleBottomDomainVariables.addAll(rSharedVariables);			// FIXME this stinks
 		//

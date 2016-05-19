@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Package;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
@@ -200,7 +201,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @NonNull CoreModel visitCoreModel(@NonNull CoreModel mIn) {
-		    @NonNull CoreModel mOut = QVTcoreFactory.eINSTANCE.createCoreModel();
+		    CoreModel mOut = QVTcoreFactory.eINSTANCE.createCoreModel();
 			context.pushScope(mOut);
 		    context.addTrace(mIn, mOut);
 		    createAll(mIn.getOwnedImports(), mOut.getOwnedImports());
@@ -212,7 +213,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @NonNull Function visitFunction(@NonNull Function fIn) {
-			@NonNull Function fOut = QVTbaseFactory.eINSTANCE.createFunction();
+			Function fOut = QVTbaseFactory.eINSTANCE.createFunction();
 			context.addTrace(fIn, fOut);				// Global
 			context.pushScope(fOut);
 			fOut.setName(fIn.getName());
@@ -227,7 +228,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @NonNull FunctionParameter visitFunctionParameter(@NonNull FunctionParameter fpIn) {
-			@NonNull FunctionParameter fpOut = QVTbaseFactory.eINSTANCE.createFunctionParameter();
+			FunctionParameter fpOut = QVTbaseFactory.eINSTANCE.createFunctionParameter();
 			context.addTrace(fpIn, fpOut);
 			fpOut.setName(fpIn.getName());
 			fpOut.setIsRequired(fpIn.isIsRequired());
@@ -255,7 +256,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @Nullable Element visitMapping(@NonNull Mapping mIn) {
-			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
+			Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
 			context.pushScope(mOut);
 			doMapping(mIn, mOut);
 			context.popScope();
@@ -293,7 +294,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @Nullable Element visitPredicate(@NonNull Predicate pIn) {
-			@NonNull Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
+			Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
 	        context.addTrace(pIn, pOut);
 	        // The condition expression is copied during update once replacement variables exist.
 			createAll(pIn.getOwnedComments(), pOut.getOwnedComments());
@@ -325,7 +326,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @NonNull Transformation visitTransformation(@NonNull Transformation tIn) {
-			@NonNull Transformation tOut = QVTbaseFactory.eINSTANCE.createTransformation();
+			Transformation tOut = QVTbaseFactory.eINSTANCE.createTransformation();
 			context.addTrace(tIn, tOut);
 		    tOut.setName(tIn.getName());
 		    tOut.setOwnedContext(create(tIn.getOwnedContext()));
@@ -338,7 +339,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @NonNull TypedModel visitTypedModel(@NonNull TypedModel tmIn) {
-			@NonNull TypedModel tmOut = QVTbaseFactory.eINSTANCE.createTypedModel();
+			TypedModel tmOut = QVTbaseFactory.eINSTANCE.createTypedModel();
 			context.addTrace(tmIn, tmOut);
 			String name = tmIn.getName();
 			if (name == null) {
@@ -613,6 +614,17 @@ public abstract class AbstractQVTc2QVTc
 			return null;
 		}
 
+		@Override
+		public @Nullable Object visitParameter(@NonNull Parameter pOut) {
+			Parameter pIn = context.equivalentSource(pOut);
+			pOut.setName(pIn.getName());
+			pOut.setIsRequired(pIn.isIsRequired());
+	        Type tVar = pIn.getType();
+	        pOut.setType(tVar);
+	        pOut.setTypeValue(pIn.getTypeValue());
+			return pIn;
+		}
+
 		//
 		//	Predicates that were PropertyAssignments need a comparison to be synthesized.
 		//
@@ -837,6 +849,10 @@ public abstract class AbstractQVTc2QVTc
     	assert !scopeStack.contains(scope);
     	scopeStack.push(scope);
     }
+
+	protected void setDebugSource(@NonNull Resource debugSource) {
+		this.debugSource =  debugSource;
+	}
 	
     protected void setMiddleTypedModelTarget(@NonNull TypedModel middleTypedModelTarget) {
 		this.middleTypedModelTarget = middleTypedModelTarget;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fstm:StateMachine xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fstm="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/FlatStateMachine"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/FlatStateMachine java://org.eclipse.qvtd.xtext.qvtrelation.tests.HierarchicalStateMachine2FlatStateMachine.FlatStateMachine.FlatStateMachinePackage"
+    name="sm">
+  <ownedStates outTransitions="//@ownedTransitions.4 //@ownedTransitions.8 //@ownedTransitions.9" inTransitions="//@ownedTransitions.10"
+      name="s2"/>
+  <ownedStates outTransitions="//@ownedTransitions.10" inTransitions="//@ownedTransitions.0" name="s1"/>
+  <ownedStates outTransitions="//@ownedTransitions.3 //@ownedTransitions.7" inTransitions="//@ownedTransitions.9" name="s3a"/>
+  <ownedStates outTransitions="//@ownedTransitions.0 //@ownedTransitions.1 //@ownedTransitions.5" inTransitions="//@ownedTransitions.1 //@ownedTransitions.2 //@ownedTransitions.3 //@ownedTransitions.4"
+      name="s3ba"/>
+  <ownedStates outTransitions="//@ownedTransitions.2 //@ownedTransitions.6" inTransitions="//@ownedTransitions.5 //@ownedTransitions.6 //@ownedTransitions.7 //@ownedTransitions.8"
+      name="s3bb"/>
+  <ownedTransitions fromState="//@ownedStates.3" toState="//@ownedStates.1" name="t3ba_1"/>
+  <ownedTransitions fromState="//@ownedStates.3" toState="//@ownedStates.3" name="t3_3b"/>
+  <ownedTransitions fromState="//@ownedStates.4" toState="//@ownedStates.3" name="t3_3b"/>
+  <ownedTransitions fromState="//@ownedStates.2" toState="//@ownedStates.3" name="t3_3b"/>
+  <ownedTransitions fromState="//@ownedStates.0" toState="//@ownedStates.3" name="t2_3b"/>
+  <ownedTransitions fromState="//@ownedStates.3" toState="//@ownedStates.4" name="t3_3b"/>
+  <ownedTransitions fromState="//@ownedStates.4" toState="//@ownedStates.4" name="t3_3b"/>
+  <ownedTransitions fromState="//@ownedStates.2" toState="//@ownedStates.4" name="t3_3b"/>
+  <ownedTransitions fromState="//@ownedStates.0" toState="//@ownedStates.4" name="t2_3b"/>
+  <ownedTransitions fromState="//@ownedStates.0" toState="//@ownedStates.2" name="t2_3a"/>
+  <ownedTransitions fromState="//@ownedStates.1" toState="//@ownedStates.0" name="t1_2"/>
+</fstm:StateMachine>
