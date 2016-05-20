@@ -11,6 +11,7 @@ import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getOwningPac
 import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getSuperClasses;
 import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getUpdateMappingName;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -490,8 +491,26 @@ public class OCL2QVTp {
 	
 	private  ClonsMap cloneImportedOperationsAndEcoreImports(Model oldModel, Model newModel, List<URI> extendedASURIs) {
 		
-		ClonsMap clonsMap = new ClonsMap(newModel);
+		Model newOCL = PivotFactory.eINSTANCE.createModel();
+		URI newOCLURI = URI.createURI(newModel.getExternalURI()).appendFileExtension("oclas");
+		newOCL.setExternalURI(newOCLURI.toString());
+		
+		ClonsMap clonsMap = new ClonsMap(newOCL);
 		doCloneImportedOperationsAndImports(oldModel, clonsMap, new HashSet<Model>(), extendedASURIs);
+		updateOpCallExpressions(newOCL, clonsMap);
+		
+		Import newOCLimport = PivotFactory.eINSTANCE.createImport();
+		newOCLimport.setImportedNamespace(newOCL);
+		newModel.getOwnedImports().add(newOCLimport);
+		
+		Resource resource = envFact.getMetamodelManager().getASResourceSet().createResource(newOCLURI);
+		resource.getContents().add(newOCL);
+		try {
+			resource.save(saveOptions);
+		} catch (IOException e) {
+			logger.severe("qvtp.qvtcas.ocl OCL file could not be saved");
+		}
+		
 		return clonsMap;
 	}
 	
@@ -556,7 +575,7 @@ public class OCL2QVTp {
 	private void updateOpCallExpression(OperationCallExp opCallExp, ClonsMap copyHelper) {
 		Operation oclOp = opCallExp.getReferredOperation();
 		if (isOclDocOp().test(oclOp) // We are only interested in ops belonging to a model corresponding to an Ocl Doc
-			&& !refersToContainingOperation().test(opCallExp)) { // and opCallExps that refer to operation that contains them
+			&& !refersToContainingOperation().test(opCallExp)) { // and opCallExps that do not refer to operations that contains them
 			Operation newOp = copyHelper.getCachedOperation(oclOp);
 			opCallExp.setReferredOperation(newOp);
 		}
