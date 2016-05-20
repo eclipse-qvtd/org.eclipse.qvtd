@@ -1,0 +1,106 @@
+grammar org.eclipse.qvtd.doc.MiniOCLCS with org.eclipse.xtext.common.Terminals
+
+generate minioclcs "http://www.eclipse.org/qvtd/doc/MiniOCLCS"
+
+RootCS:
+	(packages+=PackageCS
+	| contraints+=ConstraintsDefCS)*
+;
+	
+PackageCS:
+	'package' name=ID '{'
+		(packages+=PackageCS
+		|classes+=ClassCS
+		)*
+	'}'
+;
+
+ClassCS:
+	'class' name=ID ('extends' extends=PathNameCS)? '{'
+		( properties+=PropertyCS
+		| operations+=OperationCS )*
+	'}'
+;
+
+PropertyCS:
+	'prop' name=ID ':' typeRef=PathNameCS ';'
+;
+
+OperationCS:
+	'op' name=ID
+	'(' (params+=ParameterCS (','params+=ParameterCS)*)? ')'
+	':' resultRef=PathNameCS
+	'=' body=ExpCS  
+	';'
+;
+
+ParameterCS:
+	name=ID ':' typeRef=PathNameCS
+;
+
+
+ConstraintsDefCS:
+	'context' typeRef=PathNameCS '{'
+		(invariants+=InvariantCS)*
+	'}'
+;
+
+InvariantCS:
+	'inv' ':' exp=ExpCS ';'
+;
+
+// Expressions
+ExpCS:
+	LogicExpCS
+;
+
+LogicExpCS:
+	CallExpCS ({LogicExpCS.left=current} op=('=' | '<>') right=CallExpCS)*
+;
+
+CallExpCS:
+	PrimaryExpCS ({CallExpCS.source=current} op=('.' | '->') nameExp=NameExpCS)*
+;
+
+PrimaryExpCS:
+	NameExpCS | LiteralExpCS
+;
+
+NameExpCS:
+	expName=PathNameCS
+	(roundedBrackets=RoundedBracketClauseCS)?
+;
+
+RoundedBracketClauseCS:
+	{RoundedBracketClauseCS}
+	'('
+		(args+=ExpCS (','args+=ExpCS)* )? 
+	')'
+;
+
+LiteralExpCS:
+	IntLiteralExpCS | StringLiteralExpCS | BooleanLiteralExpCS
+;
+
+IntLiteralExpCS :
+	intSymbol=INT
+;
+
+StringLiteralExpCS:
+	stringSymbol=STRING
+;
+
+BooleanLiteralExpCS:
+	{BooleanExpCS}
+	(boolSymbol?='true'
+	| 'false')
+	;
+
+PathNameCS :
+	path+=PathElementCS
+	('::'path+=PathElementCS)*
+;
+
+PathElementCS:
+	pathName=ID
+;

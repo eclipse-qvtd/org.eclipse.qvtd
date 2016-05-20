@@ -1,0 +1,382 @@
+import  cs : 'generated/MiniOCLCS.ecore#/'
+import  as : '/resource/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.ecore#/'
+import '/resource/org.eclipse.qvtd.doc.miniocl/model/Lookup.ecore'
+import 'MiniOCLCS2ASHelpers.ocl'
+
+package ocl
+
+context OclElement
+-- Domain specific default functionality
+def : unqualified_env_Class() : lookup::LookupEnvironment[1] =
+	_unqualified_env_Class(null)
+def : unqualified_env_Package() : lookup::LookupEnvironment[1] =
+	_unqualified_env_Package(null)
+def : unqualified_env_Operation() : lookup::LookupEnvironment[1] =
+	_unqualified_env_Operation(null)
+def : unqualified_env_Variable() : lookup::LookupEnvironment[1] =
+	_unqualified_env_Variable(null)
+def : unqualified_env_Property() : lookup::LookupEnvironment[1] =
+	_unqualified_env_Property(null)
+
+def : _unqualified_env_Class(child : OclElement) : lookup::LookupEnvironment[1] =
+	parentEnv_Class()
+def : _unqualified_env_Package(child : OclElement) : lookup::LookupEnvironment[1] =
+	parentEnv_Package()
+def : _unqualified_env_Operation(child : OclElement) : lookup::LookupEnvironment[1] =
+	parentEnv_Operation()
+def : _unqualified_env_Variable(child : OclElement) : lookup::LookupEnvironment[1] =
+	parentEnv_Variable()
+def : _unqualified_env_Property(child : OclElement) : lookup::LookupEnvironment[1] =
+	parentEnv_Property()
+
+def : parentEnv_Class() : lookup::LookupEnvironment[1] =
+	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_Class(self) endif
+def : parentEnv_Package() : lookup::LookupEnvironment[1] =
+	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_Package(self) endif
+def : parentEnv_Operation() : lookup::LookupEnvironment[1] =
+	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_Operation(self) endif
+def : parentEnv_Variable() : lookup::LookupEnvironment[1] =
+	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_Variable(self) endif
+def : parentEnv_Property() : lookup::LookupEnvironment[1] =
+	let parent = oclContainer() in if parent = null then lookup::LookupEnvironment { } else parent._unqualified_env_Property(self) endif
+
+def : _exported_env_Property(importer : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+def : _exported_env_Operation(importer : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+
+def : _qualified_env_Class(qualifier : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+def : _qualified_env_Package(qualifier : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+def : _qualified_env_Operation(qualifier : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+def : _qualified_env_Property(qualifier : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
+-- End of domain specific default functionality
+endpackage 
+
+package lookup
+-- Some common lookup functionality
+context LookupEnvironment
+def : nestedEnv() : LookupEnvironment[1] =
+	LookupEnvironment {
+		parentEnv = self
+	}
+-- End of common lookup functionality
+endpackage
+
+package as
+
+	
+context Root
+def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
+	parentEnv_Package().nestedEnv()
+		.addElements(ownedPackages)
+		
+	
+context Package
+	
+def : _lookupQualifiedPackage(pName : String) : Package[?] =
+	let foundPackage = _lookupPackage(_qualified_env_Package(), pName)
+	in  if foundPackage->isEmpty()
+		then null
+		else foundPackage->first()
+		endif
+def : _qualified_env_Package() : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment{}
+	in env
+	.addElements(ownedPackages)
+def : lookupQualifiedPackage(aPathElementCS : cs::PathElementCS) : Package[?] =
+   _lookupQualifiedPackage(aPathElementCS.pathName)
+   
+	
+def : _lookupQualifiedClass(cName : String) : Class[?] =
+	let foundClass = _lookupClass(_qualified_env_Class(), cName)
+	in  if foundClass->isEmpty()
+		then null
+		else foundClass->first()
+		endif
+def : _qualified_env_Class() : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment{}
+	in env
+	.addElements(ownedClasses)
+def : lookupQualifiedClass(aPathElementCS : cs::PathElementCS) : Class[?] =
+   _lookupQualifiedClass(aPathElementCS.pathName)
+   
+def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
+	parentEnv_Package().nestedEnv()
+		.addElements(ownedPackages)
+		
+def : _unqualified_env_Class(child : ocl::OclElement) : lookup::LookupEnvironment =
+	parentEnv_Class().nestedEnv()
+		.addElements(ownedClasses)
+		
+	
+context Class
+	
+def : _lookupQualifiedOperation(oName : String, args : OrderedSet(OCLExpression)) : Operation[?] =
+	let foundOperation = _lookupOperation(_qualified_env_Operation(), oName, args)
+	in  if foundOperation->isEmpty()
+		then null
+		else foundOperation->first()
+		endif
+def : _qualified_env_Operation() : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment{}
+	in env
+	.addElements(ownedOperations)
+def : lookupQualifiedOperation(aPathElementCS : cs::PathElementCS, args : OrderedSet(OCLExpression)) : Operation[?] =
+   _lookupQualifiedOperation(aPathElementCS.pathName, args)
+   
+	
+def : _lookupQualifiedProperty(pName : String) : Property[?] =
+	let foundProperty = _lookupProperty(_qualified_env_Property(), pName)
+	in  if foundProperty->isEmpty()
+		then null
+		else foundProperty->first()
+		endif
+def : _qualified_env_Property() : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment{}
+	in env
+	.addElements(ownedProperties)
+def : lookupQualifiedProperty(aPathElementCS : cs::PathElementCS) : Property[?] =
+   _lookupQualifiedProperty(aPathElementCS.pathName)
+   
+def : _unqualified_env_Operation(child : ocl::OclElement) : lookup::LookupEnvironment =
+	parentEnv_Operation().nestedEnv()
+		.addElements(self->closure(superClass).ownedOperations)
+		.nestedEnv()
+		.addElements(ownedOperations)
+		
+def : _unqualified_env_Property(child : ocl::OclElement) : lookup::LookupEnvironment =
+	parentEnv_Property().nestedEnv()
+		.addElements(self->closure(superClass).ownedProperties)
+		.nestedEnv()
+		.addElements(ownedProperties)
+		
+def : _exported_env_Operation(importer : ocl::OclElement) : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment {}
+	in env
+		.addElements(ownedOperations)
+	
+def : _exported_env_Property(importer : ocl::OclElement) : lookup::LookupEnvironment =
+	let env = lookup::LookupEnvironment {}
+	in env
+		.addElements(ownedProperties)
+	
+	
+def : _lookupExportedOperation(importer : ocl::OclElement, oName : String, args : OrderedSet(OCLExpression)) : Operation[?] =
+	let foundOperation = _lookupOperation(_exported_env_Operation(importer), oName, args)
+	in  if foundOperation->isEmpty()
+		then null
+		else foundOperation->first()
+		endif
+		
+def : lookupExportedOperation(importer : ocl::OclElement, aPathElementCS : cs::PathElementCS, args : OrderedSet(OCLExpression)) : Operation[?] =
+	_lookupExportedOperation(importer, aPathElementCS.pathName, args)
+	
+def : _lookupExportedProperty(importer : ocl::OclElement, pName : String) : Property[?] =
+	let foundProperty = _lookupProperty(_exported_env_Property(importer), pName)
+	in  if foundProperty->isEmpty()
+		then null
+		else foundProperty->first()
+		endif
+		
+def : lookupExportedProperty(importer : ocl::OclElement, aPathElementCS : cs::PathElementCS) : Property[?] =
+	_lookupExportedProperty(importer, aPathElementCS.pathName)
+	
+context Operation
+	
+def : _appliesFilter_Operation(args : OrderedSet(OCLExpression)) : Boolean =
+	args->size() = ownedParameters->size()
+def : _unqualified_env_Variable(child : ocl::OclElement) : lookup::LookupEnvironment =
+	parentEnv_Variable().nestedEnv()
+		.addElement(ownedBodyExpression.ownedSelfVar)
+		.addElements(ownedParameters)
+		
+
+context Visitable
+-- Package lookup
+def : _lookupPackage(env : lookup::LookupEnvironment, pName : String) : OrderedSet(Package) =
+let foundPackage = env.namedElements->selectByKind(Package)->select(name = pName)
+in  if foundPackage->isEmpty() and not (env.parentEnv = null)
+	then _lookupPackage(env.parentEnv, pName)
+	else foundPackage
+	endif
+	
+-- Note: when calling this method, the source element of the argument passed to this method, will be the contextual 
+-- object on which error reports will be handled
+def : _lookupUnqualifiedPackage(pName : String) : Package[?] =
+let foundPackage = _lookupPackage(unqualified_env_Package(), pName)
+in  if foundPackage->isEmpty()
+	then null
+	else foundPackage->first() -- LookupVisitor will report ambiguous result
+	endif
+def : lookupPackage(aPathElementCS : cs::PathElementCS) : Package[?] =
+   _lookupUnqualifiedPackage(aPathElementCS.pathName)
+   
+
+-- QN Package lookup
+def : lookupPackage(aPathNameCS : cs::PathNameCS) : Package[?] =
+   lookupPackage(aPathNameCS .path)
+
+def : lookupPackage(segments : OrderedSet(cs::PathElementCS)) : Package[?] =
+   if segments->size() = 1
+   then lookupPackage(segments->first())
+   else let qualifierSegments = segments->subOrderedSet(1,segments->size()-1),
+            qualifier = lookupPackage(qualifierSegments)
+        in qualifier?.lookupQualifiedPackage(segments->last())
+   endif
+
+-- Class lookup
+def : _lookupClass(env : lookup::LookupEnvironment, cName : String) : OrderedSet(Class) =
+let foundClass = env.namedElements->selectByKind(Class)->select(name = cName)
+in  if foundClass->isEmpty() and not (env.parentEnv = null)
+	then _lookupClass(env.parentEnv, cName)
+	else foundClass
+	endif
+	
+-- Note: when calling this method, the source element of the argument passed to this method, will be the contextual 
+-- object on which error reports will be handled
+def : _lookupUnqualifiedClass(cName : String) : Class[?] =
+let foundClass = _lookupClass(unqualified_env_Class(), cName)
+in  if foundClass->isEmpty()
+	then null
+	else foundClass->first() -- LookupVisitor will report ambiguous result
+	endif
+def : lookupClass(aPathElementCS : cs::PathElementCS) : Class[?] =
+   _lookupUnqualifiedClass(aPathElementCS.pathName)
+   
+
+-- QN Class lookup
+def : lookupClass(aPathNameCS : cs::PathNameCS) : Class[?] =
+   lookupClass(aPathNameCS .path)
+
+def : lookupClass(segments : OrderedSet(cs::PathElementCS)) : Class[?] =
+   if segments->size() = 1
+   then lookupClass(segments->first())
+   else let qualifierSegments = segments->subOrderedSet(1,segments->size()-1),
+            qualifier = lookupPackage(qualifierSegments)
+        in qualifier?.lookupQualifiedClass(segments->last())
+   endif
+
+-- Class exports Operation
+	
+def : lookupOperationFrom(exporter : Class, aPathElementCS : cs::PathElementCS, args : OrderedSet(OCLExpression)) : Operation[?] =
+	exporter.lookupExportedOperation(self, aPathElementCS, args)
+
+def : lookupOperationFrom(exporter : Class, aPathNameCS : cs::PathNameCS, args : OrderedSet(OCLExpression)) : Operation[?] =
+   lookupOperationFrom(exporter, aPathNameCS.path, args)
+
+def : lookupOperationFrom(exporter : Class, segments : OrderedSet(cs::PathElementCS), args : OrderedSet(OCLExpression)) : Operation[?] =
+   if segments->size() = 1
+   then lookupOperationFrom(exporter, segments->first(), args)
+   else let qualifierSegments = segments->subOrderedSet(1,segments->size()-1),
+            qualifier = lookupClass(qualifierSegments)
+        in qualifier?.lookupQualifiedOperation(segments->last(), args)
+   endif
+-- Class exports Property
+	
+def : lookupPropertyFrom(exporter : Class, aPathElementCS : cs::PathElementCS) : Property[?] =
+	exporter.lookupExportedProperty(self, aPathElementCS)
+
+def : lookupPropertyFrom(exporter : Class, aPathNameCS : cs::PathNameCS) : Property[?] =
+   lookupPropertyFrom(exporter, aPathNameCS.path)
+
+def : lookupPropertyFrom(exporter : Class, segments : OrderedSet(cs::PathElementCS)) : Property[?] =
+   if segments->size() = 1
+   then lookupPropertyFrom(exporter, segments->first())
+   else let qualifierSegments = segments->subOrderedSet(1,segments->size()-1),
+            qualifier = lookupClass(qualifierSegments)
+        in qualifier?.lookupQualifiedProperty(segments->last())
+   endif
+-- Operation lookup
+def : _lookupOperation(env : lookup::LookupEnvironment, oName : String, args : OrderedSet(OCLExpression)) : OrderedSet(Operation) =
+let foundOperation = env.namedElements->selectByKind(Operation)->select(name = oName)
+                                         ->select(_appliesFilter_Operation(args))
+in  if foundOperation->isEmpty() and not (env.parentEnv = null)
+	then _lookupOperation(env.parentEnv, oName, args)
+	else foundOperation
+	endif
+	
+-- Note: when calling this method, the source element of the argument passed to this method, will be the contextual 
+-- object on which error reports will be handled
+def : _lookupUnqualifiedOperation(oName : String, args : OrderedSet(OCLExpression)) : Operation[?] =
+let foundOperation = _lookupOperation(unqualified_env_Operation(), oName, args)
+in  if foundOperation->isEmpty()
+	then null
+	else foundOperation->first() -- LookupVisitor will report ambiguous result
+	endif
+def : lookupOperation(aPathElementCS : cs::PathElementCS, args : OrderedSet(OCLExpression)) : Operation[?] =
+   _lookupUnqualifiedOperation(aPathElementCS.pathName, args)
+   
+
+-- QN Operation lookup
+def : lookupOperation(aPathNameCS : cs::PathNameCS, args : OrderedSet(OCLExpression)) : Operation[?] =
+   lookupOperation(aPathNameCS .path, args)
+
+def : lookupOperation(segments : OrderedSet(cs::PathElementCS), args : OrderedSet(OCLExpression)) : Operation[?] =
+   if segments->size() = 1
+   then lookupOperation(segments->first(), args)
+   else let qualifierSegments = segments->subOrderedSet(1,segments->size()-1),
+            qualifier = lookupClass(qualifierSegments)
+        in qualifier?.lookupQualifiedOperation(segments->last(), args)
+   endif
+
+-- Property lookup
+def : _lookupProperty(env : lookup::LookupEnvironment, pName : String) : OrderedSet(Property) =
+let foundProperty = env.namedElements->selectByKind(Property)->select(name = pName)
+in  if foundProperty->isEmpty() and not (env.parentEnv = null)
+	then _lookupProperty(env.parentEnv, pName)
+	else foundProperty
+	endif
+	
+-- Note: when calling this method, the source element of the argument passed to this method, will be the contextual 
+-- object on which error reports will be handled
+def : _lookupUnqualifiedProperty(pName : String) : Property[?] =
+let foundProperty = _lookupProperty(unqualified_env_Property(), pName)
+in  if foundProperty->isEmpty()
+	then null
+	else foundProperty->first() -- LookupVisitor will report ambiguous result
+	endif
+def : lookupProperty(aPathElementCS : cs::PathElementCS) : Property[?] =
+   _lookupUnqualifiedProperty(aPathElementCS.pathName)
+   
+
+-- QN Property lookup
+def : lookupProperty(aPathNameCS : cs::PathNameCS) : Property[?] =
+   lookupProperty(aPathNameCS .path)
+
+def : lookupProperty(segments : OrderedSet(cs::PathElementCS)) : Property[?] =
+   if segments->size() = 1
+   then lookupProperty(segments->first())
+   else let qualifierSegments = segments->subOrderedSet(1,segments->size()-1),
+            qualifier = lookupClass(qualifierSegments)
+        in qualifier?.lookupQualifiedProperty(segments->last())
+   endif
+
+-- Variable lookup
+def : _lookupVariable(env : lookup::LookupEnvironment, vName : String) : OrderedSet(Variable) =
+let foundVariable = env.namedElements->selectByKind(Variable)->select(name = vName)
+in  if foundVariable->isEmpty() and not (env.parentEnv = null)
+	then _lookupVariable(env.parentEnv, vName)
+	else foundVariable
+	endif
+	
+-- Note: when calling this method, the source element of the argument passed to this method, will be the contextual 
+-- object on which error reports will be handled
+def : _lookupUnqualifiedVariable(vName : String) : Variable[?] =
+let foundVariable = _lookupVariable(unqualified_env_Variable(), vName)
+in  if foundVariable->isEmpty()
+	then null
+	else foundVariable->first() -- LookupVisitor will report ambiguous result
+	endif
+def : lookupVariable(aPathElementCS : cs::PathElementCS) : Variable[?] =
+   _lookupUnqualifiedVariable(aPathElementCS.pathName)
+   
+-- FIXME this has been manually added
+def : lookupVariable(vName : String) : Variable[?] =
+   _lookupUnqualifiedVariable(vName)
+-- ENDOF manual addition
+
+endpackage

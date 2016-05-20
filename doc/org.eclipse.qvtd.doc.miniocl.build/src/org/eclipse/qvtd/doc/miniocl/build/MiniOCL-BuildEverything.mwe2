@@ -1,0 +1,146 @@
+module org.eclipse.qvtd.doc.miniocl.build.MiniOCLBuildEverything
+
+Workflow {
+
+	bean = org.eclipse.emf.ecore.resource.impl.ResourceSetImpl : rSet {}
+	bean = org.eclipse.ocl.examples.build.utilities.ProjectMapSetup { resourceSet = rSet }
+	bean = org.eclipse.ocl.examples.build.utilities.EcoreGenModelSetup { resourceSet = rSet }
+	
+	// We run the Xtext Generator
+	component = @org.eclipse.qvtd.doc.GenerateMiniOCLCS { }
+	
+	
+	// We inject the CS trace property
+	component = org.eclipse.qvtd.cs2as.build.mwe.CSTracePropertyInjector {
+		resourceSet = rSet
+		cSTraceInfo = org.eclipse.qvtd.cs2as.build.mwe.CSTracePropertyInjector.CSTraceInfo {
+			targetGenModel = "platform:/resource/org.eclipse.qvtd.doc.minioclcs.xtext/model/generated/MiniOCLCS.genmodel"	
+		}
+		aSTraceType = org.eclipse.qvtd.cs2as.build.mwe.CSTracePropertyInjector.ASTraceInfo {
+			targetGenModel = "platform:/resource/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.genmodel"
+			targetTypeName = "Element"
+		}
+	}
+	
+	// We regenerate the CS model
+	component = org.eclipse.ocl.examples.build.utilities.GenerateModel { resourceSet = rSet
+		genModel = "/org.eclipse.qvtd.doc.minioclcs.xtext/model/generated/MiniOCLCS.genmodel"
+	}
+	
+	// We regenerate the AS model
+	component = org.eclipse.ocl.examples.build.utilities.GenerateModel { resourceSet = rSet
+		genModel = "/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.genmodel"
+	}
+	
+	component = org.eclipse.ocl.examples.build.xtend.GenerateASVisitors { resourceSet = rSet
+		projectName = "org.eclipse.qvtd.doc.miniocl"
+		genModelFile = "model/MiniOCL.genmodel"
+	}
+	
+	// We regenerate the AS Lookup model
+	component = org.eclipse.ocl.examples.build.utilities.GenerateModel { resourceSet = rSet
+		genModel = "/org.eclipse.qvtd.doc.miniocl/model/Lookup.genmodel"
+	}
+	
+	// We generate the AS Lookup infrastructure
+	component = @SubGenerateAutoASModel { resourceSet = rSet
+    	projectName = "org.eclipse.qvtd.doc.miniocl"
+    	genModelFile = "model/MiniOCL.genmodel"
+    	lookupFilePath = "platform:/resource/org.eclipse.qvtd.doc.minioclcs.xtext/model/MiniOCLCS2ASLookup.ocl"
+    }
+    
+    
+    // We generate the CS2AS infrastructure
+	
+    component = org.eclipse.ocl.examples.build.utilities.CopyAndRename {
+    	script = "org.eclipse.qvtd.doc.miniocl.build.MiniOCLBuildEverything"
+    	fromProject = "../../plugins/org.eclipse.qvtd.runtime/src"
+    	toProject = "../org.eclipse.qvtd.doc.minioclcs.xtext/src-gen"
+    	packageCopy = {
+    		from = "org.eclipse.qvtd.runtime.internal.cs2as"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.tx"
+    	}
+    	packageCopy = {
+    		from = "org.eclipse.qvtd.runtime.evaluation"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.tx"
+    	}
+    	packageCopy = {
+    		from = "org.eclipse.qvtd.runtime.internal.evaluation"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.internal.tx"
+    	}
+    	packageCopy = {
+    		from = "org.eclipse.qvtd.runtime.labels"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtexts.labels"
+    	}
+    	packageCopy = {
+    		from = "org.eclipse.qvtd.runtime.library.model"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.library.model"
+    	}
+    	
+    	packageRename = {
+    		from = "org.eclipse.qvtd.runtime.internal.cs2as"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.tx"
+    	}
+    	
+    	packageRename = {
+    		from = "org.eclipse.qvtd.runtime.evaluation"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.tx"
+    	}
+    	packageRename = {
+    		from = "org.eclipse.qvtd.runtime.internal.evaluation"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.internal.tx"
+    	}
+    	packageRename = {
+    		from = "org.eclipse.qvtd.runtime.labels"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.labels"
+    	}
+    	packageRename = {
+    		from = "org.eclipse.qvtd.runtime.library.model"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.library.model"
+    	}
+    }
+    
+     component = org.eclipse.ocl.examples.build.utilities.CopyAndRename {
+    	script = "org.eclipse.qvtd.doc.miniocl.build.MiniOCLBuildEverything"
+    	fromProject = "../../plugins/org.eclipse.qvtd.cs2as.xtext.runtime/src"
+    	toProject = "../org.eclipse.qvtd.doc.minioclcs.xtext/src-gen"
+    	packageCopy = {
+    		from = "org.eclipse.qvtd.cs2as.xtext.runtime"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.tx"
+    	}
+    	packageRename = {
+    		from = "org.eclipse.qvtd.runtime.internal.cs2as"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.tx"
+    	}
+    }
+
+	bean = org.eclipse.emf.ecore.resource.impl.ResourceSetImpl : rSet2 {}
+	bean = org.eclipse.ocl.examples.build.utilities.ProjectMapSetup { resourceSet = rSet2 }
+	bean = org.eclipse.ocl.examples.build.utilities.EcoreGenModelSetup { resourceSet = rSet2 }
+  
+	component = org.eclipse.ocl.examples.build.utilities.GenerateCGedQVTiTransformation { 
+		resourceSet = rSet2
+		oclDocURI = "platform:/resource/org.eclipse.qvtd.doc.minioclcs.xtext/model/MiniOCLCS2AS.ocl"
+		javaFolder = "../org.eclipse.qvtd.doc.minioclcs.xtext/src-gen"
+		javaPackage = "org.eclipse.qvtd.doc.minioclcs.xtext"
+		lookupSolverClassName = "org.eclipse.qvtd.doc.miniocl.lookup.util.MiniOCLLookupSolver"
+		lookupResultItfName = "org.eclipse.qvtd.doc.miniocl.lookup.util.MiniOCLLookupResult"
+		
+		packageRename = {
+    		from = "org.eclipse.qvtd.runtime.library.model"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.library.model"
+    	}
+    	packageRename = {
+    		from = "org.eclipse.qvtd.runtime.internal.cs2as"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.tx"
+    	}
+    	packageRename = {
+    		from = "org.eclipse.qvtd.runtime.evaluation"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.tx"
+    	}
+    	packageRename = {
+    		from = "org.eclipse.qvtd.runtime.internal.evaluation"
+    		to = "org.eclipse.qvtd.doc.minioclcs.xtext.internal.tx"
+    	}
+	}
+}

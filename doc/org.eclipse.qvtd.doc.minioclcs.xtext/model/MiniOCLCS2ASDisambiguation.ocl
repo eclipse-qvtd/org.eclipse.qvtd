@@ -1,0 +1,36 @@
+import  cs : 'generated/MiniOCLCS.ecore#/'
+import  as : '/resource/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.ecore#/'
+import 'MiniOCLCS2ASHelpers.ocl'
+import 'MiniOCLCS2ASLookup.ocl'
+
+package cs
+
+-- FIXME Manually added
+context NameExpCS
+def : lookupVariable() : as::Variable = 
+	ast.lookupVariable(expName.path->first())
+-- ENDOF manual addition
+	
+context NameExpCS
+-- NOTE: opCallExps takes priority, as only CS information is required to disambiguate
+def : isOpCallExpWithImplicitSource() : Boolean =
+	roundedBrackets <> null
+	and not isNameExpOfACallExpCS() 
+def : isOpCallExpWithExplicitSource() : Boolean =
+	roundedBrackets <> null
+	and isNameExpOfACallExpCS()
+-- NOTE: propCallExpWithExplicitSource takes priorioty, to avoid a variable lookup
+def : isPropCallExpWithExplicitSource() : Boolean =
+	roundedBrackets = null	
+	and isNameExpOfACallExpCS()
+-- NOTE: When no explicit source, VariableExp takes priority over propCallExpWithImplicitSource -> language requirement
+def : isVariableExp() : Boolean =
+	roundedBrackets = null	
+	and not isNameExpOfACallExpCS()
+	and expName.path->size() = 1 -- If using a qualified name, we assume we are looking for a fully qualified property
+	and lookupVariable() <> null 
+def : isPropCallExpWithImplicitSource() : Boolean =
+	roundedBrackets = null	
+	and not isNameExpOfACallExpCS()
+	and lookupVariable() = null
+endpackage

@@ -1,0 +1,24 @@
+import  cs : 'generated/MiniOCLCS.ecore#/'
+import  as : '/resource/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.ecore#/'
+
+
+package cs
+
+context NameExpCS 
+def : parentAsCallExpCS() : CallExpCS[?] =
+	let container = self.oclContainer()
+	in if container.oclIsKindOf(CallExpCS)
+	   then container.oclAsType(CallExpCS)
+	   else null 
+	endif
+
+def : isNameExpOfACallExpCS() : Boolean =
+	let parentCallExpCS = parentAsCallExpCS()
+	-- FIXME this in expression makes execution of the CGed Tx fail: CGcode is probably not short circuited
+	-- in parentCallExpCS <> null and parentCallExpCS.nameExp = self
+	in if parentCallExpCS = null
+	   then false
+	   else parentCallExpCS.nameExp = self
+	   endif
+	 
+endpackage

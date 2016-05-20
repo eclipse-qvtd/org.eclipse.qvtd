@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.qvtd.doc.minioclcs.xtext
+Bundle-Vendor: My Company
+Bundle-Version: 0.13.0.qualifier
+Bundle-SymbolicName: org.eclipse.qvtd.doc.minioclcs.xtext; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib,
+ org.antlr.runtime,
+ org.eclipse.xtext.util,
+ org.eclipse.xtend.lib,
+ org.eclipse.emf.common,
+ org.eclipse.ocl.pivot;bundle-version="[1.1.0,2.0.0)",
+ org.eclipse.qvtd.doc.miniocl;bundle-version="[0.13.0,1.0.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.eclipse.qvtd.doc,
+ org.eclipse.qvtd.doc.generator,
+ org.eclipse.qvtd.doc.minioclcs,
+ org.eclipse.qvtd.doc.minioclcs.impl,
+ org.eclipse.qvtd.doc.minioclcs.util,
+ org.eclipse.qvtd.doc.parser.antlr,
+ org.eclipse.qvtd.doc.parser.antlr.internal,
+ org.eclipse.qvtd.doc.scoping,
+ org.eclipse.qvtd.doc.serializer,
+ org.eclipse.qvtd.doc.services,
+ org.eclipse.qvtd.doc.validation
+Import-Package: org.apache.log4j

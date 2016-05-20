@@ -1,0 +1,126 @@
+import  cs : 'generated/MiniOCLCS.ecore#/'
+import  as : '/resource/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.ecore#/'
+import 'MiniOCLCS2ASHelpers.ocl'
+import 'MiniOCLCS2ASLookup.ocl'
+import 'MiniOCLCS2ASDisambiguation.ocl'
+
+package cs
+
+context RootCS
+def : ast() : as::Root[1] =
+	as::Root {
+		ownedPackages = packages.ast()->asOrderedSet() -- FIXME
+	}
+	
+context PackageCS
+def : ast() : as::Package[1] =
+	as::Package {
+		name = name.toString(), -- FIXME bug 494252 
+	ownedClasses = classes.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
+	ownedPackages = packages.ast()->asOrderedSet()  -- FIXME remove asOrderedSet()
+	}
+	
+context ClassCS
+def : ast() : as::Class[1] =
+	as::Class {
+		name = name.toString(), 
+		ownedOperations = operations.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
+		ownedProperties = properties.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
+		--ownedInvariants = ConstraintCS::allInstances()->select(x | x.ast().ownedSpecification.ownedSelfVar.type  = ast()),
+--		ownedInvariants = self->closure(oclContainer())->selectByKind(RootCS)
+--				.contraints.invariants->select(x | x.ast().ownedSpecification.ownedSelfVar.type = ast())
+--				.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
+		superClass = if _extends = null then null else ast().lookupClass(_extends) endif
+	}
+	
+--context InvariantCS
+--def :  ast() : as::Constraint[1] =
+--	as::Constraint {
+--		name = 'Constraint',
+--		ownedSpecification = as::ExpressionInOCL {
+--				ownedBody = self.exp.ast(),
+--				ownedSelfVar = as::Variable{name='self', type= ast().Class}
+--			},	
+--		Class = ast().lookupClass(oclContainer().oclAsType(ConstraintsDefCS).typeRef)
+--	}
+	
+context PropertyCS
+def : ast() : as::Property[1] =
+	as::Property {
+		name = name.toString(), 
+	type = ast().lookupClass(typeRef) 
+	}
+context OperationCS
+def : ast() : as::Operation[1] =
+	as::Operation {
+		name = name.toString(), 
+		type = ast().lookupClass(resultRef),
+		ownedParameters = params.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
+		ownedBodyExpression = as::ExpressionInOCL {
+				ownedBody = self._body.ast(),
+				ownedSelfVar = as::Variable{name='self', type= self.ast().owningClass}
+			}
+	}
+	
+context ParameterCS
+def : ast() : as::Parameter[1] =
+	as::Parameter {
+		name = name.toString(),
+		type = ast().lookupClass(typeRef) 
+	}
+	
+context ExpCS
+def : ast() : as::OCLExpression[1] =
+	invalid -- to be overridden
+	
+context CallExpCS
+def : ast() : as::OCLExpression[1] =
+	nameExp.ast()
+
+context NameExpCS
+def : ast() : as::OCLExpression[1] =
+--	if isOpCallExpWithImplicitSource()
+--	then as::OperationCallExp {
+--		ownedSource = let referredVar : as::Variable = ast().lookupVariable('self')
+--						in as::VariableExp {
+--							referredVariable = referredVar, 
+--							type = referredVar.type
+--						},
+--		ownedArguments = roundedBrackets?.args.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
+--		referredOperation = ast().lookupOperationFrom(ast().oclAsType(as::OperationCallExp).ownedSource.type, expName, ast().oclAsType(as::OperationCallExp).ownedArguments), 
+--		type = ast().oclAsType(as::OperationCallExp).referredOperation?.type
+--	}
+--	else if isOpCallExpWithExplicitSource()
+--	then as::OperationCallExp {
+--		ownedSource = parentAsCallExpCS()?.source?.ast(),
+--		ownedArguments = roundedBrackets?.args.ast()->asOrderedSet(), -- FIXME remove asOrderedSet() 
+--		referredOperation = ast().lookupOperationFrom(ast().oclAsType(as::OperationCallExp).ownedSource.type, expName, ast().oclAsType(as::OperationCallExp).ownedArguments), 
+--		type = ast().oclAsType(as::OperationCallExp).referredOperation?.type
+--	}
+--	else
+	if isPropCallExpWithExplicitSource()
+	then as::PropertyCallExp {
+		ownedSource = parentAsCallExpCS()?.source?.ast(), 
+		referredProperty = ast().lookupPropertyFrom(ast().oclAsType(as::PropertyCallExp).ownedSource.type, expName), 
+		type = ast().oclAsType(as::PropertyCallExp).referredProperty?.type
+	}
+	else if isVariableExp() 
+	then as::VariableExp {
+		referredVariable = ast().lookupVariable(expName.path->first()), 
+		type = ast().oclAsType(as::VariableExp).referredVariable.type
+	} 
+	else if isPropCallExpWithImplicitSource()
+	then as::PropertyCallExp {
+		ownedSource = let referredVar : as::Variable = ast().lookupVariable('self')
+						in as::VariableExp {
+							referredVariable = referredVar, 
+							type = referredVar.type
+						}, 
+		referredProperty = ast().lookupPropertyFrom(ast().oclAsType(as::PropertyCallExp).ownedSource.type, expName), 
+		type = ast().oclAsType(as::PropertyCallExp).referredProperty?.type
+	}
+	else
+		invalid
+	endif endif endif -- endif endif
+	
+endpackage

@@ -1,6 +1,8 @@
 package org.eclipse.qvtd.cs2as.build.mwe;
 
 import java.io.IOException;
+import java.text.MessageFormat;
+import java.util.List;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
@@ -19,68 +21,106 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.emf.mwe2.runtime.Mandatory;
 
-// TODO ideally we could be interesting in setting the TYPE of the trace property, so we point to something more
-// specific than than an EObject
 public class CSTracePropertyInjector extends AbstractWorkflowComponent2 {
 
-	private String baseGenModelURI;
-	private String targetGenModelURI;
+	public static class ASTraceInfo {
+		private String genModelURI;
+		private String traceClassName;
+		
+		@Mandatory
+		public void setTargetGenModel(String genModelURI) {
+			this.genModelURI = genModelURI;
+		}
+		
+		@Mandatory
+		public void setTargetTypeName(String className) {
+			this.traceClassName = className;
+		}
+	}
+	
+	public static class CSTraceInfo {
+		private String baseGenModelURI;
+		private String targetGenModelURI;
+		private String traceClassName = "CSTrace";
+		private String tracePropName = "ast";
+		
+		@Mandatory
+		public void setTargetGenModel(String genModelURI) {
+			this.targetGenModelURI = genModelURI;
+		}
+		
+		public void setBaseGenModel(String genModelURI) {
+			this.baseGenModelURI = genModelURI;
+		}
+		
+		public void setTracePropertyName(String tracePropName) {
+			this.tracePropName = tracePropName;
+		}
+		
+		public void setTraceClassName(String traceClassName) {
+			this.traceClassName = traceClassName;
+		}
+	}
+	
 	private ResourceSet rSet;
-	private String tracePropName = "ast";
+	
+	private CSTraceInfo csTraceInfo;
+	private ASTraceInfo asTraceType;
 	
 	
 	@Override
 	public void preInvoke() {
 		super.preInvoke();
-		if (baseGenModelURI == null) {
-			baseGenModelURI = targetGenModelURI;
+		if (csTraceInfo.baseGenModelURI == null) {
+			csTraceInfo.baseGenModelURI = csTraceInfo.targetGenModelURI;
 		}
 	}
 	
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
-		
-		Resource targetResource = rSet.getResource(URI.createURI(targetGenModelURI), true);
-		GenModel targetGenModel = (GenModel) targetResource.getContents().get(0);
-		GenPackage targetGenPackage = targetGenModel.getGenPackages().get(0); // FIXME what if we have many ?
-		EPackage targetEPackage = targetGenPackage.getEcorePackage();
-		
-		Resource baseResource = rSet.getResource(URI.createURI(baseGenModelURI), true);
-		GenModel baseGenModel = (GenModel) baseResource.getContents().get(0);
-		GenPackage baseGenPackage = baseGenModel.getGenPackages().get(0); // FIXME what if we have many ?
-		EPackage baseEPackage = baseGenPackage.getEcorePackage();
-		
-		EClass traceClass = getTraceClass(baseEPackage);
-		for (EClassifier eClassifier : targetEPackage.getEClassifiers()) {
-			if (eClassifier instanceof EClass) {
-				EClass eClass = (EClass) eClassifier;
-				if (eClass.getESuperTypes().size() == 0
-					&& eClass != traceClass) {
-					eClass.getESuperTypes().add(traceClass);
+
+		try {
+			EClass traceClass = getCSTraceClass(csTraceInfo.baseGenModelURI);
+			Resource targetResource = rSet.getResource(URI.createURI(csTraceInfo.targetGenModelURI), true);
+			GenModel targetGenModel = (GenModel) targetResource.getContents().get(0);
+			GenPackage targetGenPackage = targetGenModel.getGenPackages().get(0); // FIXME what if we have many ?
+			EPackage targetEPackage = targetGenPackage.getEcorePackage();
+			
+			boolean targetChanged = false;
+			for (EClassifier eClassifier : targetEPackage.getEClassifiers()) {
+				if (eClassifier instanceof EClass) {
+					EClass eClass = (EClass) eClassifier;
+					if (eClass.getESuperTypes().size() == 0
+						&& eClass != traceClass) {
+						eClass.getESuperTypes().add(traceClass);
+						targetChanged = true;
+					}
 				}
 			}
-		}
-		
-		baseGenPackage.reconcile();
-		targetGenPackage.reconcile();
-		
-		try {
-			targetResource.save(null);
-			baseResource.save(null);
-			targetEPackage.eResource().save(null);
-			baseEPackage.eResource().save(null);
+			
+			if (targetChanged) {
+				targetEPackage.eResource().save(null);
+				targetGenModel.reconcile();
+				targetResource.save(null);
+			}
 		} catch(IOException e) {
 			issues.addError(e.getMessage());
 		}
-		
 	}
 		
-	private EClass getTraceClass(EPackage ePackage) {
-				
+	private EClass getCSTraceClass(String genModelURI) throws IOException {
+		
+		Resource resource = rSet.getResource(URI.createURI(genModelURI), true);
+		GenModel genModel = (GenModel) resource.getContents().get(0);
+		GenPackage baseGenPackage = genModel.getGenPackages().get(0); // FIXME what if we have many ?
+		EPackage ePackage = baseGenPackage.getEcorePackage();
+		
+		String traceClassName = csTraceInfo.traceClassName;
+		String tracePropName = csTraceInfo.tracePropName; 
 		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
 			if (eClassifier instanceof EClass) {
 				EClass eClass = (EClass) eClassifier;
-				if ("CSTrace".equals(eClass.getName())) {
+				if (traceClassName.equals(eClass.getName())) {
 					for (EReference eRef : eClass.getEReferences()) {
 						if (tracePropName.equals(eRef.getName())) {
 							return eClass;
@@ -91,39 +131,62 @@ public class CSTracePropertyInjector extends AbstractWorkflowComponent2 {
 		}
 		
 		// If not found we create it
-		// FIXME solve the situation of having an already CSTrace class with no ast property
-		
+		// FIXME solve the situation of having an already "traceClassName" class with no ast property
 		EClass traceClass = EcoreFactory.eINSTANCE.createEClass();
-		traceClass.setName("CSTrace");
+		traceClass.setName(traceClassName);
 		traceClass.setAbstract(true);
 		EReference traceProp = EcoreFactory.eINSTANCE.createEReference();
 		traceProp.setName(tracePropName);
 		traceProp.setTransient(true);
-		traceProp.setEType(EcorePackage.Literals.EOBJECT);
+		if (asTraceType == null) {
+			traceProp.setEType(EcorePackage.Literals.EOBJECT);	
+		} else {
+			Resource asResource = rSet.getResource(URI.createURI(asTraceType.genModelURI), true);
+			GenModel asGenModel = (GenModel) asResource.getContents().get(0);
+			GenPackage asGenPackage = asGenModel.getGenPackages().get(0); // FIXME what if we have many ?
+			EPackage asEPackage = asGenPackage.getEcorePackage();
+			traceProp.setEType(getASTraceClass(asEPackage));
+			List<GenPackage> usedGenPackages = genModel.getUsedGenPackages();
+			if (!usedGenPackages.contains(asGenPackage)) {
+				usedGenPackages.add(asGenPackage);
+			}
+		}
+		
 		
 		traceClass.getEStructuralFeatures().add(traceProp);
 		ePackage.getEClassifiers().add(traceClass);
-		return traceClass;
-
 		
+		
+		ePackage.eResource().save(null);
+		genModel.reconcile();
+		resource.save(null);
+		return traceClass;
+	}
+	
+	private EClass getASTraceClass(EPackage ePackage) {
+		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
+			if (eClassifier instanceof EClass) {
+				EClass eClass = (EClass) eClassifier;
+				if (asTraceType.traceClassName.equals(eClass.getName())) {
+					return eClass;
+				}
+			}
+		}
+		throw new IllegalStateException(MessageFormat.format("AS class with name {0} not found in the EPackage of {1}", asTraceType.traceClassName,asTraceType.genModelURI));
 	}
 	
 	@Mandatory
 	public void setResourceSet(ResourceSet rSet) {
 		this.rSet = rSet;
 	}
-		
-	public void setBaseGenModel(String genModelURI) {
-		this.baseGenModelURI = genModelURI;
-	}
 	
 	@Mandatory
-	public void setTargetGenModel(String genModelURI) {
-		this.targetGenModelURI = genModelURI;
+	public void setCSTraceInfo(CSTraceInfo csTraceInfo) {
+		this.csTraceInfo = csTraceInfo;
 	}
 	
-	public void setTracePropertyName(String tracePropName) {
-		this.tracePropName = tracePropName;
+	public void setASTraceType(ASTraceInfo asTraceInfo) {
+		this.asTraceType = asTraceInfo;
 	}
 
 }

@@ -1,0 +1,73 @@
+source cs : 'generated/MiniOCLCS.ecore#/'
+target as : '/resource/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.ecore#/'
+
+mappings {
+	-- TODO
+}
+
+disambiguation {
+	 NameExpCS {
+	 	isOpCallExpWithImplicitSource := parentAsNameExp() = null and roundedBrackets <> null ;
+	 	isOpCallExpWithExplicitSource := parentAsNameExp() <> null and roundedBrackets <> null;
+	 	isPropCallExpWithImplicitSource := parentAsNameExp() = null	and roundedBrackets = null;
+	 	isPropCallExpWithExplicitSource := parentAsNameExp() <> null and roundedBrackets = null;
+	 }
+}
+
+nameresolution {
+		
+	named-element NamedElement name-property name; 	  /*from target */
+	name-referencer PathElementCS name-property pathName; /*from source */
+	name-qualifier PathNameCS name-segments-property path; /*from source */
+	
+	Root {
+		scopes 
+			Package using ownedPackages;
+	}
+	
+	Package {
+		named-element 
+			qualifies Package using ownedPackages,
+					   Class using ownedClasses;
+		
+		scopes-occluding 
+			Package using ownedPackages
+			Class using ownedClasses;
+	}
+
+	Class {
+		named-element
+			qualifies Operation using ownedOperations,
+					   Property using ownedProperties;
+					
+		scopes-occluding
+			Operation using ownedOperations occluding self->closure(superClass).ownedOperations
+			Property using ownedProperties occluding self->closure(superClass).ownedProperties;
+		
+		exports 
+			Operation using ownedOperations
+			Property using ownedProperties; 
+	}
+	
+	Operation {
+		named-element
+			filtered by args : OrderedSet(OCLExpression)
+				when args->size() = ownedParameters->size() 
+						-- FIXME and check arg/parm types conformance
+				;
+		scopes-occluding
+			Variable using ownedContext, ownedParameters;
+	}
+	
+	Property {
+		named-element;
+	}
+	
+	Variable {
+		named-element;
+	}
+}
+
+helpers {
+	
+}
