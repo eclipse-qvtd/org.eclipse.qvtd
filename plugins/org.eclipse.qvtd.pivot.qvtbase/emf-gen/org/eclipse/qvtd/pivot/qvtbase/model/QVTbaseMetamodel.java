@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.internal.utilities.AbstractContents;
 import org.eclipse.ocl.pivot.library.LibraryFeature;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
@@ -61,7 +62,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 	public static final @NonNull String PIVOT_URI = "http://www.eclipse.org/qvt/2015/QVTbase";
 
 	public static @NonNull Package create(@NonNull StandardLibraryInternal standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
-		QVTbaseMetamodel resource = new QVTbaseMetamodel(ClassUtil.nonNullEMF(URI.createURI(PIVOT_URI)));
+		QVTbaseMetamodel resource = new QVTbaseMetamodel(ClassUtil.nonNullEMF(URI.createURI(PIVOT_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION)));
 		Contents contents = new Contents(standardLibrary.getPackage(), name, nsPrefix, nsURI);
 		Model model = contents.getModel();
 		resource.getContents().add(model);
@@ -77,7 +78,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 	public static @NonNull QVTbaseMetamodel getDefault() {
 		QVTbaseMetamodel metamodel = INSTANCE;
 		if (metamodel == null) {
-			metamodel = INSTANCE = new QVTbaseMetamodel(ClassUtil.nonNullEMF(URI.createURI(PIVOT_URI)));
+			metamodel = INSTANCE = new QVTbaseMetamodel(ClassUtil.nonNullEMF(URI.createURI(PIVOT_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION)));
 			Contents contents = new Contents(OCLstdlib.getDefaultPackage(), "qvtbase", "qvtb", PIVOT_URI);
 			metamodel.getContents().add(contents.getModel());
 		}
