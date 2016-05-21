@@ -37,6 +37,7 @@ import org.eclipse.ocl.pivot.library.LibraryFeature;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
+import org.eclipse.ocl.pivot.internal.utilities.PivotObjectImpl;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
@@ -120,8 +121,11 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			super(standardLibrary);
 			root = createModel("http://www.eclipse.org/qvt/2015/QVTbase");
 			pivot = createPackage("pivot", "pivot", "http://www.eclipse.org/ocl/2015/Pivot", IdManager.METAMODEL);
+			((PivotObjectImpl)pivot).setESObject(PivotPackage.eINSTANCE);
 			qvtbase = createPackage("qvtbase", "qvtb", "http://www.eclipse.org/qvt/2015/QVTbase", null);
+			((PivotObjectImpl)qvtbase).setESObject(QVTbasePackage.eINSTANCE);
 			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null);
+			((PivotObjectImpl)orphanage).setESObject(null);
 			installPackages();
 			installClassTypes();
 			installCollectionTypes();
