@@ -779,7 +779,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	 * Return true if a mapping may assign this property in an input model.
 	 */
 	public boolean isDirty(@NonNull Property property) {
-		return dirtyProperties.contains(property);
+		return property.isIsTransient() || dirtyProperties.contains(property);
 	}
 	
 //	private boolean isPivotMMPackage(Package p) {
