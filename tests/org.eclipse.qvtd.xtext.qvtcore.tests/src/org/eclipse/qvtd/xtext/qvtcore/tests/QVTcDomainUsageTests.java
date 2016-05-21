@@ -150,7 +150,7 @@ public class QVTcDomainUsageTests extends LoadTestCase
 	public Resource doLoad_ConcreteWithOCL(@NonNull MyQVT myQVT, @NonNull URI inputURI) throws IOException {
 		String inputName = inputURI.lastSegment();
 		String cstName = inputName + ".xmi";
-		String pivotName = inputName + ".pivot";
+		String pivotName = inputName + ".oclas";
 		URI cstURI = getProjectFileURI(cstName);
 		URI pivotURI = getProjectFileURI(pivotName);
 		BaseCSResource xtextResource = (BaseCSResource) myQVT.getResourceSet().getResource(inputURI, true);
