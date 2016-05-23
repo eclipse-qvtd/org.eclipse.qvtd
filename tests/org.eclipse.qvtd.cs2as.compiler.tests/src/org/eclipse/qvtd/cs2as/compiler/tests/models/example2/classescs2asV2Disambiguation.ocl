@@ -12,14 +12,15 @@ def : ast() : as::Element =
 context NameExpCS 
 def : lookupOperation() : as::Operation = 
 	if oclContainer().oclIsKindOf(NameExpCS) 
-	then ast().lookupOperationFrom(ast().oclAsType(as::OperationCallExp).owningSource.type, self.name, ast().oclAsType(as::OperationCallExp).ownedArguments) 
-	else ast().lookupOperation(name, ast().oclAsType(as::OperationCallExp).ownedArguments)
+	then ast.oclAsType(as::CallExp).lookupOperationFrom(ast.oclAsType(as::CallExp).owningSource.type, self.name, ast.oclAsType(as::OperationCallExp).ownedArguments) 
+	else ast.oclAsType(as::CallExp).lookupOperation(name, ast.oclAsType(as::CallExp).oclAsType(as::OperationCallExp).ownedArguments)
 	endif
 -- END OF manual addition
 	
 context NameExpCS
 def : isOpCallExp() : Boolean =
 	roundedBrackets <> null
+	
 def : isPropCallExp() : Boolean =
 	roundedBrackets = null
 	
