@@ -38,8 +38,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -160,6 +162,11 @@ public class OCL2QVTp {
 				.filter(shadowPartToUpdateMappingGuard())
 				.map(shadowPartToUpdateMapping())
 				.collect(Collectors.toList()));
+
+			pTx.getRule().addAll(allAstOps.stream()
+				.filter(astOpWithNoShadowExps2UpdateMappingGuard())
+				.map(astOpWithNoShadowExps2UpdateMapping())
+				.collect(Collectors.toList()));
 			return iModel;
 		};
 	}
@@ -234,7 +241,7 @@ public class OCL2QVTp {
 			Property refProp = shadowPart.getReferredProperty();
 
 			CoreDomain leftDomain = createUpdateMapping_LeftDomain(shadowExp);
-			CoreDomain rightDomain = createUpdateMapping_RightDomain(shadowExp);
+			CoreDomain rightDomain = createUpdateMapping_RightDomain();
 			mapping.getDomain().add(leftDomain);
 			mapping.getDomain().add(rightDomain);
 
@@ -263,7 +270,7 @@ public class OCL2QVTp {
 
 			PropertyAssignment pAssignment = QVTcoreFactory.eINSTANCE.createPropertyAssignment();
 			pAssignment.setTargetProperty(refProp);
-			pAssignment.setValue(createPropertyAssignmentValue(shadowPart, leftVar));
+			pAssignment.setValue(createPropertyAssignmentValue(shadowPart.getOwnedInit(), leftVar));
 			pAssignment.setSlotExpression(asTypeOpCallExp);
 
 			GuardPattern guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
@@ -279,70 +286,123 @@ public class OCL2QVTp {
 	}
 
 
-	private CoreDomain createCreationMapping_LeftDomain(ShadowExp shadowExp) {
+	protected Predicate<@NonNull Operation> astOpWithNoShadowExps2UpdateMappingGuard() {
+		return operation -> {
 
-		Class contextType = getExpressionContextType().apply(shadowExp);
+			return isAstOp().test(operation)
+					&& !isInvalidOp().test(operation)
+					&& !getAllContents().apply(operation).anyMatch(x -> x instanceof ShadowExp);
+		};
+	}
+
+	public Function<@NonNull Operation, @NonNull Mapping>  astOpWithNoShadowExps2UpdateMapping() {
+		return operation -> {
+			Mapping mapping = QVTcoreFactory.eINSTANCE.createMapping();
+			mapping.setName(getAstPropUpdateMappingName().apply(operation));
+
+			CoreDomain leftDomain = createUpdateMapping_LeftDomain(operation);
+			CoreDomain rightDomain = createUpdateMapping_RightDomain();
+			mapping.getDomain().add(leftDomain);
+			mapping.getDomain().add(rightDomain);
+
+			Variable leftVar = leftDomain.getGuardPattern().getVariable().get(0);
+
+			GuardPattern guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
+			BottomPattern bottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
+			mapping.setGuardPattern(guardPattern);
+			mapping.setBottomPattern(bottomPattern);
+
+			VariableExp varExp = PivotFactory.eINSTANCE.createVariableExp();
+			varExp.setReferredVariable(leftVar);
+			varExp.setType(leftVar.getType());
+
+
+			PropertyAssignment pAssignment = QVTcoreFactory.eINSTANCE.createPropertyAssignment();
+			ExpressionInOCL bodyExp = (ExpressionInOCL) operation.getBodyExpression();
+			pAssignment.setTargetProperty(getTraceabilityProperty(varExp.getType()));
+			pAssignment.setValue(createPropertyAssignmentValue(bodyExp.getOwnedBody(), leftVar));
+			pAssignment.setSlotExpression(varExp);
+
+			bottomPattern.getAssignment().add(pAssignment);
+			return mapping;
+		};
+	}
+
+
+	private CoreDomain createDomain() {
+
 		CoreDomain domain = QVTcoreFactory.eINSTANCE.createCoreDomain();
+		GuardPattern guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
+		BottomPattern bottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
+		domain.setGuardPattern(guardPattern);
+		domain.setBottomPattern(bottomPattern);
+		return domain;
+	}
+
+	private CoreDomain createLeftDomain(Type type) {
+
+		CoreDomain domain = createDomain();
 		domain.setTypedModel(leftTypedModel);
 		domain.setIsCheckable(true);
 
-		GuardPattern guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
-		BottomPattern bottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
-		domain.setGuardPattern(guardPattern);
-		domain.setBottomPattern(bottomPattern);
-
 		Variable variable = PivotFactory.eINSTANCE.createVariable();
-		variable.setName("l"+firstToUpperCase().apply(contextType.getName()));
-		variable.setType(contextType);
+		variable.setName("l"+firstToUpperCase().apply(type.getName()));
+		variable.setType(type);
 
-		guardPattern.getVariable().add(variable);
-
+		domain.getGuardPattern().getVariable().add(variable);
 		return domain;
+	}
+
+	// No realized variable
+	private CoreDomain createRightDomain() {
+
+		CoreDomain domain = createDomain();
+		domain.setTypedModel(rightTypedModel);
+		domain.setIsEnforceable(true);
+		return domain;
+	}
+
+	private CoreDomain createRightDomain(Type type) {
+
+		CoreDomain domain = createRightDomain();
+
+		RealizedVariable variable = QVTcoreFactory.eINSTANCE.createRealizedVariable();
+		variable.setName("r"+firstToUpperCase().apply(type.getName()));
+		variable.setType(type);
+
+		domain.getBottomPattern().getRealizedVariable().add(variable);
+		return domain;
+
+	}
+
+
+	private CoreDomain createCreationMapping_LeftDomain(ShadowExp shadowExp) {
+		return createLeftDomain(getExpressionContextType().apply(shadowExp));
 	}
 
 	private CoreDomain createCreationMapping_RightDomain(ShadowExp shadowExp) {
-
-		Class constructedType = shadowExp.getType();
-		CoreDomain domain = QVTcoreFactory.eINSTANCE.createCoreDomain();
-		domain.setTypedModel(rightTypedModel);
-		domain.setIsEnforceable(true);
-
-		GuardPattern guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
-		BottomPattern bottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
-		domain.setGuardPattern(guardPattern);
-		domain.setBottomPattern(bottomPattern);
-
-		RealizedVariable variable = QVTcoreFactory.eINSTANCE.createRealizedVariable();
-		variable.setName("r"+firstToUpperCase().apply(constructedType.getName()));
-		variable.setType(constructedType);
-
-		bottomPattern.getRealizedVariable().add(variable);
-		return domain;
+		return createRightDomain(shadowExp.getType());
 	}
+
 
 	private CoreDomain createUpdateMapping_LeftDomain(ShadowExp shadowExp) {
 		// It's exactly the same domain as we have for the creation mappings
-		return createCreationMapping_LeftDomain(shadowExp);
+		return createLeftDomain(getExpressionContextType().apply(shadowExp));
 	}
 
-	private CoreDomain createUpdateMapping_RightDomain(ShadowExp shadowExp) {
-		CoreDomain domain = QVTcoreFactory.eINSTANCE.createCoreDomain();
-		domain.setTypedModel(rightTypedModel);
-		domain.setIsEnforceable(true);
-
-		GuardPattern guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
-		BottomPattern bottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
-		domain.setGuardPattern(guardPattern);
-		domain.setBottomPattern(bottomPattern);
-
-		return domain;
+	private CoreDomain createUpdateMapping_RightDomain() {
+		// We don't create a realized variable
+		return createRightDomain();
 	}
 
-	private OCLExpression createPropertyAssignmentValue(ShadowPart shadowPart, Variable leftVar) {
+	private CoreDomain createUpdateMapping_LeftDomain(Operation operation ) {
+		return createLeftDomain(operation.getOwningClass());
+	}
+
+	private OCLExpression createPropertyAssignmentValue(OCLExpression exp, Variable leftVar) {
 
 		// FIXME what happens with synthetised types ????
-		OCLExpression initExp = shadowPart.getOwnedInit();
-		OCLExpression newInitExp = EcoreUtil.copy(initExp);
+		OCLExpression newInitExp = EcoreUtil.copy(exp);
 		//We need to replace the OCL refered "self" varible by the QVTi domain "leftVar" and ast op calls
 		return doReplacements(newInitExp, leftVar);
 	}
@@ -468,6 +528,19 @@ public class OCL2QVTp {
 		};
 	}
 
+	private Predicate<EObject> isInvalidOp() {
+		return element -> {
+			if (element instanceof Operation) {
+				LanguageExpression exp = ((Operation) element).getBodyExpression();
+				if (exp instanceof ExpressionInOCL) {
+					OCLExpression bodyExp = ((ExpressionInOCL) exp).getOwnedBody();
+					return bodyExp.getType() == envFact.getStandardLibrary().getOclInvalidType();
+				}
+			}
+			return false;
+		};
+	}
+
 	/*private List<OperationCallExp> getAstCalls(ShadowPart shadowPart) {
 		return getAllContentsIncludingSelf().apply(shadowPart.getOwnedInit())
 			.filter(isAstOpCallExp())
@@ -478,7 +551,8 @@ public class OCL2QVTp {
 	private @NonNull Property getTraceabilityProperty(Type type) {
 		Class aClass = type.isClass();
 		assert(aClass != null);
-		Set<Class> allClasses = getSuperClasses().apply(aClass);
+		Class pClass = envFact.getMetamodelManager().getPrimaryClass(aClass);
+		Set<Class> allClasses = getSuperClasses().apply(pClass);
 		allClasses.add(aClass);
 		return allClasses.stream()
 				.flatMap(x -> x.getOwnedProperties().stream())
@@ -486,6 +560,12 @@ public class OCL2QVTp {
 				.findFirst().get();
 	}
 
+
+	private Function<@NonNull Operation, @NonNull String> getAstPropUpdateMappingName() {
+		return op -> {
+			return 'u' + op.getOwningClass().getName() + '_' + traceabilityPropName;
+		};
+	}
 
 	private @NonNull Operation getOclAnyEqualsOp() {
 		Class oclAny = envFact.getStandardLibrary().getOclAnyType();
