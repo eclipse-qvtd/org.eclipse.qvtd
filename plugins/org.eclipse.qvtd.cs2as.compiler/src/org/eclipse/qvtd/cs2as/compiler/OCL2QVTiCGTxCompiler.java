@@ -42,6 +42,7 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 	}
 
 	private @Nullable Log log = null;
+	private boolean debug = false;
 		
 	@Override
 	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet, @NonNull CS2ASJavaCompilerParameters params, @NonNull URI oclDocURI, URI... extendedOCLDocURIs) throws Exception {
@@ -75,6 +76,8 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 		// Default options
 		@NonNull Map<@NonNull Key<?>, @Nullable Object> defStepOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();
 		defStepOptions.put(OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions()); // FIXME parametrize save options ?
+		defStepOptions.put(CompilerChain.DEBUG_KEY, debug);
+		
 		options.put(OCL2QVTiCompilerChain.DEFAULT_STEP, defStepOptions);
 		options.put(OCL2QVTiCompilerChain.QVTP_STEP, ocl2qvtpOptions);
 	
@@ -98,5 +101,9 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 
 	public void setLog(@Nullable Log log) {
 		this.log  = log;
+	}
+	
+	public void setDebug(boolean debug) {
+		this.debug = debug;
 	}
 }

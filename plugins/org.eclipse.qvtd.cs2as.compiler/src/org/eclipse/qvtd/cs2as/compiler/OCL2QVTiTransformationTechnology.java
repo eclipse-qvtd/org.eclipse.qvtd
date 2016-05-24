@@ -45,6 +45,7 @@ public class OCL2QVTiTransformationTechnology extends AbstractTransformationTech
 		String lookupResultItfName = (String) parametersMap.get("lookupResultItfName");
 		String javaFolder = (String) parametersMap.get("javaFolder");
 		String javaPackage = (String) parametersMap.get("javaPackage");
+		Boolean debug = (Boolean) parametersMap.get("debug");
 		//
 		String oclFileURI = (String) parametersMap.get("oclFileURI");
 		@SuppressWarnings("unchecked")
@@ -71,6 +72,7 @@ public class OCL2QVTiTransformationTechnology extends AbstractTransformationTech
 		try {
 			OCL2QVTiCGTxCompiler ocl2qvTiCGTxCompiler = new OCL2QVTiCGTxCompiler();
 			ocl2qvTiCGTxCompiler.setLog(log);
+			ocl2qvTiCGTxCompiler.setDebug(debug);
 			Class<? extends Transformer> transformationClass = ocl2qvTiCGTxCompiler.compileTransformation(resourceSet, cgParams, traceabilityPropName, oclDocURI, extendedOclDocURIs);
 			if (log != null) {
 				log.info("Created " + transformationClass);
