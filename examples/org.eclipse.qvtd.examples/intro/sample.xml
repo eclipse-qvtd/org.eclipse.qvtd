@@ -2,8 +2,8 @@
 <introContent>
   	<extensionContent id="qvtd-examples-introExtension" style="css/sample.css" name="Sample Extension" path="overview/@">
 		<group style-id="content-group" id="qvtd-examples-introLink-group">
-       		<link label="QVT Declarative Examples" url="http://www.eclipse.org" id="qvtd-examples-introLink" style-id="content-link">
-          		<text>Example QVT Declarative projects may be loaded by File->New->Projects... Examples.QVT...</text>
+       		<link label="QVT Declarative Examples" url="http://org.eclipse.ui.intro/showHelpTopic?id=/org.eclipse.qvtd.doc/help/GettingStarted.html" id="qvtd-examples-introLink" style-id="content-link">
+          		<text>Get started by loading an example model transformation project</text>
        		</link>
        	</group>
   	</extensionContent>

@@ -1,0 +1,267 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Getting Started</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="QVT Declarative Documentation">
+<link rel="up" href="OverviewandGettingStarted.html" title="Overview and Getting Started">
+<link rel="prev" href="WhoisBehindEclipseQVTd.html" title="Who is Behind Eclipse QVTd?">
+<link rel="next" href="Extensions.html" title="Extensions">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Getting Started</h1>
+<div class="section" title="Getting Started">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="GettingStarted"></a>Getting Started</h2>
+</div>
+</div>
+</div>
+<p>
+				
+<span class="bold"><strong>Warning: Eclipse QVTd 0.13.0 execution is not sufficiently mature for more than experimental/research usage.</strong></span>
+			
+</p>
+<p>For a very quick demonstration of QVTc or QVTr you may install the appropriate example project.</p>
+<div class="section" title="QVTr Example Project">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="QVTrExampleProject"></a>QVTr Example Project</h3>
+</div>
+</div>
+</div>
+<p>Invoke 
+					<span class="bold"><strong>File-&gt;New-&gt;Example...</strong></span> then select 
+					<span class="bold"><strong>Examples</strong></span> then 
+					<span class="bold"><strong>QVT (Query/View/Transformation Language) Projects</strong></span> then select either 
+					<span class="bold"><strong>QVTr HSTM2FSTM Project</strong></span> then 
+					<span class="bold"><strong>Finish</strong></span> to create a small example project called 
+					<span class="bold"><strong>org.eclipse.qvtd.examples.qvtrelation.hstm2fstm</strong></span>.
+				</p>
+<p>A QVTr or QVTc editor opens to show the transformation.</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/QVTrEditor.png"></div>
+<p>
+				
+</p>
+<p>The image shows one of the mappings with hovertext elaborating the declaration referenced by 
+					<span class="bold"><strong>name</strong></span>.
+				</p>
+<p>The QVT editors extend the OCL editor and so the OCL context menu provides useful functionality such as saving the transformation in Abstyract Syntax form.</p>
+<p>A QVTr project is currently just a normal Java project. (A QVTd nature may be added in the future to support auto-building.)</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/QVTrProject.png"></div>
+<p>
+				
+</p>
+<p>The QVTr Hierarchical to Flat State Machine example contains</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>HierarchicalStateMachine2FlatStateMachine.qvtr</strong></span> - the transformation
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>HierarchicalStateMachine.ecore</strong></span> - the source metamodel
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>FlatStateMachine.ecore</strong></span> - the target metamodel
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>hier.xmi</strong></span> - an example model to exercise the execution
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>expected.xmi</strong></span> - the expected execution result
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>HierarchicalStateMachine2FlatStateMachine.qvtr.launch</strong></span> - a launch configuration for execution
+						</p>
+</li>
+</ul>
+</div>
+<p>You may execute the transformation on the 
+					<span class="bold"><strong>hier.xmi</strong></span> input by invoking 
+					<span class="bold"><strong>Run-&gt;Run Configurations...</strong></span> then 
+					<span class="bold"><strong>QVTr (Relations) transformation</strong></span> then 
+					<span class="bold"><strong>HierarchicalStateMachine2FlatStateMachine.qvtr</strong></span>.
+				</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/QVTrLaunch.png"></div>
+<p>
+				
+</p>
+<p>The launch is currently cluttered by an excess of development information and not yet implemented facilities. The important fields are:</p>
+<div class="section" title="Project / Transformation">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="ProjectTransformation"></a>Project / Transformation</h4>
+</div>
+</div>
+</div>
+<p>The project name provides a default name against which other filenames are resolved to reduce screen clutter.</p>
+<p>The transformation name is the transformation to be executed.</p>
+<p>The mode can only be enforce creation/overwrite of the output model at present.</p>
+<p>The direction selects the output direction when executing a multi-directional transformation.</p>
+</div>
+<div class="section" title="Inputs">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Inputs"></a>Inputs</h4>
+</div>
+</div>
+</div>
+<p>The file bound to each input domain must be specified.</p>
+</div>
+<div class="section" title="New outputs">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Newoutputs"></a>New outputs</h4>
+</div>
+</div>
+</div>
+<p>The file bound to each output domain must be specified.</p>
+</div>
+<div class="section" title="Intermediates">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Intermediates"></a>Intermediates</h4>
+</div>
+</div>
+</div>
+<p>The location of each intermediate file in the transformation chain is identified. Their default location is a 
+						<span class="bold"><strong>temp</strong></span> subfolder of the transformation&rsquo;s parent folder. You can change them.
+					</p>
+<p>If you click 
+						<span class="bold"><strong>Compile</strong></span> you can see the compilation progress as the grey 
+						<span class="bold"><strong>Stale</strong></span> texts change to green 
+						<span class="bold"><strong>Ready</strong></span> text.
+					</p>
+</div>
+<div class="section" title="Build">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Build"></a>Build</h4>
+</div>
+</div>
+</div>
+<p>The 
+						<span class="bold"><strong>Interpreted</strong></span> check box selects between interpreted execution (fast start, slow run) or code generated execution (slow start, fast run).
+					</p>
+<p>The interpreted compilation synthesizes a QVTc middle metamodel and a genmodel.</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+								
+<span class="bold"><strong>HierarchicalStateMachine2FlatStateMachine.ecore</strong></span>
+							
+</p>
+</li>
+<li class="listitem">
+<p>
+								
+<span class="bold"><strong>HierarchicalStateMachine2FlatStateMachine.genmodel</strong></span>
+							
+</p>
+</li>
+</ul>
+</div>
+<p>The code generated compilation additionally synthesizes a Java class to implement the transformation and the Java classes for the QVTc middle model.</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+								
+<span class="bold"><strong>HierarchicalStateMachine2FlatStateMachine.java</strong></span>
+							
+</p>
+</li>
+</ul>
+</div>
+<p>The generated files are generated to a distinct 
+						<span class="bold"><strong>src-gen</strong></span> tree which you may need to refresh to see all files. Java problem markers come and go during the synthesis and build. The errors should all be gone before execution proceeds. Elimination of warnings is a work in progress.
+					</p>
+<div class="section" title="Run">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="Run"></a>Run</h5>
+</div>
+</div>
+</div>
+<p>Clicking on 
+							<span class="bold"><strong>Run</strong></span> will 
+							<span class="bold"><strong>Compile</strong></span> automatically if you have not already done so.
+						</p>
+<p>The result should be a 
+							<span class="bold"><strong>flat.xmi</strong></span> file that is similar to the 
+							<span class="bold"><strong>expected.xmi</strong></span> file.
+						</p>
+</div>
+</div>
+</div>
+<div class="section" title="QVTc Example Project">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="QVTcExampleProject"></a>QVTc Example Project</h3>
+</div>
+</div>
+</div>
+<p>The OMG QVTc variant of the traditional UML to RDBMS transformation may be installed by:</p>
+<p>Invoke 
+					<span class="bold"><strong>File-&gt;New-&gt;Example...</strong></span> then select 
+					<span class="bold"><strong>Examples</strong></span> then 
+					<span class="bold"><strong>QVT (Query/View/Transformation Language) Projects</strong></span> then select either 
+					<span class="bold"><strong>QVTc UML2RDBMS Project</strong></span> then 
+					<span class="bold"><strong>Finish</strong></span> to create a small example project called 
+					<span class="bold"><strong>org.eclipse.qvtd.examples.qvtcore.uml2rdbms</strong></span>.
+				</p>
+<p>The QVTc editor opens to show the transformation.</p>
+<p>The QVTc tooling is very similar to the QVTr tooling. The main difference is that for QVTc the middle model and its genmodel are designed by the user, whereas the QVTr middle model and genmodel are synthesized automatically. If code generated Java execution is required, using the genmodel to generate Java code for the middle model is again a manual user responsibility. </p>
+</div>
+</div>
+</body>
+</html>

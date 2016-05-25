@@ -1,0 +1,100 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>How Does It Work?</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="QVT Declarative Documentation">
+<link rel="up" href="OverviewandGettingStarted.html" title="Overview and Getting Started">
+<link rel="prev" href="OverviewandGettingStarted.html" title="Overview and Getting Started">
+<link rel="next" href="WhoisBehindEclipseQVTd.html" title="Who is Behind Eclipse QVTd?">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">How Does It Work?</h1>
+<div class="section" title="How Does It Work?">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="HowDoesItWork"></a>How Does It Work?</h2>
+</div>
+</div>
+</div>
+<p>QVTr and QVTc are programming languages, so you will want to edit them, execute them and debug them.</p>
+<div class="section" title="Editing">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Editing"></a>Editing</h3>
+</div>
+</div>
+</div>
+<p>Eclipse QVTd provides QVTr, QVTc and QVTi editors developed using Xtext. The QVTc editor may be used to view or maintain the intermediate QVTu, QVTm and QVTp models.</p>
+<p>The editor may be opened conventionally by double clicking a *.qvtr, *.qvtc, or *.qvti text file name in an Explorer view. This displays the source text with syntax highlighting and an outline of the Abstract Syntax.</p>
+<p>The QVTc and QVTi editors may also be used to view *.qvtcas and *.qvtias XMI files as source text. </p>
+<div class="section" title="Status">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Status"></a>Status</h4>
+</div>
+</div>
+</div>
+<p>These editors have been available since QVTd 0.9.0. They are useful, but currently have only limited well-formedness validation.</p>
+<p>Editing *.qvtcas and *.qvtias files should be possible but is not recommended in the current release.</p>
+<p>Hopefully 1.0.0 (Oxygen) will offer UMLX as a graphical alternative to the QVTr textual exposition of a transformation.</p>
+</div>
+</div>
+<div class="section" title="Execution">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Execution"></a>Execution</h3>
+</div>
+</div>
+</div>
+<p>The 0.13.0 release provides one QVTr and one QVTc example project that be installed and executed. However execution functionality is very new and not suitable for more than experimental use.</p>
+<div class="section" title="Status">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Status2"></a>Status</h4>
+</div>
+</div>
+</div>
+<p>QVTi execution has been available since 0.11.0 (Luna). It demonstrates the extensibility of the Eclipse OCL interpreter, Java code generator and debugger. QVTi is a low level intermediate; it is not intended as a primary programming language.</p>
+<p>A very preliminary form of QVTc execution was available in 0.12.0 (Mars) using an Epsilon prototype of the transformation chain.</p>
+<p>0.13.0 (Neon) introduces a Java re-implementation of the full transformation chain so that QVTr and QVTc transformations can be executed. It is only suitable for researchers.</p>
+<p>The current execution supports only creation of output models. Checking, updated, incremental, in-place execution and views are work in progress.</p>
+<p>Hopefully 1.0.0 (Oxygen) will have more substantial functionality and will be used internally to replace some of the manual Java transformations by QVTr / UMLX transformations.</p>
+</div>
+</div>
+<div class="section" title="Debugger">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Debugger"></a>Debugger</h3>
+</div>
+</div>
+</div>
+<p>The QVTi debugger extends the OCL debugger.</p>
+<div class="section" title="Status">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Status3"></a>Status</h4>
+</div>
+</div>
+</div>
+<p>The further extension to provide QVTc and QVTr debugging is work in progress.</p>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Extensions</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="QVT Declarative Documentation">
+<link rel="up" href="OverviewandGettingStarted.html" title="Overview and Getting Started">
+<link rel="prev" href="GettingStarted.html" title="Getting Started">
+<link rel="next" href="glossary.html" title="Appendix&nbsp;A.&nbsp;Glossary">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Extensions</h1>
+<div class="section" title="Extensions">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Extensions"></a>Extensions</h2>
+</div>
+</div>
+</div>
+<div class="section" title="Import">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Import"></a>Import</h3>
+</div>
+</div>
+</div>
+<p>The Eclipse support for OCL, QVTc and QVTr adds an import statement to define the location of the metamodels.</p>
+<div class="literallayout">
+<p>
+<code class="code">import&nbsp;SimpleUML&nbsp;:&nbsp;'SimpleUml.ecore'::umlMM;<br>
+
+</code>
+</p>
+</div>
+<p>This specifies that the 
+					<span class="bold"><strong>SimpleUml.ecore</strong></span> metamodel is loaded. The metamodel root prefixes a navigation to select an imported element. In the example above the 
+					<span class="bold"><strong>umlMM</strong></span> package is selected and made available with a 
+					<span class="bold"><strong>SimpleUML</strong></span> alias. If alias-name and colon separator are omitted, the imported element is accessible by its own name.
+				</p>
+<p>The quoted name may be importing-file-relative file name as above, or a an absolute path such as 
+					<span class="bold"><strong>platform:/resource/org.eclipse.emf.examples.library/model/extlibrary.ecore</strong></span> or a registered namespace URI such as 
+					<span class="bold"><strong>http://www.eclipse.org/emf/2002/Ecore</strong></span>.
+				</p>
+</div>
+<div class="section" title="Packages">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Packages"></a>Packages</h3>
+</div>
+</div>
+</div>
+<p>The Eclipse support for QVTc and QVTr supports declaration of transformations within a package hierarchy. A Transformation therefore extends just a Class, not a Class and a Package as specified by OMG. The Transformation is declared nested within one of more Packages by qualifying the transformation name with one of more package names. For compatibility, if no Package is declared, the Transformation is contained by a Package with a blank name.</p>
+<p>The package hierarchy declared for the Transformation is re-used to define the Java package hierarchy when Java code is generated from the Transformation.</p>
+</div>
+<div class="section" title="QVTc Middle Model">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="QVTc Middle Model"></a>QVTc Middle Model</h3>
+</div>
+</div>
+</div>
+<p>The QVTc part of the specification is unclear as to how the middle metamodel is defined.</p>
+<p>Eclipse QVTc imports the middle metamodel in the same way as any other metamodel. This is then used as a used-package of an unnamed domain.</p>
+<div class="literallayout">
+<p>
+<code class="code">import&nbsp;SimpleUML&nbsp;:&nbsp;'SimpleUml.ecore'::umlMM;<br>
+import&nbsp;SimpleUMLtoRDBMS&nbsp;:&nbsp;'SimpleUMLtoRDBMS.ecore'::uml2rdbms;<br>
+import&nbsp;SimpleRDBMS&nbsp;:&nbsp;'SimpleRdbms.ecore'::rdbmsMM;<br>
+
+</code>
+</p>
+</div>
+<div class="literallayout">
+<p>
+<code class="code">transformation&nbsp;umlRdbms&nbsp;{<br>
+	uml&nbsp;imports&nbsp;SimpleUML;<br>
+	rdbms&nbsp;imports&nbsp;SimpleRDBMS;<br>
+	imports&nbsp;SimpleUMLtoRDBMS;<br>
+}<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="QVTr Middle Model">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="QVTr Middle Model"></a>QVTr Middle Model</h3>
+</div>
+</div>
+</div>
+<p>The QVTr part of the specification appears to specify how the middle metamodel is synthesized. The specification however ignores details such as Models, Packages and Collections. There is also a lack of clarity as to whether the trace is the minimum required to support non-re-invocation of mappings or whether it should contain everything necessary for minimal incremental re-execution. The Eclipse QVTd implementation is work-in-progress.</p>
+</div>
+<div class="section" title="QVTr Collection Templates">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Collection Templates"></a>QVTr Collection Templates</h3>
+</div>
+</div>
+</div>
+<p>The QVTr part of the specification omits almost all detail of the semantics of Collections and in particular Collection Templates. The implementation in Eclipse QVTd is therefore language design work-in-progress rather than implementation work-in-progress.</p>
+</div>
+<div class="section" title="OCL/EMOF Metamodels">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="OCL/EMOF Metamodels"></a>OCL/EMOF Metamodels</h3>
+</div>
+</div>
+</div>
+<p>The QVT specification provides layered metamodels for QVTrelation, QVTtemplate, QVTcore and QVTbase layered on top of EssentialOCL and EMOF. The EssentialOCL and EMOF metamodels are very strongly influenced by OCL and MOF specifications, but are ot formally compliant.</p>
+<p>Eclipse QVTd provides layered metamodels for QVTrelation, QVTtemplate, QVTcore and QVTbase layered on top of Pivot which is derived from the UML 2.5 metamodel and work towards a future OCL specification. (QVTimperative shares some QVTcore functionality through a QVTcoreBase abstraction.)</p>
+<p>A consequence of extending the Eclipse OCL Pivot is that Eclipse QVTd has preliminary support for templated types, extensible libraries and safe navigation.</p>
+</div>
+<div class="section" title="this">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="this"></a>this</h3>
+</div>
+</div>
+</div>
+<p>QVTo defines 
+					<span class="bold"><strong>this</strong></span> as a reserved variable for the instance of the executing transformation.
+				</p>
+<p>Eclipse QVTd provides 
+					<span class="bold"><strong>this</strong></span> for QVTc and QVTr and thereby solves an OCL compatibility problem with respect to the source of an operation call of a query. In Eclipse QVTd, queries, using the Function class, are operations of the Transformation class and are invoked with an implicit 
+					<span class="bold"><strong>this</strong></span>. An explicit 
+					<span class="bold"><strong>this</strong></span> can be used, and is used when viewing the equivalent source text for the Abstract Syntax model.
+				</p>
+</div>
+</div>
+</body>
+</html>

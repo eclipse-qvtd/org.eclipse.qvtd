@@ -8,8 +8,6 @@
 <mapEntry key="hier" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/in/hier.xmi"/>
 </mapAttribute>
 <mapAttribute key="intermediates">
-<mapEntry key="Class" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/bin"/>
-<mapEntry key="Java" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src-gen"/>
 <mapEntry key="QVTc" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/temp/HierarchicalStateMachine2FlatStateMachine.qvtcas"/>
 <mapEntry key="QVTi" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/temp/HierarchicalStateMachine2FlatStateMachine.qvtias"/>
 <mapEntry key="QVTm" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/temp/HierarchicalStateMachine2FlatStateMachine.qvtm.qvtcas"/>
@@ -18,7 +16,7 @@
 <mapEntry key="QVTs" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/temp/HierarchicalStateMachine2FlatStateMachine.qvts.xmi"/>
 <mapEntry key="QVTu" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/temp/HierarchicalStateMachine2FlatStateMachine.qvtu.qvtcas"/>
 </mapAttribute>
-<booleanAttribute key="interpreted" value="false"/>
+<booleanAttribute key="interpreted" value="true"/>
 <stringAttribute key="mode" value="ENFORCE - CREATE"/>
 <mapAttribute key="old-in"/>
 <mapAttribute key="old-out"/>

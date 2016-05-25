@@ -1,0 +1,423 @@
+<?xml version='1.0' ?><!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book>
+	<title>QVT Declarative Documentation</title>
+	<chapter id="OverviewandGettingStarted">
+		<title>Overview and Getting Started</title>
+		<para>For a quick demonstration of QVTc or QVTr editing and execution go to 
+			<link linkend="GettingStarted">Getting Started</link>.
+		</para>
+		<para>A PDF version of this documentation is available at 
+			<ulink url="http://download.eclipse.org/qvtd/doc/0.13.0/qvtd.pdf">QVTd 0.13.0 Documentation</ulink>.
+		</para>
+		<section id="WhatisQVTQueryViewTransformation">
+			<title>What is 
+				<glossterm>QVT</glossterm>?
+			</title>
+			<para>The 
+				<ulink url="http://www.omg.org/spec/QVT/">Query/View/Transformation language</ulink> is the model transformation language specified by the 
+				<glossterm>OMG</glossterm> (Object Management Group). Or rather it is three specified languages to which Eclipse QVTd adds five intermediate languages.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>QVTo – Operation Mappings is an imperative transformation language supported by the 
+						<ulink url="https://projects.eclipse.org/projects/modeling.mmt.qvt-oml">Eclipse QVTo project</ulink>.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<listitem>
+					<para>QVTr – Relations is a rich declarative transformation language.</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<listitem>
+					<para>QVTc – Core is a simple core declarative transformation language.</para>
+				</listitem>
+			</itemizedlist>
+			<para>QVTc and QVTr, generically referred to as QVTd, are supported the 
+				<ulink url="https://projects.eclipse.org/projects/modeling.mmt.qvtd">Eclipse QVTd project</ulink> (QVT Declarative) and documented here.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/QVThorizontalAlphabet.png" scale="55"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>The Eclipse QVTd support involves a transformation chain from QVTr via QVTc to executable form. The stages in this chain are:</para>
+			<itemizedlist>
+				<listitem>
+					<para>QVTu – a unidirectional declarative transformation language – a simplification of QVTc.</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<listitem>
+					<para>QVTm – a minimal declarative transformation language – a further simplification of QVTc.</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<listitem>
+					<para>QVTp – a partitioned declarative transformation language – a further simplification of QVTc.</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<listitem>
+					<para>QVTs – a graphical declarative transformation language suitable for schedule determination.</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<listitem>
+					<para>QVTi – an executable imperative transformation language – a variant of QVTc.</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<listitem>
+					<para>Java – the ultimate executable form</para>
+				</listitem>
+			</itemizedlist>
+			<para>Note that QVTu, QVTm, QVTp, QVTs and QVTi are not defined by the current OMG specification. It is possible that they may contribute to a future specification.</para>
+			<section id="ModelingLayers">
+				<title>Modeling Layers</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<emphasis>EMF is Modeled Structure</emphasis>
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>The Eclipse Modeling Framework (
+					<glossterm>EMF</glossterm>) supports the definition of structural meta-models and the subsequent use of models conforming to these meta-models. EMF also supports generating of Java code to represent the meta-models. Additional Java code can be provided to add behavior to the structural meta-models.
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<emphasis>OCL is EMF and Modeled Behavior</emphasis>
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>
+					<glossterm>OCL</glossterm> provides a modeling language that allows the behavior to be embedded within the structural meta-models or provided as a complement to those meta-models. As a modeling language, OCL understands the models and so OCL code is much more compact than the equivalent Java. OCL code can be statically checked, whereas the corresponding Java code often uses reflection and so cannot be checked.  
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<emphasis>QVT is Modeled Model Execution</emphasis>
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>Eclipse QVTd is an implementation of the OMG QVT 1.3 specification for use with Ecore and UML meta-models.</para>
+				<para>Eclipse QVTd exploits the extensibility of the Eclipse OCL Pivot model.</para>
+			</section>
+		</section>
+		<section id="HowDoesItWork">
+			<title>How Does It Work?</title>
+			<para>QVTr and QVTc are programming languages, so you will want to edit them, execute them and debug them.</para>
+			<section id="Editing">
+				<title>Editing</title>
+				<para>Eclipse QVTd provides QVTr, QVTc and QVTi editors developed using Xtext. The QVTc editor may be used to view or maintain the intermediate QVTu, QVTm and QVTp models.</para>
+				<para>The editor may be opened conventionally by double clicking a *.qvtr, *.qvtc, or *.qvti text file name in an Explorer view. This displays the source text with syntax highlighting and an outline of the Abstract Syntax.</para>
+				<para>The QVTc and QVTi editors may also be used to view *.qvtcas and *.qvtias XMI files as source text. </para>
+				<section id="Status">
+					<title>Status</title>
+					<para>These editors have been available since QVTd 0.9.0. They are useful, but currently have only limited well-formedness validation.</para>
+					<para>Editing *.qvtcas and *.qvtias files should be possible but is not recommended in the current release.</para>
+					<para>Hopefully 1.0.0 (Oxygen) will offer UMLX as a graphical alternative to the QVTr textual exposition of a transformation.</para>
+				</section>
+			</section>
+			<section id="Execution">
+				<title>Execution</title>
+				<para>The 0.13.0 release provides one QVTr and one QVTc example project that be installed and executed. However execution functionality is very new and not suitable for more than experimental use.</para>
+				<section id="Status2">
+					<title>Status</title>
+					<para>QVTi execution has been available since 0.11.0 (Luna). It demonstrates the extensibility of the Eclipse OCL interpreter, Java code generator and debugger. QVTi is a low level intermediate; it is not intended as a primary programming language.</para>
+					<para>A very preliminary form of QVTc execution was available in 0.12.0 (Mars) using an Epsilon prototype of the transformation chain.</para>
+					<para>0.13.0 (Neon) introduces a Java re-implementation of the full transformation chain so that QVTr and QVTc transformations can be executed. It is only suitable for researchers.</para>
+					<para>The current execution supports only creation of output models. Checking, updated, incremental, in-place execution and views are work in progress.</para>
+					<para>Hopefully 1.0.0 (Oxygen) will have more substantial functionality and will be used internally to replace some of the manual Java transformations by QVTr / UMLX transformations.</para>
+				</section>
+			</section>
+			<section id="Debugger">
+				<title>Debugger</title>
+				<para>The QVTi debugger extends the OCL debugger.</para>
+				<section id="Status3">
+					<title>Status</title>
+					<para>The further extension to provide QVTc and QVTr debugging is work in progress.</para>
+				</section>
+			</section>
+		</section>
+		<section id="WhoisBehindEclipseQVTd">
+			<title>Who is Behind Eclipse QVTd?</title>
+			<para>Eclipse QVTd is an Open Source project. All code has been developed under the auspices of Eclipse.</para>
+			<para>Eclipse QVTd is a largely one man development by Ed Willink who has been the OMG QVT 
+				<glossterm>RTF</glossterm> (Revision Task Force) chair since QVT 1.2. Expect further revisions of the QVT specification to exploit feedback from the Eclipse QVTo and QVTd projects.
+			</para>
+			<para>There is now a significant personnel and corporate overlap between the Eclipse QVTd committers and the OMG QVT RTF and so Eclipse OCL is pioneering solutions to many of the under-specification problems in the OCL specification.</para>
+			<para>Ed Willink is also project lead of the Eclipse OCL where the new pivot-based implementation prototypes solutions to many problems with the OMG OCL specification for which Ed Willink has been the RTF chair since OCL 2.4.</para>
+			<para>The many aspects of OCL and QVTd are converging; help welcome.</para>
+		</section>
+		<section id="GettingStarted">
+			<title>Getting Started</title>
+			<para>
+				<emphasis role="bold">Warning: Eclipse QVTd 0.13.0 execution is not sufficiently mature for more than experimental/research usage.</emphasis>
+			</para>
+			<para>For a very quick demonstration of QVTc or QVTr you may install the appropriate example project.</para>
+			<section id="QVTrExampleProject">
+				<title>QVTr Example Project</title>
+				<para>Invoke 
+					<emphasis role="bold">File-&gt;New-&gt;Example...</emphasis> then select 
+					<emphasis role="bold">Examples</emphasis> then 
+					<emphasis role="bold">QVT (Query/View/Transformation Language) Projects</emphasis> then select either 
+					<emphasis role="bold">QVTr HSTM2FSTM Project</emphasis> then 
+					<emphasis role="bold">Finish</emphasis> to create a small example project called 
+					<emphasis role="bold">org.eclipse.qvtd.examples.qvtrelation.hstm2fstm</emphasis>.
+				</para>
+				<para>A QVTr or QVTc editor opens to show the transformation.</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/QVTrEditor.png" scale="50"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>The image shows one of the mappings with hovertext elaborating the declaration referenced by 
+					<emphasis role="bold">name</emphasis>.
+				</para>
+				<para>The QVT editors extend the OCL editor and so the OCL context menu provides useful functionality such as saving the transformation in Abstyract Syntax form.</para>
+				<para>A QVTr project is currently just a normal Java project. (A QVTd nature may be added in the future to support auto-building.)</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/QVTrProject.png" scale="60"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>The QVTr Hierarchical to Flat State Machine example contains</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<emphasis role="bold">HierarchicalStateMachine2FlatStateMachine.qvtr</emphasis> - the transformation
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis role="bold">HierarchicalStateMachine.ecore</emphasis> - the source metamodel
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis role="bold">FlatStateMachine.ecore</emphasis> - the target metamodel
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis role="bold">hier.xmi</emphasis> - an example model to exercise the execution
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis role="bold">expected.xmi</emphasis> - the expected execution result
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<emphasis role="bold">HierarchicalStateMachine2FlatStateMachine.qvtr.launch</emphasis> - a launch configuration for execution
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>You may execute the transformation on the 
+					<emphasis role="bold">hier.xmi</emphasis> input by invoking 
+					<emphasis role="bold">Run-&gt;Run Configurations...</emphasis> then 
+					<emphasis role="bold">QVTr (Relations) transformation</emphasis> then 
+					<emphasis role="bold">HierarchicalStateMachine2FlatStateMachine.qvtr</emphasis>.
+				</para>
+				<para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/QVTrLaunch.png" scale="40"/>
+						</imageobject>
+					</mediaobject>
+				</para>
+				<para>The launch is currently cluttered by an excess of development information and not yet implemented facilities. The important fields are:</para>
+				<section id="ProjectTransformation">
+					<title>Project / Transformation</title>
+					<para>The project name provides a default name against which other filenames are resolved to reduce screen clutter.</para>
+					<para>The transformation name is the transformation to be executed.</para>
+					<para>The mode can only be enforce creation/overwrite of the output model at present.</para>
+					<para>The direction selects the output direction when executing a multi-directional transformation.</para>
+				</section>
+				<section id="Inputs">
+					<title>Inputs</title>
+					<para>The file bound to each input domain must be specified.</para>
+				</section>
+				<section id="Newoutputs">
+					<title>New outputs</title>
+					<para>The file bound to each output domain must be specified.</para>
+				</section>
+				<section id="Intermediates">
+					<title>Intermediates</title>
+					<para>The location of each intermediate file in the transformation chain is identified. Their default location is a 
+						<emphasis role="bold">temp</emphasis> subfolder of the transformation’s parent folder. You can change them.
+					</para>
+					<para>If you click 
+						<emphasis role="bold">Compile</emphasis> you can see the compilation progress as the grey 
+						<emphasis role="bold">Stale</emphasis> texts change to green 
+						<emphasis role="bold">Ready</emphasis> text.
+					</para>
+				</section>
+				<section id="Build">
+					<title>Build</title>
+					<para>The 
+						<emphasis role="bold">Interpreted</emphasis> check box selects between interpreted execution (fast start, slow run) or code generated execution (slow start, fast run).
+					</para>
+					<para>The interpreted compilation synthesizes a QVTc middle metamodel and a genmodel.</para>
+					<itemizedlist>
+						<listitem>
+							<para>
+								<emphasis role="bold">HierarchicalStateMachine2FlatStateMachine.ecore</emphasis>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<emphasis role="bold">HierarchicalStateMachine2FlatStateMachine.genmodel</emphasis>
+							</para>
+						</listitem>
+					</itemizedlist>
+					<para>The code generated compilation additionally synthesizes a Java class to implement the transformation and the Java classes for the QVTc middle model.</para>
+					<itemizedlist>
+						<listitem>
+							<para>
+								<emphasis role="bold">HierarchicalStateMachine2FlatStateMachine.java</emphasis>
+							</para>
+						</listitem>
+					</itemizedlist>
+					<para>The generated files are generated to a distinct 
+						<emphasis role="bold">src-gen</emphasis> tree which you may need to refresh to see all files. Java problem markers come and go during the synthesis and build. The errors should all be gone before execution proceeds. Elimination of warnings is a work in progress.
+					</para>
+					<section id="Run">
+						<title>Run</title>
+						<para>Clicking on 
+							<emphasis role="bold">Run</emphasis> will 
+							<emphasis role="bold">Compile</emphasis> automatically if you have not already done so.
+						</para>
+						<para>The result should be a 
+							<emphasis role="bold">flat.xmi</emphasis> file that is similar to the 
+							<emphasis role="bold">expected.xmi</emphasis> file.
+						</para>
+					</section>
+				</section>
+			</section>
+			<section id="QVTcExampleProject">
+				<title>QVTc Example Project</title>
+				<para>The OMG QVTc variant of the traditional UML to RDBMS transformation may be installed by:</para>
+				<para>Invoke 
+					<emphasis role="bold">File-&gt;New-&gt;Example...</emphasis> then select 
+					<emphasis role="bold">Examples</emphasis> then 
+					<emphasis role="bold">QVT (Query/View/Transformation Language) Projects</emphasis> then select either 
+					<emphasis role="bold">QVTc UML2RDBMS Project</emphasis> then 
+					<emphasis role="bold">Finish</emphasis> to create a small example project called 
+					<emphasis role="bold">org.eclipse.qvtd.examples.qvtcore.uml2rdbms</emphasis>.
+				</para>
+				<para>The QVTc editor opens to show the transformation.</para>
+				<para>The QVTc tooling is very similar to the QVTr tooling. The main difference is that for QVTc the middle model and its genmodel are designed by the user, whereas the QVTr middle model and genmodel are synthesized automatically. If code generated Java execution is required, using the genmodel to generate Java code for the middle model is again a manual user responsibility. </para>
+			</section>
+		</section>
+		<section id="Extensions">
+			<title>Extensions</title>
+			<section id="Import">
+				<title>Import</title>
+				<para>The Eclipse support for OCL, QVTc and QVTr adds an import statement to define the location of the metamodels.</para>
+				<literallayout><code>import SimpleUML : 'SimpleUml.ecore'::umlMM;
+</code></literallayout>
+				<para>This specifies that the 
+					<emphasis role="bold">SimpleUml.ecore</emphasis> metamodel is loaded. The metamodel root prefixes a navigation to select an imported element. In the example above the 
+					<emphasis role="bold">umlMM</emphasis> package is selected and made available with a 
+					<emphasis role="bold">SimpleUML</emphasis> alias. If alias-name and colon separator are omitted, the imported element is accessible by its own name.
+				</para>
+				<para>The quoted name may be importing-file-relative file name as above, or a an absolute path such as 
+					<emphasis role="bold">platform:/resource/org.eclipse.emf.examples.library/model/extlibrary.ecore</emphasis> or a registered namespace URI such as 
+					<emphasis role="bold">http://www.eclipse.org/emf/2002/Ecore</emphasis>.
+				</para>
+			</section>
+			<section id="Packages">
+				<title>Packages</title>
+				<para>The Eclipse support for QVTc and QVTr supports declaration of transformations within a package hierarchy. A Transformation therefore extends just a Class, not a Class and a Package as specified by OMG. The Transformation is declared nested within one of more Packages by qualifying the transformation name with one of more package names. For compatibility, if no Package is declared, the Transformation is contained by a Package with a blank name.</para>
+				<para>The package hierarchy declared for the Transformation is re-used to define the Java package hierarchy when Java code is generated from the Transformation.</para>
+			</section>
+			<section id="QVTc Middle Model">
+				<title>QVTc Middle Model</title>
+				<para>The QVTc part of the specification is unclear as to how the middle metamodel is defined.</para>
+				<para>Eclipse QVTc imports the middle metamodel in the same way as any other metamodel. This is then used as a used-package of an unnamed domain.</para>
+				<literallayout><code>import SimpleUML : 'SimpleUml.ecore'::umlMM;
+import SimpleUMLtoRDBMS : 'SimpleUMLtoRDBMS.ecore'::uml2rdbms;
+import SimpleRDBMS : 'SimpleRdbms.ecore'::rdbmsMM;
+</code></literallayout>
+				<literallayout><code>transformation umlRdbms {
+	uml imports SimpleUML;
+	rdbms imports SimpleRDBMS;
+	imports SimpleUMLtoRDBMS;
+}
+</code></literallayout>
+			</section>
+			<section id="QVTr Middle Model">
+				<title>QVTr Middle Model</title>
+				<para>The QVTr part of the specification appears to specify how the middle metamodel is synthesized. The specification however ignores details such as Models, Packages and Collections. There is also a lack of clarity as to whether the trace is the minimum required to support non-re-invocation of mappings or whether it should contain everything necessary for minimal incremental re-execution. The Eclipse QVTd implementation is work-in-progress.</para>
+			</section>
+			<section id="Collection Templates">
+				<title>QVTr Collection Templates</title>
+				<para>The QVTr part of the specification omits almost all detail of the semantics of Collections and in particular Collection Templates. The implementation in Eclipse QVTd is therefore language design work-in-progress rather than implementation work-in-progress.</para>
+			</section>
+			<section id="OCL/EMOF Metamodels">
+				<title>OCL/EMOF Metamodels</title>
+				<para>The QVT specification provides layered metamodels for QVTrelation, QVTtemplate, QVTcore and QVTbase layered on top of EssentialOCL and EMOF. The EssentialOCL and EMOF metamodels are very strongly influenced by OCL and MOF specifications, but are ot formally compliant.</para>
+				<para>Eclipse QVTd provides layered metamodels for QVTrelation, QVTtemplate, QVTcore and QVTbase layered on top of Pivot which is derived from the UML 2.5 metamodel and work towards a future OCL specification. (QVTimperative shares some QVTcore functionality through a QVTcoreBase abstraction.)</para>
+				<para>A consequence of extending the Eclipse OCL Pivot is that Eclipse QVTd has preliminary support for templated types, extensible libraries and safe navigation.</para>
+			</section>
+			<section id="this">
+				<title>this</title>
+				<para>QVTo defines 
+					<emphasis role="bold">this</emphasis> as a reserved variable for the instance of the executing transformation.
+				</para>
+				<para>Eclipse QVTd provides 
+					<emphasis role="bold">this</emphasis> for QVTc and QVTr and thereby solves an OCL compatibility problem with respect to the source of an operation call of a query. In Eclipse QVTd, queries, using the Function class, are operations of the Transformation class and are invoked with an implicit 
+					<emphasis role="bold">this</emphasis>. An explicit 
+					<emphasis role="bold">this</emphasis> can be used, and is used when viewing the equivalent source text for the Abstract Syntax model.
+				</para>
+			</section>
+		</section>
+	</chapter>
+	<appendix id="glossary">
+		<title id="glossary-end">Glossary</title>
+		<glosslist>
+			<glossentry>
+				<glossterm>EMF</glossterm>
+				<glossdef>
+					<para>Eclipse Modeling Framework</para>
+				</glossdef>
+			</glossentry>
+			<glossentry>
+				<glossterm>OCL</glossterm>
+				<glossdef>
+					<para>Object Constraint Language</para>
+				</glossdef>
+			</glossentry>
+			<glossentry>
+				<glossterm>OMG</glossterm>
+				<glossdef>
+					<para>Object Management Group</para>
+				</glossdef>
+			</glossentry>
+			<glossentry>
+				<glossterm>QVT</glossterm>
+				<glossdef>
+					<para>Query/View/Transformation</para>
+				</glossdef>
+			</glossentry>
+			<glossentry>
+				<glossterm>RTF</glossterm>
+				<glossdef>
+					<para>Revision Task Force</para>
+				</glossdef>
+			</glossentry>
+		</glosslist>
+	</appendix>
+</book>

@@ -73,15 +73,6 @@
       </wizard>
    </extension>
    <extension point="org.eclipse.emf.common.ui.examples">
-      <example id="org.eclipse.qvtd.examples.project.qvtcore.empty"
-            wizardID="org.eclipse.qvtd.examples.qvtcore.empty"
-            pageImage="$nl$/icons/QVTcModelFile.gif">
-         <projectDescriptor name="org.eclipse.ocl.examples.project.completeocltutorial"
-               contentURI="zips/qvtc/empty.zip"
-               description="%CompleteOCL_Tutorial_description"/>
-         <fileToOpen location="org.eclipse.ocl.examples.project.completeocltutorial/model/ExtraEcoreValidation.ocl"
-               editorID="org.eclipse.qvtd.xtext.qvtcore.QVTcore"/>
-      </example>
       <example id="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"
             wizardID="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"
             pageImage="$nl$/icons/QVTcModelFile.gif">

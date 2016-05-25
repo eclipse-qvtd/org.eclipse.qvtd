@@ -1,4 +1,41 @@
-<toc topic="help/index.html" label="QVT Declarative Documentation">
-<topic href="help/Overview.html" label="Overview">
+<toc label="QVT Declarative Documentation">
+<topic href="help/OverviewandGettingStarted.html" label="Overview and Getting Started">
+<topic href="help/OverviewandGettingStarted.html#WhatisQVTQueryViewTransformation" label="What is QVT?">
+<topic href="help/OverviewandGettingStarted.html#ModelingLayers" label="Modeling Layers"></topic>
 </topic>
+<topic href="help/HowDoesItWork.html" label="How Does It Work?">
+<topic href="help/HowDoesItWork.html#Editing" label="Editing">
+<topic href="help/HowDoesItWork.html#Status" label="Status"></topic>
+</topic>
+<topic href="help/HowDoesItWork.html#Execution" label="Execution">
+<topic href="help/HowDoesItWork.html#Status2" label="Status"></topic>
+</topic>
+<topic href="help/HowDoesItWork.html#Debugger" label="Debugger">
+<topic href="help/HowDoesItWork.html#Status3" label="Status"></topic>
+</topic>
+</topic>
+<topic href="help/WhoisBehindEclipseQVTd.html" label="Who is Behind Eclipse QVTd?"></topic>
+<topic href="help/GettingStarted.html" label="Getting Started">
+<topic href="help/GettingStarted.html#QVTrExampleProject" label="QVTr Example Project">
+<topic href="help/GettingStarted.html#ProjectTransformation" label="Project / Transformation"></topic>
+<topic href="help/GettingStarted.html#Inputs" label="Inputs"></topic>
+<topic href="help/GettingStarted.html#Newoutputs" label="New outputs"></topic>
+<topic href="help/GettingStarted.html#Intermediates" label="Intermediates"></topic>
+<topic href="help/GettingStarted.html#Build" label="Build">
+<topic href="help/GettingStarted.html#Run" label="Run"></topic>
+</topic>
+</topic>
+<topic href="help/GettingStarted.html#QVTcExampleProject" label="QVTc Example Project"></topic>
+</topic>
+<topic href="help/Extensions.html" label="Extensions">
+<topic href="help/Extensions.html#Import" label="Import"></topic>
+<topic href="help/Extensions.html#Packages" label="Packages"></topic>
+<topic href="help/Extensions.html#QVTc Middle Model" label="QVTc Middle Model"></topic>
+<topic href="help/Extensions.html#QVTr Middle Model" label="QVTr Middle Model"></topic>
+<topic href="help/Extensions.html#Collection Templates" label="QVTr Collection Templates"></topic>
+<topic href="help/Extensions.html#OCL/EMOF Metamodels" label="OCL/EMOF Metamodels"></topic>
+<topic href="help/Extensions.html#this" label="this"></topic>
+</topic>
+</topic>
+<topic href="help/glossary.html" label="A. Glossary"></topic>
 </toc>
