@@ -43,7 +43,6 @@ import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.utilities.JavaSourceFileObject;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -386,8 +385,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		Scheduler.DEBUG_GRAPHS.setState(true);
 		AbstractTransformer.EXCEPTIONS.setState(true);
 		AbstractTransformer.INVOCATIONS.setState(true);
- //   	QVTm2QVTp.PARTITIONING.setState(true);
-    	MyQVT myQVT = new MyQVT("hstm2fstm");
+//   	QVTm2QVTp.PARTITIONING.setState(true);
+//		QVTr2QVTc.VARIABLES.setState(true);
+		MyQVT myQVT = new MyQVT("hstm2fstm");
     	try {
 	    	String projectTestName = PROJECT_NAME + ".HierarchicalStateMachine2FlatStateMachine";
 			Transformation asTransformation = myQVT.compileTransformation("HierarchicalStateMachine2FlatStateMachine.qvtr", "flat", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine");
@@ -474,9 +474,9 @@ public class QVTrCompilerTests extends LoadTestCase
     public void testQVTrCompiler_SimplerRel2Core_CG() throws Exception {
 		AbstractTransformer.EXCEPTIONS.setState(true);
 		AbstractTransformer.INVOCATIONS.setState(true);
- //   	QVTm2QVTp.PARTITIONING.setState(true);
-		QVTr2QVTc.SYNTHESIS.setState(true);
-		QVTr2QVTc.VARIABLES.setState(true);
+//   	QVTm2QVTp.PARTITIONING.setState(true);
+//		QVTr2QVTc.SYNTHESIS.setState(true);
+//		QVTr2QVTc.VARIABLES.setState(true);
     	MyQVT myQVT = new MyQVT("rel2core");
     	try {
 	    	String projectTestName = PROJECT_NAME + ".rel2core";

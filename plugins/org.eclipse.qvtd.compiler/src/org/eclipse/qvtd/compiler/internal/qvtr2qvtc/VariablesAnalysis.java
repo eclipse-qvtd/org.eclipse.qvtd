@@ -252,6 +252,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		private boolean isEnforcedReferred = false;
 		private @Nullable CoreDomain cOtherBound = null;
 		private @Nullable CoreDomain cOtherReferred = null;
+		private @Nullable Area cPredicateArea = null;
 		private boolean isRoot = false;
 		private @Nullable CoreDomain cWhenDomain = null;
 		private @Nullable CoreDomain cWhereDomain = null;
@@ -342,6 +343,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			else if (cOtherReferred != null) {
 				isGuard = false;
 				cArea = cOtherReferred;
+			}			
+			else if (cPredicateArea != null) {
+				isGuard = false;
+				cArea = cPredicateArea;
 			}			
 			assert cArea != null;
 			return ClassUtil.nonNullState(isGuard ? cArea.getGuardPattern() : cArea.getBottomPattern());
@@ -434,6 +439,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			this.isRoot = true;
 		}
 
+		public void setPredicate(@NonNull Area cPredicateArea) {
+			this.cPredicateArea = cPredicateArea;
+		}
+
 		public void setWhen(@NonNull CoreDomain cWhenDomain) {
 			assert (this.cWhenDomain == null) || (this.cWhenDomain == cWhenDomain);
 			this.cWhenDomain = cWhenDomain;
@@ -495,6 +504,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 			if (isInvoked) {
 				s.append(" INVOKED");
+			}
+			if (cPredicateArea != null) {
+				s.append(" PREDICATE:" + (cPredicateArea instanceof CoreDomain ? ((CoreDomain)cPredicateArea).getName() : null));
 			}
 			if (isRoot) {
 				s.append(" ROOT");
@@ -673,6 +685,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				}
 			}
 		}
+	}
+
+	protected @Nullable RelationVariableAnalysis basicGetVariableAnalysis(@NonNull Variable relationVariable) {
+		return rVariable2analysis.get(relationVariable);
 	}
 	
 	public void check() {

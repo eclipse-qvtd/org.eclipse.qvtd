@@ -540,12 +540,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 
 	public @Nullable List<@NonNull Element> getGlobalTargets(@NonNull Element element) {
-		List<@NonNull Element> list = globalSource2targets.get(element);
-		if (list != null) {
-			return list;
-		}
-		@NonNull Element equivalentTarget = equivalentTarget(element);
-		return Collections.singletonList(equivalentTarget);
+		return globalSource2targets.get(element);
 	}
 	
 	/*public*/ org.eclipse.ocl.pivot.@NonNull Class getTraceClass(@NonNull Relation relation) {		

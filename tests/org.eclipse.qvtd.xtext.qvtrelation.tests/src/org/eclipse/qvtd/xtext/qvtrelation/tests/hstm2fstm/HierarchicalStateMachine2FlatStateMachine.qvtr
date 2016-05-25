@@ -24,19 +24,10 @@ transformation org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm::Hierarc
 --	key flatMM::Trans {name, fromState, toState};
 
 	/**
-	 * Return true if leafState is a leaf state and is nested below hierarchicalState.
+	 * Return the leafStates of a given hierarchicalState.
 	 */
-	query HierarchicalStateContainsLeafState(hierarchicalState : hierMM::State, leafState : hierMM::State) : Boolean {
-		if (leafState.nestingState->isEmpty())
-		then
-			false
-		else if (leafState.nestingState = hierarchicalState)
-			then
-				true
-			else
-				HierarchicalStateContainsLeafState(hierarchicalState, leafState.nestingState)
-			endif
-		endif
+	query getLeafStates(hierarchicalState : hierMM::State) : Set(hierMM::State) {
+		hierarchicalState->closure(nestedStates)?->select(nestedStates->isEmpty())
 	}
 
 	/**
@@ -75,36 +66,28 @@ transformation org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm::Hierarc
 	 */
 	top relation HierachicalTransition2FlatTransition
 	{
+		leafFromStates : Set(hierMM::State) = hierarchicalFromState->closure(nestedStates)->select(nestedStates->isEmpty());
+		leafToStates : Set(hierMM::State) = hierarchicalToState->closure(nestedStates)->select(nestedStates->isEmpty());
 		leafFromState : hierMM::State;
 		leafToState : hierMM::State;
-		domain hier hierarchicalFromState : State {
-			outTransitions = hierarchicalTransition : Transition {
-				owningStateMachine = hierarchicalStateMachine : StateMachine{},
-				name = transitionName : String{},
-				toState = hierarchicalToState : State{}
-			}
+		domain hier hierarchicalTransition : Transition {
+			owningStateMachine = hierarchicalStateMachine : StateMachine{},
+			name = transitionName : String{},
+			fromState = hierarchicalFromState : State{},
+			toState = hierarchicalToState : State{}
 		};	   
-		enforce domain flat flatFromState : State {
-			outTransitions = flatTransition : Transition {
-				owningStateMachine = flatStateMachine : StateMachine{},
-				name = transitionName,
-				toState = flatToState : State{}
-			}
+		enforce domain flat flatTransition : Transition {
+			owningStateMachine = flatStateMachine : StateMachine{},
+			name = transitionName,
+			fromState = flatFromState : State{},
+			toState = flatToState : State{}
 		};		
-		when  {
+		when {
 			HierachicalStateMachine2FlatStateMachine(hierarchicalStateMachine, flatStateMachine);
 			LeafState2FlatState(leafFromState, flatFromState);
-			(
-				leafFromState = hierarchicalFromState
-				or
-				HierarchicalStateContainsLeafState(hierarchicalFromState, leafFromState)
-			);
 			LeafState2FlatState(leafToState, flatToState);
-			(
-				leafToState = hierarchicalToState
-				or
-				HierarchicalStateContainsLeafState(hierarchicalToState, leafToState)
-			);
+			leafFromStates->includes(leafFromState);
+			leafToStates->includes(leafToState);
 		}
 	}   
 }
