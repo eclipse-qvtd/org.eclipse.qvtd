@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.qvtd.debug.launching.QVTrLaunchConfigurationDelegate">
+<booleanAttribute key="auto-build" value="false"/>
+<booleanAttribute key="console-trace" value="false"/>
+<stringAttribute key="direction" value="flat"/>
+<stringAttribute key="genmodel" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.genmodel"/>
+<mapAttribute key="in">
+<mapEntry key="hier" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/SimpleModel.xmi"/>
+</mapAttribute>
+<mapAttribute key="intermediates">
+<mapEntry key="QVTc" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtcas"/>
+<mapEntry key="QVTi" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtias"/>
+<mapEntry key="QVTm" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtm.qvtcas"/>
+<mapEntry key="QVTp" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtp.qvtcas"/>
+<mapEntry key="QVTr" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtras"/>
+<mapEntry key="QVTs" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvts.xmi"/>
+<mapEntry key="QVTu" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtu.qvtcas"/>
+</mapAttribute>
+<booleanAttribute key="interpreted" value="true"/>
+<stringAttribute key="mode" value="ENFORCE - CREATE"/>
+<mapAttribute key="old-in"/>
+<mapAttribute key="old-out"/>
+<mapAttribute key="out">
+<mapEntry key="flat" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/SimpleFlatModel.xmi"/>
+</mapAttribute>
+<stringAttribute key="tx" value="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"/>
+<booleanAttribute key="view" value="false"/>
+</launchConfiguration>

@@ -121,7 +121,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), prefixURI, options);
 			compilerChain.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
 			Map<@NonNull String, @Nullable String> traceOptions = new HashMap<@NonNull String, @Nullable String>();
-			traceOptions.put(CompilerChain.TRACE_NS_URI, middleNsURI);
+//			traceOptions.put(CompilerChain.TRACE_NS_URI, middleNsURI);
 			compilerChain.setOption(CompilerChain.TRACE_STEP, CompilerChain.TRACE_OPTIONS_KEY, traceOptions);
 			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<@NonNull String, @Nullable String>();
 			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, basePrefix);

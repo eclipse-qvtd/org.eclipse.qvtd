@@ -10,20 +10,27 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
@@ -32,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.osgi.framework.Bundle;
 
 /**
  * The QVTcCompilerChain supports generation of a QVTi Transformation from a QVTc Transformation.
@@ -102,9 +110,30 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			t.generateModels(genModel);
 			String sourcePathPrefix = ".." + genModel.getModelDirectory() + "/";
 			String projectName = t.getProjectName(traceURI);
-			String objectPath = "../" + projectName + "/bin";		// FIXME deduce/parameterize bin
+			File binFile;
+			String objectPath;
+			if (EcorePlugin.IS_ECLIPSE_RUNNING) {
+//				URIConverter.INSTANCE.
+				Bundle bundle = Platform.getBundle(projectName);
+				String location = bundle.getLocation();
+				URL entry = bundle.getEntry("bin");
+				URL resolve = FileLocator.resolve(entry);
+				binFile = new File(FileLocator.toFileURL(entry).getFile()).getCanonicalFile();
+				objectPath = binFile.toString().replace(".", "/");		// FIXME deduce/parameterize bin
+			}
+			else {
+				URI location = ClassUtil.nonNullState(((StandaloneProjectMap)environmentFactory.getProjectManager()).getLocation(projectName));
+				binFile = new File(location.appendSegment("bin").toFileString());
+				objectPath = "../" + projectName + "/bin";		// FIXME deduce/parameterize bin
+			}
+//			IProjectDescriptor projectDescriptor = ((ProjectMap)environmentFactory.getProjectManager()).getProjectDescriptor(projectName);
+//			assert projectDescriptor != null;
+//			URI locationURI = projectDescriptor.getLocationURI();
+//			String canonicalPath = binFile.getCanonicalPath();
+//			binFile.mkdir();
 			for (GenPackage genPackage : genModel.getGenPackages()) {
-				String sourcePath = sourcePathPrefix + genPackage.getBasePackage().replace(".", "/");
+				String basePackage = genPackage.getBasePackage();
+				String sourcePath = sourcePathPrefix + (basePackage != null ? basePackage.replace(".", "/") : "");
 				JavaSourceFileObject.compileClasses(sourcePath, objectPath);
 			}
 			compiled(GENMODEL_STEP, cResource);

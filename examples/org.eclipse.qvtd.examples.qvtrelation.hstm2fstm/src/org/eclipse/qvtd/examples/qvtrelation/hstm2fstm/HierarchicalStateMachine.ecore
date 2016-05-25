@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="HierarchicalStateMachine" nsURI="http://www.eclipse.org/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine"
+    nsPrefix="hstm">
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningStateMachine" lowerBound="1"
+        eType="#//StateMachine" eOpposite="#//StateMachine/ownedStates"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedStates" ordered="false"
+        upperBound="-1" eType="#//State" eOpposite="#//State/nestingState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestingState" ordered="false"
+        eType="#//State" eOpposite="#//State/nestedStates"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outTransitions" ordered="false"
+        upperBound="-1" eType="#//Transition" eOpposite="#//Transition/fromState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inTransitions" ordered="false"
+        upperBound="-1" eType="#//Transition" eOpposite="#//Transition/toState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningStateMachine" lowerBound="1"
+        eType="#//StateMachine" eOpposite="#//StateMachine/ownedTransitions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromState" ordered="false"
+        lowerBound="1" eType="#//State" eOpposite="#//State/outTransitions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toState" ordered="false"
+        lowerBound="1" eType="#//State" eOpposite="#//State/inTransitions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateMachine">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStates" ordered="false"
+        upperBound="-1" eType="#//State" containment="true" eOpposite="#//State/owningStateMachine"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTransitions" ordered="false"
+        upperBound="-1" eType="#//Transition" containment="true" eOpposite="#//Transition/owningStateMachine"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

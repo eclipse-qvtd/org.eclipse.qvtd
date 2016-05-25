@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
@@ -316,13 +317,12 @@ public class QVTbaseUtil
 			}
 			for (EObject eContent : asResource.getContents()) {
 				if (modelClass.isInstance(eContent)) {
-	    			for (org.eclipse.ocl.pivot.Package asPackage : ((Model)eContent).getOwnedPackages()) {		// FIXME nested classes
-    	    			for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
-    	    				if (asClass instanceof Transformation) {
-    	    	                return (Transformation)asClass;
-    	    				}
-    	    			}
-	    			}
+					for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(((Model)eContent).getOwnedPackages())) {
+		    			Transformation asTransformation = loadTransformationRecursion(asPackage);
+						if (asTransformation != null) {
+				            return asTransformation;
+						}
+					}
 				}
 			}
 		} finally {
@@ -331,6 +331,21 @@ public class QVTbaseUtil
 			}
 		}
         throw new IOException("Failed to locate a transformation in '" + transformationURI + "'");
+	}
+
+	private static @Nullable Transformation loadTransformationRecursion(org.eclipse.ocl.pivot.@NonNull Package asPackage) {
+		for (org.eclipse.ocl.pivot.@NonNull Class asClass : ClassUtil.nullFree(asPackage.getOwnedClasses())) {
+			if (asClass instanceof Transformation) {
+	            return (Transformation)asClass;
+			}
+		}
+		for (org.eclipse.ocl.pivot.@NonNull Package asNestedPackage : ClassUtil.nullFree(asPackage.getOwnedPackages())) {
+			Transformation asTransformation = loadTransformationRecursion(asNestedPackage);
+			if (asTransformation != null) {
+	            return asTransformation;
+			}
+		}
+		return null;
 	}
 	
     public static @NonNull Resource loadTransformations(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {

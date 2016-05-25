@@ -17,7 +17,7 @@
       <category id="org.eclipse.qvtd.examples.category"
             name="%QVT_category"
             parentCategory="org.eclipse.ui.Examples"/>
-      <wizard id="org.eclipse.qvtd.examples.qvtcore.empty"           
+      <!--wizard id="org.eclipse.qvtd.examples.qvtcore.empty"           
             canFinishEarly="true"
             category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"
             class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
@@ -25,7 +25,7 @@
             name="%EmptyQVTc_name"
             icon="$nl$/icons/QVTcModelFile.gif">
          <description>%EmptyQVTc_description</description>
-      </wizard>
+      </wizard-->
       <wizard id="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"           
             canFinishEarly="true"
             category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"
@@ -35,7 +35,7 @@
             icon="$nl$/icons/QVTcModelFile.gif">
          <description>%QVTc_UML2RDBMS_description</description>
       </wizard>
-      <wizard id="org.eclipse.qvtd.examples.qvtrelation.empty"           
+      <!--wizard id="org.eclipse.qvtd.examples.qvtrelation.empty"           
             canFinishEarly="true"
             category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"
             class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
@@ -43,6 +43,15 @@
             name="%EmptyQVTr_name"
             icon="$nl$/icons/QVTrModelFile.gif">
          <description>%EmptyQVTr_description</description>
+      </wizard-->
+      <wizard id="org.eclipse.qvtd.examples.qvtrelation.hstm2fstm"           
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/org.eclipse.qvtd.examples.category"
+            class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+            project="true"
+            name="%QVTr_HSTM2FSTM_name"
+            icon="$nl$/icons/QVTrModelFile.gif">
+         <description>%QVTr_HSTM2FSTM_description</description>
       </wizard>
       <wizard id="org.eclipse.qvtd.examples.qvtrelation.modelmorf"           
             canFinishEarly="true"
@@ -81,6 +90,15 @@
                description="%QVTc_UML2RDBMS_description"/>
          <fileToOpen location="org.eclipse.qvtd.examples.qvtcore.uml2rdbms/src/org/eclipse/qvtd/examples/qvtcore/uml2rdbms/SimpleUML2RDBMS.qvtc"
                editorID="org.eclipse.qvtd.xtext.qvtcore.QVTcore"/>
+      </example>
+      <example id="org.eclipse.qvtd.examples.qvtrelation.hstm2fstm"
+            wizardID="org.eclipse.qvtd.examples.qvtrelation.hstm2fstm"
+            pageImage="$nl$/icons/QVTrModelFile.gif">
+         <projectDescriptor name="org.eclipse.qvtd.examples.qvtrelation.hstm2fstm"
+               contentURI="zips/qvtr/hstm2fstm.zip"
+               description="%QVTr_HSTM2FSTM_description"/>
+         <fileToOpen location="org.eclipse.qvtd.examples.qvtrelation.hstm2fstm/src/org/eclipse/qvtd/examples/qvtrelation/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"
+               editorID="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation"/>
       </example>
    </extension>
 

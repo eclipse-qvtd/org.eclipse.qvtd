@@ -8,6 +8,7 @@
 		<dependency name="org.eclipse.qvtd.examples.qvtcore.empty" componentType="unknown"/>
 		<dependency name="org.eclipse.qvtd.examples.qvtcore.uml2rdbms" componentType="unknown"/>
 		<dependency name="org.eclipse.qvtd.examples.qvtrelation.empty" componentType="unknown"/>
+		<dependency name="org.eclipse.qvtd.examples.qvtrelation.hstm2fstm" componentType="unknown"/>
 		<dependency name="org.eclipse.qvtd.examples.qvtrelation.modelmorf" componentType="unknown"/>
 		<dependency name="org.eclipse.qvtd.examples.qvtrelation.reltocore" componentType="unknown"/>
 	</dependencies>

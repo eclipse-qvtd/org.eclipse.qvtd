@@ -5,6 +5,7 @@
 
 	<patternset id="qvtc.excludes" excludes="bin/** qvtcbin/** src-gen/org/**"/>
 	<patternset id="qvtr.excludes" excludes="bin/** qvtrbin/** src/** .settings/** META-INF/** .classpath build.properties about.html"/>
+	<patternset id="qvtr2.excludes" excludes="bin/** qvtrbin/** src-gen/org/**"/>
 
 	<target name="zip.examples" depends="init">
 		<!-- ../../examples is the prefcerred project layout
@@ -28,6 +29,9 @@
 		<mkdir dir="zips/qvtr"/>
 		<zip destfile="zips/qvtr/empty.zip" basedir="${examplesDir}org.eclipse.qvtd.examples.qvtrelation.empty">
 			<patternset refid="qvtr.excludes"/>
+		</zip>
+		<zip destfile="zips/qvtr/hstm2fstm.zip" basedir="${examplesDir}org.eclipse.qvtd.examples.qvtrelation.hstm2fstm">
+			<patternset refid="qvtr2.excludes"/>
 		</zip>
 		<zip destfile="zips/qvtr/modelmorf.zip" basedir="${examplesDir}org.eclipse.qvtd.examples.qvtrelation.modelmorf">
 			<patternset refid="qvtr.excludes"/>

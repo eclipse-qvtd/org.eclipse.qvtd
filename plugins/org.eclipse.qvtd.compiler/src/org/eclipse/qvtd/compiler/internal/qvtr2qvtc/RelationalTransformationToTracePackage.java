@@ -42,19 +42,37 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 
 	public org.eclipse.ocl.pivot.@NonNull Package doRelationalTransformationToTracePackage(@NonNull RelationalTransformation rTransformation) {
-		org.eclipse.ocl.pivot.Package p = PivotFactory.eINSTANCE.createPackage();
-		p.setName("P" + rTransformation.getName());
-		p.setNsPrefix("P" + rTransformation.getName());
-//		p.setURI(p.getName());
-		qvtr2qvtc.putTracePackage(rTransformation, p);
-		List<org.eclipse.ocl.pivot.@NonNull Class> ownedClasses = ClassUtil.nullFree(p.getOwnedClasses());
+		org.eclipse.ocl.pivot.Package rPackage = rTransformation.getOwningPackage();
+		org.eclipse.ocl.pivot.Package tracePackage = PivotFactory.eINSTANCE.createPackage();
+		tracePackage.setName("P" + rTransformation.getName());
+		tracePackage.setNsPrefix("P" + rTransformation.getName());
+		StringBuilder s = new StringBuilder();
+		getURI(rPackage, s);
+		tracePackage.setURI(s.toString() + "/" + rTransformation.getName());
+		qvtr2qvtc.putTracePackage(rTransformation, tracePackage);
+		List<org.eclipse.ocl.pivot.@NonNull Class> ownedClasses = ClassUtil.nullFree(tracePackage.getOwnedClasses());
 		for (@NonNull Rule rRule : ClassUtil.nullFree(rTransformation.getRule())) {
 			if (rRule instanceof Relation) {
 				ownedClasses.add(doRelationToTraceClass((Relation)rRule));
 			}
 		}
 		CompilerUtil.normalizeNameables(ownedClasses);
-		return p;
+		return tracePackage;
+	}
+
+	private String getURI(org.eclipse.ocl.pivot.Package rPackage, @NonNull StringBuilder s) {
+		if (rPackage == null) {
+			s.append("http://www.eclipse.org/qvtd-example");
+		}
+		else if (rPackage.getURI() != null) {
+			s.append(rPackage.getURI());
+		}
+		else {
+			getURI(rPackage.getOwningPackage(), s);
+			s.append("/");
+			s.append(rPackage.getName());
+		}
+		return null;
 	}
 
 	private org.eclipse.ocl.pivot.@NonNull Class doRelationToTraceClass(@NonNull Relation rRelation) {	
