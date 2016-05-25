@@ -759,6 +759,8 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 				return null;
 			}
 			else if (mVariable.eContainer() instanceof CorePattern) {
+		        Variable uVariable = context.equivalentSource(mVariable);
+		        mVariable.setOwnedInit(createCastCopy(uVariable.getOwnedInit(), uVariable.getType()));
 				return null;
 			}
 			else {
