@@ -545,7 +545,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		for (@NonNull Domain domain : ClassUtil.nullFree(pivotElement.getDomain())) {
 			RelationDomain relationDomain = (RelationDomain)domain;
 			for (@NonNull DomainPattern pattern : ClassUtil.nullFree(relationDomain.getPattern())) {
-				relationVariables.addAll(ClassUtil.nullFree(pattern.getBindsTo()));
+//				relationVariables.addAll(ClassUtil.nullFree(pattern.getBindsTo()));
 			}
 		}
 		//
@@ -563,6 +563,14 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 					}
 					if (asPattern != null) {
 						PivotUtilInternal.refreshList(asPattern.getBindsTo(), boundVariables);
+					}
+				}
+			}
+			else {		// PrimitiveDomainCS
+				RelationDomain asDomain = PivotUtil.getPivot(RelationDomain.class, csAbstractDomain);
+				if (asDomain != null) {
+					for (@NonNull DomainPattern pattern : ClassUtil.nullFree(asDomain.getPattern())) {
+						relationVariables.addAll(ClassUtil.nullFree(pattern.getBindsTo()));
 					}
 				}
 			}
