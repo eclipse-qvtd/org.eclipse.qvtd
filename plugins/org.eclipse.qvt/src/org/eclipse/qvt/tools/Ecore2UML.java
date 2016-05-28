@@ -84,6 +84,8 @@ import org.eclipse.uml2.uml.util.UMLUtil;
 /**
  * Translator from the QVT 1.2 *.ecore master to the QVT 1.2 distribution
  */
+// FIXME investigate org.eclipse.papyrus.infra.gmfdiag.export to export all diagrams
+//  -- See "How to get an image out of a Papyrus diagram ?" Papyrus newsgroup thread
 @SuppressWarnings("restriction")
 public class Ecore2UML {
 	
