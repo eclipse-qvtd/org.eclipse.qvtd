@@ -2,7 +2,7 @@ import SimpleUML : 'SimpleUML.ecore#/';
 import SimpleRDBMS : 'SimpleRDBMS.ecore#/';
 import SimpleUML2RDBMS : 'SimpleUML2RDBMS.ecore#/';
 
-transformation umlRdbms
+transformation org::eclipse::qvtd::examples::qvtcore::uml2rdbms::umlRdbms
 {
 	uml imports simpleuml;
 	rdbms imports simplerdbms;
