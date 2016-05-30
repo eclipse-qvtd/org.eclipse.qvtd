@@ -21,6 +21,7 @@ import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.swt.graphics.Image;
 
 public class QVTrMainTab extends DirectionalMainTab
@@ -39,6 +40,7 @@ public class QVTrMainTab extends DirectionalMainTab
 
 	@Override
 	protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI) {
+		QVTcoreStandaloneSetup.class.getName();			// QVTrCompilerChain doesn't initialize QVTc
 		return new QVTrCompilerChain(environmentFactory, txURI, null);
 	}
 	

@@ -17,10 +17,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -31,6 +36,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.common.ui.dialogs.WorkspaceResourceDialog;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -38,12 +44,17 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.window.Window;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.debug.vm.ui.launching.LaunchingUtils;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
@@ -68,7 +79,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConstants
 {
@@ -206,6 +219,44 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		}
 	}
 
+	protected class ProjectModifyListener implements ModifyListener
+	{
+		@Override
+		public void modifyText(ModifyEvent e) {
+//			if (!txModified) {
+//				txModified = true;
+//				updateLaunchConfigurationDialog();
+//			}
+			if (projectPath.isDisposed()) {
+				return;
+			}
+			String projectName = projectPath.getText();
+/*			URI txURI = URI.createURI(txName, true);
+			URI elementsURI = txURI.trimFragment();
+			try {
+				updateTransformation(elementsURI);
+//				Resource resource = getEnvironmentFactory().getResourceSet().getResource(elementsURI, true);
+//		        if (resource == null) {
+//		        	throw new IOException("There was an error loading the transformation file. ");
+//		        }
+//				List<String> elements = new ArrayList<String>();
+//				for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+//					EObject eObject = tit.next();
+//					String displayString = LabelUtil.getLabel(eObject);
+//					URI uri = EcoreUtil.getURI(eObject);
+//					elements.add(displayString);
+//					element2uri.put(displayString, uri);
+//				}
+//				Collections.sort(elements);
+//				elementCombo.setItems(elements.toArray(new String[elements.size()]));
+			}
+			catch (Exception ex) {
+				setErrorMessage("Failed to load '" + elementsURI + "': " + ex.toString());
+			} */
+			updateLaunchConfigurationDialog();
+		}
+	}
+
 	protected class TransformationModeListener implements ModifyListener
 	{
 		@Override
@@ -228,8 +279,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 			if (txPath.isDisposed()) {
 				return;
 			}
-			String txName = txPath.getText();
-			URI txURI = URI.createURI(txName, true);
+			URI txURI = getTxURI();
 			URI elementsURI = txURI.trimFragment();
 			try {
 				updateTransformation(elementsURI);
@@ -254,6 +304,9 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 			updateLaunchConfigurationDialog();
 		}
 	}
+
+	protected Text projectPath;
+	protected Button projectBrowseWS;
 
 	protected Text txPath;
 	protected Button txBrowseWS;
@@ -289,6 +342,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	private @Nullable CompileJob compileJob = null;
 
 	protected void addListeners() {
+		projectPath.addModifyListener(new ProjectModifyListener());
 		txPath.addModifyListener(new TransformationModifyListener());
 		compileButton.addSelectionListener(new CompileButtonAdapter());
 		interpretedCheckButton.addSelectionListener(new InterpretedCheckBoxAdapter());
@@ -301,13 +355,29 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	public boolean canSave() {
 //		System.out.println("canSave");
 		assert !initializing;
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		String projectName = getProjectName();
+		try {
+			IProject iProject = root.getProject(projectName);
+			if (iProject == null){
+				setErrorMessage("Project '" + projectName + "' does not exist");
+				return false;
+			}
+			if (!iProject.isOpen()) {
+				setErrorMessage("Project '" + projectName + "' is closed");
+				return false;
+			}
+		}
+		catch (Exception e) {
+			setErrorMessage("Project '" + projectName + "' is invalid : " + e.getMessage());
+			return false;
+		}
 		ResourceSet resourceSet = getEnvironmentFactory().getResourceSet();
 		URIConverter uriConverter = resourceSet.getURIConverter();
-		String txName = txPath.getText().trim();
-		URI txURI = URI.createURI(txName, true);
+		URI txURI = getTxURI();
 		boolean txExists = uriConverter.exists(txURI, null);
 		if (!txExists){
-			setErrorMessage("Transformation '" + txName + "' does not exist");
+			setErrorMessage("Transformation '" + txURI + "' does not exist");
 			return false;
 		}
 		if (newInputsGroup != null) {
@@ -316,10 +386,10 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 				ParameterRow row = (ParameterRow)children[i];
 				String name = row.name.getText();
 				String path = row.path.getText();
-				URI inURI = URI.createURI(path, true);
+				URI inURI = URI.createURI(path, true).resolve(getProjectURI());
 				boolean inExists = uriConverter.exists(inURI, null);
 				if (!inExists){
-					setErrorMessage("Input '" + name + "': '" + path + "' does not exist");
+					setErrorMessage("Input '" + name + "': '" + inURI + "' does not exist");
 					return false;
 				}
 			}
@@ -330,10 +400,10 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 				ParameterRow row = (ParameterRow)children[i];
 				String name = row.name.getText();
 				String path = row.path.getText();
-				URI outURI = URI.createURI(path, true);
+				URI outURI = URI.createURI(path, true).resolve(getProjectURI());
 				boolean outExists = uriConverter.exists(outURI.trimSegments(1), null);
 				if (!outExists){
-					setErrorMessage("Output '" + name + "': '" + path + "' uses non-existent parent folder");
+					setErrorMessage("Output '" + name + "': '" + outURI + "' uses non-existent parent folder");
 					return false;
 				}
 			}
@@ -407,7 +477,6 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		interpretedCheckButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
 		interpretedCheckButton.setText("Interpreted");
 		interpretedCheckButton.setSelection(true);
-		interpretedCheckButton.setEnabled(false);		// FIXME BUG 486938 disabled until Java/Tx package-path discrepancy resolved
 		
 		traceEvaluationCheckButton = new Button(buildGroup, SWT.CHECK);
 		traceEvaluationCheckButton.setToolTipText("Whether to provide a textual evaluation trace to the console.");
@@ -422,7 +491,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 	}
 
 	protected @NonNull CompileJob createCompileJob() {
-		URI txURI = URI.createURI(txPath.getText());
+		URI txURI = getTxURI();
 		String direction = getDirection();
 		if (isInterpreted()) {
 			return new CompileJob(txURI, direction, null, null);
@@ -441,6 +510,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 //		System.out.println("createControl-start");
 		Composite control = createForm(parent);
 		addListeners();
+		prepareBrowseProjectsButton(projectBrowseWS, projectPath);
 		LaunchingUtils.prepareBrowseWorkspaceButton(txBrowseWS, txPath, false);
 		LaunchingUtils.prepareBrowseFileSystemButton(txBrowseFile, txPath, false);
 		LaunchingUtils.prepareBrowseWorkspaceButton(genmodelBrowseWS, genmodelPath, false);
@@ -481,6 +551,8 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		control.setLayout(controlLayout);
 		control.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 
+//		Group projectGroup = createProjectGroup(control);
+		
 		Group txGroup = createTransformationGroup(control);
 		
 		createDirectionGroup(txGroup);
@@ -571,10 +643,18 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 
 	protected Group createTransformationGroup(Composite control) {
 		Group txGroup = new Group(control, SWT.NONE);
-		txGroup.setToolTipText("The transformation selection and its directional configuration ");
+		txGroup.setToolTipText("The default project and transformation selection and its directional configuration ");
 		txGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		txGroup.setText("Transformation");
+		txGroup.setText("Project / Transformation");
 		txGroup.setLayout(new GridLayout(3, false));
+
+		projectPath = new Text(txGroup, SWT.BORDER);
+		projectPath.setToolTipText("The default project");
+		GridData gd_projectPath = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		gd_projectPath.minimumWidth = 100;
+		projectPath.setLayoutData(gd_projectPath);
+		projectBrowseWS = new Button(txGroup, SWT.NONE);
+		projectBrowseWS.setText("Browse Projects...");
 
 		txPath = new Text(txGroup, SWT.BORDER);
 		txPath.setToolTipText("The transformation to execute");
@@ -586,6 +666,20 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		txBrowseFile = new Button(txGroup, SWT.NONE);
 		txBrowseFile.setText("Browse File...");
 		return txGroup;
+	}
+
+	protected @NonNull String deresolve(String key) {
+		String rawValue = String.valueOf(key);
+		URI rawURI = URI.createURI(rawValue);
+		String projectName = getProjectName();
+		if (rawURI.isPlatformResource()) {
+			URI normalizedURI = rawURI.deresolve(getProjectURI());
+			rawValue = String.valueOf(normalizedURI);
+		}
+		else if ((projectName.length() > 0) && rawValue.startsWith(projectName)) {			// FIXME temporary migration fudge
+			rawValue = rawValue.substring(projectName.length()+1);
+		}
+		return rawValue;
 	}
 
 	protected @Nullable CompileStepRow getCompilerStepRow(@NonNull String step) {
@@ -604,22 +698,50 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		return null;
 	}
 
-	protected @NonNull String getDefaultIntermediatePath(@NonNull Group group, @NonNull URI txURI, @NonNull String step) {
+	protected @NonNull String getDefaultIntermediatePath(@NonNull Group group, @NonNull URI txURI, @Nullable String subPath, @NonNull String step) {
 		String text = getCurrentPath(group, step);
 		if (text != null) {
 			return text;
 		}
-		return String.valueOf(txURI.trimFileExtension().appendFileExtension(AbstractCompilerChain.getDefaultExtension(step)));//.deresolve(txURI));
+		int segmentCount = txURI.segmentCount();
+		if (segmentCount > 1) {
+			URI prefixURI = txURI.trimSegments(1);
+			if (subPath != null) {
+				prefixURI = URI.createURI(subPath, true).resolve(prefixURI.appendSegment(""));
+			}
+			String name = txURI.trimFileExtension().lastSegment();
+			URI deresolveSrcURI = prefixURI.appendSegment(name).appendFileExtension(AbstractCompilerChain.getDefaultExtension(step)).deresolve(getProjectURI());
+			List<String> stepProjectSegments = deresolveSrcURI.segmentsList();//.subList(2, segmentCount2);
+			int stepProjectSegmentCount = stepProjectSegments.size();
+			if (prefixURI.isPlatformResource() && (stepProjectSegmentCount >= 2)) {
+				if (step == CompilerChain.CLASS_STEP) {
+					String stepProjectName = prefixURI.segment(1);
+					URI stepProjectURI = URI.createPlatformResourceURI(stepProjectName, false);
+					return String.valueOf(stepProjectURI.appendSegment("bin").deresolve(getProjectURI()));				// FIXME Use JDT Propject path
+				}
+				else if (step == CompilerChain.JAVA_STEP) {
+					String stepProjectName = prefixURI.segment(1);
+					URI stepProjectURI = URI.createPlatformResourceURI(stepProjectName, false);
+					return String.valueOf(stepProjectURI.appendSegment("src-gen").deresolve(getProjectURI()));				// FIXME Use JDT Propject path
+				}
+			}
+			return String.valueOf(deresolveSrcURI);
+		}
+		return "";
 	}
 
-	protected @NonNull String getDefaultPath(@NonNull Group group, @NonNull URI txURI, @NonNull String name) {
+	protected @NonNull String getDefaultPath(@NonNull Group group, @NonNull URI txURI, @Nullable String subPath, @NonNull String name) {
 		String text = getCurrentPath(group, name);
 		if (text != null) {
 			return text;
 		}
 		int segmentCount = txURI.segmentCount();
 		if (segmentCount > 1) {
-			return String.valueOf(txURI.trimSegments(1).appendSegment(name).appendFileExtension("xmi"));//.deresolve(txURI));
+			URI prefixURI = txURI.trimSegments(1);
+			if (subPath != null) {
+				prefixURI = URI.createURI(subPath, true).resolve(prefixURI.appendSegment(""));
+			}
+			return String.valueOf(prefixURI.appendSegment(name).appendFileExtension("xmi").deresolve(getProjectURI()));
 		}
 		return "";
 	}
@@ -671,6 +793,23 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		return null;
 	}
 
+	protected @NonNull String getProjectName() {
+		return projectPath.getText().trim();
+	}
+
+	protected @NonNull URI getProjectURI() {
+		return URI.createPlatformResourceURI(getProjectName() + "/", true);
+	}
+
+	protected @NonNull String getTxName() {
+		return txPath.getText().trim();
+	}
+
+	protected @NonNull URI getTxURI() {
+		String txName = getTxName();
+		return URI.createURI(txName, true).resolve(getProjectURI());
+	}
+
 	public void initializeFrom(ILaunchConfiguration configuration) {
 //		System.out.println("initializeFrom");
 		assert !initializing;
@@ -690,15 +829,18 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 
 	protected void initializeInternal(@NonNull ILaunchConfiguration configuration) throws CoreException {
 //		System.out.println("initializeInternal");
+		String projectAttribute = configuration.getAttribute(PROJECT_KEY, "");
+		projectPath.setText(String.valueOf(projectAttribute));
 		String txAttribute = configuration.getAttribute(TX_KEY, "");
-		URI uri = URI.createURI(txAttribute);
-		if (uri.scheme() == null) {
-			uri = URI.createPlatformResourceURI(txAttribute, true);
-		}
-		txPath.setText(String.valueOf(uri));
+		URI projectURI = getProjectURI();
+		URI uri = URI.createURI(txAttribute).resolve(projectURI);
+//		if (uri.scheme() == null) {
+//			uri = URI.createPlatformResourceURI(txAttribute, true);
+//		}
+		txPath.setText(String.valueOf(uri.deresolve(projectURI)));
 //		autoBuildCheckButton.setSelection(configuration.getAttribute(AUTO_BUILD_KEY, true));					// FIXME disabled
-//		interpretedCheckButton.setSelection(configuration.getAttribute(INTERPRETED_KEY, true));
-		traceEvaluationCheckButton.setSelection(configuration.getAttribute(TRACE_EVALUATION_KEY, false));		// FIXME BUG 486938 disabled until Java/Tx package-path discrepancy resolved
+		interpretedCheckButton.setSelection(configuration.getAttribute(INTERPRETED_KEY, true));
+		traceEvaluationCheckButton.setSelection(configuration.getAttribute(TRACE_EVALUATION_KEY, false));
 		Map<String, String> oldInputsMap = configuration.getAttribute(OLD_IN_KEY, EMPTY_MAP);
 		Map<String, String> newInputsMap = configuration.getAttribute(NEW_IN_KEY, EMPTY_MAP);
 		Map<String, String> oldOutputsMap = configuration.getAttribute(OLD_OUT_KEY, EMPTY_MAP);
@@ -733,25 +875,29 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 //		}
 		String genmodelAttribute = configuration.getAttribute(GENMODEL_KEY, "");
 		if (genmodelAttribute == null) {
-			Path path = new Path(genmodelAttribute);
-			genmodelAttribute = path.removeFileExtension().addFileExtension("genmodel").toString();
+			URI txURI = getTxURI();
+			String name = txURI.trimFileExtension().lastSegment();
+			URI prefixURI = txURI.trimSegments(1);
+			URI deresolveSrcURI = prefixURI.appendSegment(name).appendFileExtension("genmodel").deresolve(getProjectURI());
+			genmodelAttribute = deresolveSrcURI.toString();
 		}
 		uri = URI.createURI(genmodelAttribute);
 		if (uri.scheme() == null) {
 			uri = URI.createPlatformResourceURI(genmodelAttribute, true);
 		}
-		genmodelPath.setText(String.valueOf(uri));
+		genmodelPath.setText(String.valueOf(uri.deresolve(getProjectURI())));
 	}
 
 	protected boolean isInterpreted() {
-		return true; //interpretedCheckButton.getSelection();		// FIXME BUG 486938 disabled until Java/Tx package-path discrepancy resolved
+		return interpretedCheckButton.getSelection();
 	}
 
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 //		System.out.println("performApply");
-		configuration.setAttribute(TX_KEY, txPath.getText());
+		configuration.setAttribute(PROJECT_KEY, getProjectName());
+		configuration.setAttribute(TX_KEY, getTxURI().toString());
 		configuration.setAttribute(AUTO_BUILD_KEY, autoBuildCheckButton.getSelection());
-		configuration.setAttribute(GENMODEL_KEY, genmodelPath.getText());
+		configuration.setAttribute(GENMODEL_KEY, URI.createURI(genmodelPath.getText(), true).resolve(getProjectURI()).toString());
 		configuration.setAttribute(INTERPRETED_KEY, interpretedCheckButton.getSelection());
 		configuration.setAttribute(TRACE_EVALUATION_KEY, traceEvaluationCheckButton.getSelection());
 		performApply_Map(configuration, oldInputsGroup, OLD_IN_KEY);
@@ -778,10 +924,64 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		for (Control child : group.getChildren()) {
 			if (child instanceof ParameterRow) {
 				ParameterRow row = (ParameterRow)child;
-				map.put(row.name.getText(), row.path.getText());
+				URI uri = URI.createURI(row.path.getText());
+				map.put(row.name.getText(), uri.resolve(getProjectURI()).toString());
 			}
 		}
 		configuration.setAttribute(mapKey, map);
+	}
+
+	/**
+	 * Called to prepare the Browse Workspace button, this implementation adds a
+	 * selection listener that creates an appropriate
+	 * {@link WorkspaceResourceDialog}.
+	 */
+	public void prepareBrowseProjectsButton(@NonNull Button browseWorkspaceButton, final @NonNull Text uriField) {
+		// This method substantially copied from org.eclipse.emf.common.ui.dialogs.ResourceDialog.
+		final Shell shell = browseWorkspaceButton.getShell();
+		browseWorkspaceButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent event) {
+
+				ILabelProvider labelProvider = new LabelProvider() {
+					@Override
+					public Image getImage(Object element) {
+						return null;		// FIXME project icon
+					}
+
+					@Override
+					public String getText(Object element) {
+						if (element instanceof IProject) {
+							IProject iProject = (IProject)element;
+							if (iProject.isOpen()) {
+								return iProject.getName();
+							}
+						}
+						return null;
+					}
+				};
+				
+				ElementListSelectionDialog dialog = new ElementListSelectionDialog(shell, labelProvider);
+				dialog.setTitle("Project Selection"); 
+				dialog.setMessage("Select the default project."); 
+				dialog.setMultipleSelection(false); 
+				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+//				try {
+					dialog.setElements(root.getProjects());
+//				}
+//				catch (JavaModelException jme) {QVTdDebugUIPlugin.log(jme);}
+				try {
+					IProject iProject = root.getProject(uriField.getText().trim());
+					if (iProject != null) {
+						dialog.setInitialSelections(new Object[] { iProject });
+					}
+				}
+				catch (Exception e) {}
+				if (dialog.open() == Window.OK) {			
+					uriField.setText(((IProject) dialog.getFirstResult()).getName());
+				}
+			}
+		});
 	}
 
 /*	protected void refreshParametersGroup(@NonNull Group group, int style, @NonNull Map<String, String> map, @Nullable Comparator<ParameterRow> keyComparator) {
@@ -814,8 +1014,14 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 
 	protected void setDefaults(@NonNull ILaunchConfigurationWorkingCopy configuration, @NonNull IFile iFile) {
 //		System.out.println("setDefaults");
-		configuration.setAttribute(TX_KEY, iFile.getFullPath().toString());
-		configuration.setAttribute(GENMODEL_KEY, iFile.getFullPath().removeFileExtension().addFileExtension("genmodel").toString());
+		String projectName = iFile.getProject().getName();
+		URI projectURI = URI.createPlatformResourceURI(projectName, true);
+		URI rawTxURI = URI.createPlatformResourceURI(iFile.getFullPath().toString(), true);
+		URI resolvedTxURI = rawTxURI.resolve(projectURI);
+//		URI deresolvedTxURI = resolvedTxURI.deresolve(projectURI);
+		configuration.setAttribute(PROJECT_KEY, projectName);
+		configuration.setAttribute(TX_KEY, resolvedTxURI.toString());
+		configuration.setAttribute(GENMODEL_KEY, resolvedTxURI.trimFileExtension().appendFileExtension("genmodel").toString());
 		configuration.setAttribute(AUTO_BUILD_KEY, true);
 		configuration.setAttribute(INTERPRETED_KEY, true);
 		configuration.setAttribute(TRACE_EVALUATION_KEY, false);
@@ -900,18 +1106,18 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 //			}
 			updating = true;
 			try {
-				String txName = txPath.getText().trim();
-				URI txURI = URI.createURI(txName, true);
+				if (projectPath.isDisposed() || txPath.isDisposed()) {
+					return;
+				}
+				String projectName = getProjectName();
+				URI txURI = getTxURI();
 				if (txModified) {
-					if (txPath.isDisposed()) {
-						return;
-					}
 					try {
 						transformation = updateTransformation(txURI);
 						directionModified = true;
 					}
 					catch (Throwable ex) {
-						setErrorMessage("Failed to load '" + txName + "': " + ex.toString());
+						setErrorMessage("Failed to load '" + txURI + "': " + ex.toString());
 						return;
 					}
 					txModified = false;
@@ -941,19 +1147,19 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 					@SuppressWarnings("null")@NonNull Group newOutputsGroup2 = newOutputsGroup;
 					@SuppressWarnings("null")@NonNull Group intermediatesGroup2 = intermediatesGroup;
 					for (String oldInputName : oldInputsMap.keySet()) {
-						oldInputsMap.put(oldInputName, getDefaultPath(oldInputsGroup2, txURI, oldInputName));
+						oldInputsMap.put(oldInputName, getDefaultPath(oldInputsGroup2, txURI, "in", oldInputName));
 					}
 					for (String newInputName : newInputsMap.keySet()) {
-						newInputsMap.put(newInputName, getDefaultPath(newInputsGroup2, txURI, newInputName));
+						newInputsMap.put(newInputName, getDefaultPath(newInputsGroup2, txURI, "in", newInputName));
 					}
 					for (String oldOutputName : oldOutputsMap.keySet()) {
-						oldOutputsMap.put(oldOutputName, getDefaultPath(oldOutputsGroup2, txURI,oldOutputName));
+						oldOutputsMap.put(oldOutputName, getDefaultPath(oldOutputsGroup2, txURI, "out", oldOutputName));
 					}
 					for (String newOutputName : newOutputsMap.keySet()) {
-						newOutputsMap.put(newOutputName, getDefaultPath(newOutputsGroup2, txURI, newOutputName));
+						newOutputsMap.put(newOutputName, getDefaultPath(newOutputsGroup2, txURI, "out", newOutputName));
 					}
 					for (String intermediateName : intermediateMap.keySet()) {
-						intermediateMap.put(intermediateName, getDefaultIntermediatePath(intermediatesGroup2, txURI, intermediateName));
+						intermediateMap.put(intermediateName, getDefaultIntermediatePath(intermediatesGroup2, txURI, "temp", intermediateName));
 					}
 					updateParametersGroup(oldInputsGroup2, SWT.NONE, oldInputsMap, null);
 					updateParametersGroup(newInputsGroup2, SWT.NONE, newInputsMap, null);
@@ -1005,7 +1211,8 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 				String key = keys.get(i);
 				if (key != null) {
 					row.name.setText(key);
-					row.path.setText(String.valueOf(map.get(key)));
+					String rawValue = deresolve(map.get(key));
+					row.path.setText(rawValue);
 				}
 			}
 			for (; i < keys.size(); i++) {

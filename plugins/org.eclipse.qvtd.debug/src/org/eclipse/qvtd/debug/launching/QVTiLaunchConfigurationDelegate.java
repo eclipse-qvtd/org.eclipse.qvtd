@@ -26,6 +26,8 @@ import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.vm.utils.MiscUtil;
 import org.eclipse.ocl.examples.debug.vm.utils.SafeRunner;
@@ -33,9 +35,11 @@ import org.eclipse.ocl.examples.debug.vm.utils.ShallowProcess;
 import org.eclipse.ocl.examples.debug.vm.utils.StreamsProxy;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;
@@ -81,6 +85,17 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
         			}
         	    	Transformation transformation = QVTimperativeUtil.loadTransformation(environmentFactory, txURI, environmentFactory.keepDebug());
         			QVTiExecutor executor = createExecutor(environmentFactory, transformation);
+        			for (@NonNull TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {
+            			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(typedModel.getUsedPackage())) {
+            				EObject esObject = asPackage.getESObject();
+            				if (esObject instanceof EPackage) {
+            					String nsURI = ((EPackage)esObject).getNsURI();
+            					if (nsURI != null) {
+            						environmentFactory.getResourceSet().getPackageRegistry().put(nsURI, (EPackage)esObject);
+            					}
+            				}
+            			}
+        			}
         			for (String inName : inMap.keySet()) {
         				if (inName != null) {
 	        				URI inURI = URI.createURI(inMap.get(inName), true);

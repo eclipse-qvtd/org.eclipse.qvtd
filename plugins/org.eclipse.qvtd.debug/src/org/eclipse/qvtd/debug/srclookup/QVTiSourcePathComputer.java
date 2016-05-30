@@ -28,6 +28,7 @@ public class QVTiSourcePathComputer extends VMSourcePathComputer {
 
 	protected URI getModuleFile(@NonNull ILaunchConfiguration configuration) throws CoreException {
 //        String moduleFileName = configuration.getAttribute(LaunchConstants.MODULE, ""); //$NON-NLS-1$
+		String projectName = configuration.getAttribute(QVTiLaunchConstants.PROJECT_KEY, (String)null);
         String moduleFileName = configuration.getAttribute(QVTiLaunchConstants.TX_KEY, ""); //$NON-NLS-1$
         URI moduleUri = URI.createURI(moduleFileName);
         return moduleUri;

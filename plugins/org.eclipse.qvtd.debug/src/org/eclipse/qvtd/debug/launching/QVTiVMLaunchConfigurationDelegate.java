@@ -49,6 +49,7 @@ public class QVTiVMLaunchConfigurationDelegate extends VMLaunchConfigurationDele
 	}
 	
 	protected @NonNull QVTiEvaluationContext createEvaluationContext(@NonNull ILaunchConfiguration configuration) throws CoreException {
+		String projectName = configuration.getAttribute(PROJECT_KEY, "");
 		String txName = configuration.getAttribute(TX_KEY, "");
 		URI txURI = URI.createURI(txName, true);
 		Map<String, String> inMap = configuration.getAttribute(NEW_IN_KEY, EMPTY_MAP);

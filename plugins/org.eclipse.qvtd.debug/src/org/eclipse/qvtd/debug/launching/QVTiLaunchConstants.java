@@ -63,6 +63,11 @@ public interface QVTiLaunchConstants
 	public static final @NonNull String OLD_OUT_KEY = "old-out";
 
 	/**
+	 * ILaunchConfiguration String attribute for the default project.
+	 */
+	public static final @NonNull String PROJECT_KEY = "project";
+
+	/**
 	 * ILaunchConfiguration String attribute for the textual trace evaluation option.
 	 */
 	public static final @NonNull String TRACE_EVALUATION_KEY = "console-trace";
