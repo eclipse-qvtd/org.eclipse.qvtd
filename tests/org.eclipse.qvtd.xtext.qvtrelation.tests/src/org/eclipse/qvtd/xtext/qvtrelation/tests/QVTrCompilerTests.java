@@ -104,6 +104,18 @@ public class QVTrCompilerTests extends LoadTestCase
 			usedGenPackages.add((@NonNull GenPackage)getResourceSet().getEObject(uri, true));
 		}
 
+		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String testName, @NonNull String txName, @NonNull String outputName, @NonNull String middleNsURI, @NonNull String... suffixes) throws Exception {
+	    	String projectTestName = PROJECT_NAME + "." + testName;
+	    	if (suffixes != null) {
+	    		for (@NonNull String suffix : suffixes) {
+			    	installClassName(projectTestName + "." + suffix);
+		    	}
+	    	}
+			Transformation asTransformation = compileTransformation(txName + ".qvtr", outputName, projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/" + txName);
+			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
+	    	return createGeneratedClass(asTransformation, txName + ".genmodel");
+		}
+
 		public void checkOutput(@NonNull Resource outputResource, @NonNull String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
 		        URI referenceModelURI = samplesBaseUri.appendSegment(expectedFile);
 				Resource referenceResource = outputResource.getResourceSet().getResource(referenceModelURI, true);
@@ -389,12 +401,10 @@ public class QVTrCompilerTests extends LoadTestCase
 //		QVTr2QVTc.VARIABLES.setState(true);
 		MyQVT myQVT = new MyQVT("hstm2fstm");
     	try {
-	    	String projectTestName = PROJECT_NAME + ".HierarchicalStateMachine2FlatStateMachine";
-			Transformation asTransformation = myQVT.compileTransformation("HierarchicalStateMachine2FlatStateMachine.qvtr", "flat", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine");
-			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
-	    	myQVT.installClassName(projectTestName + ".FlatStateMachine.FlatStateMachinePackage");
-	    	myQVT.installClassName(projectTestName + ".HierarchicalStateMachine.HierarchicalStateMachinePackage");
-	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "HierarchicalStateMachine2FlatStateMachine.genmodel");
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("HierarchicalStateMachine2FlatStateMachine",
+					"HierarchicalStateMachine2FlatStateMachine", "flat",
+					"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine",
+					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
 	    	myQVT.loadInput("hier", "MiniModel.xmi");
@@ -448,12 +458,9 @@ public class QVTrCompilerTests extends LoadTestCase
  //   	QVTm2QVTp.PARTITIONING.setState(true);
     	MyQVT myQVT = new MyQVT("seq2stm");
     	try {
-	    	String projectTestName = PROJECT_NAME + ".seq2stm";
-			Transformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm");
-			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
-	    	myQVT.installClassName(projectTestName + ".SeqMM.SeqMMPackage");
-	    	myQVT.installClassName(projectTestName + ".PSeqToStm.PSeqToStmPackage");
-	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "SeqToStm.genmodel");
+	    	Class<? extends Transformer> txClass = myQVT.buildTransformation("seq2stm", "SeqToStm", "stm",
+	    			"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm",
+					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
 	    	myQVT.loadInput("seqDgm", "Seq.xmi");
@@ -479,18 +486,14 @@ public class QVTrCompilerTests extends LoadTestCase
 //		QVTr2QVTc.VARIABLES.setState(true);
     	MyQVT myQVT = new MyQVT("rel2core");
     	try {
-	    	String projectTestName = PROJECT_NAME + ".rel2core";
 	    	myQVT.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.genmodel", "//qvtcore");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel", "//qvtcorebase");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
-	    	Transformation asTransformation = myQVT.compileTransformation("RelToCore.qvtr", "core", projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/rel2core/RelToCore");
-	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "RelToCore.genmodel");
-			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
-//	    	myQVT.installClassName(projectTestName + ".SeqMM.SeqMMPackage");
-//	    	myQVT.installClassName(projectTestName + ".PSeqToStm.PSeqToStmPackage");
+	    	Class<? extends Transformer> txClass = myQVT.buildTransformation("rel2core", "RelToCore", "core",
+	    			"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/rel2core/RelToCore");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
 	    	myQVT.loadInput("relations", "MiniSeq2Stm.qvtras");
