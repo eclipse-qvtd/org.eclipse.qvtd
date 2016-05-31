@@ -58,7 +58,6 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
@@ -66,6 +65,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.util.DerivedConstants;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -159,7 +159,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	private final @NonNull Map<@NonNull Element, @NonNull Element> globalTarget2source = new HashMap<@NonNull Element, @NonNull Element>();
 	private final @NonNull Map<@NonNull Element, @NonNull List<@NonNull Element>> globalSource2targets = new HashMap<@NonNull Element, @NonNull List<@NonNull Element>>();
 	
-	private final @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
+	/**
+	 * All leaf packages that contribute to the trace. Typically just one leaf package. May be many.
+	 */
+	private final @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> txTracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
 //	private final @NonNull List<@NonNull Transformation> coreTransformations = new ArrayList<@NonNull Transformation>();
 	
 	/**
@@ -386,6 +389,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 
 	public void generateModels(@NonNull GenModel genModel) {
+		((PivotMetamodelManager)environmentFactory.getMetamodelManager()).addGenModel(genModel);
 		Registry generatorAdapterDescriptorRegistry = GeneratorAdapterFactory.Descriptor.Registry.INSTANCE;
 		if (!generatorAdapterDescriptorRegistry.getDescriptors(GenModelPackage.eNS_URI).contains(GenModelGeneratorAdapterFactory.DESCRIPTOR)) {
 			generatorAdapterDescriptorRegistry.addDescriptor(GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
@@ -675,7 +679,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
         asResource.getContents().add(this.coreModel);
         // Copy imports
         
-        for (org.eclipse.ocl.pivot.@NonNull Package asPackage : tracePackages) {
+        for (org.eclipse.ocl.pivot.@NonNull Package asPackage : txTracePackages) {
             Import asImport = helper.createImport(null, asPackage);
             coreModel.getOwnedImports().add(asImport);
         }
@@ -701,7 +705,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		if (usedGenPackages != null) {
 			genModel.getUsedGenPackages().addAll(usedGenPackages);
 		}
-		genModel.setModelDirectory("/" + projectName + "/test-gen");
+		genModel.setModelDirectory("/" + projectName + "/src-gen");
 		genModel.setModelPluginID(projectName);
 		genModel.setModelName(trimFileExtension.lastSegment());
 		genModel.setBundleManifest(false);
@@ -794,10 +798,18 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
         Model root = PivotFactory.eINSTANCE.createModel();
 		root.setExternalURI(traceURI.toString());
         asResource.getContents().add(root);
-		if ((traceNsURI != null) && (tracePackages.size() == 1)) {
-			tracePackages.get(0).setURI(traceNsURI);
+		if ((traceNsURI != null) && (txTracePackages.size() == 1)) {
+			txTracePackages.get(0).setURI(traceNsURI);
 		}
-        root.getOwnedPackages().addAll(tracePackages);
+        for (org.eclipse.ocl.pivot.@NonNull Package txTracePackage : txTracePackages) {
+        	org.eclipse.ocl.pivot.@NonNull Package rootPackage = txTracePackage;
+        	for (EObject eContainer = rootPackage.eContainer(); eContainer instanceof org.eclipse.ocl.pivot.Package; eContainer = eContainer.eContainer()) {
+        		rootPackage = (org.eclipse.ocl.pivot.Package)eContainer;
+        	}
+        	if (!root.getOwnedPackages().contains(rootPackage)) {
+        		root.getOwnedPackages().add(rootPackage);
+        	}
+        }
 		AS2Ecore as2ecore = new AS2Ecore((EnvironmentFactoryInternal) environmentFactory, traceURI, null);
 		XMLResource ecoreResource = as2ecore.convertResource(asResource, traceURI);
 		ecoreResource.save(saveOptions);
@@ -925,28 +937,66 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		}
 	}
 
-	public @NonNull List<@NonNull Package> transformToTracePackages() {
+	public void transformToTracePackages() {
+		List<org.eclipse.ocl.pivot.@NonNull Package> rootTracePackages = null;
 		for (@NonNull EObject eObject : qvtrResource.getContents()) {
 			if (eObject instanceof RelationModel) {
-				transformToTracePackageHierarchy(tracePackages, ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
-				CompilerUtil.normalizeNameables(tracePackages);
+				List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages = transformToTracePackageHierarchy(ClassUtil.nullFree(((RelationModel)eObject).getOwnedPackages()));
+				if (tracePackages != null) {
+					if (rootTracePackages == null) {
+						rootTracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
+					}
+					rootTracePackages.addAll(tracePackages);
+				}
 			}
 		}
-		return tracePackages;
+		if (rootTracePackages != null) {
+			CompilerUtil.normalizeNameables(rootTracePackages);
+		}
 	}
 	
-	private void transformToTracePackageHierarchy(@NonNull List<org.eclipse.ocl.pivot.@NonNull Package> tracePackages, @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
+	private @Nullable List<org.eclipse.ocl.pivot.@NonNull Package> transformToTracePackageHierarchy(@NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> relationPackages) {
+		List<org.eclipse.ocl.pivot.@NonNull Package> nestingTracePackages = null;
 		for (org.eclipse.ocl.pivot.@NonNull Package relationPackage : relationPackages) {
+			List<org.eclipse.ocl.pivot.@NonNull Package> nestedTracePackages = null;
 			for (org.eclipse.ocl.pivot.@NonNull Class relationClass : ClassUtil.nullFree(relationPackage.getOwnedClasses())) {
 				if (relationClass instanceof RelationalTransformation) {
 					RelationalTransformationToTracePackage relationalTransformationToTracePackage = new RelationalTransformationToTracePackage(this);
-					org.eclipse.ocl.pivot.Package tracePackage = relationalTransformationToTracePackage.doRelationalTransformationToTracePackage((RelationalTransformation)relationClass);
-					tracePackages.add(tracePackage);
+					org.eclipse.ocl.pivot.Package nestedTracePackage = relationalTransformationToTracePackage.doRelationalTransformationToTracePackage((RelationalTransformation)relationClass);
+					txTracePackages.add(nestedTracePackage);
+					if (nestedTracePackages == null) {
+						nestedTracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
+					}
+					nestedTracePackages.add(nestedTracePackage);
 				}
 			}
-			transformToTracePackageHierarchy(tracePackages, ClassUtil.nullFree(relationPackage.getOwnedPackages()));
+			List<org.eclipse.ocl.pivot.@NonNull Package> nestedTracePackages2 = transformToTracePackageHierarchy(ClassUtil.nullFree(relationPackage.getOwnedPackages()));
+			if (nestedTracePackages2 != null) {
+				if (nestedTracePackages == null) {
+					nestedTracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
+				}
+				nestedTracePackages.addAll(nestedTracePackages2);
+			}
+			if (nestedTracePackages != null) {
+				CompilerUtil.normalizeNameables(nestedTracePackages);
+//				String uri = relationPackage.getURI();		// FIXME replicate tx package hierarchy
+//				if (uri == null) {
+//					StringBuilder s = new StringBuilder();
+//					getURI(relationPackage, s);
+//					uri = s.toString();
+//				}
+//				org.eclipse.ocl.pivot.Package nestingTracePackage = helper.createPackage(ClassUtil.nonNull(relationPackage.getName()), relationPackage.getNsPrefix(), uri);
+//				nestingTracePackage.getOwnedPackages().addAll(nestedTracePackages);
+				if (nestingTracePackages == null) {
+					nestingTracePackages = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
+				}
+//				nestingTracePackages.add(nestingTracePackage);
+				nestingTracePackages.addAll(nestedTracePackages);
+			}
 		}
+		return nestingTracePackages;
 	}
+	
 	/**
 	 * Lazily create the name Property for a traceClass with a type.
 	 * @param isMany 

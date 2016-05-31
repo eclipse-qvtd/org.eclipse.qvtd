@@ -18,17 +18,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -46,6 +50,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
 import org.eclipse.qvtd.compiler.internal.qvtu2qvtm.QVTu2QVTm;
+import org.eclipse.qvtd.compiler.internal.utilities.JavaSourceFileObject;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -166,7 +171,7 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		this.environmentFactory = environmentFactory;
 		this.asResourceSet = environmentFactory.getMetamodelManager().getASResourceSet();
     	this.txURI = txURI;
-    	this.prefixURI = txURI.trimFileExtension();
+    	this.prefixURI = txURI.trimSegments(1).appendSegment("temp").appendSegment(txURI.trimFileExtension().lastSegment());
 		this.options = options != null ? options : new HashMap<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>>();
 	}
 
@@ -292,19 +297,24 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		}
 	}
 	
-	protected @NonNull URI getURI(@NonNull String stepKey, @NonNull Key<URI> uriKey) {
+	public @NonNull URI getURI(@NonNull String stepKey, @NonNull Key<URI> uriKey) {
 		URI uri = getOption(stepKey, URI_KEY);
 		return uri != null ? uri : prefixURI.appendFileExtension(step2extension.get(stepKey));
 	}
 
 	protected @NonNull Class<? extends Transformer> java2class(@NonNull JavaResult javaResult) throws Exception {
-//		URI javaURI = getURI(JAVA_STEP, URI_KEY);
-//		URI classURI = getURI(CLASS_STEP, URI_KEY);
-		File explicitClassPath = new File("../org.eclipse.qvtd.xtext.qvtcore.tests/bin");
-//		String qualifiedClassName = cg.getQualifiedName();
-		OCL2JavaFileObject.saveClass(javaResult.classPath, javaResult.qualifiedClassName, javaResult.code);	
+	   	List<@NonNull String> classpathProjects;
+		if (EcorePlugin.IS_ECLIPSE_RUNNING) {
+			String projectName = txURI.segment(1);
+		   	classpathProjects = JavaSourceFileObject.createClasspathProjectList(projectName, "org.eclipse.emf.common", "org.eclipse.emf.ecore", "org.eclipse.jdt.annotation", "org.eclipse.ocl.pivot", "org.eclipse.osgi", "org.eclipse.qvtd.runtime");
+		}
+		else {
+		   	classpathProjects = null;
+		}
+		JavaSourceFileObject.saveClass(javaResult.classPath, javaResult.qualifiedClassName, javaResult.code, classpathProjects);
+		File explicitClassPath = new File(javaResult.classPath);
 		@SuppressWarnings("unchecked")
-		Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, javaResult.qualifiedClassName);
+		Class<? extends Transformer> txClass = (Class<? extends Transformer>) JavaSourceFileObject.loadExplicitClass(explicitClassPath, javaResult.qualifiedClassName);
 		assert txClass != null;
 		compiled(CLASS_STEP, txClass);
 		return txClass;
@@ -353,6 +363,7 @@ public abstract class AbstractCompilerChain implements CompilerChain
 
 	protected @NonNull JavaResult qvti2java(@NonNull Transformation asTransformation, @NonNull String ... genModelFiles) throws IOException {
 		URI javaURI = getURI(JAVA_STEP, URI_KEY);
+		URI classURI = getURI(CLASS_STEP, URI_KEY);
 		ResourceSet resourceSet = environmentFactory.getResourceSet();
 		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
 		if (genModelFiles != null) {
@@ -364,13 +375,31 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		QVTiCodeGenerator cg = new QVTiCodeGenerator(environmentFactory, asTransformation);
 		QVTiCodeGenOptions options = cg.getOptions();
 		options.setUseNullAnnotations(true);
-		options.setPackagePrefix("cg");
+		String javaExtraPrefix = getOption(JAVA_STEP, JAVA_EXTRA_PREFIX_KEY);
+		if (javaExtraPrefix != null) {
+			options.setPackagePrefix(javaExtraPrefix);
+		}
 		String javaCodeSource = cg.generateClassFile();
 		URI normalizedURI = resourceSet.getURIConverter().normalize(javaURI);
-		File javaFile = cg.saveSourceFile(ClassUtil.nonNullState(normalizedURI.toFileString()));
-//		cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtcore.tests/test-gen/");
+		String javaFileName;
+		File explicitClassPath;
+		if (EcorePlugin.IS_ECLIPSE_RUNNING) {
+			URI createPlatformResourceURI = URI.createPlatformResourceURI("", false);
+			URI dURI = normalizedURI.deresolve(createPlatformResourceURI);
+			IFile iFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(dURI.toString()));
+		    File file = URIUtil.toFile(iFile.getLocationURI());
+			javaFileName = ClassUtil.nonNullState(file.toString());
+			IFile iBinFolder = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(classURI.deresolve(createPlatformResourceURI).toString()));
+		    File binFolder = URIUtil.toFile(iBinFolder.getLocationURI());
+			explicitClassPath = binFolder;
+		}
+		else {
+			javaFileName = ClassUtil.nonNullState(normalizedURI.toFileString());
+			URI normalizedClassURI = resourceSet.getURIConverter().normalize(classURI);
+			explicitClassPath = new File(normalizedClassURI.toFileString());
+		}
+		File javaFile = cg.saveSourceFile(javaFileName);
 		compiled(JAVA_STEP, javaFile);
-		File explicitClassPath = new File("../org.eclipse.qvtd.xtext.qvtcore.tests/bin");
 		return new JavaResult(javaFile, javaCodeSource, cg.getQualifiedName(), String.valueOf(explicitClassPath));
 	}
 

@@ -14,9 +14,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,8 +29,18 @@ import javax.tools.SimpleJavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.osgi.framework.Bundle;
 
 /**
  * JavaSourceFileObject supports use of a File as a Java compilation unit.
@@ -45,7 +55,7 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 	 * Compile all *.java files on sourcePath to objectPath.
 	 * e.g. from ../xyzzy/src/a/b/c to ../xyzzy/bin
 	 */
-	public static void compileClasses(@NonNull String sourcePath, @NonNull String objectPath) throws IOException {
+	public static void compileClasses(@NonNull String sourcePath, @NonNull String objectPath, @Nullable List<String> classpathProjects) throws IOException {
 		try {
 			List<@NonNull JavaFileObject> compilationUnits = gatherCompilationUnits(new File(sourcePath), null);
 			JavaCompiler compiler2 = compiler;
@@ -57,8 +67,15 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 				throw new IllegalStateException("No StandardJavaFileManager provided by the Java platform");
 			}
 //			System.out.printf("%6.3f start\n", 0.001 * (System.currentTimeMillis()-base));
-			DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();				
-			List<String> compilationOptions = Arrays.asList("-d", objectPath, "-g");
+			DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();	
+			List<String> compilationOptions;
+			if (EcorePlugin.IS_ECLIPSE_RUNNING && (classpathProjects != null)) {
+				compilationOptions = Arrays.asList("-d", objectPath, "-g", "-cp", createClassPath(classpathProjects));
+			}
+			else {
+				compilationOptions = Arrays.asList("-d", objectPath, "-g");
+			}
+			
 //			System.out.printf("%6.3f getTask\n", 0.001 * (System.currentTimeMillis()-base));
 			CompilationTask compilerTask = compiler2.getTask(null, stdFileManager2, diagnostics, compilationOptions, null, compilationUnits);
 //			System.out.printf("%6.3f call\n", 0.001 * (System.currentTimeMillis()-base));
@@ -85,6 +102,60 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 		}
 	}
 
+	public static @NonNull List<@NonNull String> createClasspathProjectList(@NonNull String... classpathProjects) {
+		List<@NonNull String> classpathProjectList = new ArrayList<@NonNull String>();
+		if (classpathProjects != null) {
+			for (@NonNull String classpathProject : classpathProjects) {
+				classpathProjectList.add(classpathProject);
+			}
+		}
+		return classpathProjectList;
+	}
+
+	public static @NonNull String createClassPath(@NonNull List<String> projectNames) {
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		String pathSeparator = null;
+		StringBuilder s = new StringBuilder();
+		for (String projectName : projectNames) {
+			String projectPath = null;
+			IProject project = root.getProject(projectName);
+			if (project != null) {
+				IPath location = project.getLocation();
+				if (location != null) {
+					projectPath = location.toString() + "/";
+				}
+			}
+			if (projectPath == null) {
+				Bundle bundle = Platform.getBundle(projectName);
+				if (bundle != null) {
+					projectPath = bundle.getLocation();
+				}
+			}
+			
+			if (projectPath != null) {
+				if (projectPath.startsWith("reference:")) {
+					projectPath = projectPath.substring(10);
+				}
+				URI uri = URI.createURI(projectPath);
+				if (uri.isFile()) {
+					projectPath =  ClassUtil.nonNullState(uri.toFileString()).replace("\\", "/");
+				}
+				assert projectPath != null;
+				if (projectPath.endsWith("/")) {
+					projectPath = projectPath + "bin";
+				}
+				if (pathSeparator != null) {
+					s.append(pathSeparator);
+				}
+				else {
+					pathSeparator = System.getProperty("path.separator");
+				}
+				s.append(projectPath);
+			}
+		}
+		return s.toString();
+	}
+
 	/**
 	 * Return a list comprisiing a JavaFileObject for each *.java file in or below folder.
 	 * A non-null compilationUnits may be provided for use as the returned list.
@@ -100,7 +171,7 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 					gatherCompilationUnits(file, compilationUnits);
 				}
 				else if (file.isFile() && file.getName().endsWith(".java")) {
-					URI uri = file.getCanonicalFile().toURI();
+					java.net.URI uri = file.getCanonicalFile().toURI();
 					compilationUnits.add(new JavaSourceFileObject(uri));
 				}
 			}
@@ -108,7 +179,59 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 		return compilationUnits;
 	}
 
-	private JavaSourceFileObject(@NonNull URI uri) {
+	/**
+	 * Load the class whose Java name is qualifiedClassName and whose class file can be found below explicitClassPath.
+	 * Subsequent loads of classes such as nested classes whose names are prefixed by qualifiedClassName are also loaded from explicitClassPath.
+	 * This method always uses a new ClassLoader to load the class and so ignores any previously cached loads. 
+	 */
+	public static Class<?> loadExplicitClass(@NonNull File explicitClassPath, @NonNull String qualifiedClassName) throws ClassNotFoundException, IOException {
+		ClassLoader thisClassLoader = JavaSourceFileObject.class.getClassLoader();
+		ExplicitClassLoader classLoader = new ExplicitClassLoader(explicitClassPath, qualifiedClassName, thisClassLoader);
+		return classLoader.loadClass(qualifiedClassName);
+	}
+
+	public static void saveClass(@NonNull String explicitClassPath, @NonNull String qualifiedName, @NonNull String javaCodeSource, @Nullable List<String> classpathProjects) throws IOException {
+		JavaCompiler compiler2 = compiler;
+		if (compiler2 == null) {
+			throw new IllegalStateException("No JavaCompiler provided by the Java platform - you need to use a JDK rather than a JRE");
+		}
+		StandardJavaFileManager stdFileManager2 = compiler2.getStandardFileManager(null, Locale.getDefault(), null);
+		if (stdFileManager2 == null) {
+			throw new IllegalStateException("No StandardJavaFileManager provided by the Java platform");
+		}
+//		System.out.printf("%6.3f start\n", 0.001 * (System.currentTimeMillis()-base));
+		List<? extends JavaFileObject> compilationUnits = Collections.singletonList(
+				new OCL2JavaFileObject(qualifiedName, javaCodeSource));
+		DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
+		
+		List<String> compilationOptions;
+		if (EcorePlugin.IS_ECLIPSE_RUNNING && (classpathProjects != null)) {
+			compilationOptions = Arrays.asList("-d", explicitClassPath, "-g", "-cp", createClassPath(classpathProjects));
+		}
+		else {
+			compilationOptions = Arrays.asList("-d", explicitClassPath, "-g");
+		}
+
+//		System.out.printf("%6.3f getTask\n", 0.001 * (System.currentTimeMillis()-base));
+		CompilationTask compilerTask = compiler2.getTask(null, stdFileManager2,
+				diagnostics, compilationOptions, null, compilationUnits);
+//		System.out.printf("%6.3f call\n", 0.001 * (System.currentTimeMillis()-base));
+		if (!compilerTask.call()) {
+			StringBuilder s = new StringBuilder();
+			for (Diagnostic<?> diagnostic : diagnostics.getDiagnostics()) {
+				s.append("\n" + diagnostic);
+			}
+			if (s.length() > 0) {
+				throw new IOException("Failed to compile " + qualifiedName + s.toString());
+			}
+			System.out.println("Compilation of " + qualifiedName + " returned false but no diagnostics");
+		}
+//		System.out.printf("%6.3f close\n", 0.001 * (System.currentTimeMillis()-base));
+		stdFileManager2.close();		// Close the file manager which re-opens automatically
+//		System.out.printf("%6.3f forName\n", 0.001 * (System.currentTimeMillis()-base));
+	}
+
+	private JavaSourceFileObject(java.net.@NonNull URI uri) {
 		super(uri, Kind.SOURCE);
 	}
 	

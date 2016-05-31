@@ -66,8 +66,10 @@ public interface CompilerChain
 	public static final @NonNull Key<@Nullable Collection<@NonNull ? extends GenPackage>> GENMODEL_USED_GENPACKAGES_KEY = new Key<@Nullable Collection<@NonNull ? extends GenPackage>>("genmodel-usedGenPackages");;
 	public static final @NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> TRACE_OPTIONS_KEY = new Key<@NonNull Map<@NonNull String, @Nullable String>>("trace-options");
 	public static final @NonNull Key<@NonNull Map<Object, Object>> SAVE_OPTIONS_KEY = new Key<@NonNull Map<Object, Object>>("save");
-	public static final @NonNull Key<URI> URI_KEY = new Key<URI>("uri");
+	public static final @NonNull Key<@Nullable URI> URI_KEY = new Key<@Nullable URI>("uri");
 	public static final @NonNull Key<Boolean> VALIDATE_KEY = new Key<Boolean>("validate");
+
+	public static final @NonNull Key<@Nullable String> JAVA_EXTRA_PREFIX_KEY = new Key<@Nullable String>("javaExtraPrefix");
 
 	public static final @NonNull String GENMODEL_BASE_PREFIX = "genModelBasePrefix";
 	public static final @NonNull String GENMODEL_COPYRIGHT_TEXT = "genModelCopyrightText";
@@ -79,5 +81,5 @@ public interface CompilerChain
 	@NonNull Transformation compile(@NonNull String outputName) throws Exception;
 	void dispose();
 	void removeListener(@NonNull Listener listener);
-	<@NonNull T> void setOption(@NonNull String stepKey, @NonNull Key<T> optionKey, @Nullable T object);
+	<T> void setOption(@NonNull String stepKey, @NonNull Key<T> optionKey, @Nullable T object);
 }

@@ -41,9 +41,9 @@ import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
-import org.eclipse.qvtd.compiler.internal.utilities.JavaSourceFileObject;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -73,6 +73,8 @@ public class QVTrCompilerTests extends LoadTestCase
 {
 	private static final @NonNull String PROJECT_NAME = "org.eclipse.qvtd.xtext.qvtrelation.tests";
 	private static final @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME + "/bin/" + PROJECT_NAME.replace(".",  "/"), true);
+	private static URI TESTS_JAVA_SRC_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME +"/test-gen", true);
+	private static URI TESTS_JAVA_BIN_URI = URI.createPlatformResourceURI("/" + PROJECT_NAME + "/bin", true);
 
 	protected static class MyQVT extends QVTimperative
 	{
@@ -104,7 +106,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			usedGenPackages.add((@NonNull GenPackage)getResourceSet().getEObject(uri, true));
 		}
 
-		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String testName, @NonNull String txName, @NonNull String outputName, @NonNull String middleNsURI, @NonNull String... suffixes) throws Exception {
+/*		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String testName, @NonNull String txName, @NonNull String outputName, @NonNull String middleNsURI, @NonNull String... suffixes) throws Exception {
 	    	String projectTestName = PROJECT_NAME + "." + testName;
 	    	if (suffixes != null) {
 	    		for (@NonNull String suffix : suffixes) {
@@ -112,8 +114,25 @@ public class QVTrCompilerTests extends LoadTestCase
 		    	}
 	    	}
 			Transformation asTransformation = compileTransformation(txName + ".qvtr", outputName, projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/" + txName);
-			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
-	    	return createGeneratedClass(asTransformation, txName + ".genmodel");
+			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin", null);
+	    	return createGeneratedClass(asTransformation);
+		} */
+
+		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String testName, @NonNull String testFileName, @NonNull String outputName,
+				@NonNull String middleNsURI, @NonNull String @NonNull... genModelFiles) throws Exception {
+			Map<@NonNull String, @NonNull Map<CompilerChain.Key<?>, Object>> options = new HashMap<@NonNull String, @NonNull Map<CompilerChain.Key<?>, Object>>();
+			compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), testFolderURI.appendSegment(testFileName), options);
+			compilerChain.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+			compilerChain.setOption(CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, TESTS_JAVA_SRC_URI);
+			compilerChain.setOption(CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, TESTS_JAVA_BIN_URI);
+			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<@NonNull String, @Nullable String>();
+			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, PROJECT_NAME + "." + testName);
+			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
+			compilerChain.setOption(CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
+			compilerChain.setOption(CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
+			Class<? extends Transformer> txClass = compilerChain.build(outputName, genModelFiles);
+			createGeneratedExecutor(txClass);
+	        return txClass;
 		}
 
 		public void checkOutput(@NonNull Resource outputResource, @NonNull String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
@@ -134,6 +153,8 @@ public class QVTrCompilerTests extends LoadTestCase
 			compilerChain.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
 			Map<@NonNull String, @Nullable String> traceOptions = new HashMap<@NonNull String, @Nullable String>();
 //			traceOptions.put(CompilerChain.TRACE_NS_URI, middleNsURI);
+			compilerChain.setOption(CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, null);
+			compilerChain.setOption(CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, null);
 			compilerChain.setOption(CompilerChain.TRACE_STEP, CompilerChain.TRACE_OPTIONS_KEY, traceOptions);
 			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<@NonNull String, @Nullable String>();
 			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, basePrefix);
@@ -146,8 +167,10 @@ public class QVTrCompilerTests extends LoadTestCase
 		public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
 			ResourceSet resourceSet = getResourceSet();
 			resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
+			URI primaryGenModelURI = getURI(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY);
+			loadGenModel(primaryGenModelURI);
 			for (String genModelFile : genModelFiles) {
-				URI genModelURI = testFolderURI.appendSegment(genModelFile);
+				URI genModelURI = URI.createURI(genModelFile).resolve(testFolderURI);
 				loadGenModel(genModelURI);
 			}
 			QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), asTransformation);
@@ -287,6 +310,10 @@ public class QVTrCompilerTests extends LoadTestCase
 	        }
 	        return outputResource;
 		}
+
+		public URI getURI(@NonNull String genmodelStep, @NonNull Key<URI> uriKey) {
+			return compilerChain.getURI(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY);
+		}
 	}
 
 	/* (non-Javadoc)
@@ -345,7 +372,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin");
 	    	myQVT.installClassName(projectTestName + ".ClassMM.ClassMMPackage");
 	    	myQVT.installClassName(projectTestName + ".PClassModelToClassModel.PClassModelToClassModelPackage");
-	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation, "ClassModelToClassModel.genmodel");
+	    	Class<? extends Transformer> txClass = myQVT.createGeneratedClass(asTransformation);
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
 	    	myQVT.loadInput("uml1", "ClassUM1.xmi");
@@ -402,9 +429,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT("hstm2fstm");
     	try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("HierarchicalStateMachine2FlatStateMachine",
-					"HierarchicalStateMachine2FlatStateMachine", "flat",
-					"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine",
-					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
+					"HierarchicalStateMachine2FlatStateMachine.qvtr", "flat",
+					"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine");//,
+//					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
 	    	myQVT.loadInput("hier", "MiniModel.xmi");
@@ -458,9 +485,9 @@ public class QVTrCompilerTests extends LoadTestCase
  //   	QVTm2QVTp.PARTITIONING.setState(true);
     	MyQVT myQVT = new MyQVT("seq2stm");
     	try {
-	    	Class<? extends Transformer> txClass = myQVT.buildTransformation("seq2stm", "SeqToStm", "stm",
-	    			"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm",
-					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
+	    	Class<? extends Transformer> txClass = myQVT.buildTransformation("seq2stm", "SeqToStm.qvtr", "stm",
+	    			"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm");//,
+//					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);
 	    	myQVT.loadInput("seqDgm", "Seq.xmi");
@@ -492,7 +519,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel", "//qvtcorebase");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
 			myQVT.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
-	    	Class<? extends Transformer> txClass = myQVT.buildTransformation("rel2core", "RelToCore", "core",
+	    	Class<? extends Transformer> txClass = myQVT.buildTransformation("rel2core", "RelToCore.qvtr", "core",
 	    			"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/rel2core/RelToCore");
 	    	//
 	        myQVT.createGeneratedExecutor(txClass);

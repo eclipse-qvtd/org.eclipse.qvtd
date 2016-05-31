@@ -76,7 +76,8 @@ import junit.framework.TestCase;
 public class QVTcCompilerTests extends LoadTestCase
 {
 	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/bin/org/eclipse/qvtd/xtext/qvtcore/tests", true);
-	private static URI TESTS_JAVA_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/test-gen", true);
+	private static URI TESTS_JAVA_SRC_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/test-gen", true);
+	private static URI TESTS_JAVA_BIN_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/bin", true);
 
 	protected static class MyQVT extends QVTimperative
 	{
@@ -108,7 +109,9 @@ public class QVTcCompilerTests extends LoadTestCase
 			Map<@NonNull String, @NonNull Map<CompilerChain.Key<?>, Object>> options = new HashMap<@NonNull String, @NonNull Map<CompilerChain.Key<?>, Object>>();
 			compilerChain = new QVTcCompilerChain(getEnvironmentFactory(), testFolderURI.appendSegment(testFileName), options);
 			compilerChain.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-			compilerChain.setOption(CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, TESTS_JAVA_URI);
+			compilerChain.setOption(CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, TESTS_JAVA_SRC_URI);
+			compilerChain.setOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
+			compilerChain.setOption(CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, TESTS_JAVA_BIN_URI);
 			Class<? extends Transformer> txClass = compilerChain.build(outputName, genModelFiles);
 			createGeneratedExecutor(txClass);
 	        return txClass;
