@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.InvalidType;
 import org.eclipse.ocl.pivot.IterateExp;
 import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.IteratorExp;
+import org.eclipse.ocl.pivot.LetExp;
 import org.eclipse.ocl.pivot.MapLiteralExp;
 import org.eclipse.ocl.pivot.MapLiteralPart;
 import org.eclipse.ocl.pivot.MapType;
@@ -377,6 +378,14 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			OCLExpression iBody = inlineExpressionCreator.create(pIteratorExp.getOwnedBody());
 			assert iBody != null;
 			return helper.createIteratorExp(iSource, referredIteration, iIterators, iBody);
+		}
+
+		@Override
+		public @NonNull OCLExpression visitLetExp(@NonNull LetExp pLetExp) {
+			Variable asVariable = createVariable(ClassUtil.nonNull(pLetExp.getOwnedVariable()));
+			OCLExpression asInExpression = create(pLetExp.getOwnedIn());
+			assert asInExpression != null;
+			return helper.createLetExp(asVariable, asInExpression);
 		}
 
 		@Override

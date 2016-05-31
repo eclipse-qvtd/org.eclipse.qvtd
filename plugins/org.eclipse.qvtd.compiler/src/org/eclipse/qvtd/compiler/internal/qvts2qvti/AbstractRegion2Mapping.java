@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.LetExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
@@ -284,6 +285,9 @@ public abstract class AbstractRegion2Mapping
 	public @Nullable Node getNode(@Nullable TypedElement qvtpTypedElement) {
 		if (qvtpTypedElement instanceof VariableExp) {
 			return getNode(((VariableExp)qvtpTypedElement).getReferredVariable());
+		}
+		if (qvtpTypedElement instanceof LetExp) {
+			return getNode(((LetExp)qvtpTypedElement).getOwnedIn());
 		}
 		if (qvtpTypedElement instanceof OppositePropertyCallExp) {
 			OppositePropertyCallExp propertyCallExp = (OppositePropertyCallExp)qvtpTypedElement;
