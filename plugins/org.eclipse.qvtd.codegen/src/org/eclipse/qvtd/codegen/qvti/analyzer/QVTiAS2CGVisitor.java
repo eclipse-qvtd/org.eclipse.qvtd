@@ -951,7 +951,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 					genModelHelper.getGetAccessor(eStructuralFeature);
 					cgPropertyAssignment.setEStructuralFeature(eStructuralFeature);
 				} catch (GenModelException e) {
-					System.out.println("Missing getAccessor for " + eStructuralFeature + "ignored.");
+					System.out.println("Missing getAccessor for " + eStructuralFeature + "ignored : " + e.getMessage());
 				}
 			}
 			return cgPropertyAssignment;
@@ -969,7 +969,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 						cgEcorePropertyAssignment.setEStructuralFeature(eStructuralFeature);
 						cgPropertyAssignment = cgEcorePropertyAssignment;
 					} catch (GenModelException e) {
-						System.out.println("Missing getAccessor for " + eStructuralFeature + "ignored.");
+						System.out.println("Missing getAccessor for " + eStructuralFeature + "ignored : " + e.getMessage());
 					}
 				}
 				else {
@@ -983,7 +983,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 							cgEcoreContainerAssignment.setEStructuralFeature(eStructuralFeature);
 							cgPropertyAssignment = cgEcoreContainerAssignment;
 						} catch (GenModelException e) {
-							System.out.println("Missing getAccessor for " + eStructuralFeature + "ignored.");
+							System.out.println("Missing getAccessor for " + eStructuralFeature + "ignored : " + e.getMessage());
 						}
 					}
 				}
