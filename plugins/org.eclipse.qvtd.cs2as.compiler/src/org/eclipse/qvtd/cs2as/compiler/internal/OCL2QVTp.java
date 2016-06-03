@@ -56,7 +56,9 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -205,13 +207,9 @@ public class OCL2QVTp {
 			mapping.setBottomPattern(bottomPattern);
 
 			PropertyAssignment pAssignment = QVTcoreFactory.eINSTANCE.createPropertyAssignment();
-			VariableExp value = PivotFactory.eINSTANCE.createVariableExp();
-			value.setReferredVariable(rightDomain.getBottomPattern().getRealizedVariable().get(0));
-			value.setType(value.getReferredVariable().getType());
+			VariableExp value = PivotUtil.createVariableExp(rightDomain.getBottomPattern().getRealizedVariable().get(0));
 
-			VariableExp slotExpression = PivotFactory.eINSTANCE.createVariableExp();
-			slotExpression.setReferredVariable(leftVar);
-			slotExpression.setType(slotExpression.getReferredVariable().getType());
+			VariableExp slotExpression = PivotUtil.createVariableExp(leftVar);
 
 			pAssignment.setValue(value);
 			pAssignment.setSlotExpression(slotExpression);
@@ -220,6 +218,12 @@ public class OCL2QVTp {
 			bottomPattern.getAssignment().add(pAssignment);
 			updateGuardPattern(shadowExp, guardPattern, leftVar);
 
+
+			workaround495327(getAllContainers().apply(shadowExp)
+				.filter(Operation.class::isInstance)
+				.map(Operation.class::cast)
+				.findFirst().get()
+				,mapping,leftDomain);
 			return mapping;
 		};
 	}
@@ -262,8 +266,7 @@ public class OCL2QVTp {
 			asTypeOpCallExp.setReferredOperation(getOclAnyOclAsTypeOp());
 			asTypeOpCallExp.setType(shadowExp.getType());
 
-			TypeExp argTypeExp = PivotFactory.eINSTANCE.createTypeExp();
-			argTypeExp.setReferredType(shadowExp.getType());
+			TypeExp argTypeExp = createTypeExp(shadowExp.getType());
 			argTypeExp.setType(getOclMetaClass());
 
 			asTypeOpCallExp.getOwnedArguments().add(argTypeExp);
@@ -279,8 +282,13 @@ public class OCL2QVTp {
 			mapping.setBottomPattern(bottomPattern);
 
 			bottomPattern.getAssignment().add(pAssignment);
-
 			updateGuardPattern(shadowExp,  guardPattern, leftVar);
+
+			workaround495327(getAllContainers().apply(shadowExp)
+				.filter(Operation.class::isInstance)
+				.map(Operation.class::cast)
+				.findFirst().get()
+				,mapping,leftDomain);
 			return mapping;
 		};
 	}
@@ -324,6 +332,8 @@ public class OCL2QVTp {
 			pAssignment.setSlotExpression(varExp);
 
 			bottomPattern.getAssignment().add(pAssignment);
+
+			workaround495327(operation,mapping,leftDomain);
 			return mapping;
 		};
 	}
@@ -438,10 +448,7 @@ public class OCL2QVTp {
 				asTypeOpCallExp.setType(castType);
 				asTypeOpCallExp.setIsSafe(astPropCallExp.isIsSafe());
 
-				TypeExp argTypeExp = PivotFactory.eINSTANCE.createTypeExp();
-				argTypeExp.setReferredType(castType);
-				argTypeExp.setType(getOclMetaClass());
-
+				TypeExp argTypeExp = createTypeExp(castType);
 				asTypeOpCallExp.getOwnedArguments().add(argTypeExp);
 
 				if (result.contains(exp)) { // if exp is the initial oclExp, the new asTypeOpCallExp will be the new result
@@ -506,6 +513,7 @@ public class OCL2QVTp {
 			return notOpCallExp;
 		}
 	}
+
 
 	private Predicate<EObject> isSelfVarExp() {
 		return element -> {
@@ -585,6 +593,13 @@ public class OCL2QVTp {
 				.findFirst().get();
 	}
 
+	private @NonNull Operation getOclAnyOclIsTypeOfOp() {
+		Class oclAny = envFact.getStandardLibrary().getOclAnyType();
+		return envFact.getMetamodelManager().getPrimaryClass(oclAny).getOwnedOperations().stream()
+				.filter(x -> "oclIsTypeOf".equals(x.getName()))
+				.findFirst().get();
+	}
+
 	private @NonNull Class getBooleanPrimitiveType() {
 		return envFact.getStandardLibrary().getBooleanType();
 
@@ -604,4 +619,29 @@ public class OCL2QVTp {
 		};
 	}
 
+	// TODO promote to PivotUtil
+	private TypeExp createTypeExp(Type type) {
+		TypeExp argTypeExp = PivotFactory.eINSTANCE.createTypeExp();
+		argTypeExp.setReferredType(type);
+		argTypeExp.setType(getOclMetaClass());
+		return argTypeExp;
+	}
+
+	// To workaround limitation of Bug 495327: Any mapping related to a non-final ast() operation
+	// will include an additional guard to ensure that only strictly instance of (oclTypeOf) the source type
+	// are considered. Therefor, any instance of a subtype won't ever be considered by this mapping
+	private void workaround495327(Operation op, Mapping mapping, CoreDomain leftDomain) {
+		PivotMetamodelManager mm = (PivotMetamodelManager) envFact.getMetamodelManager();
+		if (!mm.getFinalAnalysis().isFinal(op)) {
+			GuardPattern guard = mapping.getGuardPattern();
+			Variable leftVar = leftDomain.getGuardPattern().getVariable().get(0);
+
+			org.eclipse.qvtd.pivot.qvtbase.Predicate predicate = QVTbaseFactory.eINSTANCE.createPredicate();
+			VariableExp sourceExp = PivotUtil.createVariableExp(leftVar);
+			TypeExp argTypeExp = createTypeExp(leftVar.getType());
+			predicate.setConditionExpression(PivotUtil.createOperationCallExp(sourceExp, getOclAnyOclIsTypeOfOp(), argTypeExp));
+
+			guard.getPredicate().add(predicate);
+		}
+	}
 }
