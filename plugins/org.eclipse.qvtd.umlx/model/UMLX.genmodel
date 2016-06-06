@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2016 Willink Transformations and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  E.D.Willink - Initial API and implementation"
+    modelDirectory="/org.eclipse.qvtd.umlx/emf-gen" editDirectory="/org.eclipse.qvtd.umlx.edit/emf-gen"
+    editorDirectory="/org.eclipse.qvtd.umlx.editor/emf-gen" modelPluginID="org.eclipse.qvtd.umlx"
+    modelName="UMLX" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    suppressEMFMetaData="true" suppressEMFModelTags="true" testsDirectory="/org.eclipse.qvtd.umlx.tests/emf-gen"
+    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="8.0"
+    copyrightFields="false" runtimeVersion="2.7" usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
+    operationReflection="true" importOrganizing="true" pluginKey="">
+  <foreignModel>UMLX.ecore</foreignModel>
+  <genPackages prefix="Umlx" basePackage="org.eclipse.qvtd" disposableProviderFactory="true"
+      ecorePackage="UMLX.ecore#/">
+    <genClasses ecoreClass="UMLX.ecore#//Diagram">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//Diagram/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//Diagram/ownedNodes"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="UMLX.ecore#//Edge">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//Edge/owningSource"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//Edge/target"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="UMLX.ecore#//Element"/>
+    <genClasses ecoreClass="UMLX.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//Model/ownedDiagrams"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="UMLX.ecore#//Node">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference UMLX.ecore#//Node/diagram"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//Node/incomingEdges"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//Node/ownedOutgoingEdges"/>
+    </genClasses>
+    <genClasses ecoreClass="UMLX.ecore#//RelDiagram"/>
+    <genClasses ecoreClass="UMLX.ecore#//RelDomainNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelDomainNode/referredTypedModelNode"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelDomainNode/rootPatternNodes"/>
+    </genClasses>
+    <genClasses ecoreClass="UMLX.ecore#//RelInvocationEdge"/>
+    <genClasses ecoreClass="UMLX.ecore#//RelInvocationNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelInvocationNode/isWhen"/>
+    </genClasses>
+    <genClasses ecoreClass="UMLX.ecore#//RelPatternEdge">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternEdge/referredProperty"/>
+    </genClasses>
+    <genClasses ecoreClass="UMLX.ecore#//RelPatternNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//RelPatternNode/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternNode/referredClass"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//RelPatternNode/relDomainNode"/>
+    </genClasses>
+    <genClasses ecoreClass="UMLX.ecore#//TxDiagram">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxDiagram/ownedDiagrams"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="UMLX.ecore#//TxEdge"/>
+    <genClasses ecoreClass="UMLX.ecore#//TxNode"/>
+    <genClasses ecoreClass="UMLX.ecore#//TxPackageNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxPackageNode/referredPackage"/>
+    </genClasses>
+    <genClasses ecoreClass="UMLX.ecore#//TxTransformationNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//TxTransformationNode/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxTransformationNode/txTypedModelNodes"/>
+    </genClasses>
+    <genClasses ecoreClass="UMLX.ecore#//TxTypedModelNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UMLX.ecore#//TxTypedModelNode/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference UMLX.ecore#//TxTypedModelNode/txPackageNodes"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
