@@ -169,12 +169,6 @@ Workflow {
 		javaPackageName = "${QVTrelationProjectName}"
 		grammarFileStem = "QVTrelation"
 	}
-	component = BackportToXtext_2_3_1 {
-		directory = "${QVTrelationRuntimeProject}/src-gen"
-	}
-	component = BackportToXtext_2_3_1 {
-		directory = "${QVTrelationRuntimeProject}.ui/src-gen"
-	}
 	component = ConvertToUnixLineEndings {
 		directory = "${QVTrelationRuntimeProject}/src-gen"
 	}

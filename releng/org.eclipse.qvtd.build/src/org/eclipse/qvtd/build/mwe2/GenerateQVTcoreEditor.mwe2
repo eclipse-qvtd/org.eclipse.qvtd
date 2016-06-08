@@ -170,12 +170,6 @@ Workflow {
 		javaPackageName = "${QVTcoreProjectName}"
 		grammarFileStem = "QVTcore"
 	}
-	component = BackportToXtext_2_3_1 {
-		directory = "${QVTcoreRuntimeProject}/src-gen"
-	}
-	component = BackportToXtext_2_3_1 {
-		directory = "${QVTcoreRuntimeProject}.ui/src-gen"
-	}
 	component = ConvertToUnixLineEndings {
 		directory = "${QVTcoreRuntimeProject}/src-gen"
 	}
