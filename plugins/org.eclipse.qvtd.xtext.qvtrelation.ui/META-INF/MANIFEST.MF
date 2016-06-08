@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.xtext.qvtrelation.ui; singleton:=true
-Bundle-Version: 0.13.0.qualifier
+Bundle-Version: 0.14.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
@@ -14,9 +14,9 @@ Export-Package: org.eclipse.qvtd.xtext.qvtrelation.ui,
  org.eclipse.qvtd.xtext.qvtrelation.ui.labeling,
  org.eclipse.qvtd.xtext.qvtrelation.ui.outline,
  org.eclipse.qvtd.xtext.qvtrelation.ui.quickfix
-Require-Bundle: org.eclipse.xtext.builder;bundle-version="[2.3.0,3.0.0)",
- org.eclipse.qvtd.xtext.qvtbase.ui;bundle-version="[0.13.0,1.0.0)";visibility:=reexport,
- org.eclipse.qvtd.xtext.qvtrelation;bundle-version="[0.13.0,1.0.0)";visibility:=reexport
+Require-Bundle: org.eclipse.xtext.builder;bundle-version="[2.10.0,3.0.0)",
+ org.eclipse.qvtd.xtext.qvtbase.ui;bundle-version="[0.14.0,1.0.0)";visibility:=reexport,
+ org.eclipse.qvtd.xtext.qvtrelation;bundle-version="[0.14.0,1.0.0)";visibility:=reexport
 Import-Package: org.apache.log4j
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtrelation.ui.internal.QVTrelationActivator
 Bundle-Vendor: %providerName
