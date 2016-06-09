@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.scoping;
 
-import org.eclipse.ocl.xtext.essentialocl.scoping.EssentialOCLScopeProvider;
+import org.eclipse.qvtd.xtext.qvtbase.scoping.QVTbaseScopeProvider;
 
 /**
  * This class contains custom scoping description.
@@ -19,6 +19,6 @@ import org.eclipse.ocl.xtext.essentialocl.scoping.EssentialOCLScopeProvider;
  * on how and when to use it 
  *
  */
-public class QVTrelationScopeProvider extends EssentialOCLScopeProvider
+public class QVTrelationScopeProvider extends QVTbaseScopeProvider
 {
 }

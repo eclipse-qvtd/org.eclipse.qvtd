@@ -9,7 +9,11 @@ Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.xtext.builder;bundle-version="[2.10.0,3.0.0)",
  org.eclipse.qvtd.xtext.qvtbase;bundle-version="[0.14.0,1.0.0)";visibility:=reexport,
  org.eclipse.ocl.xtext.essentialocl.ui;bundle-version="[1.2.0,1.3.0)";visibility:=reexport
-Export-Package: org.eclipse.qvtd.xtext.qvtbase.ui.labeling,
- org.eclipse.qvtd.xtext.qvtbase.ui.outline
+Export-Package: org.eclipse.qvtd.xtext.qvtbase.ui,
+ org.eclipse.qvtd.xtext.qvtbase.ui.contentassist,
+ org.eclipse.qvtd.xtext.qvtbase.ui.labeling,
+ org.eclipse.qvtd.xtext.qvtbase.ui.outline,
+ org.eclipse.qvtd.xtext.qvtbase.ui.quickfix
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.15"
+Bundle-Activator: org.eclipse.qvtd.xtext.qvtbase.ui.internal.QVTbaseActivator
