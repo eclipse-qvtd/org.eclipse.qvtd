@@ -30,10 +30,18 @@ Workflow {
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
 
     component = @SubGenerateCSModel { resourceSet = resourceSet
-    	projectName = "org.eclipse.qvtd.xtext.qvtcorebase"
-    	genModelFile = "model/QVTcoreBaseCS.genmodel"
+    	projectName = "org.eclipse.qvtd.xtext.qvtbase"
+    	genModelFile = "model/QVTbaseCS.genmodel"
     	superProjectName = "org.eclipse.ocl.xtext.essentialocl"
     	superGenModelFile = "model/EssentialOCLCS.genmodel"
+    	baseProjectName = "org.eclipse.ocl.xtext.base"
+    	baseGenModelFile = "model/BaseCS.genmodel"
+    }
+    component = @SubGenerateCSModel { resourceSet = resourceSet
+    	projectName = "org.eclipse.qvtd.xtext.qvtcorebase"
+    	genModelFile = "model/QVTcoreBaseCS.genmodel"
+    	superProjectName = "org.eclipse.qvtd.xtext.qvtbase"
+    	superGenModelFile = "model/QVTbaseCS.genmodel"
     	baseProjectName = "org.eclipse.ocl.xtext.base"
     	baseGenModelFile = "model/BaseCS.genmodel"
     }
@@ -56,8 +64,8 @@ Workflow {
     component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.xtext.qvtrelation"
     	genModelFile = "model/QVTrelationCS.genmodel"
-    	superProjectName = "org.eclipse.ocl.xtext.essentialocl"
-    	superGenModelFile = "model/EssentialOCLCS.genmodel"
+    	superProjectName = "org.eclipse.qvtd.xtext.qvtbase"
+    	superGenModelFile = "model/QVTbaseCS.genmodel"
     	baseProjectName = "org.eclipse.ocl.xtext.base"
     	baseGenModelFile = "model/BaseCS.genmodel"
     }

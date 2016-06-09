@@ -18,6 +18,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMiddle" lowerBound="1"
         eType="#//DomainCS" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractTopLevelCS" abstract="true"
+      eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//RootPackageCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedQueries" upperBound="-1"
+        eType="#//QueryCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTransformations" upperBound="-1"
+        eType="#//TransformationCS" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AreaCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedGuardPattern" eType="#//GuardPatternCS"
         containment="true"/>
@@ -82,9 +89,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="RealizeableVariableCS" abstract="true"
       eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="RealizedVariableCS" eSuperTypes="#//RealizeableVariableCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ClassCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="../../org.eclipse.qvtd.xtext.qvtbase/model/QVTbaseCS.ecore#//AbstractTransformationCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Package"
         changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDirections" upperBound="-1"

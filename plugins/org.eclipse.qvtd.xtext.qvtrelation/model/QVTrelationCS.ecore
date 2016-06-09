@@ -110,15 +110,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTransformations" upperBound="-1"
         eType="#//TransformationCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ClassCS">
+  <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="../../org.eclipse.qvtd.xtext.qvtbase/model/QVTbaseCS.ecore#//AbstractTransformationCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedModelDecls" upperBound="-1"
         eType="#//ModelDeclCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Transformation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedKeyDecls" upperBound="-1"
         eType="#//KeyDeclCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedQueries" upperBound="-1"
         eType="#//QueryCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRelations" upperBound="-1"

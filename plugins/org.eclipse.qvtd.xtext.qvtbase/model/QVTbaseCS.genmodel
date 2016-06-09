@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2010, 2015 Willink Transformations and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  E.D.Willink - Initial API and implementation"
+    modelDirectory="/org.eclipse.qvtd.xtext.qvtbase/emf-gen" editDirectory="/org.eclipse.qvtd.xtext.qvtbase.edit/emf-gen"
+    editorDirectory="/org.eclipse.qvtd.xtext.qvtbase.editor/emf-gen" modelPluginID="org.eclipse.qvtd.xtext.qvtbase"
+    forceOverwrite="true" modelName="QVTbaseCS" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    codeFormatting="true" testsDirectory="/org.eclipse.qvtd.xtext.qvtbase.tests/emf-gen"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    editPluginID="org.eclipse.qvtd.xtext.qvtbase.edit" editorPluginID="org.eclipse.qvtd.xtext.qvtbase.editor"
+    runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.xtext.base/model/BaseCS.genmodel#//basecs ../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase"
+    importOrganizing="true">
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Delegates" value="false"/>
+    <details key="Use Null Annotations" value="true"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString"/>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.qvtd.xtext.qvtbasecs.util.QVTbaseCSVisitor"/>
+  </genAnnotations>
+  <foreignModel>QVTbaseCS.ecore</foreignModel>
+  <genPackages prefix="QVTbaseCS" basePackage="org.eclipse.qvtd.xtext" disposableProviderFactory="true"
+      ecorePackage="QVTbaseCS.ecore#/">
+    <genClasses image="false" ecoreClass="QVTbaseCS.ecore#//AbstractTransformationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbaseCS.ecore#//AbstractTransformationCS/ownedPathName"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTbaseCS.ecore#//QualifiedPackageCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTbaseCS.ecore#//QualifiedPackageCS/ownedPathName"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -8,13 +8,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="refines" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#//Mapping"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TopLevelCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//RootPackageCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTransformations" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore#//TransformationCS"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedQueries" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore#//QueryCS"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TopLevelCS" eSuperTypes="../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore#//AbstractTopLevelCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappings" upperBound="-1"
         eType="#//MappingCS" containment="true"/>
   </eClassifiers>
