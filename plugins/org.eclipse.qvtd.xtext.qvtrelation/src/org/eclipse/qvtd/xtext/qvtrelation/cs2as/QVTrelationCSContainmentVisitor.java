@@ -86,7 +86,6 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.util.AbstractQVTrelationCSContainmentVisitor;
@@ -623,11 +622,6 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		context.refreshPivotList(TypedModel.class, pivotElement.getModelParameter(), csElement.getOwnedModelDecls());
 		context.refreshPivotList(Relation.class, pivotElement.getRule(), csElement.getOwnedRelations());
 		context.refreshPivotList(Operation.class, pivotElement.getOwnedOperations(), csElement.getOwnedQueries());
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitUnitCS(@NonNull UnitCS csElement) {
 		return null;
 	}
 

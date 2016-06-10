@@ -86,7 +86,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//TemplateVariableCS/ownedType"/>
     </genClasses>
     <genClasses ecoreClass="QVTrelationCS.ecore#//TopLevelCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//TopLevelCS/ownedImportClauses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//TopLevelCS/ownedTransformations"/>
     </genClasses>
     <genClasses ecoreClass="QVTrelationCS.ecore#//TransformationCS">
@@ -96,9 +95,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//TransformationCS/ownedPathName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//TransformationCS/ownedQueries"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//TransformationCS/ownedRelations"/>
-    </genClasses>
-    <genClasses ecoreClass="QVTrelationCS.ecore#//UnitCS">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//UnitCS/identifiers"/>
     </genClasses>
     <genClasses ecoreClass="QVTrelationCS.ecore#//VarDeclarationCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//VarDeclarationCS/ownedInitExpression"/>
