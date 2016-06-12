@@ -30,7 +30,29 @@ import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
-import org.eclipse.qvtd.xtext.qvtrelationcs.*;
+import org.eclipse.qvtd.xtext.qvtrelationcs.AbstractDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
+import org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS;
 
 /**
  * <!-- begin-user-doc -->

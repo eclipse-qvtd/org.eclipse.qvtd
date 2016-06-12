@@ -76,6 +76,7 @@ public abstract class AbstractTransformationCSImpl extends ClassCSImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathNameCS getOwnedPathName()
 	{
 		return ownedPathName;
@@ -103,6 +104,7 @@ public abstract class AbstractTransformationCSImpl extends ClassCSImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedPathName(PathNameCS newOwnedPathName)
 	{
 		if (newOwnedPathName != ownedPathName)

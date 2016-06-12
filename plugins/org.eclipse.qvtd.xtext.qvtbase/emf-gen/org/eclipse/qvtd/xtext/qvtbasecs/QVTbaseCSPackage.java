@@ -301,7 +301,6 @@ public interface QVTbaseCSPackage extends EPackage
 	 */
 	int QUALIFIED_PACKAGE_CS_FEATURE_COUNT = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 1;
 
-
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS <em>Abstract Transformation CS</em>}'.
 	 * <!-- begin-user-doc -->

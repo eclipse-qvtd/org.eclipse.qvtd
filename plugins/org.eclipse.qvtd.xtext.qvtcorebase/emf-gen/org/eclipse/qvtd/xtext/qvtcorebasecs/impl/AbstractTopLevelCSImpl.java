@@ -92,6 +92,7 @@ public abstract class AbstractTopLevelCSImpl extends RootPackageCSImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<QueryCS> getOwnedQueries() {
 		if (ownedQueries == null) {
 			ownedQueries = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS__OWNED_QUERIES);
@@ -104,6 +105,7 @@ public abstract class AbstractTopLevelCSImpl extends RootPackageCSImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TransformationCS> getOwnedTransformations() {
 		if (ownedTransformations == null) {
 			ownedTransformations = new EObjectContainmentEList<TransformationCS>(TransformationCS.class, this, QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS__OWNED_TRANSFORMATIONS);

@@ -499,6 +499,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImperativeRealizedVariableCS() {
 		return imperativeRealizedVariableCSEClass;
 	}
@@ -508,6 +509,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getImperativeRealizedVariableCS_OwnedInitExpression() {
 		return (EReference)imperativeRealizedVariableCSEClass.getEStructuralFeatures().get(0);
 	}

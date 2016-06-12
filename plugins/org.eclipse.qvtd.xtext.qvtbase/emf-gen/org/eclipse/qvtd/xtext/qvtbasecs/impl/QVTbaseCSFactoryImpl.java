@@ -83,6 +83,7 @@ public class QVTbaseCSFactoryImpl extends EFactoryImpl implements QVTbaseCSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QualifiedPackageCS createQualifiedPackageCS()
 	{
 		QualifiedPackageCSImpl qualifiedPackageCS = new QualifiedPackageCSImpl();
@@ -94,6 +95,7 @@ public class QVTbaseCSFactoryImpl extends EFactoryImpl implements QVTbaseCSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTbaseCSPackage getQVTbaseCSPackage()
 	{
 		return (QVTbaseCSPackage)getEPackage();

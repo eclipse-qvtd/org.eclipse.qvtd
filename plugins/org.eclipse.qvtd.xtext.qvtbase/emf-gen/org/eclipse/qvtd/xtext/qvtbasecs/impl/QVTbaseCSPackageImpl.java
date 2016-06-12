@@ -13,13 +13,9 @@ package org.eclipse.qvtd.xtext.qvtbasecs.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
-
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSFactory;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
@@ -39,14 +35,12 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * @generated
 	 */
 	private EClass abstractTransformationCSEClass = null;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass qualifiedPackageCSEClass = null;
-
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
@@ -120,6 +114,7 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAbstractTransformationCS()
 	{
 		return abstractTransformationCSEClass;
@@ -130,6 +125,7 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractTransformationCS_OwnedPathName()
 	{
 		return (EReference)abstractTransformationCSEClass.getEStructuralFeatures().get(0);
@@ -140,6 +136,7 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getQualifiedPackageCS()
 	{
 		return qualifiedPackageCSEClass;
@@ -150,6 +147,7 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getQualifiedPackageCS_OwnedPathName()
 	{
 		return (EReference)qualifiedPackageCSEClass.getEStructuralFeatures().get(0);
@@ -160,6 +158,7 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTbaseCSFactory getQVTbaseCSFactory()
 	{
 		return (QVTbaseCSFactory)getEFactoryInstance();

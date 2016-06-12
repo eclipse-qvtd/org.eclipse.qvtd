@@ -11,11 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtcorecs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 
 /**
  * <!-- begin-user-doc -->

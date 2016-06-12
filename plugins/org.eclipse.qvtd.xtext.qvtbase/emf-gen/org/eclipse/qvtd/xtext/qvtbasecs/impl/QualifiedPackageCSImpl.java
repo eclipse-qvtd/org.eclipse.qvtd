@@ -82,6 +82,7 @@ public class QualifiedPackageCSImpl extends PackageCSImpl implements QualifiedPa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathNameCS getOwnedPathName()
 	{
 		return ownedPathName;
@@ -109,6 +110,7 @@ public class QualifiedPackageCSImpl extends PackageCSImpl implements QualifiedPa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedPathName(PathNameCS newOwnedPathName)
 	{
 		if (newOwnedPathName != ownedPathName)
