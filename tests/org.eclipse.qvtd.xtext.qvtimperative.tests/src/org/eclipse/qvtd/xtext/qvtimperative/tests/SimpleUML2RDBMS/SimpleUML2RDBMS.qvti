@@ -2,11 +2,14 @@ import simplerdbms : 'SimpleRDBMS.ecore#/';
 import simpleuml : 'SimpleUML.ecore#/';
 import umltordbms : 'SimpleUML2RDBMS.ecore#/';
 
-transformation simpleUML2RDBMS::SimpleUML2RDBMS
+package simpleUML2RDBMS = 'http://simpleUML2RDBMS'
 {
-	uml imports simpleuml;
-	rdbms imports simplerdbms;
-	middle imports umltordbms;
+	transformation SimpleUML2RDBMS
+	{
+		uml imports simpleuml;
+		rdbms imports simplerdbms;
+		middle imports umltordbms;
+	}
 }
 
 map packageToSchema_LM in simpleUML2RDBMS::SimpleUML2RDBMS

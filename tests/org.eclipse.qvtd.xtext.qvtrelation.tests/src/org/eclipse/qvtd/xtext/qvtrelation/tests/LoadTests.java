@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 
 /**
@@ -34,6 +35,16 @@ public class LoadTests extends LoadTestCase
 		doLoad_Concrete(ocl, inputURI, pivotURI);
 		ocl.dispose();
 	}
+	
+	public void doLoad_Concrete(@NonNull String inputName) throws IOException {
+		OCL ocl = QVTbase.newInstance(getProjectMap(), null);
+//		OCL ocl = OCL.newInstance(getProjectMap());
+		URI inputURI = getProjectFileURI(inputName);
+		URI pivotURI = inputURI.trimFileExtension().appendFileExtension("qvtras");
+		doLoad_Concrete(ocl, inputURI, pivotURI);
+		ocl.dispose();
+	}
+
 
 	@Override
 	protected void setUp() throws Exception {
@@ -71,6 +82,10 @@ public class LoadTests extends LoadTestCase
 
 	public void testLoad_Keys_qvtr() throws IOException, InterruptedException {
 		doLoad_Concrete("models/Keys.qvtr");
+	}	
+
+	public void testLoad_Packages_qvtr() throws IOException, InterruptedException {
+		doLoad_Concrete("models/Packages.qvtr");
 	}	
 
 	public void testLoad_MiToSi_qvtr() throws IOException, InterruptedException {

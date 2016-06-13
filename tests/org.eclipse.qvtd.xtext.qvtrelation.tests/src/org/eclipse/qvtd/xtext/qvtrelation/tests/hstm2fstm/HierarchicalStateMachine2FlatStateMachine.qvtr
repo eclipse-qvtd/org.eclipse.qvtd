@@ -16,7 +16,8 @@ import flatMM : 'FlatStateMachine.ecore'::FlatStateMachine;
 /**
  * Transform a hierarchical StateMachine into a flat StateMachine.
  */
-transformation org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm::HierarchicalStateMachine2FlatStateMachine(hier:hierMM, flat:flatMM)
+package org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm {
+transformation HierarchicalStateMachine2FlatStateMachine(hier:hierMM, flat:flatMM)
 {
 --	key hierMM::State {name};
 --	key hierMM::Trans {name, fromState, toState};
@@ -90,4 +91,5 @@ transformation org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm::Hierarc
 			leafToStates->includes(leafToState);
 		}
 	}   
+}
 }
