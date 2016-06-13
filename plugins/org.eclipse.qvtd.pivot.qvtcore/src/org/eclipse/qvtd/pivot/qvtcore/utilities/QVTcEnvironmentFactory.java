@@ -21,15 +21,20 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 
 public class QVTcEnvironmentFactory extends QVTbaseEnvironmentFactory
 {
-	public QVTcEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
-		super(projectMap, externalResourceSet);
-		getStandardLibrary().setDefaultStandardLibraryURI(QVTbaseLibrary.STDLIB_URI);
+	private static class QVTcCreateStrategy extends CreateStrategy
+	{
+		@Override
+		public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
+				@NonNull QVTbaseEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
+			return new QVTcoreTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
+		}
 	}
-
-	@Override
-	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
-			@Nullable Type selfType, @Nullable Type selfTypeValue) {
-		return new QVTcoreTemplateParameterSubstitutionVisitor(this, selfType, selfTypeValue);
+	
+	public static final @NonNull CreateStrategy CREATE_STRATEGY = new QVTcCreateStrategy();
+	
+	public QVTcEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
+		super(projectMap, externalResourceSet, CREATE_STRATEGY);
+		getStandardLibrary().setDefaultStandardLibraryURI(QVTbaseLibrary.STDLIB_URI);
 	}
 
 	public boolean keepDebug() {

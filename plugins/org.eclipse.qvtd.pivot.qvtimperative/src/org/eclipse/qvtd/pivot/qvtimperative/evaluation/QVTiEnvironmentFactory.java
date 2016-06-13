@@ -22,8 +22,19 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeTemplateParam
 
 public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 {
+	private static class QVTiCreateStrategy extends CreateStrategy
+	{
+		@Override
+		public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
+				@NonNull QVTbaseEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
+			return new QVTimperativeTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
+		}
+	}
+	
+	public static final @NonNull CreateStrategy CREATE_STRATEGY = new QVTiCreateStrategy();
+	
 	public QVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
-		super(projectMap, externalResourceSet);
+		super(projectMap, externalResourceSet, CREATE_STRATEGY);
 		getStandardLibrary().setDefaultStandardLibraryURI(QVTimperativeLibrary.STDLIB_URI);
 	}
 
@@ -34,13 +45,6 @@ public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 
 	public @NonNull QVTiModelManager createModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		return new QVTiModelManager(transformationAnalysis);
-	}
-
-	@Override
-	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
-			@Nullable Type selfType, @Nullable Type selfTypeValue) {
-		// TODO Auto-generated method stub
-		return new QVTimperativeTemplateParameterSubstitutionVisitor(this, selfType, selfTypeValue);
 	}
 
 	public @NonNull QVTiTransformationAnalysis createTransformationAnalysis() {

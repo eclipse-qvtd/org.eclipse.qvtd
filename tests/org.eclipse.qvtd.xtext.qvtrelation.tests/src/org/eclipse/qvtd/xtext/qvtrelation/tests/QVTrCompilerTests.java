@@ -482,7 +482,7 @@ public class QVTrCompilerTests extends LoadTestCase
     public void testQVTrCompiler_SeqToStm_CG() throws Exception {
 //		AbstractTransformer.EXCEPTIONS.setState(true);
 //		AbstractTransformer.INVOCATIONS.setState(true);
- //   	QVTm2QVTp.PARTITIONING.setState(true);
+//   	QVTm2QVTp.PARTITIONING.setState(true);
     	MyQVT myQVT = new MyQVT("seq2stm");
     	try {
 	    	Class<? extends Transformer> txClass = myQVT.buildTransformation("seq2stm", "SeqToStm.qvtr", "stm",

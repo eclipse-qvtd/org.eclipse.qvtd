@@ -54,7 +54,9 @@ import org.eclipse.qvtd.compiler.internal.utilities.JavaSourceFileObject;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -341,12 +343,18 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	}
 
 	protected @NonNull Resource qvtc2qvtu(@NonNull Resource cResource, @NonNull QVTuConfiguration qvtuConfiguration) throws IOException {
-		URI qvtuURI = getURI(QVTU_STEP, URI_KEY);
-		Resource uResource = createResource(qvtuURI);
-        QVTc2QVTu qvtc2qvtu = new QVTc2QVTu(environmentFactory, qvtuConfiguration);
-        qvtc2qvtu.transform(cResource, uResource);
-		saveResource(uResource, QVTU_STEP);
-		return uResource;
+		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+		try {
+			URI qvtuURI = getURI(QVTU_STEP, URI_KEY);
+			Resource uResource = createResource(qvtuURI);
+	        QVTc2QVTu qvtc2qvtu = new QVTc2QVTu(environmentFactory, qvtuConfiguration);
+	        qvtc2qvtu.transform(cResource, uResource);
+			saveResource(uResource, QVTU_STEP);
+			return uResource;
+		}
+		finally {
+			environmentFactory.setCreateStrategy(savedStrategy);
+		}
 	}
 
 	protected @NonNull Resource qvtg2qvti(@NonNull Resource pResource, @NonNull Resource gResource, @NonNull QVTp2QVTg qvtp2qvtg) throws IOException {
@@ -404,12 +412,18 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	}
 
     protected @NonNull Resource qvtm2qvtp(@NonNull Resource mResource) throws IOException {
-		URI qvtpURI = getURI(QVTP_STEP, URI_KEY);
-		Resource pResource = createResource(qvtpURI);
-        QVTm2QVTp tx = new QVTm2QVTp(environmentFactory);
-        tx.transform(mResource, pResource);
-		saveResource(pResource, QVTP_STEP);
-        return pResource;
+		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+		try {
+			URI qvtpURI = getURI(QVTP_STEP, URI_KEY);
+			Resource pResource = createResource(qvtpURI);
+	        QVTm2QVTp tx = new QVTm2QVTp(environmentFactory);
+	        tx.transform(mResource, pResource);
+			saveResource(pResource, QVTP_STEP);
+	        return pResource;
+		}
+		finally {
+			environmentFactory.setCreateStrategy(savedStrategy);
+		}
     }
 
 	protected @NonNull Resource qvtp2qvtg(@NonNull Resource pResource, @NonNull QVTp2QVTg qvtp2qvtg) throws IOException {
@@ -425,21 +439,33 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	}
 
 	protected @NonNull Transformation qvtp2qvti(@NonNull Resource pResource) throws IOException {
-		RootDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
-		ClassRelationships classRelationships = new ClassRelationships(environmentFactory);
-		QVTp2QVTg qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);
-		Resource gResource = qvtp2qvtg(pResource, qvtp2qvtg);
-		Resource iResource = qvtg2qvti(pResource, gResource, qvtp2qvtg);
-		return getTransformation(iResource);
+		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+		try {
+			RootDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
+			ClassRelationships classRelationships = new ClassRelationships(environmentFactory);
+			QVTp2QVTg qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);
+			Resource gResource = qvtp2qvtg(pResource, qvtp2qvtg);
+			Resource iResource = qvtg2qvti(pResource, gResource, qvtp2qvtg);
+			return getTransformation(iResource);
+		}
+		finally {
+			environmentFactory.setCreateStrategy(savedStrategy);
+		}
 	}
 	
 	protected @NonNull Resource qvtu2qvtm(@NonNull Resource uResource) throws IOException {
-		URI qvtmURI = getURI(QVTM_STEP, URI_KEY);
-		Resource mResource = createResource(qvtmURI);
-		QVTu2QVTm qvtu2qvtm = new QVTu2QVTm(environmentFactory);
-		qvtu2qvtm.transform(uResource, mResource);
-		saveResource(mResource, QVTM_STEP);
-		return mResource;
+		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+		try {
+			URI qvtmURI = getURI(QVTM_STEP, URI_KEY);
+			Resource mResource = createResource(qvtmURI);
+			QVTu2QVTm qvtu2qvtm = new QVTu2QVTm(environmentFactory);
+			qvtu2qvtm.transform(uResource, mResource);
+			saveResource(mResource, QVTM_STEP);
+			return mResource;
+		}
+		finally {
+			environmentFactory.setCreateStrategy(savedStrategy);
+		}
 	}
 
 	@Override

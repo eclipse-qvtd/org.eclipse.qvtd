@@ -13,16 +13,47 @@ package org.eclipse.qvtd.pivot.qvtbase.utilities;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseLibrary;
 
-public class QVTbaseEnvironmentFactory extends AbstractEnvironmentFactory {
-
+public class QVTbaseEnvironmentFactory extends AbstractEnvironmentFactory
+{
+	public static abstract class CreateStrategy
+	{
+		public abstract @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
+				@NonNull QVTbaseEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue);	
+	}
+	
+	private @Nullable CreateStrategy createStrategy = null;
+	
 	public QVTbaseEnvironmentFactory(@NonNull ProjectManager projectManager,
-			@Nullable ResourceSet externalResourceSet) {
+			@Nullable ResourceSet externalResourceSet, @Nullable CreateStrategy createStrategy) {
 		super(projectManager, externalResourceSet);
+		this.createStrategy = createStrategy;
 		getStandardLibrary().setDefaultStandardLibraryURI(QVTbaseLibrary.STDLIB_URI);
 	}
 
+	@Override
+	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
+			@Nullable Type selfType, @Nullable Type selfTypeValue) {
+		if (createStrategy != null) {
+			return createStrategy.createTemplateParameterSubstitutionVisitor(this, selfType, selfTypeValue);
+		}
+		else {
+			return super.createTemplateParameterSubstitutionVisitor(selfType, selfTypeValue);
+		}
+	}
+	
+	public @Nullable CreateStrategy getCreateStrategy() {
+		return createStrategy;
+	}
+
+	public @Nullable CreateStrategy setCreateStrategy(@Nullable CreateStrategy createStrategy) {
+		CreateStrategy savedStrategy = createStrategy;
+		this.createStrategy = createStrategy;
+		return savedStrategy;
+	}
 }

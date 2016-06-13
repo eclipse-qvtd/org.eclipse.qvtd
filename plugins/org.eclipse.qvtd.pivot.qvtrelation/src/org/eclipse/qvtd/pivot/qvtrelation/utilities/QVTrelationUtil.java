@@ -21,9 +21,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -92,11 +93,23 @@ public class QVTrelationUtil extends QVTbaseUtil
 		return rootVariables;
 	}
 
-	public static @NonNull Transformation loadTransformation(@NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
-		return loadTransformation(RelationModel.class, environmentFactory, transformationURI, keepDebug);
+	public static @NonNull Transformation loadTransformation(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+		try {
+			return loadTransformation(RelationModel.class, environmentFactory, transformationURI, keepDebug);
+		}
+		finally {
+			environmentFactory.setCreateStrategy(savedStrategy);
+		}
 	}
 
-	public static @NonNull Resource loadTransformations(@NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
-		return loadTransformations(RelationModel.class, environmentFactory, transformationURI, keepDebug);
+	public static @NonNull Resource loadTransformations(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+		try {
+			return loadTransformations(RelationModel.class, environmentFactory, transformationURI, keepDebug);
+		}
+		finally {
+			environmentFactory.setCreateStrategy(savedStrategy);
+		}
 	}
 }

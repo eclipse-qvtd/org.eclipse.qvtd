@@ -35,7 +35,7 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 	private long envId = 0;
 
     public QVTiVMExecutor(@NonNull IVMContext vmContext, @NonNull URI transformationURI) throws IOException {
-    	super((QVTiEnvironmentFactory) vmContext.getEnvironmentFactory(), QVTimperativeUtil.loadTransformation(vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug()));
+    	super((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), QVTimperativeUtil.loadTransformation((QVTiEnvironmentFactory)vmContext.getEnvironmentFactory(), transformationURI, vmContext.keepDebug()));
 		this.vmContext = vmContext;
     }
 
