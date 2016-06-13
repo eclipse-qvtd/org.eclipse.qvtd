@@ -20,12 +20,16 @@ import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
+import org.eclipse.ocl.xtext.basecs.PackageOwnerCS;
 import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
+import org.eclipse.ocl.xtext.basecs.RootCS;
+import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 import org.eclipse.ocl.xtext.basecs.TemplateableElementCS;
 import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.*;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
@@ -111,6 +115,20 @@ public class QVTcoreBaseCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElementCS(abstractMappingCS);
 				if (result == null) result = casePivotable(abstractMappingCS);
 				if (result == null) result = caseVisitableCS(abstractMappingCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS: {
+				AbstractTopLevelCS abstractTopLevelCS = (AbstractTopLevelCS)theEObject;
+				T result = caseAbstractTopLevelCS(abstractTopLevelCS);
+				if (result == null) result = caseRootPackageCS(abstractTopLevelCS);
+				if (result == null) result = casePackageOwnerCS(abstractTopLevelCS);
+				if (result == null) result = caseRootCS(abstractTopLevelCS);
+				if (result == null) result = caseModelElementCS(abstractTopLevelCS);
+				if (result == null) result = casePivotableElementCS(abstractTopLevelCS);
+				if (result == null) result = caseElementCS(abstractTopLevelCS);
+				if (result == null) result = casePivotable(abstractTopLevelCS);
+				if (result == null) result = caseVisitableCS(abstractTopLevelCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -284,6 +302,7 @@ public class QVTcoreBaseCSSwitch<@Nullable T> extends Switch<T> {
 			case QVTcoreBaseCSPackage.TRANSFORMATION_CS: {
 				TransformationCS transformationCS = (TransformationCS)theEObject;
 				T result = caseTransformationCS(transformationCS);
+				if (result == null) result = caseAbstractTransformationCS(transformationCS);
 				if (result == null) result = caseClassCS(transformationCS);
 				if (result == null) result = caseNamedElementCS(transformationCS);
 				if (result == null) result = caseTypeCS(transformationCS);
@@ -328,6 +347,21 @@ public class QVTcoreBaseCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAbstractMappingCS(AbstractMappingCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Top Level CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Top Level CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractTopLevelCS(AbstractTopLevelCS object) {
 		return null;
 	}
 
@@ -662,6 +696,51 @@ public class QVTcoreBaseCSSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackageOwnerCS(PackageOwnerCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Root CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Root CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRootCS(RootCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Root Package CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Root Package CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRootPackageCS(RootPackageCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -733,6 +812,21 @@ public class QVTcoreBaseCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClassCS(ClassCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Transformation CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Transformation CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractTransformationCS(AbstractTransformationCS object) {
 		return null;
 	}
 

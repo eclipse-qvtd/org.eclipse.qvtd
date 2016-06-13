@@ -50,6 +50,6 @@ public abstract class AbstractQVTcoreCSContainmentVisitor
 
 	@Override
 	public @Nullable Continuation<?> visitTopLevelCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull TopLevelCS csElement) {
-		return visitRootPackageCS(csElement);
+		return visitAbstractTopLevelCS(csElement);
 	}
 }

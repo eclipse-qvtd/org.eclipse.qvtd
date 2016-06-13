@@ -27,6 +27,7 @@ import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
@@ -223,6 +224,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 			case QVTimperativeCSPackage.TOP_LEVEL_CS: {
 				TopLevelCS topLevelCS = (TopLevelCS)theEObject;
 				T result = caseTopLevelCS(topLevelCS);
+				if (result == null) result = caseAbstractTopLevelCS(topLevelCS);
 				if (result == null) result = caseRootPackageCS(topLevelCS);
 				if (result == null) result = casePackageOwnerCS(topLevelCS);
 				if (result == null) result = caseRootCS(topLevelCS);
@@ -640,6 +642,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRootPackageCS(RootPackageCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Top Level CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Top Level CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractTopLevelCS(AbstractTopLevelCS object) {
 		return null;
 	}
 

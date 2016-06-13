@@ -13,6 +13,7 @@ package org.eclipse.qvtd.xtext.qvtcorebasecs;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +24,6 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getPackage <em>Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getOwnedDirections <em>Owned Directions</em>}</li>
  * </ul>
@@ -32,33 +32,7 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  * @model
  * @generated
  */
-public interface TransformationCS extends ClassCS {
-	/**
-	 * Returns the value of the '<em><b>Owned Path Name</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Path Name</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Path Name</em>' containment reference.
-	 * @see #setOwnedPathName(PathNameCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getTransformationCS_OwnedPathName()
-	 * @model containment="true"
-	 * @generated
-	 */
-	PathNameCS getOwnedPathName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getOwnedPathName <em>Owned Path Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Path Name</em>' containment reference.
-	 * @see #getOwnedPathName()
-	 * @generated
-	 */
-	void setOwnedPathName(PathNameCS value);
-
+public interface TransformationCS extends AbstractTransformationCS {
 	/**
 	 * Returns the value of the '<em><b>Package</b></em>' reference.
 	 * <!-- begin-user-doc -->

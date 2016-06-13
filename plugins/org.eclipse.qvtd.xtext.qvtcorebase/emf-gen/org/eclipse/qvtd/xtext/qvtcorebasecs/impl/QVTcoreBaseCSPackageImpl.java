@@ -20,7 +20,9 @@ import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
@@ -52,6 +54,13 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	private EClass abstractMappingCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractTopLevelCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,6 +216,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 
 		// Initialize simple dependencies
 		EssentialOCLCSPackage.eINSTANCE.eClass();
+		QVTbaseCSPackage.eINSTANCE.eClass();
 		QVTcoreBasePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
@@ -272,6 +282,33 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	@Override
 	public EReference getAbstractMappingCS_OwnedMiddle() {
 		return (EReference)abstractMappingCSEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAbstractTopLevelCS() {
+		return abstractTopLevelCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractTopLevelCS_OwnedQueries() {
+		return (EReference)abstractTopLevelCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractTopLevelCS_OwnedTransformations() {
+		return (EReference)abstractTopLevelCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -640,7 +677,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformationCS_OwnedPathName() {
+	public EReference getTransformationCS_Package() {
 		return (EReference)transformationCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -650,18 +687,8 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformationCS_Package() {
-		return (EReference)transformationCSEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getTransformationCS_OwnedDirections() {
-		return (EReference)transformationCSEClass.getEStructuralFeatures().get(2);
+		return (EReference)transformationCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -719,6 +746,10 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		createEReference(abstractMappingCSEClass, ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME);
 		createEReference(abstractMappingCSEClass, ABSTRACT_MAPPING_CS__OWNED_MIDDLE);
 
+		abstractTopLevelCSEClass = createEClass(ABSTRACT_TOP_LEVEL_CS);
+		createEReference(abstractTopLevelCSEClass, ABSTRACT_TOP_LEVEL_CS__OWNED_QUERIES);
+		createEReference(abstractTopLevelCSEClass, ABSTRACT_TOP_LEVEL_CS__OWNED_TRANSFORMATIONS);
+
 		areaCSEClass = createEClass(AREA_CS);
 		createEReference(areaCSEClass, AREA_CS__OWNED_GUARD_PATTERN);
 		createEReference(areaCSEClass, AREA_CS__OWNED_BOTTOM_PATTERN);
@@ -768,7 +799,6 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		realizedVariableCSEClass = createEClass(REALIZED_VARIABLE_CS);
 
 		transformationCSEClass = createEClass(TRANSFORMATION_CS);
-		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_PATH_NAME);
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__PACKAGE);
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_DIRECTIONS);
 
@@ -805,6 +835,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		QVTcoreBasePackage theQVTcoreBasePackage = (QVTcoreBasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTcoreBasePackage.eNS_URI);
 		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 		EssentialOCLCSPackage theEssentialOCLCSPackage = (EssentialOCLCSPackage)EPackage.Registry.INSTANCE.getEPackage(EssentialOCLCSPackage.eNS_URI);
+		QVTbaseCSPackage theQVTbaseCSPackage = (QVTbaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTbaseCSPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -812,6 +843,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 
 		// Add supertypes to classes
 		abstractMappingCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
+		abstractTopLevelCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());
 		areaCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		bottomPatternCSEClass.getESuperTypes().add(this.getPatternCS());
 		directionCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
@@ -825,7 +857,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		realizeableVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		realizedVariableCSEClass.getESuperTypes().add(this.getRealizeableVariableCS());
-		transformationCSEClass.getESuperTypes().add(theBaseCSPackage.getClassCS());
+		transformationCSEClass.getESuperTypes().add(theQVTbaseCSPackage.getAbstractTransformationCS());
 		unrealizedVariableCSEClass.getESuperTypes().add(this.getRealizeableVariableCS());
 
 		// Initialize classes and features; add operations and parameters
@@ -834,6 +866,10 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		initEReference(getAbstractMappingCS_OwnedDomains(), this.getDomainCS(), null, "ownedDomains", null, 0, -1, AbstractMappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractMappingCS_OwnedInPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedInPathName", null, 0, 1, AbstractMappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractMappingCS_OwnedMiddle(), this.getDomainCS(), null, "ownedMiddle", null, 1, 1, AbstractMappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(abstractTopLevelCSEClass, AbstractTopLevelCS.class, "AbstractTopLevelCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAbstractTopLevelCS_OwnedQueries(), this.getQueryCS(), null, "ownedQueries", null, 0, -1, AbstractTopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractTopLevelCS_OwnedTransformations(), this.getTransformationCS(), null, "ownedTransformations", null, 0, -1, AbstractTopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(areaCSEClass, AreaCS.class, "AreaCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAreaCS_OwnedGuardPattern(), this.getGuardPatternCS(), null, "ownedGuardPattern", null, 0, 1, AreaCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -884,7 +920,6 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		initEClass(realizedVariableCSEClass, RealizedVariableCS.class, "RealizedVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(transformationCSEClass, TransformationCS.class, "TransformationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTransformationCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_Package(), thePivotPackage.getPackage(), null, "package", null, 0, 1, TransformationCS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_OwnedDirections(), this.getDirectionCS(), null, "ownedDirections", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

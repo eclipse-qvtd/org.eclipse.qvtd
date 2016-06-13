@@ -23,7 +23,7 @@ package	org.eclipse.qvtd.xtext.qvtrelationcs.util;
  * but n implementations of the visitXXX methods..
  */
 public abstract class AbstractQVTrelationCSVisitor<R, C>
-	extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractEssentialOCLCSVisitor<R, C>
+	extends org.eclipse.qvtd.xtext.qvtbasecs.util.AbstractQVTbaseCSVisitor<R, C>
 	implements QVTrelationCSVisitor<R>
 {
 	/**

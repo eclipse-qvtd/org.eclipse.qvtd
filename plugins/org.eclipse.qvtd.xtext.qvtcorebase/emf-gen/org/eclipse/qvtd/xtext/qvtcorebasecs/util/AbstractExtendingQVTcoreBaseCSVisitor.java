@@ -27,7 +27,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractExtendingQVTcoreBaseCSVisitor<R, C>
-	extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractExtendingEssentialOCLCSVisitor<R, C>
+	extends org.eclipse.qvtd.xtext.qvtbasecs.util.AbstractExtendingQVTbaseCSVisitor<R, C>
 	implements QVTcoreBaseCSVisitor<R>
 {
 	/**
@@ -42,6 +42,11 @@ public abstract class AbstractExtendingQVTcoreBaseCSVisitor<R, C>
 	@Override
 	public R visitAbstractMappingCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull AbstractMappingCS object) {
 		return visitNamedElementCS(object);
+	}
+
+	@Override
+	public R visitAbstractTopLevelCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull AbstractTopLevelCS object) {
+		return visitRootPackageCS(object);
 	}
 
 	@Override
@@ -111,7 +116,7 @@ public abstract class AbstractExtendingQVTcoreBaseCSVisitor<R, C>
 
 	@Override
 	public R visitTransformationCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull TransformationCS object) {
-		return visitClassCS(object);
+		return visitAbstractTransformationCS(object);
 	}
 
 	@Override

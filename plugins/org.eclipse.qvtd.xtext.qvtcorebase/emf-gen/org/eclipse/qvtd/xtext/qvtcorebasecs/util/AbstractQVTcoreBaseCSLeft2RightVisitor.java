@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
-import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCSLeft2RightVisitor;
+import org.eclipse.qvtd.xtext.qvtbase.cs2as.QVTbaseCSLeft2RightVisitor;
 
 /**
  * An AbstractQVTcoreBaseCSLeft2RightVisitor provides a default implementation for each
@@ -31,7 +31,7 @@ import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCSLeft2RightVisitor;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTcoreBaseCSLeft2RightVisitor
-	extends EssentialOCLCSLeft2RightVisitor
+	extends QVTbaseCSLeft2RightVisitor
 	implements QVTcoreBaseCSVisitor<Element>
 {
 	/**
@@ -46,6 +46,11 @@ public abstract class AbstractQVTcoreBaseCSLeft2RightVisitor
 	@Override
 	public @Nullable Element visitAbstractMappingCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull AbstractMappingCS csElement) {
 		return visitNamedElementCS(csElement);
+	}
+
+	@Override
+	public @Nullable Element visitAbstractTopLevelCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull AbstractTopLevelCS csElement) {
+		return visitRootPackageCS(csElement);
 	}
 
 	@Override
@@ -115,7 +120,7 @@ public abstract class AbstractQVTcoreBaseCSLeft2RightVisitor
 
 	@Override
 	public @Nullable Element visitTransformationCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull TransformationCS csElement) {
-		return visitClassCS(csElement);
+		return visitAbstractTransformationCS(csElement);
 	}
 
 	@Override

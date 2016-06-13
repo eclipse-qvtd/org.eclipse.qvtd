@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
-import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCSLeft2RightVisitor;
+import org.eclipse.qvtd.xtext.qvtbase.cs2as.QVTbaseCSLeft2RightVisitor;
 
 /**
  * An AbstractQVTrelationCSLeft2RightVisitor provides a default implementation for each
@@ -31,7 +31,7 @@ import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCSLeft2RightVisitor;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTrelationCSLeft2RightVisitor
-	extends EssentialOCLCSLeft2RightVisitor
+	extends QVTbaseCSLeft2RightVisitor
 	implements QVTrelationCSVisitor<Element>
 {
 	/**
@@ -140,7 +140,7 @@ public abstract class AbstractQVTrelationCSLeft2RightVisitor
 
 	@Override
 	public @Nullable Element visitTransformationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TransformationCS csElement) {
-		return visitClassCS(csElement);
+		return visitAbstractTransformationCS(csElement);
 	}
 
 	@Override

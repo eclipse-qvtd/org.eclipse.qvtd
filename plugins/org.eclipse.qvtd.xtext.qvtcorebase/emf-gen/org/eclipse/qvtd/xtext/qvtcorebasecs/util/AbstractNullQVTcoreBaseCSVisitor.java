@@ -28,7 +28,7 @@ import org.eclipse.jdt.annotation.Nullable;
  */
  @Deprecated
 public abstract class AbstractNullQVTcoreBaseCSVisitor<@Nullable R, C>
-	extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractNullEssentialOCLCSVisitor<R, C> implements QVTcoreBaseCSVisitor<R>
+	extends org.eclipse.qvtd.xtext.qvtbasecs.util.AbstractNullQVTbaseCSVisitor<R, C> implements QVTcoreBaseCSVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.
@@ -41,6 +41,11 @@ public abstract class AbstractNullQVTcoreBaseCSVisitor<@Nullable R, C>
 
 	@Override
 	public R visitAbstractMappingCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull AbstractMappingCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitAbstractTopLevelCS(org.eclipse.qvtd.xtext.qvtcorebasecs.@NonNull AbstractTopLevelCS object) {
 		return null;
 	}
 

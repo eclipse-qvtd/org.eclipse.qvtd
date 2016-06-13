@@ -50,6 +50,6 @@ public abstract class AbstractQVTcoreCSLeft2RightVisitor
 
 	@Override
 	public @Nullable Element visitTopLevelCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull TopLevelCS csElement) {
-		return visitRootPackageCS(csElement);
+		return visitAbstractTopLevelCS(csElement);
 	}
 }

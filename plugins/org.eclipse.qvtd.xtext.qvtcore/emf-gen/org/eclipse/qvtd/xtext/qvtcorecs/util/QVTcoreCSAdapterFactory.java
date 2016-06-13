@@ -26,6 +26,7 @@ import org.eclipse.ocl.xtext.basecs.RootCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.*;
 
 /**
@@ -135,6 +136,10 @@ public class QVTcoreCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRootPackageCS(RootPackageCS object) {
 				return createRootPackageCSAdapter();
+			}
+			@Override
+			public Adapter caseAbstractTopLevelCS(AbstractTopLevelCS object) {
+				return createAbstractTopLevelCSAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -335,6 +340,20 @@ public class QVTcoreCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRootPackageCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS <em>Abstract Top Level CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS
+	 * @generated
+	 */
+	public Adapter createAbstractTopLevelCSAdapter() {
 		return null;
 	}
 

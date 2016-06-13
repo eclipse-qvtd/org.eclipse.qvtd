@@ -216,7 +216,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__CSI = BaseCSPackage.ROOT_PACKAGE_CS__CSI;
+	int TOP_LEVEL_CS__CSI = QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -225,7 +225,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__PARENT = BaseCSPackage.ROOT_PACKAGE_CS__PARENT;
+	int TOP_LEVEL_CS__PARENT = QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -234,7 +234,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__PIVOT = BaseCSPackage.ROOT_PACKAGE_CS__PIVOT;
+	int TOP_LEVEL_CS__PIVOT = QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -243,7 +243,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__ORIGINAL_XMI_ID = BaseCSPackage.ROOT_PACKAGE_CS__ORIGINAL_XMI_ID;
+	int TOP_LEVEL_CS__ORIGINAL_XMI_ID = QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -252,7 +252,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__OWNED_ANNOTATIONS = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_ANNOTATIONS;
+	int TOP_LEVEL_CS__OWNED_ANNOTATIONS = QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS__OWNED_ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Packages</b></em>' containment reference list.
@@ -261,7 +261,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__OWNED_PACKAGES = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_PACKAGES;
+	int TOP_LEVEL_CS__OWNED_PACKAGES = QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS__OWNED_PACKAGES;
 
 	/**
 	 * The feature id for the '<em><b>Owned Imports</b></em>' containment reference list.
@@ -270,16 +270,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__OWNED_IMPORTS = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_IMPORTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Transformations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOP_LEVEL_CS__OWNED_TRANSFORMATIONS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 0;
+	int TOP_LEVEL_CS__OWNED_IMPORTS = QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS__OWNED_IMPORTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Queries</b></em>' containment reference list.
@@ -288,7 +279,16 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__OWNED_QUERIES = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 1;
+	int TOP_LEVEL_CS__OWNED_QUERIES = QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS__OWNED_QUERIES;
+
+	/**
+	 * The feature id for the '<em><b>Owned Transformations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_LEVEL_CS__OWNED_TRANSFORMATIONS = QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS__OWNED_TRANSFORMATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Mappings</b></em>' containment reference list.
@@ -297,7 +297,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__OWNED_MAPPINGS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 2;
+	int TOP_LEVEL_CS__OWNED_MAPPINGS = QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Top Level CS</em>' class.
@@ -306,7 +306,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS_FEATURE_COUNT = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 3;
+	int TOP_LEVEL_CS_FEATURE_COUNT = QVTcoreBaseCSPackage.ABSTRACT_TOP_LEVEL_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS <em>Mapping CS</em>}'.
@@ -349,28 +349,6 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTopLevelCS();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getOwnedTransformations <em>Owned Transformations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Transformations</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getOwnedTransformations()
-	 * @see #getTopLevelCS()
-	 * @generated
-	 */
-	EReference getTopLevelCS_OwnedTransformations();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getOwnedQueries <em>Owned Queries</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Queries</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getOwnedQueries()
-	 * @see #getTopLevelCS()
-	 * @generated
-	 */
-	EReference getTopLevelCS_OwnedQueries();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getOwnedMappings <em>Owned Mappings</em>}'.
@@ -440,22 +418,6 @@ public interface QVTcoreCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TOP_LEVEL_CS = eINSTANCE.getTopLevelCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Transformations</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TOP_LEVEL_CS__OWNED_TRANSFORMATIONS = eINSTANCE.getTopLevelCS_OwnedTransformations();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Queries</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TOP_LEVEL_CS__OWNED_QUERIES = eINSTANCE.getTopLevelCS_OwnedQueries();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Mappings</b></em>' containment reference list feature.

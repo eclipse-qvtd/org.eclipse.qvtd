@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * An AbstractDelegatingQVTrelationCSVisitor delegates all visits.
  */
 public abstract class AbstractDelegatingQVTrelationCSVisitor<R, C, @NonNull D extends QVTrelationCSVisitor<R>>
-	extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractDelegatingEssentialOCLCSVisitor<R, C, D>
+	extends org.eclipse.qvtd.xtext.qvtbasecs.util.AbstractDelegatingQVTbaseCSVisitor<R, C, D>
 	implements QVTrelationCSVisitor<R>
 {
 	protected AbstractDelegatingQVTrelationCSVisitor(@NonNull D delegate, C context) {

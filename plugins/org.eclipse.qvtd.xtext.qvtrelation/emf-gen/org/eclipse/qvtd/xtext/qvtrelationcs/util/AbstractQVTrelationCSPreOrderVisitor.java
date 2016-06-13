@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCSPreOrderVisitor;
+import org.eclipse.qvtd.xtext.qvtbase.cs2as.QVTbaseCSPreOrderVisitor;
 
 /**
  * An AbstractQVTrelationCSPreOrderVisitor provides a default implementation for each
@@ -31,7 +31,7 @@ import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCSPreOrderVisitor;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTrelationCSPreOrderVisitor
-	extends EssentialOCLCSPreOrderVisitor
+	extends QVTbaseCSPreOrderVisitor
 	implements QVTrelationCSVisitor<Continuation<?>>
 {
 	/**
@@ -140,7 +140,7 @@ public abstract class AbstractQVTrelationCSPreOrderVisitor
 
 	@Override
 	public @Nullable Continuation<?> visitTransformationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TransformationCS csElement) {
-		return visitClassCS(csElement);
+		return visitAbstractTransformationCS(csElement);
 	}
 
 	@Override

@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +28,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedModelDecls <em>Owned Model Decls</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedKeyDecls <em>Owned Key Decls</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedQueries <em>Owned Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedRelations <em>Owned Relations</em>}</li>
  * </ul>
@@ -36,7 +36,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * @model
  * @generated
  */
-public interface TransformationCS extends ClassCS {
+public interface TransformationCS extends AbstractTransformationCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Model Decls</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS}.
@@ -84,32 +84,6 @@ public interface TransformationCS extends ClassCS {
 	 * @generated
 	 */
 	EList<KeyDeclCS> getOwnedKeyDecls();
-
-	/**
-	 * Returns the value of the '<em><b>Owned Path Name</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Path Name</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Path Name</em>' containment reference.
-	 * @see #setOwnedPathName(PathNameCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTransformationCS_OwnedPathName()
-	 * @model containment="true"
-	 * @generated
-	 */
-	PathNameCS getOwnedPathName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedPathName <em>Owned Path Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Path Name</em>' containment reference.
-	 * @see #getOwnedPathName()
-	 * @generated
-	 */
-	void setOwnedPathName(PathNameCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Queries</b></em>' containment reference list.

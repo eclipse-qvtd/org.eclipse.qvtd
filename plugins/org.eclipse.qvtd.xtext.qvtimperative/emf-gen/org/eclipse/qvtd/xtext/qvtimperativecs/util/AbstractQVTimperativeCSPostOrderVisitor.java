@@ -95,6 +95,6 @@ public abstract class AbstractQVTimperativeCSPostOrderVisitor
 
 	@Override
 	public @Nullable Continuation<?> visitTopLevelCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull TopLevelCS csElement) {
-		return visitRootPackageCS(csElement);
+		return visitAbstractTopLevelCS(csElement);
 	}
 }

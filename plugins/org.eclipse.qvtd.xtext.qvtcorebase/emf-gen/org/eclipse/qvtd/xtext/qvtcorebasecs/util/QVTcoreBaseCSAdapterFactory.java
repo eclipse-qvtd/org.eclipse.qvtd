@@ -21,12 +21,16 @@ import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
+import org.eclipse.ocl.xtext.basecs.PackageOwnerCS;
 import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
+import org.eclipse.ocl.xtext.basecs.RootCS;
+import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 import org.eclipse.ocl.xtext.basecs.TemplateableElementCS;
 import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.*;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
@@ -104,6 +108,10 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAbstractMappingCS(AbstractMappingCS object) {
 				return createAbstractMappingCSAdapter();
+			}
+			@Override
+			public Adapter caseAbstractTopLevelCS(AbstractTopLevelCS object) {
+				return createAbstractTopLevelCSAdapter();
 			}
 			@Override
 			public Adapter caseAreaCS(AreaCS object) {
@@ -194,6 +202,18 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementCSAdapter();
 			}
 			@Override
+			public Adapter casePackageOwnerCS(PackageOwnerCS object) {
+				return createPackageOwnerCSAdapter();
+			}
+			@Override
+			public Adapter caseRootCS(RootCS object) {
+				return createRootCSAdapter();
+			}
+			@Override
+			public Adapter caseRootPackageCS(RootPackageCS object) {
+				return createRootPackageCSAdapter();
+			}
+			@Override
 			public Adapter caseTypedElementCS(TypedElementCS object) {
 				return createTypedElementCSAdapter();
 			}
@@ -212,6 +232,10 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseClassCS(ClassCS object) {
 				return createClassCSAdapter();
+			}
+			@Override
+			public Adapter caseAbstractTransformationCS(AbstractTransformationCS object) {
+				return createAbstractTransformationCSAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -244,6 +268,20 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAbstractMappingCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS <em>Abstract Top Level CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS
+	 * @generated
+	 */
+	public Adapter createAbstractTopLevelCSAdapter() {
 		return null;
 	}
 
@@ -556,6 +594,48 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.basecs.PackageOwnerCS <em>Package Owner CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.xtext.basecs.PackageOwnerCS
+	 * @generated
+	 */
+	public Adapter createPackageOwnerCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.basecs.RootCS <em>Root CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.xtext.basecs.RootCS
+	 * @generated
+	 */
+	public Adapter createRootCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.basecs.RootPackageCS <em>Root Package CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.xtext.basecs.RootPackageCS
+	 * @generated
+	 */
+	public Adapter createRootPackageCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.essentialoclcs.ExpCS <em>Exp CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -622,6 +702,20 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClassCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS <em>Abstract Transformation CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS
+	 * @generated
+	 */
+	public Adapter createAbstractTransformationCSAdapter() {
 		return null;
 	}
 

@@ -91,6 +91,6 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 
 	@Override
 	public R visitTopLevelCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull TopLevelCS object) {
-		return visitRootPackageCS(object);
+		return visitAbstractTopLevelCS(object);
 	}
 }

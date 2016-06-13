@@ -29,6 +29,7 @@ import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.*;
 
 /**
@@ -339,6 +340,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 			case QVTrelationCSPackage.TRANSFORMATION_CS: {
 				TransformationCS transformationCS = (TransformationCS)theEObject;
 				T result = caseTransformationCS(transformationCS);
+				if (result == null) result = caseAbstractTransformationCS(transformationCS);
 				if (result == null) result = caseClassCS(transformationCS);
 				if (result == null) result = caseNamedElementCS(transformationCS);
 				if (result == null) result = caseTypeCS(transformationCS);
@@ -932,6 +934,21 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClassCS(ClassCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Transformation CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Transformation CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractTransformationCS(AbstractTransformationCS object) {
 		return null;
 	}
 

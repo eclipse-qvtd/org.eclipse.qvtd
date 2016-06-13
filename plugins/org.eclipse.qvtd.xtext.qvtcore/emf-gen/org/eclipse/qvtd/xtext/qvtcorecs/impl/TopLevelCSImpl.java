@@ -23,6 +23,7 @@ import org.eclipse.ocl.xtext.basecs.impl.RootPackageCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AbstractTopLevelCSImpl;
 import org.eclipse.qvtd.xtext.qvtcorecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS;
@@ -36,34 +37,12 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.TopLevelCSImpl#getOwnedTransformations <em>Owned Transformations</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.TopLevelCSImpl#getOwnedQueries <em>Owned Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.TopLevelCSImpl#getOwnedMappings <em>Owned Mappings</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
-	/**
-	 * The cached value of the '{@link #getOwnedTransformations() <em>Owned Transformations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedTransformations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TransformationCS> ownedTransformations;
-
-	/**
-	 * The cached value of the '{@link #getOwnedQueries() <em>Owned Queries</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedQueries()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<QueryCS> ownedQueries;
-
+public class TopLevelCSImpl extends AbstractTopLevelCSImpl implements TopLevelCS {
 	/**
 	 * The cached value of the '{@link #getOwnedMappings() <em>Owned Mappings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -98,33 +77,6 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("null")
-	@Override
-	public @NonNull EList<TransformationCS> getOwnedTransformations() {
-		if (ownedTransformations == null) {
-			ownedTransformations = new EObjectContainmentEList<TransformationCS>(TransformationCS.class, this, QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS);
-		}
-		return ownedTransformations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<QueryCS> getOwnedQueries() {
-		if (ownedQueries == null) {
-			ownedQueries = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_QUERIES);
-		}
-		return ownedQueries;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public EList<MappingCS> getOwnedMappings() {
 		if (ownedMappings == null) {
@@ -141,10 +93,6 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
-				return ((InternalEList<?>)getOwnedTransformations()).basicRemove(otherEnd, msgs);
-			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_QUERIES:
-				return ((InternalEList<?>)getOwnedQueries()).basicRemove(otherEnd, msgs);
 			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_MAPPINGS:
 				return ((InternalEList<?>)getOwnedMappings()).basicRemove(otherEnd, msgs);
 		}
@@ -159,10 +107,6 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
-				return getOwnedTransformations();
-			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_QUERIES:
-				return getOwnedQueries();
 			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_MAPPINGS:
 				return getOwnedMappings();
 		}
@@ -178,14 +122,6 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
-				getOwnedTransformations().clear();
-				getOwnedTransformations().addAll((Collection<? extends TransformationCS>)newValue);
-				return;
-			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_QUERIES:
-				getOwnedQueries().clear();
-				getOwnedQueries().addAll((Collection<? extends QueryCS>)newValue);
-				return;
 			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_MAPPINGS:
 				getOwnedMappings().clear();
 				getOwnedMappings().addAll((Collection<? extends MappingCS>)newValue);
@@ -202,12 +138,6 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
-				getOwnedTransformations().clear();
-				return;
-			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_QUERIES:
-				getOwnedQueries().clear();
-				return;
 			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_MAPPINGS:
 				getOwnedMappings().clear();
 				return;
@@ -223,10 +153,6 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
-				return ownedTransformations != null && !ownedTransformations.isEmpty();
-			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_QUERIES:
-				return ownedQueries != null && !ownedQueries.isEmpty();
 			case QVTcoreCSPackage.TOP_LEVEL_CS__OWNED_MAPPINGS:
 				return ownedMappings != null && !ownedMappings.isEmpty();
 		}

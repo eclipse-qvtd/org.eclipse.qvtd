@@ -26,6 +26,7 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.impl.ClassCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.xtext.qvtbasecs.impl.AbstractTransformationCSImpl;
 import org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
@@ -45,14 +46,13 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getOwnedModelDecls <em>Owned Model Decls</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getOwnedKeyDecls <em>Owned Key Decls</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getOwnedQueries <em>Owned Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getOwnedRelations <em>Owned Relations</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TransformationCSImpl extends ClassCSImpl implements TransformationCS {
+public class TransformationCSImpl extends AbstractTransformationCSImpl implements TransformationCS {
 	/**
 	 * The cached value of the '{@link #getOwnedModelDecls() <em>Owned Model Decls</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -82,16 +82,6 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	 * @ordered
 	 */
 	protected EList<KeyDeclCS> ownedKeyDecls;
-
-	/**
-	 * The cached value of the '{@link #getOwnedPathName() <em>Owned Path Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedPathName()
-	 * @generated
-	 * @ordered
-	 */
-	protected PathNameCS ownedPathName;
 
 	/**
 	 * The cached value of the '{@link #getOwnedQueries() <em>Owned Queries</em>}' containment reference list.
@@ -177,51 +167,6 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	 * @generated
 	 */
 	@Override
-	public PathNameCS getOwnedPathName() {
-		return ownedPathName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwnedPathName(PathNameCS newOwnedPathName, NotificationChain msgs) {
-		PathNameCS oldOwnedPathName = ownedPathName;
-		ownedPathName = newOwnedPathName;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME, oldOwnedPathName, newOwnedPathName);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwnedPathName(PathNameCS newOwnedPathName) {
-		if (newOwnedPathName != ownedPathName) {
-			NotificationChain msgs = null;
-			if (ownedPathName != null)
-				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME, null, msgs);
-			if (newOwnedPathName != null)
-				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME, null, msgs);
-			msgs = basicSetOwnedPathName(newOwnedPathName, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME, newOwnedPathName, newOwnedPathName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<QueryCS> getOwnedQueries() {
 		if (ownedQueries == null) {
 			ownedQueries = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES);
@@ -254,8 +199,6 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 				return ((InternalEList<?>)getOwnedModelDecls()).basicRemove(otherEnd, msgs);
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
 				return ((InternalEList<?>)getOwnedKeyDecls()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME:
-				return basicSetOwnedPathName(null, msgs);
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
 				return ((InternalEList<?>)getOwnedQueries()).basicRemove(otherEnd, msgs);
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:
@@ -278,8 +221,6 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 				return getExtends();
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
 				return getOwnedKeyDecls();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME:
-				return getOwnedPathName();
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
 				return getOwnedQueries();
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:
@@ -308,9 +249,6 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
 				getOwnedKeyDecls().clear();
 				getOwnedKeyDecls().addAll((Collection<? extends KeyDeclCS>)newValue);
-				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME:
-				setOwnedPathName((PathNameCS)newValue);
 				return;
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
 				getOwnedQueries().clear();
@@ -341,9 +279,6 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
 				getOwnedKeyDecls().clear();
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME:
-				setOwnedPathName((PathNameCS)null);
-				return;
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
 				getOwnedQueries().clear();
 				return;
@@ -368,8 +303,6 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 				return extends_ != null && !extends_.isEmpty();
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
 				return ownedKeyDecls != null && !ownedKeyDecls.isEmpty();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME:
-				return ownedPathName != null;
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
 				return ownedQueries != null && !ownedQueries.isEmpty();
 			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:

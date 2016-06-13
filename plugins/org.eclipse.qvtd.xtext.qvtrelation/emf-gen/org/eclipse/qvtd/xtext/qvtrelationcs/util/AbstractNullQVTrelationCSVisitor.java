@@ -28,7 +28,7 @@ import org.eclipse.jdt.annotation.Nullable;
  */
  @Deprecated
 public abstract class AbstractNullQVTrelationCSVisitor<@Nullable R, C>
-	extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractNullEssentialOCLCSVisitor<R, C> implements QVTrelationCSVisitor<R>
+	extends org.eclipse.qvtd.xtext.qvtbasecs.util.AbstractNullQVTbaseCSVisitor<R, C> implements QVTrelationCSVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

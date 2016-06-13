@@ -30,6 +30,7 @@ import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.*;
 
 /**
@@ -235,6 +236,10 @@ public class QVTrelationCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseClassCS(ClassCS object) {
 				return createClassCSAdapter();
+			}
+			@Override
+			public Adapter caseAbstractTransformationCS(AbstractTransformationCS object) {
+				return createAbstractTransformationCSAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -771,6 +776,20 @@ public class QVTrelationCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClassCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS <em>Abstract Transformation CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS
+	 * @generated
+	 */
+	public Adapter createAbstractTransformationCSAdapter() {
 		return null;
 	}
 
