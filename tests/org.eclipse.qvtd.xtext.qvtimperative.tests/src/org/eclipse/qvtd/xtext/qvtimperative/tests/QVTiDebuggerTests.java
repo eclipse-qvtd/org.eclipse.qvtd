@@ -220,7 +220,12 @@ public class QVTiDebuggerTests extends XtextTestCase
 		assert vmThread != null;
 		TestUIUtil.waitForSuspended(vmThread);
 		//
-		checkPosition(vmThread, 8, 433, 447);
+		try {
+			checkPosition(vmThread, 8, 448, 455);		// Values with OCL BaseLocationInFileProvider fix
+		}
+		catch (java.lang.AssertionError e) {
+			checkPosition(vmThread, 8, 433, 447);		// FIXME 495979 Old values without OCL BaseLocationInFileProvider fix
+		}
 		checkVariables(vmThread, PC_NAME, "this", outName, inName, middleName);
 		checkVariable(vmThread, PC_NAME, asTransformation);
 		checkVariable(vmThread, "this", vmRootEvaluationEnvironment.getValueOf(asTransformationVariable));
