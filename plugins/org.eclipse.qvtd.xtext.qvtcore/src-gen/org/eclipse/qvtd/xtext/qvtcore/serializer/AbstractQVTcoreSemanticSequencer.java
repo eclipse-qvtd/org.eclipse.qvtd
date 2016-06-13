@@ -74,6 +74,8 @@ import org.eclipse.ocl.xtext.essentialoclcs.TupleLiteralPartCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtcorebase.serializer.QVTcoreBaseSemanticSequencer;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
@@ -423,6 +425,12 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 				sequence_UnlimitedNaturalLiteralExpCS(context, (UnlimitedNaturalLiteralExpCS) semanticObject); 
 				return; 
 			}
+		else if (epackage == QVTbaseCSPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
+			case QVTbaseCSPackage.QUALIFIED_PACKAGE_CS:
+				sequence_QualifiedPackageCS(context, (QualifiedPackageCS) semanticObject); 
+				return; 
+			}
 		else if (epackage == QVTcoreBaseCSPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS:
@@ -513,7 +521,10 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 	 * Constraint:
 	 *     (
 	 *         ownedImports+=ImportCS+ | 
-	 *         (ownedImports+=ImportCS+ (ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)+)
+	 *         (
+	 *             ownedImports+=ImportCS+ 
+	 *             (ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)+
+	 *         )
 	 *     )?
 	 */
 	protected void sequence_TopLevelCS(ISerializationContext context, TopLevelCS semanticObject) {

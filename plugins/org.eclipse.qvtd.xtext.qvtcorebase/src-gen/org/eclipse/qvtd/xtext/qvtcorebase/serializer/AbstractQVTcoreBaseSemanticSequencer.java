@@ -75,6 +75,8 @@ import org.eclipse.ocl.xtext.essentialoclcs.TypeLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.qvtd.xtext.qvtbase.serializer.QVTbaseSemanticSequencer;
+import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
@@ -422,6 +424,12 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends QVTbaseSemant
 				sequence_UnlimitedNaturalLiteralExpCS(context, (UnlimitedNaturalLiteralExpCS) semanticObject); 
 				return; 
 			}
+		else if (epackage == QVTbaseCSPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
+			case QVTbaseCSPackage.QUALIFIED_PACKAGE_CS:
+				sequence_QualifiedPackageCS(context, (QualifiedPackageCS) semanticObject); 
+				return; 
+			}
 		else if (epackage == QVTcoreBaseCSPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS:
@@ -632,6 +640,24 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends QVTbaseSemant
 	 *     (isDefault?='default'? ownedTarget=ExpCS ownedInitExpression=ExpCS?)
 	 */
 	protected void sequence_PredicateOrAssignmentCS(ISerializationContext context, PredicateOrAssignmentCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     QualifiedPackageCS returns QualifiedPackageCS
+	 *
+	 * Constraint:
+	 *     (
+	 *         ownedPathName=ScopeNameCS? 
+	 *         name=UnrestrictedName 
+	 *         nsPrefix=UnrestrictedName? 
+	 *         nsURI=URI? 
+	 *         (ownedPackages+=QualifiedPackageCS | ownedClasses+=ClassCS | ownedClasses+=TransformationCS)*
+	 *     )
+	 */
+	protected void sequence_QualifiedPackageCS(ISerializationContext context, QualifiedPackageCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

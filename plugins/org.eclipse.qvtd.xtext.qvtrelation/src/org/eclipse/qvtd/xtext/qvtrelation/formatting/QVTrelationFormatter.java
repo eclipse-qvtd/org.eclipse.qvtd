@@ -157,7 +157,7 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 	    }
 	    {
 	    	TopLevelCSElements a = f.getTopLevelCSAccess();
-			c.setLinewrap(2).before(a.getOwnedTransformationsAssignment_1());
+			c.setLinewrap(2).before(a.getOwnedTransformationsAssignment_1_1());
 	    }
 	    {
 	    	TransformationCSElements a = f.getTransformationCSAccess();

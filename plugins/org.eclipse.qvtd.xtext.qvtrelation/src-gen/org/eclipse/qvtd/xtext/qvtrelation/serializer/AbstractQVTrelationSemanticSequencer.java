@@ -75,6 +75,8 @@ import org.eclipse.ocl.xtext.essentialoclcs.TypeLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.qvtd.xtext.qvtbase.serializer.QVTbaseSemanticSequencer;
+import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
@@ -450,6 +452,12 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 				else break;
 			case EssentialOCLCSPackage.UNLIMITED_NATURAL_LITERAL_EXP_CS:
 				sequence_UnlimitedNaturalLiteralExpCS(context, (UnlimitedNaturalLiteralExpCS) semanticObject); 
+				return; 
+			}
+		else if (epackage == QVTbaseCSPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
+			case QVTbaseCSPackage.QUALIFIED_PACKAGE_CS:
+				sequence_QualifiedPackageCS(context, (QualifiedPackageCS) semanticObject); 
 				return; 
 			}
 		else if (epackage == QVTrelationCSPackage.eINSTANCE)
@@ -845,6 +853,24 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	
 	/**
 	 * Contexts:
+	 *     QualifiedPackageCS returns QualifiedPackageCS
+	 *
+	 * Constraint:
+	 *     (
+	 *         ownedPathName=ScopeNameCS? 
+	 *         name=UnrestrictedName 
+	 *         nsPrefix=UnrestrictedName? 
+	 *         nsURI=URI? 
+	 *         (ownedPackages+=QualifiedPackageCS | ownedClasses+=ClassCS | ownedClasses+=TransformationCS)*
+	 *     )
+	 */
+	protected void sequence_QualifiedPackageCS(ISerializationContext context, QualifiedPackageCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     QueryCS returns QueryCS
 	 *
 	 * Constraint:
@@ -893,7 +919,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *     TopLevelCS returns TopLevelCS
 	 *
 	 * Constraint:
-	 *     ((ownedImports+=UnitCS+ ownedTransformations+=TransformationCS+) | ownedTransformations+=TransformationCS+)?
+	 *     (ownedImports+=UnitCS+ | (ownedImports+=UnitCS+ (ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS)+))?
 	 */
 	protected void sequence_TopLevelCS(ISerializationContext context, TopLevelCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

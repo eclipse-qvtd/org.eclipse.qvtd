@@ -723,6 +723,179 @@ ruleGuardVariableCS returns [EObject current=null]
 
 
 
+// Entry rule entryRuleQualifiedPackageCS
+entryRuleQualifiedPackageCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getQualifiedPackageCSRule()); }
+	 iv_ruleQualifiedPackageCS=ruleQualifiedPackageCS 
+	 { $current=$iv_ruleQualifiedPackageCS.current; } 
+	 EOF 
+;
+
+// Rule QualifiedPackageCS
+ruleQualifiedPackageCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='package' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getQualifiedPackageCSAccess().getPackageKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getQualifiedPackageCSAccess().getOwnedPathNameScopeNameCSParserRuleCall_1_0()); 
+	    }
+		lv_ownedPathName_1_0=ruleScopeNameCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getQualifiedPackageCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedPathName",
+        		lv_ownedPathName_1_0, 
+        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ScopeNameCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getQualifiedPackageCSAccess().getNameUnrestrictedNameParserRuleCall_2_0()); 
+	    }
+		lv_name_2_0=ruleUnrestrictedName		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getQualifiedPackageCSRule());
+	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_2_0, 
+        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_3=':' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getQualifiedPackageCSAccess().getColonKeyword_3_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getQualifiedPackageCSAccess().getNsPrefixUnrestrictedNameParserRuleCall_3_1_0()); 
+	    }
+		lv_nsPrefix_4_0=ruleUnrestrictedName		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getQualifiedPackageCSRule());
+	        }
+       		set(
+       			$current, 
+       			"nsPrefix",
+        		lv_nsPrefix_4_0, 
+        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?(	otherlv_5='=' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getQualifiedPackageCSAccess().getEqualsSignKeyword_4_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getQualifiedPackageCSAccess().getNsURIURIParserRuleCall_4_1_0()); 
+	    }
+		lv_nsURI_6_0=ruleURI		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getQualifiedPackageCSRule());
+	        }
+       		set(
+       			$current, 
+       			"nsURI",
+        		lv_nsURI_6_0, 
+        		"org.eclipse.ocl.xtext.base.Base.URI");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?((	otherlv_7='{' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getQualifiedPackageCSAccess().getLeftCurlyBracketKeyword_5_0_0());
+    }
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getQualifiedPackageCSAccess().getOwnedPackagesQualifiedPackageCSParserRuleCall_5_0_1_0_0()); 
+	    }
+		lv_ownedPackages_8_0=ruleQualifiedPackageCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getQualifiedPackageCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedPackages",
+        		lv_ownedPackages_8_0, 
+        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.QualifiedPackageCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getQualifiedPackageCSAccess().getOwnedClassesClassCSParserRuleCall_5_0_1_1_0_0()); 
+	    }
+		lv_ownedClasses_9_1=ruleClassCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getQualifiedPackageCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedClasses",
+        		lv_ownedClasses_9_1, 
+        		"org.eclipse.qvtd.xtext.qvtbase.QVTbase.ClassCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+    |		{ 
+	        newCompositeNode(grammarAccess.getQualifiedPackageCSAccess().getOwnedClassesTransformationCSParserRuleCall_5_0_1_1_0_1()); 
+	    }
+		lv_ownedClasses_9_2=ruleTransformationCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getQualifiedPackageCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedClasses",
+        		lv_ownedClasses_9_2, 
+        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.TransformationCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+
+)
+))*	otherlv_10='}' 
+    {
+    	newLeafNode(otherlv_10, grammarAccess.getQualifiedPackageCSAccess().getRightCurlyBracketKeyword_5_0_2());
+    }
+)
+    |	otherlv_11=';' 
+    {
+    	newLeafNode(otherlv_11, grammarAccess.getQualifiedPackageCSAccess().getSemicolonKeyword_5_1());
+    }
+))
+;
+
+
+
+
+
 // Entry rule entryRuleParamDeclarationCS
 entryRuleParamDeclarationCS returns [EObject current=null] 
 	:
@@ -971,6 +1144,95 @@ ruleScopeNameCS returns [EObject current=null]
 ;
 
 
+
+
+
+// Entry rule entryRuleTransformationCS
+entryRuleTransformationCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getTransformationCSRule()); }
+	 iv_ruleTransformationCS=ruleTransformationCS 
+	 { $current=$iv_ruleTransformationCS.current; } 
+	 EOF 
+;
+
+// Rule TransformationCS
+ruleTransformationCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='transformation' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getTransformationCSAccess().getTransformationKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getTransformationCSAccess().getOwnedPathNameScopeNameCSParserRuleCall_1_0()); 
+	    }
+		lv_ownedPathName_1_0=ruleScopeNameCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTransformationCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedPathName",
+        		lv_ownedPathName_1_0, 
+        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ScopeNameCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getTransformationCSAccess().getNameUnreservedNameParserRuleCall_2_0()); 
+	    }
+		lv_name_2_0=ruleUnreservedName		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTransformationCSRule());
+	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_2_0, 
+        		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.UnreservedName");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3='{' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getTransformationCSAccess().getLeftCurlyBracketKeyword_3());
+    }
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getTransformationCSAccess().getOwnedDirectionsDirectionCSParserRuleCall_4_0_0()); 
+	    }
+		lv_ownedDirections_4_0=ruleDirectionCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTransformationCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedDirections",
+        		lv_ownedDirections_4_0, 
+        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.DirectionCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_5=';' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getTransformationCSAccess().getSemicolonKeyword_4_1());
+    }
+)*	otherlv_6='}' 
+    {
+    	newLeafNode(otherlv_6, grammarAccess.getTransformationCSAccess().getRightCurlyBracketKeyword_5());
+    }
+)
+;
 
 
 
@@ -1743,6 +2005,63 @@ ruleUnrestrictedName
 ;
 
 
+
+
+
+// Entry rule entryRuleClassCS
+entryRuleClassCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getClassCSRule()); }
+	 iv_ruleClassCS=ruleClassCS 
+	 { $current=$iv_ruleClassCS.current; } 
+	 EOF 
+;
+
+// Rule ClassCS
+ruleClassCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+	{ 
+	  /* */ 
+	}
+    { 
+        newCompositeNode(grammarAccess.getClassCSAccess().getStructuredClassCSParserRuleCall_0()); 
+    }
+    this_StructuredClassCS_0=ruleStructuredClassCS
+    { 
+        $current = $this_StructuredClassCS_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        newCompositeNode(grammarAccess.getClassCSAccess().getDataTypeCSParserRuleCall_1()); 
+    }
+    this_DataTypeCS_1=ruleDataTypeCS
+    { 
+        $current = $this_DataTypeCS_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        newCompositeNode(grammarAccess.getClassCSAccess().getEnumerationCSParserRuleCall_2()); 
+    }
+    this_EnumerationCS_2=ruleEnumerationCS
+    { 
+        $current = $this_EnumerationCS_2.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
 
 
 

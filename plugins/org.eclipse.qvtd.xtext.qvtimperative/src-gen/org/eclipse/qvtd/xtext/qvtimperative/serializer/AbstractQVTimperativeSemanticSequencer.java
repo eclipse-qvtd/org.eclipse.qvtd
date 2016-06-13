@@ -75,6 +75,8 @@ import org.eclipse.ocl.xtext.essentialoclcs.TypeLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.serializer.QVTcoreBaseSemanticSequencer;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
@@ -434,6 +436,12 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 				return; 
 			case EssentialOCLCSPackage.VARIABLE_CS:
 				sequence_MappingIteratorCS(context, (VariableCS) semanticObject); 
+				return; 
+			}
+		else if (epackage == QVTbaseCSPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
+			case QVTbaseCSPackage.QUALIFIED_PACKAGE_CS:
+				sequence_QualifiedPackageCS(context, (QualifiedPackageCS) semanticObject); 
 				return; 
 			}
 		else if (epackage == QVTcoreBaseCSPackage.eINSTANCE)
@@ -849,7 +857,10 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	 * Constraint:
 	 *     (
 	 *         ownedImports+=ImportCS+ | 
-	 *         (ownedImports+=ImportCS+ (ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)+)
+	 *         (
+	 *             ownedImports+=ImportCS+ 
+	 *             (ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)+
+	 *         )
 	 *     )?
 	 */
 	protected void sequence_TopLevelCS(ISerializationContext context, TopLevelCS semanticObject) {

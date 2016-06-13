@@ -98,6 +98,7 @@ public class QVTcoreBaseGrammarResource extends AbstractGrammarResource
 		private static final @NonNull ReferencedMetamodel MM_essentialocl = createReferencedMetamodel(org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.eINSTANCE, "essentialocl"); // http://www.eclipse.org/ocl/2015/EssentialOCLCS
 		private static final @NonNull ReferencedMetamodel MM_pivot = createReferencedMetamodel(org.eclipse.ocl.pivot.PivotPackage.eINSTANCE, "pivot"); // http://www.eclipse.org/ocl/2015/Pivot
 		private static final @NonNull ReferencedMetamodel MM_qvtbase = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage.eINSTANCE, "qvtbase"); // http://www.eclipse.org/qvt/2015/QVTbase
+		private static final @NonNull ReferencedMetamodel MM_qvtbasecs = createReferencedMetamodel(org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage.eINSTANCE, "qvtbasecs"); // http://www.eclipse.org/ocl/2016/QVTbaseCS
 		private static final @NonNull ReferencedMetamodel MM_qvtcorebase = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage.eINSTANCE, "qvtcorebase"); // http://www.eclipse.org/qvt/2015/QVTcoreBase
 		
 		private static final @NonNull ParserRule PR_BottomPatternCS = createParserRule("BottomPatternCS", createTypeRef(MM, org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage.Literals.BOTTOM_PATTERN_CS));
@@ -109,6 +110,7 @@ public class QVTcoreBaseGrammarResource extends AbstractGrammarResource
 		private static final @NonNull ParserRule PR_ParamDeclarationCS = createParserRule("ParamDeclarationCS", createTypeRef(MM, org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage.Literals.PARAM_DECLARATION_CS));
 		private static final @NonNull ParserRule PR_PredicateCS = createParserRule("PredicateCS", createTypeRef(MM, org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage.Literals.PREDICATE_CS));
 		private static final @NonNull ParserRule PR_PredicateOrAssignmentCS = createParserRule("PredicateOrAssignmentCS", createTypeRef(MM, org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS));
+		private static final @NonNull ParserRule PR_QualifiedPackageCS = createParserRule("QualifiedPackageCS", createTypeRef(MM_qvtbasecs, org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage.Literals.QUALIFIED_PACKAGE_CS));
 		private static final @NonNull ParserRule PR_QueryCS = createParserRule("QueryCS", createTypeRef(MM, org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage.Literals.QUERY_CS));
 		private static final @NonNull ParserRule PR_RealizedVariableCS = createParserRule("RealizedVariableCS", createTypeRef(MM, org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage.Literals.REALIZED_VARIABLE_CS));
 		private static final @NonNull ParserRule PR_ScopeNameCS = createParserRule("ScopeNameCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.PATH_NAME_CS));
@@ -127,6 +129,7 @@ public class QVTcoreBaseGrammarResource extends AbstractGrammarResource
 			PR_ParamDeclarationCS.setAlternatives(createGroup(createAssignment("name", "=", createRuleCall(PR_UnrestrictedName)), createKeyword(":"), createAssignment("ownedType", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS))));
 			PR_PredicateCS.setAlternatives(createGroup(createAssignment("ownedCondition", "=", createRuleCall(_EssentialOCL.PR_ExpCS)), createKeyword(";")));
 			PR_PredicateOrAssignmentCS.setAlternatives(createGroup(setCardinality("?", createAssignment("isDefault", "?=", createKeyword("default"))), createAssignment("ownedTarget", "=", createRuleCall(_EssentialOCL.PR_ExpCS)), setCardinality("?", createGroup(createKeyword(":="), createAssignment("ownedInitExpression", "=", createRuleCall(_EssentialOCL.PR_ExpCS)))), createKeyword(";")));
+			PR_QualifiedPackageCS.setAlternatives(createGroup(createKeyword("package"), setCardinality("?", createAssignment("ownedPathName", "=", createRuleCall(PR_ScopeNameCS))), createAssignment("name", "=", createRuleCall(PR_UnrestrictedName)), setCardinality("?", createGroup(createKeyword(":"), createAssignment("nsPrefix", "=", createRuleCall(PR_UnrestrictedName)))), setCardinality("?", createGroup(createKeyword("="), createAssignment("nsURI", "=", createRuleCall(_Base.PR_URI)))), createAlternatives(createGroup(createKeyword("{"), setCardinality("*", createAlternatives(createAssignment("ownedPackages", "+=", createRuleCall(PR_QualifiedPackageCS)), createAssignment("ownedClasses", "+=", createAlternatives(createRuleCall(_QVTbase.PR_ClassCS), createRuleCall(PR_TransformationCS))))), createKeyword("}")), createKeyword(";"))));
 			PR_QueryCS.setAlternatives(createGroup(createKeyword("query"), createAssignment("ownedPathName", "=", createRuleCall(PR_ScopeNameCS)), createAssignment("name", "=", createRuleCall(PR_UnrestrictedName)), createKeyword("("), setCardinality("?", createGroup(createAssignment("ownedParameters", "+=", createRuleCall(PR_ParamDeclarationCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedParameters", "+=", createRuleCall(PR_ParamDeclarationCS)))))), createKeyword(")"), createKeyword(":"), createAssignment("ownedType", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), createAlternatives(createKeyword(";"), createGroup(createKeyword("{"), createAssignment("ownedExpression", "=", createRuleCall(_EssentialOCL.PR_ExpCS)), createKeyword("}")))));
 			PR_RealizedVariableCS.setAlternatives(createGroup(createKeyword("realize"), createAssignment("name", "=", createRuleCall(PR_UnrestrictedName)), createKeyword(":"), createAssignment("ownedType", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS))));
 			PR_ScopeNameCS.setAlternatives(createGroup(createAssignment("ownedPathElements", "+=", createRuleCall(_Base.PR_FirstPathElementCS)), createKeyword("::"), setCardinality("*", createGroup(createAssignment("ownedPathElements", "+=", createRuleCall(_Base.PR_NextPathElementCS)), createKeyword("::")))));
@@ -146,6 +149,7 @@ public class QVTcoreBaseGrammarResource extends AbstractGrammarResource
 				metamodelDeclarations.add(MM_base);
 				metamodelDeclarations.add(MM_essentialocl);
 				metamodelDeclarations.add(MM_qvtbase);
+				metamodelDeclarations.add(MM_qvtbasecs);
 				metamodelDeclarations.add(MM_qvtcorebase);
 				metamodelDeclarations.add(MM);
 			}
@@ -157,6 +161,7 @@ public class QVTcoreBaseGrammarResource extends AbstractGrammarResource
 				rules.add(PR_GuardVariableCS);
 				rules.add(PR_ImportCS);
 				rules.add(PR_NamedDomainCS);
+				rules.add(PR_QualifiedPackageCS);
 				rules.add(PR_ParamDeclarationCS);
 				rules.add(PR_PredicateCS);
 				rules.add(PR_PredicateOrAssignmentCS);

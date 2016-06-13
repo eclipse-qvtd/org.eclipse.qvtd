@@ -44,6 +44,10 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
+					put(grammarAccess.getTopLevelCSAccess().getAlternatives_1(), "rule__TopLevelCS__Alternatives_1");
+					put(grammarAccess.getQualifiedPackageCSAccess().getAlternatives_5(), "rule__QualifiedPackageCS__Alternatives_5");
+					put(grammarAccess.getQualifiedPackageCSAccess().getAlternatives_5_0_1(), "rule__QualifiedPackageCS__Alternatives_5_0_1");
+					put(grammarAccess.getQualifiedPackageCSAccess().getOwnedClassesAlternatives_5_0_1_1_0(), "rule__QualifiedPackageCS__OwnedClassesAlternatives_5_0_1_1_0");
 					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAlternatives_4_0_0(), "rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0");
 					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAlternatives_4_1_1_0(), "rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0");
 					put(grammarAccess.getDomainCSAccess().getAlternatives_0(), "rule__DomainCS__Alternatives_0");
@@ -112,6 +116,10 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIDAccess().getAlternatives(), "rule__ID__Alternatives");
 					put(grammarAccess.getUPPERAccess().getAlternatives(), "rule__UPPER__Alternatives");
 					put(grammarAccess.getTopLevelCSAccess().getGroup(), "rule__TopLevelCS__Group__0");
+					put(grammarAccess.getQualifiedPackageCSAccess().getGroup(), "rule__QualifiedPackageCS__Group__0");
+					put(grammarAccess.getQualifiedPackageCSAccess().getGroup_3(), "rule__QualifiedPackageCS__Group_3__0");
+					put(grammarAccess.getQualifiedPackageCSAccess().getGroup_4(), "rule__QualifiedPackageCS__Group_4__0");
+					put(grammarAccess.getQualifiedPackageCSAccess().getGroup_5_0(), "rule__QualifiedPackageCS__Group_5_0__0");
 					put(grammarAccess.getCollectionTemplateCSAccess().getGroup(), "rule__CollectionTemplateCS__Group__0");
 					put(grammarAccess.getCollectionTemplateCSAccess().getGroup_4(), "rule__CollectionTemplateCS__Group_4__0");
 					put(grammarAccess.getCollectionTemplateCSAccess().getGroup_4_1(), "rule__CollectionTemplateCS__Group_4_1__0");
@@ -312,7 +320,14 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getWildcardTypeRefCSAccess().getGroup(), "rule__WildcardTypeRefCS__Group__0");
 					put(grammarAccess.getWildcardTypeRefCSAccess().getGroup_2(), "rule__WildcardTypeRefCS__Group_2__0");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedImportsAssignment_0(), "rule__TopLevelCS__OwnedImportsAssignment_0");
-					put(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsAssignment_1(), "rule__TopLevelCS__OwnedTransformationsAssignment_1");
+					put(grammarAccess.getTopLevelCSAccess().getOwnedPackagesAssignment_1_0(), "rule__TopLevelCS__OwnedPackagesAssignment_1_0");
+					put(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsAssignment_1_1(), "rule__TopLevelCS__OwnedTransformationsAssignment_1_1");
+					put(grammarAccess.getQualifiedPackageCSAccess().getOwnedPathNameAssignment_1(), "rule__QualifiedPackageCS__OwnedPathNameAssignment_1");
+					put(grammarAccess.getQualifiedPackageCSAccess().getNameAssignment_2(), "rule__QualifiedPackageCS__NameAssignment_2");
+					put(grammarAccess.getQualifiedPackageCSAccess().getNsPrefixAssignment_3_1(), "rule__QualifiedPackageCS__NsPrefixAssignment_3_1");
+					put(grammarAccess.getQualifiedPackageCSAccess().getNsURIAssignment_4_1(), "rule__QualifiedPackageCS__NsURIAssignment_4_1");
+					put(grammarAccess.getQualifiedPackageCSAccess().getOwnedPackagesAssignment_5_0_1_0(), "rule__QualifiedPackageCS__OwnedPackagesAssignment_5_0_1_0");
+					put(grammarAccess.getQualifiedPackageCSAccess().getOwnedClassesAssignment_5_0_1_1(), "rule__QualifiedPackageCS__OwnedClassesAssignment_5_0_1_1");
 					put(grammarAccess.getCollectionTemplateCSAccess().getNameAssignment_0(), "rule__CollectionTemplateCS__NameAssignment_0");
 					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedTypeAssignment_2(), "rule__CollectionTemplateCS__OwnedTypeAssignment_2");
 					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAssignment_4_0(), "rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0");

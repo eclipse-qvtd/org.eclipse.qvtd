@@ -24,6 +24,7 @@ public class AbstractQVTcoreBaseJavaValidator extends org.eclipse.qvtd.xtext.qvt
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/qvt/2015/QVTcoreBaseCS"));
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/ocl/2015/BaseCS"));
+	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/ocl/2016/QVTbaseCS"));
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/ocl/2015/EssentialOCLCS"));
 		return result;
 	}
