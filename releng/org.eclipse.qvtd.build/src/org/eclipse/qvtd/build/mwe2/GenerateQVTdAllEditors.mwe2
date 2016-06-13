@@ -18,6 +18,7 @@ module GenerateQVTdAllEditors
  *	Generate all Xtext editors (but not their Concrete Syntax Models).
  */
 Workflow {
+  component = @GenerateQVTbaseEditor {}
   component = @GenerateQVTcoreBaseEditor {}
   component = @GenerateQVTcoreEditor {}
   component = @GenerateQVTimperativeEditor {}
