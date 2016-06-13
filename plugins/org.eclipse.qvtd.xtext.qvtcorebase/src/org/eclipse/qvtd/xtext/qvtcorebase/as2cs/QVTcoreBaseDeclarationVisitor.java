@@ -12,6 +12,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcorebase.as2cs;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,9 +26,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -36,8 +40,11 @@ import org.eclipse.ocl.xtext.base.as2cs.AliasAnalysis;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.BaseCSFactory;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
+import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
+import org.eclipse.ocl.xtext.basecs.PackageCS;
+import org.eclipse.ocl.xtext.basecs.PackageOwnerCS;
 import org.eclipse.ocl.xtext.basecs.PathElementCS;
 import org.eclipse.ocl.xtext.basecs.PathElementWithURICS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
@@ -67,7 +74,11 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
+import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
@@ -83,6 +94,20 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
 
 public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarationVisitor implements QVTcoreBaseVisitor<ElementCS>
 {
+	public static @Nullable PathNameCS createPathNameCS(@Nullable List<? extends @NonNull NamedElement> csPath) {
+		PathNameCS csPathName = null;
+		if (csPath != null) {
+			csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+			List<@NonNull PathElementCS> csPathElements = ClassUtil.nullFree(csPathName.getOwnedPathElements());
+			for (@NonNull NamedElement csElement : csPath) {
+				PathElementCS csPathElement = BaseCSFactory.eINSTANCE.createPathElementCS();
+				csPathElement.setReferredElement(csElement);
+				csPathElements.add(csPathElement);
+			}
+		}
+		return csPathName;
+	}
+
 	/**
 	 * QVTcoreBaseAliasAnalysis revises AliasAnalysis to support only those names explicitly defined (as a consequence
 	 * of Unit AS elements).
@@ -110,6 +135,82 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	public QVTcoreBaseDeclarationVisitor(@NonNull AS2CSConversion context) {
 		super(context);
 	}
+	
+	protected void addClass(@NonNull PackageOwnerCS csParentPackage, @NonNull ClassCS csClass) {
+		/*if (csParentPackage instanceof AbstractTopLevelCS) {
+			((AbstractTopLevelCS)csParentPackage).getOwnedClasses().add(csClass);
+		}
+		else*/ if (csParentPackage instanceof PackageCS) {
+			((PackageCS)csParentPackage).getOwnedClasses().add(csClass);
+		}
+		else {
+			throw new UnsupportedOperationException(getClass().getSimpleName() + " addClass for a " + csClass.eClass().getName());
+		}
+	}
+	
+	protected void addPackage(@NonNull PackageOwnerCS csParentPackage, @NonNull QualifiedPackageCS csPackage) {
+		csParentPackage.getOwnedPackages().add(csPackage);
+	}
+
+	protected void addTransformation(@NonNull PackageOwnerCS csParentPackage, @NonNull AbstractTransformationCS csTransformation) {
+		if (csParentPackage instanceof AbstractTopLevelCS) {
+			((AbstractTopLevelCS)csParentPackage).getOwnedTransformations().add((TransformationCS)csTransformation);
+		}
+		else if (csParentPackage instanceof PackageCS) {
+			((PackageCS)csParentPackage).getOwnedClasses().add(csTransformation);
+		}
+		else {
+			throw new UnsupportedOperationException(getClass().getSimpleName() + " addClass for a " + csTransformation.eClass().getName());
+		}
+	}
+	
+	public void buildModel(@NonNull RootPackageCS csRootPackage, @NonNull Model asModel) {
+		for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(asModel.getOwnedPackages())) {
+			if (!Orphanage.isTypeOrphanage(asPackage)) {
+				buildPackage(csRootPackage, null, asPackage);
+			}
+		}
+	}
+	
+	private void buildPackage(@NonNull PackageOwnerCS csParentPackage, @Nullable List<@NonNull NamedElement> csParentPath, org.eclipse.ocl.pivot.@NonNull Package asPackage) {
+		if (needsQualifiedPackageCS(asPackage)) {
+			QualifiedPackageCS csPackage = context.visitDeclaration(QualifiedPackageCS.class, asPackage);
+			if (csPackage != null) {
+				csPackage.setOwnedPathName(createPathNameCS(csParentPath));
+				addPackage(csParentPackage, csPackage);
+				csParentPackage = csPackage;
+			}
+			csParentPath = null;
+		}
+		else {
+			List<@NonNull NamedElement> csPath = new ArrayList<@NonNull NamedElement>();
+			if (csParentPath != null) {
+				csPath.addAll(csParentPath);
+			}
+			csPath.add(asPackage);
+			csParentPath = csPath;
+		}
+		for (org.eclipse.ocl.pivot.@NonNull Package asChildPackage : ClassUtil.nullFree(asPackage.getOwnedPackages())) {
+			buildPackage(csParentPackage, csParentPath, asChildPackage);
+		}
+		for (org.eclipse.ocl.pivot.@NonNull Class asChildClass : ClassUtil.nullFree(asPackage.getOwnedClasses())) {
+			buildClass(csParentPackage, csParentPath, asChildClass);
+		}
+	}
+	
+	private void buildClass(@NonNull PackageOwnerCS csParentPackage, @Nullable List<@NonNull NamedElement> csPath, org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		ClassCS csClass = context.visitDeclaration(ClassCS.class, asClass);
+		if (csClass instanceof AbstractTransformationCS) {
+			AbstractTransformationCS csTransformation = (AbstractTransformationCS)csClass;
+			if ((csPath != null) && ((csParentPackage instanceof QualifiedPackageCS) || (csPath.size() != 1) || !"".equals(csPath.get(0).getName()))) {
+				csTransformation.setOwnedPathName(createPathNameCS(csPath));
+			}
+			addTransformation(csParentPackage, csTransformation);
+		}
+		else if (csClass != null) {
+			addClass(csParentPackage, csClass);
+		}
+	}
 
 	protected @NonNull DomainCS createCoreDomain(@NonNull CoreDomain asCoreDomain) {
 		return context.refreshElement(DomainCS.class, QVTcoreBaseCSPackage.Literals.DOMAIN_CS, asCoreDomain);
@@ -136,6 +237,27 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 			return null;
 		}
 		return usedPackages.get(0);
+	}
+
+	/**
+	 * Return true if a QualifiedPackageCS is needed to avoid information loss when serializing asPackage.
+	 */
+	protected boolean needsQualifiedPackageCS(org.eclipse.ocl.pivot.@NonNull Package asPackage) {
+		if (asPackage.getNsPrefix() != null) {
+			return true;
+		}
+		if (asPackage.getURI() != null) {
+			return true;
+		}
+		if (asPackage.getOwnedPackages().size() > 1) {
+			return true;
+		}
+		for (org.eclipse.ocl.pivot.@NonNull Class asClass : ClassUtil.nullFree(asPackage.getOwnedClasses())) {
+			if (!(asClass instanceof Transformation)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -259,6 +381,29 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	}
 
 	@Override
+	public ElementCS visitPackage(org.eclipse.ocl.pivot.@NonNull Package asPackage) {
+//		List<org.eclipse.ocl.pivot.@NonNull Class> asClasses = ClassUtil.nullFree(asPackage.getOwnedClasses());
+//		List<org.eclipse.ocl.pivot.@NonNull Package> asPackages = ClassUtil.nullFree(asPackage.getOwnedPackages());
+//		if (needsQualifiedPackageCS(asPackage)) {
+//			assert needsQualifiedPackageCS(asPackage);
+			QualifiedPackageCS csPackage = context.refreshNamedElement(QualifiedPackageCS.class, QVTbaseCSPackage.Literals.QUALIFIED_PACKAGE_CS, asPackage);
+//			context.refreshList(csPackage.getOwnedClasses(), context.visitDeclarations(ClassCS.class, asClasses, null));
+			csPackage.setNsPrefix(asPackage.getNsPrefix());
+			csPackage.setNsURI(asPackage.getURI());
+//			context.refreshList(csPackage.getOwnedPackages(), context.visitDeclarations(QualifiedPackageCS.class, asPackages, null));
+			return csPackage;
+//		}
+//		else {
+//			PackageCS csPackage = context.refreshNamedElement(PackageCS.class, BaseCSPackage.Literals.PACKAGE_CS, asPackage);
+//			context.refreshList(csPackage.getOwnedClasses(), context.visitDeclarations(ClassCS.class, asClasses, null));
+//			csPackage.setNsPrefix(asPackage.getNsPrefix());
+//			csPackage.setNsURI(asPackage.getURI());
+//			context.refreshList(csPackage.getOwnedPackages(), context.visitDeclarations(PackageCS.class, asPackages, null));
+//			return csPackage;
+//		}
+	}
+
+	@Override
 	public ElementCS visitPattern(@NonNull Pattern object) {
 		throw new UnsupportedOperationException();
 	}
@@ -301,15 +446,15 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	public ElementCS visitTransformation(@NonNull Transformation asTransformation) {
 		TransformationCS csTransformation = context.refreshNamedElement(TransformationCS.class, QVTcoreBaseCSPackage.Literals.TRANSFORMATION_CS, asTransformation);
 		csTransformation.setPivot(asTransformation);
-		org.eclipse.ocl.pivot.Package owningPackage = asTransformation.getOwningPackage();
-		if ((owningPackage == null) || "".equals(owningPackage.getName()) || (owningPackage.getName() == null)) {
-			csTransformation.setOwnedPathName(null);
-		}
-		else {
-			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
-			csTransformation.setOwnedPathName(csPathName);
-			context.refreshPathName(csPathName, owningPackage, null);
-		}
+//		org.eclipse.ocl.pivot.Package owningPackage = asTransformation.getOwningPackage();
+//		if ((owningPackage == null) || "".equals(owningPackage.getName()) || (owningPackage.getName() == null)) {
+//			csTransformation.setOwnedPathName(null);
+//		}
+//		else {
+//			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+//			csTransformation.setOwnedPathName(csPathName);
+//			context.refreshPathName(csPathName, owningPackage, null);
+//		}
 		context.refreshList(csTransformation.getOwnedDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
 		return csTransformation;
 	}

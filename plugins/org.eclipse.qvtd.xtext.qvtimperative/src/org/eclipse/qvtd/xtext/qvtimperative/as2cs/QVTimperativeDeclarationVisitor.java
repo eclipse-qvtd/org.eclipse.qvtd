@@ -71,7 +71,6 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
@@ -218,6 +217,9 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		TopLevelCS csDocument = context.refreshElement(TopLevelCS.class, QVTimperativeCSPackage.Literals.TOP_LEVEL_CS, asModel);
 		csDocument.setPivot(asModel);
 		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, asModel.getOwnedImports(), null));
+
+		buildModel(csDocument, asModel);
+		
 		List<Mapping> asMappings = null;
 		List<Function> asQueries = null;
 		List<Transformation> asTransformations = new ArrayList<Transformation>();
@@ -240,7 +242,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 				}
 			}
 		}
-		context.refreshList(csDocument.getOwnedTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
+//		context.refreshList(csDocument.getOwnedTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
 		if (asMappings != null) {
 			context.refreshList(csDocument.getOwnedMappings(), context.visitDeclarations(MappingCS.class, asMappings, null));
 		}
