@@ -191,7 +191,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 	}
 
 	@Override
-	protected @NonNull OCLExpression resolveInvocation(@Nullable OCLExpression sourceExp,@NonNull RoundBracketedClauseCS csRoundBracketedClause) {
+	protected @NonNull OCLExpression resolveInvocation(@Nullable OCLExpression sourceExp, @NonNull RoundBracketedClauseCS csRoundBracketedClause) {
 		AbstractNameExpCS csNameExp = csRoundBracketedClause.getOwningNameExp();
 		PathNameCS csPathName = csNameExp.getOwnedPathName();
 		if (csPathName != null) {	// This isn't actually needed but it should be.

@@ -211,8 +211,8 @@ public class QVTbaseUtil
 //        	}
         	ownedContext = PivotFactory.eINSTANCE.createVariable();
         	ownedContext.setName("this");
-			ownedContext.setType(transformationType);		// FIXME promote API
-           	ownedContext.setTypeValue(transformation);
+			ownedContext.setType(transformation);		// FIXME promote API
+//           	ownedContext.setTypeValue(transformation);
         	ownedContext.setIsRequired(true);
         	transformation.setOwnedContext(ownedContext);
         }
