@@ -14,6 +14,7 @@ import org.eclipse.ocl.examples.test.xtext.AbstractGrammarTests;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.eclipse.ocl.xtext.oclstdlib.OCLstdlibStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtbase.QVTbaseGrammarResource;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreGrammarResource;
 import org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBaseGrammarResource;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeGrammarResource;
@@ -42,6 +43,10 @@ public class GrammarTests extends AbstractGrammarTests
 	 * 
 	 * FIXME check the library/model version instead.
 	 */
+	public void testGrammar_QVTbase() throws Exception {
+		doTestGrammar(QVTbaseGrammarResource.class.getResource("QVTbase.xtextbin"), QVTbaseGrammarResource.INSTANCE);
+	}
+	
 	public void testGrammar_QVTcore() throws Exception {
 		doTestGrammar(QVTcoreGrammarResource.class.getResource("QVTcore.xtextbin"), QVTcoreGrammarResource.INSTANCE);
 	}
