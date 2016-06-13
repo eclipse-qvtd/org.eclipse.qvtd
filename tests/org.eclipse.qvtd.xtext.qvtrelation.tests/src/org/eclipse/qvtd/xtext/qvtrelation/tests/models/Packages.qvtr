@@ -1,0 +1,27 @@
+import qvtrelation : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTRelation.ecore'::QVTRelation;
+import emof : 'platform:/resource/org.eclipse.qvt/model/ecore/EMOF.ecore'::EMOF;
+
+package pkg : pfx = 'ns' {
+    class Class {
+    	property myName : String;
+    	operation f(n : String[1]) : String[1] {
+    		body: n.toUpper();
+    	}
+    }
+	transformation Keys(mm:{qvtrelation, emof})
+	{
+--	     key Key{identifies};
+	     key Class{name};
+	--     key Class{key};
+	--     key Class{key, name};
+	--     key Class{};
+	}
+	transformation Keys2(mm:{pkg})
+	{
+--	     key Key{identifies};
+	     key Class{myName};
+	--     key Class{key};
+	--     key Class{key, name};
+	--     key Class{};
+	}
+}

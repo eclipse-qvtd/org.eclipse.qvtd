@@ -44,7 +44,7 @@ map packageToSchema in umlRdbms {
         owner : PackageToSchema opposites primitivesToNames;
         name : String;
         -- uml
-        primitive : PrimitiveDataType;
+        _'primitive' : PrimitiveDataType;
         -- rdbms
         typeName : String;
     }
@@ -60,7 +60,7 @@ map primitiveToName in umlRdbms {
     where (p2s:PackageToSchema | p2s.umlPackage = p;) {
         realize p2n:PrimitiveToName |
         p2n.owner := p2s;
-        p2n.primitive := prim;
+        p2n._'primitive' := prim;
         p2n.typeName := sqlType;
     }
     map {
@@ -264,7 +264,7 @@ map associationToForeignKey in umlRdbms refines flattening {
         owner : FromAttributeOwner opposites fromAttributes;
         leafs : Set(AttributeToColumn);
         -- uml
-        attribute : Attribute;
+        _'attribute' : Attribute;
     }
     abstract class ToColumn {
         -- rdbms
@@ -286,7 +286,7 @@ map attributes in umlRdbms refines flattening {
     }
     where (fao:FromAttributeOwner |) {
         realize fa : FromAttribute |
-        fa.attribute := a;
+        fa._'attribute' := a;
         fa.owner := fao;
     }
     map {
@@ -311,7 +311,7 @@ map primitiveAttribute in umlRdbms refines attributes {
     check enforce uml (t:PrimitiveDataType |) {
         a.type := t;
     }
-    where (p2n:PrimitiveToName | p2n.primitive = t;) {
+    where (p2n:PrimitiveToName | p2n._'primitive' = t;) {
         realize fa:AttributeToColumn |
         fa.type := p2n;
     }
@@ -326,7 +326,7 @@ map complexAttributeAttributes in umlRdbms refines attributes {
     check uml (ca:Attribute |
         ca.type = c; ) {}
     where (fao:NonLeafAttribute |
-        fao.attribute = ca; ) {}
+        fao._'attribute' = ca; ) {}
     map {
         where () {
             fa.name := fao.name + '_' + a.name;

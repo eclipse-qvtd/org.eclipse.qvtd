@@ -23,7 +23,7 @@ transformation SeqToStmc(seqDgm:SeqMM, stmc:StmcMM)
 		{
 			object = o:Object
 			{
-				class = c1:Class
+				_'class' = c1:Class
 				{
 					name = cn
 				}

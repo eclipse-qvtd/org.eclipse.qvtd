@@ -15,7 +15,7 @@ import relmm : 'RelMM.emof'::relMM2;
 transformation UmlToRel(uml:umlmm, rdbms:relmm)
 {
 	key umlmm::Class {name};
-	key umlmm::Attribute {name, class};
+	key umlmm::Attribute {name, _'class'};
 	key relmm::Table {name};
 	key relmm::Column {name, table};
 
@@ -81,7 +81,7 @@ transformation UmlToRel(uml:umlmm, rdbms:relmm)
 		{
 			name = n,
 			type = utyp,
-			class = c:Class{}
+			_'class' = c:Class{}
 		}
 		default_values
 		{

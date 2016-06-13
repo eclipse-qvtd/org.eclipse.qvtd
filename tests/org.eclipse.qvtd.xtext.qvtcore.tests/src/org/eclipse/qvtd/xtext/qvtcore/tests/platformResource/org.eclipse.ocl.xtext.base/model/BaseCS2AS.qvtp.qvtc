@@ -20,11 +20,11 @@ map cAttributeCS_2_Property in BaseCS2AS_qvtp_qvtcas
 	|) {}
 
 	enforce rightAS() {
-		realize property : Property
+		realize _'property' : Property
 	|}
 
 	where() {
-		attributeCS.pivot := property;
+		attributeCS.pivot := _'property';
 	}
 }
 map cConstraintCS_2_Constraint in BaseCS2AS_qvtp_qvtcas
@@ -124,11 +124,11 @@ map cOperationCS_2_Operation in BaseCS2AS_qvtp_qvtcas
 	|) {}
 
 	enforce rightAS() {
-		realize operation : Operation
+		realize _'operation' : Operation
 	|}
 
 	where() {
-		operationCS.pivot := operation;
+		operationCS.pivot := _'operation';
 	}
 }
 map cPackageCS_2_Package in BaseCS2AS_qvtp_qvtcas
@@ -137,11 +137,11 @@ map cPackageCS_2_Package in BaseCS2AS_qvtp_qvtcas
 	|) {}
 
 	enforce rightAS() {
-		realize package : Package
+		realize _'package' : Package
 	|}
 
 	where() {
-		packageCS.pivot := package;
+		packageCS.pivot := _'package';
 	}
 }
 map cParameterCS_2_Parameter in BaseCS2AS_qvtp_qvtcas
@@ -176,11 +176,11 @@ map cReferenceCS_2_Property_0 in BaseCS2AS_qvtp_qvtcas
 	|) {}
 
 	enforce rightAS() {
-		realize property : Property
+		realize _'property' : Property
 	|}
 
 	where() {
-		referenceCS.pivot := property;
+		referenceCS.pivot := _'property';
 	}
 }
 map cRootPackageCS_2_Model in BaseCS2AS_qvtp_qvtcas
@@ -215,11 +215,11 @@ map cStructuredClassCS_2_Class in BaseCS2AS_qvtp_qvtcas
 	|) {}
 
 	enforce rightAS() {
-		realize class : Class
+		realize _'class' : Class
 	|}
 
 	where() {
-		structuredClassCS.pivot := class;
+		structuredClassCS.pivot := _'class';
 	}
 }
 map cTemplateBindingCS_2_TemplateBinding in BaseCS2AS_qvtp_qvtcas
@@ -267,11 +267,11 @@ map cTuplePartCS_2_Property in BaseCS2AS_qvtp_qvtcas
 	|) {}
 
 	enforce rightAS() {
-		realize property : Property
+		realize _'property' : Property
 	|}
 
 	where() {
-		tuplePartCS.pivot := property;
+		tuplePartCS.pivot := _'property';
 	}
 }
 map cTupleTypeCS_2_TupleType in BaseCS2AS_qvtp_qvtcas
@@ -1288,7 +1288,7 @@ map uSpecificationCS_2_LanguageExpression_body in BaseCS2AS_qvtp_qvtcas
 	enforce rightAS() {}
 
 	where() {
-		specificationCS.pivot.oclAsType(pivot::LanguageExpression).body := Sequence(String){specificationCS.exprString};
+		specificationCS.pivot.oclAsType(pivot::LanguageExpression)._'body' := Sequence(String){specificationCS.exprString};
 	}
 }
 map uStructuredClassCS_2_Class_name in BaseCS2AS_qvtp_qvtcas

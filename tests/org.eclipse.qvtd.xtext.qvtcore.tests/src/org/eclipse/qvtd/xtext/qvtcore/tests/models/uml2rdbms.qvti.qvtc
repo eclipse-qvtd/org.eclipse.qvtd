@@ -41,7 +41,7 @@ map packageToSchema in umlRdbms {
 			allAttributes : Set(Attribute)
 		|
 			superClasses := getAllSupers(cls);
-			allAttributes := superClasses.attribute->asSet();
+			allAttributes := superClasses._'attribute'->asSet();
 		}
 		enforce rdbms () {
 			realize tab : Table,
@@ -75,7 +75,7 @@ map packageToSchema in umlRdbms {
 				where () {
 					realize prim2name : PrimitiveToName
 				|
-					prim2name.primitive = type;
+					prim2name._'primitive' = type;
 				}
 
 				map { -- integerToNumber
@@ -119,7 +119,7 @@ map packageToSchema in umlRdbms {
 				map { -- complexAttributeAttributes {
 					check uml (ca : Attribute | ca.type = cls;) {}
 					enforce rdbms () {}
-					where (fao : NonLeafAttribute | fao.attribute=ca;) {
+					where (fao : NonLeafAttribute | fao._'attribute'=ca;) {
 						realize att2col:AttributeToColumn
 					|
 						att2col.kind := att.kind;
@@ -139,7 +139,7 @@ map packageToSchema in umlRdbms {
 					where () { -- fao : FromAttributeOwner | fao = cls2Tab;) {
 						realize att2col : NonLeafAttribute
 					|
-						att2col.attribute := att;
+						att2col._'attribute' := att;
 						att2col.kind := att.kind;
 						att2col.name := att.name;
 					}
@@ -148,7 +148,7 @@ map packageToSchema in umlRdbms {
 				map { -- complexAttributeAttributes
 					check uml (ca:Attribute | ca.type = cls;) {}
 					enforce rdbms () {}
-					where (fao : NonLeafAttribute | fao.attribute=ca;) {
+					where (fao : NonLeafAttribute | fao._'attribute'=ca;) {
 						realize att2col : AttributeToColumn
 					|
 						att2col.owner := fao;

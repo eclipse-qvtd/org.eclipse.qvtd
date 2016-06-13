@@ -16,7 +16,7 @@ query umlRdbms::getAllSupers(cls : SimpleUML::Class) : Set(SimpleUML::Class) {
 }
 
 query umlRdbms::getAllAttributes(cls : SimpleUML::Class) : Set(SimpleUML::Attribute) {
-	getAllSupers(cls).attribute->asSet()
+	getAllSupers(cls)._'attribute'->asSet()
 }
 
 query umlRdbms::getAllForwards(cls : SimpleUML::Class) : Set(SimpleUML::Association) {
@@ -58,7 +58,7 @@ map primitiveToName in umlRdbms {
 	where (p2s:PackageToSchema| p2s.umlPackage=p;) {
 		realize p2n:PrimitiveToName
 	|   p2n.owner := p2s;
-		p2n.primitive := prim;
+		p2n._'primitive' := prim;
 		p2n.typeName := sqlType;
 	}
 	map {
@@ -228,7 +228,7 @@ map attributes in umlRdbms {
 	}
 	where (fao:FromAttributeOwner |) {
 		fa : FromAttribute
-	|	fa.attribute := a;
+	|	fa._'attribute' := a;
 		fa.owner := fao;
 	}
 	map {
@@ -256,7 +256,7 @@ map primitiveAttribute in umlRdbms refines attributes {
 		a.type := t;
 	}
 	where (p2n:PrimitiveToName
-	|	p2n.primitive=t;
+	|	p2n._'primitive'=t;
 	) {
 		realize fpa:AttributeToColumn
 	|	fpa.type := p2n;
@@ -273,7 +273,7 @@ map complexAttributeAttributes in umlRdbms refines attributes {
 	|	ca.type=c;
 	) {}
 	where (faco:NonLeafAttribute
-	|	faco.attribute=ca;
+	|	faco._'attribute'=ca;
 	) {}
 	map {
 		where () {

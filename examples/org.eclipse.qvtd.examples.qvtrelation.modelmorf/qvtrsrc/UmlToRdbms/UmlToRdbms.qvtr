@@ -105,7 +105,7 @@ transformation UmlToRdbms(uml:umlMM, rdbms:rdbmsMM)
 		checkonly domain uml 
 		c:Class 
 		{
-			attribute=a:Attribute 
+			_'attribute'=a:Attribute 
 			{
 				name=an,
 				type=p:PrimitiveDataType 
@@ -142,7 +142,7 @@ transformation UmlToRdbms(uml:umlMM, rdbms:rdbmsMM)
 		checkonly domain uml 
 		c:Class 
 		{
-			attribute=a:Attribute 
+			_'attribute'=a:Attribute 
 			{
 				name=an,
 				type=tc:Class {}

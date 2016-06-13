@@ -14,8 +14,8 @@ import UMLMM : 'ClassMM_IN.emof'::ClassMM;
 transformation AbstractToConcrete(uml1:UMLMM, uml2:UMLMM)
 {
 	key UMLMM::Type {name};
-	key UMLMM::Operation {name, class};
-	key UMLMM::Parameter {name, operation, type};
+	key UMLMM::Operation {name, _'class'};
+	key UMLMM::Parameter {name, _'operation', type};
 
 	top relation AbstractClassToConcreteClass
 	{
@@ -28,7 +28,7 @@ transformation AbstractToConcrete(uml1:UMLMM, uml2:UMLMM)
 			inheritsFrom = ac:Class 
 			{
 				isAbstract = true,
-				operation = aco:Operation 
+				_'operation' = aco:Operation 
 				{
 					name = acon,
 					parameter = acop:Parameter 
@@ -43,7 +43,7 @@ transformation AbstractToConcrete(uml1:UMLMM, uml2:UMLMM)
 		enforce domain uml2 
 		cc:Class 
 		{
-			operation = cco:Operation 
+			_'operation' = cco:Operation 
 			{
 				name = acon,
 				parameter = ccop:Parameter 

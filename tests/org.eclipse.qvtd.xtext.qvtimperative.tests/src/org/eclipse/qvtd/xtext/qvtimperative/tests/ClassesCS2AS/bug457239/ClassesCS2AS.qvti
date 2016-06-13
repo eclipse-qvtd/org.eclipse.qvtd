@@ -12,10 +12,10 @@ map createPackage in classescs2as
 {
 	check leftCS(packageCS : PackageCS) {}
 	enforce rightAS() {
-		realize package : Package
+		realize _'package' : Package
 	}
 	where () {
-		package.name := if packageCS.hasName()
+		_'package'.name := if packageCS.hasName()
 						then packageCS.name
 						else 'unnamed'
 						endif;

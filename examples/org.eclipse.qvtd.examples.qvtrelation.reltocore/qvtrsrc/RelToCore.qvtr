@@ -26,7 +26,7 @@ key qvtcore::BottomPattern{area};
 key essentialocl::Variable{name, type};
 key emof::Type{name};
 key emof::Class{name};
-key emof::Property{name, class};
+key emof::Property{name, _'class'};
 key qvtcore::CoreDomain{name, rule};
 key qvtbase::TypedModel{name, usedPackage, transformation};
 key emof::Package{name};
@@ -1132,7 +1132,7 @@ relation RWhenRelCallArgToMGuardPredicate
          conditionExpression = ee:OperationCallExp {   -- vd.dvn = mv
             source = pe:PropertyCallExp {
                source = pve:VariableExp{referredVariable = vd},
-               referredProperty = pep:Property{name = dvn, class = vd.type.oclAsType(emof::Class)}
+               referredProperty = pep:Property{name = dvn, _'class' = vd.type.oclAsType(emof::Class)}
             },
             referredOperation = eo:Operation{name = '='},
             argument = ave:VariableExp{referredVariable = mv}
@@ -1190,7 +1190,7 @@ relation RInvokerToMGuardPredicate
          conditionExpression = ee:OperationCallExp {   -- vd.vn = mdv
             source = pe:PropertyCallExp {
                source = mve:VariableExp{referredVariable = vd},
-               referredProperty = pep:Property{name = vn, class = vd.type.oclAsType(emof::Class)}
+               referredProperty = pep:Property{name = vn, _'class' = vd.type.oclAsType(emof::Class)}
             },
             referredOperation = eo:Operation{name = '='},
             argument = ave:VariableExp{referredVariable = mdv}
@@ -1292,7 +1292,7 @@ relation RDomainVarToMDBottomAssignmnetForEnforcement
    enforce domain core mb:BottomPattern {   -- domain bottom
       assignment = a:PropertyAssignment {
          slotExpression = ve1:VariableExp{referredVariable = tcv},
-         targetProperty = tp:Property{name = v.name, class = tcv.type.oclAsType(emof::Class)},
+         targetProperty = tp:Property{name = v.name, _'class' = tcv.type.oclAsType(emof::Class)},
          value = ve2:VariableExp{referredVariable = mv}
       }
    };
@@ -1329,7 +1329,7 @@ relation RDomainToMBottomPredicateForEnforcement
                source = pve:VariableExp{referredVariable = tcv},
                referredProperty = pep:Property{
                   name = v.name,
-                  class = tcv.type.oclAsType(emof::Class)
+                  _'class' = tcv.type.oclAsType(emof::Class)
                }
             },
             referredOperation = eo:Operation{name = '='},
@@ -1432,7 +1432,7 @@ relation RDomainToMDBottomForEnforcementOfIdentityPropObject
    enforce domain core mb:BottomPattern {
       assignment = a:PropertyAssignment {
          slotExpression = ve1:VariableExp{referredVariable = tcv},
-         targetProperty = tp:Property{name = tv.name, class = tcv.type.oclAsType(emof::Class)},
+         targetProperty = tp:Property{name = tv.name, _'class' = tcv.type.oclAsType(emof::Class)},
          value = ve2:VariableExp{referredVariable = mtv}
       }
    };   -- domain bottom
@@ -1459,7 +1459,7 @@ relation RDomainPatternExprToMappingDomainAssignment
    enforce domain core db:BottomPattern {
       assignment = a:PropertyAssignment {
          slotExpression = ve:VariableExp{referredVariable = mv},
-         targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},
+         targetProperty = tp:Property{name = pn, _'class' = mv.type.oclAsType(emof::Class)},
          value = me:OclExpression{}
       }
    };
@@ -1488,7 +1488,7 @@ relation RDomainPatternExprToMappingDomainVarAssignment
       realizedVariable = mv:RealizedVariable {},
       assignment = a:PropertyAssignment {
          slotExpression = ve:VariableExp{referredVariable = mv},
-         targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},
+         targetProperty = tp:Property{name = pn, _'class' = mv.type.oclAsType(emof::Class)},
          value = me:VariableExp{referredVariable = mev}
       }
    };
@@ -1520,7 +1520,7 @@ relation RDomainPatternExprToMappingDomainTemplateVarAssignment
       realizedVariable = mv:RealizedVariable {},
       assignment = a:PropertyAssignment {
          slotExpression = ve:VariableExp{referredVariable = mv},
-         targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},
+         targetProperty = tp:Property{name = pn, _'class' = mv.type.oclAsType(emof::Class)},
          value = me:VariableExp{referredVariable = mev}
       }
    };
@@ -1552,7 +1552,7 @@ relation RDomainPatternExprToMappingBottomVarAssignment
       realizedVariable = mv:RealizedVariable {},
       assignment = a:PropertyAssignment {
          slotExpression = ve:VariableExp{referredVariable = mv},
-         targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},
+         targetProperty = tp:Property{name = pn, _'class' = mv.type.oclAsType(emof::Class)},
          value = me:VariableExp{referredVariable = mev}
       }
    };
@@ -1598,7 +1598,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
          bottomPattern = bp:BottomPattern {
             assignment = a:PropertyAssignment {
                slotExpression = ve:VariableExp{referredVariable = mv},
-               targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},
+               targetProperty = tp:Property{name = pn, _'class' = mv.type.oclAsType(emof::Class)},
                value = me:OclExpression{}
             }
          }
@@ -1653,7 +1653,7 @@ relation RDomainToMComposedMappingGuard
                   source = ve1:VariableExp{referredVariable = tcv},
                   referredProperty = tp:Property {
                      name = mv.name, 
-                     class = mv.type.oclAsType(emof::Class)
+                     _'class' = mv.type.oclAsType(emof::Class)
                   }
                },
                referredOperation = eo:Operation{name = '='},
@@ -1734,7 +1734,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropObject
                realizedVariable = mpv:RealizedVariable {},
                assignment = a:PropertyAssignment {
                   slotExpression = ve1:VariableExp{referredVariable = mv},
-                  targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},
+                  targetProperty = tp:Property{name = pn, _'class' = mv.type.oclAsType(emof::Class)},
                   value = ve2:VariableExp{referredVariable = mpv}
                }
             }
@@ -1781,7 +1781,7 @@ relation RDomainPatternToMDBottomPatternComposite
    enforce domain core db:BottomPattern {
       assignment = a:PropertyAssignment {
          slotExpression = ve1:VariableExp{referredVariable = mvte},
-         targetProperty = tp:Property{name = pn, class = mvte.type.oclAsType(emof::Class)},
+         targetProperty = tp:Property{name = pn, _'class' = mvte.type.oclAsType(emof::Class)},
          value = ve2:VariableExp{referredVariable = mvpte}
       }
    };
@@ -1815,7 +1815,7 @@ relation RDomainPatternToMDBottomPatternSimpleUnSharedVarExpr
    enforce domain core db:BottomPattern {
       assignment = a:PropertyAssignment {
          slotExpression = ve1:VariableExp{referredVariable = mvte},
-         targetProperty = tp:Property{name = pn, class = mvte.type.oclAsType(emof::Class)},
+         targetProperty = tp:Property{name = pn, _'class' = mvte.type.oclAsType(emof::Class)},
          value = ve2:VariableExp{referredVariable = mvpte}
       }
    };
@@ -1850,7 +1850,7 @@ relation RDomainPatternToMDBottomPatternSimpleSharedVarExpr
    enforce domain core mb:BottomPattern {
       assignment = a:PropertyAssignment {
          slotExpression = ve1:VariableExp{referredVariable = mvte},
-         targetProperty = tp:Property{name = pn, class = mvte.type.oclAsType(emof::Class)},
+         targetProperty = tp:Property{name = pn, _'class' = mvte.type.oclAsType(emof::Class)},
          value = ve2:VariableExp{referredVariable = mvpte}
       }
    };
@@ -1883,7 +1883,7 @@ relation RDomainPatternToMDBottomPatternSimpleNonVarExpr
    enforce domain core db:BottomPattern {
       assignment = a:PropertyAssignment {
          slotExpression = ve:VariableExp{referredVariable = mvte},
-         targetProperty = tp:Property{name = pn, class = mvte.type.oclAsType(emof::Class)},
+         targetProperty = tp:Property{name = pn, _'class' = mvte.type.oclAsType(emof::Class)},
          value = me:OclExpression{}
       }
    };
@@ -1906,7 +1906,7 @@ relation RDomainVarsToTraceClassProps
    enforce domain core mb:BottomPattern {
       assignment = a:PropertyAssignment {
          slotExpression = ve1:VariableExp{referredVariable = tcv},
-         targetProperty = tp:Property{name = dv.name, class = tcv.type.oclAsType(emof::Class)},
+         targetProperty = tp:Property{name = dv.name, _'class' = tcv.type.oclAsType(emof::Class)},
          value = ve2:VariableExp{referredVariable = mdv}
       }
    };
@@ -1932,7 +1932,7 @@ relation ROppositeDomainVarsToTraceClassProps
    enforce domain core mb:BottomPattern {
       assignment = a:PropertyAssignment {
          slotExpression = ve1:VariableExp{referredVariable = tcv},
-         targetProperty = tp:Property{name = dv.name, class = tcv.type.oclAsType(emof::Class)},
+         targetProperty = tp:Property{name = dv.name, _'class' = tcv.type.oclAsType(emof::Class)},
          value = ve2:VariableExp{referredVariable = mdv}
       }
    };

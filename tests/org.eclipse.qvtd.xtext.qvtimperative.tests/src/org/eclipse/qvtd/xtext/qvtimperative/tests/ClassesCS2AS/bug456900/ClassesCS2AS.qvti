@@ -22,10 +22,10 @@ map mCreationPackageCS2Package in classescs2as
 {
 	check leftCS(packageCS : PackageCS) {}
 	enforce rightAS() {
-		realize package : Package
+		realize _'package' : Package
 	}
 	where () {
-		packageCS.ast := package;
+		packageCS.ast := _'package';
 	}
 }
 

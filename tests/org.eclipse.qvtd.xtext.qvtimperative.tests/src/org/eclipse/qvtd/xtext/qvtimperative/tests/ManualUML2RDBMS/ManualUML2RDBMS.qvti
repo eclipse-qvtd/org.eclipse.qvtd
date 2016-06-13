@@ -127,7 +127,7 @@ map integerToNumberLM in ManualUML2RDBMS {
         p2s.umlPackage=p;
     ) {
         p2n.owner := p2s;
-        p2n.primitive := prim;
+        p2n._'primitive' := prim;
         p2n.name := prim.name + '2' + 'NUMBER';     
 		p2n.typeName := 'NUMBER';
     }
@@ -153,7 +153,7 @@ map booleanToBooleanLM in ManualUML2RDBMS {
         p2s.umlPackage=p;
     ) {
         p2n.owner := p2s;
-        p2n.primitive := prim;
+        p2n._'primitive' := prim;
         p2n.name := prim.name + '2' + 'BOOLEAN';
 		p2n.typeName := 'BOOLEAN';
     }
@@ -179,7 +179,7 @@ map stringToVarcharLM in ManualUML2RDBMS {
         p2s.umlPackage=p;
     ) {
         p2n.owner := p2s;
-        p2n.primitive := prim;
+        p2n._'primitive' := prim;
         p2n.name := prim.name + '2' + 'VARCHAR';
 		p2n.typeName := 'VARCHAR';
     }
@@ -199,7 +199,7 @@ query ManualUML2RDBMS::getAllSupers(cls : UML::Class) : Set(UML::Class) {
 }
 
 query ManualUML2RDBMS::getAllAttributes(cls :  UML::Class) : Set(UML::Attribute) {
-    getAllSupers(cls).attributes->asSet() -- ->collect(c | c.attribute)
+    getAllSupers(cls).attributes->asSet() -- ->collect(c | c._'attribute')
 }
     
 query ManualUML2RDBMS::getAllForwards(cls : UML::Class) : Set(UML::Association) {
@@ -436,7 +436,7 @@ map classPrimitiveAttributesLM in ManualUML2RDBMS {
     	fao.umlClass = c;
     
     ) {
-        atc.attribute := a;
+        atc._'attribute' := a;
         atc.owner := fao;
         atc.type := p2n;
         atc.kind := a.kind;
@@ -456,7 +456,7 @@ map classComplexAttributesLM in ManualUML2RDBMS {
         --getAllAttributes(c)->includes(a);
         fao.umlClass=c;
     ) {
-        fa.attribute := a;
+        fa._'attribute' := a;
         fa.owner := fao;
         fa.kind := a.kind;
         fa.name := a.name;
@@ -494,7 +494,7 @@ map complexAttributePrimitiveAttributesLM_1 in ManualUML2RDBMS {
      ) {
         fa.owner := fao_1;    
         fa.leafs := Set(AttributeToColumn) {fa};
-        fa.attribute := a_1;
+        fa._'attribute' := a_1;
         fa.type := p2n_1;
         fa.kind := a_1.kind;
         fa.name := ca_1.name + '_' + a_1.name;
@@ -531,10 +531,10 @@ map complexAttributeComplexAttributesLM_1 in ManualUML2RDBMS {
     ) {
         fa.owner := fao_1;    
         fa.leafs := fao_1.fromAttributes.leafs->asSet(); 
-        fa.attribute := a_1;
+        fa._'attribute' := a_1;
         fa.kind := a_1.kind;
         fa.name := ca_1.name + '_' + a_1.name;
---        fa.attribute := t_1;
+--        fa._'attribute' := t_1;
     }
 }
 
