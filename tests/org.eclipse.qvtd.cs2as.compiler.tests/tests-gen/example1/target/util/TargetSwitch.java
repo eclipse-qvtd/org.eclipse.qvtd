@@ -12,7 +12,6 @@
  */
 package example1.target.util;
 
-import example1.target.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;

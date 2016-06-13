@@ -9,23 +9,15 @@
 
 package example1.target.util;
 
-import example1.target.A2;
 import example1.target.C;
 import example1.target.TargetPackage;
 import example1.target.lookup.EnvironmentPackage;
 import example1.target.lookup.LookupEnvironment;
 import example1.target.util.AbstractTargetCommonLookupVisitor;
 import example1.target.util.Visitable;
-import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 

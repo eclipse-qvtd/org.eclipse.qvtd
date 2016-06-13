@@ -14,11 +14,7 @@ import example1.target.util.AbstractTargetCommonLookupVisitor;
 import example1.target.util.Visitable;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.IdManager;
-import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 public class TargetExportedLookupVisitor

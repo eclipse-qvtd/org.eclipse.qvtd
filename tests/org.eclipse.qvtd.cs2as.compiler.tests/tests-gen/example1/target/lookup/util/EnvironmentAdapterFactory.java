@@ -12,7 +12,6 @@
  */
 package example1.target.lookup.util;
 
-import example1.target.lookup.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
