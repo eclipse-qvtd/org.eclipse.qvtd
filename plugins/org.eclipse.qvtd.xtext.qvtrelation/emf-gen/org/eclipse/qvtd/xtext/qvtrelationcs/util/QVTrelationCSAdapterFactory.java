@@ -169,10 +169,6 @@ public class QVTrelationCSAdapterFactory extends AdapterFactoryImpl {
 				return createTransformationCSAdapter();
 			}
 			@Override
-			public Adapter caseUnitCS(UnitCS object) {
-				return createUnitCSAdapter();
-			}
-			@Override
 			public Adapter caseVarDeclarationCS(VarDeclarationCS object) {
 				return createVarDeclarationCSAdapter();
 			}
@@ -537,20 +533,6 @@ public class QVTrelationCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTransformationCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS <em>Unit CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS
-	 * @generated
-	 */
-	public Adapter createUnitCSAdapter() {
 		return null;
 	}
 

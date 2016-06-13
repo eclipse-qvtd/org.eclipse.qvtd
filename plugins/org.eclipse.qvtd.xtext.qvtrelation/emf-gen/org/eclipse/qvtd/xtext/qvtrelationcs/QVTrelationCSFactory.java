@@ -183,15 +183,6 @@ public interface QVTrelationCSFactory extends EFactory {
 	TransformationCS createTransformationCS();
 
 	/**
-	 * Returns a new object of class '<em>Unit CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unit CS</em>'.
-	 * @generated
-	 */
-	UnitCS createUnitCS();
-
-	/**
 	 * Returns a new object of class '<em>Var Declaration CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -140,11 +140,6 @@ public abstract class AbstractNullQVTrelationCSVisitor<@Nullable R, C>
 	}
 
 	@Override
-	public R visitUnitCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull UnitCS object) {
-		return null;
-	}
-
-	@Override
 	public R visitVarDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull VarDeclarationCS object) {
 		return null;
 	}

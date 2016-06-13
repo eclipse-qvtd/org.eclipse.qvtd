@@ -136,11 +136,6 @@ public abstract class AbstractDelegatingQVTrelationCSVisitor<R, C, @NonNull D ex
 	}
 
 	@Override
-	public R visitUnitCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull UnitCS object) {
-		return delegate.visitUnitCS(object);
-	}
-
-	@Override
 	public R visitVarDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull VarDeclarationCS object) {
 		return delegate.visitVarDeclarationCS(object);
 	}

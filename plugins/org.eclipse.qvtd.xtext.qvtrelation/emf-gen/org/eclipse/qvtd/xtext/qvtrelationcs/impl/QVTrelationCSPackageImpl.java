@@ -42,7 +42,6 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS;
 
@@ -192,13 +191,6 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	private EClass transformationCSEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass unitCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -846,18 +838,8 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getTopLevelCS_OwnedImportClauses() {
-		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getTopLevelCS_OwnedTransformations() {
-		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(1);
+		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -928,26 +910,6 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	@Override
 	public EReference getTransformationCS_OwnedRelations() {
 		return (EReference)transformationCSEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getUnitCS() {
-		return unitCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getUnitCS_Identifiers() {
-		return (EReference)unitCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1103,7 +1065,6 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		createEReference(templateVariableCSEClass, TEMPLATE_VARIABLE_CS__OWNED_TYPE);
 
 		topLevelCSEClass = createEClass(TOP_LEVEL_CS);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_IMPORT_CLAUSES);
 		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_TRANSFORMATIONS);
 
 		transformationCSEClass = createEClass(TRANSFORMATION_CS);
@@ -1113,9 +1074,6 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_PATH_NAME);
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_QUERIES);
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_RELATIONS);
-
-		unitCSEClass = createEClass(UNIT_CS);
-		createEReference(unitCSEClass, UNIT_CS__IDENTIFIERS);
 
 		varDeclarationCSEClass = createEClass(VAR_DECLARATION_CS);
 		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION);
@@ -1183,7 +1141,6 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		templateVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		topLevelCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());
 		transformationCSEClass.getESuperTypes().add(theBaseCSPackage.getClassCS());
-		unitCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		varDeclarationCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		varDeclarationIdCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 
@@ -1262,7 +1219,6 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEReference(getTemplateVariableCS_OwnedType(), theBaseCSPackage.getTypedRefCS(), null, "ownedType", null, 0, 1, TemplateVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(topLevelCSEClass, TopLevelCS.class, "TopLevelCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTopLevelCS_OwnedImportClauses(), this.getUnitCS(), null, "ownedImportClauses", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopLevelCS_OwnedTransformations(), this.getTransformationCS(), null, "ownedTransformations", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transformationCSEClass, TransformationCS.class, "TransformationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1272,9 +1228,6 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEReference(getTransformationCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_OwnedQueries(), this.getQueryCS(), null, "ownedQueries", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_OwnedRelations(), this.getRelationCS(), null, "ownedRelations", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(unitCSEClass, UnitCS.class, "UnitCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUnitCS_Identifiers(), thePivotPackage.getElement(), null, "identifiers", null, 1, -1, UnitCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(varDeclarationCSEClass, VarDeclarationCS.class, "VarDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVarDeclarationCS_OwnedInitExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInitExpression", null, 0, 1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

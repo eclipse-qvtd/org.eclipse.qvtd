@@ -144,11 +144,6 @@ public abstract class AbstractQVTrelationCSContainmentVisitor
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitUnitCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull UnitCS csElement) {
-		return visitModelElementCS(csElement);
-	}
-
-	@Override
 	public @Nullable Continuation<?> visitVarDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull VarDeclarationCS csElement) {
 		return visitModelElementCS(csElement);
 	}

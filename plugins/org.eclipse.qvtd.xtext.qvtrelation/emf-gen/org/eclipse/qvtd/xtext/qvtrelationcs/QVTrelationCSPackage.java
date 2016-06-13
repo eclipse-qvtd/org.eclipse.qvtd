@@ -2028,22 +2028,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int TOP_LEVEL_CS__OWNED_IMPORTS = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_IMPORTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Import Clauses</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOP_LEVEL_CS__OWNED_IMPORT_CLAUSES = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owned Transformations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__OWNED_TRANSFORMATIONS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 1;
+	int TOP_LEVEL_CS__OWNED_TRANSFORMATIONS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Top Level CS</em>' class.
@@ -2052,7 +2043,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS_FEATURE_COUNT = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 2;
+	int TOP_LEVEL_CS_FEATURE_COUNT = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl <em>Transformation CS</em>}' class.
@@ -2218,79 +2209,6 @@ public interface QVTrelationCSPackage extends EPackage {
 	int TRANSFORMATION_CS_FEATURE_COUNT = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.UnitCSImpl <em>Unit CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.UnitCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getUnitCS()
-	 * @generated
-	 */
-	int UNIT_CS = 20;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT_CS__CSI = BaseCSPackage.MODEL_ELEMENT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT_CS__PARENT = BaseCSPackage.MODEL_ELEMENT_CS__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT_CS__PIVOT = BaseCSPackage.MODEL_ELEMENT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT_CS__ORIGINAL_XMI_ID = BaseCSPackage.MODEL_ELEMENT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Identifiers</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT_CS__IDENTIFIERS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Unit CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl <em>Var Declaration CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2298,7 +2216,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getVarDeclarationCS()
 	 * @generated
 	 */
-	int VAR_DECLARATION_CS = 21;
+	int VAR_DECLARATION_CS = 20;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2389,7 +2307,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getVarDeclarationIdCS()
 	 * @generated
 	 */
-	int VAR_DECLARATION_ID_CS = 22;
+	int VAR_DECLARATION_ID_CS = 21;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -3052,17 +2970,6 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getTopLevelCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getOwnedImportClauses <em>Owned Import Clauses</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Import Clauses</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getOwnedImportClauses()
-	 * @see #getTopLevelCS()
-	 * @generated
-	 */
-	EReference getTopLevelCS_OwnedImportClauses();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getOwnedTransformations <em>Owned Transformations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3148,27 +3055,6 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTransformationCS_OwnedRelations();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS <em>Unit CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Unit CS</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS
-	 * @generated
-	 */
-	EClass getUnitCS();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS#getIdentifiers <em>Identifiers</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Identifiers</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS#getIdentifiers()
-	 * @see #getUnitCS()
-	 * @generated
-	 */
-	EReference getUnitCS_Identifiers();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS <em>Var Declaration CS</em>}'.
@@ -3732,14 +3618,6 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass TOP_LEVEL_CS = eINSTANCE.getTopLevelCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Import Clauses</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TOP_LEVEL_CS__OWNED_IMPORT_CLAUSES = eINSTANCE.getTopLevelCS_OwnedImportClauses();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Transformations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3804,24 +3682,6 @@ public interface QVTrelationCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSFORMATION_CS__OWNED_RELATIONS = eINSTANCE.getTransformationCS_OwnedRelations();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.UnitCSImpl <em>Unit CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.UnitCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtrelationcs.impl.QVTrelationCSPackageImpl#getUnitCS()
-		 * @generated
-		 */
-		EClass UNIT_CS = eINSTANCE.getUnitCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Identifiers</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference UNIT_CS__IDENTIFIERS = eINSTANCE.getUnitCS_Identifiers();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl <em>Var Declaration CS</em>}' class.

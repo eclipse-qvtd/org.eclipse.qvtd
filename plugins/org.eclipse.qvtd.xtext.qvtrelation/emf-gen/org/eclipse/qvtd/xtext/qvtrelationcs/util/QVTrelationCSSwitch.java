@@ -352,17 +352,6 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.UNIT_CS: {
-				UnitCS unitCS = (UnitCS)theEObject;
-				T result = caseUnitCS(unitCS);
-				if (result == null) result = caseModelElementCS(unitCS);
-				if (result == null) result = casePivotableElementCS(unitCS);
-				if (result == null) result = caseElementCS(unitCS);
-				if (result == null) result = casePivotable(unitCS);
-				if (result == null) result = caseVisitableCS(unitCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTrelationCSPackage.VAR_DECLARATION_CS: {
 				VarDeclarationCS varDeclarationCS = (VarDeclarationCS)theEObject;
 				T result = caseVarDeclarationCS(varDeclarationCS);
@@ -688,21 +677,6 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTransformationCS(TransformationCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unit CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unit CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnitCS(UnitCS object) {
 		return null;
 	}
 

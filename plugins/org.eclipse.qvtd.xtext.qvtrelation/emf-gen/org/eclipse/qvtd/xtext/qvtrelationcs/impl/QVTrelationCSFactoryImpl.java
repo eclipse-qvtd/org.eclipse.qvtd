@@ -34,7 +34,6 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS;
 
@@ -99,7 +98,6 @@ public class QVTrelationCSFactoryImpl extends EFactoryImpl implements QVTrelatio
 			case QVTrelationCSPackage.RELATION_CS: return createRelationCS();
 			case QVTrelationCSPackage.TOP_LEVEL_CS: return createTopLevelCS();
 			case QVTrelationCSPackage.TRANSFORMATION_CS: return createTransformationCS();
-			case QVTrelationCSPackage.UNIT_CS: return createUnitCS();
 			case QVTrelationCSPackage.VAR_DECLARATION_CS: return createVarDeclarationCS();
 			case QVTrelationCSPackage.VAR_DECLARATION_ID_CS: return createVarDeclarationIdCS();
 			default:
@@ -292,17 +290,6 @@ public class QVTrelationCSFactoryImpl extends EFactoryImpl implements QVTrelatio
 	public TransformationCS createTransformationCS() {
 		TransformationCSImpl transformationCS = new TransformationCSImpl();
 		return transformationCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public UnitCS createUnitCS() {
-		UnitCSImpl unitCS = new UnitCSImpl();
-		return unitCS;
 	}
 
 	/**

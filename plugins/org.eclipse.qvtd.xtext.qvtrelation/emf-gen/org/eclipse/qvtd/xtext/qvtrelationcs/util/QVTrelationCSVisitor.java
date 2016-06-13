@@ -43,7 +43,6 @@ public interface QVTrelationCSVisitor<R> extends org.eclipse.ocl.xtext.essential
 	R visitTemplateVariableCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TemplateVariableCS object);
 	R visitTopLevelCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TopLevelCS object);
 	R visitTransformationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull TransformationCS object);
-	R visitUnitCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull UnitCS object);
 	R visitVarDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull VarDeclarationCS object);
 	R visitVarDeclarationIdCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull VarDeclarationIdCS object);
 }

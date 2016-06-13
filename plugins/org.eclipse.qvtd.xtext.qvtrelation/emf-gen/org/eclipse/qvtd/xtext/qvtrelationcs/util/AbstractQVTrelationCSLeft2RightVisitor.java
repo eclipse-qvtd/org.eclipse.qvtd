@@ -144,11 +144,6 @@ public abstract class AbstractQVTrelationCSLeft2RightVisitor
 	}
 
 	@Override
-	public @Nullable Element visitUnitCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull UnitCS csElement) {
-		return visitModelElementCS(csElement);
-	}
-
-	@Override
 	public @Nullable Element visitVarDeclarationCS(org.eclipse.qvtd.xtext.qvtrelationcs.@NonNull VarDeclarationCS csElement) {
 		return visitModelElementCS(csElement);
 	}
