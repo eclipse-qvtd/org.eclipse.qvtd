@@ -19,13 +19,13 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
+import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCS2AS;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.xtext.qvtcorebase.cs2as.QVTcoreBaseCS2AS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 
-public class QVTimperativeCS2AS extends QVTcoreBaseCS2AS
+public class QVTimperativeCS2AS extends EssentialOCLCS2AS
 {	
     public static boolean isMiddle(org.eclipse.ocl.pivot.@Nullable Class areaType, @NonNull ElementCS csElement) {
     	if (areaType != null) {

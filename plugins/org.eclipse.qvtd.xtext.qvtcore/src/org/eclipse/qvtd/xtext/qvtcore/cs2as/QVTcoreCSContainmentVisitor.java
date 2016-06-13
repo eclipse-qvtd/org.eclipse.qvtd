@@ -10,29 +10,18 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.cs2as;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Import;
-import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
-import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
@@ -46,8 +35,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.util.AbstractQVTcoreCSContainmentVisitor;
@@ -57,65 +44,6 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 	public QVTcoreCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}	
-
-	protected void resolveTransformationMappings(@NonNull TopLevelCS csTopLevel) {
-		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
-		for (MappingCS csMapping : csTopLevel.getOwnedMappings()) {
-			PathNameCS csInPathName = csMapping.getOwnedInPathName();
-			if (csInPathName != null) {
-				Transformation asTransformation = lookupTransformation(csMapping, csInPathName, null);
-				if (asTransformation != null) {
-					Mapping asMapping = PivotUtil.getPivot(Mapping.class, csMapping);
-					if (asMapping != null) {
-						List<Mapping> asMappings = tx2mappings.get(asTransformation);
-						if (asMappings == null) {
-							asMappings = new ArrayList<Mapping>();
-							tx2mappings.put(asTransformation, asMappings);
-						}
-						asMappings.add(asMapping);
-					}
-				}
-			}
-		}
-		for (Transformation asTransformation : tx2mappings.keySet()) {
-			List<Mapping> asMappings = tx2mappings.get(asTransformation);
-			List<Rule> asRules = asTransformation.getRule();
-			if (asMappings != null) {
-				PivotUtilInternal.refreshList(asRules, asMappings);
-			}
-			else {
-				asRules.clear();
-			}
-		}
-	}
-
-	protected void resolveTransformationQueries(@NonNull TopLevelCS csTopLevel) {
-		Map<Transformation, List<Function>> tx2qMap = new HashMap<Transformation, List<Function>>();
-		for (QueryCS csQuery : csTopLevel.getOwnedQueries()) {
-			Transformation asTransformation = csQuery.getTransformation();
-			if (asTransformation != null) {
-				Function asQuery = PivotUtil.getPivot(Function.class,  csQuery);
-				if (asQuery != null) {
-					List<Function> asQueries = tx2qMap.get(asTransformation);
-					if (asQueries == null) {
-						asQueries = new ArrayList<Function>();
-						tx2qMap.put(asTransformation, asQueries);
-					}
-					asQueries.add(asQuery);
-				}
-			}
-		}
-		for (Transformation asTransformation : tx2qMap.keySet()) {
-			List<Function> asQueries = tx2qMap.get(asTransformation);
-			List<Operation> asOperations = asTransformation.getOwnedOperations();
-			if (asQueries != null) {
-				PivotUtilInternal.refreshList(asOperations, asQueries);
-			}
-			else {
-				asOperations.clear();
-			}
-		}
-	}
 
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
@@ -186,19 +114,17 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 	@Override
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 		importPackages(csElement);
-		@NonNull CoreModel asCoreModel = refreshRoot(CoreModel.class, QVTcorePackage.Literals.CORE_MODEL, csElement);
-		context.refreshPivotList(Import.class, asCoreModel.getOwnedImports(), csElement.getOwnedImports());
+		@NonNull CoreModel asModel = refreshRoot(CoreModel.class, QVTcorePackage.Literals.CORE_MODEL, csElement);
+		installPackageStructure(asModel, ClassUtil.nullFree(csElement.getOwnedPackages()), ClassUtil.nullFree(csElement.getOwnedTransformations()));
+		context.refreshPivotList(Import.class, asModel.getOwnedImports(), csElement.getOwnedImports());
 		//
 		Resource eResource = csElement.eResource();
 		if (eResource instanceof BaseCSResource) {
-			context.installRootElement((BaseCSResource)eResource, asCoreModel);		// Ensure containment viable for imported library type references
+			context.installRootElement((BaseCSResource)eResource, asModel);		// Ensure containment viable for imported library type references
 //			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}
-		List<@NonNull TransformationCS> csTransformations = ClassUtil.nullFree(csElement.getOwnedTransformations());
-		List<org.eclipse.ocl.pivot.@NonNull Package> asPackages = resolveTransformations(csTransformations, asCoreModel);
-		PivotUtilInternal.refreshList(asCoreModel.getOwnedPackages(), asPackages);
-		resolveTransformationMappings(csElement);
-		resolveTransformationQueries(csElement);
+		resolveTransformationMappings(ClassUtil.nullFree(csElement.getOwnedMappings()));
+		resolveTransformationQueries(ClassUtil.nullFree(csElement.getOwnedQueries()));
 		return null;
 	}
 }

@@ -10,11 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -22,20 +17,16 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.PrimitiveTypeRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
-import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -67,8 +58,6 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
@@ -240,22 +229,8 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 		importPackages(csElement);
 		@NonNull ImperativeModel asModel = refreshRoot(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, csElement);
+		installPackageStructure(asModel, ClassUtil.nullFree(csElement.getOwnedPackages()), ClassUtil.nullFree(csElement.getOwnedTransformations()));
 		context.refreshPivotList(Import.class, asModel.getOwnedImports(), csElement.getOwnedImports());
-		List<@NonNull TransformationCS> csTransformations = ClassUtil.nullFree(csElement.getOwnedTransformations());
-//		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
-		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
-		for (@NonNull TransformationCS csTransformation : csTransformations) {
-			Transformation pTransformation = PivotUtil.getPivot(Transformation.class, csTransformation);
-			tx2mappings.put(pTransformation, new ArrayList<Mapping>());
-//			txList.add(pTransformation);
-		}
-//		ImperativeModel asModel = PivotUtil.getPivot(ImperativeModel.class, csElement);
-//		if (asModel != null) {
-//			PivotUtil.refreshList(asModel.getOwnedTransformations(), txList);
-//		}
-//		List<TransformationCS> csTransformations = csElement.getTransformations();
-		List<org.eclipse.ocl.pivot.@NonNull Package> asPackages = resolveTransformations(csTransformations, asModel);
-		PivotUtilInternal.refreshList(asModel.getOwnedPackages(), asPackages);
 		//
 		Resource eResource = csElement.eResource();
 		if (eResource instanceof BaseCSResource) {
@@ -263,55 +238,12 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 //			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}
 		//
-		for (MappingCS csMapping : csElement.getOwnedMappings()) {
-			PathNameCS csInPathName = csMapping.getOwnedInPathName();
-			if (csInPathName != null) {
-				Transformation asTransformation = lookupTransformation(csMapping, csInPathName, null);
-				if (asTransformation != null) {
-					List<Mapping> mappings = tx2mappings.get(asTransformation);
-					if (mappings != null) {
-						Mapping pMapping = PivotUtil.getPivot(Mapping.class, csMapping);
-						if (pMapping != null) {
-							mappings.add(pMapping);
-						}
-					}
-				}
-			}
-		}
-		Map<Transformation, List<Function>> tx2qMap = new HashMap<Transformation, List<Function>>();
-		for (QueryCS csQuery : csElement.getOwnedQueries()) {
-			Transformation transformation = csQuery.getTransformation();
-			Function query = PivotUtil.getPivot(Function.class,  csQuery);
-			List<Function> queries = tx2qMap.get(transformation);
-			if (queries == null) {
-				queries = new ArrayList<Function>();
-				tx2qMap.put(transformation, queries);
-			}
-			queries.add(query);
-		}
-		for (Transformation pTransformation : tx2mappings.keySet()) {
-			PivotUtilInternal.refreshList(pTransformation.getRule(), tx2mappings.get(pTransformation));
-			List<Function> newElements = tx2qMap.get(pTransformation);
-			if (newElements != null) {
-				PivotUtilInternal.refreshList(pTransformation.getOwnedOperations(), newElements);
-			}
-			else {
-				pTransformation.getOwnedOperations().clear();
-			}
-		}
-//		context.refreshPivotList(Type.class, pivotElement.getOwnedType(), csElement.getOwnedType());
-//		context.refreshPivotList(org.eclipse.ocl.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
+		resolveTransformationMappings(ClassUtil.nullFree(csElement.getOwnedMappings()));
+		resolveTransformationQueries(ClassUtil.nullFree(csElement.getOwnedQueries()));
+//		context.addMappings(ClassUtil.nullFree(csElement.getOwnedMappings()));
+//		context.addQueries(ClassUtil.nullFree(csElement.getOwnedQueries()));
+//		context.installTransformationStructure();
 		return null;
-	}
-
-	@Override
-	public Continuation<?> visitTransformationCS( @NonNull TransformationCS csElement) {
-		Continuation<?> continuation = super.visitTransformationCS(csElement);
-		Transformation asTransformation = PivotUtil.getPivot(Transformation.class, csElement);
-		if (asTransformation != null) {
-			QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
-		}
-		return continuation;
 	}
 
 	@Override
