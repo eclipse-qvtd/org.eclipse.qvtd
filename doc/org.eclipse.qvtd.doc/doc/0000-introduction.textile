@@ -217,6 +217,44 @@ The Eclipse support for QVTc and QVTr supports declaration of transformations wi
 
 The package hierarchy declared for the Transformation is re-used to define the Java package hierarchy when Java code is generated from the Transformation.
 
+bc. 
+transformation org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm::HierarchicalStateMachine2FlatStateMachine(hier:hierMM, flat:flatMM)
+{
+    ...
+}
+
+Alternatively a package declaration may be used. This may also optionally define the package URI and/or namespace prefix.
+
+bc. 
+package org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm : nsPrefix = 'nsURI'
+{
+    transformation HierarchicalStateMachine2FlatStateMachine(hier:hierMM, flat:flatMM)
+    {
+        ...
+    }
+}
+
+h3(#Contextual Operations and Properties). Contextual Operations and Properties
+
+A *package* declaration may contain nested packages, classes or transformations. Within class declarations operations and properties may be declared analoguously to QVTo's contextual operatuions and properties, or to additional declarations from an imported Complete OCL document. The syntax is the same as OCLinECore which emulates typical OMG specification source text.
+
+bc. 
+package MyPackage
+{
+    class MyClass
+    {
+        operation op(p : String[1]) : String[1]
+        {
+            body: p.toUpper();
+        }
+        property name : String[1];
+    }
+    transformation MyTx(...)
+    {
+        ...
+    }
+}
+
 h3(#QVTc Middle Model). QVTc Middle Model
 
 The QVTc part of the specification is unclear as to how the middle metamodel is defined.
