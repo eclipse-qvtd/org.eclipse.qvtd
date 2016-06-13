@@ -20,6 +20,7 @@ import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.Mode
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.ObjectTemplateCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.PredicateCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.PrimitiveTypeDomainCSElements;
+import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.QualifiedPackageCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.QueryCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.RelationCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.ScopeNameCSElements;
@@ -128,6 +129,13 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5());
 	    }
 	    {
+		    QualifiedPackageCSElements a = f.getQualifiedPackageCSAccess();
+			c.setLinewrap(2).before(a.getPackageKeyword_0());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_5_0_0(), a.getRightCurlyBracketKeyword_5_0_2());
+			setBraces(c, a.getLeftCurlyBracketKeyword_5_0_0(), a.getRightCurlyBracketKeyword_5_0_2());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5_1());
+		}
+	    {
 	    	QueryCSElements a = f.getQueryCSAccess();
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_2());	
 			c.setNoSpace().before(a.getCommaKeyword_3_1_0());
@@ -195,6 +203,20 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_2(), a.getRightCurlyBracketKeyword_4());
 	    }
 	}
+	/*
+    {
+    	TransformationCSElements a = f.getTransformationCSAccess();
+		c.setNoSpace().around(a.getLeftParenthesisKeyword_3());	
+		c.setNoSpace().around(a.getLeftParenthesisKeyword_3());	
+		c.setNoSpace().before(a.getCommaKeyword_5_0());
+		c.setNoSpace().before(a.getRightParenthesisKeyword_6());	
+		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_8(), a.getRightCurlyBracketKeyword_11());
+		setBraces(c, a.getLeftCurlyBracketKeyword_8(), a.getRightCurlyBracketKeyword_11());
+		c.setLinewrap(2).between(a.getOwnedKeyDeclsAssignment_9(), a.getAlternatives_10());
+		c.setLinewrap(2).between(a.getAlternatives_10(), a.getAlternatives_10());
+	    c.setIndentation(a.getLeftParenthesisKeyword_3(), a.getRightParenthesisKeyword_6());
+    }
+ */
 
 	@Override
 	public QVTrelationGrammarAccess getGrammarAccess() {

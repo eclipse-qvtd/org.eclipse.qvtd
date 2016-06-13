@@ -17,6 +17,7 @@ import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.Guar
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.ImportCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.PredicateCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.PredicateOrAssignmentCSElements;
+import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.QualifiedPackageCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.QueryCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.ScopeNameCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.TransformationCSElements;
@@ -128,6 +129,13 @@ public class QVTcoreBaseFormatter extends AbstractEssentialOCLFormatter {
 
 	protected void configurePredicateOrAssignmentCS(FormattingConfig c, PredicateOrAssignmentCSElements a) {
 		setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
+	}
+	
+	protected void configureQualifiedPackageCS(FormattingConfig c, QualifiedPackageCSElements a) {
+		c.setLinewrap(2).before(a.getPackageKeyword_0());
+		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_5_0_0(), a.getRightCurlyBracketKeyword_5_0_2());
+		setBraces(c, a.getLeftCurlyBracketKeyword_5_0_0(), a.getRightCurlyBracketKeyword_5_0_2());
+		setNoSpaceLineWrap(c, a.getSemicolonKeyword_5_1());
 	}
 
 	protected void configureQueryCS(FormattingConfig c, QueryCSElements a) {
