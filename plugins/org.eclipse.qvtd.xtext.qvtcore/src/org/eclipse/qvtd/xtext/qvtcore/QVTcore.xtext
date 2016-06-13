@@ -21,7 +21,7 @@ import "platform:/resource/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore"
 
 TopLevelCS:
 	ownedImports+=ImportCS*
-	(ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
+	(ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
 ;
 	
 MappingCS: {MappingCS} isDefault?='default'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)?

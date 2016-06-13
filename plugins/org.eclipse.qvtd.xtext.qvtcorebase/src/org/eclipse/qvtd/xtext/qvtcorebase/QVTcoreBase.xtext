@@ -15,6 +15,7 @@ import "platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore" as pivot
 import "platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore" as base
 import "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore" as essentialocl
 import "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" as qvtbase
+import "platform:/resource/org.eclipse.qvtd.xtext.qvtbase/model/QVTbaseCS.ecore" as qvtbasecs
 import "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore" as qvtcorebase
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore"
 		
@@ -60,6 +61,15 @@ ImportCS returns base::ImportCS:
 	
 NamedDomainCS returns DomainCS: isCheck?='check'? isEnforce?='enforce'? direction=[qvtbase::TypedModel|UnrestrictedName]
 	ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS;
+
+QualifiedPackageCS returns qvtbasecs::QualifiedPackageCS:
+	'package' ownedPathName=ScopeNameCS? name=UnrestrictedName (':' nsPrefix=UnrestrictedName)? ('=' nsURI=URI)?
+	(('{'
+		(/* ownedAnnotations+=AnnotationElementCS | */ ownedPackages+=QualifiedPackageCS | ownedClasses+=(ClassCS | TransformationCS))*
+		'}')
+	|';'
+	)
+;
 	
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 

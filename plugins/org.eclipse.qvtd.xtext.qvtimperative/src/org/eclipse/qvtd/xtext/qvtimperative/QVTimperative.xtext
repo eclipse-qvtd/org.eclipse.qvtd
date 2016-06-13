@@ -22,7 +22,7 @@ import "platform:/resource/org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperat
 
 TopLevelCS:
 	ownedImports+=ImportCS*
-	(ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
+	(ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
 ;
 
 ConnectionStatementCS: targetVariable=[pivot::Variable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';

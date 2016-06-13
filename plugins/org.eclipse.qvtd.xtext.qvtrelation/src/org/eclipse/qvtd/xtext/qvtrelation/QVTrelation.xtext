@@ -21,7 +21,16 @@ import "platform:/resource/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationC
 
 TopLevelCS:
 	ownedImports+=UnitCS*
-	ownedTransformations+=TransformationCS*	
+	(ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS)*	
+;
+
+QualifiedPackageCS returns qvtbasecs::QualifiedPackageCS:
+	'package' ownedPathName=ScopeNameCS? name=UnrestrictedName (':' nsPrefix=UnrestrictedName)? ('=' nsURI=URI)?
+	(('{'
+		(/* ownedAnnotations+=AnnotationElementCS | */ ownedPackages+=QualifiedPackageCS | ownedClasses+=(ClassCS | TransformationCS))*
+		'}')
+	|';'
+	)
 ;
 		
 //UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
