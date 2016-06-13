@@ -25,7 +25,7 @@ public class QVTrelationStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.ocl.xtext.essentialocl.EssentialOCLStandaloneSetup.doSetup();
+		org.eclipse.qvtd.xtext.qvtbase.QVTbaseStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);

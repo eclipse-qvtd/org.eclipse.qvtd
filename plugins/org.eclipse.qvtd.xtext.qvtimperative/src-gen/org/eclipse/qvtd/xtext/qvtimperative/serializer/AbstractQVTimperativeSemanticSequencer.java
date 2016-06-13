@@ -14,14 +14,22 @@ import com.google.inject.Inject;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.ocl.xtext.basecs.AttributeCS;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
+import org.eclipse.ocl.xtext.basecs.DataTypeCS;
+import org.eclipse.ocl.xtext.basecs.EnumerationCS;
+import org.eclipse.ocl.xtext.basecs.EnumerationLiteralCS;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
 import org.eclipse.ocl.xtext.basecs.MultiplicityBoundsCS;
 import org.eclipse.ocl.xtext.basecs.MultiplicityStringCS;
+import org.eclipse.ocl.xtext.basecs.OperationCS;
+import org.eclipse.ocl.xtext.basecs.ParameterCS;
 import org.eclipse.ocl.xtext.basecs.PathElementCS;
 import org.eclipse.ocl.xtext.basecs.PathElementWithURICS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.PrimitiveTypeRefCS;
+import org.eclipse.ocl.xtext.basecs.ReferenceCS;
+import org.eclipse.ocl.xtext.basecs.StructuredClassCS;
 import org.eclipse.ocl.xtext.basecs.TemplateBindingCS;
 import org.eclipse.ocl.xtext.basecs.TemplateParameterSubstitutionCS;
 import org.eclipse.ocl.xtext.basecs.TemplateSignatureCS;
@@ -38,6 +46,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.CollectionTypeCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ContextCS;
 import org.eclipse.ocl.xtext.essentialoclcs.CurlyBracketedClauseCS;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
+import org.eclipse.ocl.xtext.essentialoclcs.ExpSpecificationCS;
 import org.eclipse.ocl.xtext.essentialoclcs.IfExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.IfThenExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.InfixExpCS;
@@ -111,6 +120,18 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == BaseCSPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case BaseCSPackage.ATTRIBUTE_CS:
+				sequence_AttributeCS(context, (AttributeCS) semanticObject); 
+				return; 
+			case BaseCSPackage.DATA_TYPE_CS:
+				sequence_DataTypeCS(context, (DataTypeCS) semanticObject); 
+				return; 
+			case BaseCSPackage.ENUMERATION_CS:
+				sequence_EnumerationCS(context, (EnumerationCS) semanticObject); 
+				return; 
+			case BaseCSPackage.ENUMERATION_LITERAL_CS:
+				sequence_EnumerationLiteralCS(context, (EnumerationLiteralCS) semanticObject); 
+				return; 
 			case BaseCSPackage.IMPORT_CS:
 				sequence_ImportCS(context, (ImportCS) semanticObject); 
 				return; 
@@ -134,6 +155,12 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 					return; 
 				}
 				else break;
+			case BaseCSPackage.OPERATION_CS:
+				sequence_OperationCS(context, (OperationCS) semanticObject); 
+				return; 
+			case BaseCSPackage.PARAMETER_CS:
+				sequence_ParameterCS(context, (ParameterCS) semanticObject); 
+				return; 
 			case BaseCSPackage.PATH_ELEMENT_CS:
 				if (rule == grammarAccess.getFirstPathElementCSRule()) {
 					sequence_FirstPathElementCS(context, (PathElementCS) semanticObject); 
@@ -180,6 +207,12 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 					return; 
 				}
 				else break;
+			case BaseCSPackage.REFERENCE_CS:
+				sequence_ReferenceCS(context, (ReferenceCS) semanticObject); 
+				return; 
+			case BaseCSPackage.STRUCTURED_CLASS_CS:
+				sequence_StructuredClassCS(context, (StructuredClassCS) semanticObject); 
+				return; 
 			case BaseCSPackage.TEMPLATE_BINDING_CS:
 				sequence_TemplateBindingCS(context, (TemplateBindingCS) semanticObject); 
 				return; 
@@ -211,8 +244,17 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 				sequence_TypeParameterCS(context, (TypeParameterCS) semanticObject); 
 				return; 
 			case BaseCSPackage.TYPED_TYPE_REF_CS:
-				sequence_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getTypedMultiplicityRefCSRule()) {
+					sequence_TypedMultiplicityRefCS_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getTypeRefCSRule()
+						|| rule == grammarAccess.getTypedRefCSRule()
+						|| rule == grammarAccess.getTypedTypeRefCSRule()) {
+					sequence_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject); 
+					return; 
+				}
+				else break;
 			case BaseCSPackage.WILDCARD_TYPE_REF_CS:
 				sequence_WildcardTypeRefCS(context, (WildcardTypeRefCS) semanticObject); 
 				return; 
@@ -258,6 +300,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 				return; 
 			case EssentialOCLCSPackage.CURLY_BRACKETED_CLAUSE_CS:
 				sequence_CurlyBracketedClauseCS(context, (CurlyBracketedClauseCS) semanticObject); 
+				return; 
+			case EssentialOCLCSPackage.EXP_SPECIFICATION_CS:
+				sequence_SpecificationCS(context, (ExpSpecificationCS) semanticObject); 
 				return; 
 			case EssentialOCLCSPackage.IF_EXP_CS:
 				sequence_IfExpCS(context, (IfExpCS) semanticObject); 
