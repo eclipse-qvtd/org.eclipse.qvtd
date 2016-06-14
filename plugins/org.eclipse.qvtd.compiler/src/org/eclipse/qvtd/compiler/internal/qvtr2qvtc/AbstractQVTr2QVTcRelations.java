@@ -35,7 +35,6 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.InvokedRelationToMappingForEnforcement.InvokedEnforceableRelationDomain2CoreMapping;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.VariablesAnalysis.RelationVariableAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -388,7 +387,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			this.cEnforcedGuardPattern = ClassUtil.nonNullState(cEnforcedDomain.getGuardPattern());
 			this.cEnforcedBottomPattern = ClassUtil.nonNullState(cEnforcedDomain.getBottomPattern());
 			//
-			this.variablesAnalysis = new VariablesAnalysis(qvtr2qvtc, cEnforcedDomain, traceClass, this instanceof InvokedEnforceableRelationDomain2CoreMapping);
+			this.variablesAnalysis = new VariablesAnalysis(qvtr2qvtc, rEnforcedDomain, cEnforcedDomain, traceClass, this instanceof InvokedEnforceableRelationDomain2CoreMapping);
 			this.cMiddleRealizedVariable = variablesAnalysis.getMiddleRealizedVariable();
 //			putTrace(cMiddleRealizedVariable, cMiddleBottomPattern);
 			//
@@ -406,11 +405,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			rAllOtherReferredVariables.removeAll(rUnsharedEnforcedDomainVariables);
 			//
 			for (Map.Entry<@NonNull Variable, @Nullable RelationDomain> entry : rWhenVariable2rDomain.entrySet()) {
-				Variable rWhenVariable = entry.getKey();
 				RelationDomain rWhenDomain = entry.getValue();
-				RelationVariableAnalysis variableAnalysis = variablesAnalysis.getVariableAnalysis(rWhenVariable);
 				if (rWhenDomain != null) {
-					variableAnalysis.setWhen(getCoreDomain(rWhenDomain));
+					variablesAnalysis.getVariableAnalysis(entry.getKey()).setWhen(getCoreDomain(rWhenDomain));
 				}
 			}
 			for (Map.Entry<@NonNull Variable, @Nullable RelationDomain> entry : rWhereVariable2rDomain.entrySet()) {
@@ -433,17 +430,19 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			for (Map.Entry<@NonNull Variable, @Nullable RelationDomain> entry : rWhenVariable2rDomain.entrySet()) {
 				Variable rWhenVariable = entry.getKey();
 				RelationDomain rWhenDomain = entry.getValue();
-				RelationVariableAnalysis variableAnalysis = variablesAnalysis.getVariableAnalysis(rWhenVariable);
+				VariableAnalysis variableAnalysis = variablesAnalysis.getVariableAnalysis(rWhenVariable);
 				if (rWhenDomain == null) {
 					OCLExpression rWhenInit = rWhenVariable.getOwnedInit();
 					if (rWhenInit != null) {
 						Set<@NonNull Variable> rReferredVariables = new HashSet<@NonNull Variable>();
 						VariablesAnalysis.gatherReferredVariables(rReferredVariables, rWhenInit);
 						for (Variable rReferredVariable : rReferredVariables) {
-							RelationVariableAnalysis referredVariableAnalysis = variablesAnalysis.basicGetVariableAnalysis(rReferredVariable);
+							VariableAnalysis referredVariableAnalysis = variablesAnalysis.basicGetVariableAnalysis(rReferredVariable);
 							if (referredVariableAnalysis != null) {
 								CorePattern corePattern = referredVariableAnalysis.getCorePattern();
-								variableAnalysis.setPredicate(ClassUtil.nonNullState(corePattern.getArea()));	// FIXME need QVTrDomainAnalayis
+								if (corePattern != null) {
+									variableAnalysis.setPredicate(ClassUtil.nonNullState(corePattern.getArea()));	// FIXME need QVTrDomainAnalayis
+								}
 								break;
 							}
 						}
@@ -452,18 +451,22 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 			//
 			QVTr2QVTc.VARIABLES.println(" In " + cMapping + "\n\t\t" + variablesAnalysis.toString().replace("\n", "\n\t\t"));
-			for (@NonNull RelationVariableAnalysis analysis : variablesAnalysis.getAnalyses()) {
+			for (@NonNull VariableAnalysis analysis : variablesAnalysis.getAnalyses()) {
 				Variable rVariable = analysis.getRelationVariable();
-				Variable cVariable = analysis.synthesize();
-				putTrace(cVariable, rVariable);
-			}
-			for (@NonNull RelationVariableAnalysis analysis : variablesAnalysis.getAnalyses()) {
-				Variable rVariable = analysis.getRelationVariable();
-				OCLExpression rOwnedInit = rVariable.getOwnedInit();
-				if (rOwnedInit != null) {
+				if (rVariable != null) {
 					Variable cVariable = analysis.getCoreVariable();
-					cVariable.setOwnedInit(mapExpression(rOwnedInit));
-//					variablesAnalysis.addConditionPredicate(analysis.getCorePattern(), createVariableExp(cVariable), mapExpression(rOwnedInit));
+					putTrace(cVariable, rVariable);
+				}
+			}
+			for (@NonNull VariableAnalysis analysis : variablesAnalysis.getAnalyses()) {
+				Variable rVariable = analysis.getRelationVariable();
+				if (rVariable != null) {
+					OCLExpression rOwnedInit = rVariable.getOwnedInit();
+					if (rOwnedInit != null) {
+						Variable cVariable = analysis.getCoreVariable();
+						cVariable.setOwnedInit(mapExpression(rOwnedInit));
+	//					variablesAnalysis.addConditionPredicate(analysis.getCorePattern(), createVariableExp(cVariable), mapExpression(rOwnedInit));
+					}
 				}
 			}
 		}
