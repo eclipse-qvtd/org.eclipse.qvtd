@@ -17,79 +17,76 @@ import flatMM : 'FlatStateMachine.ecore'::FlatStateMachine;
  * Transform a hierarchical StateMachine into a flat StateMachine.
  */
 package org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm {
-transformation HierarchicalStateMachine2FlatStateMachine(hier:hierMM, flat:flatMM)
-{
---	key hierMM::State {name};
---	key hierMM::Trans {name, fromState, toState};
---	key flatMM::State {name};
---	key flatMM::Trans {name, fromState, toState};
-
-	/**
-	 * Return the leafStates of a given hierarchicalState.
-	 */
-	query getLeafStates(hierarchicalState : hierMM::State) : Set(hierMM::State) {
-		hierarchicalState->closure(nestedStates)?->select(nestedStates->isEmpty())
-	}
-
-	/**
-	 *  Map each hierarchical StateMachine to a flat StateMachine
-	 */
-	top relation HierachicalStateMachine2FlatStateMachine {
-		domain hier hierarchicalStateMachine : StateMachine {
-			name = stateMachineName : String{}
-		};	   
-		enforce domain flat flatStateMachine : StateMachine {
-			name = stateMachineName
-		};
-	}   
-
-	/**
-	 *  Map each Leaf State to a Flat State in the corresponding StateMachine.
-	 */
-	top relation LeafState2FlatState {
-		domain hier leafState : State {
-			owningStateMachine = hierarchicalStateMachine : hierMM::StateMachine{},
-	   		name = stateName : String{}
-		} {leafState.nestedStates->isEmpty()};
-	   
-		enforce domain flat flatState : State {
-			owningStateMachine = flatStateMachine : StateMachine{},
-			name = stateName
-		};	
-		when {
-			HierachicalStateMachine2FlatStateMachine(hierarchicalStateMachine, flatStateMachine);
-		}
-	}   
-
-	/**
-	 *  Map each hierarchical Transition to a Flat Transition in the corresponding StateMachine
-	 *  for each combination of possible leaf end states
-	 */
-	top relation HierachicalTransition2FlatTransition
+	transformation HierarchicalStateMachine2FlatStateMachine(hier:hierMM, flat:flatMM)
 	{
-		leafFromStates : Set(hierMM::State) = hierarchicalFromState->closure(nestedStates)->select(nestedStates->isEmpty());
-		leafToStates : Set(hierMM::State) = hierarchicalToState->closure(nestedStates)->select(nestedStates->isEmpty());
-		leafFromState : hierMM::State;
-		leafToState : hierMM::State;
-		domain hier hierarchicalTransition : Transition {
-			owningStateMachine = hierarchicalStateMachine : StateMachine{},
-			name = transitionName : String{},
-			fromState = hierarchicalFromState : State{},
-			toState = hierarchicalToState : State{}
-		};	   
-		enforce domain flat flatTransition : Transition {
-			owningStateMachine = flatStateMachine : StateMachine{},
-			name = transitionName,
-			fromState = flatFromState : State{},
-			toState = flatToState : State{}
-		};		
-		when {
-			HierachicalStateMachine2FlatStateMachine(hierarchicalStateMachine, flatStateMachine);
-			LeafState2FlatState(leafFromState, flatFromState);
-			LeafState2FlatState(leafToState, flatToState);
-			leafFromStates->includes(leafFromState);
-			leafToStates->includes(leafToState);
+	--	key hierMM::State {name};
+	--	key hierMM::Trans {name, fromState, toState};
+	--	key flatMM::State {name};
+	--	key flatMM::Trans {name, fromState, toState};
+
+		/**
+		 * Return the leafStates of a given hierarchicalState.
+		 */
+		query getLeafStates(hierarchicalState : hierMM::State) : Set(hierMM::State) {
+			hierarchicalState->closure(nestedStates)?->select(nestedStates->isEmpty())
 		}
-	}   
-}
+
+		/**
+		 *  Map each hierarchical StateMachine to a flat StateMachine
+		 */
+		top relation HierachicalStateMachine2FlatStateMachine {
+			domain hier hierarchicalStateMachine : StateMachine {
+				name = stateMachineName : String{}
+			};	   
+			enforce domain flat flatStateMachine : StateMachine {
+				name = stateMachineName
+			};
+		}
+
+		/**
+		 *  Map each Leaf State to a Flat State in the corresponding StateMachine.
+		 */
+		top relation LeafState2FlatState {
+			domain hier leafState : State {
+				owningStateMachine = hierarchicalStateMachine : hierMM::StateMachine{},
+				name = stateName : String{}
+			} {leafState.nestedStates->isEmpty()};
+			enforce domain flat flatState : State {
+				owningStateMachine = flatStateMachine : StateMachine{},
+				name = stateName
+			};	
+			when {
+				HierachicalStateMachine2FlatStateMachine(hierarchicalStateMachine, flatStateMachine);
+			}
+		}
+
+		/**
+		 *  Map each hierarchical Transition to a Flat Transition in the corresponding StateMachine
+		 *  for each combination of possible leaf end states
+		 */
+		top relation HierachicalTransition2FlatTransition
+		{
+			leafFromState : hierMM::State;
+			leafToState : hierMM::State;
+			domain hier hierarchicalTransition : Transition {
+				owningStateMachine = hierarchicalStateMachine : StateMachine{},
+				name = transitionName : String{},
+				fromState = hierarchicalFromState : State{},
+				toState = hierarchicalToState : State{}
+			};
+			enforce domain flat flatTransition : Transition {
+				owningStateMachine = flatStateMachine : StateMachine{},
+				name = transitionName,
+				fromState = flatFromState : State{},
+				toState = flatToState : State{}
+			};
+			when {
+				HierachicalStateMachine2FlatStateMachine(hierarchicalStateMachine, flatStateMachine);
+				LeafState2FlatState(leafFromState, flatFromState);
+				LeafState2FlatState(leafToState, flatToState);
+				this.getLeafStates(hierarchicalFromState)->includes(leafFromState);
+				this.getLeafStates(hierarchicalToState)->includes(leafToState);
+			}
+		}
+	}
 }
