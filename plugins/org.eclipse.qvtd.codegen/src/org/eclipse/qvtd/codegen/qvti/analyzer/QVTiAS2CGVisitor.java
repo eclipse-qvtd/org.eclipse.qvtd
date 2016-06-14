@@ -634,6 +634,9 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			analyzer.setNames(cgFunctionParameter, asFunctionParameter);
 			setAst(cgFunctionParameter, asFunctionParameter);
 			cgFunctionParameter.setTypeId(analyzer.getTypeId(asFunctionParameter.getTypeId()));
+			if (asFunctionParameter.isIsRequired()) {
+				cgFunctionParameter.setNonNull();
+			}
 			addParameter(asFunctionParameter, cgFunctionParameter);
 		}
 		return cgFunctionParameter;

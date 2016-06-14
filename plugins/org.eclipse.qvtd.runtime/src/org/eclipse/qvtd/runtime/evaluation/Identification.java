@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
-import org.eclipse.jdt.annotation.NonNull;
-
 /** 
  * An Identification identifies a unique object with its bound values. This is used to support
  * - a function cache which associates a result with its arguments.
@@ -23,7 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public interface Identification extends Occurrence
 {
-	@NonNull Object getInstance();
+//	@NonNull Object getInstance();
 	
 	public interface Incremental extends Identification, Occurrence.Incremental
 	{
