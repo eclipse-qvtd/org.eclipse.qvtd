@@ -308,6 +308,13 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 			}
+			for (@NonNull Edge edge : node.getIncomingEdges()) {
+				EdgeRole edgeRole = edge.getEdgeRole();
+				if (edgeRole.isResult()) {
+					OCLExpression source = create(edge.getSource());
+					return source;
+				}
+			}
 			return null;
 		}
 
@@ -1287,7 +1294,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					bottomPattern.getAssignment().add(propertyAssignment);
 				}
 				else {
-					System.err.println("No assignment in " + this + " to " + slotVariableExp);
+					System.err.println("No assignment in " + this + " to " + slotVariableExp + "." + property);
 				}
 			}
 			else {
