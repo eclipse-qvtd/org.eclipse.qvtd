@@ -31,8 +31,9 @@ public abstract class AbstractSimpleNode extends AbstractNode implements SimpleN
 
 	@Override
 	public void addTypedElement(@NonNull TypedElement typedElement) {
-		boolean wasAdded = typedElements.add(typedElement);
-		assert wasAdded;
+		if (!typedElements.contains(typedElement)) {
+			typedElements.add(typedElement);
+		}
 	}
 
 	@Override
