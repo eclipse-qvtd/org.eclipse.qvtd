@@ -49,7 +49,6 @@ import org.eclipse.ocl.xtext.basecs.PathElementCS;
 import org.eclipse.ocl.xtext.basecs.PathElementWithURICS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
-import org.eclipse.ocl.xtext.essentialocl.as2cs.EssentialOCLDeclarationVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -74,6 +73,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
+import org.eclipse.qvtd.xtext.qvtbase.as2cs.QVTbaseDeclarationVisitor;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
@@ -92,7 +92,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
 
-public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarationVisitor implements QVTcoreBaseVisitor<ElementCS>
+public abstract class QVTcoreBaseDeclarationVisitor extends QVTbaseDeclarationVisitor implements QVTcoreBaseVisitor<ElementCS>
 {
 	public static @Nullable PathNameCS createPathNameCS(@Nullable List<? extends @NonNull NamedElement> csPath) {
 		PathNameCS csPathName = null;
@@ -346,10 +346,8 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 
 	@Override
 	public ElementCS visitFunction(@NonNull Function asFunction) {
-		QueryCS csQuery = context.refreshNamedElement(QueryCS.class, QVTcoreBaseCSPackage.Literals.QUERY_CS, asFunction);
-		csQuery.setPivot(asFunction);
+		QueryCS csQuery = refreshTypedElement(QueryCS.class, QVTcoreBaseCSPackage.Literals.QUERY_CS, asFunction);
 		csQuery.setOwnedPathName(createPathNameCS(asFunction.getOwningClass()));
-		csQuery.setOwnedType(createTypeRefCS(asFunction.getType()));
 		context.refreshList(csQuery.getOwnedParameters(), context.visitDeclarations(ParamDeclarationCS.class, asFunction.getOwnedParameters(), null));
 		csQuery.setOwnedExpression(createExpCS(asFunction.getQueryExpression()));
 		return csQuery;
@@ -357,16 +355,13 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 
 	@Override
 	public ElementCS visitFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
-		ParamDeclarationCS csParamDeclaration = context.refreshNamedElement(ParamDeclarationCS.class, QVTcoreBaseCSPackage.Literals.PARAM_DECLARATION_CS, asFunctionParameter);
-		csParamDeclaration.setPivot(asFunctionParameter);
-		csParamDeclaration.setOwnedType(createTypeRefCS(asFunctionParameter.getType()));
+		ParamDeclarationCS csParamDeclaration = refreshTypedElement(ParamDeclarationCS.class, QVTcoreBaseCSPackage.Literals.PARAM_DECLARATION_CS, asFunctionParameter);
 		return csParamDeclaration;
 	}
 
 	@Override
 	public ElementCS visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
 		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTcoreBaseCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asNavigationAssignment);
-		csAssignment.setPivot(asNavigationAssignment);
 		ExpCS csSlotExp = createExpCS(asNavigationAssignment.getSlotExpression());
 		NameExpCS csPropName = createNameExpCS(QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment));
 		csAssignment.setOwnedTarget(createInfixExpCS(csSlotExp, ".", csPropName));
@@ -431,9 +426,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 
 	@Override
 	public ElementCS visitRealizedVariable(@NonNull RealizedVariable asRealizedVariable) {
-		RealizedVariableCS csRealizedVariable = context.refreshNamedElement(RealizedVariableCS.class, QVTcoreBaseCSPackage.Literals.REALIZED_VARIABLE_CS, asRealizedVariable);
-		csRealizedVariable.setPivot(asRealizedVariable);
-		csRealizedVariable.setOwnedType(createTypeRefCS(asRealizedVariable.getType(), getScope(asRealizedVariable)));
+		RealizedVariableCS csRealizedVariable = refreshTypedElement(RealizedVariableCS.class, QVTcoreBaseCSPackage.Literals.REALIZED_VARIABLE_CS, asRealizedVariable);
 		return csRealizedVariable;
 	}
 
@@ -445,7 +438,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	@Override
 	public ElementCS visitTransformation(@NonNull Transformation asTransformation) {
 		TransformationCS csTransformation = context.refreshNamedElement(TransformationCS.class, QVTcoreBaseCSPackage.Literals.TRANSFORMATION_CS, asTransformation);
-		csTransformation.setPivot(asTransformation);
+//		csTransformation.setPivot(asTransformation);
 //		org.eclipse.ocl.pivot.Package owningPackage = asTransformation.getOwningPackage();
 //		if ((owningPackage == null) || "".equals(owningPackage.getName()) || (owningPackage.getName() == null)) {
 //			csTransformation.setOwnedPathName(null);
@@ -465,7 +458,6 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		if ("".equals(asTypedModel.getName())) {
 			csDirection.setName(null);
 		}	
-		csDirection.setPivot(asTypedModel);
 		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
 //		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
 		return csDirection;
@@ -506,9 +498,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	@Override
 	public ElementCS visitVariable(@NonNull Variable asVariable) {
 		if (asVariable.eContainer() instanceof CorePattern) {
-			UnrealizedVariableCS csUnrealizedVariable = context.refreshNamedElement(UnrealizedVariableCS.class, QVTcoreBaseCSPackage.Literals.UNREALIZED_VARIABLE_CS, asVariable);
-			csUnrealizedVariable.setPivot(asVariable);
-			csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), getScope(asVariable)));
+			UnrealizedVariableCS csUnrealizedVariable = refreshTypedElement(UnrealizedVariableCS.class, QVTcoreBaseCSPackage.Literals.UNREALIZED_VARIABLE_CS, asVariable);
 			csUnrealizedVariable.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedInit()));
 			return csUnrealizedVariable;
 		}
@@ -520,7 +510,6 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	@Override
 	public ElementCS visitVariableAssignment(@NonNull VariableAssignment asVariableAssignment) {
 		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTcoreBaseCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asVariableAssignment);
-		csAssignment.setPivot(asVariableAssignment);
 		Variable asVariable = asVariableAssignment.getTargetVariable();
 		if (asVariable != null) {
 			csAssignment.setOwnedTarget(createNameExpCS(asVariable));

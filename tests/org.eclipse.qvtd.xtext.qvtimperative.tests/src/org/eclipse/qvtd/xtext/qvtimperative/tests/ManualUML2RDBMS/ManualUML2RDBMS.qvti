@@ -194,15 +194,15 @@ map stringToVarcharMR in ManualUML2RDBMS {
     ) {}
 }
 
-query ManualUML2RDBMS::getAllSupers(cls : UML::Class) : Set(UML::Class) {
+query ManualUML2RDBMS::getAllSupers(cls : UML::Class[1]) : Set(UML::Class) {
     cls.general->collect(gen | getAllSupers(gen))->including(cls)->asSet()
 }
 
-query ManualUML2RDBMS::getAllAttributes(cls :  UML::Class) : Set(UML::Attribute) {
+query ManualUML2RDBMS::getAllAttributes(cls :  UML::Class[1]) : Set(UML::Attribute) {
     getAllSupers(cls).attributes->asSet() -- ->collect(c | c._'attribute')
 }
     
-query ManualUML2RDBMS::getAllForwards(cls : UML::Class) : Set(UML::Association) {
+query ManualUML2RDBMS::getAllForwards(cls : UML::Class[1]) : Set(UML::Association) {
     getAllSupers(cls).forward->asSet()
 }
 
