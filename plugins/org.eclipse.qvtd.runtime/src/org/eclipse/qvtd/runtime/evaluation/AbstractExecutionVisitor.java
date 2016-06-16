@@ -31,7 +31,7 @@ public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisito
 	}
 
 	@Override
-	public R visitValueOccurrence(@NonNull Computation object) {
+	public R visitComputation(@NonNull Computation object) {
 		return visiting(object);
 	}
 

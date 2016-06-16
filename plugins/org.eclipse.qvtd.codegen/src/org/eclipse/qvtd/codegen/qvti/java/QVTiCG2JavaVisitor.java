@@ -732,9 +732,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doFunctionGetInstance(@NonNull CGFunction cgFunction, @NonNull String instanceName) {
 		js.append("public ");
-		js.append("Object");
+		js.appendIsRequired(false);
+		js.append(" Object");
 //		js.appendTypeDeclaration(ClassUtil.nonNullState(cgFunction.getBody()));
-		js.append(" getInstance() {\n");
+		js.append(" getResult() {\n");
 		js.pushIndentation(null);
 			js.append("return " + instanceName + ";\n");
 		js.popIndentation();

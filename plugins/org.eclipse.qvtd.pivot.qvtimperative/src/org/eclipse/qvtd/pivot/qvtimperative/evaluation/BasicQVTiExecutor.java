@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -23,6 +24,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
@@ -33,12 +37,16 @@ import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
+import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
+import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.NullValue;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -349,6 +357,38 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		}
 		return transformationAnalysis2;
 	}
+
+	protected @Nullable Object internalExecuteFunctionCallExp(@NonNull OperationCallExp operationCallExp,
+			@NonNull Function referredFunction, @Nullable Object @NonNull [] boxedSourceAndArgumentValues) {
+//		PivotUtil.checkExpression(expressionInOCL);
+		EvaluationEnvironment nestedEvaluationEnvironment = pushEvaluationEnvironment(referredFunction, operationCallExp);
+//		nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(expressionInOCL.getOwnedContext()), sourceValue);
+		List<Parameter> parameters = referredFunction.getOwnedParameters();
+		if (!parameters.isEmpty()) {
+			for (int i = 0; i < parameters.size(); i++) {
+				Object value = boxedSourceAndArgumentValues[i+1];
+				nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(parameters.get(i)), value);
+			}
+		}
+		try {
+			OCLExpression bodyExpression = referredFunction.getQueryExpression();
+			assert bodyExpression != null;
+			Object result = evaluate(bodyExpression);
+			assert !(result instanceof NullValue);
+			return result;
+		}
+		catch (InvalidValueException e) {
+			throw e;
+		}
+		catch (Exception e) {
+			// This is a backstop. Library operations should catch their own exceptions
+			//  and produce a better reason as a result.
+			throw new InvalidValueException(e, PivotMessagesInternal.FailedToEvaluate_ERROR_, referredFunction, ILabelGenerator.Registry.INSTANCE.labelFor(null), operationCallExp);
+		}
+		finally {
+			popEvaluationEnvironment();
+		}
+	}
 	
 	@Override
 	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor) {
@@ -411,6 +451,18 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex(navigationAssignment);
 		if (cacheIndex != null) {
 			modelManager.setUnnavigableOpposite(cacheIndex, slotObject, ecoreValue);
+		}
+	}
+
+	@Override
+	public @Nullable Object internalExecuteOperationCallExp(@NonNull OperationCallExp operationCallExp,
+			@Nullable Object @NonNull [] boxedSourceAndArgumentValues) {
+		Operation referredOperation = operationCallExp.getReferredOperation();
+		if (referredOperation instanceof Function) {
+			return internalExecuteFunctionCallExp(operationCallExp, (Function)referredOperation, boxedSourceAndArgumentValues);
+		}
+		else {
+			return super.internalExecuteOperationCallExp(operationCallExp, boxedSourceAndArgumentValues);
 		}
 	}
 

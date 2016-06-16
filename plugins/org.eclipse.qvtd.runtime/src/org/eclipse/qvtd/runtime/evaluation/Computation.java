@@ -24,7 +24,9 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
  * @since 1.1
  */
 public interface Computation extends ExecutionVisitable
-{
+{	
+	@Nullable Object getResult();
+	
 	/**
 	 * Return true if this is a computation from thoseValues.
 	 */

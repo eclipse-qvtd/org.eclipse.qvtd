@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NavigationCallExp;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
@@ -25,6 +27,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
@@ -33,13 +36,16 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.evaluation.Computation;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.internal.evaluation.AbstractComputationConstructor;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationConstructor;
 import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalInvocationManager;
 import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalObjectManager;
@@ -70,6 +76,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	protected final @NonNull ObjectManager objectManager;
 	private Invocation.@Nullable Incremental currentInvocation = null;
 	private @Nullable Map<@NonNull Mapping, Invocation.@NonNull Constructor> mapping2invocationConstructor = null;
+	private @Nullable Map<@NonNull Operation, Computation.@NonNull Constructor> operation2computationConstructor = null;
 	
 	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull Mode mode) {
 		super(environmentFactory, transformation);
@@ -87,6 +94,56 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		String string = execution2GraphVisitor.toString();
 		assert string != null;
 		return string;
+	}
+
+	@Override
+	protected @Nullable Object internalExecuteFunctionCallExp(@NonNull OperationCallExp operationCallExp,
+			@NonNull Function asFunction, @Nullable Object @NonNull [] boxedSourceAndArgumentValues) {
+		Map<@NonNull Operation, Computation.@NonNull Constructor> operation2computationConstructor2 = operation2computationConstructor;
+		if (operation2computationConstructor2 == null) {
+			operation2computationConstructor = operation2computationConstructor2 = new HashMap<@NonNull Operation, Computation.@NonNull Constructor>();
+		}
+		Computation.Constructor computationConstructor = operation2computationConstructor2.get(asFunction);
+		if (computationConstructor == null) {
+			computationConstructor = new AbstractComputationConstructor(idResolver)
+			{
+				@Override
+				public @NonNull Computation newInstance(@Nullable Object @NonNull [] theseValues) {
+					Computation.Incremental computation = new AbstractComputation.Incremental()
+					{
+						protected Object result = QVTiIncrementalExecutor.super.internalExecuteFunctionCallExp(operationCallExp, asFunction, theseValues);
+
+						@Override
+						public @Nullable Object getResult() {
+							return result;
+						}
+						
+						@Override
+						public boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues) {
+							int iMax = thoseValues.length;
+							if (iMax != theseValues.length) {
+								return false;
+							}
+							for (int i = 0; i < iMax; i++) {
+								if (!ClassUtil.safeEquals(theseValues[i], thoseValues[i])) {
+									return false;
+								}
+							}
+							return true;
+						}
+
+						@Override
+						public String toString() {
+							return operationCallExp.getReferredOperation().getName() + "@" + Integer.toHexString(System.identityHashCode(this));
+						}
+					};
+					return computation;
+				}
+			};
+			operation2computationConstructor2.put(asFunction, computationConstructor);
+		}
+		Computation computation = computationConstructor.getUniqueComputation(boxedSourceAndArgumentValues);
+		return computation.getResult();		
 	}
 
 	@Override

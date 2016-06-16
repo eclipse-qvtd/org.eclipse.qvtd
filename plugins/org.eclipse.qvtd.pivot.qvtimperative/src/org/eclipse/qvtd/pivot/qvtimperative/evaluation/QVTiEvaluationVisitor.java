@@ -18,26 +18,15 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
-import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationVisitor;
-import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
-import org.eclipse.ocl.pivot.labels.ILabelGenerator;
-import org.eclipse.ocl.pivot.library.AbstractOperation;
-import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.CollectionValue.Accumulator;
-import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.NullValue;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -79,51 +68,6 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
  */
 public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQVTiEvaluationVisitor
 {
-	public class FunctionOperation extends AbstractOperation
-	{
-		protected final @NonNull Function function;
-		
-		public FunctionOperation(@NonNull Function function) {
-			this.function = function;
-		}
-		
-		/**
-		 * @since 1.1
-		 */
-		@Override
-		public @Nullable Object dispatch(@NonNull Executor executor, @NonNull OperationCallExp callExp, @Nullable Object sourceValue) {
-			List<? extends OCLExpression> arguments = callExp.getOwnedArguments();
-			@Nullable Object[] argumentValues = new @Nullable Object[arguments.size()];
-			for (int i = 0; i < arguments.size(); i++) {
-				OCLExpression argument = arguments.get(i);
-				assert argument != null;
-				argumentValues[i] = executor.evaluate(argument);
-			}
-			return evaluate(executor, callExp, sourceValue, argumentValues);
-		}
-
-		@Override
-		public @Nullable Object evaluate(@NonNull Executor executor, @NonNull OperationCallExp callExp, @Nullable Object sourceValue, @Nullable Object @NonNull ... argumentValues) {
-//			PivotUtil.checkExpression(expressionInOCL);
-			EvaluationEnvironment nestedEvaluationEnvironment = executor.pushEvaluationEnvironment(function, callExp);
-//			nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(expressionInOCL.getOwnedContext()), sourceValue);
-			List<Parameter> parameters = function.getOwnedParameters();
-			if (!parameters.isEmpty()) {
-				for (int i = 0; i < parameters.size(); i++) {
-					Object value = argumentValues[i];
-					nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(parameters.get(i)), value);
-				}
-			}
-			try {
-				OCLExpression bodyExpression = function.getQueryExpression();
-				assert bodyExpression != null;
-				return executor.evaluate(bodyExpression);
-			}
-			finally {
-				executor.popEvaluationEnvironment();
-			}
-		}
-	}//	private static final Logger logger = Logger.getLogger(QVTiAbstractEvaluationVisitor.class);
 	protected final @NonNull QVTiExecutor executor;			// FIXME fold into templated context
         
     /**
@@ -374,31 +318,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		}
         return true;
 	}
-
-	@Override
-	public Object visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
-		Operation referredOperation = operationCallExp.getReferredOperation();
-		if (referredOperation instanceof Function) {
-			Function function = (Function)referredOperation;
-			LibraryOperation.LibraryOperationExtension implementation = new FunctionOperation(function);
-			try {
-				Object result = implementation.dispatch(context, operationCallExp, null);
-				assert !(result instanceof NullValue);
-				return result;
-			}
-			catch (InvalidValueException e) {
-				throw e;
-			}
-			catch (Exception e) {
-				// This is a backstop. Library operations should catch their own exceptions
-				//  and produce a better reason as a result.
-				throw new InvalidValueException(e, PivotMessagesInternal.FailedToEvaluate_ERROR_, function, ILabelGenerator.Registry.INSTANCE.labelFor(null), operationCallExp);
-			}
-		}
-		else {
-			return super.visitOperationCallExp(operationCallExp);
-		}
-	}
     
     @Override
 	public @Nullable Object visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment navigationAssignment) {
@@ -439,7 +358,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitPredicate(@NonNull Predicate predicate) {
-        
         // Each predicate has a conditionExpression that is an OCLExpression
         OCLExpression exp = predicate.getConditionExpression();
         // The predicated is visited with a nested environment
