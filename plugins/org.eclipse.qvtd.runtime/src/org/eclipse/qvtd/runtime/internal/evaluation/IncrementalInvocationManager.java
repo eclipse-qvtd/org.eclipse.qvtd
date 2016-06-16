@@ -12,6 +12,7 @@ package org.eclipse.qvtd.runtime.internal.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
@@ -35,6 +36,10 @@ public class IncrementalInvocationManager extends AbstractInvocationManager
 	private @Nullable AbstractInvocationInternal waitingInvocations = null;	
 
 	protected final boolean debugTracing = AbstractTransformer.INVOCATIONS.isActive();
+
+	public IncrementalInvocationManager(@NonNull IdResolver idResolver) {
+		super(idResolver);
+	}
     
 	private synchronized void block(@NonNull Invocation invocation, @NonNull SlotState slotState) {
 		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;

@@ -100,7 +100,8 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		this.mode = mode;
 		this.transformationAnalysis = getModelManager().getTransformationAnalysis();
 		boolean isLazy = mode == Mode.LAZY;
-		this.invocationManager = isLazy ? new LazyInvocationManager() : new IncrementalInvocationManager();
+		IdResolver idResolver = environmentFactory.getIdResolver();
+		this.invocationManager = isLazy ? new LazyInvocationManager(idResolver) : new IncrementalInvocationManager(idResolver);
 		this.objectManager = isLazy ? new LazyObjectManager((LazyInvocationManager)invocationManager) : new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
 	}
 

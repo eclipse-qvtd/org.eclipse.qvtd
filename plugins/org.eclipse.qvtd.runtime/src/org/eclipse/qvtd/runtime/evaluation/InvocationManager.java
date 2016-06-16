@@ -10,7 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
+import java.lang.reflect.Constructor;
+
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An InvocationManager supervises the invocations of mappings, inhibiting re-executions and
@@ -21,7 +24,13 @@ import org.eclipse.jdt.annotation.NonNull;
  * @noimplement clients should derive from AbstractInvocationManager
  */
 public interface InvocationManager extends ExecutionVisitable
-{
+{	
+    /**
+     * Create or reuse the unique occurrence object, created by constructor and parameterized by argValues.
+     * @throws ReflectiveOperationException 
+     */
+	<T extends Occurrence> @NonNull T createFirst(@NonNull Object constructorThis, @NonNull Constructor<? extends T> constructor, @Nullable Object @NonNull [] argValues) throws ReflectiveOperationException;
+
 	boolean flush() throws ReflectiveOperationException;
     void invoke(@NonNull Invocation invocation, boolean doFlush) throws ReflectiveOperationException;
     void unblock(@NonNull Invocation invocation);

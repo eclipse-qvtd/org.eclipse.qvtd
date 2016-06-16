@@ -45,7 +45,6 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable;
 import org.eclipse.qvtd.runtime.evaluation.Identification;
-import org.eclipse.qvtd.runtime.evaluation.Occurrence;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
@@ -331,30 +330,24 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	 * models.
 	 */
 	private final @Nullable Map<@NonNull ClassId, @NonNull Set<@NonNull Integer>> classId2classIndexes;
-	
-	/**
-	 * Map from occurrence identity to one or more occurrences with that identity. Single map entries use the
-	 * Occurence directly as the entry. Colliding entries use a List<Occurence> for the collisions.
-	 * <br>
-	 * This map is used to inhibit repeated occurrences of the occurrenceId.
-	 */
-	private final @NonNull Map<@NonNull Integer, @NonNull Object> occurrenceId2occurrence = new HashMap<@NonNull Integer, @NonNull Object>();
 
 	/**
 	 * Manager for the blocked and unblocked invocations.
 	 */
-	protected final @NonNull InvocationManager invocationManager = createInvocationManager();
+	protected final @NonNull InvocationManager invocationManager;
 
 	/**
 	 * Manager for the auxiliary object and property state.
 	 */
-	protected final @NonNull ObjectManager objectManager = createObjectManager();
+	protected final @NonNull ObjectManager objectManager;
 	
 	protected AbstractTransformerInternal(@NonNull Executor executor, @NonNull String @NonNull [] modelNames,
 			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @Nullable [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
 		this.executor = executor;
 		this.evaluator = executor;
 		this.idResolver = (IdResolver.IdResolverExtension)executor.getIdResolver();
+		this.invocationManager = createInvocationManager();
+		this.objectManager = createObjectManager();
 		this.models = new @NonNull Model @NonNull [modelNames.length];
 		for (int i = 0; i < modelNames.length; i++) {
 			String modelName = modelNames[i];
@@ -423,59 +416,12 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
     	}
     	models[modelIndex].addRootObjects(eRootObjects);
 	}
-	
-    /**
-     * Create or reuse the unique occurrence object, created by constructor and parameterized by argValues.
-     * @throws ReflectiveOperationException 
-     */
-    private <T extends Occurrence> @NonNull T createFirst(@NonNull Constructor<? extends T> constructor, @Nullable Object... argValues) throws ReflectiveOperationException {
-    	Class<? extends T> occurrenceClass = constructor.getDeclaringClass();
-    	assert occurrenceClass != null;
-		int hashCode = System.identityHashCode(occurrenceClass);
-    	for (@Nullable Object argValue : argValues) {
-    		hashCode = 3 * hashCode + idResolver.oclHashCode(argValue);
-    	}
-    	Object zeroOrMoreOccurrences = occurrenceId2occurrence.get(hashCode);
-    	Occurrence oneOccurrence = null;
-		List<@NonNull Occurrence> twoOrMoreOccurrences2 = null;
-    	if (zeroOrMoreOccurrences instanceof Occurrence) {
-    		oneOccurrence = (Occurrence)zeroOrMoreOccurrences;
-    		if ((occurrenceClass == oneOccurrence.getClass()) && oneOccurrence.isEqual(idResolver, argValues)) {
-	    		@SuppressWarnings("unchecked") T castOccurrence = (T)oneOccurrence;
-				return castOccurrence;
-	    	}
-    	}
-    	else if (zeroOrMoreOccurrences instanceof List<?>) {
-    		@SuppressWarnings("unchecked")@NonNull List<@NonNull Occurrence> zeroOrMoreOccurrences2 = (List<@NonNull Occurrence>)zeroOrMoreOccurrences;
-			twoOrMoreOccurrences2 = zeroOrMoreOccurrences2;
-			for (@NonNull Occurrence anOccurrence : twoOrMoreOccurrences2) {
-		   		if ((occurrenceClass == anOccurrence.getClass()) && anOccurrence.isEqual(idResolver, argValues)) {
-		    		@SuppressWarnings("unchecked") T castOccurrence = (T)anOccurrence;
-					return castOccurrence;
-    	    	}
-    		}
-    	}
-		T theOccurrence = constructor.newInstance(this, argValues);
-		if (zeroOrMoreOccurrences == null) {
-			occurrenceId2occurrence.put(hashCode, theOccurrence);
-		}
-		else {
-			if (twoOrMoreOccurrences2 == null) {
-	    		twoOrMoreOccurrences2 = new ArrayList<@NonNull Occurrence>(4);
-	    		assert oneOccurrence != null;
-    			twoOrMoreOccurrences2.add(oneOccurrence);
-			}
-			twoOrMoreOccurrences2.add(theOccurrence);
-			occurrenceId2occurrence.put(hashCode, twoOrMoreOccurrences2);
-		}
-		return theOccurrence;
-    }
 
     /**
      * Create the InvocationManager. Creates a LazyInvocationManager by default.
      */
 	protected @NonNull InvocationManager createInvocationManager() {
-		return new LazyInvocationManager();
+		return new LazyInvocationManager(idResolver);
 	}
 
     /**
@@ -525,8 +471,8 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	 *
      * @throws ReflectiveOperationException 
      */
-    public <T extends Identification> @NonNull T getIdentification(@NonNull Constructor<T> constructor, @Nullable Object... partValues) throws ReflectiveOperationException {
-    	T identification = createFirst(constructor, partValues);
+    public <T extends Identification> @NonNull T getIdentification(@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... partValues) throws ReflectiveOperationException {
+    	T identification = invocationManager.createFirst(this, constructor, partValues);
     	AbstractTransformer.INVOCATIONS.println("getIdentification " + identification);
     	return identification;
     }
@@ -642,7 +588,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
      * 
      * @throws ReflectiveOperationException 
      */
-    public <T extends Invocation> void invoke(@NonNull Constructor<T> constructor, @Nullable Object... boundValues) throws ReflectiveOperationException {
+    public <T extends Invocation> void invoke(@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... boundValues) throws ReflectiveOperationException {
     	@NonNull Invocation invocation = constructor.newInstance(this, boundValues);
     	AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
     	invocationManager.invoke(invocation, true);
@@ -653,8 +599,8 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	 *
      * @throws ReflectiveOperationException 
      */
-    public <T extends Invocation> void invokeOnce(@NonNull Constructor<T> constructor, @Nullable Object... boundValues) throws ReflectiveOperationException {
-    	T invocation = createFirst(constructor, boundValues);
+    public <T extends Invocation> void invokeOnce(@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... boundValues) throws ReflectiveOperationException {
+    	T invocation = invocationManager.createFirst(this, constructor, boundValues);
     	AbstractTransformer.INVOCATIONS.println("invokeOnce " + invocation);
     	invocationManager.invoke(invocation, true);
     }
