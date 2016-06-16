@@ -104,7 +104,8 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			return evaluate(executor, callExp, sourceValue, argumentValues);
 		}
 
-		private @Nullable Object evaluate(@NonNull Executor executor, @NonNull OperationCallExp callExp, @Nullable Object sourceValue, @Nullable Object... argumentValues) {
+		@Override
+		public @Nullable Object evaluate(@NonNull Executor executor, @NonNull OperationCallExp callExp, @Nullable Object sourceValue, @Nullable Object @NonNull ... argumentValues) {
 //			PivotUtil.checkExpression(expressionInOCL);
 			EvaluationEnvironment nestedEvaluationEnvironment = executor.pushEvaluationEnvironment(function, callExp);
 //			nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(expressionInOCL.getOwnedContext()), sourceValue);
