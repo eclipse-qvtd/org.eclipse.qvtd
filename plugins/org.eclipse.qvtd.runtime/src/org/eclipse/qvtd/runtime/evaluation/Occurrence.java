@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 
 /** 
@@ -24,7 +25,7 @@ public interface Occurrence extends ExecutionVisitable
 	/**
 	 * Return true if an occurrence with thoseValues would be a re-occurrence.
 	 */
-	boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues);
+	boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues);
 	
 	public interface Incremental extends Occurrence
 	{

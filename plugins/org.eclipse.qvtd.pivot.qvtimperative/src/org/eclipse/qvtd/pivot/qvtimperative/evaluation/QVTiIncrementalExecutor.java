@@ -69,7 +69,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		}
 
 		@Override
-		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
+		public boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues) {
 			int iMax = thoseValues.length;
 			if (iMax != theseValues.size()) {
 				return false;

@@ -626,11 +626,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (cgBody != null) {
 			js.appendCommentWithOCL(null, cgBody.getAst());
 		}
+		if (js.isUseNullAnnotations()) {
+			js.append("@SuppressWarnings(\"null\")\n");		// Accurate casts are too hard
+		}
 		js.append("public ");
 		js.append(getFunctionName(cgFunction));
-		js.append("(");
-		js.appendIsRequired(true);
-		js.append(" Object ");
+		js.append("(/*Nullable*/ Object ");
 		js.appendIsRequired(true);
 		js.append(" [] boundValues) throws ");
 		js.appendClassReference(ReflectiveOperationException.class);
@@ -655,11 +656,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doFunctionConstructor(@NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp, @NonNull String instanceName) {
 //		List<@NonNull CGParameter> cgParameters = ClassUtil.nullFree(cgFunction.getParameters());
+		if (js.isUseNullAnnotations()) {
+			js.append("@SuppressWarnings(\"null\")\n");		// Accurate casts are too hard
+		}
 		js.append("public ");
 		js.append(getFunctionName(cgFunction));
-		js.append("(");
-		js.appendIsRequired(true);
-		js.append(" Object ");
+		js.append("(/*Nullable*/ Object ");
 		js.appendIsRequired(true);
 		js.append(" [] boundValues) ");
 /*		int i = 0;
@@ -728,7 +730,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(" ");
 		js.appendClassReference(IdResolver.class);
 		js.append(" idResolver, ");
-		js.appendIsRequired(true);
+		js.appendIsRequired(false);
 		js.append(" Object ");
 		js.appendIsRequired(true);
 		js.append(" [] thoseValues) {\n");
@@ -752,7 +754,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(" ");
 		js.appendClassReference(IdResolver.class);
 		js.append(" idResolver, ");
-		js.appendIsRequired(true);
+		js.appendIsRequired(false);
 		js.append(" Object ");
 		js.appendIsRequired(true);
 		js.append(" [] thoseValues) {\n");
@@ -829,7 +831,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(" ");
 		js.appendClassReference(IdResolver.class);
 		js.append(" idResolver, ");
-		js.appendIsRequired(true);
+		js.appendIsRequired(false);
 		js.append(" Object ");
 		js.appendIsRequired(true);
 		js.append(" [] thoseValues) {\n");
@@ -902,11 +904,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doMappingConstructor(@NonNull CGMapping cgMapping) {
 		List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getFreeVariables());
+		if (js.isUseNullAnnotations()) {
+			js.append("@SuppressWarnings(\"null\")\n");		// Accurate casts are too hard
+		}
 		js.append("public ");
 		js.append(getMappingName(cgMapping));
-		js.append("(");
-		js.appendIsRequired(true);
-		js.append(" Object ");
+		js.append("(/*Nullable*/ Object ");
 		js.appendIsRequired(true);
 		js.append(" [] boundValues) {\n");
 		js.pushIndentation(null);

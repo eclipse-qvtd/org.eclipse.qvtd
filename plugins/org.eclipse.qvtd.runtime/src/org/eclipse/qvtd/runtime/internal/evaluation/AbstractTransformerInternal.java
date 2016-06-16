@@ -428,11 +428,11 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
      * Create or reuse the unique occurrence object, created by constructor and parameterized by argValues.
      * @throws ReflectiveOperationException 
      */
-    private <T extends Occurrence> @NonNull T createFirst(@NonNull Constructor<? extends T> constructor, @NonNull Object... argValues) throws ReflectiveOperationException {
+    private <T extends Occurrence> @NonNull T createFirst(@NonNull Constructor<? extends T> constructor, @Nullable Object... argValues) throws ReflectiveOperationException {
     	Class<? extends T> occurrenceClass = constructor.getDeclaringClass();
     	assert occurrenceClass != null;
 		int hashCode = System.identityHashCode(occurrenceClass);
-    	for (@NonNull Object argValue : argValues) {
+    	for (@Nullable Object argValue : argValues) {
     		hashCode = 3 * hashCode + idResolver.oclHashCode(argValue);
     	}
     	Object zeroOrMoreOccurrences = occurrenceId2occurrence.get(hashCode);
@@ -525,7 +525,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	 *
      * @throws ReflectiveOperationException 
      */
-    public <T extends Identification> @NonNull T getIdentification(@NonNull Constructor<T> constructor, @NonNull Object... partValues) throws ReflectiveOperationException {
+    public <T extends Identification> @NonNull T getIdentification(@NonNull Constructor<T> constructor, @Nullable Object... partValues) throws ReflectiveOperationException {
     	T identification = createFirst(constructor, partValues);
     	AbstractTransformer.INVOCATIONS.println("getIdentification " + identification);
     	return identification;
@@ -642,7 +642,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
      * 
      * @throws ReflectiveOperationException 
      */
-    public <T extends Invocation> void invoke(@NonNull Constructor<T> constructor, @NonNull Object... boundValues) throws ReflectiveOperationException {
+    public <T extends Invocation> void invoke(@NonNull Constructor<T> constructor, @Nullable Object... boundValues) throws ReflectiveOperationException {
     	@NonNull Invocation invocation = constructor.newInstance(this, boundValues);
     	AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
     	invocationManager.invoke(invocation, true);
@@ -653,7 +653,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	 *
      * @throws ReflectiveOperationException 
      */
-    public <T extends Invocation> void invokeOnce(@NonNull Constructor<T> constructor, @NonNull Object... boundValues) throws ReflectiveOperationException {
+    public <T extends Invocation> void invokeOnce(@NonNull Constructor<T> constructor, @Nullable Object... boundValues) throws ReflectiveOperationException {
     	T invocation = createFirst(constructor, boundValues);
     	AbstractTransformer.INVOCATIONS.println("invokeOnce " + invocation);
     	invocationManager.invoke(invocation, true);
