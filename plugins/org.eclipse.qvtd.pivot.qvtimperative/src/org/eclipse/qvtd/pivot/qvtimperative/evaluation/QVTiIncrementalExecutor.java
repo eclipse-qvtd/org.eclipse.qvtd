@@ -131,7 +131,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		InterpretedInvocation invocation = new InterpretedInvocation(newBoundValues)
 		{
 			@Override
-			public boolean execute() throws InvocationFailedException, ReflectiveOperationException {
+			public boolean execute() throws InvocationFailedException {
 				currentInvocation = this;
 				try {
 					returnStatus = QVTiIncrementalExecutor.super.internalExecuteMappingCall(mappingCall, variable2value, undecoratedVisitor);
@@ -149,12 +149,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			
 		};
 		AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
-		try {
-			invocationManager.invoke(invocation, true);
-		} catch (ReflectiveOperationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		invocationManager.invoke(invocation, true);
 		return null;		
 	}
 

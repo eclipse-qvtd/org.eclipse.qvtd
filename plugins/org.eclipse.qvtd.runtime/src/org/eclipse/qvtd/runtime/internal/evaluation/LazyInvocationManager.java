@@ -59,7 +59,7 @@ public class LazyInvocationManager extends AbstractInvocationManager
 	}
 
 	@Override
-	public boolean flush() throws ReflectiveOperationException {
+	public boolean flush() {
 		flushInternal();
 		AbstractInvocationInternal blockedInvocation = blockedInvocations;
 		if (blockedInvocation == null) {
@@ -75,7 +75,7 @@ public class LazyInvocationManager extends AbstractInvocationManager
 		return false;
 	}
 	
-    private void flushInternal() throws ReflectiveOperationException {
+    private void flushInternal() {
 		while (waitingInvocations != null) {
 			AbstractInvocationInternal invocation = null;
     		synchronized (this) {
@@ -99,7 +99,7 @@ public class LazyInvocationManager extends AbstractInvocationManager
     }
 
     @Override
-	public void invoke(@NonNull Invocation invocation, boolean doFlush) throws ReflectiveOperationException {
+	public void invoke(@NonNull Invocation invocation, boolean doFlush) {
 		try {
 			invocation.execute();
 			if (debugTracing) {

@@ -23,9 +23,8 @@ public interface Invocation extends Occurrence
 	/**
 	 * Execute the mapping invocation, returning true if successfully executed, or false if some predicate failed.
 	 * @throws InvocationFailedException if a required memory access could not be performed; a retry when ready is required
-	 * @throws ReflectiveOperationException if a Java failure occurred while constructing an Invocation object
 	 */
-	boolean execute() throws InvocationFailedException, ReflectiveOperationException;
+	boolean execute() throws InvocationFailedException;
 
 	/**
 	 * Insert this Invocation following predecessor, which may be in the blocked or waiting invocations linked list.

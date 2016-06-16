@@ -27,6 +27,12 @@ public interface Occurrence extends ExecutionVisitable
 	 */
 	boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues);
 	
+	public interface Constructor<T extends Occurrence>
+	{
+		T getResultOf(@NonNull T theOccurrence);
+		@NonNull T newInstance(@Nullable Object @NonNull [] values);
+	}
+	
 	public interface Incremental extends Occurrence
 	{
 	}

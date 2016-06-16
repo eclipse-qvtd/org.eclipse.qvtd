@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.runtime.internal.evaluation;
 
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -49,6 +48,7 @@ import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
+import org.eclipse.qvtd.runtime.evaluation.Occurrence;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 /**
@@ -61,6 +61,14 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 {	
 	private static final @NonNull List<@NonNull Integer> EMPTY_INDEX_LIST = Collections.emptyList();
 	private static final @NonNull List<@NonNull Object> EMPTY_EOBJECT_LIST = Collections.emptyList();
+    
+	protected static abstract class AbstractOccurrenceConstructor<T extends Occurrence> implements Occurrence.Constructor<T>
+    {
+        @Override
+        public T getResultOf(@NonNull T theOccurrence) {
+            return theOccurrence;
+        }
+    };
 
 	protected class Model extends AbstractTypedModelInstance
 	{
@@ -468,10 +476,8 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	
     /**
      * Create or re-use the unique Identification object constructed by constructor and parameterized by partValues.
-	 *
-     * @throws ReflectiveOperationException 
      */
-    public <T extends Identification> @NonNull T getIdentification(@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... partValues) throws ReflectiveOperationException {
+    public <@NonNull T extends Identification> @NonNull T getIdentification(Occurrence.@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... partValues) {
     	T identification = invocationManager.createFirst(this, constructor, partValues);
     	AbstractTransformer.INVOCATIONS.println("getIdentification " + identification);
     	return identification;
@@ -585,21 +591,17 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
     /**
      * Invoke a mapping with the given constructor with a given set of boundValues once. This shortform of invokeOnce
      * should only be used when it is known that recursive invocation is impossible.
-     * 
-     * @throws ReflectiveOperationException 
      */
-    public <T extends Invocation> void invoke(@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... boundValues) throws ReflectiveOperationException {
-    	@NonNull Invocation invocation = constructor.newInstance(this, boundValues);
+    public <@NonNull T extends Invocation> void invoke(Occurrence.@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... boundValues) {
+    	@NonNull Invocation invocation = constructor.newInstance(boundValues);
     	AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
     	invocationManager.invoke(invocation, true);
     }
 	
     /**
      * Invoke a mapping with the given constructor with a given set of boundValues once. Repeated invocation attempts are ignored.
-	 *
-     * @throws ReflectiveOperationException 
      */
-    public <T extends Invocation> void invokeOnce(@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... boundValues) throws ReflectiveOperationException {
+    public <@NonNull T extends Invocation> void invokeOnce(Occurrence.@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... boundValues) {
     	T invocation = invocationManager.createFirst(this, constructor, boundValues);
     	AbstractTransformer.INVOCATIONS.println("invokeOnce " + invocation);
     	invocationManager.invoke(invocation, true);

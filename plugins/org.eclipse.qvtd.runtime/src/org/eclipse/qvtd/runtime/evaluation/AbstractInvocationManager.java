@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,11 +47,10 @@ public abstract class AbstractInvocationManager implements InvocationManager
 	
     /**
      * Create or reuse the unique occurrence object, created by constructor and parameterized by argValues.
-     * @throws ReflectiveOperationException 
      */
 	@Override
-	public <T extends Occurrence> @NonNull T createFirst(@NonNull Object constructorThis, @NonNull Constructor<? extends T> constructor, @Nullable Object @NonNull [] argValues) throws ReflectiveOperationException {
-    	Class<? extends T> occurrenceClass = constructor.getDeclaringClass();
+	public <T extends Occurrence> T createFirst(@NonNull Object constructorThis, Occurrence.@NonNull Constructor<T> constructor, @Nullable Object @NonNull [] argValues) {
+    	Class<?> occurrenceClass = constructor.getClass();
     	assert occurrenceClass != null;
 		int hashCode = System.identityHashCode(occurrenceClass);
     	for (@Nullable Object argValue : argValues) {
@@ -78,7 +76,7 @@ public abstract class AbstractInvocationManager implements InvocationManager
     	    	}
     		}
     	}
-		T theOccurrence = constructor.newInstance(constructorThis, argValues);
+		T theOccurrence = constructor.newInstance(argValues);
 		if (zeroOrMoreOccurrences == null) {
 			occurrenceId2occurrence.put(hashCode, theOccurrence);
 		}
@@ -91,6 +89,6 @@ public abstract class AbstractInvocationManager implements InvocationManager
 			twoOrMoreOccurrences2.add(theOccurrence);
 			occurrenceId2occurrence.put(hashCode, twoOrMoreOccurrences2);
 		}
-		return theOccurrence;
+		return constructor.getResultOf(theOccurrence);
     }
 }
