@@ -69,7 +69,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		}
 
 		@Override
-		public boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues) {
+		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 			int iMax = thoseValues.length;
 			if (iMax != theseValues.size()) {
 				return false;
@@ -100,7 +100,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		this.mode = mode;
 		this.transformationAnalysis = getModelManager().getTransformationAnalysis();
 		boolean isLazy = mode == Mode.LAZY;
-		this.invocationManager = isLazy ? new LazyInvocationManager(idResolver) : new IncrementalInvocationManager(idResolver);
+		this.invocationManager = isLazy ? new LazyInvocationManager() : new IncrementalInvocationManager();
 		this.objectManager = isLazy ? new LazyObjectManager((LazyInvocationManager)invocationManager) : new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
 	}
 

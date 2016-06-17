@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2016 Willink Transformations and others.
+ * Copyright (c) 2016 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -43,12 +43,10 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable;
-import org.eclipse.qvtd.runtime.evaluation.Identification;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
-import org.eclipse.qvtd.runtime.evaluation.Occurrence;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 /**
@@ -62,22 +60,6 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	private static final @NonNull List<@NonNull Integer> EMPTY_INDEX_LIST = Collections.emptyList();
 	private static final @NonNull List<@NonNull Object> EMPTY_EOBJECT_LIST = Collections.emptyList();
     
-	protected static abstract class AbstractEventOccurrenceConstructor<@Nullable T extends Occurrence> implements Occurrence.Constructor<T>
-    {
-        @Override
-        public boolean isEvent() {
-            return true;
-        }
-    };
-    
-	protected static abstract class AbstractValueOccurrenceConstructor<@NonNull T extends Occurrence> implements Occurrence.Constructor<T>
-    {
-        @Override
-        public boolean isEvent() {
-            return false;
-        }
-    };
-
 	protected class Model extends AbstractTypedModelInstance
 	{
 		protected final @NonNull String name;
@@ -437,7 +419,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
      * Create the InvocationManager. Creates a LazyInvocationManager by default.
      */
 	protected @NonNull InvocationManager createInvocationManager() {
-		return new LazyInvocationManager(idResolver);
+		return new LazyInvocationManager();
 	}
 
     /**
@@ -481,15 +463,6 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
     protected @NonNull <T extends EObject> List<T> getObjectsByType(int modelIndex, @NonNull EClass eClass) {
 		return models[modelIndex].getObjectsByType(eClass);
 	} */
-	
-    /**
-     * Create or re-use the unique Identification object constructed by constructor and parameterized by partValues.
-     */
-    public <@NonNull T extends Identification> @NonNull T getIdentification(Occurrence.@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... partValues) {
-    	T identification = invocationManager.createFirst(this, constructor, partValues);
-    	AbstractTransformer.INVOCATIONS.println("getIdentification " + identification);
-    	return identification;
-    }
 
 	/**
 	 * Return the List of all PropertyIndexes for which an EClass instance could be the unnavigable opposite.
@@ -600,7 +573,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
      * Invoke a mapping with the given constructor with a given set of boundValues once. This shortform of invokeOnce
      * should only be used when it is known that recursive invocation is impossible.
      */
-    public <@Nullable T extends Invocation> void invoke(Occurrence.@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... boundValues) {
+    public <@Nullable T extends Invocation> void invoke(Invocation.@NonNull Constructor constructor, @NonNull Object @NonNull ... boundValues) {
     	@NonNull Invocation invocation = constructor.newInstance(boundValues);
     	AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
     	invocationManager.invoke(invocation, true);
@@ -609,8 +582,8 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
     /**
      * Invoke a mapping with the given constructor with a given set of boundValues once. Repeated invocation attempts are ignored.
      */
-    public <@Nullable T extends Invocation> void invokeOnce(Occurrence.@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... boundValues) {
-    	@Nullable T invocation = invocationManager.createFirst(this, constructor, boundValues);
+    public void invokeOnce(Invocation.@NonNull Constructor constructor, @NonNull Object @NonNull ... boundValues) {
+    	@Nullable Invocation invocation = constructor.getFirstInvocation(boundValues);
     	if (invocation != null) {
     		AbstractTransformer.INVOCATIONS.println("invokeOnce " + invocation);
         	invocationManager.invoke(invocation, true);

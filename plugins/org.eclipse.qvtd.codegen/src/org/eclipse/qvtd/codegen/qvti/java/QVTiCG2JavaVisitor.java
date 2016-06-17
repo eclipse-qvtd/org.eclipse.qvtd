@@ -111,12 +111,14 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.runtime.evaluation.AbstractIdentification;
+import org.eclipse.qvtd.runtime.evaluation.AbstractValueOccurrence;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationConstructor;
+import org.eclipse.qvtd.runtime.internal.evaluation.AbstractComputationConstructor;
 import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalInvocationManager;
 import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalObjectManager;
 
@@ -686,12 +688,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				if ((useClass(cgFunction) != null) || useCache(cgFunction)) {
 					js.append("protected final ");
 					js.appendIsRequired(true);
-					js.append(" AbstractValueOccurrenceConstructor<");
-					js.appendIsRequired(true);
-					js.append(" " + getFunctionName(cgFunction) + ">");
-					js.append(" " + getFunctionCtorName(cgFunction) + " = new AbstractValueOccurrenceConstructor<");
-					js.appendIsRequired(true);
-					js.append(" " + getFunctionName(cgFunction) + ">()\n");
+					js.append(" ");
+					js.appendClassReference(AbstractComputationConstructor.class);
+					js.append(" " + getFunctionCtorName(cgFunction) + " = new ");
+					js.appendClassReference(AbstractComputationConstructor.class);
+					js.append("(idResolver)\n");
 					js.append("{\n");
 					js.pushIndentation(null);
 						js.append("@Override\n");
@@ -847,7 +848,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(" ");
 		js.appendClassReference(IdResolver.class);
 		js.append(" idResolver, ");
-		js.appendIsRequired(false);
+		js.appendIsRequired(true);
 		js.append(" Object ");
 		js.appendIsRequired(true);
 		js.append(" [] thoseValues) {\n");
@@ -925,7 +926,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 //		}
 		js.append("public ");
 		js.append(getMappingName(cgMapping));
-		js.append("(/*Nullable*/ Object ");
+		js.append("(");
+		js.appendIsRequired(true);
+		js.append(" Object ");
 		js.appendIsRequired(true);
 		js.append(" [] boundValues) {\n");
 		js.pushIndentation(null);
@@ -955,19 +958,18 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			if (useClass(cgMapping) && (cgMapping.getFreeVariables().size() > 0)) {
 				js.append("protected final ");
 				js.appendIsRequired(true);
-				js.append(" AbstractEventOccurrenceConstructor<");
-				js.appendIsRequired(false);
-				js.append(" " + getMappingName(cgMapping) + ">");
-				js.append(" " + getMappingCtorName(cgMapping) + " = new AbstractEventOccurrenceConstructor<");
-				js.appendIsRequired(false);
-				js.append(" " + getMappingName(cgMapping) + ">()\n");
+				js.append(" ");
+				js.appendClassReference(AbstractInvocationConstructor.class);
+				js.append(" " + getMappingCtorName(cgMapping) + " = new ");
+				js.appendClassReference(AbstractInvocationConstructor.class);
+				js.append("(idResolver)\n");
 				js.append("{\n");
 				js.pushIndentation(null);
 					js.append("@Override\n");
 					js.append("public ");
 					js.appendIsRequired(true);
 					js.append(" " + getMappingName(cgMapping) + " newInstance(");
-					js.appendIsRequired(false);
+					js.appendIsRequired(true);
 					js.append(" ");
 					js.appendClassReference(Object.class);
 					js.append(" ");
@@ -1421,7 +1423,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append("protected class ");
 					js.append(getFunctionName(cgFunction));
 					js.append(" extends ");
-					js.appendClassReference(/*isIncremental ? AbstractIdentification.Incremental.class :*/ AbstractIdentification.class);
+					js.appendClassReference(/*isIncremental ? AbstractIdentification.Incremental.class :*/ AbstractValueOccurrence.class);
 					js.append("\n");
 					js.append("{\n");
 					js.pushIndentation(null);
@@ -1444,7 +1446,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append("protected class ");
 					js.append(getFunctionName(cgFunction));
 					js.append(" extends ");
-					js.appendClassReference(/*isIncremental ? AbstractIdentification.Incremental.class :*/ AbstractIdentification.class);
+					js.appendClassReference(/*isIncremental ? AbstractIdentification.Incremental.class :*/ AbstractValueOccurrence.class);
 					js.append("\n");
 					js.append("{\n");
 					js.pushIndentation(null);
@@ -1527,17 +1529,19 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		//
 		js.appendDeclaration(cgFunctionCallExp);
 		js.append(" = ");
-		boolean needComma =false;
+		boolean needComma = false;
 		if (isIdentifiedInstance) {
-			js.append("getIdentification(");
+			js.append("((");
+			js.append(getFunctionName(cgFunction));
+			js.append(")");
 			js.append(getFunctionCtorName(cgFunction));
+			js.append(".getUniqueComputation(");
 			if (useCache && (cgShadowExp == null)) {
-				js.append(", ");
 				CGClass cgClass = ClassUtil.nonNullState(cgFunction.getContainingClass());
 				js.appendClassReference(cgClass);
 				js.append(".this");
+				needComma = true;
 			}
-			needComma = true;
 		}
 		else {
 			js.append(pOperation.getName());
@@ -1558,6 +1562,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 		js.append(")");
 		if (isIdentifiedInstance) {
+			js.append(")");
 			JavaLocalContext<?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
 			String instanceName = functionContext.getNameManagerContext().getSymbolName(cgFunction.getBody(), "instance");
 //			js.append(".getInstance()");

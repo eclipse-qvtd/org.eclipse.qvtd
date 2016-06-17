@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An InvocationManager supervises the invocations of mappings, inhibiting re-executions and
@@ -23,11 +22,6 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 public interface InvocationManager extends ExecutionVisitable
 {	
-    /**
-     * Create or reuse the unique occurrence object, created by constructor and parameterized by argValues.
-     */
-	<T extends Occurrence> T createFirst(@NonNull Object constructorThis, Occurrence.@NonNull Constructor<T> constructor, @Nullable Object @NonNull [] argValues);
-
 	boolean flush();
     void invoke(@NonNull Invocation invocation, boolean doFlush);
     void unblock(@NonNull Invocation invocation);

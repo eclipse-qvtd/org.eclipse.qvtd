@@ -11,6 +11,8 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 
 /** 
  * An Invocation identifies a unique invocation of a Mapping and the objects/values bound to its guard variables.
@@ -18,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * @noimplement clients should derive from AbstractInvocation
  * @since 1.1
  */
-public interface Invocation extends Occurrence
+public interface Invocation extends ExecutionVisitable
 {
 	/**
 	 * Execute the mapping invocation, returning true if successfully executed, or false if some predicate failed.
@@ -32,11 +34,31 @@ public interface Invocation extends Occurrence
 	void insertAfter(@NonNull Invocation predecessor);
 
 	/**
+	 * Return true if an occurrence with thoseValues would be a re-occurrence.
+	 */
+	boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues);
+	
+
+	/**
 	 * Remove this Invocation from the blocked or waiting invocations linked list.
 	 */
 	void remove();
 	
-	public interface Incremental extends Invocation, Occurrence.Incremental
+	public interface Constructor
+	{	
+		/**
+		 * Return the first invocation of this constructor with argValues, using newInstance(argValues) to
+		 * create a new invocation instance if necessary. Returns null if an instance already created.
+		 */
+		@Nullable Invocation getFirstInvocation(@NonNull Object @NonNull [] argValues);
+
+		/**
+		 * Create the invocation identified by this constructor and values.
+		 */
+		@NonNull Invocation newInstance(@NonNull Object @NonNull [] values);
+	}
+		
+	public interface Incremental extends Invocation
 	{
 		void addCreatedObject(@NonNull Object createdObject);
 		void addReadSlot(SlotState.@NonNull Incremental readSlot);

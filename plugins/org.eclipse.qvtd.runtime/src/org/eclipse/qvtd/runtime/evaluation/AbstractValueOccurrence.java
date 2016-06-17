@@ -10,10 +10,15 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
- * AbstractOccurrence provides the mandatory shared functionality of the unique occurrence functionality.
- * @since 1.1
+ * AbstractValueOccurrence provides the mandatory shared functionality of a cached value.
  */
-public abstract class AbstractOccurrence implements Occurrence
+public abstract class AbstractValueOccurrence implements Computation
 {
+	@Override
+	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
+		return visitor.visitValueOccurrence(this);
+	}
 }
