@@ -11,6 +11,9 @@
 
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -32,10 +35,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationConstructor;
 import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalInvocationManager;
 import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalObjectManager;
 import org.eclipse.qvtd.runtime.internal.evaluation.LazyInvocationManager;
@@ -53,30 +58,6 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	 */
 	public static int RUN_TIME_EVALUATOR_API_VERSION = Transformer.RUN_TIME_EVALUATOR_API_VERSION_1_1_0_2;
 
-	protected static abstract class InterpretedInvocation extends AbstractInvocation.Incremental
-	{
-		protected final @NonNull Object @NonNull [] theseValues;
-		protected Object returnStatus;
-		
-		public InterpretedInvocation(@NonNull Object @NonNull [] theseValues) {
-			this.theseValues = theseValues;
-		}
-
-		@Override
-		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
-			int iMax = thoseValues.length;
-			if (iMax != theseValues.length) {
-				return false;
-			}
-			for (int i = 0; i < iMax; i++) {
-				if (!ClassUtil.safeEquals(theseValues[i], thoseValues[i])) {
-					return false;
-				}
-			}
-			return true;
-		}
-	}
-
 	public enum Mode {
 		LAZY,						// EvaluationStatus is created lazily where necessary
 		INCREMENTAL,				// EvaluationStatus is created for all mapping elements
@@ -87,7 +68,8 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
 	protected final @NonNull InvocationManager invocationManager;
 	protected final @NonNull ObjectManager objectManager;
-	private @Nullable InterpretedInvocation currentInvocation = null;
+	private Invocation.@Nullable Incremental currentInvocation = null;
+	private @Nullable Map<@NonNull Mapping, Invocation.@NonNull Constructor> mapping2invocationConstructor = null;
 	
 	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull Mode mode) {
 		super(environmentFactory, transformation);
@@ -109,35 +91,67 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 
 	@Override
 	public @Nullable Object internalExecuteMappingCall(final @NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, final @NonNull EvaluationVisitor undecoratedVisitor) {
+		Mapping asMapping = ClassUtil.nonNullState(mappingCall.getReferredMapping());
 		if (mode == Mode.LAZY) {
-			Mapping asMapping = mappingCall.getReferredMapping();
-			assert asMapping != null;
 			if (!transformationAnalysis.isHazardous(asMapping)) {
-				return internalExecuteMappingCall2(mappingCall, boundValues, undecoratedVisitor);
+				return super.internalExecuteMappingCall(mappingCall, boundValues, undecoratedVisitor);
 			}
 		}
-		InterpretedInvocation invocation = new InterpretedInvocation(boundValues)
-		{
-			@Override
-			public boolean execute() throws InvocationFailedException {
-				currentInvocation = this;
-				try {
-					returnStatus = internalExecuteMappingCall2(mappingCall, boundValues, undecoratedVisitor);
-					return returnStatus == ValueUtil.TRUE_VALUE;
-				}
-				finally {
-					currentInvocation = null;
-				}
-			}
+		Map<@NonNull Mapping, Invocation.@NonNull Constructor> mapping2invocationConstructor2 = mapping2invocationConstructor;
+		if (mapping2invocationConstructor2 == null) {
+			mapping2invocationConstructor = mapping2invocationConstructor2 = new HashMap<@NonNull Mapping, Invocation.@NonNull Constructor>();
+		}
+		Invocation.Constructor invocationConstructor = mapping2invocationConstructor2.get(asMapping);
+		if (invocationConstructor == null) {
+			invocationConstructor = new AbstractInvocationConstructor(idResolver)
+			{
+				@Override
+				public @NonNull Invocation newInstance(@NonNull Object @NonNull [] theseValues) {
+					Invocation.Incremental invocation = new AbstractInvocation.Incremental()
+					{
+						protected Object returnStatus;
 
-			@Override
-			public String toString() {
-				return mappingCall.getReferredMapping().getName() + "@" + Integer.toHexString(System.identityHashCode(this));
-			}
-			
-		};
-		AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
-		invocationManager.invoke(invocation, true);
+						@Override
+						public boolean execute() throws InvocationFailedException {
+							currentInvocation = this;
+							try {
+								returnStatus = QVTiIncrementalExecutor.super.internalExecuteMappingCall(mappingCall, theseValues, undecoratedVisitor);
+								return returnStatus == ValueUtil.TRUE_VALUE;
+							}
+							finally {
+								currentInvocation = null;
+							}
+						}
+						
+						@Override
+						public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
+							int iMax = thoseValues.length;
+							if (iMax != theseValues.length) {
+								return false;
+							}
+							for (int i = 0; i < iMax; i++) {
+								if (!ClassUtil.safeEquals(theseValues[i], thoseValues[i])) {
+									return false;
+								}
+							}
+							return true;
+						}
+
+						@Override
+						public String toString() {
+							return mappingCall.getReferredMapping().getName() + "@" + Integer.toHexString(System.identityHashCode(this));
+						}
+					};
+					return invocation;
+				}
+			};
+			mapping2invocationConstructor2.put(asMapping, invocationConstructor);
+		}
+		Invocation invocation = invocationConstructor.getFirstInvocation(boundValues);
+		if (invocation != null) {
+			AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
+			invocationManager.invoke(invocation, true);
+		}
 		return null;		
 	}
 
@@ -180,7 +194,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			ecoreValue = super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
 		}
 		if (mode != Mode.LAZY) {
-			InterpretedInvocation currentInvocation2 = currentInvocation;
+			Invocation.Incremental currentInvocation2 = currentInvocation;
 			if (currentInvocation2 != null) {			// Null at root
 				assert sourceValue != null;
 				EStructuralFeature eFeature = (EStructuralFeature)referredProperty.getESObject();
@@ -208,7 +222,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
 			assert targetProperty != null;
 			EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
-			InterpretedInvocation currentInvocation2 = currentInvocation;
+			Invocation.Incremental currentInvocation2 = currentInvocation;
 			assert currentInvocation2 != null;
 			objectManager.assigned(currentInvocation2, sourceObject, eFeature, ecoreValue, childKey);
 		}
@@ -218,7 +232,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	public @Nullable Object internalExecuteRealizedVariable(@NonNull RealizedVariable realizedVariable, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Object element = super.internalExecuteRealizedVariable(realizedVariable, undecoratedVisitor);
 		if ((element != null) && (mode == Mode.INCREMENTAL)) {
-			InterpretedInvocation currentInvocation2 = currentInvocation;
+			Invocation.Incremental currentInvocation2 = currentInvocation;
 			assert currentInvocation2 != null;
 			objectManager.created(currentInvocation2, element);
 /*			DomainUsage domainUsage = getEvaluationEnvironment().getUsageFor(realizedVariable);

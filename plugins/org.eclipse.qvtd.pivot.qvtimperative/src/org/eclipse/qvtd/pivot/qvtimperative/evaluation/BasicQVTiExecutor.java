@@ -352,10 +352,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	
 	@Override
 	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor) {
-    	return internalExecuteMappingCall2(mappingCall, boundValues, undecoratedVisitor);
-	}
-
-	public @Nullable Object internalExecuteMappingCall2(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Mapping calledMapping = mappingCall.getReferredMapping();
 		if (calledMapping != null) {
 			pushEvaluationEnvironment(calledMapping, mappingCall);
