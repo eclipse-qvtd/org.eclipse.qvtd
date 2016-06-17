@@ -57,6 +57,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -348,16 +349,21 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		}
 		return transformationAnalysis2;
 	}
-
+	
 	@Override
-	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Map<Variable, Object> variable2value, @NonNull EvaluationVisitor undecoratedVisitor) {
+	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor) {
+    	return internalExecuteMappingCall2(mappingCall, boundValues, undecoratedVisitor);
+	}
+
+	public @Nullable Object internalExecuteMappingCall2(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Mapping calledMapping = mappingCall.getReferredMapping();
 		if (calledMapping != null) {
 			pushEvaluationEnvironment(calledMapping, mappingCall);
 			try {
-				for (Map.Entry<Variable,Object> entry : variable2value.entrySet()) {
-					@SuppressWarnings("null")@NonNull Variable variable = entry.getKey();
-					replace(variable, entry.getValue());
+				int index = 0;
+				for (MappingCallBinding binding : mappingCall.getBinding()) {
+					Variable boundVariable = ClassUtil.nonNullState(binding.getBoundVariable());
+					replace(boundVariable, boundValues[index++]);
 				}
 				calledMapping.accept(undecoratedVisitor);
 			}

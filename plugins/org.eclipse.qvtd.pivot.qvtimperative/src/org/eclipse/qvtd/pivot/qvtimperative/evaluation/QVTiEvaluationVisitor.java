@@ -10,9 +10,7 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -267,7 +265,12 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
-		Map<Variable, Object> variable2value = new HashMap<Variable, Object>();
+		Mapping referredMapping = mappingCall.getReferredMapping();
+		if (referredMapping == null) {
+			return null;
+		}
+		@NonNull Object @NonNull [] boundValues = new @NonNull Object[mappingCall.getBinding().size()];
+		int index = 0;
 		for (MappingCallBinding binding : mappingCall.getBinding()) {
 			Variable boundVariable = binding.getBoundVariable();
 			if (boundVariable == null) {
@@ -282,19 +285,18 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				return null;		
 			}
 			Object valueOrValues = value.accept(undecoratedVisitor);
+			if (valueOrValues == null) {
+				return null;		
+			}
 			Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
-			if (valueType.conformsTo(standardLibrary, varType)) {
-				variable2value.put(boundVariable, valueOrValues);
+			if (valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
+				boundValues[index++] = valueOrValues;
 			}
 			else {
 				return null;		
 			}
-    	}
-		Mapping referredMapping = mappingCall.getReferredMapping();
-		if (referredMapping == null) {
-			return null;
 		}
-		return executor.internalExecuteMappingCall(mappingCall, variable2value, undecoratedVisitor);
+		return executor.internalExecuteMappingCall(mappingCall, boundValues, undecoratedVisitor);
     }
 
 	@Override

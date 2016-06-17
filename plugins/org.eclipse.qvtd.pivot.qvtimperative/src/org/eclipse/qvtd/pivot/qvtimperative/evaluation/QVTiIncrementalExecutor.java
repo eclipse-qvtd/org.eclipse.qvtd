@@ -11,17 +11,12 @@
 
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -33,7 +28,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
@@ -61,21 +55,21 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 
 	protected static abstract class InterpretedInvocation extends AbstractInvocation.Incremental
 	{
-		protected final @NonNull List<Object> theseValues;
+		protected final @NonNull Object @NonNull [] theseValues;
 		protected Object returnStatus;
 		
-		public InterpretedInvocation(@NonNull List<Object> theseValues) {
+		public InterpretedInvocation(@NonNull Object @NonNull [] theseValues) {
 			this.theseValues = theseValues;
 		}
 
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 			int iMax = thoseValues.length;
-			if (iMax != theseValues.size()) {
+			if (iMax != theseValues.length) {
 				return false;
 			}
 			for (int i = 0; i < iMax; i++) {
-				if (!ClassUtil.safeEquals(theseValues.get(i), thoseValues[i])) {
+				if (!ClassUtil.safeEquals(theseValues[i], thoseValues[i])) {
 					return false;
 				}
 			}
@@ -114,27 +108,21 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	}
 
 	@Override
-	public @Nullable Object internalExecuteMappingCall(final @NonNull MappingCall mappingCall, final @NonNull Map<Variable, Object> variable2value, final @NonNull EvaluationVisitor undecoratedVisitor) {
+	public @Nullable Object internalExecuteMappingCall(final @NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, final @NonNull EvaluationVisitor undecoratedVisitor) {
 		if (mode == Mode.LAZY) {
 			Mapping asMapping = mappingCall.getReferredMapping();
 			assert asMapping != null;
 			if (!transformationAnalysis.isHazardous(asMapping)) {
-				return QVTiIncrementalExecutor.super.internalExecuteMappingCall(mappingCall, variable2value, undecoratedVisitor);
+				return internalExecuteMappingCall2(mappingCall, boundValues, undecoratedVisitor);
 			}
 		}
-		List<Object> newBoundValues = new ArrayList<Object>();
-		for (MappingCallBinding binding : mappingCall.getBinding()) {
-			Variable boundVariable = ClassUtil.nonNullModel(binding.getBoundVariable());
-			Object valueOrValues = variable2value.get(boundVariable);
-			newBoundValues.add(valueOrValues);
-		}
-		InterpretedInvocation invocation = new InterpretedInvocation(newBoundValues)
+		InterpretedInvocation invocation = new InterpretedInvocation(boundValues)
 		{
 			@Override
 			public boolean execute() throws InvocationFailedException {
 				currentInvocation = this;
 				try {
-					returnStatus = QVTiIncrementalExecutor.super.internalExecuteMappingCall(mappingCall, variable2value, undecoratedVisitor);
+					returnStatus = internalExecuteMappingCall2(mappingCall, boundValues, undecoratedVisitor);
 					return returnStatus == ValueUtil.TRUE_VALUE;
 				}
 				finally {
