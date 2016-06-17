@@ -29,7 +29,15 @@ public interface Occurrence extends ExecutionVisitable
 	
 	public interface Constructor<T extends Occurrence>
 	{
-		T getResultOf(@NonNull T theOccurrence);
+		/**
+		 * Return true for event occurrences that should execute only after the initial construction.
+		 * Return false for cached values that repeatedly use the initial construction.
+		 */
+		boolean isEvent();
+		
+		/**
+		 * Create the occurrence identified by this constructor and values.
+		 */
 		@NonNull T newInstance(@Nullable Object @NonNull [] values);
 	}
 	

@@ -686,8 +686,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				if ((useClass(cgFunction) != null) || useCache(cgFunction)) {
 					js.append("protected final ");
 					js.appendIsRequired(true);
-					js.append(" AbstractOccurrenceConstructor<" + getFunctionName(cgFunction) + ">");
-					js.append(" " + getFunctionCtorName(cgFunction) + " = new AbstractOccurrenceConstructor<" + getFunctionName(cgFunction) + ">()\n");
+					js.append(" AbstractValueOccurrenceConstructor<");
+					js.appendIsRequired(true);
+					js.append(" " + getFunctionName(cgFunction) + ">");
+					js.append(" " + getFunctionCtorName(cgFunction) + " = new AbstractValueOccurrenceConstructor<");
+					js.appendIsRequired(true);
+					js.append(" " + getFunctionName(cgFunction) + ">()\n");
 					js.append("{\n");
 					js.pushIndentation(null);
 						js.append("@Override\n");
@@ -951,8 +955,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			if (useClass(cgMapping) && (cgMapping.getFreeVariables().size() > 0)) {
 				js.append("protected final ");
 				js.appendIsRequired(true);
-				js.append(" AbstractOccurrenceConstructor<" + getMappingName(cgMapping) + ">");
-				js.append(" " + getMappingCtorName(cgMapping) + " = new AbstractOccurrenceConstructor<" + getMappingName(cgMapping) + ">()\n");
+				js.append(" AbstractEventOccurrenceConstructor<");
+				js.appendIsRequired(false);
+				js.append(" " + getMappingName(cgMapping) + ">");
+				js.append(" " + getMappingCtorName(cgMapping) + " = new AbstractEventOccurrenceConstructor<");
+				js.appendIsRequired(false);
+				js.append(" " + getMappingName(cgMapping) + ">()\n");
 				js.append("{\n");
 				js.pushIndentation(null);
 					js.append("@Override\n");

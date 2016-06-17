@@ -62,11 +62,19 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	private static final @NonNull List<@NonNull Integer> EMPTY_INDEX_LIST = Collections.emptyList();
 	private static final @NonNull List<@NonNull Object> EMPTY_EOBJECT_LIST = Collections.emptyList();
     
-	protected static abstract class AbstractOccurrenceConstructor<T extends Occurrence> implements Occurrence.Constructor<T>
+	protected static abstract class AbstractEventOccurrenceConstructor<@Nullable T extends Occurrence> implements Occurrence.Constructor<T>
     {
         @Override
-        public T getResultOf(@NonNull T theOccurrence) {
-            return theOccurrence;
+        public boolean isEvent() {
+            return true;
+        }
+    };
+    
+	protected static abstract class AbstractValueOccurrenceConstructor<@NonNull T extends Occurrence> implements Occurrence.Constructor<T>
+    {
+        @Override
+        public boolean isEvent() {
+            return false;
         }
     };
 
@@ -592,7 +600,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
      * Invoke a mapping with the given constructor with a given set of boundValues once. This shortform of invokeOnce
      * should only be used when it is known that recursive invocation is impossible.
      */
-    public <@NonNull T extends Invocation> void invoke(Occurrence.@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... boundValues) {
+    public <@Nullable T extends Invocation> void invoke(Occurrence.@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... boundValues) {
     	@NonNull Invocation invocation = constructor.newInstance(boundValues);
     	AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
     	invocationManager.invoke(invocation, true);
@@ -601,9 +609,11 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
     /**
      * Invoke a mapping with the given constructor with a given set of boundValues once. Repeated invocation attempts are ignored.
      */
-    public <@NonNull T extends Invocation> void invokeOnce(Occurrence.@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... boundValues) {
-    	T invocation = invocationManager.createFirst(this, constructor, boundValues);
-    	AbstractTransformer.INVOCATIONS.println("invokeOnce " + invocation);
-    	invocationManager.invoke(invocation, true);
+    public <@Nullable T extends Invocation> void invokeOnce(Occurrence.@NonNull Constructor<T> constructor, @Nullable Object @NonNull ... boundValues) {
+    	@Nullable T invocation = invocationManager.createFirst(this, constructor, boundValues);
+    	if (invocation != null) {
+    		AbstractTransformer.INVOCATIONS.println("invokeOnce " + invocation);
+        	invocationManager.invoke(invocation, true);
+    	}
     }
 }

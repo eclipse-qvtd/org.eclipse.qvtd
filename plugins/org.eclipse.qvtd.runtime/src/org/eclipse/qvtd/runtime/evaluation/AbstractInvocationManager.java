@@ -63,7 +63,7 @@ public abstract class AbstractInvocationManager implements InvocationManager
     		oneOccurrence = (Occurrence)zeroOrMoreOccurrences;
     		if ((occurrenceClass == oneOccurrence.getClass()) && oneOccurrence.isEqual(idResolver, argValues)) {
 	    		@SuppressWarnings("unchecked") T castOccurrence = (T)oneOccurrence;
-				return castOccurrence;
+				return constructor.isEvent() ? null : castOccurrence;
 	    	}
     	}
     	else if (zeroOrMoreOccurrences instanceof List<?>) {
@@ -72,7 +72,7 @@ public abstract class AbstractInvocationManager implements InvocationManager
 			for (@NonNull Occurrence anOccurrence : twoOrMoreOccurrences2) {
 		   		if ((occurrenceClass == anOccurrence.getClass()) && anOccurrence.isEqual(idResolver, argValues)) {
 		    		@SuppressWarnings("unchecked") T castOccurrence = (T)anOccurrence;
-					return castOccurrence;
+					return constructor.isEvent() ? null : castOccurrence;
     	    	}
     		}
     	}
@@ -89,6 +89,6 @@ public abstract class AbstractInvocationManager implements InvocationManager
 			twoOrMoreOccurrences2.add(theOccurrence);
 			occurrenceId2occurrence.put(hashCode, twoOrMoreOccurrences2);
 		}
-		return constructor.getResultOf(theOccurrence);
+		return theOccurrence;
     }
 }
