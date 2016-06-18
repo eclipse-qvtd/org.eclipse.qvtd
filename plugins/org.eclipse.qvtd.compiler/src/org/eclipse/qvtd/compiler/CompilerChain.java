@@ -10,14 +10,17 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 public interface CompilerChain 
@@ -62,6 +65,8 @@ public interface CompilerChain
 	public static final @NonNull String TRACE_STEP = "Trace";
 	
 	public static final @NonNull Key<Boolean> CHECK_KEY = new Key<Boolean>("check");
+	public static final @NonNull Key<Boolean> DEBUG_KEY = new Key<Boolean>("debug");
+//	public static final @NonNull Key<@NonNull QVTuConfiguration> QVTU_CONFIGURATION_KEY = new Key<@NonNull QVTuConfiguration>("qvtuConfiguration");
 	public static final @NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> GENMODEL_OPTIONS_KEY = new Key<@NonNull Map<@NonNull String, @Nullable String>>("genmodel-options");
 	public static final @NonNull Key<@Nullable Collection<@NonNull ? extends GenPackage>> GENMODEL_USED_GENPACKAGES_KEY = new Key<@Nullable Collection<@NonNull ? extends GenPackage>>("genmodel-usedGenPackages");;
 	public static final @NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> TRACE_OPTIONS_KEY = new Key<@NonNull Map<@NonNull String, @Nullable String>>("trace-options");
@@ -79,7 +84,13 @@ public interface CompilerChain
 	void addListener(@NonNull Listener listener);
 	@NonNull Class<? extends Transformer> build(@NonNull String outputName, @NonNull String ... genModelFiles) throws Exception;
 	@NonNull Transformation compile(@NonNull String outputName) throws Exception;
+	void compiled(@NonNull String stepKey, @NonNull Object object);
+	@NonNull Resource createResource(@NonNull URI uri) throws IOException;
 	void dispose();
+	@NonNull QVTiEnvironmentFactory getEnvironmentFactory();
+	<T> @Nullable T getOption(@NonNull String stepKey, @NonNull Key<T> optionKey);
+	@NonNull URI getURI(@NonNull String stepKey, @NonNull Key<URI> uriKey);
 	void removeListener(@NonNull Listener listener);
+	 void saveResource(@NonNull Resource asResource, @NonNull String stepKey) throws IOException;
 	<T> void setOption(@NonNull String stepKey, @NonNull Key<T> optionKey, @Nullable T object);
 }

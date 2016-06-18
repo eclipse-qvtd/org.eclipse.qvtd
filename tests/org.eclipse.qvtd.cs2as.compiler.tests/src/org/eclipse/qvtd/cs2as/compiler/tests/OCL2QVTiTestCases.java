@@ -237,10 +237,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		}
 	
 		// For testing purpose
-		@Override
-		protected Resource ocl2qvtp(URI oclDocURI) throws IOException {
-			return super.ocl2qvtp(oclDocURI);
-		}
+//		@Override
+//		protected Resource ocl2qvtp(URI oclDocURI) throws IOException {
+//			return super.ocl2qvtp(oclDocURI);
+//		}
 	}
 
 	@Before
@@ -302,7 +302,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI qvtpFileURI = baseURI.appendSegment("Source2Target.qvtp.qvtcas");
 
 		OCL2QVTiCompilerTester mtc = new OCL2QVTiCompilerTester(baseURI, "Source2Target.ocl", myQVT);
-		mtc.ocl2qvtp(oclDocURI);
+		mtc.ocl2qvtpCompilerStep.ocl2qvtp(oclDocURI);
 		// Test the QVTp transformation can be loaded
 		assertValidQVTiModel(qvtpFileURI);
 		myQVT.dispose();
@@ -443,7 +443,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtcas");
 
 		OCL2QVTiCompilerTester mtc = new OCL2QVTiCompilerTester(baseURI, "classescs2as.ocl", myQVT);
-		mtc.ocl2qvtp(oclDocURI);
+		mtc.ocl2qvtpCompilerStep.ocl2qvtp(oclDocURI);
 		// Test the QVTp transformation can be loaded
 		assertValidQVTiModel(qvtpFileURI);
 		myQVT.dispose();

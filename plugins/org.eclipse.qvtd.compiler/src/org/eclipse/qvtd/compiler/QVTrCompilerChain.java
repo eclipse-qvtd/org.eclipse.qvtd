@@ -41,8 +41,8 @@ import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.utilities.JavaSourceFileObject;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -52,114 +52,146 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
  */
 public class QVTrCompilerChain extends AbstractCompilerChain
 {
+	protected static class Xtext2QVTrCompilerStep extends AbstractCompilerStep
+	{
+		public Xtext2QVTrCompilerStep(@NonNull CompilerChain compilerChain) {
+			super(compilerChain, QVTR_STEP);
+		}
+		
+		public @NonNull Resource execute(@NonNull URI txURI) throws IOException {
+//			Transformation loadTransformation = QVTrelationUtil.loadTransformation(environmentFactory, txURI, false);
+//			Resource rResource = ClassUtil.nonNullState(loadTransformation.eResource());
+			Resource rResource = QVTrelationUtil.loadTransformations(environmentFactory, txURI, false);
+	        // FIXME Following code fixes up missing source. Should be fixed earlier.
+	        List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, rResource);
+	        if (missingOperationCallSources != null) {
+	        	System.err.println("Missing OperationCallExp sources  were fixed up for '" + txURI + "'");
+	        }
+			compiled(rResource);
+//			saveResource(rResource, QVTR_STEP); -- causes test failures
+			return rResource;
+	    }
+	}
+	
+	protected static class QVTr2QVTcCompilerStep extends AbstractCompilerStep
+	{
+		public QVTr2QVTcCompilerStep(@NonNull CompilerChain compilerChain) {
+			super(compilerChain, QVTC_STEP);
+		}
+		
+		public @NonNull Resource execute(@NonNull Resource rResource) throws IOException {
+			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+			try {
+		//		URI classURI = getURI(CLASS_STEP, URI_KEY);
+				URI classURI = compilerChain.getOption(CLASS_STEP, URI_KEY);
+				URI qvtcURI = compilerChain.getURI(QVTC_STEP, URI_KEY);
+				URI traceURI = compilerChain.getURI(TRACE_STEP, URI_KEY);
+				URI genModelURI = compilerChain.getURI(GENMODEL_STEP, URI_KEY);
+				Map<@NonNull String, @Nullable String> traceOptions = compilerChain.getOption(TRACE_STEP, TRACE_OPTIONS_KEY);
+				String traceNsURI = traceOptions != null ? traceOptions.get(TRACE_NS_URI) : null;
+				Resource cResource = createResource(qvtcURI);
+				Resource traceResource = createResource(PivotUtilInternal.getASURI(traceURI));
+		    	QVTr2QVTc t = new QVTr2QVTc(environmentFactory, rResource, cResource);
+		    	if (traceNsURI != null) {
+		    		t.setTraceNsURI(traceNsURI);
+		    	}
+				t.prepare();
+				//
+				t.transformToTracePackages();
+				Map<Object, Object> saveOptions = compilerChain.getOption(TRACE_STEP, SAVE_OPTIONS_KEY);
+				if (saveOptions == null) {
+					saveOptions = XMIUtil.createSaveOptions();
+				}
+				t.saveTrace(traceResource, traceURI, genModelURI, traceOptions, saveOptions);
+		        assertNoResourceErrors("Trace save", traceResource);
+		        compiled(TRACE_STEP, cResource);
+				//
+				t.transformToCoreTransformations();
+				saveOptions = compilerChain.getOption(QVTR_STEP, SAVE_OPTIONS_KEY);
+				if (saveOptions == null) {
+					saveOptions = XMIUtil.createSaveOptions();
+				}
+		        t.saveCore(cResource, saveOptions);
+		        assertNoResourceErrors("Core save", cResource);
+		        compiled(QVTC_STEP, cResource);
+				// FIXME next few lines should be classURI != null, but a test fails in combination (? due to global registry leakage)
+				saveOptions = compilerChain.getOption(GENMODEL_STEP, SAVE_OPTIONS_KEY);
+				if (saveOptions == null) {
+					saveOptions = XMIUtil.createSaveOptions();
+				}
+				saveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
+				Collection<@NonNull ? extends GenPackage> usedGenPackages = compilerChain.getOption(GENMODEL_STEP, GENMODEL_USED_GENPACKAGES_KEY);
+				GenModel genModel = t.saveGenModel(traceResource, traceURI, genModelURI, compilerChain.getOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY), saveOptions, usedGenPackages);
+		
+				if (classURI != null) {
+					t.generateModels(genModel);
+					String binProjectName = t.getProjectName(traceURI);
+					File binFile;
+					String objectPath;
+					String sourcePathPrefix;
+				   	List<@NonNull String> classpathProjects;
+					if (EcorePlugin.IS_ECLIPSE_RUNNING) {
+					    IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+					    IProject binProject = root.getProject(binProjectName);
+					    IFolder binFolder = binProject.getFolder("bin");
+					    binFile = URIUtil.toFile(binFolder.getLocationURI());
+						objectPath = binFile.toString()/*.replace(".", "/")*/.replace("\\", "/");		// FIXME deduce/parameterize bin
+					    IFile genIFile = root.getFile(new Path(genModel.getModelDirectory()));
+					    File genFile = URIUtil.toFile(genIFile.getLocationURI());
+						sourcePathPrefix = genFile.getAbsolutePath().replace("\\", "/");
+					   	classpathProjects = JavaSourceFileObject.createClasspathProjectList("org.eclipse.emf.common", "org.eclipse.emf.ecore", "org.eclipse.jdt.annotation", "org.eclipse.ocl.pivot", "org.eclipse.osgi", "org.eclipse.qvtd.runtime");
+					}
+					else {
+						ResourceSet resourceSet = environmentFactory.getResourceSet();
+						URI normalizedClassURI = resourceSet.getURIConverter().normalize(classURI);
+						objectPath = normalizedClassURI.toFileString();
+						URI location = ClassUtil.nonNullState(((StandaloneProjectMap)environmentFactory.getProjectManager()).getLocation(binProjectName));
+						binFile = new File(location.appendSegment("bin").toFileString());
+						URI genModelDirectoryURI = URI.createPlatformResourceURI(genModel.getModelDirectory(), true);
+						sourcePathPrefix = resourceSet.getURIConverter().normalize(genModelDirectoryURI).toFileString() + "/";
+					   	classpathProjects = null;
+					}
+					assert objectPath != null;
+					binFile.mkdir();
+					for (GenPackage genPackage : genModel.getGenPackages()) {
+						String basePackage = genPackage.getBasePackage();
+						String sourcePath = sourcePathPrefix + (basePackage != null ? ("/" + basePackage.replace(".", "/")) : "");
+						JavaSourceFileObject.compileClasses(sourcePath, objectPath, classpathProjects);
+					}
+				}
+				compiled(GENMODEL_STEP, cResource);
+				return cResource;
+			}
+			finally {
+				environmentFactory.setCreateStrategy(savedStrategy);
+			}
+	    }
+	}
+	
+	protected final @NonNull Xtext2QVTrCompilerStep xtext2qvtrCompilerStep;
+	protected final @NonNull QVTr2QVTcCompilerStep qvtr2qvtcCompilerStep;
+
 	public QVTrCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @Nullable Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options) {
 		super(environmentFactory, txURI, options);
+		this.xtext2qvtrCompilerStep = createXtext2QVTrCompilerStep();
+		this.qvtr2qvtcCompilerStep = createQVTr2QVTcCompilerStep();
 	}
 
 	@Override
 	public @NonNull Transformation compile(@NonNull String enforcedOutputName) throws IOException {
-//		Transformation loadTransformation = QVTrelationUtil.loadTransformation(environmentFactory, txURI, false);
-//		Resource rResource = ClassUtil.nonNullState(loadTransformation.eResource());
-		Resource rResource = QVTrelationUtil.loadTransformations(environmentFactory, txURI, false);
-        // FIXME Following code fixes up missing source. Should be fixed earlier.
-        List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, rResource);
-        if (missingOperationCallSources != null) {
-        	System.err.println("Missing OperationCallExp sources  were fixed up for '" + txURI + "'");
-        }
-		compiled(QVTR_STEP, rResource);
-//		saveResource(rResource, QVTR_STEP); -- causes test failures
-		Resource cResource = qvtr2qvtc(rResource);
-		assert cResource != null;
+		Resource rResource = xtext2qvtrCompilerStep.execute(txURI);
+		Resource cResource = qvtr2qvtcCompilerStep.execute(rResource);
 		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
+//		setOption(QVTU_STEP, QVTU_CONFIGURATION_KEY, qvtuConfiguration);
 		Resource pResource = qvtc2qvtp(cResource, qvtuConfiguration);
 		return qvtp2qvti(pResource);
 	}
 
-	private @NonNull Resource qvtr2qvtc(@NonNull Resource rResource) throws IOException {
-		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
-		try {
-	//		URI classURI = getURI(CLASS_STEP, URI_KEY);
-			URI classURI = getOption(CLASS_STEP, URI_KEY);
-			URI qvtcURI = getURI(QVTC_STEP, URI_KEY);
-			URI traceURI = getURI(TRACE_STEP, URI_KEY);
-			URI genModelURI = getURI(GENMODEL_STEP, URI_KEY);
-			Map<@NonNull String, @Nullable String> traceOptions = getOption(TRACE_STEP, TRACE_OPTIONS_KEY);
-			String traceNsURI = traceOptions != null ? traceOptions.get(TRACE_NS_URI) : null;
-			Resource cResource = createResource(qvtcURI);
-			Resource traceResource = createResource(PivotUtilInternal.getASURI(traceURI));
-	    	QVTr2QVTc t = new QVTr2QVTc(environmentFactory, rResource, cResource);
-	    	if (traceNsURI != null) {
-	    		t.setTraceNsURI(traceNsURI);
-	    	}
-			t.prepare();
-			//
-			t.transformToTracePackages();
-			Map<Object, Object> saveOptions = getOption(TRACE_STEP, SAVE_OPTIONS_KEY);
-			if (saveOptions == null) {
-				saveOptions = XMIUtil.createSaveOptions();
-			}
-			t.saveTrace(traceResource, traceURI, genModelURI, traceOptions, saveOptions);
-	        assertNoResourceErrors("Trace save", traceResource);
-			compiled(TRACE_STEP, cResource);
-			//
-			t.transformToCoreTransformations();
-			saveOptions = getOption(QVTR_STEP, SAVE_OPTIONS_KEY);
-			if (saveOptions == null) {
-				saveOptions = XMIUtil.createSaveOptions();
-			}
-	        t.saveCore(cResource, saveOptions);
-	        assertNoResourceErrors("Core save", cResource);
-			compiled(QVTC_STEP, cResource);
-			// FIXME next few lines should be classURI != null, but a test fails in combination (? due to global registry leakage)
-			saveOptions = getOption(GENMODEL_STEP, SAVE_OPTIONS_KEY);
-			if (saveOptions == null) {
-				saveOptions = XMIUtil.createSaveOptions();
-			}
-			saveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-			Collection<@NonNull ? extends GenPackage> usedGenPackages = getOption(GENMODEL_STEP, GENMODEL_USED_GENPACKAGES_KEY);
-			GenModel genModel = t.saveGenModel(traceResource, traceURI, genModelURI, getOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY), saveOptions, usedGenPackages);
-	
-			if (classURI != null) {
-				t.generateModels(genModel);
-				String binProjectName = t.getProjectName(traceURI);
-				File binFile;
-				String objectPath;
-				String sourcePathPrefix;
-			   	List<@NonNull String> classpathProjects;
-				if (EcorePlugin.IS_ECLIPSE_RUNNING) {
-				    IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-				    IProject binProject = root.getProject(binProjectName);
-				    IFolder binFolder = binProject.getFolder("bin");
-				    binFile = URIUtil.toFile(binFolder.getLocationURI());
-					objectPath = binFile.toString()/*.replace(".", "/")*/.replace("\\", "/");		// FIXME deduce/parameterize bin
-				    IFile genIFile = root.getFile(new Path(genModel.getModelDirectory()));
-				    File genFile = URIUtil.toFile(genIFile.getLocationURI());
-					sourcePathPrefix = genFile.getAbsolutePath().replace("\\", "/");
-				   	classpathProjects = JavaSourceFileObject.createClasspathProjectList("org.eclipse.emf.common", "org.eclipse.emf.ecore", "org.eclipse.jdt.annotation", "org.eclipse.ocl.pivot", "org.eclipse.osgi", "org.eclipse.qvtd.runtime");
-				}
-				else {
-					ResourceSet resourceSet = environmentFactory.getResourceSet();
-					URI normalizedClassURI = resourceSet.getURIConverter().normalize(classURI);
-					objectPath = normalizedClassURI.toFileString();
-					URI location = ClassUtil.nonNullState(((StandaloneProjectMap)environmentFactory.getProjectManager()).getLocation(binProjectName));
-					binFile = new File(location.appendSegment("bin").toFileString());
-					URI genModelDirectoryURI = URI.createPlatformResourceURI(genModel.getModelDirectory(), true);
-					sourcePathPrefix = resourceSet.getURIConverter().normalize(genModelDirectoryURI).toFileString() + "/";
-				   	classpathProjects = null;
-				}
-				assert objectPath != null;
-				binFile.mkdir();
-				for (GenPackage genPackage : genModel.getGenPackages()) {
-					String basePackage = genPackage.getBasePackage();
-					String sourcePath = sourcePathPrefix + (basePackage != null ? ("/" + basePackage.replace(".", "/")) : "");
-					JavaSourceFileObject.compileClasses(sourcePath, objectPath, classpathProjects);
-				}
-			}
-			compiled(GENMODEL_STEP, cResource);
-			return cResource;
-		}
-		finally {
-			environmentFactory.setCreateStrategy(savedStrategy);
-		}
+	protected @NonNull QVTr2QVTcCompilerStep createQVTr2QVTcCompilerStep() {
+		return new QVTr2QVTcCompilerStep(this);
+	}
+
+	protected @NonNull Xtext2QVTrCompilerStep createXtext2QVTrCompilerStep() {
+		return new Xtext2QVTrCompilerStep(this);
 	}
 }

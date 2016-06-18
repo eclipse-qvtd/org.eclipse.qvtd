@@ -76,6 +76,7 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		step2extension.put(QVTU_STEP, "qvtu.qvtcas");
 		step2extension.put(QVTM_STEP, "qvtm.qvtcas");
 		step2extension.put(QVTP_STEP, "qvtp.qvtcas");
+		step2extension.put(QVTG_STEP, "qvtg.xmi");
 		step2extension.put(QVTS_STEP, "qvts.xmi");
 		step2extension.put(QVTI_STEP, "qvtias");
 		step2extension.put(JAVA_STEP, "java");
@@ -96,6 +97,232 @@ public abstract class AbstractCompilerChain implements CompilerChain
 			this.qualifiedClassName = qualifiedClassName;
 			this.classPath = classPath;
 		}
+	}
+
+	protected static class Java2ClassCompilerStep extends AbstractCompilerStep
+	{
+		public Java2ClassCompilerStep(@NonNull CompilerChain compilerChain) {
+			super(compilerChain, CLASS_STEP);
+		}
+
+		public @NonNull Class<? extends Transformer> execute(@NonNull URI txURI, @NonNull JavaResult javaResult) throws Exception {
+		   	List<@NonNull String> classpathProjects;
+			if (EcorePlugin.IS_ECLIPSE_RUNNING) {
+				String projectName = txURI.segment(1);
+			   	classpathProjects = JavaSourceFileObject.createClasspathProjectList(projectName, "org.eclipse.emf.common", "org.eclipse.emf.ecore", "org.eclipse.jdt.annotation", "org.eclipse.ocl.pivot", "org.eclipse.osgi", "org.eclipse.qvtd.runtime");
+			}
+			else {
+			   	classpathProjects = null;
+			}
+			JavaSourceFileObject.saveClass(javaResult.classPath, javaResult.qualifiedClassName, javaResult.code, classpathProjects);
+			File explicitClassPath = new File(javaResult.classPath);
+			@SuppressWarnings("unchecked")
+			Class<? extends Transformer> txClass = (Class<? extends Transformer>) JavaSourceFileObject.loadExplicitClass(explicitClassPath, javaResult.qualifiedClassName);
+			assert txClass != null;
+			compiled(txClass);
+			return txClass;
+		}
+	}
+
+	protected static class QVTc2QVTuCompilerStep extends AbstractCompilerStep
+	{
+		public QVTc2QVTuCompilerStep(@NonNull CompilerChain compilerChain) {
+			super(compilerChain, QVTU_STEP);
+		}
+		
+		public @NonNull Resource execute(@NonNull Resource cResource, @NonNull QVTuConfiguration qvtuConfiguration) throws IOException {
+			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+			try {
+//				QVTuConfiguration qvtuConfiguration = compilerChain.getOption(QVTU_STEP, QVTU_CONFIGURATION_KEY);
+//				assert qvtuConfiguration != null;
+				Resource uResource = createResource();
+		        QVTc2QVTu tx = new QVTc2QVTu(environmentFactory, qvtuConfiguration);
+		        tx.transform(cResource, uResource);
+				return saveResource(uResource);
+			}
+			finally {
+				environmentFactory.setCreateStrategy(savedStrategy);
+			}
+	    }
+	}
+
+	protected static class QVTi2JavaCompilerStep extends AbstractCompilerStep
+	{
+		public QVTi2JavaCompilerStep(@NonNull CompilerChain compilerChain) {
+			super(compilerChain, JAVA_STEP);
+		}
+
+		protected @NonNull JavaResult execute(@NonNull URI txURI, @NonNull Transformation asTransformation, @NonNull String ... genModelFiles) throws IOException {
+			URI javaURI = compilerChain.getURI(JAVA_STEP, URI_KEY);
+			URI classURI = compilerChain.getURI(CLASS_STEP, URI_KEY);
+			ResourceSet resourceSet = environmentFactory.getResourceSet();
+			resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
+			if (genModelFiles != null) {
+				for (String genModelFile : genModelFiles) {
+					URI genModelURI = URI.createURI(genModelFile).resolve(txURI);
+					loadGenModel(genModelURI);
+				}
+			}
+			QVTiCodeGenerator cg = new QVTiCodeGenerator(environmentFactory, asTransformation);
+			QVTiCodeGenOptions options = cg.getOptions();
+			options.setUseNullAnnotations(true);
+			String javaExtraPrefix = compilerChain.getOption(JAVA_STEP, JAVA_EXTRA_PREFIX_KEY);
+			if (javaExtraPrefix != null) {
+				options.setPackagePrefix(javaExtraPrefix);
+			}
+			String javaCodeSource = cg.generateClassFile();
+			URI normalizedURI = resourceSet.getURIConverter().normalize(javaURI);
+			String javaFileName;
+			File explicitClassPath;
+			if (EcorePlugin.IS_ECLIPSE_RUNNING) {
+				URI createPlatformResourceURI = URI.createPlatformResourceURI("", false);
+				URI dURI = normalizedURI.deresolve(createPlatformResourceURI);
+				IFile iFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(dURI.toString()));
+			    File file = URIUtil.toFile(iFile.getLocationURI());
+				javaFileName = ClassUtil.nonNullState(file.toString());
+				IFile iBinFolder = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(classURI.deresolve(createPlatformResourceURI).toString()));
+			    File binFolder = URIUtil.toFile(iBinFolder.getLocationURI());
+				explicitClassPath = binFolder;
+			}
+			else {
+				javaFileName = ClassUtil.nonNullState(normalizedURI.toFileString());
+				URI normalizedClassURI = resourceSet.getURIConverter().normalize(classURI);
+				explicitClassPath = new File(normalizedClassURI.toFileString());
+			}
+			File javaFile = cg.saveSourceFile(javaFileName);
+			compiled(javaFile);
+			return new JavaResult(javaFile, javaCodeSource, cg.getQualifiedName(), String.valueOf(explicitClassPath));
+		}
+			
+		private void loadGenModel(@NonNull URI genModelURI) {
+			ResourceSet resourceSet = environmentFactory.getResourceSet();
+			MetamodelManagerInternal metamodelManager = environmentFactory.getMetamodelManager();
+			Resource csGenResource = resourceSet.getResource(genModelURI, true);
+			for (EObject eObject : csGenResource.getContents()) {
+				if (eObject instanceof GenModel) {
+					GenModel genModel = (GenModel)eObject;
+					genModel.reconcile();
+					metamodelManager.addGenModel(genModel);
+				}
+			}
+		}
+	}
+
+	protected static class QVTm2QVTpCompilerStep extends AbstractCompilerStep
+	{
+		public QVTm2QVTpCompilerStep(@NonNull CompilerChain compilerChain) {
+			super(compilerChain, QVTP_STEP);
+		}
+		
+		public @NonNull Resource execute(@NonNull Resource mResource) throws IOException {
+			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+			try {
+				Resource pResource = createResource();
+		        QVTm2QVTp tx = new QVTm2QVTp(environmentFactory);
+		        tx.transform(mResource, pResource);
+		        return saveResource(pResource);
+			}
+			finally {
+				environmentFactory.setCreateStrategy(savedStrategy);
+			}
+	    }
+	}
+
+	protected static class QVTp2QVTgCompilerStep extends AbstractCompilerStep
+	{
+		public QVTp2QVTgCompilerStep(@NonNull CompilerChain compilerChain) {
+			super(compilerChain, QVTG_STEP);
+		}
+		
+		public @NonNull Resource execute(@NonNull Resource pResource, @NonNull QVTp2QVTg qvtp2qvtg) throws IOException {
+			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+			try {
+				URI qvtgURI = compilerChain.getURI(QVTS_STEP, URI_KEY);
+				Resource gResource = createResource(qvtgURI);
+				Transformation asTransformation = getTransformation(pResource);
+				RootDomainUsageAnalysis domainUsageAnalysis = qvtp2qvtg.getDomainUsageAnalysis();
+				domainUsageAnalysis.analyzeTransformation(asTransformation);
+				qvtp2qvtg.run(pResource, gResource);
+				gResource.getContents().add(domainUsageAnalysis.getPrimitiveTypeModel());
+				saveResource(gResource);
+				return gResource;
+			}
+			finally {
+				environmentFactory.setCreateStrategy(savedStrategy);
+			}
+	    }
+	}
+
+	protected static class QVTp2QVTsCompilerStep extends AbstractCompilerStep
+	{
+		public QVTp2QVTsCompilerStep(@NonNull CompilerChain compilerChain) {
+			super(compilerChain, QVTS_STEP);
+			Scheduler.DEBUG_GRAPHS.setState(getOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
+		}
+		
+		public @NonNull RootScheduledRegion execute(@NonNull Resource gResource, @NonNull QVTp2QVTg qvtp2qvtg) throws IOException {
+			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+			try {
+				Schedule schedule = getSchedule(gResource);
+				Scheduler scheduler = new Scheduler(environmentFactory, schedule, qvtp2qvtg);
+				RootScheduledRegion rootRegion = scheduler.qvtp2qvts();
+				compiled(rootRegion);			// FIXME
+//				saveResource(sResource, QVTS_STEP);
+				return rootRegion;
+			}
+			finally {
+				environmentFactory.setCreateStrategy(savedStrategy);
+			}
+	    }
+		
+		private @NonNull Schedule getSchedule(@NonNull Resource gResource) throws IOException {
+			for (EObject eContent : gResource.getContents()) {
+				if (eContent instanceof Schedule) {
+		    		return (Schedule) eContent;
+				}
+			}
+			throw new IOException("No Schedule element in " + gResource.getURI());
+		}
+	}
+
+	protected static class QVTs2QVTiCompilerStep extends AbstractCompilerStep
+	{
+		public QVTs2QVTiCompilerStep(@NonNull CompilerChain compilerChain) {
+			super(compilerChain, QVTI_STEP);
+		}
+		
+		public @NonNull Transformation execute(@NonNull RootScheduledRegion rootRegion) throws IOException {
+			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+			try {
+				Scheduler scheduler = rootRegion.getScheduler();
+				Resource iResource = scheduler.qvts2qvti(rootRegion, getURI(), scheduler.getSymbolNameReservation());
+				saveResource(iResource);
+				return getTransformation(iResource);
+			}
+			finally {
+				environmentFactory.setCreateStrategy(savedStrategy);
+			}
+	    }
+	}
+
+	protected static class QVTu2QVTmCompilerStep extends AbstractCompilerStep
+	{
+		public QVTu2QVTmCompilerStep(@NonNull CompilerChain compilerChain) {
+			super(compilerChain, QVTM_STEP);
+		}
+		
+		public @NonNull Resource execute(@NonNull Resource uResource) throws IOException {
+			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
+			try {
+				Resource mResource = createResource();
+				QVTu2QVTm tx = new QVTu2QVTm(environmentFactory);
+				tx.transform(uResource, mResource);
+				return saveResource(mResource);
+			}
+			finally {
+				environmentFactory.setCreateStrategy(savedStrategy);
+			}
+	    }
 	}
 	
 	public static void assertNoResourceErrors(@NonNull String prefix, @NonNull Resource resource) {
@@ -151,6 +378,24 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		return step2extension.get(key);
 	}
 
+	public static @NonNull Transformation getTransformation(Resource resource) throws IOException {
+		List<@NonNull Transformation> asTransformations = new ArrayList<@NonNull Transformation>();
+		for (EObject eContent : resource.getContents()) {
+			if (eContent instanceof BaseModel) {
+				QVTbaseUtil.getAllTransformations(ClassUtil.nullFree(((BaseModel)eContent).getOwnedPackages()), asTransformations);
+			}
+		}
+		if (asTransformations.size() == 1) {
+			return asTransformations.get(0);
+		}
+		else if (asTransformations.size() == 1) {
+			throw new IOException("No Transformation element in " + resource.getURI());
+		}
+		else {
+			throw new IOException("Multiple Transformation elements in " + resource.getURI());
+		}
+	}
+
 	protected final @NonNull QVTiEnvironmentFactory environmentFactory;
 	protected final @NonNull ResourceSet asResourceSet;
 	
@@ -167,6 +412,15 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	protected final @NonNull URI prefixURI;
 	
 	private @Nullable List<@NonNull Listener> listeners = null;
+
+	protected final @NonNull Java2ClassCompilerStep java2classCompilerStep;
+	protected final @NonNull QVTc2QVTuCompilerStep qvtc2qvtuCompilerStep;
+	protected final @NonNull QVTu2QVTmCompilerStep qvtu2qvtmCompilerStep;
+	protected final @NonNull QVTm2QVTpCompilerStep qvtm2qvtpCompilerStep;
+	protected final @NonNull QVTp2QVTgCompilerStep qvtp2qvtgCompilerStep;
+	protected final @NonNull QVTp2QVTsCompilerStep qvtp2qvtsCompilerStep;
+	protected final @NonNull QVTs2QVTiCompilerStep qvts2qvtiCompilerStep;
+	protected final @NonNull QVTi2JavaCompilerStep qvti2javaCompilerStep;
 	
 	protected AbstractCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI,
 			@Nullable Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options) {
@@ -175,6 +429,14 @@ public abstract class AbstractCompilerChain implements CompilerChain
     	this.txURI = txURI;
     	this.prefixURI = txURI.trimSegments(1).appendSegment("temp").appendSegment(txURI.trimFileExtension().lastSegment());
 		this.options = options != null ? options : new HashMap<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>>();
+		this.java2classCompilerStep = createJava2ClassCompilerStep();
+		this.qvtc2qvtuCompilerStep = createQVTc2QVTuCompilerStep();
+		this.qvtu2qvtmCompilerStep = createQVTu2QVTmCompilerStep();
+		this.qvtm2qvtpCompilerStep = createQVTm2QVTpCompilerStep();
+		this.qvtp2qvtgCompilerStep = createQVTp2QVTgCompilerStep();
+		this.qvtp2qvtsCompilerStep = createQVTp2QVTsCompilerStep();
+		this.qvts2qvtiCompilerStep = createQVTs2QVTiCompilerStep();
+		this.qvti2javaCompilerStep = createQVTi2JavaCompilerStep();
 	}
 
 	@Override
@@ -199,13 +461,46 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	@Override
 	public abstract @NonNull Transformation compile(@NonNull String enforcedOutputName) throws IOException;
 
-	protected void compiled(@NonNull String stepKey, @NonNull Object object) {
+	@Override
+	public void compiled(@NonNull String stepKey, @NonNull Object object) {
 		List<@NonNull Listener> listeners2 = listeners;
 		if (listeners2 != null) {
 			for (Listener listener : listeners2) {
 				listener.compiled(stepKey, object);
 			}
 		}
+	}
+
+	protected @NonNull Java2ClassCompilerStep createJava2ClassCompilerStep() {
+		return new Java2ClassCompilerStep(this);
+	}
+
+	protected @NonNull QVTc2QVTuCompilerStep createQVTc2QVTuCompilerStep() {
+		return new QVTc2QVTuCompilerStep(this);
+	}
+
+	protected @NonNull QVTi2JavaCompilerStep createQVTi2JavaCompilerStep() {
+		return new QVTi2JavaCompilerStep(this);
+	}
+
+	protected @NonNull QVTm2QVTpCompilerStep createQVTm2QVTpCompilerStep() {
+		return new QVTm2QVTpCompilerStep(this);
+	}
+
+	protected @NonNull QVTp2QVTgCompilerStep createQVTp2QVTgCompilerStep() {
+		return new QVTp2QVTgCompilerStep(this);
+	}
+
+	protected @NonNull QVTp2QVTsCompilerStep createQVTp2QVTsCompilerStep() {
+		return new QVTp2QVTsCompilerStep(this);
+	}
+
+	protected @NonNull QVTs2QVTiCompilerStep createQVTs2QVTiCompilerStep() {
+		return new QVTs2QVTiCompilerStep(this);
+	}
+
+	protected @NonNull QVTu2QVTmCompilerStep createQVTu2QVTmCompilerStep() {
+		return new QVTu2QVTmCompilerStep(this);
 	}
 	
 	protected @NonNull QVTuConfiguration createQVTuConfiguration(@NonNull Resource cResource, QVTuConfiguration.Mode mode, @NonNull String enforcedOutputName) throws IOException {
@@ -232,7 +527,8 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		return new QVTuConfiguration(QVTuConfiguration.Mode.ENFORCE, inputNames, Collections.singletonList(enforcedOutputName));
 	}
 
-	protected @NonNull Resource createResource(@NonNull URI uri) throws IOException {
+	@Override
+	public @NonNull Resource createResource(@NonNull URI uri) throws IOException {
 		Resource resource = asResourceSet.createResource(uri);
 		if (resource == null) {
 			throw new IOException("Failed to create " + uri);
@@ -243,6 +539,12 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	@Override
 	public void dispose() {}
 
+	@Override
+	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+		return environmentFactory;
+	}
+
+	@Override
 	public <T> @Nullable T getOption(@NonNull String stepKey, @NonNull Key<T> optionKey) {
 		Map<@NonNull Key<?>, @Nullable Object> stepOptions = options.get(stepKey);
 		if ((stepOptions == null) && !options.containsKey(stepOptions)) {
@@ -261,211 +563,34 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		@SuppressWarnings("unchecked") T castSaveOptions = (T) saveOptions;
 		return castSaveOptions;
 	}
-
-	protected @NonNull Resource getResource(@NonNull URI uri) throws IOException {
-		Resource resource = asResourceSet.getResource(uri, true);
-		if (resource == null) {
-			throw new IOException("Failed to get " + uri);
-		}
-		assertNoResourceErrors("get", resource);
-    	assertNoValidationErrors("get validation", resource);
-		return resource;
-	}
 	
-	private @NonNull Schedule getSchedule(@NonNull Resource gResource) throws IOException {
-		for (EObject eContent : gResource.getContents()) {
-			if (eContent instanceof Schedule) {
-	    		return (Schedule) eContent;
-			}
-		}
-		throw new IOException("No Schedule element in " + gResource.getURI());
-	}
-
-	public @NonNull Transformation getTransformation(Resource resource) throws IOException {
-		List<@NonNull Transformation> asTransformations = new ArrayList<@NonNull Transformation>();
-		for (EObject eContent : resource.getContents()) {
-			if (eContent instanceof BaseModel) {
-				QVTbaseUtil.getAllTransformations(ClassUtil.nullFree(((BaseModel)eContent).getOwnedPackages()), asTransformations);
-			}
-		}
-		if (asTransformations.size() == 1) {
-			return asTransformations.get(0);
-		}
-		else if (asTransformations.size() == 1) {
-			throw new IOException("No Transformation element in " + resource.getURI());
-		}
-		else {
-			throw new IOException("Multiple Transformation elements in " + resource.getURI());
-		}
-	}
-	
+	@Override
 	public @NonNull URI getURI(@NonNull String stepKey, @NonNull Key<URI> uriKey) {
 		URI uri = getOption(stepKey, URI_KEY);
 		return uri != null ? uri : prefixURI.appendFileExtension(step2extension.get(stepKey));
 	}
 
 	protected @NonNull Class<? extends Transformer> java2class(@NonNull JavaResult javaResult) throws Exception {
-	   	List<@NonNull String> classpathProjects;
-		if (EcorePlugin.IS_ECLIPSE_RUNNING) {
-			String projectName = txURI.segment(1);
-		   	classpathProjects = JavaSourceFileObject.createClasspathProjectList(projectName, "org.eclipse.emf.common", "org.eclipse.emf.ecore", "org.eclipse.jdt.annotation", "org.eclipse.ocl.pivot", "org.eclipse.osgi", "org.eclipse.qvtd.runtime");
-		}
-		else {
-		   	classpathProjects = null;
-		}
-		JavaSourceFileObject.saveClass(javaResult.classPath, javaResult.qualifiedClassName, javaResult.code, classpathProjects);
-		File explicitClassPath = new File(javaResult.classPath);
-		@SuppressWarnings("unchecked")
-		Class<? extends Transformer> txClass = (Class<? extends Transformer>) JavaSourceFileObject.loadExplicitClass(explicitClassPath, javaResult.qualifiedClassName);
-		assert txClass != null;
-		compiled(CLASS_STEP, txClass);
-		return txClass;
-	}
-		
-	private void loadGenModel(@NonNull URI genModelURI) {
-		ResourceSet resourceSet = environmentFactory.getResourceSet();
-		MetamodelManagerInternal metamodelManager = environmentFactory.getMetamodelManager();
-		Resource csGenResource = resourceSet.getResource(genModelURI, true);
-		for (EObject eObject : csGenResource.getContents()) {
-			if (eObject instanceof GenModel) {
-				GenModel genModel = (GenModel)eObject;
-				genModel.reconcile();
-				metamodelManager.addGenModel(genModel);
-			}
-		}
+		return java2classCompilerStep.execute(txURI, javaResult);
 	}
 
 	protected @NonNull Resource qvtc2qvtp(@NonNull Resource cResource, @NonNull QVTuConfiguration qvtuConfiguration) throws IOException {
-		Resource uResource = qvtc2qvtu(cResource, qvtuConfiguration);
-		Resource mResource = qvtu2qvtm(uResource);
-    	Resource pResource = qvtm2qvtp(mResource);
-		return pResource;
-	}
-
-	protected @NonNull Resource qvtc2qvtu(@NonNull Resource cResource, @NonNull QVTuConfiguration qvtuConfiguration) throws IOException {
-		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
-		try {
-			URI qvtuURI = getURI(QVTU_STEP, URI_KEY);
-			Resource uResource = createResource(qvtuURI);
-	        QVTc2QVTu qvtc2qvtu = new QVTc2QVTu(environmentFactory, qvtuConfiguration);
-	        qvtc2qvtu.transform(cResource, uResource);
-			saveResource(uResource, QVTU_STEP);
-			return uResource;
-		}
-		finally {
-			environmentFactory.setCreateStrategy(savedStrategy);
-		}
-	}
-
-	protected @NonNull Resource qvtg2qvti(@NonNull Resource pResource, @NonNull Resource gResource, @NonNull QVTp2QVTg qvtp2qvtg) throws IOException {
-		URI qvtiURI = getURI(QVTI_STEP, URI_KEY);
-		Schedule schedule = getSchedule(gResource);
-		Scheduler scheduler = new Scheduler(environmentFactory, schedule, qvtp2qvtg);
-		RootScheduledRegion rootRegion = scheduler.qvtp2qvts();
-		compiled(QVTS_STEP, gResource);			// FIXME
-//		saveResource(sResource, QVTS_STEP);
-		Resource iResource = scheduler.qvts2qvti(rootRegion, qvtiURI, scheduler.getSymbolNameReservation());
-		saveResource(iResource, QVTI_STEP);
-		return iResource;
+		Resource uResource = qvtc2qvtuCompilerStep.execute(cResource, qvtuConfiguration);
+		Resource mResource = qvtu2qvtmCompilerStep.execute(uResource);
+    	return qvtm2qvtpCompilerStep.execute(mResource);
 	}
 
 	protected @NonNull JavaResult qvti2java(@NonNull Transformation asTransformation, @NonNull String ... genModelFiles) throws IOException {
-		URI javaURI = getURI(JAVA_STEP, URI_KEY);
-		URI classURI = getURI(CLASS_STEP, URI_KEY);
-		ResourceSet resourceSet = environmentFactory.getResourceSet();
-		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
-		if (genModelFiles != null) {
-			for (String genModelFile : genModelFiles) {
-				URI genModelURI = URI.createURI(genModelFile).resolve(txURI);
-				loadGenModel(genModelURI);
-			}
-		}
-		QVTiCodeGenerator cg = new QVTiCodeGenerator(environmentFactory, asTransformation);
-		QVTiCodeGenOptions options = cg.getOptions();
-		options.setUseNullAnnotations(true);
-		String javaExtraPrefix = getOption(JAVA_STEP, JAVA_EXTRA_PREFIX_KEY);
-		if (javaExtraPrefix != null) {
-			options.setPackagePrefix(javaExtraPrefix);
-		}
-		String javaCodeSource = cg.generateClassFile();
-		URI normalizedURI = resourceSet.getURIConverter().normalize(javaURI);
-		String javaFileName;
-		File explicitClassPath;
-		if (EcorePlugin.IS_ECLIPSE_RUNNING) {
-			URI createPlatformResourceURI = URI.createPlatformResourceURI("", false);
-			URI dURI = normalizedURI.deresolve(createPlatformResourceURI);
-			IFile iFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(dURI.toString()));
-		    File file = URIUtil.toFile(iFile.getLocationURI());
-			javaFileName = ClassUtil.nonNullState(file.toString());
-			IFile iBinFolder = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(classURI.deresolve(createPlatformResourceURI).toString()));
-		    File binFolder = URIUtil.toFile(iBinFolder.getLocationURI());
-			explicitClassPath = binFolder;
-		}
-		else {
-			javaFileName = ClassUtil.nonNullState(normalizedURI.toFileString());
-			URI normalizedClassURI = resourceSet.getURIConverter().normalize(classURI);
-			explicitClassPath = new File(normalizedClassURI.toFileString());
-		}
-		File javaFile = cg.saveSourceFile(javaFileName);
-		compiled(JAVA_STEP, javaFile);
-		return new JavaResult(javaFile, javaCodeSource, cg.getQualifiedName(), String.valueOf(explicitClassPath));
-	}
-
-    protected @NonNull Resource qvtm2qvtp(@NonNull Resource mResource) throws IOException {
-		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
-		try {
-			URI qvtpURI = getURI(QVTP_STEP, URI_KEY);
-			Resource pResource = createResource(qvtpURI);
-	        QVTm2QVTp tx = new QVTm2QVTp(environmentFactory);
-	        tx.transform(mResource, pResource);
-			saveResource(pResource, QVTP_STEP);
-	        return pResource;
-		}
-		finally {
-			environmentFactory.setCreateStrategy(savedStrategy);
-		}
-    }
-
-	protected @NonNull Resource qvtp2qvtg(@NonNull Resource pResource, @NonNull QVTp2QVTg qvtp2qvtg) throws IOException {
-		URI qvtgURI = getURI(QVTS_STEP, URI_KEY);
-		RootDomainUsageAnalysis domainUsageAnalysis = qvtp2qvtg.getDomainUsageAnalysis();
-		Resource gResource = createResource(qvtgURI);
-		Transformation asTransformation = getTransformation(pResource);
-		domainUsageAnalysis.analyzeTransformation(asTransformation);
-		qvtp2qvtg.run(pResource, gResource);
-		gResource.getContents().add(domainUsageAnalysis.getPrimitiveTypeModel());
-		saveResource(gResource, QVTG_STEP);
-		return gResource;
+		return qvti2javaCompilerStep.execute(txURI, asTransformation, genModelFiles);
 	}
 
 	protected @NonNull Transformation qvtp2qvti(@NonNull Resource pResource) throws IOException {
-		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
-		try {
-			RootDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
-			ClassRelationships classRelationships = new ClassRelationships(environmentFactory);
-			QVTp2QVTg qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);
-			Resource gResource = qvtp2qvtg(pResource, qvtp2qvtg);
-			Resource iResource = qvtg2qvti(pResource, gResource, qvtp2qvtg);
-			return getTransformation(iResource);
-		}
-		finally {
-			environmentFactory.setCreateStrategy(savedStrategy);
-		}
-	}
-	
-	protected @NonNull Resource qvtu2qvtm(@NonNull Resource uResource) throws IOException {
-		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
-		try {
-			URI qvtmURI = getURI(QVTM_STEP, URI_KEY);
-			Resource mResource = createResource(qvtmURI);
-			QVTu2QVTm qvtu2qvtm = new QVTu2QVTm(environmentFactory);
-			qvtu2qvtm.transform(uResource, mResource);
-			saveResource(mResource, QVTM_STEP);
-			return mResource;
-		}
-		finally {
-			environmentFactory.setCreateStrategy(savedStrategy);
-		}
+		RootDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
+		ClassRelationships classRelationships = new ClassRelationships(environmentFactory);
+		QVTp2QVTg qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);
+		Resource gResource = qvtp2qvtgCompilerStep.execute(pResource, qvtp2qvtg);
+		RootScheduledRegion rootRegion = qvtp2qvtsCompilerStep.execute(gResource, qvtp2qvtg);
+	   	return qvts2qvtiCompilerStep.execute(rootRegion);
 	}
 
 	@Override
@@ -476,20 +601,20 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		}
 	}
 
-	protected void saveResource(@NonNull Resource resource, @NonNull String stepKey) throws IOException {
-		Map<?, ?> saveOptions = getOption(stepKey, SAVE_OPTIONS_KEY);
+	@Override
+	public void saveResource(@NonNull Resource asResource, @NonNull String stepKey) throws IOException {
+		Map<?, ?> saveOptions = getOption(stepKey, CompilerChain.SAVE_OPTIONS_KEY);
 		if (saveOptions != null) {
-			resource.save(saveOptions);
+			asResource.save(saveOptions);
 		}
-		assertNoResourceErrors(stepKey, resource);
-		if (getOption(stepKey, VALIDATE_KEY) == Boolean.TRUE) {
-	        assertNoValidationErrors(stepKey, resource);
+		AbstractCompilerChain.assertNoResourceErrors(stepKey, asResource);
+		if (getOption(stepKey, CompilerChain.VALIDATE_KEY) == Boolean.TRUE) {
+			AbstractCompilerChain.assertNoValidationErrors(stepKey, asResource);
 		}
-		compiled(stepKey, resource);
 	}
 
 	@Override
-	public <@NonNull T> void setOption(@NonNull String stepKey, @NonNull Key<T> optionKey, @Nullable T object) {
+	public <T> void setOption(@NonNull String stepKey, @NonNull Key<T> optionKey, @Nullable T object) {
 		Map<@NonNull Key<?>, @Nullable Object> stepOptions = options.get(stepKey);
 		if (stepOptions == null) {
 			stepOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();

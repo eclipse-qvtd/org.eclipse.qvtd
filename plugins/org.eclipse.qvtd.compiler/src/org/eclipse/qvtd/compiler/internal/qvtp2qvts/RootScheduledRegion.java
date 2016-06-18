@@ -1188,6 +1188,10 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		return this;
 	}
 
+	public @NonNull Scheduler getScheduler() {
+		return (Scheduler)getSchedulerConstants();
+	}
+
 /*	private @NonNull Node zzgetSourceOrConnectionNode(@NonNull Collection<Node> sourceNodes, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		if (sourceNodes.size() <= 1) {
 			@SuppressWarnings("null")@NonNull Node sourceNode = sourceNodes.iterator().next();
