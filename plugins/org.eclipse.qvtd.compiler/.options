@@ -20,6 +20,8 @@ org.eclipse.qvtd.compiler/qvtp2qvts/dump/class2realizedNodes=false
 org.eclipse.qvtd.compiler/qvtp2qvts/dump/inputModel2domainUsage=false
 # Turn on dump of the possible containing properties for each class 
 org.eclipse.qvtd.compiler/qvtp2qvts/dump/property2consumingClass=false
+# Turn on tracing of the splitting of multi-headed regions
+org.eclipse.qvtd.compiler/qvtp2qvts/headSplitting=false
 # Turn on tracing of the region cycle resolution 
 org.eclipse.qvtd.compiler/qvtp2qvts/regionCycles=false
 # Turn on tracing of the region depth computation 
