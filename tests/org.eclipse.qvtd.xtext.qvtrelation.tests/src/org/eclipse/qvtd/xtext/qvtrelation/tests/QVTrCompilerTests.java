@@ -43,6 +43,7 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
+import org.eclipse.qvtd.compiler.internal.qvts2qvti.HeadSplitter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -421,9 +422,10 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
     public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_CG() throws Exception {
+    	HeadSplitter.SPLITTING.setState(true);
 		Scheduler.DEBUG_GRAPHS.setState(true);
 		AbstractTransformer.EXCEPTIONS.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
+//		AbstractTransformer.INVOCATIONS.setState(true);
 //   	QVTm2QVTp.PARTITIONING.setState(true);
 //		QVTr2QVTc.VARIABLES.setState(true);
 		MyQVT myQVT = new MyQVT("hstm2fstm");
@@ -480,6 +482,7 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
     public void testQVTrCompiler_SeqToStm_CG() throws Exception {
+    	HeadSplitter.SPLITTING.setState(true);
 //		AbstractTransformer.EXCEPTIONS.setState(true);
 //		AbstractTransformer.INVOCATIONS.setState(true);
 //   	QVTm2QVTp.PARTITIONING.setState(true);
