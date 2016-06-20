@@ -278,6 +278,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			if (variable != null) {
 				return PivotUtil.createVariableExp(variable);
 			}
+			if (node.isOperation()) {
+				Iterable<@NonNull TypedElement> typedElements = node.getTypedElements();
+				assert Iterables.size(typedElements) >= 1;
+				return typedElements.iterator().next().accept(inlineExpressionCreator);
+				
+			}
 			for (@NonNull Edge edge : node.getArgumentEdges()) {
 				Node expNode = edge.getSource();
 //				TypedElement oldTypedElement = expNode.getTypedElements().iterator().next();
@@ -483,6 +489,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			assert referredType != null;
 			return helper.createTypeExp(referredType);
 		}
+
+//		@Override		-- should not be invoked; results in use of input not output variable
+//		public @NonNull OCLExpression visitVariable(@NonNull Variable pVariable) {
+//			return helper.createVariableExp(pVariable);
+//		}
 
 		@Override
 		public @NonNull OCLExpression visitVariableExp(@NonNull VariableExp pVariableExp) {
@@ -803,24 +814,44 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			ImperativeDomain oldDomain = typedModel2domain.put(qvtiTypedModel, domain);
 			assert oldDomain == null;
 		}
-		ECollections.sort(ClassUtil.nullFree(mapping.getDomain()), DomainNameComparator.INSTANCE);
+		EList<@NonNull Domain> domains = ClassUtil.nullFree(mapping.getDomain());
+		ECollections.sort(domains, DomainNameComparator.INSTANCE);
 	}
 
 	/**
 	 * Create a predicate expression for each TRUE 'head'.
 	 */
 	private void createExternalPredicates() {
-		for (@NonNull Node node : region.getNodes()) {
-			if (node.isTrue()) {
-				for (@NonNull Edge edge : node.getArgumentEdges()) {
-					Node predicateNode = edge.getSource();
-					for (@NonNull TypedElement typedElement : predicateNode.getTypedElements()) {
-						OCLExpression conditionExpression = typedElement.accept(inlineExpressionCreator);
-						Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
-						asPredicate.setConditionExpression(conditionExpression);
-						addPredicate(asPredicate);
-					}
+		/*		for (@NonNull Node node : region.getNodes()) {
+		if (node.isTrue()) {
+			for (@NonNull Edge edge : node.getArgumentEdges()) {
+				Node predicateNode = edge.getSource();
+				for (@NonNull TypedElement typedElement : predicateNode.getTypedElements()) {
+					OCLExpression conditionExpression = typedElement.accept(inlineExpressionCreator);
+					Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
+					asPredicate.setConditionExpression(conditionExpression);
+					addPredicate(asPredicate);
 				}
+			}
+		} */
+		for (@NonNull Edge edge : region.getEdges()) {
+			if (edge.isPredicate()) {
+				Node sourceNode = edge.getSource();
+				Node targetNode = edge.getTarget();
+				OCLExpression conditionExpression = inlineExpressionCreator.getExpression(sourceNode);
+				assert conditionExpression != null;
+				if (!targetNode.isTrue()) {
+					String name = ClassUtil.nonNullState(edge.getName()).trim();
+					if (name.length() >= 2) {
+						name = name.substring(1, name.length()-1);		// Lose guillemets
+					}
+					OCLExpression targetExpression = inlineExpressionCreator.getExpression(targetNode);
+					assert targetExpression != null;
+					conditionExpression = helper.createOperationCallExp(conditionExpression, name, targetExpression);
+				}
+				Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
+				asPredicate.setConditionExpression(conditionExpression);
+				addPredicate(asPredicate);
 			}
 		}
 	}

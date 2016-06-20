@@ -223,6 +223,11 @@ public abstract class AbstractEdge implements Edge//, GraphStringBuilder.GraphNo
 	}
 
 	@Override
+	public boolean isPredicate() {
+		return edgeRole.isPredicate();
+	}
+
+	@Override
 	public boolean isPredicated() {
 		return edgeRole.isPredicated();
 	}

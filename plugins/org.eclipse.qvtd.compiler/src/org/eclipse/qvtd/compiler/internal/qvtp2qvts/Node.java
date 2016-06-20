@@ -186,6 +186,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Return true if this node is an output port of a nested region.
 	 */
 //	boolean isOutput();
+
 	/**
 	 * Return true if the value of this node is part of the navigation path that must be validated
 	 * by predicate matching prior to execution of a mapping.

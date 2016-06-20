@@ -109,8 +109,11 @@ public class Edges
 	{
 		public static class ArgumentEdgeRole extends AbstractComputationEdgeRole
 		{
-			protected ArgumentEdgeRole(@NonNull Phase phase) {
+			private final boolean isPredicate;
+
+			protected ArgumentEdgeRole(@NonNull Phase phase, boolean isPredicate) {
 				super(phase);
+				this.isPredicate = isPredicate;
 			}
 
 			@Override
@@ -122,25 +125,40 @@ public class Edges
 			public boolean isMergeable() {
 				return true;
 			}
+
+			@Override
+			public boolean isPredicate() {
+				return isPredicate;
+			}
 		}
 
-		private static final @NonNull ArgumentEdgeRole CONSTANT_ARGUMENT = new ArgumentEdgeRole(Role.Phase.CONSTANT);	
-		private static final @NonNull ArgumentEdgeRole LOADED_ARGUMENT = new ArgumentEdgeRole(Role.Phase.LOADED);	
-		private static final @NonNull ArgumentEdgeRole PREDICATED_ARGUMENT = new ArgumentEdgeRole(Role.Phase.PREDICATED);	
-		public static final @NonNull ArgumentEdgeRole REALIZED_ARGUMENT = new ArgumentEdgeRole(Role.Phase.REALIZED);	
+		private static final @NonNull ArgumentEdgeRole CONSTANT_ARGUMENT = new ArgumentEdgeRole(Role.Phase.CONSTANT, false);	
+		private static final @NonNull ArgumentEdgeRole CONSTANT_PREDICATE = new ArgumentEdgeRole(Role.Phase.CONSTANT, true);	
+		private static final @NonNull ArgumentEdgeRole LOADED_ARGUMENT = new ArgumentEdgeRole(Role.Phase.LOADED, false);	
+		private static final @NonNull ArgumentEdgeRole LOADED_PREDICATE = new ArgumentEdgeRole(Role.Phase.LOADED, true);	
+		private static final @NonNull ArgumentEdgeRole PREDICATED_ARGUMENT = new ArgumentEdgeRole(Role.Phase.PREDICATED, false);	
+		private static final @NonNull ArgumentEdgeRole PREDICATED_PREDICATE = new ArgumentEdgeRole(Role.Phase.PREDICATED, true);	
+		public static final @NonNull ArgumentEdgeRole REALIZED_ARGUMENT = new ArgumentEdgeRole(Role.Phase.REALIZED, false);	
+		public static final @NonNull ArgumentEdgeRole REALIZED_PREDICATE = new ArgumentEdgeRole(Role.Phase.REALIZED, true);	
+
+		private final boolean isPredicate;
+
+		public ArgumentEdgeRoleFactory(boolean isPredicate) {
+			this.isPredicate = isPredicate;
+		}
 
 		public @NonNull SimpleEdge createSimpleEdge(@NonNull SimpleRegion region, @NonNull SimpleNode sourceNode, @Nullable String name, @NonNull SimpleNode targetNode) {
 			if (sourceNode.isConstant()) {
-				return new BasicSimpleEdge(CONSTANT_ARGUMENT, region, sourceNode, name, targetNode);
+				return new BasicSimpleEdge(isPredicate ? CONSTANT_PREDICATE : CONSTANT_ARGUMENT, region, sourceNode, name, targetNode);
 			}
 			else if (sourceNode.isLoaded()) {
-				return new BasicSimpleEdge(LOADED_ARGUMENT, region, sourceNode, name, targetNode);
+				return new BasicSimpleEdge(isPredicate ? LOADED_PREDICATE : LOADED_ARGUMENT, region, sourceNode, name, targetNode);
 			}
 			else if (sourceNode.isPredicated()) {
-				return new BasicSimpleEdge(PREDICATED_ARGUMENT, region, sourceNode, name, targetNode);
+				return new BasicSimpleEdge(isPredicate ? PREDICATED_PREDICATE : PREDICATED_ARGUMENT, region, sourceNode, name, targetNode);
 			}
 			else if (sourceNode.isRealized()) {
-				return new BasicSimpleEdge(REALIZED_ARGUMENT, region, sourceNode, name, targetNode);
+				return new BasicSimpleEdge(isPredicate ? REALIZED_PREDICATE : REALIZED_ARGUMENT, region, sourceNode, name, targetNode);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -434,13 +452,14 @@ public class Edges
 		}
 	}
 	
-	public static final @NonNull ArgumentEdgeRoleFactory ARGUMENT = new ArgumentEdgeRoleFactory();
+	public static final @NonNull ArgumentEdgeRoleFactory ARGUMENT = new ArgumentEdgeRoleFactory(false);
 	public static final @NonNull CastEdgeRoleFactory CAST = new CastEdgeRoleFactory(null);
 	public static final @NonNull IteratedEdgeRoleFactory ITERATED = new IteratedEdgeRoleFactory();		
 //	public static final @NonNull IteratingEdgeRoleFactory ITERATING = new IteratingEdgeRoleFactory();		
 //	public static final @NonNull CastEdgeRoleFactory NAVIGABLE_CAST = new CastEdgeRoleFactory(true);
 	public static final @NonNull NavigationEdgeRoleFactory NAVIGABLE_NAVIGATION = new NavigationEdgeRoleFactory(true);
 	public static final @NonNull NavigationEdgeRoleFactory NAVIGATION = new NavigationEdgeRoleFactory(null);
+	public static final @NonNull ArgumentEdgeRoleFactory PREDICATE = new ArgumentEdgeRoleFactory(true);
 	public static final EdgeRole.@NonNull Recursion PRIMARY_RECURSION = new RecursionEdgeRole(true);	
 	public static final EdgeRole.@NonNull Navigation REALIZED = new RealizedNavigationEdgeRole();
 	public static final @NonNull ResultEdgeRoleFactory RESULT = new ResultEdgeRoleFactory();

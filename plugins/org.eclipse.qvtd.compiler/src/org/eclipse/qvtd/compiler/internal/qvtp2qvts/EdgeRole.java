@@ -71,6 +71,7 @@ public interface EdgeRole extends Role
 	 * Return true if this edge represents a property navigation.
 	 */
 	boolean isNavigation();
+	boolean isPredicate();
 	boolean isRecursion();
 	boolean isResult();
 
