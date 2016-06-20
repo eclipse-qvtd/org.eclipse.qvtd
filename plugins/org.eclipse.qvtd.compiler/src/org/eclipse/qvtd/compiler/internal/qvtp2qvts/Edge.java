@@ -116,6 +116,11 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable
 	/**
 	 * Return true if this edge is for a predicate.
 	 */
+	boolean isPredicate();
+	
+	/**
+	 * Return true if this edge is for a predicated relationship.
+	 */
 	boolean isPredicated();
 
 	/**

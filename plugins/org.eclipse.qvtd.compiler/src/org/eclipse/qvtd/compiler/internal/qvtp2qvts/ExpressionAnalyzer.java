@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.CollectionItem;
 import org.eclipse.ocl.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.pivot.CollectionRange;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
@@ -53,6 +54,7 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -112,6 +114,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		SimpleNode accept = element.accept(this);
 		assert accept != null;
 		return accept;
+	}
+
+	private @NonNull SimpleNode analyzeOperationCallExp_includes(@NonNull SimpleNode sourceNode, @NonNull OperationCallExp operationCallExp) {
+		SimpleNode targetNode = analyze(operationCallExp.getOwnedArguments().get(0));
+		String name = operationCallExp.getReferredOperation().getName();
+		createPredicateEdge(sourceNode, "«" + name + "»", targetNode);
+		return Nodes.TRUE.createSimpleNode(sourceNode.getRegion());
 	}
 
 	private @NonNull SimpleNode analyzeOperationCallExp_oclAsType(@NonNull SimpleNode sourceNode, @NonNull OperationCallExp operationCallExp) {
@@ -253,6 +262,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 	protected @NonNull SimpleEdge createArgumentEdge(@NonNull SimpleNode sourceNode, @Nullable String name, @NonNull SimpleNode targetNode) {
 		return Edges.ARGUMENT.createSimpleEdge(context, sourceNode, name, targetNode);
+	}
+
+	protected @NonNull SimpleEdge createPredicateEdge(@NonNull SimpleNode sourceNode, @Nullable String name, @NonNull SimpleNode targetNode) {
+		return Edges.PREDICATE.createSimpleEdge(context, sourceNode, name, targetNode);
 	}
 
 	protected @NonNull SimpleEdge createCastEdge(@NonNull SimpleNode sourceNode, @NonNull Property castProperty, @NonNull SimpleNode castNode) {
@@ -625,7 +638,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 				}
 			}
 		}
-		String name = referredOperation.getName();
+		String operationName = ClassUtil.nonNullState(referredOperation.getName());
 		if (ownedSource == null) {
 			List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
 			int iSize = ownedArguments.size();
@@ -633,7 +646,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			for (int i = 0; i < iSize; i++) {
 				argNodes[i] = analyze(ownedArguments.get(i));
 			}
-			SimpleNode operationNode = createOperationNode(ClassUtil.nonNullState(name), operationCallExp, argNodes);
+			SimpleNode operationNode = createOperationNode(operationName, operationCallExp, argNodes);
 			for (int i = 0; i < iSize; i++) {
 				createArgumentEdge(ClassUtil.nonNullState(argNodes[i]), /*iSize > 1 ?*/ "«arg" + i + "»"/*: null*/, operationNode);
 			}
@@ -652,6 +665,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		else if (PivotUtil.isSameOperation(operationId, scheduler.getOclAnyOclIsKindOfId())) {
 			return analyzeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
 		}
+		else if ((operationCallExp.eContainer() instanceof Predicate)
+			&& (sourceNode.getCompleteClass().getPrimaryClass() instanceof CollectionType)
+			&& ("includes".equals(operationName) || "includesAll".equals(operationName))) {
+			return analyzeOperationCallExp_includes(sourceNode, operationCallExp);
+		}
 		else {
 			List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
 			int iSize = ownedArguments.size();
@@ -660,7 +678,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			for (int i = 0; i < iSize; i++) {
 				argNodes[i+1] = analyze(ownedArguments.get(i));
 			}
-			SimpleNode operationNode = createOperationNode(ClassUtil.nonNullState(name), operationCallExp, argNodes);
+			SimpleNode operationNode = createOperationNode(operationName, operationCallExp, argNodes);
 			for (int i = 0; i <= iSize; i++) {
 				createArgumentEdge(ClassUtil.nonNullState(argNodes[i]), /*iSize > 1 ?*/ "«arg" + i + "»"/*: null*/, operationNode);
 			}

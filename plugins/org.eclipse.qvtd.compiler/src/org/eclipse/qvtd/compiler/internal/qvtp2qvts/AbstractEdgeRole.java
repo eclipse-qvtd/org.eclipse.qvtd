@@ -70,6 +70,11 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 	}
 
 	@Override
+	public boolean isPredicate() {
+		return false;
+	}
+
+	@Override
 	public boolean isRecursion() {
 		return false;
 	}

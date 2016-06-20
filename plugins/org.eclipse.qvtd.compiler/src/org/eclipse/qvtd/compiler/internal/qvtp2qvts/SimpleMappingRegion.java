@@ -143,8 +143,13 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 			}
 			else { */
 			SimpleNode resultNode = expressionAnalyzer.analyze(conditionExpression);
-			SimpleNode trueNode = Nodes.TRUE.createSimpleNode(this);
-			Edges.ARGUMENT.createSimpleEdge(this, resultNode, null, trueNode);
+			if (!resultNode.isTrue()) {
+				SimpleNode trueNode = Nodes.TRUE.createSimpleNode(this);
+				Edges.PREDICATE.createSimpleEdge(this, resultNode, null, trueNode);
+			}
+			else {		// FIXME ?? do includes() here explicitly
+				resultNode.destroy();
+			}
 //			}
 		}
 		//
