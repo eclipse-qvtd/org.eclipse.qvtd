@@ -378,6 +378,33 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		return step2extension.get(key);
 	}
 
+	/**
+	 * Return the optionsKey sub-option of the stepKey option of the overall options.
+	 * If no stepKey options are available the sub-option of the DEFAULT_KEY is returned.
+	 */
+	public static <T> @Nullable T getOption(@NonNull Map<@NonNull String, @NonNull Map<@NonNull Key<Object>, @Nullable Object>> options,
+			@NonNull String stepKey, @NonNull Key<T> optionKey) {
+		@SuppressWarnings("unchecked")
+		Map<@NonNull String, @NonNull Map<@NonNull Key<T>, @Nullable T>> castOptions = (Map<@NonNull String, @NonNull Map<@NonNull Key<T>, @Nullable T>>)(Object)options;
+		Map<@NonNull Key<T>, @Nullable T> stepOptions = castOptions.get(stepKey);
+		if ((stepOptions == null) && !options.containsKey(stepOptions)) {
+			stepOptions = castOptions.get(DEFAULT_STEP);
+		}
+//		return stepOptions != null ? stepOptions.get(optionsKey) : null;
+		@Nullable Object optionValue = null;
+		if (stepOptions != null) {
+			optionValue = stepOptions.get(optionKey);
+			if ((optionValue == null) && !options.containsKey(optionKey)) {
+				Map<@NonNull Key<Object>, @Nullable Object> defaultOptions = options.get(DEFAULT_STEP);
+				if (defaultOptions != null){
+					optionValue =  defaultOptions.get(optionKey);
+				}
+			}
+		}
+		@SuppressWarnings("unchecked") T castValue = (T) optionValue;
+		return castValue;
+	}
+
 	public static @NonNull Transformation getTransformation(Resource resource) throws IOException {
 		List<@NonNull Transformation> asTransformations = new ArrayList<@NonNull Transformation>();
 		for (EObject eContent : resource.getContents()) {
@@ -396,6 +423,22 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		}
 	}
 
+	/**
+	 * Set the optionsKey sub-option of the stepKey option of the overall options to optionValue.
+	 * If no stepKey options are available the sub-option of the DEFAULT_KEY is returned.
+	 */
+	public static <T> void setOption(@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options,
+			@NonNull String stepKey, @NonNull Key<T> optionsKey, @Nullable T optionValue) {
+		@SuppressWarnings("unchecked")
+		Map<@NonNull String, @NonNull Map<@NonNull Key<T>, @Nullable T>> castOptions = (Map<@NonNull String, @NonNull Map<@NonNull Key<T>, @Nullable T>>)(Object)options;
+		Map<@NonNull Key<T>, @Nullable T> stepOptions = castOptions.get(stepKey);
+		if (stepOptions == null) {
+			stepOptions = new HashMap<@NonNull Key<T>, @Nullable T>();
+			castOptions.put(stepKey, stepOptions);
+		}
+		stepOptions.put(optionsKey, optionValue);
+	}
+
 	protected final @NonNull QVTiEnvironmentFactory environmentFactory;
 	protected final @NonNull ResourceSet asResourceSet;
 	
@@ -406,7 +449,7 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	 * 
 	 * If there is no step entry or no key entry, a default is taken from the DEFAULT_STEP.
 	 */
-	protected final @NonNull Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options;
+	protected final @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options;
 	
 	protected final @NonNull URI txURI;
 	protected final @NonNull URI prefixURI;
@@ -423,12 +466,12 @@ public abstract class AbstractCompilerChain implements CompilerChain
 	protected final @NonNull QVTi2JavaCompilerStep qvti2javaCompilerStep;
 	
 	protected AbstractCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI,
-			@Nullable Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options) {
+			@Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
 		this.environmentFactory = environmentFactory;
 		this.asResourceSet = environmentFactory.getMetamodelManager().getASResourceSet();
     	this.txURI = txURI;
     	this.prefixURI = txURI.trimSegments(1).appendSegment("temp").appendSegment(txURI.trimFileExtension().lastSegment());
-		this.options = options != null ? options : new HashMap<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>>();
+		this.options = options != null ? options : new HashMap<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>>();
 		this.java2classCompilerStep = createJava2ClassCompilerStep();
 		this.qvtc2qvtuCompilerStep = createQVTc2QVTuCompilerStep();
 		this.qvtu2qvtmCompilerStep = createQVTu2QVTmCompilerStep();
@@ -546,22 +589,22 @@ public abstract class AbstractCompilerChain implements CompilerChain
 
 	@Override
 	public <T> @Nullable T getOption(@NonNull String stepKey, @NonNull Key<T> optionKey) {
-		Map<@NonNull Key<?>, @Nullable Object> stepOptions = options.get(stepKey);
+		Map<@NonNull Key<Object>, @Nullable Object> stepOptions = options.get(stepKey);
 		if ((stepOptions == null) && !options.containsKey(stepOptions)) {
 			stepOptions = options.get(DEFAULT_STEP);
 		}
-		@Nullable Object saveOptions = null;
+		@Nullable Object optionValue = null;
 		if (stepOptions != null) {
-			saveOptions = stepOptions.get(optionKey);
-			if ((saveOptions == null) && !options.containsKey(optionKey)) {
-				Map<@NonNull Key<?>, @Nullable Object> defaultOptions = options.get(DEFAULT_STEP);
+			optionValue = stepOptions.get(optionKey);
+			if ((optionValue == null) && !options.containsKey(optionKey)) {
+				Map<@NonNull Key<Object>, @Nullable Object> defaultOptions = options.get(DEFAULT_STEP);
 				if (defaultOptions != null){
-					saveOptions =  defaultOptions.get(optionKey);
+					optionValue =  defaultOptions.get(optionKey);
 				}
 			}
 		}
-		@SuppressWarnings("unchecked") T castSaveOptions = (T) saveOptions;
-		return castSaveOptions;
+		@SuppressWarnings("unchecked") T castValue = (T) optionValue;
+		return castValue;
 	}
 	
 	@Override
@@ -615,11 +658,13 @@ public abstract class AbstractCompilerChain implements CompilerChain
 
 	@Override
 	public <T> void setOption(@NonNull String stepKey, @NonNull Key<T> optionKey, @Nullable T object) {
-		Map<@NonNull Key<?>, @Nullable Object> stepOptions = options.get(stepKey);
+		Map<@NonNull Key<Object>, @Nullable Object> stepOptions = options.get(stepKey);
 		if (stepOptions == null) {
-			stepOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();
+			stepOptions = new HashMap<@NonNull Key<Object>, @Nullable Object>();
 			options.put(stepKey, stepOptions);
 		}
-		stepOptions.put(optionKey, object);
+		@SuppressWarnings("unchecked")
+		Map<@NonNull Key<T>, @Nullable T> stepOptions2 = (Map<@NonNull Key<T>, @Nullable T>)(Object)stepOptions;
+		stepOptions2.put(optionKey, object);
 	}
 }
