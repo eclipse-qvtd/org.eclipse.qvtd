@@ -37,7 +37,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 		private @Nullable String traceabilityPropName;
 
 		public OCL2QVTpCompilerStep(@NonNull CompilerChain compilerChain, @NonNull QVTimperative qvti,
-				@Nullable Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options,			
+				@Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options,			
 				@NonNull URI oclDocURI, URI... extendedDocURIs) {
 			super(compilerChain, QVTP_STEP);
 			this.traceabilityPropName = getTraceabilityPropertyName();
@@ -90,7 +90,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	 * @param oclDocURI the mandatory main OCL document URI to compile
 	 * @param extendedDocURIs optional OCL document URIs that the main one extends
 	 */
-	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @Nullable Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options,			
+	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options,			
 			@NonNull URI oclDocURI, URI... extendedDocURIs) { 
 		super(qvti.getEnvironmentFactory(), oclDocURI, options);
 		this.ocl2qvtpCompilerStep = new OCL2QVTpCompilerStep(this, qvti, options, oclDocURI, extendedDocURIs);

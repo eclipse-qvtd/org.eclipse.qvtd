@@ -171,7 +171,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	protected final @NonNull Xtext2QVTrCompilerStep xtext2qvtrCompilerStep;
 	protected final @NonNull QVTr2QVTcCompilerStep qvtr2qvtcCompilerStep;
 
-	public QVTrCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @Nullable Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options) {
+	public QVTrCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
 		super(environmentFactory, txURI, options);
 		this.xtext2qvtrCompilerStep = createXtext2QVTrCompilerStep();
 		this.qvtr2qvtcCompilerStep = createQVTr2QVTcCompilerStep();

@@ -219,12 +219,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			r.save(TestsXMLUtil.defaultSavingOptions);
 		}
 		
-		protected  @NonNull Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> createTestCasesCompilerOptions() {
-			Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options = new HashMap<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>>();
-			Map<@NonNull Key<?>, @Nullable Object> defStepOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();
-			defStepOptions.put(OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-			// TODO problem hen validating  defStepOptions.put(OCL2QVTiCompilerChain.VALIDATE_KEY, true);
-			options.put(OCL2QVTiCompilerChain.DEFAULT_STEP, defStepOptions);
+		protected  @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> createTestCasesCompilerOptions() {
+			Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options = new HashMap<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>>();
+			OCL2QVTiCompilerChain.setOption(options, OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+			// TODO problem when validating OCL2QVTiCompilerChain.setOption(options, OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.VALIDATE_KEY, true);
 			return options;
 		}
 	}

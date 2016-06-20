@@ -19,7 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 public class TestsXMLUtil {
 
-	@NonNull public final static Map<Object, Object> defaultSavingOptions; 
+	public final static @NonNull Map<Object, Object> defaultSavingOptions; 
 	
 	// FIXME use a better default strategy for the saving options
 	static {

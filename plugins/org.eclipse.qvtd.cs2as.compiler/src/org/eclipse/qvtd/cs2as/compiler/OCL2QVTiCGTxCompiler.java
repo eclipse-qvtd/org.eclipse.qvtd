@@ -69,17 +69,12 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 
 	protected Transformation executeOCL2QVTi_CompilerChain(QVTimperative qvt, String tracePropName,  URI oclDocURI, URI... extendedOCLDocURIs) throws Exception {
 
-		Map<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>> options = new HashMap<@NonNull String, @NonNull Map<@NonNull Key<?>, @Nullable Object>>();
+		Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options = new HashMap<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>>();
 		// OCL2QVTp options
-		@NonNull Map<@NonNull Key<?>, @Nullable Object> ocl2qvtpOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();
-		ocl2qvtpOptions.put(OCL2QVTiCompilerChain.TRACE_PROPERTY_NAME_KEY, tracePropName);
+		OCL2QVTiCompilerChain.setOption(options, OCL2QVTiCompilerChain.QVTP_STEP, OCL2QVTiCompilerChain.TRACE_PROPERTY_NAME_KEY, tracePropName);
 		// Default options
-		@NonNull Map<@NonNull Key<?>, @Nullable Object> defStepOptions = new HashMap<@NonNull Key<?>, @Nullable Object>();
-		defStepOptions.put(OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions()); // FIXME parametrize save options ?
-		defStepOptions.put(CompilerChain.DEBUG_KEY, debug);
-		
-		options.put(OCL2QVTiCompilerChain.DEFAULT_STEP, defStepOptions);
-		options.put(OCL2QVTiCompilerChain.QVTP_STEP, ocl2qvtpOptions);
+		OCL2QVTiCompilerChain.setOption(options, OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions()); // FIXME parametrize save options ?
+		OCL2QVTiCompilerChain.setOption(options, OCL2QVTiCompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, debug);
 	
 		OCL2QVTiCompilerChain compilerChain = new OCL2QVTiCompilerChain(qvt, options, oclDocURI, extendedOCLDocURIs);
 		if (log != null) {
