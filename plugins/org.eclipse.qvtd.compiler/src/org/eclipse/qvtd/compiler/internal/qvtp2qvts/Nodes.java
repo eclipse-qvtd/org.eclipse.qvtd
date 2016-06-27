@@ -458,6 +458,9 @@ public class Nodes
 				if (nodeRole.isConstant()) {
 					return nodeRole;
 				}
+				if ((phase == nodeRole.getPhase()) && nodeRole.isHead()) {
+					return this;
+				}
 //				if ((phase == Phase.PREDICATED) && (nodeRole.getPhase() == Phase.PREDICATED) && nodeRole.isHead()) {
 //					return this;
 //				}
