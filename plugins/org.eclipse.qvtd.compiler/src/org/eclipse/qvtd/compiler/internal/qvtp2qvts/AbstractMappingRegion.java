@@ -122,14 +122,36 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 				if (diff != 0) {
 					return diff;
 				}
+				int r1 = getPhase(o1.getNodeRole());
+				int r2 = getPhase(o2.getNodeRole());
+				diff = r1 - r2;
+				if (diff != 0) {
+					return diff;
+				}
 				for (@NonNull NavigationEdge e : o1.getNavigationEdges()) {
 					if (e.getTarget() == o2) {
 						return e.getProperty().isIsImplicit() ? 1 : -1;
 					}
-				}			
+				}
 				String n1 = o1.getName();
 				String n2 = o2.getName();
 				return n1.compareTo(n2);
+			}
+
+			private int getPhase(@NonNull NodeRole nodeRole) {
+				if (nodeRole.isConstant()) {
+					return 0;
+				}
+				if (nodeRole.isLoaded()) {
+					return 1;
+				}
+				if (nodeRole.isPredicated()) {
+					return 2;
+				}
+				if (nodeRole.isRealized()) {
+					return 3;
+				}
+				return 4;
 			}
 		});
 		//
