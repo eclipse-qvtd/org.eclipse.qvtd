@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
@@ -49,6 +50,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassRelationships;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
+import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvtu2qvtm.QVTu2QVTm;
 import org.eclipse.qvtd.compiler.internal.utilities.JavaSourceFileObject;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -294,8 +296,10 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		public @NonNull Transformation execute(@NonNull RootScheduledRegion rootRegion) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
-				Scheduler scheduler = rootRegion.getScheduler();
-				Resource iResource = scheduler.qvts2qvti(rootRegion, getURI(), scheduler.getSymbolNameReservation());
+				Resource iResource = createResource();
+				QVTs2QVTi tx = new QVTs2QVTi(environmentFactory);
+				Model model = tx.transform(rootRegion);
+				iResource.getContents().add(model);
 				saveResource(iResource);
 				return getTransformation(iResource);
 			}

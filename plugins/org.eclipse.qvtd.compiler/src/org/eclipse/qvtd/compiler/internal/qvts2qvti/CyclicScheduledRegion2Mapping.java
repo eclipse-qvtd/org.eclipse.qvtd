@@ -141,6 +141,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			}
 		}
 
+		@SuppressWarnings("unused")
 		public @Nullable NodeConnection getAccumulatedConnection() {
 			return accumulatedConnection;
 		}
