@@ -661,10 +661,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
 			int iSize = ownedArguments.size();
 			@NonNull SimpleNode[] argNodes = new @NonNull SimpleNode[iSize];
+			@Nullable String [] argNames = new @Nullable String[iSize];
 			for (int i = 0; i < iSize; i++) {
 				argNodes[i] = analyze(ownedArguments.get(i));
+				argNames[i] = "«" + referredOperation.getOwnedParameters().get(i).getName() + "»";
 			}
-			SimpleNode operationNode = createConnectedOperationNode(operationName, operationCallExp, argNodes);
+			SimpleNode operationNode = createConnectedOperationNode(operationName, argNames, operationCallExp, argNodes);
 			return operationNode;
 		}
 		SimpleNode sourceNode = analyze(ownedSource);
@@ -689,9 +691,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
 			int iSize = ownedArguments.size();
 			@NonNull SimpleNode[] argNodes = new @NonNull SimpleNode[iSize+1];
+			@Nullable String [] argNames = new @Nullable String[iSize+1];
 			argNodes[0] = sourceNode;
+			argNames[0] = "«self»";
 			for (int i = 0; i < iSize; i++) {
 				argNodes[i+1] = analyze(ownedArguments.get(i));
+				argNames[i+1] = "«" + referredOperation.getOwnedParameters().get(i).getName() + "»";
 			}
 			if ("<>".equals(operationName)) {
 				operationName.toString();
@@ -700,7 +705,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			if (operationNode == null) {
 				operationNode = createOperationNode(operationName, operationCallExp, argNodes);
 				for (int i = 0; i <= iSize; i++) {
-					createArgumentEdge(argNodes[i], /*iSize > 1 ?*/ "«arg" + i + "»"/*: null*/, operationNode);
+					createArgumentEdge(argNodes[i], argNames[i], operationNode);
 				}
 				if (referredOperation.getBodyExpression() != null) {
 					OperationRegion operationRegion = context.getSuperRegion().analyzeOperation(operationCallExp);
@@ -748,11 +753,14 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	public @NonNull SimpleNode visitShadowExp(@NonNull ShadowExp shadowExp) {
 		List<ShadowPart> ownedParts = shadowExp.getOwnedParts();
 		int iSize = ownedParts.size();
-		@NonNull SimpleNode[] partNodes = new @NonNull SimpleNode[iSize];
+		@NonNull SimpleNode [] partNodes = new @NonNull SimpleNode[iSize];
+		@Nullable String [] partNames = new @Nullable String[iSize];
 		for (int i = 0; i < iSize; i++) {
-			partNodes[i] = analyze(ownedParts.get(i));
+			ShadowPart shadowPart = ownedParts.get(i);
+			partNodes[i] = analyze(shadowPart);
+			partNames[i] = shadowPart.getName();
 		}
-		SimpleNode operationNode = createConnectedOperationNode(ClassUtil.nonNullState(shadowExp.getType().getName()), shadowExp, partNodes);
+		SimpleNode operationNode = createConnectedOperationNode(ClassUtil.nonNullState(shadowExp.getType().getName()), partNames, shadowExp, partNodes);
 		return operationNode;
 	}
 
