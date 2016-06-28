@@ -29,6 +29,98 @@ import com.google.common.collect.Iterables;
 public abstract class AbstractMappingRegion extends AbstractRegion implements MappingRegion
 {
 	/**
+	 * HeadComparator supports sorting a list of Head candidates into a most suitable first order.
+	 */
+	protected static final class HeadComparator implements Comparator<@NonNull Node>
+	{
+		private final @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> target2sourceClosure;
+		private @Nullable Map<@NonNull Node, @NonNull Integer> node2implicity = null;
+
+		protected HeadComparator(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> target2sourceClosure) {
+			this.target2sourceClosure = target2sourceClosure;
+		}
+
+		@Override
+		public int compare(@NonNull Node o1, @NonNull Node o2) {
+			//
+			//	Least reachable first
+			//
+			Set<@NonNull Node> set1 = target2sourceClosure.get(o1);
+			Set<@NonNull Node> set2 = target2sourceClosure.get(o2);
+			assert (set1 != null) && (set2 != null);
+			int l1 = set1.size();
+			int l2 = set2.size();
+			int diff = l1 - l2;
+			if (diff != 0) {
+				return diff;
+			}
+			//
+			//	Earliest phase first (prefers LOADED to PREDICATED)
+			//
+			int r1 = getPhase(o1.getNodeRole());
+			int r2 = getPhase(o2.getNodeRole());
+			diff = r1 - r2;
+			if (diff != 0) {
+				return diff;
+			}
+			//
+			//	Least implicit first (prefers middle to output)
+			//
+			int i1 = getImplicity(o1);
+			int i2 = getImplicity(o2);
+			diff = i1 - i2;
+			if (diff != 0) {
+				return diff;
+			}
+			//
+			//	Alphabetical
+			//
+			String n1 = o1.getName();
+			String n2 = o2.getName();
+			return n1.compareTo(n2);
+		}
+
+		/**
+		 * Return the number of outgoing implicit connection from node. A middle model node
+		 * has no implicit connections and so is a better candodate for a head than an output
+		 * model node which has implicit connections to the trace.
+		 */
+		private int getImplicity(@NonNull Node node) {
+			Map<@NonNull Node, @NonNull Integer> node2implicity2 = node2implicity;
+			if (node2implicity2 == null) {
+				node2implicity = node2implicity2 = new HashMap<@NonNull Node, @NonNull Integer>();
+			}
+			Integer implicity = node2implicity2.get(node);
+			if (implicity == null) {
+				implicity = 0;
+				for (@NonNull NavigationEdge e : node.getNavigationEdges()) {
+					if (e.getProperty().isIsImplicit()) {
+						implicity++;
+					}
+				}
+				node2implicity2.put(node, implicity);
+			}
+			return implicity;
+		}
+
+		private int getPhase(@NonNull NodeRole nodeRole) {
+			if (nodeRole.isConstant()) {
+				return 0;
+			}
+			if (nodeRole.isLoaded()) {
+				return 1;
+			}
+			if (nodeRole.isPredicated()) {
+				return 2;
+			}
+			if (nodeRole.isRealized()) {
+				return 3;
+			}
+			return 4;
+		}
+	}
+
+	/**
 	 * The subsets of guardVariables from which all guardVariables are to-one navigable.
 	 */
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> headNodes = null;
@@ -42,7 +134,6 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 	}
 
 	protected @NonNull List<@NonNull Node> computeHeadNodes() {
-		List<@NonNull Node> headNodeGroups = new ArrayList<@NonNull Node>();
 		Iterable<@NonNull Node> navigableNodes = getNavigableNodes();		// Excludes, null, attributes, constants, operations
 		//
 		//	Compute the Set of all target nodes that can be reached by transitive to-one navigation from a particular source node.
@@ -109,88 +200,23 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		//
 		List<@NonNull Node> headLessNodes = new ArrayList<@NonNull Node>();
 		Iterables.addAll(headLessNodes, source2targetClosure.keySet());
-		Collections.sort(headLessNodes, new Comparator<@NonNull Node>()
-		{
-			@Override
-			public int compare(@NonNull Node o1, @NonNull Node o2) {
-				Set<@NonNull Node> set1 = target2sourceClosure.get(o1);
-				Set<@NonNull Node> set2 = target2sourceClosure.get(o2);
-				assert (set1 != null) && (set2 != null);
-				int l1 = set1.size();
-				int l2 = set2.size();
-				int diff = l1 - l2;
-				if (diff != 0) {
-					return diff;
-				}
-				int r1 = getPhase(o1.getNodeRole());
-				int r2 = getPhase(o2.getNodeRole());
-				diff = r1 - r2;
-				if (diff != 0) {
-					return diff;
-				}
-				for (@NonNull NavigationEdge e : o1.getNavigationEdges()) {
-					if (e.getTarget() == o2) {
-						return e.getProperty().isIsImplicit() ? 1 : -1;
-					}
-				}
-				String n1 = o1.getName();
-				String n2 = o2.getName();
-				return n1.compareTo(n2);
-			}
-
-			private int getPhase(@NonNull NodeRole nodeRole) {
-				if (nodeRole.isConstant()) {
-					return 0;
-				}
-				if (nodeRole.isLoaded()) {
-					return 1;
-				}
-				if (nodeRole.isPredicated()) {
-					return 2;
-				}
-				if (nodeRole.isRealized()) {
-					return 3;
-				}
-				return 4;
-			}
-		});
+		Collections.sort(headLessNodes, new HeadComparator(target2sourceClosure));
 		//
-		//	Loop to keep removing distinct inputs until all guard nodes are reachable from some head, taking
-		//	care to group mutually reachable heads as a single input.
+		//	Loop to keep removing distinct inputs until all guard nodes are reachable from some head.
 		//
+		List<@NonNull Node> headNodes = new ArrayList<@NonNull Node>();
 		while (!headLessNodes.isEmpty()) {
 			Node headNode = headLessNodes.remove(0);
 			assert headNode != null;
-			Set<@NonNull Node> sourceClosure = target2sourceClosure.get(headNode);
-			assert sourceClosure != null;
 			Set<@NonNull Node> targetClosure = source2targetClosure.get(headNode);
 			assert targetClosure != null;
-			List<@NonNull Node> headGroup = new ArrayList<@NonNull Node>();
 			headNode.setHead();
-			assert !headGroup.contains(headNode);
-			headGroup.add(headNode);
-			for (int i = 0; i < headLessNodes.size(); i++) {
-				Node nextNode = headLessNodes.get(i);
-				assert nextNode != null;
-				Set<@NonNull Node> nextClosure = target2sourceClosure.get(nextNode);
-				assert nextClosure != null;
-				if (nextClosure.size() > sourceClosure.size()) {
-					break;
-				}
-				if (nextClosure.equals(sourceClosure)) {
-//					nextNode.setHead();
-					assert !headGroup.contains(nextNode);
-					headGroup.add(nextNode);
-					headLessNodes.remove(nextNode);
-				}
-			}
 			headLessNodes.removeAll(targetClosure);
-			targetClosure.removeAll(headGroup);
-			Node bestHeadNode = selectBestHeadNode(headGroup);
-			assert !headNodeGroups.contains(bestHeadNode);
-			headNodeGroups.add(bestHeadNode);
+			targetClosure.remove(headNode);
+			assert !headNodes.contains(headNode);
+			headNodes.add(headNode);
 		}
-		return headNodeGroups;
+		return headNodes;
 	}
 
 	@Override
