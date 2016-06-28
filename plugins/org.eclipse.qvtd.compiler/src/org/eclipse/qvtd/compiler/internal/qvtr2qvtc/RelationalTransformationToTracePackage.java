@@ -115,10 +115,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				}
 				argIndex++;
 			}
-			Variable rv = cte.getRest();
-			if (rv != null) {
-				createTraceProperty(rDomain, rc, rv, isMany);
-			}
+//			Variable rv = cte.getRest();
+//			if (rv != null) {
+//				createTraceProperty(rDomain, rc, rv, isMany);
+//			}
 			createTraceProperty(rDomain, rc, tv, isMany);			// ?? not required for CollectionTemplateExp's
 		}
 		else if (te instanceof ObjectTemplateExp) {
