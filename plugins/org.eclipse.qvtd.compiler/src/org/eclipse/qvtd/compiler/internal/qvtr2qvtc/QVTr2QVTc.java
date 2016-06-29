@@ -230,6 +230,8 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	 * The root variables (in relation call order) of each relation.
 	 */
 	private @NonNull Map<@NonNull Relation, @NonNull List<@NonNull Variable>> relation2rootVariables = new HashMap<@NonNull Relation, @NonNull List<@NonNull Variable>>();
+
+	private @Nullable Property oclContainerProperty = null;
 	
 	public QVTr2QVTc(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrResource, @NonNull Resource qvtcResource) {	
 		super(environmentFactory);
@@ -486,6 +488,18 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	
 	/*public*/ @NonNull Function getKeyFunction(@NonNull Key key) {		
 		return ClassUtil.nonNullState(key2function.get(key));
+	}
+
+	public @NonNull Property getOclContainerProperty() {
+		Property oclContainerProperty2 = oclContainerProperty;
+		if (oclContainerProperty2 == null) {
+			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
+			org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
+			oclContainerProperty2 = NameUtil.getNameable(oclElementType.getOwnedProperties(), "oclContainer");
+			assert oclContainerProperty2 != null : "OCL Standard Library has no OclElement::oclContainer property";
+			oclContainerProperty = oclContainerProperty2;
+		}
+		return oclContainerProperty2 ;
 	}
 	
 	public Predicate getPredicateForRelationCallExp(RelationCallExp ri) {
