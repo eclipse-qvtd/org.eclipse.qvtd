@@ -18,19 +18,10 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
  */
 public abstract class QVTbase extends OCLInternal
 {	
-/*	public static @NonNull QVTbase newInstance(@NonNull ProjectManager projectManager, @Nullable ResourceSet externalResourceSet) {	
-		QVTbaseEnvironmentFactory environmentFactory = new QVTbaseEnvironmentFactory(projectManager, externalResourceSet);
-		QVTbase qvt = new QVTbase(environmentFactory);
-		if (externalResourceSet != null) {
-			environmentFactory.adapt(externalResourceSet);
-		}
-		return qvt;
-	} */
-	
 	public QVTbase(@NonNull QVTbaseEnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 	}
-	
+
 	@Override
 	public @NonNull QVTbaseEnvironmentFactory getEnvironmentFactory() {
 		return (QVTbaseEnvironmentFactory)super.getEnvironmentFactory();
