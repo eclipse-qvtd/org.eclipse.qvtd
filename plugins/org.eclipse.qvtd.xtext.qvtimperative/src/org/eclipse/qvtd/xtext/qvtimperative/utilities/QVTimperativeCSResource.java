@@ -20,7 +20,9 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -33,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory;
 import org.eclipse.qvtd.xtext.qvtimperative.as2cs.QVTimperativeAS2CS;
 import org.eclipse.qvtd.xtext.qvtimperative.cs2as.QVTimperativeCS2AS;
@@ -61,7 +64,15 @@ public class QVTimperativeCSResource extends EssentialOCLCSResource
 	}
 
 	@Override
-	@SuppressWarnings("null")
+	public @NonNull CS2AS getCS2AS() {
+		EnvironmentFactoryInternal environmentFactory = PivotUtilInternal.findEnvironmentFactory(this);
+		if (environmentFactory == null) {
+			environmentFactory = new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), getResourceSet());
+		}
+		return super.getCS2AS();
+	}
+
+	@Override
 	public @NonNull URI getASURI(@NonNull URI csURI) {
 		return URI.createURI(csURI.toString() + "as");
 	}
