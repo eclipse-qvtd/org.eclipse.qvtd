@@ -83,6 +83,7 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NodeCS getLeft() {
 		return left;
 	}
@@ -107,6 +108,7 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLeft(NodeCS newLeft) {
 		if (newLeft != left) {
 			NotificationChain msgs = null;
@@ -126,6 +128,7 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NodeCS getRight() {
 		return right;
 	}
@@ -150,6 +153,7 @@ public class PlusCSImpl extends NodeCSImpl implements PlusCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRight(NodeCS newRight) {
 		if (newRight != right) {
 			NotificationChain msgs = null;

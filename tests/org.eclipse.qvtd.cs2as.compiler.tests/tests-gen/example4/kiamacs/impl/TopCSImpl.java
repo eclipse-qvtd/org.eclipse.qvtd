@@ -72,6 +72,7 @@ public class TopCSImpl extends BaseCSImpl implements TopCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NodeCS getNode() {
 		return node;
 	}
@@ -96,6 +97,7 @@ public class TopCSImpl extends BaseCSImpl implements TopCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNode(NodeCS newNode) {
 		if (newNode != node) {
 			NotificationChain msgs = null;

@@ -73,6 +73,7 @@ public class PathNameCSImpl extends ElementCSImpl implements PathNameCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PathElementCS> getPath() {
 		if (path == null) {
 			path = new EObjectContainmentEList<PathElementCS>(PathElementCS.class, this, ClassescsPackage.PATH_NAME_CS__PATH);

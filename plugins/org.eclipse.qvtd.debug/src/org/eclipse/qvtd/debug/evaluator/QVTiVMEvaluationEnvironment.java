@@ -22,11 +22,18 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationEnvironment
 public interface QVTiVMEvaluationEnvironment extends QVTiEvaluationEnvironment, VMEvaluationEnvironment
 {
 	@NonNull QVTiVMEvaluationEnvironment createClonedEvaluationEnvironment();
+	@Override
 	@NonNull Element getCurrentIP();
+	@Override
 	@NonNull UnitLocation getCurrentLocation();
+	@Override
 	@Nullable QVTiVMEvaluationEnvironment getVMParentEvaluationEnvironment();
+	@Override
 	@NonNull QVTiVMRootEvaluationEnvironment getVMRootEvaluationEnvironment();
+	@Override
 	void processDeferredTasks();
+	@Override
 	@NonNull Element setCurrentIP(@NonNull Element element);
+	@Override
 	void throwVMException(@NonNull VMRuntimeException qvtInterruptedExecutionException);
 }

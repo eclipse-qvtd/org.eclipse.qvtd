@@ -106,6 +106,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Column> getColumns() {
 		if (columns == null) {
 			columns = new EObjectContainmentWithInverseEList<Column>(Column.class, this, RDBMSPackage.TABLE__COLUMNS, RDBMSPackage.COLUMN__OWNER);
@@ -118,6 +119,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Schema getSchema() {
 		if (eContainerFeatureID() != RDBMSPackage.TABLE__SCHEMA) return null;
 		return (Schema)eInternalContainer();
@@ -138,6 +140,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSchema(Schema newSchema) {
 		if (newSchema != eInternalContainer() || (eContainerFeatureID() != RDBMSPackage.TABLE__SCHEMA && newSchema != null)) {
 			if (EcoreUtil.isAncestor(this, newSchema))
@@ -159,6 +162,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Key> getKeys() {
 		if (keys == null) {
 			keys = new EObjectContainmentWithInverseEList<Key>(Key.class, this, RDBMSPackage.TABLE__KEYS, RDBMSPackage.KEY__OWNER);
@@ -171,6 +175,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ForeignKey> getForeignKeys() {
 		if (foreignKeys == null) {
 			foreignKeys = new EObjectContainmentWithInverseEList<ForeignKey>(ForeignKey.class, this, RDBMSPackage.TABLE__FOREIGN_KEYS, RDBMSPackage.FOREIGN_KEY__OWNER);

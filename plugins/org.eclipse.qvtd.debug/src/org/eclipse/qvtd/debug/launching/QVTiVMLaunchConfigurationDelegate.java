@@ -39,15 +39,18 @@ public class QVTiVMLaunchConfigurationDelegate extends VMLaunchConfigurationDele
 {
 	public static final IStatus MODIFIED_SOURCE_STATUS = QVTiDebugCore.INSTANCE.createError("", 300, null); //$NON-NLS-1$
 
+	@Override
 	protected @NonNull QVTiDebugTarget createDebugTarget(@NonNull IVMVirtualMachineShell vm, @NonNull VMVirtualProcess process) {
 		return new QVTiDebugTarget(process, vm);
 	}
 
+	@Override
 	protected @NonNull DebuggableRunnerFactory createDebuggableRunnerFactory(EPackage.@NonNull Registry packageRegistry,
 			@NonNull List<String> modelURIs, @Nullable String traceURI) {
 		return new QVTiDebuggableRunnerFactory(packageRegistry, modelURIs, null);
 	}
 	
+	@Override
 	protected @NonNull QVTiEvaluationContext createEvaluationContext(@NonNull ILaunchConfiguration configuration) throws CoreException {
 		String projectName = configuration.getAttribute(PROJECT_KEY, "");
 		String txName = configuration.getAttribute(TX_KEY, "");
@@ -65,10 +68,12 @@ public class QVTiVMLaunchConfigurationDelegate extends VMLaunchConfigurationDele
 		return new QVTiEvaluationContext(txURI, inURIMap, outURIMap);
 	}
 
+	@Override
 	protected @NonNull QVTiVMVirtualMachine createVirtualMachine(@NonNull QVTiEvaluationContext evaluationContext, @NonNull DebuggableRunner runner) {
 		return new QVTiVMVirtualMachine(runner, evaluationContext);
 	}
 
+	@Override
 	protected @NonNull QVTiVirtualProcess createVirtualProcess(@NonNull ILaunch launch, @NonNull IVMVirtualMachineShell vm) {
 		return new QVTiVirtualProcess(launch, vm);
 	}

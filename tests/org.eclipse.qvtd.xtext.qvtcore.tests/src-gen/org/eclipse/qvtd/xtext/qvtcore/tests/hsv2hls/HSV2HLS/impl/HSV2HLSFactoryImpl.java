@@ -106,6 +106,7 @@ public class HSV2HLSFactoryImpl extends EFactoryImpl implements HSV2HLSFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HSVNode2HLSNode createHSVNode2HLSNode() {
 		HSVNode2HLSNodeImpl hsvNode2HLSNode = new HSVNode2HLSNodeImpl();
 		return hsvNode2HLSNode;
@@ -134,6 +135,7 @@ public class HSV2HLSFactoryImpl extends EFactoryImpl implements HSV2HLSFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HSV2HLSPackage getHSV2HLSPackage() {
 		return (HSV2HLSPackage)getEPackage();
 	}

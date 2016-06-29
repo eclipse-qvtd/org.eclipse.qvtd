@@ -76,6 +76,7 @@ public class CS2ASCGFactoryImpl extends EFactoryImpl implements CS2ASCGFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGLookupCallExp createCGLookupCallExp() {
 		CGLookupCallExpImpl cgLookupCallExp = new CGLookupCallExpImpl();
 		return cgLookupCallExp;
@@ -86,6 +87,7 @@ public class CS2ASCGFactoryImpl extends EFactoryImpl implements CS2ASCGFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CS2ASCGPackage getCS2ASCGPackage() {
 		return (CS2ASCGPackage)getEPackage();
 	}

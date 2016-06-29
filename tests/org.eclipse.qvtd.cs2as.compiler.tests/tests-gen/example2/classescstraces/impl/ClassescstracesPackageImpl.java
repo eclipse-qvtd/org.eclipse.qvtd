@@ -124,6 +124,7 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPackageCS2Package() {
 		return packageCS2PackageEClass;
 	}
@@ -133,6 +134,7 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackageCS2Package_PackageCS() {
 		return (EReference)packageCS2PackageEClass.getEStructuralFeatures().get(0);
 	}
@@ -142,6 +144,7 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackageCS2Package_Package() {
 		return (EReference)packageCS2PackageEClass.getEStructuralFeatures().get(1);
 	}
@@ -151,6 +154,7 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getClassCS2Class() {
 		return classCS2ClassEClass;
 	}
@@ -160,6 +164,7 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassCS2Class_ClassCS() {
 		return (EReference)classCS2ClassEClass.getEStructuralFeatures().get(0);
 	}
@@ -169,6 +174,7 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassCS2Class_Class() {
 		return (EReference)classCS2ClassEClass.getEStructuralFeatures().get(1);
 	}
@@ -178,6 +184,7 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRootCS2Root() {
 		return rootCS2RootEClass;
 	}
@@ -187,6 +194,7 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRootCS2Root_RootCS() {
 		return (EReference)rootCS2RootEClass.getEStructuralFeatures().get(0);
 	}
@@ -196,6 +204,7 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRootCS2Root_Root() {
 		return (EReference)rootCS2RootEClass.getEStructuralFeatures().get(1);
 	}
@@ -205,6 +214,7 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassescstracesFactory getClassescstracesFactory() {
 		return (ClassescstracesFactory)getEFactoryInstance();
 	}

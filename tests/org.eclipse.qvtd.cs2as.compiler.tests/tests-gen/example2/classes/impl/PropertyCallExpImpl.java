@@ -73,6 +73,7 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property getReferredProperty() {
 		if (referredProperty != null && referredProperty.eIsProxy()) {
 			InternalEObject oldReferredProperty = (InternalEObject)referredProperty;
@@ -99,6 +100,7 @@ public class PropertyCallExpImpl extends CallExpImpl implements PropertyCallExp 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredProperty(Property newReferredProperty) {
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;

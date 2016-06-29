@@ -81,6 +81,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public classes.Package createPackage() {
 		PackageImpl package_ = new PackageImpl();
 		return package_;
@@ -91,6 +92,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public classes.Class createClass() {
 		ClassImpl class_ = new ClassImpl();
 		return class_;
@@ -101,6 +103,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Root createRoot() {
 		RootImpl root = new RootImpl();
 		return root;
@@ -111,6 +114,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassesPackage getClassesPackage() {
 		return (ClassesPackage)getEPackage();
 	}

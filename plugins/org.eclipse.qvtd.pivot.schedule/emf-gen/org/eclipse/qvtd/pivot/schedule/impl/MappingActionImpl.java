@@ -70,6 +70,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AbstractMapping getMapping() {
 		if (mapping != null && mapping.eIsProxy()) {
 			InternalEObject oldMapping = (InternalEObject)mapping;
@@ -96,6 +97,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMapping(AbstractMapping newMapping) {
 		AbstractMapping oldMapping = mapping;
 		mapping = newMapping;

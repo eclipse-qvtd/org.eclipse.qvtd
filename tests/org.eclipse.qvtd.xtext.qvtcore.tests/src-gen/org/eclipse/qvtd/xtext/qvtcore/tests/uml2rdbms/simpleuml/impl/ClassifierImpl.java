@@ -74,6 +74,7 @@ public abstract class ClassifierImpl extends PackageElementImpl implements Class
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Attribute> getTypeOpposite() {
 		if (typeOpposite == null) {
 			typeOpposite = new EObjectWithInverseResolvingEList<Attribute>(Attribute.class, this, SimpleumlPackage.CLASSIFIER__TYPE_OPPOSITE, SimpleumlPackage.ATTRIBUTE__TYPE);

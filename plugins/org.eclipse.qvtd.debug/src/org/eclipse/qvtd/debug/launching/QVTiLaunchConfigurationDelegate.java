@@ -64,6 +64,7 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
 	}
 
 	// FIXME - do refactoring of this area 
+	@Override
 	public void launch(final ILaunchConfiguration configuration, String mode, final ILaunch launch, IProgressMonitor monitor) throws CoreException {
         
 		try {
@@ -78,7 +79,8 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
    
             ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
                 
-                public void run() throws Exception { 
+                @Override
+				public void run() throws Exception { 
         			QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null);
         			if (traceEvaluation) {
         				environmentFactory.setEvaluationTracingEnabled(true);
@@ -150,7 +152,8 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
             process.setStreamsProxy(streamsProxy);
             
             Thread processThread = new Thread(new Runnable() {
-            	public void run() {
+            	@Override
+				public void run() {
                     try {
 						process.run();
 					} catch (Exception e) {

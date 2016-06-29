@@ -83,6 +83,7 @@ public class PlusImpl extends NodeImpl implements Plus {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node getLeft() {
 		return left;
 	}
@@ -107,6 +108,7 @@ public class PlusImpl extends NodeImpl implements Plus {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLeft(Node newLeft) {
 		if (newLeft != left) {
 			NotificationChain msgs = null;
@@ -126,6 +128,7 @@ public class PlusImpl extends NodeImpl implements Plus {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node getRight() {
 		return right;
 	}
@@ -150,6 +153,7 @@ public class PlusImpl extends NodeImpl implements Plus {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRight(Node newRight) {
 		if (newRight != right) {
 			NotificationChain msgs = null;

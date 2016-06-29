@@ -74,6 +74,7 @@ public class A1Impl extends AImpl implements A1 {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<B> getOwnsB() {
 		if (ownsB == null) {
 			ownsB = new EObjectContainmentWithInverseEList<B>(B.class, this, TargetPackage.A1__OWNS_B, TargetPackage.B__TO_A1);

@@ -32,14 +32,14 @@ import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 
 /**
  * UpperToLowerNormalizer normalises the results of the UpperToLower transformation.
- * 
+ *
  * Even though everything is ordered in the input/output model, the edges/incoming/outgoing lists cn be independently ordered, and only
  * the edges order is preserved in the middle model.
  */
 public class FlatStateMachineNormalizer implements ModelNormalizer
 {
 	public static final @NonNull FlatStateMachineNormalizer INSTANCE = new FlatStateMachineNormalizer();
-	
+
 	protected abstract class AbstractComparator implements Comparator<@NonNull EObject>
 	{
 		protected final @NonNull EClass eClass;
@@ -49,7 +49,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 			eClass2comparator.put(eClass, this);
 		}
 	}
-	
+
 	protected class StateComparator extends AbstractComparator
 	{
 		private final @NonNull EAttribute stateName;
@@ -58,7 +58,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 			super(stateClass);
 			this.stateName = stateName;
 		}
-		
+
 		@Override
 		public int compare(@NonNull EObject o1, @NonNull EObject o2) {
 			if (eClass.isInstance(o1)) {
@@ -76,7 +76,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 			return ClassUtil.safeCompareTo(n1, n2);
 		}
 	}
-	
+
 	protected class StateMachineComparator extends AbstractComparator
 	{
 		private final @NonNull EAttribute stateMachineName;
@@ -85,7 +85,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 			super(stateMachineClass);
 			this.stateMachineName = stateMachineName;
 		}
-		
+
 		@Override
 		public int compare(@NonNull EObject o1, @NonNull EObject o2) {
 			if (eClass.isInstance(o1)) {
@@ -103,7 +103,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 			return ClassUtil.safeCompareTo(n1, n2);
 		}
 	}
-	
+
 	protected class TransitionComparator extends AbstractComparator
 	{
 		private final @NonNull EAttribute transitionName;
@@ -119,7 +119,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 			this.transitionToState = transitionToState;
 			this.stateName = stateName;
 		}
-		
+
 		@Override
 		public int compare(@NonNull EObject o1, @NonNull EObject o2) {
 			if (eClass.isInstance(o1)) {
@@ -150,7 +150,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 			return diff;
 		}
 	}
-	
+
 	protected abstract class AbstractNormalizer
 	{
 		protected final @NonNull EClass eClass;
@@ -162,7 +162,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 
 		public abstract void normalize(@NonNull EObject eObject);
 	}
-	
+
 	protected class ResourceNormalizer extends AbstractNormalizer
 	{
 		private final @NonNull EReference stateMachineOwnedStates;
@@ -184,10 +184,10 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 		@Override
 		public void normalize(@NonNull EObject eObject) {
 			ECollections.sort((EList<EObject>)eObject.eGet(stateMachineOwnedStates), stateComparator);
-			ECollections.sort((EList<EObject>)eObject.eGet(stateMachineOwnedTransitions), transitionComparator);			
+			ECollections.sort((EList<EObject>)eObject.eGet(stateMachineOwnedTransitions), transitionComparator);
 		}
 	}
-	
+
 	protected class StateNormalizer extends AbstractNormalizer
 	{
 		private final @NonNull EReference stateOutTransitions;
@@ -206,10 +206,10 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 		@Override
 		public void normalize(@NonNull EObject eObject) {
 			ECollections.sort((EList<EObject>)eObject.eGet(stateOutTransitions), transitionComparator);
-			ECollections.sort((EList<EObject>)eObject.eGet(stateInTransitions), transitionComparator);			
+			ECollections.sort((EList<EObject>)eObject.eGet(stateInTransitions), transitionComparator);
 		}
 	}
-	
+
 	protected class StateMachineNormalizer extends AbstractNormalizer
 	{
 		private final @NonNull EReference stateMachineOwnedStates;
@@ -231,13 +231,14 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 		@Override
 		public void normalize(@NonNull EObject eObject) {
 			ECollections.sort((EList<EObject>)eObject.eGet(stateMachineOwnedStates), stateComparator);
-			ECollections.sort((EList<EObject>)eObject.eGet(stateMachineOwnedTransitions), transitionComparator);			
+			ECollections.sort((EList<EObject>)eObject.eGet(stateMachineOwnedTransitions), transitionComparator);
 		}
 	}
-	
+
 	protected final @NonNull Map<@NonNull EClass, @NonNull AbstractComparator> eClass2comparator = new HashMap<@NonNull EClass, @NonNull AbstractComparator>();
 	protected final @NonNull Map<@NonNull EClass, @NonNull AbstractNormalizer> eClass2normalizer = new HashMap<@NonNull EClass, @NonNull AbstractNormalizer>();
 
+	@Override
 	public @NonNull List<Normalizer> normalize(@NonNull Resource resource) {
 		EObject eRoot = resource.getContents().get(0);
 		EPackage ePackage = eRoot.eClass().getEPackage();
@@ -272,7 +273,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 		}
 		for (@NonNull EObject eObject : eObjects) {
 			EClass eClass = eObject.eClass();
-			AbstractNormalizer normalizer = eClass2normalizer.get(eClass);
+			AbstractNormalizer normalizer = ClassUtil.nonNullState(eClass2normalizer.get(eClass));
 			normalizer.normalize(eObject);
 		}
 		ECollections.sort(resource.getContents(), stateMachineComparator);

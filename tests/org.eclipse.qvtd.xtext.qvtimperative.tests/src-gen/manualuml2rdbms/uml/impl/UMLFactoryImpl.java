@@ -85,6 +85,7 @@ public class UMLFactoryImpl extends EFactoryImpl implements UMLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Attribute createAttribute() {
 		AttributeImpl attribute = new AttributeImpl();
 		return attribute;
@@ -95,6 +96,7 @@ public class UMLFactoryImpl extends EFactoryImpl implements UMLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Association createAssociation() {
 		AssociationImpl association = new AssociationImpl();
 		return association;
@@ -105,6 +107,7 @@ public class UMLFactoryImpl extends EFactoryImpl implements UMLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public manualuml2rdbms.uml.Class createClass() {
 		ClassImpl class_ = new ClassImpl();
 		return class_;
@@ -115,6 +118,7 @@ public class UMLFactoryImpl extends EFactoryImpl implements UMLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public manualuml2rdbms.uml.Package createPackage() {
 		PackageImpl package_ = new PackageImpl();
 		return package_;
@@ -125,6 +129,7 @@ public class UMLFactoryImpl extends EFactoryImpl implements UMLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrimitiveDataType createPrimitiveDataType() {
 		PrimitiveDataTypeImpl primitiveDataType = new PrimitiveDataTypeImpl();
 		return primitiveDataType;
@@ -135,6 +140,7 @@ public class UMLFactoryImpl extends EFactoryImpl implements UMLFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UMLPackage getUMLPackage() {
 		return (UMLPackage)getEPackage();
 	}

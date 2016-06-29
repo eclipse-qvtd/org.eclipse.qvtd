@@ -122,6 +122,7 @@ public class SderivedPackageImpl extends EPackageImpl implements SderivedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getX2() {
 		return x2EClass;
 	}
@@ -131,6 +132,7 @@ public class SderivedPackageImpl extends EPackageImpl implements SderivedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getX2_OwnsW() {
 		return (EReference)x2EClass.getEStructuralFeatures().get(0);
 	}
@@ -140,6 +142,7 @@ public class SderivedPackageImpl extends EPackageImpl implements SderivedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getY2() {
 		return y2EClass;
 	}
@@ -149,6 +152,7 @@ public class SderivedPackageImpl extends EPackageImpl implements SderivedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getY2_Name2() {
 		return (EAttribute)y2EClass.getEStructuralFeatures().get(0);
 	}
@@ -158,6 +162,7 @@ public class SderivedPackageImpl extends EPackageImpl implements SderivedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getW() {
 		return wEClass;
 	}
@@ -167,6 +172,7 @@ public class SderivedPackageImpl extends EPackageImpl implements SderivedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SderivedFactory getSderivedFactory() {
 		return (SderivedFactory)getEFactoryInstance();
 	}

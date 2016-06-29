@@ -43,26 +43,27 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 
 	private @Nullable Log log = null;
 	private boolean debug = false;
-		
+
 	@Override
 	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet, @NonNull CS2ASJavaCompilerParameters params, @NonNull URI oclDocURI, URI... extendedOCLDocURIs) throws Exception {
 		return this.compileTransformation(rSet, params, "ast", oclDocURI);
 	}
-	
-	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet, @NonNull CS2ASJavaCompilerParameters params, @NonNull String tracePropertyName, @NonNull URI oclDocURI, URI... extendedOCLDocURIs) 
+
+	@Override
+	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet, @NonNull CS2ASJavaCompilerParameters params, @NonNull String tracePropertyName, @NonNull URI oclDocURI, URI... extendedOCLDocURIs)
 			throws Exception {
-		
+
 		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, rSet);
 		try {
 			Transformation qvtiTransf = executeOCL2QVTi_CompilerChain(qvt, tracePropertyName, oclDocURI, extendedOCLDocURIs);
 			CS2ASJavaCompilerImpl compiler = createCompiler();
 			compiler.setLog(log);
-			return compiler.compileTransformation(qvt, qvtiTransf, (CS2ASJavaCompilerParameters) params);	
+			return compiler.compileTransformation(qvt, qvtiTransf, params);
 		} finally {
 			qvt.dispose();
 		}
 	}
-	
+
 	protected CS2ASJavaCompilerImpl createCompiler() {
 		return new CS2ASJavaCompilerImpl();
 	}
@@ -75,29 +76,30 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 		// Default options
 		OCL2QVTiCompilerChain.setOption(options, OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions()); // FIXME parametrize save options ?
 		OCL2QVTiCompilerChain.setOption(options, OCL2QVTiCompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, debug);
-	
+
 		OCL2QVTiCompilerChain compilerChain = new OCL2QVTiCompilerChain(qvt, options, oclDocURI, extendedOCLDocURIs);
-		if (log != null) {
+		Log log2 = log;
+		if (log2 != null) {
 			compilerChain.addListener(new CompilerChain.Listener() {
-	
+
 				@Override
 				public void compiled(@NonNull String step, @Nullable Object object) {
 					if (object instanceof Resource) {
-						log.info(step + " step completed => " + ((Resource)object).getURI());
+						log2.info(step + " step completed => " + ((Resource)object).getURI());
 					}
 					else {
-						log.info(step + " step completed => " + object);
+						log2.info(step + " step completed => " + object);
 					}
 				}
 			});
 		}
-    	return compilerChain.compile();
+		return compilerChain.compile();
 	}
 
 	public void setLog(@Nullable Log log) {
 		this.log  = log;
 	}
-	
+
 	public void setDebug(boolean debug) {
 		this.debug = debug;
 	}

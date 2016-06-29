@@ -117,6 +117,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Column> getColumn() {
 		if (column == null) {
 			column = new EObjectContainmentWithInverseEList<Column>(Column.class, this, RDBMSPackage.TABLE__COLUMN, RDBMSPackage.COLUMN__OWNER);
@@ -129,6 +130,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Schema getSchema() {
 		if (eContainerFeatureID() != RDBMSPackage.TABLE__SCHEMA) return null;
 		return (Schema)eInternalContainer();
@@ -149,6 +151,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSchema(Schema newSchema) {
 		if (newSchema != eInternalContainer() || (eContainerFeatureID() != RDBMSPackage.TABLE__SCHEMA && newSchema != null)) {
 			if (EcoreUtil.isAncestor(this, newSchema))
@@ -170,6 +173,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Key getTheKey() {
 		if (theKey != null && theKey.eIsProxy()) {
 			InternalEObject oldTheKey = (InternalEObject)theKey;
@@ -196,6 +200,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTheKey(Key newTheKey) {
 		Key oldTheKey = theKey;
 		theKey = newTheKey;
@@ -208,6 +213,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Key> getKey() {
 		if (key == null) {
 			key = new EObjectContainmentWithInverseEList<Key>(Key.class, this, RDBMSPackage.TABLE__KEY, RDBMSPackage.KEY__OWNER);
@@ -220,6 +226,7 @@ public class TableImpl extends RModelElementImpl implements Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ForeignKey> getForeignKey() {
 		if (foreignKey == null) {
 			foreignKey = new EObjectContainmentWithInverseEList<ForeignKey>(ForeignKey.class, this, RDBMSPackage.TABLE__FOREIGN_KEY, RDBMSPackage.FOREIGN_KEY__OWNER);

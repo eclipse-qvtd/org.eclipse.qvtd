@@ -118,6 +118,7 @@ public class TreePackageImpl extends EPackageImpl implements TreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNode() {
 		return nodeEClass;
 	}
@@ -127,6 +128,7 @@ public class TreePackageImpl extends EPackageImpl implements TreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode_Children() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -136,6 +138,7 @@ public class TreePackageImpl extends EPackageImpl implements TreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNode_Name() {
 		return (EAttribute)nodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -145,6 +148,7 @@ public class TreePackageImpl extends EPackageImpl implements TreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode_Parent() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -154,6 +158,7 @@ public class TreePackageImpl extends EPackageImpl implements TreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TreeFactory getTreeFactory() {
 		return (TreeFactory)getEFactoryInstance();
 	}

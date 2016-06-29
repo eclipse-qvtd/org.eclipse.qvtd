@@ -80,6 +80,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class getDestination() {
 		if (destination != null && destination.eIsProxy()) {
 			InternalEObject oldDestination = (InternalEObject)destination;
@@ -121,6 +122,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDestination(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class newDestination) {
 		if (newDestination != destination) {
 			NotificationChain msgs = null;
@@ -140,6 +142,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
@@ -181,6 +184,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSource(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class newSource) {
 		if (newSource != source) {
 			NotificationChain msgs = null;

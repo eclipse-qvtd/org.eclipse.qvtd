@@ -72,6 +72,7 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathNameCS getExtends() {
 		return extends_;
 	}
@@ -96,6 +97,7 @@ public class ClassCSImpl extends NamedElementCSImpl implements ClassCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExtends(PathNameCS newExtends) {
 		if (newExtends != extends_) {
 			NotificationChain msgs = null;

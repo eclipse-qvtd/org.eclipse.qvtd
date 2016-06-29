@@ -79,6 +79,7 @@ public class Simplegraph2graphFactoryImpl extends EFactoryImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Graph2Graph createGraph2Graph() {
 		Graph2GraphImpl graph2Graph = new Graph2GraphImpl();
 		return graph2Graph;
@@ -89,6 +90,7 @@ public class Simplegraph2graphFactoryImpl extends EFactoryImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Edge2Edge createEdge2Edge() {
 		Edge2EdgeImpl edge2Edge = new Edge2EdgeImpl();
 		return edge2Edge;
@@ -99,6 +101,7 @@ public class Simplegraph2graphFactoryImpl extends EFactoryImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node2Node createNode2Node() {
 		Node2NodeImpl node2Node = new Node2NodeImpl();
 		return node2Node;
@@ -109,6 +112,7 @@ public class Simplegraph2graphFactoryImpl extends EFactoryImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Simplegraph2graphPackage getSimplegraph2graphPackage() {
 		return (Simplegraph2graphPackage)getEPackage();
 	}

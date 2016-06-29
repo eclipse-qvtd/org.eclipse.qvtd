@@ -81,6 +81,7 @@ public class B2Impl extends BImpl implements B2 {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getAnotherName() {
 		return anotherName;
 	}
@@ -90,6 +91,7 @@ public class B2Impl extends BImpl implements B2 {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnotherName(String newAnotherName) {
 		String oldAnotherName = anotherName;
 		anotherName = newAnotherName;

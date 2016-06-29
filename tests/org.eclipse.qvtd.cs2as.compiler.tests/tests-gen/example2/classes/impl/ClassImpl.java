@@ -96,6 +96,7 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public example2.classes.Class getSuperClass() {
 		if (superClass != null && superClass.eIsProxy()) {
 			InternalEObject oldSuperClass = (InternalEObject)superClass;
@@ -122,6 +123,7 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSuperClass(example2.classes.Class newSuperClass) {
 		example2.classes.Class oldSuperClass = superClass;
 		superClass = newSuperClass;
@@ -134,6 +136,7 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Operation> getOwnedOperations() {
 		if (ownedOperations == null) {
 			ownedOperations = new EObjectContainmentEList<Operation>(Operation.class, this, ClassesPackage.CLASS__OWNED_OPERATIONS);
@@ -146,6 +149,7 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Property> getOwnedProperties() {
 		if (ownedProperties == null) {
 			ownedProperties = new EObjectContainmentEList<Property>(Property.class, this, ClassesPackage.CLASS__OWNED_PROPERTIES);

@@ -118,6 +118,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 			this.javaURI = javaURI;
 		}
 
+		@Override
 		public void compiled(@NonNull String step, @Nullable Object object) {
 			Display.getDefault().asyncExec(new Runnable()
 			{
@@ -499,6 +500,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 
 	protected abstract @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI);
 
+	@Override
 	@SuppressWarnings("null")
 	public void createControl(Composite parent) {
 //		System.out.println("createControl-start");
@@ -804,6 +806,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		return URI.createURI(txName, true).resolve(getProjectURI());
 	}
 
+	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 //		System.out.println("initializeFrom");
 		assert !initializing;
@@ -886,6 +889,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		return interpretedCheckButton.getSelection();
 	}
 
+	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 //		System.out.println("performApply");
 		configuration.setAttribute(PROJECT_KEY, getProjectName());
@@ -1006,6 +1010,7 @@ public abstract class MainTab extends AbstractMainTab implements QVTiLaunchConst
 		}
 	}
 
+	@Override
 	protected void setDefaults(@NonNull ILaunchConfigurationWorkingCopy configuration, @NonNull IFile iFile) {
 //		System.out.println("setDefaults");
 		String projectName = iFile.getProject().getName();

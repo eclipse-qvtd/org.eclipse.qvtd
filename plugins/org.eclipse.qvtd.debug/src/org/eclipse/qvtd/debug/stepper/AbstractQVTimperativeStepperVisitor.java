@@ -35,22 +35,27 @@ public abstract class AbstractQVTimperativeStepperVisitor
 		super(context);
 	}	
 
+	@Override
 	public @Nullable IStepper visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitMapping(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Mapping object) {
 		return visitRule(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitMappingCall(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCall object) {
 		return visitOCLExpression(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitMappingCallBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCallBinding object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitVariablePredicate(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariablePredicate object) {
 		return visitPredicate(object);
 	}

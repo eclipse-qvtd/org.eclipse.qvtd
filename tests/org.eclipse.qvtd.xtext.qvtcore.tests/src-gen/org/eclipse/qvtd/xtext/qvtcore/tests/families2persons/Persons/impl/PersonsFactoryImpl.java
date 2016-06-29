@@ -76,6 +76,7 @@ public class PersonsFactoryImpl extends EFactoryImpl implements PersonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Male createMale() {
 		MaleImpl male = new MaleImpl();
 		return male;
@@ -86,6 +87,7 @@ public class PersonsFactoryImpl extends EFactoryImpl implements PersonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Female createFemale() {
 		FemaleImpl female = new FemaleImpl();
 		return female;
@@ -96,6 +98,7 @@ public class PersonsFactoryImpl extends EFactoryImpl implements PersonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PersonsPackage getPersonsPackage() {
 		return (PersonsPackage)getEPackage();
 	}

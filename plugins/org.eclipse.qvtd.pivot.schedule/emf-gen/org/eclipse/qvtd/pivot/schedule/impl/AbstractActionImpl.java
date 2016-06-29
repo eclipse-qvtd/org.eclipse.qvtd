@@ -168,6 +168,7 @@ public abstract class AbstractActionImpl extends ScheduleElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AbstractDatum> getProductions() {
 		if (productions == null) {
 			productions = new EObjectWithInverseResolvingEList.ManyInverse<AbstractDatum>(AbstractDatum.class, this, SchedulePackage.ABSTRACT_ACTION__PRODUCTIONS, SchedulePackage.ABSTRACT_DATUM__PRODUCED_BY);
@@ -180,6 +181,7 @@ public abstract class AbstractActionImpl extends ScheduleElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AbstractDatum> getRequisites() {
 		if (requisites == null) {
 			requisites = new EObjectWithInverseResolvingEList.ManyInverse<AbstractDatum>(AbstractDatum.class, this, SchedulePackage.ABSTRACT_ACTION__REQUISITES, SchedulePackage.ABSTRACT_DATUM__REQUIRED_BY);
@@ -192,6 +194,7 @@ public abstract class AbstractActionImpl extends ScheduleElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ParameterDerivation> getParameterDerivations() {
 		if (parameterDerivations == null) {
 			parameterDerivations = new EObjectContainmentWithInverseEList<ParameterDerivation>(ParameterDerivation.class, this, SchedulePackage.ABSTRACT_ACTION__PARAMETER_DERIVATIONS, SchedulePackage.PARAMETER_DERIVATION__TARGET);
@@ -204,6 +207,7 @@ public abstract class AbstractActionImpl extends ScheduleElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getOrder() {
 		return order;
 	}
@@ -213,6 +217,7 @@ public abstract class AbstractActionImpl extends ScheduleElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOrder(int newOrder) {
 		int oldOrder = order;
 		order = newOrder;
@@ -225,6 +230,7 @@ public abstract class AbstractActionImpl extends ScheduleElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AbstractAction getParent() {
 		if (parent != null && parent.eIsProxy()) {
 			InternalEObject oldParent = (InternalEObject)parent;
@@ -266,6 +272,7 @@ public abstract class AbstractActionImpl extends ScheduleElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParent(AbstractAction newParent) {
 		if (newParent != parent) {
 			NotificationChain msgs = null;
@@ -285,6 +292,7 @@ public abstract class AbstractActionImpl extends ScheduleElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AbstractAction> getChildren() {
 		if (children == null) {
 			children = new EObjectWithInverseResolvingEList<AbstractAction>(AbstractAction.class, this, SchedulePackage.ABSTRACT_ACTION__CHILDREN, SchedulePackage.ABSTRACT_ACTION__PARENT);
@@ -297,6 +305,7 @@ public abstract class AbstractActionImpl extends ScheduleElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DataParameter> getParameters() {
 		if (parameters == null) {
 			parameters = new EObjectContainmentEList<DataParameter>(DataParameter.class, this, SchedulePackage.ABSTRACT_ACTION__PARAMETERS);
@@ -309,6 +318,7 @@ public abstract class AbstractActionImpl extends ScheduleElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DataParameter> getResults() {
 		if (results == null) {
 			results = new EObjectContainmentEList<DataParameter>(DataParameter.class, this, SchedulePackage.ABSTRACT_ACTION__RESULTS);
@@ -321,6 +331,7 @@ public abstract class AbstractActionImpl extends ScheduleElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Schedule getSchedule() {
 		if (eContainerFeatureID() != SchedulePackage.ABSTRACT_ACTION__SCHEDULE) return null;
 		return (Schedule)eInternalContainer();
@@ -341,6 +352,7 @@ public abstract class AbstractActionImpl extends ScheduleElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSchedule(Schedule newSchedule) {
 		if (newSchedule != eInternalContainer() || (eContainerFeatureID() != SchedulePackage.ABSTRACT_ACTION__SCHEDULE && newSchedule != null)) {
 			if (EcoreUtil.isAncestor(this, newSchedule))

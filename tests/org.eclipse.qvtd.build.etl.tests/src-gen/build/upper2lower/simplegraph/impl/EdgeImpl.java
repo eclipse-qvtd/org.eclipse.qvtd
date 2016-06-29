@@ -83,6 +83,7 @@ public class EdgeImpl extends ElementImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node getTarget() {
 		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject)target;
@@ -124,6 +125,7 @@ public class EdgeImpl extends ElementImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTarget(Node newTarget) {
 		if (newTarget != target) {
 			NotificationChain msgs = null;
@@ -143,6 +145,7 @@ public class EdgeImpl extends ElementImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
@@ -184,6 +187,7 @@ public class EdgeImpl extends ElementImpl implements Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSource(Node newSource) {
 		if (newSource != source) {
 			NotificationChain msgs = null;

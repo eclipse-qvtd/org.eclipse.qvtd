@@ -104,6 +104,7 @@ public class CS2ASCGPackageImpl extends EPackageImpl implements CS2ASCGPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGLookupCallExp() {
 		return cgLookupCallExpEClass;
 	}
@@ -113,6 +114,7 @@ public class CS2ASCGPackageImpl extends EPackageImpl implements CS2ASCGPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CS2ASCGFactory getCS2ASCGFactory() {
 		return (CS2ASCGFactory)getEFactoryInstance();
 	}

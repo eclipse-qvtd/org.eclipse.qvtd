@@ -128,6 +128,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTop() {
 		return topEClass;
 	}
@@ -137,6 +138,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTop_Node() {
 		return (EReference)topEClass.getEStructuralFeatures().get(0);
 	}
@@ -146,6 +148,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNode() {
 		return nodeEClass;
 	}
@@ -155,6 +158,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNode_Height() {
 		return (EAttribute)nodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -164,6 +168,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNode_Depth() {
 		return (EAttribute)nodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -173,6 +178,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getComposite() {
 		return compositeEClass;
 	}
@@ -182,6 +188,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getComposite_Child() {
 		return (EReference)compositeEClass.getEStructuralFeatures().get(0);
 	}
@@ -191,6 +198,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLeaf() {
 		return leafEClass;
 	}
@@ -200,6 +208,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public KiamaasFactory getKiamaasFactory() {
 		return (KiamaasFactory)getEFactoryInstance();
 	}

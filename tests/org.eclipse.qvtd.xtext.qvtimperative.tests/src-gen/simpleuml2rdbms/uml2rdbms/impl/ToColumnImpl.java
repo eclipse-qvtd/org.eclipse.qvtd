@@ -73,6 +73,7 @@ public abstract class ToColumnImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Column getColumn() {
 		if (column != null && column.eIsProxy()) {
 			InternalEObject oldColumn = (InternalEObject)column;
@@ -99,6 +100,7 @@ public abstract class ToColumnImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setColumn(Column newColumn) {
 		Column oldColumn = column;
 		column = newColumn;

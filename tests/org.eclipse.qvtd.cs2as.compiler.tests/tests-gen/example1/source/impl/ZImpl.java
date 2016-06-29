@@ -73,6 +73,7 @@ public class ZImpl extends SElementImpl implements Z {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Y getToY() {
 		if (eContainerFeatureID() != SourcePackage.Z__TO_Y) return null;
 		return (Y)eInternalContainer();
@@ -93,6 +94,7 @@ public class ZImpl extends SElementImpl implements Z {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setToY(Y newToY) {
 		if (newToY != eInternalContainer() || (eContainerFeatureID() != SourcePackage.Z__TO_Y && newToY != null)) {
 			if (EcoreUtil.isAncestor(this, newToY))
@@ -114,6 +116,7 @@ public class ZImpl extends SElementImpl implements Z {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathNameCS getRefers() {
 		return refers;
 	}
@@ -138,6 +141,7 @@ public class ZImpl extends SElementImpl implements Z {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRefers(PathNameCS newRefers) {
 		if (newRefers != refers) {
 			NotificationChain msgs = null;

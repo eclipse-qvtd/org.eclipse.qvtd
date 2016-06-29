@@ -78,6 +78,7 @@ public class X2Impl extends XImpl implements X2 {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<W> getOwnsW() {
 		if (ownsW == null) {
 			ownsW = new EObjectContainmentEList<W>(W.class, this, SderivedPackage.X2__OWNS_W);

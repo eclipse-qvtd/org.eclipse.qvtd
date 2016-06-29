@@ -94,6 +94,7 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Argument> getOwnedArguments() {
 		if (ownedArguments == null) {
 			ownedArguments = new EObjectContainmentEList<Argument>(Argument.class, this, ClassesPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS);
@@ -106,6 +107,7 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Operation getReferredOperation() {
 		if (referredOperation != null && referredOperation.eIsProxy()) {
 			InternalEObject oldReferredOperation = (InternalEObject)referredOperation;
@@ -132,6 +134,7 @@ public class OperationCallExpImpl extends CallExpImpl implements OperationCallEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredOperation(Operation newReferredOperation) {
 		Operation oldReferredOperation = referredOperation;
 		referredOperation = newReferredOperation;

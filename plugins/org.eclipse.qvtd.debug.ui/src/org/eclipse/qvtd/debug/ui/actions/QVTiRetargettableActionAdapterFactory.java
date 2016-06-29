@@ -42,6 +42,7 @@ public class QVTiRetargettableActionAdapterFactory implements IAdapterFactory
 		return null;
 	}
 
+	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Class[] getAdapterList() {
 		return new Class[] { QVTiToggleBreakpointAdapter.class, QVTiRunToLineAdapter.class };

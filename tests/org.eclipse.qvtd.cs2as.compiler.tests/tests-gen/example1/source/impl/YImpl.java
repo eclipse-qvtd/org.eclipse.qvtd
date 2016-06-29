@@ -94,6 +94,7 @@ public abstract class YImpl extends SElementImpl implements Y {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Z getOwnsZ() {
 		return ownsZ;
 	}
@@ -118,6 +119,7 @@ public abstract class YImpl extends SElementImpl implements Y {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnsZ(Z newOwnsZ) {
 		if (newOwnsZ != ownsZ) {
 			NotificationChain msgs = null;
@@ -137,6 +139,7 @@ public abstract class YImpl extends SElementImpl implements Y {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -146,6 +149,7 @@ public abstract class YImpl extends SElementImpl implements Y {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -158,6 +162,7 @@ public abstract class YImpl extends SElementImpl implements Y {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public X getToX() {
 		if (eContainerFeatureID() != SourcePackage.Y__TO_X) return null;
 		return (X)eInternalContainer();
@@ -178,6 +183,7 @@ public abstract class YImpl extends SElementImpl implements Y {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setToX(X newToX) {
 		if (newToX != eInternalContainer() || (eContainerFeatureID() != SourcePackage.Y__TO_X && newToX != null)) {
 			if (EcoreUtil.isAncestor(this, newToX))

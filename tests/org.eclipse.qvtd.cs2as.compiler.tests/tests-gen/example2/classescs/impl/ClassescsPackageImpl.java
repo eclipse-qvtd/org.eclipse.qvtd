@@ -191,6 +191,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getElementCS() {
 		return elementCSEClass;
 	}
@@ -200,6 +201,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getElementCS_Ast() {
 		return (EReference)elementCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -209,6 +211,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNamedElementCS() {
 		return namedElementCSEClass;
 	}
@@ -218,6 +221,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNamedElementCS_Name() {
 		return (EAttribute)namedElementCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -227,6 +231,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPackageCS() {
 		return packageCSEClass;
 	}
@@ -236,6 +241,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackageCS_OwnedClasses() {
 		return (EReference)packageCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -245,6 +251,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackageCS_OwnedPackages() {
 		return (EReference)packageCSEClass.getEStructuralFeatures().get(1);
 	}
@@ -254,6 +261,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getClassCS() {
 		return classCSEClass;
 	}
@@ -263,6 +271,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassCS_Extends() {
 		return (EReference)classCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -272,6 +281,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassCS_Properties() {
 		return (EReference)classCSEClass.getEStructuralFeatures().get(1);
 	}
@@ -281,6 +291,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassCS_Operations() {
 		return (EReference)classCSEClass.getEStructuralFeatures().get(2);
 	}
@@ -290,6 +301,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPathNameCS() {
 		return pathNameCSEClass;
 	}
@@ -299,6 +311,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPathNameCS_Path() {
 		return (EReference)pathNameCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -308,6 +321,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPathElementCS() {
 		return pathElementCSEClass;
 	}
@@ -317,6 +331,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRootCS() {
 		return rootCSEClass;
 	}
@@ -326,6 +341,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRootCS_OwnedPackages() {
 		return (EReference)rootCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -335,6 +351,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPropertyCS() {
 		return propertyCSEClass;
 	}
@@ -344,6 +361,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPropertyCS_TypeRef() {
 		return (EReference)propertyCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -353,6 +371,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOperationCS() {
 		return operationCSEClass;
 	}
@@ -362,6 +381,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOperationCS_Params() {
 		return (EAttribute)operationCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -371,6 +391,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOperationCS_BodyExps() {
 		return (EReference)operationCSEClass.getEStructuralFeatures().get(1);
 	}
@@ -380,6 +401,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOperationCS_ResultRef() {
 		return (EReference)operationCSEClass.getEStructuralFeatures().get(2);
 	}
@@ -389,6 +411,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNameExpCS() {
 		return nameExpCSEClass;
 	}
@@ -398,6 +421,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNameExpCS_Name() {
 		return (EReference)nameExpCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -407,6 +431,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNameExpCS_RoundedBrackets() {
 		return (EReference)nameExpCSEClass.getEStructuralFeatures().get(1);
 	}
@@ -416,6 +441,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNameExpCS_OwnedNameExp() {
 		return (EReference)nameExpCSEClass.getEStructuralFeatures().get(2);
 	}
@@ -425,6 +451,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRoundedBracketClause() {
 		return roundedBracketClauseEClass;
 	}
@@ -434,6 +461,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoundedBracketClause_Args() {
 		return (EReference)roundedBracketClauseEClass.getEStructuralFeatures().get(0);
 	}
@@ -443,6 +471,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getArgumentCS() {
 		return argumentCSEClass;
 	}
@@ -452,6 +481,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassescsFactory getClassescsFactory() {
 		return (ClassescsFactory)getEFactoryInstance();
 	}

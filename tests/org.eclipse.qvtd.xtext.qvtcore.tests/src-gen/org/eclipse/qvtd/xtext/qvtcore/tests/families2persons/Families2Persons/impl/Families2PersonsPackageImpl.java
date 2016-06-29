@@ -134,6 +134,7 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMemberToPerson() {
 		return memberToPersonEClass;
 	}
@@ -143,6 +144,7 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMemberToPerson_Member() {
 		return (EReference)memberToPersonEClass.getEStructuralFeatures().get(0);
 	}
@@ -152,6 +154,7 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMemberToPerson_Person() {
 		return (EReference)memberToPersonEClass.getEStructuralFeatures().get(1);
 	}
@@ -161,6 +164,7 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getMemberToPerson_FirstName() {
 		return (EAttribute)memberToPersonEClass.getEStructuralFeatures().get(2);
 	}
@@ -170,6 +174,7 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getMemberToPerson_FamilyName() {
 		return (EAttribute)memberToPersonEClass.getEStructuralFeatures().get(3);
 	}
@@ -179,6 +184,7 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMember2Male() {
 		return member2MaleEClass;
 	}
@@ -188,6 +194,7 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMember2Female() {
 		return member2FemaleEClass;
 	}
@@ -197,6 +204,7 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Families2PersonsFactory getFamilies2PersonsFactory() {
 		return (Families2PersonsFactory)getEFactoryInstance();
 	}

@@ -113,6 +113,7 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getType() {
 		return type;
 	}
@@ -122,6 +123,7 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(String newType) {
 		String oldType = type;
 		type = newType;
@@ -134,6 +136,7 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Table getOwner() {
 		if (eContainerFeatureID() != SimplerdbmsPackage.COLUMN__OWNER) return null;
 		return (Table)eInternalContainer();
@@ -154,6 +157,7 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(Table newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != SimplerdbmsPackage.COLUMN__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
@@ -175,6 +179,7 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ForeignKey> getForeignKeys() {
 		if (foreignKeys == null) {
 			foreignKeys = new EObjectWithInverseResolvingEList.ManyInverse<ForeignKey>(ForeignKey.class, this, SimplerdbmsPackage.COLUMN__FOREIGN_KEYS, SimplerdbmsPackage.FOREIGN_KEY__COLUMNS);
@@ -187,6 +192,7 @@ public class ColumnImpl extends RModelElementImpl implements Column {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Key> getKeys() {
 		if (keys == null) {
 			keys = new EObjectWithInverseResolvingEList.ManyInverse<Key>(Key.class, this, SimplerdbmsPackage.COLUMN__KEYS, SimplerdbmsPackage.KEY__COLUMN);

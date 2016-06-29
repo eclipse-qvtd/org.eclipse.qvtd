@@ -197,6 +197,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAbstractDatum() {
 		return abstractDatumEClass;
 	}
@@ -206,6 +207,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractDatum_Super() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(0);
 	}
@@ -215,6 +217,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractDatum_Sub() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(1);
 	}
@@ -224,6 +227,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractDatum_Domain() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(2);
 	}
@@ -233,6 +237,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractDatum_TypedModel() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(7);
 	}
@@ -242,6 +247,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractDatum_ProducedBy() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(3);
 	}
@@ -251,6 +257,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractDatum_RequiredBy() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(4);
 	}
@@ -260,6 +267,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractDatum_Schedule() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(5);
 	}
@@ -269,6 +277,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractDatum_DataParameter() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(6);
 	}
@@ -278,6 +287,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAbstractAction() {
 		return abstractActionEClass;
 	}
@@ -287,6 +297,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractAction_Productions() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(0);
 	}
@@ -296,6 +307,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractAction_Requisites() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(1);
 	}
@@ -305,6 +317,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractAction_ParameterDerivations() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(2);
 	}
@@ -314,6 +327,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAbstractAction_Order() {
 		return (EAttribute)abstractActionEClass.getEStructuralFeatures().get(3);
 	}
@@ -323,6 +337,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractAction_Parent() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(4);
 	}
@@ -332,6 +347,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractAction_Children() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(5);
 	}
@@ -341,6 +357,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractAction_Parameters() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(6);
 	}
@@ -350,6 +367,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractAction_Results() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(7);
 	}
@@ -359,6 +377,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAbstractAction_Schedule() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(8);
 	}
@@ -368,6 +387,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getClassDatum() {
 		return classDatumEClass;
 	}
@@ -377,6 +397,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassDatum_Type() {
 		return (EReference)classDatumEClass.getEStructuralFeatures().get(0);
 	}
@@ -386,6 +407,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassDatum_PropertyDatums() {
 		return (EReference)classDatumEClass.getEStructuralFeatures().get(1);
 	}
@@ -395,6 +417,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDataParameter() {
 		return dataParameterEClass;
 	}
@@ -404,6 +427,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDataParameter_Variable() {
 		return (EReference)dataParameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -413,6 +437,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDataParameter_SecondaryParameter() {
 		return (EReference)dataParameterEClass.getEStructuralFeatures().get(1);
 	}
@@ -422,6 +447,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDataParameter_Datum() {
 		return (EReference)dataParameterEClass.getEStructuralFeatures().get(2);
 	}
@@ -431,6 +457,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInputAction() {
 		return inputActionEClass;
 	}
@@ -440,6 +467,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMappingAction() {
 		return mappingActionEClass;
 	}
@@ -449,6 +477,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMappingAction_Mapping() {
 		return (EReference)mappingActionEClass.getEStructuralFeatures().get(0);
 	}
@@ -458,6 +487,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOutputAction() {
 		return outputActionEClass;
 	}
@@ -467,6 +497,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getParameterDerivation() {
 		return parameterDerivationEClass;
 	}
@@ -476,6 +507,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getParameterDerivation_Target() {
 		return (EReference)parameterDerivationEClass.getEStructuralFeatures().get(0);
 	}
@@ -485,6 +517,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getParameterDerivation_PrimaryParameter() {
 		return (EReference)parameterDerivationEClass.getEStructuralFeatures().get(1);
 	}
@@ -494,6 +527,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getParameterDerivation_SecondaryParameter() {
 		return (EReference)parameterDerivationEClass.getEStructuralFeatures().get(2);
 	}
@@ -503,6 +537,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPropertyDatum() {
 		return propertyDatumEClass;
 	}
@@ -512,6 +547,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPropertyDatum_Property() {
 		return (EReference)propertyDatumEClass.getEStructuralFeatures().get(0);
 	}
@@ -521,6 +557,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPropertyDatum_ClassDatum() {
 		return (EReference)propertyDatumEClass.getEStructuralFeatures().get(1);
 	}
@@ -530,6 +567,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPropertyDatum_Opposite() {
 		return (EReference)propertyDatumEClass.getEStructuralFeatures().get(2);
 	}
@@ -539,6 +577,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSchedule() {
 		return scheduleEClass;
 	}
@@ -548,6 +587,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSchedule_Datums() {
 		return (EReference)scheduleEClass.getEStructuralFeatures().get(0);
 	}
@@ -557,6 +597,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSchedule_Actions() {
 		return (EReference)scheduleEClass.getEStructuralFeatures().get(1);
 	}
@@ -566,6 +607,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getScheduleElement() {
 		return scheduleElementEClass;
 	}
@@ -575,6 +617,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSecondaryParameter() {
 		return secondaryParameterEClass;
 	}
@@ -584,6 +627,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSecondaryParameter_IsLoop() {
 		return (EAttribute)secondaryParameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -593,6 +637,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSecondaryParameter_DataParameter() {
 		return (EReference)secondaryParameterEClass.getEStructuralFeatures().get(1);
 	}
@@ -602,6 +647,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSecondaryParameter_DerivationProperty() {
 		return (EReference)secondaryParameterEClass.getEStructuralFeatures().get(2);
 	}
@@ -611,6 +657,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSecondaryParameter_Derivation() {
 		return (EReference)secondaryParameterEClass.getEStructuralFeatures().get(3);
 	}
@@ -620,6 +667,7 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ScheduleFactory getScheduleFactory() {
 		return (ScheduleFactory)getEFactoryInstance();
 	}

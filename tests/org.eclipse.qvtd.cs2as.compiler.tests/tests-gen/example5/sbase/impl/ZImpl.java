@@ -64,6 +64,7 @@ public class ZImpl extends SElementImpl implements Z {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Y getToY() {
 		if (eContainerFeatureID() != SbasePackage.Z__TO_Y) return null;
 		return (Y)eInternalContainer();
@@ -84,6 +85,7 @@ public class ZImpl extends SElementImpl implements Z {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setToY(Y newToY) {
 		if (newToY != eInternalContainer() || (eContainerFeatureID() != SbasePackage.Z__TO_Y && newToY != null)) {
 			if (EcoreUtil.isAncestor(this, newToY))

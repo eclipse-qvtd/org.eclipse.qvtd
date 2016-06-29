@@ -48,6 +48,7 @@ public class QVTiLineBreakpoint extends VMLineBreakpoint
     	super(sourceURI, lineNumber, isRunToLine);
     }
 
+	@Override
 	protected @NonNull QVTiDebugCore getDebugCore() {
 		return QVTiDebugCore.INSTANCE;
 	}

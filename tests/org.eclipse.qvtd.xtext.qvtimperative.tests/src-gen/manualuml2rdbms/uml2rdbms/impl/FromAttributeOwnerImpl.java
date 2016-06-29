@@ -78,6 +78,7 @@ public abstract class FromAttributeOwnerImpl extends MinimalEObjectImpl.Containe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<FromAttribute> getFromAttributes() {
 		if (fromAttributes == null) {
 			fromAttributes = new EObjectContainmentWithInverseEList<FromAttribute>(FromAttribute.class, this, UML2RDBMSPackage.FROM_ATTRIBUTE_OWNER__FROM_ATTRIBUTES, UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER);

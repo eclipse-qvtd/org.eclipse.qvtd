@@ -83,6 +83,7 @@ public class PackageImpl extends NamedElementImpl implements example2.classes.Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<example2.classes.Class> getOwnedClasses() {
 		if (ownedClasses == null) {
 			ownedClasses = new EObjectContainmentEList<example2.classes.Class>(example2.classes.Class.class, this, ClassesPackage.PACKAGE__OWNED_CLASSES);
@@ -95,6 +96,7 @@ public class PackageImpl extends NamedElementImpl implements example2.classes.Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<example2.classes.Package> getOwnedPackages() {
 		if (ownedPackages == null) {
 			ownedPackages = new EObjectContainmentEList<example2.classes.Package>(example2.classes.Package.class, this, ClassesPackage.PACKAGE__OWNED_PACKAGES);

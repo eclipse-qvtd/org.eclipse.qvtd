@@ -37,6 +37,7 @@ import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -87,10 +88,10 @@ public class PivotTestCase extends TestCase
 		if (unresolvedProxies.size() > 0) {
 			StringBuilder s = new StringBuilder();
 			s.append(unresolvedProxies.size());
-			s.append(" unresolved proxies in '" + resource.getURI() + "' ");	
+			s.append(" unresolved proxies in '" + resource.getURI() + "' ");
 			s.append(message);
 			for (Map.Entry<EObject, Collection<Setting>> unresolvedProxy : unresolvedProxies.entrySet()) {
-				s.append("\n");	
+				s.append("\n");
 				BasicEObjectImpl key = (BasicEObjectImpl) unresolvedProxy.getKey();
 				s.append(key.eProxyURI());
 				for (Setting setting : unresolvedProxy.getValue()) {
@@ -171,7 +172,7 @@ public class PivotTestCase extends TestCase
 		}
 		StringBuilder s2 = null;
 		for (String key : expected.keySet()) {
-			Integer count = expected.get(key);
+			Integer count = ClassUtil.nonNullState(expected.get(key));
 			while (count-- > 0) {
 				if (s2 == null) {
 					s2 = new StringBuilder();
@@ -211,10 +212,10 @@ public class PivotTestCase extends TestCase
 			throw new Error("Failed to parse or evaluate \"" + expression + "\"", e);
 		}
 		else {
-	        throw new Error("Failure for \"" + expression + "\"", e);
+			throw new Error("Failure for \"" + expression + "\"", e);
 		}
 	}
-	
+
 	public static Resource getEcoreFromCS(@NonNull OCL ocl, String testDocument, URI ecoreURI) throws IOException {
 		InputStream inputStream = new ByteArrayInputStream(testDocument.getBytes());
 		URI xtextURI = URI.createURI("test.oclinecore");
@@ -235,16 +236,16 @@ public class PivotTestCase extends TestCase
 		}
 		return projectMap2;
 	}
-	
+
 	public URI getTestModelURI(String localFileName) {
-		String urlString = getProjectMap().getLocation(PLUGIN_ID).toString();
+		String urlString = ClassUtil.nonNullState(getProjectMap().getLocation(PLUGIN_ID)).toString();
 		TestCase.assertNotNull(urlString);
 		return URI.createURI(urlString + "/" + localFileName);
 	}
 
-//	public static void resetProjectMap() {
-//		projectMap = null;
-//	}
+	//	public static void resetProjectMap() {
+	//		projectMap = null;
+	//	}
 
 	public static Resource savePivotAsEcore(@NonNull OCL ocl, Resource pivotResource, URI ecoreURI, boolean validateSaved) throws IOException {
 		return savePivotAsEcore(ocl, pivotResource, ecoreURI, null, validateSaved);
@@ -278,13 +279,13 @@ public class PivotTestCase extends TestCase
 		}
 		resourceSet.eAdapters().clear();
 	}
-	
+
 	protected static boolean noDebug = false;
-	
+
 	public static void debugPrintln(String string) {
 		if (!noDebug) {
 			System.out.println(string);
-		}		
+		}
 	}
 
 	@Override

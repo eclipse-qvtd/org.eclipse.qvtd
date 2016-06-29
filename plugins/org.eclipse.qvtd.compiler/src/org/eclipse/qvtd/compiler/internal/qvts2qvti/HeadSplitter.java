@@ -40,7 +40,7 @@ public class HeadSplitter
 	{
 		protected final @NonNull Set<@NonNull Node> intersectionNodes;
 		protected final @NonNull Set<@NonNull Node> headNodes = new HashSet<@NonNull Node>();
-//		protected final @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> headNode2reachableNodes;
+		//		protected final @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> headNode2reachableNodes;
 		Map<@NonNull Node, List<@NonNull Edge>> head2interHeadEdges = new HashMap<@NonNull Node, List<@NonNull Edge>>();
 		Map<@NonNull Node, List<@NonNull Node>> head2interHeadNodes = new HashMap<@NonNull Node, List<@NonNull Node>>();
 
@@ -52,13 +52,13 @@ public class HeadSplitter
 			boolean wasAdded = headNodes.add(headNode);
 			assert wasAdded;
 		}
-		
+
 		public void analyze() {
 			for (@NonNull Node headNode : headNodes) {
 				analyze(headNode);
 			}
 		}
-		
+
 		public void analyze(@NonNull Node headNode) {
 			List<@NonNull Edge> interHeadEdges = null;
 			List<@NonNull Node> interHeadNodes = null;
@@ -131,10 +131,10 @@ public class HeadSplitter
 				head2interHeadNodes.put(headNode, interHeadNodes);
 			}
 		}
-		
-		
+
+
 		public void debug(@NonNull StringBuilder s) {
-			s.append("\n    boundary:");			
+			s.append("\n    boundary:");
 			for (@NonNull Node headNode : headNodes) {
 				s.append(" \"" + headNode.getName() + "\"");
 			}
@@ -160,7 +160,7 @@ public class HeadSplitter
 							if (opposite != null) {
 								s.append("\n                opposite: " + (opposite.isIsImplicit() ? "implicit" : "explicit") + " " + opposite.getName() + " : " + opposite.getType());
 							}
-							
+
 						}
 					}
 				}
@@ -180,7 +180,7 @@ public class HeadSplitter
 						derivableHeadNodes2edges.put(headNode, interHeadEdges);
 					}
 				}
-			}		
+			}
 			//
 			//	Compute the deriveable head nodes that do not depend on other deriveable heads.
 			//
@@ -196,37 +196,37 @@ public class HeadSplitter
 			return removableHeadNodes;
 		}
 	}
-	
+
 	public static boolean containsNone(@NonNull Iterable<@NonNull Node> firstNodes, @NonNull Iterable<@NonNull Node> secondNodes) {
 		for (@NonNull Node firstNode : firstNodes) {
 			for (@NonNull Node secondNode : secondNodes) {
 				if (firstNode == secondNode) {
 					return false;
 				}
-			}		
-		}		
+			}
+		}
 		return true;
 	}
-	
+
 	protected final @NonNull Region region;
-	
+
 	/**
 	 * Map from each head node to all the nodes reachable from the head by to-one navigation.
 	 */
 	private final @NonNull Map<@NonNull Node, Set<@NonNull Node>> head2reachables = new HashMap<@NonNull Node, Set<@NonNull Node>>();
-	
+
 	/**
 	 * Map from each head node to all the nodes reachable from the head by to-one navigation.
 	 */
 	private final @NonNull Set<@NonNull Node> allReachables = new HashSet<@NonNull Node>();
-	
+
 	/**
 	 * Map from each reachable node to all the head nodes from which it is reachable by to-one navigation.
 	 */
 	private final @NonNull Map<@NonNull Node, List<@NonNull Node>> reachable2heads = new HashMap<@NonNull Node, List<@NonNull Node>>();
 
 	private final @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull Boundary> intersection2boundary = new HashMap<@NonNull Set<@NonNull Node>, @NonNull Boundary>();;
-	
+
 	public HeadSplitter(@NonNull Region region) {
 		this.region = region;
 		List<@NonNull Node> headNodes = region.getHeadNodes();
@@ -330,7 +330,7 @@ public class HeadSplitter
 					}
 				}
 			}
-		}	
+		}
 	}
 
 	private @NonNull Collection<@NonNull Node>  removeBoundary() {
@@ -341,7 +341,7 @@ public class HeadSplitter
 					resolvedHeadNodes2edges.put(entry.getKey(), entry.getValue());
 				}
 			}
-		}		
+		}
 		if (SPLITTING.isActive()) {
 			StringBuilder s = new StringBuilder();
 			for (Map.Entry<@NonNull Node, @NonNull List<@NonNull Edge>> entry : resolvedHeadNodes2edges.entrySet()) {
@@ -349,7 +349,7 @@ public class HeadSplitter
 				for (@NonNull Edge edge : entry.getValue()) {
 					s.append("\n\t    via " + edge);
 				}
-			}		
+			}
 			SPLITTING.println(region + s.toString());
 		}
 		return resolvedHeadNodes2edges.keySet();
@@ -372,20 +372,20 @@ public class HeadSplitter
 	}
 
 	private @NonNull Collection<@NonNull Node> split(@NonNull List<@NonNull Node> headNodes) {
-//		head2reachables.clear();
+		//		head2reachables.clear();
 		intersection2boundary.clear();
 		for (@NonNull Node headNode : headNodes) {
 			createBoundary(headNode);
-		}		
-//		pruneBoundaries();
+		}
+		//		pruneBoundaries();
 		for (@NonNull Boundary boundary : intersection2boundary.values()) {
 			boundary.analyze();
-		}		
+		}
 		if (SPLITTING.isActive()) {
 			StringBuilder s = new StringBuilder();
 			for (@NonNull Boundary boundary : intersection2boundary.values()) {
 				boundary.debug(s);
-			}		
+			}
 			SPLITTING.println(region + s.toString());
 		}
 		return removeBoundary();

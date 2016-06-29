@@ -79,6 +79,7 @@ public class KiamaasFactoryImpl extends EFactoryImpl implements KiamaasFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Top createTop() {
 		TopImpl top = new TopImpl();
 		return top;
@@ -89,6 +90,7 @@ public class KiamaasFactoryImpl extends EFactoryImpl implements KiamaasFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Plus createPlus() {
 		PlusImpl plus = new PlusImpl();
 		return plus;
@@ -99,6 +101,7 @@ public class KiamaasFactoryImpl extends EFactoryImpl implements KiamaasFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Num createNum() {
 		NumImpl num = new NumImpl();
 		return num;
@@ -109,6 +112,7 @@ public class KiamaasFactoryImpl extends EFactoryImpl implements KiamaasFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public KiamaasPackage getKiamaasPackage() {
 		return (KiamaasPackage)getEPackage();
 	}

@@ -98,6 +98,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public C getToC() {
 		if (eContainerFeatureID() != TargetPackage.D__TO_C) return null;
 		return (C)eInternalContainer();
@@ -118,6 +119,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setToC(C newToC) {
 		if (newToC != eInternalContainer() || (eContainerFeatureID() != TargetPackage.D__TO_C && newToC != null)) {
 			if (EcoreUtil.isAncestor(this, newToC))
@@ -139,6 +141,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public B getToB() {
 		if (eContainerFeatureID() != TargetPackage.D__TO_B) return null;
 		return (B)eInternalContainer();
@@ -159,6 +162,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setToB(B newToB) {
 		if (newToB != eInternalContainer() || (eContainerFeatureID() != TargetPackage.D__TO_B && newToB != null)) {
 			if (EcoreUtil.isAncestor(this, newToB))
@@ -180,6 +184,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public A getToA() {
 		if (toA != null && toA.eIsProxy()) {
 			InternalEObject oldToA = (InternalEObject)toA;
@@ -206,6 +211,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setToA(A newToA) {
 		A oldToA = toA;
 		toA = newToA;
@@ -218,6 +224,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public B getRefsB() {
 		if (refsB != null && refsB.eIsProxy()) {
 			InternalEObject oldRefsB = (InternalEObject)refsB;
@@ -244,6 +251,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRefsB(B newRefsB) {
 		B oldRefsB = refsB;
 		refsB = newRefsB;
@@ -256,6 +264,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public C getRefsC() {
 		if (refsC != null && refsC.eIsProxy()) {
 			InternalEObject oldRefsC = (InternalEObject)refsC;
@@ -282,6 +291,7 @@ public class DImpl extends NamedElementImpl implements D {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRefsC(C newRefsC) {
 		C oldRefsC = refsC;
 		refsC = newRefsC;

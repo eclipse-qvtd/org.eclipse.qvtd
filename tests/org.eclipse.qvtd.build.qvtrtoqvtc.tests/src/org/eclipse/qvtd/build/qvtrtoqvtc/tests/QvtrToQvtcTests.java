@@ -25,6 +25,7 @@ public class QvtrToQvtcTests extends LoadTestCase {
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase#setUp()
 	 */
+	@Override
 	@Before
     public void setUp() throws Exception {
 //		BaseLinkingService.DEBUG_RETRY.setState(true);
@@ -37,7 +38,8 @@ public class QvtrToQvtcTests extends LoadTestCase {
     /* (non-Javadoc)
      * @see org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase#tearDown()
      */
-    @After
+    @Override
+	@After
     public void tearDown() throws Exception {
 		super.tearDown();
     }

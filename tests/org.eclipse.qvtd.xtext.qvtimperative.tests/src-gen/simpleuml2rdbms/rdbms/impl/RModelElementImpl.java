@@ -101,6 +101,7 @@ public abstract class RModelElementImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -110,6 +111,7 @@ public abstract class RModelElementImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -122,6 +124,7 @@ public abstract class RModelElementImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getKind() {
 		return kind;
 	}
@@ -131,6 +134,7 @@ public abstract class RModelElementImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKind(String newKind) {
 		String oldKind = kind;
 		kind = newKind;

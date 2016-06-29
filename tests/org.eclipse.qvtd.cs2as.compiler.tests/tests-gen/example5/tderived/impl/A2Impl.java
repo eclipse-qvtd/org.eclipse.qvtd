@@ -78,6 +78,7 @@ public class A2Impl extends AImpl implements A2 {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<D> getOwnsD() {
 		if (ownsD == null) {
 			ownsD = new EObjectContainmentEList<D>(D.class, this, TderivedPackage.A2__OWNS_D);

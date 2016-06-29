@@ -123,6 +123,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Graph getGraph1() {
 		if (graph1 != null && graph1.eIsProxy()) {
 			InternalEObject oldGraph1 = (InternalEObject)graph1;
@@ -149,6 +150,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGraph1(Graph newGraph1) {
 		Graph oldGraph1 = graph1;
 		graph1 = newGraph1;
@@ -161,6 +163,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Graph getGraph2() {
 		if (graph2 != null && graph2.eIsProxy()) {
 			InternalEObject oldGraph2 = (InternalEObject)graph2;
@@ -187,6 +190,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGraph2(Graph newGraph2) {
 		Graph oldGraph2 = graph2;
 		graph2 = newGraph2;
@@ -199,6 +203,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Element2Element> getElement2Element() {
 		if (element2Element == null) {
 			element2Element = new EObjectContainmentWithInverseEList<Element2Element>(Element2Element.class, this, Simplegraph2graphPackage.GRAPH2_GRAPH__ELEMENT2_ELEMENT, Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER);
@@ -211,6 +216,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -220,6 +226,7 @@ public class Graph2GraphImpl extends MinimalEObjectImpl.Container implements Gra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;

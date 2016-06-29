@@ -37,6 +37,7 @@ public class QVTiDebuggableRunnerFactory extends DebuggableRunnerFactory
 		super(packageRegistry, modelURIs, traceFileURI);
 	}
 
+	@Override
 	public @NonNull DebuggableRunner createRunner(@NonNull EvaluationContext evaluationContext) throws DiagnosticException {
 		QVTiEvaluationContext qvtiEvaluationContext = (QVTiEvaluationContext)evaluationContext;
 		@SuppressWarnings("unused") BasicDiagnostic diagnostic = createDiagnostic("Transformation runner problems");
@@ -78,6 +79,7 @@ public class QVTiDebuggableRunnerFactory extends DebuggableRunnerFactory
 		return runner;
 	}
 
+	@Override
 	protected @NonNull String getPluginId() {
 		return QVTiDebugPlugin.PLUGIN_ID;
 	}

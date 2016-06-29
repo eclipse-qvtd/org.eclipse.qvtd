@@ -135,6 +135,7 @@ public class PersonsPackageImpl extends EPackageImpl implements PersonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPerson() {
 		return personEClass;
 	}
@@ -144,6 +145,7 @@ public class PersonsPackageImpl extends EPackageImpl implements PersonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPerson_FullName() {
 		return (EAttribute)personEClass.getEStructuralFeatures().get(0);
 	}
@@ -153,6 +155,7 @@ public class PersonsPackageImpl extends EPackageImpl implements PersonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMale() {
 		return maleEClass;
 	}
@@ -162,6 +165,7 @@ public class PersonsPackageImpl extends EPackageImpl implements PersonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFemale() {
 		return femaleEClass;
 	}
@@ -171,6 +175,7 @@ public class PersonsPackageImpl extends EPackageImpl implements PersonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PersonsFactory getPersonsFactory() {
 		return (PersonsFactory)getEFactoryInstance();
 	}

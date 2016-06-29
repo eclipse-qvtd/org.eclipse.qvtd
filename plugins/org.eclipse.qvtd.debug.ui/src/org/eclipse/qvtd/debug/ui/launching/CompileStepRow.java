@@ -31,6 +31,7 @@ public class CompileStepRow extends ParameterRow
 //		state.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
 	}
 
+	@Override
 	protected void createDerivedButtons() {
 		state = new Label(this, SWT.NONE);
 		state.setText("  Stale  ");

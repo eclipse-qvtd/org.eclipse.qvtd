@@ -77,6 +77,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		return myCurrentIP;
 	}
 
+	@Override
 	public @NonNull UnitLocation getCurrentLocation() {
 //		if (myCurrentIP == null) {
 //			return null;
@@ -88,6 +89,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 //		}
 	}
 
+	@Override
 	public @NonNull QVTiDebugCore getDebugCore() {
 		return QVTiDebugCore.INSTANCE;
 	}
@@ -169,6 +171,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 //    	myException = exception;
     }
 
+	@Override
 	public @NonNull Element setCurrentIP(@NonNull Element element) {
 		Element prevValue = myCurrentIP;
 		myCurrentIP = element;
@@ -179,6 +182,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
     	saveThrownException(exception);
     }
 
+	@Override
 	public void throwVMException(@NonNull VMRuntimeException exception) throws VMRuntimeException {
 		try {
 			saveThrownException(exception);

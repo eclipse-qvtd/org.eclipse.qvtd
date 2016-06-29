@@ -137,6 +137,7 @@ public class PackageToSchemaImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ClassToTable> getClassesToTables() {
 		if (classesToTables == null) {
 			classesToTables = new EObjectContainmentWithInverseEList<ClassToTable>(ClassToTable.class, this, UML2RDBMSPackage.PACKAGE_TO_SCHEMA__CLASSES_TO_TABLES, UML2RDBMSPackage.CLASS_TO_TABLE__OWNER);
@@ -149,6 +150,7 @@ public class PackageToSchemaImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PrimitiveToName> getPrimitivesToNames() {
 		if (primitivesToNames == null) {
 			primitivesToNames = new EObjectContainmentWithInverseEList<PrimitiveToName>(PrimitiveToName.class, this, UML2RDBMSPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES, UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER);
@@ -161,6 +163,7 @@ public class PackageToSchemaImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -170,6 +173,7 @@ public class PackageToSchemaImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -182,6 +186,7 @@ public class PackageToSchemaImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public manualuml2rdbms.uml.Package getUmlPackage() {
 		if (umlPackage != null && umlPackage.eIsProxy()) {
 			InternalEObject oldUmlPackage = (InternalEObject)umlPackage;
@@ -208,6 +213,7 @@ public class PackageToSchemaImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUmlPackage(manualuml2rdbms.uml.Package newUmlPackage) {
 		manualuml2rdbms.uml.Package oldUmlPackage = umlPackage;
 		umlPackage = newUmlPackage;
@@ -220,6 +226,7 @@ public class PackageToSchemaImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Schema getSchema() {
 		if (schema != null && schema.eIsProxy()) {
 			InternalEObject oldSchema = (InternalEObject)schema;
@@ -246,6 +253,7 @@ public class PackageToSchemaImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSchema(Schema newSchema) {
 		Schema oldSchema = schema;
 		schema = newSchema;

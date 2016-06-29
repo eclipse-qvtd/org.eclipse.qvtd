@@ -79,6 +79,7 @@ public class ClassescstracesFactoryImpl extends EFactoryImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PackageCS2Package createPackageCS2Package() {
 		PackageCS2PackageImpl packageCS2Package = new PackageCS2PackageImpl();
 		return packageCS2Package;
@@ -89,6 +90,7 @@ public class ClassescstracesFactoryImpl extends EFactoryImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassCS2Class createClassCS2Class() {
 		ClassCS2ClassImpl classCS2Class = new ClassCS2ClassImpl();
 		return classCS2Class;
@@ -99,6 +101,7 @@ public class ClassescstracesFactoryImpl extends EFactoryImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RootCS2Root createRootCS2Root() {
 		RootCS2RootImpl rootCS2Root = new RootCS2RootImpl();
 		return rootCS2Root;
@@ -109,6 +112,7 @@ public class ClassescstracesFactoryImpl extends EFactoryImpl implements Classesc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassescstracesPackage getClassescstracesPackage() {
 		return (ClassescstracesPackage)getEPackage();
 	}

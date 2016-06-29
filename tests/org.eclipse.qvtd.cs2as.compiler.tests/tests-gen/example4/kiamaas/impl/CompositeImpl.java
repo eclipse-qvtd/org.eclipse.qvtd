@@ -72,6 +72,7 @@ public class CompositeImpl extends NodeImpl implements Composite {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node getChild() {
 		return child;
 	}
@@ -96,6 +97,7 @@ public class CompositeImpl extends NodeImpl implements Composite {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setChild(Node newChild) {
 		if (newChild != child) {
 			NotificationChain msgs = null;

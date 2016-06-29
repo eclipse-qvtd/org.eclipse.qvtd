@@ -145,6 +145,7 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 		return varsArray;
 	}
 	
+	@Override
 	public VMStackFrameData createStackFrame(@NonNull UnitLocation location) {
 		return createStackFrame(location, true);
 	}

@@ -121,6 +121,7 @@ public class HSVNodeImpl extends MinimalEObjectImpl.Container implements HSVNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HSVNode getParent() {
 		if (eContainerFeatureID() != HSVTreePackage.HSV_NODE__PARENT) return null;
 		return (HSVNode)eInternalContainer();
@@ -141,6 +142,7 @@ public class HSVNodeImpl extends MinimalEObjectImpl.Container implements HSVNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParent(HSVNode newParent) {
 		if (newParent != eInternalContainer() || (eContainerFeatureID() != HSVTreePackage.HSV_NODE__PARENT && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))
@@ -162,6 +164,7 @@ public class HSVNodeImpl extends MinimalEObjectImpl.Container implements HSVNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<HSVNode> getChildren() {
 		if (children == null) {
 			children = new EObjectContainmentWithInverseEList<HSVNode>(HSVNode.class, this, HSVTreePackage.HSV_NODE__CHILDREN, HSVTreePackage.HSV_NODE__PARENT);
@@ -174,6 +177,7 @@ public class HSVNodeImpl extends MinimalEObjectImpl.Container implements HSVNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getHsv() {
 		return hsv;
 	}
@@ -183,6 +187,7 @@ public class HSVNodeImpl extends MinimalEObjectImpl.Container implements HSVNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHsv(String newHsv) {
 		String oldHsv = hsv;
 		hsv = newHsv;
@@ -195,6 +200,7 @@ public class HSVNodeImpl extends MinimalEObjectImpl.Container implements HSVNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -204,6 +210,7 @@ public class HSVNodeImpl extends MinimalEObjectImpl.Container implements HSVNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;

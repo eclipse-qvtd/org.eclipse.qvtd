@@ -123,6 +123,7 @@ public class HLSNodeImpl extends MinimalEObjectImpl.Container implements HLSNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HLSNode getParent() {
 		if (eContainerFeatureID() != HLSTreePackage.HLS_NODE__PARENT) return null;
 		return (HLSNode)eInternalContainer();
@@ -143,6 +144,7 @@ public class HLSNodeImpl extends MinimalEObjectImpl.Container implements HLSNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParent(HLSNode newParent) {
 		if (newParent != eInternalContainer() || (eContainerFeatureID() != HLSTreePackage.HLS_NODE__PARENT && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))
@@ -164,6 +166,7 @@ public class HLSNodeImpl extends MinimalEObjectImpl.Container implements HLSNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<HLSNode> getChildren() {
 		if (children == null) {
 			children = new EObjectContainmentWithInverseEList<HLSNode>(HLSNode.class, this, HLSTreePackage.HLS_NODE__CHILDREN, HLSTreePackage.HLS_NODE__PARENT);
@@ -176,6 +179,7 @@ public class HLSNodeImpl extends MinimalEObjectImpl.Container implements HLSNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getHls() {
 		return hls;
 	}
@@ -185,6 +189,7 @@ public class HLSNodeImpl extends MinimalEObjectImpl.Container implements HLSNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHls(String newHls) {
 		String oldHls = hls;
 		hls = newHls;
@@ -197,6 +202,7 @@ public class HLSNodeImpl extends MinimalEObjectImpl.Container implements HLSNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -206,6 +212,7 @@ public class HLSNodeImpl extends MinimalEObjectImpl.Container implements HLSNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;

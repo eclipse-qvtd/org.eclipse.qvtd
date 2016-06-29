@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -113,6 +113,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getKind() {
 		return kind;
 	}
@@ -122,6 +123,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKind(String newKind) {
 		String oldKind = kind;
 		kind = newKind;
@@ -134,6 +136,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Attribute getAttribute() {
 		if (attribute != null && attribute.eIsProxy()) {
 			InternalEObject oldAttribute = (InternalEObject)attribute;
@@ -160,6 +163,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAttribute(Attribute newAttribute) {
 		Attribute oldAttribute = attribute;
 		attribute = newAttribute;
@@ -172,6 +176,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AttributeToColumn> getLeafs() {
 		if (leafs == null) {
 			leafs = new EObjectResolvingEList<AttributeToColumn>(AttributeToColumn.class, this, Simpleuml2rdbmsPackage.FROM_ATTRIBUTE__LEAFS);
@@ -184,6 +189,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FromAttributeOwner getOwner() {
 		if (eContainerFeatureID() != Simpleuml2rdbmsPackage.FROM_ATTRIBUTE__OWNER) return null;
 		return (FromAttributeOwner)eInternalContainer();
@@ -204,6 +210,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(FromAttributeOwner newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != Simpleuml2rdbmsPackage.FROM_ATTRIBUTE__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))

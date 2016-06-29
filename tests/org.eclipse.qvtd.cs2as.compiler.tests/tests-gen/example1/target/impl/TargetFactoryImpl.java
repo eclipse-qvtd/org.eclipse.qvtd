@@ -93,6 +93,7 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public A1 createA1() {
 		A1Impl a1 = new A1Impl();
 		return a1;
@@ -103,6 +104,7 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public A2 createA2() {
 		A2Impl a2 = new A2Impl();
 		return a2;
@@ -113,6 +115,7 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public A3 createA3() {
 		A3Impl a3 = new A3Impl();
 		return a3;
@@ -123,6 +126,7 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public B createB() {
 		BImpl b = new BImpl();
 		return b;
@@ -133,6 +137,7 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public C createC() {
 		CImpl c = new CImpl();
 		return c;
@@ -143,6 +148,7 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public D createD() {
 		DImpl d = new DImpl();
 		return d;
@@ -153,6 +159,7 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TRoot createTRoot() {
 		TRootImpl tRoot = new TRootImpl();
 		return tRoot;
@@ -163,6 +170,7 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NamedElement createNamedElement() {
 		NamedElementImpl namedElement = new NamedElementImpl();
 		return namedElement;
@@ -173,6 +181,7 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Namespace createNamespace() {
 		NamespaceImpl namespace = new NamespaceImpl();
 		return namespace;
@@ -183,6 +192,7 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TargetPackage getTargetPackage() {
 		return (TargetPackage)getEPackage();
 	}

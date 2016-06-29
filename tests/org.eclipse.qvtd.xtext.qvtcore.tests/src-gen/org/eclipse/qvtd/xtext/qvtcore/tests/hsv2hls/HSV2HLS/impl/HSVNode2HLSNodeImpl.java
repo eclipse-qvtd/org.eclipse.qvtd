@@ -147,6 +147,7 @@ public class HSVNode2HLSNodeImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HSVNode2HLSNode getParent() {
 		if (eContainerFeatureID() != HSV2HLSPackage.HSV_NODE2_HLS_NODE__PARENT) return null;
 		return (HSVNode2HLSNode)eInternalContainer();
@@ -167,6 +168,7 @@ public class HSVNode2HLSNodeImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParent(HSVNode2HLSNode newParent) {
 		if (newParent != eInternalContainer() || (eContainerFeatureID() != HSV2HLSPackage.HSV_NODE2_HLS_NODE__PARENT && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))
@@ -188,6 +190,7 @@ public class HSVNode2HLSNodeImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<HSVNode2HLSNode> getChildren() {
 		if (children == null) {
 			children = new EObjectContainmentWithInverseEList<HSVNode2HLSNode>(HSVNode2HLSNode.class, this, HSV2HLSPackage.HSV_NODE2_HLS_NODE__CHILDREN, HSV2HLSPackage.HSV_NODE2_HLS_NODE__PARENT);
@@ -200,6 +203,7 @@ public class HSVNode2HLSNodeImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HSVNode getHsv() {
 		if (hsv != null && hsv.eIsProxy()) {
 			InternalEObject oldHsv = (InternalEObject)hsv;
@@ -226,6 +230,7 @@ public class HSVNode2HLSNodeImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHsv(HSVNode newHsv) {
 		HSVNode oldHsv = hsv;
 		hsv = newHsv;
@@ -238,6 +243,7 @@ public class HSVNode2HLSNodeImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HLSNode getHls() {
 		if (hls != null && hls.eIsProxy()) {
 			InternalEObject oldHls = (InternalEObject)hls;
@@ -264,6 +270,7 @@ public class HSVNode2HLSNodeImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHls(HLSNode newHls) {
 		HLSNode oldHls = hls;
 		hls = newHls;
@@ -276,6 +283,7 @@ public class HSVNode2HLSNodeImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getRgb() {
 		return rgb;
 	}
@@ -285,6 +293,7 @@ public class HSVNode2HLSNodeImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRgb(String newRgb) {
 		String oldRgb = rgb;
 		rgb = newRgb;
@@ -297,6 +306,7 @@ public class HSVNode2HLSNodeImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -306,6 +316,7 @@ public class HSVNode2HLSNodeImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;

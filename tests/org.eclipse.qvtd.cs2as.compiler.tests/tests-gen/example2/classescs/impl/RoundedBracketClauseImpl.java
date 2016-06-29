@@ -75,6 +75,7 @@ public class RoundedBracketClauseImpl extends ElementCSImpl implements RoundedBr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ArgumentCS> getArgs() {
 		if (args == null) {
 			args = new EObjectContainmentEList<ArgumentCS>(ArgumentCS.class, this, ClassescsPackage.ROUNDED_BRACKET_CLAUSE__ARGS);

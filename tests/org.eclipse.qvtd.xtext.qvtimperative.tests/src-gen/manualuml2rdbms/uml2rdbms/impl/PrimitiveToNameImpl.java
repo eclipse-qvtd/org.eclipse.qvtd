@@ -120,6 +120,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PackageToSchema getOwner() {
 		if (eContainerFeatureID() != UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER) return null;
 		return (PackageToSchema)eInternalContainer();
@@ -140,6 +141,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(PackageToSchema newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != UML2RDBMSPackage.PRIMITIVE_TO_NAME__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
@@ -161,6 +163,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -170,6 +173,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -182,6 +186,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrimitiveDataType getPrimitive() {
 		if (primitive != null && primitive.eIsProxy()) {
 			InternalEObject oldPrimitive = (InternalEObject)primitive;
@@ -208,6 +213,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimitive(PrimitiveDataType newPrimitive) {
 		PrimitiveDataType oldPrimitive = primitive;
 		primitive = newPrimitive;
@@ -220,6 +226,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getTypeName() {
 		return typeName;
 	}
@@ -229,6 +236,7 @@ public class PrimitiveToNameImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypeName(String newTypeName) {
 		String oldTypeName = typeName;
 		typeName = newTypeName;

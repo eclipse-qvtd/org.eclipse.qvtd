@@ -90,14 +90,17 @@ public class QVTrLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 		return super.buildForLaunch(configuration, mode, monitor);		// FIXME override with the progress monitor
 	}
 
+	@Override
 	protected @NonNull QVTiExecutor createExecutor(@NonNull QVTiEnvironmentFactory envFactory, @NonNull Transformation transformation) {
 		return new BasicQVTrExecutor(envFactory, transformation);
 	}
 
+	@Override
 	protected @NonNull QVTiDebugCore getDebugCore() {
 		return QVTiDebugCore.INSTANCE;				// FIXME QVTrDebugCore with back-traceability
 	}
 
+	@Override
 	protected @NonNull URI getTransformationURI(final ILaunchConfiguration configuration) throws CoreException {
 		Map<String, String> intermediatesMap = configuration.getAttribute(INTERMEDIATES_KEY, EMPTY_MAP);
 		String qvtiName = intermediatesMap.get(CompilerChain.QVTI_STEP);

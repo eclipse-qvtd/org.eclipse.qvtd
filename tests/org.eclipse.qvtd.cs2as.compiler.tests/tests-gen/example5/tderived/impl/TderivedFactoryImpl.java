@@ -79,6 +79,7 @@ public class TderivedFactoryImpl extends EFactoryImpl implements TderivedFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public A2 createA2() {
 		A2Impl a2 = new A2Impl();
 		return a2;
@@ -89,6 +90,7 @@ public class TderivedFactoryImpl extends EFactoryImpl implements TderivedFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public B2 createB2() {
 		B2Impl b2 = new B2Impl();
 		return b2;
@@ -99,6 +101,7 @@ public class TderivedFactoryImpl extends EFactoryImpl implements TderivedFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public D createD() {
 		DImpl d = new DImpl();
 		return d;
@@ -109,6 +112,7 @@ public class TderivedFactoryImpl extends EFactoryImpl implements TderivedFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TderivedPackage getTderivedPackage() {
 		return (TderivedPackage)getEPackage();
 	}

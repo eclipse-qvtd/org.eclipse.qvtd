@@ -100,6 +100,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Node> getChildren() {
 		if (children == null) {
 			children = new EObjectContainmentWithInverseEList<Node>(Node.class, this, TreePackage.NODE__CHILDREN, TreePackage.NODE__PARENT);
@@ -112,6 +113,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -121,6 +123,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -133,6 +136,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node getParent() {
 		if (eContainerFeatureID() != TreePackage.NODE__PARENT) return null;
 		return (Node)eInternalContainer();
@@ -153,6 +157,7 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParent(Node newParent) {
 		if (newParent != eInternalContainer() || (eContainerFeatureID() != TreePackage.NODE__PARENT && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))

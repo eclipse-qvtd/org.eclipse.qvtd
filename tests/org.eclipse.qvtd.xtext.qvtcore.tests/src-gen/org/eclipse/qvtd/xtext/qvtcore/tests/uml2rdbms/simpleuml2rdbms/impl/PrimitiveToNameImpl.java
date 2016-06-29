@@ -96,6 +96,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getTypeName() {
 		return typeName;
 	}
@@ -105,6 +106,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypeName(String newTypeName) {
 		String oldTypeName = typeName;
 		typeName = newTypeName;
@@ -117,6 +119,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PackageToSchema getOwner() {
 		if (eContainerFeatureID() != Simpleuml2rdbmsPackage.PRIMITIVE_TO_NAME__OWNER) return null;
 		return (PackageToSchema)eInternalContainer();
@@ -137,6 +140,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(PackageToSchema newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != Simpleuml2rdbmsPackage.PRIMITIVE_TO_NAME__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
@@ -158,6 +162,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrimitiveDataType getPrimitive() {
 		if (primitive != null && primitive.eIsProxy()) {
 			InternalEObject oldPrimitive = (InternalEObject)primitive;
@@ -184,6 +189,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimitive(PrimitiveDataType newPrimitive) {
 		PrimitiveDataType oldPrimitive = primitive;
 		primitive = newPrimitive;

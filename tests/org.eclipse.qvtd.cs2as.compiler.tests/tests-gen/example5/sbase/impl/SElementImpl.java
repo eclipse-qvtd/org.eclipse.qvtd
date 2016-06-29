@@ -72,6 +72,7 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject getAst() {
 		if (ast != null && ast.eIsProxy()) {
 			InternalEObject oldAst = (InternalEObject)ast;
@@ -98,6 +99,7 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAst(EObject newAst) {
 		EObject oldAst = ast;
 		ast = newAst;

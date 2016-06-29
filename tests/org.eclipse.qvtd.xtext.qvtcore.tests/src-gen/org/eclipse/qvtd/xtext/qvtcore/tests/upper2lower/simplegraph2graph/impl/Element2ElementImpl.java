@@ -63,6 +63,7 @@ public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Graph2Graph getOwner() {
 		if (eContainerFeatureID() != Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER) return null;
 		return (Graph2Graph)eInternalContainer();
@@ -83,6 +84,7 @@ public abstract class Element2ElementImpl extends MinimalEObjectImpl.Container i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(Graph2Graph newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != Simplegraph2graphPackage.ELEMENT2_ELEMENT__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))

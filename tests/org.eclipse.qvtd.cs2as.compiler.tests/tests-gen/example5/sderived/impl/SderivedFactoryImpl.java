@@ -79,6 +79,7 @@ public class SderivedFactoryImpl extends EFactoryImpl implements SderivedFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public X2 createX2() {
 		X2Impl x2 = new X2Impl();
 		return x2;
@@ -89,6 +90,7 @@ public class SderivedFactoryImpl extends EFactoryImpl implements SderivedFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Y2 createY2() {
 		Y2Impl y2 = new Y2Impl();
 		return y2;
@@ -99,6 +101,7 @@ public class SderivedFactoryImpl extends EFactoryImpl implements SderivedFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public W createW() {
 		WImpl w = new WImpl();
 		return w;
@@ -109,6 +112,7 @@ public class SderivedFactoryImpl extends EFactoryImpl implements SderivedFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SderivedPackage getSderivedPackage() {
 		return (SderivedPackage)getEPackage();
 	}

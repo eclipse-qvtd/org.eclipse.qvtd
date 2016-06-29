@@ -118,6 +118,7 @@ public class Tree2talltreePackageImpl extends EPackageImpl implements Tree2tallt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNode2TallNode() {
 		return node2TallNodeEClass;
 	}
@@ -127,6 +128,7 @@ public class Tree2talltreePackageImpl extends EPackageImpl implements Tree2tallt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode2TallNode_Children() {
 		return (EReference)node2TallNodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -136,6 +138,7 @@ public class Tree2talltreePackageImpl extends EPackageImpl implements Tree2tallt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNode2TallNode_Name() {
 		return (EAttribute)node2TallNodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -145,6 +148,7 @@ public class Tree2talltreePackageImpl extends EPackageImpl implements Tree2tallt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode2TallNode_Parent() {
 		return (EReference)node2TallNodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -154,6 +158,7 @@ public class Tree2talltreePackageImpl extends EPackageImpl implements Tree2tallt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode2TallNode_Node() {
 		return (EReference)node2TallNodeEClass.getEStructuralFeatures().get(3);
 	}
@@ -163,6 +168,7 @@ public class Tree2talltreePackageImpl extends EPackageImpl implements Tree2tallt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode2TallNode_TallNode() {
 		return (EReference)node2TallNodeEClass.getEStructuralFeatures().get(4);
 	}
@@ -172,6 +178,7 @@ public class Tree2talltreePackageImpl extends EPackageImpl implements Tree2tallt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Tree2talltreeFactory getTree2talltreeFactory() {
 		return (Tree2talltreeFactory)getEFactoryInstance();
 	}

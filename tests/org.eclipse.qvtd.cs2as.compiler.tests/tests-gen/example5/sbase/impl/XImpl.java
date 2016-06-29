@@ -100,6 +100,7 @@ public class XImpl extends SElementImpl implements X {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Y> getOwnsY() {
 		if (ownsY == null) {
 			ownsY = new EObjectContainmentWithInverseEList<Y>(Y.class, this, SbasePackage.X__OWNS_Y, SbasePackage.Y__TO_X);
@@ -112,6 +113,7 @@ public class XImpl extends SElementImpl implements X {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -121,6 +123,7 @@ public class XImpl extends SElementImpl implements X {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;

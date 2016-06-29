@@ -24,6 +24,7 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
  */
 public class QVTiEditorTests extends LoadTestCase
 {	
+	@Override
 	public void doLoad_Concrete(@NonNull String inputName) throws IOException {
 		OCL ocl = QVTimperative.newInstance(getProjectMap(), null);
 //		OCL ocl = OCL.newInstance(getProjectMap());

@@ -75,6 +75,7 @@ public class TRootImpl extends MinimalEObjectImpl.Container implements TRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<A> getOwnedA() {
 		if (ownedA == null) {
 			ownedA = new EObjectContainmentEList<A>(A.class, this, TargetPackage.TROOT__OWNED_A);

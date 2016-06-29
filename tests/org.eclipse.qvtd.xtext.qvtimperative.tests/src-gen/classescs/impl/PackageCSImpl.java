@@ -76,6 +76,7 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ClassCS> getOwnedClasses() {
 		if (ownedClasses == null) {
 			ownedClasses = new EObjectContainmentEList<ClassCS>(ClassCS.class, this, ClassescsPackage.PACKAGE_CS__OWNED_CLASSES);

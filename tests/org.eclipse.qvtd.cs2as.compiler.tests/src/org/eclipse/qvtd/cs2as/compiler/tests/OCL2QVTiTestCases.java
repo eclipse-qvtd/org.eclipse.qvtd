@@ -241,6 +241,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //		}
 	}
 
+	@Override
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();

@@ -65,6 +65,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Graph getGraph() {
 		if (eContainerFeatureID() != SimplegraphPackage.ELEMENT__GRAPH) return null;
 		return (Graph)eInternalContainer();
@@ -85,6 +86,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGraph(Graph newGraph) {
 		if (newGraph != eInternalContainer() || (eContainerFeatureID() != SimplegraphPackage.ELEMENT__GRAPH && newGraph != null)) {
 			if (EcoreUtil.isAncestor(this, newGraph))

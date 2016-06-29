@@ -99,6 +99,7 @@ public class GraphImpl extends MinimalEObjectImpl.Container implements Graph {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Element> getElement() {
 		if (element == null) {
 			element = new EObjectContainmentWithInverseEList<Element>(Element.class, this, SimplegraphPackage.GRAPH__ELEMENT, SimplegraphPackage.ELEMENT__GRAPH);
@@ -111,6 +112,7 @@ public class GraphImpl extends MinimalEObjectImpl.Container implements Graph {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -120,6 +122,7 @@ public class GraphImpl extends MinimalEObjectImpl.Container implements Graph {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;

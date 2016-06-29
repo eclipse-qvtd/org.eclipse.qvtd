@@ -74,6 +74,7 @@ public class SchemaImpl extends RModelElementImpl implements Schema {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Table> getTables() {
 		if (tables == null) {
 			tables = new EObjectContainmentWithInverseEList<Table>(Table.class, this, SimplerdbmsPackage.SCHEMA__TABLES, SimplerdbmsPackage.TABLE__SCHEMA);

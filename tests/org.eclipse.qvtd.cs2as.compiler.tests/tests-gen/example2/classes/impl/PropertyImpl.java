@@ -75,6 +75,7 @@ public class PropertyImpl extends NamedElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public example2.classes.Class getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -101,6 +102,7 @@ public class PropertyImpl extends NamedElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(example2.classes.Class newType) {
 		example2.classes.Class oldType = type;
 		type = newType;

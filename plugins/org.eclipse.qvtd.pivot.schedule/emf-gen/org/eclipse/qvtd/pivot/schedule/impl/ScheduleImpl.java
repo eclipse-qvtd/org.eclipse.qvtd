@@ -86,6 +86,7 @@ public class ScheduleImpl extends ScheduleElementImpl implements Schedule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AbstractDatum> getDatums() {
 		if (datums == null) {
 			datums = new EObjectContainmentWithInverseEList<AbstractDatum>(AbstractDatum.class, this, SchedulePackage.SCHEDULE__DATUMS, SchedulePackage.ABSTRACT_DATUM__SCHEDULE);
@@ -98,6 +99,7 @@ public class ScheduleImpl extends ScheduleElementImpl implements Schedule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AbstractAction> getActions() {
 		if (actions == null) {
 			actions = new EObjectContainmentWithInverseEList<AbstractAction>(AbstractAction.class, this, SchedulePackage.SCHEDULE__ACTIONS, SchedulePackage.ABSTRACT_ACTION__SCHEDULE);
@@ -213,6 +215,7 @@ public class ScheduleImpl extends ScheduleElementImpl implements Schedule {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
 		return visitor.visitSchedule(this);
 	}

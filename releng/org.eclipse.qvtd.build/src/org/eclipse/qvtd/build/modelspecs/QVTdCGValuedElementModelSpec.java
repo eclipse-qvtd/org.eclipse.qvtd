@@ -43,7 +43,8 @@ import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
  */
 public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 {
-	public static final @NonNull Ctl CTL_MEXP = new Ctl() { public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+	public static final @NonNull Ctl CTL_MEXP = new Ctl() { @Override
+	public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 		return "return " + classRef(MappingExpPlaces.class) + ".createMappingExpPlaces(element2place, this);";
 	}};
 

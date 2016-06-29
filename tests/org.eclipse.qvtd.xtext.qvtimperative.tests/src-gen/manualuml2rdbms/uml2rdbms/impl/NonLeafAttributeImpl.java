@@ -137,6 +137,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -146,6 +147,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -158,6 +160,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getKind() {
 		return kind;
 	}
@@ -167,6 +170,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKind(String newKind) {
 		String oldKind = kind;
 		kind = newKind;
@@ -179,6 +183,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FromAttributeOwner getOwner() {
 		if (eContainerFeatureID() != UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER) return null;
 		return (FromAttributeOwner)eInternalContainer();
@@ -199,6 +204,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(FromAttributeOwner newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
@@ -220,6 +226,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AttributeToColumn> getLeafs() {
 		if (leafs == null) {
 			leafs = new EObjectResolvingEList<AttributeToColumn>(AttributeToColumn.class, this, UML2RDBMSPackage.NON_LEAF_ATTRIBUTE__LEAFS);
@@ -232,6 +239,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Attribute getAttribute() {
 		if (attribute != null && attribute.eIsProxy()) {
 			InternalEObject oldAttribute = (InternalEObject)attribute;
@@ -258,6 +266,7 @@ public class NonLeafAttributeImpl extends FromAttributeOwnerImpl implements NonL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAttribute(Attribute newAttribute) {
 		Attribute oldAttribute = attribute;
 		attribute = newAttribute;

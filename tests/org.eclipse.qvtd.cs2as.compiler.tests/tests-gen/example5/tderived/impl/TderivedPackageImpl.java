@@ -122,6 +122,7 @@ public class TderivedPackageImpl extends EPackageImpl implements TderivedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getA2() {
 		return a2EClass;
 	}
@@ -131,6 +132,7 @@ public class TderivedPackageImpl extends EPackageImpl implements TderivedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getA2_OwnsD() {
 		return (EReference)a2EClass.getEStructuralFeatures().get(0);
 	}
@@ -140,6 +142,7 @@ public class TderivedPackageImpl extends EPackageImpl implements TderivedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getB2() {
 		return b2EClass;
 	}
@@ -149,6 +152,7 @@ public class TderivedPackageImpl extends EPackageImpl implements TderivedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getB2_AnotherName() {
 		return (EAttribute)b2EClass.getEStructuralFeatures().get(0);
 	}
@@ -158,6 +162,7 @@ public class TderivedPackageImpl extends EPackageImpl implements TderivedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getD() {
 		return dEClass;
 	}
@@ -167,6 +172,7 @@ public class TderivedPackageImpl extends EPackageImpl implements TderivedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TderivedFactory getTderivedFactory() {
 		return (TderivedFactory)getEFactoryInstance();
 	}

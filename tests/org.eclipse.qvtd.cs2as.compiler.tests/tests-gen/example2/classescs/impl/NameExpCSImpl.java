@@ -95,6 +95,7 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathNameCS getName() {
 		return name;
 	}
@@ -119,6 +120,7 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(PathNameCS newName) {
 		if (newName != name) {
 			NotificationChain msgs = null;
@@ -138,6 +140,7 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RoundedBracketClause getRoundedBrackets() {
 		return roundedBrackets;
 	}
@@ -162,6 +165,7 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRoundedBrackets(RoundedBracketClause newRoundedBrackets) {
 		if (newRoundedBrackets != roundedBrackets) {
 			NotificationChain msgs = null;
@@ -181,6 +185,7 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NameExpCS getOwnedNameExp() {
 		return ownedNameExp;
 	}
@@ -205,6 +210,7 @@ public class NameExpCSImpl extends ElementCSImpl implements NameExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedNameExp(NameExpCS newOwnedNameExp) {
 		if (newOwnedNameExp != ownedNameExp) {
 			NotificationChain msgs = null;

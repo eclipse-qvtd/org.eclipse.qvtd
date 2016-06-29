@@ -77,6 +77,7 @@ public class EnvironmentFactoryImpl extends EFactoryImpl implements EnvironmentF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LookupEnvironment createLookupEnvironment() {
 		LookupEnvironmentImpl lookupEnvironment = new LookupEnvironmentImpl();
 		return lookupEnvironment;
@@ -87,6 +88,7 @@ public class EnvironmentFactoryImpl extends EFactoryImpl implements EnvironmentF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EnvironmentPackage getEnvironmentPackage() {
 		return (EnvironmentPackage)getEPackage();
 	}

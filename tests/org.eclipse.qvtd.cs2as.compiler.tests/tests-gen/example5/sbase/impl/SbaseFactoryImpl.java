@@ -81,6 +81,7 @@ public class SbaseFactoryImpl extends EFactoryImpl implements SbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public X createX() {
 		XImpl x = new XImpl();
 		return x;
@@ -91,6 +92,7 @@ public class SbaseFactoryImpl extends EFactoryImpl implements SbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Y createY() {
 		YImpl y = new YImpl();
 		return y;
@@ -101,6 +103,7 @@ public class SbaseFactoryImpl extends EFactoryImpl implements SbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Z createZ() {
 		ZImpl z = new ZImpl();
 		return z;
@@ -111,6 +114,7 @@ public class SbaseFactoryImpl extends EFactoryImpl implements SbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SRoot createSRoot() {
 		SRootImpl sRoot = new SRootImpl();
 		return sRoot;
@@ -121,6 +125,7 @@ public class SbaseFactoryImpl extends EFactoryImpl implements SbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SElement createSElement() {
 		SElementImpl sElement = new SElementImpl();
 		return sElement;
@@ -131,6 +136,7 @@ public class SbaseFactoryImpl extends EFactoryImpl implements SbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SbasePackage getSbasePackage() {
 		return (SbasePackage)getEPackage();
 	}

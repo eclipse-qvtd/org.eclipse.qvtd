@@ -21,10 +21,12 @@ public class QVTiDebugTarget extends VMDebugTarget
 		super(process, vm);
 	}
 
+	@Override
 	public @NonNull QVTiDebugCore getDebugCore() {
 		return QVTiDebugCore.INSTANCE;
 	}
 	
+	@Override
 	public @NonNull String getModelIdentifier() {
 		return getDebugCore().getModelId();
 	}

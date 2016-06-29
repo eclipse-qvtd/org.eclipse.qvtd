@@ -73,6 +73,7 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Element getAst() {
 		if (ast != null && ast.eIsProxy()) {
 			InternalEObject oldAst = (InternalEObject)ast;
@@ -99,6 +100,7 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAst(Element newAst) {
 		Element oldAst = ast;
 		ast = newAst;

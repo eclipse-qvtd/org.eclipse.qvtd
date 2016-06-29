@@ -72,6 +72,7 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CallExp getOwnedCallExp() {
 		return ownedCallExp;
 	}
@@ -96,6 +97,7 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedCallExp(CallExp newOwnedCallExp) {
 		if (newOwnedCallExp != ownedCallExp) {
 			NotificationChain msgs = null;
@@ -115,6 +117,7 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CallExp getOwningSource() {
 		if (eContainerFeatureID() != ClassesPackage.CALL_EXP__OWNING_SOURCE) return null;
 		return (CallExp)eInternalContainer();
@@ -135,6 +138,7 @@ public abstract class CallExpImpl extends TypedElementImpl implements CallExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwningSource(CallExp newOwningSource) {
 		if (newOwningSource != eInternalContainer() || (eContainerFeatureID() != ClassesPackage.CALL_EXP__OWNING_SOURCE && newOwningSource != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningSource))

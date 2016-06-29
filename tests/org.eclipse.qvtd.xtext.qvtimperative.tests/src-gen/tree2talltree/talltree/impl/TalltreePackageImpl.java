@@ -118,6 +118,7 @@ public class TalltreePackageImpl extends EPackageImpl implements TalltreePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTallNode() {
 		return tallNodeEClass;
 	}
@@ -127,6 +128,7 @@ public class TalltreePackageImpl extends EPackageImpl implements TalltreePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTallNode_Children() {
 		return (EReference)tallNodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -136,6 +138,7 @@ public class TalltreePackageImpl extends EPackageImpl implements TalltreePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTallNode_Height() {
 		return (EAttribute)tallNodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -145,6 +148,7 @@ public class TalltreePackageImpl extends EPackageImpl implements TalltreePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTallNode_Name() {
 		return (EAttribute)tallNodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -154,6 +158,7 @@ public class TalltreePackageImpl extends EPackageImpl implements TalltreePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTallNode_Parent() {
 		return (EReference)tallNodeEClass.getEStructuralFeatures().get(3);
 	}
@@ -163,6 +168,7 @@ public class TalltreePackageImpl extends EPackageImpl implements TalltreePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TalltreeFactory getTalltreeFactory() {
 		return (TalltreeFactory)getEFactoryInstance();
 	}

@@ -107,6 +107,7 @@ public class SecondaryParameterImpl extends ScheduleElementImpl implements Secon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsLoop() {
 		return isLoop;
 	}
@@ -116,6 +117,7 @@ public class SecondaryParameterImpl extends ScheduleElementImpl implements Secon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsLoop(boolean newIsLoop) {
 		boolean oldIsLoop = isLoop;
 		isLoop = newIsLoop;
@@ -128,6 +130,7 @@ public class SecondaryParameterImpl extends ScheduleElementImpl implements Secon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DataParameter getDataParameter() {
 		if (dataParameter != null && dataParameter.eIsProxy()) {
 			InternalEObject oldDataParameter = (InternalEObject)dataParameter;
@@ -169,6 +172,7 @@ public class SecondaryParameterImpl extends ScheduleElementImpl implements Secon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDataParameter(DataParameter newDataParameter) {
 		if (newDataParameter != dataParameter) {
 			NotificationChain msgs = null;
@@ -188,6 +192,7 @@ public class SecondaryParameterImpl extends ScheduleElementImpl implements Secon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property getDerivationProperty() {
 		if (derivationProperty != null && derivationProperty.eIsProxy()) {
 			InternalEObject oldDerivationProperty = (InternalEObject)derivationProperty;
@@ -214,6 +219,7 @@ public class SecondaryParameterImpl extends ScheduleElementImpl implements Secon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDerivationProperty(Property newDerivationProperty) {
 		Property oldDerivationProperty = derivationProperty;
 		derivationProperty = newDerivationProperty;
@@ -226,6 +232,7 @@ public class SecondaryParameterImpl extends ScheduleElementImpl implements Secon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ParameterDerivation getDerivation() {
 		if (eContainerFeatureID() != SchedulePackage.SECONDARY_PARAMETER__DERIVATION) return null;
 		return (ParameterDerivation)eInternalContainer();
@@ -246,6 +253,7 @@ public class SecondaryParameterImpl extends ScheduleElementImpl implements Secon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDerivation(ParameterDerivation newDerivation) {
 		if (newDerivation != eInternalContainer() || (eContainerFeatureID() != SchedulePackage.SECONDARY_PARAMETER__DERIVATION && newDerivation != null)) {
 			if (EcoreUtil.isAncestor(this, newDerivation))

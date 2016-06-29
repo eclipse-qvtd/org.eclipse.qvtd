@@ -79,6 +79,7 @@ public class KiamaasFactoryImpl extends EFactoryImpl implements KiamaasFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Top createTop() {
 		TopImpl top = new TopImpl();
 		return top;
@@ -89,6 +90,7 @@ public class KiamaasFactoryImpl extends EFactoryImpl implements KiamaasFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Composite createComposite() {
 		CompositeImpl composite = new CompositeImpl();
 		return composite;
@@ -99,6 +101,7 @@ public class KiamaasFactoryImpl extends EFactoryImpl implements KiamaasFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Leaf createLeaf() {
 		LeafImpl leaf = new LeafImpl();
 		return leaf;
@@ -109,6 +112,7 @@ public class KiamaasFactoryImpl extends EFactoryImpl implements KiamaasFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public KiamaasPackage getKiamaasPackage() {
 		return (KiamaasPackage)getEPackage();
 	}

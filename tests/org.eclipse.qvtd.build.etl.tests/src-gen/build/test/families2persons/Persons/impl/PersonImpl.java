@@ -80,6 +80,7 @@ public abstract class PersonImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFullName() {
 		return fullName;
 	}
@@ -89,6 +90,7 @@ public abstract class PersonImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFullName(String newFullName) {
 		String oldFullName = fullName;
 		fullName = newFullName;

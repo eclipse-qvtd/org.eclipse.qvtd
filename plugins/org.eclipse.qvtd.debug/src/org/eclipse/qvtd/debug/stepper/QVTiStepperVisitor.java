@@ -53,10 +53,12 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 		return NonStepper.INSTANCE;
 	}
 
+	@Override
 	public @Nullable IStepper visitConnectionAssignment(@NonNull ConnectionAssignment object) {
 		return visitAssignment(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitConnectionStatement(@NonNull ConnectionStatement object) {
 		return visitMappingStatement(object);
 	}
@@ -106,6 +108,7 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 		return PreStepper.INSTANCE;
 	}
 
+	@Override
 	public @Nullable IStepper visitMappingSequence(@NonNull MappingSequence object) {
 		return NonStepper.INSTANCE;
 	}

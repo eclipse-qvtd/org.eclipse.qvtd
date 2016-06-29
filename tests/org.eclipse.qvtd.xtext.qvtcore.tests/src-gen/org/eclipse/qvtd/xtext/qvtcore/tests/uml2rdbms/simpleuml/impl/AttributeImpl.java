@@ -73,6 +73,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class getOwner() {
 		if (eContainerFeatureID() != SimpleumlPackage.ATTRIBUTE__OWNER) return null;
 		return (org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class)eInternalContainer();
@@ -93,6 +94,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != SimpleumlPackage.ATTRIBUTE__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
@@ -114,6 +116,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Classifier getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -155,6 +158,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(Classifier newType) {
 		if (newType != type) {
 			NotificationChain msgs = null;

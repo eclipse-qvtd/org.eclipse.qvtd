@@ -81,6 +81,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PackageCS createPackageCS() {
 		PackageCSImpl packageCS = new PackageCSImpl();
 		return packageCS;
@@ -91,6 +92,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassCS createClassCS() {
 		ClassCSImpl classCS = new ClassCSImpl();
 		return classCS;
@@ -101,6 +103,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathNameCS createPathNameCS() {
 		PathNameCSImpl pathNameCS = new PathNameCSImpl();
 		return pathNameCS;
@@ -111,6 +114,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathElementCS createPathElementCS() {
 		PathElementCSImpl pathElementCS = new PathElementCSImpl();
 		return pathElementCS;
@@ -121,6 +125,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RootCS createRootCS() {
 		RootCSImpl rootCS = new RootCSImpl();
 		return rootCS;
@@ -131,6 +136,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassescsPackage getClassescsPackage() {
 		return (ClassescsPackage)getEPackage();
 	}

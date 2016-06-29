@@ -126,6 +126,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Node2TallNode> getChildren() {
 		if (children == null) {
 			children = new EObjectContainmentWithInverseEList<Node2TallNode>(Node2TallNode.class, this, Tree2talltreePackage.NODE2_TALL_NODE__CHILDREN, Tree2talltreePackage.NODE2_TALL_NODE__PARENT);
@@ -138,6 +139,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -147,6 +149,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -159,6 +162,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node2TallNode getParent() {
 		if (eContainerFeatureID() != Tree2talltreePackage.NODE2_TALL_NODE__PARENT) return null;
 		return (Node2TallNode)eInternalContainer();
@@ -179,6 +183,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParent(Node2TallNode newParent) {
 		if (newParent != eInternalContainer() || (eContainerFeatureID() != Tree2talltreePackage.NODE2_TALL_NODE__PARENT && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))
@@ -200,6 +205,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node getNode() {
 		if (node != null && node.eIsProxy()) {
 			InternalEObject oldNode = (InternalEObject)node;
@@ -226,6 +232,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNode(Node newNode) {
 		Node oldNode = node;
 		node = newNode;
@@ -238,6 +245,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TallNode getTallNode() {
 		if (tallNode != null && tallNode.eIsProxy()) {
 			InternalEObject oldTallNode = (InternalEObject)tallNode;
@@ -264,6 +272,7 @@ public class Node2TallNodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTallNode(TallNode newTallNode) {
 		TallNode oldTallNode = tallNode;
 		tallNode = newTallNode;

@@ -135,6 +135,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNode() {
 		return nodeEClass;
 	}
@@ -144,6 +145,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode_Incoming() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -153,6 +155,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode_Outgoing() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -162,6 +165,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNode_Label() {
 		return (EAttribute)nodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -171,6 +175,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEdge() {
 		return edgeEClass;
 	}
@@ -180,6 +185,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEdge_Target() {
 		return (EReference)edgeEClass.getEStructuralFeatures().get(0);
 	}
@@ -189,6 +195,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEdge_Source() {
 		return (EReference)edgeEClass.getEStructuralFeatures().get(1);
 	}
@@ -198,6 +205,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getElement() {
 		return elementEClass;
 	}
@@ -207,6 +215,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getElement_Graph() {
 		return (EReference)elementEClass.getEStructuralFeatures().get(0);
 	}
@@ -216,6 +225,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGraph() {
 		return graphEClass;
 	}
@@ -225,6 +235,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraph_Element() {
 		return (EReference)graphEClass.getEStructuralFeatures().get(0);
 	}
@@ -234,6 +245,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getGraph_Name() {
 		return (EAttribute)graphEClass.getEStructuralFeatures().get(1);
 	}
@@ -243,6 +255,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimplegraphFactory getSimplegraphFactory() {
 		return (SimplegraphFactory)getEFactoryInstance();
 	}

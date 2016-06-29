@@ -53,6 +53,7 @@ public abstract class ScheduleElementImpl extends MinimalEObjectImpl.Container i
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
 		return visitor.visitScheduleElement(this);
 	}

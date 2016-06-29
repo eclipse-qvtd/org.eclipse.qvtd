@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -53,32 +54,32 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 public class QVTpModelsMerger {
 
-	
+
 	/**
 	 * <p>
 	 * Utility to merge the QVTp models result of the OCL2QVTp transformation on different CS2AS descriptions.
 	 * </p>
-	 * 
+	 *
 	 * <ul>
 	 * The merge utility will simply consist of:
 	 * <li> Merging all the qvtp {@link Mapping mappings} in one qvtp {@link Transformation transformation} </li>
 	 * <li> Merging all the {@link Import imports} in the containing qvtp {@link CoreModel model}, taking care of import duplications </li>
 	 * </ul>
-	 *   
+	 *
 	 * @param extendedQVTpModels a list of the QVTp models to merge
-	 * @return a clone of the first QVTp model of the provided list, having merged the remaining QVTp models of that list  
+	 * @return a clone of the first QVTp model of the provided list, having merged the remaining QVTp models of that list
 	 */
 	public static void merge(EnvironmentFactory envF, Resource targetQVTpModel, List<Resource> extendedQVTpModels) {
-		
+
 		CoreModel qvtpModel = getCoreModel(targetQVTpModel);
 		Map<Class, List<Mapping>> inputType2RefiningMapping = getRefiningMappingInputTypes(qvtpModel);
 		for (Resource extendedQVTpModel : extendedQVTpModels) {
 			doMerge(envF, qvtpModel, getCoreModel(extendedQVTpModel), inputType2RefiningMapping);
 		}
 	}
-	
+
 	private static Map<Class, List<Mapping>> getRefiningMappingInputTypes(CoreModel qvtpModel) {
-		
+
 		Map<Class, List<Mapping>> result = new HashMap<Class, List<Mapping>>();
 		Package _package = qvtpModel.getOwnedPackages().get(0);
 		Transformation tx = (Transformation) _package.getOwnedClasses().get(0);
@@ -101,7 +102,7 @@ public class QVTpModelsMerger {
 	 * @param refMapInputTypes a list of the types involved in the mappings of the extending QVTp model
 	 */
 	private static void doMerge(EnvironmentFactory envF, CoreModel resultQVTpModel, CoreModel mergedQVTpModel, Map<Class, List<Mapping>> inputType2RefiningMapping) {
-		
+
 		// Imports
 		Set<Namespace> alreadyImportedNamespaces = new HashSet<Namespace>();
 		Set<Import> importsToRemove = new HashSet<Import>();
@@ -119,15 +120,15 @@ public class QVTpModelsMerger {
 				resultQVTpModel.getOwnedImports().add(EcoreUtil.copy(_import));
 			}
 		}
-		
+
 		for (Import _import : importsToRemove) {
 			resultQVTpModel.getOwnedImports().remove(_import);
 		}
-			
-		
+
+
 		Transformation resultTransformation = getTransformation(resultQVTpModel);
 		Transformation mergedTransformation = getTransformation(mergedQVTpModel);
-		
+
 		// TypedModels
 		Map<String, List<Package>> tmName2oldUsedPackages = new HashMap<String, List<Package>>();
 		for (TypedModel typedModel : mergedTransformation.getModelParameter()) {
@@ -138,7 +139,7 @@ public class QVTpModelsMerger {
 			typedModel.getUsedPackage().addAll(tmName2oldUsedPackages.get(typedModel.getName()));
 			tmName2newTypedModel.put(typedModel.getName(), typedModel);
 		}
-		
+
 		// Mapping rules
 		EList<Rule> resultRules = resultTransformation.getRule();
 		for (Rule rule : mergedTransformation.getRule()) {
@@ -146,23 +147,23 @@ public class QVTpModelsMerger {
 			refactorMapping(envF, baseRule, inputType2RefiningMapping, tmName2newTypedModel);
 			resultRules.add(baseRule);
 		}
-		
+
 
 	}
-	
+
 	private static boolean doesNamespaceCorrespondToMergedQVTpModel(CoreModel mergedQVTpModel, Namespace ns) {
-		
-		if (ns instanceof Model && isAnOCLModel(ns)) { 
+
+		if (ns instanceof Model && isAnOCLModel(ns)) {
 			URI qvtpModelURI = URI.createURI(mergedQVTpModel.getExternalURI());
 			assert assertCorrectQVTpModelFileExtenion(qvtpModelURI);
 			URI importedNSURI = URI.createURI(((Model) ns).getExternalURI());
 			String fileName1 = qvtpModelURI.trimFragment().trimFileExtension().trimFileExtension().lastSegment(); // xxx.qvtp.qvias
 			String fileName2 = importedNSURI.trimFragment().trimFileExtension().trimFileExtension(). lastSegment();	// xxx.ocl or xxx.ocl.oclas
-			return fileName1.equals(fileName2);
+			return ClassUtil.nonNullState(fileName1).equals(fileName2);
 		}
 		return false;
 	}
-	
+
 	private static boolean isAnOCLModel(Namespace ns) {
 
 		URI nsURI = URI.createURI(((Model) ns).getExternalURI());
@@ -179,21 +180,21 @@ public class QVTpModelsMerger {
 	}
 
 	private static Transformation getTransformation(CoreModel iModel) {
-				
 
-	    for (org.eclipse.ocl.pivot.Package aPackage : iModel.getOwnedPackages()) {
-	    	for (org.eclipse.ocl.pivot.Class aClass : aPackage.getOwnedClasses()) {
-	    		if (aClass instanceof Transformation) {
-	    			return (Transformation) aClass;
-	    		}	
-	    	}
-	    }
-		
+
+		for (org.eclipse.ocl.pivot.Package aPackage : iModel.getOwnedPackages()) {
+			for (org.eclipse.ocl.pivot.Class aClass : aPackage.getOwnedClasses()) {
+				if (aClass instanceof Transformation) {
+					return (Transformation) aClass;
+				}
+			}
+		}
+
 		throw new IllegalStateException(MessageFormat.format("The QVTd model '{0}' does not have a Transformation element.", iModel.getExternalURI()));
 	}
-	
+
 	private static CoreModel getCoreModel(Resource qvtpResource) {
-		
+
 		for (EObject eContent : qvtpResource.getContents()) {
 			if (eContent instanceof CoreModel) {
 				return (CoreModel) eContent;
@@ -201,22 +202,22 @@ public class QVTpModelsMerger {
 		}
 		throw new IllegalStateException(MessageFormat.format("The QVTd model '{0}' does not have an CoreModel element.", qvtpResource.getURI()));
 	}
-	
+
 	private static boolean assertCorrectQVTpModelFileExtenion(URI qvtpModelURI ) {
-		
+
 		assert qvtpModelURI.fileExtension().equals("qvtcas");
 		assert qvtpModelURI.trimFileExtension().fileExtension().equals("qvtp");
 		return true;
 	}
-	
+
 	private static void refactorMapping (EnvironmentFactory envF, Mapping mappingToRefactor, Map<Class, List<Mapping>> inputType2extendingMapping,
 			Map<String, TypedModel> tmName2newTypedModel) {
-		
+
 		// TypedModel refactor
 		for (Domain domain : mappingToRefactor.getDomain()) {
 			domain.setTypedModel(tmName2newTypedModel.get(domain.getTypedModel().getName()));
 		}
-		
+
 		Variable inputVar = getInputVariable(mappingToRefactor);
 		Type refinedType = inputVar.getType();
 		for (Entry<Class, List<Mapping>> mEntry : inputType2extendingMapping.entrySet()) {
@@ -228,13 +229,13 @@ public class QVTpModelsMerger {
 					// We check the mapping name, to ensure it's the correct refining mapping
 					String refinedMappingName = mappingToRefactor.getName();
 					String refiningMappingName = refiningMapping.getName();
-					if (refinedMappingName.startsWith("c")){	// if it's a creation mapping 
+					if (refinedMappingName.startsWith("c")){	// if it's a creation mapping
 						if (refiningMappingName.startsWith("c")) {
 							doMappingRefactoring(envF, mappingToRefactor, refiningMapping, inputVar, refiningType);
-						} 
+						}
 					} else if (refinedMappingName.startsWith("u")) {
 						if (refiningMappingName.startsWith("u")) {
-							String refinedUMappingFeature = refinedMappingName.split("u.*_")[1]; 
+							String refinedUMappingFeature = refinedMappingName.split("u.*_")[1];
 							String refiningUMappingFeature = refiningMappingName.split("u.*_")[1];
 							if (refinedUMappingFeature.equals(refiningUMappingFeature)) {
 								doMappingRefactoring(envF, mappingToRefactor, refiningMapping, inputVar, refiningType);
@@ -242,15 +243,15 @@ public class QVTpModelsMerger {
 						}
 					} else {
 						//This point should never be reached given the mapping naming convention introduced in OCL2QVTp.
-						throw new IllegalStateException("This point should never be reached given the mapping naming convention introduced in OCL2QVTp."); 
+						throw new IllegalStateException("This point should never be reached given the mapping naming convention introduced in OCL2QVTp.");
 					}
 				}
 			}
 		}
 	}
-	
+
 	private static void doMappingRefactoring(EnvironmentFactory envF, Mapping mappingToRefactor, Mapping refiningMapping, Variable inputVar, Class refiningType) {
-		
+
 		// We add the guard
 		Predicate predicate = QVTbaseFactory.eINSTANCE.createPredicate();
 		predicate.setConditionExpression(createOclIsKindOfOperationCall(envF, inputVar, refiningType));
@@ -258,63 +259,63 @@ public class QVTpModelsMerger {
 		// And set the refinement
 		refiningMapping.setOverrides(mappingToRefactor);
 	}
-	
-	private static Variable getInputVariable(Mapping mapping) {		
+
+	private static Variable getInputVariable(Mapping mapping) {
 		// In OCL2QVTp the first one is always the input domain with a unique input variable
 		CoreDomain inputDomain = (CoreDomain) mapping.getDomain().get(0);
 		return inputDomain.getGuardPattern().getVariable().get(0);
 	}
 	private static void computeAllSuperClasses(Class aClass, List<Class> allSuperClasses) {
-		
+
 		for (Class superClass : aClass.getSuperClasses()) {
 			if (!allSuperClasses.contains(superClass)) {
 				allSuperClasses.add(superClass);
-				computeAllSuperClasses(superClass, allSuperClasses);	
+				computeAllSuperClasses(superClass, allSuperClasses);
 			}
 		}
 	}
-	
+
 	private static OCLExpression createOclIsKindOfOperationCall(EnvironmentFactory envF, Variable inputVar, Class refiningType) {
-	
+
 		// oclIsKindOf OperationCallExp
 		OperationCallExp opCallExp = PivotFactory.eINSTANCE.createOperationCallExp();
 		CompletePackage cPackage = envF.getCompleteModel().getCompletePackage(envF.getStandardLibrary().getPackage());
 		CompleteClass cClass = cPackage.getCompleteClass(envF.getStandardLibrary().getOclAnyType());
-		Operation oclIsKindOfOp = cClass.getOperations(FeatureFilter.SELECT_NON_STATIC, "oclIsKindOf").iterator().next();  
-		
+		Operation oclIsKindOfOp = cClass.getOperations(FeatureFilter.SELECT_NON_STATIC, "oclIsKindOf").iterator().next();
+
 		opCallExp.setReferredOperation(oclIsKindOfOp);
 		opCallExp.setName(oclIsKindOfOp.getName());
 		opCallExp.setType(oclIsKindOfOp.getType());
-		
+
 		// We set the source
-		
+
 		VariableExp source = PivotFactory.eINSTANCE.createVariableExp();
 		source.setReferredVariable(inputVar);
 		source.setName(inputVar.getName());
 		source.setType(inputVar.getType());
 		opCallExp.setOwnedSource(source);
-		
+
 		// We set the argument
 		TypeExp arg = PivotFactory.eINSTANCE.createTypeExp();
 		arg.setType(envF.getStandardLibrary().getClassType());
 		arg.setReferredType(refiningType);
 		opCallExp.getOwnedArguments().add(arg);
-		
+
 		return createNotOperation(envF, opCallExp);
 	}
-	
+
 	private static OperationCallExp createNotOperation(EnvironmentFactory envF, OCLExpression expToNegate) {
-		
+
 		// not OperationCallExp
 		OperationCallExp opCallExp = PivotFactory.eINSTANCE.createOperationCallExp();
 		CompletePackage cPackage = envF.getCompleteModel().getPrimitiveCompletePackage();
 		CompleteClass cClass = cPackage.getCompleteClass(envF.getStandardLibrary().getBooleanType());
-		Operation oclIsKindOfOp = cClass.getOperations(FeatureFilter.SELECT_NON_STATIC, "not").iterator().next(); 
-		
+		Operation oclIsKindOfOp = cClass.getOperations(FeatureFilter.SELECT_NON_STATIC, "not").iterator().next();
+
 		opCallExp.setReferredOperation(oclIsKindOfOp);
 		opCallExp.setName(oclIsKindOfOp.getName());
 		opCallExp.setType(oclIsKindOfOp.getType());
-		
+
 		// we set the source
 		opCallExp.setOwnedSource(expToNegate);
 		return opCallExp;

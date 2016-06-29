@@ -83,6 +83,7 @@ public class SimpleumlFactoryImpl extends EFactoryImpl implements SimpleumlFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Attribute createAttribute() {
 		AttributeImpl attribute = new AttributeImpl();
 		return attribute;
@@ -93,6 +94,7 @@ public class SimpleumlFactoryImpl extends EFactoryImpl implements SimpleumlFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Association createAssociation() {
 		AssociationImpl association = new AssociationImpl();
 		return association;
@@ -103,6 +105,7 @@ public class SimpleumlFactoryImpl extends EFactoryImpl implements SimpleumlFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class createClass() {
 		ClassImpl class_ = new ClassImpl();
 		return class_;
@@ -113,6 +116,7 @@ public class SimpleumlFactoryImpl extends EFactoryImpl implements SimpleumlFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package createPackage() {
 		PackageImpl package_ = new PackageImpl();
 		return package_;
@@ -123,6 +127,7 @@ public class SimpleumlFactoryImpl extends EFactoryImpl implements SimpleumlFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrimitiveDataType createPrimitiveDataType() {
 		PrimitiveDataTypeImpl primitiveDataType = new PrimitiveDataTypeImpl();
 		return primitiveDataType;
@@ -133,6 +138,7 @@ public class SimpleumlFactoryImpl extends EFactoryImpl implements SimpleumlFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimpleumlPackage getSimpleumlPackage() {
 		return (SimpleumlPackage)getEPackage();
 	}

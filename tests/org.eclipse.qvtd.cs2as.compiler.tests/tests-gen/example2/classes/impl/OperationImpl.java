@@ -107,6 +107,7 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public example2.classes.Class getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -133,6 +134,7 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(example2.classes.Class newType) {
 		example2.classes.Class oldType = type;
 		type = newType;
@@ -145,6 +147,7 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Parameter> getOwnedParameters() {
 		if (ownedParameters == null) {
 			ownedParameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, ClassesPackage.OPERATION__OWNED_PARAMETERS);
@@ -157,6 +160,7 @@ public class OperationImpl extends NamedElementImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<CallExp> getOwnedExpressions() {
 		if (ownedExpressions == null) {
 			ownedExpressions = new EObjectContainmentEList<CallExp>(CallExp.class, this, ClassesPackage.OPERATION__OWNED_EXPRESSIONS);

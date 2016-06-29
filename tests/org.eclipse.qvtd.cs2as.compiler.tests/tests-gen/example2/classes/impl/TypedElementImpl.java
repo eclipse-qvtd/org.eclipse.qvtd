@@ -70,6 +70,7 @@ public abstract class TypedElementImpl extends ElementImpl implements TypedEleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public example2.classes.Class getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -96,6 +97,7 @@ public abstract class TypedElementImpl extends ElementImpl implements TypedEleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(example2.classes.Class newType) {
 		example2.classes.Class oldType = type;
 		type = newType;

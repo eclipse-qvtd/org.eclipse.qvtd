@@ -81,10 +81,12 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
         return context.getDiagnosticSeverity(severityPreference, resultValue);
 	}
 
+	@Override
 	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 		return (QVTiEnvironmentFactory) context.getEnvironmentFactory();
 	}
 
+	@Override
 	public @NonNull EvaluationEnvironment getEvaluationEnvironment() {
 		return context.getEvaluationEnvironment();
 	}
@@ -129,6 +131,7 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
         return context.getModelManager();
     }
 
+	@Override
 	public @Nullable Monitor getMonitor() {
 		return context.getMonitor();
 	}
@@ -183,6 +186,7 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 		return (VMEvaluationEnvironment) context.getEvaluationEnvironment();
 	}
 
+	@Override
 	public @NonNull VMEvaluationStepper getVMEvaluationStepper() {
 		return vmEvaluationStepper;
 	}
@@ -204,6 +208,7 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 		context.setLogger(logger);
 	}
 
+	@Override
 	public void setMonitor(@Nullable Monitor monitor) {
 		context.setMonitor(monitor);
 	}

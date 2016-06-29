@@ -126,6 +126,7 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getHSVNode() {
 		return hsvNodeEClass;
 	}
@@ -135,6 +136,7 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getHSVNode_Parent() {
 		return (EReference)hsvNodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -144,6 +146,7 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getHSVNode_Children() {
 		return (EReference)hsvNodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -153,6 +156,7 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getHSVNode_Hsv() {
 		return (EAttribute)hsvNodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -162,6 +166,7 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getHSVNode_Name() {
 		return (EAttribute)hsvNodeEClass.getEStructuralFeatures().get(3);
 	}
@@ -171,6 +176,7 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getHSV() {
 		return hsvEDataType;
 	}
@@ -180,6 +186,7 @@ public class HSVTreePackageImpl extends EPackageImpl implements HSVTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HSVTreeFactory getHSVTreeFactory() {
 		return (HSVTreeFactory)getEFactoryInstance();
 	}

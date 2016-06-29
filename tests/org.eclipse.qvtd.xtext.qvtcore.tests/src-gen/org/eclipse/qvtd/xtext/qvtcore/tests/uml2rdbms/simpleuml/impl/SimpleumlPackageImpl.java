@@ -172,6 +172,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAttribute() {
 		return attributeEClass;
 	}
@@ -181,6 +182,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAttribute_Owner() {
 		return (EReference)attributeEClass.getEStructuralFeatures().get(0);
 	}
@@ -190,6 +192,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAttribute_Type() {
 		return (EReference)attributeEClass.getEStructuralFeatures().get(1);
 	}
@@ -199,6 +202,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAssociation() {
 		return associationEClass;
 	}
@@ -208,6 +212,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssociation_Destination() {
 		return (EReference)associationEClass.getEStructuralFeatures().get(0);
 	}
@@ -217,6 +222,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssociation_Source() {
 		return (EReference)associationEClass.getEStructuralFeatures().get(1);
 	}
@@ -226,6 +232,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getClass_() {
 		return classEClass;
 	}
@@ -235,6 +242,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClass_Attributes() {
 		return (EReference)classEClass.getEStructuralFeatures().get(0);
 	}
@@ -244,6 +252,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClass_Forward() {
 		return (EReference)classEClass.getEStructuralFeatures().get(1);
 	}
@@ -253,6 +262,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClass_General() {
 		return (EReference)classEClass.getEStructuralFeatures().get(2);
 	}
@@ -262,6 +272,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClass_GeneralOpposite() {
 		return (EReference)classEClass.getEStructuralFeatures().get(3);
 	}
@@ -271,6 +282,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClass_Reverse() {
 		return (EReference)classEClass.getEStructuralFeatures().get(4);
 	}
@@ -280,6 +292,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getClassifier() {
 		return classifierEClass;
 	}
@@ -289,6 +302,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassifier_TypeOpposite() {
 		return (EReference)classifierEClass.getEStructuralFeatures().get(0);
 	}
@@ -298,6 +312,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPackage() {
 		return packageEClass;
 	}
@@ -307,6 +322,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackage_Elements() {
 		return (EReference)packageEClass.getEStructuralFeatures().get(0);
 	}
@@ -316,6 +332,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPackageElement() {
 		return packageElementEClass;
 	}
@@ -325,6 +342,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackageElement_Namespace() {
 		return (EReference)packageElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -334,6 +352,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPrimitiveDataType() {
 		return primitiveDataTypeEClass;
 	}
@@ -343,6 +362,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getUMLModelElement() {
 		return umlModelElementEClass;
 	}
@@ -352,6 +372,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUMLModelElement_Kind() {
 		return (EAttribute)umlModelElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -361,6 +382,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUMLModelElement_Name() {
 		return (EAttribute)umlModelElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -370,6 +392,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimpleumlFactory getSimpleumlFactory() {
 		return (SimpleumlFactory)getEFactoryInstance();
 	}

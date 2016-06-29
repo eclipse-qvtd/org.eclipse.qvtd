@@ -30,7 +30,8 @@ import org.eclipse.ui.IEditorInput;
 
 public class QVTiDebugModelPresentation extends VMDebugModelPresentation
 {
-    public Image getImage(Object element) {		// FIXME Inherit most of this
+    @Override
+	public Image getImage(Object element) {		// FIXME Inherit most of this
     	if (element instanceof VMDebugTarget) {
     		return QVTiDebugImages.getImage(QVTiDebugImages.TRANSFORMATION);
     	}
@@ -125,6 +126,7 @@ public class QVTiDebugModelPresentation extends VMDebugModelPresentation
         return null;
 	} */
 
+	@Override
 	public String getEditorId(IEditorInput input, Object element) {
 		if (element instanceof IFile || element instanceof ILineBreakpoint) {
 			return QVTimperativeEditor.EDITOR_ID;

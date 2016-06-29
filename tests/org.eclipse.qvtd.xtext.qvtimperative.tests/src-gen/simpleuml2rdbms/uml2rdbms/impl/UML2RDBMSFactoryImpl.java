@@ -84,6 +84,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AttributeToColumn createAttributeToColumn() {
 		AttributeToColumnImpl attributeToColumn = new AttributeToColumnImpl();
 		return attributeToColumn;
@@ -94,6 +95,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AssociationToForeignKey createAssociationToForeignKey() {
 		AssociationToForeignKeyImpl associationToForeignKey = new AssociationToForeignKeyImpl();
 		return associationToForeignKey;
@@ -104,6 +106,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BooleanToBoolean createBooleanToBoolean() {
 		BooleanToBooleanImpl booleanToBoolean = new BooleanToBooleanImpl();
 		return booleanToBoolean;
@@ -114,6 +117,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassToTable createClassToTable() {
 		ClassToTableImpl classToTable = new ClassToTableImpl();
 		return classToTable;
@@ -124,6 +128,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IntegerToNumber createIntegerToNumber() {
 		IntegerToNumberImpl integerToNumber = new IntegerToNumberImpl();
 		return integerToNumber;
@@ -134,6 +139,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NonLeafAttribute createNonLeafAttribute() {
 		NonLeafAttributeImpl nonLeafAttribute = new NonLeafAttributeImpl();
 		return nonLeafAttribute;
@@ -144,6 +150,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PackageToSchema createPackageToSchema() {
 		PackageToSchemaImpl packageToSchema = new PackageToSchemaImpl();
 		return packageToSchema;
@@ -154,6 +161,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StringToVarchar createStringToVarchar() {
 		StringToVarcharImpl stringToVarchar = new StringToVarcharImpl();
 		return stringToVarchar;
@@ -164,6 +172,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UML2RDBMSPackage getUML2RDBMSPackage() {
 		return (UML2RDBMSPackage)getEPackage();
 	}

@@ -128,6 +128,7 @@ public class HLSTreePackageImpl extends EPackageImpl implements HLSTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getHLSNode() {
 		return hlsNodeEClass;
 	}
@@ -137,6 +138,7 @@ public class HLSTreePackageImpl extends EPackageImpl implements HLSTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getHLSNode_Parent() {
 		return (EReference)hlsNodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -146,6 +148,7 @@ public class HLSTreePackageImpl extends EPackageImpl implements HLSTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getHLSNode_Children() {
 		return (EReference)hlsNodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -155,6 +158,7 @@ public class HLSTreePackageImpl extends EPackageImpl implements HLSTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getHLSNode_Hls() {
 		return (EAttribute)hlsNodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -164,6 +168,7 @@ public class HLSTreePackageImpl extends EPackageImpl implements HLSTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getHLSNode_Name() {
 		return (EAttribute)hlsNodeEClass.getEStructuralFeatures().get(3);
 	}
@@ -173,6 +178,7 @@ public class HLSTreePackageImpl extends EPackageImpl implements HLSTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getHLS() {
 		return hlsEDataType;
 	}
@@ -182,6 +188,7 @@ public class HLSTreePackageImpl extends EPackageImpl implements HLSTreePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HLSTreeFactory getHLSTreeFactory() {
 		return (HLSTreeFactory)getEFactoryInstance();
 	}
