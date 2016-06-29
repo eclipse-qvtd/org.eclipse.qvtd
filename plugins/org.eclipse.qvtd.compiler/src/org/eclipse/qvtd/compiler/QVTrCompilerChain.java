@@ -114,6 +114,15 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		        t.saveCore(cResource, saveOptions);
 		        assertNoResourceErrors("Core save", cResource);
 		        compiled(QVTC_STEP, cResource);
+		        
+		        if (getOption(DEBUG_KEY) == Boolean.TRUE) {
+					URI txURI = cResource.getURI();
+					if (txURI != null) {
+						URI inputURI = txURI;
+						URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvtc");
+						doQVTcSerializeAndLoad(inputURI, serializedURI);
+					}
+		        }
 				// FIXME next few lines should be classURI != null, but a test fails in combination (? due to global registry leakage)
 				saveOptions = compilerChain.getOption(GENMODEL_STEP, SAVE_OPTIONS_KEY);
 				if (saveOptions == null) {
