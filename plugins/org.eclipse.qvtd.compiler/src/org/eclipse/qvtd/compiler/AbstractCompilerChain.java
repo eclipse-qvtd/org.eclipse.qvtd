@@ -24,23 +24,16 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.LabelUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
-import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
@@ -52,6 +45,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvtu2qvtm.QVTu2QVTm;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.JavaSourceFileObject;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -64,10 +58,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
-public abstract class AbstractCompilerChain implements CompilerChain
+public abstract class AbstractCompilerChain extends CompilerUtil implements CompilerChain
 {
 	private static final @NonNull Map<@NonNull String, @NonNull String> step2extension = new HashMap<@NonNull String, @NonNull String>();
 	static {
@@ -327,55 +319,6 @@ public abstract class AbstractCompilerChain implements CompilerChain
 				environmentFactory.setCreateStrategy(savedStrategy);
 			}
 	    }
-	}
-	
-	public static void assertNoResourceErrors(@NonNull String prefix, @NonNull Resource resource) {
-		String message = PivotUtil.formatResourceDiagnostics(resource.getErrors(), prefix, "\n\t");
-		if (message != null)
-			assert false : message;
-	}
-	
-	public static void assertNoValidationErrors(@NonNull String prefix, @NonNull Resource resource) {
-		for (EObject eObject : resource.getContents()) {
-			assertNoValidationErrors(prefix, eObject);
-		}
-	}
-
-	public static void assertNoValidationErrors(@NonNull String string, EObject eObject) {
-		Map<Object, Object> validationContext = LabelUtil.createDefaultContext(Diagnostician.INSTANCE);
-		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);
-		List<Diagnostic> children = diagnostic.getChildren();
-		if (children.size() <= 0) {
-			return;
-		}
-		StringBuilder s = new StringBuilder();
-		s.append(children.size() + " validation errors");
-		for (Diagnostic child : children){
-			s.append("\n\t");
-			if (child.getData().size() > 0) {
-				Object data = child.getData().get(0);
-				if (data instanceof Element) {
-					for (EObject eScope = (Element)data; eScope instanceof Element; eScope = eScope.eContainer()) {
-						ModelElementCS csElement = ElementUtil.getCsElement((Element)eScope);
-						if (csElement != null) {
-							ICompositeNode node = NodeModelUtils.getNode(csElement);
-							if (node != null) {
-								Resource eResource = csElement.eResource();
-								if (eResource != null) {
-									s.append(eResource.getURI().lastSegment() + ":");
-								}
-								int startLine = node.getStartLine();
-								s.append(startLine + ":");
-							}
-							s.append(((Element)data).eClass().getName() + ": ");
-							break;
-						}
-					}
-				}
-			}
-			s.append(child.getMessage());
-		}
-		assert false : s.toString();
 	}
 
 	public static @Nullable String getDefaultExtension(@NonNull String key) {
@@ -654,9 +597,9 @@ public abstract class AbstractCompilerChain implements CompilerChain
 		if (saveOptions != null) {
 			asResource.save(saveOptions);
 		}
-		AbstractCompilerChain.assertNoResourceErrors(stepKey, asResource);
+		assertNoResourceErrors(stepKey, asResource);
 		if (getOption(stepKey, CompilerChain.VALIDATE_KEY) == Boolean.TRUE) {
-			AbstractCompilerChain.assertNoValidationErrors(stepKey, asResource);
+			assertNoValidationErrors(stepKey, asResource);
 		}
 	}
 
