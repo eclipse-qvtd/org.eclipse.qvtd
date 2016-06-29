@@ -583,6 +583,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			Element cOperation = rOperation.accept(createVisitor);
 			if (cOperation instanceof Operation) {
 				cOperations.add((Operation) cOperation);
+				putGlobalTrace(cOperation, rOperation);
 			}
 		}
 		coreTransformation.getOwnedOperations().addAll(cOperations);
