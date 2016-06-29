@@ -18,13 +18,16 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASResourceFactory;
 import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCS2AS;
 
@@ -48,6 +51,15 @@ public class QVTrelationCSResource extends EssentialOCLCSResource
 	@Override
 	public @NonNull URI getASURI(@NonNull URI csURI) {
 		return URI.createURI(csURI.toString() + "as");
+	}
+
+	@Override
+	public @NonNull CS2AS getCS2AS() {
+		EnvironmentFactoryInternal environmentFactory = PivotUtilInternal.findEnvironmentFactory(this);
+		if (environmentFactory == null) {
+			environmentFactory = new QVTrEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), getResourceSet());
+		}
+		return super.getCS2AS();
 	}
 
 	@Override
