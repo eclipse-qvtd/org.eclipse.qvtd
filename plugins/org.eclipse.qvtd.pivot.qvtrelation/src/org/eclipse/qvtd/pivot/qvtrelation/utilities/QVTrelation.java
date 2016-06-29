@@ -21,6 +21,10 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
  */
 public class QVTrelation extends QVTbase
 {
+	public static @NonNull QVTrelation newInstance(@NonNull ProjectManager projectManager) {	
+		return newInstance(projectManager, null);
+	}
+
 	public static @NonNull QVTrelation newInstance(@NonNull ProjectManager projectManager, @Nullable ResourceSet externalResourceSet) {	
 		QVTrEnvironmentFactory environmentFactory = new QVTrEnvironmentFactory(projectManager, externalResourceSet);
 		QVTrelation qvt = new QVTrelation(environmentFactory);
@@ -29,7 +33,7 @@ public class QVTrelation extends QVTbase
 		}
 		return qvt;
 	}
-	
+
 	public QVTrelation(@NonNull QVTrEnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 	}

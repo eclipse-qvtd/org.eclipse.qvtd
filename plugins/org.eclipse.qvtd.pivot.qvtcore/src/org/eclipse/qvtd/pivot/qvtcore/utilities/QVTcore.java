@@ -21,6 +21,10 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
  */
 public class QVTcore extends QVTbase
 {
+	public static @NonNull QVTcore newInstance(@NonNull ProjectManager projectManager) {	
+		return newInstance(projectManager, null);
+	}
+
 	public static @NonNull QVTcore newInstance(@NonNull ProjectManager projectManager, @Nullable ResourceSet externalResourceSet) {	
 		QVTcEnvironmentFactory environmentFactory = new QVTcEnvironmentFactory(projectManager, externalResourceSet);
 		QVTcore qvt = new QVTcore(environmentFactory);
@@ -29,7 +33,7 @@ public class QVTcore extends QVTbase
 		}
 		return qvt;
 	}
-	
+
 	public QVTcore(@NonNull QVTcEnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 	}

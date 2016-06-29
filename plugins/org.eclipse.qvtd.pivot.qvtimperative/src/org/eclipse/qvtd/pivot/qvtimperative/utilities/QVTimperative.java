@@ -22,6 +22,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
  */
 public class QVTimperative extends QVTbase
 {
+	public static @NonNull QVTimperative newInstance(@NonNull ProjectManager projectManager) {	
+		return newInstance(projectManager, null);
+	}
+
 	public static @NonNull QVTimperative newInstance(@NonNull ProjectManager projectManager, @Nullable ResourceSet externalResourceSet) {	
 		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(projectManager, externalResourceSet);
 		QVTimperative qvt = new QVTimperative(environmentFactory);
@@ -30,7 +34,7 @@ public class QVTimperative extends QVTbase
 		}
 		return qvt;
 	}
-	
+
 	public QVTimperative(@NonNull QVTiEnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 	}
