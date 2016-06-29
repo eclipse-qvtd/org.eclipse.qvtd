@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -321,15 +322,24 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	}
 	
 	/**
-	 * Add the NavigationAssignment "trace.cProperty := cExpression" to the middle BottomPattern.
+	 * Add the assignment for rVariable to the middle BottomPattern. If isOptional, a missing trace property is ignored.
+	 *
+	 * Returns the core variant of the relation variable.
 	 */
-	public void addTraceNavigationAssignment(@NonNull Property targetProperty, @NonNull OCLExpression cExpression) {
-		assert (!targetProperty.isIsMany() || (cExpression.getType() instanceof CollectionType));
-		VariableExp cSlotVariableExp = createVariableExp(cMiddleRealizedVariable);
-		NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, targetProperty, cExpression);
-		QVTr2QVTc.SYNTHESIS.println("  addPropertyAssignment " + cAssignment);
-		assertNewAssignment(cMiddleBottomPattern.getAssignment(), cAssignment);
-		cMiddleBottomPattern.getAssignment().add(cAssignment);
+	public @NonNull Variable addTraceNavigationAssignment(@NonNull Variable rVariable, boolean isOptional) throws CompilerChainException {
+		Variable cVariable = getCoreVariable(rVariable); //getCoreRealizedVariable(rTargetVariable);
+		Property cTargetProperty = qvtr2qvtc.basicGetProperty(cMiddleRealizedVariable.getType(), cVariable);
+		assert isOptional || (cTargetProperty != null);
+		if (cTargetProperty != null) {
+			assert (!cTargetProperty.isIsMany() || (cVariable.getType() instanceof CollectionType));
+			VariableExp cSlotVariableExp = createVariableExp(cMiddleRealizedVariable);
+			OCLExpression cExpression = createVariableExp(cVariable);
+			NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, cTargetProperty, cExpression);
+			QVTr2QVTc.SYNTHESIS.println("  addPropertyAssignment " + cAssignment);
+			assertNewAssignment(cMiddleBottomPattern.getAssignment(), cAssignment);
+			cMiddleBottomPattern.getAssignment().add(cAssignment);
+		}
+		return cVariable;
 	}
 
 	public void addVariableAnalysis(@NonNull VariableAnalysis analysis) {

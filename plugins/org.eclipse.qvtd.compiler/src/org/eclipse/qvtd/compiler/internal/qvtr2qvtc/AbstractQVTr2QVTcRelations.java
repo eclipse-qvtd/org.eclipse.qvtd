@@ -480,8 +480,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				Variable rBoundVariable = ClassUtil.nonNullState(((ObjectTemplateExp)rExpression).getBindsTo());
 				if (!rSharedVariables.contains(rBoundVariable)) {
 					Variable cBoundVariable = variablesAnalysis.getCoreVariable(rBoundVariable);  // FIXME whenVariable(cMiddleBottomPattern, rBoundVariable);
-					cTargetVariable = variablesAnalysis.getCoreVariable(rTargetVariable); //getCoreRealizedVariable(rTargetVariable);
 					cExpression = createVariableExp(cBoundVariable);
+					cTargetVariable = variablesAnalysis.addTraceNavigationAssignment(rBoundVariable, false);
 				}
 			}
 			else if (rExpression instanceof VariableExp) {
@@ -608,7 +608,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 					TemplateExp pte = (TemplateExp)rPartValue;
 					Variable pv = ClassUtil.nonNullState(pte.getBindsTo());
 					/*Realized*/Variable cTargetVariable/*mpv*/ = variablesAnalysis.getCoreVariable(pv); //rWhenVariables.contains(pv) ? getCoreVariable(pv) : whenRealizedVariable(cEnforcedBottomPattern, pv);
-					Variable cTemplateVariable/*mv*/ = variablesAnalysis.getCoreVariable(rTemplateVariable);
+//					Variable cTemplateVariable/*mv*/ = variablesAnalysis.getCoreVariable(rTemplateVariable);
 					variablesAnalysis.addNavigationAssignment(rTemplateVariable, partProperty, createVariableExp(cTargetVariable));
 					mapEnforcedTemplateExpression(pte);
 //					Property cTargetProperty2 = qvtr2qvtc.getProperty(cMiddleRealizedVariable.getType(), cTargetVariable);
@@ -616,7 +616,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				}
 				else {
 					// body of RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
-					Variable cTemplateVariable = variablesAnalysis.getCoreVariable(rTemplateVariable);
+//					Variable cTemplateVariable = variablesAnalysis.getCoreVariable(rTemplateVariable);
 					//RDomainToMComposedMappingGuardrEnforcedDomain
 					for (@NonNull TemplateExp rTemplateExpression : rEnforcedTemplateExpressions) {
 						if ((rPartValue instanceof VariableExp) && (rTemplateExpression instanceof ObjectTemplateExp)) {
@@ -660,9 +660,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			 * Creates the assignment of the middle model to the L/R models
 			 */
 			// RDomainVarToMDBottomAssignmnetForEnforcement
-			Variable cTemplateVariable = variablesAnalysis.getCoreVariable(rTemplateVariable);
-			Property cTargetProperty = qvtr2qvtc.getProperty(cMiddleRealizedVariable.getType(), rTemplateVariable);
-			variablesAnalysis.addTraceNavigationAssignment(cTargetProperty, createVariableExp(cTemplateVariable));
+			variablesAnalysis.addTraceNavigationAssignment(rTemplateVariable, false);
 		}
 
 		// 15
@@ -727,11 +725,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 //				TemplateExp rTemplateExp = analysis.getTemplateExp();
 //				if (dvte instanceof ObjectTemplateExp) {
 					// tp=dv:T{...} => tcv.tp := dv;
-					Property cProperty = qvtr2qvtc.basicGetProperty(cMiddleRealizedVariable.getType(), rDomainVariable);
-					if (cProperty != null) {			// null for dead variables
-						Variable cVariable = variablesAnalysis.getCoreVariable(rDomainVariable);
-						variablesAnalysis.addTraceNavigationAssignment(cProperty, createVariableExp(cVariable));
-					}
+					variablesAnalysis.addTraceNavigationAssignment(rDomainVariable, true);
 //				}
 /*				else if (dvte instanceof CollectionTemplateExp) {
 					// tp=dv:T{...} => tcv.tp := dv;
