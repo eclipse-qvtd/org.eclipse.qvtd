@@ -78,6 +78,7 @@ public class FamiliesFactoryImpl extends EFactoryImpl implements FamiliesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Family createFamily() {
 		FamilyImpl family = new FamilyImpl();
 		return family;
@@ -88,6 +89,7 @@ public class FamiliesFactoryImpl extends EFactoryImpl implements FamiliesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Member createMember() {
 		MemberImpl member = new MemberImpl();
 		return member;
@@ -98,6 +100,7 @@ public class FamiliesFactoryImpl extends EFactoryImpl implements FamiliesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FamiliesPackage getFamiliesPackage() {
 		return (FamiliesPackage)getEPackage();
 	}

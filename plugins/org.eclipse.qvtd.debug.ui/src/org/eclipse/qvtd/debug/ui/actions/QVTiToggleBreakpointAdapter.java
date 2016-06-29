@@ -19,10 +19,12 @@ import org.eclipse.ui.IWorkbenchPart;
 
 public class QVTiToggleBreakpointAdapter extends VMToggleBreakpointAdapter
 {
+	@Override
 	public boolean canToggleLineBreakpoints(IWorkbenchPart part, ISelection selection) {
 		return part instanceof QVTimperativeEditor;
 	}
 
+	@Override
 	public void toggleLineBreakpoints(final IWorkbenchPart part, ISelection selection) throws CoreException {
 		if (part instanceof QVTimperativeEditor) {
 			super.toggleLineBreakpoints(part, selection);;

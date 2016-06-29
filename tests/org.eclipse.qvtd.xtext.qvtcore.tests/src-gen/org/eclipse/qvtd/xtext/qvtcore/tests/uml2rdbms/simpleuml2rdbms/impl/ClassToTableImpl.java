@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -151,6 +151,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Column getColumn() {
 		if (column != null && column.eIsProxy()) {
 			InternalEObject oldColumn = (InternalEObject)column;
@@ -177,6 +178,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setColumn(Column newColumn) {
 		Column oldColumn = column;
 		column = newColumn;
@@ -189,6 +191,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -198,6 +201,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -210,6 +214,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AssociationToForeignKey> getAssociationsToForeignKeys() {
 		if (associationsToForeignKeys == null) {
 			associationsToForeignKeys = new EObjectContainmentWithInverseEList<AssociationToForeignKey>(AssociationToForeignKey.class, this, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__ASSOCIATIONS_TO_FOREIGN_KEYS, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER);
@@ -222,6 +227,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PackageToSchema getOwner() {
 		if (eContainerFeatureID() != Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER) return null;
 		return (PackageToSchema)eInternalContainer();
@@ -242,6 +248,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(PackageToSchema newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
@@ -263,6 +270,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Key getPrimaryKey() {
 		if (primaryKey != null && primaryKey.eIsProxy()) {
 			InternalEObject oldPrimaryKey = (InternalEObject)primaryKey;
@@ -289,6 +297,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryKey(Key newPrimaryKey) {
 		Key oldPrimaryKey = primaryKey;
 		primaryKey = newPrimaryKey;
@@ -301,6 +310,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Table getTable() {
 		if (table != null && table.eIsProxy()) {
 			InternalEObject oldTable = (InternalEObject)table;
@@ -327,6 +337,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTable(Table newTable) {
 		Table oldTable = table;
 		table = newTable;
@@ -339,6 +350,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class getUmlClass() {
 		if (umlClass != null && umlClass.eIsProxy()) {
 			InternalEObject oldUmlClass = (InternalEObject)umlClass;
@@ -365,6 +377,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUmlClass(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class newUmlClass) {
 		org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class oldUmlClass = umlClass;
 		umlClass = newUmlClass;

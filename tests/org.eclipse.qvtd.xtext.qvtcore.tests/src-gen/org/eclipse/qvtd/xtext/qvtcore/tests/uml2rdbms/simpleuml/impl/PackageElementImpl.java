@@ -61,6 +61,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package getNamespace() {
 		if (eContainerFeatureID() != SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE) return null;
 		return (org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package)eInternalContainer();
@@ -81,6 +82,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNamespace(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package newNamespace) {
 		if (newNamespace != eInternalContainer() || (eContainerFeatureID() != SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE && newNamespace != null)) {
 			if (EcoreUtil.isAncestor(this, newNamespace))

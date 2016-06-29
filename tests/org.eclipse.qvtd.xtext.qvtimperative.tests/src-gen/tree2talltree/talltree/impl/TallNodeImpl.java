@@ -121,6 +121,7 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TallNode> getChildren() {
 		if (children == null) {
 			children = new EObjectContainmentWithInverseEList<TallNode>(TallNode.class, this, TalltreePackage.TALL_NODE__CHILDREN, TalltreePackage.TALL_NODE__PARENT);
@@ -133,6 +134,7 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getHeight() {
 		return height;
 	}
@@ -142,6 +144,7 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHeight(int newHeight) {
 		int oldHeight = height;
 		height = newHeight;
@@ -154,6 +157,7 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -163,6 +167,7 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -175,6 +180,7 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TallNode getParent() {
 		if (eContainerFeatureID() != TalltreePackage.TALL_NODE__PARENT) return null;
 		return (TallNode)eInternalContainer();
@@ -195,6 +201,7 @@ public class TallNodeImpl extends MinimalEObjectImpl.Container implements TallNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParent(TallNode newParent) {
 		if (newParent != eInternalContainer() || (eContainerFeatureID() != TalltreePackage.TALL_NODE__PARENT && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))

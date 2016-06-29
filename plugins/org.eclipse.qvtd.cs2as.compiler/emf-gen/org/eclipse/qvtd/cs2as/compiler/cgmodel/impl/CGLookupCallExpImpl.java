@@ -61,6 +61,7 @@ public class CGLookupCallExpImpl extends CGOperationCallExpImpl implements CGLoo
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public EClassifier getEcoreClassifier() {
 		return null;
 	}
@@ -80,6 +81,7 @@ public class CGLookupCallExpImpl extends CGOperationCallExpImpl implements CGLoo
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isEcore() {
 		return false;
 	}
@@ -88,6 +90,7 @@ public class CGLookupCallExpImpl extends CGOperationCallExpImpl implements CGLoo
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public boolean isGlobal() {
 		return false;
 	}

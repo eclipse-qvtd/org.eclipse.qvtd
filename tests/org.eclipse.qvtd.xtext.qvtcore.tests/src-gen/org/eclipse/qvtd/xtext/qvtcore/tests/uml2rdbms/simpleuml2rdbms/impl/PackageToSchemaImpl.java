@@ -113,6 +113,7 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ClassToTable> getClassesToTables() {
 		if (classesToTables == null) {
 			classesToTables = new EObjectContainmentWithInverseEList<ClassToTable>(ClassToTable.class, this, Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__CLASSES_TO_TABLES, Simpleuml2rdbmsPackage.CLASS_TO_TABLE__OWNER);
@@ -125,6 +126,7 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PrimitiveToName> getPrimitivesToNames() {
 		if (primitivesToNames == null) {
 			primitivesToNames = new EObjectContainmentWithInverseEList<PrimitiveToName>(PrimitiveToName.class, this, Simpleuml2rdbmsPackage.PACKAGE_TO_SCHEMA__PRIMITIVES_TO_NAMES, Simpleuml2rdbmsPackage.PRIMITIVE_TO_NAME__OWNER);
@@ -137,6 +139,7 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Schema getSchema() {
 		if (schema != null && schema.eIsProxy()) {
 			InternalEObject oldSchema = (InternalEObject)schema;
@@ -163,6 +166,7 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSchema(Schema newSchema) {
 		Schema oldSchema = schema;
 		schema = newSchema;
@@ -175,6 +179,7 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package getUmlPackage() {
 		if (umlPackage != null && umlPackage.eIsProxy()) {
 			InternalEObject oldUmlPackage = (InternalEObject)umlPackage;
@@ -201,6 +206,7 @@ public class PackageToSchemaImpl extends UmlToRdbmsModelElementImpl implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUmlPackage(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package newUmlPackage) {
 		org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Package oldUmlPackage = umlPackage;
 		umlPackage = newUmlPackage;

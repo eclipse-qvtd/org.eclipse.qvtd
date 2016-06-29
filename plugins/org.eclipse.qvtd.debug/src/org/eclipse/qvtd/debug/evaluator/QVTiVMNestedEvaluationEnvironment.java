@@ -61,6 +61,7 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 		return myCurrentIP;
 	}
 
+	@Override
 	public @NonNull UnitLocation getCurrentLocation() {
 //		if (myCurrentIP == null) {
 //			return null;
@@ -72,10 +73,12 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 //		}
 	}
 
+	@Override
 	public @NonNull VMDebugCore getDebugCore() {
 		return getVMRootEvaluationEnvironment().getDebugCore();
 	}
 
+	@Override
 	public @NonNull Transformation getDebuggableElement() {
 		return getVMRootEvaluationEnvironment().getDebuggableElement();
 	}
@@ -120,14 +123,17 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 		return stepperStack;
 	}
 
+	@Override
 	public boolean isDeferredExecution() {
 		return getVMRootEvaluationEnvironment().isDeferredExecution();
 	}
     
-    public void processDeferredTasks() {
+    @Override
+	public void processDeferredTasks() {
     	getVMRootEvaluationEnvironment().processDeferredTasks();
     }
 
+	@Override
 	public @NonNull Element setCurrentIP(@NonNull Element element) {
 		Element prevValue = myCurrentIP;
 		myCurrentIP = element;
@@ -139,6 +145,7 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 		this.myOperation = operation;
 	}
 
+	@Override
 	public void throwVMException(@NonNull VMRuntimeException exception) throws VMRuntimeException {
 		try {
 			getVMRootEvaluationEnvironment().saveThrownException(exception);

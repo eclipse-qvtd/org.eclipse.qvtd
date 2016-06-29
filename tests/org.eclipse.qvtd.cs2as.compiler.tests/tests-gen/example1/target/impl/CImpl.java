@@ -74,6 +74,7 @@ public class CImpl extends NamespaceImpl implements C {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public A2 getToA2() {
 		if (eContainerFeatureID() != TargetPackage.C__TO_A2) return null;
 		return (A2)eInternalContainer();
@@ -94,6 +95,7 @@ public class CImpl extends NamespaceImpl implements C {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setToA2(A2 newToA2) {
 		if (newToA2 != eInternalContainer() || (eContainerFeatureID() != TargetPackage.C__TO_A2 && newToA2 != null)) {
 			if (EcoreUtil.isAncestor(this, newToA2))
@@ -115,6 +117,7 @@ public class CImpl extends NamespaceImpl implements C {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public D getOwnsD() {
 		return ownsD;
 	}
@@ -139,6 +142,7 @@ public class CImpl extends NamespaceImpl implements C {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnsD(D newOwnsD) {
 		if (newOwnsD != ownsD) {
 			NotificationChain msgs = null;

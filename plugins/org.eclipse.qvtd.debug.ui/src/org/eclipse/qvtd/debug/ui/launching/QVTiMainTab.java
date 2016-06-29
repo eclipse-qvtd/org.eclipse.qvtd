@@ -48,6 +48,7 @@ public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
 		return new QVTiCompilerChain(environmentFactory, txURI, null);
 	}
 
+	@Override
 	protected void createDirectionGroup(Group txGroup) {}
 	
 	@Override

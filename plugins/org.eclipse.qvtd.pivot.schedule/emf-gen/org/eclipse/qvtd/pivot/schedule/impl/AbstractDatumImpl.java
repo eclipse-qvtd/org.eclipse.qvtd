@@ -146,6 +146,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AbstractDatum> getSuper() {
 		if (super_ == null) {
 			super_ = new EObjectWithInverseResolvingEList.ManyInverse<AbstractDatum>(AbstractDatum.class, this, SchedulePackage.ABSTRACT_DATUM__SUPER, SchedulePackage.ABSTRACT_DATUM__SUB);
@@ -158,6 +159,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AbstractDatum> getSub() {
 		if (sub == null) {
 			sub = new EObjectWithInverseResolvingEList.ManyInverse<AbstractDatum>(AbstractDatum.class, this, SchedulePackage.ABSTRACT_DATUM__SUB, SchedulePackage.ABSTRACT_DATUM__SUPER);
@@ -181,6 +183,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 		}
 		return domain;
 	}
+	@Override
 	public CoreDomain getDomain() {		// FIXME Eliminate domain altogether
 		CoreDomain domainGen = getDomainGen();
 		TypedModel typedModel2 = getTypedModel();
@@ -213,6 +216,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SchedulePackage.ABSTRACT_DATUM__DOMAIN, oldDomain, domain));
 	}
+	@Override
 	public void setDomain(CoreDomain newDomain) {
 		setDomainGen(newDomain);
 		setTypedModel(newDomain != null ? newDomain.getTypedModel() : null);
@@ -223,6 +227,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypedModel getTypedModel() {
 		if (typedModel != null && typedModel.eIsProxy()) {
 			InternalEObject oldTypedModel = (InternalEObject)typedModel;
@@ -249,6 +254,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypedModel(TypedModel newTypedModel) {
 		TypedModel oldTypedModel = typedModel;
 		typedModel = newTypedModel;
@@ -261,6 +267,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AbstractAction> getProducedBy() {
 		if (producedBy == null) {
 			producedBy = new EObjectWithInverseResolvingEList.ManyInverse<AbstractAction>(AbstractAction.class, this, SchedulePackage.ABSTRACT_DATUM__PRODUCED_BY, SchedulePackage.ABSTRACT_ACTION__PRODUCTIONS);
@@ -273,6 +280,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AbstractAction> getRequiredBy() {
 		if (requiredBy == null) {
 			requiredBy = new EObjectWithInverseResolvingEList.ManyInverse<AbstractAction>(AbstractAction.class, this, SchedulePackage.ABSTRACT_DATUM__REQUIRED_BY, SchedulePackage.ABSTRACT_ACTION__REQUISITES);
@@ -285,6 +293,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Schedule getSchedule() {
 		if (eContainerFeatureID() != SchedulePackage.ABSTRACT_DATUM__SCHEDULE) return null;
 		return (Schedule)eInternalContainer();
@@ -305,6 +314,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSchedule(Schedule newSchedule) {
 		if (newSchedule != eInternalContainer() || (eContainerFeatureID() != SchedulePackage.ABSTRACT_DATUM__SCHEDULE && newSchedule != null)) {
 			if (EcoreUtil.isAncestor(this, newSchedule))
@@ -326,6 +336,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DataParameter> getDataParameter() {
 		if (dataParameter == null) {
 			dataParameter = new EObjectWithInverseResolvingEList<DataParameter>(DataParameter.class, this, SchedulePackage.ABSTRACT_DATUM__DATA_PARAMETER, SchedulePackage.DATA_PARAMETER__DATUM);

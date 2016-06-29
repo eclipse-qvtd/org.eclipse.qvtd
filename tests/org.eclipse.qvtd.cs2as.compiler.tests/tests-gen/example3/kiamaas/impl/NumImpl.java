@@ -79,6 +79,7 @@ public class NumImpl extends NodeImpl implements Num {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 		return value;
 	}
@@ -88,6 +89,7 @@ public class NumImpl extends NodeImpl implements Num {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(int newValue) {
 		int oldValue = value;
 		value = newValue;

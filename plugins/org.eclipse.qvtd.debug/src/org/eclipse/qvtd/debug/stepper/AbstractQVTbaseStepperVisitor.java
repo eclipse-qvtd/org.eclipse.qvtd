@@ -36,38 +36,47 @@ public abstract class AbstractQVTbaseStepperVisitor
 		super(context);
 	}	
 
+	@Override
 	public @Nullable IStepper visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull BaseModel object) {
 		return visitModel(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitDomain(org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain object) {
 		return visitNamedElement(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitFunction(org.eclipse.qvtd.pivot.qvtbase.@NonNull Function object) {
 		return visitOperation(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.@NonNull FunctionParameter object) {
 		return visitParameter(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitPattern(org.eclipse.qvtd.pivot.qvtbase.@NonNull Pattern object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitPredicate(org.eclipse.qvtd.pivot.qvtbase.@NonNull Predicate object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitRule(org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule object) {
 		return visitNamedElement(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitTransformation(org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation object) {
 		return visitClass(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel object) {
 		return visitNamedElement(object);
 	}

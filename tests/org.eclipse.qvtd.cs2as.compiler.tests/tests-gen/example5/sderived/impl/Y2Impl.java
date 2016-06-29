@@ -81,6 +81,7 @@ public class Y2Impl extends YImpl implements Y2 {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName2() {
 		return name2;
 	}
@@ -90,6 +91,7 @@ public class Y2Impl extends YImpl implements Y2 {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName2(String newName2) {
 		String oldName2 = name2;
 		name2 = newName2;

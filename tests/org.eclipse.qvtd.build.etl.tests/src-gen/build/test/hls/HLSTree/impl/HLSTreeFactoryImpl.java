@@ -108,6 +108,7 @@ public class HLSTreeFactoryImpl extends EFactoryImpl implements HLSTreeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HLSNode createHLSNode() {
 		HLSNodeImpl hlsNode = new HLSNodeImpl();
 		return hlsNode;
@@ -136,6 +137,7 @@ public class HLSTreeFactoryImpl extends EFactoryImpl implements HLSTreeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HLSTreePackage getHLSTreePackage() {
 		return (HLSTreePackage)getEPackage();
 	}

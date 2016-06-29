@@ -75,6 +75,7 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PackageCS> getOwnedPackages() {
 		if (ownedPackages == null) {
 			ownedPackages = new EObjectContainmentEList<PackageCS>(PackageCS.class, this, ClassescsPackage.ROOT_CS__OWNED_PACKAGES);

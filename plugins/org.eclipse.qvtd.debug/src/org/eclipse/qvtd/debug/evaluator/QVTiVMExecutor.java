@@ -56,6 +56,7 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 		return new QVTiVMRootEvaluationEnvironment(this, (Transformation)executableObject, ++envId);
 	}
 
+	@Override
 	protected Boolean executeInternal() {
 		QVTiVMEvaluationVisitor visitor = (QVTiVMEvaluationVisitor) getEvaluationVisitor();
 		VMEvaluationStepper vmStepper = visitor.getVMEvaluationStepper();

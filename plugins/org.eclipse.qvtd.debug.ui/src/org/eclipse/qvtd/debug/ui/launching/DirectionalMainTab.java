@@ -47,6 +47,7 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 	protected Combo directionCombo;
 	protected Button viewCheckButton;
 
+	@Override
 	protected void createDirectionGroup(Group txGroup) {
 		directionGroup = new Composite(txGroup, SWT.NONE);
 		GridLayout gl_directionGroup = new GridLayout(5, false);

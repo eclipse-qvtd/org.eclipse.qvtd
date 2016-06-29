@@ -121,6 +121,7 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentWithInverseEList<Attribute>(Attribute.class, this, UMLPackage.CLASS__ATTRIBUTES, UMLPackage.ATTRIBUTE__OWNER);
@@ -133,6 +134,7 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Association> getForward() {
 		if (forward == null) {
 			forward = new EObjectWithInverseResolvingEList<Association>(Association.class, this, UMLPackage.CLASS__FORWARD, UMLPackage.ASSOCIATION__SOURCE);
@@ -145,6 +147,7 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<simpleuml2rdbms.uml.Class> getGeneral() {
 		if (general == null) {
 			general = new EObjectWithInverseResolvingEList.ManyInverse<simpleuml2rdbms.uml.Class>(simpleuml2rdbms.uml.Class.class, this, UMLPackage.CLASS__GENERAL, UMLPackage.CLASS__GENERAL_OPPOSITE);
@@ -157,6 +160,7 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<simpleuml2rdbms.uml.Class> getGeneralOpposite() {
 		if (generalOpposite == null) {
 			generalOpposite = new EObjectWithInverseResolvingEList.ManyInverse<simpleuml2rdbms.uml.Class>(simpleuml2rdbms.uml.Class.class, this, UMLPackage.CLASS__GENERAL_OPPOSITE, UMLPackage.CLASS__GENERAL);
@@ -169,6 +173,7 @@ public class ClassImpl extends ClassifierImpl implements simpleuml2rdbms.uml.Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Association> getReverse() {
 		if (reverse == null) {
 			reverse = new EObjectWithInverseResolvingEList<Association>(Association.class, this, UMLPackage.CLASS__REVERSE, UMLPackage.ASSOCIATION__DESTINATION);

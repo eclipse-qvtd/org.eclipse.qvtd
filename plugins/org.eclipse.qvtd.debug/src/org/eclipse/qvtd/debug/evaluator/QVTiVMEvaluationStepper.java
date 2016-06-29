@@ -27,14 +27,17 @@ public class QVTiVMEvaluationStepper extends AbstractVMEvaluationStepper
 		super(evaluationVisitor, vmContext, QVTiStepperVisitor.INSTANCE);
 	}
 
+	@Override
 	protected @NonNull VMStackFrameData @NonNull [] createStackFrame() {
 		return QVTiVMVirtualMachine.createStackFrame(getLocationStack());
 	}
 	
-    protected void log(IStatus status) {
+    @Override
+	protected void log(IStatus status) {
 		QVTiDebugCore.INSTANCE.log(status);
     }
 
+	@Override
 	protected void trace(String option, String message) {
 		QVTiDebugCore.TRACE.trace(option, message);
 	}

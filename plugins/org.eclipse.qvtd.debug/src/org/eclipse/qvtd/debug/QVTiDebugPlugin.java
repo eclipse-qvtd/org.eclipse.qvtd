@@ -36,11 +36,13 @@ public class QVTiDebugPlugin extends Plugin
 		return new Status(IStatus.ERROR, PLUGIN_ID, 0, message, e);
 	}
 
+	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		super.start(bundleContext);
 		plugin = this;
 	}
 
+	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
 		plugin = null;
 		super.stop(bundleContext);

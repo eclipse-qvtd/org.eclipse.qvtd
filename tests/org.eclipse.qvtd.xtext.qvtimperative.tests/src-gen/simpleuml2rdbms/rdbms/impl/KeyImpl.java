@@ -82,6 +82,7 @@ public class KeyImpl extends RModelElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Table getOwner() {
 		if (eContainerFeatureID() != RDBMSPackage.KEY__OWNER) return null;
 		return (Table)eInternalContainer();
@@ -102,6 +103,7 @@ public class KeyImpl extends RModelElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(Table newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != RDBMSPackage.KEY__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
@@ -123,6 +125,7 @@ public class KeyImpl extends RModelElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Column> getColumn() {
 		if (column == null) {
 			column = new EObjectWithInverseResolvingEList.ManyInverse<Column>(Column.class, this, RDBMSPackage.KEY__COLUMN, RDBMSPackage.COLUMN__KEYS);

@@ -133,6 +133,7 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getA() {
 		return aEClass;
 	}
@@ -142,6 +143,7 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getA_OwnsB() {
 		return (EReference)aEClass.getEStructuralFeatures().get(0);
 	}
@@ -151,6 +153,7 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getB() {
 		return bEClass;
 	}
@@ -160,6 +163,7 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getB_OwnsC() {
 		return (EReference)bEClass.getEStructuralFeatures().get(0);
 	}
@@ -169,6 +173,7 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getC() {
 		return cEClass;
 	}
@@ -178,6 +183,7 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTRoot() {
 		return tRootEClass;
 	}
@@ -187,6 +193,7 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTRoot_OwnedA() {
 		return (EReference)tRootEClass.getEStructuralFeatures().get(0);
 	}
@@ -196,6 +203,7 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNamedElement() {
 		return namedElementEClass;
 	}
@@ -205,6 +213,7 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNamedElement_Name() {
 		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -214,6 +223,7 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TbaseFactory getTbaseFactory() {
 		return (TbaseFactory)getEFactoryInstance();
 	}

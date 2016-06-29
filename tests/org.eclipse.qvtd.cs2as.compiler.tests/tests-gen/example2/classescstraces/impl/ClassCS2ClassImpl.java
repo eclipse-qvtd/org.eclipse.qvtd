@@ -81,6 +81,7 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassCS getClassCS() {
 		if (classCS != null && classCS.eIsProxy()) {
 			InternalEObject oldClassCS = (InternalEObject)classCS;
@@ -107,6 +108,7 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setClassCS(ClassCS newClassCS) {
 		ClassCS oldClassCS = classCS;
 		classCS = newClassCS;
@@ -119,6 +121,7 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public example2.classes.Class getClass_() {
 		if (class_ != null && class_.eIsProxy()) {
 			InternalEObject oldClass = (InternalEObject)class_;
@@ -145,6 +148,7 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setClass(example2.classes.Class newClass) {
 		example2.classes.Class oldClass = class_;
 		class_ = newClass;

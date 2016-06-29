@@ -69,6 +69,7 @@ public class ClassImpl extends NamedElementImpl implements classes.Class {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public classes.Class getSuperClass() {
 		if (superClass != null && superClass.eIsProxy()) {
 			InternalEObject oldSuperClass = (InternalEObject)superClass;
@@ -95,6 +96,7 @@ public class ClassImpl extends NamedElementImpl implements classes.Class {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSuperClass(classes.Class newSuperClass) {
 		classes.Class oldSuperClass = superClass;
 		superClass = newSuperClass;

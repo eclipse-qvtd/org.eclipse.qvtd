@@ -91,6 +91,7 @@ public class SourceFactoryImpl extends EFactoryImpl implements SourceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public X createX() {
 		XImpl x = new XImpl();
 		return x;
@@ -101,6 +102,7 @@ public class SourceFactoryImpl extends EFactoryImpl implements SourceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Y1 createY1() {
 		Y1Impl y1 = new Y1Impl();
 		return y1;
@@ -111,6 +113,7 @@ public class SourceFactoryImpl extends EFactoryImpl implements SourceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Y2 createY2() {
 		Y2Impl y2 = new Y2Impl();
 		return y2;
@@ -121,6 +124,7 @@ public class SourceFactoryImpl extends EFactoryImpl implements SourceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Z createZ() {
 		ZImpl z = new ZImpl();
 		return z;
@@ -131,6 +135,7 @@ public class SourceFactoryImpl extends EFactoryImpl implements SourceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SRoot createSRoot() {
 		SRootImpl sRoot = new SRootImpl();
 		return sRoot;
@@ -141,6 +146,7 @@ public class SourceFactoryImpl extends EFactoryImpl implements SourceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SElement createSElement() {
 		SElementImpl sElement = new SElementImpl();
 		return sElement;
@@ -151,6 +157,7 @@ public class SourceFactoryImpl extends EFactoryImpl implements SourceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathNameCS createPathNameCS() {
 		PathNameCSImpl pathNameCS = new PathNameCSImpl();
 		return pathNameCS;
@@ -161,6 +168,7 @@ public class SourceFactoryImpl extends EFactoryImpl implements SourceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathElementCS createPathElementCS() {
 		PathElementCSImpl pathElementCS = new PathElementCSImpl();
 		return pathElementCS;
@@ -171,6 +179,7 @@ public class SourceFactoryImpl extends EFactoryImpl implements SourceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SourcePackage getSourcePackage() {
 		return (SourcePackage)getEPackage();
 	}

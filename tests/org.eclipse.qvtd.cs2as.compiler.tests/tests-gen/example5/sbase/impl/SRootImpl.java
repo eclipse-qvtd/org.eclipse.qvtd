@@ -76,6 +76,7 @@ public class SRootImpl extends SElementImpl implements SRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<X> getOwnedX() {
 		if (ownedX == null) {
 			ownedX = new EObjectContainmentEList<X>(X.class, this, SbasePackage.SROOT__OWNED_X);

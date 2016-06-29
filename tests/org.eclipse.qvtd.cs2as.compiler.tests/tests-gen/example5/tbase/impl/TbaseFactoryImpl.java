@@ -81,6 +81,7 @@ public class TbaseFactoryImpl extends EFactoryImpl implements TbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public A createA() {
 		AImpl a = new AImpl();
 		return a;
@@ -91,6 +92,7 @@ public class TbaseFactoryImpl extends EFactoryImpl implements TbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public B createB() {
 		BImpl b = new BImpl();
 		return b;
@@ -101,6 +103,7 @@ public class TbaseFactoryImpl extends EFactoryImpl implements TbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public C createC() {
 		CImpl c = new CImpl();
 		return c;
@@ -111,6 +114,7 @@ public class TbaseFactoryImpl extends EFactoryImpl implements TbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TRoot createTRoot() {
 		TRootImpl tRoot = new TRootImpl();
 		return tRoot;
@@ -121,6 +125,7 @@ public class TbaseFactoryImpl extends EFactoryImpl implements TbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NamedElement createNamedElement() {
 		NamedElementImpl namedElement = new NamedElementImpl();
 		return namedElement;
@@ -131,6 +136,7 @@ public class TbaseFactoryImpl extends EFactoryImpl implements TbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TbasePackage getTbasePackage() {
 		return (TbasePackage)getEPackage();
 	}

@@ -99,6 +99,7 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getParams() {
 		if (params == null) {
 			params = new EDataTypeUniqueEList<String>(String.class, this, ClassescsPackage.OPERATION_CS__PARAMS);
@@ -111,6 +112,7 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<NameExpCS> getBodyExps() {
 		if (bodyExps == null) {
 			bodyExps = new EObjectContainmentEList<NameExpCS>(NameExpCS.class, this, ClassescsPackage.OPERATION_CS__BODY_EXPS);
@@ -123,6 +125,7 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathNameCS getResultRef() {
 		return resultRef;
 	}
@@ -147,6 +150,7 @@ public class OperationCSImpl extends NamedElementCSImpl implements OperationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResultRef(PathNameCS newResultRef) {
 		if (newResultRef != resultRef) {
 			NotificationChain msgs = null;

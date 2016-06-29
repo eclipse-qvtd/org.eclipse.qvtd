@@ -133,6 +133,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getX() {
 		return xEClass;
 	}
@@ -142,6 +143,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getX_OwnsY() {
 		return (EReference)xEClass.getEStructuralFeatures().get(0);
 	}
@@ -151,6 +153,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getX_Name() {
 		return (EAttribute)xEClass.getEStructuralFeatures().get(1);
 	}
@@ -160,6 +163,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getY() {
 		return yEClass;
 	}
@@ -169,6 +173,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getY_OwnsZ() {
 		return (EReference)yEClass.getEStructuralFeatures().get(0);
 	}
@@ -178,6 +183,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getY_Name() {
 		return (EAttribute)yEClass.getEStructuralFeatures().get(1);
 	}
@@ -187,6 +193,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getY_ToX() {
 		return (EReference)yEClass.getEStructuralFeatures().get(2);
 	}
@@ -196,6 +203,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getZ() {
 		return zEClass;
 	}
@@ -205,6 +213,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getZ_ToY() {
 		return (EReference)zEClass.getEStructuralFeatures().get(0);
 	}
@@ -214,6 +223,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSRoot() {
 		return sRootEClass;
 	}
@@ -223,6 +233,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSRoot_OwnedX() {
 		return (EReference)sRootEClass.getEStructuralFeatures().get(0);
 	}
@@ -232,6 +243,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSElement() {
 		return sElementEClass;
 	}
@@ -241,6 +253,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSElement_Ast() {
 		return (EReference)sElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -250,6 +263,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SbaseFactory getSbaseFactory() {
 		return (SbaseFactory)getEFactoryInstance();
 	}

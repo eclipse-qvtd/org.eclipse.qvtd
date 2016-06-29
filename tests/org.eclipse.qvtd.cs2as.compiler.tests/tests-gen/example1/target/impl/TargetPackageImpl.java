@@ -183,6 +183,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getA() {
 		return aEClass;
 	}
@@ -192,6 +193,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getA1() {
 		return a1EClass;
 	}
@@ -201,6 +203,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getA1_OwnsB() {
 		return (EReference)a1EClass.getEStructuralFeatures().get(0);
 	}
@@ -210,6 +213,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getA2() {
 		return a2EClass;
 	}
@@ -219,6 +223,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getA2_OwnsC() {
 		return (EReference)a2EClass.getEStructuralFeatures().get(0);
 	}
@@ -228,6 +233,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getA3() {
 		return a3EClass;
 	}
@@ -237,6 +243,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getB() {
 		return bEClass;
 	}
@@ -246,6 +253,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getB_ToA1() {
 		return (EReference)bEClass.getEStructuralFeatures().get(0);
 	}
@@ -255,6 +263,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getB_OwnsD() {
 		return (EReference)bEClass.getEStructuralFeatures().get(1);
 	}
@@ -264,6 +273,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getC() {
 		return cEClass;
 	}
@@ -273,6 +283,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getC_ToA2() {
 		return (EReference)cEClass.getEStructuralFeatures().get(0);
 	}
@@ -282,6 +293,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getC_OwnsD() {
 		return (EReference)cEClass.getEStructuralFeatures().get(1);
 	}
@@ -291,6 +303,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getD() {
 		return dEClass;
 	}
@@ -300,6 +313,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getD_ToC() {
 		return (EReference)dEClass.getEStructuralFeatures().get(0);
 	}
@@ -309,6 +323,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getD_ToB() {
 		return (EReference)dEClass.getEStructuralFeatures().get(1);
 	}
@@ -318,6 +333,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getD_ToA() {
 		return (EReference)dEClass.getEStructuralFeatures().get(2);
 	}
@@ -327,6 +343,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getD_RefsB() {
 		return (EReference)dEClass.getEStructuralFeatures().get(3);
 	}
@@ -336,6 +353,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getD_RefsC() {
 		return (EReference)dEClass.getEStructuralFeatures().get(4);
 	}
@@ -345,6 +363,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTRoot() {
 		return tRootEClass;
 	}
@@ -354,6 +373,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTRoot_OwnedA() {
 		return (EReference)tRootEClass.getEStructuralFeatures().get(0);
 	}
@@ -363,6 +383,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNamedElement() {
 		return namedElementEClass;
 	}
@@ -372,6 +393,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNamedElement_Name() {
 		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -381,6 +403,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNamespace() {
 		return namespaceEClass;
 	}
@@ -390,6 +413,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getVisitable() {
 		return visitableEClass;
 	}
@@ -399,6 +423,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TargetFactory getTargetFactory() {
 		return (TargetFactory)getEFactoryInstance();
 	}

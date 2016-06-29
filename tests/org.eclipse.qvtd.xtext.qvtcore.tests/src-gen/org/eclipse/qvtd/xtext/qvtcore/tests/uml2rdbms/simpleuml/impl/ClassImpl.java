@@ -119,6 +119,7 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentWithInverseEList<Attribute>(Attribute.class, this, SimpleumlPackage.CLASS__ATTRIBUTES, SimpleumlPackage.ATTRIBUTE__OWNER);
@@ -131,6 +132,7 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Association> getForward() {
 		if (forward == null) {
 			forward = new EObjectWithInverseResolvingEList<Association>(Association.class, this, SimpleumlPackage.CLASS__FORWARD, SimpleumlPackage.ASSOCIATION__SOURCE);
@@ -143,6 +145,7 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class> getGeneral() {
 		if (general == null) {
 			general = new EObjectWithInverseResolvingEList.ManyInverse<org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class>(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, this, SimpleumlPackage.CLASS__GENERAL, SimpleumlPackage.CLASS__GENERAL_OPPOSITE);
@@ -155,6 +158,7 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class> getGeneralOpposite() {
 		if (generalOpposite == null) {
 			generalOpposite = new EObjectWithInverseResolvingEList.ManyInverse<org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class>(org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Class.class, this, SimpleumlPackage.CLASS__GENERAL_OPPOSITE, SimpleumlPackage.CLASS__GENERAL);
@@ -167,6 +171,7 @@ public class ClassImpl extends ClassifierImpl implements org.eclipse.qvtd.xtext.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Association> getReverse() {
 		if (reverse == null) {
 			reverse = new EObjectWithInverseResolvingEList<Association>(Association.class, this, SimpleumlPackage.CLASS__REVERSE, SimpleumlPackage.ASSOCIATION__DESTINATION);

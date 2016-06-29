@@ -20,6 +20,7 @@ import org.eclipse.debug.ui.ILaunchConfigurationTab;
 
 public class QVTiLaunchConfigurationTabGroup extends LaunchConfigurationTabGroup
 {
+	@Override
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
 		List<ILaunchConfigurationTab> tabList = new ArrayList<ILaunchConfigurationTab>();
 		tabList.add(new QVTiMainTab());

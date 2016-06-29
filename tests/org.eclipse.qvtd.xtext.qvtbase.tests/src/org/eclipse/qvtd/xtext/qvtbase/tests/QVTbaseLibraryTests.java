@@ -89,7 +89,7 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		assertNoResourceErrors("Load failed", asResource);
 		assertNoUnresolvedProxies("File Model", asResource);
 		assertNoValidationErrors("File Model", asResource);
-//		PivotAliasCreator.refreshPackageAliases(javaResource);
+		//		PivotAliasCreator.refreshPackageAliases(javaResource);
 		assertNoResourceErrors("Java Model", javaResource);
 		assertNoUnresolvedProxies("Java Model", javaResource);
 		assertNoValidationErrors("Java Model", javaResource);
@@ -100,14 +100,14 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		//	Check similar content
 		//
 		Map<String,Element> fileMoniker2asMap = computeMoniker2ASMap(Collections.singletonList(asResource));
-//		for (String moniker : fileMoniker2asMap.keySet()) {
-//			System.out.println("File : " + moniker);
-//		}
+		//		for (String moniker : fileMoniker2asMap.keySet()) {
+		//			System.out.println("File : " + moniker);
+		//		}
 		Map<String,Element> javaMoniker2asMap = computeMoniker2ASMap(Collections.singletonList(javaResource));
-//		for (String moniker : javaMoniker2asMap.keySet()) {
-//			System.out.println("Java : " + moniker);
-//		}
-//		assertEquals(fileMoniker2asMap.size(), javaMoniker2asMap.size());
+		//		for (String moniker : javaMoniker2asMap.keySet()) {
+		//			System.out.println("Java : " + moniker);
+		//		}
+		//		assertEquals(fileMoniker2asMap.size(), javaMoniker2asMap.size());
 		for (String moniker : fileMoniker2asMap.keySet()) {
 			Element fileElement = fileMoniker2asMap.get(moniker);
 			Element javaElement = javaMoniker2asMap.get(moniker);
@@ -124,7 +124,9 @@ public class QVTbaseLibraryTests extends XtextTestCase
 				}
 			}
 			assertNotNull("Missing java element for '" + moniker + "'", javaElement);
-//			@SuppressWarnings("null")	// Can be null and we'll have an NPE as the test failure.
+			assert fileElement != null;
+			assert javaElement != null;
+			//			@SuppressWarnings("null")	// Can be null and we'll have an NPE as the test failure.
 			Class<? extends Element> javaElementClass = javaElement.getClass();
 			assertEquals(fileElement.getClass(), javaElementClass);
 			if (fileElement instanceof TypedElement) {
@@ -180,11 +182,11 @@ public class QVTbaseLibraryTests extends XtextTestCase
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
-	
+
 	/**
 	 * Checks that the local QVTbase-1.3.oclstdlib is the same as the pre-compiled
 	 * Java implementation.
-	 * 
+	 *
 	 * FIXME check the library/model version instead.
 	 */
 	public void testQVTbaseLibrary() throws Exception {
@@ -200,6 +202,7 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		ocl.getEnvironmentFactory().adapt(xtextResource);
 		xtextResource.load(null);
 		CS2AS cs2as = xtextResource.findCS2AS();
+		assert cs2as != null;
 		assertNoResourceErrors("Load failed", xtextResource);
 		Resource fileResource = cs2as.getASResource();
 		assertNoResourceErrors("File Model", fileResource);
@@ -209,7 +212,7 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		//	Load 'QVTbaseLibrary.oclstdlib' as pre-code-generated Java.
 		//
 		Resource javaResource = QVTbaseLibrary.getDefault();
-//		PivotAliasCreator.refreshPackageAliases(javaResource);
+		//		PivotAliasCreator.refreshPackageAliases(javaResource);
 		assertNoResourceErrors("Java Model", javaResource);
 		assertNoUnresolvedProxies("Java Model", javaResource);
 		assertNoValidationErrors("Java Model", javaResource);
@@ -217,14 +220,14 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		//	Check similar content
 		//
 		Map<String,Element> fileMoniker2asMap = computeMoniker2ASMap(Collections.singletonList(fileResource));
-//		for (String moniker : fileMoniker2asMap.keySet()) {
-//			System.out.println("File : " + moniker);
-//		}
+		//		for (String moniker : fileMoniker2asMap.keySet()) {
+		//			System.out.println("File : " + moniker);
+		//		}
 		Map<String,Element> javaMoniker2asMap = computeMoniker2ASMap(Collections.singletonList(javaResource));
-//		for (String moniker : javaMoniker2asMap.keySet()) {
-//			System.out.println("Java : " + moniker);
-//		}
-//		assertEquals(fileMoniker2asMap.size(), javaMoniker2asMap.size());
+		//		for (String moniker : javaMoniker2asMap.keySet()) {
+		//			System.out.println("Java : " + moniker);
+		//		}
+		//		assertEquals(fileMoniker2asMap.size(), javaMoniker2asMap.size());
 		for (String moniker : fileMoniker2asMap.keySet()) {
 			Element fileElement = fileMoniker2asMap.get(moniker);
 			Element javaElement = javaMoniker2asMap.get(moniker);
@@ -241,7 +244,9 @@ public class QVTbaseLibraryTests extends XtextTestCase
 				}
 			}
 			assertNotNull("Missing java element for '" + moniker + "'", javaElement);
-//			@SuppressWarnings("null")	// Can be null and we'll have an NPE as the test failure.
+			assert fileElement != null;
+			assert javaElement != null;
+			//			@SuppressWarnings("null")	// Can be null and we'll have an NPE as the test failure.
 			Class<? extends Element> javaElementClass = javaElement.getClass();
 			assertEquals(fileElement.getClass(), javaElementClass);
 			if (fileElement instanceof TypedElement) {
@@ -286,7 +291,7 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		}
 		ocl.dispose();
 	}
-	
+
 	/**
 	 * Checks that the QVTbase-1.3 AS model is the same as the pre-compiled
 	 * Java implementation.
@@ -304,7 +309,7 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		@SuppressWarnings("unused")Resource asResource = doLoadAS(ocl.getMetamodelManager().getASResourceSet(), libraryURI, javaResource, false);		// FIXME Contents are far from identical
 		ocl.dispose();
 	}
-	
+
 	/**
 	 * Checks that the QVTbase AS model is the same as the pre-compiled Java implementation.
 	 */

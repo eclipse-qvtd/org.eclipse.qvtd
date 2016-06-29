@@ -76,6 +76,7 @@ public interface Schedule extends ScheduleElement {
 	 * @generated
 	 */
 	// Generated from org.eclipse.ocl.examples.build/templates/model/Class/insert.javajetinc
+	@Override
 	public <R> R accept(@NonNull ScheduleVisitor<R> visitor);
 
 } // Schedule

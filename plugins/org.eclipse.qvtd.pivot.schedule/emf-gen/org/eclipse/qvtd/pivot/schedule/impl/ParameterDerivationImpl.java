@@ -86,6 +86,7 @@ public class ParameterDerivationImpl extends ScheduleElementImpl implements Para
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AbstractAction getTarget() {
 		if (eContainerFeatureID() != SchedulePackage.PARAMETER_DERIVATION__TARGET) return null;
 		return (AbstractAction)eInternalContainer();
@@ -106,6 +107,7 @@ public class ParameterDerivationImpl extends ScheduleElementImpl implements Para
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTarget(AbstractAction newTarget) {
 		if (newTarget != eInternalContainer() || (eContainerFeatureID() != SchedulePackage.PARAMETER_DERIVATION__TARGET && newTarget != null)) {
 			if (EcoreUtil.isAncestor(this, newTarget))
@@ -127,6 +129,7 @@ public class ParameterDerivationImpl extends ScheduleElementImpl implements Para
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DataParameter getPrimaryParameter() {
 		if (primaryParameter != null && primaryParameter.eIsProxy()) {
 			InternalEObject oldPrimaryParameter = (InternalEObject)primaryParameter;
@@ -153,6 +156,7 @@ public class ParameterDerivationImpl extends ScheduleElementImpl implements Para
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryParameter(DataParameter newPrimaryParameter) {
 		DataParameter oldPrimaryParameter = primaryParameter;
 		primaryParameter = newPrimaryParameter;
@@ -165,6 +169,7 @@ public class ParameterDerivationImpl extends ScheduleElementImpl implements Para
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SecondaryParameter getSecondaryParameter() {
 		return secondaryParameter;
 	}
@@ -189,6 +194,7 @@ public class ParameterDerivationImpl extends ScheduleElementImpl implements Para
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSecondaryParameter(SecondaryParameter newSecondaryParameter) {
 		if (newSecondaryParameter != secondaryParameter) {
 			NotificationChain msgs = null;

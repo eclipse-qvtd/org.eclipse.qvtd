@@ -118,6 +118,7 @@ public abstract class AbstractExampleWizard extends Wizard
 		
 		try {
 			getContainer().run(true, false, new IRunnableWithProgress() {
+				@Override
 				public void run(IProgressMonitor monitor)
 					throws InvocationTargetException, InterruptedException {
 					
@@ -268,6 +269,7 @@ public abstract class AbstractExampleWizard extends Wizard
 		}
 	}
 
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		// No code is necessary.
 	}

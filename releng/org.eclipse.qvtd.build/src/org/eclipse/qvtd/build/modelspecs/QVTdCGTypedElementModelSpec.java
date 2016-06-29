@@ -26,7 +26,8 @@ public class QVTdCGTypedElementModelSpec extends CGTypedElementModelSpec
 	/**
 	 * The algorithm options for getASTypeId()
 	 */
-	public static final @NonNull Ati ATI_BOOL = new Ati() { public @NonNull String generate() {
+	public static final @NonNull Ati ATI_BOOL = new Ati() { @Override
+	public @NonNull String generate() {
 		return "return " + classRef(TypeId.class) + ".BOOLEAN;";
 	}};
 

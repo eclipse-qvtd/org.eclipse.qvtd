@@ -138,6 +138,7 @@ public class XImpl extends SElementImpl implements X {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Y> getOwnsY() {
 		if (ownsY == null) {
 			ownsY = new EObjectContainmentWithInverseEList<Y>(Y.class, this, SourcePackage.X__OWNS_Y, SourcePackage.Y__TO_X);
@@ -150,6 +151,7 @@ public class XImpl extends SElementImpl implements X {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsA1() {
 		return isA1;
 	}
@@ -159,6 +161,7 @@ public class XImpl extends SElementImpl implements X {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsA1(boolean newIsA1) {
 		boolean oldIsA1 = isA1;
 		isA1 = newIsA1;
@@ -171,6 +174,7 @@ public class XImpl extends SElementImpl implements X {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsA2() {
 		return isA2;
 	}
@@ -180,6 +184,7 @@ public class XImpl extends SElementImpl implements X {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsA2(boolean newIsA2) {
 		boolean oldIsA2 = isA2;
 		isA2 = newIsA2;
@@ -192,6 +197,7 @@ public class XImpl extends SElementImpl implements X {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -201,6 +207,7 @@ public class XImpl extends SElementImpl implements X {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;

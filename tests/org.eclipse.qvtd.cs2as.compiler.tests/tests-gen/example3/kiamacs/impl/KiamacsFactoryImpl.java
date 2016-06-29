@@ -79,6 +79,7 @@ public class KiamacsFactoryImpl extends EFactoryImpl implements KiamacsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TopCS createTopCS() {
 		TopCSImpl topCS = new TopCSImpl();
 		return topCS;
@@ -89,6 +90,7 @@ public class KiamacsFactoryImpl extends EFactoryImpl implements KiamacsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PlusCS createPlusCS() {
 		PlusCSImpl plusCS = new PlusCSImpl();
 		return plusCS;
@@ -99,6 +101,7 @@ public class KiamacsFactoryImpl extends EFactoryImpl implements KiamacsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NumCS createNumCS() {
 		NumCSImpl numCS = new NumCSImpl();
 		return numCS;
@@ -109,6 +112,7 @@ public class KiamacsFactoryImpl extends EFactoryImpl implements KiamacsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public KiamacsPackage getKiamacsPackage() {
 		return (KiamacsPackage)getEPackage();
 	}

@@ -73,6 +73,7 @@ public class RootImpl extends ElementImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<example2.classes.Package> getOwnedPackages() {
 		if (ownedPackages == null) {
 			ownedPackages = new EObjectContainmentEList<example2.classes.Package>(example2.classes.Package.class, this, ClassesPackage.ROOT__OWNED_PACKAGES);

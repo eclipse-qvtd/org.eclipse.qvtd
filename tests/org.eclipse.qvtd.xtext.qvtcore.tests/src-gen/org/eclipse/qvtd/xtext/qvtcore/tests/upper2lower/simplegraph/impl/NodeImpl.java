@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -109,6 +109,7 @@ public class NodeImpl extends ElementImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Edge> getIncoming() {
 		if (incoming == null) {
 			incoming = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, SimplegraphPackage.NODE__INCOMING, SimplegraphPackage.EDGE__TARGET);
@@ -121,6 +122,7 @@ public class NodeImpl extends ElementImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Edge> getOutgoing() {
 		if (outgoing == null) {
 			outgoing = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, SimplegraphPackage.NODE__OUTGOING, SimplegraphPackage.EDGE__SOURCE);
@@ -133,6 +135,7 @@ public class NodeImpl extends ElementImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLabel() {
 		return label;
 	}
@@ -142,6 +145,7 @@ public class NodeImpl extends ElementImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLabel(String newLabel) {
 		String oldLabel = label;
 		label = newLabel;

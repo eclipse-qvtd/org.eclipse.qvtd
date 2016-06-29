@@ -129,6 +129,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLookupEnvironment() {
 		return lookupEnvironmentEClass;
 	}
@@ -138,6 +139,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLookupEnvironment_NamedElements() {
 		return (EReference)lookupEnvironmentEClass.getEStructuralFeatures().get(0);
 	}
@@ -147,6 +149,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLookupEnvironment_ParentEnv() {
 		return (EReference)lookupEnvironmentEClass.getEStructuralFeatures().get(1);
 	}
@@ -156,6 +159,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getLookupEnvironment__AddElements__Collection() {
 		return lookupEnvironmentEClass.getEOperations().get(0);
 	}
@@ -165,6 +169,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getLookupEnvironment__AddElement__NamedElement() {
 		return lookupEnvironmentEClass.getEOperations().get(1);
 	}
@@ -174,6 +179,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEnv4CG() {
 		return env4CGEClass;
 	}
@@ -183,6 +189,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEnv4CG__HasFinalResult() {
 		return env4CGEClass.getEOperations().get(0);
 	}
@@ -192,6 +199,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEnv4CG__GetExecutor() {
 		return env4CGEClass.getEOperations().get(1);
 	}
@@ -201,6 +209,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExecutor() {
 		return executorEClass;
 	}
@@ -210,6 +219,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EnvironmentFactory getEnvironmentFactory() {
 		return (EnvironmentFactory)getEFactoryInstance();
 	}

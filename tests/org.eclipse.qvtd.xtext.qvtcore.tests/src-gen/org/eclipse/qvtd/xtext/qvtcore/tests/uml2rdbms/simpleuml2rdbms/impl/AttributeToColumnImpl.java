@@ -83,6 +83,7 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Column getColumn() {
 		if (column != null && column.eIsProxy()) {
 			InternalEObject oldColumn = (InternalEObject)column;
@@ -109,6 +110,7 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setColumn(Column newColumn) {
 		Column oldColumn = column;
 		column = newColumn;
@@ -121,6 +123,7 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrimitiveToName getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -147,6 +150,7 @@ public class AttributeToColumnImpl extends FromAttributeImpl implements Attribut
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(PrimitiveToName newType) {
 		PrimitiveToName oldType = type;
 		type = newType;

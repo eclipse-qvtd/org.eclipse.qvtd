@@ -128,6 +128,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Member getMember() {
 		if (member != null && member.eIsProxy()) {
 			InternalEObject oldMember = (InternalEObject)member;
@@ -154,6 +155,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMember(Member newMember) {
 		Member oldMember = member;
 		member = newMember;
@@ -166,6 +168,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Person getPerson() {
 		if (person != null && person.eIsProxy()) {
 			InternalEObject oldPerson = (InternalEObject)person;
@@ -192,6 +195,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPerson(Person newPerson) {
 		Person oldPerson = person;
 		person = newPerson;
@@ -204,6 +208,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFirstName() {
 		return firstName;
 	}
@@ -213,6 +218,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFirstName(String newFirstName) {
 		String oldFirstName = firstName;
 		firstName = newFirstName;
@@ -225,6 +231,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFamilyName() {
 		return familyName;
 	}
@@ -234,6 +241,7 @@ public abstract class MemberToPersonImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFamilyName(String newFamilyName) {
 		String oldFamilyName = familyName;
 		familyName = newFamilyName;

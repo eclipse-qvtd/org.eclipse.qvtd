@@ -79,6 +79,7 @@ public abstract class NamedElementImpl extends ElementImpl implements NamedEleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -88,6 +89,7 @@ public abstract class NamedElementImpl extends ElementImpl implements NamedEleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;

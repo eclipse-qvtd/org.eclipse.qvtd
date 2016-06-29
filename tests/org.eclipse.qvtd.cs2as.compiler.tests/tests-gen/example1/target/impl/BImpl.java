@@ -74,6 +74,7 @@ public class BImpl extends NamespaceImpl implements B {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public A1 getToA1() {
 		if (eContainerFeatureID() != TargetPackage.B__TO_A1) return null;
 		return (A1)eInternalContainer();
@@ -94,6 +95,7 @@ public class BImpl extends NamespaceImpl implements B {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setToA1(A1 newToA1) {
 		if (newToA1 != eInternalContainer() || (eContainerFeatureID() != TargetPackage.B__TO_A1 && newToA1 != null)) {
 			if (EcoreUtil.isAncestor(this, newToA1))
@@ -115,6 +117,7 @@ public class BImpl extends NamespaceImpl implements B {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public D getOwnsD() {
 		return ownsD;
 	}
@@ -139,6 +142,7 @@ public class BImpl extends NamespaceImpl implements B {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnsD(D newOwnsD) {
 		if (newOwnsD != ownsD) {
 			NotificationChain msgs = null;

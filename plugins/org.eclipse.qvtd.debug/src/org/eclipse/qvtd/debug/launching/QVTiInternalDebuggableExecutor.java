@@ -35,6 +35,7 @@ public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor
 		this.evaluationContext = evaluationContext;
 	}
 
+	@Override
 	protected @NonNull QVTiVMExecutor createVMExecutor() throws IOException {
 		QVTiVMExecutor vmExecutor = new QVTiVMExecutor(vmContext, evaluationContext.getTransformationURI());
 		for (Map.Entry<String, URI> inEntry : evaluationContext.getInputURIs().entrySet()) {

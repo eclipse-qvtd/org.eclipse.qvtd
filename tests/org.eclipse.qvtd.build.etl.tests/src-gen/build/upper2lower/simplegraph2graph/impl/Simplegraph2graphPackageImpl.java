@@ -137,6 +137,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGraph2Graph() {
 		return graph2GraphEClass;
 	}
@@ -146,6 +147,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraph2Graph_Graph1() {
 		return (EReference)graph2GraphEClass.getEStructuralFeatures().get(0);
 	}
@@ -155,6 +157,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraph2Graph_Graph2() {
 		return (EReference)graph2GraphEClass.getEStructuralFeatures().get(1);
 	}
@@ -164,6 +167,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraph2Graph_Element2Element() {
 		return (EReference)graph2GraphEClass.getEStructuralFeatures().get(2);
 	}
@@ -173,6 +177,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getGraph2Graph_Name() {
 		return (EAttribute)graph2GraphEClass.getEStructuralFeatures().get(3);
 	}
@@ -182,6 +187,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getElement2Element() {
 		return element2ElementEClass;
 	}
@@ -191,6 +197,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getElement2Element_Owner() {
 		return (EReference)element2ElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -200,6 +207,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEdge2Edge() {
 		return edge2EdgeEClass;
 	}
@@ -209,6 +217,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEdge2Edge_Edge1() {
 		return (EReference)edge2EdgeEClass.getEStructuralFeatures().get(0);
 	}
@@ -218,6 +227,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEdge2Edge_Edge2() {
 		return (EReference)edge2EdgeEClass.getEStructuralFeatures().get(1);
 	}
@@ -227,6 +237,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEdge2Edge_Target() {
 		return (EReference)edge2EdgeEClass.getEStructuralFeatures().get(2);
 	}
@@ -236,6 +247,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEdge2Edge_Source() {
 		return (EReference)edge2EdgeEClass.getEStructuralFeatures().get(3);
 	}
@@ -245,6 +257,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNode2Node() {
 		return node2NodeEClass;
 	}
@@ -254,6 +267,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode2Node_Node1() {
 		return (EReference)node2NodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -263,6 +277,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode2Node_Node2() {
 		return (EReference)node2NodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -272,6 +287,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNode2Node_Label() {
 		return (EAttribute)node2NodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -281,6 +297,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Simplegraph2graphFactory getSimplegraph2graphFactory() {
 		return (Simplegraph2graphFactory)getEFactoryInstance();
 	}

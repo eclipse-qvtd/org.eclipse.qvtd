@@ -136,6 +136,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTopCS() {
 		return topCSEClass;
 	}
@@ -145,6 +146,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTopCS_Node() {
 		return (EReference)topCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -154,6 +156,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNodeCS() {
 		return nodeCSEClass;
 	}
@@ -163,6 +166,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPlusCS() {
 		return plusCSEClass;
 	}
@@ -172,6 +176,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPlusCS_Left() {
 		return (EReference)plusCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -181,6 +186,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPlusCS_Right() {
 		return (EReference)plusCSEClass.getEStructuralFeatures().get(1);
 	}
@@ -190,6 +196,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNumCS() {
 		return numCSEClass;
 	}
@@ -199,6 +206,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNumCS_Value() {
 		return (EAttribute)numCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -208,6 +216,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBaseCS() {
 		return baseCSEClass;
 	}
@@ -217,6 +226,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getBaseCS_Ast() {
 		return (EReference)baseCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -226,6 +236,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public KiamacsFactory getKiamacsFactory() {
 		return (KiamacsFactory)getEFactoryInstance();
 	}

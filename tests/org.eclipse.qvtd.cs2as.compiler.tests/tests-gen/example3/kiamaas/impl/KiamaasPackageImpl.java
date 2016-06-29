@@ -128,6 +128,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTop() {
 		return topEClass;
 	}
@@ -137,6 +138,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTop_Node() {
 		return (EReference)topEClass.getEStructuralFeatures().get(0);
 	}
@@ -146,6 +148,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNode() {
 		return nodeEClass;
 	}
@@ -155,6 +158,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNode_Height() {
 		return (EAttribute)nodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -164,6 +168,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNode_Depth() {
 		return (EAttribute)nodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -173,6 +178,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPlus() {
 		return plusEClass;
 	}
@@ -182,6 +188,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPlus_Left() {
 		return (EReference)plusEClass.getEStructuralFeatures().get(0);
 	}
@@ -191,6 +198,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPlus_Right() {
 		return (EReference)plusEClass.getEStructuralFeatures().get(1);
 	}
@@ -200,6 +208,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNum() {
 		return numEClass;
 	}
@@ -209,6 +218,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNum_Value() {
 		return (EAttribute)numEClass.getEStructuralFeatures().get(0);
 	}
@@ -218,6 +228,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public KiamaasFactory getKiamaasFactory() {
 		return (KiamaasFactory)getEFactoryInstance();
 	}

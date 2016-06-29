@@ -104,6 +104,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Edge getEdge1() {
 		if (edge1 != null && edge1.eIsProxy()) {
 			InternalEObject oldEdge1 = (InternalEObject)edge1;
@@ -130,6 +131,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEdge1(Edge newEdge1) {
 		Edge oldEdge1 = edge1;
 		edge1 = newEdge1;
@@ -142,6 +144,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Edge getEdge2() {
 		if (edge2 != null && edge2.eIsProxy()) {
 			InternalEObject oldEdge2 = (InternalEObject)edge2;
@@ -168,6 +171,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEdge2(Edge newEdge2) {
 		Edge oldEdge2 = edge2;
 		edge2 = newEdge2;
@@ -180,6 +184,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node2Node getTarget() {
 		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject)target;
@@ -206,6 +211,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTarget(Node2Node newTarget) {
 		Node2Node oldTarget = target;
 		target = newTarget;
@@ -218,6 +224,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node2Node getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
@@ -244,6 +251,7 @@ public class Edge2EdgeImpl extends Element2ElementImpl implements Edge2Edge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSource(Node2Node newSource) {
 		Node2Node oldSource = source;
 		source = newSource;

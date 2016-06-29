@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -121,6 +121,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -130,6 +131,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -142,6 +144,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Association getAssociation() {
 		if (association != null && association.eIsProxy()) {
 			InternalEObject oldAssociation = (InternalEObject)association;
@@ -168,6 +171,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAssociation(Association newAssociation) {
 		Association oldAssociation = association;
 		association = newAssociation;
@@ -180,6 +184,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ForeignKey getForeignKey() {
 		if (foreignKey != null && foreignKey.eIsProxy()) {
 			InternalEObject oldForeignKey = (InternalEObject)foreignKey;
@@ -206,6 +211,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setForeignKey(ForeignKey newForeignKey) {
 		ForeignKey oldForeignKey = foreignKey;
 		foreignKey = newForeignKey;
@@ -218,6 +224,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassToTable getOwner() {
 		if (eContainerFeatureID() != Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER) return null;
 		return (ClassToTable)eInternalContainer();
@@ -238,6 +245,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(ClassToTable newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
@@ -259,6 +267,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassToTable getReferenced() {
 		if (referenced != null && referenced.eIsProxy()) {
 			InternalEObject oldReferenced = (InternalEObject)referenced;
@@ -285,6 +294,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferenced(ClassToTable newReferenced) {
 		ClassToTable oldReferenced = referenced;
 		referenced = newReferenced;

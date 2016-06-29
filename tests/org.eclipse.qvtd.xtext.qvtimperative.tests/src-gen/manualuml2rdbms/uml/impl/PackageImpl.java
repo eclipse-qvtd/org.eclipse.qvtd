@@ -75,6 +75,7 @@ public class PackageImpl extends UMLModelElementImpl implements manualuml2rdbms.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PackageElement> getElements() {
 		if (elements == null) {
 			elements = new EObjectContainmentWithInverseEList<PackageElement>(PackageElement.class, this, UMLPackage.PACKAGE__ELEMENTS, UMLPackage.PACKAGE_ELEMENT__NAMESPACE);

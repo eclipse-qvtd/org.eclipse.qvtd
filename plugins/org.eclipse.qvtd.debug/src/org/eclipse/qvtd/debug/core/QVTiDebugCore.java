@@ -46,39 +46,48 @@ public class QVTiDebugCore extends VMDebugCore
 
 	private QVTiDebugCore() {}
 
+	@Override
 	public @NonNull String getBreakpointMarkerId() {
 		return BREAKPOINT_MARKER_ID;
 	}
 
+	@Override
 	public @NonNull String getDebuggerActiveProperty() {
 		return DEBUGGER_ACTIVE_PROPERTY;
 	}
     
+	@Override
 	public @NonNull List<QVTiLineBreakpoint> getLineBreakpoints() {
 		return getOCLBreakpoints(QVTiLineBreakpoint.class);
 	}
 
+	@Override
 	public @NonNull EssentialOCLLocationInFileProvider getLocationInFileProvider() {
 		return locationInFileProvider;
 	}
 
-    public @Nullable ILog getLog() {
+    @Override
+	public @Nullable ILog getLog() {
     	QVTiDebugPlugin debugPlugin = QVTiDebugPlugin.getDefault();
 		return debugPlugin != null ? debugPlugin.getLog() : null;
     } 
 	
+	@Override
 	public @NonNull String getModelId() {
 		return MODEL_ID;
 	}
 	
+	@Override
 	public @NonNull String getPluginId() {
 		return PLUGIN_ID;
 	}
 
+	@Override
 	public @NonNull Trace getTrace() {
 		return TRACE;
 	}
 	
+	@Override
 	public @NonNull String getVMThreadName() {
 		return "QVTi VM";
 	}	

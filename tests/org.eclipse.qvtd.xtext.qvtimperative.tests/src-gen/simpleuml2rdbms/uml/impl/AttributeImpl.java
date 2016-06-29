@@ -75,6 +75,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public simpleuml2rdbms.uml.Class getOwner() {
 		if (eContainerFeatureID() != UMLPackage.ATTRIBUTE__OWNER) return null;
 		return (simpleuml2rdbms.uml.Class)eInternalContainer();
@@ -95,6 +96,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(simpleuml2rdbms.uml.Class newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != UMLPackage.ATTRIBUTE__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
@@ -116,6 +118,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Classifier getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -157,6 +160,7 @@ public class AttributeImpl extends UMLModelElementImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(Classifier newType) {
 		if (newType != type) {
 			NotificationChain msgs = null;

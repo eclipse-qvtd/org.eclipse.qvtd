@@ -216,6 +216,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAttributeToColumn() {
 		return attributeToColumnEClass;
 	}
@@ -225,6 +226,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAttributeToColumn_Type() {
 		return (EReference)attributeToColumnEClass.getEStructuralFeatures().get(0);
 	}
@@ -234,6 +236,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAssociationToForeignKey() {
 		return associationToForeignKeyEClass;
 	}
@@ -243,6 +246,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssociationToForeignKey_Association() {
 		return (EReference)associationToForeignKeyEClass.getEStructuralFeatures().get(0);
 	}
@@ -252,6 +256,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssociationToForeignKey_ForeignKey() {
 		return (EReference)associationToForeignKeyEClass.getEStructuralFeatures().get(1);
 	}
@@ -261,6 +266,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssociationToForeignKey_Owner() {
 		return (EReference)associationToForeignKeyEClass.getEStructuralFeatures().get(2);
 	}
@@ -270,6 +276,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssociationToForeignKey_Referenced() {
 		return (EReference)associationToForeignKeyEClass.getEStructuralFeatures().get(3);
 	}
@@ -279,6 +286,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBooleanToBoolean() {
 		return booleanToBooleanEClass;
 	}
@@ -288,6 +296,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getClassToTable() {
 		return classToTableEClass;
 	}
@@ -297,6 +306,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassToTable_AssociationsToForeignKeys() {
 		return (EReference)classToTableEClass.getEStructuralFeatures().get(0);
 	}
@@ -306,6 +316,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassToTable_Owner() {
 		return (EReference)classToTableEClass.getEStructuralFeatures().get(1);
 	}
@@ -315,6 +326,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassToTable_PrimaryKey() {
 		return (EReference)classToTableEClass.getEStructuralFeatures().get(2);
 	}
@@ -324,6 +336,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassToTable_Table() {
 		return (EReference)classToTableEClass.getEStructuralFeatures().get(3);
 	}
@@ -333,6 +346,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassToTable_UmlClass() {
 		return (EReference)classToTableEClass.getEStructuralFeatures().get(4);
 	}
@@ -342,6 +356,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFromAttribute() {
 		return fromAttributeEClass;
 	}
@@ -351,6 +366,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFromAttribute_Kind() {
 		return (EAttribute)fromAttributeEClass.getEStructuralFeatures().get(0);
 	}
@@ -360,6 +376,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFromAttribute_Attribute() {
 		return (EReference)fromAttributeEClass.getEStructuralFeatures().get(1);
 	}
@@ -369,6 +386,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFromAttribute_Leafs() {
 		return (EReference)fromAttributeEClass.getEStructuralFeatures().get(2);
 	}
@@ -378,6 +396,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFromAttribute_Owner() {
 		return (EReference)fromAttributeEClass.getEStructuralFeatures().get(3);
 	}
@@ -387,6 +406,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFromAttributeOwner() {
 		return fromAttributeOwnerEClass;
 	}
@@ -396,6 +416,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFromAttributeOwner_FromAttributes() {
 		return (EReference)fromAttributeOwnerEClass.getEStructuralFeatures().get(0);
 	}
@@ -405,6 +426,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIntegerToNumber() {
 		return integerToNumberEClass;
 	}
@@ -414,6 +436,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNonLeafAttribute() {
 		return nonLeafAttributeEClass;
 	}
@@ -423,6 +446,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPackageToSchema() {
 		return packageToSchemaEClass;
 	}
@@ -432,6 +456,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackageToSchema_ClassesToTables() {
 		return (EReference)packageToSchemaEClass.getEStructuralFeatures().get(0);
 	}
@@ -441,6 +466,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackageToSchema_PrimitivesToNames() {
 		return (EReference)packageToSchemaEClass.getEStructuralFeatures().get(1);
 	}
@@ -450,6 +476,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackageToSchema_Schema() {
 		return (EReference)packageToSchemaEClass.getEStructuralFeatures().get(2);
 	}
@@ -459,6 +486,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackageToSchema_UmlPackage() {
 		return (EReference)packageToSchemaEClass.getEStructuralFeatures().get(3);
 	}
@@ -468,6 +496,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPrimitiveToName() {
 		return primitiveToNameEClass;
 	}
@@ -477,6 +506,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPrimitiveToName_TypeName() {
 		return (EAttribute)primitiveToNameEClass.getEStructuralFeatures().get(0);
 	}
@@ -486,6 +516,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPrimitiveToName_Owner() {
 		return (EReference)primitiveToNameEClass.getEStructuralFeatures().get(1);
 	}
@@ -495,6 +526,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPrimitiveToName_Primitive() {
 		return (EReference)primitiveToNameEClass.getEStructuralFeatures().get(2);
 	}
@@ -504,6 +536,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStringToVarchar() {
 		return stringToVarcharEClass;
 	}
@@ -513,6 +546,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getToColumn() {
 		return toColumnEClass;
 	}
@@ -522,6 +556,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getToColumn_Column() {
 		return (EReference)toColumnEClass.getEStructuralFeatures().get(0);
 	}
@@ -531,6 +566,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getUmlToRdbmsModelElement() {
 		return umlToRdbmsModelElementEClass;
 	}
@@ -540,6 +576,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUmlToRdbmsModelElement_Name() {
 		return (EAttribute)umlToRdbmsModelElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -549,6 +586,7 @@ public class UML2RDBMSPackageImpl extends EPackageImpl implements UML2RDBMSPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UML2RDBMSFactory getUML2RDBMSFactory() {
 		return (UML2RDBMSFactory)getEFactoryInstance();
 	}

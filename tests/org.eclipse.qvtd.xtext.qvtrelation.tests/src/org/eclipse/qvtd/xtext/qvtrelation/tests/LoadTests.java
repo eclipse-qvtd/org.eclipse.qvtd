@@ -36,6 +36,7 @@ public class LoadTests extends LoadTestCase
 		ocl.dispose();
 	}
 	
+	@Override
 	public void doLoad_Concrete(@NonNull String inputName) throws IOException {
 		OCL ocl = QVTbase.newInstance(getProjectMap(), null);
 //		OCL ocl = OCL.newInstance(getProjectMap());

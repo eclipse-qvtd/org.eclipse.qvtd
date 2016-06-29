@@ -72,6 +72,7 @@ public class CompositeCSImpl extends NodeCSImpl implements CompositeCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NodeCS getChild() {
 		return child;
 	}
@@ -96,6 +97,7 @@ public class CompositeCSImpl extends NodeCSImpl implements CompositeCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setChild(NodeCS newChild) {
 		if (newChild != child) {
 			NotificationChain msgs = null;

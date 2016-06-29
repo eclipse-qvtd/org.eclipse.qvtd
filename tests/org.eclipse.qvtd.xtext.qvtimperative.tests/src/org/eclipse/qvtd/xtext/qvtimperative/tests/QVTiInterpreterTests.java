@@ -80,6 +80,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 			return new MyQvtiExecutor(getEnvironmentFactory(), fileNamePrefix, transformationFileName, mode);
 		}
 
+		@Override
 		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
 		}
@@ -248,6 +249,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase#setUp()
 	 */
+	@Override
 	@Before
     public void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);

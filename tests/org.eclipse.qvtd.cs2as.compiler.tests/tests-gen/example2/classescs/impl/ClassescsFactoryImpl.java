@@ -91,6 +91,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PackageCS createPackageCS() {
 		PackageCSImpl packageCS = new PackageCSImpl();
 		return packageCS;
@@ -101,6 +102,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassCS createClassCS() {
 		ClassCSImpl classCS = new ClassCSImpl();
 		return classCS;
@@ -111,6 +113,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathNameCS createPathNameCS() {
 		PathNameCSImpl pathNameCS = new PathNameCSImpl();
 		return pathNameCS;
@@ -121,6 +124,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathElementCS createPathElementCS() {
 		PathElementCSImpl pathElementCS = new PathElementCSImpl();
 		return pathElementCS;
@@ -131,6 +135,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RootCS createRootCS() {
 		RootCSImpl rootCS = new RootCSImpl();
 		return rootCS;
@@ -141,6 +146,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PropertyCS createPropertyCS() {
 		PropertyCSImpl propertyCS = new PropertyCSImpl();
 		return propertyCS;
@@ -151,6 +157,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OperationCS createOperationCS() {
 		OperationCSImpl operationCS = new OperationCSImpl();
 		return operationCS;
@@ -161,6 +168,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NameExpCS createNameExpCS() {
 		NameExpCSImpl nameExpCS = new NameExpCSImpl();
 		return nameExpCS;
@@ -171,6 +179,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RoundedBracketClause createRoundedBracketClause() {
 		RoundedBracketClauseImpl roundedBracketClause = new RoundedBracketClauseImpl();
 		return roundedBracketClause;
@@ -181,6 +190,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ArgumentCS createArgumentCS() {
 		ArgumentCSImpl argumentCS = new ArgumentCSImpl();
 		return argumentCS;
@@ -191,6 +201,7 @@ public class ClassescsFactoryImpl extends EFactoryImpl implements ClassescsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassescsPackage getClassescsPackage() {
 		return (ClassescsPackage)getEPackage();
 	}

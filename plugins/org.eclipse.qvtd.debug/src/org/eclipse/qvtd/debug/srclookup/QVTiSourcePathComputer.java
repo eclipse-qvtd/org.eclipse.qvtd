@@ -22,10 +22,12 @@ public class QVTiSourcePathComputer extends VMSourcePathComputer {
 		
 	public static final @NonNull String ID = "org.eclipse.qvtd.debug.srclookup.QVTiSourcePathComputer";  //$NON-NLS-1$
 	
+	@Override
 	public @NonNull String getId() {
 		return ID;
 	}
 
+	@Override
 	protected URI getModuleFile(@NonNull ILaunchConfiguration configuration) throws CoreException {
 //        String moduleFileName = configuration.getAttribute(LaunchConstants.MODULE, ""); //$NON-NLS-1$
 		String projectName = configuration.getAttribute(QVTiLaunchConstants.PROJECT_KEY, (String)null);

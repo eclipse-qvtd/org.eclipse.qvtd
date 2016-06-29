@@ -82,6 +82,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public simpleuml2rdbms.uml.Class getDestination() {
 		if (destination != null && destination.eIsProxy()) {
 			InternalEObject oldDestination = (InternalEObject)destination;
@@ -123,6 +124,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDestination(simpleuml2rdbms.uml.Class newDestination) {
 		if (newDestination != destination) {
 			NotificationChain msgs = null;
@@ -142,6 +144,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public simpleuml2rdbms.uml.Class getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
@@ -183,6 +186,7 @@ public class AssociationImpl extends PackageElementImpl implements Association {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSource(simpleuml2rdbms.uml.Class newSource) {
 		if (newSource != source) {
 			NotificationChain msgs = null;

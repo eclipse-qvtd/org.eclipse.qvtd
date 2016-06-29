@@ -152,6 +152,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Column getColumn() {
 		if (column != null && column.eIsProxy()) {
 			InternalEObject oldColumn = (InternalEObject)column;
@@ -178,6 +179,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setColumn(Column newColumn) {
 		Column oldColumn = column;
 		column = newColumn;
@@ -190,6 +192,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PackageToSchema getOwner() {
 		if (eContainerFeatureID() != UML2RDBMSPackage.CLASS_TO_TABLE__OWNER) return null;
 		return (PackageToSchema)eInternalContainer();
@@ -210,6 +213,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(PackageToSchema newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != UML2RDBMSPackage.CLASS_TO_TABLE__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
@@ -231,6 +235,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AssociationToForeignKey> getAssociationsToForeignKeys() {
 		if (associationsToForeignKeys == null) {
 			associationsToForeignKeys = new EObjectContainmentWithInverseEList<AssociationToForeignKey>(AssociationToForeignKey.class, this, UML2RDBMSPackage.CLASS_TO_TABLE__ASSOCIATIONS_TO_FOREIGN_KEYS, UML2RDBMSPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER);
@@ -243,6 +248,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -252,6 +258,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -264,6 +271,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public manualuml2rdbms.uml.Class getUmlClass() {
 		if (umlClass != null && umlClass.eIsProxy()) {
 			InternalEObject oldUmlClass = (InternalEObject)umlClass;
@@ -290,6 +298,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUmlClass(manualuml2rdbms.uml.Class newUmlClass) {
 		manualuml2rdbms.uml.Class oldUmlClass = umlClass;
 		umlClass = newUmlClass;
@@ -302,6 +311,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Table getTable() {
 		if (table != null && table.eIsProxy()) {
 			InternalEObject oldTable = (InternalEObject)table;
@@ -328,6 +338,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTable(Table newTable) {
 		Table oldTable = table;
 		table = newTable;
@@ -340,6 +351,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Key getPrimaryKey() {
 		if (primaryKey != null && primaryKey.eIsProxy()) {
 			InternalEObject oldPrimaryKey = (InternalEObject)primaryKey;
@@ -366,6 +378,7 @@ public class ClassToTableImpl extends FromAttributeOwnerImpl implements ClassToT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryKey(Key newPrimaryKey) {
 		Key oldPrimaryKey = primaryKey;
 		primaryKey = newPrimaryKey;

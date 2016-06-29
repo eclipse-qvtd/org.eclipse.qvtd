@@ -115,6 +115,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getKind() {
 		return kind;
 	}
@@ -124,6 +125,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKind(String newKind) {
 		String oldKind = kind;
 		kind = newKind;
@@ -136,6 +138,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Attribute getAttribute() {
 		if (attribute != null && attribute.eIsProxy()) {
 			InternalEObject oldAttribute = (InternalEObject)attribute;
@@ -162,6 +165,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAttribute(Attribute newAttribute) {
 		Attribute oldAttribute = attribute;
 		attribute = newAttribute;
@@ -174,6 +178,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AttributeToColumn> getLeafs() {
 		if (leafs == null) {
 			leafs = new EObjectResolvingEList<AttributeToColumn>(AttributeToColumn.class, this, UML2RDBMSPackage.FROM_ATTRIBUTE__LEAFS);
@@ -186,6 +191,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FromAttributeOwner getOwner() {
 		if (eContainerFeatureID() != UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER) return null;
 		return (FromAttributeOwner)eInternalContainer();
@@ -206,6 +212,7 @@ public abstract class FromAttributeImpl extends UmlToRdbmsModelElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(FromAttributeOwner newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != UML2RDBMSPackage.FROM_ATTRIBUTE__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))

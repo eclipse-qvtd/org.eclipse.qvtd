@@ -95,6 +95,7 @@ public class DataParameterImpl extends ScheduleElementImpl implements DataParame
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable getVariable() {
 		if (variable != null && variable.eIsProxy()) {
 			InternalEObject oldVariable = (InternalEObject)variable;
@@ -121,6 +122,7 @@ public class DataParameterImpl extends ScheduleElementImpl implements DataParame
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVariable(Variable newVariable) {
 		Variable oldVariable = variable;
 		variable = newVariable;
@@ -133,6 +135,7 @@ public class DataParameterImpl extends ScheduleElementImpl implements DataParame
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SecondaryParameter getSecondaryParameter() {
 		if (secondaryParameter != null && secondaryParameter.eIsProxy()) {
 			InternalEObject oldSecondaryParameter = (InternalEObject)secondaryParameter;
@@ -174,6 +177,7 @@ public class DataParameterImpl extends ScheduleElementImpl implements DataParame
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSecondaryParameter(SecondaryParameter newSecondaryParameter) {
 		if (newSecondaryParameter != secondaryParameter) {
 			NotificationChain msgs = null;
@@ -193,6 +197,7 @@ public class DataParameterImpl extends ScheduleElementImpl implements DataParame
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AbstractDatum getDatum() {
 		if (datum != null && datum.eIsProxy()) {
 			InternalEObject oldDatum = (InternalEObject)datum;
@@ -234,6 +239,7 @@ public class DataParameterImpl extends ScheduleElementImpl implements DataParame
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDatum(AbstractDatum newDatum) {
 		if (newDatum != datum) {
 			NotificationChain msgs = null;

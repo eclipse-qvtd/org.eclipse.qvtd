@@ -89,6 +89,7 @@ public class MemberImpl extends MinimalEObjectImpl.Container implements Member {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFirstName() {
 		return firstName;
 	}
@@ -98,6 +99,7 @@ public class MemberImpl extends MinimalEObjectImpl.Container implements Member {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFirstName(String newFirstName) {
 		String oldFirstName = firstName;
 		firstName = newFirstName;
@@ -110,6 +112,7 @@ public class MemberImpl extends MinimalEObjectImpl.Container implements Member {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Family getFamilyFather() {
 		if (eContainerFeatureID() != FamiliesPackage.MEMBER__FAMILY_FATHER) return null;
 		return (Family)eInternalContainer();
@@ -130,6 +133,7 @@ public class MemberImpl extends MinimalEObjectImpl.Container implements Member {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFamilyFather(Family newFamilyFather) {
 		if (newFamilyFather != eInternalContainer() || (eContainerFeatureID() != FamiliesPackage.MEMBER__FAMILY_FATHER && newFamilyFather != null)) {
 			if (EcoreUtil.isAncestor(this, newFamilyFather))
@@ -151,6 +155,7 @@ public class MemberImpl extends MinimalEObjectImpl.Container implements Member {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Family getFamilyMother() {
 		if (eContainerFeatureID() != FamiliesPackage.MEMBER__FAMILY_MOTHER) return null;
 		return (Family)eInternalContainer();
@@ -171,6 +176,7 @@ public class MemberImpl extends MinimalEObjectImpl.Container implements Member {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFamilyMother(Family newFamilyMother) {
 		if (newFamilyMother != eInternalContainer() || (eContainerFeatureID() != FamiliesPackage.MEMBER__FAMILY_MOTHER && newFamilyMother != null)) {
 			if (EcoreUtil.isAncestor(this, newFamilyMother))
@@ -192,6 +198,7 @@ public class MemberImpl extends MinimalEObjectImpl.Container implements Member {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Family getFamilySon() {
 		if (eContainerFeatureID() != FamiliesPackage.MEMBER__FAMILY_SON) return null;
 		return (Family)eInternalContainer();
@@ -212,6 +219,7 @@ public class MemberImpl extends MinimalEObjectImpl.Container implements Member {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFamilySon(Family newFamilySon) {
 		if (newFamilySon != eInternalContainer() || (eContainerFeatureID() != FamiliesPackage.MEMBER__FAMILY_SON && newFamilySon != null)) {
 			if (EcoreUtil.isAncestor(this, newFamilySon))
@@ -233,6 +241,7 @@ public class MemberImpl extends MinimalEObjectImpl.Container implements Member {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Family getFamilyDaughter() {
 		if (eContainerFeatureID() != FamiliesPackage.MEMBER__FAMILY_DAUGHTER) return null;
 		return (Family)eInternalContainer();
@@ -253,6 +262,7 @@ public class MemberImpl extends MinimalEObjectImpl.Container implements Member {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFamilyDaughter(Family newFamilyDaughter) {
 		if (newFamilyDaughter != eInternalContainer() || (eContainerFeatureID() != FamiliesPackage.MEMBER__FAMILY_DAUGHTER && newFamilyDaughter != null)) {
 			if (EcoreUtil.isAncestor(this, newFamilyDaughter))

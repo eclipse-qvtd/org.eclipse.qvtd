@@ -70,6 +70,7 @@ public class PropertyCSImpl extends NamedElementCSImpl implements PropertyCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PathNameCS getTypeRef() {
 		return typeRef;
 	}
@@ -94,6 +95,7 @@ public class PropertyCSImpl extends NamedElementCSImpl implements PropertyCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypeRef(PathNameCS newTypeRef) {
 		if (newTypeRef != typeRef) {
 			NotificationChain msgs = null;

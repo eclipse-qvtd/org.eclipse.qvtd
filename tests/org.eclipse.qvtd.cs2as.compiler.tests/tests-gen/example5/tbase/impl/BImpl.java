@@ -72,6 +72,7 @@ public class BImpl extends NamedElementImpl implements B {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public C getOwnsC() {
 		return ownsC;
 	}
@@ -96,6 +97,7 @@ public class BImpl extends NamedElementImpl implements B {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnsC(C newOwnsC) {
 		if (newOwnsC != ownsC) {
 			NotificationChain msgs = null;

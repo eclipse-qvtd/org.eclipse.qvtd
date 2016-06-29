@@ -101,6 +101,7 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getHeight() {
 		return height;
 	}
@@ -110,6 +111,7 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHeight(Integer newHeight) {
 		Integer oldHeight = height;
 		height = newHeight;
@@ -122,6 +124,7 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getDepth() {
 		return depth;
 	}
@@ -131,6 +134,7 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDepth(Integer newDepth) {
 		Integer oldDepth = depth;
 		depth = newDepth;

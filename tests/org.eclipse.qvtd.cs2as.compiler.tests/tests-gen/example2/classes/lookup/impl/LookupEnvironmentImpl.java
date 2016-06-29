@@ -95,6 +95,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<NamedElement> getNamedElements() {
 		if (namedElements == null) {
 			namedElements = new EObjectResolvingEList<NamedElement>(NamedElement.class, this, EnvironmentPackage.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS);
@@ -107,6 +108,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LookupEnvironment getParentEnv() {
 		if (parentEnv != null && parentEnv.eIsProxy()) {
 			InternalEObject oldParentEnv = (InternalEObject)parentEnv;
@@ -133,6 +135,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParentEnv(LookupEnvironment newParentEnv) {
 		LookupEnvironment oldParentEnv = parentEnv;
 		parentEnv = newParentEnv;
@@ -145,6 +148,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public <NE extends NamedElement> LookupEnvironment addElements(final Collection<NE> elements) {
 		/**
 		 * 
@@ -176,6 +180,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LookupEnvironment addElement(final NamedElement element) {
 		/**
 		 * 
@@ -206,6 +211,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean hasFinalResult() {
 		throw new UnsupportedOperationException("LookupEnvironment::hasFinalResult() has been created for CG purposes. Don't call this method");
 	}
@@ -215,6 +221,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Executor getExecutor() {
 		throw new UnsupportedOperationException("LookupEnvironment::getEvaluator() has been created for CG purposes. Don't call this method");
 	}

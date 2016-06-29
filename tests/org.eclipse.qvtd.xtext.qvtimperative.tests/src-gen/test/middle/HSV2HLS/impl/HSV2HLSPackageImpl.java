@@ -128,6 +128,7 @@ public class HSV2HLSPackageImpl extends EPackageImpl implements HSV2HLSPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getHSVNode2HLSNode() {
 		return hsvNode2HLSNodeEClass;
 	}
@@ -137,6 +138,7 @@ public class HSV2HLSPackageImpl extends EPackageImpl implements HSV2HLSPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getHSVNode2HLSNode_Parent() {
 		return (EReference)hsvNode2HLSNodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -146,6 +148,7 @@ public class HSV2HLSPackageImpl extends EPackageImpl implements HSV2HLSPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getHSVNode2HLSNode_Children() {
 		return (EReference)hsvNode2HLSNodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -155,6 +158,7 @@ public class HSV2HLSPackageImpl extends EPackageImpl implements HSV2HLSPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getHSVNode2HLSNode_Hsv() {
 		return (EReference)hsvNode2HLSNodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -164,6 +168,7 @@ public class HSV2HLSPackageImpl extends EPackageImpl implements HSV2HLSPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getHSVNode2HLSNode_Hls() {
 		return (EReference)hsvNode2HLSNodeEClass.getEStructuralFeatures().get(3);
 	}
@@ -173,6 +178,7 @@ public class HSV2HLSPackageImpl extends EPackageImpl implements HSV2HLSPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getHSVNode2HLSNode_Rgb() {
 		return (EAttribute)hsvNode2HLSNodeEClass.getEStructuralFeatures().get(4);
 	}
@@ -182,6 +188,7 @@ public class HSV2HLSPackageImpl extends EPackageImpl implements HSV2HLSPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getHSVNode2HLSNode_Name() {
 		return (EAttribute)hsvNode2HLSNodeEClass.getEStructuralFeatures().get(5);
 	}
@@ -191,6 +198,7 @@ public class HSV2HLSPackageImpl extends EPackageImpl implements HSV2HLSPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getRGB() {
 		return rgbEDataType;
 	}
@@ -200,6 +208,7 @@ public class HSV2HLSPackageImpl extends EPackageImpl implements HSV2HLSPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HSV2HLSFactory getHSV2HLSFactory() {
 		return (HSV2HLSFactory)getEFactoryInstance();
 	}

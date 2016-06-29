@@ -91,6 +91,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public example2.classes.Package createPackage() {
 		PackageImpl package_ = new PackageImpl();
 		return package_;
@@ -101,6 +102,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public example2.classes.Class createClass() {
 		ClassImpl class_ = new ClassImpl();
 		return class_;
@@ -111,6 +113,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property createProperty() {
 		PropertyImpl property = new PropertyImpl();
 		return property;
@@ -121,6 +124,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Operation createOperation() {
 		OperationImpl operation = new OperationImpl();
 		return operation;
@@ -131,6 +135,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Parameter createParameter() {
 		ParameterImpl parameter = new ParameterImpl();
 		return parameter;
@@ -141,6 +146,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PropertyCallExp createPropertyCallExp() {
 		PropertyCallExpImpl propertyCallExp = new PropertyCallExpImpl();
 		return propertyCallExp;
@@ -151,6 +157,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OperationCallExp createOperationCallExp() {
 		OperationCallExpImpl operationCallExp = new OperationCallExpImpl();
 		return operationCallExp;
@@ -161,6 +168,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Argument createArgument() {
 		ArgumentImpl argument = new ArgumentImpl();
 		return argument;
@@ -171,6 +179,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Root createRoot() {
 		RootImpl root = new RootImpl();
 		return root;
@@ -181,6 +190,7 @@ public class ClassesFactoryImpl extends EFactoryImpl implements ClassesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassesPackage getClassesPackage() {
 		return (ClassesPackage)getEPackage();
 	}

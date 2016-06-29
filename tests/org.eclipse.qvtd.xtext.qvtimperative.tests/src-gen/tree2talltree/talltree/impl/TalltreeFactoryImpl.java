@@ -75,6 +75,7 @@ public class TalltreeFactoryImpl extends EFactoryImpl implements TalltreeFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TallNode createTallNode() {
 		TallNodeImpl tallNode = new TallNodeImpl();
 		return tallNode;
@@ -85,6 +86,7 @@ public class TalltreeFactoryImpl extends EFactoryImpl implements TalltreeFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TalltreePackage getTalltreePackage() {
 		return (TalltreePackage)getEPackage();
 	}

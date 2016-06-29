@@ -25,6 +25,7 @@ public class QVTiVirtualProcess extends VMVirtualProcess
 		super(launch, vm);
 	}
 
+	@Override
 	public @NonNull String getLabel() {
 		String transformationURI = null;
 		ILaunchConfiguration configuration = fLaunch.getLaunchConfiguration();

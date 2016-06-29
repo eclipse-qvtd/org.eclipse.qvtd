@@ -166,6 +166,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getColumn() {
 		return columnEClass;
 	}
@@ -175,6 +176,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getColumn_Type() {
 		return (EAttribute)columnEClass.getEStructuralFeatures().get(0);
 	}
@@ -184,6 +186,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getColumn_Owner() {
 		return (EReference)columnEClass.getEStructuralFeatures().get(1);
 	}
@@ -193,6 +196,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getColumn_ForeignKeys() {
 		return (EReference)columnEClass.getEStructuralFeatures().get(2);
 	}
@@ -202,6 +206,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getColumn_Keys() {
 		return (EReference)columnEClass.getEStructuralFeatures().get(3);
 	}
@@ -211,6 +216,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getForeignKey() {
 		return foreignKeyEClass;
 	}
@@ -220,6 +226,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getForeignKey_RefersTo() {
 		return (EReference)foreignKeyEClass.getEStructuralFeatures().get(0);
 	}
@@ -229,6 +236,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getForeignKey_Columns() {
 		return (EReference)foreignKeyEClass.getEStructuralFeatures().get(1);
 	}
@@ -238,6 +246,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getForeignKey_Owner() {
 		return (EReference)foreignKeyEClass.getEStructuralFeatures().get(2);
 	}
@@ -247,6 +256,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getKey() {
 		return keyEClass;
 	}
@@ -256,6 +266,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getKey_Owner() {
 		return (EReference)keyEClass.getEStructuralFeatures().get(0);
 	}
@@ -265,6 +276,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getKey_Column() {
 		return (EReference)keyEClass.getEStructuralFeatures().get(1);
 	}
@@ -274,6 +286,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRModelElement() {
 		return rModelElementEClass;
 	}
@@ -283,6 +296,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRModelElement_Name() {
 		return (EAttribute)rModelElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -292,6 +306,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRModelElement_Kind() {
 		return (EAttribute)rModelElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -301,6 +316,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSchema() {
 		return schemaEClass;
 	}
@@ -310,6 +326,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSchema_Tables() {
 		return (EReference)schemaEClass.getEStructuralFeatures().get(0);
 	}
@@ -319,6 +336,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTable() {
 		return tableEClass;
 	}
@@ -328,6 +346,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTable_Columns() {
 		return (EReference)tableEClass.getEStructuralFeatures().get(0);
 	}
@@ -337,6 +356,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTable_Schema() {
 		return (EReference)tableEClass.getEStructuralFeatures().get(1);
 	}
@@ -346,6 +366,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTable_Keys() {
 		return (EReference)tableEClass.getEStructuralFeatures().get(2);
 	}
@@ -355,6 +376,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTable_ForeignKeys() {
 		return (EReference)tableEClass.getEStructuralFeatures().get(3);
 	}
@@ -364,6 +386,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getString() {
 		return stringEDataType;
 	}
@@ -373,6 +396,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimplerdbmsFactory getSimplerdbmsFactory() {
 		return (SimplerdbmsFactory)getEFactoryInstance();
 	}

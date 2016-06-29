@@ -122,6 +122,7 @@ public class ClassImpl extends ClassifierImpl implements manualuml2rdbms.uml.Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<manualuml2rdbms.uml.Class> getGeneral() {
 		if (general == null) {
 			general = new EObjectWithInverseResolvingEList.ManyInverse<manualuml2rdbms.uml.Class>(manualuml2rdbms.uml.Class.class, this, UMLPackage.CLASS__GENERAL, UMLPackage.CLASS__GENERAL_OPPOSITE);
@@ -134,6 +135,7 @@ public class ClassImpl extends ClassifierImpl implements manualuml2rdbms.uml.Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Association> getForward() {
 		if (forward == null) {
 			forward = new EObjectWithInverseResolvingEList<Association>(Association.class, this, UMLPackage.CLASS__FORWARD, UMLPackage.ASSOCIATION__SOURCE);
@@ -146,6 +148,7 @@ public class ClassImpl extends ClassifierImpl implements manualuml2rdbms.uml.Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentWithInverseEList<Attribute>(Attribute.class, this, UMLPackage.CLASS__ATTRIBUTES, UMLPackage.ATTRIBUTE__OWNER);
@@ -158,6 +161,7 @@ public class ClassImpl extends ClassifierImpl implements manualuml2rdbms.uml.Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Association> getReverse() {
 		if (reverse == null) {
 			reverse = new EObjectResolvingEList<Association>(Association.class, this, UMLPackage.CLASS__REVERSE);
@@ -170,6 +174,7 @@ public class ClassImpl extends ClassifierImpl implements manualuml2rdbms.uml.Cla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<manualuml2rdbms.uml.Class> getGeneralOpposite() {
 		if (generalOpposite == null) {
 			generalOpposite = new EObjectWithInverseResolvingEList.ManyInverse<manualuml2rdbms.uml.Class>(manualuml2rdbms.uml.Class.class, this, UMLPackage.CLASS__GENERAL_OPPOSITE, UMLPackage.CLASS__GENERAL);

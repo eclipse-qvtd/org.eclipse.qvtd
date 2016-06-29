@@ -76,6 +76,7 @@ public class AImpl extends NamedElementImpl implements A {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<B> getOwnsB() {
 		if (ownsB == null) {
 			ownsB = new EObjectContainmentEList<B>(B.class, this, TbasePackage.A__OWNS_B);

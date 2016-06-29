@@ -76,6 +76,7 @@ public class Families2PersonsFactoryImpl extends EFactoryImpl implements Familie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Member2Male createMember2Male() {
 		Member2MaleImpl member2Male = new Member2MaleImpl();
 		return member2Male;
@@ -86,6 +87,7 @@ public class Families2PersonsFactoryImpl extends EFactoryImpl implements Familie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Member2Female createMember2Female() {
 		Member2FemaleImpl member2Female = new Member2FemaleImpl();
 		return member2Female;
@@ -96,6 +98,7 @@ public class Families2PersonsFactoryImpl extends EFactoryImpl implements Familie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Families2PersonsPackage getFamilies2PersonsPackage() {
 		return (Families2PersonsPackage)getEPackage();
 	}

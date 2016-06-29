@@ -79,6 +79,7 @@ public class SimplegraphFactoryImpl extends EFactoryImpl implements SimplegraphF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node createNode() {
 		NodeImpl node = new NodeImpl();
 		return node;
@@ -89,6 +90,7 @@ public class SimplegraphFactoryImpl extends EFactoryImpl implements SimplegraphF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Edge createEdge() {
 		EdgeImpl edge = new EdgeImpl();
 		return edge;
@@ -99,6 +101,7 @@ public class SimplegraphFactoryImpl extends EFactoryImpl implements SimplegraphF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Graph createGraph() {
 		GraphImpl graph = new GraphImpl();
 		return graph;
@@ -109,6 +112,7 @@ public class SimplegraphFactoryImpl extends EFactoryImpl implements SimplegraphF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimplegraphPackage getSimplegraphPackage() {
 		return (SimplegraphPackage)getEPackage();
 	}

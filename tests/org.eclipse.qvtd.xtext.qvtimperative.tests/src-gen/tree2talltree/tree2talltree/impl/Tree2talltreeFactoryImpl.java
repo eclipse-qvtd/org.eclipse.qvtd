@@ -75,6 +75,7 @@ public class Tree2talltreeFactoryImpl extends EFactoryImpl implements Tree2tallt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node2TallNode createNode2TallNode() {
 		Node2TallNodeImpl node2TallNode = new Node2TallNodeImpl();
 		return node2TallNode;
@@ -85,6 +86,7 @@ public class Tree2talltreeFactoryImpl extends EFactoryImpl implements Tree2tallt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Tree2talltreePackage getTree2talltreePackage() {
 		return (Tree2talltreePackage)getEPackage();
 	}

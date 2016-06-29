@@ -73,6 +73,7 @@ public class PackageImpl extends PackageElementImpl implements org.eclipse.qvtd.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PackageElement> getElements() {
 		if (elements == null) {
 			elements = new EObjectContainmentWithInverseEList<PackageElement>(PackageElement.class, this, SimpleumlPackage.PACKAGE__ELEMENTS, SimpleumlPackage.PACKAGE_ELEMENT__NAMESPACE);

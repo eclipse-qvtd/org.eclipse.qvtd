@@ -92,6 +92,7 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Key getRefersTo() {
 		if (refersTo != null && refersTo.eIsProxy()) {
 			InternalEObject oldRefersTo = (InternalEObject)refersTo;
@@ -118,6 +119,7 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRefersTo(Key newRefersTo) {
 		Key oldRefersTo = refersTo;
 		refersTo = newRefersTo;
@@ -130,6 +132,7 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Column> getColumns() {
 		if (columns == null) {
 			columns = new EObjectWithInverseResolvingEList.ManyInverse<Column>(Column.class, this, SimplerdbmsPackage.FOREIGN_KEY__COLUMNS, SimplerdbmsPackage.COLUMN__FOREIGN_KEYS);
@@ -142,6 +145,7 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Table getOwner() {
 		if (eContainerFeatureID() != SimplerdbmsPackage.FOREIGN_KEY__OWNER) return null;
 		return (Table)eInternalContainer();
@@ -162,6 +166,7 @@ public class ForeignKeyImpl extends RModelElementImpl implements ForeignKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(Table newOwner) {
 		if (newOwner != eInternalContainer() || (eContainerFeatureID() != SimplerdbmsPackage.FOREIGN_KEY__OWNER && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))

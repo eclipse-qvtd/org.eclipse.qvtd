@@ -81,6 +81,7 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PackageCS getPackageCS() {
 		if (packageCS != null && packageCS.eIsProxy()) {
 			InternalEObject oldPackageCS = (InternalEObject)packageCS;
@@ -107,6 +108,7 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPackageCS(PackageCS newPackageCS) {
 		PackageCS oldPackageCS = packageCS;
 		packageCS = newPackageCS;
@@ -119,6 +121,7 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public example2.classes.Package getPackage() {
 		if (package_ != null && package_.eIsProxy()) {
 			InternalEObject oldPackage = (InternalEObject)package_;
@@ -145,6 +148,7 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPackage(example2.classes.Package newPackage) {
 		example2.classes.Package oldPackage = package_;
 		package_ = newPackage;

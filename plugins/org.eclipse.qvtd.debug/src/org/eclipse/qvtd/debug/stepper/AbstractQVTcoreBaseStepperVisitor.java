@@ -35,46 +35,57 @@ public abstract class AbstractQVTcoreBaseStepperVisitor
 		super(context);
 	}	
 
+	@Override
 	public @Nullable IStepper visitAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull Assignment object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitBottomPattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull BottomPattern object) {
 		return visitCorePattern(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitCoreDomain(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull CoreDomain object) {
 		return visitDomain(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitCorePattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull CorePattern object) {
 		return visitPattern(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull EnforcementOperation object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitGuardPattern(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull GuardPattern object) {
 		return visitCorePattern(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull NavigationAssignment object) {
 		return visitAssignment(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull OppositePropertyAssignment object) {
 		return visitNavigationAssignment(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull PropertyAssignment object) {
 		return visitNavigationAssignment(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitRealizedVariable(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull RealizedVariable object) {
 		return visitVariable(object);
 	}
 
+	@Override
 	public @Nullable IStepper visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcorebase.@NonNull VariableAssignment object) {
 		return visitAssignment(object);
 	}

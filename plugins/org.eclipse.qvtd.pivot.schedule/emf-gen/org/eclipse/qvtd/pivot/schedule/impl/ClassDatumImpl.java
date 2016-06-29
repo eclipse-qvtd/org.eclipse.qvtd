@@ -87,6 +87,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.ocl.pivot.Class getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -113,6 +114,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(org.eclipse.ocl.pivot.Class newType) {
 		org.eclipse.ocl.pivot.Class oldType = type;
 		type = newType;
@@ -125,6 +127,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PropertyDatum> getPropertyDatums() {
 		if (propertyDatums == null) {
 			propertyDatums = new EObjectContainmentWithInverseEList<PropertyDatum>(PropertyDatum.class, this, SchedulePackage.CLASS_DATUM__PROPERTY_DATUMS, SchedulePackage.PROPERTY_DATUM__CLASS_DATUM);

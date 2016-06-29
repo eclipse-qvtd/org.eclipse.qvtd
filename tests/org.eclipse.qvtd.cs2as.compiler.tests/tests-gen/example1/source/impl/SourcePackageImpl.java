@@ -162,6 +162,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getX() {
 		return xEClass;
 	}
@@ -171,6 +172,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getX_OwnsY() {
 		return (EReference)xEClass.getEStructuralFeatures().get(0);
 	}
@@ -180,6 +182,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getX_IsA1() {
 		return (EAttribute)xEClass.getEStructuralFeatures().get(1);
 	}
@@ -189,6 +192,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getX_IsA2() {
 		return (EAttribute)xEClass.getEStructuralFeatures().get(2);
 	}
@@ -198,6 +202,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getX_Name() {
 		return (EAttribute)xEClass.getEStructuralFeatures().get(3);
 	}
@@ -207,6 +212,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getY() {
 		return yEClass;
 	}
@@ -216,6 +222,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getY_OwnsZ() {
 		return (EReference)yEClass.getEStructuralFeatures().get(0);
 	}
@@ -225,6 +232,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getY_Name() {
 		return (EAttribute)yEClass.getEStructuralFeatures().get(1);
 	}
@@ -234,6 +242,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getY_ToX() {
 		return (EReference)yEClass.getEStructuralFeatures().get(2);
 	}
@@ -243,6 +252,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getY1() {
 		return y1EClass;
 	}
@@ -252,6 +262,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getY2() {
 		return y2EClass;
 	}
@@ -261,6 +272,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getZ() {
 		return zEClass;
 	}
@@ -270,6 +282,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getZ_ToY() {
 		return (EReference)zEClass.getEStructuralFeatures().get(0);
 	}
@@ -279,6 +292,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getZ_Refers() {
 		return (EReference)zEClass.getEStructuralFeatures().get(1);
 	}
@@ -288,6 +302,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSRoot() {
 		return sRootEClass;
 	}
@@ -297,6 +312,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSRoot_OwnedX() {
 		return (EReference)sRootEClass.getEStructuralFeatures().get(0);
 	}
@@ -306,6 +322,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSElement() {
 		return sElementEClass;
 	}
@@ -315,6 +332,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSElement_Ast() {
 		return (EReference)sElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -324,6 +342,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPathNameCS() {
 		return pathNameCSEClass;
 	}
@@ -333,6 +352,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPathNameCS_Path() {
 		return (EReference)pathNameCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -342,6 +362,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPathElementCS() {
 		return pathElementCSEClass;
 	}
@@ -351,6 +372,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPathElementCS_Name() {
 		return (EAttribute)pathElementCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -360,6 +382,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SourceFactory getSourceFactory() {
 		return (SourceFactory)getEFactoryInstance();
 	}

@@ -73,6 +73,7 @@ public class PathNameCSImpl extends SElementImpl implements PathNameCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PathElementCS> getPath() {
 		if (path == null) {
 			path = new EObjectContainmentEList<PathElementCS>(PathElementCS.class, this, SourcePackage.PATH_NAME_CS__PATH);

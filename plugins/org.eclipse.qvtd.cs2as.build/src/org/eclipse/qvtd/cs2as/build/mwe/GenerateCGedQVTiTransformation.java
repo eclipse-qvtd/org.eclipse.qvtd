@@ -44,6 +44,7 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	protected String traceabilityPropName = "ast";
 	protected Map<?, ?> savingOptions;
 
+	@Override
 	public void checkConfiguration(final Issues issues) {
 		if (!isDefined(oclFileURI)) {
 			issues.addError(this, "OCL document URI not specified.");

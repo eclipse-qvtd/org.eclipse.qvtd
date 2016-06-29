@@ -77,6 +77,7 @@ public abstract class NamedElementCSImpl extends ElementCSImpl implements NamedE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -86,6 +87,7 @@ public abstract class NamedElementCSImpl extends ElementCSImpl implements NamedE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;

@@ -48,6 +48,7 @@ public abstract class AbstractMainTab extends AbstractLaunchConfigurationTab
 		super.dispose();
 	}
 
+	@Override
 	public @NonNull String getName() {
 		return "Main";
 	}
@@ -82,6 +83,7 @@ public abstract class AbstractMainTab extends AbstractLaunchConfigurationTab
 		}
 	}
 
+	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		if (workbench != null) {

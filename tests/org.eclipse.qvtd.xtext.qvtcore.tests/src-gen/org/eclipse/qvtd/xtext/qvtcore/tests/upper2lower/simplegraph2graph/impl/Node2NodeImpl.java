@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -102,6 +102,7 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node getNode1() {
 		if (node1 != null && node1.eIsProxy()) {
 			InternalEObject oldNode1 = (InternalEObject)node1;
@@ -128,6 +129,7 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNode1(Node newNode1) {
 		Node oldNode1 = node1;
 		node1 = newNode1;
@@ -140,6 +142,7 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Node getNode2() {
 		if (node2 != null && node2.eIsProxy()) {
 			InternalEObject oldNode2 = (InternalEObject)node2;
@@ -166,6 +169,7 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNode2(Node newNode2) {
 		Node oldNode2 = node2;
 		node2 = newNode2;
@@ -178,6 +182,7 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLabel() {
 		return label;
 	}
@@ -187,6 +192,7 @@ public class Node2NodeImpl extends Element2ElementImpl implements Node2Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLabel(String newLabel) {
 		String oldLabel = label;
 		label = newLabel;

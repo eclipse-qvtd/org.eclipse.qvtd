@@ -63,6 +63,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public simpleuml2rdbms.uml.Package getNamespace() {
 		if (eContainerFeatureID() != UMLPackage.PACKAGE_ELEMENT__NAMESPACE) return null;
 		return (simpleuml2rdbms.uml.Package)eInternalContainer();
@@ -83,6 +84,7 @@ public abstract class PackageElementImpl extends UMLModelElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNamespace(simpleuml2rdbms.uml.Package newNamespace) {
 		if (newNamespace != eInternalContainer() || (eContainerFeatureID() != UMLPackage.PACKAGE_ELEMENT__NAMESPACE && newNamespace != null)) {
 			if (EcoreUtil.isAncestor(this, newNamespace))

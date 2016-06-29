@@ -19,6 +19,7 @@ import org.eclipse.ui.IWorkbenchPart;
 
 public class QVTiRunToLineAdapter extends VMRunToLineAdapter
 {
+	@Override
 	public boolean canRunToLine(IWorkbenchPart part, ISelection selection, ISuspendResume target) {
 		return (part instanceof QVTimperativeEditor) && super.canRunToLine(part, selection, target);
 	}

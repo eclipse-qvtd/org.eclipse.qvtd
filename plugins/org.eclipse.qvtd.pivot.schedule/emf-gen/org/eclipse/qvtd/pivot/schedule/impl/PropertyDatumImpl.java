@@ -85,6 +85,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property getProperty() {
 		if (property != null && property.eIsProxy()) {
 			InternalEObject oldProperty = (InternalEObject)property;
@@ -111,6 +112,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setProperty(Property newProperty) {
 		Property oldProperty = property;
 		property = newProperty;
@@ -123,6 +125,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassDatum getClassDatum() {
 		if (eContainerFeatureID() != SchedulePackage.PROPERTY_DATUM__CLASS_DATUM) return null;
 		return (ClassDatum)eInternalContainer();
@@ -143,6 +146,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setClassDatum(ClassDatum newClassDatum) {
 		if (newClassDatum != eInternalContainer() || (eContainerFeatureID() != SchedulePackage.PROPERTY_DATUM__CLASS_DATUM && newClassDatum != null)) {
 			if (EcoreUtil.isAncestor(this, newClassDatum))
@@ -164,6 +168,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PropertyDatum getOpposite() {
 		if (opposite != null && opposite.eIsProxy()) {
 			InternalEObject oldOpposite = (InternalEObject)opposite;
@@ -190,6 +195,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOpposite(PropertyDatum newOpposite) {
 		PropertyDatum oldOpposite = opposite;
 		opposite = newOpposite;

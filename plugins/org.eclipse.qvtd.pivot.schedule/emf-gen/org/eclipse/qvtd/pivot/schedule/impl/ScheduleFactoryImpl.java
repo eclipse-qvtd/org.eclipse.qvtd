@@ -83,6 +83,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull ClassDatum createClassDatum() {
 		ClassDatumImpl classDatum = new ClassDatumImpl();
 		return classDatum;
@@ -93,6 +94,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull DataParameter createDataParameter() {
 		DataParameterImpl dataParameter = new DataParameterImpl();
 		return dataParameter;
@@ -103,6 +105,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull InputAction createInputAction() {
 		InputActionImpl inputAction = new InputActionImpl();
 		return inputAction;
@@ -113,6 +116,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull MappingAction createMappingAction() {
 		MappingActionImpl mappingAction = new MappingActionImpl();
 		return mappingAction;
@@ -123,6 +127,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull OutputAction createOutputAction() {
 		OutputActionImpl outputAction = new OutputActionImpl();
 		return outputAction;
@@ -133,6 +138,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull ParameterDerivation createParameterDerivation() {
 		ParameterDerivationImpl parameterDerivation = new ParameterDerivationImpl();
 		return parameterDerivation;
@@ -143,6 +149,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull PropertyDatum createPropertyDatum() {
 		PropertyDatumImpl propertyDatum = new PropertyDatumImpl();
 		return propertyDatum;
@@ -153,6 +160,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull Schedule createSchedule() {
 		ScheduleImpl schedule = new ScheduleImpl();
 		return schedule;
@@ -163,6 +171,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull SecondaryParameter createSecondaryParameter() {
 		SecondaryParameterImpl secondaryParameter = new SecondaryParameterImpl();
 		return secondaryParameter;
@@ -173,6 +182,7 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SchedulePackage getSchedulePackage() {
 		return (SchedulePackage)getEPackage();
 	}

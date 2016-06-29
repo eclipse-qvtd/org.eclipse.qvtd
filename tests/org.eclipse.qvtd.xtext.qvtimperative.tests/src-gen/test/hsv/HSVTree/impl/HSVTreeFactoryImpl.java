@@ -108,6 +108,7 @@ public class HSVTreeFactoryImpl extends EFactoryImpl implements HSVTreeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HSVNode createHSVNode() {
 		HSVNodeImpl hsvNode = new HSVNodeImpl();
 		return hsvNode;
@@ -136,6 +137,7 @@ public class HSVTreeFactoryImpl extends EFactoryImpl implements HSVTreeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public HSVTreePackage getHSVTreePackage() {
 		return (HSVTreePackage)getEPackage();
 	}

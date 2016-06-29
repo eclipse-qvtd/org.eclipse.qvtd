@@ -103,6 +103,7 @@ public class PivotNormalizer implements ModelNormalizer
 		}
 	}
 
+	@Override
 	public @NonNull List<Normalizer> normalize(@NonNull Resource resource) {
 		List<Normalizer> normalizers = new ArrayList<Normalizer>();
 		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {

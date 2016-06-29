@@ -83,6 +83,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AttributeToColumn createAttributeToColumn() {
 		AttributeToColumnImpl attributeToColumn = new AttributeToColumnImpl();
 		return attributeToColumn;
@@ -93,6 +94,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AssociationToForeignKey createAssociationToForeignKey() {
 		AssociationToForeignKeyImpl associationToForeignKey = new AssociationToForeignKeyImpl();
 		return associationToForeignKey;
@@ -103,6 +105,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassToTable createClassToTable() {
 		ClassToTableImpl classToTable = new ClassToTableImpl();
 		return classToTable;
@@ -113,6 +116,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NonLeafAttribute createNonLeafAttribute() {
 		NonLeafAttributeImpl nonLeafAttribute = new NonLeafAttributeImpl();
 		return nonLeafAttribute;
@@ -123,6 +127,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PackageToSchema createPackageToSchema() {
 		PackageToSchemaImpl packageToSchema = new PackageToSchemaImpl();
 		return packageToSchema;
@@ -133,6 +138,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrimitiveToName createPrimitiveToName() {
 		PrimitiveToNameImpl primitiveToName = new PrimitiveToNameImpl();
 		return primitiveToName;
@@ -143,6 +149,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ToColumn createToColumn() {
 		ToColumnImpl toColumn = new ToColumnImpl();
 		return toColumn;
@@ -153,6 +160,7 @@ public class UML2RDBMSFactoryImpl extends EFactoryImpl implements UML2RDBMSFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UML2RDBMSPackage getUML2RDBMSPackage() {
 		return (UML2RDBMSPackage)getEPackage();
 	}

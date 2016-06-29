@@ -70,6 +70,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		}
 	}
 	
+	@Override
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();

@@ -86,6 +86,7 @@ public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements Roo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RootCS getRootCS() {
 		if (rootCS != null && rootCS.eIsProxy()) {
 			InternalEObject oldRootCS = (InternalEObject)rootCS;
@@ -112,6 +113,7 @@ public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements Roo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRootCS(RootCS newRootCS) {
 		RootCS oldRootCS = rootCS;
 		rootCS = newRootCS;
@@ -124,6 +126,7 @@ public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements Roo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Root getRoot() {
 		if (root != null && root.eIsProxy()) {
 			InternalEObject oldRoot = (InternalEObject)root;
@@ -150,6 +153,7 @@ public class RootCS2RootImpl extends MinimalEObjectImpl.Container implements Roo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRoot(Root newRoot) {
 		Root oldRoot = root;
 		root = newRoot;

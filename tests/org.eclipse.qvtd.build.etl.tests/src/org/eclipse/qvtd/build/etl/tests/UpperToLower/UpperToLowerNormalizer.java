@@ -133,6 +133,7 @@ public class UpperToLowerNormalizer implements ModelNormalizer
 		}
 	}
 
+	@Override
 	public @NonNull List<Normalizer> normalize(@NonNull Resource resource) {
 		EObject eRoot = resource.getContents().get(0);
 		EPackage ePackage = eRoot.eClass().getEPackage();
