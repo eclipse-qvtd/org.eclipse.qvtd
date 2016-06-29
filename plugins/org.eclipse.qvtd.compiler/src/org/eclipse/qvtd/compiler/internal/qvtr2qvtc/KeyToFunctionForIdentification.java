@@ -15,10 +15,12 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -27,7 +29,7 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 
 /**
- * KeyToMappingForIdentification synthesizes a Core constructor function/querythat enforces the uniqueness of a realized variable
+ * KeyToMappingForIdentification synthesizes a Core constructor function/query that enforces the uniqueness of a realized variable
  * with respect to its key parts.
  */
 public class KeyToFunctionForIdentification
@@ -45,12 +47,18 @@ public class KeyToFunctionForIdentification
 		String functionName = qvtr2qvtc.createKeyFunctionName(rKey);
 		List<@NonNull FunctionParameter> asParameters = new ArrayList<@NonNull FunctionParameter>();
 		List<@NonNull ShadowPart> asShadowParts = new ArrayList<@NonNull ShadowPart>();
+		//
+		//	One shadow part per forward key property
+		//
 		for (@NonNull Property keyProperty : ClassUtil.nullFree(rKey.getPart())) {
 			FunctionParameter cParameter = helper.createFunctionParameter(keyProperty);
 			asParameters.add(cParameter);
 			ShadowPart asShadowPart = helper.createShadowPart(keyProperty, helper.createVariableExp(cParameter));
 			asShadowParts.add(asShadowPart);
 		}
+		//
+		//	One shadow part per opposite key property
+		//
 		for (@NonNull Property keyOppositeProperty : ClassUtil.nullFree(rKey.getOppositePart())) {
 			Property keyProperty = ClassUtil.nonNullState(keyOppositeProperty.getOpposite());
 			FunctionParameter cParameter = helper.createFunctionParameter(keyProperty);
@@ -60,6 +68,25 @@ public class KeyToFunctionForIdentification
 		}
 		Collections.sort(asParameters, NameUtil.NAMEABLE_COMPARATOR);
 		org.eclipse.ocl.pivot.@NonNull Class identifiedClass = ClassUtil.nonNullState(rKey.getIdentifies());
+		//
+		//	One shadow part per uninitialized key property
+		//
+		CompleteClass completeClass = qvtr2qvtc.getEnvironmentFactory().getCompleteModel().getCompleteClass(identifiedClass);
+		for (@NonNull Property asProperty : completeClass.getProperties(FeatureFilter.SELECT_NON_STATIC)) {
+			if (!asProperty.isIsImplicit() && !asProperty.isIsMany() && (asProperty != qvtr2qvtc.getOclContainerProperty())) {
+				boolean gotIt = false;
+				for (@NonNull ShadowPart asShadowPart : asShadowParts) {
+					if (asShadowPart.getReferredProperty() == asProperty) {
+						gotIt = true;
+						break;
+					}
+				}
+				if (!gotIt) {
+					ShadowPart asShadowPart = helper.createShadowPart(asProperty, helper.createNullLiteralExp());
+					asShadowParts.add(asShadowPart);
+				}
+			}
+		}
 		Function cFunction = helper.createFunction(functionName, identifiedClass, true, asParameters);
 		OCLExpression asShadowExp = helper.createShadowExp(identifiedClass, asShadowParts);
 		cFunction.setQueryExpression(asShadowExp);
