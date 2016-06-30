@@ -62,6 +62,8 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.TracingOption;
+import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -73,8 +75,15 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeV
 
 public class DependencyAnalyzer
 {
-//	private static final @SuppressWarnings("null")@NonNull Set<@NonNull List<@NonNull DependencyStep>> EMPTY_ELEMENTS = Collections.emptySet();
-		
+	//	private static final @SuppressWarnings("null")@NonNull Set<@NonNull List<@NonNull DependencyStep>> EMPTY_ELEMENTS = Collections.emptySet();
+	public static final @NonNull TracingOption BLOCK = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/block");
+	public static final @NonNull TracingOption CREATE = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/create");
+	public static final @NonNull TracingOption FAIL = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/fail");
+	public static final @NonNull TracingOption FINISH = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/finish");
+	public static final @NonNull TracingOption RETURN = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/return");
+	public static final @NonNull TracingOption START = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/start");
+	public static final @NonNull TracingOption UNBLOCK = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/unblock");
+
 	@SuppressWarnings("serial")
 	protected static class BlockedAnalysisException extends RuntimeException
 	{
@@ -98,7 +107,7 @@ public class DependencyAnalyzer
 		protected DependencyStepFactory(@NonNull DomainUsage usage) {
 			this.usage = usage;
 		}
-		
+
 		public @NonNull ClassDependencyStep createClassDependencyStep(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull Element element) {
 			ClassDependencyStep dependencyStep = class2step.get(type);
 			if (dependencyStep == null) {
@@ -107,7 +116,7 @@ public class DependencyAnalyzer
 			}
 			return dependencyStep;
 		}
-		
+
 		public @NonNull NavigationDependencyStep createPropertyDependencyStep(@NonNull NavigationCallExp navigationCallExp) {
 			Property property = PivotUtil.getReferredProperty(navigationCallExp);
 			assert property != null;
@@ -123,7 +132,7 @@ public class DependencyAnalyzer
 			return usage;
 		}
 	}
-	
+
 	protected abstract static class DependencyStep
 	{
 		protected final @NonNull DomainUsage usage;
@@ -146,11 +155,11 @@ public class DependencyAnalyzer
 			return usage;
 		}
 	}
-	
+
 	protected static class ClassDependencyStep extends DependencyStep
 	{
 		private final org.eclipse.ocl.pivot.@NonNull Class type;
-		
+
 		public ClassDependencyStep(@NonNull DomainUsage usage, org.eclipse.ocl.pivot.@NonNull Class type, @NonNull Element element) {
 			super(usage, element);
 			this.type = type;
@@ -172,11 +181,11 @@ public class DependencyAnalyzer
 			return usage + " «" + type.eClass().getName() + "»" + type.toString();
 		}
 	}
-	
+
 	protected static class NavigationDependencyStep extends DependencyStep
 	{
 		protected final @NonNull Property property;
-		
+
 		public NavigationDependencyStep(@NonNull DomainUsage usage, @NonNull Property property, @NonNull NavigationCallExp element) {
 			super(usage, element);
 			this.property = property;
@@ -206,23 +215,23 @@ public class DependencyAnalyzer
 			return property;
 		}
 
-//		@Override
-//		public org.eclipse.ocl.pivot.@NonNull Class getType() {
-//			Type type = property.getType();
-//			assert type != null;
-//			return (org.eclipse.ocl.pivot.Class) type;
-//		}
+		//		@Override
+		//		public org.eclipse.ocl.pivot.@NonNull Class getType() {
+		//			Type type = property.getType();
+		//			assert type != null;
+		//			return (org.eclipse.ocl.pivot.Class) type;
+		//		}
 
 		@Override
 		public String toString() {
 			return usage + " «" + property.eClass().getName() + "»" + property.toString();
 		}
 	}
-	
+
 	protected static class UnknownDependencyStep extends DependencyStep
 	{
 		private final org.eclipse.ocl.pivot.@NonNull Class type;
-		
+
 		public UnknownDependencyStep(@NonNull DomainUsage usage, org.eclipse.ocl.pivot.@NonNull Class type, @NonNull Element element) {
 			super(usage, element);
 			this.type = type;
@@ -244,7 +253,7 @@ public class DependencyAnalyzer
 			return usage + " ??«" + type.eClass().getName() + "»" + type.toString();
 		}
 	}
-		
+
 	protected static class DependencyPaths
 	{
 		protected final @NonNull DependencyAnalyzer dependencyAnalyzer;
@@ -313,7 +322,7 @@ public class DependencyAnalyzer
 			}
 			return dependencyAnalyzer.createDependencyPaths(newReturnPaths, newHiddenPaths);
 		}
-		
+
 		public @NonNull DependencyPaths append(@NonNull NavigationDependencyStep propertyDependencyStep) {
 			Set<@NonNull List<@NonNull DependencyStep>> oldReturnPaths = returnPaths;
 			if (oldReturnPaths == null) {
@@ -450,8 +459,8 @@ public class DependencyAnalyzer
 	protected class DependencyAnalyzerVisitor extends AbstractExtendingQVTimperativeVisitor<@NonNull DependencyPaths, @Nullable Object>
 	{
 		private final @Nullable DependencyAnalyzerVisitor parent;
-		private final @NonNull Map<@NonNull VariableDeclaration, @NonNull DependencyPaths> variable2dependencies = new HashMap<@NonNull VariableDeclaration, @NonNull DependencyPaths>();		
-		
+		private final @NonNull Map<@NonNull VariableDeclaration, @NonNull DependencyPaths> variable2dependencies = new HashMap<@NonNull VariableDeclaration, @NonNull DependencyPaths>();
+
 		protected DependencyAnalyzerVisitor(@Nullable DependencyAnalyzerVisitor parent) {
 			super(null);
 			this.parent = parent;
@@ -460,13 +469,13 @@ public class DependencyAnalyzer
 		private void addVariable(@NonNull VariableDeclaration variable, @NonNull DependencyPaths value) {
 			variable2dependencies.put(variable, value);
 		}
-		
+
 		public @NonNull DependencyPaths analyze(/*@NonNull*/ Visitable element) {
 			DependencyPaths accept = element.accept(this);
 			assert accept != null;
 			return accept;
 		}
-		
+
 		protected @NonNull DependencyPaths getVariable(@NonNull VariableDeclaration variable) {
 			DependencyPaths result = variable2dependencies.get(variable);
 			if (result != null) {
@@ -514,7 +523,7 @@ public class DependencyAnalyzer
 		}
 
 		@Override
-		public @NonNull DependencyPaths visitLetExp(@NonNull LetExp letExp) {		
+		public @NonNull DependencyPaths visitLetExp(@NonNull LetExp letExp) {
 			Variable ownedVariable = letExp.getOwnedVariable();
 			DependencyPaths result = analyze(ownedVariable.getOwnedInit());
 			DependencyAnalyzerVisitor nestedAnalyzer = new DependencyAnalyzerVisitor(this);
@@ -570,19 +579,19 @@ public class DependencyAnalyzer
 				return executeOperationCall(operationCallExp, argumentPaths);
 			}
 			OperationId operationId = referredOperation.getOperationId();
-//			if (operationId == scheduler.getOclAnyOclAsTypeId()) {
-//				return analyzeOperationCallExp_oclAsType(sourceNode, operationCallExp);
-//			}
+			//			if (operationId == scheduler.getOclAnyOclAsTypeId()) {
+			//				return analyzeOperationCallExp_oclAsType(sourceNode, operationCallExp);
+			//			}
 			if (PivotUtil.isSameOperation(operationId, scheduler.getOclElementOclContainerId())) {
 				return executeOperationCallExp_oclContainer(operationCallExp, argumentPaths);
 			}
-//			if (PivotUtil.isSameOperation(operationId, scheduler.getCollectionSelectByKindId())) {
-//				return executeOperationCallExp_collectionSelectByKind(operationCallExp, argumentPaths);
-//			}
-//			else if (PivotUtil.isSameOperation(operationId, scheduler.getOclAnyOclIsKindOfId())) {
-//				return analyzeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
-//			}
-//			else {
+			//			if (PivotUtil.isSameOperation(operationId, scheduler.getCollectionSelectByKindId())) {
+			//				return executeOperationCallExp_collectionSelectByKind(operationCallExp, argumentPaths);
+			//			}
+			//			else if (PivotUtil.isSameOperation(operationId, scheduler.getOclAnyOclIsKindOfId())) {
+			//				return analyzeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
+			//			}
+			//			else {
 			org.eclipse.ocl.pivot.Class returnType = ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class) operationCallExp.getType());
 			DependencyStep step = createClassDependencyStep(returnType, operationCallExp);
 			DependencyPaths result = createDependencyPaths(step);
@@ -592,7 +601,7 @@ public class DependencyAnalyzer
 			return result;
 		}
 
-/*		private @NonNull DependencyPaths executeOperationCallExp_collectionSelectByKind(@NonNull OperationCallExp operationCallExp,
+		/*		private @NonNull DependencyPaths executeOperationCallExp_collectionSelectByKind(@NonNull OperationCallExp operationCallExp,
 				@NonNull List<@NonNull DependencyPaths> argumentPaths) {
 			OCLExpression oclExpression = operationCallExp.getOwnedArguments().get(0);
 			Type typeValue = oclExpression.getTypeValue();
@@ -691,20 +700,20 @@ public class DependencyAnalyzer
 		 * Analyses that this analysis blocks
 		 */
 		private Set<@NonNull OperationAnalysis> invokingAnalyses = null;
-		
+
 		public OperationAnalysis(@NonNull Operation operation, @NonNull List<@NonNull DependencyPaths> sourceAndArgumentPaths) {
 			this.operation = operation;
 			this.sourceAndArgumentPaths = sourceAndArgumentPaths;
-			Scheduler.DEPENDENCY_ANALYSIS.println("Create  " + this);
+			CREATE.println("Create  " + this);
 		}
-		
+
 		private void addFailedAnalysis(@NonNull OperationAnalysis failedAnalysis) {
 			if (failedAnalyses == null) {
 				failedAnalyses = new HashSet<@NonNull OperationAnalysis>();
 			}
 			failedAnalyses.add(failedAnalysis);
 		}
-		
+
 		private void addInvokingAnalysis(@NonNull OperationAnalysis invokingAnalysis) {
 			if (invokingAnalyses == null) {
 				invokingAnalyses = new HashSet<@NonNull OperationAnalysis>();
@@ -716,7 +725,7 @@ public class DependencyAnalyzer
 			if (result != null) {
 				return result;
 			}
-			Scheduler.DEPENDENCY_ANALYSIS.println("Start   " + this);
+			START.println("Start   " + this);
 			try {
 				DependencyAnalyzerVisitor visitor = new DependencyAnalyzerVisitor(null);
 				LanguageExpression bodyExpression;
@@ -750,13 +759,13 @@ public class DependencyAnalyzer
 					}
 					invokingAnalyses.clear();
 				}
-				Scheduler.DEPENDENCY_ANALYSIS.println("Finish  " + this);
+				FINISH.println("Finish  " + this);
 				return result;
 			} catch (ParserException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (BlockedAnalysisException e) {
-				Scheduler.DEPENDENCY_ANALYSIS.println("Fail    " + this);
+				FAIL.println("Fail    " + this);
 				for (@NonNull OperationAnalysis analysis : e.getFailedAnalyses()) {
 					block(this, analysis);
 				}
@@ -774,14 +783,14 @@ public class DependencyAnalyzer
 					invokingAnalyses.remove(invokingAnalysis);
 					invokingAnalysis.removeFailedAnalysis(this);
 				}
-//				invokingAnalyses.clear();
+				//				invokingAnalyses.clear();
 			}
 			if (failedAnalyses != null) {
 				for (@NonNull OperationAnalysis failedAnalysis : new ArrayList<@NonNull OperationAnalysis>(failedAnalyses)) {
 					failedAnalyses.remove(failedAnalysis);
 					failedAnalysis.removeInvokingAnalysis(this);
 				}
-//				failedAnalyses.clear();
+				//				failedAnalyses.clear();
 			}
 			unblock(this);
 			checkAll();
@@ -791,12 +800,12 @@ public class DependencyAnalyzer
 			if ((failedAnalyses != null) && !failedAnalyses.isEmpty()) {
 				assert DependencyAnalyzer.this.blockedAnalyses.contains(this) : "should be blocked " + this;
 				for (@NonNull OperationAnalysis blockingAnalysis : failedAnalyses) {
-//					assert DependencyAnalyzer.this.blockedAnalyses.contains(blockingAnalysis);
+					//					assert DependencyAnalyzer.this.blockedAnalyses.contains(blockingAnalysis);
 					assert blockingAnalysis.invokingAnalyses.contains(this);
 				}
 			}
 			if (invokingAnalyses != null) {
-//				assert DependencyAnalyzer.this.blockedAnalyses.contains(this);
+				//				assert DependencyAnalyzer.this.blockedAnalyses.contains(this);
 				for (@NonNull OperationAnalysis blockedAnalysis : invokingAnalyses) {
 					assert DependencyAnalyzer.this.blockedAnalyses.contains(blockedAnalysis);
 					assert blockedAnalysis.failedAnalyses.contains(this);
@@ -807,7 +816,7 @@ public class DependencyAnalyzer
 		public @Nullable DependencyPaths getResult() {
 			return result;
 		}
-		
+
 		private void removeFailedAnalysis(@NonNull OperationAnalysis operationAnalysis) {
 			assert failedAnalyses != null;
 			boolean wasRemoved = failedAnalyses.remove(operationAnalysis);
@@ -829,7 +838,7 @@ public class DependencyAnalyzer
 			return operation.toString() + " <= " + sourceAndArgumentPaths;
 		}
 	}
-	
+
 	private final @NonNull MetamodelManager metamodelManager;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	protected final @NonNull SchedulerConstants scheduler;
@@ -840,7 +849,7 @@ public class DependencyAnalyzer
 	private final @NonNull FinalAnalysis finalAnalysis;
 	private final @NonNull Set<@NonNull OperationAnalysis> blockedAnalyses = new HashSet<@NonNull OperationAnalysis>();
 	private final @NonNull Deque<@NonNull OperationAnalysis> unblockedAnalyses = new LinkedList<@NonNull OperationAnalysis>();
-	
+
 	public DependencyAnalyzer(@NonNull SchedulerConstants scheduler) {
 		EnvironmentFactory environmentFactory = scheduler.getEnvironmentFactory();
 		this.metamodelManager = environmentFactory.getMetamodelManager();
@@ -866,7 +875,7 @@ public class DependencyAnalyzer
 			}
 		}
 		while (blockedAnalyses.size() > 0) {
-//			System.out.println("blocked");
+			//			System.out.println("blocked");
 			Map<String, @NonNull OperationAnalysis> map = new HashMap<String, @NonNull OperationAnalysis>();
 			for (OperationAnalysis analysis : blockedAnalyses) {
 				map.put(analysis.toString(), analysis);
@@ -878,17 +887,17 @@ public class DependencyAnalyzer
 			for (String key : keys) {
 				OperationAnalysis operationAnalysis = map.get(key);
 				assert operationAnalysis != null;
-//				System.out.println("  " + operationAnalysis);
-//				for (OperationAnalysis blockingAnalysis : operationAnalysis.failedAnalyses) {
-//					System.out.println("    " + blockingAnalysis);
-//				}
+				//				System.out.println("  " + operationAnalysis);
+				//				for (OperationAnalysis blockingAnalysis : operationAnalysis.failedAnalyses) {
+				//					System.out.println("    " + blockingAnalysis);
+				//				}
 				operationAnalysis.check();
 				if ((operationAnalysis.invokingAnalyses != null) && (operationAnalysis.invokingAnalyses.size() > mostBlockedCount)) {
 					mostBlocked = operationAnalysis;
-					mostBlockedCount = operationAnalysis.invokingAnalyses.size();			
+					mostBlockedCount = operationAnalysis.invokingAnalyses.size();
 				}
 			}
-//			System.out.println("Most blocked " + mostBlockedCount + " : " + mostBlocked);
+			//			System.out.println("Most blocked " + mostBlockedCount + " : " + mostBlocked);
 			assert mostBlocked != null;
 			mostBlocked.assignUnknownResult();
 			while (unblockedAnalyses.size() > 0) {
@@ -898,7 +907,7 @@ public class DependencyAnalyzer
 			}
 		}
 		Map<@NonNull String, @NonNull OperationAnalysis> map2 = new HashMap<@NonNull String, @NonNull OperationAnalysis>();
-//		System.out.println("not blocked");
+		//		System.out.println("not blocked");
 		for (@NonNull Map<@NonNull List<@NonNull DependencyPaths>, @NonNull OperationAnalysis> values : operation2result.values()) {
 			for (@NonNull OperationAnalysis analysis : values.values()) {
 				if (!blockedAnalyses.contains(analysis)) {
@@ -911,17 +920,17 @@ public class DependencyAnalyzer
 		for (@NonNull String key : keys2) {
 			OperationAnalysis operationAnalysis = map2.get(key);
 			assert operationAnalysis != null;
-//			System.out.println("  " + operationAnalysis);
-//			if (operationAnalysis.failedAnalyses != null) {
-//				for (OperationAnalysis failedAnalysis : operationAnalysis.failedAnalyses) {
-//					System.out.println("    " + failedAnalysis);
-//				}
-//			}
+			//			System.out.println("  " + operationAnalysis);
+			//			if (operationAnalysis.failedAnalyses != null) {
+			//				for (OperationAnalysis failedAnalysis : operationAnalysis.failedAnalyses) {
+			//					System.out.println("    " + failedAnalysis);
+			//				}
+			//			}
 			operationAnalysis.check();
 		}
 		return analyze(visitor, element);
 	}
-	
+
 	public @NonNull DependencyPaths analyze(/*@NonNull*/ Element element,
 			@NonNull VariableDeclaration selfVariable, @Nullable DependencyPaths selfPath) {
 		assert element != null;
@@ -933,8 +942,8 @@ public class DependencyAnalyzer
 		visitor.addVariable(selfVariable, selfPath);
 		return analyze(visitor, element);
 	}
-	
-/*	private DependencyPaths analyzeOperationCall(@NonNull Operation operation, @NonNull List<DependencyPaths> sourceAndArgumentPaths) {
+
+	/*	private DependencyPaths analyzeOperationCall(@NonNull Operation operation, @NonNull List<DependencyPaths> sourceAndArgumentPaths) {
 		OperationId operationId = operation.getOperationId();
 		Scheduler.DEPENDENCY_ANALYSIS.println(++debugDepth  + " Call " + operationId);// + " for " + sourceAndArgumentPaths);
 		Map<List<DependencyPaths>, OperationAnalysis> args2result = operation2result.get(operationId);
@@ -972,18 +981,18 @@ public class DependencyAnalyzer
 	} */
 
 	protected void block(@NonNull OperationAnalysis invokingAnalysis, @NonNull OperationAnalysis failedAnalysis) {
-		Scheduler.DEPENDENCY_ANALYSIS.println("Block   " + invokingAnalysis); // + "\n from " + failedAnalysis);
+		BLOCK.println("Block   " + invokingAnalysis); // + "\n from " + failedAnalysis);
 		blockedAnalyses.add(invokingAnalysis);
 		invokingAnalysis.addFailedAnalysis(failedAnalysis);
 		failedAnalysis.addInvokingAnalysis(invokingAnalysis);
 	}
-	
+
 	private void checkAll() {
 		for (OperationAnalysis operationAnalysis : blockedAnalyses) {
 			operationAnalysis.check();
 		}
 	}
-	
+
 	protected @NonNull ClassDependencyStep createClassDependencyStep(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull Element element) {
 		while (type instanceof CollectionType) {
 			type = ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class) ((CollectionType)type).getElementType());
@@ -1017,7 +1026,7 @@ public class DependencyAnalyzer
 		DependencyStepFactory factory = getDependencyStepFactory(usage);
 		return factory.createPropertyDependencyStep(navigationCallExp);
 	}
-	
+
 	/**
 	 * Attempt to execute all applicable overloads of operationCallExp with a given concatenation of known source and argument paths.
 	 * Throws a BlockedAnalysisException if any overload is blocked pending execution of some other operation.
@@ -1088,11 +1097,11 @@ public class DependencyAnalyzer
 		assert usage != null;
 		return usage;
 	}
-	
+
 	protected void unblock(@NonNull OperationAnalysis operationAnalysis) {
-		Scheduler.DEPENDENCY_ANALYSIS.println("Unblock " + operationAnalysis);
+		UNBLOCK.println("Unblock " + operationAnalysis);
 		@SuppressWarnings("unused")boolean wasRemoved = blockedAnalyses.remove(operationAnalysis);
-//		assert wasRemoved; -- multiple unblocking occur when introducing UnknownDependencySteps
+		//		assert wasRemoved; -- multiple unblocking occur when introducing UnknownDependencySteps
 		unblockedAnalyses.addLast(operationAnalysis);
 	}
 }
