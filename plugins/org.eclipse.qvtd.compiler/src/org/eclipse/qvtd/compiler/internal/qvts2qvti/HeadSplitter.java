@@ -11,16 +11,20 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvti;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
@@ -28,174 +32,20 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
 /**
  * A HeadSplitter splits multi-headed regions whose heads are dependent into a cascade of looping regions, one per head around
- * a singly-headed core region.
+ * a singly-headed core region. The split is performed recusively by introducing a Boundary between a Group of ssource head nodes
+ * and target head nodes. The result is an ordered list of boundaries.
  */
 public class HeadSplitter
 {
-	public static final @NonNull TracingOption SPLITTING = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/headSplitting");
-
-	public class Boundary
-	{
-		protected final @NonNull Set<@NonNull Node> intersectionNodes;
-		protected final @NonNull Set<@NonNull Node> headNodes = new HashSet<@NonNull Node>();
-		//		protected final @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> headNode2reachableNodes;
-		Map<@NonNull Node, List<@NonNull Edge>> head2interHeadEdges = new HashMap<@NonNull Node, List<@NonNull Edge>>();
-		Map<@NonNull Node, List<@NonNull Node>> head2interHeadNodes = new HashMap<@NonNull Node, List<@NonNull Node>>();
-
-		public Boundary(@NonNull Set<@NonNull Node> intersectionNodes) {
-			this.intersectionNodes = intersectionNodes;
-		}
-
-		public void add(@NonNull Node headNode) {
-			boolean wasAdded = headNodes.add(headNode);
-			assert wasAdded;
-		}
-
-		public void analyze() {
-			for (@NonNull Node headNode : headNodes) {
-				analyze(headNode);
-			}
-		}
-
-		public void analyze(@NonNull Node headNode) {
-			List<@NonNull Edge> interHeadEdges = null;
-			List<@NonNull Node> interHeadNodes = null;
-			Set<@NonNull Node> theseNodes = new HashSet<@NonNull Node>(head2reachables.get(headNode));
-			theseNodes.removeAll(intersectionNodes);
-			Set<@NonNull Node> thoseNodes = new HashSet<@NonNull Node>(allReachables);
-			thoseNodes.removeAll(theseNodes);
-			for (@NonNull Node thisNode : theseNodes) {
-				for (@NonNull NavigationEdge edge : thisNode.getNavigationEdges()) {
-					assert edge.getSource() == thisNode;
-					if (!edge.isRealized() && edge.isNavigable()) {
-						Property property = edge.getProperty();
-						Property opposite = property.getOpposite();
-						if ((opposite != null) && opposite.isIsMany()) {
-							Node targetNode = edge.getTarget();
-							if (!theseNodes.contains(targetNode)) {
-								List<@NonNull Node> targetHeadNodes = reachable2heads.get(targetNode);
-								assert targetHeadNodes != null;
-								targetHeadNodes.remove(headNode);
-								targetHeadNodes.retainAll(headNodes);
-								if (targetHeadNodes.size() > 0) {
-									if (interHeadEdges == null) {
-										interHeadEdges = new ArrayList<@NonNull Edge>();
-									}
-									if (!interHeadEdges.contains(edge)) {
-										interHeadEdges.add(edge);
-									}
-									for (@NonNull Node targetHeadNode : targetHeadNodes) {
-										if (interHeadNodes == null) {
-											interHeadNodes = new ArrayList<@NonNull Node>();
-										}
-										if (!interHeadNodes.contains(targetHeadNode)) {
-											interHeadNodes.add(targetHeadNode);
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-				for (@NonNull Edge edge : thisNode.getIncomingEdges()) {
-					assert edge.getTarget() == thisNode;
-					if (!edge.isRealized() && edge.isComputation()) {
-						Set<@NonNull Node> sourceHeadNodes = getSourceHeadNodes(edge);
-						sourceHeadNodes.remove(headNode);
-						sourceHeadNodes.retainAll(headNodes);
-						if (sourceHeadNodes.size() > 0) {
-							if (interHeadEdges == null) {
-								interHeadEdges = new ArrayList<@NonNull Edge>();
-							}
-							if (!interHeadEdges.contains(edge)) {
-								interHeadEdges.add(edge);
-							}
-						}
-						for (@NonNull Node sourceHeadNode : sourceHeadNodes) {
-							if (interHeadNodes == null) {
-								interHeadNodes = new ArrayList<@NonNull Node>();
-							}
-							if (!interHeadNodes.contains(sourceHeadNode)) {
-								interHeadNodes.add(sourceHeadNode);
-							}
-						}
-					}
-				}
-			}
-			if (interHeadEdges != null) {
-				head2interHeadEdges.put(headNode, interHeadEdges);
-			}
-			if (interHeadNodes != null) {
-				head2interHeadNodes.put(headNode, interHeadNodes);
-			}
-		}
-
-
-		public void debug(@NonNull StringBuilder s) {
-			s.append("\n    boundary:");
-			for (@NonNull Node headNode : headNodes) {
-				s.append(" \"" + headNode.getName() + "\"");
-			}
-			for (@NonNull Node node : intersectionNodes) {
-				s.append("\n        shared " + node);
-			}
-			for (@NonNull Node headNode : headNodes) {
-				s.append("\n        head: \"" + headNode.getName() + "\" <-");
-				List<@NonNull Node> interHeadNodes = head2interHeadNodes.get(headNode);
-				if (interHeadNodes != null) {
-					for (@NonNull Node node : interHeadNodes) {
-						s.append(" \"" + node.getName() + "\"");
-					}
-				}
-				List<@NonNull Edge> interHeadEdges = head2interHeadEdges.get(headNode);
-				if (interHeadEdges != null) {
-					for (@NonNull Edge edge : interHeadEdges) {
-						s.append("\n            via: " + edge);
-						if (edge instanceof NavigationEdge) {
-							Property property = ((NavigationEdge)edge).getProperty();
-							s.append("\n                property: " + (property.isIsImplicit() ? "implicit" : "explicit") + " " + property.getName() + " : " + property.getType());
-							Property opposite = property.getOpposite();
-							if (opposite != null) {
-								s.append("\n                opposite: " + (opposite.isIsImplicit() ? "implicit" : "explicit") + " " + opposite.getName() + " : " + opposite.getType());
-							}
-
-						}
-					}
-				}
-			}
-		}
-
-		public @NonNull LinkedHashMap<@NonNull Node, @NonNull List<@NonNull Edge>> getRemoveableHeads() {
-			//
-			//	Compute the head nodes that can be derived by navigation from other heads.
-			//
-			LinkedHashMap<@NonNull Node, @NonNull List<@NonNull Edge>> derivableHeadNodes2edges = new LinkedHashMap<@NonNull Node, @NonNull List<@NonNull Edge>>();
-			for (@NonNull Node headNode : headNodes) {
-				List<@NonNull Node> interHeadNodes = head2interHeadNodes.get(headNode);
-				if ((interHeadNodes != null) && (interHeadNodes.size() > 0)) {
-					List<@NonNull Edge> interHeadEdges = head2interHeadEdges.get(headNode);
-					if ((interHeadEdges != null) && (interHeadEdges.size() > 0)) {
-						derivableHeadNodes2edges.put(headNode, interHeadEdges);
-					}
-				}
-			}
-			//
-			//	Compute the deriveable head nodes that do not depend on other deriveable heads.
-			//
-			LinkedHashMap<@NonNull Node, @NonNull List<@NonNull Edge>> removableHeadNodes = new LinkedHashMap<@NonNull Node, @NonNull List<@NonNull Edge>>();
-			Set<@NonNull Node> derivableHeadNodes = derivableHeadNodes2edges.keySet();
-			for (Map.Entry<@NonNull Node, @NonNull List<@NonNull Edge>> entry : derivableHeadNodes2edges.entrySet()) {
-				Node headNode = entry.getKey();
-				List<@NonNull Node> interHeadNodes = head2interHeadNodes.get(headNode);
-				if ((interHeadNodes != null) && containsNone(interHeadNodes, derivableHeadNodes)) {
-					removableHeadNodes.put(headNode, entry.getValue());
-				}
-			}
-			return removableHeadNodes;
-		}
-	}
+	public static final @NonNull TracingOption ANALYSIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/split/analysis");
+	public static final @NonNull TracingOption OVERLAP = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/split/overlap");
+	public static final @NonNull TracingOption RESULT = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/split/result");
 
 	public static boolean containsNone(@NonNull Iterable<@NonNull Node> firstNodes, @NonNull Iterable<@NonNull Node> secondNodes) {
 		for (@NonNull Node firstNode : firstNodes) {
@@ -208,187 +58,526 @@ public class HeadSplitter
 		return true;
 	}
 
-	protected final @NonNull Region region;
+	/**
+	 * A Boundary describes an edge between the reachable nodes of two head groups.
+	 */
+	public static class Boundary implements Nameable
+	{
+		protected final @NonNull Group sourceGroup;
+		protected final @NonNull Edge edge;
+		protected final @NonNull Group targetGroup;
+		protected final @NonNull String name;
+
+		public Boundary(@NonNull Group sourceGroup, @NonNull Edge edge, @NonNull Group targetGroup) {
+			this.sourceGroup = sourceGroup;
+			this.edge = edge;
+			this.targetGroup = targetGroup;
+			this.name = sourceGroup.getName() + "==>" + edge.getName() + "==>" + targetGroup.getName();
+		}
+
+		public @NonNull Edge getEdge() {
+			return edge;
+		}
+
+		@Override
+		public @NonNull String getName() {
+			return name;
+		}
+
+		public @NonNull Group getSourceGroup() {
+			return sourceGroup;
+		}
+
+		public @NonNull Group getTargetGroup() {
+			return targetGroup;
+		}
+
+		public boolean isReverseNavigable() {
+			if (!(edge instanceof NavigationEdge)) {
+				return false;
+			}
+			Property forwardProperty = ((NavigationEdge)edge).getProperty();
+			Property reverseProperty = forwardProperty.getOpposite();
+			if (reverseProperty == null) {
+				return false;
+			}
+			return !reverseProperty.isIsImplicit();
+		}
+
+		@Override
+		public @NonNull String toString() {
+			return name;
+		}
+	}
 
 	/**
-	 * Map from each head node to all the nodes reachable from the head by to-one navigation.
+	 * BestBoundaryComparator supports comparison of boundaries so that more easily realizeable cross-boundary iterations are sorted first.
 	 */
-	private final @NonNull Map<@NonNull Node, Set<@NonNull Node>> head2reachables = new HashMap<@NonNull Node, Set<@NonNull Node>>();
+	public static final class BestBoundaryComparator implements Comparator<@NonNull Boundary>
+	{
+		public static final @NonNull BestBoundaryComparator INSTANCE = new BestBoundaryComparator();
+
+		@Override
+		public int compare(@NonNull Boundary o1, @NonNull Boundary o2) {
+			// boolean: true better than false
+			boolean b1 = o1.isReverseNavigable();
+			boolean b2 = o2.isReverseNavigable();
+			if (b1 != b2) {
+				return b1 ? -1 : 1;
+			}
+			Edge e1 = o1.getEdge();
+			Edge e2 = o2.getEdge();
+			b1 = e1.isConstant();
+			b2 = e2.isConstant();
+			if (b1 != b2) {
+				return b1 ? -1 : 1;
+			}
+			b1 = e1.isLoaded();
+			b2 = e2.isLoaded();
+			if (b1 != b2) {
+				return b1 ? -1 : 1;
+			}
+			b1 = e1.isPredicated();
+			b2 = e2.isPredicated();
+			if (b1 != b2) {
+				return b1 ? -1 : 1;
+			}
+			return ClassUtil.safeCompareTo(o1.getName(), o2.getName());
+		}
+	}
 
 	/**
-	 * Map from each head node to all the nodes reachable from the head by to-one navigation.
+	 * A head Group describes one or more head nodes whose reachable nodes are treated as a single sub-region for the purposes of
+	 * establishing a Boundary between two or more Groups by a SplitAttempt.
 	 */
-	private final @NonNull Set<@NonNull Node> allReachables = new HashSet<@NonNull Node>();
+	public static class Group implements Nameable
+	{
+		/**
+		 * The head nodes grouped into a composite sub-region.
+		 */
+		protected final @NonNull Iterable<@NonNull Node> headNodes;
 
-	/**
-	 * Map from each reachable node to all the head nodes from which it is reachable by to-one navigation.
-	 */
-	private final @NonNull Map<@NonNull Node, List<@NonNull Node>> reachable2heads = new HashMap<@NonNull Node, List<@NonNull Node>>();
+		/**
+		 * The name of the group.
+		 */
+		protected final @NonNull String name;
 
-	private final @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull Boundary> intersection2boundary = new HashMap<@NonNull Set<@NonNull Node>, @NonNull Boundary>();;
+		/**
+		 * All the nodes reachable from one of the head nodes by to-one navigation.
+		 */
+		private final @NonNull Set<@NonNull Node> reachableNodes = new HashSet<>();
 
-	public HeadSplitter(@NonNull Region region) {
-		this.region = region;
-		List<@NonNull Node> headNodes = region.getHeadNodes();
-		for (@NonNull Node headNode : headNodes) {
-			Set<@NonNull Node> reachableNodes = new HashSet<@NonNull Node>();
-			computeReachableNodes(headNode, reachableNodes);
-			head2reachables.put(headNode, reachableNodes);
-			for (@NonNull Node reachableNode : reachableNodes) {
-				List<@NonNull Node> reachableHeadNodes = reachable2heads.get(reachableNode);
-				if (reachableHeadNodes == null) {
-					reachableHeadNodes = new ArrayList<@NonNull Node>();
-					reachable2heads.put(reachableNode, reachableHeadNodes);
+		public Group(@NonNull Iterable<@NonNull Node> headNodes) {
+			this.headNodes = headNodes;
+			for (@NonNull Node headNode : headNodes) {
+				computeReachableNodes(headNode);
+			}
+			StringBuilder s = new StringBuilder();
+			List<@NonNull Node> sortedHeadNodes = Lists.newArrayList(headNodes);
+			Collections.sort(sortedHeadNodes, NameUtil.NAMEABLE_COMPARATOR);
+			for (@NonNull Node headNode : sortedHeadNodes) {
+				if (s.length() <= 0) {
+					s.append("\"");
 				}
-				assert !reachableHeadNodes.contains(headNode);
-				reachableHeadNodes.add(headNode);
-				allReachables.add(reachableNode);
-			}
-		}
-	}
-
-	private void computeReachableNodes(@NonNull Node sourceNode, @NonNull Set<@NonNull Node> reachableNodes) {
-		if (reachableNodes.add(sourceNode)) {
-			for (@NonNull NavigationEdge edge : sourceNode.getNavigationEdges()) {
-				assert edge.getSource() == sourceNode;
-				if (!edge.isRealized() && edge.isNavigable()) {
-					Node targetNode = edge.getTarget();
-					computeReachableNodes(targetNode, reachableNodes);
+				else {
+					s.append("+");
 				}
+				s.append(headNode.getName());
 			}
+			s.append("\"");
+			this.name = s.toString();
 		}
-	}
 
-	private void computeSourceNodes(@NonNull Edge computationEdge, @NonNull Set<@NonNull Node> sourceNodes) {
-		Node sourceNode = computationEdge.getSource();
-		if (sourceNodes.add(sourceNode)) {
-			for (@NonNull Edge edge : sourceNode.getIncomingEdges()) {
-				assert edge.getTarget() == sourceNode;
-				if (!edge.isRealized() && edge.isComputation()) {
-					computeSourceNodes(edge, sourceNodes);
-				}
-			}
-		}
-	}
-
-	private void createBoundary(@NonNull Node thisHeadNode) {
-		//
-		//	Compute the intersection that is reachable from another headNodes.
-		//
-		Set<@NonNull Node> allThoseNodes = new HashSet<@NonNull Node>();
-		for (@NonNull Node thatHeadNode : region.getHeadNodes()) {
-			if (thatHeadNode != thisHeadNode) {
-				Set<@NonNull Node> thoseNodes = head2reachables.get(thatHeadNode);
-				assert thoseNodes != null;
-				allThoseNodes.addAll(thoseNodes);
-			}
-		}
-		Set<@NonNull Node> theseNodes = head2reachables.get(thisHeadNode);
-		Set<@NonNull Node> intersectionNodes = new HashSet<@NonNull Node>(theseNodes);
-		intersectionNodes.retainAll(allThoseNodes);
-		Boundary boundary = intersection2boundary.get(intersectionNodes);
-		if (boundary == null) {
-			boundary = new Boundary(intersectionNodes);
-			intersection2boundary.put(intersectionNodes, boundary);
-		}
-		boundary.add(thisHeadNode);
-	}
-
-	private @NonNull Set<@NonNull Node> getSourceHeadNodes(@NonNull Edge edge) {
-		Set<@NonNull Node> sourceHeadNodes = new HashSet<@NonNull Node>();
-		Set<@NonNull Node> sourceNodes = new HashSet<@NonNull Node>();
-		computeSourceNodes(edge, sourceNodes);
-		for (@NonNull Node sourceNode : sourceNodes) {
-			List<@NonNull Node> reachableSourceHeadNodes = reachable2heads.get(sourceNode);
-			if (reachableSourceHeadNodes != null) {
-				sourceHeadNodes.addAll(reachableSourceHeadNodes);
-			}
-		}
-		return sourceHeadNodes;
-	}
-
-	private void pruneBoundaries() {
-		//
-		//	Hypothesis: larger boundaries are sums of smaller boundaries, so smaller are the interesting ones.
-		//
-		List<@NonNull Set<@NonNull Node>> intersections = new ArrayList<@NonNull Set<@NonNull Node>>(intersection2boundary.keySet());
-		int iMax = intersections.size();
-		for (int i1 = 0; i1 < iMax; i1++) {
-			Set<@NonNull Node> intersection1 = intersections.get(i1);
-			Boundary boundary1 = intersection2boundary.get(intersection1);
-			assert boundary1 != null;
-			for (int i2 = 0; i2 < iMax; i2++) {
-				if (i1 != i2) {
-					Set<@NonNull Node> intersection2 = intersections.get(i2);
-					if (/*(intersection2.size() > 0) &&*/ intersection1.containsAll(intersection2)) {
-						intersection2boundary.remove(intersection1);
-						Boundary boundary2 = intersection2boundary.get(intersection2);
-						assert boundary2 != null;
-						for (@NonNull Node headNode : boundary1.headNodes) {
-							boundary2.add(headNode);
-						}
+		private void computeReachableNodes(@NonNull Node sourceNode) {
+			if (reachableNodes.add(sourceNode)) {
+				for (@NonNull NavigationEdge edge : sourceNode.getNavigationEdges()) {
+					assert edge.getSource() == sourceNode;
+					if (!edge.isRealized() && edge.isNavigable()) {
+						Node targetNode = edge.getTarget();
+						computeReachableNodes(targetNode);
 					}
 				}
 			}
 		}
+
+		public @NonNull Iterable<@NonNull Node> getHeadNodes() {
+			return headNodes;
+		}
+
+		@Override
+		public @NonNull String getName() {
+			return name;
+		}
+
+		public @NonNull Iterable<@NonNull Node> getReachableNodes() {
+			return reachableNodes;
+		}
+
+		@Override
+		public @NonNull String toString() {
+			return name;
+		}
 	}
 
-	private @NonNull Collection<@NonNull Node>  removeBoundary() {
-		LinkedHashMap<@NonNull Node, @NonNull List<@NonNull Edge>> resolvedHeadNodes2edges = new LinkedHashMap<@NonNull Node, @NonNull List<@NonNull Edge>>();
-		for (@NonNull Boundary boundary : intersection2boundary.values()) {
-			for (Map.Entry<@NonNull Node, @NonNull List<@NonNull Edge>> entry : boundary.getRemoveableHeads().entrySet()) {
-				if (!resolvedHeadNodes2edges.containsKey(entry.getKey())) {
-					resolvedHeadNodes2edges.put(entry.getKey(), entry.getValue());
+	/**
+	 * A SplitAttempt supervises the identification and merge of two overlapping sub-regions to form a smaller problem for the next SplitAttempt.
+	 */
+	protected static class SplitAttempt
+	{
+		/**
+		 * An Overlap supports analysis of the intersection of nodes reachable from two or more head groups.
+		 * The intersection may be empty when a computation rather than a navigation crosses the boundary
+		 * between reachable node sub-regions.
+		 */
+		protected class Overlap
+		{
+			/**
+			 * The nodes in the overlap.
+			 */
+			protected final @NonNull Set<@NonNull Node> overlapNodes;
+
+			/**
+			 * The heads groups for which all the overlapNodes are reachable.
+			 */
+			protected final @NonNull Set<@NonNull Group> headGroups = new HashSet<>();
+
+			/**
+			 * The per-target head edges that provide a path via the overlap from another head to the head.
+			 */
+			private final @NonNull Map<@NonNull Group, @NonNull Map<@NonNull Group, @NonNull List<@NonNull Boundary>>> sourceGroup2targetGroup2boundaries = new HashMap<>();
+
+			public Overlap(@NonNull Set<@NonNull Node> overlapNodes) {
+				this.overlapNodes = overlapNodes;
+			}
+
+			public void add(@NonNull Group headGroup) {
+				boolean wasAdded = headGroups.add(headGroup);
+				assert wasAdded;
+			}
+
+			private void addBoundary(@NonNull Group sourceGroup, @NonNull Edge edge, @NonNull Group targetGroup) {
+				Boundary boundary = new Boundary(sourceGroup, edge, targetGroup);
+				Map<@NonNull Group, @NonNull List<@NonNull Boundary>> targetGroup2boundaries = sourceGroup2targetGroup2boundaries.get(sourceGroup);
+				if (targetGroup2boundaries == null) {
+					targetGroup2boundaries = new HashMap<>();
+					sourceGroup2targetGroup2boundaries.put(sourceGroup, targetGroup2boundaries);
+				}
+				List<@NonNull Boundary> boundaries = targetGroup2boundaries.get(targetGroup);
+				if (boundaries == null) {
+					boundaries = new ArrayList<>();
+					targetGroup2boundaries.put(targetGroup, boundaries);
+				}
+				boolean wasAdded = boundaries.add(boundary);
+				assert wasAdded;
+			}
+
+			public void analyze() {
+				if (headGroups.size() > 1) {
+					for (@NonNull Group headGroup : headGroups) {
+						analyze(headGroup);
+					}
+				}
+			}
+
+			private void analyze(@NonNull Group thisHeadGroup) {
+				Set<@NonNull Node> theseNonOverlapNodes = Sets.newHashSet(thisHeadGroup.getReachableNodes());
+				theseNonOverlapNodes.removeAll(overlapNodes);
+				for (@NonNull Node thisNonOverlapNode : theseNonOverlapNodes) {
+					for (@NonNull NavigationEdge edge : thisNonOverlapNode.getNavigationEdges()) {
+						assert edge.getSource() == thisNonOverlapNode;
+						if (!edge.isRealized() && edge.isNavigable()) {
+							Property property = edge.getProperty();
+							Property opposite = property.getOpposite();
+							if ((opposite != null) && opposite.isIsMany()) {
+								Node targetNode = edge.getTarget();
+								if (!theseNonOverlapNodes.contains(targetNode)) {
+									List<@NonNull Group> targetGroups = reachable2groups.get(targetNode);
+									assert targetGroups != null;
+									for (@NonNull Group targetGroup : targetGroups) {
+										if ((targetGroup != thisHeadGroup) && headGroups.contains(targetGroup)) {
+											addBoundary(thisHeadGroup, edge, targetGroup);
+										}
+									}
+								}
+							}
+						}
+					}
+					for (@NonNull Edge edge : thisNonOverlapNode.getIncomingEdges()) {
+						assert edge.getTarget() == thisNonOverlapNode;
+						if (!edge.isRealized() && edge.isComputation()) {
+							for (@NonNull Group sourceGroup : getSourceGroups(edge)) {
+								if ((sourceGroup != thisHeadGroup) && headGroups.contains(sourceGroup)) {
+									addBoundary(sourceGroup, edge, thisHeadGroup);
+								}
+							}
+						}
+					}
+				}
+			}
+
+			public void debug(@NonNull StringBuilder s) {
+				s.append("\n    overlap: ");
+				s.append(toString());
+				for (@NonNull Node node : overlapNodes) {
+					s.append("\n        shared " + node);
+				}
+				for (@NonNull Group sourceGroup : sourceGroup2targetGroup2boundaries.keySet()) {
+					Map<@NonNull Group, List<@NonNull Boundary>> targetGroup2boundaries = sourceGroup2targetGroup2boundaries.get(sourceGroup);
+					assert targetGroup2boundaries != null;
+					for (@NonNull Group targetGroup : targetGroup2boundaries.keySet()) {
+						s.append("\n      from " + sourceGroup.getName() + " to " + targetGroup.getName());
+						List<@NonNull Boundary> boundaries = targetGroup2boundaries.get(targetGroup);
+						assert boundaries != null;
+						for (@NonNull Boundary boundary : boundaries) {
+							s.append("\n        edge: " + boundary.getEdge());
+						}
+					}
+				}
+			}
+
+			public @NonNull Set<@NonNull Boundary> getRemoveableBoundaries() {
+				//
+				//	Compute the head nodes that can be derived by navigation from other heads.
+				//	Compute the deriveable head nodes that do not depend on other deriveable heads.
+				//
+				List<@NonNull Boundary> removableHeadBoundaries = new ArrayList<>();
+				for (@NonNull Map<@NonNull Group, @NonNull List<@NonNull Boundary>> targetGroup2boundaries : sourceGroup2targetGroup2boundaries.values()) {
+					for (@NonNull List<@NonNull Boundary> boundaries : targetGroup2boundaries.values()) {
+						removableHeadBoundaries.addAll(boundaries);
+					}
+				}
+				Collections.sort(removableHeadBoundaries, BestBoundaryComparator.INSTANCE);
+				// FIXME can we remove multiple boundaries if suitably orthogonal ?
+				return removableHeadBoundaries.size() > 0 ? Collections.singleton(removableHeadBoundaries.get(0)) :  Collections.emptySet();
+			}
+
+			@Override
+			public @NonNull String toString() {
+				StringBuilder s = new StringBuilder();
+				List<@NonNull Group> sortedGroups = new ArrayList<>(headGroups);
+				Collections.sort(sortedGroups, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull Group group : sortedGroups) {
+					if (s.length() > 0) {
+						s.append(",");
+					}
+					s.append(group.getName());
+				}
+				return s.toString();
+			}
+		}
+
+		/**
+		 * The region to be split.
+		 */
+		protected final @NonNull Region region;
+
+		/**
+		 * The sub-regions to be coalesced.
+		 */
+		protected final @NonNull Iterable<@NonNull Group> groups;
+
+		/**
+		 * Map from each reachable node to all the head nodes from which it is reachable by to-one navigation.
+		 */
+		private final @NonNull Map<@NonNull Node, List<@NonNull Group>> reachable2groups = new HashMap<>();
+
+		private final @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull Overlap> overlapNodes2overlap = new HashMap<>();
+
+		public SplitAttempt(@NonNull Region region, @NonNull Iterable<@NonNull Group> groups) {
+			this.region = region;
+			this.groups = groups;
+			for (@NonNull Group group : groups) {
+				for (@NonNull Node reachableNode : group.getReachableNodes()) {
+					List<@NonNull Group> reachableGroups = reachable2groups.get(reachableNode);
+					if (reachableGroups == null) {
+						reachableGroups = new ArrayList<>();
+						reachable2groups.put(reachableNode, reachableGroups);
+					}
+					assert !reachableGroups.contains(group);
+					reachableGroups.add(group);
 				}
 			}
 		}
-		if (SPLITTING.isActive()) {
-			StringBuilder s = new StringBuilder();
-			for (Map.Entry<@NonNull Node, @NonNull List<@NonNull Edge>> entry : resolvedHeadNodes2edges.entrySet()) {
-				s.append("\n\tresolveable \"" + entry.getKey().getName() + "\"");
-				for (@NonNull Edge edge : entry.getValue()) {
-					s.append("\n\t    via " + edge);
+
+		private void computeSourceNodes(@NonNull Edge computationEdge, @NonNull Set<@NonNull Node> sourceNodes) {
+			Node sourceNode = computationEdge.getSource();
+			if (sourceNodes.add(sourceNode)) {
+				for (@NonNull Edge edge : sourceNode.getIncomingEdges()) {
+					assert edge.getTarget() == sourceNode;
+					if (!edge.isRealized() && edge.isComputation()) {
+						computeSourceNodes(edge, sourceNodes);
+					}
 				}
 			}
-			SPLITTING.println(region + s.toString());
 		}
-		return resolvedHeadNodes2edges.keySet();
+
+		private void createOverlap(@NonNull Group thisGroup) {
+			//
+			//	Compute the nodes that are reachable from all other groups.
+			//
+			Set<@NonNull Node> allThoseNodes = new HashSet<>();
+			for (@NonNull Group thatGroup : groups) {
+				if (thatGroup != thisGroup) {
+					Iterables.addAll(allThoseNodes, thatGroup.getReachableNodes());
+				}
+			}
+			//
+			//	Compute the overlap nodes that are reachable from this head node and another head node.
+			//
+			Iterable<@NonNull Node> theseNodes = thisGroup.getReachableNodes();
+			Set<@NonNull Node> overlapNodes = Sets.newHashSet(theseNodes);
+			overlapNodes.retainAll(allThoseNodes);
+			//
+			//	Create or extend the overlap for the overlap nodes.
+			//
+			Overlap overlap = overlapNodes2overlap.get(overlapNodes);
+			if (overlap == null) {
+				overlap = new Overlap(overlapNodes);
+				overlapNodes2overlap.put(overlapNodes, overlap);
+			}
+			overlap.add(thisGroup);
+		}
+
+		private @NonNull Iterable<@NonNull Group> getSourceGroups(@NonNull Edge edge) {
+			Set<@NonNull Group> sourceGroups = new HashSet<>();
+			Set<@NonNull Node> sourceNodes = new HashSet<>();
+			computeSourceNodes(edge, sourceNodes);
+			for (@NonNull Node sourceNode : sourceNodes) {
+				List<@NonNull Group> reachableSourceGroups = reachable2groups.get(sourceNode);
+				if (reachableSourceGroups != null) {
+					sourceGroups.addAll(reachableSourceGroups);
+				}
+			}
+			return sourceGroups;
+		}
+
+		/* private void pruneOverlaps() {
+			//
+			//	Hypothesis: larger overlaps are sums of smaller overlaps, so smaller are the interesting ones.
+			//
+			List<@NonNull Set<@NonNull Node>> intersections = new ArrayList<>(overlapNodes2overlap.keySet());
+			int iMax = intersections.size();
+			for (int i1 = 0; i1 < iMax; i1++) {
+				Set<@NonNull Node> intersection1 = intersections.get(i1);
+				Overlap overlap1 = overlapNodes2overlap.get(intersection1);
+				assert overlap1 != null;
+				for (int i2 = 0; i2 < iMax; i2++) {
+					if (i1 != i2) {
+						Set<@NonNull Node> intersection2 = intersections.get(i2);
+						if (/*(intersection2.size() > 0) &&* / intersection1.containsAll(intersection2)) {
+							overlapNodes2overlap.remove(intersection1);
+							Overlap overlap2 = overlapNodes2overlap.get(intersection2);
+							assert overlap2 != null;
+							for (@NonNull Node headNode : overlap1.headNodes) {
+								overlap2.add(headNode);
+							}
+						}
+					}
+				}
+			}
+		} */
+
+		private @NonNull Set<@NonNull Boundary> removeOverlap() {
+			Set<@NonNull Boundary> removeableBoundaries = new HashSet<>();
+			for (@NonNull Overlap overlap : overlapNodes2overlap.values()) {
+				//				for (Map.Entry<@NonNull Node, @NonNull List<@NonNull Edge>> entry : overlap.getRemoveableHeads().entrySet()) {
+				for (@NonNull Boundary boundary : overlap.getRemoveableBoundaries()) {
+					removeableBoundaries.add(boundary);
+				}
+			}
+			if (OVERLAP.isActive()) {
+				StringBuilder s = new StringBuilder();
+				for (@NonNull Boundary boundary : removeableBoundaries) {
+					s.append("\n    resolveable: " + boundary);
+				}
+				OVERLAP.println(region + s.toString());
+			}
+			return removeableBoundaries;
+		}
+
+		public @NonNull Set<@NonNull Boundary> split() {
+			//
+			//	Create the overlap (intersection) between each head node's reachable region
+			//	and the other head node's reachable regions.
+			//
+			for (@NonNull Group group : groups) {
+				createOverlap(group);
+			}
+			//		pruneOverlaps();
+			//
+			//	Analyze each overlap to identify the boundaries that bridge the overlap.
+			//
+			for (@NonNull Overlap overlap : overlapNodes2overlap.values()) {
+				overlap.analyze();
+			}
+			//
+			//	Print out the analysis
+			//
+			if (ANALYSIS.isActive()) {
+				StringBuilder s = new StringBuilder();
+				for (@NonNull Overlap overlap : overlapNodes2overlap.values()) {
+					overlap.debug(s);
+				}
+				ANALYSIS.println(region + s.toString());
+			}
+			return removeOverlap();
+		}
+
 	}
 
-	public List<@NonNull Region> split() {
-		List<@NonNull Node> headNodes = new ArrayList<@NonNull Node>(region.getHeadNodes());
+	/**
+	 * The region to be split.
+	 */
+	protected final @NonNull Region region;
+
+	/**
+	 * The root groups, one per head node.
+	 */
+	//	protected final @NonNull List<@NonNull Group> rootGroups = new ArrayList<>();
+
+	public HeadSplitter(@NonNull Region region) {
+		this.region = region;
+	}
+
+	/**
+	 * Return an ordered list of boundaries at which the region can be successively split by performing an iteration from the boundary source
+	 * using the boundary edge over the boundary target. Returns null if no split possible or needed.
+	 */
+	public @Nullable List<@NonNull Boundary> split() {
+		List<@NonNull Node> headNodes = region.getHeadNodes();
 		if (headNodes.size() <= 1) {
 			return null;
 		}
-		do {
-			Collection<@NonNull Node> doneNodes = split(headNodes);
-			if (doneNodes.size() <= 0) {
+		List<@NonNull Group> groups = new ArrayList<>(headNodes.size());
+		for (@NonNull Node headNode : headNodes) {
+			groups.add(new Group(Collections.singletonList(headNode)));
+		}
+		List<@NonNull Boundary> allRemoveableBoundaries = new ArrayList<>();
+		while (groups.size() > 1) {
+			SplitAttempt splitAttempt = new SplitAttempt(region, groups);
+			Set<@NonNull Boundary> removeableBoundaries = splitAttempt.split();
+			if (removeableBoundaries.size() <= 0) {
 				break;
 			}
-			headNodes.removeAll(doneNodes);
-		}
-		while(headNodes.size() > 1);
-		return null;
-	}
-
-	private @NonNull Collection<@NonNull Node> split(@NonNull List<@NonNull Node> headNodes) {
-		//		head2reachables.clear();
-		intersection2boundary.clear();
-		for (@NonNull Node headNode : headNodes) {
-			createBoundary(headNode);
-		}
-		//		pruneBoundaries();
-		for (@NonNull Boundary boundary : intersection2boundary.values()) {
-			boundary.analyze();
-		}
-		if (SPLITTING.isActive()) {
-			StringBuilder s = new StringBuilder();
-			for (@NonNull Boundary boundary : intersection2boundary.values()) {
-				boundary.debug(s);
+			for (@NonNull Boundary boundary : removeableBoundaries) {
+				allRemoveableBoundaries.add(0, boundary);
+				Group sourceGroup = boundary.getSourceGroup();
+				Group targetGroup = boundary.getTargetGroup();
+				boolean wasRemoved = groups.remove(sourceGroup) && groups.remove(targetGroup);
+				assert wasRemoved;
+				List<@NonNull Node> mergedHeadNodes = Lists.newArrayList(sourceGroup.getHeadNodes());
+				Iterables.addAll(mergedHeadNodes, targetGroup.getHeadNodes());
+				groups.add(new Group(mergedHeadNodes));
 			}
-			SPLITTING.println(region + s.toString());
 		}
-		return removeBoundary();
+		if (RESULT.isActive()) {
+			StringBuilder s = new StringBuilder();
+			for (@NonNull Boundary boundary : allRemoveableBoundaries) {
+				s.append("\n    split: " + boundary);
+			}
+			RESULT.println(region + s.toString());
+		}
+		return allRemoveableBoundaries;
 	}
 
 	@Override

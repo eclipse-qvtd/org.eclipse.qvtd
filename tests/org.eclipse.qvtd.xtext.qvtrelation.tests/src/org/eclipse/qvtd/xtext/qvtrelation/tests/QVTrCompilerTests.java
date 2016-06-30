@@ -428,7 +428,7 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_CG() throws Exception {
-		HeadSplitter.SPLITTING.setState(true);
+		HeadSplitter.RESULT.setState(true);
 		Scheduler.DEBUG_GRAPHS.setState(true);
 		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
@@ -488,7 +488,7 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTrCompiler_SeqToStm_CG() throws Exception {
-		HeadSplitter.SPLITTING.setState(true);
+		HeadSplitter.RESULT.setState(true);
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
