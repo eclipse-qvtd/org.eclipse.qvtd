@@ -1,5 +1,20 @@
 # Debugging options for the org.eclipse.ocl.examples.codegen plug-in
 
+# Turn on tracing of the operation dependency analysis blocking an incomplete operation analysis
+org.eclipse.qvtd.compiler/qvtp2qvts/dependency/block=false
+# Turn on tracing of the operation dependency analysis creating a new operation analysis
+org.eclipse.qvtd.compiler/qvtp2qvts/dependency/create=false
+# Turn on tracing of the operation dependency analysis failing to complete an operation analysis
+org.eclipse.qvtd.compiler/qvtp2qvts/dependency/fail=false
+# Turn on tracing of the operation dependency analysis successfully completing an operation analysis
+org.eclipse.qvtd.compiler/qvtp2qvts/dependency/finish=false
+# Turn on tracing of the operation dependency analysis operation returns
+org.eclipse.qvtd.compiler/qvtp2qvts/dependency/return=false
+# Turn on tracing of the operation dependency analysis (re)starting an operation analysis
+org.eclipse.qvtd.compiler/qvtp2qvts/dependency/start=false
+# Turn on tracing of the operation dependency analysis unblocking an operation analysis for a retry
+org.eclipse.qvtd.compiler/qvtp2qvts/dependency/unblock=false
+
 # Turn on tracing of partitioining 
 org.eclipse.qvtd.compiler/qvtm2qvtp/partitioining=false
 # Turn on tracing of connection creation 
@@ -8,8 +23,6 @@ org.eclipse.qvtd.compiler/qvtp2qvts/connectionCreation=false
 org.eclipse.qvtd.compiler/qvtp2qvts/connectionRouting=false
 # Turn on generation of debug graphs 
 org.eclipse.qvtd.compiler/qvtp2qvts/debugGraphs=false
-# Turn on tracing of the operation dependency analysis 
-org.eclipse.qvtd.compiler/qvtp2qvts/dependencyAnalysis=false
 # Turn on dump of the consuming node for each class 
 org.eclipse.qvtd.compiler/qvtp2qvts/dump/class2consumingNodes=false
 # Turn on dump of the consumed properties analysis 
