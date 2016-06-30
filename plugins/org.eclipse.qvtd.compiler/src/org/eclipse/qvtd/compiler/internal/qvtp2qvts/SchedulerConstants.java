@@ -21,7 +21,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
@@ -84,7 +83,7 @@ public abstract class SchedulerConstants
 		}
 		return s.toString();
 	}
-	
+
 	/**
 	 * The DependencyGraph to be analyzed
 	 */
@@ -125,17 +124,12 @@ public abstract class SchedulerConstants
 	 * Property used as a navigation to iterate collection elementse.
 	 */
 	private final @NonNull Map<Type, Property> type2iterateProperty = new HashMap<Type, Property>();
-	
+
 	/**
 	 * Property used as an argument role identification.
 	 */
 	private final @NonNull Map<String, Property> name2argumentProperty = new HashMap<String, Property>();
-	
-	/**
-	 * OPeration depency analyzer and analyses.
-	 */
-	private @Nullable DependencyAnalyzer dependencyAnalyzer = null;
-	
+
 	/**
 	 * Map reserving a unique symbol name per region or connection.
 	 */
@@ -149,9 +143,9 @@ public abstract class SchedulerConstants
 		this.transformation = ClassUtil.nonNullState(QVTbaseUtil.getContainingTransformation(((MappingAction)dependencyGraph.getActions().get(0)).getMapping()));
 		//
 		this.inputUsage = domainAnalysis.getInputUsage();
-//		int outputMask = ((DomainUsage.Internal)domainAnalysis.getOutputUsage()).getMask();
-//		int inputMask = checkableMask & ~enforceableMask;
-//		this.inputUsage = domainAnalysis.getConstantUsage(inputMask);
+		//		int outputMask = ((DomainUsage.Internal)domainAnalysis.getOutputUsage()).getMask();
+		//		int inputMask = checkableMask & ~enforceableMask;
+		//		this.inputUsage = domainAnalysis.getConstantUsage(inputMask);
 		//
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		org.eclipse.ocl.pivot.Class oclAnyType = standardLibrary.getOclAnyType();
@@ -189,7 +183,7 @@ public abstract class SchedulerConstants
 		for (AbstractDatum abstractDatum : datums) {
 			if (abstractDatum instanceof ClassDatum) {
 				ClassDatum classDatum = (ClassDatum)abstractDatum;
-//				class2classDatum.put(classDatum.getType(), classDatum);
+				//				class2classDatum.put(classDatum.getType(), classDatum);
 				analyzeDatums(classDatum.getPropertyDatums());
 			}
 			else if (abstractDatum instanceof PropertyDatum) {
@@ -250,13 +244,13 @@ public abstract class SchedulerConstants
 		return classDatumAnalysis;
 	}
 
-//	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull Element contextElement, @NonNull Type type) {
-//		ClassDatum classDatum = getClassDatum(type);
-//		DomainUsage usage = getDomainUsage(contextElement);
-//		return getClassDatumAnalysis(classDatum, ClassUtil.nonNullState(usage));
-//	}
+	//	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull Element contextElement, @NonNull Type type) {
+	//		ClassDatum classDatum = getClassDatum(type);
+	//		DomainUsage usage = getDomainUsage(contextElement);
+	//		return getClassDatumAnalysis(classDatum, ClassUtil.nonNullState(usage));
+	//	}
 
-/*	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull Type type, @NonNull DomainUsage usage) {
+	/*	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull Type type, @NonNull DomainUsage usage) {
 		ClassDatum classDatum = getClassDatum(type);
 //		DomainUsage usage = getDomainUsage(contextElement);
 		return getClassDatumAnalysis(classDatum);
@@ -264,7 +258,7 @@ public abstract class SchedulerConstants
 
 	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull TypedElement typedElement) {
 		ClassDatum classDatum = getClassDatum(typedElement);
-//		DomainUsage usage = getDomainUsage(typedElement);
+		//		DomainUsage usage = getDomainUsage(typedElement);
 		return getClassDatumAnalysis(classDatum);
 	}
 
@@ -281,22 +275,13 @@ public abstract class SchedulerConstants
 		return qvtp2qvtg.getClassRelationships();
 	}
 
-//	@SuppressWarnings("null")
-//	public @NonNull Set<ClassDatum> getClassDatums() {
-//		return classDatum2classDatumAnalysis.keySet();
-//	}
+	//	@SuppressWarnings("null")
+	//	public @NonNull Set<ClassDatum> getClassDatums() {
+	//		return classDatum2classDatumAnalysis.keySet();
+	//	}
 
 	public @NonNull OperationId getCollectionSelectByKindId() {
 		return collectionSelectByKindId;
-	}
-
-	public @NonNull DependencyAnalyzer getDependencyAnalyzer() {
-		@Nullable
-		DependencyAnalyzer dependencyAnalyzer2 = dependencyAnalyzer;
-		if (dependencyAnalyzer2 == null) {
-			dependencyAnalyzer = dependencyAnalyzer2 = new DependencyAnalyzer(this);
-		}
-		return dependencyAnalyzer2;
 	}
 
 	public @NonNull Schedule getDependencyGraph() {
