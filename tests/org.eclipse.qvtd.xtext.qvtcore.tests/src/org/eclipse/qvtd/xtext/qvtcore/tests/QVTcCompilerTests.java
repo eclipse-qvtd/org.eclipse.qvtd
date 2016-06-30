@@ -418,7 +418,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_TRAVERSAL.setState(true);
 		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
-		HeadSplitter.SPLITTING.setState(true);
+		HeadSplitter.RESULT.setState(true);
 		MyQVT myQVT = new MyQVT("uml2rdbms", Simpleuml2rdbmsPackage.eINSTANCE, SimpleumlPackage.eINSTANCE, SimplerdbmsPackage.eINSTANCE);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS.qvtcas", "rdbms");

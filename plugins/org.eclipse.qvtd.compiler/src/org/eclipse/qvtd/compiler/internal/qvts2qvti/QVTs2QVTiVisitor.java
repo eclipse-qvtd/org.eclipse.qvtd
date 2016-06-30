@@ -179,7 +179,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		}
 		else {
 			HeadSplitter headSplitter = new HeadSplitter(region);
-			List<@NonNull Region> newRegions = headSplitter.split();
+			List<HeadSplitter.@NonNull Boundary> boundaries = headSplitter.split();
 			region2mapping = new BasicRegion2Mapping(this, region);
 		}
 		region2region2mapping.put(region, region2mapping);
