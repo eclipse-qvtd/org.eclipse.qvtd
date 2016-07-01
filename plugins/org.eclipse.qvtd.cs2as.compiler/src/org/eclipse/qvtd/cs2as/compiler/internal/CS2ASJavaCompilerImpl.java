@@ -41,6 +41,8 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ids.ElementId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
@@ -235,12 +237,13 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 			CGValuedElement lookupArg = cgArguments.get(0); // FIXMe improve handleLookupError
 			CGValuedElement initialSource = initialSourceCG(lookupArg);
-			js.append("handleLookupError(");
-			js.appendReferenceTo(initialSource);
-			js.append(",");
-			js.appendReferenceTo(lookupArg);
-			js.append(");\n");
-
+			if (shouldHandleError(initialSource)) {
+				js.append("handleLookupError(");
+				js.appendReferenceTo(initialSource);
+				js.append(",");
+				js.appendReferenceTo(lookupArg);
+				js.append(");\n");
+			}
 			js.popIndentation();
 			js.append("};\n");
 			return true;
@@ -286,6 +289,24 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 				return initialSourceCG(cgSource);
 			}
 			return cgValue;
+		}
+
+		/**
+		 * helper to decide if lookup error should be handled or not.
+		 * For the time being, just the lookup arg source is the considered.
+		 *
+		 * FIXME FTB we exclude all String-typed lookup arguments to avoid the
+		 * generation error. This incorrectly exclude valid String-based lookups
+		 * where that string appears in the text. In that case, the containing object
+		 * should be considered by further analysis of the CGValuedElement (See {@link #initialSourceCG(CGValuedElement)}
+		 *
+		 * @param cgValue
+		 * @return  <code>true</code>, if lookup error should be handled.
+		 */
+		private boolean shouldHandleError(CGValuedElement cgValue) {
+			TypeId stringTypeId = context.getEnvironmentFactory().getStandardLibrary().getStringType().getTypeId();
+			ElementId valueTypeId = cgValue.getTypeId().getElementId();
+			return ! stringTypeId.equals(valueTypeId);
 		}
 	}
 
