@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  ******************************************************************************/
@@ -49,6 +49,12 @@ public abstract class AbstractVariableAnalysis implements VariableAnalysis
 
 	@Override
 	public void check() {}
+
+	@Override
+	public boolean hasWhenDomain() {
+		System.out.println("Unexpected " + getClass().getSimpleName() + ".hasWhenDomain for " + this);
+		return false;
+	}
 
 	@Override
 	public void setIsEnforcedBound(@Nullable TemplateExp rTemplateExp, @Nullable Key rKey) {

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  ******************************************************************************/
@@ -23,7 +23,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 /**
  * A VariableAnalysis accumulates the usage of a core or relation variable and eventually synthesizes an appropriate core variable.
- * 
+ *
  * @noimplement Clients should extend AbstractVariableAnalysis.
  */
 public interface VariableAnalysis
@@ -55,6 +55,11 @@ public interface VariableAnalysis
 	@Nullable Variable getRelationVariable();
 
 	/**
+	 * Return true if this variable is associated with a when clause.
+	 */
+	boolean hasWhenDomain();
+
+	/**
 	 * Accumulate the definition of this variable by rTemplateExp in an enforced domain.
 	 * If rKey is non-null the enforcement correlates with rKey.
 	 */
@@ -79,7 +84,7 @@ public interface VariableAnalysis
 	 * Accumulate the reference of this variable by the not-enforced otherDomain.
 	 */
 	void setOtherReferred(@NonNull CoreDomain cOtherDomain);
-	
+
 	/**
 	 * Accumulate the reference of this variable by the predicate in cPredicateArea.
 	 */
