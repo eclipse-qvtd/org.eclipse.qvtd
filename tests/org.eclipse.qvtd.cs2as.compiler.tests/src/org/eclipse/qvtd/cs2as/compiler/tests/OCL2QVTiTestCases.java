@@ -37,7 +37,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DependencyAnalyzer;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
@@ -260,6 +259,13 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample1_CG() throws Exception {
+		//		DependencyAnalyzer.CALL.setState(true);
+		//		DependencyAnalyzer.CREATE.setState(true);
+		//		DependencyAnalyzer.FINISH.setState(true);
+		//		DependencyAnalyzer.PENDING.setState(true);
+		//		DependencyAnalyzer.REFINING.setState(true);
+		//		DependencyAnalyzer.RETURN.setState(true);
+		//		DependencyAnalyzer.START.setState(true);
 		MyQVT myQVT = new MyQVT("example1");
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2Target.ocl");
@@ -339,10 +345,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample2_Interpreted() throws Exception {
-		//		DependencyAnalyzer.START.setState(true);
-		//		DependencyAnalyzer.FAIL.setState(true);
+		//		DependencyAnalyzer.CALL.setState(true);
+		//		DependencyAnalyzer.CREATE.setState(true);
 		//		DependencyAnalyzer.FINISH.setState(true);
-		DependencyAnalyzer.RETURN.setState(true);
+		//		DependencyAnalyzer.HYPOTHECATING.setState(true);
+		//		DependencyAnalyzer.PENDING.setState(true);
+		//		DependencyAnalyzer.REFINING.setState(true);
+		//		DependencyAnalyzer.RETURN.setState(true);
+		//		DependencyAnalyzer.START.setState(true);
 		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
@@ -378,7 +388,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_TRAVERSAL.setState(true);
 		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
-		DependencyAnalyzer.FINISH.setState(true);
+		//		DependencyAnalyzer.FINISH.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("example2");
 		OCLstdlibPackage.eINSTANCE.getName();
@@ -404,6 +414,13 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample2_V2_Interpreted() throws Exception {
+		//		DependencyAnalyzer.CALL.setState(true);
+		//		DependencyAnalyzer.CREATE.setState(true);
+		//		DependencyAnalyzer.FINISH.setState(true);
+		//		DependencyAnalyzer.PENDING.setState(true);
+		//		DependencyAnalyzer.REFINING.setState(true);
+		//		DependencyAnalyzer.RETURN.setState(true);
+		//		DependencyAnalyzer.START.setState(true);
 		testCaseAppender.uninstall();	// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
