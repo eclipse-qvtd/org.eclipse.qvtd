@@ -1,19 +1,21 @@
 # Debugging options for the org.eclipse.ocl.examples.codegen plug-in
 
-# Turn on tracing of the operation dependency analysis blocking an incomplete operation analysis
-org.eclipse.qvtd.compiler/qvtp2qvts/dependency/block=false
+# Turn on tracing of the operation dependency analysis operation call calls
+org.eclipse.qvtd.compiler/qvtp2qvts/dependency/call=false
 # Turn on tracing of the operation dependency analysis creating a new operation analysis
 org.eclipse.qvtd.compiler/qvtp2qvts/dependency/create=false
-# Turn on tracing of the operation dependency analysis failing to complete an operation analysis
-org.eclipse.qvtd.compiler/qvtp2qvts/dependency/fail=false
 # Turn on tracing of the operation dependency analysis successfully completing an operation analysis
 org.eclipse.qvtd.compiler/qvtp2qvts/dependency/finish=false
-# Turn on tracing of the operation dependency analysis operation returns
+# Turn on tracing of the operation dependency analysis hypothecating to break operation analysis loops
+org.eclipse.qvtd.compiler/qvtp2qvts/dependency/hypothecating=false
+# Turn on tracing of the operation dependency analysis addition of pending operation analysis
+org.eclipse.qvtd.compiler/qvtp2qvts/dependency/pending=false
+# Turn on tracing of the operation dependency analysis addition of refining operation analysis
+org.eclipse.qvtd.compiler/qvtp2qvts/dependency/refining=false
+# Turn on tracing of the operation dependency analysis operation call returns
 org.eclipse.qvtd.compiler/qvtp2qvts/dependency/return=false
 # Turn on tracing of the operation dependency analysis (re)starting an operation analysis
 org.eclipse.qvtd.compiler/qvtp2qvts/dependency/start=false
-# Turn on tracing of the operation dependency analysis unblocking an operation analysis for a retry
-org.eclipse.qvtd.compiler/qvtp2qvts/dependency/unblock=false
 
 # Turn on tracing of partitioining 
 org.eclipse.qvtd.compiler/qvtm2qvtp/partitioining=false

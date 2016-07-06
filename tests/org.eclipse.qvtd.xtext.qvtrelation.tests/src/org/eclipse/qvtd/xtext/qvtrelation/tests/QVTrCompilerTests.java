@@ -51,7 +51,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -352,7 +351,7 @@ public class QVTrCompilerTests extends LoadTestCase
 //		AbstractTransformer.EXCEPTIONS.setState(true);
 //		AbstractTransformer.INVOCATIONS.setState(true);
     	MyQVT myQVT = new MyQVT("classmodel2classmodel");
-    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
     	try {
 	    	Transformation asTransformation = myQVT.compileTransformation("ClassModelToClassModel.qvtr", "uml1", PROJECT_NAME + ".classmodel2classmodel", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/classmodel2classmodel/ClassModelToClassModel");
 	    	myQVT.createInterpretedExecutor(asTransformation);
@@ -396,7 +395,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("hstm2fstm");
-		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("HierarchicalStateMachine2FlatStateMachine.qvtr", "flat", PROJECT_NAME + ".HierarchicalStateMachine2FlatStateMachine", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine");
 			//
@@ -429,8 +428,8 @@ public class QVTrCompilerTests extends LoadTestCase
 	@Test
 	public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_CG() throws Exception {
 		HeadSplitter.RESULT.setState(true);
-		Scheduler.DEBUG_GRAPHS.setState(true);
-		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		Scheduler.DEBUG_GRAPHS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.VARIABLES.setState(true);
@@ -471,7 +470,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("seq2stm");
-		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm", PROJECT_NAME + ".seq2stm", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm");
 			myQVT.createInterpretedExecutor(asTransformation);
@@ -515,8 +514,8 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTrCompiler_SimplerRel2Core_CG() throws Exception {
-		AbstractTransformer.EXCEPTIONS.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.SYNTHESIS.setState(true);
 		//		QVTr2QVTc.VARIABLES.setState(true);

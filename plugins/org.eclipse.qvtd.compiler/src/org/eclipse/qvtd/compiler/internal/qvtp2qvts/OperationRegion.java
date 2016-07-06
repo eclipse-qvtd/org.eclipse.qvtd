@@ -87,7 +87,7 @@ public class OperationRegion extends AbstractRegion implements SimpleRegion
 		DependencyAnalyzer dependencyAnalyzer2 = new DependencyAnalyzer(schedulerConstants);
 		DependencyPaths path2 = dependencyAnalyzer2.analyze(operationCallExp);
 		//		dependencyAnalyzer2.dump();
-		System.out.println("Analyze2 " + operationCallExp + " gives\n" + path2);
+		//		System.out.println("Analyze2 " + operationCallExp + " gives\n\t" + path2);
 		Iterable<@NonNull List<@NonNull DependencyStep>> hiddenPaths = path2.getHiddenPaths();
 		Iterable<@NonNull List<@NonNull DependencyStep>> returnPaths = path2.getReturnPaths();
 		Map<@NonNull ClassDatumAnalysis, @NonNull SimpleNode> classDatumAnalysis2node = new HashMap<@NonNull ClassDatumAnalysis, @NonNull SimpleNode>();

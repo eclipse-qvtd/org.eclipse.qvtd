@@ -308,6 +308,13 @@ public class QVTcCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTcCompiler_Families2Persons_CG() throws Exception {
+		//		DependencyAnalyzer.CALL.setState(true);
+		//		DependencyAnalyzer.CREATE.setState(true);
+		//		DependencyAnalyzer.FINISH.setState(true);
+		//		DependencyAnalyzer.PENDING.setState(true);
+		//		DependencyAnalyzer.REFINING.setState(true);
+		//		DependencyAnalyzer.RETURN.setState(true);
+		//		DependencyAnalyzer.START.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//		Scheduler.EDGE_ORDER.setState(true);
 		//		Scheduler.REGION_DEPTH.setState(true);
@@ -410,6 +417,13 @@ public class QVTcCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTcCompiler_SimpleUML2RDBMS_CG() throws Exception {
+		//		DependencyAnalyzer.CALL.setState(true);
+		//		DependencyAnalyzer.CREATE.setState(true);
+		//		DependencyAnalyzer.FINISH.setState(true);
+		//		DependencyAnalyzer.PENDING.setState(true);
+		//		DependencyAnalyzer.REFINING.setState(true);
+		//		DependencyAnalyzer.RETURN.setState(true);
+		//		DependencyAnalyzer.START.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//		Scheduler.CONNECTION_ROUTING.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
