@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionItem;
@@ -70,6 +71,7 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
@@ -101,6 +103,7 @@ public class DependencyAnalyzer
 	{
 		protected final @NonNull DomainUsage usage;
 		private final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull ClassDependencyStep> class2step = new HashMap<>();
+		private final @NonNull Map<@NonNull VariableDeclaration, @NonNull ParameterDependencyStep> parameter2step = new HashMap<>();
 		private final @NonNull Map<@NonNull Property, @NonNull NavigationDependencyStep> property2step = new HashMap<>();
 
 		protected DependencyStepFactory(@NonNull DomainUsage usage) {
@@ -112,6 +115,15 @@ public class DependencyAnalyzer
 			if (dependencyStep == null) {
 				dependencyStep = new ClassDependencyStep(usage, type, element);
 				class2step.put(type, dependencyStep);
+			}
+			return dependencyStep;
+		}
+
+		public @NonNull ParameterDependencyStep createParameterDependencyStep(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull VariableDeclaration parameter) {
+			ParameterDependencyStep dependencyStep = parameter2step.get(parameter);
+			if (dependencyStep == null) {
+				dependencyStep = new ParameterDependencyStep(usage, type, parameter);
+				parameter2step.put(parameter, dependencyStep);
 			}
 			return dependencyStep;
 		}
@@ -217,6 +229,32 @@ public class DependencyAnalyzer
 		@Override
 		public String toString() {
 			return usage + " «" + property.eClass().getName() + "»" + property.toString();
+		}
+	}
+
+	protected static class ParameterDependencyStep extends DependencyStep
+	{
+		private final org.eclipse.ocl.pivot.@NonNull Class type;
+
+		public ParameterDependencyStep(@NonNull DomainUsage usage, org.eclipse.ocl.pivot.@NonNull Class type, @NonNull VariableDeclaration parameter) {
+			super(usage, parameter);
+			this.type = type;
+			assert !(type instanceof CollectionType);
+		}
+
+		@Override
+		public org.eclipse.ocl.pivot.@NonNull Class getElementalType() {
+			return type;
+		}
+
+		@Override
+		public String getName() {
+			return type.getName();
+		}
+
+		@Override
+		public String toString() {
+			return usage + " «" + type.eClass().getName() + "»" + type.toString();
 		}
 	}
 
@@ -570,7 +608,13 @@ public class DependencyAnalyzer
 				return parent.getVariable(variable);
 			}
 			else {
-				return createDependencyPaths(variable);
+				EObject eContainer = variable.eContainer();
+				if (eContainer instanceof CorePattern) {
+					return createParameterDependencyPaths(variable);
+				}
+				else {
+					return createDependencyPaths(variable);
+				}
 			}
 		}
 
@@ -664,6 +708,7 @@ public class DependencyAnalyzer
 			if (sourcePaths == null) {
 				return null;
 			}
+			Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
 			NavigationDependencyStep dependencyStep = createPropertyDependencyStep(navigationCallExp);
 			DependencyPaths result = sourcePaths.append(dependencyStep);
 			return result.addHidden(sourcePaths);
@@ -673,9 +718,6 @@ public class DependencyAnalyzer
 		public @Nullable DependencyPaths visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
 			Operation referredOperation = operationCallExp.getReferredOperation();
 			assert referredOperation != null;
-			if ("lookup::LookupEnvironment::addElements(NE)(Collection(addElements.NE)) : lookup::LookupEnvironment[1]".equals(referredOperation.toString())) {
-				referredOperation.toString();
-			}
 			//
 			//	Form the sourceAndArgumentPaths by stripping all hidden dependencies; only true dependencies are passed in.
 			//	Form the resultPaths by retaining all hidden dependenncies; all dependencies are passed out.
@@ -1018,9 +1060,6 @@ public class DependencyAnalyzer
 			this.sourceAndArgumentPaths = sourceAndArgumentPaths;
 			this.result = result;
 			CREATE.println(toString());
-			if ("OclElement::_unqualified_env_Class(OclElement[?]) : lookup::LookupEnvironment[1]".equals(operation.toString())) {
-				operation.toString();
-			}
 		}
 
 		@Override
@@ -1032,10 +1071,6 @@ public class DependencyAnalyzer
 				START.println(s.toString());
 			}
 			resetInvokedFutureAnalyses();
-			if ("classes::Root::_unqualified_env_Package(OclElement[?]) : lookup::LookupEnvironment[?]".equals(operation.toString())) {
-				operation.toString();
-			}
-			//			try {
 			DependencyAnalyzerVisitor visitor = dependencyAnalyzer.createDependencyAnalyzerVisitor(this, exactResult);
 			LanguageExpression bodyExpression;
 			List<? extends VariableDeclaration> ownedParameters;
@@ -1246,6 +1281,22 @@ public class DependencyAnalyzer
 			content2path.put(content, path);
 		}
 		return path;
+	}
+
+	public @NonNull DependencyPaths createParameterDependencyPaths(@NonNull VariableDeclaration parameter) {
+		return createDependencyPaths(createParameterDependencyStep(parameter));
+	}
+
+	protected @NonNull ParameterDependencyStep createParameterDependencyStep(@NonNull VariableDeclaration parameter) {
+		Type type = parameter.getType();
+		while (type instanceof CollectionType) {
+			type = ClassUtil.nonNullState(((CollectionType)type).getElementType());
+		}
+		assert type != null;
+		DomainUsage usage1 = domainUsageAnalysis.basicGetUsage(type);
+		DomainUsage usage = usage1 != null ? usage1 : getUsage(parameter);
+		DependencyStepFactory factory = getDependencyStepFactory(usage);
+		return factory.createParameterDependencyStep((org.eclipse.ocl.pivot.Class)type, parameter);
 	}
 
 	protected @NonNull NavigationDependencyStep createPropertyDependencyStep(@NonNull NavigationCallExp navigationCallExp) {

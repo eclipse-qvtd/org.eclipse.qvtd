@@ -61,7 +61,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	protected abstract class AbstractDomainUsage implements DomainUsage.Internal
 	{
 		protected final int bitMask;
-		
+
 		protected AbstractDomainUsage(int bitMask) {
 			this.bitMask = bitMask;
 		}
@@ -92,7 +92,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 						return RootDomainUsageAnalysis.this.getTypedModel(i);
 					}
 					System.err.println("Ambiguous TypedModel: " + this + " for " + LabelUtil.getLabel(context));
-//					throw new IllegalStateException("Ambiguous TypedModel: " + this);
+					//					throw new IllegalStateException("Ambiguous TypedModel: " + this);
 					return RootDomainUsageAnalysis.this.getTypedModel(i);
 				}
 			}
@@ -101,7 +101,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 
 		@Override
 		public @NonNull Iterable<@NonNull TypedModel> getTypedModels() {
-			List<@NonNull TypedModel> typedModels = new ArrayList<@NonNull TypedModel>();
+			List<@NonNull TypedModel> typedModels = new ArrayList<>();
 			int residue = bitMask;
 			for (int i = 0; residue != 0; i++) {
 				int bit = 1 << i;
@@ -169,7 +169,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			return s.toString();
 		}
 	}
-	
+
 	/**
 	 * A DomainUsageConstant identifies a specific domain result from the DomainUsageAnalysis of an OCL AST node.
 	 */
@@ -196,24 +196,24 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		public boolean isConstant() {
 			return true;
 		}
-	
+
 		@Override
 		public String toString() {
 			return toString("«constant»");
 		}
-	
+
 		public @NonNull DomainUsageConstant union(@NonNull DomainUsageConstant usage) {
 			return RootDomainUsageAnalysis.this.getConstantUsage(bitMask | usage.bitMask);
 		}
 	}
-	
+
 	/**
 	 * A DomainUsageVariable identifies a constrained domain result from the DomainUsageAnalysis of an OCL AST node.
 	 */
 	protected class DomainUsageVariable extends AbstractDomainUsage
 	{
-		protected final @NonNull List<Element> usedBy = new ArrayList<Element>();
-		
+		protected final @NonNull List<Element> usedBy = new ArrayList<>();
+
 		protected DomainUsageVariable(int bitMask) {
 			super(bitMask);
 			assert bitMask != 0;
@@ -261,36 +261,38 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			return RootDomainUsageAnalysis.this;
 		}
 	}
-	
+
 	/**
 	 * No TypedModels is used by control infrastructure such as MappingLoops.
 	 */
 	private static final @NonNull Integer NONE_USAGE_BIT_MASK = 0;
-	
+
 	/**
 	 * The first bit is reserved for the primitive TypedModel that is used by DataTypes.
 	 */
 	private static final @NonNull Integer PRIMITIVE_USAGE_BIT_MASK = 1;
 
+	protected final @NonNull StandardLibrary standardLibrary;
+
 	/**
 	 * The model name to typed model bit mapping.
 	 */
-	protected final @NonNull Map<@Nullable String, @NonNull Integer> name2bit = new HashMap<@Nullable String, @NonNull Integer>();
+	protected final @NonNull Map<@Nullable String, @NonNull Integer> name2bit = new HashMap<>();
 
 	/**
 	 * The bit number to typed model 'mapping'.
 	 */
-	protected final @NonNull List<@NonNull TypedModel> bit2typedModel = new ArrayList<@NonNull TypedModel>();
-	
+	protected final @NonNull List<@NonNull TypedModel> bit2typedModel = new ArrayList<>();
+
 	/**
 	 * Map from Integer to all in-use Constant Usages
 	 */
-	private final @NonNull Map<@NonNull Integer, @NonNull DomainUsageConstant> constantUsages = new HashMap<@NonNull Integer, @NonNull DomainUsageConstant>();
+	private final @NonNull Map<@NonNull Integer, @NonNull DomainUsageConstant> constantUsages = new HashMap<>();
 
 	/**
 	 * Map from Integer to all single TypedModel Constant Usages
 	 */
-	private final @NonNull Map<@NonNull Integer, @NonNull DomainUsageConstant> validUsages = new HashMap<@NonNull Integer, @NonNull DomainUsageConstant>();
+	private final @NonNull Map<@NonNull Integer, @NonNull DomainUsageConstant> validUsages = new HashMap<>();
 
 	/**
 	 * The TypedModels that are not primitive and not checkable and not enforceable.
@@ -310,17 +312,17 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	/**
 	 * The domains in which each class may be used.
 	 */
-	protected final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull DomainUsageConstant> class2usage = new HashMap<org.eclipse.ocl.pivot.@NonNull Class, @NonNull DomainUsageConstant>();
+	protected final @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull DomainUsageConstant> class2usage = new HashMap<>();
 
 	/**
 	 * The domains in which the containing class of a property may be used.
 	 */
-	protected final @NonNull Map<@NonNull Property, @NonNull DomainUsage> property2containingClassUsage = new HashMap<@NonNull Property, @NonNull DomainUsage>();
-	
+	protected final @NonNull Map<@NonNull Property, @NonNull DomainUsage> property2containingClassUsage = new HashMap<>();
+
 	/**
 	 * The nested analyses for declared operations.
 	 */
-	protected final @NonNull Map<@NonNull Operation, DomainUsageAnalysis.@NonNull Internal> operation2analysis = new HashMap<@NonNull Operation, DomainUsageAnalysis.@NonNull Internal>();
+	protected final @NonNull Map<@NonNull Operation, DomainUsageAnalysis.@NonNull Internal> operation2analysis = new HashMap<>();
 
 	private final @NonNull TypedModel primitiveTypeModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 
@@ -334,12 +336,12 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	 * The properties of the input models that are assigned by mappings and which cannot therefore
 	 * be trusted to be loaded from the input models.
 	 */
-	private final @NonNull Set<@NonNull Property> dirtyProperties = new HashSet<@NonNull Property>();
-	private final @NonNull Set<@NonNull EReference> dirtyEReferences = new HashSet<@NonNull EReference>();
-
+	private final @NonNull Set<@NonNull Property> dirtyProperties = new HashSet<>();
+	private final @NonNull Set<@NonNull EReference> dirtyEReferences = new HashSet<>();
 
 	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
+		this.standardLibrary = context.getStandardLibrary();
 		primitiveTypeModel.setName("$primitive$");
 		add(primitiveTypeModel);
 		validUsages.put(NONE_USAGE_BIT_MASK, getConstantUsage(NONE_USAGE_BIT_MASK));
@@ -370,15 +372,15 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			EObject eObject = tit.next();
 			if (eObject instanceof PropertyAssignment) {
 				PropertyAssignment propertyAssignment = (PropertyAssignment)eObject;
-//				if ("s.name := sn".equals(eObject.toString())) {
-//					eObject.toString();
-//				}
+				//				if ("s.name := sn".equals(eObject.toString())) {
+				//					eObject.toString();
+				//				}
 				OCLExpression slotExpression = propertyAssignment.getSlotExpression();
 				assert slotExpression != null;
 				DomainUsage domainUsage = getUsage(slotExpression);
 				if (!domainUsage.isOutput() && !domainUsage.isMiddle()) {
 					Property targetProperty = ClassUtil.nonNullState(propertyAssignment.getTargetProperty());
-//					System.out.println("Dirty " + targetProperty + " for " + eObject);
+					//					System.out.println("Dirty " + targetProperty + " for " + eObject);
 					dirtyProperties.add(targetProperty);
 					EObject eProperty = targetProperty.getESObject();
 					if (eProperty instanceof EReference) {
@@ -434,16 +436,16 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			if (ownedContext != null) {
 				setUsage(ownedContext, typedModelUsage);
 			}
-			Set<@NonNull CompleteClass> completeClasses = new HashSet<@NonNull CompleteClass>();
-// TODO		There is an issue with extending transformations, because just classes extended by the
-//			the extending metamodel are tracked. Following code tries to workaround this issue. Also take into account
-//			that pivot/ocl are filtered. This might be an issue, when the transformations involve the own pivot metamodel 
-//			(e.g. the CS2AS transformation for QVTo, Pivot-based QVTo AS extends Pivot metamodel).
-//			Set<Package> allPackages = QVTbaseUtil.getAllUsedPackages(typedModel);
-//			Deque<Package> pckQueue = new LinkedList<Package>();	// To track new discovered packages
-//			pckQueue.addAll(allPackages);
-//			while (!pckQueue.isEmpty()) {
-//			Package asPackage = pckQueue.pop();
+			Set<@NonNull CompleteClass> completeClasses = new HashSet<>();
+			// TODO		There is an issue with extending transformations, because just classes extended by the
+			//			the extending metamodel are tracked. Following code tries to workaround this issue. Also take into account
+			//			that pivot/ocl are filtered. This might be an issue, when the transformations involve the own pivot metamodel
+			//			(e.g. the CS2AS transformation for QVTo, Pivot-based QVTo AS extends Pivot metamodel).
+			//			Set<Package> allPackages = QVTbaseUtil.getAllUsedPackages(typedModel);
+			//			Deque<Package> pckQueue = new LinkedList<Package>();	// To track new discovered packages
+			//			pckQueue.addAll(allPackages);
+			//			while (!pckQueue.isEmpty()) {
+			//			Package asPackage = pckQueue.pop();
 			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : QVTbaseUtil.getAllUsedPackages(typedModel)) {
 				CompletePackage completePackage = completeModel.getCompletePackage(asPackage);
 				for (@NonNull CompleteClass completeClass : ClassUtil.nullFree(completePackage.getOwnedCompleteClasses())) {
@@ -473,11 +475,11 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 				if (referredTypeUsage == null) {
 					referredTypeUsage = visit(property.getType());
 				}
-//				System.out.println(property + " => " + referredTypeUsage);
-//				property2referredTypeUsage.put(property, referredTypeUsage);
+				//				System.out.println(property + " => " + referredTypeUsage);
+				//				property2referredTypeUsage.put(property, referredTypeUsage);
 			}
 		}
-		class2usage.put(((StandardLibraryInternal)context.getStandardLibrary()).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
+		class2usage.put(((StandardLibraryInternal)standardLibrary).getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
 		inputUsage = getConstantUsage(getAnyMask() & unenforceableMask);
 		outputUsage = getConstantUsage(getAnyMask() & enforceableMask);
 		middleUsage = getConstantUsage(getAnyMask() & ~unenforceableMask & ~enforceableMask & ~PRIMITIVE_USAGE_BIT_MASK);
@@ -569,7 +571,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 						}
 					}
 				}
-				
+
 			}
 		}
 		return referredTypeUsage;
@@ -625,15 +627,14 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	public @NonNull DomainUsage getOutputUsage() {
 		return ClassUtil.nonNullState(outputUsage);
 	}
-	
-//	public @NonNull TypedModel getPrimitiveTypeModel() {
-//		return primitiveTypeModel;
-//	}
+
+	//	public @NonNull TypedModel getPrimitiveTypeModel() {
+	//		return primitiveTypeModel;
+	//	}
 
 	public @NonNull OperationId getOclContainerId() {
 		OperationId oclElementOclContainerId2 = oclElementOclContainerId;
 		if (oclElementOclContainerId2 == null) {
-			StandardLibrary standardLibrary = context.getStandardLibrary();
 			org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
 			Operation operation = NameUtil.getNameable(oclElementType.getOwnedOperations(), "oclContainer");
 			assert operation != null;
@@ -645,7 +646,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	public @NonNull Property getOclContainerProperty() {
 		Property oclElementOclContainerProperty2 = oclElementOclContainerProperty;
 		if (oclElementOclContainerProperty2 == null) {
-			StandardLibrary standardLibrary = context.getStandardLibrary();
 			org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
 			oclElementOclContainerProperty2 = NameUtil.getNameable(oclElementType.getOwnedProperties(), "oclContainer");
 			assert oclElementOclContainerProperty2 != null;
@@ -657,7 +657,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	public @NonNull OperationId getOclContentsId() {
 		OperationId oclElementOclContentsId2 = oclElementOclContentsId;
 		if (oclElementOclContentsId2 == null) {
-			StandardLibrary standardLibrary = context.getStandardLibrary();
 			org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
 			Operation operation = NameUtil.getNameable(oclElementType.getOwnedOperations(), "oclContents");
 			assert operation != null;
@@ -669,7 +668,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	public @NonNull Property getOclContentsProperty() {
 		Property oclElementOclContentsProperty2 = oclElementOclContentsProperty;
 		if (oclElementOclContentsProperty2 == null) {
-			StandardLibrary standardLibrary = context.getStandardLibrary();
 			org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
 			oclElementOclContentsProperty2 = NameUtil.getNameable(oclElementType.getOwnedProperties(), "oclContents");
 			assert oclElementOclContentsProperty2 != null;
@@ -681,7 +679,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	public @NonNull OperationId getOclAnyEqualsOperationId() {
 		OperationId oclAnyEqualsOperationId2 = oclAnyEqualsOperationId;
 		if (oclAnyEqualsOperationId2 == null) {
-			StandardLibrary standardLibrary = context.getStandardLibrary();
 			org.eclipse.ocl.pivot.Class oclAnyType = standardLibrary.getOclAnyType();
 			Operation operation = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "=");
 			assert operation != null;
@@ -693,7 +690,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	public @NonNull OperationId getOclAnyNotEqualsOperationId() {
 		OperationId oclAnyNotEqualsOperationId2 = oclAnyNotEqualsOperationId;
 		if (oclAnyNotEqualsOperationId2 == null) {
-			StandardLibrary standardLibrary = context.getStandardLibrary();
 			org.eclipse.ocl.pivot.Class oclAnyType = standardLibrary.getOclAnyType();
 			Operation operation = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "<>");
 			assert operation != null;
@@ -701,7 +697,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		}
 		return oclAnyNotEqualsOperationId2;
 	}
-	
+
 	public @NonNull TypedModel getPrimitiveTypeModel() {
 		return primitiveTypeModel;
 	}
@@ -721,7 +717,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		return bit2typedModel.get(i);
 	}
 
-/*	@Override
+	/*	@Override
 	public @Nullable DomainUsage getUsage(@Nullable EObject element) {
 		DomainUsage domainUsage = super.getUsage(element);
 		if ((domainUsage == null) && (element instanceof Property)) {
@@ -781,10 +777,10 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	public boolean isDirty(@NonNull Property property) {
 		return property.isIsTransient() || dirtyProperties.contains(property);
 	}
-	
-//	private boolean isPivotMMPackage(Package p) {
-//		String pURI = p.getURI();
-//		return PivotPackage.eNS_URI.equals(pURI) ||
-//				OCLstdlib.STDLIB_URI.equals(pURI);
-//	}
+
+	//	private boolean isPivotMMPackage(Package p) {
+	//		String pURI = p.getURI();
+	//		return PivotPackage.eNS_URI.equals(pURI) ||
+	//				OCLstdlib.STDLIB_URI.equals(pURI);
+	//	}
 }

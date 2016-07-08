@@ -39,8 +39,8 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 	}
 
 	protected @NonNull MappingStatement createCall(@Nullable MappingStatement mappingStatement, @NonNull Region calledRegion, @Nullable Map<@NonNull Variable, @NonNull OCLExpression> guardVariable2expression) {
-//		Iterable<Connection> connectionRegions = getConnectionRegions(calledRegion);
-//		assert !calledRegion.isConnectionRegion();
+		//		Iterable<Connection> connectionRegions = getConnectionRegions(calledRegion);
+		//		assert !calledRegion.isConnectionRegion();
 		AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
 		Mapping calledMapping = calledRegion2Mapping.getMapping();
 		Map<@NonNull Variable, @NonNull OCLExpression> loopVariables = new HashMap<@NonNull Variable, @NonNull OCLExpression>();
@@ -75,7 +75,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 				}
 			}
 		}
-/*		for (@NonNull NodeConnection headConnection : calledRegion.getHeadConnections()) {	// FIXME unify headConnections/headNodes
+		/*		for (@NonNull NodeConnection headConnection : calledRegion.getHeadConnections()) {	// FIXME unify headConnections/headNodes
 			Variable calledConnectionVariable = calledRegion2Mapping.getConnectionVariable(headConnection);
 			Variable callingConnectionVariable = connection2variable.get(headConnection);
 			assert callingConnectionVariable != null;
@@ -111,12 +111,12 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 			@NonNull Variable loopVariable = loopEntry.getKey();
 			@NonNull OCLExpression loopSource = loopEntry.getValue();
 			mappingCallStatement = QVTimperativeUtil.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
-		}				
+		}
 		mappingStatement = QVTimperativeUtil.addMappingStatement(mappingStatement, mappingCallStatement);
 		return mappingStatement;
 	}
 
-/*	protected @NonNull MappingStatement createCalls(@Nullable MappingStatement mappingStatement, @NonNull Region calledRegion) {
+	/*	protected @NonNull MappingStatement createCalls(@Nullable MappingStatement mappingStatement, @NonNull Region calledRegion) {
 		AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
 		Mapping calledMapping = calledRegion2Mapping.getMapping();
 		Map<@NonNull Variable, @NonNull OCLExpression> loopVariables = new HashMap<@NonNull Variable, @NonNull OCLExpression>();
@@ -171,7 +171,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 			@NonNull Variable loopVariable = loopEntry.getKey();
 			@NonNull OCLExpression loopSource = loopEntry.getValue();
 			mappingCallStatement = QVTimperativeUtil.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
-		}				
+		}
 		mappingStatement = QVTimperativeUtil.addMappingStatement(mappingStatement, mappingCallStatement);
 		return mappingStatement;
 	} */
