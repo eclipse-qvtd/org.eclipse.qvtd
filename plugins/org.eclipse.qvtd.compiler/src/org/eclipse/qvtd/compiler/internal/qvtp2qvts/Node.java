@@ -31,9 +31,9 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	void addIncomingEdge(@NonNull Edge edge);
 	void addOutgoingConnection(@NonNull NodeConnection connection);
 	void addOutgoingEdge(@NonNull Edge edge);
-//	void cloneIn(@NonNull Region clonedRegion, @NonNull Map<Node, Node> node2clone);
+	//	void cloneIn(@NonNull Region clonedRegion, @NonNull Map<Node, Node> node2clone);
 	void destroy();
-	
+
 	/**
 	 * Accumulate this node and all passed binding sources in the call-tree ancestry of this node.
 	 * On completion there is exactly one entry per region from each possible call path.
@@ -60,27 +60,27 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	@NonNull NodeRole getNodeRole();
 	@NonNull List<@NonNull NodeConnection> getOutgoingConnections();
 	@NonNull List<@NonNull Edge> getOutgoingEdges();
-//	@Nullable InterRegionEdge getPassedBindingEdge();
+	//	@Nullable InterRegionEdge getPassedBindingEdge();
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedBindingEdges();
-	
+
 	/**
 	 * Get all sources that pass a value to this target.
 	 */
 	@NonNull Iterable<@NonNull Node> getPassedBindingSources();
-	
+
 	/**
 	 * Get all targets that are passed a value from this source.
 	 */
 	@NonNull Iterable<@NonNull Node> getPassedBindingTargets();
 	@NonNull Iterable<@NonNull NavigationEdge> getPredicateEdges();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
-	
+
 	/**
 	 * Get all 'targets' that pass a value to this target recursively.
 	 */
 	@NonNull Iterable<@NonNull Node> getRecursionSources();
-	
+
 	/**
 	 * Get all 'sources' that pass a value to this target recursively.
 	 */
@@ -99,16 +99,16 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Return true if this node is a class value.
 	 */
 	boolean isClassNode();
-	
+
 	boolean isComposed();
 
 	/**
 	 * Return true if this node is a constant that can be computed at compile time.
-	 * 
+	 *
 	 * isConstant() is exclusive to isLoaded()/isPredicated()/isRealized()
 	 */
 	boolean isConstant();
-	
+
 	/**
 	 * Return true if this node is an OCL expression.
 	 */
@@ -128,11 +128,11 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Return true if this node is part of a head group from which many other nodes are navigable.
 	 */
 	boolean isHead();
-	
+
 	/**
 	 * Return true if this node is an input port of a nested region.
 	 */
-//	boolean isInput();
+	//	boolean isInput();
 
 	/**
 	 * Return true if this node's dependencies can be resolved within the containing region.
@@ -156,20 +156,20 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	/**
 	 * Return true if this node is part of the checkable input domain and so may be loaded at will to satisfy
 	 * the requirements of mapping execution.
-	 * 
+	 *
 	 * isLoaded() is exclusive to isConstant()/isPredicated()/isRealized()
 	 */
 	boolean isLoaded();
-	
+
 	/**
 	 * Return true if this node is part of the to-one navigation path that is matched as part of a mapping's predicate.
-	 * 
+	 *
 	 * Regions with conflicting isMatchable() nodes cannot be merged.
-	 * 
+	 *
 	 * ?? isConstant() || isLoaded() || isPredicated()
 	 */
 	boolean isMatchable();
-	
+
 	/**
 	 * Return true if this node is part of the to-one navigation path that is navigated to determine the navigation heads.
 	 */
@@ -181,23 +181,23 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	boolean isNull();
 
 	boolean isOperation();
-	
+
 	/**
 	 * Return true if this node is an output port of a nested region.
 	 */
-//	boolean isOutput();
+	//	boolean isOutput();
 
 	/**
 	 * Return true if the value of this node is part of the navigation path that must be validated
 	 * by predicate matching prior to execution of a mapping.
-	 * 
+	 *
 	 * isPredicated() is exclusive to isConstant()/isLoaded()/isRealized()
 	 */
 	boolean isPredicated();
 
 	/**
 	 * Return true if the value of this node is determined by execution of a mapping.
-	 * 
+	 *
 	 * isRealized() is exclusive to isConstant()/isLoaded()/isPredicated()
 	 */
 	boolean isRealized();
@@ -206,7 +206,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Return true if this is a RealizedVariableNode
 	 */
 	boolean isRealizedVariable();
-	
+
 	/**
 	 * Return true if this is a ResultNode computed by some expression.
 	 */
@@ -216,14 +216,16 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Return true if this is a TrueNode that terminates a complex predicate expression.
 	 */
 	boolean isTrue();
-	
+
 	boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis);
 	void removeIncomingConnection(@NonNull NodeConnection connection);
 	void removeIncomingEdge(@NonNull Edge edge);
 	void removeOutgoingConnection(@NonNull NodeConnection connection);
 	void removeOutgoingEdge(@NonNull Edge edge);
-	
+
 	void setHead();
 
 	void toGraph(@NonNull GraphStringBuilder s);
+	@Override
+	@NonNull String toString();
 }
