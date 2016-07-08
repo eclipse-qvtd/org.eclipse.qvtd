@@ -62,15 +62,15 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	 * The original ordering.
 	 */
 	private final int naturalOrder;
-	
+
 	/**
 	 * Predicates that are too complex to analyze. i.e. more than a comparison of a bound variable wrt
 	 * a property call chain on another bound variable.
 	 */
 	private final @NonNull Set<Predicate> complexPredicates = new HashSet<Predicate>();
-	
+
 	private /*@LazyNonNull*/ List<SimpleMappingRegion> successors;
-	
+
 	private final @NonNull ExpressionAnalyzer expressionAnalyzer = new ExpressionAnalyzer(this);
 
 	/**
@@ -89,16 +89,16 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		this.naturalOrder = naturalOrder;
 		AbstractMapping mapping = mappingAction.getMapping();
 		assert mapping != null;
-		
+
 		List<@NonNull GuardPattern> guardPatterns = new ArrayList<@NonNull GuardPattern>();
 		List<@NonNull BottomPattern> bottomPatterns = new ArrayList<@NonNull BottomPattern>();
-//
+		//
 		guardPatterns.add(ClassUtil.nonNull(mapping.getGuardPattern()));
 		bottomPatterns.add(ClassUtil.nonNull(mapping.getBottomPattern()));
 		for (Domain domain : mapping.getDomain()) {
 			if (domain instanceof CoreDomain) {
 				CoreDomain coreDomain = (CoreDomain)domain;
-//
+				//
 				guardPatterns.add(ClassUtil.nonNull(coreDomain.getGuardPattern()));
 				bottomPatterns.add(ClassUtil.nonNull(coreDomain.getBottomPattern()));
 			}
@@ -113,7 +113,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		 */
 		for (Predicate predicate : complexPredicates) {
 			OCLExpression conditionExpression = predicate.getConditionExpression();
-/*			if (conditionExpression instanceof OperationCallExp) {
+			/*			if (conditionExpression instanceof OperationCallExp) {
 				OperationCallExp callExp = (OperationCallExp)conditionExpression;
 				OperationId operationId = callExp.getReferredOperation().getOperationId();
 				if (SchedulerConstants.isSameOperation(operationId, getSchedulerConstants().getOclAnyEqualsId())) {
@@ -134,7 +134,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 						else if (rightNode.isKnown()) {
 							Edges.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
 						}
-						else {				
+						else {
 							Edges.BINDING.createEdge(this, leftNode, null, rightNode);			// FIXME
 							Edges.BINDING.createEdge(this, rightNode, null, leftNode);
 						}
@@ -150,38 +150,39 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 			else {		// FIXME ?? do includes() here explicitly
 				resultNode.destroy();
 			}
-//			}
+			//			}
 		}
 		//
 		for (BottomPattern bottomPattern : bottomPatterns) {
 			for (@SuppressWarnings("null")@NonNull RealizedVariable realizedVariable : bottomPattern.getRealizedVariable()) {
 				/*assignedNodes.add(*/Nodes.REALIZED_VARIABLE.createSimpleNode(this, realizedVariable);
 			}
-//			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
-//				/*assignedNodes.add(*/Nodes.UNREALIZED_VARIABLE.createSimpleNode(this, variable);
-//			}
+			//			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
+			//				/*assignedNodes.add(*/Nodes.UNREALIZED_VARIABLE.createSimpleNode(this, variable);
+			//			}
 		}
 		//
+		getHeadNodes();
+		//
 		for (BottomPattern bottomPattern : bottomPatterns) {
-//			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
-//				SimpleNode variableNode = getReferenceNode(variable);
-//				OCLExpression ownedInit = variable.getOwnedInit();
-//				if (ownedInit != null) {
-//					SimpleNode initNode = ownedInit.accept(expressionAnalyzer);
-//					assert initNode != null;
-//					variable2simpleNode.put(variable, initNode);
-//					Edges.ARGUMENT.createSimpleEdge(this, initNode, null, variableNode);
-//					if (initNode.isConstant()) {
-//						variableNode.mergeRole(initNode.getNodeRole());
-//					}
-//				}
-//			}
+			//			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
+			//				SimpleNode variableNode = getReferenceNode(variable);
+			//				OCLExpression ownedInit = variable.getOwnedInit();
+			//				if (ownedInit != null) {
+			//					SimpleNode initNode = ownedInit.accept(expressionAnalyzer);
+			//					assert initNode != null;
+			//					variable2simpleNode.put(variable, initNode);
+			//					Edges.ARGUMENT.createSimpleEdge(this, initNode, null, variableNode);
+			//					if (initNode.isConstant()) {
+			//						variableNode.mergeRole(initNode.getNodeRole());
+			//					}
+			//				}
+			//			}
 			for (@SuppressWarnings("null")@NonNull Assignment assignment : bottomPattern.getAssignment()) {
 				assignment.accept(expressionAnalyzer);
 			}
 		}
 		//
-		getHeadNodes();
 		toGraph(new DOTStringBuilder());
 		toGraph(new GraphMLStringBuilder());
 		return;
@@ -191,7 +192,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitSimpleMappingRegion(this);
 	}
-	
+
 	public void addAssignmentEdge(@NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
 		assert sourceNode.isClassNode();
 		Edge assignmentEdge = sourceNode.getAssignmentEdge(source2targetProperty);
@@ -225,8 +226,8 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	 * Install the path equivalence that navigation of the successive path elements starting from sourceVariable reaches targetVariable.
 	 */
 	private void addPredicateNavigation(@NonNull VariableDeclaration sourceVariable, @NonNull List<Property> path, @Nullable VariableDeclaration targetVariable) {
-//		assert guardVariables.contains(targetVariable);
-//		assert guardVariables.contains(sourceVariable);
+		//		assert guardVariables.contains(targetVariable);
+		//		assert guardVariables.contains(sourceVariable);
 		assert path.size() == 1;		// FIXME multi-step paths
 		Property property = path.get(0);
 		assert property != null;
@@ -257,14 +258,14 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	}
 
 	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull SimpleNode simpleNode) {
-//		assert !simpleNode.isOperation();			// FIXME testExample2_V2 violates this for an intermediate "if"
+		//		assert !simpleNode.isOperation();			// FIXME testExample2_V2 violates this for an intermediate "if"
 		variable2simpleNode.put(typedElement, simpleNode);
 	}
 
 	/**
 	 * Analyze the predicates to partition the guard variables into the distinct inputs that are not mutually
 	 * navigable as a consequence of predicate constraints.
-	 * @param bottomPatterns 
+	 * @param bottomPatterns
 	 */
 	private void analyzePredicates(@NonNull List<@NonNull ? extends CorePattern> corePatterns) {
 		//
@@ -288,19 +289,19 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 			}
 		}
 		for (@NonNull CorePattern corePattern : corePatterns) {
-		 	for (@NonNull Predicate predicate : ClassUtil.nullFree(corePattern.getPredicate())) {
+			for (@NonNull Predicate predicate : ClassUtil.nullFree(corePattern.getPredicate())) {
 				OCLExpression conditionExpression = predicate.getConditionExpression();
 				if (conditionExpression != null) {
 					OCLExpression boundExpression = getPredicateComparisonBoundExpression(conditionExpression);
 					if (boundExpression instanceof VariableExp) {
 						OCLExpression referenceExpression = getPredicateComparisonReferenceExpression(conditionExpression);
 						assert referenceExpression != null;
-						analyzeSimplePredicate(((VariableExp)boundExpression).getReferredVariable(), referenceExpression);				
+						analyzeSimplePredicate(((VariableExp)boundExpression).getReferredVariable(), referenceExpression);
 					}
 					else if (boundExpression instanceof NullLiteralExp) {
 						OCLExpression referenceExpression = getPredicateComparisonReferenceExpression(conditionExpression);
 						assert referenceExpression != null;
-						analyzeSimplePredicate(null, referenceExpression);				
+						analyzeSimplePredicate(null, referenceExpression);
 					}
 					else {
 						complexPredicates.add(predicate);
@@ -343,13 +344,13 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 				Edges.RESULT.createSimpleEdge(this, initNode, null, stepNode);
 				initNode = stepNode;
 			}
-//			else if (variable.getType() instanceof CollectionType) {
-//				SimpleNode stepNode = Nodes.ATTRIBUTE.createSimpleNode(this, variable, (OperationCallExp)ownedInit);
-//				Edges.RESULT.createSimpleEdge(this, initNode, null, stepNode);
-//				initNode = stepNode;
-//			}
+			//			else if (variable.getType() instanceof CollectionType) {
+			//				SimpleNode stepNode = Nodes.ATTRIBUTE.createSimpleNode(this, variable, (OperationCallExp)ownedInit);
+			//				Edges.RESULT.createSimpleEdge(this, initNode, null, stepNode);
+			//				initNode = stepNode;
+			//			}
 			else {
-//				SimpleNode stepNode = Nodes.STEP.createSimpleNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
+				//				SimpleNode stepNode = Nodes.STEP.createSimpleNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
 				SimpleNode stepNode = Nodes.UNREALIZED_VARIABLE.createSimpleNode(this, variable);
 				Edges.RESULT.createSimpleEdge(this, initNode, null, stepNode);
 				initNode = stepNode;
@@ -374,7 +375,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		addHeadNode(extraGuardNode);
 		return extraGuardNode;
 	}
-	
+
 	/**
 	 * Create a navigable path from startNode following the edges of protoPath, re-using edges and nodes where possible.
 	 * Returns a mapping of the proto-edges to the created/re-used edges.
@@ -416,8 +417,8 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	public @NonNull String getName() {
 		AbstractMapping mapping = mappingAction.getMapping();
 		return String.valueOf(mapping.getName());
-	}	
-	
+	}
+
 	public int getNaturalOrder() {
 		return naturalOrder;
 	}
@@ -430,7 +431,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	 * <br>"referenceExpression = null".
 	 * <br>"constant-expression = referenceExpression"
 	 * <br>"referenceExpression = constant-expression".
-	 * 
+	 *
 	 * Returns null otherwise.
 	 */
 	private @Nullable OCLExpression getPredicateComparisonBoundExpression(@NonNull OCLExpression conditionExpression) {
@@ -486,7 +487,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		}
 		return null;
 	}
-	
+
 	@Override
 	public @NonNull String getColor() {
 		return "green";
@@ -509,7 +510,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		}
 		assert node != null : "No variable2simpleNode entry for " + variable;
 		return node;
-/*		if (variable instanceof RealizedVariable) {
+		/*		if (variable instanceof RealizedVariable) {
 			return Nodes.REALIZED_VARIABLE.createNode(this, (RealizedVariable)variable);
 		}
 		else if (variable.eContainer() instanceof BottomPattern) {
@@ -547,7 +548,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		SimpleNode node = getSimpleNode(typedElement);
 		if (node == null) {
 			node = Nodes.UNKNOWN.createSimpleNode(this, ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
-//			node2node.put(typedElement, node);
+			//			node2node.put(typedElement, node);
 		}
 		return node;
 	}

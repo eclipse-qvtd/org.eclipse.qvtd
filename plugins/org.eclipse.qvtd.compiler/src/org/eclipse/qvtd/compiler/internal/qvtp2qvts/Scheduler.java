@@ -27,17 +27,21 @@ import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.pivot.schedule.utilities.DependencyUtil;
+
+import com.google.common.collect.Iterables;
 
 public class Scheduler extends SchedulerConstants
 {
@@ -52,11 +56,11 @@ public class Scheduler extends SchedulerConstants
 	public static final @NonNull TracingOption EDGE_ORDER = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/edgeOrder");
 	public static final @NonNull TracingOption REGION_CYCLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionCycles");
 	public static final @NonNull TracingOption REGION_DEPTH = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionDepth");
-//	public static final @NonNull TracingOption REGION_LOCALITY = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionLocality");
+	//	public static final @NonNull TracingOption REGION_LOCALITY = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionLocality");
 	public static final @NonNull TracingOption REGION_ORDER = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionOrder");
 	public static final @NonNull TracingOption REGION_STACK = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionStack");
 	public static final @NonNull TracingOption REGION_TRAVERSAL = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionTraversal");
-	
+
 	/**
 	 * The Region to which each action is allocated.
 	 */
@@ -73,7 +77,7 @@ public class Scheduler extends SchedulerConstants
 		}
 		this.orderedActions = orderedActions;
 	}
-	
+
 	private Map<OperationDatum, OperationRegion> map = new HashMap<OperationDatum, OperationRegion>();
 
 	public @NonNull OperationRegion analyzeOperation(@NonNull SuperRegion superRegion, @NonNull OperationCallExp operationCallExp) {
@@ -101,13 +105,17 @@ public class Scheduler extends SchedulerConstants
 	}
 
 	private @NonNull OperationDatum createOperationDatum(@NonNull OperationCallExp operationCallExp) {
-		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
-		@NonNull ClassDatum[] classDatums = new @NonNull ClassDatum[1 + ownedArguments.size()];
+		Iterable<@NonNull VariableDeclaration> externalVariables = QVTbaseUtil.getExternalVariables(operationCallExp);
+		List<@NonNull OCLExpression> ownedArguments = ClassUtil.nullFree(operationCallExp.getOwnedArguments());
+		@NonNull ClassDatum[] classDatums = new @NonNull ClassDatum[1 + ownedArguments.size() + Iterables.size(externalVariables)];
 		int i = 0;
 		@SuppressWarnings("null")@NonNull OCLExpression source = operationCallExp.getOwnedSource();
 		classDatums[i++] = getClassDatum(source);
-		for (@SuppressWarnings("null")@NonNull OCLExpression argument : ownedArguments) {
+		for (@NonNull OCLExpression argument : ownedArguments) {
 			classDatums[i++] = getClassDatum(argument);
+		}
+		for (@NonNull VariableDeclaration externalVariable : externalVariables) {
+			classDatums[i++] = getClassDatum(externalVariable);
 		}
 		String operationName = operationCallExp.getReferredOperation().getName();
 		assert operationName != null;
@@ -172,7 +180,7 @@ public class Scheduler extends SchedulerConstants
 			mappingRegion.resolveRecursion();
 		}
 		List<@NonNull Region> allRegions = new ArrayList<@NonNull Region>(earlyRegionMerge(orderedRegions));
-//		@NonNull List<Region> allRegions = superRegion.identifyRegions();
+		//		@NonNull List<Region> allRegions = superRegion.identifyRegions();
 		for (@NonNull OperationRegion operationRegion : superRegion.getOperationRegions()) {
 			allRegions.add(operationRegion);
 		}
@@ -197,8 +205,8 @@ public class Scheduler extends SchedulerConstants
 	/**
 	 * Replace those orderedRegions that may be aggregated as part of a GuardedRegion decision tree by GuardedRegions.
 	 * orderedRegions should be naturally ordered to ensure that non-recursive dependencies are inherently satisfied.
-	 * 
-	 * Returns the orderedRegions plus the new aggregates less those aggregated. 
+	 *
+	 * Returns the orderedRegions plus the new aggregates less those aggregated.
 	 */
 	public @NonNull List<@NonNull Region> earlyRegionMerge(@NonNull List<@NonNull SimpleMappingRegion> orderedRegions) {
 		Region2Depth region2depths = new Region2Depth();
@@ -232,15 +240,15 @@ public class Scheduler extends SchedulerConstants
 						}
 					}
 					if (mergedRegion != null) {
-//						mergedRegion.resolveRecursion();
+						//						mergedRegion.resolveRecursion();
 						if (Scheduler.DEBUG_GRAPHS.isActive()) {
 							mergedRegion.writeDebugGraphs("2-merged");
 						}
-//						GuardedRegion guardedRegion = createGuardedRegion(mergedRegion, mergeableRegions);
-//						outputRegions.add(guardedRegion);
+						//						GuardedRegion guardedRegion = createGuardedRegion(mergedRegion, mergeableRegions);
+						//						outputRegions.add(guardedRegion);
 						outputRegions.add(mergedRegion);
 						isMerged = true;
-					}	
+					}
 				}
 			}
 			if (!isMerged) {
@@ -318,7 +326,7 @@ public class Scheduler extends SchedulerConstants
 		//
 		Set<@NonNull ClassDatumAnalysis> toOneReachableClasses = new HashSet<@NonNull ClassDatumAnalysis>();
 		List<@NonNull Region> secondaryRegions = null;
-		List<@NonNull Region> allConsumingRegionsList = new ArrayList<@NonNull Region>(allConsumingRegions);	// CME-proof iterable List shadowing a mutating Set 
+		List<@NonNull Region> allConsumingRegionsList = new ArrayList<@NonNull Region>(allConsumingRegions);	// CME-proof iterable List shadowing a mutating Set
 		for (int i = 0; i < allConsumingRegionsList.size(); i++) {
 			@NonNull Region secondaryRegion = allConsumingRegionsList.get(i);
 			if ((i == 0) || isEarlyMergeSecondaryCandidate(primaryRegion, secondaryRegion, toOneReachableClasses)) {
