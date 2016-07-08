@@ -37,7 +37,7 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
-import org.eclipse.qvtd.compiler.internal.qvts2qvti.HeadSplitter;
+import org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -432,7 +432,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_TRAVERSAL.setState(true);
 		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
-		HeadSplitter.RESULT.setState(true);
+		Splitter.RESULT.setState(true);
 		MyQVT myQVT = new MyQVT("uml2rdbms", Simpleuml2rdbmsPackage.eINSTANCE, SimpleumlPackage.eINSTANCE, SimplerdbmsPackage.eINSTANCE);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS.qvtcas", "rdbms");

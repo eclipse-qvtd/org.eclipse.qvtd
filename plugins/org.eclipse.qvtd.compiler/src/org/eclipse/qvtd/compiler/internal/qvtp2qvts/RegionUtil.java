@@ -15,7 +15,18 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 
 public class RegionUtil
-{		
+{
+	public static boolean containsNone(@NonNull Iterable<@NonNull Node> firstNodes, @NonNull Iterable<@NonNull Node> secondNodes) {
+		for (@NonNull Node firstNode : firstNodes) {
+			for (@NonNull Node secondNode : secondNodes) {
+				if (firstNode == secondNode) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * Return the edge unless it is subject to a cast chain in which case return the final cast.
 	 */
