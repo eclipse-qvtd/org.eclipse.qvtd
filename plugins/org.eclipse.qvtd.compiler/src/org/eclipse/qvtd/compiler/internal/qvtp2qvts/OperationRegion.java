@@ -28,13 +28,15 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DependencyAnalyzer.DependencyPaths;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DependencyAnalyzer.DependencyStep;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DependencyAnalyzer.NavigationDependencyStep;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
@@ -44,17 +46,15 @@ import com.google.common.collect.Iterables;
 public class OperationRegion extends AbstractRegion implements SimpleRegion
 {
 	protected final @NonNull Operation operation;
-	protected final @NonNull ExpressionInOCL specification;
 	protected final @NonNull String name;
 	private final @NonNull List<@NonNull Node> headNodes = new ArrayList<@NonNull Node>();
-	//	private final @NonNull List<SimpleNode> iteratorNodes = new ArrayList<SimpleNode>();
 	private final @NonNull SimpleNode resultNode;
 	private final @NonNull List<@NonNull Node> extraNodes = new ArrayList<@NonNull Node>();
+	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull SimpleNode> parameter2node = new HashMap<>();
 
 	protected OperationRegion(@NonNull SuperRegion superRegion, @NonNull OperationDatum operationDatum, @NonNull ExpressionInOCL specification, @NonNull OperationCallExp operationCallExp) {//, @NonNull SimpleNode sourceNode) {
 		super(superRegion);
 		this.operation = ClassUtil.nonNullState(operationCallExp.getReferredOperation());
-		this.specification = specification;
 		String name = operationDatum.toString();
 		assert name != null;
 		this.name = name;
@@ -77,7 +77,10 @@ public class OperationRegion extends AbstractRegion implements SimpleRegion
 			createParameterNode(parameter, ClassUtil.nonNullState(parameter.getName()), ClassUtil.nonNullState(ownedArguments.get(i)));
 		}
 
-
+		Iterable<@NonNull VariableDeclaration> externalVariables = QVTbaseUtil.getExternalVariables(operationCallExp);
+		for (@NonNull VariableDeclaration variable : externalVariables) {
+			createParameterNode2(variable, ClassUtil.nonNullState(variable.getName()));
+		}
 		//
 		SchedulerConstants schedulerConstants = getSchedulerConstants();
 		//		DependencyAnalyzer dependencyAnalyzer1 = schedulerConstants.getDependencyAnalyzer(null);
@@ -90,12 +93,24 @@ public class OperationRegion extends AbstractRegion implements SimpleRegion
 		//		System.out.println("Analyze2 " + operationCallExp + " gives\n\t" + path2);
 		Iterable<@NonNull List<@NonNull DependencyStep>> hiddenPaths = path2.getHiddenPaths();
 		Iterable<@NonNull List<@NonNull DependencyStep>> returnPaths = path2.getReturnPaths();
+		RootDomainUsageAnalysis domainAnalysis = schedulerConstants.getDomainAnalysis();
 		Map<@NonNull ClassDatumAnalysis, @NonNull SimpleNode> classDatumAnalysis2node = new HashMap<@NonNull ClassDatumAnalysis, @NonNull SimpleNode>();
 		for (List<DependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
 			if (steps.size() > 0) {
+				boolean isDirty = false;
+				for (int i = 1; i < steps.size(); i++) {
+					DependencyStep step = steps.get(i);
+					Property asProperty = step.getProperty();
+					if (asProperty != null) {
+						if (domainAnalysis.isDirty(asProperty)) {
+							isDirty = true;
+							break;
+						}
+					}
+				}
 				DependencyStep classStep = steps.get(0);
 				DomainUsage stepUsage = classStep.getUsage();
-				if (stepUsage.isOutput() && !stepUsage.isInput()) {
+				if (stepUsage.isOutput() && !stepUsage.isInput() || isDirty) {
 					//					System.out.println("!checkable && enforceable: " + steps);
 					org.eclipse.ocl.pivot.Class stepType = steps.get(0).getElementalType();
 					TypedModel typedModel = stepUsage.getTypedModel(classStep.getElement());
@@ -105,16 +120,25 @@ public class OperationRegion extends AbstractRegion implements SimpleRegion
 						//					OCLExpression source = operationCallExp.getOwnedSource();
 						//					assert source != null;
 						//					createParameterNode(selfVariable, selfVariable.getName(), source);
-						SimpleNode extraNode2 = classDatumAnalysis2node.get(classDatumAnalysis);
-						if (extraNode2 == null) {
-							extraNode2 = createParameterNode(classDatumAnalysis, "extra2_" + stepType.getName());
-							classDatumAnalysis2node.put(classDatumAnalysis, extraNode2);
-							extraNodes.add(extraNode2);
+						SimpleNode extraNode2;
+						if (classStep.isParameter()) {
+							extraNode2 = parameter2node.get(classStep.getElement());
+							assert extraNode2 != null;
+						}
+						else {
+							extraNode2 = classDatumAnalysis2node.get(classDatumAnalysis);
+							if (extraNode2 == null) {
+								extraNode2 = createParameterNode(classDatumAnalysis, "extra2_" + stepType.getName());
+								classDatumAnalysis2node.put(classDatumAnalysis, extraNode2);
+								extraNodes.add(extraNode2);
+							}
 						}
 						//					extraNodes.add(extraNode);
 						for (int i = 1; i < steps.size(); i++) {
-							NavigationDependencyStep propertyStep = (NavigationDependencyStep)steps.get(i);
-							NavigationCallExp navigationCallExp = propertyStep.getNavigationCallExp();
+							DependencyStep step = steps.get(i);
+							Property property = step.getProperty();
+							NavigationCallExp navigationCallExp = step.getNavigationCallExp();
+							assert (property != null) && (navigationCallExp != null);
 							//						stepUsage = propertyStep.getUsage();
 							//						typedModel = stepUsage.getTypedModel();
 							//						assert typedModel != null;
@@ -122,12 +146,12 @@ public class OperationRegion extends AbstractRegion implements SimpleRegion
 							//						classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(stepType, typedModel);
 							//						SimpleNode nextNode = Nodes.StepNodeRoleFactory.PREDICATED_STEP.createSimpleNode(this, "next", classDatumAnalysis);
 
-							CompleteClass completeClass = extraNode2.getCompleteClass();
+							CompleteClass completeClass = classDatumAnalysis.getCompleteClass();
 							Type primaryClass = completeClass.getPrimaryClass();
 							if (primaryClass instanceof CollectionType) {
 								Property iterateProperty = schedulerConstants.getIterateProperty(primaryClass);
 								Type elementType = ((CollectionType)primaryClass).getElementType();
-								TypedModel typedModel2 = extraNode2.getClassDatumAnalysis().getTypedModel();
+								TypedModel typedModel2 = classDatumAnalysis.getTypedModel();
 								ClassDatumAnalysis elementClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis((@NonNull Class) elementType, typedModel2);
 								SimpleNode elementNode = Nodes.ELEMENT.createSimpleNode(this, name, elementClassDatumAnalysis, extraNode2);
 								//(region, name, typedElement, argNodes)SimpleNode(region, name, callExp, sourceNode)Node(this, name, iterateProperty, extraNode2);
@@ -135,7 +159,7 @@ public class OperationRegion extends AbstractRegion implements SimpleRegion
 								extraNode2 = elementNode;
 							}
 							SimpleNode nextNode = Nodes.UNNAVIGABLE_ATTRIBUTE.createSimpleNode(this, extraNode2, navigationCallExp);
-							Edges.NAVIGATION.createSimpleEdge(this, extraNode2, propertyStep.getProperty(), nextNode);
+							Edges.NAVIGATION.createSimpleEdge(this, extraNode2, property, nextNode);
 							extraNode2 = nextNode;
 						}
 					}
@@ -177,6 +201,21 @@ public class OperationRegion extends AbstractRegion implements SimpleRegion
 		SimpleNode parameterNode = Nodes.PARAMETER.createSimpleNode(this, name, classDatumAnalysis);
 		//		addVariableNode(variable, parameterNode);
 		headNodes.add(parameterNode);
+		parameter2node.put(variable, parameterNode);
+		return parameterNode;
+	}
+
+	private @NonNull SimpleNode createParameterNode2(@NonNull VariableDeclaration variable, @NonNull String name) {
+		SchedulerConstants schedulerConstants = getSchedulerConstants();
+		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)variable.getType();
+		assert type != null;
+		TypedModel typedModel = schedulerConstants.getDomainUsage(variable).getTypedModel(variable);
+		assert typedModel != null;
+		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(type, typedModel);
+		SimpleNode parameterNode = Nodes.PARAMETER.createSimpleNode(this, name, classDatumAnalysis);
+		//		addVariableNode(variable, parameterNode);
+		headNodes.add(parameterNode);
+		parameter2node.put(variable, parameterNode);
 		return parameterNode;
 	}
 

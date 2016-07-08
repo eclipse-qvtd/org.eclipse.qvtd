@@ -162,8 +162,20 @@ public class DependencyAnalyzer
 
 		public abstract String getName();
 
+		public @Nullable NavigationCallExp getNavigationCallExp() {
+			return null;
+		}
+
+		public @Nullable Property getProperty() {
+			return null;
+		}
+
 		public @NonNull DomainUsage getUsage() {
 			return usage;
+		}
+
+		public boolean isParameter() {
+			return false;
 		}
 	}
 
@@ -218,10 +230,12 @@ public class DependencyAnalyzer
 			return property.getName();
 		}
 
+		@Override
 		public @NonNull NavigationCallExp getNavigationCallExp() {
 			return (NavigationCallExp) element;
 		}
 
+		@Override
 		public @NonNull Property getProperty() {
 			return property;
 		}
@@ -249,12 +263,17 @@ public class DependencyAnalyzer
 
 		@Override
 		public String getName() {
-			return type.getName();
+			return ((VariableDeclaration)element).getName();
+		}
+
+		@Override
+		public boolean isParameter() {
+			return true;
 		}
 
 		@Override
 		public String toString() {
-			return usage + " «" + type.eClass().getName() + "»" + type.toString();
+			return usage + " «" + type.eClass().getName() + "»" + ((VariableDeclaration)element).getName() + ":" + type.toString();
 		}
 	}
 
@@ -708,7 +727,6 @@ public class DependencyAnalyzer
 			if (sourcePaths == null) {
 				return null;
 			}
-			Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
 			NavigationDependencyStep dependencyStep = createPropertyDependencyStep(navigationCallExp);
 			DependencyPaths result = sourcePaths.append(dependencyStep);
 			return result.addHidden(sourcePaths);
@@ -1309,12 +1327,17 @@ public class DependencyAnalyzer
 		Set<@NonNull List<@NonNull DependencyStep>> typePaths = new HashSet<>();
 		for (@NonNull List<@NonNull DependencyStep> path : paths) {
 			DependencyStep lastStep = path.get(path.size()-1);
-			TypedElement typedElement = (TypedElement)lastStep.getElement();
-			assert typedElement != null;
-			Type type = typedElement.getType();
-			assert type != null;
-			ClassDependencyStep classStep = createClassDependencyStep((org.eclipse.ocl.pivot.Class)type, typedElement);
-			typePaths.add(Collections.singletonList(classStep));
+			if (lastStep.isParameter()) {
+				typePaths.add(Collections.singletonList(lastStep));
+			}
+			else {
+				TypedElement typedElement = (TypedElement)lastStep.getElement();
+				assert typedElement != null;
+				Type type = typedElement.getType();
+				assert type != null;
+				ClassDependencyStep classStep = createClassDependencyStep((org.eclipse.ocl.pivot.Class)type, typedElement);
+				typePaths.add(Collections.singletonList(classStep));
+			}
 		}
 		return createDependencyPaths(typePaths, null);
 	}

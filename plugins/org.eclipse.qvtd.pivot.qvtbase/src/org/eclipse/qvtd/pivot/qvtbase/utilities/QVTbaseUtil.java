@@ -38,6 +38,8 @@ import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
@@ -204,21 +206,21 @@ public class QVTbaseUtil
 	 */
 	public static @NonNull Variable getContextVariable(@NonNull StandardLibrary standardLibrary, @NonNull Transformation transformation) {
 		Variable ownedContext = transformation.getOwnedContext();
-        if (ownedContext == null) {
-        	org.eclipse.ocl.pivot.Class transformationType = ((StandardLibraryInternal)standardLibrary).getLibraryType("Transformation");
-//        	if (transformationType == null) {	// FIXME BUG 487123
-//        		throw new IllegalLibraryException("No Transformation type in standard library.");		// FIXME need to be using a derived EnvironmentFactory
-//        	}
-        	ownedContext = PivotFactory.eINSTANCE.createVariable();
-        	ownedContext.setName("this");
+		if (ownedContext == null) {
+			//			org.eclipse.ocl.pivot.Class transformationType = ((StandardLibraryInternal)standardLibrary).getLibraryType("Transformation");
+			//        	if (transformationType == null) {	// FIXME BUG 487123
+			//        		throw new IllegalLibraryException("No Transformation type in standard library.");		// FIXME need to be using a derived EnvironmentFactory
+			//        	}
+			ownedContext = PivotFactory.eINSTANCE.createVariable();
+			ownedContext.setName("this");
 			ownedContext.setType(transformation);		// FIXME promote API
-//           	ownedContext.setTypeValue(transformation);
-        	ownedContext.setIsRequired(true);
-        	transformation.setOwnedContext(ownedContext);
-        }
-        else {
-           	ownedContext.setTypeValue(transformation);		// FIXME BUG 484723 find a better solution for the transient declaration
-        }
+			//           	ownedContext.setTypeValue(transformation);
+			ownedContext.setIsRequired(true);
+			transformation.setOwnedContext(ownedContext);
+		}
+		else {
+			ownedContext.setTypeValue(transformation);		// FIXME BUG 484723 find a better solution for the transient declaration
+		}
 		return ownedContext;
 	}
 
@@ -227,14 +229,14 @@ public class QVTbaseUtil
 	 */
 	public static @NonNull Variable getContextVariable(@NonNull StandardLibraryInternal standardLibrary, @NonNull TypedModel typedModel) {
 		Variable ownedContext = typedModel.getOwnedContext();
-        if (ownedContext == null) {
-        	ownedContext = PivotFactory.eINSTANCE.createVariable();
-        	ownedContext.setName(typedModel.getName());
-        	ownedContext.setType(standardLibrary.getLibraryType("Model"));
-//        	ownedContext.setTypeValue(typedModel);
-        	ownedContext.setIsRequired(true);
-        	typedModel.setOwnedContext(ownedContext);
-        }
+		if (ownedContext == null) {
+			ownedContext = PivotFactory.eINSTANCE.createVariable();
+			ownedContext.setName(typedModel.getName());
+			ownedContext.setType(standardLibrary.getLibraryType("Model"));
+			//        	ownedContext.setTypeValue(typedModel);
+			ownedContext.setIsRequired(true);
+			typedModel.setOwnedContext(ownedContext);
+		}
 		return ownedContext;
 	}
 
@@ -278,6 +280,28 @@ public class QVTbaseUtil
 		return enforceableTypedModels;
 	}
 
+	public static @NonNull Iterable<@NonNull VariableDeclaration> getExternalVariables(@NonNull OperationCallExp operationCallExp) {
+		List<@NonNull VariableDeclaration> externalVariables = new ArrayList<>();
+		for (@NonNull EObject eObject : new TreeIterable(operationCallExp, false)) {
+			if (eObject instanceof VariableExp) {
+				VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
+				assert referredVariable != null;
+				EObject eContainer = referredVariable.eContainer();
+				boolean gotIt = eContainer instanceof Transformation;
+				for (; !gotIt && (eContainer != null); eContainer = eContainer.eContainer()) {
+					if (eContainer == operationCallExp) {
+						gotIt = true;
+					}
+				}
+				if (!gotIt && !externalVariables.contains(referredVariable)) {
+					externalVariables.add(referredVariable);
+				}
+			}
+		}
+		return externalVariables;
+	}
+
+
 	/**
 	 * Return true if asOperation is an Identification - an operation whose result is a singleton object.
 	 */
@@ -290,19 +314,19 @@ public class QVTbaseUtil
 		}
 		return false;
 	}
-	
-    public static @NonNull Transformation loadTransformation(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
-        CSResource xtextResource = null;
+
+	public static @NonNull Transformation loadTransformation(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+		CSResource xtextResource = null;
 		ASResource asResource;
 		// Load the transformation resource
 		if (PivotUtilInternal.isASURI(transformationURI)) {
 			asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
 		}
 		else {
-	        xtextResource = (CSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
-	        if (xtextResource == null) {
-	            throw new IOException("Failed to load '" + transformationURI + "'");
-	        }
+			xtextResource = (CSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
+			if (xtextResource == null) {
+				throw new IOException("Failed to load '" + transformationURI + "'");
+			}
 			String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
 			if (csMessage != null) {
 				throw new IOException(csMessage);
@@ -317,9 +341,9 @@ public class QVTbaseUtil
 			for (EObject eContent : asResource.getContents()) {
 				if (modelClass.isInstance(eContent)) {
 					for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(((Model)eContent).getOwnedPackages())) {
-		    			Transformation asTransformation = loadTransformationRecursion(asPackage);
+						Transformation asTransformation = loadTransformationRecursion(asPackage);
 						if (asTransformation != null) {
-				            return asTransformation;
+							return asTransformation;
 						}
 					}
 				}
@@ -329,47 +353,47 @@ public class QVTbaseUtil
 				((CSResource.CSResourceExtension)xtextResource).dispose();
 			}
 		}
-        throw new IOException("Failed to locate a transformation in '" + transformationURI + "'");
+		throw new IOException("Failed to locate a transformation in '" + transformationURI + "'");
 	}
 
 	private static @Nullable Transformation loadTransformationRecursion(org.eclipse.ocl.pivot.@NonNull Package asPackage) {
 		for (org.eclipse.ocl.pivot.@NonNull Class asClass : ClassUtil.nullFree(asPackage.getOwnedClasses())) {
 			if (asClass instanceof Transformation) {
-	            return (Transformation)asClass;
+				return (Transformation)asClass;
 			}
 		}
 		for (org.eclipse.ocl.pivot.@NonNull Package asNestedPackage : ClassUtil.nullFree(asPackage.getOwnedPackages())) {
 			Transformation asTransformation = loadTransformationRecursion(asNestedPackage);
 			if (asTransformation != null) {
-	            return asTransformation;
+				return asTransformation;
 			}
 		}
 		return null;
 	}
-	
-    public static @NonNull Resource loadTransformations(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
-        CSResource xtextResource = null;
+
+	public static @NonNull Resource loadTransformations(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+		CSResource xtextResource = null;
 		ASResource asResource;
 		// Load the transformation resource
 		if (PivotUtilInternal.isASURI(transformationURI)) {
 			asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
 		}
 		else {
-	        xtextResource = (CSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
-	        if (xtextResource == null) {
-	            throw new IOException("Failed to load '" + transformationURI + "'");
-	        }
+			xtextResource = (CSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
+			if (xtextResource == null) {
+				throw new IOException("Failed to load '" + transformationURI + "'");
+			}
 			String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
 			if (csMessage != null) {
 				throw new IOException(csMessage);
 			}
 			asResource = xtextResource.getASResource();
-		}	
+		}
 		if (asResource == null) {
 			throw new IOException("Failed to load '" + transformationURI + "'");
 		}
 		return asResource;
-/*		try {
+		/*		try {
 			String asMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(asResource.getErrors()), "Failed to load '" + asResource.getURI() + "'", "\n");
 			if (asMessage != null) {
 				throw new IOException(asMessage);
@@ -393,39 +417,39 @@ public class QVTbaseUtil
         throw new IOException("Failed to locate a transformation in '" + transformationURI + "'"); */
 	}
 
-    /**
-     * Rewrite asResource to replace null OperationCallExp sources by a "this" expression.
-     */
+	/**
+	 * Rewrite asResource to replace null OperationCallExp sources by a "this" expression.
+	 */
 	public static @Nullable List<OperationCallExp> rewriteMissingOperationCallSources(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource asResource) {
-		List<OperationCallExp> missingSources = null; 
-	    for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
-	    	EObject eObject = tit.next();
-	    	if (eObject instanceof OperationCallExp) {
-	    		OperationCallExp operationCallExp = (OperationCallExp)eObject;
-	    		if (operationCallExp.getOwnedSource() == null) {
-	    			if (missingSources == null) {
-	    				missingSources = new ArrayList<OperationCallExp>();
-	    			}
-	    			missingSources.add(operationCallExp);
-	    		}
-	    	}
-	    }
-	    if (missingSources != null) {
+		List<OperationCallExp> missingSources = null;
+		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof OperationCallExp) {
+				OperationCallExp operationCallExp = (OperationCallExp)eObject;
+				if (operationCallExp.getOwnedSource() == null) {
+					if (missingSources == null) {
+						missingSources = new ArrayList<OperationCallExp>();
+					}
+					missingSources.add(operationCallExp);
+				}
+			}
+		}
+		if (missingSources != null) {
 			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-	    	for (OperationCallExp operationCallExp : missingSources) {
-    			Transformation transformation = QVTbaseUtil.getContainingTransformation(operationCallExp);
-    			if (transformation != null) {
-    				Variable thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
+			for (OperationCallExp operationCallExp : missingSources) {
+				Transformation transformation = QVTbaseUtil.getContainingTransformation(operationCallExp);
+				if (transformation != null) {
+					Variable thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
 					operationCallExp.setOwnedSource(PivotUtil.createVariableExp(thisVariable));
-    			}
-	    	}
-	    }
-	    return missingSources;
+				}
+			}
+		}
+		return missingSources;
 	}
-	
-    /**
-     * Rewrite asTree and all its descendants to replace all "?." and "?->" navigations by their safe counterparts.
-     */
+
+	/**
+	 * Rewrite asTree and all its descendants to replace all "?." and "?->" navigations by their safe counterparts.
+	 */
 	public static void rewriteSafeNavigations(@NonNull EnvironmentFactory environmentFactory, @NonNull Element asTree) {
 		//
 		//	Locate all unsafe calls first to avoid CME from concurrent locate/rewrite.
