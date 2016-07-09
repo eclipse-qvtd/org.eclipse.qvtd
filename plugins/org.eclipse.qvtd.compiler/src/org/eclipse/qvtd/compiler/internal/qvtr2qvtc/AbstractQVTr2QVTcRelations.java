@@ -975,6 +975,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			}
 		} */
 		VariablesAnalysis.gatherReferredVariables(rAllDomainVariables, ClassUtil.nullFree(rRelation.getDomain()));
+		if (rWhenPattern != null) {
+			VariablesAnalysis.gatherReferredVariables(rAllDomainVariables, rWhenPattern);
+		}
 		//
 		this.rSharedVariables = VariablesAnalysis.getMiddleDomainVariables(rRelation);
 		//

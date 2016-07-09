@@ -28,6 +28,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.Create
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -44,7 +45,25 @@ public class QVTrelationUtil extends QVTbaseUtil
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Return the domain of the argumentIndex'th argument of rInvocation
+	 */
+	public static @NonNull RelationDomain getRelationCallExpArgumentDomain(@NonNull RelationCallExp rInvocation, int argumentIndex) {
+		Relation rRelation = rInvocation.getReferredRelation();
+		assert rRelation != null;
+		int iFirst = 0;
+		for (@NonNull Domain rDomain : ClassUtil.nullFree(rRelation.getDomain())) {
+			RelationDomain rRelationDomain = (RelationDomain)rDomain;
+			int iNext = iFirst + rRelationDomain.getRootVariable().size();
+			if (argumentIndex < iNext) {
+				return rRelationDomain;
+			}
+			iFirst = iNext;
+		}
+		throw new IndexOutOfBoundsException(argumentIndex + " > " + iFirst + " for " + rRelation);
+	}
+
 	/**
 	 * Return the domain of a given root variable.
 	 * Throws an IllegalStateException if there is no such domain.
@@ -62,7 +81,7 @@ public class QVTrelationUtil extends QVTbaseUtil
 		}
 		throw new IllegalStateException("No RelationDomain for " + rootVariable);
 	}
-	
+
 	/**
 	 * Return all the root variables of relation in RelationCallExp order.
 	 */
@@ -78,7 +97,7 @@ public class QVTrelationUtil extends QVTbaseUtil
 		}
 		return rootVariables;
 	}
-	
+
 	/**
 	 * Return all the root variables of relationDomain (in partial RelationCallExp order).
 	 */
