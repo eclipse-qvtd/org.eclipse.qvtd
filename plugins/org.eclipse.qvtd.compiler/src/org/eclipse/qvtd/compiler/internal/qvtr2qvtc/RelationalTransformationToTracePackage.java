@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Horacio Hoyos - initial API and implementation
  ******************************************************************************/
@@ -20,14 +20,20 @@ import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Pattern;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -75,7 +81,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		return null;
 	}
 
-	private org.eclipse.ocl.pivot.@NonNull Class doRelationToTraceClass(@NonNull Relation rRelation) {	
+	private org.eclipse.ocl.pivot.@NonNull Class doRelationToTraceClass(@NonNull Relation rRelation) {
 		@SuppressWarnings("null")org.eclipse.ocl.pivot.@NonNull Class traceClass = PivotFactory.eINSTANCE.createClass();
 		qvtr2qvtc.putRelationTrace(rRelation, traceClass);
 		traceClass.setName("T" + rRelation.getName());
@@ -88,12 +94,32 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				doSubTemplateToTraceClassProps(rDomain, rTemplateExp, traceClass);
 			}
 		}
+		Pattern rWhenPattern = rRelation.getWhen();
+		if (rWhenPattern != null) {
+			for (Predicate rWhenPredicate : ClassUtil.nullFree(rWhenPattern.getPredicate())) {
+				OCLExpression rConditionExpression = ClassUtil.nonNullState(rWhenPredicate.getConditionExpression());
+				if (rConditionExpression instanceof RelationCallExp) {
+					RelationCallExp rInvocation = (RelationCallExp)rConditionExpression;
+					List<@NonNull OCLExpression> rArguments = ClassUtil.nullFree(rInvocation.getArgument());
+					for (int i = 0; i < rArguments.size(); i++) {
+						OCLExpression rArgument = rArguments.get(i);
+						if (rArgument instanceof VariableExp) {
+							VariableDeclaration rVariable = ((VariableExp)rArgument).getReferredVariable();
+							assert rVariable != null;
+							RelationDomain rDomain = QVTrelationUtil.getRelationCallExpArgumentDomain(rInvocation, i);
+							createTraceProperty(rDomain, traceClass, rVariable, false);
+							//							createTraceProperty(rDomain, rVariable.getType(), rVariable, isMany);			// ?? not required for CollectionTemplateExp's
+						}
+					}
+				}
+			}
+		}
 		CompilerUtil.normalizeNameables(ClassUtil.nullFree(traceClass.getOwnedProperties()));
 		return traceClass;
 	}
 
 	/**
-	 * Returns true if there are many subtemplate matches. 
+	 * Returns true if there are many subtemplate matches.
 	 */
 	private boolean doSubTemplateToTraceClassProps(@NonNull Domain rDomain, @NonNull TemplateExp te, org.eclipse.ocl.pivot.@NonNull Class rc) {
 		boolean isMany = false;
@@ -115,10 +141,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 				}
 				argIndex++;
 			}
-//			Variable rv = cte.getRest();
-//			if (rv != null) {
-//				createTraceProperty(rDomain, rc, rv, isMany);
-//			}
+			//			Variable rv = cte.getRest();
+			//			if (rv != null) {
+			//				createTraceProperty(rDomain, rc, rv, isMany);
+			//			}
 			createTraceProperty(rDomain, rc, tv, isMany);			// ?? not required for CollectionTemplateExp's
 		}
 		else if (te instanceof ObjectTemplateExp) {
