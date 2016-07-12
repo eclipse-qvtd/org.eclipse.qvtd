@@ -7,8 +7,9 @@ package cs
 
 -- FIXME Manually added
 context NameExpCS
-def : lookupVariable() : as::Variable = 
-	ast.lookupVariable(expName.path->first())
+def : lookupVariableToDisambiguate() : as::Variable = 
+	oclContainer().oclAsType(CSTrace).ast.lookupVariable(expName.path->first())
+	
 -- ENDOF manual addition
 	
 context NameExpCS
@@ -28,9 +29,9 @@ def : isVariableExp() : Boolean =
 	roundedBrackets = null	
 	and not isNameExpOfACallExpCS()
 	and expName.path->size() = 1 -- If using a qualified name, we assume we are looking for a fully qualified property
-	and lookupVariable() <> null 
+	and lookupVariableToDisambiguate() <> null 
 def : isPropCallExpWithImplicitSource() : Boolean =
 	roundedBrackets = null	
 	and not isNameExpOfACallExpCS()
-	and lookupVariable() = null
+	-- and lookupVariableToDisambiguate() = null
 endpackage
