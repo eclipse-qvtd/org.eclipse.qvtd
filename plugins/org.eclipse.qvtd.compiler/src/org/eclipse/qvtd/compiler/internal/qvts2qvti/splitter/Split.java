@@ -10,11 +10,14 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 
 /**
  * A Split captures the result of the analysis that enables a multi-headed region to be split.
@@ -22,35 +25,76 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 public class Split
 {
 	/**
-	 * The head nodes of each region in navigation order and the edge that enables each head to be
-	 * reached from earlier heads. The first head has a null edge.
+	 * The Splitter supervising the region splitting.
 	 */
-	protected final @NonNull LinkedHashMap<@NonNull Node, @Nullable Edge> headNode2edge = new LinkedHashMap<>();
+	protected final @NonNull SplitterAnalysis splitter;
 
-	public void addSimpleGroup(@NonNull SimpleGroup simpleGroup, @Nullable Edge edge) {
-		Node headNode = simpleGroup.getHeadNode();
-		assert !headNode2edge.containsKey(headNode);
-		headNode2edge.put(headNode, edge);
+	/**
+	 * The Stages that specify a multi-headed region split.
+	 */
+	private final @NonNull List<@NonNull Stage> stages = new ArrayList<>();
+
+	/**
+	 * Mapping from each head node to the Stage that specifies it.
+	 */
+	private final @NonNull Map<@NonNull SimpleGroup, @NonNull HeadedStage> simpleGroup2stage = new HashMap<>();
+
+	public Split(@NonNull SplitterAnalysis splitter) {
+		this.splitter = splitter;
+	}
+
+	public void addBodyStage() {
+		Stage bodyStage = new BodyStage(splitter, stages);
+		stages.add(bodyStage);
+	}
+
+	public @NonNull Stage addStage(@Nullable SimpleGroup sourceSimpleGroup, @Nullable Edge edge, @NonNull SimpleGroup targetSimpleGroup) {
+		assert !simpleGroup2stage.containsKey(targetSimpleGroup);
+		HeadedStage sourceStage;
+		HeadedStage targetStage;
+		if (edge == null) {
+			assert sourceSimpleGroup == null;
+			sourceStage = null;
+			targetStage = new HeadStage(splitter, targetSimpleGroup);
+		}
+		else {
+			assert sourceSimpleGroup != null;
+			sourceStage = /*sourceSimpleGroup != null ?*/ simpleGroup2stage.get(sourceSimpleGroup);// : null;
+			targetStage = new LoopStage(splitter, sourceStage, edge, targetSimpleGroup);
+		}
+		stages.add(targetStage);
+		simpleGroup2stage.put(targetSimpleGroup, targetStage);
+		if (sourceStage != null) {
+			sourceStage.addSuccessor(targetStage);
+		}
+		return targetStage;
+	}
+
+	public void check() {
+		for (@NonNull Stage stage : stages) {
+			stage.debug();
+			stage.check();
+		}
+	}
+
+	public void debug() {
+		for (@NonNull Stage stage : stages) {
+			stage.debug();
+		}
+	}
+
+	@Override
+	public @NonNull String toString() {
+		StringBuilder s = new StringBuilder();
+		toString(s, 0);
+		return s.toString();
 	}
 
 	public void toString(@NonNull StringBuilder s, int depth) {
 		SplitterUtil.indent(s, depth);
-		for (@NonNull Node node : headNode2edge.keySet()) {
-			Edge edge = headNode2edge.get(node);
-			if (edge != null) {
-				s.append("\n");
-				SplitterUtil.indent(s, depth+1);
-				s.append(edge.isComputation() ? "forward-edge : " : "reverse-edge : ");
-				s.append(edge.getName());
-				s.append(" : ");
-				s.append(edge);
-			}
+		for (@NonNull Stage stage : stages) {
 			s.append("\n");
-			SplitterUtil.indent(s, depth+1);
-			s.append("head-node : ");
-			s.append(node.getName());
-			s.append(" : ");
-			s.append(node);
+			stage.toString(s, depth+1);
 		}
 	}
 }

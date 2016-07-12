@@ -36,9 +36,9 @@ class SimpleGroup extends AbstractGroup
 	public void computeMutualOrdering(@NonNull Iterable<@NonNull SimpleGroup> externalSimpleGroups) {}
 
 	@Override
-	protected void buildSplit(@NonNull Split split, @Nullable Edge edge) {
-		split.addSimpleGroup(this, edge);
-		buildSplit(split);
+	protected void buildSplit(@NonNull Split split, @Nullable SimpleGroup sourceSimpleGroup, @Nullable Edge edge) {
+		split.addStage(sourceSimpleGroup, edge, this);
+		buildSplit(split, this);
 	}
 
 	public @NonNull Node getHeadNode() {

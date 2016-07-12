@@ -108,6 +108,10 @@ class SplitterAnalysis
 		return ClassUtil.nonNullState(reachableNode2simpleGroups.get(node));
 	}
 
+	public @NonNull Region getRegion() {
+		return region;
+	}
+
 	@Override
 	public @NonNull String toString() {
 		return region.getName();

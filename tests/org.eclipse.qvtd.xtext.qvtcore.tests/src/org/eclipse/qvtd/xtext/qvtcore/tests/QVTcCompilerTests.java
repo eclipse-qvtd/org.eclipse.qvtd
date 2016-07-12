@@ -233,7 +233,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			}
 			else {
 				Resource inputResource = getResourceSet().getResource(modelURI, true);
-				generatedExecutor.getTransformer().addRootObjects(modelName, ClassUtil.nonNullState(inputResource.getContents()));
+				generatedExecutor.getTransformer().addRootObjects(modelName, ClassUtil.nullFree(inputResource.getContents()));
 			}
 		}
 
@@ -431,6 +431,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		Scheduler.REGION_DEPTH.setState(true);
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_TRAVERSAL.setState(true);
+		Splitter.RESULT.setState(true);
+		Splitter.STAGES.setState(true);
 		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		Splitter.RESULT.setState(true);
 		MyQVT myQVT = new MyQVT("uml2rdbms", Simpleuml2rdbmsPackage.eINSTANCE, SimpleumlPackage.eINSTANCE, SimplerdbmsPackage.eINSTANCE);
