@@ -77,6 +77,11 @@
         <requirement
             name="org.eclipse.xtext.sdk.feature.group"/>
         <repositoryList
+            name="Neon">
+          <repository
+              url="http://download.eclipse.org/releases/neon"/>
+        </repositoryList>
+        <repositoryList
             name="Mars">
           <repository
               url="http://download.eclipse.org/releases/mars"/>
@@ -285,7 +290,7 @@
     </setupTask>
     <stream
         name="master"
-        label="Master (Mars)"/>
+        label="Master (Neon)"/>
     <description>The development environment for the QVTd project</description>
   </project>
   <project name="Releng">
@@ -353,7 +358,7 @@
     </setupTask>
     <stream
         name="master"
-        label="Master (Mars)">
+        label="Master (Neon)">
       <setupTask
           xsi:type="setup:VariableTask"
           name="simrel.branch"
