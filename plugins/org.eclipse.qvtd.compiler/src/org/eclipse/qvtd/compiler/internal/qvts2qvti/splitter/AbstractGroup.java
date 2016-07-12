@@ -70,7 +70,7 @@ abstract class AbstractGroup implements Group
 	protected AbstractGroup(@NonNull SplitterAnalysis splitter, @NonNull List<@NonNull Node> headNodes) {
 		this.splitter = splitter;
 		this.name = SplitterUtil.computeMultiHeadNodeName(headNodes);
-		this.reachableNodes = SplitterUtil.computeReachableNodes(headNodes);
+		this.reachableNodes = SplitterUtil.computeNavigableNodes(headNodes);
 	}
 
 	public void addPredecessor(@NonNull Edge edge, @NonNull List<@NonNull AbstractGroup> predecessorGroups) {
@@ -103,9 +103,9 @@ abstract class AbstractGroup implements Group
 		successorGroups.put(successorGroup, edge);
 	}
 
-	public void buildSplit(@NonNull Split split) {
+	public void buildSplit(@NonNull Split split, @Nullable SimpleGroup sourceSimpleGroup) {
 		for (Map.Entry<@NonNull AbstractGroup, @NonNull Edge> entry : successorGroups.entrySet()) {
-			entry.getKey().buildSplit(split, entry.getValue());
+			entry.getKey().buildSplit(split, sourceSimpleGroup, entry.getValue());
 		}
 	}
 
@@ -127,7 +127,7 @@ abstract class AbstractGroup implements Group
 		}
 	}
 
-	protected abstract void buildSplit(@NonNull Split subregion, @Nullable Edge edge);
+	protected abstract void buildSplit(@NonNull Split subregion, @Nullable SimpleGroup sourceSimpleGroup, @Nullable Edge edge);
 
 	public abstract @NonNull Iterable<@NonNull SimpleGroup> getInternalSimpleGroups();
 

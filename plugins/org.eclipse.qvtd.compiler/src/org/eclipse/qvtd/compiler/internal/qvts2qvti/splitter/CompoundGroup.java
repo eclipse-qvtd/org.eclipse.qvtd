@@ -81,20 +81,21 @@ class CompoundGroup extends AbstractGroup
 	}
 
 	@Override
-	public void buildSplit(@NonNull Split split, @Nullable Edge edge) {
-		split.addSimpleGroup(getEntryGroup(), edge);
+	public void buildSplit(@NonNull Split split, @Nullable SimpleGroup sourceSimpleGroup, @Nullable Edge edge) {
+		SimpleGroup entryGroup = getEntryGroup();
+		split.addStage(sourceSimpleGroup, edge, entryGroup);
 		for (@NonNull Boundary boundary : orderedBoundaries) {
-			split.addSimpleGroup(boundary.getTargetGroup(), boundary.getEdge());
+			split.addStage(boundary.getSourceGroup(), boundary.getEdge(), boundary.getTargetGroup());
 		}
-		buildSplit(split);
+		buildSplit(split, entryGroup);
 	}
 
 	/**
 	 * Create a Boundary for each edge whose source end is also in externalSimpleGroups and whose target end is only in internalSimpleGroups.
 	 */
 	protected @NonNull Iterable<@NonNull SimpleGroup> computeExternalBoundaries(@NonNull Iterable<@NonNull SimpleGroup> externalSimpleGroups) {
-		Set<@NonNull Node> externalReachableNodes = SplitterUtil.computeReachableNodes(SplitterUtil.computeHeadNodes(externalSimpleGroups));
-		Set<@NonNull Node> externalComputableNodes = SplitterUtil.computeComputableNodes(externalReachableNodes);
+		Set<@NonNull Node> externalReachableNodes = SplitterUtil.computeNavigableNodes(SplitterUtil.computeHeadNodes(externalSimpleGroups));
+		Set<@NonNull Node> externalComputableNodes = SplitterUtil.computeComputableTargetNodes(externalReachableNodes);
 		List<@NonNull SimpleGroup> externalInternalSimpleGroups = new ArrayList<>();
 		for (@NonNull SimpleGroup internalSimpleGroup : internalSimpleGroups) {
 			Iterable<@NonNull Node> internalReachableNodes = internalSimpleGroup.getReachableNodes();

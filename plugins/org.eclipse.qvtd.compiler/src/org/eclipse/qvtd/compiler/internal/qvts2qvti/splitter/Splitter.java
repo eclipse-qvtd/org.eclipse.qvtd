@@ -48,6 +48,7 @@ public class Splitter extends SplitterAnalysis
 	//	public static final @NonNull TracingOption ANALYSIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/split/analysis");
 	public static final @NonNull TracingOption GROUPS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/split/groups");
 	public static final @NonNull TracingOption RESULT = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/split/result");
+	public static final @NonNull TracingOption STAGES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/split/stages");
 
 	/**
 	 * Map from each simple group to the mutually navigable group that contains it.
@@ -169,10 +170,11 @@ public class Splitter extends SplitterAnalysis
 	 * region and the edges that traverse them.
 	 */
 	protected Split computeSplit(@NonNull Iterable<@NonNull AbstractGroup> rootGroups) {
-		Split split = new Split();
+		Split split = new Split(this);
 		for (@NonNull AbstractGroup rootGroup : rootGroups) {
-			rootGroup.buildSplit(split, null);
+			rootGroup.buildSplit(split, null, null);
 		}
+		split.addBodyStage();
 		return split;
 	}
 
@@ -292,10 +294,9 @@ public class Splitter extends SplitterAnalysis
 		Split split = computeSplit(rootGroups);
 		//
 		if (RESULT.isActive()) {
-			StringBuilder s = new StringBuilder();
-			split.toString(s, 0);
-			RESULT.println(region + s.toString());
+			RESULT.println(region + split.toString());
 		}
+		split.check();
 		return split;
 	}
 }
