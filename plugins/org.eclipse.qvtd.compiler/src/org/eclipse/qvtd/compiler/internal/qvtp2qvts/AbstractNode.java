@@ -39,9 +39,9 @@ import com.google.common.collect.Iterables;
 public abstract class AbstractNode implements Node
 {
 	public static final class NodeComparator implements Comparator<@NonNull Node>
-	{	
+	{
 		public static final @NonNull NodeComparator INSTANCE = new NodeComparator();
-	
+
 		@Override
 		public int compare(@NonNull Node o1, @NonNull Node o2) {
 			String n1 = NameUtil.getSafeName(o1);
@@ -109,14 +109,14 @@ public abstract class AbstractNode implements Node
 	public final void addIncomingConnection(@NonNull NodeConnection connection) {
 		assert (incomingConnection == null) || (incomingConnection == connection);
 		assert Iterables.contains(connection.getTargetNodes(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		incomingConnection = connection;
 	}
 
 	@Override
 	public final void addIncomingEdge(@NonNull Edge edge) {
 		assert edge.getTarget() == this;
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		List<@NonNull Edge> incomingEdges2 = incomingEdges;
 		if (incomingEdges2 == null) {
 			incomingEdges = incomingEdges2 = new ArrayList<@NonNull Edge>();
@@ -130,7 +130,7 @@ public abstract class AbstractNode implements Node
 	@Override
 	public final void addOutgoingConnection(@NonNull NodeConnection connection) {
 		assert Iterables.contains(connection.getSources(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		List<@NonNull NodeConnection> outgoingConnections2 = outgoingConnections;
 		if (outgoingConnections2 == null) {
 			outgoingConnections = outgoingConnections2 = new ArrayList<@NonNull NodeConnection>();
@@ -144,7 +144,7 @@ public abstract class AbstractNode implements Node
 	@Override
 	public final void addOutgoingEdge(@NonNull Edge edge) {
 		assert edge.getSource() == this;
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		List<@NonNull Edge> outgoingEdges2 = outgoingEdges;
 		if (outgoingEdges2 == null) {
 			outgoingEdges = outgoingEdges2 = new ArrayList<@NonNull Edge>();
@@ -160,7 +160,7 @@ public abstract class AbstractNode implements Node
 		boolean isHead = isHead();
 		if (isHead) {
 			s.setHead();
-//			s.append("{rank=source;");
+			//			s.append("{rank=source;");
 		}
 		setLabel(s);
 		String shape = getShape();
@@ -174,9 +174,9 @@ public abstract class AbstractNode implements Node
 		s.setColor(getColor());
 		s.setPenwidth(getPenwidth());
 		s.appendAttributedNode(nodeName);
-//		if (isHead) {
-//			s.append("}");
-//		}
+		//		if (isHead) {
+		//			s.append("}");
+		//		}
 	}
 
 	@Override
@@ -216,7 +216,7 @@ public abstract class AbstractNode implements Node
 		return filter;
 	}
 
-/*	@Override
+	/*	@Override
 	public @NonNull Node getCastEquivalentNode() {
 		List<Edge> outgoingEdges = getOutgoingEdges();
 		if ((outgoingEdges != null) && (outgoingEdges.size() == 1)) {
@@ -227,7 +227,7 @@ public abstract class AbstractNode implements Node
 		}
 		return this;
 	} */
-	
+
 	@Override
 	public final @NonNull ClassDatumAnalysis getClassDatumAnalysis() {
 		return classDatumAnalysis;
@@ -242,22 +242,22 @@ public abstract class AbstractNode implements Node
 		return classDatumAnalysis.getCompleteClass();
 	}
 
-//	@Override
-//	public @Nullable Edge getComposedOrderingEdge(@NonNull Node targetNode) {
-//		for (Edge edge : getComposedOrderingEdges()) {
-//			if (edge.getTarget() == targetNode) {
-//				return edge;
-//			}
-//		}
-//		return null;
-//	}
+	//	@Override
+	//	public @Nullable Edge getComposedOrderingEdge(@NonNull Node targetNode) {
+	//		for (Edge edge : getComposedOrderingEdges()) {
+	//			if (edge.getTarget() == targetNode) {
+	//				return edge;
+	//			}
+	//		}
+	//		return null;
+	//	}
 
-//	@Override
-//	public final @NonNull Iterable<Edge> getComposedOrderingEdges() {
-//		@SuppressWarnings("null")
-//		@NonNull Iterable<Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsComposedOrderingEdgePredicate.INSTANCE);
-//		return filter;
-//	}
+	//	@Override
+	//	public final @NonNull Iterable<Edge> getComposedOrderingEdges() {
+	//		@SuppressWarnings("null")
+	//		@NonNull Iterable<Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsComposedOrderingEdgePredicate.INSTANCE);
+	//		return filter;
+	//	}
 
 	@Override
 	public final @NonNull Iterable<@NonNull Edge> getComputationEdges() {
@@ -265,23 +265,23 @@ public abstract class AbstractNode implements Node
 		return filter;
 	}
 
-//	@Override
-//	public @Nullable Edge getConsumedOrderingEdge(@NonNull Node targetNode) {
-//		for (Edge edge : getConsumedOrderingEdges()) {
-//			if (edge.getTarget() == targetNode) {
-//				return edge;
-//			}
-//		}
-//		return null;
-//	}
+	//	@Override
+	//	public @Nullable Edge getConsumedOrderingEdge(@NonNull Node targetNode) {
+	//		for (Edge edge : getConsumedOrderingEdges()) {
+	//			if (edge.getTarget() == targetNode) {
+	//				return edge;
+	//			}
+	//		}
+	//		return null;
+	//	}
 
-//	@Override
-//	public final @NonNull Iterable<Edge> getConsumedOrderingEdges() {
-//		@SuppressWarnings("null")
-//		@NonNull Iterable<Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsConsumedOrderingEdgePredicate.INSTANCE);
-//		return filter;
-//	}
-	
+	//	@Override
+	//	public final @NonNull Iterable<Edge> getConsumedOrderingEdges() {
+	//		@SuppressWarnings("null")
+	//		@NonNull Iterable<Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsConsumedOrderingEdgePredicate.INSTANCE);
+	//		return filter;
+	//	}
+
 	@Override
 	public @NonNull String getDisplayName() {
 		return region.getName() + "::" + getName();
@@ -494,24 +494,24 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public final boolean isAttributeNode() {
-//		boolean isAttributeNode1 = nodeRole.isAttributeNode();		// FIXME OperationNode
+		//		boolean isAttributeNode1 = nodeRole.isAttributeNode();		// FIXME OperationNode
 		boolean isAttributeNode2 = (classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();
-//		assert isAttributeNode1 == isAttributeNode2;
+		//		assert isAttributeNode1 == isAttributeNode2;
 		return isAttributeNode2;
 	}
 
-//	@Override
-//	public boolean isCast() {
-//		return false;
-//	}
+	//	@Override
+	//	public boolean isCast() {
+	//		return false;
+	//	}
 
 	@Override
 	public final boolean isClassNode() {
 		boolean isClassNode1 = nodeRole.isClassNode();		// FIXME OperationNode / InternalNode
 		boolean isClassNode2 = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();// && !isOperation();
-//		assert isClassNode1 == isClassNode2;
+		//		assert isClassNode1 == isClassNode2;
 		if (isClassNode1 != isClassNode2) {
-//			System.err.println("Inconsistent isClassNode for " + this);
+			//			System.err.println("Inconsistent isClassNode for " + this);
 			isClassNode1 = nodeRole.isClassNode();
 			isClassNode2 = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();// && !isOperation();
 		}
@@ -527,7 +527,7 @@ public abstract class AbstractNode implements Node
 	public boolean isConstant() {
 		return nodeRole.isConstant();
 	}
-	
+
 	@Override
 	public boolean isExpression() {
 		return nodeRole.isExpression();
@@ -548,10 +548,10 @@ public abstract class AbstractNode implements Node
 		return nodeRole.isHead();
 	}
 
-//	@Override
-//	public boolean isInput() {
-//		return nodeRole.isInput();
-//	}
+	//	@Override
+	//	public boolean isInput() {
+	//		return nodeRole.isInput();
+	//	}
 
 	@Override
 	public boolean isInternal() {
@@ -571,7 +571,7 @@ public abstract class AbstractNode implements Node
 	@Override
 	public boolean isLoaded() {
 		return nodeRole.isLoaded();
-//		return classDatumAnalysis.getDomainUsage().isCheckable() && !isNull();
+		//		return classDatumAnalysis.getDomainUsage().isCheckable() && !isNull();
 	}
 
 	@Override
@@ -594,10 +594,10 @@ public abstract class AbstractNode implements Node
 		return nodeRole.isOperation();
 	}
 
-//	@Override
-//	public boolean isOutput() {
-//		return nodeRole.isOutput();
-//	}
+	//	@Override
+	//	public boolean isOutput() {
+	//		return nodeRole.isOutput();
+	//	}
 
 	@Override
 	public boolean isPredicated() {
@@ -629,7 +629,7 @@ public abstract class AbstractNode implements Node
 			this.nodeRole = this.nodeRole.merge(nodeRole);
 		}
 	}
- 
+
 	@Override
 	public boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis) {
 		CompleteClass oldCompleteClass = classDatumAnalysis.getCompleteClass();
@@ -664,19 +664,19 @@ public abstract class AbstractNode implements Node
 			return false;
 		}
 	}
-	
+
 	@Override
 	public final void removeIncomingConnection(@NonNull NodeConnection connection) {
 		assert Iterables.contains(connection.getTargetNodes(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		assert incomingConnection != null;
 		incomingConnection = null;
 	}
-	
+
 	@Override
 	public final void removeIncomingEdge(@NonNull Edge edge) {
 		assert edge.getTarget() == this;
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		List<Edge> incomingEdges2 = incomingEdges;
 		assert incomingEdges2 != null;
 		boolean wasRemoved = incomingEdges2.remove(edge);
@@ -686,21 +686,27 @@ public abstract class AbstractNode implements Node
 	@Override
 	public final void removeOutgoingConnection(@NonNull NodeConnection connection) {
 		assert Iterables.contains(connection.getSources(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		List<NodeConnection> outgoingConnections2 = outgoingConnections;
 		assert outgoingConnections2 != null;
+		@SuppressWarnings("unused")
 		boolean wasRemoved = outgoingConnections2.remove(connection);
-//		assert wasRemoved;
+		//		assert wasRemoved;
 	}
 
 	@Override
 	public final void removeOutgoingEdge(@NonNull Edge edge) {
 		assert edge.getSource() == this;
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		List<Edge> outgoingEdges2 = outgoingEdges;
 		assert outgoingEdges2 != null;
 		boolean wasRemoved = outgoingEdges2.remove(edge);
 		assert wasRemoved;
+	}
+
+	@Override
+	public void resetHead() {
+		this.nodeRole = this.nodeRole.resetHead();
 	}
 
 	@Override
@@ -726,6 +732,6 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public @NonNull String toString() {
-        return nodeRole.toString() + "(" + getName() + " : " + classDatumAnalysis.toString() + ")";
-    }
+		return nodeRole.toString() + "(" + getName() + " : " + classDatumAnalysis.toString() + ")";
+	}
 }

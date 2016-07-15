@@ -223,6 +223,14 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	void removeOutgoingConnection(@NonNull NodeConnection connection);
 	void removeOutgoingEdge(@NonNull Edge edge);
 
+	/**
+	 * Redesignate a head node as not-a-head, typically following a multi-headed split.
+	 */
+	void resetHead();
+
+	/**
+	 * Redesignate a guard node as a head.
+	 */
 	void setHead();
 
 	void toGraph(@NonNull GraphStringBuilder s);

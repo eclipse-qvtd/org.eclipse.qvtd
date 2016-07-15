@@ -48,7 +48,7 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	public boolean isComposed() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isExpression() {
 		return false;
@@ -58,7 +58,7 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	public boolean isExtraGuardVariable() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isGuardVariable() {
 		return false;
@@ -69,16 +69,16 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 		return false;
 	}
 
-//	@Override
-//	public boolean isInput() {
-//		return false;
-//	}
+	//	@Override
+	//	public boolean isInput() {
+	//		return false;
+	//	}
 
 	@Override
 	public boolean isInternal() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isIterator() {
 		return false;
@@ -104,10 +104,10 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 		return false;
 	}
 
-//	@Override
-//	public boolean isOutput() {
-//		return false;
-//	}
+	//	@Override
+	//	public boolean isOutput() {
+	//		return false;
+	//	}
 
 	@Override
 	public boolean isRealizedVariable() {
@@ -123,10 +123,18 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	public boolean isTrue() {
 		return false;
 	}
-	
+
 	@Override
 	public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
 		throw new IllegalStateException(this + " cannot be merged with " + nodeRole);
+	}
+
+	@Override
+	public @NonNull NodeRole resetHead() {
+		if (!isHead()) {
+			return this;
+		}
+		throw new IllegalStateException(this + " cannot be reset as a non-head");
 	}
 
 	@Override

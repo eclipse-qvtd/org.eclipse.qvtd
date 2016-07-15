@@ -26,12 +26,12 @@ public interface NodeRole extends Role
 	@NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull TypedElement typedElement);
 
 	/**
-	 * Return the pen width with which this edge is drawn. 
+	 * Return the pen width with which this edge is drawn.
 	 */
 	@NonNull Integer getPenwidth();
 
 	/**
-	 * Return the shape or null for default. 
+	 * Return the shape or null for default.
 	 */
 	@Nullable String getShape();
 
@@ -42,27 +42,27 @@ public interface NodeRole extends Role
 	boolean isClassNode();
 
 	boolean isComposed();
-	
+
 	boolean isExpression();
 
 	boolean isExtraGuardVariable();
-	
+
 	boolean isGuardVariable();
-	
+
 	boolean isHead();
-//	boolean isInput();
+	//	boolean isInput();
 	boolean isInternal();
-	
+
 	boolean isIterator();
-	
+
 	boolean isMatchable();
 
 	boolean isNavigable();
 
 	boolean isNull();
-	
+
 	boolean isOperation();
-//	boolean isOutput();
+	//	boolean isOutput();
 	boolean isRealizedVariable();
 
 	boolean isResult();
@@ -74,6 +74,14 @@ public interface NodeRole extends Role
 	 */
 	@NonNull NodeRole merge(@NonNull NodeRole nodeRole);
 
+	/**
+	 * Redesignate a head node as not-a-head, typically following a multi-headed split.
+	 */
+	@NonNull NodeRole resetHead();
+
+	/**
+	 * Redesignate a guard node as a head.
+	 */
 	@NonNull NodeRole setHead();
 
 }
