@@ -22,6 +22,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -104,6 +105,11 @@ abstract class HeadedStage extends AbstractStage
 	@Override
 	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
 		return headNodes;
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull Node> getOtherNodes() {
+		return Iterables.concat(navigableNodes, computableNodes);
 	}
 
 	@Override

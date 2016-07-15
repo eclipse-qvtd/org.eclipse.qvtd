@@ -30,21 +30,26 @@ public abstract class AbstractNavigationEdge extends AbstractEdge implements Nav
 			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		super(edgeRole, region, sourceNode, source2targetProperty.getName(), targetNode);
 		this.source2targetProperty = source2targetProperty;
-//		assert (source2targetProperty.eContainer() == null) || sourceNode.isClassNode();		// Pseudo navigations may be non-classes
+		//		assert (source2targetProperty.eContainer() == null) || sourceNode.isClassNode();		// Pseudo navigations may be non-classes
+	}
+
+	@Override
+	public EdgeRole.@NonNull  Navigation getEdgeRole() {
+		return (EdgeRole.Navigation) super.getEdgeRole();
 	}
 
 	@Override
 	public final void addIncomingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert incomingConnection == null;
 		assert Iterables.contains(edgeConnection.getTargetEdges(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		incomingConnection = edgeConnection;
 	}
 
 	@Override
 	public final void addOutgoingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert Iterables.contains(edgeConnection.getSources(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		List<@NonNull EdgeConnection> outgoingConnections2 = outgoingConnections;
 		if (outgoingConnections2 == null) {
 			outgoingConnections = outgoingConnections2 = new ArrayList<@NonNull EdgeConnection>();
@@ -62,7 +67,7 @@ public abstract class AbstractNavigationEdge extends AbstractEdge implements Nav
 
 	@Override
 	public @Nullable String getLabel() {
-		return ((EdgeRole.Navigation)getEdgeRole()).getLabel(source2targetProperty);
+		return getEdgeRole().getLabel(source2targetProperty);
 	}
 
 	@Override
@@ -78,7 +83,7 @@ public abstract class AbstractNavigationEdge extends AbstractEdge implements Nav
 	@Override
 	public final void removeIncomingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert Iterables.contains(edgeConnection.getTargetEdges(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		assert incomingConnection != null;
 		incomingConnection = null;
 	}
@@ -86,7 +91,7 @@ public abstract class AbstractNavigationEdge extends AbstractEdge implements Nav
 	@Override
 	public final void removeOutgoingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert Iterables.contains(edgeConnection.getSources(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		List<EdgeConnection> outgoingConnections2 = outgoingConnections;
 		assert outgoingConnections2 != null;
 		boolean wasRemoved = outgoingConnections2.remove(edgeConnection);

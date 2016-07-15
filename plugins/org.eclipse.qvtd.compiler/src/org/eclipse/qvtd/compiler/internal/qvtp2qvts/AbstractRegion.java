@@ -2611,7 +2611,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return symbolName != null ? (symbolName/* + " - " + getName()*/) : getName();
 	}
 
-	protected void writeDebugGraphs(@NonNull String context) {
+	public void writeDebugGraphs(@NonNull String context) {
 		SchedulerConstants scheduler = getSchedulerConstants();
 		scheduler.writeDOTfile(this, "-" + context);
 		scheduler.writeGraphMLfile(this, "-" + context);

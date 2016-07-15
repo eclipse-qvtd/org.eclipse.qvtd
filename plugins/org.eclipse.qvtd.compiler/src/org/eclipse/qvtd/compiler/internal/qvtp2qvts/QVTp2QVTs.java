@@ -297,6 +297,7 @@ public class QVTp2QVTs extends SchedulerConstants
 			if (abstractAction instanceof MappingAction) {
 				MappingAction mappingAction = (MappingAction) abstractAction;
 				SimpleMappingRegion mappingRegion = new SimpleMappingRegion(multiRegion, mappingAction, i);
+				mappingRegion.initialize();
 				action2mappingRegion.put(abstractAction, mappingRegion);
 			}
 		}

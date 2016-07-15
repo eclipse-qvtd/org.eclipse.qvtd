@@ -21,11 +21,13 @@ public interface NavigationEdge extends Edge, ConnectionEnd//, GraphStringBuilde
 	void addIncomingConnection(@NonNull EdgeConnection edgeConnection);
 	void addOutgoingConnection(@NonNull EdgeConnection edgeConnection);
 
+	@Override
+	EdgeRole.@NonNull Navigation getEdgeRole();
 	@Nullable EdgeConnection getIncomingConnection();
 	@NonNull List<@NonNull EdgeConnection> getOutgoingConnections();
 
 	/**
-	 * Return the property that this edge navigates from source to target. 
+	 * Return the property that this edge navigates from source to target.
 	 */
 	@NonNull Property getProperty();
 

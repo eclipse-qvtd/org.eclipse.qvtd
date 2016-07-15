@@ -25,6 +25,8 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 
+import com.google.common.collect.Lists;
+
 /**
  * QVTs2QVTi supervises the serialization of a QVTs schedule as a QVTi transformation.
  */
@@ -88,12 +90,12 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	}
 
 	protected void splitMultiHeadedRegions(@NonNull MultiRegion multiRegion) {
-		for (@NonNull Region region : multiRegion.getActiveRegions()) {
+		for (@NonNull Region region : Lists.newArrayList(multiRegion.getActiveRegions())) {
 			if (region instanceof SimpleMappingRegion) {
 				Splitter splitter = new Splitter((@NonNull SimpleMappingRegion) region);
 				Split split = splitter.split();
 				if (split != null) {
-					split.install(multiRegion);
+					//					split.install(multiRegion);
 				}
 			}
 		}

@@ -28,7 +28,7 @@ public class MergedNavigationEdge extends MergedEdge implements NavigationEdge
 	protected final @NonNull Property source2targetProperty;
 	private @Nullable EdgeConnection incomingConnection = null;
 	private @Nullable List<@NonNull EdgeConnection> outgoingConnections = null;
-	
+
 	public MergedNavigationEdge(@NonNull MergedMappingRegion mergedRegion, @NonNull MergedNode sourceNode, @NonNull NavigationEdge primaryEdge, @NonNull MergedNode targetNode) {
 		super(mergedRegion, sourceNode, primaryEdge, targetNode);
 		source2targetProperty = primaryEdge.getProperty();
@@ -38,14 +38,14 @@ public class MergedNavigationEdge extends MergedEdge implements NavigationEdge
 	public final void addIncomingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert incomingConnection == null;
 		assert Iterables.contains(edgeConnection.getTargetEdges(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		incomingConnection = edgeConnection;
 	}
 
 	@Override
 	public final void addOutgoingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert Iterables.contains(edgeConnection.getSources(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		List<@NonNull EdgeConnection> outgoingConnections2 = outgoingConnections;
 		if (outgoingConnections2 == null) {
 			outgoingConnections = outgoingConnections2 = new ArrayList<@NonNull EdgeConnection>();
@@ -59,6 +59,11 @@ public class MergedNavigationEdge extends MergedEdge implements NavigationEdge
 	@Override
 	public @NonNull String getDisplayName() {
 		return source2targetProperty.getOwningClass().getName() + "::" + source2targetProperty.getName();
+	}
+
+	@Override
+	public EdgeRole.@NonNull  Navigation getEdgeRole() {
+		return (EdgeRole.Navigation) super.getEdgeRole();
 	}
 
 	@Override
@@ -84,7 +89,7 @@ public class MergedNavigationEdge extends MergedEdge implements NavigationEdge
 	@Override
 	public final void removeIncomingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert Iterables.contains(edgeConnection.getTargetEdges(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		assert incomingConnection != null;
 		incomingConnection = null;
 	}
@@ -92,7 +97,7 @@ public class MergedNavigationEdge extends MergedEdge implements NavigationEdge
 	@Override
 	public final void removeOutgoingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert Iterables.contains(edgeConnection.getSources(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		List<EdgeConnection> outgoingConnections2 = outgoingConnections;
 		assert outgoingConnections2 != null;
 		boolean wasRemoved = outgoingConnections2.remove(edgeConnection);

@@ -23,6 +23,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -46,7 +47,7 @@ class BodyStage extends AbstractStage
 	//	private final @NonNull Iterable<@NonNull Node> visibleIteratedNodes;
 	private final @NonNull Iterable<@NonNull Node> visibleIteratorNodes;
 	private final @NonNull Iterable<@NonNull Node> realizedNodes;
-	private final @NonNull Iterable<@NonNull Node> allHeadNodes;
+	private final @NonNull Iterable<@NonNull Node> headNodes;
 	private final @NonNull Iterable<@NonNull Node> directlyRequiredNodes;
 	private final @NonNull Iterable<@NonNull Node> deadNodes;
 	private final @NonNull Iterable<@NonNull Node> indirectlyRequiredNodes;
@@ -61,7 +62,7 @@ class BodyStage extends AbstractStage
 		//	Determine the nodes needed to realize the realized nodes.
 		//
 		Iterable<@NonNull Node> requiredNodes = computeRequiredNodes();
-		this.allHeadNodes = computeAllHeadNodes(requiredNodes);
+		this.headNodes = computeAllHeadNodes(requiredNodes);
 		this.directlyRequiredNodes = computeDirectlyRequiredNodes(requiredNodes);
 		Iterable<@NonNull Node> allNodes = computeAllNodes();
 		this.deadNodes = computeDeadNodes(allNodes);
@@ -72,7 +73,7 @@ class BodyStage extends AbstractStage
 	protected @NonNull String buildContents(@NonNull StringBuilder s) {
 		//		build(s, "visible iterated nodes", visibleIteratedNodes);
 		//		build(s, "visible iterator nodes", visibleIteratorNodes);
-		build(s, "all head nodes", allHeadNodes);
+		build(s, "head nodes", headNodes);
 		build(s, "realized nodes", realizedNodes);
 		build(s, "directly required nodes", directlyRequiredNodes);
 		build(s, "indirectly required nodes", indirectlyRequiredNodes);
@@ -83,7 +84,7 @@ class BodyStage extends AbstractStage
 	@Override
 	public void check() {
 		Set<@NonNull Node> accumulator = new HashSet<>();
-		checkAccumulate(accumulator, allHeadNodes);
+		checkAccumulate(accumulator, headNodes);
 		checkAccumulate(accumulator, realizedNodes);
 		checkAccumulate(accumulator, directlyRequiredNodes);
 		checkAccumulate(accumulator, indirectlyRequiredNodes);
@@ -109,7 +110,7 @@ class BodyStage extends AbstractStage
 	}
 
 	protected @NonNull Iterable<@NonNull Node> computeAllNodes() {
-		Set<@NonNull Node> navigableNodes = SplitterUtil.computeNavigableNodes(allHeadNodes);
+		Set<@NonNull Node> navigableNodes = SplitterUtil.computeNavigableNodes(headNodes);
 		Set<@NonNull Node> computableNodes = SplitterUtil.computeComputableTargetNodes(navigableNodes);
 		Set<@NonNull Node> allNodes = Sets.newHashSet(navigableNodes);
 		allNodes.addAll(computableNodes);
@@ -132,7 +133,7 @@ class BodyStage extends AbstractStage
 
 	protected @NonNull Iterable<@NonNull Node>  computeIndirectlyRequiredNodes(@NonNull Iterable<@NonNull Node> allNodes) {
 		Set<@NonNull Node> nodeSet = Sets.newHashSet(allNodes);
-		CompilerUtil.removeAll(nodeSet, allHeadNodes);
+		CompilerUtil.removeAll(nodeSet, headNodes);
 		CompilerUtil.removeAll(nodeSet, deadNodes);
 		CompilerUtil.removeAll(nodeSet, directlyRequiredNodes);
 		CompilerUtil.removeAll(nodeSet, realizedNodes);
@@ -142,7 +143,7 @@ class BodyStage extends AbstractStage
 	}
 
 	protected @NonNull Iterable<@NonNull Node> computeReachableNodes(@NonNull Iterable<@NonNull Node> requiredNodes) {
-		Set<@NonNull Node> reachableNodes = SplitterUtil.computeNavigableNodes(allHeadNodes);
+		Set<@NonNull Node> reachableNodes = SplitterUtil.computeNavigableNodes(headNodes);
 		//		assert reachableNodes.containsAll(requiredNodes);
 		for (@NonNull Node node : requiredNodes) {
 			reachableNodes.remove(node);
@@ -209,7 +210,12 @@ class BodyStage extends AbstractStage
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
-		return allHeadNodes;
+		return headNodes;
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull Node> getOtherNodes() {
+		return Iterables.concat(directlyRequiredNodes, indirectlyRequiredNodes, realizedNodes);
 	}
 
 	@Override

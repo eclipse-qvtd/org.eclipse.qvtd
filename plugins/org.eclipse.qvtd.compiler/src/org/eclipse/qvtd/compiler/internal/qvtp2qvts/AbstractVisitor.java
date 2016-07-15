@@ -14,6 +14,18 @@ import org.eclipse.jdt.annotation.NonNull;
 
 public abstract class AbstractVisitor<R> implements Visitor<R>
 {
+	public <@NonNull T extends R> T create(@NonNull Class<T> returnClass, @NonNull Visitable visitable) {
+		R result = visitable.accept(this);
+		if (result == null) {
+			throw new NullPointerException("null return from SplitterVisitor for " + visitable.getClass().getSimpleName());
+		}
+		if (!returnClass.isAssignableFrom(result.getClass())) {
+			throw new ClassCastException("bad return from SplitterVisitor for " + visitable.getClass().getSimpleName());
+		}
+		@SuppressWarnings("unchecked") T castVisitable = (T) result;
+		return castVisitable;
+	}
+
 	@Override
 	public R visiting(@NonNull Visitable visitable) {
 		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());

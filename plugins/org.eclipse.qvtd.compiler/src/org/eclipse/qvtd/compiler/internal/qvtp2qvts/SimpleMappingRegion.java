@@ -91,7 +91,6 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		super(multiRegion);
 		this.mappingAction = mappingAction;
 		this.naturalOrder = naturalOrder;
-		initialize();
 	}
 
 	@Override
