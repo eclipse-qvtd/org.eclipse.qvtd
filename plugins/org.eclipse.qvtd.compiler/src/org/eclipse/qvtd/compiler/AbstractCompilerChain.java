@@ -40,9 +40,10 @@ import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvtp.QVTm2QVTp;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassRelationships;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtu2qvtm.QVTu2QVTm;
@@ -252,17 +253,18 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	{
 		public QVTp2QVTsCompilerStep(@NonNull CompilerChain compilerChain) {
 			super(compilerChain, QVTS_STEP);
-			Scheduler.DEBUG_GRAPHS.setState(getOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
+			QVTp2QVTs.DEBUG_GRAPHS.setState(getOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
 		public @NonNull RootScheduledRegion execute(@NonNull Resource gResource, @NonNull QVTp2QVTg qvtp2qvtg) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Schedule schedule = getSchedule(gResource);
-				Scheduler scheduler = new Scheduler(environmentFactory, schedule, qvtp2qvtg);
-				RootScheduledRegion rootRegion = scheduler.qvtp2qvts();
-				QVTs2QVTs qvts2qvts = new QVTs2QVTs(environmentFactory);
-				qvts2qvts.transform(rootRegion);
+				QVTp2QVTs scheduler = new QVTp2QVTs(environmentFactory, schedule, qvtp2qvtg);
+				MultiRegion multiRegion = scheduler.transform();
+				String rootName = ClassUtil.nonNullState(scheduler.getDependencyGraph().eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
+				QVTs2QVTs qvts2qvts = new QVTs2QVTs(environmentFactory, rootName);
+				RootScheduledRegion rootRegion = qvts2qvts.transform(multiRegion);
 				compiled(rootRegion);			// FIXME
 				//				saveResource(sResource, QVTS_STEP);
 				return rootRegion;

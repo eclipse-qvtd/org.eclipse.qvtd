@@ -24,7 +24,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
 /**
  * Region2Depth provides facilities that use a temporary cache depth of the region passing binding tree.
@@ -58,7 +58,7 @@ public class Region2Depth
 		region2children.clear();	// FIXME do intelligent update rather than recalculate
 		region2depth.clear();
 		region2parents.clear();
-		Scheduler.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " <reset> : " + region.getName());
+		QVTp2QVTs.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " <reset> : " + region.getName());
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class Region2Depth
 		Integer depth = region2depth.get(region);
 		if (depth == null) {
 			if (region2depth.containsKey(region)) {
-				Scheduler.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " <loop> : " + region.getName());
+				QVTp2QVTs.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " <loop> : " + region.getName());
 				return 0;
 			}
 			region2depth.put(region, null);
@@ -176,7 +176,7 @@ public class Region2Depth
 				}
 			}
 			region2depth.put(region, depth);
-			Scheduler.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " " + depth + " : " + region.getName());
+			QVTp2QVTs.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " " + depth + " : " + region.getName());
 		}
 		return depth.intValue();
 	}

@@ -53,8 +53,8 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	 */
 	private final @NonNull Map<@NonNull Set<@NonNull NavigationEdge>, @NonNull EdgeConnection> edges2edgeConnection = new HashMap<@NonNull Set<@NonNull NavigationEdge>, @NonNull EdgeConnection>();
 
-	public AbstractScheduledRegion(@NonNull SuperRegion superRegion) {
-		super(superRegion);
+	public AbstractScheduledRegion(@NonNull MultiRegion multiRegion) {
+		super(multiRegion);
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		}
 		CyclicScheduledRegion cyclicRegion = new CyclicScheduledRegion(this, cycle);
 		addRegion(cyclicRegion);
-		if (Scheduler.DEBUG_GRAPHS.isActive()) {
+		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			cyclicRegion.writeDebugGraphs("3-cycle");
 		}
 		return cyclicRegion;
@@ -107,7 +107,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		//
 		splitConnectionVariables();
 		//
-		if (Scheduler.DEBUG_GRAPHS.isActive()) {
+		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			writeDebugGraphs("5-cycled", true, true, false);
 		}
 	}
@@ -265,7 +265,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 //		firstPassRegion.writeDOTfile();
 //		firstPassRegion.writeGraphMLfile();
 		//
-		if (Scheduler.DEBUG_GRAPHS.isActive()) {
+		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			writeDebugGraphs("9-final", true, true, true);
 		}
 	}

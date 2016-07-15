@@ -83,8 +83,8 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	 */
 	private /*@LazyNonNull*/ List<@NonNull SimpleNode> extraNodes = null;
 
-	public SimpleMappingRegion(@NonNull SuperRegion superRegion, @NonNull MappingAction mappingAction, int naturalOrder) {
-		super(superRegion);
+	public SimpleMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction, int naturalOrder) {
+		super(multiRegion);
 		this.mappingAction = mappingAction;
 		this.naturalOrder = naturalOrder;
 		AbstractMapping mapping = mappingAction.getMapping();
@@ -597,7 +597,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 			classDatumAnalysis.addProduction(this, assignedNode);
 			ClassDatum classDatum = classDatumAnalysis.getClassDatum();
 			for (@SuppressWarnings("null")@NonNull AbstractAction consumingAction : classDatum.getRequiredBy()) {
-				SimpleMappingRegion consumingRegion = superRegion.getMappingRegion(consumingAction);
+				SimpleMappingRegion consumingRegion = multiRegion.getMappingRegion(consumingAction);
 				assert consumingRegion != null;
 				for (@NonNull Node consumingNode : consumingRegion.getMatchableNodes()) {
 					if (consumingNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
@@ -611,7 +611,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 			classDatumAnalysis.addConsumption(this, predicatedNode);
 			ClassDatum classDatum = classDatumAnalysis.getClassDatum();
 			for (@SuppressWarnings("null")@NonNull AbstractAction introducingAction : classDatum.getProducedBy()) {
-				SimpleMappingRegion producingRegion = superRegion.getMappingRegion(introducingAction);
+				SimpleMappingRegion producingRegion = multiRegion.getMappingRegion(introducingAction);
 				assert producingRegion != null;
 				for (@NonNull Node assignedNode : producingRegion.getComputedNodes()) {
 					if (assignedNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance

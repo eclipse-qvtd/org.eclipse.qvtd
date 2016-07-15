@@ -24,7 +24,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DatumConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
 import com.google.common.collect.Iterables;
 
@@ -363,7 +363,7 @@ public abstract class ScheduleState extends ScheduleCache
 
 	protected void scheduleRegion(@NonNull Region region) {
 		int thisIndex = orderedRegions.size();
-		Scheduler.REGION_ORDER.println(thisIndex + " : " + region);
+		QVTp2QVTs.REGION_ORDER.println(thisIndex + " : " + region);
 		assert !orderedRegions.contains(region) : "Attempting to re-order " + region;
 		region.addIndex(thisIndex);
 		orderedRegions.add(region);

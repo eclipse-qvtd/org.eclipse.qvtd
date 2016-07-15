@@ -91,7 +91,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 //	private @NonNull List<@NonNull Node> tailNodes = new ArrayList<@NonNull Node>();
 
 	public CyclicScheduledRegion(@NonNull ScheduledRegion parentScheduledRegion, @NonNull Iterable<@NonNull Region> regions) {
-		super(parentScheduledRegion.getSuperRegion());
+		super(parentScheduledRegion.getMultiRegion());
 		this.parentScheduledRegion = parentScheduledRegion;
 		for (@NonNull Region region : regions) {
 			addRegion(region);

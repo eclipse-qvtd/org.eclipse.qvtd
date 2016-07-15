@@ -262,13 +262,13 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 		for (@NonNull Region intermediateRegion : intermediateRegions) {
 			intermediateRegion.addIntermediateConnection(this);
 		}
-		if (Scheduler.CONNECTION_ROUTING.isActive()) {
+		if (QVTp2QVTs.CONNECTION_ROUTING.isActive()) {
 			StringBuilder s = new StringBuilder();
 			s.append(getSymbolName() + " common: " + commonRegion + " intermediate:");
 			for (@NonNull Region intermediateRegion : intermediateRegions) {
 				s.append(" " + intermediateRegion);
 			}
-			Scheduler.CONNECTION_ROUTING.println(s.toString());
+			QVTp2QVTs.CONNECTION_ROUTING.println(s.toString());
 		}
 	}
 	

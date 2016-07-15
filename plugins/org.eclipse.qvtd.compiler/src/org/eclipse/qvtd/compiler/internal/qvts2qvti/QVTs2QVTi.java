@@ -33,7 +33,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -127,7 +127,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 	}
 
 	protected void resolveTransformation(@NonNull Model model, @NonNull RootScheduledRegion scheduledRegion) {
-		Scheduler scheduler = scheduledRegion.getScheduler();
+		QVTp2QVTs scheduler = scheduledRegion.getScheduler();
 		SymbolNameReservation symbolNameReservation = scheduler.getSymbolNameReservation();
 		Transformation transformation = scheduler.getTransformation();
 		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(environmentFactory, transformation, symbolNameReservation);

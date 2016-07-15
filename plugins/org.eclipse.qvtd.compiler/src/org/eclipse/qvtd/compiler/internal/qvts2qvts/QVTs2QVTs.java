@@ -14,9 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Split;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 
@@ -25,15 +29,32 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
  */
 public class QVTs2QVTs extends QVTimperativeHelper
 {
-	public QVTs2QVTs(@NonNull QVTiEnvironmentFactory environmentFactory) {
+	protected final @NonNull String rootName;
+
+	public QVTs2QVTs(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull String rootName) {
 		super(environmentFactory);
+		this.rootName = rootName;
+	}
+
+	public @NonNull RootScheduledRegion createRootRegion(@NonNull List<@NonNull Region> allRegions) {
+		RootScheduledRegion rootRegion = null;
+		for (@NonNull Region region : new ArrayList<@NonNull Region>(allRegions)) {
+			if (region.getInvokingRegion() == null) {
+				if (rootRegion == null) {
+					rootRegion = new RootScheduledRegion(rootName, region);
+				}
+				rootRegion.addRegion(region);
+			}
+		}
+		assert rootRegion != null;
+		return rootRegion;
 	}
 
 	protected void createSchedule(@NonNull RootScheduledRegion rootScheduledRegion) {
 		//
 		//	Replace multi-region recursions by single nested region recursions.
 		//
-		List<@NonNull ScheduledRegion> allScheduledRegions = new ArrayList<@NonNull ScheduledRegion>();
+		List<@NonNull ScheduledRegion> allScheduledRegions = new ArrayList<>();
 		allScheduledRegions.add(rootScheduledRegion);
 		CyclesAnalyzer cyclesAnalyzer = new CyclesAnalyzer(rootScheduledRegion, rootScheduledRegion.getCallableRegions());
 		List<@NonNull RegionCycle> regionCycles = cyclesAnalyzer.getOrderedCycles();
@@ -49,28 +70,40 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				}
 			} */
 		}
-		if (Scheduler.DEBUG_GRAPHS.isActive()) {
+		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			rootScheduledRegion.writeDebugGraphs("4-cycles", true, true, false);
 		}
 		//
 		//	Create the schedule for each directed acyclic scheduled region.
 		//
-		for (ScheduledRegion scheduledRegion : allScheduledRegions) {
+		for (@NonNull Region region : rootScheduledRegion.getCallableRegions()) {
+			Splitter splitter = new Splitter(region);
+			Split split = splitter.split();
+			if (split != null) {
+				//				split.install();
+			}
+		}
+		//
+		//	Create the schedule for each directed acyclic scheduled region.
+		//
+		for (@NonNull ScheduledRegion scheduledRegion : allScheduledRegions) {
 			scheduledRegion.createLocalSchedule();
 		}
 		ScheduleIndexer scheduleIndexer = new ScheduleIndexer(rootScheduledRegion);
 		scheduleIndexer.schedule(rootScheduledRegion);
-		for (ScheduledRegion scheduledRegion : allScheduledRegions) {
+		for (@NonNull ScheduledRegion scheduledRegion : allScheduledRegions) {
 			scheduledRegion.createLocalSchedule2(scheduleIndexer.getOrdering());
 		}
 	}
 
 	protected void splitRegions() {
-		//		Splitter splitter = new Splitter(region);
-		//		Split split = splitter.split();
 	}
 
-	public void transform(@NonNull RootScheduledRegion scheduledRegion) {
-		createSchedule(scheduledRegion);
+	public @NonNull RootScheduledRegion transform(@NonNull MultiRegion multiRegion) {
+		List<@NonNull Region> activeRegions = multiRegion.getActiveRegions();
+		RootScheduledRegion rootRegion = createRootRegion(activeRegions);
+		rootRegion.createSchedule();
+		createSchedule(rootRegion);
+		return rootRegion;
 	}
 }

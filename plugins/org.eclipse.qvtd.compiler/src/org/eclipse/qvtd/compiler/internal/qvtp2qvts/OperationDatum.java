@@ -47,7 +47,7 @@ public class OperationDatum implements IndexableIterable<ClassDatum>
 	/**
 	 * Construct an OperationDatum for an Scheduler that has computed the hashCode for the classDatums.
 	 */
-	public OperationDatum(@NonNull Scheduler scheduler, @NonNull String name, @NonNull ClassDatum[] classDatums) {
+	public OperationDatum(@NonNull QVTp2QVTs scheduler, @NonNull String name, @NonNull ClassDatum[] classDatums) {
 		int hashCode = name.hashCode();
 		for (ClassDatum classDatum : classDatums) {
 			hashCode = 3 * hashCode + classDatum.hashCode();

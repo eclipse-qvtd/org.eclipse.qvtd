@@ -31,7 +31,7 @@ public class MergedMappingRegion extends AbstractMappingRegion
 	private @Nullable Map<@NonNull Node, @NonNull Node> recursiveBindings = null;
 
 	public MergedMappingRegion(@NonNull MergeableRegion primaryRegion) {
-		super(primaryRegion.getSuperRegion());
+		super(primaryRegion.getMultiRegion());
 //		addPrimaryRegion(primaryRegion);
 		mergedRegions.add(primaryRegion);
 		createMergedRegion(primaryRegion);

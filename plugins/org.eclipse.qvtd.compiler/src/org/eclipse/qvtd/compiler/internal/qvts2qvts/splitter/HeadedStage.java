@@ -102,6 +102,11 @@ abstract class HeadedStage extends AbstractStage
 	}
 
 	@Override
+	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
+		return headNodes;
+	}
+
+	@Override
 	protected boolean isLive(@NonNull Node node, @NonNull Set<@NonNull Node> deadNodes) {
 		if (node.isHead()) {
 			return true;

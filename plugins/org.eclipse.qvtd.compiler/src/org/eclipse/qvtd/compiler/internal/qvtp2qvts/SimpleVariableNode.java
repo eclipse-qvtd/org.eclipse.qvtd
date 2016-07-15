@@ -22,7 +22,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 public class SimpleVariableNode extends AbstractSimpleNode
 {
 	protected final @NonNull VariableDeclaration variable;
-	
+
 	public SimpleVariableNode(@NonNull NodeRole nodeRole, @NonNull SimpleRegion region, @NonNull VariableDeclaration variable) {
 		super(nodeRole, region, ClassUtil.nonNullState(variable.getName()), region.getClassDatumAnalysis(variable));
 		this.variable = variable;
@@ -38,8 +38,9 @@ public class SimpleVariableNode extends AbstractSimpleNode
 		return variable;
 	}
 
+	@SuppressWarnings("null")		// @NonNull may be null during construction
 	@Override
 	public @NonNull String toString() {
-        return getNodeRole().toString() + "(" + (variable != null ? variable.toString() : name) + ")";
-    }
+		return getNodeRole().toString() + "(" + (variable != null ? variable.toString() : name) + ")";
+	}
 }

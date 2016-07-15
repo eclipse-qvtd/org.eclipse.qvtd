@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -19,20 +20,26 @@ import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
-public class SuperRegion
+/**
+ * The MultiRegion supervises the many Region instances that realize a transformation.
+ */
+public class MultiRegion
 {
-	protected final @NonNull Scheduler scheduler;
+	protected final @NonNull QVTp2QVTs qvtp2qvts;
 
 	/**
 	 * The oclAsType(Type) casting property for each cast in use.
 	 */
-//	private final @NonNull Map<Type, Property> type2castProperty = new HashMap<Type, Property>();
+	//	private final @NonNull Map<Type, Property> type2castProperty = new HashMap<>();
 
-	private final @NonNull List<Region> allRegions = new ArrayList<Region>();
+	private final @NonNull List<@NonNull Region> allRegions = new ArrayList<>();
 
-	public SuperRegion(@NonNull Scheduler scheduler) {
-		this.scheduler = scheduler;
+	private @NonNull List<@NonNull Region> activeRegions = Collections.emptyList();
+
+	public MultiRegion(@NonNull QVTp2QVTs qvtp2qvts) {
+		this.qvtp2qvts = qvtp2qvts;
 	}
 
 	public void addRegion(@NonNull Region region) {
@@ -40,10 +47,14 @@ public class SuperRegion
 	}
 
 	public @NonNull OperationRegion analyzeOperation(@NonNull OperationCallExp operationCallExp) {
-		return scheduler.analyzeOperation(this, operationCallExp);
+		return qvtp2qvts.analyzeOperation(this, operationCallExp);
 	}
 
-/*	public @NonNull Property getCastProperty(@NonNull Type type) {
+	public @NonNull List<@NonNull Region> getActiveRegions() {
+		return activeRegions;
+	}
+
+	/*	public @NonNull Property getCastProperty(@NonNull Type type) {
 		Property castProperty = type2castProperty.get(type);
 		if (castProperty == null) {
 			castProperty = PivotFactory.eINSTANCE.createProperty();
@@ -55,7 +66,7 @@ public class SuperRegion
 	} */
 
 	public @NonNull SimpleMappingRegion getMappingRegion(@NonNull AbstractAction action) {
-		return scheduler.getMappingRegion(action);
+		return qvtp2qvts.getMappingRegion(action);
 	}
 
 	public @NonNull Iterable<@NonNull OperationRegion> getOperationRegions() {
@@ -63,14 +74,14 @@ public class SuperRegion
 	}
 
 	public @NonNull SchedulerConstants getSchedulerConstants() {
-		return scheduler;
+		return qvtp2qvts;
 	}
 
 	public @NonNull StandardLibrary getStandardLibrary() {
-		return scheduler.getStandardLibrary();
+		return qvtp2qvts.getStandardLibrary();
 	}
 
-/*	private @NonNull List<Region> growSequentialRegions(@NonNull List<Region> orderedRegions) {
+	/*	private @NonNull List<Region> growSequentialRegions(@NonNull List<Region> orderedRegions) {
 		List<Region> regions = new ArrayList<Region>();
 		for (@SuppressWarnings("null")@NonNull Region region : orderedRegions) {
 			if (region.getInvokingRegion() == null) {
@@ -86,10 +97,14 @@ public class SuperRegion
 		return regions;
 	} */
 
-//	public @NonNull List<Region> identifyRegions() {
-//		List<Region> sequentialRegions = growSequentialRegions(guardedRegions);
-//		HierarchicalRegion.growHierarchicalRegions(sequentialRegions);
-		//
-//		return allRegions;
-//	}
+	//	public @NonNull List<Region> identifyRegions() {
+	//		List<Region> sequentialRegions = growSequentialRegions(guardedRegions);
+	//		HierarchicalRegion.growHierarchicalRegions(sequentialRegions);
+	//
+	//		return allRegions;
+	//	}
+
+	public void setActiveRegions(@NonNull Iterable<@NonNull Region> activeRegions) {	// FIXME eliminate
+		this.activeRegions = Lists.newArrayList(activeRegions);
+	}
 }

@@ -18,7 +18,12 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * A Split captures the result of the analysis that enables a multi-headed region to be split.
@@ -81,6 +86,17 @@ public class Split
 	public void debug() {
 		for (@NonNull Stage stage : stages) {
 			stage.debug();
+		}
+	}
+
+	public void install() {
+		Region region = splitter.getRegion();
+		Iterable<@NonNull Node> newHeadNodes = stages.get(0).getHeadNodes();
+		Iterable<@NonNull Node> oldHeadNodes = Lists.newArrayList(region.getHeadNodes());
+		for (@NonNull Node headNode : oldHeadNodes) {
+			if (!Iterables.contains(newHeadNodes, headNode)) {
+				region.resetHead(headNode);
+			}
 		}
 	}
 

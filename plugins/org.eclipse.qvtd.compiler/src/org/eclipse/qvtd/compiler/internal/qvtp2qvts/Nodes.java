@@ -499,7 +499,7 @@ public class Nodes
 
 			@Override
 			public @NonNull NodeRole resetHead() {
-				return isPredicated() ? LOADED_CLASS_GUARD : PREDICATED_CLASS_GUARD;
+				return isPredicated() ? PREDICATED_CLASS_GUARD : LOADED_CLASS_GUARD;
 			}
 
 			@Override

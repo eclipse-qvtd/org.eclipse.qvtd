@@ -20,7 +20,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Connection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -53,7 +53,7 @@ public class ScheduleIndexer extends ScheduleState
 			Region selectedRegion = selectNextRegion(scheduledRegion);
 			scheduleRegion(selectedRegion);
 		}
-		if (Scheduler.DEBUG_GRAPHS.isActive()) {
+		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			scheduledRegion.writeDebugGraphs("6-indexed", false, true, true);
 		}
 	}
@@ -76,14 +76,14 @@ public class ScheduleIndexer extends ScheduleState
 		//		Collections.sort(partiallyBlockedConnectionsList, NameUtil.NAMEABLE_COMPARATOR);
 		List<@NonNull Connection> blockedConnectionsList = Lists.newArrayList(getBlockedConnections());
 		Collections.sort(blockedConnectionsList, NameUtil.NAMEABLE_COMPARATOR);
-		if (Scheduler.REGION_ORDER.isActive()) {
-			Scheduler.REGION_ORDER.println("      unblocked regions:");
+		if (QVTp2QVTs.REGION_ORDER.isActive()) {
+			QVTp2QVTs.REGION_ORDER.println("      unblocked regions:");
 			for (@NonNull Region region : unblockedRegionsList) {
-				Scheduler.REGION_ORDER.println("        " + region);
+				QVTp2QVTs.REGION_ORDER.println("        " + region);
 			}
-			Scheduler.REGION_ORDER.println("      callableRegion : blockedConnectionCount:");
+			QVTp2QVTs.REGION_ORDER.println("      callableRegion : blockedConnectionCount:");
 			for (@NonNull Region region : callableRegionsList) {
-				Scheduler.REGION_ORDER.println("        " + region + " : " + getBlockedConnectionCount(region));
+				QVTp2QVTs.REGION_ORDER.println("        " + region + " : " + getBlockedConnectionCount(region));
 				/*				List<@NonNull DatumConnection> incomingConnections = getIncomingConnections(region);
 				assert incomingConnections != null;
 				for (@NonNull DatumConnection connection : incomingConnections) {
@@ -132,17 +132,17 @@ public class ScheduleIndexer extends ScheduleState
 							+ connection.getSourceDisplayNames());
 				} */
 			}
-			Scheduler.REGION_ORDER.println("      mandatory blocked regions:");
+			QVTp2QVTs.REGION_ORDER.println("      mandatory blocked regions:");
 			for (@NonNull Region region : mandatoryBlockedRegionsList) {
-				Scheduler.REGION_ORDER.println("        " + region);
+				QVTp2QVTs.REGION_ORDER.println("        " + region);
 			}
 			//			Scheduler.REGION_ORDER.println("      partially blocked connections:");
 			//			for (Connection connection : partiallyBlockedConnectionsList) {
 			//				Scheduler.REGION_ORDER.println("        " + connection);
 			//			}
-			Scheduler.REGION_ORDER.println("      blocked connections:");
+			QVTp2QVTs.REGION_ORDER.println("      blocked connections:");
 			for (@NonNull Connection connection : blockedConnectionsList) {
-				Scheduler.REGION_ORDER.println("        " + connection);
+				QVTp2QVTs.REGION_ORDER.println("        " + connection);
 			}
 		}
 		//		int debugRegionSize = region2incomingConnections.size();

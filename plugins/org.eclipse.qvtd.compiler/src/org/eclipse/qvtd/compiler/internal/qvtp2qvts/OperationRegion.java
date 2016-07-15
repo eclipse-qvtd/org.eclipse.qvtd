@@ -52,8 +52,8 @@ public class OperationRegion extends AbstractRegion implements SimpleRegion
 	private final @NonNull List<@NonNull Node> extraNodes = new ArrayList<@NonNull Node>();
 	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull SimpleNode> parameter2node = new HashMap<>();
 
-	protected OperationRegion(@NonNull SuperRegion superRegion, @NonNull OperationDatum operationDatum, @NonNull ExpressionInOCL specification, @NonNull OperationCallExp operationCallExp) {//, @NonNull SimpleNode sourceNode) {
-		super(superRegion);
+	protected OperationRegion(@NonNull MultiRegion multiRegion, @NonNull OperationDatum operationDatum, @NonNull ExpressionInOCL specification, @NonNull OperationCallExp operationCallExp) {//, @NonNull SimpleNode sourceNode) {
+		super(multiRegion);
 		this.operation = ClassUtil.nonNullState(operationCallExp.getReferredOperation());
 		String name = operationDatum.toString();
 		assert name != null;

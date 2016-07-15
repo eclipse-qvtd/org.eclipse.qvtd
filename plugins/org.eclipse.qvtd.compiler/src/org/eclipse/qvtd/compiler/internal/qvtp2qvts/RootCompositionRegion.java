@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 public class RootCompositionRegion extends AbstractRegion implements SimpleRegion
 {
 	/**
-	 * The null node that is the 'container' of all root model elements. 
+	 * The null node that is the 'container' of all root model elements.
 	 */
 	private /*@LazyNonNull*/ SimpleNode nullNode = null;
 
@@ -40,12 +40,12 @@ public class RootCompositionRegion extends AbstractRegion implements SimpleRegio
 
 	/**
 	 * The introducer node for each consumed ClassDatumAnalysis and for each known containing type where the containing property is just oclContainer.
-	 * The null type is used when no containing property or type is known. 
+	 * The null type is used when no containing property or type is known.
 	 */
 	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable ClassDatumAnalysis, @NonNull SimpleNode>> classDatumAnalysis2type2node = new HashMap<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable ClassDatumAnalysis, @NonNull SimpleNode>>();
-	
-	protected RootCompositionRegion(@NonNull SuperRegion superRegion) {
-		super(superRegion);
+
+	protected RootCompositionRegion(@NonNull MultiRegion multiRegion) {
+		super(multiRegion);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class RootCompositionRegion extends AbstractRegion implements SimpleRegio
 			if (introducedNode == null) {
 				introducedNode = Nodes.COMPOSING.createSimpleNode(this, "«" + elementType.getName() + "»", childrenClassDatumAnalysis);
 				type2node.put(null, introducedNode);
-			}			
+			}
 		}
 		else if ((containerEdge != null) && containerEdge.getTarget().isNull()) {		// At root, owned by null property
 			Map<@Nullable Property, @NonNull SimpleNode> property2node = classDatumAnalysis2property2node.get(consumedClassDatumAnalysis);
@@ -168,7 +168,7 @@ public class RootCompositionRegion extends AbstractRegion implements SimpleRegio
 		}
 		return nullNode2;
 	}
-	
+
 	@Override
 	public boolean isLateMergeable(@NonNull Region innerRegion, @NonNull Region2Depth region2depths) {
 		return false;

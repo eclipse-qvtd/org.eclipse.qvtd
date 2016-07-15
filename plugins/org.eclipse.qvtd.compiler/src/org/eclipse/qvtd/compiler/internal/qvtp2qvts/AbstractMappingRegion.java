@@ -125,8 +125,8 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 	 */
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> headNodes = null;
 
-	protected AbstractMappingRegion(@NonNull SuperRegion superRegion) {
-		super(superRegion);
+	protected AbstractMappingRegion(@NonNull MultiRegion multiRegion) {
+		super(multiRegion);
 	}
 
 	protected void addHeadNode(@NonNull Node headNode) {
@@ -220,11 +220,18 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 	}
 
 	@Override
-	public @NonNull List<@NonNull Node> getHeadNodes() {
+	public final @NonNull List<@NonNull Node> getHeadNodes() {
 		List<@NonNull Node> headNodes2 = headNodes;
 		if (headNodes2 == null) {
 			headNodes = headNodes2 = computeHeadNodes();
 		}
 		return headNodes2;
+	}
+
+	@Override
+	public void resetHead(@NonNull Node headNode) {
+		boolean wasRemoved = getHeadNodes().remove(headNode);
+		assert wasRemoved;
+		headNode.resetHead();
 	}
 }

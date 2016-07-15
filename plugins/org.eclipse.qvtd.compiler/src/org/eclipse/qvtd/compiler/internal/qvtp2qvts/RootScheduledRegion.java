@@ -123,16 +123,16 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 */
 	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigationEdge>> producedPropertyDatum2realizedEdges = new HashMap<@NonNull PropertyDatum, @NonNull List<@NonNull NavigationEdge>>();
 
-	private final @NonNull RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(superRegion);
+	private final @NonNull RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(multiRegion);
 
 	public RootScheduledRegion(@NonNull String name, @NonNull Region primaryRegion) {
-		super(primaryRegion.getSuperRegion());
+		super(primaryRegion.getMultiRegion());
 		this.name = name;
 		this.completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
 	}
 
 	public RootScheduledRegion(@NonNull String name, @NonNull List<Region> regions) {
-		super(ClassUtil.nonNullState(regions.get(0)).getSuperRegion());
+		super(ClassUtil.nonNullState(regions.get(0)).getMultiRegion());
 		this.name = name;
 		this.completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
 		for (@SuppressWarnings("null")@NonNull Region region : regions) {
@@ -603,7 +603,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		for (Region region : sortedCallableRegions) {
 			region.createIncomingConnections();
 		}
-		if (Scheduler.DEBUG_GRAPHS.isActive()) {
+		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			writeDebugGraphs("4-bindings", true, true, false);
 		}
 		//		for (Region region : sortedCallableRegions) {
@@ -616,7 +616,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 * composition relationships that form part of an extended metamodel that is not known until run-time.
 	 */
 	private @NonNull RootCompositionRegion createRootContainmentRegion() {
-		//		RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(superRegion);
+		//		RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(multiRegion);
 		/*		Set<ClassDatumAnalysis> rootClassDatumAnalyses = new HashSet<ClassDatumAnalysis>();
 		for (Entry<Property, Set<ClassDatumAnalysis>> entry : consumedCompositeProperty2introducedClassDatumAnalyses.entrySet()) {
 			@SuppressWarnings("null")@NonNull Property parent2childrenProperty = entry.getKey();
@@ -668,7 +668,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 
 
 
-//			ChildCompositionRegion containmentRegion = new ChildCompositionRegion(superRegion, parent2childrenProperty, typedModel);
+//			ChildCompositionRegion containmentRegion = new ChildCompositionRegion(multiRegion, parent2childrenProperty, typedModel);
 //			Node headNode = containmentRegion.getComposingNode();
 //			CompleteClass parentClass = headNode.getCompleteClass();
 //			addConsumedNode(headNode);
@@ -719,7 +719,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 				addIntroducedNode(introducedNode);
 			}
 		} */
-		if (Scheduler.DEBUG_GRAPHS.isActive()) {
+		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			rootContainmentRegion.writeDebugGraphs("1-create");
 		}
 		return rootContainmentRegion;
@@ -730,36 +730,36 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		//	Identify the input models.
 		//
 		computeInputModels();
-		if (Scheduler.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.isActive()) {
-			Scheduler.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.println(dumpInputModels().reduce("", stringJoin("\n\t")));
+		if (QVTp2QVTs.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.isActive()) {
+			QVTp2QVTs.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.println(dumpInputModels().reduce("", stringJoin("\n\t")));
 		}
 		//
 		//	Identify all the containment relationships in the input models.
 		//
 		computeContainedClassDatumAnalysis2compositeProperties();
-		if (Scheduler.DUMP_CLASS_TO_CONTAINING_PROPERTIES.isActive()) {
-			Scheduler.DUMP_CLASS_TO_CONTAINING_PROPERTIES.println(dumpClass2ContainingProperties().reduce("", stringJoin("\n\t")));
+		if (QVTp2QVTs.DUMP_CLASS_TO_CONTAINING_PROPERTIES.isActive()) {
+			QVTp2QVTs.DUMP_CLASS_TO_CONTAINING_PROPERTIES.println(dumpClass2ContainingProperties().reduce("", stringJoin("\n\t")));
 		}
 		//
 		//	Identify all classes that are produced by mappings.
 		//
 		computeProducedClassDatumAnalysis2realizedNodes();
-		if (Scheduler.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
-			Scheduler.DUMP_CLASS_TO_REALIZED_NODES.println(dumpClass2ProducingNode().reduce("", stringJoin("\n\t")));
+		if (QVTp2QVTs.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
+			QVTp2QVTs.DUMP_CLASS_TO_REALIZED_NODES.println(dumpClass2ProducingNode().reduce("", stringJoin("\n\t")));
 		}
 		//
 		//	Identify all classes that are consumed as independent inputs of mappings.
 		//
 		computeConsumedConsumedClassDatumAnalysis2headNodes();
-		if (Scheduler.DUMP_CLASS_TO_CONSUMING_NODES.isActive()) {
-			Scheduler.DUMP_CLASS_TO_CONSUMING_NODES.println(dumpClass2consumingNode().reduce("", stringJoin("\n\t")));
+		if (QVTp2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.isActive()) {
+			QVTp2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.println(dumpClass2consumingNode().reduce("", stringJoin("\n\t")));
 		}
 		//
 		//	Identify all classes that are transitively consumed as containers of consumed classes.
 		//
 		computeConsumedCompositeProperty2introducedClassDatumAnalyses();
-		if (Scheduler.DUMP_PROPERTY_TO_CONSUMING_CLASSES.isActive()) {
-			Scheduler.DUMP_PROPERTY_TO_CONSUMING_CLASSES.println(dumpClass2ConsumingProperty().reduce("", stringJoin("\n\t")));
+		if (QVTp2QVTs.DUMP_PROPERTY_TO_CONSUMING_CLASSES.isActive()) {
+			QVTp2QVTs.DUMP_PROPERTY_TO_CONSUMING_CLASSES.println(dumpClass2ConsumingProperty().reduce("", stringJoin("\n\t")));
 		}
 		//
 		//	Create the root containment region to introduce all root and otherwise contained consumed classes.
@@ -983,7 +983,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 
 	@Override
 	public @NonNull List<@NonNull Node> getHeadNodes() {
-		return Scheduler.EMPTY_NODE_LIST;
+		return QVTp2QVTs.EMPTY_NODE_LIST;
 	}
 
 	public @Nullable Iterable<@NonNull Node> getIntroducingNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -1043,7 +1043,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			else {
 				ClassDatumAnalysis classDatumAnalysis = sourceNode.getClassDatumAnalysis();
 				String joinName = "-join-" + classDatumAnalysis.getCompleteClass().getName() + "-" + toRegion.getName();
-				joinRegion = new ConnectionRegion(getSuperRegion(), joinName, classDatumAnalysis);
+				joinRegion = new ConnectionRegion(getMultiRegion(), joinName, classDatumAnalysis);
 				Node joinNode = joinRegion.getConnectionNode();
 				Connections.PASSED_BINDING.createConnection(this, sourceNode, null, joinNode);
 				Connections.PASSED_BINDING.createConnection(this, joinNode, null, edge.getTarget());
@@ -1157,8 +1157,8 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		return this;
 	}
 
-	public @NonNull Scheduler getScheduler() {
-		return (Scheduler)getSchedulerConstants();
+	public @NonNull QVTp2QVTs getScheduler() {
+		return (QVTp2QVTs)getSchedulerConstants();
 	}
 
 	/*	private @NonNull Node zzgetSourceOrConnectionNode(@NonNull Collection<Node> sourceNodes, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -1177,7 +1177,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			return joinRegion.getConnectionNode();
 		}
 		String joinName = "-join-" + classDatumAnalysis.getCompleteClass().getName() + "-" + joins.size();
-		joinRegion = new ConnectionRegion(getSuperRegion(), joinName, classDatumAnalysis);
+		joinRegion = new ConnectionRegion(getMultiRegion(), joinName, classDatumAnalysis);
 		joins.put(sources, joinRegion);
 		Node joinNode = joinRegion.getConnectionNode();
 		for (Node sourceNode : sourceNodes) {

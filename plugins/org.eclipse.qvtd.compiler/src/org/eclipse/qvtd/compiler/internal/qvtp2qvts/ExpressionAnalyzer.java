@@ -708,7 +708,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 					createArgumentEdge(argNodes[i], argNames[i], operationNode);
 				}
 				if (referredOperation.getBodyExpression() != null) {
-					OperationRegion operationRegion = context.getSuperRegion().analyzeOperation(operationCallExp);
+					OperationRegion operationRegion = context.getMultiRegion().analyzeOperation(operationCallExp);
 					List<@NonNull Node> extraNodes = operationRegion.getExtraNodes();
 					if (extraNodes.size() > 0) {
 						for (@NonNull Node extraNode : extraNodes) {

@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 
 public interface Region extends Visitable, GraphNode, Nameable, Symbolable
-{		
+{
 	void addCallToChild(@NonNull Region region);
 	void addEdge(@NonNull Edge edge);
 	void addEnforcedEdge(@NonNull NavigationEdge realizedEdge);
@@ -41,23 +41,23 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2realizedEdges);
 	void createIncomingConnections();
 	@NonNull Iterable<@NonNull SimpleMappingRegion> getAllMappingRegions();
-	
+
 	/**
 	 * Return all the nodes in this region that are call-tree ancestors of node.
 	 */
 	@NonNull Iterable<@NonNull Node> getAncestorsOf(@NonNull Node node);
 	@NonNull Iterable<@NonNull Node> getAssignedNodes();
-	
+
 	/**
 	 * Return the regions that this region can actually call directly after taking account the connection dependencies.
 	 */
 	@NonNull Iterable<@NonNull Region> getCallableChildren();
-	
+
 	/**
 	 * Return the regions that can actually call this region directly after taking account the connection dependencies.
 	 */
 	@NonNull Iterable<@NonNull Region> getCallableParents();
-	
+
 	/**
 	 * Return the regions that this region calls.
 	 */
@@ -90,7 +90,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	 * Return the GuardVariable nodes of the region (not Composing)
 	 */
 	@NonNull Iterable<@NonNull Node> getGuardVariableNodes();
-//	@NonNull List<@NonNull NodeConnection> getHeadConnections();
+	//	@NonNull List<@NonNull NodeConnection> getHeadConnections();
 	@NonNull List<@NonNull Node> getHeadNodes();
 	@NonNull Iterable<@NonNull DatumConnection> getIncomingConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections();
@@ -98,7 +98,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	@NonNull String getIndexRangeText();
 	@NonNull List<@NonNull Integer> getIndexes();
 	@NonNull List<@NonNull NodeConnection> getIntermediateConnections();
-	
+
 	/**
 	 * The schedule index at which ALL invocations of this region occur.
 	 */
@@ -112,6 +112,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	@NonNull Iterable<@NonNull Node> getMatchableNodes();
 
 	@NonNull Iterable<@NonNull MergeableRegion> getMergeableRegions();
+	@NonNull MultiRegion getMultiRegion();
 	@Override
 	@NonNull String getName();
 	/**
@@ -144,7 +145,6 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	@NonNull SchedulerConstants getSchedulerConstants();
 	@Nullable String getShape();
 	@Nullable String getStyle();
-	@NonNull SuperRegion getSuperRegion();
 	@NonNull Iterable<@NonNull Node> getTrueNodes();
 
 	/**
@@ -159,8 +159,9 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	void refineBindings(@NonNull Region bindingRegion);
 	void removeEdge(@NonNull Edge edge);
 	void removeNode(@NonNull Node node);
+	void resetHead(@NonNull Node headNode);
 	void setInvokingRegion(@NonNull ScheduledRegion invokingRegion);
-	void setIsCyclic();
+	//	void setIsCyclic();
 	void toCallGraph(@NonNull GraphStringBuilder s);
 	void toGraph(@NonNull GraphStringBuilder s);
 	void toRegionGraph(@NonNull GraphStringBuilder s);
