@@ -34,6 +34,11 @@ public class SimpleVariableNode extends AbstractSimpleNode
 		addTypedElement(variable);
 	}
 
+	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitSimpleVariableNode(this);
+	}
+
 	public @NonNull VariableDeclaration getVariable() {
 		return variable;
 	}

@@ -36,10 +36,15 @@ public class MergedNode extends AbstractNode
 	}
 
 	protected final @NonNull List<@NonNull SimpleNode> simpleNodes = new ArrayList<@NonNull SimpleNode>();
-//	private @Nullable MergedNode recursionNode = null;
+	//	private @Nullable MergedNode recursionNode = null;
 
 	public MergedNode(@NonNull MergedMappingRegion mergedRegion, @NonNull Node node) {
 		super(node.getNodeRole(), mergedRegion, node.getName(), node.getClassDatumAnalysis());
+	}
+
+	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitMergedNode(this);
 	}
 
 	public void addNode(@NonNull SimpleNode node) {
@@ -56,9 +61,9 @@ public class MergedNode extends AbstractNode
 		return simpleNodes;
 	}
 
-//	public @Nullable MergedNode getRecursionNode() {
-//		return recursionNode;
-//	}
+	//	public @Nullable MergedNode getRecursionNode() {
+	//		return recursionNode;
+	//	}
 
 	@Override
 	public @NonNull Iterable<@NonNull SimpleNode> getSimpleNodes() {
@@ -73,11 +78,11 @@ public class MergedNode extends AbstractNode
 	}
 
 	public void setRecursion(@NonNull MergedNode recursionNode) {
-//		this.recursionNode  = recursionNode;
+		//		this.recursionNode  = recursionNode;
 	}
 
-//	@Override
-//	public String toString() {
-//		return introductoryNode != null ? introductoryNode.toString() : super.toString();
-//	}
+	//	@Override
+	//	public String toString() {
+	//		return introductoryNode != null ? introductoryNode.toString() : super.toString();
+	//	}
 }

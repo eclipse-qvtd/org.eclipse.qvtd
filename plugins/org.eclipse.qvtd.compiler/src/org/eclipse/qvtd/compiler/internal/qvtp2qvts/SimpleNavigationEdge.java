@@ -19,7 +19,12 @@ public class SimpleNavigationEdge extends AbstractNavigationEdge implements Simp
 {
 	public SimpleNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull SimpleRegion region, @NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
 		super(edgeRole, region, sourceNode, source2targetProperty, targetNode);
-//		assert !sourceNode.isOperation();			// FIXME testExample2_V2 violates this to cast an intermediate "if"
+		//		assert !sourceNode.isOperation();			// FIXME testExample2_V2 violates this to cast an intermediate "if"
+	}
+
+	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitSimpleNavigationEdge(this);
 	}
 
 	@Override

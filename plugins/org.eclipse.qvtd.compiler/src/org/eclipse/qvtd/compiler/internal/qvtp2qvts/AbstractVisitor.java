@@ -1,0 +1,101 @@
+/*******************************************************************************
+ * Copyright (c) 2016 Willink Transformations and others.
+ * All rights reserved.   This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   E.D.Willink - Initial API and implementation
+ *******************************************************************************/
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+
+import org.eclipse.jdt.annotation.NonNull;
+
+public abstract class AbstractVisitor<R> implements Visitor<R>
+{
+	@Override
+	public R visiting(@NonNull Visitable visitable) {
+		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
+	}
+
+	@Override
+	public R visitBasicSimpleEdge(@NonNull BasicSimpleEdge basicSimpleEdge) {
+		return visitEdge(basicSimpleEdge);
+	}
+
+	@Override
+	public R visitCyclicScheduledRegion(@NonNull CyclicScheduledRegion cyclicScheduledRegion) {
+		return visitRegion(cyclicScheduledRegion);
+	}
+
+	@Override
+	public R visitComplexTypedNode(@NonNull ComplexTypedNode complexTypedNode) {
+		return visitNode(complexTypedNode);
+	}
+
+	@Override
+	public R visitEdge(@NonNull Edge edge) {
+		return visiting(edge);
+	}
+
+	@Override
+	public R visitMergedEdge(@NonNull MergedEdge mergedEdge) {
+		return visitEdge(mergedEdge);
+	}
+
+	@Override
+	public R visitMergedMappingRegion(@NonNull MergedMappingRegion mergedMappingRegion) {
+		return visitRegion(mergedMappingRegion);
+	}
+
+	@Override
+	public R visitMergedNode(@NonNull MergedNode mergedNode) {
+		return visitNode(mergedNode);
+	}
+
+	@Override
+	public R visitNode(@NonNull Node node) {
+		return visiting(node);
+	}
+
+	@Override
+	public R visitOperationRegion(@NonNull OperationRegion operationRegion) {
+		return visitRegion(operationRegion);
+	}
+
+	@Override
+	public R visitRegion(@NonNull Region region) {
+		return visiting(region);
+	}
+
+	@Override
+	public R visitRootCompositionRegion(@NonNull RootCompositionRegion rootCompositionRegion) {
+		return visitRegion(rootCompositionRegion);
+	}
+
+	@Override
+	public R visitRootScheduledRegion(@NonNull RootScheduledRegion rootScheduledRegion) {
+		return visitRegion(rootScheduledRegion);
+	}
+
+	@Override
+	public R visitSimpleMappingRegion(@NonNull SimpleMappingRegion simpleMappingRegion) {
+		return visitRegion(simpleMappingRegion);
+	}
+
+	@Override
+	public R visitSimpleNavigationEdge(@NonNull SimpleNavigationEdge simpleNavigationEdge) {
+		return visitEdge(simpleNavigationEdge);
+	}
+
+	@Override
+	public R visitSimpleTypedNode(@NonNull SimpleTypedNode simpleTypedNode) {
+		return visitNode(simpleTypedNode);
+	}
+
+	@Override
+	public R visitSimpleVariableNode(@NonNull SimpleVariableNode simpleVariableNode) {
+		return visitNode(simpleVariableNode);
+	}
+}
