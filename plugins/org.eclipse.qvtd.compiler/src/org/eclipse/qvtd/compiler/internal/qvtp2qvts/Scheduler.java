@@ -128,26 +128,6 @@ public class Scheduler extends SchedulerConstants
 		return new ClassDatumAnalysis(this, classDatum);
 	}
 
-	/**
-	 * Unify the head groups of each mapping region to create a simple uniform ClassDatum to HeadNodeGroup map.
-	 */
-	private @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull HeadNodeGroup> createHeadGroups() {
-		Map<@NonNull ClassDatumAnalysis, @NonNull HeadNodeGroup> classDatumAnalysis2headGroup = new HashMap<@NonNull ClassDatumAnalysis, @NonNull HeadNodeGroup>();
-		for (@NonNull SimpleMappingRegion mappingRegion : action2mappingRegion.values()) {
-			List<@NonNull Node> headNodes = mappingRegion.getHeadNodes();
-			if (headNodes.size() == 1) {
-				Node headNode = headNodes.get(0);
-				HeadNodeGroup headNodeGroup = classDatumAnalysis2headGroup.get(headNode.getClassDatumAnalysis());
-				if (headNodeGroup == null) {
-					headNodeGroup = new HeadNodeGroup();
-				}
-				headNodeGroup.addMappingRegion(mappingRegion, headNodes);
-				classDatumAnalysis2headGroup.put(headNode.getClassDatumAnalysis(), headNodeGroup);
-			}
-		}
-		return classDatumAnalysis2headGroup;
-	}
-
 	private @NonNull List<@NonNull Region> createSuperRegions() {
 		SuperRegion superRegion = new SuperRegion(this);
 		//
@@ -171,8 +151,6 @@ public class Scheduler extends SchedulerConstants
 				mappingRegion.writeDebugGraphs("1-create");
 			}
 		}
-		@SuppressWarnings("unused")
-		Map<@NonNull ClassDatumAnalysis, @NonNull HeadNodeGroup> classDatumAnalysis2headNodeGroup = createHeadGroups();
 		List<@NonNull SimpleMappingRegion> orderedRegions = new ArrayList<@NonNull SimpleMappingRegion>();
 		for (@NonNull AbstractAction abstractAction : orderedActions) {
 			SimpleMappingRegion mappingRegion = action2mappingRegion.get(abstractAction);
