@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +19,12 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Connection;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DatumConnection;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
 
 import com.google.common.collect.Iterables;
 
@@ -31,12 +37,12 @@ public abstract class ScheduleState extends ScheduleCache
 	 * Working state: the regions that have not yet been ordered.
 	 */
 	private final @NonNull Set<@NonNull Region> blockedRegions = new HashSet<@NonNull Region>();
-	
+
 	/**
 	 * Working state: the regions that have not yet been ordered but which are blocked by a mandatory access.
 	 */
 	private final @NonNull Set<@NonNull Region> mandatoryBlockedRegions = new HashSet<@NonNull Region>();
-	
+
 	/**
 	 * Working state: the regions that have not yet been ordered but whose sources are all fully unblocked.
 	 */
@@ -52,8 +58,8 @@ public abstract class ScheduleState extends ScheduleCache
 	/**
 	 * Working state: call stack to access current region.
 	 */
-//	private final @NonNull CallTree callTree;
-	
+	//	private final @NonNull CallTree callTree;
+
 	/**
 	 * Working state: the regions that have a schedule index to define their order.
 	 */
@@ -80,54 +86,54 @@ public abstract class ScheduleState extends ScheduleCache
 		}
 		//
 		// Initialize the source/target content of each connection of each region to empty.
-		// Compute the set of all connections that are not passed. 
-		// Compute the set of all regions that are blocked by a mandatory dependence. 
+		// Compute the set of all connections that are not passed.
+		// Compute the set of all regions that are blocked by a mandatory dependence.
 		//
 		for (@NonNull Region region : this.callableRegions) {
 			analyzeInitialConnectionContent(region);
 		}
 		for (@NonNull Region region : this.callableRegions) {
-//			for (@NonNull DatumConnection connection : region.getIncomingConnections()) {
+			//			for (@NonNull DatumConnection connection : region.getIncomingConnections()) {
 			Iterable<@NonNull DatumConnection> incomingConnections = getIncomingConnections(region);
 			assert incomingConnections != null;
 			for (@NonNull DatumConnection connection : incomingConnections) {
-//			if (connection.isOutput()) {
+				//			if (connection.isOutput()) {
 				Map<@NonNull Region, @NonNull Boolean> sourceRegion2hasContent = connection2sourceRegion2hasContent.get(connection);
 				assert sourceRegion2hasContent != null;
-/*				if (sourceRegion2hasContent == null) {
+				/*				if (sourceRegion2hasContent == null) {
 					sourceRegion2hasContent = new HashMap<@NonNull Region, @NonNull Boolean>();
 					for (@NonNull Region sourceRegion : connection.getSourceRegions(scheduledRegion)) {
 						sourceRegion2hasContent.put(sourceRegion, Boolean.TRUE);
 					}
 					connection2sourceRegion2hasContent.put(connection, sourceRegion2hasContent);
 				} */
-//				Map<@NonNull Region, @NonNull Boolean> targetRegion2hasContent = connection2targetRegion2hasContent.get(connection);
-//				assert targetRegion2hasContent != null;
-/*				if (targetRegion2hasContent == null) {
+				//				Map<@NonNull Region, @NonNull Boolean> targetRegion2hasContent = connection2targetRegion2hasContent.get(connection);
+				//				assert targetRegion2hasContent != null;
+				/*				if (targetRegion2hasContent == null) {
 					targetRegion2hasContent = new HashMap<@NonNull Region, @NonNull Boolean>();
 					for (@NonNull Region targetRegion : connection.getTargetRegions(scheduledRegion)) {
 						targetRegion2hasContent.put(targetRegion, Boolean.TRUE);
 					}
 					connection2targetRegion2hasContent.put(connection, targetRegion2hasContent);
 				} */
-//				if (sourceRegion2hasContent.isEmpty()) {		// Source-less connections have their content.
-//					for (@NonNull Region targetRegion : connection.getTargetRegions(scheduledRegion)) {
-//						targetRegion2hasContent.put(targetRegion, Boolean.TRUE);
-//					}
-//				}
+				//				if (sourceRegion2hasContent.isEmpty()) {		// Source-less connections have their content.
+				//					for (@NonNull Region targetRegion : connection.getTargetRegions(scheduledRegion)) {
+				//						targetRegion2hasContent.put(targetRegion, Boolean.TRUE);
+				//					}
+				//				}
 			}
 		}
 		Iterables.addAll(blockedConnections, getConnections());
 		for (@NonNull Region region : this.callableRegions) {
 			refreshRegionBlockage(region);
 		}
-//		callTree = new CallTree(this, rootScheduledRegion);
+		//		callTree = new CallTree(this, rootScheduledRegion);
 	}
 
 	/**
 	 * Initialize the source/target content of each connection of each region to empty.
-	 * Compute the set of all connections that are not passed. 
-	 * Compute the set of all regions that are blocked by a mandatory dependence. 
+	 * Compute the set of all connections that are not passed.
+	 * Compute the set of all regions that are blocked by a mandatory dependence.
 	 */
 	private void analyzeInitialConnectionContent(@NonNull Region region) {
 		boolean hasMandatoryUsedConnection = false;
@@ -243,7 +249,7 @@ public abstract class ScheduleState extends ScheduleCache
 		//
 		//	Unblock the scheduled regions of any connection target regions.
 		//
-/*		if (connection.isPassed()) {
+		/*		if (connection.isPassed()) {
 			for (@NonNull Region targetRegion : getTargetRegions(connection)) {
 				for (Region invokingRegion = targetRegion.getInvokingRegion(); invokingRegion != null; invokingRegion = invokingRegion.getInvokingRegion()) {
 					if (blockedScheduledRegions.contains(invokingRegion)) {
@@ -314,11 +320,11 @@ public abstract class ScheduleState extends ScheduleCache
 				blockedConnectionCount++;
 				if (connection.isPassed()) {
 					hasPassedBlock = true;
-//					assert callableRegion2blockedConnectionCount.containsKey(region);
+					//					assert callableRegion2blockedConnectionCount.containsKey(region);
 				}
 				else if (connection.isMandatory()) {
 					hasMandatoryBlock = true;
-//					assert mandatoryBlockedRegions.contains(region);
+					//					assert mandatoryBlockedRegions.contains(region);
 				}
 			}
 		}
@@ -365,34 +371,34 @@ public abstract class ScheduleState extends ScheduleCache
 		//
 		//	Drain incomingConnections wrt selectedRegion
 		//
-//		List<@NonNull DatumConnection> incomingConnections = getIncomingConnections(selectedRegion);
-//		assert incomingConnections != null;
+		//		List<@NonNull DatumConnection> incomingConnections = getIncomingConnections(selectedRegion);
+		//		assert incomingConnections != null;
 		Iterable<@NonNull DatumConnection> loopingConnections = getLoopingConnections(region);
 		assert loopingConnections != null;
 		Iterable<@NonNull DatumConnection> outgoingConnections = getOutgoingConnections(region);
 		assert outgoingConnections != null;
-//		for (@NonNull DatumConnection incomingConnection : incomingConnections) {
-//			List<@NonNull Region> targetRegions = getTargetRegions(incomingConnection);
-//			assert targetRegions != null;
-//			Boolean oldHasContent = targetRegion2hasContent.put(selectedRegion, Boolean.FALSE);
-//			assert oldHasContent != null;
-//		}
+		//		for (@NonNull DatumConnection incomingConnection : incomingConnections) {
+		//			List<@NonNull Region> targetRegions = getTargetRegions(incomingConnection);
+		//			assert targetRegions != null;
+		//			Boolean oldHasContent = targetRegion2hasContent.put(selectedRegion, Boolean.FALSE);
+		//			assert oldHasContent != null;
+		//		}
 		//	Ignore loopingConnections, necessarily incomplete on entry, complete on recursion exit
-//		for (Connection loopingConnection : loopingConnections) {
-//			Map<@NonNull Region, @NonNull Boolean> targetRegion2hasContent = connection2targetRegion2hasContent.get(loopingConnection);
-//			Boolean oldHasContent = targetRegion2hasContent.put(selectedRegion, Boolean.FALSE);
-//			assert oldHasContent != null;
-//		}
-//		if (childClass.conformsTo(parentClass)) {
-//		Edges.PRIMARY_RECURSION.createEdge(containmentRegion, introducedNode, headNode);
-//	}
+		//		for (Connection loopingConnection : loopingConnections) {
+		//			Map<@NonNull Region, @NonNull Boolean> targetRegion2hasContent = connection2targetRegion2hasContent.get(loopingConnection);
+		//			Boolean oldHasContent = targetRegion2hasContent.put(selectedRegion, Boolean.FALSE);
+		//			assert oldHasContent != null;
+		//		}
+		//		if (childClass.conformsTo(parentClass)) {
+		//		Edges.PRIMARY_RECURSION.createEdge(containmentRegion, introducedNode, headNode);
+		//	}
 		//
 		//	Fill outgoingConnections wrt selectedRegion
 		//
 		Set<@NonNull Region> nextRegions = new HashSet<@NonNull Region>();
 		for (@NonNull DatumConnection loopingConnection : loopingConnections) {
 			loopingConnection.addIndex(thisIndex);
-//			refreshConnectionBlockage(outgoingConnection, selectedRegion, nextRegions);
+			//			refreshConnectionBlockage(outgoingConnection, selectedRegion, nextRegions);
 		}
 		for (@NonNull DatumConnection outgoingConnection : outgoingConnections) {
 			outgoingConnection.addIndex(thisIndex);
@@ -401,10 +407,10 @@ public abstract class ScheduleState extends ScheduleCache
 		//
 		//	Unblock connections whose final blocking source is the selectedRegion.
 		//
-//		assert !alreadyIndexed;
-//		assert loopingConnections != null;
-//		assert outgoingConnections != null;
-/*			List<@NonNull Connection> connections = new ArrayList<@NonNull Connection>();
+		//		assert !alreadyIndexed;
+		//		assert loopingConnections != null;
+		//		assert outgoingConnections != null;
+		/*			List<@NonNull Connection> connections = new ArrayList<@NonNull Connection>();
 		connections.addAll(loopingConnections);
 		connections.addAll(outgoingConnections);
 		Collections.sort(connections, NameUtil.NAMEABLE_COMPARATOR);
@@ -430,7 +436,7 @@ public abstract class ScheduleState extends ScheduleCache
 				refreshRegionBlockage(nextRegion);
 			}
 		}
-//		callTree.updateCallStack(region);
+		//		callTree.updateCallStack(region);
 		if (region instanceof ScheduledRegion) {
 			ScheduledRegion scheduledRegion = (ScheduledRegion)region;
 			scheduleScheduledRegion(scheduledRegion);
@@ -447,7 +453,7 @@ public abstract class ScheduleState extends ScheduleCache
 		}
 		buildCallTree();
 	}
-	
+
 	protected abstract void scheduleScheduledRegion(@NonNull ScheduledRegion scheduledRegion);
 
 	private void unblock(@NonNull Region region) {
@@ -456,7 +462,7 @@ public abstract class ScheduleState extends ScheduleCache
 		assert wasRemoved0;
 		boolean wasRemoved1 = unblockedRegions.remove(region);
 		boolean wasRemoved2 = callableRegion2blockedConnectionCount.remove(region) != null;
-//		boolean wasRemoved3 = partiallyBlockedRegions2availableFraction.remove(selectedRegion) != null;
+		//		boolean wasRemoved3 = partiallyBlockedRegions2availableFraction.remove(selectedRegion) != null;
 		assert wasRemoved1 || wasRemoved2;// || wasRemoved3;
 	}
 }

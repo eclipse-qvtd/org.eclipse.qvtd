@@ -8,21 +8,23 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 
 /**
- * A Stage specifies part of a multi-headed region split. It has a headNode to represent its primary content
- * and an edge that defines the entry to the stage, null fir the first stage.
+ * A Group participates in a hierarchy of groups that determine the scheduling of a multi-head region.
  */
-interface Stage
+interface Group extends Nameable
 {
-	void check();
-	void debug();
-	@Nullable Node getIteratedNode();
-	@Nullable Node getIteratorNode();
+	@NonNull Iterable<@NonNull Node> getHeadNodes();
+
+	@NonNull Iterable<@NonNull Node> getReachableNodes();
+
+	@Override
+	@NonNull String toString();
+
 	void toString(@NonNull StringBuilder s, int depth);
 }

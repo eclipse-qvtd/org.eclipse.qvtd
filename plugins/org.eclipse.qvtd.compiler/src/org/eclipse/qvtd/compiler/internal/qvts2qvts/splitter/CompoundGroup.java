@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -334,7 +335,7 @@ class CompoundGroup extends AbstractGroup
 
 	@Override
 	public void toString(@NonNull StringBuilder s, int depth) {
-		SplitterUtil.indent(s, depth);
+		CompilerUtil.indent(s, depth);
 		s.append("compound-group: ");
 		s.append(name);
 		if (orderedBoundaries.isEmpty()) {
@@ -348,11 +349,11 @@ class CompoundGroup extends AbstractGroup
 		else {
 			for (@NonNull Boundary boundary : orderedBoundaries) {
 				s.append("\n");
-				SplitterUtil.indent(s, depth+1);
+				CompilerUtil.indent(s, depth+1);
 				s.append("boundary: ");
 				s.append(boundary.getName());
 				s.append("\n");
-				SplitterUtil.indent(s, depth+2);
+				CompilerUtil.indent(s, depth+2);
 				s.append(boundary.getEdge().getTarget());
 			}
 		}

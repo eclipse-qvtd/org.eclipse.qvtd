@@ -53,8 +53,8 @@ import org.eclipse.xtext.resource.XtextResource;
 
 public class CompilerUtil
 {
-	public final static @NonNull Map<Object, Object> defaultSavingOptions; 
-	
+	public final static @NonNull Map<Object, Object> defaultSavingOptions;
+
 	// FIXME use a better default strategy for the saving options
 	static {
 		defaultSavingOptions = new HashMap<Object, Object>();
@@ -63,7 +63,7 @@ public class CompilerUtil
 		defaultSavingOptions.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
 		defaultSavingOptions.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
 		defaultSavingOptions.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
-		
+
 	}
 
 	public static void assertNoDiagnosticErrors(String message, XtextResource xtextResource) {
@@ -90,10 +90,10 @@ public class CompilerUtil
 		if (unresolvedProxies.size() > 0) {
 			StringBuilder s = new StringBuilder();
 			s.append(unresolvedProxies.size());
-			s.append(" unresolved proxies in '" + resource.getURI() + "' ");	
+			s.append(" unresolved proxies in '" + resource.getURI() + "' ");
 			s.append(message);
 			for (Map.Entry<EObject, Collection<Setting>> unresolvedProxy : unresolvedProxies.entrySet()) {
-				s.append("\n");	
+				s.append("\n");
 				BasicEObjectImpl key = (BasicEObjectImpl) unresolvedProxy.getKey();
 				s.append(key.eProxyURI());
 				for (Setting setting : unresolvedProxy.getValue()) {
@@ -105,7 +105,7 @@ public class CompilerUtil
 			assert false : s.toString();
 		}
 	}
-	
+
 	public static void assertNoValidationErrors(@NonNull String prefix, @NonNull Resource resource) {
 		for (EObject eObject : resource.getContents()) {
 			assertNoValidationErrors(prefix, eObject);
@@ -153,14 +153,14 @@ public class CompilerUtil
 		/*XtextResource csResource =*/ doSerialize(inputURI, serializedURI);
 		QVTcore qvtc = QVTcore.newInstance(ProjectManager.NO_PROJECTS, null);
 		Resource cResource2 = QVTcoreUtil.loadTransformations(qvtc.getEnvironmentFactory(), serializedURI, false);
-        assertNoResourceErrors("Core Load", cResource2);
+		assertNoResourceErrors("Core Load", cResource2);
 	}
 
 	private static XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		//
 		//	Load QVTcAS
-		//		
+		//
 		OCL ocl = QVTcore.newInstance(OCL.NO_PROJECTS, null);
 		ocl.getEnvironmentFactory().setSeverity(PivotTables.STR_Variable_c_c_CompatibleInitialiserType, StatusCodes.Severity.IGNORE);
 		try {
@@ -170,7 +170,7 @@ public class CompilerUtil
 			assertNoValidationErrors("Normalisation invalid", asResource);
 			//
 			//	Pivot to CS
-			//		
+			//
 			XtextResource xtextResource = pivot2cs(ocl, resourceSet, asResource, serializedURI);
 			resourceSet.getResources().clear();
 			return xtextResource;
@@ -181,16 +181,22 @@ public class CompilerUtil
 		}
 	}
 
+	public static void indent(@NonNull StringBuilder s, int depth) {
+		for (int i = 0; i < depth; i++) {
+			s.append("    ");
+		}
+	}
+
 	private static @NonNull ASResource loadQVTcAS(@NonNull OCL ocl, @NonNull URI inputURI) {
 		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
 		assert asResource != null;
-//		List<String> conversionErrors = new ArrayList<String>();
-//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
-//		Resource eResource = documentCS.eResource();
+		//		List<String> conversionErrors = new ArrayList<String>();
+		//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
+		//		Resource eResource = documentCS.eResource();
 		assertNoResourceErrors("Load failed", asResource);
-//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
-//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
-//		xtextResource.getContents().add(documentCS);
+		//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+		//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
+		//		xtextResource.getContents().add(documentCS);
 		return (ASResource) asResource;
 	}
 
@@ -205,7 +211,7 @@ public class CompilerUtil
 			Collections.sort(nameables, NameUtil.ENamedElementComparator.INSTANCE);
 		}
 	} */
-	
+
 	/**
 	 * Normalize a list of Nameable by sorting according to their name.
 	 */
@@ -217,14 +223,14 @@ public class CompilerUtil
 			Collections.sort(nameables, NameUtil.NAMEABLE_COMPARATOR);
 		}
 	}
-	
+
 	// FIXME move following clones to a Util class
 	private static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
 		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, null));
 		ocl.as2cs(asResource, (CSResource) xtextResource);
-		assertNoResourceErrors("Conversion failed", xtextResource);		
+		assertNoResourceErrors("Conversion failed", xtextResource);
 		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
-		try {		
+		try {
 			xtextResource.save(defaultSavingOptions);
 		}
 		catch (Exception e) {
@@ -236,5 +242,11 @@ public class CompilerUtil
 			assert false : e.toString();
 		}
 		return xtextResource;
+	}
+
+	public static <T> void removeAll(@NonNull Collection<T> removeFrom, @NonNull Iterable<T> elementsToTemove) {
+		for (T element : elementsToTemove) {
+			removeFrom.remove(element);
+		}
 	}
 }

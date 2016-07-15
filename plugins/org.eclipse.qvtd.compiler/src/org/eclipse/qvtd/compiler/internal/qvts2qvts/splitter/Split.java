@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 /**
  * A Split captures the result of the analysis that enables a multi-headed region to be split.
@@ -91,7 +92,7 @@ public class Split
 	}
 
 	public void toString(@NonNull StringBuilder s, int depth) {
-		SplitterUtil.indent(s, depth);
+		CompilerUtil.indent(s, depth);
 		for (@NonNull Stage stage : stages) {
 			s.append("\n");
 			stage.toString(s, depth+1);

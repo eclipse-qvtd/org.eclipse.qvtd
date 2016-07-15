@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,10 +45,10 @@ import com.google.common.collect.Sets;
  */
 public class Splitter extends SplitterAnalysis
 {
-	//	public static final @NonNull TracingOption ANALYSIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/split/analysis");
-	public static final @NonNull TracingOption GROUPS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/split/groups");
-	public static final @NonNull TracingOption RESULT = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/split/result");
-	public static final @NonNull TracingOption STAGES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/split/stages");
+	//	public static final @NonNull TracingOption ANALYSIS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/split/analysis");
+	public static final @NonNull TracingOption GROUPS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/split/groups");
+	public static final @NonNull TracingOption RESULT = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/split/result");
+	public static final @NonNull TracingOption STAGES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/split/stages");
 
 	/**
 	 * Map from each simple group to the mutually navigable group that contains it.

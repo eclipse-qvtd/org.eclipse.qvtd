@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +20,10 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DatumConnection;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
 
 /**
  * ScheduleCache provides the immutable caches used during the schedule index allocation.
@@ -30,7 +34,7 @@ public abstract class ScheduleCache extends Region2Depth
 	 * The overall RootScheduledRegion.
 	 */
 	protected final @NonNull RootScheduledRegion rootScheduledRegion;
-	
+
 	/**
 	 * All transitively callable regions within the rootScheduledRegion (no OperationRegions).
 	 */
@@ -60,7 +64,7 @@ public abstract class ScheduleCache extends Region2Depth
 	 * Cached list of all target regions per-connection and whether the connection has unserviced content for the target.
 	 */
 	private final @NonNull Map<@NonNull DatumConnection, @NonNull List<@NonNull Region>> connection2targetRegions = new HashMap<@NonNull DatumConnection, @NonNull List<@NonNull Region>>();
-	
+
 	/**
 	 * The regions that have no outgoing passed connections.
 	 */
@@ -81,7 +85,7 @@ public abstract class ScheduleCache extends Region2Depth
 		}
 		//
 		// Initialize the source/target of each connection.
-		// Compute the set of all connections that are not passed. 
+		// Compute the set of all connections that are not passed.
 		//
 		for (@NonNull Region region : this.callableRegions) {
 			analyzeSourcesAndTargets(region);
@@ -143,8 +147,8 @@ public abstract class ScheduleCache extends Region2Depth
 
 	/**
 	 * Initialize the source/target content of each connection of each region to empty.
-	 * Compute the set of all connections that are not passed. 
-	 * Compute the set of all regions that are blocked by a mandatory dependence. 
+	 * Compute the set of all connections that are not passed.
+	 * Compute the set of all regions that are blocked by a mandatory dependence.
 	 */
 	private void analyzeSourcesAndTargets(@NonNull Region region) {
 		boolean hasPassedConnection = false;

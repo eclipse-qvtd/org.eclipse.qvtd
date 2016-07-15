@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -45,11 +46,11 @@ abstract class AbstractStage implements Stage
 	protected void build(@NonNull StringBuilder s, @NonNull String title, @NonNull Iterable<@NonNull Node> nodes) {
 		if (!Iterables.isEmpty(nodes)) {
 			s.append("\n");
-			SplitterUtil.indent(s, 2);
+			CompilerUtil.indent(s, 2);
 			s.append(title);
 			for (@NonNull Node node : nodes) {
 				s.append("\n");
-				SplitterUtil.indent(s, 3);
+				CompilerUtil.indent(s, 3);
 				if (node.isHead()) {
 					s.append("*");
 				}
@@ -78,7 +79,7 @@ abstract class AbstractStage implements Stage
 		if (!actualNodes.equals(expectedNodesSet)) {
 			StringBuilder s = new StringBuilder();
 			Set<@NonNull Node> extraNodesSet = Sets.newHashSet(actualNodes);
-			SplitterUtil.removeAll(extraNodesSet, expectedNodes);
+			CompilerUtil.removeAll(extraNodesSet, expectedNodes);
 			for (@NonNull Node node : extraNodesSet) {
 				s.append("\nextra: ");
 				s.append(node);

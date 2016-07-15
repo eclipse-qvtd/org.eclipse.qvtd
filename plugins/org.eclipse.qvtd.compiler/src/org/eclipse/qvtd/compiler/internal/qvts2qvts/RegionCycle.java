@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,10 +19,11 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 
 /**
  * A RegionCycle identifies a Set or Regions that encompass a cyclic dependency.
- * 
+ *
  * Distinct RegionCycle objects identifying the same set of regions are equal.
  */
 public final class RegionCycle

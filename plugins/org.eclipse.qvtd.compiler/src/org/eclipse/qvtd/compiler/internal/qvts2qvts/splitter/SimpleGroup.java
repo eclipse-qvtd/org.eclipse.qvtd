@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 
 import java.util.Collections;
 
@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 /**
  * A SimpleGroup encompasses a head node and its reachable nodes.
@@ -57,7 +58,7 @@ class SimpleGroup extends AbstractGroup
 
 	@Override
 	public void toString(@NonNull StringBuilder s, int depth) {
-		SplitterUtil.indent(s, depth);
+		CompilerUtil.indent(s, depth);
 		s.append("simple-group: ");
 		s.append(name);
 		super.toString(s, depth);

@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 import com.google.common.collect.Lists;
 
@@ -166,9 +167,9 @@ abstract class AbstractGroup implements Group
 			Edge edge = successorGroups.get(group);
 			assert edge != null;
 			s.append("\n");
-			SplitterUtil.indent(s, depth+1);
+			CompilerUtil.indent(s, depth+1);
 			s.append("successor:\n");
-			SplitterUtil.indent(s, depth+2);
+			CompilerUtil.indent(s, depth+2);
 			s.append("edge: ");
 			s.append(edge.toString());
 			s.append("\n");

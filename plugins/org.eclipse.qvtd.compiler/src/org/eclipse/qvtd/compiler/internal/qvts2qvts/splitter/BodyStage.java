@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -131,10 +132,10 @@ class BodyStage extends AbstractStage
 
 	protected @NonNull Iterable<@NonNull Node>  computeIndirectlyRequiredNodes(@NonNull Iterable<@NonNull Node> allNodes) {
 		Set<@NonNull Node> nodeSet = Sets.newHashSet(allNodes);
-		SplitterUtil.removeAll(nodeSet, allHeadNodes);
-		SplitterUtil.removeAll(nodeSet, deadNodes);
-		SplitterUtil.removeAll(nodeSet, directlyRequiredNodes);
-		SplitterUtil.removeAll(nodeSet, realizedNodes);
+		CompilerUtil.removeAll(nodeSet, allHeadNodes);
+		CompilerUtil.removeAll(nodeSet, deadNodes);
+		CompilerUtil.removeAll(nodeSet, directlyRequiredNodes);
+		CompilerUtil.removeAll(nodeSet, realizedNodes);
 		List<@NonNull Node> nodesList = Lists.newArrayList(nodeSet);
 		Collections.sort(nodesList, NameUtil.NAMEABLE_COMPARATOR);
 		return nodesList;
@@ -227,7 +228,7 @@ class BodyStage extends AbstractStage
 
 	@Override
 	public void toString(@NonNull StringBuilder s, int depth) {
-		SplitterUtil.indent(s, depth);
+		CompilerUtil.indent(s, depth);
 		s.append("body");
 	}
 }

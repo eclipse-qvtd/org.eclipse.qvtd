@@ -47,15 +47,6 @@ org.eclipse.qvtd.compiler/qvtp2qvts/regionStack=false
 # Turn on tracing of the region traversal computation 
 org.eclipse.qvtd.compiler/qvtp2qvts/regionTraversal=false
 
-# Turn on tracing of the analysis for splitting of multi-headed regions
-#org.eclipse.qvtd.compiler/qvtp2qvts/split/analysis=false
-# Turn on tracing of the groups within multi-headed regions
-org.eclipse.qvtd.compiler/qvtp2qvts/split/groups=false
-# Turn on tracing of the result of splitting multi-headed regions
-org.eclipse.qvtd.compiler/qvtp2qvts/split/result=false
-# Turn on tracing of the stages of splitting multi-headed regions
-org.eclipse.qvtd.compiler/qvtp2qvts/split/stages=false
-
 # Turn on tracing of the polled properties computation 
 org.eclipse.qvtd.compiler/qvts2qvti/polledProperties=false
 
@@ -63,3 +54,12 @@ org.eclipse.qvtd.compiler/qvts2qvti/polledProperties=false
 org.eclipse.qvtd.compiler/qvtr2qvtc/synthesize=false
 # Turn on tracing of the QVTr variables analysis 
 org.eclipse.qvtd.compiler/qvtr2qvtc/variables=false
+
+# Turn on tracing of the analysis for splitting of multi-headed regions
+#org.eclipse.qvtd.compiler/qvtp2qvts/split/analysis=false
+# Turn on tracing of the groups within multi-headed regions
+org.eclipse.qvtd.compiler/qvts2qvts/split/groups=false
+# Turn on tracing of the result of splitting multi-headed regions
+org.eclipse.qvtd.compiler/qvts2qvts/split/result=false
+# Turn on tracing of the stages of splitting multi-headed regions
+org.eclipse.qvtd.compiler/qvts2qvts/split/stages=false

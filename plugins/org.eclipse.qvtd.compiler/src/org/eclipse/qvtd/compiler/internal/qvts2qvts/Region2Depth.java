@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +19,12 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DatumConnection;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
 
 /**
  * Region2Depth provides facilities that use a temporary cache depth of the region passing binding tree.
@@ -47,14 +53,14 @@ public class Region2Depth
 	 * in the cycle.
 	 */
 	private @NonNull Map<@NonNull Region, @NonNull Set<@NonNull Region>> region2properAncestors = new HashMap<@NonNull Region, @NonNull Set<@NonNull Region>>();
-	
+
 	public void addRegion(@NonNull Region region) {
 		region2children.clear();	// FIXME do intelligent update rather than recalculate
 		region2depth.clear();
 		region2parents.clear();
 		Scheduler.REGION_DEPTH.println(getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this)) + " <reset> : " + region.getName());
 	}
-	
+
 	/**
 	 * Return the deepest region in the region call tree that is common to firstRegion and secondRegion.
 	 */
@@ -116,13 +122,13 @@ public class Region2Depth
 					ScheduledRegion sourceInvokingRegion = sourceRegion.getInvokingRegion();
 					int sourceInvokingRegionDepth = sourceInvokingRegion != null ? getRegionDepth(sourceInvokingRegion) : 0;
 					Region parentRegion = sourceInvokingRegionDepth < childInvokingRegionDepth ? childInvokingRegion : sourceRegion;
-//					if ((scheduledRegion == null)
-//					 || (parentRegion == scheduledRegion)
-//					 || (parentRegion.getInvokingRegion() == scheduledRegion)) {
-						if ((parentRegion != null) && !parentRegions.contains(parentRegion)) {
-							parentRegions.add(parentRegion);
-						}
-//					}
+					//					if ((scheduledRegion == null)
+					//					 || (parentRegion == scheduledRegion)
+					//					 || (parentRegion.getInvokingRegion() == scheduledRegion)) {
+					if ((parentRegion != null) && !parentRegions.contains(parentRegion)) {
+						parentRegions.add(parentRegion);
+					}
+					//					}
 				}
 			}
 			if (parentRegions.isEmpty() && (childInvokingRegion != null)) {
@@ -174,16 +180,16 @@ public class Region2Depth
 		}
 		return depth.intValue();
 	}
-	
+
 	/**
 	 * Return the edges deterministically ordered and in so far as
-	 * possible respecting ordering edges between the target nodes. 
+	 * possible respecting ordering edges between the target nodes.
 	 */
 	public @NonNull <@NonNull E extends Edge> Iterable<@NonNull E> getSortedEdges(@NonNull Iterable<@NonNull E> edges) {
 		Map<@NonNull Node, @NonNull E> node2edge = new HashMap<@NonNull Node, @NonNull E>();
-//		Map<Node, Node> before2after = new HashMap<Node, Node>();
+		//		Map<Node, Node> before2after = new HashMap<Node, Node>();
 		List<@NonNull Node> orderedNodes = new ArrayList<@NonNull Node>();
-/*		for (E edge : edges) {
+		/*		for (E edge : edges) {
 			Node target = edge.getTarget();
 			Edge oldEdge = node2edge.put(target, edge);
 			assert oldEdge == null;
@@ -216,7 +222,7 @@ public class Region2Depth
 				orderedNodes.add(arbitraryNode);
 				before2after.remove(arbitraryNode);
 				System.out.println("Ordering loop broken by arbitrary choice of " + arbitraryNode);
-			}			
+			}
 		} */
 		List<@NonNull E> orderedEdges = new ArrayList<@NonNull E>();
 		for (@NonNull Node orderedNode : orderedNodes) {
@@ -227,7 +233,7 @@ public class Region2Depth
 		assert orderedEdges.size() == node2edge.size();
 		return orderedEdges;
 	}
-	
+
 	/*
 	 * Return true if secondRegion executes after firstNode is computed, if to-one navigable, or all node's if not to-one navigable.
 	 *
@@ -269,7 +275,7 @@ public class Region2Depth
 
 	/**
 	 * Return the nodes deterministically ordered and in so far as
-	 * possible respecting ordering edges between the nodes. 
+	 * possible respecting ordering edges between the nodes.
 	 *
 	public @NonNull Iterable<Node> getSortedTargets(@NonNull Iterable<Node> nodes) {
 		Map<Node, Node> before2after = new HashMap<Node, Node>();
@@ -306,7 +312,7 @@ public class Region2Depth
 				orderedNodes.add(arbitraryNode);
 				before2after.remove(arbitraryNode);
 				System.out.println("Ordering loop broken by arbitrary choice of " + arbitraryNode);
-			}			
+			}
 		}
 		return orderedNodes;
 	} */

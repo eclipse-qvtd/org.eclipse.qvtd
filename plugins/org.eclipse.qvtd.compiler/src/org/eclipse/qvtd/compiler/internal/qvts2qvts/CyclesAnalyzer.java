@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +23,14 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ConnectionRole;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.CyclicScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Symbolable;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -36,9 +44,9 @@ public class CyclesAnalyzer
 {
 
 	public static final class SymbolableComparator implements Comparator<@NonNull Symbolable>
-	{	
+	{
 		public static final @NonNull SymbolableComparator INSTANCE = new SymbolableComparator();
-	
+
 		@Override
 		public int compare(@NonNull Symbolable o1, @NonNull Symbolable o2) {
 			String n1 = o1.getSymbolName();
@@ -50,12 +58,12 @@ public class CyclesAnalyzer
 	private class RegionStatus
 	{
 		protected final @NonNull Region region;
-		
+
 		/**
 		 * The regions that source incoming connections to this region for which no depth has yet been determined.
 		 */
 		private final @NonNull Set<@NonNull RegionStatus> depthlessSourceRegions = new HashSet<@NonNull RegionStatus>();
-		
+
 		/**
 		 * The largest depth of the sources whose depth is known. null if none known.
 		 */
@@ -65,7 +73,7 @@ public class CyclesAnalyzer
 		 * The depth of this region. Set non-null once known.
 		 */
 		private @Nullable Integer depth = null;
-		
+
 		private @NonNull Set<@NonNull Region> debugSourceRegions = new HashSet<@NonNull Region>();
 		private @NonNull Set<@NonNull Region> debugTargetRegions = new HashSet<@NonNull Region>();
 
@@ -74,7 +82,7 @@ public class CyclesAnalyzer
 			debugSourceRegions.addAll(getPreviousRegions(region));
 			debugTargetRegions.addAll(getNextRegions(region));
 		}
-		
+
 		private void check(@NonNull List<@NonNull RegionStatus> unblockedRegionStatuses, int orderedThreshold) {
 			if (region instanceof CyclicScheduledRegion) {
 				computeDepth();
@@ -83,7 +91,7 @@ public class CyclesAnalyzer
 			int index = unblockedRegionStatuses.indexOf(this);
 			if (index < 0) {
 				assert !depthlessSourceRegions.isEmpty();
-//				assert partialSourceDepth == checkDepth;
+				//				assert partialSourceDepth == checkDepth;
 				assert depth == null;
 			}
 			else if (index < orderedThreshold) {
@@ -91,7 +99,7 @@ public class CyclesAnalyzer
 				assert partialSourceDepth == checkDepth;
 				if (index == 0) {
 					assert partialSourceDepth == null;
-//					assert (checkDepth != null) && (checkDepth == 0);
+					//					assert (checkDepth != null) && (checkDepth == 0);
 					assert depth == 0;
 				}
 				else if (checkDepth != null) {	// null for no inputs.
@@ -115,19 +123,19 @@ public class CyclesAnalyzer
 				assert regionStatus.debugSourceRegions.contains(region);
 			}
 			assert Sets.intersection(depthlessSourceRegions, Sets.newHashSet(unblockedRegionStatuses.subList(0, orderedThreshold))).isEmpty();
-//			assert partialSourceDepth == checkDepth;
-//			if (!depthlessSourceRegions.isEmpty()) {
-//				assert depth == null;
-//			}
-//			else if (depth != null) {
-//				assert depth == ((checkDepth != null) ? (checkDepth+1) : 0);
-//			}
-//			Set<@NonNull Region> targetRegions = new HashSet<@NonNull Region>();
+			//			assert partialSourceDepth == checkDepth;
+			//			if (!depthlessSourceRegions.isEmpty()) {
+			//				assert depth == null;
+			//			}
+			//			else if (depth != null) {
+			//				assert depth == ((checkDepth != null) ? (checkDepth+1) : 0);
+			//			}
+			//			Set<@NonNull Region> targetRegions = new HashSet<@NonNull Region>();
 			for (@NonNull RegionStatus sourceRegion : depthlessSourceRegions) {
-				assert debugSourceRegions.contains(sourceRegion.region); 
+				assert debugSourceRegions.contains(sourceRegion.region);
 			}
 		}
-		
+
 		private @Nullable Integer computeDepth() {
 			Set<@NonNull Region> sourceRegions = new HashSet<@NonNull Region>();
 			sourceRegions.addAll(getPreviousRegions(region));
@@ -136,7 +144,7 @@ public class CyclesAnalyzer
 				RegionStatus sourceRegionStatus = region2status.get(sourceRegion);
 				assert sourceRegionStatus != null;
 				Integer sourceDepth = sourceRegionStatus.getDepth();
-//				assert depthlessSourceRegions.contains(sourceRegionStatus) == (sourceDepth == null);
+				//				assert depthlessSourceRegions.contains(sourceRegionStatus) == (sourceDepth == null);
 				if (sourceDepth != null) {
 					checkDepth = checkDepth != null ? Math.max(checkDepth,  sourceDepth) : sourceDepth;
 				}
@@ -219,9 +227,9 @@ public class CyclesAnalyzer
 			if (!depthlessSourceRegions.isEmpty()) {
 				return false;
 			}
-//			if (partialSourceDepth != null) {
-//				setDepth(partialSourceDepth+1);
-//			}
+			//			if (partialSourceDepth != null) {
+			//				setDepth(partialSourceDepth+1);
+			//			}
 			return true;
 		}
 
@@ -261,8 +269,8 @@ public class CyclesAnalyzer
 					partialSourceDepth = partialSourceDepth2 = Math.max(partialSourceDepth2, sourceDepth);
 				}
 				if (depthlessSourceRegions.isEmpty()) {
-//					int regionDepth = partialSourceDepth2 + 1;
-//					setDepth(regionDepth);
+					//					int regionDepth = partialSourceDepth2 + 1;
+					//					setDepth(regionDepth);
 					unblockedRegionStatuses.add(this);
 				}
 			}
@@ -295,15 +303,15 @@ public class CyclesAnalyzer
 						Scheduler.REGION_CYCLES.println("    <> " + depthlessSourceRegions.size() + " " + oldRegionStatus);
 					}
 				}
-//				if (cyclicRegion.getDepth() == null) {
-					depthlessSourceRegions.add(cyclicRegionStatus);
-//				}
-//				else if (depthlessSourceRegions.isEmpty()) {
-//					Integer partialSourceDepth2 = partialSourceDepth;
-//					assert partialSourceDepth2 != null;
-//					setDepth(partialSourceDepth2 + 1);
-//					unblockedRegionStatuses.add(this);
-//				}
+				//				if (cyclicRegion.getDepth() == null) {
+				depthlessSourceRegions.add(cyclicRegionStatus);
+				//				}
+				//				else if (depthlessSourceRegions.isEmpty()) {
+				//					Integer partialSourceDepth2 = partialSourceDepth;
+				//					assert partialSourceDepth2 != null;
+				//					setDepth(partialSourceDepth2 + 1);
+				//					unblockedRegionStatuses.add(this);
+				//				}
 
 				Scheduler.REGION_CYCLES.println("    <= " + depthlessSourceRegions.size() + " " + cyclicRegionStatus);
 			}
@@ -314,18 +322,18 @@ public class CyclesAnalyzer
 			return region.getName();
 		}
 	}
-	
+
 	protected final @NonNull ScheduledRegion scheduledRegion;
 
 	/**
 	 * Working representation: one RegionStatus per schedulable Region.
 	 */
-	private final @NonNull Map<@NonNull Region, @NonNull RegionStatus> region2status = new HashMap<@NonNull Region, @NonNull RegionStatus>();
+	private final @NonNull Map<@NonNull Region, @NonNull RegionStatus> region2status = new HashMap<>();
 
 	/**
 	 * The result.
 	 */
-	private final @NonNull List<@NonNull RegionCycle> orderedCycles = new ArrayList<@NonNull RegionCycle>();
+	private final @NonNull List<@NonNull RegionCycle> orderedCycles = new ArrayList<>();
 
 	private final @NonNull Set<@NonNull RegionStatus> blockedRegions;
 
@@ -352,9 +360,9 @@ public class CyclesAnalyzer
 		//	Propagate the known region depths to their descendants.
 		//
 		for (int i = 0; blockedRegions.size() > 0; ) {
-//			assert Sets.intersection(blockedRegions, Sets.newHashSet(unblockedRegionStatuses.subList(0, i))).isEmpty();
-//			assert Sets.intersection(blockedRegions, Sets.newHashSet(unblockedRegionStatuses.subList(i, unblockedRegionStatuses.size()))).size() == blockedRegions.size();
-//			assert i + blockedRegions.size() == Sets.newHashSet(region2status.values()).size();
+			//			assert Sets.intersection(blockedRegions, Sets.newHashSet(unblockedRegionStatuses.subList(0, i))).isEmpty();
+			//			assert Sets.intersection(blockedRegions, Sets.newHashSet(unblockedRegionStatuses.subList(i, unblockedRegionStatuses.size()))).size() == blockedRegions.size();
+			//			assert i + blockedRegions.size() == Sets.newHashSet(region2status.values()).size();
 			while (i < unblockedRegionStatuses.size()) {
 				checkAll(unblockedRegionStatuses, i);
 				RegionStatus unblockedRegionStatus = unblockedRegionStatuses.get(i++);
@@ -372,8 +380,8 @@ public class CyclesAnalyzer
 
 				Iterable<@NonNull Region> oldRegions = cycle.getRegions();
 				showOld(oldRegions);
-				
-				
+
+
 				Set<@NonNull Region> debugOldPreviousRegions = new HashSet<@NonNull Region>();
 				Set<@NonNull Region> debugOldNextRegions = new HashSet<@NonNull Region>();
 				for (@NonNull Region debugOldRegion : oldRegions) {
@@ -382,17 +390,17 @@ public class CyclesAnalyzer
 				}
 				CyclicScheduledRegion cyclicRegion = scheduledRegion.createCyclicScheduledRegion(oldRegions);
 
-				
+
 				showNew(cyclicRegion);
-				
-				
-				
-				
-				
-				
+
+
+
+
+
+
 				Set<@NonNull Region> debugOldRegions2 = Sets.newHashSet(oldRegions);
-				
-				
+
+
 				RegionStatus cyclicRegionStatus = new RegionStatus(cyclicRegion);
 				Set<@NonNull Region> debugNewPreviousRegions = getPreviousRegions(cyclicRegion);
 				Set<@NonNull Region> debugNewNextRegions = getNextRegions(cyclicRegion);
@@ -415,7 +423,7 @@ public class CyclesAnalyzer
 					Scheduler.REGION_CYCLES.println("New Old Next Region: " + region + " " + intersection.contains(region));
 				}
 				assert debugNewNextRegions.equals(debugNewOldNextRegions);
-				
+
 				Set<@NonNull RegionStatus> oldRegionStatuses = new HashSet<@NonNull RegionStatus>();
 				for (@NonNull Region oldRegion : oldRegions) {
 					RegionStatus oldRegionStatus = region2status.put(oldRegion, cyclicRegionStatus);
@@ -435,17 +443,17 @@ public class CyclesAnalyzer
 				}
 				region2status.put(cyclicRegion, cyclicRegionStatus);
 				blockedRegions.add(cyclicRegionStatus);
-//				if (cyclicRegionStatus.getDepth() != null) {
-//					cyclicRegionStatus.propagate(unblockedRegionStatuses);
-//				}
+				//				if (cyclicRegionStatus.getDepth() != null) {
+				//					cyclicRegionStatus.propagate(unblockedRegionStatuses);
+				//				}
 			}
 		}
 	}
 
 	private void checkAll(@NonNull List<@NonNull RegionStatus> unblockedRegionStatuses, int orderedThreshold) {
-//		assert Sets.intersection(blockedRegions, Sets.newHashSet(unblockedRegionStatuses.subList(0, i))).isEmpty();
-//		assert Sets.intersection(blockedRegions, Sets.newHashSet(unblockedRegionStatuses.subList(i, unblockedRegionStatuses.size()))).size() == blockedRegions.size();
-//		assert i + blockedRegions.size() == Sets.newHashSet(region2status.values()).size();
+		//		assert Sets.intersection(blockedRegions, Sets.newHashSet(unblockedRegionStatuses.subList(0, i))).isEmpty();
+		//		assert Sets.intersection(blockedRegions, Sets.newHashSet(unblockedRegionStatuses.subList(i, unblockedRegionStatuses.size()))).size() == blockedRegions.size();
+		//		assert i + blockedRegions.size() == Sets.newHashSet(region2status.values()).size();
 		HashSet<@NonNull RegionStatus> allRegionStatuses1 = Sets.newHashSet(region2status.values());
 		HashSet<@NonNull RegionStatus> unblockedRegionStatuses1 = Sets.newHashSet(unblockedRegionStatuses.subList(0, orderedThreshold));
 		HashSet<@NonNull RegionStatus> unblockedRegionStatuses2 = Sets.newHashSet(unblockedRegionStatuses.subList(orderedThreshold, unblockedRegionStatuses.size()));
@@ -514,7 +522,7 @@ public class CyclesAnalyzer
 			RegionCycle depthlessSourceClosure = regionStatus.getDepthlessSourceClosure();
 			if (depthlessSourceClosure != null) {
 				if (cyclesSet == null) {
-					cyclesSet = new HashSet<@NonNull RegionCycle>();
+					cyclesSet = new HashSet<>();
 				}
 				cyclesSet.add(depthlessSourceClosure);
 			}
@@ -526,7 +534,7 @@ public class CyclesAnalyzer
 		//
 		//	Return the smallest cycle.
 		//
-		List<@NonNull RegionCycle> cyclesList = new ArrayList<@NonNull RegionCycle>(cyclesSet);
+		List<@NonNull RegionCycle> cyclesList = new ArrayList<>(cyclesSet);
 		Collections.sort(cyclesList, RegionCycle.COMPARATOR);
 		if (Scheduler.REGION_CYCLES.isActive()) {
 			Scheduler.REGION_CYCLES.println("cycles ");
@@ -598,7 +606,7 @@ public class CyclesAnalyzer
 
 	private void showOld(@NonNull Iterable<@NonNull Region> oldRegions) {
 		Set<@NonNull Region> debugOldRegions = Sets.newHashSet(oldRegions);
-		
+
 		List<@NonNull Region> sortedOldRegions = Lists.newArrayList(oldRegions);
 		Collections.sort(sortedOldRegions, SymbolableComparator.INSTANCE);
 		Set<@NonNull NodeConnection> debugOldConnections = new HashSet<@NonNull NodeConnection>();

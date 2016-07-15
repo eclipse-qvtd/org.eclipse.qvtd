@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +16,11 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Connection;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Scheduler;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -25,10 +30,10 @@ import com.google.common.collect.Lists;
  * - all sources of a passed connection precede all targets of that connection
  * - all sources of mandatory access connection precede all targets of that connection
  * Where possible the sources of preferred access connections also precede targets of that connection.
- * 
+ *
  * The passed connection scheduling requires that the regions form an acyclic tree with respect to the passed connection.
  * This should be achieved by using the CyclesAnalyzer to factor out loops as nested CyclicScheduledRegions.
- * 
+ *
  * The mandatory connection scheduling cannot be guaranteed to be satisfied; scheduling may not be possible.
  * An IllegalStateException is thrown.
  */
@@ -58,28 +63,28 @@ public class ScheduleIndexer extends ScheduleState
 	 * at least minimal violation of preferred blockages.
 	 */
 	protected @NonNull Region selectNextRegion(@NonNull ScheduledRegion scheduledRegion) {
-//		assert orderedSchedulables.size() + unblockedRegions.size() + callableRegion2blockedConnectionCount.size() + mandatoryBlockedRegions.size() == region2incomingConnections.size();
+		//		assert orderedSchedulables.size() + unblockedRegions.size() + callableRegion2blockedConnectionCount.size() + mandatoryBlockedRegions.size() == region2incomingConnections.size();
 		List<@NonNull Region> unblockedRegionsList = Lists.newArrayList(getUnblockedRegions());
 		Collections.sort(unblockedRegionsList, NameUtil.NAMEABLE_COMPARATOR);
 		List<@NonNull Region> callableRegionsList = Lists.newArrayList(getBlockedCallableRegions());
 		Collections.sort(callableRegionsList, NameUtil.NAMEABLE_COMPARATOR);
-//		List<@NonNull Region> preferredBlockedRegionsList = new ArrayList<@NonNull Region>(preferredBlockedRegions2availableFraction.keySet());
-//		Collections.sort(preferredBlockedRegionsList, NameUtil.NAMEABLE_COMPARATOR);
+		//		List<@NonNull Region> preferredBlockedRegionsList = new ArrayList<@NonNull Region>(preferredBlockedRegions2availableFraction.keySet());
+		//		Collections.sort(preferredBlockedRegionsList, NameUtil.NAMEABLE_COMPARATOR);
 		List<@NonNull Region> mandatoryBlockedRegionsList = Lists.newArrayList(getMandatoryBlockedRegions());
 		Collections.sort(mandatoryBlockedRegionsList, NameUtil.NAMEABLE_COMPARATOR);
-//		List<@NonNull Connection> partiallyBlockedConnectionsList = new ArrayList<@NonNull Connection>(partiallyBlockedConnections);
-//		Collections.sort(partiallyBlockedConnectionsList, NameUtil.NAMEABLE_COMPARATOR);
+		//		List<@NonNull Connection> partiallyBlockedConnectionsList = new ArrayList<@NonNull Connection>(partiallyBlockedConnections);
+		//		Collections.sort(partiallyBlockedConnectionsList, NameUtil.NAMEABLE_COMPARATOR);
 		List<@NonNull Connection> blockedConnectionsList = Lists.newArrayList(getBlockedConnections());
 		Collections.sort(blockedConnectionsList, NameUtil.NAMEABLE_COMPARATOR);
 		if (Scheduler.REGION_ORDER.isActive()) {
-			Scheduler.REGION_ORDER.println("      unblocked regions:"); 
+			Scheduler.REGION_ORDER.println("      unblocked regions:");
 			for (@NonNull Region region : unblockedRegionsList) {
-				Scheduler.REGION_ORDER.println("        " + region); 
+				Scheduler.REGION_ORDER.println("        " + region);
 			}
-			Scheduler.REGION_ORDER.println("      callableRegion : blockedConnectionCount:"); 
+			Scheduler.REGION_ORDER.println("      callableRegion : blockedConnectionCount:");
 			for (@NonNull Region region : callableRegionsList) {
-				Scheduler.REGION_ORDER.println("        " + region + " : " + getBlockedConnectionCount(region)); 
-/*				List<@NonNull DatumConnection> incomingConnections = getIncomingConnections(region);
+				Scheduler.REGION_ORDER.println("        " + region + " : " + getBlockedConnectionCount(region));
+				/*				List<@NonNull DatumConnection> incomingConnections = getIncomingConnections(region);
 				assert incomingConnections != null;
 				for (@NonNull DatumConnection connection : incomingConnections) {
 					boolean isMandatory = connection.isMandatory();
@@ -104,7 +109,7 @@ public class ScheduleIndexer extends ScheduleState
 							+ connection.getSourceDisplayNames());
 				}
 			}
-			Scheduler.REGION_ORDER.println("      preferred blocked regions:"); 
+			Scheduler.REGION_ORDER.println("      preferred blocked regions:");
 			for (@NonNull Region region : preferredBlockedRegionsList) {
 				Scheduler.REGION_ORDER.println("        " + region + " : " + preferredBlockedRegions2availableFraction.get(region));
 				List<@NonNull DatumConnection> incomingConnections = getIncomingConnections(region);
@@ -127,21 +132,21 @@ public class ScheduleIndexer extends ScheduleState
 							+ connection.getSourceDisplayNames());
 				} */
 			}
-			Scheduler.REGION_ORDER.println("      mandatory blocked regions:"); 
+			Scheduler.REGION_ORDER.println("      mandatory blocked regions:");
 			for (@NonNull Region region : mandatoryBlockedRegionsList) {
-				Scheduler.REGION_ORDER.println("        " + region); 
+				Scheduler.REGION_ORDER.println("        " + region);
 			}
-//			Scheduler.REGION_ORDER.println("      partially blocked connections:"); 
-//			for (Connection connection : partiallyBlockedConnectionsList) {
-//				Scheduler.REGION_ORDER.println("        " + connection); 
-//			}
-			Scheduler.REGION_ORDER.println("      blocked connections:"); 
+			//			Scheduler.REGION_ORDER.println("      partially blocked connections:");
+			//			for (Connection connection : partiallyBlockedConnectionsList) {
+			//				Scheduler.REGION_ORDER.println("        " + connection);
+			//			}
+			Scheduler.REGION_ORDER.println("      blocked connections:");
 			for (@NonNull Connection connection : blockedConnectionsList) {
-				Scheduler.REGION_ORDER.println("        " + connection); 
+				Scheduler.REGION_ORDER.println("        " + connection);
 			}
 		}
-//		int debugRegionSize = region2incomingConnections.size();
-//		assert debugRegionSize == orderedSchedulables.size() + unblockedRegions.size() + partiallyBlockedRegions2availableFraction.size() + mandatoryBlockedRegions.size() + preferredBlockedRegions2availableFraction.size();
+		//		int debugRegionSize = region2incomingConnections.size();
+		//		assert debugRegionSize == orderedSchedulables.size() + unblockedRegions.size() + partiallyBlockedRegions2availableFraction.size() + mandatoryBlockedRegions.size() + preferredBlockedRegions2availableFraction.size();
 		//
 		//	Select any unblocked region
 		//

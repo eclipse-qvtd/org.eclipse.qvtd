@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -61,9 +62,9 @@ abstract class HeadedStage extends AbstractStage
 		this.computableNodes.removeAll(navigableNodes);
 		int newSize = this.computableNodes.size();
 		assert oldSize-newSize == navigableNodes.size();
-		SplitterUtil.removeAll(navigableNodes, headNodes);
-		SplitterUtil.removeAll(navigableNodes, deadNodes);
-		SplitterUtil.removeAll(computableNodes, deadNodes);
+		CompilerUtil.removeAll(navigableNodes, headNodes);
+		CompilerUtil.removeAll(navigableNodes, deadNodes);
+		CompilerUtil.removeAll(computableNodes, deadNodes);
 		Collections.sort(navigableNodes, NameUtil.NAMEABLE_COMPARATOR);
 		Collections.sort(computableNodes, NameUtil.NAMEABLE_COMPARATOR);
 	}
@@ -124,14 +125,14 @@ abstract class HeadedStage extends AbstractStage
 	public void toString(@NonNull StringBuilder s, int depth) {
 		Edge edge2 = edge;
 		if (edge2 != null) {
-			SplitterUtil.indent(s, depth);
+			CompilerUtil.indent(s, depth);
 			s.append(edge2.isComputation() ? "forward-edge : " : "reverse-edge : ");
 			s.append(edge2.getName());
 			s.append(" : ");
 			s.append(edge2);
 			s.append("\n");
 		}
-		SplitterUtil.indent(s, depth);
+		CompilerUtil.indent(s, depth);
 		s.append("simple-group : ");
 		s.append(targetSimpleGroup.getName());
 		s.append(" : ");

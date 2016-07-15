@@ -39,14 +39,12 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.CyclicScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MergedMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
-import org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter.Splitter;
-import org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter.Split;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -180,8 +178,6 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 			region2mapping = new RootRegion2Mapping(this, (RootCompositionRegion)region);
 		}
 		else {
-			Splitter splitter = new Splitter(region);
-			Split split = splitter.split();
 			region2mapping = new BasicRegion2Mapping(this, region);
 		}
 		region2region2mapping.put(region, region2mapping);

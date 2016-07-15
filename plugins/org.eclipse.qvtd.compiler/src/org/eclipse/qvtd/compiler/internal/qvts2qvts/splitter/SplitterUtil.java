@@ -8,10 +8,9 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvti.splitter;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -145,17 +144,5 @@ class SplitterUtil
 			}
 		}
 		return false;
-	}
-
-	public static void indent(@NonNull StringBuilder s, int depth) {
-		for (int i = 0; i < depth; i++) {
-			s.append("    ");
-		}
-	}
-
-	public static <T> void removeAll(@NonNull Collection<T> removeFrom, @NonNull Iterable<T> elementsToTemove) {
-		for (T element : elementsToTemove) {
-			removeFrom.remove(element);
-		}
 	}
 }
