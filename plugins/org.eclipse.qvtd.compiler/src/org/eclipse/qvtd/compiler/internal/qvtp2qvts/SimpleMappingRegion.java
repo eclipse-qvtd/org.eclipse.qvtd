@@ -83,6 +83,10 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	 */
 	private /*@LazyNonNull*/ List<@NonNull SimpleNode> extraNodes = null;
 
+	public SimpleMappingRegion(@NonNull SimpleMappingRegion region) {
+		this(region.multiRegion, region.mappingAction, region.naturalOrder);
+	}
+
 	public SimpleMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction, int naturalOrder) {
 		super(multiRegion);
 		this.mappingAction = mappingAction;

@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -89,7 +90,7 @@ public class Split
 		}
 	}
 
-	public void install() {
+	public void install(@NonNull MultiRegion multiRegion) {
 		Region region = splitter.getRegion();
 		Iterable<@NonNull Node> newHeadNodes = stages.get(0).getHeadNodes();
 		Iterable<@NonNull Node> oldHeadNodes = Lists.newArrayList(region.getHeadNodes());
@@ -97,6 +98,9 @@ public class Split
 			if (!Iterables.contains(newHeadNodes, headNode)) {
 				region.resetHead(headNode);
 			}
+		}
+		for (@NonNull Stage stage : stages) {
+			Region stageRegion = stage.createRegion(multiRegion);
 		}
 	}
 

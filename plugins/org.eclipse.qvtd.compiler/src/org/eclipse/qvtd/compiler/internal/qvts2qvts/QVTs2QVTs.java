@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Split;
@@ -76,16 +77,6 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Create the schedule for each directed acyclic scheduled region.
 		//
-		for (@NonNull Region region : rootScheduledRegion.getCallableRegions()) {
-			Splitter splitter = new Splitter(region);
-			Split split = splitter.split();
-			if (split != null) {
-				//				split.install();
-			}
-		}
-		//
-		//	Create the schedule for each directed acyclic scheduled region.
-		//
 		for (@NonNull ScheduledRegion scheduledRegion : allScheduledRegions) {
 			scheduledRegion.createLocalSchedule();
 		}
@@ -96,10 +87,20 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 	}
 
-	protected void splitRegions() {
+	protected void splitMultiHeadedRegions(@NonNull MultiRegion multiRegion) {
+		for (@NonNull Region region : multiRegion.getActiveRegions()) {
+			if (region instanceof SimpleMappingRegion) {
+				Splitter splitter = new Splitter((@NonNull SimpleMappingRegion) region);
+				Split split = splitter.split();
+				if (split != null) {
+					split.install(multiRegion);
+				}
+			}
+		}
 	}
 
 	public @NonNull RootScheduledRegion transform(@NonNull MultiRegion multiRegion) {
+		splitMultiHeadedRegions(multiRegion);
 		List<@NonNull Region> activeRegions = multiRegion.getActiveRegions();
 		RootScheduledRegion rootRegion = createRootRegion(activeRegions);
 		rootRegion.createSchedule();

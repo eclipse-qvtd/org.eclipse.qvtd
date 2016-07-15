@@ -21,14 +21,14 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleMappingRegion;
 
 class SplitterAnalysis
 {
 	/**
 	 * The region to be split.
 	 */
-	protected final @NonNull Region region;
+	protected final @NonNull SimpleMappingRegion region;
 
 	/**
 	 * Map from each reachable node to all the simple groups with a head node from which it is reachable by to-one navigation.
@@ -37,7 +37,7 @@ class SplitterAnalysis
 
 	//	private final @NonNull Map<@NonNull Node, @NonNull SimpleGroup> headNode2simpleGroup = new HashMap<>();
 
-	public SplitterAnalysis(@NonNull Region region) {
+	public SplitterAnalysis(@NonNull SimpleMappingRegion region) {
 		this.region = region;
 	}
 
@@ -108,7 +108,7 @@ class SplitterAnalysis
 		return ClassUtil.nonNullState(reachableNode2simpleGroups.get(node));
 	}
 
-	public @NonNull Region getRegion() {
+	public @NonNull SimpleMappingRegion getRegion() {
 		return region;
 	}
 

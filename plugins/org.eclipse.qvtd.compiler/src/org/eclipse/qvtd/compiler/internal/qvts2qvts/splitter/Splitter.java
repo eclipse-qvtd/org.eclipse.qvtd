@@ -25,7 +25,7 @@ import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleMappingRegion;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -55,7 +55,7 @@ public class Splitter extends SplitterAnalysis
 	 */
 	private final @NonNull Map<@NonNull SimpleGroup, @NonNull AbstractGroup> simpleGroup2mutualGroup = new HashMap<>();
 
-	public Splitter(@NonNull Region region) {
+	public Splitter(@NonNull SimpleMappingRegion region) {
 		super(region);
 	}
 

@@ -12,7 +12,9 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 
 /**
  * A Stage specifies part of a multi-headed region split. It has a headNode to represent its primary content
@@ -21,6 +23,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 interface Stage
 {
 	void check();
+	@NonNull Region createRegion(@NonNull MultiRegion multiRegion);
 	void debug();
 	@NonNull Iterable<@NonNull Node> getHeadNodes();
 	@Nullable Node getIteratedNode();
