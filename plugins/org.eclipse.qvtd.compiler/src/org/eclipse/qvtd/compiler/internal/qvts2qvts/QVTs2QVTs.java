@@ -41,7 +41,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		for (@NonNull Region region : new ArrayList<@NonNull Region>(allRegions)) {
 			if (region.getInvokingRegion() == null) {
 				if (rootRegion == null) {
-					rootRegion = new RootScheduledRegion(rootName, region);
+					rootRegion = new RootScheduledRegion(region.getMultiRegion(), rootName);
 				}
 				rootRegion.addRegion(region);
 			}

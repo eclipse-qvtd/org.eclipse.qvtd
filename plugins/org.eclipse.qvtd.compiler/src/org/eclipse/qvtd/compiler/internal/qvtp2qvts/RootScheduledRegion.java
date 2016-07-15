@@ -26,7 +26,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
-import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Property;
@@ -74,7 +73,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	}
 
 	private final @NonNull String name;
-	protected final @NonNull CompleteModel completeModel;
+	//	protected final @NonNull CompleteModel completeModel;
 
 	/**
 	 * The input models that may introduce model elements for transformation.
@@ -125,19 +124,10 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 
 	private final @NonNull RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(multiRegion);
 
-	public RootScheduledRegion(@NonNull String name, @NonNull Region primaryRegion) {
-		super(primaryRegion.getMultiRegion());
+	public RootScheduledRegion(@NonNull MultiRegion multiRegion, @NonNull String name) {
+		super(multiRegion);
 		this.name = name;
-		this.completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
-	}
-
-	public RootScheduledRegion(@NonNull String name, @NonNull List<Region> regions) {
-		super(ClassUtil.nonNullState(regions.get(0)).getMultiRegion());
-		this.name = name;
-		this.completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
-		for (@SuppressWarnings("null")@NonNull Region region : regions) {
-			addRegion(region);
-		}
+		//		this.completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
 	}
 
 	@Override

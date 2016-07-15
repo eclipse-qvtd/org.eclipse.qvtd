@@ -87,105 +87,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		super(multiRegion);
 		this.mappingAction = mappingAction;
 		this.naturalOrder = naturalOrder;
-		AbstractMapping mapping = mappingAction.getMapping();
-		assert mapping != null;
-
-		List<@NonNull GuardPattern> guardPatterns = new ArrayList<@NonNull GuardPattern>();
-		List<@NonNull BottomPattern> bottomPatterns = new ArrayList<@NonNull BottomPattern>();
-		//
-		guardPatterns.add(ClassUtil.nonNull(mapping.getGuardPattern()));
-		bottomPatterns.add(ClassUtil.nonNull(mapping.getBottomPattern()));
-		for (Domain domain : mapping.getDomain()) {
-			if (domain instanceof CoreDomain) {
-				CoreDomain coreDomain = (CoreDomain)domain;
-				//
-				guardPatterns.add(ClassUtil.nonNull(coreDomain.getGuardPattern()));
-				bottomPatterns.add(ClassUtil.nonNull(coreDomain.getBottomPattern()));
-			}
-		}
-		/**
-		 * Extract the reachability constraints from the predicates.
-		 */
-		analyzePredicates(guardPatterns);
-		analyzePredicates(bottomPatterns);
-		/**
-		 * Identify any assignments and hidden inputs.
-		 */
-		for (Predicate predicate : complexPredicates) {
-			OCLExpression conditionExpression = predicate.getConditionExpression();
-			/*			if (conditionExpression instanceof OperationCallExp) {
-				OperationCallExp callExp = (OperationCallExp)conditionExpression;
-				OperationId operationId = callExp.getReferredOperation().getOperationId();
-				if (SchedulerConstants.isSameOperation(operationId, getSchedulerConstants().getOclAnyEqualsId())) {
-					OCLExpression leftExpression = callExp.getOwnedSource();
-					OCLExpression rightExpression = callExp.getOwnedArguments().get(0);
-					Node leftNode = expressionAnalyzer.analyze(leftExpression);
-					Node rightNode = expressionAnalyzer.analyze(rightExpression);
-					if (leftNode != rightNode) {
-						if (leftNode.isKnown() && !(leftExpression instanceof NavigationCallExp)) {
-							Edges.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
-						}
-						else if (rightNode.isKnown() && !(rightExpression instanceof NavigationCallExp)) {
-							Edges.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
-						}
-						else if (leftNode.isKnown()) {
-							Edges.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
-						}
-						else if (rightNode.isKnown()) {
-							Edges.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
-						}
-						else {
-							Edges.BINDING.createEdge(this, leftNode, null, rightNode);			// FIXME
-							Edges.BINDING.createEdge(this, rightNode, null, leftNode);
-						}
-					}
-				}
-			}
-			else { */
-			SimpleNode resultNode = expressionAnalyzer.analyze(conditionExpression);
-			if (!resultNode.isTrue()) {
-				SimpleNode trueNode = Nodes.TRUE.createSimpleNode(this);
-				Edges.PREDICATE.createSimpleEdge(this, resultNode, null, trueNode);
-			}
-			else {		// FIXME ?? do includes() here explicitly
-				resultNode.destroy();
-			}
-			//			}
-		}
-		//
-		for (BottomPattern bottomPattern : bottomPatterns) {
-			for (@SuppressWarnings("null")@NonNull RealizedVariable realizedVariable : bottomPattern.getRealizedVariable()) {
-				/*assignedNodes.add(*/Nodes.REALIZED_VARIABLE.createSimpleNode(this, realizedVariable);
-			}
-			//			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
-			//				/*assignedNodes.add(*/Nodes.UNREALIZED_VARIABLE.createSimpleNode(this, variable);
-			//			}
-		}
-		//
-		getHeadNodes();
-		//
-		for (BottomPattern bottomPattern : bottomPatterns) {
-			//			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
-			//				SimpleNode variableNode = getReferenceNode(variable);
-			//				OCLExpression ownedInit = variable.getOwnedInit();
-			//				if (ownedInit != null) {
-			//					SimpleNode initNode = ownedInit.accept(expressionAnalyzer);
-			//					assert initNode != null;
-			//					variable2simpleNode.put(variable, initNode);
-			//					Edges.ARGUMENT.createSimpleEdge(this, initNode, null, variableNode);
-			//					if (initNode.isConstant()) {
-			//						variableNode.mergeRole(initNode.getNodeRole());
-			//					}
-			//				}
-			//			}
-			for (@SuppressWarnings("null")@NonNull Assignment assignment : bottomPattern.getAssignment()) {
-				assignment.accept(expressionAnalyzer);
-			}
-		}
-		//
-		toGraph(new DOTStringBuilder());
-		toGraph(new GraphMLStringBuilder());
-		return;
+		initialize();
 	}
 
 	@Override
@@ -551,6 +453,107 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 			//			node2node.put(typedElement, node);
 		}
 		return node;
+	}
+
+	public void initialize() {
+		AbstractMapping mapping = mappingAction.getMapping();
+		assert mapping != null;
+
+		List<@NonNull GuardPattern> guardPatterns = new ArrayList<@NonNull GuardPattern>();
+		List<@NonNull BottomPattern> bottomPatterns = new ArrayList<@NonNull BottomPattern>();
+		//
+		guardPatterns.add(ClassUtil.nonNull(mapping.getGuardPattern()));
+		bottomPatterns.add(ClassUtil.nonNull(mapping.getBottomPattern()));
+		for (Domain domain : mapping.getDomain()) {
+			if (domain instanceof CoreDomain) {
+				CoreDomain coreDomain = (CoreDomain)domain;
+				//
+				guardPatterns.add(ClassUtil.nonNull(coreDomain.getGuardPattern()));
+				bottomPatterns.add(ClassUtil.nonNull(coreDomain.getBottomPattern()));
+			}
+		}
+		/**
+		 * Extract the reachability constraints from the predicates.
+		 */
+		analyzePredicates(guardPatterns);
+		analyzePredicates(bottomPatterns);
+		/**
+		 * Identify any assignments and hidden inputs.
+		 */
+		for (Predicate predicate : complexPredicates) {
+			OCLExpression conditionExpression = predicate.getConditionExpression();
+			/*			if (conditionExpression instanceof OperationCallExp) {
+				OperationCallExp callExp = (OperationCallExp)conditionExpression;
+				OperationId operationId = callExp.getReferredOperation().getOperationId();
+				if (SchedulerConstants.isSameOperation(operationId, getSchedulerConstants().getOclAnyEqualsId())) {
+					OCLExpression leftExpression = callExp.getOwnedSource();
+					OCLExpression rightExpression = callExp.getOwnedArguments().get(0);
+					Node leftNode = expressionAnalyzer.analyze(leftExpression);
+					Node rightNode = expressionAnalyzer.analyze(rightExpression);
+					if (leftNode != rightNode) {
+						if (leftNode.isKnown() && !(leftExpression instanceof NavigationCallExp)) {
+							Edges.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
+						}
+						else if (rightNode.isKnown() && !(rightExpression instanceof NavigationCallExp)) {
+							Edges.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
+						}
+						else if (leftNode.isKnown()) {
+							Edges.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
+						}
+						else if (rightNode.isKnown()) {
+							Edges.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
+						}
+						else {
+							Edges.BINDING.createEdge(this, leftNode, null, rightNode);			// FIXME
+							Edges.BINDING.createEdge(this, rightNode, null, leftNode);
+						}
+					}
+				}
+			}
+			else { */
+			SimpleNode resultNode = expressionAnalyzer.analyze(conditionExpression);
+			if (!resultNode.isTrue()) {
+				SimpleNode trueNode = Nodes.TRUE.createSimpleNode(this);
+				Edges.PREDICATE.createSimpleEdge(this, resultNode, null, trueNode);
+			}
+			else {		// FIXME ?? do includes() here explicitly
+				resultNode.destroy();
+			}
+			//			}
+		}
+		//
+		for (BottomPattern bottomPattern : bottomPatterns) {
+			for (@SuppressWarnings("null")@NonNull RealizedVariable realizedVariable : bottomPattern.getRealizedVariable()) {
+				/*assignedNodes.add(*/Nodes.REALIZED_VARIABLE.createSimpleNode(this, realizedVariable);
+			}
+			//			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
+			//				/*assignedNodes.add(*/Nodes.UNREALIZED_VARIABLE.createSimpleNode(this, variable);
+			//			}
+		}
+		//
+		getHeadNodes();
+		//
+		for (BottomPattern bottomPattern : bottomPatterns) {
+			//			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
+			//				SimpleNode variableNode = getReferenceNode(variable);
+			//				OCLExpression ownedInit = variable.getOwnedInit();
+			//				if (ownedInit != null) {
+			//					SimpleNode initNode = ownedInit.accept(expressionAnalyzer);
+			//					assert initNode != null;
+			//					variable2simpleNode.put(variable, initNode);
+			//					Edges.ARGUMENT.createSimpleEdge(this, initNode, null, variableNode);
+			//					if (initNode.isConstant()) {
+			//						variableNode.mergeRole(initNode.getNodeRole());
+			//					}
+			//				}
+			//			}
+			for (@SuppressWarnings("null")@NonNull Assignment assignment : bottomPattern.getAssignment()) {
+				assignment.accept(expressionAnalyzer);
+			}
+		}
+		//
+		toGraph(new DOTStringBuilder());
+		toGraph(new GraphMLStringBuilder());
 	}
 
 	@Override
