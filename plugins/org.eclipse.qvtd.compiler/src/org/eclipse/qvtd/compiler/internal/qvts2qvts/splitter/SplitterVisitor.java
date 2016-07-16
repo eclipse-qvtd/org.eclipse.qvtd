@@ -28,6 +28,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleNavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleNode;
@@ -38,13 +39,15 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitable;
 
 public class SplitterVisitor extends AbstractVisitor<@Nullable Visitable>
 {
+	protected final @NonNull RootScheduledRegion rootRegion;
 	protected final @NonNull MultiRegion multiRegion;
 	protected final @NonNull Stage stage;
 	protected final int stageNumber;
 	protected final @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode;
 	protected final @NonNull Map<@NonNull Visitable, @NonNull Visitable> old2new = new HashMap<>();
 
-	public SplitterVisitor(@NonNull MultiRegion multiRegion, @NonNull Stage stage, int stageNumber, @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode) {
+	public SplitterVisitor(@NonNull RootScheduledRegion rootRegion, @NonNull MultiRegion multiRegion, @NonNull Stage stage, int stageNumber, @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode) {
+		this.rootRegion = rootRegion;
 		this.multiRegion = multiRegion;
 		this.stage = stage;
 		this.stageNumber = stageNumber;
@@ -110,17 +113,29 @@ public class SplitterVisitor extends AbstractVisitor<@Nullable Visitable>
 	public @Nullable Visitable visitBasicSimpleEdge(@NonNull BasicSimpleEdge oldBasicSimpleEdge) {
 		BasicSimpleEdge newBasicSimpleEdge = basicGetNew(BasicSimpleEdge.class, oldBasicSimpleEdge, false);
 		if (newBasicSimpleEdge == null) {
-			SimpleNode sourceNode = basicGetNew(SimpleNode.class, oldBasicSimpleEdge.getSource(), true);
-			if (sourceNode != null) {
+			SimpleNode newSourceNode = basicGetNew(SimpleNode.class, oldBasicSimpleEdge.getSource(), true);
+			if (newSourceNode != null) {
 				EdgeRole edgeRole = oldBasicSimpleEdge.getEdgeRole();
 				SimpleRegion newRegion = getNew(SimpleRegion.class, oldBasicSimpleEdge.getRegion());
 				String name = oldBasicSimpleEdge.getName();
-				SimpleNode targetNode = getNew(SimpleNode.class, oldBasicSimpleEdge.getTarget());
-				newBasicSimpleEdge = new BasicSimpleEdge(edgeRole, newRegion, sourceNode, name, targetNode);
-				//			for (@NonNull TypedElement typedElement : oldBasicSimpleEdge.getTypedElements()) {
-				//				newBasicSimpleEdge.addTypedElement(typedElement);
-				//			}
+				SimpleNode newTargetNode = getNew(SimpleNode.class, oldBasicSimpleEdge.getTarget());
+				newBasicSimpleEdge = new BasicSimpleEdge(edgeRole, newRegion, newSourceNode, name, newTargetNode);
 			}
+			/*			else {
+				newSourceNode = basicGetNew(SimpleNode.class, oldBasicSimpleEdge.getSource(), true);
+				if (newSourceNode != null) {
+					SimpleNode newTargetNode = getNew(SimpleNode.class, oldBasicSimpleEdge.getTarget());
+					SymbolNameBuilder s = new SymbolNameBuilder();
+					s.appendString("js_");
+					s.appendName(newTargetNode.getClassDatumAnalysis().getCompleteClass().getName());
+					SplitRegionConnection headConnection = new SplitRegionConnection(multiRegion.getSchedulerConstants(),
+						newSourceNode, newTargetNode, s);
+					if (QVTp2QVTs.CONNECTION_CREATION.isActive()) {
+						QVTp2QVTs.CONNECTION_CREATION.println("  Head NodeConnection to " + newTargetNode);
+						QVTp2QVTs.CONNECTION_CREATION.println("    from " + newSourceNode);
+					}
+				}
+			} */
 		}
 		return newBasicSimpleEdge;
 	}
@@ -164,9 +179,6 @@ public class SplitterVisitor extends AbstractVisitor<@Nullable Visitable>
 				Property source2targetProperty = oldSimpleNavigationEdge.getProperty();
 				SimpleNode targetNode = getNew(SimpleNode.class, oldSimpleNavigationEdge.getTarget());
 				newSimpleNavigationEdge = new SimpleNavigationEdge(edgeRole, newRegion, sourceNode, source2targetProperty, targetNode);
-				//			for (@NonNull TypedElement typedElement : oldSimpleNavigationEdge.getTypedElements()) {
-				//				newSimpleNavigationEdge.addTypedElement(typedElement);
-				//			}
 			}
 		}
 		return newSimpleNavigationEdge;
@@ -196,9 +208,6 @@ public class SplitterVisitor extends AbstractVisitor<@Nullable Visitable>
 			SimpleRegion newRegion = getNew(SimpleRegion.class, oldSimpleVariableNode.getRegion());
 			@NonNull VariableDeclaration variable = oldSimpleVariableNode.getVariable();
 			newSimpleVariableNode = new SimpleVariableNode(nodeRole, newRegion, variable);
-			//		for (@NonNull TypedElement typedElement : oldSimpleVariableNode.getTypedElements()) {
-			//			newSimpleVariableNode.addTypedElement(typedElement);
-			//		}
 		}
 		return newSimpleVariableNode;
 	}

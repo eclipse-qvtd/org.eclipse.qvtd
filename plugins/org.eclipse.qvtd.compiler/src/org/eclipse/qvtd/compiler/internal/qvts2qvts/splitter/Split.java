@@ -24,6 +24,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 /**
@@ -33,22 +34,22 @@ public class Split
 {
 	public static class BodySplitterVisitor extends SplitterVisitor
 	{
-		public BodySplitterVisitor(@NonNull MultiRegion multiRegion, @NonNull Stage stage, int stageNumber, @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode) {
-			super(multiRegion, stage, stageNumber, oldSourceNode2newSourceNode);
+		public BodySplitterVisitor(@NonNull RootScheduledRegion rootRegion, @NonNull MultiRegion multiRegion, @NonNull Stage stage, int stageNumber, @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode) {
+			super(rootRegion, multiRegion, stage, stageNumber, oldSourceNode2newSourceNode);
 		}
 	}
 
 	public static class HeadSplitterVisitor extends SplitterVisitor
 	{
-		public HeadSplitterVisitor(@NonNull MultiRegion multiRegion, @NonNull Stage stage, int stageNumber, @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode) {
-			super(multiRegion, stage, stageNumber, oldSourceNode2newSourceNode);
+		public HeadSplitterVisitor(@NonNull RootScheduledRegion rootRegion, @NonNull MultiRegion multiRegion, @NonNull Stage stage, int stageNumber, @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode) {
+			super(rootRegion, multiRegion, stage, stageNumber, oldSourceNode2newSourceNode);
 		}
 	}
 
 	public static class LoopSplitterVisitor extends SplitterVisitor
 	{
-		public LoopSplitterVisitor(@NonNull MultiRegion multiRegion, @NonNull Stage stage, int stageNumber, @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode) {
-			super(multiRegion, stage, stageNumber, oldSourceNode2newSourceNode);
+		public LoopSplitterVisitor(@NonNull RootScheduledRegion rootRegion, @NonNull MultiRegion multiRegion, @NonNull Stage stage, int stageNumber, @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode) {
+			super(rootRegion, multiRegion, stage, stageNumber, oldSourceNode2newSourceNode);
 		}
 	}
 
@@ -112,7 +113,7 @@ public class Split
 		}
 	}
 
-	public void install(@NonNull MultiRegion multiRegion) {
+	public void install(@NonNull RootScheduledRegion rootRegion, @NonNull MultiRegion multiRegion) {
 		Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode = new HashMap<>();
 		Region oldRegion = splitter.getRegion();
 		//		Iterable<@NonNull Node> newHeadNodes = stages.get(0).getHeadNodes();
@@ -129,7 +130,7 @@ public class Split
 		//
 		Stage nextStage = stageIterator.hasNext() ? stageIterator.next() : null;
 		assert nextStage instanceof HeadStage;
-		SplitterVisitor visitor = new HeadSplitterVisitor(multiRegion, nextStage, ++stageNumber, oldSourceNode2newSourceNode);
+		SplitterVisitor visitor = new HeadSplitterVisitor(rootRegion, multiRegion, nextStage, ++stageNumber, oldSourceNode2newSourceNode);
 		AbstractRegion stageRegion = visitor.createRegion(oldRegion);
 		multiRegion.addActiveRegion(stageRegion);
 
@@ -149,7 +150,7 @@ public class Split
 		//	LoopStage
 		//
 		while (nextStage instanceof HeadedStage) {
-			visitor = new LoopSplitterVisitor(multiRegion, nextStage, ++stageNumber, oldSourceNode2newSourceNode);
+			visitor = new LoopSplitterVisitor(rootRegion, multiRegion, nextStage, ++stageNumber, oldSourceNode2newSourceNode);
 			stageRegion = visitor.createRegion(oldRegion);
 			multiRegion.addActiveRegion(stageRegion);
 			nextStage = stageIterator.hasNext() ? stageIterator.next() : null;
@@ -169,7 +170,7 @@ public class Split
 		//	Body stage
 		//
 		assert nextStage instanceof BodyStage;
-		visitor = new BodySplitterVisitor(multiRegion, nextStage, ++stageNumber, oldSourceNode2newSourceNode);
+		visitor = new BodySplitterVisitor(rootRegion, multiRegion, nextStage, ++stageNumber, oldSourceNode2newSourceNode);
 		stageRegion = visitor.createRegion(oldRegion);
 		multiRegion.addActiveRegion(stageRegion);
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {

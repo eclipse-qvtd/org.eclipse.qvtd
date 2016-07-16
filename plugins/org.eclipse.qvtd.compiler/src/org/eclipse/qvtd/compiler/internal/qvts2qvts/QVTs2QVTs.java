@@ -99,22 +99,22 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 	}
 
-	protected void splitMultiHeadedRegions(@NonNull MultiRegion multiRegion) {
+	protected void splitMultiHeadedRegions(@NonNull RootScheduledRegion rootRegion, @NonNull MultiRegion multiRegion) {
 		for (@NonNull Region region : Lists.newArrayList(multiRegion.getActiveRegions())) {
 			if (region instanceof SimpleMappingRegion) {
 				Splitter splitter = new Splitter((@NonNull SimpleMappingRegion) region);
 				Split split = splitter.split();
 				if (split != null) {
-					split.install(multiRegion);
+					split.install(rootRegion, multiRegion);
 				}
 			}
 		}
 	}
 
 	public @NonNull RootScheduledRegion transform(@NonNull MultiRegion multiRegion) {
-		splitMultiHeadedRegions(multiRegion);
 		List<@NonNull Region> activeRegions = multiRegion.getActiveRegions();
 		RootScheduledRegion rootRegion = createRootRegion(activeRegions);
+		splitMultiHeadedRegions(rootRegion, multiRegion);
 		rootRegion.createSchedule();
 		createSchedule(rootRegion);
 		return rootRegion;
