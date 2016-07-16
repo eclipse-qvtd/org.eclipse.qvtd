@@ -15,7 +15,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 /**
- * RealizedVariableNode provides the non-terminal analysis and status of a Class Property from which further navigations
+ * SimpleVariableNode provides the non-terminal analysis and status of a Variable from which navigations
  * are possible. The analysis is associated with a particular sourceVariable from which a variety of further node analyses
  * are reachable by traversing some Property.
  */

@@ -652,26 +652,41 @@ public class Nodes
 			if (resolvedIsClassNode == null) {
 				resolvedIsClassNode = !(letVariable.getType() instanceof DataType);
 			}
-			if (inNode.isNavigable()) {
-				if (inNode.isConstant()) {
-					return (resolvedIsClassNode ? CONSTANT_NAVIGABLE_CLASS_LET : CONSTANT_NAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
+			AbstractVariableNodeRole nodeRole = getNodeRole(inNode, resolvedIsClassNode);
+			return nodeRole.createSimpleNode(region, letVariable);
+		}
+
+		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleMappingRegion region, @NonNull String name, @NonNull SimpleNode sourceNode) {
+			ClassDatumAnalysis classDatumAnalysis = sourceNode.getClassDatumAnalysis();
+			Boolean resolvedIsClassNode = isClassNode;
+			if (resolvedIsClassNode == null) {
+				resolvedIsClassNode = !(classDatumAnalysis.getCompleteClass().getPrimaryClass() instanceof DataType);
+			}
+			AbstractVariableNodeRole nodeRole = getNodeRole(sourceNode, resolvedIsClassNode);
+			return nodeRole.createSimpleNode(region, name, classDatumAnalysis);
+		}
+
+		protected @NonNull AbstractVariableNodeRole getNodeRole(@NonNull SimpleNode sourceNode, boolean resolvedIsClassNode) {
+			if (sourceNode.isNavigable()) {
+				if (sourceNode.isConstant()) {
+					return resolvedIsClassNode ? CONSTANT_NAVIGABLE_CLASS_LET : CONSTANT_NAVIGABLE_ATTRIBUTE_LET;
 				}
-				else if (inNode.isLoaded()) {
-					return (resolvedIsClassNode ? LOADED_NAVIGABLE_CLASS_LET : LOADED_NAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
+				else if (sourceNode.isLoaded()) {
+					return resolvedIsClassNode ? LOADED_NAVIGABLE_CLASS_LET : LOADED_NAVIGABLE_ATTRIBUTE_LET;
 				}
 				else {
-					return (resolvedIsClassNode ? PREDICATED_NAVIGABLE_CLASS_LET : PREDICATED_NAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
+					return resolvedIsClassNode ? PREDICATED_NAVIGABLE_CLASS_LET : PREDICATED_NAVIGABLE_ATTRIBUTE_LET;
 				}
 			}
 			else {
-				if (inNode.isConstant()) {
-					return (resolvedIsClassNode ? CONSTANT_UNNAVIGABLE_CLASS_LET : CONSTANT_UNNAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
+				if (sourceNode.isConstant()) {
+					return resolvedIsClassNode ? CONSTANT_UNNAVIGABLE_CLASS_LET : CONSTANT_UNNAVIGABLE_ATTRIBUTE_LET;
 				}
-				else if (inNode.isLoaded()) {
-					return (resolvedIsClassNode ? LOADED_UNNAVIGABLE_CLASS_LET : LOADED_UNNAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
+				else if (sourceNode.isLoaded()) {
+					return resolvedIsClassNode ? LOADED_UNNAVIGABLE_CLASS_LET : LOADED_UNNAVIGABLE_ATTRIBUTE_LET;
 				}
 				else {
-					return (resolvedIsClassNode ? PREDICATED_UNNAVIGABLE_CLASS_LET : PREDICATED_UNNAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
+					return resolvedIsClassNode ? PREDICATED_UNNAVIGABLE_CLASS_LET : PREDICATED_UNNAVIGABLE_ATTRIBUTE_LET;
 				}
 			}
 		}
