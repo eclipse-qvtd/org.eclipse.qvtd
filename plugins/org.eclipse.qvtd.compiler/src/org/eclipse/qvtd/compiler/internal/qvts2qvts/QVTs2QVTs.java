@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleMappingRegion;
+import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Split;
@@ -32,6 +34,14 @@ import com.google.common.collect.Lists;
  */
 public class QVTs2QVTs extends QVTimperativeHelper
 {
+	public static final @NonNull TracingOption EDGE_ORDER = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/edgeOrder");
+	public static final @NonNull TracingOption REGION_CYCLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/regionCycles");
+	public static final @NonNull TracingOption REGION_DEPTH = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/regionDepth");
+	//	public static final @NonNull TracingOption REGION_LOCALITY = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/regionLocality");
+	public static final @NonNull TracingOption REGION_ORDER = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/regionOrder");
+	public static final @NonNull TracingOption REGION_STACK = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/regionStack");
+	public static final @NonNull TracingOption REGION_TRAVERSAL = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/regionTraversal");
+
 	protected final @NonNull String rootName;
 
 	public QVTs2QVTs(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull String rootName) {

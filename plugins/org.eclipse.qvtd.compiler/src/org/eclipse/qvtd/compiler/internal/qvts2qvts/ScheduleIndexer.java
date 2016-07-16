@@ -76,14 +76,14 @@ public class ScheduleIndexer extends ScheduleState
 		//		Collections.sort(partiallyBlockedConnectionsList, NameUtil.NAMEABLE_COMPARATOR);
 		List<@NonNull Connection> blockedConnectionsList = Lists.newArrayList(getBlockedConnections());
 		Collections.sort(blockedConnectionsList, NameUtil.NAMEABLE_COMPARATOR);
-		if (QVTp2QVTs.REGION_ORDER.isActive()) {
-			QVTp2QVTs.REGION_ORDER.println("      unblocked regions:");
+		if (QVTs2QVTs.REGION_ORDER.isActive()) {
+			QVTs2QVTs.REGION_ORDER.println("      unblocked regions:");
 			for (@NonNull Region region : unblockedRegionsList) {
-				QVTp2QVTs.REGION_ORDER.println("        " + region);
+				QVTs2QVTs.REGION_ORDER.println("        " + region);
 			}
-			QVTp2QVTs.REGION_ORDER.println("      callableRegion : blockedConnectionCount:");
+			QVTs2QVTs.REGION_ORDER.println("      callableRegion : blockedConnectionCount:");
 			for (@NonNull Region region : callableRegionsList) {
-				QVTp2QVTs.REGION_ORDER.println("        " + region + " : " + getBlockedConnectionCount(region));
+				QVTs2QVTs.REGION_ORDER.println("        " + region + " : " + getBlockedConnectionCount(region));
 				/*				List<@NonNull DatumConnection> incomingConnections = getIncomingConnections(region);
 				assert incomingConnections != null;
 				for (@NonNull DatumConnection connection : incomingConnections) {
@@ -132,17 +132,17 @@ public class ScheduleIndexer extends ScheduleState
 							+ connection.getSourceDisplayNames());
 				} */
 			}
-			QVTp2QVTs.REGION_ORDER.println("      mandatory blocked regions:");
+			QVTs2QVTs.REGION_ORDER.println("      mandatory blocked regions:");
 			for (@NonNull Region region : mandatoryBlockedRegionsList) {
-				QVTp2QVTs.REGION_ORDER.println("        " + region);
+				QVTs2QVTs.REGION_ORDER.println("        " + region);
 			}
 			//			Scheduler.REGION_ORDER.println("      partially blocked connections:");
 			//			for (Connection connection : partiallyBlockedConnectionsList) {
 			//				Scheduler.REGION_ORDER.println("        " + connection);
 			//			}
-			QVTp2QVTs.REGION_ORDER.println("      blocked connections:");
+			QVTs2QVTs.REGION_ORDER.println("      blocked connections:");
 			for (@NonNull Connection connection : blockedConnectionsList) {
-				QVTp2QVTs.REGION_ORDER.println("        " + connection);
+				QVTs2QVTs.REGION_ORDER.println("        " + connection);
 			}
 		}
 		//		int debugRegionSize = region2incomingConnections.size();

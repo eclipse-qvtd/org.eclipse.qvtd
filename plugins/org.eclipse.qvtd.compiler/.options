@@ -36,17 +36,6 @@ org.eclipse.qvtd.compiler/qvtp2qvts/dump/inputModel2domainUsage=false
 # Turn on dump of the possible containing properties for each class 
 org.eclipse.qvtd.compiler/qvtp2qvts/dump/property2consumingClass=false
 
-# Turn on tracing of the region cycle resolution 
-org.eclipse.qvtd.compiler/qvtp2qvts/regionCycles=false
-# Turn on tracing of the region depth computation 
-org.eclipse.qvtd.compiler/qvtp2qvts/regionDepth=false
-# Turn on tracing of the region order computation 
-org.eclipse.qvtd.compiler/qvtp2qvts/regionOrder=false
-# Turn on tracing of the region call stack computation 
-org.eclipse.qvtd.compiler/qvtp2qvts/regionStack=false
-# Turn on tracing of the region traversal computation 
-org.eclipse.qvtd.compiler/qvtp2qvts/regionTraversal=false
-
 # Turn on tracing of the polled properties computation 
 org.eclipse.qvtd.compiler/qvts2qvti/polledProperties=false
 
@@ -54,6 +43,17 @@ org.eclipse.qvtd.compiler/qvts2qvti/polledProperties=false
 org.eclipse.qvtd.compiler/qvtr2qvtc/synthesize=false
 # Turn on tracing of the QVTr variables analysis 
 org.eclipse.qvtd.compiler/qvtr2qvtc/variables=false
+
+# Turn on tracing of the region cycle resolution 
+org.eclipse.qvtd.compiler/qvts2qvts/regionCycles=false
+# Turn on tracing of the region depth computation 
+org.eclipse.qvtd.compiler/qvts2qvts/regionDepth=false
+# Turn on tracing of the region order computation 
+org.eclipse.qvtd.compiler/qvts2qvts/regionOrder=false
+# Turn on tracing of the region call stack computation 
+org.eclipse.qvtd.compiler/qvts2qvts/regionStack=false
+# Turn on tracing of the region traversal computation 
+org.eclipse.qvtd.compiler/qvts2qvts/regionTraversal=false
 
 # Turn on tracing of the analysis for splitting of multi-headed regions
 #org.eclipse.qvtd.compiler/qvtp2qvts/split/analysis=false

@@ -22,7 +22,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DatumConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 
 import com.google.common.collect.Iterables;
 
@@ -128,7 +127,7 @@ public class CallTreeBuilder
 	 * region's incomingConnections are accessible from a commonRegion on the callStack.
 	 */
 	protected void updateCallStack(@NonNull Stack<@NonNull Region> callStack, @NonNull Region region) {
-		QVTp2QVTs.REGION_STACK.println(region.getSymbolName() + " => " + callStack);
+		QVTs2QVTs.REGION_STACK.println(region.getSymbolName() + " => " + callStack);
 		//
 		//	Pop stack to commonRegion
 		//

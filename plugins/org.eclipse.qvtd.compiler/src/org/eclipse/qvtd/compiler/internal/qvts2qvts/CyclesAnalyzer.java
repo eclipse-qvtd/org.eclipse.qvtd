@@ -29,7 +29,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Symbolable;
 
 import com.google.common.collect.Iterables;
@@ -213,15 +212,15 @@ public class CyclesAnalyzer
 					}
 				}
 			}
-			if (QVTp2QVTs.REGION_CYCLES.isActive()) {
-				QVTp2QVTs.REGION_CYCLES.println(region.getName());
+			if (QVTs2QVTs.REGION_CYCLES.isActive()) {
+				QVTs2QVTs.REGION_CYCLES.println(region.getName());
 				List<@NonNull String> names = new ArrayList<@NonNull String>();
 				for (@NonNull RegionStatus regionStatus : depthlessSourceRegions) {
 					names.add(regionStatus.getRegion().getName());
 				}
 				Collections.sort(names);
 				for (@NonNull String name : names) {
-					QVTp2QVTs.REGION_CYCLES.println("  <= " + depthlessSourceRegions.size() + " " + name);
+					QVTs2QVTs.REGION_CYCLES.println("  <= " + depthlessSourceRegions.size() + " " + name);
 				}
 			}
 			if (!depthlessSourceRegions.isEmpty()) {
@@ -246,7 +245,7 @@ public class CyclesAnalyzer
 			else {
 				this.depth = newDepth;
 			}
-			QVTp2QVTs.REGION_CYCLES.println(depth + " : " + region.getName());
+			QVTs2QVTs.REGION_CYCLES.println(depth + " : " + region.getName());
 			Integer depth2 = depth;
 			assert depth2 != null;
 			for (@NonNull Region targetRegion : getNextRegions(region)) {
@@ -260,7 +259,7 @@ public class CyclesAnalyzer
 
 		private void propagateFrom(@NonNull RegionStatus sourceRegion, int sourceDepth, @NonNull List<@NonNull RegionStatus> unblockedRegionStatuses) {
 			if (depthlessSourceRegions.remove(sourceRegion)) {
-				QVTp2QVTs.REGION_CYCLES.println("    => " + depthlessSourceRegions.size() + " " + this);
+				QVTs2QVTs.REGION_CYCLES.println("    => " + depthlessSourceRegions.size() + " " + this);
 				Integer partialSourceDepth2 = partialSourceDepth;
 				if (partialSourceDepth2 == null) {
 					partialSourceDepth = partialSourceDepth2 = sourceDepth;
@@ -296,11 +295,11 @@ public class CyclesAnalyzer
 			}
 			boolean gotOne = !Sets.intersection(depthlessSourceRegions, oldRegionStatuses).isEmpty();
 			if (gotOne) {
-				QVTp2QVTs.REGION_CYCLES.println(region.getName());
+				QVTs2QVTs.REGION_CYCLES.println(region.getName());
 				for (RegionStatus oldRegionStatus : oldRegionStatuses) {
 					if (depthlessSourceRegions.remove(oldRegionStatus)) {
 						gotOne = true;
-						QVTp2QVTs.REGION_CYCLES.println("    <> " + depthlessSourceRegions.size() + " " + oldRegionStatus);
+						QVTs2QVTs.REGION_CYCLES.println("    <> " + depthlessSourceRegions.size() + " " + oldRegionStatus);
 					}
 				}
 				//				if (cyclicRegion.getDepth() == null) {
@@ -313,7 +312,7 @@ public class CyclesAnalyzer
 				//					unblockedRegionStatuses.add(this);
 				//				}
 
-				QVTp2QVTs.REGION_CYCLES.println("    <= " + depthlessSourceRegions.size() + " " + cyclicRegionStatus);
+				QVTs2QVTs.REGION_CYCLES.println("    <= " + depthlessSourceRegions.size() + " " + cyclicRegionStatus);
 			}
 		}
 
@@ -411,16 +410,16 @@ public class CyclesAnalyzer
 				assert debugNewPreviousRegions.equals(debugNewOldPreviousRegions);
 				Set<@NonNull Region> intersection = Sets.intersection(debugNewNextRegions, debugNewOldNextRegions);
 				for (@NonNull Region region : Sets.difference(debugNewNextRegions, debugNewOldNextRegions)) {
-					QVTp2QVTs.REGION_CYCLES.println("Missing New Next Region: " + region);
+					QVTs2QVTs.REGION_CYCLES.println("Missing New Next Region: " + region);
 				}
 				for (@NonNull Region region : Sets.difference(debugNewOldNextRegions, debugNewNextRegions)) {
-					QVTp2QVTs.REGION_CYCLES.println("Missing New Old Next Region: " + region);
+					QVTs2QVTs.REGION_CYCLES.println("Missing New Old Next Region: " + region);
 				}
 				for (@NonNull Region region : debugNewNextRegions) {
-					QVTp2QVTs.REGION_CYCLES.println("New Next Region: " + region + " " + intersection.contains(region));
+					QVTs2QVTs.REGION_CYCLES.println("New Next Region: " + region + " " + intersection.contains(region));
 				}
 				for (@NonNull Region region : debugNewOldNextRegions) {
-					QVTp2QVTs.REGION_CYCLES.println("New Old Next Region: " + region + " " + intersection.contains(region));
+					QVTs2QVTs.REGION_CYCLES.println("New Old Next Region: " + region + " " + intersection.contains(region));
 				}
 				assert debugNewNextRegions.equals(debugNewOldNextRegions);
 
@@ -528,7 +527,7 @@ public class CyclesAnalyzer
 			}
 		}
 		if (cyclesSet == null) {
-			QVTp2QVTs.REGION_CYCLES.println("No cycles found");
+			QVTs2QVTs.REGION_CYCLES.println("No cycles found");
 			return null;
 		}
 		//
@@ -536,10 +535,10 @@ public class CyclesAnalyzer
 		//
 		List<@NonNull RegionCycle> cyclesList = new ArrayList<>(cyclesSet);
 		Collections.sort(cyclesList, RegionCycle.COMPARATOR);
-		if (QVTp2QVTs.REGION_CYCLES.isActive()) {
-			QVTp2QVTs.REGION_CYCLES.println("cycles ");
+		if (QVTs2QVTs.REGION_CYCLES.isActive()) {
+			QVTs2QVTs.REGION_CYCLES.println("cycles ");
 			for (@NonNull RegionCycle cycle : cyclesList) {
-				QVTp2QVTs.REGION_CYCLES.println("    " + cycle.toString());
+				QVTs2QVTs.REGION_CYCLES.println("    " + cycle.toString());
 			}
 		}
 		RegionCycle smallestCycle = cyclesList.get(0);
@@ -558,7 +557,7 @@ public class CyclesAnalyzer
 			s.append(region);
 			first = false;
 		}
-		QVTp2QVTs.REGION_CYCLES.println(s.toString());
+		QVTs2QVTs.REGION_CYCLES.println(s.toString());
 	}
 
 	private void showAll(@NonNull String prefix, @NonNull Map<@NonNull Region, @NonNull List<@NonNull NodeConnection>> region2connections) {
@@ -577,13 +576,13 @@ public class CyclesAnalyzer
 				s.append(connection);
 				first = false;
 			}
-			QVTp2QVTs.REGION_CYCLES.println(s.toString());
+			QVTs2QVTs.REGION_CYCLES.println(s.toString());
 		}
 	}
 
 	private void showNew(@NonNull CyclicScheduledRegion cyclicRegion) {
 		Set<@NonNull NodeConnection> externalConnections = new HashSet<@NonNull NodeConnection>();
-		QVTp2QVTs.REGION_CYCLES.println("New Region: " + cyclicRegion);
+		QVTs2QVTs.REGION_CYCLES.println("New Region: " + cyclicRegion);
 		@NonNull
 		List<@NonNull Node> sortedHeadNodes = Lists.newArrayList(cyclicRegion.getHeadNodes());
 		Collections.sort(sortedHeadNodes, NameUtil.NAMEABLE_COMPARATOR);
@@ -593,14 +592,14 @@ public class CyclesAnalyzer
 			s.append(headNode);
 			s.append("  ");
 			s.append(headNode.getIncomingConnection());
-			QVTp2QVTs.REGION_CYCLES.println(s.toString());
+			QVTs2QVTs.REGION_CYCLES.println(s.toString());
 		}
 		Iterables.addAll(externalConnections, cyclicRegion.getIncomingPassedConnections());
 		Iterables.addAll(externalConnections, cyclicRegion.getOutgoingPassedConnections());
 		List<@NonNull NodeConnection> sortedExternalConnections = Lists.newArrayList(externalConnections);
 		Collections.sort(sortedExternalConnections, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull NodeConnection externalConnection : sortedExternalConnections) {
-			QVTp2QVTs.REGION_CYCLES.println("New Connection: " + externalConnection);
+			QVTs2QVTs.REGION_CYCLES.println("New Connection: " + externalConnection);
 		}
 	}
 
@@ -611,7 +610,7 @@ public class CyclesAnalyzer
 		Collections.sort(sortedOldRegions, SymbolableComparator.INSTANCE);
 		Set<@NonNull NodeConnection> debugOldConnections = new HashSet<@NonNull NodeConnection>();
 		for (@NonNull Region debugOldRegion : sortedOldRegions) {
-			QVTp2QVTs.REGION_CYCLES.println("Old Region: " + debugOldRegion);
+			QVTs2QVTs.REGION_CYCLES.println("Old Region: " + debugOldRegion);
 			Iterables.addAll(debugOldConnections, debugOldRegion.getIncomingPassedConnections());
 			Iterables.addAll(debugOldConnections, debugOldRegion.getOutgoingPassedConnections());
 		}
@@ -622,7 +621,7 @@ public class CyclesAnalyzer
 		Map<@NonNull Region, @NonNull List<@NonNull NodeConnection>> allInternalTargetRegions = new HashMap<@NonNull Region, @NonNull List<@NonNull NodeConnection>>();
 		Map<@NonNull Region, @NonNull List<@NonNull NodeConnection>> allExternalTargetRegions = new HashMap<@NonNull Region, @NonNull List<@NonNull NodeConnection>>();
 		for (@NonNull NodeConnection debugOldConnection : sortedOldConnections) {
-			QVTp2QVTs.REGION_CYCLES.println("Old Connection: " + debugOldConnection);
+			QVTs2QVTs.REGION_CYCLES.println("Old Connection: " + debugOldConnection);
 
 			Set<@NonNull Region> internalSourceRegions = Sets.newHashSet(debugOldConnection.getSourceRegions());
 			internalSourceRegions.retainAll(debugOldRegions);
