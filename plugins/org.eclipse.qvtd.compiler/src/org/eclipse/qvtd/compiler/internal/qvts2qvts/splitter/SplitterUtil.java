@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
@@ -60,12 +61,33 @@ class SplitterUtil
 	private static void computeComputableTargetNodes(@NonNull Set<@NonNull Node> computableTargetNodes, @NonNull Node sourceNode, @NonNull Set<@NonNull Node> unresolvedOperationNodes) {
 		if (computableTargetNodes.add(sourceNode)) {
 			for (@NonNull Edge edge : sourceNode.getOutgoingEdges()) {
-				if (edge.isComputation() || (edge.isNavigation() && !edge.isNavigable())) {
+				if (edge.isComputation()) {
+					Node targetNode = edge.getTarget();
+					if (targetNode.isRealized() && targetNode.isOperation()) {
+						unresolvedOperationNodes.add(targetNode);		// Keys require an all-input check.
+					}
+					else if (targetNode.isOperation()) {
+						computeComputableTargetNodes(computableTargetNodes, targetNode, unresolvedOperationNodes);
+					}
+					else {
+						CompleteClass sourceCompleteClass = sourceNode.getCompleteClass();
+						CompleteClass targetCompleteClass = targetNode.getCompleteClass();
+						if (sourceCompleteClass.conformsTo(targetCompleteClass)) {
+							computeComputableTargetNodes(computableTargetNodes, targetNode, unresolvedOperationNodes);
+						}
+						else {
+							assert "«includes»".equals(edge.getName());
+							// Presumably a many-to-one requiring an iteration.
+						}
+					}
+				}
+				else if (edge.isNavigation() && !edge.isNavigable()) {
 					Node targetNode = edge.getTarget();
 					if (targetNode.isRealized() && targetNode.isOperation()) {
 						unresolvedOperationNodes.add(targetNode);		// Keys require an all-input check.
 					}
 					else {		// FIXME ?? exclude computation of many that is consumed as not-many
+						//						targetNode.get
 						computeComputableTargetNodes(computableTargetNodes, targetNode, unresolvedOperationNodes);
 					}
 				}

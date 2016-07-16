@@ -219,6 +219,11 @@ class BodyStage extends AbstractStage
 	}
 
 	@Override
+	public @NonNull Iterable<@NonNull Stage> getSuccessors() {
+		return Collections.emptyList();
+	}
+
+	@Override
 	protected boolean isLive(@NonNull Node node, @NonNull Set<@NonNull Node> deadNodes) {
 		if (node.isRealized()) {
 			return true;		// Realized node is needed

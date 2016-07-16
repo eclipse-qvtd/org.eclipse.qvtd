@@ -137,6 +137,15 @@ abstract class AbstractGroup implements Group
 		return name;
 	}
 
+	public @Nullable Edge getPrecedingEdge() {
+		Set<@NonNull Edge> predecessors = edge2predecessors.keySet();
+		if (predecessors.size() == 0) {
+			return null;
+		}
+		assert predecessors.size() == 1;
+		return predecessors.iterator().next();
+	}
+
 	public @NonNull Iterable<@NonNull AbstractGroup> getPredecessors() {
 		return predecessor2edges.keySet();
 	}

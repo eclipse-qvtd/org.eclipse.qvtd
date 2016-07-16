@@ -22,9 +22,11 @@ interface Stage
 {
 	void check();
 	void debug();
+	//	@Nullable Edge getEdge();
 	@NonNull Iterable<@NonNull Node> getHeadNodes();
 	@Nullable Node getIteratedNode();
 	@Nullable Node getIteratorNode();
 	@NonNull Iterable<@NonNull Node> getOtherNodes() ;
+	@NonNull Iterable<@NonNull Stage> getSuccessors();
 	void toString(@NonNull StringBuilder s, int depth);
 }

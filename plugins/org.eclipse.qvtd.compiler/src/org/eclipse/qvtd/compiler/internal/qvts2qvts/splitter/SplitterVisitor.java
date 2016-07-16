@@ -41,16 +41,21 @@ public class SplitterVisitor extends AbstractVisitor<@Nullable Visitable>
 	protected final @NonNull MultiRegion multiRegion;
 	protected final @NonNull Stage stage;
 	protected final int stageNumber;
+	protected final @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode;
 	protected final @NonNull Map<@NonNull Visitable, @NonNull Visitable> old2new = new HashMap<>();
 
-	public SplitterVisitor(@NonNull MultiRegion multiRegion, @NonNull Stage stage, int stageNumber) {
+	public SplitterVisitor(@NonNull MultiRegion multiRegion, @NonNull Stage stage, int stageNumber, @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode) {
 		this.multiRegion = multiRegion;
 		this.stage = stage;
 		this.stageNumber = stageNumber;
+		this.oldSourceNode2newSourceNode = oldSourceNode2newSourceNode;
 	}
 
-	protected <@NonNull T extends Visitable> @Nullable T basicGetNew(@NonNull Class<T> returnClass, @NonNull Visitable oldVisitable) {
+	protected <@NonNull T extends Visitable> @Nullable T basicGetNew(@NonNull Class<T> returnClass, @NonNull Visitable oldVisitable, boolean useExternals) {
 		Visitable newVisitable = old2new.get(oldVisitable);
+		if ((newVisitable == null) && useExternals) {
+			newVisitable = oldSourceNode2newSourceNode.get(oldVisitable);
+		}
 		if (newVisitable == null) {
 			return null;
 		}
@@ -59,6 +64,25 @@ public class SplitterVisitor extends AbstractVisitor<@Nullable Visitable>
 		}
 		@SuppressWarnings("unchecked") T castVisitable = (T) newVisitable;
 		return castVisitable;
+	}
+
+	public @NonNull AbstractRegion createRegion(@NonNull Region oldRegion) {
+		AbstractRegion newRegion = create(AbstractRegion.class, oldRegion);
+		/**
+		 * Accumulate the mappings for sources of edges to successors.
+		 */
+		for (@NonNull Stage successor : stage.getSuccessors()) {
+			for (@NonNull Node headNode : successor.getHeadNodes()) {
+				for (@NonNull Edge edge : headNode.getIncomingEdges()) {
+					Node oldSourceNode = edge.getSource();
+					Node newSourceNode = basicGetNew(Node.class, oldSourceNode, false);
+					if (newSourceNode != null) {
+						oldSourceNode2newSourceNode.put(oldSourceNode, newSourceNode);
+					}
+				}
+			}
+		}
+		return newRegion;
 	}
 
 	public void extend(@NonNull AbstractRegion stageRegion, @NonNull Stage nextStage, @NonNull Region oldRegion) {
@@ -78,19 +102,25 @@ public class SplitterVisitor extends AbstractVisitor<@Nullable Visitable>
 		return castVisitable;
 	}
 
+	public @NonNull Stage getStage() {
+		return stage;
+	}
+
 	@Override
 	public @Nullable Visitable visitBasicSimpleEdge(@NonNull BasicSimpleEdge oldBasicSimpleEdge) {
-		BasicSimpleEdge newBasicSimpleEdge = basicGetNew(BasicSimpleEdge.class, oldBasicSimpleEdge);
+		BasicSimpleEdge newBasicSimpleEdge = basicGetNew(BasicSimpleEdge.class, oldBasicSimpleEdge, false);
 		if (newBasicSimpleEdge == null) {
-			EdgeRole edgeRole = oldBasicSimpleEdge.getEdgeRole();
-			SimpleRegion newRegion = getNew(SimpleRegion.class, oldBasicSimpleEdge.getRegion());
-			SimpleNode sourceNode = getNew(SimpleNode.class, oldBasicSimpleEdge.getSource());
-			String name = oldBasicSimpleEdge.getName();
-			SimpleNode targetNode = getNew(SimpleNode.class, oldBasicSimpleEdge.getTarget());
-			newBasicSimpleEdge = new BasicSimpleEdge(edgeRole, newRegion, sourceNode, name, targetNode);
-			//			for (@NonNull TypedElement typedElement : oldBasicSimpleEdge.getTypedElements()) {
-			//				newBasicSimpleEdge.addTypedElement(typedElement);
-			//			}
+			SimpleNode sourceNode = basicGetNew(SimpleNode.class, oldBasicSimpleEdge.getSource(), true);
+			if (sourceNode != null) {
+				EdgeRole edgeRole = oldBasicSimpleEdge.getEdgeRole();
+				SimpleRegion newRegion = getNew(SimpleRegion.class, oldBasicSimpleEdge.getRegion());
+				String name = oldBasicSimpleEdge.getName();
+				SimpleNode targetNode = getNew(SimpleNode.class, oldBasicSimpleEdge.getTarget());
+				newBasicSimpleEdge = new BasicSimpleEdge(edgeRole, newRegion, sourceNode, name, targetNode);
+				//			for (@NonNull TypedElement typedElement : oldBasicSimpleEdge.getTypedElements()) {
+				//				newBasicSimpleEdge.addTypedElement(typedElement);
+				//			}
+			}
 		}
 		return newBasicSimpleEdge;
 	}
@@ -113,8 +143,8 @@ public class SplitterVisitor extends AbstractVisitor<@Nullable Visitable>
 			old2new.put(oldNode, newNode);
 		}
 		for (@NonNull Edge oldEdge : oldRegion.getEdges()) {
-			Node newSource = basicGetNew(Node.class, oldEdge.getSource());
-			Node newTarget = basicGetNew(Node.class, oldEdge.getTarget());
+			Node newSource = basicGetNew(Node.class, oldEdge.getSource(), true);
+			Node newTarget = basicGetNew(Node.class, oldEdge.getTarget(), false);
 			if ((newSource != null) && (newTarget != null)) {
 				Edge newEdge = create(Edge.class, oldEdge);
 				old2new.put(oldEdge, newEdge);
@@ -125,24 +155,26 @@ public class SplitterVisitor extends AbstractVisitor<@Nullable Visitable>
 
 	@Override
 	public @Nullable Visitable visitSimpleNavigationEdge(@NonNull SimpleNavigationEdge oldSimpleNavigationEdge) {
-		SimpleNavigationEdge newSimpleNavigationEdge = basicGetNew(SimpleNavigationEdge.class, oldSimpleNavigationEdge);
+		SimpleNavigationEdge newSimpleNavigationEdge = basicGetNew(SimpleNavigationEdge.class, oldSimpleNavigationEdge, false);
 		if (newSimpleNavigationEdge == null) {
-			EdgeRole.Navigation edgeRole = oldSimpleNavigationEdge.getEdgeRole();
-			SimpleRegion newRegion = getNew(SimpleRegion.class, oldSimpleNavigationEdge.getRegion());
-			SimpleNode sourceNode = getNew(SimpleNode.class, oldSimpleNavigationEdge.getSource());
-			Property source2targetProperty = oldSimpleNavigationEdge.getProperty();
-			SimpleNode targetNode = getNew(SimpleNode.class, oldSimpleNavigationEdge.getTarget());
-			newSimpleNavigationEdge = new SimpleNavigationEdge(edgeRole, newRegion, sourceNode, source2targetProperty, targetNode);
-			//			for (@NonNull TypedElement typedElement : oldSimpleNavigationEdge.getTypedElements()) {
-			//				newSimpleNavigationEdge.addTypedElement(typedElement);
-			//			}
+			SimpleNode sourceNode = basicGetNew(SimpleNode.class, oldSimpleNavigationEdge.getSource(), true);
+			if (sourceNode != null) {
+				EdgeRole.Navigation edgeRole = oldSimpleNavigationEdge.getEdgeRole();
+				SimpleRegion newRegion = getNew(SimpleRegion.class, oldSimpleNavigationEdge.getRegion());
+				Property source2targetProperty = oldSimpleNavigationEdge.getProperty();
+				SimpleNode targetNode = getNew(SimpleNode.class, oldSimpleNavigationEdge.getTarget());
+				newSimpleNavigationEdge = new SimpleNavigationEdge(edgeRole, newRegion, sourceNode, source2targetProperty, targetNode);
+				//			for (@NonNull TypedElement typedElement : oldSimpleNavigationEdge.getTypedElements()) {
+				//				newSimpleNavigationEdge.addTypedElement(typedElement);
+				//			}
+			}
 		}
 		return newSimpleNavigationEdge;
 	}
 
 	@Override
 	public @NonNull SimpleTypedNode visitSimpleTypedNode(@NonNull SimpleTypedNode oldSimpleTypedNode) {
-		SimpleTypedNode newSimpleTypedNode = basicGetNew(SimpleTypedNode.class, oldSimpleTypedNode);
+		SimpleTypedNode newSimpleTypedNode = basicGetNew(SimpleTypedNode.class, oldSimpleTypedNode, true);
 		if (newSimpleTypedNode == null) {
 			NodeRole nodeRole = oldSimpleTypedNode.getNodeRole();
 			SimpleRegion newRegion = getNew(SimpleRegion.class, oldSimpleTypedNode.getRegion());
@@ -158,7 +190,7 @@ public class SplitterVisitor extends AbstractVisitor<@Nullable Visitable>
 
 	@Override
 	public @NonNull SimpleVariableNode visitSimpleVariableNode(@NonNull SimpleVariableNode oldSimpleVariableNode) {
-		SimpleVariableNode newSimpleVariableNode = basicGetNew(SimpleVariableNode.class, oldSimpleVariableNode);
+		SimpleVariableNode newSimpleVariableNode = basicGetNew(SimpleVariableNode.class, oldSimpleVariableNode, true);
 		if (newSimpleVariableNode == null) {
 			NodeRole nodeRole = oldSimpleVariableNode.getNodeRole();
 			SimpleRegion newRegion = getNew(SimpleRegion.class, oldSimpleVariableNode.getRegion());

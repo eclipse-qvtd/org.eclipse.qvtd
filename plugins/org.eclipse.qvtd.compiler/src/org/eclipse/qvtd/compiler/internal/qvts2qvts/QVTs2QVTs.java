@@ -95,7 +95,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				Splitter splitter = new Splitter((@NonNull SimpleMappingRegion) region);
 				Split split = splitter.split();
 				if (split != null) {
-					//					split.install(multiRegion);
+					split.install(multiRegion);
 				}
 			}
 		}

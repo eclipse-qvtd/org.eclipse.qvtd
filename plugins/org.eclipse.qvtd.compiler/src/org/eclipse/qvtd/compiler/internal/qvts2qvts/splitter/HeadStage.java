@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+
 import com.google.common.collect.Iterables;
 
 /**
@@ -27,6 +28,9 @@ class HeadStage extends HeadedStage
 
 	@Override
 	protected boolean isLive(@NonNull Node node, @NonNull Set<@NonNull Node> deadNodes) {
+		if (node.isLoaded()) {
+			return true;		// Don't discard predicates
+		}
 		Iterable<@NonNull SimpleGroup> reachableSimpleGroups = splitter.basicGetReachableSimpleGroups(node);
 		if ((reachableSimpleGroups != null) && (Iterables.size(reachableSimpleGroups) > 1)) {
 			return true;		// Group intersections must be live.

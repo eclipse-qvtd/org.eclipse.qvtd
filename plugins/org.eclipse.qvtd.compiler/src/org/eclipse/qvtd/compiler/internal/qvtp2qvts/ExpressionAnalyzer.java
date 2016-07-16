@@ -131,10 +131,9 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 	private @NonNull SimpleNode analyzeOperationCallExp_includes(@NonNull SimpleNode sourceNode, @NonNull OperationCallExp operationCallExp) {
 		if (sourceNode.isOperation()) {
-			//			SimpleNode stepNode = createStepNode("includes", (CallExp) sourceNode.getTypedElements().iterator().next(), sourceNode);
-			SimpleNode stepNode = createLetNode("includes", sourceNode);
-			createResultEdge(sourceNode, stepNode);
-			sourceNode = stepNode;
+			SimpleNode iteratedNode = createLetNode("includes", sourceNode);
+			createResultEdge(sourceNode, iteratedNode);
+			sourceNode = iteratedNode;
 		}
 		SimpleNode targetNode = analyze(operationCallExp.getOwnedArguments().get(0));
 		String name = operationCallExp.getReferredOperation().getName();
@@ -360,7 +359,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull SimpleEdge createResultEdge(@NonNull SimpleNode sourceNode, @NonNull SimpleNode targetNode) {
-		return Edges.RESULT.createSimpleEdge(context, sourceNode, null, targetNode);
+		return Edges.RESULT.createSimpleEdge(context, sourceNode, "«result»", targetNode);
 	}
 
 	protected @NonNull SimpleNode createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull SimpleNode sourceNode) {

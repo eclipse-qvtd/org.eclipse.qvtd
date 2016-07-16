@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 /**
  * A LoopStage specifies an intermediate looping part of a multi-headed region split.
@@ -65,5 +66,17 @@ class LoopStage extends HeadedStage
 			return true;
 		}
 		return super.isLive(node, deadNodes);
+	}
+
+	@Override
+	public void toString(@NonNull StringBuilder s, int depth) {
+		Edge edge = getEdge();
+		CompilerUtil.indent(s, depth);
+		s.append(edge.isComputation() ? "forward-edge : " : "reverse-edge : ");
+		s.append(edge.getName());
+		s.append(" : ");
+		s.append(edge);
+		s.append("\n");
+		super.toString(s, depth);
 	}
 }

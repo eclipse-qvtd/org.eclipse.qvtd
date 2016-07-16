@@ -26,6 +26,7 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleMappingRegion;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -81,9 +82,7 @@ public class Splitter extends SplitterAnalysis
 			for (@NonNull AbstractGroup unscheduledNavigable : unscheduledNavigables) {
 				Iterable<@NonNull AbstractGroup> predecessors = unscheduledNavigable.getPredecessors();
 				Set<@NonNull AbstractGroup> unscheduledPredecessors = Sets.newHashSet(predecessors);
-				for (@NonNull AbstractGroup scheduledNavigable : scheduledNavigables) {
-					unscheduledPredecessors.remove(scheduledNavigable);
-				}
+				CompilerUtil.removeAll(unscheduledPredecessors, scheduledNavigables);
 				if (unscheduledPredecessors.isEmpty()) {
 					boolean hasPredecessor = false;
 					for (int lastIndex = scheduledNavigables.size()-1; lastIndex >= 0; lastIndex--) {
@@ -149,6 +148,8 @@ public class Splitter extends SplitterAnalysis
 				Iterable<@NonNull SimpleGroup> sourceGroups = basicGetReachableSimpleGroups(sourceNode);
 				if (sourceGroups != null) {
 					Iterables.addAll(groups, sourceGroups);
+				}
+				else {
 					computeComputableSourceGroups(groups, sourceNode);
 				}
 			}
@@ -172,14 +173,14 @@ public class Splitter extends SplitterAnalysis
 	protected Split computeSplit(@NonNull Iterable<@NonNull AbstractGroup> rootGroups) {
 		Split split = new Split(this);
 		for (@NonNull AbstractGroup rootGroup : rootGroups) {
-			rootGroup.buildSplit(split, null, null);
+			rootGroup.buildSplit(split, null, rootGroup.getPrecedingEdge());
 		}
 		split.addBodyStage();
 		return split;
 	}
 
 	/**
-	 * Grow a navigable group seeded by thisGroup to include all simple groups that are mutually to-1 or to-N navigable from this group.
+	 * Grow a mutually navigable group seeded by thisGroup to include all simple groups that are mutually to-1 or to-N navigable from this group.
 	 */
 	protected @NonNull AbstractGroup growMutualGroup(@NonNull Iterable<@NonNull SimpleGroup> simpleGroups, @NonNull SimpleGroup thisGroup) {
 		//
@@ -231,9 +232,7 @@ public class Splitter extends SplitterAnalysis
 			for (@NonNull Node node : overlapNodes) {
 				Iterable<@NonNull SimpleGroup> overlapGroups = getReachableSimpleGroups(node);
 				assert overlapGroups != null;
-				for (@NonNull SimpleGroup overlapGroup : overlapGroups) {
-					newOverlapGroups.add(overlapGroup);
-				}
+				Iterables.addAll(newOverlapGroups, overlapGroups);
 			}
 			newOverlapGroups.removeAll(theseGroups);
 			//
@@ -264,7 +263,7 @@ public class Splitter extends SplitterAnalysis
 		//
 		Iterable<@NonNull AbstractGroup> mutualGroups = computeSimpleGroup2mutualGroup(simpleGroups);
 		//
-		//	Create a computable group for each navigable group and their mandatory precedences.
+		//	Establish the computable predecessor/successor relationshipsfor each navigable group.
 		//
 		computeComputableGroup(mutualGroups);
 		//

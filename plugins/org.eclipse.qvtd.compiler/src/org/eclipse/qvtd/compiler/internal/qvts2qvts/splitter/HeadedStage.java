@@ -44,7 +44,7 @@ abstract class HeadedStage extends AbstractStage
 	/**
 	 * Transitive closure of all successors.
 	 */
-	protected final @NonNull Set<@NonNull AbstractStage> successors = new HashSet<>();
+	protected final @NonNull Set<@NonNull Stage> successors = new HashSet<>();
 
 	protected HeadedStage(@NonNull SplitterAnalysis splitter, @Nullable HeadedStage sourceStage, @Nullable Edge edge, @NonNull SimpleGroup targetSimpleGroup) {
 		super(splitter);
@@ -113,6 +113,11 @@ abstract class HeadedStage extends AbstractStage
 	}
 
 	@Override
+	public @NonNull Iterable<@NonNull Stage> getSuccessors() {
+		return successors;
+	}
+
+	@Override
 	protected boolean isLive(@NonNull Node node, @NonNull Set<@NonNull Node> deadNodes) {
 		if (node.isHead()) {
 			return true;
@@ -134,15 +139,6 @@ abstract class HeadedStage extends AbstractStage
 
 	@Override
 	public void toString(@NonNull StringBuilder s, int depth) {
-		Edge edge2 = edge;
-		if (edge2 != null) {
-			CompilerUtil.indent(s, depth);
-			s.append(edge2.isComputation() ? "forward-edge : " : "reverse-edge : ");
-			s.append(edge2.getName());
-			s.append(" : ");
-			s.append(edge2);
-			s.append("\n");
-		}
 		CompilerUtil.indent(s, depth);
 		s.append("simple-group : ");
 		s.append(targetSimpleGroup.getName());
