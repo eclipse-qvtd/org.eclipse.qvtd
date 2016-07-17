@@ -1,0 +1,171 @@
+/*******************************************************************************
+ * Copyright (c) 2016 University of York
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - Initial API and implementation
+ *******************************************************************************/
+ 
+rule packageToSchema
+    transform p : uml!Package
+    to s : rdbms!Schema
+{
+    s.name = p.name;
+    p.name.println();
+}
+
+function uml!PrimitiveDataType primitiveToName() : String {
+    switch(self.name) {
+        case 'Integer': return 'NUMBER';
+        case 'Boolean':return 'BOOLEAN';
+        case 'String':return 'VARCHAR';
+    }
+    return '';
+}
+
+function uml!Class getAllSupers() : Set(uml!Class)
+{
+    return self.general.collect(gen | gen.getAllSupers()).flatten().including(self).asSet();
+}
+
+function uml!Class getAllSubs() : Set(uml!Class)
+{
+    return self.generalOpposite.collect(sub | sub.getAllSubs()).including(self).asSet();
+}
+
+function uml!Class getAllAttributes() : Set(uml!Attribute)
+{
+    return self.getAllSupers().collect(c | c.attributes).flatten().asSet();
+}
+
+function uml!Class getAllComplexAttributes() : Set(uml!Attribute)
+{
+    var selfCa = self.getAllAttributes().select(a | a.type.isTypeOf(uml!Class));
+    return selfCa.includingAll(selfCa
+        .collect(a | a.type.getAllComplexAttributes()).flatten()).asSet();
+}
+
+function uml!Class getAllForwards() : Set(uml!Association)
+{
+    return self.getAllSupers().flatten().collect(c | c.forward).asSet();
+}
+
+rule classToTable
+    transform c : uml!Class
+    to t : rdbms!Table, pk: rdbms!Key, pc : rdbms!Column
+{
+    guard: c.kind == 'persistent'
+
+    t.kind = 'base';
+    t.schema ::= c.namespace;
+    t.name = c.name;
+    var tableCols : Map;
+    //c.getAllAttributes().println("Class " + c.name + " ");
+    //c.getAllAttributes().select(a | a.type.isTypeOf(uml!PrimitiveDataType)).println("Class " + c.name + " prim attrs: ");
+    //c.getAllAttributes().select(a | a.type.isTypeOf(uml!PrimitiveDataType))
+    //  .collect(a | a.equivalents()).flatten().println("Class " + c.name + " prim attrs eqs: ");
+    for (colMap in c.getAllAttributes().select(a | a.type.isTypeOf(uml!PrimitiveDataType))
+        .collect(a | a.equivalents()).flatten()) {
+          for (key in colMap.keySet()) {
+              var cols = tableCols.get(key);
+              if (cols == null) {
+                  cols = new Set();
+                  tableCols.put(key, cols);
+              }
+              cols.add(colMap.get(key));
+          }
+        }
+    //tableCols.println("Class " + c.name + " prim attrs eqs: ");
+    //if (not tableCols.isEmpty())
+    //    t.columns.addAll(tableCols.get(c));
+    //c.getAllComplexAttributes().println("Class " + c.name + " cmplx ");
+    for (ca in c.getAllComplexAttributes()) {
+        for (colMap in ca.type.getAllAttributes().select(a | a.type.isTypeOf(uml!PrimitiveDataType))
+            .collect(a | a.equivalents()).flatten()) {
+            for (key in colMap.keySet()) {
+                var cols = tableCols.get(key);
+                if (cols == null) {
+                    cols = new Set();
+                    tableCols.put(key, cols);
+                }
+                cols.add(colMap.get(key));
+            }
+        }
+    }
+    if (not tableCols.isEmpty())
+        t.columns.addAll(tableCols.get(c));
+    pk.owner = t;
+    pk.kind = 'primary';
+    pc.owner = t;
+    pc.keys = Set{pk};
+    pc.type = 'NUMBER';
+    pc.name = t.name + '_tid';
+    pk.name = t.name + '_pk';
+}
+
+rule associationToForeignKey
+    transform a : uml!Association
+    to fk : rdbms!ForeignKey, fc : rdbms!Column
+{
+    guard: (a.source.kind == 'persistent') and (a.destination.kind == 'persistent')
+
+    var rk = a.destination.equivalents().select(rk | rk.isTypeOf(rdbms!Key));
+    fk.owner ::= a.source;
+    fk.refersTo = rk;
+    fk.name = a.name;
+    fc.owner ::= a.source;
+    fc.foreignKeys = Set{fk};
+    fc.name = a.name + '_tid';
+    fc.type = 'NUMBER';    // We can not access output elements attribs rk.column->first().type;
+}
+
+
+rule PrimitiveAttributeToColumn
+    transform a : uml!Attribute
+    to cols : Map {
+
+        guard : a.type.isTypeOf(uml!PrimitiveDataType)
+
+        //a.owner.getAllSubs().flatten().println(a.name + " used in ");
+        if (a.owner.kind == 'persistent') {
+            for (sub in a.owner.getAllSubs().flatten()) {
+                var col : rdbms!Column = new rdbms!Column;
+                col.name = a.name;
+                col.kind = a.type.primitiveToName();
+                cols.put(sub, col);
+            }
+        }
+        //a.getAllTypeOpposites().println("ca opposites ");
+        var prefix = "";
+        for (tOpp in a.getAllTypeOpposites()) {
+            prefix = tOpp.name + "_" + prefix;
+            //prefix.println("prefix ");
+            if (tOpp.owner.kind == 'persistent') {
+                var col : rdbms!Column = new rdbms!Column;
+                col.name = prefix + a.name;
+                col.kind = a.type.primitiveToName();
+                //col.println("Added to " + tOpp.owner);
+                cols.put(tOpp.owner, col);
+            }
+        }
+    }
+
+
+function uml!Attribute getAllTypeOpposites() : Set(uml!Attribute)
+{
+    var result : Set(uml!Attribute);
+    if (self.owner.isTypeOf(uml!Class)) {
+        //self.owner.typeOpposite.println(self + " top ");
+        result.addAll(self.owner.typeOpposite.flatten());
+        if (not self.owner.typeOpposite.isEmpty()) {
+            result.addAll(self.owner.typeOpposite->collect(top | top.getAllTypeOpposites()).flatten());
+        }
+    }
+    return result;
+}
+
+
+

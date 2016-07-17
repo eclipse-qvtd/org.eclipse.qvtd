@@ -1,0 +1,122 @@
+--******************************************************************************
+--* Copyright (c) 2016 University of York
+--* All rights reserved. This program and the accompanying materials
+--* are made available under the terms of the Eclipse Public License v1.0
+--* which accompanies this distribution, and is available at
+--* http://www.eclipse.org/legal/epl-v10.html
+--*
+--* Contributors:
+--*     Horacio Hoyos - Initial API and implementation
+--*******************************************************************************/
+ 
+module Uml2Rdbms1;
+
+-- @path uml=../../../../../../../../../../org.eclipse.qvtd.examples.qvtcore/qvtcsrc/UML2RDBMS/SimpleUML.ecore
+-- @path rdbms=../../../../../../../../../../org.eclipse.qvtd.examples.qvtcore/qvtcsrc/UML2RDBMS/SimpleRDBMS.ecore
+
+create OUT: rdbms from IN: uml;
+-- Package with classes
+
+
+rule PackageToSchema {
+  from  p : uml!Package
+    to s : rdbms!Schema (
+      name <- p.name)
+}
+
+helper context uml!PrimitiveDataType def : primitiveToString() : String =
+  let name : String = self.name in
+    if name = 'Integer' then
+      'NUMBER'
+    else
+      if name = 'Boolean' then
+        'BOOLEAN'
+      else
+        if name = 'String' then
+          'VARCHAR'
+      else
+        ''
+        endif
+      endif
+    endif;
+
+
+rule associationToForeignKey {
+  from a : uml!Association (
+      a.source.kind = 'persistent' and
+      a.destination.kind = 'persistent'
+      )
+  to fk : rdbms!ForeignKey(
+    owner <- a.source,
+  refersTo <- thisModule.resolveTemp(a.destination, 'pk'),
+  name <- a.name),
+  fc : rdbms!Column(
+    owner <- a.source,
+  foreignKeys <- Set{fk},
+  name <- a.name + '_tid',
+  type <- 'NUMBER')
+}
+
+helper context uml!Class def : getAllSupers() : Set(uml!Class) =
+  self.general->collect(gen | gen.getAllSupers())->flatten()->including(self)->asSet();
+
+helper context uml!Class def : getAllAttributes() : Set(uml!Attribute) =
+  self.getAllSupers()->collect(c  | c.attributes)->asSet();
+
+helper def : getAllForwards(cls : uml!Class) : Set(uml!Association) =
+  cls.getAllSupers()->collect(c  | c.forward)->asSet();
+
+
+rule calssToTable {
+  from c : uml!Class(
+    c.kind = 'persistent' )
+  using {
+    p : uml!Package = c.namespace;
+  }
+  to 	t : rdbms!Table (
+    kind <- 'base',
+    schema <- p,
+    name <- c.name,
+    columns <- c.getAllAttributes()->flatten()->select(a | a.type.oclIsTypeOf(uml!PrimitiveDataType))->collect(a | thisModule.PrimitiveAttributeToColumn(a))
+      ->union(c.getAllAttributes()->flatten()->select(a | a.type.oclIsTypeOf(uml!Class))->collect(a | a.getColums(a.name)))
+  ),
+  pk: rdbms!Key(
+      owner <- t,
+      kind <- 'primary',
+      name <- c.name + '_pk'),
+    pc : rdbms!Column(
+      owner <- t,
+      keys <- Set{pk},
+      type <- 'NUMBER',
+      name <- c.name + '_tid')
+}
+
+-- Lazy rules dont validate guards!
+lazy rule PrimitiveAttributeToColumn {
+  from a : uml!Attribute
+  using {
+    t : uml!PrimitiveDataType = a.type;
+  }
+  to c : rdbms!Column (
+    name <- a.name,
+    kind <- t.primitiveToString())
+}
+
+-- Recursively visit all complex attributes and generate columns for the primitive attributes
+helper context uml!Attribute def : getColums(prefix : String) : Set(rdbms!Column) =
+  let primitive : Set(uml!Attribute) = self.type.getAllAttributes()->flatten()->select(a | a.type.oclIsTypeOf(uml!PrimitiveDataType)) in
+    let complex : Set(uml!Attribute) = self.type.getAllAttributes()->flatten()->select(a | a.type.oclIsTypeOf(uml!Class)) in
+        primitive->collect(a | thisModule.ComplexAttributePrimitiveAttributeToColumn(prefix, a))
+        ->union(complex->collect(ca | ca.getColums(self.name + '_' + ca.name)));
+
+  
+-- Creates a colum for the primitive attribute. The prefix
+rule ComplexAttributePrimitiveAttributeToColumn (prefix : String, a : uml!Attribute) {
+  to c : rdbms!Column (
+    name <- prefix + '_' + a.name,
+    kind <- a.type.primitiveToString())
+  do {
+    c;
+  }
+}
+
