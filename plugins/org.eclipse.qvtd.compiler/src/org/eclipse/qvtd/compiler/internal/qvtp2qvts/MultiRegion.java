@@ -42,9 +42,9 @@ public class MultiRegion
 		this.qvtp2qvts = qvtp2qvts;
 	}
 
-	public void addActiveRegion(@NonNull Region region) {
-		activeRegions.add(region);
-	}
+	//	public void addActiveRegion(@NonNull Region region) {
+	//		activeRegions.add(region);
+	//	}
 
 	public void addRegion(@NonNull Region region) {
 		allRegions.add(region);
@@ -77,6 +77,10 @@ public class MultiRegion
 		return Iterables.filter(allRegions, OperationRegion.class);
 	}
 
+	//	public @NonNull List<@NonNull Region> getRegions() {
+	//		return allRegions;
+	//	}
+
 	public @NonNull SchedulerConstants getSchedulerConstants() {
 		return qvtp2qvts;
 	}
@@ -108,9 +112,9 @@ public class MultiRegion
 	//		return allRegions;
 	//	}
 
-	public boolean removeActiveRegion(@NonNull Region region) {
-		return activeRegions.remove(region);
-	}
+	//	public boolean removeActiveRegion(@NonNull Region region) {
+	//		return activeRegions.remove(region);
+	//	}
 
 	public void setActiveRegions(@NonNull Iterable<@NonNull Region> activeRegions) {	// FIXME eliminate
 		this.activeRegions = Lists.newArrayList(activeRegions);

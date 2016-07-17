@@ -32,6 +32,16 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	}
 
 	@Override
+	public R visitBasicEdgeConnection(@NonNull BasicEdgeConnection basicEdgeConnection) {
+		return visiting(basicEdgeConnection);
+	}
+
+	@Override
+	public R visitBasicNodeConnection(@NonNull BasicNodeConnection basicNodeConnection) {
+		return visiting(basicNodeConnection);
+	}
+
+	@Override
 	public R visitBasicSimpleEdge(@NonNull BasicSimpleEdge basicSimpleEdge) {
 		return visitEdge(basicSimpleEdge);
 	}

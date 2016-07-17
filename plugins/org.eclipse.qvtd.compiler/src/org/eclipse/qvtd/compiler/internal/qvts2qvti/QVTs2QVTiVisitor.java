@@ -35,6 +35,8 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdgeConnection;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicNodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicSimpleEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ComplexTypedNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.CyclicScheduledRegion;
@@ -320,6 +322,16 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	@Override
 	public @Nullable Element visiting(@NonNull Visitable visitable) {
 		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
+	}
+
+	@Override
+	public Element visitBasicEdgeConnection(@NonNull BasicEdgeConnection basicEdgeConnection) {
+		return visiting(basicEdgeConnection);
+	}
+
+	@Override
+	public Element visitBasicNodeConnection(@NonNull BasicNodeConnection basicNodeConnection) {
+		return visiting(basicNodeConnection);
 	}
 
 	@Override

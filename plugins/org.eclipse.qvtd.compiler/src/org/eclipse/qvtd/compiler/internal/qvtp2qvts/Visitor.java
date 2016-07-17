@@ -16,6 +16,8 @@ public interface Visitor<R>
 {
 	R visiting(@NonNull Visitable visitable);
 
+	R visitBasicEdgeConnection(@NonNull BasicEdgeConnection basicEdgeConnection);
+	R visitBasicNodeConnection(@NonNull BasicNodeConnection basicNodeConnection);
 	R visitBasicSimpleEdge(@NonNull BasicSimpleEdge basicSimpleEdge);
 	R visitComplexTypedNode(@NonNull ComplexTypedNode complexTypedNode);
 	R visitCyclicScheduledRegion(@NonNull CyclicScheduledRegion cyclicScheduledRegion);

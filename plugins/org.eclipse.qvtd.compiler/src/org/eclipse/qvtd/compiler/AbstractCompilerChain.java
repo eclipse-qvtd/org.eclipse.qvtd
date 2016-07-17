@@ -259,10 +259,10 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		public @NonNull RootScheduledRegion execute(@NonNull Resource gResource, @NonNull QVTp2QVTg qvtp2qvtg) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
-				Schedule schedule = getSchedule(gResource);
-				QVTp2QVTs scheduler = new QVTp2QVTs(environmentFactory, schedule, qvtp2qvtg);
-				MultiRegion multiRegion = scheduler.transform();
-				String rootName = ClassUtil.nonNullState(scheduler.getDependencyGraph().eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
+				String rootName = ClassUtil.nonNullState(gResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
+				Schedule dependencyGraph = getSchedule(gResource);
+				QVTp2QVTs qvtp2qvts = new QVTp2QVTs(environmentFactory, dependencyGraph, qvtp2qvtg);
+				MultiRegion multiRegion = qvtp2qvts.transform();
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(environmentFactory, rootName);
 				RootScheduledRegion rootRegion = qvts2qvts.transform(multiRegion);
 				compiled(rootRegion);			// FIXME

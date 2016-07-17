@@ -28,7 +28,7 @@ import com.google.common.collect.Iterables;
 public class BasicNodeConnection extends AbstractConnection<@NonNull Node> implements NodeConnection
 {
 	protected final @NonNull ClassDatumAnalysis classDatumAnalysis;
-	
+
 	/**
 	 * The region that manages the data structures for the Connection.
 	 */
@@ -49,12 +49,17 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 	}
 
 	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitBasicNodeConnection(this);
+	}
+
+	@Override
 	public void addPassedTargetNode(@NonNull Node targetNode) {
 		mergeRole(Connections.PASSED);
 		assert !targetEnd2role.containsKey(targetNode);
 		targetEnd2role.put(targetNode, Connections.PASSED);
 		targetNode.addIncomingConnection(this);
-//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
+		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}
 
 	@Override
@@ -67,7 +72,7 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 		mergeRole(newConnectionRole);
 		targetEnd2role.put(targetNode, newConnectionRole);
 		targetNode.addIncomingConnection(this);
-//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
+		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}
 
 	@Override
@@ -115,11 +120,11 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 
 	@Override
 	public @NonNull Type getSourcesType(@NonNull IdResolver idResolver) {
-//		System.out.println("commonType of " + this);
+		//		System.out.println("commonType of " + this);
 		Type commonType = null;
 		for (@NonNull Node node : getSources()) {
 			Type nodeType = node.getCompleteClass().getPrimaryClass();
-//			System.out.println("  nodeType " + nodeType);
+			//			System.out.println("  nodeType " + nodeType);
 			CompleteEnvironment environment = idResolver.getEnvironment();
 			if (!(nodeType instanceof CollectionType)) {		// RealizedVariable accumulated on Connection
 				nodeType = isOrdered() ? environment.getOrderedSetType(nodeType, true, null, null) : environment.getSetType(nodeType, true, null, null);
@@ -131,7 +136,7 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 				commonType = commonType.getCommonType(idResolver, nodeType);
 			}
 		}
-//		System.out.println("=> " + commonType);
+		//		System.out.println("=> " + commonType);
 		assert commonType != null;
 		return commonType;
 	}
@@ -146,7 +151,7 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 		return targetEnd2role;
 	}
 
-/*	@Override
+	/*	@Override
 	public boolean isInput() {
 		boolean isInput = false;
 		boolean isNonInput = false;
@@ -190,7 +195,7 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 		return isOrdered;
 	}
 
-/*	@Override
+	/*	@Override
 	public boolean isOutput() {
 		boolean isOutput = false;
 		boolean isNonOutput = false;
@@ -271,24 +276,24 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 			QVTp2QVTs.CONNECTION_ROUTING.println(s.toString());
 		}
 	}
-	
+
 	@Override
 	public void toCallGraph(@NonNull GraphStringBuilder s) {
 		if (isNode2Node()) {
 			s.appendNode(this);
-//			@SuppressWarnings("null")@NonNull Node sourceNode = sourceEnds.iterator().next();
-//			@SuppressWarnings("null")@NonNull Node targetNode = targetEnd2role.keySet().iterator().next();
-//			s.appendEdge(sourceNode, this, targetNode);
+			//			@SuppressWarnings("null")@NonNull Node sourceNode = sourceEnds.iterator().next();
+			//			@SuppressWarnings("null")@NonNull Node targetNode = targetEnd2role.keySet().iterator().next();
+			//			s.appendEdge(sourceNode, this, targetNode);
 		}
 		else {
 			s.appendNode(this);
-//			for (@SuppressWarnings("null")@NonNull Node source : getSources()) {
-//				s.appendEdge(source, this, this);
-//			}
-//			for (@SuppressWarnings("null")@NonNull Node target : getTargets()) {
-//				@SuppressWarnings("null")@NonNull ConnectionRole role = targetEnd2role.get(target);
-//				s.appendEdge(this, role, target);
-//			}
+			//			for (@SuppressWarnings("null")@NonNull Node source : getSources()) {
+			//				s.appendEdge(source, this, this);
+			//			}
+			//			for (@SuppressWarnings("null")@NonNull Node target : getTargets()) {
+			//				@SuppressWarnings("null")@NonNull ConnectionRole role = targetEnd2role.get(target);
+			//				s.appendEdge(this, role, target);
+			//			}
 		}
 	}
 

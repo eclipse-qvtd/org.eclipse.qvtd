@@ -38,17 +38,22 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationE
 	}
 
 	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitBasicEdgeConnection(this);
+	}
+
+	@Override
 	public void addUsedTargetEdge(@NonNull NavigationEdge targetEdge, boolean mustBeLater) {
-//		if (getSourceRegions().contains(targetEdge.getRegion())) {
-//			System.out.println("Cyclic dependency arbitrarily ignored: " + this);
-//			mergeRole(Connections.PREFERRED_EDGE);
-//			return;
-//		}
+		//		if (getSourceRegions().contains(targetEdge.getRegion())) {
+		//			System.out.println("Cyclic dependency arbitrarily ignored: " + this);
+		//			mergeRole(Connections.PREFERRED_EDGE);
+		//			return;
+		//		}
 		mergeRole(mustBeLater ? Connections.MANDATORY_EDGE : Connections.PREFERRED_EDGE);
 		assert !targetEnd2role.containsKey(targetEdge);
 		targetEnd2role.put(targetEdge, mustBeLater ? Connections.MANDATORY_EDGE : Connections.PREFERRED_EDGE);
 		targetEdge.addIncomingConnection(this);
-//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
+		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}
 
 	@Override
@@ -95,7 +100,7 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationE
 		return targetEnd2role;
 	}
 
-/*	@Override
+	/*	@Override
 	public @NonNull Type getType(@NonNull IdResolver idResolver) {
 //		System.out.println("commonType of " + this);
 		Type commonType = null;
@@ -122,20 +127,20 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationE
 		return (sourceEnds.size() == 1) && (targetEnd2role.size() == 1);
 	}
 
-//	@Override
-//	public boolean isInput() {
-//		return false;
-//	}
+	//	@Override
+	//	public boolean isInput() {
+	//		return false;
+	//	}
 
 	@Override
 	public boolean isMandatory() {
 		return false;
 	}
 
-//	@Override
-//	public boolean isOutput() {
-//		return false;
-//	}
+	//	@Override
+	//	public boolean isOutput() {
+	//		return false;
+	//	}
 
 	@Override
 	public boolean isPassed() {
@@ -147,7 +152,7 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationE
 		return false;
 	}
 
-/*	@Override
+	/*	@Override
 	public void removeSource(@NonNull Node sourceNode) {
 		boolean wasRemoved = sourceNodes.remove(sourceNode);
 		assert wasRemoved;
@@ -158,10 +163,10 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationE
 		ConnectionRole oldRole = targetNode2role.remove(targetNode);
 		assert oldRole != null;
 	} */
-	
+
 	@Override
 	public void toCallGraph(@NonNull GraphStringBuilder s) {
-/*		if (isNode2Node()) {
+		/*		if (isNode2Node()) {
 			s.appendNode(this);
 //			@SuppressWarnings("null")@NonNull Node sourceNode = sourceNodes.iterator().next();
 //			@SuppressWarnings("null")@NonNull Node targetNode = targetNode2role.keySet().iterator().next();

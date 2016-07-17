@@ -19,24 +19,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
  * A Connection is a directed hyper edge between one or more source nodes in one or more regions and
  * one or more target nodes in one or more target regions.
  */
-public interface Connection extends /*Edge*/ Nameable, Symbolable
+public interface Connection extends /*Edge*/ Nameable, Symbolable, Visitable
 {
 	void destroy();
 
 	/**
-	 * Return a non-standard style for the arrow head. 
+	 * Return a non-standard style for the arrow head.
 	 */
 	@Nullable String getArrowhead();
 
 	/**
-	 * Return the color with which this edge is drawn. 
+	 * Return the color with which this edge is drawn.
 	 */
 	@NonNull String getColor();
-	
+
 	@NonNull ConnectionRole getConnectionRole();
 
 	/**
-	 * Return a formatted label to accompany the edge, or null for no label. 
+	 * Return a formatted label to accompany the edge, or null for no label.
 	 */
 	@Nullable String getLabel();
 	@NonNull ScheduledRegion getRegion();

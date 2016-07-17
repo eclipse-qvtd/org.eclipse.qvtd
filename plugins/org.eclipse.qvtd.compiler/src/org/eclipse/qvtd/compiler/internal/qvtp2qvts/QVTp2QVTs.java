@@ -62,9 +62,9 @@ public class QVTp2QVTs extends SchedulerConstants
 
 	private final @NonNull List<@NonNull AbstractAction> orderedActions;
 
-	public QVTp2QVTs(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule schedule, @NonNull QVTp2QVTg qvtp2qvtg) {
-		super(environmentFactory, schedule, qvtp2qvtg);
-		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(schedule);
+	public QVTp2QVTs(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule dependencyGraph, @NonNull QVTp2QVTg qvtp2qvtg) {
+		super(environmentFactory, dependencyGraph, qvtp2qvtg);
+		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(dependencyGraph);
 		List<@NonNull AbstractAction> orderedActions = orderer.computeOrdering();
 		if (orderedActions == null) {
 			throw new IllegalArgumentException(orderer.diagnoseOrderingFailure());
