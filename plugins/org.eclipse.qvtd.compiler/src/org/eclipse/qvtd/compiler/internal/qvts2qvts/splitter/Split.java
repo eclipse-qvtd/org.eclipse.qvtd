@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
@@ -113,8 +112,9 @@ public class Split
 		}
 	}
 
-	public void install(@NonNull RootScheduledRegion rootRegion) {
-		MultiRegion multiRegion = rootRegion.getMultiRegion();
+	public @NonNull Iterable<@NonNull Region> install(@NonNull RootScheduledRegion rootRegion) {
+		List<@NonNull Region> splitRegions = new ArrayList<>();
+		//
 		Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode = new HashMap<>();
 		Region oldRegion = splitter.getRegion();
 		//		Iterable<@NonNull Node> newHeadNodes = stages.get(0).getHeadNodes();
@@ -125,7 +125,7 @@ public class Split
 		//			}
 		//		}
 		int stageNumber = 0;
-		Iterator<@NonNull Stage> stageIterator = stages.iterator();;
+		Iterator<@NonNull Stage> stageIterator = stages.iterator();
 		//
 		//	HeadStage
 		//
@@ -133,8 +133,7 @@ public class Split
 		assert nextStage instanceof HeadStage;
 		SplitterVisitor visitor = new HeadSplitterVisitor(rootRegion, nextStage, ++stageNumber, oldSourceNode2newSourceNode);
 		AbstractRegion stageRegion = visitor.createRegion(oldRegion);
-		//		multiRegion.addActiveRegion(stageRegion);
-		rootRegion.addRegion(stageRegion);
+		splitRegions.add(stageRegion);
 
 		nextStage = stageIterator.hasNext() ? stageIterator.next() : null;
 		//
@@ -154,8 +153,7 @@ public class Split
 		while (nextStage instanceof HeadedStage) {
 			visitor = new LoopSplitterVisitor(rootRegion, nextStage, ++stageNumber, oldSourceNode2newSourceNode);
 			stageRegion = visitor.createRegion(oldRegion);
-			//			multiRegion.addActiveRegion(stageRegion);
-			rootRegion.addRegion(stageRegion);
+			splitRegions.add(stageRegion);
 			nextStage = stageIterator.hasNext() ? stageIterator.next() : null;
 			//
 			//	non-hazardous LoopStages fold into HeadStage
@@ -175,14 +173,14 @@ public class Split
 		assert nextStage instanceof BodyStage;
 		visitor = new BodySplitterVisitor(rootRegion, nextStage, ++stageNumber, oldSourceNode2newSourceNode);
 		stageRegion = visitor.createRegion(oldRegion);
-		//		multiRegion.addActiveRegion(stageRegion);
-		rootRegion.addRegion(stageRegion);
+		splitRegions.add(stageRegion);
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			stageRegion.writeDebugGraphs("4-stage");
 		}
 		assert !stageIterator.hasNext();
 		//		multiRegion.removeActiveRegion(oldRegion);
-		rootRegion.removeRegion(stageRegion);
+		//
+		return splitRegions;
 	}
 
 	@Override

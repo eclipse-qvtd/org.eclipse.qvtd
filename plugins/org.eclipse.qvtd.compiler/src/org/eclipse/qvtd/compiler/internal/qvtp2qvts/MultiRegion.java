@@ -11,12 +11,12 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 
 import com.google.common.collect.Iterables;
@@ -35,8 +35,8 @@ public class MultiRegion
 	//	private final @NonNull Map<Type, Property> type2castProperty = new HashMap<>();
 
 	private final @NonNull List<@NonNull Region> allRegions = new ArrayList<>();
-
-	private @NonNull List<@NonNull Region> activeRegions = Collections.emptyList();
+	//	private @NonNull List<@NonNull Region> activeRegions = Collections.emptyList();
+	private /*@LazyNonNull*/ List<@NonNull SimpleMappingRegion> orderedRegions = null;
 
 	public MultiRegion(@NonNull QVTp2QVTs qvtp2qvts) {
 		this.qvtp2qvts = qvtp2qvts;
@@ -54,9 +54,9 @@ public class MultiRegion
 		return qvtp2qvts.analyzeOperation(this, operationCallExp);
 	}
 
-	public @NonNull List<@NonNull Region> getActiveRegions() {
-		return activeRegions;
-	}
+	//	public @NonNull List<@NonNull Region> getActiveRegions() {
+	//		return activeRegions;
+	//	}
 
 	/*	public @NonNull Property getCastProperty(@NonNull Type type) {
 		Property castProperty = type2castProperty.get(type);
@@ -75,6 +75,10 @@ public class MultiRegion
 
 	public @NonNull Iterable<@NonNull OperationRegion> getOperationRegions() {
 		return Iterables.filter(allRegions, OperationRegion.class);
+	}
+
+	public @NonNull List<@NonNull SimpleMappingRegion> getOrderedRegions() {
+		return ClassUtil.nonNullState(orderedRegions);
 	}
 
 	//	public @NonNull List<@NonNull Region> getRegions() {
@@ -116,7 +120,11 @@ public class MultiRegion
 	//		return activeRegions.remove(region);
 	//	}
 
-	public void setActiveRegions(@NonNull Iterable<@NonNull Region> activeRegions) {	// FIXME eliminate
-		this.activeRegions = Lists.newArrayList(activeRegions);
+	//	public void setActiveRegions(@NonNull Iterable<@NonNull Region> activeRegions) {	// FIXME eliminate
+	//		this.activeRegions = Lists.newArrayList(activeRegions);
+	//	}
+
+	public void setOrderedRegions(@NonNull Iterable<@NonNull SimpleMappingRegion> orderedRegions) {	// FIXME eliminate
+		this.orderedRegions = Lists.newArrayList(orderedRegions);
 	}
 }

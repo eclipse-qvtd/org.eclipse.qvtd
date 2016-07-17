@@ -715,7 +715,8 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		return rootContainmentRegion;
 	}
 
-	public void createSchedule() {
+	public void createSchedule(@NonNull Iterable<@NonNull Region> regions) {
+		setRegions(regions);
 		//
 		//	Identify the input models.
 		//

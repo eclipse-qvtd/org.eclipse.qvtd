@@ -26,7 +26,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicSimpleEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
@@ -45,7 +44,7 @@ import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 public class SplitterVisitor extends AbstractVisitor<@Nullable Visitable>
 {
 	protected final @NonNull RootScheduledRegion rootRegion;
-	protected final @NonNull MultiRegion multiRegion;
+	//	protected final @NonNull MultiRegion multiRegion;
 	protected final @NonNull Stage stage;
 	protected final int stageNumber;
 	protected final @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode;
@@ -53,7 +52,7 @@ public class SplitterVisitor extends AbstractVisitor<@Nullable Visitable>
 
 	public SplitterVisitor(@NonNull RootScheduledRegion rootRegion, @NonNull Stage stage, int stageNumber, @NonNull Map<@NonNull Node, @NonNull Node> oldSourceNode2newSourceNode) {
 		this.rootRegion = rootRegion;
-		this.multiRegion = rootRegion.getMultiRegion();
+		//		this.multiRegion = rootRegion.getMultiRegion();
 		this.stage = stage;
 		this.stageNumber = stageNumber;
 		this.oldSourceNode2newSourceNode = oldSourceNode2newSourceNode;

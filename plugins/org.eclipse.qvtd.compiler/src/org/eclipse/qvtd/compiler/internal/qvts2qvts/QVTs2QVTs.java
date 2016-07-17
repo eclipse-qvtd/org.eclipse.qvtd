@@ -21,9 +21,12 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleMappingRegion;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyRegionMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Split;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 
@@ -49,14 +52,14 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		this.rootName = rootName;
 	}
 
-	public @NonNull RootScheduledRegion createRootRegion(@NonNull List<@NonNull Region> allRegions) {
+	public @NonNull RootScheduledRegion createRootRegion(@NonNull Iterable<@NonNull Region> allRegions) {
 		RootScheduledRegion rootRegion = null;
-		for (@NonNull Region region : new ArrayList<@NonNull Region>(allRegions)) {
+		for (@NonNull Region region : Lists.newArrayList(allRegions)) {
 			if (region.getInvokingRegion() == null) {
 				if (rootRegion == null) {
 					rootRegion = new RootScheduledRegion(region.getMultiRegion(), rootName);
 				}
-				rootRegion.addRegion(region);
+				//				rootRegion.addRegion(region);
 			}
 		}
 		assert rootRegion != null;
@@ -99,23 +102,52 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 	}
 
-	protected void splitMultiHeadedRegions(@NonNull RootScheduledRegion rootRegion) {
-		for (@NonNull Region region : Lists.newArrayList(rootRegion.getRegions())) {
+	/**
+	 * Merge any mappings that are locally compatible. // FIXME do/done in QVTm2QVTp
+	 * Returns a pruned list of mappings.
+	 */
+	protected @NonNull Iterable<@NonNull Region> earlyRegionMerge(@NonNull MultiRegion multiRegion, @NonNull List<@NonNull SimpleMappingRegion> orderedRegions) {
+		EarlyRegionMerger earlyRegionMerger = new EarlyRegionMerger(this);
+		List<@NonNull Region> earlyMergedRegions = new ArrayList<@NonNull Region>(earlyRegionMerger.earlyRegionMerge(orderedRegions));
+		for (@NonNull OperationRegion operationRegion : multiRegion.getOperationRegions()) {
+			earlyMergedRegions.add(operationRegion);
+		}
+		return earlyMergedRegions;
+	}
+
+	protected @NonNull Iterable<@NonNull Region> splitMultiHeadedRegions(@NonNull RootScheduledRegion rootRegion, @NonNull Iterable<@NonNull Region> inputRegions) {
+		List<@NonNull Region> outputRegions = new ArrayList<>();
+		for (@NonNull Region region : inputRegions) {
 			if (region instanceof SimpleMappingRegion) {
-				Splitter splitter = new Splitter((@NonNull SimpleMappingRegion) region);
+				Splitter splitter = new Splitter((SimpleMappingRegion) region);
 				Split split = splitter.split();
 				if (split != null) {
-					split.install(rootRegion);
+					CompilerUtil.addAll(outputRegions, split.install(rootRegion));
+				}
+				else {
+					outputRegions.add(region);
 				}
 			}
+			else {
+				outputRegions.add(region);
+			}
 		}
+		return outputRegions;
 	}
 
 	public @NonNull RootScheduledRegion transform(@NonNull MultiRegion multiRegion) {
-		List<@NonNull Region> activeRegions = multiRegion.getActiveRegions();
-		RootScheduledRegion rootRegion = createRootRegion(activeRegions);
-		splitMultiHeadedRegions(rootRegion);
-		rootRegion.createSchedule();
+		List<@NonNull SimpleMappingRegion> orderedRegions = multiRegion.getOrderedRegions();
+		//
+		//	Merge mappings that are trivially compatible.
+		//
+		Iterable<@NonNull Region> earlyMergedRegions = earlyRegionMerge(multiRegion, orderedRegions);
+		RootScheduledRegion rootRegion = createRootRegion(earlyMergedRegions);
+		//
+		//	Merge mappings that are trivially compatible.
+		//
+		Iterable<@NonNull Region> splitHeadRegions = splitMultiHeadedRegions(rootRegion, earlyMergedRegions);
+		//
+		rootRegion.createSchedule(splitHeadRegions);
 		createSchedule(rootRegion);
 		return rootRegion;
 	}

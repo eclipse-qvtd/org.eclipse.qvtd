@@ -66,6 +66,12 @@ public class CompilerUtil
 
 	}
 
+	public static <T> void addAll(@NonNull Collection<T> addTo, @NonNull Iterable<T> elementsToAdd) {
+		for (T element : elementsToAdd) {
+			addTo.add(element);
+		}
+	}
+
 	public static void assertNoDiagnosticErrors(String message, XtextResource xtextResource) {
 		List<Diagnostic> diagnostics = xtextResource.validateConcreteSyntax();
 		if (diagnostics.size() > 0) {

@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -36,7 +37,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	/**
 	 * All regions within this scheduled region.
 	 */
-	private final @NonNull List<@NonNull Region> regions = new ArrayList<@NonNull Region>();
+	private /*@LazyNonNull*/ List<@NonNull Region> regions = null;
 
 	/**
 	 * All the connections defined in this region, but not those in nested regions.
@@ -365,7 +366,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 
 	@Override
 	public @NonNull List<@NonNull Region> getRegions() {
-		return regions;
+		return ClassUtil.nonNullState(regions);
 	}
 
 	@Override
@@ -420,6 +421,13 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		removeConnection(connection);
 	}
 
+	protected void setRegions(@NonNull Iterable<@NonNull Region> regions) {
+		this.regions = new ArrayList<>();
+		for (@NonNull Region region : regions) {
+			region.setInvokingRegion(this);
+			this.regions.add(region);
+		}
+	}
 
 	/**
 	 * After cycles have been removed, split looped connection variables to isolate the unlooping base case, from the/each looping case.
