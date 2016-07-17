@@ -210,7 +210,14 @@
           locateNestedProjects="true"/>
       <sourceLocator
           rootFolder="${qvtd.git.clone.location/tests}"
-          locateNestedProjects="true"/>
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NotPredicate">
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern="org.eclipse.qvtd.doc.*.tests"/>
+        </predicate>
+      </sourceLocator>
       <sourceLocator
           rootFolder="${qvtd.git.clone.location/examples}"
           locateNestedProjects="true"/>
