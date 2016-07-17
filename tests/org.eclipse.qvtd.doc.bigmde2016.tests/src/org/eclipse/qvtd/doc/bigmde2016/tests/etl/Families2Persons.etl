@@ -11,31 +11,34 @@
  
 rule Member2Male
     transform s : Families!Member
-    to t : Persosns!Male {
+    to t : Persons!Male {
 
         guard : not s.isFemale()
 
-        t.fullName = s.firstName + ' ' + s.familyName;
+        t.fullName = s.firstName + ' ' + s.familyName();
     }
 
 rule Member2Female
     transform s : Families!Member
-    to t : Persosns!Female {
+    to t : Persons!Female {
 
         guard : s.isFemale()
 
-        t.fullName = s.firstName + ' ' + s.familyName;
+        t.fullName = s.firstName + ' ' + s.familyName();
     }
 
 operation Families!Member familyName() : String {
-    if (self.familiySon.isDefined()) {
-        return self.familiySon.lastName;
+    if (self.familyFather.isDefined()) {
+        return self.familyFather.lastName;
     }
-    else if (self.familyDaughter.isDefined()) {
-        return self.familiySon.lastName;
+    else if (self.familyMother.isDefined()) {
+        return self.familyMother.lastName;
+    }
+    else if (self.familySon.isDefined()) {
+        return self.familySon.lastName;
     }
     else {
-        return '';
+        return self.familyDaughter.lastName;
     }
 }
 
