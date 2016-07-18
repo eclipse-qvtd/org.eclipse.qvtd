@@ -31,6 +31,9 @@ Workflow {
     	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/families2persons/Families2Persons.genmodel"
     }
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
+    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/forward2reverse/List2List.genmodel"
+    }
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
     	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/hsv2hls/HSV2HLS.genmodel"
     }
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="list2list" nsURI="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/forward2reverse/1.0/List2List"
+    nsPrefix="list2list">
+  <eClassifiers xsi:type="ecore:EClass" name="List2List">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="list1" lowerBound="1" eType="ecore:EClass DoublyLinkedList.ecore#//DoublyLinkedList">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="middle1"/>
+        <details key="upper" value="1"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/qvt#Domains">
+        <details key="referredDomain" value="forward"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="list2" lowerBound="1" eType="ecore:EClass DoublyLinkedList.ecore#//DoublyLinkedList">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="middle2"/>
+        <details key="upper" value="1"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/qvt#Domains">
+        <details key="referredDomain" value="reverse"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element2Element" upperBound="-1"
+        eType="#//Element2Element" containment="true" eOpposite="#//Element2Element/list2list"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element2Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element1" lowerBound="1"
+        eType="ecore:EClass DoublyLinkedList.ecore#//Element">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="middle1"/>
+        <details key="upper" value="1"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/qvt#Domains">
+        <details key="referredDomain" value="forward"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element2" lowerBound="1"
+        eType="ecore:EClass DoublyLinkedList.ecore#//Element">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="middle2"/>
+        <details key="upper" value="1"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/qvt#Domains">
+        <details key="referredDomain" value="reverse"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="list2list" lowerBound="1"
+        eType="#//List2List" eOpposite="#//List2List/element2Element"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
