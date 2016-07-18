@@ -1,14 +1,14 @@
 import DoublyLinkedList : 'DoublyLinkedList.ecore#/';
 import List2List : 'List2List.ecore#/';
 
-transformation forward2reverse
+transformation org::eclipse::qvtd::xtext::qvtcore::tests::forward2reverse::Forward2Reverse
 {
 	forward imports DoublyLinkedList;
 	reverse imports DoublyLinkedList;
 	imports List2List;
 }
 
-map list2list in forward2reverse
+map list2list in Forward2Reverse
 {
 	check enforce forward() {
 		realize forwardList : DoublyLinkedList[1]
@@ -34,7 +34,7 @@ map list2list in forward2reverse
 	}
 }
 
-map element2element in forward2reverse
+map element2element in Forward2Reverse
 {
 	check enforce forward() {
 		realize forwardElement : Element[1]

@@ -350,7 +350,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT("forward2reverse");
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Transformation asTransformation = myQVT.compileTransformation("forward2reverse.qvtc", "reverse");
+			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
 			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", "EmptyList.xmi");
@@ -396,7 +396,14 @@ public class QVTcCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT("forward2reverse", List2listPackage.eINSTANCE, DoublylinkedlistPackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Class<? extends Transformer> txClass = myQVT.buildTransformation("forward2reverse.qvtc", "reverse", "List2List.genmodel");
+			Class<? extends Transformer> txClassReverse = myQVT.buildTransformation("Forward2Reverse.qvtc", "forward", "List2List.genmodel");
+			//
+			myQVT.createGeneratedExecutor(txClassReverse);
+			myQVT.loadInput("reverse", "ThreeElementList.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("forward", "ThreeElementList_Reverse_CG.xmi", "ThreeElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+			//
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("Forward2Reverse.qvtc", "reverse", "List2List.genmodel");
 			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", "EmptyList.xmi");
@@ -417,13 +424,6 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.loadInput("forward", "ThreeElementList.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", "ThreeElementList_CG.xmi", "ThreeElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
-
-			Class<? extends Transformer> txClassReverse = myQVT.buildTransformation("forward2reverse.qvtc", "forward", "List2List.genmodel");
-			//
-			myQVT.createGeneratedExecutor(txClassReverse);
-			myQVT.loadInput("reverse", "ThreeElementList.xmi");
-			myQVT.executeTransformation();
-			myQVT.saveOutput("forward", "ThreeElementList_Reverse_CG.xmi", "ThreeElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();
