@@ -1,0 +1,67 @@
+import DoublyLinkedList : 'DoublyLinkedList.ecore#/';
+import List2List : 'List2List.ecore#/';
+
+transformation forward2reverse
+{
+	forward imports DoublyLinkedList;
+	reverse imports DoublyLinkedList;
+	imports List2List;
+}
+
+map list2list in forward2reverse
+{
+	check enforce forward() {
+		realize forwardList : DoublyLinkedList[1]
+	|}
+
+	check enforce reverse() {
+		realize reverseList : DoublyLinkedList[1]
+	|}
+
+	where() {
+		realize list2list : List2List[1]
+	|
+		list2list.list1 := forwardList;
+		list2list.list2 := reverseList;
+		list2list.name := forwardList.name;
+		list2list.name := reverseList.name;
+		--
+		forwardList.name := list2list.name;
+		forwardList.headElement := list2list.list2.headElement.middle2.element1;
+		--
+		reverseList.name := list2list.name;
+		reverseList.headElement := list2list.list1.headElement.middle1.element2;
+	}
+}
+
+map element2element in forward2reverse
+{
+	check enforce forward() {
+		realize forwardElement : Element[1]
+	|}
+
+	check enforce reverse() {
+		realize reverseElement : Element[1]
+	|}
+
+	where() {
+		realize element2element : Element2Element[1]
+	|
+		element2element.element1 := forwardElement;
+		element2element.element2 := reverseElement;
+		element2element.name := forwardElement.name;
+		element2element.name := reverseElement.name;
+		element2element.list2list := reverseElement.list.middle2;
+		element2element.list2list := forwardElement.list.middle1;
+		--
+		forwardElement.name := element2element.name;
+		forwardElement.list := reverseElement.list.middle2.list1;
+		forwardElement.source := reverseElement.target.middle2.element1;
+		forwardElement.target := reverseElement.source.middle2.element1;
+		--
+		reverseElement.name := element2element.name;
+		reverseElement.list := forwardElement.list.middle1.list2;
+		reverseElement.source := forwardElement.target.middle1.element2;
+		reverseElement.target := forwardElement.source.middle1.element2;
+	}
+}

@@ -52,10 +52,13 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2PersonsNor
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2Persons.Families2PersonsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.PersonsPackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.forward2reverse.Forward2ReverseNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HSV2HLSNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HLSTree.HLSTreePackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HSV2HLS.HSV2HLSPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hls.HSVTree.HSVTreePackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list.List2listPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.SimpleRDBMSNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simplerdbms.SimplerdbmsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.SimpleumlPackage;
@@ -335,6 +338,92 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.loadInput("family", "FamiliesBig.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("person", "PersonsBig_CG.xmi", "PersonsBig_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTcCompiler_Forward2Reverse() throws Exception {
+		//    	QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
+		MyQVT myQVT = new MyQVT("forward2reverse");
+		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		try {
+			Transformation asTransformation = myQVT.compileTransformation("forward2reverse.qvtc", "reverse");
+			//
+			myQVT.createInterpretedExecutor(asTransformation);
+			myQVT.loadInput("forward", "EmptyList.xmi");
+			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "EmptyList_trace.xmi");
+			myQVT.createModel("reverse", "EmptyList_Interpreted.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "EmptyList_Interpreted.xmi", "EmptyList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+			//
+			myQVT.createInterpretedExecutor(asTransformation);
+			myQVT.loadInput("forward", "OneElementList.xmi");
+			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "OneElementList_trace.xmi");
+			myQVT.createModel("reverse", "OneElementList_Interpreted.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "OneElementList_Interpreted.xmi", "OneElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+			//
+			myQVT.createInterpretedExecutor(asTransformation);
+			myQVT.loadInput("forward", "TwoElementList.xmi");
+			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "TwoElementList_trace.xmi");
+			myQVT.createModel("reverse", "TwoElementList_Interpreted.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "TwoElementList_Interpreted.xmi", "TwoElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+			//
+			myQVT.createInterpretedExecutor(asTransformation);
+			myQVT.loadInput("forward", "ThreeElementList.xmi");
+			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "ThreeElementList_trace.xmi");
+			myQVT.createModel("reverse", "ThreeElementList_Interpreted.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "ThreeElementList_Interpreted.xmi", "ThreeElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTcCompiler_Forward2Reverse_CG() throws Exception {
+		//    	Scheduler.EDGE_ORDER.setState(true);
+		//    	Scheduler.REGION_DEPTH.setState(true);
+		//    	Scheduler.REGION_LOCALITY.setState(true);
+		//    	Scheduler.REGION_ORDER.setState(true);
+		//    	Scheduler.REGION_STACK.setState(true);
+		//    	Scheduler.REGION_TRAVERSAL.setState(true);
+		MyQVT myQVT = new MyQVT("forward2reverse", List2listPackage.eINSTANCE, DoublylinkedlistPackage.eINSTANCE);
+		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		try {
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("forward2reverse.qvtc", "reverse", "List2List.genmodel");
+			//
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("forward", "EmptyList.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "EmptyList_CG.xmi", "EmptyList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+			//
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("forward", "OneElementList.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "OneElementList_CG.xmi", "OneElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+			//
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("forward", "TwoElementList.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "TwoElementList_CG.xmi", "TwoElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+			//
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("forward", "ThreeElementList.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "ThreeElementList_CG.xmi", "ThreeElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+
+			Class<? extends Transformer> txClassReverse = myQVT.buildTransformation("forward2reverse.qvtc", "forward", "List2List.genmodel");
+			//
+			myQVT.createGeneratedExecutor(txClassReverse);
+			myQVT.loadInput("reverse", "ThreeElementList.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("forward", "ThreeElementList_Reverse_CG.xmi", "ThreeElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();
