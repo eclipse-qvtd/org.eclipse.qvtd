@@ -12,6 +12,8 @@ package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -132,7 +134,19 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	public @NonNull DomainUsage visitMappingStatement(@NonNull MappingStatement object) {
 		return visitOCLExpression(object);
 	}
-	
+
+	@Override
+	public @NonNull DomainUsage visitOperationCallExp(@NonNull OperationCallExp object) {
+		String operationName = object.getReferredOperation().getName();
+		if ("objectsOfKind".equals(operationName) || "objectsOfType".equals(operationName)) {				// FIXME stronger test
+			for (OCLExpression argument : object.getOwnedArguments()) {
+				visit(argument);
+			}
+			return visit(object.getOwnedSource());
+		}
+		return super.visitOperationCallExp(object);
+	}
+
 	@Override
 	public @NonNull DomainUsage visitVariableExp(@NonNull VariableExp object) {
 		StandardLibraryInternal standardLibrary = (StandardLibraryInternal) context.getStandardLibrary();
