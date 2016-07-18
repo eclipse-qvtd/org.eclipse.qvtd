@@ -22,6 +22,30 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.Element;
 
 public class DoublyLinkedListGenerator
 {
+
+	public static void checkModel(@NonNull DoublyLinkedList list, int testSize) {
+		List<Element> elements = list.getOwnedElements();
+		assert elements.size() == testSize-1;
+		int i = 0;
+		for (Element element = list.getHeadElement(); element != null; element = element.getTarget()) {
+			assert element.getName().equals("e-" + (i > 0 ? testSize-i : 1));
+			if ((i > 0) && (element == list.getHeadElement())) {
+				break;
+			}
+			i++;
+		}
+		assert i == testSize-1;
+		i = 0;
+		for (Element element = list.getHeadElement(); element != null; element = element.getSource()) {
+			if ((i > 0) && (element == list.getHeadElement())) {
+				break;
+			}
+			assert element.getName().equals("e-" + (i+1));
+			i++;
+		}
+		assert i == testSize-1;
+	}
+
 	public static @NonNull List<@NonNull ? extends EObject> createDoublyLinkedListModel(int nElements) {
 		DoublyLinkedList list = DoublylinkedlistFactory.eINSTANCE.createDoublyLinkedList();
 		Element prevElement = null;
