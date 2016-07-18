@@ -1058,16 +1058,20 @@ public class Nodes
 				@NonNull CallExp callExp, @NonNull SimpleNode sourceNode) {
 			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			boolean isDirty = false;
+			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
 			if (callExp instanceof NavigationCallExp) {
 				Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);
 				isDirty = region.getSchedulerConstants().isDirty(referredProperty);
+				//				DomainUsage usage = region.getSchedulerConstants().basicGetDomainUsage(referredProperty);
+			}
+			//			if (!isDirty && sourceNode.isLoaded()) {
+			//				return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
+			//			}
+			if (sourceNode.isPredicated() || domainUsage.isOutput() ) {
+				return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
 			}
 			if (!isDirty && sourceNode.isLoaded()) {
 				return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
-			}
-			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
-			if (sourceNode.isPredicated() || domainUsage.isOutput() ) {
-				return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
 			}
 			else {
 				if (!isDirty) {
