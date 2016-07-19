@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="doublylinkedlist" nsURI="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/forward2reverse/1.0/DoublyLinkList"
+    nsPrefix="doublylinkedlist">
+  <eClassifiers xsi:type="ecore:EClass" name="Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="list" lowerBound="1" eType="#//DoublyLinkedList"
+        eOpposite="#//DoublyLinkedList/ownedElements"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Element" eOpposite="#//Element/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Element" eOpposite="#//Element/source"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DoublyLinkedList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headElement" eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedElements" ordered="false"
+        upperBound="-1" eType="#//Element" containment="true" eOpposite="#//Element/list"/>
+  </eClassifiers>
+</ecore:EPackage>

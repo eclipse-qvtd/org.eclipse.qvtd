@@ -391,6 +391,48 @@ public class QVTrCompilerTests extends LoadTestCase
     } */
 
 	@Test
+	public void testQVTrCompiler_Forward2Reverse_CG() throws Exception {
+		Splitter.RESULT.setState(true);
+		Splitter.STAGES.setState(true);
+		//		Scheduler.DEBUG_GRAPHS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		//		QVTr2QVTc.VARIABLES.setState(true);
+		MyQVT myQVT = new MyQVT("forward2reverse");
+		try {
+			@SuppressWarnings("unused")
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("forward2reverse",
+				"Forward2Reverse.qvtr", "reverse",
+					"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse");//,
+			//					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
+			//
+			/*			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("forward", "EmptyList.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "EmptyList_CG.xmi", "EmptyList_expected.xmi", null);//FlatStateMachineNormalizer.INSTANCE);
+			//
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("forward", "SimpleModel.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "SimpleModel_CG.xmi", "SimpleModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+			//
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("forward", "LargerModel.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "LargerModel_CG.xmi", "LargerModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+			//
+			//	        myQVT.createGeneratedExecutor(txClass);
+			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
+			//	    	myQVT.executeTransformation();
+			//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null); */
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
 	public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine() throws Exception {
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);

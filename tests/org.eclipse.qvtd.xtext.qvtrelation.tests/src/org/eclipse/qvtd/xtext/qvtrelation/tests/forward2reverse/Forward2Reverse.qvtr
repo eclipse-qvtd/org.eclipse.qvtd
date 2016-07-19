@@ -1,0 +1,59 @@
+/*******************************************************************************
+ * Copyright (c) 2007,2008 Tata Consultancy Services and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     TCS - initial implementation for ModelMorf
+ *     E.D.Willink - alignment with evolved specification
+ *     E.D.Willink - rename / comment
+ *******************************************************************************/
+--import listMM : '../../../../../../../../../org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/forward2reverse/DoublyLinkedList.ecore#/'; 
+import listMM : 'DoublyLinkedList.ecore#/'; 
+
+/**
+ * Transform a hierarchical StateMachine into a flat StateMachine.
+ */
+package org::eclipse::qvtd::xtext::qvtrelation2::tests::forward2reverse {
+	transformation Forward2Reverse(forward:listMM, reverse:listMM)
+	{
+		/**
+		 *  Map each hierarchical StateMachine to a flat StateMachine
+		 */
+		top relation list2list {
+			domain forward forwardList : DoublyLinkedList {
+				name = listName : String{},
+				headElement = forwardHead : Element{}
+			};	   
+			enforce domain reverse reverseList : DoublyLinkedList {
+				name = listName,
+				headElement = reverseHead : Element{}
+			};
+			when {
+				element2element(forwardHead, reverseHead);
+			}
+		}
+	
+		/**
+		 *  Map each Leaf State to a Flat State in the corresponding StateMachine.
+		 */
+		top relation element2element {
+			domain forward forwardElement : Element {
+				list = forwardList : DoublyLinkedList{},
+				name = elementName : String{},
+				target = forwardTarget : Element{}
+			};
+			enforce domain reverse reverseElement : Element {
+				list = reverseList : DoublyLinkedList{},
+				name = elementName,
+				source = reverseSource : Element{}
+			};	
+			when {
+				list2list(forwardList, reverseList);
+				element2element(forwardTarget, reverseSource);
+			}
+		}
+	}
+}
