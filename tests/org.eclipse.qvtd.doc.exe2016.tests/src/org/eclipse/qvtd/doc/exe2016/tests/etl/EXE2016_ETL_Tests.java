@@ -57,12 +57,17 @@ public class EXE2016_ETL_Tests extends TestCase {
 		 */
 		try {
 			int[] tests = PrintAndLog.getTestSizes();
-			EtlModule transformationLauncher = new EtlModule();
-			EmfModelFactory modelFactory = EmfModelFactory.getInstance();
-			String etlpath = "src/org/eclipse/qvtd/doc/exe2016/tests/etl/Forward2Reverse.etl";
-			File file = new File(etlpath);
-			transformationLauncher.parse(file);
+			boolean isFirst = true;
 			for (int testSize : tests) {
+				if (isFirst) {
+					isFirst = false;
+					testSize = 500;		// Avoid Stack Overflow on warmup
+				}
+				EtlModule transformationLauncher = new EtlModule();
+				EmfModelFactory modelFactory = EmfModelFactory.getInstance();
+				String etlpath = "src/org/eclipse/qvtd/doc/exe2016/tests/etl/Forward2Reverse.etl";
+				File file = new File(etlpath);
+				transformationLauncher.parse(file);
 				/*
 				 * Load models
 				 */
@@ -83,12 +88,13 @@ public class EXE2016_ETL_Tests extends TestCase {
 				reverseListModel.setMetamodelUri(DoublylinkedlistPackage.eINSTANCE.getNsURI());
 				reverseListModel.setResource(new XMIResourceImpl());
 				AccessMode.WRITE_ONLY.applyTo(reverseListModel);
+				reverseListModel.setStoredOnDisposal(false);
 				transformationLauncher.getContext().getModelRepository().addModel(forwardListModel);
 				transformationLauncher.getContext().getModelRepository().addModel(reverseListModel);
 				/*
 				 * Execute
 				 */
-				logger.printf("%9d, ", 10*testSize);
+				logger.printf("%9d, ", testSize);
 				EXE2016CGTests.garbageCollect();
 				long startTime = System.nanoTime();
 				transformationLauncher.execute();
