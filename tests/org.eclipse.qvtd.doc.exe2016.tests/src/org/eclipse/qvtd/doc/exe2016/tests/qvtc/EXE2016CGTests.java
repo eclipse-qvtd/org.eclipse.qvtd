@@ -15,6 +15,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.doc.exe2016.tests.DoublyLinkedListGenerator;
@@ -144,6 +146,41 @@ public class EXE2016CGTests extends TestCase
 			logger.dispose();
 		}
 	} */
+
+	@Test
+	public void testQVTcCompiler_Families2Persons_EcoreUtil() throws Exception {
+		PrintAndLog logger = new PrintAndLog(getName());
+		logger.printf("%s\n", getName());
+		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
+		try {
+			int[] tests = PrintAndLog.getTestSizes();
+			for (int testSize : tests) {
+				Iterable<@NonNull ? extends Object> rootObjects = DoublyLinkedListGenerator.createDoublyLinkedListModel(testSize);
+				garbageCollect();
+				logger.printf("%9d, ", testSize);
+				long startTime = System.nanoTime();
+				DoublyLinkedList oldList = (DoublyLinkedList) rootObjects.iterator().next();
+				Copier copier = new EcoreUtil.Copier();
+				DoublyLinkedList newList = (DoublyLinkedList) copier.copy(oldList);
+				for (Element oldElement : oldList.getOwnedElements()) {
+					Element newElement = (Element) copier.get(oldElement);
+					assert newElement != null;
+					Element oldTarget = oldElement.getTarget();
+					Element newSource = (Element) copier.get(oldTarget);
+					assert newSource != null;
+					newElement.setSource(newSource);
+				}
+				newList.setHeadElement((Element) copier.get(oldList.getHeadElement()));
+				long endTime = System.nanoTime();
+				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
+				DoublyLinkedListGenerator.checkModel(newList, testSize);
+			}
+		}
+		finally {
+			environmentFactory.dispose();
+			logger.dispose();
+		}
+	}
 
 	@Test
 	public void testQVTcCompiler_Families2Persons_Manual() throws Exception {
