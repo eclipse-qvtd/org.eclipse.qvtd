@@ -8,7 +8,10 @@
 --* Contributors:
 --*     Horacio Hoyos - Initial API and implementation
 --*******************************************************************************/
- 
+-- @atlcompiler emftvm
+-- @path ForwardList=/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/forward2reverse/DoublyLinkedList.ecore
+-- @path ReverseList=/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/forward2reverse/DoublyLinkedList.ecore
+
 module Forward2Reverse;
 create OUT : ReverseList from IN : ForwardList;
 

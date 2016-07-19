@@ -12,19 +12,16 @@ package org.eclipse.qvtd.doc.exe2016.tests.atl;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.m2m.atl.core.IInjector;
 import org.eclipse.m2m.atl.core.emf.EMFInjector;
@@ -32,17 +29,21 @@ import org.eclipse.m2m.atl.core.emf.EMFModel;
 import org.eclipse.m2m.atl.core.emf.EMFModelFactory;
 import org.eclipse.m2m.atl.core.emf.EMFReferenceModel;
 import org.eclipse.m2m.atl.core.launch.ILauncher;
+import org.eclipse.m2m.atl.emftvm.EmftvmFactory;
+import org.eclipse.m2m.atl.emftvm.ExecEnv;
+import org.eclipse.m2m.atl.emftvm.Metamodel;
+import org.eclipse.m2m.atl.emftvm.Model;
+import org.eclipse.m2m.atl.emftvm.impl.resource.EMFTVMResourceFactoryImpl;
+import org.eclipse.m2m.atl.emftvm.util.DefaultModuleResolver;
+import org.eclipse.m2m.atl.emftvm.util.ModuleResolver;
+import org.eclipse.m2m.atl.emftvm.util.TimingData;
 import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.doc.exe2016.tests.DoublyLinkedListGenerator;
 import org.eclipse.qvtd.doc.exe2016.tests.PrintAndLog;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtc.EXE2016CGTests;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublyLinkedList;
-import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistFactory;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
-import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.Element;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,30 +75,6 @@ public class EXE2016_ATL_Tests extends TestCase
 		super.tearDown();
 	}
 
-	/*    @Test
-    public void testQVTcCompiler_Families_EcoreUtilCopy() throws Exception {
-    	PrintAndLog logger = new PrintAndLog("results/" + getName());
-    	logger.printf("%s\n", getName());
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
-		try {
-	        int[] tests = PrintAndLog.getTestSizes();
-	        for (int testSize : tests) {
-				Collection<@NonNull ? extends EObject> rootObjects = DoublyLinkedListGenerator.createFamiliesModel(testSize, 9);
-				garbageCollect();
-				logger.printf("%9d, ", 10*testSize);
-				long startTime = System.nanoTime();
-				Collection<@NonNull Object> rootObjects2 = EcoreUtil.copyAll(rootObjects);
-				long endTime = System.nanoTime();
-				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-				assert rootObjects2.size() == testSize;
-	        }
-		}
-		finally {
-			environmentFactory.dispose();
-			logger.dispose();
-		}
-	} */
-
 	@Test
 	public void testQVTcCompiler_Forward2Reverse_ATL() throws Exception {
 		PrintAndLog logger = new PrintAndLog(getName());
@@ -108,7 +85,6 @@ public class EXE2016_ATL_Tests extends TestCase
 		ILauncher transformationLauncher = new EMFVMLauncher();
 		EMFModelFactory modelFactory = new EMFModelFactory();
 		ResourceSet resourceSet = modelFactory.getResourceSet();
-		resourceSet.getPackageRegistry().put(DoublylinkedlistPackage.eNS_URI, DoublylinkedlistPackage.eINSTANCE);
 		resourceSet.getPackageRegistry().put(DoublylinkedlistPackage.eNS_URI, DoublylinkedlistPackage.eINSTANCE);
 		IInjector injector = new EMFInjector();
 		/*
@@ -177,120 +153,80 @@ public class EXE2016_ATL_Tests extends TestCase
 		}
 	}
 
-	/*    @Test
-    public void testQVTcCompiler_Families2Persons_ManualInPlace() throws Exception {
-    	PrintAndLog logger = new PrintAndLog(getName());
-    	logger.printf("%s\n", getName());
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
-		try {
-	        int[] tests = PrintAndLog.getTestSizes();
-	        for (int testSize : tests) {
-				Iterable<@NonNull ? extends EObject> rootObjects = DoublyLinkedListGenerator.createFamiliesModel(testSize, 9);
-				garbageCollect();
-				logger.printf("%9d, ", 10*testSize);
-				long startTime = System.nanoTime();
-				List<Member> members = new ArrayList<Member>(9*testSize);
-				for (EObject eObject : rootObjects) {
-					Family family = (Family)eObject;
-					members.add(family.getFather());
-					members.add(family.getMother());
-					members.addAll(family.getSons());
-					members.addAll(family.getDaughters());
-				}
-				long endTime = System.nanoTime();
-				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-				assert members.size() == 9*testSize;
-	        }
-		}
-		finally {
-			environmentFactory.dispose();
-			logger.dispose();
-		}
-	} */
-
 	@Test
-	public void testQVTcCompiler_Families2Persons_EcoreUtil() throws Exception {
+	public void testQVTcCompiler_Forward2Reverse_EMFTVM() throws Exception {
 		PrintAndLog logger = new PrintAndLog(getName());
 		logger.printf("%s\n", getName());
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
 		try {
 			int[] tests = PrintAndLog.getTestSizes();
 			for (int testSize : tests) {
-				Iterable<@NonNull ? extends Object> rootObjects = DoublyLinkedListGenerator.createDoublyLinkedListModel(testSize);
-				garbageCollect();
-				logger.printf("%9d, ", testSize);
-				long startTime = System.nanoTime();
-				DoublyLinkedList oldList = (DoublyLinkedList) rootObjects.iterator().next();
-				Copier copier = new EcoreUtil.Copier();
-				DoublyLinkedList newList = (DoublyLinkedList) copier.copy(oldList);
-				for (Element oldElement : oldList.getOwnedElements()) {
-					Element newElement = (Element) copier.get(oldElement);
-					assert newElement != null;
-					Element oldTarget = oldElement.getTarget();
-					Element newSource = (Element) copier.get(oldTarget);
-					assert newSource != null;
-					newElement.setSource(newSource);
+
+				ExecEnv env = EmftvmFactory.eINSTANCE.createExecEnv();
+				ResourceSet resourceSet = new ResourceSetImpl();
+				resourceSet.getPackageRegistry().put(DoublylinkedlistPackage.eNS_URI, DoublylinkedlistPackage.eINSTANCE);
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("emftvm", new EMFTVMResourceFactoryImpl());
+
+				// Load metamodels
+				Metamodel metaModel = EmftvmFactory.eINSTANCE.createMetamodel();
+				metaModel.setResource(resourceSet.getResource(URI.createURI("http://www.eclipse.org/m2m/atl/2011/EMFTVM"), true));
+				env.registerMetaModel("METAMODEL", metaModel);
+				metaModel = EmftvmFactory.eINSTANCE.createMetamodel();
+				metaModel.setResource(resourceSet.getResource(URI.createURI(DoublylinkedlistPackage.eNS_URI), true));
+				env.registerMetaModel("ForwardList", metaModel);
+				env.registerMetaModel("ReverseList", metaModel);
+				Resource forwardResource = resourceSet.createResource(URI.createURI("src/org/eclipse/qvtd/doc/exe2016/tests/atl/samples-Families.xmi"));
+				try {
+					forwardResource.load(new InputStream() {
+						@Override
+						public int read()      { return -1; }
+						@Override
+						public int available() { return 0; }
+					}, null);
 				}
-				newList.setHeadElement((Element) copier.get(oldList.getHeadElement()));
+				catch(Throwable e) {}
+				Model outModel = EmftvmFactory.eINSTANCE.createModel();
+				outModel.setResource(resourceSet.createResource(URI.createFileURI("out.xmi")));
+
+				//		try {
+				//	        int[] tests = PrintAndLog.getTestSizes();
+				//	        for (int testSize : tests) {
+				// Load models
+				Model inModel = EmftvmFactory.eINSTANCE.createModel();
+				forwardResource.getContents().clear();
+				outModel.getResource().getContents().clear();
+				env.clearModels();
+				EXE2016CGTests.garbageCollect();
+				Collection<@NonNull ? extends EObject> rootObjects = DoublyLinkedListGenerator.createDoublyLinkedListModel(testSize);
+				forwardResource.getContents().addAll(rootObjects);
+				inModel.setResource(forwardResource);
+				env.registerInputModel("IN", inModel);
+				env.registerOutputModel("OUT", outModel);
+
+				// Load and run module
+				ModuleResolver mr = new DefaultModuleResolver("src/org/eclipse/qvtd/doc/exe2016/tests/atl/", new ResourceSetImpl());
+				TimingData td = new TimingData();
+				env.loadModule(mr, "Forward2Reverse");
+				td.finishLoading();
+				logger.printf("%9d, ", testSize);
+				EXE2016CGTests.garbageCollect();
+				long startTime = System.nanoTime();
+				env.run(td);
 				long endTime = System.nanoTime();
 				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-				DoublyLinkedListGenerator.checkModel(newList, testSize);
+				td.finish();
+
+				Resource reverseListResource = outModel.getResource();
+				Collection<@NonNull EObject> rootObjects2 = reverseListResource.getContents();
+				Iterator<@NonNull EObject> it = rootObjects2.iterator();
+				Object rootObject = it.next();
+				assert !it.hasNext();
+				assert ((DoublyLinkedList)rootObject).getOwnedElements().size() == testSize-1;
+				DoublyLinkedListGenerator.checkModel((DoublyLinkedList) rootObject, testSize);
 			}
 		}
 		finally {
-			environmentFactory.dispose();
 			logger.dispose();
 		}
 	}
-
-	@Test
-	public void testQVTcCompiler_Families2Persons_Manual() throws Exception {
-		PrintAndLog logger = new PrintAndLog(getName());
-		logger.printf("%s\n", getName());
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
-		try {
-			int[] tests = PrintAndLog.getTestSizes();
-			for (int testSize : tests) {
-				Iterable<@NonNull ? extends Object> rootObjects = DoublyLinkedListGenerator.createDoublyLinkedListModel(testSize);
-				garbageCollect();
-				logger.printf("%9d, ", testSize);
-				long startTime = System.nanoTime();
-				DoublyLinkedList oldList = (DoublyLinkedList) rootObjects.iterator().next();
-				List<Element> oldElements = oldList.getOwnedElements();
-				//
-				DoublyLinkedList newList = DoublylinkedlistFactory.eINSTANCE.createDoublyLinkedList();
-				int iSize = oldElements.size();
-				List<Element> newElements = new ArrayList<>(iSize);
-				newList.setName(oldList.getName());
-
-				Element prevElement = null;
-				for (Element oldElement : oldElements) {
-					Element newElement = DoublylinkedlistFactory.eINSTANCE.createElement();
-					newElement.setName(oldElement.getName());
-					newElement.setTarget(prevElement);
-					newElements.add(newElement);
-					prevElement = newElement;
-				}
-				if (prevElement != null) {
-					Element firstElement = newElements.get(0);
-					firstElement.setTarget(prevElement);
-					newList.setHeadElement(firstElement);
-				}
-				newList.getOwnedElements().addAll(newElements);
-				long endTime = System.nanoTime();
-				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-				DoublyLinkedListGenerator.checkModel(newList, testSize);
-			}
-		}
-		finally {
-			environmentFactory.dispose();
-			logger.dispose();
-		}
-	}
-
-	/*    private Member manualCopy(@NonNull Member oldMember) {
-		Member newMember = FamiliesFactory.eINSTANCE.createMember();
-		newMember.setFirstName(oldMember.getFirstName());
-		return newMember;
-	} */
 }
