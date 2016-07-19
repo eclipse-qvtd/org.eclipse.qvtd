@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -154,9 +155,11 @@ public class EXE2016_ATL_Tests extends TestCase
 
 				Resource reverseListResource = reverseListModel.getResource();
 				Collection<@NonNull EObject> rootObjects2 = reverseListResource.getContents();
-				System.out.println("Testsize " + testSize);
-				System.out.println("result " + rootObjects2.size());
-				assert rootObjects2.size() == testSize;
+				Iterator<@NonNull EObject> it = rootObjects2.iterator();
+				Object rootObject = it.next();
+				assert !it.hasNext();
+				assert ((DoublyLinkedList)rootObject).getOwnedElements().size() == testSize-1;
+				DoublyLinkedListGenerator.checkModel((DoublyLinkedList) rootObject, testSize);
 				/*
 				 * Unload all models
 				 */
