@@ -1,0 +1,20 @@
+modeltype lMM uses 'http://www.eclipse.org/qvtd/xtext/qvtcore/tests/forward2reverse/1.0/DoublyLinkList';
+
+transformation Forward2Reverse(in family : lMM, out lMM);
+
+main() {
+	family.rootObjects()[lMM::DoublyLinkedList]->map list2list();
+}
+
+mapping lMM::DoublyLinkedList::list2list() : lMM::DoublyLinkedList
+{
+	result.name := self.name;
+	result.ownedElements := self.ownedElements->map element2element();
+	result.headElement := self.headElement.late resolveoneIn(Element::element2element);
+}
+
+mapping lMM::Element::element2element() : lMM::Element
+{
+	result.name := self.name;
+	result.source := self.target.late resolveoneIn(Element::element2element);
+}
