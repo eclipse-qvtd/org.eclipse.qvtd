@@ -1,0 +1,92 @@
+/*******************************************************************************
+ * Copyright (c) 2016 University of York
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - Initial API and implementation
+ *******************************************************************************/
+ 
+pattern packageToSchema
+    p : uml!Package {
+      onmatch:
+      p.name.println() 
+    }
+
+pattern classToTable
+	p : uml!Package,
+	c : uml!Class
+	  guard: c.kind == 'persistent' {
+	  match :
+	  c.namespace = p 
+	}
+
+pattern associationToForeignKey
+	p : Package,
+    sc : Class
+      guard: sc.kind = 'persistent',
+    dc : Class
+      guard: dc.kind = 'persistent',
+	a : uml!Association {
+	  match:
+		sc.namespace = p and 
+		sc.getAllForwards()->includes(a) and 
+    	dc.getAllSupers()->includes(a.destination)
+	}
+
+pattern classPrimitiveAttributes
+	t : PrimitiveDataType,
+    c : Class,
+    a : Attribute {
+      match:
+        a.type = t and
+    	c.getAllAttributes()->includes(a)
+    }
+
+pattern classComplexAttributes
+	t : Class,
+    c : Class,
+    a : Attribute {
+      match:
+        a.type = t and
+        c.getAllAttributes()->includes(a)
+    }
+	
+pattern complexAttributePrimitiveAttributes
+	t : PrimitiveDataType,
+    ca : Attribute,
+    c : Class,
+    a : Attribute {
+      match:
+      	a.type = t and
+    	ca.type = c and 
+    	c.getAllAttributes()->includes(a)
+    }
+
+pattern complexAttributeComplexAttributes
+	ca : Attribute,
+    t : Class,
+    c : Class,
+    a : Attribute {
+      match:
+      	a.type = t and
+      	ca.type = c and
+    	getAllAttributes(c)->includes(a)
+    }
+	
+function uml!Class getAllSupers() : Set(uml!Class)
+{
+    return self.general.collect(gen | gen.getAllSupers()).flatten().including(self).asSet();
+}
+
+function uml!Class getAllAttributes() : Set(uml!Attribute)
+{
+    return self.getAllSupers().collect(c | c.attributes).flatten().asSet();
+}
+
+function uml!Class getAllForwards() : Set(uml!Association)
+{
+    return self.getAllSupers().flatten().collect(c | c.forward).asSet();
+}	
