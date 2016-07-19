@@ -1,0 +1,25 @@
+module Forward2Reverse;
+create OUT : ReverseList from IN : ForwardList;
+
+rule list2list {
+	from
+		f : ForwardList!DoublyLinkedList
+	to
+		r : ReverseList!DoublyLinkedList (
+			name <- f.name,
+			headElement <- f.headElement
+		)
+}
+
+
+rule element2element {
+	from
+		f : ForwardList!Element
+	to
+		r : ReverseList!Element (
+			name <- f.name,
+			list <- f.list,
+			source <- f.target,
+			target <- f.source
+		)
+}
