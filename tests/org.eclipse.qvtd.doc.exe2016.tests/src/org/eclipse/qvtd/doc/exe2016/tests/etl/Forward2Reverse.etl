@@ -1,0 +1,31 @@
+/*******************************************************************************
+ * Copyright (c) 2016 University of York
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - Initial API and implementation
+ *******************************************************************************/
+rule list2list
+	transform
+		f : ForwardList!DoublyLinkedList
+	to
+		r : ReverseList!DoublyLinkedList {
+	
+	r.name = f.name;
+	r.headElement ::= f.headElement;
+		
+}
+
+rule element2element
+	transform
+		f : ForwardList!Element
+	to
+		r : ReverseList!Element {
+	r.name = f.name;
+	r.list ::= f.list;
+	r.source ::= f.target;
+	r.target ::= f.source;
+}
