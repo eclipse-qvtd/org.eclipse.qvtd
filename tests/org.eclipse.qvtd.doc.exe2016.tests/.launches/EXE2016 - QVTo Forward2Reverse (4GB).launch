@@ -12,5 +12,5 @@
 <stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.qvtd.doc.exe2016.tests.qvto.EXE2016QVToTests"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.qvtd.doc.exe2016.tests"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DtestSuiteName=&quot;EXE2016 - QVTo Forward2Reverse (4GB)&quot;&#13;&#10;-ea -Xmx4G"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DtestSuiteName=&quot;EXE2016 - QVTo Forward2Reverse (4GB)&quot;&#13;&#10;-Xmx4G"/>
 </launchConfiguration>

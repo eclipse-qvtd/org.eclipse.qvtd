@@ -10,22 +10,20 @@
  *******************************************************************************/
 rule list2list
 	transform
-		f : ForwardList!DoublyLinkedList
+		forwardList : ForwardList!DoublyLinkedList
 	to
-		r : ReverseList!DoublyLinkedList {
-	
-	r.name = f.name;
-	r.headElement ::= f.headElement;
-		
+		reverseList : ReverseList!DoublyLinkedList {
+	reverseList.name = forwardList.name;
+	reverseList.headElement ::= forwardList.headElement;
 }
 
 rule element2element
 	transform
-		f : ForwardList!Element
+		forwardElement : ForwardList!Element
 	to
-		r : ReverseList!Element {
-	r.name = f.name;
-	r.list ::= f.list;
-	r.source ::= f.target;
-	r.target ::= f.source;
+		reverseElement : ReverseList!Element {
+	reverseElement.name = forwardElement.name;
+	reverseElement.list ::= forwardElement.list;
+	reverseElement.source ::= forwardElement.target;
+	reverseElement.target ::= forwardElement.source;
 }

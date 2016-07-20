@@ -17,23 +17,21 @@ create OUT : ReverseList from IN : ForwardList;
 
 rule list2list {
 	from
-		f : ForwardList!DoublyLinkedList
+		forwardList : ForwardList!DoublyLinkedList
 	to
-		r : ReverseList!DoublyLinkedList (
-			name <- f.name,
-			headElement <- f.headElement
+		reverseList : ReverseList!DoublyLinkedList (
+			name <- forwardList.name,
+			headElement <- forwardList.headElement
 		)
 }
 
-
 rule element2element {
 	from
-		f : ForwardList!Element
+		forwardElement : ForwardList!Element
 	to
-		r : ReverseList!Element (
-			name <- f.name,
-			list <- f.list,
-			source <- f.target,
-			target <- f.source
+		reverseElement : ReverseList!Element (
+			name <- forwardElement.name,
+			list <- forwardElement.list,
+			source <- forwardElement.target
 		)
 }

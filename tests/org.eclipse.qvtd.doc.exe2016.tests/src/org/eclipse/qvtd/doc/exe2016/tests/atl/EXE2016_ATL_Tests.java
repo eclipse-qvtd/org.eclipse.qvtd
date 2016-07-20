@@ -121,7 +121,7 @@ public class EXE2016_ATL_Tests extends TestCase
 				transformationLauncher.addInModel(forwardListModel, "IN", "ForwardList");
 				transformationLauncher.addOutModel(reverseListModel, "OUT", "ReverseList");
 
-				logger.printf("%9d, ", 10*testSize);
+				logger.printf("%9d, ", testSize);
 				EXE2016CGTests.garbageCollect();
 				long startTime = System.nanoTime();
 				transformationLauncher.launch(ILauncher.RUN_MODE, new NullProgressMonitor(), new HashMap<String,Object>(),

@@ -32,6 +32,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import cg.org.eclipse.qvtd.xtext.qvtcore.tests.forward2reverse.Forward2Reverse;
 import junit.framework.TestCase;
 
 /**
@@ -59,92 +60,37 @@ public class EXE2016CGTests extends TestCase
 		super.tearDown();
 	}
 
-	/*    @Test
-    public void testQVTcCompiler_Families_EcoreUtilCopy() throws Exception {
-    	PrintAndLog logger = new PrintAndLog("results/" + getName());
-    	logger.printf("%s\n", getName());
+	@Test
+	public void testQVTcCompiler_Forward2Reverse_CG() throws Exception {
+		PrintAndLog logger = new PrintAndLog(getName());
+		logger.printf("%s\n", getName());
 		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
 		try {
-	        int[] tests = PrintAndLog.getTestSizes();
-	        for (int testSize : tests) {
-				Collection<@NonNull ? extends EObject> rootObjects = DoublyLinkedListGenerator.createFamiliesModel(testSize, 9);
+			int[] tests = PrintAndLog.getTestSizes();
+			for (int testSize : tests) {
+				Iterable<@NonNull ? extends Object> rootObjects = DoublyLinkedListGenerator.createDoublyLinkedListModel(testSize);
+				QVTiTransformationExecutor generatedExecutor = new QVTiTransformationExecutor(environmentFactory, Forward2Reverse.class);
+				Transformer transformer = generatedExecutor.getTransformer();
+				transformer.addRootObjects("forward", rootObjects);
 				garbageCollect();
-				logger.printf("%9d, ", 10*testSize);
+				logger.printf("%9d, ", testSize);
 				long startTime = System.nanoTime();
-				Collection<@NonNull Object> rootObjects2 = EcoreUtil.copyAll(rootObjects);
+				transformer.run();
 				long endTime = System.nanoTime();
 				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-				assert rootObjects2.size() == testSize;
-	        }
+				Collection<@NonNull Object> rootObjects2 = transformer.getRootObjects("reverse");
+				Iterator<Object> it = rootObjects2.iterator();
+				Object rootObject = it.next();
+				assert !it.hasNext();
+				assert ((DoublyLinkedList)rootObject).getOwnedElements().size() == testSize-1;
+				DoublyLinkedListGenerator.checkModel((DoublyLinkedList) rootObject, testSize);
+			}
 		}
 		finally {
 			environmentFactory.dispose();
 			logger.dispose();
 		}
-	} */
-
-	//	@Test
-	//	public void testQVTcCompiler_Forward2Reverse_CG() throws Exception {
-	//		PrintAndLog logger = new PrintAndLog(getName());
-	//		logger.printf("%s\n", getName());
-	//		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
-	//		try {
-	//			int[] tests = PrintAndLog.getTestSizes();
-	//			for (int testSize : tests) {
-	//				Iterable<@NonNull ? extends Object> rootObjects = DoublyLinkedListGenerator.createDoublyLinkedListModel(testSize);
-	//				QVTiTransformationExecutor generatedExecutor = new QVTiTransformationExecutor(environmentFactory, Forward2Reverse.class);
-	//				Transformer transformer = generatedExecutor.getTransformer();
-	//				transformer.addRootObjects("forward", rootObjects);
-	//				garbageCollect();
-	//				logger.printf("%9d, ", testSize);
-	//				long startTime = System.nanoTime();
-	//				transformer.run();
-	//				long endTime = System.nanoTime();
-	//				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-	//				Collection<@NonNull Object> rootObjects2 = transformer.getRootObjects("reverse");
-	//				Iterator<Object> it = rootObjects2.iterator();
-	//				Object rootObject = it.next();
-	//				assert !it.hasNext();
-	//				assert ((DoublyLinkedList)rootObject).getOwnedElements().size() == testSize-1;
-	//				DoublyLinkedListGenerator.checkModel((DoublyLinkedList) rootObject, testSize);
-	//			}
-	//		}
-	//		finally {
-	//			environmentFactory.dispose();
-	//			logger.dispose();
-	//		}
-	//	}
-
-	/*    @Test
-    public void testQVTcCompiler_Families2Persons_ManualInPlace() throws Exception {
-    	PrintAndLog logger = new PrintAndLog(getName());
-    	logger.printf("%s\n", getName());
-		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
-		try {
-	        int[] tests = PrintAndLog.getTestSizes();
-	        for (int testSize : tests) {
-				Iterable<@NonNull ? extends EObject> rootObjects = DoublyLinkedListGenerator.createFamiliesModel(testSize, 9);
-				garbageCollect();
-				logger.printf("%9d, ", 10*testSize);
-				long startTime = System.nanoTime();
-				List<Member> members = new ArrayList<Member>(9*testSize);
-				for (EObject eObject : rootObjects) {
-					Family family = (Family)eObject;
-					members.add(family.getFather());
-					members.add(family.getMother());
-					members.addAll(family.getSons());
-					members.addAll(family.getDaughters());
-				}
-				long endTime = System.nanoTime();
-				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-				assert members.size() == 9*testSize;
-	        }
-		}
-		finally {
-			environmentFactory.dispose();
-			logger.dispose();
-		}
-	} */
+	}
 
 	@Test
 	public void testQVTcCompiler_Families2Persons_EcoreUtil() throws Exception {
