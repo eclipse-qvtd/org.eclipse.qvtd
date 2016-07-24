@@ -83,12 +83,12 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 	/**
 	 * The nodes to which inputs are passed.
 	 */
-//	private @NonNull List<@NonNull Node> extraGuardNodes = new ArrayList<@NonNull Node>();
+	//	private @NonNull List<@NonNull Node> extraGuardNodes = new ArrayList<@NonNull Node>();
 
 	/**
 	 * The nodes from which outputs are passed.
 	 */
-//	private @NonNull List<@NonNull Node> tailNodes = new ArrayList<@NonNull Node>();
+	//	private @NonNull List<@NonNull Node> tailNodes = new ArrayList<@NonNull Node>();
 
 	public CyclicScheduledRegion(@NonNull ScheduledRegion parentScheduledRegion, @NonNull Iterable<@NonNull Region> regions) {
 		super(parentScheduledRegion.getMultiRegion());
@@ -97,24 +97,24 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 			addRegion(region);
 		}
 		createHeadNodes();
-//		createExtraHeadNodes();
-//		createTailNodes();
-//		relocateInternalConnections();
-//		for (@NonNull Node headNode : headNodes) {
-//			for (@NonNull Node tailNode : tailNodes) {
-//				Edges.PRIMARY_RECURSION.createEdge(this, headNode, tailNode);
-//			}
-//		}
-//		toGraph(new DOTStringBuilder());
-//		toGraph(new GraphMLStringBuilder());
+		//		createExtraHeadNodes();
+		//		createTailNodes();
+		//		relocateInternalConnections();
+		//		for (@NonNull Node headNode : headNodes) {
+		//			for (@NonNull Node tailNode : tailNodes) {
+		//				Edges.PRIMARY_RECURSION.createEdge(this, headNode, tailNode);
+		//			}
+		//		}
+		//		toGraph(new DOTStringBuilder());
+		//		toGraph(new GraphMLStringBuilder());
 	}
 
 	@Override
-	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitCyclicScheduledRegion(this);
 	}
 
-/*	private void createExtraHeadNodes() {
+	/*	private void createExtraHeadNodes() {
 		Map<@NonNull ClassDatumAnalysis, @NonNull Set<@NonNull Node>> type2extraNodes = new HashMap<@NonNull ClassDatumAnalysis, @NonNull Set<@NonNull Node>>();
 		for (@NonNull Region innerRegion : getRegions()) {
 			for (@NonNull Node guardNode : innerRegion.getGuardNodes()) {
@@ -272,7 +272,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 		}
 		return headNode;
 	}
-/*			@NonNull NodeConnection externalConnection;
+	/*			@NonNull NodeConnection externalConnection;
 			if (externalConnections.size() > 1) {
 				Set<@NonNull Node> externalSourceNodes = null;
 //				Set<@NonNull Node> internalSourceNodes = null;
@@ -280,7 +280,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 					Region sourceRegion = sourceNode.getRegion();
 					if (!regions.contains(sourceRegion)) {
 					}
-//					else {}				-- internalSources resolved after unifying connections 
+//					else {}				-- internalSources resolved after unifying connections
 //						if (internalSourceNodes == null) {
 //							internalSourceNodes = new HashSet<@NonNull Node>();
 //						}
@@ -342,7 +342,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 				newInternalConnection.addPassedTargetNode(internalTargetNode);
 			}
 		} */
-/*		for (@NonNull NodeConnection outerConnection : incomingConnections2headNodes.keySet()) {
+	/*		for (@NonNull NodeConnection outerConnection : incomingConnections2headNodes.keySet()) {
 			Set<@NonNull Node> targetNodes = incomingConnections2headNodes.get(outerConnection);
 			assert targetNodes != null;
 			NodeRole.Phase nodeRolePhase = null;
@@ -368,7 +368,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 //			outerConnection.addSubConnection(innerConnection);
 			headNodes.add(headNode);
 		} */
-//	}
+	//	}
 
 	/**
 	 * Every outgoing connection that passes a value must have a tail node to accumulate the value to be passed.
@@ -417,7 +417,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 //			outerConnection.addSubConnection(innerConnection);
 		}
 	}*/
-	
+
 	@Override
 	public @NonNull String getName() {
 		List<@NonNull String> names = new ArrayList<@NonNull String>();
@@ -426,7 +426,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 		}
 		Collections.sort(names);;
 		StringBuilder s = new StringBuilder();
-//		s.append(getClass().getSimpleName());
+		//		s.append(getClass().getSimpleName());
 		for (String name : names) {
 			if (s.length() > 0) {
 				s.append("\\n");
@@ -435,21 +435,21 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 		}
 		return s.toString();
 	}
-	
+
 	@Override
 	public @NonNull String getColor() {
 		return "brown";
 	}
 
-//	@Override
-//	public @NonNull Collection<@NonNull Connection> getConnections() {
-//		return Sets.newHashSet(Iterables.concat(getIncomingConnections(), getOutgoingConnections()));
-//	}
+	//	@Override
+	//	public @NonNull Collection<@NonNull Connection> getConnections() {
+	//		return Sets.newHashSet(Iterables.concat(getIncomingConnections(), getOutgoingConnections()));
+	//	}
 
-//	@Override
-//	public @NonNull List<@NonNull NodeConnection> getHeadConnections() {
-//		return getIncomingPassedConnections();
-//	}
+	//	@Override
+	//	public @NonNull List<@NonNull NodeConnection> getHeadConnections() {
+	//		return getIncomingPassedConnections();
+	//	}
 
 	@Override
 	public @NonNull List<@NonNull Node> getHeadNodes() {
@@ -459,7 +459,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 	@Override
 	public @NonNull Iterable<@NonNull DatumConnection> getIncomingConnections() {		// FIXME cache
 		return Sets.newHashSet(Iterables.concat(getIncomingPassedConnections(), getIncomingUsedConnections()));
-/*		Set<@NonNull DatumConnection> connections = new HashSet<@NonNull DatumConnection>();
+		/*		Set<@NonNull DatumConnection> connections = new HashSet<@NonNull DatumConnection>();
 		Set<@NonNull Region> regions = new HashSet<@NonNull Region>(getRegions());
 		for (@NonNull Region region : regions) {
 			for (@NonNull DatumConnection connection : region.getIncomingConnections()) {
@@ -473,7 +473,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 		return connections; */
 	}
 
-/*	@Override
+	/*	@Override
 	public @NonNull List<@NonNull NodeConnection> getIncomingPassedConnections() {		// FIXME cache
 		List<@NonNull NodeConnection> connections = new ArrayList<@NonNull NodeConnection>();
 		Set<@NonNull Region> regions = new HashSet<@NonNull Region>(getRegions());
@@ -515,7 +515,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 		}
 		Iterables.addAll(connections, getOutgoingUsedConnections());
 		return Lists.newArrayList(connections);
-/*		List<@NonNull DatumConnection> connections = new ArrayList<@NonNull DatumConnection>();
+		/*		List<@NonNull DatumConnection> connections = new ArrayList<@NonNull DatumConnection>();
 		Set<@NonNull Region> regions = new HashSet<@NonNull Region>(getRegions());
 		for (@NonNull Region region : regions) {
 			for (@NonNull DatumConnection connection : region.getOutgoingConnections()) {
@@ -535,7 +535,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 		Iterables.addAll(connections, getOutgoingPassedConnections());
 		Iterables.addAll(connections, getOutgoingUsedConnections());
 		return Lists.newArrayList(connections);
-/*		List<@NonNull DatumConnection> connections = new ArrayList<@NonNull DatumConnection>();
+		/*		List<@NonNull DatumConnection> connections = new ArrayList<@NonNull DatumConnection>();
 		Set<@NonNull Region> regions = new HashSet<@NonNull Region>(getRegions());
 		for (@NonNull Region region : regions) {
 			for (@NonNull DatumConnection connection : region.getOutgoingConnections()) {
@@ -551,8 +551,8 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 
 	@Override
 	public @NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections() {			// FIXME cache
-//		throw new UnsupportedOperationException();
-/*		List<@NonNull NodeConnection> connections = new ArrayList<@NonNull NodeConnection>();
+		//		throw new UnsupportedOperationException();
+		/*		List<@NonNull NodeConnection> connections = new ArrayList<@NonNull NodeConnection>();
 		for (@NonNull Node headNode : headNodes) {
 			for (@NonNull NodeConnection connection : headNode.getOutgoingPassedConnections()) {
 				connections.add(connection);
@@ -562,25 +562,25 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 		Set<@NonNull NodeConnection> connections = new HashSet<@NonNull NodeConnection>();
 		Set<@NonNull Region> regions = new HashSet<@NonNull Region>(getRegions());
 		for (@NonNull Region region : regions) {
-//			System.out.println("Region: " + region);
+			//			System.out.println("Region: " + region);
 			for (@NonNull NodeConnection connection : region.getOutgoingPassedConnections()) {
-//				System.out.println("  connection: " + connection);
+				//				System.out.println("  connection: " + connection);
 				for (Map.Entry<@NonNull Node, @NonNull ConnectionRole> targetEntry : connection.getTargets().entrySet()) {
 					if (targetEntry.getValue().isPassed()) { // && !connections.contains(connection)) {
 						Node targetNode = targetEntry.getKey();
 						Region targetRegion = targetNode.getRegion();
-//						System.out.println("    target region: " + targetRegion);
+						//						System.out.println("    target region: " + targetRegion);
 						if (!regions.contains(targetRegion)) {
-//							System.out.println("      add: ");
+							//							System.out.println("      add: ");
 							connections.add(connection);
 						}
 					}
 				}
 			}
 		}
-//		for (@NonNull NodeConnection connection : connections) {
-//			System.out.println("  -- " + connection);
-//		}
+		//		for (@NonNull NodeConnection connection : connections) {
+		//			System.out.println("  -- " + connection);
+		//		}
 		return connections;
 	}
 
@@ -655,7 +655,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 			}
 		}
 	} */
-	
+
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
 		s.setLabel(getName());

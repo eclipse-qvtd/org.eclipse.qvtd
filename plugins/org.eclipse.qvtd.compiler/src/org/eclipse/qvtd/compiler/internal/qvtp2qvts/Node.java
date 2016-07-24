@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
  * Node provides the analysis and status of a node in the pattern match or construction of a Mapping
  * or Composite Region.
  */
-public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Nameable
+public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Nameable, Visitable
 {
 	void addIncomingConnection(@NonNull NodeConnection connection);
 	void addIncomingEdge(@NonNull Edge edge);

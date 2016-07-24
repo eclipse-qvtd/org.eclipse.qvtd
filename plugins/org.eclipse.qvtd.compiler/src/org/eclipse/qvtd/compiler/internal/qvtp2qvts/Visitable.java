@@ -11,9 +11,8 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 public interface Visitable
 {
-	@Nullable <R> R accept(@NonNull Visitor<R> visitor);
+	<R> R accept(@NonNull Visitor<R> visitor);
 }

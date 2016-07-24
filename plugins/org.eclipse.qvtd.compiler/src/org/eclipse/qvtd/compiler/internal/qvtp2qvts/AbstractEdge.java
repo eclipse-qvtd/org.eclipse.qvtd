@@ -38,6 +38,11 @@ public abstract class AbstractEdge implements Edge//, GraphStringBuilder.GraphNo
 	}
 
 	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitEdge(this);
+	}
+
+	@Override
 	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
 		s.setColor(getColor());
 		String label = getLabel();
@@ -60,7 +65,7 @@ public abstract class AbstractEdge implements Edge//, GraphStringBuilder.GraphNo
 		final Node sourceNode = getSource();
 		final Node targetNode = getTarget();
 		s.appendEdge(sourceNode, this, targetNode);
-/*		GraphEdge graphEdge1 = new GraphEdge()
+		/*		GraphEdge graphEdge1 = new GraphEdge()
 		{
 			@Override
 			public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
@@ -103,7 +108,7 @@ public abstract class AbstractEdge implements Edge//, GraphStringBuilder.GraphNo
 		s.appendEdge(graphEdge2.getSource(), graphEdge2, graphEdge2.getTarget()); */
 	}
 
-/*	@Override
+	/*	@Override
 	public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
 		String name = getName();
 / *		String indexText = getIndexText();
@@ -274,6 +279,6 @@ public abstract class AbstractEdge implements Edge//, GraphStringBuilder.GraphNo
 
 	@Override
 	public @NonNull String toString() {
-        return edgeRole.toString() + "(" + getSource().toString() + "=>" + getName() + "=>" + getTarget().toString() + ")";
-    }
+		return edgeRole.toString() + "(" + getSource().toString() + "=>" + getName() + "=>" + getTarget().toString() + ")";
+	}
 }

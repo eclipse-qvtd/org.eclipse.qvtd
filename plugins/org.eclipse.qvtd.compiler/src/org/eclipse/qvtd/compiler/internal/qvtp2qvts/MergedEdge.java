@@ -21,10 +21,15 @@ import org.eclipse.jdt.annotation.NonNull;
 public class MergedEdge extends AbstractEdge
 {
 	protected final @NonNull List<@NonNull SimpleEdge> simpleEdges = new ArrayList<@NonNull SimpleEdge>();
-		
+
 	public MergedEdge(@NonNull MergedMappingRegion mergedRegion, @NonNull MergedNode sourceNode, @NonNull Edge primaryEdge, @NonNull MergedNode targetNode) {
 		super(primaryEdge.getEdgeRole(), mergedRegion, sourceNode, primaryEdge.getName(), targetNode);
 		addEdge(primaryEdge);
+	}
+
+	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitMergedEdge(this);
 	}
 
 	public void addEdge(@NonNull Edge edge) {

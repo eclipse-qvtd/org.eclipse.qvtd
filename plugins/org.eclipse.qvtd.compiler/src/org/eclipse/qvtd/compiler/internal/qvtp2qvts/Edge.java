@@ -18,38 +18,38 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 /**
  * An edge is directed and abstracts any Node interconnection within a Region.
  */
-public interface Edge extends GraphStringBuilder.GraphEdge, Nameable
+public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 {
 	void destroy();
 
 	/**
-	 * Return a non-standard style for the arrow head. 
+	 * Return a non-standard style for the arrow head.
 	 */
 	@Nullable String getArrowhead();
 
 	/**
-	 * Return the color with which this edge is drawn. 
+	 * Return the color with which this edge is drawn.
 	 */
 	@NonNull String getColor();
 
 	/**
-	 * Return the role of this edge. 
+	 * Return the role of this edge.
 	 */
 	@NonNull EdgeRole getEdgeRole();
 
 	/**
-	 * Return a formatted label to accompany the edge, or null for no label. 
+	 * Return a formatted label to accompany the edge, or null for no label.
 	 */
 	@Nullable String getLabel();
 
 	/**
-	 * Return a logical name of the edge. 
+	 * Return a logical name of the edge.
 	 */
 	@Override
 	@Nullable String getName();
 
 	/**
-	 * Return the containing Region.. 
+	 * Return the containing Region..
 	 */
 	@NonNull Region getRegion();
 
@@ -66,7 +66,7 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable
 	 */
 	@Override
 	@NonNull Node getTarget();
-	
+
 	/**
 	 * Return true if this edge is for an expression argument.
 	 */
@@ -97,27 +97,27 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable
 	 * Return true if this edge conveys a value that is loadable from an input model.
 	 */
 	boolean isLoaded();
-	
+
 	/**
 	 * Return true if this edge is for a predicate or assignment or expression.
 	 */
 	boolean isMergeable();
-	
+
 	/**
 	 * Return true if this edge is part of the to-one navigation from a head.
 	 */
 	boolean isNavigable();
-	
+
 	/**
 	 * Return true if this edge is a property navigation.
 	 */
 	boolean isNavigation();
-	
+
 	/**
 	 * Return true if this edge is for a predicate.
 	 */
 	boolean isPredicate();
-	
+
 	/**
 	 * Return true if this edge is for a predicated relationship.
 	 */

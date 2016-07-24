@@ -22,6 +22,11 @@ public class ComplexTypedNode extends AbstractNode
 	}
 
 	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitComplexTypedNode(this);
+	}
+
+	@Override
 	public @NonNull Iterable<@NonNull SimpleNode> getSimpleNodes() {
 		throw new UnsupportedOperationException();
 	}
@@ -30,14 +35,4 @@ public class ComplexTypedNode extends AbstractNode
 	public @NonNull Iterable<@NonNull TypedElement> getTypedElements() {
 		return Collections.emptyList();
 	}
-	
-//	public ComplexTypedNode(@NonNull NodeRole nodeRole, @NonNull SimpleRegion region, @NonNull String name, @NonNull TypedElement typedElement) {
-//		super(nodeRole, region, name, region.getClassDatumAnalysis(typedElement));
-//		addTypedElement(typedElement);
-//	}
-
-//	@Override
-//	public void cloneIn(@NonNull Region region, @NonNull Map<Node, Node> node2clone) {
-//		node2clone.put(this, new SimpleTypedNode(getNodeRole(), (SimpleRegion) region, name, getClassDatumAnalysis()));
-//	}
 }

@@ -21,13 +21,10 @@ public class BasicSimpleEdge extends AbstractEdge implements SimpleEdge
 		super(edgeRole, region, sourceNode, name, targetNode);
 	}
 
-/*	@Override
-	public void cloneIn(@NonNull Region clonedRegion, @NonNull Map<Node, Node> node2clone) {
-		SimpleNode clonedSourceNode = (SimpleNode) node2clone.get(getSource());
-		SimpleNode clonedTargetNode = (SimpleNode) node2clone.get(getTarget());
-		assert (clonedSourceNode != null) && (clonedTargetNode != null);
-		new BasicSimpleEdge(getEdgeRole(), (SimpleRegion) clonedRegion, clonedSourceNode, name, clonedTargetNode);
-	} */
+	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitBasicSimpleEdge(this);
+	}
 
 	@Override
 	public @NonNull Iterable<@NonNull SimpleEdge> getSimpleEdges() {
