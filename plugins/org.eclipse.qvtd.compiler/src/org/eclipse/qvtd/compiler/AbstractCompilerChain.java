@@ -214,7 +214,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Resource pResource = createResource();
-				QVTm2QVTp tx = new QVTm2QVTp(environmentFactory);
+				QVTm2QVTp tx = new QVTm2QVTp();
 				tx.transform(mResource, pResource);
 				return saveResource(pResource);
 			}
