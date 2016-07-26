@@ -355,6 +355,9 @@ public class Edges
 			if (edgeRole == NavigationEdgeRoleFactory.PREDICATED_NAVIGABLE_NAVIGATION) {
 				return this;
 			}
+			//			if (edgeRole == NavigationEdgeRoleFactory.LOADED_NAVIGABLE_NAVIGATION) {
+			//				return NavigationEdgeRoleFactory.LOADED_NAVIGABLE_NAVIGATION;
+			//			}
 			return super.merge(edgeRole);
 		}
 

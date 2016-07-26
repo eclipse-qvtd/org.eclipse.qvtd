@@ -76,12 +76,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 
 		@Override
-		protected @NonNull Edge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
+		protected @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
 			return Edges.UNNAVIGABLE_CAST.createEdge(context, sourceNode, castProperty, castNode);
 		}
 
 		@Override
-		protected @NonNull Edge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		protected @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 			return Edges.UNNAVIGABLE_NAVIGATION.createEdge(context, sourceNode, source2targetProperty, targetNode);
 		}
 
@@ -101,6 +101,68 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		//		this.dependencyAnalyzer = getDependencyAnalyzer();
 	}
 
+	protected @NonNull NavigationEdge addNavigationEdgeToAttribute(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		assert targetNode.isAttributeNode();
+		Type type = source2targetProperty.getType();
+		assert type instanceof DataType;
+		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		if (navigationEdge == null) {
+			if (!targetNode.isOperation()) {
+				navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
+			}
+			else {
+				Node attributeNode = Nodes.REALIZED_ATTRIBUTE.createNode(context, sourceNode, source2targetProperty);
+				navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, attributeNode);
+				createArgumentEdge(targetNode, "«equals»", attributeNode);
+			}
+		}
+		else {
+			//			if (navigationEdge.isRealized() && !targetNode.isRealized() && !targetNode.isOperation()) {
+			//				reTarget(navigationEdge, targetNode, true);
+			//			}
+			//			else {
+			createArgumentEdge(targetNode, "«equals»", navigationEdge.getTarget());
+			//			}
+		}
+		return navigationEdge;
+	}
+
+	protected @NonNull NavigationEdge addNavigationEdgeToClass(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		assert targetNode.isClassNode();
+		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		assert navigationEdge == null;
+		navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
+		Property target2sourceProperty = source2targetProperty.getOpposite();		// FIXME move to createEdge
+		if (targetNode.isClassNode() && (target2sourceProperty != null) && !target2sourceProperty.isIsMany()) {
+			createRealizedEdge(targetNode, target2sourceProperty, sourceNode);
+		}
+		return navigationEdge;
+	}
+
+	protected @NonNull NavigationEdge addNavigationEdgeToExpression(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		assert targetNode.isExpression();
+		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		assert navigationEdge != null;
+		Node valueNode = navigationEdge.getTarget();
+		assert valueNode.isRealized();
+		Type type = source2targetProperty.getType();
+		if (type instanceof DataType) {
+			createRealizedArgumentEdge(targetNode, null, valueNode);
+		}
+		else {
+			createArgumentEdge(targetNode, null, valueNode);
+		}
+		return navigationEdge;
+	}
+
+	protected @NonNull NavigationEdge addNavigationEdgeToNull(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		assert targetNode.isNull();
+		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		assert navigationEdge == null;
+		navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
+		return navigationEdge;
+	}
+
 	protected void addPredicateEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		assert sourceNode.isClassNode();
 		Edge predicateEdge = sourceNode.getPredicateEdge(source2targetProperty);
@@ -114,7 +176,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 	public @NonNull Node analyze(/*@NonNull*/ Visitable element) {
 		Node accept = element.accept(this);
-		assert accept != null;
 		return accept;
 	}
 
@@ -293,7 +354,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return operationNode;
 	}
 
-	protected @NonNull Edge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
+	protected @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
 		return Edges.CAST.createEdge(context, sourceNode, castProperty, castNode);
 	}
 
@@ -313,8 +374,24 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Nodes.LET.createNode(context, letVariable, inNode);
 	}
 
-	protected @NonNull Edge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+	protected @NonNull NavigationEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		return Edges.NAVIGABLE_NAVIGATION.createEdge(context, sourceNode, source2targetProperty, targetNode);
+	}
+
+	protected @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		return Edges.NAVIGATION.createEdge(context, sourceNode, source2targetProperty, targetNode);
+	}
+
+	protected @NonNull NavigationEdge createNavigationOrRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isAssignment) {
+		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		assert navigationEdge == null;
+		if (isAssignment || context.isPropertyAssignment(sourceNode, source2targetProperty)) {
+			navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
+		}
+		else {
+			navigationEdge = createNavigableNavigationEdge(sourceNode, source2targetProperty, targetNode);
+		}
+		return navigationEdge;
 	}
 
 	protected @NonNull Node createNullNode(@NonNull TypedElement typedElement) {
@@ -339,6 +416,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 	protected @NonNull Edge createRealizedArgumentEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		return Edges.ArgumentEdgeRoleFactory.REALIZED_ARGUMENT.createEdge(context, sourceNode, name, targetNode);
+	}
+
+	protected @NonNull NavigationEdge createRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		return Edges.REALIZED.createEdge(context, sourceNode, source2targetProperty, targetNode);
 	}
 
 	protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
@@ -386,6 +467,100 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 		return dependencyAnalyzer2;
 	} */
+
+	/**
+	 * Return the navigation edge suitable for navigating from sourceNode to targetNode via source2targetProperty,
+	 * re-using an already created edge if available, otherwise creating the edge.
+	 */
+	protected @NonNull NavigationEdge getNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isAssignment) {
+		if (targetNode.isNull()) {
+			return getNavigationEdgeToNull(sourceNode, source2targetProperty, targetNode, isAssignment);
+		}
+		else if (targetNode.isClassNode()) {
+			return getNavigationEdgeToClass(sourceNode, source2targetProperty, targetNode, isAssignment);
+		}
+		else if (targetNode.isAttributeNode()) {
+			return getNavigationEdgeToAttribute(sourceNode, source2targetProperty, targetNode, isAssignment);
+		}
+		else {
+			return getNavigationEdgeToExpression(sourceNode, source2targetProperty, targetNode, isAssignment);
+		}
+	}
+
+	protected @NonNull NavigationEdge getNavigationEdgeToAttribute(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isAssignment) {
+		assert targetNode.isAttributeNode();
+		Type type = source2targetProperty.getType();
+		assert type instanceof DataType;
+		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		if (navigationEdge == null) {
+			if (!targetNode.isOperation()) {
+				//				navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
+				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, isAssignment);
+			}
+			else {
+				Node stepNode = Nodes.NAVIGABLE_ATTRIBUTE.createNode(context, targetNode, source2targetProperty);
+				//				SimpleNode stepNode = Nodes.NAVIGABLE_STEP.createSimpleNode(context, source2targetProperty.getName(), sourceNode, source2targetProperty);
+				//				navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, attributeNode);
+				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, stepNode, isAssignment);
+				createArgumentEdge(targetNode, "«equals»", stepNode);
+			}
+		}
+		else {
+			//			if (!navigationEdge.isRealized() || targetNode.isRealized()) {
+			createArgumentEdge(targetNode, "«equals»", navigationEdge.getTarget());
+			//			}
+			//			else if (!targetNode.isOperation()) {
+			//				reTarget(navigationEdge, targetNode, true);			// Occurs if c.x := b.x occurs before b.x := a.x
+			//			}
+			//			else {
+			//				// FIXME retarget to a LOADED / PREDICATED attribute
+			//				createArgumentEdge(targetNode, "«equals»", navigationEdge.getTarget());
+			//			}
+		}
+		return navigationEdge;
+	}
+
+	protected @NonNull NavigationEdge getNavigationEdgeToClass(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isAssignment) {
+		assert targetNode.isClassNode();
+		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		if (navigationEdge != null) {
+			Node target = navigationEdge.getTarget();
+			if (target != targetNode) {
+				createArgumentEdge(targetNode, "«equals»", target);
+			}
+		}
+		else {
+			//		navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
+			navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, isAssignment);
+			Property target2sourceProperty = source2targetProperty.getOpposite();		// FIXME move to createEdge
+			if (targetNode.isClassNode() && (target2sourceProperty != null) && !target2sourceProperty.isIsMany()) {
+				//			createRealizedEdge(targetNode, target2sourceProperty, sourceNode);
+				createNavigationOrRealizedEdge(targetNode, target2sourceProperty, sourceNode, isAssignment);
+			}
+		}
+		return navigationEdge;
+	}
+
+	protected @NonNull NavigationEdge getNavigationEdgeToExpression(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isAssignment) {
+		assert targetNode.isExpression();
+		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		assert navigationEdge != null;
+		Node valueNode = navigationEdge.getTarget();
+		assert valueNode.isRealized();
+		Type type = source2targetProperty.getType();
+		if (type instanceof DataType) {
+			createRealizedArgumentEdge(targetNode, null, valueNode);
+		}
+		else {
+			createArgumentEdge(targetNode, null, valueNode);
+		}
+		return navigationEdge;
+	}
+
+	protected @NonNull NavigationEdge getNavigationEdgeToNull(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isAssignment) {
+		assert targetNode.isNull();
+		return createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, isAssignment);
+	}
 
 	private void instantiate(@NonNull Node instantiatedNode, @NonNull Node extraNode) {
 		for (@NonNull NavigationEdge extraEdge : extraNode.getNavigationEdges()) {
@@ -438,7 +613,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		ClassDatumAnalysis classDatumAnalysis = scheduler.getClassDatumAnalysis(oclInvalidType, scheduler.getDomainAnalysis().getPrimitiveTypeModel());
 		Node errorNode = createErrorNode("«error»", classDatumAnalysis);
 		for (EObject eObject : element.eContents()) {
-			Node node = analyze((Visitable) eObject);
+			Node node = analyze((Element) eObject);
 			createArgumentEdge(node, "?", errorNode);
 		}
 		return errorNode;
@@ -552,10 +727,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 	@Override
 	public @NonNull Node visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
-		Property property = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
-		assert property != null;
 		Node slotNode = analyze(asNavigationAssignment.getSlotExpression());
 		assert slotNode.isClassNode();
+		Property property = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
+		assert property != null;
 		Node valueNode = analyze(asNavigationAssignment.getValue());
 		//		if (!valueNode.isClassNode() && !valueNode.isNull()) {
 		if (valueNode.isExpression()) {

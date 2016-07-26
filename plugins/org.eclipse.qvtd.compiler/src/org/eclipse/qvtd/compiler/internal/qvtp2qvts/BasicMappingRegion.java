@@ -41,7 +41,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
@@ -64,6 +66,21 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	private final @NonNull ExpressionAnalyzer expressionAnalyzer = new ExpressionAnalyzer(this);
 
 	/**
+	 * All the guardpatterns. (domain and mapping).
+	 */
+	private final @NonNull List<@NonNull GuardPattern> guardPatterns = new ArrayList<>();
+
+	/**
+	 * All the bottom patterns. (domain and mapping).
+	 */
+	private final @NonNull List<@NonNull BottomPattern> bottomPatterns = new ArrayList<>();
+
+	/**
+	 * The node for each navigable VariableDeclaration.
+	 */
+	private final @NonNull List<@NonNull NavigationAssignment> navigationAssignments = new ArrayList<>();
+
+	/**
 	 * The node for each navigable VariableDeclaration.
 	 */
 	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> variable2simpleNode = new HashMap<>();
@@ -78,9 +95,6 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		this.mappingAction = mappingAction;
 		AbstractMapping mapping = mappingAction.getMapping();
 		assert mapping != null;
-
-		List<@NonNull GuardPattern> guardPatterns = new ArrayList<>();
-		List<@NonNull BottomPattern> bottomPatterns = new ArrayList<>();
 		//
 		guardPatterns.add(ClassUtil.nonNull(mapping.getGuardPattern()));
 		bottomPatterns.add(ClassUtil.nonNull(mapping.getBottomPattern()));
@@ -88,8 +102,15 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			if (domain instanceof CoreDomain) {
 				CoreDomain coreDomain = (CoreDomain)domain;
 				//
-				guardPatterns.add(ClassUtil.nonNull(coreDomain.getGuardPattern()));
-				bottomPatterns.add(ClassUtil.nonNull(coreDomain.getBottomPattern()));
+				GuardPattern guardPattern = ClassUtil.nonNull(coreDomain.getGuardPattern());
+				BottomPattern bottomPattern = ClassUtil.nonNull(coreDomain.getBottomPattern());
+				guardPatterns.add(guardPattern);
+				bottomPatterns.add(bottomPattern);
+				for (@NonNull Assignment assignment : ClassUtil.nullFree(bottomPattern.getAssignment())) {
+					if (assignment instanceof NavigationAssignment) {
+						navigationAssignments.add((NavigationAssignment)assignment);
+					}
+				}
 			}
 		}
 		/**
@@ -470,6 +491,24 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			//			node2node.put(typedElement, node);
 		}
 		return node;
+	}
+
+	/**
+	 * Return true if the navigation from sourceNode using source2targetProperty corresponds to a PropertyAssigmment,
+	 */
+	public boolean isPropertyAssignment(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
+		if (sourceNode.isRealized()) {
+			for (@NonNull NavigationAssignment navigationAssignment : navigationAssignments) {
+				Property navigationProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+				if (source2targetProperty == navigationProperty) {		// ??? opposites ??? do they even exist ???
+					Node slotNode = expressionAnalyzer.analyze(navigationAssignment.getSlotExpression());
+					if (slotNode == sourceNode) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public void mergeInto(@NonNull Node unwantedNode, @NonNull Node wantedNode) {

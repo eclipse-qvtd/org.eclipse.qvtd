@@ -125,6 +125,25 @@ public class Nodes
 				return createNode(region, name, navigationCallExp);
 			}
 
+			public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull Property property) {
+				//				assert parentNode.isClassNode();  -- computed attaributes have an operation parentNode
+				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
+				org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
+				assert type != null;
+				Type elementType = QVTbaseUtil.getElementalType(type);
+				TypedModel typedModel = elementType instanceof DataType ? region.getSchedulerConstants().getDomainAnalysis().getPrimitiveTypeModel() : parentNode.getClassDatumAnalysis().getTypedModel();
+				//				DomainUsage usage = region.getSchedulerConstants().getDomainAnalysis().getUsage(type);
+				//				assert usage != null;
+				//				TypedModel typedModel = usage.getTypedModel();
+				assert typedModel != null;
+				ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
+				//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
+				ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
+				String name = property.getName();
+				assert name != null;
+				return createNode(region, name, classDatumAnalysis);
+			}
+
 			@Override
 			public boolean isMatchable() {
 				return true;
@@ -286,6 +305,28 @@ public class Nodes
 				Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);	// ??never happens
 				assert referredProperty != null;
 				return REALIZED_ATTRIBUTE.createNode(parentNode.getRegion(), parentNode, referredProperty);
+			}
+			else {
+				throw new UnsupportedOperationException();
+			}
+		}
+
+		public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull Property property) {
+			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : parentNode.isNavigable();
+			if (parentNode.isLoaded()) {
+				boolean isDirty = region.getSchedulerConstants().isDirty(property);
+				if (!isDirty) {
+					return (resolvedNavigable ? LOADED_NAVIGABLE_ATTRIBUTE : LOADED_UNNAVIGABLE_ATTRIBUTE).createNode(parentNode.getRegion(), parentNode, property);
+				}
+				else {
+					return (resolvedNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE).createNode(parentNode.getRegion(), parentNode, property);
+				}
+			}
+			else if (parentNode.isPredicated()) {
+				return (resolvedNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE).createNode(parentNode.getRegion(), parentNode, property);
+			}
+			else if (parentNode.isRealized()) {
+				return REALIZED_ATTRIBUTE.createNode(parentNode.getRegion(), parentNode, property);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -1058,7 +1099,7 @@ public class Nodes
 			//			if (!isDirty && sourceNode.isLoaded()) {
 			//				return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createNode(region, name, callExp);
 			//			}
-			if (sourceNode.isPredicated() || domainUsage.isOutput() ) {
+			if (sourceNode.isPredicated() || domainUsage.isOutput() || domainUsage.isMiddle()) {
 				return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createNode(region, name, callExp);
 			}
 			if (!isDirty && sourceNode.isLoaded()) {

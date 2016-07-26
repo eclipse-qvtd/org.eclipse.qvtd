@@ -1521,6 +1521,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return ancestors;
 	}
 
+	@Deprecated
 	public @NonNull Node getAssignedAttributeNode(@NonNull Node parentNode, @NonNull Property property) {
 		assert parentNode.isClassNode();
 		assert property.getType() instanceof DataType;
