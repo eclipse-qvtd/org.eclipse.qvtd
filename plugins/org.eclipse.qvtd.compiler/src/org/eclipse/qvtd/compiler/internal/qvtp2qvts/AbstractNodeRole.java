@@ -126,6 +126,9 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 
 	@Override
 	public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
+		if (nodeRole == this) {
+			return this;
+		}
 		throw new IllegalStateException(this + " cannot be merged with " + nodeRole);
 	}
 

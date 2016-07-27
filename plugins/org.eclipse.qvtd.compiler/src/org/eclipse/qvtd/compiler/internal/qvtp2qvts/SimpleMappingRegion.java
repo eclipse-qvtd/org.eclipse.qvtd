@@ -358,6 +358,11 @@ public class SimpleMappingRegion extends AbstractSimpleMappingRegion
 		return path;
 	} */
 
+	@Override
+	public @NonNull Iterable<@NonNull MappingAction> getMappingActions() {
+		return Collections.singletonList(mappingAction);
+	}
+
 	public @Nullable SimpleNode getExtraGuard(@NonNull ClassDatumAnalysis classDatumAnalysis) {
 		if (extraNodes != null) {
 			for (@NonNull SimpleNode extraNode : extraNodes) {
@@ -438,11 +443,6 @@ public class SimpleMappingRegion extends AbstractSimpleMappingRegion
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull AbstractMappingRegion> getMergeableRegions() {
-		return Collections.singletonList(this);
 	}
 
 	public @NonNull SimpleNode getReferenceNode(@NonNull VariableDeclaration variable) {

@@ -14,6 +14,7 @@ import java.util.Collections;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.schedule.MappingAction;
 
 public abstract class AbstractSimpleMappingRegion extends AbstractMappingRegion implements SimpleRegion
 {
@@ -52,6 +53,13 @@ public abstract class AbstractSimpleMappingRegion extends AbstractMappingRegion 
 	@Override
 	public @NonNull String getColor() {
 		return "green";
+	}
+
+	public abstract @NonNull Iterable<@NonNull MappingAction> getMappingActions();
+
+	@Override
+	public @NonNull Iterable<@NonNull AbstractMappingRegion> getMergeableRegions() {
+		return Collections.singletonList(this);
 	}
 
 	@Override
