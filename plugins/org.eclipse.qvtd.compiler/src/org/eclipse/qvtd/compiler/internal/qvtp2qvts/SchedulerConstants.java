@@ -60,7 +60,7 @@ public abstract class SchedulerConstants
 	public static final @NonNull List<@NonNull EdgeConnection> EMPTY_EDGE_CONNECTION_LIST = Collections.emptyList();
 	public static final @NonNull List<@NonNull Edge> EMPTY_EDGE_LIST = Collections.emptyList();
 	//public static final @NonNull List<ExpressionEdge> EMPTY_EXPRESSION_EDGE_LIST = Collections.emptyList();
-	public static final @NonNull Set<@NonNull SimpleMappingRegion> EMPTY_MAPPING_REGION_SET = Collections.emptySet();
+	public static final @NonNull Set<@NonNull AbstractSimpleMappingRegion> EMPTY_MAPPING_REGION_SET = Collections.emptySet();
 	public static final @NonNull List<@NonNull NavigationEdge> EMPTY_NAVIGATION_EDGE_LIST = Collections.emptyList();
 	public static final @NonNull List<@NonNull Node> EMPTY_NODE_LIST = Collections.emptyList();
 	public static final @NonNull List<@NonNull NodeConnection> EMPTY_NODE_CONNECTION_LIST = Collections.emptyList();

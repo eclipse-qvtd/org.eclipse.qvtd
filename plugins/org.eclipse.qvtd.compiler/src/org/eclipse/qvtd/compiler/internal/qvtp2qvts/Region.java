@@ -40,7 +40,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	void computeCheckedOrEnforcedEdges(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2predicatedEdges,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2realizedEdges);
 	void createIncomingConnections();
-	@NonNull Iterable<@NonNull SimpleMappingRegion> getAllMappingRegions();
+	@NonNull Iterable<@NonNull AbstractSimpleMappingRegion> getAllMappingRegions();
 
 	/**
 	 * Return all the nodes in this region that are call-tree ancestors of node.

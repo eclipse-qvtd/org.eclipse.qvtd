@@ -44,12 +44,11 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
 
-public class SimpleMappingRegion extends AbstractMappingRegion implements SimpleRegion
+public class SimpleMappingRegion extends AbstractSimpleMappingRegion
 {
 	/**
 	 * The analyzed action.
@@ -60,14 +59,14 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	 * Predicates that are too complex to analyze. i.e. more than a comparison of a bound variable wrt
 	 * a property call chain on another bound variable.
 	 */
-	private final @NonNull Set<Predicate> complexPredicates = new HashSet<Predicate>();
+	private final @NonNull Set<@NonNull Predicate> complexPredicates = new HashSet<>();
 
 	private final @NonNull ExpressionAnalyzer expressionAnalyzer = new ExpressionAnalyzer(this);
 
 	/**
 	 * The node for each navigable VariableDeclaration.
 	 */
-	private final @NonNull Map<VariableDeclaration, SimpleNode> variable2simpleNode = new HashMap<VariableDeclaration, SimpleNode>();
+	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull SimpleNode> variable2simpleNode = new HashMap<>();
 
 	/**
 	 * The extra guards to accommodate operation content.
@@ -80,8 +79,8 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		AbstractMapping mapping = mappingAction.getMapping();
 		assert mapping != null;
 
-		List<@NonNull GuardPattern> guardPatterns = new ArrayList<@NonNull GuardPattern>();
-		List<@NonNull BottomPattern> bottomPatterns = new ArrayList<@NonNull BottomPattern>();
+		List<@NonNull GuardPattern> guardPatterns = new ArrayList<>();
+		List<@NonNull BottomPattern> bottomPatterns = new ArrayList<>();
 		//
 		guardPatterns.add(ClassUtil.nonNull(mapping.getGuardPattern()));
 		bottomPatterns.add(ClassUtil.nonNull(mapping.getBottomPattern()));
@@ -178,11 +177,6 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		return;
 	}
 
-	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return visitor.visitSimpleMappingRegion(this);
-	}
-
 	public void addAssignmentEdge(@NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
 		assert sourceNode.isClassNode();
 		Edge assignmentEdge = sourceNode.getAssignmentEdge(source2targetProperty);
@@ -192,24 +186,6 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		else {
 			assert assignmentEdge.getTarget() == targetNode;
 		}
-	}
-
-	@Override
-	public void addEdge(@NonNull Edge edge) {
-		assert (basicGetSymbolName() == null) || !edge.isNavigation();
-		super.addEdge(edge);
-	}
-
-	@Override
-	protected void addHeadNode(@NonNull Node headNode) {
-		assert basicGetSymbolName() == null;
-		super.addHeadNode(headNode);
-	}
-
-	@Override
-	public void addNode(@NonNull Node node) {
-		assert basicGetSymbolName() == null;
-		super.addNode(node);
 	}
 
 	/**
@@ -310,7 +286,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	//	A reverse entry is also created if no PropertCallExp is not to-one.
 	//
 	private void analyzeSimplePredicate(@Nullable VariableDeclaration boundVariable, @NonNull OCLExpression referenceExpression) {
-		List<Property> path = new ArrayList<Property>();
+		List<@NonNull Property> path = new ArrayList<>();
 		for (OCLExpression expression = referenceExpression; expression instanceof NavigationCallExp; ) {
 			NavigationCallExp navigationCallExp = (NavigationCallExp)expression;
 			Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
@@ -353,7 +329,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 
 	public @NonNull SimpleNode createExtraGuard(@NonNull ClassDatumAnalysis classDatumAnalysis) {
 		if (extraNodes == null) {
-			extraNodes = new ArrayList<@NonNull SimpleNode>();
+			extraNodes = new ArrayList<>();
 		}
 		SimpleNode extraGuardNode = Nodes.EXTRA_GUARD.createSimpleNode(this, "«extra-" + (extraNodes.size()+1) + "»", classDatumAnalysis);
 		extraNodes.add(extraGuardNode);
@@ -381,11 +357,6 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		}
 		return path;
 	} */
-
-	@Override
-	public @NonNull Iterable<@NonNull SimpleMappingRegion> getAllMappingRegions() {
-		return Collections.singleton(this);
-	}
 
 	public @Nullable SimpleNode getExtraGuard(@NonNull ClassDatumAnalysis classDatumAnalysis) {
 		if (extraNodes != null) {
@@ -470,11 +441,6 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	}
 
 	@Override
-	public @NonNull String getColor() {
-		return "green";
-	}
-
-	@Override
 	public @NonNull Iterable<@NonNull AbstractMappingRegion> getMergeableRegions() {
 		return Collections.singletonList(this);
 	}
@@ -518,7 +484,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 
 	public void mergeInto(@NonNull SimpleNode unwantedNode, @NonNull SimpleNode wantedNode) {
 		// FIXME this should be a deep merge of equivalence
-		for (@NonNull Edge unwantedEdge : new ArrayList<@NonNull Edge>(unwantedNode.getIncomingEdges())) {
+		for (@NonNull Edge unwantedEdge : new ArrayList<>(unwantedNode.getIncomingEdges())) {
 			boolean moveIt = true;
 			if (unwantedEdge instanceof NavigationEdge) {
 				NavigationEdge unwantedNavigationEdge = (NavigationEdge)unwantedEdge;
@@ -532,7 +498,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 				unwantedEdge.setSource(wantedNode);
 			}
 		}
-		for (@NonNull Edge unwantedEdge : new ArrayList<@NonNull Edge>(unwantedNode.getOutgoingEdges())) {
+		for (@NonNull Edge unwantedEdge : new ArrayList<>(unwantedNode.getOutgoingEdges())) {
 			boolean moveIt = true;
 			if (unwantedEdge instanceof NavigationEdge) {
 				NavigationEdge unwantedNavigationEdge = (NavigationEdge)unwantedEdge;
@@ -555,7 +521,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 			classDatumAnalysis.addProduction(this, assignedNode);
 			ClassDatum classDatum = classDatumAnalysis.getClassDatum();
 			for (@SuppressWarnings("null")@NonNull AbstractAction consumingAction : classDatum.getRequiredBy()) {
-				SimpleMappingRegion consumingRegion = multiRegion.getMappingRegion(consumingAction);
+				AbstractSimpleMappingRegion consumingRegion = multiRegion.getMappingRegion(consumingAction);
 				assert consumingRegion != null;
 				for (@NonNull Node consumingNode : consumingRegion.getMatchableNodes()) {
 					if (consumingNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
@@ -564,12 +530,12 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 				}
 			}
 		}
-		for (Node predicatedNode : getMatchableNodes()) {
+		for (@NonNull Node predicatedNode : getMatchableNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = predicatedNode.getClassDatumAnalysis();
 			classDatumAnalysis.addConsumption(this, predicatedNode);
 			ClassDatum classDatum = classDatumAnalysis.getClassDatum();
 			for (@SuppressWarnings("null")@NonNull AbstractAction introducingAction : classDatum.getProducedBy()) {
-				SimpleMappingRegion producingRegion = multiRegion.getMappingRegion(introducingAction);
+				AbstractSimpleMappingRegion producingRegion = multiRegion.getMappingRegion(introducingAction);
 				assert producingRegion != null;
 				for (@NonNull Node assignedNode : producingRegion.getComputedNodes()) {
 					if (assignedNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
@@ -578,12 +544,5 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 				}
 			}
 		}
-	}
-
-	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		s.setColor("palegreen");
-		s.setPenwidth(Role.LINE_WIDTH);
-		super.toGraph(s);
 	}
 }

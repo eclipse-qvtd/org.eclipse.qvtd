@@ -102,7 +102,7 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	}
 
 	@Override
-	public R visitSimpleMappingRegion(@NonNull SimpleMappingRegion simpleMappingRegion) {
+	public R visitSimpleMappingRegion(@NonNull AbstractSimpleMappingRegion simpleMappingRegion) {
 		return visitRegion(simpleMappingRegion);
 	}
 

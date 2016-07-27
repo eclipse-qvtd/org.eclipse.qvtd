@@ -101,7 +101,7 @@ public class ClassDatumAnalysis
 		assignmentNodes.add(introducingNode);
 	}
 
-	public void addProduction(@NonNull SimpleMappingRegion producer, @NonNull Node producingNode) {
+	public void addProduction(@NonNull AbstractSimpleMappingRegion producer, @NonNull Node producingNode) {
 		List<@NonNull Node> assignmentNodes = producer2assignmentNodes.get(producer);
 		if (assignmentNodes == null) {
 			assignmentNodes = new ArrayList<@NonNull Node>();

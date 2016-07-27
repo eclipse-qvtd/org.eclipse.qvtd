@@ -31,7 +31,7 @@ public interface Visitor<R>
 	R visitRootCompositionRegion(@NonNull RootCompositionRegion rootCompositionRegion);
 	R visitRootScheduledRegion(@NonNull RootScheduledRegion rootScheduledRegion);
 	R visitSimpleNavigationEdge(@NonNull SimpleNavigationEdge simpleNavigationEdge);
-	R visitSimpleMappingRegion(@NonNull SimpleMappingRegion simpleMappingRegion);
+	R visitSimpleMappingRegion(@NonNull AbstractSimpleMappingRegion simpleMappingRegion);
 	R visitSimpleTypedNode(@NonNull SimpleTypedNode simpleTypedNode);
 	R visitSimpleVariableNode(@NonNull SimpleVariableNode simpleVariableNode);
 }

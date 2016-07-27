@@ -49,7 +49,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleMappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractSimpleMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleNavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleTypedNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleVariableNode;
@@ -501,7 +501,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	}
 
 	@Override
-	public @Nullable Element visitSimpleMappingRegion(@NonNull SimpleMappingRegion simpleMappingRegion) {
+	public @Nullable Element visitSimpleMappingRegion(@NonNull AbstractSimpleMappingRegion simpleMappingRegion) {
 		AbstractRegion2Mapping region2mapping = getRegion2Mapping(simpleMappingRegion);
 		return region2mapping.getMapping();
 	}

@@ -134,10 +134,10 @@ public class QVTp2QVTs extends SchedulerConstants
 	 *
 	 * Returns the orderedRegions plus the new aggregates less those aggregated.
 	 */
-	public @NonNull List<@NonNull Region> earlyRegionMerge(@NonNull List<@NonNull SimpleMappingRegion> orderedRegions) {
+	public @NonNull List<@NonNull Region> earlyRegionMerge(@NonNull List<@NonNull AbstractSimpleMappingRegion> orderedRegions) {
 		Region2Depth region2depths = new Region2Depth();
 		List<@NonNull Region> outputRegions = new ArrayList<>();
-		LinkedHashSet<@NonNull SimpleMappingRegion> residualInputRegions = new LinkedHashSet<>(orderedRegions);	// order preserving fast random removal
+		LinkedHashSet<@NonNull AbstractSimpleMappingRegion> residualInputRegions = new LinkedHashSet<>(orderedRegions);	// order preserving fast random removal
 		while (!residualInputRegions.isEmpty()) {
 			@NonNull AbstractMappingRegion candidateRegion = residualInputRegions.iterator().next();
 			boolean isMerged = false;
@@ -185,8 +185,8 @@ public class QVTp2QVTs extends SchedulerConstants
 		return outputRegions;
 	}
 
-	public @NonNull SimpleMappingRegion getMappingRegion(@NonNull AbstractAction action) {
-		SimpleMappingRegion mappingRegion = action2mappingRegion.get(action);
+	public @NonNull AbstractSimpleMappingRegion getMappingRegion(@NonNull AbstractAction action) {
+		AbstractSimpleMappingRegion mappingRegion = action2mappingRegion.get(action);
 		assert mappingRegion != null;
 		return mappingRegion;
 	}
@@ -267,8 +267,8 @@ public class QVTp2QVTs extends SchedulerConstants
 						}
 					}
 				}
-				if (secondaryRegion instanceof SimpleMappingRegion) {
-					for (@NonNull Node assignedNode : ((SimpleMappingRegion)secondaryRegion).getComputedNodes()) {
+				if (secondaryRegion instanceof AbstractSimpleMappingRegion) {
+					for (@NonNull Node assignedNode : ((AbstractSimpleMappingRegion)secondaryRegion).getComputedNodes()) {
 						if (assignedNode.isClassNode()) {							// Ignore nulls, attributes
 							ClassDatumAnalysis consumingClassDatumAnalysis = assignedNode.getClassDatumAnalysis();
 							if (toOneReachableClasses.add(consumingClassDatumAnalysis)) {
@@ -305,13 +305,13 @@ public class QVTp2QVTs extends SchedulerConstants
 			mappingRegion.registerConsumptionsAndProductions();
 		}
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
-			for (@NonNull SimpleMappingRegion mappingRegion : mappingRegions) {
+			for (@NonNull AbstractSimpleMappingRegion mappingRegion : mappingRegions) {
 				mappingRegion.writeDebugGraphs("1-create");
 			}
 		}
-		List<@NonNull SimpleMappingRegion> orderedRegions = new ArrayList<>();
+		List<@NonNull AbstractSimpleMappingRegion> orderedRegions = new ArrayList<>();
 		for (@NonNull AbstractAction abstractAction : orderedActions) {
-			SimpleMappingRegion mappingRegion = action2mappingRegion.get(abstractAction);
+			AbstractSimpleMappingRegion mappingRegion = action2mappingRegion.get(abstractAction);
 			assert mappingRegion != null;
 			orderedRegions.add(mappingRegion);
 			mappingRegion.resolveRecursion();

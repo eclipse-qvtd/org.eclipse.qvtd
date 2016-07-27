@@ -1508,7 +1508,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull SimpleMappingRegion> getAllMappingRegions() {
+	public @NonNull Iterable<@NonNull AbstractSimpleMappingRegion> getAllMappingRegions() {
 		return SchedulerConstants.EMPTY_MAPPING_REGION_SET;
 	}
 
@@ -1835,7 +1835,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return loopingConnections;
 	}
 
-	public @NonNull SimpleMappingRegion getMappingRegion(@NonNull AbstractAction action) {
+	public @NonNull AbstractSimpleMappingRegion getMappingRegion(@NonNull AbstractAction action) {
 		return multiRegion.getMappingRegion(action);
 	}
 
