@@ -47,11 +47,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
-import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
 
-public class SimpleMappingRegion extends AbstractMappingRegion implements SimpleRegion, Comparable<SimpleMappingRegion>, MergeableRegion, Iterable<@NonNull MergeableRegion>
+public class SimpleMappingRegion extends AbstractMappingRegion implements SimpleRegion, MergeableRegion, Iterable<@NonNull MergeableRegion>
 {
 	/**
 	 * The analyzed action.
@@ -59,17 +58,10 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	private final @NonNull MappingAction mappingAction;
 
 	/**
-	 * The original ordering.
-	 */
-	private final int naturalOrder;
-
-	/**
 	 * Predicates that are too complex to analyze. i.e. more than a comparison of a bound variable wrt
 	 * a property call chain on another bound variable.
 	 */
 	private final @NonNull Set<Predicate> complexPredicates = new HashSet<Predicate>();
-
-	private /*@LazyNonNull*/ List<SimpleMappingRegion> successors;
 
 	private final @NonNull ExpressionAnalyzer expressionAnalyzer = new ExpressionAnalyzer(this);
 
@@ -83,10 +75,9 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	 */
 	private /*@LazyNonNull*/ List<@NonNull SimpleNode> extraNodes = null;
 
-	public SimpleMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction, int naturalOrder) {
+	public SimpleMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction) {
 		super(multiRegion);
 		this.mappingAction = mappingAction;
-		this.naturalOrder = naturalOrder;
 		AbstractMapping mapping = mappingAction.getMapping();
 		assert mapping != null;
 
@@ -361,11 +352,6 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 		return initNode;
 	}
 
-	@Override
-	public int compareTo(SimpleMappingRegion thatRegion) {
-		return Integer.compare(getNaturalOrder(), thatRegion.getNaturalOrder());
-	}
-
 	public @NonNull SimpleNode createExtraGuard(@NonNull ClassDatumAnalysis classDatumAnalysis) {
 		if (extraNodes == null) {
 			extraNodes = new ArrayList<@NonNull SimpleNode>();
@@ -417,10 +403,6 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	public @NonNull String getName() {
 		AbstractMapping mapping = mappingAction.getMapping();
 		return String.valueOf(mapping.getName());
-	}
-
-	public int getNaturalOrder() {
-		return naturalOrder;
 	}
 
 	/**
@@ -523,24 +505,6 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 
 	public @Nullable SimpleNode getSimpleNode(@NonNull TypedElement typedElement) {
 		return variable2simpleNode.get(typedElement);
-	}
-
-	public @NonNull List<? extends Region> getSuccessors() {
-		List<SimpleMappingRegion> successors2 = successors;
-		if (successors2 == null) {
-			successors = successors2 = new ArrayList<SimpleMappingRegion>();
-			for (AbstractDatum production : mappingAction.getProductions()) {
-				for (@SuppressWarnings("null")@NonNull AbstractAction nextAction : production.getRequiredBy()) {
-					SimpleMappingRegion nextRegion = getMappingRegion(nextAction);
-					assert nextRegion != null;
-					if (!successors2.contains(nextRegion)) {
-						successors2.add(nextRegion);
-					}
-				}
-			}
-			Collections.sort(successors);
-		}
-		return successors2;
 	}
 
 	public @NonNull SimpleNode getUnknownNode(@NonNull TypedElement typedElement) {

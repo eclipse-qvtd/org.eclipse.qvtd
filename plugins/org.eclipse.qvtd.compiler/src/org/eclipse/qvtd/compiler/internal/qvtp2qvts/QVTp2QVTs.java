@@ -65,21 +65,21 @@ public class QVTp2QVTs extends SchedulerConstants
 	/**
 	 * The Region to which each action is allocated.
 	 */
-	private final @NonNull Map<@NonNull AbstractAction, @NonNull SimpleMappingRegion> action2mappingRegion = new HashMap<@NonNull AbstractAction, @NonNull SimpleMappingRegion>();
+	private final @NonNull Map<@NonNull AbstractAction, @NonNull SimpleMappingRegion> action2mappingRegion = new HashMap<>();
 
 	private final @NonNull List<@NonNull AbstractAction> orderedActions;
 
 	public QVTp2QVTs(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule schedule, @NonNull QVTp2QVTg qvtp2qvtg) {
 		super(environmentFactory, schedule, qvtp2qvtg);
 		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(schedule);
-		List<@NonNull AbstractAction> orderedActions = orderer.computeOrdering();
+		List<@NonNull AbstractAction> orderedActions = orderer.computeOrdering();	// FIXME ??is this ordering still needed??
 		if (orderedActions == null) {
 			throw new IllegalArgumentException(orderer.diagnoseOrderingFailure());
 		}
 		this.orderedActions = orderedActions;
 	}
 
-	private Map<OperationDatum, OperationRegion> map = new HashMap<OperationDatum, OperationRegion>();
+	private Map<@NonNull OperationDatum, @NonNull OperationRegion> map = new HashMap<>();
 
 	public @NonNull OperationRegion analyzeOperation(@NonNull MultiRegion multiRegion, @NonNull OperationCallExp operationCallExp) {
 		Operation operation = operationCallExp.getReferredOperation();
@@ -136,8 +136,8 @@ public class QVTp2QVTs extends SchedulerConstants
 	 */
 	public @NonNull List<@NonNull Region> earlyRegionMerge(@NonNull List<@NonNull SimpleMappingRegion> orderedRegions) {
 		Region2Depth region2depths = new Region2Depth();
-		List<@NonNull Region> outputRegions = new ArrayList<@NonNull Region>();
-		LinkedHashSet<@NonNull SimpleMappingRegion> residualInputRegions = new LinkedHashSet<@NonNull SimpleMappingRegion>(orderedRegions);	// order preserving fast random removal
+		List<@NonNull Region> outputRegions = new ArrayList<>();
+		LinkedHashSet<@NonNull SimpleMappingRegion> residualInputRegions = new LinkedHashSet<>(orderedRegions);	// order preserving fast random removal
 		while (!residualInputRegions.isEmpty()) {
 			@NonNull Region candidateRegion = residualInputRegions.iterator().next();
 			boolean isMerged = false;
@@ -238,20 +238,20 @@ public class QVTp2QVTs extends SchedulerConstants
 		//
 		//	All regions that consume one of the primary nodes.
 		//
-		Set<@NonNull Region> allConsumingRegions = new HashSet<@NonNull Region>();
+		Set<@NonNull Region> allConsumingRegions = new HashSet<>();
 		allConsumingRegions.add(primaryRegion);
 		//
 		//	All classes reachable from the primary head.
 		//
-		Set<@NonNull ClassDatumAnalysis> toOneReachableClasses = new HashSet<@NonNull ClassDatumAnalysis>();
+		Set<@NonNull ClassDatumAnalysis> toOneReachableClasses = new HashSet<>();
 		List<@NonNull Region> secondaryRegions = null;
-		List<@NonNull Region> allConsumingRegionsList = new ArrayList<@NonNull Region>(allConsumingRegions);	// CME-proof iterable List shadowing a mutating Set
+		List<@NonNull Region> allConsumingRegionsList = new ArrayList<>(allConsumingRegions);	// CME-proof iterable List shadowing a mutating Set
 		for (int i = 0; i < allConsumingRegionsList.size(); i++) {
 			@NonNull Region secondaryRegion = allConsumingRegionsList.get(i);
 			if ((i == 0) || isEarlyMergeSecondaryCandidate(primaryRegion, secondaryRegion, toOneReachableClasses)) {
 				if (i > 0) {
 					if (secondaryRegions == null) {
-						secondaryRegions = new ArrayList<@NonNull Region>();
+						secondaryRegions = new ArrayList<>();
 					}
 					secondaryRegions.add(secondaryRegion);
 				}
@@ -292,15 +292,14 @@ public class QVTp2QVTs extends SchedulerConstants
 		//
 		//	Extract salient characteristics from within each MappingAction.
 		//
-		for (int i = 0; i < orderedActions.size(); i++) {
-			@NonNull AbstractAction abstractAction = orderedActions.get(i);
+		for (@NonNull AbstractAction abstractAction : orderedActions) {
 			if (abstractAction instanceof MappingAction) {
 				MappingAction mappingAction = (MappingAction) abstractAction;
-				SimpleMappingRegion mappingRegion = new SimpleMappingRegion(multiRegion, mappingAction, i);
+				SimpleMappingRegion mappingRegion = new SimpleMappingRegion(multiRegion, mappingAction);
 				action2mappingRegion.put(abstractAction, mappingRegion);
 			}
 		}
-		List<@NonNull SimpleMappingRegion> mappingRegions = new ArrayList<@NonNull SimpleMappingRegion>(action2mappingRegion.values());
+		List<@NonNull SimpleMappingRegion> mappingRegions = new ArrayList<>(action2mappingRegion.values());
 		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
 		for (@NonNull SimpleMappingRegion mappingRegion : mappingRegions) {
 			mappingRegion.registerConsumptionsAndProductions();
@@ -310,14 +309,14 @@ public class QVTp2QVTs extends SchedulerConstants
 				mappingRegion.writeDebugGraphs("1-create");
 			}
 		}
-		List<@NonNull SimpleMappingRegion> orderedRegions = new ArrayList<@NonNull SimpleMappingRegion>();
+		List<@NonNull SimpleMappingRegion> orderedRegions = new ArrayList<>();
 		for (@NonNull AbstractAction abstractAction : orderedActions) {
 			SimpleMappingRegion mappingRegion = action2mappingRegion.get(abstractAction);
 			assert mappingRegion != null;
 			orderedRegions.add(mappingRegion);
 			mappingRegion.resolveRecursion();
 		}
-		List<@NonNull Region> activeRegions = new ArrayList<@NonNull Region>(earlyRegionMerge(orderedRegions));
+		List<@NonNull Region> activeRegions = new ArrayList<>(earlyRegionMerge(orderedRegions));
 		for (@NonNull OperationRegion operationRegion : multiRegion.getOperationRegions()) {
 			activeRegions.add(operationRegion);
 		}
