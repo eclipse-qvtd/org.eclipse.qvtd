@@ -139,14 +139,14 @@ public class QVTp2QVTs extends SchedulerConstants
 		List<@NonNull Region> outputRegions = new ArrayList<>();
 		LinkedHashSet<@NonNull SimpleMappingRegion> residualInputRegions = new LinkedHashSet<>(orderedRegions);	// order preserving fast random removal
 		while (!residualInputRegions.isEmpty()) {
-			@NonNull Region candidateRegion = residualInputRegions.iterator().next();
+			@NonNull AbstractMappingRegion candidateRegion = residualInputRegions.iterator().next();
 			boolean isMerged = false;
 			if (isEarlyMergePrimaryCandidate(candidateRegion)) {
-				List<@NonNull Region> secondaryRegions = selectSecondaryRegions(candidateRegion);
+				List<@NonNull AbstractMappingRegion> secondaryRegions = selectSecondaryRegions(candidateRegion);
 				if (secondaryRegions != null) {
-					Region primaryRegion = candidateRegion;
+					AbstractMappingRegion primaryRegion = candidateRegion;
 					MergedMappingRegion mergedRegion = null;
-					for (@NonNull Region secondaryRegion : secondaryRegions) {
+					for (@NonNull AbstractMappingRegion secondaryRegion : secondaryRegions) {
 						assert secondaryRegion != null;
 						if (residualInputRegions.contains(secondaryRegion)) {
 							Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode = primaryRegion.canMerge(secondaryRegion, region2depths, false);
@@ -154,7 +154,7 @@ public class QVTp2QVTs extends SchedulerConstants
 								boolean isSharedHead = isSharedHead(primaryRegion, secondaryRegion);
 								if (!isSharedHead || (secondaryRegion.canMerge(primaryRegion, region2depths, false) != null)) {
 									if (mergedRegion == null) {
-										mergedRegion = new MergedMappingRegion((MergeableRegion)primaryRegion);
+										mergedRegion = new MergedMappingRegion(primaryRegion);
 										residualInputRegions.remove(primaryRegion);
 										primaryRegion = mergedRegion;
 									}
@@ -234,20 +234,20 @@ public class QVTp2QVTs extends SchedulerConstants
 	/**
 	 * Return a list of single-headed to-one navigable regions whose head is transitively to-one reachable from the primaryRegion's head.
 	 */
-	private @Nullable List<@NonNull Region> selectSecondaryRegions(@NonNull Region primaryRegion) {
+	private @Nullable List<@NonNull AbstractMappingRegion> selectSecondaryRegions(@NonNull AbstractMappingRegion primaryRegion) {
 		//
 		//	All regions that consume one of the primary nodes.
 		//
-		Set<@NonNull Region> allConsumingRegions = new HashSet<>();
+		Set<@NonNull AbstractMappingRegion> allConsumingRegions = new HashSet<>();
 		allConsumingRegions.add(primaryRegion);
 		//
 		//	All classes reachable from the primary head.
 		//
 		Set<@NonNull ClassDatumAnalysis> toOneReachableClasses = new HashSet<>();
-		List<@NonNull Region> secondaryRegions = null;
-		List<@NonNull Region> allConsumingRegionsList = new ArrayList<>(allConsumingRegions);	// CME-proof iterable List shadowing a mutating Set
+		List<@NonNull AbstractMappingRegion> secondaryRegions = null;
+		List<@NonNull AbstractMappingRegion> allConsumingRegionsList = new ArrayList<>(allConsumingRegions);	// CME-proof iterable List shadowing a mutating Set
 		for (int i = 0; i < allConsumingRegionsList.size(); i++) {
-			@NonNull Region secondaryRegion = allConsumingRegionsList.get(i);
+			@NonNull AbstractMappingRegion secondaryRegion = allConsumingRegionsList.get(i);
 			if ((i == 0) || isEarlyMergeSecondaryCandidate(primaryRegion, secondaryRegion, toOneReachableClasses)) {
 				if (i > 0) {
 					if (secondaryRegions == null) {
@@ -259,7 +259,7 @@ public class QVTp2QVTs extends SchedulerConstants
 					if (predicatedNode.isClassNode()) {							// Ignore nulls, attributes
 						ClassDatumAnalysis predicatedClassDatumAnalysis = predicatedNode.getClassDatumAnalysis();
 						if (toOneReachableClasses.add(predicatedClassDatumAnalysis)) {
-							for (@NonNull Region consumingRegion : predicatedClassDatumAnalysis.getConsumingRegions()) {
+							for (@NonNull AbstractMappingRegion consumingRegion : predicatedClassDatumAnalysis.getConsumingRegions()) {
 								if (allConsumingRegions.add(consumingRegion)) {
 									allConsumingRegionsList.add(consumingRegion);
 								}
@@ -272,7 +272,7 @@ public class QVTp2QVTs extends SchedulerConstants
 						if (assignedNode.isClassNode()) {							// Ignore nulls, attributes
 							ClassDatumAnalysis consumingClassDatumAnalysis = assignedNode.getClassDatumAnalysis();
 							if (toOneReachableClasses.add(consumingClassDatumAnalysis)) {
-								for (@NonNull Region consumingRegion : consumingClassDatumAnalysis.getConsumingRegions()) {
+								for (@NonNull AbstractMappingRegion consumingRegion : consumingClassDatumAnalysis.getConsumingRegions()) {
 									if (allConsumingRegions.add(consumingRegion)) {
 										allConsumingRegionsList.add(consumingRegion);
 									}

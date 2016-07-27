@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -50,7 +49,7 @@ import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
 
-public class SimpleMappingRegion extends AbstractMappingRegion implements SimpleRegion, MergeableRegion, Iterable<@NonNull MergeableRegion>
+public class SimpleMappingRegion extends AbstractMappingRegion implements SimpleRegion
 {
 	/**
 	 * The analyzed action.
@@ -476,8 +475,8 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull MergeableRegion> getMergeableRegions() {
-		return this;
+	public @NonNull Iterable<@NonNull AbstractMappingRegion> getMergeableRegions() {
+		return Collections.singletonList(this);
 	}
 
 	public @NonNull SimpleNode getReferenceNode(@NonNull VariableDeclaration variable) {
@@ -515,11 +514,6 @@ public class SimpleMappingRegion extends AbstractMappingRegion implements Simple
 			//			node2node.put(typedElement, node);
 		}
 		return node;
-	}
-
-	@Override
-	public Iterator<@NonNull MergeableRegion> iterator() {
-		return new SingletonIterator<@NonNull MergeableRegion>(this);
 	}
 
 	public void mergeInto(@NonNull SimpleNode unwantedNode, @NonNull SimpleNode wantedNode) {

@@ -64,13 +64,13 @@ public class ClassDatumAnalysis
 	 */
 	private /* @LazyNonNull*/ List<@NonNull Property> multiOpposites = null;
 
-//	private final @NonNull HeadNodeGroup headNodeGroup;
+	//	private final @NonNull HeadNodeGroup headNodeGroup;
 
-	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> introducer2assignmentNodes = new HashMap<@NonNull Region, @NonNull List<@NonNull Node>>();
-	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> consumer2predicateNodes = new HashMap<@NonNull Region, @NonNull List<@NonNull Node>>();
-	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> producer2assignmentNodes = new HashMap<@NonNull Region, @NonNull List<@NonNull Node>>();
+	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> introducer2assignmentNodes = new HashMap<>();
+	private final @NonNull Map<@NonNull AbstractMappingRegion, @NonNull List<@NonNull Node>> consumer2predicateNodes = new HashMap<>();
+	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> producer2assignmentNodes = new HashMap<>();
 	private /*@LazyNonNull*/ List<@NonNull ClassDatumAnalysis> superClassDatumAnalyses = null;
-	
+
 	public ClassDatumAnalysis(@NonNull SchedulerConstants schedulerConstants, @NonNull ClassDatum classDatum) {
 		this.schedulerConstants = schedulerConstants;
 		this.classDatum = classDatum;
@@ -80,7 +80,7 @@ public class ClassDatumAnalysis
 		this.completeClass = schedulerConstants.getEnvironmentFactory().getCompleteModel().getCompleteClass(type);
 	}
 
-	public void addConsumption(@NonNull Region consumer, @NonNull Node consumingNode) {
+	public void addConsumption(@NonNull AbstractMappingRegion consumer, @NonNull Node consumingNode) {
 		List<@NonNull Node> predicateNodes = consumer2predicateNodes.get(consumer);
 		if (predicateNodes == null) {
 			predicateNodes = new ArrayList<@NonNull Node>();
@@ -124,7 +124,7 @@ public class ClassDatumAnalysis
 		return Iterables.concat(consumer2predicateNodes.values());
 	}
 
-	public @NonNull Set<@NonNull Region> getConsumingRegions() {
+	public @NonNull Set<@NonNull AbstractMappingRegion> getConsumingRegions() {
 		return consumer2predicateNodes.keySet();
 	}
 
@@ -163,10 +163,10 @@ public class ClassDatumAnalysis
 		return multiOpposites2;
 	}
 
-//	@SuppressWarnings("null")
-//	public @NonNull Collection<MappingRegion> getProducers() {
-//		return producer2assignmentNodes.keySet();
-//	}
+	//	@SuppressWarnings("null")
+	//	public @NonNull Collection<MappingRegion> getProducers() {
+	//		return producer2assignmentNodes.keySet();
+	//	}
 
 	public @NonNull Iterable<Node> getProducingNodes() {
 		return Iterables.concat(consumer2predicateNodes.values());

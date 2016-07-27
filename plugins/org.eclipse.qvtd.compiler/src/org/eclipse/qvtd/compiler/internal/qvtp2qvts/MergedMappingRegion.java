@@ -25,14 +25,14 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
  */
 public class MergedMappingRegion extends AbstractMappingRegion
 {
-	private final @NonNull List<@NonNull MergeableRegion> mergedRegions = new ArrayList<@NonNull MergeableRegion>();
-	private final @NonNull Map<@NonNull SimpleNode, @NonNull MergedNode> simpleNode2mergedNode = new HashMap<@NonNull SimpleNode, @NonNull MergedNode>();
-	private final @NonNull Map<@NonNull SimpleEdge, @NonNull MergedEdge> simpleEdge2mergedEdge = new HashMap<@NonNull SimpleEdge, @NonNull MergedEdge>();
+	private final @NonNull List<@NonNull AbstractMappingRegion> mergedRegions = new ArrayList<>();
+	private final @NonNull Map<@NonNull SimpleNode, @NonNull MergedNode> simpleNode2mergedNode = new HashMap<>();
+	private final @NonNull Map<@NonNull SimpleEdge, @NonNull MergedEdge> simpleEdge2mergedEdge = new HashMap<>();
 	private @Nullable Map<@NonNull Node, @NonNull Node> recursiveBindings = null;
 
-	public MergedMappingRegion(@NonNull MergeableRegion primaryRegion) {
+	public MergedMappingRegion(@NonNull AbstractMappingRegion primaryRegion) {
 		super(primaryRegion.getMultiRegion());
-//		addPrimaryRegion(primaryRegion);
+		//		addPrimaryRegion(primaryRegion);
 		mergedRegions.add(primaryRegion);
 		createMergedRegion(primaryRegion);
 	}
@@ -44,9 +44,9 @@ public class MergedMappingRegion extends AbstractMappingRegion
 
 	private void addEdgeToMergedEdge(@NonNull Edge edge, @NonNull MergedEdge mergedEdge) {
 		mergedEdge.addEdge(edge);
-//		for (SimpleEdge simpleEdge : edge.getSimpleEdges()) {
-//			addSimpleEdgeToMergedEdge(simpleEdge, mergedEdge);
-//		}
+		//		for (SimpleEdge simpleEdge : edge.getSimpleEdges()) {
+		//			addSimpleEdgeToMergedEdge(simpleEdge, mergedEdge);
+		//		}
 	}
 
 	private void addNodeToMergedNode(@NonNull Node node, @NonNull MergedNode mergedNode) {
@@ -72,7 +72,7 @@ public class MergedMappingRegion extends AbstractMappingRegion
 					incomingEdge.setTarget(mergedNode);
 				}
 			}
-		}	
+		}
 		for (@NonNull Edge outgoingEdge : new ArrayList<@NonNull Edge>(simpleNode.getOutgoingEdges())) {
 			if (outgoingEdge.getSource().getRegion() != outgoingEdge.getTarget().getRegion()) {
 				if (mergedNode == outgoingEdge.getTarget()) {
@@ -82,16 +82,16 @@ public class MergedMappingRegion extends AbstractMappingRegion
 					outgoingEdge.setSource(mergedNode);
 				}
 			}
-		}	
+		}
 	}
 
-//	private void addPrimaryRegion(@NonNull Region primaryRegion) {
-//		mergedRegions.add(primaryRegion);
-//		createMergedRegion(primaryRegion);
-//	}
+	//	private void addPrimaryRegion(@NonNull Region primaryRegion) {
+	//		mergedRegions.add(primaryRegion);
+	//		createMergedRegion(primaryRegion);
+	//	}
 
 	private void createMergedRegion(@NonNull Region region) {
-/*		for (@SuppressWarnings("null")@NonNull Region nestedRegion : region.getRegions()) {
+		/*		for (@SuppressWarnings("null")@NonNull Region nestedRegion : region.getRegions()) {
 			MergedRegion nestedMergedRegion = new MergedRegion((MergeableRegion)nestedRegion);
 			addRegion(nestedMergedRegion);
 			for (Node node : nestedMergedRegion.getNodes()) {
@@ -118,7 +118,7 @@ public class MergedMappingRegion extends AbstractMappingRegion
 				createMergedEdge(edge.getSource(), edge, edge.getTarget());
 			}
 			else if (edge.isRecursion()) {
-//				createMergedEdge(edge.getSource(), edge, edge.getTarget());	-- recomputed
+				//				createMergedEdge(edge.getSource(), edge, edge.getTarget());	-- recomputed
 			}
 			else {
 				System.err.println("Unmerged edge" + edge);
@@ -153,7 +153,7 @@ public class MergedMappingRegion extends AbstractMappingRegion
 		addNodeToMergedNode(node, mergedNode);
 		return mergedNode;
 	}
-	
+
 	private @Nullable MergedNode findMergedNode(@Nullable Node node) {
 		if (node instanceof MergedNode) {
 			return (MergedNode) node;
@@ -165,7 +165,7 @@ public class MergedMappingRegion extends AbstractMappingRegion
 			return null;
 		}
 	}
-	
+
 	@Override
 	public @NonNull String getName() {
 		List<String> names = new ArrayList<String>();
@@ -174,7 +174,7 @@ public class MergedMappingRegion extends AbstractMappingRegion
 		}
 		Collections.sort(names);;
 		StringBuilder s = new StringBuilder();
-//		s.append(getClass().getSimpleName());
+		//		s.append(getClass().getSimpleName());
 		for (String name : names) {
 			if (s.length() > 0) {
 				s.append("\\n");
@@ -183,14 +183,14 @@ public class MergedMappingRegion extends AbstractMappingRegion
 		}
 		return s.toString();
 	}
-	
+
 	@Override
 	public @NonNull String getColor() {
 		return "green";
 	}
 	
 	@Override
-	public @NonNull Iterable<@NonNull MergeableRegion> getMergeableRegions() {
+	public @NonNull Iterable<@NonNull AbstractMappingRegion> getMergeableRegions() {
 		return mergedRegions;
 	}
 
@@ -203,18 +203,18 @@ public class MergedMappingRegion extends AbstractMappingRegion
 			return mergedNode;
 		}
 		return ClassUtil.nonNullState(mergedNode);
-//		MergedNode mergedNode = simpleNode2mergedNode.get(node);
-//		if (mergedNode == null) {
-//			mergedNode = createMergedNode(node);
-//		}
-//		return mergedNode;
+		//		MergedNode mergedNode = simpleNode2mergedNode.get(node);
+		//		if (mergedNode == null) {
+		//			mergedNode = createMergedNode(node);
+		//		}
+		//		return mergedNode;
 	}
 
 	public @Nullable Map<Node, Node> getRecursiveBindings() {
 		return recursiveBindings;
 	}
 
-/*	public @NonNull Map<MergedNode, Node> getSharedPredicate(@NonNull MappingRegion mappingRegion) {
+	/*	public @NonNull Map<MergedNode, Node> getSharedPredicate(@NonNull MappingRegion mappingRegion) {
 		List<MappingRegion> requiredRegions = new ArrayList<MappingRegion>();
 		Map<MergedNode, Node> bindings = new HashMap<MergedNode, Node>();
 		for (@SuppressWarnings("null")@NonNull Edge edge : mappingRegion.getEdges()) {
@@ -277,7 +277,7 @@ public class MergedMappingRegion extends AbstractMappingRegion
 		return bindings;
 	} */
 
-/*	@Override
+	/*	@Override
 	public boolean isIterationRegion() {
 		for (Region mergedRegion : mergedRegions) {
 			if (mergedRegion.isIterationRegion()) {
@@ -287,7 +287,7 @@ public class MergedMappingRegion extends AbstractMappingRegion
 		return false;
 	} */
 
-/*	private void mergeNestedRegions(@NonNull List<Region> nestedRegions) {
+	/*	private void mergeNestedRegions(@NonNull List<Region> nestedRegions) {
 		if (!nestedRegions.isEmpty()) {
 			Map<Node, Node> node2clone = new HashMap<Node, Node>();
 			for (Node mergedNode : getNodes()) {
@@ -301,15 +301,15 @@ public class MergedMappingRegion extends AbstractMappingRegion
 		}
 	} */
 
-	public void mergeRegion(@NonNull Region secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
-//		Region secondaryRegion = secondaryNode2mergedNode.keySet().iterator().next().getRegion();
+	public void mergeRegion(@NonNull AbstractMappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
+		//		Region secondaryRegion = secondaryNode2mergedNode.keySet().iterator().next().getRegion();
 		//
 		//	Merge the regions
 		//
-		for (@NonNull MergeableRegion mergeableRegion : secondaryRegion.getMergeableRegions()) {
+		for (@NonNull AbstractMappingRegion mergeableRegion : secondaryRegion.getMergeableRegions()) {
 			mergedRegions.add(mergeableRegion);
 		}
-/*		for (@SuppressWarnings("null")@NonNull Region nestedRegion : secondaryRegion.getRegions()) {
+		/*		for (@SuppressWarnings("null")@NonNull Region nestedRegion : secondaryRegion.getRegions()) {
 			MergedRegion nestedMergedRegion = new MergedRegion((MergeableRegion)nestedRegion);
 			addRegion(nestedMergedRegion);
 //			for (Node mergedNode : nestedMergedRegion.getNodes()) {
@@ -324,7 +324,7 @@ public class MergedMappingRegion extends AbstractMappingRegion
 		for (Map.@NonNull Entry<@NonNull Node, @NonNull Node> entry : secondaryNode2primaryNode.entrySet()) {
 			@NonNull Node secondaryNode = entry.getKey();
 			@NonNull Node primaryNode = entry.getValue();
-//			assert mergedRegions.contains(primaryNode.getRegion());
+			//			assert mergedRegions.contains(primaryNode.getRegion());
 			MergedNode mergedNode = getMergedNode(primaryNode);
 			addNodeToMergedNode(secondaryNode, mergedNode);
 		}
@@ -338,23 +338,23 @@ public class MergedMappingRegion extends AbstractMappingRegion
 				mergedNode1 = createMergedNode(secondaryNode);
 				secondaryNode2primaryNode.put(secondaryNode, mergedNode1);
 			}
-//			MergedNode mergedNode2 = getMergedNode(secondaryNode);
+			//			MergedNode mergedNode2 = getMergedNode(secondaryNode);
 			assert mergedNode1 != null;
-//			assert mergedNode1 == mergedNode2;
-//			assert simpleNode2mergedNode.get(secondaryNode) != null;
+			//			assert mergedNode1 == mergedNode2;
+			//			assert simpleNode2mergedNode.get(secondaryNode) != null;
 		}
 		//
 		//	Merge the edges
 		//
-//		for (@SuppressWarnings("null")@NonNull Node secondarySourceNode : secondaryRegion.getNodes()) {
-//			MergedNode mergedSourceNode = getMergedNode(secondarySourceNode);
-//			for (@SuppressWarnings("null")@NonNull Edge secondaryEdge : secondarySourceNode.getMergeableEdges()) {
+		//		for (@SuppressWarnings("null")@NonNull Node secondarySourceNode : secondaryRegion.getNodes()) {
+		//			MergedNode mergedSourceNode = getMergedNode(secondarySourceNode);
+		//			for (@SuppressWarnings("null")@NonNull Edge secondaryEdge : secondarySourceNode.getMergeableEdges()) {
 		for (@NonNull Edge secondaryEdge : secondaryRegion.getEdges()) {
 			if (secondaryEdge.isMergeable()) {
 				Node primarySource = ClassUtil.nonNullState(secondaryNode2primaryNode.get(secondaryEdge.getSource()));
 				Node primaryTarget = ClassUtil.nonNullState(secondaryNode2primaryNode.get(secondaryEdge.getTarget()));
 				MergedNode mergedSourceNode = getMergedNode(primarySource);
-//				Node secondaryTargetNode = secondaryEdge.getTarget();
+				//				Node secondaryTargetNode = secondaryEdge.getTarget();
 				if (secondaryEdge instanceof NavigationEdge) {
 					NavigationEdge secondaryNavigationEdge = (NavigationEdge)secondaryEdge;
 					MergedNavigationEdge mergedEdge = (MergedNavigationEdge) mergedSourceNode.getNavigationEdge(secondaryNavigationEdge.getProperty());
@@ -362,9 +362,9 @@ public class MergedMappingRegion extends AbstractMappingRegion
 						createMergedNavigationEdge(primarySource, secondaryNavigationEdge, primaryTarget);
 					}
 					else {
-//						MergedNode mergedTargetNode1 = getMergedNode(secondaryTargetNode);
-//						Node mergedTargetNode2 = secondaryNode2primaryNode.get(secondaryTargetNode);
-//						assert mergedTargetNode1 == mergedTargetNode2;
+						//						MergedNode mergedTargetNode1 = getMergedNode(secondaryTargetNode);
+						//						Node mergedTargetNode2 = secondaryNode2primaryNode.get(secondaryTargetNode);
+						//						assert mergedTargetNode1 == mergedTargetNode2;
 						addEdgeToMergedEdge(secondaryEdge, mergedEdge);
 					}
 				}
@@ -390,7 +390,7 @@ public class MergedMappingRegion extends AbstractMappingRegion
 		//
 		//	Prune dead casts
 		//
-/*		List<Node> deadNodes = null;
+		/*		List<Node> deadNodes = null;
 		for (Edge castEdge : getCastEdges()) {
 			Node sourceNode = castEdge.getSource();
 			List<Edge> incomingEdges = sourceNode.getIncomingEdges();
@@ -406,8 +406,8 @@ public class MergedMappingRegion extends AbstractMappingRegion
 				deadNode.destroy();
 			}
 		} */
-		
+
 		//
-//		mergedRegions.add(secondaryRegion);
+		//		mergedRegions.add(secondaryRegion);
 	}
 }

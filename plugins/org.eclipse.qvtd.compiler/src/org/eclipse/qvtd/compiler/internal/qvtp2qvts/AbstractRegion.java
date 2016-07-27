@@ -315,8 +315,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
-	public static final @NonNull List<@NonNull MergeableRegion> EMPTY_MERGEABLE_REGIONS = Collections.emptyList();
-
 	protected final @NonNull MultiRegion multiRegion;
 	private @Nullable ScheduledRegion invokingRegion = null;
 
@@ -1844,11 +1842,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getMatchableNodes() {
 		return Iterables.filter(nodes, IsMatchableNodePredicate.INSTANCE);
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull MergeableRegion> getMergeableRegions() {
-		return EMPTY_MERGEABLE_REGIONS;
 	}
 
 	@Override

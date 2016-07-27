@@ -111,7 +111,6 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	 */
 	@NonNull Iterable<@NonNull Node> getMatchableNodes();
 
-	@NonNull Iterable<@NonNull MergeableRegion> getMergeableRegions();
 	@NonNull MultiRegion getMultiRegion();
 	@Override
 	@NonNull String getName();

@@ -228,6 +228,8 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		return headNodes2;
 	}
 
+	public abstract @NonNull Iterable<@NonNull AbstractMappingRegion> getMergeableRegions();
+
 	@Override
 	public void resetHead(@NonNull Node headNode) {
 		boolean wasRemoved = getHeadNodes().remove(headNode);
