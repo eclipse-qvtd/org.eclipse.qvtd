@@ -67,13 +67,18 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 	}
 
 	@Override
+	public EdgeRole.@NonNull Navigation getEdgeRole() {
+		return (EdgeRole.Navigation)super.getEdgeRole();
+	}
+
+	@Override
 	public final @Nullable EdgeConnection getIncomingConnection() {
 		return incomingConnection;
 	}
 
 	@Override
 	public @Nullable String getLabel() {
-		return ((EdgeRole.Navigation)getEdgeRole()).getLabel(source2targetProperty);
+		return getEdgeRole().getLabel(source2targetProperty);
 	}
 
 	@Override

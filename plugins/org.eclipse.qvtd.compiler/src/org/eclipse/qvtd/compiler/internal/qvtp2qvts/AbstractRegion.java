@@ -1527,7 +1527,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		Node node = parentNode.getNavigationTarget(property);
 		//		AbstractAttributeNode node = (AbstractAttributeNode)node2node.get(property);
 		if (node == null) {
-			node = Nodes.REALIZED_ATTRIBUTE.createSimpleNode(parentNode.getRegion(), parentNode, property);
+			node = Nodes.REALIZED_ATTRIBUTE.createNode(parentNode.getRegion(), parentNode, property);
 			//			node2node.put(property, node);
 		}
 		return node;
@@ -1539,7 +1539,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		Node node = parentNode.getNavigationTarget(property);
 //		AbstractAttributeNode node = (AbstractAttributeNode)node2node.get(property);
 		if (node == null) {
-			node = Nodes.NAV.createSimpleNode(region, parentNode, navigationCallExp)Node(parentNode.getRegion(), parentNode, property);
+			node = Nodes.NAV.createNode(region, parentNode, navigationCallExp)Node(parentNode.getRegion(), parentNode, property);
 //			node2node.put(property, node);
 		}
 		return node;
@@ -1972,7 +1972,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		Node node = parentNode.getNavigationTarget(referredProperty);
 		//		AbstractAttributeNode node = (AbstractAttributeNode)node2node.get(property);
 		if (node == null) {
-			node = Nodes.ATTRIBUTE.createSimpleNode(parentNode.getRegion(), parentNode, navigationCallExp);
+			node = Nodes.ATTRIBUTE.createNode(parentNode.getRegion(), parentNode, navigationCallExp);
 		}
 		return node;
 	}

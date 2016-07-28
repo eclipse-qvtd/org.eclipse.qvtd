@@ -66,8 +66,8 @@ public class OperationRegion extends AbstractRegion
 		Node extraNode;
 		extraNode = selfNode;
 		//
-		resultNode = Nodes.UNNAVIGABLE_STEP.createSimpleNode(this, "result", operationCallExp, extraNode);
-		Edges.RESULT.createSimpleEdge(this, extraNode, null, resultNode);
+		resultNode = Nodes.UNNAVIGABLE_STEP.createNode(this, "result", operationCallExp, extraNode);
+		Edges.RESULT.createEdge(this, extraNode, null, resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
@@ -144,7 +144,7 @@ public class OperationRegion extends AbstractRegion
 							//						assert typedModel != null;
 							//						stepType = propertyStep.getType();
 							//						classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(stepType, typedModel);
-							//						Node nextNode = Nodes.StepNodeRoleFactory.PREDICATED_STEP.createSimpleNode(this, "next", classDatumAnalysis);
+							//						Node nextNode = Nodes.StepNodeRoleFactory.PREDICATED_STEP.createNode(this, "next", classDatumAnalysis);
 
 							CompleteClass completeClass = classDatumAnalysis.getCompleteClass();
 							Type primaryClass = completeClass.getPrimaryClass();
@@ -153,13 +153,13 @@ public class OperationRegion extends AbstractRegion
 								Type elementType = ((CollectionType)primaryClass).getElementType();
 								TypedModel typedModel2 = classDatumAnalysis.getTypedModel();
 								ClassDatumAnalysis elementClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis((@NonNull Class) elementType, typedModel2);
-								Node elementNode = Nodes.ELEMENT.createSimpleNode(this, name, elementClassDatumAnalysis, extraNode2);
+								Node elementNode = Nodes.ELEMENT.createNode(this, name, elementClassDatumAnalysis, extraNode2);
 								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, extraNode2);
-								Edges.NAVIGATION.createSimpleEdge(this, extraNode2, iterateProperty, elementNode);
+								Edges.NAVIGATION.createEdge(this, extraNode2, iterateProperty, elementNode);
 								extraNode2 = elementNode;
 							}
-							Node nextNode = Nodes.UNNAVIGABLE_ATTRIBUTE.createSimpleNode(this, extraNode2, navigationCallExp);
-							Edges.NAVIGATION.createSimpleEdge(this, extraNode2, property, nextNode);
+							Node nextNode = Nodes.UNNAVIGABLE_ATTRIBUTE.createNode(this, extraNode2, navigationCallExp);
+							Edges.NAVIGATION.createEdge(this, extraNode2, property, nextNode);
 							extraNode2 = nextNode;
 						}
 					}
@@ -198,7 +198,7 @@ public class OperationRegion extends AbstractRegion
 		TypedModel typedModel = schedulerConstants.getDomainUsage(expression).getTypedModel(expression);
 		assert typedModel != null;
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(type, typedModel);
-		Node parameterNode = Nodes.PARAMETER.createSimpleNode(this, name, classDatumAnalysis);
+		Node parameterNode = Nodes.PARAMETER.createNode(this, name, classDatumAnalysis);
 		//		addVariableNode(variable, parameterNode);
 		headNodes.add(parameterNode);
 		parameter2node.put(variable, parameterNode);
@@ -212,7 +212,7 @@ public class OperationRegion extends AbstractRegion
 		TypedModel typedModel = schedulerConstants.getDomainUsage(variable).getTypedModel(variable);
 		assert typedModel != null;
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(type, typedModel);
-		Node parameterNode = Nodes.PARAMETER.createSimpleNode(this, name, classDatumAnalysis);
+		Node parameterNode = Nodes.PARAMETER.createNode(this, name, classDatumAnalysis);
 		//		addVariableNode(variable, parameterNode);
 		headNodes.add(parameterNode);
 		parameter2node.put(variable, parameterNode);
@@ -220,7 +220,7 @@ public class OperationRegion extends AbstractRegion
 	}
 
 	private @NonNull Node createParameterNode(@NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull String name) {
-		Node parameterNode = Nodes.PARAMETER.createSimpleNode(this, name, classDatumAnalysis);
+		Node parameterNode = Nodes.PARAMETER.createNode(this, name, classDatumAnalysis);
 		//		addVariableNode(variable, parameterNode);
 		headNodes.add(parameterNode);
 		return parameterNode;

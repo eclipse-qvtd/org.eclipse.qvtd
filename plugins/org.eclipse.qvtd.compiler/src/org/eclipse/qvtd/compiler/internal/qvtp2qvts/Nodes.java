@@ -44,16 +44,11 @@ public class Nodes
 
 		@Override
 		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 			return new TypedNode(this, region, name, classDatumAnalysis);
 		}
 
 		@Override
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
+		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 			return new TypedNode(this, region, name, typedElement);
 		}
 	}
@@ -67,7 +62,7 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
+		public @NonNull Node createNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
 			assert isClassNode == !(variable.getType() instanceof DataType);
 			return new VariableNode(this, region, variable);
 		}
@@ -115,7 +110,7 @@ public class Nodes
 				this.isAttribute = isAttribute;
 			}
 
-			public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp) {
+			public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp) {
 				assert parentNode.isClassNode();
 				//				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 				Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
@@ -127,7 +122,7 @@ public class Nodes
 				//				ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum, domainUsage);
 				String name = referredProperty.getName();
 				assert name != null;
-				return createSimpleNode(region, name, navigationCallExp);
+				return createNode(region, name, navigationCallExp);
 			}
 
 			@Override
@@ -180,7 +175,7 @@ public class Nodes
 				super(Role.Phase.REALIZED, false);
 			}
 
-			public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull Node parentNode, @NonNull Property property) {
+			public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull Property property) {
 				assert parentNode.isClassNode();
 				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 				org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
@@ -196,7 +191,7 @@ public class Nodes
 				ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
 				String name = property.getName();
 				assert name != null;
-				return createSimpleNode(region, name, classDatumAnalysis);
+				return createNode(region, name, classDatumAnalysis);
 			}
 
 			@Override
@@ -224,7 +219,7 @@ public class Nodes
 				super(Role.Phase.PREDICATED, false);
 			}
 
-			public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
+			public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
 				assert parentNode.isClassNode();
 				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 				Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
@@ -237,7 +232,7 @@ public class Nodes
 				ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
 				String name = property.getName();
 				assert name != null;
-				return createSimpleNode(region, name, classDatumAnalysis);
+				return createNode(region, name, classDatumAnalysis);
 			}
 
 			@Override
@@ -271,26 +266,26 @@ public class Nodes
 			this.isNavigable = isNavigable;
 		}
 
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp) {
+		public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp) {
 			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : parentNode.isNavigable();
 			if (parentNode.isLoaded()) {
 				Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
 				assert referredProperty != null;
 				boolean isDirty = region.getSchedulerConstants().isDirty(referredProperty);
 				if (!isDirty) {
-					return (resolvedNavigable ? LOADED_NAVIGABLE_ATTRIBUTE : LOADED_UNNAVIGABLE_ATTRIBUTE).createSimpleNode(parentNode.getRegion(), parentNode, navigationCallExp);
+					return (resolvedNavigable ? LOADED_NAVIGABLE_ATTRIBUTE : LOADED_UNNAVIGABLE_ATTRIBUTE).createNode(parentNode.getRegion(), parentNode, navigationCallExp);
 				}
 				else {
-					return (resolvedNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE).createSimpleNode(parentNode.getRegion(), parentNode, navigationCallExp);
+					return (resolvedNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE).createNode(parentNode.getRegion(), parentNode, navigationCallExp);
 				}
 			}
 			else if (parentNode.isPredicated()) {
-				return (resolvedNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE).createSimpleNode(parentNode.getRegion(), parentNode, navigationCallExp);
+				return (resolvedNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE).createNode(parentNode.getRegion(), parentNode, navigationCallExp);
 			}
 			else if (parentNode.isRealized()) {
 				Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);	// ??never happens
 				assert referredProperty != null;
-				return REALIZED_ATTRIBUTE.createSimpleNode(parentNode.getRegion(), parentNode, referredProperty);
+				return REALIZED_ATTRIBUTE.createNode(parentNode.getRegion(), parentNode, referredProperty);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -380,12 +375,12 @@ public class Nodes
 		private static final @NonNull LoadedElementNodeRole LOADED_ELEMENT = new LoadedElementNodeRole();
 		public static final @NonNull PredicatedElementNodeRole PREDICATED_ELEMENT = new PredicatedElementNodeRole();
 
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
+		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
 			if (sourceNode.isPredicated()) {
-				return PREDICATED_ELEMENT.createSimpleNode(region, name, classDatumAnalysis);
+				return PREDICATED_ELEMENT.createNode(region, name, classDatumAnalysis);
 			}
 			else {
-				return LOADED_ELEMENT.createSimpleNode(region, name, classDatumAnalysis);
+				return LOADED_ELEMENT.createNode(region, name, classDatumAnalysis);
 			}
 		}
 	}
@@ -521,7 +516,7 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull VariableDeclaration guardVariable) {
+		public @NonNull Node createNode(@NonNull Region region, @NonNull VariableDeclaration guardVariable) {
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(guardVariable);
 			boolean isEnforceable = domainUsage.isOutput();
 			Boolean resolvedIsClassNode = isClassNode;
@@ -529,10 +524,10 @@ public class Nodes
 				resolvedIsClassNode = !(guardVariable.getType() instanceof DataType);
 			}
 			if (!isEnforceable) {
-				return (resolvedIsClassNode ? LOADED_CLASS_GUARD : LOADED_ATTRIBUTE_GUARD).createSimpleNode(region, guardVariable);
+				return (resolvedIsClassNode ? LOADED_CLASS_GUARD : LOADED_ATTRIBUTE_GUARD).createNode(region, guardVariable);
 			}
 			else {
-				return (resolvedIsClassNode ? PREDICATED_CLASS_GUARD : PREDICATED_ATTRIBUTE_GUARD).createSimpleNode(region, guardVariable);
+				return (resolvedIsClassNode ? PREDICATED_CLASS_GUARD : PREDICATED_ATTRIBUTE_GUARD).createNode(region, guardVariable);
 			}
 		}
 	}
@@ -584,19 +579,19 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull Variable iterator, @NonNull Node sourceNode) {
+		public @NonNull Node createNode(@NonNull Region region, @NonNull Variable iterator, @NonNull Node sourceNode) {
 			Boolean resolvedIsClassNode = isClassNode;
 			if (resolvedIsClassNode == null) {
 				resolvedIsClassNode = !(iterator.getType() instanceof DataType);
 			}
 			if (sourceNode.isConstant()) {
-				return (resolvedIsClassNode ? CONSTANT_CLASS_ITERATOR : CONSTANT_ATTRIBUTE_ITERATOR).createSimpleNode(region, iterator);
+				return (resolvedIsClassNode ? CONSTANT_CLASS_ITERATOR : CONSTANT_ATTRIBUTE_ITERATOR).createNode(region, iterator);
 			}
 			else if (sourceNode.isLoaded()) {
-				return (resolvedIsClassNode ? LOADED_CLASS_ITERATOR : LOADED_ATTRIBUTE_ITERATOR).createSimpleNode(region, iterator);
+				return (resolvedIsClassNode ? LOADED_CLASS_ITERATOR : LOADED_ATTRIBUTE_ITERATOR).createNode(region, iterator);
 			}
 			else {
-				return (resolvedIsClassNode ? PREDICATED_CLASS_ITERATOR : PREDICATED_ATTRIBUTE_ITERATOR).createSimpleNode(region, iterator);
+				return (resolvedIsClassNode ? PREDICATED_CLASS_ITERATOR : PREDICATED_ATTRIBUTE_ITERATOR).createNode(region, iterator);
 			}
 		}
 	}
@@ -647,31 +642,31 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull Variable letVariable, @NonNull Node inNode) {
+		public @NonNull Node createNode(@NonNull Region region, @NonNull Variable letVariable, @NonNull Node inNode) {
 			Boolean resolvedIsClassNode = isClassNode;
 			if (resolvedIsClassNode == null) {
 				resolvedIsClassNode = !(letVariable.getType() instanceof DataType);
 			}
 			if (inNode.isNavigable()) {
 				if (inNode.isConstant()) {
-					return (resolvedIsClassNode ? CONSTANT_NAVIGABLE_CLASS_LET : CONSTANT_NAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
+					return (resolvedIsClassNode ? CONSTANT_NAVIGABLE_CLASS_LET : CONSTANT_NAVIGABLE_ATTRIBUTE_LET).createNode(region, letVariable);
 				}
 				else if (inNode.isLoaded()) {
-					return (resolvedIsClassNode ? LOADED_NAVIGABLE_CLASS_LET : LOADED_NAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
+					return (resolvedIsClassNode ? LOADED_NAVIGABLE_CLASS_LET : LOADED_NAVIGABLE_ATTRIBUTE_LET).createNode(region, letVariable);
 				}
 				else {
-					return (resolvedIsClassNode ? PREDICATED_NAVIGABLE_CLASS_LET : PREDICATED_NAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
+					return (resolvedIsClassNode ? PREDICATED_NAVIGABLE_CLASS_LET : PREDICATED_NAVIGABLE_ATTRIBUTE_LET).createNode(region, letVariable);
 				}
 			}
 			else {
 				if (inNode.isConstant()) {
-					return (resolvedIsClassNode ? CONSTANT_UNNAVIGABLE_CLASS_LET : CONSTANT_UNNAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
+					return (resolvedIsClassNode ? CONSTANT_UNNAVIGABLE_CLASS_LET : CONSTANT_UNNAVIGABLE_ATTRIBUTE_LET).createNode(region, letVariable);
 				}
 				else if (inNode.isLoaded()) {
-					return (resolvedIsClassNode ? LOADED_UNNAVIGABLE_CLASS_LET : LOADED_UNNAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
+					return (resolvedIsClassNode ? LOADED_UNNAVIGABLE_CLASS_LET : LOADED_UNNAVIGABLE_ATTRIBUTE_LET).createNode(region, letVariable);
 				}
 				else {
-					return (resolvedIsClassNode ? PREDICATED_UNNAVIGABLE_CLASS_LET : PREDICATED_UNNAVIGABLE_ATTRIBUTE_LET).createSimpleNode(region, letVariable);
+					return (resolvedIsClassNode ? PREDICATED_UNNAVIGABLE_CLASS_LET : PREDICATED_UNNAVIGABLE_ATTRIBUTE_LET).createNode(region, letVariable);
 				}
 			}
 		}
@@ -683,12 +678,12 @@ public class Nodes
 			super(Role.Phase.CONSTANT);
 		}
 
-		public @NonNull Node createSimpleNode(@NonNull Region region) {
-			return createSimpleNode(region, "«null»", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
+		public @NonNull Node createNode(@NonNull Region region) {
+			return createNode(region, "«null»", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
 		}
 
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull TypedElement typedElement) {
-			return createSimpleNode(region, "«null»", typedElement);
+		public @NonNull Node createNode(@NonNull Region region, @NonNull TypedElement typedElement) {
+			return createNode(region, "«null»", typedElement);
 		}
 
 		@Override
@@ -746,7 +741,7 @@ public class Nodes
 		private static final @NonNull OperationNodeRole PREDICATED_OPERATION = new OperationNodeRole(Role.Phase.PREDICATED);
 		private static final @NonNull OperationNodeRole REALIZED_OPERATION = new OperationNodeRole(Role.Phase.REALIZED);
 
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement, Node... argNodes) {
+		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement, Node... argNodes) {
 			boolean isLoaded = false;
 			boolean isPredicated = false;
 			boolean isRealized = false;
@@ -773,16 +768,16 @@ public class Nodes
 				}
 			}
 			if (isRealized) {
-				return REALIZED_OPERATION.createSimpleNode(region, name, typedElement);
+				return REALIZED_OPERATION.createNode(region, name, typedElement);
 			}
 			else if (isPredicated) {
-				return PREDICATED_OPERATION.createSimpleNode(region, name, typedElement);
+				return PREDICATED_OPERATION.createNode(region, name, typedElement);
 			}
 			else if (isLoaded) {
-				return LOADED_OPERATION.createSimpleNode(region, name, typedElement);
+				return LOADED_OPERATION.createNode(region, name, typedElement);
 			}
 			else {
-				return CONSTANT_OPERATION.createSimpleNode(region, name, typedElement);
+				return CONSTANT_OPERATION.createNode(region, name, typedElement);
 			}
 		}
 	}
@@ -811,12 +806,12 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 			Boolean resolvedIsClassNode = isClassNode;
 			if (resolvedIsClassNode == null) {
 				resolvedIsClassNode = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType);
 			}
-			return (resolvedIsClassNode ? CLASS_PARAMETER : ATTRIBUTE_PARAMETER).createSimpleNode(region, name, classDatumAnalysis);
+			return (resolvedIsClassNode ? CLASS_PARAMETER : ATTRIBUTE_PARAMETER).createNode(region, name, classDatumAnalysis);
 		}
 	}
 
@@ -838,13 +833,8 @@ public class Nodes
 			}
 
 			@Override
-			public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-				throw new UnsupportedOperationException();
-			}
 
-			@Override
-
-			public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
+			public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 				throw new UnsupportedOperationException();
 			}
 
@@ -961,20 +951,20 @@ public class Nodes
 		private static final @NonNull ResultNodeRole PREDICATED_RESULT = new ResultNodeRole(Role.Phase.PREDICATED);
 		private static final @NonNull ResultNodeRole REALIZED_RESULT = new ResultNodeRole(Role.Phase.REALIZED);
 
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull String name,
+		public @NonNull Node createNode(@NonNull Region region, @NonNull String name,
 				@NonNull CallExp callExp, @NonNull Node sourceNode) {
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
 			if (domainUsage.isEnforceable()) {
-				return REALIZED_RESULT.createSimpleNode(region, name, callExp);
+				return REALIZED_RESULT.createNode(region, name, callExp);
 			}
 			else if (sourceNode.isPredicated()) {
-				return PREDICATED_RESULT.createSimpleNode(region, name, callExp);
+				return PREDICATED_RESULT.createNode(region, name, callExp);
 			}
 			else if (sourceNode.isLoaded()) {
-				return LOADED_RESULT.createSimpleNode(region, name, callExp);
+				return LOADED_RESULT.createNode(region, name, callExp);
 			}
 			else {
-				return CONSTANT_RESULT.createSimpleNode(region, name, callExp);
+				return CONSTANT_RESULT.createNode(region, name, callExp);
 			}
 		}
 	} */
@@ -1055,7 +1045,7 @@ public class Nodes
 			this.isNavigable = isNavigable;
 		}
 
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull String name,
+		public @NonNull Node createNode(@NonNull Region region, @NonNull String name,
 				@NonNull CallExp callExp, @NonNull Node sourceNode) {
 			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			boolean isDirty = false;
@@ -1066,20 +1056,20 @@ public class Nodes
 				//				DomainUsage usage = region.getSchedulerConstants().basicGetDomainUsage(referredProperty);
 			}
 			//			if (!isDirty && sourceNode.isLoaded()) {
-			//				return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
+			//				return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createNode(region, name, callExp);
 			//			}
 			if (sourceNode.isPredicated() || domainUsage.isOutput() ) {
-				return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
+				return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createNode(region, name, callExp);
 			}
 			if (!isDirty && sourceNode.isLoaded()) {
-				return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
+				return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createNode(region, name, callExp);
 			}
 			else {
 				if (!isDirty) {
-					return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
+					return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createNode(region, name, callExp);
 				}
 				else {
-					return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createSimpleNode(region, name, callExp);
+					return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createNode(region, name, callExp);
 				}
 			}
 		}
@@ -1091,12 +1081,12 @@ public class Nodes
 			super(Role.Phase.CONSTANT);
 		}
 
-		public @NonNull Node createSimpleNode(@NonNull Region region) {
+		public @NonNull Node createNode(@NonNull Region region) {
 			SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 			org.eclipse.ocl.pivot.Class booleanType = schedulerConstants.getStandardLibrary().getBooleanType();
 			DomainUsage primitiveUsage = schedulerConstants.getDomainAnalysis().getPrimitiveUsage();
 			ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)));
-			return createSimpleNode(region, "«true»", classDatumAnalysis);
+			return createNode(region, "«true»", classDatumAnalysis);
 		}
 
 		@Override
@@ -1145,12 +1135,12 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull Variable variable) {
+		public @NonNull Node createNode(@NonNull Region region, @NonNull Variable variable) {
 			Boolean resolvedIsClassNode = isClassNode;
 			if (resolvedIsClassNode == null) {
 				resolvedIsClassNode = !(variable.getType() instanceof DataType);
 			}
-			return (resolvedIsClassNode ? UNREALIZED_CLASS_VARIABLE : UNREALIZED_ATTRIBUTE_VARIABLE).createSimpleNode(region, variable);
+			return (resolvedIsClassNode ? UNREALIZED_CLASS_VARIABLE : UNREALIZED_ATTRIBUTE_VARIABLE).createNode(region, variable);
 		}
 	}
 

@@ -36,13 +36,13 @@ public class RootCompositionRegion extends AbstractRegion
 	 * The introducer node for each consumed ClassDatumAnalysis and for each known container property where the containing property is known.
 	 * The null containing property is used for introducer nodes required to be at the root.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable Property, @NonNull Node>> classDatumAnalysis2property2node = new HashMap<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable Property, @NonNull Node>>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable Property, @NonNull Node>> classDatumAnalysis2property2node = new HashMap<>();
 
 	/**
 	 * The introducer node for each consumed ClassDatumAnalysis and for each known containing type where the containing property is just oclContainer.
 	 * The null type is used when no containing property or type is known.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable ClassDatumAnalysis, @NonNull Node>> classDatumAnalysis2type2node = new HashMap<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable ClassDatumAnalysis, @NonNull Node>>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable ClassDatumAnalysis, @NonNull Node>> classDatumAnalysis2type2node = new HashMap<>();
 
 	protected RootCompositionRegion(@NonNull MultiRegion multiRegion) {
 		super(multiRegion);
@@ -95,57 +95,57 @@ public class RootCompositionRegion extends AbstractRegion
 		if (parent2childProperty == null) {												// No known containment, owned by null type
 			Map<@Nullable ClassDatumAnalysis, @NonNull Node> type2node = classDatumAnalysis2type2node.get(consumedClassDatumAnalysis);
 			if (type2node == null) {
-				type2node = new HashMap<@Nullable ClassDatumAnalysis, @NonNull Node>();
+				type2node = new HashMap<>();
 				classDatumAnalysis2type2node.put(consumedClassDatumAnalysis, type2node);
 			}
 			introducedNode = type2node.get(null);
 			if (introducedNode == null) {
-				introducedNode = Nodes.COMPOSING.createSimpleNode(this, "«" + elementType.getName() + "»", childrenClassDatumAnalysis);
+				introducedNode = Nodes.COMPOSING.createNode(this, "«" + elementType.getName() + "»", childrenClassDatumAnalysis);
 				type2node.put(null, introducedNode);
 			}
 		}
 		else if ((containerEdge != null) && containerEdge.getTarget().isNull()) {		// At root, owned by null property
 			Map<@Nullable Property, @NonNull Node> property2node = classDatumAnalysis2property2node.get(consumedClassDatumAnalysis);
 			if (property2node == null) {
-				property2node = new HashMap<@Nullable Property, @NonNull Node>();
+				property2node = new HashMap<>();
 				classDatumAnalysis2property2node.put(consumedClassDatumAnalysis, property2node);
 			}
 			introducedNode = property2node.get(null);
 			if (introducedNode == null) {
-				introducedNode = Nodes.COMPOSING.createSimpleNode(this, "«" + elementType.getName() + "-null»", childrenClassDatumAnalysis);
+				introducedNode = Nodes.COMPOSING.createNode(this, "«" + elementType.getName() + "-null»", childrenClassDatumAnalysis);
 				property2node.put(null, introducedNode);
-				Edges.NAVIGABLE_NAVIGATION.createSimpleEdge(this, getNullNode(), parent2childProperty, introducedNode);
+				Edges.NAVIGABLE_NAVIGATION.createEdge(this, getNullNode(), parent2childProperty, introducedNode);
 			}
 		}
 		else if (containingClassDatumAnalysis != null) {								// Non-root oclContainer ownership
 			Map<@Nullable ClassDatumAnalysis, @NonNull Node> type2node = classDatumAnalysis2type2node.get(consumedClassDatumAnalysis);
 			if (type2node == null) {
-				type2node = new HashMap<@Nullable ClassDatumAnalysis, @NonNull Node>();
+				type2node = new HashMap<>();
 				classDatumAnalysis2type2node.put(consumedClassDatumAnalysis, type2node);
 			}
 			introducedNode = type2node.get(containingClassDatumAnalysis);
 			if (introducedNode == null) {
-				introducedNode = Nodes.COMPOSING.createSimpleNode(this, "«" + elementType.getName() + "-oclContents»", childrenClassDatumAnalysis);
+				introducedNode = Nodes.COMPOSING.createNode(this, "«" + elementType.getName() + "-oclContents»", childrenClassDatumAnalysis);
 				type2node.put(containingClassDatumAnalysis, introducedNode);
-				Node containerNode = Nodes.COMPOSING.createSimpleNode(this, "«" + containingClassDatumAnalysis.getCompleteClass().getName() + "-oclContainer»", containingClassDatumAnalysis);
-				Edges.NAVIGABLE_NAVIGATION.createSimpleEdge(this, containerNode, parent2childProperty, introducedNode);
+				Node containerNode = Nodes.COMPOSING.createNode(this, "«" + containingClassDatumAnalysis.getCompleteClass().getName() + "-oclContainer»", containingClassDatumAnalysis);
+				Edges.NAVIGABLE_NAVIGATION.createEdge(this, containerNode, parent2childProperty, introducedNode);
 			}
 		}
 		else {																			// Knonw distinctive containment
 			Map<@Nullable Property, @NonNull Node> property2node = classDatumAnalysis2property2node.get(consumedClassDatumAnalysis);
 			if (property2node == null) {
-				property2node = new HashMap<@Nullable Property, @NonNull Node>();
+				property2node = new HashMap<>();
 				classDatumAnalysis2property2node.put(consumedClassDatumAnalysis, property2node);
 			}
 			introducedNode = property2node.get(parent2childProperty);
 			if (introducedNode == null) {
-				introducedNode = Nodes.COMPOSING.createSimpleNode(this, "«" + elementType.getName() + "-" + parent2childProperty.getName() + "»", childrenClassDatumAnalysis);
+				introducedNode = Nodes.COMPOSING.createNode(this, "«" + elementType.getName() + "-" + parent2childProperty.getName() + "»", childrenClassDatumAnalysis);
 				property2node.put(parent2childProperty, introducedNode);
 				org.eclipse.ocl.pivot.Class owningClass = parent2childProperty.getOwningClass();
 				assert owningClass != null;
 				containingClassDatumAnalysis = scheduler.getClassDatumAnalysis(owningClass, typedModel);
-				Node containerNode = Nodes.COMPOSING.createSimpleNode(this, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatumAnalysis);
-				Edges.NAVIGABLE_NAVIGATION.createSimpleEdge(this, containerNode, parent2childProperty, introducedNode);
+				Node containerNode = Nodes.COMPOSING.createNode(this, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatumAnalysis);
+				Edges.NAVIGABLE_NAVIGATION.createEdge(this, containerNode, parent2childProperty, introducedNode);
 			}
 		}
 		return introducedNode;
@@ -164,7 +164,7 @@ public class RootCompositionRegion extends AbstractRegion
 	private @NonNull Node getNullNode() {
 		Node nullNode2 = nullNode;
 		if (nullNode2 == null) {
-			nullNode = nullNode2 = Nodes.NULL.createSimpleNode(this);
+			nullNode = nullNode2 = Nodes.NULL.createNode(this);
 		}
 		return nullNode2;
 	}

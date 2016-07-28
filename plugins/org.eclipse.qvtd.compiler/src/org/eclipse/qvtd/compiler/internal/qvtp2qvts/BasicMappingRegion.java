@@ -133,8 +133,8 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			else { */
 			Node resultNode = expressionAnalyzer.analyze(conditionExpression);
 			if (!resultNode.isTrue()) {
-				Node trueNode = Nodes.TRUE.createSimpleNode(this);
-				Edges.PREDICATE.createSimpleEdge(this, resultNode, null, trueNode);
+				Node trueNode = Nodes.TRUE.createNode(this);
+				Edges.PREDICATE.createEdge(this, resultNode, null, trueNode);
 			}
 			else {		// FIXME ?? do includes() here explicitly
 				resultNode.destroy();
@@ -144,10 +144,10 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		//
 		for (BottomPattern bottomPattern : bottomPatterns) {
 			for (@SuppressWarnings("null")@NonNull RealizedVariable realizedVariable : bottomPattern.getRealizedVariable()) {
-				/*assignedNodes.add(*/Nodes.REALIZED_VARIABLE.createSimpleNode(this, realizedVariable);
+				/*assignedNodes.add(*/Nodes.REALIZED_VARIABLE.createNode(this, realizedVariable);
 			}
 			//			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
-			//				/*assignedNodes.add(*/Nodes.UNREALIZED_VARIABLE.createSimpleNode(this, variable);
+			//				/*assignedNodes.add(*/Nodes.UNREALIZED_VARIABLE.createNode(this, variable);
 			//			}
 		}
 		//
@@ -161,7 +161,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			//					Node initNode = ownedInit.accept(expressionAnalyzer);
 			//					assert initNode != null;
 			//					variable2simpleNode.put(variable, initNode);
-			//					Edges.ARGUMENT.createSimpleEdge(this, initNode, null, variableNode);
+			//					Edges.ARGUMENT.createEdge(this, initNode, null, variableNode);
 			//					if (initNode.isConstant()) {
 			//						variableNode.mergeRole(initNode.getNodeRole());
 			//					}
@@ -198,14 +198,14 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		Property property = path.get(0);
 		assert property != null;
 		Node sourceNode = getReferenceNode(sourceVariable);
-		Node targetNode = targetVariable != null ? getReferenceNode(targetVariable) : Nodes.NULL.createSimpleNode(this);
+		Node targetNode = targetVariable != null ? getReferenceNode(targetVariable) : Nodes.NULL.createNode(this);
 		assert sourceNode.isGuardVariable();
 		assert (targetVariable == null) || targetNode.isGuardVariable();
 		assert sourceNode.isClassNode();
 		if (!property.isIsMany()) {
 			Edge predicateEdge = sourceNode.getPredicateEdge(property);
 			if (predicateEdge == null) {
-				Edges.NAVIGATION.createSimpleEdge(this, sourceNode, property, targetNode);
+				Edges.NAVIGATION.createEdge(this, sourceNode, property, targetNode);
 			}
 			else {
 				assert predicateEdge.getTarget() == targetNode;
@@ -215,7 +215,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		if ((oppositeProperty != null) && !oppositeProperty.isIsMany()) {
 			Edge predicateEdge = targetNode.getPredicateEdge(oppositeProperty);
 			if (predicateEdge == null) {
-				Edges.NAVIGATION.createSimpleEdge(this, targetNode, oppositeProperty, sourceNode);
+				Edges.NAVIGATION.createEdge(this, targetNode, oppositeProperty, sourceNode);
 			}
 			else {
 				assert predicateEdge.getTarget() == sourceNode;
@@ -241,7 +241,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		for (CorePattern corePattern : corePatterns) {
 			for (@NonNull Variable variable : ClassUtil.nullFree(corePattern.getVariable())) {
 				if (corePattern instanceof GuardPattern) {
-					Nodes.GUARD.createSimpleNode(this, variable);
+					Nodes.GUARD.createNode(this, variable);
 				}
 				else {
 					OCLExpression ownedInit = variable.getOwnedInit();
@@ -249,7 +249,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 						analyzeVariable(variable, ownedInit);
 					}
 					else {
-						Nodes.GUARD.createSimpleNode(this, variable);		// FIXME ?? should have been guard not bottom
+						Nodes.GUARD.createNode(this, variable);		// FIXME ?? should have been guard not bottom
 					}
 				}
 			}
@@ -306,19 +306,19 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		assert initNode != null;
 		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
-				Node stepNode = Nodes.REALIZED_VARIABLE.createSimpleNode(this, variable);
-				Edges.RESULT.createSimpleEdge(this, initNode, null, stepNode);
+				Node stepNode = Nodes.REALIZED_VARIABLE.createNode(this, variable);
+				Edges.RESULT.createEdge(this, initNode, null, stepNode);
 				initNode = stepNode;
 			}
 			//			else if (variable.getType() instanceof CollectionType) {
-			//				Node stepNode = Nodes.ATTRIBUTE.createSimpleNode(this, variable, (OperationCallExp)ownedInit);
-			//				Edges.RESULT.createSimpleEdge(this, initNode, null, stepNode);
+			//				Node stepNode = Nodes.ATTRIBUTE.createNode(this, variable, (OperationCallExp)ownedInit);
+			//				Edges.RESULT.createEdge(this, initNode, null, stepNode);
 			//				initNode = stepNode;
 			//			}
 			else {
-				//				Node stepNode = Nodes.STEP.createSimpleNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
-				Node stepNode = Nodes.UNREALIZED_VARIABLE.createSimpleNode(this, variable);
-				Edges.RESULT.createSimpleEdge(this, initNode, null, stepNode);
+				//				Node stepNode = Nodes.STEP.createNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
+				Node stepNode = Nodes.UNREALIZED_VARIABLE.createNode(this, variable);
+				Edges.RESULT.createEdge(this, initNode, null, stepNode);
 				initNode = stepNode;
 			}
 		}
@@ -331,7 +331,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		if (extraNodes == null) {
 			extraNodes = new ArrayList<>();
 		}
-		Node extraGuardNode = Nodes.EXTRA_GUARD.createSimpleNode(this, "«extra-" + (extraNodes.size()+1) + "»", classDatumAnalysis);
+		Node extraGuardNode = Nodes.EXTRA_GUARD.createNode(this, "«extra-" + (extraNodes.size()+1) + "»", classDatumAnalysis);
 		extraNodes.add(extraGuardNode);
 		addHeadNode(extraGuardNode);
 		return extraGuardNode;
@@ -349,8 +349,8 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			SimpleNavigationEdge edge = sourceNode.getNavigationEdge(protoEdge.getProperty());
 			if (edge == null) {
 				Node protoTarget = protoEdge.getTarget();
-				Node targetNode = protoTarget.getNodeRole().createSimpleNode(region, protoTarget.getName(), protoTarget.getClassDatumAnalysis());
-				edge = ((NavigationEdgeRole)protoEdge.getEdgeRole()).createSimpleEdge(region, sourceNode, protoEdge.getProperty(), targetNode);
+				Node targetNode = protoTarget.getNodeRole().createNode(region, protoTarget.getName(), protoTarget.getClassDatumAnalysis());
+				edge = ((NavigationEdgeRole)protoEdge.getEdgeRole()).createEdge(region, sourceNode, protoEdge.getProperty(), targetNode);
 			}
 			sourceNode = edge.getTarget();
 			path.put(protoEdge, edge);
@@ -476,7 +476,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		assert !(typedElement instanceof Property);		// Property entries should be AttributeNodes
 		Node node = getSimpleNode(typedElement);
 		if (node == null) {
-			node = Nodes.UNKNOWN.createSimpleNode(this, ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
+			node = Nodes.UNKNOWN.createNode(this, ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
 			//			node2node.put(typedElement, node);
 		}
 		return node;

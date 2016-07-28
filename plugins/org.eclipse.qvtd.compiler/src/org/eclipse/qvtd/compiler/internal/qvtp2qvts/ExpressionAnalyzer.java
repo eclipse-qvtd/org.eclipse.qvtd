@@ -77,17 +77,17 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 		@Override
 		protected @NonNull Edge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
-			return Edges.UNNAVIGABLE_CAST.createSimpleEdge(context, sourceNode, castProperty, castNode);
+			return Edges.UNNAVIGABLE_CAST.createEdge(context, sourceNode, castProperty, castNode);
 		}
 
 		@Override
 		protected @NonNull Edge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-			return Edges.UNNAVIGABLE_NAVIGATION.createSimpleEdge(context, sourceNode, source2targetProperty, targetNode);
+			return Edges.UNNAVIGABLE_NAVIGATION.createEdge(context, sourceNode, source2targetProperty, targetNode);
 		}
 
 		@Override
 		protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-			return Nodes.UNNAVIGABLE_STEP.createSimpleNode(context, name, callExp, sourceNode);
+			return Nodes.UNNAVIGABLE_STEP.createNode(context, name, callExp, sourceNode);
 		}
 	}
 
@@ -131,7 +131,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		Node targetNode = analyze(operationCallExp.getOwnedArguments().get(0));
 		String name = operationCallExp.getReferredOperation().getName();
 		createPredicateEdge(sourceNode, "«" + name + "»", targetNode);
-		return Nodes.TRUE.createSimpleNode(sourceNode.getRegion());
+		return Nodes.TRUE.createNode(sourceNode.getRegion());
 	}
 
 	private @NonNull Node analyzeOperationCallExp_oclAsType(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
@@ -272,7 +272,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Edge createArgumentEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return Edges.ARGUMENT.createSimpleEdge(context, sourceNode, name, targetNode);
+		return Edges.ARGUMENT.createEdge(context, sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Node createConnectedOperationNode(@NonNull String name, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
@@ -303,47 +303,47 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Edge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
-		return Edges.CAST.createSimpleEdge(context, sourceNode, castProperty, castNode);
+		return Edges.CAST.createEdge(context, sourceNode, castProperty, castNode);
 	}
 
 	protected @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return Nodes.ERROR.createSimpleNode(context, name, classDatumAnalysis);
+		return Nodes.ERROR.createNode(context, name, classDatumAnalysis);
 	}
 
 	protected @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
-		return Edges.ITERATED.createSimpleEdge(context, sourceNode, targetNode);
+		return Edges.ITERATED.createEdge(context, sourceNode, targetNode);
 	}
 
 	protected @NonNull Node createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
-		return Nodes.ITERATOR.createSimpleNode(context, iterator, sourceNode);
+		return Nodes.ITERATOR.createNode(context, iterator, sourceNode);
 	}
 
 	protected @NonNull Node createLetNode(@NonNull Variable letVariable, @NonNull Node inNode) {
-		return Nodes.LET.createSimpleNode(context, letVariable, inNode);
+		return Nodes.LET.createNode(context, letVariable, inNode);
 	}
 
 	protected @NonNull Edge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		return Edges.NAVIGATION.createSimpleEdge(context, sourceNode, source2targetProperty, targetNode);
+		return Edges.NAVIGATION.createEdge(context, sourceNode, source2targetProperty, targetNode);
 	}
 
 	protected @NonNull Node createNullNode(@NonNull TypedElement typedElement) {
-		return Nodes.NULL.createSimpleNode(context, typedElement);
+		return Nodes.NULL.createNode(context, typedElement);
 	}
 
 	protected @NonNull Node createOperationNode(@NonNull String name, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... argNodes) {
-		return Nodes.OPERATION.createSimpleNode(context, name, typedElement, argNodes);
+		return Nodes.OPERATION.createNode(context, name, typedElement, argNodes);
 	}
 
 	protected @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return Edges.PREDICATE.createSimpleEdge(context, sourceNode, name, targetNode);
+		return Edges.PREDICATE.createEdge(context, sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Node createPredicatedClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
-		return Nodes.AttributeNodeRoleFactory.PREDICATED_CLASS.createSimpleNode(context, parentNode, navigationAssignment);
+		return Nodes.AttributeNodeRoleFactory.PREDICATED_CLASS.createNode(context, parentNode, navigationAssignment);
 	}
 
 	protected @NonNull Node createPredicatedClassNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return Nodes.AttributeNodeRoleFactory.PREDICATED_CLASS.createSimpleNode(context, name, classDatumAnalysis);
+		return Nodes.AttributeNodeRoleFactory.PREDICATED_CLASS.createNode(context, name, classDatumAnalysis);
 	}
 
 	protected @NonNull Edge createRealizedArgumentEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
@@ -351,7 +351,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-		return Nodes.STEP.createSimpleNode(context, name, callExp, sourceNode);
+		return Nodes.STEP.createNode(context, name, callExp, sourceNode);
 	}
 
 	protected @Nullable Node findOperationNode(@NonNull String name, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
@@ -527,7 +527,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			assert iteratorNode != null;
 			createArgumentEdge(iteratorNode, iterator.getName() , accumulateNode);
 		}
-		//		Node resultNode = Nodes.RESULT.createSimpleNode(context, "«result»", loopExp, sourceNode);
+		//		Node resultNode = Nodes.RESULT.createNode(context, "«result»", loopExp, sourceNode);
 		//		createArgument(accumulateNode, null, resultNode);
 		return accumulateNode;
 	}

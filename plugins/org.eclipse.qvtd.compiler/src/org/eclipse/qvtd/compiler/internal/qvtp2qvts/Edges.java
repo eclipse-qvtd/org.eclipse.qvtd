@@ -147,7 +147,7 @@ public class Edges
 			this.isPredicate = isPredicate;
 		}
 
-		public @NonNull Edge createSimpleEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+		public @NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 			if (sourceNode.isConstant()) {
 				return new BasicEdge(isPredicate ? CONSTANT_PREDICATE : CONSTANT_ARGUMENT, region, sourceNode, name, targetNode);
 			}
@@ -191,7 +191,7 @@ public class Edges
 			this.isNavigable = isNavigable;
 		}
 
-		public @NonNull Edge createSimpleEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		public @NonNull NavigationEdge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 			boolean resolvedNavigation = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			if (sourceNode.isLoaded() && targetNode.isLoaded()) {
 				return new BasicNavigationEdge(resolvedNavigation ? LOADED_NAVIGABLE_CAST : LOADED_UNNAVIGABLE_CAST, region, sourceNode, source2targetProperty, targetNode);
@@ -219,7 +219,7 @@ public class Edges
 		private static final @NonNull IteratedEdgeRole PREDICATED_ITERATED = new IteratedEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull IteratedEdgeRole REALIZED_ITERATED = new IteratedEdgeRole(Role.Phase.REALIZED);
 
-		public @NonNull Edge createSimpleEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Node targetNode) {
+		public @NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Node targetNode) {
 			if (sourceNode.isRealized() || targetNode.isRealized()) {
 				return new BasicEdge(REALIZED_ITERATED, region, sourceNode, null, targetNode);
 			}
@@ -262,7 +262,7 @@ public class Edges
 		private static final @NonNull IteratingEdgeRole PREDICATED_ITERATING = new IteratingEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull IteratingEdgeRole REALIZED_ITERATING = new IteratingEdgeRole(Role.Phase.REALIZED);
 
-		public @NonNull Edge createSimpleEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Node targetNode) {
+		public @NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Node targetNode) {
 			if (sourceNode.isRealized() || targetNode.isRealized()) {
 				return new BasicSimpleEdge(REALIZED_ITERATING, region, sourceNode, null, targetNode);
 			}
@@ -323,7 +323,7 @@ public class Edges
 			this.isNavigable = isNavigable;
 		}
 
-		public @NonNull Edge createSimpleEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		public @NonNull NavigationEdge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 			boolean resolvedNavigation = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			if (sourceNode.isRealized() || targetNode.isRealized()) {
 				//				throw new UnsupportedOperationException();
@@ -427,7 +427,7 @@ public class Edges
 		private static final @NonNull EdgeRole PREDICATED_RESULT = new ResultEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull EdgeRole REALIZED_RESULT = new ResultEdgeRole(Role.Phase.REALIZED);
 
-		public @NonNull Edge createSimpleEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+		public @NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 			if (targetNode.isConstant()) {
 				return new BasicEdge(CONSTANT_RESULT, region, sourceNode, name, targetNode);
 			}
