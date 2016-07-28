@@ -36,9 +36,9 @@ public abstract class AbstractSimpleNode extends AbstractNode
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull SimpleNavigationEdge> getCastEdges() {
+	public final @NonNull Iterable<@NonNull NavigationEdge> getCastEdges() {
 		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull SimpleNavigationEdge> filter = (Iterable<@NonNull SimpleNavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsCastEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsCastEdgePredicate.INSTANCE);
 		return filter;
 	}
 

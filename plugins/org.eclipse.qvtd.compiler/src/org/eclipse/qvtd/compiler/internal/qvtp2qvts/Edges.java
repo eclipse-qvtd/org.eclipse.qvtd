@@ -27,7 +27,7 @@ public class Edges
 
 		@Override
 		public @NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-			return new BasicSimpleEdge(this, region, sourceNode, name, targetNode);
+			return new BasicEdge(this, region, sourceNode, name, targetNode);
 		}
 
 		@Override
@@ -51,8 +51,8 @@ public class Edges
 		}
 
 		@Override
-		public @NonNull SimpleNavigationEdge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-			return new SimpleNavigationEdge(this, region, sourceNode, source2targetProperty, targetNode);
+		public @NonNull NavigationEdge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+			return new BasicNavigationEdge(this, region, sourceNode, source2targetProperty, targetNode);
 		}
 
 		@Override
@@ -149,16 +149,16 @@ public class Edges
 
 		public @NonNull Edge createSimpleEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 			if (sourceNode.isConstant()) {
-				return new BasicSimpleEdge(isPredicate ? CONSTANT_PREDICATE : CONSTANT_ARGUMENT, region, sourceNode, name, targetNode);
+				return new BasicEdge(isPredicate ? CONSTANT_PREDICATE : CONSTANT_ARGUMENT, region, sourceNode, name, targetNode);
 			}
 			else if (sourceNode.isLoaded()) {
-				return new BasicSimpleEdge(isPredicate ? LOADED_PREDICATE : LOADED_ARGUMENT, region, sourceNode, name, targetNode);
+				return new BasicEdge(isPredicate ? LOADED_PREDICATE : LOADED_ARGUMENT, region, sourceNode, name, targetNode);
 			}
 			else if (sourceNode.isPredicated()) {
-				return new BasicSimpleEdge(isPredicate ? PREDICATED_PREDICATE : PREDICATED_ARGUMENT, region, sourceNode, name, targetNode);
+				return new BasicEdge(isPredicate ? PREDICATED_PREDICATE : PREDICATED_ARGUMENT, region, sourceNode, name, targetNode);
 			}
 			else if (sourceNode.isRealized()) {
-				return new BasicSimpleEdge(isPredicate ? REALIZED_PREDICATE : REALIZED_ARGUMENT, region, sourceNode, name, targetNode);
+				return new BasicEdge(isPredicate ? REALIZED_PREDICATE : REALIZED_ARGUMENT, region, sourceNode, name, targetNode);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -194,10 +194,10 @@ public class Edges
 		public @NonNull Edge createSimpleEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 			boolean resolvedNavigation = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			if (sourceNode.isLoaded() && targetNode.isLoaded()) {
-				return new SimpleNavigationEdge(resolvedNavigation ? LOADED_NAVIGABLE_CAST : LOADED_UNNAVIGABLE_CAST, region, sourceNode, source2targetProperty, targetNode);
+				return new BasicNavigationEdge(resolvedNavigation ? LOADED_NAVIGABLE_CAST : LOADED_UNNAVIGABLE_CAST, region, sourceNode, source2targetProperty, targetNode);
 			}
 			else if (sourceNode.isPredicated() || targetNode.isPredicated()){
-				return new SimpleNavigationEdge(resolvedNavigation ? PREDICATED_NAVIGABLE_CAST : PREDICATED_UNNAVIGABLE_CAST, region, sourceNode, source2targetProperty, targetNode);
+				return new BasicNavigationEdge(resolvedNavigation ? PREDICATED_NAVIGABLE_CAST : PREDICATED_UNNAVIGABLE_CAST, region, sourceNode, source2targetProperty, targetNode);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -221,16 +221,16 @@ public class Edges
 
 		public @NonNull Edge createSimpleEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Node targetNode) {
 			if (sourceNode.isRealized() || targetNode.isRealized()) {
-				return new BasicSimpleEdge(REALIZED_ITERATED, region, sourceNode, null, targetNode);
+				return new BasicEdge(REALIZED_ITERATED, region, sourceNode, null, targetNode);
 			}
 			else if (sourceNode.isPredicated() || targetNode.isPredicated()){
-				return new BasicSimpleEdge(PREDICATED_ITERATED, region, sourceNode, null, targetNode);
+				return new BasicEdge(PREDICATED_ITERATED, region, sourceNode, null, targetNode);
 			}
 			else if (sourceNode.isLoaded() || targetNode.isLoaded()) {
-				return new BasicSimpleEdge(LOADED_ITERATED, region, sourceNode, null, targetNode);
+				return new BasicEdge(LOADED_ITERATED, region, sourceNode, null, targetNode);
 			}
 			else if (sourceNode.isConstant() || targetNode.isConstant()) {
-				return new BasicSimpleEdge(CONSTANT_ITERATED, region, sourceNode, null, targetNode);
+				return new BasicEdge(CONSTANT_ITERATED, region, sourceNode, null, targetNode);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -327,16 +327,16 @@ public class Edges
 			boolean resolvedNavigation = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			if (sourceNode.isRealized() || targetNode.isRealized()) {
 				//				throw new UnsupportedOperationException();
-				return new SimpleNavigationEdge(REALIZED, region, sourceNode, source2targetProperty, targetNode);
+				return new BasicNavigationEdge(REALIZED, region, sourceNode, source2targetProperty, targetNode);
 			}
 			else if (sourceNode.isPredicated() || targetNode.isPredicated()) {
-				return new SimpleNavigationEdge(resolvedNavigation ? PREDICATED_NAVIGABLE_NAVIGATION : PREDICATED_UNNAVIGABLE_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
+				return new BasicNavigationEdge(resolvedNavigation ? PREDICATED_NAVIGABLE_NAVIGATION : PREDICATED_UNNAVIGABLE_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
 			}
 			else if (sourceNode.isLoaded() || targetNode.isLoaded()) {
-				return new SimpleNavigationEdge(resolvedNavigation ? LOADED_NAVIGABLE_NAVIGATION : LOADED_UNNAVIGABLE_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
+				return new BasicNavigationEdge(resolvedNavigation ? LOADED_NAVIGABLE_NAVIGATION : LOADED_UNNAVIGABLE_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
 			}
 			else if (sourceNode.isConstant() || targetNode.isConstant()) {
-				return new SimpleNavigationEdge(resolvedNavigation ? CONSTANT_NAVIGABLE_NAVIGATION : CONSTANT_UNNAVIGABLE_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
+				return new BasicNavigationEdge(resolvedNavigation ? CONSTANT_NAVIGABLE_NAVIGATION : CONSTANT_UNNAVIGABLE_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -375,7 +375,7 @@ public class Edges
 
 		@Override
 		public @NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Node targetNode) {
-			return new BasicSimpleEdge(this, region, sourceNode, null, targetNode);
+			return new BasicEdge(this, region, sourceNode, null, targetNode);
 		}
 
 		@Override
@@ -429,16 +429,16 @@ public class Edges
 
 		public @NonNull Edge createSimpleEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 			if (targetNode.isConstant()) {
-				return new BasicSimpleEdge(CONSTANT_RESULT, region, sourceNode, name, targetNode);
+				return new BasicEdge(CONSTANT_RESULT, region, sourceNode, name, targetNode);
 			}
 			else if (targetNode.isLoaded()) {
-				return new BasicSimpleEdge(LOADED_RESULT, region, sourceNode, name, targetNode);
+				return new BasicEdge(LOADED_RESULT, region, sourceNode, name, targetNode);
 			}
 			else if (targetNode.isPredicated()) {
-				return new BasicSimpleEdge(PREDICATED_RESULT, region, sourceNode, name, targetNode);
+				return new BasicEdge(PREDICATED_RESULT, region, sourceNode, name, targetNode);
 			}
 			else if (targetNode.isRealized()) {
-				return new BasicSimpleEdge(REALIZED_RESULT, region, sourceNode, name, targetNode);
+				return new BasicEdge(REALIZED_RESULT, region, sourceNode, name, targetNode);
 			}
 			else {
 				throw new UnsupportedOperationException();

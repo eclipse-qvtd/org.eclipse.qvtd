@@ -136,35 +136,19 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 	}
 
 	@Override
-	public @NonNull Visitable visitBasicSimpleEdge(@NonNull BasicSimpleEdge basicSimpleEdge) {
-		Node mergedSourceNode = oldNode2mergedNode.get(basicSimpleEdge.getSource());
-		Node mergedTargetNode = oldNode2mergedNode.get(basicSimpleEdge.getTarget());
+	public @NonNull Visitable visitBasicEdge(@NonNull BasicEdge basicEdge) {
+		Node mergedSourceNode = oldNode2mergedNode.get(basicEdge.getSource());
+		Node mergedTargetNode = oldNode2mergedNode.get(basicEdge.getTarget());
 		assert (mergedSourceNode != null) && (mergedTargetNode != null);
 		EdgeRole edgeRole = null;
-		List<@NonNull Edge> oldEdges = oldEdge2oldEdges.get(basicSimpleEdge);
+		List<@NonNull Edge> oldEdges = oldEdge2oldEdges.get(basicEdge);
 		assert oldEdges != null;
 		for (@NonNull Edge oldEdge : oldEdges) {
 			EdgeRole edgeRole2 = oldEdge.getEdgeRole();
 			edgeRole = edgeRole != null ? edgeRole.merge(edgeRole2) : edgeRole2;
 		}
 		assert edgeRole != null;
-		return new BasicSimpleEdge(edgeRole, mergedRegion, mergedSourceNode, basicSimpleEdge.getName(), mergedTargetNode);
-	}
-
-	@Override
-	public @NonNull Visitable visitSimpleNavigationEdge(@NonNull SimpleNavigationEdge simpleNavigationEdge) {
-		Node mergedSourceNode = oldNode2mergedNode.get(simpleNavigationEdge.getSource());
-		Node mergedTargetNode = oldNode2mergedNode.get(simpleNavigationEdge.getTarget());
-		assert (mergedSourceNode != null) && (mergedTargetNode != null);
-		EdgeRole edgeRole = null;
-		List<@NonNull Edge> oldEdges = oldEdge2oldEdges.get(simpleNavigationEdge);
-		assert oldEdges != null;
-		for (@NonNull Edge oldEdge : oldEdges) {
-			EdgeRole edgeRole2 = ((SimpleNavigationEdge)oldEdge).getEdgeRole();
-			edgeRole = edgeRole != null ? edgeRole.merge(edgeRole2) : edgeRole2;
-		}
-		assert edgeRole != null;
-		return new SimpleNavigationEdge((EdgeRole.Navigation)edgeRole, mergedRegion, mergedSourceNode, simpleNavigationEdge.getProperty(), mergedTargetNode);
+		return new BasicEdge(edgeRole, mergedRegion, mergedSourceNode, basicEdge.getName(), mergedTargetNode);
 	}
 
 	@Override
@@ -202,6 +186,22 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 		checkEdges(primaryRegion);
 		checkEdges(secondaryRegion);
 		return mergedRegion;
+	}
+
+	@Override
+	public @NonNull Visitable visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
+		Node mergedSourceNode = oldNode2mergedNode.get(navigationEdge.getSource());
+		Node mergedTargetNode = oldNode2mergedNode.get(navigationEdge.getTarget());
+		assert (mergedSourceNode != null) && (mergedTargetNode != null);
+		EdgeRole edgeRole = null;
+		List<@NonNull Edge> oldEdges = oldEdge2oldEdges.get(navigationEdge);
+		assert oldEdges != null;
+		for (@NonNull Edge oldEdge : oldEdges) {
+			EdgeRole edgeRole2 = oldEdge.getEdgeRole();
+			edgeRole = edgeRole != null ? edgeRole.merge(edgeRole2) : edgeRole2;
+		}
+		assert edgeRole != null;
+		return new BasicNavigationEdge((EdgeRole.Navigation)edgeRole, mergedRegion, mergedSourceNode, navigationEdge.getProperty(), mergedTargetNode);
 	}
 
 	@Override

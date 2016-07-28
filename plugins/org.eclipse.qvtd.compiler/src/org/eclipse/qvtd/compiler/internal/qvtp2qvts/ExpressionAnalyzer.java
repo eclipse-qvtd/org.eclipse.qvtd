@@ -146,7 +146,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			sourceNode.addTypedElement(operationCallExp);
 			return sourceNode;											// Skip cast if already conformant, typically a redundant cast daisy chain
 		}
-		for (SimpleNavigationEdge castEdge : sourceNode.getCastEdges()) {
+		for (@NonNull NavigationEdge castEdge : sourceNode.getCastEdges()) {
 			Node targetNode = castEdge.getTarget();
 			predicatedClass = targetNode.getCompleteClass();
 			if (predicatedClass.conformsTo(requiredClass)) {

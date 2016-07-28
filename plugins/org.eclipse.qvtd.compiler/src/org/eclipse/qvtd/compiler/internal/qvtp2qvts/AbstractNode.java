@@ -624,6 +624,7 @@ public abstract class AbstractNode implements Node
 		return nodeRole.isTrue();
 	}
 
+	@Override
 	public void mergeRole(@NonNull NodeRole nodeRole) {
 		if (this.nodeRole != nodeRole) {
 			this.nodeRole = this.nodeRole.merge(nodeRole);

@@ -42,7 +42,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	@NonNull Iterable<@NonNull Edge> getArgumentEdges();
 	@Nullable Edge getAssignmentEdge(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull NavigationEdge> getAssignmentEdges();
-	@NonNull Iterable<@NonNull SimpleNavigationEdge> getCastEdges();
+	@NonNull Iterable<@NonNull NavigationEdge> getCastEdges();
 	@NonNull ClassDatumAnalysis getClassDatumAnalysis();
 	@NonNull CompleteClass getCompleteClass();
 	@NonNull Iterable<@NonNull Edge> getComputationEdges();

@@ -37,16 +37,16 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdgeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicNodeConnection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicSimpleEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.CyclicScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleNavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleTypedNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleVariableNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitable;
@@ -321,6 +321,11 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	}
 
 	@Override
+	public Element visitBasicEdge(@NonNull BasicEdge basicEdge) {
+		return visitEdge(basicEdge);
+	}
+
+	@Override
 	public Element visitBasicEdgeConnection(@NonNull BasicEdgeConnection basicEdgeConnection) {
 		return visiting(basicEdgeConnection);
 	}
@@ -328,11 +333,6 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	@Override
 	public Element visitBasicNodeConnection(@NonNull BasicNodeConnection basicNodeConnection) {
 		return visiting(basicNodeConnection);
-	}
-
-	@Override
-	public Element visitBasicSimpleEdge(@NonNull BasicSimpleEdge basicSimpleEdge) {
-		return visitEdge(basicSimpleEdge);
 	}
 
 	@Override
@@ -373,6 +373,11 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	public @Nullable Element visitMappingRegion(@NonNull MappingRegion mappingRegion) {
 		AbstractRegion2Mapping region2mapping = getRegion2Mapping(mappingRegion);
 		return region2mapping.getMapping();
+	}
+
+	@Override
+	public Element visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
+		return visitEdge(navigationEdge);
 	}
 
 	@Override
@@ -478,11 +483,6 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 			ownedImports.add(createImport(null, importedNamespace));
 		} */
 		return qvtiTransformation;
-	}
-
-	@Override
-	public Element visitSimpleNavigationEdge(@NonNull SimpleNavigationEdge simpleNavigationEdge) {
-		return visitEdge(simpleNavigationEdge);
 	}
 
 	@Override

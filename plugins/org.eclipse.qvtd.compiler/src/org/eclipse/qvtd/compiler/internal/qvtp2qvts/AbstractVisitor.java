@@ -32,6 +32,11 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	}
 
 	@Override
+	public R visitBasicEdge(@NonNull BasicEdge basicSimpleEdge) {
+		return visitEdge(basicSimpleEdge);
+	}
+
+	@Override
 	public R visitBasicEdgeConnection(@NonNull BasicEdgeConnection basicEdgeConnection) {
 		return visiting(basicEdgeConnection);
 	}
@@ -39,11 +44,6 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	@Override
 	public R visitBasicNodeConnection(@NonNull BasicNodeConnection basicNodeConnection) {
 		return visiting(basicNodeConnection);
-	}
-
-	@Override
-	public R visitBasicSimpleEdge(@NonNull BasicSimpleEdge basicSimpleEdge) {
-		return visitEdge(basicSimpleEdge);
 	}
 
 	@Override
@@ -59,6 +59,11 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	@Override
 	public R visitMappingRegion(@NonNull MappingRegion mappingRegion) {
 		return visitRegion(mappingRegion);
+	}
+
+	@Override
+	public R visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
+		return visitEdge(navigationEdge);
 	}
 
 	@Override
@@ -84,11 +89,6 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	@Override
 	public R visitRootScheduledRegion(@NonNull RootScheduledRegion rootScheduledRegion) {
 		return visitRegion(rootScheduledRegion);
-	}
-
-	@Override
-	public R visitSimpleNavigationEdge(@NonNull SimpleNavigationEdge simpleNavigationEdge) {
-		return visitEdge(simpleNavigationEdge);
 	}
 
 	@Override

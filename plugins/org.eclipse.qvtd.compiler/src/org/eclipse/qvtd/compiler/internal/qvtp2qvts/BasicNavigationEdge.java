@@ -20,31 +20,37 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;
 
-public abstract class AbstractNavigationEdge extends AbstractEdge implements NavigationEdge//, GraphStringBuilder.GraphNode
+public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 {
 	protected final @NonNull Property source2targetProperty;
 	private @Nullable EdgeConnection incomingConnection = null;
 	private @Nullable List<@NonNull EdgeConnection> outgoingConnections = null;
 
-	protected AbstractNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull Region region,
+	public BasicNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull Region region,
 			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		super(edgeRole, region, sourceNode, source2targetProperty.getName(), targetNode);
 		this.source2targetProperty = source2targetProperty;
-//		assert (source2targetProperty.eContainer() == null) || sourceNode.isClassNode();		// Pseudo navigations may be non-classes
+		//		assert (source2targetProperty.eContainer() == null) || sourceNode.isClassNode();		// Pseudo navigations may be non-classes
+		//		assert !sourceNode.isOperation();			// FIXME testExample2_V2 violates this to cast an intermediate "if"
+	}
+
+	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitNavigationEdge(this);
 	}
 
 	@Override
 	public final void addIncomingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert incomingConnection == null;
 		assert Iterables.contains(edgeConnection.getTargetEdges(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		incomingConnection = edgeConnection;
 	}
 
 	@Override
 	public final void addOutgoingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert Iterables.contains(edgeConnection.getSources(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		List<@NonNull EdgeConnection> outgoingConnections2 = outgoingConnections;
 		if (outgoingConnections2 == null) {
 			outgoingConnections = outgoingConnections2 = new ArrayList<@NonNull EdgeConnection>();
@@ -53,6 +59,11 @@ public abstract class AbstractNavigationEdge extends AbstractEdge implements Nav
 			assert !outgoingConnections2.contains(edgeConnection);
 		}
 		outgoingConnections2.add(edgeConnection);
+	}
+
+	@Override
+	public @NonNull String getDisplayName() {
+		return source2targetProperty.getOwningClass().getName() + "::" + source2targetProperty.getName();
 	}
 
 	@Override
@@ -78,7 +89,7 @@ public abstract class AbstractNavigationEdge extends AbstractEdge implements Nav
 	@Override
 	public final void removeIncomingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert Iterables.contains(edgeConnection.getTargetEdges(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		assert incomingConnection != null;
 		incomingConnection = null;
 	}
@@ -86,7 +97,7 @@ public abstract class AbstractNavigationEdge extends AbstractEdge implements Nav
 	@Override
 	public final void removeOutgoingConnection(@NonNull EdgeConnection edgeConnection) {
 		assert Iterables.contains(edgeConnection.getSources(), this);
-//		assert edge.getRegion() == getRegion();
+		//		assert edge.getRegion() == getRegion();
 		List<EdgeConnection> outgoingConnections2 = outgoingConnections;
 		assert outgoingConnections2 != null;
 		boolean wasRemoved = outgoingConnections2.remove(edgeConnection);

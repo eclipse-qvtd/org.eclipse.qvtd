@@ -21,7 +21,7 @@ public interface EdgeRole extends Role
 {
 	interface Navigation extends EdgeRole
 	{
-		@NonNull SimpleNavigationEdge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode);
+		@NonNull NavigationEdge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode);
 
 		@Nullable String getLabel(@NonNull Property source2targetProperty);
 	}

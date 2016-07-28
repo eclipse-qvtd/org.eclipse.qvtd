@@ -11,22 +11,16 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Property;
+import org.eclipse.jdt.annotation.Nullable;
 
-public class SimpleNavigationEdge extends AbstractNavigationEdge
+public class BasicEdge extends AbstractEdge
 {
-	public SimpleNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		super(edgeRole, region, sourceNode, source2targetProperty, targetNode);
-		//		assert !sourceNode.isOperation();			// FIXME testExample2_V2 violates this to cast an intermediate "if"
+	public BasicEdge(@NonNull EdgeRole edgeRole, @NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+		super(edgeRole, region, sourceNode, name, targetNode);
 	}
 
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return visitor.visitSimpleNavigationEdge(this);
-	}
-
-	@Override
-	public @NonNull String getDisplayName() {
-		return source2targetProperty.getOwningClass().getName() + "::" + source2targetProperty.getName();
+		return visitor.visitBasicEdge(this);
 	}
 }
