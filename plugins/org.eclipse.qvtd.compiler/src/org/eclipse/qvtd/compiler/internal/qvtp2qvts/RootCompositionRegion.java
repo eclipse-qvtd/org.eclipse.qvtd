@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
-public class RootCompositionRegion extends AbstractRegion implements SimpleRegion
+public class RootCompositionRegion extends AbstractRegion
 {
 	/**
 	 * The null node that is the 'container' of all root model elements.

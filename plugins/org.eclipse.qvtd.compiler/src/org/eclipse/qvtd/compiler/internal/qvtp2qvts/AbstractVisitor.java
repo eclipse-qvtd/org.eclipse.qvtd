@@ -62,6 +62,11 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	}
 
 	@Override
+	public R visitMappingRegion(@NonNull MappingRegion mappingRegion) {
+		return visitRegion(mappingRegion);
+	}
+
+	@Override
 	public R visitNode(@NonNull Node node) {
 		return visiting(node);
 	}
@@ -84,11 +89,6 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	@Override
 	public R visitRootScheduledRegion(@NonNull RootScheduledRegion rootScheduledRegion) {
 		return visitRegion(rootScheduledRegion);
-	}
-
-	@Override
-	public R visitSimpleMappingRegion(@NonNull AbstractSimpleMappingRegion simpleMappingRegion) {
-		return visitRegion(simpleMappingRegion);
 	}
 
 	@Override

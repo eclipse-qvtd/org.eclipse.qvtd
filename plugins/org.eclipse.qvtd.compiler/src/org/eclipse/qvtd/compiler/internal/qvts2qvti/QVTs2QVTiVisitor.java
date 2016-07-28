@@ -35,13 +35,13 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractSimpleMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdgeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicNodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicSimpleEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ComplexTypedNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.CyclicScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
@@ -376,6 +376,12 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	}
 
 	@Override
+	public @Nullable Element visitMappingRegion(@NonNull MappingRegion mappingRegion) {
+		AbstractRegion2Mapping region2mapping = getRegion2Mapping(mappingRegion);
+		return region2mapping.getMapping();
+	}
+
+	@Override
 	public Element visitNode(@NonNull Node node) {
 		return visiting(node);
 	}
@@ -478,12 +484,6 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 			ownedImports.add(createImport(null, importedNamespace));
 		} */
 		return qvtiTransformation;
-	}
-
-	@Override
-	public @Nullable Element visitSimpleMappingRegion(@NonNull AbstractSimpleMappingRegion simpleMappingRegion) {
-		AbstractRegion2Mapping region2mapping = getRegion2Mapping(simpleMappingRegion);
-		return region2mapping.getMapping();
 	}
 
 	@Override

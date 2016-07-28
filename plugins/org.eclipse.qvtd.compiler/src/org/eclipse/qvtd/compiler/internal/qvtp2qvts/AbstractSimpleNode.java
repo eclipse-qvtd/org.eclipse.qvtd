@@ -24,7 +24,7 @@ public abstract class AbstractSimpleNode extends AbstractNode implements SimpleN
 {
 	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<@NonNull TypedElement>();
 
-	protected AbstractSimpleNode(@NonNull NodeRole nodeRole, @NonNull SimpleRegion region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+	protected AbstractSimpleNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		super(nodeRole, region, name, classDatumAnalysis);
 	}
 
@@ -62,11 +62,6 @@ public abstract class AbstractSimpleNode extends AbstractNode implements SimpleN
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public @NonNull SimpleRegion getRegion() {
-		return (SimpleRegion) region;
 	}
 
 	@Override

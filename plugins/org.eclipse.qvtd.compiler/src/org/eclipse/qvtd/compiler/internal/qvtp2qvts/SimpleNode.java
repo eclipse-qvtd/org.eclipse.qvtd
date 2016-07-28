@@ -27,8 +27,6 @@ public interface SimpleNode extends Node
 	@Override
 	@Nullable SimpleNode getNavigationTarget(@NonNull Property source2targetProperty);
 	@Nullable SimpleEdge getPredicateEdge(@NonNull Property source2targetProperty);
-	@Override
-	@NonNull SimpleRegion getRegion();
 	@NonNull Iterable<@NonNull ? extends SimpleEdge> getResultEdges();
 	void mergeRole(@NonNull NodeRole nodeRole);
 }

@@ -20,14 +20,14 @@ import org.eclipse.qvtd.pivot.schedule.MappingAction;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
-public class SimpleMergedMappingRegion extends AbstractSimpleMappingRegion
+public class MergedMappingRegion extends AbstractMappingRegion
 {
 	/**
 	 * The merged analyzed actions.
 	 */
 	private final @NonNull List<@NonNull MappingAction> mappingActions = new ArrayList<>();
 
-	public SimpleMergedMappingRegion(@NonNull AbstractSimpleMappingRegion primaryRegion, @NonNull AbstractSimpleMappingRegion secondaryRegion) {
+	public MergedMappingRegion(@NonNull MappingRegion primaryRegion, @NonNull MappingRegion secondaryRegion) {
 		super(primaryRegion.getMultiRegion());
 		Iterables.addAll(mappingActions, primaryRegion.getMappingActions());
 		Iterables.addAll(mappingActions, secondaryRegion.getMappingActions());

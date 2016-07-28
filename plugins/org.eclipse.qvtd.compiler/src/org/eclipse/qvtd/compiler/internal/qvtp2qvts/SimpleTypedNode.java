@@ -15,11 +15,11 @@ import org.eclipse.ocl.pivot.TypedElement;
 
 public class SimpleTypedNode extends AbstractSimpleNode
 {
-	public SimpleTypedNode(@NonNull NodeRole nodeRole, @NonNull SimpleRegion region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+	public SimpleTypedNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		super(nodeRole, region, name, classDatumAnalysis);
 	}
 
-	public SimpleTypedNode(@NonNull NodeRole nodeRole, @NonNull SimpleRegion region, @NonNull String name, @NonNull TypedElement typedElement) {
+	public SimpleTypedNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 		super(nodeRole, region, name, region.getClassDatumAnalysis(typedElement));
 		addTypedElement(typedElement);
 	}

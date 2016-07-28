@@ -22,13 +22,13 @@ public interface Visitor<R>
 	R visitComplexTypedNode(@NonNull ComplexTypedNode complexTypedNode);
 	R visitCyclicScheduledRegion(@NonNull CyclicScheduledRegion cyclicScheduledRegion);
 	R visitEdge(@NonNull Edge edge);
+	R visitMappingRegion(@NonNull MappingRegion mappingRegion);
 	R visitNode(@NonNull Node node);
 	R visitOperationRegion(@NonNull OperationRegion operationRegion);
 	R visitRegion(@NonNull Region region);
 	R visitRootCompositionRegion(@NonNull RootCompositionRegion rootCompositionRegion);
 	R visitRootScheduledRegion(@NonNull RootScheduledRegion rootScheduledRegion);
 	R visitSimpleNavigationEdge(@NonNull SimpleNavigationEdge simpleNavigationEdge);
-	R visitSimpleMappingRegion(@NonNull AbstractSimpleMappingRegion simpleMappingRegion);
 	R visitSimpleTypedNode(@NonNull SimpleTypedNode simpleTypedNode);
 	R visitSimpleVariableNode(@NonNull SimpleVariableNode simpleVariableNode);
 }

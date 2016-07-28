@@ -48,7 +48,7 @@ import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
 
-public class SimpleMappingRegion extends AbstractSimpleMappingRegion
+public class SimpleMappingRegion extends AbstractMappingRegion
 {
 	/**
 	 * The analyzed action.
@@ -358,11 +358,6 @@ public class SimpleMappingRegion extends AbstractSimpleMappingRegion
 		return path;
 	} */
 
-	@Override
-	public @NonNull Iterable<@NonNull MappingAction> getMappingActions() {
-		return Collections.singletonList(mappingAction);
-	}
-
 	public @Nullable SimpleNode getExtraGuard(@NonNull ClassDatumAnalysis classDatumAnalysis) {
 		if (extraNodes != null) {
 			for (@NonNull SimpleNode extraNode : extraNodes) {
@@ -372,6 +367,11 @@ public class SimpleMappingRegion extends AbstractSimpleMappingRegion
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull MappingAction> getMappingActions() {
+		return Collections.singletonList(mappingAction);
 	}
 
 	@Override
@@ -521,7 +521,7 @@ public class SimpleMappingRegion extends AbstractSimpleMappingRegion
 			classDatumAnalysis.addProduction(this, assignedNode);
 			ClassDatum classDatum = classDatumAnalysis.getClassDatum();
 			for (@SuppressWarnings("null")@NonNull AbstractAction consumingAction : classDatum.getRequiredBy()) {
-				AbstractSimpleMappingRegion consumingRegion = multiRegion.getMappingRegion(consumingAction);
+				MappingRegion consumingRegion = multiRegion.getMappingRegion(consumingAction);
 				assert consumingRegion != null;
 				for (@NonNull Node consumingNode : consumingRegion.getMatchableNodes()) {
 					if (consumingNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
@@ -535,7 +535,7 @@ public class SimpleMappingRegion extends AbstractSimpleMappingRegion
 			classDatumAnalysis.addConsumption(this, predicatedNode);
 			ClassDatum classDatum = classDatumAnalysis.getClassDatum();
 			for (@SuppressWarnings("null")@NonNull AbstractAction introducingAction : classDatum.getProducedBy()) {
-				AbstractSimpleMappingRegion producingRegion = multiRegion.getMappingRegion(introducingAction);
+				MappingRegion producingRegion = multiRegion.getMappingRegion(introducingAction);
 				assert producingRegion != null;
 				for (@NonNull Node assignedNode : producingRegion.getComputedNodes()) {
 					if (assignedNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance

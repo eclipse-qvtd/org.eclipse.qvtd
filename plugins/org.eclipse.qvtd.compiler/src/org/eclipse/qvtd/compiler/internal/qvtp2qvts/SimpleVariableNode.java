@@ -23,7 +23,7 @@ public class SimpleVariableNode extends AbstractSimpleNode
 {
 	protected final @NonNull VariableDeclaration variable;
 
-	public SimpleVariableNode(@NonNull NodeRole nodeRole, @NonNull SimpleRegion region, @NonNull VariableDeclaration variable) {
+	public SimpleVariableNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
 		super(nodeRole, region, ClassUtil.nonNullState(variable.getName()), region.getClassDatumAnalysis(variable));
 		this.variable = variable;
 		assert variable.eContainer() != null;

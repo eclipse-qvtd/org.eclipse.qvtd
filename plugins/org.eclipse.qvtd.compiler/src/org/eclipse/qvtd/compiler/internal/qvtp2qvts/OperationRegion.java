@@ -43,7 +43,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;
 
-public class OperationRegion extends AbstractRegion implements SimpleRegion
+public class OperationRegion extends AbstractRegion
 {
 	protected final @NonNull Operation operation;
 	protected final @NonNull String name;

@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Type;
-
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import com.google.common.collect.Iterables;
 
 public abstract class AbstractMappingRegion extends AbstractRegion implements MappingRegion
@@ -129,8 +129,26 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		super(multiRegion);
 	}
 
+	@Override
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitMappingRegion(this);
+	}
+
+	@Override
+	public void addEdge(@NonNull Edge edge) {
+		assert (basicGetSymbolName() == null) || !edge.isNavigation();
+		super.addEdge(edge);
+	}
+
 	protected void addHeadNode(@NonNull Node headNode) {
+		assert basicGetSymbolName() == null;
 		getHeadNodes().add(headNode);
+	}
+
+	@Override
+	public void addNode(@NonNull Node node) {
+		assert basicGetSymbolName() == null;
+		super.addNode(node);
 	}
 
 	protected @NonNull List<@NonNull Node> computeHeadNodes() {
@@ -220,6 +238,11 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 	}
 
 	@Override
+	public @NonNull String getColor() {
+		return "green";
+	}
+
+	@Override
 	public final @NonNull List<@NonNull Node> getHeadNodes() {
 		List<@NonNull Node> headNodes2 = headNodes;
 		if (headNodes2 == null) {
@@ -228,12 +251,17 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		return headNodes2;
 	}
 
-	public abstract @NonNull Iterable<@NonNull AbstractMappingRegion> getMergeableRegions();
-
 	@Override
 	public void resetHead(@NonNull Node headNode) {
 		boolean wasRemoved = getHeadNodes().remove(headNode);
 		assert wasRemoved;
 		headNode.resetHead();
+	}
+
+	@Override
+	public void toGraph(@NonNull GraphStringBuilder s) {
+		s.setColor("palegreen");
+		s.setPenwidth(Role.LINE_WIDTH);
+		super.toGraph(s);
 	}
 }

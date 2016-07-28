@@ -24,20 +24,20 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 
 public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 {
-	public static @NonNull AbstractSimpleMappingRegion createMergedRegion(@NonNull AbstractMappingRegion primaryRegion, @NonNull AbstractMappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
-		RegionMerger regionMerger = new RegionMerger((AbstractSimpleMappingRegion)primaryRegion, (AbstractSimpleMappingRegion)secondaryRegion, secondaryNode2primaryNode);
-		return (AbstractSimpleMappingRegion) secondaryRegion.accept(regionMerger);
+	public static @NonNull MappingRegion createMergedRegion(@NonNull MappingRegion primaryRegion, @NonNull MappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
+		RegionMerger regionMerger = new RegionMerger(primaryRegion, secondaryRegion, secondaryNode2primaryNode);
+		return (MappingRegion) secondaryRegion.accept(regionMerger);
 	}
 
-	protected final @NonNull AbstractSimpleMappingRegion primaryRegion;
-	protected final @NonNull AbstractSimpleMappingRegion secondaryRegion;
+	protected final @NonNull MappingRegion primaryRegion;
+	protected final @NonNull MappingRegion secondaryRegion;
 	protected final @NonNull Map<@NonNull SimpleNode, @NonNull SimpleNode> secondaryNode2primaryNode;
-	protected final @NonNull AbstractSimpleMappingRegion mergedRegion;
+	protected final @NonNull MappingRegion mergedRegion;
 	protected final @NonNull Map<@NonNull SimpleNode, @NonNull SimpleNode> oldNode2mergedNode = new HashMap<>();
 	protected final @NonNull Map<@NonNull SimpleEdge, @NonNull List<@NonNull SimpleEdge>> oldEdge2oldEdges = new HashMap<>();
 	protected final @NonNull Map<@NonNull SimpleEdge, @NonNull SimpleEdge> oldEdge2mergedEdge = new HashMap<>();
 
-	protected RegionMerger(@NonNull AbstractSimpleMappingRegion primaryRegion, @NonNull AbstractSimpleMappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
+	protected RegionMerger(@NonNull MappingRegion primaryRegion, @NonNull MappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
 		this.primaryRegion = primaryRegion;
 		this.secondaryRegion = secondaryRegion;
 		this.secondaryNode2primaryNode = (Map<@NonNull SimpleNode, @NonNull SimpleNode>)(Object)secondaryNode2primaryNode;
@@ -47,7 +47,7 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 		for (@NonNull Node node : secondaryNode2primaryNode.values()) {
 			assert node instanceof SimpleNode;
 		}
-		this.mergedRegion = new SimpleMergedMappingRegion(primaryRegion, secondaryRegion);
+		this.mergedRegion = new MergedMappingRegion(primaryRegion, secondaryRegion);
 	}
 
 	protected void accumulateEdge(@NonNull Map<@NonNull Node, @NonNull Map<@NonNull Node, @NonNull List<@NonNull List<@NonNull SimpleEdge>>>> mergedSourceNode2mergedTargetNode2listOfOldEdges, @NonNull SimpleEdge oldEdge) {
@@ -182,7 +182,7 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 	}
 
 	@Override
-	public @NonNull AbstractSimpleMappingRegion visitSimpleMappingRegion(@NonNull AbstractSimpleMappingRegion simpleMappingRegion) {
+	public @NonNull MappingRegion visitMappingRegion(@NonNull MappingRegion mappingRegion) {
 		Set<@NonNull Node> toBeMergedNodes = new HashSet<>(primaryRegion.getNodes());
 		toBeMergedNodes.removeAll(secondaryNode2primaryNode.values());
 		toBeMergedNodes.addAll(secondaryRegion.getNodes());

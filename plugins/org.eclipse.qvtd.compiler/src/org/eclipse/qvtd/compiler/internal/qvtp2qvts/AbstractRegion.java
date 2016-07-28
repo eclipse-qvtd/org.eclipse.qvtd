@@ -39,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
+import org.eclipse.qvtd.pivot.schedule.MappingAction;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -989,8 +990,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	protected @NonNull SymbolNameBuilder computeSymbolName() {
 		List<String> names = new ArrayList<String>();
-		for (@NonNull Region action : getAllMappingRegions()) {
-			names.add(action.getName());
+		for (@NonNull MappingAction action : getMappingActions()) {
+			names.add(action.getMapping().getName());
 		}
 		Collections.sort(names);
 		SymbolNameBuilder s = null;
@@ -1508,11 +1509,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull AbstractSimpleMappingRegion> getAllMappingRegions() {
-		return SchedulerConstants.EMPTY_MAPPING_REGION_SET;
-	}
-
-	@Override
 	public @NonNull Iterable<@NonNull Node> getAncestorsOf(@NonNull Node node) {
 		List<@NonNull Node> ancestors = new ArrayList<@NonNull Node>();
 		HashSet<@NonNull Node> ancestorSet = new HashSet<@NonNull Node>();
@@ -1835,7 +1831,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return loopingConnections;
 	}
 
-	public @NonNull AbstractSimpleMappingRegion getMappingRegion(@NonNull AbstractAction action) {
+	public @NonNull Iterable<@NonNull MappingAction> getMappingActions() {
+		return Collections.emptyList();
+	}
+
+	public @NonNull MappingRegion getMappingRegion(@NonNull AbstractAction action) {
 		return multiRegion.getMappingRegion(action);
 	}
 
@@ -1852,8 +1852,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	@Override
 	public @NonNull String getName() {
 		List<@NonNull String> names = new ArrayList<@NonNull String>();
-		for (@NonNull Region action : getAllMappingRegions()) {
-			names.add(action.getName());
+		for (@NonNull MappingAction action : getMappingActions()) {
+			names.add(ClassUtil.nonNullState(action.getMapping().getName()));
 		}
 		Collections.sort(names);;
 		StringBuilder s = new StringBuilder();
@@ -2604,7 +2604,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return symbolName != null ? (symbolName/* + " - " + getName()*/) : getName();
 	}
 
-	protected void writeDebugGraphs(@NonNull String context) {
+	public void writeDebugGraphs(@NonNull String context) {
 		SchedulerConstants scheduler = getSchedulerConstants();
 		scheduler.writeDOTfile(this, "-" + context);
 		scheduler.writeGraphMLfile(this, "-" + context);

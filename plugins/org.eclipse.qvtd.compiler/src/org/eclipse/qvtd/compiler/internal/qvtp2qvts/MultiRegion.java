@@ -65,7 +65,7 @@ public class MultiRegion
 		return castProperty;
 	} */
 
-	public @NonNull AbstractSimpleMappingRegion getMappingRegion(@NonNull AbstractAction action) {
+	public @NonNull MappingRegion getMappingRegion(@NonNull AbstractAction action) {
 		return qvtp2qvts.getMappingRegion(action);
 	}
 

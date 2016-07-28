@@ -21,9 +21,9 @@ public interface NodeRole extends Role
 {
 	@NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis);
 
-	@NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis);
+	@NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis);
 
-	@NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull TypedElement typedElement);
+	@NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement);
 
 	/**
 	 * Return the pen width with which this edge is drawn.

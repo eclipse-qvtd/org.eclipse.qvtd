@@ -21,7 +21,7 @@ public interface EdgeRole extends Role
 {
 	interface Navigation extends EdgeRole
 	{
-		@NonNull SimpleNavigationEdge createEdge(@NonNull SimpleRegion region, @NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode);
+		@NonNull SimpleNavigationEdge createEdge(@NonNull Region region, @NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode);
 
 		@Nullable String getLabel(@NonNull Property source2targetProperty);
 	}
@@ -33,18 +33,18 @@ public interface EdgeRole extends Role
 
 	interface Simple extends EdgeRole
 	{
-		@NonNull SimpleEdge createEdge(@NonNull SimpleRegion region, @NonNull SimpleNode sourceNode, @Nullable String name, @NonNull SimpleNode targetNode);
+		@NonNull SimpleEdge createEdge(@NonNull Region region, @NonNull SimpleNode sourceNode, @Nullable String name, @NonNull SimpleNode targetNode);
 	}
-	
+
 	@Nullable String getArrowhead();
 
 	/**
-	 * Return a label for the edge, null for none. 
+	 * Return a label for the edge, null for none.
 	 */
 	@Nullable String getLabel();
 
 	/**
-	 * Return the pen width with which this edge is drawn. 
+	 * Return the pen width with which this edge is drawn.
 	 */
 	@NonNull Integer getPenwidth();
 
@@ -61,12 +61,12 @@ public interface EdgeRole extends Role
 	boolean isCast();
 	boolean isComputation();
 	boolean isMergeable();
-	
+
 	/**
 	 * Return true if this edge forms part of the to-one navigation reachable from a head.
 	 */
 	boolean isNavigable();
-	
+
 	/**
 	 * Return true if this edge represents a property navigation.
 	 */

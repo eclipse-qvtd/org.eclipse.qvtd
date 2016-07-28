@@ -67,7 +67,7 @@ public class ClassDatumAnalysis
 	//	private final @NonNull HeadNodeGroup headNodeGroup;
 
 	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> introducer2assignmentNodes = new HashMap<>();
-	private final @NonNull Map<@NonNull AbstractMappingRegion, @NonNull List<@NonNull Node>> consumer2predicateNodes = new HashMap<>();
+	private final @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull Node>> consumer2predicateNodes = new HashMap<>();
 	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> producer2assignmentNodes = new HashMap<>();
 	private /*@LazyNonNull*/ List<@NonNull ClassDatumAnalysis> superClassDatumAnalyses = null;
 
@@ -80,7 +80,7 @@ public class ClassDatumAnalysis
 		this.completeClass = schedulerConstants.getEnvironmentFactory().getCompleteModel().getCompleteClass(type);
 	}
 
-	public void addConsumption(@NonNull AbstractMappingRegion consumer, @NonNull Node consumingNode) {
+	public void addConsumption(@NonNull MappingRegion consumer, @NonNull Node consumingNode) {
 		List<@NonNull Node> predicateNodes = consumer2predicateNodes.get(consumer);
 		if (predicateNodes == null) {
 			predicateNodes = new ArrayList<@NonNull Node>();
@@ -101,7 +101,7 @@ public class ClassDatumAnalysis
 		assignmentNodes.add(introducingNode);
 	}
 
-	public void addProduction(@NonNull AbstractSimpleMappingRegion producer, @NonNull Node producingNode) {
+	public void addProduction(@NonNull MappingRegion producer, @NonNull Node producingNode) {
 		List<@NonNull Node> assignmentNodes = producer2assignmentNodes.get(producer);
 		if (assignmentNodes == null) {
 			assignmentNodes = new ArrayList<@NonNull Node>();
@@ -124,7 +124,7 @@ public class ClassDatumAnalysis
 		return Iterables.concat(consumer2predicateNodes.values());
 	}
 
-	public @NonNull Set<@NonNull AbstractMappingRegion> getConsumingRegions() {
+	public @NonNull Set<@NonNull MappingRegion> getConsumingRegions() {
 		return consumer2predicateNodes.keySet();
 	}
 

@@ -134,18 +134,18 @@ public class QVTp2QVTs extends SchedulerConstants
 	 *
 	 * Returns the orderedRegions plus the new aggregates less those aggregated.
 	 */
-	public @NonNull List<@NonNull Region> earlyRegionMerge(@NonNull List<@NonNull AbstractSimpleMappingRegion> orderedRegions) {
+	public @NonNull List<@NonNull Region> earlyRegionMerge(@NonNull List<@NonNull MappingRegion> orderedRegions) {
 		Region2Depth region2depths = new Region2Depth();
 		List<@NonNull Region> outputRegions = new ArrayList<>();
-		LinkedHashSet<@NonNull AbstractSimpleMappingRegion> residualInputRegions = new LinkedHashSet<>(orderedRegions);	// order preserving fast random removal
+		LinkedHashSet<@NonNull MappingRegion> residualInputRegions = new LinkedHashSet<>(orderedRegions);	// order preserving fast random removal
 		while (!residualInputRegions.isEmpty()) {
-			@NonNull AbstractMappingRegion candidateRegion = residualInputRegions.iterator().next();
+			@NonNull MappingRegion candidateRegion = residualInputRegions.iterator().next();
 			boolean isMerged = false;
 			if (isEarlyMergePrimaryCandidate(candidateRegion)) {
-				List<@NonNull AbstractMappingRegion> secondaryRegions = selectSecondaryRegions(candidateRegion);
+				List<@NonNull MappingRegion> secondaryRegions = selectSecondaryRegions(candidateRegion);
 				if (secondaryRegions != null) {
-					AbstractMappingRegion mergedRegion = candidateRegion;
-					for (@NonNull AbstractMappingRegion secondaryRegion : secondaryRegions) {
+					MappingRegion mergedRegion = candidateRegion;
+					for (@NonNull MappingRegion secondaryRegion : secondaryRegions) {
 						assert secondaryRegion != null;
 						if (residualInputRegions.contains(secondaryRegion)) {
 							Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode = mergedRegion.canMerge(secondaryRegion, region2depths, false);
@@ -180,8 +180,8 @@ public class QVTp2QVTs extends SchedulerConstants
 		return outputRegions;
 	}
 
-	public @NonNull AbstractSimpleMappingRegion getMappingRegion(@NonNull AbstractAction action) {
-		AbstractSimpleMappingRegion mappingRegion = action2mappingRegion.get(action);
+	public @NonNull MappingRegion getMappingRegion(@NonNull AbstractAction action) {
+		MappingRegion mappingRegion = action2mappingRegion.get(action);
 		assert mappingRegion != null;
 		return mappingRegion;
 	}
@@ -229,20 +229,20 @@ public class QVTp2QVTs extends SchedulerConstants
 	/**
 	 * Return a list of single-headed to-one navigable regions whose head is transitively to-one reachable from the primaryRegion's head.
 	 */
-	private @Nullable List<@NonNull AbstractMappingRegion> selectSecondaryRegions(@NonNull AbstractMappingRegion primaryRegion) {
+	private @Nullable List<@NonNull MappingRegion> selectSecondaryRegions(@NonNull MappingRegion primaryRegion) {
 		//
 		//	All regions that consume one of the primary nodes.
 		//
-		Set<@NonNull AbstractMappingRegion> allConsumingRegions = new HashSet<>();
+		Set<@NonNull MappingRegion> allConsumingRegions = new HashSet<>();
 		allConsumingRegions.add(primaryRegion);
 		//
 		//	All classes reachable from the primary head.
 		//
 		Set<@NonNull ClassDatumAnalysis> toOneReachableClasses = new HashSet<>();
-		List<@NonNull AbstractMappingRegion> secondaryRegions = null;
-		List<@NonNull AbstractMappingRegion> allConsumingRegionsList = new ArrayList<>(allConsumingRegions);	// CME-proof iterable List shadowing a mutating Set
+		List<@NonNull MappingRegion> secondaryRegions = null;
+		List<@NonNull MappingRegion> allConsumingRegionsList = new ArrayList<>(allConsumingRegions);	// CME-proof iterable List shadowing a mutating Set
 		for (int i = 0; i < allConsumingRegionsList.size(); i++) {
-			@NonNull AbstractMappingRegion secondaryRegion = allConsumingRegionsList.get(i);
+			@NonNull MappingRegion secondaryRegion = allConsumingRegionsList.get(i);
 			if ((i == 0) || isEarlyMergeSecondaryCandidate(primaryRegion, secondaryRegion, toOneReachableClasses)) {
 				if (i > 0) {
 					if (secondaryRegions == null) {
@@ -254,7 +254,7 @@ public class QVTp2QVTs extends SchedulerConstants
 					if (predicatedNode.isClassNode()) {							// Ignore nulls, attributes
 						ClassDatumAnalysis predicatedClassDatumAnalysis = predicatedNode.getClassDatumAnalysis();
 						if (toOneReachableClasses.add(predicatedClassDatumAnalysis)) {
-							for (@NonNull AbstractMappingRegion consumingRegion : predicatedClassDatumAnalysis.getConsumingRegions()) {
+							for (@NonNull MappingRegion consumingRegion : predicatedClassDatumAnalysis.getConsumingRegions()) {
 								if (allConsumingRegions.add(consumingRegion)) {
 									allConsumingRegionsList.add(consumingRegion);
 								}
@@ -262,15 +262,13 @@ public class QVTp2QVTs extends SchedulerConstants
 						}
 					}
 				}
-				if (secondaryRegion instanceof AbstractSimpleMappingRegion) {
-					for (@NonNull Node assignedNode : ((AbstractSimpleMappingRegion)secondaryRegion).getComputedNodes()) {
-						if (assignedNode.isClassNode()) {							// Ignore nulls, attributes
-							ClassDatumAnalysis consumingClassDatumAnalysis = assignedNode.getClassDatumAnalysis();
-							if (toOneReachableClasses.add(consumingClassDatumAnalysis)) {
-								for (@NonNull AbstractMappingRegion consumingRegion : consumingClassDatumAnalysis.getConsumingRegions()) {
-									if (allConsumingRegions.add(consumingRegion)) {
-										allConsumingRegionsList.add(consumingRegion);
-									}
+				for (@NonNull Node assignedNode : secondaryRegion.getComputedNodes()) {
+					if (assignedNode.isClassNode()) {							// Ignore nulls, attributes
+						ClassDatumAnalysis consumingClassDatumAnalysis = assignedNode.getClassDatumAnalysis();
+						if (toOneReachableClasses.add(consumingClassDatumAnalysis)) {
+							for (@NonNull MappingRegion consumingRegion : consumingClassDatumAnalysis.getConsumingRegions()) {
+								if (allConsumingRegions.add(consumingRegion)) {
+									allConsumingRegionsList.add(consumingRegion);
 								}
 							}
 						}
@@ -300,13 +298,13 @@ public class QVTp2QVTs extends SchedulerConstants
 			mappingRegion.registerConsumptionsAndProductions();
 		}
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
-			for (@NonNull AbstractSimpleMappingRegion mappingRegion : mappingRegions) {
+			for (@NonNull MappingRegion mappingRegion : mappingRegions) {
 				mappingRegion.writeDebugGraphs("1-create");
 			}
 		}
-		List<@NonNull AbstractSimpleMappingRegion> orderedRegions = new ArrayList<>();
+		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
 		for (@NonNull AbstractAction abstractAction : orderedActions) {
-			AbstractSimpleMappingRegion mappingRegion = action2mappingRegion.get(abstractAction);
+			MappingRegion mappingRegion = action2mappingRegion.get(abstractAction);
 			assert mappingRegion != null;
 			orderedRegions.add(mappingRegion);
 			//			mappingRegion.resolveRecursion();

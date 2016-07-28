@@ -48,12 +48,12 @@ public class Nodes
 		}
 
 		@Override
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 			return new SimpleTypedNode(this, region, name, classDatumAnalysis);
 		}
 
 		@Override
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull TypedElement typedElement) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 			return new SimpleTypedNode(this, region, name, typedElement);
 		}
 	}
@@ -67,7 +67,7 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull VariableDeclaration variable) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
 			assert isClassNode == !(variable.getType() instanceof DataType);
 			return new SimpleVariableNode(this, region, variable);
 		}
@@ -115,7 +115,7 @@ public class Nodes
 				this.isAttribute = isAttribute;
 			}
 
-			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp) {
+			public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp) {
 				assert parentNode.isClassNode();
 				//				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 				Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
@@ -180,7 +180,7 @@ public class Nodes
 				super(Role.Phase.REALIZED, false);
 			}
 
-			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull SimpleNode parentNode, @NonNull Property property) {
+			public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull SimpleNode parentNode, @NonNull Property property) {
 				assert parentNode.isClassNode();
 				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 				org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
@@ -224,7 +224,7 @@ public class Nodes
 				super(Role.Phase.PREDICATED, false);
 			}
 
-			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull SimpleNode parentNode, @NonNull NavigationAssignment navigationAssignment) {
+			public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull SimpleNode parentNode, @NonNull NavigationAssignment navigationAssignment) {
 				assert parentNode.isClassNode();
 				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 				Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
@@ -380,7 +380,7 @@ public class Nodes
 		private static final @NonNull LoadedElementNodeRole LOADED_ELEMENT = new LoadedElementNodeRole();
 		public static final @NonNull PredicatedElementNodeRole PREDICATED_ELEMENT = new PredicatedElementNodeRole();
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull SimpleNode sourceNode) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull SimpleNode sourceNode) {
 			if (sourceNode.isPredicated()) {
 				return PREDICATED_ELEMENT.createSimpleNode(region, name, classDatumAnalysis);
 			}
@@ -521,7 +521,7 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull VariableDeclaration guardVariable) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull VariableDeclaration guardVariable) {
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(guardVariable);
 			boolean isEnforceable = domainUsage.isOutput();
 			Boolean resolvedIsClassNode = isClassNode;
@@ -584,7 +584,7 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull Variable iterator, @NonNull SimpleNode sourceNode) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull Variable iterator, @NonNull SimpleNode sourceNode) {
 			Boolean resolvedIsClassNode = isClassNode;
 			if (resolvedIsClassNode == null) {
 				resolvedIsClassNode = !(iterator.getType() instanceof DataType);
@@ -647,7 +647,7 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull Variable letVariable, @NonNull SimpleNode inNode) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull Variable letVariable, @NonNull SimpleNode inNode) {
 			Boolean resolvedIsClassNode = isClassNode;
 			if (resolvedIsClassNode == null) {
 				resolvedIsClassNode = !(letVariable.getType() instanceof DataType);
@@ -683,11 +683,11 @@ public class Nodes
 			super(Role.Phase.CONSTANT);
 		}
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region) {
 			return createSimpleNode(region, "«null»", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
 		}
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull TypedElement typedElement) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull TypedElement typedElement) {
 			return createSimpleNode(region, "«null»", typedElement);
 		}
 
@@ -746,7 +746,7 @@ public class Nodes
 		private static final @NonNull OperationNodeRole PREDICATED_OPERATION = new OperationNodeRole(Role.Phase.PREDICATED);
 		private static final @NonNull OperationNodeRole REALIZED_OPERATION = new OperationNodeRole(Role.Phase.REALIZED);
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull TypedElement typedElement, SimpleNode... argNodes) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement, SimpleNode... argNodes) {
 			boolean isLoaded = false;
 			boolean isPredicated = false;
 			boolean isRealized = false;
@@ -811,7 +811,7 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 			Boolean resolvedIsClassNode = isClassNode;
 			if (resolvedIsClassNode == null) {
 				resolvedIsClassNode = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType);
@@ -837,13 +837,13 @@ public class Nodes
 			}
 
 			@Override
-			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+			public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 				throw new UnsupportedOperationException();
 			}
 
 			@Override
 
-			public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name, @NonNull TypedElement typedElement) {
+			public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 				throw new UnsupportedOperationException();
 			}
 
@@ -960,7 +960,7 @@ public class Nodes
 		private static final @NonNull ResultNodeRole PREDICATED_RESULT = new ResultNodeRole(Role.Phase.PREDICATED);
 		private static final @NonNull ResultNodeRole REALIZED_RESULT = new ResultNodeRole(Role.Phase.REALIZED);
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name,
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull String name,
 				@NonNull CallExp callExp, @NonNull SimpleNode sourceNode) {
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
 			if (domainUsage.isEnforceable()) {
@@ -1054,7 +1054,7 @@ public class Nodes
 			this.isNavigable = isNavigable;
 		}
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull String name,
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull String name,
 				@NonNull CallExp callExp, @NonNull SimpleNode sourceNode) {
 			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			boolean isDirty = false;
@@ -1090,7 +1090,7 @@ public class Nodes
 			super(Role.Phase.CONSTANT);
 		}
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region) {
 			SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 			org.eclipse.ocl.pivot.Class booleanType = schedulerConstants.getStandardLibrary().getBooleanType();
 			DomainUsage primitiveUsage = schedulerConstants.getDomainAnalysis().getPrimitiveUsage();
@@ -1144,7 +1144,7 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull SimpleNode createSimpleNode(@NonNull SimpleRegion region, @NonNull Variable variable) {
+		public @NonNull SimpleNode createSimpleNode(@NonNull Region region, @NonNull Variable variable) {
 			Boolean resolvedIsClassNode = isClassNode;
 			if (resolvedIsClassNode == null) {
 				resolvedIsClassNode = !(variable.getType() instanceof DataType);
