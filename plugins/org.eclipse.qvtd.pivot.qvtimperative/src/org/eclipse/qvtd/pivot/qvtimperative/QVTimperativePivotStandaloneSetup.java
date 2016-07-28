@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.labels.LabelGeneratorRegistry;
+import org.eclipse.qvtd.runtime.labels.QVTiLabelGenerators;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 import org.eclipse.qvtd.pivot.qvtimperative.scoping.QVTimperativePivotScoping;
@@ -31,7 +33,7 @@ import com.google.inject.Injector;
 public class QVTimperativePivotStandaloneSetup
 {
 	private static Injector injector = null;
-	
+
 	public static void doSetup() {
 		if (injector == null) {
 			injector = new QVTimperativePivotStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -44,8 +46,9 @@ public class QVTimperativePivotStandaloneSetup
 		QVTimperativePivotScoping.init();
 		QVTimperativeASResourceFactory.getInstance();
 		QVTimperativeToStringVisitor.FACTORY.getClass();
+		QVTiLabelGenerators.initialize(LabelGeneratorRegistry.INSTANCE);
 	}
-	
+
 	/**
 	 * Return the Injector for this plugin.
 	 */
@@ -56,7 +59,7 @@ public class QVTimperativePivotStandaloneSetup
 		return injector;
 	}
 
-/*	private static final ContentHandler QVTI_CONTENT_HANDLER = new RootXMLContentHandlerImpl(
+	/*	private static final ContentHandler QVTI_CONTENT_HANDLER = new RootXMLContentHandlerImpl(
 		QVTimperativePackage.eCONTENT_TYPE,
 		new String[]{ASResource.FILE_EXTENSION},
 		RootXMLContentHandlerImpl.XMI_KIND, QVTimperativePackage.eNS_URI, null);
@@ -90,7 +93,7 @@ public class QVTimperativePivotStandaloneSetup
 		if (!resourceFactoryRegistry.getExtensionToFactoryMap().containsKey("xmi"))
 			resourceFactoryRegistry.getExtensionToFactoryMap().put(
 				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
-//		initializeResourceFactory(resourceFactoryRegistry);
+		//		initializeResourceFactory(resourceFactoryRegistry);
 		if (!EPackage.Registry.INSTANCE.containsKey(QVTimperativePackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(QVTimperativePackage.eNS_URI, QVTimperativePackage.eINSTANCE);
 
@@ -98,12 +101,12 @@ public class QVTimperativePivotStandaloneSetup
 		register(injector);
 		return injector;
 	}
-	
+
 	public void register(Injector injector) {
-//		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-//		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", resourceFactory);
-//		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", serviceProvider);
+		//		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		//		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
+		//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", resourceFactory);
+		//		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", serviceProvider);
 	}
 }
 

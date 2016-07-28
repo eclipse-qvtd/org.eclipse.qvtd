@@ -12,4 +12,5 @@ Export-Package: org.eclipse.qvtd.runtime.evaluation,
  org.eclipse.qvtd.runtime.internal.cs2as,
  org.eclipse.qvtd.runtime.internal.evaluation,
  org.eclipse.qvtd.runtime.invocation,
+ org.eclipse.qvtd.runtime.labels,
  org.eclipse.qvtd.runtime.library.model
