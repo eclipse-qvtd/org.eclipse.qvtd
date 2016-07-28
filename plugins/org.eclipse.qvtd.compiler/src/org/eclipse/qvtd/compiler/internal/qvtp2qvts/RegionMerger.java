@@ -31,22 +31,16 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 
 	protected final @NonNull MappingRegion primaryRegion;
 	protected final @NonNull MappingRegion secondaryRegion;
-	protected final @NonNull Map<@NonNull SimpleNode, @NonNull SimpleNode> secondaryNode2primaryNode;
+	protected final @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode;
 	protected final @NonNull MappingRegion mergedRegion;
-	protected final @NonNull Map<@NonNull SimpleNode, @NonNull SimpleNode> oldNode2mergedNode = new HashMap<>();
+	protected final @NonNull Map<@NonNull Node, @NonNull Node> oldNode2mergedNode = new HashMap<>();
 	protected final @NonNull Map<@NonNull SimpleEdge, @NonNull List<@NonNull SimpleEdge>> oldEdge2oldEdges = new HashMap<>();
 	protected final @NonNull Map<@NonNull SimpleEdge, @NonNull SimpleEdge> oldEdge2mergedEdge = new HashMap<>();
 
 	protected RegionMerger(@NonNull MappingRegion primaryRegion, @NonNull MappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
 		this.primaryRegion = primaryRegion;
 		this.secondaryRegion = secondaryRegion;
-		this.secondaryNode2primaryNode = (Map<@NonNull SimpleNode, @NonNull SimpleNode>)(Object)secondaryNode2primaryNode;
-		for (@NonNull Node node : secondaryNode2primaryNode.keySet()) {
-			assert node instanceof SimpleNode;
-		}
-		for (@NonNull Node node : secondaryNode2primaryNode.values()) {
-			assert node instanceof SimpleNode;
-		}
+		this.secondaryNode2primaryNode = secondaryNode2primaryNode;
 		this.mergedRegion = new MergedMappingRegion(primaryRegion, secondaryRegion);
 	}
 
@@ -107,7 +101,7 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 	private void checkNodes(@NonNull Region oldRegion) {
 		for (@NonNull Node oldNode : oldRegion.getNodes()) {
 			assert oldNode.getRegion() == oldRegion;
-			SimpleNode mergedNode = oldNode2mergedNode.get(oldNode);
+			Node mergedNode = oldNode2mergedNode.get(oldNode);
 			assert mergedNode != null;
 			assert mergedNode.getRegion() == mergedRegion;
 		}
@@ -151,8 +145,8 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 
 	@Override
 	public @NonNull Visitable visitBasicSimpleEdge(@NonNull BasicSimpleEdge basicSimpleEdge) {
-		SimpleNode mergedSourceNode = oldNode2mergedNode.get(basicSimpleEdge.getSource());
-		SimpleNode mergedTargetNode = oldNode2mergedNode.get(basicSimpleEdge.getTarget());
+		Node mergedSourceNode = oldNode2mergedNode.get(basicSimpleEdge.getSource());
+		Node mergedTargetNode = oldNode2mergedNode.get(basicSimpleEdge.getTarget());
 		assert (mergedSourceNode != null) && (mergedTargetNode != null);
 		EdgeRole edgeRole = null;
 		List<@NonNull SimpleEdge> oldEdges = oldEdge2oldEdges.get(basicSimpleEdge);
@@ -167,8 +161,8 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 
 	@Override
 	public @NonNull Visitable visitSimpleNavigationEdge(@NonNull SimpleNavigationEdge simpleNavigationEdge) {
-		SimpleNode mergedSourceNode = oldNode2mergedNode.get(simpleNavigationEdge.getSource());
-		SimpleNode mergedTargetNode = oldNode2mergedNode.get(simpleNavigationEdge.getTarget());
+		Node mergedSourceNode = oldNode2mergedNode.get(simpleNavigationEdge.getSource());
+		Node mergedTargetNode = oldNode2mergedNode.get(simpleNavigationEdge.getTarget());
 		assert (mergedSourceNode != null) && (mergedTargetNode != null);
 		EdgeRole edgeRole = null;
 		List<@NonNull SimpleEdge> oldEdges = oldEdge2oldEdges.get(simpleNavigationEdge);
@@ -221,7 +215,7 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 	@Override
 	public @NonNull SimpleTypedNode visitSimpleTypedNode(@NonNull SimpleTypedNode simpleTypedNode) {
 		NodeRole nodeRole = simpleTypedNode.getNodeRole();
-		SimpleNode primaryNode = secondaryNode2primaryNode.get(simpleTypedNode);
+		Node primaryNode = secondaryNode2primaryNode.get(simpleTypedNode);
 		if (primaryNode != null) {
 			nodeRole = nodeRole.merge(primaryNode.getNodeRole());
 		}
@@ -242,7 +236,7 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 	@Override
 	public @NonNull SimpleVariableNode visitSimpleVariableNode(@NonNull SimpleVariableNode simpleVariableNode) {
 		NodeRole nodeRole = simpleVariableNode.getNodeRole();
-		SimpleNode primaryNode = secondaryNode2primaryNode.get(simpleVariableNode);
+		Node primaryNode = secondaryNode2primaryNode.get(simpleVariableNode);
 		if (primaryNode != null) {
 			nodeRole = nodeRole.merge(primaryNode.getNodeRole());
 		}

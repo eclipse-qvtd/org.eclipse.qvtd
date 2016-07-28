@@ -1521,10 +1521,10 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return ancestors;
 	}
 
-	public @NonNull SimpleNode getAssignedAttributeNode(@NonNull SimpleNode parentNode, @NonNull Property property) {
+	public @NonNull Node getAssignedAttributeNode(@NonNull Node parentNode, @NonNull Property property) {
 		assert parentNode.isClassNode();
 		assert property.getType() instanceof DataType;
-		SimpleNode node = parentNode.getNavigationTarget(property);
+		Node node = parentNode.getNavigationTarget(property);
 		//		AbstractAttributeNode node = (AbstractAttributeNode)node2node.get(property);
 		if (node == null) {
 			node = Nodes.REALIZED_ATTRIBUTE.createSimpleNode(parentNode.getRegion(), parentNode, property);
@@ -1533,13 +1533,13 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return node;
 	}
 
-	/*	public @NonNull SimpleNode getAssignedClassNode(@NonNull SimpleNode parentNode, @NonNull Property property) {
+	/*	public @NonNull Node getAssignedClassNode(@NonNull Node parentNode, @NonNull Property property) {
 		assert parentNode.isClassNode();
 		assert !(property.getType() instanceof DataType);
-		SimpleNode node = parentNode.getNavigationTarget(property);
+		Node node = parentNode.getNavigationTarget(property);
 //		AbstractAttributeNode node = (AbstractAttributeNode)node2node.get(property);
 		if (node == null) {
-			node = Nodes.NAV.createSimpleNode(region, parentNode, navigationCallExp)SimpleNode(parentNode.getRegion(), parentNode, property);
+			node = Nodes.NAV.createSimpleNode(region, parentNode, navigationCallExp)Node(parentNode.getRegion(), parentNode, property);
 //			node2node.put(property, node);
 		}
 		return node;
@@ -1965,11 +1965,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
-	public @NonNull SimpleNode getPredicatedAttributeNode(@NonNull SimpleNode parentNode, @NonNull NavigationCallExp navigationCallExp) {
+	public @NonNull Node getPredicatedAttributeNode(@NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp) {
 		assert parentNode.isClassNode();
 		Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
 		assert referredProperty != null;
-		SimpleNode node = parentNode.getNavigationTarget(referredProperty);
+		Node node = parentNode.getNavigationTarget(referredProperty);
 		//		AbstractAttributeNode node = (AbstractAttributeNode)node2node.get(property);
 		if (node == null) {
 			node = Nodes.ATTRIBUTE.createSimpleNode(parentNode.getRegion(), parentNode, navigationCallExp);

@@ -15,22 +15,12 @@ import org.eclipse.jdt.annotation.Nullable;
 
 public class BasicSimpleEdge extends AbstractEdge implements SimpleEdge
 {
-	public BasicSimpleEdge(@NonNull EdgeRole edgeRole, @NonNull Region region, @NonNull SimpleNode sourceNode, @Nullable String name, @NonNull SimpleNode targetNode) {
+	public BasicSimpleEdge(@NonNull EdgeRole edgeRole, @NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		super(edgeRole, region, sourceNode, name, targetNode);
 	}
 
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitBasicSimpleEdge(this);
-	}
-
-	@Override
-	public @NonNull SimpleNode getSource() {
-		return (SimpleNode) super.getSource();
-	}
-
-	@Override
-	public @NonNull SimpleNode getTarget() {
-		return (SimpleNode) super.getTarget();
 	}
 }

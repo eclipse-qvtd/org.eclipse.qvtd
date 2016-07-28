@@ -31,7 +31,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	void addIncomingEdge(@NonNull Edge edge);
 	void addOutgoingConnection(@NonNull NodeConnection connection);
 	void addOutgoingEdge(@NonNull Edge edge);
-	//	void cloneIn(@NonNull Region clonedRegion, @NonNull Map<Node, Node> node2clone);
+	void addTypedElement(@NonNull TypedElement typedElement);
 	void destroy();
 
 	/**
@@ -42,6 +42,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	@NonNull Iterable<@NonNull Edge> getArgumentEdges();
 	@Nullable Edge getAssignmentEdge(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull NavigationEdge> getAssignmentEdges();
+	@NonNull Iterable<@NonNull SimpleNavigationEdge> getCastEdges();
 	@NonNull ClassDatumAnalysis getClassDatumAnalysis();
 	@NonNull CompleteClass getCompleteClass();
 	@NonNull Iterable<@NonNull Edge> getComputationEdges();
@@ -73,6 +74,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Get all targets that are passed a value from this source.
 	 */
 	@NonNull Iterable<@NonNull Node> getPassedBindingTargets();
+	@Nullable SimpleEdge getPredicateEdge(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull NavigationEdge> getPredicateEdges();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
 
@@ -85,6 +87,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Get all 'sources' that pass a value to this target recursively.
 	 */
 	@NonNull Iterable<@NonNull Node> getRecursionTargets();
+	@NonNull Iterable<@NonNull ? extends SimpleEdge> getResultEdges();
 	@NonNull SchedulerConstants getSchedulerConstants();
 	@NonNull Iterable<@NonNull TypedElement> getTypedElements();
 	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
@@ -216,6 +219,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 */
 	boolean isTrue();
 
+	void mergeRole(@NonNull NodeRole nodeRole);
 	boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis);
 	void removeIncomingConnection(@NonNull NodeConnection connection);
 	void removeIncomingEdge(@NonNull Edge edge);

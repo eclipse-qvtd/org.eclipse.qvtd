@@ -66,7 +66,6 @@ public abstract class SchedulerConstants
 	public static final @NonNull List<@NonNull NodeConnection> EMPTY_NODE_CONNECTION_LIST = Collections.emptyList();
 	public static final @NonNull List<@NonNull Region> EMPTY_REGION_LIST = Collections.emptyList();
 	public static final @NonNull List<@NonNull SimpleEdge> EMPTY_SIMPLE_EDGE_LIST = Collections.emptyList();
-	public static final @NonNull List<@NonNull SimpleNode> EMPTY_SIMPLE_NODE_LIST = Collections.emptyList();
 	public static final @NonNull List<@NonNull TypedElement> EMPTY_TYPED_ELEMENT_LIST = Collections.emptyList();
 
 	public static @NonNull String getMultiplicity(@NonNull TypedElement typedElement) {

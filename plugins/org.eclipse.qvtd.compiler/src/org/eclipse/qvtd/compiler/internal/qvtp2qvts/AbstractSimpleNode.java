@@ -20,7 +20,7 @@ import org.eclipse.ocl.pivot.TypedElement;
 
 import com.google.common.collect.Iterables;
 
-public abstract class AbstractSimpleNode extends AbstractNode implements SimpleNode
+public abstract class AbstractSimpleNode extends AbstractNode
 {
 	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<@NonNull TypedElement>();
 
@@ -40,16 +40,6 @@ public abstract class AbstractSimpleNode extends AbstractNode implements SimpleN
 		@SuppressWarnings("unchecked")
 		@NonNull Iterable<@NonNull SimpleNavigationEdge> filter = (Iterable<@NonNull SimpleNavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsCastEdgePredicate.INSTANCE);
 		return filter;
-	}
-
-	@Override
-	public @Nullable SimpleNavigationEdge getNavigationEdge(@NonNull Property source2targetProperty) {
-		return (SimpleNavigationEdge) super.getNavigationEdge(source2targetProperty);
-	}
-
-	@Override
-	public @Nullable SimpleNode getNavigationTarget(@NonNull Property source2targetProperty) {
-		return (SimpleNode) super.getNavigationTarget(source2targetProperty);
 	}
 
 	@Override

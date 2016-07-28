@@ -17,7 +17,7 @@ import org.eclipse.ocl.pivot.Property;
 public interface NavigationEdgeRole extends EdgeRole
 {
 	//	@NonNull NavigationEdge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode);
-	@NonNull SimpleNavigationEdge createSimpleEdge(@NonNull Region region, @NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode);
+	@NonNull SimpleNavigationEdge createSimpleEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode);
 
 	@Nullable String getLabel(@NonNull Property source2targetProperty);
 }

@@ -10,15 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
-import org.eclipse.jdt.annotation.NonNull;
-
 /**
  * A SimpleEdge joins a pair of SimpleNodes in a SimpleRegion (no merging).
  */
 public interface SimpleEdge extends Edge
 {
-	@Override
-	@NonNull SimpleNode getSource();
-	@Override
-	@NonNull SimpleNode getTarget();
 }

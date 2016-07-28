@@ -15,7 +15,7 @@ import org.eclipse.ocl.pivot.Property;
 
 public class SimpleNavigationEdge extends AbstractNavigationEdge implements SimpleEdge
 {
-	public SimpleNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull Region region, @NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
+	public SimpleNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		super(edgeRole, region, sourceNode, source2targetProperty, targetNode);
 		//		assert !sourceNode.isOperation();			// FIXME testExample2_V2 violates this to cast an intermediate "if"
 	}
@@ -28,15 +28,5 @@ public class SimpleNavigationEdge extends AbstractNavigationEdge implements Simp
 	@Override
 	public @NonNull String getDisplayName() {
 		return source2targetProperty.getOwningClass().getName() + "::" + source2targetProperty.getName();
-	}
-
-	@Override
-	public @NonNull SimpleNode getSource() {
-		return (SimpleNode) super.getSource();
-	}
-
-	@Override
-	public @NonNull SimpleNode getTarget() {
-		return (SimpleNode) super.getTarget();
 	}
 }
