@@ -35,21 +35,18 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractSimpleMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdgeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicNodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicSimpleEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ComplexTypedNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.CyclicScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MergedEdge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MergedMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MergedNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractSimpleMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleNavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleTypedNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleVariableNode;
@@ -376,23 +373,6 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	@Override
 	public Element visitEdge(@NonNull Edge edge) {
 		return visiting(edge);
-	}
-
-	@Override
-	public Element visitMergedEdge(@NonNull MergedEdge mergedEdge) {
-		return visitEdge(mergedEdge);
-	}
-
-	@Override
-	public @Nullable Element visitMergedMappingRegion(@NonNull MergedMappingRegion mergedMappingRegion) {
-		AbstractRegion2Mapping region2mapping = getRegion2Mapping(mergedMappingRegion);
-		Mapping mapping = region2mapping.getMapping();
-		return mapping;
-	}
-
-	@Override
-	public Element visitMergedNode(@NonNull MergedNode mergedNode) {
-		return visitNode(mergedNode);
 	}
 
 	@Override

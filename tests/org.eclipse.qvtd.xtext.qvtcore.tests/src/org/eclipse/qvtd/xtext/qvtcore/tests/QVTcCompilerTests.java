@@ -435,7 +435,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("hsv2hls");
-		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("HSV2HLS.qvtcas", "hls");
 			myQVT.createInterpretedExecutor(asTransformation);

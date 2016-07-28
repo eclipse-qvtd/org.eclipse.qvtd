@@ -62,21 +62,6 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	}
 
 	@Override
-	public R visitMergedEdge(@NonNull MergedEdge mergedEdge) {
-		return visitEdge(mergedEdge);
-	}
-
-	@Override
-	public R visitMergedMappingRegion(@NonNull MergedMappingRegion mergedMappingRegion) {
-		return visitRegion(mergedMappingRegion);
-	}
-
-	@Override
-	public R visitMergedNode(@NonNull MergedNode mergedNode) {
-		return visitNode(mergedNode);
-	}
-
-	@Override
 	public R visitNode(@NonNull Node node) {
 		return visiting(node);
 	}

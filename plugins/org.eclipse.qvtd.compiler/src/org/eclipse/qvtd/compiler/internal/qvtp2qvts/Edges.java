@@ -375,7 +375,7 @@ public class Edges
 
 		@Override
 		public @NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Node targetNode) {
-			return new AbstractEdge(this, region, sourceNode, null, targetNode)
+			return new BasicSimpleEdge(this, (SimpleRegion)region, (SimpleNode)sourceNode, null, (SimpleNode)targetNode)
 			{
 				@Override
 				public @NonNull Iterable<@NonNull SimpleEdge> getSimpleEdges() {

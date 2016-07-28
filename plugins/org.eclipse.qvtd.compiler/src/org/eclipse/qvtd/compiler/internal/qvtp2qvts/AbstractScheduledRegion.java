@@ -60,22 +60,22 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	@Override
 	public void addEdgeConnection(@NonNull EdgeConnection edgeConnection) {
 		assert !connections.contains(edgeConnection);
-//		for (Connection oldConnection : connections) {
-//			if (oldConnection.getConnectionRole() == connection.getConnectionRole()) {
-//				assert (edge.getSource() != oldConnection.getSource()) || (edge.getTarget() != oldConnection.getTarget());
-//			}
-//		}
+		//		for (Connection oldConnection : connections) {
+		//			if (oldConnection.getConnectionRole() == connection.getConnectionRole()) {
+		//				assert (edge.getSource() != oldConnection.getSource()) || (edge.getTarget() != oldConnection.getTarget());
+		//			}
+		//		}
 		connections.add(edgeConnection);
 	}
 
 	@Override
 	public void addNodeConnection(@NonNull NodeConnection nodeConnection) {
 		assert !connections.contains(nodeConnection);
-//		for (Connection oldConnection : connections) {
-//			if (oldConnection.getConnectionRole() == connection.getConnectionRole()) {
-//				assert (edge.getSource() != oldConnection.getSource()) || (edge.getTarget() != oldConnection.getTarget());
-//			}
-//		}
+		//		for (Connection oldConnection : connections) {
+		//			if (oldConnection.getConnectionRole() == connection.getConnectionRole()) {
+		//				assert (edge.getSource() != oldConnection.getSource()) || (edge.getTarget() != oldConnection.getTarget());
+		//			}
+		//		}
 		connections.add(nodeConnection);
 	}
 
@@ -83,7 +83,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		assert !regions.contains(region);
 		if (regions.add(region)) {
 			region.setInvokingRegion(this);
-//			allMappingRegions.addAll(nestedRegion.getAllMappingRegions());
+			//			allMappingRegions.addAll(nestedRegion.getAllMappingRegions());
 		}
 	}
 
@@ -114,8 +114,8 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 
 	@Override
 	public void createLocalSchedule2(@NonNull List<@NonNull Region> orderedRegions) {
-//		region2order.computeRegionIndexes(getCallableRegions());
-//		Iterable<Region> sortedCallableRegions = regionOrdering;//AbstractRegion.EarliestRegionComparator.sort(getCallableRegions());
+		//		region2order.computeRegionIndexes(getCallableRegions());
+		//		Iterable<Region> sortedCallableRegions = regionOrdering;//AbstractRegion.EarliestRegionComparator.sort(getCallableRegions());
 		//
 		//	Index all predicated and realized edges by typed model and property.
 		//
@@ -133,7 +133,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		//
 		//	Redirect ordered consumers to depend on each other's heads thereby respecting the ordering and
 		//	making earlier results available to later mappings.
-		//	
+		//
 		if (region2orderingEdge2usedEdges != null) {
 			for (@SuppressWarnings("null")@NonNull Region commonRegion : region2orderingEdge2usedEdges.keySet()) {
 				@SuppressWarnings("null")@NonNull Map<Edge, Set<Edge>> orderingEdge2usedEdges = region2orderingEdge2usedEdges.get(commonRegion);
@@ -198,10 +198,10 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		//
 		//	Propagate early results down to later mappings that need them.
 		//
-/*		for (Region calledRegion : sortedRegions) {
+		/*		for (Region calledRegion : sortedRegions) {
 			calledRegion.refineBindings(this);
 		} */
-/*		HashMap<Node, List<Node>> outerNode2outerNodes = new HashMap<Node, List<Node>>();
+		/*		HashMap<Node, List<Node>> outerNode2outerNodes = new HashMap<Node, List<Node>>();
 		Map<Region, Map<NavigationEdge, NavigationEdge>> region2innerEdge2outerEdge = new HashMap<Region, Map<NavigationEdge, NavigationEdge>>();
 		propagateCommonNavigations(rootContainmentRegion, outerNode2outerNodes, region2innerEdge2outerEdge);
 		for (@SuppressWarnings("null")@NonNull Map.Entry<Region, Map<NavigationEdge, NavigationEdge>> entry1 : region2innerEdge2outerEdge.entrySet()) {
@@ -217,7 +217,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 				assert bestPath != null;
 				for (@SuppressWarnings("null")@NonNull Node node : innerRegion.getNodes()) {
 					for (@SuppressWarnings("null")@NonNull Edge edge : node.getIncomingPassedBindingEdges()) {	// ??? joins
-						assert edge.getTarget() == node;		
+						assert edge.getTarget() == node;
 						Region outerRegion = edge.getSource().getRegion();
 						Map<Edge, Edge> innerEdge2outerEdge = createPath(edge.getSource(), bestPath);
 						for (@SuppressWarnings("null")@NonNull Map.Entry<Edge, Edge> entry : innerEdge2outerEdge.entrySet()) {
@@ -227,15 +227,15 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 						}
 //						innerNode2outerNode.put(node, edge.getSource());
 //						propagateSharedNodes(edge.getSource(), node, innerNode2outerNode);
-						
-						
-						
-						
+
+
+
+
 //						propagatePassedEdges(edge.getSource(), node, innerNode2outerNode, innerNode2edge);
 					}
 				}
 			} */
-/*			Map<Node, Edge> innerNode2edge = new HashMap<Node, Edge>();
+		/*			Map<Node, Edge> innerNode2edge = new HashMap<Node, Edge>();
 			Map<Node, Node> innerNode2outerNode = new HashMap<Node, Node>();
 //			for (NavigationEdge innerEdge : entry1.getValue().keySet()) {
 //				innerNode2edge.put(innerEdge.getSource(), innerEdge);
@@ -243,15 +243,15 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 			for (Node node : innerRegion.getNodes()) {
 				for (Edge edge : node.getIncomingPassedBindingEdges()) {	// ??? joins
 					assert edge.getTarget() == node;
-					
+
 					Node outerNode = createPath(edge.getRegion(), bestEdge);
-					
+
 					innerNode2outerNode.put(node, edge.getSource());
 					propagateSharedNodes(edge.getSource(), node, innerNode2outerNode);
-					
-					
-					
-					
+
+
+
+
 					propagatePassedEdges(edge.getSource(), node, innerNode2outerNode, innerNode2edge);
 				}
 			}
@@ -261,9 +261,9 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 				propagateEdge(outerEdge.getSource(), innerEdge.getSource());
 				propagateEdge(outerEdge.getTarget(), innerEdge.getTarget());
 			} */
-//		}
-//		firstPassRegion.writeDOTfile();
-//		firstPassRegion.writeGraphMLfile();
+		//		}
+		//		firstPassRegion.writeDOTfile();
+		//		firstPassRegion.writeGraphMLfile();
 		//
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			writeDebugGraphs("9-final", true, true, true);
@@ -459,17 +459,17 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 			}
 		}
 	}
-	
+
 	@Override
 	public void toRegionGraph(@NonNull GraphStringBuilder s) {
 		s.setLabel(getName());
 		s.pushCluster();
 		for (@NonNull Region region : getCallableRegions()) {
-//			region.toRegionGraph(s);
+			//			region.toRegionGraph(s);
 			s.appendNode(region);
-//			for (@SuppressWarnings("null")@NonNull Edge edge : region.getRecursionEdges()) {
-//				s.appendEdge(edge.getSource().getRegion(), edge, edge.getTarget().getRegion());
-//			}
+			//			for (@SuppressWarnings("null")@NonNull Edge edge : region.getRecursionEdges()) {
+			//				s.appendEdge(edge.getSource().getRegion(), edge, edge.getTarget().getRegion());
+			//			}
 		}
 		for (@NonNull Node node : getNodes()) {
 			s.appendNode(node);

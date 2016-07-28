@@ -22,9 +22,6 @@ public interface Visitor<R>
 	R visitComplexTypedNode(@NonNull ComplexTypedNode complexTypedNode);
 	R visitCyclicScheduledRegion(@NonNull CyclicScheduledRegion cyclicScheduledRegion);
 	R visitEdge(@NonNull Edge edge);
-	R visitMergedEdge(@NonNull MergedEdge mergedEdge);
-	R visitMergedMappingRegion(@NonNull MergedMappingRegion mergedMappingRegion);
-	R visitMergedNode(@NonNull MergedNode mergedNode);
 	R visitNode(@NonNull Node node);
 	R visitOperationRegion(@NonNull OperationRegion operationRegion);
 	R visitRegion(@NonNull Region region);

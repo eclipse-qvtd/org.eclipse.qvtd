@@ -24,8 +24,8 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 
 public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 {
-	public static @NonNull AbstractSimpleMappingRegion createMergedRegion(@NonNull AbstractSimpleMappingRegion primaryRegion, @NonNull AbstractSimpleMappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
-		RegionMerger regionMerger = new RegionMerger(primaryRegion, secondaryRegion, secondaryNode2primaryNode);
+	public static @NonNull AbstractSimpleMappingRegion createMergedRegion(@NonNull AbstractMappingRegion primaryRegion, @NonNull AbstractMappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
+		RegionMerger regionMerger = new RegionMerger((AbstractSimpleMappingRegion)primaryRegion, (AbstractSimpleMappingRegion)secondaryRegion, secondaryNode2primaryNode);
 		return (AbstractSimpleMappingRegion) secondaryRegion.accept(regionMerger);
 	}
 
@@ -93,12 +93,14 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 	private void checkEdges(@NonNull Region oldRegion) {
 		for (@NonNull SimpleEdge oldEdge : asSimpleEdges(oldRegion.getEdges())) {
 			assert oldEdge.getRegion() == oldRegion;
-			List<@NonNull SimpleEdge> oldEdges = oldEdge2oldEdges.get(oldEdge);
-			assert oldEdges != null;
-			assert oldEdges.contains(oldEdge);
-			SimpleEdge mergedEdge = oldEdge2mergedEdge.get(oldEdge);
-			assert mergedEdge != null;
-			assert mergedEdge.getRegion() == mergedRegion;
+			if (!oldEdge.isRecursion()) {		// FIXME Remove this irregularity
+				List<@NonNull SimpleEdge> oldEdges = oldEdge2oldEdges.get(oldEdge);
+				assert oldEdges != null;
+				assert oldEdges.contains(oldEdge);
+				SimpleEdge mergedEdge = oldEdge2mergedEdge.get(oldEdge);
+				assert mergedEdge != null;
+				assert mergedEdge.getRegion() == mergedRegion;
+			}
 		}
 	}
 
@@ -192,10 +194,14 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 		//
 		Map<@NonNull Node, @NonNull Map<@NonNull Node, @NonNull List<@NonNull List<@NonNull SimpleEdge>>>> mergedSourceNode2mergedTargetNode2listOfOldEdges = new HashMap<>();
 		for (@NonNull SimpleEdge oldEdge : asSimpleEdges(primaryRegion.getEdges())) {
-			accumulateEdge(mergedSourceNode2mergedTargetNode2listOfOldEdges, oldEdge);
+			if (!oldEdge.isRecursion()) {		// FIXME Remove this irregularity
+				accumulateEdge(mergedSourceNode2mergedTargetNode2listOfOldEdges, oldEdge);
+			}
 		}
 		for (@NonNull SimpleEdge oldEdge : asSimpleEdges(secondaryRegion.getEdges())) {
-			accumulateEdge(mergedSourceNode2mergedTargetNode2listOfOldEdges, oldEdge);
+			if (!oldEdge.isRecursion()) {		// FIXME Remove this irregularity
+				accumulateEdge(mergedSourceNode2mergedTargetNode2listOfOldEdges, oldEdge);
+			}
 		}
 		for (@NonNull Map<@NonNull Node, @NonNull List<@NonNull List<@NonNull SimpleEdge>>> mergedTargetNode2listOfOldEdges : mergedSourceNode2mergedTargetNode2listOfOldEdges.values()) {
 			for (@NonNull List<@NonNull List<@NonNull SimpleEdge>> listOfOldEdges : mergedTargetNode2listOfOldEdges.values()) {

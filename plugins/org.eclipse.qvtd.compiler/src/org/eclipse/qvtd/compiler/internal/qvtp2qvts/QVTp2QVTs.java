@@ -144,28 +144,23 @@ public class QVTp2QVTs extends SchedulerConstants
 			if (isEarlyMergePrimaryCandidate(candidateRegion)) {
 				List<@NonNull AbstractMappingRegion> secondaryRegions = selectSecondaryRegions(candidateRegion);
 				if (secondaryRegions != null) {
-					AbstractMappingRegion primaryRegion = candidateRegion;
-					MergedMappingRegion mergedRegion = null;
+					AbstractMappingRegion mergedRegion = candidateRegion;
 					for (@NonNull AbstractMappingRegion secondaryRegion : secondaryRegions) {
 						assert secondaryRegion != null;
 						if (residualInputRegions.contains(secondaryRegion)) {
-							Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode = primaryRegion.canMerge(secondaryRegion, region2depths, false);
+							Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode = mergedRegion.canMerge(secondaryRegion, region2depths, false);
 							if (secondaryNode2primaryNode != null) {
-								boolean isSharedHead = isSharedHead(primaryRegion, secondaryRegion);
-								if (!isSharedHead || (secondaryRegion.canMerge(primaryRegion, region2depths, false) != null)) {
-									if (mergedRegion == null) {
-										mergedRegion = new MergedMappingRegion(primaryRegion);
-										residualInputRegions.remove(primaryRegion);
-										primaryRegion = mergedRegion;
-									}
-									mergedRegion.mergeRegion(secondaryRegion, secondaryNode2primaryNode);
+								boolean isSharedHead = isSharedHead(mergedRegion, secondaryRegion);
+								if (!isSharedHead || (secondaryRegion.canMerge(mergedRegion, region2depths, false) != null)) {
+									residualInputRegions.remove(mergedRegion);
 									residualInputRegions.remove(secondaryRegion);
+									mergedRegion = RegionMerger.createMergedRegion(mergedRegion, secondaryRegion, secondaryNode2primaryNode);
 									region2depths.addRegion(mergedRegion);
 								}
 							}
 						}
 					}
-					if (mergedRegion != null) {
+					if (mergedRegion != candidateRegion) {
 						//						mergedRegion.resolveRecursion();
 						if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 							mergedRegion.writeDebugGraphs("2-merged");
@@ -314,9 +309,12 @@ public class QVTp2QVTs extends SchedulerConstants
 			AbstractSimpleMappingRegion mappingRegion = action2mappingRegion.get(abstractAction);
 			assert mappingRegion != null;
 			orderedRegions.add(mappingRegion);
-			mappingRegion.resolveRecursion();
+			//			mappingRegion.resolveRecursion();
 		}
 		List<@NonNull Region> activeRegions = new ArrayList<>(earlyRegionMerge(orderedRegions));
+		for (@NonNull Region activeRegion : activeRegions) {
+			((AbstractRegion)activeRegion).resolveRecursion();
+		}
 		for (@NonNull OperationRegion operationRegion : multiRegion.getOperationRegions()) {
 			activeRegions.add(operationRegion);
 		}
