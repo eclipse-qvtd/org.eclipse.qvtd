@@ -1040,7 +1040,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 		//
-		//	Identify the edges that need traversal to reach as all nodes preferring forwardEdges.
+		//	Identify the edges that need traversal to reach all nodes preferring forwardEdges.
 		//
 		/*
 		 * The edges that are traversed while locating each node and their depth in the traversal forest.
@@ -1310,7 +1310,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private void createPropertyAssignments() {
 		Map<@NonNull Node, @NonNull List<@NonNull NavigationEdge>> classAssignments = null;
 		ImperativeBottomPattern bottomPattern = (ImperativeBottomPattern) mapping.getBottomPattern();
-		for (@NonNull NavigationEdge edge : region.getRealizedNavigationEdges()) {
+		for (@NonNull NavigationEdge edge : NavigationEdgeSorter.getSortedAssignments(region.getRealizedNavigationEdges())) {
 			Node sourceNode = edge.getSource();
 			Node targetNode = edge.getTarget();
 			if (targetNode.isAttributeNode()) {
