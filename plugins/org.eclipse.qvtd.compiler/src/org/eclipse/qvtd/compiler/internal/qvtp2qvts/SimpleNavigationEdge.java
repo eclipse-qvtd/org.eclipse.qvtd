@@ -10,12 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
-import java.util.Iterator;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 
-public class SimpleNavigationEdge extends AbstractNavigationEdge implements SimpleEdge, Iterable<@NonNull SimpleEdge>
+public class SimpleNavigationEdge extends AbstractNavigationEdge implements SimpleEdge
 {
 	public SimpleNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull SimpleRegion region, @NonNull SimpleNode sourceNode, @NonNull Property source2targetProperty, @NonNull SimpleNode targetNode) {
 		super(edgeRole, region, sourceNode, source2targetProperty, targetNode);
@@ -33,11 +31,6 @@ public class SimpleNavigationEdge extends AbstractNavigationEdge implements Simp
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull SimpleEdge> getSimpleEdges() {
-		return this;
-	}
-
-	@Override
 	public @NonNull SimpleNode getSource() {
 		return (SimpleNode) super.getSource();
 	}
@@ -45,10 +38,5 @@ public class SimpleNavigationEdge extends AbstractNavigationEdge implements Simp
 	@Override
 	public @NonNull SimpleNode getTarget() {
 		return (SimpleNode) super.getTarget();
-	}
-
-	@Override
-	public @NonNull Iterator<@NonNull SimpleEdge> iterator() {
-		return new SingletonIterator<@NonNull SimpleEdge>(this);
 	}
 }

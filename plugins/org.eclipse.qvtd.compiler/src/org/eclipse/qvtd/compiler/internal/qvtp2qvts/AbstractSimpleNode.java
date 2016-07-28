@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -75,16 +74,6 @@ public abstract class AbstractSimpleNode extends AbstractNode implements SimpleN
 		@SuppressWarnings("unchecked")
 		@NonNull Iterable<@NonNull SimpleEdge> filter = (Iterable<@NonNull SimpleEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsExpressionEdgePredicate.INSTANCE);
 		return filter;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull SimpleNode> getSimpleNodes() {
-		return this;
-	}
-
-	@Override
-	public @NonNull Iterator<@NonNull SimpleNode> iterator() {
-		return new SingletonIterator<@NonNull SimpleNode>(this);
 	}
 
 	@Override

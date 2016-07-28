@@ -27,11 +27,6 @@ public class ComplexTypedNode extends AbstractNode
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull SimpleNode> getSimpleNodes() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public @NonNull Iterable<@NonNull TypedElement> getTypedElements() {
 		return Collections.emptyList();
 	}

@@ -86,7 +86,6 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 */
 	@NonNull Iterable<@NonNull Node> getRecursionTargets();
 	@NonNull SchedulerConstants getSchedulerConstants();
-	@NonNull Iterable<@NonNull SimpleNode> getSimpleNodes();
 	@NonNull Iterable<@NonNull TypedElement> getTypedElements();
 	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
 

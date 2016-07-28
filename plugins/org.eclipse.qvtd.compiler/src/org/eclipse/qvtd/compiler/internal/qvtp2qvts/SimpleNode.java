@@ -18,7 +18,7 @@ import org.eclipse.ocl.pivot.TypedElement;
 /**
  * A SimpleNode together with SimpleEdges define the content of a SimpleRegion (no merging).
  */
-public interface SimpleNode extends Node, Iterable<@NonNull SimpleNode>
+public interface SimpleNode extends Node
 {
 	void addTypedElement(@NonNull TypedElement typedElement);
 	@NonNull Iterable<@NonNull SimpleNavigationEdge> getCastEdges();

@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
-import java.util.Iterator;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -27,11 +25,6 @@ public class BasicSimpleEdge extends AbstractEdge implements SimpleEdge
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull SimpleEdge> getSimpleEdges() {
-		return this;
-	}
-
-	@Override
 	public @NonNull SimpleNode getSource() {
 		return (SimpleNode) super.getSource();
 	}
@@ -39,10 +32,5 @@ public class BasicSimpleEdge extends AbstractEdge implements SimpleEdge
 	@Override
 	public @NonNull SimpleNode getTarget() {
 		return (SimpleNode) super.getTarget();
-	}
-
-	@Override
-	public Iterator<@NonNull SimpleEdge> iterator() {
-		return new SingletonIterator<@NonNull SimpleEdge>(this);
 	}
 }

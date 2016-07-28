@@ -59,8 +59,6 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	@Override
 	@NonNull Node getSource();
 
-	@NonNull Iterable<@NonNull SimpleEdge> getSimpleEdges();
-
 	/**
 	 * Return the target Node.
 	 */

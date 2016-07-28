@@ -375,13 +375,7 @@ public class Edges
 
 		@Override
 		public @NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Node targetNode) {
-			return new BasicSimpleEdge(this, (SimpleRegion)region, (SimpleNode)sourceNode, null, (SimpleNode)targetNode)
-			{
-				@Override
-				public @NonNull Iterable<@NonNull SimpleEdge> getSimpleEdges() {
-					return SchedulerConstants.EMPTY_SIMPLE_EDGE_LIST;
-				}
-			};
+			return new BasicSimpleEdge(this, (SimpleRegion)region, (SimpleNode)sourceNode, null, (SimpleNode)targetNode);
 		}
 
 		@Override
