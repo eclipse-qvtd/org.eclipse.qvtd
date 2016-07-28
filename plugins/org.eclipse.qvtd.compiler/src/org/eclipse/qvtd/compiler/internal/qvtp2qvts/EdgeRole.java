@@ -33,7 +33,7 @@ public interface EdgeRole extends Role
 
 	interface Simple extends EdgeRole
 	{
-		@NonNull SimpleEdge createEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode);
+		@NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode);
 	}
 
 	@Nullable String getArrowhead();

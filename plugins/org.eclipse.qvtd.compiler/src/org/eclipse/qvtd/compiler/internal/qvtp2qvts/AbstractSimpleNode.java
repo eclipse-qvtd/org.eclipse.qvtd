@@ -43,11 +43,11 @@ public abstract class AbstractSimpleNode extends AbstractNode
 	}
 
 	@Override
-	public final @Nullable SimpleEdge getPredicateEdge(@NonNull Property source2targetProperty) {
-		for (Edge edge : getOutgoingEdges()) {
-			if (edge.isPredicated() && (edge instanceof NavigationEdge) && (edge instanceof SimpleEdge)) {
+	public final @Nullable Edge getPredicateEdge(@NonNull Property source2targetProperty) {
+		for (@NonNull Edge edge : getOutgoingEdges()) {
+			if (edge.isPredicated() && (edge instanceof NavigationEdge)) {
 				if (((NavigationEdge)edge).getProperty() == source2targetProperty) {
-					return (SimpleEdge) edge;
+					return edge;
 				}
 			}
 		}
@@ -55,9 +55,8 @@ public abstract class AbstractSimpleNode extends AbstractNode
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull ? extends SimpleEdge> getResultEdges() {
-		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull SimpleEdge> filter = (Iterable<@NonNull SimpleEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsExpressionEdgePredicate.INSTANCE);
+	public final @NonNull Iterable<@NonNull ? extends Edge> getResultEdges() {
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsExpressionEdgePredicate.INSTANCE);
 		return filter;
 	}
 

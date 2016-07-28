@@ -76,12 +76,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 
 		@Override
-		protected @NonNull SimpleEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
+		protected @NonNull Edge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
 			return Edges.UNNAVIGABLE_CAST.createSimpleEdge(context, sourceNode, castProperty, castNode);
 		}
 
 		@Override
-		protected @NonNull SimpleEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		protected @NonNull Edge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 			return Edges.UNNAVIGABLE_NAVIGATION.createSimpleEdge(context, sourceNode, source2targetProperty, targetNode);
 		}
 
@@ -103,13 +103,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 	protected void addPredicateEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		assert sourceNode.isClassNode();
-		SimpleEdge predicateEdge = sourceNode.getPredicateEdge(source2targetProperty);
+		Edge predicateEdge = sourceNode.getPredicateEdge(source2targetProperty);
 		if (predicateEdge == null) {
 			predicateEdge = createNavigationEdge(sourceNode, source2targetProperty, targetNode);
 			if (!source2targetProperty.isIsMany()) {
 				Property target2sourceProperty = source2targetProperty.getOpposite();
 				if ((target2sourceProperty != null) && !target2sourceProperty.isIsMany() && target2sourceProperty.isIsRequired()) {		// FIXME do we need stronger type conformance here ??
-					SimpleEdge inverseEdge = targetNode.getPredicateEdge(target2sourceProperty);
+					Edge inverseEdge = targetNode.getPredicateEdge(target2sourceProperty);
 					if (inverseEdge == null) {
 						createNavigationEdge(targetNode, target2sourceProperty, sourceNode);
 					}
@@ -157,7 +157,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		Type castType = type;
 		assert castType != null;
 		Property castProperty = scheduler.getCastProperty(castType);
-		SimpleEdge castEdge = sourceNode.getPredicateEdge(castProperty);
+		Edge castEdge = sourceNode.getPredicateEdge(castProperty);
 		if (castEdge != null) {
 			Node castNode = castEdge.getTarget();
 			castNode.addTypedElement(operationCallExp);
@@ -223,7 +223,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		Type castType = operationCallExp.getType();
 		assert castType != null;
 		Property oclContainerProperty = scheduler.getOclContainerProperty();
-		SimpleEdge oclContainerEdge = sourceNode.getPredicateEdge(oclContainerProperty);
+		Edge oclContainerEdge = sourceNode.getPredicateEdge(oclContainerProperty);
 		if (oclContainerEdge != null) {
 			return oclContainerEdge.getTarget();
 		}
@@ -271,7 +271,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		} */
 	}
 
-	protected @NonNull SimpleEdge createArgumentEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+	protected @NonNull Edge createArgumentEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		return Edges.ARGUMENT.createSimpleEdge(context, sourceNode, name, targetNode);
 	}
 
@@ -302,7 +302,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return operationNode;
 	}
 
-	protected @NonNull SimpleEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
+	protected @NonNull Edge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
 		return Edges.CAST.createSimpleEdge(context, sourceNode, castProperty, castNode);
 	}
 
@@ -310,7 +310,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Nodes.ERROR.createSimpleNode(context, name, classDatumAnalysis);
 	}
 
-	protected @NonNull SimpleEdge createIteratedEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
+	protected @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
 		return Edges.ITERATED.createSimpleEdge(context, sourceNode, targetNode);
 	}
 
@@ -322,7 +322,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Nodes.LET.createSimpleNode(context, letVariable, inNode);
 	}
 
-	protected @NonNull SimpleEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+	protected @NonNull Edge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		return Edges.NAVIGATION.createSimpleEdge(context, sourceNode, source2targetProperty, targetNode);
 	}
 
@@ -334,7 +334,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Nodes.OPERATION.createSimpleNode(context, name, typedElement, argNodes);
 	}
 
-	protected @NonNull SimpleEdge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+	protected @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		return Edges.PREDICATE.createSimpleEdge(context, sourceNode, name, targetNode);
 	}
 
@@ -346,7 +346,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Nodes.AttributeNodeRoleFactory.PREDICATED_CLASS.createSimpleNode(context, name, classDatumAnalysis);
 	}
 
-	protected @NonNull SimpleEdge createRealizedArgumentEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+	protected @NonNull Edge createRealizedArgumentEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		return Edges.ArgumentEdgeRoleFactory.REALIZED_ARGUMENT.createEdge(context, sourceNode, name, targetNode);
 	}
 

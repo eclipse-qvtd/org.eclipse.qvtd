@@ -34,8 +34,8 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 	protected final @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode;
 	protected final @NonNull MappingRegion mergedRegion;
 	protected final @NonNull Map<@NonNull Node, @NonNull Node> oldNode2mergedNode = new HashMap<>();
-	protected final @NonNull Map<@NonNull SimpleEdge, @NonNull List<@NonNull SimpleEdge>> oldEdge2oldEdges = new HashMap<>();
-	protected final @NonNull Map<@NonNull SimpleEdge, @NonNull SimpleEdge> oldEdge2mergedEdge = new HashMap<>();
+	protected final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull Edge>> oldEdge2oldEdges = new HashMap<>();
+	protected final @NonNull Map<@NonNull Edge, @NonNull Edge> oldEdge2mergedEdge = new HashMap<>();
 
 	protected RegionMerger(@NonNull MappingRegion primaryRegion, @NonNull MappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
 		this.primaryRegion = primaryRegion;
@@ -44,24 +44,24 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 		this.mergedRegion = new MergedMappingRegion(primaryRegion, secondaryRegion);
 	}
 
-	protected void accumulateEdge(@NonNull Map<@NonNull Node, @NonNull Map<@NonNull Node, @NonNull List<@NonNull List<@NonNull SimpleEdge>>>> mergedSourceNode2mergedTargetNode2listOfOldEdges, @NonNull SimpleEdge oldEdge) {
-		//		List<@NonNull SimpleEdge> oldOldEdges2 = oldEdge2oldEdges.get(oldEdge);
+	protected void accumulateEdge(@NonNull Map<@NonNull Node, @NonNull Map<@NonNull Node, @NonNull List<@NonNull List<@NonNull Edge>>>> mergedSourceNode2mergedTargetNode2listOfOldEdges, @NonNull Edge oldEdge) {
+		//		List<@NonNull Edge> oldOldEdges2 = oldEdge2oldEdges.get(oldEdge);
 		//		assert oldOldEdges2 == null;
 		Node mergedSourceNode = oldNode2mergedNode.get(oldEdge.getSource());
 		Node mergedTargetNode = oldNode2mergedNode.get(oldEdge.getTarget());
 		assert (mergedSourceNode != null) && (mergedTargetNode != null);
-		Map<@NonNull Node, @NonNull List<@NonNull List<@NonNull SimpleEdge>>> mergedTargetNode2listOfOldEdges = mergedSourceNode2mergedTargetNode2listOfOldEdges.get(mergedSourceNode);
+		Map<@NonNull Node, @NonNull List<@NonNull List<@NonNull Edge>>> mergedTargetNode2listOfOldEdges = mergedSourceNode2mergedTargetNode2listOfOldEdges.get(mergedSourceNode);
 		if (mergedTargetNode2listOfOldEdges == null) {
 			mergedTargetNode2listOfOldEdges = new HashMap<>();
 			mergedSourceNode2mergedTargetNode2listOfOldEdges.put(mergedSourceNode, mergedTargetNode2listOfOldEdges);
 		}
-		List<@NonNull List<@NonNull SimpleEdge>> listOfOldEdges = mergedTargetNode2listOfOldEdges.get(mergedTargetNode);
+		List<@NonNull List<@NonNull Edge>> listOfOldEdges = mergedTargetNode2listOfOldEdges.get(mergedTargetNode);
 		if (listOfOldEdges == null) {
 			listOfOldEdges = new ArrayList<>();
 			mergedTargetNode2listOfOldEdges.put(mergedTargetNode, listOfOldEdges);
 		}
-		List<@NonNull SimpleEdge> matchingOldEdges = null;
-		for (@NonNull List<@NonNull SimpleEdge> oldEdges : listOfOldEdges) {
+		List<@NonNull Edge> matchingOldEdges = null;
+		for (@NonNull List<@NonNull Edge> oldEdges : listOfOldEdges) {
 			if (sameEdge(oldEdge, oldEdges)) {
 				matchingOldEdges = oldEdges;
 				break;
@@ -72,26 +72,18 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 			listOfOldEdges.add(matchingOldEdges);
 		}
 		matchingOldEdges.add(oldEdge);
-		List<@NonNull SimpleEdge> oldOldEdges = oldEdge2oldEdges.put(oldEdge, matchingOldEdges);
+		List<@NonNull Edge> oldOldEdges = oldEdge2oldEdges.put(oldEdge, matchingOldEdges);
 		assert oldOldEdges == null;
 	}
 
-	@Deprecated		// waiting for elimination of merged edges
-	private @NonNull Iterable<@NonNull SimpleEdge> asSimpleEdges(@NonNull Iterable<@NonNull Edge> edges) {
-		for (@NonNull Edge edge : edges) {
-			assert edge instanceof SimpleEdge;
-		}
-		return (Iterable<@NonNull SimpleEdge>)(Object)edges;
-	}
-
 	private void checkEdges(@NonNull Region oldRegion) {
-		for (@NonNull SimpleEdge oldEdge : asSimpleEdges(oldRegion.getEdges())) {
+		for (@NonNull Edge oldEdge : oldRegion.getEdges()) {
 			assert oldEdge.getRegion() == oldRegion;
 			if (!oldEdge.isRecursion()) {		// FIXME Remove this irregularity
-				List<@NonNull SimpleEdge> oldEdges = oldEdge2oldEdges.get(oldEdge);
+				List<@NonNull Edge> oldEdges = oldEdge2oldEdges.get(oldEdge);
 				assert oldEdges != null;
 				assert oldEdges.contains(oldEdge);
-				SimpleEdge mergedEdge = oldEdge2mergedEdge.get(oldEdge);
+				Edge mergedEdge = oldEdge2mergedEdge.get(oldEdge);
 				assert mergedEdge != null;
 				assert mergedEdge.getRegion() == mergedRegion;
 			}
@@ -107,22 +99,22 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 		}
 	}
 
-	protected void createMergedEdge(@NonNull Iterable<@NonNull SimpleEdge> oldEdges) {
-		SimpleEdge mergedEdge = null;
-		for (@NonNull SimpleEdge oldEdge : oldEdges) {
-			mergedEdge = (SimpleEdge)oldEdge.accept(this);
+	protected void createMergedEdge(@NonNull Iterable<@NonNull Edge> oldEdges) {
+		Edge mergedEdge = null;
+		for (@NonNull Edge oldEdge : oldEdges) {
+			mergedEdge = (Edge)oldEdge.accept(this);
 			break;
 		}
 		assert mergedEdge != null;
-		for (@NonNull SimpleEdge oldEdge : oldEdges) {
+		for (@NonNull Edge oldEdge : oldEdges) {
 			oldEdge2mergedEdge.put(oldEdge, mergedEdge);
 		}
 	}
 
-	private boolean sameEdge(@NonNull SimpleEdge newEdge, @NonNull Iterable<@NonNull SimpleEdge> oldEdges) {
+	private boolean sameEdge(@NonNull Edge newEdge, @NonNull Iterable<@NonNull Edge> oldEdges) {
 		if (newEdge instanceof NavigationEdge) {
 			Property newProperty = ((NavigationEdge)newEdge).getProperty();
-			for (@NonNull SimpleEdge oldEdge : oldEdges) {
+			for (@NonNull Edge oldEdge : oldEdges) {
 				if (oldEdge instanceof NavigationEdge) {
 					Property oldProperty = ((NavigationEdge)oldEdge).getProperty();
 					if (oldProperty == newProperty) {
@@ -132,9 +124,9 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 			}
 		}
 		else {
-			Class<? extends @NonNull SimpleEdge> newClass = newEdge.getClass();
-			for (@NonNull SimpleEdge oldEdge : oldEdges) {
-				Class<? extends @NonNull SimpleEdge> oldClass = oldEdge.getClass();
+			Class<? extends @NonNull Edge> newClass = newEdge.getClass();
+			for (@NonNull Edge oldEdge : oldEdges) {
+				Class<? extends @NonNull Edge> oldClass = oldEdge.getClass();
 				if (oldClass == newClass) {
 					return true;
 				}
@@ -149,9 +141,9 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 		Node mergedTargetNode = oldNode2mergedNode.get(basicSimpleEdge.getTarget());
 		assert (mergedSourceNode != null) && (mergedTargetNode != null);
 		EdgeRole edgeRole = null;
-		List<@NonNull SimpleEdge> oldEdges = oldEdge2oldEdges.get(basicSimpleEdge);
+		List<@NonNull Edge> oldEdges = oldEdge2oldEdges.get(basicSimpleEdge);
 		assert oldEdges != null;
-		for (@NonNull SimpleEdge oldEdge : oldEdges) {
+		for (@NonNull Edge oldEdge : oldEdges) {
 			EdgeRole edgeRole2 = oldEdge.getEdgeRole();
 			edgeRole = edgeRole != null ? edgeRole.merge(edgeRole2) : edgeRole2;
 		}
@@ -165,9 +157,9 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 		Node mergedTargetNode = oldNode2mergedNode.get(simpleNavigationEdge.getTarget());
 		assert (mergedSourceNode != null) && (mergedTargetNode != null);
 		EdgeRole edgeRole = null;
-		List<@NonNull SimpleEdge> oldEdges = oldEdge2oldEdges.get(simpleNavigationEdge);
+		List<@NonNull Edge> oldEdges = oldEdge2oldEdges.get(simpleNavigationEdge);
 		assert oldEdges != null;
-		for (@NonNull SimpleEdge oldEdge : oldEdges) {
+		for (@NonNull Edge oldEdge : oldEdges) {
 			EdgeRole edgeRole2 = ((SimpleNavigationEdge)oldEdge).getEdgeRole();
 			edgeRole = edgeRole != null ? edgeRole.merge(edgeRole2) : edgeRole2;
 		}
@@ -186,21 +178,21 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 		//
 		//
 		//
-		Map<@NonNull Node, @NonNull Map<@NonNull Node, @NonNull List<@NonNull List<@NonNull SimpleEdge>>>> mergedSourceNode2mergedTargetNode2listOfOldEdges = new HashMap<>();
-		for (@NonNull SimpleEdge oldEdge : asSimpleEdges(primaryRegion.getEdges())) {
+		Map<@NonNull Node, @NonNull Map<@NonNull Node, @NonNull List<@NonNull List<@NonNull Edge>>>> mergedSourceNode2mergedTargetNode2listOfOldEdges = new HashMap<>();
+		for (@NonNull Edge oldEdge : primaryRegion.getEdges()) {
 			if (!oldEdge.isRecursion()) {		// FIXME Remove this irregularity
 				accumulateEdge(mergedSourceNode2mergedTargetNode2listOfOldEdges, oldEdge);
 			}
 		}
-		for (@NonNull SimpleEdge oldEdge : asSimpleEdges(secondaryRegion.getEdges())) {
+		for (@NonNull Edge oldEdge : secondaryRegion.getEdges()) {
 			if (!oldEdge.isRecursion()) {		// FIXME Remove this irregularity
 				accumulateEdge(mergedSourceNode2mergedTargetNode2listOfOldEdges, oldEdge);
 			}
 		}
-		for (@NonNull Map<@NonNull Node, @NonNull List<@NonNull List<@NonNull SimpleEdge>>> mergedTargetNode2listOfOldEdges : mergedSourceNode2mergedTargetNode2listOfOldEdges.values()) {
-			for (@NonNull List<@NonNull List<@NonNull SimpleEdge>> listOfOldEdges : mergedTargetNode2listOfOldEdges.values()) {
+		for (@NonNull Map<@NonNull Node, @NonNull List<@NonNull List<@NonNull Edge>>> mergedTargetNode2listOfOldEdges : mergedSourceNode2mergedTargetNode2listOfOldEdges.values()) {
+			for (@NonNull List<@NonNull List<@NonNull Edge>> listOfOldEdges : mergedTargetNode2listOfOldEdges.values()) {
 				assert listOfOldEdges != null;
-				for (@NonNull List<@NonNull SimpleEdge> oldEdges : listOfOldEdges) {
+				for (@NonNull List<@NonNull Edge> oldEdges : listOfOldEdges) {
 					createMergedEdge(oldEdges);
 				}
 			}

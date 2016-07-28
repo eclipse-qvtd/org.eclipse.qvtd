@@ -16,7 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 
-public interface NavigationEdge extends Edge, ConnectionEnd//, GraphStringBuilder.GraphNode
+public interface NavigationEdge extends Edge, ConnectionEnd
 {
 	void addIncomingConnection(@NonNull EdgeConnection edgeConnection);
 	void addOutgoingConnection(@NonNull EdgeConnection edgeConnection);
@@ -25,7 +25,7 @@ public interface NavigationEdge extends Edge, ConnectionEnd//, GraphStringBuilde
 	@NonNull List<@NonNull EdgeConnection> getOutgoingConnections();
 
 	/**
-	 * Return the property that this edge navigates from source to target. 
+	 * Return the property that this edge navigates from source to target.
 	 */
 	@NonNull Property getProperty();
 

@@ -13,7 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 
-public class SimpleNavigationEdge extends AbstractNavigationEdge implements SimpleEdge
+public class SimpleNavigationEdge extends AbstractNavigationEdge
 {
 	public SimpleNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		super(edgeRole, region, sourceNode, source2targetProperty, targetNode);

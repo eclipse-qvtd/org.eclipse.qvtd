@@ -203,7 +203,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion
 		assert (targetVariable == null) || targetNode.isGuardVariable();
 		assert sourceNode.isClassNode();
 		if (!property.isIsMany()) {
-			SimpleEdge predicateEdge = sourceNode.getPredicateEdge(property);
+			Edge predicateEdge = sourceNode.getPredicateEdge(property);
 			if (predicateEdge == null) {
 				Edges.NAVIGATION.createSimpleEdge(this, sourceNode, property, targetNode);
 			}
@@ -213,7 +213,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion
 		}
 		Property oppositeProperty = property.getOpposite();
 		if ((oppositeProperty != null) && !oppositeProperty.isIsMany()) {
-			SimpleEdge predicateEdge = targetNode.getPredicateEdge(oppositeProperty);
+			Edge predicateEdge = targetNode.getPredicateEdge(oppositeProperty);
 			if (predicateEdge == null) {
 				Edges.NAVIGATION.createSimpleEdge(this, targetNode, oppositeProperty, sourceNode);
 			}
@@ -341,8 +341,8 @@ public class SimpleMappingRegion extends AbstractMappingRegion
 	 * Create a navigable path from startNode following the edges of protoPath, re-using edges and nodes where possible.
 	 * Returns a mapping of the proto-edges to the created/re-used edges.
 	 *
-	protected @NonNull Map<SimpleEdge, SimpleEdge> createPath(@NonNull Node startNode, @NonNull List<SimpleNavigationEdge> protoPath) {
-		Map<SimpleEdge, SimpleEdge> path = new HashMap<SimpleEdge, SimpleEdge>();
+	protected @NonNull Map<Edge, Edge> createPath(@NonNull Node startNode, @NonNull List<SimpleNavigationEdge> protoPath) {
+		Map<Edge, Edge> path = new HashMap<Edge, Edge>();
 		SimpleRegion region = startNode.getRegion();
 		Node sourceNode = startNode;
 		for (SimpleNavigationEdge protoEdge : protoPath) {

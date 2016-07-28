@@ -13,7 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-public class BasicSimpleEdge extends AbstractEdge implements SimpleEdge
+public class BasicSimpleEdge extends AbstractEdge
 {
 	public BasicSimpleEdge(@NonNull EdgeRole edgeRole, @NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		super(edgeRole, region, sourceNode, name, targetNode);

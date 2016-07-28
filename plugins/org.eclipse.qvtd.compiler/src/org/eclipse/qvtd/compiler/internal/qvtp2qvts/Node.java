@@ -74,7 +74,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Get all targets that are passed a value from this source.
 	 */
 	@NonNull Iterable<@NonNull Node> getPassedBindingTargets();
-	@Nullable SimpleEdge getPredicateEdge(@NonNull Property source2targetProperty);
+	@Nullable Edge getPredicateEdge(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull NavigationEdge> getPredicateEdges();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
 
@@ -87,7 +87,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Get all 'sources' that pass a value to this target recursively.
 	 */
 	@NonNull Iterable<@NonNull Node> getRecursionTargets();
-	@NonNull Iterable<@NonNull ? extends SimpleEdge> getResultEdges();
+	@NonNull Iterable<@NonNull ? extends Edge> getResultEdges();
 	@NonNull SchedulerConstants getSchedulerConstants();
 	@NonNull Iterable<@NonNull TypedElement> getTypedElements();
 	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
