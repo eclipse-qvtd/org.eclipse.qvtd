@@ -38,7 +38,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdgeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicNodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicSimpleEdge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ComplexTypedNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.CyclicScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
@@ -363,11 +362,6 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		}
 		AbstractRegion2Mapping region2mapping = getRegion2Mapping(cyclicScheduledRegion);
 		return region2mapping.getMapping();
-	}
-
-	@Override
-	public Element visitComplexTypedNode(@NonNull ComplexTypedNode complexTypedNode) {
-		return visitNode(complexTypedNode);
 	}
 
 	@Override

@@ -52,11 +52,6 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	}
 
 	@Override
-	public R visitComplexTypedNode(@NonNull ComplexTypedNode complexTypedNode) {
-		return visitNode(complexTypedNode);
-	}
-
-	@Override
 	public R visitEdge(@NonNull Edge edge) {
 		return visiting(edge);
 	}

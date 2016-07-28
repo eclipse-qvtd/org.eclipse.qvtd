@@ -833,7 +833,8 @@ public class Nodes
 
 			@Override
 			public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-				return new ComplexTypedNode(this, region, name, classDatumAnalysis);
+				//				return new ComplexTypedNode(this, region, name, classDatumAnalysis);
+				throw new UnsupportedOperationException(); // FIXME Only used for obsolete cyclic regions.
 			}
 
 			@Override
