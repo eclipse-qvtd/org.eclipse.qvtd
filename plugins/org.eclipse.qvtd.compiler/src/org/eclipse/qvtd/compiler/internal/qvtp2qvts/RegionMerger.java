@@ -205,15 +205,15 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 	}
 
 	@Override
-	public @NonNull SimpleTypedNode visitSimpleTypedNode(@NonNull SimpleTypedNode simpleTypedNode) {
-		NodeRole nodeRole = simpleTypedNode.getNodeRole();
-		Node primaryNode = secondaryNode2primaryNode.get(simpleTypedNode);
+	public @NonNull TypedNode visitTypedNode(@NonNull TypedNode typedNode) {
+		NodeRole nodeRole = typedNode.getNodeRole();
+		Node primaryNode = secondaryNode2primaryNode.get(typedNode);
 		if (primaryNode != null) {
 			nodeRole = nodeRole.merge(primaryNode.getNodeRole());
 		}
-		SimpleTypedNode mergedNode = new SimpleTypedNode(nodeRole, mergedRegion, simpleTypedNode.getName(), simpleTypedNode.getClassDatumAnalysis());
-		oldNode2mergedNode.put(simpleTypedNode, mergedNode);
-		for (@NonNull TypedElement typedElement : simpleTypedNode.getTypedElements()) {
+		TypedNode mergedNode = new TypedNode(nodeRole, mergedRegion, typedNode.getName(), typedNode.getClassDatumAnalysis());
+		oldNode2mergedNode.put(typedNode, mergedNode);
+		for (@NonNull TypedElement typedElement : typedNode.getTypedElements()) {
 			mergedNode.addTypedElement(typedElement);
 		}
 		if (primaryNode != null) {
@@ -226,16 +226,16 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 	}
 
 	@Override
-	public @NonNull SimpleVariableNode visitSimpleVariableNode(@NonNull SimpleVariableNode simpleVariableNode) {
-		NodeRole nodeRole = simpleVariableNode.getNodeRole();
-		Node primaryNode = secondaryNode2primaryNode.get(simpleVariableNode);
+	public @NonNull VariableNode visitVariableNode(@NonNull VariableNode variableNode) {
+		NodeRole nodeRole = variableNode.getNodeRole();
+		Node primaryNode = secondaryNode2primaryNode.get(variableNode);
 		if (primaryNode != null) {
 			nodeRole = nodeRole.merge(primaryNode.getNodeRole());
 		}
-		@NonNull VariableDeclaration variableDeclaration = (VariableDeclaration)simpleVariableNode.getTypedElements().iterator().next();
-		SimpleVariableNode mergedNode = new SimpleVariableNode(nodeRole, mergedRegion, variableDeclaration);
-		oldNode2mergedNode.put(simpleVariableNode, mergedNode);
-		for (@NonNull TypedElement typedElement : simpleVariableNode.getTypedElements()) {
+		@NonNull VariableDeclaration variableDeclaration = (VariableDeclaration)variableNode.getTypedElements().iterator().next();
+		VariableNode mergedNode = new VariableNode(nodeRole, mergedRegion, variableDeclaration);
+		oldNode2mergedNode.put(variableNode, mergedNode);
+		for (@NonNull TypedElement typedElement : variableNode.getTypedElements()) {
 			mergedNode.addTypedElement(typedElement);
 		}
 		if (primaryNode != null) {

@@ -67,7 +67,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeV
 
 import com.google.common.collect.Iterables;
 
-public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@NonNull Node, @NonNull SimpleMappingRegion>
+public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@NonNull Node, @NonNull BasicMappingRegion>
 {
 	public class ConditionalExpressionAnalyzer extends ExpressionAnalyzer
 	{
@@ -95,7 +95,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	private /*@LazyNonNull*/ ConditionalExpressionAnalyzer conditionalExpressionAnalyzer = null;
 	//	private /*@LazyNonNull*/ DependencyAnalyzer dependencyAnalyzer;
 
-	protected ExpressionAnalyzer(@NonNull SimpleMappingRegion context) {
+	protected ExpressionAnalyzer(@NonNull BasicMappingRegion context) {
 		super(context);
 		this.scheduler = context.getSchedulerConstants();
 		//		this.dependencyAnalyzer = getDependencyAnalyzer();

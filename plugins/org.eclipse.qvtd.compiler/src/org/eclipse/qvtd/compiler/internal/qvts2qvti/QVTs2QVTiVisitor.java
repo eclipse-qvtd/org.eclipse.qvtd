@@ -47,8 +47,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleTypedNode;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SimpleVariableNode;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.TypedNode;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.VariableNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
@@ -486,12 +486,12 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	}
 
 	@Override
-	public Element visitSimpleTypedNode(@NonNull SimpleTypedNode simpleTypedNode) {
-		return visitNode(simpleTypedNode);
+	public Element visitTypedNode(@NonNull TypedNode typedNode) {
+		return visitNode(typedNode);
 	}
 
 	@Override
-	public Element visitSimpleVariableNode(@NonNull SimpleVariableNode simpleVariableNode) {
-		return visitNode(simpleVariableNode);
+	public Element visitVariableNode(@NonNull VariableNode variableNode) {
+		return visitNode(variableNode);
 	}
 }

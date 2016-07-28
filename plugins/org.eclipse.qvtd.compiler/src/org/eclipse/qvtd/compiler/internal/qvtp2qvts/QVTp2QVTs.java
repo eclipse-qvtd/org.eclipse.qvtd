@@ -65,7 +65,7 @@ public class QVTp2QVTs extends SchedulerConstants
 	/**
 	 * The Region to which each action is allocated.
 	 */
-	private final @NonNull Map<@NonNull AbstractAction, @NonNull SimpleMappingRegion> action2mappingRegion = new HashMap<>();
+	private final @NonNull Map<@NonNull AbstractAction, @NonNull BasicMappingRegion> action2mappingRegion = new HashMap<>();
 
 	private final @NonNull List<@NonNull AbstractAction> orderedActions;
 
@@ -288,13 +288,13 @@ public class QVTp2QVTs extends SchedulerConstants
 		for (@NonNull AbstractAction abstractAction : orderedActions) {
 			if (abstractAction instanceof MappingAction) {
 				MappingAction mappingAction = (MappingAction) abstractAction;
-				SimpleMappingRegion mappingRegion = new SimpleMappingRegion(multiRegion, mappingAction);
+				BasicMappingRegion mappingRegion = new BasicMappingRegion(multiRegion, mappingAction);
 				action2mappingRegion.put(abstractAction, mappingRegion);
 			}
 		}
-		List<@NonNull SimpleMappingRegion> mappingRegions = new ArrayList<>(action2mappingRegion.values());
+		List<@NonNull BasicMappingRegion> mappingRegions = new ArrayList<>(action2mappingRegion.values());
 		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
-		for (@NonNull SimpleMappingRegion mappingRegion : mappingRegions) {
+		for (@NonNull BasicMappingRegion mappingRegion : mappingRegions) {
 			mappingRegion.registerConsumptionsAndProductions();
 		}
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {

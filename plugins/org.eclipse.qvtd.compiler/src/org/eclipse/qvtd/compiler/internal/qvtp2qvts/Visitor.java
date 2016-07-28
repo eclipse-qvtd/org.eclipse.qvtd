@@ -28,6 +28,6 @@ public interface Visitor<R>
 	R visitRegion(@NonNull Region region);
 	R visitRootCompositionRegion(@NonNull RootCompositionRegion rootCompositionRegion);
 	R visitRootScheduledRegion(@NonNull RootScheduledRegion rootScheduledRegion);
-	R visitSimpleTypedNode(@NonNull SimpleTypedNode simpleTypedNode);
-	R visitSimpleVariableNode(@NonNull SimpleVariableNode simpleVariableNode);
+	R visitTypedNode(@NonNull TypedNode typedNode);
+	R visitVariableNode(@NonNull VariableNode variableNode);
 }

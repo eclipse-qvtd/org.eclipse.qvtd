@@ -15,28 +15,28 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 /**
- * SimpleVariableNode provides the non-terminal analysis and status of a Variable from which navigations
+ * VariableNode provides the non-terminal analysis and status of a Variable from which navigations
  * are possible. The analysis is associated with a particular sourceVariable from which a variety of further node analyses
  * are reachable by traversing some Property.
  */
-public class SimpleVariableNode extends AbstractSimpleNode
+public class VariableNode extends AbstractNode
 {
 	protected final @NonNull VariableDeclaration variable;
 
-	public SimpleVariableNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
+	public VariableNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
 		super(nodeRole, region, ClassUtil.nonNullState(variable.getName()), region.getClassDatumAnalysis(variable));
 		this.variable = variable;
 		assert variable.eContainer() != null;
 		assert variable.getName() != null;
-		if (region instanceof SimpleMappingRegion) {
-			((SimpleMappingRegion)region).addVariableNode(getVariable(), this);
+		if (region instanceof BasicMappingRegion) {
+			((BasicMappingRegion)region).addVariableNode(getVariable(), this);
 		}
 		addTypedElement(variable);
 	}
 
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return visitor.visitSimpleVariableNode(this);
+		return visitor.visitVariableNode(this);
 	}
 
 	public @NonNull VariableDeclaration getVariable() {

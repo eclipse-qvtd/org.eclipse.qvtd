@@ -92,12 +92,12 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	}
 
 	@Override
-	public R visitSimpleTypedNode(@NonNull SimpleTypedNode simpleTypedNode) {
-		return visitNode(simpleTypedNode);
+	public R visitTypedNode(@NonNull TypedNode typedNode) {
+		return visitNode(typedNode);
 	}
 
 	@Override
-	public R visitSimpleVariableNode(@NonNull SimpleVariableNode simpleVariableNode) {
-		return visitNode(simpleVariableNode);
+	public R visitVariableNode(@NonNull VariableNode variableNode) {
+		return visitNode(variableNode);
 	}
 }

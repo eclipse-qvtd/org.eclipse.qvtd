@@ -48,7 +48,7 @@ import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
 
-public class SimpleMappingRegion extends AbstractMappingRegion
+public class BasicMappingRegion extends AbstractMappingRegion
 {
 	/**
 	 * The analyzed action.
@@ -73,7 +73,7 @@ public class SimpleMappingRegion extends AbstractMappingRegion
 	 */
 	private /*@LazyNonNull*/ List<@NonNull Node> extraNodes = null;
 
-	public SimpleMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction) {
+	public BasicMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction) {
 		super(multiRegion);
 		this.mappingAction = mappingAction;
 		AbstractMapping mapping = mappingAction.getMapping();

@@ -49,12 +49,12 @@ public class Nodes
 
 		@Override
 		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-			return new SimpleTypedNode(this, region, name, classDatumAnalysis);
+			return new TypedNode(this, region, name, classDatumAnalysis);
 		}
 
 		@Override
 		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
-			return new SimpleTypedNode(this, region, name, typedElement);
+			return new TypedNode(this, region, name, typedElement);
 		}
 	}
 
@@ -69,7 +69,7 @@ public class Nodes
 
 		public @NonNull Node createSimpleNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
 			assert isClassNode == !(variable.getType() instanceof DataType);
-			return new SimpleVariableNode(this, region, variable);
+			return new VariableNode(this, region, variable);
 		}
 
 		@Override

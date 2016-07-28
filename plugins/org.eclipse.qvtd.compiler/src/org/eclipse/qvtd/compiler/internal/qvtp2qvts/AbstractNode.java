@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -69,6 +70,7 @@ public abstract class AbstractNode implements Node
 	private @Nullable List<@NonNull Edge> outgoingEdges = null;
 
 	private @NonNull ClassDatumAnalysis classDatumAnalysis;
+	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<@NonNull TypedElement>();
 
 	protected AbstractNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		this.nodeRole = nodeRole;
@@ -156,6 +158,13 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
+	public void addTypedElement(@NonNull TypedElement typedElement) {
+		if (!typedElements.contains(typedElement)) {
+			typedElements.add(typedElement);
+		}
+	}
+
+	@Override
 	public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
 		boolean isHead = isHead();
 		if (isHead) {
@@ -213,6 +222,13 @@ public abstract class AbstractNode implements Node
 	public final @NonNull Iterable<@NonNull NavigationEdge> getAssignmentEdges() {
 		@SuppressWarnings("unchecked")
 		Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsAssignmentEdgePredicate.INSTANCE);
+		return filter;
+	}
+
+	@Override
+	public final @NonNull Iterable<@NonNull NavigationEdge> getCastEdges() {
+		@SuppressWarnings("unchecked")
+		@NonNull Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsCastEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -434,6 +450,18 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
+	public final @Nullable Edge getPredicateEdge(@NonNull Property source2targetProperty) {
+		for (@NonNull Edge edge : getOutgoingEdges()) {
+			if (edge.isPredicated() && (edge instanceof NavigationEdge)) {
+				if (((NavigationEdge)edge).getProperty() == source2targetProperty) {
+					return edge;
+				}
+			}
+		}
+		return null;
+	}
+
+	@Override
 	public final @NonNull Iterable<@NonNull NavigationEdge> getPredicateEdges() {
 		@SuppressWarnings("unchecked")
 		Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsPredicatedEdgePredicate.INSTANCE);
@@ -466,6 +494,12 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
+	public final @NonNull Iterable<@NonNull ? extends Edge> getResultEdges() {
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsExpressionEdgePredicate.INSTANCE);
+		return filter;
+	}
+
+	@Override
 	public @NonNull SchedulerConstants getSchedulerConstants() {
 		return region.getSchedulerConstants();
 	}
@@ -476,6 +510,11 @@ public abstract class AbstractNode implements Node
 
 	protected @Nullable String getStyle() {
 		return nodeRole.getStyle();
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull TypedElement> getTypedElements() {
+		return typedElements;
 	}
 
 	@Override

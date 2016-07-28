@@ -13,19 +13,19 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.TypedElement;
 
-public class SimpleTypedNode extends AbstractSimpleNode
+public class TypedNode extends AbstractNode
 {
-	public SimpleTypedNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+	public TypedNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		super(nodeRole, region, name, classDatumAnalysis);
 	}
 
-	public SimpleTypedNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
+	public TypedNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 		super(nodeRole, region, name, region.getClassDatumAnalysis(typedElement));
 		addTypedElement(typedElement);
 	}
 
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return visitor.visitSimpleTypedNode(this);
+		return visitor.visitTypedNode(this);
 	}
 }
