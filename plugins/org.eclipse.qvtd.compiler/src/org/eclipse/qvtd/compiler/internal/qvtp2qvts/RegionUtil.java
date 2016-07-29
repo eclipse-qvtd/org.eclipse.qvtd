@@ -35,7 +35,10 @@ public class RegionUtil
 		while (true) {
 			@Nullable NavigationEdge targetEdge = null;
 			for (@NonNull Edge nextEdge : sourceEdge.getTarget().getOutgoingEdges()) {
-				if (!nextEdge.isCast() && !nextEdge.isRecursion()) {
+				if (nextEdge.isRecursion()) {
+					continue;
+				}
+				if (!nextEdge.isCast()) {
 					return sourceEdge;
 				}
 				if (targetEdge != null) {			// FIXME multi-cast support
@@ -58,7 +61,10 @@ public class RegionUtil
 		while (true) {
 			@Nullable Node targetNode = null;
 			for (@NonNull Edge edge : sourceNode.getOutgoingEdges()) {
-				if (!edge.isCast() && !edge.isRecursion()) {
+				if (edge.isRecursion() || edge.isSecondary()) {
+					continue;
+				}
+				if (!edge.isCast()) {
 					return sourceNode;
 				}
 				if (targetNode != null) {			// FIXME multi-cast support

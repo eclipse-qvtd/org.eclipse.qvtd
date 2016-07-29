@@ -18,15 +18,18 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 
-public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
+public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 {
 	public static @NonNull MappingRegion createMergedRegion(@NonNull MappingRegion primaryRegion, @NonNull MappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
 		RegionMerger regionMerger = new RegionMerger(primaryRegion, secondaryRegion, secondaryNode2primaryNode);
-		return (MappingRegion) secondaryRegion.accept(regionMerger);
+		Visitable mergedRegion = secondaryRegion.accept(regionMerger);
+		assert mergedRegion != null;
+		return (MappingRegion) mergedRegion;
 	}
 
 	protected final @NonNull MappingRegion primaryRegion;
@@ -35,7 +38,7 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 	protected final @NonNull MappingRegion mergedRegion;
 	protected final @NonNull Map<@NonNull Node, @NonNull Node> oldNode2mergedNode = new HashMap<>();
 	protected final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull Edge>> oldEdge2oldEdges = new HashMap<>();
-	protected final @NonNull Map<@NonNull Edge, @NonNull Edge> oldEdge2mergedEdge = new HashMap<>();
+	private final @NonNull Map<@NonNull Edge, @NonNull Edge> debugOldEdge2mergedEdge = new HashMap<>();
 
 	protected RegionMerger(@NonNull MappingRegion primaryRegion, @NonNull MappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
 		this.primaryRegion = primaryRegion;
@@ -79,11 +82,11 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 	private void checkEdges(@NonNull Region oldRegion) {
 		for (@NonNull Edge oldEdge : oldRegion.getEdges()) {
 			assert oldEdge.getRegion() == oldRegion;
-			if (!oldEdge.isRecursion()) {		// FIXME Remove this irregularity
+			if (!oldEdge.isRecursion() && !oldEdge.isSecondary()) {		// FIXME Remove this irregularity
 				List<@NonNull Edge> oldEdges = oldEdge2oldEdges.get(oldEdge);
 				assert oldEdges != null;
 				assert oldEdges.contains(oldEdge);
-				Edge mergedEdge = oldEdge2mergedEdge.get(oldEdge);
+				Edge mergedEdge = debugOldEdge2mergedEdge.get(oldEdge);
 				assert mergedEdge != null;
 				assert mergedEdge.getRegion() == mergedRegion;
 			}
@@ -105,9 +108,10 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 			mergedEdge = (Edge)oldEdge.accept(this);
 			break;
 		}
-		assert mergedEdge != null;
-		for (@NonNull Edge oldEdge : oldEdges) {
-			oldEdge2mergedEdge.put(oldEdge, mergedEdge);
+		if (mergedEdge != null) {
+			for (@NonNull Edge oldEdge : oldEdges) {
+				debugOldEdge2mergedEdge.put(oldEdge, mergedEdge);
+			}
 		}
 	}
 
@@ -189,7 +193,10 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 	}
 
 	@Override
-	public @NonNull Visitable visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
+	public @Nullable Visitable visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
+		if (navigationEdge.isSecondary()) {
+			return null;
+		}
 		Node mergedSourceNode = oldNode2mergedNode.get(navigationEdge.getSource());
 		Node mergedTargetNode = oldNode2mergedNode.get(navigationEdge.getTarget());
 		assert (mergedSourceNode != null) && (mergedTargetNode != null);
@@ -201,7 +208,7 @@ public class RegionMerger extends AbstractVisitor<@NonNull Visitable>
 			edgeRole = edgeRole != null ? edgeRole.merge(edgeRole2) : edgeRole2;
 		}
 		assert edgeRole != null;
-		return new BasicNavigationEdge((EdgeRole.Navigation)edgeRole, mergedRegion, mergedSourceNode, navigationEdge.getProperty(), mergedTargetNode);
+		return ((EdgeRole.Navigation)edgeRole).createEdge(mergedRegion, mergedSourceNode, navigationEdge.getProperty(), mergedTargetNode);
 	}
 
 	@Override

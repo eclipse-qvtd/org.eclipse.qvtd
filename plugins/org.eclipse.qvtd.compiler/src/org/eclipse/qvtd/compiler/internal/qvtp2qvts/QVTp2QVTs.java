@@ -310,9 +310,9 @@ public class QVTp2QVTs extends SchedulerConstants
 			//			mappingRegion.resolveRecursion();
 		}
 		List<@NonNull Region> activeRegions = new ArrayList<>(earlyRegionMerge(orderedRegions));
-		for (@NonNull Region activeRegion : activeRegions) {
-			((AbstractRegion)activeRegion).resolveRecursion();
-		}
+		//		for (@NonNull Region activeRegion : activeRegions) {
+		//			((AbstractRegion)activeRegion).resolveRecursion();
+		//		}
 		for (@NonNull OperationRegion operationRegion : multiRegion.getOperationRegions()) {
 			activeRegions.add(operationRegion);
 		}

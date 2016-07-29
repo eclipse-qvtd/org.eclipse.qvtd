@@ -106,15 +106,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		Edge predicateEdge = sourceNode.getPredicateEdge(source2targetProperty);
 		if (predicateEdge == null) {
 			predicateEdge = createNavigationEdge(sourceNode, source2targetProperty, targetNode);
-			if (!source2targetProperty.isIsMany()) {
-				Property target2sourceProperty = source2targetProperty.getOpposite();
-				if ((target2sourceProperty != null) && !target2sourceProperty.isIsMany() && target2sourceProperty.isIsRequired()) {		// FIXME do we need stronger type conformance here ??
-					Edge inverseEdge = targetNode.getPredicateEdge(target2sourceProperty);
-					if (inverseEdge == null) {
-						createNavigationEdge(targetNode, target2sourceProperty, sourceNode);
-					}
-				}
-			}
 		}
 		else {
 			assert predicateEdge.getTarget() == targetNode;
@@ -397,13 +388,15 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	} */
 
 	private void instantiate(@NonNull Node instantiatedNode, @NonNull Node extraNode) {
-		for (NavigationEdge extraEdge : extraNode.getNavigationEdges()) {
-			Node extraTargetNode = extraEdge.getTarget();
-			String name = extraTargetNode.getName();
-			ClassDatumAnalysis classDatumAnalysis = extraTargetNode.getClassDatumAnalysis();
-			Node instantiatedTargetNode = createPredicatedClassNode(name, classDatumAnalysis);
-			createNavigationEdge(instantiatedNode, extraEdge.getProperty(), instantiatedTargetNode);
-			instantiate(instantiatedTargetNode, extraTargetNode);
+		for (@NonNull NavigationEdge extraEdge : extraNode.getNavigationEdges()) {
+			if (!extraEdge.isSecondary()) {
+				Node extraTargetNode = extraEdge.getTarget();
+				String name = extraTargetNode.getName();
+				ClassDatumAnalysis classDatumAnalysis = extraTargetNode.getClassDatumAnalysis();
+				Node instantiatedTargetNode = createPredicatedClassNode(name, classDatumAnalysis);
+				createNavigationEdge(instantiatedNode, extraEdge.getProperty(), instantiatedTargetNode);
+				instantiate(instantiatedTargetNode, extraTargetNode);
+			}
 		}
 	}
 
@@ -592,10 +585,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			}
 		}
 		context.addAssignmentEdge(slotNode, property, valueNode);
-		Property oppositeProperty = property.getOpposite();
-		if (valueNode.isClassNode() && (oppositeProperty != null) && !oppositeProperty.isIsMany()) {
-			context.addAssignmentEdge(valueNode, oppositeProperty, slotNode);
-		}
 		if (navigationEdge != null) {
 			context.mergeInto(navigationEdge.getTarget(), valueNode);
 		}

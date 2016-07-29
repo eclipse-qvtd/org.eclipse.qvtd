@@ -23,4 +23,9 @@ public class BasicEdge extends AbstractEdge
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitBasicEdge(this);
 	}
+
+	@Override
+	public boolean isSecondary() {
+		return false;
+	}
 }

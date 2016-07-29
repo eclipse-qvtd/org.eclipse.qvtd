@@ -52,7 +52,7 @@ public class Edges
 
 		@Override
 		public @NonNull NavigationEdge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-			return new BasicNavigationEdge(this, region, sourceNode, source2targetProperty, targetNode);
+			return BasicNavigationEdge.createEdge(this, region, sourceNode, source2targetProperty, targetNode);
 		}
 
 		@Override
@@ -194,10 +194,10 @@ public class Edges
 		public @NonNull NavigationEdge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 			boolean resolvedNavigation = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			if (sourceNode.isLoaded() && targetNode.isLoaded()) {
-				return new BasicNavigationEdge(resolvedNavigation ? LOADED_NAVIGABLE_CAST : LOADED_UNNAVIGABLE_CAST, region, sourceNode, source2targetProperty, targetNode);
+				return (resolvedNavigation ? LOADED_NAVIGABLE_CAST : LOADED_UNNAVIGABLE_CAST).createEdge(region, sourceNode, source2targetProperty, targetNode);
 			}
 			else if (sourceNode.isPredicated() || targetNode.isPredicated()){
-				return new BasicNavigationEdge(resolvedNavigation ? PREDICATED_NAVIGABLE_CAST : PREDICATED_UNNAVIGABLE_CAST, region, sourceNode, source2targetProperty, targetNode);
+				return (resolvedNavigation ? PREDICATED_NAVIGABLE_CAST : PREDICATED_UNNAVIGABLE_CAST).createEdge(region, sourceNode, source2targetProperty, targetNode);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -327,16 +327,16 @@ public class Edges
 			boolean resolvedNavigation = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			if (sourceNode.isRealized() || targetNode.isRealized()) {
 				//				throw new UnsupportedOperationException();
-				return new BasicNavigationEdge(REALIZED, region, sourceNode, source2targetProperty, targetNode);
+				return REALIZED.createEdge(region, sourceNode, source2targetProperty, targetNode);
 			}
 			else if (sourceNode.isPredicated() || targetNode.isPredicated()) {
-				return new BasicNavigationEdge(resolvedNavigation ? PREDICATED_NAVIGABLE_NAVIGATION : PREDICATED_UNNAVIGABLE_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
+				return (resolvedNavigation ? PREDICATED_NAVIGABLE_NAVIGATION : PREDICATED_UNNAVIGABLE_NAVIGATION).createEdge(region, sourceNode, source2targetProperty, targetNode);
 			}
 			else if (sourceNode.isLoaded() || targetNode.isLoaded()) {
-				return new BasicNavigationEdge(resolvedNavigation ? LOADED_NAVIGABLE_NAVIGATION : LOADED_UNNAVIGABLE_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
+				return (resolvedNavigation ? LOADED_NAVIGABLE_NAVIGATION : LOADED_UNNAVIGABLE_NAVIGATION).createEdge(region, sourceNode, source2targetProperty, targetNode);
 			}
 			else if (sourceNode.isConstant() || targetNode.isConstant()) {
-				return new BasicNavigationEdge(resolvedNavigation ? CONSTANT_NAVIGABLE_NAVIGATION : CONSTANT_UNNAVIGABLE_NAVIGATION, region, sourceNode, source2targetProperty, targetNode);
+				return (resolvedNavigation ? CONSTANT_NAVIGABLE_NAVIGATION : CONSTANT_UNNAVIGABLE_NAVIGATION).createEdge(region, sourceNode, source2targetProperty, targetNode);
 			}
 			else {
 				throw new UnsupportedOperationException();

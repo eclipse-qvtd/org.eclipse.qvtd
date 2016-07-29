@@ -22,6 +22,12 @@ public interface NavigationEdge extends Edge, ConnectionEnd
 	void addOutgoingConnection(@NonNull EdgeConnection edgeConnection);
 
 	@Nullable EdgeConnection getIncomingConnection();
+
+	/**
+	 * Return the other edge in a pair of bidirectionally to-one edges, or null if unidirectional.
+	 */
+	@Nullable NavigationEdge getOppositeEdge();
+
 	@NonNull List<@NonNull EdgeConnection> getOutgoingConnections();
 
 	/**

@@ -18,7 +18,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNo
 /**
  * AbstractEdge.
  */
-public abstract class AbstractEdge implements Edge//, GraphStringBuilder.GraphNode
+public abstract class AbstractEdge implements Edge
 {
 	private @NonNull EdgeRole edgeRole;
 	protected final @NonNull Region region;
@@ -32,6 +32,7 @@ public abstract class AbstractEdge implements Edge//, GraphStringBuilder.GraphNo
 		this.sourceNode = sourceNode;
 		this.name = name;
 		this.targetNode = targetNode;
+		assert sourceNode != targetNode;
 		region.addEdge(this);
 		sourceNode.addOutgoingEdge(this);
 		targetNode.addIncomingEdge(this);

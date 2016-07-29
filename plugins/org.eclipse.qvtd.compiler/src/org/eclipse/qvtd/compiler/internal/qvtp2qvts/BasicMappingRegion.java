@@ -211,16 +211,6 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				assert predicateEdge.getTarget() == targetNode;
 			}
 		}
-		Property oppositeProperty = property.getOpposite();
-		if ((oppositeProperty != null) && !oppositeProperty.isIsMany()) {
-			Edge predicateEdge = targetNode.getPredicateEdge(oppositeProperty);
-			if (predicateEdge == null) {
-				Edges.NAVIGATION.createEdge(this, targetNode, oppositeProperty, sourceNode);
-			}
-			else {
-				assert predicateEdge.getTarget() == sourceNode;
-			}
-		}
 	}
 
 	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull Node simpleNode) {

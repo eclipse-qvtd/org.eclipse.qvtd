@@ -22,11 +22,47 @@ import com.google.common.collect.Iterables;
 
 public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 {
+	/**
+	 * Create, install and return the edgeRole edge for source2targetProperty from sourceNode to targetNode. If
+	 * source2targetProperty has an opposite, the opposite edge is also created and installed.
+	 */
+	public static @NonNull NavigationEdge createEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull Region region,
+			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		BasicNavigationEdge forwardEdge = new BasicNavigationEdge(edgeRole, region, sourceNode, source2targetProperty, targetNode);
+		Property target2sourceProperty = source2targetProperty.getOpposite();
+		if (target2sourceProperty != null) {
+			assert targetNode.getNavigationEdge(target2sourceProperty) == null;
+			if (!source2targetProperty.isIsMany() && !target2sourceProperty.isIsMany() /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??
+				BasicNavigationEdge reverseEdge = new BasicNavigationEdge(edgeRole, region, targetNode, target2sourceProperty, sourceNode);
+				forwardEdge.oppositeEdge = reverseEdge;
+				reverseEdge.oppositeEdge = forwardEdge;
+				if (source2targetProperty.isIsImplicit()) {
+					forwardEdge.isSecondary = true;
+				}
+				else {
+					reverseEdge.isSecondary = true;
+				}
+			}
+		}
+		return forwardEdge;
+	}
+
 	protected final @NonNull Property source2targetProperty;
+
+	/**
+	 * Non-null if this edge is part of a bidirectional pair.
+	 */
+	private @Nullable NavigationEdge oppositeEdge = null;
+
+	/**
+	 * True if this edge is the auto-created second half of a bidirectional pair.
+	 */
+	private boolean isSecondary = false;
+
 	private @Nullable EdgeConnection incomingConnection = null;
 	private @Nullable List<@NonNull EdgeConnection> outgoingConnections = null;
 
-	public BasicNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull Region region,
+	private BasicNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull Region region,
 			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		super(edgeRole, region, sourceNode, source2targetProperty.getName(), targetNode);
 		this.source2targetProperty = source2targetProperty;
@@ -62,6 +98,18 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 	}
 
 	@Override
+	public void destroy() {
+		NavigationEdge oppositeEdge = this.oppositeEdge;
+		if (oppositeEdge != null) {
+			this.oppositeEdge = null;
+			oppositeEdge.destroy();
+		}
+		else {
+			super.destroy();
+		}
+	}
+
+	@Override
 	public @NonNull String getDisplayName() {
 		return source2targetProperty.getOwningClass().getName() + "::" + source2targetProperty.getName();
 	}
@@ -82,6 +130,11 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 	}
 
 	@Override
+	public @Nullable NavigationEdge getOppositeEdge() {
+		return oppositeEdge;
+	}
+
+	@Override
 	public final @NonNull List<@NonNull EdgeConnection> getOutgoingConnections() {
 		return outgoingConnections != null ? outgoingConnections : SchedulerConstants.EMPTY_EDGE_CONNECTION_LIST;
 	}
@@ -89,6 +142,11 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 	@Override
 	public @NonNull Property getProperty() {
 		return source2targetProperty;
+	}
+
+	@Override
+	public boolean isSecondary() {
+		return isSecondary;
 	}
 
 	@Override

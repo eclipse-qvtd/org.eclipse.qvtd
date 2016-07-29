@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,6 +60,20 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 public class QVTbaseUtil
 {
+	public static final class DomainNameComparator implements Comparator<@NonNull Domain>
+	{
+		public static final @NonNull DomainNameComparator INSTANCE = new DomainNameComparator();
+
+		@Override
+		public int compare(@NonNull Domain o1, @NonNull Domain o2) {
+			TypedModel t1 = o1.getTypedModel();
+			TypedModel t2 = o2.getTypedModel();
+			String n1 = t1 != null ? t1.getName() : null;
+			String n2 = t2 != null ? t2.getName() : null;
+			return ClassUtil.safeCompareTo(n1, n2);
+		}
+	}
+
 	public static void addAllClasses(@NonNull EnvironmentView environmentView, org.eclipse.ocl.pivot.@NonNull Package pPackage) {
 		String packageName = pPackage.getName();
 		if ((packageName == null) || "".equals(packageName)) {

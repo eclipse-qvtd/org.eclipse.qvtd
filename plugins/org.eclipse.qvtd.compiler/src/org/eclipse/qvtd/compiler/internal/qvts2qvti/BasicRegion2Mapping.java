@@ -13,7 +13,6 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvti;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -75,7 +74,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -106,24 +104,10 @@ import com.google.common.collect.Iterables;
 
 public class BasicRegion2Mapping extends AbstractRegion2Mapping
 {
-	private static final class DomainNameComparator implements Comparator<@NonNull Domain>
-	{
-		public static final @NonNull DomainNameComparator INSTANCE = new DomainNameComparator();
-
-		@Override
-		public int compare(@NonNull Domain o1, @NonNull Domain o2) {
-			TypedModel t1 = o1.getTypedModel();
-			TypedModel t2 = o2.getTypedModel();
-			String n1 = t1 != null ? t1.getName() : null;
-			String n2 = t2 != null ? t2.getName() : null;
-			return ClassUtil.safeCompareTo(n1, n2);
-		}
-	}
-
 	private class ExpressionCreator extends AbstractExtendingQVTimperativeVisitor<@NonNull OCLExpression, @NonNull BasicRegion2Mapping>
 	{
-		protected final @NonNull Set<@NonNull Node> multiAccessedNodes = new HashSet<@NonNull Node>();
-		protected final @NonNull Set<@NonNull Node> conditionalNodes = new HashSet<@NonNull Node>();
+		protected final @NonNull Set<@NonNull Node> multiAccessedNodes = new HashSet<>();
+		protected final @NonNull Set<@NonNull Node> conditionalNodes = new HashSet<>();
 
 		public ExpressionCreator() {
 			super(BasicRegion2Mapping.this);
@@ -134,7 +118,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		 * Compute the nodes that are only evaluated if a run-time if-condition is satisfied, and the nodes that are always accessed more than once.
 		 */
 		private void analyzeExpressions(@NonNull Set<Node> multiAccessedNodes, @NonNull Set<Node> conditionalNodes) {
-			Set<@NonNull Node> unconditionalNodes = new HashSet<@NonNull Node>();
+			Set<@NonNull Node> unconditionalNodes = new HashSet<>();
 			for (@NonNull Edge edge : region.getRealizedEdges()) {
 				analyzeIncomingPath(edge.getTarget(), unconditionalNodes, conditionalNodes, false);
 			}
@@ -220,7 +204,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		private @NonNull List<@NonNull OCLExpression> createAll(@NonNull List<@NonNull OCLExpression> oldTypedElements) {
-			List<@NonNull OCLExpression> newTypedElements = new ArrayList<@NonNull OCLExpression>(oldTypedElements.size());
+			List<@NonNull OCLExpression> newTypedElements = new ArrayList<>(oldTypedElements.size());
 			for (@NonNull OCLExpression oldTypedElement : oldTypedElements) {
 				OCLExpression newTypedElement = create(oldTypedElement);
 				assert newTypedElement != null;
@@ -239,7 +223,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		private @NonNull List<@NonNull Variable> createVariables(@NonNull List<@NonNull Variable> oldVariables) {
-			List<@NonNull Variable> newVariables = new ArrayList<@NonNull Variable>(oldVariables.size());
+			List<@NonNull Variable> newVariables = new ArrayList<>(oldVariables.size());
 			for (@NonNull Variable oldVariable : oldVariables) {
 				Variable newVariable = createVariable(oldVariable);
 				newVariables.add(newVariable);
@@ -342,7 +326,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		@Override
 		public @NonNull OCLExpression visitCollectionLiteralExp(@NonNull CollectionLiteralExp pCollectionLiteralExp) {
-			List<@NonNull CollectionLiteralPart> clonedParts = new ArrayList<@NonNull CollectionLiteralPart>();
+			List<@NonNull CollectionLiteralPart> clonedParts = new ArrayList<>();
 			for (@NonNull CollectionLiteralPart pPart : ClassUtil.nullFree(pCollectionLiteralExp.getOwnedParts())) {
 				if (pPart instanceof CollectionItem) {
 					OCLExpression item = createNonNull(((CollectionItem)pPart).getOwnedItem());
@@ -403,7 +387,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		@Override
 		public @NonNull OCLExpression visitMapLiteralExp(@NonNull MapLiteralExp pMapLiteralExp) {
-			List<@NonNull MapLiteralPart> clonedParts = new ArrayList<@NonNull MapLiteralPart>();
+			List<@NonNull MapLiteralPart> clonedParts = new ArrayList<>();
 			for (@NonNull MapLiteralPart pPart : ClassUtil.nullFree(pMapLiteralExp.getOwnedParts())) {
 				OCLExpression key = createNonNull(pPart.getOwnedKey());
 				OCLExpression value = createNonNull(pPart.getOwnedValue());
@@ -453,7 +437,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		@Override
 		public @NonNull OCLExpression visitShadowExp(@NonNull ShadowExp pShadowExp) {
-			List<@NonNull ShadowPart> clonedParts = new ArrayList<@NonNull ShadowPart>();
+			List<@NonNull ShadowPart> clonedParts = new ArrayList<>();
 			for (@NonNull ShadowPart pPart : ClassUtil.nullFree(pShadowExp.getOwnedParts())) {
 				OCLExpression init = createNonNull(pPart.getOwnedInit());
 				String name = pPart.getName();
@@ -470,7 +454,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		@Override
 		public @NonNull OCLExpression visitTupleLiteralExp(@NonNull TupleLiteralExp pTupleLiteralExp) {
-			List<@NonNull TupleLiteralPart> clonedParts = new ArrayList<@NonNull TupleLiteralPart>();
+			List<@NonNull TupleLiteralPart> clonedParts = new ArrayList<>();
 			for (@NonNull TupleLiteralPart pPart : ClassUtil.nullFree(pTupleLiteralExp.getOwnedParts())) {
 				OCLExpression init = createNonNull(pPart.getOwnedInit());
 				String name = pPart.getName();
@@ -563,34 +547,30 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	/**
 	 * The selected head from each head group that is actually passed. Other heads are computed.
 	 */
-	private final @NonNull List<@NonNull Node> headNodes = new ArrayList<@NonNull Node>();
+	private final @NonNull List<@NonNull Node> headNodes = new ArrayList<>();
 
 	/**
-	 * The subset of possible guard nodes that all callers can pass..
+	 * The subset of possible guard nodes that all callers can pass.
 	 */
-	private final @NonNull List<@NonNull Node> guardNodes = new ArrayList<@NonNull Node>();
+	private final @NonNull List<@NonNull Node> guardNodes = new ArrayList<>();
 
 	/**
 	 * Mapping from the scheduled Nodes to their QVTi variables.
 	 */
-	private final @NonNull Map<@NonNull Node, @NonNull Variable> node2variable = new HashMap<@NonNull Node, @NonNull Variable>();
+	private final @NonNull Map<@NonNull Node, @NonNull Variable> node2variable = new HashMap<>();
 
 	/**
 	 * Mapping from the TypedModel to its ImperativeDomain.
 	 */
-	private final @NonNull Map<@NonNull TypedModel, @NonNull ImperativeDomain> typedModel2domain = new HashMap<@NonNull TypedModel, @NonNull ImperativeDomain>();
-
-	/**
-	 * Mapping from QVTi expression to Schedule Node.
-	 */
-	//	private final @NonNull Map<TypedElement, Node> qvti2node = new HashMap<TypedElement, Node>();
+	private final @NonNull Map<@NonNull TypedModel, @NonNull ImperativeDomain> typedModel2domain = new HashMap<>();
 
 	private final @NonNull ExpressionCreator expressionCreator;
-	private final @NonNull ExpressionCreator inlineExpressionCreator = new InlineExpressionCreator();
+	private final @NonNull ExpressionCreator inlineExpressionCreator;
 
 	public BasicRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		super(visitor, region);
 		this.expressionCreator = new ExpressionCreator();
+		this.inlineExpressionCreator = new InlineExpressionCreator();
 		@SuppressWarnings("unused")String name = region.getName();
 		createEmptyDomainsAndPatterns();
 		createHeadAndGuardNodeVariables();
@@ -776,8 +756,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 * Create the domains and guard/bottom patterns.
 	 */
 	private void createEmptyDomainsAndPatterns() {
-		Set<@NonNull TypedModel> checkableTypedModels = new HashSet<@NonNull TypedModel>();
-		Set<@NonNull TypedModel> enforceableTypedModels = new HashSet<@NonNull TypedModel>();
+		Set<@NonNull TypedModel> checkableTypedModels = new HashSet<>();
+		Set<@NonNull TypedModel> enforceableTypedModels = new HashSet<>();
 		for (@NonNull Node node : region.getNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
 			Type type = classDatumAnalysis.getClassDatum().getType();
@@ -815,7 +795,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			assert oldDomain == null;
 		}
 		EList<@NonNull Domain> domains = ClassUtil.nullFree(mapping.getDomain());
-		ECollections.sort(domains, DomainNameComparator.INSTANCE);
+		ECollections.sort(domains, QVTbaseUtil.DomainNameComparator.INSTANCE);
 	}
 
 	/**
@@ -938,7 +918,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (Map.Entry<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> entry : calls.entrySet()) {
 			@NonNull Region calledRegion = entry.getKey();
 			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
-			List<@NonNull MappingCallBinding> mappingCallBindings = new ArrayList<@NonNull MappingCallBinding>();
+			List<@NonNull MappingCallBinding> mappingCallBindings = new ArrayList<>();
 			for (Map.Entry<@NonNull Node, @NonNull Node> entry2 : entry.getValue().entrySet()) {
 				@NonNull Node sourceNode = entry2.getKey();
 				@NonNull Node targetNode = entry2.getValue();
@@ -946,7 +926,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				Type type = sourceExpression.getType();
 				if (type instanceof CollectionType) {
 					if (loopVariables == null) {
-						loopVariables = new HashMap<@NonNull Variable, @NonNull OCLExpression>();
+						loopVariables = new HashMap<>();
 					}
 					Type elementType = ((CollectionType)type).getElementType();
 					assert elementType != null;
@@ -991,197 +971,32 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	/**
-	 * Recurse over the guard nodes and loaded/predicates region and convert the edges to predicates and non-guard nodes to unrealized variables.
+	 * Recurse over the guard nodes and loaded/predicates region and convert the non-guard nodes to unrealized variables
+	 * and edges to predicates or inituializtions
 	 */
 	private void createNavigablePredicates() {
 		@SuppressWarnings("unused")String name = region.getName();
 		//
-		//	Categorize the relevant navigation edges
+		//	Create the navigation forest for the guardNodes roots and navigation edges.
 		//
-		Set<@NonNull NavigationEdge> backwardEdges = new HashSet<@NonNull NavigationEdge>();
-		Set<@NonNull NavigationEdge> forwardEdges = new HashSet<@NonNull NavigationEdge>();
-		//		Set<@NonNull NavigationEdge> attributeEdges = new HashSet<@NonNull NavigationEdge>();
-		/*
-		 * The nodes that form the traversal forest.
-		 */
-		Set<@NonNull Node> navigableNodes = new HashSet<@NonNull Node>();
-		/*
-		 * The edges that are not traversed while locating each node.
-		 */
-		Set<@NonNull NavigationEdge> untraversedEdges = new HashSet<@NonNull NavigationEdge>();
-		for (@NonNull NavigationEdge edge : region.getNavigationEdges()) {
-			if (edge.isRealized()) {}
-			else if (!edge.isNavigable()) {}
-			else if (edge.isCast()) {}
-			else {
-				assert !edge.isArgument();
-				assert !edge.isComputation();
-				Node sourceNode = edge.getSource();
-				navigableNodes.add(sourceNode);
-				Node targetNode = edge.getTarget();
-				if (targetNode.isNull()) {
-					untraversedEdges.add(edge);
-				}
-				else {
-					targetNode = RegionUtil.getCastTarget(targetNode);
-					Property property = edge.getProperty();
-					if (property.isIsImplicit()) {
-						backwardEdges.add(edge);
-						navigableNodes.add(targetNode);
-					}
-					//				else if (targetNode.isAttributeNode()) {
-					//					attributeEdges.add(edge);
-					//				}
-					else {
-						forwardEdges.add(edge);
-						navigableNodes.add(targetNode);
-					}
-				}
-			}
-		}
+		NavigationForestBuilder navigationForest = new NavigationForestBuilder(guardNodes, region.getNavigationEdges());
 		//
-		//	Identify the edges that need traversal to reach all nodes preferring forwardEdges.
+		//	Convert the ordered forest edges to unrealized variables and initializers.
 		//
-		/*
-		 * The edges that are traversed while locating each node and their depth in the traversal forest.
-		 */
-		Map<@NonNull NavigationEdge, @NonNull Integer> traversedEdge2depth = new HashMap<@NonNull NavigationEdge, @NonNull Integer>();
-		/*
-		 * The incoming edge for each node in the traversal forest, null at a root.
-		 */
-		Map<@NonNull Node, @Nullable NavigationEdge> traversedNode2incomingEdge = new HashMap<@NonNull Node, @Nullable NavigationEdge>();
-		for (@NonNull Node guardNode : guardNodes) {
-			traversedNode2incomingEdge.put(guardNode, null);
-		}
-		Set<@NonNull Node> moreNodes = new HashSet<@NonNull Node>(guardNodes);
-		int depth = 0;
-		while (moreNodes.size() > 0) {
-			//
-			//	Select the forward edges that make progress.
-			//
-			Set<@NonNull Node> moreMoreNodes = new HashSet<@NonNull Node>();
-			for (@NonNull Node sourceNode : moreNodes) {
-				for (@NonNull NavigationEdge edge : sourceNode.getNavigationEdges()) {
-					if (forwardEdges.contains(edge)) {
-						Node targetNode = RegionUtil.getCastTarget(edge.getTarget());
-						if (!traversedNode2incomingEdge.containsKey(targetNode)) {
-							traversedNode2incomingEdge.put(targetNode, edge);
-							moreMoreNodes.add(targetNode);
-							traversedEdge2depth.put(edge, depth);
-						}
-						else {
-							untraversedEdges.add(edge);
-						}
-					}
-				}
-			}
-			if (moreMoreNodes.isEmpty() && (traversedNode2incomingEdge.size() < navigableNodes.size())) {
-				//
-				//	Unblock an incomplete traversal by choosing a backward edge.
-				//
-				for (@NonNull NavigationEdge edge : backwardEdges) {		// FIXME maintain reducing list of possibles
-					Node sourceNode = edge.getSource();
-					if (traversedNode2incomingEdge.containsKey(sourceNode)) {
-						Node targetNode = edge.getTarget();
-						if (!traversedNode2incomingEdge.containsKey(targetNode)) {
-							traversedNode2incomingEdge.put(targetNode, edge);
-							moreMoreNodes.add(targetNode);
-							traversedEdge2depth.put(edge, depth);
-							break;
-						}
-					}
-				}
-			}
-			moreNodes = moreMoreNodes;
-			depth++;
-		}
-		//
-		//	Traverse the attributes too.
-		//
-		/*		for (@NonNull NavigationEdge edge : attributeEdges) {
-			Node targetNode = edge.getTarget();
-			if (!traversedNode2incomingEdge.containsKey(targetNode)) {
-				traversedNode2incomingEdge.put(targetNode, edge);
-			}
-			else {
-				untraversedEdges.add(edge);
-			}
-		} */
-		//
-		//	Identify the remaining untraversed edges that are not used to reach nodes and so must be reified as predicates to check nodes.
-		//
-		for (@NonNull NavigationEdge edge : forwardEdges) {
-			if (!traversedEdge2depth.containsKey(edge)) {
-				NavigationEdge oppositeEdge = getOppositeEdge(edge);
-				if ((oppositeEdge == null) || !traversedEdge2depth.containsKey(oppositeEdge)) {
-					untraversedEdges.add(edge);
-				}
-			}
-		}
-		for (@NonNull NavigationEdge edge : backwardEdges) {
-			if (!traversedEdge2depth.containsKey(edge) && !untraversedEdges.contains(edge)) {
-				NavigationEdge oppositeEdge = getOppositeEdge(edge);
-				if ((oppositeEdge == null) || (!traversedEdge2depth.containsKey(oppositeEdge) && !untraversedEdges.contains(edge))) {
-					untraversedEdges.add(edge);
-				}
-			}
-		}
-		//
-		//	Order the traversal edges shallowest first then alphabetically.
-		//
-		List<@NonNull NavigationEdge> traversedEdges = new ArrayList<@NonNull NavigationEdge>(traversedEdge2depth.keySet());
-		Collections.sort(traversedEdges, new Comparator<@NonNull NavigationEdge>() {
-			@Override
-			public int compare(@NonNull NavigationEdge o1, @NonNull NavigationEdge o2) {
-				Integer d1 = traversedEdge2depth.get(o1);
-				Integer d2 = traversedEdge2depth.get(o2);
-				assert (d1 != null) && (d2 != null);
-				if (d1 != d2) {
-					return d1 - d2;
-				}
-				String n1 = o1.getDisplayName();
-				String n2 = o2.getDisplayName();
-				return n1.compareTo(n2);
-			}
-		});
-		//
-		//	Convert the traversed edges to unrealized variables and initializers.
-		//
-		for (@NonNull NavigationEdge traversedEdge : traversedEdges) {
+		for (@NonNull NavigationEdge traversedEdge : navigationForest.getForestNavigations()) {
 			Node sourceNode = traversedEdge.getSource();
 			Node targetNode = traversedEdge.getTarget();
 			Property property = traversedEdge.getProperty();
 			OCLExpression sourceExp = createVariableExp(sourceNode);
 			OCLExpression source2targetExp = createCallExp(sourceExp, property);
-			if (targetNode.isAttributeNode()) {
-				Variable attributeVariable = node2variable.get(targetNode);
-				assert attributeVariable == null;
-				createBottomVariable(targetNode, source2targetExp);
-			}
-			else {
-				Variable classVariable = node2variable.get(targetNode);
-				assert classVariable == null;
-				createBottomVariable(targetNode, source2targetExp);
-				/*				}
-				else {
-					OCLExpression ownedInit = classVariable.getOwnedInit();
-					assert ownedInit == null;
-					if (source2targetExp != null) {
-						Type variableType = classVariable.getType();
-						Type initType = source2targetExp.getType();
-						assert variableType != null;
-						if (!initType.conformsTo(visitor.getStandardLibrary(), variableType)) {
-							source2targetExp = createOclAsTypeCallExp(source2targetExp, variableType);
-						}
-					}
-					classVariable.setOwnedInit(source2targetExp);
-				} */
-			}
+			Variable nodeVariable = node2variable.get(targetNode);
+			assert nodeVariable == null;
+			createBottomVariable(targetNode, source2targetExp);
 		}
 		//
-		//	Convert the untraversed edges to predicates.
+		//	Convert the ordered non-forest edges to predicates.
 		//
-		for (@NonNull NavigationEdge untraversedEdge : untraversedEdges) {
+		for (@NonNull NavigationEdge untraversedEdge : navigationForest.getGraphPredicates()) {
 			Node sourceNode = untraversedEdge.getSource();
 			Node targetNode = untraversedEdge.getTarget();
 			Property property = untraversedEdge.getProperty();
@@ -1195,8 +1010,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					asPredicate.setConditionExpression(matchesExp);
 					addPredicate(asPredicate);
 		}
-		/*		Set<@NonNull Node> reachableNodes = new HashSet<@NonNull Node>(guardNodes);
-		List<@NonNull Node> sourcesList = new ArrayList<@NonNull Node>(guardNodes);
+		/*		Set<@NonNull Node> reachableNodes = new HashSet<>(guardNodes);
+		List<@NonNull Node> sourcesList = new ArrayList<>(guardNodes);
 		for (int i = 0; i < sourcesList.size(); i++) {
 			@NonNull Node sourceNode = sourcesList.get(i);
 			for (@NonNull NavigationEdge edge : sourceNode.getNavigationEdges()) {		// if !edge.getEdgeRole().isRealized() && !targetNode.isNull()
@@ -1330,11 +1145,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 			else {
 				if (classAssignments == null) {
-					classAssignments = new HashMap<@NonNull Node, @NonNull List<@NonNull NavigationEdge>>();
+					classAssignments = new HashMap<>();
 				}
 				List<@NonNull NavigationEdge> edges = classAssignments.get(sourceNode);
 				if (edges == null) {
-					edges = new ArrayList<@NonNull NavigationEdge>();
+					edges = new ArrayList<>();
 					classAssignments.put(sourceNode, edges);
 				}
 				edges.add(edge);
@@ -1377,11 +1192,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//		for (@SuppressWarnings("null")@NonNull Region calledRegion : getEarliestFirstCalledRegions()) {
 		for (@NonNull Region calledRegion : region.getCallableChildren()) {
 			if (calls == null) {
-				calls = new HashMap<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>>();
+				calls = new HashMap<>();
 			}
 			Map<@NonNull Node, @NonNull Node> source2target = calls.get(calledRegion);
 			if (source2target == null) {
-				source2target = new HashMap<@NonNull Node, @NonNull Node>();
+				source2target = new HashMap<>();
 				calls.put(calledRegion, source2target);
 			}
 			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
@@ -1526,21 +1341,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 	} */
 
-	private @Nullable NavigationEdge getOppositeEdge(@NonNull NavigationEdge edge) {
-		Node targetNode = edge.getTarget();
-		Property property = edge.getProperty();
-		Property oppositeProperty = property.getOpposite();
-		if (oppositeProperty == null) {
-			return null;
-		}
-		NavigationEdge oppositeEdge = targetNode.getNavigationEdge(oppositeProperty);
-		if (oppositeEdge == null) {
-			return null;
-		}
-		assert oppositeEdge.getTarget() == edge.getSource();
-		return oppositeEdge;
-	}
-
 	private @NonNull OCLExpression getSourceExpression(@NonNull Node sourceNode) {
 		return createVariableExp(sourceNode);
 	}
@@ -1572,7 +1372,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 * Filter classAssignments to retain only one of each opposite-property assignment pair.
 	 */
 	private void pruneClassAssignments(@NonNull Map<@NonNull Node, @NonNull List<@NonNull NavigationEdge>> classAssignments) {
-		for (@NonNull Node sourceNode : new ArrayList<@NonNull Node>(classAssignments.keySet())) {
+		for (@NonNull Node sourceNode : new ArrayList<>(classAssignments.keySet())) {
 			List<@NonNull NavigationEdge> forwardEdges = classAssignments.get(sourceNode);
 			assert forwardEdges != null;
 			for (int iForward = forwardEdges.size()-1; iForward >= 0; iForward--) {

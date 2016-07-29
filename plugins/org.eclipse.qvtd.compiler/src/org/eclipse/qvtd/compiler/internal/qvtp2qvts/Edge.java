@@ -136,6 +136,11 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	 */
 	boolean isResult();
 
+	/**
+	 * Return true is this edge is the auto-created inverse edge of a bidirectional pair of edges.
+	 */
+	boolean isSecondary();
+
 	void setSource(@NonNull Node sourceNode);
 
 	void setTarget(@NonNull Node targetNode);
