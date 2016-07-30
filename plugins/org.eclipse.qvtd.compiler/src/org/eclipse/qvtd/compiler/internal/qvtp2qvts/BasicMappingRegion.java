@@ -83,7 +83,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	/**
 	 * The node for each navigable VariableDeclaration.
 	 */
-	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> variable2simpleNode = new HashMap<>();
+	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> variable2node = new HashMap<>();
 
 	/**
 	 * The extra guards to accommodate operation content.
@@ -113,64 +113,22 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				}
 			}
 		}
-		/**
-		 * Extract the reachability constraints from the predicates.
-		 */
+		//
+		// Create the BLUE/CYAN guard nodes.
+		//
+		analyzeGuardVariables();
+		//
+		// Create the GREEN realized nodes.
+		//
+		analyzeRealizedVariables();
+		//
+		// Create the initialization/predicate/computation nodes and edges
+		//
+		analyzeInitializers(guardPatterns);
+		analyzeInitializers(bottomPatterns);
 		analyzePredicates(guardPatterns);
 		analyzePredicates(bottomPatterns);
-		/**
-		 * Identify any assignments and hidden inputs.
-		 */
-		for (Predicate predicate : complexPredicates) {
-			OCLExpression conditionExpression = predicate.getConditionExpression();
-			/*			if (conditionExpression instanceof OperationCallExp) {
-				OperationCallExp callExp = (OperationCallExp)conditionExpression;
-				OperationId operationId = callExp.getReferredOperation().getOperationId();
-				if (SchedulerConstants.isSameOperation(operationId, getSchedulerConstants().getOclAnyEqualsId())) {
-					OCLExpression leftExpression = callExp.getOwnedSource();
-					OCLExpression rightExpression = callExp.getOwnedArguments().get(0);
-					Node leftNode = expressionAnalyzer.analyze(leftExpression);
-					Node rightNode = expressionAnalyzer.analyze(rightExpression);
-					if (leftNode != rightNode) {
-						if (leftNode.isKnown() && !(leftExpression instanceof NavigationCallExp)) {
-							Edges.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
-						}
-						else if (rightNode.isKnown() && !(rightExpression instanceof NavigationCallExp)) {
-							Edges.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
-						}
-						else if (leftNode.isKnown()) {
-							Edges.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
-						}
-						else if (rightNode.isKnown()) {
-							Edges.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
-						}
-						else {
-							Edges.BINDING.createEdge(this, leftNode, null, rightNode);			// FIXME
-							Edges.BINDING.createEdge(this, rightNode, null, leftNode);
-						}
-					}
-				}
-			}
-			else { */
-			Node resultNode = expressionAnalyzer.analyze(conditionExpression);
-			if (!resultNode.isTrue()) {
-				Node trueNode = Nodes.TRUE.createNode(this);
-				Edges.PREDICATE.createEdge(this, resultNode, null, trueNode);
-			}
-			else {		// FIXME ?? do includes() here explicitly
-				resultNode.destroy();
-			}
-			//			}
-		}
-		//
-		for (BottomPattern bottomPattern : bottomPatterns) {
-			for (@SuppressWarnings("null")@NonNull RealizedVariable realizedVariable : bottomPattern.getRealizedVariable()) {
-				/*assignedNodes.add(*/Nodes.REALIZED_VARIABLE.createNode(this, realizedVariable);
-			}
-			//			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
-			//				/*assignedNodes.add(*/Nodes.UNREALIZED_VARIABLE.createNode(this, variable);
-			//			}
-		}
+		analyzeComplexPredicates();
 		//
 		getHeadNodes();
 		//
@@ -236,7 +194,90 @@ public class BasicMappingRegion extends AbstractMappingRegion
 
 	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull Node simpleNode) {
 		//		assert !simpleNode.isOperation();			// FIXME testExample2_V2 violates this for an intermediate "if"
-		variable2simpleNode.put(typedElement, simpleNode);
+		variable2node.put(typedElement, simpleNode);
+	}
+
+	protected void analyzeComplexPredicates() {
+		/**
+		 * Identify any assignments and hidden inputs.
+		 */
+		for (Predicate predicate : complexPredicates) {
+			OCLExpression conditionExpression = predicate.getConditionExpression();
+			/*			if (conditionExpression instanceof OperationCallExp) {
+				OperationCallExp callExp = (OperationCallExp)conditionExpression;
+				OperationId operationId = callExp.getReferredOperation().getOperationId();
+				if (SchedulerConstants.isSameOperation(operationId, getSchedulerConstants().getOclAnyEqualsId())) {
+					OCLExpression leftExpression = callExp.getOwnedSource();
+					OCLExpression rightExpression = callExp.getOwnedArguments().get(0);
+					Node leftNode = expressionAnalyzer.analyze(leftExpression);
+					Node rightNode = expressionAnalyzer.analyze(rightExpression);
+					if (leftNode != rightNode) {
+						if (leftNode.isKnown() && !(leftExpression instanceof NavigationCallExp)) {
+							Edges.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
+						}
+						else if (rightNode.isKnown() && !(rightExpression instanceof NavigationCallExp)) {
+							Edges.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
+						}
+						else if (leftNode.isKnown()) {
+							Edges.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
+						}
+						else if (rightNode.isKnown()) {
+							Edges.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
+						}
+						else {
+							Edges.BINDING.createEdge(this, leftNode, null, rightNode);			// FIXME
+							Edges.BINDING.createEdge(this, rightNode, null, leftNode);
+						}
+					}
+				}
+			}
+			else { */
+			Node resultNode = expressionAnalyzer.analyze(conditionExpression);
+			if (!resultNode.isTrue()) {
+				Node trueNode = Nodes.TRUE.createNode(this);
+				Edges.PREDICATE.createEdge(this, resultNode, null, trueNode);
+			}
+			else {		// FIXME ?? do includes() here explicitly
+				resultNode.destroy();
+			}
+			//			}
+		}
+	}
+
+	/**
+	 * Create a BLUE/CYAN node for each guard variable.
+	 */
+	protected void analyzeGuardVariables() {
+		for (@NonNull GuardPattern guardPattern : guardPatterns) {
+			for (@NonNull Variable guardVariable : ClassUtil.nullFree(guardPattern.getVariable())) {
+				Node guardNode = getNode(guardVariable);
+				assert guardNode == null;
+				guardNode = Nodes.GUARD.createNode(this, guardVariable);
+				assert guardNode == getNode(guardVariable);
+			}
+		}
+	}
+
+	/**
+	 * Analyze the initializers to form predicates / computations.
+	 */
+	protected void analyzeInitializers(@NonNull Iterable<@NonNull ? extends CorePattern> corePatterns) {
+		for (@NonNull CorePattern corePattern : corePatterns) {
+			for (@NonNull Variable variable : ClassUtil.nullFree(corePattern.getVariable())) {
+				OCLExpression ownedInit = variable.getOwnedInit();
+				if (ownedInit != null) {
+					analyzeVariable(variable, ownedInit);
+				}
+			}
+			if (corePattern instanceof BottomPattern) {
+				for (@NonNull RealizedVariable realizedVariable : ClassUtil.nullFree(((BottomPattern)corePattern).getRealizedVariable())) {
+					OCLExpression ownedInit = realizedVariable.getOwnedInit();
+					if (ownedInit != null) {
+						analyzeVariable(realizedVariable, ownedInit);
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -244,27 +285,11 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	 * navigable as a consequence of predicate constraints.
 	 * @param bottomPatterns
 	 */
-	private void analyzePredicates(@NonNull List<@NonNull ? extends CorePattern> corePatterns) {
+	protected void analyzePredicates(@NonNull List<@NonNull ? extends CorePattern> corePatterns) {
 		//
 		//	Populate the targetVariable2sourceVariable2paths from the simple "a.b = c" style predicates,
 		//	and cache those that are too hard to analyze as complex predicates.
 		//
-		for (CorePattern corePattern : corePatterns) {
-			for (@NonNull Variable variable : ClassUtil.nullFree(corePattern.getVariable())) {
-				if (corePattern instanceof GuardPattern) {
-					Nodes.GUARD.createNode(this, variable);
-				}
-				else {
-					OCLExpression ownedInit = variable.getOwnedInit();
-					if (ownedInit != null) {
-						analyzeVariable(variable, ownedInit);
-					}
-					else {
-						Nodes.GUARD.createNode(this, variable);		// FIXME ?? should have been guard not bottom
-					}
-				}
-			}
-		}
 		for (@NonNull CorePattern corePattern : corePatterns) {
 			for (@NonNull Predicate predicate : ClassUtil.nullFree(corePattern.getPredicate())) {
 				OCLExpression conditionExpression = predicate.getConditionExpression();
@@ -287,6 +312,20 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			}
 		}
 		return;
+	}
+
+	/**
+	 * Create a GREEN node for each realized variable.
+	 */
+	protected void analyzeRealizedVariables() {
+		for (@NonNull BottomPattern bottomPattern : bottomPatterns) {
+			for (@NonNull RealizedVariable realizedVariable : ClassUtil.nullFree(bottomPattern.getRealizedVariable())) {
+				Node realizedNode = getNode(realizedVariable);
+				assert realizedNode == null;
+				realizedNode = Nodes.REALIZED_VARIABLE.createNode(this, realizedVariable);
+				assert realizedNode == getNode(realizedVariable);
+			}
+		}
 	}
 
 	//
@@ -391,6 +430,10 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		return String.valueOf(mapping.getName());
 	}
 
+	public @Nullable Node getNode(@NonNull TypedElement typedElement) {
+		return variable2node.get(typedElement);
+	}
+
 	/**
 	 * Return the boundExpression if conditionExpression is of the form
 	 * <br>"boundVariable = referenceExpression"
@@ -457,7 +500,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	}
 
 	public @NonNull Node getReferenceNode(@NonNull VariableDeclaration variable) {
-		Node node = variable2simpleNode.get(variable);
+		Node node = variable2node.get(variable);
 		if (node == null) {
 			if (variable instanceof Variable) {
 				OCLExpression ownedInit = ((Variable)variable).getOwnedInit();
@@ -479,13 +522,9 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		} */
 	}
 
-	public @Nullable Node getSimpleNode(@NonNull TypedElement typedElement) {
-		return variable2simpleNode.get(typedElement);
-	}
-
 	public @NonNull Node getUnknownNode(@NonNull TypedElement typedElement) {
 		assert !(typedElement instanceof Property);		// Property entries should be AttributeNodes
-		Node node = getSimpleNode(typedElement);
+		Node node = getNode(typedElement);
 		if (node == null) {
 			node = Nodes.UNKNOWN.createNode(this, ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
 			//			node2node.put(typedElement, node);

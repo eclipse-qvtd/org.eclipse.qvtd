@@ -498,7 +498,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, isAssignment);
 			}
 			else {
-				Node stepNode = Nodes.NAVIGABLE_ATTRIBUTE.createNode(context, targetNode, source2targetProperty);
+				Node stepNode;
+				if (isAssignment) {
+					stepNode = Nodes.REALIZED_ATTRIBUTE.createNode(context, sourceNode, source2targetProperty);
+				}
+				else {
+					stepNode = Nodes.NAVIGABLE_ATTRIBUTE.createNode(context, sourceNode, source2targetProperty);
+				}
 				//				SimpleNode stepNode = Nodes.NAVIGABLE_STEP.createSimpleNode(context, source2targetProperty.getName(), sourceNode, source2targetProperty);
 				//				navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, attributeNode);
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, stepNode, isAssignment);
@@ -532,11 +538,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		else {
 			//		navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
 			navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, isAssignment);
-			Property target2sourceProperty = source2targetProperty.getOpposite();		// FIXME move to createEdge
-			if (targetNode.isClassNode() && (target2sourceProperty != null) && !target2sourceProperty.isIsMany()) {
-				//			createRealizedEdge(targetNode, target2sourceProperty, sourceNode);
-				createNavigationOrRealizedEdge(targetNode, target2sourceProperty, sourceNode, isAssignment);
-			}
+			//			Property target2sourceProperty = source2targetProperty.getOpposite();		// FIXME move to createEdge
+			//			if (targetNode.isClassNode() && (target2sourceProperty != null) && !target2sourceProperty.isIsMany()) {
+			//			createRealizedEdge(targetNode, target2sourceProperty, sourceNode);
+			//				createNavigationOrRealizedEdge(targetNode, target2sourceProperty, sourceNode, isAssignment);
+			//			}
 		}
 		return navigationEdge;
 	}
@@ -731,6 +737,9 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		assert slotNode.isClassNode();
 		Property property = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
 		assert property != null;
+		//		Node targetNode = analyze(asNavigationAssignment.getValue());
+		//		NavigationEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, true);
+		//		Node valueNode = navigationEdge.getTarget();
 		Node valueNode = analyze(asNavigationAssignment.getValue());
 		//		if (!valueNode.isClassNode() && !valueNode.isNull()) {
 		if (valueNode.isExpression()) {
@@ -792,6 +801,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			if (type instanceof DataType) {
 				Node attributeNode = context.getPredicatedAttributeNode(sourceReferenceNode, navigationCallExp);
 				addPredicateEdge(sourceReferenceNode, referredProperty, attributeNode);
+				//				getNavigationEdge(sourceReferenceNode, referredProperty, attributeNode, false);
 				return attributeNode;
 			}
 			else {
@@ -799,6 +809,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 				assert (name != null) && (type != null);
 				Node targetReferenceNode = createStepNode(name, navigationCallExp, sourceNode);
 				addPredicateEdge(sourceReferenceNode, referredProperty, targetReferenceNode);
+				//				getNavigationEdge(sourceReferenceNode, referredProperty, targetReferenceNode, false);
 				return targetReferenceNode;
 			}
 		}
