@@ -62,9 +62,9 @@ public class Nodes
 			this.isClassNode = isClassNode;
 		}
 
-		public @NonNull Node createNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
+		public @NonNull VariableNode createNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
 			assert isClassNode == !(variable.getType() instanceof DataType);
-			return new VariableNode(this, region, variable);
+			return region.createVariableNode(this, variable);
 		}
 
 		@Override
@@ -287,23 +287,14 @@ public class Nodes
 
 		public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp) {
 			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : parentNode.isNavigable();
-			if (parentNode.isLoaded()) {
-				Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
-				assert referredProperty != null;
-				boolean isDirty = region.getSchedulerConstants().isDirty(referredProperty);
-				if (!isDirty) {
-					return (resolvedNavigable ? LOADED_NAVIGABLE_ATTRIBUTE : LOADED_UNNAVIGABLE_ATTRIBUTE).createNode(parentNode.getRegion(), parentNode, navigationCallExp);
-				}
-				else {
-					return (resolvedNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE).createNode(parentNode.getRegion(), parentNode, navigationCallExp);
-				}
+			Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
+			assert referredProperty != null;
+			boolean isDirty = region.getSchedulerConstants().isDirty(referredProperty);
+			AttributeNodeRole attributeNodeRole = getAttributeNodeRole(parentNode, resolvedNavigable, isDirty);
+			if (attributeNodeRole != null) {
+				return attributeNodeRole.createNode(parentNode.getRegion(), parentNode, navigationCallExp);
 			}
-			else if (parentNode.isPredicated()) {
-				return (resolvedNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE).createNode(parentNode.getRegion(), parentNode, navigationCallExp);
-			}
-			else if (parentNode.isRealized()) {
-				Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);	// ??never happens
-				assert referredProperty != null;
+			if (parentNode.isRealized()) {
 				return REALIZED_ATTRIBUTE.createNode(parentNode.getRegion(), parentNode, referredProperty);
 			}
 			else {
@@ -313,24 +304,32 @@ public class Nodes
 
 		public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull Property property) {
 			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : parentNode.isNavigable();
-			if (parentNode.isLoaded()) {
-				boolean isDirty = region.getSchedulerConstants().isDirty(property);
-				if (!isDirty) {
-					return (resolvedNavigable ? LOADED_NAVIGABLE_ATTRIBUTE : LOADED_UNNAVIGABLE_ATTRIBUTE).createNode(parentNode.getRegion(), parentNode, property);
-				}
-				else {
-					return (resolvedNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE).createNode(parentNode.getRegion(), parentNode, property);
-				}
+			boolean isDirty = region.getSchedulerConstants().isDirty(property);
+			AttributeNodeRole attributeNodeRole = getAttributeNodeRole(parentNode, resolvedNavigable, isDirty);
+			if (attributeNodeRole != null) {
+				return attributeNodeRole.createNode(parentNode.getRegion(), parentNode, property);
 			}
-			else if (parentNode.isPredicated()) {
-				return (resolvedNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE).createNode(parentNode.getRegion(), parentNode, property);
-			}
-			else if (parentNode.isRealized()) {
+			if (parentNode.isRealized()) {
 				return REALIZED_ATTRIBUTE.createNode(parentNode.getRegion(), parentNode, property);
 			}
 			else {
 				throw new UnsupportedOperationException();
 			}
+		}
+
+		private @Nullable AttributeNodeRole getAttributeNodeRole(@NonNull Node sourceNode, boolean isNavigable, boolean isDirty) {
+			if (sourceNode.isLoaded()) {
+				if (!isDirty) {
+					return isNavigable ? LOADED_NAVIGABLE_ATTRIBUTE : LOADED_UNNAVIGABLE_ATTRIBUTE;
+				}
+				else {
+					return isNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE;
+				}
+			}
+			else if (sourceNode.isPredicated()) {
+				return isNavigable ? PREDICATED_NAVIGABLE_ATTRIBUTE : PREDICATED_UNNAVIGABLE_ATTRIBUTE;
+			}
+			return null;
 		}
 	}
 
@@ -1086,32 +1085,35 @@ public class Nodes
 			this.isNavigable = isNavigable;
 		}
 
-		public @NonNull Node createNode(@NonNull Region region, @NonNull String name,
-				@NonNull CallExp callExp, @NonNull Node sourceNode) {
+		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
 			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
 			boolean isDirty = false;
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
 			if (callExp instanceof NavigationCallExp) {
 				Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);
 				isDirty = region.getSchedulerConstants().isDirty(referredProperty);
-				//				DomainUsage usage = region.getSchedulerConstants().basicGetDomainUsage(referredProperty);
 			}
-			//			if (!isDirty && sourceNode.isLoaded()) {
-			//				return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createNode(region, name, callExp);
-			//			}
-			if (sourceNode.isPredicated() || domainUsage.isOutput() || domainUsage.isMiddle()) {
-				return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createNode(region, name, callExp);
-			}
-			if (!isDirty && sourceNode.isLoaded()) {
-				return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createNode(region, name, callExp);
+			AbstractStepNodeRole stepNodeRole = getStepNodeRole(sourceNode, resolvedNavigable, isDirty, domainUsage.isOutput() || domainUsage.isMiddle());
+			return stepNodeRole.createNode(region, name, callExp);
+		}
+
+		/*		public @NonNull Node createNode(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property property) {
+			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
+			boolean isDirty = false;
+			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(property);
+			isDirty = region.getSchedulerConstants().isDirty(property);
+			String name = property.getName();
+			assert name != null;
+			AbstractStepNodeRole stepNodeRole = getStepNodeRole(sourceNode, resolvedNavigable, isDirty, domainUsage.isOutput() || domainUsage.isMiddle());
+			return stepNodeRole.createNode(region, name, property);
+		} */
+
+		private @NonNull AbstractStepNodeRole getStepNodeRole(@NonNull Node sourceNode, boolean isNavigable, boolean isDirty, boolean isMiddleOrOutput) {
+			if (sourceNode.isPredicated() || isMiddleOrOutput || isDirty) {
+				return isNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP;
 			}
 			else {
-				if (!isDirty) {
-					return (resolvedNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP).createNode(region, name, callExp);
-				}
-				else {
-					return (resolvedNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP).createNode(region, name, callExp);
-				}
+				return isNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP;
 			}
 		}
 	}

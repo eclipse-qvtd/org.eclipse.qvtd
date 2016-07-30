@@ -24,12 +24,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
-import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
@@ -1489,6 +1488,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return predicateEdge;
 	} */
 
+	@Override
+	public @NonNull VariableNode createVariableNode(@NonNull NodeRole nodeRole, @NonNull VariableDeclaration variable) {
+		return new VariableNode(nodeRole, this, variable);
+	}
+
 	protected @Nullable Map<@NonNull Node, @NonNull Node> expandRecursion(@NonNull Node nextNode, @NonNull Node prevNode, @NonNull Map<@NonNull Node, @NonNull Node> bindings) {
 		Node oldPrevNode = bindings.put(nextNode, prevNode);
 		if (oldPrevNode != null) {
@@ -1965,29 +1969,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			return getBestPath(Collections.singletonList(bestEdge), bestPath);
 		}
 	}
-
-	public @NonNull Node getPredicatedAttributeNode(@NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp) {
-		assert parentNode.isClassNode();
-		Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
-		assert referredProperty != null;
-		Node node = parentNode.getNavigationTarget(referredProperty);
-		//		AbstractAttributeNode node = (AbstractAttributeNode)node2node.get(property);
-		if (node == null) {
-			node = Nodes.ATTRIBUTE.createNode(parentNode.getRegion(), parentNode, navigationCallExp);
-		}
-		return node;
-	}
-
-	//	@Override
-	//	public @Nullable PredicateEdge getPredicateEdge(@NonNull ClassNode sourceNode, @NonNull Property source2targetProperty) {
-	//		Map<Property, PredicateEdge> property2predicateEdge = node2property2predicateEdge.get(sourceNode);
-	//		return property2predicateEdge != null ? property2predicateEdge.get(source2targetProperty) : null;
-	//	}
-
-	//	@Override
-	//	public @Nullable Map<Property, PredicateEdge> getPredicateEdges(@NonNull ClassNode sourceNode) {
-	//		return node2property2predicateEdge.get(sourceNode);
-	//	}
 
 	public final @NonNull Iterable<NavigationEdge> getPredicateEdges() {
 		@SuppressWarnings("unchecked")

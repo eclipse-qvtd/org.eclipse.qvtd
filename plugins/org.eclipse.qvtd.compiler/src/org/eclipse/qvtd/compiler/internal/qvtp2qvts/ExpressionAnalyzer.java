@@ -69,6 +69,12 @@ import com.google.common.collect.Iterables;
 
 public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@NonNull Node, @NonNull BasicMappingRegion>
 {
+	private static final @Nullable String @NonNull [] ifArgNames = new @Nullable String[]{"«condition»", "«then»", "«else»"};
+	private static final @Nullable String @NonNull [] mapArgNames = new @Nullable String[]{"«key»", "«value»"};
+	private static final @Nullable String @NonNull [] nullArgNames = new @Nullable String[]{null};
+	private static final @Nullable String @NonNull [] rangeArgNames = new @Nullable String[]{"«first»", "«last»"};
+	private static final @Nullable String @NonNull [] srcArgNames = new @Nullable String[]{"«source»", "«arg»"};
+
 	public class ConditionalExpressionAnalyzer extends ExpressionAnalyzer
 	{
 		protected ConditionalExpressionAnalyzer() {
@@ -99,79 +105,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		super(context);
 		this.scheduler = context.getSchedulerConstants();
 		//		this.dependencyAnalyzer = getDependencyAnalyzer();
-	}
-
-	protected @NonNull NavigationEdge addNavigationEdgeToAttribute(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		assert targetNode.isAttributeNode();
-		Type type = source2targetProperty.getType();
-		assert type instanceof DataType;
-		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
-		if (navigationEdge == null) {
-			if (!targetNode.isOperation()) {
-				navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
-			}
-			else {
-				Node attributeNode = Nodes.REALIZED_ATTRIBUTE.createNode(context, sourceNode, source2targetProperty);
-				navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, attributeNode);
-				createArgumentEdge(targetNode, "«equals»", attributeNode);
-			}
-		}
-		else {
-			//			if (navigationEdge.isRealized() && !targetNode.isRealized() && !targetNode.isOperation()) {
-			//				reTarget(navigationEdge, targetNode, true);
-			//			}
-			//			else {
-			createArgumentEdge(targetNode, "«equals»", navigationEdge.getTarget());
-			//			}
-		}
-		return navigationEdge;
-	}
-
-	protected @NonNull NavigationEdge addNavigationEdgeToClass(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		assert targetNode.isClassNode();
-		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
-		assert navigationEdge == null;
-		navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
-		Property target2sourceProperty = source2targetProperty.getOpposite();		// FIXME move to createEdge
-		if (targetNode.isClassNode() && (target2sourceProperty != null) && !target2sourceProperty.isIsMany()) {
-			createRealizedEdge(targetNode, target2sourceProperty, sourceNode);
-		}
-		return navigationEdge;
-	}
-
-	protected @NonNull NavigationEdge addNavigationEdgeToExpression(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		assert targetNode.isExpression();
-		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
-		assert navigationEdge != null;
-		Node valueNode = navigationEdge.getTarget();
-		assert valueNode.isRealized();
-		Type type = source2targetProperty.getType();
-		if (type instanceof DataType) {
-			createRealizedArgumentEdge(targetNode, null, valueNode);
-		}
-		else {
-			createArgumentEdge(targetNode, null, valueNode);
-		}
-		return navigationEdge;
-	}
-
-	protected @NonNull NavigationEdge addNavigationEdgeToNull(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		assert targetNode.isNull();
-		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
-		assert navigationEdge == null;
-		navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
-		return navigationEdge;
-	}
-
-	protected void addPredicateEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		assert sourceNode.isClassNode();
-		Edge predicateEdge = sourceNode.getPredicateEdge(source2targetProperty);
-		if (predicateEdge == null) {
-			predicateEdge = createNavigationEdge(sourceNode, source2targetProperty, targetNode);
-		}
-		else {
-			assert predicateEdge.getTarget() == targetNode;
-		}
 	}
 
 	public @NonNull Node analyze(/*@NonNull*/ Visitable element) {
@@ -245,9 +178,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			return resultNode;
 		} */
 	}
-
-	private static final @Nullable String @NonNull [] nullArgNames = new @Nullable String[]{null};
-	private static final @Nullable String @NonNull [] srcArgNames = new @Nullable String[]{"«source»", "«arg»"};
 
 	private @NonNull Node analyzeOperationCallExp_oclIsKindOf(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
 		OCLExpression argument = operationCallExp.getOwnedArguments().get(0);
@@ -327,6 +257,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Edges.ARGUMENT.createEdge(context, sourceNode, name, targetNode);
 	}
 
+	protected @NonNull Node createAttributeNode(@NonNull Node sourceNode, @NonNull NavigationCallExp callExp) {
+		return Nodes.ATTRIBUTE.createNode(context, sourceNode, callExp);
+	}
+
 	protected @NonNull Node createConnectedOperationNode(@NonNull String name, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
 		Node reusedNode = findOperationNode(name, sourceAndArgumentNodes);
 		if (reusedNode != null) {
@@ -374,6 +308,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Nodes.LET.createNode(context, letVariable, inNode);
 	}
 
+	protected @NonNull Node createNavigableAttributeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
+		return Nodes.NAVIGABLE_ATTRIBUTE.createNode(context, sourceNode, source2targetProperty);
+	}
+
 	protected @NonNull NavigationEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		return Edges.NAVIGABLE_NAVIGATION.createEdge(context, sourceNode, source2targetProperty, targetNode);
 	}
@@ -382,14 +320,14 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Edges.NAVIGATION.createEdge(context, sourceNode, source2targetProperty, targetNode);
 	}
 
-	protected @NonNull NavigationEdge createNavigationOrRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isAssignment) {
+	protected @NonNull NavigationEdge createNavigationOrRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
 		assert navigationEdge == null;
-		if (isAssignment || context.isPropertyAssignment(sourceNode, source2targetProperty)) {
+		if ((navigationAssignment != null) || context.isPropertyAssignment(sourceNode, source2targetProperty)) {
 			navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
 		}
 		else {
-			navigationEdge = createNavigableNavigationEdge(sourceNode, source2targetProperty, targetNode);
+			navigationEdge = createNavigationEdge(sourceNode, source2targetProperty, targetNode);
 		}
 		return navigationEdge;
 	}
@@ -416,6 +354,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 	protected @NonNull Edge createRealizedArgumentEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		return Edges.ArgumentEdgeRoleFactory.REALIZED_ARGUMENT.createEdge(context, sourceNode, name, targetNode);
+	}
+
+	protected @NonNull Node createRealizedAttributeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
+		return Nodes.REALIZED_ATTRIBUTE.createNode(context, sourceNode, source2targetProperty);
 	}
 
 	protected @NonNull NavigationEdge createRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
@@ -472,61 +414,52 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	 * Return the navigation edge suitable for navigating from sourceNode to targetNode via source2targetProperty,
 	 * re-using an already created edge if available, otherwise creating the edge.
 	 */
-	protected @NonNull NavigationEdge getNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isAssignment) {
+	protected @NonNull NavigationEdge getNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		if (targetNode.isNull()) {
-			return getNavigationEdgeToNull(sourceNode, source2targetProperty, targetNode, isAssignment);
+			return getNavigationEdgeToNull(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
-		else if (targetNode.isClassNode()) {
-			return getNavigationEdgeToClass(sourceNode, source2targetProperty, targetNode, isAssignment);
+		else if (targetNode.isClassNode() && !targetNode.isOperation()) {		// FIXME rationalize isXXX tests
+			return getNavigationEdgeToClass(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
 		else if (targetNode.isAttributeNode()) {
-			return getNavigationEdgeToAttribute(sourceNode, source2targetProperty, targetNode, isAssignment);
+			return getNavigationEdgeToAttribute(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
 		else {
-			return getNavigationEdgeToExpression(sourceNode, source2targetProperty, targetNode, isAssignment);
+			return getNavigationEdgeToExpression(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
 	}
 
-	protected @NonNull NavigationEdge getNavigationEdgeToAttribute(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isAssignment) {
+	protected @NonNull NavigationEdge getNavigationEdgeToAttribute(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isAttributeNode();
 		Type type = source2targetProperty.getType();
 		assert type instanceof DataType;
 		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
 		if (navigationEdge == null) {
 			if (!targetNode.isOperation()) {
-				//				navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
-				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, isAssignment);
+				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 			}
 			else {
 				Node stepNode;
-				if (isAssignment) {
-					stepNode = Nodes.REALIZED_ATTRIBUTE.createNode(context, sourceNode, source2targetProperty);
+				if (navigationAssignment != null) {
+					stepNode = createRealizedAttributeNode(sourceNode, source2targetProperty);
 				}
 				else {
-					stepNode = Nodes.NAVIGABLE_ATTRIBUTE.createNode(context, sourceNode, source2targetProperty);
+					stepNode = createNavigableAttributeNode(sourceNode, source2targetProperty);
 				}
-				//				SimpleNode stepNode = Nodes.NAVIGABLE_STEP.createSimpleNode(context, source2targetProperty.getName(), sourceNode, source2targetProperty);
-				//				navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, attributeNode);
-				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, stepNode, isAssignment);
+				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, stepNode, navigationAssignment);
 				createArgumentEdge(targetNode, "«equals»", stepNode);
 			}
 		}
 		else {
 			//			if (!navigationEdge.isRealized() || targetNode.isRealized()) {
-			createArgumentEdge(targetNode, "«equals»", navigationEdge.getTarget());
-			//			}
-			//			else if (!targetNode.isOperation()) {
-			//				reTarget(navigationEdge, targetNode, true);			// Occurs if c.x := b.x occurs before b.x := a.x
-			//			}
-			//			else {
-			//				// FIXME retarget to a LOADED / PREDICATED attribute
-			//				createArgumentEdge(targetNode, "«equals»", navigationEdge.getTarget());
-			//			}
+			if (targetNode != navigationEdge.getTarget()) {
+				createArgumentEdge(targetNode, "«equals»", navigationEdge.getTarget());
+			}
 		}
 		return navigationEdge;
 	}
 
-	protected @NonNull NavigationEdge getNavigationEdgeToClass(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isAssignment) {
+	protected @NonNull NavigationEdge getNavigationEdgeToClass(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isClassNode();
 		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
 		if (navigationEdge != null) {
@@ -537,7 +470,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 		else {
 			//		navigationEdge = createRealizedEdge(sourceNode, source2targetProperty, targetNode);
-			navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, isAssignment);
+			navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 			//			Property target2sourceProperty = source2targetProperty.getOpposite();		// FIXME move to createEdge
 			//			if (targetNode.isClassNode() && (target2sourceProperty != null) && !target2sourceProperty.isIsMany()) {
 			//			createRealizedEdge(targetNode, target2sourceProperty, sourceNode);
@@ -547,25 +480,46 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return navigationEdge;
 	}
 
-	protected @NonNull NavigationEdge getNavigationEdgeToExpression(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isAssignment) {
+	protected @NonNull NavigationEdge getNavigationEdgeToExpression(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isExpression();
-		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
-		assert navigationEdge != null;
-		Node valueNode = navigationEdge.getTarget();
-		assert valueNode.isRealized();
-		Type type = source2targetProperty.getType();
-		if (type instanceof DataType) {
-			createRealizedArgumentEdge(targetNode, null, valueNode);
+		if (navigationAssignment != null) {
+			NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+			assert navigationEdge == null;
+			//			Node valueNode = navigationEdge.getTarget();
+			//			assert valueNode.isRealized();
+			Type type = source2targetProperty.getType();
+			if (type instanceof DataType) {
+				Node attributeNode = createRealizedAttributeNode(sourceNode, source2targetProperty);
+				createArgumentEdge(targetNode, "«equals»", attributeNode);
+				targetNode = attributeNode;
+			}
+			else {
+				Node stepNode = createPredicatedClassNode(sourceNode, navigationAssignment);
+				createArgumentEdge(targetNode, "«equals»", stepNode);
+				targetNode = stepNode;
+			}
+			navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
+			return navigationEdge;
 		}
 		else {
-			createArgumentEdge(targetNode, null, valueNode);
+			NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+			assert navigationEdge != null;
+			Node valueNode = navigationEdge.getTarget();
+			assert valueNode.isRealized();
+			Type type = source2targetProperty.getType();
+			if (type instanceof DataType) {
+				createRealizedArgumentEdge(targetNode, null, valueNode);
+			}
+			else {
+				createArgumentEdge(targetNode, null, valueNode);
+			}
+			return navigationEdge;
 		}
-		return navigationEdge;
 	}
 
-	protected @NonNull NavigationEdge getNavigationEdgeToNull(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, boolean isAssignment) {
+	protected @NonNull NavigationEdge getNavigationEdgeToNull(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isNull();
-		return createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, isAssignment);
+		return createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 	}
 
 	private void instantiate(@NonNull Node instantiatedNode, @NonNull Node extraNode) {
@@ -603,8 +557,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return analyze(collectionItem.getOwnedItem());
 	}
 
-	private static final @Nullable String @NonNull [] rangeArgNames = new @Nullable String[]{"«first»", "«last»"};
-
 	@Override
 	public @NonNull Node visitCollectionRange(@NonNull CollectionRange collectionRange) {
 		Node firstNode = analyze(collectionRange.getOwnedFirst());
@@ -624,8 +576,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 		return errorNode;
 	}
-
-	private static final @Nullable String @NonNull [] ifArgNames = new @Nullable String[]{"«condition»", "«then»", "«else»"};
 
 	@Override
 	public @NonNull Node visitIfExp(@NonNull IfExp ifExp) {
@@ -701,8 +651,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			assert iteratorNode != null;
 			createArgumentEdge(iteratorNode, iterator.getName() , accumulateNode);
 		}
-		//		Node resultNode = Nodes.RESULT.createNode(context, "«result»", loopExp, sourceNode);
-		//		createArgument(accumulateNode, null, resultNode);
 		return accumulateNode;
 	}
 
@@ -717,9 +665,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		Node operationNode = createConnectedOperationNode(ClassUtil.nonNullState(mapLiteralExp.getName()), mapLiteralExp, partNodes);
 		return operationNode;
 	}
-
-	private static final @Nullable String @NonNull [] mapArgNames = new @Nullable String[]{"«key»", "«value»"};
-
 
 	@Override
 	public @NonNull Node visitMapLiteralPart(@NonNull MapLiteralPart mapLiteralPart) {
@@ -737,26 +682,9 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		assert slotNode.isClassNode();
 		Property property = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
 		assert property != null;
-		//		Node targetNode = analyze(asNavigationAssignment.getValue());
-		//		NavigationEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, true);
-		//		Node valueNode = navigationEdge.getTarget();
-		Node valueNode = analyze(asNavigationAssignment.getValue());
-		//		if (!valueNode.isClassNode() && !valueNode.isNull()) {
-		if (valueNode.isExpression()) {
-			Node computedValueNode = valueNode;
-			Type type = property.getType();
-			if (type instanceof DataType) {
-				valueNode = context.getAssignedAttributeNode(slotNode, property);
-				createRealizedArgumentEdge(computedValueNode, null, valueNode);
-			}
-			else {
-				String name = property.getName();
-				assert (name != null) && (type != null);
-				valueNode = createPredicatedClassNode(slotNode, asNavigationAssignment);
-				createArgumentEdge(computedValueNode, null, valueNode);
-			}
-		}
-		NavigationEdge navigationEdge = slotNode.getNavigationEdge(property);
+		Node targetNode = analyze(asNavigationAssignment.getValue());
+		NavigationEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);
+		Node valueNode = navigationEdge.getTarget();
 		CompleteClass valueCompleteClass = valueNode.getCompleteClass();
 		Type propertyType = ClassUtil.nonNullState(property.getType());
 		CompleteClass targetCompleteClass = scheduler.getEnvironmentFactory().getCompleteModel().getCompleteClass(propertyType);
@@ -768,7 +696,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 				}
 			}
 		}
-		context.addAssignmentEdge(slotNode, property, valueNode);
 		return slotNode;
 	}
 
@@ -781,34 +708,28 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		assert ownedSource != null;
 		Node sourceNode = analyze(ownedSource);
 		if (sourceNode.isClassNode()) {
-			Node sourceReferenceNode = sourceNode;
 			if (!referredProperty.isIsMany()) {
-				NavigationEdge navigationEdge = sourceReferenceNode.getNavigationEdge(referredProperty);
+				NavigationEdge navigationEdge = sourceNode.getNavigationEdge(referredProperty);
 				if (navigationEdge != null) {
-					Node targetNode = navigationEdge.getTarget();
-					//					if (targetNode instanceof ClassNode) {
-					return targetNode;
-					//					}
-					//					else {
-					//						return null;
-					//					}
+					return navigationEdge.getTarget();
 				}
 			}
 			Type type = referredProperty.getType();
+			assert type != null;
+			Node targetNode;
 			if (type instanceof DataType) {
-				Node attributeNode = context.getPredicatedAttributeNode(sourceReferenceNode, navigationCallExp);
-				addPredicateEdge(sourceReferenceNode, referredProperty, attributeNode);
-				//				getNavigationEdge(sourceReferenceNode, referredProperty, attributeNode, false);
-				return attributeNode;
+				targetNode = sourceNode.getNavigationTarget(referredProperty);
+				if (targetNode == null) {
+					targetNode = createAttributeNode(sourceNode, navigationCallExp);
+				}
 			}
 			else {
 				String name = referredProperty.getName();
-				assert (name != null) && (type != null);
-				Node targetReferenceNode = createStepNode(name, navigationCallExp, sourceNode);
-				addPredicateEdge(sourceReferenceNode, referredProperty, targetReferenceNode);
-				//				getNavigationEdge(sourceReferenceNode, referredProperty, targetReferenceNode, false);
-				return targetReferenceNode;
+				assert name != null;
+				targetNode = createStepNode(name, navigationCallExp, sourceNode);
 			}
+			getNavigationEdge(sourceNode, referredProperty, targetNode, null);
+			return targetNode;
 		}
 		return context.getUnknownNode(ownedSource);
 	}

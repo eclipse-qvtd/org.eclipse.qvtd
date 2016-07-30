@@ -240,7 +240,7 @@ public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 			nodeRole = nodeRole.merge(primaryNode.getNodeRole());
 		}
 		@NonNull VariableDeclaration variableDeclaration = (VariableDeclaration)variableNode.getTypedElements().iterator().next();
-		VariableNode mergedNode = new VariableNode(nodeRole, mergedRegion, variableDeclaration);
+		VariableNode mergedNode = mergedRegion.createVariableNode(nodeRole, variableDeclaration);
 		oldNode2mergedNode.put(variableNode, mergedNode);
 		for (@NonNull TypedElement typedElement : variableNode.getTypedElements()) {
 			mergedNode.addTypedElement(typedElement);

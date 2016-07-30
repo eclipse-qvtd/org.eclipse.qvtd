@@ -28,9 +28,6 @@ public class VariableNode extends AbstractNode
 		this.variable = variable;
 		assert variable.eContainer() != null;
 		assert variable.getName() != null;
-		if (region instanceof BasicMappingRegion) {
-			((BasicMappingRegion)region).addVariableNode(getVariable(), this);
-		}
 		addTypedElement(variable);
 	}
 

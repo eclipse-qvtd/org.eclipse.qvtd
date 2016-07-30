@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -40,6 +41,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	void computeCheckedOrEnforcedEdges(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2predicatedEdges,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2realizedEdges);
 	void createIncomingConnections();
+	@NonNull VariableNode createVariableNode(@NonNull NodeRole NodeRole, @NonNull VariableDeclaration variable);
 
 	/**
 	 * Return all the nodes in this region that are call-tree ancestors of node.

@@ -138,43 +138,6 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		return;
 	}
 
-	@Deprecated
-	public void addAssignmentEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		assert sourceNode.isClassNode();
-		Edge assignmentEdge = sourceNode.getAssignmentEdge(source2targetProperty);
-		if (assignmentEdge == null) {
-			Edges.REALIZED.createEdge(this, sourceNode, source2targetProperty, targetNode);
-		}
-		else {
-			assert assignmentEdge.getTarget() == targetNode;
-		}
-	}
-
-	/**
-	 * Install the path equivalence that navigation of the successive path elements starting from sourceVariable reaches targetVariable.
-	 */
-	private void addPredicateNavigation(@NonNull VariableDeclaration sourceVariable, @NonNull List<Property> path, @Nullable VariableDeclaration targetVariable) {
-		//		assert guardVariables.contains(targetVariable);
-		//		assert guardVariables.contains(sourceVariable);
-		assert path.size() == 1;		// FIXME multi-step paths
-		Property property = path.get(0);
-		assert property != null;
-		Node sourceNode = getReferenceNode(sourceVariable);
-		Node targetNode = targetVariable != null ? getReferenceNode(targetVariable) : Nodes.NULL.createNode(this);
-		assert sourceNode.isGuardVariable();
-		assert (targetVariable == null) || targetNode.isGuardVariable();
-		assert sourceNode.isClassNode();
-		if (!property.isIsMany()) {
-			Edge predicateEdge = sourceNode.getPredicateEdge(property);
-			if (predicateEdge == null) {
-				Edges.NAVIGATION.createEdge(this, sourceNode, property, targetNode);
-			}
-			else {
-				assert predicateEdge.getTarget() == targetNode;
-			}
-		}
-	}
-
 	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull Node simpleNode) {
 		//		assert !simpleNode.isOperation();			// FIXME testExample2_V2 violates this for an intermediate "if"
 		variable2node.put(typedElement, simpleNode);
@@ -332,17 +295,30 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	//	A reverse entry is also created if no PropertyCallExp is not to-one.
 	//
 	private void analyzeSimplePredicate(@Nullable VariableDeclaration boundVariable, @NonNull OCLExpression referenceExpression) {
-		List<@NonNull Property> path = new ArrayList<>();
-		for (OCLExpression expression = referenceExpression; expression instanceof NavigationCallExp; ) {
+		for (@NonNull OCLExpression expression = referenceExpression; expression instanceof NavigationCallExp; ) {
 			NavigationCallExp navigationCallExp = (NavigationCallExp)expression;
 			Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
 			assert referredProperty != null;
-			path.add(0, referredProperty);
-			expression = navigationCallExp.getOwnedSource();
+			expression = ClassUtil.nonNullState(navigationCallExp.getOwnedSource());
 			if (expression instanceof VariableExp) {
 				VariableDeclaration sourceVariable = ((VariableExp)expression).getReferredVariable();
 				assert sourceVariable != null;
-				addPredicateNavigation(sourceVariable, path, boundVariable);
+				//		assert guardVariables.contains(targetVariable);
+				//		assert guardVariables.contains(sourceVariable);
+				Node sourceNode = getReferenceNode(sourceVariable);
+				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : Nodes.NULL.createNode(this);
+				assert sourceNode.isGuardVariable();
+				assert (boundVariable == null) || targetNode.isGuardVariable();
+				assert sourceNode.isClassNode();
+				if (!referredProperty.isIsMany()) {
+					Edge predicateEdge = sourceNode.getPredicateEdge(referredProperty);
+					if (predicateEdge == null) {
+						Edges.NAVIGATION.createEdge(this, sourceNode, referredProperty, targetNode);
+					}
+					else {
+						assert predicateEdge.getTarget() == targetNode;
+					}
+				}
 			}
 		}
 	}
@@ -383,26 +359,12 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		return extraGuardNode;
 	}
 
-	/**
-	 * Create a navigable path from startNode following the edges of protoPath, re-using edges and nodes where possible.
-	 * Returns a mapping of the proto-edges to the created/re-used edges.
-	 *
-	protected @NonNull Map<Edge, Edge> createPath(@NonNull Node startNode, @NonNull List<SimpleNavigationEdge> protoPath) {
-		Map<Edge, Edge> path = new HashMap<Edge, Edge>();
-		SimpleRegion region = startNode.getRegion();
-		Node sourceNode = startNode;
-		for (SimpleNavigationEdge protoEdge : protoPath) {
-			SimpleNavigationEdge edge = sourceNode.getNavigationEdge(protoEdge.getProperty());
-			if (edge == null) {
-				Node protoTarget = protoEdge.getTarget();
-				Node targetNode = protoTarget.getNodeRole().createNode(region, protoTarget.getName(), protoTarget.getClassDatumAnalysis());
-				edge = ((NavigationEdgeRole)protoEdge.getEdgeRole()).createEdge(region, sourceNode, protoEdge.getProperty(), targetNode);
-			}
-			sourceNode = edge.getTarget();
-			path.put(protoEdge, edge);
-		}
-		return path;
-	} */
+	@Override
+	public @NonNull VariableNode createVariableNode(@NonNull NodeRole nodeRole, @NonNull VariableDeclaration variable) {
+		VariableNode variableNode = super.createVariableNode(nodeRole, variable);
+		addVariableNode(variable, variableNode);
+		return variableNode;
+	}
 
 	public @Nullable Node getExtraGuard(@NonNull ClassDatumAnalysis classDatumAnalysis) {
 		if (extraNodes != null) {
