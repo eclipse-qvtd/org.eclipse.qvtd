@@ -128,34 +128,17 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		analyzeInitializers(bottomPatterns);
 		analyzePredicates(guardPatterns);
 		analyzePredicates(bottomPatterns);
+		analyzeAssignmentValues();
 		analyzeComplexPredicates();
 		//
 		getHeadNodes();
-		//
-		for (BottomPattern bottomPattern : bottomPatterns) {
-			//			for (@SuppressWarnings("null")@NonNull Variable variable : bottomPattern.getVariable()) {
-			//				Node variableNode = getReferenceNode(variable);
-			//				OCLExpression ownedInit = variable.getOwnedInit();
-			//				if (ownedInit != null) {
-			//					Node initNode = ownedInit.accept(expressionAnalyzer);
-			//					assert initNode != null;
-			//					variable2simpleNode.put(variable, initNode);
-			//					Edges.ARGUMENT.createEdge(this, initNode, null, variableNode);
-			//					if (initNode.isConstant()) {
-			//						variableNode.mergeRole(initNode.getNodeRole());
-			//					}
-			//				}
-			//			}
-			for (@SuppressWarnings("null")@NonNull Assignment assignment : bottomPattern.getAssignment()) {
-				assignment.accept(expressionAnalyzer);
-			}
-		}
 		//
 		toGraph(new DOTStringBuilder());
 		toGraph(new GraphMLStringBuilder());
 		return;
 	}
 
+	@Deprecated
 	public void addAssignmentEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		assert sourceNode.isClassNode();
 		Edge assignmentEdge = sourceNode.getAssignmentEdge(source2targetProperty);
@@ -195,6 +178,19 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull Node simpleNode) {
 		//		assert !simpleNode.isOperation();			// FIXME testExample2_V2 violates this for an intermediate "if"
 		variable2node.put(typedElement, simpleNode);
+	}
+
+	/**
+	 * Create the BLUE/CYAN computations for the RHS of assignments.
+	 */
+	protected void analyzeAssignmentValues() {
+		AssignmentSorter assignmentSorter = new AssignmentSorter();
+		for (@NonNull BottomPattern bottomPattern : bottomPatterns) {
+			assignmentSorter.addAll(ClassUtil.nullFree(bottomPattern.getAssignment()));
+		}
+		for (@NonNull Assignment assignment : assignmentSorter.getSortedAssignments()) {
+			assignment.accept(expressionAnalyzer);
+		}
 	}
 
 	protected void analyzeComplexPredicates() {
@@ -333,7 +329,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	//	where the referenceExpression involves zero or more PropertyCallExps of a VariableExp. boundVariable may be null
 	//	for a negative application condition.
 	//
-	//	A reverse entry is also created if no PropertCallExp is not to-one.
+	//	A reverse entry is also created if no PropertyCallExp is not to-one.
 	//
 	private void analyzeSimplePredicate(@Nullable VariableDeclaration boundVariable, @NonNull OCLExpression referenceExpression) {
 		List<@NonNull Property> path = new ArrayList<>();
@@ -548,39 +544,6 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			}
 		}
 		return false;
-	}
-
-	public void mergeInto(@NonNull Node unwantedNode, @NonNull Node wantedNode) {
-		// FIXME this should be a deep merge of equivalence
-		for (@NonNull Edge unwantedEdge : new ArrayList<>(unwantedNode.getIncomingEdges())) {
-			boolean moveIt = true;
-			if (unwantedEdge instanceof NavigationEdge) {
-				NavigationEdge unwantedNavigationEdge = (NavigationEdge)unwantedEdge;
-				NavigationEdge wantedNavigationEdge = wantedNode.getNavigationEdge(unwantedNavigationEdge.getProperty());
-				if ((wantedNavigationEdge !=  null) && (unwantedNavigationEdge.getSource() == wantedNavigationEdge.getSource())) {
-					assert !unwantedNavigationEdge.isRealized();
-					moveIt = false;
-				}
-			}
-			if (moveIt) {
-				unwantedEdge.setSource(wantedNode);
-			}
-		}
-		for (@NonNull Edge unwantedEdge : new ArrayList<>(unwantedNode.getOutgoingEdges())) {
-			boolean moveIt = true;
-			if (unwantedEdge instanceof NavigationEdge) {
-				NavigationEdge unwantedNavigationEdge = (NavigationEdge)unwantedEdge;
-				NavigationEdge wantedNavigationEdge = wantedNode.getNavigationEdge(unwantedNavigationEdge.getProperty());
-				if ((wantedNavigationEdge !=  null) && (unwantedNavigationEdge.getTarget() == wantedNavigationEdge.getTarget())) {
-					assert !unwantedNavigationEdge.isRealized();
-					moveIt = false;
-				}
-			}
-			if (moveIt) {
-				unwantedEdge.setTarget(wantedNode);
-			}
-		}
-		unwantedNode.destroy();
 	}
 
 	public void registerConsumptionsAndProductions() {

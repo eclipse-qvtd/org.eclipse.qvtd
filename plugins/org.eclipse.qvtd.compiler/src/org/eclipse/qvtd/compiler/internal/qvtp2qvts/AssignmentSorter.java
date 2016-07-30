@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
@@ -81,6 +82,11 @@ public class AssignmentSorter
 	protected final @NonNull Map<@NonNull Variable, @NonNull VariableAssignment> variable2variableAssignment = new HashMap<>();
 
 	/**
+	 * FIXME List of too-complex assignments that OCL2QVTp produces; just tack them on at the end.
+	 */
+	protected final @NonNull List<@NonNull Assignment> otherAssignments = new ArrayList<>();
+
+	/**
 	 * Asd all assignments to the Set of assignments to be sorted.
 	 */
 	public void addAll(@NonNull Iterable<@NonNull Assignment> assignments) {
@@ -105,6 +111,9 @@ public class AssignmentSorter
 					Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
 					NavigationAssignment oldAssignment = property2navigationAssignable.put(targetProperty, navigationAssignment);
 					assert oldAssignment == null;
+				}
+				else {
+					otherAssignments.add(assignment);
 				}
 			}
 			else {
@@ -164,7 +173,7 @@ public class AssignmentSorter
 					OCLExpression sourceExpression = navigationCallExp.getOwnedSource();
 					if (sourceExpression instanceof VariableExp) {
 						VariableDeclaration referredVariable = ((VariableExp)sourceExpression).getReferredVariable();
-						if (referredVariable instanceof RealizedVariable) {
+						if (referredVariable.eContainer() instanceof CorePattern) {
 							Map<@NonNull Property, @NonNull NavigationAssignment> property2navigationAssignment = realizedVariable2property2navigationAssignment.get(referredVariable);
 							if (property2navigationAssignment != null) {
 								Property property = PivotUtil.getReferredProperty(navigationCallExp);
@@ -192,7 +201,7 @@ public class AssignmentSorter
 	/**
 	 * Return the assignments in a less dependent-first stable order.
 	 *
-	 * Throws IllegalStateException if there is a cyclic dependency.	 * @return
+	 * Throws IllegalStateException if there is a cyclic dependency.
 	 */
 	public @NonNull Iterable<@NonNull Assignment> getSortedAssignments() {
 		Map<@NonNull Assignment, Set<@NonNull Assignment>> targetAssignment2sourceAssignments = new HashMap<>();
@@ -220,6 +229,7 @@ public class AssignmentSorter
 			sortedAssignments.addAll(resolvedAssignments);
 			targetAssignments.removeAll(resolvedAssignments);
 		}
+		sortedAssignments.addAll(otherAssignments);
 		return sortedAssignments;
 	}
 }

@@ -769,9 +769,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			}
 		}
 		context.addAssignmentEdge(slotNode, property, valueNode);
-		if (navigationEdge != null) {
-			context.mergeInto(navigationEdge.getTarget(), valueNode);
-		}
 		return slotNode;
 	}
 
