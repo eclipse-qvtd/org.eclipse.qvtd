@@ -770,7 +770,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						checkableTypedModels.add(qvtiTypedModel);
 					}
 				}
-				if (domainUsage.isOutput()) {		// EObject is $primitive$
+				else if (domainUsage.isMiddle()) {
+					TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(null);
+					assert qvtiTypedModel != null;
+					enforceableTypedModels.add(qvtiTypedModel);
+				}
+				else if (domainUsage.isOutput()) {		// EObject is $primitive$
 					for (@NonNull TypedModel typedModel : domainUsage.getTypedModels()) {
 						TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(typedModel);
 						assert qvtiTypedModel != null;

@@ -83,6 +83,8 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	private final @NonNull Set<@NonNull Transformation> otherTransformations = new HashSet<@NonNull Transformation>();	// Workaround Bug 481658
 	private final @NonNull Map<@NonNull String, @NonNull Operation> name2operation = new HashMap<@NonNull String, @NonNull Operation>();	// Workaround Bug 481658
 
+	private /*@LazyNonNull*/ TypedModel qvtiMiddleTypedModel = null;
+
 	public QVTs2QVTiVisitor(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation qvtpTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
 		super(environmentFactory);
 		this.qvtpTransformation = qvtpTransformation;
@@ -203,6 +205,10 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 			assert typedModelName != null;
 			TypedModel qvtiTypedModel = QVTimperativeUtil.createTypedModel(typedModelName);
 			qvtiTypedModel.getUsedPackage().addAll(qvtpTypedModel.getUsedPackage());
+			if (QVTimperativeUtil.MIDDLE_DOMAIN_NAME.equals(typedModelName)) {
+				assert qvtiMiddleTypedModel  == null;
+				qvtiMiddleTypedModel = qvtiTypedModel;
+			}
 			qvtpTypedModel2qvtiTypedModel.put(qvtpTypedModel, qvtiTypedModel);
 			qvtiTransformation.getModelParameter().add(qvtiTypedModel);
 		}
@@ -267,6 +273,9 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	}
 
 	public @Nullable TypedModel getQVTiTypedModel(@Nullable TypedModel qvtpTypedModel) {
+		if (qvtpTypedModel == null) {
+			return qvtiMiddleTypedModel;
+		}
 		TypedModel qvtiTypedModel = qvtpTypedModel2qvtiTypedModel.get(qvtpTypedModel);
 		return qvtiTypedModel != null ? qvtiTypedModel : qvtpTypedModel;
 	}

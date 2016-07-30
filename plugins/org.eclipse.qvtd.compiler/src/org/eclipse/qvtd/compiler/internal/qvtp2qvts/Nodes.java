@@ -518,7 +518,7 @@ public class Nodes
 
 		public @NonNull Node createNode(@NonNull Region region, @NonNull VariableDeclaration guardVariable) {
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(guardVariable);
-			boolean isEnforceable = domainUsage.isOutput();
+			boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
 			Boolean resolvedIsClassNode = isClassNode;
 			if (resolvedIsClassNode == null) {
 				resolvedIsClassNode = !(guardVariable.getType() instanceof DataType);
