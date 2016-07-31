@@ -159,6 +159,11 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	@Override
+	public @NonNull Edge getForwardEdge() {
+		return this;
+	}
+
+	@Override
 	public @Nullable String getLabel() {
 		return name;
 	}

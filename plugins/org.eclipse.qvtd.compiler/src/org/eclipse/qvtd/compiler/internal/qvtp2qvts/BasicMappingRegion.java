@@ -44,14 +44,21 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
 
+/**
+ * A BasicMappingRegion provides the initial QVTs node-edge graph representation of a QVTp mapping.
+ */
 public class BasicMappingRegion extends AbstractMappingRegion
 {
+	public static @NonNull BasicMappingRegion createMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction) {
+		BasicMappingRegion mappingRegion = new BasicMappingRegion(multiRegion, mappingAction);
+		mappingRegion.initialize();
+		return mappingRegion;
+	}
+
 	/**
 	 * The analyzed action.
 	 */
@@ -90,7 +97,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	 */
 	private /*@LazyNonNull*/ List<@NonNull Node> extraNodes = null;
 
-	public BasicMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction) {
+	private BasicMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction) {
 		super(multiRegion);
 		this.mappingAction = mappingAction;
 		AbstractMapping mapping = mappingAction.getMapping();
@@ -113,29 +120,6 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				}
 			}
 		}
-		//
-		// Create the BLUE/CYAN guard nodes.
-		//
-		analyzeGuardVariables();
-		//
-		// Create the GREEN realized nodes.
-		//
-		analyzeRealizedVariables();
-		//
-		// Create the initialization/predicate/computation nodes and edges
-		//
-		analyzeInitializers(guardPatterns);
-		analyzeInitializers(bottomPatterns);
-		analyzePredicates(guardPatterns);
-		analyzePredicates(bottomPatterns);
-		analyzeAssignmentValues();
-		analyzeComplexPredicates();
-		//
-		getHeadNodes();
-		//
-		toGraph(new DOTStringBuilder());
-		toGraph(new GraphMLStringBuilder());
-		return;
 	}
 
 	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull Node simpleNode) {
@@ -307,8 +291,8 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				//		assert guardVariables.contains(sourceVariable);
 				Node sourceNode = getReferenceNode(sourceVariable);
 				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : Nodes.createNullNode(this, null);
-				assert sourceNode.isGuard();
-				assert (boundVariable == null) || targetNode.isGuard();
+				//				assert sourceNode.isGuard();
+				//				assert (boundVariable == null) || targetNode.isGuard();
 				assert sourceNode.isClass();
 				if (!referredProperty.isIsMany()) {
 					Edge predicateEdge = sourceNode.getPredicateEdge(referredProperty);
@@ -377,6 +361,10 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		return null;
 	}
 
+	public @NonNull AbstractMapping getMapping() {
+		return ClassUtil.nonNullState(mappingAction.getMapping());
+	}
+
 	@Override
 	public @NonNull Iterable<@NonNull MappingAction> getMappingActions() {
 		return Collections.singletonList(mappingAction);
@@ -384,8 +372,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 
 	@Override
 	public @NonNull String getName() {
-		AbstractMapping mapping = mappingAction.getMapping();
-		return String.valueOf(mapping.getName());
+		return String.valueOf(getMapping().getName());
 	}
 
 	public @Nullable Node getNode(@NonNull TypedElement typedElement) {
@@ -465,6 +452,9 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				if (ownedInit != null) {
 					node = analyzeVariable((Variable) variable, ownedInit);
 				}
+				else if (variable.eContainer() instanceof BottomPattern) {
+					node = Nodes.createUnrealizedStepNode(this, variable);
+				}
 			}
 		}
 		assert node != null : "No variable2simpleNode entry for " + variable;
@@ -488,6 +478,28 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			//			node2node.put(typedElement, node);
 		}
 		return node;
+	}
+
+	public void initialize() {
+		//
+		// Create the BLUE/CYAN guard nodes.
+		//
+		analyzeGuardVariables();
+		//
+		// Create the GREEN realized nodes.
+		//
+		analyzeRealizedVariables();
+		//
+		// Create the initialization/predicate/computation nodes and edges
+		//
+		analyzeInitializers(guardPatterns);
+		analyzeInitializers(bottomPatterns);
+		analyzePredicates(guardPatterns);
+		analyzePredicates(bottomPatterns);
+		analyzeAssignmentValues();
+		analyzeComplexPredicates();
+		//
+		getHeadNodes();
 	}
 
 	/**

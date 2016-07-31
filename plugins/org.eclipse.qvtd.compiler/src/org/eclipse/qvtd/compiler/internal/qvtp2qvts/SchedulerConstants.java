@@ -21,6 +21,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
@@ -378,7 +379,7 @@ public abstract class SchedulerConstants
 
 	public void writeCallDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
 		URI baseURI = getGraphsBaseURI();
-		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_c") + suffix + ".dot").resolve(baseURI);
+		URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_c")*/ + suffix + ".dot").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
 			DOTStringBuilder s = new DOTStringBuilder();
@@ -392,7 +393,7 @@ public abstract class SchedulerConstants
 
 	public void writeCallGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
 		URI baseURI = getGraphsBaseURI();
-		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_c") + suffix + ".graphml").resolve(baseURI);
+		URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_c")*/ + suffix + ".graphml").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
 			GraphMLStringBuilder s = new GraphMLStringBuilder();
@@ -404,9 +405,13 @@ public abstract class SchedulerConstants
 		}
 	}
 
-	public void writeDOTfile(@NonNull Region region, @NonNull String suffix) {
+	public void writeDOTfile(@NonNull Region region, @Nullable String suffix) {
 		URI baseURI = getGraphsBaseURI();
-		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_").replace("::",  "_") + suffix + ".dot").resolve(baseURI);
+		String symbolName = region.getSymbolName();
+		if (suffix != null) {
+			symbolName = symbolName + suffix;
+		}
+		URI dotURI = URI.createURI(symbolName + ".dot").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
 			DOTStringBuilder s = new DOTStringBuilder();
@@ -418,9 +423,13 @@ public abstract class SchedulerConstants
 		}
 	}
 
-	public void writeGraphMLfile(@NonNull Region region, @NonNull String suffix) {
+	public void writeGraphMLfile(@NonNull Region region, @Nullable String suffix) {
 		URI baseURI = getGraphsBaseURI();
-		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_").replace("::",  "_") + suffix + ".graphml").resolve(baseURI);
+		String symbolName = region.getSymbolName();
+		if (suffix != null) {
+			symbolName = symbolName + suffix;
+		}
+		URI dotURI = URI.createURI(symbolName + ".graphml").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
 			GraphMLStringBuilder s = new GraphMLStringBuilder();
@@ -434,7 +443,7 @@ public abstract class SchedulerConstants
 
 	public void writeRegionDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
 		URI baseURI = getGraphsBaseURI();
-		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".dot").resolve(baseURI);
+		URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".dot").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
 			DOTStringBuilder s = new DOTStringBuilder();
@@ -453,7 +462,7 @@ public abstract class SchedulerConstants
 
 	public void writeRegionGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
 		URI baseURI = getGraphsBaseURI();
-		URI dotURI = URI.createURI(region.getSymbolName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".graphml").resolve(baseURI);
+		URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".graphml").resolve(baseURI);
 		try {
 			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
 			GraphMLStringBuilder s = new GraphMLStringBuilder();

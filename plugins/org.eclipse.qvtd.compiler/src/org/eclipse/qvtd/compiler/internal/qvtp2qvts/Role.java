@@ -28,6 +28,8 @@ public interface Role extends Comparable<Role>
 	public static final @NonNull String PREDICATED_COLOR = "cyan";
 	public static final @NonNull String REALIZED_COLOR = "green";
 	public static final @NonNull String RECURSION_COLOR = "brown";
+	public static final @NonNull String SPECULATED_COLOR = "orange";
+	public static final @NonNull String SPECULATION_COLOR = "red";
 
 	public static final @NonNull Integer HEAD_WIDTH = 8;
 	public static final @NonNull Integer GUARD_WIDTH = 4;
@@ -42,6 +44,8 @@ public interface Role extends Comparable<Role>
 		LOADED,			// Known once input models loaded
 		REALIZED,		// Known once a mapping has realized its results
 		PREDICATED,		// Not known, awaiting matching
+		SPECULATION,	// Awaiting other mappings to speculate
+		SPECULATED,		// Known other mappings are speculating
 		OTHER			// Not known, nothing to do with mapping execution.
 	};
 
@@ -63,5 +67,9 @@ public interface Role extends Comparable<Role>
 
 	boolean isPredicated();
 
+	boolean isSpeculated();
+
 	boolean isRealized();
+
+	boolean isSpeculation();
 }

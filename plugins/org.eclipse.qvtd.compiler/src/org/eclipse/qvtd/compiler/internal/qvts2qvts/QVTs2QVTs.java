@@ -101,6 +101,17 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 	public @NonNull RootScheduledRegion transform(@NonNull MultiRegion multiRegion) {
 		List<@NonNull Region> activeRegions = multiRegion.getActiveRegions();
+		/*		for (@NonNull Region region : activeRegions) {
+			if (region instanceof BasicMappingRegion) {
+				Partitioner partitioner = new Partitioner((BasicMappingRegion) region);
+				Iterable<@NonNull MicroMappingRegion> partitionedRegions = partitioner.partition();
+				if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+					for (@NonNull MappingRegion mappingRegion : partitionedRegions) {
+						mappingRegion.writeDebugGraphs(null);
+					}
+				}
+			}
+		} */
 		RootScheduledRegion rootRegion = createRootRegion(activeRegions);
 		rootRegion.createSchedule();
 		createSchedule(rootRegion);

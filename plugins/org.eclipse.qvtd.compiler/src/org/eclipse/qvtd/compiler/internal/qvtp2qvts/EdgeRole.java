@@ -39,6 +39,10 @@ public interface EdgeRole extends Role
 	@Override
 	@NonNull EdgeRole asPhase(@NonNull Phase phase);
 
+	@NonNull EdgeRole asPredicated();
+	//	@NonNull EdgeRole asSpeculated();
+	//	@NonNull EdgeRole asSpeculation();
+
 	@Nullable String getArrowhead();
 
 	@Nullable String getArrowtail();

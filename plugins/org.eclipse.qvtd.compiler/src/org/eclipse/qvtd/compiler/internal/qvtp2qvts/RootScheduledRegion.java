@@ -720,7 +720,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			}
 		} */
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
-			rootContainmentRegion.writeDebugGraphs("1-create");
+			rootContainmentRegion.writeDebugGraphs(null);
 		}
 		return rootContainmentRegion;
 	}

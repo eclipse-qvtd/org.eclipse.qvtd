@@ -43,6 +43,11 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	@NonNull EdgeRole getEdgeRole();
 
 	/**
+	 * Retirn the forward form of this edge if this is a bidirectional edge, this edge otherwise.
+	 */
+	@NonNull Edge getForwardEdge();
+
+	/**
 	 * Return a formatted label to accompany the edge, or null for no label.
 	 */
 	@Nullable String getLabel();

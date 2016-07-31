@@ -21,6 +21,9 @@ public interface NavigationEdge extends Edge, ConnectionEnd
 	void addIncomingConnection(@NonNull EdgeConnection edgeConnection);
 	void addOutgoingConnection(@NonNull EdgeConnection edgeConnection);
 
+	@Override
+	@NonNull NavigationEdge getForwardEdge();
+
 	@Nullable EdgeConnection getIncomingConnection();
 
 	/**

@@ -94,7 +94,7 @@ public class QVTp2QVTs extends SchedulerConstants
 				operationRegion = new OperationRegion(multiRegion, operationDatum, specification, operationCallExp);
 				map.put(operationDatum, operationRegion);
 				if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
-					operationRegion.writeDebugGraphs("1-create");
+					operationRegion.writeDebugGraphs(null);
 				}
 			}
 			return operationRegion;
@@ -134,9 +134,9 @@ public class QVTp2QVTs extends SchedulerConstants
 	 *
 	 * Returns the orderedRegions plus the new aggregates less those aggregated.
 	 */
-	public @NonNull List<@NonNull Region> earlyRegionMerge(@NonNull List<@NonNull MappingRegion> orderedRegions) {
+	public @NonNull List<@NonNull MappingRegion> earlyRegionMerge(@NonNull List<@NonNull BasicMappingRegion> orderedRegions) {
 		Region2Depth region2depths = new Region2Depth();
-		List<@NonNull Region> outputRegions = new ArrayList<>();
+		List<@NonNull MappingRegion> outputRegions = new ArrayList<>();
 		LinkedHashSet<@NonNull MappingRegion> residualInputRegions = new LinkedHashSet<>(orderedRegions);	// order preserving fast random removal
 		while (!residualInputRegions.isEmpty()) {
 			@NonNull MappingRegion candidateRegion = residualInputRegions.iterator().next();
@@ -288,7 +288,7 @@ public class QVTp2QVTs extends SchedulerConstants
 		for (@NonNull AbstractAction abstractAction : orderedActions) {
 			if (abstractAction instanceof MappingAction) {
 				MappingAction mappingAction = (MappingAction) abstractAction;
-				BasicMappingRegion mappingRegion = new BasicMappingRegion(multiRegion, mappingAction);
+				BasicMappingRegion mappingRegion = BasicMappingRegion.createMappingRegion(multiRegion, mappingAction);
 				action2mappingRegion.put(abstractAction, mappingRegion);
 			}
 		}
@@ -299,12 +299,12 @@ public class QVTp2QVTs extends SchedulerConstants
 		}
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			for (@NonNull MappingRegion mappingRegion : mappingRegions) {
-				mappingRegion.writeDebugGraphs("1-create");
+				mappingRegion.writeDebugGraphs(null);
 			}
 		}
-		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
+		List<@NonNull BasicMappingRegion> orderedRegions = new ArrayList<>();
 		for (@NonNull AbstractAction abstractAction : orderedActions) {
-			MappingRegion mappingRegion = action2mappingRegion.get(abstractAction);
+			BasicMappingRegion mappingRegion = action2mappingRegion.get(abstractAction);
 			assert mappingRegion != null;
 			orderedRegions.add(mappingRegion);
 			//			mappingRegion.resolveRecursion();

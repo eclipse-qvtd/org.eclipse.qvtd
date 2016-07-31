@@ -25,6 +25,21 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	}
 
 	@Override
+	public @NonNull NodeRole asPredicated() {
+		return asPhase(Phase.PREDICATED);
+	}
+
+	@Override
+	public @NonNull NodeRole asSpeculated() {
+		return asPhase(Phase.SPECULATED);
+	}
+
+	@Override
+	public @NonNull NodeRole asSpeculation() {
+		return asPhase(Phase.SPECULATION);
+	}
+
+	@Override
 	public @NonNull Integer getPenwidth() {
 		return isHead() /*&& !isResult()*/ ? HEAD_WIDTH : isGuard() ? GUARD_WIDTH : LINE_WIDTH;
 	}
@@ -39,7 +54,7 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 		if (isDataType()) {
 			return "rounded";
 		}
-		return isNavigable() || isRealized() || isHead() ? null : "dashed";
+		return isNavigable() || isSpeculated() || isSpeculation() || isRealized() || isHead() ? null : "dashed";
 	}
 
 	@Override

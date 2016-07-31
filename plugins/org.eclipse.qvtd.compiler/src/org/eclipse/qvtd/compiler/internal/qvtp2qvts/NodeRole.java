@@ -21,6 +21,9 @@ public interface NodeRole extends Role
 {
 	@Override
 	@NonNull NodeRole asPhase(@NonNull Phase phase);
+	@NonNull NodeRole asPredicated();
+	@NonNull NodeRole asSpeculated();
+	@NonNull NodeRole asSpeculation();
 
 	@NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis);
 
@@ -80,5 +83,4 @@ public interface NodeRole extends Role
 	 * Redesignate a guard node as a head.
 	 */
 	@NonNull NodeRole setHead();
-
 }

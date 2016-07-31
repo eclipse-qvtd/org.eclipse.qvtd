@@ -968,11 +968,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	} */
 
 	protected @NonNull SymbolNameBuilder computeSymbolName() {
-		List<String> names = new ArrayList<String>();
-		for (@NonNull MappingAction action : getMappingActions()) {
-			names.add(action.getMapping().getName());
-		}
-		Collections.sort(names);
+		//		List<String> names = new ArrayList<String>();
+		//		for (@NonNull MappingAction action : getMappingActions()) {
+		//			names.add(action.getMapping().getName());
+		//		}
+		//		Collections.sort(names);
 		SymbolNameBuilder s = null;
 		Set<@NonNull Node> bestToOneSubRegion = null;
 		Node bestNamingNode = null;
@@ -2526,9 +2526,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return symbolName != null ? (symbolName/* + " - " + getName()*/) : getName();
 	}
 
-	public void writeDebugGraphs(@NonNull String context) {
+	public void writeDebugGraphs(@Nullable String context) {
 		SchedulerConstants scheduler = getSchedulerConstants();
-		scheduler.writeDOTfile(this, "-" + context);
-		scheduler.writeGraphMLfile(this, "-" + context);
+		scheduler.writeDOTfile(this, context != null ? "-" + context : null);
+		scheduler.writeGraphMLfile(this, context != null ? "-" + context : null);
 	}
 }

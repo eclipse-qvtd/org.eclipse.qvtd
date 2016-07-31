@@ -32,6 +32,8 @@ public abstract class AbstractRole implements Role
 			case LOADED: return LOADED_COLOR;
 			case PREDICATED: return PREDICATED_COLOR;
 			case REALIZED: return REALIZED_COLOR;
+			case SPECULATION: return SPECULATION_COLOR;
+			case SPECULATED: return SPECULATED_COLOR;
 			default: return OTHER_COLOR;
 		}
 	}
@@ -59,6 +61,16 @@ public abstract class AbstractRole implements Role
 	@Override
 	public final boolean isRealized() {
 		return phase == Phase.REALIZED;
+	}
+
+	@Override
+	public final boolean isSpeculated() {
+		return phase == Phase.SPECULATED;
+	}
+
+	@Override
+	public final boolean isSpeculation() {
+		return phase == Phase.SPECULATION;
 	}
 
 	@Override

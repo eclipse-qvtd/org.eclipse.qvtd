@@ -25,6 +25,21 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 	}
 
 	@Override
+	public @NonNull EdgeRole asPredicated() {
+		throw new IllegalStateException("Cannot created PREDICATED variant of " + this);
+	}
+
+	//	@Override
+	//	public @NonNull EdgeRole asSpeculated() {
+	//		throw new IllegalStateException("Cannot created SPECULATED variant of " + this);
+	//	}
+
+	//	@Override
+	//	public @NonNull EdgeRole asSpeculation() {
+	//		throw new IllegalStateException("Cannot created SPECULATION variant of " + this);
+	//	}
+
+	@Override
 	public @Nullable String getArrowhead() {
 		return null;
 	}

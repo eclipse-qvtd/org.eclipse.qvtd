@@ -117,7 +117,7 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 		if (style != null) {
 			s.setStyle(style);
 		}
-		if (!isSecondary()) {
+		if (!isSecondary() && (oppositeEdge2 != null)) {
 			s.setDir("both");
 			s.setArrowtail("vee");
 		}
@@ -147,6 +147,18 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 	public EdgeRole.@NonNull Navigation getEdgeRole() {
 		return (EdgeRole.Navigation)super.getEdgeRole();
 	}
+
+	@Override
+	public @NonNull NavigationEdge getForwardEdge() {
+		if (isSecondary) {
+			assert oppositeEdge != null;
+			return oppositeEdge;
+		}
+		else {
+			return this;
+		}
+	}
+
 
 	@Override
 	public final @Nullable EdgeConnection getIncomingConnection() {
