@@ -58,6 +58,10 @@ public abstract class AbstractEdge implements Edge
 		if (arrowhead != null) {
 			s.setArrowhead(arrowhead);
 		}
+		String arrowtail = getArrowtail();
+		if (arrowtail != null) {
+			s.setArrowtail(arrowtail);
+		}
 		s.setPenwidth(getPenwidth());
 		s.appendAttributedEdge(source, this, target);
 	}
@@ -137,6 +141,11 @@ public abstract class AbstractEdge implements Edge
 	@Override
 	public String getArrowhead() {
 		return edgeRole.getArrowhead();
+	}
+
+	@Override
+	public String getArrowtail() {
+		return edgeRole.getArrowtail();
 	}
 
 	@Override

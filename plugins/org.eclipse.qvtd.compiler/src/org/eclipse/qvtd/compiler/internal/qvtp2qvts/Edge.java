@@ -28,6 +28,11 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	@Nullable String getArrowhead();
 
 	/**
+	 * Return a non-standard style for the arrow tail, non-null selects bidirectional.
+	 */
+	@Nullable String getArrowtail();
+
+	/**
 	 * Return the color with which this edge is drawn.
 	 */
 	@NonNull String getColor();

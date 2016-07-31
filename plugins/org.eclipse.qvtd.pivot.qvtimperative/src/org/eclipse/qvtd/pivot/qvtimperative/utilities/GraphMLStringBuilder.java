@@ -40,9 +40,9 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	private @NonNull String shape = "rectangle";
 	private @NonNull LineType lineType = LineType.line;
 	private @NonNull String labelColor = "#000000";
-	private @NonNull ArrowType sourceArrowType = ArrowType.none;
-	private @NonNull ArrowType targetArrowType = ArrowType.delta;
-	
+	private @Nullable ArrowType sourceArrowType = null;
+	private @Nullable ArrowType targetArrowType = null;
+
 	public GraphMLStringBuilder() {
 		open();
 	}
@@ -56,17 +56,17 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		String lineColor = color;
 		Double width = Double.valueOf(penwidth);
 		s.pushTag("edge");
-			appendEdgeId();
-			appendEdgeSource(sourceId);
-			appendEdgeTarget(targetId);
-			s.pushTag("data");
-				s.appendElement("key", "d9");
-				s.pushTag("y:PolyLineEdge");
-					appendLineStyle(new LineStyle(lineColor, lineType, width));
-					appendArrows(sourceArrowType.name(), targetArrowType.name());
-					appendEdgeLabel(label, labelColor);
-				s.popTag();
-			s.popTag();
+		appendEdgeId();
+		appendEdgeSource(sourceId);
+		appendEdgeTarget(targetId);
+		s.pushTag("data");
+		s.appendElement("key", "d9");
+		s.pushTag("y:PolyLineEdge");
+		appendLineStyle(new LineStyle(lineColor, lineType, width));
+		appendArrows(sourceArrowType != null ? sourceArrowType.name() : ArrowType.none.name(), targetArrowType != null ? targetArrowType.name() : ArrowType.delta.name());
+		appendEdgeLabel(label, labelColor);
+		s.popTag();
+		s.popTag();
 		s.popTag();
 		resetAttributes();
 	}
@@ -80,20 +80,20 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		LineType lineType = LineType.line;
 		Double width = Double.valueOf(penwidth);
 		s.pushTag("node");
-			s.appendElement("id", NODEID_PREFIX + id);
-			appendData("d5");
-			s.pushTag("data");
-				s.appendElement("key", "d6");
-				s.pushTag("y:ShapeNode");
-					Geometry g = new Geometry();
-					g.adjustToText(label, 12, shapeName);
-					appendGeometry(g);
-					appendFill(fillColor);
-					appendBorder(new BorderStyle(lineColor, lineType, width));
-					appendNodeLabel(label, labelColor);
-					appendShape(shapeName);
-				s.popTag();
-			s.popTag();
+		s.appendElement("id", NODEID_PREFIX + id);
+		appendData("d5");
+		s.pushTag("data");
+		s.appendElement("key", "d6");
+		s.pushTag("y:ShapeNode");
+		Geometry g = new Geometry();
+		g.adjustToText(label, 12, shapeName);
+		appendGeometry(g);
+		appendFill(fillColor);
+		appendBorder(new BorderStyle(lineColor, lineType, width));
+		appendNodeLabel(label, labelColor);
+		appendShape(shapeName);
+		s.popTag();
+		s.popTag();
 		s.popTag();
 		resetAttributes();
 	}
@@ -104,7 +104,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		edge.appendEdgeAttributes(this, source, target);
 		resetAttributes();
 	}
-	
+
 	@Override
 	public @NonNull String appendNode(@NonNull GraphNode object) {
 		String name = node2name.get(object);
@@ -126,24 +126,24 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	@Override
 	public void pushCluster() {
 		s.pushTag("node");
-			s.appendElement("id", "gn" + graphCount++);
-			appendData("d5");
-			s.pushTag("data");
-				s.appendElement("key", "d6");
-				s.pushTag("y:ShapeNode");
-	//				appendGeometry(height, width, null, null);
-					appendFill("#ffffff");
-					s.appendTextBegin("y:NodeLabel");
-					s.appendElement("fontSize", "16");
-					s.appendElement("modelName", "sides");
-					s.appendElement("modelPosition", "n");
-					s.appendTextEnd(label);
-	//				appendShape(shapeName);
-				s.popTag();
-			s.popTag();
-			s.pushTag("graph");
-				s.appendElement("id", "gg" + graphCount++);
-				s.appendElement("edgedefault", "directed");
+		s.appendElement("id", "gn" + graphCount++);
+		appendData("d5");
+		s.pushTag("data");
+		s.appendElement("key", "d6");
+		s.pushTag("y:ShapeNode");
+		//				appendGeometry(height, width, null, null);
+		appendFill("#ffffff");
+		s.appendTextBegin("y:NodeLabel");
+		s.appendElement("fontSize", "16");
+		s.appendElement("modelName", "sides");
+		s.appendElement("modelPosition", "n");
+		s.appendTextEnd(label);
+		//				appendShape(shapeName);
+		s.popTag();
+		s.popTag();
+		s.pushTag("graph");
+		s.appendElement("id", "gg" + graphCount++);
+		s.appendElement("edgedefault", "directed");
 	}
 
 	protected void resetAttributes() {
@@ -152,15 +152,31 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		lineType = LineType.line;
 		penwidth = "2.0";
 		shape = "rectangle";
-		sourceArrowType = ArrowType.none;
-		targetArrowType = ArrowType.delta;
+		sourceArrowType = null;
+		targetArrowType = null;
 	}
 
 	@Override
 	public void setArrowhead(@NonNull String arrowhead) {
-		if ("oinv".equals(arrowhead)) {
+		//		if ("oinv".equals(arrowhead)) {
+		//			sourceArrowType = ArrowType.delta;
+		//			targetArrowType = ArrowType.none;
+		//		}
+		if ("normal".equals(arrowhead)) {
+			targetArrowType = ArrowType.delta;
+		}
+		else if ("vee".equals(arrowhead)) {
+			targetArrowType = ArrowType.standard;
+		}
+	}
+
+	@Override
+	public void setArrowtail(@NonNull String arrowtail) {
+		if ("normal".equals(arrowtail)) {
 			sourceArrowType = ArrowType.delta;
-			targetArrowType = ArrowType.none;
+		}
+		else if ("vee".equals(arrowtail)) {
+			sourceArrowType = ArrowType.standard;
 		}
 	}
 
@@ -171,8 +187,21 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	}
 
 	@Override
+	public void setDir(@NonNull String direction) {
+	}
+
+	@Override
 	public void setHead() {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void setHeadlabel(/*@NonNull*/ String label) {
+		String replace = "  " + label.replace("\\n", "  \n  ") + "  ";
+		if (replace.length() < 10) {
+			replace = "   " + replace + "    ";
+		}
+		this.label = replace;
 	}
 
 	@Override
@@ -207,7 +236,16 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 			shape = ShapeType.roundrectangle.toString();
 		}
 	}
-	
+
+	@Override
+	public void setTaillabel(/*@NonNull*/ String label) {
+		String replace = "  " + label.replace("\\n", "  \n  ") + "  ";
+		if (replace.length() < 10) {
+			replace = "   " + replace + "    ";
+		}
+		this.label = replace;
+	}
+
 	@Override
 	public @NonNull String toString() {
 		close();

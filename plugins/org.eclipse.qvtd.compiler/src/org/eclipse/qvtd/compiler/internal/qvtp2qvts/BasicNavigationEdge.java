@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 
 import com.google.common.collect.Iterables;
 
@@ -98,6 +99,34 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 	}
 
 	@Override
+	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
+		s.setColor(getColor());
+		@Nullable
+		NavigationEdge oppositeEdge2 = oppositeEdge;
+		if (oppositeEdge2 != null) {
+			String oppositeLabel = oppositeEdge2.getLabel();
+			if ((oppositeLabel != null) && !oppositeEdge2.getProperty().getName().equals(((Node)source).getClassDatumAnalysis().getCompleteClass().getName())) {
+				s.setTaillabel(oppositeLabel);
+			}
+		}
+		String label = getLabel();
+		if (label != null) {
+			s.setHeadlabel(label);
+		}
+		String style = getStyle();
+		if (style != null) {
+			s.setStyle(style);
+		}
+		if (!isSecondary()) {
+			s.setDir("both");
+			s.setArrowtail("vee");
+		}
+		s.setArrowhead("normal");
+		s.setPenwidth(getPenwidth());
+		s.appendAttributedEdge(source, this, target);
+	}
+
+	@Override
 	public void destroy() {
 		NavigationEdge oppositeEdge = this.oppositeEdge;
 		if (oppositeEdge != null) {
@@ -169,7 +198,10 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
-		if ((incomingConnection == null) && (outgoingConnections == null)) {
+		if (isSecondary()) {
+			// Let primary draw a bidirectional edge
+		}
+		else if ((incomingConnection == null) && (outgoingConnections == null)) {
 			super.toGraph(s);
 		}
 		else {

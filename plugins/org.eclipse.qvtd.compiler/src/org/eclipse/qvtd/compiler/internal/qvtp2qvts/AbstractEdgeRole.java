@@ -25,6 +25,11 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 	}
 
 	@Override
+	public @Nullable String getArrowtail() {
+		return null;
+	}
+
+	@Override
 	public @Nullable String getLabel() {
 		return null;
 	}

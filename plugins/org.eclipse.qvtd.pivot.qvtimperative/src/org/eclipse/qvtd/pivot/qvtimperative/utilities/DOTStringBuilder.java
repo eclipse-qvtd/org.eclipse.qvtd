@@ -35,20 +35,20 @@ public class DOTStringBuilder implements GraphStringBuilder
 	private final @NonNull Map<String, Set<String>> edges = new HashMap<String, Set<String>>();
 	private final @NonNull List<String> clusterName = new ArrayList<String>();
 	private final @NonNull Map<String,String> attributes = new HashMap<String,String>();
-	
+
 	public DOTStringBuilder() {
 		append("digraph ");
 		append("schedule");
 		append(" {");
 		indents++;
-//		newLine();		-- one line to facitate dual use of toString() in debugger
+		//		newLine();		-- one line to facitate dual use of toString() in debugger
 		append("fontname=arial;");
-//		newLine();
+		//		newLine();
 		append("edge [fontname=arial,penwidth=2];");
-//		newLine();
+		//		newLine();
 		append("node [shape=rectangle,fontname=arial,penwidth=2];");
-//		newLine();
-		append("compound=true;");
+		//		newLine();
+		append("nodesep=1;ranksep=1;compound=true;");
 		newLine();
 	}
 
@@ -131,11 +131,11 @@ public class DOTStringBuilder implements GraphStringBuilder
 			append(sourceName);
 			append(" -> ");
 			append(targetName);
-//			if (source instanceof DOTNode) {
-//				attributes.clear();
-//				((DOTNode)source).appendEdgeAttributes(this, target);
-//				appendAttributes();
-//			}
+			//			if (source instanceof DOTNode) {
+			//				attributes.clear();
+			//				((DOTNode)source).appendEdgeAttributes(this, target);
+			//				appendAttributes();
+			//			}
 			newLine();
 		}
 	}
@@ -144,20 +144,20 @@ public class DOTStringBuilder implements GraphStringBuilder
 	public void appendEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
 		String sourceName = appendNode(source);
 		String targetName = appendNode(target);
-//		Set<String> edgeSet = edges.get(sourceName);
-//		if (edgeSet == null) {
-//			edgeSet = new HashSet<String> ();
-//			edges.put(sourceName, edgeSet);
-//		}
-//		if (edgeSet.add(targetName)) {
-			append(sourceName);
-			append(" -> ");
-			append(targetName);
-			attributes.clear();
-			edge.appendEdgeAttributes(this, source, target);
-			appendAttributes();
-			newLine();
-//		}
+		//		Set<String> edgeSet = edges.get(sourceName);
+		//		if (edgeSet == null) {
+		//			edgeSet = new HashSet<String> ();
+		//			edges.put(sourceName, edgeSet);
+		//		}
+		//		if (edgeSet.add(targetName)) {
+		append(sourceName);
+		append(" -> ");
+		append(targetName);
+		attributes.clear();
+		edge.appendEdgeAttributes(this, source, target);
+		appendAttributes();
+		newLine();
+		//		}
 	}
 
 	public void appendEdge(@NonNull GraphNode source, @NonNull GraphNode target, @Nullable String suffix) {
@@ -253,13 +253,29 @@ public class DOTStringBuilder implements GraphStringBuilder
 	}
 
 	@Override
+	public void setArrowtail(@NonNull String value) {
+		attributes.put("arrowtail", value);
+		attributes.put("arrowsize", "1.5");
+	}
+
+	@Override
 	public void setColor(@NonNull String value) {
 		attributes.put("color", value);
 	}
 
 	@Override
+	public void setDir(@NonNull String direction) {
+		attributes.put("dir", direction);
+	}
+
+	@Override
 	public void setHead() {
 		attributes.put("head", "true");
+	}
+
+	@Override
+	public void setHeadlabel(/*@NonNull*/ String value) {
+		attributes.put("headlabel",  '"' + value + '"');
 	}
 
 	@Override
@@ -288,7 +304,12 @@ public class DOTStringBuilder implements GraphStringBuilder
 	public void setStyle(@NonNull String value) {
 		attributes.put("style", value);
 	}
-	
+
+	@Override
+	public void setTaillabel(/*@NonNull*/ String value) {
+		attributes.put("taillabel",  '"' + value + '"');
+	}
+
 	@Override
 	public @NonNull String toString() {
 		if (indents > 0) {

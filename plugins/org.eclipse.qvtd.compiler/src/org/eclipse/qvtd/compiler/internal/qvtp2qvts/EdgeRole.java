@@ -38,6 +38,8 @@ public interface EdgeRole extends Role
 
 	@Nullable String getArrowhead();
 
+	@Nullable String getArrowtail();
+
 	/**
 	 * Return a label for the edge, null for none.
 	 */

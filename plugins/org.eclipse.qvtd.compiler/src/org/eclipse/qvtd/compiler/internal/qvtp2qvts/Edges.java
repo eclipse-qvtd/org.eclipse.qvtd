@@ -56,6 +56,11 @@ public class Edges
 		}
 
 		@Override
+		public @Nullable String getArrowtail() {
+			return "vee";
+		}
+
+		@Override
 		public @Nullable String getLabel(@NonNull Property source2targetProperty) {
 			if (source2targetProperty.eContainer() != null) {
 				return getName(source2targetProperty) + "\\n" + SchedulerConstants.getMultiplicity(source2targetProperty);
