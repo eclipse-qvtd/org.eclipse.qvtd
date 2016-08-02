@@ -329,7 +329,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
 				Node stepNode = Nodes.REALIZED_VARIABLE.createNode(this, variable);
-				Edges.ARGUMENT.createEdge(this, initNode, null, stepNode);
+				Edges.EXPRESSION.createEdge(this, initNode, null, stepNode);
 				initNode = stepNode;
 			}
 			//			else if (variable.getType() instanceof CollectionType) {
@@ -340,7 +340,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			else {
 				//				Node stepNode = Nodes.STEP.createNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
 				Node stepNode = Nodes.UNREALIZED_VARIABLE.createNode(this, variable);
-				Edges.ARGUMENT.createEdge(this, initNode, null, stepNode);
+				Edges.EXPRESSION.createEdge(this, initNode, null, stepNode);
 				initNode = stepNode;
 			}
 		}

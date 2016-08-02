@@ -71,11 +71,6 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	@NonNull Node getTarget();
 
 	/**
-	 * Return true if this edge is for an expression argument.
-	 */
-	boolean isArgument();
-
-	/**
 	 * Return true if this edge is for an oclAsType cast.
 	 */
 	boolean isCast();
@@ -89,6 +84,11 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	 * Return true if this edge conveys a compile-time constant.
 	 */
 	boolean isConstant();
+
+	/**
+	 * Return true if this edge is for an expression.
+	 */
+	boolean isExpression();
 
 	/**
 	 * Return true if the source of this edge has a known value, because it is inherently constant, or

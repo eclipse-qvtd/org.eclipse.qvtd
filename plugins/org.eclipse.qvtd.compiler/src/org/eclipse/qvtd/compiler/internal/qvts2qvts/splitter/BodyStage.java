@@ -35,7 +35,7 @@ class BodyStage extends AbstractStage
 	private static void computeOperationSources(Set<@NonNull Node> nodes, @NonNull Node node) {
 		if (nodes.add(node)) {
 			for (@NonNull Edge edge : node.getIncomingEdges()) {
-				if (edge.isArgument()) {
+				if (edge.isExpression()) {
 					computeOperationSources(nodes, edge.getSource());
 				}
 			}

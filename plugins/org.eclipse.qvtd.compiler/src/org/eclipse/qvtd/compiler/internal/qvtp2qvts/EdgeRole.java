@@ -55,13 +55,13 @@ public interface EdgeRole extends Role
 	 */
 	@Nullable String getStyle();
 
-	/**
-	 * Return  true if this edge provides an argument for an OCL expression node.
-	 */
-	boolean isArgument();
-
 	boolean isCast();
 	boolean isComputation();
+
+	/**
+	 * Return true if this edge is for an expression.
+	 */
+	boolean isExpression();
 
 	/**
 	 * Return true if this edge forms part of the to-one navigation reachable from a head.

@@ -67,7 +67,7 @@ public class OperationRegion extends AbstractRegion
 		extraNode = selfNode;
 		//
 		resultNode = Nodes.UNNAVIGABLE_STEP.createNode(this, "result", operationCallExp, extraNode);
-		Edges.ARGUMENT.createEdge(this, extraNode, null, resultNode);
+		Edges.EXPRESSION.createEdge(this, extraNode, null, resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();

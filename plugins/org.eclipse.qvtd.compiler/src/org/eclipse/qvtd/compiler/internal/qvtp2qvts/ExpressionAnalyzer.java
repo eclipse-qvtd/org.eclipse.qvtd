@@ -155,7 +155,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		OCLExpression argument = operationCallExp.getOwnedArguments().get(0);
 		if (!(argument instanceof TypeExp)) {
 			Node argumentNode = analyze(argument);
-			createArgumentEdge(argumentNode, "«arg»", castNode);
+			createExpressionEdge(argumentNode, "«arg»", castNode);
 		}
 		return castNode;
 		/*		OperationNode operationNode = new OperationNode(context, operationCallExp.getReferredOperation().getName(), context.getClassDatumAnalysis(operationCallExp));
@@ -253,10 +253,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		} */
 	}
 
-	protected @NonNull Edge createArgumentEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return Edges.ARGUMENT.createEdge(context, sourceNode, name, targetNode);
-	}
-
 	protected @NonNull Node createAttributeNode(@NonNull Node sourceNode, @NonNull NavigationCallExp callExp) {
 		return Nodes.ATTRIBUTE.createNode(context, sourceNode, callExp);
 	}
@@ -269,7 +265,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 		Node operationNode = createOperationNode(name, typedElement, sourceAndArgumentNodes);
 		for (int i = 0; i < sourceAndArgumentNodes.length; i++) {
-			createArgumentEdge(ClassUtil.nonNullState(sourceAndArgumentNodes[i]), /*iSize > 1 ?*/ "«arg" + i + "»"/*: null*/, operationNode);
+			createExpressionEdge(ClassUtil.nonNullState(sourceAndArgumentNodes[i]), /*iSize > 1 ?*/ "«arg" + i + "»"/*: null*/, operationNode);
 		}
 		return operationNode;
 	}
@@ -283,7 +279,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 		Node operationNode = createOperationNode(name, typedElement, sourceAndArgumentNodes);
 		for (int i = 0; i < sourceAndArgumentNodes.length; i++) {
-			createArgumentEdge(ClassUtil.nonNullState(sourceAndArgumentNodes[i]), argNames[i], operationNode);
+			createExpressionEdge(ClassUtil.nonNullState(sourceAndArgumentNodes[i]), argNames[i], operationNode);
 		}
 		return operationNode;
 	}
@@ -294,6 +290,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 	protected @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		return Nodes.ERROR.createNode(context, name, classDatumAnalysis);
+	}
+
+	protected @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+		return Edges.EXPRESSION.createEdge(context, sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
@@ -353,7 +353,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Edge createRealizedArgumentEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return Edges.ArgumentEdgeRoleFactory.REALIZED_ARGUMENT.createEdge(context, sourceNode, name, targetNode);
+		return Edges.ExpressionEdgeRoleFactory.REALIZED_EXPRESSION.createEdge(context, sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Node createRealizedAttributeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
@@ -447,13 +447,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 					stepNode = createNavigableAttributeNode(sourceNode, source2targetProperty);
 				}
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, stepNode, navigationAssignment);
-				createArgumentEdge(targetNode, "«equals»", stepNode);
+				createExpressionEdge(targetNode, "«equals»", stepNode);
 			}
 		}
 		else {
 			//			if (!navigationEdge.isRealized() || targetNode.isRealized()) {
 			if (targetNode != navigationEdge.getTarget()) {
-				createArgumentEdge(targetNode, "«equals»", navigationEdge.getTarget());
+				createExpressionEdge(targetNode, "«equals»", navigationEdge.getTarget());
 			}
 		}
 		return navigationEdge;
@@ -465,7 +465,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		if (navigationEdge != null) {
 			Node target = navigationEdge.getTarget();
 			if (target != targetNode) {
-				createArgumentEdge(targetNode, "«equals»", target);
+				createExpressionEdge(targetNode, "«equals»", target);
 			}
 		}
 		else {
@@ -490,12 +490,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			Type type = source2targetProperty.getType();
 			if (type instanceof DataType) {
 				Node attributeNode = createRealizedAttributeNode(sourceNode, source2targetProperty);
-				createArgumentEdge(targetNode, "«equals»", attributeNode);
+				createExpressionEdge(targetNode, "«equals»", attributeNode);
 				targetNode = attributeNode;
 			}
 			else {
 				Node stepNode = createPredicatedClassNode(sourceNode, navigationAssignment);
-				createArgumentEdge(targetNode, "«equals»", stepNode);
+				createExpressionEdge(targetNode, "«equals»", stepNode);
 				targetNode = stepNode;
 			}
 			navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
@@ -511,7 +511,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 				createRealizedArgumentEdge(targetNode, null, valueNode);
 			}
 			else {
-				createArgumentEdge(targetNode, null, valueNode);
+				createExpressionEdge(targetNode, null, valueNode);
 			}
 			return navigationEdge;
 		}
@@ -572,7 +572,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		Node errorNode = createErrorNode("«error»", classDatumAnalysis);
 		for (EObject eObject : element.eContents()) {
 			Node node = analyze((Element) eObject);
-			createArgumentEdge(node, "?", errorNode);
+			createExpressionEdge(node, "?", errorNode);
 		}
 		return errorNode;
 	}
@@ -643,13 +643,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		argNodes[0] = bodyNode;
 		String iterationName = "«" + loopExp.getReferredIteration().getName() + "»";
 		Node accumulateNode = createOperationNode(iterationName, loopExp, argNodes);
-		createArgumentEdge(sourceNode, "«source»", accumulateNode);
-		createArgumentEdge(bodyNode, "«body»", accumulateNode);
+		createExpressionEdge(sourceNode, "«source»", accumulateNode);
+		createExpressionEdge(bodyNode, "«body»", accumulateNode);
 		i = 1;
 		for (@NonNull Variable iterator : ownedIterators) {
 			Node iteratorNode = argNodes[i++];
 			assert iteratorNode != null;
-			createArgumentEdge(iteratorNode, iterator.getName() , accumulateNode);
+			createExpressionEdge(iteratorNode, iterator.getName() , accumulateNode);
 		}
 		return accumulateNode;
 	}
@@ -807,7 +807,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			if (operationNode == null) {
 				operationNode = createOperationNode(operationName, operationCallExp, argNodes);
 				for (int i = 0; i <= iSize; i++) {
-					createArgumentEdge(argNodes[i], argNames[i], operationNode);
+					createExpressionEdge(argNodes[i], argNames[i], operationNode);
 				}
 				if (referredOperation.getBodyExpression() != null) {
 					OperationRegion operationRegion = context.getMultiRegion().analyzeOperation(operationCallExp);
@@ -818,7 +818,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 							Node extraGuard = context.getExtraGuard(classDatumAnalysis);
 							if (extraGuard == null) {
 								extraGuard = context.createExtraGuard(classDatumAnalysis);
-								createArgumentEdge(extraGuard, extraGuard.getName(), operationNode);
+								createExpressionEdge(extraGuard, extraGuard.getName(), operationNode);
 								instantiate(extraGuard, extraNode);
 							}
 						}

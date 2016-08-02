@@ -86,7 +86,7 @@ class NavigationForestBuilder implements Comparator<@NonNull NavigationEdge>
 		else if (!edge.isNavigable()) {}
 		else if (edge.isCast()) {}
 		else {
-			assert !edge.isArgument();
+			assert !edge.isExpression();
 			assert !edge.isComputation();
 			Node sourceNode = edge.getSource();
 			navigableNodes.add(sourceNode);

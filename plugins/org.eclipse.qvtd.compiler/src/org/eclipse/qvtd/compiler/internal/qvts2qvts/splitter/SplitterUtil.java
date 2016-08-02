@@ -40,7 +40,7 @@ class SplitterUtil
 			for (@NonNull Node unresolvedNode : new ArrayList<>(unresolvedOperationNodes)) {
 				boolean allReachable = true;
 				for (@NonNull Edge edge : unresolvedNode.getIncomingEdges()) {
-					if (edge.isArgument() && !computableTargetNodes.contains(edge.getSource())) {
+					if (edge.isExpression() && !computableTargetNodes.contains(edge.getSource())) {
 						allReachable = false;
 					}
 				}

@@ -45,17 +45,17 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 	}
 
 	@Override
-	public boolean isArgument() {
-		return false;
-	}
-
-	@Override
 	public boolean isCast() {
 		return false;
 	}
 
 	@Override
 	public boolean isComputation() {
+		return false;
+	}
+
+	@Override
+	public boolean isExpression() {
 		return false;
 	}
 

@@ -193,11 +193,6 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	@Override
-	public boolean isArgument() {
-		return edgeRole.isArgument();
-	}
-
-	@Override
 	public boolean isCast() {
 		return edgeRole.isCast();
 	}
@@ -210,6 +205,11 @@ public abstract class AbstractEdge implements Edge
 	@Override
 	public boolean isConstant() {
 		return edgeRole.isConstant();
+	}
+
+	@Override
+	public boolean isExpression() {
+		return edgeRole.isExpression();
 	}
 
 	@Override

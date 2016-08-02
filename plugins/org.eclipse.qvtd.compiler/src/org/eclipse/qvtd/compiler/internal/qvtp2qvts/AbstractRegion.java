@@ -161,7 +161,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 		@Override
 		public boolean apply(@NonNull Edge edge) {
-			return edge.isArgument();
+			return edge.isExpression();
 		}
 	}
 
