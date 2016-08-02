@@ -62,7 +62,6 @@ public interface EdgeRole extends Role
 
 	boolean isCast();
 	boolean isComputation();
-	boolean isMergeable();
 
 	/**
 	 * Return true if this edge forms part of the to-one navigation reachable from a head.

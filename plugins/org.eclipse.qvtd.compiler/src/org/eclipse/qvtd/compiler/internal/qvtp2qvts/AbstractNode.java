@@ -341,12 +341,6 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull Edge> getMergeableEdges() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsMergeableEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
 	public @NonNull String getName() {
 		return name;
 	}

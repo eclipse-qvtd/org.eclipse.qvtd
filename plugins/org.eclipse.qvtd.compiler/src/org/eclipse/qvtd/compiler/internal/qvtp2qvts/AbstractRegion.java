@@ -195,16 +195,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
-	public static final class IsMergeableEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsMergeableEdgePredicate INSTANCE = new IsMergeableEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			return edge.isMergeable();
-		}
-	}
-
 	public static final class IsNavigableNodePredicate implements Predicate<@NonNull Node>
 	{
 		public static final @NonNull IsNavigableNodePredicate INSTANCE = new IsNavigableNodePredicate();

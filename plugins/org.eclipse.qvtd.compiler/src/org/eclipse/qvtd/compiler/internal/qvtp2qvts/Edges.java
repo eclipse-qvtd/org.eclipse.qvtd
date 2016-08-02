@@ -34,11 +34,6 @@ public class Edges
 		public boolean isComputation() {
 			return true;
 		}
-
-		@Override
-		public boolean isMergeable() {
-			return true;
-		}
 	}
 
 	protected abstract static class AbstractNavigationEdgeRole extends AbstractEdgeRole implements EdgeRole.Navigation
@@ -73,11 +68,6 @@ public class Edges
 		@SuppressWarnings("null")
 		public @NonNull String getName(@NonNull Property source2targetProperty) {
 			return source2targetProperty.getName();
-		}
-
-		@Override
-		public boolean isMergeable() {
-			return true;
 		}
 
 		@Override
@@ -123,11 +113,6 @@ public class Edges
 
 			@Override
 			public boolean isArgument() {
-				return true;
-			}
-
-			@Override
-			public boolean isMergeable() {
 				return true;
 			}
 
@@ -417,11 +402,6 @@ public class Edges
 		{
 			protected ResultEdgeRole(@NonNull Phase phase) {
 				super(phase);
-			}
-
-			@Override
-			public boolean isMergeable() {
-				return true;
 			}
 
 			@Override

@@ -223,11 +223,6 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	@Override
-	public boolean isMergeable() {
-		return edgeRole.isMergeable();
-	}
-
-	@Override
 	public boolean isNavigable() {
 		return edgeRole.isNavigable();
 	}

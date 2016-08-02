@@ -60,11 +60,6 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 	}
 
 	@Override
-	public boolean isMergeable() {
-		return false;
-	}
-
-	@Override
 	public boolean isNavigable() {
 		return false;
 	}

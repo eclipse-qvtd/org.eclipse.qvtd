@@ -102,11 +102,6 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	boolean isLoaded();
 
 	/**
-	 * Return true if this edge is for a predicate or assignment or expression.
-	 */
-	boolean isMergeable();
-
-	/**
 	 * Return true if this edge is part of the to-one navigation from a head.
 	 */
 	boolean isNavigable();

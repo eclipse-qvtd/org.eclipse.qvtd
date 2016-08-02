@@ -51,7 +51,6 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	@Nullable NodeConnection getIncomingPassedConnection();
 	@Nullable NodeConnection getIncomingUsedConnection();
 	@NonNull String getLabel();
-	@NonNull Iterable<@NonNull Edge> getMergeableEdges();
 	@Override
 	@NonNull String getName();
 	@Nullable NavigationEdge getNavigationEdge(@NonNull Property source2targetProperty);
