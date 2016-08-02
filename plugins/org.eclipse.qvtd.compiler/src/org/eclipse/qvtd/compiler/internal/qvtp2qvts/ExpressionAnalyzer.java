@@ -83,12 +83,16 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 		@Override
 		protected @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
-			return Edges.UNNAVIGABLE_CAST.createEdge(context, sourceNode, castProperty, castNode);
+			EdgeRole.Phase phase = Edges.CastEdgeRole.getCastEdgePhase(sourceNode, castNode);
+			Edges.CastEdgeRole edgeRole = Edges.CastEdgeRole.getCastEdgeRole(phase, false);
+			return edgeRole.createEdge(context, sourceNode, castProperty, castNode);
 		}
 
 		@Override
 		protected @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-			return Edges.UNNAVIGABLE_NAVIGATION.createEdge(context, sourceNode, source2targetProperty, targetNode);
+			EdgeRole.Phase edgePhase = Edges.NavigationEdgeRole.getNavigationEdgePhase(sourceNode, targetNode);
+			Edges.NavigationEdgeRole navigationEdgeRole = Edges.NavigationEdgeRole.getNavigationEdgeRole(edgePhase, false);
+			return navigationEdgeRole.createEdge(context, sourceNode, source2targetProperty, targetNode);
 		}
 
 		@Override
@@ -285,7 +289,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
-		return Edges.CAST.createEdge(context, sourceNode, castProperty, castNode);
+		return Edges.CastEdgeRole.createCastEdge(context, sourceNode, castProperty, castNode);
 	}
 
 	protected @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -293,11 +297,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return Edges.EXPRESSION.createEdge(context, sourceNode, name, targetNode);
+		return Edges.ExpressionEdgeRole.createExpressionEdge(context, sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
-		return Edges.ITERATED.createEdge(context, sourceNode, targetNode);
+		return Edges.IteratedEdgeRole.createIteratedEdgeRole(context, sourceNode, targetNode);
 	}
 
 	protected @NonNull Node createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
@@ -313,11 +317,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull NavigationEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		return Edges.NAVIGABLE_NAVIGATION.createEdge(context, sourceNode, source2targetProperty, targetNode);
+		EdgeRole.Phase edgePhase = Edges.NavigationEdgeRole.getNavigationEdgePhase(sourceNode, targetNode);
+		Edges.NavigationEdgeRole navigationEdgeRole = Edges.NavigationEdgeRole.getNavigationEdgeRole(edgePhase, true);
+		return navigationEdgeRole.createEdge(context, sourceNode, source2targetProperty, targetNode);
 	}
 
 	protected @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		return Edges.NAVIGATION.createEdge(context, sourceNode, source2targetProperty, targetNode);
+		return Edges.NavigationEdgeRole.createNavigationEdge(context, sourceNode, source2targetProperty, targetNode);
 	}
 
 	protected @NonNull NavigationEdge createNavigationOrRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
@@ -341,7 +347,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return Edges.PREDICATE.createEdge(context, sourceNode, name, targetNode);
+		return Edges.PredicateEdgeRole.createPredicateEdge(context, sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Node createPredicatedClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
@@ -353,7 +359,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Edge createRealizedArgumentEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return Edges.ExpressionEdgeRoleFactory.REALIZED_EXPRESSION.createEdge(context, sourceNode, name, targetNode);
+		Edges.ExpressionEdgeRole expressionEdgeRole = Edges.ExpressionEdgeRole.getExpressionEdgeRole(Role.Phase.REALIZED);
+		return expressionEdgeRole.createEdge(context, sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Node createRealizedAttributeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
@@ -361,7 +368,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull NavigationEdge createRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		return Edges.REALIZED.createEdge(context, sourceNode, source2targetProperty, targetNode);
+		Edges.AbstractNavigationEdgeRole navigationEdgeRole = Edges.NavigationEdgeRole.getNavigationEdgeRole(Role.Phase.REALIZED, true);
+		return navigationEdgeRole.createEdge(context, sourceNode, source2targetProperty, targetNode);
 	}
 
 	protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
