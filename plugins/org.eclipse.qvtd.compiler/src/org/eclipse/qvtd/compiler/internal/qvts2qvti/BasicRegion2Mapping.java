@@ -300,7 +300,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 			for (@NonNull Edge edge : node.getIncomingEdges()) {
 				EdgeRole edgeRole = edge.getEdgeRole();
-				if (edgeRole.isResult()) {
+				if (edgeRole.isComputation()) {
 					OCLExpression source = create(edge.getSource());
 					return source;
 				}
@@ -1174,7 +1174,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (@NonNull Node node : region.getRealizedVariableNodes()) {
 			OCLExpression constructor = null;
 			for (Edge edge : node.getIncomingEdges()) {
-				if (edge.isResult()) {
+				if (edge.isComputation()) {
 					Node sourceNode = edge.getSource();
 					if (sourceNode.isOperation()) {
 						constructor = ((OperationCallExp)sourceNode.getTypedElements().iterator().next()).accept(expressionCreator);

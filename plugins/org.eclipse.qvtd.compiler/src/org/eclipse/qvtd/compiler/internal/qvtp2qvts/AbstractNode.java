@@ -648,11 +648,6 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public boolean isResult() {
-		return nodeRole.isResult();
-	}
-
-	@Override
 	public boolean isTrue() {
 		return nodeRole.isTrue();
 	}

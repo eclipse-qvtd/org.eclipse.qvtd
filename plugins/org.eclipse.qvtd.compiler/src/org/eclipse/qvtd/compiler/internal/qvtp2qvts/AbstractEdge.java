@@ -252,11 +252,6 @@ public abstract class AbstractEdge implements Edge
 		return edgeRole.isRecursion();
 	}
 
-	@Override
-	public boolean isResult() {
-		return edgeRole.isResult();
-	}
-
 	protected void mergeRole(@NonNull EdgeRole edgeRole) {
 		if (this.edgeRole != edgeRole) {
 			this.edgeRole = this.edgeRole.merge(edgeRole);

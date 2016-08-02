@@ -80,11 +80,6 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 	}
 
 	@Override
-	public boolean isResult() {
-		return false;
-	}
-
-	@Override
 	public @NonNull EdgeRole merge(@NonNull EdgeRole edgeRole) {
 		if (edgeRole == this) {
 			return this;

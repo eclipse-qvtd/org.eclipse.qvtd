@@ -209,11 +209,6 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	boolean isRealizedVariable();
 
 	/**
-	 * Return true if this is a ResultNode computed by some expression.
-	 */
-	boolean isResult();
-
-	/**
 	 * Return true if this is a TrueNode that terminates a complex predicate expression.
 	 */
 	boolean isTrue();

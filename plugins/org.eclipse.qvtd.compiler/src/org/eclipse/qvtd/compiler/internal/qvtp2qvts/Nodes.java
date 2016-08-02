@@ -962,53 +962,6 @@ public class Nodes
 		}
 	}
 
-	/*	public static final class ResultNodeRoleFactory
-	{
-		private static final class ResultNodeRole extends AbstractSimpleNodeRole
-		{
-			protected ResultNodeRole(@NonNull Phase phase) {
-				super(phase);
-			}
-
-			@Override
-			public @Nullable String getStyle() {
-				return("rounded");
-			}
-
-			@Override
-			public boolean isMatchable() {
-				return phase != Role.Phase.REALIZED;
-			}
-
-			@Override
-			public boolean isResult() {
-				return true;
-			}
-		}
-
-		private static final @NonNull ResultNodeRole CONSTANT_RESULT = new ResultNodeRole(Role.Phase.CONSTANT);
-		private static final @NonNull ResultNodeRole LOADED_RESULT = new ResultNodeRole(Role.Phase.LOADED);
-		private static final @NonNull ResultNodeRole PREDICATED_RESULT = new ResultNodeRole(Role.Phase.PREDICATED);
-		private static final @NonNull ResultNodeRole REALIZED_RESULT = new ResultNodeRole(Role.Phase.REALIZED);
-
-		public @NonNull Node createNode(@NonNull Region region, @NonNull String name,
-				@NonNull CallExp callExp, @NonNull Node sourceNode) {
-			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
-			if (domainUsage.isEnforceable()) {
-				return REALIZED_RESULT.createNode(region, name, callExp);
-			}
-			else if (sourceNode.isPredicated()) {
-				return PREDICATED_RESULT.createNode(region, name, callExp);
-			}
-			else if (sourceNode.isLoaded()) {
-				return LOADED_RESULT.createNode(region, name, callExp);
-			}
-			else {
-				return CONSTANT_RESULT.createNode(region, name, callExp);
-			}
-		}
-	} */
-
 	public static final class StepNodeRoleFactory
 	{
 		private static abstract class AbstractStepNodeRole extends AbstractSimpleNodeRole

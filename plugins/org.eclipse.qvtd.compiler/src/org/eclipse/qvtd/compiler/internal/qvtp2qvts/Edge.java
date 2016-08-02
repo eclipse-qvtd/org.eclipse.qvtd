@@ -132,11 +132,6 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	boolean isRecursion();
 
 	/**
-	 * Return true if this edge is for an expression result.
-	 */
-	boolean isResult();
-
-	/**
 	 * Return true is this edge is the auto-created inverse edge of a bidirectional pair of edges.
 	 */
 	boolean isSecondary();

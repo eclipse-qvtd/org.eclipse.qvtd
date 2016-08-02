@@ -74,7 +74,6 @@ public interface EdgeRole extends Role
 	boolean isNavigation();
 	boolean isPredicate();
 	boolean isRecursion();
-	boolean isResult();
 
 	/**
 	 * Return the merged role combining this role and edgeRole.

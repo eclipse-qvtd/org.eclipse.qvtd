@@ -63,8 +63,6 @@ public interface NodeRole extends Role
 	//	boolean isOutput();
 	boolean isRealizedVariable();
 
-	boolean isResult();
-
 	boolean isTrue();
 
 	/**

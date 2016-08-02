@@ -115,11 +115,6 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	}
 
 	@Override
-	public boolean isResult() {
-		return false;
-	}
-
-	@Override
 	public boolean isTrue() {
 		return false;
 	}
