@@ -622,6 +622,11 @@ public abstract class AbstractNode implements Node
 		return nodeRole.isOperation();
 	}
 
+	@Override
+	public boolean isPattern() {
+		return nodeRole.isPattern();
+	}
+
 	//	@Override
 	//	public boolean isOutput() {
 	//		return nodeRole.isOutput();
@@ -635,6 +640,16 @@ public abstract class AbstractNode implements Node
 	@Override
 	public boolean isRealized() {
 		return nodeRole.isRealized();
+	}
+
+	@Override
+	public boolean isSpeculated() {
+		return nodeRole.isSpeculated();
+	}
+
+	@Override
+	public boolean isSpeculation() {
+		return nodeRole.isSpeculation();
 	}
 
 	@Override

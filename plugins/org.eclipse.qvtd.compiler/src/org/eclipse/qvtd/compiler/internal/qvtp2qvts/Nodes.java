@@ -99,6 +99,11 @@ public class Nodes
 		public boolean isClass() {
 			return classable == ClassableEnum.CLASS;
 		}
+
+		@Override
+		public boolean isDataType() {
+			return classable == ClassableEnum.DATATYPE;
+		}
 	}
 
 	private static final class ComposingNodeRole extends AbstractSimpleNodeRole
@@ -506,7 +511,8 @@ public class Nodes
 		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.REALIZED, ClassableEnum.CLASS, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
 		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.REALIZED, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
 		private static final @NonNull PatternNodeRole SPECULATED_NAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.SPECULATED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.HEAD);
-		private static final @NonNull PatternNodeRole SPECULATION_NAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.SPECULATION, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.HEAD);
+		private static final @NonNull PatternNodeRole SPECULATED_NAVIGABLE_CLASS_GUARD = new PatternNodeRole(Role.Phase.SPECULATED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.GUARD);
+		private static final @NonNull PatternNodeRole SPECULATION_NAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.SPECULATION, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
 
 		public static @NonNull PatternNodeRole getDataTypeNodeRole(@NonNull Node sourceNode, @NonNull Property property) {
 			Phase phase;
@@ -535,7 +541,6 @@ public class Nodes
 										case LOADED: return LOADED_NAVIGABLE_CLASS_HEAD;
 										case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_HEAD;
 										case SPECULATED: return SPECULATED_NAVIGABLE_CLASS_HEAD;
-										case SPECULATION: return SPECULATION_NAVIGABLE_CLASS_HEAD;
 									}
 									break;
 								}
@@ -553,6 +558,7 @@ public class Nodes
 									switch (phase) {
 										case LOADED: return LOADED_NAVIGABLE_CLASS_GUARD;
 										case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_GUARD;
+										case SPECULATED: return SPECULATED_NAVIGABLE_CLASS_GUARD;
 									}
 									break;
 								}
@@ -572,6 +578,7 @@ public class Nodes
 									switch (phase) {
 										case LOADED: return LOADED_NAVIGABLE_CLASS_STEP;
 										case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_STEP;
+										case SPECULATION: return SPECULATION_NAVIGABLE_CLASS_STEP;
 									}
 									break;
 								}
@@ -654,6 +661,16 @@ public class Nodes
 		}
 
 		@Override
+		public @NonNull NodeRole asSpeculated() {
+			return getPatternNodeRole(Phase.SPECULATED, classable, NavigableEnum.NAVIGABLE, GuardableEnum.HEAD);
+		}
+
+		@Override
+		public @NonNull NodeRole asSpeculation() {
+			return getPatternNodeRole(Phase.SPECULATION, classable, NavigableEnum.NAVIGABLE, guardable);
+		}
+
+		@Override
 		public boolean isGuard() {
 			return guardable != GuardableEnum.STEP;
 		}
@@ -671,6 +688,11 @@ public class Nodes
 		@Override
 		public boolean isNavigable() {
 			return navigable == NavigableEnum.NAVIGABLE;
+		}
+
+		@Override
+		public boolean isPattern() {
+			return true;
 		}
 
 		@Override
@@ -913,10 +935,18 @@ public class Nodes
 		return UnknownNodeRole.UNKNOWN.createNode(region, name, typedElement);
 	}
 
-	public static @NonNull VariableNode createUnrealizedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
-		throw new UnsupportedOperationException();			// FIXME experimenting
-		//		ClassableEnum classable = asClassable(!(stepVariable.getType() instanceof DataType));
-		//		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.PREDICATED, classable, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
-		//		return patternNodeRole.createNode(region, stepVariable);
-	}
+	/*	public static @NonNull VariableNode createUnrealizedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
+	/*	SchedulerConstants schedulerConstants = region.getSchedulerConstants();
+		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)stepVariable.getType();
+		assert type != null;
+		Type elementType = QVTbaseUtil.getElementalType(type);
+		TypedModel typedModel = elementType instanceof DataType ? schedulerConstants.getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatumAnalysis().getTypedModel();
+		assert typedModel != null;
+		ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
+		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum); * /
+	//	throw new UnsupportedOperationException();			// FIXME experimenting
+		ClassableEnum classable = asClassable(!(stepVariable.getType() instanceof DataType));
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.LOADDED, classable, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
+		return patternNodeRole.createNode(region, stepVariable);
+	} */
 }

@@ -453,7 +453,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 					node = analyzeVariable((Variable) variable, ownedInit);
 				}
 				else if (variable.eContainer() instanceof BottomPattern) {
-					node = Nodes.createUnrealizedStepNode(this, variable);
+					node = Nodes.createLoadedStepNode(this, variable);		// FIXME Predicated ??
 				}
 			}
 		}

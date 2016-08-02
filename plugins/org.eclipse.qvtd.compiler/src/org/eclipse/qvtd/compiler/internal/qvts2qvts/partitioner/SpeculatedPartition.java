@@ -11,9 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
@@ -26,27 +23,42 @@ class SpeculatedPartition extends AbstractPartition
 {
 	public SpeculatedPartition(@NonNull Partitioner partitioner) {
 		super(partitioner);
+		//	Iterable<@NonNull Edge> predicatedEdges = partitioner.getPredicatedEdges();
 		Iterable<@NonNull Node> predicatedMiddleNodes = partitioner.getPredicatedMiddleNodes();
+		Iterable<@NonNull Node> predicatedOutputNodes = partitioner.getPredicatedOutputNodes();
 		Iterable<@NonNull Node> realizedMiddleNodes = partitioner.getRealizedMiddleNodes();
 		Iterable<@NonNull Node> realizedOutputNodes = partitioner.getRealizedOutputNodes();
 		//
 		//	The realized middle (trace) nodes become speculated head nodes.
 		//
 		for (@NonNull Node node : realizedMiddleNodes) {
-			node2nodeRole.put(node, node.getNodeRole().asSpeculated().setHead());
+			NodeRole nodeRole = node.getNodeRole();
+			if (node.isPattern() && node.isClass()) {
+				nodeRole = nodeRole.asSpeculated().setHead();
+			}
+			addNode(node, nodeRole);
 		}
 		//
-		//	The predicated middle nodes become speculated nodes.
+		//	The predicated middle nodes become speculated guard nodes and all preceding
+		//	navigations are retained as is.
 		//
 		for (@NonNull Node node : predicatedMiddleNodes) {
-			gatherSourceNavigations(node, node.getNodeRole().resetHead().asSpeculated());
+			NodeRole nodeRole = node.getNodeRole();
+			if (node.isPattern() && node.isClass()) {
+				nodeRole = nodeRole.resetHead().asSpeculated();
+			}
+			gatherSourceNavigations(node, nodeRole);
 		}
 		//
-		//	The traced inputs nodes are used as is.
+		//	The predicated output nodes and all preceding navigations are retained as is.
 		//
-		//		for (@NonNull Node node : tracedInputNodes) {
-		//			node2nodeRole.put(node, node.getNodeRole().resetHead());
-		//		}
+		for (@NonNull Node node : predicatedOutputNodes) {
+			NodeRole nodeRole = node.getNodeRole();
+			//			if (node.isPattern() && node.isClass()) {
+			//				nodeRole = nodeRole.resetHead().asSpeculated();
+			//			}
+			gatherSourceNavigations(node, nodeRole);
+		}
 		//
 		//	The realized output nodes are realized as is.
 		//
@@ -63,11 +75,30 @@ class SpeculatedPartition extends AbstractPartition
 			}
 		}
 		//
-		//	The realized output nodes are linked to the trace as is.
+		//	The ends of all predicated edges not predicated in the Speculation partition are added as is.
 		//
-		//		for (@NonNull Node node : realizedMiddleNodes) {
-		//			gatherRealizedNavigations(node, realizedOutputNodes);
-		//		}
+		/*		for (@NonNull Edge edge : predicatedEdges) {
+			Node sourceNode = edge.getSource();
+			Node targetNode = edge.getTarget();
+			NodeRole sourceNodeRole = sourceNode.getNodeRole();
+			NodeRole targetNodeRole = targetNode.getNodeRole();
+			if (!sourceNodeRole.isLoaded() || !targetNodeRole.isLoaded()) {
+				if (!hasNode(sourceNode)) {
+					addNode(sourceNode, sourceNodeRole);
+				}
+				if (!hasNode(targetNode)) {
+					addNode(targetNode, targetNodeRole);
+				}
+			}
+		} */
+		//
+		//	Perform any required computations.
+		//
+		resolveComputations();
+		//
+		//	Perform any outstanding predicates.
+		//
+		resolvePredicates();
 		//
 		//	Join up the edges.
 		//
@@ -75,45 +106,21 @@ class SpeculatedPartition extends AbstractPartition
 	}
 
 	private void gatherSourceNavigations(@NonNull Node targetNode, @NonNull NodeRole targetNodeRole) {
-		if (!node2nodeRole.containsKey(targetNode)) {
-			node2nodeRole.put(targetNode, targetNodeRole);
-			for (@NonNull Node sourceNode : partitioner.getPredecessors(targetNode)) {
+		if (!hasNode(targetNode)) {
+			addNode(targetNode, targetNodeRole.resetHead());
+			boolean hasPredecessor = false;
+			for (@NonNull Node sourceNode : getPredecessors(targetNode)) {
+				hasPredecessor = true;
 				gatherSourceNavigations(sourceNode, sourceNode.getNodeRole());
 			}
-		}
-	}
-
-	@Override
-	protected @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole) {
-		EdgeRole edgeRole = edge.getEdgeRole();
-		if (edgeRole.isRealized()) {
-			if (sourceNodeRole.isSpeculated() && !targetNodeRole.isRealized()) {
-				edgeRole = edgeRole.asPredicated();
-			}
-			else if (targetNodeRole.isSpeculated() && !sourceNodeRole.isRealized()) {
-				edgeRole = edgeRole.asPredicated();
-			}
-		}
-		/*		else if (edgeRole.isPredicated()) {
-			if (sourceNodeRole.isSpeculated()) {
-				edgeRole = edgeRole.asSpeculated();
-			}
-			else if (targetNodeRole.isSpeculated()) {
-				edgeRole = edgeRole.asSpeculated();
-			}
-		} */
-		return edgeRole;
-	}
-
-	/*	private void gatherRealizedNavigations(@NonNull Node sourceNode, @NonNull Iterable<@NonNull Node> realizedOutputNodes) {
-		for (@NonNull NavigationEdge edge : sourceNode.getNavigationEdges()) {
-			EdgeRole edgeRole = edge.getEdgeRole();
-			if (edgeRole.isRealized()) {
-				Node targetNode = edge.getTarget();
-				if (Iterables.contains(realizedOutputNodes, targetNode)) {
-					edge2edgeRole.put(edge.getForwardEdge(), edgeRole);
+			if (!hasPredecessor && targetNode.isPredicated()) {			// Must be the wrong end of a 1:N navigation
+				for (@NonNull NavigationEdge edge : targetNode.getNavigationEdges()) {
+					if (edge.isPredicated() && (edge.getOppositeEdge() == null)) {
+						Node nonUnitSourceNode = edge.getTarget();
+						gatherSourceNavigations(nonUnitSourceNode, nonUnitSourceNode.getNodeRole());
+					}
 				}
 			}
 		}
-	} */
+	}
 }

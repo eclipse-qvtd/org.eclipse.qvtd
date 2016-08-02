@@ -52,9 +52,12 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	@Override
 	public @Nullable String getStyle() {
 		if (isDataType()) {
-			return "rounded";
+			return isExpression() ? "\"rounded,dashed\"" : "rounded";
 		}
-		return isNavigable() || isSpeculated() || isSpeculation() || isRealized() || isHead() ? null : "dashed";
+		else {
+			return isExpression() ? "dashed" : null;
+			//		return isNavigable() || isSpeculated() || isSpeculation() || isRealized() || isHead() ? null : "dashed";
+		}
 	}
 
 	@Override
@@ -119,6 +122,11 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 
 	@Override
 	public boolean isOperation() {
+		return false;
+	}
+
+	@Override
+	public boolean isPattern() {
 		return false;
 	}
 

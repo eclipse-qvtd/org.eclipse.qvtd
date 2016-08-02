@@ -101,7 +101,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	/**
 	 * Return true if this node is a constant that can be computed at compile time.
 	 *
-	 * isConstant() is exclusive to isLoaded()/isPredicated()/isRealized()
+	 * isConstant() is exclusive to isLoaded()/isSpeculation()/isSpeculated()/isPredicated()/isRealized()
 	 */
 	boolean isConstant();
 
@@ -153,7 +153,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Return true if this node is part of the checkable input domain and so may be loaded at will to satisfy
 	 * the requirements of mapping execution.
 	 *
-	 * isLoaded() is exclusive to isConstant()/isPredicated()/isRealized()
+	 * isLoaded() is exclusive to isConstant()/isPredicated()/isSpeculation()/isSpeculated()/isRealized()
 	 */
 	boolean isLoaded();
 
@@ -184,19 +184,40 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	//	boolean isOutput();
 
 	/**
+	 * Return true if this node is a pattern variable.
+	 */
+	boolean isPattern();
+
+	/**
 	 * Return true if the value of this node is part of the navigation path that must be validated
 	 * by predicate matching prior to execution of a mapping.
 	 *
-	 * isPredicated() is exclusive to isConstant()/isLoaded()/isRealized()
+	 * isPredicated() is exclusive to isConstant()/isLoaded()/isSpeculation()/isSpeculated()/isRealized()
 	 */
 	boolean isPredicated();
 
 	/**
 	 * Return true if the value of this node is determined by execution of a mapping.
 	 *
-	 * isRealized() is exclusive to isConstant()/isLoaded()/isPredicated()
+	 * isRealized() is exclusive to isConstant()/isLoaded()/isSpeculation()/isSpeculated()/isPredicated()
 	 */
 	boolean isRealized();
+
+	/**
+	 * Return true if this node is a speculated middle trace element that may havew benn created in anticipation
+	 * of other dependencies.
+	 *
+	 * isSpeculated() is exclusive to isConstant()/isLoaded()/isSpeculation()/isPredicated()/isRealized()
+	 */
+	boolean isSpeculated();
+
+	/**
+	 * Return true if this node is a/the speculation of the realized middle trace element that is created in anticipation
+	 * of other dependencies.
+	 *
+	 * isSpeculation() is exclusive to isConstant()/isLoaded()/isPredicated()/isSpeculated()/isPredicated()/isRealized()
+	 */
+	boolean isSpeculation();
 
 	/**
 	 * Return true if this is a TrueNode that terminates a complex predicate expression.

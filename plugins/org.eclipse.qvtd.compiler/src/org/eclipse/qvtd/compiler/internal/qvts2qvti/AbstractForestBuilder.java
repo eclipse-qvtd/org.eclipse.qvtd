@@ -32,6 +32,11 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 	private final @NonNull Set<@NonNull NavigationEdge> forwardEdges = new HashSet<>();
 
 	/**
+	 * Edges that have no opposite.
+	 */
+	private final @NonNull Set<@NonNull NavigationEdge> manyToOneEdges = new HashSet<>();
+
+	/**
 	 * The edges that are traversed while locating each node and their depth in the traversal forest, 0 at edge sourced by root.
 	 */
 	private final @NonNull Map<@NonNull NavigationEdge, @NonNull Integer> traversedEdge2depth = new HashMap<>();
@@ -56,20 +61,90 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 		//
 		//	Analyze the descendants of the roots to identify the most simply navigated forest.
 		//
-		analyze();
+		analyze(traversedNode2incomingEdge.keySet());
 	}
 
 	protected void addEdge(@NonNull NavigationEdge edge) {
 		if (!edge.isSecondary()) {
 			forwardEdges.add(edge);
+			if ((edge.getSource().isClass()) && (edge.getOppositeEdge() == null)) {
+				manyToOneEdges.add(edge);
+			}
 		}
 	}
 
 	/**
 	 * Identify the forest from the given roots.
 	 */
-	protected void analyze() {
-		Set<@NonNull Node> moreNodes = Sets.newHashSet(traversedNode2incomingEdge.keySet());
+	public void analyze(@NonNull Iterable<@NonNull Node> rootNodes) {
+		Set<@NonNull Node> moreNodes = Sets.newHashSet(rootNodes);
+		//
+		//	Advance breadth first, one depth at a time, accumulating all edges that make one stage of progress.
+		//
+		for (int depth = 0; moreNodes.size() > 0; depth++) {
+			//
+			//	Select the forward edges that make progress.
+			//
+			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
+			for (@NonNull Node sourceNode : moreNodes) {
+				//				traversedNode2depth.put(sourceNode, depth);
+				for (@NonNull NavigationEdge forwardEdge : sourceNode.getNavigationEdges()) {
+					if (forwardEdges.contains(forwardEdge)) {
+						Node targetNode = RegionUtil.getCastTarget(forwardEdge.getTarget());
+						if (!traversedNode2incomingEdge.containsKey(targetNode)) {
+							traversedNode2incomingEdge.put(targetNode, forwardEdge);
+							moreMoreNodes.add(targetNode);
+							traversedEdge2depth.put(forwardEdge, depth);
+						}
+					}
+				}
+			}
+			if (moreMoreNodes.isEmpty()) {
+				//
+				//	If no forward edge makes progress, select just one backward edge instead.
+				//
+				for (@NonNull NavigationEdge forwardEdge : forwardEdges) {		// FIXME maintain reducing list of possibles
+					@Nullable NavigationEdge backwardEdge = forwardEdge.getOppositeEdge();
+					if (backwardEdge != null) {
+						Node sourceNode = backwardEdge.getSource();
+						if (traversedNode2incomingEdge.containsKey(sourceNode)) {
+							Node targetNode = backwardEdge.getTarget();
+							if (!traversedNode2incomingEdge.containsKey(targetNode)) {
+								traversedNode2incomingEdge.put(targetNode, backwardEdge);
+								moreMoreNodes.add(targetNode);
+								traversedEdge2depth.put(backwardEdge, depth);
+								break;
+							}
+						}
+					}
+				}
+				if (moreMoreNodes.isEmpty()) {
+					//
+					//	If no backward edge makes progress, select just one inverse edge instead.
+					//
+					for (@NonNull NavigationEdge manyToOneEdge : manyToOneEdges) {		// FIXME maintain reducing list of possibles
+						Node sourceNode = manyToOneEdge.getTarget();
+						if (traversedNode2incomingEdge.containsKey(sourceNode)) {
+							Node targetNode = manyToOneEdge.getSource();
+							if (!traversedNode2incomingEdge.containsKey(targetNode)) {
+								traversedNode2incomingEdge.put(targetNode, manyToOneEdge);
+								moreMoreNodes.add(targetNode);
+								traversedEdge2depth.put(manyToOneEdge, depth);
+								break;
+							}
+						}
+					}
+				}
+			}
+			moreNodes = moreMoreNodes;
+		}
+	}
+
+	/**
+	 * Identify the forest from the given roots.
+	 *
+	public void reanalyze(@NonNull Node rootNode) {
+		Set<@NonNull Node> moreNodes = Sets.newHashSet(rootNodes);
 		//
 		//	Advance breadth first, one depth at a time, accumulating all edges that make one stage of progress.
 		//
@@ -113,7 +188,7 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 			}
 			moreNodes = moreMoreNodes;
 		}
-	}
+	} */
 
 	/**
 	 *	Support the shallowest first then alphabetical ordering of the traversal edges of the forest.

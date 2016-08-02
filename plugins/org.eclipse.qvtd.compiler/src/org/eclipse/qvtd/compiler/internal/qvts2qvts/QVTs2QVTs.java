@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Split;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -105,11 +105,6 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			if (region instanceof BasicMappingRegion) {
 				Partitioner partitioner = new Partitioner((BasicMappingRegion) region);
 				Iterable<@NonNull MicroMappingRegion> partitionedRegions = partitioner.partition();
-				if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
-					for (@NonNull MappingRegion mappingRegion : partitionedRegions) {
-						mappingRegion.writeDebugGraphs(null);
-					}
-				}
 			}
 		} */
 		RootScheduledRegion rootRegion = createRootRegion(activeRegions);

@@ -161,6 +161,9 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 			if (navigableNode.isDataType()) {
 				continue;									// FIXME avoid even considering these nodes
 			}
+			if (navigableNode.isSpeculation()) {
+				continue;									// FIXME avoid even considering these nodes
+			}
 			Type type = navigableNode.getCompleteClass().getPrimaryClass();
 			if (type instanceof CollectionType) {
 				System.err.println("No head created for CollectionType " + type + " in " + this);

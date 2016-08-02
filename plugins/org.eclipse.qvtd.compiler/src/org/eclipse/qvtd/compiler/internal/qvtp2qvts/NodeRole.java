@@ -67,6 +67,8 @@ public interface NodeRole extends Role
 
 	boolean isOperation();
 
+	boolean isPattern();
+
 	boolean isTrue();
 
 	/**

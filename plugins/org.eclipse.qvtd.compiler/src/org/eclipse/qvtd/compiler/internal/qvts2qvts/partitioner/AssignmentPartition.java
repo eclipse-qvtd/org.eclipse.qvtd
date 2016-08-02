@@ -30,7 +30,7 @@ class AssignmentPartition extends AbstractPartition
 		//	The realized middle (trace) nodes become predicated head nodes.
 		//
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
-			node2nodeRole.put(node, node.getNodeRole().asPredicated().setHead());
+			addNode(node, node.getNodeRole().asPredicated().setHead());
 		}
 		//
 		//	The nodes that support identification of the realized edge are used as is.
@@ -44,14 +44,24 @@ class AssignmentPartition extends AbstractPartition
 	}
 
 	private void gatherSourceNavigations(@NonNull Node targetNode) {
-		if (!node2nodeRole.containsKey(targetNode)) {
+		if (!hasNode(targetNode)) {
 			NodeRole targetNodeRole = targetNode.getNodeRole();
 			if (targetNodeRole.isRealized()) {
 				targetNodeRole = targetNodeRole.asPredicated();
 			}
-			node2nodeRole.put(targetNode, targetNodeRole);
-			for (@NonNull Node sourceNode : partitioner.getPredecessors(targetNode)) {
+			addNode(targetNode, targetNodeRole.resetHead());
+			boolean hasPredecessor = false;
+			for (@NonNull Node sourceNode : getPredecessors(targetNode)) {
+				hasPredecessor = true;
 				gatherSourceNavigations(sourceNode);
+			}
+			if (!hasPredecessor && targetNode.isPredicated()) {			// Must be the wrong end of a 1:N navigation
+				for (@NonNull NavigationEdge edge : targetNode.getNavigationEdges()) {
+					if (edge.isPredicated() && (edge.getOppositeEdge() == null)) {
+						Node nonUnitSourceNode = edge.getTarget();
+						gatherSourceNavigations(nonUnitSourceNode);
+					}
+				}
 			}
 		}
 	}
