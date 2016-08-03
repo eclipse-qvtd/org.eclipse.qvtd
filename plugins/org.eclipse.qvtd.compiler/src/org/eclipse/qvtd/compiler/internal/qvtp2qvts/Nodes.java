@@ -447,128 +447,6 @@ public class Nodes
 		}
 	}
 
-	public static class GuardNodeRole extends AbstractVariableNodeRole
-	{
-		private static final @NonNull GuardNodeRole LOADED_CLASS_HEAD = new GuardNodeRole(Role.Phase.LOADED, true, true);
-		private static final @NonNull GuardNodeRole LOADED_DATATYPE_GUARD = new GuardNodeRole(Role.Phase.LOADED, false, false);
-		private static final @NonNull GuardNodeRole LOADED_CLASS_GUARD = new GuardNodeRole(Role.Phase.LOADED, true, false);
-		private static final @NonNull GuardNodeRole PREDICATED_CLASS_HEAD = new GuardNodeRole(Role.Phase.PREDICATED, true, true);
-		private static final @NonNull GuardNodeRole PREDICATED_DATATYPE_GUARD = new GuardNodeRole(Role.Phase.PREDICATED, false, false);
-		private static final @NonNull GuardNodeRole PREDICATED_CLASS_GUARD = new GuardNodeRole(Role.Phase.PREDICATED, true, false);
-
-		public static @NonNull VariableNode createGuardNode(@NonNull Region region, @NonNull VariableDeclaration guardVariable) {
-			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(guardVariable);
-			boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
-			boolean isClassNode = !(guardVariable.getType() instanceof DataType);
-			GuardNodeRole guardNodeRole = getGuardNodeRole(isEnforceable ? Phase.PREDICATED : Phase.LOADED, isClassNode, false);
-			return guardNodeRole.createNode(region, guardVariable);
-		}
-
-		public static @NonNull GuardNodeRole getGuardNodeRole(@NonNull Phase phase, boolean isClassNode, boolean isHead) {
-			if (isHead) {
-				if (isClassNode) {
-					switch (phase) {
-						case LOADED: return LOADED_CLASS_HEAD;
-						case PREDICATED: return PREDICATED_CLASS_HEAD;
-					}
-				}
-				else {
-					switch (phase) {
-					}
-				}
-			}
-			else {
-				if (isClassNode) {
-					switch (phase) {
-						case LOADED: return LOADED_CLASS_GUARD;
-						case PREDICATED: return PREDICATED_CLASS_GUARD;
-					}
-				}
-				else {
-					switch (phase) {
-						case LOADED: return LOADED_DATATYPE_GUARD;
-						case PREDICATED: return PREDICATED_DATATYPE_GUARD;
-					}
-				}
-			}
-			throw new UnsupportedOperationException();
-		}
-
-		private final boolean isHead;
-
-		protected GuardNodeRole(@NonNull Phase phase, boolean isClassNode, boolean isHead) {
-			super(phase, isClassNode);
-			this.isHead = isHead;
-		}
-
-		@Override
-		public @NonNull GuardNodeRole asPhase(@NonNull Phase phase) {
-			return getGuardNodeRole(phase, isClassNode, isHead);
-		}
-
-		@Override
-		public boolean isGuardVariable() {
-			return true;
-		}
-
-		@Override
-		public boolean isHead() {
-			return isHead;
-		}
-
-		@Override
-		public boolean isMatchable() {
-			return true;
-		}
-
-		@Override
-		public boolean isNavigable() {
-			return true;
-		}
-
-		@Override
-		public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {  // FIXME Rationalize this legacy
-			if (isHead) {
-				if ((phase == Phase.LOADED) && (nodeRole.getPhase() == Phase.LOADED) && (nodeRole.isGuardVariable() && !nodeRole.isHead())) {
-					return nodeRole;
-				}
-				//				if ((phase == Phase.PREDICATED) && (nodeRole.getPhase() == Phase.PREDICATED) && (nodeRole instanceof GuardNodeRole)) {
-				//					return nodeRole;
-				//				}
-			}
-			else {
-				if (nodeRole.isConstant()) {
-					return nodeRole;
-				}
-				if ((phase == nodeRole.getPhase()) && nodeRole.isHead()) {
-					return this;
-				}
-				//				if ((phase == Phase.PREDICATED) && (nodeRole.getPhase() == Phase.PREDICATED) && nodeRole.isHead()) {
-				//					return this;
-				//				}
-			}
-			if ((phase == Phase.PREDICATED) && (nodeRole == REALIZED_VARIABLE)) {
-				return nodeRole;
-			}
-			return super.merge(nodeRole);
-		}
-
-		@Override
-		public @NonNull NodeRole resetHead() {
-			return getGuardNodeRole(phase, isClassNode, false);
-		}
-
-		@Override
-		public @NonNull NodeRole setHead() {
-			return getGuardNodeRole(phase, isClassNode, true);
-		}
-
-		@Override
-		public String toString() {
-			return phase + (isClassNode ? "-Class" : "-DataType") + (isHead ? "Head-" : "Guard-") + getClass().getSimpleName();
-		}
-	}
-
 	public static final class IteratorNodeRole extends AbstractVariableNodeRole
 	{
 		private static final @NonNull IteratorNodeRole CONSTANT_DATATYPE_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT, false);
@@ -880,6 +758,131 @@ public class Nodes
 				resolvedIsClassNode = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType);
 			}
 			return (resolvedIsClassNode ? CLASS_PARAMETER : ATTRIBUTE_PARAMETER).createNode(region, name, classDatumAnalysis);
+		}
+	}
+
+	public static class PatternNodeRole extends AbstractVariableNodeRole
+	{
+		private static final @NonNull PatternNodeRole LOADED_CLASS_HEAD = new PatternNodeRole(Role.Phase.LOADED, true, true, true);
+		private static final @NonNull PatternNodeRole LOADED_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.LOADED, false, true, false);
+		private static final @NonNull PatternNodeRole LOADED_CLASS_GUARD = new PatternNodeRole(Role.Phase.LOADED, true, true, false);
+		private static final @NonNull PatternNodeRole PREDICATED_CLASS_HEAD = new PatternNodeRole(Role.Phase.PREDICATED, true, true, true);
+		private static final @NonNull PatternNodeRole PREDICATED_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, false, true, false);
+		private static final @NonNull PatternNodeRole PREDICATED_CLASS_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, true, true, false);
+
+		public static @NonNull VariableNode createGuardNode(@NonNull Region region, @NonNull VariableDeclaration guardVariable) {
+			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(guardVariable);
+			boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
+			boolean isClass = !(guardVariable.getType() instanceof DataType);
+			PatternNodeRole guardNodeRole = getPatternNodeRole(isEnforceable ? Phase.PREDICATED : Phase.LOADED, isClass, true, false);
+			return guardNodeRole.createNode(region, guardVariable);
+		}
+
+		public static @NonNull PatternNodeRole getPatternNodeRole(@NonNull Phase phase, boolean isClass, boolean isGuard, boolean isHead) {
+			if (isHead) {
+				if (isClass) {
+					switch (phase) {
+						case LOADED: return LOADED_CLASS_HEAD;
+						case PREDICATED: return PREDICATED_CLASS_HEAD;
+					}
+				}
+				else {
+					switch (phase) {
+					}
+				}
+			}
+			else {
+				if (isClass) {
+					switch (phase) {
+						case LOADED: return LOADED_CLASS_GUARD;
+						case PREDICATED: return PREDICATED_CLASS_GUARD;
+					}
+				}
+				else {
+					switch (phase) {
+						case LOADED: return LOADED_DATATYPE_GUARD;
+						case PREDICATED: return PREDICATED_DATATYPE_GUARD;
+					}
+				}
+			}
+			throw new UnsupportedOperationException();
+		}
+
+		private final boolean isGuard;
+		private final boolean isHead;
+
+		private PatternNodeRole(@NonNull Phase phase, boolean isClass, boolean isGuard, boolean isHead) {
+			super(phase, isClass);
+			assert !(!isGuard && isHead);
+			this.isGuard = isGuard;
+			this.isHead = isHead;
+		}
+
+		@Override
+		public @NonNull PatternNodeRole asPhase(@NonNull Phase phase) {
+			return getPatternNodeRole(phase, isClassNode, isGuard, isHead);
+		}
+
+		@Override
+		public boolean isGuardVariable() {
+			return isGuard;
+		}
+
+		@Override
+		public boolean isHead() {
+			return isHead;
+		}
+
+		@Override
+		public boolean isMatchable() {
+			return true;
+		}
+
+		@Override
+		public boolean isNavigable() {
+			return true;
+		}
+
+		@Override
+		public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {  // FIXME Rationalize this legacy
+			if (isHead) {
+				if ((phase == Phase.LOADED) && (nodeRole.getPhase() == Phase.LOADED) && (nodeRole.isGuardVariable() && !nodeRole.isHead())) {
+					return nodeRole;
+				}
+				//				if ((phase == Phase.PREDICATED) && (nodeRole.getPhase() == Phase.PREDICATED) && (nodeRole instanceof GuardNodeRole)) {
+				//					return nodeRole;
+				//				}
+			}
+			else {
+				if (nodeRole.isConstant()) {
+					return nodeRole;
+				}
+				if ((phase == nodeRole.getPhase()) && nodeRole.isHead()) {
+					return this;
+				}
+				//				if ((phase == Phase.PREDICATED) && (nodeRole.getPhase() == Phase.PREDICATED) && nodeRole.isHead()) {
+				//					return this;
+				//				}
+			}
+			if ((phase == Phase.PREDICATED) && (nodeRole == REALIZED_VARIABLE)) {
+				return nodeRole;
+			}
+			return super.merge(nodeRole);
+		}
+
+		@Override
+		public @NonNull NodeRole resetHead() {
+			return getPatternNodeRole(phase, isClassNode, isGuard, false);
+		}
+
+		@Override
+		public @NonNull NodeRole setHead() {
+			return getPatternNodeRole(phase, isClassNode, isGuard, true);
+		}
+
+		@Override
+		public String toString() {
+			return phase + (isClassNode ? "-Class" : "-DataType") + (isHead ? "Head-" : isGuard ? "Guard-" : "Pattern-") + getClass().getSimpleName();
 		}
 	}
 
