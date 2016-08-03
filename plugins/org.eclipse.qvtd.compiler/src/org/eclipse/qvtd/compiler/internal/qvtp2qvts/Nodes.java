@@ -523,7 +523,7 @@ public class Nodes
 
 			@Override
 			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-				if ((phase == Phase.LOADED) && (nodeRole.getPhase() == Phase.LOADED) && (nodeRole instanceof GuardNodeRole)) {
+				if ((phase == Phase.LOADED) && (nodeRole.getPhase() == Phase.LOADED) && (nodeRole.isGuardVariable() && !nodeRole.isHead())) {
 					return nodeRole;
 				}
 				//				if ((phase == Phase.PREDICATED) && (nodeRole.getPhase() == Phase.PREDICATED) && (nodeRole instanceof GuardNodeRole)) {
@@ -973,7 +973,7 @@ public class Nodes
 
 		@Override
 		public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-			if (nodeRole instanceof GuardNodeRoleFactory.AbstractGuardNodeRole) {
+			if (nodeRole.isGuardVariable() && !nodeRole.isExtraGuardVariable()) {
 				return this;
 			}
 			if (nodeRole instanceof StepNodeRoleFactory.AbstractStepNodeRole) {
